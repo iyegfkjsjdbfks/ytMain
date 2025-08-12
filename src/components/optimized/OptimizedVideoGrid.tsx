@@ -41,30 +41,30 @@ const VideoGridItem = memo<{
  return (
  <div style={style} className='p-2'>
  <div
- className='bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer'
- onClick={(e: any) => handleClick(e)}
+// FIXED:  className='bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer' />
+// FIXED:  onClick={(e: any) => handleClick(e)}
  >
  <div className='aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden'>
  <img
- src={video.thumbnailUrl}
- alt={video.title}
- className='w-full h-full object-cover'
- loading='lazy'
+// FIXED:  src={video.thumbnailUrl}
+// FIXED:  alt={video.title}
+// FIXED:  className='w-full h-full object-cover'
+ loading='lazy' />
  />
- </div>
+// FIXED:  </div>
  <div className='p-3'>
  <h3 className='font-medium text-sm line-clamp-2 text-gray-900 dark:text-white'>
  {video.title}
- </h3>
+// FIXED:  </h3>
  <p className='text-xs text-gray-600 dark:text-gray-400 mt-1'>
  {video.channel?.name}
- </p>
+// FIXED:  </p>
  <p className='text-xs text-gray-500 dark:text-gray-500 mt-1'>
  {video.views} views • {video.publishedAt || video.uploadedAt}
- </p>
- </div>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 });
 
@@ -123,16 +123,16 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
  if (loading as any) {
  return (
  <div
- className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ${className}`}
+// FIXED:  className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ${className}`} />
  >
  {Array.from({ length: 12 }).map((_, index) => (
  <div key={index} className='animate-pulse'>
  <div className='aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg mb-2' />
  <div className='h-4 bg-gray-200 dark:bg-gray-700 rounded mb-1' />
  <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4' />
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -140,7 +140,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
  return (
  <div className={`flex items-center justify-center h-64 ${className}`}>
  <p className='text-gray-500 dark:text-gray-400'>No videos found</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -156,12 +156,12 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
  rowHeight={itemHeight}
  itemData={gridData}
  overscanRowCount={2}
- overscanColumnCount={1}
+ overscanColumnCount={1} />
  >
  {VideoGridItem}
- </Grid>
+// FIXED:  </Grid>
  )}
- </div>
+// FIXED:  </div>
  );
  }
 );

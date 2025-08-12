@@ -12,12 +12,12 @@ const LikedVideosPageSkeleton: React.FC = () => {
  <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  );
 };
 

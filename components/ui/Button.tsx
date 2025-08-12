@@ -81,15 +81,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((
  return (
  <button
  ref={ref}
- className={buttonClasses}
- disabled={isDisabled}
- {...props}
+// FIXED:  className={buttonClasses}
+// FIXED:  disabled={isDisabled}
+ {...props} />
  >
  {loading ? (
  <>
  <ButtonLoading size={size === 'xs' ? 'xs' : size === 'sm' ? 'sm' : 'md'} className="mr-2" />
  <span>Loading...</span>
- </>
+// FIXED:  </>
  ) : (
  <>
  {leftIcon && (
@@ -99,9 +99,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((
  {rightIcon && (
  <span className="ml-2 flex-shrink-0">{rightIcon}</span>
  )}
- </>
+// FIXED:  </>
  )}
- </button>
+// FIXED:  </button>
  );
 });
 
@@ -129,11 +129,11 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((
  variant={variant}
  size={size}
  rounded={rounded}
- className={cn('p-2', className)}
- {...props}
+// FIXED:  className={cn('p-2', className)}
+ {...props} />
  >
  {icon}
- </Button>
+// FIXED:  </Button>
  );
 });
 
@@ -149,12 +149,12 @@ export const SubscribeButton: React.FC<{,
  <Button
  variant={isSubscribed ? 'outline' : 'primary'}
  size="sm"
- loading={loading}
- onClick={(e: any) => onClick(e)}
- className={className}
+ loading={loading} />
+// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  className={className}
  >
  {isSubscribed ? 'Subscribed' : 'Subscribe'}
- </Button>
+// FIXED:  </Button>
 );
 
 export const LikeButton: React.FC<{,
@@ -167,17 +167,17 @@ export const LikeButton: React.FC<{,
  <Button
  variant={isLiked ? 'primary' : 'ghost'}
  size="sm"
- loading={loading}
- onClick={(e: any) => onClick(e)}
- className={className}
+ loading={loading} />
+// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  className={className}
  leftIcon={
  <svg className="w-4 h-4" fill={isLiked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
- </svg>
+// FIXED:  </svg>
  }
  >
  {count !== undefined ? count : ''}
- </Button>
+// FIXED:  </Button>
 );
 
 export default Button;

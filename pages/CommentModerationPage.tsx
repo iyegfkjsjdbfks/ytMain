@@ -156,7 +156,7 @@ const CommentModerationPage: React.FC = () => {
  <span className={`${baseClasses} bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400`}>
  <FlagIcon className="w-3 h-3 inline mr-1" />
  Flagged
- </span>
+// FIXED:  </span>
  );
  }
 
@@ -191,9 +191,9 @@ return comments.filter((c) => c.flaggedReason).length;
  {Array.from({ length: 5 }).map((_, i) => (
  <div key={i} className="h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -203,11 +203,11 @@ return comments.filter((c) => c.flaggedReason).length;
  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
  <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-4 sm:mb-0">
  Comment Moderation
- </h1>
+// FIXED:  </h1>
  <div className="text-sm text-neutral-600 dark:text-neutral-400">
  {filteredComments.length} of {comments.length} comments
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Filters and Search */}
  <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
@@ -216,43 +216,43 @@ return comments.filter((c) => c.flaggedReason).length;
  <div className="flex flex-wrap gap-2">
  {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType).map((filterType: any) => (
  <button
- key={filterType}
- onClick={() => setFilter(filterType)}
- className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+ key={filterType} />
+// FIXED:  onClick={() => setFilter(filterType)}
+// FIXED:  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
  filter === filterType
  ? 'bg-blue-500 text-white'
  : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
  }`}
  >
  {filterType.charAt(0).toUpperCase() + filterType.slice(1)} ({getFilterCount(filterType)})
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Search and Sort */}
  <div className="flex items-center space-x-4">
  <div className="relative">
  <input
- type="text"
- placeholder="Search comments..."
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- className="pl-3 pr-10 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
+// FIXED:  type="text"
+// FIXED:  placeholder="Search comments..."
+// FIXED:  value={searchQuery} />
+// FIXED:  onChange={(e) => setSearchQuery(e.target.value)}
+// FIXED:  className="pl-3 pr-10 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
  />
- </div>
+// FIXED:  </div>
  <select
- value={sortBy}
- onChange={(e) => setSortBy(e.target.value as SortType)}
- className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={(e) => setSortBy(e.target.value as SortType)}
+// FIXED:  className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
  >
  <option value="newest">Newest First</option>
  <option value="oldest">Oldest First</option>
  <option value="mostLikes">Most Likes</option>
  <option value="mostReplies">Most Replies</option>
- </select>
- </div>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Bulk Actions */}
  {showBulkActions && (
@@ -260,39 +260,39 @@ return comments.filter((c) => c.flaggedReason).length;
  <div className="flex items-center justify-between">
  <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
  {selectedComments.size} comment{selectedComments.size !== 1 ? 's' : ''} selected
- </span>
+// FIXED:  </span>
  <div className="flex items-center space-x-2">
- <button
- onClick={() => handleBulkAction('approve')}
- className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600 transition-colors"
+ <button />
+// FIXED:  onClick={() => handleBulkAction('approve')}
+// FIXED:  className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600 transition-colors"
  >
  <CheckIcon className="w-4 h-4 inline mr-1" />
  Approve
- </button>
- <button
- onClick={() => handleBulkAction('spam')}
- className="px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600 transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('spam')}
+// FIXED:  className="px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600 transition-colors"
  >
  <ExclamationTriangleIcon className="w-4 h-4 inline mr-1" />
  Mark as Spam
- </button>
- <button
- onClick={() => handleBulkAction('hide')}
- className="px-3 py-1 bg-gray-500 text-white rounded text-sm hover:bg-gray-600 transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('hide')}
+// FIXED:  className="px-3 py-1 bg-gray-500 text-white rounded text-sm hover:bg-gray-600 transition-colors"
  >
  <EyeSlashIcon className="w-4 h-4 inline mr-1" />
  Hide
- </button>
- <button
- onClick={() => handleBulkAction('delete')}
- className="px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('delete')}
+// FIXED:  className="px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition-colors"
  >
  <TrashIcon className="w-4 h-4 inline mr-1" />
  Delete
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Comments List */}
@@ -301,16 +301,16 @@ return comments.filter((c) => c.flaggedReason).length;
  <div className="p-4 border-b border-neutral-200 dark:border-neutral-700">
  <label className="flex items-center space-x-3">
  <input
- type="checkbox"
- checked={selectedComments.size === filteredComments.length && filteredComments.length > 0}
- onChange={(e: any) => handleSelectAll(e)}
- className="rounded border-neutral-300 dark:border-neutral-600 text-blue-500 focus:ring-blue-500"
+// FIXED:  type="checkbox" />
+// FIXED:  checked={selectedComments.size === filteredComments.length && filteredComments.length > 0}
+// FIXED:  onChange={(e: any) => handleSelectAll(e)}
+// FIXED:  className="rounded border-neutral-300 dark:border-neutral-600 text-blue-500 focus:ring-blue-500"
  />
  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
  Select All
- </span>
- </label>
- </div>
+// FIXED:  </span>
+// FIXED:  </label>
+// FIXED:  </div>
 
  {/* Comments */}
  <div className="divide-y divide-neutral-200 dark:divide-neutral-700">
@@ -319,90 +319,90 @@ return comments.filter((c) => c.flaggedReason).length;
  <ChatBubbleLeftIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-500 mx-auto mb-4" />
  <h3 className="text-lg font-medium text-neutral-700 dark:text-neutral-300 mb-2">
  No comments found
- </h3>
+// FIXED:  </h3>
  <p className="text-neutral-500 dark:text-neutral-400">
  {searchQuery ? 'Try adjusting your search or filters.' : 'No comments match the current filter.'}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  ) : (
  filteredComments.map((comment) => (
  <div key={comment.id} className="p-4 hover:bg-neutral-50 dark:hover:bg-neutral-700/30">
  <div className="flex items-start space-x-4">
  <input
- type="checkbox"
- checked={selectedComments.has(comment.id)}
- onChange={() => handleSelectComment(comment.id)}
- className="mt-1 rounded border-neutral-300 dark:border-neutral-600 text-blue-500 focus:ring-blue-500"
+// FIXED:  type="checkbox"
+// FIXED:  checked={selectedComments.has(comment.id)} />
+// FIXED:  onChange={() => handleSelectComment(comment.id)}
+// FIXED:  className="mt-1 rounded border-neutral-300 dark:border-neutral-600 text-blue-500 focus:ring-blue-500"
  />
  <img
- src={comment.authorAvatar}
- alt={comment.authorName}
- className="w-10 h-10 rounded-full"
+// FIXED:  src={comment.authorAvatar}
+// FIXED:  alt={comment.authorName}
+// FIXED:  className="w-10 h-10 rounded-full" />
  />
  <div className="flex-1 min-w-0">
  <div className="flex items-center space-x-2 mb-1">
  <span className="font-medium text-neutral-900 dark:text-neutral-50">
  {comment.authorName}
- </span>
+// FIXED:  </span>
  {getStatusBadge(comment.status, comment.flaggedReason)}
  <span className="text-sm text-neutral-500 dark:text-neutral-400">
  {parseRelativeDate(comment.publishedAt)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <p className="text-neutral-700 dark:text-neutral-300 mb-2">
  {comment.text}
- </p>
+// FIXED:  </p>
  <div className="flex items-center space-x-4 text-sm text-neutral-500 dark:text-neutral-400">
  <span>On: {comment.videoTitle}</span>
  <span>{comment.likes} likes</span>
  {comment.replyCount && <span>{comment.replyCount} replies</span>}
- </div>
+// FIXED:  </div>
  {comment.flaggedReason && (
  <div className="mt-2 p-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded">
  <span className="text-sm text-red-800 dark:text-red-400">
  <FlagIcon className="w-4 h-4 inline mr-1" />,
  Flagged: {comment.flaggedReason}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-1">
- <button
- onClick={() => handleSingleAction(comment.id, 'approve')}
- className="p-2 text-green-600 hover:bg-green-100 dark:hover:bg-green-900/30 rounded transition-colors"
+ <button />
+// FIXED:  onClick={() => handleSingleAction(comment.id, 'approve')}
+// FIXED:  className="p-2 text-green-600 hover:bg-green-100 dark:hover:bg-green-900/30 rounded transition-colors"
  title="Approve"
  >
  <CheckIcon className="w-4 h-4" />
- </button>
- <button
- onClick={() => handleSingleAction(comment.id, 'spam')}
- className="p-2 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleSingleAction(comment.id, 'spam')}
+// FIXED:  className="p-2 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors"
  title="Mark as Spam"
  >
  <ExclamationTriangleIcon className="w-4 h-4" />
- </button>
- <button
- onClick={() => handleSingleAction(comment.id, 'hide')}
- className="p-2 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-900/30 rounded transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleSingleAction(comment.id, 'hide')}
+// FIXED:  className="p-2 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-900/30 rounded transition-colors"
  title="Hide"
  >
  <EyeSlashIcon className="w-4 h-4" />
- </button>
- <button
- onClick={() => handleSingleAction(comment.id, 'delete')}
- className="p-2 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleSingleAction(comment.id, 'delete')}
+// FIXED:  className="p-2 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors"
  title="Delete"
  >
  <TrashIcon className="w-4 h-4" />
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

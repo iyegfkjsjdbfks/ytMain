@@ -58,20 +58,20 @@ const LoginPage: React.FC = () => {
  <div className="sm:mx-auto sm:w-full sm:max-w-md">
  <div className="flex justify-center">
  <YouTubeLogo className="h-12 w-auto" />
- </div>
+// FIXED:  </div>
  <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
  Sign in to your account
- </h2>
+// FIXED:  </h2>
  <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
  Or{' '}
  <Link
  to="/register"
- className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
+// FIXED:  className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300" />
  >
  create a new account
- </Link>
- </p>
- </div>
+// FIXED:  </Link>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
  <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -80,116 +80,116 @@ const LoginPage: React.FC = () => {
  <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
  <div className="text-sm text-red-700 dark:text-red-400">
  {error}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  <div>
  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
  Email address
- </label>
+// FIXED:  </label>
  <div className="mt-1">
  <Input
- id="email"
- name="email"
- type="email"
+// FIXED:  id="email"
+// FIXED:  name="email"
+// FIXED:  type="email"
  autoComplete="email"
  required
- value={email}
- onChange={(e) => setEmail(e.target.value)}
- className="block w-full"
- placeholder="Enter your email"
+// FIXED:  value={email} />
+// FIXED:  onChange={(e) => setEmail(e.target.value)}
+// FIXED:  className="block w-full"
+// FIXED:  placeholder="Enter your email"
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
  Password
- </label>
+// FIXED:  </label>
  <div className="mt-1">
  <Input
- id="password"
- name="password"
- type="password"
+// FIXED:  id="password"
+// FIXED:  name="password"
+// FIXED:  type="password"
  autoComplete="current-password"
  required
- value={password}
- onChange={(e) => setPassword(e.target.value)}
- className="block w-full"
- placeholder="Enter your password"
+// FIXED:  value={password} />
+// FIXED:  onChange={(e) => setPassword(e.target.value)}
+// FIXED:  className="block w-full"
+// FIXED:  placeholder="Enter your password"
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="flex items-center justify-between">
  <div className="flex items-center">
  <input
- id="remember-me"
- name="remember-me"
- type="checkbox"
- className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+// FIXED:  id="remember-me"
+// FIXED:  name="remember-me"
+// FIXED:  type="checkbox"
+// FIXED:  className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded" />
  />
  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
  Remember me
- </label>
- </div>
+// FIXED:  </label>
+// FIXED:  </div>
 
  <div className="text-sm">
  <Link to="/forgot-password" className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
  Forgot your password?
- </Link>
- </div>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div>
  <Button
- type="submit"
- disabled={isLoading}
- className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+// FIXED:  type="submit"
+// FIXED:  disabled={isLoading}
+// FIXED:  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed" />
  >
  {isLoading ? 'Signing in...' : 'Sign in'}
- </Button>
- </div>
+// FIXED:  </Button>
+// FIXED:  </div>
 
  <div className="mt-6">
  <div className="relative">
  <div className="absolute inset-0 flex items-center">
  <div className="w-full border-t border-gray-300 dark:border-gray-600" />
- </div>
+// FIXED:  </div>
  <div className="relative flex justify-center text-sm">
  <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">Or</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="mt-6">
  <Button
- type="button"
- onClick={(e: any) => handleDemoLogin(e)}
- disabled={isLoading}
- className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+// FIXED:  type="button" />
+// FIXED:  onClick={(e: any) => handleDemoLogin(e)}
+// FIXED:  disabled={isLoading}
+// FIXED:  className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  Try Demo Account
- </Button>
- </div>
- </div>
- </form>
+// FIXED:  </Button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </form>
 
  <div className="mt-6">
  <div className="text-center text-xs text-gray-500 dark:text-gray-400">
  By signing in, you agree to our{' '}
  <a href="/terms-of-service" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
  Terms of Service
- </a>{' '}
+// FIXED:  </a>{' '}
  and{' '}
  <a href="/privacy-policy" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
  Privacy Policy
- </a>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </a>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

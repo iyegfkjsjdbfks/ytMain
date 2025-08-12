@@ -215,26 +215,26 @@ export function createLazyComponent<P extends Record<string, any>>(,
  return errorFallback || (
  <div className="p-4 text-center text-red-600">
  <p>Failed to load component</p>
- <button
- onClick={() => setError(null)}
- className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+ <button />
+// FIXED:  onClick={() => setError(null)}
+// FIXED:  className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
  >
  Retry
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  );
  }
 
  return (
  <React.Suspense
- fallback={fallback || (
+ fallback={fallback || ( />
  <div className="flex items-center justify-center p-8">
  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
- </div>
+// FIXED:  </div>
  )}
  >
  <LazyComponent {...((props as any))} />
- </React.Suspense>
+// FIXED:  </React.Suspense>
  );
  }
 // Virtual scrolling hook for large lists
@@ -388,7 +388,7 @@ export function withPerformanceMonitoring<P extends object>(,
  return (
  <div ref={elementRef} data-component={displayName} data-render-count={renderCount}>
  <Component {...props} />
- </div>
+// FIXED:  </div>
  );
  }
 // Debounced state hook for performance

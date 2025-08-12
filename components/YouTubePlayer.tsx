@@ -308,8 +308,8 @@ return;
  <div className={`bg-gray-100 dark:bg-gray-800 rounded-lg p-4 ${className}`}>
  <p className="text-gray-600 dark:text-gray-400 text-center">
  Invalid YouTube video ID
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  );
  }
 
@@ -318,8 +318,8 @@ return;
  <div className={`bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 ${className}`}>
  <p className="text-red-600 dark:text-red-400 text-center">
  {playerError}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  );
  }
 
@@ -330,17 +330,17 @@ return;
  <div className="text-gray-600 dark:text-gray-400 text-center">
  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2" />
  <p>Loading YouTube player...</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
  <div
  ref={playerRef}
- id={playerIdRef.current}
- className="w-full h-full"
- style={{
- opacity: isAPIReady ? 1 : 0 }
+// FIXED:  id={playerIdRef.current}
+// FIXED:  className="w-full h-full"
+// FIXED:  style={{
+ opacity: isAPIReady ? 1 : 0 } />
  />
- </div>
+// FIXED:  </div>
  );
 };
 

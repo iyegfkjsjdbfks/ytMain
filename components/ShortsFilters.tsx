@@ -25,41 +25,41 @@ return 'All';
  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
  <div className="flex items-center justify-between mb-3">
  <h3 className="text-white font-medium">Filter by Category</h3>
- <button
- onClick={(e: any) => onClose(e)}
- className="p-1 text-white/60 hover:text-white transition-colors"
- aria-label="Close filters"
+ <button />
+// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  className="p-1 text-white/60 hover:text-white transition-colors"
+// FIXED:  aria-label="Close filters"
  >
  <XMarkIcon className="w-4 h-4" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  <div className="flex flex-wrap gap-2">
  {categories.map((category: any) => (
  <button
- key={category}
- onClick={() => onCategoryChange(category)}
- className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+ key={category} />
+// FIXED:  onClick={() => onCategoryChange(category)}
+// FIXED:  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
  selectedCategory === category
  ? 'bg-white text-black'
  : 'bg-white/20 text-white hover:bg-white/30'
  }`}
  >
  {formatCategoryName(category)}
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
 
  {selectedCategory !== 'all' && (
- <button
- onClick={() => onCategoryChange('all')}
- className="mt-3 text-sm text-white/60 hover:text-white transition-colors"
+ <button />
+// FIXED:  onClick={() => onCategoryChange('all')}
+// FIXED:  className="mt-3 text-sm text-white/60 hover:text-white transition-colors"
  >
  Clear filter
- </button>
+// FIXED:  </button>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

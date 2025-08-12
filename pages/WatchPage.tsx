@@ -28,8 +28,8 @@ const LoadingSkeleton = memo(() => (
  <div className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
  <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
  <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Description skeleton */}
  <div className="bg-gray-200 dark:bg-gray-700 rounded-xl p-4 mb-4 animate-pulse">
@@ -38,14 +38,14 @@ const LoadingSkeleton = memo(() => (
  <div className="flex-1">
  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-1" />
  <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2" />
- </div>
+// FIXED:  </div>
  <div className="h-9 w-24 bg-gray-300 dark:bg-gray-600 rounded-full" />
- </div>
+// FIXED:  </div>
  <div className="space-y-2">
  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded" />
  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Comments skeleton */}
  <div className="space-y-4">
@@ -56,11 +56,11 @@ const LoadingSkeleton = memo(() => (
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Sidebar skeleton */}
  <div className="xl:w-[402px] xl:flex-shrink-0">
@@ -73,14 +73,14 @@ const LoadingSkeleton = memo(() => (
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 ));
 
 LoadingSkeleton.displayName = 'LoadingSkeleton';
@@ -200,14 +200,14 @@ const WatchPage: React.FC = () => {
  <div className="text-center">
  <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Video not found</h1>
  <p className="text-gray-600 dark:text-gray-400 mb-4">The video you're looking for doesn't exist or has been removed.</p>
- <button
- onClick={() => navigate('/')}
- className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+ <button />
+// FIXED:  onClick={() => navigate('/')}
+// FIXED:  className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
  >
  Go to Home
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -229,7 +229,7 @@ const WatchPage: React.FC = () => {
  return (
  <YouTubePlayer
  video={video}
- autoplay={true}
+ autoplay={true} />
  />
  );
  default:
@@ -239,7 +239,7 @@ const WatchPage: React.FC = () => {
  autoplay={true}
  width="100%"
  height="100%"
- controls={true}
+ controls={true} />
  />
  );
  }
@@ -247,24 +247,24 @@ const WatchPage: React.FC = () => {
  <AdvancedVideoPlayer
  video={video}
  autoplay={true}
- muted={true}
+ muted={true} />
  />
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Video title */}
  <div className="mb-2 sm:mb-3 px-1 sm:px-0">
  <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight">
  {video.title}
- </h1>
- </div>
+// FIXED:  </h1>
+// FIXED:  </div>
 
  {/* Video metadata and actions combined */}
  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4 px-1 sm:px-0">
  <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
  {formatCount(typeof video.views === 'string' ? parseInt(((video.views as string)).replace(/[^0-9]/g, ''), 10) : video.views || 0)} views • {formatDistanceToNow(video.uploadedAt)}
- </div>
+// FIXED:  </div>
 
  {/* Video actions - moved to same line as metadata */}
  <VideoActions
@@ -272,12 +272,12 @@ const WatchPage: React.FC = () => {
  disliked={disliked}
  likeCount={video.likes || 0}
  onLike={handleLike}
- onDislike={handleDislike}
+ onDislike={handleDislike} />
  onShare={() => {}
  onSave={openSaveModal}
  isSavedToAnyList={isSavedToAnyList}
  />
- </div>
+// FIXED:  </div>
 
  {/* Video description */}
  <VideoDescription
@@ -291,13 +291,13 @@ const WatchPage: React.FC = () => {
  summaryError={summaryError}
  isSummarizing={isSummarizing}
  canSummarize={!!canSummarize}
- onSummarizeDescription={handleSummarizeDescription}
+ onSummarizeDescription={handleSummarizeDescription} />
  />
 
  {/* Enhanced Video Metadata */}
  <VideoMetadata
  video={video}
- expanded={metadataExpanded}
+ expanded={metadataExpanded} />
  onToggleExpanded={() => setMetadataExpanded(!metadataExpanded)}
  />
 
@@ -322,24 +322,24 @@ const WatchPage: React.FC = () => {
  onSetCurrentReplyText={setCurrentReplyText}
  onSetEditingComment={setEditingComment}
  onSetActiveCommentMenu={setActiveCommentMenu}
- onSetExpandedReplies={setExpandedReplies}
+ onSetExpandedReplies={setExpandedReplies} />
  />
- </div>
+// FIXED:  </div>
 
  {/* Sidebar - Related videos */}
  <aside className="xl:w-[402px] xl:flex-shrink-0 mt-4 xl:mt-0">
  <div className="xl:sticky xl:top-4">
  <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 px-1 sm:px-0">Up next</h2>
  <RecommendationEngine
- currentVideo={video}
+ currentVideo={video} />
  onVideoSelect={(videoId: any) => {
  window.location.href = `/watch?v=${videoId}`;
  }
  />
- </div>
- </aside>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </aside>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Save to Playlist Modal */}
  <RefactoredSaveToPlaylistModal
@@ -348,9 +348,9 @@ const WatchPage: React.FC = () => {
  videoId={videoId || ''}
  existingPlaylists={mockPlaylists}
  onSaveToPlaylist={enhancedHandleSaveToPlaylist}
- onCreatePlaylist={handleCreatePlaylist}
+ onCreatePlaylist={handleCreatePlaylist} />
  />
- </div>
+// FIXED:  </div>
  );
 };
 

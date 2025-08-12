@@ -199,7 +199,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
  return (
  <div
- className={`bg-white border border-gray-200 rounded-lg p-4 ${className}`}
+// FIXED:  className={`bg-white border border-gray-200 rounded-lg p-4 ${className}`} />
  >
  <div className='flex items-center justify-between mb-4'>
  <div className='flex items-center space-x-2'>
@@ -207,197 +207,197 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  <span className='font-medium text-gray-900'>Stream Scheduler</span>
  <span className='px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full'>
  {scheduledStreams.length} scheduled
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
- <button
- onClick={() => setShowCreateForm(!showCreateForm)}
- className='flex items-center space-x-1 px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm'
+ <button />
+// FIXED:  onClick={() => setShowCreateForm(!showCreateForm)}
+// FIXED:  className='flex items-center space-x-1 px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm'
  >
  <CalendarIcon className='w-4 h-4' />
  <span>{editingStream ? 'Cancel Edit' : 'Schedule Stream'}</span>
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Create/Edit Form */}
  {showCreateForm && (
- <form
- onSubmit={(e: any) => handleSubmit(e)}
- className='mb-6 p-4 bg-gray-50 rounded-lg border'
+ <form />
+// FIXED:  onSubmit={(e: any) => handleSubmit(e)}
+// FIXED:  className='mb-6 p-4 bg-gray-50 rounded-lg border'
  >
  <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
  <div>
  <label
- htmlFor='stream-title'
- className='block text-sm font-medium text-gray-700 mb-1'
+// FIXED:  htmlFor='stream-title'
+// FIXED:  className='block text-sm font-medium text-gray-700 mb-1' />
  >
  Stream Title *
- </label>
+// FIXED:  </label>
  <input
- id='stream-title'
- type='text'
- value={formData.title}
- onChange={e =>
+// FIXED:  id='stream-title'
+// FIXED:  type='text'
+// FIXED:  value={formData.title} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({ ...prev as any, title: e.target.value }))
  }
- placeholder='Enter stream title...'
+// FIXED:  placeholder='Enter stream title...'
  required
- className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <label
- htmlFor='stream-category'
- className='block text-sm font-medium text-gray-700 mb-1'
+// FIXED:  htmlFor='stream-category'
+// FIXED:  className='block text-sm font-medium text-gray-700 mb-1' />
  >
  Category
- </label>
+// FIXED:  </label>
  <select
- id='stream-category'
- value={formData.category}
- onChange={e =>
+// FIXED:  id='stream-category'
+// FIXED:  value={formData.category} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({ ...prev as any, category: e.target.value }))
  }
- className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  >
  {categories.map((category: any) => (
  <option key={category} value={category}>
  {category}
- </option>
+// FIXED:  </option>
  ))}
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  <div className='md:col-span-2'>
  <label
- htmlFor='stream-description'
- className='block text-sm font-medium text-gray-700 mb-1'
+// FIXED:  htmlFor='stream-description'
+// FIXED:  className='block text-sm font-medium text-gray-700 mb-1' />
  >
  Description
- </label>
+// FIXED:  </label>
  <textarea
- id='stream-description'
- value={formData.description}
- onChange={e =>
+// FIXED:  id='stream-description'
+// FIXED:  value={formData.description} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({
  ...prev as any,
  description: e.target.value }))
  }
- placeholder='Describe your stream...'
+// FIXED:  placeholder='Describe your stream...'
  rows={3}
- className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none'
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <label
- htmlFor='stream-start-time'
- className='block text-sm font-medium text-gray-700 mb-1'
+// FIXED:  htmlFor='stream-start-time'
+// FIXED:  className='block text-sm font-medium text-gray-700 mb-1' />
  >
  Scheduled Start Time *
- </label>
+// FIXED:  </label>
  <input
- id='stream-start-time'
- type='datetime-local'
- value={formData.scheduledStartTime}
- onChange={e =>
+// FIXED:  id='stream-start-time'
+// FIXED:  type='datetime-local'
+// FIXED:  value={formData.scheduledStartTime} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({
  ...prev as any,
  scheduledStartTime: e.target.value }))
  }
  min={new Date().toISOString().slice(0, 16)}
  required
- className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <label
- htmlFor='stream-visibility'
- className='block text-sm font-medium text-gray-700 mb-1'
+// FIXED:  htmlFor='stream-visibility'
+// FIXED:  className='block text-sm font-medium text-gray-700 mb-1' />
  >
  Visibility
- </label>
+// FIXED:  </label>
  <select
- id='stream-visibility'
- value={formData.visibility}
- onChange={e =>
+// FIXED:  id='stream-visibility'
+// FIXED:  value={formData.visibility} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({
  ...prev as any,
  visibility: e.target.value as any }))
  }
- className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  >
  <option value='public'>Public</option>
  <option value='unlisted'>Unlisted</option>
  <option value='private'>Private</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  <div className='md:col-span-2'>
  <label
- htmlFor='stream-tags'
- className='block text-sm font-medium text-gray-700 mb-1'
+// FIXED:  htmlFor='stream-tags'
+// FIXED:  className='block text-sm font-medium text-gray-700 mb-1' />
  >
  Tags
- </label>
+// FIXED:  </label>
  <div className='flex space-x-2 mb-2'>
  <input
- id='stream-tags'
- type='text'
- value={newTag}
- onChange={e => setNewTag(e.target.value)}
+// FIXED:  id='stream-tags'
+// FIXED:  type='text'
+// FIXED:  value={newTag} />
+// FIXED:  onChange={e => setNewTag(e.target.value)}
  onKeyPress={e =>
  e.key === 'Enter' && (e.preventDefault(), addTag())
  }
- placeholder='Add a tag...'
- className='flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+// FIXED:  placeholder='Add a tag...'
+// FIXED:  className='flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  />
  <button
- type='button'
- onClick={(e: any) => addTag(e)}
- className='px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700'
+// FIXED:  type='button' />
+// FIXED:  onClick={(e: any) => addTag(e)}
+// FIXED:  className='px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700'
  >
  Add
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  <div className='flex flex-wrap gap-2'>
  {formData.tags.map((tag: string) => (
  <span
  key={tag}
- className='inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg'
+// FIXED:  className='inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg' />
  >
  {tag}
  <button
- type='button'
- onClick={() => removeTag(tag)}
- className='ml-1 text-blue-600 hover:text-blue-800'
+// FIXED:  type='button' />
+// FIXED:  onClick={() => removeTag(tag)}
+// FIXED:  className='ml-1 text-blue-600 hover:text-blue-800'
  >
  ×
- </button>
- </span>
+// FIXED:  </button>
+// FIXED:  </span>
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='flex space-x-2 mt-4'>
  <button
- type='submit'
- className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700'
+// FIXED:  type='submit'
+// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700' />
  >
  {editingStream ? 'Update Stream' : 'Schedule Stream'}
- </button>
+// FIXED:  </button>
  <button
- type='button'
- onClick={(e: any) => resetForm(e)}
- className='px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50'
+// FIXED:  type='button' />
+// FIXED:  onClick={(e: any) => resetForm(e)}
+// FIXED:  className='px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50'
  >
  Cancel
- </button>
- </div>
- </form>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </form>
  )}
 
  {/* Scheduled Streams List */}
@@ -408,37 +408,37 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  <p>No scheduled streams</p>
  <p className='text-sm mt-1'>
  Schedule your first stream to get started!
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  ) : (
  scheduledStreams.map((stream: any) => (
  <div
  key={stream.id}
- className='p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'
+// FIXED:  className='p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors' />
  >
  <div className='flex items-start justify-between'>
  <div className='flex-1'>
  <div className='flex items-center space-x-2 mb-2'>
  <h3 className='font-medium text-gray-900'>
  {stream.title}
- </h3>
+// FIXED:  </h3>
  <span
- className={`px-2 py-1 text-xs rounded-full ${
+// FIXED:  className={`px-2 py-1 text-xs rounded-full ${
  stream.visibility === 'public'
  ? 'bg-green-100 text-green-800'
  : stream.visibility === 'unlisted'
  ? 'bg-yellow-100 text-yellow-800'
  : 'bg-red-100 text-red-800'
- }`}
+ }`} />
  >
  {stream.visibility}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  {stream.description && (
  <p className='text-sm text-gray-600 mb-2'>
  {stream.description}
- </p>
+// FIXED:  </p>
  )}
 
  <div className='flex items-center space-x-4 text-sm text-gray-500'>
@@ -447,67 +447,67 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  <span>
  {stream.scheduledStartTime &&
  formatDateTime(new Date(stream.scheduledStartTime))}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <span>•</span>
  <span>{stream.category}</span>
  <span>•</span>
  <span className='font-medium text-blue-600'>
  {stream.scheduledStartTime &&
  getTimeUntilStream(new Date(stream.scheduledStartTime))}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  {stream.tags.length > 0 && (
  <div className='flex flex-wrap gap-1 mt-2'>
  {stream.tags.slice(0, 3).map((tag: string) => (
  <span
  key={tag}
- className='px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded'
+// FIXED:  className='px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded' />
  >
  {tag}
- </span>
+// FIXED:  </span>
  ))}
  {stream.tags.length > 3 && (
  <span className='px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded'>
  +{stream.tags.length - 3} more
- </span>
+// FIXED:  </span>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  <div className='flex items-center space-x-2 ml-4'>
  {isStreamStartable(stream) && (
- <button
- onClick={() => handleStartStream(stream.id)}
- className='flex items-center space-x-1 px-3 py-1 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm'
+ <button />
+// FIXED:  onClick={() => handleStartStream(stream.id)}
+// FIXED:  className='flex items-center space-x-1 px-3 py-1 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm'
  >
  <PlayIcon className='w-4 h-4' />
  <span>Go Live</span>
- </button>
+// FIXED:  </button>
  )}
 
- <button
- onClick={() => handleEditStream(stream)}
- className='p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100'
+ <button />
+// FIXED:  onClick={() => handleEditStream(stream)}
+// FIXED:  className='p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100'
  >
  <PencilIcon className='w-4 h-4' />
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => handleDeleteStream(stream.id)}
- className='p-2 text-red-400 hover:text-red-600 rounded-lg hover:bg-red-50'
+ <button />
+// FIXED:  onClick={() => handleDeleteStream(stream.id)}
+// FIXED:  className='p-2 text-red-400 hover:text-red-600 rounded-lg hover:bg-red-50'
  >
  <TrashIcon className='w-4 h-4' />
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

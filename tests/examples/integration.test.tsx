@@ -17,17 +17,17 @@ import { TestPerformanceTracker } from '../setup';
 const VideoPlayer: any = ({ video, onTimeUpdate, onEnded }: any) => (
  <div data-testid="video-player">
  <video
- src={video.url}
+// FIXED:  src={video.url}
  onTimeUpdate={onTimeUpdate}
  onEnded={onEnded}
- aria-label={`Playing ${video.title}`}
+// FIXED:  aria-label={`Playing ${video.title}`} />
  />
  <div className="controls">
  <button aria-label="Play/Pause">⏯️</button>
  <button aria-label="Mute/Unmute">🔊</button>
  <button aria-label="Fullscreen">⛶</button>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 );
 
 const VideoList: any = ({ videos, onVideoSelect, loading }: any) => (
@@ -38,18 +38,18 @@ const VideoList: any = ({ videos, onVideoSelect, loading }: any) => (
  videos.map((video: any) => (
  <div
  key={video.id}
- data-testid={`video-item-${video.id}`}
- onClick={() => onVideoSelect(video)}
- className="video-item"
+// FIXED:  data-testid={`video-item-${video.id}`} />
+// FIXED:  onClick={() => onVideoSelect(video)}
+// FIXED:  className="video-item"
  >
  <img src={video.thumbnail} alt={video.title} />
  <h3>{video.title}</h3>
  <p>{video.channel.name}</p>
  <span>{video.viewCount} views</span>
- </div>
+// FIXED:  </div>
  ))
  )}
- </div>
+// FIXED:  </div>
 );
 
 const CommentSection: any = ({ comments, onAddComment }: any) => {
@@ -68,16 +68,16 @@ const CommentSection: any = ({ comments, onAddComment }: any) => {
 
  <form onSubmit={(e: any) => handleSubmit(e)} data-testid="comment-form">
  <textarea
- value={newComment}
- onChange={(e) => setNewComment(e.target.value)}
- placeholder="Add a comment..."
- aria-label="Add a comment"
- data-testid="comment-input"
+// FIXED:  value={newComment} />
+// FIXED:  onChange={(e) => setNewComment(e.target.value)}
+// FIXED:  placeholder="Add a comment..."
+// FIXED:  aria-label="Add a comment"
+// FIXED:  data-testid="comment-input"
  />
  <button type="submit" disabled={!newComment.trim()}>
  Comment
- </button>
- </form>
+// FIXED:  </button>
+// FIXED:  </form>
 
  <div className="comments-list">
  {comments.map((comment: any) => (
@@ -87,11 +87,11 @@ const CommentSection: any = ({ comments, onAddComment }: any) => {
  <strong>{comment.author.name}</strong>
  <p>{comment.text}</p>
  <span>{comment.timestamp}</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
@@ -182,7 +182,7 @@ return;
  <VideoPlayer
  video={currentVideo}
  onTimeUpdate={handleTimeUpdate}
- onEnded={handleVideoEnded}
+ onEnded={handleVideoEnded} />
  />
  <VideoDescription
  video={currentVideo}
@@ -190,7 +190,7 @@ return;
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -198,20 +198,20 @@ return;
  <CommentSection
  videoId={currentVideo?.id || ''}
  comments={comments}
- onAddComment={handleAddComment}
+ onAddComment={handleAddComment} />
  />
- </>
+// FIXED:  </>
  )}
- </main>
+// FIXED:  </main>
 
  <aside className="sidebar">
  <VideoList
  videos={videos}
  onVideoSelect={handleVideoSelect}
- loading={loading}
+ loading={loading} />
  />
- </aside>
- </div>
+// FIXED:  </aside>
+// FIXED:  </div>
  );
 };
 

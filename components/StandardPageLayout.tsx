@@ -43,14 +43,14 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  const defaultLoadingComponent: any = (
  <div className="flex items-center justify-center min-h-[400px]">
  <LoadingSpinner size="lg" />
- </div>
+// FIXED:  </div>
  );
 
  // Default error component
  const defaultErrorComponent: any = (
  <ErrorState
  title="Something went wrong"
- message={error || 'An unexpected error occurred'}
+ message={error || 'An unexpected error occurred'} />
  />
  );
 
@@ -60,15 +60,15 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  <div className="text-gray-400 mb-4">
  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  No content found
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400">
  There's nothing to display at the moment.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  );
 
  return (
@@ -82,21 +82,21 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  {title && (
  <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
  {title}
- </h1>
+// FIXED:  </h1>
  )}
  {subtitle && (
  <p className="text-gray-600 dark:text-gray-400">
  {subtitle}
- </p>
+// FIXED:  </p>
  )}
- </div>
+// FIXED:  </div>
  {headerActions && (
  <div className="flex items-center space-x-4">
  {headerActions}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Content Area */}
@@ -108,9 +108,9 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  {!loading && !error && isEmpty && (emptyComponent || defaultEmptyComponent)}
 
  {!loading && !error && !isEmpty && children}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

@@ -118,11 +118,11 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  <div className='h-5 bg-gray-200 rounded w-3/4' />
  <div className='h-4 bg-gray-200 rounded w-1/2' />
  <div className='h-4 bg-gray-200 rounded w-1/4' />
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -133,33 +133,33 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  <h2 className='text-xl font-semibold'>{title}</h2>
  <Link
  to='/studio/videos/upload'
- className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center'
+// FIXED:  className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center' />
  >
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-5 w-5 mr-2'
+// FIXED:  className='h-5 w-5 mr-2'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M12 6v6m0 0v6m0-6h6m-6 0H6'
+ d='M12 6v6m0 0v6m0-6h6m-6 0H6' />
  />
- </svg>
+// FIXED:  </svg>
  Upload Video
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
 
  <div className='flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0'>
  {/* Filters and sorting */}
  <div className='flex flex-wrap gap-2'>
  <select
- className='border rounded px-3 py-1 text-sm'
- value={filterVisibility}
- onChange={e =>
+// FIXED:  className='border rounded px-3 py-1 text-sm'
+// FIXED:  value={filterVisibility} />
+// FIXED:  onChange={e =>
  setFilterVisibility(e.target.value as VideoVisibility | 'all')
  }
  >
@@ -167,46 +167,46 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  <option value='public'>Public</option>
  <option value='unlisted'>Unlisted</option>
  <option value='private'>Private</option>
- </select>
+// FIXED:  </select>
 
  <select
- className='border rounded px-3 py-1 text-sm'
- value={sortBy}
- onChange={e =>
+// FIXED:  className='border rounded px-3 py-1 text-sm'
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={e =>
  setSortBy(e.target.value as 'date' | 'views' | 'comments')
  }
  >
  <option value='date'>Date</option>
  <option value='views'>Views</option>
  <option value='comments'>Comments</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {/* Bulk actions */}
  <div className='flex items-center gap-2'>
  <input
- type='checkbox'
- className='h-4 w-4'
- checked={
+// FIXED:  type='checkbox'
+// FIXED:  className='h-4 w-4'
+// FIXED:  checked={ />
  selectedVideos.size === videos.length && videos.length > 0
  }
- onChange={e => handleSelectAll(e.target.checked)}
+// FIXED:  onChange={e => handleSelectAll(e.target.checked)}
  />
  <span className='text-sm text-gray-600 mr-3'>
  {selectedVideos.size} selected
- </span>
+// FIXED:  </span>
 
  {selectedVideos.size > 0 && (
  <button
- className='text-red-600 hover:text-red-800 text-sm border border-red-600 hover:bg-red-50 rounded px-3 py-1'
- onClick={(e: any) => handleDeleteSelected(e)}
+// FIXED:  className='text-red-600 hover:text-red-800 text-sm border border-red-600 hover:bg-red-50 rounded px-3 py-1' />
+// FIXED:  onClick={(e: any) => handleDeleteSelected(e)}
  >
  Delete
- </button>
+// FIXED:  </button>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Video list */}
  {sortedVideos.length > 0 ? (
@@ -214,22 +214,22 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  {sortedVideos.map((video: any) => (
  <div
  key={video.id}
- className='flex items-center p-4 hover:bg-gray-50'
+// FIXED:  className='flex items-center p-4 hover:bg-gray-50' />
  >
  <input
- type='checkbox'
- className='h-4 w-4 mr-4'
- checked={selectedVideos.has(video.id)}
- onChange={e => handleVideoSelect(video.id, e.target.checked)}
+// FIXED:  type='checkbox'
+// FIXED:  className='h-4 w-4 mr-4'
+// FIXED:  checked={selectedVideos.has(video.id)} />
+// FIXED:  onChange={e => handleVideoSelect(video.id, e.target.checked)}
  />
 
  <div className='flex flex-col md:flex-row items-start md:items-center flex-grow'>
  <div className='flex items-center flex-grow min-w-0'>
  <div className='relative w-28 h-16 md:w-40 md:h-24 flex-shrink-0'>
  <img
- src={video.thumbnailUrl}
- alt={video.title}
- className='w-full h-full object-cover rounded'
+// FIXED:  src={video.thumbnailUrl}
+// FIXED:  alt={video.title}
+// FIXED:  className='w-full h-full object-cover rounded' />
  />
  <div className='absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1 rounded'>
  {Math.floor(
@@ -245,43 +245,43 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  )
  .toString()
  .padStart(2, '0')}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='ml-3 min-w-0 flex-grow'>
  <Link
  to={`/studio/videos/edit/${video.id}`}
- className='block hover:underline'
+// FIXED:  className='block hover:underline' />
  >
  <h3 className='font-medium line-clamp-2'>
  {video.title}
- </h3>
- </Link>
+// FIXED:  </h3>
+// FIXED:  </Link>
  <p className='text-sm text-gray-600 line-clamp-1 mt-1'>
  {video.description}
- </p>
+// FIXED:  </p>
  <div className='mt-1 flex items-center flex-wrap gap-x-3 text-xs text-gray-500'>
  <span>{formatDate(video.createdAt)}</span>
  <span>{video.views.toLocaleString()} views</span>
  <span
- className={`
+// FIXED:  className={`
  ${video.visibility === 'public' ? 'text-green-600' : ''}
  ${video.visibility === 'unlisted' ? 'text-yellow-600' : ''}
  ${video.visibility === 'private' ? 'text-gray-600' : ''}
- `}
+ `} />
  >
  {video.visibility}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='flex mt-3 md:mt-0 ml-0 md:ml-4 space-x-2'>
  {onVisibilityChange && (
  <select
- className='border rounded text-sm p-1'
- value={video.visibility}
- onChange={e =>
+// FIXED:  className='border rounded text-sm p-1'
+// FIXED:  value={video.visibility} />
+// FIXED:  onChange={e =>
  onVisibilityChange(
  video.id,
  e.target.value as VideoVisibility
@@ -291,35 +291,35 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  <option value='public'>Public</option>
  <option value='unlisted'>Unlisted</option>
  <option value='private'>Private</option>
- </select>
+// FIXED:  </select>
  )}
 
  {onEdit && (
  <button
- className='p-1 hover:bg-gray-200 rounded'
- onClick={() => onEdit(video.id)}
+// FIXED:  className='p-1 hover:bg-gray-200 rounded' />
+// FIXED:  onClick={() => onEdit(video.id)}
  >
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-5 w-5'
+// FIXED:  className='h-5 w-5'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
+ d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z' />
  />
- </svg>
- </button>
+// FIXED:  </svg>
+// FIXED:  </button>
  )}
 
  {onDelete && (
  <button
- className='p-1 hover:bg-gray-200 rounded text-red-600'
- onClick={() => {
+// FIXED:  className='p-1 hover:bg-gray-200 rounded text-red-600' />
+// FIXED:  onClick={() => {
  if (
  window.confirm(
  'Are you sure you want to delete this video?'
@@ -331,51 +331,51 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  >
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-5 w-5'
+// FIXED:  className='h-5 w-5'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
+ d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' />
  />
- </svg>
- </button>
+// FIXED:  </svg>
+// FIXED:  </button>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className='py-16 text-center'>
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-16 w-16 mx-auto text-gray-400 mb-4'
+// FIXED:  className='h-16 w-16 mx-auto text-gray-400 mb-4'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={1.5}
- d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'
+ d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
  />
- </svg>
+// FIXED:  </svg>
  <p className='text-gray-600'>{emptyMessage}</p>
  <Link
  to='/studio/videos/upload'
- className='mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700'
+// FIXED:  className='mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700' />
  >
  Upload a video
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

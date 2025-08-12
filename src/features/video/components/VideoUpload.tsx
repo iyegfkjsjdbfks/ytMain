@@ -127,80 +127,80 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  return (
  <div className='max-w-2xl mx-auto'>
  <div
- className={`border-2 border-dashed rounded-lg p-8 text-center ${
+// FIXED:  className={`border-2 border-dashed rounded-lg p-8 text-center ${
  isDragging
  ? 'border-blue-500 bg-blue-50'
  : 'border-gray-300 hover:border-gray-400'
  } ${file ? 'bg-gray-50' : ''}`}
  onDragOver={handleDragOver}
  onDragLeave={handleDragLeave}
- onDrop={handleDrop}
+ onDrop={handleDrop} />
  >
  {!file ? (
  <div className='space-y-4'>
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-16 w-16 mx-auto text-gray-400'
+// FIXED:  className='h-16 w-16 mx-auto text-gray-400'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={1.5}
- d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
+ d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12' />
  />
- </svg>
+// FIXED:  </svg>
  <h3 className='text-lg font-medium'>
  Drag and drop video to upload
- </h3>
+// FIXED:  </h3>
  <p className='text-sm text-gray-500'>
  Your videos will be private until you publish them
- </p>
+// FIXED:  </p>
  <button
- type='button'
- onClick={(e: any) => handleSelectFile(e)}
- className='mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+// FIXED:  type='button' />
+// FIXED:  onClick={(e: any) => handleSelectFile(e)}
+// FIXED:  className='mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
  >
  SELECT FILE
- </button>
+// FIXED:  </button>
  <input
- type='file'
+// FIXED:  type='file'
  ref={fileInputRef}
- className='hidden'
- accept={allowedTypes.join(',')}
- onChange={(e: any) => handleFileChange(e)}
+// FIXED:  className='hidden'
+ accept={allowedTypes.join(',')} />
+// FIXED:  onChange={(e: any) => handleFileChange(e)}
  />
  <p className='text-xs text-gray-500 mt-2'>
  Accepted formats:{' '}
  {allowedTypes.map((type: any) => type.split('/')[1]).join(', ')}
  <br />
  Maximum file size: {maxSizeMB}MB
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  ) : (
  <div className='space-y-4'>
  <div className='flex items-center justify-center'>
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-8 w-8 text-green-500 mr-2'
+// FIXED:  className='h-8 w-8 text-green-500 mr-2'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M5 13l4 4L19 7'
+ d='M5 13l4 4L19 7' />
  />
- </svg>
+// FIXED:  </svg>
  <span className='text-lg font-medium'>{file.name}</span>
- </div>
+// FIXED:  </div>
  <p className='text-sm text-gray-500'>
  {(file.size / (1024 * 1024)).toFixed(2)} MB • {file.type}
- </p>
+// FIXED:  </p>
 
  {uploading ? (
  <div className='w-full'>
@@ -209,66 +209,66 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  <div>
  <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200'>
  Uploading
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='text-right'>
  <span className='text-xs font-semibold inline-block text-blue-600'>
  {progress}%
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200'>
  <div
- style={{ width: `${progress}%` }
- className='shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-300'
+// FIXED:  style={{ width: `${progress}%` }
+// FIXED:  className='shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-300' />
  />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ) : (
  <div className='flex space-x-3'>
  <button
- type='button'
- onClick={(e: any) => handleUpload(e)}
- className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+// FIXED:  type='button' />
+// FIXED:  onClick={(e: any) => handleUpload(e)}
+// FIXED:  className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
  >
  UPLOAD
- </button>
+// FIXED:  </button>
  <button
- type='button'
- onClick={(e: any) => handleCancel(e)}
- className='inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+// FIXED:  type='button' />
+// FIXED:  onClick={(e: any) => handleCancel(e)}
+// FIXED:  className='inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
  >
  CANCEL
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {error && (
  <div className='mt-4 p-3 bg-red-50 border border-red-200 rounded-md'>
  <div className='flex'>
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-5 w-5 text-red-400 mr-2'
+// FIXED:  className='h-5 w-5 text-red-400 mr-2'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+ d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
  />
- </svg>
+// FIXED:  </svg>
  <p className='text-sm text-red-600'>{error}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

@@ -81,68 +81,68 @@ const LiveStreamingHubPage: React.FC = () => {
  <div>
  <h1 className='text-3xl font-bold text-gray-900 dark:text-white mb-2'>
  Live Streaming Hub
- </h1>
+// FIXED:  </h1>
  <p className='text-gray-600 dark:text-gray-400'>
  Manage your live streams, view analytics, and engage with your
  audience
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='flex items-center space-x-4'>
  {isLive && (
  <div className='flex items-center space-x-2'>
  <div className='w-3 h-3 bg-red-500 rounded-full animate-pulse' />
  <span className='text-sm font-medium text-red-600 dark:text-red-400'>
  LIVE
- </span>
+// FIXED:  </span>
  <Badge variant='secondary'>
  <Eye className='h-3 w-3 mr-1' />
  {viewerCount.toLocaleString()}
- </Badge>
- </div>
+// FIXED:  </Badge>
+// FIXED:  </div>
  )}
  <Link to='/go-live'>
  <Button className='bg-red-600 hover:bg-red-700'>
  <Play className='h-4 w-4 mr-2' />
  Go Live
- </Button>
- </Link>
- </div>
- </div>
- </div>
+// FIXED:  </Button>
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Quick Actions */}
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
  {quickActions.map((action, index) => (
  <div key={index} onClick={action.action} className='cursor-pointer'>
  <UnifiedCard
- className='hover:shadow-lg transition-shadow'
- hover={true}
+// FIXED:  className='hover:shadow-lg transition-shadow'
+ hover={true} />
  >
  <div className='p-6'>
  <div className='flex items-center space-x-3'>
  <div className='p-2 bg-blue-100 dark:bg-blue-900 rounded-lg'>
  {action.icon}
- </div>
+// FIXED:  </div>
  <div>
  <h3 className='font-semibold text-gray-900 dark:text-white'>
  {action.title}
- </h3>
+// FIXED:  </h3>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  {action.description}
- </p>
- </div>
- </div>
- </div>
- </UnifiedCard>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </UnifiedCard>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Main Content Tabs */}
  <Tabs
- value={activeTab}
+// FIXED:  value={activeTab}
  onValueChange={setActiveTab}
- className='space-y-6'
+// FIXED:  className='space-y-6' />
  >
  <TabsList className='grid w-full grid-cols-5'>
  <TabsTrigger value='overview'>Overview</TabsTrigger>
@@ -150,7 +150,7 @@ const LiveStreamingHubPage: React.FC = () => {
  <TabsTrigger value='analytics'>Analytics</TabsTrigger>
  <TabsTrigger value='viewer'>Live Viewer</TabsTrigger>
  <TabsTrigger value='settings'>Settings</TabsTrigger>
- </TabsList>
+// FIXED:  </TabsList>
 
  {/* Overview Tab */}
  <TabsContent value='overview' className='space-y-6'>
@@ -162,14 +162,14 @@ const LiveStreamingHubPage: React.FC = () => {
  <Users className='h-5 w-5' />
  <span className='font-semibold text-gray-900 dark:text-white'>
  Total Viewers
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='text-3xl font-bold text-blue-600'>12.4K</div>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  +15% from last week
- </p>
- </div>
- </UnifiedCard>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </UnifiedCard>
 
  <UnifiedCard>
  <div className='p-6'>
@@ -177,14 +177,14 @@ const LiveStreamingHubPage: React.FC = () => {
  <Play className='h-5 w-5' />
  <span className='font-semibold text-gray-900 dark:text-white'>
  Live Streams
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='text-3xl font-bold text-green-600'>3</div>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Currently active
- </p>
- </div>
- </UnifiedCard>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </UnifiedCard>
 
  <UnifiedCard>
  <div className='p-6'>
@@ -192,15 +192,15 @@ const LiveStreamingHubPage: React.FC = () => {
  <Zap className='h-5 w-5' />
  <span className='font-semibold text-gray-900 dark:text-white'>
  Engagement
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='text-3xl font-bold text-purple-600'>89%</div>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Average engagement rate
- </p>
- </div>
- </UnifiedCard>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </UnifiedCard>
+// FIXED:  </div>
 
  {/* Live Streams Grid */}
  <UnifiedCard>
@@ -208,65 +208,65 @@ const LiveStreamingHubPage: React.FC = () => {
  <div className='mb-6'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-2'>
  Currently Live
- </h3>
+// FIXED:  </h3>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Active live streams across your channels
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
  {liveStreams.map((stream: any) => (
  <div
  key={stream.id}
- className='relative group cursor-pointer'
+// FIXED:  className='relative group cursor-pointer' />
  >
  <div className='aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden'>
  <img
- src={stream.thumbnail}
- alt={stream.title}
- className='w-full h-full object-cover'
+// FIXED:  src={stream.thumbnail}
+// FIXED:  alt={stream.title}
+// FIXED:  className='w-full h-full object-cover' />
  />
  <div className='absolute top-2 left-2'>
  <Badge className='bg-red-600 text-white'>
  <div className='w-2 h-2 bg-white rounded-full mr-1 animate-pulse' />
  LIVE
- </Badge>
- </div>
+// FIXED:  </Badge>
+// FIXED:  </div>
  <div className='absolute bottom-2 right-2'>
  <Badge variant='secondary'>{stream.duration}</Badge>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='mt-2'>
  <h3 className='font-semibold text-gray-900 dark:text-white line-clamp-2'>
  {stream.title}
- </h3>
+// FIXED:  </h3>
  <div className='flex items-center space-x-2 mt-1'>
  <Eye className='h-4 w-4 text-gray-500' />
  <span className='text-sm text-gray-600 dark:text-gray-400'>
  {stream.viewers.toLocaleString()} viewers
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </UnifiedCard>
- </TabsContent>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </UnifiedCard>
+// FIXED:  </TabsContent>
 
  {/* Management Tab */}
  <TabsContent value='management'>
  <StreamManagementDashboard />
- </TabsContent>
+// FIXED:  </TabsContent>
 
  {/* Analytics Tab */}
  <TabsContent value='analytics'>
  <StreamAnalyticsDashboard streamId='demo-stream-1' />
- </TabsContent>
+// FIXED:  </TabsContent>
 
  {/* Live Viewer Tab */}
  <TabsContent value='viewer'>
  <LiveStreamViewer streamId='demo-stream-1' />
- </TabsContent>
+// FIXED:  </TabsContent>
 
  {/* Settings Tab */}
  <TabsContent value='settings'>
@@ -275,33 +275,33 @@ const LiveStreamingHubPage: React.FC = () => {
  <div className='mb-6'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-2'>
  Stream Settings
- </h3>
+// FIXED:  </h3>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Configure your default streaming preferences
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='text-center py-8'>
  <Settings className='h-12 w-12 text-gray-400 mx-auto mb-4' />
  <p className='text-gray-600 dark:text-gray-400 mb-4'>
  Advanced stream settings will be available here
- </p>
+// FIXED:  </p>
  <Link to='/go-live'>
  <Button variant='outline'>Configure in Live Studio</Button>
- </Link>
- </div>
- </div>
- </UnifiedCard>
- </TabsContent>
- </Tabs>
- </div>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </UnifiedCard>
+// FIXED:  </TabsContent>
+// FIXED:  </Tabs>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
 const LiveStreamingHubPageWithErrorBoundary: any = () => (
  <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
  <LiveStreamingHubPage />
- </ErrorBoundary>
+// FIXED:  </ErrorBoundary>
 );
 
 export default LiveStreamingHubPageWithErrorBoundary;

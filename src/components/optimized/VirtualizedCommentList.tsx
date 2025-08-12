@@ -54,55 +54,55 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }: any) => {
 
  return (
  <div
- style={style}
- className='px-4 py-3 border-b border-gray-200 dark:border-gray-700'
+// FIXED:  style={style}
+// FIXED:  className='px-4 py-3 border-b border-gray-200 dark:border-gray-700' />
  >
  <div className='flex space-x-3'>
  <img
- src={
+// FIXED:  src={
  comment.authorAvatar ||
  comment.authorAvatarUrl ||
  'https://via.placeholder.com/32'
  }
- alt={comment.authorName}
- className='w-8 h-8 rounded-full flex-shrink-0'
+// FIXED:  alt={comment.authorName}
+// FIXED:  className='w-8 h-8 rounded-full flex-shrink-0' />
  />
  <div className='flex-1 min-w-0'>
  <div className='flex items-center space-x-2'>
  <span className='font-medium text-sm text-gray-900 dark:text-white'>
  {comment.authorName}
- </span>
+// FIXED:  </span>
  <span className='text-xs text-gray-500 dark:text-gray-400'>
  {comment.publishedAt}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <p className='text-sm text-gray-700 dark:text-gray-300 mt-1'>
  {comment.content}
- </p>
+// FIXED:  </p>
  <div className='flex items-center space-x-4 mt-2'>
- <button
- onClick={(e: any) => handleLike(e)}
- className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+ <button />
+// FIXED:  onClick={(e: any) => handleLike(e)}
+// FIXED:  className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
  >
  <span>👍</span>
  <span>{comment.likeCount || 0}</span>
- </button>
- <button
- onClick={(e: any) => handleDislike(e)}
- className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleDislike(e)}
+// FIXED:  className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
  >
  <span>👎</span>
- </button>
- <button
- onClick={(e: any) => handleReply(e)}
- className='text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleReply(e)}
+// FIXED:  className='text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
  >
  Reply
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 });
 
@@ -132,7 +132,7 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(
  return (
  <div className={`flex items-center justify-center h-32 ${className}`}>
  <p className='text-gray-500 dark:text-gray-400'>No comments yet</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -144,11 +144,11 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(
  itemCount={comments.length}
  itemSize={itemHeight}
  itemData={listData}
- overscanCount={5}
+ overscanCount={5} />
  >
  {CommentItem}
- </List>
- </div>
+// FIXED:  </List>
+// FIXED:  </div>
  );
  }
 );

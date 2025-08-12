@@ -75,7 +75,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
  return (
  <FormContext.Provider value={contextValue}>
  {children}
- </FormContext.Provider>
+// FIXED:  </FormContext.Provider>
  );
 };
 
@@ -112,12 +112,12 @@ export const FormField: React.FC<FormFieldProps> = ({
  <div className={cn('space-y-1', className)}>
  {label && (
  <label
- htmlFor={name}
- className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+// FIXED:  htmlFor={name}
+// FIXED:  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300" />
  >
  {label}
  {required && <span className="text-red-500 ml-1">*</span>}
- </label>
+// FIXED:  </label>
  )}
 
  {children}
@@ -125,15 +125,15 @@ export const FormField: React.FC<FormFieldProps> = ({
  {error && (
  <p className="text-sm text-red-600 dark:text-red-400">
  {error}
- </p>
+// FIXED:  </p>
  )}
 
  {helpText && !error && (
  <p className="text-sm text-neutral-500 dark:text-neutral-400">
  {helpText}
- </p>
+// FIXED:  </p>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -207,40 +207,40 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
  <span className="text-neutral-400 dark:text-neutral-500">
  {leftIcon}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
 
  <input
  {...props}
- id={name}
- name={name}
- value={value}
- onChange={(e: any) => handleChange(e)}
+// FIXED:  id={name}
+// FIXED:  name={name}
+// FIXED:  value={value} />
+// FIXED:  onChange={(e: any) => handleChange(e)}
  onBlur={handleBlur}
- className={inputClasses}
+// FIXED:  className={inputClasses}
  />
 
  {rightIcon && (
  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
  <span className="text-neutral-400 dark:text-neutral-500">
  {rightIcon}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 
  if (label || helpText) {
  return (
  <FormField
- name={name}
+// FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
- {...(helpText && { helpText })}
+ {...(helpText && { helpText })} />
  >
  {input}
- </FormField>
+// FIXED:  </FormField>
  );
  }
 
@@ -312,25 +312,25 @@ export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
  const textarea: any = (
  <textarea
  {...props}
- id={name}
- name={name}
- value={value}
- onChange={(e: any) => handleChange(e)}
+// FIXED:  id={name}
+// FIXED:  name={name}
+// FIXED:  value={value} />
+// FIXED:  onChange={(e: any) => handleChange(e)}
  onBlur={handleBlur}
- className={textareaClasses}
+// FIXED:  className={textareaClasses}
  />
  );
 
  if (label || helpText) {
  return (
  <FormField
- name={name}
+// FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
- {...(helpText && { helpText })}
+ {...(helpText && { helpText })} />
  >
  {textarea}
- </FormField>
+// FIXED:  </FormField>
  );
  }
 
@@ -394,13 +394,13 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
  <div className="relative">
  <select
  {...props}
- id={name}
- name={name}
- value={value}
- onChange={(e: any) => handleChange(e)}
+// FIXED:  id={name}
+// FIXED:  name={name}
+// FIXED:  value={value} />
+// FIXED:  onChange={(e: any) => handleChange(e)}
  onBlur={handleBlur}
- className={selectClasses}
- style={{
+// FIXED:  className={selectClasses}
+// FIXED:  style={{
  backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")' 
 
  }
@@ -408,31 +408,31 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
  {placeholder && (
  <option value="" disabled>
  {placeholder}
- </option>
+// FIXED:  </option>
  )}
  {options.map((option) => (
  <option
  key={option.value}
- value={option.value}
- disabled={option.disabled}
+// FIXED:  value={option.value}
+// FIXED:  disabled={option.disabled} />
  >
  {option.label}
- </option>
+// FIXED:  </option>
  ))}
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
  );
 
  if (label || helpText) {
  return (
  <FormField
- name={name}
+// FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
- {...(helpText && { helpText })}
+ {...(helpText && { helpText })} />
  >
  {select}
- </FormField>
+// FIXED:  </FormField>
  );
  }
 
@@ -477,11 +477,11 @@ return;
  return (
  <FormProvider
  {...(initialValues && { initialValues })}
- {...(validationSchema && { validationSchema })}
+ {...(validationSchema && { validationSchema })} />
  >
- <form
- onSubmit={(e: any) => handleSubmit(e)}
- className={cn('space-y-6', className)}
+ <form />
+// FIXED:  onSubmit={(e: any) => handleSubmit(e)}
+// FIXED:  className={cn('space-y-6', className)}
  noValidate
  >
  {children}
@@ -489,16 +489,16 @@ return;
  {onSubmit && (
  <div className="flex justify-end">
  <UnifiedButton
- type="submit"
+// FIXED:  type="submit"
  loading={isSubmitting}
- disabled={isSubmitting}
+// FIXED:  disabled={isSubmitting} />
  >
  {isSubmitting ? 'Submitting...' : 'Submit'}
- </UnifiedButton>
- </div>
+// FIXED:  </UnifiedButton>
+// FIXED:  </div>
  )}
- </form>
- </FormProvider>
+// FIXED:  </form>
+// FIXED:  </FormProvider>
  );
 };
 

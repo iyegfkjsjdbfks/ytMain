@@ -84,10 +84,10 @@ export function AccessibilityProvider({ children }): any {
  highContrast,
  fontSize,
  announcements,
- addAnnouncement,
+ addAnnouncement, />
  clearAnnouncements }}>
  {children}
- </AccessibilityContext.Provider>
+// FIXED:  </AccessibilityContext.Provider>
  );
 }
 
@@ -105,18 +105,18 @@ export function ScreenReaderAnnouncer(): any {
 
  return (
  <div
- aria-live="polite"
- aria-atomic="true"
- className="sr-only"
- role="status"
+// FIXED:  aria-live="polite"
+// FIXED:  aria-atomic="true"
+// FIXED:  className="sr-only"
+ role="status" />
  >
  {announcements.map((announcement: any,
  index: number) => (
  <div key={`${announcement}-${index}`}>
  {announcement}
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  );
 }
 
@@ -235,13 +235,13 @@ export function useAriaLiveRegion(_initialMessage = ''): any {
 
  const LiveRegion = useCallback(() => (
  <div
- aria-live={politeness}
- aria-atomic="true"
- className="sr-only"
- role="status"
+// FIXED:  aria-live={politeness}
+// FIXED:  aria-atomic="true"
+// FIXED:  className="sr-only"
+ role="status" />
  >
  {message}
- </div>
+// FIXED:  </div>
  ), [message, politeness]);
 
  return { announce, LiveRegion }
@@ -281,15 +281,15 @@ export function checkColorContrast(foreground: any,
 export function SkipLink({ href, children }): any {
  return (
  <a
- href={href}
- className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg"
+// FIXED:  href={href}
+// FIXED:  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg" />
  onFocus={(e: any) => {
  e.currentTarget.scrollIntoView({ behavior: 'smooth',
  block: 'center' });
  }
  >
  {children}
- </a>
+// FIXED:  </a>
  );
 }
 

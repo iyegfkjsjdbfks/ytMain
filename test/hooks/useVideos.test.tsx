@@ -25,7 +25,7 @@ const createWrapper: any = () => {
  const Wrapper: any = ({ children }: any) => (
  <QueryClientProvider client={queryClient}>
  {children}
- </QueryClientProvider>
+// FIXED:  </QueryClientProvider>
  );
 
  return { Wrapper, queryClient };

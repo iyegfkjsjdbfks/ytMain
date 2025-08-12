@@ -34,7 +34,7 @@ const LikedVideosPage: React.FC = () => {
  <div className="flex items-center mb-6 sm:mb-8">
  <HeartIcon className="w-7 h-7 sm:w-8 sm:h-8 text-red-500 dark:text-red-400 mr-3" />
  <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">Liked Videos</h1>
- </div>
+// FIXED:  </div>
 
  {loading ? (
  <LikedVideosPageSkeleton />
@@ -43,17 +43,17 @@ const LikedVideosPage: React.FC = () => {
  {videos.map((video: any) => (
  <VideoCard key={`${video.id}-liked`} video={video} />
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className="text-center py-12 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg">
  <HeartIcon className="w-16 h-16 text-red-400 dark:text-red-500/70 mx-auto mb-6" />
  <p className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">You haven't liked any videos yet</p>
  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-md mx-auto">
  Tap the thumbs up icon on videos you enjoy, and they'll appear here.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

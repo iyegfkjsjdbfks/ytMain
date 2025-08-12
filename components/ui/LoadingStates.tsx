@@ -40,13 +40,13 @@ export const Spinner: React.FC<LoadingProps> = ({
 
  return (
  <div
- className={cn(
+// FIXED:  className={cn(
  'animate-spin rounded-full border-2 border-current border-t-transparent',
  sizeClass,
  colorClass,
  className)}
  role="status"
- aria-label="Loading"
+// FIXED:  aria-label="Loading" />
  />
  );
 };
@@ -64,17 +64,17 @@ export const DotsLoader: React.FC<LoadingProps> = ({
  {[0, 1, 2].map((i) => (
  <div
  key={i}
- className={cn(
+// FIXED:  className={cn(
  'rounded-full animate-pulse',
  dotSize,
  colorClass,
  'bg-current')}
- style={{
+// FIXED:  style={{
  animationDelay: `${i * 0.2}s`,
- animationDuration: '1s' }
+ animationDuration: '1s' } />
  />
  ))}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -85,7 +85,7 @@ export const PulseLoader: React.FC<LoadingProps & { children?: React.ReactNode }
  return (
  <div className={cn('animate-pulse', className)} role="status" aria-label="Loading">
  {children}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -109,14 +109,14 @@ export const Skeleton: React.FC<{
 
  return (
  <div
- className={cn(
+// FIXED:  className={cn(
  'animate-pulse bg-gray-200 dark:bg-gray-700',
  width,
  height,
  roundedClass,
  className)}
  role="status"
- aria-label="Loading"
+// FIXED:  aria-label="Loading" />
  />
  );
 };
@@ -139,7 +139,7 @@ export const Loading: React.FC<LoadingProps> = ({
  return (
  <PulseLoader>
  <div className={cn('rounded-full bg-current', sizeMap[size].spinner)} />
- </PulseLoader>
+// FIXED:  </PulseLoader>
  );
  case 'skeleton':
  return <Skeleton className={sizeMap[size].spinner} rounded="full" />;
@@ -153,9 +153,9 @@ export const Loading: React.FC<LoadingProps> = ({
  {text && (
  <span className={cn('font-medium', textSizeClass, colorClass)}>
  {text}
- </span>
+// FIXED:  </span>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -167,8 +167,8 @@ export const VideoCardSkeleton: React.FC<{ className?: string }> = ({ className 
  <Skeleton height="h-4" width="w-3/4" />
  <Skeleton height="h-3" width="w-1/2" />
  <Skeleton height="h-3" width="w-1/3" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 );
 
 export const CommentSkeleton: React.FC<{ className?: string }> = ({ className }: any) => (
@@ -178,8 +178,8 @@ export const CommentSkeleton: React.FC<{ className?: string }> = ({ className }:
  <Skeleton height="h-3" width="w-1/4" />
  <Skeleton height="h-4" width="w-full" />
  <Skeleton height="h-4" width="w-3/4" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 );
 
 export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className }: any) => (
@@ -188,8 +188,8 @@ export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className }:
  <div className="flex-1 space-y-2">
  <Skeleton height="h-4" width="w-1/2" />
  <Skeleton height="h-3" width="w-1/3" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 );
 
 export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }: any) => (
@@ -198,8 +198,8 @@ export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }
  <div className="space-y-2">
  <Skeleton height="h-4" width="w-2/3" />
  <Skeleton height="h-3" width="w-1/2" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 );
 
 // Loading Screen Component
@@ -209,7 +209,7 @@ export const LoadingScreen: React.FC<{
 }> = ({ message = 'Loading...', className }: any) => (
  <div className={cn('flex items-center justify-center min-h-screen', className)}>
  <Loading size="lg" text={message} />
- </div>
+// FIXED:  </div>
 );
 
 // Page Loading Component
@@ -219,7 +219,7 @@ export const PageLoading: React.FC<{
 }> = ({ message = 'Loading...', className }: any) => (
  <div className={cn('flex items-center justify-center py-12', className)}>
  <Loading size="md" text={message} />
- </div>
+// FIXED:  </div>
 );
 
 // Button Loading Component

@@ -117,9 +117,9 @@ return duration;
 
  return (
  <div
- className={`group cursor-pointer ${className}`}
+// FIXED:  className={`group cursor-pointer ${className}`}
  onMouseEnter={handleMouseEnter}
- onMouseLeave={handleMouseLeave}
+ onMouseLeave={handleMouseLeave} />
  >
  {/* Video Thumbnail */}
  <div className="relative mb-3">
@@ -127,12 +127,12 @@ return duration;
  <div className="relative w-full" style={{ height: '250px' }}>
  {/* Main thumbnail */}
  <ImageWithFallback
- src={video.thumbnailUrl}
- alt={video.title}
- className="absolute inset-0 w-full h-full object-cover rounded-xl"
+// FIXED:  src={video.thumbnailUrl}
+// FIXED:  alt={video.title}
+// FIXED:  className="absolute inset-0 w-full h-full object-cover rounded-xl"
  width={320}
  height={250}
- fallbackSrc={`https://picsum.photos/320/250?random=${video.id}`}
+ fallbackSrc={`https://picsum.photos/320/250?random=${video.id}`} />
  />
 
  {/* Animated preview overlay */}
@@ -146,32 +146,32 @@ return duration;
  <div className="absolute inset-0 flex items-center justify-center">
  <div className="bg-red-600 bg-opacity-90 rounded-full p-4 transform scale-110 animate-pulse">
  <svg
- className="w-10 h-10 text-white animate-pulse"
+// FIXED:  className="w-10 h-10 text-white animate-pulse"
  fill="currentColor"
- viewBox="0 0 24 24"
+ viewBox="0 0 24 24" />
  >
  <path d="M8 5v14l11-7z"/>
- </svg>
- </div>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Preview indicators */}
  <div className="absolute top-3 left-3 flex gap-2">
  <div className="bg-red-600 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
  ▶ Preview
- </div>
+// FIXED:  </div>
  <div className="bg-black/70 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
  HD
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Animated progress bar */}
  <div className="absolute bottom-4 left-4 right-4">
  <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden">
  <div className="h-full bg-red-600 rounded-full animate-progress-bar" />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Play button overlay - shown on hover when not in preview mode */}
@@ -179,34 +179,34 @@ return duration;
  <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-all duration-200">
  <div className="bg-black bg-opacity-70 rounded-full p-3 transform scale-110 transition-transform duration-200">
  <svg
- className="w-8 h-8 text-white"
+// FIXED:  className="w-8 h-8 text-white"
  fill="currentColor"
- viewBox="0 0 24 24"
+ viewBox="0 0 24 24" />
  >
  <path d="M8 5v14l11-7z"/>
- </svg>
- </div>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Duration Badge */}
  {video.duration && video.duration !== '0:00' && (
  <div className={`absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded-sm font-medium transition-all duration-200 ${
- showPreview ? 'opacity-0 transform translate-y-2' : 'opacity-100'
+ showPreview ? 'opacity-0 transform translate-y-2' : 'opacity-100' />
  }`}>
  {formatDuration(video.duration)}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Hover indicator during delay */}
  {isHovered && !showPreview && videoId && (
  <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
  Hover to preview
- </div>
+// FIXED:  </div>
  )}
- </div>
- </Link>
- </div>
+// FIXED:  </div>
+// FIXED:  </Link>
+// FIXED:  </div>
 
  {/* Video Info */}
  <div className="flex gap-3">
@@ -214,16 +214,16 @@ return duration;
  {video.channelAvatarUrl && (
  <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
  <ImageWithFallback
- src={video.channelAvatarUrl}
- alt={video.channelName}
- className={`w-9 h-9 rounded-full object-cover transition-transform duration-200 ${
+// FIXED:  src={video.channelAvatarUrl}
+// FIXED:  alt={video.channelName}
+// FIXED:  className={`w-9 h-9 rounded-full object-cover transition-transform duration-200 ${
  isHovered ? 'transform scale-110 ring-2 ring-red-500/50' : ''
  }`}
  width={36}
  height={36}
- fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName}`}
+ fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName}`} />
  />
- </Link>
+// FIXED:  </Link>
  )}
 
  {/* Video Details */}
@@ -231,20 +231,20 @@ return duration;
  {/* Video Title */}
  <Link to={`/watch/${video.id}`}>
  <h3 className={`font-medium text-black dark:text-white line-clamp-2 text-sm leading-5 mb-1 transition-colors duration-200 ${
- isHovered ? 'text-blue-600 dark:text-blue-400' : ''
+ isHovered ? 'text-blue-600 dark:text-blue-400' : '' />
  }`}>
  {video.title}
- </h3>
- </Link>
+// FIXED:  </h3>
+// FIXED:  </Link>
 
  {/* Channel Name */}
  <Link to={`/channel/${video.channelId}`}>
  <p className={`text-gray-600 dark:text-gray-400 text-sm transition-colors duration-200 ${
- isHovered ? 'text-gray-800 dark:text-white' : ''
+ isHovered ? 'text-gray-800 dark:text-white' : '' />
  }`}>
  {video.channelName}
- </p>
- </Link>
+// FIXED:  </p>
+// FIXED:  </Link>
 
  {/* Views and Upload Time */}
  <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm">
@@ -262,10 +262,10 @@ return duration;
  return 'Recently';
  }
  })()}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Custom CSS animations */}
  <style>{`
@@ -293,7 +293,7 @@ return duration;
  animation: progress-bar 3s linear infinite
  }
  `}</style>
- </div>
+// FIXED:  </div>
  );
 };
 

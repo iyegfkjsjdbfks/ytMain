@@ -19,11 +19,11 @@ export const Layout: React.FC = () => {
  <main className='flex-1 p-4 overflow-auto'>
  {/* The Outlet component renders the current route's element */}
  <Outlet />
- </main>
- </div>
+// FIXED:  </main>
+// FIXED:  </div>
 
  <Footer />
- </div>
+// FIXED:  </div>
  );
 };
 

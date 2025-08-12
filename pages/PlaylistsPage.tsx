@@ -79,10 +79,10 @@ const PlaylistsPage: React.FC = () => {
  <div className="p-3 sm:p-4">
  <div className="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4 mb-1.5" />
  <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  );
 
  return (
@@ -91,16 +91,16 @@ const PlaylistsPage: React.FC = () => {
  <div className="flex items-center mb-4 sm:mb-0">
  <PlaylistIconSolid className="w-7 h-7 sm:w-8 sm:h-8 text-neutral-700 dark:text-neutral-300 mr-3" aria-hidden="true" />
  <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">Your Playlists</h1>
- </div>
+// FIXED:  </div>
  <button
- className="flex items-center justify-center px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-medium rounded-full text-sm transition-colors w-full sm:w-auto"
- title="Create a new playlist"
- onClick={() => setIsCreateModalOpen(true)}
+// FIXED:  className="flex items-center justify-center px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-medium rounded-full text-sm transition-colors w-full sm:w-auto"
+ title="Create a new playlist" />
+// FIXED:  onClick={() => setIsCreateModalOpen(true)}
  >
  <PlusCircleIcon className="w-5 h-5 mr-2" />
  Create New Playlist
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {loading ? (
  renderSkeleton()
@@ -110,34 +110,34 @@ const PlaylistsPage: React.FC = () => {
  <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
  <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
  <img
- src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
- alt={`Thumbnail for ${playlist.title}`}
- className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+// FIXED:  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
+// FIXED:  alt={`Thumbnail for ${playlist.title}`}
+// FIXED:  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
  />
  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
  <PlaySolidIcon className="w-12 h-12 text-white" aria-hidden="true" />
- </div>
+// FIXED:  </div>
  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-2.5 py-2 text-white">
  <p className="text-xs font-semibold">{playlist.videoCount} video{playlist.videoCount !== 1 && 's'}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className="p-3 sm:p-4">
  <h3 className="text-sm sm:text-base font-semibold text-neutral-800 dark:text-neutral-50 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2 mb-0.5">{playlist.title}</h3>
  <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
  Updated {new Date(playlist.updatedAt).toLocaleDateString()}
- </p>
- </div>
- </Link>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </Link>
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className="text-center py-12 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg">
  <PlaylistIconSolid className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-6" aria-hidden="true" />
  <h2 className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">No Playlists Yet</h2>
  <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base max-w-md mx-auto mb-6">
  You haven't created or saved any playlists. Start organizing your favorite videos by creating a new playlist.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  )}
 
  {/* Create Playlist Modal */}
@@ -148,57 +148,57 @@ const PlaylistsPage: React.FC = () => {
  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Create New Playlist</h2>
  <button onClick={(e: any) => closeCreateModal(e)} className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700">
  <XMarkIcon className="w-5 h-5 text-neutral-500 dark:text-neutral-300" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  <form onSubmit={(e: any) => handleCreatePlaylist(e)} className="p-4 space-y-4">
  <div>
  <label htmlFor="playlistName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
  Playlist Name
- </label>
+// FIXED:  </label>
  <input
- id="playlistName"
- type="text"
- value={newPlaylistName}
- onChange={(e: any) => {
+// FIXED:  id="playlistName"
+// FIXED:  type="text"
+// FIXED:  value={newPlaylistName} />
+// FIXED:  onChange={(e: any) => {
  setNewPlaylistName(e.target.value);
  setCreateError(null);
  }
- placeholder="Enter playlist name..."
- className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
+// FIXED:  placeholder="Enter playlist name..."
+// FIXED:  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
  maxLength={100}
  autoFocus
  />
  {createError && (
  <p className="text-sm text-red-500 dark:text-red-400 mt-1">{createError}</p>
  )}
- </div>
+// FIXED:  </div>
 
  <div className="text-sm text-neutral-500 dark:text-neutral-400">,
  Privacy: Public (default)
- </div>
+// FIXED:  </div>
 
  <div className="flex justify-end space-x-3 pt-2">
  <button
- type="button"
- onClick={(e: any) => closeCreateModal(e)}
- className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md transition-colors"
+// FIXED:  type="button" />
+// FIXED:  onClick={(e: any) => closeCreateModal(e)}
+// FIXED:  className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md transition-colors"
  >
  Cancel
- </button>
+// FIXED:  </button>
  <button
- type="submit"
- disabled={!newPlaylistName.trim() || isCreating}
- className="px-4 py-2 text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+// FIXED:  type="submit"
+// FIXED:  disabled={!newPlaylistName.trim() || isCreating}
+// FIXED:  className="px-4 py-2 text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed" />
  >
  {isCreating ? 'Creating...' : 'Create'}
- </button>
- </div>
- </form>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </form>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

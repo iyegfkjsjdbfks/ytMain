@@ -63,41 +63,41 @@ return null;
 
  return (
  <div
- className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in p-4"
+// FIXED:  className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in p-4"
  role="dialog"
- aria-modal="true"
- aria-labelledby={title ? 'modal-title' : undefined}
+// FIXED:  aria-modal="true"
+// FIXED:  aria-labelledby={title ? 'modal-title' : undefined} />
  >
  <div
  ref={modalRef}
- className={`bg-white dark:bg-neutral-800 rounded-xl shadow-2xl flex flex-col overflow-hidden w-full ${sizeClasses[size]} animate-slide-up-fade`}
+// FIXED:  className={`bg-white dark:bg-neutral-800 rounded-xl shadow-2xl flex flex-col overflow-hidden w-full ${sizeClasses[size]} animate-slide-up-fade`} />
  >
  {title && (
  <div className="flex items-center justify-between p-4 sm:p-5 border-b border-neutral-200 dark:border-neutral-700">
  <h3 id="modal-title" className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
  {title}
- </h3>
+// FIXED:  </h3>
  {!hideCloseButton && (
- <button
- onClick={(e: any) => onClose(e)}
- className="p-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
- aria-label="Close modal"
+ <button />
+// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  className="p-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+// FIXED:  aria-label="Close modal"
  >
  <XMarkIcon className="w-6 h-6" />
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
  <div className="p-4 sm:p-5 flex-grow overflow-y-auto">
  {children}
- </div>
+// FIXED:  </div>
  {footer && (
  <div className="p-4 sm:p-5 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
  {footer}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

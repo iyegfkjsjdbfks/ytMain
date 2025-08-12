@@ -247,7 +247,7 @@ const WatchPage: React.FC = () => {
  return (
  <div className='min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center'>
  <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-red-600' />
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -370,67 +370,67 @@ const WatchPage: React.FC = () => {
  <div className='max-w-4xl mx-auto'>
  <h1 className='text-2xl font-bold text-neutral-900 dark:text-white mb-4'>
  {loading ? 'Loading video...' : 'Video not found'}
- </h1>
+// FIXED:  </h1>
 
  {/* Debug Information Panel */}
  <div className='bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6 mb-6'>
  <h2 className='text-lg font-semibold text-neutral-900 dark:text-white mb-4'>
  🔍 Debug Information
- </h2>
+// FIXED:  </h2>
  <div className='space-y-2 text-sm text-neutral-700 dark:text-neutral-300'>
  <div>
  <strong>Video ID from URL:</strong> {videoId}
- </div>
+// FIXED:  </div>
  <div>
  <strong>Loading State:</strong> {loading ? 'Yes' : 'No'}
- </div>
+// FIXED:  </div>
  <div>
  <strong>Error State:</strong> {error || 'None'}
- </div>
+// FIXED:  </div>
  <div>
  <strong>Hook Response:</strong> {video ? 'Video found' : 'null'}
- </div>
+// FIXED:  </div>
  <div>
  <strong>Video Data:</strong>{' '}
  {video ? JSON.stringify(video, null, 2) : 'null'}
- </div>
+// FIXED:  </div>
  <div>
  <strong>Environment Check:</strong>
- </div>
+// FIXED:  </div>
  <div className='ml-4'>
  <div>,
  VITE_GOOGLE_SEARCH_API_KEY:{' '}
  {import.meta.env.VITE_GOOGLE_SEARCH_API_KEY
  ? '✅ Set'
  : '❌ Missing'}
- </div>
+// FIXED:  </div>
  <div>,
  VITE_GOOGLE_SEARCH_ENGINE_ID:{' '}
  {import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID
  ? '✅ Set'
  : '❌ Missing'}
- </div>
+// FIXED:  </div>
  <div>,
  VITE_YOUTUBE_API_KEY:{' '}
  {import.meta.env.VITE_YOUTUBE_API_KEY
  ? '✅ Set'
  : '❌ Missing'}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div>
  <strong>⚠️ Note:</strong> YouTube API is blocked when Google
  Custom Search is selected in admin panel
- </div>
+// FIXED:  </div>
  <div>
  <strong>💡 Expected:</strong> Google Custom Search should
  provide basic metadata, but view counts may not be available
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Manual Retry Button */}
  <div className='mt-4'>
- <button
- onClick={async (): Promise<void> => {
+ <button />
+// FIXED:  onClick={async (): Promise<void> => {
  if (videoId.startsWith('google-search-')) {
  const youtubeId = videoId.replace('google-search-', '');
  logger.debug(
@@ -464,44 +464,44 @@ const WatchPage: React.FC = () => {
  );
  }
  }
- className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+// FIXED:  className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
  >
  🔄 Retry Fetch Video
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='space-y-4'>
- <button
- onClick={(e: any) => testGoogleSearchFallback(e)}
- className='w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
+ <button />
+// FIXED:  onClick={(e: any) => testGoogleSearchFallback(e)}
+// FIXED:  className='w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
  >
  🧪 Test Google Custom Search Fallback
- </button>
+// FIXED:  </button>
 
- <button
- onClick={(e: any) => clearCacheAndRefresh(e)}
- className='w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium'
+ <button />
+// FIXED:  onClick={(e: any) => clearCacheAndRefresh(e)}
+// FIXED:  className='w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium'
  >
  🗑️ Clear Cache & Refresh
- </button>
+// FIXED:  </button>
 
  <Link
  to='/'
- className='block w-full px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center'
+// FIXED:  className='block w-full px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center' />
  >
  ← Go back to home
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
 
  <div className='mt-6 text-xs text-neutral-500 dark:text-neutral-400'>
  <p>
  💡 <strong>Tip:</strong> Open browser developer tools (F12) to see
  detailed console logs
- </p>
- </div>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -523,7 +523,7 @@ const WatchPage: React.FC = () => {
  typeof video.duration === 'string'
  ? parseInt(
  video.duration
- .split(':')
+ .split(':') />
  .reduce((acc, time) => 60 * acc + +time, 0)
  .toString(),
  10
@@ -534,20 +534,20 @@ const WatchPage: React.FC = () => {
  width='100%'
  height={480}
  controls={true}
- className='w-full h-full'
+// FIXED:  className='w-full h-full'
  />
  ) : (
  <VideoPlayer
  videoId={video.id}
- src={
+// FIXED:  src={
  video.videoUrl ||
  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
  }
  poster={video.thumbnailUrl}
  title={video.title}
  autoplay={true}
- className='w-full'
- useYouTube={false}
+// FIXED:  className='w-full'
+ useYouTube={false} />
  onTimeUpdate={(_currentTime: any, _duration: any) => {
  // Track watch progress
 
@@ -558,159 +558,159 @@ const WatchPage: React.FC = () => {
  }
  />
  )}
- </div>
+// FIXED:  </div>
 
  {/* Video Metadata */}
  <div className='space-y-4'>
  {/* Video Title */}
  <h1 className='text-xl font-bold text-neutral-900 dark:text-white'>
  {video.title}
- </h1>
+// FIXED:  </h1>
 
  {/* Channel Metadata Section - Mirroring search results styling */}
  <div className='flex items-center gap-3 pb-3 border-b border-neutral-200 dark:border-neutral-700'>
  {/* Channel Avatar */}
  <Link
  to={`/channel/${video.channel?.id}`}
- className='flex-shrink-0'
+// FIXED:  className='flex-shrink-0' />
  >
  <img
- src={
+// FIXED:  src={
  video.channel?.avatarUrl ||
  'https://picsum.photos/seed/default-channel/150/150'
  }
- alt={video.channel?.name}
- className='w-9 h-9 rounded-full object-cover'
+// FIXED:  alt={video.channel?.name}
+// FIXED:  className='w-9 h-9 rounded-full object-cover' />
  />
- </Link>
+// FIXED:  </Link>
 
  {/* Channel Info */}
  <div className='flex-1 min-w-0'>
  <Link
  to={`/channel/${video.channel?.id}`}
- className='font-medium text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors block'
+// FIXED:  className='font-medium text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors block' />
  >
  {video.channel?.name}
- </Link>
+// FIXED:  </Link>
  <div className='flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400'>
  {/* Subscriber Count */}
  <span>
  {video.channel?.subscribersFormatted || '0 subscribers'}
- </span>
+// FIXED:  </span>
  <span>•</span>
  {/* View Count */}
  <span>{video.viewsFormatted || '0 views'}</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Subscribe Button */}
  <button className='px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium'>
  Subscribe
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Video Stats and Actions */}
  <div className='flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-neutral-200 dark:border-neutral-700'>
  <div className='flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400'>
  <span>
  {new Date(video.publishedAt).toLocaleDateString()}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  <div className='flex items-center gap-2'>
  {/* Like Button */}
  <button className='flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
  <svg
- className='w-5 h-5'
+// FIXED:  className='w-5 h-5'
  fill='none'
  stroke='currentColor'
- viewBox='0 0 24 24'
+ viewBox='0 0 24 24' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L9 7m5 3v10M9 7H6a2 2 0 00-2 2v8a2 2 0 002 2h2.5'
+ d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L9 7m5 3v10M9 7H6a2 2 0 00-2 2v8a2 2 0 002 2h2.5' />
  />
- </svg>
+// FIXED:  </svg>
  <span>{(video.likes || 0).toLocaleString()}</span>
- </button>
+// FIXED:  </button>
 
  {/* Dislike Button */}
  {video.dislikes && (
  <button className='flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
  <svg
- className='w-5 h-5 rotate-180'
+// FIXED:  className='w-5 h-5 rotate-180'
  fill='none'
  stroke='currentColor'
- viewBox='0 0 24 24'
+ viewBox='0 0 24 24' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L9 7m5 3v10M9 7H6a2 2 0 00-2 2v8a2 2 0 002 2h2.5'
+ d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L9 7m5 3v10M9 7H6a2 2 0 00-2 2v8a2 2 0 002 2h2.5' />
  />
- </svg>
+// FIXED:  </svg>
  <span>{video.dislikes.toLocaleString()}</span>
- </button>
+// FIXED:  </button>
  )}
 
  {/* Share Button */}
  <button className='flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
  <svg
- className='w-5 h-5'
+// FIXED:  className='w-5 h-5'
  fill='none'
  stroke='currentColor'
- viewBox='0 0 24 24'
+ viewBox='0 0 24 24' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
- d='M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z'
+ d='M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z' />
  />
- </svg>
+// FIXED:  </svg>
  <span>Share</span>
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Channel Information */}
  <div className='flex items-start gap-4'>
  <Link
  to={`/channel/${video.channel?.id}`}
- className='flex-shrink-0'
+// FIXED:  className='flex-shrink-0' />
  >
  <img
- src={
+// FIXED:  src={
  video.channel?.avatarUrl ||
  'https://picsum.photos/seed/default-channel/150/150'
  }
- alt={video.channel?.name}
- className='w-12 h-12 rounded-full object-cover'
+// FIXED:  alt={video.channel?.name}
+// FIXED:  className='w-12 h-12 rounded-full object-cover' />
  />
- </Link>
+// FIXED:  </Link>
 
  <div className='flex-1 min-w-0'>
  <div>
  <Link
  to={`/channel/${video.channel?.id}`}
- className='font-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors'
+// FIXED:  className='font-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors' />
  >
  {video.channel?.name}
- </Link>
+// FIXED:  </Link>
  <p className='text-sm text-neutral-600 dark:text-neutral-400'>
  {video.channel?.subscribersFormatted || '0 subscribers'} •{' '}
  {video.viewsFormatted || '0 views'}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Video Description */}
  <div className='mt-4 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg'>
  <div className='text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap'>
  {video.description}
- </div>
+// FIXED:  </div>
  {/* Tags */}{' '}
  {video.tags && video.tags.length > 0 && (
  <div className='mt-4 flex flex-wrap gap-2'>
@@ -718,12 +718,12 @@ const WatchPage: React.FC = () => {
  index: number) => (
  <span
  key={index}
- className='px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full'
+// FIXED:  className='px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full' />
  >
  #{tag}
- </span>
+// FIXED:  </span>
  ))}
- </div>
+// FIXED:  </div>
  )}
  {/* Additional Metadata */}
  <div className='mt-4 space-y-3'>
@@ -732,30 +732,30 @@ const WatchPage: React.FC = () => {
  <div>
  <span className='font-medium'>Category:</span>{' '}
  {video.category}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Duration:</span>{' '}
  {video.duration || '0:00'}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Views:</span>{' '}
  {video.viewsFormatted}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Likes:</span>{' '}
  {(video.likes || 0).toLocaleString()}
- </div>
+// FIXED:  </div>
  {video.commentCount && (
  <div>
  <span className='font-medium'>Comments:</span>{' '}
  {video.commentCount.toLocaleString()}
- </div>
+// FIXED:  </div>
  )}
  <div>
  <span className='font-medium'>Source:</span>{' '}
  {video.source || 'local'}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* YouTube Specific Metadata */}
  {(video.source === 'youtube' ||
@@ -765,32 +765,32 @@ const WatchPage: React.FC = () => {
  {video.source === 'google-search'
  ? 'Google Custom Search Metadata'
  : 'YouTube Metadata'}
- </h4>
+// FIXED:  </h4>
  <div className='grid grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400'>
  <div>
  <span className='font-medium'>Published:</span>{' '}
  {video.publishedAtFormatted}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Quality:</span>{' '}
  {video.metadata?.definition || 'HD'}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Captions:</span>{' '}
  {video.metadata?.captions ? 'Available' : 'None'}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>License:</span>{' '}
  {video.metadata?.license || 'Standard'}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Source:</span>{' '}
  {video.source === 'google-search'
  ? 'Google Custom Search JSON API'
  : 'YouTube Data API v3'}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Channel Metadata */}
@@ -798,49 +798,49 @@ const WatchPage: React.FC = () => {
  <div className='pt-3 border-t border-neutral-200 dark:border-neutral-600'>
  <h4 className='font-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2'>
  Channel Details
- </h4>
+// FIXED:  </h4>
  <div className='grid grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400'>
  <div>
  <span className='font-medium'>Channel ID:</span>{' '}
  {video.channel.id}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Subscribers:</span>{' '}
  {video.channel.subscribersFormatted}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Verified:</span>{' '}
  {video.channel.isVerified ? 'Yes' : 'No'}
- </div>
+// FIXED:  </div>
  <div>
  <span className='font-medium'>Name:</span>{' '}
  {video.channel.name}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Debug Info */}
  <details className='pt-3 border-t border-neutral-200 dark:border-neutral-600'>
  <summary className='cursor-pointer text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200'>
  Raw Video Data (Debug)
- </summary>
+// FIXED:  </summary>
  <pre className='mt-2 p-2 bg-neutral-100 dark:bg-neutral-700 rounded text-xs overflow-auto max-h-40 text-neutral-700 dark:text-neutral-300'>
  {JSON.stringify(video, null, 2)}
- </pre>
- </details>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </pre>
+// FIXED:  </details>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Sidebar - Recommended Videos */}
  <div className='lg:col-span-1'>
  <h3 className='text-lg font-semibold text-neutral-900 dark:text-white mb-4'>
  Recommended Videos
- </h3>
+// FIXED:  </h3>
  <div className='space-y-4'>
  {(() => {
  logger.debug(
@@ -852,7 +852,7 @@ const WatchPage: React.FC = () => {
  {_recommendedVideos.length === 0 ? (
  <div className='text-neutral-500 dark:text-neutral-400 text-sm'>
  Loading recommendations...
- </div>
+// FIXED:  </div>
  ) : (
  _recommendedVideos.map((recommendedVideo: any) => {
  logger.debug(
@@ -864,8 +864,8 @@ const WatchPage: React.FC = () => {
  <VideoCard
  key={recommendedVideo.id}
  video={recommendedVideo}
- variant='compact'
- onClick={() => {
+ variant='compact' />
+// FIXED:  onClick={() => {
  logger.debug(
  '🎬 Recommendation clicked:',
  recommendedVideo.id
@@ -876,11 +876,11 @@ const WatchPage: React.FC = () => {
  );
  })
  )}
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

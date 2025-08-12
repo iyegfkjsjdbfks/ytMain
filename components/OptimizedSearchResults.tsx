@@ -181,8 +181,8 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
 
  return (
  <div
- className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors"
- onClick={(e: any) => handleCardClick(e)}
+// FIXED:  className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors" />
+// FIXED:  onClick={(e: any) => handleCardClick(e)}
  onKeyDown={(e: any) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.preventDefault();
@@ -197,8 +197,8 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  <div className="w-full sm:w-[480px] h-[270px] sm:h-[270px] aspect-video sm:aspect-auto bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
  {videoId ? (
  <div
- className="w-full h-full"
- onClick={(e) => e.stopPropagation()}
+// FIXED:  className="w-full h-full" />
+// FIXED:  onClick={(e) => e.stopPropagation()}
  onKeyDown={(e: any) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.stopPropagation();
@@ -208,57 +208,57 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  tabIndex={0}
  >
  <iframe
- src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0&origin=${encodeURIComponent(window.location.origin)}`}
+// FIXED:  src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0&origin=${encodeURIComponent(window.location.origin)}`}
  title={convertedVideo.title}
- className="w-full h-full border-0 rounded-xl"
+// FIXED:  className="w-full h-full border-0 rounded-xl"
  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
  allowFullScreen
- loading="lazy"
+ loading="lazy" />
  />
- </div>
+// FIXED:  </div>
  ) : (
  <>
  <img
- src={convertedVideo.thumbnailUrl}
- alt={convertedVideo.title}
- className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
- loading="lazy"
+// FIXED:  src={convertedVideo.thumbnailUrl}
+// FIXED:  alt={convertedVideo.title}
+// FIXED:  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+ loading="lazy" />
  />
  {/* Duration badge */}
  {convertedVideo.duration && convertedVideo.duration !== '0:00' && (
  <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-sm font-medium">
  {formatDuration(convertedVideo.duration)}
- </div>
+// FIXED:  </div>
  )}
- </>
+// FIXED:  </>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Content */}
  <div className="flex-1 min-w-0">
  {/* Title */}
  <h3 className="text-lg sm:text-xl font-medium text-gray-900 dark:text-white line-clamp-2 leading-6 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
  {convertedVideo.title}
- </h3>
+// FIXED:  </h3>
 
  {/* Minimal metadata line - YouTube style */}
  <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
  <span className="hover:text-gray-900 dark:hover:text-white transition-colors">
  {convertedVideo.channelName}
- </span>
+// FIXED:  </span>
  <span className="mx-1">•</span>
  <span>{formatViews(convertedVideo.views)} views</span>
  <span className="mx-1">•</span>
  <span>{formatTimeAgo(convertedVideo.uploadedAt)}</span>
- </div>
+// FIXED:  </div>
 
  {/* Description - only first line visible */}
  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1 leading-5">
  {convertedVideo.description}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 });
 
@@ -360,11 +360,11 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-2" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ));
 
  // Empty state
@@ -373,13 +373,13 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
  <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  <h3 className="text-lg font-medium text-gray-900 mb-2">No results found</h3>
  <p className="text-gray-500 max-w-md">
  Try adjusting your search terms to find what you're looking for.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  ));
 
  if (loading && allResults.length === 0) {
@@ -395,35 +395,35 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  {/* YouTube-style filter tabs */}
  <div className="mb-4 px-4">
  <div className="flex items-center gap-3 mb-4 overflow-x-auto scrollbar-hide">
- <button
- onClick={() => setActiveTab('all')}
- className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+ <button />
+// FIXED:  onClick={() => setActiveTab('all')}
+// FIXED:  className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
  activeTab === 'all'
  ? 'bg-black dark:bg-white text-white dark:text-black'
  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
  }`}
  >
  All
- </button>
- <button
- onClick={() => setActiveTab('videos')}
- className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setActiveTab('videos')}
+// FIXED:  className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
  activeTab === 'videos'
  ? 'bg-black dark:bg-white text-white dark:text-black'
  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
  }`}
  >
  Videos
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Results header */}
  <div className="mb-4 px-4">
  <div className="text-sm text-gray-600 dark:text-gray-400">
  About {filteredResults.length.toLocaleString()} results
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Results */}
  {filteredResults.length > 0 ? (
@@ -432,10 +432,10 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  <YouTubeSearchResultCard
  key={`${item.id}-${index}`}
  item={item}
- onVideoClick={onVideoClick}
+ onVideoClick={onVideoClick} />
  />
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <EmptyState />
  )}
@@ -446,16 +446,16 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  {loading ? (
  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
  ) : (
- <button
- onClick={(e: any) => onLoadMore(e)}
- className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+ <button />
+// FIXED:  onClick={(e: any) => onLoadMore(e)}
+// FIXED:  className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
  >
  Load More Videos
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

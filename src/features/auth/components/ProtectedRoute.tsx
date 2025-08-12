@@ -37,7 +37,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
  <Navigate
  to={redirectTo || '/login'}
  state={{ from: location }
- replace
+ replace />
  />
  );
  }

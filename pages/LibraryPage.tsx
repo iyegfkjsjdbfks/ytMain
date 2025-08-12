@@ -38,15 +38,15 @@ const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, chil
  <>
  <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4 mt-1.5" />
  <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2 mt-1" />
- </>
+// FIXED:  </>
  )}
  {!isPlaylistSection && (
  <>
  <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6 mt-2" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4 mt-1" />
- </>
+// FIXED:  </>
  )}
- </div>
+// FIXED:  </div>
  ));
  };
 
@@ -57,29 +57,29 @@ const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, chil
  <span className="mr-2.5 text-neutral-600 dark:text-neutral-400">{icon}</span>
  <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">{title}</h2>
  {itemCount !== undefined && <span className="ml-2 text-sm text-neutral-500 dark:text-neutral-400">({itemCount})</span>}
- </div>
+// FIXED:  </div>
  {hasContent && (
  <Link to={viewAllLink} className="text-sm font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 flex items-center">
  View all <ChevronRightIcon className="w-4 h-4 ml-0.5" />
- </Link>
+// FIXED:  </Link>
  )}
- </div>
+// FIXED:  </div>
  {isLoading ? (
  isPlaylistSection ? (
  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
  {renderSkeletonItems()}
- </div>
+// FIXED:  </div>
  ) : (
  <div className="flex space-x-3 md:space-x-4 overflow-x-hidden pb-1"> {/* Hide scrollbar during loading */}
  {renderSkeletonItems()}
- </div>
+// FIXED:  </div>
  )
  ) : hasContent ? (
  children
  ) : (
  <p className="text-neutral-500 dark:text-neutral-400 text-sm py-4">{emptyMessage}</p>
  )}
- </section>
+// FIXED:  </section>
  );
 };
 
@@ -134,11 +134,11 @@ function LibraryPage(): any { // Removed React.FC
  <div className="flex items-center mb-6 sm:mb-8">
  <SolidQueueListIcon className="w-7 h-7 sm:w-8 sm:h-8 text-neutral-700 dark:text-neutral-300 mr-3" />
  <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">Library</h1>
- </div>
+// FIXED:  </div>
 
  {/* History Section */}
  <LibrarySection
- title="History"
+ title="History" />
  icon={<LocalHistoryIcon className="w-5 h-5" />}
  viewAllLink="/history"
  isLoading={loadingHistory}
@@ -150,14 +150,14 @@ function LibraryPage(): any { // Removed React.FC
  {historyVideos.map((video: any) => (
  <div key={`hist-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
  <VideoCard video={video} />
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </LibrarySection>
+// FIXED:  </div>
+// FIXED:  </LibrarySection>
 
  {/* Watch Later Section */}
  <LibrarySection
- title="Watch Later"
+ title="Watch Later" />
  icon={<OutlineClockIcon className="w-5 h-5" />}
  viewAllLink="/watch-later"
  isLoading={loadingWatchLater}
@@ -169,14 +169,14 @@ function LibraryPage(): any { // Removed React.FC
  {watchLaterVideos.map((video: any) => (
  <div key={`wl-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
  <VideoCard video={video} />
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </LibrarySection>
+// FIXED:  </div>
+// FIXED:  </LibrarySection>
 
  {/* Playlists Section */}
  <LibrarySection
- title="Playlists"
+ title="Playlists" />
  icon={<CustomPlaylistIcon className="w-5 h-5" />}
  viewAllLink="/playlists"
  isLoading={loadingPlaylists}
@@ -190,32 +190,32 @@ function LibraryPage(): any { // Removed React.FC
  <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
  <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
  <img
- src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
- alt={`Thumbnail for ${playlist.title}`}
- className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+// FIXED:  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
+// FIXED:  alt={`Thumbnail for ${playlist.title}`}
+// FIXED:  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
  />
  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
  <SolidPlayIcon className="w-10 h-10 text-white" aria-hidden="true" />
- </div>
+// FIXED:  </div>
  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-2 py-1.5 text-white">
  <p className="text-xs font-semibold">{playlist.videoCount} video{playlist.videoCount !== 1 && 's'}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className="p-2.5">
  <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-50 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2 mb-0.5">{playlist.title}</h3>
  <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
  Updated {new Date(playlist.updatedAt).toLocaleDateString([], { year: 'numeric',
  month: 'short', day: 'numeric' })}
- </p>
- </div>
- </Link>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </Link>
  ))}
- </div>
- </LibrarySection>
+// FIXED:  </div>
+// FIXED:  </LibrarySection>
 
  {/* Liked Videos Section */}
  <LibrarySection
- title="Liked Videos"
+ title="Liked Videos" />
  icon={<SolidHeartIcon className="w-5 h-5 text-red-500 dark:text-red-400" />}
  viewAllLink="/liked-videos"
  isLoading={loadingLiked}
@@ -227,10 +227,10 @@ function LibraryPage(): any { // Removed React.FC
  {likedVideos.map((video: any) => (
  <div key={`liked-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
  <VideoCard video={video} />
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </LibrarySection>
+// FIXED:  </div>
+// FIXED:  </LibrarySection>
 
  {/* Fallback if all sections are empty after loading */}
  {!overallLoading && !loadingHistory && !historyVideos.length &&
@@ -241,9 +241,9 @@ function LibraryPage(): any { // Removed React.FC
  <SolidQueueListIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-500 mx-auto mb-4" />
  <p className="text-lg font-medium text-neutral-700 dark:text-neutral-300">Your library is empty</p>
  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Watch videos, save them for later, or create playlists to see them here.</p>
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 }
 

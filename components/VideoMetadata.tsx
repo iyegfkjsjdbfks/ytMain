@@ -119,16 +119,16 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="flex items-center justify-between mb-4">
  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
  Video Information
- </h3>
+// FIXED:  </h3>
  {detailedMetadata.some(item => item.condition) && onToggleExpanded && (
- <button
- onClick={(e: any) => onToggleExpanded(e)}
- className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
+ <button />
+// FIXED:  onClick={(e: any) => onToggleExpanded(e)}
+// FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
  >
  {expanded ? 'Show Less' : 'Show More'}
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Basic Metadata Grid */}
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
@@ -138,17 +138,17 @@ return `${(num / 1000).toFixed(1)}K`;
  <div>
  <p className="text-xs text-neutral-600 dark:text-neutral-400">{item.label}</p>
  <p className="text-sm font-medium text-neutral-900 dark:text-white">{item.value}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Detailed Metadata (Expandable) */}
  {expanded && (
  <div className="border-t border-neutral-200 dark:border-neutral-700 pt-4">
  <h4 className="text-md font-medium text-neutral-900 dark:text-white mb-3">
  Detailed Information
- </h4>
+// FIXED:  </h4>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
  {detailedMetadata.filter((item) => item.condition).map((item, index) => (
@@ -157,10 +157,10 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="min-w-0 flex-1">
  <p className="text-xs text-neutral-600 dark:text-neutral-400">{item.label}</p>
  <p className="text-sm text-neutral-900 dark:text-white break-words">{item.value}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Tags */}
  {video.tags && video.tags.length > 0 && (
@@ -171,18 +171,18 @@ return `${(num / 1000).toFixed(1)}K`;
  index: number) => (
  <span
  key={index}
- className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
+// FIXED:  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full" />
  >
  #{tag}
- </span>
+// FIXED:  </span>
  ))}
  {video.tags.length > 10 && (
  <span className="px-2 py-1 bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 text-xs rounded-full">
  +{video.tags.length - 10} more
- </span>
+// FIXED:  </span>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Live Streaming Details */}
@@ -190,42 +190,42 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="mb-4">
  <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">
  Live Stream Information
- </h5>
+// FIXED:  </h5>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
  {video.metadata?.scheduledStartTime && (
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Scheduled:</span>
  <span className="ml-2 text-neutral-900 dark:text-white">
  {formatDate(video.metadata.scheduledStartTime)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
  {video.metadata?.actualStartTime && (
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Started:</span>
  <span className="ml-2 text-neutral-900 dark:text-white">
  {formatDate(video.metadata.actualStartTime)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
  {video.metadata?.actualEndTime && (
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Ended:</span>
  <span className="ml-2 text-neutral-900 dark:text-white">
  {formatDate(video.metadata.actualEndTime)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
  {video.metadata?.concurrentViewers && (
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Peak Viewers:</span>
  <span className="ml-2 text-neutral-900 dark:text-white">
  {formatNumber(parseInt(video.metadata.concurrentViewers, 10))}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Content Details */}
@@ -233,36 +233,36 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="mb-4">
  <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">
  Technical Details
- </h5>
+// FIXED:  </h5>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Projection:</span>
  <span className="ml-2 text-neutral-900 dark:text-white capitalize">
  {video.contentDetails.projection}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Captions:</span>
  <span className="ml-2 text-neutral-900 dark:text-white">
  {video.contentDetails.caption === 'true' ? 'Available' : 'Not Available'}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Licensed Content:</span>
  <span className="ml-2 text-neutral-900 dark:text-white">
  {video.contentDetails.licensedContent ? 'Yes' : 'No'}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  {video.metadata?.embeddable !== undefined && (
  <div>
  <span className="text-neutral-600 dark:text-neutral-400">Embeddable:</span>
  <span className="ml-2 text-neutral-900 dark:text-white">
  {video.metadata.embeddable ? 'Yes' : 'No'}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Statistics Summary */}
@@ -270,38 +270,38 @@ return `${(num / 1000).toFixed(1)}K`;
  <div>
  <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">
  Engagement Statistics
- </h5>
+// FIXED:  </h5>
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
  <div className="text-center p-2 bg-neutral-100 dark:bg-neutral-700 rounded">
  <p className="text-neutral-600 dark:text-neutral-400">Views</p>
  <p className="font-semibold text-neutral-900 dark:text-white">
  {formatNumber(video.statistics.viewCount)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className="text-center p-2 bg-neutral-100 dark:bg-neutral-700 rounded">
  <p className="text-neutral-600 dark:text-neutral-400">Likes</p>
  <p className="font-semibold text-neutral-900 dark:text-white">
  {formatNumber(video.statistics.likeCount)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className="text-center p-2 bg-neutral-100 dark:bg-neutral-700 rounded">
  <p className="text-neutral-600 dark:text-neutral-400">Comments</p>
  <p className="font-semibold text-neutral-900 dark:text-white">
  {formatNumber(video.statistics.commentCount)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className="text-center p-2 bg-neutral-100 dark:bg-neutral-700 rounded">
  <p className="text-neutral-600 dark:text-neutral-400">Favorites</p>
  <p className="font-semibold text-neutral-900 dark:text-white">
  {formatNumber(video.statistics.favoriteCount)}
- </p>
- </div>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

@@ -1,59 +1,83 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { Video } from '../types';
-
-import type { Video as VideoType } from '../src/types/core';
-
-// Use the Video type for items in the watch later list
-// We can alias it to VideoItem if preferred, or just use VideoType directly.
-// For clarity, let's stick to VideoType where it's used for the list items.
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 interface WatchLaterContextType {
- watchLaterList: VideoType;
- addToWatchLater: (video: VideoType) => void;
- removeFromWatchLater: (videoId: any) => void;
- isWatchLater: (videoId: any) => boolean
+  watchLaterVideos: string[];
+  addToWatchLater: (videoId: string) => void;
+  removeFromWatchLater: (videoId: string) => void;
+  isInWatchLater: (videoId: string) => boolean;
+  clearWatchLater: () => void;
 }
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
 
-export const WatchLaterProvider: any = ({ children }: any) => {
- const [watchLaterList, setWatchLaterList] = useState<VideoType[]>(() => {
- const storedList = (localStorage as any).getItem('youtubeCloneWatchLater_v1');
- return storedList ? JSON.parse(storedList) : [];
- });
-
- useEffect(() => {
- (localStorage as any).setItem('youtubeCloneWatchLater_v1', JSON.stringify(watchLaterList));
- }, [watchLaterList]);
-
- const addToWatchLater: any = (video: VideoType) => {
- setWatchLaterList((prevList: any) => {
- if (!prevList.find(item => item.id === video.id)) {
- return [...prevList as any, video];
- }
- return prevList;
- });
- };
-
- const removeFromWatchLater: any = (videoId: any) => {
- setWatchLaterList((prevList) => prevList.filter((video) => video.id !== videoId));
- };
-
- const isWatchLater: any = (videoId: any) => {
- return watchLaterList.some(video => video.id === videoId);
- };
-
- return (
- <WatchLaterContext.Provider value={{ watchLaterList, addToWatchLater, removeFromWatchLater, isWatchLater }}>
- {children}
- </WatchLaterContext.Provider>
- );
+export const useWatchLater = () => {
+  const context = useContext(WatchLaterContext);
+  if (!context) {
+    throw new Error('useWatchLater must be used within a WatchLaterProvider');
+}
+  }
+  return context;
 };
 
-export const useWatchLater: any = () => {
- const context = useContext<any>(WatchLaterContext);
- if (context === undefined) {
- throw new Error('useWatchLater must be used within a WatchLaterProvider');
- }
- return context;
+interface WatchLaterProviderProps {
+  children: ReactNode;
+}
+
+export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children }) => {
+  const [watchLaterVideos, setWatchLaterVideos] = useState<string[]>([]);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem('watchLaterVideos');
+    if (stored) {
+      try {
+        setWatchLaterVideos(JSON.parse(stored));
+      } catch (error) {
+        console.error('Error loading watch later videos:', error);
+      }
+    }
+  }, []);
+
+  // Save to localStorage whenever the list changes
+  useEffect(() => {
+    localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos));
+  }, [watchLaterVideos]);
+
+  const addToWatchLater = (videoId: string) => {
+    setWatchLaterVideos(prev => {
+      if (prev.includes(videoId)) return prev;
+      return [...prev, videoId];
+}
+    });
+  };
+
+  const removeFromWatchLater = (videoId: string) => {
+    setWatchLaterVideos(prev => prev.filter(id => id !== videoId));
+}
+  };
+
+  const isInWatchLater = (videoId: string): boolean => {
+    return watchLaterVideos.includes(videoId);
+  };
+
+  const clearWatchLater = () => {
+    setWatchLaterVideos([]);
+}
+  };
+
+  const value = {
+    watchLaterVideos,
+    addToWatchLater,
+    removeFromWatchLater,
+    isInWatchLater,
+    clearWatchLater
+  };
+
+  return (
+    <WatchLaterContext.Provider value={value}>
+      {children}
+// FIXED:     </WatchLaterContext.Provider>
+  );
 };
+
+export default WatchLaterProvider;

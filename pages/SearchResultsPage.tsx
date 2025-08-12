@@ -26,8 +26,8 @@ const EmptySearchState = memo(() => (
  <MagnifyingGlassIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
  <h3 className="text-lg font-medium mb-2">Enter a search term</h3>
  <p>Use the search bar above to find videos.</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 ));
 
 EmptySearchState.displayName = 'EmptySearchState';
@@ -148,7 +148,7 @@ const SearchResultsPage: React.FC = () => {
  return (
  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
  <EmptySearchState />
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -161,7 +161,7 @@ const SearchResultsPage: React.FC = () => {
  googleSearchVideos={searchState.googleSearchVideos}
  loading={searchState.loading || searchState.youtubeLoading}
  query={debouncedQuery}
- sortBy="relevance"
+ sortBy="relevance" />
  onVideoClick={(video: any) => {
  if ('videoId' in video) {
  // YouTube video - use google-search prefix for search results
@@ -172,8 +172,8 @@ const SearchResultsPage: React.FC = () => {
  }
  }
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

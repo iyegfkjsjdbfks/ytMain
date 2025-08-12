@@ -26,8 +26,8 @@ export const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children, clas
  <TabsContext.Provider value={{ value, onValueChange }}>
  <div className={className}>
  {children}
- </div>
- </TabsContext.Provider>
+// FIXED:  </div>
+// FIXED:  </TabsContext.Provider>
  );
 };
 
@@ -40,7 +40,7 @@ export const TabsList: React.FC<TabsListProps> = ({ children, className = '' }: 
  return (
  <div className={`flex space-x-1 border-b border-neutral-200 dark:border-neutral-700 ${className}`}>
  {children}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -55,18 +55,18 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, class
  const isActive = activeValue === value;
 
  return (
- <button
- onClick={() => onValueChange(value)}
- className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+ <button />
+// FIXED:  onClick={() => onValueChange(value)}
+// FIXED:  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
  isActive
  ? 'border-blue-500 text-blue-600 dark:text-blue-400'
  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-600'
  } ${className}`}
- aria-selected={isActive}
+// FIXED:  aria-selected={isActive}
  role="tab"
  >
  {children}
- </button>
+// FIXED:  </button>
  );
 };
 
@@ -86,7 +86,7 @@ export const TabsContent: React.FC<TabsContentProps> = ({ value, children, class
  return (
  <div className={className} role="tabpanel">
  {children}
- </div>
+// FIXED:  </div>
  );
 };
 export default Tabs;

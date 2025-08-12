@@ -24,12 +24,12 @@ const Image: any = ({
 }) => {
  return (
  <img
- src={src}
- alt={alt}
+// FIXED:  src={src}
+// FIXED:  alt={alt}
  width={width}
  height={height}
- className={cn(className, { 'w-full h-full object-cover': fill })}
- {...props}
+// FIXED:  className={cn(className, { 'w-full h-full object-cover': fill })}
+ {...props} />
  />
  );
 };
@@ -56,27 +56,27 @@ export const VideoCard: any = ({
 
  return (
  <div
- className={cn('flex flex-col space-y-2 group', className)}
+// FIXED:  className={cn('flex flex-col space-y-2 group', className)} />
  onMouseEnter={() => setIsHovered(true)}
  onMouseLeave={() => setIsHovered(false)}
  >
  <div className='relative aspect-video rounded-xl overflow-hidden bg-muted'>
  <Link to={`/watch?v=${id}`} className='block w-full h-full'>
  <Image
- src={thumbnailUrl}
- alt={title}
+// FIXED:  src={thumbnailUrl}
+// FIXED:  alt={title}
  fill
- className={cn(
+// FIXED:  className={cn(
  'object-cover transition-transform duration-300',
  isHovered ? 'scale-105' : 'scale-100'
  )}
- sizes='(max-width: 768px) 100vw(max-width: 1200px) 50vw, 33vw'
+ sizes='(max-width: 768px) 100vw(max-width: 1200px) 50vw, 33vw' />
  />
- </Link>
+// FIXED:  </Link>
  <div className='absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded'>
  {formatDuration(duration)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='flex space-x-2'>
  {showChannelInfo && (
@@ -84,19 +84,19 @@ export const VideoCard: any = ({
  <div className='w-9 h-9 rounded-full bg-muted overflow-hidden'>
  {avatarUrl ? (
  <Image
- src={avatarUrl}
- alt={channelName}
+// FIXED:  src={avatarUrl}
+// FIXED:  alt={channelName}
  width={36}
  height={36}
- className='w-full h-full object-cover'
+// FIXED:  className='w-full h-full object-cover' />
  />
  ) : (
  <div className='w-full h-full flex items-center justify-center bg-muted-foreground/10'>
  <User className='w-5 h-5 text-muted-foreground' />
- </div>
+// FIXED:  </div>
  )}
- </div>
- </Link>
+// FIXED:  </div>
+// FIXED:  </Link>
  )}
 
  <div className='flex-1 min-w-0'>
@@ -104,38 +104,38 @@ export const VideoCard: any = ({
  <h3 className='font-medium text-sm line-clamp-2'>
  <Link to={`/watch?v=${id}`} className='hover:text-primary'>
  {title}
- </Link>
- </h3>
+// FIXED:  </Link>
+// FIXED:  </h3>
  <Button
  variant='ghost'
  size='icon'
- className='h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity'
- onClick={() => onMoreClick(id)}
+// FIXED:  className='h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity' />
+// FIXED:  onClick={() => onMoreClick(id)}
  >
  <MoreVertical className='h-4 w-4' />
  <span className='sr-only'>More options</span>
- </Button>
- </div>
+// FIXED:  </Button>
+// FIXED:  </div>
 
  {showChannelInfo && (
  <div className='text-xs text-muted-foreground'>
  <Link
  to={`/channel/${channelId}`}
- className='hover:text-foreground'
+// FIXED:  className='hover:text-foreground' />
  >
  {channelName}
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  )}
 
  <div className='flex items-center text-xs text-muted-foreground'>
  <span>{formatNumber(viewCount)} views</span>
  <span className='mx-1'>•</span>
  <span>{getTimeAgo(publishedAt)}</span>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

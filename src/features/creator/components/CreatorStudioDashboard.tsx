@@ -194,24 +194,24 @@ export const CreatorStudioDashboard: React.FC = () => {
  <div>
  <h1 className='text-3xl font-bold text-gray-900 dark:text-white'>
  Creator Studio
- </h1>
+// FIXED:  </h1>
  <p className='text-gray-600 dark:text-gray-400 mt-2'>
  Manage your channel and track performance
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className='flex items-center gap-4'>
  <select
- value={timeRange}
- onChange={e => setTimeRange(e.target.value as any)}
- className='px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
+// FIXED:  value={timeRange} />
+// FIXED:  onChange={e => setTimeRange(e.target.value as any)}
+// FIXED:  className='px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
  >
  <option value='7d'>Last 7 days</option>
  <option value='30d'>Last 30 days</option>
  <option value='90d'>Last 90 days</option>
- </select>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Key Metrics */}
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
@@ -220,16 +220,16 @@ export const CreatorStudioDashboard: React.FC = () => {
  <div>
  <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
  Views
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900 dark:text-white'>
  {formatNumber(metrics.views.total)}
- </p>
+// FIXED:  </p>
  <div
- className={`flex items-center mt-2 text-sm ${
+// FIXED:  className={`flex items-center mt-2 text-sm ${
  metrics.views.trend === 'up'
  ? 'text-green-600'
  : 'text-red-600'
- }`}
+ }`} />
  >
  {metrics.views.trend === 'up' ? (
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
@@ -237,29 +237,29 @@ export const CreatorStudioDashboard: React.FC = () => {
  <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
  )}
  {Math.abs(metrics.views.change)}%
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='p-3 rounded-full bg-blue-500'>
  <EyeIcon className='w-6 h-6 text-white' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <div className='flex items-center justify-between'>
  <div>
  <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
  Watch Time
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900 dark:text-white'>
  {formatDuration(metrics.watchTime.total)}
- </p>
+// FIXED:  </p>
  <div
- className={`flex items-center mt-2 text-sm ${
+// FIXED:  className={`flex items-center mt-2 text-sm ${
  metrics.watchTime.trend === 'up'
  ? 'text-green-600'
  : 'text-red-600'
- }`}
+ }`} />
  >
  {metrics.watchTime.trend === 'up' ? (
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
@@ -267,29 +267,29 @@ export const CreatorStudioDashboard: React.FC = () => {
  <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
  )}
  {Math.abs(metrics.watchTime.change)}%
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='p-3 rounded-full bg-green-500'>
  <ClockIcon className='w-6 h-6 text-white' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <div className='flex items-center justify-between'>
  <div>
  <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
  Subscribers
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900 dark:text-white'>
  {formatNumber(metrics.subscribers.total)}
- </p>
+// FIXED:  </p>
  <div
- className={`flex items-center mt-2 text-sm ${
+// FIXED:  className={`flex items-center mt-2 text-sm ${
  metrics.subscribers.trend === 'up'
  ? 'text-green-600'
  : 'text-red-600'
- }`}
+ }`} />
  >
  {metrics.subscribers.trend === 'up' ? (
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
@@ -297,29 +297,29 @@ export const CreatorStudioDashboard: React.FC = () => {
  <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
  )}
  {Math.abs(metrics.subscribers.change)}%
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='p-3 rounded-full bg-purple-500'>
  <UserGroupIcon className='w-6 h-6 text-white' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <div className='flex items-center justify-between'>
  <div>
  <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
  Revenue
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900 dark:text-white'>
  ${metrics.revenue.total.toLocaleString()}
- </p>
+// FIXED:  </p>
  <div
- className={`flex items-center mt-2 text-sm ${
+// FIXED:  className={`flex items-center mt-2 text-sm ${
  metrics.revenue.trend === 'up'
  ? 'text-green-600'
  : 'text-red-600'
- }`}
+ }`} />
  >
  {metrics.revenue.trend === 'up' ? (
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
@@ -327,14 +327,14 @@ export const CreatorStudioDashboard: React.FC = () => {
  <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
  )}
  {Math.abs(metrics.revenue.change)}%
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='p-3 rounded-full bg-orange-500'>
  <CurrencyDollarIcon className='w-6 h-6 text-white' />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
  {/* Quick Actions */}
@@ -342,126 +342,126 @@ export const CreatorStudioDashboard: React.FC = () => {
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 mb-8'>
  <h2 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Quick Actions
- </h2>
+// FIXED:  </h2>
  <div className='grid grid-cols-2 gap-4'>
  {quickActions.map((action: any) => (
  <button
  key={action.id}
- onClick={action.action}
- className='flex items-center gap-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left'
+// FIXED:  onClick={action.action}
+// FIXED:  className='flex items-center gap-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left' />
  >
  <div className={`p-3 rounded-full ${action.color}`}>
  <action.icon className='w-6 h-6 text-white' />
- </div>
+// FIXED:  </div>
  <div>
  <h3 className='font-medium text-gray-900 dark:text-white'>
  {action.title}
- </h3>
+// FIXED:  </h3>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  {action.description}
- </p>
- </div>
- </button>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </button>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Recent Videos */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <div className='flex items-center justify-between mb-4'>
  <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
  Recent Videos
- </h2>
+// FIXED:  </h2>
  <button className='text-blue-600 hover:text-blue-700 text-sm font-medium'>
  View all
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  <div className='space-y-4'>
  {recentVideos.map((video: any) => (
  <div key={video.id} className='flex items-center gap-4'>
  <img
- src={video.thumbnail}
- alt={video.title}
- className='w-20 h-12 object-cover rounded'
+// FIXED:  src={video.thumbnail}
+// FIXED:  alt={video.title}
+// FIXED:  className='w-20 h-12 object-cover rounded' />
  />
  <div className='flex-1 min-w-0'>
  <h3 className='font-medium text-gray-900 dark:text-white truncate'>
  {video.title}
- </h3>
+// FIXED:  </h3>
  <div className='flex items-center gap-4 mt-1 text-sm text-gray-600 dark:text-gray-400'>
  <span>{formatNumber(video.views)} views</span>
  <span>{formatNumber(video.likes)} likes</span>
  <span>{formatNumber(video.comments)} comments</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='text-right'>
  <span
- className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(video.status)}`}
+// FIXED:  className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(video.status)}`} />
  >
  {video.status}
- </span>
+// FIXED:  </span>
  <p className='text-xs text-gray-500 dark:text-gray-400 mt-1'>
  {new Date(video.publishedAt).toLocaleDateString()}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Notifications */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <div className='flex items-center justify-between mb-4'>
  <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
  Notifications
- </h2>
+// FIXED:  </h2>
  <button className='text-blue-600 hover:text-blue-700 text-sm font-medium'>
  Mark all read
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  <div className='space-y-4'>
  {notifications.map((notification: any) => {
  const IconComponent = getNotificationIcon(notification.type);
  return (
  <div
  key={notification.id}
- className={`p-4 rounded-lg border ${
+// FIXED:  className={`p-4 rounded-lg border ${
  notification.isRead
  ? 'border-gray-200 dark:border-gray-600'
  : 'border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20'
- }`}
+ }`} />
  >
  <div className='flex items-start gap-3'>
  <IconComponent
- className={`w-5 h-5 mt-0.5 ${
+// FIXED:  className={`w-5 h-5 mt-0.5 ${
  notification.priority === 'high'
  ? 'text-red-500'
  : notification.priority === 'medium'
  ? 'text-yellow-500'
  : 'text-blue-500'
- }`}
+ }`} />
  />
  <div className='flex-1 min-w-0'>
  <h4 className='font-medium text-gray-900 dark:text-white text-sm'>
  {notification.title}
- </h4>
+// FIXED:  </h4>
  <p className='text-sm text-gray-600 dark:text-gray-400 mt-1'>
  {notification.message}
- </p>
+// FIXED:  </p>
  <p className='text-xs text-gray-500 dark:text-gray-400 mt-2'>
  {new Date(notification.timestamp).toLocaleString()}
- </p>
- </div>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  })}
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

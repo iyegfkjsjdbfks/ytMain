@@ -53,66 +53,66 @@ const SearchResultItem = memo<SearchResultItemProps>(
 
  return (
  <div
- style={style}
- className='px-4 py-3 border-b border-gray-200 dark:border-gray-700'
+// FIXED:  style={style}
+// FIXED:  className='px-4 py-3 border-b border-gray-200 dark:border-gray-700' />
  >
  <div
- className='flex space-x-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-2 transition-colors'
- onClick={(e: any) => handleClick(e)}
+// FIXED:  className='flex space-x-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-2 transition-colors' />
+// FIXED:  onClick={(e: any) => handleClick(e)}
  >
  {/* Video Thumbnail */}
  <div className='flex-shrink-0'>
  <div className='w-40 h-24 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden'>
  <img
- src={video.thumbnailUrl}
- alt={video.title}
- className='w-full h-full object-cover'
- loading='lazy'
+// FIXED:  src={video.thumbnailUrl}
+// FIXED:  alt={video.title}
+// FIXED:  className='w-full h-full object-cover'
+ loading='lazy' />
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Video Info */}
  <div className='flex-1 min-w-0'>
  <h3
- className='text-lg font-medium text-gray-900 dark:text-white line-clamp-2 mb-1'
- dangerouslySetInnerHTML={{ __html: highlightedTitle }
+// FIXED:  className='text-lg font-medium text-gray-900 dark:text-white line-clamp-2 mb-1'
+ dangerouslySetInnerHTML={{ __html: highlightedTitle } />
  />
 
  <div className='flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-2'>
  <span>{video.views} views</span>
  <span>•</span>
  <span>{video.publishedAt || video.uploadedAt}</span>
- </div>
+// FIXED:  </div>
 
  {/* Channel Info */}
  <div className='flex items-center space-x-2 mb-2'>
  <img
- src={
+// FIXED:  src={
  video.channel?.avatarUrl || 'https://via.placeholder.com/24'
  }
- alt={video.channel?.name}
- className='w-6 h-6 rounded-full'
+// FIXED:  alt={video.channel?.name}
+// FIXED:  className='w-6 h-6 rounded-full' />
  />
  <span className='text-sm text-gray-700 dark:text-gray-300'>
  {video.channel?.name}
- </span>
+// FIXED:  </span>
  {video.channel?.isVerified && (
  <span className='text-blue-500' title='Verified'>
  ✓
- </span>
+// FIXED:  </span>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Description */}
  {video.description && (
  <p className='text-sm text-gray-600 dark:text-gray-400 line-clamp-2'>
  {video.description}
- </p>
+// FIXED:  </p>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 );
@@ -191,25 +191,25 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
  <div className='h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4' />
  <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2' />
  <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/4' />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  );
  }
 
  if (videos.length === 0) {
  return (
  <div
- className={`flex flex-col items-center justify-center h-64 ${className}`}
+// FIXED:  className={`flex flex-col items-center justify-center h-64 ${className}`} />
  >
  <p className='text-gray-500 dark:text-gray-400 text-lg mb-2'>
  No results found for "{query}"
- </p>
+// FIXED:  </p>
  <p className='text-gray-400 dark:text-gray-500 text-sm'>
  Try different keywords or check your spelling
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  );
  }
 
@@ -221,27 +221,27 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
  itemCount={videos.length}
  itemSize={140}
  itemData={listData}
- overscanCount={5}
+ overscanCount={5} />
  >
  {SearchResultItem}
- </List>
+// FIXED:  </List>
 
  {/* Load more trigger */}
  {hasMore && (
  <div
  ref={loadMoreRef}
- className='h-20 flex items-center justify-center'
+// FIXED:  className='h-20 flex items-center justify-center' />
  >
  {loading ? (
  <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500' />
  ) : (
  <p className='text-gray-500 dark:text-gray-400'>
  Load more results...
- </p>
+// FIXED:  </p>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
  }
 );

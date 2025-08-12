@@ -32,11 +32,11 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
  if (!videoId) {
  return (
  <div
- className={`bg-gray-200 dark:bg-gray-800 flex items-center justify-center ${className}`}
- style={{ width, height }
+// FIXED:  className={`bg-gray-200 dark:bg-gray-800 flex items-center justify-center ${className}`}
+// FIXED:  style={{ width, height } />
  >
  <p className='text-gray-500 dark:text-gray-400'>Invalid YouTube URL</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -51,16 +51,16 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
  return (
  <div className={className} style={{ width, height }}>
  <iframe
- src={embedUrl}
+// FIXED:  src={embedUrl}
  title={video.title || 'YouTube Video'}
  width='100%'
  height='100%'
  frameBorder='0'
  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
  allowFullScreen
- className='w-full h-full'
+// FIXED:  className='w-full h-full' />
  />
- </div>
+// FIXED:  </div>
  );
 };
 

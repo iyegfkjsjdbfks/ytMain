@@ -36,25 +36,25 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
  <div className="flex justify-between items-center mb-1">
  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
  {label || 'Progress'}
- </span>
+// FIXED:  </span>
  {showLabel && (
  <span className="text-sm text-neutral-500 dark:text-neutral-400">
  {Math.round(percentage)}%
- </span>
+// FIXED:  </span>
  )}
- </div>
+// FIXED:  </div>
  )}
  <div className={`w-full bg-neutral-200 dark:bg-neutral-700 rounded-full ${sizeClasses[size]}`}>
  <div
- className={`${sizeClasses[size]} ${variantClasses[variant]} rounded-full transition-all duration-300 ease-in-out`}
- style={{ width: `${percentage}%` }
+// FIXED:  className={`${sizeClasses[size]} ${variantClasses[variant]} rounded-full transition-all duration-300 ease-in-out`}
+// FIXED:  style={{ width: `${percentage}%` }
  role="progressbar"
- aria-valuenow={value}
- aria-valuemin={0}
- aria-valuemax={max}
+// FIXED:  aria-valuenow={value}
+// FIXED:  aria-valuemin={0}
+// FIXED:  aria-valuemax={max} />
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 export default ProgressBar;

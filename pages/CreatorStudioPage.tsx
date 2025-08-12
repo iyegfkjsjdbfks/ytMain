@@ -230,10 +230,10 @@ const CreatorStudioPage: React.FC = () => {
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
  <div className="lg:col-span-2 h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
  <div className="h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -244,11 +244,11 @@ const CreatorStudioPage: React.FC = () => {
  <div className="mb-8">
  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
  Creator Studio
- </h1>
+// FIXED:  </h1>
  <p className="text-gray-600 dark:text-gray-400">
  Tools and insights to help you create better content
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Tab Navigation */}
  <div className="mb-8">
@@ -263,9 +263,9 @@ const CreatorStudioPage: React.FC = () => {
  { id: 'schedule',
  label: 'Content Schedule', icon: <CalendarDaysIcon className="w-5 h-5" /> }].map((tab) => (
  <button
- key={tab.id}
- onClick={() => setActiveTab(tab.id as any)}
- className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+ key={tab.id} />
+// FIXED:  onClick={() => setActiveTab(tab.id as any)}
+// FIXED:  className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
  activeTab === tab.id
  ? 'border-blue-500 text-blue-600 dark:text-blue-400'
  : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
@@ -273,10 +273,10 @@ const CreatorStudioPage: React.FC = () => {
  >
  {tab.icon}
  <span>{tab.label}</span>
- </button>
+// FIXED:  </button>
  ))}
- </nav>
- </div>
+// FIXED:  </nav>
+// FIXED:  </div>
 
  {/* Tab Content */}
  {activeTab === 'insights' && (
@@ -285,26 +285,26 @@ const CreatorStudioPage: React.FC = () => {
  <div key={index} className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
  {insight.metric}
- </h3>
+// FIXED:  </h3>
  <div className="flex items-center justify-between">
  <span className="text-2xl font-bold text-gray-900 dark:text-white">
  {insight.value}
- </span>
- <div className={`flex items-center text-sm ${
+// FIXED:  </span>
+ <div className={`flex items-center text-sm ${ />
  insight.change > 0 ? 'text-green-600' : 'text-red-600'
  }`}>
  <ArrowTrendingUpIcon className={`w-4 h-4 mr-1 ${
- insight.change < 0 ? 'transform rotate-180' : ''
+ insight.change < 0 ? 'transform rotate-180' : '' />
  }`} />
  {Math.abs(insight.change)}%
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  {insight.period}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  )}
 
  {activeTab === 'ideas' && (
@@ -316,56 +316,56 @@ const CreatorStudioPage: React.FC = () => {
  <div className="flex items-center space-x-2 mb-2">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
  {idea.title}
- </h3>
+// FIXED:  </h3>
  {idea.trending && (
  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
  <ArrowTrendingUpIcon className="w-3 h-3 mr-1" />
  Trending
- </span>
+// FIXED:  </span>
  )}
- </div>
+// FIXED:  </div>
  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
  {idea.category}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(idea.difficulty)}`}>
  {idea.difficulty}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-4 mb-4">
  <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
  <EyeIcon className="w-4 h-4 mr-1" />
  Est. {formatNumber(idea.estimatedViews)} views
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="flex flex-wrap gap-2 mb-4">
  {idea.tags.map((tag: string,
  tagIndex: any) => (
  <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
  #{tag}
- </span>
+// FIXED:  </span>
  ))}
- </div>
+// FIXED:  </div>
 
  <div className="flex space-x-3">
  <Link
  to={`/ai-content-spark?idea=${encodeURIComponent(idea.title)}`}
- className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors text-center"
+// FIXED:  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors text-center" />
  >
  Develop Idea
- </Link>
+// FIXED:  </Link>
  <Link
  to={`/upload?title=${encodeURIComponent(idea.title)}`}
- className="flex-1 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors text-center"
+// FIXED:  className="flex-1 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors text-center" />
  >
  Create Video
- </Link>
- </div>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  )}
 
  {activeTab === 'resources' && (
@@ -374,27 +374,27 @@ const CreatorStudioPage: React.FC = () => {
  <Link
  key={index}
  to={resource.link}
- className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700 hover:shadow-md transition-shadow group"
+// FIXED:  className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700 hover:shadow-md transition-shadow group" />
  >
  <div className="flex items-center space-x-3 mb-4">
  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg text-blue-600 dark:text-blue-400">
  {resource.icon}
- </div>
+// FIXED:  </div>
  <div>
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
  {resource.title}
- </h3>
+// FIXED:  </h3>
  <span className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
  {resource.type}
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  <p className="text-gray-600 dark:text-gray-400 text-sm">
  {resource.description}
- </p>
- </Link>
+// FIXED:  </p>
+// FIXED:  </Link>
  ))}
- </div>
+// FIXED:  </div>
  )}
 
  {activeTab === 'schedule' && (
@@ -403,32 +403,32 @@ const CreatorStudioPage: React.FC = () => {
  <div className="flex items-center justify-between">
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
  Upcoming Content
- </h2>
+// FIXED:  </h2>
  <Link
  to="/upload"
- className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors"
+// FIXED:  className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors" />
  >
  Schedule New
- </Link>
- </div>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className="p-6">
  {scheduledContent.length === 0 ? (
  <div className="text-center py-12">
  <CalendarDaysIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  No scheduled content
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-600 dark:text-gray-400 mb-6">
  Start planning your content calendar
- </p>
+// FIXED:  </p>
  <Link
  to="/upload"
- className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+// FIXED:  className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors" />
  >
  Schedule Content
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  ) : (
  <div className="space-y-4">
  {scheduledContent.map((content) => (
@@ -436,39 +436,39 @@ const CreatorStudioPage: React.FC = () => {
  <div className="flex items-center space-x-4">
  <div className="p-2 bg-gray-100 dark:bg-neutral-700 rounded-lg">
  {getTypeIcon(content.type)}
- </div>
+// FIXED:  </div>
  <div>
  <h3 className="font-medium text-gray-900 dark:text-white">
  {content.title}
- </h3>
+// FIXED:  </h3>
  <div className="flex items-center space-x-3 mt-1">
  <span className="text-sm text-gray-600 dark:text-gray-400">
  {formatDistanceToNow(content.scheduledDate)}
- </span>
+// FIXED:  </span>
  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(content.status)}`}>
  {content.status}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-2">
- <button
- onClick={() => { }
- className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+ <button />
+// FIXED:  onClick={() => { }
+// FIXED:  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
  title="Edit comment"
  >
  <PencilSquareIcon className="w-5 h-5" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

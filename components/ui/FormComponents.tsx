@@ -76,12 +76,12 @@ const FieldLabel: React.FC<{
  className?: string; children: React.ReactNode
 }> = ({ htmlFor, required, className, children }: any) => (
  <label
- htmlFor={htmlFor}
- className={cn('block text-sm font-medium text-gray-700 mb-1', className)}
+// FIXED:  htmlFor={htmlFor}
+// FIXED:  className={cn('block text-sm font-medium text-gray-700 mb-1', className)} />
  >
  {children}
  {required && <span className="text-red-500 ml-1">*</span>}
- </label>
+// FIXED:  </label>
 );
 
 // Field Error Component
@@ -96,7 +96,7 @@ return null;
  return (
  <p className={cn('mt-1 text-sm text-red-600', className)}>
  {error}
- </p>
+// FIXED:  </p>
  );
 };
 
@@ -112,7 +112,7 @@ return null;
  return (
  <p className={cn('mt-1 text-sm text-gray-500', className)}>
  {hint}
- </p>
+// FIXED:  </p>
  );
 };
 
@@ -152,26 +152,26 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
  <div className="w-full">
  {label && (
  <FieldLabel
- htmlFor={inputId}
+// FIXED:  htmlFor={inputId}
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })}
+ {...(labelClassName && { className: labelClassName })} />
  >
  {label}
- </FieldLabel>
+// FIXED:  </FieldLabel>
  )}
 
  <div className="relative">
  {leftIcon && (
  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
  <div className="text-gray-400">{leftIcon}</div>
- </div>
+// FIXED:  </div>
  )}
 
  <input
  ref={ref}
- id={inputId}
- className={inputClasses}
- {...props}
+// FIXED:  id={inputId}
+// FIXED:  className={inputClasses}
+ {...props} />
  />
 
  {(rightIcon || loading) && (
@@ -181,13 +181,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
  ) : (
  <div className="text-gray-400">{rightIcon}</div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
  {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
- </div>
+// FIXED:  </div>
  );
 });
 
@@ -233,24 +233,24 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
  <div className="w-full">
  {label && (
  <FieldLabel
- htmlFor={textareaId}
+// FIXED:  htmlFor={textareaId}
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })}
+ {...(labelClassName && { className: labelClassName })} />
  >
  {label}
- </FieldLabel>
+// FIXED:  </FieldLabel>
  )}
 
  <textarea
  ref={ref}
- id={textareaId}
- className={textareaClasses}
- {...props}
+// FIXED:  id={textareaId}
+// FIXED:  className={textareaClasses}
+ {...props} />
  />
 
  {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
  {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
- </div>
+// FIXED:  </div>
  );
 });
 
@@ -290,47 +290,47 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
  <div className="w-full">
  {label && (
  <FieldLabel
- htmlFor={selectId}
+// FIXED:  htmlFor={selectId}
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })}
+ {...(labelClassName && { className: labelClassName })} />
  >
  {label}
- </FieldLabel>
+// FIXED:  </FieldLabel>
  )}
 
  <div className="relative">
  <select
  ref={ref}
- id={selectId}
- className={selectClasses}
- {...props}
+// FIXED:  id={selectId}
+// FIXED:  className={selectClasses}
+ {...props} />
  >
  {placeholder && (
  <option value="" disabled>
  {placeholder}
- </option>
+// FIXED:  </option>
  )}
  {options.map((option) => (
  <option
  key={option.value}
- value={option.value}
- disabled={option.disabled}
+// FIXED:  value={option.value}
+// FIXED:  disabled={option.disabled} />
  >
  {option.label}
- </option>
+// FIXED:  </option>
  ))}
- </select>
+// FIXED:  </select>
 
  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
- </svg>
- </div>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
  {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
- </div>
+// FIXED:  </div>
  );
 });
 
@@ -371,28 +371,28 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
  <div className="flex items-start">
  <input
  ref={ref}
- type="checkbox"
- id={checkboxId}
- className={checkboxClasses}
- {...props}
+// FIXED:  type="checkbox"
+// FIXED:  id={checkboxId}
+// FIXED:  className={checkboxClasses}
+ {...props} />
  />
 
  {label && (
  <div className="ml-2 flex-1">
  <FieldLabel
- htmlFor={checkboxId}
+// FIXED:  htmlFor={checkboxId}
  {...(required !== undefined && { required })}
- className={cn('mb-0', labelClassName)}
+// FIXED:  className={cn('mb-0', labelClassName)} />
  >
  {label}
- </FieldLabel>
- </div>
+// FIXED:  </FieldLabel>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
  {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
- </div>
+// FIXED:  </div>
  );
 });
 
@@ -432,10 +432,10 @@ export const RadioGroup: React.FC<RadioProps> = ({
  {label && (
  <FieldLabel
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })}
+ {...(labelClassName && { className: labelClassName })} />
  >
  {label}
- </FieldLabel>
+// FIXED:  </FieldLabel>
  )}
 
  <div className="space-y-2">
@@ -445,32 +445,32 @@ export const RadioGroup: React.FC<RadioProps> = ({
  return (
  <div key={option.value} className="flex items-center">
  <input
- type="radio"
- id={radioId}
- name={name}
- value={option.value}
- checked={value === option.value}
- onChange={(e: any) => onChange(e)}
- disabled={option.disabled}
- className={radioClasses}
+// FIXED:  type="radio"
+// FIXED:  id={radioId}
+// FIXED:  name={name}
+// FIXED:  value={option.value}
+// FIXED:  checked={value === option.value} />
+// FIXED:  onChange={(e: any) => onChange(e)}
+// FIXED:  disabled={option.disabled}
+// FIXED:  className={radioClasses}
  {...props}
  />
  <label
- htmlFor={radioId}
- className={cn(
+// FIXED:  htmlFor={radioId}
+// FIXED:  className={cn(
  'ml-2 text-sm text-gray-700',
- option.disabled && 'opacity-50 cursor-not-allowed')}
+ option.disabled && 'opacity-50 cursor-not-allowed')} />
  >
  {option.label}
- </label>
- </div>
+// FIXED:  </label>
+// FIXED:  </div>
  );
  })}
- </div>
+// FIXED:  </div>
 
  {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
  {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -481,7 +481,7 @@ export const FormGroup: React.FC<{,
 }> = ({ children, className }: any) => (
  <div className={cn('space-y-4', className)}>
  {children}
- </div>
+// FIXED:  </div>
 );
 
 // Form Actions Component
@@ -498,7 +498,7 @@ export const FormActions: React.FC<{,
  return (
  <div className={cn('flex gap-3 pt-4', alignClasses[align], className)}>
  {children}
- </div>
+// FIXED:  </div>
  );
 };
 

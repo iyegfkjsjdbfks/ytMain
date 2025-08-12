@@ -46,11 +46,11 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
  return (
  <YouTubeVideoCard
  key={keyPrefix ? `${keyPrefix}-${videoKey}` : videoKey}
- video={video}
+ video={video} />
  />
  );
  })}
- </div>
+// FIXED:  </div>
  );
 });
 

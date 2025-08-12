@@ -127,12 +127,12 @@ const ChannelPage: React.FC = () => {
  channel={channel}
  videoCount={videos.length}
  isSubscribed={isSubscribed}
- onSubscribeToggle={handleSubscribeToggle}
+ onSubscribeToggle={handleSubscribeToggle} />
  />
 
  <div className="px-4 md:px-6 lg:px-8">
  <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
- </div>
+// FIXED:  </div>
 
  <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"> {/* Reduced py for less space */}
  <ChannelTabContent
@@ -140,11 +140,11 @@ const ChannelPage: React.FC = () => {
  channel={channel}
  videos={videos}
  playlists={channelPlaylists}
- communityPosts={channelCommunityPosts}
+ communityPosts={channelCommunityPosts} />
  onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

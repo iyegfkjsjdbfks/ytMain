@@ -173,48 +173,48 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <div className="flex items-start space-x-4">
  <img
- src={analytics.thumbnail}
- alt={analytics.title}
- className="w-32 h-18 object-cover rounded-lg flex-shrink-0"
+// FIXED:  src={analytics.thumbnail}
+// FIXED:  alt={analytics.title}
+// FIXED:  className="w-32 h-18 object-cover rounded-lg flex-shrink-0" />
  />
  <div className="flex-1">
  <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
  {analytics.title}
- </h1>
+// FIXED:  </h1>
  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
  Published {new Date(analytics.publishedAt).toLocaleDateString()}
- </p>
+// FIXED:  </p>
 
  {/* Quick Stats */}
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
  <div className="text-center">
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.views)}
- </div>
+// FIXED:  </div>
  <div className="text-sm text-gray-500 dark:text-gray-400">Views</div>
- </div>
+// FIXED:  </div>
  <div className="text-center">
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatDuration(analytics.totalWatchTime)}
- </div>
+// FIXED:  </div>
  <div className="text-sm text-gray-500 dark:text-gray-400">Watch time</div>
- </div>
+// FIXED:  </div>
  <div className="text-center">
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {analytics.engagementRate.toFixed(1)}%
- </div>
+// FIXED:  </div>
  <div className="text-sm text-gray-500 dark:text-gray-400">Engagement</div>
- </div>
+// FIXED:  </div>
  <div className="text-center">
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.subscribers)}
- </div>
+// FIXED:  </div>
  <div className="text-sm text-gray-500 dark:text-gray-400">Subscribers</div>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Time Range Selector */}
  <div className="flex justify-between items-center">
@@ -229,18 +229,18 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  { value: '365d',
  label: '1 year' }].map((option) => (
  <button
- key={option.value}
- onClick={() => onTimeRangeChange(option.value as any)}
- className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+ key={option.value} />
+// FIXED:  onClick={() => onTimeRangeChange(option.value as any)}
+// FIXED:  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
  timeRange === option.value
  ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
  }`}
  >
  {option.label}
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Tab Navigation */}
  <div className="flex space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
@@ -254,19 +254,19 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  ...(analytics.revenue ? [{ value: 'revenue',
  label: 'Revenue' }]: [])].map((tab) => (
  <button
- key={tab.value}
- onClick={() => setActiveTab(tab.value as any)}
- className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+ key={tab.value} />
+// FIXED:  onClick={() => setActiveTab(tab.value as any)}
+// FIXED:  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
  activeTab === tab.value
  ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
  }`}
  >
  {tab.label}
- </button>
+// FIXED:  </button>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Tab Content */}
  {activeTab === 'overview' && (
@@ -275,21 +275,21 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Views over time
- </h3>
+// FIXED:  </h3>
  <div className="h-64">
  <Line data={viewsChartData} options={chartOptions} />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Watch Time Chart */}
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Watch time over time
- </h3>
+// FIXED:  </h3>
  <div className="h-64">
  <Line data={watchTimeChartData} options={chartOptions} />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Key Metrics */}
  <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -297,43 +297,43 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="flex items-center space-x-2 mb-2">
  <HeartIcon className="w-5 h-5 text-red-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Likes</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.likes)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <div className="flex items-center space-x-2 mb-2">
  <ChatBubbleLeftIcon className="w-5 h-5 text-blue-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Comments</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.comments)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <div className="flex items-center space-x-2 mb-2">
  <ShareIcon className="w-5 h-5 text-green-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Shares</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.shares)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <div className="flex items-center space-x-2 mb-2">
  <ClockIcon className="w-5 h-5 text-purple-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg. Duration</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatDuration(analytics.averageViewDuration)}
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {activeTab === 'audience' && (
@@ -342,54 +342,54 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Device types
- </h3>
+// FIXED:  </h3>
  <div className="h-64">
  <Doughnut data={deviceChartData} options={doughnutOptions} />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Traffic Sources */}
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Traffic sources
- </h3>
+// FIXED:  </h3>
  <div className="h-64">
  <Doughnut data={trafficSourcesChartData} options={doughnutOptions} />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Top Countries */}
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Top countries
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  {analytics.topCountries.slice(0, 5).map((country, index) => (
  <div key={country.country} className="flex items-center justify-between">
  <div className="flex items-center space-x-3">
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
  #{index + 1}
- </span>
+// FIXED:  </span>
  <span className="text-gray-900 dark:text-white">{country.country}</span>
- </div>
+// FIXED:  </div>
  <div className="text-right">
  <div className="text-sm font-medium text-gray-900 dark:text-white">
  {formatNumber(country.views)}
- </div>
+// FIXED:  </div>
  <div className="text-xs text-gray-500 dark:text-gray-400">
  {country.percentage.toFixed(1)}%
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Demographics */}
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Age groups
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  {analytics.ageGroups.map((group) => (
  <div key={group.range} className="flex items-center justify-between">
@@ -397,19 +397,19 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="flex items-center space-x-2">
  <div className="w-24 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
  <div
- className="bg-blue-500 h-2 rounded-full"
- style={{ width: `${group.percentage}%` }
+// FIXED:  className="bg-blue-500 h-2 rounded-full"
+// FIXED:  style={{ width: `${group.percentage}%` } />
  />
- </div>
+// FIXED:  </div>
  <span className="text-sm text-gray-600 dark:text-gray-400 w-12 text-right">
  {group.percentage.toFixed(1)}%
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {activeTab === 'engagement' && (
@@ -420,42 +420,42 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="flex items-center space-x-2 mb-2">
  <ArrowTrendingUpIcon className="w-5 h-5 text-green-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">CTR</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {analytics.clickThroughRate.toFixed(2)}%
- </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Click-through rate
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <div className="flex items-center space-x-2 mb-2">
  <ClockIcon className="w-5 h-5 text-blue-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Retention</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {((analytics.averageViewDuration / 600) * 100).toFixed(1)}%
- </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Average view duration
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <div className="flex items-center space-x-2 mb-2">
  <HeartIcon className="w-5 h-5 text-red-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Like ratio</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {((analytics.likes / (analytics.likes + analytics.dislikes)) * 100).toFixed(1)}%
- </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Likes vs dislikes
- </p>
- </div>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {activeTab === 'revenue' && analytics.revenue && (
@@ -464,40 +464,40 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="flex items-center space-x-2 mb-2">
  <ChartBarIcon className="w-5 h-5 text-green-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Revenue</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatCurrency(analytics.revenue.total)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <div className="flex items-center space-x-2 mb-2">
  <ArrowTrendingUpIcon className="w-5 h-5 text-blue-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">RPM</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatCurrency(analytics.revenue.rpm)}
- </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Revenue per mille
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <div className="flex items-center space-x-2 mb-2">
  <EyeIcon className="w-5 h-5 text-purple-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">CPM</span>
- </div>
+// FIXED:  </div>
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatCurrency(analytics.revenue.cpm)}
- </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Cost per mille
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

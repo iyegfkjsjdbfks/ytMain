@@ -69,7 +69,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  return (
  <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
  <VideoGridSkeleton count={skeletonCount} />
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -80,21 +80,21 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  <div className="text-red-500 mb-4">
  <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  Failed to load videos
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400 mb-4">
  {error}
- </p>
- <button
- onClick={() => window.location.reload()}
- className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+// FIXED:  </p>
+ <button />
+// FIXED:  onClick={() => window.location.reload()}
+// FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
  >
  Try Again
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  );
  }
 
@@ -106,16 +106,16 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  {emptyIcon || (
  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
- </svg>
+// FIXED:  </svg>
  )}
- </div>
+// FIXED:  </div>
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  {emptyMessage}
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400">
  Check back later for new content.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  );
  }
 
@@ -129,11 +129,11 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  key={video.id}
  video={video}
  showChannel={showChannelName}
- showDescription={false}
+ showDescription={false} />
  {...(onVideoClick && { onClick: () => onVideoClick(video) })}
  />
  ))}
- </div>
+// FIXED:  </div>
  );
 };
 

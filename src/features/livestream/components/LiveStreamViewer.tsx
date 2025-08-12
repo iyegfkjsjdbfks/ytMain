@@ -46,7 +46,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
  return (
  <div className='flex items-center justify-center h-64'>
  Loading live stream...
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -54,7 +54,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
  return (
  <div className='flex items-center justify-center h-64 text-red-500'>,
  Error: {error}
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -62,23 +62,23 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
  <div className='relative bg-black rounded-lg overflow-hidden'>
  <video
  ref={videoRef}
- className='w-full h-full'
+// FIXED:  className='w-full h-full'
  autoPlay={autoplay}
  controls
- muted
+ muted />
  >
  <source src='#' type='video/mp4' />
  Your browser does not support the video tag.
- </video>
+// FIXED:  </video>
 
  <div className='absolute top-4 left-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold'>
  LIVE
- </div>
+// FIXED:  </div>
 
  <div className='absolute top-4 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm'>
  {viewerCount.toLocaleString()} viewers
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

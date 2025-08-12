@@ -529,43 +529,43 @@ return;
  <div className="flex items-center justify-between p-4">
  <h1 className="text-white text-lg font-semibold">Shorts</h1>
  <div className="flex items-center space-x-2">
- <button
- onClick={(e: any) => handleSearchToggle(e)}
- className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
- aria-label="Search shorts"
+ <button />
+// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+// FIXED:  aria-label="Search shorts"
  >
  <MagnifyingGlassIcon className="w-5 h-5" />
- </button>
- <button
- onClick={(e: any) => handleFilterToggle(e)}
- className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
- aria-label="Filter shorts"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleFilterToggle(e)}
+// FIXED:  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+// FIXED:  aria-label="Filter shorts"
  >
  <AdjustmentsHorizontalIcon className="w-5 h-5" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Search Bar */}
  {showSearch && (
  <div className="px-4 pb-4">
  <div className="relative">
  <input
- type="text"
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- placeholder="Search shorts..."
- className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+// FIXED:  type="text"
+// FIXED:  value={searchQuery} />
+// FIXED:  onChange={(e) => setSearchQuery(e.target.value)}
+// FIXED:  placeholder="Search shorts..."
+// FIXED:  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
  autoFocus
  />
- <button
- onClick={(e: any) => handleSearchToggle(e)}
- className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+ <button />
+// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
  >
  <XMarkIcon className="w-4 h-4" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Filters */}
@@ -573,20 +573,20 @@ return;
  <ShortsFilters
  categories={categories}
  selectedCategory={selectedCategory}
- onCategoryChange={handleCategoryChange}
+ onCategoryChange={handleCategoryChange} />
  onClose={() => setShowFilters(false)}
  />
  )}
- </div>
+// FIXED:  </div>
 
  <EmptyShortsState
- hasFilters={selectedCategory !== 'all' || debouncedSearchQuery !== ''}
+ hasFilters={selectedCategory !== 'all' || debouncedSearchQuery !== ''} />
  onClearFilters={() => {
  setSelectedCategory('all');
  setSearchQuery('');
  }
  />
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -597,47 +597,47 @@ return;
  <div className="flex items-center justify-between p-4">
  <h1 className="text-white text-lg font-semibold">Shorts</h1>
  <div className="flex items-center space-x-2">
- <button
- onClick={(e: any) => handleSearchToggle(e)}
- className={`p-2 rounded-full transition-colors ${
+ <button />
+// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  className={`p-2 rounded-full transition-colors ${
  showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
  }`}
- aria-label="Search shorts"
+// FIXED:  aria-label="Search shorts"
  >
  <MagnifyingGlassIcon className="w-5 h-5" />
- </button>
- <button
- onClick={(e: any) => handleFilterToggle(e)}
- className={`p-2 rounded-full transition-colors ${
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleFilterToggle(e)}
+// FIXED:  className={`p-2 rounded-full transition-colors ${
  showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
  }`}
- aria-label="Filter shorts"
+// FIXED:  aria-label="Filter shorts"
  >
  <AdjustmentsHorizontalIcon className="w-5 h-5" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Search Bar */}
  {showSearch && (
  <div className="px-4 pb-4">
  <div className="relative">
  <input
- type="text"
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- placeholder="Search shorts..."
- className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+// FIXED:  type="text"
+// FIXED:  value={searchQuery} />
+// FIXED:  onChange={(e) => setSearchQuery(e.target.value)}
+// FIXED:  placeholder="Search shorts..."
+// FIXED:  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
  autoFocus
  />
- <button
- onClick={(e: any) => handleSearchToggle(e)}
- className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+ <button />
+// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
  >
  <XMarkIcon className="w-4 h-4" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Filters */}
@@ -645,28 +645,28 @@ return;
  <ShortsFilters
  categories={categories}
  selectedCategory={selectedCategory}
- onCategoryChange={handleCategoryChange}
+ onCategoryChange={handleCategoryChange} />
  onClose={() => setShowFilters(false)}
  />
  )}
- </div>
+// FIXED:  </div>
 
  {/* Navigation Controls */}
  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">
  <ShortsNavigation
  onPrevious={handlePreviousVideo}
- onNext={handleNextVideo}
+ onNext={handleNextVideo} />
  canGoPrevious={currentVideoIndex > 0}
  canGoNext={currentVideoIndex < filteredShorts.length - 1}
  />
- </div>
+// FIXED:  </div>
 
  {/* Shorts Feed */}
  <div
  ref={containerRef}
- className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
+// FIXED:  className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
  role="feed"
- aria-label="Shorts feed"
+// FIXED:  aria-label="Shorts feed" />
  >
  {filteredShorts.map((short, index) => (
  <div key={short.id || index} className="h-full w-full snap-start">
@@ -677,18 +677,18 @@ return;
  onLike={handleLike}
  onFollow={handleFollow}
  onComment={handleComment}
- onShare={handleShare}
+ onShare={handleShare} />
  onVideoChange={() => handleVideoChange(index)}
  onVideoEnd={isAutoAdvanceEnabled ? handleNextVideo : () => {}
  isActive={index === currentVideoIndex}
  />
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Comment Modal */}
  <CommentModal
- isOpen={commentModalOpen}
+ isOpen={commentModalOpen} />
  onClose={() => {
  setCommentModalOpen(false);
  setSelectedShortForComment(null);
@@ -697,7 +697,7 @@ return;
  shortTitle={selectedShortForComment?.title || 'Short video'}
  onCommentSubmit={handleCommentSubmit}
  />
- </div>
+// FIXED:  </div>
  );
 };
 

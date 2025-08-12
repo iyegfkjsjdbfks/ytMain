@@ -17,12 +17,12 @@ export const VideoGridSkeleton: React.FC<VideoGridSkeletonProps> = ({ count = 18
  <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 );
 
 interface ErrorStateProps {
@@ -41,11 +41,11 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
  {icon || <ExclamationTriangleIcon className="w-16 h-16 text-red-400 dark:text-red-600 mx-auto mb-6" />}
  <p className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
  {title}
- </p>
+// FIXED:  </p>
  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-md mx-auto">
  {message}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 );
 
 interface EmptyStateProps {
@@ -64,10 +64,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
  {icon && <div className="mx-auto mb-6">{icon}</div>}
  <p className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
  {title}
- </p>
+// FIXED:  </p>
  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-md mx-auto">
  {message}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 );
 export default VideoGridSkeleton;

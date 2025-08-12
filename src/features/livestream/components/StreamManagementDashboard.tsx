@@ -448,9 +448,9 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  {[...Array(3)].map((_, i) => (
  <div key={i} className='h-20 bg-gray-200 rounded' />
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -460,72 +460,72 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  <div className='flex items-center justify-between'>
  <h2 className='text-2xl font-bold text-gray-900 dark:text-white'>
  Stream Management
- </h2>
+// FIXED:  </h2>
  <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'>
  Create New Stream
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Filters and Controls */}
  <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0'>
  <div className='flex items-center space-x-4'>
  <select
- value={filter}
- onChange={e => setFilter(e.target.value as any)}
- className='px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
+// FIXED:  value={filter} />
+// FIXED:  onChange={e => setFilter(e.target.value as any)}
+// FIXED:  className='px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
  >
  <option value='all'>All Streams</option>
  <option value='live'>Live</option>
  <option value='scheduled'>Scheduled</option>
  <option value='ended'>Ended</option>
- </select>
+// FIXED:  </select>
 
  <select
- value={sortBy}
- onChange={e => setSortBy(e.target.value as any)}
- className='px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={e => setSortBy(e.target.value as any)}
+// FIXED:  className='px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
  >
  <option value='date'>Sort by Date</option>
  <option value='viewers'>Sort by Viewers</option>
  <option value='duration'>Sort by Duration</option>
  <option value='revenue'>Sort by Revenue</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {selectedStreams.length > 0 && (
  <div className='flex items-center space-x-2'>
  <span className='text-sm text-gray-600'>
  {selectedStreams.length} selected
- </span>
- <button
- onClick={() => handleBulkAction('archive')}
- className='px-3 py-1 bg-gray-600 text-white rounded text-sm hover:bg-gray-700'
+// FIXED:  </span>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('archive')}
+// FIXED:  className='px-3 py-1 bg-gray-600 text-white rounded text-sm hover:bg-gray-700'
  >
  Archive
- </button>
- <button
- onClick={() => handleBulkAction('delete')}
- className='px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('delete')}
+// FIXED:  className='px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700'
  >
  Delete
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Streams List */}
  <div className='space-y-4'>
  {sortedStreams.map((stream: any) => (
  <div
  key={stream.id}
- className='bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow'
+// FIXED:  className='bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow' />
  >
  <div className='flex items-start space-x-4'>
  {/* Checkbox */}
  <input
- type='checkbox'
- checked={selectedStreams.includes(stream.id)}
- onChange={e => {
+// FIXED:  type='checkbox'
+// FIXED:  checked={selectedStreams.includes(stream.id)} />
+// FIXED:  onChange={e => {
  if (e.target.checked) {
  setSelectedStreams(prev => [...prev as any, stream.id]);
  } else {
@@ -534,14 +534,14 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  );
  }
  }
- className='mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
+// FIXED:  className='mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
  />
 
  {/* Thumbnail */}
  <img
- src={stream.thumbnailUrl}
- alt={stream.title}
- className='w-24 h-14 object-cover rounded'
+// FIXED:  src={stream.thumbnailUrl}
+// FIXED:  alt={stream.title}
+// FIXED:  className='w-24 h-14 object-cover rounded' />
  />
 
  {/* Stream Info */}
@@ -549,40 +549,40 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  <div className='flex items-center space-x-2 mb-2'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white truncate'>
  {stream.title}
- </h3>
+// FIXED:  </h3>
  <div
- className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(stream.status)}`}
+// FIXED:  className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(stream.status)}`} />
  >
  {getStatusIcon(stream.status)}
  <span className='ml-1 capitalize'>{stream.status}</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <p className='text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2'>
  {stream.description}
- </p>
+// FIXED:  </p>
 
  <div className='flex items-center space-x-6 text-sm text-gray-500'>
  <div className='flex items-center space-x-1'>
  <EyeIcon className='h-4 w-4' />
  <span>
  {formatNumber(stream.stats.peakViewers)} peak viewers
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  {stream.stats.duration > 0 && (
  <div className='flex items-center space-x-1'>
  <ClockIcon className='h-4 w-4' />
  <span>{formatDuration(stream.stats.duration)}</span>
- </div>
+// FIXED:  </div>
  )}
 
  {stream.monetization.totalRevenue > 0 && (
  <div className='flex items-center space-x-1'>
  <span className='text-green-600 font-medium'>
  ${stream.monetization.totalRevenue.toFixed(2)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
 
  <div className='flex items-center space-x-1'>
@@ -592,10 +592,10 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  ? stream.actualStartTime.toLocaleDateString()
  : stream.scheduledStartTime?.toLocaleDateString() ||
  'No date'}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Actions */}
  <div className='flex items-center space-x-2'>
@@ -603,46 +603,46 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  .slice(0, 3)
  .map((action: any) => (
  <button
- key={action.id}
- onClick={() => handleStreamAction(stream, action)}
- disabled={action.disabled}
- className={`p-2 rounded-lg transition-colors ${action.color} ${action.disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+ key={action.id} />
+// FIXED:  onClick={() => handleStreamAction(stream, action)}
+// FIXED:  disabled={action.disabled}
+// FIXED:  className={`p-2 rounded-lg transition-colors ${action.color} ${action.disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}
  title={action.label}
  >
  <action.icon className='h-4 w-4' />
- </button>
+// FIXED:  </button>
  ))}
 
  {getStreamActions(stream).length > 3 && (
  <div className='relative'>
  <button className='p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600'>
  <Cog6ToothIcon className='h-4 w-4' />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {sortedStreams.length === 0 && (
  <div className='text-center py-12'>
  <VideoCameraIcon className='h-12 w-12 text-gray-400 mx-auto mb-4' />
  <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-2'>
  No streams found
- </h3>
+// FIXED:  </h3>
  <p className='text-gray-600 dark:text-gray-400 mb-4'>
  {filter === 'all'
  ? "You haven't created any streams yet."
  : `No ${filter} streams found.`}
- </p>
+// FIXED:  </p>
  <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'>
  Create Your First Stream
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

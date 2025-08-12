@@ -186,7 +186,7 @@ export const DeveloperDashboard: React.FC = () => {
  severity: 6,
  actionable: true });
  }
-
+ />
  if (metrics.performance.errorRate > 0.05) {
  alerts.push({
  id: 'error-rate-high',
@@ -198,7 +198,7 @@ export const DeveloperDashboard: React.FC = () => {
  actionable: true });
  }
 
- // Code quality alerts
+ // Code quality alerts />
  if (metrics.codeQuality.complexity > 8) {
  alerts.push({
  id: 'complexity-high',
@@ -214,7 +214,7 @@ export const DeveloperDashboard: React.FC = () => {
  alerts.push({
  id: 'coverage-low',
  type: "warning",
- category: 'quality',
+ category: 'quality', />
  message: `Test coverage is ${metrics.codeQuality.testCoverage}% (target: >80%)`,
  timestamp: Date.now(),
  severity: 6,
@@ -277,11 +277,11 @@ export const DeveloperDashboard: React.FC = () => {
  {[...Array(4)].map((_, i) => (
  <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg" />
  ))}
- </div>
+// FIXED:  </div>
  <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-lg" />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -293,56 +293,56 @@ export const DeveloperDashboard: React.FC = () => {
  <div>
  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
  Developer Dashboard
- </h1>
+// FIXED:  </h1>
  <p className="text-gray-600 dark:text-gray-400 mt-1">
  Real-time insights into application health and development metrics
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-4">
  {/* Auto-refresh toggle */}
  <div className="flex items-center space-x-2">
  <label htmlFor="auto-refresh-toggle" className="text-sm text-gray-600 dark:text-gray-400">
  Auto-refresh
- </label>
+// FIXED:  </label>
  <button
- id="auto-refresh-toggle"
- onClick={() => setAutoRefresh(!autoRefresh)}
- className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+// FIXED:  id="auto-refresh-toggle" />
+// FIXED:  onClick={() => setAutoRefresh(!autoRefresh)}
+// FIXED:  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
  autoRefresh ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'
  }`}
  >
  <span
- className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+// FIXED:  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
  autoRefresh ? 'translate-x-6' : 'translate-x-1'
- }`}
+ }`} />
  />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Refresh interval */}
  <select
- value={refreshInterval}
- onChange={(e) => setRefreshInterval(Number(e.target.value))}
- className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
- disabled={!autoRefresh}
+// FIXED:  value={refreshInterval} />
+// FIXED:  onChange={(e) => setRefreshInterval(Number(e.target.value))}
+// FIXED:  className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+// FIXED:  disabled={!autoRefresh}
  >
  <option value={10}>10s</option>
  <option value={30}>30s</option>
  <option value={60}>1m</option>
  <option value={300}>5m</option>
- </select>
+// FIXED:  </select>
 
  {/* Manual refresh */}
- <button
- onClick={(e: any) => fetchDashboardData(e)}
- disabled={isLoading}
- className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+ <button />
+// FIXED:  onClick={(e: any) => fetchDashboardData(e)}
+// FIXED:  disabled={isLoading}
+// FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
  >
  {isLoading ? 'Refreshing...' : 'Refresh'}
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Health Score & Critical Alerts */}
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -350,7 +350,7 @@ export const DeveloperDashboard: React.FC = () => {
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Overall Health Score
- </h3>
+// FIXED:  </h3>
  <div className="flex items-center justify-center">
  <div className="relative w-24 h-24">
  <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
@@ -361,7 +361,7 @@ export const DeveloperDashboard: React.FC = () => {
  stroke="currentColor"
  strokeWidth="8"
  fill="transparent"
- className="text-gray-200 dark:text-gray-700"
+// FIXED:  className="text-gray-200 dark:text-gray-700" />
  />
  <circle
  cx="50"
@@ -371,7 +371,7 @@ export const DeveloperDashboard: React.FC = () => {
  strokeWidth="8"
  fill="transparent"
  strokeDasharray={`${overallHealthScore * 2.51} 251`}
- className={`${
+// FIXED:  className={`${ />
  overallHealthScore >= 80
  ? 'text-green-500'
  : overallHealthScore >= 60
@@ -379,88 +379,88 @@ export const DeveloperDashboard: React.FC = () => {
  : 'text-red-500'
  }`}
  />
- </svg>
+// FIXED:  </svg>
  <div className="absolute inset-0 flex items-center justify-center">
  <span className="text-2xl font-bold text-gray-900 dark:text-white">
  {overallHealthScore}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
  {overallHealthScore >= 80
  ? 'Excellent'
  : overallHealthScore >= 60
  ? 'Good'
  : 'Needs Attention'}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Critical Alerts */}
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Critical Alerts
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  {criticalAlerts.length === 0 ? (
  <p className="text-green-600 dark:text-green-400 text-sm">
  ✅ No critical alerts
- </p>
+// FIXED:  </p>
  ) : (
  criticalAlerts.slice(0, 3).map((alert) => (
  <div
  key={alert.id}
- className="flex items-start space-x-3 p-3 bg-red-50 dark:bg-red-900/20 rounded-md"
+// FIXED:  className="flex items-start space-x-3 p-3 bg-red-50 dark:bg-red-900/20 rounded-md" />
  >
  <div className="flex-shrink-0">
  <div className="w-2 h-2 bg-red-500 rounded-full mt-2" />
- </div>
+// FIXED:  </div>
  <div className="flex-1 min-w-0">
  <p className="text-sm text-red-800 dark:text-red-200">
  {alert.message}
- </p>
+// FIXED:  </p>
  <p className="text-xs text-red-600 dark:text-red-400 mt-1">
  {new Date(alert.timestamp).toLocaleTimeString()}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  ))
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Quick Actions */}
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Quick Actions
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  {actionableSuggestions.length > 0 && (
- <button
- onClick={() => intelligentWorkflowEngine.autoImplementImprovements(
+ <button />
+// FIXED:  onClick={() => intelligentWorkflowEngine.autoImplementImprovements(
  actionableSuggestions.slice(0, 3).map((s: any) => s.id))}
- className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
+// FIXED:  className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
  >
  Auto-implement {actionableSuggestions.length} improvements
- </button>
+// FIXED:  </button>
  )}
 
- <button
- onClick={() => intelligentWorkflowEngine.executeWorkflow('ci-cd')}
- className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
+ <button />
+// FIXED:  onClick={() => intelligentWorkflowEngine.executeWorkflow('ci-cd')}
+// FIXED:  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
  >
  Run CI/CD Pipeline
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => codeAnalysisEngine.analyzeCode()}
- className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm"
+ <button />
+// FIXED:  onClick={() => codeAnalysisEngine.analyzeCode()}
+// FIXED:  className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm"
  >
  Run Code Analysis
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Metrics Overview */}
  {metrics && (
@@ -469,140 +469,140 @@ export const DeveloperDashboard: React.FC = () => {
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Performance
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">LCP</span>
  <span className={`text-sm font-medium ${
- metrics.performance.coreWebVitals.lcp <= 2500 ? 'text-green-600' : 'text-red-600'
+ metrics.performance.coreWebVitals.lcp <= 2500 ? 'text-green-600' : 'text-red-600' />
  }`}>
  {metrics.performance.coreWebVitals.lcp}ms
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">FID</span>
  <span className={`text-sm font-medium ${
- metrics.performance.coreWebVitals.fid <= 100 ? 'text-green-600' : 'text-red-600'
+ metrics.performance.coreWebVitals.fid <= 100 ? 'text-green-600' : 'text-red-600' />
  }`}>
  {metrics.performance.coreWebVitals.fid}ms
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">CLS</span>
  <span className={`text-sm font-medium ${
- metrics.performance.coreWebVitals.cls <= 0.1 ? 'text-green-600' : 'text-red-600'
+ metrics.performance.coreWebVitals.cls <= 0.1 ? 'text-green-600' : 'text-red-600' />
  }`}>
  {metrics.performance.coreWebVitals.cls.toFixed(3)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Error Rate</span>
  <span className={`text-sm font-medium ${
- metrics.performance.errorRate <= 0.05 ? 'text-green-600' : 'text-red-600'
+ metrics.performance.errorRate <= 0.05 ? 'text-green-600' : 'text-red-600' />
  }`}>
  {(metrics.performance.errorRate * 100).toFixed(2)}%
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Code Quality Metrics */}
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Code Quality
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Complexity</span>
  <span className={`text-sm font-medium ${
- metrics.codeQuality.complexity <= 8 ? 'text-green-600' : 'text-red-600'
+ metrics.codeQuality.complexity <= 8 ? 'text-green-600' : 'text-red-600' />
  }`}>
  {metrics.codeQuality.complexity.toFixed(1)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Maintainability</span>
- <span className={`text-sm font-medium ${
+ <span className={`text-sm font-medium ${ />
  metrics.codeQuality.maintainability >= 80 ? 'text-green-600' : 'text-yellow-600'
  }`}>
  {metrics.codeQuality.maintainability.toFixed(0)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Test Coverage</span>
- <span className={`text-sm font-medium ${
+ <span className={`text-sm font-medium ${ />
  metrics.codeQuality.testCoverage >= 80 ? 'text-green-600' : 'text-red-600'
  }`}>
  {metrics.codeQuality.testCoverage.toFixed(0)}%
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Tech Debt</span>
  <span className={`text-sm font-medium ${
- metrics.codeQuality.technicalDebt === 0 ? 'text-green-600' : 'text-yellow-600'
+ metrics.codeQuality.technicalDebt === 0 ? 'text-green-600' : 'text-yellow-600' />
  }`}>
  {metrics.codeQuality.technicalDebt} items
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Workflow Metrics */}
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Workflow
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Success Rate</span>
- <span className={`text-sm font-medium ${
+ <span className={`text-sm font-medium ${ />
  metrics.workflow.successRate >= 0.9 ? 'text-green-600' : 'text-red-600'
  }`}>
  {(metrics.workflow.successRate * 100).toFixed(1)}%
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Avg Duration</span>
  <span className="text-sm font-medium text-gray-900 dark:text-white">
  {Math.round(metrics.workflow.averageDuration)}s
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Executions</span>
  <span className="text-sm font-medium text-gray-900 dark:text-white">
  {metrics.workflow.totalExecutions}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Feature Flags */}
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Feature Flags
- </h3>
+// FIXED:  </h3>
  <div className="space-y-3">
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Total Flags</span>
  <span className="text-sm font-medium text-gray-900 dark:text-white">
  {metrics.featureFlags.totalFlags}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Active</span>
  <span className="text-sm font-medium text-green-600">
  {metrics.featureFlags.activeFlags}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className="flex justify-between items-center">
  <span className="text-sm text-gray-600 dark:text-gray-400">Rolling Out</span>
  <span className="text-sm font-medium text-blue-600">
  {metrics.featureFlags.rolloutProgress.length}
- </span>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Tab Navigation */}
@@ -622,19 +622,19 @@ export const DeveloperDashboard: React.FC = () => {
  { id: 'security',
  label: 'Security' }].map((tab) => (
  <button
- key={tab.id}
- onClick={() => setSelectedTab(tab.id as any)}
- className={`py-2 px-1 border-b-2 font-medium text-sm ${
+ key={tab.id} />
+// FIXED:  onClick={() => setSelectedTab(tab.id as any)}
+// FIXED:  className={`py-2 px-1 border-b-2 font-medium text-sm ${
  selectedTab === tab.id
  ? 'border-blue-500 text-blue-600 dark:text-blue-400'
  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
  }`}
  >
  {tab.label}
- </button>
+// FIXED:  </button>
  ))}
- </nav>
- </div>
+// FIXED:  </nav>
+// FIXED:  </div>
 
  {/* Tab Content */}
  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
@@ -642,24 +642,24 @@ export const DeveloperDashboard: React.FC = () => {
  <div>
  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
  System Overview
- </h3>
+// FIXED:  </h3>
 
  {/* Alerts Section */}
  <div className="mb-8">
  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
  Recent Alerts ({alerts.length})
- </h4>
+// FIXED:  </h4>
  <div className="space-y-3">
  {alerts.slice(0, 5).map((alert) => (
  <div
  key={alert.id}
- className={`flex items-start space-x-3 p-4 rounded-lg ${
+// FIXED:  className={`flex items-start space-x-3 p-4 rounded-lg ${
  alert.type === 'error'
  ? 'bg-red-50 dark:bg-red-900/20'
  : alert.type === 'warning'
  ? 'bg-yellow-50 dark:bg-yellow-900/20'
  : 'bg-blue-50 dark:bg-blue-900/20'
- }`}
+ }`} />
  >
  <div className="flex-shrink-0">
  <div className={`w-3 h-3 rounded-full mt-1 ${
@@ -667,9 +667,9 @@ export const DeveloperDashboard: React.FC = () => {
  ? 'bg-red-500'
  : alert.type === 'warning'
  ? 'bg-yellow-500'
- : 'bg-blue-500'
+ : 'bg-blue-500' />
  }`} />
- </div>
+// FIXED:  </div>
  <div className="flex-1 min-w-0">
  <div className="flex justify-between items-start">
  <div>
@@ -678,21 +678,21 @@ export const DeveloperDashboard: React.FC = () => {
  ? 'text-red-800 dark:text-red-200'
  : alert.type === 'warning'
  ? 'text-yellow-800 dark:text-yellow-200'
- : 'text-blue-800 dark:text-blue-200'
+ : 'text-blue-800 dark:text-blue-200' />
  }`}>
  {alert.message}
- </p>
+// FIXED:  </p>
  <p className={`text-xs mt-1 ${
  alert.type === 'error'
  ? 'text-red-600 dark:text-red-400'
  : alert.type === 'warning'
  ? 'text-yellow-600 dark:text-yellow-400'
- : 'text-blue-600 dark:text-blue-400'
+ : 'text-blue-600 dark:text-blue-400' />
  }`}>
  {alert.category} • {new Date(alert.timestamp).toLocaleString()}
- </p>
- </div>
- <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+// FIXED:  </p>
+// FIXED:  </div>
+ <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${ />
  alert.severity >= 8
  ? 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
  : alert.severity >= 6
@@ -700,51 +700,51 @@ export const DeveloperDashboard: React.FC = () => {
  : 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200'
  }`}>
  Severity {alert.severity}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Improvement Suggestions */}
  <div>
  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
  Improvement Suggestions ({suggestions.length})
- </h4>
+// FIXED:  </h4>
  <div className="space-y-3">
  {suggestions.slice(0, 5).map((suggestion) => (
  <div
  key={suggestion.id}
- className="flex items-start space-x-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
+// FIXED:  className="flex items-start space-x-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg" />
  >
  <div className="flex-shrink-0">
- <div className={`w-3 h-3 rounded-full mt-1 ${
+ <div className={`w-3 h-3 rounded-full mt-1 ${ />
  suggestion.priority >= 8
  ? 'bg-red-500'
  : suggestion.priority >= 6
  ? 'bg-yellow-500'
  : 'bg-green-500'
  }`} />
- </div>
+// FIXED:  </div>
  <div className="flex-1 min-w-0">
  <div className="flex justify-between items-start">
  <div>
  <p className="text-sm font-medium text-gray-900 dark:text-white">
  {suggestion.description}
- </p>
+// FIXED:  </p>
  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
  {suggestion.category} • Impact: {suggestion.estimatedImpact}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className="flex items-center space-x-2">
  {suggestion.automatable && (
  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200">
  Auto-fixable
- </span>
+// FIXED:  </span>
  )}
- <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+ <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${ />
  suggestion.priority >= 8
  ? 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
  : suggestion.priority >= 6
@@ -752,27 +752,27 @@ export const DeveloperDashboard: React.FC = () => {
  : 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200'
  }`}>
  P{suggestion.priority}
- </span>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {selectedTab !== 'overview' && (
  <div className="text-center py-12">
  <p className="text-gray-500 dark:text-gray-400">
  {selectedTab.charAt(0).toUpperCase() + selectedTab.slice(1)} details coming soon...
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

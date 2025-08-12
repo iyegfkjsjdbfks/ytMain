@@ -40,7 +40,7 @@ const renderWithQueryClient: any = (component: React.ReactElement) => {
  return render(
  <QueryClientProvider client={queryClient}>
  {component}
- </QueryClientProvider>
+// FIXED:  </QueryClientProvider>
  );
 };
 

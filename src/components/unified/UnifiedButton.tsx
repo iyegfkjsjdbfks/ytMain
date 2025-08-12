@@ -128,23 +128,23 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
  {loading && (
  <LoadingSpinner
  size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
- className='absolute inset-0 m-auto'
+// FIXED:  className='absolute inset-0 m-auto' />
  />
  )}
 
  <span
- className={cn(
+// FIXED:  className={cn(
  'flex items-center gap-inherit',
  loading && 'opacity-0'
- )}
+ )} />
  >
  {leftIcon && <span className='flex-shrink-0'>{leftIcon}</span>}
 
  <span className='flex-1'>{children}</span>
 
  {rightIcon && <span className='flex-shrink-0'>{rightIcon}</span>}
- </span>
- </>
+// FIXED:  </span>
+// FIXED:  </>
  );
 
  if (asChild as any) {
@@ -154,12 +154,12 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
  return (
  <button
  ref={ref}
- className={buttonClasses}
- disabled={isDisabled}
- {...props}
+// FIXED:  className={buttonClasses}
+// FIXED:  disabled={isDisabled}
+ {...props} />
  >
  {content}
- </button>
+// FIXED:  </button>
  );
  }
 );

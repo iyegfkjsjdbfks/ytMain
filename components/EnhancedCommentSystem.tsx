@@ -151,16 +151,16 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  return (
  <div
  key={comment.id}
- className={`${isReply ? 'ml-12 mt-3' : 'mb-6'} ${
+// FIXED:  className={`${isReply ? 'ml-12 mt-3' : 'mb-6'} ${
  comment.isPinned ? 'bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg' : ''
- }`}
+ }`} />
  >
  <div className="flex space-x-3">
  {/* Avatar */}
  <img
- src={comment.authorAvatar}
- alt={comment.authorName}
- className="w-10 h-10 rounded-full flex-shrink-0"
+// FIXED:  src={comment.authorAvatar}
+// FIXED:  alt={comment.authorName}
+// FIXED:  className="w-10 h-10 rounded-full flex-shrink-0" />
  />
 
  <div className="flex-1 min-w-0">
@@ -168,20 +168,20 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <div className="flex items-center space-x-2 mb-1">
  <span className="font-medium text-gray-900 dark:text-white">
  {comment.authorName}
- </span>
+// FIXED:  </span>
 
  {comment.authorVerified && (
  <div className="w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center">
  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  )}
 
  {comment.isChannelOwner && (
  <span className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-0.5 rounded text-xs">
  Creator
- </span>
+// FIXED:  </span>
  )}
 
  {comment.isPinned && (
@@ -190,44 +190,44 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
  <span className="text-sm text-gray-500 dark:text-gray-400">
  {formatDistanceToNow(new Date(comment.timestamp))} ago
- </span>
+// FIXED:  </span>
 
  {comment.isEdited && (
  <span className="text-xs text-gray-400">(edited)</span>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Comment Content */}
  {isEditing ? (
  <div className="mb-3">
  <textarea
- value={editContent}
- onChange={(e) => setEditContent(e.target.value)}
- className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+// FIXED:  value={editContent} />
+// FIXED:  onChange={(e) => setEditContent(e.target.value)}
+// FIXED:  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
  rows={3}
  />
  <div className="flex space-x-2 mt-2">
- <button
- onClick={() => handleEditSubmit(comment.id)}
- className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
+ <button />
+// FIXED:  onClick={() => handleEditSubmit(comment.id)}
+// FIXED:  className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
  >
  Save
- </button>
- <button
- onClick={() => {
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => {
  setEditingComment(null);
  setEditContent('');
  }
- className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+// FIXED:  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Cancel
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  ) : (
  <p className="text-gray-900 dark:text-white mb-2 whitespace-pre-wrap">
  {comment.content}
- </p>
+// FIXED:  </p>
  )}
 
  {/* Moderation Status */}
@@ -235,13 +235,13 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <div className={`mb-2 p-2 rounded text-sm ${
  comment.moderationStatus === 'pending' ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200' :
  comment.moderationStatus === 'flagged' ? 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200' :
- 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
+ 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200' />
  }`}>
  <div className="flex items-center space-x-2">
  <ExclamationTriangleIcon className="w-4 h-4" />
  <span>Status: {comment.moderationStatus}</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Actions */}
@@ -249,9 +249,9 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <div className="flex items-center space-x-4">
  {/* Like/Dislike */}
  <div className="flex items-center space-x-2">
- <button
- onClick={() => onLikeComment(comment.id)}
- className={`flex items-center space-x-1 text-sm transition-colors ${
+ <button />
+// FIXED:  onClick={() => onLikeComment(comment.id)}
+// FIXED:  className={`flex items-center space-x-1 text-sm transition-colors ${
  comment.isLiked
  ? 'text-blue-600 dark:text-blue-400'
  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
@@ -263,100 +263,100 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <HeartIcon className="w-4 h-4" />
  )}
  <span>{formatNumber(comment.likes)}</span>
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => onDislikeComment(comment.id)}
- className={`text-sm transition-colors ${
+ <button />
+// FIXED:  onClick={() => onDislikeComment(comment.id)}
+// FIXED:  className={`text-sm transition-colors ${
  comment.isDisliked
  ? 'text-red-600 dark:text-red-400'
  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
  }`}
  >
  👎 {comment.dislikes > 0 && formatNumber(comment.dislikes)}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Reply */}
  {!isReply && (
- <button
- onClick={() => setReplyingTo(comment.id)}
- className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+ <button />
+// FIXED:  onClick={() => setReplyingTo(comment.id)}
+// FIXED:  className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
  >
  Reply
- </button>
+// FIXED:  </button>
  )}
 
  {/* Owner/Moderator Actions */}
  {(isOwner || canModerate) && (
  <div className="flex items-center space-x-2">
  {isOwner && (
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  setEditingComment(comment.id);
  setEditContent(comment.content);
  }
- className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+// FIXED:  className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
  >
  <PencilIcon className="w-4 h-4" />
- </button>
+// FIXED:  </button>
  )}
 
  {canModerate && !comment.isPinned && !isReply && (
- <button
- onClick={() => onPinComment(comment.id)}
- className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+ <button />
+// FIXED:  onClick={() => onPinComment(comment.id)}
+// FIXED:  className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
  title="Pin comment"
  >
  📌
- </button>
+// FIXED:  </button>
  )}
 
  {(isOwner || canModerate) && (
- <button
- onClick={() => onDeleteComment(comment.id)}
- className="text-sm text-red-500 hover:text-red-700"
+ <button />
+// FIXED:  onClick={() => onDeleteComment(comment.id)}
+// FIXED:  className="text-sm text-red-500 hover:text-red-700"
  >
  <TrashIcon className="w-4 h-4" />
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Report */}
  {!isOwner && (
- <button
- onClick={() => setShowReportModal(comment.id)}
- className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+ <button />
+// FIXED:  onClick={() => setShowReportModal(comment.id)}
+// FIXED:  className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
  >
  <FlagIcon className="w-4 h-4" />
- </button>
+// FIXED:  </button>
  )}
 
  {/* Moderation Actions */}
  {canModerate && comment.moderationStatus !== 'approved' && (
  <div className="flex space-x-2">
- <button
- onClick={() => onModerateComment(comment.id, 'approve')}
- className="text-sm text-green-600 hover:text-green-700"
+ <button />
+// FIXED:  onClick={() => onModerateComment(comment.id, 'approve')}
+// FIXED:  className="text-sm text-green-600 hover:text-green-700"
  >
  Approve
- </button>
- <button
- onClick={() => onModerateComment(comment.id, 'flag')}
- className="text-sm text-yellow-600 hover:text-yellow-700"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => onModerateComment(comment.id, 'flag')}
+// FIXED:  className="text-sm text-yellow-600 hover:text-yellow-700"
  >
  Flag
- </button>
- <button
- onClick={() => onModerateComment(comment.id, 'remove')}
- className="text-sm text-red-600 hover:text-red-700"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => onModerateComment(comment.id, 'remove')}
+// FIXED:  className="text-sm text-red-600 hover:text-red-700"
  >
  Remove
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Reply Input */}
@@ -364,9 +364,9 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <div className="mt-3">
  <textarea
  ref={replyTextareaRef}
- placeholder={`Reply to ${comment.authorName}...`}
- className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
- rows={2}
+// FIXED:  placeholder={`Reply to ${comment.authorName}...`}
+// FIXED:  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+ rows={2} />
  onKeyDown={(e: any) => {
  if (e.key === 'Enter' && !e.shiftKey) {
  e.preventDefault();
@@ -376,34 +376,34 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  }
  />
  <div className="flex space-x-2 mt-2">
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  const textarea = replyTextareaRef.current;
  if (textarea as any) {
  handleSubmitReply(comment.id, textarea.value);
  textarea.value = '';
  }
  }
- className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
+// FIXED:  className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
  >
  Reply
- </button>
- <button
- onClick={() => setReplyingTo(null)}
- className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setReplyingTo(null)}
+// FIXED:  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Cancel
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Replies */}
  {comment.replies.length > 0 && (
  <div className="mt-3">
- <button
- onClick={() => toggleReplies(comment.id)}
- className="flex items-center space-x-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+ <button />
+// FIXED:  onClick={() => toggleReplies(comment.id)}
+// FIXED:  className="flex items-center space-x-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
  >
  {expandedReplies.has(comment.id) ? (
  <ChevronUpIcon className="w-4 h-4" />
@@ -412,19 +412,19 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  )}
  <span>
  {expandedReplies.has(comment.id) ? 'Hide' : 'Show'} {comment.replies.length} {comment.replies.length === 1 ? 'reply' : 'replies'}
- </span>
- </button>
+// FIXED:  </span>
+// FIXED:  </button>
 
  {expandedReplies.has(comment.id) && (
  <div className="mt-3">
  {comment.replies.map((reply: any) => renderComment(reply, true))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  };
 
@@ -456,7 +456,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <div className={`text-center py-8 ${className}`}>
  <ChatBubbleLeftIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
  <p className="text-gray-600 dark:text-gray-400">Comments are disabled for this video.</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -466,59 +466,59 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <div className="flex items-center justify-between">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
  {formatNumber(comments.length)} Comments
- </h3>
+// FIXED:  </h3>
 
  <select
- value={sortBy}
- onChange={(e) => onSortChange(e.target.value as any)}
- className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={(e) => onSortChange(e.target.value as any)}
+// FIXED:  className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
  >
  <option value="popular">Top comments</option>
  <option value="newest">Newest first</option>
  <option value="oldest">Oldest first</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {/* Add Comment */}
  {currentUserId && (
  <div className="flex space-x-3">
  <img
- src={`https://picsum.photos/40/40?random=${currentUserId}`}
- alt="Your avatar"
- className="w-10 h-10 rounded-full flex-shrink-0"
+// FIXED:  src={`https://picsum.photos/40/40?random=${currentUserId}`}
+// FIXED:  alt="Your avatar"
+// FIXED:  className="w-10 h-10 rounded-full flex-shrink-0" />
  />
  <div className="flex-1">
  <textarea
  ref={textareaRef}
- value={newComment}
- onChange={(e) => setNewComment(e.target.value)}
- placeholder="Add a comment..."
- className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+// FIXED:  value={newComment} />
+// FIXED:  onChange={(e) => setNewComment(e.target.value)}
+// FIXED:  placeholder="Add a comment..."
+// FIXED:  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
  rows={3}
  />
  <div className="flex justify-end space-x-2 mt-2">
- <button
- onClick={() => setNewComment('')}
- className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+ <button />
+// FIXED:  onClick={() => setNewComment('')}
+// FIXED:  className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  Cancel
- </button>
- <button
- onClick={(e: any) => handleSubmitComment(e)}
- disabled={!newComment.trim()}
- className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleSubmitComment(e)}
+// FIXED:  disabled={!newComment.trim()}
+// FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  Comment
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Comments List */}
  <div className="space-y-6">
  {sortedComments.map((comment: any) => renderComment(comment))}
- </div>
+// FIXED:  </div>
 
  {/* Report Modal */}
  {showReportModal && (
@@ -526,46 +526,46 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Report Comment
- </h3>
+// FIXED:  </h3>
 
  <div className="space-y-3 mb-6">
  {reportReasons.map((reason) => (
  <label key={reason} className="flex items-center">
  <input
- type="radio"
- name="reportReason"
- value={reason}
- checked={reportReason === reason}
- onChange={(e) => setReportReason(e.target.value)}
- className="mr-3"
+// FIXED:  type="radio"
+// FIXED:  name="reportReason"
+// FIXED:  value={reason}
+// FIXED:  checked={reportReason === reason} />
+// FIXED:  onChange={(e) => setReportReason(e.target.value)}
+// FIXED:  className="mr-3"
  />
  <span className="text-gray-900 dark:text-white">{reason}</span>
- </label>
+// FIXED:  </label>
  ))}
- </div>
+// FIXED:  </div>
 
  <div className="flex space-x-3">
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  setShowReportModal(null);
  setReportReason('');
  }
- className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+// FIXED:  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Cancel
- </button>
- <button
- onClick={() => handleReport(showReportModal)}
- disabled={!reportReason}
- className="flex-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleReport(showReportModal)}
+// FIXED:  disabled={!reportReason}
+// FIXED:  className="flex-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  Report
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

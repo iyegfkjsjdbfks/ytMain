@@ -210,7 +210,7 @@ const authRoutes: RouteObject[] = [
  element: (
  <ProtectedRoute requireAuth={false}>
  <LoginPage />
- </ProtectedRoute>
+// FIXED:  </ProtectedRoute>
  ),
  errorElement: <ErrorBoundary /> },
  {
@@ -218,7 +218,7 @@ const authRoutes: RouteObject[] = [
  element: (
  <ProtectedRoute requireAuth={false}>
  <RegisterPage />
- </ProtectedRoute>
+// FIXED:  </ProtectedRoute>
  ),
  errorElement: <ErrorBoundary /> }];
 

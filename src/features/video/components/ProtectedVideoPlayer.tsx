@@ -45,16 +45,16 @@ const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
  {...(title && { title })}
  autoplay={autoplay}
  startTime={startTime}
- className={className}
+// FIXED:  className={className}
  {...(onReady && { onReady })}
  {...(onTimeUpdate && { onTimeUpdate })}
  {...(onPlay && { onPlay })}
  {...(onPause && { onPause })}
  {...(onEnded && { onEnded })}
  useYouTube={useYouTube}
- {...otherProps}
+ {...otherProps} />
  />
- </VideoErrorBoundary>
+// FIXED:  </VideoErrorBoundary>
  );
 };
 

@@ -152,14 +152,14 @@ const StudioDashboardPage: React.FC = () => {
  {Array.from({ length: 8 }).map((_, i) => (
  <div key={i} className="h-24 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
  ))}
- </div>
+// FIXED:  </div>
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
  <div className="h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
  <div className="h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -170,11 +170,11 @@ const StudioDashboardPage: React.FC = () => {
  <div className="mb-8">
  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
  Studio Dashboard
- </h1>
+// FIXED:  </h1>
  <p className="text-gray-600 dark:text-gray-400">
  Manage your channel and track your performance
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Stats Grid */}
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -184,11 +184,11 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Views</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(stats.totalViews)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <EyeIcon className="w-8 h-8 text-blue-500" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between">
@@ -196,11 +196,11 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Subscribers</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(stats.totalSubscribers)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <UserGroupIcon className="w-8 h-8 text-red-500" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between">
@@ -208,11 +208,11 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Videos</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {stats.totalVideos}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <VideoCameraIcon className="w-8 h-8 text-green-500" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between">
@@ -220,11 +220,11 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Revenue</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  ${formatNumber(stats.totalRevenue)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <CurrencyDollarIcon className="w-8 h-8 text-yellow-500" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between">
@@ -232,11 +232,11 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Watch Time</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatDuration(stats.avgWatchTime)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <ClockIcon className="w-8 h-8 text-purple-500" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between">
@@ -244,11 +244,11 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Likes</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(stats.totalLikes)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <HeartIcon className="w-8 h-8 text-pink-500" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between">
@@ -256,11 +256,11 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Comments</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(stats.totalComments)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <ChatBubbleLeftRightIcon className="w-8 h-8 text-indigo-500" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between">
@@ -268,86 +268,86 @@ const StudioDashboardPage: React.FC = () => {
  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Shares</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(stats.totalShares)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <ShareIcon className="w-8 h-8 text-teal-500" />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
  {/* Quick Actions */}
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
  Quick Actions
- </h2>
+// FIXED:  </h2>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  {quickActions.map((action, index) => (
  <Link
  key={index}
  to={action.link}
- className={`${action.color} text-white p-4 rounded-lg transition-colors duration-200 group`}
+// FIXED:  className={`${action.color} text-white p-4 rounded-lg transition-colors duration-200 group`} />
  >
  <div className="flex items-center space-x-3">
  {action.icon}
  <div>
  <h3 className="font-medium">{action.title}</h3>
  <p className="text-sm opacity-90">{action.description}</p>
- </div>
- </div>
- </Link>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </Link>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Recent Videos */}
  <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
  <div className="flex items-center justify-between mb-6">
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
  Recent Videos
- </h2>
+// FIXED:  </h2>
  <Link
  to="/studio/content"
- className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
+// FIXED:  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium" />
  >
  View All
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  <div className="space-y-4">
  {recentVideos.map((video) => (
  <div key={video.id} className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors">
  <img
- src={video.thumbnail}
- alt={video.title}
- className="w-16 h-9 object-cover rounded"
+// FIXED:  src={video.thumbnail}
+// FIXED:  alt={video.title}
+// FIXED:  className="w-16 h-9 object-cover rounded" />
  />
  <div className="flex-1 min-w-0">
  <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate">
  {video.title}
- </h3>
+// FIXED:  </h3>
  <div className="flex items-center space-x-4 mt-1">
  <span className="text-xs text-gray-500 dark:text-gray-400">
  {formatNumber(video.views)} views
- </span>
+// FIXED:  </span>
  <span className="text-xs text-gray-500 dark:text-gray-400">
  {formatDistanceToNow(video.uploadDate)}
- </span>
+// FIXED:  </span>
  <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(video.status)}`}>
  {video.status}
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
  <span>{formatNumber(video.likes)} likes</span>
  <span>{formatNumber(video.comments)} comments</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

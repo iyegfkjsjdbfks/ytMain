@@ -189,13 +189,13 @@ return;
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -206,44 +206,44 @@ return;
  <div className="mb-8">
  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Community</h1>
  <p className="text-gray-600 dark:text-gray-400">Connect with your audience through posts, polls, and updates</p>
- </div>
+// FIXED:  </div>
 
  {/* Tabs */}
  <div className="flex space-x-1 mb-6 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
- <button
- onClick={() => setSelectedTab('posts')}
- className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+ <button />
+// FIXED:  onClick={() => setSelectedTab('posts')}
+// FIXED:  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
  selectedTab === 'posts'
  ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
  }`}
  >
  Posts
- </button>
- <button
- onClick={() => setSelectedTab('analytics')}
- className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setSelectedTab('analytics')}
+// FIXED:  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
  selectedTab === 'analytics'
  ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
  }`}
  >
  Analytics
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {selectedTab === 'posts' ? (
  <div>
  {/* Create Post Button */}
  <div className="mb-6">
- <button
- onClick={() => setShowCreatePost(true)}
- className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+ <button />
+// FIXED:  onClick={() => setShowCreatePost(true)}
+// FIXED:  className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
  >
  <PlusIcon className="w-5 h-5" />
  <span>Create Post</span>
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Create Post Modal */}
  {showCreatePost && (
@@ -255,25 +255,25 @@ return;
  <div className="flex space-x-2 mb-4">
  {(['text', 'image', 'poll'] as const).map((type) => (
  <button
- key={type}
- onClick={() => setNewPostType(type)}
- className={`px-3 py-1 rounded-md text-sm capitalize ${
+ key={type} />
+// FIXED:  onClick={() => setNewPostType(type)}
+// FIXED:  className={`px-3 py-1 rounded-md text-sm capitalize ${
  newPostType === type
  ? 'bg-blue-600 text-white'
  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
  }`}
  >
  {type}
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Content Input */}
  <textarea
- value={newPostContent}
- onChange={(e) => setNewPostContent(e.target.value)}
- placeholder="What's on your mind?"
- className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+// FIXED:  value={newPostContent} />
+// FIXED:  onChange={(e) => setNewPostContent(e.target.value)}
+// FIXED:  placeholder="What's on your mind?"
+// FIXED:  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
  rows={4}
  />
 
@@ -283,45 +283,45 @@ return;
  {pollOptions.map((option, index) => (
  <input
  key={index}
- value={option}
- onChange={(e: any) => {
+// FIXED:  value={option} />
+// FIXED:  onChange={(e: any) => {
  const newOptions = [...pollOptions];
  newOptions[index] = e.target.value;
  setPollOptions(newOptions);
  }
- placeholder={`Option ${index + 1}`}
- className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  placeholder={`Option ${index + 1}`}
+// FIXED:  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  />
  ))}
  {pollOptions.length < 4 && (
- <button
- onClick={() => setPollOptions([...pollOptions as any, ''])}
- className="text-blue-600 hover:text-blue-700 text-sm"
+ <button />
+// FIXED:  onClick={() => setPollOptions([...pollOptions as any, ''])}
+// FIXED:  className="text-blue-600 hover:text-blue-700 text-sm"
  >
  + Add option
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Actions */}
  <div className="flex justify-end space-x-3 mt-6">
- <button
- onClick={() => setShowCreatePost(false)}
- className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+ <button />
+// FIXED:  onClick={() => setShowCreatePost(false)}
+// FIXED:  className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  Cancel
- </button>
- <button
- onClick={(e: any) => handleCreatePost(e)}
- disabled={!newPostContent.trim()}
- className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleCreatePost(e)}
+// FIXED:  disabled={!newPostContent.trim()}
+// FIXED:  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
  >
  Post
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Posts List */}
@@ -333,23 +333,23 @@ return;
  <div className="flex items-center space-x-3">
  <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
  <span className="text-white font-semibold">YC</span>
- </div>
+// FIXED:  </div>
  <div>
  <p className="font-semibold text-gray-900 dark:text-white">Your Channel</p>
  <p className="text-sm text-gray-500 dark:text-gray-400">{formatDate(post.createdAt)}</p>
- </div>
- </div>
- <button
- onClick={() => {
+// FIXED:  </div>
+// FIXED:  </div>
+ <button />
+// FIXED:  onClick={() => {
  // Show post options menu
 
  }
- className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+// FIXED:  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
  title="Post options"
  >
  <EllipsisHorizontalIcon className="w-5 h-5" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Post Content */}
  <div className="mb-4">
@@ -357,9 +357,9 @@ return;
 
  {post.type === 'image' && post.imageUrl && (
  <img
- src={post.imageUrl}
- alt="Post content"
- className="w-full max-w-md rounded-lg"
+// FIXED:  src={post.imageUrl}
+// FIXED:  alt="Post content"
+// FIXED:  className="w-full max-w-md rounded-lg" />
  />
  )}
 
@@ -376,28 +376,28 @@ return;
  <span className="text-gray-900 dark:text-white">{option.text}</span>
  <span className="text-sm text-gray-500 dark:text-gray-400">
  {option.votes} ({percentage.toFixed(1)}%)
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div
- className="absolute left-0 top-0 h-full bg-blue-100 dark:bg-blue-900 rounded-lg transition-all duration-300"
- style={{ width: `${percentage}%`,
- zIndex: -1 }
+// FIXED:  className="absolute left-0 top-0 h-full bg-blue-100 dark:bg-blue-900 rounded-lg transition-all duration-300"
+// FIXED:  style={{ width: `${percentage}%`,
+ zIndex: -1 } />
  />
- </div>
+// FIXED:  </div>
  );
  })}
  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
  {post.pollOptions.reduce((sum, opt) => sum + opt.votes, 0)} votes
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Post Actions */}
  <div className="flex items-center space-x-6 pt-3 border-t border-gray-100 dark:border-gray-700">
- <button
- onClick={() => toggleLike(post.id)}
- className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+ <button />
+// FIXED:  onClick={() => toggleLike(post.id)}
+// FIXED:  className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
  >
  {post.isLiked ? (
  <HeartIconSolid className="w-5 h-5 text-red-600" />
@@ -405,42 +405,42 @@ return;
  <HeartIcon className="w-5 h-5" />
  )}
  <span className="text-sm">{post.likes}</span>
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  // Show comments for this post
 
  }
- className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+// FIXED:  className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
  title="View comments"
  >
  <ChatBubbleLeftIcon className="w-5 h-5" />
  <span className="text-sm">{post.comments}</span>
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  // Share this post
 
  }
- className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+// FIXED:  className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
  title="Share post"
  >
  <ShareIcon className="w-5 h-5" />
  <span className="text-sm">{post.shares}</span>
- </button>
+// FIXED:  </button>
 
  <div className="flex-1" />
 
  <div className="text-sm text-gray-500 dark:text-gray-400">
  {post.engagement.views.toLocaleString()} views
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ) : (
  /* Analytics Tab */
  <div>
@@ -449,33 +449,33 @@ return;
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Total Posts</h3>
  <p className="text-3xl font-bold text-blue-600">{stats.totalPosts}</p>
- </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Total Engagement</h3>
  <p className="text-3xl font-bold text-green-600">{stats.totalEngagement.toLocaleString()}</p>
- </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Reach Growth</h3>
  <p className="text-3xl font-bold text-purple-600">+{stats.reachGrowth.toFixed(1)}%</p>
- </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Avg. Likes</h3>
  <p className="text-3xl font-bold text-red-600">{stats.averageLikes}</p>
- </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Avg. Comments</h3>
  <p className="text-3xl font-bold text-yellow-600">{stats.averageComments}</p>
- </div>
+// FIXED:  </div>
 
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Top Performing</h3>
  <p className="text-sm text-gray-600 dark:text-gray-400">{stats.topPerformingPost}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Engagement Chart Placeholder */}
@@ -485,13 +485,13 @@ return;
  <div className="text-center">
  <ChartBarIcon className="w-12 h-12 text-gray-400 mx-auto mb-2" />
  <p className="text-gray-500 dark:text-gray-400">Chart visualization would go here</p>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

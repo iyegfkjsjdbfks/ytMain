@@ -46,25 +46,25 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
  <div key={platform.id} className='border rounded-lg p-4'>
  <div className='flex items-center justify-between mb-2'>
  <span className='font-medium'>{platform.name}</span>
- <button
- onClick={() => togglePlatform(platform.id)}
- className={`px-3 py-1 rounded ${
+ <button />
+// FIXED:  onClick={() => togglePlatform(platform.id)}
+// FIXED:  className={`px-3 py-1 rounded ${
  platform.enabled
  ? 'bg-green-500 text-white'
  : 'bg-gray-200 text-gray-700'
  }`}
  >
  {platform.enabled ? 'Enabled' : 'Disabled'}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {platform.enabled && (
  <input
- type='text'
- placeholder='Stream key'
- className='w-full px-3 py-2 border rounded'
- value={platform.streamKey || ''}
- onChange={e => {
+// FIXED:  type='text'
+// FIXED:  placeholder='Stream key'
+// FIXED:  className='w-full px-3 py-2 border rounded'
+// FIXED:  value={platform.streamKey || ''} />
+// FIXED:  onChange={e => {
  setPlatforms(prev =>
  prev.map((p: any) =>
  p.id === platform.id
@@ -75,10 +75,10 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
  }
  />
  )}
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

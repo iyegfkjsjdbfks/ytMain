@@ -43,7 +43,7 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
  return (
  <VideoErrorBoundary
  videoId={videoId}
- onRetry={handleRetry}
+ onRetry={handleRetry} />
  >
  <YouTubePlayer
  video={video}
@@ -51,12 +51,12 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
  height={height || 315}
  autoplay={autoplay}
  controls={controls}
- className={className}
+// FIXED:  className={className}
  {...(onReady && { onReady })}
  {...(onStateChange && { onStateChange })}
- {...(onError && { onError })}
+ {...(onError && { onError })} />
  />
- </VideoErrorBoundary>
+// FIXED:  </VideoErrorBoundary>
  );
 };
 

@@ -49,14 +49,14 @@ return null;
  {/* Header */}
  <div className="flex items-center justify-between mb-4">
  <h3 className="text-lg font-semibold">Settings</h3>
- <button
- onClick={(e: any) => onClose(e)}
- className="text-gray-400 hover:text-white transition-colors"
- aria-label="Close settings"
+ <button />
+// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  className="text-gray-400 hover:text-white transition-colors"
+// FIXED:  aria-label="Close settings"
  >
  <XMarkIcon className="w-5 h-5" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Quality Settings */}
  <div className="mb-6">
@@ -64,9 +64,9 @@ return null;
  <div className="space-y-1">
  {qualities.map((quality: any) => (
  <button
- key={quality.value}
- onClick={() => onQualityChange(quality.value)}
- className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
+ key={quality.value} />
+// FIXED:  onClick={() => onQualityChange(quality.value)}
+// FIXED:  className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
  currentQuality === quality.value
  ? 'bg-red-600 text-white'
  : 'hover:bg-gray-700 text-gray-300'
@@ -77,19 +77,19 @@ return null;
  {currentQuality === quality.value && (
  <CheckIcon className="w-4 h-4" />
  )}
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </button>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Subtitle Settings */}
  <div className="mb-6">
  <h4 className="text-sm font-medium mb-2 text-gray-300">Subtitles</h4>
  <div className="space-y-1">
- <button
- onClick={() => onSubtitleChange(null)}
- className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
+ <button />
+// FIXED:  onClick={() => onSubtitleChange(null)}
+// FIXED:  className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
  currentSubtitle === null
  ? 'bg-red-600 text-white'
  : 'hover:bg-gray-700 text-gray-300'
@@ -100,13 +100,13 @@ return null;
  {currentSubtitle === null && (
  <CheckIcon className="w-4 h-4" />
  )}
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </button>
  {subtitles.map((subtitle: any) => (
  <button
- key={subtitle.srcLang}
- onClick={() => onSubtitleChange(subtitle.srcLang)}
- className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
+ key={subtitle.srcLang} />
+// FIXED:  onClick={() => onSubtitleChange(subtitle.srcLang)}
+// FIXED:  className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
  currentSubtitle === subtitle.srcLang
  ? 'bg-red-600 text-white'
  : 'hover:bg-gray-700 text-gray-300'
@@ -117,26 +117,26 @@ return null;
  {currentSubtitle === subtitle.srcLang && (
  <CheckIcon className="w-4 h-4" />
  )}
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </button>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Autoplay Settings */}
  <div>
  <h4 className="text-sm font-medium mb-2 text-gray-300">Autoplay</h4>
  <label className="flex items-center space-x-3 cursor-pointer">
  <input
- type="checkbox"
- checked={autoplay}
- onChange={(e) => onAutoplayChange(e.target.checked)}
- className="w-4 h-4 text-red-600 bg-gray-700 border-gray-600 rounded focus:ring-red-500 focus:ring-2"
+// FIXED:  type="checkbox"
+// FIXED:  checked={autoplay} />
+// FIXED:  onChange={(e) => onAutoplayChange(e.target.checked)}
+// FIXED:  className="w-4 h-4 text-red-600 bg-gray-700 border-gray-600 rounded focus:ring-red-500 focus:ring-2"
  />
  <span className="text-sm text-gray-300">Autoplay next video</span>
- </label>
- </div>
- </div>
+// FIXED:  </label>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

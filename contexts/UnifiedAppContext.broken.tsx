@@ -355,7 +355,7 @@ return false;
  return (
  <UnifiedAppContext.Provider value={contextValue}>
  {children}
- </UnifiedAppContext.Provider>
+// FIXED:  </UnifiedAppContext.Provider>
  );
 };
 

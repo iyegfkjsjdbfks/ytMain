@@ -266,22 +266,22 @@ const StatsCard: FC<StatsCardProps> = ({
  <div className='flex-1'>
  <p className='text-sm text-gray-600 dark:text-gray-400 font-medium'>
  {title}
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900 dark:text-white mt-1'>
  {typeof value === 'number' ? formatNumber(value) : value}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='flex-shrink-0 ml-4'>{icon}</div>
- </div>
+// FIXED:  </div>
  {(subtitle || trend) && (
  <div className='mt-3 flex items-center text-sm'>
  {trend}
  {subtitle && (
  <span className='text-gray-600 dark:text-gray-400'>{subtitle}</span>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 );
 
 /**
@@ -318,12 +318,12 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: any) => {
  <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Top Moments
- </h3>
+// FIXED:  </h3>
  <div className='text-center text-gray-500 dark:text-gray-400 py-8'>
  <ChartBarIcon className='h-8 w-8 mx-auto mb-2' />
  <p>No notable moments yet</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -331,31 +331,31 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: any) => {
  <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Top Moments
- </h3>
+// FIXED:  </h3>
  <div className='space-y-3'>
  {moments.map((moment: any) => (
  <div
  key={`moment-${moment.type}-${moment.timestamp}`}
- className='flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors'
+// FIXED:  className='flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors' />
  >
  <div className='flex items-center space-x-3'>
  {getIcon(moment.type)}
  <div>
  <p className='text-sm font-medium text-gray-900 dark:text-white'>
  {moment.description}
- </p>
+// FIXED:  </p>
  <p className='text-xs text-gray-600 dark:text-gray-400'>
  {formatDuration(moment.timestamp)}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className='text-sm font-bold text-gray-900 dark:text-white'>
  {formatMomentValue(moment)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
@@ -371,59 +371,59 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
  <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Audience Demographics
- </h3>
+// FIXED:  </h3>
  <div className='space-y-6'>
  <div>
  <h4 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
  Top Countries
- </h4>
+// FIXED:  </h4>
  <div className='space-y-3'>
  {demographics.countries.slice(0, 3).map((country: any) => (
  <div
  key={`country-${country.name}`}
- className='flex items-center justify-between'
+// FIXED:  className='flex items-center justify-between' />
  >
  <span className='text-sm text-gray-600 dark:text-gray-400 font-medium'>
  {country.name}
- </span>
+// FIXED:  </span>
  <div className='flex items-center space-x-3'>
  <div className='w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2'>
  <div
- className='bg-blue-500 h-2 rounded-full transition-all duration-300'
- style={{ width: `${country.percentage}%` }
+// FIXED:  className='bg-blue-500 h-2 rounded-full transition-all duration-300'
+// FIXED:  style={{ width: `${country.percentage}%` } />
  />
- </div>
+// FIXED:  </div>
  <span className='text-sm font-medium text-gray-900 dark:text-white min-w-[2rem] text-right'>
  {country.percentage}%
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div>
  <h4 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
  Devices
- </h4>
+// FIXED:  </h4>
  <div className='grid grid-cols-2 gap-3'>
  {demographics.devices.map((device: any) => (
  <div
  key={`device-${device.type}`}
- className='text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors'
+// FIXED:  className='text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors' />
  >
  <div className='text-lg font-bold text-gray-900 dark:text-white'>
  {device.percentage}%
- </div>
+// FIXED:  </div>
  <div className='text-xs text-gray-600 dark:text-gray-400 font-medium'>
  {device.type}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 );
 
 /**
@@ -438,7 +438,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
  * ```tsx
  * <StreamAnalyticsDashboard
  * streamId="stream_123"
- * className="w-full"
+ * className="w-full" />
  * />
  * ```
  */
@@ -496,17 +496,17 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  {Array.from({ length: 4 }).map((_, i) => (
  <div
  key={`loading-card-${i}`}
- className='h-24 bg-gray-200 dark:bg-gray-700 rounded'
+// FIXED:  className='h-24 bg-gray-200 dark:bg-gray-700 rounded' />
  />
  ))}
- </div>
+// FIXED:  </div>
  <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
  <div className='h-64 bg-gray-200 dark:bg-gray-700 rounded' />
  <div className='h-64 bg-gray-200 dark:bg-gray-700 rounded' />
- </div>
+// FIXED:  </div>
  <div className='h-48 bg-gray-200 dark:bg-gray-700 rounded' />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -517,12 +517,12 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  <ChartBarIcon className='h-12 w-12 mx-auto mb-4 text-gray-400 dark:text-gray-500' />
  <h3 className='text-lg font-medium mb-2'>
  No analytics data available
- </h3>
+// FIXED:  </h3>
  <p className='text-sm'>
  Analytics will appear here once your stream is live.
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -532,79 +532,79 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  <div className='flex items-center justify-between'>
  <h2 className='text-2xl font-bold text-gray-900 dark:text-white'>
  Stream Analytics
- </h2>
+// FIXED:  </h2>
  <div className='flex items-center space-x-2'>
  <select
- value={timeRange}
- onChange={e => {
+// FIXED:  value={timeRange} />
+// FIXED:  onChange={e => {
  setTimeRange(e.target.value as TimeRange);
  }
- className='px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
- aria-label='Select time range'
+// FIXED:  className='px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  aria-label='Select time range'
  >
  <option value='live'>Live</option>
  <option value='1h'>Last Hour</option>
  <option value='24h'>Last 24 Hours</option>
  <option value='7d'>Last 7 Days</option>
- </select>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Real-time Stats Cards */}
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
  <StatsCard
  title='Current Viewers'
- value={analytics.realTimeStats.viewers}
+// FIXED:  value={analytics.realTimeStats.viewers} />
  icon={<EyeIcon className='h-8 w-8 text-blue-500' />}
  trend={
  <>
  <TrendingUpIcon className='h-4 w-4 text-green-500 mr-1' />
  <span className='text-green-600'>,
  Peak: {formatNumber(analytics.realTimeStats.peakViewers)}
- </span>
- </>
+// FIXED:  </span>
+// FIXED:  </>
  }
  />
 
  <StatsCard
  title='Stream Duration'
- value={formatDuration(analytics.realTimeStats.duration)}
+// FIXED:  value={formatDuration(analytics.realTimeStats.duration)} />
  icon={<ClockIcon className='h-8 w-8 text-purple-500' />}
  trend={
  <>
  <SignalIcon
- className={`h-4 w-4 mr-1 ${getHealthColor(analytics.realTimeStats.streamHealth)}`}
+// FIXED:  className={`h-4 w-4 mr-1 ${getHealthColor(analytics.realTimeStats.streamHealth)}`} />
  />
  <span
- className={getHealthColor(analytics.realTimeStats.streamHealth)}
+// FIXED:  className={getHealthColor(analytics.realTimeStats.streamHealth)} />
  >
  {analytics.realTimeStats.streamHealth}
- </span>
- </>
+// FIXED:  </span>
+// FIXED:  </>
  }
  />
 
  <StatsCard
  title='Chat Messages'
- value={analytics.realTimeStats.chatMessages}
+// FIXED:  value={analytics.realTimeStats.chatMessages} />
  icon={<ChatBubbleLeftRightIcon className='h-8 w-8 text-green-500' />}
  trend={
  <>
  <HeartIcon className='h-4 w-4 text-red-500 mr-1' />
  <span className='text-gray-600'>
  {formatNumber(analytics.realTimeStats.likes)} likes
- </span>
- </>
+// FIXED:  </span>
+// FIXED:  </>
  }
  />
 
  <StatsCard
  title='Super Chat Revenue'
- value={`$${analytics.realTimeStats.superChatAmount.toFixed(2)}`}
+// FIXED:  value={`$${analytics.realTimeStats.superChatAmount.toFixed(2)}`} />
  icon={<CurrencyDollarIcon className='h-8 w-8 text-yellow-500' />}
  subtitle={`${analytics.realTimeStats.superChatCount} donations`}
  />
- </div>
+// FIXED:  </div>
 
  {/* Charts Section */}
  <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
@@ -613,54 +613,54 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  <div className='flex items-center justify-between mb-4'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
  Viewer Trends
- </h3>
+// FIXED:  </h3>
  <select
- value={selectedMetric}
- onChange={e => {
+// FIXED:  value={selectedMetric} />
+// FIXED:  onChange={e => {
  setSelectedMetric(e.target.value as MetricType);
  }
- className='px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
- aria-label='Select metric to display'
+// FIXED:  className='px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  aria-label='Select metric to display'
  >
  <option value='viewers'>Viewers</option>
  <option value='engagement'>Engagement</option>
  <option value='revenue'>Revenue</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
  {chartData.length > 0 ? (
  <div
- className='h-64 flex items-end justify-between space-x-1'
+// FIXED:  className='h-64 flex items-end justify-between space-x-1'
  role='img'
- aria-label={`${selectedMetric} chart`}
+// FIXED:  aria-label={`${selectedMetric} chart`} />
  >
  {chartData.map((point: any) => (
  <div
  key={point.id}
- className='bg-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer'
- style={{ height: `${point.height}%`,
+// FIXED:  className='bg-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer'
+// FIXED:  style={{ height: `${point.height}%`,
  width: '4%' }
  title={`${point.value} at ${new Date(point.time).toLocaleTimeString()}`}
- role='presentation'
+ role='presentation' />
  />
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className='h-64 flex items-center justify-center text-gray-500 dark:text-gray-400'>
  <div className='text-center'>
  <ChartBarIcon className='h-8 w-8 mx-auto mb-2' />
  <p>No chart data available</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Demographics */}
  <Demographics demographics={analytics.demographics} />
- </div>
+// FIXED:  </div>
 
  {/* Top Moments */}
  <TopMoments moments={analytics.topMoments} />
- </div>
+// FIXED:  </div>
  );
 };
 

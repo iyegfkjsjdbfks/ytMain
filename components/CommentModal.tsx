@@ -51,22 +51,22 @@ return;
  const modalFooter: any = (
  <div className="flex justify-end space-x-3">
  <button
- type="button"
- onClick={(e: any) => onClose(e)}
- className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
- disabled={isSubmitting}
+// FIXED:  type="button" />
+// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+// FIXED:  disabled={isSubmitting}
  >
  Cancel
- </button>
+// FIXED:  </button>
  <button
- type="button"
- onClick={() => handleCommentSubmit(commentText)}
- disabled={!commentText.trim() || isSubmitting}
- className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+// FIXED:  type="button" />
+// FIXED:  onClick={() => handleCommentSubmit(commentText)}
+// FIXED:  disabled={!commentText.trim() || isSubmitting}
+// FIXED:  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  {isSubmitting ? 'Posting...' : 'Comment'}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  );
 
  return (
@@ -75,36 +75,36 @@ return;
  onClose={onClose}
  title="Add a comment"
  size="md"
- footer={modalFooter}
+ footer={modalFooter} />
  >
  <div className="space-y-4">
  {shortTitle && (
  <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
  <ChatBubbleOvalLeftIcon className="w-4 h-4" />
  <span>Commenting on: {shortTitle}</span>
- </div>
+// FIXED:  </div>
  )}
 
  <div>
  <label htmlFor="comment-text" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Your comment
- </label>
+// FIXED:  </label>
  <textarea
- id="comment-text"
+// FIXED:  id="comment-text"
  rows={4}
- value={commentText}
- onChange={(e) => setCommentText(e.target.value)}
- placeholder="Share your thoughts about this short..."
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white resize-none"
+// FIXED:  value={commentText} />
+// FIXED:  onChange={(e) => setCommentText(e.target.value)}
+// FIXED:  placeholder="Share your thoughts about this short..."
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white resize-none"
  maxLength={500}
- disabled={isSubmitting}
+// FIXED:  disabled={isSubmitting}
  />
  <div className="mt-1 text-xs text-gray-500 dark:text-gray-400 text-right">
  {commentText.length}/500
- </div>
- </div>
- </div>
- </BaseModal>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </BaseModal>
  );
 };
 

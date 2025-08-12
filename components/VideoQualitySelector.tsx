@@ -112,102 +112,102 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  <div className={`flex items-center space-x-2 ${className}`}>
  {/* Play/Pause Button */}
  {onPlayPause && (
- <button
- onClick={(e: any) => onPlayPause(e)}
- className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
- aria-label={isPlaying ? 'Pause' : 'Play'}
+ <button />
+// FIXED:  onClick={(e: any) => onPlayPause(e)}
+// FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+// FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
  <PlayIcon className={`w-6 h-6 ${isPlaying ? 'hidden' : 'block'}`} />
  <div className={`w-6 h-6 ${isPlaying ? 'block' : 'hidden'}`}>
  <div className="flex space-x-1">
  <div className="w-1.5 h-6 bg-white rounded-sm" />
  <div className="w-1.5 h-6 bg-white rounded-sm" />
- </div>
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </button>
  )}
 
  {/* Skip Backward */}
  <button
- className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
- aria-label="Skip backward 10 seconds"
+// FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+// FIXED:  aria-label="Skip backward 10 seconds" />
  >
  <BackwardIcon className="w-5 h-5" />
- </button>
+// FIXED:  </button>
 
  {/* Skip Forward */}
  <button
- className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
- aria-label="Skip forward 10 seconds"
+// FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+// FIXED:  aria-label="Skip forward 10 seconds" />
  >
  <ForwardIcon className="w-5 h-5" />
- </button>
+// FIXED:  </button>
 
  {/* Volume Control */}
  <div className="relative" ref={volumeRef}>
- <button
- onClick={() => setShowVolumeSlider(!showVolumeSlider)}
+ <button />
+// FIXED:  onClick={() => setShowVolumeSlider(!showVolumeSlider)}
  onMouseEnter={() => setShowVolumeSlider(true)}
- className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
- aria-label="Volume"
+// FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+// FIXED:  aria-label="Volume"
  >
  {volume === 0 ? (
  <SpeakerXMarkIcon className="w-5 h-5" />
  ) : (
  <SpeakerWaveIcon className="w-5 h-5" />
  )}
- </button>
+// FIXED:  </button>
 
  {/* Volume Slider */}
  {showVolumeSlider && (
  <div
- className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black/80 backdrop-blur-sm rounded-lg p-3"
+// FIXED:  className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black/80 backdrop-blur-sm rounded-lg p-3" />
  onMouseLeave={() => setShowVolumeSlider(false)}
  >
  <div className="flex flex-col items-center space-y-2">
  <span className="text-white text-xs">{Math.round(volume)}%</span>
  <input
- type="range"
+// FIXED:  type="range"
  min="0"
  max="100"
- value={volume}
- onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
- className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
- style={{ writingMode: 'vertical-lr' as const,
+// FIXED:  value={volume} />
+// FIXED:  onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
+// FIXED:  className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
+// FIXED:  style={{ writingMode: 'vertical-lr' as const,
  WebkitAppearance: 'slider-vertical' }
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Spacer */}
  <div className="flex-1" />
 
  {/* Picture-in-Picture */}
  {onPictureInPictureToggle && (
- <button
- onClick={(e: any) => onPictureInPictureToggle(e)}
- className={`p-2 text-white hover:bg-white/20 rounded-full transition-colors ${
+ <button />
+// FIXED:  onClick={(e: any) => onPictureInPictureToggle(e)}
+// FIXED:  className={`p-2 text-white hover:bg-white/20 rounded-full transition-colors ${
  isPictureInPicture ? 'bg-white/20' : ''
  }`}
- aria-label="Picture in Picture"
+// FIXED:  aria-label="Picture in Picture"
  >
  <div className="w-5 h-5 border-2 border-white rounded relative">
  <div className="absolute top-0 right-0 w-2 h-1.5 border border-white bg-white/20 rounded-sm" />
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </button>
  )}
 
  {/* Settings */}
  <div className="relative" ref={settingsRef}>
- <button
- onClick={() => setShowSettings(!showSettings)}
- className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
- aria-label="Settings"
+ <button />
+// FIXED:  onClick={() => setShowSettings(!showSettings)}
+// FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+// FIXED:  aria-label="Settings"
  >
  <Cog6ToothIcon className="w-5 h-5" />
- </button>
+// FIXED:  </button>
 
  {/* Settings Menu */}
  {showSettings && (
@@ -215,120 +215,120 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  {activePanel === 'main' && (
  <div className="py-2">
  {/* Quality Option */}
- <button
- onClick={() => setActivePanel('quality')}
- className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
+ <button />
+// FIXED:  onClick={() => setActivePanel('quality')}
+// FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
  >
  <span>Quality</span>
  <span className="text-gray-300 text-sm">{getCurrentQualityLabel()}</span>
- </button>
+// FIXED:  </button>
 
  {/* Speed Option */}
  {onSpeedChange && (
- <button
- onClick={() => setActivePanel('speed')}
- className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
+ <button />
+// FIXED:  onClick={() => setActivePanel('speed')}
+// FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
  >
  <span>Playback speed</span>
  <span className="text-gray-300 text-sm">{getCurrentSpeedLabel()}</span>
- </button>
+// FIXED:  </button>
  )}
 
  {/* Subtitles/Captions */}
  <button className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between">
  <span>Subtitles/CC</span>
  <span className="text-gray-300 text-sm">Off</span>
- </button>
+// FIXED:  </button>
 
  {/* Audio Track */}
  <button className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between">
  <span>Audio track</span>
  <span className="text-gray-300 text-sm">Default</span>
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
 
  {activePanel === 'quality' && (
  <div className="py-2">
  {/* Back Button */}
- <button
- onClick={() => setActivePanel('main')}
- className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors border-b border-gray-600"
+ <button />
+// FIXED:  onClick={() => setActivePanel('main')}
+// FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors border-b border-gray-600"
  >
  ← Quality
- </button>
+// FIXED:  </button>
 
  {/* Auto Quality */}
- <button
- onClick={() => handleQualitySelect('auto')}
- className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
+ <button />
+// FIXED:  onClick={() => handleQualitySelect('auto')}
+// FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
  >
  <div>
  <div>Auto</div>
  <div className="text-xs text-gray-400">Adjust to connection</div>
- </div>
+// FIXED:  </div>
  {currentQuality === 'auto' && <CheckIcon className="w-4 h-4" />}
- </button>
+// FIXED:  </button>
 
  {/* Quality Options */}
  {qualities.map((quality: any) => (
  <button
- key={quality.value}
- onClick={() => handleQualitySelect(quality.value)}
- className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
+ key={quality.value} />
+// FIXED:  onClick={() => handleQualitySelect(quality.value)}
+// FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
  >
  <div>
  <div>{quality.label}</div>
  <div className="text-xs text-gray-400">{quality.resolution}</div>
- </div>
+// FIXED:  </div>
  {currentQuality === quality.value && <CheckIcon className="w-4 h-4" />}
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
  )}
 
  {activePanel === 'speed' && (
  <div className="py-2">
  {/* Back Button */}
- <button
- onClick={() => setActivePanel('main')}
- className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors border-b border-gray-600"
+ <button />
+// FIXED:  onClick={() => setActivePanel('main')}
+// FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors border-b border-gray-600"
  >
  ← Playback speed
- </button>
+// FIXED:  </button>
 
  {/* Speed Options */}
  {playbackSpeeds.map((speed: any) => (
  <button
- key={speed.value}
- onClick={() => handleSpeedSelect(speed.value)}
- className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
+ key={speed.value} />
+// FIXED:  onClick={() => handleSpeedSelect(speed.value)}
+// FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
  >
  <span>{speed.label}</span>
  {currentSpeed === speed.value && <CheckIcon className="w-4 h-4" />}
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Fullscreen */}
  {onFullscreenToggle && (
- <button
- onClick={(e: any) => onFullscreenToggle(e)}
- className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
- aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+ <button />
+// FIXED:  onClick={(e: any) => onFullscreenToggle(e)}
+// FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+// FIXED:  aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
  >
  {isFullscreen ? (
  <ArrowsPointingInIcon className="w-5 h-5" />
  ) : (
  <ArrowsPointingOutIcon className="w-5 h-5" />
  )}
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

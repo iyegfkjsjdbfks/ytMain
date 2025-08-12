@@ -251,100 +251,100 @@ return;
  <h3 className="font-medium text-gray-900 dark:text-white">Timeline</h3>
  <div className="text-sm text-gray-600 dark:text-gray-400">
  {formatTime(currentTime)} / {formatTime(duration)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div
  ref={timelineRef}
- className="relative h-16 bg-gray-200 dark:bg-gray-700 rounded cursor-pointer"
- onClick={(e: any) => handleTimelineClick(e)}
+// FIXED:  className="relative h-16 bg-gray-200 dark:bg-gray-700 rounded cursor-pointer" />
+// FIXED:  onClick={(e: any) => handleTimelineClick(e)}
  >
  {/* Timeline track */}
  <div className="absolute inset-0 flex">
  {clips.map((clip, index) => (
  <div
  key={clip.id}
- className="bg-blue-500 h-full flex items-center justify-center text-white text-xs"
- style={{
+// FIXED:  className="bg-blue-500 h-full flex items-center justify-center text-white text-xs"
+// FIXED:  style={{
  left: `${(clip.startTime / duration) * 100}%`,
- width: `${(clip.duration / duration) * 100}%` }
+ width: `${(clip.duration / duration) * 100}%` } />
  >
  Clip {index + 1}
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Playhead */}
  <div
- className="absolute top-0 bottom-0 w-0.5 bg-red-500 z-10"
- style={{ left: `${(currentTime / duration) * 100}%` }
+// FIXED:  className="absolute top-0 bottom-0 w-0.5 bg-red-500 z-10"
+// FIXED:  style={{ left: `${(currentTime / duration) * 100}%` } />
  >
  <div className="absolute -top-2 -left-2 w-4 h-4 bg-red-500 rounded-full" />
- </div>
+// FIXED:  </div>
 
  {/* Trim markers */}
  {activeTab === 'trim' && (
  <>
  <div
- className="absolute top-0 bottom-0 w-1 bg-green-500 cursor-ew-resize"
- style={{ left: `${(trimStart / duration) * 100}%` }
+// FIXED:  className="absolute top-0 bottom-0 w-1 bg-green-500 cursor-ew-resize"
+// FIXED:  style={{ left: `${(trimStart / duration) * 100}%` } />
  />
  <div
- className="absolute top-0 bottom-0 w-1 bg-green-500 cursor-ew-resize"
- style={{ left: `${(trimEnd / duration) * 100}%` }
+// FIXED:  className="absolute top-0 bottom-0 w-1 bg-green-500 cursor-ew-resize"
+// FIXED:  style={{ left: `${(trimEnd / duration) * 100}%` } />
  />
- </>
+// FIXED:  </>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Controls */}
  <div className="flex items-center justify-center space-x-4 mt-4">
- <button
- onClick={(e: any) => togglePlay(e)}
- className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700"
+ <button />
+// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700"
  >
  {isPlaying ? (
  <PauseIcon className="w-5 h-5" />
  ) : (
  <PlayIcon className="w-5 h-5" />
  )}
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => seekTo(currentTime - 10)}
- className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+ <button />
+// FIXED:  onClick={() => seekTo(currentTime - 10)}
+// FIXED:  className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  ⏪
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => seekTo(currentTime + 10)}
- className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+ <button />
+// FIXED:  onClick={() => seekTo(currentTime + 10)}
+// FIXED:  className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  ⏩
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => setIsMuted(!isMuted)}
- className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+ <button />
+// FIXED:  onClick={() => setIsMuted(!isMuted)}
+// FIXED:  className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  {isMuted ? (
  <SpeakerXMarkIcon className="w-5 h-5" />
  ) : (
  <SpeakerWaveIcon className="w-5 h-5" />
  )}
- </button>
+// FIXED:  </button>
 
  <input
- type="range"
+// FIXED:  type="range"
  min="0"
  max="100"
- value={volume}
- onChange={(e) => setVolume(parseInt(e.target.value, 10))}
- className="w-20"
+// FIXED:  value={volume} />
+// FIXED:  onChange={(e) => setVolume(parseInt(e.target.value, 10))}
+// FIXED:  className="w-20"
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 
  const renderTrimPanel: any = () => (
@@ -355,100 +355,100 @@ return;
  <div>
  <label htmlFor="trim-start-time" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
  Start Time
- </label>
+// FIXED:  </label>
  <input
- type="range"
- id="trim-start-time"
+// FIXED:  type="range"
+// FIXED:  id="trim-start-time"
  min="0"
  max={duration}
  step="0.1"
- value={trimStart}
- onChange={(e) => setTrimStart(parseFloat(e.target.value))}
- className="w-full"
+// FIXED:  value={trimStart} />
+// FIXED:  onChange={(e) => setTrimStart(parseFloat(e.target.value))}
+// FIXED:  className="w-full"
  />
  <div className="text-sm text-gray-600 dark:text-gray-400">
  {formatTime(trimStart)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="trim-end-time" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
  End Time
- </label>
+// FIXED:  </label>
  <input
- type="range"
- id="trim-end-time"
+// FIXED:  type="range"
+// FIXED:  id="trim-end-time"
  min="0"
  max={duration}
  step="0.1"
- value={trimEnd}
- onChange={(e) => setTrimEnd(parseFloat(e.target.value))}
- className="w-full"
+// FIXED:  value={trimEnd} />
+// FIXED:  onChange={(e) => setTrimEnd(parseFloat(e.target.value))}
+// FIXED:  className="w-full"
  />
  <div className="text-sm text-gray-600 dark:text-gray-400">
  {formatTime(trimEnd)}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
  <p className="text-sm text-gray-600 dark:text-gray-400">,
  Duration: {formatTime(trimEnd - trimStart)}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
- <button
- onClick={(e: any) => trimVideo(e)}
- className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+ <button />
+// FIXED:  onClick={(e: any) => trimVideo(e)}
+// FIXED:  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
  >
  Apply Trim
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  );
 
  const renderTextPanel: any = () => (
  <div className="space-y-4">
  <div className="flex items-center justify-between">
  <h3 className="font-medium text-gray-900 dark:text-white">Text Overlays</h3>
- <button
- onClick={(e: any) => addTextOverlay(e)}
- className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
+ <button />
+// FIXED:  onClick={(e: any) => addTextOverlay(e)}
+// FIXED:  className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
  >
  Add Text
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  <div className="space-y-3">
  {textOverlays.map((text) => (
  <div
  key={text.id}
- className={`p-3 border rounded cursor-pointer ${
+// FIXED:  className={`p-3 border rounded cursor-pointer ${
  selectedText === text.id
  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
  : 'border-gray-200 dark:border-gray-700'
- }`}
- onClick={() => setSelectedText(text.id)}
+ }`} />
+// FIXED:  onClick={() => setSelectedText(text.id)}
  >
  <div className="flex items-center justify-between">
  <span className="font-medium text-gray-900 dark:text-white">
  {text.text}
- </span>
- <button
- onClick={(e: any) => {
+// FIXED:  </span>
+ <button />
+// FIXED:  onClick={(e: any) => {
  e.stopPropagation();
  deleteTextOverlay(text.id);
  }
- className="text-red-500 hover:text-red-700"
+// FIXED:  className="text-red-500 hover:text-red-700"
  >
  ×
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
  {formatTime(text.startTime)} - {formatTime(text.endTime)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {selectedText && (
  <div className="border-t pt-4 space-y-3">
@@ -462,67 +462,67 @@ return null;
  return (
  <div className="space-y-3">
  <input
- type="text"
- value={text.text}
- onChange={(e) => updateTextOverlay(text.id, { text: e.target.value })}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
- placeholder="Enter text"
+// FIXED:  type="text"
+// FIXED:  value={text.text} />
+// FIXED:  onChange={(e) => updateTextOverlay(text.id, { text: e.target.value })}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+// FIXED:  placeholder="Enter text"
  />
 
  <div className="grid grid-cols-2 gap-3">
  <div>
  <label htmlFor="text-font-size" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
  Font Size
- </label>
+// FIXED:  </label>
  <input
- type="range"
- id="text-font-size"
+// FIXED:  type="range"
+// FIXED:  id="text-font-size"
  min="12"
  max="72"
- value={text.fontSize}
- onChange={(e) => updateTextOverlay(text.id, { fontSize: parseInt(e.target.value, 10) })}
- className="w-full"
+// FIXED:  value={text.fontSize} />
+// FIXED:  onChange={(e) => updateTextOverlay(text.id, { fontSize: parseInt(e.target.value, 10) })}
+// FIXED:  className="w-full"
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="text-color" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
  Color
- </label>
+// FIXED:  </label>
  <input
- type="color"
- id="text-color"
- value={text.color}
- onChange={(e) => updateTextOverlay(text.id, { color: e.target.value })}
- className="w-full h-8 rounded"
+// FIXED:  type="color"
+// FIXED:  id="text-color"
+// FIXED:  value={text.color} />
+// FIXED:  onChange={(e) => updateTextOverlay(text.id, { color: e.target.value })}
+// FIXED:  className="w-full h-8 rounded"
  />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  })()}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 
  const renderFiltersPanel: any = () => (
  <div className="space-y-4">
  <div className="flex items-center justify-between">
  <h3 className="font-medium text-gray-900 dark:text-white">Filters & Effects</h3>
- </div>
+// FIXED:  </div>
 
  <div className="grid grid-cols-2 gap-2">
  {['brightness', 'contrast', 'saturation', 'blur', 'sepia', 'grayscale'].map((filterType) => (
  <button
- key={filterType}
- onClick={() => addFilter(filterType as VideoFilter['type'])}
- className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+ key={filterType} />
+// FIXED:  onClick={() => addFilter(filterType as VideoFilter['type'])}
+// FIXED:  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
 
  <div className="space-y-3">
  {filters.map((filter) => (
@@ -530,29 +530,29 @@ return null;
  <div className="flex items-center justify-between mb-2">
  <span className="font-medium text-gray-900 dark:text-white">
  {filter.name}
- </span>
- <button
- onClick={() => removeFilter(filter.id)}
- className="text-red-500 hover:text-red-700"
+// FIXED:  </span>
+ <button />
+// FIXED:  onClick={() => removeFilter(filter.id)}
+// FIXED:  className="text-red-500 hover:text-red-700"
  >
  ×
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  <input
- type="range"
+// FIXED:  type="range"
  min="0"
  max={filter.type === 'blur' ? 10 : 200}
- value={filter.value}
- onChange={(e) => updateFilter(filter.id, parseInt(e.target.value, 10))}
- className="w-full"
+// FIXED:  value={filter.value} />
+// FIXED:  onChange={(e) => updateFilter(filter.id, parseInt(e.target.value, 10))}
+// FIXED:  className="w-full"
  />
  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
  {filter.value}{filter.type === 'blur' ? 'px' : '%'}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 
  return (
@@ -563,17 +563,17 @@ return null;
  <div className="bg-black rounded-lg overflow-hidden aspect-video">
  <video
  ref={videoRef}
- src={videoUrl}
- className="w-full h-full object-contain"
- muted={isMuted}
+// FIXED:  src={videoUrl}
+// FIXED:  className="w-full h-full object-contain"
+ muted={isMuted} />
  onPlay={() => setIsPlaying(true)}
  onPause={() => setIsPlaying(false)}
  />
  <canvas ref={canvasRef} className="hidden" />
- </div>
+// FIXED:  </div>
 
  {renderTimeline()}
- </div>
+// FIXED:  </div>
 
  {/* Editing Panel */}
  <div className="space-y-6">
@@ -587,9 +587,9 @@ return null;
  { id: 'filters',
  icon: AdjustmentsHorizontalIcon, label: 'Filters' }].map((tab) => (
  <button
- key={tab.id}
- onClick={() => setActiveTab(tab.id as any)}
- className={`flex-1 flex items-center justify-center space-x-1 px-3 py-2 rounded text-sm font-medium transition-colors ${
+ key={tab.id} />
+// FIXED:  onClick={() => setActiveTab(tab.id as any)}
+// FIXED:  className={`flex-1 flex items-center justify-center space-x-1 px-3 py-2 rounded text-sm font-medium transition-colors ${
  activeTab === tab.id
  ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
@@ -597,47 +597,47 @@ return null;
  >
  <tab.icon className="w-4 h-4" />
  <span>{tab.label}</span>
- </button>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Tab Content */}
  <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
  {activeTab === 'trim' && renderTrimPanel()}
  {activeTab === 'text' && renderTextPanel()}
  {activeTab === 'filters' && renderFiltersPanel()}
- </div>
+// FIXED:  </div>
 
  {/* Action Buttons */}
  <div className="space-y-3">
- <button
- onClick={(e: any) => exportVideo(e)}
- disabled={isProcessing}
- className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+ <button />
+// FIXED:  onClick={(e: any) => exportVideo(e)}
+// FIXED:  disabled={isProcessing}
+// FIXED:  className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
  >
  {isProcessing ? (
  <>
  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
  <span>Processing...</span>
- </>
+// FIXED:  </>
  ) : (
  <>
  <CloudArrowDownIcon className="w-5 h-5" />
  <span>Export Video</span>
- </>
+// FIXED:  </>
  )}
- </button>
+// FIXED:  </button>
 
- <button
- onClick={(e: any) => onCancel(e)}
- className="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+ <button />
+// FIXED:  onClick={(e: any) => onCancel(e)}
+// FIXED:  className="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Cancel
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

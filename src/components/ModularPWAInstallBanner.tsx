@@ -227,50 +227,50 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  <div className='flex items-center justify-between'>
  <div className='flex-1'>
  <h3
- className='font-semibold text-lg mb-1'
- style={{ color: theme.textColor 
- }
+// FIXED:  className='font-semibold text-lg mb-1'
+// FIXED:  style={{ color: theme.textColor 
+ } />
  >
  Install YouTubeX
- </h3>
+// FIXED:  </h3>
  <p
- className='text-sm opacity-80'
- style={{ color: theme.textColor }
+// FIXED:  className='text-sm opacity-80'
+// FIXED:  style={{ color: theme.textColor } />
  >
  Get the full app experience with offline access and
  notifications.
- </p>
+// FIXED:  </p>
  {showBenefits && variant !== 'minimal' && (
  <div className='mt-2 flex flex-wrap gap-2'>
  <span className='text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded'>
  📱 Home Screen Access
- </span>
+// FIXED:  </span>
  <span className='text-xs px-2 py-1 bg-green-100 text-green-800 rounded'>
  🔔 Push Notifications
- </span>
+// FIXED:  </span>
  <span className='text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded'>
  📶 Offline Support
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  <div className='flex gap-2 ml-4'>
- <button
- onClick={(e: any) => handleInstall(e)}
- disabled={state.isAnimating}
- className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
- style={{ backgroundColor: theme.primaryColor }
+ <button />
+// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  disabled={state.isAnimating}
+// FIXED:  className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
+// FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  {state.isAnimating ? 'Installing...' : 'Install'}
- </button>
- <button
- onClick={(e: any) => handleDismiss(e)}
- className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
  >
  ✕
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 
  case 'update':
@@ -278,43 +278,43 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  <div className='flex items-center justify-between'>
  <div className='flex-1'>
  <h3
- className='font-semibold text-lg mb-1'
- style={{ color: theme.textColor }
+// FIXED:  className='font-semibold text-lg mb-1'
+// FIXED:  style={{ color: theme.textColor } />
  >
  Update Available
- </h3>
+// FIXED:  </h3>
  <p
- className='text-sm opacity-80'
- style={{ color: theme.textColor }
+// FIXED:  className='text-sm opacity-80'
+// FIXED:  style={{ color: theme.textColor } />
  >
  A new version of YouTubeX is ready to install.
- </p>
+// FIXED:  </p>
  {pwaUpdates.updateVersion && (
  <p
- className='text-xs mt-1 opacity-60'
- style={{ color: theme.textColor }
+// FIXED:  className='text-xs mt-1 opacity-60'
+// FIXED:  style={{ color: theme.textColor } />
  >,
  Version: {pwaUpdates.updateVersion}
- </p>
+// FIXED:  </p>
  )}
- </div>
+// FIXED:  </div>
  <div className='flex gap-2 ml-4'>
- <button
- onClick={(e: any) => handleUpdate(e)}
- disabled={state.isAnimating}
- className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
- style={{ backgroundColor: theme.primaryColor }
+ <button />
+// FIXED:  onClick={(e: any) => handleUpdate(e)}
+// FIXED:  disabled={state.isAnimating}
+// FIXED:  className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
+// FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  {state.isAnimating ? 'Updating...' : 'Update'}
- </button>
- <button
- onClick={() => pwaUpdates.skipUpdate()}
- className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => pwaUpdates.skipUpdate()}
+// FIXED:  className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
  >
  Skip
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 
  case 'notification':
@@ -322,35 +322,35 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  <div className='flex items-center justify-between'>
  <div className='flex-1'>
  <h3
- className='font-semibold text-lg mb-1'
- style={{ color: theme.textColor }
+// FIXED:  className='font-semibold text-lg mb-1'
+// FIXED:  style={{ color: theme.textColor } />
  >
  Enable Notifications
- </h3>
+// FIXED:  </h3>
  <p
- className='text-sm opacity-80'
- style={{ color: theme.textColor }
+// FIXED:  className='text-sm opacity-80'
+// FIXED:  style={{ color: theme.textColor } />
  >
  Stay updated with new videos and important updates.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='flex gap-2 ml-4'>
- <button
- onClick={(e: any) => handleNotificationPermission(e)}
- disabled={state.isAnimating}
- className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
- style={{ backgroundColor: theme.primaryColor }
+ <button />
+// FIXED:  onClick={(e: any) => handleNotificationPermission(e)}
+// FIXED:  disabled={state.isAnimating}
+// FIXED:  className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
+// FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  {state.isAnimating ? 'Requesting...' : 'Enable'}
- </button>
- <button
- onClick={(e: any) => handleDismiss(e)}
- className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
  >
  ✕
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 
  case 'offline':
@@ -358,43 +358,43 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  <div className='flex items-center justify-between'>
  <div className='flex-1'>
  <h3
- className='font-semibold text-lg mb-1'
- style={{ color: theme.textColor }
+// FIXED:  className='font-semibold text-lg mb-1'
+// FIXED:  style={{ color: theme.textColor } />
  >
  You're Offline
- </h3>
+// FIXED:  </h3>
  <p
- className='text-sm opacity-80'
- style={{ color: theme.textColor }
+// FIXED:  className='text-sm opacity-80'
+// FIXED:  style={{ color: theme.textColor } />
  >
  Some features may be limited. Check your connection.
- </p>
+// FIXED:  </p>
  {offlineStatus.offlineDuration > 0 && (
  <p
- className='text-xs mt-1 opacity-60'
- style={{ color: theme.textColor }
+// FIXED:  className='text-xs mt-1 opacity-60'
+// FIXED:  style={{ color: theme.textColor } />
  >
  Offline for:{' '}
  {Math.floor(offlineStatus.offlineDuration / 1000)}s
- </p>
+// FIXED:  </p>
  )}
- </div>
+// FIXED:  </div>
  <div className='flex gap-2 ml-4'>
- <button
- onClick={() => offlineStatus.testConnection()}
- className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity'
- style={{ backgroundColor: theme.primaryColor }
+ <button />
+// FIXED:  onClick={() => offlineStatus.testConnection()}
+// FIXED:  className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity'
+// FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  Retry
- </button>
- <button
- onClick={(e: any) => handleDismiss(e)}
- className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
  >
  ✕
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 
  default: return null
@@ -402,12 +402,12 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
 
  return (
  <div
- className={`fixed z-50 ${positionClasses[position]} ${variantClasses[variant]} transition-all duration-300 ease-in-out`}
- style={{
+// FIXED:  className={`fixed z-50 ${positionClasses[position]} ${variantClasses[variant]} transition-all duration-300 ease-in-out`}
+// FIXED:  style={{
  backgroundColor: theme.backgroundColor,
  borderRadius: theme.borderRadius,
  transform: state.isVisible ? 'translateY(0)' : 'translateY(100%)',
- opacity: state.isVisible ? 1 : 0 }
+ opacity: state.isVisible ? 1 : 0 } />
  >
  {renderContent()}
 
@@ -415,18 +415,18 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  {showNetworkStatus && (
  <div className='absolute top-2 right-2'>
  <div
- className={`w-2 h-2 rounded-full ${
+// FIXED:  className={`w-2 h-2 rounded-full ${
  offlineStatus.isOnline
  ? offlineStatus.getNetworkQuality() === 'fast'
  ? 'bg-green-500'
  : 'bg-yellow-500'
  : 'bg-red-500'
  }`}
- title={`Network: ${offlineStatus.getNetworkQuality()}`}
+ title={`Network: ${offlineStatus.getNetworkQuality()}`} />
  />
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

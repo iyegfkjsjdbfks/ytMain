@@ -97,18 +97,18 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  return (
  <div className={className}>
  {/* Filter Toggle Button */}
- <button
- onClick={(e: any) => onToggle(e)}
- className='flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
+ <button />
+// FIXED:  onClick={(e: any) => onToggle(e)}
+// FIXED:  className='flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
  >
  <FunnelIcon className='w-5 h-5' />
  <span>Filters</span>
  {hasActiveFilters() && (
  <span className='bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full'>
  {getActiveFilterCount()}
- </span>
+// FIXED:  </span>
  )}
- </button>
+// FIXED:  </button>
 
  {/* Filter Panel */}
  {isOpen && (
@@ -116,31 +116,31 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  <div className='flex items-center justify-between mb-6'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
  Search Filters
- </h3>
+// FIXED:  </h3>
  <div className='flex items-center gap-2'>
  {hasActiveFilters() && (
- <button
- onClick={(e: any) => resetFilters(e)}
- className='text-sm text-blue-600 hover:text-blue-700 font-medium'
+ <button />
+// FIXED:  onClick={(e: any) => resetFilters(e)}
+// FIXED:  className='text-sm text-blue-600 hover:text-blue-700 font-medium'
  >
  Clear all
- </button>
+// FIXED:  </button>
  )}
- <button
- onClick={(e: any) => onToggle(e)}
- className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
+ <button />
+// FIXED:  onClick={(e: any) => onToggle(e)}
+// FIXED:  className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
  >
  <XMarkIcon className='w-5 h-5' />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
  {/* Type Filter */}
  <div>
  <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
  Type
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {[
  { value: 'all',
@@ -155,32 +155,32 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'Live', icon: PlayIcon }].map(({ value, label, icon: Icon }: any) => (
  <label
  key={value}
- className='flex items-center gap-2 cursor-pointer'
+// FIXED:  className='flex items-center gap-2 cursor-pointer' />
  >
  <input
- type='radio'
- name='type'
- value={value}
- checked={filters.type === value}
- onChange={e =>
+// FIXED:  type='radio'
+// FIXED:  name='type'
+// FIXED:  value={value}
+// FIXED:  checked={filters.type === value} />
+// FIXED:  onChange={e =>
  updateFilter('type', e.target.value as any)
  }
- className='text-blue-600'
+// FIXED:  className='text-blue-600'
  />
  <Icon className='w-4 h-4 text-gray-500' />
  <span className='text-sm text-gray-700 dark:text-gray-300'>
  {label}
- </span>
- </label>
+// FIXED:  </span>
+// FIXED:  </label>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Upload Date Filter */}
  <div>
  <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
  Upload Date
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {[
  { value: 'any',
@@ -197,31 +197,31 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'This year' }].map(({ value, label }: any) => (
  <label
  key={value}
- className='flex items-center gap-2 cursor-pointer'
+// FIXED:  className='flex items-center gap-2 cursor-pointer' />
  >
  <input
- type='radio'
- name='uploadDate'
- value={value}
- checked={filters.uploadDate === value}
- onChange={e =>
+// FIXED:  type='radio'
+// FIXED:  name='uploadDate'
+// FIXED:  value={value}
+// FIXED:  checked={filters.uploadDate === value} />
+// FIXED:  onChange={e =>
  updateFilter('uploadDate', e.target.value as any)
  }
- className='text-blue-600'
+// FIXED:  className='text-blue-600'
  />
  <span className='text-sm text-gray-700 dark:text-gray-300'>
  {label}
- </span>
- </label>
+// FIXED:  </span>
+// FIXED:  </label>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Duration Filter */}
  <div>
  <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
  Duration
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {[
  { value: 'any',
@@ -234,31 +234,31 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'Over 20 minutes' }].map(({ value, label }: any) => (
  <label
  key={value}
- className='flex items-center gap-2 cursor-pointer'
+// FIXED:  className='flex items-center gap-2 cursor-pointer' />
  >
  <input
- type='radio'
- name='duration'
- value={value}
- checked={filters.duration === value}
- onChange={e =>
+// FIXED:  type='radio'
+// FIXED:  name='duration'
+// FIXED:  value={value}
+// FIXED:  checked={filters.duration === value} />
+// FIXED:  onChange={e =>
  updateFilter('duration', e.target.value as any)
  }
- className='text-blue-600'
+// FIXED:  className='text-blue-600'
  />
  <span className='text-sm text-gray-700 dark:text-gray-300'>
  {label}
- </span>
- </label>
+// FIXED:  </span>
+// FIXED:  </label>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Features Filter */}
  <div>
  <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
  Features
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {[
  { value: 'live',
@@ -285,27 +285,27 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'Purchased' }].map(({ value, label }: any) => (
  <label
  key={value}
- className='flex items-center gap-2 cursor-pointer'
+// FIXED:  className='flex items-center gap-2 cursor-pointer' />
  >
  <input
- type='checkbox'
- checked={filters.features.includes(value)}
- onChange={() => toggleFeature(value)}
- className='text-blue-600'
+// FIXED:  type='checkbox'
+// FIXED:  checked={filters.features.includes(value)} />
+// FIXED:  onChange={() => toggleFeature(value)}
+// FIXED:  className='text-blue-600'
  />
  <span className='text-sm text-gray-700 dark:text-gray-300'>
  {label}
- </span>
- </label>
+// FIXED:  </span>
+// FIXED:  </label>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Sort By Filter */}
  <div>
  <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
  Sort by
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {[
  { value: 'relevance',
@@ -318,31 +318,31 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'Rating' }].map(({ value, label }: any) => (
  <label
  key={value}
- className='flex items-center gap-2 cursor-pointer'
+// FIXED:  className='flex items-center gap-2 cursor-pointer' />
  >
  <input
- type='radio'
- name='sortBy'
- value={value}
- checked={filters.sortBy === value}
- onChange={e =>
+// FIXED:  type='radio'
+// FIXED:  name='sortBy'
+// FIXED:  value={value}
+// FIXED:  checked={filters.sortBy === value} />
+// FIXED:  onChange={e =>
  updateFilter('sortBy', e.target.value as any)
  }
- className='text-blue-600'
+// FIXED:  className='text-blue-600'
  />
  <span className='text-sm text-gray-700 dark:text-gray-300'>
  {label}
- </span>
- </label>
+// FIXED:  </span>
+// FIXED:  </label>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Quality Filter */}
  <div>
  <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
  Quality
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {[
  { value: 'any',
@@ -355,39 +355,39 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'HDR' }].map(({ value, label }: any) => (
  <label
  key={value}
- className='flex items-center gap-2 cursor-pointer'
+// FIXED:  className='flex items-center gap-2 cursor-pointer' />
  >
  <input
- type='radio'
- name='quality'
- value={value}
- checked={filters.quality === value}
- onChange={e =>
+// FIXED:  type='radio'
+// FIXED:  name='quality'
+// FIXED:  value={value}
+// FIXED:  checked={filters.quality === value} />
+// FIXED:  onChange={e =>
  updateFilter('quality', e.target.value as any)
  }
- className='text-blue-600'
+// FIXED:  className='text-blue-600'
  />
  <span className='text-sm text-gray-700 dark:text-gray-300'>
  {label}
- </span>
- </label>
+// FIXED:  </span>
+// FIXED:  </label>
  ))}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Apply Button */}
  <div className='flex justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700'>
- <button
- onClick={(e: any) => onToggle(e)}
- className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+ <button />
+// FIXED:  onClick={(e: any) => onToggle(e)}
+// FIXED:  className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  Apply Filters
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

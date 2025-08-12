@@ -158,39 +158,39 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
  <>
  <img
  ref={imgRef}
- src={src}
- alt={alt}
- className={`w-full h-full object-cover transition-opacity duration-300 ${
+// FIXED:  src={src}
+// FIXED:  alt={alt}
+// FIXED:  className={`w-full h-full object-cover transition-opacity duration-300 ${
  loaded ? 'opacity-100' : 'opacity-0'
  }`}
  onLoad={handleLoad}
  onError={handleError}
  loading={priority === 'high' ? 'eager' : 'lazy'}
- decoding="async"
+ decoding="async" />
  />
  {!loaded && !error && (
  <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  )}
  {error && (
  <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  )}
- </>
+// FIXED:  </>
  ) : (
  <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center">
  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 });
 
@@ -318,15 +318,15 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 
  return (
  <div
- className={cn(
+// FIXED:  className={cn(
  classes.container,
  'group cursor-pointer transition-transform hover:scale-105',
- className)}
- onClick={(e: any) => handleVideoClick(e)}
+ className)} />
+// FIXED:  onClick={(e: any) => handleVideoClick(e)}
  onKeyDown={handleKeyDown}
  tabIndex={0}
  role="button"
- aria-label={`Play video: ${video.title}`}
+// FIXED:  aria-label={`Play video: ${video.title}`}
  >
  {/* Thumbnail Container */}
  <div className="relative overflow-hidden rounded-lg bg-gray-200">
@@ -339,88 +339,88 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  height={size === 'sm' ? 180 : size === 'md' ? 200 : 240}
  autoplay={true}
  controls={true}
- className={classes.thumbnail}
+// FIXED:  className={classes.thumbnail} />
  />
  {/* Close button for inline player */}
- <button
- onClick={(e: any) => handleCloseInlinePlayer(e)}
- className="absolute top-2 right-2 p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors z-10"
+ <button />
+// FIXED:  onClick={(e: any) => handleCloseInlinePlayer(e)}
+// FIXED:  className="absolute top-2 right-2 p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors z-10"
  title="Close player"
  >
  <XMarkIcon className="w-4 h-4 text-white" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  ) : (
  /* Regular thumbnail */
  <>
  <LazyImage
- src={video.thumbnailUrl}
- alt={video.title}
- className={cn(
+// FIXED:  src={video.thumbnailUrl}
+// FIXED:  alt={video.title}
+// FIXED:  className={cn(
  classes.thumbnail,
  'transition-transform group-hover:scale-110')}
  priority={index < 4 ? 'high' : priority}
- lazy={lazy}
+ lazy={lazy} />
  />
 
  {/* Duration Badge */}
  <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded">
  {formattedDuration}
- </div>
+// FIXED:  </div>
 
  {/* Live Badge */}
  {video.isLive && (
  <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-medium">
  LIVE
- </div>
+// FIXED:  </div>
  )}
 
  {/* Hover Overlay */}
  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
  {isYouTube ? (
  <div className="flex items-center gap-2">
- <button
- onClick={(e: any) => handlePlayInline(e)}
- className="p-2 bg-red-600 hover:bg-red-700 rounded-full transition-colors"
+ <button />
+// FIXED:  onClick={(e: any) => handlePlayInline(e)}
+// FIXED:  className="p-2 bg-red-600 hover:bg-red-700 rounded-full transition-colors"
  title="Play inline"
  >
  <PlayIcon className="w-6 h-6 text-white" />
- </button>
+// FIXED:  </button>
  <span className="text-white text-sm font-medium">Play on YouTube</span>
- </div>
+// FIXED:  </div>
  ) : (
  <PlayIcon className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
  )}
- </div>
- </>
+// FIXED:  </div>
+// FIXED:  </>
  )}
 
  {/* Action Buttons - Hide when inline player is active */}
  {!isPlayingInline && (
  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
- <button
- onClick={(e: any) => handleWatchLaterToggle(e)}
- className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+ <button />
+// FIXED:  onClick={(e: any) => handleWatchLaterToggle(e)}
+// FIXED:  className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
  title={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
- aria-label={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
+// FIXED:  aria-label={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
  >
  {isWatchLater ? (
  <CheckIcon className="w-4 h-4 text-white" />
  ) : (
  <ClockIcon className="w-4 h-4 text-white" />
  )}
- </button>
- <button
- onClick={(e: any) => handleMenuClick(e)}
- className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleMenuClick(e)}
+// FIXED:  className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
  title="More options"
- aria-label="More options"
- aria-expanded={showMenu}
- aria-haspopup="menu"
+// FIXED:  aria-label="More options"
+// FIXED:  aria-expanded={showMenu}
+// FIXED:  aria-haspopup="menu"
  >
  <EllipsisVerticalIcon className="w-4 h-4 text-white" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
 
  {/* Dropdown Menu - Hide when inline player is active */}
@@ -429,12 +429,12 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  isOpen={showMenu}
  onClose={closeMenu}
  menuRef={menuRef}
- className="top-12 right-2"
+// FIXED:  className="top-12 right-2"
  position="bottom-right"
- aria-label="Video options menu"
+// FIXED:  aria-label="Video options menu" />
  >
- <DropdownMenuItem
- onClick={(e: Event) => {
+ <DropdownMenuItem />
+// FIXED:  onClick={(e: Event) => {
  e.stopPropagation();
  closeMenu();
  // Open save to playlist modal
@@ -443,12 +443,12 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  window.dispatchEvent(event);
  }
  icon={<PlusIcon className="w-4 h-4" />}
- aria-label="Save video to playlist"
+// FIXED:  aria-label="Save video to playlist"
  >
  Save to playlist
- </DropdownMenuItem>
- <DropdownMenuItem
- onClick={(e: Event) => {
+// FIXED:  </DropdownMenuItem>
+ <DropdownMenuItem />
+// FIXED:  onClick={(e: Event) => {
  e.stopPropagation();
  closeMenu();
  // Share video functionality
@@ -473,14 +473,14 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  icon={
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
- </svg>
+// FIXED:  </svg>
  }
- aria-label="Share video"
+// FIXED:  aria-label="Share video"
  >
  Share
- </DropdownMenuItem>
- <DropdownMenuItem
- onClick={(e: Event) => {
+// FIXED:  </DropdownMenuItem>
+ <DropdownMenuItem />
+// FIXED:  onClick={(e: Event) => {
  e.stopPropagation();
  closeMenu();
  // Mark video as not interested
@@ -506,15 +506,15 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  icon={
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636" />
- </svg>
+// FIXED:  </svg>
  }
- aria-label="Mark as not interested"
+// FIXED:  aria-label="Mark as not interested"
  >
  Not interested
- </DropdownMenuItem>
+// FIXED:  </DropdownMenuItem>
  <DropdownMenuSeparator />
- <DropdownMenuItem
- onClick={(e: Event) => {
+ <DropdownMenuItem />
+// FIXED:  onClick={(e: Event) => {
  e.stopPropagation();
  closeMenu();
  // Report video functionality
@@ -549,42 +549,42 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  icon={
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
- </svg>
+// FIXED:  </svg>
  }
- aria-label="Report video"
+// FIXED:  aria-label="Report video"
  >
  Report
- </DropdownMenuItem>
- </DropdownMenu>
+// FIXED:  </DropdownMenuItem>
+// FIXED:  </DropdownMenu>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Content */}
  <article className="mt-3 space-y-2">
  {/* Title */}
  <h3 className={cn(classes.title, 'hover:text-blue-600 transition-colors')}>
  {video.title}
- </h3>
+// FIXED:  </h3>
 
  {/* Channel Info */}
  {showChannel && (
  <div className="flex items-center gap-2">
  <img
- src={video.channelAvatarUrl}
- alt={video.channelName}
- className="w-6 h-6 rounded-full object-cover"
- loading="lazy"
+// FIXED:  src={video.channelAvatarUrl}
+// FIXED:  alt={video.channelName}
+// FIXED:  className="w-6 h-6 rounded-full object-cover"
+ loading="lazy" />
  />
- <button
- onClick={(e: any) => handleChannelClick(e)}
- className={cn(
+ <button />
+// FIXED:  onClick={(e: any) => handleChannelClick(e)}
+// FIXED:  className={cn(
  classes.channel,
  'hover:text-gray-900 transition-colors truncate focus:outline-none focus:ring-2 focus:ring-blue-500 rounded')}
- aria-label={`Go to ${video.channelName} channel`}
+// FIXED:  aria-label={`Go to ${video.channelName} channel`}
  >
  {video.channelName}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
 
  {/* Meta Info */}
@@ -593,14 +593,14 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  <span aria-hidden="true">•</span>
  <time dateTime={video.uploadedAt} aria-label={`Published ${formattedTimeAgo}`}>
  {formattedTimeAgo}
- </time>
- </div>
+// FIXED:  </time>
+// FIXED:  </div>
 
  {/* Description */}
  {showDescription && video.description && (
  <p className={cn(classes.meta, 'line-clamp-2 mt-2')}>
  {video.description}
- </p>
+// FIXED:  </p>
  )}
 
  {/* Tags */}
@@ -609,16 +609,16 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  {video.tags.slice(0, 3).map((tag: string) => (
  <span
  key={tag}
- className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
- role="listitem"
+// FIXED:  className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
+ role="listitem" />
  >
  #{tag}
- </span>
+// FIXED:  </span>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </article>
- </div>
+// FIXED:  </article>
+// FIXED:  </div>
  );
 });
 

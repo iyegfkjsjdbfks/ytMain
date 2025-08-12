@@ -60,7 +60,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -95,7 +95,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -118,7 +118,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -144,7 +144,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -186,7 +186,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -210,7 +210,7 @@ describe('VideoDescription Component', () => {
  showFullDescription={false}
  isSummarizing={false}
  canSummarize={true}
- onSubscribe={onSubscribe}
+ onSubscribe={onSubscribe} />
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
  />
@@ -235,7 +235,7 @@ describe('VideoDescription Component', () => {
  showFullDescription={false}
  isSummarizing={false}
  canSummarize={true}
- onSubscribe={onSubscribe}
+ onSubscribe={onSubscribe} />
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
  />
@@ -271,7 +271,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -298,7 +298,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -336,7 +336,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -365,7 +365,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -395,7 +395,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -423,7 +423,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -444,7 +444,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -464,7 +464,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -484,7 +484,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -506,7 +506,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -535,7 +535,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -562,7 +562,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -588,7 +588,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
@@ -615,7 +615,7 @@ describe('VideoDescription Component', () => {
  isSubscribed={false}
  showFullDescription={false}
  isSummarizing={false}
- canSummarize={true}
+ canSummarize={true} />
  onSubscribe={() => {}
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}

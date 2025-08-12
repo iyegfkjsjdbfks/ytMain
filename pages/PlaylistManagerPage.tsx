@@ -226,12 +226,12 @@ return;
  <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded mb-4" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -242,7 +242,7 @@ return;
  <div className="mb-8">
  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Playlist Manager</h1>
  <p className="text-gray-600 dark:text-gray-400">Organize and manage your video playlists</p>
- </div>
+// FIXED:  </div>
 
  {/* Stats */}
  {stats && (
@@ -250,28 +250,28 @@ return;
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Playlists</h3>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalPlaylists}</p>
- </div>
+// FIXED:  </div>
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Videos</h3>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalVideos}</p>
- </div>
+// FIXED:  </div>
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Views</h3>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalViews.toLocaleString()}</p>
- </div>
+// FIXED:  </div>
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Public</h3>
  <p className="text-2xl font-bold text-green-600">{stats.publicPlaylists}</p>
- </div>
+// FIXED:  </div>
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Unlisted</h3>
  <p className="text-2xl font-bold text-yellow-600">{stats.unlistedPlaylists}</p>
- </div>
+// FIXED:  </div>
  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Private</h3>
  <p className="text-2xl font-bold text-red-600">{stats.privatePlaylists}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -279,62 +279,62 @@ return;
  <div className="lg:col-span-2">
  {/* Controls */}
  <div className="flex flex-col sm:flex-row gap-4 mb-6">
- <button
- onClick={() => setShowCreateModal(true)}
- className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+ <button />
+// FIXED:  onClick={() => setShowCreateModal(true)}
+// FIXED:  className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
  >
  <PlusIcon className="w-5 h-5" />
  <span>Create Playlist</span>
- </button>
+// FIXED:  </button>
 
  <input
- type="text"
- placeholder="Search playlists..."
- value={searchTerm}
- onChange={(e) => setSearchTerm(e.target.value)}
- className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  type="text"
+// FIXED:  placeholder="Search playlists..."
+// FIXED:  value={searchTerm} />
+// FIXED:  onChange={(e) => setSearchTerm(e.target.value)}
+// FIXED:  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  />
 
  <select
- value={sortBy}
- onChange={(e) => setSortBy(e.target.value as any)}
- className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={(e) => setSortBy(e.target.value as any)}
+// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  >
  <option value="updated">Last Updated</option>
  <option value="created">Date Created</option>
  <option value="title">Title</option>
  <option value="views">Views</option>
- </select>
+// FIXED:  </select>
 
  <select
- value={filterVisibility}
- onChange={(e) => setFilterVisibility(e.target.value as any)}
- className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  value={filterVisibility} />
+// FIXED:  onChange={(e) => setFilterVisibility(e.target.value as any)}
+// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  >
  <option value="all">All Visibility</option>
  <option value="public">Public</option>
  <option value="unlisted">Unlisted</option>
  <option value="private">Private</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {/* Playlists Grid */}
  <div className="space-y-4">
  {filteredPlaylists.map((playlist) => (
  <div
  key={playlist.id}
- className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer transition-all ${
+// FIXED:  className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer transition-all ${
  selectedPlaylist?.id === playlist.id
  ? 'ring-2 ring-blue-500 border-blue-500'
  : 'hover:shadow-md'
- }`}
- onClick={() => setSelectedPlaylist(playlist)}
+ }`} />
+// FIXED:  onClick={() => setSelectedPlaylist(playlist)}
  >
  <div className="flex items-start space-x-4">
  <img
- src={playlist.thumbnail}
- alt={playlist.title}
- className="w-24 h-16 object-cover rounded"
+// FIXED:  src={playlist.thumbnail}
+// FIXED:  alt={playlist.title}
+// FIXED:  className="w-24 h-16 object-cover rounded" />
  />
  <div className="flex-1 min-w-0">
  <div className="flex items-start justify-between">
@@ -345,39 +345,39 @@ return;
  <div className="flex items-center space-x-1">
  {getVisibilityIcon(playlist.visibility)}
  <span className="capitalize">{playlist.visibility}</span>
- </div>
+// FIXED:  </div>
  <span>{playlist.videoCount} videos</span>
  <span>{playlist.totalViews.toLocaleString()} views</span>
  <span>Updated {formatDate(playlist.lastUpdated)}</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-2 ml-4">
- <button
- onClick={(e: any) => {
+ <button />
+// FIXED:  onClick={(e: any) => {
  e.stopPropagation();
  setSelectedPlaylist(playlist);
 }
- className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+// FIXED:  className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
  >
  <PencilIcon className="w-4 h-4" />
- </button>
- <button
- onClick={(e: any) => {
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => {
  e.stopPropagation();
  handleDeletePlaylist(playlist.id);
  }
- className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400"
+// FIXED:  className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400"
  >
  <TrashIcon className="w-4 h-4" />
- </button>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Playlist Details */}
  <div className="lg:col-span-1">
@@ -389,30 +389,30 @@ return;
  <div>
  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Description:</span>
  <p className="text-sm text-gray-900 dark:text-white mt-1">{selectedPlaylist.description}</p>
- </div>
+// FIXED:  </div>
 
  <div className="grid grid-cols-2 gap-4 text-sm">
  <div>
  <span className="text-gray-500 dark:text-gray-400">Videos:</span>
  <p className="font-medium text-gray-900 dark:text-white">{selectedPlaylist.videoCount}</p>
- </div>
+// FIXED:  </div>
  <div>
  <span className="text-gray-500 dark:text-gray-400">Views:</span>
  <p className="font-medium text-gray-900 dark:text-white">{selectedPlaylist.totalViews.toLocaleString()}</p>
- </div>
+// FIXED:  </div>
  <div>
  <span className="text-gray-500 dark:text-gray-400">Visibility:</span>
  <div className="flex items-center space-x-1">
  {getVisibilityIcon(selectedPlaylist.visibility)}
  <span className="font-medium text-gray-900 dark:text-white capitalize">{selectedPlaylist.visibility}</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div>
  <span className="text-gray-500 dark:text-gray-400">Created:</span>
  <p className="font-medium text-gray-900 dark:text-white">{formatDate(selectedPlaylist.createdDate)}</p>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Videos List */}
  <div>
@@ -430,14 +430,14 @@ return;
  ref={provided.innerRef}
  {...provided.draggableProps}
  {...provided.dragHandleProps}
- className={`flex items-center space-x-3 p-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 ${
+// FIXED:  className={`flex items-center space-x-3 p-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 ${
  snapshot.isDragging ? 'shadow-lg' : ''
- }`}
+ }`} />
  >
  <img
- src={video.thumbnail}
- alt={video.title}
- className="w-12 h-8 object-cover rounded"
+// FIXED:  src={video.thumbnail}
+// FIXED:  alt={video.title}
+// FIXED:  className="w-12 h-8 object-cover rounded" />
  />
  <div className="flex-1 min-w-0">
  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{video.title}</p>
@@ -445,27 +445,27 @@ return;
  <span>{video.duration}</span>
  <span>•</span>
  <span>{video.views.toLocaleString()} views</span>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </Draggable>
+// FIXED:  </Draggable>
  ))}
  {provided.placeholder}
- </div>
+// FIXED:  </div>
  )}
- </Droppable>
- </DragDropContext>
- </div>
- </div>
+// FIXED:  </Droppable>
+// FIXED:  </DragDropContext>
+// FIXED:  </div>
+// FIXED:  </div>
  ) : (
  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 text-center">
  <UserGroupIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
  <p className="text-gray-500 dark:text-gray-400">Select a playlist to view details</p>
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Create Playlist Modal */}
  {showCreateModal && (
@@ -477,62 +477,62 @@ return;
  <div>
  <label htmlFor="new-playlist-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
  <input
- type="text"
- id="new-playlist-title"
- value={newPlaylist.title}
- onChange={(e) => setNewPlaylist({ ...newPlaylist as any, title: e.target.value })}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
- placeholder="Enter playlist title"
+// FIXED:  type="text"
+// FIXED:  id="new-playlist-title"
+// FIXED:  value={newPlaylist.title} />
+// FIXED:  onChange={(e) => setNewPlaylist({ ...newPlaylist as any, title: e.target.value })}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  placeholder="Enter playlist title"
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="new-playlist-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
  <textarea
- id="new-playlist-description"
- value={newPlaylist.description}
- onChange={(e) => setNewPlaylist({ ...newPlaylist as any, description: e.target.value })}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+// FIXED:  id="new-playlist-description"
+// FIXED:  value={newPlaylist.description} />
+// FIXED:  onChange={(e) => setNewPlaylist({ ...newPlaylist as any, description: e.target.value })}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
  rows={3}
- placeholder="Enter playlist description"
+// FIXED:  placeholder="Enter playlist description"
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="new-playlist-visibility" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Visibility</label>
  <select
- id="new-playlist-visibility"
- value={newPlaylist.visibility}
- onChange={(e) => setNewPlaylist({ ...newPlaylist as any, visibility: e.target.value as any })}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  id="new-playlist-visibility"
+// FIXED:  value={newPlaylist.visibility} />
+// FIXED:  onChange={(e) => setNewPlaylist({ ...newPlaylist as any, visibility: e.target.value as any })}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  >
  <option value="public">Public</option>
  <option value="unlisted">Unlisted</option>
  <option value="private">Private</option>
- </select>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="flex justify-end space-x-3 mt-6">
- <button
- onClick={() => setShowCreateModal(false)}
- className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+ <button />
+// FIXED:  onClick={() => setShowCreateModal(false)}
+// FIXED:  className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  Cancel
- </button>
- <button
- onClick={(e: any) => handleCreatePlaylist(e)}
- disabled={!newPlaylist.title.trim()}
- className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleCreatePlaylist(e)}
+// FIXED:  disabled={!newPlaylist.title.trim()}
+// FIXED:  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
  >
  Create
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

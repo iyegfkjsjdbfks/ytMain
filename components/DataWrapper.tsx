@@ -44,7 +44,7 @@ export function DataWrapper<T>({
  return (
  <ErrorState
  title={errorTitle || 'Failed to load data'}
- message={error}
+ message={error} />
  />
  );
  }
@@ -54,7 +54,7 @@ export function DataWrapper<T>({
  <EmptyState
  title={emptyState.title}
  message={emptyState.message}
- icon={emptyState.icon}
+ icon={emptyState.icon} />
  />
  );
  }

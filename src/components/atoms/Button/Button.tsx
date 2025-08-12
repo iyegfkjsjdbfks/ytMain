@@ -51,20 +51,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
  return (
  <Comp
- className={cn(buttonVariants({ variant, size, className }))}
+// FIXED:  className={cn(buttonVariants({ variant, size, className }))}
  ref={ref}
- disabled={isLoading}
- {...props}
+// FIXED:  disabled={isLoading}
+ {...props} />
  >
  {isLoading ? (
  <>
  <span className='mr-2 h-4 w-4 animate-spin' />
  Loading...
- </>
+// FIXED:  </>
  ) : (
  children
  )}
- </Comp>
+// FIXED:  </Comp>
  );
  }
 );

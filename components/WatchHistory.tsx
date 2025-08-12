@@ -54,7 +54,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }: any) => {
  <div className="flex items-center mb-4">
  <HistoryIcon className="w-6 h-6 mr-2 text-neutral-600 dark:text-neutral-400" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Continue watching</h2>
- </div>
+// FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {Array.from({ length: 3 }).map((_, index) => (
  <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
@@ -66,13 +66,13 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }: any) => {
  <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -82,9 +82,9 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }: any) => {
  <div className="flex items-center mb-4">
  <HistoryIcon className="w-6 h-6 mr-2 text-neutral-600 dark:text-neutral-400" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Continue watching</h2>
- </div>
+// FIXED:  </div>
  <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -94,12 +94,12 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }: any) => {
  <div className="flex items-center mb-4">
  <HistoryIcon className="w-6 h-6 mr-2 text-neutral-600 dark:text-neutral-400" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Continue watching</h2>
- </div>
+// FIXED:  </div>
  <div className="text-center py-8 text-neutral-600 dark:text-neutral-400">
  <p className="mb-2">No watch history yet</p>
  <p className="text-sm">Videos you watch will appear here</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -109,14 +109,14 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }: any) => {
  <div className="flex items-center">
  <HistoryIcon className="w-6 h-6 mr-2 text-neutral-600 dark:text-neutral-400" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Continue watching</h2>
- </div>
+// FIXED:  </div>
  <Link
  to="/history"
- className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
+// FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
  View All
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {historyVideos.map((video: any) => (
  <div key={video.id} className="relative">
@@ -124,14 +124,14 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }: any) => {
  {/* Progress bar overlay to simulate watch progress */}
  <div className="absolute bottom-0 left-0 right-0 h-1 bg-neutral-200 dark:bg-neutral-700 rounded-b-lg overflow-hidden">
  <div
- className="h-full bg-red-600 dark:bg-red-500"
- style={{ width: `${Math.floor(Math.random() * 70) + 10}%` }
+// FIXED:  className="h-full bg-red-600 dark:bg-red-500"
+// FIXED:  style={{ width: `${Math.floor(Math.random() * 70) + 10}%` } />
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

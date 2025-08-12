@@ -89,107 +89,107 @@ export const LoginForm: React.FC = () => {
  {error && (
  <div className='mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded'>
  {error}
- </div>
+// FIXED:  </div>
  )}
 
  <form onSubmit={(e: any) => handleSubmit(e)}>
  <div className='mb-4'>
  <label
- className='block text-gray-700 text-sm font-bold mb-2'
- htmlFor='email'
+// FIXED:  className='block text-gray-700 text-sm font-bold mb-2'
+// FIXED:  htmlFor='email' />
  >
  Email
- </label>
+// FIXED:  </label>
  <input
- id='email'
- type='email'
- name='email'
- className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+// FIXED:  id='email'
+// FIXED:  type='email'
+// FIXED:  name='email'
+// FIXED:  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
  formErrors.email
  ? 'border-red-500 focus:ring-red-200'
  : 'border-gray-300 focus:ring-blue-200'
  }`}
- value={formData.email}
- onChange={(e: any) => handleChange(e)}
- disabled={isSubmitting}
+// FIXED:  value={formData.email} />
+// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  disabled={isSubmitting}
  />
  {formErrors.email && (
  <p className='text-red-500 text-xs mt-1'>{formErrors.email}</p>
  )}
- </div>
+// FIXED:  </div>
 
  <div className='mb-6'>
  <label
- className='block text-gray-700 text-sm font-bold mb-2'
- htmlFor='password'
+// FIXED:  className='block text-gray-700 text-sm font-bold mb-2'
+// FIXED:  htmlFor='password' />
  >
  Password
- </label>
+// FIXED:  </label>
  <input
- id='password'
- type='password'
- name='password'
- className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+// FIXED:  id='password'
+// FIXED:  type='password'
+// FIXED:  name='password'
+// FIXED:  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
  formErrors.password
  ? 'border-red-500 focus:ring-red-200'
  : 'border-gray-300 focus:ring-blue-200'
  }`}
- value={formData.password}
- onChange={(e: any) => handleChange(e)}
- disabled={isSubmitting}
+// FIXED:  value={formData.password} />
+// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  disabled={isSubmitting}
  />
  {formErrors.password && (
  <p className='text-red-500 text-xs mt-1'>{formErrors.password}</p>
  )}
- </div>
+// FIXED:  </div>
 
  <div className='flex items-center justify-between mb-6'>
  <div className='flex items-center'>
  <input
- id='rememberMe'
- type='checkbox'
- name='rememberMe'
- checked={formData.rememberMe}
- onChange={(e: any) => handleChange(e)}
- className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
- disabled={isSubmitting}
+// FIXED:  id='rememberMe'
+// FIXED:  type='checkbox'
+// FIXED:  name='rememberMe'
+// FIXED:  checked={formData.rememberMe} />
+// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
+// FIXED:  disabled={isSubmitting}
  />
  <label
- htmlFor='rememberMe'
- className='ml-2 block text-sm text-gray-700'
+// FIXED:  htmlFor='rememberMe'
+// FIXED:  className='ml-2 block text-sm text-gray-700' />
  >
  Remember me
- </label>
- </div>
+// FIXED:  </label>
+// FIXED:  </div>
 
  <div className='text-sm'>
  <a
- href='/forgot-password'
- className='text-blue-600 hover:text-blue-800'
+// FIXED:  href='/forgot-password'
+// FIXED:  className='text-blue-600 hover:text-blue-800' />
  >
  Forgot your password?
- </a>
- </div>
- </div>
+// FIXED:  </a>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <button
- type='submit'
- className={`w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ${
+// FIXED:  type='submit'
+// FIXED:  className={`w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ${
  isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
  }`}
- disabled={isSubmitting}
+// FIXED:  disabled={isSubmitting} />
  >
  {isSubmitting ? 'Signing in...' : 'Sign In'}
- </button>
+// FIXED:  </button>
 
  <div className='text-center mt-4'>
  <span className='text-gray-600'>Don't have an account?</span>{' '}
  <a href='/register' className='text-blue-600 hover:text-blue-800'>
  Sign up
- </a>
- </div>
- </form>
- </div>
+// FIXED:  </a>
+// FIXED:  </div>
+// FIXED:  </form>
+// FIXED:  </div>
  );
 };
 

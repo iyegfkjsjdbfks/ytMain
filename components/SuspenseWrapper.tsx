@@ -9,7 +9,7 @@ const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({ children, fallback })
   return (
     <Suspense fallback={fallback || <div>Loading...</div>}>
       {children}
-    </Suspense>
+// FIXED:     </Suspense>
   );
 };
 

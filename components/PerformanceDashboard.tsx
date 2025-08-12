@@ -81,25 +81,25 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
  {/* Header */}
  <div className="flex items-center justify-between mb-2">
  <h3 className="font-semibold">Performance Monitor</h3>
- <button
- onClick={() => setIsExpanded(!isExpanded)}
- className="text-gray-300 hover:text-white"
+ <button />
+// FIXED:  onClick={() => setIsExpanded(!isExpanded)}
+// FIXED:  className="text-gray-300 hover:text-white"
  >
  {isExpanded ? '−' : '+'}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Summary Stats */}
  <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
  <div className="bg-blue-900 bg-opacity-50 p-2 rounded">
  <div className="text-blue-300">Avg Render</div>
  <div className="font-bold">{averageRenderTime.toFixed(1)}ms</div>
- </div>
+// FIXED:  </div>
  <div className="bg-green-900 bg-opacity-50 p-2 rounded">
  <div className="text-green-300">API Calls</div>
  <div className="font-bold">{apiCallsCount}</div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Detailed Metrics */}
  {isExpanded && (
@@ -112,14 +112,14 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
  <div key={index} className="flex justify-between items-center py-1 border-b border-gray-700">
  <span className={`${getTypeColor(metric.type)} truncate max-w-32`}>
  {metric.name}
- </span>
+// FIXED:  </span>
  <span className="text-white font-mono">
  {metric.value.toFixed(1)}ms
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  ))
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Performance Tips */}
@@ -132,31 +132,31 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
  <li>Adding React.memo to components</li>
  <li>Using useCallback for event handlers</li>
  <li>Implementing virtual scrolling</li>
- </ul>
- </div>
- </div>
+// FIXED:  </ul>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Controls */}
  <div className="flex justify-between mt-3 pt-2 border-t border-gray-700">
- <button
- onClick={() => performanceMonitor.clearMetrics()}
- className="text-xs text-red-400 hover:text-red-300"
+ <button />
+// FIXED:  onClick={() => performanceMonitor.clearMetrics()}
+// FIXED:  className="text-xs text-red-400 hover:text-red-300"
  >
  Clear
- </button>
- <button
- onClick={() => {
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => {
  const metrics = performanceMonitor.getMetrics();
  (console as any).table(metrics);
  }
- className="text-xs text-blue-400 hover:text-blue-300"
+// FIXED:  className="text-xs text-blue-400 hover:text-blue-300"
  >
  Log Report
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 });
 

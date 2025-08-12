@@ -210,57 +210,57 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  {!controls && (
  <div className='mt-2 bg-gray-100 p-2 rounded'>
  <div className='flex items-center space-x-2 mb-2'>
- <button
- onClick={(e: any) => togglePlay(e)}
- className='p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600'
- aria-label={isPlaying ? 'Pause' : 'Play'}
+ <button />
+// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  className='p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600'
+// FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
  {isPlaying ? '⏸' : '▶️'}
- </button>
+// FIXED:  </button>
 
  <div className='flex-1'>
  <input
- type='range'
+// FIXED:  type='range'
  min='0'
  max={duration || 100}
- value={currentTime}
- onChange={(e: any) => handleSeek(e)}
- className='w-full'
- aria-label='Seek'
+// FIXED:  value={currentTime} />
+// FIXED:  onChange={(e: any) => handleSeek(e)}
+// FIXED:  className='w-full'
+// FIXED:  aria-label='Seek'
  />
- </div>
+// FIXED:  </div>
 
  <div className='text-sm text-gray-600 w-20 text-right'>
  {formatTime(currentTime)} / {formatTime(duration)}
- </div>
+// FIXED:  </div>
 
- <button
- onClick={(e: any) => toggleMute(e)}
- className='p-2 rounded-full hover:bg-gray-200'
- aria-label={isMuted ? 'Unmute' : 'Mute'}
+ <button />
+// FIXED:  onClick={(e: any) => toggleMute(e)}
+// FIXED:  className='p-2 rounded-full hover:bg-gray-200'
+// FIXED:  aria-label={isMuted ? 'Unmute' : 'Mute'}
  >
  {isMuted ? '🔇' : volume > 50 ? '🔊' : '🔉'}
- </button>
+// FIXED:  </button>
 
  <div className='w-24'>
  <input
- type='range'
+// FIXED:  type='range'
  min='0'
  max='100'
- value={isMuted ? 0 : volume}
- onChange={(e: any) => handleVolumeChange(e)}
- className='w-full'
- aria-label='Volume'
+// FIXED:  value={isMuted ? 0 : volume} />
+// FIXED:  onChange={(e: any) => handleVolumeChange(e)}
+// FIXED:  className='w-full'
+// FIXED:  aria-label='Volume'
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='text-xs text-gray-500'>
  Player State: {YouTubePlayerState[playerState || -1]}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

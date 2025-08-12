@@ -19,10 +19,10 @@ export const StudioLayout: React.FC = () => {
  <div className='max-w-7xl mx-auto'>
  {/* The Outlet component renders the current route's element */}
  <Outlet />
- </div>
- </main>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </main>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

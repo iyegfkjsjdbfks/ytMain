@@ -60,23 +60,23 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  <div className={`bg-gradient-to-t from-black/80 to-transparent p-4 ${className}`}>
  {/* Progress Bar */}
  <div
- className="w-full h-1 bg-gray-600 rounded-full cursor-pointer mb-4 group"
- onClick={(e: any) => handleProgressClick(e)}
+// FIXED:  className="w-full h-1 bg-gray-600 rounded-full cursor-pointer mb-4 group" />
+// FIXED:  onClick={(e: any) => handleProgressClick(e)}
  >
  <div
- className="h-full bg-red-600 rounded-full relative group-hover:h-1.5 transition-all"
- style={{ width: `${progress}%` }
+// FIXED:  className="h-full bg-red-600 rounded-full relative group-hover:h-1.5 transition-all"
+// FIXED:  style={{ width: `${progress}%` } />
  >
  <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Controls */}
  <div className="flex items-center justify-between">
  <div className="flex items-center space-x-4">
  {/* Play/Pause */}
- <ActionButton
- onClick={(e: any) => onPlayPause(e)}
+ <ActionButton />
+// FIXED:  onClick={(e: any) => onPlayPause(e)}
  ariaLabel={isPlaying ? 'Pause' : 'Play'}
  size="lg"
  >
@@ -85,12 +85,12 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  ) : (
  <PlayIcon className="w-6 h-6" />
  )}
- </ActionButton>
+// FIXED:  </ActionButton>
 
  {/* Volume Controls */}
  <div className="flex items-center space-x-2 group">
- <ActionButton
- onClick={(e: any) => onMuteToggle(e)}
+ <ActionButton />
+// FIXED:  onClick={(e: any) => onMuteToggle(e)}
  ariaLabel={isMuted ? 'Unmute' : 'Mute'}
  >
  {isMuted ? (
@@ -98,31 +98,31 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  ) : (
  <SpeakerWaveIcon className="w-5 h-5" />
  )}
- </ActionButton>
+// FIXED:  </ActionButton>
 
  <input
- type="range"
+// FIXED:  type="range"
  min="0"
  max="1"
  step="0.1"
- value={isMuted ? 0 : volume}
- onChange={(e: any) => handleVolumeChange(e)}
- className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
+// FIXED:  value={isMuted ? 0 : volume} />
+// FIXED:  onChange={(e: any) => handleVolumeChange(e)}
+// FIXED:  className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
  />
- </div>
+// FIXED:  </div>
 
  {/* Time Display */}
  <span className="text-white text-sm font-mono">
  {formatTime(currentTime)} / {formatTime(duration)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-2">
  {/* Playback Rate */}
  <select
- value={playbackRate}
- onChange={(e) => onPlaybackRateChange(parseFloat(e.target.value))}
- className="bg-black bg-opacity-50 text-white text-sm rounded px-2 py-1 border-none outline-none"
+// FIXED:  value={playbackRate} />
+// FIXED:  onChange={(e) => onPlaybackRateChange(parseFloat(e.target.value))}
+// FIXED:  className="bg-black bg-opacity-50 text-white text-sm rounded px-2 py-1 border-none outline-none"
  >
  <option value={0.25}>0.25x</option>
  <option value={0.5}>0.5x</option>
@@ -131,19 +131,19 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  <option value={1.25}>1.25x</option>
  <option value={1.5}>1.5x</option>
  <option value={2}>2x</option>
- </select>
+// FIXED:  </select>
 
  {/* Settings */}
- <ActionButton
- onClick={(e: any) => onSettingsToggle(e)}
+ <ActionButton />
+// FIXED:  onClick={(e: any) => onSettingsToggle(e)}
  ariaLabel="Settings"
  >
  <Cog6ToothIcon className="w-5 h-5" />
- </ActionButton>
+// FIXED:  </ActionButton>
 
  {/* Fullscreen */}
- <ActionButton
- onClick={(e: any) => onFullscreenToggle(e)}
+ <ActionButton />
+// FIXED:  onClick={(e: any) => onFullscreenToggle(e)}
  ariaLabel={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
  >
  {isFullscreen ? (
@@ -151,10 +151,10 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  ) : (
  <ArrowsPointingOutIcon className="w-5 h-5" />
  )}
- </ActionButton>
- </div>
- </div>
- </div>
+// FIXED:  </ActionButton>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

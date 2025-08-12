@@ -12,8 +12,8 @@ const SettingSection: React.FC<{ title,
  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{title}</h3>
  <div className="space-y-4">
  {children}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 );
 
 const ToggleSetting: React.FC<{,
@@ -25,26 +25,26 @@ const ToggleSetting: React.FC<{,
  <div className="flex-1">
  <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
  {label}
- </label>
+// FIXED:  </label>
  {description && (
  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
  {description}
- </p>
+// FIXED:  </p>
  )}
- </div>
- <button
- onClick={() => onChange(!checked)}
- className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
+// FIXED:  </div>
+ <button />
+// FIXED:  onClick={() => onChange(!checked)}
+// FIXED:  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
  checked ? 'bg-sky-600' : 'bg-neutral-200 dark:bg-neutral-600'
  }`}
  >
  <span
- className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+// FIXED:  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
  checked ? 'translate-x-6' : 'translate-x-1'
- }`}
+ }`} />
  />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 );
 
 const SelectSetting: React.FC<{
@@ -54,17 +54,17 @@ const SelectSetting: React.FC<{
  <div className="flex items-center justify-between py-2">
  <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
  {label}
- </label>
+// FIXED:  </label>
  <select
- value={value}
- onChange={(e) => onChange(e.target.value)}
- className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+// FIXED:  value={value} />
+// FIXED:  onChange={(e) => onChange(e.target.value)}
+// FIXED:  className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
  >
  {options.map((option: any) => (
  <option key={option} value={option}>{option}</option>
  ))}
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 );
 
 const SettingsPage: React.FC = () => {
@@ -97,21 +97,21 @@ const SettingsPage: React.FC = () => {
  <Cog8ToothIcon className="w-6 h-6 text-neutral-600 dark:text-neutral-400 mr-3" />
  <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50">
  General Settings
- </h2>
- </div>
+// FIXED:  </h2>
+// FIXED:  </div>
  <p className="text-sm text-neutral-600 dark:text-neutral-400">
  Manage your account preferences and application settings
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="space-y-6">
  <SettingSection title="Appearance">
  <div className="space-y-3">
  <p className="text-sm text-neutral-600 dark:text-neutral-400">Choose your preferred theme</p>
  <div className="flex space-x-3">
- <button
- onClick={() => toggleTheme()}
- className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
+ <button />
+// FIXED:  onClick={() => toggleTheme()}
+// FIXED:  className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
  theme === 'light'
  ? 'bg-sky-100 dark:bg-sky-900/30 border-sky-300 dark:border-sky-700 text-sky-700 dark:text-sky-300'
  : 'bg-neutral-100 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
@@ -120,10 +120,10 @@ const SettingsPage: React.FC = () => {
  <SunIcon className="w-4 h-4" />
  <span className="text-sm font-medium">Light</span>
  {theme === 'light' && <CheckIcon className="w-4 h-4" />}
- </button>
- <button
- onClick={() => toggleTheme()}
- className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => toggleTheme()}
+// FIXED:  className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
  theme === 'dark'
  ? 'bg-sky-100 dark:bg-sky-900/30 border-sky-300 dark:border-sky-700 text-sky-700 dark:text-sky-300'
  : 'bg-neutral-100 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
@@ -132,94 +132,94 @@ const SettingsPage: React.FC = () => {
  <MoonIcon className="w-4 h-4" />
  <span className="text-sm font-medium">Dark</span>
  {theme === 'dark' && <CheckIcon className="w-4 h-4" />}
- </button>
- </div>
- </div>
- </SettingSection>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </SettingSection>
 
  <SettingSection title="Playback">
  <ToggleSetting
  label="Autoplay"
  description="Automatically play the next video"
- checked={autoplay}
- onChange={(e: any) => setAutoplay(e)}
+// FIXED:  checked={autoplay} />
+// FIXED:  onChange={(e: any) => setAutoplay(e)}
  />
  <ToggleSetting
  label="Annotations"
  description="Show video annotations and cards"
- checked={annotations}
- onChange={(e: any) => setAnnotations(e)}
+// FIXED:  checked={annotations} />
+// FIXED:  onChange={(e: any) => setAnnotations(e)}
  />
  <ToggleSetting
  label="Captions"
  description="Always show captions"
- checked={captions}
- onChange={(e: any) => setCaptions(e)}
+// FIXED:  checked={captions} />
+// FIXED:  onChange={(e: any) => setCaptions(e)}
  />
  <SelectSetting
  label="Video Quality"
- value={videoQuality}
- options={['Auto', '144p', '240p', '360p', '480p', '720p', '1080p', '1440p', '2160p']}
- onChange={(e: any) => setVideoQuality(e)}
+// FIXED:  value={videoQuality}
+ options={['Auto', '144p', '240p', '360p', '480p', '720p', '1080p', '1440p', '2160p']} />
+// FIXED:  onChange={(e: any) => setVideoQuality(e)}
  />
- </SettingSection>
+// FIXED:  </SettingSection>
 
  <SettingSection title="Privacy">
  <ToggleSetting
  label="Restricted Mode"
  description="Hide potentially mature content"
- checked={restrictedMode}
- onChange={(e: any) => setRestrictedMode(e)}
+// FIXED:  checked={restrictedMode} />
+// FIXED:  onChange={(e: any) => setRestrictedMode(e)}
  />
  <SelectSetting
  label="Location"
- value={location}
- options={['United States', 'Canada', 'United Kingdom', 'Germany', 'France', 'Japan', 'Australia']}
- onChange={(e: any) => setLocation(e)}
+// FIXED:  value={location}
+ options={['United States', 'Canada', 'United Kingdom', 'Germany', 'France', 'Japan', 'Australia']} />
+// FIXED:  onChange={(e: any) => setLocation(e)}
  />
- </SettingSection>
+// FIXED:  </SettingSection>
 
  <SettingSection title="Language & Region">
  <SelectSetting
  label="Language"
- value={language}
- options={['English', 'Spanish', 'French', 'German', 'Japanese', 'Korean', 'Portuguese']}
- onChange={(e: any) => setLanguage(e)}
+// FIXED:  value={language}
+ options={['English', 'Spanish', 'French', 'German', 'Japanese', 'Korean', 'Portuguese']} />
+// FIXED:  onChange={(e: any) => setLanguage(e)}
  />
- </SettingSection>
+// FIXED:  </SettingSection>
 
  <SettingSection title="Notifications">
  <ToggleSetting
  label="Subscriptions"
  description="Notify me about new videos from my subscriptions"
- checked={notifications.subscriptions}
- onChange={() => handleNotificationChange('subscriptions')}
+// FIXED:  checked={notifications.subscriptions} />
+// FIXED:  onChange={() => handleNotificationChange('subscriptions')}
  />
  <ToggleSetting
  label="Recommended videos"
  description="Notify me about recommended videos"
- checked={notifications.recommendedVideos}
- onChange={() => handleNotificationChange('recommendedVideos')}
+// FIXED:  checked={notifications.recommendedVideos} />
+// FIXED:  onChange={() => handleNotificationChange('recommendedVideos')}
  />
  <ToggleSetting
  label="Activity on my channel"
  description="Notify me about comments, likes, and new subscribers"
- checked={notifications.activityOnMyChannel}
- onChange={() => handleNotificationChange('activityOnMyChannel')}
+// FIXED:  checked={notifications.activityOnMyChannel} />
+// FIXED:  onChange={() => handleNotificationChange('activityOnMyChannel')}
  />
  <ToggleSetting
  label="Replies to my comments"
  description="Notify me when someone replies to my comments"
- checked={notifications.repliesComments}
- onChange={() => handleNotificationChange('repliesComments')}
+// FIXED:  checked={notifications.repliesComments} />
+// FIXED:  onChange={() => handleNotificationChange('repliesComments')}
  />
  <ToggleSetting
  label="Mentions"
  description="Notify me when someone mentions me"
- checked={notifications.mentions}
- onChange={() => handleNotificationChange('mentions')}
+// FIXED:  checked={notifications.mentions} />
+// FIXED:  onChange={() => handleNotificationChange('mentions')}
  />
- </SettingSection>
+// FIXED:  </SettingSection>
 
  <div className="pt-6 border-t border-neutral-200 dark:border-neutral-700">
  <div className="flex justify-between items-center">
@@ -227,15 +227,15 @@ const SettingsPage: React.FC = () => {
  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50">Reset Settings</h3>
  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
  Reset all settings to their default values
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
  Reset to Defaults
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ) };
 
 export default SettingsPage;

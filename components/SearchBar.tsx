@@ -137,21 +137,21 @@ inputRef.current.blur();
  <form onSubmit={(e: any) => handleSubmit(e)} className="flex items-center w-full" role="search">
  <input
  ref={inputRef}
- type="search"
- value={query}
- onChange={(e: any) => handleInputChange(e)}
+// FIXED:  type="search"
+// FIXED:  value={query} />
+// FIXED:  onChange={(e: any) => handleInputChange(e)}
  onFocus={handleInputFocus}
- placeholder="Search"
- className={`w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white border border-neutral-300,
+// FIXED:  placeholder="Search"
+// FIXED:  className={`w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white border border-neutral-300,
  dark:bg-neutral-900 dark:border-neutral-700,
  focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-black
  outline-none text-neutral-900 dark:text-neutral-50 placeholder-neutral-500 dark:placeholder-neutral-400 text-sm shadow-sm
  transition-all duration-100 ease-in-out
  ${inputBorderRadiusClass}
  `}
- aria-label="Search YouTube"
- aria-autocomplete="list"
- aria-controls={
+// FIXED:  aria-label="Search YouTube"
+// FIXED:  aria-autocomplete="list"
+// FIXED:  aria-controls={
  (() => {
  if (showSuggestions as any) {
  return 'search-suggestions-listbox';
@@ -164,66 +164,66 @@ inputRef.current.blur();
  }
  />
  <button
- type="submit"
- className={`px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 
+// FIXED:  type="submit"
+// FIXED:  className={`px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 
  border border-neutral-300 dark:border-neutral-700 border-l-0 
  flex items-center justify-center transition-all duration-100 ease-in-out min-w-[44px]
  ${buttonBorderRadiusClass}
  `}
- aria-label="Perform search"
+// FIXED:  aria-label="Perform search" />
  >
  <SearchIcon className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-600 dark:text-neutral-300" />
- </button>
- </form>
+// FIXED:  </button>
+// FIXED:  </form>
  {showSuggestions && suggestions.length > 0 && (
  <div id="search-suggestions-listbox">
  <SearchSuggestions
- suggestions={suggestions}
+ suggestions={suggestions} />
  onSuggestionClick={(e: any) => handleSuggestionClick(e)}
  isVisible={showSuggestions}
  />
- </div>
+// FIXED:  </div>
  )}
  {showRecentSearches && recentSearches.length > 0 && (
  <ul
- id="recent-searches-listbox"
- className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
- aria-label="Recent searches"
+// FIXED:  id="recent-searches-listbox"
+// FIXED:  className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
+// FIXED:  aria-label="Recent searches" />
  >
  {recentSearches.map((searchTerm) => (
  <li key={searchTerm} className="flex items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
- <button
- onClick={() => handleSearch(searchTerm)}
- className="flex items-center flex-grow text-left"
+ <button />
+// FIXED:  onClick={() => handleSearch(searchTerm)}
+// FIXED:  className="flex items-center flex-grow text-left"
  >
  <ClockIcon className="w-4 h-4 mr-3 text-neutral-500 dark:text-neutral-400 flex-shrink-0" />
  <span>{searchTerm}</span>
- </button>
- <button
- onClick={(e: any) => {
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => {
  handleRemoveRecentSearch(searchTerm, e).catch(console.error);
  }
- className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
- aria-label={`Remove ${searchTerm} from recent searches`}
+// FIXED:  className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
+// FIXED:  aria-label={`Remove ${searchTerm} from recent searches`}
  title="Remove"
  >
  <XMarkIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
- </button>
- </li>
+// FIXED:  </button>
+// FIXED:  </li>
  ))}
  <li className="border-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
- <button
- onClick={(e: any) => {
+ <button />
+// FIXED:  onClick={(e: any) => {
  handleClearAllRecent(e).catch(console.error);
  }
- className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
+// FIXED:  className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
  >
  Clear all recent searches
- </button>
- </li>
- </ul>
+// FIXED:  </button>
+// FIXED:  </li>
+// FIXED:  </ul>
  )}
- </div>
+// FIXED:  </div>
  );
 });
 

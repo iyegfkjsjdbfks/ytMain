@@ -69,26 +69,26 @@ return null;
  autoplay={false}
  width="100%"
  height={480}
- controls={true}
+ controls={true} />
  />
  ) : (
  <AdvancedVideoPlayer
- video={video}
+ video={video} />
  />
  )}
- </div>
+// FIXED:  </div>
 
  {/* Video title and stats */}
  <div className="mb-4">
  <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
  {video.title}
- </h1>
+// FIXED:  </h1>
  <div className="flex items-center justify-between">
  <div className="text-sm text-gray-600 dark:text-gray-400">
  {formatCount(typeof video.views === 'string' ? parseInt(((video.views as string)).replace(/[^0-9]/g, ''), 10) : video.views || 0)} views • {formatDistanceToNow(video.uploadedAt)}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Video actions */}
  <VideoActions
@@ -97,7 +97,7 @@ return null;
  likeCount={video.likes || 0}
  isSavedToAnyList={props.isSavedToAnyList}
  onLike={handleLike}
- onDislike={handleDislike}
+ onDislike={handleDislike} />
  onShare={() => { /* Implement share functionality */ }
  onSave={openSaveModal}
  />
@@ -112,13 +112,13 @@ return null;
  isSummarizing={isSummarizing || false}
  canSummarize={canSummarize || false}
  onSubscribe={handleSubscribe}
- onToggleDescription={handleToggleDescription}
+ onToggleDescription={handleToggleDescription} />
  onSummarizeDescription={handleSummarizeDescription || (() => {})}
  {...(summaryError !== null && summaryError !== undefined && { summaryError })}
  {...(summary !== null && summary !== undefined && { summary })}
  />
  )}
- </>
+// FIXED:  </>
  );
 };
 

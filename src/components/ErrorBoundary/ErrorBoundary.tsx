@@ -48,7 +48,7 @@ class ErrorBoundary extends React.Component<
  return (
  <FallbackComponent
  error={this.state.error}
- resetError={this.resetError}
+ resetError={this.resetError} />
  />
  );
  }
@@ -60,9 +60,9 @@ class ErrorBoundary extends React.Component<
  <summary>Error details</summary>
  <pre>{this.state.error?.message}</pre>
  <pre>{this.state.error?.stack}</pre>
- </details>
+// FIXED:  </details>
  <button onClick={this.resetError}>Try again</button>
- </div>
+// FIXED:  </div>
  );
  }
 

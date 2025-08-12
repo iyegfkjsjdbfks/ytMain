@@ -216,16 +216,16 @@ return 'text-orange-600';
  <p className="text-sm font-medium text-gray-600">{title}</p>
  <p className={`text-2xl font-semibold ${color}`}>{value}</p>
  {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
- </div>
+// FIXED:  </div>
  {trend && (
  <div className={`text-sm ${
  trend === 'up' ? 'text-green-600' :
- trend === 'down' ? 'text-red-600' : 'text-gray-600'
+ trend === 'down' ? 'text-red-600' : 'text-gray-600' />
  }`}>
  {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '→'}</div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 
  // Render overview tab
@@ -239,70 +239,70 @@ return <div>Loading...</div>;
  {/* Key Metrics Grid */}<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  <MetricCard
  title="Performance Score",
- value={metrics.performance.score}
+// FIXED:  value={metrics.performance.score}
  color={getScoreColor(metrics.performance.score)}
- trend="stable"
+ trend="stable" />
  />
  <MetricCard
  title="Security Score"
- value={metrics.security.score}
+// FIXED:  value={metrics.security.score}
  color={getScoreColor(metrics.security.score)}
- trend="up"
+ trend="up" />
  />
  <MetricCard
  title="Deployment Success"
- value={`${metrics.deployment.successRate}%`}
+// FIXED:  value={`${metrics.deployment.successRate}%`}
  color={getScoreColor(metrics.deployment.successRate)}
- trend="stable"
+ trend="stable" />
  />
  <MetricCard
  title="Code Quality"
- value={metrics.codeQuality.score}
+// FIXED:  value={metrics.codeQuality.score}
  color={getScoreColor(metrics.codeQuality.score)}
- trend="up"
+ trend="up" />
  />
- </div>
+// FIXED:  </div>
 
  {/* System Status */}
  <div className="bg-white rounded-lg shadow">
  <div className="px-6 py-4 border-b border-gray-200">
  <h3 className="text-lg font-medium text-gray-900">System Status</h3>
- </div>
+// FIXED:  </div>
  <div className="p-6">
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
  <div className="flex items-center space-x-3">
  <div className="w-3 h-3 bg-green-400 rounded-full" />
  <span className="text-sm text-gray-600">Application Health: Healthy</span>
- </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-3">
  <div className="w-3 h-3 bg-green-400 rounded-full" />
  <span className="text-sm text-gray-600">Database: Connected</span>
- </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-3">
  <div className="w-3 h-3 bg-yellow-400 rounded-full" />
  <span className="text-sm text-gray-600">Cache: Degraded</span>
- </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-3">
  <div className="w-3 h-3 bg-green-400 rounded-full" />
  <span className="text-sm text-gray-600">CDN: Operational</span>
- </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-3">
  <div className="w-3 h-3 bg-green-400 rounded-full" />
  <span className="text-sm text-gray-600">Monitoring: Active</span>
- </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-3">
  <div className="w-3 h-3 bg-green-400 rounded-full" />
  <span className="text-sm text-gray-600">Security: Protected</span>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Recent Alerts */}
  <div className="bg-white rounded-lg shadow">
  <div className="px-6 py-4 border-b border-gray-200">
  <h3 className="text-lg font-medium text-gray-900">Recent Alerts</h3>
- </div>
+// FIXED:  </div>
  <div className="divide-y divide-gray-200">
  {alerts.slice(0, 5).map((alert) => (
  <div key={alert.id} className="p-6">
@@ -310,34 +310,34 @@ return <div>Loading...</div>;
  <div className="flex items-start space-x-3">
  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSeverityColor(alert.severity)}`}>
  {alert.severity.toUpperCase()}
- </span>
+// FIXED:  </span>
  <div>
  <p className="text-sm font-medium text-gray-900">{alert.title}</p>
  <p className="text-sm text-gray-500">{alert.description}</p>
  <p className="text-xs text-gray-400 mt-1">
  {new Date(alert.timestamp).toLocaleString()}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
  alert.type === 'security' ? 'text-red-800 bg-red-100' :
  alert.type === 'performance' ? 'text-blue-800 bg-blue-100' :
  alert.type === 'deployment' ? 'text-purple-800 bg-purple-100' :
- 'text-gray-800 bg-gray-100'
+ 'text-gray-800 bg-gray-100' />
  }`}>
  {alert.type}
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
  {alerts.length === 0 && (
  <div className="p-6 text-center text-gray-500">
  No active alerts,
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  };
 
@@ -352,29 +352,29 @@ return <div>Loading...</div>;
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
  <MetricCard
  title="Largest Contentful Paint",
- value={`${metrics.performance.lcp}ms`},
+// FIXED:  value={`${metrics.performance.lcp}ms`}, />
  color={metrics.performance.lcp < 2500 ? 'text-green-600' : 'text-red-600'} />
  <MetricCard
  title="First Input Delay",
- value={`${metrics.performance.fid}ms`},
+// FIXED:  value={`${metrics.performance.fid}ms`}, />
  color={metrics.performance.fid < 100 ? 'text-green-600' : 'text-red-600'} />
  <MetricCard
  title="Cumulative Layout Shift",
- value={metrics.performance.cls.toFixed(3)}
- color={metrics.performance.cls < 0.1 ? 'text-green-600' : 'text-red-600'}
+// FIXED:  value={metrics.performance.cls.toFixed(3)}
+ color={metrics.performance.cls < 0.1 ? 'text-green-600' : 'text-red-600'} />
  />
  <MetricCard
  title="Memory Usage"
- value={`${metrics.performance.memoryUsage}%`}
- color={metrics.performance.memoryUsage < 70 ? 'text-green-600' : 'text-red-600'}
+// FIXED:  value={`${metrics.performance.memoryUsage}%`}
+ color={metrics.performance.memoryUsage < 70 ? 'text-green-600' : 'text-red-600'} />
  />
  <MetricCard
  title="Error Rate"
- value={`${metrics.performance.errorRate}%`}
- color={metrics.performance.errorRate < 1 ? 'text-green-600' : 'text-red-600'}
+// FIXED:  value={`${metrics.performance.errorRate}%`}
+ color={metrics.performance.errorRate < 1 ? 'text-green-600' : 'text-red-600'} />
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  };
 
@@ -389,25 +389,25 @@ return <div>Loading...</div>;
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  <MetricCard
  title="Threats Detected",
- value={metrics.security.threatsDetected}
- color="text-red-600"
+// FIXED:  value={metrics.security.threatsDetected}
+ color="text-red-600" />
  />
  <MetricCard
  title="Vulnerabilities",
- value={metrics.security.vulnerabilities}
+// FIXED:  value={metrics.security.vulnerabilities} />
  color={metrics.security.vulnerabilities === 0 ? 'text-green-600' : 'text-red-600'} />
  <MetricCard
  title="Compliance Score",
- value={`${metrics.security.complianceScore}%`},
- color={getScoreColor(metrics.security.complianceScore)}
+// FIXED:  value={`${metrics.security.complianceScore}%`},
+ color={getScoreColor(metrics.security.complianceScore)} />
  />
  <MetricCard
  title="Security Score"
- value={metrics.security.score}
- color={getScoreColor(metrics.security.score)}
+// FIXED:  value={metrics.security.score}
+ color={getScoreColor(metrics.security.score)} />
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  };
 
@@ -422,26 +422,26 @@ return <div>Loading...</div>;
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  <MetricCard
  title="Success Rate",
- value={`${metrics.deployment.successRate}%`},
- color={getScoreColor(metrics.deployment.successRate)}
+// FIXED:  value={`${metrics.deployment.successRate}%`},
+ color={getScoreColor(metrics.deployment.successRate)} />
  />
  <MetricCard
  title="Average Deploy Time"
- value={`${metrics.deployment.averageTime}min`}
- color="text-blue-600"
+// FIXED:  value={`${metrics.deployment.averageTime}min`}
+ color="text-blue-600" />
  />
  <MetricCard
  title="Deploy Frequency"
- value={`${metrics.deployment.frequency}/day`}
- color="text-green-600"
+// FIXED:  value={`${metrics.deployment.frequency}/day`}
+ color="text-green-600" />
  />
  <MetricCard
  title="Active Deployments"
- value={metrics.deployment.activeDeployments}
+// FIXED:  value={metrics.deployment.activeDeployments} />
  color={metrics.deployment.activeDeployments > 0 ? 'text-orange-600' : 'text-green-600'}
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  };
 
@@ -456,26 +456,26 @@ return <div>Loading...</div>;
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  <MetricCard
  title="Code Quality Score",
- value={metrics.codeQuality.score}
- color={getScoreColor(metrics.codeQuality.score)}
+// FIXED:  value={metrics.codeQuality.score}
+ color={getScoreColor(metrics.codeQuality.score)} />
  />
  <MetricCard
  title="Complexity"
- value={metrics.codeQuality.complexity}
- color={metrics.codeQuality.complexity < 20 ? 'text-green-600' : 'text-red-600'}
+// FIXED:  value={metrics.codeQuality.complexity}
+ color={metrics.codeQuality.complexity < 20 ? 'text-green-600' : 'text-red-600'} />
  />
  <MetricCard
  title="Test Coverage"
- value={`${metrics.codeQuality.coverage}%`}
- color={getScoreColor(metrics.codeQuality.coverage)}
+// FIXED:  value={`${metrics.codeQuality.coverage}%`}
+ color={getScoreColor(metrics.codeQuality.coverage)} />
  />
  <MetricCard
  title="Technical Debt"
- value={`${metrics.codeQuality.technicalDebt}h`}
- color={metrics.codeQuality.technicalDebt < 20 ? 'text-green-600' : 'text-red-600'}
+// FIXED:  value={`${metrics.codeQuality.technicalDebt}h`}
+ color={metrics.codeQuality.technicalDebt < 20 ? 'text-green-600' : 'text-red-600'} />
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  };
 
@@ -490,21 +490,21 @@ return <div>Loading...</div>;
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  <MetricCard
  title="Total Flags",
- value={metrics.featureFlags.totalFlags}
- color="text-blue-600"
+// FIXED:  value={metrics.featureFlags.totalFlags}
+ color="text-blue-600" />
  />
  <MetricCard
  title="Active Flags",
- value={metrics.featureFlags.activeFlags}
- color="text-green-600"
+// FIXED:  value={metrics.featureFlags.activeFlags}
+ color="text-green-600" />
  />
  <MetricCard
  title="Running Experiments",
- value={metrics.featureFlags.experimentsRunning}
- color="text-purple-600"
+// FIXED:  value={metrics.featureFlags.experimentsRunning}
+ color="text-purple-600" />
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  };
 
@@ -514,8 +514,8 @@ return <div>Loading...</div>;
  <div className="text-center">
  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
  <p className="mt-4 text-gray-600">Loading DevOps Dashboard...</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -528,20 +528,20 @@ return <div>Loading...</div>;
  <h1 className="text-3xl font-bold text-gray-900">DevOps Dashboard</h1>
  <p className="text-sm text-gray-500">
  Last updated: {lastUpdated.toLocaleString()}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className="flex items-center space-x-4">
- <button
- onClick={(e: any) => fetchDashboardData(e)}
- className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
- disabled={isLoading}
+ <button />
+// FIXED:  onClick={(e: any) => fetchDashboardData(e)}
+// FIXED:  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+// FIXED:  disabled={isLoading}
  >
  {isLoading ? 'Refreshing...' : 'Refresh'}
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Navigation Tabs */}
  <div className="bg-white border-b border-gray-200">
@@ -562,20 +562,20 @@ return <div>Loading...</div>;
  label: 'Feature Flags' }
  ].map((tab) => (
  <button,
- key={tab.id}
- onClick={() => setActiveTab(tab.id as any)}
- className={`py-4 px-1 border-b-2 font-medium text-sm ${
+ key={tab.id} />
+// FIXED:  onClick={() => setActiveTab(tab.id as any)}
+// FIXED:  className={`py-4 px-1 border-b-2 font-medium text-sm ${
  activeTab === tab.id
  ? 'border-blue-500 text-blue-600'
  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
  }`}
  >
  {tab.label}
- </button>
+// FIXED:  </button>
  ))}
- </nav>
- </div>
- </div>
+// FIXED:  </nav>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Content */}
  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -585,8 +585,8 @@ return <div>Loading...</div>;
  {activeTab === 'deployment' && <DeploymentTab />}
  {activeTab === 'quality' && <QualityTab />}
  {activeTab === 'features' && <FeaturesTab />}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

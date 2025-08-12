@@ -99,66 +99,66 @@ const GoogleSearchStoreDebug: FC = () => {
  {import.meta.env.VITE_GOOGLE_SEARCH_API_KEY
  ? '✅ Set'
  : '❌ Missing'}
- </div>
+// FIXED:  </div>
  <div>
  Google Search Engine ID:{' '}
  {import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID
  ? '✅ Set'
  : '❌ Missing'}
- </div>
+// FIXED:  </div>
  <div>
  YouTube API Key:{' '}
  {import.meta.env.VITE_YOUTUBE_API_KEY ? '✅ Set' : '❌ Missing'}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Store Statistics */}
  <div className='bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-6'>
  <h2 className='text-lg font-semibold mb-2'>Store Statistics</h2>
  <p>Videos in store: {storeVideos.length}</p>
- <button
- onClick={(e: any) => handleClearStore(e)}
- className='mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600'
+ <button />
+// FIXED:  onClick={(e: any) => handleClearStore(e)}
+// FIXED:  className='mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600'
  >
  Clear Store
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Test Video Fetch */}
  <div className='bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-6'>
  <h2 className='text-lg font-semibold mb-2'>Test Video Fetch</h2>
  <div className='flex gap-2 mb-4'>
  <input
- type='text'
- value={testVideoId}
- onChange={e => setTestVideoId(e.target.value)}
- placeholder='YouTube Video ID'
- className='flex-1 px-3 py-2 border rounded'
+// FIXED:  type='text'
+// FIXED:  value={testVideoId} />
+// FIXED:  onChange={e => setTestVideoId(e.target.value)}
+// FIXED:  placeholder='YouTube Video ID'
+// FIXED:  className='flex-1 px-3 py-2 border rounded'
  />
- <button
- onClick={(e: any) => handleTestFetch(e)}
- disabled={loading}
- className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
+ <button />
+// FIXED:  onClick={(e: any) => handleTestFetch(e)}
+// FIXED:  disabled={loading}
+// FIXED:  className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
  >
  {loading ? 'Testing...' : 'Test Direct Fetch'}
- </button>
- <button
- onClick={(e: any) => handleTestUnifiedService(e)}
- disabled={loading}
- className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 ml-2'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleTestUnifiedService(e)}
+// FIXED:  disabled={loading}
+// FIXED:  className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 ml-2'
  >
  {loading ? 'Testing...' : 'Test Unified Service'}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {testResult && (
  <div className='mt-4 p-3 bg-white dark:bg-gray-700 rounded'>
  <h3 className='font-semibold mb-2'>Direct Fetch Result:</h3>
  <pre className='text-sm overflow-auto'>
  {JSON.stringify(testResult, null, 2)}
- </pre>
- </div>
+// FIXED:  </pre>
+// FIXED:  </div>
  )}
 
  {unifiedServiceTest && (
@@ -166,10 +166,10 @@ const GoogleSearchStoreDebug: FC = () => {
  <h3 className='font-semibold mb-2'>Unified Service Result:</h3>
  <pre className='text-sm overflow-auto'>
  {JSON.stringify(unifiedServiceTest, null, 2)}
- </pre>
- </div>
+// FIXED:  </pre>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Store Contents */}
  <div className='bg-gray-100 dark:bg-gray-800 p-4 rounded-lg'>
@@ -181,29 +181,29 @@ const GoogleSearchStoreDebug: FC = () => {
  {storeVideos.map((video, index) => (
  <div
  key={index}
- className='bg-white dark:bg-gray-700 p-3 rounded'
+// FIXED:  className='bg-white dark:bg-gray-700 p-3 rounded' />
  >
  <div className='font-medium'>{video.title}</div>
  <div className='text-sm text-gray-600 dark:text-gray-400'>,
  ID: {video.id}
- </div>
+// FIXED:  </div>
  <div className='text-sm text-gray-600 dark:text-gray-400'>,
  Channel: {video.channelName}
- </div>
+// FIXED:  </div>
  <div className='text-sm text-gray-600 dark:text-gray-400'>,
  URL: {video.videoUrl}
- </div>
+// FIXED:  </div>
  {video.viewCount && (
  <div className='text-sm text-gray-600 dark:text-gray-400'>,
  Views: {video.viewCount.toLocaleString()}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

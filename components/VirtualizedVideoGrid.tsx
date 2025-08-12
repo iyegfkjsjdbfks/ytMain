@@ -58,9 +58,9 @@ const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data 
  showChannel={showChannel}
  showDescription={showDescription}
  {...(onVideoClick && { onClick: onVideoClick })}
- {...(onChannelClick && { onChannelClick })}
+ {...(onChannelClick && { onChannelClick })} />
  />
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -157,8 +157,8 @@ return;
  <h3 className="text-lg font-medium mb-2">No videos found</h3>
  <p className="text-sm text-center max-w-md">
  There are no videos to display at the moment. Try adjusting your filters or check back later.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  );
  }
 
@@ -166,7 +166,7 @@ return;
  <div className={cn('w-full h-full', className)}>
  <div
  ref={setContainerRef}
- className="w-full h-full min-h-[400px]"
+// FIXED:  className="w-full h-full min-h-[400px]" />
  >
  {containerSize.width > 0 && (
  <>
@@ -180,33 +180,33 @@ return;
  itemData={itemData}
  onScroll={handleScroll}
  overscanRowCount={2}
- overscanColumnCount={1}
+ overscanColumnCount={1} />
  >
  {GridItem}
- </Grid>
+// FIXED:  </Grid>
 
  {/* Loading indicator */}
  {loading && (
  <div className="flex justify-center py-8">
  <LoadingSpinner size="lg" />
- </div>
+// FIXED:  </div>
  )}
 
  {/* Load more button */}
  {hasMore && !loading && onLoadMore && (
  <div className="flex justify-center py-8">
- <button
- onClick={(e: any) => onLoadMore(e)}
- className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+ <button />
+// FIXED:  onClick={(e: any) => onLoadMore(e)}
+// FIXED:  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
  >
  Load More Videos
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </>
+// FIXED:  </>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

@@ -184,12 +184,12 @@ return null;
  {/* Video */}
  <video
  ref={videoRef}
- src={currentShort.videoUrl}
- className="w-full h-full object-cover"
+// FIXED:  src={currentShort.videoUrl}
+// FIXED:  className="w-full h-full object-cover"
  loop={false}
  muted={isMuted}
- playsInline
- onClick={(e: any) => handleVideoClick(e)}
+ playsInline />
+// FIXED:  onClick={(e: any) => handleVideoClick(e)}
  poster={currentShort.thumbnailUrl}
  />
 
@@ -197,39 +197,39 @@ return null;
  {isLoading && (
  <div className="absolute inset-0 flex items-center justify-center bg-black/50">
  <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
- </div>
+// FIXED:  </div>
  )}
 
  {/* Progress Bar */}
  <div
  ref={progressRef}
- className="absolute right-2 top-20 bottom-20 w-1 bg-white/30 rounded-full cursor-pointer"
- onClick={(e: any) => handleSeek(e)}
+// FIXED:  className="absolute right-2 top-20 bottom-20 w-1 bg-white/30 rounded-full cursor-pointer" />
+// FIXED:  onClick={(e: any) => handleSeek(e)}
  >
  <div
- className="w-full bg-white rounded-full transition-all duration-100"
- style={{ height: `${progress}%` }
+// FIXED:  className="w-full bg-white rounded-full transition-all duration-100"
+// FIXED:  style={{ height: `${progress}%` } />
  />
- </div>
+// FIXED:  </div>
 
  {/* Navigation Arrows */}
  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4">
- <button
- onClick={() => navigateShort('up')}
- disabled={currentIndex === 0}
- className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
+ <button />
+// FIXED:  onClick={() => navigateShort('up')}
+// FIXED:  disabled={currentIndex === 0}
+// FIXED:  className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  <ChevronUpIcon className="w-6 h-6" />
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => navigateShort('down')}
- disabled={currentIndex === shorts.length - 1}
- className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
+ <button />
+// FIXED:  onClick={() => navigateShort('down')}
+// FIXED:  disabled={currentIndex === shorts.length - 1}
+// FIXED:  className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  <ChevronDownIcon className="w-6 h-6" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Play/Pause Overlay */}
  {showControls && (
@@ -240,8 +240,8 @@ return null;
  ) : (
  <PlayIcon className="w-12 h-12 text-white" />
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Content Info */}
@@ -249,9 +249,9 @@ return null;
  {/* Channel Info */}
  <div className="flex items-center space-x-3 mb-3">
  <img
- src={currentShort.channelAvatarUrl}
- alt={currentShort.channelName}
- className="w-10 h-10 rounded-full"
+// FIXED:  src={currentShort.channelAvatarUrl}
+// FIXED:  alt={currentShort.channelName}
+// FIXED:  className="w-10 h-10 rounded-full" />
  />
  <div className="flex-1">
  <div className="flex items-center space-x-2">
@@ -260,32 +260,32 @@ return null;
  <div className="w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center">
  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  <p className="text-gray-300 text-sm">{formatNumber(parseInt(currentShort.views, 10) || 0)} views</p>
- </div>
+// FIXED:  </div>
 
- <button
- onClick={() => onSubscribe(currentShort.channelId)}
- className="bg-white text-black px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+ <button />
+// FIXED:  onClick={() => onSubscribe(currentShort.channelId)}
+// FIXED:  className="bg-white text-black px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
  >
  Subscribe
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Video Title & Description */}
  <div className="mb-3">
  <h3 className="text-white font-medium mb-1 line-clamp-2">
  {currentShort.title}
- </h3>
+// FIXED:  </h3>
  {currentShort.description && (
  <p className="text-gray-300 text-sm line-clamp-2">
  {currentShort.description}
- </p>
+// FIXED:  </p>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Hashtags */}
  {currentShort.tags.length > 0 && (
@@ -294,22 +294,22 @@ return null;
  index: number) => (
  <span
  key={index}
- className="text-blue-400 text-sm hover:text-blue-300 cursor-pointer"
+// FIXED:  className="text-blue-400 text-sm hover:text-blue-300 cursor-pointer" />
  >
  #{tag}
- </span>
+// FIXED:  </span>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Action Buttons */}
  <div className="absolute bottom-20 right-4 flex flex-col space-y-6">
  {/* Like */}
  <div className="flex flex-col items-center">
- <button
- onClick={() => onLike(currentShort.id)}
- className={`p-3 rounded-full transition-colors ${
+ <button />
+// FIXED:  onClick={() => onLike(currentShort.id)}
+// FIXED:  className={`p-3 rounded-full transition-colors ${
  currentShort.isLiked
  ? 'bg-red-500 text-white'
  : 'bg-black/50 text-white hover:bg-black/70'
@@ -320,61 +320,61 @@ return null;
  ) : (
  <HeartIcon className="w-6 h-6" />
  )}
- </button>
+// FIXED:  </button>
  <span className="text-white text-xs mt-1">
  {formatNumber(currentShort.likes)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  {/* Comment */}
  <div className="flex flex-col items-center">
- <button
- onClick={() => onComment(currentShort.id)}
- className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
+ <button />
+// FIXED:  onClick={() => onComment(currentShort.id)}
+// FIXED:  className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
  >
  <ChatBubbleLeftIcon className="w-6 h-6" />
- </button>
+// FIXED:  </button>
  <span className="text-white text-xs mt-1">
  {formatNumber(currentShort.commentCount || 0)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  {/* Share */}
  <div className="flex flex-col items-center">
- <button
- onClick={() => onShare(currentShort.id)}
- className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
+ <button />
+// FIXED:  onClick={() => onShare(currentShort.id)}
+// FIXED:  className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
  >
  <ShareIcon className="w-6 h-6" />
- </button>
+// FIXED:  </button>
  <span className="text-white text-xs mt-1">
  {formatNumber(currentShort.analytics?.engagement?.shares || 0)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 
  {/* More Options */}
  <button className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors">
  <EllipsisVerticalIcon className="w-6 h-6" />
- </button>
+// FIXED:  </button>
 
  {/* Mute/Unmute */}
- <button
- onClick={(e: any) => toggleMute(e)}
- className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
+ <button />
+// FIXED:  onClick={(e: any) => toggleMute(e)}
+// FIXED:  className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
  >
  {isMuted ? (
  <SpeakerXMarkIcon className="w-6 h-6" />
  ) : (
  <SpeakerWaveIcon className="w-6 h-6" />
  )}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Short Counter */}
  <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
  {currentIndex + 1} / {shorts.length}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

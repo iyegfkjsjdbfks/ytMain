@@ -114,25 +114,25 @@ const SearchResultsPage: React.FC = () => {
  <h1 className='text-2xl font-bold mb-6'>Search Results</h1>
  <p className='text-gray-600 mb-4'>
  {query ? `Showing results for: "${query}"` : 'No search query provided'}
- </p>
+// FIXED:  </p>
 
  {loading && (
  <div className='flex justify-center items-center py-8'>
  <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600' />
  <span className='ml-2 text-gray-600'>Searching...</span>
- </div>
+// FIXED:  </div>
  )}
 
  {error && (
  <div className='p-4 bg-red-50 rounded-lg border border-red-200 text-red-700 mb-4'>
  <p>Error: {error}</p>
- </div>
+// FIXED:  </div>
  )}
 
  {!loading && !error && videos.length === 0 && query && (
  <div className='p-4 bg-yellow-50 rounded-lg border border-yellow-200 text-yellow-700'>
  <p>No videos found for "{query}". Try a different search term.</p>
- </div>
+// FIXED:  </div>
  )}
 
  {!loading && videos.length > 0 && (
@@ -154,40 +154,40 @@ const SearchResultsPage: React.FC = () => {
  return (
  <div
  key={video.id}
- className='bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow'
+// FIXED:  className='bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow' />
  >
  {/* YouTube Player */}
  <div className='relative aspect-video bg-black rounded-t-lg overflow-hidden'>
  {videoId && videoId.length === 11 ? (
  <iframe
- src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`}
+// FIXED:  src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`}
  title={video.title}
- className='w-full h-full border-0'
+// FIXED:  className='w-full h-full border-0'
  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
  allowFullScreen
- loading='lazy'
+ loading='lazy' />
  />
  ) : (
  <div className='w-full h-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center'>
  <div className='text-center text-gray-600 dark:text-gray-400'>
  <svg
- className='w-12 h-12 mx-auto mb-2'
+// FIXED:  className='w-12 h-12 mx-auto mb-2'
  fill='currentColor'
- viewBox='0 0 24 24'
+ viewBox='0 0 24 24' />
  >
  <path d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' />
- </svg>
+// FIXED:  </svg>
  <p className='text-sm'>Video unavailable</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Video Info */}
  <div className='p-4'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2'>
  {video.title}
- </h3>
+// FIXED:  </h3>
  <div className='text-sm text-gray-600 dark:text-gray-400'>
  <p className='mb-1'>{video.channelName}</p>
  <div className='flex items-center space-x-2'>
@@ -195,19 +195,19 @@ const SearchResultsPage: React.FC = () => {
  <span>•</span>
  <span>
  {new Date(video.uploadedAt).toLocaleDateString()}
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  {video.description && (
  <p className='text-sm text-gray-700 dark:text-gray-300 mt-2 line-clamp-2'>
  {video.description}
- </p>
+// FIXED:  </p>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  })}
- </div>
+// FIXED:  </div>
  )}
 
  {!query && (
@@ -216,10 +216,10 @@ const SearchResultsPage: React.FC = () => {
  <p className='mt-2'>
  For demonstration of video components, please visit the{' '}
  <strong>Video Demo</strong> page using the user menu dropdown.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

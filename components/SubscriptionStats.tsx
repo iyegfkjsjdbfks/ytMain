@@ -53,19 +53,19 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
  <UserGroupIcon className="w-12 h-12 text-red-400 dark:text-red-500 mx-auto mb-3" />
  <h3 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-2">
  Start Building Your Subscription Feed
- </h3>
+// FIXED:  </h3>
  <p className="text-red-600 dark:text-red-300 mb-4">
  Subscribe to channels to see their latest videos and build your personalized feed.
- </p>
+// FIXED:  </p>
  <Link
  to="/trending"
- className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+// FIXED:  className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors" />
  >
  <VideoCameraIcon className="w-4 h-4 mr-2" />
  Discover Channels
- </Link>
- </div>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -76,25 +76,25 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
  return (
  <div
  key={index}
- className={`p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 ${stat.bgColor} transition-transform hover:scale-105`}
+// FIXED:  className={`p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 ${stat.bgColor} transition-transform hover:scale-105`} />
  >
  <div className="flex items-center justify-between">
  <div>
  <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
  {stat.label}
- </p>
+// FIXED:  </p>
  <p className={`text-2xl font-bold ${stat.color}`}>
  {stat.value}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className={`p-2 rounded-lg ${stat.bgColor}`}>
  <IconComponent className={`w-6 h-6 ${stat.color}`} />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  })}
- </div>
+// FIXED:  </div>
  );
 };
 

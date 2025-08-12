@@ -1,49 +1,75 @@
-import React, { createContext, useState, useContext, useCallback, type ReactNode, FC, ReactNode } from 'react';
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
 
-import type { Video } from '../src/types/core';
+interface Video {
+  id: string;
+  title: string;
+  thumbnail: string;
+  duration?: number;
+  channelName?: string;
+}
 
 interface MiniplayerContextType {
- miniplayerVideo: Video | null;
- isMiniplayerVisible: boolean;
- showMiniplayer: (video: Video) => void;
- hideMiniplayer: () => void; // Hides but keeps video in state,
- clearMiniplayer: () => void; // Clears video and hides
+  isOpen: boolean;
+  currentVideo: Video | null;
+  isPlaying: boolean;
+  openMiniplayer: (video: Video) => void;
+  closeMiniplayer: () => void;
+  togglePlay: () => void;
 }
 
 const MiniplayerContext = createContext<MiniplayerContextType | undefined>(undefined);
 
-export const MiniplayerProvider: React.FC<{ children?: React.ReactNode }> = ({ children }: any) => {
- const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
- const [isVisible, setIsVisible] = useState<boolean>(false);
-
- const showMiniplayer = useCallback((video: Video) => {
- setCurrentVideo(video);
- setIsVisible(true);
- }, []);
-
- const hideMiniplayer = useCallback(() => {
- setIsVisible(false);
- }, []);
-
- const clearMiniplayer = useCallback(() => {
- setCurrentVideo(null);
- setIsVisible(false);
- }, []);
-
- return (
- <MiniplayerContext.Provider value={{ miniplayerVideo: currentVideo,
- isMiniplayerVisible: isVisible, showMiniplayer, hideMiniplayer, clearMiniplayer }}>
- {children}
- </MiniplayerContext.Provider>
- );
+export const useMiniplayer = () => {
+  const context = useContext(MiniplayerContext);
+  if (!context) {
+    throw new Error('useMiniplayer must be used within a MiniplayerProvider');
+}
+  }
+  return context;
 };
 
-export const useMiniplayer: any = (): MiniplayerContextType => {
- const context = useContext<any>(MiniplayerContext);
- if (!context) {
- throw new Error('useMiniplayer must be used within a MiniplayerProvider');
- }
- return context;
+interface MiniplayerProviderProps {
+  children: ReactNode;
+}
+
+export const MiniplayerProvider: React.FC<MiniplayerProviderProps> = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const openMiniplayer = (video: Video) => {
+    setCurrentVideo(video);
+    setIsOpen(true);
+    setIsPlaying(true);
+}
+  };
+
+  const closeMiniplayer = () => {
+    setIsOpen(false);
+    setCurrentVideo(null);
+    setIsPlaying(false);
+}
+  };
+
+  const togglePlay = () => {
+    setIsPlaying(prev => !prev);
+}
+  };
+
+  const value = {
+    isOpen,
+    currentVideo,
+    isPlaying,
+    openMiniplayer,
+    closeMiniplayer,
+    togglePlay
+  };
+
+  return (
+    <MiniplayerContext.Provider value={value}>
+      {children}
+// FIXED:     </MiniplayerContext.Provider>
+  );
 };
 
 export default MiniplayerProvider;

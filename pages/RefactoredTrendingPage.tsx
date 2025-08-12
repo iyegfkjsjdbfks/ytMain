@@ -60,20 +60,20 @@ const RefactoredTrendingPage: React.FC = () => {
  loading={loading}
  error={error}
  isEmpty={!videos || videos.length === 0}
- emptyComponent={
+ emptyComponent={ />
  <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
  <div className="text-gray-400 mb-4">
  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  No trending videos available
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400">
  Check back later for trending content.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  }
  >
  <ReusableVideoGrid
@@ -86,9 +86,9 @@ const RefactoredTrendingPage: React.FC = () => {
  showDuration={true}
  showViews={true}
  showUploadDate={true}
- className="mt-6"
+// FIXED:  className="mt-6" />
  />
- </StandardPageLayout>
+// FIXED:  </StandardPageLayout>
  );
 };
 

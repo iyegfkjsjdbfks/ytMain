@@ -235,7 +235,7 @@ return {
  // <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center space-x-2">
  // <Button
  // size="sm"
- // variant="secondary"
+ // variant="secondary" />
  // onClick={() => openEditModal(video)}
  // disabled={actionLoading}
  // >
@@ -243,7 +243,7 @@ return {
  // </Button>
  // <Button
  // size="sm"
- // variant="danger"
+ // variant="danger" />
  // onClick={() => handleVideoDelete(video.id)}
  // disabled={actionLoading}
  // >
@@ -255,7 +255,7 @@ return {
  // <div className="absolute top-2 right-2">
  // <Badge
  // variant={video.visibility === 'public' ? 'default' : 'secondary'}
- // className="text-xs"
+ // className="text-xs" />
  // >
  // {video.visibility}
  // </Badge>
@@ -267,7 +267,7 @@ return {
  // <ProgressBar
  // value={uploadProgress[video.id].progress || 0}
  // size="sm"
- // className="h-1"
+ // className="h-1" />
  // />
  // <p className="text-white text-xs mt-1">
  // {uploadProgress[video.id].status}
@@ -291,35 +291,35 @@ return {
  error={videosError}
  isEmpty={videos.length === 0}
  title="Content Manager"
- headerActions={
+ headerActions={ />
  <Button onClick={() => setIsUploadModalOpen(true)}>
  Upload Video
- </Button>
+// FIXED:  </Button>
  }
  emptyComponent={
  <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
  <div className="text-gray-400 mb-4">
  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  No videos found
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400 mb-4">
  Upload your first video to get started!
- </p>
+// FIXED:  </p>
  <Button onClick={() => setIsUploadModalOpen(true)}>
  Upload Video
- </Button>
- </div>
+// FIXED:  </Button>
+// FIXED:  </div>
  }
  >
  {/* Action Error */}
  {actionError && (
  <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
  <p className="text-red-600 dark:text-red-400 text-sm">{actionError}</p>
- </div>
+// FIXED:  </div>
  )}
 
  {/* Content Tabs */}
@@ -327,20 +327,20 @@ return {
  <TabsList className="grid w-full grid-cols-5">
  <TabsTrigger value="all">
  All ({tabCounts.all})
- </TabsTrigger>
+// FIXED:  </TabsTrigger>
  <TabsTrigger value="published">
  Published ({tabCounts.published})
- </TabsTrigger>
+// FIXED:  </TabsTrigger>
  <TabsTrigger value="unlisted">
  Unlisted ({tabCounts.unlisted})
- </TabsTrigger>
+// FIXED:  </TabsTrigger>
  <TabsTrigger value="private">
  Private ({tabCounts.private})
- </TabsTrigger>
+// FIXED:  </TabsTrigger>
  <TabsTrigger value="drafts">
  Drafts ({tabCounts.drafts})
- </TabsTrigger>
- </TabsList>
+// FIXED:  </TabsTrigger>
+// FIXED:  </TabsList>
 
  <TabsContent value={activeTab} className="mt-6">
  <ReusableVideoGrid
@@ -349,30 +349,30 @@ return {
  error={null}
  emptyMessage={`No ${activeTab} videos found.`}
  columns={4}
- className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+// FIXED:  className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
  />
- </TabsContent>
- </Tabs>
+// FIXED:  </TabsContent>
+// FIXED:  </Tabs>
 
  {/* Upload Modal */}
  <BaseModal
- isOpen={isUploadModalOpen}
+ isOpen={isUploadModalOpen} />
  onClose={() => setIsUploadModalOpen(false)}
  title="Upload Video"
  size="lg"
  >
  <BaseForm
- fields={uploadFormFields}
- onSubmit={(e: any) => handleVideoUpload(e)}
+ fields={uploadFormFields} />
+// FIXED:  onSubmit={(e: any) => handleVideoUpload(e)}
  submitLabel="Upload Video"
  loading={actionLoading}
  error={actionError}
  />
- </BaseModal>
+// FIXED:  </BaseModal>
 
  {/* Edit Modal */}
  <BaseModal
- isOpen={isEditModalOpen}
+ isOpen={isEditModalOpen} />
  onClose={() => {
  setIsEditModalOpen(false);
  setSelectedVideo(null);
@@ -381,15 +381,15 @@ return {
  size="lg"
  >
  <BaseForm
- fields={editFormFields}
- onSubmit={(e: any) => handleVideoEdit(e)}
+ fields={editFormFields} />
+// FIXED:  onSubmit={(e: any) => handleVideoEdit(e)}
  submitLabel="Update Video"
  loading={actionLoading}
  error={actionError}
  initialValues={getEditFormInitialValues()}
  />
- </BaseModal>
- </StandardPageLayout>
+// FIXED:  </BaseModal>
+// FIXED:  </StandardPageLayout>
  );
 };
 

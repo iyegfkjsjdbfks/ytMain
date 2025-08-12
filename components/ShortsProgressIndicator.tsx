@@ -21,15 +21,15 @@ return null;
  {/* Numeric indicator */}
  <div className="bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full">
  {displayIndex} / {totalCount}
- </div>
+// FIXED:  </div>
 
  {/* Progress bar */}
  <div className="w-1 h-20 bg-white/20 rounded-full overflow-hidden">
  <div
- className="w-full bg-white rounded-full transition-all duration-300 ease-out"
- style={{ height: `${progress}%` }
+// FIXED:  className="w-full bg-white rounded-full transition-all duration-300 ease-out"
+// FIXED:  style={{ height: `${progress}%` } />
  />
- </div>
+// FIXED:  </div>
 
  {/* Dots indicator for smaller counts */}
  {totalCount <= 10 && (
@@ -37,18 +37,18 @@ return null;
  {Array.from({ length: totalCount }, (_, index) => (
  <div
  key={index}
- className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+// FIXED:  className={`w-2 h-2 rounded-full transition-colors duration-200 ${
  index === currentIndex
  ? 'bg-white'
  : index < currentIndex
  ? 'bg-white/60'
  : 'bg-white/20'
- }`}
+ }`} />
  />
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

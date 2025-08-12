@@ -226,9 +226,9 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
  return (
  <div className={`relative ${className}`} ref={dropdownRef}>
- <button
- onClick={() => setIsOpen(!isOpen)}
- className="relative p-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
+ <button />
+// FIXED:  onClick={() => setIsOpen(!isOpen)}
+// FIXED:  className="relative p-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
  title="Notifications"
  >
  {unreadCount > 0 ? (
@@ -239,77 +239,77 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  {unreadCount > 0 && (
  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
  {unreadCount > 99 ? '99+' : unreadCount}
- </span>
+// FIXED:  </span>
  )}
- </button>
+// FIXED:  </button>
 
  {isOpen && (
  <div className="absolute top-full right-0 mt-2 w-96 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl z-50 max-h-96 overflow-hidden">
  <div className="p-4 border-b border-neutral-200 dark:border-neutral-700">
  <div className="flex items-center justify-between mb-3">
  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Notifications</h3>
- <button
- onClick={() => setIsOpen(false)}
- className="p-1 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+ <button />
+// FIXED:  onClick={() => setIsOpen(false)}
+// FIXED:  className="p-1 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
  >
  <XMarkIcon className="w-5 h-5" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  <div className="flex items-center justify-between">
  <div className="flex space-x-2">
- <button
- onClick={() => setFilter('all')}
- className={`px-3 py-1 text-sm rounded-full transition-colors ${
+ <button />
+// FIXED:  onClick={() => setFilter('all')}
+// FIXED:  className={`px-3 py-1 text-sm rounded-full transition-colors ${
  filter === 'all'
  ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
  : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700'
  }`}
  >
  All
- </button>
- <button
- onClick={() => setFilter('unread')}
- className={`px-3 py-1 text-sm rounded-full transition-colors ${
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setFilter('unread')}
+// FIXED:  className={`px-3 py-1 text-sm rounded-full transition-colors ${
  filter === 'unread'
  ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
  : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700'
  }`}
  >
  Unread ({unreadCount})
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {unreadCount > 0 && (
- <button
- onClick={(e: any) => markAllAsRead(e)}
- className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+ <button />
+// FIXED:  onClick={(e: any) => markAllAsRead(e)}
+// FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
  >
  Mark all read
- </button>
+// FIXED:  </button>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="max-h-80 overflow-y-auto">
  {filteredNotifications.length === 0 ? (
  <div className="p-8 text-center text-neutral-500 dark:text-neutral-400">
  <BellIcon className="w-12 h-12 mx-auto mb-3 opacity-50" />
  <p>No notifications</p>
- </div>
+// FIXED:  </div>
  ) : (
  filteredNotifications.map((notification) => (
  <div
  key={notification.id}
- className={`p-4 border-b border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-750 transition-colors ${
+// FIXED:  className={`p-4 border-b border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-750 transition-colors ${
  !notification.isRead ? 'bg-blue-50 dark:bg-blue-950/20' : ''
- }`}
+ }`} />
  >
  <div className="flex items-start space-x-3">
  <img
- src={notification.channelAvatar}
- alt={notification.channelName}
- className="w-10 h-10 rounded-full flex-shrink-0"
+// FIXED:  src={notification.channelAvatar}
+// FIXED:  alt={notification.channelName}
+// FIXED:  className="w-10 h-10 rounded-full flex-shrink-0" />
  />
 
  <div className="flex-1 min-w-0">
@@ -319,55 +319,55 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  <span className="text-lg">{getNotificationIcon(notification.type)}</span>
  <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
  {notification.title}
- </p>
+// FIXED:  </p>
  {!notification.isRead && (
  <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
  )}
- </div>
+// FIXED:  </div>
  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
  {notification.channelName} {notification.message}
- </p>
+// FIXED:  </p>
  <p className="text-xs text-neutral-500 dark:text-neutral-500">
  {formatDistanceToNow(new Date(notification.timestamp))} ago
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-1 ml-2">
  {!notification.isRead && (
- <button
- onClick={() => markAsRead(notification.id)}
- className="p-1 text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400"
+ <button />
+// FIXED:  onClick={() => markAsRead(notification.id)}
+// FIXED:  className="p-1 text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400"
  title="Mark as read"
  >
  <CheckIcon className="w-4 h-4" />
- </button>
+// FIXED:  </button>
  )}
- <button
- onClick={() => deleteNotification(notification.id)}
- className="p-1 text-neutral-400 hover:text-red-600 dark:hover:text-red-400"
+ <button />
+// FIXED:  onClick={() => deleteNotification(notification.id)}
+// FIXED:  className="p-1 text-neutral-400 hover:text-red-600 dark:hover:text-red-400"
  title="Delete notification"
  >
  <TrashIcon className="w-4 h-4" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {notification.videoThumbnail && (
  <img
- src={notification.videoThumbnail}
- alt="Video thumbnail"
- className="w-20 h-11 rounded mt-2 object-cover"
+// FIXED:  src={notification.videoThumbnail}
+// FIXED:  alt="Video thumbnail"
+// FIXED:  className="w-20 h-11 rounded mt-2 object-cover" />
  />
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

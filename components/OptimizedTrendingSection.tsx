@@ -55,10 +55,10 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  {trendingVideos.map((video) => (
  <MemoizedVideoCard
  key={video.id}
- video={video}
+ video={video} />
  />
  ))}
- </div>
+// FIXED:  </div>
  ), [trendingVideos]);
 
  if (loading as any) {
@@ -67,7 +67,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  <div className="flex items-center gap-2 mb-4">
  <FireIcon className="w-6 h-6 text-red-500" />
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
- </div>
+// FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
  {Array.from({ length: maxVideos }).map((_, index) => (
  <div key={index} className="animate-pulse">
@@ -78,12 +78,12 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </section>
+// FIXED:  </div>
+// FIXED:  </section>
  );
  }
 
@@ -93,17 +93,17 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  <div className="flex items-center gap-2 mb-4">
  <FireIcon className="w-6 h-6 text-red-500" />
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
- </div>
+// FIXED:  </div>
  <div className="text-center py-8">
  <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
- <button
- onClick={(e: any) => fetchTrendingVideos(e)}
- className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+ <button />
+// FIXED:  onClick={(e: any) => fetchTrendingVideos(e)}
+// FIXED:  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
  >
  Try Again
- </button>
- </div>
- </section>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </section>
  );
  }
 
@@ -113,11 +113,11 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  <div className="flex items-center gap-2 mb-4">
  <FireIcon className="w-6 h-6 text-red-500" />
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
- </div>
+// FIXED:  </div>
  <div className="text-center py-8">
  <p className="text-gray-600 dark:text-gray-400">No trending videos available right now.</p>
- </div>
- </section>
+// FIXED:  </div>
+// FIXED:  </section>
  );
  }
 
@@ -127,17 +127,17 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  <div className="flex items-center gap-2">
  <FireIcon className="w-6 h-6 text-red-500" />
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
- </div>
+// FIXED:  </div>
  <Link
  to="/trending"
- className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors"
+// FIXED:  className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors" />
  >
  View all
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
 
  {videoGrid}
- </section>
+// FIXED:  </section>
  );
 });
 

@@ -116,7 +116,7 @@ return [];
  return (
  <div className="flex justify-center items-center min-h-96">
  <LoadingSpinner size="lg" />
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -126,9 +126,9 @@ return [];
  <SubscriptionsIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
  Something went wrong
- </h2>
+// FIXED:  </h2>
  <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -140,40 +140,40 @@ return [];
  <SubscriptionsIcon className="w-8 h-8 text-red-600 dark:text-red-500" />
  <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
  Subscriptions
- </h1>
- </div>
+// FIXED:  </h1>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-2">
  <Button
  variant={showChannels ? 'primary' : 'secondary'}
- size="sm"
- onClick={() => setShowChannels(!showChannels)}
- className="flex items-center space-x-2"
+ size="sm" />
+// FIXED:  onClick={() => setShowChannels(!showChannels)}
+// FIXED:  className="flex items-center space-x-2"
  >
  <UserGroupIcon className="w-4 h-4" />
  <span>Manage</span>
- </Button>
+// FIXED:  </Button>
 
  <div className="flex items-center border border-neutral-200 dark:border-neutral-700 rounded-lg">
  <Button
  variant={viewType === 'grid' ? 'primary' : 'ghost'}
- size="sm"
- onClick={() => setViewType('grid')}
- className="rounded-r-none border-r border-neutral-200 dark:border-neutral-700"
+ size="sm" />
+// FIXED:  onClick={() => setViewType('grid')}
+// FIXED:  className="rounded-r-none border-r border-neutral-200 dark:border-neutral-700"
  >
  <ViewColumnsIcon className="w-4 h-4" />
- </Button>
+// FIXED:  </Button>
  <Button
  variant={viewType === 'list' ? 'primary' : 'ghost'}
- size="sm"
- onClick={() => setViewType('list')}
- className="rounded-l-none"
+ size="sm" />
+// FIXED:  onClick={() => setViewType('list')}
+// FIXED:  className="rounded-l-none"
  >
  <Bars3Icon className="w-4 h-4" />
- </Button>
- </div>
- </div>
- </div>
+// FIXED:  </Button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Subscription Statistics */}
  <SubscriptionStats
@@ -181,7 +181,7 @@ return [];
  notificationsEnabled={subscriptionStats.notificationsEnabled}
  totalVideos={subscriptionStats.totalVideos}
  newVideosToday={subscriptionStats.newVideosToday}
- className="mb-6"
+// FIXED:  className="mb-6" />
  />
 
  {/* Subscribed Channels Management */}
@@ -190,53 +190,53 @@ return [];
  <div className="flex items-center justify-between mb-4">
  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
  Subscribed Channels ({subscribedChannels.length})
- </h2>
- </div>
+// FIXED:  </h2>
+// FIXED:  </div>
 
  {subscribedChannels.length === 0 ? (
  <div className="text-center py-8">
  <UserGroupIcon className="w-12 h-12 text-neutral-400 dark:text-neutral-600 mx-auto mb-3" />
  <p className="text-neutral-600 dark:text-neutral-400">
  You haven't subscribed to any channels yet.
- </p>
+// FIXED:  </p>
  <Link
  to="/trending"
- className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium mt-2 inline-block"
+// FIXED:  className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium mt-2 inline-block" />
  >
  Discover channels to subscribe to
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  ) : (
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {subscribedChannels.map((channel: any) => (
  <div
  key={channel.id}
- className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
+// FIXED:  className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700" />
  >
  <Link to={`/channel/${encodeURIComponent(channel.name)}`}>
  <img
- src={channel.avatar}
- alt={channel.name}
- className="w-12 h-12 rounded-full object-cover"
+// FIXED:  src={channel.avatar}
+// FIXED:  alt={channel.name}
+// FIXED:  className="w-12 h-12 rounded-full object-cover" />
  />
- </Link>
+// FIXED:  </Link>
 
  <div className="flex-1 min-w-0">
  <Link
  to={`/channel/${encodeURIComponent(channel.name)}`}
- className="block font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-500 truncate"
+// FIXED:  className="block font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-500 truncate" />
  >
  {channel.name}
- </Link>
+// FIXED:  </Link>
  <p className="text-sm text-neutral-600 dark:text-neutral-400">
  {channel.subscribers} subscribers
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-1">
- <button
- onClick={() => toggleNotifications(channel.id)}
- className={`p-2 rounded-full transition-colors ${
+ <button />
+// FIXED:  onClick={() => toggleNotifications(channel.id)}
+// FIXED:  className={`p-2 rounded-full transition-colors ${
  channel.notificationsEnabled
  ? 'bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-800 hover:bg-neutral-700 dark:hover:bg-neutral-300'
  : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-600'
@@ -248,22 +248,22 @@ return [];
  ) : (
  <BellIcon className="w-4 h-4" />
  )}
- </button>
+// FIXED:  </button>
 
  <Button
  variant="ghost"
- size="sm"
- onClick={() => unsubscribe(channel.id)}
- className="text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-500"
+ size="sm" />
+// FIXED:  onClick={() => unsubscribe(channel.id)}
+// FIXED:  className="text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-500"
  >
  Unsubscribe
- </Button>
- </div>
- </div>
+// FIXED:  </Button>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Tabs and Filters */}
@@ -277,21 +277,21 @@ return [];
  <TabsTrigger value="unwatched">Unwatched</TabsTrigger>
  <TabsTrigger value="live">Live</TabsTrigger>
  <TabsTrigger value="posts">Posts</TabsTrigger>
- </TabsList>
+// FIXED:  </TabsList>
 
  <div className="flex items-center space-x-2 ml-4">
  <AdjustmentsHorizontalIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
  <select
- value={sortBy}
- onChange={(e) => setSortBy(e.target.value as SortType)}
- className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-3 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={(e) => setSortBy(e.target.value as SortType)}
+// FIXED:  className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-3 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
  >
  <option value="latest">Latest</option>
  <option value="popular">Popular</option>
  <option value="oldest">Oldest</option>
- </select>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <TabsContent value={activeTab}>
  {filteredVideos.length === 0 ? (
@@ -302,22 +302,22 @@ return [];
  ? 'No new videos from your subscriptions'
  : `No ${activeTab} videos from your subscriptions`
  }
- </h2>
+// FIXED:  </h2>
  <p className="text-neutral-600 dark:text-neutral-400 mb-4">
  {subscribedChannels.length === 0
  ? 'Subscribe to channels to see their latest videos here.'
  : 'Check back later for new content from your subscribed channels.'
  }
- </p>
+// FIXED:  </p>
  {subscribedChannels.length === 0 && (
  <Link
  to="/trending"
- className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+// FIXED:  className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors" />
  >
  Discover channels
- </Link>
+// FIXED:  </Link>
  )}
- </div>
+// FIXED:  </div>
  ) : (
  <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
  {filteredVideos.map((video: any) => (
@@ -325,15 +325,15 @@ return [];
  key={`${activeTab}-${video.id}`}
  video={video}
  viewType={viewType}
- showChannel={true}
+ showChannel={true} />
  />
  ))}
- </div>
+// FIXED:  </div>
  )}
- </TabsContent>
- </Tabs>
- </div>
- </div>
+// FIXED:  </TabsContent>
+// FIXED:  </Tabs>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

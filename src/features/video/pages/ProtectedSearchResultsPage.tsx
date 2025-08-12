@@ -24,10 +24,10 @@ const ProtectedSearchResultsPage: FC = () => {
  <DataFetchErrorBoundary
  dataType='search results'
  onRetry={handleRetry}
- showOfflineMessage={true}
+ showOfflineMessage={true} />
  >
  <SearchResultsPage />
- </DataFetchErrorBoundary>
+// FIXED:  </DataFetchErrorBoundary>
  );
 };
 

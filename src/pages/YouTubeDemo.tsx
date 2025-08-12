@@ -40,53 +40,53 @@ const YouTubeDemo: React.FC = () => {
  <div className='flex flex-col md:flex-row gap-4 mb-4'>
  <div className='flex-1'>
  <input
- type='text'
- value={videoUrl}
- onChange={e => setVideoUrl(e.target.value)}
- placeholder='Enter YouTube URL'
- className='w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+// FIXED:  type='text'
+// FIXED:  value={videoUrl} />
+// FIXED:  onChange={e => setVideoUrl(e.target.value)}
+// FIXED:  placeholder='Enter YouTube URL'
+// FIXED:  className='w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  />
  {error && <p className='text-red-500 text-sm mt-1'>{error}</p>}
- </div>
+// FIXED:  </div>
  <button
- type='submit'
- className='bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded transition-colors'
+// FIXED:  type='submit'
+// FIXED:  className='bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded transition-colors' />
  >
  Load Video
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  <div className='flex flex-wrap gap-6'>
  <label className='flex items-center space-x-2'>
  <input
- type='checkbox'
- checked={useCustomControls}
- onChange={e => setUseCustomControls(e.target.checked)}
- className='rounded text-blue-500'
+// FIXED:  type='checkbox'
+// FIXED:  checked={useCustomControls} />
+// FIXED:  onChange={e => setUseCustomControls(e.target.checked)}
+// FIXED:  className='rounded text-blue-500'
  />
  <span>Use Custom Controls</span>
- </label>
+// FIXED:  </label>
 
  <label className='flex items-center space-x-2'>
  <input
- type='checkbox'
- checked={autoplay}
- onChange={e => setAutoplay(e.target.checked)}
- className='rounded text-blue-500'
+// FIXED:  type='checkbox'
+// FIXED:  checked={autoplay} />
+// FIXED:  onChange={e => setAutoplay(e.target.checked)}
+// FIXED:  className='rounded text-blue-500'
  />
  <span>Autoplay</span>
- </label>
- </div>
- </form>
+// FIXED:  </label>
+// FIXED:  </div>
+// FIXED:  </form>
 
  <div className='aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden'>
  <YouTubePlayerExample
  videoId={videoId}
  controls={!useCustomControls}
  autoplay={autoplay}
- className='w-full h-full'
+// FIXED:  className='w-full h-full' />
  />
- </div>
+// FIXED:  </div>
 
  <div className='mt-6 p-4 bg-gray-50 rounded-lg'>
  <h2 className='text-xl font-semibold mb-3'>Current Video Info</h2>
@@ -94,23 +94,23 @@ const YouTubeDemo: React.FC = () => {
  <div>
  <h3 className='font-medium text-gray-700'>Video ID:</h3>
  <p className='font-mono bg-gray-100 p-2 rounded'>{videoId}</p>
- </div>
+// FIXED:  </div>
  <div>
  <h3 className='font-medium text-gray-700'>Video URL:</h3>
  <p className='break-all'>
  <a
- href={`https://www.youtube.com/watch?v=${videoId}`}
+// FIXED:  href={`https://www.youtube.com/watch?v=${videoId}`}
  target='_blank'
  rel='noopener noreferrer'
- className='text-blue-500 hover:underline'
+// FIXED:  className='text-blue-500 hover:underline' />
  >,
  https://www.youtube.com/watch?v={videoId}
- </a>
- </p>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </a>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white rounded-lg shadow-md p-6'>
  <h2 className='text-2xl font-bold mb-4'>How to Use</h2>
@@ -139,11 +139,11 @@ const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
 player.playVideo();
 player.pauseVideo();
 player.seekTo(60); // Seek to 1 minute`}
- </pre>
+// FIXED:  </pre>
 
  <h3 className='text-xl font-semibold mt-6'>
  Using the React Component
- </h3>
+// FIXED:  </h3>
  <pre className='bg-gray-100 p-4 rounded-lg overflow-x-auto'>
  import{' '}
  {`import { YouTubePlayerExample } from './components/examples/YouTubePlayerExample';
@@ -155,19 +155,19 @@ player.seekTo(60); // Seek to 1 minute`}
  height={450}
  autoplay={false}
  controls={true}
- className="my-4"
+// FIXED:  className="my-4" />
 />`}
- </pre>
- </div>
- </div>
- </div>
+// FIXED:  </pre>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
 const YouTubeDemoWithErrorBoundary: any = () => (
  <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
  <YouTubeDemo />
- </ErrorBoundary>
+// FIXED:  </ErrorBoundary>
 );
 
 export default YouTubeDemoWithErrorBoundary;

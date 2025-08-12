@@ -7,7 +7,7 @@ const PlaylistDetailSkeleton: React.FC = () => {
  <div className="flex space-x-3 mb-8">
  <div className="h-10 w-32 bg-neutral-200 dark:bg-neutral-700 rounded-full" />
  <div className="h-10 w-32 bg-neutral-200 dark:bg-neutral-700 rounded-full" />
- </div>
+// FIXED:  </div>
  {Array.from({ length: 5 }).map((_, index) => (
  <div key={index} className="flex items-center space-x-3 py-2.5 border-b border-neutral-200 dark:border-neutral-800">
  <div className="w-6 text-neutral-400 dark:text-neutral-500 bg-neutral-200 dark:bg-neutral-700 h-6 rounded" />
@@ -15,10 +15,10 @@ const PlaylistDetailSkeleton: React.FC = () => {
  <div className="flex-grow space-y-2">
  <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
  <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  );
 };
 

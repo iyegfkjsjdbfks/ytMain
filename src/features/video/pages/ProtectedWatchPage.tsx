@@ -25,10 +25,10 @@ const ProtectedWatchPage: FC = () => {
  <DataFetchErrorBoundary
  dataType='video and recommendations'
  onRetry={handleRetry}
- showOfflineMessage={true}
+ showOfflineMessage={true} />
  >
  <WatchPage />
- </DataFetchErrorBoundary>
+// FIXED:  </DataFetchErrorBoundary>
  );
 };
 

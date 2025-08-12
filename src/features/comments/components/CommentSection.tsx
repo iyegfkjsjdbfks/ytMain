@@ -77,11 +77,11 @@ const CommentItem: React.FC<CommentItemProps> = ({
  {/* Avatar */}
  <div className='flex-shrink-0'>
  <img
- src={comment.authorAvatar || '/default-avatar.png'}
- alt={comment.authorName}
- className='w-10 h-10 rounded-full object-cover'
+// FIXED:  src={comment.authorAvatar || '/default-avatar.png'}
+// FIXED:  alt={comment.authorName}
+// FIXED:  className='w-10 h-10 rounded-full object-cover' />
  />
- </div>
+// FIXED:  </div>
 
  {/* Comment Content */}
  <div className='flex-1 min-w-0'>
@@ -89,33 +89,33 @@ const CommentItem: React.FC<CommentItemProps> = ({
  <div className='flex items-center gap-2 mb-1'>
  <span className='font-medium text-sm text-gray-900 dark:text-white'>
  {comment.authorName}
- </span>
+// FIXED:  </span>
  {isChannelOwner && (
  <span className='bg-gray-100 dark:bg-gray-700 text-xs px-2 py-0.5 rounded text-gray-600 dark:text-gray-300'>
  Creator
- </span>
+// FIXED:  </span>
  )}
  <span className='text-xs text-gray-500 dark:text-gray-400'>
  {formatDistanceToNow(new Date(comment.createdAt), {
  addSuffix: true })}
- </span>
+// FIXED:  </span>
  {comment.isPinned && (
  <PinSolidIcon className='w-4 h-4 text-gray-500' />
  )}
- </div>
+// FIXED:  </div>
 
  {/* Comment Text */}
  <div className='text-sm text-gray-900 dark:text-white mb-2 whitespace-pre-wrap'>
  {comment.content}
- </div>
+// FIXED:  </div>
 
  {/* Actions */}
  <div className='flex items-center gap-4'>
  {/* Like/Dislike */}
  <div className='flex items-center gap-2'>
- <button
- onClick={() => onReact(comment.id, 'like')}
- className={
+ <button />
+// FIXED:  onClick={() => onReact(comment.id, 'like')}
+// FIXED:  className={
  'flex items-center gap-1 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400'
  }
  >
@@ -123,31 +123,31 @@ const CommentItem: React.FC<CommentItemProps> = ({
  {comment.likes > 0 && (
  <span className='text-xs'>{formatCount(comment.likes)}</span>
  )}
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => onReact(comment.id, 'dislike')}
- className={
+ <button />
+// FIXED:  onClick={() => onReact(comment.id, 'dislike')}
+// FIXED:  className={
  'p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400'
  }
  >
  <HandThumbDownIcon className='w-4 h-4' />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Reply */}
- <button
- onClick={() => setIsReplying(!isReplying)}
- className='text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors'
+ <button />
+// FIXED:  onClick={() => setIsReplying(!isReplying)}
+// FIXED:  className='text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors'
  >
  Reply
- </button>
+// FIXED:  </button>
 
  {/* Heart (Channel Owner) */}
  {isChannelOwner && onHeart && (
- <button
- onClick={() => onHeart(comment.id)}
- className={`p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+ <button />
+// FIXED:  onClick={() => onHeart(comment.id)}
+// FIXED:  className={`p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
  comment.isHearted
  ? 'text-red-600'
  : 'text-gray-600 dark:text-gray-400'
@@ -158,99 +158,99 @@ const CommentItem: React.FC<CommentItemProps> = ({
  ) : (
  <HeartIcon className='w-4 h-4' />
  )}
- </button>
+// FIXED:  </button>
  )}
 
  {/* Menu */}
  <div className='relative' ref={menuRef}>
- <button
- onClick={() => setShowMenu(!showMenu)}
- className='p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400'
+ <button />
+// FIXED:  onClick={() => setShowMenu(!showMenu)}
+// FIXED:  className='p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400'
  >
  <EllipsisVerticalIcon className='w-4 h-4' />
- </button>
+// FIXED:  </button>
 
  {showMenu && (
  <div className='absolute right-0 top-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-1 z-10 min-w-[120px]'>
  {isChannelOwner && onPin && (
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  onPin(comment.id);
  setShowMenu(false);
  }
- className='w-full px-3 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'
+// FIXED:  className='w-full px-3 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'
  >
  <MapPinIcon className='w-4 h-4' />
  {comment.isPinned ? 'Unpin' : 'Pin'}
- </button>
+// FIXED:  </button>
  )}
  {onReport && (
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  onReport(comment.id, 'inappropriate');
  setShowMenu(false);
  }
- className='w-full px-3 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 text-red-600'
+// FIXED:  className='w-full px-3 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 text-red-600'
  >
  <FlagIcon className='w-4 h-4' />
  Report
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Reply Input */}
  {isReplying && (
  <div className='mt-3 flex gap-3'>
  <img
- src='/default-avatar.png'
- alt='Your avatar'
- className='w-8 h-8 rounded-full object-cover flex-shrink-0'
+// FIXED:  src='/default-avatar.png'
+// FIXED:  alt='Your avatar'
+// FIXED:  className='w-8 h-8 rounded-full object-cover flex-shrink-0' />
  />
  <div className='flex-1'>
  <textarea
- value={replyText}
- onChange={e => setReplyText(e.target.value)}
- placeholder='Add a reply...'
- className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none'
+// FIXED:  value={replyText} />
+// FIXED:  onChange={e => setReplyText(e.target.value)}
+// FIXED:  placeholder='Add a reply...'
+// FIXED:  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none'
  rows={2}
  autoFocus
  />
  <div className='flex gap-2 mt-2'>
- <button
- onClick={(e: any) => handleReplySubmit(e)}
- disabled={!replyText.trim()}
- className='px-4 py-1 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
+ <button />
+// FIXED:  onClick={(e: any) => handleReplySubmit(e)}
+// FIXED:  disabled={!replyText.trim()}
+// FIXED:  className='px-4 py-1 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
  >
  Reply
- </button>
- <button
- onClick={() => {
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => {
  setIsReplying(false);
  setReplyText('');
  }
- className='px-4 py-1 text-gray-600 dark:text-gray-400 rounded-full text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'
+// FIXED:  className='px-4 py-1 text-gray-600 dark:text-gray-400 rounded-full text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'
  >
  Cancel
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Show Replies */}
  {comment.replies && comment.replies.length > 0 && (
  <div className='mt-3'>
- <button
- onClick={() => setShowReplies(!showReplies)}
- className='flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium'
+ <button />
+// FIXED:  onClick={() => setShowReplies(!showReplies)}
+// FIXED:  className='flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium'
  >
  <ChatBubbleLeftIcon className='w-4 h-4' />
  {showReplies ? 'Hide' : 'Show'} {comment.replies.length}{' '}
  {comment.replies.length === 1 ? 'reply' : 'replies'}
- </button>
+// FIXED:  </button>
 
  {showReplies && (
  <div className='mt-3 space-y-4'>
@@ -260,19 +260,19 @@ const CommentItem: React.FC<CommentItemProps> = ({
  comment={reply}
  isChannelOwner={isChannelOwner}
  onReply={onReply}
- onReact={onReact}
+ onReact={onReact} />
  onPin={onPin || (() => {})}
  onHeart={onHeart || (() => {})}
  onReport={onReport || (() => {})}
  level={level + 1}
  />
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
@@ -344,7 +344,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
  return (
  <div className={`p-4 text-center text-red-600 ${className}`}>
  Failed to load comments. Please try again.
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -355,81 +355,81 @@ const CommentSection: React.FC<CommentSectionProps> = ({
  <div className='flex items-center gap-4'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
  {comments?.length || 0} Comments
- </h3>
+// FIXED:  </h3>
 
  {/* Sort Options */}
  <div className='flex items-center gap-2'>
- <button
- onClick={() => setSortBy('top')}
- className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+ <button />
+// FIXED:  onClick={() => setSortBy('top')}
+// FIXED:  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
  sortBy === 'top'
  ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
  }`}
  >
  Top comments
- </button>
- <button
- onClick={() => setSortBy('newest')}
- className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setSortBy('newest')}
+// FIXED:  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
  sortBy === 'newest'
  ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
  }`}
  >
  Newest first
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Add Comment */}
  <div className='flex gap-3'>
  <img
- src='/default-avatar.png'
- alt='Your avatar'
- className='w-10 h-10 rounded-full object-cover flex-shrink-0'
+// FIXED:  src='/default-avatar.png'
+// FIXED:  alt='Your avatar'
+// FIXED:  className='w-10 h-10 rounded-full object-cover flex-shrink-0' />
  />
  <div className='flex-1'>
  <div
- className={`border-b-2 transition-colors ${
+// FIXED:  className={`border-b-2 transition-colors ${
  showCommentInput
  ? 'border-blue-600'
  : 'border-gray-300 dark:border-gray-600'
- }`}
+ }`} />
  >
  <textarea
- value={newComment}
- onChange={e => setNewComment(e.target.value)}
+// FIXED:  value={newComment} />
+// FIXED:  onChange={e => setNewComment(e.target.value)}
  onFocus={() => setShowCommentInput(true)}
- placeholder='Add a comment...'
- className='w-full p-2 bg-transparent text-gray-900 dark:text-white resize-none border-none outline-none'
+// FIXED:  placeholder='Add a comment...'
+// FIXED:  className='w-full p-2 bg-transparent text-gray-900 dark:text-white resize-none border-none outline-none'
  rows={showCommentInput ? 3 : 1}
  />
- </div>
+// FIXED:  </div>
 
  {showCommentInput && (
  <div className='flex justify-end gap-2 mt-2'>
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  setShowCommentInput(false);
  setNewComment('');
  }
- className='px-4 py-2 text-gray-600 dark:text-gray-400 rounded-full text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'
+// FIXED:  className='px-4 py-2 text-gray-600 dark:text-gray-400 rounded-full text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'
  >
  Cancel
- </button>
- <button
- onClick={(e: any) => handleCommentSubmit(e)}
- disabled={!newComment.trim() || createCommentMutation.loading}
- className='px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => handleCommentSubmit(e)}
+// FIXED:  disabled={!newComment.trim() || createCommentMutation.loading}
+// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
  >
  {createCommentMutation.loading ? 'Posting...' : 'Comment'}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Comments List */}
  {loading ? (
@@ -441,10 +441,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({
  <div className='h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/4' />
  <div className='h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4' />
  <div className='h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2' />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  ) : comments && comments.length > 0 ? (
  <div className='space-y-6'>
  {comments.map((comment: Comment) => (
@@ -453,20 +453,20 @@ const CommentSection: React.FC<CommentSectionProps> = ({
  comment={comment}
  isChannelOwner={isChannelOwner}
  onReply={handleReply}
- onReact={handleReact}
+ onReact={handleReact} />
  onPin={isChannelOwner ? handlePin : () => {}
  onHeart={isChannelOwner ? handleHeart : () => {}
  onReport={handleReport}
  />
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className='text-center py-8 text-gray-500 dark:text-gray-400'>
  <ChatBubbleLeftIcon className='w-12 h-12 mx-auto mb-4 opacity-50' />
  <p>No comments yet. Be the first to comment!</p>
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

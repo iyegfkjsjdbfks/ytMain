@@ -155,24 +155,24 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
 
  const ThumbnailContent: any = () => (
  <div
- className={cn(
+// FIXED:  className={cn(
  'relative group overflow-hidden',
  styles.thumbnail,
  sizeStyle.thumbnail
- )}
+ )} />
  >
  {/* Thumbnail Image */}
  <Link to={videoUrl} className='block w-full h-full'>
  {!imageError ? (
  <img
- src={video.thumbnailUrl}
- alt={video.title}
- className={cn(
+// FIXED:  src={video.thumbnailUrl}
+// FIXED:  alt={video.title}
+// FIXED:  className={cn(
  'w-full h-full object-cover transition-all duration-300',
  'group-hover:scale-105',
  !imageLoaded &&
  'bg-neutral-200 dark:bg-neutral-800 animate-pulse'
- )}
+ )} />
  onLoad={() => setImageLoaded(true)}
  onError={() => setImageError(true)}
  loading='lazy'
@@ -180,20 +180,20 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  ) : (
  <div className='w-full h-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center'>
  <PlayIcon className='w-8 h-8 text-neutral-400' />
- </div>
+// FIXED:  </div>
  )}
 
  {/* Overlay on hover */}
  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center'>
  <PlayIcon className='w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
- </div>
- </Link>
+// FIXED:  </div>
+// FIXED:  </Link>
 
  {/* Duration Badge */}
  {showDuration && video.duration && (
  <div className='absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded'>
  {video.duration}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Live Badge */}
@@ -201,7 +201,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  <div className='absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded flex items-center space-x-1'>
  <div className='w-2 h-2 bg-white rounded-full animate-pulse' />
  <span>LIVE</span>
- </div>
+// FIXED:  </div>
  )}
 
  {/* Actions Overlay */}
@@ -210,40 +210,40 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  <div className='flex flex-col space-y-1'>
  <UnifiedButton
  variant='ghost'
- size='xs'
- onClick={(e: any) => handleLike(e)}
- className='bg-black/50 text-white hover:bg-black/70'
+ size='xs' />
+// FIXED:  onClick={(e: any) => handleLike(e)}
+// FIXED:  className='bg-black/50 text-white hover:bg-black/70'
  >
  {isLiked ? (
  <HeartIconSolid className='w-4 h-4 text-red-500' />
  ) : (
  <HeartIcon className='w-4 h-4' />
  )}
- </UnifiedButton>
+// FIXED:  </UnifiedButton>
 
  <UnifiedButton
  variant='ghost'
- size='xs'
- onClick={(e: any) => handleSave(e)}
- className='bg-black/50 text-white hover:bg-black/70'
+ size='xs' />
+// FIXED:  onClick={(e: any) => handleSave(e)}
+// FIXED:  className='bg-black/50 text-white hover:bg-black/70'
  >
  <BookmarkIcon
- className={cn('w-4 h-4', isSaved && 'fill-current')}
+// FIXED:  className={cn('w-4 h-4', isSaved && 'fill-current')} />
  />
- </UnifiedButton>
+// FIXED:  </UnifiedButton>
 
  <UnifiedButton
  variant='ghost'
- size='xs'
- onClick={(e: any) => handleShare(e)}
- className='bg-black/50 text-white hover:bg-black/70'
+ size='xs' />
+// FIXED:  onClick={(e: any) => handleShare(e)}
+// FIXED:  className='bg-black/50 text-white hover:bg-black/70'
  >
  <ShareIcon className='w-4 h-4' />
- </UnifiedButton>
- </div>
- </div>
+// FIXED:  </UnifiedButton>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 
  const ContentSection: any = () => (
@@ -253,16 +253,16 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  video.channelAvatarUrl &&
  (variant === 'default' || variant === 'list') && (
  <Link
- to={channelUrl}
- onClick={(e: any) => handleChannelClick(e)}
- className='flex-shrink-0'
+ to={channelUrl} />
+// FIXED:  onClick={(e: any) => handleChannelClick(e)}
+// FIXED:  className='flex-shrink-0'
  >
  <img
- src={video.channelAvatarUrl}
- alt={video.channelName}
- className={cn('rounded-full object-cover', sizeStyle.avatar)}
+// FIXED:  src={video.channelAvatarUrl}
+// FIXED:  alt={video.channelName}
+// FIXED:  className={cn('rounded-full object-cover', sizeStyle.avatar)} />
  />
- </Link>
+// FIXED:  </Link>
  )}
 
  {/* Video Info */}
@@ -270,28 +270,28 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  {/* Title */}
  <Link to={videoUrl} className='block'>
  <h3
- className={cn(
+// FIXED:  className={cn(
  styles.title,
  sizeStyle.title,
  'hover:text-red-600 dark:hover:text-red-400 transition-colors'
- )}
+ )} />
  >
  {video.title}
- </h3>
- </Link>
+// FIXED:  </h3>
+// FIXED:  </Link>
 
  {/* Channel Name */}
  {showChannel && (
  <Link
- to={channelUrl}
- onClick={(e: any) => handleChannelClick(e)}
- className={cn(
+ to={channelUrl} />
+// FIXED:  onClick={(e: any) => handleChannelClick(e)}
+// FIXED:  className={cn(
  styles.meta,
  'hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors'
  )}
  >
  {video.channelName}
- </Link>
+// FIXED:  </Link>
  )}
 
  {/* Meta Information */}
@@ -300,39 +300,39 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  <div className='flex items-center space-x-1'>
  <EyeIcon className='w-3 h-3' />
  <span>{video.views}</span>
- </div>
+// FIXED:  </div>
  )}
 
  {showDate && (
  <div className='flex items-center space-x-1'>
  <ClockIcon className='w-3 h-3' />
  <span>{formatRelativeTime(video.uploadedAt)}</span>
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Description */}
  {showDescription && video.description && (
  <p className={cn(styles.meta, 'line-clamp-2')}>
  {video.description}
- </p>
+// FIXED:  </p>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Actions Menu */}
  {showActions && variant !== 'shorts' && (
  <div className='flex-shrink-0'>
  <UnifiedButton variant='ghost' size='xs'>
  <EllipsisVerticalIcon className='w-4 h-4' />
- </UnifiedButton>
- </div>
+// FIXED:  </UnifiedButton>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 
  return (
  <article
- className={cn(
+// FIXED:  className={cn(
  'group transition-all duration-200 hover:shadow-lg',
  variant === 'shorts' &&
  'bg-black text-white rounded-lg overflow-hidden',
@@ -342,11 +342,11 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  className
  )}
  data-video-id={video.id}
- data-testid={`${keyPrefix}-${video.id}`}
+// FIXED:  data-testid={`${keyPrefix}-${video.id}`} />
  >
  <ThumbnailContent />
  <ContentSection />
- </article>
+// FIXED:  </article>
  );
  }
 );

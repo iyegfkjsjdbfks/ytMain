@@ -45,8 +45,8 @@ const TestProviders: React.FC<TestProvidersProps> = ({
  <QueryClientProvider client={queryClient}>
  <BrowserRouter>
  {children}
- </BrowserRouter>
- </QueryClientProvider>
+// FIXED:  </BrowserRouter>
+// FIXED:  </QueryClientProvider>
  );
 };
 
@@ -65,7 +65,7 @@ export const renderWithProviders: any = (,
  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }: any) => (
  <TestProviders queryClient={queryClient}>
  {children}
- </TestProviders>
+// FIXED:  </TestProviders>
  );
 
  return render(ui, { wrapper: Wrapper, ...renderOptions });
@@ -86,7 +86,7 @@ export const renderHookWithProviders = <TResult, TProps>(,
  const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }: any) => (
  <TestProviders queryClient={queryClient}>
  {children}
- </TestProviders>
+// FIXED:  </TestProviders>
  );
 
  return (global as any).renderHook(hook, { wrapper, ...renderHookOptions });

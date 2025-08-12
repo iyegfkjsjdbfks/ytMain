@@ -23,9 +23,9 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
  {isModerator && (
  <div className='text-xs mt-2'>Moderator controls available</div>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

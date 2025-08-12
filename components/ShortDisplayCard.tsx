@@ -36,28 +36,28 @@ interface PlayPauseOverlayProps {
 
 const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }: any) => (
  <div
- className="absolute inset-0 flex items-center justify-center cursor-pointer"
- onClick={(e: any) => {
+// FIXED:  className="absolute inset-0 flex items-center justify-center cursor-pointer" />
+// FIXED:  onClick={(e: any) => {
  e.stopPropagation();
  onToggle();
  }
  >
  <button
- className={`
+// FIXED:  className={`
  bg-black bg-opacity-50 text-white p-4 rounded-full 
  transition-opacity duration-200 pointer-events-none
  ${!isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 hover:opacity-100'}
  hover:bg-opacity-70
  `}
- aria-label={isPlaying ? 'Pause video' : 'Play video'}
+// FIXED:  aria-label={isPlaying ? 'Pause video' : 'Play video'} />
  >
  {isPlaying ? (
  <PauseIcon className="w-8 h-8" />
  ) : (
  <PlayIcon className="w-8 h-8" />
  )}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 );
 
 // Extracted VideoInfo component
@@ -78,26 +78,26 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
  <div className="flex-1 mr-4 pointer-events-auto">
  <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
  {title}
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-300 text-xs mb-2">
  {channelName} • {views}
- </p>
+// FIXED:  </p>
  {onFollow && (
- <button
- onClick={(e: any) => {
+ <button />
+// FIXED:  onClick={(e: any) => {
  e.stopPropagation();
  onFollow();
  }
- className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+// FIXED:  className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
  isFollowed
  ? 'bg-gray-600 text-white hover:bg-gray-700'
  : 'bg-white text-black hover:bg-gray-200'
  }`}
  >
  {isFollowed ? 'Following' : 'Follow'}
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
 );
 
 // Extracted ActionButtons component
@@ -119,8 +119,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
  onShare }) => (
  <div className="flex flex-col space-y-3 pointer-events-auto">
  {/* Mute/Unmute */}
- <ActionButton
- onClick={(e: any) => {
+ <ActionButton />
+// FIXED:  onClick={(e: any) => {
  e.stopPropagation();
  onToggleMute();
  }
@@ -131,11 +131,11 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
  ) : (
  <SpeakerWaveIcon className="w-5 h-5" />
  )}
- </ActionButton>
+// FIXED:  </ActionButton>
 
  {/* Like */}
- <ActionButton
- onClick={(e: any) => onLike(e)}
+ <ActionButton />
+// FIXED:  onClick={(e: any) => onLike(e)}
  ariaLabel="Like video"
  >
  {isLiked ? (
@@ -143,31 +143,31 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
  ) : (
  <HeartIcon className="w-5 h-5" />
  )}
- </ActionButton>
+// FIXED:  </ActionButton>
 
  {/* Comment */}
- <ActionButton
- onClick={(e: any) => onComment(e)}
+ <ActionButton />
+// FIXED:  onClick={(e: any) => onComment(e)}
  ariaLabel="Comment on video"
  >
  <ChatBubbleOvalLeftIcon className="w-5 h-5" />
- </ActionButton>
+// FIXED:  </ActionButton>
 
  {/* Share */}
- <ActionButton
- onClick={(e: any) => onShare(e)}
+ <ActionButton />
+// FIXED:  onClick={(e: any) => onShare(e)}
  ariaLabel="Share video"
  >
  <ShareIcon className="w-5 h-5" />
- </ActionButton>
- </div>
+// FIXED:  </ActionButton>
+// FIXED:  </div>
 );
 
 // Extracted LoadingIndicator component
 const LoadingIndicator: React.FC = () => (
  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
  <LoadingSpinner size="md" color="white" />
- </div>
+// FIXED:  </div>
 );
 
 // Extracted ErrorState component
@@ -181,7 +181,7 @@ const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }: any) => (
  message={error}
  onRetry={onRetry}
  variant="overlay"
- showIcon={false}
+ showIcon={false} />
  />
 );
 
@@ -287,9 +287,9 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  }, [isActive, onVideoChange]);
 
  return (
- <div
+ <div />
  ref={intersectionRef as React.RefObject<HTMLDivElement>}
- className={`relative bg-black overflow-hidden group cursor-pointer ${
+// FIXED:  className={`relative bg-black overflow-hidden group cursor-pointer ${
  isOnShortsPage
  ? 'w-full h-full'
  : 'w-40 h-72 rounded-lg'
@@ -298,14 +298,14 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  {/* Real video element */}
  <video
  ref={videoRef}
- src={short.videoUrl}
+// FIXED:  src={short.videoUrl}
  poster={short.thumbnailUrl}
- className="w-full h-full object-cover cursor-pointer"
+// FIXED:  className="w-full h-full object-cover cursor-pointer"
  playsInline
  muted={videoPlayer.isMuted}
  loop
- preload="metadata"
- onClick={(e: any) => handlePlayPauseToggle(e)}
+ preload="metadata" />
+// FIXED:  onClick={(e: any) => handlePlayPauseToggle(e)}
  onEnded={() => {
  handleVideoEnd();
  }
@@ -318,14 +318,14 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  {videoPlayer.error && (
  <ErrorState
  error={videoPlayer.error.message}
- onRetry={handleRetry}
+ onRetry={handleRetry} />
  />
  )}
 
  {/* Play/Pause Overlay */}
  <PlayPauseOverlay
  isPlaying={videoPlayer.isPlaying}
- onToggle={handlePlayPauseToggle}
+ onToggle={handlePlayPauseToggle} />
  />
 
  {/* Video Info Overlay */}
@@ -336,7 +336,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  channelName={short.channelName}
  views={short.views}
  isFollowed={isFollowed}
- onFollow={onFollow ? handleFollow : undefined}
+ onFollow={onFollow ? handleFollow : undefined} />
  />
 
  {/* Action Buttons */}
@@ -346,11 +346,11 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  onToggleMute={videoPlayer.toggleMute}
  onLike={handleLike}
  onComment={handleComment}
- onShare={handleShare}
+ onShare={handleShare} />
  />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

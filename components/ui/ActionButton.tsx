@@ -28,13 +28,13 @@ const ActionButton: React.FC<ActionButtonProps> = ({
  lg: 'p-3' };
 
  return (
- <button
- onClick={(e: any) => onClick(e)}
- className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
- aria-label={ariaLabel}
+ <button />
+// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+// FIXED:  aria-label={ariaLabel}
  >
  {children}
- </button>
+// FIXED:  </button>
  );
 };
 

@@ -251,22 +251,22 @@ const DashboardPage: React.FC = () => {
  <div className='h-4 bg-gray-200 rounded w-24 mb-2' />
  <div className='h-8 bg-gray-200 rounded w-32 mb-2' />
  <div className='h-3 bg-gray-200 rounded w-16' />
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
  <div className='bg-white p-6 rounded-lg shadow'>
  <div className='h-6 bg-gray-200 rounded w-32 mb-4' />
  <div className='h-64 bg-gray-200 rounded' />
- </div>
+// FIXED:  </div>
  <div className='bg-white p-6 rounded-lg shadow'>
  <div className='h-6 bg-gray-200 rounded w-32 mb-4' />
  <div className='h-64 bg-gray-200 rounded' />
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -278,19 +278,19 @@ const DashboardPage: React.FC = () => {
  <div>
  <h1 className='text-3xl font-bold text-gray-900 mb-2'>
  Creator Dashboard
- </h1>
+// FIXED:  </h1>
  <p className='text-gray-600'>
  Track your channel's performance and growth
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Time Range Selector */}
  <div className='flex bg-white rounded-lg shadow-sm border mt-4 sm:mt-0'>
  {(['7d', '30d', '90d', '1y'] as const).map((range: any) => (
  <button
- key={range}
- onClick={() => setTimeRange(range)}
- className={`px-4 py-2 text-sm font-medium transition-colors ${
+ key={range} />
+// FIXED:  onClick={() => setTimeRange(range)}
+// FIXED:  className={`px-4 py-2 text-sm font-medium transition-colors ${
  timeRange === range
  ? 'bg-red-600 text-white'
  : 'text-gray-700 hover:text-red-600 hover:bg-gray-50'
@@ -309,10 +309,10 @@ const DashboardPage: React.FC = () => {
  : range === '90d'
  ? 'Last 90 days'
  : 'Last year'}
- </button>
+// FIXED:  </button>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Key Metrics */}
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
@@ -322,17 +322,17 @@ const DashboardPage: React.FC = () => {
  <p className='text-sm font-medium text-gray-600'>Total Views</p>
  <p className='text-2xl font-bold text-gray-900'>
  {formatNumber(stats.totalViews)}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-green-600 flex items-center mt-1'>
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
  +12.5% from last period
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='p-3 bg-blue-100 rounded-full'>
  <EyeIcon className='w-6 h-6 text-blue-600' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <div className='flex items-center justify-between'>
@@ -340,17 +340,17 @@ const DashboardPage: React.FC = () => {
  <p className='text-sm font-medium text-gray-600'>Subscribers</p>
  <p className='text-2xl font-bold text-gray-900'>
  {formatNumber(stats.totalSubscribers)}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-green-600 flex items-center mt-1'>
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
  +8.3% from last period
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='p-3 bg-green-100 rounded-full'>
  <UserGroupIcon className='w-6 h-6 text-green-600' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <div className='flex items-center justify-between'>
@@ -358,17 +358,17 @@ const DashboardPage: React.FC = () => {
  <p className='text-sm font-medium text-gray-600'>Watch Time</p>
  <p className='text-2xl font-bold text-gray-900'>
  {formatDuration(stats.totalWatchTime)}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-green-600 flex items-center mt-1'>
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
  +15.2% from last period
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='p-3 bg-purple-100 rounded-full'>
  <ClockIcon className='w-6 h-6 text-purple-600' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <div className='flex items-center justify-between'>
@@ -376,18 +376,18 @@ const DashboardPage: React.FC = () => {
  <p className='text-sm font-medium text-gray-600'>Revenue</p>
  <p className='text-2xl font-bold text-gray-900'>
  {formatCurrency(stats.revenue)}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-green-600 flex items-center mt-1'>
  <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
  +22.1% from last period
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='p-3 bg-yellow-100 rounded-full'>
  <CurrencyDollarIcon className='w-6 h-6 text-yellow-600' />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Charts Section */}
  <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8'>
@@ -395,22 +395,22 @@ const DashboardPage: React.FC = () => {
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <h3 className='text-lg font-semibold text-gray-900 mb-4'>
  Views Over Time
- </h3>
+// FIXED:  </h3>
  <div className='w-full h-[300px] bg-gray-100 rounded-lg flex items-center justify-center'>
  <p className='text-gray-500'>Views Chart Placeholder</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Revenue Over Time */}
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <h3 className='text-lg font-semibold text-gray-900 mb-4'>
  Revenue Over Time
- </h3>
+// FIXED:  </h3>
  <div className='w-full h-[300px] bg-gray-100 rounded-lg flex items-center justify-center'>
  <p className='text-gray-500'>Revenue Chart Placeholder</p>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Audience Analytics */}
  <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8'>
@@ -418,43 +418,43 @@ const DashboardPage: React.FC = () => {
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <h3 className='text-lg font-semibold text-gray-900 mb-4'>
  Top Countries
- </h3>
+// FIXED:  </h3>
  <div className='space-y-4'>
  {audienceData.map((country, index) => (
  <div
  key={country.country}
- className='flex items-center justify-between'
+// FIXED:  className='flex items-center justify-between' />
  >
  <div className='flex items-center'>
  <span className='text-sm font-medium text-gray-900 w-4'>
  {index + 1}
- </span>
+// FIXED:  </span>
  <GlobeAltIcon className='w-4 h-4 text-gray-400 mx-2' />
  <span className='text-sm text-gray-700'>
  {country.country}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='flex items-center'>
  <div className='w-24 bg-gray-200 rounded-full h-2 mr-3'>
  <div
- className='bg-blue-600 h-2 rounded-full'
- style={{ width: `${country.percentage}%` }
+// FIXED:  className='bg-blue-600 h-2 rounded-full'
+// FIXED:  style={{ width: `${country.percentage}%` } />
  />
- </div>
+// FIXED:  </div>
  <span className='text-sm font-medium text-gray-900 w-8'>
  {country.percentage}%
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Device Breakdown */}
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <h3 className='text-lg font-semibold text-gray-900 mb-4'>
  Device Breakdown
- </h3>
+// FIXED:  </h3>
  <ResponsiveContainer width='100%' height={250}>
  <PieChart>
  <Pie
@@ -464,18 +464,18 @@ const DashboardPage: React.FC = () => {
  innerRadius={60}
  outerRadius={100}
  paddingAngle={5}
- dataKey='percentage'
+ dataKey='percentage' />
  >
  {deviceData.map((entry, index) => (
  <Cell key={`cell-${index}`} fill={entry.color} />
  ))}
- </Pie>
- <Tooltip
+// FIXED:  </Pie>
+ <Tooltip />
  formatter={(value: string | number) => [`${value}%`, 'Usage']}
  />
  <Legend />
- </PieChart>
- </ResponsiveContainer>
+// FIXED:  </PieChart>
+// FIXED:  </ResponsiveContainer>
  <div className='grid grid-cols-2 gap-4 mt-4'>
  {deviceData.map((device: any) => {
  const Icon =
@@ -489,53 +489,53 @@ const DashboardPage: React.FC = () => {
  return (
  <div key={device.device} className='flex items-center'>
  <Icon
- className='w-4 h-4 mr-2'
- style={{ color: device.color }
+// FIXED:  className='w-4 h-4 mr-2'
+// FIXED:  style={{ color: device.color } />
  />
  <span className='text-sm text-gray-700'>
  {device.device}: {device.percentage}%
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  );
  })}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Top Performing Videos */}
  <div className='bg-white rounded-lg shadow-sm border'>
  <div className='p-6 border-b border-gray-200'>
  <h3 className='text-lg font-semibold text-gray-900'>
  Top Performing Videos
- </h3>
+// FIXED:  </h3>
  <p className='text-sm text-gray-600 mt-1'>
  Your best videos from the selected time period
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='overflow-x-auto'>
  <table className='min-w-full divide-y divide-gray-200'>
  <thead className='bg-gray-50'>
  <tr>
  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
  Video
- </th>
+// FIXED:  </th>
  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
  Views
- </th>
+// FIXED:  </th>
  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
  Engagement
- </th>
+// FIXED:  </th>
  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
  Watch Time
- </th>
+// FIXED:  </th>
  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
  Revenue
- </th>
+// FIXED:  </th>
  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
  Published
- </th>
- </tr>
- </thead>
+// FIXED:  </th>
+// FIXED:  </tr>
+// FIXED:  </thead>
  <tbody className='bg-white divide-y divide-gray-200'>
  {topVideos.map((video: any) => (
  <tr key={video.id} className='hover:bg-gray-50'>
@@ -543,75 +543,75 @@ const DashboardPage: React.FC = () => {
  <div className='flex items-center'>
  <div className='flex-shrink-0 h-16 w-24'>
  <img
- className='h-16 w-24 rounded object-cover'
- src={video.thumbnail}
- alt={video.title}
+// FIXED:  className='h-16 w-24 rounded object-cover'
+// FIXED:  src={video.thumbnail}
+// FIXED:  alt={video.title} />
  />
- </div>
+// FIXED:  </div>
  <div className='ml-4'>
  <div className='text-sm font-medium text-gray-900 max-w-xs truncate'>
  {video.title}
- </div>
+// FIXED:  </div>
  <div className='text-sm text-gray-500'>
  {video.duration}
- </div>
- </div>
- </div>
- </td>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </td>
  <td className='px-6 py-4 whitespace-nowrap'>
  <div className='flex items-center'>
  <EyeIcon className='w-4 h-4 text-gray-400 mr-1' />
  <span className='text-sm text-gray-900'>
  {formatNumber(video.views)}
- </span>
- </div>
- </td>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </td>
  <td className='px-6 py-4 whitespace-nowrap'>
  <div className='flex items-center space-x-3'>
  <div className='flex items-center'>
  <HeartIcon className='w-4 h-4 text-red-400 mr-1' />
  <span className='text-sm text-gray-900'>
  {formatNumber(video.likes)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='flex items-center'>
  <ChatBubbleLeftIcon className='w-4 h-4 text-blue-400 mr-1' />
  <span className='text-sm text-gray-900'>
  {formatNumber(video.comments)}
- </span>
- </div>
- </div>
- </td>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </td>
  <td className='px-6 py-4 whitespace-nowrap'>
  <div className='flex items-center'>
  <ClockIcon className='w-4 h-4 text-gray-400 mr-1' />
  <span className='text-sm text-gray-900'>
  {formatDuration(video.watchTime)}
- </span>
- </div>
- </td>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </td>
  <td className='px-6 py-4 whitespace-nowrap'>
  <div className='flex items-center'>
  <CurrencyDollarIcon className='w-4 h-4 text-green-400 mr-1' />
  <span className='text-sm text-gray-900'>
  {formatCurrency(video.revenue)}
- </span>
- </div>
- </td>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </td>
  <td className='px-6 py-4 whitespace-nowrap'>
  <div className='flex items-center'>
  <CalendarDaysIcon className='w-4 h-4 text-gray-400 mr-1' />
  <span className='text-sm text-gray-900'>
  {new Date(video.publishedAt).toLocaleDateString()}
- </span>
- </div>
- </td>
- </tr>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </td>
+// FIXED:  </tr>
  ))}
- </tbody>
- </table>
- </div>
- </div>
+// FIXED:  </tbody>
+// FIXED:  </table>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Additional Metrics */}
  <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-8'>
@@ -620,51 +620,51 @@ const DashboardPage: React.FC = () => {
  <div>
  <p className='text-sm font-medium text-gray-600'>
  Avg. View Duration
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900'>
  {stats.avgViewDuration} min
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='p-3 bg-indigo-100 rounded-full'>
  <ClockIcon className='w-6 h-6 text-indigo-600' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <div className='flex items-center justify-between'>
  <div>
  <p className='text-sm font-medium text-gray-600'>
  Engagement Rate
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900'>
  {stats.engagement}%
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='p-3 bg-pink-100 rounded-full'>
  <HeartIcon className='w-6 h-6 text-pink-600' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='bg-white p-6 rounded-lg shadow-sm border'>
  <div className='flex items-center justify-between'>
  <div>
  <p className='text-sm font-medium text-gray-600'>
  Click-through Rate
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900'>
  {stats.clickThroughRate}%
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='p-3 bg-orange-100 rounded-full'>
  <ChartBarIcon className='w-6 h-6 text-orange-600' />
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

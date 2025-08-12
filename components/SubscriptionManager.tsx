@@ -84,19 +84,19 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
  <div className="flex items-center space-x-2">
  {isSubscribed ? (
  <div className="flex items-center space-x-1">
- <button
- onClick={(e: any) => handleSubscribe(e)}
- disabled={isLoading}
- className="flex items-center space-x-2 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
+ <button />
+// FIXED:  onClick={(e: any) => handleSubscribe(e)}
+// FIXED:  disabled={isLoading}
+// FIXED:  className="flex items-center space-x-2 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
  >
  <CheckIcon className="w-4 h-4" />
  <span>Subscribed</span>
- </button>
+// FIXED:  </button>
 
  <div className="relative">
- <button
- onClick={() => setShowNotificationMenu(!showNotificationMenu)}
- className={`p-2 rounded-full transition-colors ${
+ <button />
+// FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu)}
+// FIXED:  className={`p-2 rounded-full transition-colors ${
  notificationsEnabled
  ? 'bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-800 hover:bg-neutral-700 dark:hover:bg-neutral-300'
  : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700'
@@ -108,47 +108,47 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
  ) : (
  <BellIcon className="w-4 h-4" />
  )}
- </button>
+// FIXED:  </button>
 
  {showNotificationMenu && (
  <div className="absolute top-full right-0 mt-1 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-lg z-50 py-1">
- <button
- onClick={() => handleNotificationToggle(true)}
- className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
+ <button />
+// FIXED:  onClick={() => handleNotificationToggle(true)}
+// FIXED:  className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
  notificationsEnabled ? 'text-neutral-900 dark:text-neutral-100 font-medium' : 'text-neutral-600 dark:text-neutral-400'
  }`}
  >
  <div className="flex items-center space-x-2">
  <BellIconSolid className="w-4 h-4" />
  <span>All notifications</span>
- </div>
- </button>
- <button
- onClick={() => handleNotificationToggle(false)}
- className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
+// FIXED:  </div>
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleNotificationToggle(false)}
+// FIXED:  className={`w-full text-left px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
  !notificationsEnabled ? 'text-neutral-900 dark:text-neutral-100 font-medium' : 'text-neutral-600 dark:text-neutral-400'
  }`}
  >
  <div className="flex items-center space-x-2">
  <BellIcon className="w-4 h-4" />
  <span>None</span>
- </div>
- </button>
- </div>
+// FIXED:  </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ) : (
- <button
- onClick={(e: any) => handleSubscribe(e)}
- disabled={isLoading}
- className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
+ <button />
+// FIXED:  onClick={(e: any) => handleSubscribe(e)}
+// FIXED:  disabled={isLoading}
+// FIXED:  className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
  >
  <PlusIcon className="w-4 h-4" />
  <span>Subscribe</span>
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

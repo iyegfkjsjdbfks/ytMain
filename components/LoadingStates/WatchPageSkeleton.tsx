@@ -18,8 +18,8 @@ const WatchPageSkeleton: React.FC = () => {
  <div className="flex-1">
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Comments skeleton */}
  <div className="space-y-4">
@@ -30,11 +30,11 @@ const WatchPageSkeleton: React.FC = () => {
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Sidebar skeleton */}
  <div className="space-y-4">
@@ -45,13 +45,13 @@ const WatchPageSkeleton: React.FC = () => {
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1 w-3/4" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

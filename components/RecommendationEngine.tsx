@@ -243,15 +243,15 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  <div className="flex items-center justify-between mb-2">
  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
  Recommended for you
- </h3>
+// FIXED:  </h3>
  {useGoogleCustomSearch && (
  <div className="flex items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">
  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
  <span>Loading...</span>
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div className="space-y-2">
  {[...Array(5)].map((_, i) => (
  <div key={i} className="flex gap-2 p-1">
@@ -260,11 +260,11 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -274,12 +274,12 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  <div className="mb-4">
  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
  Recommended for you
- </h3>
- </div>
+// FIXED:  </h3>
+// FIXED:  </div>
  <div className="text-center py-8 text-gray-500">
  No recommendations available
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -290,15 +290,15 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  <div className="flex items-center justify-between mb-2">
  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
  Recommended for you
- </h3>
+// FIXED:  </h3>
  {useGoogleCustomSearch && (
  <div className="flex items-center space-x-1 text-xs text-green-600 dark:text-green-400">
  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
  <span>Live</span>
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* YouTube-style video grid - more compact spacing */}
  <div className="space-y-2">
@@ -309,19 +309,19 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  video={video}
  onVideoSelect={onVideoSelect}
  showChannel={true}
- size="sm"
+ size="sm" />
  />
  ) : (
  <OptimizedVideoCard
  video={video}
  showChannel={true}
- size="sm"
+ size="sm" />
  />
  )}
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

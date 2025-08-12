@@ -187,111 +187,111 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  return (
  <div
  ref={setRefs}
- className={`relative bg-black rounded-lg overflow-hidden ${className}`}
- onTouchStart={handleTouchStart}
- onClick={(e: any) => showControlsTemporarily(e)}
+// FIXED:  className={`relative bg-black rounded-lg overflow-hidden ${className}`}
+ onTouchStart={handleTouchStart} />
+// FIXED:  onClick={(e: any) => showControlsTemporarily(e)}
  >
  {/* Video Element */}
  <video
  ref={videoRef}
- src={video.videoUrl}
+// FIXED:  src={video.videoUrl}
  poster={video.thumbnailUrl}
- className='w-full h-full object-cover'
+// FIXED:  className='w-full h-full object-cover'
  playsInline
  preload='metadata'
  onLoadedMetadata={handleLoadedMetadata}
  onTimeUpdate={handleTimeUpdate}
- onEnded={handleEnded}
+ onEnded={handleEnded} />
  onPlay={() => setIsPlaying(true)}
  onPause={() => setIsPlaying(false)}
  />
 
  {/* Mobile Controls Overlay */}
  <div
- className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 transition-opacity duration-300 ${
+// FIXED:  className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 transition-opacity duration-300 ${
  showControls ? 'opacity-100' : 'opacity-0'
- }`}
+ }`} />
  >
  {/* Center Play Button */}
  <div className='absolute inset-0 flex items-center justify-center'>
- <button
- onClick={(e: any) => togglePlay(e)}
- className='bg-black/50 backdrop-blur-sm rounded-full p-4 text-white hover:bg-black/70 transition-colors'
- aria-label={isPlaying ? 'Pause' : 'Play'}
+ <button />
+// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  className='bg-black/50 backdrop-blur-sm rounded-full p-4 text-white hover:bg-black/70 transition-colors'
+// FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
  {isPlaying ? (
  <PauseIcon className='w-8 h-8' />
  ) : (
  <PlayIcon className='w-8 h-8 ml-1' />
  )}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Top Controls */}
  <div className='absolute top-4 right-4 flex space-x-2'>
- <button
- onClick={(e: any) => toggleMute(e)}
- className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
- aria-label={isMuted ? 'Unmute' : 'Mute'}
+ <button />
+// FIXED:  onClick={(e: any) => toggleMute(e)}
+// FIXED:  className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
+// FIXED:  aria-label={isMuted ? 'Unmute' : 'Mute'}
  >
  {isMuted ? (
  <SpeakerXMarkIcon className='w-5 h-5' />
  ) : (
  <SpeakerWaveIcon className='w-5 h-5' />
  )}
- </button>
+// FIXED:  </button>
 
- <button
- onClick={(e: any) => toggleFullscreen(e)}
- className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
- aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+ <button />
+// FIXED:  onClick={(e: any) => toggleFullscreen(e)}
+// FIXED:  className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
+// FIXED:  aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
  >
  {isFullscreen ? (
  <ArrowsPointingInIcon className='w-5 h-5' />
  ) : (
  <ArrowsPointingOutIcon className='w-5 h-5' />
  )}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Bottom Controls */}
  <div className='absolute bottom-0 left-0 right-0 p-4'>
  {/* Progress Bar */}
  <div className='mb-3'>
  <input
- type='range'
+// FIXED:  type='range'
  min='0'
  max={duration || 0}
- value={currentTime}
- onChange={(e: any) => handleSeek(e)}
- className='w-full h-1 bg-white/30 rounded-lg appearance-none slider-thumb'
- style={{
+// FIXED:  value={currentTime} />
+// FIXED:  onChange={(e: any) => handleSeek(e)}
+// FIXED:  className='w-full h-1 bg-white/30 rounded-lg appearance-none slider-thumb'
+// FIXED:  style={{
  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)` }
  />
  {/* Buffered indicator */}
  <div
- className='absolute h-1 bg-white/50 rounded-lg pointer-events-none'
- style={{
+// FIXED:  className='absolute h-1 bg-white/50 rounded-lg pointer-events-none'
+// FIXED:  style={{
  width: `${(buffered / duration) * 100}%`,
- marginTop: '-4px' }
+ marginTop: '-4px' } />
  />
- </div>
+// FIXED:  </div>
 
  {/* Time Display */}
  <div className='flex justify-between items-center text-white text-sm'>
  <span>{formatTime(currentTime)}</span>
  <span>{formatTime(duration)}</span>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Loading Indicator */}
  {!duration && (
  <div className='absolute inset-0 flex items-center justify-center bg-black/50'>
  <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white' />
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
  }
 );

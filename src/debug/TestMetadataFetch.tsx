@@ -89,56 +89,56 @@ const TestMetadataFetch: React.FC = () => {
  <div className='mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded'>
  <h2 className='text-lg font-semibold mb-4'>
  React Query Test (Auto-running)
- </h2>
+// FIXED:  </h2>
  <div className='space-y-2'>
  <p>
  <strong>Loading:</strong> {reactQueryLoading ? 'Yes' : 'No'}
- </p>
+// FIXED:  </p>
  <p>
  <strong>Error:</strong>{' '}
  {reactQueryError ? String(reactQueryError) : 'None'}
- </p>
+// FIXED:  </p>
  <p>
  <strong>Data:</strong>{' '}
  {reactQueryData ? `Found: ${reactQueryData.title}` : 'None'}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  {reactQueryData && (
  <details className='mt-4'>
  <summary className='cursor-pointer font-medium'>
  Raw React Query Data
- </summary>
+// FIXED:  </summary>
  <pre className='mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto'>
  {JSON.stringify(reactQueryData, null, 2)}
- </pre>
- </details>
+// FIXED:  </pre>
+// FIXED:  </details>
  )}
- </div>
+// FIXED:  </div>
 
  <div className='space-y-4 mb-6'>
- <button
- onClick={(e: any) => testDirectGoogleSearch(e)}
- disabled={loading}
- className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
+ <button />
+// FIXED:  onClick={(e: any) => testDirectGoogleSearch(e)}
+// FIXED:  disabled={loading}
+// FIXED:  className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
  >
  Test Direct Google Custom Search API
- </button>
+// FIXED:  </button>
 
- <button
- onClick={(e: any) => testUnifiedDataService(e)}
- disabled={loading}
- className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50'
+ <button />
+// FIXED:  onClick={(e: any) => testUnifiedDataService(e)}
+// FIXED:  disabled={loading}
+// FIXED:  className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50'
  >
  Test Unified Data Service
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {loading && <div className='text-blue-600'>Loading...</div>}
 
  {error && (
  <div className='text-red-600 bg-red-50 p-4 rounded'>
  <strong>Error:</strong> {error}
- </div>
+// FIXED:  </div>
  )}
 
  {result && (
@@ -149,34 +149,34 @@ const TestMetadataFetch: React.FC = () => {
  ? 'Direct Google API'
  : 'Unified Data Service'}
  :
- </h3>
+// FIXED:  </h3>
 
  {result.data ? (
  <div className='space-y-2'>
  <p>
  <strong>Title:</strong> {result.data.title || 'N/A'}
- </p>
+// FIXED:  </p>
  <p>
  <strong>Description:</strong> {result.data.description || 'N/A'}
- </p>
+// FIXED:  </p>
  <p>
  <strong>Video URL:</strong> {result.data.videoUrl || 'N/A'}
- </p>
+// FIXED:  </p>
  <p>
  <strong>Source:</strong> {result.data.source || 'N/A'}
- </p>
+// FIXED:  </p>
  {result.data.thumbnailUrl && (
  <div>
  <strong>Thumbnail:</strong>
  <br />
  <img
- src={result.data.thumbnailUrl}
- alt='Thumbnail'
- className='max-w-xs mt-2'
+// FIXED:  src={result.data.thumbnailUrl}
+// FIXED:  alt='Thumbnail'
+// FIXED:  className='max-w-xs mt-2' />
  />
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  ) : (
  <p className='text-red-600'>No data returned</p>
  )}
@@ -185,11 +185,11 @@ const TestMetadataFetch: React.FC = () => {
  <summary className='cursor-pointer font-medium'>Raw Data</summary>
  <pre className='mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto'>
  {JSON.stringify(result.data, null, 2)}
- </pre>
- </details>
- </div>
+// FIXED:  </pre>
+// FIXED:  </details>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

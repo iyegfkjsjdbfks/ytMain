@@ -142,35 +142,35 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  <div className="flex-1">
  <p className="text-sm font-medium">
  {getInstallText()}
- </p>
+// FIXED:  </p>
  <p className="text-xs opacity-90 mt-1">
  {getInstallInstructions()}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-2">
  {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && (
- <button
- onClick={(e: any) => handleInstall(e)}
- disabled={isInstalling}
- className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+ <button />
+// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  disabled={isInstalling}
+// FIXED:  className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
  >
  {isInstalling ? 'Installing...' : 'Install'}
- </button>
+// FIXED:  </button>
  )}
 
- <button
- onClick={(e: any) => handleDismiss(e)}
- className="p-1 hover:bg-white/20 rounded-lg transition-colors"
- aria-label="Dismiss install banner"
+ <button />
+// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+// FIXED:  aria-label="Dismiss install banner"
  >
  <XMarkIcon className="h-5 w-5" />
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

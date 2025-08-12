@@ -84,10 +84,10 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  if (variant === 'compact') {
  return (
  <div className={`flex items-center gap-2 ${className}`}>
- <button
- onClick={(e: any) => handleSubscriptionToggle(e)}
- disabled={isLoading}
- className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 ${
+ <button />
+// FIXED:  onClick={(e: any) => handleSubscriptionToggle(e)}
+// FIXED:  disabled={isLoading}
+// FIXED:  className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 ${
  isSubscribed
  ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
  : 'bg-red-600 text-white hover:bg-red-700'
@@ -101,31 +101,31 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  {subscriberCount && variant !== 'compact' && (
  <span className='ml-1 opacity-75'>
  {formatSubscriberCount(subscriberCount)}
- </span>
+// FIXED:  </span>
  )}
- </>
+// FIXED:  </>
  )}
- </button>
+// FIXED:  </button>
 
  {isSubscribed && showNotificationBell && (
  <div className='relative'>
- <button
- onClick={() => setShowNotificationMenu(!showNotificationMenu)}
- className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
+ <button />
+// FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu)}
+// FIXED:  className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
  title='Notification preferences'
  >
  {getNotificationIcon()}
- </button>
+// FIXED:  </button>
 
  {showNotificationMenu && (
  <div className='absolute top-full right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-2 z-10 min-w-[200px]'>
  <div className='px-4 py-2 text-sm font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700'>
  Notifications
- </div>
+// FIXED:  </div>
 
- <button
- onClick={() => handleNotificationChange('all')}
- className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
+ <button />
+// FIXED:  onClick={() => handleNotificationChange('all')}
+// FIXED:  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
  notificationLevel === 'all'
  ? 'text-blue-600'
  : 'text-gray-700 dark:text-gray-300'
@@ -136,13 +136,13 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <div className='font-medium'>All</div>
  <div className='text-xs opacity-75'>
  Get notified for all uploads
- </div>
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </button>
 
- <button
- onClick={() => handleNotificationChange('personalized')}
- className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
+ <button />
+// FIXED:  onClick={() => handleNotificationChange('personalized')}
+// FIXED:  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
  notificationLevel === 'personalized'
  ? 'text-blue-600'
  : 'text-gray-700 dark:text-gray-300'
@@ -153,13 +153,13 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <div className='font-medium'>Personalized</div>
  <div className='text-xs opacity-75'>
  Occasional notifications
- </div>
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </button>
 
- <button
- onClick={() => handleNotificationChange('none')}
- className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
+ <button />
+// FIXED:  onClick={() => handleNotificationChange('none')}
+// FIXED:  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
  notificationLevel === 'none'
  ? 'text-blue-600'
  : 'text-gray-700 dark:text-gray-300'
@@ -170,23 +170,23 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <div className='font-medium'>None</div>
  <div className='text-xs opacity-75'>
  Turn off notifications
- </div>
- </div>
- </button>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
  }
 
  return (
  <div className={`flex items-center gap-2 ${className}`}>
- <button
- onClick={(e: any) => handleSubscriptionToggle(e)}
- disabled={isLoading}
- className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 flex items-center gap-2 ${
+ <button />
+// FIXED:  onClick={(e: any) => handleSubscriptionToggle(e)}
+// FIXED:  disabled={isLoading}
+// FIXED:  className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 flex items-center gap-2 ${
  isSubscribed
  ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
  : 'bg-red-600 text-white hover:bg-red-700'
@@ -200,31 +200,31 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  {subscriberCount && (
  <span className='opacity-75'>
  {formatSubscriberCount(subscriberCount)}
- </span>
+// FIXED:  </span>
  )}
- </>
+// FIXED:  </>
  )}
- </button>
+// FIXED:  </button>
 
  {isSubscribed && showNotificationBell && (
  <div className='relative'>
- <button
- onClick={() => setShowNotificationMenu(!showNotificationMenu)}
- className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
+ <button />
+// FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu)}
+// FIXED:  className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
  title='Notification preferences'
  >
  {getNotificationIcon()}
- </button>
+// FIXED:  </button>
 
  {showNotificationMenu && (
  <div className='absolute top-full right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-2 z-10 min-w-[200px]'>
  <div className='px-4 py-2 text-sm font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700'>
  Notifications for {channelName}
- </div>
+// FIXED:  </div>
 
- <button
- onClick={() => handleNotificationChange('all')}
- className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
+ <button />
+// FIXED:  onClick={() => handleNotificationChange('all')}
+// FIXED:  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
  notificationLevel === 'all'
  ? 'text-blue-600'
  : 'text-gray-700 dark:text-gray-300'
@@ -235,13 +235,13 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <div className='font-medium'>All</div>
  <div className='text-xs opacity-75'>
  Get notified for all uploads
- </div>
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </button>
 
- <button
- onClick={() => handleNotificationChange('personalized')}
- className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
+ <button />
+// FIXED:  onClick={() => handleNotificationChange('personalized')}
+// FIXED:  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
  notificationLevel === 'personalized'
  ? 'text-blue-600'
  : 'text-gray-700 dark:text-gray-300'
@@ -252,13 +252,13 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <div className='font-medium'>Personalized</div>
  <div className='text-xs opacity-75'>
  Occasional notifications
- </div>
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </button>
 
- <button
- onClick={() => handleNotificationChange('none')}
- className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
+ <button />
+// FIXED:  onClick={() => handleNotificationChange('none')}
+// FIXED:  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
  notificationLevel === 'none'
  ? 'text-blue-600'
  : 'text-gray-700 dark:text-gray-300'
@@ -269,14 +269,14 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <div className='font-medium'>None</div>
  <div className='text-xs opacity-75'>
  Turn off notifications
- </div>
- </div>
- </button>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

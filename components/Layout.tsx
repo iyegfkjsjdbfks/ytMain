@@ -93,25 +93,25 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
  <Sidebar isOpen={isSidebarOpen} />
  )}
  <main
- id="main-content"
+// FIXED:  id="main-content"
  role="main"
- className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}
+// FIXED:  className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`} />
  >
  <div className={mainContentPaddingClass}> {/* Apply conditional padding */}
  <div className="min-h-[calc(100vh-3.5rem)]">
  <Outlet /> {/* Render child routes */}
- </div>
- </div>
- </main>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </main>
+// FIXED:  </div>
  {miniplayerContext.state.isVisible && miniplayerContext.state.currentVideo && (
  <Miniplayer
  video={miniplayerContext.state.currentVideo}
  onClose={miniplayerContext.actions.hideMiniplayer}
- onMaximize={handleMaximizeMiniplayer}
+ onMaximize={handleMaximizeMiniplayer} />
  />
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

@@ -199,64 +199,64 @@ return '0: 00'
  <div className="text-center mb-8">
  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
  Upload Video
- </h1>
+// FIXED:  </h1>
  <p className="text-gray-600 dark:text-gray-400">
  Share your content with the world
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div
  onDragOver={handleDragOver}
  onDragLeave={handleDragLeave}
  onDrop={handleDrop}
- className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
+// FIXED:  className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
  isDragging
  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
- }`}
+ }`} />
  >
  <CloudArrowUpIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
 
  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
  Drag and drop video files to upload
- </h3>
+// FIXED:  </h3>
 
  <p className="text-gray-600 dark:text-gray-400 mb-6">
  Your videos will be private until you publish them.
- </p>
+// FIXED:  </p>
 
- <button
- onClick={() => fileInputRef.current?.click()}
- className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+ <button />
+// FIXED:  onClick={() => fileInputRef.current?.click()}
+// FIXED:  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
  >
  SELECT FILES
- </button>
+// FIXED:  </button>
 
  <input
  ref={fileInputRef}
- type="file"
- accept={allowedFormats.join(',')}
- onChange={(e: any) => handleFileInputChange(e)}
- className="hidden"
+// FIXED:  type="file"
+ accept={allowedFormats.join(',')} />
+// FIXED:  onChange={(e: any) => handleFileInputChange(e)}
+// FIXED:  className="hidden"
  />
 
  <div className="mt-6 text-sm text-gray-500 dark:text-gray-400">
  <p>Maximum file size: {maxSizeGB}GB</p>
  <p>Supported formats: MP4, WebM, MOV, AVI</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {onCancel && (
  <div className="mt-6 text-center">
- <button
- onClick={(e: any) => onCancel(e)}
- className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+ <button />
+// FIXED:  onClick={(e: any) => onCancel(e)}
+// FIXED:  className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  Cancel
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -268,41 +268,41 @@ return '0: 00'
  <VideoCameraIcon className="w-16 h-16 text-blue-500 mx-auto mb-4" />
  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
  Processing your video
- </h2>
+// FIXED:  </h2>
  <p className="text-gray-600 dark:text-gray-400">
  Please wait while we process and upload your video
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className="max-w-md mx-auto">
  <div className="bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4">
  <div
- className="bg-blue-600 h-2 rounded-full transition-all duration-300"
- style={{ width: `${uploadProgress}%` }
+// FIXED:  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+// FIXED:  style={{ width: `${uploadProgress}%` } />
  />
- </div>
+// FIXED:  </div>
  <p className="text-sm text-gray-600 dark:text-gray-400">
  {uploadProgress.toFixed(0)}% complete
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {uploadProgress === 100 && (
  <div className="mt-8">
  <div className="text-green-600 dark:text-green-400 mb-4">
  <svg className="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 20 20">
  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
- </svg>
- </div>
+// FIXED:  </svg>
+// FIXED:  </div>
  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
  Upload Complete!
- </h3>
+// FIXED:  </h3>
  <p className="text-gray-600 dark:text-gray-400">
  Your video has been successfully uploaded and is being processed.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -315,16 +315,16 @@ return '0: 00'
  <div className="sticky top-6">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Preview
- </h3>
+// FIXED:  </h3>
 
  {videoPreview && (
  <div className="relative bg-black rounded-lg overflow-hidden">
  <video
  ref={videoRef}
- src={videoPreview}
- className="w-full aspect-video"
+// FIXED:  src={videoPreview}
+// FIXED:  className="w-full aspect-video"
  controls={false}
- muted={isMuted}
+ muted={isMuted} />
  onLoadedMetadata={() => {
  if (videoRef.current) {
  videoRef.current.currentTime = 0;
@@ -336,8 +336,8 @@ return '0: 00'
  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
  <div className="flex items-center justify-between text-white">
  <div className="flex items-center space-x-2">
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  if (videoRef.current) {
  if (isPlaying as any) {
  videoRef.current.pause();
@@ -347,53 +347,53 @@ return '0: 00'
  setIsPlaying(!isPlaying);
  }
  }
- className="p-1 hover:bg-white/20 rounded"
+// FIXED:  className="p-1 hover:bg-white/20 rounded"
  >
  {isPlaying ? (
  <PauseIcon className="w-5 h-5" />
  ) : (
  <PlayIcon className="w-5 h-5" />
  )}
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  setIsMuted(!isMuted);
  if (videoRef.current) {
  videoRef.current.muted = !isMuted;
  }
  }
- className="p-1 hover:bg-white/20 rounded"
+// FIXED:  className="p-1 hover:bg-white/20 rounded"
  >
  {isMuted ? (
  <SpeakerXMarkIcon className="w-5 h-5" />
  ) : (
  <SpeakerWaveIcon className="w-5 h-5" />
  )}
- </button>
+// FIXED:  </button>
 
  <span className="text-sm">
  {getVideoDuration()}
- </span>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* File Info */}
  <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
  <h4 className="font-medium text-gray-900 dark:text-white mb-2">
  File Details
- </h4>
+// FIXED:  </h4>
  <div className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
  <p><span className="font-medium">Name:</span> {videoFile?.name}</p>
  <p><span className="font-medium">Size:</span> {videoFile ? formatFileSize(videoFile.size) : 'N/A'}</p>
  <p><span className="font-medium">Type:</span> {videoFile?.type}</p>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Upload Form */}
  <div className="lg:col-span-2">
@@ -401,126 +401,126 @@ return '0: 00'
  <div>
  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
  Video Details
- </h2>
- </div>
+// FIXED:  </h2>
+// FIXED:  </div>
 
  {/* Title */}
  <div>
  <label htmlFor="video-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Title *
- </label>
+// FIXED:  </label>
  <input
- id="video-title"
- type="text"
- value={uploadData.title}
- onChange={(e) => setUploadData(prev => ({ ...prev as any, title: e.target.value }))}
- placeholder="Add a title that describes your video"
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  id="video-title"
+// FIXED:  type="text"
+// FIXED:  value={uploadData.title} />
+// FIXED:  onChange={(e) => setUploadData(prev => ({ ...prev as any, title: e.target.value }))}
+// FIXED:  placeholder="Add a title that describes your video"
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  maxLength={100}
  />
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  {uploadData.title.length}/100 characters
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Description */}
  <div>
  <label htmlFor="video-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Description
- </label>
+// FIXED:  </label>
  <textarea
- id="video-description"
- value={uploadData.description}
- onChange={(e) => setUploadData(prev => ({ ...prev as any, description: e.target.value }))}
- placeholder="Tell viewers about your video"
+// FIXED:  id="video-description"
+// FIXED:  value={uploadData.description} />
+// FIXED:  onChange={(e) => setUploadData(prev => ({ ...prev as any, description: e.target.value }))}
+// FIXED:  placeholder="Tell viewers about your video"
  rows={4}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  maxLength={5000}
  />
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  {uploadData.description.length}/5000 characters
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Thumbnail */}
  <div>
  <label htmlFor="thumbnail-upload" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Thumbnail
- </label>
+// FIXED:  </label>
  <div className="flex items-center space-x-4">
  {uploadData.customThumbnail ? (
  <div className="relative">
  <img
- src={uploadData.customThumbnail}
- alt="Custom thumbnail"
- className="w-32 h-18 object-cover rounded border"
+// FIXED:  src={uploadData.customThumbnail}
+// FIXED:  alt="Custom thumbnail"
+// FIXED:  className="w-32 h-18 object-cover rounded border" />
  />
- <button
- onClick={() => setUploadData(prev => ({
+ <button />
+// FIXED:  onClick={() => setUploadData(prev => ({
  ...prev as any,
  thumbnail: null,
  customThumbnail: null }))}
- className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+// FIXED:  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
  >
  <XMarkIcon className="w-3 h-3" />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  ) : (
  <div className="w-32 h-18 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded flex items-center justify-center">
  <PhotoIcon className="w-8 h-8 text-gray-400" />
- </div>
+// FIXED:  </div>
  )}
 
- <button
- onClick={() => thumbnailInputRef.current?.click()}
- className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+ <button />
+// FIXED:  onClick={() => thumbnailInputRef.current?.click()}
+// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Upload thumbnail
- </button>
+// FIXED:  </button>
 
  <input
- id="thumbnail-upload"
+// FIXED:  id="thumbnail-upload"
  ref={thumbnailInputRef}
- type="file"
- accept="image/*"
- onChange={(e: any) => handleThumbnailUpload(e)}
- className="hidden"
+// FIXED:  type="file"
+ accept="image/*" />
+// FIXED:  onChange={(e: any) => handleThumbnailUpload(e)}
+// FIXED:  className="hidden"
  />
- </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Upload a custom thumbnail (1280x720 recommended)
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Category */}
  <div>
  <label htmlFor="video-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Category
- </label>
+// FIXED:  </label>
  <select
- id="video-category"
- value={uploadData.category}
- onChange={(e) => setUploadData(prev => ({ ...prev as any, category: e.target.value }))}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  id="video-category"
+// FIXED:  value={uploadData.category} />
+// FIXED:  onChange={(e) => setUploadData(prev => ({ ...prev as any, category: e.target.value }))}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="">Select a category</option>
  {categories.map((category: any) => (
  <option key={category} value={category}>{category}</option>
  ))}
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {/* Tags */}
  <div>
  <label htmlFor="video-tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Tags
- </label>
+// FIXED:  </label>
  <div className="space-y-2">
  <input
- id="video-tags"
- type="text"
- placeholder="Add tags to help people find your video"
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  id="video-tags"
+// FIXED:  type="text"
+// FIXED:  placeholder="Add tags to help people find your video"
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
  onKeyPress={(e: any) => {
  if (e.key === 'Enter') {
  e.preventDefault();
@@ -537,56 +537,56 @@ return '0: 00'
  index: number) => (
  <span
  key={index}
- className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+// FIXED:  className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm" />
  >
  <TagIcon className="w-3 h-3 mr-1" />
  {tag}
- <button
- onClick={() => removeTag(tag)}
- className="ml-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
+ <button />
+// FIXED:  onClick={() => removeTag(tag)}
+// FIXED:  className="ml-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
  >
  <XMarkIcon className="w-3 h-3" />
- </button>
- </span>
+// FIXED:  </button>
+// FIXED:  </span>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Press Enter to add tags. Tags help viewers find your video.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Action Buttons */}
  <div className="flex justify-between pt-6 border-t border-gray-200 dark:border-gray-700">
- <button
- onClick={() => setStep('upload')}
- className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+ <button />
+// FIXED:  onClick={() => setStep('upload')}
+// FIXED:  className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Back
- </button>
+// FIXED:  </button>
 
  <div className="space-x-3">
- <button
- onClick={() => setUploadData(prev => ({ ...prev as any, visibility: 'private' }))}
- className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+ <button />
+// FIXED:  onClick={() => setUploadData(prev => ({ ...prev as any, visibility: 'private' }))}
+// FIXED:  className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Save as Draft
- </button>
+// FIXED:  </button>
 
- <button
- onClick={(e: any) => handleSubmit(e)}
- disabled={!uploadData.title.trim()}
- className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+ <button />
+// FIXED:  onClick={(e: any) => handleSubmit(e)}
+// FIXED:  disabled={!uploadData.title.trim()}
+// FIXED:  className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  Publish
- </button>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

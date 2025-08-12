@@ -9,14 +9,14 @@ const HomePage: React.FC = () => {
  <p className='text-gray-600 mb-4'>
  This is a placeholder for the homepage that will display trending and
  recommended videos.
- </p>
+// FIXED:  </p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
  For demonstration of video components, please visit the{' '}
  <strong>Video Demo</strong> page using the user menu dropdown.
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

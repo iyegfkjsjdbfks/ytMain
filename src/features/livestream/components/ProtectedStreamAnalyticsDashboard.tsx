@@ -27,13 +27,13 @@ const ProtectedStreamAnalyticsDashboard: FC<
  <DataFetchErrorBoundary
  dataType='analytics data'
  onRetry={handleRetry}
- showOfflineMessage={true}
+ showOfflineMessage={true} />
  >
  <StreamAnalyticsDashboard
  streamId={streamId}
- {...(className && { className })}
+ {...(className && { className })} />
  />
- </DataFetchErrorBoundary>
+// FIXED:  </DataFetchErrorBoundary>
  );
 };
 

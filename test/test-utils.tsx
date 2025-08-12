@@ -79,8 +79,8 @@ const AllTheProviders: any = ({
  <QueryClientProvider client={testQueryClient}>
  <BrowserRouter>
  {children}
- </BrowserRouter>
- </QueryClientProvider>
+// FIXED:  </BrowserRouter>
+// FIXED:  </QueryClientProvider>
  );
 };
 
@@ -102,10 +102,10 @@ const customRender: any = (,
  defaultOptions: {
  queries: { retry: false,
  gcTime: 0, staleTime: 0 },
- mutations: { retry: false } } })}
+ mutations: { retry: false } } })} />
  >
  {children}
- </AllTheProviders>
+// FIXED:  </AllTheProviders>
  ),
  ...renderOptions });
 };

@@ -161,66 +161,66 @@ searchParams.set('sort_by', filters.sortBy);
  <div className="relative flex-1">
  <input
  ref={inputRef}
- type="text"
- value={query}
- onChange={(e) => setQuery(e.target.value)}
+// FIXED:  type="text"
+// FIXED:  value={query} />
+// FIXED:  onChange={(e) => setQuery(e.target.value)}
  onKeyPress={handleKeyPress}
  onFocus={() => setShowSuggestions(true)}
- placeholder="Search videos, channels, playlists..."
- className="w-full px-4 py-2 pl-10 pr-12 border border-gray-300 dark:border-gray-600 rounded-l-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+// FIXED:  placeholder="Search videos, channels, playlists..."
+// FIXED:  className="w-full px-4 py-2 pl-10 pr-12 border border-gray-300 dark:border-gray-600 rounded-l-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
  />
  <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
 
  {query && (
- <button
- onClick={() => setQuery('')}
- className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+ <button />
+// FIXED:  onClick={() => setQuery('')}
+// FIXED:  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
  >
  <XMarkIcon className="w-5 h-5" />
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Search Button */}
- <button
- onClick={() => handleSearch()}
- className="px-6 py-2 bg-gray-100 dark:bg-gray-700 border border-l-0 border-gray-300 dark:border-gray-600 rounded-r-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+ <button />
+// FIXED:  onClick={() => handleSearch()}
+// FIXED:  className="px-6 py-2 bg-gray-100 dark:bg-gray-700 border border-l-0 border-gray-300 dark:border-gray-600 rounded-r-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
  >
  <MagnifyingGlassIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
- </button>
+// FIXED:  </button>
 
  {/* Filter Button */}
- <button
- onClick={() => setShowFilters(!showFilters)}
- className={`ml-2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+ <button />
+// FIXED:  onClick={() => setShowFilters(!showFilters)}
+// FIXED:  className={`ml-2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
  hasActiveFilters() ? 'bg-blue-100 dark:bg-blue-900 border-blue-300 dark:border-blue-600' : 'bg-white dark:bg-gray-800'
  }`}
  >
  <FunnelIcon className={`w-5 h-5 ${hasActiveFilters() ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300'}`} />
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Search Suggestions */}
  {showSuggestions && suggestions.length > 0 && (
  <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50">
  {suggestions.map((suggestion, index) => (
  <button
- key={index}
- onClick={() => {
+ key={index} />
+// FIXED:  onClick={() => {
  setQuery(suggestion);
  handleSearch(suggestion);
  }
- className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg"
+// FIXED:  className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg"
  >
  <div className="flex items-center space-x-3">
  <MagnifyingGlassIcon className="w-4 h-4 text-gray-400" />
  <span className="text-gray-900 dark:text-white">{suggestion}</span>
- </div>
- </button>
+// FIXED:  </div>
+// FIXED:  </button>
  ))}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Advanced Filters Panel */}
  {showFilters && (
@@ -229,21 +229,21 @@ searchParams.set('sort_by', filters.sortBy);
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Search Filters</h3>
  <div className="flex space-x-2">
  {hasActiveFilters() && (
- <button
- onClick={(e: any) => clearFilters(e)}
- className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+ <button />
+// FIXED:  onClick={(e: any) => clearFilters(e)}
+// FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
  >
  Clear all
- </button>
+// FIXED:  </button>
  )}
- <button
- onClick={() => setShowFilters(false)}
- className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+ <button />
+// FIXED:  onClick={() => setShowFilters(false)}
+// FIXED:  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
  >
  <XMarkIcon className="w-5 h-5" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  {/* Duration Filter */}
@@ -251,31 +251,31 @@ searchParams.set('sort_by', filters.sortBy);
  <label htmlFor="duration-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  <ClockIcon className="w-4 h-4 inline mr-1" />
  Duration
- </label>
+// FIXED:  </label>
  <select
- id="duration-filter"
- value={filters.duration}
- onChange={(e) => setFilters(prev => ({ ...prev as any, duration: e.target.value as any }))}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  id="duration-filter"
+// FIXED:  value={filters.duration} />
+// FIXED:  onChange={(e) => setFilters(prev => ({ ...prev as any, duration: e.target.value as any }))}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="any">Any duration</option>
  <option value="short">Under 4 minutes</option>
  <option value="medium">4-20 minutes</option>
  <option value="long">Over 20 minutes</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {/* Upload Date Filter */}
  <div>
  <label htmlFor="upload-date-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  <CalendarDaysIcon className="w-4 h-4 inline mr-1" />
  Upload date
- </label>
+// FIXED:  </label>
  <select
- id="upload-date-filter"
- value={filters.uploadDate}
- onChange={(e) => setFilters(prev => ({ ...prev as any, uploadDate: e.target.value as any }))}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  id="upload-date-filter"
+// FIXED:  value={filters.uploadDate} />
+// FIXED:  onChange={(e) => setFilters(prev => ({ ...prev as any, uploadDate: e.target.value as any }))}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="any">Any time</option>
  <option value="hour">Last hour</option>
@@ -283,54 +283,54 @@ searchParams.set('sort_by', filters.sortBy);
  <option value="week">This week</option>
  <option value="month">This month</option>
  <option value="year">This year</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {/* Type Filter */}
  <div>
  <label htmlFor="type-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  <VideoCameraIcon className="w-4 h-4 inline mr-1" />
  Type
- </label>
+// FIXED:  </label>
  <select
- id="type-filter"
- value={filters.type}
- onChange={(e) => setFilters(prev => ({ ...prev as any, type: e.target.value as any }))}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  id="type-filter"
+// FIXED:  value={filters.type} />
+// FIXED:  onChange={(e) => setFilters(prev => ({ ...prev as any, type: e.target.value as any }))}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="any">Any type</option>
  <option value="video">Video</option>
  <option value="channel">Channel</option>
  <option value="playlist">Playlist</option>
  <option value="live">Live</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  {/* Sort By */}
  <div>
  <label htmlFor="sort-by-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  <AdjustmentsHorizontalIcon className="w-4 h-4 inline mr-1" />
  Sort by
- </label>
+// FIXED:  </label>
  <select
- id="sort-by-filter"
- value={filters.sortBy}
- onChange={(e) => setFilters(prev => ({ ...prev as any, sortBy: e.target.value as any }))}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  id="sort-by-filter"
+// FIXED:  value={filters.sortBy} />
+// FIXED:  onChange={(e) => setFilters(prev => ({ ...prev as any, sortBy: e.target.value as any }))}
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="relevance">Relevance</option>
  <option value="upload_date">Upload date</option>
  <option value="view_count">View count</option>
  <option value="rating">Rating</option>
- </select>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Features */}
  <div className="mt-6">
  <label htmlFor="features-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
  Features
- </label>
+// FIXED:  </label>
  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
  {[
  { id: 'subtitles',
@@ -351,30 +351,30 @@ searchParams.set('sort_by', filters.sortBy);
  label: 'HDR' }].map((feature) => (
  <label key={feature.id} htmlFor={feature.id} className="flex items-center space-x-2 cursor-pointer">
  <input
- id={feature.id}
- type="checkbox"
- checked={filters.features.includes(feature.id)}
- onChange={() => toggleFeature(feature.id)}
- className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+// FIXED:  id={feature.id}
+// FIXED:  type="checkbox"
+// FIXED:  checked={filters.features.includes(feature.id)} />
+// FIXED:  onChange={() => toggleFeature(feature.id)}
+// FIXED:  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
  />
  <span className="text-sm text-gray-700 dark:text-gray-300">{feature.label}</span>
- </label>
+// FIXED:  </label>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Apply Button */}
  <div className="mt-6 flex justify-end">
- <button
- onClick={() => handleSearch()}
- className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+ <button />
+// FIXED:  onClick={() => handleSearch()}
+// FIXED:  className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
  >
  Apply Filters
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

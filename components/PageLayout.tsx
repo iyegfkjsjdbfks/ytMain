@@ -41,12 +41,12 @@ export function PageLayout<T>({
  <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  );
 
  return (
@@ -56,25 +56,25 @@ export function PageLayout<T>({
  {icon && <div className="w-7 h-7 sm:w-8 sm:h-8 mr-3">{icon}</div>}
  <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">
  {title}
- </h1>
- </div>
+// FIXED:  </h1>
+// FIXED:  </div>
  {headerActions && (
  <div className="flex items-center space-x-2">
  {headerActions}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  <DataWrapper
  data={data}
  loading={loading}
  error={error}
  loadingSkeleton={renderSkeleton()}
- {...(emptyState && { emptyState })}
+ {...(emptyState && { emptyState })} />
  >
  {(data) => children(data)}
- </DataWrapper>
- </div>
+// FIXED:  </DataWrapper>
+// FIXED:  </div>
  );
 }
 

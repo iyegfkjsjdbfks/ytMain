@@ -229,7 +229,7 @@ export const OptimizedMiniplayerProvider: React.FC<MiniplayerProviderProps> = ({
   return (
     <MiniplayerContext.Provider value={value}>
       {children}
-    </MiniplayerContext.Provider>
+// FIXED:     </MiniplayerContext.Provider>
   );
 };
 
@@ -238,22 +238,26 @@ export const useOptimizedMiniplayer = () => {
   const context = useContext(MiniplayerContext);
   if (!context) {
     throw new Error('useOptimizedMiniplayer must be used within an OptimizedMiniplayerProvider');
+}
   }
   return context;
 };
 
 // Selector hooks for specific parts of the state
 export const useMiniplayerVideo = () => {
+}
   const { state } = useOptimizedMiniplayer();
   return state.currentVideo;
 };
 
 export const useMiniplayerVisibility = () => {
+}
   const { state } = useOptimizedMiniplayer();
   return state.isVisible;
 };
 
 export const useMiniplayerPlayback = () => {
+}
   const { state } = useOptimizedMiniplayer();
   return {
     isPlaying: state.isPlaying,
@@ -264,6 +268,7 @@ export const useMiniplayerPlayback = () => {
 };
 
 export const useMiniplayerQueue = () => {
+}
   const { state } = useOptimizedMiniplayer();
   return {
     queue: state.queue,
@@ -272,6 +277,7 @@ export const useMiniplayerQueue = () => {
 };
 
 export const useMiniplayerActions = () => {
+}
   const { actions } = useOptimizedMiniplayer();
   return actions;
 };

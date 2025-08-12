@@ -34,18 +34,18 @@ class ErrorBoundary extends Component<Props, State> {
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               Something went wrong
-            </h1>
+// FIXED:             </h1>
             <p className="text-gray-600 mb-8">
               An unexpected error occurred. Please try refreshing the page.
-            </p>
-            <button
-              onClick={() => window.location.reload()}
+// FIXED:             </p>
+            <button// FIXED:  />
+              onClick={() => window.location.reload()}// FIXED: 
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
               Refresh Page
-            </button>
-          </div>
-        </div>
+// FIXED:             </button>
+// FIXED:           </div>
+// FIXED:         </div>
       );
     }
 

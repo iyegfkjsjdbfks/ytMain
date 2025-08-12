@@ -43,10 +43,10 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
  index: number) => (
  <VideoCard
  key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
- video={video}
+ video={video} />
  />
  ))}
- </div>
+// FIXED:  </div>
  );
 });
 

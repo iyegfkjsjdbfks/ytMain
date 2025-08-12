@@ -61,13 +61,13 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <div className="flex items-center mb-4">
  <div className="w-3 h-3 bg-red-600 rounded-full mr-2 animate-pulse" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Live now</h2>
- </div>
+// FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {Array.from({ length: 3 }).map((_, index) => (
  <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
  <div className="aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg relative">
  <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded">LIVE</div>
- </div>
+// FIXED:  </div>
  <div className="p-3">
  <div className="flex items-start space-x-3">
  <div className="w-9 h-9 rounded-full bg-neutral-300 dark:bg-neutral-700/80 mt-0.5 flex-shrink-0" />
@@ -75,13 +75,13 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -91,9 +91,9 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <div className="flex items-center mb-4">
  <div className="w-3 h-3 bg-red-600 rounded-full mr-2" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Live now</h2>
- </div>
+// FIXED:  </div>
  <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -103,12 +103,12 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <div className="flex items-center mb-4">
  <div className="w-3 h-3 bg-red-600 rounded-full mr-2" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Live now</h2>
- </div>
+// FIXED:  </div>
  <div className="text-center py-8 text-neutral-600 dark:text-neutral-400">
  <p className="mb-2">No live streams at the moment</p>
  <p className="text-sm">Check back later for live content</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -118,14 +118,14 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <div className="flex items-center">
  <div className="w-3 h-3 bg-red-600 rounded-full mr-2 animate-pulse" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Live now</h2>
- </div>
+// FIXED:  </div>
  <Link
  to="/trending?filter=live"
- className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
+// FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
  View All
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {liveStreams.map((stream: any) => (
  <div key={stream.id} className="relative">
@@ -133,15 +133,15 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  {/* Live indicator overlay */}
  <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded shadow-lg">
  LIVE
- </div>
+// FIXED:  </div>
  {/* Viewer count overlay */}
  <div className="absolute bottom-16 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
  {stream.views}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

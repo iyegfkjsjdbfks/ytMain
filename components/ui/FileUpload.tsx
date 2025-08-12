@@ -86,7 +86,7 @@ return '0 Bytes';
  return (
  <div className={`w-full ${className}`}>
  <div
- className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${
+// FIXED:  className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${
  isDragOver
  ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/10'
  : 'border-neutral-300 dark:border-neutral-600'
@@ -97,17 +97,17 @@ return '0 Bytes';
  }`}
  onDragOver={handleDragOver}
  onDragLeave={handleDragLeave}
- onDrop={handleDrop}
- onClick={(e: any) => handleClick(e)}
+ onDrop={handleDrop} />
+// FIXED:  onClick={(e: any) => handleClick(e)}
  >
  <input
  ref={fileInputRef}
- type="file"
+// FIXED:  type="file"
  accept={accept}
- multiple={multiple}
- onChange={(e) => handleFileSelect(e.target.files)}
- className="hidden"
- disabled={disabled}
+ multiple={multiple} />
+// FIXED:  onChange={(e) => handleFileSelect(e.target.files)}
+// FIXED:  className="hidden"
+// FIXED:  disabled={disabled}
  />
 
  <div className="text-center">
@@ -115,18 +115,18 @@ return '0 Bytes';
  <div className="mt-4">
  <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
  {label}
- </p>
+// FIXED:  </p>
  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
  {description}
- </p>
+// FIXED:  </p>
  {maxSize && (
  <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1">
  Maximum file size: {formatFileSize(maxSize)}
- </p>
+// FIXED:  </p>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {error && (
  <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
@@ -136,42 +136,42 @@ return '0 Bytes';
  <div className="mt-4 space-y-2">
  <h4 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
  Selected Files ({files.length})
- </h4>
+// FIXED:  </h4>
  <div className="space-y-2">
  {files.map((file: any,
  index: number) => (
  <div
  key={index}
- className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg"
+// FIXED:  className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg" />
  >
  <div className="flex items-center space-x-3">
  <DocumentIcon className="h-5 w-5 text-neutral-400" />
  <div>
  <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
  {file.name}
- </p>
+// FIXED:  </p>
  <p className="text-xs text-neutral-500 dark:text-neutral-400">
  {formatFileSize(file.size)}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  {onFileRemove && (
- <button
- onClick={(e: any) => {
+ <button />
+// FIXED:  onClick={(e: any) => {
  e.stopPropagation();
  onFileRemove(index);
  }
- className="p-1 text-neutral-400 hover:text-red-500 transition-colors"
+// FIXED:  className="p-1 text-neutral-400 hover:text-red-500 transition-colors"
  >
  <XMarkIcon className="h-4 w-4" />
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 export default FileUpload;

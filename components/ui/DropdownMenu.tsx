@@ -43,13 +43,13 @@ return null;
  return (
  <div
  ref={menuRef}
- className={cn(
+// FIXED:  className={cn(
  'absolute z-50 min-w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2',
  positionClasses[position],
- className)}
+ className)} />
  >
  {children}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -65,10 +65,10 @@ const DropdownMenuItem: any = ({
  danger: 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20' };
 
  return (
- <button
- onClick={(e: any) => onClick(e)}
- disabled={disabled}
- className={cn(
+ <button />
+// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  disabled={disabled}
+// FIXED:  className={cn(
  'w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors',
  variantClasses[variant],
  disabled && 'opacity-50 cursor-not-allowed',
@@ -76,7 +76,7 @@ const DropdownMenuItem: any = ({
  >
  {icon && <span className="flex-shrink-0">{icon}</span>}
  <span>{children}</span>
- </button>
+// FIXED:  </button>
  );
 };
 

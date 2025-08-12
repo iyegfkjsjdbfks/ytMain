@@ -226,10 +226,10 @@ return;
  return (
  <div className={`relative ${className}`} ref={dropdownRef}>
  {/* Notification Bell Button */}
- <button
- onClick={() => setIsOpen(!isOpen)}
- className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
- aria-label="Notifications"
+ <button />
+// FIXED:  onClick={() => setIsOpen(!isOpen)}
+// FIXED:  className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+// FIXED:  aria-label="Notifications"
  >
  {unreadCount > 0 ? (
  <BellSolidIcon className="w-6 h-6" />
@@ -240,9 +240,9 @@ return;
  {unreadCount > 0 && (
  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
  {unreadCount > 99 ? '99+' : unreadCount}
- </span>
+// FIXED:  </span>
  )}
- </button>
+// FIXED:  </button>
 
  {/* Notification Dropdown */}
  {isOpen && (
@@ -252,30 +252,30 @@ return;
  <div className="flex items-center justify-between">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
  Notifications
- </h3>
+// FIXED:  </h3>
  <div className="flex items-center space-x-2">
- <button
- onClick={() => setFilter(filter === 'all' ? 'unread' : 'all')}
- className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+ <button />
+// FIXED:  onClick={() => setFilter(filter === 'all' ? 'unread' : 'all')}
+// FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
  >
  {filter === 'all' ? 'Unread only' : 'Show all'}
- </button>
- <button
- onClick={(e: any) => markAllAsRead(e)}
- className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
- disabled={unreadCount === 0}
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => markAllAsRead(e)}
+// FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+// FIXED:  disabled={unreadCount === 0}
  >
  Mark all read
- </button>
- <button
- onClick={() => setIsOpen(false)}
- className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setIsOpen(false)}
+// FIXED:  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
  >
  <XMarkIcon className="w-5 h-5" />
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Notifications List */}
  <div className="max-h-80 overflow-y-auto">
@@ -284,14 +284,14 @@ return;
  <BellIcon className="w-12 h-12 mx-auto mb-4 opacity-50" />
  <p>No notifications</p>
  <p className="text-sm">You're all caught up!</p>
- </div>
+// FIXED:  </div>
  ) : (
  filteredNotifications.map((notification) => (
  <div
  key={notification.id}
- className={`p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
+// FIXED:  className={`p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
  !notification.isRead ? 'bg-blue-50 dark:bg-blue-900/20' : ''
- }`}
+ }`} />
  >
  <div className="flex items-start space-x-3">
  {/* Notification Icon */}
@@ -300,10 +300,10 @@ return;
  notification.type === 'like' ? 'bg-pink-100 text-pink-600' :
  notification.type === 'comment' ? 'bg-blue-100 text-blue-600' :
  notification.type === 'subscription' ? 'bg-green-100 text-green-600' :
- 'bg-gray-100 text-gray-600'
+ 'bg-gray-100 text-gray-600' />
  }`}>
  {getNotificationIcon(notification.type)}
- </div>
+// FIXED:  </div>
 
  {/* Content */}
  <div className="flex-1 min-w-0">
@@ -311,75 +311,75 @@ return;
  <div className="flex-1">
  <p className="text-sm font-medium text-gray-900 dark:text-white">
  {notification.title}
- </p>
+// FIXED:  </p>
  <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
  {notification.message}
- </p>
+// FIXED:  </p>
  {notification.channelName && (
  <div className="flex items-center mt-2">
  {notification.channelAvatar && (
  <img
- src={notification.channelAvatar}
- alt={notification.channelName}
- className="w-4 h-4 rounded-full mr-2"
+// FIXED:  src={notification.channelAvatar}
+// FIXED:  alt={notification.channelName}
+// FIXED:  className="w-4 h-4 rounded-full mr-2" />
  />
  )}
  <span className="text-xs text-gray-500 dark:text-gray-400">
  {notification.channelName}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
  {formatDistanceToNow(new Date(notification.timestamp))} ago
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Thumbnail */}
  {notification.thumbnail && (
  <img
- src={notification.thumbnail}
- alt=""
- className="w-16 h-9 object-cover rounded ml-3 flex-shrink-0"
+// FIXED:  src={notification.thumbnail}
+// FIXED:  alt=""
+// FIXED:  className="w-16 h-9 object-cover rounded ml-3 flex-shrink-0" />
  />
  )}
- </div>
+// FIXED:  </div>
 
  {/* Actions */}
  <div className="flex items-center justify-between mt-2">
  <div className="flex space-x-2">
  {!notification.isRead && (
- <button
- onClick={() => markAsRead(notification.id)}
- className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+ <button />
+// FIXED:  onClick={() => markAsRead(notification.id)}
+// FIXED:  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
  >
  Mark as read
- </button>
+// FIXED:  </button>
  )}
  {notification.videoId && (
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  markAsRead(notification.id);
  window.location.href = `/watch/${notification.videoId}`;
  }
- className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+// FIXED:  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
  >
  Watch video
- </button>
+// FIXED:  </button>
  )}
- </div>
- <button
- onClick={() => deleteNotification(notification.id)}
- className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+// FIXED:  </div>
+ <button />
+// FIXED:  onClick={() => deleteNotification(notification.id)}
+// FIXED:  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
  >
  <XMarkIcon className="w-4 h-4" />
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))
  )}
- </div>
+// FIXED:  </div>
 
  {/* Footer */}
  {filteredNotifications.length > 0 && (
@@ -387,12 +387,12 @@ return;
  <button className="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center justify-center space-x-1">
  <Cog6ToothIcon className="w-4 h-4" />
  <span>Notification settings</span>
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

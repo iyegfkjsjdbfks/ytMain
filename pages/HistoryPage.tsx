@@ -32,7 +32,7 @@ const HistoryPage: React.FC = () => {
  <div className="flex items-center mb-6 sm:mb-8">
  <HistoryIcon className="w-7 h-7 sm:w-8 sm:h-8 text-neutral-700 dark:text-neutral-300 mr-3" />
  <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">Watch History</h1>
- </div>
+// FIXED:  </div>
 
  {loading ? (
  <HistoryPageSkeleton />
@@ -41,17 +41,17 @@ const HistoryPage: React.FC = () => {
  {videos.map((video: any) => (
  <VideoCard key={`${video.id}-history`} video={video} /> // Ensure unique key if video appears elsewhere
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className="text-center py-12 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg">
  <HistoryIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-6" />
  <p className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">Your watch history is empty</p>
  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-md mx-auto">
  Videos you watch will appear here. Start exploring and they'll show up!
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

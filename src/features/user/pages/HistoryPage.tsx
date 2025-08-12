@@ -11,13 +11,13 @@ const HistoryPage: React.FC = () => {
  <p>
  This is a placeholder for the watch history page that will display
  videos you've watched.
- </p>
+// FIXED:  </p>
  <p className='mt-2'>
  For demonstration of video components, please visit the{' '}
  <strong>Video Demo</strong> page using the user menu dropdown.
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

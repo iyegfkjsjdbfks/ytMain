@@ -15,18 +15,18 @@ const ChannelPage: React.FC = () => {
  {channelIdOrName
  ? `Viewing channel: ${channelIdOrName}`
  : 'No channel specified'}
- </p>
+// FIXED:  </p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
  This is a placeholder for the channel page that will display a
  channel's videos, playlists, and information.
- </p>
+// FIXED:  </p>
  <p className='mt-2'>
  For demonstration of video components, please visit the{' '}
  <strong>Video Demo</strong> page using the user menu dropdown.
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

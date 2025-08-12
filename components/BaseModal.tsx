@@ -100,15 +100,15 @@ return null;
 
  return (
  <div
- className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`}
- onClick={(e: any) => handleOverlayClick(e)}
+// FIXED:  className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`} />
+// FIXED:  onClick={(e: any) => handleOverlayClick(e)}
  onKeyDown={(e: any) => {
  if (e.key === 'Escape') {
  onClose();
  }
  }
  role="dialog"
- aria-modal="true"
+// FIXED:  aria-modal="true"
  tabIndex={0}
  >
  {/* Backdrop */}
@@ -118,7 +118,7 @@ return null;
  <div
  ref={modalRef}
  tabIndex={-1}
- className={`
+// FIXED:  className={`
  relative w-full ${getSizeClasses()} max-h-[90vh] 
  bg-white dark:bg-gray-800 rounded-lg shadow-xl 
  transform transition-all duration-200 ease-out
@@ -126,8 +126,8 @@ return null;
  ${className}
  `}
  role="dialog"
- aria-modal="true"
- aria-labelledby={title ? 'modal-title' : undefined}
+// FIXED:  aria-modal="true"
+// FIXED:  aria-labelledby={title ? 'modal-title' : undefined} />
  >
  {/* Header */}
  {(title || showCloseButton) && (
@@ -135,33 +135,33 @@ return null;
  {title && (
  <h2 id="modal-title" className="text-xl font-semibold text-gray-900 dark:text-white">
  {title}
- </h2>
+// FIXED:  </h2>
  )}
  {showCloseButton && (
- <button
- onClick={(e: any) => onClose(e)}
- className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
- aria-label="Close modal"
+ <button />
+// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+// FIXED:  aria-label="Close modal"
  >
  <XMarkIcon className="w-5 h-5" />
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Content */}
  <div className="flex-1 overflow-y-auto p-6">
  {children}
- </div>
+// FIXED:  </div>
 
  {/* Footer */}
  {footer && (
  <div className="p-6 border-t border-gray-200 dark:border-gray-700">
  {footer}
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

@@ -271,11 +271,11 @@ return false;
  <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center space-x-2">
  <ShieldCheckIcon className="w-8 h-8" />
  <span>Content Moderation</span>
- </h1>
+// FIXED:  </h1>
  <p className="text-gray-600 dark:text-gray-400 mt-1">
  {filteredItems.length} items requiring review
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  {/* Stats */}
  <div className="grid grid-cols-4 gap-4">
@@ -291,10 +291,10 @@ return false;
  <div key={index} className="text-center">
  <div className={`text-2xl font-bold ${stat.color}`}>{stat.count}</div>
  <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Filters and Search */}
  <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
@@ -303,63 +303,63 @@ return false;
  <div className="md:col-span-2 relative">
  <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
  <input
- type="text"
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- placeholder="Search content..."
- className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  type="text"
+// FIXED:  value={searchQuery} />
+// FIXED:  onChange={(e) => setSearchQuery(e.target.value)}
+// FIXED:  placeholder="Search content..."
+// FIXED:  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  />
- </div>
+// FIXED:  </div>
 
  {/* Filters */}
  <select
- value={filterStatus}
- onChange={(e) => setFilterStatus(e.target.value as any)}
- className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+// FIXED:  value={filterStatus} />
+// FIXED:  onChange={(e) => setFilterStatus(e.target.value as any)}
+// FIXED:  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
  >
  <option value="all">All Status</option>
  <option value="pending">Pending</option>
  <option value="flagged">Flagged</option>
  <option value="approved">Approved</option>
  <option value="rejected">Rejected</option>
- </select>
+// FIXED:  </select>
 
  <select
- value={filterType}
- onChange={(e) => setFilterType(e.target.value as any)}
- className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+// FIXED:  value={filterType} />
+// FIXED:  onChange={(e) => setFilterType(e.target.value as any)}
+// FIXED:  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
  >
  <option value="all">All Types</option>
  <option value="video">Videos</option>
  <option value="comment">Comments</option>
  <option value="user">Users</option>
  <option value="community_post">Posts</option>
- </select>
+// FIXED:  </select>
 
  <select
- value={filterPriority}
- onChange={(e) => setFilterPriority(e.target.value as any)}
- className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+// FIXED:  value={filterPriority} />
+// FIXED:  onChange={(e) => setFilterPriority(e.target.value as any)}
+// FIXED:  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
  >
  <option value="all">All Priority</option>
  <option value="critical">Critical</option>
  <option value="high">High</option>
  <option value="medium">Medium</option>
  <option value="low">Low</option>
- </select>
+// FIXED:  </select>
 
  <select
- value={sortBy}
- onChange={(e) => setSortBy(e.target.value as any)}
- className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={(e) => setSortBy(e.target.value as any)}
+// FIXED:  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
  >
  <option value="newest">Newest First</option>
  <option value="oldest">Oldest First</option>
  <option value="priority">By Priority</option>
  <option value="reports">Most Reports</option>
- </select>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Bulk Actions */}
  {selectedItems.size > 0 && (
@@ -367,30 +367,30 @@ return false;
  <div className="flex items-center justify-between">
  <span className="text-blue-800 dark:text-blue-200">
  {selectedItems.size} item{selectedItems.size !== 1 ? 's' : ''} selected
- </span>
+// FIXED:  </span>
 
  <div className="flex space-x-3">
- <button
- onClick={() => handleBulkAction('approve')}
- className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
+ <button />
+// FIXED:  onClick={() => handleBulkAction('approve')}
+// FIXED:  className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
  >
  Approve All
- </button>
- <button
- onClick={() => handleBulkAction('reject')}
- className="px-3 py-1 bg-yellow-600 text-white rounded text-sm hover:bg-yellow-700"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('reject')}
+// FIXED:  className="px-3 py-1 bg-yellow-600 text-white rounded text-sm hover:bg-yellow-700"
  >
  Reject All
- </button>
- <button
- onClick={() => handleBulkAction('remove')}
- className="px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('remove')}
+// FIXED:  className="px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700"
  >
  Remove All
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Moderation Items */}
@@ -398,17 +398,17 @@ return false;
  {filteredItems.map((item) => (
  <div
  key={item.id}
- className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 ${
+// FIXED:  className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 ${
  selectedItems.has(item.id) ? 'ring-2 ring-blue-500' : ''
- }`}
+ }`} />
  >
  <div className="flex items-start space-x-4">
  {/* Selection Checkbox */}
  <input
- type="checkbox"
- checked={selectedItems.has(item.id)}
- onChange={() => toggleSelection(item.id)}
- className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+// FIXED:  type="checkbox"
+// FIXED:  checked={selectedItems.has(item.id)} />
+// FIXED:  onChange={() => toggleSelection(item.id)}
+// FIXED:  className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
  />
 
  {/* Content Preview */}
@@ -419,27 +419,27 @@ return false;
  <div>
  <h3 className="font-medium text-gray-900 dark:text-white">
  {item.content.title || item.content.text || `${item.type} by ${item.content.authorName}`}
- </h3>
+// FIXED:  </h3>
  <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
  <span>By {item.content.authorName}</span>
  <span>•</span>
  <span>{formatDistanceToNow(new Date(item.reportedAt))} ago</span>
  <span>•</span>
  <span>{item.reportCount} reports</span>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Status and Priority Badges */}
  <div className="flex items-center space-x-2">
  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(item.priority)}`}>
  {item.priority.toUpperCase()}
- </span>
+// FIXED:  </span>
  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
  {item.status.toUpperCase()}
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Content Details */}
  <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -447,20 +447,20 @@ return false;
  <div className="md:col-span-2">
  {item.content.thumbnail && (
  <img
- src={item.content.thumbnail}
- alt="Content thumbnail"
- className="w-full h-32 object-cover rounded mb-2"
+// FIXED:  src={item.content.thumbnail}
+// FIXED:  alt="Content thumbnail"
+// FIXED:  className="w-full h-32 object-cover rounded mb-2" />
  />
  )}
  {item.content.text && (
  <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">
  {item.content.text}
- </p>
+// FIXED:  </p>
  )}
  <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
  <strong>Report Reason:</strong> {item.reportReason}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* AI Analysis */}
  {item.aiAnalysis && (
@@ -469,13 +469,13 @@ return false;
  <div className="space-y-2 text-sm">
  <div>
  <span className="text-gray-600 dark:text-gray-400">Toxicity Score:</span>
- <span className={`ml-2 font-medium ${
+ <span className={`ml-2 font-medium ${ />
  item.aiAnalysis.toxicityScore > 0.8 ? 'text-red-600' :
  item.aiAnalysis.toxicityScore > 0.5 ? 'text-yellow-600' : 'text-green-600'
  }`}>
  {(item.aiAnalysis.toxicityScore * 100).toFixed(0)}%
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div>
  <span className="text-gray-600 dark:text-gray-400">Categories:</span>
  <div className="mt-1">
@@ -483,64 +483,64 @@ return false;
  index: number) => (
  <span
  key={index}
- className="inline-block bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs mr-1 mb-1"
+// FIXED:  className="inline-block bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs mr-1 mb-1" />
  >
  {category}
- </span>
+// FIXED:  </span>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div>
  <span className="text-gray-600 dark:text-gray-400">Suggested:</span>
  <span className="ml-2 font-medium text-blue-600 dark:text-blue-400">
  {item.aiAnalysis.suggestedAction}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Actions */}
  <div className="mt-4 flex items-center justify-between">
  <div className="flex space-x-2">
- <button
- onClick={() => handleModerate(item.id, 'approve')}
- className="flex items-center space-x-1 px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
+ <button />
+// FIXED:  onClick={() => handleModerate(item.id, 'approve')}
+// FIXED:  className="flex items-center space-x-1 px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
  >
  <CheckIcon className="w-4 h-4" />
  <span>Approve</span>
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => {
+ <button />
+// FIXED:  onClick={() => {
  setShowModerationModal(item.id);
  }
- className="flex items-center space-x-1 px-3 py-1 bg-yellow-600 text-white rounded text-sm hover:bg-yellow-700"
+// FIXED:  className="flex items-center space-x-1 px-3 py-1 bg-yellow-600 text-white rounded text-sm hover:bg-yellow-700"
  >
  <XMarkIcon className="w-4 h-4" />
  <span>Reject</span>
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => handleModerate(item.id, 'remove')}
- className="flex items-center space-x-1 px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700"
+ <button />
+// FIXED:  onClick={() => handleModerate(item.id, 'remove')}
+// FIXED:  className="flex items-center space-x-1 px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700"
  >
  <TrashIcon className="w-4 h-4" />
  <span>Remove</span>
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
  <ClockIcon className="w-4 h-4" />
  <span>Reported {formatDistanceToNow(new Date(item.reportedAt))} ago</span>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  {/* Moderation Modal */}
  {showModerationModal && (
@@ -548,34 +548,34 @@ return false;
  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
  Moderation Action
- </h3>
+// FIXED:  </h3>
 
  <textarea
- value={moderationReason}
- onChange={(e) => setModerationReason(e.target.value)}
- placeholder="Enter reason for this action (optional)"
+// FIXED:  value={moderationReason} />
+// FIXED:  onChange={(e) => setModerationReason(e.target.value)}
+// FIXED:  placeholder="Enter reason for this action (optional)"
  rows={3}
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white mb-4"
+// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white mb-4"
  />
 
  <div className="flex space-x-3">
- <button
- onClick={() => setShowModerationModal(null)}
- className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+ <button />
+// FIXED:  onClick={() => setShowModerationModal(null)}
+// FIXED:  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Cancel
- </button>
- <button
- onClick={() => handleModerate(showModerationModal, 'reject')}
- className="flex-1 px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleModerate(showModerationModal, 'reject')}
+// FIXED:  className="flex-1 px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
  >
  Reject
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

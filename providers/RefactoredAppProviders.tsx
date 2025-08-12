@@ -41,14 +41,14 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
  {children}
  <PWAStatus />
  <PWAUpdateNotification />
- </SuspenseWrapper>
- </UnifiedAppProvider>
- </WatchLaterProvider>
- </OptimizedMiniplayerProvider>
- </AuthProvider>
- </ThemeProvider>
- </QueryClientProvider>
- </ErrorBoundary>
+// FIXED:  </SuspenseWrapper>
+// FIXED:  </UnifiedAppProvider>
+// FIXED:  </WatchLaterProvider>
+// FIXED:  </OptimizedMiniplayerProvider>
+// FIXED:  </AuthProvider>
+// FIXED:  </ThemeProvider>
+// FIXED:  </QueryClientProvider>
+// FIXED:  </ErrorBoundary>
  );
 };
 
@@ -75,13 +75,13 @@ export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
  <WatchLaterProvider>
  <UnifiedAppProvider>
  {children}
- </UnifiedAppProvider>
- </WatchLaterProvider>
- </OptimizedMiniplayerProvider>
- </AuthProvider>
- </ThemeProvider>
- </QueryClientProvider>
- </ErrorBoundary>
+// FIXED:  </UnifiedAppProvider>
+// FIXED:  </WatchLaterProvider>
+// FIXED:  </OptimizedMiniplayerProvider>
+// FIXED:  </AuthProvider>
+// FIXED:  </ThemeProvider>
+// FIXED:  </QueryClientProvider>
+// FIXED:  </ErrorBoundary>
  );
 };
 

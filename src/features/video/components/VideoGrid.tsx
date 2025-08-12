@@ -46,13 +46,13 @@ const VideoGrid: React.FC<VideoGridProps> = ({
  <h2 className='text-xl font-bold'>{title}</h2>
  {showMoreLink && (
  <a
- href={showMoreLink}
- className='text-blue-600 hover:text-blue-800 text-sm font-medium'
+// FIXED:  href={showMoreLink}
+// FIXED:  className='text-blue-600 hover:text-blue-800 text-sm font-medium' />
  >
  Show more
- </a>
+// FIXED:  </a>
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Video grid */}
@@ -62,32 +62,32 @@ const VideoGrid: React.FC<VideoGridProps> = ({
  <VideoCard
  key={video.id}
  video={video}
- onClick={onVideoClick ? onVideoClick : undefined}
+// FIXED:  onClick={onVideoClick ? onVideoClick : undefined} />
  />
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className='flex items-center justify-center py-10'>
  <div className='text-center'>
  <svg
  xmlns='http://www.w3.org/2000/svg'
- className='h-16 w-16 mx-auto text-gray-400 mb-4'
+// FIXED:  className='h-16 w-16 mx-auto text-gray-400 mb-4'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor'
+ stroke='currentColor' />
  >
  <path
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={1.5}
- d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'
+ d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
  />
- </svg>
+// FIXED:  </svg>
  <p className='text-gray-600'>{emptyMessage}</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

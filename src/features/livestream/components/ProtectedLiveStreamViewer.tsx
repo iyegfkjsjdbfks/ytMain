@@ -31,10 +31,10 @@ const ProtectedLiveStreamViewer: FC<ProtectedLiveStreamViewerProps> = ({
  <LiveStreamErrorBoundary
  streamId={streamId}
  onRetry={handleRetry}
- onReconnect={handleReconnect}
+ onReconnect={handleReconnect} />
  >
  <LiveStreamViewer streamId={streamId} {...(className && { className })} />
- </LiveStreamErrorBoundary>
+// FIXED:  </LiveStreamErrorBoundary>
  );
 };
 

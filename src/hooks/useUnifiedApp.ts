@@ -1,15 +1,12 @@
 import { useContext } from 'react';
+import { UnifiedAppContext } from '../../contexts/UnifiedAppContext';
 
-import { UnifiedAppContext } from '../contexts/UnifiedAppContext';
+export const useUnifiedApp = () => {
+  const context = useContext(UnifiedAppContext);
+  if (context === undefined) {
+    throw new Error('useUnifiedApp must be used within a UnifiedAppProvider');
+  }
+  return context;
+};
 
-/**
- * Hook to access the unified app context
- * Provides access to all app state and actions
- */
-export function useUnifiedApp(): any {
- const context = useContext<any>(UnifiedAppContext);
- if (context === undefined) {
- throw new Error('useUnifiedApp must be used within a UnifiedAppProvider');
- }
- return context;
-}
+export default useUnifiedApp;

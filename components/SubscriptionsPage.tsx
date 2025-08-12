@@ -269,99 +269,99 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  {/* Search Bar */}
  <div className="relative flex-grow">
  <input
- type="text"
- placeholder="Search subscriptions..."
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  type="text"
+// FIXED:  placeholder="Search subscriptions..."
+// FIXED:  value={searchQuery} />
+// FIXED:  onChange={(e) => setSearchQuery(e.target.value)}
+// FIXED:  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  />
  <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
- </div>
+// FIXED:  </div>
 
  {/* Sort By */}
  <select
- value={sortBy}
- onChange={(e) => setSortBy(e.target.value as any)}
- className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={(e) => setSortBy(e.target.value as any)}
+// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="alphabetical">Sort by: A-Z</option>
  <option value="recent">Sort by: Recently Subscribed</option>
  <option value="most_videos">Sort by: Most Videos</option>
  <option value="subscribers">Sort by: Subscribers</option>
- </select>
+// FIXED:  </select>
 
  {/* Filter By */}
  <select
- value={filterBy}
- onChange={(e) => setFilterBy(e.target.value as any)}
- className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+// FIXED:  value={filterBy} />
+// FIXED:  onChange={(e) => setFilterBy(e.target.value as any)}
+// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="all">Filter: All</option>
  <option value="notifications_on">Filter: Notifications On</option>
  <option value="notifications_off">Filter: Notifications Off</option>
  <option value="live">Filter: Live Now</option>
  <option value="recent_uploads">Filter: Recent Uploads</option>
- </select>
+// FIXED:  </select>
 
  {/* View Mode Toggle */}
  <div className="flex bg-gray-100 dark:bg-gray-700 rounded-full p-1">
- <button
- onClick={() => setViewMode('grid')}
- className={`p-2 rounded-full ${viewMode === 'grid' ? 'bg-white dark:bg-gray-600 shadow text-blue-600' : 'text-gray-500 dark:text-gray-400 hover:text-blue-600'}`}
+ <button />
+// FIXED:  onClick={() => setViewMode('grid')}
+// FIXED:  className={`p-2 rounded-full ${viewMode === 'grid' ? 'bg-white dark:bg-gray-600 shadow text-blue-600' : 'text-gray-500 dark:text-gray-400 hover:text-blue-600'}`}
  title="Grid View"
  >
  <Squares2X2Icon className="w-5 h-5" />
- </button>
- <button
- onClick={() => setViewMode('list')}
- className={`p-2 rounded-full ${viewMode === 'list' ? 'bg-white dark:bg-gray-600 shadow text-blue-600' : 'text-gray-500 dark:text-gray-400 hover:text-blue-600'}`}
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setViewMode('list')}
+// FIXED:  className={`p-2 rounded-full ${viewMode === 'list' ? 'bg-white dark:bg-gray-600 shadow text-blue-600' : 'text-gray-500 dark:text-gray-400 hover:text-blue-600'}`}
  title="List View"
  >
  <ListBulletIcon className="w-5 h-5" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Bulk Actions */}
  <div className="mt-4 flex items-center gap-4">
- <button
- onClick={() => setBulkActionMode(!bulkActionMode)}
- className="px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+ <button />
+// FIXED:  onClick={() => setBulkActionMode(!bulkActionMode)}
+// FIXED:  className="px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
  >
  {bulkActionMode ? 'Exit Bulk Mode' : 'Select Multiple'}
- </button>
+// FIXED:  </button>
  {bulkActionMode && selectedSubscriptions.size > 0 && (
  <>
  <span className="text-gray-700 dark:text-gray-300 text-sm">
  {selectedSubscriptions.size} selected
- </span>
- <button
- onClick={() => handleBulkAction('toggle_notifications')}
- className="px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+// FIXED:  </span>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('toggle_notifications')}
+// FIXED:  className="px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
  >
  Toggle Notifications
- </button>
- <button
- onClick={() => handleBulkAction('unsubscribe')}
- className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:underline"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleBulkAction('unsubscribe')}
+// FIXED:  className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:underline"
  >
  Unsubscribe Selected
- </button>
- </>
+// FIXED:  </button>
+// FIXED:  </>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Subscription List/Grid */}
  {filteredAndSortedSubscriptions.length === 0 ? (
  <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
  <p className="text-gray-600 dark:text-gray-400 text-lg">
  No subscriptions found matching your criteria.
- </p>
+// FIXED:  </p>
  <p className="text-gray-500 dark:text-gray-400 mt-2">
  Try adjusting your search, sort, or filter options.
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  ) : viewMode === 'grid' ? (
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
  {filteredAndSortedSubscriptions.map((sub) => (
@@ -369,45 +369,45 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  {bulkActionMode && (
  <div className="absolute top-2 left-2 z-10">
  <input
- type="checkbox"
- checked={selectedSubscriptions.has(sub.channelId)}
- onChange={() => toggleBulkSelection(sub.channelId)}
- className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
+// FIXED:  type="checkbox"
+// FIXED:  checked={selectedSubscriptions.has(sub.channelId)} />
+// FIXED:  onChange={() => toggleBulkSelection(sub.channelId)}
+// FIXED:  className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
  />
- </div>
+// FIXED:  </div>
  )}
  <div className="relative h-32 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
  <img
- src={sub.channelArt || `/api/placeholder/480/180?text=${sub.channelName.split(' ')[0]}`}
- alt={`${sub.channelName} channel art`}
- className="w-full h-full object-cover"
+// FIXED:  src={sub.channelArt || `/api/placeholder/480/180?text=${sub.channelName.split(' ')[0]}`}
+// FIXED:  alt={`${sub.channelName} channel art`}
+// FIXED:  className="w-full h-full object-cover" />
  />
  <img
- src={sub.channelAvatar}
- alt={`${sub.channelName} avatar`}
- className="absolute -bottom-8 left-4 w-16 h-16 rounded-full border-4 border-white dark:border-gray-800 shadow-md"
+// FIXED:  src={sub.channelAvatar}
+// FIXED:  alt={`${sub.channelName} avatar`}
+// FIXED:  className="absolute -bottom-8 left-4 w-16 h-16 rounded-full border-4 border-white dark:border-gray-800 shadow-md" />
  />
- </div>
+// FIXED:  </div>
  <div className="p-4 pt-10">
  <h3 className="font-semibold text-lg text-gray-900 dark:text-white line-clamp-1">
  {sub.channelName}
  {sub.channelVerified && (
  <CheckIcon className="w-4 h-4 inline-block ml-1 text-blue-500" title="Verified Channel" />
  )}
- </h3>
+// FIXED:  </h3>
  <p className="text-sm text-gray-600 dark:text-gray-400">
  {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos
- </p>
+// FIXED:  </p>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Subscribed {formatDistanceToNow(new Date(sub.subscribedAt), { addSuffix: true })}
- </p>
+// FIXED:  </p>
  <p className="text-sm text-gray-700 dark:text-gray-300 mt-2 line-clamp-2">
  {sub.description}
- </p>
+// FIXED:  </p>
  <div className="flex items-center justify-between mt-4">
- <button
- onClick={() => toggleNotifications(sub.channelId)}
- className={`p-2 rounded-full ${sub.notificationsEnabled ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'} hover:bg-red-200 dark:hover:bg-red-900/20 transition-colors`}
+ <button />
+// FIXED:  onClick={() => toggleNotifications(sub.channelId)}
+// FIXED:  className={`p-2 rounded-full ${sub.notificationsEnabled ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'} hover:bg-red-200 dark:hover:bg-red-900/20 transition-colors`}
  title={sub.notificationsEnabled ? 'Notifications On' : 'Notifications Off'}
  >
  {sub.notificationsEnabled ? (
@@ -415,19 +415,19 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  ) : (
  <BellIcon className="w-5 h-5" />
  )}
- </button>
- <button
- onClick={() => setShowUnsubscribeModal(sub.channelId)}
- className="flex items-center space-x-1 px-3 py-1 text-sm font-medium text-red-600 dark:text-red-400 border border-red-600 dark:border-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setShowUnsubscribeModal(sub.channelId)}
+// FIXED:  className="flex items-center space-x-1 px-3 py-1 text-sm font-medium text-red-600 dark:text-red-400 border border-red-600 dark:border-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
  >
  <UserMinusIcon className="w-4 h-4" />
  <span>Unsubscribe</span>
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className="space-y-4">
  {filteredAndSortedSubscriptions.map((sub) => (
@@ -435,17 +435,17 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  {bulkActionMode && (
  <div className="flex-shrink-0 mr-4">
  <input
- type="checkbox"
- checked={selectedSubscriptions.has(sub.channelId)}
- onChange={() => toggleBulkSelection(sub.channelId)}
- className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
+// FIXED:  type="checkbox"
+// FIXED:  checked={selectedSubscriptions.has(sub.channelId)} />
+// FIXED:  onChange={() => toggleBulkSelection(sub.channelId)}
+// FIXED:  className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
  />
- </div>
+// FIXED:  </div>
  )}
  <img
- src={sub.channelAvatar}
- alt={`${sub.channelName} avatar`}
- className="w-20 h-20 rounded-full object-cover flex-shrink-0 mr-4"
+// FIXED:  src={sub.channelAvatar}
+// FIXED:  alt={`${sub.channelName} avatar`}
+// FIXED:  className="w-20 h-20 rounded-full object-cover flex-shrink-0 mr-4" />
  />
  <div className="flex-grow">
  <h3 className="font-semibold text-lg text-gray-900 dark:text-white line-clamp-1">
@@ -453,21 +453,21 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  {sub.channelVerified && (
  <CheckIcon className="w-4 h-4 inline-block ml-1 text-blue-500" title="Verified Channel" />
  )}
- </h3>
+// FIXED:  </h3>
  <p className="text-sm text-gray-600 dark:text-gray-400">
  {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos
- </p>
+// FIXED:  </p>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Subscribed {formatDistanceToNow(new Date(sub.subscribedAt), { addSuffix: true })}
- </p>
+// FIXED:  </p>
  <p className="text-sm text-gray-700 dark:text-gray-300 mt-2 line-clamp-2">
  {sub.description}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className="flex flex-col items-end space-y-2 ml-4 flex-shrink-0">
- <button
- onClick={() => toggleNotifications(sub.channelId)}
- className={`p-2 rounded-full ${sub.notificationsEnabled ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'} hover:bg-red-200 dark:hover:bg-red-900/20 transition-colors`}
+ <button />
+// FIXED:  onClick={() => toggleNotifications(sub.channelId)}
+// FIXED:  className={`p-2 rounded-full ${sub.notificationsEnabled ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'} hover:bg-red-200 dark:hover:bg-red-900/20 transition-colors`}
  title={sub.notificationsEnabled ? 'Notifications On' : 'Notifications Off'}
  >
  {sub.notificationsEnabled ? (
@@ -475,18 +475,18 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  ) : (
  <BellIcon className="w-5 h-5" />
  )}
- </button>
- <button
- onClick={() => setShowUnsubscribeModal(sub.channelId)}
- className="flex items-center space-x-1 px-3 py-1 text-sm font-medium text-red-600 dark:text-red-400 border border-red-600 dark:border-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setShowUnsubscribeModal(sub.channelId)}
+// FIXED:  className="flex items-center space-x-1 px-3 py-1 text-sm font-medium text-red-600 dark:text-red-400 border border-red-600 dark:border-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
  >
  <UserMinusIcon className="w-4 h-4" />
  <span>Unsubscribe</span>
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Unsubscribe Confirmation Modal */}
@@ -498,27 +498,27 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  Are you sure you want to unsubscribe from {' '}
  <span className="font-medium text-gray-900 dark:text-white">
  {subscriptions.find(sub => sub.channelId === showUnsubscribeModal)?.channelName}
- </span>?
- </p>
+// FIXED:  </span>?
+// FIXED:  </p>
  <div className="flex justify-center space-x-4">
- <button
- onClick={() => setShowUnsubscribeModal(null)}
- className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-lg"
+ <button />
+// FIXED:  onClick={() => setShowUnsubscribeModal(null)}
+// FIXED:  className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-lg"
  >
  Cancel
- </button>
- <button
- onClick={() => handleUnsubscribe(showUnsubscribeModal)}
- className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleUnsubscribe(showUnsubscribeModal)}
+// FIXED:  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
  >
  Unsubscribe
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

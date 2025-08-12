@@ -65,119 +65,119 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Create New Playlist
- </h3>
+// FIXED:  </h3>
 
  <form onSubmit={(e: any) => handleSubmit(e)} className='space-y-4'>
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Title *
- </div>
+// FIXED:  </div>
  <input
- type='text'
- value={formData.title}
- onChange={e =>
+// FIXED:  type='text'
+// FIXED:  value={formData.title} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({ ...prev as any, title: e.target.value }))
  }
- className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
- placeholder='Enter playlist title...'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  placeholder='Enter playlist title...'
  required
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Description
- </div>
+// FIXED:  </div>
  <textarea
- value={formData.description}
- onChange={e =>
+// FIXED:  value={formData.description} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({ ...prev as any, description: e.target.value }))
  }
- className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
  rows={3}
- placeholder='Enter playlist description...'
+// FIXED:  placeholder='Enter playlist description...'
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Visibility
- </div>
+// FIXED:  </div>
  <select
- value={formData.visibility}
- onChange={e =>
+// FIXED:  value={formData.visibility} />
+// FIXED:  onChange={e =>
  setFormData(prev => ({
  ...prev as any,
  visibility: e.target.value as any }))
  }
- className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
  >
  <option value='public'>Public</option>
  <option value='unlisted'>Unlisted</option>
  <option value='private'>Private</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Tags
- </div>
+// FIXED:  </div>
  <div className='flex gap-2 mb-2'>
  <input
- type='text'
- value={tagInput}
- onChange={e => setTagInput(e.target.value)}
+// FIXED:  type='text'
+// FIXED:  value={tagInput} />
+// FIXED:  onChange={e => setTagInput(e.target.value)}
  onKeyPress={e =>
  e.key === 'Enter' && (e.preventDefault(), addTag())
  }
- className='flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
- placeholder='Add tags...'
+// FIXED:  className='flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  placeholder='Add tags...'
  />
  <button
- type='button'
- onClick={(e: any) => addTag(e)}
- className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
+// FIXED:  type='button' />
+// FIXED:  onClick={(e: any) => addTag(e)}
+// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
  >
  Add
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  <div className='flex flex-wrap gap-2'>
  {formData.tags.map((tag: string) => (
  <span
  key={tag}
- className='inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm'
+// FIXED:  className='inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm' />
  >
  {tag}
  <button
- type='button'
- onClick={() => removeTag(tag)}
- className='text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200'
+// FIXED:  type='button' />
+// FIXED:  onClick={() => removeTag(tag)}
+// FIXED:  className='text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200'
  >
  ×
- </button>
- </span>
+// FIXED:  </button>
+// FIXED:  </span>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='flex gap-2 justify-end pt-4'>
  <button
- type='button'
- onClick={(e: any) => onClose(e)}
- className='px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors'
+// FIXED:  type='button' />
+// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  className='px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors'
  >
  Cancel
- </button>
+// FIXED:  </button>
  <button
- type='submit'
- className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
+// FIXED:  type='submit'
+// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors' />
  >
  Create Playlist
- </button>
- </div>
- </form>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </form>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
@@ -258,61 +258,61 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
  <div>
  <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
  Playlist Manager
- </h1>
+// FIXED:  </h1>
  <p className='text-gray-600 dark:text-gray-400 mt-1'>
  Organize and manage your video playlists
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
- <button
- onClick={() => setShowCreateModal(true)}
- className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+ <button />
+// FIXED:  onClick={() => setShowCreateModal(true)}
+// FIXED:  className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  <PlusIcon className='w-5 h-5' />
  Create Playlist
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  {/* Search and Filters */}
  <div className='flex items-center justify-between gap-4'>
  <div className='flex-1 max-w-md relative'>
  <MagnifyingGlassIcon className='absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400' />
  <input
- type='text'
- value={searchQuery}
- onChange={e => setSearchQuery(e.target.value)}
- placeholder='Search playlists...'
- className='w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
+// FIXED:  type='text'
+// FIXED:  value={searchQuery} />
+// FIXED:  onChange={e => setSearchQuery(e.target.value)}
+// FIXED:  placeholder='Search playlists...'
+// FIXED:  className='w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
  />
- </div>
+// FIXED:  </div>
 
  <div className='flex items-center gap-4'>
  <select
- value={sortBy}
- onChange={e => setSortBy(e.target.value as any)}
- className='px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
+// FIXED:  value={sortBy} />
+// FIXED:  onChange={e => setSortBy(e.target.value as any)}
+// FIXED:  className='px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
  >
  <option value='recent'>Recently updated</option>
  <option value='alphabetical'>Alphabetical</option>
  <option value='most_videos'>Most videos</option>
- </select>
+// FIXED:  </select>
 
  <div className='flex items-center border border-gray-300 dark:border-gray-600 rounded-lg'>
- <button
- onClick={() => setViewMode('grid')}
- className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400'}`}
+ <button />
+// FIXED:  onClick={() => setViewMode('grid')}
+// FIXED:  className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400'}`}
  >
  <Squares2X2Icon className='w-5 h-5' />
- </button>
- <button
- onClick={() => setViewMode('list')}
- className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400'}`}
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => setViewMode('list')}
+// FIXED:  className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400'}`}
  >
  <ListBulletIcon className='w-5 h-5' />
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Playlists Grid/List */}
  {isLoading ? (
@@ -320,176 +320,176 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
  {[...Array(6)].map((_, i) => (
  <div
  key={i}
- className='bg-white dark:bg-gray-800 rounded-lg p-4 animate-pulse'
+// FIXED:  className='bg-white dark:bg-gray-800 rounded-lg p-4 animate-pulse' />
  >
  <div className='w-full h-32 bg-gray-300 dark:bg-gray-700 rounded mb-4' />
  <div className='h-4 bg-gray-300 dark:bg-gray-700 rounded mb-2' />
  <div className='h-3 bg-gray-300 dark:bg-gray-700 rounded w-2/3' />
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  ) : filteredPlaylists.length > 0 ? (
  <div
- className={
+// FIXED:  className={
  viewMode === 'grid'
  ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
  : 'space-y-4'
- }
+ } />
  >
  {filteredPlaylists.map((playlist: Playlist) => (
  <div
  key={playlist.id}
- className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow ${
+// FIXED:  className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow ${
  viewMode === 'list' ? 'flex items-center p-4' : 'p-4'
- }`}
+ }`} />
  >
  {viewMode === 'grid' ? (
  <>
  <div className='relative mb-4'>
  <img
- src={
+// FIXED:  src={
  playlist.thumbnailUrl ||
  `https://picsum.photos/300/200?random=${playlist.id}`
  }
- alt={playlist.title}
- className='w-full h-32 object-cover rounded'
+// FIXED:  alt={playlist.title}
+// FIXED:  className='w-full h-32 object-cover rounded' />
  />
  <div className='absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity rounded'>
  <PlayIcon className='w-8 h-8 text-white' />
- </div>
+// FIXED:  </div>
  <div className='absolute top-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs'>
  {playlist.videoCount || 0} videos
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='flex items-start justify-between'>
  <div className='flex-1 min-w-0'>
  <h3 className='font-semibold text-gray-900 dark:text-white truncate'>
  {playlist.title}
- </h3>
+// FIXED:  </h3>
  {playlist.description && (
  <p className='text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2'>
  {playlist.description}
- </p>
+// FIXED:  </p>
  )}
  <div className='flex items-center gap-2 mt-2'>
  {getVisibilityIcon(playlist.visibility)}
  <span className='text-xs text-gray-500 dark:text-gray-400 capitalize'>
  {playlist.visibility}
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='relative'>
- <button
- onClick={() =>
+ <button />
+// FIXED:  onClick={() =>
  setShowPlaylistMenu(
  showPlaylistMenu === playlist.id
  ? null
  : playlist.id
  )
  }
- className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
+// FIXED:  className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
  >
  <EllipsisVerticalIcon className='w-5 h-5 text-gray-500' />
- </button>
+// FIXED:  </button>
 
  {showPlaylistMenu === playlist.id && (
  <div className='absolute right-0 top-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-2 z-10 min-w-[160px]'>
  <button className='w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'>
  <PlayIcon className='w-4 h-4' />
  Play all
- </button>
+// FIXED:  </button>
  <button className='w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'>
  <PencilIcon className='w-4 h-4' />
  Edit
- </button>
- <button
- onClick={() => handleDuplicatePlaylist(playlist)}
- className='w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() => handleDuplicatePlaylist(playlist)}
+// FIXED:  className='w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'
  >
  <DocumentDuplicateIcon className='w-4 h-4' />
  Duplicate
- </button>
+// FIXED:  </button>
  <button className='w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'>
  <ShareIcon className='w-4 h-4' />
  Share
- </button>
+// FIXED:  </button>
  <hr className='my-2 border-gray-200 dark:border-gray-600' />
- <button
- onClick={() => handleDeletePlaylist(playlist.id)}
- className='w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 text-red-600'
+ <button />
+// FIXED:  onClick={() => handleDeletePlaylist(playlist.id)}
+// FIXED:  className='w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 text-red-600'
  >
  <TrashIcon className='w-4 h-4' />
  Delete
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
- </div>
- </div>
- </>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </>
  ) : (
  <>
  <img
- src={
+// FIXED:  src={
  playlist.thumbnailUrl ||
  `https://picsum.photos/120/80?random=${playlist.id}`
  }
- alt={playlist.title}
- className='w-20 h-12 object-cover rounded mr-4'
+// FIXED:  alt={playlist.title}
+// FIXED:  className='w-20 h-12 object-cover rounded mr-4' />
  />
  <div className='flex-1 min-w-0'>
  <h3 className='font-semibold text-gray-900 dark:text-white'>
  {playlist.title}
- </h3>
+// FIXED:  </h3>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  {playlist.videoCount || 0} videos • {playlist.visibility}
- </p>
- </div>
- <button
- onClick={() =>
+// FIXED:  </p>
+// FIXED:  </div>
+ <button />
+// FIXED:  onClick={() =>
  setShowPlaylistMenu(
  showPlaylistMenu === playlist.id ? null : playlist.id
  )
  }
- className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
+// FIXED:  className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
  >
  <EllipsisVerticalIcon className='w-5 h-5 text-gray-500' />
- </button>
- </>
+// FIXED:  </button>
+// FIXED:  </>
  )}
- </div>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
  ) : (
  <div className='text-center py-12'>
  <FolderIcon className='w-16 h-16 text-gray-400 mx-auto mb-4' />
  <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-2'>
  No playlists found
- </h3>
+// FIXED:  </h3>
  <p className='text-gray-600 dark:text-gray-400 mb-4'>
  {searchQuery
  ? 'Try adjusting your search terms'
  : 'Create your first playlist to get started'}
- </p>
+// FIXED:  </p>
  {!searchQuery && (
- <button
- onClick={() => setShowCreateModal(true)}
- className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+ <button />
+// FIXED:  onClick={() => setShowCreateModal(true)}
+// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  Create Playlist
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
 
  {/* Create Playlist Modal */}
  <CreatePlaylistModal
- isOpen={showCreateModal}
+ isOpen={showCreateModal} />
  onClose={() => setShowCreateModal(false)}
- onSubmit={(e: any) => handleCreatePlaylist(e)}
+// FIXED:  onSubmit={(e: any) => handleCreatePlaylist(e)}
  />
- </div>
+// FIXED:  </div>
  );
 };
 

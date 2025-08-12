@@ -20,34 +20,34 @@ const EmptyShortsState: React.FC<EmptyShortsStateProps> = ({
 
  <h2 className="text-2xl font-bold mb-4">
  {hasFilters ? 'No Shorts Found' : 'No Shorts Available'}
- </h2>
+// FIXED:  </h2>
 
  <p className="text-gray-300 mb-6">
  {hasFilters
  ? 'No shorts match your current search or filter criteria. Try adjusting your filters or search terms.'
  : 'There are no short videos to display right now. Check back later for new content!'
  }
- </p>
+// FIXED:  </p>
 
  <div className="flex flex-col sm:flex-row gap-3 justify-center">
  {hasFilters && onClearFilters && (
- <button
- onClick={(e: any) => onClearFilters(e)}
- className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+ <button />
+// FIXED:  onClick={(e: any) => onClearFilters(e)}
+// FIXED:  className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-medium transition-colors"
  >
  Clear Filters
- </button>
+// FIXED:  </button>
  )}
 
- <button
- onClick={() => window.location.reload()}
- className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+ <button />
+// FIXED:  onClick={() => window.location.reload()}
+// FIXED:  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
  >
  Refresh
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

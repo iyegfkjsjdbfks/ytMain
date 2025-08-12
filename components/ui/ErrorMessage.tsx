@@ -40,26 +40,26 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
 
  return (
  <div
- className={`${variantClasses[variant]} ${className}`}
- onClick={(e: any) => handleClick(e)}
+// FIXED:  className={`${variantClasses[variant]} ${className}`} />
+// FIXED:  onClick={(e: any) => handleClick(e)}
  role="alert"
  >
  <div className="text-center">
  {showIcon && (
  <ExclamationTriangleIcon
- className={`w-8 h-8 mx-auto mb-2 ${iconColorClasses[variant]}`}
+// FIXED:  className={`w-8 h-8 mx-auto mb-2 ${iconColorClasses[variant]}`} />
  />
  )}
  <p className={`text-sm mb-2 ${textColorClasses[variant]}`}>
  {message}
- </p>
+// FIXED:  </p>
  {onRetry && (
  <p className={`text-xs opacity-75 ${textColorClasses[variant]}`}>
  {retryText}
- </p>
+// FIXED:  </p>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

@@ -223,25 +223,25 @@ export const VideoEditor: React.FC = () => {
  <div className='flex items-center justify-between'>
  <h1 className='text-xl font-bold text-gray-900 dark:text-white'>
  Video Editor
- </h1>
+// FIXED:  </h1>
  <div className='flex items-center gap-4'>
- <button
- onClick={() => setShowTextEditor(true)}
- className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+ <button />
+// FIXED:  onClick={() => setShowTextEditor(true)}
+// FIXED:  className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  <ChatBubbleBottomCenterTextIcon className='w-4 h-4' />
  Add Text
- </button>
- <button
- onClick={(e: any) => exportVideo(e)}
- className='flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => exportVideo(e)}
+// FIXED:  className='flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors'
  >
  <DocumentArrowDownIcon className='w-4 h-4' />
  Export
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='flex flex-1'>
  {/* Main Editor Area */}
@@ -251,8 +251,8 @@ export const VideoEditor: React.FC = () => {
  <div className='relative max-w-4xl max-h-full'>
  <video
  ref={videoRef}
- className='max-w-full max-h-full'
- poster='https://picsum.photos/800/450?random=3'
+// FIXED:  className='max-w-full max-h-full'
+ poster='https://picsum.photos/800/450?random=3' />
  />
 
  {/* Text Overlays Preview */}
@@ -264,74 +264,74 @@ export const VideoEditor: React.FC = () => {
  .map((overlay: any) => (
  <div
  key={overlay.id}
- className='absolute pointer-events-none'
- style={{
+// FIXED:  className='absolute pointer-events-none'
+// FIXED:  style={{
  left: `${overlay.x}%`,
  top: `${overlay.y}%`,
  fontSize: `${overlay.fontSize}px`,
  color: overlay.color,
  fontFamily: overlay.fontFamily,
- transform: 'translate(-50%, -50%)' }
+ transform: 'translate(-50%, -50%)' } />
  >
  {overlay.text}
- </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Controls */}
  <div className='bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4'>
  <div className='flex items-center justify-center gap-4'>
- <button
- onClick={(e: any) => togglePlayPause(e)}
- className='p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors'
+ <button />
+// FIXED:  onClick={(e: any) => togglePlayPause(e)}
+// FIXED:  className='p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors'
  >
  {editorState.isPlaying ? (
  <PauseIcon className='w-6 h-6' />
  ) : (
  <PlayIcon className='w-6 h-6' />
  )}
- </button>
+// FIXED:  </button>
 
  <span className='text-sm font-mono text-gray-600 dark:text-gray-400'>
  {formatTime(editorState.currentTime)} /{' '}
  {formatTime(editorState.duration)}
- </span>
+// FIXED:  </span>
 
  <div className='flex items-center gap-2'>
- <button
- onClick={() =>
+ <button />
+// FIXED:  onClick={() =>
  setEditorState(prev => ({
  ...prev as any,
  zoom: Math.max(0.5, prev.zoom - 0.5) }))
  }
- className='px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
+// FIXED:  className='px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
  >
  -
- </button>
+// FIXED:  </button>
  <span className='text-sm text-gray-600 dark:text-gray-400 min-w-[60px] text-center'>
  {editorState.zoom}x
- </span>
- <button
- onClick={() =>
+// FIXED:  </span>
+ <button />
+// FIXED:  onClick={() =>
  setEditorState(prev => ({
  ...prev as any,
  zoom: Math.min(3, prev.zoom + 0.5) }))
  }
- className='px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
+// FIXED:  className='px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
  >
  +
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Timeline */}
  <div className='bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 overflow-x-auto'>
  <div
- className='relative'
- style={{ width: `${timelineWidth}px`,
- minHeight: '200px' }
+// FIXED:  className='relative'
+// FIXED:  style={{ width: `${timelineWidth}px`,
+ minHeight: '200px' } />
  >
  {/* Time Ruler */}
  <div className='h-6 border-b border-gray-300 dark:border-gray-600 relative'>
@@ -340,33 +340,33 @@ export const VideoEditor: React.FC = () => {
  (_, i) => (
  <div
  key={i}
- className='absolute text-xs text-gray-500 dark:text-gray-400'
- style={{ left: `${i * 10 * editorState.zoom * 10}px` }
+// FIXED:  className='absolute text-xs text-gray-500 dark:text-gray-400'
+// FIXED:  style={{ left: `${i * 10 * editorState.zoom * 10}px` } />
  >
  {formatTime(i * 10)}
- </div>
+// FIXED:  </div>
  )
  )}
- </div>
+// FIXED:  </div>
 
  {/* Video Track */}
  <div className='mt-2'>
  <div className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Video
- </div>
+// FIXED:  </div>
  <div className='relative h-16 bg-gray-200 dark:bg-gray-700 rounded'>
  {editorState.clips.map((clip: any) => (
  <div
  key={clip.id}
- className={`absolute h-full bg-blue-500 rounded cursor-pointer border-2 ${
+// FIXED:  className={`absolute h-full bg-blue-500 rounded cursor-pointer border-2 ${
  editorState.selectedClip === clip.id
  ? 'border-blue-300'
  : 'border-transparent'
  }`}
- style={{
+// FIXED:  style={{
  left: `${clip.startTime * editorState.zoom * 10}px`,
- width: `${clip.duration * editorState.zoom * 10}px` }
- onClick={() =>
+ width: `${clip.duration * editorState.zoom * 10}px` } />
+// FIXED:  onClick={() =>
  setEditorState(prev => ({
  ...prev as any,
  selectedClip: clip.id }))
@@ -374,90 +374,90 @@ export const VideoEditor: React.FC = () => {
  >
  <div className='p-2 text-white text-xs truncate'>
  {clip.name}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Audio Track */}
  <div className='mt-4'>
  <div className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Audio
- </div>
+// FIXED:  </div>
  <div className='relative h-12 bg-gray-200 dark:bg-gray-700 rounded'>
  {editorState.audioTracks.map((track: any) => (
  <div
  key={track.id}
- className='absolute h-full bg-green-500 rounded'
- style={{
+// FIXED:  className='absolute h-full bg-green-500 rounded'
+// FIXED:  style={{
  left: `${track.startTime * editorState.zoom * 10}px`,
- width: `${track.duration * editorState.zoom * 10}px` }
+ width: `${track.duration * editorState.zoom * 10}px` } />
  >
  <div className='p-2 text-white text-xs truncate'>
  {track.name}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Text Track */}
  <div className='mt-4'>
  <div className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Text
- </div>
+// FIXED:  </div>
  <div className='relative h-8 bg-gray-200 dark:bg-gray-700 rounded'>
  {editorState.textOverlays.map((overlay: any) => (
  <div
  key={overlay.id}
- className='absolute h-full bg-purple-500 rounded'
- style={{
+// FIXED:  className='absolute h-full bg-purple-500 rounded'
+// FIXED:  style={{
  left: `${overlay.startTime * editorState.zoom * 10}px`,
- width: `${(overlay.endTime - overlay.startTime) * editorState.zoom * 10}px` }
+ width: `${(overlay.endTime - overlay.startTime) * editorState.zoom * 10}px` } />
  >
  <div className='p-1 text-white text-xs truncate'>
  {overlay.text}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Playhead */}
  <div
- className='absolute top-0 bottom-0 w-0.5 bg-red-500 pointer-events-none'
- style={{
- left: `${editorState.currentTime * editorState.zoom * 10}px` }
+// FIXED:  className='absolute top-0 bottom-0 w-0.5 bg-red-500 pointer-events-none'
+// FIXED:  style={{
+ left: `${editorState.currentTime * editorState.zoom * 10}px` } />
  >
  <div className='w-3 h-3 bg-red-500 rounded-full -ml-1.5 -mt-1' />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Properties Panel */}
  <div className='w-80 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-4'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Properties
- </h3>
+// FIXED:  </h3>
 
  {editorState.selectedClip ? (
  <div className='space-y-4'>
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Volume
- </div>
+// FIXED:  </div>
  <input
- type='range'
+// FIXED:  type='range'
  min='0'
  max='1'
  step='0.1'
- value={
+// FIXED:  value={ />
  editorState.clips.find((c: any) => c.id === editorState.selectedClip
  )?.volume || 1
  }
- onChange={e => {
+// FIXED:  onChange={e => {
  const volume = parseFloat(e.target.value);
  setEditorState(prev => ({
  ...prev as any,
@@ -467,39 +467,39 @@ export const VideoEditor: React.FC = () => {
  : clip
  ) }));
  }
- className='w-full'
+// FIXED:  className='w-full'
  />
- </div>
+// FIXED:  </div>
 
  <div className='flex gap-2'>
- <button
- onClick={() =>
+ <button />
+// FIXED:  onClick={() =>
  editorState.selectedClip &&
  splitClip(editorState.selectedClip, editorState.currentTime)
  }
- className='flex items-center gap-2 px-3 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition-colors text-sm'
+// FIXED:  className='flex items-center gap-2 px-3 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition-colors text-sm'
  >
  <ScissorsIcon className='w-4 h-4' />
  Split
- </button>
- <button
- onClick={() =>
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={() =>
  editorState.selectedClip &&
  deleteClip(editorState.selectedClip)
  }
- className='flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm'
+// FIXED:  className='flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm'
  >
  Delete
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  ) : (
  <p className='text-gray-500 dark:text-gray-400 text-sm'>
  Select a clip to edit its properties
- </p>
+// FIXED:  </p>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Text Editor Modal */}
  {showTextEditor && (
@@ -507,85 +507,85 @@ export const VideoEditor: React.FC = () => {
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Add Text Overlay
- </h3>
+// FIXED:  </h3>
 
  <div className='space-y-4'>
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Text
- </div>
+// FIXED:  </div>
  <input
- type='text'
- value={newTextOverlay.text || ''}
- onChange={e =>
+// FIXED:  type='text'
+// FIXED:  value={newTextOverlay.text || ''} />
+// FIXED:  onChange={e =>
  setNewTextOverlay(prev => ({
  ...prev as any,
  text: e.target.value }))
  }
- className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
- placeholder='Enter text...'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  placeholder='Enter text...'
  />
- </div>
+// FIXED:  </div>
 
  <div className='grid grid-cols-2 gap-4'>
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Font Size
- </div>
+// FIXED:  </div>
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Font Size
- </div>
+// FIXED:  </div>
  <input
- type='number'
- value={newTextOverlay.fontSize || 24}
- onChange={e =>
+// FIXED:  type='number'
+// FIXED:  value={newTextOverlay.fontSize || 24} />
+// FIXED:  onChange={e =>
  setNewTextOverlay(prev => ({
  ...prev as any,
  fontSize: parseInt(e.target.value, 10) }))
  }
- className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  <div>
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Color
- </div>
+// FIXED:  </div>
  <input
- type='color'
- value={newTextOverlay.color || '#ffffff'}
- onChange={e =>
+// FIXED:  type='color'
+// FIXED:  value={newTextOverlay.color || '#ffffff'} />
+// FIXED:  onChange={e =>
  setNewTextOverlay(prev => ({
  ...prev as any,
  color: e.target.value }))
  }
- className='w-full h-10 border border-gray-300 dark:border-gray-600 rounded-md'
+// FIXED:  className='w-full h-10 border border-gray-300 dark:border-gray-600 rounded-md'
  />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='flex gap-2 justify-end'>
- <button
- onClick={() => setShowTextEditor(false)}
- className='px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors'
+ <button />
+// FIXED:  onClick={() => setShowTextEditor(false)}
+// FIXED:  className='px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors'
  >
  Cancel
- </button>
- <button
- onClick={(e: any) => addTextOverlay(e)}
- className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => addTextOverlay(e)}
+// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
  >
  Add Text
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 

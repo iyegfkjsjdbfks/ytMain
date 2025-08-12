@@ -197,27 +197,27 @@ export const LiveStreamStudio: React.FC = () => {
  <div className='flex items-center justify-between mb-6'>
  <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
  Live Stream Studio
- </h1>
+// FIXED:  </h1>
  <div className='flex items-center gap-4'>
  {isStreaming && (
  <div className='flex items-center gap-4 text-sm'>
  <div className='flex items-center gap-2'>
  <div className='w-3 h-3 bg-red-500 rounded-full animate-pulse' />
  <span className='text-red-600 font-medium'>LIVE</span>
- </div>
+// FIXED:  </div>
  <span className='text-gray-600 dark:text-gray-400'>
  {formatDuration(stats.duration)}
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  )}
- <button
- onClick={() => setShowSettings(!showSettings)}
- className='p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700'
+ <button />
+// FIXED:  onClick={() => setShowSettings(!showSettings)}
+// FIXED:  className='p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700'
  >
  <Cog6ToothIcon className='w-5 h-5' />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
  {/* Main Stream Area */}
@@ -229,15 +229,15 @@ export const LiveStreamStudio: React.FC = () => {
  ref={videoRef}
  autoPlay
  muted
- className='w-full h-full object-cover'
+// FIXED:  className='w-full h-full object-cover' />
  />
  ) : (
  <div className='w-full h-full flex items-center justify-center'>
  <div className='text-center text-white'>
  <VideoCameraIcon className='w-16 h-16 mx-auto mb-4 opacity-50' />
  <p className='text-lg'>Click "Start Preview" to begin</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Stream Overlay */}
@@ -245,7 +245,7 @@ export const LiveStreamStudio: React.FC = () => {
  <div className='absolute top-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm flex items-center gap-2'>
  <div className='w-2 h-2 bg-red-500 rounded-full animate-pulse' />
  LIVE
- </div>
+// FIXED:  </div>
  )}
 
  {/* Stream Stats Overlay */}
@@ -255,21 +255,21 @@ export const LiveStreamStudio: React.FC = () => {
  <div className='flex items-center gap-1'>
  <EyeIcon className='w-4 h-4' />
  <span>{stats.viewers}</span>
- </div>
+// FIXED:  </div>
  <div className='flex items-center gap-1'>
  <HeartIcon className='w-4 h-4' />
  <span>{stats.likes}</span>
- </div>
+// FIXED:  </div>
  <div className='flex items-center gap-1'>
  <SignalIcon className='w-4 h-4' />
  <span className='text-green-400'>
  {stats.streamHealth}
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Stream Controls */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6'>
@@ -277,25 +277,25 @@ export const LiveStreamStudio: React.FC = () => {
  <div className='flex items-center gap-4'>
  {!isStreaming ? (
  <button
- onClick={isPreviewing ? startStream : setupCamera}
- className='flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors'
+// FIXED:  onClick={isPreviewing ? startStream : setupCamera}
+// FIXED:  className='flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors' />
  >
  <PlayIcon className='w-5 h-5' />
  {isPreviewing ? 'Go Live' : 'Start Preview'}
- </button>
+// FIXED:  </button>
  ) : (
- <button
- onClick={(e: any) => stopStream(e)}
- className='flex items-center gap-2 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors'
+ <button />
+// FIXED:  onClick={(e: any) => stopStream(e)}
+// FIXED:  className='flex items-center gap-2 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors'
  >
  <StopIcon className='w-5 h-5' />
  End Stream
- </button>
+// FIXED:  </button>
  )}
 
- <button
- onClick={(e: any) => toggleVideo(e)}
- className={`p-3 rounded-lg transition-colors ${
+ <button />
+// FIXED:  onClick={(e: any) => toggleVideo(e)}
+// FIXED:  className={`p-3 rounded-lg transition-colors ${
  isVideoEnabled
  ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
  : 'bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400'
@@ -306,11 +306,11 @@ export const LiveStreamStudio: React.FC = () => {
  ) : (
  <VideoCameraIcon className='w-5 h-5' />
  )}
- </button>
+// FIXED:  </button>
 
- <button
- onClick={(e: any) => toggleAudio(e)}
- className={`p-3 rounded-lg transition-colors ${
+ <button />
+// FIXED:  onClick={(e: any) => toggleAudio(e)}
+// FIXED:  className={`p-3 rounded-lg transition-colors ${
  isAudioEnabled
  ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
  : 'bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400'
@@ -321,63 +321,63 @@ export const LiveStreamStudio: React.FC = () => {
  ) : (
  <MicrophoneIcon className='w-5 h-5' />
  )}
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
 
  <div className='flex items-center gap-4'>
- <button
- onClick={() => setShowChat(!showChat)}
- className='flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
+ <button />
+// FIXED:  onClick={() => setShowChat(!showChat)}
+// FIXED:  className='flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
  >
  <ChatBubbleLeftRightIcon className='w-5 h-5' />
  Chat
- </button>
+// FIXED:  </button>
  <button className='flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'>
  <ShareIcon className='w-5 h-5' />
  Share
- </button>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Stream Settings */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Stream Information
- </h3>
+// FIXED:  </h3>
  <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
  <div>
  <label
- htmlFor='stream-title'
- className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'
+// FIXED:  htmlFor='stream-title'
+// FIXED:  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2' />
  >
  Title
- </label>
+// FIXED:  </label>
  <input
- type='text'
- value={settings.title}
- onChange={e =>
+// FIXED:  type='text'
+// FIXED:  value={settings.title} />
+// FIXED:  onChange={e =>
  setSettings(prev => ({ ...prev as any, title: e.target.value }))
  }
- className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
- placeholder='Enter stream title...'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  placeholder='Enter stream title...'
  />
- </div>
+// FIXED:  </div>
  <div>
  <label
- htmlFor='stream-category'
- className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'
+// FIXED:  htmlFor='stream-category'
+// FIXED:  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2' />
  >
  Category
- </label>
+// FIXED:  </label>
  <select
- value={settings.category}
- onChange={e =>
+// FIXED:  value={settings.category} />
+// FIXED:  onChange={e =>
  setSettings(prev => ({
  ...prev as any,
  category: e.target.value }))
  }
- className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
  >
  <option value='Gaming'>Gaming</option>
  <option value='Music'>Music</option>
@@ -385,74 +385,74 @@ export const LiveStreamStudio: React.FC = () => {
  <option value='Entertainment'>Entertainment</option>
  <option value='Technology'>Technology</option>
  <option value='Sports'>Sports</option>
- </select>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Chat Sidebar */}
  {showChat && (
  <div className='bg-white dark:bg-gray-800 rounded-lg p-4 h-fit'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Live Chat
- </h3>
+// FIXED:  </h3>
 
  <div
  ref={chatContainerRef}
- className='h-96 overflow-y-auto mb-4 space-y-2 border border-gray-200 dark:border-gray-600 rounded-lg p-3'
+// FIXED:  className='h-96 overflow-y-auto mb-4 space-y-2 border border-gray-200 dark:border-gray-600 rounded-lg p-3' />
  >
  {chatMessages.map((message: any) => (
  <div key={message.id} className='text-sm'>
  <div className='flex items-center gap-2 mb-1'>
  <span
- className={`font-medium ${
+// FIXED:  className={`font-medium ${
  message.isOwner
  ? 'text-red-600'
  : message.isModerator
  ? 'text-green-600'
  : 'text-gray-900 dark:text-white'
- }`}
+ }`} />
  >
  {message.username}
- </span>
+// FIXED:  </span>
  {message.badges?.map((badge: any) => (
  <span
  key={badge}
- className='text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded'
+// FIXED:  className='text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded' />
  >
  {badge}
- </span>
+// FIXED:  </span>
  ))}
- </div>
+// FIXED:  </div>
  <p className='text-gray-700 dark:text-gray-300'>
  {message.message}
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  ))}
- </div>
+// FIXED:  </div>
 
  <div className='flex gap-2'>
  <input
- type='text'
- value={chatMessage}
- onChange={e => setChatMessage(e.target.value)}
+// FIXED:  type='text'
+// FIXED:  value={chatMessage} />
+// FIXED:  onChange={e => setChatMessage(e.target.value)}
  onKeyPress={e => e.key === 'Enter' && sendChatMessage()}
- placeholder='Type a message...'
- className='flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm'
+// FIXED:  placeholder='Type a message...'
+// FIXED:  className='flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm'
  />
- <button
- onClick={(e: any) => sendChatMessage(e)}
- className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm'
+ <button />
+// FIXED:  onClick={(e: any) => sendChatMessage(e)}
+// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm'
  >
  Send
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

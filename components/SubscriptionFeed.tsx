@@ -65,7 +65,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  <div className="flex items-center mb-4">
  <SubscriptionsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Latest from your subscriptions</h2>
- </div>
+// FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {Array.from({ length: 4 }).map((_, index) => (
  <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
@@ -77,13 +77,13 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
  <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -93,9 +93,9 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  <div className="flex items-center mb-4">
  <SubscriptionsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Latest from your subscriptions</h2>
- </div>
+// FIXED:  </div>
  <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -105,17 +105,17 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  <div className="flex items-center mb-4">
  <SubscriptionsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Latest from your subscriptions</h2>
- </div>
+// FIXED:  </div>
  <div className="text-center py-8 text-neutral-600 dark:text-neutral-400">
  <p className="mb-2">No new videos from your subscriptions</p>
  <Link
  to="/trending"
- className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 font-medium"
+// FIXED:  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 font-medium" />
  >
  Discover new channels
- </Link>
- </div>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -125,20 +125,20 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  <div className="flex items-center">
  <SubscriptionsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Latest from your subscriptions</h2>
- </div>
+// FIXED:  </div>
  <Link
  to="/subscriptions"
- className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
+// FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
  View All
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {subscriptionVideos.map((video: any) => (
  <VideoCard key={video.id} video={video} />
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

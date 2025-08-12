@@ -302,7 +302,7 @@ return;
  autoPlay
  muted
  playsInline
- className="w-full h-full object-cover"
+// FIXED:  className="w-full h-full object-cover" />
  />
  ) : (
  <div className="flex items-center justify-center h-full text-white">
@@ -310,8 +310,8 @@ return;
  <VideoCameraIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
  <p className="text-lg">Camera not connected</p>
  <p className="text-sm opacity-75">Click "Start Stream" to begin</p>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Stream Status Overlay */}
@@ -320,11 +320,11 @@ return;
  <div className="flex items-center space-x-2 bg-red-600 text-white px-3 py-1 rounded-full">
  <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
  <span className="text-sm font-medium">LIVE</span>
- </div>
+// FIXED:  </div>
  <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
  {formatDuration(stats.duration)}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Stream Stats Overlay */}
@@ -333,50 +333,50 @@ return;
  <div className="flex items-center space-x-2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
  <EyeIcon className="w-4 h-4" />
  <span>{stats.viewers}</span>
- </div>
+// FIXED:  </div>
  <div className="flex items-center space-x-2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
  <HeartIcon className="w-4 h-4" />
  <span>{stats.likes}</span>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Stream Controls */}
  <div className="flex items-center justify-between bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
  <div className="flex items-center space-x-3">
  {!isStreaming ? (
- <button
- onClick={(e: any) => startStream(e)}
- disabled={isSettingUp}
- className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
+ <button />
+// FIXED:  onClick={(e: any) => startStream(e)}
+// FIXED:  disabled={isSettingUp}
+// FIXED:  className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
  >
  <PlayIcon className="w-5 h-5" />
  <span>{isSettingUp ? 'Setting up...' : 'Start Stream'}</span>
- </button>
+// FIXED:  </button>
  ) : (
  <div className="flex items-center space-x-2">
- <button
- onClick={(e: any) => pauseStream(e)}
- className="flex items-center space-x-2 bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+ <button />
+// FIXED:  onClick={(e: any) => pauseStream(e)}
+// FIXED:  className="flex items-center space-x-2 bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
  >
  {isPaused ? <PlayIcon className="w-5 h-5" /> : <PauseIcon className="w-5 h-5" />}
  <span>{isPaused ? 'Resume' : 'Pause'}</span>
- </button>
- <button
- onClick={(e: any) => stopStream(e)}
- className="flex items-center space-x-2 bg-neutral-600 hover:bg-neutral-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+// FIXED:  </button>
+ <button />
+// FIXED:  onClick={(e: any) => stopStream(e)}
+// FIXED:  className="flex items-center space-x-2 bg-neutral-600 hover:bg-neutral-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
  >
  <StopIcon className="w-5 h-5" />
  <span>Stop</span>
- </button>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
  )}
 
  <div className="flex items-center space-x-2">
- <button
- onClick={(e: any) => toggleAudio(e)}
- className={`p-2 rounded-lg transition-colors ${
+ <button />
+// FIXED:  onClick={(e: any) => toggleAudio(e)}
+// FIXED:  className={`p-2 rounded-lg transition-colors ${
  audioEnabled
  ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
  : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
@@ -388,11 +388,11 @@ return;
  ) : (
  <MicrophoneIcon className="w-5 h-5" />
  )}
- </button>
+// FIXED:  </button>
 
- <button
- onClick={(e: any) => toggleVideo(e)}
- className={`p-2 rounded-lg transition-colors ${
+ <button />
+// FIXED:  onClick={(e: any) => toggleVideo(e)}
+// FIXED:  className={`p-2 rounded-lg transition-colors ${
  videoEnabled
  ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
  : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
@@ -404,28 +404,28 @@ return;
  ) : (
  <VideoCameraIcon className="w-5 h-5" />
  )}
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-2">
- <button
- onClick={() => setShowChat(!showChat)}
- className="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 px-3 py-2 rounded-lg transition-colors"
+ <button />
+// FIXED:  onClick={() => setShowChat(!showChat)}
+// FIXED:  className="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 px-3 py-2 rounded-lg transition-colors"
  >
  <ChatBubbleLeftIcon className="w-5 h-5" />
  <span>Chat</span>
- </button>
+// FIXED:  </button>
 
- <button
- onClick={() => setShowSettings(!showSettings)}
- className="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 px-3 py-2 rounded-lg transition-colors"
+ <button />
+// FIXED:  onClick={() => setShowSettings(!showSettings)}
+// FIXED:  className="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 px-3 py-2 rounded-lg transition-colors"
  >
  <Cog6ToothIcon className="w-5 h-5" />
  <span>Settings</span>
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Stream Settings */}
  {showSettings && (
@@ -436,90 +436,90 @@ return;
  <div>
  <label htmlFor="stream-title" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
  Stream Title *
- </label>
+// FIXED:  </label>
  <input
- id="stream-title"
- type="text"
- value={settings.title}
- onChange={(e) => setSettings(prev => ({ ...prev as any, title: e.target.value }))}
- className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
- placeholder="Enter stream title"
+// FIXED:  id="stream-title"
+// FIXED:  type="text"
+// FIXED:  value={settings.title} />
+// FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, title: e.target.value }))}
+// FIXED:  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+// FIXED:  placeholder="Enter stream title"
  />
- </div>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="stream-category" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
  Category
- </label>
+// FIXED:  </label>
  <select
- id="stream-category"
- value={settings.category}
- onChange={(e) => setSettings(prev => ({ ...prev as any, category: e.target.value }))}
- className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+// FIXED:  id="stream-category"
+// FIXED:  value={settings.category} />
+// FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, category: e.target.value }))}
+// FIXED:  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
  >
  {categories.map((category: any) => (
  <option key={category} value={category}>{category}</option>
  ))}
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="stream-privacy" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
  Privacy
- </label>
+// FIXED:  </label>
  <select
- id="stream-privacy"
- value={settings.privacy}
- onChange={(e) => setSettings(prev => ({ ...prev as any, privacy: e.target.value as 'public' | 'unlisted' | 'private' }))}
- className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+// FIXED:  id="stream-privacy"
+// FIXED:  value={settings.privacy} />
+// FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, privacy: e.target.value as 'public' | 'unlisted' | 'private' }))}
+// FIXED:  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
  >
  <option value="public">Public</option>
  <option value="unlisted">Unlisted</option>
  <option value="private">Private</option>
- </select>
- </div>
+// FIXED:  </select>
+// FIXED:  </div>
 
  <div className="flex items-center space-x-4">
  <label htmlFor="enable-chat" className="flex items-center space-x-2">
  <input
- id="enable-chat"
- type="checkbox"
- checked={settings.enableChat}
- onChange={(e) => setSettings(prev => ({ ...prev as any, enableChat: e.target.checked }))}
- className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
+// FIXED:  id="enable-chat"
+// FIXED:  type="checkbox"
+// FIXED:  checked={settings.enableChat} />
+// FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, enableChat: e.target.checked }))}
+// FIXED:  className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
  />
  <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Chat</span>
- </label>
+// FIXED:  </label>
 
  <label htmlFor="enable-donations" className="flex items-center space-x-2">
  <input
- id="enable-donations"
- type="checkbox"
- checked={settings.enableDonations}
- onChange={(e) => setSettings(prev => ({ ...prev as any, enableDonations: e.target.checked }))}
- className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
+// FIXED:  id="enable-donations"
+// FIXED:  type="checkbox"
+// FIXED:  checked={settings.enableDonations} />
+// FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, enableDonations: e.target.checked }))}
+// FIXED:  className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
  />
  <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Donations</span>
- </label>
- </div>
- </div>
+// FIXED:  </label>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div>
  <label htmlFor="stream-description" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
  Description
- </label>
+// FIXED:  </label>
  <textarea
- id="stream-description"
- value={settings.description}
- onChange={(e) => setSettings(prev => ({ ...prev as any, description: e.target.value }))}
+// FIXED:  id="stream-description"
+// FIXED:  value={settings.description} />
+// FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, description: e.target.value }))}
  rows={3}
- className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
- placeholder="Describe your stream..."
+// FIXED:  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+// FIXED:  placeholder="Describe your stream..."
  />
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
 
  {/* Chat and Stats Sidebar */}
  {showChat && (
@@ -532,43 +532,43 @@ return;
  <div>
  <p className="text-neutral-600 dark:text-neutral-400">Viewers</p>
  <p className="text-xl font-bold text-neutral-900 dark:text-neutral-100">{stats.viewers}</p>
- </div>
+// FIXED:  </div>
  <div>
  <p className="text-neutral-600 dark:text-neutral-400">Peak</p>
  <p className="text-xl font-bold text-neutral-900 dark:text-neutral-100">{stats.peakViewers}</p>
- </div>
+// FIXED:  </div>
  <div>
  <p className="text-neutral-600 dark:text-neutral-400">Likes</p>
  <p className="text-xl font-bold text-neutral-900 dark:text-neutral-100">{stats.likes}</p>
- </div>
+// FIXED:  </div>
  <div>
  <p className="text-neutral-600 dark:text-neutral-400">Messages</p>
  <p className="text-xl font-bold text-neutral-900 dark:text-neutral-100">{stats.messages}</p>
- </div>
+// FIXED:  </div>
  {settings.enableDonations && stats.totalDonations > 0 && (
  <div className="col-span-2">
  <p className="text-neutral-600 dark:text-neutral-400">Donations</p>
  <p className="text-xl font-bold text-green-600">${stats.totalDonations}</p>
- </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
 
  {/* Live Chat */}
  <div className="bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 flex flex-col h-96">
  <div className="p-4 border-b border-neutral-200 dark:border-neutral-700">
  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Live Chat</h3>
- </div>
+// FIXED:  </div>
 
  <div
  ref={chatContainerRef}
- className="flex-1 overflow-y-auto p-4 space-y-2"
+// FIXED:  className="flex-1 overflow-y-auto p-4 space-y-2" />
  >
  {chatMessages.length === 0 ? (
  <p className="text-neutral-500 dark:text-neutral-400 text-center py-8">
  No messages yet. Start the conversation!
- </p>
+// FIXED:  </p>
  ) : (
  chatMessages.map((message) => (
  <div key={message.id} className="flex items-start space-x-2">
@@ -579,51 +579,51 @@ return;
  ? 'text-red-600 dark:text-red-400'
  : message.isModerator
  ? 'text-green-600 dark:text-green-400'
- : 'text-neutral-900 dark:text-neutral-100'
+ : 'text-neutral-900 dark:text-neutral-100' />
  }`}>
  {message.username}
  {message.isOwner && ' (You)'}
  {message.isModerator && ' (Mod)'}
- </span>
+// FIXED:  </span>
  {message.donation && (
  <span className="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs px-2 py-1 rounded-full">
  ${message.donation.amount}
- </span>
+// FIXED:  </span>
  )}
- </div>
+// FIXED:  </div>
  <p className="text-sm text-neutral-700 dark:text-neutral-300">
  {message.message}
- </p>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
  ))
  )}
- </div>
+// FIXED:  </div>
 
  <div className="p-4 border-t border-neutral-200 dark:border-neutral-700">
  <div className="flex space-x-2">
  <input
- type="text"
- value={newMessage}
- onChange={(e) => setNewMessage(e.target.value)}
+// FIXED:  type="text"
+// FIXED:  value={newMessage} />
+// FIXED:  onChange={(e) => setNewMessage(e.target.value)}
  onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
- placeholder="Type a message..."
- className="flex-1 px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+// FIXED:  placeholder="Type a message..."
+// FIXED:  className="flex-1 px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
  />
- <button
- onClick={(e: any) => sendChatMessage(e)}
- className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
+ <button />
+// FIXED:  onClick={(e: any) => sendChatMessage(e)}
+// FIXED:  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
  >
  Send
- </button>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

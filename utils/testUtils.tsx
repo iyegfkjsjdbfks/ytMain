@@ -174,8 +174,8 @@ function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockU
  <QueryClientProvider client={queryClient}>
  <MemoryRouter initialEntries={initialEntries}>
  {children}
- </MemoryRouter>
- </QueryClientProvider>
+// FIXED:  </MemoryRouter>
+// FIXED:  </QueryClientProvider>
  );
 }
 
@@ -193,10 +193,10 @@ export function customRender(_ui: ReactElement,
  <AllTheProviders
  queryClient={queryClient}
  initialEntries={initialEntries}
- mockUser={mockUser}
+ mockUser={mockUser} />
  >
  {children}
- </AllTheProviders>
+// FIXED:  </AllTheProviders>
  ));
 
  const result = render(_ui, { wrapper: Wrapper, ...renderOptions });
@@ -226,10 +226,10 @@ export function customRenderHook<TResult, TProps>(,
  <AllTheProviders
  queryClient={queryClient}
  initialEntries={initialEntries}
- mockUser={mockUser}
+ mockUser={mockUser} />
  >
  {children}
- </AllTheProviders>
+// FIXED:  </AllTheProviders>
  ));
 
  return (global as any).renderHook(hook, { wrapper: Wrapper, ...renderHookOptions });

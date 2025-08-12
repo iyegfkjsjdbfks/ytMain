@@ -80,13 +80,13 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
  <div className="flex items-center mb-3">
  <ShortsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Shorts</h2>
- </div>
+// FIXED:  </div>
  <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">
  {Array.from({ length: 5 }).map((_, index) => (
  <div key={index} className="w-40 h-72 bg-neutral-200 dark:bg-neutral-800 rounded-lg animate-pulse flex-shrink-0" />
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 
@@ -96,9 +96,9 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
  <div className="flex items-center mb-3">
  <ShortsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Shorts</h2>
- </div>
+// FIXED:  </div>
  <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
- </div>
+// FIXED:  </div>
  );
  }
 
@@ -112,22 +112,22 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
  <div className="flex items-center">
  <ShortsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Shorts</h2>
- </div>
+// FIXED:  </div>
  <Link
  to="/shorts"
- className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
+// FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
  View All
- </Link>
- </div>
+// FIXED:  </Link>
+// FIXED:  </div>
  <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">
  {shorts.map((short: any) => (
  <Link key={short.id} to={`/shorts?v=${short.id}`} className="flex-shrink-0">
  <ShortDisplayCard short={short} />
- </Link>
+// FIXED:  </Link>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

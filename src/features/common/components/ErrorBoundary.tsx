@@ -46,30 +46,30 @@ export class ErrorBoundary extends Component<Props, State> {
  <div className='bg-white p-8 rounded-lg shadow-md max-w-lg w-full'>
  <h1 className='text-2xl font-bold text-red-600 mb-4'>
  Something went wrong
- </h1>
+// FIXED:  </h1>
  <div className='bg-red-50 p-4 rounded mb-4 border border-red-200'>
  <p className='text-red-800 font-medium'>
  {this.state.error && this.state.error.toString()}
- </p>
+// FIXED:  </p>
  {this.state.errorInfo && (
  <details className='mt-2'>
  <summary className='text-sm text-red-700 cursor-pointer'>
  View technical details
- </summary>
+// FIXED:  </summary>
  <pre className='mt-2 text-xs overflow-auto p-2 bg-red-100 rounded'>
  {this.state.errorInfo.componentStack}
- </pre>
- </details>
+// FIXED:  </pre>
+// FIXED:  </details>
  )}
- </div>
+// FIXED:  </div>
  <button
- className='w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
- onClick={() => (window.location.href = '/')}
+// FIXED:  className='w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors' />
+// FIXED:  onClick={() => (window.location.href = '/')}
  >
  Go to Home
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  );
  }
 

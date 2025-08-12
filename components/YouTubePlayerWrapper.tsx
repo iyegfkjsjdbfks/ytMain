@@ -61,7 +61,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
  {...(props.className !== undefined && { className: props.className })}
  {...(props.onStateChange !== undefined && { onStateChange: props.onStateChange })}
  {...(props.onReady !== undefined && { onReady: props.onReady })}
- {...(props.onError !== undefined && { onError: props.onError })}
+ {...(props.onError !== undefined && { onError: props.onError })} />
  />
  );
 });

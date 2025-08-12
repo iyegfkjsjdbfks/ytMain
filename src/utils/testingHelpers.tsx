@@ -30,7 +30,7 @@ export const TestWrapper: any = ({ children, queryClient }: TestWrapperProps) =>
  return (
  <QueryClientProvider client={client}>
  <BrowserRouter>{children}</BrowserRouter>
- </QueryClientProvider>
+// FIXED:  </QueryClientProvider>
  );
 };
 

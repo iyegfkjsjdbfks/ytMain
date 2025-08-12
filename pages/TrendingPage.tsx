@@ -27,7 +27,7 @@ const TrendingPage: React.FC = () => {
 
  return (
  <PageLayout
- title="Trending"
+ title="Trending" />
  icon={<FireIcon className="w-8 h-8 text-red-500" />}
  data={trendingVideos}
  loading={loading}
@@ -38,7 +38,7 @@ const TrendingPage: React.FC = () => {
  headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
  >
  {(videos) => <VideoGrid videos={videos || []} />}
- </PageLayout>
+// FIXED:  </PageLayout>
  );
 };
 

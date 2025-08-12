@@ -85,13 +85,13 @@ const MetricCard: React.FC<MetricCardProps> = ({
  <div>
  <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
  {title}
- </p>
+// FIXED:  </p>
  <p className='text-2xl font-bold text-gray-900 dark:text-white mt-1'>
  {formatValue(value)}
- </p>
+// FIXED:  </p>
  {change !== undefined && (
  <div
- className={`flex items-center mt-2 text-sm ${
+// FIXED:  className={`flex items-center mt-2 text-sm ${ />
  change >= 0 ? 'text-green-600' : 'text-red-600'
  }`}
  >
@@ -101,14 +101,14 @@ const MetricCard: React.FC<MetricCardProps> = ({
  <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
  )}
  {Math.abs(change).toFixed(1)}%
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  <div className={`p-3 rounded-full ${iconColor}`}>
  <Icon className='w-6 h-6 text-white' />
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
@@ -228,207 +228,207 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  <div>
  <h1 className='text-3xl font-bold text-gray-900 dark:text-white'>
  Analytics Dashboard
- </h1>
+// FIXED:  </h1>
  <p className='text-gray-600 dark:text-gray-400 mt-2'>
  Track your channel's performance and audience insights
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
 
  <div className='flex items-center gap-4'>
  <select
- value={timeRange}
- onChange={e => setTimeRange(e.target.value as any)}
- className='px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
+// FIXED:  value={timeRange} />
+// FIXED:  onChange={e => setTimeRange(e.target.value as any)}
+// FIXED:  className='px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
  >
  <option value='7d'>Last 7 days</option>
  <option value='30d'>Last 30 days</option>
  <option value='90d'>Last 90 days</option>
  <option value='1y'>Last year</option>
- </select>
+// FIXED:  </select>
 
  <button className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'>
  <CalendarIcon className='w-4 h-4' />
  Export Report
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Key Metrics */}
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
  <MetricCard
  title='Total Views'
- value={analyticsData.overview.totalViews}
+// FIXED:  value={analyticsData.overview.totalViews}
  change={12.5}
  icon={EyeIcon}
- iconColor='bg-blue-500'
+ iconColor='bg-blue-500' />
  />
  <MetricCard
  title='Watch Time'
- value={analyticsData.overview.totalWatchTime}
+// FIXED:  value={analyticsData.overview.totalWatchTime}
  change={8.3}
  icon={ClockIcon}
  iconColor='bg-green-500'
- format='duration'
+ format='duration' />
  />
  <MetricCard
  title='Subscribers'
- value={analyticsData.overview.subscribers}
+// FIXED:  value={analyticsData.overview.subscribers}
  change={-2.1}
  icon={UserGroupIcon}
- iconColor='bg-purple-500'
+ iconColor='bg-purple-500' />
  />
  <MetricCard
  title='Avg. View Duration'
- value={analyticsData.overview.averageViewDuration}
+// FIXED:  value={analyticsData.overview.averageViewDuration}
  change={5.7}
  icon={ClockIcon}
- iconColor='bg-orange-500'
+ iconColor='bg-orange-500' />
  />
- </div>
+// FIXED:  </div>
 
  {/* Performance Chart */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 mb-8'>
  <div className='flex items-center justify-between mb-6'>
  <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
  Performance Overview
- </h2>
+// FIXED:  </h2>
  <div className='flex space-x-2'>
  {(['views', 'watchTime', 'subscribers', 'revenue'] as const).map(
  metric => (
  <button
- key={metric}
- onClick={() => setSelectedMetric(metric)}
- className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+ key={metric} />
+// FIXED:  onClick={() => setSelectedMetric(metric)}
+// FIXED:  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
  selectedMetric === metric
  ? 'bg-blue-500 text-white'
  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
  }`}
  >
  {metric.charAt(0).toUpperCase() + metric.slice(1)}
- </button>
+// FIXED:  </button>
  )
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Simple chart representation */}
  <div className='h-64 flex items-end justify-between gap-1'>
  {chartData.slice(-14).map((item, index) => (
  <div
  key={index}
- className='bg-blue-500 rounded-t flex-1 min-w-0 transition-all hover:bg-blue-600'
- style={{
+// FIXED:  className='bg-blue-500 rounded-t flex-1 min-w-0 transition-all hover:bg-blue-600'
+// FIXED:  style={{ />
  height: `${(item.value / Math.max(...chartData.map((d: any) => d.value))) * 100}%`,
  minHeight: '4px' }
  title={`${new Date(item.date).toLocaleDateString()}: ${item.value.toLocaleString()}`}
  />
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8'>
  {/* Top Videos */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Top Performing Videos
- </h3>
+// FIXED:  </h3>
  <div className='space-y-4'>
  {analyticsData.topVideos.map((video, index) => (
  <div key={video.id} className='flex items-center gap-4'>
  <div className='text-sm font-medium text-gray-500 dark:text-gray-400 w-6'>
  #{index + 1}
- </div>
+// FIXED:  </div>
  <img
- src={video.thumbnail}
- alt={video.title}
- className='w-16 h-9 object-cover rounded'
+// FIXED:  src={video.thumbnail}
+// FIXED:  alt={video.title}
+// FIXED:  className='w-16 h-9 object-cover rounded' />
  />
  <div className='flex-1 min-w-0'>
  <h4 className='text-sm font-medium text-gray-900 dark:text-white truncate'>
  {video.title}
- </h4>
+// FIXED:  </h4>
  <div className='flex items-center gap-4 mt-1 text-xs text-gray-500 dark:text-gray-400'>
  <span>{video.views.toLocaleString()} views</span>
  <span>{video.likes.toLocaleString()} likes</span>
  <span>{video.comments.toLocaleString()} comments</span>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Demographics */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Audience Demographics
- </h3>
+// FIXED:  </h3>
 
  <div className='space-y-6'>
  {/* Age Groups */}
  <div>
  <h4 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
  Age Groups
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {analyticsData.demographics.ageGroups.map((group: any) => (
  <div
  key={group.range}
- className='flex items-center justify-between'
+// FIXED:  className='flex items-center justify-between' />
  >
  <span className='text-sm text-gray-600 dark:text-gray-400'>
  {group.range}
- </span>
+// FIXED:  </span>
  <div className='flex items-center gap-2'>
  <div className='w-20 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden'>
  <div
- className='h-full bg-blue-500'
- style={{ width: `${group.percentage}%` }
+// FIXED:  className='h-full bg-blue-500'
+// FIXED:  style={{ width: `${group.percentage}%` } />
  />
- </div>
+// FIXED:  </div>
  <span className='text-sm font-medium text-gray-900 dark:text-white w-12 text-right'>
  {group.percentage}%
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Top Countries */}
  <div>
  <h4 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
  Top Countries
- </h4>
+// FIXED:  </h4>
  <div className='space-y-2'>
  {analyticsData.demographics.countries
  .slice(0, 5)
  .map((country: any) => (
  <div
  key={country.country}
- className='flex items-center justify-between'
+// FIXED:  className='flex items-center justify-between' />
  >
  <span className='text-sm text-gray-600 dark:text-gray-400'>
  {country.country}
- </span>
+// FIXED:  </span>
  <div className='flex items-center gap-2'>
  <div className='w-16 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden'>
  <div
- className='h-full bg-green-500'
- style={{ width: `${country.percentage}%` }
+// FIXED:  className='h-full bg-green-500'
+// FIXED:  style={{ width: `${country.percentage}%` } />
  />
- </div>
+// FIXED:  </div>
  <span className='text-sm font-medium text-gray-900 dark:text-white w-12 text-right'>
  {country.percentage}%
- </span>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
  ))}
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Device & Engagement Stats */}
  <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
@@ -436,99 +436,99 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Device Breakdown
- </h3>
+// FIXED:  </h3>
  <div className='space-y-4'>
  <div className='flex items-center justify-between'>
  <div className='flex items-center gap-3'>
  <DevicePhoneMobileIcon className='w-5 h-5 text-blue-500' />
  <span className='text-sm text-gray-600 dark:text-gray-400'>
  Mobile
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <span className='text-sm font-medium text-gray-900 dark:text-white'>
  {analyticsData.devices.mobile}%
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='flex items-center justify-between'>
  <div className='flex items-center gap-3'>
  <ComputerDesktopIcon className='w-5 h-5 text-green-500' />
  <span className='text-sm text-gray-600 dark:text-gray-400'>
  Desktop
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <span className='text-sm font-medium text-gray-900 dark:text-white'>
  {analyticsData.devices.desktop}%
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <div className='flex items-center justify-between'>
  <div className='flex items-center gap-3'>
  <GlobeAltIcon className='w-5 h-5 text-purple-500' />
  <span className='text-sm text-gray-600 dark:text-gray-400'>
  Tablet
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
  <span className='text-sm font-medium text-gray-900 dark:text-white'>
  {analyticsData.devices.tablet}%
- </span>
- </div>
- </div>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
 
  {/* Engagement Metrics */}
  <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
  <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Engagement Metrics
- </h3>
+// FIXED:  </h3>
  <div className='grid grid-cols-2 gap-4'>
  <div className='text-center'>
  <div className='flex items-center justify-center w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full mx-auto mb-2'>
  <HeartIcon className='w-6 h-6 text-red-600' />
- </div>
+// FIXED:  </div>
  <p className='text-lg font-semibold text-gray-900 dark:text-white'>
  {analyticsData.engagement.likes.toLocaleString()}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Likes
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full mx-auto mb-2'>
  <ChatBubbleLeftIcon className='w-6 h-6 text-blue-600' />
- </div>
+// FIXED:  </div>
  <p className='text-lg font-semibold text-gray-900 dark:text-white'>
  {analyticsData.engagement.comments.toLocaleString()}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Comments
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full mx-auto mb-2'>
  <ShareIcon className='w-6 h-6 text-green-600' />
- </div>
+// FIXED:  </div>
  <p className='text-lg font-semibold text-gray-900 dark:text-white'>
  {analyticsData.engagement.shares.toLocaleString()}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Shares
- </p>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full mx-auto mb-2'>
  <UserGroupIcon className='w-6 h-6 text-purple-600' />
- </div>
+// FIXED:  </div>
  <p className='text-lg font-semibold text-gray-900 dark:text-white'>
  +{analyticsData.engagement.subscribersGained.toLocaleString()}
- </p>
+// FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  New Subscribers
- </p>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
+// FIXED:  </p>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

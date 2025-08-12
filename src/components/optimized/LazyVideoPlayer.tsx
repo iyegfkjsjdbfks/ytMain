@@ -23,8 +23,8 @@ const VideoPlayerFallback: any = () => (
  <LoadingSpinner size='lg' />
  <span className='ml-2 text-gray-600 dark:text-gray-400'>
  Loading player...
- </span>
- </div>
+// FIXED:  </span>
+// FIXED:  </div>
 );
 
 const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
@@ -45,7 +45,7 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
  {isYouTubeVideo ? (
  <YouTubePlayer
  video={video}
- autoplay={autoplay}
+ autoplay={autoplay} />
  onStateChange={state => {
  if (state === 1) {
  onPlay?.();
@@ -63,7 +63,7 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
  ) : (
  <VideoPlayer
  videoId={video.id}
- src={video.videoUrl}
+// FIXED:  src={video.videoUrl}
  poster={video.thumbnailUrl}
  title={video.title}
  autoplay={autoplay}
@@ -71,10 +71,10 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
  {...(onPlay && { onPlay })}
  {...(onPause && { onPause })}
  {...(onEnded && { onEnded })}
- className={className || ''}
+// FIXED:  className={className || ''} />
  />
  )}
- </Suspense>
+// FIXED:  </Suspense>
  );
  }
 );

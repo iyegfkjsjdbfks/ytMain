@@ -105,23 +105,23 @@ return;
  <div className={cn('relative flex items-center py-2 sm:py-3', className)}>
  {/* Left scroll button */}
  {canScrollLeft && (
- <button
- onClick={(e: any) => scrollLeft(e)}
- className="absolute left-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
- aria-label="Scroll left"
+ <button />
+// FIXED:  onClick={(e: any) => scrollLeft(e)}
+// FIXED:  className="absolute left-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
+// FIXED:  aria-label="Scroll left"
  >
  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
- </svg>
- </button>
+// FIXED:  </svg>
+// FIXED:  </button>
  )}
 
  {/* Category chips container */}
  <div
  ref={scrollContainerRef}
- className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
- style={{ scrollbarWidth: 'none',
- msOverflowStyle: 'none' }
+// FIXED:  className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
+// FIXED:  style={{ scrollbarWidth: 'none',
+ msOverflowStyle: 'none' } />
  >
  {categories?.map((category: any) => {
  const isSelected = category === selectedCategory;
@@ -129,34 +129,34 @@ return;
  return (
  <button
  key={category}
- data-category={category}
- onClick={() => onSelectCategory(category)}
- className={cn(
+// FIXED:  data-category={category} />
+// FIXED:  onClick={() => onSelectCategory(category)}
+// FIXED:  className={cn(
  'flex-shrink-0 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap touch-manipulation min-h-[36px] sm:min-h-[40px]',
  isSelected
  ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700')}
  >
  {category}
- </button>
+// FIXED:  </button>
  );
  })}
- </div>
+// FIXED:  </div>
 
  {/* Right scroll button */}
  {canScrollRight && (
- <button
- onClick={(e: any) => scrollRight(e)}
- className="absolute right-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
- aria-label="Scroll right"
+ <button />
+// FIXED:  onClick={(e: any) => scrollRight(e)}
+// FIXED:  className="absolute right-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
+// FIXED:  aria-label="Scroll right"
  >
  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
- </svg>
- </button>
+// FIXED:  </svg>
+// FIXED:  </button>
  )}
 
- </div>
+// FIXED:  </div>
  );
 };
 

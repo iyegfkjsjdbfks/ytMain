@@ -41,25 +41,25 @@ const iconSizeClasses = {
 
 const LoadingSpinner: React.FC<{ size: string }> = ({ size }: any) => (
  <svg
- className={cn('animate-spin text-current', size)}
+// FIXED:  className={cn('animate-spin text-current', size)}
  xmlns="http://www.w3.org/2000/svg"
  fill="none"
- viewBox="0 0 24 24"
+ viewBox="0 0 24 24" />
  >
  <circle
- className="opacity-25"
+// FIXED:  className="opacity-25"
  cx="12"
  cy="12"
  r="10"
  stroke="currentColor"
- strokeWidth="4"
+ strokeWidth="4" />
  />
  <path
- className="opacity-75"
+// FIXED:  className="opacity-75"
  fill="currentColor"
- d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+ d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
  />
- </svg>
+// FIXED:  </svg>
 );
 
 export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
@@ -102,23 +102,23 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
 
  return (
  <button
- type="button"
- className={cn(baseClasses, className)}
- disabled={isDisabled}
- {...props}
+// FIXED:  type="button"
+// FIXED:  className={cn(baseClasses, className)}
+// FIXED:  disabled={isDisabled}
+ {...props} />
  >
  {loading && (
  <LoadingSpinner
  size={cn(
  spinnerSize,
- children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : '')}
+ children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : '')} />
  />
  )}
 
  {leftIcon && !loading && (
  <span className={cn(iconSize, children ? 'mr-2' : '')}>
  {leftIcon}
- </span>
+// FIXED:  </span>
  )}
 
  {children}
@@ -126,9 +126,9 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
  {rightIcon && !loading && (
  <span className={cn(iconSize, children ? 'ml-2' : '')}>
  {rightIcon}
- </span>
+// FIXED:  </span>
  )}
- </button>
+// FIXED:  </button>
  );
 };
 

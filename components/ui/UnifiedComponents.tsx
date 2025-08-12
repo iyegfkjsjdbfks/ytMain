@@ -44,14 +44,14 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
  return (
  <button
  ref={ref}
- className={cn(
+// FIXED:  className={cn(
  'inline-flex items-center justify-center font-medium rounded-md border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed',
  buttonVariants[variant],
  buttonSizes[size],
  fullWidth && 'w-full',
  className)}
- disabled={isDisabled}
- {...props}
+// FIXED:  disabled={isDisabled}
+ {...props} />
  >
  {loading && (
  <ArrowPathIcon className="w-4 h-4 mr-2 animate-spin" />
@@ -63,7 +63,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
  {!loading && icon && iconPosition === 'right' && (
  <span className="ml-2">{icon}</span>
  )}
- </button>
+// FIXED:  </button>
  );
  });
 
@@ -98,22 +98,22 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
  <div className={cn('space-y-1', fullWidth && 'w-full')}>
  {label && (
  <label
- htmlFor={inputId}
- className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+// FIXED:  htmlFor={inputId}
+// FIXED:  className="block text-sm font-medium text-gray-700 dark:text-gray-300" />
  >
  {label}
- </label>
+// FIXED:  </label>
  )}
  <div className="relative">
  {leftIcon && (
  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
  <span className="text-gray-400">{leftIcon}</span>
- </div>
+// FIXED:  </div>
  )}
  <input
  ref={ref}
- id={inputId}
- className={cn(
+// FIXED:  id={inputId}
+// FIXED:  className={cn(
  'block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200',
  hasError
  ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
@@ -121,24 +121,24 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
  leftIcon && 'pl-10',
  rightIcon && 'pr-10',
  className)}
- {...props}
+ {...props} />
  />
  {rightIcon && (
  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
  <span className="text-gray-400">{rightIcon}</span>
- </div>
+// FIXED:  </div>
  )}
- </div>
+// FIXED:  </div>
  {error && (
  <p className="text-sm text-red-600 dark:text-red-400 flex items-center">
  <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
  {error}
- </p>
+// FIXED:  </p>
  )}
  {helperText && !error && (
  <p className="text-sm text-gray-500 dark:text-gray-400">{helperText}</p>
  )}
- </div>
+// FIXED:  </div>
  );
  });
 
@@ -175,16 +175,16 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
  hover = false }) => {
  return (
  <div
- className={cn(
+// FIXED:  className={cn(
  'bg-white dark:bg-gray-800 rounded-lg transition-all duration-200',
  cardPadding[padding],
  cardShadow[shadow],
  border && 'border border-gray-200 dark:border-gray-700',
  hover && 'hover:shadow-md hover:scale-[1.02]',
- className)}
+ className)} />
  >
  {children}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -237,41 +237,41 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
  return (
  <div className={cn(
  'rounded-md border p-4',
- styles.container,
+ styles.container, />
  className)}>
  <div className="flex">
  <div className="flex-shrink-0">
  <IconComponent className={cn('h-5 w-5', styles.icon)} />
- </div>
+// FIXED:  </div>
  <div className="ml-3 flex-1">
  {title && (
  <h3 className={cn('text-sm font-medium', styles.title)}>
  {title}
- </h3>
+// FIXED:  </h3>
  )}
  <div className={cn('text-sm', title ? 'mt-2' : '', styles.content)}>
  {children}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  {dismissible && onDismiss && (
  <div className="ml-auto pl-3">
  <div className="-mx-1.5 -my-1.5">
  <button
- type="button"
- className={cn(
+// FIXED:  type="button"
+// FIXED:  className={cn(
  'inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors',
  styles.icon,
- 'hover:bg-black/5 dark:hover:bg-white/5')}
- onClick={(e: any) => onDismiss(e)}
+ 'hover:bg-black/5 dark:hover:bg-white/5')} />
+// FIXED:  onClick={(e: any) => onDismiss(e)}
  >
  <span className="sr-only">Dismiss</span>
  <XMarkIcon className="h-5 w-5" />
- </button>
- </div>
- </div>
+// FIXED:  </button>
+// FIXED:  </div>
+// FIXED:  </div>
  )}
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 
@@ -300,7 +300,7 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
  case 'spinner':
  return (
  <ArrowPathIcon
- className={cn(sizeClass, 'animate-spin text-gray-400', className)}
+// FIXED:  className={cn(sizeClass, 'animate-spin text-gray-400', className)} />
  />
  );
  case 'dots':
@@ -309,23 +309,23 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
  {[0, 1, 2].map((i) => (
  <div
  key={i}
- className={cn(
+// FIXED:  className={cn(
  'bg-gray-400 rounded-full animate-pulse',
  size === 'sm' ? 'w-1 h-1' : size === 'md' ? 'w-2 h-2' : 'w-3 h-3')}
- style={{
+// FIXED:  style={{
  animationDelay: `${i * 0.2}s`,
- animationDuration: '1s' }
+ animationDuration: '1s' } />
  />
  ))}
- </div>
+// FIXED:  </div>
  );
  case 'pulse':
  return (
  <div
- className={cn(
+// FIXED:  className={cn(
  'bg-gray-300 dark:bg-gray-600 rounded animate-pulse',
  sizeClass,
- className)}
+ className)} />
  />
  );
  default: return null
@@ -337,7 +337,7 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
  {text && (
  <span className="text-sm text-gray-500 dark:text-gray-400">{text}</span>
  )}
- </div>
+// FIXED:  </div>
  );
 };
 
@@ -379,37 +379,37 @@ return null;
 
  return (
  <div
- className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
- onClick={(e: any) => handleOverlayClick(e)}
+// FIXED:  className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50" />
+// FIXED:  onClick={(e: any) => handleOverlayClick(e)}
  >
  <div
- className={cn(
+// FIXED:  className={cn(
  'bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full',
  modalSizes[size],
- className)}
+ className)} />
  >
  {(title || showCloseButton) && (
  <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
  {title && (
  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
  {title}
- </h2>
+// FIXED:  </h2>
  )}
  {showCloseButton && (
- <button
- onClick={(e: any) => onClose(e)}
- className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+ <button />
+// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
  >
  <XMarkIcon className="w-6 h-6" />
- </button>
+// FIXED:  </button>
  )}
- </div>
+// FIXED:  </div>
  )}
  <div className="p-6">
  {children}
- </div>
- </div>
- </div>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>
  );
 };
 

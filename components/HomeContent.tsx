@@ -22,17 +22,17 @@ const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: a
  <SubscriptionFeed maxVideos={4} />
  <LiveStreams maxStreams={4} />
  <TrendingSection maxVideos={6} />
- </>
+// FIXED:  </>
  )}
  {videos && videos.length > 0 && (
  <div className="px-4">
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">
  {selectedCategory === 'All' ? 'Recommended' : selectedCategory}
- </h2>
+// FIXED:  </h2>
  <VideoGrid videos={videos} />
- </div>
+// FIXED:  </div>
  )}
- </>
+// FIXED:  </>
  );
 };
 
