@@ -130,7 +130,7 @@ return;
    */
   async getRefactoringOpportunities(): Promise<RefactoringOpportunity[]> {
     await this.identifyRefactoringOpportunities();
-    return this.refactoringOpportunities.sort((a: any, b: any) => b: any.priority - a: any.priority);
+    return this.refactoringOpportunities.sort((a: any, b: any) => b.priority - a.priority);
   }
 
   /**

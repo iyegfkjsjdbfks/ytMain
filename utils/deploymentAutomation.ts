@@ -1061,7 +1061,7 @@ continue;
       return;
     }
 
-    const relevantNotifications = (config as any).notifications.filter((n: any) => n: any.events?.includes(event));
+    const relevantNotifications = (config as any).notifications.filter((n: any) => n.events?.includes(event));
 
     for (const notification of relevantNotifications) {
       try {
