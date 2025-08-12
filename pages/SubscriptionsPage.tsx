@@ -2,10 +2,6 @@ import React, { useState, useMemo, useEffect, FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ViewColumnsIcon, Bars3Icon, AdjustmentsHorizontalIcon, BellIcon, UserGroupIcon  } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
 const BellIconSolid = BellSolidIcon;
 
 import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
@@ -86,7 +82,7 @@ return [];
       case 'oldest':
         filtered.sort((a, b) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
         break;
-      case 'latest':,
+      case 'latest':
   default:
         filtered.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
         break;
@@ -342,4 +338,3 @@ return [];
 };
 
 export default SubscriptionsPage;
-

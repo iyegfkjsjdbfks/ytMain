@@ -3,12 +3,9 @@ import { logger } from '@/utils/logger';
 import { useLivePolls } from '@/hooks/useLiveStream';
 import type { LivePoll } from '@/types/livestream';
 import { PlusIcon, ClockIcon, CheckCircleIcon, ChartBarIcon, TrashIcon, StopIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 interface LivePollsProps {
-  streamId: string;,
+  streamId: string;
   isOwner: boolean;
   className?: string;
 }
@@ -351,4 +348,3 @@ const LivePolls: React.FC<LivePollsProps> = ({
 };
 
 export default LivePolls;
-

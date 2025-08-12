@@ -1,13 +1,11 @@
 import React, { useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
 import BaseModal from './BaseModal';
 
 interface CommentModalProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
   shortId: string;
   shortTitle?: string;

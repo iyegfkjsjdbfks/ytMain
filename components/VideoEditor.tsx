@@ -1,55 +1,50 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useRef, memo } from 'react';
 
 import type { Video } from '../types';
-import { useEffect, useRef, useState, memo, FC, MouseEvent } from 'react';
 
 import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, SpeakerXMarkIcon, DocumentTextIcon, AdjustmentsHorizontalIcon, CloudArrowDownIcon } from '@heroicons/react/24/outline';
 
 export interface VideoClip {
-  id: string;,
+  id: string;
   startTime: number;
-  endTime: number;,
+  endTime: number;
   duration: number;
   thumbnail: string
 }
 
 export interface AudioTrack {
-  id: string;,
+  id: string;
   name: string;
-  url: string;,
+  url: string;
   volume: number;
-  startTime: number;,
+  startTime: number;
   duration: number
 }
 
 export interface TextOverlay {
-  id: string;,
+  id: string;
   text: string;
-  x: number;,
+  x: number;
   y: number;
-  fontSize: number;,
+  fontSize: number;
   color: string;
-  fontFamily: string;,
+  fontFamily: string;
   startTime: number;
   endTime: number;
   animation?: 'fade' | 'slide' | 'bounce';
 }
 
 export interface VideoFilter {
-  id: string;,
+  id: string;
   name: string;
-  type: "brightness" as const | 'contrast' | 'saturation' | 'blur' | 'sepia' | 'grayscale';,
+  type: "brightness" as const | 'contrast' | 'saturation' | 'blur' | 'sepia' | 'grayscale';
   value: number
 }
 
 interface VideoEditorProps {
-  videoFile: File;,
+  videoFile: File;
   onSave: (editedVideo: Blob,
-          metadata: any) => void;,
+          metadata: any) => void;
   onCancel: () => void;
   className?: string;
 }

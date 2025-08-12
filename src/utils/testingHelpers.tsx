@@ -1,21 +1,20 @@
+import React, { ReactNode, ReactElement } from 'react';
 import type { Channel } from '../types';
 import { Channel } from '../types';
-import React, { ReactNode, ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient  } from '@tanstack/react-query';
 import screen, { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { Video } from '../types/core';
-import { ReactNode } from 'react';
 
 // Test utilities for consistent testing
 export const createTestQueryClient: any = () => {
   return new QueryClient({
-    defaultOptions: {,
+    defaultOptions: {
       queries: {
         retry: false,
           gcTime: 0 },
-      mutations: {,
+      mutations: {
         retry: false } } });
 };
 
@@ -45,7 +44,7 @@ export const renderWithProviders: any = (,
 ) => {
   const {
     queryClient = new QueryClient({
-      defaultOptions: {,
+      defaultOptions: {
         queries: { retry: false },
           mutations: { retry: false } } }),
     ...renderOptions
@@ -184,17 +183,17 @@ export const userInteraction = {
 
 // Mock API responses
 export const mockApiResponses = {
-  videos: {,
+  videos: {
     trending: [createMockVideo({ id: '1',
           title: 'Trending Video 1' })],
     search: (query: any) => [
       createMockVideo({ id: '2',
           title: `Search Result for ${query}` })] },
 
-  channels: {,
+  channels: {
     byId: (id: string) =>
       createMockChannel({ id, name: `Channel ${id}` }) },
-          comments: {,
+          comments: {
     byVideoId: (videoId: any) => [
       createMockComment({ id: '1',
           content: `Comment for video ${videoId}` })] } };
@@ -240,21 +239,20 @@ export const testScenarios = {
 
 // Performance benchmarks
 export const performanceBenchmarks = {
-  videoGridRender: {,
+  videoGridRender: {
     maxRenderTime: 100, // ms,
   maxMemoryUsage: 50 * 1024 * 1024, // 50MB
   },
 
-  videoPlayerLoad: {,
+  videoPlayerLoad: {
     maxLoadTime: 500, // ms,
   maxBundleSize: 200 * 1024, // 200KB
   },
 
-  commentSection: {,
+  commentSection: {
     maxRenderTime: 50, // ms per 100 comments,
   maxScrollPerformance: 60, // fps
   } 
         };
 
 export { screen, fireEvent, waitFor, userEvent  };
-

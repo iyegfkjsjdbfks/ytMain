@@ -1,8 +1,5 @@
 import React, { useEffect, useState, FC } from 'react';
 import X, { RefreshCw } from 'lucide-react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -54,7 +51,7 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
         if (updateAvailable as any) {
           setIsVisible(true);
         }
-      
+
         }) as any,
       60 * 60 * 1000
     );
@@ -133,4 +130,3 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
 };
 
 export default PWAUpdateNotification;
-

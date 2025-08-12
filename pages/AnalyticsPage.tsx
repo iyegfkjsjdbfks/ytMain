@@ -1,9 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
@@ -12,23 +7,23 @@ import { ArrowTrendingUpIcon } from '@heroicons/react/24/outline';
 import { ArrowTrendingDownIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
-  totalViews: number;,
+  totalViews: number;
   totalVideos: number;
-  totalWatchTime: number;,
+  totalWatchTime: number;
   totalLikes: number;
-  totalComments: number;,
+  totalComments: number;
   subscriberGrowth: number;
-  topPerformingVideo: Video | null;,
+  topPerformingVideo: Video | null;
   recentPerformance: {
-    views: number;,
+    views: number;
     watchTime: number;
     subscribers: number; labels: string;
   };
   videoPerformance: Array<{,
     video: Video;
-    views: number;,
+    views: number;
     likes: number;
-    comments: number;,
+    comments: number;
     watchTime: number;
     ctr: number; // Click-through rate,
           retention: number; // Average view duration percentage
@@ -55,7 +50,7 @@ const AnalyticsPage: React.FC = () => {
           totalComments: Math.floor(Math.random() * 5000) + 1000,
           subscriberGrowth: Math.floor(Math.random() * 1000) + 100,
           topPerformingVideo: null, // No local videos available,
-  recentPerformance: {,
+  recentPerformance: {
             views: Array.from({ length: 30 }, () => Math.floor(Math.random() * 10000) + 1000),
             watchTime: Array.from({ length: 30 }, () => Math.floor(Math.random() * 500) + 100),
             subscribers: Array.from({ length: 30 }, () => Math.floor(Math.random() * 100) + 10),

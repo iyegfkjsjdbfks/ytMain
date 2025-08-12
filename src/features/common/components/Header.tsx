@@ -1,8 +1,5 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent } from 'react';
 import { useNavigate, Link  } from 'react-router-dom';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -200,4 +197,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-

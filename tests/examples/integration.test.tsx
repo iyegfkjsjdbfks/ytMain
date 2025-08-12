@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { FormEvent } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 /**
  * Integration tests demonstrating how multiple components work together
  * and testing real user workflows
@@ -652,4 +649,3 @@ describe('Integration Tests', () => {
     });
   });
 });
-

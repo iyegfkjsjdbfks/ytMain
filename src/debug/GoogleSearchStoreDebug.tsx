@@ -1,11 +1,7 @@
-import React from 'react';
-import { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { logger } from '../utils/logger';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 const GoogleSearchStoreDebug: FC = () => {
   const [storeVideos, setStoreVideos] = useState<any[]>([]);
@@ -34,7 +30,7 @@ const GoogleSearchStoreDebug: FC = () => {
       if (!searchApiKey || !searchEngineId) {
         setTestResult({
           error: 'Google Custom Search API not configured',
-          details: {,
+          details: {
             apiKey: !!searchApiKey,
           engineId: !!searchEngineId } 
         });
@@ -214,4 +210,3 @@ const GoogleSearchStoreDebug: FC = () => {
 };
 
 export default GoogleSearchStoreDebug;
-

@@ -1,7 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 interface UseAsyncDataOptions<T> {
   initialData?: T;

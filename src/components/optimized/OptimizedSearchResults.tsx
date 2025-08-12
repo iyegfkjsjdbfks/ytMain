@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, memo, lazy } from 'react';
 import { FixedSizeList } from 'react-window';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import { performanceMonitor } from '../../utils/performanceOptimizations';
 
@@ -11,7 +7,7 @@ import { useDebounce, useIntersectionObserver } from '../../hooks/usePerformance
 import type { Video } from '../../types/core';
 
 interface OptimizedSearchResultsProps {
-  videos: Video;,
+  videos: Video;
   query: string;
   onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
@@ -22,10 +18,10 @@ interface OptimizedSearchResultsProps {
 
 interface SearchResultItemProps {
   index;
-  style: React.CSSProperties;,
+  style: React.CSSProperties;
   data: {
-    videos: Video;,
-    onVideoClick: (video: Video) => void;,
+    videos: Video;
+    onVideoClick: (video: Video) => void;
     query: string;
   }}
 
@@ -144,7 +140,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
           if (entry as any) {
             setContainerHeight(Math.min(entry.contentRect.height, 800));
           }
-        
+
         });
 
         resizeObserver.observe(node);
@@ -166,7 +162,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
       if (isIntersecting && hasMore && !loading && onLoadMore) {
         onLoadMore();
       }
-    
+
         }, [isIntersecting, hasMore, loading, onLoadMore]);
 
     // Memoized list data
@@ -183,7 +179,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
       performanceMonitor.startMeasure('search-results-render');
       return () => {
         performanceMonitor.endMeasure('search-results-render');
-      
+
         }}, [videos.length]);
 
     if (loading && videos.length === 0) {
@@ -254,4 +250,3 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
 OptimizedSearchResults.displayName = 'OptimizedSearchResults';
 
 export default OptimizedSearchResults;
-

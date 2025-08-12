@@ -1,8 +1,5 @@
-import type { Video } from '../types';
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
+import type { Video } from '../types';
 
 import { logger } from '../utils/logger';
 

@@ -1,16 +1,9 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useRef, useEffect, useState, FC, MouseEvent } from 'react';
+import React, { MouseEvent, FormEvent, FC, useState, useEffect, useRef } from 'react';
 
 interface PlaylistEditModalProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
-  initialTitle: string;,
+  initialTitle: string;
   initialDescription: string;
   onSaveChanges: (title: any,
           description: any) => Promise<void>

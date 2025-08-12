@@ -1,6 +1,4 @@
-import React from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
+import React, { ReactNode, FC } from 'react';
 export interface BadgeProps {
   children: React.ReactNode;
   variant?: 'default' | 'secondary' | 'success' | 'warning' | 'error' | 'info';

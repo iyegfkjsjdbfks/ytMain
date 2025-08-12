@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { ReactNode, FC } from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { ReactNode } from 'react';
-import { FC } from 'react';
 
 interface VideoGridSkeletonProps {
   count?: number;
@@ -51,7 +49,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
 );
 
 interface EmptyStateProps {
-  title: string;,
+  title: string;
   message: string;
   icon?: React.ReactNode;
   className?: string;

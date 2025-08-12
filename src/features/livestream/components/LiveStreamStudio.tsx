@@ -1,7 +1,4 @@
 import React, { useState, useRef, useEffect, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -17,30 +14,30 @@ import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, Cha
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
 
 interface StreamSettings {
-  title: string;,
+  title: string;
   description: string;
-  category: string;,
+  category: string;
   visibility: 'public' | 'unlisted' | 'private';
-  enableChat: boolean;,
+  enableChat: boolean;
   enableDonations: boolean;
-  quality: '720p' | '1080p' | '1440p' | '4k';,
+  quality: '720p' | '1080p' | '1440p' | '4k';
   bitrate: number;
   frameRate: 30 | 60
 }
 
 interface StreamStats {
-  viewers: number;,
+  viewers: number;
   peakViewers: number;
-  duration: number;,
+  duration: number;
   likes: number;
-  chatMessages: number;,
+  chatMessages: number;
   streamHealth: 'excellent' | 'good' | 'poor'
 }
 
 interface ChatMessage {
-  id: string;,
+  id: string;
   username: string;
-  message: string;,
+  message: string;
   timestamp: Date;
   isModerator?: boolean;
   isOwner?: boolean;
@@ -109,11 +106,11 @@ export const LiveStreamStudio: React.FC = () => {
   const setupCamera = async (): Promise<void> => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {,
+        video: {
           width: { ideal: 1920 },
           height: { ideal: 1080 },
           frameRate: { ideal: settings.frameRate } },
-          audio: {,
+          audio: {
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true } });
@@ -465,4 +462,3 @@ export const LiveStreamStudio: React.FC = () => {
 };
 
 export default LiveStreamStudio;
-

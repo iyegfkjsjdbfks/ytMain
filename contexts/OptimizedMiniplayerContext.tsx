@@ -1,19 +1,15 @@
-import React from 'react';
-import { createContext, useContext, useReducer, useMemo, type ReactNode, ReactNode } from 'react';
-import { ReactNode } from 'react';
-import { useMemo } from 'react';
+import React, { createContext, useContext, useReducer, useMemo, type ReactNode, ReactNode } from 'react';
 
 import type { Video } from '../src/types/core';
 
-// State interface
-interface MiniplayerState {
-  isVisible: boolean;,
+// State interface MiniplayerState {
+  isVisible: boolean;
   currentVideo: Video | null;
-  isPlaying: boolean;,
+  isPlaying: boolean;
   volume: number;
-  currentTime: number;,
+  currentTime: number;
   duration: number;
-  isMaximized: boolean;,
+  isMaximized: boolean;
   queue: Video;
   currentIndex: number
 }
@@ -156,26 +152,25 @@ const miniplayerReducer: any = (state: MiniplayerState,
   }
 };
 
-// Context interface
-interface MiniplayerContextValue {
-  state: MiniplayerState;,
+// Context interface MiniplayerContextValue {
+  state: MiniplayerState;
   actions: {
-    showMiniplayer: (video: Video) => void;,
+    showMiniplayer: (video: Video) => void;
     hideMiniplayer: () => void;
-    togglePlay: () => void;,
-    setPlaying: (playing: any) => void;,
-    setVolume: (volume: any) => void;,
-    setCurrentTime: (time: any) => void;,
-    setDuration: (duration: any) => void;,
+    togglePlay: () => void;
+    setPlaying: (playing: any) => void;
+    setVolume: (volume: any) => void;
+    setCurrentTime: (time: any) => void;
+    setDuration: (duration: any) => void;
     toggleMaximize: () => void;
-    setMaximized: (maximized: any) => void;,
-    setQueue: (queue: Video) => void;,
-    addToQueue: (video: Video) => void;,
-    removeFromQueue: (videoId: any) => void;,
+    setMaximized: (maximized: any) => void;
+    setQueue: (queue: Video) => void;
+    addToQueue: (video: Video) => void;
+    removeFromQueue: (videoId: any) => void;
     nextVideo: () => void;
-    previousVideo: () => void;,
+    previousVideo: () => void;
     setCurrentIndex: (index: number) => void
-  
+
         }}
 
 // Create contexts
@@ -264,4 +259,3 @@ export const useMiniplayerActions: any = () => {
   const { actions } = useOptimizedMiniplayer();
   return actions;
 };
-

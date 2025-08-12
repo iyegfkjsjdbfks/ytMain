@@ -1,9 +1,4 @@
 import React, { useEffect, useMemo, useCallback, useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 // @ts-nocheck
 
 import { realVideos } from '../services/realVideoService';
@@ -331,4 +326,3 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 };
 
 export default RecommendationEngine;
-

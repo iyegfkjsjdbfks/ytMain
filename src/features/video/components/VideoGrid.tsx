@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
-import { FC } from 'react';
 
 interface VideoGridProps {
   title?: string;
@@ -35,11 +34,10 @@ const VideoGrid: React.FC<VideoGridProps> = ({
         return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
       case 5:
         return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5';
-      case 6:
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6';,
+      case 6: return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6';
       default: return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
     }
-  
+
         };
 
   return (
@@ -96,4 +94,3 @@ const VideoGrid: React.FC<VideoGridProps> = ({
 };
 
 export default VideoGrid;
-

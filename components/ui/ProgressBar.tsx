@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 export interface ProgressBarProps {
   value: number; // 0-100
   max?: number;

@@ -1,5 +1,4 @@
-import React from 'react';
-import type React from 'react';
+import React, { type React } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
@@ -16,7 +15,7 @@ const mockUnifiedDataService = vi.mocked(unifiedDataService);
 // Test wrapper component with React Query provider
 const createWrapper: any = () => {
   const queryClient = new QueryClient({
-    defaultOptions: {,
+    defaultOptions: {
       queries: {
         retry: false,
           staleTime: 0,
@@ -51,7 +50,7 @@ describe('Unified Video Hooks', () => {
           likes: 10,
             dislikes: 0,
           commentCount: 5,
-            channel: {,
+            channel: {
               id: 'channel-1',
           name: 'Test Channel 1',
               avatarUrl: 'https://example.com/avatar1.jpg',
@@ -85,7 +84,7 @@ describe('Unified Video Hooks', () => {
           likes: 20,
             dislikes: 0,
           commentCount: 10,
-            channel: {,
+            channel: {
               id: 'channel-2',
           name: 'Test Channel 2',
               avatarUrl: 'https://example.com/avatar2.jpg',
@@ -108,7 +107,7 @@ describe('Unified Video Hooks', () => {
           channelAvatarUrl: 'https://example.com/avatar2.jpg',
           createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString() }],
-          sources: {,
+          sources: {
           local: { count: 1,
           hasMore: false },
           youtube: { count: 1,
@@ -190,7 +189,7 @@ describe('Unified Video Hooks', () => {
           likes: 10,
         dislikes: 0,
           commentCount: 5,
-        channel: {,
+        channel: {
           id: 'channel-1',
           name: 'Test Channel',
           avatarUrl: 'https://example.com/avatar.jpg',
@@ -289,7 +288,7 @@ describe('Unified Video Hooks', () => {
           likes: 10,
             dislikes: 0,
           commentCount: 5,
-            channel: {,
+            channel: {
               id: 'channel-1',
           name: 'Channel 1',
               avatarUrl: 'https://example.com/avatar1.jpg',
@@ -323,7 +322,7 @@ describe('Unified Video Hooks', () => {
           likes: 20,
             dislikes: 0,
           commentCount: 10,
-            channel: {,
+            channel: {
               id: 'channel-2',
           name: 'Channel 2',
               avatarUrl: 'https://example.com/avatar2.jpg',
@@ -346,7 +345,7 @@ describe('Unified Video Hooks', () => {
           channelAvatarUrl: 'https://example.com/avatar2.jpg',
           createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString() }],
-          sources: {,
+          sources: {
           local: { count: 1,
           hasMore: false },
           youtube: { count: 1,
@@ -409,7 +408,7 @@ describe('Unified Video Hooks', () => {
           likes: 50,
             dislikes: 0,
           commentCount: 10,
-            channel: {,
+            channel: {
               id: 'channel-1',
           name: 'Short Channel',
               avatarUrl: 'https://example.com/avatar1.jpg',
@@ -443,7 +442,7 @@ describe('Unified Video Hooks', () => {
           likes: 100,
             dislikes: 0,
           commentCount: 20,
-            channel: {,
+            channel: {
               id: 'channel-2',
           name: 'Short Channel 2',
               avatarUrl: 'https://example.com/avatar2.jpg',
@@ -466,7 +465,7 @@ describe('Unified Video Hooks', () => {
           channelAvatarUrl: 'https://example.com/avatar2.jpg',
           createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString() }],
-          sources: {,
+          sources: {
           local: { count: 2,
           hasMore: false },
           youtube: { count: 0,
@@ -505,7 +504,7 @@ describe('Unified Video Hooks', () => {
           likes: 50,
             dislikes: 0,
           commentCount: 10,
-            channel: {,
+            channel: {
               id: 'channel-1',
           name: 'Search Channel 1',
               avatarUrl: 'https://example.com/avatar1.jpg',
@@ -539,7 +538,7 @@ describe('Unified Video Hooks', () => {
           likes: 100,
             dislikes: 0,
           commentCount: 20,
-            channel: {,
+            channel: {
               id: 'channel-2',
           name: 'Search Channel 2',
               avatarUrl: 'https://example.com/avatar2.jpg',
@@ -562,7 +561,7 @@ describe('Unified Video Hooks', () => {
           channelAvatarUrl: 'https://example.com/avatar2.jpg',
           createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString() }],
-          sources: {,
+          sources: {
           local: { count: 1,
           hasMore: false },
           youtube: { count: 1,
@@ -738,4 +737,3 @@ describe('Unified Video Hooks', () => {
     });
   });
 });
-

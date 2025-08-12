@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback, useRef } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -6,11 +7,6 @@ declare namespace NodeJS {
     env: ProcessEnv
   }
 }
-
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 import { CONSTANTS } from '../../lib/constants';
 import type { ApiResponse } from '../../types/core';

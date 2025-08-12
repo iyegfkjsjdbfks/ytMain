@@ -1,8 +1,4 @@
-import React from 'react';
-import { useEffect, useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 
 import { CalendarIcon, FolderIcon } from '@heroicons/react/24/outline';
 
@@ -100,7 +96,7 @@ const ContentManagerPage: React.FC = () => {
           (parseInt(aDurationParts[0] || '0', 10) * 60 + parseInt(aDurationParts[1] || '0', 10));
         default: return 0
       }
-    
+
         });
 
     setFilteredContent(filtered);
@@ -147,7 +143,7 @@ const ContentManagerPage: React.FC = () => {
               return item;
             default: return item
           }
-        
+
         }
         return item;
       }).filter(Boolean) as ContentItem);
@@ -453,7 +449,7 @@ return content.length;
                           if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
                             // Delete video logic here
                           }
-                        
+
         }}
                         className="p-1 text-neutral-500 hover:text-red-500 transition-colors"
                         title="Delete video"
@@ -528,7 +524,7 @@ return content.length;
                         if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
                           // Delete video logic here
                         }
-                      
+
         }}
                       className="p-2 text-neutral-500 hover:text-red-500 transition-colors"
                       title="Delete video"
@@ -598,4 +594,3 @@ return content.length;
 };
 
 export default ContentManagerPage;
-

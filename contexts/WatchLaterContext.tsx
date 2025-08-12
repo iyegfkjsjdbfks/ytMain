@@ -1,8 +1,5 @@
-import React from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { Video } from '../types';
-import { createContext, useContext, useState, useEffect } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import type { Video as VideoType } from '../src/types/core';
 
@@ -11,9 +8,9 @@ import type { Video as VideoType } from '../src/types/core';
 // For clarity, let's stick to VideoType where it's used for the list items.
 
 interface WatchLaterContextType {
-  watchLaterList: VideoType;,
-  addToWatchLater: (video: VideoType) => void;,
-  removeFromWatchLater: (videoId: any) => void;,
+  watchLaterList: VideoType;
+  addToWatchLater: (video: VideoType) => void;
+  removeFromWatchLater: (videoId: any) => void;
   isWatchLater: (videoId: any) => boolean
 }
 
@@ -60,4 +57,3 @@ export const useWatchLater: any = () => {
   }
   return context;
 };
-

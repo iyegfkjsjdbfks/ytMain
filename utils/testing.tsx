@@ -1,9 +1,6 @@
+import React, { ReactNode, FC } from 'react';
 import type { Channel } from '../types';
-import React from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
 // Note: Keep React import minimal to avoid unused warnings
-import React from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import { render } from '@testing-library/react';
@@ -18,7 +15,7 @@ import { vi } from 'vitest';
 import type { Video } from '../src/types/core';
 // If Channel type exists, import it; otherwise, define a minimal fallback to satisfy tests
 type Channel = {
-  id: string;,
+  id: string;
   name: string;
   description?: string;
   avatarUrl?: string;
@@ -40,7 +37,7 @@ interface TestProvidersProps {
 const TestProviders: React.FC<TestProvidersProps> = ({
   children,
   queryClient = new QueryClient({
-    defaultOptions: {,
+    defaultOptions: {
       queries: {
         retry: false,
           gcTime: 0 } } }) }) => {
@@ -234,7 +231,7 @@ export const createMemoryLeakTest: any = (testFn: () => void,
 
     // Memory increase should be reasonable (less than 10MB for most tests)
     expect(memoryIncrease).toBeLessThan(10 * 1024 * 1024);
-  
+
         }};
 
 // Component Testing Utilities
@@ -421,7 +418,7 @@ export const runAccessibilityAudit = async (_container: HTMLElement): Promise<an
       issues: [] as Array<{ type: "error" as const | 'warning'; message: string; element: HTMLElement }>,
           score: 100,
       violations: [], // For backward compatibility
-    
+
         }} catch (error: any) {
     (console as any).warn('Accessibility testing not available:', error);
     return {
@@ -457,6 +454,5 @@ expect.extend({
       pass: hasExpectedName }} });
 
 // Type declarations for custom matchers
-
 
 export default TestProviders;

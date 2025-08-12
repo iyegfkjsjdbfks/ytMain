@@ -1,10 +1,6 @@
 import React, { useEffect, useCallback, useState, memo, FC } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useNavigate, useNavigate, useSearchParams  } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../src/hooks/useDebounce';
@@ -16,9 +12,9 @@ import type { Video } from '../types';
 
 // Types for better performance
 interface SearchState {
-  videos: Video;,
+  videos: Video;
   youtubeVideos: YouTubeSearchResult;
-  googleSearchVideos: GoogleSearchResult;,
+  googleSearchVideos: GoogleSearchResult;
   loading: boolean;
   youtubeLoading: boolean
 }
@@ -134,14 +130,14 @@ const SearchResultsPage: React.FC = () => {
     // Return cleanup function
     return () => {
       currentController.abort();
-    
+
         }}, []);
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
       // Cancel any ongoing requests when component unmounts
-    
+
         }}, []);
 
   // Effect for debounced search
@@ -185,4 +181,3 @@ const SearchResultsPage: React.FC = () => {
 
 // Export with memo for performance
 export default React.memo(SearchResultsPage);
-

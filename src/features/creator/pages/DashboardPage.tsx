@@ -1,9 +1,6 @@
-import type { Video } from '../types';
 import React, { useEffect, useState, FC } from 'react';
+import type { Video } from '../types';
 import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ArrowTrendingUpIcon, CalendarDaysIcon, CurrencyDollarIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 // Mock chart components since recharts is not available
 const ResponsiveContainer: any = ({ children, width, height }: any) => (
   <div style={{ width, height }}>{children}</div>
@@ -47,13 +44,13 @@ interface VideoPerformance {
 
 interface AudienceData {
   country;
-  percentage: number;,
+  percentage: number;
   views: number
 }
 
 interface DeviceData {
   device;
-  percentage: number;,
+  percentage: number;
   color: string
 }
 
@@ -672,4 +669,3 @@ const DashboardPage: React.FC = () => {
 };
 
 export default DashboardPage;
-

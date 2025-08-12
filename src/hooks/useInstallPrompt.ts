@@ -1,7 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -141,7 +138,7 @@ export const useInstallPrompt: any = (): UseInstallPromptReturn => {
       setState(prev => ({
         ...prev as any,
         isInstalling: false,
-        installError:,
+        installError:
           error instanceof Error ? error.message : 'Installation failed' }));
 
       return false;

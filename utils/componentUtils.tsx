@@ -1,8 +1,4 @@
-import React, { ReactNode } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
+import React, { ReactNode, FC, useCallback, useMemo } from 'react';
 // Component utilities and helpers
 // Type definitions
 export interface TruncateOptions {
@@ -87,13 +83,13 @@ export const safeLocalStorage = {
       if (typeof window !== 'undefined') {
         return (localStorage as any).getItem(key);
       }
-    
+
         } catch (error: any) {
       (console as any).warn('localStorage getItem failed:', error);
     }
     return null;
   },
-  
+
   setItem: (key: string,
           value: string | number): boolean => {
     try {
@@ -106,7 +102,7 @@ export const safeLocalStorage = {
     }
     return false;
   },
-  
+
   removeItem: (key: string): boolean => {
     try {
       if (typeof window !== 'undefined') {
@@ -150,4 +146,3 @@ export const buildChannelUrl: any = (channelId: any): string => {
 export const getAvatarFallback: any = (name: any): string => {
   return name.charAt(0).toUpperCase();
 };
-

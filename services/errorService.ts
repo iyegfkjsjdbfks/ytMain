@@ -189,7 +189,7 @@ class ErrorService {
         const parsed = JSON.parse(authData);
         return parsed.userId || parsed.id;
       }
-    } catch {
+    } catch (e) {
       // Ignore parsing errors
     }
     return undefined;

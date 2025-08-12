@@ -1,7 +1,5 @@
 import React, { memo, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { ReactNode } from 'react';
-import { FC } from 'react';
 
 import { UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon, QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
 

@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 const BellIconSolid = BellSolidIcon;
 import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
@@ -15,9 +11,9 @@ interface NotificationCenterProps {
 }
 
 interface NotificationItemProps {
-  notification: Notification;,
-  onMarkAsRead: (id: string) => void;,
-  onDelete: (id: string) => void;,
+  notification: Notification;
+  onMarkAsRead: (id: string) => void;
+  onDelete: (id: string) => void;
   onClick: (notification: Notification) => void
 }
 
@@ -364,4 +360,3 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 };
 
 export default NotificationCenter;
-

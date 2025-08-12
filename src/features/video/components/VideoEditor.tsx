@@ -1,8 +1,5 @@
-import type { Video } from '../types';
 import React, { useEffect, useRef, useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import type { Video } from '../types';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -15,46 +12,46 @@ declare namespace NodeJS {
 import { PlayIcon, PauseIcon, ScissorsIcon, DocumentArrowDownIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
 
 interface VideoClip {
-  id: string;,
+  id: string;
   name: string;
-  startTime: number;,
+  startTime: number;
   endTime: number;
-  duration: number;,
+  duration: number;
   thumbnail: string;
-  volume: number;,
+  volume: number;
   effects: string
 }
 
 interface AudioTrack {
-  id: string;,
+  id: string;
   name: string;
-  url: string;,
+  url: string;
   volume: number;
-  startTime: number;,
+  startTime: number;
   duration: number
 }
 
 interface TextOverlay {
-  id: string;,
+  id: string;
   text: string;
-  x: number;,
+  x: number;
   y: number;
-  fontSize: number;,
+  fontSize: number;
   color: string;
-  startTime: number;,
+  startTime: number;
   endTime: number;
   fontFamily: string;
   animation?: 'fadeIn' | 'slideIn' | 'bounce';
 }
 
 interface EditorState {
-  currentTime: number;,
+  currentTime: number;
   duration: number;
-  isPlaying: boolean;,
+  isPlaying: boolean;
   zoom: number;
-  selectedClip: string | null;,
+  selectedClip: string | null;
   clips: VideoClip;
-  audioTracks: AudioTrack;,
+  audioTracks: AudioTrack;
   textOverlays: TextOverlay
 }
 
@@ -595,4 +592,3 @@ export const VideoEditor: React.FC = () => {
 };
 
 export default VideoEditor;
-

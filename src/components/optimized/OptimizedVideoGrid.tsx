@@ -1,13 +1,10 @@
 import React, { useState, useMemo, useCallback, memo, lazy } from 'react';
 import { FixedSizeGrid } from 'react-window';
-import { useState } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import type { Video } from '../../types/core';
 
 interface OptimizedVideoGridProps {
-  videos: Video;,
+  videos: Video;
   onVideoClick: (video: Video) => void;
   loading?: boolean;
   className?: string;
@@ -19,13 +16,13 @@ interface OptimizedVideoGridProps {
 // Memoized video item component
 const VideoGridItem = memo<{
   columnIndex;
-  rowIndex: number;,
+  rowIndex: number;
   style: React.CSSProperties;
-  data: {,
+  data: {
     videos: Video;
-    itemsPerRow: number;,
+    itemsPerRow: number;
     onVideoClick: (video: Video) => void
-  
+
         }}>(({ columnIndex, rowIndex, style, data }: any) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
@@ -111,7 +108,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
           if (entry as any) {
             setContainerWidth(entry.contentRect.width);
           }
-        
+
         });
 
         resizeObserver.observe(node);
@@ -172,4 +169,3 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
 OptimizedVideoGrid.displayName = 'OptimizedVideoGrid';
 
 export default OptimizedVideoGrid;
-

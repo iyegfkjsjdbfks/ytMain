@@ -1,33 +1,28 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { ShieldCheckIcon, TrashIcon, CheckIcon, XMarkIcon, FlagIcon, ChatBubbleLeftIcon, VideoCameraIcon, UserIcon, ClockIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface ModerationItem {
-  id: string;,
+  id: string;
   type: "video" as const | 'comment' | 'user' | 'community_post';
-  status: 'pending' | 'approved' | 'rejected' | 'flagged' | 'removed';,
+  status: 'pending' | 'approved' | 'rejected' | 'flagged' | 'removed';
   priority: 'low' | 'medium' | 'high' | 'critical';
-  reportReason: string;,
+  reportReason: string;
   reportCount: number;
-  reportedAt: string;,
+  reportedAt: string;
   reportedBy: string;
 
   // Content details,
-  content: {,
+  content: {
     id: string;
     title?: string;
     text?: string;
     thumbnail?: string;
-    authorId: string;,
+    authorId: string;
     authorName: string;
-    authorAvatar: string;,
+    authorAvatar: string;
     createdAt: string;
     views?: number;
     likes?: number;
@@ -36,16 +31,16 @@ export interface ModerationItem {
 
   // AI Analysis
   aiAnalysis?: {
-    toxicityScore: number;,
+    toxicityScore: number;
     categories: string;
-    confidence: number;,
+    confidence: number;
     suggestedAction: 'approve' | 'review' | 'remove'
   };
 
   // Moderation history,
   moderationHistory: Array<{,
     action: string;
-    moderatorId: string;,
+    moderatorId: string;
     moderatorName: string;
     timestamp: string;
     reason?: string;
@@ -90,7 +85,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           reportCount: 5,
         reportedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
           reportedBy: ['user1', 'user2', 'user3'],
-        content: {,
+        content: {
           id: 'video1',
           title: 'Controversial Video Title',
           thumbnail: 'https://picsum.photos/320/180?random=1',
@@ -101,7 +96,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           views: 15000,
           likes: 200,
           comments: 45 },
-          aiAnalysis: {,
+          aiAnalysis: {
           toxicityScore: 0.75,
           categories: ['harassment', 'hate_speech'],
           confidence: 0.85,
@@ -116,7 +111,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           reportCount: 12,
         reportedAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
           reportedBy: ['user4', 'user5', 'user6'],
-        content: {,
+        content: {
           id: 'comment1',
           text: 'This is an inappropriate comment that violates community guidelines...',
           authorId: 'user123',
@@ -124,7 +119,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           authorAvatar: 'https://picsum.photos/40/40?random=2',
           createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
           likes: 0 },
-          aiAnalysis: {,
+          aiAnalysis: {
           toxicityScore: 0.92,
           categories: ['hate_speech', 'harassment'],
           confidence: 0.95,
@@ -145,7 +140,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           reportCount: 3,
         reportedAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
           reportedBy: ['user7', 'user8'],
-        content: {,
+        content: {
           id: 'user456',
           authorId: 'user456',
           authorName: 'Suspicious Account',
@@ -245,7 +240,7 @@ return false;
       case 'critical': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
       case 'high': return 'text-orange-600 bg-orange-100 dark:bg-orange-900/20';
       case 'medium': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20';
-      case 'low': return 'text-green-600 bg-green-100 dark:bg-green-900/20';,
+      case 'low': return 'text-green-600 bg-green-100 dark: bg-green-900/20';
       default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20'
     }
   };
@@ -256,7 +251,7 @@ return false;
       case 'approved': return 'text-green-600 bg-green-100 dark:bg-green-900/20';
       case 'rejected': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
       case 'flagged': return 'text-orange-600 bg-orange-100 dark:bg-orange-900/20';
-      case 'removed': return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20';,
+      case 'removed': return 'text-gray-600 bg-gray-100 dark: bg-gray-900/20';
       default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20'
     }
   };

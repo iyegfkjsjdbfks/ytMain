@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
 // Development server for handling API requests and serving mock data
 import express from 'express';
 import cors from 'cors';
@@ -72,20 +71,20 @@ app.get('/api/health', (req, res) => {
 app.get('/api/videos', (req, res) => {
   const { limit = 20, category, search } = req.query;
   const videos = Array.from({ length: parseInt(limit, 10) }, (_, i) => generateMockVideo(i.toString()));
-  
+
   let filteredVideos = videos;
-  
+
   if (category && category !== 'all') {
     filteredVideos = videos.filter(v => v.category.toLowerCase() === category.toLowerCase());
   }
-  
+
   if (search) {
     filteredVideos = videos.filter(v => 
       v.title.toLowerCase().includes(search.toLowerCase()) ||
       v.description.toLowerCase().includes(search.toLowerCase())
     );
   }
-  
+
   res.json({ videos: filteredVideos, total: filteredVideos.length });
 });
 
@@ -103,7 +102,7 @@ app.get('/api/shorts', (req, res) => {
     hashtags: ['#shorts', '#viral', '#trending'],
     isShort: true
   }));
-  
+
   res.json({ shorts, total: shorts.length });
 });
 
@@ -111,11 +110,11 @@ app.get('/api/shorts', (req, res) => {
 app.get('/api/videos/:id/comments', (req, res) => {
   const { limit = 20 } = req.query;
   const videoId = req.params.id;
-  
+
   const authors = [
     'VideoLover123', 'TechEnthusiast', 'NatureFan', 'MusicAddict', 'Gamer4Life'
   ];
-  
+
   const commentTexts = [
     'This is absolutely amazing! Thanks for sharing.',
     'Great content as always. Keep up the excellent work!',
@@ -123,7 +122,7 @@ app.get('/api/videos/:id/comments', (req, res) => {
     'The quality of this content is outstanding.',
     'This deserves way more views. Underrated channel!'
   ];
-  
+
   const comments = Array.from({ length: parseInt(limit, 10) }, (_, i) => ({
     id: `comment-${videoId}-${i}`,
     content: commentTexts[i % commentTexts.length],
@@ -137,7 +136,7 @@ app.get('/api/videos/:id/comments', (req, res) => {
     isLiked: false,
     replies: []
   }));
-  
+
   res.json({ comments, total: comments.length });
 });
 
@@ -146,7 +145,7 @@ app.get('/api/channels/:id', (req, res) => {
   const channelId = req.params.id;
   const names = ['TechMaster', 'NatureExplorer', 'MusicMaven', 'GameGuru', 'ArtisticSoul'];
   const index = parseInt(channelId.replace('channel-', '')) % names.length;
-  
+
   const channel = {
     id: channelId,
     name: names[index],
@@ -159,20 +158,20 @@ app.get('/api/channels/:id', (req, res) => {
     verified: Math.random() > 0.7,
     joinedDate: new Date(Date.now() - Math.random() * 5 * 365 * 24 * 60 * 60 * 1000).toISOString()
   };
-  
+
   res.json(channel);
 });
 
 // Search
 app.get('/api/search', (req, res) => {
   const { q: query, limit = 20, type = 'video' } = req.query;
-  
+
   if (type === 'video') {
     const videos = Array.from({ length: parseInt(limit, 10) }, (_, i) => generateMockVideo(`search-${i}`));
     const filteredVideos = query 
       ? videos.filter(v => v.title.toLowerCase().includes(query.toLowerCase()))
       : videos;
-    
+
     res.json({ results: filteredVideos, total: filteredVideos.length, type: 'video' });
   } else {
     res.json({ results: [], total: 0, type });
@@ -187,7 +186,7 @@ app.get('/api/trending', (req, res) => {
     trending: true,
     trendingRank: i + 1
   }));
-  
+
   res.json({ videos, total: videos.length });
 });
 
@@ -200,7 +199,7 @@ app.get('/api/subscriptions', (req, res) => {
     subscribedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
     notificationsEnabled: Math.random() > 0.5
   }));
-  
+
   res.json({ subscriptions, total: subscriptions.length });
 });
 
@@ -215,7 +214,7 @@ app.get('/api/playlists', (req, res) => {
     visibility: Math.random() > 0.5 ? 'public' : 'private',
     createdAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString()
   }));
-  
+
   res.json({ playlists, total: playlists.length });
 });
 
@@ -223,7 +222,7 @@ app.get('/api/playlists', (req, res) => {
 app.post('/api/upload', (req, res) => {
   // Simulate upload process
   const uploadId = `upload-${Date.now()}`;
-  
+
   res.json({
     uploadId,
     status: 'processing',
@@ -235,7 +234,7 @@ app.post('/api/upload', (req, res) => {
 // Upload progress
 app.get('/api/upload/:id/progress', (req, res) => {
   const progress = Math.min(100, Math.floor(Math.random() * 100) + 1);
-  
+
   res.json({
     uploadId: req.params.id,
     progress,
@@ -248,7 +247,7 @@ app.get('/api/upload/:id/progress', (req, res) => {
 app.get('/api/placeholder/:dimensions', (req, res) => {
   const { dimensions } = req.params;
   const [width, height] = dimensions.split('x').map(Number);
-  
+
   // Redirect to picsum photos
   res.redirect(`https://picsum.photos/${width || 320}/${height || 180}?random=${Math.floor(Math.random() * 1000)}`);
 });
@@ -260,7 +259,7 @@ app.get('/api/placeholder/video', (req, res) => {
     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
   ];
-  
+
   const randomVideo = videos[Math.floor(Math.random() * videos.length)];
   res.redirect(randomVideo);
 });

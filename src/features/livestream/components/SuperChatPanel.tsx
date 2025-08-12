@@ -3,9 +3,6 @@ import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';
 import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 interface SuperChatPanelProps {
   streamId: string;
@@ -368,4 +365,3 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
 };
 
 export default SuperChatPanel;
-

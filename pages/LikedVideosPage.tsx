@@ -1,8 +1,4 @@
-import React from 'react';
-import { useState, useEffect, FC  } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version;
 const HeartIconSolid = HeartSolidIcon;
@@ -63,4 +59,3 @@ const LikedVideosPage: React.FC = () => {
 };
 
 export default LikedVideosPage;
-

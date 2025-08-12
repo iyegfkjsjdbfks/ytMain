@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * ShortsPage component for displaying short-form vertical videos
  */
@@ -25,4 +24,3 @@ const ShortsPage: React.FC = () => {
 };
 
 export default ShortsPage;
-

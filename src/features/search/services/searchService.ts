@@ -14,7 +14,7 @@ import type {
 
 export interface SearchFilters {
   type?: 'all' | 'video' | 'channel' | 'playlist' | 'user';
-  duration?: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min
+  duration?: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min >20min
   uploadDate?: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
   sortBy?: 'relevance' | 'upload_date' | 'view_count' | 'rating' | 'title';
   features?: Array<

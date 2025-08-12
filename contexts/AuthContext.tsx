@@ -1,30 +1,23 @@
-import React from 'react';
-import { createContext, useContext, useState, useEffect, type ReactNode, FC, ReactNode } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode, type FC } from 'react';
 
 interface User {
-  id: string;,
+  id: string;
   username: string;
   email: string;
   avatar?: string;
   isVerified: boolean;
   subscriberCount?: number;
-  createdAt: string
+  createdAt: string;
 }
 
 interface AuthContextType {
-  user: User | null;,
+  user: User | null;
   isAuthenticated: boolean;
-  isLoading: boolean;,
-  login: (email: any,
-          password: any) => Promise<boolean>;,
-  register: (username: any,
-          email: any, password: any) => Promise<boolean>;,
+  isLoading: boolean;
+  login: (email: any, password: any) => Promise<boolean>;
+  register: (username: any, email: any, password: any) => Promise<boolean>;
   logout: () => void;
-  updateProfile: (updates: Partial<User>) => Promise<boolean>
+  updateProfile: (updates: Partial<User>) => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -55,7 +48,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }: any) => 
         if (storedUser && token) {
           setUser(JSON.parse(storedUser));
         }
-      
+
         } catch (error: any) {
         (console as any).error('Error checking auth status:', error);
         // Clear invalid data
@@ -77,14 +70,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }: any) => 
       // Mock authentication - in real app, this would be an API call
       if (email && password.length >= 6) {
         const username = email.split('@')[0] || 'user';
-        const mockUser: User = {,
+        const mockUser: User = {
           id: `user_${Date.now()}`,
           username,
           email,
           avatar: `https://ui-avatars.com/api/?name=${username}&background=random`,
           isVerified: Math.random() > 0.5,
           subscriberCount: Math.floor(Math.random() * 10000),
-          createdAt: new Date().toISOString() };
+          createdAt: new Date().toISOString()
+        };
 
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
@@ -112,14 +106,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }: any) => 
 
       // Mock registration - in real app, this would be an API call
       if (username && email && password.length >= 6) {
-        const mockUser: User = {,
+        const mockUser: User = {
           id: `user_${Date.now()}`,
           username,
           email,
           avatar: `https://ui-avatars.com/api/?name=${username}&background=random`,
           isVerified: false,
           subscriberCount: 0,
-          createdAt: new Date().toISOString() };
+          createdAt: new Date().toISOString()
+        };
 
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
@@ -170,7 +165,8 @@ return false;
     login,
     register,
     logout,
-    updateProfile };
+    updateProfile
+  };
 
   return (
     <AuthContext.Provider value={value}>
@@ -180,4 +176,3 @@ return false;
 };
 
 export default AuthProvider;
-

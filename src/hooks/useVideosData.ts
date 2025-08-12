@@ -26,7 +26,7 @@ export function useVideosData(,
           return response.data;
         }
         case 'trending':
-        case 'all':,
+        case 'all':
   default: {
           const response = await unifiedDataService.getTrendingVideos(50);
           return response.data;
@@ -38,7 +38,7 @@ export function useVideosData(,
         case 'shorts':
           return getShortsVideos();
         case 'trending':
-        case 'all':,
+        case 'all':
   default: return getVideos()
       }
     }
@@ -62,7 +62,7 @@ export function useUnifiedVideosData(,
         return response.data;
       }
       case 'trending':
-      case 'all':,
+      case 'all':
   default: {
         const response = await unifiedDataService.getTrendingVideos(limit);
         return response.data;

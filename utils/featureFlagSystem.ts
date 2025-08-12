@@ -625,7 +625,7 @@ continue;
     switch (condition.operator) {
       case 'equals':
         return contextValue === (condition.value as any);
-  
+
       case 'equals':
         return contextValue === (condition.value as any);
       case 'not_equals':
@@ -647,7 +647,7 @@ continue;
         try {
           const regex = new RegExp(condition.value);
           return regex.test(String(contextValue));
-        } catch {
+        } catch (e) {
           return false;
         }
       default: return false

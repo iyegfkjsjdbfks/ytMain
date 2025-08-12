@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import BellIcon from './icons/BellIcon';
-import { FC } from 'react';
 
 import type { Channel } from '../src/types/core';
 
 interface ChannelHeaderProps {
-  channel: Channel;,
+  channel: Channel;
   videoCount: number;
-  isSubscribed: boolean;,
+  isSubscribed: boolean;
   onSubscribeToggle: () => void
 }
 

@@ -1,14 +1,13 @@
-import type { Video } from '../types';
 import React, { FC } from 'react';
+import type { Video } from '../types';
 import { FunnelIcon, XMarkIcon, VideoCameraIcon, UserIcon, PlayIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
 
 export interface SearchFilters {
-  type: "all" as const | 'video' | 'channel' | 'playlist' | 'live';,
+  type: "all" as const | 'video' | 'channel' | 'playlist' | 'live';
   uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
-  duration: 'any' | 'short' | 'medium' | 'long';,
+  duration: 'any' | 'short' | 'medium' | 'long';
   features: string;
-  sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';,
+  sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';
   quality: 'any' | 'hd' | '4k' | 'hdr';
   captions: 'any' | 'with_captions' | 'without_captions';
   location?: string;
@@ -16,8 +15,8 @@ export interface SearchFilters {
 }
 
 interface AdvancedSearchFiltersProps {
-  filters: SearchFilters;,
-  onFiltersChange: (filters: SearchFilters) => void;,
+  filters: SearchFilters;
+  onFiltersChange: (filters: SearchFilters) => void;
   isOpen: boolean;
   onToggle: () => void;
   className?: string;
@@ -393,4 +392,3 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 };
 
 export default AdvancedSearchFilters;
-

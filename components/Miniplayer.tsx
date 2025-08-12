@@ -1,8 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, type React } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-
-import type React from 'react';
 
 import { PlayIcon as PlaySolidIcon, XMarkIcon as XMarkSolidIcon  } from '@heroicons/react/24/solid';
 const PlayIconSolid = PlaySolidIcon;
@@ -11,7 +8,7 @@ const XMarkIconSolid = XMarkSolidIcon;
 import type { Video } from '../src/types/core';
 
 interface MiniplayerProps {
-  video: Video | null;,
+  video: Video | null;
   onClose: () => void; onMaximize: (videoId: any) => void
 }
 

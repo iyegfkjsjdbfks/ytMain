@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { Cog8ToothIcon, ShieldCheckIcon, DocumentTextIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
 
 /**
  * AccountLayout component provides a consistent layout for account-related pages
@@ -88,7 +87,7 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle account backup
-                    
+
         }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
@@ -97,7 +96,7 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle password change
-                    
+
         }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
@@ -106,7 +105,7 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle two-factor auth
-                    
+
         }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
@@ -129,4 +128,3 @@ const AccountLayout: React.FC = () => {
 };
 
 export default AccountLayout;
-

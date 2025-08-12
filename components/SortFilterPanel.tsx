@@ -1,10 +1,4 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 
 import { CheckIcon as CheckSolidIcon } from '@heroicons/react/24/solid';
 const CheckIconSolid = CheckSolidIcon;
@@ -22,7 +16,7 @@ export const sortOptions: Array<{ value: SortByType; label: string }> = [
           label: 'View count' }];
 
 interface SortFilterPanelProps {
-  currentSortBy: SortByType;,
+  currentSortBy: SortByType;
   onSortChange: (newSortBy: SortByType) => void;
   disabled?: boolean;
 }

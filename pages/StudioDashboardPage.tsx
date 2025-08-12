@@ -1,42 +1,38 @@
 import React, { useEffect, useState, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ChartBarIcon, VideoCameraIcon, CurrencyDollarIcon, ChatBubbleLeftRightIcon, DocumentTextIcon, UserGroupIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon } from '@heroicons/react/24/outline';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatDuration, formatNumber } from '../utils/numberUtils';
 
 interface DashboardStats {
-  totalViews: number;,
-          totalSubscribers: number;,
-  totalVideos: number;,
-          totalRevenue: number;,
-  avgWatchTime: number;,
-          totalComments: number;,
-  totalLikes: number;,
+  totalViews: number;
+          totalSubscribers: number;
+  totalVideos: number;
+          totalRevenue: number;
+  avgWatchTime: number;
+          totalComments: number;
+  totalLikes: number;
           totalShares: number
 }
 
 interface RecentVideo {
-  id: string;,
-          title: string;,
-  thumbnail: string;,
-          views: number;,
-  likes: number;,
-          comments: number;,
-  uploadDate: Date;,
-          duration: number;,
+  id: string;
+          title: string;
+  thumbnail: string;
+          views: number;
+  likes: number;
+          comments: number;
+  uploadDate: Date;
+          duration: number;
   status: 'published' | 'processing' | 'scheduled' | 'draft'
 }
 
 interface QuickAction {
-  title: string;,
-          description: string;,
-  icon: React.ReactNode;,
-          link: string;,
+  title: string;
+          description: string;
+  icon: React.ReactNode;
+          link: string;
   color: string
 }
 
@@ -357,4 +353,3 @@ const StudioDashboardPage: React.FC = () => {
 };
 
 export default StudioDashboardPage;
-

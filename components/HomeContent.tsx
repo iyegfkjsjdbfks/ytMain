@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import LiveStreams from './LiveStreams';
 import ShortsSection from './ShortsSection';
 import SubscriptionFeed from './SubscriptionFeed';
 import TrendingSection from './TrendingSection';
 import VideoGrid from './VideoGrid';
 import WatchHistory from './WatchHistory';
-import { FC } from 'react';
 
 import type { Video } from '../types'; // Assuming Video type is in types.ts;
 

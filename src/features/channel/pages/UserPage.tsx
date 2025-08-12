@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { FC } from 'react';
 
 /**
  * UserPage component for displaying a user's public profile
@@ -30,4 +29,3 @@ const UserPage: React.FC = () => {
 };
 
 export default UserPage;
-

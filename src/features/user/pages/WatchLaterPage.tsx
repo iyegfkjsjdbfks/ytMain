@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * WatchLaterPage component for displaying videos saved to watch later
  */
@@ -23,4 +22,3 @@ const WatchLaterPage: React.FC = () => {
 };
 
 export default WatchLaterPage;
-

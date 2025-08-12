@@ -1,21 +1,15 @@
-import React from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
 import { XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 interface PictureInPictureProps {
-  videoId: string;,
+  videoId: string;
   videoTitle: string;
-  channelName: string;,
+  channelName: string;
   thumbnailUrl: string;
   videoUrl?: string;
-  isVisible: boolean;,
+  isVisible: boolean;
   onClose: () => void;
   onExpand?: () => void;
   className?: string;
@@ -166,7 +160,7 @@ return null;
             onClick={(e: any) => {
               e.stopPropagation();
               setIsMinimized(false);
-            
+
         }}
             className="text-white hover:text-gray-300"
           >
@@ -321,4 +315,3 @@ return null;
 };
 
 export default PictureInPicture;
-

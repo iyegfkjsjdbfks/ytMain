@@ -1,28 +1,23 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 
 import type { Video } from '../types';
-import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
 import { Cog6ToothIcon, CheckIcon, PlayIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ForwardIcon, BackwardIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
-  label: string;,
+  label: string;
   value: string;
   resolution: string;
   bitrate?: number;
 }
 
 export interface PlaybackSpeed {
-  label: string;,
+  label: string;
   value: number
 }
 
 interface VideoQualitySelectorProps {
-  qualities: VideoQuality;,
+  qualities: VideoQuality;
   currentQuality: string;
   onQualityChange: (quality: any) => void;
   playbackSpeeds?: PlaybackSpeed;

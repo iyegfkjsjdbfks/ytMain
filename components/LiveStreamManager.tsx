@@ -1,7 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -12,8 +9,6 @@ declare namespace NodeJS {
     env: ProcessEnv;
   }
 }
-
-import { useRef, useEffect, useState, FC } from 'react';
 
 import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
@@ -26,34 +21,34 @@ const VideoCameraIconSolid = VideoCameraSolidIcon;
 const MicrophoneIconSolid = MicrophoneSolidIcon;
 
 interface LiveStreamSettings {
-  title: string;,
+  title: string;
   description: string;
-  category: string;,
+  category: string;
   privacy: 'public' | 'unlisted' | 'private';
-  enableChat: boolean;,
+  enableChat: boolean;
   enableDonations: boolean;
   maxViewers?: number;
   scheduledStartTime?: string;
 }
 
 interface ChatMessage {
-  id: string;,
+  id: string;
   username: string;
-  message: string;,
+  message: string;
   timestamp: string;
-  isModerator: boolean;,
+  isModerator: boolean;
   isOwner: boolean;
   donation?: {
-    amount: number;,
+    amount: number;
     currency: string;
   }}
 
 interface LiveStreamStats {
-  viewers: number;,
+  viewers: number;
   likes: number;
-  messages: number;,
+  messages: number;
   duration: number;
-  peakViewers: number;,
+  peakViewers: number;
   totalDonations: number
 }
 
@@ -121,11 +116,11 @@ clearInterval(chatInterval.current);
     setIsSettingUp(true);
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {,
+        video: {
           width: { ideal: 1920 },
           height: { ideal: 1080 },
           frameRate: { ideal: 30 } },
-          audio: {,
+          audio: {
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true } });
@@ -177,7 +172,7 @@ clearInterval(chatInterval.current);
       if (Math.random() > 0.7) {
         generateRandomChatMessage();
       }
-    
+
         }) as any, 3000);
 
     onStreamStart?.(settings);
@@ -258,7 +253,7 @@ clearInterval(chatInterval.current);
       isModerator: Math.random() > 0.9,
           isOwner: false,
       ...(isDonation && {
-        donation: {,
+        donation: {
           amount: Math.floor(Math.random() * 50) + 5,
           currency: 'USD' } }) };
 

@@ -1,9 +1,5 @@
 import React, { useState, useRef, useEffect, FC, MouseEvent } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 // @ts-nocheck - Temporary during refactoring
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -34,7 +30,7 @@ interface ShortDisplayCardProps {
 
 // Extracted PlayPauseOverlay component
 interface PlayPauseOverlayProps {
-  isPlaying: boolean;,
+  isPlaying: boolean;
   onToggle: () => void
 }
 
@@ -66,9 +62,9 @@ const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle
 
 // Extracted VideoInfo component
 interface VideoInfoProps {
-  title: string;,
+  title: string;
   channelName: string;
-  views: string;,
+  views: string;
   isFollowed: boolean;
   onFollow: (() => void) | undefined
 }
@@ -106,11 +102,11 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
 
 // Extracted ActionButtons component
 interface ActionButtonsProps {
-  isMuted: boolean;,
+  isMuted: boolean;
   isLiked: boolean;
-  onToggleMute: () => void;,
-  onLike: (e: React.MouseEvent) => void;,
-  onComment: (e: React.MouseEvent) => void;,
+  onToggleMute: () => void;
+  onLike: (e: React.MouseEvent) => void;
+  onComment: (e: React.MouseEvent) => void;
   onShare: (e: React.MouseEvent) => void
 }
 
@@ -176,7 +172,7 @@ const LoadingIndicator: React.FC = () => (
 
 // Extracted ErrorState component
 interface ErrorStateProps {
-  error: string;,
+  error: string;
   onRetry: () => void
 }
 
@@ -218,7 +214,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     if (videoRef.current) {
       videoPlayer.setVideoRef(videoRef.current);
     }
-  
+
         }, [videoPlayer]);
 
   // Use intersection observer for visibility tracking and autoplay
@@ -231,7 +227,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     isIntersecting,
     isPlaying: videoPlayer.isPlaying,
     isManuallyPaused,
-    actions: {,
+    actions: {
       play: videoPlayer.play,
           pause: videoPlayer.pause,
       unmute: videoPlayer.unmute },
@@ -289,7 +285,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     if (isActive && onVideoChange) {
       onVideoChange();
     }
-  
+
         }, [isActive, onVideoChange]);
 
   return (
@@ -364,4 +360,3 @@ export default ShortDisplayCard;
 
 // Export video-specific sub-components for reuse in other parts of the application
 export { PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState  };
-

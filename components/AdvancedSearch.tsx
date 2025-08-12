@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useRef, FC, KeyboardEvent, MouseEvent } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon, ClockIcon, CalendarDaysIcon, VideoCameraIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 export interface SearchFilters {
-  duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min,
-  uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';,
+  duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min >20min,
+  uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
   type: "any" as const | 'video' | 'channel' | 'playlist' | 'live';
-  quality: 'any' | 'hd' | '4k';,
+  quality: 'any' | 'hd' | '4k';
   features: string[]; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr,
   sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating'
 }
@@ -387,4 +382,3 @@ searchParams.set('sort_by', filters.sortBy);
 };
 
 export default AdvancedSearch;
-

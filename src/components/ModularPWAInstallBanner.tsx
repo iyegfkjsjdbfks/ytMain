@@ -1,9 +1,5 @@
 import React, { useEffect, useCallback, useState, FC } from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 
@@ -34,9 +30,9 @@ interface ModularPWAInstallBannerProps {
 }
 
 interface BannerState {
-  isVisible: boolean;,
+  isVisible: boolean;
   currentView: 'install' | 'update' | 'offline' | 'notification';
-  isAnimating: boolean;,
+  isAnimating: boolean;
   dismissedAt: number | null
 }
 
@@ -87,7 +83,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
         if (Date.now() - dismissedTime < dayInMs) {
           return;
         }
-      
+
         }
 
       // Determine priority view
@@ -440,4 +436,3 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
 };
 
 export default ModularPWAInstallBanner;
-

@@ -1,9 +1,5 @@
-import React, { useState, FC, ChangeEvent } from 'react';
+import React, { useState, FC, ChangeEvent, FormEvent } from 'react';
 import { useLocation, useNavigate  } from 'react-router-dom';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import { useAuthStore } from '../store/authStore';
 import type { LoginCredentials } from '../types';
@@ -200,4 +196,3 @@ export const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
-

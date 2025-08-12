@@ -1,7 +1,5 @@
 import React, { useState, memo, lazy, MouseEvent } from 'react';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
-import { MouseEvent } from 'react';
-import { useState } from 'react';
 const HeartIconSolid = HeartSolidIcon;
 import { Link } from 'react-router-dom';
 import { formatRelativeTime, cn } from '../../lib/utils';
@@ -41,40 +39,40 @@ export interface UnifiedVideoCardProps {
 const variantStyles: Record<
   VideoCardVariant,
   {
-    container: string;,
+    container: string;
     thumbnail: string;
-    content: string;,
+    content: string;
     title: string;
     meta: string;
   }
 > = {
-  default: {,
+  default: {
     container: 'flex flex-col space-y-3',
           thumbnail: 'aspect-video w-full',
     content: 'flex space-x-3',
           title: 'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2',
           meta: 'text-sm text-neutral-600 dark:text-neutral-400' },
-          compact: {,
+          compact: {
     container: 'flex space-x-3',
           thumbnail: 'w-40 aspect-video flex-shrink-0',
     content: 'flex-1 min-w-0',
           title:
       'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2 text-sm',
           meta: 'text-xs text-neutral-600 dark:text-neutral-400' },
-          list: {,
+          list: {
     container: 'flex space-x-4 p-4',
           thumbnail: 'w-48 aspect-video flex-shrink-0',
     content: 'flex-1 min-w-0',
           title: 'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2',
           meta: 'text-sm text-neutral-600 dark:text-neutral-400' },
-          grid: {,
+          grid: {
     container: 'flex flex-col space-y-2',
           thumbnail: 'aspect-video w-full',
     content: 'space-y-1',
           title:
       'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2 text-sm',
           meta: 'text-xs text-neutral-600 dark:text-neutral-400' },
-          shorts: {,
+          shorts: {
     container: 'flex flex-col',
           thumbnail: 'aspect-[9/16] w-full',
     content: 'p-3 space-y-2',
@@ -85,20 +83,20 @@ const variantStyles: Record<
 const sizeStyles: Record<
   VideoCardSize,
   {
-    thumbnail: string;,
+    thumbnail: string;
     title: string;
     avatar: string;
   }
 > = {
-  sm: {,
+  sm: {
     thumbnail: 'rounded-md',
           title: 'text-sm',
     avatar: 'w-6 h-6' },
-          md: {,
+          md: {
     thumbnail: 'rounded-lg',
           title: 'text-base',
     avatar: 'w-8 h-8' },
-          lg: {,
+          lg: {
     thumbnail: 'rounded-xl',
           title: 'text-lg',
     avatar: 'w-10 h-10' } };
@@ -356,4 +354,3 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
 UnifiedVideoCard.displayName = 'UnifiedVideoCard';
 
 export default UnifiedVideoCard;
-

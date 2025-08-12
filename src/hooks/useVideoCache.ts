@@ -1,10 +1,6 @@
+import { useState, useEffect, useCallback, useRef, lazy } from 'react';
 import type { Video } from '../types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useState, useEffect, useCallback, useRef, lazy } from 'react';
 
 interface VideoData {
   id: string;

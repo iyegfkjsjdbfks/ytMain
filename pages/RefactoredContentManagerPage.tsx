@@ -5,16 +5,13 @@ import ReusableVideoGrid from '../components/ReusableVideoGrid';
 import StandardPageLayout from '../components/StandardPageLayout';
 import { Button } from '../components/ui/Button';
 import TabsContent, { Tabs } from '../components/ui/Tabs';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import type { Video } from '../types';
 
 /**
  * Refactored Content Manager Page
  *
- * This component demonstrates comprehensive refactoring of a complex page:
- * - Uses StandardPageLayout for consistent structure
+ * This component demonstrates comprehensive refactoring of a complex page: * - Uses StandardPageLayout for consistent structure
  * - Leverages BaseForm for all form handling
  * - Uses BaseModal for modal dialogs
  * - Implements ReusableVideoGrid for video display
@@ -26,9 +23,9 @@ import type { Video } from '../types';
  */
 
 interface VideoUploadFormData {
-  title: string;,
+  title: string;
   description: string;
-  tags: string;,
+  tags: string;
   category: string;
   visibility: 'public' | 'unlisted' | 'private';
   thumbnail?: File;
@@ -36,9 +33,9 @@ interface VideoUploadFormData {
 }
 
 interface VideoEditFormData {
-  title: string;,
+  title: string;
   description: string;
-  tags: string;,
+  tags: string;
   category: string;
   visibility: 'public' | 'unlisted' | 'private';
   thumbnail?: File;
@@ -93,7 +90,7 @@ const RefactoredContentManagerPage: React.FC = () => {
         (console as any).error('Action failed:', error);
         // Handle error if needed
       }
-    
+
         } };
 
   // Filter videos based on active tab
@@ -109,7 +106,7 @@ const RefactoredContentManagerPage: React.FC = () => {
         return video.visibility === 'private';
       default: return true
     }
-  
+
         });
 
   // Video upload form configuration
@@ -398,4 +395,3 @@ return {
 };
 
 export default RefactoredContentManagerPage;
-

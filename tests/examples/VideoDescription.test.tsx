@@ -20,7 +20,7 @@ const mockVideo = testUtils.generateMockVideo({
   viewCount: 1000000,
           likeCount: 50000,
   publishedAt: '2024-01-15T10:00:00Z',
-          channel: {,
+          channel: {
     id: 'channel-1',
           name: 'Test Channel',
     avatar: 'https://example.com/avatar.jpg',
@@ -632,4 +632,3 @@ describe('VideoDescription Component', () => {
     });
   });
 });
-

@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * TrendingPage component for displaying trending videos
  */
@@ -25,4 +24,3 @@ const TrendingPage: React.FC = () => {
 };
 
 export default TrendingPage;
-

@@ -1,17 +1,11 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useCallback, useEffect, useState, memo, FC } from 'react';
+import React, { FC, useState, useEffect, useCallback, memo } from 'react';
 
 import { performanceMonitor } from '../utils/performance';
 
 interface PerformanceMetric {
-  name: string;,
+  name: string;
   value: number;
-  timestamp: number;,
+  timestamp: number;
   type: "render" as const | 'api' | 'user-interaction' | 'navigation'
 }
 

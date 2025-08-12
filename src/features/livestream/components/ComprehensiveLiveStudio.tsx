@@ -5,9 +5,6 @@ import type { LiveStream } from '../../../types/livestream';
 import { VideoCameraIcon, MicrophoneIcon, StopIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, SignalIcon, ClockIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
 import { AdvancedLiveChat, LivePolls, LiveQA, SuperChatPanel, StreamScheduler, MultiplatformStreaming } from '.';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 interface ComprehensiveLiveStudioProps {
   className?: string;
@@ -61,11 +58,11 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
   const setupMedia = async (): Promise<void> => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {,
+        video: {
           width: { ideal: 1920 },
           height: { ideal: 1080 },
           frameRate: { ideal: streamSettings.frameRate } },
-          audio: {,
+          audio: {
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true } });
@@ -112,7 +109,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
           description: streamSettings.description,
         category: streamSettings.category,
           visibility: streamSettings.visibility,
-        settings: {,
+        settings: {
           enableChat: streamSettings.enableChat,
           enableSuperChat: streamSettings.enableSuperChat,
           enablePolls: streamSettings.enablePolls,
@@ -158,7 +155,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
       }
-    
+
         } catch (error: any) {
       logger.error('Failed to start stream:', error);
       alert('Failed to start stream. Please try again.');
@@ -644,4 +641,3 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 };
 
 export default ComprehensiveLiveStudio;
-

@@ -1,9 +1,4 @@
 import { useState, useRef, useEffect, useCallback, KeyboardEvent, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 /**
  * Custom hook for managing dropdown menu state and behavior

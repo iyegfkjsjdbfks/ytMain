@@ -1,9 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { BellIcon, UserMinusIcon, MagnifyingGlassIcon, CheckIcon, Squares2X2Icon, ListBulletIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
@@ -12,25 +7,25 @@ const BellIconSolid = BellSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface SubscriptionData {
-  id: string;,
+  id: string;
   channelId: string;
-  channelName: string;,
+  channelName: string;
   channelAvatar: string;
   channelArt?: string;
-  channelVerified: boolean;,
+  channelVerified: boolean;
   subscriberCount: number;
-  videoCount: number;,
+  videoCount: number;
   subscribedAt: string;
   notificationsEnabled: boolean;
   lastVideoUpload?: string;
-  category: string;,
+  category: string;
   description: string;
   isLive?: boolean;
   recentVideos: Array<{,
     id: string;
-    title: string;,
+    title: string;
     thumbnail: string;
-    views: number;,
+    views: number;
     uploadedAt: string;
     duration: string;
   }>;

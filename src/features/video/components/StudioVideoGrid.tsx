@@ -1,8 +1,6 @@
 import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import type { Video } from '../types';
-import { FC } from 'react';
-import { useState } from 'react';
 
 interface StudioVideoGridProps {
   videos: Video;
@@ -99,13 +97,13 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
       case 'comments':
         // If we had comments count, we'd use it here
         return 0;
-      case 'date':,
+      case 'date':
   default:
         return (
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
     }
-  
+
         });
 
   // Show loading indicator if data is being fetched
@@ -384,4 +382,3 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
 };
 
 export default StudioVideoGrid;
-

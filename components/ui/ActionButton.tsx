@@ -1,9 +1,6 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
+import React, { MouseEvent, ReactNode, FC } from 'react';
 interface ActionButtonProps {
-  onClick: (e: React.MouseEvent) => void;,
+  onClick: (e: React.MouseEvent) => void;
   ariaLabel: string;
   children: React.ReactNode;
   className?: string;

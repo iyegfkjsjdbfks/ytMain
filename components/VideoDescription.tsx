@@ -1,10 +1,7 @@
+import React, { FC, type React } from 'react';
 import type { Video } from '../types';
 import type { Channel } from '../types';
-import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-
-import type React from 'react';
 
 import { BellIcon } from '@heroicons/react/24/outline';
 

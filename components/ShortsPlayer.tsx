@@ -1,10 +1,4 @@
 import React, { useEffect, useCallback, useRef, useState, FC, KeyboardEvent, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 // @ts-nocheck
 
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ShareIcon, EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, ChatBubbleLeftIcon  } from '@heroicons/react/24/outline';
@@ -14,12 +8,12 @@ const HeartIconSolid = HeartSolidIcon;
 import type { Short } from '../src/types/core';
 
 interface ShortsPlayerProps {
-  shorts: Short;,
+  shorts: Short;
   currentIndex: number;
-  onIndexChange: (index: number) => void;,
-  onLike: (shortId: any) => void;,
-  onSubscribe: (channelId: any) => void;,
-  onComment: (shortId: any) => void;,
+  onIndexChange: (index: number) => void;
+  onLike: (shortId: any) => void;
+  onSubscribe: (channelId: any) => void;
+  onComment: (shortId: any) => void;
   onShare: (shortId: any) => void;
   className?: string;
 }
@@ -64,7 +58,7 @@ return;
         // Loop back to first short
         onIndexChange(0);
       }
-    
+
         };
 
     const handleLoadStart: any = () => setIsLoading(true);
@@ -92,7 +86,7 @@ return;
     if (isPlaying as any) {
       video.play().catch(console.error);
     }
-  
+
         }, [currentIndex, isPlaying]);
 
   useEffect(() => {
@@ -117,7 +111,7 @@ return;
           toggleMute();
           break;
       }
-    
+
         };
 
     document.addEventListener('keydown', handleKeyDown as EventListener);
@@ -389,4 +383,3 @@ return null;
 };
 
 export default ShortsPlayer;
-

@@ -1,7 +1,6 @@
-import { Video } from '../types';
 import React, { useMemo } from 'react';
+import { Video } from '../types';
 import { Link } from 'react-router-dom';
-import { useMemo } from 'react';
 // @ts-nocheck
 
 import { ChevronRightIcon as ChevronRightSolidIcon, PlayIcon as PlaySolidIcon  } from '@heroicons/react/24/solid';
@@ -18,11 +17,11 @@ import { ChartBarIcon } from '@heroicons/react/24/outline';
 import { SignalSlashIcon } from '@heroicons/react/24/outline';
 
 interface ChannelTabContentProps {
-  activeTab: string;,
+  activeTab: string;
   channel: Channel | null;
-  videos: Video;,
+  videos: Video;
   playlists: PlaylistSummary;
-  communityPosts: CommunityPost;,
+  communityPosts: CommunityPost;
   onPlaylistTabSelect: () => void
 }
 
@@ -209,4 +208,3 @@ return null;
 };
 
 export default ChannelTabContent;
-

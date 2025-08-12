@@ -1,12 +1,11 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 interface Category {
-  id: 'all' | 'music' | 'gaming' | 'news' | 'movies';,
+  id: 'all' | 'music' | 'gaming' | 'news' | 'movies';
   label: string; icon: string
 }
 
 interface CategoryTabsProps {
-  categories: Category;,
+  categories: Category;
   activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies'; setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void
 }
 

@@ -1,8 +1,4 @@
-import React from 'react';
-import { useEffect, useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 
 import { TrashIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 
@@ -97,7 +93,7 @@ const YourDataPage: React.FC = () => {
 
   const DataSection: React.FC<{
     title, description: string;
-    count, isVisible: boolean;,
+    count, isVisible: boolean;
     onToggleVisibility: () => void,
           onClear: () => void; loading: boolean;
   }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: any) => (
@@ -224,4 +220,3 @@ const YourDataPage: React.FC = () => {
 };
 
 export default YourDataPage;
-

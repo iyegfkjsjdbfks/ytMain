@@ -5,15 +5,11 @@ import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/
 import type { Comment } from '../../../types/core';
 import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { MapPinIcon as MapPinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 const MapPinIconSolid = MapPinSolidIcon;
 const HeartIconSolid = HeartSolidIcon;
 
 interface CommentSectionProps {
-  videoId: string;,
+  videoId: string;
   channelId: string;
   isChannelOwner?: boolean;
   className?: string;
@@ -23,11 +19,11 @@ interface CommentItemProps {
   comment: Comment;
   isChannelOwner?: boolean;
   onReply: (parentId: any,
-          content: any) => void;,
+          content: any) => void;
   onReact: (commentId: any,
-          type: "like" as const | 'dislike') => void;,
-  onPin: (commentId: any) => void | Promise<void>;,
-  onHeart: (commentId: any) => void | Promise<void>;,
+          type: "like" as const | 'dislike') => void;
+  onPin: (commentId: any) => void | Promise<void>;
+  onHeart: (commentId: any) => void | Promise<void>;
   onReport: (commentId: any,
           reason: any) => void | Promise<void>;
   level?: number;
@@ -481,4 +477,3 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
 export { CommentSection, CommentItem  };
 export default CommentSection;
-

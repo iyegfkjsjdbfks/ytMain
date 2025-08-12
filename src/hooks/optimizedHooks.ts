@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -8,12 +9,6 @@ declare namespace NodeJS {
     env: ProcessEnv
   }
 }
-
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 /**
  * Enhanced useDebounce hook with cleanup and cancellation

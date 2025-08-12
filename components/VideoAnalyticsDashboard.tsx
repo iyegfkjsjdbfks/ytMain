@@ -1,7 +1,5 @@
-import type { Video } from '../types';
 import React, { useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
+import type { Video } from '../types';
 
 import { ClockIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
@@ -19,17 +17,17 @@ ChartJS.register(
   ArcElement);
 
 export interface VideoAnalytics {
-  videoId: string;,
+  videoId: string;
   title: string;
-  thumbnail: string;,
+  thumbnail: string;
   publishedAt: string;
 
   // Core metrics,
-  views: number;,
+  views: number;
   likes: number;
-  dislikes: number;,
+  dislikes: number;
   comments: number;
-  shares: number;,
+  shares: number;
   subscribers: number;
 
   // Engagement metrics,
@@ -53,14 +51,14 @@ export interface VideoAnalytics {
 
   // Revenue (if monetized)
   revenue?: {
-    total: number;,
+    total: number;
     rpm: number; // Revenue per mille,
           cpm: number; // Cost per mille
-  
+
         }}
 
 interface VideoAnalyticsDashboardProps {
-  analytics: VideoAnalytics;,
+  analytics: VideoAnalytics;
   timeRange: '7d' | '28d' | '90d' | '365d';
   onTimeRangeChange: (range: '7d' | '28d' | '90d' | '365d') => void;
   className?: string;
@@ -152,21 +150,21 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   const chartOptions = {
     responsive: true,
           maintainAspectRatio: false,
-    plugins: {,
+    plugins: {
       legend: {
         display: false } },
-          scales: {,
+          scales: {
       x: {
-        grid: {,
+        grid: {
           display: false } },
-          y: {,
+          y: {
         grid: {
           color: 'rgba(156, 163, 175, 0.2)' } } } };
 
   const doughnutOptions = {
     responsive: true,
           maintainAspectRatio: false,
-    plugins: {,
+    plugins: {
       legend: {
         position: 'bottom' as const } } };
 

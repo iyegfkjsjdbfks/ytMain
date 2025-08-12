@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { ReactNode, FC } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { ErrorState } from './LoadingStates';
-import { ReactNode } from 'react';
-import { FC } from 'react';
 
 interface StandardPageLayoutProps {
   children: React.ReactNode;

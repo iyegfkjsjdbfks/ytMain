@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => ({
       gzipSize: true,
       brotliSize: true,
       template: 'treemap' })] : [])],
-  
+
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
@@ -48,7 +48,7 @@ export default defineConfig(({ mode }) => ({
       '@store': resolve(__dirname, './store'),
       '@types': resolve(__dirname, './types'),
       '@config': resolve(__dirname, './config') } },
-  
+
   // Development server configuration,
   server: {
     port: 3000,
@@ -84,7 +84,7 @@ export default defineConfig(({ mode }) => ({
         target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false } } },
-  
+
   // Build configuration,
   build: {
     target: 'esnext',
@@ -99,7 +99,7 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: mode === 'production',
         drop_debugger: true } },
-    
+
     // Rollup options,
   rollupOptions: {
       input: {
@@ -129,7 +129,7 @@ export default defineConfig(({ mode }) => ({
             }
             return 'vendor';
           }
-          
+
           // App chunks by feature
           if (id.includes('/pages/')) {
             return 'pages';
@@ -147,7 +147,7 @@ export default defineConfig(({ mode }) => ({
             return 'services';
           }
         },
-        
+
         // Asset naming,
   chunkFileNames: (chunkInfo: any) => {
           const facadeModuleId = chunkInfo.facadeModuleId
@@ -168,17 +168,17 @@ export default defineConfig(({ mode }) => ({
           return `assets/[name]-[hash][extname]`;
         },
         entryFileNames: 'js/[name]-[hash].js' } } },
-  
+
   // CSS configuration,
   css: {
     postcss: './postcss.config.js',
     devSourcemap: true },
-  
+
   // Environment variables,
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()) },
-  
+
   // Optimization,
   optimizeDeps: {
     include: [
@@ -194,13 +194,13 @@ export default defineConfig(({ mode }) => ({
     exclude: [
       // Exclude large dependencies that should be loaded dynamically
     ] },
-  
+
   // Preview configuration (for production preview)
   preview: {
     port: 4173,
     host: true,
     cors: true },
-  
+
   // Test configuration,
   test: {
     globals: true,
@@ -214,13 +214,13 @@ export default defineConfig(({ mode }) => ({
         '**/*.d.ts',
         '**/*.test.{ts,tsx}',
         '**/*.spec.{ts,tsx}'] } },
-  
+
   // ESBuild configuration,
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
     target: 'esnext',
     platform: 'browser' },
-  
+
   // Worker configuration,
   worker: {
     format: 'es' } }));

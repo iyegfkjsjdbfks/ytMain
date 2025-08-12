@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { MouseEvent, FC } from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
 
 interface ErrorMessageProps {
   message: string;

@@ -1,10 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
-
-import { useMemo, useRef, useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect, useMemo, useRef } from 'react';
 
 import { HeartIcon, ChatBubbleLeftIcon, FlagIcon, PencilIcon, TrashIcon, ChevronDownIcon, ChevronUpIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -13,48 +7,48 @@ const HeartIconSolid = HeartSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Comment {
-  id: string;,
+  id: string;
   content: string;
-  authorId: string;,
+  authorId: string;
   authorName: string;
-  authorAvatar: string;,
+  authorAvatar: string;
   authorVerified: boolean;
-  isChannelOwner: boolean;,
+  isChannelOwner: boolean;
   isCreator: boolean;
-  timestamp: string;,
+  timestamp: string;
   likes: number;
-  dislikes: number;,
+  dislikes: number;
   isLiked: boolean;
-  isDisliked: boolean;,
+  isDisliked: boolean;
   isPinned: boolean;
-  isEdited: boolean;,
+  isEdited: boolean;
   replies: Comment;
   parentId?: string;
-  isReported: boolean;,
+  isReported: boolean;
   moderationStatus: 'approved' | 'pending' | 'flagged' | 'removed';
-  mentions: string;,
+  mentions: string;
   hashtags: string
 }
 
 interface EnhancedCommentSystemProps {
-  videoId: string;,
+  videoId: string;
   comments: Comment;
   currentUserId?: string;
   isChannelOwner?: boolean;
   isModerator?: boolean;
-  commentsEnabled: boolean;,
+  commentsEnabled: boolean;
   sortBy: 'newest' | 'oldest' | 'popular';
   onAddComment: (content: any, parentId?: string) => void;
   onEditComment: (commentId: any,
-          content: any) => void;,
-  onDeleteComment: (commentId: any) => void;,
-  onLikeComment: (commentId: any) => void;,
-  onDislikeComment: (commentId: any) => void;,
-  onPinComment: (commentId: any) => void;,
+          content: any) => void;
+  onDeleteComment: (commentId: any) => void;
+  onLikeComment: (commentId: any) => void;
+  onDislikeComment: (commentId: any) => void;
+  onPinComment: (commentId: any) => void;
   onReportComment: (commentId: any,
-          reason: any) => void;,
+          reason: any) => void;
   onModerateComment: (commentId: any,
-          action: 'approve' | 'flag' | 'remove') => void;,
+          action: 'approve' | 'flag' | 'remove') => void;
   onSortChange: (sort: 'newest' | 'oldest' | 'popular') => void;
   className?: string;
 }
@@ -455,7 +449,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
           return b.likes - a.likes;
         default: return 0
       }
-    
+
         });
 
     return [...pinnedComments as any, ...sorted];

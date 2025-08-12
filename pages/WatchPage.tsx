@@ -8,10 +8,6 @@ import { getYouTubePlayerType } from '../services/settingsService';
 import { isYouTubeUrl, getYouTubeVideoId  } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 // Memoized skeleton component to prevent re-rendering
 const LoadingSkeleton = memo(() => (
@@ -175,7 +171,7 @@ const WatchPage: React.FC = () => {
     if (playlistId === 'playlist-1' && video) {
       addToWatchLater(video);
     }
-  
+
         }, [handleSaveToPlaylist, video, addToWatchLater]);
 
   // Add to watch history when video loads
@@ -184,7 +180,7 @@ const WatchPage: React.FC = () => {
       addToWatchHistory();
       showMiniplayer(video);
     }
-  
+
         }, [video, addToWatchHistory, showMiniplayer]);
 
   // Scroll to top when page loads or video changes
@@ -359,4 +355,3 @@ const WatchPage: React.FC = () => {
 };
 
 export default WatchPage;
-

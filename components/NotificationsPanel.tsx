@@ -1,17 +1,15 @@
-import type { Video } from '../types';
 import React, { useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
+import type { Video } from '../types';
 
 import { ChatBubbleLeftRightIcon, BellAlertIcon  } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
-  id: string;,
+  id: string;
   icon: React.ElementType;
-  iconColorClass: string;,
+  iconColorClass: string;
   title: string;
-  description: string;,
+  description: string;
   time: string;
   isNew?: boolean;
 }

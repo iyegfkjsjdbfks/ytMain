@@ -3,34 +3,31 @@ import { ChartBarIcon, PlusIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 import { ShareIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 const HeartIconSolid = HeartSolidIcon;
 
 interface CommunityPost {
-  id: string;,
+  id: string;
   type: "text" as const | 'image' | 'poll' | 'video';
   content: string;
   imageUrl?: string;
   videoUrl?: string;
   pollOptions?: Array<{ id: string; text: string; votes: number }>;
-  likes: number;,
+  likes: number;
   comments: number;
-  shares: number;,
+  shares: number;
   isLiked: boolean;
-  createdAt: Date;,
+  createdAt: Date;
   engagement: {
-    views: number;,
+    views: number;
     clickThroughRate: number;
   }}
 
 interface CommunityStats {
-  totalPosts: number;,
+  totalPosts: number;
   totalEngagement: number;
-  averageLikes: number;,
+  averageLikes: number;
   averageComments: number;
-  topPerformingPost: string;,
+  topPerformingPost: string;
   reachGrowth: number
 }
 
@@ -79,7 +76,7 @@ return;
           shares: 0,
       isLiked: false,
           createdAt: new Date(),
-      engagement: {,
+      engagement: {
         views: 0,
           clickThroughRate: 0 } };
 
@@ -150,7 +147,7 @@ return;
           shares: Math.floor(Math.random() * 100) + (i < 3 ? 20 : 5),
           isLiked: Math.random() > 0.7,
           createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-          engagement: {,
+          engagement: {
             views: Math.floor(Math.random() * 10000) + (i < 3 ? 2000 : 500),
           clickThroughRate: Math.random() * 15 + 2 } }}).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     };
@@ -348,7 +345,7 @@ return;
                     <button
                       onClick={() => {
                         // Show post options menu
-                      
+
         }}
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                       title="Post options"
@@ -416,7 +413,7 @@ return;
                     <button
                       onClick={() => {
                         // Show comments for this post
-                      
+
         }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       title="View comments"
@@ -428,7 +425,7 @@ return;
                     <button
                       onClick={() => {
                         // Share this post
-                      
+
         }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                       title="Share post"
@@ -502,4 +499,3 @@ return;
 };
 
 export default CommunityPage;
-

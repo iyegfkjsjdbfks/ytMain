@@ -1,8 +1,4 @@
-import { useEffect, useRef, useCallback, useState } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState, FC } from 'react';
 
 interface PerformanceMetrics {
   renderTime: number;

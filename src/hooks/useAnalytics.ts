@@ -1,7 +1,4 @@
 import { useEffect, useCallback, useRef, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 import { useLocation } from 'react-router-dom';
 

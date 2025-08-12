@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * AIContentSparkPage component for AI-assisted content creation
  */
@@ -25,4 +24,3 @@ const AIContentSparkPage: React.FC = () => {
 };
 
 export default AIContentSparkPage;
-

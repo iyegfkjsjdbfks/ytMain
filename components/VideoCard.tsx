@@ -1,8 +1,5 @@
 import React, { memo, lazy, FC, KeyboardEvent, MouseEvent } from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { FC } from 'react';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks';
@@ -123,4 +120,3 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: any) => {
 VideoCard.displayName = 'VideoCard'; // For better debugging
 
 export default VideoCard;
-

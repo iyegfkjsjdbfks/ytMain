@@ -1,6 +1,5 @@
 import React, { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 import type { Video } from '../types';
@@ -328,4 +327,3 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
 );
 
 export default VideoCard;
-

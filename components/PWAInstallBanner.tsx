@@ -1,9 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -47,7 +42,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
         if (daysSinceDismissed < 30) {
           return;
         }
-      
+
         }
 
       // Show the banner after a delay

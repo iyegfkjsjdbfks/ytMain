@@ -1,12 +1,5 @@
-import React from 'react';
+import React, { FC, useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
-
-import { useMemo, useCallback, useEffect, useState, memo, FC } from 'react';
 
 import { getVideos } from '../services/realVideoService';
 

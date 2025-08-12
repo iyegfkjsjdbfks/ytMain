@@ -1,12 +1,4 @@
-import React from 'react';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
-
-import { useState, useCallback, useContext, createContext, FC, ReactNode, ChangeEvent, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import React, { ChangeEvent, FormEvent, ReactNode, FC, useState, useCallback, useContext, createContext, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 
 import { cn } from '../../utils/cn';
 import { UnifiedButton } from '../ui/UnifiedButton';
@@ -17,11 +9,11 @@ interface FormContextValue {
   touched: Record<string, boolean>;
   values: Record<string, any>;
   setFieldValue: (name: any,
-          value: string | number) => void;,
+          value: string | number) => void;
   setFieldError: (name: any,
-          error: Error) => void;,
+          error: Error) => void;
   setFieldTouched: (name: any,
-          touched: any) => void;,
+          touched: any) => void;
   validateField: (name: any) => void
 }
 
@@ -411,7 +403,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
         className={selectClasses}
         style={{
           backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")' 
-        
+
         }}
       >
         {placeholder && (

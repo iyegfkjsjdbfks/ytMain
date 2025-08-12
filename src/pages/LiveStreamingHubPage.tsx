@@ -9,16 +9,13 @@ import { UnifiedCard } from '../../components/ui/UnifiedComponents';
 import LiveStreamViewer from '../features/livestream/components/LiveStreamViewer';
 import StreamAnalyticsDashboard from '../features/livestream/components/StreamAnalyticsDashboard';
 import StreamManagementDashboard from '../features/livestream/components/StreamManagementDashboard';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 // Import live streaming components
 
 interface QuickAction {
-  title: string;,
+  title: string;
   description: string;
-  icon: React.ReactNode;,
+  icon: React.ReactNode;
   action: () => void;
   variant?: 'default' | 'destructive' | 'outline' | 'secondary';
 }
@@ -308,4 +305,3 @@ const LiveStreamingHubPageWithErrorBoundary: any = () => (
 );
 
 export default LiveStreamingHubPageWithErrorBoundary;
-

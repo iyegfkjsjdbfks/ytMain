@@ -1,10 +1,8 @@
 import React, { useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 // Import statements fixed
 
 interface StreamQuality {
-  resolution: string;,
+  resolution: string;
   bitrate: number;
   fps: number
 }
@@ -167,4 +165,3 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
 };
 
 export default StreamSettings;
-

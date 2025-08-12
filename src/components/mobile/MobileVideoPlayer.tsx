@@ -1,8 +1,4 @@
 import React, { useState, useEffect, useCallback, useRef, memo, ChangeEvent } from 'react';
-import { ChangeEvent } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -144,7 +140,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
       if (videoRef.current) {
         setDuration(videoRef.current.duration);
       }
-    
+
         }, []);
 
     const handleTimeUpdate = useCallback(() => {
@@ -160,7 +156,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
             : 0;
         setBuffered(bufferedEnd);
       }
-    
+
         }, []);
 
     const handleEnded = useCallback(() => {
@@ -305,4 +301,3 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
 MobileVideoPlayer.displayName = 'MobileVideoPlayer';
 
 export default MobileVideoPlayer;
-

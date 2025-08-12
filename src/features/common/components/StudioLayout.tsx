@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import StudioHeader from './StudioHeader';
 import StudioSidebar from './StudioSidebar';
-import { FC } from 'react';
 
 /**
  * Studio layout component for the YouTube Studio section
@@ -28,4 +27,3 @@ export const StudioLayout: React.FC = () => {
 };
 
 export default StudioLayout;
-

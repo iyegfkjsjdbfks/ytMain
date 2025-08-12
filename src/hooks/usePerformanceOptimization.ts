@@ -1,3 +1,4 @@
+import { useMemo, useCallback, useEffect, useRef, useState, lazy } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -8,12 +9,6 @@ declare namespace NodeJS {
     env: ProcessEnv
   }
 }
-
-import { useMemo, useCallback, useEffect, useRef, useState, lazy } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 // Performance monitoring hook
 export const usePerformanceMonitor: any = (componentName: any) => {

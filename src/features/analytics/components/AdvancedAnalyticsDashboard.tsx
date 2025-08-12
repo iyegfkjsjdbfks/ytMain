@@ -1,60 +1,57 @@
 import React, { useMemo, useState, FC } from 'react';
 import { EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, CalendarIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useMemo } from 'react';
 
 interface AnalyticsData {
-  overview: {,
+  overview: {
     totalViews: number;
-    totalWatchTime: number;,
+    totalWatchTime: number;
     subscribers: number;
-    totalVideos: number;,
+    totalVideos: number;
     averageViewDuration: number;
     clickThroughRate: number;
   };
   timeSeriesData: Array<{,
     date: string;
-    views: number;,
+    views: number;
     watchTime: number;
-    subscribers: number;,
+    subscribers: number;
     revenue: number;
   }>;
-  demographics: {,
+  demographics: {
     ageGroups: Array<{ range: string; percentage: number }>;
     genders: Array<{ gender: string; percentage: number }>;
     countries: Array<{ country: string; percentage: number; views: number }>;
   };
-  devices: {,
+  devices: {
     mobile: number;
-    desktop: number;,
+    desktop: number;
     tablet: number;
     tv: number;
   };
   topVideos: Array<{,
     id: string;
-    title: string;,
+    title: string;
     views: number;
-    watchTime: number;,
+    watchTime: number;
     likes: number;
-    comments: number;,
+    comments: number;
     thumbnail: string;
     publishedAt: string;
   }>;
-  engagement: {,
+  engagement: {
     likes: number;
-    dislikes: number;,
+    dislikes: number;
     comments: number;
-    shares: number;,
+    shares: number;
     subscribersGained: number;
     subscribersLost: number;
   }}
 
 interface MetricCardProps {
-  title: string;,
+  title: string;
   value: string | number;
   change?: number;
-  icon: React.ComponentType<any>;,
+  icon: React.ComponentType<any>;
   iconColor: string;
   format?: 'number' | 'duration' | 'percentage' | 'currency';
 }
@@ -129,7 +126,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
   // Mock analytics data
   const analyticsData: AnalyticsData = useMemo(
     () => ({
-      overview: {,
+      overview: {
         totalViews: 1250000,
           totalWatchTime: 45000000, // seconds,
   subscribers: 125000,
@@ -146,7 +143,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           watchTime: Math.floor(Math.random() * 2000000) + 500000,
         subscribers: Math.floor(Math.random() * 500) + 100,
           revenue: Math.floor(Math.random() * 1000) + 200 })),
-      demographics: {,
+      demographics: {
         ageGroups: [
           { range: '13-17',
           percentage: 15.2 },
@@ -178,7 +175,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           percentage: 6.7, views: 83750 },
           { country: 'Germany',
           percentage: 5.4, views: 67500 }] },
-          devices: {,
+          devices: {
         mobile: 68.5,
           desktop: 24.3,
         tablet: 5.8,
@@ -211,7 +208,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           comments: 750,
           thumbnail: 'https://picsum.photos/160/90?random=3',
           publishedAt: '2024-01-08' }],
-      engagement: {,
+      engagement: {
         likes: 45600,
           dislikes: 1200,
         comments: 12800,
@@ -538,4 +535,3 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
 };
 
 export default AdvancedAnalyticsDashboard;
-

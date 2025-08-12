@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 const ThumbsDownIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }: any) => (
   <svg
     className={className}

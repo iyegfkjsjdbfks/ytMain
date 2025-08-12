@@ -267,7 +267,7 @@ export function isValidUrl(str: any): boolean {
   try {
     const url = new URL(str);
     return Boolean(url);
-  } catch {
+  } catch (e) {
     return false;
   }
 }

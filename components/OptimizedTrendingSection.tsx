@@ -1,10 +1,5 @@
 import React, { useEffect, useMemo, useCallback, useState, memo, FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 // @ts-nocheck
 
 import { getVideos } from '../services/realVideoService';
@@ -149,4 +144,3 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
 TrendingSection.displayName = 'TrendingSection';
 
 export default TrendingSection;
-

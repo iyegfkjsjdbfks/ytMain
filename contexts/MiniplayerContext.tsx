@@ -1,16 +1,11 @@
-import React from 'react';
-import { createContext, useState, useContext, useCallback, type ReactNode, FC, ReactNode } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
+import React, { createContext, useState, useContext, useCallback, type ReactNode, FC, ReactNode } from 'react';
 
 import type { Video } from '../src/types/core';
 
 interface MiniplayerContextType {
-  miniplayerVideo: Video | null;,
+  miniplayerVideo: Video | null;
   isMiniplayerVisible: boolean;
-  showMiniplayer: (video: Video) => void;,
+  showMiniplayer: (video: Video) => void;
   hideMiniplayer: () => void; // Hides but keeps video in state,
           clearMiniplayer: () => void; // Clears video and hides
 }
@@ -50,6 +45,5 @@ export const useMiniplayer: any = (): MiniplayerContextType => {
   }
   return context;
 };
-
 
 export default MiniplayerProvider;

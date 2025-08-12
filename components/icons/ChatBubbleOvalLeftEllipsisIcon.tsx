@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 // Solid Chat Bubble Icon
 const SolidChatBubbleIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }: any) => (
   <svg

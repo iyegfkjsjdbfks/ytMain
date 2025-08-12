@@ -1,10 +1,7 @@
+import React, { FC, type React } from 'react';
 import type { Video } from '../types';
 import type { Channel } from '../types';
-import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-
-import type React from 'react';
 
 import { BellIcon } from '@heroicons/react/24/outline';
 
@@ -13,37 +10,36 @@ import { formatCount } from '../utils/numberUtils';
 import { SummarizeIcon } from './icons/SummarizeIcon';
 
 interface Channel {
-  id: string;,
+  id: string;
   name: string;
-  avatarUrl: string;,
+  avatarUrl: string;
   subscriberCount: string; isVerified: boolean
 }
 
 interface Video {
-  id: string;,
+  id: string;
   title: string;
-  description: string;,
+  description: string;
   views: string; uploadedAt: string
 }
 
 interface RefactoredVideoDescriptionProps {
-  video: Video;,
+  video: Video;
   channel: Channel | null;
-  isSubscribed: boolean;,
+  isSubscribed: boolean;
   showFullDescription: boolean;
   summary?: string;
   summaryError?: string;
-  isSummarizing: boolean;,
+  isSummarizing: boolean;
   canSummarize: boolean;
-  onSubscribe: () => void;,
+  onSubscribe: () => void;
   onToggleDescription: () => void; onSummarizeDescription: () => void
 }
 
 /**
  * Refactored Video Description Component
  *
- * This component demonstrates improved patterns:
- * - Extracted reusable sub-components
+ * This component demonstrates improved patterns: * - Extracted reusable sub-components
  * - Better separation of concerns
  * - Consistent styling patterns
  * - Improved accessibility
@@ -52,7 +48,7 @@ interface RefactoredVideoDescriptionProps {
 
 // Reusable Channel Info Component
 interface ChannelInfoProps {
-  channel: Channel | null;,
+  channel: Channel | null;
   isSubscribed: boolean; onSubscribe: () => void
 }
 
@@ -133,7 +129,7 @@ const NotificationButton: React.FC = () => {
 
 // Reusable Description Content Component
 interface DescriptionContentProps {
-  video: Video;,
+  video: Video;
   showFullDescription: boolean; onToggleDescription: () => void
 }
 
@@ -187,7 +183,7 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
 
 // Reusable AI Summary Section Component
 interface AISummarySectionProps {
-  canSummarize: boolean;,
+  canSummarize: boolean;
   isSummarizing: boolean;
   summary?: string;
   summaryError?: string; onSummarizeDescription: () => void

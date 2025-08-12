@@ -1,9 +1,4 @@
-import React from 'react';
-import { useCallback, useMemo, useState, memo, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
+import React, { useCallback, useMemo, useState, memo, FC } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
@@ -121,4 +116,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-

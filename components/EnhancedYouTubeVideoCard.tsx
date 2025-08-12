@@ -1,5 +1,4 @@
 import React, { memo, FC } from 'react';
-import { FC } from 'react';
 
 import { ArrowTopRightOnSquareIcon, PlayIcon  } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
@@ -27,7 +26,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
       // Open YouTube video in new tab
       window.open(video.videoUrl, '_blank', 'noopener,noreferrer');
     }
-  
+
         };
 
   const formatViews: any = (views: string | number): string => {
@@ -45,25 +44,25 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
   const formatTimeAgo: any = (dateStr: any): string => {
     try {
       return formatDistanceToNow(new Date(dateStr || Date.now()), { addSuffix: true });
-    } catch {
+    } catch (e) {
       return 'Recently';
     }
   };
 
   const sizeClasses = {
-    sm: {,
+    sm: {
       container: 'flex gap-2',
           thumbnail: 'w-[168px] h-[94px] flex-shrink-0',
       content: 'flex-1 min-w-0',
           title: 'text-sm font-medium line-clamp-2 leading-5',
       meta: 'text-xs text-gray-600' },
-          md: {,
+          md: {
       container: 'flex gap-3',
           thumbnail: 'w-48 h-28 flex-shrink-0',
       content: 'flex-1 min-w-0',
           title: 'text-base font-medium line-clamp-2',
       meta: 'text-sm text-gray-600' },
-          lg: {,
+          lg: {
       container: 'block',
           thumbnail: 'w-full h-48',
       content: 'mt-3',

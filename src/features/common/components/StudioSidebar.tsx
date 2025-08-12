@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Link, Link, NavLink  } from 'react-router-dom';
-import { FC } from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -396,4 +395,3 @@ const StudioSidebar: React.FC = () => {
 };
 
 export default StudioSidebar;
-

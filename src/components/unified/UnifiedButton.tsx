@@ -1,7 +1,6 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import LoadingSpinner from '@components/LoadingSpinner';
-import { ReactNode } from 'react';
 
 /**
  * Unified Button Component
@@ -200,4 +199,3 @@ GhostButton.displayName = 'GhostButton';
 LinkButton.displayName = 'LinkButton';
 
 export default UnifiedButton;
-

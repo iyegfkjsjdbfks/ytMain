@@ -1,8 +1,5 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent } from 'react';
 import { useNavigate, Link  } from 'react-router-dom';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
@@ -250,4 +247,3 @@ const RegisterPage: React.FC = () => {
 };
 
 export default RegisterPage;
-

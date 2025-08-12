@@ -1,8 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { LivePoll, QAQuestion } from '@/types/livestream';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 // Import statement fixed
 //

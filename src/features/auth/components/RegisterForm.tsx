@@ -1,9 +1,5 @@
-import React, { useState, FC, ChangeEvent } from 'react';
+import React, { useState, FC, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import { useAuthStore } from '../store/authStore';
 import type { RegisterData } from '../types';
@@ -278,4 +274,3 @@ export const RegisterForm: React.FC = () => {
 };
 
 export default RegisterForm;
-

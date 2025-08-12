@@ -1,36 +1,32 @@
-import React from 'react';
-import { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import { VideoCameraIcon, ChartBarIcon, CogIcon, BellIcon, PlayIcon, EyeIcon, HeartIcon, ChatBubbleLeftIcon, ArrowUpIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraSolidIcon } from '@heroicons/react/24/solid';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 const VideoCameraIconSolid = VideoCameraSolidIcon;
 
 import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface StudioVideo {
-  id: string;,
-          title: string;,
-  thumbnail: string;,
-          status: 'published' | 'draft' | 'scheduled' | 'processing';,
-  views: number;,
-          likes: number;,
-  comments: number;,
-          uploadDate: string;,
-  duration: string;,
+  id: string;
+          title: string;
+  thumbnail: string;
+          status: 'published' | 'draft' | 'scheduled' | 'processing';
+  views: number;
+          likes: number;
+  comments: number;
+          uploadDate: string;
+  duration: string;
           visibility: 'public' | 'unlisted' | 'private'
 }
 
 interface AnalyticsData {
-  totalViews: number;,
-          totalSubscribers: number;,
-  totalVideos: number;,
-          totalRevenue: number;,
-  viewsChange: number;,
-          subscribersChange: number;,
+  totalViews: number;
+          totalSubscribers: number;
+  totalVideos: number;
+          totalRevenue: number;
+  viewsChange: number;
+          subscribersChange: number;
   recentViews: number
 }
 
@@ -118,7 +114,7 @@ return `${(num / 1000).toFixed(1)}K`;
       case 'published': return 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900/30';
       case 'draft': return 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900/30';
       case 'scheduled': return 'text-blue-600 bg-blue-100 dark:text-blue-400 dark:bg-blue-900/30';
-      case 'processing': return 'text-purple-600 bg-purple-100 dark:text-purple-400 dark:bg-purple-900/30';,
+      case 'processing': return 'text-purple-600 bg-purple-100 dark: text-purple-400 dark:bg-purple-900/30';
           default: return 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-gray-900/30'
     }
   };
@@ -441,4 +437,3 @@ return `${(num / 1000).toFixed(1)}K`;
 };
 
 export default StudioPage;
-

@@ -1,10 +1,8 @@
-import React, { lazy, FC } from 'react';
+import React, { lazy, FC, type React } from 'react';
 import { useNavigate, Navigate  } from 'react-router-dom';
-import { FC } from 'react';
 
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results
-import type React from 'react';
 
 import { buildVideoUrl } from '../utils/componentUtils';
 
@@ -50,7 +48,7 @@ return `${Math.floor(diffDays / 7)} weeks ago`;
 return `${Math.floor(diffDays / 30)} months ago`;
 }
       return `${Math.floor(diffDays / 365)} years ago`;
-    } catch {
+    } catch (e) {
       return uploadDate;
     }
   };

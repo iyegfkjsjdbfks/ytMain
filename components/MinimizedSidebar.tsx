@@ -1,7 +1,5 @@
 import React, { memo, FC, ReactNode } from 'react';
 import { Link, useLocation  } from 'react-router-dom';
-import { ReactNode } from 'react';
-import { FC } from 'react';
 
 import { QueueListIcon as QueueListSolidIcon, ChartBarIcon as ChartBarSolidIcon, VideoCameraIcon as VideoCameraSolidIcon  } from '@heroicons/react/24/solid';
 const QueueListIconSolid = QueueListSolidIcon;
@@ -17,9 +15,9 @@ import ShortsIcon from './icons/ShortsIcon';
 import SubscriptionsIcon from './icons/SubscriptionsIcon';
 
 interface MinimizedNavItemProps {
-  to: string;,
+  to: string;
   icon: React.ReactNode;
-  label: string;,
+  label: string;
   currentPath: string;
   title?: string;
 }

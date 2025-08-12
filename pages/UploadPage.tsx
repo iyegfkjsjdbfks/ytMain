@@ -1,28 +1,25 @@
 import React, { useRef, useState, FC, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CloudArrowUpIcon, VideoCameraIcon, EyeIcon, GlobeAltIcon, LockClosedIcon, XMarkIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
-import { ChangeEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface UploadedFile {
-  file: File;,
+  file: File;
   preview: string;
-  progress: number;,
+  progress: number;
   status: 'uploading' | 'processing' | 'completed' | 'error'
 }
 
 interface VideoMetadata {
-  title: string;,
+  title: string;
   description: string;
-  visibility: 'public' | 'unlisted' | 'private';,
+  visibility: 'public' | 'unlisted' | 'private';
   category: string;
-  tags: string;,
+  tags: string;
   thumbnail: string | null;
-  monetization: boolean;,
+  monetization: boolean;
   commentsEnabled: boolean;
   ageRestriction: boolean
 }
@@ -515,4 +512,3 @@ return null;
 };
 
 export default UploadPage;
-

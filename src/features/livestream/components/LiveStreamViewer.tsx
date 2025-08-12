@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 // Import statements fixed
 
 interface LiveStreamViewerProps {
@@ -87,4 +84,3 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 };
 
 export default LiveStreamViewer;
-

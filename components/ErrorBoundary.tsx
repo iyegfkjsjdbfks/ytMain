@@ -1,15 +1,12 @@
-import React from 'react';
-import { ReactNode } from 'react';
-
-import { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
+import React, { ReactNode, Component, type ErrorInfo } from 'react';
 
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 // Error reporting service
 interface ErrorReport {
-  error: Error;,
+  error: Error;
   errorInfo: ErrorInfo;
-  timestamp: number;,
+  timestamp: number;
   url: string;
   userAgent: string;
   userId?: string;
@@ -31,18 +28,19 @@ class ErrorReportingService {
     return ErrorReportingService.instance;
   }
 
-  public async reportError(error: Error,
-          errorInfo: ErrorInfo): Promise<void> {
-    const report: ErrorReport = {,
+  public async reportError(error: Error, errorInfo: ErrorInfo): Promise<void> {
+    const report: ErrorReport = {
       error: {
         name: error.name,
-          message: error.message,
-        stack: error.stack || '' } as Error,
+        message: error.message,
+        stack: error.stack || ''
+      } as Error,
       errorInfo,
       timestamp: Date.now(),
-          url: window.location.href,
+      url: window.location.href,
       userAgent: navigator.userAgent,
-          sessionId: this.sessionId };
+      sessionId: this.sessionId
+    };
 
     try {
       // In development, log to console
@@ -101,9 +99,10 @@ class ErrorBoundary extends Component<Props, State> {
   private resetTimeoutId: number | null = null;
   private prevResetKeys: Array<string | number> = [];
 
-  public override state: State = {,
+  public override state: State = {
     hasError: false,
-          retryCount: 0 };
+    retryCount: 0
+  };
 
   constructor(props: Props) {
     super(props);
@@ -115,7 +114,9 @@ class ErrorBoundary extends Component<Props, State> {
     return {
       hasError: true,
       error,
-      errorId }}
+      errorId
+    };
+  }
 
   public override componentDidUpdate(prevProps: Props) {
     const { resetKeys, resetOnPropsChange } = this.props;
@@ -130,15 +131,13 @@ class ErrorBoundary extends Component<Props, State> {
         this.prevResetKeys = resetKeys;
         this.resetErrorBoundary();
       }
-    
-        }
+    }
 
     // Reset error boundary when any props change (if enabled)
     if (hasError && resetOnPropsChange && prevProps !== this.props) {
       this.resetErrorBoundary();
     }
-  
-        }
+  }
 
   public override componentDidCatch(error: Error,
           errorInfo: ErrorInfo) {
@@ -166,7 +165,8 @@ class ErrorBoundary extends Component<Props, State> {
 
     this.setState({
       hasError: false,
-          retryCount: 0 });
+      retryCount: 0
+    });
   };
 
   private handleRetry = () => {
@@ -176,7 +176,8 @@ class ErrorBoundary extends Component<Props, State> {
     if (retryCount < maxRetries) {
       this.setState(prevState => ({
         hasError: false,
-          retryCount: prevState.retryCount + 1 }));
+        retryCount: prevState.retryCount + 1
+      }));
     }
   };
 

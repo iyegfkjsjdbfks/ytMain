@@ -1,7 +1,5 @@
 import React, { useEffect, FC } from 'react';
 import { LoginForm } from '../components/LoginForm';
-import { FC } from 'react';
-import { useEffect } from 'react';
 
 import { useAuthStore } from '../store/authStore';
 
@@ -47,4 +45,3 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
-

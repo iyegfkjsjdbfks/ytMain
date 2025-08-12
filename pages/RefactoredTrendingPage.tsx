@@ -1,7 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, type React } from 'react';
 import { Navigate } from 'react-router-dom';
-import type React from 'react';
-import { FC } from 'react';
 
 import ReusableVideoGrid from '../components/ReusableVideoGrid';
 import StandardPageLayout from '../components/StandardPageLayout';
@@ -95,4 +93,3 @@ const RefactoredTrendingPage: React.FC = () => {
 };
 
 export default RefactoredTrendingPage;
-

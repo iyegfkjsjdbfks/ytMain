@@ -1,5 +1,4 @@
-import React from 'react';
-import { ReactNode } from 'react';
+import React, { ReactNode, Component, type ErrorInfo, type ReactNode } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -8,8 +7,6 @@ declare namespace NodeJS {
     env: ProcessEnv;
   }
 }
-
-import { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
 
 import { SignalSlashIcon, ArrowPathIcon, HomeIcon } from '@heroicons/react/24/outline';
 
@@ -29,9 +26,9 @@ export interface LiveStreamErrorBoundaryProps {
 type Props = LiveStreamErrorBoundaryProps;
 
 interface State {
-  hasError: boolean;,
+  hasError: boolean;
   error: Error | null;
-  errorInfo: ErrorInfo | null;,
+  errorInfo: ErrorInfo | null;
   retryCount: number;
   isReconnecting: boolean
 }
@@ -229,4 +226,3 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
 }
 
 export default LiveStreamErrorBoundary;
-

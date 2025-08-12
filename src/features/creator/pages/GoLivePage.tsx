@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * GoLivePage component for starting and managing live streams
  */
@@ -23,4 +22,3 @@ const GoLivePage: React.FC = () => {
 };
 
 export default GoLivePage;
-

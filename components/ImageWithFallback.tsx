@@ -1,13 +1,7 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useCallback, useEffect, useState, lazy, FC } from 'react';
+import React, { FC, useState, useEffect, useCallback, lazy } from 'react';
 
 interface ImageWithFallbackProps {
-  src: string;,
+  src: string;
   alt: string;
   fallbackSrc?: string;
   width?: number;

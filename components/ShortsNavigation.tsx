@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { MouseEvent, FC } from 'react';
 import { ChevronUpIcon, ChevronDownIcon  } from '@heroicons/react/24/outline';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
 
 interface ShortsNavigationProps {
-  onPrevious: () => void;,
+  onPrevious: () => void;
   onNext: () => void;
-  canGoPrevious: boolean;,
+  canGoPrevious: boolean;
   canGoNext: boolean;
   className?: string;
 }

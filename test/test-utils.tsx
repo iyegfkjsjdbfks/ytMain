@@ -1,6 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
-import type { ReactElement } from 'react';
-import { ReactNode } from 'react';
+import React, { ReactNode, ReactElement, type { ReactElement } from 'react';
 
 import { QueryClientProvider, QueryClient  } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
@@ -18,7 +16,7 @@ export const mockVideo: any = (overrides = {}) => ({
           likes: 50,
   dislikes: 5,
           uploadDate: '2024-01-01T00:00:00Z',
-          channel: {,
+          channel: {
     id: 'channel-1',
           name: 'Test Channel',
     avatar: 'https://example.com/avatar.jpg',
@@ -33,7 +31,7 @@ export const mockUser: any = (overrides = {}) => ({
           avatar: 'https://example.com/user-avatar.jpg',
           subscriptions: [],
   watchHistory: [],
-          preferences: {,
+          preferences: {
     theme: 'light',
           autoplay: true,
     quality: 'auto' },
@@ -69,12 +67,12 @@ const AllTheProviders: any = ({
   children,
   queryClient }: AllTheProvidersProps) => {
   const testQueryClient = queryClient || new QueryClient({
-    defaultOptions: {,
+    defaultOptions: {
       queries: {
         retry: false,
           gcTime: 0,
         staleTime: 0 },
-          mutations: {,
+          mutations: {
         retry: false } } });
 
   return (
@@ -101,7 +99,7 @@ const customRender: any = (,
     wrapper: ({ children }: any) => (
       <AllTheProviders
         queryClient={queryClient || new QueryClient({
-          defaultOptions: {,
+          defaultOptions: {
             queries: { retry: false,
           gcTime: 0, staleTime: 0 },
           mutations: { retry: false } } })}
@@ -246,7 +244,7 @@ export const mockPerformance: any = () => {
     getEntriesByName: vi.fn(() => []),
           clearMarks: vi.fn(),
     clearMeasures: vi.fn(),
-          memory: {,
+          memory: {
       usedJSHeapSize: 1000000,
           totalJSHeapSize: 2000000,
       jsHeapSizeLimit: 4000000 } 
@@ -307,12 +305,12 @@ export const waitForLoadingToFinish: any = () => {
 
 export const createMockQueryClient: any = () => {
   return new QueryClient({
-    defaultOptions: {,
+    defaultOptions: {
       queries: {
         retry: false,
           gcTime: 0,
         staleTime: 0 },
-          mutations: {,
+          mutations: {
         retry: false } } });
 };
 
@@ -343,4 +341,3 @@ export const cleanupTestEnvironment: any = () => {
 // Re-export everything from React Testing Library
 export * from '@testing-library/react';
 export { customRender as render };
-

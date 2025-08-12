@@ -1,10 +1,5 @@
 import React, { useEffect, useMemo, useCallback, useState, FC } from 'react';
 import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -27,9 +22,9 @@ interface EnhancedPWAInstallBannerProps {
 }
 
 interface BannerState {
-  isVisible: boolean;,
+  isVisible: boolean;
   isDismissed: boolean;
-  isAnimating: boolean;,
+  isAnimating: boolean;
   showDetails: boolean;
   installProgress: 'idle' | 'installing' | 'success' | 'error'
 }
@@ -197,7 +192,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
         return `${base} top-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm`;
       case 'center':
         return `${base} top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-md`;
-      case 'bottom':,
+      case 'bottom':
   default:
         return `${base} bottom-4 left-4 right-4 md: left-auto md:right-4 md:max-w-sm`
     }
@@ -475,4 +470,3 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 };
 
 export default EnhancedPWAInstallBanner;
-

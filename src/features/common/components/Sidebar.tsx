@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FC } from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -360,4 +359,3 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
-

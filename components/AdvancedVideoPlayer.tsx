@@ -1,13 +1,6 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
+import React, { MouseEvent, KeyboardEvent, FC, useState, useEffect, useCallback, useRef } from 'react';
 /// <reference types="node" />
 
-import { useRef, useCallback, useEffect, useState, FC, KeyboardEvent, MouseEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -24,7 +17,7 @@ import { useVideoPlayer } from '../src/hooks';
 import type { Video } from '../src/types/core';
 
 interface Chapter {
-  title: string;,
+  title: string;
   startTime: number;
   endTime: number
 }
@@ -42,7 +35,7 @@ interface AdvancedVideoPlayerProps {
 }
 
 interface VideoQuality {
-  label: string;,
+  label: string;
   value: string;
   resolution: string
 }
@@ -109,7 +102,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     if (videoRef.current) {
       videoPlayerInstance.setVideoRef(videoRef.current);
     }
-  
+
         }, [videoPlayerInstance]);
 
   // Format time for display
@@ -235,7 +228,7 @@ return;
       setShowQualityMenu(false);
       setShowSpeedMenu(false);
     }
-  
+
         }, []);
 
   // Chapter navigation
@@ -281,7 +274,7 @@ return;
       if (controlsTimeoutRef.current) {
         clearTimeout(controlsTimeoutRef.current);
       }
-    
+
         }}, [handleKeyDown, handleClickOutside]);
 
   useEffect(() => {

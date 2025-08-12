@@ -1,8 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-
-import { useRef, useState, FC } from 'react';
+import React, { FC, useState, useRef } from 'react';
 
 import { EllipsisHorizontalIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 
@@ -12,13 +8,13 @@ import ThumbsUpIcon from './icons/ThumbsUpIcon';
 export interface Comment {
   id: string;
   parentId?: string;
-  userAvatarUrl: string;,
+  userAvatarUrl: string;
   userName: string;
-  commentText: string;,
+  commentText: string;
   timestamp: string;
-  likes: number;,
+  likes: number;
   isLikedByCurrentUser: boolean;
-  isDislikedByCurrentUser: boolean;,
+  isDislikedByCurrentUser: boolean;
   isEdited: boolean;
   replyTo?: string;
   replies?: Comment;
@@ -26,27 +22,27 @@ export interface Comment {
 }
 
 export interface CommentsSectionProps {
-  comments: Comment;,
+  comments: Comment;
   commentCount: number;
-  commentSortOrder: 'top' | 'newest';,
+  commentSortOrder: 'top' | 'newest';
   replyingToCommentId: string | null;
-  currentReplyText: string;,
+  currentReplyText: string;
   editingComment: { id: string; parentId?: string } | null;
-  activeCommentMenu: string | null;,
+  activeCommentMenu: string | null;
   expandedReplies: Record<string, boolean>;
-  maxCommentLength: number;,
-  onCommentSubmit: (commentText: any) => void;,
-  onReplySubmit: (parentId: any) => void;,
+  maxCommentLength: number;
+  onCommentSubmit: (commentText: any) => void;
+  onReplySubmit: (parentId: any) => void;
   onEditSave: (commentId: any,
           newText: any, parentId?: string) => void;
   onDeleteComment: (commentId: any, parentId?: string) => void;
   onToggleLikeDislike: (id: string,
-          parentId: string | undefined, action: 'like' | 'dislike') => void;,
-  onSortChange: (order: 'top' | 'newest') => void;,
+          parentId: string | undefined, action: 'like' | 'dislike') => void;
+  onSortChange: (order: 'top' | 'newest') => void;
   onSetReplyingTo: (commentId: string | null, text?: string) => void;
-  onSetCurrentReplyText: (text: any) => void;,
+  onSetCurrentReplyText: (text: any) => void;
   onSetEditingComment: (comment: { id: string; parentId?: string } | null) => void;
-  onSetActiveCommentMenu: (commentId: string | null) => void;,
+  onSetActiveCommentMenu: (commentId: string | null) => void;
   onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => void;
 }
 

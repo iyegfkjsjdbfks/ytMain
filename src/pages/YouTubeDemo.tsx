@@ -1,10 +1,7 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { isYouTubeUrl, getYouTubeVideoId  } from '../lib/youtube-utils';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 const YouTubeDemo: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState<string>('');
@@ -129,11 +126,11 @@ const YouTubeDemo: React.FC = () => {
 const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
   width: 800,
           height: 450,
-  playerVars: {,
+  playerVars: {
     autoplay: 0,
           controls: 1,
     modestbranding: 1 },
-          events: {,
+          events: {
     onReady: (event: any) => {
       },
     onStateChange: (event: any) => {
@@ -175,4 +172,3 @@ const YouTubeDemoWithErrorBoundary: any = () => (
 );
 
 export default YouTubeDemoWithErrorBoundary;
-

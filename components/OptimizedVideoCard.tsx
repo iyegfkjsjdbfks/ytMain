@@ -1,10 +1,4 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, memo, lazy, KeyboardEvent, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 // @ts-nocheck
 
 import { PlayIcon, ClockIcon, EllipsisVerticalIcon, PlusIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -60,7 +54,7 @@ return false;
         if (entry?.[0]) {
           this.cache.delete(entry[0]);
         }
-      
+
         }
     }
   }
@@ -88,7 +82,7 @@ interface OptimizedVideoCardProps {
 
 // Enhanced lazy image component with retry mechanism
 interface LazyImageProps {
-  src: string;,
+  src: string;
   alt: string;
   className?: string;
   priority?: 'high' | 'low';
@@ -156,7 +150,7 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
 
       return () => {
         clearTimeout(timeoutId);
-      
+
         }}
 
     // Return empty cleanup function for else case
@@ -208,19 +202,19 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
 LazyImage.displayName = 'LazyImage';
 
 const sizeClasses = {
-  sm: {,
+  sm: {
     container: 'w-full max-w-sm',
           thumbnail: 'aspect-video',
     title: 'text-sm font-medium line-clamp-2',
           channel: 'text-xs text-gray-600',
     meta: 'text-xs text-gray-500' },
-          md: {,
+          md: {
     container: 'w-full max-w-md',
           thumbnail: 'aspect-video',
     title: 'text-base font-medium line-clamp-2',
           channel: 'text-sm text-gray-600',
     meta: 'text-sm text-gray-500' },
-          lg: {,
+          lg: {
     container: 'w-full max-w-lg',
           thumbnail: 'aspect-video',
     title: 'text-lg font-semibold line-clamp-2',
@@ -512,7 +506,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 document.body.appendChild(feedback);
                 setTimeout((() => feedback.remove()) as any, 3000);
               }
-            
+
         }}
             icon={
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -651,4 +645,3 @@ export default withMemo(OptimizedVideoCard(prevProps: any, nextProps: any) => {
     prevProps.index === nextProps.index
   );
 });
-

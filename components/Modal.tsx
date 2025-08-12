@@ -1,15 +1,9 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useEffect } from 'react';
-
-import { useRef, useEffect, FC, ReactNode, MouseEvent } from 'react';
+import React, { MouseEvent, ReactNode, FC, useEffect, useRef } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ModalProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
   title?: string;
   children: React.ReactNode;

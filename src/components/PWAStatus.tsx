@@ -2,9 +2,6 @@ import React, { useState, useEffect, FC } from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
 import { SignalSlashIcon, ArrowDownTrayIcon, XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 const PWAStatus: React.FC = () => {
   return null;
@@ -155,4 +152,3 @@ const PWAStatus: React.FC = () => {
 };
 
 export default PWAStatus;
-

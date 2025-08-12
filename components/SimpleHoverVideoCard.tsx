@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 // @ts-nocheck
 
 import { formatDistanceToNow } from 'date-fns';
@@ -91,7 +88,7 @@ return duration;
     //     setShowPreview(true);
     //   }) as any, HOVER_DELAY);
     // }
-  
+
         };
 
   const handleMouseLeave: any = () => {
@@ -263,7 +260,7 @@ return duration;
                     return 'Recently';
                   }
                   return formatDistanceToNow(date, { addSuffix: true });
-                } catch {
+                } catch (e) {
                   return 'Recently';
                 }
               })()}
@@ -276,15 +273,15 @@ return duration;
       <style>{`
         @keyframes fade-in {
           from {
-            opacity: 0;,
+            opacity: 0;
             transform: translateY(-10px)
           }
           to {
-            opacity: 1;,
+            opacity: 1;
             transform: translateY(0)
           }
         }
-        
+
         @keyframes progress-bar {
           from {
             width: 0%
@@ -293,11 +290,11 @@ return duration;
             width: 100%
           }
         }
-        
+
         .animate-fade-in {
           animation: fade-in 0.3s ease-out
         }
-        
+
         .animate-progress-bar {
           animation: progress-bar 3s linear infinite
         }
@@ -307,4 +304,3 @@ return duration;
 };
 
 export default SimpleHoverVideoCard;
-

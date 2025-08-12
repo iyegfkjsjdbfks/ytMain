@@ -1,11 +1,7 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState, FC, FormEvent } from 'react';
 import { liveStreamService, type ScheduledStream } from '../../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 import { CalendarIcon, ClockIcon, PlayIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: ScheduledStream) => void;
@@ -13,13 +9,13 @@ interface StreamSchedulerProps {
 }
 
 interface ScheduledStreamForm {
-  title: string;,
+  title: string;
   description: string;
-  category: string;,
+  category: string;
   tags: string;
-  visibility: 'public' | 'unlisted' | 'private';,
+  visibility: 'public' | 'unlisted' | 'private';
   scheduledStartTime: string;
-  thumbnailUrl: string;,
+  thumbnailUrl: string;
   reminderSet: boolean
 }
 
@@ -520,4 +516,3 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 };
 
 export default StreamScheduler;
-

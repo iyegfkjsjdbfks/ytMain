@@ -1,9 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
@@ -18,47 +13,47 @@ import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { TvIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
-  videoId: string;,
+  videoId: string;
   title: string;
-  thumbnail: string;,
+  thumbnail: string;
   publishedAt: string;
-  views: number;,
+  views: number;
   likes: number;
-  dislikes: number;,
+  dislikes: number;
   comments: number;
-  shares: number;,
+  shares: number;
   watchTime: number;
-  averageViewDuration: number;,
+  averageViewDuration: number;
   clickThroughRate: number;
-  retention: number;,
+  retention: number;
   demographics: {
     ageGroups: { [key]: number };
     genders: { [key]: number };
     countries: { [key]: number }};
-  devices: {,
+  devices: {
     mobile: number;
-    desktop: number;,
+    desktop: number;
     tablet: number;
     tv: number;
   };
-  trafficSources: {,
+  trafficSources: {
     search: number;
-    suggested: number;,
+    suggested: number;
     external: number;
-    direct: number;,
+    direct: number;
     playlist: number;
   };
-  revenueData: {,
+  revenueData: {
     estimatedRevenue: number;
-    rpm: number;,
+    rpm: number;
     cpm: number;
     adViews: number;
   };
-  engagement: {,
+  engagement: {
     likeRate: number;
-    dislikeRate: number;,
+    dislikeRate: number;
     commentRate: number;
-    shareRate: number;,
+    shareRate: number;
     subscribeRate: number;
   }}
 
@@ -115,7 +110,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
       averageViewDuration,
       clickThroughRate: 2 + Math.random() * 8,
           retention: generateRetentionData(),
-      demographics: {,
+      demographics: {
         ageGroups: {
           '13-17': Math.floor(Math.random() * 15),
           '18-24': Math.floor(Math.random() * 25) + 15,
@@ -136,23 +131,23 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
           'Australia': 3 + Math.random() * 5,
           'Germany': 3 + Math.random() * 5,
           'Other': 20 + Math.random() * 15 } },
-      devices: {,
+      devices: {
         mobile: 60 + Math.random() * 20,
           desktop: 25 + Math.random() * 15,
         tablet: 8 + Math.random() * 7,
           tv: 2 + Math.random() * 5 },
-      trafficSources: {,
+      trafficSources: {
         search: 30 + Math.random() * 20,
           suggested: 25 + Math.random() * 15,
         external: 15 + Math.random() * 10,
           direct: 10 + Math.random() * 10,
         playlist: 5 + Math.random() * 10 },
-          revenueData: {,
+          revenueData: {
         estimatedRevenue: Math.floor(baseViews * (0.001 + Math.random() * 0.005)),
           rpm: 1 + Math.random() * 4,
         cpm: 2 + Math.random() * 8,
           adViews: Math.floor(baseViews * (0.7 + Math.random() * 0.2)) },
-      engagement: {,
+      engagement: {
         likeRate: (likes / baseViews) * 100,
           dislikeRate: (dislikes / baseViews) * 100,
         commentRate: (comments / baseViews) * 100,

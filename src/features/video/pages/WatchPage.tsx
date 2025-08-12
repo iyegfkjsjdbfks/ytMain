@@ -2,9 +2,6 @@ import React, { useEffect, useState, FC } from 'react';
 import { Link, useParams, useSearchParams  } from 'react-router-dom';
 import Link, { Link, useParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 
@@ -60,26 +57,26 @@ const WatchPage: React.FC = () => {
         id: video.id,
           title: video.title,
         description: `${video.description?.substring(0, 100)}...`,
-        channel: {,
+        channel: {
           id: video.channel?.id,
           name: video.channel?.name,
           avatarUrl: video.channel?.avatarUrl,
           subscribers: video.channel?.subscribersFormatted,
           isVerified: video.channel?.isVerified },
-          stats: {,
+          stats: {
           views: video.views,
           viewsFormatted: video.viewsFormatted,
           likes: video.likes,
           dislikes: video.dislikes,
           commentCount: video.commentCount },
-          metadata: {,
+          metadata: {
           duration: video.duration,
           publishedAt: video.publishedAt,
           publishedAtFormatted: video.publishedAtFormatted,
           category: video.category,
           tags: video.tags,
           source: video.source },
-        technicalData: {,
+        technicalData: {
           videoUrl: video.videoUrl,
           thumbnailUrl: video.thumbnailUrl,
           visibility: video.visibility } });
@@ -153,17 +150,17 @@ const WatchPage: React.FC = () => {
           isLive: unifiedVideo.isLive,
           isShort: unifiedVideo.isShort,
           visibility: unifiedVideo.visibility,
-          statistics: {,
+          statistics: {
             viewCount: unifiedVideo.views,
           likeCount: unifiedVideo.likes,
             dislikeCount: unifiedVideo.dislikes,
           favoriteCount: 0,
             commentCount: unifiedVideo.commentCount },
-          topicDetails: {,
+          topicDetails: {
             topicIds: [],
           relevantTopicIds: [],
             topicCategories: [] },
-          contentDetails: {,
+          contentDetails: {
             duration: unifiedVideo.duration,
           dimension: '2d',
             definition: unifiedVideo.metadata?.quality === 'hd' ? 'hd' : 'sd',
@@ -220,17 +217,17 @@ const WatchPage: React.FC = () => {
           isLive: false,
         isShort: false,
           visibility: 'public',
-        statistics: {,
+        statistics: {
           viewCount: 1000000,
           likeCount: 1000,
           dislikeCount: 10,
           favoriteCount: 0,
           commentCount: 100 },
-          topicDetails: {,
+          topicDetails: {
           topicIds: [],
           relevantTopicIds: [],
           topicCategories: [] },
-          contentDetails: {,
+          contentDetails: {
           duration: 'PT3M30S',
           dimension: '2d',
           definition: 'hd',
@@ -558,11 +555,11 @@ const WatchPage: React.FC = () => {
                   useYouTube={false}
                   onTimeUpdate={(_currentTime: any, _duration: any) => {
                     // Track watch progress
-                  
+
         }}
                   onPlay={() => {
                     // Handle play event
-                  
+
         }}
                 />
               )}
@@ -893,4 +890,3 @@ const WatchPage: React.FC = () => {
 };
 
 export default WatchPage;
-

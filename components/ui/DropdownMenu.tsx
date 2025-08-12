@@ -1,12 +1,9 @@
-import React, { ReactNode, MouseEvent } from 'react';
-import type { ReactNode, RefObject, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { ReactNode } from 'react';
+import React, { ReactNode, MouseEvent, type { ReactNode, RefObject } from 'react';
 
 import { cn } from '../../utils/cn';
 
 interface DropdownMenuProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
   children?: React.ReactNode;
   className?: string;
@@ -15,7 +12,7 @@ interface DropdownMenuProps {
 }
 
 interface DropdownMenuItemProps {
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;,
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
   className?: string;
   variant?: 'default' | 'danger';

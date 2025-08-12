@@ -1,7 +1,5 @@
 import React, { useCallback, FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { FC } from 'react';
-import { useCallback } from 'react';
 
 import { conditionalLogger } from '@/utils/conditionalLogger';
 
@@ -34,4 +32,3 @@ const ProtectedSearchResultsPage: FC = () => {
 };
 
 export default ProtectedSearchResultsPage;
-

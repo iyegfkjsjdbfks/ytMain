@@ -1,16 +1,9 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useEffect } from 'react';
-
-import { useRef, useEffect, FC, ReactNode, KeyboardEvent, MouseEvent } from 'react';
+import React, { MouseEvent, KeyboardEvent, ReactNode, FC, useEffect, useRef } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface BaseModalProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
@@ -59,7 +52,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
       case 'full': return 'max-w-full mx-4';
       default: return 'max-w-2xl'
     }
-  
+
         };
 
   // Handle escape key
@@ -68,7 +61,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
       if (closeOnEscape && event.key === 'Escape') {
         onClose();
       }
-    
+
         };
 
     if (isOpen as any) {
@@ -84,7 +77,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
       document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = 'unset';
-      
+
         }}
     return undefined;
   }, [isOpen, preventBodyScroll]);
@@ -104,7 +97,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
     if (closeOnOverlayClick && event.target === event.currentTarget) {
       onClose();
     }
-  
+
         };
 
   if (!isOpen) {

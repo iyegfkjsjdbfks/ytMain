@@ -84,7 +84,7 @@ export class InputValidator {
     try {
       const urlObj = new URL(url);
       return allowedProtocols.includes(urlObj.protocol.slice(0, -1));
-    } catch {
+    } catch (e) {
       return false;
     }
   }
@@ -392,7 +392,7 @@ return null;
       if (encrypted as any) {
         try {
           return decodeURIComponent(atob(value));
-        } catch {
+        } catch (e) {
           return null;
         }
       }

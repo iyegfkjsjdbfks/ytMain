@@ -1,7 +1,4 @@
-import React from 'react';
-import { Suspense, type ReactNode, FC, ReactNode } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
+import React, { Suspense, type ReactNode, FC, ReactNode } from 'react';
 
 import FastLoadingSpinner from './FastLoadingSpinner';
 
@@ -23,4 +20,3 @@ const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
 };
 
 export default SuspenseWrapper;
-

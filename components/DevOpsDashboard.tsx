@@ -1,7 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 /**
  * Comprehensive DevOps Dashboard
@@ -13,8 +10,6 @@ import { useEffect } from 'react';
  * - Feature flag management
  */
 
-import { useEffect, useState, FC } from 'react';
-
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
 import { performanceMonitor } from '../utils/performanceMonitor';
@@ -22,45 +17,45 @@ import { securityMonitoring } from '../utils/securityMonitoring';
 
 // Types for dashboard data
 interface DashboardMetrics {
-  performance: {,
-          score: number;,
-    lcp: number;,
-          fid: number;,
-    cls: number;,
-          memoryUsage: number;,
+  performance: {
+          score: number;
+    lcp: number;
+          fid: number;
+    cls: number;
+          memoryUsage: number;
     errorRate: number;
   };
-  security: {,
-          score: number;,
-    threatsDetected: number;,
-          vulnerabilities: number;,
+  security: {
+          score: number;
+    threatsDetected: number;
+          vulnerabilities: number;
     complianceScore: number;
   };
-  deployment: {,
-          successRate: number;,
-    averageTime: number;,
-          frequency: number;,
+  deployment: {
+          successRate: number;
+    averageTime: number;
+          frequency: number;
     activeDeployments: number;
   };
-  codeQuality: {,
-          score: number;,
-    complexity: number;,
-          coverage: number;,
+  codeQuality: {
+          score: number;
+    complexity: number;
+          coverage: number;
     technicalDebt: number;
   };
-  featureFlags: {,
-          totalFlags: number;,
-    activeFlags: number;,
+  featureFlags: {
+          totalFlags: number;
+    activeFlags: number;
           experimentsRunning: number;
   }}
 
 interface AlertItem {
-  id: string;,
-          type: "performance" as const | 'security' | 'deployment' | 'quality';,
-  severity: 'low' | 'medium' | 'high' | 'critical';,
-          title: string;,
-  description: string;,
-          timestamp: number;,
+  id: string;
+          type: "performance" as const | 'security' | 'deployment' | 'quality';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+          title: string;
+  description: string;
+          timestamp: number;
   acknowledged: boolean
 }
 
@@ -89,7 +84,7 @@ const DevOpsDashboard: React.FC = () => {
 
       // Transform data for dashboard
       const dashboardMetrics: DashboardMetrics = {,
-          performance: {,
+          performance: {
           score: Math.round(performanceMetrics.find(m => m.name === 'performance-score')?.value || 85),
           lcp: performanceMetrics.find(m => m.name === 'lcp')?.value || 1500,
           fid: performanceMetrics.find(m => m.name === 'fid')?.value || 50,
@@ -97,29 +92,29 @@ const DevOpsDashboard: React.FC = () => {
           memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage')?.value || 45,
           errorRate: performanceMetrics.find(m => m.name === 'error-rate')?.value || 0.1
         },
-        security: {,
+        security: {
           score: Math.round(securityMetrics.securityScore),
           threatsDetected: securityMetrics.threatsDetected,
           vulnerabilities: securityMetrics.vulnerabilities.total,
           complianceScore: Math.round(securityMetrics.complianceScore)
         },
-        deployment: {,
+        deployment: {
           successRate: Math.round(deploymentMetrics.successRate * 100),
           averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes,
           frequency: deploymentMetrics.deploymentFrequency,
           activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length
         },
-        codeQuality: {,
+        codeQuality: {
           score: codeMetrics ? Math.round(
             (codeMetrics.maintainability + codeMetrics.testCoverage) / 2) : 82,
           complexity: Math.round(codeMetrics?.complexity || 15),
           coverage: Math.round(codeMetrics?.testCoverage || 78), technicalDebt: Math.round(codeMetrics?.technicalDebt || 12)
         },
-        featureFlags: {,
+        featureFlags: {
           totalFlags: flagMetrics.totalFlags,
           activeFlags: flagMetrics.activeFlags,
           experimentsRunning: 0, // flagMetrics.experimentsRunning } 
-        
+
         };
 
       setMetrics(dashboardMetrics);
@@ -196,8 +191,7 @@ const DevOpsDashboard: React.FC = () => {
       case 'medium': return 'text-yellow-600 bg-yellow-100';
       case 'low': return 'text-blue-600 bg-blue-100'; default: return 'text-gray-600 bg-gray-100'
     }
-  
-        
+
         };
 
   // Get score color
@@ -216,7 +210,7 @@ return 'text-orange-600';
 
   // Render metric card
   const MetricCard: React.FC<{,
-          title: string;,
+          title: string;
     value: string | number;
     subtitle?: string;
     trend?: 'up' | 'down' | 'stable';
@@ -402,7 +396,7 @@ return <div>Loading...</div>;
           <MetricCard
             title="Threats Detected",
             value={metrics.security.threatsDetected}
-            color="text-red-600",
+            color="text-red-600"
           />
           <MetricCard
             title="Vulnerabilities",
@@ -503,17 +497,17 @@ return <div>Loading...</div>;
           <MetricCard
             title="Total Flags",
             value={metrics.featureFlags.totalFlags}
-            color="text-blue-600",
+            color="text-blue-600"
           />
           <MetricCard
             title="Active Flags",
             value={metrics.featureFlags.activeFlags}
-            color="text-green-600",
+            color="text-green-600"
           />
           <MetricCard
             title="Running Experiments",
             value={metrics.featureFlags.experimentsRunning}
-            color="text-purple-600",
+            color="text-purple-600"
           />
         </div>
       </div>

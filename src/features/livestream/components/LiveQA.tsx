@@ -3,11 +3,9 @@ import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
 import { useLiveQA } from '@/hooks/useLiveStream';
 import { QuestionMarkCircleIcon, HeartIcon, CheckCircleIcon, ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
 
 interface LiveQAProps {
-  streamId: string;,
+  streamId: string;
   isOwner: boolean;
   className?: string;
 }
@@ -105,7 +103,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
         return question.isHighlighted; // Use isHighlighted as pinned,
   default: return true
     }
-  
+
         });
 
   const sortedQuestions = filteredQuestions.sort((a: any, b: any) => {
@@ -354,4 +352,3 @@ const LiveQA: React.FC<LiveQAProps> = ({
 };
 
 export default LiveQA;
-

@@ -1,14 +1,5 @@
-import React from 'react';
+import React, { MouseEvent, ChangeEvent, FormEvent, FC, useState, useEffect, useCallback, useRef, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent } from 'react';
 
 import { XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid'; // For remove button;
 const XMarkIconSolid = XMarkSolidIcon;
@@ -53,7 +44,7 @@ const SearchBar: React.FC = memo(() => {
       if (currentQuery.trim().length === 0 && inputRef.current === document.activeElement) {
         loadRecentSearches().catch(console.error);
       }
-    
+
         }
   }, [loadRecentSearches]);
 
@@ -78,7 +69,7 @@ const SearchBar: React.FC = memo(() => {
 inputRef.current.blur();
 } // Optionally blur input after search
     }
-  
+
         };
 
   const handleSubmit: any = (e: React.FormEvent<HTMLFormElement>) => {
@@ -108,7 +99,7 @@ inputRef.current.blur();
       setShowRecentSearches(false); // Hide recent if user starts typing
       // Suggestions will be handled by the debounced useEffect
     }
-  
+
         };
 
   const handleRemoveRecentSearch = async (searchToRemove: any,
@@ -119,7 +110,7 @@ inputRef.current.blur();
     if (updatedSearches.length === 0) {
       setShowRecentSearches(false);
     }
-  
+
         };
 
   const handleClearAllRecent = async (e: React.MouseEvent): Promise<any> => {
@@ -249,4 +240,3 @@ inputRef.current.blur();
 SearchBar.displayName = 'SearchBar';
 
 export default SearchBar;
-

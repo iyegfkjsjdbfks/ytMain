@@ -1,7 +1,5 @@
 import React, { useCallback, FC } from 'react';
 import { useSearchParams, useParams  } from 'react-router-dom';
-import { FC } from 'react';
-import { useCallback } from 'react';
 
 import { conditionalLogger } from '@/utils/conditionalLogger';
 
@@ -35,4 +33,3 @@ const ProtectedWatchPage: FC = () => {
 };
 
 export default ProtectedWatchPage;
-

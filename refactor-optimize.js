@@ -25,7 +25,7 @@ class CodebaseRefactorer {
     const timestamp = new Date().toISOString();
     const prefix = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : type === 'success' ? '✅' : 'ℹ️';
     console.log(`${prefix} [${timestamp}] ${message}`);
-    
+
     if (type === 'error') this.errors.push(message);
     if (type === 'warning') this.warnings.push(message);
     if (type === 'success') this.fixes.push(message);
@@ -50,29 +50,29 @@ class CodebaseRefactorer {
   // Phase 1: Fix TypeScript Errors
   async fixTypeScriptErrors() {
     this.log('=== PHASE 1: Fixing TypeScript Errors ===');
-    
+
     // Fix test utilities first
     await this.fixTestUtilities();
-    
+
     // Fix component type definitions
     await this.fixComponentTypes();
-    
+
     // Fix utility functions
     await this.fixUtilityFunctions();
-    
+
     // Fix feature flag system
     await this.fixFeatureFlagSystem();
-    
+
     this.log('Phase 1 completed: TypeScript errors fixed', 'success');
   }
 
   async fixTestUtilities() {
     this.log('Fixing test utilities...');
-    
+
     const testUtilsPath = join(__dirname, 'utils', 'testing.tsx');
     if (existsSync(testUtilsPath)) {
       let content = readFileSync(testUtilsPath, 'utf8');
-      
+
       // Add missing mock generators
       if (!content.includes('generateMockVideo')) {
         const mockGenerators = `
@@ -116,7 +116,7 @@ export const generateMockPlaylist = (overrides = {}) => ({
           mockGenerators + '\n// Export everything for easy testing'
         );
       }
-      
+
       writeFileSync(testUtilsPath, content);
       this.log('Test utilities updated with mock generators', 'success');
     }
@@ -124,10 +124,10 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async fixComponentTypes() {
     this.log('Fixing component type definitions...');
-    
+
     // Find and fix VideoDescription component types
     const componentPaths = this.findFiles('components', ['.tsx']);
-    
+
     for (const filePath of componentPaths) {
       if (filePath.includes('VideoDescription')) {
         await this.fixVideoDescriptionTypes(filePath);
@@ -137,9 +137,9 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async fixVideoDescriptionTypes(filePath) {
     if (!existsSync(filePath)) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
-    
+
     // Add missing props to VideoDescriptionProps interface
     if (content.includes('interface VideoDescriptionProps')) {
       const propsInterface = `interface VideoDescriptionProps {
@@ -153,12 +153,12 @@ export const generateMockPlaylist = (overrides = {}) => ({
   onShare?: (videoId: string) => void;
   onToggleDescription?: () => void;
 }`;
-      
+
       content = content.replace(
         /interface VideoDescriptionProps\s*{[^}]*}/,
         propsInterface
       );
-      
+
       writeFileSync(filePath, content);
       this.log(`Fixed VideoDescription props in ${filePath}`, 'success');
     }
@@ -166,9 +166,9 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async fixUtilityFunctions() {
     this.log('Fixing utility functions...');
-    
+
     const utilPaths = this.findFiles('utils', ['.ts', '.tsx']);
-    
+
     for (const filePath of utilPaths) {
       await this.fixUnusedParameters(filePath);
     }
@@ -176,28 +176,28 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async fixUnusedParameters(filePath) {
     if (!existsSync(filePath)) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
     let modified = false;
-    
+
     // Remove unused parameters by prefixing with underscore
     const unusedParamPatterns = [
       /async getSecurityScanResult\(source: string\)/g,
       /async createIssue\(config: any, context: any\)/g,
       /private async \w+\([^)]*\b(\w+): [^,)]+\)(?:[^{]*{[^}]*})/g
     ];
-    
+
     for (const pattern of unusedParamPatterns) {
       const newContent = content.replace(pattern, (match) => {
         return match.replace(/(\b\w+)(?=: [^,)]+[,)])/g, '_$1');
       });
-      
+
       if (newContent !== content) {
         content = newContent;
         modified = true;
       }
     }
-    
+
     if (modified) {
       writeFileSync(filePath, content);
       this.log(`Fixed unused parameters in ${filePath}`, 'success');
@@ -206,35 +206,35 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async fixFeatureFlagSystem() {
     this.log('Fixing feature flag system...');
-    
+
     const featureFlagPath = join(__dirname, 'utils', 'featureFlagSystem.ts');
     if (existsSync(featureFlagPath)) {
       let content = readFileSync(featureFlagPath, 'utf8');
-      
+
       // Fix optional property access
       content = content.replace(
         /flag\.metadata\?\./g,
         'flag.metadata && flag.metadata.'
       );
-      
+
       // Fix undefined index access
       content = content.replace(
         /variantResults\[(\w+)\]/g,
         'variantResults[$1] || { value: null, sampleSize: 0 }'
       );
-      
+
       // Fix variant assignment
       content = content.replace(
         /variant: testVariant,/g,
         'variant: testVariant || "control",'
       );
-      
+
       // Fix userId optional
       content = content.replace(
         /userId: string/g,
         'userId?: string'
       );
-      
+
       writeFileSync(featureFlagPath, content);
       this.log('Feature flag system types fixed', 'success');
     }
@@ -243,34 +243,34 @@ export const generateMockPlaylist = (overrides = {}) => ({
   // Phase 2: Code Consolidation
   async consolidateCode() {
     this.log('=== PHASE 2: Code Consolidation ===');
-    
+
     await this.consolidateHooks();
     await this.removeDeadCode();
     await this.standardizeImports();
-    
+
     this.log('Phase 2 completed: Code consolidated', 'success');
   }
 
   async consolidateHooks() {
     this.log('Consolidating duplicate hooks...');
-    
+
     const rootHooksPath = join(__dirname, 'hooks');
     const srcHooksPath = join(__dirname, 'src', 'hooks');
-    
+
     if (existsSync(rootHooksPath) && existsSync(srcHooksPath)) {
       // Move all root-level hooks to src/hooks
       const rootHooks = readdirSync(rootHooksPath).filter(f => f.endsWith('.ts') || f.endsWith('.tsx'));
-      
+
       for (const hookFile of rootHooks) {
         const srcPath = join(rootHooksPath, hookFile);
         const destPath = join(srcHooksPath, 'legacy', hookFile);
-        
+
         // Ensure legacy directory exists
         const legacyDir = join(srcHooksPath, 'legacy');
         if (!existsSync(legacyDir)) {
           execSync(`mkdir -p "${legacyDir}"`);
         }
-        
+
         execSync(`mv "${srcPath}" "${destPath}"`);
         this.log(`Moved ${hookFile} to legacy hooks`, 'success');
       }
@@ -279,10 +279,10 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async removeDeadCode() {
     this.log('Removing dead code...');
-    
+
     // Remove empty or redundant files
     const allFiles = this.findFiles('.', ['.ts', '.tsx', '.js', '.jsx']);
-    
+
     for (const filePath of allFiles) {
       await this.cleanupFile(filePath);
     }
@@ -290,25 +290,25 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async cleanupFile(filePath) {
     if (!existsSync(filePath) || filePath.includes('node_modules')) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
     let modified = false;
-    
+
     // Remove unused imports
     const lines = content.split('\n');
     const cleanedLines = lines.filter(line => {
       // Keep non-import lines
       if (!line.trim().startsWith('import')) return true;
-      
+
       // Remove unused type-only imports that aren't used
       if (line.includes('import type') && !this.isTypeUsed(line, content)) {
         modified = true;
         return false;
       }
-      
+
       return true;
     });
-    
+
     if (modified) {
       writeFileSync(filePath, cleanedLines.join('\n'));
       this.log(`Cleaned up ${filePath}`, 'success');
@@ -318,16 +318,16 @@ export const generateMockPlaylist = (overrides = {}) => ({
   isTypeUsed(importLine, content) {
     const typeMatch = importLine.match(/import type\s*{\s*([^}]+)\s*}/);
     if (!typeMatch) return true;
-    
+
     const types = typeMatch[1].split(',').map(t => t.trim());
     return types.some(type => content.includes(type));
   }
 
   async standardizeImports() {
     this.log('Standardizing import patterns...');
-    
+
     const tsFiles = this.findFiles('src', ['.ts', '.tsx']);
-    
+
     for (const filePath of tsFiles) {
       await this.fixImportPaths(filePath);
     }
@@ -335,10 +335,10 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async fixImportPaths(filePath) {
     if (!existsSync(filePath)) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
     let modified = false;
-    
+
     // Standardize relative imports
     content = content.replace(
       /from ['"](\.\.?\/.*)['"]/g,
@@ -352,7 +352,7 @@ export const generateMockPlaylist = (overrides = {}) => ({
         return match;
       }
     );
-    
+
     if (modified) {
       writeFileSync(filePath, content);
       this.log(`Standardized imports in ${filePath}`, 'success');
@@ -362,19 +362,19 @@ export const generateMockPlaylist = (overrides = {}) => ({
   // Phase 3: Architecture Optimization
   async optimizeArchitecture() {
     this.log('=== PHASE 3: Architecture Optimization ===');
-    
+
     await this.optimizeComponents();
     await this.improveStateManagement();
     await this.enhanceErrorHandling();
-    
+
     this.log('Phase 3 completed: Architecture optimized', 'success');
   }
 
   async optimizeComponents() {
     this.log('Optimizing component performance...');
-    
+
     const componentFiles = this.findFiles('src/components', ['.tsx']);
-    
+
     for (const filePath of componentFiles) {
       await this.addMemoization(filePath);
     }
@@ -382,9 +382,9 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async addMemoization(filePath) {
     if (!existsSync(filePath)) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
-    
+
     // Add React.memo for functional components that don't have it
     if (content.includes('export default function') && !content.includes('React.memo')) {
       // Check if component has props
@@ -394,17 +394,17 @@ export const generateMockPlaylist = (overrides = {}) => ({
           /export default function (\w+)/,
           'const $1 = React.memo(function $1'
         );
-        
+
         content = content.replace(
           /}(\s*)$/,
           '});\n\nexport default $1;$1'
         );
-        
+
         // Add React import if not present
         if (!content.includes('import React')) {
           content = `import React from 'react';\n${content}`;
         }
-        
+
         writeFileSync(filePath, content);
         this.log(`Added memoization to ${filePath}`, 'success');
       }
@@ -413,9 +413,9 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async improveStateManagement() {
     this.log('Improving state management patterns...');
-    
+
     const storeFiles = this.findFiles('src/store', ['.ts', '.tsx']);
-    
+
     for (const filePath of storeFiles) {
       await this.optimizeZustandStore(filePath);
     }
@@ -423,21 +423,21 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async optimizeZustandStore(filePath) {
     if (!existsSync(filePath)) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
-    
+
     // Add devtools in development
     if (content.includes('create(') && !content.includes('devtools')) {
       content = content.replace(
         /create\(\(/,
         'create(\n  devtools(\n    ('
       );
-      
+
       content = content.replace(
         /\)\)$/m,
         '))\n  )'
       );
-      
+
       // Add devtools import
       if (!content.includes('devtools')) {
         content = content.replace(
@@ -445,7 +445,7 @@ export const generateMockPlaylist = (overrides = {}) => ({
           "import { create } from 'zustand'\nimport { devtools } from 'zustand/middleware'"
         );
       }
-      
+
       writeFileSync(filePath, content);
       this.log(`Added devtools to Zustand store in ${filePath}`, 'success');
     }
@@ -453,10 +453,10 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async enhanceErrorHandling() {
     this.log('Enhancing error handling...');
-    
+
     // Add error boundaries where missing
     const pageFiles = this.findFiles('src/pages', ['.tsx']);
-    
+
     for (const filePath of pageFiles) {
       await this.addErrorBoundary(filePath);
     }
@@ -464,15 +464,15 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
   async addErrorBoundary(filePath) {
     if (!existsSync(filePath)) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
-    
+
     // Wrap page components with error boundary if not present
     if (!content.includes('ErrorBoundary') && content.includes('export default')) {
       const componentMatch = content.match(/export default (\w+)/);
       if (componentMatch) {
         const componentName = componentMatch[1];
-        
+
         content = content.replace(
           `export default ${componentName}`,
           `const ${componentName}WithErrorBoundary = () => (
@@ -483,12 +483,12 @@ export const generateMockPlaylist = (overrides = {}) => ({
 
 export default ${componentName}WithErrorBoundary;`
         );
-        
+
         // Add ErrorBoundary import
         if (!content.includes('import ErrorBoundary')) {
           content = `import { ErrorBoundary } from 'react-error-boundary';\n${content}`;
         }
-        
+
         writeFileSync(filePath, content);
         this.log(`Added error boundary to ${filePath}`, 'success');
       }
@@ -498,18 +498,18 @@ export default ${componentName}WithErrorBoundary;`
   // Phase 4: Testing and Documentation
   async fixTestingAndDocs() {
     this.log('=== PHASE 4: Testing and Documentation ===');
-    
+
     await this.fixBrokenTests();
     await this.updateDocumentation();
-    
+
     this.log('Phase 4 completed: Testing and documentation fixed', 'success');
   }
 
   async fixBrokenTests() {
     this.log('Fixing broken test files...');
-    
+
     const testFiles = this.findFiles('tests', ['.test.tsx', '.test.ts']);
-    
+
     for (const filePath of testFiles) {
       await this.fixTestFile(filePath);
     }
@@ -517,26 +517,26 @@ export default ${componentName}WithErrorBoundary;`
 
   async fixTestFile(filePath) {
     if (!existsSync(filePath)) return;
-    
+
     let content = readFileSync(filePath, 'utf8');
     let modified = false;
-    
+
     // Fix VideoDescription test props
     if (filePath.includes('VideoDescription')) {
       content = content.replace(
         /<VideoDescription video={(\w+)} \/>/g,
         '<VideoDescription video={$1} channel={mockChannel} isSubscribed={false} showFullDescription={false} isSummarizing={false} />'
       );
-      
+
       // Fix audit results access
       content = content.replace(
         /auditResults\.violations/g,
         'auditResults.issues'
       );
-      
+
       modified = true;
     }
-    
+
     if (modified) {
       writeFileSync(filePath, content);
       this.log(`Fixed test file ${filePath}`, 'success');
@@ -545,12 +545,12 @@ export default ${componentName}WithErrorBoundary;`
 
   async updateDocumentation() {
     this.log('Updating documentation...');
-    
+
     // Update README with current architecture
     const readmePath = join(__dirname, 'README.md');
     if (existsSync(readmePath)) {
       let content = readFileSync(readmePath, 'utf8');
-      
+
       // Add refactoring status
       if (!content.includes('## Refactoring Status')) {
         const refactoringSection = `
@@ -568,12 +568,12 @@ This codebase has been comprehensively refactored and optimized:
 
 Last refactored: ${new Date().toISOString().split('T')[0]}
 `;
-        
+
         content = content.replace(
           '## 🚀 Features',
           refactoringSection + '\n## 🚀 Features'
         );
-        
+
         writeFileSync(readmePath, content);
         this.log('Updated README with refactoring status', 'success');
       }
@@ -583,11 +583,11 @@ Last refactored: ${new Date().toISOString().split('T')[0]}
   // Phase 5: Final Validation
   async validateChanges() {
     this.log('=== PHASE 5: Final Validation ===');
-    
+
     await this.runTypeCheck();
     await this.runTests();
     await this.buildProject();
-    
+
     this.log('Phase 5 completed: All validations passed', 'success');
   }
 
@@ -621,14 +621,14 @@ Last refactored: ${new Date().toISOString().split('T')[0]}
   // Utility Methods
   findFiles(directory, extensions) {
     const files = [];
-    
+
     try {
       const entries = readdirSync(join(__dirname, directory));
-      
+
       for (const entry of entries) {
         const fullPath = join(__dirname, directory, entry);
         const stat = statSync(fullPath);
-        
+
         if (stat.isDirectory() && !entry.startsWith('.') && entry !== 'node_modules') {
           files.push(...this.findFiles(join(directory, entry), extensions));
         } else if (stat.isFile() && extensions.some(ext => entry.endsWith(ext))) {
@@ -638,24 +638,24 @@ Last refactored: ${new Date().toISOString().split('T')[0]}
     } catch (error) {
       // Directory doesn't exist or can't be read
     }
-    
+
     return files;
   }
 
   // Main execution
   async run() {
     this.log('🚀 Starting comprehensive codebase refactoring...');
-    
+
     try {
       await this.fixTypeScriptErrors();
       await this.consolidateCode();
       await this.optimizeArchitecture();
       await this.fixTestingAndDocs();
       await this.validateChanges();
-      
+
       this.log('🎉 Refactoring completed successfully!', 'success');
       this.printSummary();
-      
+
     } catch (error) {
       this.log(`Fatal error during refactoring: ${error.message}`, 'error');
       process.exit(1);
@@ -670,17 +670,17 @@ Last refactored: ${new Date().toISOString().split('T')[0]}
     console.log(`⚠️  Warnings: ${this.warnings.length}`);
     console.log(`❌ Errors: ${this.errors.length}`);
     console.log('='.repeat(60));
-    
+
     if (this.fixes.length > 0) {
       console.log('\n🔧 Applied Fixes:');
       this.fixes.forEach(fix => console.log(`  • ${fix}`));
     }
-    
+
     if (this.warnings.length > 0) {
       console.log('\n⚠️  Warnings:');
       this.warnings.forEach(warning => console.log(`  • ${warning}`));
     }
-    
+
     if (this.errors.length > 0) {
       console.log('\n❌ Errors:');
       this.errors.forEach(error => console.log(`  • ${error}`));

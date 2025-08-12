@@ -1,13 +1,5 @@
-import React from 'react';
+import React, { MouseEvent, ReactNode, FC, useState, useEffect, useCallback, useRef, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useEffect, useCallback, useRef, useState, memo, FC, ReactNode, MouseEvent  } from 'react';
 
 import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon  } from '@heroicons/react/24/outline'; // Added LightBulbIcon;
 
@@ -58,9 +50,9 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
 
 // Component for authenticated user section
 interface AuthenticatedUserSectionProps {
-  userMenuRef: React.RefObject<HTMLDivElement>;,
+  userMenuRef: React.RefObject<HTMLDivElement>;
   userMenuButtonRef: React.RefObject<HTMLButtonElement>;
-  toggleUserMenu: () => void;,
+  toggleUserMenu: () => void;
   isUserMenuOpen: boolean; handleCloseUserMenu: () => void
 }
 
@@ -180,7 +172,7 @@ setIsNotificationsPanelOpen(false);
       ) {
         setIsCreateMenuOpen(false);
       }
-    
+
         };
 
     if (isUserMenuOpen || isNotificationsPanelOpen || isCreateMenuOpen) {
@@ -284,4 +276,3 @@ setIsNotificationsPanelOpen(false);
 Header.displayName = 'Header';
 
 export default Header;
-

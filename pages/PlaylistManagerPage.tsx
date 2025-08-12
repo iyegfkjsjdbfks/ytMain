@@ -4,38 +4,35 @@ import Droppable, { DragDropContext } from 'react-beautiful-dnd';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { UserGroupIcon } from '@heroicons/react/24/outline';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 interface PlaylistVideo {
-  id: string;,
+  id: string;
   title: string;
-  thumbnail: string;,
+  thumbnail: string;
   duration: string;
-  views: number;,
+  views: number;
   uploadDate: Date
 }
 
 interface Playlist {
-  id: string;,
+  id: string;
   title: string;
-  description: string;,
+  description: string;
   thumbnail: string;
-  videoCount: number;,
+  videoCount: number;
   totalViews: number;
-  visibility: 'public' | 'unlisted' | 'private';,
+  visibility: 'public' | 'unlisted' | 'private';
   createdDate: Date;
-  lastUpdated: Date;,
+  lastUpdated: Date;
   videos: PlaylistVideo
 }
 
 interface PlaylistStats {
-  totalPlaylists: number;,
+  totalPlaylists: number;
   totalVideos: number;
-  totalViews: number;,
+  totalViews: number;
   publicPlaylists: number;
-  privatePlaylists: number;,
+  privatePlaylists: number;
   unlistedPlaylists: number
 }
 
@@ -543,4 +540,3 @@ return;
 };
 
 export default PlaylistManagerPage;
-

@@ -1,5 +1,4 @@
 import React, { memo, FC } from 'react';
-import { FC } from 'react';
 
 import YouTubeVideoCard from './YouTubeVideoCard';
 

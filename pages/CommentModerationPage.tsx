@@ -1,8 +1,4 @@
-import React from 'react';
-import { useEffect, useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 
 import { CheckIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 
@@ -13,7 +9,7 @@ import type { Comment } from '../types';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface CommentWithVideo extends Comment {
-  videoTitle: string;,
+  videoTitle: string;
   videoId: string;
   status: 'approved' | 'pending' | 'spam' | 'hidden';
   flaggedReason?: string;
@@ -98,7 +94,7 @@ const CommentModerationPage: React.FC = () => {
           return (b.replyCount || 0) - (a.replyCount || 0);
         default: return 0
       }
-    
+
         });
 
     setFilteredComments(filtered);
@@ -416,4 +412,3 @@ return comments.filter((c) => c.flaggedReason).length;
 };
 
 export default CommentModerationPage;
-

@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 const ShortsPageSkeleton: React.FC = () => {
   return (
     <div className="h-full flex items-center justify-center bg-black">

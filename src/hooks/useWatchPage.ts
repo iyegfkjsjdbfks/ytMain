@@ -1,10 +1,6 @@
+import { useState, useEffect, useCallback } from 'react';
 import { Channel } from '../types';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useCallback, useEffect, useState } from 'react';
 
 import { unifiedDataService } from '../services/unifiedDataService';
 import type { Video } from '../types/core';

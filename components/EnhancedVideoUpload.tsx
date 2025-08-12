@@ -1,26 +1,21 @@
-import React from 'react';
-import { ChangeEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
+import React, { ChangeEvent, FC, useState, useCallback, useRef } from 'react';
 
 import type { Video } from '../types';
-import { useCallback, useRef, useState, FC, ChangeEvent } from 'react';
 
 import { CloudArrowUpIcon, XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, PhotoIcon, VideoCameraIcon, TagIcon } from '@heroicons/react/24/outline';
 
 export interface VideoUploadData {
-  title: string;,
+  title: string;
   description: string;
-  tags: string;,
+  tags: string;
   category: string;
   thumbnail?: File | null;
   customThumbnail?: string | null;
   visibility: 'public' | 'unlisted' | 'private' | 'scheduled';
   scheduledDate?: string;
-  monetization: boolean;,
+  monetization: boolean;
   ageRestriction: boolean;
-  commentsEnabled: boolean;,
+  commentsEnabled: boolean;
   likesVisible: boolean;
   language: string;
   captions?: File;

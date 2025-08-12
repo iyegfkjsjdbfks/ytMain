@@ -1,7 +1,6 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 interface ShortsProgressIndicatorProps {
-  currentIndex: number;,
+  currentIndex: number;
   totalCount: number;
   className?: string;
 }

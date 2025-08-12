@@ -1,8 +1,4 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 // import { getVideos, getVideosByCategory } // // from '../services/realVideoService' // Service not found // Service not found;
 import type { Video } from '../types';

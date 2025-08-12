@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * Fast loading component optimized for immediate display
  * Shows minimal but effective loading state

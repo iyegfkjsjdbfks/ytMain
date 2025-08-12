@@ -1,12 +1,4 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC, ChangeEvent, MouseEvent } from 'react';
+import React, { MouseEvent, ChangeEvent, FormEvent, FC, useState, useEffect } from 'react';
 
 import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
@@ -14,9 +6,9 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 const BellIconSolid = BellSolidIcon;
 
 interface SubscriptionManagerProps {
-  channelName: string;,
+  channelName: string;
   channelAvatarUrl: string;
-  channelId: string;,
+  channelId: string;
   subscriberCount: string;
   onSubscriptionChange?: (isSubscribed: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void
 }

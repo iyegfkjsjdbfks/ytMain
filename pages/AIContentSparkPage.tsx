@@ -1,10 +1,4 @@
-import React from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-
-
-import { useState, FC } from 'react';
+import React, { FormEvent, FC, useState } from 'react';
 
 import { LightBulbIcon, SparklesIcon } from '@heroicons/react/24/outline';
 

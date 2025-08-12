@@ -1,8 +1,5 @@
 import React, { useState, useEffect, FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 // @ts-nocheck
 
 import { getVideos } from '../services/realVideoService';
@@ -40,7 +37,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
                 publishedAt: 'Live now',
           duration: 'LIVE',
                 thumbnail: video.thumbnailUrl, // Keep original thumbnail
-              
+
         }}
             return video;
           })
@@ -150,4 +147,3 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
 };
 
 export default LiveStreams;
-

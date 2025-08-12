@@ -1,7 +1,5 @@
 import React, { useState, FC } from 'react';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
-import { FC } from 'react';
-import { useState } from 'react';
 const BellIconSolid = BellSolidIcon;
 
 import { BellSlashIcon, BellIcon  } from '@heroicons/react/24/outline';
@@ -9,7 +7,7 @@ import { BellSlashIcon, BellIcon  } from '@heroicons/react/24/outline';
 import { useSubscription } from '../hooks/useSubscription';
 
 interface SubscriptionButtonProps {
-  channelId: string;,
+  channelId: string;
   channelName: string;
   subscriberCount?: number;
   className?: string;
@@ -286,4 +284,3 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
 };
 
 export default SubscriptionButton;
-

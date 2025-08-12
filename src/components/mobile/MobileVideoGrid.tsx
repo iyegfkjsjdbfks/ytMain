@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useMemo, useCallback, memo, lazy } from 'react';
 import { FixedSizeList } from 'react-window';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
 
 interface MobileVideoGridProps {
-  videos: Video;,
+  videos: Video;
   onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
   loading?: boolean;
@@ -19,9 +15,9 @@ interface MobileVideoGridProps {
 
 interface MobileVideoItemProps {
   index;
-  style: React.CSSProperties;,
+  style: React.CSSProperties;
   data: {
-    videos: Video;,
+    videos: Video;
     onVideoClick: (video: Video) => void
   }}
 
@@ -147,7 +143,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
       if (isIntersecting && hasMore && !loading && onLoadMore) {
         onLoadMore();
       }
-    
+
         }, [isIntersecting, hasMore, loading, onLoadMore]);
 
     if (loading && videos.length === 0) {
@@ -222,4 +218,3 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
 MobileVideoGrid.displayName = 'MobileVideoGrid';
 
 export default MobileVideoGrid;
-

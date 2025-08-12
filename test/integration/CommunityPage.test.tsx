@@ -31,7 +31,7 @@ vi.mock('@hooks/useRefactoredHooks', () => ({
           addComment: vi.fn() }) }));
 
 const createTestQueryClient: any = () => new QueryClient({
-  defaultOptions: {,
+  defaultOptions: {
     queries: { retry: false },
           mutations: { retry: false } } });
 
@@ -217,4 +217,3 @@ describe('CommunityPage', () => {
     expect(screen.getByText(/error loading posts/i)).toBeInTheDocument();
   });
 });
-

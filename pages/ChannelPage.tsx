@@ -1,9 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { Channel } from '../types';
-import { useState, useEffect, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 
@@ -95,7 +91,7 @@ const ChannelPage: React.FC = () => {
           setChannelPlaylists([]);
           setChannelCommunityPosts([]);
         }
-      
+
         } catch (err: any) {
         (console as any).error('Error fetching channel data:', err);
         setError('Failed to load channel data. Please try again later.');
@@ -154,4 +150,3 @@ const ChannelPage: React.FC = () => {
 };
 
 export default ChannelPage;
-

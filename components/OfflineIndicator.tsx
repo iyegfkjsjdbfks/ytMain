@@ -1,9 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { ExclamationTriangleIcon, WifiIcon } from '@heroicons/react/24/outline';
 

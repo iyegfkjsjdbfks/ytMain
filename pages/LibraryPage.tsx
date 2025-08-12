@@ -1,9 +1,4 @@
-import React from 'react';
-import { useState, useEffect, FC, ReactNode } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect, FC, ReactNode } from 'react';
 
 import { ChevronRightIcon, ClockIcon } from '@heroicons/react/24/outline';
 import { QueueListIcon as QueueListSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -22,12 +17,12 @@ const MAX_HORIZONTAL_VIDEOS = 8;
 const MAX_PLAYLISTS_GRID = 6;
 
 interface SectionProps {
-  title: string;,
+  title: string;
   icon: React.ReactNode;
-  viewAllLink: string;,
+  viewAllLink: string;
   children: React.ReactNode;
   itemCount?: number;
-  isLoading: boolean;,
+  isLoading: boolean;
   hasContent: boolean;
   emptyMessage: string;
   isPlaylistSection?: boolean;
@@ -124,7 +119,7 @@ function LibraryPage(): any { // Removed React.FC
         setError('Could not load library content. Please try again later.');
         // Individual loading states will handle UI for sections that might have loaded
       }
-    
+
         };
     fetchAllData();
     window.scrollTo(0, 0);
@@ -255,4 +250,3 @@ function LibraryPage(): any { // Removed React.FC
 }
 
 export default LibraryPage;
-

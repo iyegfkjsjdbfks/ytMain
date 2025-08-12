@@ -5,9 +5,6 @@ import { logger } from '../../../utils/logger';
 import type { LiveStream } from '../../../types/livestream';
 import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon  } from '@heroicons/react/24/outline';
 import { CheckCircleIcon as CheckCircleSolidIcon, ExclamationCircleIcon as ExclamationCircleSolidIcon, XCircleIcon as XCircleSolidIcon  } from '@heroicons/react/24/solid';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 const CheckCircleIconSolid = CheckCircleSolidIcon;
 const ExclamationCircleIconSolid = ExclamationCircleSolidIcon;
 const XCircleIconSolid = XCircleSolidIcon;
@@ -17,7 +14,7 @@ interface StreamManagementDashboardProps {
 }
 
 interface StreamAction {
-  id: string;,
+  id: string;
   type:
     | 'start'
     | 'stop'
@@ -26,7 +23,7 @@ interface StreamAction {
     | 'duplicate'
     | 'analytics'
     | 'share';
-  label: string;,
+  label: string;
   icon: React.ComponentType<any>;
   color: string;
   disabled?: boolean;
@@ -66,7 +63,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   creatorId: 'user_123',
           creatorName: 'StreamerPro',
             creatorAvatar: '/api/placeholder/40/40',
-          settings: {,
+          settings: {
               enableChat: true,
           enableSuperChat: true,
               enablePolls: true,
@@ -82,7 +79,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               enableMultiplatform: false,
           platforms: [{ name: 'youtube',
           enabled: true }] },
-            stats: {,
+            stats: {
               viewers: 1247,
           peakViewers: 2156,
               averageViewers: 987,
@@ -98,7 +95,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               bitrate: 4500,
           frameDrops: 0,
               latency: 1800 },
-          monetization: {,
+          monetization: {
               totalRevenue: 234.5,
           superChatRevenue: 234.5,
               adRevenue: 0,
@@ -121,7 +118,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   creatorId: 'user_123',
           creatorName: 'StreamerPro',
             creatorAvatar: '/api/placeholder/40/40',
-          settings: {,
+          settings: {
               enableChat: true,
           enableSuperChat: true,
               enablePolls: true,
@@ -140,7 +137,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           enabled: true },
                 { name: 'twitch',
           enabled: true }] },
-            stats: {,
+            stats: {
               viewers: 0,
           peakViewers: 0,
               averageViewers: 0,
@@ -156,7 +153,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               bitrate: 4500,
           frameDrops: 0,
               latency: 2000 },
-          monetization: {,
+          monetization: {
               totalRevenue: 0,
           superChatRevenue: 0,
               adRevenue: 0,
@@ -180,7 +177,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   creatorId: 'user_123',
           creatorName: 'StreamerPro',
             creatorAvatar: '/api/placeholder/40/40',
-          settings: {,
+          settings: {
               enableChat: true,
           enableSuperChat: true,
               enablePolls: false,
@@ -196,7 +193,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               enableMultiplatform: false,
           platforms: [{ name: 'youtube',
           enabled: true }] },
-            stats: {,
+            stats: {
               viewers: 0,
           peakViewers: 1834,
               averageViewers: 1245,
@@ -212,7 +209,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               bitrate: 4500,
           frameDrops: 2,
               latency: 1900 },
-          monetization: {,
+          monetization: {
               totalRevenue: 456.75,
           superChatRevenue: 456.75,
               adRevenue: 0,
@@ -345,7 +342,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           logger.debug('Share stream:', stream.id);
           break;
       }
-    
+
         } catch (error: any) {
       logger.error('Failed to perform action:', error);
     }
@@ -371,7 +368,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           logger.debug('Archive streams:', selectedStreams);
           break;
       }
-    
+
         } catch (error: any) {
       logger.error('Failed to perform bulk action:', error);
     }
@@ -655,4 +652,3 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
 };
 
 export default StreamManagementDashboard;
-

@@ -1,43 +1,39 @@
 import React, { useEffect, useState, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { UserGroupIcon, ChartBarIcon, LightBulbIcon, AcademicCapIcon, CameraIcon, PencilSquareIcon, CalendarDaysIcon, GlobeAltIcon, ArrowTrendingUpIcon, ClockIcon, EyeIcon } from '@heroicons/react/24/outline';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
 
 interface AudienceInsight {
-  metric: string;,
+  metric: string;
   value: string | number;
-  change: number;,
+  change: number;
   period: string
 }
 
 interface ContentIdea {
-  id: string;,
+  id: string;
   title: string;
-  category: string;,
+  category: string;
   trending: boolean;
-  difficulty: 'Easy' | 'Medium' | 'Hard';,
+  difficulty: 'Easy' | 'Medium' | 'Hard';
   estimatedViews: number;
   tags: string
 }
 
 interface CreatorResource {
-  title: string;,
+  title: string;
   description: string;
-  type: "tutorial" as const | 'template' | 'tool' | 'guide';,
+  type: "tutorial" as const | 'template' | 'tool' | 'guide';
   link: string;
   icon: React.ReactNode
 }
 
 interface ScheduledContent {
-  id: string;,
+  id: string;
   title: string;
-  type: "video" as const | 'short' | 'live';,
+  type: "video" as const | 'short' | 'live';
   scheduledDate: Date;
   status: 'scheduled' | 'processing' | 'ready'
 }
@@ -480,4 +476,3 @@ const CreatorStudioPage: React.FC = () => {
 };
 
 export default CreatorStudioPage;
-

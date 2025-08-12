@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { createBrowserRouter, RouterProvider  } from 'react-router-dom';
-import { FC } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
@@ -33,4 +32,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

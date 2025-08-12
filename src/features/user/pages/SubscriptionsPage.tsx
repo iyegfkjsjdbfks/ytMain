@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * SubscriptionsPage component for displaying videos from subscribed channels
  */
@@ -25,4 +24,3 @@ const SubscriptionsPage: React.FC = () => {
 };
 
 export default SubscriptionsPage;
-

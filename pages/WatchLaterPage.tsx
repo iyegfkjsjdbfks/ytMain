@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state;
-import { FC } from 'react';
 
 import VideoCard from '../components/VideoCard';
 import { useWatchLater } from '../contexts/WatchLaterContext'; // Import useWatchLater;
@@ -38,4 +37,3 @@ const WatchLaterPage: React.FC = () => {
 };
 
 export default WatchLaterPage;
-

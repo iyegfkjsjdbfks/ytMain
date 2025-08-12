@@ -1,8 +1,4 @@
-import React from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-
-import { useContext, createContext, FC, ReactNode } from 'react';
+import React, { ReactNode, FC, useContext, createContext } from 'react';
 
 interface TabsContextType {
   value: string; onValueChange: (value: string | number) => void
@@ -19,8 +15,8 @@ const useTabsContext: any = () => {
 };
 
 export interface TabsProps {
-  value: string;,
-  onValueChange: (value: string | number) => void;,
+  value: string;
+  onValueChange: (value: string | number) => void;
   children: React.ReactNode;
   className?: string;
 }
@@ -49,7 +45,7 @@ export const TabsList: React.FC<TabsListProps> = ({ children, className = '' }: 
 };
 
 interface TabsTriggerProps {
-  value: string;,
+  value: string;
   children: React.ReactNode;
   className?: string;
 }
@@ -75,7 +71,7 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, class
 };
 
 interface TabsContentProps {
-  value: string;,
+  value: string;
   children: React.ReactNode;
   className?: string;
 }

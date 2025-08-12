@@ -1,8 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-
-import { useState, useRef, FC } from 'react';
+import React, { FC, useState, useRef } from 'react';
 
 import { DocumentIcon, CloudArrowUpIcon } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/24/outline';

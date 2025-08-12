@@ -1,9 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { useAsyncState } from '../src/hooks';
 
@@ -13,12 +8,12 @@ import BaseModal from './BaseModal';
 import type { Playlist } from '../src/types/core';
 
 interface RefactoredSaveToPlaylistModalProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
-  videoId: string;,
+  videoId: string;
   existingPlaylists: Playlist;
   onSaveToPlaylist: (videoId: any,
-          playlistId: any) => Promise<void>;,
+          playlistId: any) => Promise<void>;
   onCreatePlaylist: (name: any, description?: string) => Promise<Playlist>;
 }
 
@@ -47,7 +42,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
     if (isOpen && existingPlaylists.length > 0 && !selectedPlaylistId && existingPlaylists[0]) {
       setSelectedPlaylistId(existingPlaylists[0].id);
     }
-  
+
         }, [isOpen, existingPlaylists, selectedPlaylistId]);
 
   // Reset state when modal closes
@@ -56,7 +51,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
       setSelectedPlaylistId('');
       setShowCreateForm(false);
     }
-  
+
         }, [isOpen]);
 
   const {

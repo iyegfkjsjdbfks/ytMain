@@ -1,8 +1,4 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useRef, lazy } from 'react';
 /// <reference types="node" />
 import { Link } from 'react-router-dom';
 
@@ -14,8 +10,6 @@ declare namespace NodeJS {
     env: ProcessEnv;
   }
 }
-
-import { useEffect, useRef, useState, lazy, FC, MouseEvent } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 
@@ -281,7 +275,7 @@ return duration;
                     return 'Recently';
                   }
                   return formatDistanceToNow(date, { addSuffix: true });
-                } catch {
+                } catch (e) {
                   return 'Recently';
                 }
               })()}
@@ -294,4 +288,3 @@ return duration;
 };
 
 export default HoverAutoplayVideoCard;
-

@@ -1,9 +1,5 @@
+import { ReactNode, useState, useEffect, useCallback, useMemo } from 'react';
 import React, { memo, lazy, Suspense, ReactNode, /// <reference types="node" />
-import { ReactNode } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
   memo, useMemo, useCallback, useRef, useEffect, useState, type ComponentType, type ReactNode, type MemoExoticComponent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -382,7 +378,7 @@ export function withPerformanceMonitoring<P extends object>(,
       if (isVisible as any) {
         trackCustomMetric('visibility_time', performance.now());
       }
-    
+
         }, [isVisible, trackCustomMetric]);
 
     // Add performance data to dev tools
@@ -394,7 +390,7 @@ export function withPerformanceMonitoring<P extends object>(,
           _priorityLevel: any) => {
           // Custom performance tracking logic
           (console as any).debug('Component committed to root');
-        
+
         }}
     }, []);
 
@@ -464,4 +460,3 @@ export const optimizationUtils = {
   useComponentPerformance };
 
 export default optimizationUtils;
-

@@ -1,9 +1,5 @@
-import React, { lazy, FC, MouseEvent } from 'react';
+import React, { lazy, FC, MouseEvent, type React } from 'react';
 import { Link } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-
-import type React from 'react';
 
 import { EyeIcon, CalendarDaysIcon, PlayIcon } from '@heroicons/react/24/outline';
 
@@ -219,4 +215,3 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 };
 
 export default SubscriptionVideoCard;
-

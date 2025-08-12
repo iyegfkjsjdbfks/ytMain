@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { MouseEvent, ChangeEvent, FormEvent, FC } from 'react';
 import SearchIcon from './icons/SearchIcon';
-import { MouseEvent } from 'react';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
 
 interface SearchSuggestionsProps {
-  suggestions: string;,
+  suggestions: string;
   onSuggestionClick: (suggestion: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void; isVisible: boolean
 }
 

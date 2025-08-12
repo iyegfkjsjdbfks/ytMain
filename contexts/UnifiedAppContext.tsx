@@ -1,15 +1,11 @@
 import React, { useEffect, createContext, useReducer, useCallback, type ReactNode, FC, ReactNode } from 'react';
 import type { User } from '../src/types/core';
 import type { MiniplayerVideo, StrictNotification } from '../types/strictTypes';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 // Unified App State Interface
 interface UnifiedAppState {
   // Auth state,
-  user: User | null;,
+  user: User | null;
   isAuthenticated: boolean;
   isAuthLoading: boolean;
 
@@ -17,14 +13,14 @@ interface UnifiedAppState {
   theme: 'light' | 'dark' | 'system';
 
   // Miniplayer state,
-  miniplayerVideo: MiniplayerVideo | null;,
+  miniplayerVideo: MiniplayerVideo | null;
   isMiniplayerOpen: boolean;
 
   // Watch Later state,
   watchLaterVideos: string;
 
   // UI state,
-  sidebarCollapsed: boolean;,
+  sidebarCollapsed: boolean;
   notifications: StrictNotification
 }
 
@@ -109,7 +105,7 @@ interface UnifiedAppContextType {
 
   // Auth actions,
   login: (email: any,
-          password: any) => Promise<boolean>;,
+          password: any) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<boolean>;
 
@@ -117,17 +113,17 @@ interface UnifiedAppContextType {
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
 
   // Miniplayer actions,
-  openMiniplayer: (video: MiniplayerVideo) => void;,
+  openMiniplayer: (video: MiniplayerVideo) => void;
   closeMiniplayer: () => void;
   toggleMiniplayer: () => void;
 
   // Watch Later actions,
-  addToWatchLater: (videoId: any) => void;,
-  removeFromWatchLater: (videoId: any) => void;,
+  addToWatchLater: (videoId: any) => void;
+  removeFromWatchLater: (videoId: any) => void;
   isInWatchLater: (videoId: any) => boolean;
 
   // UI actions,
-  toggleSidebar: () => void;,
+  toggleSidebar: () => void;
   addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
   removeNotification: (id: string) => void
 }
@@ -169,18 +165,18 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
           avatar: 'https://via.placeholder.com/40',
           isVerified: false,
         subscriberCount: 0,
-          preferences: {,
+          preferences: {
           theme: 'system',
           language: 'en',
           autoplay: true,
-          notifications: {,
+          notifications: {
             email: true,
           push: true,
             subscriptions: true,
           comments: true,
             likes: true,
           mentions: true },
-          privacy: {,
+          privacy: {
             showSubscriptions: true,
           showLikedVideos: true,
             showWatchHistory: true,
@@ -370,4 +366,3 @@ return false;
 };
 
 export default UnifiedAppProvider;
-

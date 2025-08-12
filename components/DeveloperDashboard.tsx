@@ -1,16 +1,10 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 
 /**
  * Intelligent Developer Dashboard
  * Provides a comprehensive view of application health, development metrics,
  * feature flags, workflow status, and continuous improvement insights.
  */
-
-import { useMemo, useEffect, useState, FC } from 'react';
 
 import { advancedAPM } from '../utils/advancedMonitoring';
 import { codeAnalysisEngine } from '../utils/codeAnalysisEngine';
@@ -20,55 +14,55 @@ import { performanceMonitor } from '../utils/performanceMonitor';
 
 // Types for dashboard data
 interface DashboardMetrics {
-  performance: {,
-          coreWebVitals: {,
-      lcp: number;,
-          fid: number;,
+  performance: {
+          coreWebVitals: {
+      lcp: number;
+          fid: number;
       cls: number;
     };
-    memoryUsage: number;,
-          errorRate: number;,
+    memoryUsage: number;
+          errorRate: number;
     responseTime: number;
   };
-  codeQuality: {,
-          complexity: number;,
-    maintainability: number;,
-          testCoverage: number;,
+  codeQuality: {
+          complexity: number;
+    maintainability: number;
+          testCoverage: number;
     technicalDebt: number;
   };
-  workflow: {,
-          successRate: number;,
-    averageDuration: number;,
-          totalExecutions: number;,
+  workflow: {
+          successRate: number;
+    averageDuration: number;
+          totalExecutions: number;
     failuresByStage: Record<string, number>;
   };
-  featureFlags: {,
-          totalFlags: number;,
-    activeFlags: number;,
+  featureFlags: {
+          totalFlags: number;
+    activeFlags: number;
           rolloutProgress: Array<{ id: string; name: string; percentage: number }>;
   };
-  security: {,
-          vulnerabilities: number;,
-    lastScan: number;,
+  security: {
+          vulnerabilities: number;
+    lastScan: number;
           riskLevel: 'low' | 'medium' | 'high'
   }}
 
 interface AlertItem {
-  id: string;,
-          type: "error" as const | 'warning' | 'info';,
-  category: 'performance' | 'security' | 'quality' | 'workflow' | 'feature-flags';,
-          message: string;,
-  timestamp: number;,
-          severity: number;,
+  id: string;
+          type: "error" as const | 'warning' | 'info';
+  category: 'performance' | 'security' | 'quality' | 'workflow' | 'feature-flags';
+          message: string;
+  timestamp: number;
+          severity: number;
   actionable: boolean
 }
 
 interface ImprovementSuggestion {
-  id: string;,
-          category: string;,
-  priority: number;,
-          description: string;,
-  estimatedImpact: string;,
+  id: string;
+          category: string;
+  priority: number;
+          description: string;
+  estimatedImpact: string;
           automatable: boolean
 }
 
@@ -98,15 +92,15 @@ export const DeveloperDashboard: React.FC = () => {
         getFeatureFlagMetrics()]);
 
       const dashboardMetrics: DashboardMetrics = {,
-          performance: {,
-          coreWebVitals: {,
+          performance: {
+          coreWebVitals: {
           lcp: performanceMetrics.lcp || 0,
           fid: performanceMetrics.fid || 0,
           cls: performanceMetrics.cls || 0 },
           memoryUsage: performanceMetrics.memoryUsage || 0,
           errorRate: performanceMetrics.errorRate || 0,
           responseTime: performanceMetrics.responseTime || 0 },
-          codeQuality: {,
+          codeQuality: {
           complexity: codeAnalysis.complexity || 0,
           maintainability: codeAnalysis.maintainabilityIndex || 0,
           testCoverage: codeAnalysis.testCoverage || 0,
@@ -114,11 +108,11 @@ export const DeveloperDashboard: React.FC = () => {
         },
         workflow: workflowAnalytics,
           featureFlags: flagsData,
-        security: {,
+        security: {
           vulnerabilities: Math.floor(Math.random() * 3), // Mock data,
   lastScan: Date.now() - Math.random() * 24 * 60 * 60 * 1000,
           riskLevel: 'low' } 
-        
+
         };
 
       setMetrics(dashboardMetrics);
@@ -163,7 +157,7 @@ export const DeveloperDashboard: React.FC = () => {
           memoryUsage: (apmMetrics as any)?.['memory-usage']?.avg || 0,
       errorRate: (apmMetrics as any)?.['error-rate']?.avg || 0,
           responseTime: (apmMetrics as any)?.['response-time']?.avg || 0 
-        
+
         }};
 
   const getFeatureFlagMetrics = async (): Promise<void> => {

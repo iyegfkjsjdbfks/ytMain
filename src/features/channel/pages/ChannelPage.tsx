@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { FC } from 'react';
 
 /**
  * ChannelPage component for displaying a channel's content and information
@@ -32,4 +31,3 @@ const ChannelPage: React.FC = () => {
 };
 
 export default ChannelPage;
-

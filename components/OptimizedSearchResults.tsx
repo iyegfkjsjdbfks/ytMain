@@ -1,9 +1,4 @@
 import React, { useRef, memo, useMemo, useState, useEffect, lazy, FC, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
 // @ts-nocheck
 import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
@@ -45,11 +40,11 @@ const convertToVideo: any = (item: Video | YouTubeSearchResult | GoogleSearchRes
         }};
 
 interface OptimizedSearchResultsProps {
-  videos: Video;,
+  videos: Video;
   youtubeVideos: YouTubeSearchResult;
-  googleSearchVideos: GoogleSearchResult;,
+  googleSearchVideos: GoogleSearchResult;
   loading: boolean;
-  query: string;,
+  query: string;
   sortBy: string;
   onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
   onLoadMore?: () => void;
@@ -112,7 +107,7 @@ const extractVideoId: any = (video: Video) => {
       if (lastPart && lastPart.length === 11) {
         videoId = lastPart;
       }
-    
+
         }
   }
   return videoId && videoId.length === 11 ? videoId : null;
@@ -171,7 +166,7 @@ return `${Math.floor(diffInSeconds / 86400)} days ago`;
 return `${Math.floor(diffInSeconds / 2592000)} months ago`;
 }
       return `${Math.floor(diffInSeconds / 31536000)} years ago`;
-    } catch {
+    } catch (e) {
       return 'Recently';
     }
   };
@@ -344,7 +339,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
           }
           return false;
         });
-      case 'all':,
+      case 'all':
   default: return allResults
     }
   }, [allResults, activeTab]);
@@ -354,7 +349,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     if (isIntersecting && hasMore && !loading && onLoadMore) {
       onLoadMore();
     }
-  
+
         }, [isIntersecting, hasMore, loading, onLoadMore]);
 
   // Loading skeleton

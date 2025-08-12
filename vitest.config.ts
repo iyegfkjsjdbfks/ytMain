@@ -9,11 +9,11 @@ export default defineConfig({
   test: {
     // Test environment,
   environment: 'jsdom',
-    
+
     // Global test setup,
   globals: true,
     setupFiles: ['./src/utils/test-setup.ts'],
-    
+
     // File patterns,
   include: [
       'test/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
@@ -23,10 +23,10 @@ export default defineConfig({
       'build',
       'coverage'
     ],
-    
+
     // Test timeout (increased for memory-safe execution)
     testTimeout: 30000,
-    
+
     // Project configuration (replaces deprecated workspace)
     projects: [
       {
@@ -52,7 +52,7 @@ export default defineConfig({
       }
     ],
     hookTimeout: 10000,
-    
+
     // Coverage configuration,
   coverage: {
       provider: 'v8',
@@ -80,7 +80,7 @@ export default defineConfig({
       branches: 80,
       statements: 80
     },
-    
+
     // Reporter configuration,
   reporter: [
       'default',
@@ -91,10 +91,10 @@ export default defineConfig({
       json: './coverage/test-results.json',
       html: './coverage/test-results.html'
     },
-    
+
     // Watch mode,
   watch: false,
-    
+
     // Memory-safe test execution,
   pool: 'threads',
     poolOptions: {
@@ -104,7 +104,7 @@ export default defineConfig({
         minThreads: 1
       }
     },
-    
+
     // Mock configuration,
   server: {
       deps: {
@@ -113,7 +113,7 @@ export default defineConfig({
       ]
       }
     },
-    
+
     // Environment variables for memory management,
   env: {
       NODE_ENV: 'test',
@@ -122,20 +122,20 @@ export default defineConfig({
       VITE_TEST_MODE: 'true',
       NODE_OPTIONS: "--max-old-space-size=8192"
     },
-    
+
     // Retry configuration,
   retry: 2,
-    
+
     // Bail configuration,
   bail: 0,
-    
+
     // Silent mode,
   silent: false,
-    
+
     // UI configuration,
   ui: true,
     open: false,
-    
+
     // Browser configuration (for browser testing)
     browser: {
       enabled: false,
@@ -143,14 +143,14 @@ export default defineConfig({
       provider: 'playwright',
       headless: true
     },
-    
+
     // Benchmark configuration,
   benchmark: {
       include: ['**/*.{bench,benchmark}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
       exclude: ['node_modules', 'dist', '.idea', '.git', '.cache'],
       reporter: ['default']
     },
-    
+
     // Type checking,
   typecheck: {
       enabled: false,
@@ -158,11 +158,11 @@ export default defineConfig({
       include: ['**/*.{test,spec}-d.{ts,js}'],
       exclude: ['**/node_modules/**']
     },
-    
+
     // Workspace configuration
     // workspace: "./vitest.workspace.ts" // Deprecated, using test.projects instead
   },
-  
+
   // Resolve configuration,
   resolve: {
     alias: {
@@ -181,14 +181,14 @@ export default defineConfig({
       '@public': resolve(__dirname, './public')
     }
   },
-  
+
   // Define configuration,
   define: {
     __TEST__: true,
     __DEV__: false,
     __PROD__: false
   },
-  
+
   // ESBuild configuration,
   esbuild: {
     target: 'node14'

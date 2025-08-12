@@ -321,7 +321,7 @@ continue;
           return {
             healthy: response.ok,
             details: { status: response.status, statusText: response.statusText } };
-        } catch {
+        } catch (e) {
           return { healthy: false, details: { _error: 'API unreachable' } };
         }
       },
@@ -339,7 +339,7 @@ continue;
           const value = (localStorage as any).getItem(testKey);
           localStorage.removeItem(testKey);
           return { healthy: value === 'test' };
-        } catch {
+        } catch (e) {
           return { healthy: false };
         }
       },

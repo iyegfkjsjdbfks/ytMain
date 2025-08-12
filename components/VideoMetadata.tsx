@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ClockIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, GlobeAltIcon, CalendarIcon, TagIcon, ShieldCheckIcon, CameraIcon, LanguageIcon, TvIcon, BoltIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
 
 import type { Video } from '../src/types/core';
 

@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import type { Video } from '../types/core';
-import { FC } from 'react';
 export interface YouTubePlayerProps {
   video: Video;
   autoplay?: boolean;
@@ -66,4 +65,3 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 };
 
 export default YouTubePlayer;
-

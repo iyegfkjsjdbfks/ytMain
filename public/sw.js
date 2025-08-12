@@ -33,7 +33,7 @@ const API_ENDPOINTS = [
 // Install event - cache static assets
 self.addEventListener('install', (event) => {
   console.log('[SW] Installing service worker...');
-  
+
   event.waitUntil(
     Promise.all([
       caches.open(STATIC_CACHE_NAME).then((cache) => {
@@ -49,7 +49,7 @@ self.addEventListener('install', (event) => {
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   console.log('[SW] Activating service worker...');
-  
+
   event.waitUntil(
     Promise.all([
       // Clean up old caches
@@ -163,11 +163,11 @@ async function handleStaticAsset(request) {
   try {
     const cache = await caches.open(STATIC_CACHE_NAME);
     const cachedResponse = await cache.match(request);
-    
+
     if (cachedResponse && !isExpired(cachedResponse, CACHE_DURATION.STATIC)) {
       return cachedResponse;
     }
-    
+
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
       cache.put(request, networkResponse.clone());
@@ -223,22 +223,22 @@ async function handleImageRequest(request) {
 async function handleAPIRequest(request) {
   try {
     const networkResponse = await fetch(request);
-    
+
     if (networkResponse.ok) {
       const cache = await caches.open(API_CACHE_NAME);
       cache.put(request, networkResponse.clone());
     }
-    
+
     return networkResponse;
   } catch (error) {
     console.error('[SW] API fetch failed:', error);
     const cache = await caches.open(API_CACHE_NAME);
     const cachedResponse = await cache.match(request);
-    
+
     if (cachedResponse && !isExpired(cachedResponse, CACHE_DURATION.API)) {
       return cachedResponse;
     }
-    
+
     // Return offline response for API
     return new Response(
       JSON.stringify({
@@ -258,30 +258,30 @@ async function handleAPIRequest(request) {
 async function handleNavigationRequest(request) {
   try {
     const networkResponse = await fetch(request);
-    
+
     if (networkResponse.ok) {
       const cache = await caches.open(DYNAMIC_CACHE_NAME);
       cache.put(request, networkResponse.clone());
     }
-    
+
     return networkResponse;
   } catch (error) {
     console.error('[SW] Navigation fetch failed:', error);
-    
+
     // Try to serve from cache
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
     const cachedResponse = await cache.match(request);
-    
+
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     // Fallback to index.html for SPA routing
     const indexResponse = await cache.match('/');
     if (indexResponse) {
       return indexResponse;
     }
-    
+
     // Ultimate fallback
     return new Response(
       `<!DOCTYPE html>
@@ -335,7 +335,7 @@ async function handleDynamicRequest(request) {
 function isExpired(response, maxAge) {
   const dateHeader = response.headers.get('date');
   if (!dateHeader) return false;
-  
+
   const date = new Date(dateHeader);
   return Date.now() - date.getTime() > maxAge;
 }
@@ -343,7 +343,7 @@ function isExpired(response, maxAge) {
 // Background sync for offline actions
 self.addEventListener('sync', (event) => {
   console.log('[SW] Background sync triggered:', event.tag);
-  
+
   if (event.tag === 'video-upload') {
     event.waitUntil(syncVideoUploads());
   } else if (event.tag === 'user-actions') {
@@ -356,17 +356,17 @@ async function syncVideoUploads() {
   try {
     // Get pending uploads from IndexedDB
     const pendingUploads = await getPendingUploads();
-    
+
     for (const upload of pendingUploads) {
       try {
         await fetch('/api/videos/upload', {
           method: 'POST',
           body: upload.data
         });
-        
+
         // Remove from pending uploads
         await removePendingUpload(upload.id);
-        
+
         // Notify user of successful sync
         self.registration.showNotification('Upload completed', {
           body: `Your video "${upload.title}" has been uploaded successfully.`,
@@ -386,7 +386,7 @@ async function syncVideoUploads() {
 async function syncUserActions() {
   try {
     const pendingActions = await getPendingActions();
-    
+
     for (const action of pendingActions) {
       try {
         await fetch(action.endpoint, {
@@ -394,7 +394,7 @@ async function syncUserActions() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(action.data)
         });
-        
+
         await removePendingAction(action.id);
       } catch (error) {
         console.error('[SW] Failed to sync action:', error);
@@ -408,7 +408,7 @@ async function syncUserActions() {
 // Push notification handling
 self.addEventListener('push', (event) => {
   console.log('[SW] Push notification received');
-  
+
   const options = {
     body: 'You have new content to watch!',
     icon: '/icons/icon-192x192.png',
@@ -428,13 +428,13 @@ self.addEventListener('push', (event) => {
       }
     ]
   };
-  
+
   if (event.data) {
     const data = event.data.json();
     options.body = data.body || options.body;
     options.data.url = data.url || options.data.url;
   }
-  
+
   event.waitUntil(
     self.registration.showNotification('YouTubeX', options)
   );
@@ -443,12 +443,12 @@ self.addEventListener('push', (event) => {
 // Notification click handling
 self.addEventListener('notificationclick', (event) => {
   console.log('[SW] Notification clicked');
-  
+
   event.notification.close();
-  
+
   if (event.action === 'open' || !event.action) {
     const url = event.notification.data?.url || '/';
-    
+
     event.waitUntil(
       clients.matchAll({ type: 'window' }).then((clientList) => {
         // Check if app is already open
@@ -457,7 +457,7 @@ self.addEventListener('notificationclick', (event) => {
             return client.focus();
           }
         }
-        
+
         // Open new window
         if (clients.openWindow) {
           return clients.openWindow(url);

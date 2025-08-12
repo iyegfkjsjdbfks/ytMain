@@ -1,6 +1,4 @@
 import { memo, useMemo, useCallback, lazy, type ComponentType } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 // Performance optimization utilities
 

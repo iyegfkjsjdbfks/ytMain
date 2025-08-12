@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
-import { FC } from 'react';
 
 interface VideoListProps {
   videos: Video;
@@ -82,4 +81,3 @@ const VideoList: React.FC<VideoListProps> = ({
 };
 
 export default VideoList;
-

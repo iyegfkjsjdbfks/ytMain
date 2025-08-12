@@ -1,7 +1,5 @@
 import React, { useCallback, FC } from 'react';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
-import { FC } from 'react';
-import { useCallback } from 'react';
 
 import { DataFetchErrorBoundary } from '../../../components/ErrorBoundaries';
 import StreamAnalyticsDashboard from './StreamAnalyticsDashboard';
@@ -40,4 +38,3 @@ const ProtectedStreamAnalyticsDashboard: FC<
 };
 
 export default ProtectedStreamAnalyticsDashboard;
-

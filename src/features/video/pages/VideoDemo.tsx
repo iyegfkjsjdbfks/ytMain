@@ -1,7 +1,5 @@
 import React, { useState, FC } from 'react';
 import { realVideos } from '../../../../services/realVideoService';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import { VideoCard, VideoList, VideoGrid, StudioVideoGrid } from '../components';
 import type { Video } from '../types';
@@ -180,4 +178,3 @@ const VideoDemo: React.FC = () => {
 };
 
 export default VideoDemo;
-

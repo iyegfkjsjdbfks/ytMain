@@ -1,10 +1,8 @@
 import React, { useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 // Import statements fixed
 
 interface Platform {
-  id: string;,
+  id: string;
   name: string;
   enabled: boolean;
   streamKey?: string;
@@ -85,4 +83,3 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
 };
 
 export default MultiplatformStreaming;
-

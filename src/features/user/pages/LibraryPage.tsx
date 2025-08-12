@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 /**
  * LibraryPage component for displaying the user's video library
  */
@@ -25,4 +24,3 @@ const LibraryPage: React.FC = () => {
 };
 
 export default LibraryPage;
-

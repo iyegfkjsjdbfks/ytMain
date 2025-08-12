@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
 
 interface ShortsFiltersProps {
-  categories: string;,
+  categories: string;
   selectedCategory: string;
-  onCategoryChange: (category: any) => void;,
+  onCategoryChange: (category: any) => void;
   onClose: () => void
 }
 

@@ -21,12 +21,12 @@ class ConditionalLogger {
       if (typeof import.meta !== 'undefined' && import.meta.env) {
         return import.meta.env.MODE === 'development';
       }
-    } catch {}
+    } catch (e) {}
 
     try {
       // Check Node.js environment
       return process.env.NODE_ENV === 'development';
-    } catch {}
+    } catch (e) {}
 
     // Browser fallback - assume development if we can't determine
     return typeof window !== 'undefined';
@@ -36,12 +36,12 @@ class ConditionalLogger {
     try {
       // Check Vite debug flag first
       return import.meta.env?.VITE_DEBUG === 'true';
-    } catch {}
+    } catch (e) {}
 
     try {
       // Check Node.js debug flag
       return process.env.DEBUG === 'true';
-    } catch {}
+    } catch (e) {}
 
     // Default to development mode setting
     return this.isDevelopment;
@@ -179,7 +179,7 @@ class ConditionalLogger {
       };
 
       return removeSensitiveFields(sanitized);
-    } catch {
+    } catch (e) {
       return '[Sanitization Error]';
     }
   }

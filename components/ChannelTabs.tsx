@@ -1,11 +1,10 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 interface Tab {
   id: string; label: string
 }
 
 interface ChannelTabsProps {
-  tabs: Tab;,
+  tabs: Tab;
   activeTab: string; onTabClick: (tabId: any) => void
 }
 

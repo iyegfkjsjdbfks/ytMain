@@ -1,11 +1,4 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useCallback, useRef, useEffect, useState, FC, MouseEvent } from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useCallback, useRef } from 'react';
 
 import { XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
@@ -16,14 +9,14 @@ import { CheckIcon } from '@heroicons/react/24/outline';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface Notification {
-  id: string;,
+  id: string;
   type: "video_upload" as const | 'comment_reply' | 'like' | 'subscription' | 'live_stream' | 'community_post';
-  title: string;,
+  title: string;
   message: string;
-  channelName: string;,
+  channelName: string;
   channelAvatar: string;
   videoThumbnail?: string;
-  timestamp: string;,
+  timestamp: string;
   isRead: boolean;
   actionUrl?: string;
 }
@@ -47,7 +40,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       if (Math.random() < 0.1) { // 10% chance every 30 seconds
         generateRandomNotification();
       }
-    
+
         }) as any, 30000);
 
     return () => clearInterval(interval);
@@ -77,7 +70,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       setUnreadCount(mockNotifications.filter((n) => !n.isRead).length);
       (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(mockNotifications));
     }
-  
+
         }, []);
 
   const generateMockNotifications: any = (): Notification[] => {

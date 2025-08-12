@@ -1,6 +1,4 @@
-import React from 'react';
-import { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
-import { ReactNode } from 'react';
+import React, { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
 
 import { ExclamationTriangleIcon, PlayIcon } from '@heroicons/react/24/outline';
 
@@ -18,9 +16,9 @@ export interface VideoErrorBoundaryProps {
 type Props = VideoErrorBoundaryProps;
 
 interface State {
-  hasError: boolean;,
+  hasError: boolean;
   error: Error | null;
-  errorInfo: ErrorInfo | null;,
+  errorInfo: ErrorInfo | null;
   retryCount: number
 }
 
@@ -157,4 +155,3 @@ export class VideoErrorBoundary extends Component<Props, State> {
 }
 
 export default VideoErrorBoundary;
-

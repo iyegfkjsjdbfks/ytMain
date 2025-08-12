@@ -1,7 +1,5 @@
 import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import { HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PhotoIcon, VideoCameraIcon, LinkIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -10,11 +8,11 @@ const HeartIconSolid = HeartSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface CommunityPost {
-  id: string;,
+  id: string;
   channelId: string;
-  channelName: string;,
+  channelName: string;
   channelAvatar: string;
-  channelVerified: boolean;,
+  channelVerified: boolean;
   type: "text" as const | 'image' | 'video' | 'poll' | 'link';
   content: string;
   images?: string;
@@ -22,9 +20,9 @@ export interface CommunityPost {
   videoThumbnail?: string;
   videoTitle?: string;
   poll?: {
-    question: string;,
+    question: string;
     options: Array<{
-      id: string;,
+      id: string;
       text: string;
       votes: number;
     }>;
@@ -32,14 +30,14 @@ export interface CommunityPost {
     userVote?: string;
   };
   link?: {
-    url: string;,
+    url: string;
     title: string;
-    description: string;,
+    description: string;
     thumbnail: string;
   };
-  likes: number;,
+  likes: number;
   comments: number;
-  shares: number;,
+  shares: number;
   timestamp: string;
   isLiked: boolean;
   isPinned?: boolean;
@@ -47,9 +45,9 @@ export interface CommunityPost {
 
 interface CommunityPostsProps {
   channelId?: string;
-  posts: CommunityPost;,
-  onLike: (postId: any) => void;,
-  onComment: (postId: any) => void;,
+  posts: CommunityPost;
+  onLike: (postId: any) => void;
+  onComment: (postId: any) => void;
   onShare: (postId: any) => void;
   onVote?: (postId: any,
           optionId: any) => void;
@@ -134,7 +132,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
                 className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => {
                   // Open image in modal/lightbox
-                  
+
         }}
               />
             ))}
@@ -353,4 +351,3 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 };
 
 export default CommunityPosts;
-

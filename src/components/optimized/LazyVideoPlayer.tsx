@@ -56,7 +56,7 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
               if (state === 0) {
                 onEnded?.();
               } // Ended
-            
+
         }}
             {...(className && { className })}
           />
@@ -82,4 +82,3 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
 LazyVideoPlayer.displayName = 'LazyVideoPlayer';
 
 export default LazyVideoPlayer;
-

@@ -1,8 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, type React } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FC } from 'react';
-
-import type React from 'react';
 
 const VideoNotFound: React.FC = () => {
   const navigate = useNavigate();

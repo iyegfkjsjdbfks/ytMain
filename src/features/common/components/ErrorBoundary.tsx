@@ -1,6 +1,4 @@
-import React from 'react';
-import { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
-import { ReactNode } from 'react';
+import React, { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
 
 import { logger } from '../../../utils/logger';
 
@@ -9,7 +7,7 @@ interface Props {
 }
 
 interface State {
-  hasError: boolean;,
+  hasError: boolean;
   error: Error | null;
   errorInfo: ErrorInfo | null
 }
@@ -82,4 +80,3 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 
 export default ErrorBoundary;
-

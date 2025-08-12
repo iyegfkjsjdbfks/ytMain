@@ -224,4 +224,3 @@ const authRoutes: RouteObject[] = [
 
 // Combined route configuration
 export const routes: RouteObject[] = [...mainRoutes as any, ...studioRoutes as any, ...authRoutes];
-

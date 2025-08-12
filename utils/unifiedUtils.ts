@@ -194,7 +194,7 @@ export const validationUtils = {
       // eslint-disable-next-line no-new
       new URL(url);
       return true;
-    } catch {
+    } catch (e) {
       return false;
     }
   },

@@ -1,6 +1,4 @@
-import React from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
+import React, { ReactNode, FC } from 'react';
 // Base icon props interface
 export interface IconProps {
   className?: string;

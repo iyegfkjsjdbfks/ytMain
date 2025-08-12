@@ -1,9 +1,4 @@
-import React from 'react';
-import { useState, useEffect, FC } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect, FC, FormEvent } from 'react';
 
 import { PlusCircleIcon as PlusCircleSolidIcon, QueueListIcon as QueueListSolidIcon } from '@heroicons/react/24/solid';
 const PlusCircleIconSolid = PlusCircleSolidIcon;
@@ -210,4 +205,3 @@ const PlaylistsPage: React.FC = () => {
 };
 
 export default PlaylistsPage;
-

@@ -1,14 +1,9 @@
-import React from 'react';
-import { createContext, useState, useContext, useEffect, type ReactNode, FC, ReactNode } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, type ReactNode, FC, ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
 
 interface ThemeContextType {
-  theme: Theme;,
+  theme: Theme;
   toggleTheme: () => void
 }
 
@@ -58,6 +53,5 @@ export const useTheme: any = (): ThemeContextType => {
   }
   return context;
 };
-
 
 export default ThemeProvider;

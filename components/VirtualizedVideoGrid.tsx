@@ -1,11 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
-
-import { useState, useEffect, useCallback, useMemo, FC } from 'react';
+import React, { FC, useState, useEffect, useCallback, useMemo } from 'react';
 
 import { FixedSizeGrid } from 'react-window';
 
@@ -30,13 +23,13 @@ interface VirtualizedVideoGridProps {
 }
 
 interface GridItemProps {
-  columnIndex, rowIndex: number;,
+  columnIndex, rowIndex: number;
   style: React.CSSProperties,
-          data: {,
+          data: {
     videos: Video,
           columnsPerRow: number;
     onVideoClick?: (video: Video) => void;
-    onChannelClick?: (channelId: any) => void;,
+    onChannelClick?: (channelId: any) => void;
     cardSize: 'sm' | 'md' | 'lg',
           showChannel: boolean; showDescription: boolean;
   }}
@@ -110,7 +103,7 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
     return {
       columnsPerRow: cols,
           columnWidth: actualColumnWidth, rowHeight: cardHeight + gap
-    
+
         }}, [containerSize.width, cardSize]);
 
   const rowCount = Math.ceil(videos.length / columnsPerRow);

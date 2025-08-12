@@ -1,10 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect, createContext, useContext, KeyboardEvent, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined }
@@ -18,9 +13,9 @@ declare namespace NodeJS {
 
 // Accessibility context for global settings
 interface AccessibilityContextType {
-  reducedMotion, highContrast: boolean;,
+  reducedMotion, highContrast: boolean;
   fontSize: 'small' | 'medium' | 'large' | 'extra-large',
-          announcements: string;,
+          announcements: string;
   addAnnouncement: (message: any) => void,
           clearAnnouncements: () => void
 }
@@ -336,7 +331,7 @@ export function useAccessibleModal(): any {
       return () => {
         cleanup();
         document.body.style.overflow = '';
-      
+
         }}
     return undefined;
   }, [isOpen, trapFocus]);
@@ -347,7 +342,7 @@ export function useAccessibleModal(): any {
       if (e.key === 'Escape' && isOpen) {
         closeModal();
       }
-    
+
         };
 
     if (isOpen as any) {
@@ -362,7 +357,7 @@ export function useAccessibleModal(): any {
     openModal,
     closeModal,
     modalRef,
-    modalProps: {,
+    modalProps: {
       role: 'dialog',
       'aria-modal': true,
       'aria-labelledby': 'modal-title',
@@ -455,7 +450,7 @@ export function useAccessibleTooltip(): any {
   const tooltipProps = {
     id: tooltipId.current,
           role: 'tooltip',
-    style: {,
+    style: {
       position: 'absolute' as const,
           left: position.x,
       top: position.y,
@@ -566,4 +561,3 @@ export const accessibilityUtils = {
   runAccessibilityAudit };
 
 export default accessibilityUtils;
-

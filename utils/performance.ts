@@ -1,5 +1,4 @@
 import React, { useEffect, forwardRef } from 'react';
-import { useEffect } from 'react';
 // / <reference types="vite/client" />
 // Performance monitoring utilities for React components
 interface PerformanceMetric {
@@ -30,7 +29,7 @@ class PerformanceMonitor {
       });
       paintObserver.observe({ entryTypes: ['paint'] });
       this.observers.push(paintObserver);
-    } catch {
+    } catch (e) {
       // PerformanceObserver not supported
     }
 
@@ -45,7 +44,7 @@ class PerformanceMonitor {
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });
       this.observers.push(navigationObserver);
-    } catch {
+    } catch (e) {
       // PerformanceObserver not supported
     }
   }

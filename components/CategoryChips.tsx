@@ -1,16 +1,9 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-
-import { useState, useCallback, useEffect, useRef, FC } from 'react';
+import React, { FC, useState, useEffect, useCallback, useRef } from 'react';
 
 import { cn } from '../src/lib/utils';
 
 interface CategoryChipsProps {
-  categories: string;,
+  categories: string;
   selectedCategory: string;
   onSelectCategory: (category: any) => void;
   className?: string;
@@ -77,7 +70,7 @@ return;
     return () => {
       container.removeEventListener('scroll', checkScrollPosition as EventListener);
       resizeObserver.disconnect();
-    
+
         }}, [checkScrollPosition]);
 
   // Scroll to selected category when it changes

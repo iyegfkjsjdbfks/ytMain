@@ -1,8 +1,4 @@
 import React, { useEffect, useRef, useState, FC, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -18,21 +14,21 @@ import { PauseIcon, PlayIcon  } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
-  id: string;,
+  id: string;
   name: string;
-  duration: number;,
+  duration: number;
   resolution: string;
-  fps: number;,
+  fps: number;
   lastModified: Date;
   thumbnail: string
 }
 
 interface TimelineClip {
-  id: string;,
+  id: string;
   type: "video" as const | 'audio' | 'text' | 'image';
-  name: string;,
+  name: string;
   startTime: number;
-  duration: number;,
+  duration: number;
   track: number;
   thumbnail?: string;
   volume?: number;
@@ -40,7 +36,7 @@ interface TimelineClip {
 }
 
 interface EditAction {
-  type: "cut" as const | 'trim' | 'volume' | 'effect' | 'text';,
+  type: "cut" as const | 'trim' | 'volume' | 'effect' | 'text';
   timestamp: number;
   description: string
 }
@@ -206,7 +202,7 @@ return;
           if (originalClip as any) {
             setClips(prev => prev.filter((c) => !c.id.includes('_split_') && c.id !== originalId));
           }
-        
+
         }
       }
     }
@@ -231,7 +227,7 @@ return;
           const exportData = {
             project: currentProject) as any,
             clips,
-            exportSettings: {,
+            exportSettings: {
               format: 'mp4',
           quality: '1080p',
               fps: currentProject.fps },
@@ -269,7 +265,7 @@ return;
     switch (track as any) {
       case 0: return 'Video';
       case 1: return 'Audio';
-      case 2: return 'Text/Graphics';,
+      case 2: return 'Text/Graphics';
       default: return `Track ${track + 1}`;
     }
   };
@@ -564,7 +560,7 @@ return null;
                           onClick={() => {
                             // Delete the selected clip
                             // setClips(clips.filter((c) => c.id !== clip.id));
-                          
+
         }}
                           className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
                           title="Delete clip"
@@ -629,4 +625,3 @@ return null;
 };
 
 export default VideoEditorPage;
-

@@ -1,7 +1,6 @@
-import type { Video } from '../types';
 import React, { useState } from 'react';
+import type { Video } from '../types';
 import { User } from '../types';
-import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -151,4 +150,3 @@ function formatDuration(seconds: any): string {
     .map((v: any) => v.toString().padStart(2, '0'))
     .join(':');
 }
-

@@ -1,9 +1,4 @@
-import React from 'react';
-import { useCallback, useRef, useState, FC } from 'react';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
+import React, { useCallback, useRef, useState, FC, FormEvent } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -442,4 +437,3 @@ handleFileSelect(file);
 };
 
 export default VideoUploadPage;
-

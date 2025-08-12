@@ -1,7 +1,4 @@
 import { useState, useEffect, useCallback, StrictMode } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 

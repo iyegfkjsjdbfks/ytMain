@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
 import { ShareIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -17,21 +11,21 @@ import ThumbsDownIcon from './icons/ThumbsDownIcon';
 import ThumbsUpIcon from './icons/ThumbsUpIcon';
 
 interface VideoActionsProps {
-  liked: boolean;,
+  liked: boolean;
   disliked: boolean;
-  likeCount: number;,
+  likeCount: number;
   isSavedToAnyList: boolean;
-  onLike: () => void;,
+  onLike: () => void;
   onDislike: () => void;
-  onShare: () => void;,
+  onShare: () => void;
   onSave: () => void;
   saveModalLoading?: boolean;
 }
 
 interface ShareModalProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
-  onShareToSocial: (platform: any) => void;,
+  onShareToSocial: (platform: any) => void;
   onCopyLink: () => void;
   shareMessage?: string;
 }
@@ -186,7 +180,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
       if (isShareModalOpen && !(event.target as Element).closest('.share-modal-container')) {
         setIsShareModalOpen(false);
       }
-    
+
         };
 
     document.addEventListener('mousedown', handleClickOutside as EventListener);

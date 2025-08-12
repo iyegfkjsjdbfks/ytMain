@@ -1,10 +1,6 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import type { Video } from '../types';
-import { useEffect, useState, FC } from 'react';
 
 import { VideoCameraIcon, PlayIcon } from '@heroicons/react/24/outline';
 
@@ -14,9 +10,9 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 import { BugAntIcon } from '@heroicons/react/24/outline';
 
 interface StoreVideo {
-  id: string;,
+  id: string;
   title: string;
-  channelName: string;,
+  channelName: string;
   videoUrl: string;
   viewCount?: number;
 }
@@ -95,7 +91,7 @@ const AdminPage: React.FC = () => {
       if (!searchApiKey || !searchEngineId) {
         setTestResult({
           error: 'Google Custom Search API not configured',
-          details: {,
+          details: {
             apiKey: !!searchApiKey,
           engineId: !!searchEngineId } 
         });
@@ -187,7 +183,7 @@ const AdminPage: React.FC = () => {
             success: true,
           status: response.status,
             url: proxyUrl,
-          video: {,
+          video: {
               title: video.snippet.title,
           channel: video.snippet.channelTitle,
               views: parseInt(video.statistics.viewCount, 10).toLocaleString(),
@@ -277,7 +273,7 @@ const AdminPage: React.FC = () => {
       if (video as any) {
         setYoutubeMetadataTest({
           success: true,
-          video: {,
+          video: {
             id: video.id,
           title: video.title,
             channel: video.channel.name,
@@ -327,7 +323,7 @@ const AdminPage: React.FC = () => {
       // Clear message after 3 seconds
       setTimeout((() => setSaveMessage('')) as any, 3000);
     }
-  
+
         };
 
   const handlePlayerTypeChange = async (newPlayerType: YouTubePlayerType): Promise<any> => {
@@ -348,7 +344,7 @@ const AdminPage: React.FC = () => {
       // Clear message after 3 seconds
       setTimeout((() => setSaveMessage('')) as any, 3000);
     }
-  
+
         };
 
   const handleLocalPlayerTypeChange = async (newPlayerType: LocalVideoPlayerType): Promise<any> => {
@@ -367,7 +363,7 @@ const AdminPage: React.FC = () => {
       // Clear message after 3 seconds
       setTimeout((() => setSaveMessage('')) as any, 3000);
     }
-  
+
         };
 
   const handleToggleYouTubePlayer = async (playerType: YouTubePlayerType): Promise<any> => {

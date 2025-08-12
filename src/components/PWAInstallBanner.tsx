@@ -1,8 +1,5 @@
 import React, { useEffect, useState, FC } from 'react';
 import { PWAUtils } from '../config/pwa';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { trackEvent } from '../utils/analytics';
 
@@ -67,7 +64,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
           setIsVisible(false);
           return;
         }
-      
+
         }
 
       // Check visit count
@@ -75,7 +72,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
       if (visitCount >= 3) {
         setIsVisible(true);
       }
-    
+
         };
 
     checkVisibility();
@@ -339,4 +336,3 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
     </div>
   );
 };
-

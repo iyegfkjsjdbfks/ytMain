@@ -1,8 +1,4 @@
 import React, { useState, useRef, useEffect, FC, ChangeEvent } from 'react';
-import { ChangeEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -69,14 +65,14 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
         const player = new YouTubePlayer('youtube-player', videoId, {
           width,
           height,
-          playerVars: {,
+          playerVars: {
             autoplay: autoplay ? 1 : 0,
           controls: controls ? 1 : 0,
             modestbranding: 1,
           rel: 0,
             enablejsapi: 1,
           origin: window.location.origin },
-          events: {,
+          events: {
             onReady: async _event => {
               if (!isMounted) {
                 return;
@@ -98,7 +94,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
                       setVolume(vol);
                       setIsMuted(muted);
                     }
-                  
+
         } catch (error: any) {
                     logger.error('Error updating player state:', error);
                   }
@@ -277,4 +273,3 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 };
 
 export default YouTubePlayerExample;
-

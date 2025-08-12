@@ -1,8 +1,5 @@
 import React, { useEffect, FC, ReactNode } from 'react';
 import { useLocation, Navigate, useLocation  } from 'react-router-dom';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useEffect } from 'react';
 
 import LoadingSpinner from '@components/LoadingSpinner';
 
@@ -54,4 +51,3 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 };
 
 export default ProtectedRoute;
-

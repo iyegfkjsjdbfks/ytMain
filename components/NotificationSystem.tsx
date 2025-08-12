@@ -1,11 +1,4 @@
-import React from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useCallback, useRef, useEffect, useState, FC, MouseEvent } from 'react';
+import React, { MouseEvent, FC, useState, useEffect, useCallback, useRef } from 'react';
 
 import { BellIcon, XMarkIcon, PlayIcon, UserPlusIcon, HeartIcon, ChatBubbleLeftIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
@@ -14,15 +7,15 @@ const BellIconSolid = BellSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Notification {
-  id: string;,
+  id: string;
   type: "video_upload" as const | 'like' | 'comment' | 'subscription' | 'live_stream' | 'community_post';
-  title: string;,
+  title: string;
   message: string;
   thumbnail?: string;
   channelName?: string;
   channelAvatar?: string;
   videoId?: string;
-  timestamp: string;,
+  timestamp: string;
   isRead: boolean;
   priority: 'low' | 'medium' | 'high'
 }
@@ -46,7 +39,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
       if (Math.random() > 0.8) { // 20% chance every 30 seconds
         generateMockNotification();
       }
-    
+
         }) as any, 30000);
 
     return () => clearInterval(interval);
@@ -80,7 +73,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         setNotifications(initialNotifications);
         (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
       }
-    
+
         } catch (error: any) {
       (console as any).error('Error loading notifications:', error);
     }

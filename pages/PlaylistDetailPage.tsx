@@ -1,10 +1,5 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, FC, MouseEvent } from 'react';
 import { Video } from '../types';
-import { useState, useRef, useEffect, FC, MouseEvent  } from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { QueueListIcon as QueueListSolidIcon, PlayIcon as PlaySolidIcon  } from '@heroicons/react/24/solid';
 const QueueListIconSolid = QueueListSolidIcon;
@@ -117,14 +112,14 @@ return null;
           videos: prevDetails.videos.filter((v: any) => v.id !== videoIdToRemove),
           videoIds: prevDetails.videoIds.filter((id: string) => id !== videoIdToRemove),
           // The count will be derived from videoIds.length, and updatedAt is handled by service
-        
+
         }});
       setActiveVideoMenuId(null); // Close menu
     } catch (err: any) {
       (console as any).error('Failed to remove video from playlist:', err);
       alert('Error removing video. Please try again.'); // Or use a more sophisticated notification
     }
-  
+
         };
 
   const handleOpenEditModal: any = () => {
@@ -295,4 +290,3 @@ return null;
 };
 
 export default PlaylistDetailPage;
-

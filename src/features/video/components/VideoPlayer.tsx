@@ -1,8 +1,4 @@
 import React, { useState, useRef, useEffect, lazy, FC, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -34,15 +30,15 @@ export interface VideoPlayerProps {
 }
 
 interface VideoState {
-  isPlaying: boolean;,
+  isPlaying: boolean;
   currentTime: number;
-  duration: number;,
+  duration: number;
   volume: number;
-  isMuted: boolean;,
+  isMuted: boolean;
   isFullscreen: boolean;
-  showControls: boolean;,
+  showControls: boolean;
   buffered: number;
-  playbackRate: number;,
+  playbackRate: number;
   quality: string
 }
 
@@ -561,4 +557,3 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 };
 
 export default VideoPlayer;
-

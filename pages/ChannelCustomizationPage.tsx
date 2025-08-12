@@ -1,6 +1,4 @@
 import React, { useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 import { PaintBrushIcon, PhotoIcon  } from '@heroicons/react/24/outline';
 import { XMarkIcon as XMarkSolidIcon, CheckIcon as CheckSolidIcon  } from '@heroicons/react/24/solid';
@@ -10,28 +8,28 @@ const XMarkIconSolid = XMarkSolidIcon;
 const CheckIconSolid = CheckSolidIcon;
 
 interface ChannelBranding {
-  channelArt: string;,
+  channelArt: string;
   profilePicture: string;
-  channelName: string;,
+  channelName: string;
   channelDescription: string;
-  channelKeywords: string;,
+  channelKeywords: string;
   channelTrailer: string;
-  featuredChannels: string;,
+  featuredChannels: string;
   socialLinks: {
-    website: string;,
+    website: string;
     twitter: string;
-    instagram: string;,
+    instagram: string;
     facebook: string;
   };
-  channelLayout: 'default' | 'compact' | 'showcase';,
+  channelLayout: 'default' | 'compact' | 'showcase';
   watermark: string;
   endScreenTemplate: string
 }
 
 interface ChannelStats {
-  subscribers: number;,
+  subscribers: number;
   totalViews: number;
-  videosCount: number;,
+  videosCount: number;
   joinDate: string
 }
 
@@ -45,7 +43,7 @@ const ChannelCustomizationPage: React.FC = () => {
     channelKeywords: ['technology', 'tutorials', 'reviews', 'gaming'],
     channelTrailer: '',
           featuredChannels: [],
-    socialLinks: {,
+    socialLinks: {
       website: '',
           twitter: '',
       instagram: '',
@@ -239,7 +237,7 @@ const ChannelCustomizationPage: React.FC = () => {
                             if (file as any) {
                               // Handle file upload
                             }
-                          
+
         };
                           input.click();
                         }}
@@ -277,7 +275,7 @@ const ChannelCustomizationPage: React.FC = () => {
                               if (file as any) {
                                 // Handle file upload
                               }
-                            
+
         };
                             input.click();
                           }}
@@ -319,7 +317,7 @@ const ChannelCustomizationPage: React.FC = () => {
                             if (file as any) {
                               // Handle file upload
                             }
-                          
+
         };
                           input.click();
                         }}

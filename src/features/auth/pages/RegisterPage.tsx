@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { RegisterForm } from '../components/RegisterForm';
-import { FC } from 'react';
 
 /**
  * Registration page component
@@ -36,4 +35,3 @@ const RegisterPage: React.FC = () => {
 };
 
 export default RegisterPage;
-

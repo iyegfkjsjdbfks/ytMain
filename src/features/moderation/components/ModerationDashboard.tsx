@@ -1,28 +1,26 @@
 import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import { FlagIcon, EyeIcon, CheckIcon, XMarkIcon, ExclamationTriangleIcon, ShieldCheckIcon, ClockIcon, UserIcon, ChatBubbleLeftIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
 
 interface ModerationItem {
-  id: string;,
+  id: string;
   type: "video" as const | 'comment' | 'user' | 'community_post';
-  title: string;,
+  title: string;
   content: string;
-  author: {,
+  author: {
     id: string;
-    name: string;,
+    name: string;
     avatar: string;
     isVerified: boolean;
   };
-  reportedBy: {,
+  reportedBy: {
     id: string;
-    name: string;,
+    name: string;
     count: number;
   };
-  reportReason: string;,
+  reportReason: string;
   severity: 'low' | 'medium' | 'high' | 'critical';
-  status: 'pending' | 'approved' | 'rejected' | 'escalated';,
+  status: 'pending' | 'approved' | 'rejected' | 'escalated';
   createdAt: string;
   reportedAt: string;
   thumbnail?: string;
@@ -56,12 +54,12 @@ export const ModerationDashboard: React.FC = () => {
           type: "video" as const,
       title: 'Controversial Gaming Video',
           content: 'Video contains inappropriate language and behavior',
-      author: {,
+      author: {
         id: 'user1',
           name: 'GamerPro123',
         avatar: 'https://picsum.photos/40/40?random=1',
           isVerified: false },
-      reportedBy: {,
+      reportedBy: {
         id: 'reporter1',
           name: 'ConcernedViewer',
         count: 15 },
@@ -71,7 +69,7 @@ export const ModerationDashboard: React.FC = () => {
       createdAt: '2024-01-15T10:30:00Z',
           reportedAt: '2024-01-15T14:20:00Z',
           thumbnail: 'https://picsum.photos/160/90?random=1',
-          metadata: {,
+          metadata: {
         views: 25000,
           likes: 1200,
         comments: 340,
@@ -83,12 +81,12 @@ export const ModerationDashboard: React.FC = () => {
       title: 'Spam Comment',
           content:
         'Check out my channel! Subscribe for amazing content! Link in bio!',
-      author: {,
+      author: {
         id: 'user2',
           name: 'SpamBot2024',
         avatar: 'https://picsum.photos/40/40?random=2',
           isVerified: false },
-      reportedBy: {,
+      reportedBy: {
         id: 'reporter2',
           name: 'RegularUser',
         count: 8 },
@@ -102,12 +100,12 @@ export const ModerationDashboard: React.FC = () => {
           type: "user" as const,
       title: 'Suspicious User Activity',
           content: 'User has been mass-uploading copyrighted content',
-      author: {,
+      author: {
         id: 'user3',
           name: 'ContentThief',
         avatar: 'https://picsum.photos/40/40?random=3',
           isVerified: false },
-      reportedBy: {,
+      reportedBy: {
         id: 'reporter3',
           name: 'ContentCreator',
         count: 25 },
@@ -167,7 +165,7 @@ export const ModerationDashboard: React.FC = () => {
       case 'high':
         return 'text-orange-600 bg-orange-100 dark:bg-orange-900 dark:text-orange-300';
       case 'critical':
-        return 'text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-300';,
+        return 'text-red-600 bg-red-100 dark: bg-red-900 dark:text-red-300';
       default: return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
     }
   };
@@ -504,4 +502,3 @@ export const ModerationDashboard: React.FC = () => {
 };
 
 export default ModerationDashboard;
-

@@ -1,63 +1,61 @@
-import type { Video } from '../types';
 import React, { useState, FC } from 'react';
+import type { Video } from '../types';
 import { EyeIcon, ClockIcon, UserGroupIcon, CurrencyDollarIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, VideoCameraIcon, ChatBubbleLeftIcon, BellIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
 
 // Icon wrapper components to fix type compatibility
 const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({
   className }) => <VideoCameraIcon className={className} />;
 
 interface DashboardMetrics {
-  views: {,
+  views: {
     total: number;
-    change: number;,
+    change: number;
     trend: 'up' | 'down'
   };
-  watchTime: {,
+  watchTime: {
     total: number; // in seconds,
-          change: number;,
+          change: number;
     trend: 'up' | 'down'
   };
-  subscribers: {,
+  subscribers: {
     total: number;
-    change: number;,
+    change: number;
     trend: 'up' | 'down'
   };
-  revenue: {,
+  revenue: {
     total: number;
-    change: number;,
+    change: number;
     trend: 'up' | 'down'
   }}
 
 interface RecentVideo {
-  id: string;,
+  id: string;
   title: string;
-  thumbnail: string;,
+  thumbnail: string;
   views: number;
-  likes: number;,
+  likes: number;
   comments: number;
-  publishedAt: string;,
+  publishedAt: string;
   status: 'published' | 'processing' | 'scheduled' | 'draft';
   visibility: 'public' | 'unlisted' | 'private'
 }
 
 interface Notification {
-  id: string;,
+  id: string;
   type: "milestone" as const | 'comment' | 'copyright' | 'monetization' | 'system';
-  title: string;,
+  title: string;
   message: string;
-  timestamp: string;,
+  timestamp: string;
   isRead: boolean;
   priority: 'low' | 'medium' | 'high'
 }
 
 interface QuickAction {
-  id: string;,
+  id: string;
   title: string;
-  description: string;,
+  description: string;
   icon: React.ComponentType<{ className?: string }>;
-  action: () => void;,
+  action: () => void;
   color: string
 }
 
@@ -170,7 +168,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       case 'scheduled':
         return 'text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-300';
       case 'draft':
-        return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';,
+        return 'text-gray-600 bg-gray-100 dark: bg-gray-700 dark:text-gray-300';
       default: return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
     }
   };
@@ -471,4 +469,3 @@ export const CreatorStudioDashboard: React.FC = () => {
 };
 
 export default CreatorStudioDashboard;
-

@@ -1,7 +1,5 @@
 import React, { useCallback, FC } from 'react';
 import { conditionalLogger } from '@/utils/conditionalLogger';
-import { FC } from 'react';
-import { useCallback } from 'react';
 
 import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
 
@@ -61,4 +59,3 @@ const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
 };
 
 export default ProtectedVideoPlayer;
-

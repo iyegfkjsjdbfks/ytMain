@@ -1,16 +1,14 @@
 import React, { useMemo, useCallback, memo } from 'react';
 import { FixedSizeList } from 'react-window';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
 
 interface VirtualizedCommentListProps {
-  comments: Comment;,
+  comments: Comment;
   onReply: (commentId: any,
-          content: any) => void;,
-  onLike: (commentId: any) => void;,
+          content: any) => void;
+  onLike: (commentId: any) => void;
   onDislike: (commentId: any) => void;
   className?: string;
   height?: number;
@@ -18,13 +16,13 @@ interface VirtualizedCommentListProps {
 }
 
 interface CommentItemProps {
-  index: number;,
+  index: number;
   style: React.CSSProperties;
-  data: {,
+  data: {
     comments: Comment;
     onReply: (commentId: any,
-          content: any) => void;,
-    onLike: (commentId: any) => void;,
+          content: any) => void;
+    onLike: (commentId: any) => void;
     onDislike: (commentId: any) => void
   }}
 
@@ -159,4 +157,3 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(
 VirtualizedCommentList.displayName = 'VirtualizedCommentList';
 
 export default VirtualizedCommentList;
-

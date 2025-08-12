@@ -1,10 +1,5 @@
-import React from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useEffect, useState, FC } from 'react';
 
 import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
 import { PlayIcon as PlaySolidIcon, UserIcon as UserSolidIcon } from '@heroicons/react/24/solid';
@@ -192,7 +187,7 @@ const UserPage: React.FC = () => {
                 <button
                   onClick={() => {
                     // Toggle notification settings for this channel
-                  
+
         }}
                   className="p-2.5 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-full transition-colors"
                   title="Notification settings"
@@ -237,4 +232,3 @@ const UserPage: React.FC = () => {
 };
 
 export default UserPage;
-

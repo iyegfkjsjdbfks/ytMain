@@ -1,9 +1,5 @@
 import React, { useEffect, useState, lazy, FC, MouseEvent } from 'react';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
-import { MouseEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 const HeartIconSolid = HeartSolidIcon;
 import { Link } from 'react-router-dom';
 import { formatRelativeTime, cn } from '@/lib/utils';
@@ -348,4 +344,3 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 };
 
 export default PlaylistCard;
-

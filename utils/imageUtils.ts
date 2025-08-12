@@ -278,7 +278,7 @@ export const extractDominantColor: any = (imageUrl: any): Promise<string> => {
         b = Math.round(b / pixelCount);
 
         resolve(`rgb(${r}, ${g}, ${b})`);
-      } catch {
+      } catch (e) {
         resolve('#f3f4f6');
       }
     };

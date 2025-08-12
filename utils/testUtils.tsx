@@ -1,5 +1,4 @@
-import React, { type ReactElement } from 'react';
-import { ReactNode } from 'react';
+import React, { type ReactElement, ReactNode } from 'react';
 /**
  * Comprehensive testing utilities for React components with enhanced setup
  */
@@ -61,18 +60,18 @@ export const mockGenerators = {
           avatar: 'https://example.com/user-avatar.jpg',
           isVerified: false,
     subscriberCount: 0,
-          preferences: {,
+          preferences: {
       theme: 'system' as const,
           language: 'en',
       autoplay: true,
-          notifications: {,
+          notifications: {
         email: true,
           push: true,
         subscriptions: true,
           comments: true,
         likes: true,
           mentions: true },
-      privacy: {,
+      privacy: {
         showSubscriptions: true,
           showPlaylists: true,
         allowComments: true,
@@ -119,7 +118,7 @@ export const apiMocks = {
     const apiError = {
       status: error.status || 500,
           message: error.message || 'Internal Server Error',
-      response: {,
+      response: {
         status: error.status || 500,
           data: { message: error.message || 'Internal Server Error' } } };
 
@@ -162,11 +161,11 @@ interface CustomRenderOptions extends Omit<any, 'wrapper'> {
 
 function createTestQueryClient(): QueryClient {
   return new QueryClient({
-    defaultOptions: {,
+    defaultOptions: {
       queries: {
         retry: false,
           gcTime: 0 },
-      mutations: {,
+      mutations: {
         retry: false } } });
 }
 
@@ -397,7 +396,7 @@ export const performanceUtils = {
       finalMemory,
       memoryIncrease,
       potentialLeak: memoryIncrease > 1024 * 1024, // 1MB threshold
-    
+
         }} };
 
 // Accessibility testing utilities
@@ -453,4 +452,3 @@ export * from '@testing-library/react';
 export { userEvent };
 export { customRender as render };
 export { customRenderHook as renderHook };
-

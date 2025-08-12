@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-
-import { useCallback, useEffect, useState, FC } from 'react';
 
 import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
 
@@ -38,7 +32,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
       setIsSidebarOpen(prev => !prev);
       setIsMinimized(false); // Reset minimized state
     }
-  
+
         }, [isWatchPage]);
 
   useEffect(() => {

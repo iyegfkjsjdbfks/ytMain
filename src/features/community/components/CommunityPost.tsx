@@ -2,30 +2,28 @@ import React, { useState, FC } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
-import { FC } from 'react';
-import { useState } from 'react';
 
 export interface CommunityPostData {
-  id: string;,
+  id: string;
   channelId: string;
-  channelName: string;,
+  channelName: string;
   channelAvatar: string;
-  channelHandle: string;,
+  channelHandle: string;
   isVerified: boolean;
-  content: string;,
+  content: string;
   type: "text" as const | 'image' | 'video' | 'poll' | 'quiz';
   media?: Array<{
-    type: "image" as const | 'video';,
+    type: "image" as const | 'video';
     url: string;
     thumbnail?: string;
     alt?: string;
   }>;
   poll?: {
-    question: string;,
+    question: string;
     options: Array<{
-      id: string;,
+      id: string;
       text: string;
-      votes: number;,
+      votes: number;
       percentage: number;
     }>;
     totalVotes: number;
@@ -33,11 +31,11 @@ export interface CommunityPostData {
     hasVoted: boolean;
     userVote?: string;
   };
-  likes: number;,
+  likes: number;
   dislikes: number;
-  comments: number;,
+  comments: number;
   shares: number;
-  isLiked: boolean;,
+  isLiked: boolean;
   isDisliked: boolean;
   createdAt: string;
   updatedAt?: string;
@@ -45,10 +43,10 @@ export interface CommunityPostData {
 }
 
 interface CommunityPostProps {
-  post: CommunityPostData;,
-  onLike: (postId: any) => void;,
-  onDislike: (postId: any) => void;,
-  onComment: (postId: any) => void;,
+  post: CommunityPostData;
+  onLike: (postId: any) => void;
+  onDislike: (postId: any) => void;
+  onComment: (postId: any) => void;
   onShare: (postId: any) => void;
   onVote?: (postId: any,
           optionId: any) => void;
@@ -351,4 +349,3 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
 };
 
 export default CommunityPost;
-

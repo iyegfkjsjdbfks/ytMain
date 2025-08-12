@@ -1,8 +1,5 @@
 import React, { useRef, useState, FC, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChangeEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 interface VideoUploadProps {
   onUploadComplete?: (videoId: any) => void;
@@ -279,4 +276,3 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 };
 
 export default VideoUpload;
-

@@ -1,11 +1,4 @@
-import React from 'react';
-import { useState, FC, ReactNode, ChangeEvent, MouseEvent } from 'react';
-import { MouseEvent } from 'react';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
+import React, { useState, FC, ReactNode, ChangeEvent, MouseEvent, FormEvent } from 'react';
 
 import { MoonIcon, Cog8ToothIcon } from '@heroicons/react/24/outline';
 import { CheckIcon as CheckSolidIcon } from '@heroicons/react/24/solid';
@@ -246,4 +239,3 @@ const SettingsPage: React.FC = () => {
   ) };
 
 export default SettingsPage;
-

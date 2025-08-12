@@ -1,8 +1,4 @@
 import { useState, useCallback, useEffect, KeyboardEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 interface UseModalOptions {
   defaultOpen?: boolean;

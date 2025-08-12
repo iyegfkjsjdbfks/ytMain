@@ -1,19 +1,16 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent } from 'react';
 import { logger } from '../../../utils/logger';
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
 import type { CreatePlaylistData } from '../services/playlistService';
 import type { Playlist } from '../../../types/core';
 import { PlusIcon, MagnifyingGlassIcon, EllipsisVerticalIcon, PlayIcon, ShareIcon, PencilIcon, TrashIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, FolderIcon, ListBulletIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
-import { FormEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
 
 interface PlaylistManagerProps {
   className?: string;
 }
 
 interface CreatePlaylistModalProps {
-  isOpen: boolean;,
+  isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: any) => void
 }
@@ -502,4 +499,3 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 };
 
 export default PlaylistManager;
-

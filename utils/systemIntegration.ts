@@ -299,7 +299,7 @@ return 'critical';
 return 'degraded';
 }
       return 'healthy';
-    } catch {
+    } catch (e) {
       return 'critical';
     }
   }
@@ -315,7 +315,7 @@ return 'critical';
 return 'degraded';
 }
       return 'healthy';
-    } catch {
+    } catch (e) {
       return 'critical';
     }
   }
@@ -331,7 +331,7 @@ return 'critical';
 return 'degraded';
 }
       return 'healthy';
-    } catch {
+    } catch (e) {
       return 'critical';
     }
   }
@@ -358,7 +358,7 @@ return 'degraded';
         return 'degraded';
       }
       return 'healthy';
-    } catch {
+    } catch (e) {
       return 'critical';
     }
   }
@@ -380,7 +380,7 @@ return 'critical';
 return 'degraded';
 }
       return 'healthy';
-    } catch {
+    } catch (e) {
       return 'critical';
     }
   }
@@ -402,7 +402,7 @@ return 'critical';
 return 'degraded';
 }
       return 'healthy';
-    } catch {
+    } catch (e) {
       return 'critical';
     }
   }

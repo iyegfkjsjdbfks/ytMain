@@ -1,8 +1,5 @@
-import type { Video } from '../types';
 import React, { useEffect, useCallback, useRef, useState } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
+import type { Video } from '../types';
 interface VideoPlayerState {
   isPlaying: boolean;
   isMuted: boolean;

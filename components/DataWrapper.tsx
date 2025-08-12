@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { VideoGridSkeleton, ErrorState, EmptyState  } from './LoadingStates';
-import { ReactNode } from 'react';
 
 interface DataWrapperProps<T> {
-  data: T;,
+  data: T;
   loading: boolean;
-  error: string | null;,
+  error: string | null;
   children: (data: T) => React.ReactNode;
   loadingSkeleton?: React.ReactNode;
   emptyState?: {
-    title: string;,
+    title: string;
     message: string;
     icon?: React.ReactNode;
   };
@@ -64,4 +63,3 @@ export function DataWrapper<T>({
 }
 
 export default DataWrapper;
-

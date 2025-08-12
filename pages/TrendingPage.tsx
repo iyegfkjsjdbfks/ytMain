@@ -1,7 +1,4 @@
-import React from 'react';
-import { useState, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
+import React, { useState, FC } from 'react';
 
 import { FireIcon as FireSolidIcon } from '@heroicons/react/24/solid';
 const FireIconSolid = FireSolidIcon;
@@ -46,4 +43,3 @@ const TrendingPage: React.FC = () => {
 };
 
 export default TrendingPage;
-

@@ -1,12 +1,5 @@
-import React, { useEffect, useMemo, useCallback, useRef, useState, KeyboardEvent, MouseEvent } from 'react';
+import React, { useEffect, useMemo, useCallback, useRef, useState, KeyboardEvent, MouseEvent, FormEvent } from 'react';
 import { safeLocalStorage, throttle  } from '../utils/componentUtils';
-import { MouseEvent } from 'react';
-import { FormEvent } from 'react';
-import { KeyboardEvent } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 // Common hook patterns
 

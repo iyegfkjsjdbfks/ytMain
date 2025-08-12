@@ -1,14 +1,9 @@
-import React, { useState, type FormEvent, type ReactNode, FC, ReactNode, ChangeEvent } from 'react';
-import { ChangeEvent } from 'react';
-import { FormEvent } from 'react';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
+import React, { useState, type FormEvent, type ReactNode, FC, ReactNode, ChangeEvent, FormEvent } from 'react';
 
 import { useFormState } from '../src/hooks';
 
 interface FormField {
-  name: string;,
+  name: string;
   label: string;
   type: "text" as const | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'file';
   placeholder?: string;
@@ -21,7 +16,7 @@ interface FormField {
 }
 
 interface BaseFormProps {
-  fields: FormField;,
+  fields: FormField;
   onSubmit: (data: Record<string, any>) => void | Promise<void>;
   submitLabel?: string;
   cancelLabel?: string;

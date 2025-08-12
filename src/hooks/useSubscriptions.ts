@@ -1,7 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 // Temporarily mock these functions until service is implemented
 const getSubscribedChannels = async (): Promise<SubscribedChannel[]> => [];

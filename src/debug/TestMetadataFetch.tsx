@@ -3,8 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { logger } from '../utils/logger';
 import { unifiedDataService } from '../services/unifiedDataService';
-import { FC } from 'react';
-import { useState } from 'react';
 
 const TestMetadataFetch: React.FC = () => {
   return null;
@@ -198,4 +196,3 @@ const TestMetadataFetch: React.FC = () => {
 };
 
 export default TestMetadataFetch;
-

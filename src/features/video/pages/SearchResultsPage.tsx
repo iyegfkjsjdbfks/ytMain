@@ -1,8 +1,5 @@
 import React, { useEffect, useState, lazy, FC } from 'react';
 import { Link, useSearchParams  } from 'react-router-dom';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { getYouTubeVideoId } from '@/lib/youtube-utils';
 
@@ -153,7 +150,7 @@ const SearchResultsPage: React.FC = () => {
               if (lastPart && lastPart.length === 11) {
                 videoId = lastPart;
               }
-            
+
         }
 
             // Video ID logging removed for cleaner output
@@ -231,4 +228,3 @@ const SearchResultsPage: React.FC = () => {
 };
 
 export default SearchResultsPage;
-

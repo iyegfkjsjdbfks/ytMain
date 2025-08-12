@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { PlayIcon, FunnelIcon  } from '@heroicons/react/24/outline';
-import { FC } from 'react';
 
 interface EmptyShortsStateProps {
   hasFilters?: boolean;

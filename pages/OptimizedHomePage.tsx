@@ -1,10 +1,5 @@
-import React from 'react';
+import React, { useMemo, useCallback, useState, lazy, Suspense, FC } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useMemo, useCallback, useState, lazy, Suspense, FC } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import { HomeIcon as HomeSolidIcon } from '@heroicons/react/24/solid';
 const HomeIconSolid = HomeSolidIcon;
@@ -253,4 +248,3 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: any)
 };
 
 export default OptimizedHomePage;
-

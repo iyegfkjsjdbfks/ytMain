@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, FC, KeyboardEvent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { KeyboardEvent } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import CommentModal from '../components/CommentModal';
 import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
@@ -41,7 +35,7 @@ const ShortsPage: React.FC = () => {
       setLikedShortsArray([]);
       return new Set<string>();
     }
-  
+
         }, [likedShortsArray, setLikedShortsArray]);
 
   const followedChannels = useMemo(() => {
@@ -55,7 +49,7 @@ const ShortsPage: React.FC = () => {
       setFollowedChannelsArray([]);
       return new Set<string>();
     }
-  
+
         }, [followedChannelsArray, setFollowedChannelsArray]);
   const [commentModalOpen, setCommentModalOpen] = useState<boolean>(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string; title: string } | null>(null);
@@ -298,12 +292,12 @@ return;
         // Fallback to clipboard if share fails
         copyToClipboard(shareUrl);
       }
-    
+
         } else {
       // Fallback for browsers that don't support Web Share API
       copyToClipboard(shareUrl);
     }
-  
+
         };
 
   const copyToClipboard = async (text: any): Promise<any> => {
@@ -329,7 +323,7 @@ return;
           localStorage.removeItem('likedShorts');
           setLikedShortsArray([]);
         }
-      
+
         }
 
       if (followedChannelsRaw && followedChannelsRaw !== 'null') {
@@ -348,7 +342,7 @@ return;
       setLikedShortsArray([]);
       setFollowedChannelsArray([]);
     }
-  
+
         }, []); // Run only once on mount
 
   // Touch handling for mobile scroll navigation
@@ -381,7 +375,7 @@ return;
       // Reset scrolling flag after a delay
       setTimeout((() => setIsScrolling(false)) as any, 500);
     }
-  
+
         }, [commentModalOpen, showSearch, showFilters, isScrolling, handleNextVideo, handlePreviousVideo]);
 
   // Touch event handlers for mobile navigation
@@ -417,7 +411,7 @@ return;
         // Reset scrolling flag after a delay
         setTimeout((() => setIsScrolling(false)) as any, 500);
       }
-    
+
         }
 
     setTouchStartY(null);
@@ -479,7 +473,7 @@ return;
       // This would be triggered by video end event in ShortDisplayCard
       // Implementation would be in the video player component
     }
-  
+
         }, [isAutoAdvanceEnabled, currentVideoIndex]);
 
   // Set up intersection observer to track which video is currently in view
@@ -723,4 +717,3 @@ return;
 };
 
 export default ShortsPage;
-

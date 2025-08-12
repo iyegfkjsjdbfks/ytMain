@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { ReactNode, FC } from 'react';
 import { VideoGridSkeleton } from './LoadingStates';
 import OptimizedVideoCard from './OptimizedVideoCard';
 import VideoCard from './VideoCard';
-import { ReactNode } from 'react';
-import { FC } from 'react';
 
 import type { Video } from '../types';
 
@@ -65,7 +63,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
       case 'lg': return 'gap-6';
       default: return 'gap-4'
     }
-  
+
         };
 
   // Loading state

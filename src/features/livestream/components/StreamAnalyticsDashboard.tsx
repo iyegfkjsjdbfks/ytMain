@@ -3,12 +3,6 @@ import { conditionalLogger } from '../../../utils/conditionalLogger';
 import { createComponentError } from '../../../utils/errorUtils';
 import type { LiveStreamStats } from '../../../types/livestream';
 import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
-import { ReactNode } from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 /**
  * Props for the StreamAnalyticsDashboard component
@@ -41,13 +35,13 @@ interface AnalyticsData {
   /** Real-time stream statistics */,
   realTimeStats: LiveStreamStats;
   /** Historical data for charts */,
-  historicalData: {,
+  historicalData: {
     viewers: Array<{ time; count: number }>;
     engagement: Array<{ time; rate: number }>;
     revenue: Array<{ time; amount: number }>;
   };
   /** Audience demographic information */,
-  demographics: {,
+  demographics: {
     countries: Array<{ name; percentage: number }>;
     devices: Array<{ type; percentage: number }>;
     ageGroups: Array<{ range; percentage: number }>;
@@ -113,7 +107,7 @@ const getMetricValue: any = (,
 
 // Mock data generation for development
 const generateMockAnalytics: any = (): AnalyticsData => ({
-  realTimeStats: {,
+  realTimeStats: {
     viewers: 1247,
           peakViewers: 2156,
     averageViewers: 987,
@@ -129,7 +123,7 @@ const generateMockAnalytics: any = (): AnalyticsData => ({
     bitrate: 4500,
           frameDrops: 0,
     latency: 1800 },
-          historicalData: {,
+          historicalData: {
     viewers: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
           count: Math.floor(Math.random() * 500) + 800 })),
@@ -139,7 +133,7 @@ const generateMockAnalytics: any = (): AnalyticsData => ({
     revenue: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
           amount: Math.random() * 50 })) },
-  demographics: {,
+  demographics: {
     countries: [
       { name: 'United States',
           percentage: 35 },
@@ -674,4 +668,3 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
 };
 
 export default StreamAnalyticsDashboard;
-

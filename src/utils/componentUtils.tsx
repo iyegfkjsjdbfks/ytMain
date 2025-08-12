@@ -1,5 +1,4 @@
 import React, { type ReactNode, Fragment, ReactNode } from 'react';
-import { ReactNode } from 'react';
 /**
  * Safely render an array of items as React components
  *
@@ -13,7 +12,7 @@ import { ReactNode } from 'react';
  * @param keyExtractor Function to extract unique key for each item
  * @returns Array of React nodes
  */
-export const safeArrayRender = <T,>(,
+export const safeArrayRender = <T>(,
   items: T[] | null | undefined,
           renderItem: (item: T,
           index: number) => ReactNode,
@@ -68,7 +67,7 @@ export const createUniqueId: any = (prefix = 'component'): string => {
  * @param size Size of each chunk
  * @returns Array of chunks
  */
-export const chunkArray = <T,>(array: T,
+export const chunkArray = <T>(array: T,
           size: any): T[][] => {
   if (!array.length) {
     return [];
@@ -81,4 +80,3 @@ export const chunkArray = <T,>(array: T,
 
   return chunks;
 };
-

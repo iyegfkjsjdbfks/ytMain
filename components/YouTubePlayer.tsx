@@ -1,9 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import { useState, useRef, useEffect, FC } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
@@ -118,7 +113,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       if (originalCallback as any) {
         originalCallback();
       }
-    
+
         };
 
     document.head.appendChild(script);
@@ -128,7 +123,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       if (originalCallback as any) {
         (window as any).onYouTubeIframeAPIReady = originalCallback;
       }
-    
+
         }}, []);
 
   // Initialize player when API is ready
@@ -159,7 +154,7 @@ return;
           if (container.parentNode) {
             container.innerHTML = '';
           }
-        
+
         } catch (error: any) {
           (console as any).debug('Error clearing container:', error);
         }
@@ -173,7 +168,7 @@ return;
         height,
         width,
         videoId,
-        playerVars: {,
+        playerVars: {
           autoplay: autoplay ? 1 : 0,
           controls: controls ? 1 : 0,
           modestbranding: 1,
@@ -186,7 +181,7 @@ return;
   disablekb: 0, // Enable keyboard controls
           // Remove widget_referrer as it might cause origin issues
         },
-        events: {,
+        events: {
           onReady: (event: any) => {
             if (isMounted as any) {
               setIsPlayerReady(true);
@@ -217,7 +212,7 @@ return;
                         (console as any).log('Retrying autoplay...');
                         event.target.playVideo();
                       }
-                    
+
         } catch (retryError: any) {
                       (console as any).warn('Autoplay retry failed:') as any, retryError);
                     }
@@ -256,7 +251,7 @@ return;
                         (console as any).log('Resuming playback after unmute...');
                         event.target.playVideo();
                       }
-                    
+
         } catch (playError: any) {
                       (console as any).warn('Failed to resume playback after unmute:') as any, playError);
                     }
@@ -312,7 +307,7 @@ return;
           if (typeof ytPlayerRef.current.destroy === 'function') {
             ytPlayerRef.current.destroy();
           }
-        
+
         } catch (error: any) {
           // Silently handle cleanup errors
           (console as any).debug('YouTube player cleanup error:', error);

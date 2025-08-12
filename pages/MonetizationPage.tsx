@@ -1,8 +1,5 @@
 import React, { useEffect, useState, memo, lazy, Suspense, FC } from 'react';
 import { ArrowTrendingUpIcon, BanknotesIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 // Register Chart.js components when needed
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { ChartBarIcon } from '@heroicons/react/24/outline';
@@ -24,25 +21,25 @@ ChartJS.register(
   ArcElement);
 
 interface RevenueData {
-  date: string;,
+  date: string;
   adRevenue: number;
-  membershipRevenue: number;,
+  membershipRevenue: number;
   superChatRevenue: number;
-  merchandiseRevenue: number;,
+  merchandiseRevenue: number;
   sponsorshipRevenue: number
 }
 
 interface MonetizationMetrics {
-  totalRevenue: number;,
+  totalRevenue: number;
   monthlyRevenue: number;
-  revenueGrowth: number;,
+  revenueGrowth: number;
   rpm: number; // Revenue per mille (thousand views)
   cpm: number; // Cost per mille,
-          adImpressions: number;,
+          adImpressions: number;
   clickThroughRate: number;
-  memberCount: number;,
+  memberCount: number;
   superChatCount: number;
-  merchandiseSales: number;,
+  merchandiseSales: number;
   membershipRevenue: number;
   superChatRevenue: number
 }
@@ -198,38 +195,38 @@ return { labels: [],
   const chartOptions = {
     responsive: true,
           maintainAspectRatio: false,
-    plugins: {,
+    plugins: {
       legend: {
         position: 'top' as const,
-          labels: {,
+          labels: {
           usePointStyle: true,
           padding: 20 } },
-      tooltip: {,
+      tooltip: {
         mode: 'index' as const,
           intersect: false,
-        callbacks: {,
+        callbacks: {
           label: (context: any) => {
             return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
           } } } },
-    scales: {,
+    scales: {
       x: {
-        grid: {,
+        grid: {
           display: false } },
-          y: {,
+          y: {
         beginAtZero: true,
-          ticks: {,
+          ticks: {
           callback: (value: string | number) => formatCurrency(value as number) } } } };
 
   const doughnutOptions = {
     responsive: true,
           maintainAspectRatio: false,
-    plugins: {,
+    plugins: {
       legend: {
         position: 'bottom' as const,
-          labels: {,
+          labels: {
           usePointStyle: true,
           padding: 20 } },
-      tooltip: {,
+      tooltip: {
         callbacks: {
           label: (context: any) => {
             const total = context.dataset.data.reduce((a: any,
@@ -496,4 +493,3 @@ return { labels: [],
 };
 
 export default memo(MonetizationPage);
-

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { ReactNode } from 'react';
 interface ErrorBoundaryState {
   hasError: boolean;
   error?: Error;
@@ -39,7 +38,7 @@ class ErrorBoundary extends React.Component<
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
     }
-  
+
         }
 
   resetError = () => {
@@ -77,4 +76,3 @@ class ErrorBoundary extends React.Component<
 }
 
 export default ErrorBoundary;
-
