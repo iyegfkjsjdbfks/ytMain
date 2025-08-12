@@ -84,8 +84,8 @@ export const useOptimizedVideoData: any = ({
  videoCache.set(cacheKey, {
  data: updatedData,
  timestamp: Date.now() });
- }
- } catch (err: any) {
+    }
+  } catch (err: any) {
  const errorMessage =
  err instanceof Error ? err.message : 'Failed to fetch videos';
  setError(errorMessage);

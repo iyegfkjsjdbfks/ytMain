@@ -129,12 +129,13 @@ return;
  <button
  key={category}
 // FIXED:  data-category={category} />
-// FIXED:  onClick={() => onSelectCategory(category)}
-// FIXED:  className={cn(
- 'flex-shrink-0 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap touch-manipulation min-h-[36px] sm:min-h-[40px]',
- isSelected
- ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
- : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700')}
+ onClick={() => onSelectCategory(category)}
+ className={cn(
+  'flex-shrink-0 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap touch-manipulation min-h-[36px] sm:min-h-[40px]',
+  isSelected
+  ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+ )}
  >
  {category}
 // FIXED:  </button>

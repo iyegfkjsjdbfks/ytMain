@@ -119,10 +119,8 @@ const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }: any) => {
 
  {/* Mobile Sidebar */}
  <aside
-// FIXED:  className={`fixed top-14 left-0 z-50 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-transform duration-300 ease-in-out overflow-y-auto w-64 md:hidden
- ${isOpen ? 'transform translate-x-0' : 'transform -translate-x-full'}
- `}
-// FIXED:  aria-label="Mobile navigation" />
+  className={`fixed top-14 left-0 z-50 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-transform duration-300 ease-in-out overflow-y-auto w-64 md:hidden ${isOpen ? 'transform translate-x-0' : 'transform -translate-x-full'}`}
+  aria-label="Mobile navigation"
  >
  <div className="flex flex-col h-full">
  <div className="flex-grow">

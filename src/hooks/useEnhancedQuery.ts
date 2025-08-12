@@ -155,7 +155,7 @@ function withPerformanceMonitoring<T>(
 }
 
 // Enhanced useQuery hook
-export function useEnhancedQuery<TData = unknown, TError = ApiError>(,
+export function useEnhancedQuery<TData = unknown, TError = ApiError>(
  queryKey: any,
  queryFn: () => Promise<TData>,
  options: {
@@ -311,7 +311,7 @@ export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(,
 }
 
 // Cache management utilities
-export function useCacheManager(): any {
+  function useCacheManager(): any {
  const queryClient = useQueryClient();
 
  return {

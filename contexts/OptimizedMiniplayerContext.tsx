@@ -244,13 +244,11 @@ export const useOptimizedMiniplayer = () => {
 
 // Selector hooks for specific parts of the state
 export const useMiniplayerVideo = () => {
-}
   const { state } = useOptimizedMiniplayer();
   return state.currentVideo;
 };
 
 export const useMiniplayerVisibility = () => {
-}
   const { state } = useOptimizedMiniplayer();
   return state.isVisible;
 };

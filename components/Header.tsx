@@ -42,7 +42,7 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
    onClick={onClick}
    className={commonClasses}
    role="menuitem"
-  >
+
    {content}
   </button>
  );
@@ -72,7 +72,7 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
  variant="secondary"
  size="sm"
 className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900/20" >
- >
+
  <UserIcon className="w-4 h-4 mr-1" />
  Sign in
 </Button>
@@ -93,7 +93,7 @@ className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-
  aria-controls="user-menu"
  id="user-menu-button"
  title="Your Account"
- >
+
  {user.avatar ? (
  <img src={user.avatar} alt="User Avatar" className="w-8 h-8 rounded-full" />
  ) : (
@@ -171,6 +171,7 @@ setIsNotificationsPanelOpen(false);
  !createButtonRef.current.contains(event.target as Node)
  ) {
  setIsCreateMenuOpen(false);
+ }
  };
 
  if (isUserMenuOpen || isNotificationsPanelOpen || isCreateMenuOpen) {
@@ -180,8 +181,9 @@ setIsNotificationsPanelOpen(false);
  }
 
  return () => {
- document.removeEventListener('mousedown', handleClickOutside as EventListener);
- }}, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);
+  document.removeEventListener('mousedown', handleClickOutside as EventListener);
+ };
+ }, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);
 
  return (
  <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
@@ -191,7 +193,7 @@ onClick={(e: any) => toggleSidebar(e)}
 className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
 aria-label="Toggle sidebar menu"
  title="Menu"
- >
+
  <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6" />
 </button>
  <Link to="/" className="flex items-center" aria-label="YoutubeX Home">
@@ -221,7 +223,7 @@ aria-haspopup="true"
 aria-controls="create-menu"
 id="create-button"
  title="Create"
- >
+
  <VideoPlusIcon className="w-5 h-5 sm:w-6 sm:h-6" />
 </button>
  {isCreateMenuOpen && (
@@ -232,7 +234,7 @@ className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-neutral-800 bord
  role="menu"
 aria-orientation="vertical"
 aria-labelledby="create-button" >
- >
+
  <CreateMenuItem icon={<ArrowUpTrayIcon />} to="/upload" onClick={(e: any) => handleCloseCreateMenu(e)}>Upload video</CreateMenuItem>
  <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={(e: any) => handleCloseCreateMenu(e)}>Go live</CreateMenuItem>
  <CreateMenuItem icon={<PencilSquareIcon />} onClick={() => {
@@ -244,7 +246,7 @@ aria-labelledby="create-button" >
  icon={<LightBulbIcon />}
  to="/ai-content-spark"
  onClick={handleCloseCreateMenu}
- >
+
  AI Content Spark ✨
 </CreateMenuItem>
 </div>
@@ -261,8 +263,8 @@ aria-labelledby="create-button" >
  userMenuButtonRef={userMenuButtonRef}
  toggleUserMenu={toggleUserMenu}
  isUserMenuOpen={isUserMenuOpen}
- handleCloseUserMenu={handleCloseUserMenu} />
- />
+ handleCloseUserMenu={handleCloseUserMenu}
+/>
 </div>
 
  {/* PWA Install Banner */}

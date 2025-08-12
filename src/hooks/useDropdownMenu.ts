@@ -33,7 +33,7 @@ export const useDropdownMenu: any = () => {
  document.removeEventListener('mousedown', handleClickOutside as EventListener);
  }
  return undefined;
- }, [isOpen]);
+  }, [isOpen]);
 
  // Close menu on escape key
  useEffect(() => {

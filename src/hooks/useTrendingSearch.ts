@@ -62,7 +62,7 @@ const convertSearchResultToVideo: any = (
  caption: 'false',
  licensedContent: false,
  contentRating: {},
- projection: 'rectangular' };
+ projection: 'rectangular' }
 };
 
 interface UseInitialSearchResult {

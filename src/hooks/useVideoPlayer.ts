@@ -131,9 +131,8 @@ export const useVideoPlayer: any = (
  };
 
  const handleError: any = () => {
- const error = new Error(;
- `Video error: ${video.error?.message || 'Unknown error'}`,
- );
+ const error = new Error(
+      `Video error: ${video.error?.message || 'Unknown error'}`);
  setState(prev => ({ ...prev as any, error, isLoading: false }));
  onError?.(error);
  };

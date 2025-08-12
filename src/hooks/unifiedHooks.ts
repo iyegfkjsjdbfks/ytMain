@@ -17,8 +17,8 @@ export interface AsyncState<T> {
 }
 
 export function useAsyncState<T>(initialData: T | null = null): [
- AsyncState<T>
- {
+  AsyncState<T>,
+  {
  setData: (data: T | null) => void;
  setLoading: (loading: any) => void;
  setError: (error: Error | null) => void;

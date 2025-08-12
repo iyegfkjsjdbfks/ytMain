@@ -46,7 +46,7 @@ const defaultConfig: UnifiedDataConfig = {
  },
  mixing: {
  strategy: 'source-priority',
- sourcePriority: ['youtube'] };
+ sourcePriority: ['youtube'] }
 
 /**
  * Search filters for unified queries

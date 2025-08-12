@@ -11,7 +11,7 @@ type SetValue<T> = T | ((val: T) => T);
 export function useLocalStorage<T>(
  key: string,
  initialValue: T
-): [T(value: SetValue<T>) => void() => void] {
+): [T, (value: SetValue<T>) => void, () => void] {
  // Get from local storage then parse stored json or return initialValue
  const [storedValue, setStoredValue] = useState<T>(() => {
  if (typeof window === 'undefined') {
@@ -19,7 +19,7 @@ export function useLocalStorage<T>(
  }
 
  try {
- const item = window.(localStorage as any).getItem(key);
+ const item = window.localStorage.getItem(key);
  return item ? JSON.parse(item) : initialValue;
  } catch (error: any) {
  (console as any).warn(`Error reading localStorage key "${key}":`, error);
@@ -40,7 +40,7 @@ export function useLocalStorage<T>(
 
  // Save to local storage
  if (typeof window !== 'undefined') {
- window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+ window.localStorage.setItem(key, JSON.stringify(valueToStore));
  }
  } catch (error: any) {
  (console as any).warn(`Error setting localStorage key "${key}":`, error);
@@ -82,7 +82,7 @@ export function useLocalStorageWithExpiry<T>(,
  }
 
  try {
- const item = window.(localStorage as any).getItem(key);
+ const item = window.localStorage.getItem(key);
  if (!item) {
  return initialValue;
  }
@@ -121,7 +121,7 @@ export function useLocalStorageWithExpiry<T>(,
  setIsExpired(false);
 
  if (typeof window !== 'undefined') {
- window.(localStorage as any).setItem(key, JSON.stringify(item));
+ window.localStorage.setItem(key, JSON.stringify(item));
  }
  } catch (error: any) {
  (console as any).warn(`Error setting localStorage key "${key}":`, error);
@@ -150,7 +150,7 @@ export function useLocalStorageWithExpiry<T>(,
  }
 
  try {
- const item = window.(localStorage as any).getItem(key);
+ const item = window.localStorage.getItem(key);
  if (!item) {
  return;
  }

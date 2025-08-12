@@ -91,7 +91,7 @@ declare global {
  * @param url - YouTube URL (can be null or undefined)
  * @returns Video ID or null if not found
  */
-export function getYouTubeVideoId(,
+export function getYouTubeVideoId(
  url: string | null | undefined
 ): string | null {
  if (!url) {
@@ -117,7 +117,7 @@ export function getYouTubeVideoId(,
 /**
  * Type-safe wrapper for YouTube Player API
  */
-export class YouTubePlayer {
+  class YouTubePlayer {
  private player;
 
  constructor(
@@ -383,7 +383,7 @@ export class YouTubePlayer {
 }
 
 // Utility function to safely handle YouTube embeds
-export function embedYouTubeVideo(,
+  function embedYouTubeVideo(,
  containerId: any,
  videoId: any,
  options: {
@@ -429,7 +429,7 @@ export function embedYouTubeVideo(,
 }
 
 // Type-safe function to check if a string is a valid YouTube URL
-export function isYouTubeUrl(url: any): boolean {
+  function isYouTubeUrl(url: any): boolean {
  if (!url) {
  return false;
  }
@@ -445,7 +445,7 @@ export function isYouTubeUrl(url: any): boolean {
 }
 
 // Type-safe function to get video ID from various YouTube URL formats
-export function extractVideoIdFromUrl(,
+  function extractVideoIdFromUrl(,
  url: string | null | undefined
 ): string | null {
  if (!url) {
@@ -491,7 +491,7 @@ export function extractVideoIdFromUrl(,
 }
 
 // Type-safe YouTube player states
-export enum YouTubePlayerState {
+  enum YouTubePlayerState {
  UNSTARTED = -1,
  ENDED = 0,
  PLAYING = 1,
@@ -500,13 +500,13 @@ export enum YouTubePlayerState {
  VIDEO_CUED = 5 }
 
 // Type-safe interface for YouTube player events
-export interface YouTubePlayerEvent {
+  interface YouTubePlayerEvent {
  target;
  data: number
 }
 
 // Type-safe interface for YouTube player parameters
-export interface YouTubePlayerParameters {
+  interface YouTubePlayerParameters {
  autoplay?: 0 | 1;
  cc_load_policy?: 1;
  color?: 'red' | 'white';

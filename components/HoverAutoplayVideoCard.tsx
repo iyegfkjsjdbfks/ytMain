@@ -9,6 +9,8 @@ declare namespace NodeJS {
  interface Process {
  env: ProcessEnv;
  }
+}
+
 import { formatDistanceToNow } from 'date-fns';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
@@ -99,6 +101,7 @@ return duration;
  hoverTimeoutRef.current = setTimeout((() => {
  setShowIframe(true);
  }) as any, HOVER_DELAY);
+ }
  };
 
  const handleMouseLeave: any = () => {
@@ -147,9 +150,9 @@ return duration;
 
  return (
  <div
-// FIXED:  className={`group cursor-pointer ${className}`}
- onMouseEnter={handleMouseEnter}
- onMouseLeave={handleMouseLeave} />
+  className={`group cursor-pointer ${className}`}
+  onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
  >
  {/* Video Thumbnail/Player */}
  <div className="relative mb-3">
@@ -157,14 +160,14 @@ return duration;
  <div className="relative w-full" style={{ height: '250px' }}>
  {/* Thumbnail - always visible as background */}
  <ImageWithFallback
-// FIXED:  src={((video.thumbnailUrl || video.thumbnail) || video.thumbnail)}
-// FIXED:  alt={video.title}
-// FIXED:  className={`absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-300 ${
- showIframe ? 'opacity-0' : 'opacity-100 group-hover:rounded-lg'
- }`}
+ src={video.thumbnailUrl || video.thumbnail}
+  alt={video.title}
+  className={`absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-300 ${
+   showIframe ? 'opacity-0' : 'opacity-100 group-hover:rounded-lg'
+  }`}
  width={320}
  height={250}
- fallbackSrc={`https://picsum.photos/320/250?random=${video.id}`} />
+ fallbackSrc={`https://picsum.photos/320/250?random=${video.id}`}
  />
 
  {/* YouTube iframe - shown on hover */}
@@ -172,76 +175,77 @@ return duration;
  <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden bg-black">
  <iframe
  key={`hover-${videoId}-${iframeKey}`} // Force remount when mute changes
-// FIXED:  src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&rel=0&modestbranding=1&playsinline=1&fs=0&disablekb=1&iv_load_policy=3&start=0&end=30&loop=1&playlist=${videoId}&origin=${encodeURIComponent(window.location.origin)}&enablejsapi=0`}
+ src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&rel=0&modestbranding=1&playsinline=1&fs=0&disablekb=1&iv_load_policy=3&start=0&end=30&loop=1&playlist=${videoId}&origin=${encodeURIComponent(window.location.origin)}&enablejsapi=0`}
  title={`Preview: ${video.title}`}
-// FIXED:  className="w-full h-full border-0"
+ className="w-full h-full border-0"
  allow="autoplay; encrypted-media"
  allowFullScreen={false}
  loading="lazy"
-// FIXED:  style={{
- pointerEvents: 'none',
- border: 'none',
- outline: 'none' }
- onError={handleIframeError} />
+ style={{
+  pointerEvents: 'none',
+  border: 'none',
+  outline: 'none'
+ }}
+ onError={handleIframeError}
  />
 
  {/* Mute/Unmute Button */}
- <button />
-// FIXED:  onClick={(e: any) => toggleMute(e)}
-// FIXED:  className="absolute bottom-2 left-2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition-all duration-200 z-10"
-// FIXED:  style={{ pointerEvents: 'auto' }
- title={isMuted ? 'Unmute video' : 'Mute video'}
+ <button
+  onClick={toggleMute}
+  className="absolute bottom-2 left-2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition-all duration-200 z-10"
+  style={{ pointerEvents: 'auto' }}
+  title={isMuted ? 'Unmute video' : 'Mute video'}
  >
  {isMuted ? (
  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
  {/* Muted speaker icon */}
  <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-// FIXED:  </svg>
+</svg>
  ) : (
  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
  {/* Unmuted speaker icon */}
  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-// FIXED:  </svg>
+</svg>
  )}
-// FIXED:  </button>
-// FIXED:  </div>
+</button>
+</div>
  )}
 
  {/* Duration Badge */}
  {video.duration && video.duration !== '0:00' && (
  <div className={`absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded-sm font-medium transition-opacity duration-200 ${
- showIframe ? 'opacity-0' : 'opacity-100' />
+ showIframe ? 'opacity-0' : 'opacity-100'
  }`}>
  {formatDuration(video.duration)}
-// FIXED:  </div>
+</div>
  )}
 
  {/* Hover indicator */}
  {isHovered && !showIframe && videoId && (
  <div className={`absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-sm font-medium ${
- hasError ? 'bg-gray-600' : 'bg-red-600' />
+ hasError ? 'bg-gray-600' : 'bg-red-600'
  }`}>
  {hasError ? 'Thumbnail Only' : 'Preview'}
-// FIXED:  </div>
+</div>
  )}
-// FIXED:  </div>
-// FIXED:  </Link>
-// FIXED:  </div>
+</div>
+</Link>
+</div>
 
  {/* Video Info */}
  <div className="flex gap-3">
  {/* Channel Avatar */}
- {((video.channelAvatarUrl || video.thumbnail) || video.thumbnail) && (
+ {(video.channelAvatarUrl || video.thumbnail) && (
  <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
  <ImageWithFallback
-// FIXED:  src={((video.channelAvatarUrl || video.thumbnail) || video.thumbnail)}
-// FIXED:  alt={((video.channelName || video.channelTitle) || video.channelTitle)}
-// FIXED:  className="w-9 h-9 rounded-full object-cover"
+ src={video.channelAvatarUrl || video.thumbnail}
+  alt={video.channelName || video.channelTitle || 'Channel'}
+  className="w-9 h-9 rounded-full object-cover"
  width={36}
  height={36}
- fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || ((video.channelName || video.channelTitle) || video.channelTitle)}`} />
+ fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName || 'channel'}`}
  />
-// FIXED:  </Link>
+</Link>
  )}
 
  {/* Video Details */}
@@ -250,15 +254,15 @@ return duration;
  <Link to={`/watch/${video.id}`}>
  <h3 className="font-medium text-black dark:text-white line-clamp-2 text-sm leading-5 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
  {video.title}
-// FIXED:  </h3>
-// FIXED:  </Link>
+</h3>
+</Link>
 
  {/* Channel Name */}
  <Link to={`/channel/${video.channelId}`}>
  <p className="text-gray-600 dark:text-gray-400 text-sm hover:text-gray-800 dark:hover:text-white transition-colors">
- {((video.channelName || video.channelTitle) || video.channelTitle)}
-// FIXED:  </p>
-// FIXED:  </Link>
+ {video.channelName || video.channelTitle || 'Unknown Channel'}
+</p>
+</Link>
 
  {/* Views and Upload Time */}
  <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm">
@@ -276,11 +280,11 @@ return duration;
  return 'Recently';
  }
  })()}
-// FIXED:  </span>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+</span>
+</div>
+</div>
+</div>
+</div>
  );
 };
 

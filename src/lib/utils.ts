@@ -20,7 +20,7 @@ import React from 'react';
  * @param inputs - Class values to combine and merge
  * @returns A single string of combined and merged class names
  */
-export function cn(...inputs: ClassValue[]): string {
+  function cn(...inputs: ClassValue[]): string {
  return twMerge(clsx(inputs));
 }
 
@@ -34,7 +34,7 @@ export function cn(...inputs: ClassValue[]): string {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatNumber(num: any, decimals: number = 1): string {
+  function formatNumber(num: any, decimals: number = 1): string {
  if (num >= 1000000000) {
  return `${(num / 1000000000).toFixed(decimals)}B`;
  }
@@ -55,7 +55,7 @@ export function formatNumber(num: any, decimals: number = 1): string {
  * @param num - The number to format
  * @returns Formatted number string with commas
  */
-export function formatNumberWithCommas(num: any): string {
+  function formatNumberWithCommas(num: any): string {
  return num.toString().replace(/\B(?=(\d{3})(?!\d))/g, ',');
 }
 
@@ -66,7 +66,7 @@ export function formatNumberWithCommas(num: any): string {
  * @param max - The maximum value
  * @returns The clamped number
  */
-export function clamp(num: any, min: any, max: any): number {
+  function clamp(num: any, min: any, max: any): number {
  return Math.min(Math.max(num, min), max);
 }
 
@@ -76,7 +76,7 @@ export function clamp(num: any, min: any, max: any): number {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatCount(,
+export function formatCount(
  num: number | string,
  decimals: number = 1
 ): string {
@@ -93,7 +93,7 @@ export function formatCount(,
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-export function formatDuration(seconds: any): string {
+  function formatDuration(seconds: any): string {
  const h = Math.floor(seconds / 3600);
  const m = Math.floor((seconds % 3600) / 60);
  const s = Math.floor(seconds % 60);
@@ -113,7 +113,7 @@ export function formatDuration(seconds: any): string {
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function formatRelativeTime(date: Date | string): string {
+  function formatRelativeTime(date: Date | string): string {
  const now = new Date();
  const target = new Date(date);
  const diffInSeconds = Math.floor((now.getTime() - target.getTime()) / 1000);
@@ -140,7 +140,7 @@ export function formatRelativeTime(date: Date | string): string {
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function getTimeAgo(date: Date | string): string {
+  function getTimeAgo(date: Date | string): string {
  return formatRelativeTime(date);
 }
 
@@ -150,7 +150,7 @@ export function getTimeAgo(date: Date | string): string {
  * @param options - Intl.DateTimeFormat options
  * @returns Formatted date string
  */
-export function formatDate(,
+  function formatDate(,
  date: Date | string,
  options: Intl.DateTimeFormatOptions = {
  year: 'numeric',
@@ -171,7 +171,7 @@ export function formatDate(,
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
+  function truncate(str: any, maxLength: any, ellipsis = '...'): string {
  if (!str || str.length <= maxLength) {
  return str;
  }
@@ -183,7 +183,7 @@ export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
  * @param str - The string to convert
  * @returns String in title case
  */
-export function toTitleCase(str: any): string {
+  function toTitleCase(str: any): string {
  return str.replace(/\w\S*/g(txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
  );
 }
@@ -193,7 +193,7 @@ export function toTitleCase(str: any): string {
  * @param str - The string to convert
  * @returns kebab-case string
  */
-export function toKebabCase(str: any): string {
+  function toKebabCase(str: any): string {
  return str
  .replace(/([a-z])([A-Z])/g, '$1-$2')
  .replace(/[\s_]+/g, '-')
@@ -205,14 +205,14 @@ export function toKebabCase(str: any): string {
 // =================================
 
 // Re-export YouTube utilities
-export * from './youtube-utils';
+  * from './youtube-utils';
 
 /**
  * Builds a query string from an object
  * @param params - Object with query parameters
  * @returns Query string (without leading ? )
  */
-export function buildQueryString(params: Record<string, any>): string {
+  function buildQueryString(params: Record<string, any>): string {
  const searchParams = new URLSearchParams();
 
  Object.entries(params).forEach(([key, value]) => {
@@ -240,7 +240,7 @@ export function buildQueryString(params: Record<string, any>): string {
  * @param value - The value to check
  * @returns True if the value is an object (and not null/array)
  */
-export function isObject(value: string | number): value is Record<string, any> {
+  function isObject(value: string | number): value is Record<string, any> {
  return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -249,7 +249,7 @@ export function isObject(value: string | number): value is Record<string, any> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value: string | number): value is (...args: any[]) => any {
+  function isFunction(value: string | number): value is (...args: any[]) => any {
  return typeof value === 'function';
 }
 
@@ -258,7 +258,7 @@ export function isFunction(value: string | number): value is (...args: any[]) =>
  * @param str - The string to check
  * @returns True if the string is a valid URL
  */
-export function isValidUrl(str: any): boolean {
+  function isValidUrl(str: any): boolean {
  try {
  const url = new URL(str);
  return Boolean(url);
@@ -276,7 +276,7 @@ export function isValidUrl(str: any): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends (...args: any[]) => any>(,
+  function debounce<T extends (...args: any[]) => any>(,
  func: T,
  wait: any
 ): (...args: Parameters<T>) => void {
@@ -299,7 +299,7 @@ export function debounce<T extends (...args: any[]) => any>(,
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T extends (...args: any[]) => any>(,
+  function throttle<T extends (...args: any[]) => any>(,
  func: T,
  limit: any
 ): (...args: Parameters<T>) => void {
@@ -322,7 +322,7 @@ export function throttle<T extends (...args: any[]) => any>(,
  * @param file - The file to convert
  * @returns A promise that resolves to the base64 string
  */
-export function fileToBase64(file: File): Promise<string> {
+  function fileToBase64(file: File): Promise<string> {
  return new Promise((resolve: any, reject: any) => {
  const reader = new FileReader();
  reader.readAsDataURL(file);
@@ -342,7 +342,7 @@ export function fileToBase64(file: File): Promise<string> {
  * @param filename - The filename
  * @returns The file extension (without the dot)
  */
-export function getFileExtension(filename: any): string {
+  function getFileExtension(filename: any): string {
  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
@@ -354,7 +354,7 @@ export function getFileExtension(filename: any): string {
  * Checks if the code is running in a browser environment
  * @returns True if running in a browser
  */
-export const isBrowser: any = (): boolean => {
+  const isBrowser: any = (): boolean => {
  return typeof window !== 'undefined' && typeof document !== 'undefined';
 };
 
@@ -363,7 +363,7 @@ export const isBrowser: any = (): boolean => {
  * @param text - The text to copy
  * @returns A promise that resolves when the text is copied
  */
-export async function copyToClipboard(text: any): Promise<void> {
+  async function copyToClipboard(text: any): Promise<void> {
  if (!isBrowser()) {
  return;
  }
@@ -389,7 +389,7 @@ export async function copyToClipboard(text: any): Promise<void> {
  * @param value - The value to check
  * @returns True if the value is not null or undefined
  */
-export function isDefined<T>(value: T | null | undefined): value is T {
+  function isDefined<T>(value: T | null | undefined): value is T {
  return value !== null && value !== undefined;
 }
 
@@ -398,7 +398,7 @@ export function isDefined<T>(value: T | null | undefined): value is T {
  * @param value - The value to check
  * @returns True if the value is a string
  */
-export function isString(value: string | number): value is string {
+  function isString(value: string | number): value is string {
  return typeof value === 'string' || value instanceof String;
 }
 
@@ -407,7 +407,7 @@ export function isString(value: string | number): value is string {
  * @param value - The value to check
  * @returns True if the value is a number
  */
-export function isNumber(value: string | number): value is number {
+  function isNumber(value: string | number): value is number {
  return typeof value === 'number' && !isNaN(value);
 }
 
@@ -420,7 +420,7 @@ export function isNumber(value: string | number): value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
+  function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
  if (!result) {
  return null;
@@ -437,7 +437,7 @@ export function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex: any): 'light' | 'dark' {
+  function getColorContrast(hex: any): 'light' | 'dark' {
  const rgb = hexToRgb(hex);
  if (!rgb) {
  return 'dark';
@@ -460,7 +460,7 @@ export function getColorContrast(hex: any): 'light' | 'dark' {
  * @param array - The array to deduplicate
  * @returns A new array with unique values
  */
-export function uniq<T>(array: T[]): T[] {
+  function uniq<T>(array: T[]): T[] {
  return [...new Set(array)];
 }
 
@@ -470,7 +470,7 @@ export function uniq<T>(array: T[]): T[] {
  * @param key - The key to group by
  * @returns An object with keys and arrays of grouped items
  */
-export function groupBy<T extends Record<string, any> K extends keyof T>(,
+  function groupBy<T extends Record<string, any> K extends keyof T>(,
  array: T[],
  key: K
 ): Record<string, T[]> {
@@ -497,7 +497,7 @@ export function groupBy<T extends Record<string, any> K extends keyof T>(,
  * @param source - The source object
  * @returns A new merged object
  */
-export function deepMerge<T extends object, U extends object>(,
+  function deepMerge<T extends object, U extends object>(,
  target: T,
  source: U
 ): T & U {
@@ -527,7 +527,7 @@ export function deepMerge<T extends object, U extends object>(,
  * @param ms - The delay in milliseconds
  * @returns A promise that resolves after the delay
  */
-export function sleep(ms: any): Promise<void> {
+  function sleep(ms: any): Promise<void> {
  return new Promise(resolve => setTimeout((resolve) as any, ms));
 }
 
@@ -538,7 +538,7 @@ export function sleep(ms: any): Promise<void> {
  * @param error - Optional custom error message
  * @returns A promise that rejects if it takes longer than the timeout
  */
-export function timeout<T>(,
+  function timeout<T>(,
  promise: Promise<T>,
  timeoutMs: any,
  error = 'Operation timed out'
@@ -559,7 +559,7 @@ export function timeout<T>(,
  * @param length - The length of the random string
  * @returns A random string
  */
-export function randomString(length: number = 10): string {
+  function randomString(length: number = 10): string {
  const chars =
  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
  let result = '';
@@ -577,6 +577,6 @@ export function randomString(length: number = 10): string {
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-export function randomInt(min: any, max: any): number {
+  function randomInt(min: any, max: any): number {
  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

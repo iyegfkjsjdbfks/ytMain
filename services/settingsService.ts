@@ -60,7 +60,7 @@ const defaultSettings: Settings = {
  searchResultsPage: {
  youtubePlayer: 'youtube-player-wrapper',
  localPlayer: 'advanced-video-player',
- defaultCategory: 'youtube' } };
+ defaultCategory: 'youtube' },
 
 // Video Player Configurations
 export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = {

@@ -166,12 +166,13 @@ export const uploadVideo = async (_data: VideoUploadData, onProgress?: (progress
  { percentage: 75, status: 'processing' as const, message: 'Generating thumbnail...' },
  { percentage: 100, status: 'completed' as const, message: 'Upload completed successfully!' }];
 
- for (const step of progressSteps) {
- if (onProgress as any) {
- onProgress(step);
- }
- await new Promise(resolve => setTimeout((resolve) as any, 500));
- };
+  for (const step of progressSteps) {
+   if (onProgress) {
+    onProgress(step);
+   }
+   await new Promise(resolve => setTimeout(resolve as any, 500));
+  }
+};
 
 // Default export
 export default {

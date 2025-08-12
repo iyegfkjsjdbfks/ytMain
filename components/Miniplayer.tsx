@@ -23,23 +23,13 @@ return null;
  role="complementary"
 // FIXED:  aria-label={`Miniplayer for ${video.title}`} />
  >
- <Link
- to={`/watch/${video.id}`} />
-// FIXED:  onClick={(e: any) => {
- e.preventDefault(); onMaximize(video.id);
-}
- className="w-[160px] aspect-video block flex-shrink-0 group relative bg-black"
- aria-label={`Maximize video: ${video.title}`}
- title={`Maximize: ${video.title}`}
- >
- <img src={video.thumbnailUrl} alt={video.title} className="w-full h-full object-cover group-hover:opacity-70 transition-opacity" />
- <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
- <PlayIcon className="w-10 h-10 text-white/80" />
-// FIXED:  </div>
-// FIXED:  </Link>
+ <Link to={`/watch/${video.id}`} className="block">
+          <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <PlayIcon className="w-10 h-10 text-white/80" />
+          </div>
+        </Link>
  <div className="flex-grow p-3 overflow-hidden flex flex-col justify-center">
- <Link
- to={`/watch/${video.id}`} />
+ <Link to={`/watch/${video.id}`}>
 // FIXED:  onClick={(e: any) => {
  e.preventDefault(); onMaximize(video.id);
 }

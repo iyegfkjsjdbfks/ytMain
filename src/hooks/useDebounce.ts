@@ -62,8 +62,8 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
  return () => {
  if (timeoutRef.current) {
  clearTimeout(timeoutRef.current);
- };
- }, []);
+    };
+  }, []);
 
  return debouncedCallback;
 }

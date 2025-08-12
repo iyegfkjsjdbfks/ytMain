@@ -9,7 +9,7 @@ import { logger } from './logger';
  * @param date Date object, date string, or timestamp
  * @returns Relative time string
  */
-export const formatDistanceToNow: any = (date: string | Date | number): string => {
+  const formatDistanceToNow: any = (date: string | Date | number): string => {
  try {
  const now = new Date();
  const targetDate = new Date(date);
@@ -62,7 +62,7 @@ export const formatDistanceToNow: any = (date: string | Date | number): string =
  * @param date Date object, date string, or timestamp
  * @returns Short relative time string
  */
-export const formatShortDistanceToNow: any = (
+  const formatShortDistanceToNow = (
  date: string | Date | number
 ): string => {
  try {
@@ -118,7 +118,7 @@ export const formatShortDistanceToNow: any = (
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted date string
  */
-export const formatDate: any = (,
+  const formatDate: any = (,
  date: string | Date | number,
  options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -146,7 +146,7 @@ export const formatDate: any = (,
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted time string
  */
-export const formatTime: any = (,
+  const formatTime: any = (,
  date: string | Date | number,
  options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -172,7 +172,7 @@ export const formatTime: any = (,
  * @param relativeDate Relative date string like "2 hours ago"
  * @returns Timestamp in milliseconds
  */
-export const parseRelativeDate: any = (,
+  const parseRelativeDate: any = (,
  relativeDate: string | null | undefined
 ): number => {
  const now = new Date().getTime();
