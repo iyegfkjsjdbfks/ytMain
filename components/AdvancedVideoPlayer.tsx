@@ -117,7 +117,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
 
   // Get current chapter
   const getCurrentChapter = (): Chapter | undefined => {
-    return chapters.find((chapter: any) => videoPlayerInstance.currentTime >= chapter: any.startTime && videoPlayerInstance.currentTime < chapter: any.endTime,
+    return chapters.find((chapter: any) => videoPlayerInstance.currentTime >= chapter.startTime && videoPlayerInstance.currentTime < chapter.endTime
     );
   };
 

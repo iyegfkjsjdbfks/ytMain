@@ -354,8 +354,8 @@ return 0;
               {expandedReplies[comment.id] && (
                 <div className="space-y-3 pt-2">
                   {comment.replies
-                    .sort((a: any, b: any) => parseRelativeDate(a: any.timestamp) - parseRelativeDate(b: any.timestamp))
-                    .map((reply: any) => renderComment(reply: any, true))
+                    .sort((a: any, b: any) => parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp))
+                    .map((reply: any) => renderComment(reply, true))
                   }
                 </div>
               )}

@@ -89,7 +89,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   // Handle field blur
   const handleBlur = (fieldName: any) => {
     setTouched(prev => ({ ...prev, [fieldName]: true }));
-    const field = fields.find((f: any) => f: any.name === fieldName);
+    const field = fields.find((f: any) => f.name === fieldName);
     if (field) {
       const error = validateField(field, values[fieldName]);
       if (error) {

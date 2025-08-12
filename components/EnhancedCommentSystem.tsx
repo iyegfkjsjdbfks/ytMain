@@ -420,7 +420,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
                 {expandedReplies.has(comment.id) && (
                   <div className="mt-3">
-                    {comment.replies.map((reply: any) => renderComment(reply: any, true))}
+                    {comment.replies.map((reply: any) => renderComment(reply, true))}
                   </div>
                 )}
               </div>
@@ -433,9 +433,9 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
   // Filter and sort comments with memoization
   const sortedComments = useMemo(() => {
-    const topLevelComments = comments.filter((comment: any) => !comment: any.parentId);
-    const pinnedComments = topLevelComments.filter((comment: any) => comment: any.isPinned);
-    const regularComments = topLevelComments.filter((comment: any) => !comment: any.isPinned);
+    const topLevelComments = comments.filter((comment: any) => !comment.parentId);
+    const pinnedComments = topLevelComments.filter((comment: any) => comment.isPinned);
+    const regularComments = topLevelComments.filter((comment: any) => !comment.isPinned);
 
     const sorted = regularComments.sort((a: any, b: any) => {
       switch (sortBy) {
