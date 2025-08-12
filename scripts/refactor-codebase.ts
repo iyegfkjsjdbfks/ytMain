@@ -339,7 +339,7 @@ continue;
     }
 
     // Sort imports: React first, then libraries, then local imports
-    const reactImports = importLines.filter((line: any) => line: any.includes("'react'") || line: any.includes('"react"'));
+    const reactImports = importLines.filter((line: any) => line.includes("'react'") || line.includes('"react"'));
     const libraryImports = importLines.filter((line: any) =>
       !line.includes("'react'") &&
       !line.includes('"react"') &&
@@ -351,7 +351,7 @@ continue;
       (line.includes('./') || line.includes('../')) &&
       line.trim().startsWith('import '),
     );
-    const emptyLines = importLines.filter((line: any) => line: any.trim() === '');
+    const emptyLines = importLines.filter((line: any) => line.trim() === '');
 
     const sortedImports = [
       ...reactImports.sort(),
@@ -485,9 +485,9 @@ export interface ErrorWithSeverity extends AppError {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
 
-        if (stat.isDirectory() && !exclude.some((ex: any) => fullPath.includes(ex: any))) {
+        if (stat.isDirectory() && !exclude.some((ex: any) => fullPath.includes(ex))) {
           searchDirectory(fullPath);
-        } else if (stat.isFile() && extensions.some((ext: any) => item.endsWith(ext: any))) {
+        } else if (stat.isFile() && extensions.some((ext: any) => item.endsWith(ext))) {
           files.push(fullPath);
         }
       }

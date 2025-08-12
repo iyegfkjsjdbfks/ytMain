@@ -129,9 +129,9 @@ const sampleVideos = [
 
 // Video service functions
 export const getVideos = async () => sampleVideos;
-export const getVideoById = async (id: string) => sampleVideos.find(v => v.id: string === id: string) || null;
+export const getVideoById = async (id: string) => sampleVideos.find(v => v.id === id) || null;
 export const getShortsVideos = async () => sampleVideos.filter(v => v.isShort);
-export const getVideosByCategory = async (category: any) => sampleVideos.filter(v => v.category: any === category: any);
+export const getVideosByCategory = async (category: any) => sampleVideos.filter(v => v.category === category);
 export const searchVideos = async (query: any) => sampleVideos.filter(v =>
   v.title.toLowerCase().includes(query.toLowerCase()) ||
   v.description.toLowerCase().includes(query.toLowerCase()),

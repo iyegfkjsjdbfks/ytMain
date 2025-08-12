@@ -222,7 +222,7 @@ export const toggleYouTubePlayer = (playerType: YouTubePlayerType): void => {
   if (isEnabled) {
     // Don't allow disabling if it's the only enabled player
     if (enabled.length > 1) {
-      settings.enabledYouTubePlayers = enabled.filter((p: any) => p: any !== playerType);
+      settings.enabledYouTubePlayers = enabled.filter((p: any) => p !== playerType);
     }
   } else {
     settings.enabledYouTubePlayers = [...enabled, playerType];
@@ -239,7 +239,7 @@ export const toggleLocalPlayer = (playerType: LocalVideoPlayerType): void => {
   if (isEnabled) {
     // Don't allow disabling if it's the only enabled player
     if (enabled.length > 1) {
-      settings.enabledLocalPlayers = enabled.filter((p: any) => p: any !== playerType);
+      settings.enabledLocalPlayers = enabled.filter((p: any) => p !== playerType);
     }
   } else {
     settings.enabledLocalPlayers = [...enabled, playerType];

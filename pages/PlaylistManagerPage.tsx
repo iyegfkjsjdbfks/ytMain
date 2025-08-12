@@ -115,11 +115,11 @@ const PlaylistManagerPage: React.FC = () => {
     const generateMockStats = (playlists: Playlist): PlaylistStats => {
       return {
         totalPlaylists: playlists.length,
-        totalVideos: playlists.reduce((sum: any, playlist: any) => sum: any + playlist: any.videoCount, 0),
-        totalViews: playlists.reduce((sum: any, playlist: any) => sum: any + playlist: any.totalViews, 0),
-        publicPlaylists: playlists.filter((p: any) => p: any.visibility === 'public').length,
-        privatePlaylists: playlists.filter((p: any) => p: any.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter((p: any) => p: any.visibility === 'unlisted').length,
+        totalVideos: playlists.reduce((sum: any, playlist: any) => sum + playlist.videoCount, 0),
+        totalViews: playlists.reduce((sum: any, playlist: any) => sum + playlist.totalViews, 0),
+        publicPlaylists: playlists.filter((p: any) => p.visibility === 'public').length,
+        privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
+        unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length,
       };
     };
 

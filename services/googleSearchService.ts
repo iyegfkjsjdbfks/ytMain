@@ -735,8 +735,8 @@ export const searchYouTubeVideos = async (query: any): Promise<YouTubeSearchResu
     }
 
     // Extract video IDs and channel IDs for batch fetching
-    const videoIds = data.items.map((item: any) => item: any.id.videoId);
-    const channelIds = [...new Set(data.items.map((item: any) => item: any.snippet.channelId))];
+    const videoIds = data.items.map((item: any) => item.id.videoId);
+    const channelIds = [...new Set(data.items.map((item: any) => item.snippet.channelId))];
 
     // Fetch enhanced metadata in parallel
     const [videoDetailsMap, channelDetailsMap] = await Promise.all([
@@ -801,12 +801,12 @@ export const searchYouTubeWithGoogleSearch = async (query: any): Promise<GoogleS
     }
 
     // Filter for YouTube video results
-    const youtubeItems = data.items.filter((item: any) => item: any.link.includes('youtube.com/watch'));
+    const youtubeItems = data.items.filter((item: any) => item.link.includes('youtube.com/watch'));
 
     // Extract video IDs for enhanced metadata fetching
     const videoIds = youtubeItems
-      .map((item: any) => extractVideoIdFromUrl(item: any.link))
-      .filter((id: string): id: string is string => id: string !== null);
+      .map((item: any) => extractVideoIdFromUrl(item.link))
+      .filter((id: string): id is string => id !== null);
 
     let videoDetailsMap = new Map<string, YouTubeVideoDetails>();
     let channelDetailsMap = new Map<string, YouTubeChannelDetails>();

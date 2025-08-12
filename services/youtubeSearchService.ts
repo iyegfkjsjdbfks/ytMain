@@ -277,9 +277,9 @@ class YouTubeSearchService {
                        'No description available';
 
     // Extract tags from various sources
-    const tags: string = [];
+    const tags: string[] = [];
     if (metaTags?.['og:video:tag']) {
-      tags.push(...metaTags['og:video:tag: string'].split(',').map((tag: string) => tag: string.trim()));
+      tags.push(...metaTags['og:video:tag'].split(',').map((tag: string) => tag.trim()));
     }
 
     // Enhanced category detection
@@ -504,7 +504,7 @@ class YouTubeSearchService {
           }
           return isYouTubeVideo;
         })
-        .map((item: any, index: number) => this.convertToVideo(item: any, index: number))
+        .map((item: any, index: number) => this.convertToVideo(item, index))
         .filter((video: any) => {
           // Exclude the current video from recommendations
           const isDifferent = video.id !== currentVideo.id &&
@@ -518,7 +518,7 @@ class YouTubeSearchService {
       conditionalLogger.debug('Final recommendation results', { count: videos.length }, 'YouTubeSearchService');
       if (videos.length > 0) {
         conditionalLogger.debug('Sample recommendations', {
-          samples: videos.slice(0, 3).map((v: any) => ({ title: v: any.title, url: v: any.videoUrl })),
+          samples: videos.slice(0, 3).map((v: any) => ({ title: v.title, url: v.videoUrl })),
         }, 'YouTubeSearchService');
       }
 
@@ -572,8 +572,8 @@ class YouTubeSearchService {
       }
 
       return data.items
-        .filter((item: any) => item: any.link.includes('youtube.com/watch') || item: any.link.includes('youtu.be/'))
-        .map((item: any, index: number) => this.convertToVideo(item: any, index: number));
+        .filter((item: any) => item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/'))
+        .map((item: any, index: number) => this.convertToVideo(item, index));
 
     } catch (error) {
       const networkError = createNetworkError(
