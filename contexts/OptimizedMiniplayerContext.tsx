@@ -254,7 +254,6 @@ export const useMiniplayerVisibility = () => {
 };
 
 export const useMiniplayerPlayback = () => {
-}
   const { state } = useOptimizedMiniplayer();
   return {
     isPlaying: state.isPlaying,
@@ -265,7 +264,6 @@ export const useMiniplayerPlayback = () => {
 };
 
 export const useMiniplayerQueue = () => {
-}
   const { state } = useOptimizedMiniplayer();
   return {
     queue: state.queue,
@@ -274,7 +272,6 @@ export const useMiniplayerQueue = () => {
 };
 
 export const useMiniplayerActions = () => {
-}
   const { actions } = useOptimizedMiniplayer();
   return actions;
 };

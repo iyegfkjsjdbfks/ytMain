@@ -44,8 +44,8 @@ return fallbackSrc;
  const [w, h] = dimensions.split('x').map(Number);
  return `https://picsum.photos/${w || width}/${h || height}?random=${Math.floor(Math.random() * 1000)}`;
  }
- // Generate a picsum URL as fallback
- return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
+    // Generate a picsum URL as fallback
+    return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
   }, [fallbackSrc, src, width, height]);
 
  useEffect(() => {

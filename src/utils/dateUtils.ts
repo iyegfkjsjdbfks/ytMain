@@ -118,7 +118,7 @@ import { logger } from './logger';
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted date string
  */
-  const formatDate: any = (,
+  const formatDate: any = (
  date: string | Date | number,
  options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -146,7 +146,7 @@ import { logger } from './logger';
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted time string
  */
-  const formatTime: any = (,
+  const formatTime: any = (
  date: string | Date | number,
  options?: Intl.DateTimeFormatOptions
 ): string => {

@@ -41,9 +41,8 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
   <button
    onClick={onClick}
    className={commonClasses}
-   role="menuitem"
-
-   {content}
+   role="menuitem">
+    {content}
   </button>
  );
 };
@@ -92,9 +91,8 @@ className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-
  aria-haspopup="true"
  aria-controls="user-menu"
  id="user-menu-button"
- title="Your Account"
-
- {user.avatar ? (
+  title="Your Account">
+  {user.avatar ? (
  <img src={user.avatar} alt="User Avatar" className="w-8 h-8 rounded-full" />
  ) : (
  <div className="w-8 h-8 rounded-full bg-gray-400 dark:bg-gray-600 flex items-center justify-center">
@@ -192,8 +190,7 @@ setIsNotificationsPanelOpen(false);
 onClick={(e: any) => toggleSidebar(e)}
 className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
 aria-label="Toggle sidebar menu"
- title="Menu"
-
+ title="Menu">
  <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6" />
 </button>
  <Link to="/" className="flex items-center" aria-label="YoutubeX Home">

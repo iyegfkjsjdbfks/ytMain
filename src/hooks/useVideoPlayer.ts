@@ -165,10 +165,10 @@ export const useVideoPlayer: any = (
  video.addEventListener('durationchange', handleDurationChange as EventListener);
  video.addEventListener('volumechange', handleVolumeChange as EventListener);
  video.addEventListener('ratechange', handlePlaybackRateChange as EventListener);
- video.addEventListener('enterpictureinpicture', ( as EventListener) =>
+  video.addEventListener('enterpictureinpicture', (() =>
  setState(prev => ({ ...prev as any, isPictureInPicture: true }))
  );
- video.addEventListener('leavepictureinpicture', ( as EventListener) =>
+ video.addEventListener('leavepictureinpicture', (( =>
  setState(prev => ({ ...prev as any, isPictureInPicture: false }))
  );
  video.addEventListener('error', handleError as EventListener);

@@ -70,7 +70,7 @@ export interface UseApiOptions {
  dependencies?: any;
 }
 
-export function useApi<T>(,
+export function useApi<T>(
  apiCall: () => Promise<T>,
  options: UseApiOptions = {}
 ): AsyncState<T> & {
@@ -124,8 +124,8 @@ export function useApi<T>(,
  } else {
  setError(apiError);
  retryCountRef.current = 0;
- }
- }, [
+    }
+  }, [
  apiCall,
  setData,
  setLoading,

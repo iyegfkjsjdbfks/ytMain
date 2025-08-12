@@ -84,7 +84,7 @@ interface UseInitialSearchResult {
  * This respects the Hybrid Mode settings and automatically refetches when
  * the keyword is updated in the admin settings.
  */
-export function useTrendingSearch(): UseInitialSearchResult {
+  function useTrendingSearch(): UseInitialSearchResult {
  const [data, setData] = useState<Video[]>([]);
  const [loading, setLoading] = useState<boolean>(false);
  const [error, setError] = useState<string | null>(null);
@@ -97,7 +97,7 @@ export function useTrendingSearch(): UseInitialSearchResult {
  const initialKeyword = getInitialSearchKeyword();
 
  // Use home page specific search logic (YouTube API first in hybrid mode)
- const combinedResults = await searchForHomePage(initialKeyword(query: any) =>
+ const combinedResults = await searchForHomePage(initialKeyword, (query: any) =>
  VideoService.searchVideos(query).then(result => result.videos)
  );
 

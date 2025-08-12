@@ -51,18 +51,22 @@ const defaultSettings: Settings = {
  pageConfigurations: {
  watchPage: {
  youtubePlayer: 'youtube-player',
- localPlayer: 'video-player',
- defaultCategory: 'youtube' },
- homePage: {
+  localPlayer: 'video-player',
+  defaultCategory: 'youtube'
+  },
+  homePage: {
  youtubePlayer: 'youtube-player',
  localPlayer: 'advanced-video-player',
- defaultCategory: 'youtube' },
- searchResultsPage: {
+  defaultCategory: 'youtube'
+  },
+  searchResultsPage: {
  youtubePlayer: 'youtube-player-wrapper',
- localPlayer: 'advanced-video-player',
- defaultCategory: 'youtube' },
+  localPlayer: 'advanced-video-player',
+  defaultCategory: 'youtube'
+  }
 
 // Video Player Configurations
+
 export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = {
  'youtube-player': {
  type: 'youtube-player',

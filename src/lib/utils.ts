@@ -150,7 +150,7 @@ export function formatCount(
  * @param options - Intl.DateTimeFormat options
  * @returns Formatted date string
  */
-  function formatDate(,
+  function formatDate(
  date: Date | string,
  options: Intl.DateTimeFormatOptions = {
  year: 'numeric',
@@ -184,7 +184,7 @@ export function formatCount(
  * @returns String in title case
  */
   function toTitleCase(str: any): string {
- return str.replace(/\w\S*/g(txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+ return str.replace(/\w\S*/g, (txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
  );
 }
 
@@ -205,7 +205,7 @@ export function formatCount(
 // =================================
 
 // Re-export YouTube utilities
-  * from './youtube-utils';
+export * from './youtube-utils';
 
 /**
  * Builds a query string from an object

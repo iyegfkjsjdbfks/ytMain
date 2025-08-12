@@ -47,7 +47,7 @@ export const useDropdownMenu: any = () => {
  return () => document.removeEventListener('keydown', handleEscapeKey as EventListener);
  }
  return undefined;
- }, [isOpen]);
+  }, [isOpen]);
 
  return {
  isOpen,

@@ -71,11 +71,11 @@ export function useLocalStorage<T>(
  * @param ttl - Time to live in milliseconds
  * @returns [storedValue, setValue, removeValue, isExpired]
  */
-export function useLocalStorageWithExpiry<T>(,
+export function useLocalStorageWithExpiry<T>(
  key: string,
  initialValue: T,
  ttl: any
-): [T(value: SetValue<T>) => void() => void, boolean] {
+): [T, (value: SetValue<T>) => void, () => void, boolean] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  if (typeof window === 'undefined') {
  return initialValue;

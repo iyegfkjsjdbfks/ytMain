@@ -164,8 +164,8 @@ export function getYouTubeVideoId(
  // Call the original callback if it exists
  if (originalCallback && typeof originalCallback === 'function') {
  originalCallback();
- };
- });
+    };
+  });
  }
 
  private async initPlayer() {

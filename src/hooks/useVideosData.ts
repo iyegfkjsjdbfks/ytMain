@@ -30,7 +30,7 @@ export function useVideosData(
  default: {
  const response = await unifiedDataService.getTrendingVideos(50);
  return response.data;
-   } else {
+  } else {
  // Legacy mode - use original mock service
  switch (type as any) {
  case 'shorts':

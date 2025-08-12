@@ -270,7 +270,7 @@ export const useWatchPage: any = () => {
  .filter((v: any) => v.id !== videoId && v.category === foundVideo.category)
  .slice(0, 20);
  setAllRelatedVideos(related);
-    } catch (error: any) {
+  } catch (error: any) {
  (console as any).error('Error loading video data:', error);
  } finally {
  setLoading(false);

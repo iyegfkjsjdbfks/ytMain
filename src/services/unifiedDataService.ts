@@ -51,6 +51,8 @@ const defaultConfig: UnifiedDataConfig = {
 /**
  * Search filters for unified queries
  */
+}
+
 export interface UnifiedSearchFilters {
  query?: string;
  category?: string;
@@ -101,7 +103,7 @@ class UnifiedDataService {
  /**
  * Fetch trending videos from all enabled sources
  */
- async getTrendingVideos(,
+ async getTrendingVideos(
  limit: number = 50,
  filters: UnifiedSearchFilters = {}
  ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {

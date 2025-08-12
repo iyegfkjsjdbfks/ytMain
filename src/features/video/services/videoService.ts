@@ -64,8 +64,7 @@ class VideoService {
  /**
  * Fetch recommended videos based on a video ID
  */
- async getRecommendedVideos(
-    videoId: any,
+ async getRecommendedVideos(videoId: any,
  limit: number = 10
  ): Promise<Video[]> {
  const url = new URL(this.baseUrl);
@@ -179,6 +178,8 @@ class VideoService {
  /**
  * Get video interactions (likes, dislikes, saves)
  */
+  }
+
  async getVideoInteractions(videoId: any): Promise<VideoInteractionResponse> {
  const response = await (fetch as any)(`${this.baseUrl}/${videoId}/interactions`);
 
