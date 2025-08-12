@@ -54,7 +54,7 @@ interface NotificationConfig {
   _config: {
     url?: string;
     channel?: string;
-    recipients?: string;
+    recipients?: string[];
   };
   events: Array<'start' | 'success' | 'failure' | 'rollback'>;
 }
@@ -62,8 +62,8 @@ interface NotificationConfig {
 interface DeploymentPipeline {
   id: string;
   name: string;
-  stages: PipelineStage;
-  triggers: PipelineTrigger;
+  stages: PipelineStage[];
+  triggers: PipelineTrigger[];
   _environment: string;
   parallelExecution: boolean;
 }
@@ -72,18 +72,18 @@ interface PipelineStage {
   id: string;
   name: string;
   type: 'build' | 'test' | 'security-scan' | 'quality-check' | 'deploy' | 'verify';
-  commands: string;
+  commands: string[];
   timeout: number;
   retries: number;
   continueOnFailure: boolean;
-  artifacts?: string;
-  dependencies?: string;
+  artifacts?: string[];
+  dependencies?: string[];
 }
 
 interface PipelineTrigger {
   type: 'push' | 'pull-request' | 'schedule' | 'manual' | 'webhook';
   _config: {
-    branches?: string;
+    branches?: string[];
     schedule?: string;
     webhook?: string;
   };
@@ -107,7 +107,7 @@ interface StageExecution {
   startTime?: number;
   endTime?: number;
   logs: string[];
-  artifacts?: string;
+  artifacts?: string[];
 }
 
 interface DeploymentLogEntry {
@@ -147,7 +147,7 @@ class DeploymentAutomationEngine {
   private executions: Map<string, DeploymentExecution> = new Map();
   private configs: Map<string, DeploymentConfig> = new Map();
   private isRunning = false;
-  private executionQueue: string = [];
+  private executionQueue: string[] = [];
   private maxConcurrentExecutions = 3;
   private currentExecutions = 0;
 
@@ -705,7 +705,7 @@ return;
   /**
    * Execute a deployment
    */
-  private async executeDeployment(__executionId: any): Promise<void> {
+  private async executeDeployment(_executionId: any): Promise<void> {
     const _execution = this.executions.get(_executionId);
     if (!_execution) {
 return;
@@ -726,7 +726,8 @@ return;
       await this.sendNotifications(pipeline._environment, 'start', _execution);
 
       // Execute stages
-      for (const stage of pipeline.stages) {
+      const stages = Array.isArray(pipeline.stages) ? pipeline.stages : [pipeline.stages];
+      for (const stage of stages) {
         const stageExecution = _execution.stages.find((s: StageExecution) => s.stageId === stage.id);
         if (!stageExecution) {
           continue;
@@ -734,7 +735,7 @@ return;
 
         // Check dependencies
         if (stage.dependencies && stage.dependencies.length > 0) {
-          const dependenciesMet = (stage.dependencies as string[]).every((depId) => {
+          const dependenciesMet = stage.dependencies.every((depId) => {
             const depStage = _execution.stages.find((s: StageExecution) => s.stageId === depId);
             return !!depStage && depStage.status === 'success';
           });
@@ -945,17 +946,17 @@ continue;
         const success = await this.executeHealthCheck(_healthCheck);
 
         if (success) {
-          this.addLog(_execution, 'info', `✅ Health check passed: ${_healthCheck.name}`);
+          this.addLog(execution, 'info', `✅ Health check passed: ${_healthCheck.name}`);
         } else {
-          this.addLog(_execution, 'error', `❌ Health check failed: ${_healthCheck.name}`);
+          this.addLog(execution, 'error', `❌ Health check failed: ${_healthCheck.name}`);
 
           if (_healthCheck.critical && config.autoRollback) {
-            await this.performRollback(_execution, `Critical health check failed: ${_healthCheck.name}`);
+            await this.performRollback(execution, `Critical health check failed: ${_healthCheck.name}`);
             return;
           }
         }
       } catch (error) {
-        this.addLog(_execution, 'error', `Health check _error: ${_healthCheck.name} - ${error}`);
+        this.addLog(execution, 'error', `Health check error: ${_healthCheck.name} - ${error}`);
       }
     }
   }

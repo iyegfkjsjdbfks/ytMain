@@ -96,7 +96,7 @@ export interface UnifiedDataResponse<T> {
  */
 class UnifiedDataService {
   private config: UnifiedDataConfig;
-  private cache = new Map<string, { data; timestamp: number }>();
+  private cache = new Map<string, { data: any; timestamp: number }>();
 
   constructor(config: Partial<UnifiedDataConfig> = {}) {
     this.config = { ...defaultConfig, ...config };
@@ -169,7 +169,7 @@ class UnifiedDataService {
    * Search videos across all enabled sources
    */
   async searchVideos(
-    query: any,
+    query: string,
     filters: UnifiedSearchFilters = {},
     limit: number = 50
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
@@ -858,7 +858,7 @@ class UnifiedDataService {
   }
 
   private async searchLocalVideos(
-    query: any,
+    query: string,
     filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     // Local video search disabled - returning empty array
@@ -871,7 +871,7 @@ class UnifiedDataService {
    * Note: Metadata will still be fetched using YouTube Data API v3 via getVideoById
    */
   private async searchGoogleCustomSearchVideos(
-    query: any,
+    query: string,
     _filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     try {
@@ -959,7 +959,7 @@ class UnifiedDataService {
   }
 
   private async searchYouTubeVideos(
-    query: any,
+    query: string,
     filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     try {
@@ -1046,9 +1046,9 @@ class UnifiedDataService {
   // Video mixing strategies
 
   private mixVideoResults(
-    localVideos: UnifiedVideoMetadata,
-    youtubeVideos: UnifiedVideoMetadata,
-    limit: any
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
   ): UnifiedVideoMetadata[] {
     switch (this.config.mixing.strategy) {
       case 'round-robin':
@@ -1063,11 +1063,11 @@ class UnifiedDataService {
   }
 
   private roundRobinMix(
-    localVideos: UnifiedVideoMetadata,
-    youtubeVideos: UnifiedVideoMetadata,
-    limit: any
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
   ): UnifiedVideoMetadata[] {
-    const mixed: UnifiedVideoMetadata = [];
+    const mixed: UnifiedVideoMetadata[] = [];
     const maxLength = Math.max(localVideos.length, youtubeVideos.length);
 
     for (let i = 0; i < maxLength && mixed.length < limit; i++) {
@@ -1087,12 +1087,12 @@ class UnifiedDataService {
   }
 
   private sourcePriorityMix(
-    localVideos: UnifiedVideoMetadata,
-    youtubeVideos: UnifiedVideoMetadata,
-    limit: any
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
   ): UnifiedVideoMetadata[] {
     const priority = this.config.mixing.sourcePriority || ['local', 'youtube'];
-    const mixed: UnifiedVideoMetadata = [];
+    const mixed: UnifiedVideoMetadata[] = [];
 
     for (const source of priority) {
       const videos = source === 'local' ? localVideos : youtubeVideos;
@@ -1108,9 +1108,9 @@ class UnifiedDataService {
   }
 
   private relevanceMix(
-    localVideos: UnifiedVideoMetadata,
-    youtubeVideos: UnifiedVideoMetadata,
-    limit: any
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
   ): UnifiedVideoMetadata[] {
     // Combine all videos and sort by relevance (views, likes, recency)
     const allVideos = [...localVideos, ...youtubeVideos];
@@ -1190,7 +1190,7 @@ class UnifiedDataService {
 
   // Utility methods
 
-  private formatViews(count: any): string {
+  private formatViews(count: number): string {
     if (count >= 1000000000) {
       return `${(count / 1000000000).toFixed(1)}B views`;
     }
@@ -1203,7 +1203,7 @@ class UnifiedDataService {
     return `${count} views`;
   }
 
-  private formatTimeAgo(dateString: any): string {
+  private formatTimeAgo(dateString: string): string {
     if (!dateString) {
       return '';
     }

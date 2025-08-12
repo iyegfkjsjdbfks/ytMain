@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, ReactNode, memo, FC } from 'react';
+import React, { ReactNode } from 'react';
 // Component utilities and helpers
 // Type definitions
 export interface TruncateOptions {
@@ -91,7 +91,7 @@ export const safeLocalStorage = {
   setItem: (key: string, value: string | number): boolean => {
     try {
       if (typeof window !== 'undefined') {
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, String(value));
         return true;
       }
     } catch (error) {
@@ -127,9 +127,9 @@ export default {
   ComponentWrapper,
   buildTruncateClasses,
   safeLocalStorage,
-  memo,
-  useMemo,
-  useCallback,
+  memo: React.memo,
+  useMemo: React.useMemo,
+  useCallback: React.useCallback,
 };
 
 // Additional utility functions
