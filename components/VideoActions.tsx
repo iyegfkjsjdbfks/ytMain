@@ -1,4 +1,9 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
@@ -46,7 +51,7 @@ return null;
       <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
         <h3 className="text-base font-medium text-neutral-900 dark:text-neutral-100">Share</h3>
         <button
-          onClick={onClose}
+          onClick={(e: any) => onClose(e)}
           className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700"
           aria-label="Close share modal"
         >
@@ -103,7 +108,7 @@ return null;
               className="flex-1 px-3 py-2 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-neutral-50 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300"
             />
             <button
-              onClick={onCopyLink}
+              onClick={(e: any) => onCopyLink(e)}
               className="px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white text-sm font-medium rounded-md transition-colors"
             >
               Copy
@@ -128,21 +133,21 @@ const VideoActions: React.FC<VideoActionsProps> = ({
   onShare,
   onSave,
   saveModalLoading = false }) => {
-  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
   const [shareMessage, setShareMessage] = useState<string>('');
   const saveButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleShare = () => {
+  const handleShare: any = () => {
     setIsShareModalOpen(true);
     onShare();
   };
 
-  const handleShareToSocial = (platform: any) => {
+  const handleShareToSocial: any = (platform: any) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(document.title);
 
     let shareUrl = '';
-    switch (platform) {
+    switch (platform as any) {
       case 'twitter':
         shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
         break;
@@ -157,27 +162,27 @@ const VideoActions: React.FC<VideoActionsProps> = ({
         break;
     }
 
-    if (shareUrl) {
+    if (shareUrl as any) {
       window.open(shareUrl, '_blank', 'width=600,height=400');
     }
     setIsShareModalOpen(false);
   };
 
-  const handleCopyLink = async () => {
+  const handleCopyLink = async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(window.location.href);
       setShareMessage('Link copied to clipboard!');
-      setTimeout(() => setShareMessage(''), 3000);
-    } catch (err) {
-      console.error('Failed to copy link:', err);
+      setTimeout((() => setShareMessage('')) as any, 3000);
+    } catch (err: any) {
+      (console as any).error('Failed to copy link:', err);
       setShareMessage('Failed to copy link');
-      setTimeout(() => setShareMessage(''), 3000);
+      setTimeout((() => setShareMessage('')) as any, 3000);
     }
   };
 
   // Close share modal when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (isShareModalOpen && !(event.target as Element).closest('.share-modal-container')) {
         setIsShareModalOpen(false);
       }
@@ -193,7 +198,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
       {/* Like/Dislike Button Group */}
       <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 rounded-full">
         <button
-          onClick={onLike}
+          onClick={(e: any) => onLike(e)}
           className={`flex items-center space-x-1.5 pl-3 pr-2.5 py-2 rounded-l-full text-sm font-medium transition-colors
             ${liked ? 'text-sky-600 dark:text-sky-400 bg-sky-100 dark:bg-sky-500/10 hover:bg-sky-200 dark:hover:bg-sky-500/20' : 'text-neutral-800 dark:text-neutral-50 hover:bg-neutral-200 dark:hover:bg-neutral-700/70'}`}
           aria-pressed={liked}
@@ -204,7 +209,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
         </button>
         <div className="h-5 w-px bg-neutral-300 dark:bg-neutral-600/80" />
         <button
-          onClick={onDislike}
+          onClick={(e: any) => onDislike(e)}
           className={`hover:bg-neutral-200 dark:hover:bg-neutral-700/70 px-2.5 py-2 rounded-r-full text-sm font-medium transition-colors
             ${disliked ? 'text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-500/10 hover:bg-red-200 dark:hover:bg-red-500/20' : 'text-neutral-800 dark:text-neutral-50'}`}
           aria-pressed={disliked}
@@ -217,7 +222,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
       {/* Share Button */}
       <div className="relative share-modal-container">
         <button
-          onClick={handleShare}
+          onClick={(e: any) => handleShare(e)}
           className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3 py-2 rounded-full text-sm font-medium transition-colors"
           aria-label="Share this video"
           title="Share"
@@ -239,7 +244,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
       <div className="relative">
         <button
           ref={saveButtonRef}
-          onClick={onSave}
+          onClick={(e: any) => onSave(e)}
           disabled={saveModalLoading}
           className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60"
           aria-label="Save this video to a playlist"

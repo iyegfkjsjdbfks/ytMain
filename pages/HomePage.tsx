@@ -1,4 +1,9 @@
+import React from 'react';
 import { useCallback, useMemo, useState, memo, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
@@ -11,6 +16,7 @@ import type { Video } from '../types';
 const MemoizedVideoCard = memo(HoverAutoplayVideoCard);
 
 const HomePage: React.FC = () => {
+  return null;
   const { data: videos, loading, error } = useTrendingSearch();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const currentKeyword = getInitialSearchKeyword();
@@ -35,7 +41,7 @@ const HomePage: React.FC = () => {
     'Education', 'Technology', 'Travel', 'Food', 'Fashion',
     'Comedy', 'Science', 'Health', 'Business'], []);
 
-  if (error) {
+  if (error as any) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">

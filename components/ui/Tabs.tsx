@@ -1,3 +1,6 @@
+import React from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { useContext, createContext, FC, ReactNode } from 'react';
 
@@ -7,8 +10,8 @@ interface TabsContextType {
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined);
 
-const useTabsContext = () => {
-  const context = useContext(TabsContext);
+const useTabsContext: any = () => {
+  const context = useContext<any>(TabsContext);
   if (!context) {
     throw new Error('Tabs components must be used within a Tabs provider');
   }
@@ -22,7 +25,7 @@ export interface TabsProps {
   className?: string;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children, className = '' }) => {
+export const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children, className = '' }: any) => {
   return (
     <TabsContext.Provider value={{ value, onValueChange }}>
       <div className={className}>
@@ -37,7 +40,7 @@ interface TabsListProps {
   className?: string;
 }
 
-export const TabsList: React.FC<TabsListProps> = ({ children, className = '' }) => {
+export const TabsList: React.FC<TabsListProps> = ({ children, className = '' }: any) => {
   return (
     <div className={`flex space-x-1 border-b border-neutral-200 dark:border-neutral-700 ${className}`}>
       {children}
@@ -51,7 +54,7 @@ interface TabsTriggerProps {
   className?: string;
 }
 
-export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, className = '' }) => {
+export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, className = '' }: any) => {
   const { value: activeValue, onValueChange } = useTabsContext();
   const isActive = activeValue === value;
 
@@ -77,7 +80,7 @@ interface TabsContentProps {
   className?: string;
 }
 
-export const TabsContent: React.FC<TabsContentProps> = ({ value, children, className = '' }) => {
+export const TabsContent: React.FC<TabsContentProps> = ({ value, children, className = '' }: any) => {
   const { value: activeValue } = useTabsContext();
 
   if (activeValue !== value) {
@@ -90,3 +93,4 @@ export const TabsContent: React.FC<TabsContentProps> = ({ value, children, class
     </div>
   );
 };
+export default Tabs;

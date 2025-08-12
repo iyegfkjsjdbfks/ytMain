@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Navigate } from 'react-router-dom';
 import type React from 'react';
+import { FC } from 'react';
 
 import ReusableVideoGrid from '../components/ReusableVideoGrid';
 import StandardPageLayout from '../components/StandardPageLayout';
@@ -19,6 +20,7 @@ import type { Video } from '../types';
  * Compare this with the original TrendingPage to see the reduction in boilerplate
  */
 const RefactoredTrendingPage: React.FC = () => {
+  return null;
   const { data: unifiedVideos, loading, error } = useVideosData('trending');
 
   // Convert UnifiedVideoMetadata to Video format for compatibility
@@ -48,7 +50,7 @@ const RefactoredTrendingPage: React.FC = () => {
     createdAt: video.publishedAt || '',
           updatedAt: video.publishedAt || '' })) : [];
 
-  const handleVideoClick = (video: Video) => {
+  const handleVideoClick: any = (video: Video) => {
     // Navigate to video or handle click
     window.location.href = `/watch?v=${video.id}`;
   };

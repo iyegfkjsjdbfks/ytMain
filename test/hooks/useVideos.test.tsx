@@ -1,3 +1,4 @@
+import React from 'react';
 import type React from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -13,7 +14,7 @@ vi.mock('../../src/services/unifiedDataService');
 const mockUnifiedDataService = vi.mocked(unifiedDataService);
 
 // Test wrapper component with React Query provider
-const createWrapper = () => {
+const createWrapper: any = () => {
   const queryClient = new QueryClient({
     defaultOptions: {,
       queries: {
@@ -22,7 +23,7 @@ const createWrapper = () => {
         gcTime: 0 } 
         } });
 
-  const Wrapper = ({ children }) => (
+  const Wrapper: any = ({ children }: any) => (
     <QueryClientProvider client={queryClient}>
       {children}
     </QueryClientProvider>
@@ -36,7 +37,7 @@ describe('Unified Video Hooks', () => {
   });
 
   describe('useUnifiedVideos', () => {
-    it('should fetch trending videos successfully', async () => {
+    it('should fetch trending videos successfully', async (): Promise<void> => {
       const mockResponse = {
         data: [
           {
@@ -133,7 +134,7 @@ describe('Unified Video Hooks', () => {
       expect(result.current.error).toBeNull();
     });
 
-    it('should handle errors gracefully', async () => {
+    it('should handle errors gracefully', async (): Promise<void> => {
       const mockError = new Error('Failed to fetch videos');
       mockUnifiedDataService.getTrendingVideos.mockRejectedValue(mockError);
 
@@ -151,7 +152,7 @@ describe('Unified Video Hooks', () => {
       expect(result.current.error).toBeTruthy();
     });
 
-    it('should use correct cache key with filters', async () => {
+    it('should use correct cache key with filters', async (): Promise<void> => {
       const mockResponse = {
         data: [],
           sources: { local: { count: 0,
@@ -164,7 +165,7 @@ describe('Unified Video Hooks', () => {
 
       const { Wrapper } = createWrapper();
       const filters = { category: 'Gaming',
-          type: 'video' as const };
+          type: "video" as const as const };
 
       renderHook(
         () => useUnifiedVideos(25, filters),
@@ -177,7 +178,7 @@ describe('Unified Video Hooks', () => {
   });
 
   describe('useUnifiedVideo', () => {
-    it('should fetch single video by ID', async () => {
+    it('should fetch single video by ID', async (): Promise<void> => {
       const mockVideo = {
         id: 'test-video',
           title: 'Test Video',
@@ -229,7 +230,7 @@ describe('Unified Video Hooks', () => {
       expect(result.current.loading).toBe(false);
     });
 
-    it('should handle video not found', async () => {
+    it('should handle video not found', async (): Promise<void> => {
       mockUnifiedDataService.getVideoById.mockResolvedValue(null);
 
       const { Wrapper } = createWrapper();
@@ -255,7 +256,7 @@ describe('Unified Video Hooks', () => {
       expect(mockUnifiedDataService.getVideoById).not.toHaveBeenCalled();
     });
 
-    it('should handle fetch errors', async () => {
+    it('should handle fetch errors', async (): Promise<void> => {
       const mockError = new Error('Failed to fetch video');
       mockUnifiedDataService.getVideoById.mockRejectedValue(mockError);
 
@@ -274,7 +275,7 @@ describe('Unified Video Hooks', () => {
   });
 
   describe('useUnifiedTrendingVideos', () => {
-    it('should fetch trending videos with proper caching', async () => {
+    it('should fetch trending videos with proper caching', async (): Promise<void> => {
       const mockResponse = {
         data: [
           {
@@ -368,7 +369,7 @@ describe('Unified Video Hooks', () => {
       expect(result.current.data?.data).toEqual(mockResponse.data);
     });
 
-    it('should refetch on window focus by default', async () => {
+    it('should refetch on window focus by default', async (): Promise<void> => {
       const mockResponse = {
         data: [],
           sources: { local: { count: 0,
@@ -394,7 +395,7 @@ describe('Unified Video Hooks', () => {
   });
 
   describe('useUnifiedShorts', () => {
-    it('should fetch shorts videos', async () => {
+    it('should fetch shorts videos', async (): Promise<void> => {
       const mockResponse = {
         data: [
           {
@@ -490,7 +491,7 @@ describe('Unified Video Hooks', () => {
   });
 
   describe('useUnifiedSearchVideos', () => {
-    it('should search videos with query', async () => {
+    it('should search videos with query', async (): Promise<void> => {
       const mockResponse = {
         data: [
           {
@@ -605,7 +606,7 @@ describe('Unified Video Hooks', () => {
       expect(mockUnifiedDataService.searchVideos).not.toHaveBeenCalled();
     });
 
-    it('should handle search errors', async () => {
+    it('should handle search errors', async (): Promise<void> => {
       const mockError = new Error('Search failed');
       mockUnifiedDataService.searchVideos.mockRejectedValue(mockError);
 
@@ -625,7 +626,7 @@ describe('Unified Video Hooks', () => {
 
   describe('Combined Hooks', () => {
     describe('useVideoWithRelated', () => {
-      it('should fetch video and related videos', async () => {
+      it('should fetch video and related videos', async (): Promise<void> => {
         // Mock video data would be needed for this test
 
         // This test would require mocking the videoApi dependency
@@ -644,7 +645,7 @@ describe('Unified Video Hooks', () => {
     });
 
     describe('useHomePageData', () => {
-      it('should combine multiple data sources for home page', async () => {
+      it('should combine multiple data sources for home page', async (): Promise<void> => {
         const { Wrapper } = createWrapper();
         const { result } = renderHook(
           () => useHomePageData(),
@@ -661,7 +662,7 @@ describe('Unified Video Hooks', () => {
   });
 
   describe('Hook Configuration', () => {
-    it('should apply custom configuration options', async () => {
+    it('should apply custom configuration options', async (): Promise<void> => {
       const customConfig = {
         staleTime: 30000,
           refetchOnWindowFocus: false };
@@ -708,7 +709,7 @@ describe('Unified Video Hooks', () => {
   });
 
   describe('Refetch Functionality', () => {
-    it('should provide refetch function', async () => {
+    it('should provide refetch function', async (): Promise<void> => {
       const mockResponse = {
         data: [],
           sources: { local: { count: 0,
@@ -732,7 +733,7 @@ describe('Unified Video Hooks', () => {
       expect(typeof result.current.refetch).toBe('function');
 
       // Test refetch functionality
-      await result.current.refetch();
+      await result.current.re(fetch as any)();
       expect(mockUnifiedDataService.getTrendingVideos).toHaveBeenCalledTimes(2);
     });
   });

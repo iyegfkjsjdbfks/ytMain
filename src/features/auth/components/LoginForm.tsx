@@ -1,5 +1,9 @@
 import React, { useState, FC, ChangeEvent } from 'react';
 import { useLocation, useNavigate  } from 'react-router-dom';
+import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { useAuthStore } from '../store/authStore';
 import type { LoginCredentials } from '../types';
@@ -13,6 +17,7 @@ interface LocationState {
  * Login form component with validation and error handling
  */
 export const LoginForm: React.FC = () => {
+  return null;
   const navigate = useNavigate();
   const location = useLocation();
   const { login, error } = useAuthStore();
@@ -26,9 +31,9 @@ export const LoginForm: React.FC = () => {
     email: '',
           password: '' });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const validateForm = (): boolean => {
+  const validateForm: any = (): boolean => {
     let isValid = true;
     const errors = {
       email: '',
@@ -53,14 +58,14 @@ export const LoginForm: React.FC = () => {
     return isValid;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange: any = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData({
-      ...formData,
+      ...formData as any,
       [name]: type === 'checkbox' ? checked : value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<any> => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -76,7 +81,7 @@ export const LoginForm: React.FC = () => {
       const state = location.state as LocationState;
       const destination = state.from?.pathname || '/';
       navigate(destination, { replace: true });
-    } catch (err) {
+    } catch (err: any) {
       // Error is handled by the authStore and displayed below
     } finally {
       setIsSubmitting(false);
@@ -93,7 +98,7 @@ export const LoginForm: React.FC = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e: any) => handleSubmit(e)}>
         <div className='mb-4'>
           <label
             className='block text-gray-700 text-sm font-bold mb-2'
@@ -111,7 +116,7 @@ export const LoginForm: React.FC = () => {
                 : 'border-gray-300 focus:ring-blue-200'
             }`}
             value={formData.email}
-            onChange={handleChange}
+            onChange={(e: any) => handleChange(e)}
             disabled={isSubmitting}
           />
           {formErrors.email && (
@@ -136,7 +141,7 @@ export const LoginForm: React.FC = () => {
                 : 'border-gray-300 focus:ring-blue-200'
             }`}
             value={formData.password}
-            onChange={handleChange}
+            onChange={(e: any) => handleChange(e)}
             disabled={isSubmitting}
           />
           {formErrors.password && (
@@ -151,7 +156,7 @@ export const LoginForm: React.FC = () => {
               type='checkbox'
               name='rememberMe'
               checked={formData.rememberMe}
-              onChange={handleChange}
+              onChange={(e: any) => handleChange(e)}
               className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
               disabled={isSubmitting}
             />

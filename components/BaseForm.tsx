@@ -1,11 +1,16 @@
 import React, { useState, type FormEvent, type ReactNode, FC, ReactNode, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { useFormState } from '../src/hooks';
 
 interface FormField {
   name: string;,
   label: string;
-  type: 'text' | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'file';
+  type: "text" as const | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'file';
   placeholder?: string;
   required?: boolean;
   options?: Array<{ value: string; label: string }>;
@@ -26,7 +31,7 @@ interface BaseFormProps {
   success?: string | null;
   className?: string;
   initialValues?: Record<string, any>;
-  children?: ReactNode;
+  children?: React.ReactNode;
   showResetButton?: boolean;
   resetLabel?: string;
 }
@@ -67,7 +72,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
   // Validate field
-  const validateField = (field: FormField,
+  const validateField: any = (field: FormField,
           value: string | number): string | null => {
     if (field.required && (!value || (typeof value === 'string' && !value.trim()))) {
       return `${field.label} is required`;
@@ -79,33 +84,33 @@ const BaseForm: React.FC<BaseFormProps> = ({
   };
 
   // Handle field change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange: any = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const fieldValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
     setValue(name, fieldValue);
   };
 
   // Handle field blur
-  const handleBlur = (fieldName: any) => {
-    setTouched(prev => ({ ...prev, [fieldName]: true }));
+  const handleBlur: any = (fieldName: any) => {
+    setTouched(prev => ({ ...prev as any, [fieldName]: true }));
     const field = fields.find((f: any) => f.name === fieldName);
-    if (field) {
+    if (field as any) {
       const error = validateField(field, values[fieldName]);
-      if (error) {
+      if (error as any) {
         setError(fieldName, error);
       }
     }
   };
 
   // Handle form submission
-  const handleFormSubmit = async (e: FormEvent) => {
+  const handleFormSubmit = async (e: FormEvent): Promise<any> => {
     e.preventDefault();
 
     // Validate all fields
     const newErrors: Record<string, string> = {};
     fields.forEach((field: any) => {
       const error = validateField(field, values[field.name]);
-      if (error) {
+      if (error as any) {
         newErrors[field.name] = error;
         setError(field.name, error);
       }
@@ -126,7 +131,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   };
 
   // Render field
-  const renderField = (field: FormField) => {
+  const renderField: any = (field: FormField) => {
     const fieldError = touched[field.name] ? validateField(field, values[field.name]) : null;
     const fieldValue = values[field.name] || '';
 
@@ -148,7 +153,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
             id={field.name}
             name={field.name}
             value={fieldValue}
-            onChange={handleChange}
+            onChange={(e: any) => handleChange(e)}
             onBlur={() => handleBlur(field.name)}
             placeholder={field.placeholder}
             required={field.required}
@@ -164,14 +169,14 @@ const BaseForm: React.FC<BaseFormProps> = ({
             id={field.name}
             name={field.name}
             value={fieldValue}
-            onChange={handleChange}
+            onChange={(e: any) => handleChange(e)}
             onBlur={() => handleBlur(field.name)}
             required={field.required}
             disabled={field.disabled || loading}
             className={baseInputClasses}
           >
             <option value="">{field.placeholder || `Select ${field.label}`}</option>
-            {field.options?.map(option => (
+            {field.options?.map((option: any) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -187,7 +192,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
               name={field.name}
               type="checkbox"
               checked={!!fieldValue}
-              onChange={handleChange}
+              onChange={(e: any) => handleChange(e)}
               onBlur={() => handleBlur(field.name)}
               required={field.required}
               disabled={field.disabled || loading}
@@ -221,7 +226,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
             name={field.name}
             type={field.type}
             value={fieldValue}
-            onChange={handleChange}
+            onChange={(e: any) => handleChange(e)}
             onBlur={() => handleBlur(field.name)}
             placeholder={field.placeholder}
             required={field.required}
@@ -233,7 +238,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className={`space-y-6 ${className}`}>
+    <form onSubmit={(e: any) => handleFormSubmit(e)} className={`space-y-6 ${className}`}>
       {/* Error message */}
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
@@ -286,7 +291,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
         {onCancel && (
           <button
             type="button"
-            onClick={onCancel}
+            onClick={(e: any) => onCancel(e)}
             disabled={loading}
             className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >

@@ -68,10 +68,10 @@ class SecureStorage {
 const performanceMiddleware = <T>(,
   config: StateCreator<T, [], [], T>,
   storeName: any): StateCreator<T, [], [], T> => {
-  return (set, get, api) => {
+  return (set: any, get: any, api: any) => {
     const originalSet = set;
 
-    const wrappedSet = (partial: any, replace?: boolean) => {
+    const wrappedSet: any = (partial: any, replace?: boolean) => {
       const startTime = performance.now();
 
       originalSet(partial, replace);
@@ -80,7 +80,7 @@ const performanceMiddleware = <T>(,
       performanceMonitor.trackCustomMetric(`store_${storeName}_update`, duration);
 
       if (import.meta.env.DEV && duration > 5) {
-        console.warn(`Slow state update in ${storeName}: ${duration.toFixed(2)}ms`);
+        (console as any).warn(`Slow state update in ${storeName}: ${duration.toFixed(2)}ms`);
       }
     };
 
@@ -101,7 +101,7 @@ export function createAsyncActions<T>() {
   return {
     setLoading: (loading: any) => (state: any) => {
       state.loading = loading;
-      if (loading) {
+      if (loading as any) {
         state.error = null;
       }
     },
@@ -155,7 +155,7 @@ export function createPaginatedActions<T>() {
 
     setLoading: (loading: any) => (state: any) => {
       state.loading = loading;
-      if (loading) {
+      if (loading as any) {
         state.error = null;
       }
     },
@@ -208,7 +208,7 @@ export class OptimisticUpdatesManager<T> {
 
   rollback(id: string): void {
     const update = this.updates.get(id);
-    if (update) {
+    if (update as any) {
       update.rollback();
       this.updates.delete(id);
     }
@@ -312,7 +312,7 @@ export function createComputed<T, R>(,
   let cachedDeps;
 
   return (state: T): R => {
-    if (dependencies) {
+    if (dependencies as any) {
       const currentDeps = dependencies(state);
 
       if (!cachedDeps || !shallowEqual(cachedDeps, currentDeps)) {
@@ -372,7 +372,7 @@ return;
 
   static getLogs(store?: string): typeof StoreDebugger.logs {
     return store
-      ? this.logs.filter(log => log.store === store)
+      ? this.logs.filter((log: any) => log.store === store)
       : this.logs;
   }
 
@@ -394,7 +394,7 @@ export function createValidator<T extends object>(schema: {
 
     for (const [key, validator] of Object.entries(schema)) {
       if (validator && key in state) {
-        const result = (validator as (value: string | number) => boolean | string)(state[key as keyof T]);
+        const result: any = (validator as (value: string | number) => boolean | string)(state[key as keyof T]);
 
         if (typeof result === 'string') {
           errors[key] = result;
@@ -423,7 +423,7 @@ export class StoreSynchronizer {
     const to = this.instances.get(toStore);
 
     if (!from || !to) {
-      console.warn(`Store synchronization failed: ${fromStore} or ${toStore} not found`);
+      (console as any).warn(`Store synchronization failed: ${fromStore} or ${toStore} not found`);
       return;
     }
 

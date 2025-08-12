@@ -1,4 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 // import { getVideos, getVideosByCategory } // // from '../services/realVideoService' // Service not found // Service not found;
 import type { Video } from '../types';
@@ -31,15 +35,15 @@ const fetchRealVideos = async (category?: string): Promise<Video[]> => {
   return getVideos();
 };
 
-export const useOptimizedVideoData = ({
+export const useOptimizedVideoData: any = ({
   category,
   limit = 20,
   enableCache = true,
   refetchInterval }: UseVideoDataOptions = {}): UseVideoDataReturn => {
   const [data, setData] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState(1);
 
   const cacheKey = useMemo(() => {
@@ -47,7 +51,7 @@ export const useOptimizedVideoData = ({
   }, [category, limit]);
 
   const fetchVideos = useCallback(
-    async (pageNum: number = 1, append: boolean = false) => {
+    async (pageNum: number = 1, append: boolean = false): Promise<any> => {
       try {
         setLoading(true);
         setError(null);
@@ -63,13 +67,13 @@ export const useOptimizedVideoData = ({
         }
 
         // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout((resolve) as any, 500));
 
         // Fetch real video data
         const allVideos = await fetchRealVideos(category);
 
         // Simulate pagination with real videos
-        const startIndex = (pageNum - 1) * limit;
+        const startIndex: any = (pageNum - 1) * limit;
         const endIndex = startIndex + limit;
         const newVideos = allVideos.slice(startIndex, endIndex);
 
@@ -78,7 +82,7 @@ export const useOptimizedVideoData = ({
           setHasMore(false);
         }
 
-        const updatedData = append ? [...data, ...newVideos] : newVideos;
+        const updatedData = append ? [...data as any, ...newVideos] : newVideos;
         setData(updatedData);
 
         // Cache the data
@@ -87,11 +91,11 @@ export const useOptimizedVideoData = ({
             data: updatedData,
             timestamp: Date.now() });
         }
-      } catch (err) {
+      } catch (err: any) {
         const errorMessage =
           err instanceof Error ? err.message : 'Failed to fetch videos';
         setError(errorMessage);
-        console.error('Error fetching videos:', err);
+        (console as any).error('Error fetching videos:', err);
       } finally {
         setLoading(false);
       }
@@ -99,13 +103,13 @@ export const useOptimizedVideoData = ({
     [category, limit, enableCache, cacheKey, data]
   );
 
-  const refetch = useCallback(async () => {
+  const refetch = useCallback(async (): Promise<void> => {
     setPage(1);
     setHasMore(true);
     await fetchVideos(1, false);
   }, [fetchVideos]);
 
-  const loadMore = useCallback(async () => {
+  const loadMore = useCallback(async (): Promise<void> => {
     if (!loading && hasMore) {
       const nextPage = page + 1;
       setPage(nextPage);
@@ -124,9 +128,9 @@ export const useOptimizedVideoData = ({
       return;
     }
 
-    const interval = setInterval(() => {
-      refetch();
-    }, refetchInterval);
+    const interval = setInterval((() => {
+      re(fetch as any)();
+    }) as any, refetchInterval);
 
     return () => clearInterval(interval);
   }, [refetchInterval, refetch]);
@@ -141,14 +145,14 @@ export const useOptimizedVideoData = ({
 };
 
 // Specialized hooks for different video types
-export const useHomeVideos = (category?: string) => {
+export const useHomeVideos: any = (category?: string) => {
   return useOptimizedVideoData({
     ...(category && { category }),
     limit: 24,
     enableCache: true });
 };
 
-export const useTrendingVideos = () => {
+export const useTrendingVideos: any = () => {
   return useOptimizedVideoData({
     category: 'trending',
     limit: 20,
@@ -157,14 +161,14 @@ export const useTrendingVideos = () => {
   });
 };
 
-export const useChannelVideos = (channelId: any) => {
+export const useChannelVideos: any = (channelId: any) => {
   return useOptimizedVideoData({
     category: `channel-${channelId}`,
     limit: 15,
     enableCache: true });
 };
 
-export const useSearchVideos = (query: any) => {
+export const useSearchVideos: any = (query: any) => {
   return useOptimizedVideoData({
     category: `search-${query}`,
     limit: 20,

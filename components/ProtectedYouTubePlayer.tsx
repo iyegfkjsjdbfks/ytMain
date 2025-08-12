@@ -1,6 +1,8 @@
 import React, { useCallback, FC } from 'react';
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
 import { conditionalLogger } from '../src/utils/conditionalLogger';
+import { FC } from 'react';
+import { useCallback } from 'react';
 
 import YouTubePlayer from './YouTubePlayer';
 

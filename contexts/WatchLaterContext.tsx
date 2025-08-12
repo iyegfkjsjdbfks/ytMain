@@ -1,5 +1,8 @@
+import React from 'react';
 import type { Video } from '../types';
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import type { Video as VideoType } from '../src/types/core';
 
@@ -16,30 +19,30 @@ interface WatchLaterContextType {
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
 
-export const WatchLaterProvider = ({ children }) => {
+export const WatchLaterProvider: any = ({ children }: any) => {
   const [watchLaterList, setWatchLaterList] = useState<VideoType[]>(() => {
-    const storedList = localStorage.getItem('youtubeCloneWatchLater_v1');
+    const storedList = (localStorage as any).getItem('youtubeCloneWatchLater_v1');
     return storedList ? JSON.parse(storedList) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem('youtubeCloneWatchLater_v1', JSON.stringify(watchLaterList));
+    (localStorage as any).setItem('youtubeCloneWatchLater_v1', JSON.stringify(watchLaterList));
   }, [watchLaterList]);
 
-  const addToWatchLater = (video: VideoType) => {
-    setWatchLaterList((prevList) => {
+  const addToWatchLater: any = (video: VideoType) => {
+    setWatchLaterList((prevList: any) => {
       if (!prevList.find(item => item.id === video.id)) {
-        return [...prevList, video];
+        return [...prevList as any, video];
       }
       return prevList;
     });
   };
 
-  const removeFromWatchLater = (videoId: any) => {
+  const removeFromWatchLater: any = (videoId: any) => {
     setWatchLaterList((prevList) => prevList.filter((video) => video.id !== videoId));
   };
 
-  const isWatchLater = (videoId: any) => {
+  const isWatchLater: any = (videoId: any) => {
     return watchLaterList.some(video => video.id === videoId);
   };
 
@@ -50,8 +53,8 @@ export const WatchLaterProvider = ({ children }) => {
   );
 };
 
-export const useWatchLater = () => {
-  const context = useContext(WatchLaterContext);
+export const useWatchLater: any = () => {
+  const context = useContext<any>(WatchLaterContext);
   if (context === undefined) {
     throw new Error('useWatchLater must be used within a WatchLaterProvider');
   }

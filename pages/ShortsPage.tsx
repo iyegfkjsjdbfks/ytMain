@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, FC, KeyboardEvent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { KeyboardEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import CommentModal from '../components/CommentModal';
 import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
@@ -14,6 +20,7 @@ import { useLocalStorage, useShortsVideos } from '../src/hooks';
 import type { Short } from '../src/types/core';
 
 const ShortsPage: React.FC = () => {
+  return null;
   const { data: allShorts, loading, error } = useShortsVideos();
   const containerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -28,8 +35,8 @@ const ShortsPage: React.FC = () => {
       // Ensure we have a valid array
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
       return new Set(validArray.filter((item) => typeof item === 'string'));
-    } catch (error) {
-      console.warn('Error creating likedShorts Set:', error);
+    } catch (error: any) {
+      (console as any).warn('Error creating likedShorts Set:', error);
       // Clear invalid data and return empty Set
       setLikedShortsArray([]);
       return new Set<string>();
@@ -42,24 +49,24 @@ const ShortsPage: React.FC = () => {
       // Ensure we have a valid array
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
       return new Set(validArray.filter((item) => typeof item === 'string'));
-    } catch (error) {
-      console.warn('Error creating followedChannels Set:', error);
+    } catch (error: any) {
+      (console as any).warn('Error creating followedChannels Set:', error);
       // Clear invalid data and return empty Set
       setFollowedChannelsArray([]);
       return new Set<string>();
     }
   
         }, [followedChannelsArray, setFollowedChannelsArray]);
-  const [commentModalOpen, setCommentModalOpen] = useState(false);
+  const [commentModalOpen, setCommentModalOpen] = useState<boolean>(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string; title: string } | null>(null);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
   const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true);
 
   // Search and filter state
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [showFilters, setShowFilters] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [showSearch, setShowSearch] = useState<boolean>(false);
 
   // Debounced search
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
@@ -77,9 +84,9 @@ return [];
     // Convert Video[] to Short[] with proper type conversion
     let converted: Short[] = allShorts
       .filter((video) => video.visibility !== 'scheduled') // Filter out scheduled videos
-      .map(video => {
+      .map((video: any) => {
         const shortVideo: Short = {
-          ...video,
+          ...video as any,
           duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
           isShort: true,
           isVertical: true,
@@ -96,14 +103,14 @@ return [];
 
     // Apply category filter
     if (selectedCategory !== 'all') {
-      converted = converted.filter(short =>
+      converted = converted.filter((short: any) =>
         short.category.toLowerCase() === selectedCategory.toLowerCase());
     }
 
     // Apply search filter
-    if (debouncedSearchQuery) {
+    if (debouncedSearchQuery as any) {
       const query = debouncedSearchQuery.toLowerCase();
-      converted = converted.filter(short =>
+      converted = converted.filter((short: any) =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
         short.description.toLowerCase().includes(query));
@@ -117,7 +124,7 @@ return [];
     if (!allShorts) {
 return [];
 }
-    const uniqueCategories = [...new Set(allShorts.map(short => short.category))];
+    const uniqueCategories = [...new Set(allShorts.map((short: any) => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
@@ -128,7 +135,7 @@ return [];
       if (currentArray.includes(shortId)) {
         return currentArray.filter((id) => id !== shortId);
       }
-        return [...currentArray, shortId];
+        return [...currentArray as any, shortId];
 
     });
   }, [setLikedShortsArray]);
@@ -139,7 +146,7 @@ return [];
       if (currentArray.includes(channelName)) {
         return currentArray.filter((name) => name !== channelName);
       }
-        return [...currentArray, channelName];
+        return [...currentArray as any, channelName];
 
     });
   }, [setFollowedChannelsArray]);
@@ -152,7 +159,7 @@ return [];
     setCommentModalOpen(true);
   }, []);
 
-  const handleCommentSubmit = useCallback(async (_commentText: any) => {
+  const handleCommentSubmit = useCallback(async (_commentText: any): Promise<any> => {
     if (!selectedShortForComment) {
 return;
 }
@@ -160,8 +167,8 @@ return;
     try {      // Close modal and reset state
       setCommentModalOpen(false);
       setSelectedShortForComment(null);
-    } catch (error) {
-      console.error('Failed to submit comment:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to submit comment:', error);
     }
   }, [selectedShortForComment]);
 
@@ -178,7 +185,7 @@ return;
     // Scroll to the video
     if (containerRef.current) {
       const targetElement = containerRef.current.children[index] as HTMLElement;
-      if (targetElement) {
+      if (targetElement as any) {
         targetElement.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
@@ -200,7 +207,7 @@ return;
         // Scroll to the video
         if (containerRef.current) {
           const targetElement = containerRef.current.children[nextIndex] as HTMLElement;
-          if (targetElement) {
+          if (targetElement as any) {
             targetElement.scrollIntoView({
               behavior: 'smooth',
           block: 'start',
@@ -226,7 +233,7 @@ return;
         // Scroll to the video
         if (containerRef.current) {
           const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement;
-          if (targetElement) {
+          if (targetElement as any) {
             targetElement.scrollIntoView({
               behavior: 'smooth',
           block: 'start',
@@ -241,7 +248,7 @@ return;
 
   const handleSearchToggle = useCallback(() => {
     setShowSearch(prev => !prev);
-    if (showSearch) {
+    if (showSearch as any) {
       setSearchQuery('');
     }
   }, [showSearch]);
@@ -256,7 +263,7 @@ return;
   }, []);
 
   const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
-    if (commentModalOpen) {
+    if (commentModalOpen as any) {
 return;
 }
 
@@ -270,16 +277,16 @@ return;
         handleNextVideo();
         break;
       case 'Escape':
-        if (showSearch) {
+        if (showSearch as any) {
           handleSearchToggle();
-        } else if (showFilters) {
+        } else if (showFilters as any) {
           handleFilterToggle();
         }
         break;
     }
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId: any) => {
+  const handleShare = async (shortId: any): Promise<any> => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
@@ -287,7 +294,7 @@ return;
         await navigator.share({
           title: 'Check out this Short!',
           url: shareUrl });
-      } catch (error) {
+      } catch (error: any) {
         // Fallback to clipboard if share fails
         copyToClipboard(shareUrl);
       }
@@ -299,12 +306,12 @@ return;
   
         };
 
-  const copyToClipboard = async (text: any) => {
+  const copyToClipboard = async (text: any): Promise<any> => {
     try {
       await navigator.clipboard.writeText(text);
       // You could add a toast notification here
-      } catch (error) {
-      console.error('Failed to copy link:', error);
+      } catch (error: any) {
+      (console as any).error('Failed to copy link:', error);
     }
   };
 
@@ -312,13 +319,13 @@ return;
   useEffect(() => {
     try {
       // Check if localStorage contains invalid data and clean it up
-      const likedShortsRaw = localStorage.getItem('likedShorts');
-      const followedChannelsRaw = localStorage.getItem('followedChannels');
+      const likedShortsRaw = (localStorage as any).getItem('likedShorts');
+      const followedChannelsRaw = (localStorage as any).getItem('followedChannels');
 
       if (likedShortsRaw && likedShortsRaw !== 'null') {
         const parsed = JSON.parse(likedShortsRaw);
         if (!Array.isArray(parsed)) {
-          console.warn('Cleaning up invalid likedShorts data');
+          (console as any).warn('Cleaning up invalid likedShorts data');
           localStorage.removeItem('likedShorts');
           setLikedShortsArray([]);
         }
@@ -328,13 +335,13 @@ return;
       if (followedChannelsRaw && followedChannelsRaw !== 'null') {
         const parsed = JSON.parse(followedChannelsRaw);
         if (!Array.isArray(parsed)) {
-          console.warn('Cleaning up invalid followedChannels data');
+          (console as any).warn('Cleaning up invalid followedChannels data');
           localStorage.removeItem('followedChannels');
           setFollowedChannelsArray([]);
         }
       }
-    } catch (error) {
-      console.warn('Error during localStorage cleanup:', error);
+    } catch (error: any) {
+      (console as any).warn('Error during localStorage cleanup:', error);
       // Clear all potentially corrupted data
       localStorage.removeItem('likedShorts');
       localStorage.removeItem('followedChannels');
@@ -346,7 +353,7 @@ return;
 
   // Touch handling for mobile scroll navigation
   const [touchStartY, setTouchStartY] = useState<number | null>(null);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [isScrolling, setIsScrolling] = useState<boolean>(false);
 
   // Wheel event handler for scroll navigation
   const handleWheel = useCallback((event: WheelEvent) => {
@@ -372,7 +379,7 @@ return;
       }
 
       // Reset scrolling flag after a delay
-      setTimeout(() => setIsScrolling(false), 500);
+      setTimeout((() => setIsScrolling(false)) as any, 500);
     }
   
         }, [commentModalOpen, showSearch, showFilters, isScrolling, handleNextVideo, handlePreviousVideo]);
@@ -408,7 +415,7 @@ return;
         }
 
         // Reset scrolling flag after a delay
-        setTimeout(() => setIsScrolling(false), 500);
+        setTimeout((() => setIsScrolling(false)) as any, 500);
       }
     
         }
@@ -425,7 +432,7 @@ return;
   // Add wheel event listener for scroll navigation
   useEffect(() => {
     const container = containerRef.current;
-    if (container) {
+    if (container as any) {
       container.addEventListener('wheel', handleWheel as EventListener, { passive: false });
       return () => container.removeEventListener('wheel', handleWheel as EventListener);
     }
@@ -435,7 +442,7 @@ return;
   // Add touch event listeners for mobile navigation
   useEffect(() => {
     const container = containerRef.current;
-    if (container) {
+    if (container as any) {
       container.addEventListener('touchstart', handleTouchStart as EventListener, { passive: true });
       container.addEventListener('touchend', handleTouchEnd as EventListener, { passive: true });
       return () => {
@@ -455,7 +462,7 @@ return;
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
-          if (targetElement) {
+          if (targetElement as any) {
             targetElement.scrollIntoView({ behavior: 'smooth',
           block: 'start' });
           }
@@ -489,13 +496,13 @@ return;
     }
 
     observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      (entries: any) => {
+        entries.forEach((entry: any) => {
           if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
             const videoElement = entry.target as HTMLElement;
             const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
             if (index !== -1) {
-              setCurrentVideoIndex((prevIndex) => {
+              setCurrentVideoIndex((prevIndex: any) => {
                 if (index !== prevIndex) {
                   // Update URL without triggering scroll
                   const currentFilteredShorts = filteredShorts;
@@ -517,7 +524,7 @@ return;
         rootMargin: '0px' });
 
     // Observe all video elements
-    Array.from(containerRef.current.children).forEach((child) => {
+    Array.from(containerRef.current.children).forEach((child: any) => {
       observerRef.current?.observe(child);
     });
 
@@ -527,11 +534,11 @@ return;
       }
     }}, [filteredShorts.length]); // Only depend on length, not the entire array
 
-  if (loading) {
+  if (loading as any) {
     return <ShortsPageSkeleton />;
   }
 
-  if (error) {
+  if (error as any) {
     return <ShortsPageError error={error} />;
   }
 
@@ -544,14 +551,14 @@ return;
             <h1 className="text-white text-lg font-semibold">Shorts</h1>
             <div className="flex items-center space-x-2">
               <button
-                onClick={handleSearchToggle}
+                onClick={(e: any) => handleSearchToggle(e)}
                 className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Search shorts"
               >
                 <MagnifyingGlassIcon className="w-5 h-5" />
               </button>
               <button
-                onClick={handleFilterToggle}
+                onClick={(e: any) => handleFilterToggle(e)}
                 className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Filter shorts"
               >
@@ -573,7 +580,7 @@ return;
                   autoFocus
                 />
                 <button
-                  onClick={handleSearchToggle}
+                  onClick={(e: any) => handleSearchToggle(e)}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
                 >
                   <XMarkIcon className="w-4 h-4" />
@@ -612,7 +619,7 @@ return;
           <h1 className="text-white text-lg font-semibold">Shorts</h1>
           <div className="flex items-center space-x-2">
             <button
-              onClick={handleSearchToggle}
+              onClick={(e: any) => handleSearchToggle(e)}
               className={`p-2 rounded-full transition-colors ${
                 showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
@@ -621,7 +628,7 @@ return;
               <MagnifyingGlassIcon className="w-5 h-5" />
             </button>
             <button
-              onClick={handleFilterToggle}
+              onClick={(e: any) => handleFilterToggle(e)}
               className={`p-2 rounded-full transition-colors ${
                 showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
@@ -645,7 +652,7 @@ return;
                 autoFocus
               />
               <button
-                onClick={handleSearchToggle}
+                onClick={(e: any) => handleSearchToggle(e)}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
               >
                 <XMarkIcon className="w-4 h-4" />

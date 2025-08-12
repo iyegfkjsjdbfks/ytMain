@@ -1,3 +1,8 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 /// <reference types="node" />
 import { Link } from 'react-router-dom';
 
@@ -25,12 +30,12 @@ interface HoverAutoplayVideoCardProps {
   className?: string;
 }
 
-const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, className = '' }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [showIframe, setShowIframe] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [iframeKey, setIframeKey] = useState(0);
+const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, className = '' }: any) => {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [showIframe, setShowIframe] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [iframeKey, setIframeKey] = useState<number>(0);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -39,7 +44,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
   const HIDE_DELAY = 100; // Delay before hiding video preview in milliseconds
 
   // Extract YouTube video ID from the video
-  const getVideoId = (video: Video): string | null => {
+  const getVideoId: any = (video: Video): string | null => {
     // Try to extract from video.id if it has prefixes
     if (video.id.startsWith('youtube-')) {
       return video.id.replace('youtube-', '');
@@ -63,7 +68,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
 
   const videoId = getVideoId(video);
 
-  const formatDuration = (duration: string | number) => {
+  const formatDuration: any = (duration: string | number) => {
     if (typeof duration === 'string') {
 return duration;
 }
@@ -75,7 +80,7 @@ return duration;
     return '0: 00'
   };
 
-  const formatViews = (views: string | number) => {
+  const formatViews: any = (views: string | number) => {
     const num = typeof views === 'string' ? parseInt(views, 10) || 0 : views || 0;
     if (num >= 1000000000) {
       return `${(num / 1000000000).toFixed(1)}B`;
@@ -87,7 +92,7 @@ return duration;
     return num.toString();
   };
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter: any = () => {
     setIsHovered(true);
 
     // Clear any existing hide timeout
@@ -99,13 +104,13 @@ return duration;
     // Only show iframe if we have a valid video ID and no previous errors
     if (videoId && !hasError) {
       // Set a timeout to show the iframe after hovering for configured delay
-      hoverTimeoutRef.current = setTimeout(() => {
+      hoverTimeoutRef.current = setTimeout((() => {
         setShowIframe(true);
-      }, HOVER_DELAY);
+      }) as any, HOVER_DELAY);
     }
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave: any = () => {
     setIsHovered(false);
 
     // Clear the hover timeout if user leaves before delay completes
@@ -115,22 +120,22 @@ return duration;
     }
 
     // Hide iframe after a brief delay to prevent flickering
-    hideTimeoutRef.current = setTimeout(() => {
+    hideTimeoutRef.current = setTimeout((() => {
       setShowIframe(false);
       // Reset mute state for next hover
       setIsMuted(true);
-    }, HIDE_DELAY);
+    }) as any, HIDE_DELAY);
   };
 
   // Handle iframe errors
-  const handleIframeError = () => {
-    console.warn('YouTube iframe failed to load for video:', videoId);
+  const handleIframeError: any = () => {
+    (console as any).warn('YouTube iframe failed to load for video:', videoId);
     setHasError(true);
     setShowIframe(false);
   };
 
   // Toggle mute/unmute
-  const toggleMute = (e: React.MouseEvent) => {
+  const toggleMute: any = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsMuted(!isMuted);
@@ -191,7 +196,7 @@ return duration;
 
                 {/* Mute/Unmute Button */}
                 <button
-                  onClick={toggleMute}
+                  onClick={(e: any) => toggleMute(e)}
                   className="absolute bottom-2 left-2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition-all duration-200 z-10"
                   style={{ pointerEvents: 'auto' }}
                   title={isMuted ? 'Unmute video' : 'Mute video'}

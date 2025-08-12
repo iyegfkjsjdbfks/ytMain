@@ -1,3 +1,8 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 import { useMemo, useRef, useEffect, useState, FC } from 'react';
 
@@ -71,13 +76,13 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
   onModerateComment,
   onSortChange,
   className = '' }) => {
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState<string>('');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [editingComment, setEditingComment] = useState<string | null>(null);
-  const [editContent, setEditContent] = useState('');
+  const [editContent, setEditContent] = useState<string>('');
   const [expandedReplies, setExpandedReplies] = useState<Set<string>>(new Set());
   const [showReportModal, setShowReportModal] = useState<string | null>(null);
-  const [reportReason, setReportReason] = useState('');
+  const [reportReason, setReportReason] = useState<string>('');
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const replyTextareaRef = useRef<HTMLTextAreaElement>(null);
@@ -96,14 +101,14 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   }, [replyingTo]);
 
-  const handleSubmitComment = () => {
+  const handleSubmitComment: any = () => {
     if (newComment.trim()) {
       onAddComment(newComment.trim());
       setNewComment('');
     }
   };
 
-  const handleSubmitReply = (parentId: any,
+  const handleSubmitReply: any = (parentId: any,
           content: any) => {
     if (content.trim()) {
       onAddComment(content.trim(), parentId);
@@ -111,7 +116,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const handleEditSubmit = (commentId: any) => {
+  const handleEditSubmit: any = (commentId: any) => {
     if (editContent.trim()) {
       onEditComment(commentId, editContent.trim());
       setEditingComment(null);
@@ -119,15 +124,15 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const handleReport = (commentId: any) => {
-    if (reportReason) {
+  const handleReport: any = (commentId: any) => {
+    if (reportReason as any) {
       onReportComment(commentId, reportReason);
       setShowReportModal(null);
       setReportReason('');
     }
   };
 
-  const toggleReplies = (commentId: any) => {
+  const toggleReplies: any = (commentId: any) => {
     setExpandedReplies(prev => {
       const newSet = new Set(prev);
       if (newSet.has(commentId)) {
@@ -139,7 +144,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     });
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber: any = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -148,7 +153,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     return num.toString();
   };
 
-  const renderComment = (comment: Comment, isReply = false) => {
+  const renderComment: any = (comment: Comment, isReply = false) => {
     const isOwner = comment.authorId === currentUserId;
     const canModerate = isChannelOwner || isModerator;
     const isEditing = editingComment === comment.id;
@@ -372,7 +377,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                   placeholder={`Reply to ${comment.authorName}...`}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                   rows={2}
-                  onKeyDown={(e) => {
+                  onKeyDown={(e: any) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
                       handleSubmitReply(comment.id, e.currentTarget.value);
@@ -384,7 +389,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                   <button
                     onClick={() => {
                       const textarea = replyTextareaRef.current;
-                      if (textarea) {
+                      if (textarea as any) {
                         handleSubmitReply(comment.id, textarea.value);
                         textarea.value = '';
                       }
@@ -441,7 +446,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
     const sorted = regularComments.sort((a: any,
           b: any) => {
-      switch (sortBy) {
+      switch (sortBy as any) {
         case 'newest':
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
         case 'oldest':
@@ -453,7 +458,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     
         });
 
-    return [...pinnedComments, ...sorted];
+    return [...pinnedComments as any, ...sorted];
   }, [comments, sortBy]);
 
   if (!commentsEnabled) {
@@ -509,7 +514,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                 Cancel
               </button>
               <button
-                onClick={handleSubmitComment}
+                onClick={(e: any) => handleSubmitComment(e)}
                 disabled={!newComment.trim()}
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -522,7 +527,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
       {/* Comments List */}
       <div className="space-y-6">
-        {sortedComments.map(comment => renderComment(comment))}
+        {sortedComments.map((comment: any) => renderComment(comment))}
       </div>
 
       {/* Report Modal */}

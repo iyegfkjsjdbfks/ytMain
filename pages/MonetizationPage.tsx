@@ -1,5 +1,8 @@
 import React, { useEffect, useState, memo, lazy, Suspense, FC } from 'react';
 import { ArrowTrendingUpIcon, BanknotesIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // Register Chart.js components when needed
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { ChartBarIcon } from '@heroicons/react/24/outline';
@@ -45,14 +48,15 @@ interface MonetizationMetrics {
 }
 
 const MonetizationPage: React.FC = () => {
+  return null;
   const [metrics, setMetrics] = useState<MonetizationMetrics | null>(null);
   const [revenueData, setRevenueData] = useState<RevenueData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d');
   const [selectedMetric, setSelectedMetric] = useState<'revenue' | 'rpm' | 'cpm'>('revenue');
 
   useEffect(() => {
-    const generateMockData = () => {
+    const generateMockData: any = () => {
       setLoading(true);
 
       // Generate mock revenue data
@@ -104,19 +108,19 @@ const MonetizationPage: React.FC = () => {
     generateMockData();
   }, [timeRange]);
 
-  const formatCurrency = (amount: any) => {
+  const formatCurrency: any = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
           currency: 'USD',
       minimumFractionDigits: 2 }).format(amount);
   };
 
-  const formatNumber = (num: any) => {
+  const formatNumber: any = (num: any) => {
     return new Intl.NumberFormat('en-US').format(num);
   };
 
-  const getRevenueChartData = () => {
-    const labels = revenueData.map(data => {
+  const getRevenueChartData: any = () => {
+    const labels = revenueData.map((data: any) => {
       const date = new Date(data.date);
       return timeRange === '7d' || timeRange === '30d'
         ? date.toLocaleDateString('en-US', { month: 'short',
@@ -130,30 +134,30 @@ const MonetizationPage: React.FC = () => {
       datasets: [
         {
           label: 'Ad Revenue',
-          data: revenueData.map(d => d.adRevenue),
+          data: revenueData.map((d: any) => d.adRevenue),
           borderColor: 'rgb(59, 130, 246)',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
           tension: 0.4 },
         {
           label: 'Membership Revenue',
-          data: revenueData.map(d => d.membershipRevenue),
+          data: revenueData.map((d: any) => d.membershipRevenue),
           borderColor: 'rgb(16, 185, 129)',
           backgroundColor: 'rgba(16, 185, 129, 0.1)',
           tension: 0.4 },
         {
           label: 'Super Chat',
-          data: revenueData.map(d => d.superChatRevenue),
+          data: revenueData.map((d: any) => d.superChatRevenue),
           borderColor: 'rgb(245, 158, 11)',
           backgroundColor: 'rgba(245, 158, 11, 0.1)',
           tension: 0.4 },
         {
           label: 'Sponsorships',
-          data: revenueData.map(d => d.sponsorshipRevenue),
+          data: revenueData.map((d: any) => d.sponsorshipRevenue),
           borderColor: 'rgb(139, 92, 246)',
           backgroundColor: 'rgba(139, 92, 246, 0.1)',
           tension: 0.4 }] }};
 
-  const getRevenueSourcesData = () => {
+  const getRevenueSourcesData: any = () => {
     if (!revenueData.length) {
 return { labels: [],
           datasets: [] }}
@@ -230,7 +234,7 @@ return { labels: [],
           label: (context: any) => {
             const total = context.dataset.data.reduce((a: any,
           b: any) => a + b, 0);
-            const percentage = ((context.parsed / total) * 100).toFixed(1);
+            const percentage: any = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
           } } } } };
 

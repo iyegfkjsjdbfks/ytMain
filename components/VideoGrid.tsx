@@ -1,4 +1,5 @@
 import React, { memo, FC } from 'react';
+import { FC } from 'react';
 
 import VideoCard from './VideoCard';
 
@@ -26,7 +27,7 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
     lg: 4,
           xl: 5,
     '2xl': 6 } }) => {
-  const getGridClasses = () => {
+  const getGridClasses: any = () => {
     const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
     const responsiveClasses = [
       columns.sm && `sm:grid-cols-${columns.sm}`,

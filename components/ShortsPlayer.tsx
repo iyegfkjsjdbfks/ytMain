@@ -1,4 +1,10 @@
 import React, { useEffect, useCallback, useRef, useState, FC, KeyboardEvent, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 // @ts-nocheck
 
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ShareIcon, EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, ChatBubbleLeftIcon  } from '@heroicons/react/24/outline';
@@ -27,11 +33,11 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
   onComment,
   onShare,
   className = '' }) => {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [showControls, setShowControls] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [progress, setProgress] = useState<number>(0);
+  const [showControls, setShowControls] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -45,12 +51,12 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
 return;
 }
 
-    const handleTimeUpdate = () => {
-      const progress = (video.currentTime / video.duration) * 100;
+    const handleTimeUpdate: any = () => {
+      const progress: any = (video.currentTime / video.duration) * 100;
       setProgress(progress);
     };
 
-    const handleEnded = () => {
+    const handleEnded: any = () => {
       // Auto-advance to next short
       if (currentIndex < shorts.length - 1) {
         onIndexChange(currentIndex + 1);
@@ -61,8 +67,8 @@ return;
     
         };
 
-    const handleLoadStart = () => setIsLoading(true);
-    const handleCanPlay = () => setIsLoading(false);
+    const handleLoadStart: any = () => setIsLoading(true);
+    const handleCanPlay: any = () => setIsLoading(false);
 
     video.addEventListener('timeupdate', handleTimeUpdate as EventListener);
     video.addEventListener('ended', handleEnded as EventListener);
@@ -83,7 +89,7 @@ return;
 }
 
     // Auto-play when short changes
-    if (isPlaying) {
+    if (isPlaying as any) {
       video.play().catch(console.error);
     }
   
@@ -91,7 +97,7 @@ return;
 
   useEffect(() => {
     // Handle keyboard navigation
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown: any = (e: KeyboardEvent) => {
       switch (e.key) {
         case ' ':
           e.preventDefault();
@@ -124,7 +130,7 @@ return;
 return;
 }
 
-    if (isPlaying) {
+    if (isPlaying as any) {
       video.pause();
     } else {
       video.play().catch(console.error);
@@ -150,13 +156,13 @@ return;
     }
   }, [currentIndex, shorts.length, onIndexChange]);
 
-  const handleVideoClick = () => {
+  const handleVideoClick: any = () => {
     togglePlay();
     setShowControls(true);
-    setTimeout(() => setShowControls(false), 2000);
+    setTimeout((() => setShowControls(false)) as any, 2000);
   };
 
-  const handleSeek = (e: React.MouseEvent) => {
+  const handleSeek: any = (e: React.MouseEvent) => {
     const video = videoRef.current;
     const progressBar = progressRef.current;
     if (!video || !progressBar) {
@@ -165,12 +171,12 @@ return;
 
     const rect = progressBar.getBoundingClientRect();
     const clickY = e.clientY - rect.top;
-    const newTime = ((rect.height - clickY) / rect.height) * video.duration;
+    const newTime: any = ((rect.height - clickY) / rect.height) * video.duration;
 
     video.currentTime = newTime;
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber: any = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -193,7 +199,7 @@ return null;
         loop={false}
         muted={isMuted}
         playsInline
-        onClick={handleVideoClick}
+        onClick={(e: any) => handleVideoClick(e)}
         poster={currentShort.thumbnailUrl}
       />
 
@@ -208,7 +214,7 @@ return null;
       <div
         ref={progressRef}
         className="absolute right-2 top-20 bottom-20 w-1 bg-white/30 rounded-full cursor-pointer"
-        onClick={handleSeek}
+        onClick={(e: any) => handleSeek(e)}
       >
         <div
           className="w-full bg-white rounded-full transition-all duration-100"
@@ -363,7 +369,7 @@ return null;
 
         {/* Mute/Unmute */}
         <button
-          onClick={toggleMute}
+          onClick={(e: any) => toggleMute(e)}
           className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
         >
           {isMuted ? (

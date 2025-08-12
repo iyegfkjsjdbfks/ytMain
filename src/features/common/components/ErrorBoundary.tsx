@@ -1,9 +1,11 @@
+import React from 'react';
 import { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { logger } from '../../../utils/logger';
 
 interface Props {
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 interface State {
@@ -19,7 +21,7 @@ interface State {
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
+    this.state: any = {
       hasError: false,
           error: null,
       errorInfo: null }}

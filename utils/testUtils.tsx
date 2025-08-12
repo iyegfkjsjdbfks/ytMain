@@ -1,4 +1,5 @@
 import React, { type ReactElement } from 'react';
+import { ReactNode } from 'react';
 /**
  * Comprehensive testing utilities for React components with enhanced setup
  */
@@ -109,7 +110,7 @@ export const apiMocks = {
   mockApiSuccess<T>(data: T,
           delay: number = 0) {
     return vi.fn().mockImplementation(() =>
-      new Promise(resolve => setTimeout(() => resolve(data), delay)));
+      new Promise(resolve => setTimeout((() => resolve(data)) as any, delay)));
   },
 
   // Mock API errors,
@@ -123,13 +124,13 @@ export const apiMocks = {
           data: { message: error.message || 'Internal Server Error' } } };
 
     return vi.fn().mockImplementation(() =>
-      new Promise((_, reject) => setTimeout(() => reject(apiError instanceof Error ? apiError : new Error(JSON.stringify(apiError))), delay)));
+      new Promise((_, reject) => setTimeout((() => reject(apiError instanceof Error ? apiError : new Error(JSON.stringify(apiError)))) as any, delay)));
   },
 
   // Mock paginated responses
   mockPaginatedResponse<T extends any[]>(items: T,
           page: number = 1, pageSize: number = 10) {
-    const startIndex = (page - 1) * pageSize;
+    const startIndex: any = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedItems = items.slice(startIndex, endIndex);
 
@@ -169,7 +170,7 @@ function createTestQueryClient(): QueryClient {
         retry: false } } });
 }
 
-function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockUser }) {
+function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockUser }): any {
   return (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={initialEntries}>
@@ -180,7 +181,7 @@ function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockU
 }
 
 export function customRender(_ui: ReactElement,
-          _options: CustomRenderOptions = {}) {
+          _options: CustomRenderOptions = {}): any {
   const {
     queryClient = createTestQueryClient(),
     initialEntries = ['/'],
@@ -189,7 +190,7 @@ export function customRender(_ui: ReactElement,
     ...renderOptions
   } = _options;
 
-  const Wrapper = wrapper || (({ children }) => (
+  const Wrapper = wrapper || (({ children }: any) => (
     <AllTheProviders
       queryClient={queryClient}
       initialEntries={initialEntries}
@@ -202,7 +203,7 @@ export function customRender(_ui: ReactElement,
   const result = render(_ui, { wrapper: Wrapper, ...renderOptions });
 
   return {
-    ...result,
+    ...result as any,
     user: userEvent.setup(),
     queryClient }}
 
@@ -239,7 +240,7 @@ export function customRenderHook<TResult, TProps>(,
 // Testing utilities for common patterns
 export const testUtils = {
   // Wait for loading states to complete,
-  waitForLoadingToFinish: async () => {
+  waitForLoadingToFinish: async (): Promise<void> => {
     await (global as any).waitFor(() => {
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
       expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
@@ -248,9 +249,9 @@ export const testUtils = {
   },
 
   // Wait for error states,
-  waitForError: async (errorMessage?: string) => {
+  waitForError: async (errorMessage?: string): Promise<any> => {
     await (global as any).waitFor(() => {
-      if (errorMessage) {
+      if (errorMessage as any) {
         expect(screen.getByText(errorMessage)).toBeInTheDocument();
       } else {
         expect(screen.getByText(/error/i)).toBeInTheDocument();
@@ -260,7 +261,7 @@ export const testUtils = {
 
   // Simulate network delays,
   simulateNetworkDelay: (ms: number = 100) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout((resolve) as any, ms));
   },
 
   // Mock intersection observer for lazy loading tests,
@@ -270,7 +271,7 @@ export const testUtils = {
       observe: () => null,
           unobserve: () => null,
       disconnect: () => null });
-    window.IntersectionObserver = mockIntersectionObserver;
+    (window as any).IntersectionObserver = mockIntersectionObserver;
     return mockIntersectionObserver;
   },
 
@@ -281,7 +282,7 @@ export const testUtils = {
       observe: () => null,
           unobserve: () => null,
       disconnect: () => null });
-    window.ResizeObserver = mockResizeObserver;
+    (window as any).ResizeObserver = mockResizeObserver;
     return mockResizeObserver;
   },
 
@@ -332,7 +333,7 @@ export const testUtils = {
 
   // Simulate drag and drop events,
   simulateDragAndDrop: async (element: HTMLElement,
-          files: File[]) => {
+          files: File[]): Promise<any> => {
     const user = userEvent.setup();
 
     const dataTransfer = {
@@ -376,7 +377,7 @@ export const performanceUtils = {
   // Test for memory leaks,
   checkForMemoryLeaks: (component: ReactElement,
           iterations: number = 100) => {
-    const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
+    const initialMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
 
     for (let i = 0; i < iterations; i++) {
       const { unmount } = customRender(component);
@@ -388,7 +389,7 @@ export const performanceUtils = {
       (global as any).gc();
     }
 
-    const finalMemory = (performance as any).memory?.usedJSHeapSize || 0;
+    const finalMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
     const memoryIncrease = finalMemory - initialMemory;
 
     return {
@@ -402,10 +403,10 @@ export const performanceUtils = {
 // Accessibility testing utilities
 export const a11yUtils = {
   // Check for basic accessibility requirements,
-  checkBasicA11y: async () => {
+  checkBasicA11y: async (): Promise<void> => {
     // Check for proper heading hierarchy
     const headings = screen.getAllByRole('heading');
-    const headingLevels = headings.map(h => parseInt(h.tagName.charAt(1), 10));
+    const headingLevels = headings.map((h: any) => parseInt(h.tagName.charAt(1), 10));
 
     // Check for alt text on images
     const images = screen.getAllByRole('img');
@@ -413,7 +414,7 @@ export const a11yUtils = {
 
     // Check for form labels
     const inputs = screen.getAllByRole('textbox');
-    const inputsWithoutLabels = inputs.filter((input) => {
+    const inputsWithoutLabels = inputs.filter((input: any) => {
       const id = input.getAttribute('id');
       return !id || !screen.queryByLabelText(new RegExp(id, 'i'));
     });
@@ -424,11 +425,11 @@ export const a11yUtils = {
           inputsWithoutLabels: inputsWithoutLabels.length }},
 
   // Test keyboard navigation,
-  testKeyboardNavigation: async (startElement?: HTMLElement) => {
+  testKeyboardNavigation: async (startElement?: HTMLElement): Promise<any> => {
     const user = userEvent.setup();
     const focusableElements: HTMLElement[] = [];
 
-    if (startElement) {
+    if (startElement as any) {
       startElement.focus();
     }
 

@@ -1,4 +1,7 @@
+import React from 'react';
 import { useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { FireIcon as FireSolidIcon } from '@heroicons/react/24/solid';
 const FireIconSolid = FireSolidIcon;
@@ -9,6 +12,7 @@ import VideoGrid from '../components/VideoGrid';
 import { useTrendingVideos } from '../hooks';
 
 const TrendingPage: React.FC = () => {
+  return null;
   const [activeCategory, setActiveCategory] = useState<'all' | 'music' | 'gaming' | 'news' | 'movies'>('all');
   const { data: trendingVideos, loading, error } = useTrendingVideos(activeCategory);
 

@@ -9,7 +9,7 @@ import { logger } from './logger';
  * @param date Date object, date string, or timestamp
  * @returns Relative time string
  */
-export const formatDistanceToNow = (date: string | Date | number): string => {
+export const formatDistanceToNow: any = (date: string | Date | number): string => {
   try {
     const now = new Date();
     const targetDate = new Date(date);
@@ -52,7 +52,7 @@ export const formatDistanceToNow = (date: string | Date | number): string => {
 
     const years = Math.floor(diffInSeconds / 31536000);
     return `${years} year${years === 1 ? '' : 's'} ago`;
-  } catch (error) {
+  } catch (error: any) {
     logger.error('Error formatting date:', error);
     return 'Invalid date';
   }
@@ -63,7 +63,7 @@ export const formatDistanceToNow = (date: string | Date | number): string => {
  * @param date Date object, date string, or timestamp
  * @returns Short relative time string
  */
-export const formatShortDistanceToNow = (,
+export const formatShortDistanceToNow: any = (,
   date: string | Date | number
 ): string => {
   try {
@@ -108,7 +108,7 @@ export const formatShortDistanceToNow = (,
 
     const years = Math.floor(diffInSeconds / 31536000);
     return `${years}y ago`;
-  } catch (error) {
+  } catch (error: any) {
     logger.error('Error formatting date:', error);
     return 'Invalid';
   }
@@ -120,7 +120,7 @@ export const formatShortDistanceToNow = (,
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted date string
  */
-export const formatDate = (,
+export const formatDate: any = (,
   date: string | Date | number,
   options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -137,7 +137,7 @@ export const formatDate = (,
       day: 'numeric' };
 
     return targetDate.toLocaleDateString('en-US', options || defaultOptions);
-  } catch (error) {
+  } catch (error: any) {
     logger.error('Error formatting date:', error);
     return 'Invalid date';
   }
@@ -149,7 +149,7 @@ export const formatDate = (,
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted time string
  */
-export const formatTime = (,
+export const formatTime: any = (,
   date: string | Date | number,
   options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -165,7 +165,7 @@ export const formatTime = (,
       minute: '2-digit' };
 
     return targetDate.toLocaleTimeString('en-US', options || defaultOptions);
-  } catch (error) {
+  } catch (error: any) {
     logger.error('Error formatting time:', error);
     return 'Invalid time';
   }
@@ -176,7 +176,7 @@ export const formatTime = (,
  * @param relativeDate Relative date string like "2 hours ago"
  * @returns Timestamp in milliseconds
  */
-export const parseRelativeDate = (,
+export const parseRelativeDate: any = (,
   relativeDate: string | null | undefined
 ): number => {
   const now = new Date().getTime();
@@ -198,7 +198,7 @@ export const parseRelativeDate = (,
     const value = parseInt(parts[1], 10);
     const unit = parts[2];
 
-    switch (unit) {
+    switch (unit as any) {
       case 'hour':
         return now - value * 60 * 60 * 1000;
       case 'day':

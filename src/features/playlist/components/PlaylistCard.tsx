@@ -1,5 +1,9 @@
 import React, { useEffect, useState, lazy, FC, MouseEvent } from 'react';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const HeartIconSolid = HeartSolidIcon;
 import { Link } from 'react-router-dom';
 import { formatRelativeTime, cn } from '@/lib/utils';
@@ -39,14 +43,14 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
   onUnfollow,
   onShare,
   className }) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<boolean>(false);
 
   const playlistUrl = `/playlist?list=${playlist.id}`;
   const ownerUrl = `/channel/${encodeURIComponent(playlist.ownerName)}`;
 
-  const getVisibilityIcon = () => {
+  const getVisibilityIcon: any = () => {
     switch (playlist.visibility) {
       case 'private':
         return <LockClosedIcon className='w-4 h-4' />;
@@ -56,7 +60,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
     }
   };
 
-  const getVisibilityText = () => {
+  const getVisibilityText: any = () => {
     switch (playlist.visibility) {
       case 'private':
         return 'Private';
@@ -68,14 +72,14 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
     }
   };
 
-  const handleAction = (action: () => void) => (e: React.MouseEvent) => {
+  const handleAction: any = (action: () => void) => (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     action();
     setShowMenu(false);
   };
 
-  const ThumbnailSection = () => (
+  const ThumbnailSection: any = () => (
     <div className='relative group'>
       <Link to={playlistUrl} className='block'>
         <div
@@ -136,7 +140,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
     </div>
   );
 
-  const ContentSection = () => (
+  const ContentSection: any = () => (
     <div
       className={cn('flex-1 min-w-0', variant === 'compact' ? 'ml-3' : 'mt-3')}
     >
@@ -220,7 +224,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
     </div>
   );
 
-  const ActionsSection = () =>
+  const ActionsSection: any = () =>
     showActions && (
       <div className='flex items-center space-x-2'>
         {/* Follow/Unfollow button */}
@@ -317,8 +321,8 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 
   // Click outside to close menu
   React.useEffect(() => {
-    const handleClickOutside = () => setShowMenu(false);
-    if (showMenu) {
+    const handleClickOutside: any = () => setShowMenu(false);
+    if (showMenu as any) {
       document.addEventListener('click', handleClickOutside as EventListener);
       return () => document.removeEventListener('click', handleClickOutside as EventListener);
     }

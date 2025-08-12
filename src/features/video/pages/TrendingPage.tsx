@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * TrendingPage component for displaying trending videos
  */

@@ -1,4 +1,6 @@
 import React, { useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 // Import statements fixed
 
 interface Platform {
@@ -25,13 +27,13 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
     { id: 'twitter',
           name: 'Twitter', enabled: false }]);
 
-  const togglePlatform = (platformId: any) => {
+  const togglePlatform: any = (platformId: any) => {
     setPlatforms(prev =>
-      prev.map(platform => {
+      prev.map((platform: any) => {
         if (platform.id === platformId) {
           const enabled = !platform.enabled;
           onPlatformToggle?.(platformId, enabled);
-          return { ...platform, enabled }}
+          return { ...platform as any, enabled }}
         return platform;
       })
     );
@@ -42,7 +44,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
       <h3 className='text-lg font-semibold'>Multiplatform Streaming</h3>
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-        {platforms.map(platform => (
+        {platforms.map((platform: any) => (
           <div key={platform.id} className='border rounded-lg p-4'>
             <div className='flex items-center justify-between mb-2'>
               <span className='font-medium'>{platform.name}</span>
@@ -66,9 +68,9 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                 value={platform.streamKey || ''}
                 onChange={e => {
                   setPlatforms(prev =>
-                    prev.map(p =>
+                    prev.map((p: any) =>
                       p.id === platform.id
-                        ? { ...p, streamKey: e.target.value }
+                        ? { ...p as any, streamKey: e.target.value }
                         : p
                     )
                   );

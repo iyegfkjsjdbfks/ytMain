@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
+import { FC } from 'react';
 
 interface VideoListProps {
   videos: Video;
@@ -52,7 +53,7 @@ const VideoList: React.FC<VideoListProps> = ({
             key={video.id}
             video={video}
             variant={variant}
-            onClick={onVideoClick}
+            onClick={(e: any) => onVideoClick(e)}
           />
         ))}
       </div>
@@ -73,7 +74,7 @@ const VideoList: React.FC<VideoListProps> = ({
           key={video.id}
           video={video}
           variant={variant}
-          onClick={onVideoClick}
+          onClick={(e: any) => onVideoClick(e)}
         />
       ))}
     </div>

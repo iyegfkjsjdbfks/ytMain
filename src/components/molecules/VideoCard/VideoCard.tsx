@@ -1,6 +1,7 @@
 import type { Video } from '../types';
 import React, { useState } from 'react';
 import { User } from '../types';
+import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ import getTimeAgo, { formatNumber } from '@/lib/utils';
 import type { VideoCardProps } from '@/types';
 
 // Simple image component since we're not using Next.js
-const Image = ({
+const Image: any = ({
   src,
   alt,
   width,
@@ -39,7 +40,7 @@ export interface VideoCardProps
   onMoreClick: (videoId: any) => void
 }
 
-export const VideoCard = ({
+export const VideoCard: any = ({
   id,
   title,
   channelName,
@@ -52,7 +53,7 @@ export const VideoCard = ({
   showChannelInfo = true,
   className,
   onMoreClick }: VideoCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
     <div
@@ -147,7 +148,7 @@ function formatDuration(seconds: any): string {
 
   return [h, m, s]
     .filter((v, i) => v > 0 || i > 0)
-    .map(v => v.toString().padStart(2, '0'))
+    .map((v: any) => v.toString().padStart(2, '0'))
     .join(':');
 }
 

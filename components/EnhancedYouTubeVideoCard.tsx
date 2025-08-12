@@ -1,4 +1,5 @@
 import React, { memo, FC } from 'react';
+import { FC } from 'react';
 
 import { ArrowTopRightOnSquareIcon, PlayIcon  } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
@@ -19,8 +20,8 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
   onVideoSelect,
   showChannel = true,
   size = 'md' }) => {
-  const handleClick = () => {
-    if (onVideoSelect) {
+  const handleClick: any = () => {
+    if (onVideoSelect as any) {
       onVideoSelect(video.id);
     } else {
       // Open YouTube video in new tab
@@ -29,7 +30,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
   
         };
 
-  const formatViews = (views: string | number): string => {
+  const formatViews: any = (views: string | number): string => {
     const num = typeof views === 'string' ? parseInt(views, 10) : views;
     if (num >= 1000000000) {
       return `${(num / 1000000000).toFixed(1)}B`;
@@ -41,7 +42,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
     return num.toString();
   };
 
-  const formatTimeAgo = (dateStr: any): string => {
+  const formatTimeAgo: any = (dateStr: any): string => {
     try {
       return formatDistanceToNow(new Date(dateStr || Date.now()), { addSuffix: true });
     } catch {
@@ -74,10 +75,10 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
   return (
     <div
       className={`${classes.container} cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-md p-1 transition-colors`}
-      onClick={handleClick}
+      onClick={(e: any) => handleClick(e)}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
+      onKeyDown={(e: any) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           handleClick();

@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -63,9 +67,9 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   onStreamStart,
   onStreamEnd,
   className = '' }) => {
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isSettingUp, setIsSettingUp] = useState(false);
+  const [isStreaming, setIsStreaming] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isSettingUp, setIsSettingUp] = useState<boolean>(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [settings, setSettings] = useState<LiveStreamSettings>({
     title: '',
@@ -75,7 +79,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
     enableChat: true,
           enableDonations: true });
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState<string>('');
   const [stats, setStats] = useState<LiveStreamStats>({
     viewers: 0,
           likes: 0,
@@ -83,10 +87,10 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
           duration: 0,
     peakViewers: 0,
           totalDonations: 0 });
-  const [audioEnabled, setAudioEnabled] = useState(true);
-  const [videoEnabled, setVideoEnabled] = useState(true);
-  const [showSettings, setShowSettings] = useState(false);
-  const [showChat, setShowChat] = useState(true);
+  const [audioEnabled, setAudioEnabled] = useState<boolean>(true);
+  const [videoEnabled, setVideoEnabled] = useState<boolean>(true);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [showChat, setShowChat] = useState<boolean>(true);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -96,7 +100,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
 
   useEffect(() => {
     return () => {
-      if (stream) {
+      if (stream as any) {
         stream.getTracks().forEach(track => track.stop());
       }
       if (statsInterval.current) {
@@ -113,7 +117,7 @@ clearInterval(chatInterval.current);
     }
   }, [chatMessages]);
 
-  const setupStream = async () => {
+  const setupStream = async (): Promise<void> => {
     setIsSettingUp(true);
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -130,15 +134,15 @@ clearInterval(chatInterval.current);
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
       }
-    } catch (error) {
-      console.error('Error accessing media devices:', error);
+    } catch (error: any) {
+      (console as any).error('Error accessing media devices:', error);
       alert('Could not access camera/microphone. Please check permissions.');
     } finally {
       setIsSettingUp(false);
     }
   };
 
-  const startStream = async () => {
+  const startStream = async (): Promise<void> => {
     if (!stream) {
       await setupStream();
       return;
@@ -153,14 +157,14 @@ clearInterval(chatInterval.current);
     streamStartTime.current = Date.now();
 
     // Start stats tracking
-    statsInterval.current = setInterval(() => {
+    statsInterval.current = setInterval((() => {
       setStats(prev => {
         const newViewers = Math.floor(Math.random() * 50) + prev.viewers + (Math.random() > 0.7 ? 1 : -1);
-        const viewers = Math.max(0, newViewers);
+        const viewers = Math.max(0) as any, newViewers);
         const duration = Math.floor((Date.now() - streamStartTime.current) / 1000);
 
         return {
-          ...prev,
+          ...prev as any,
           viewers,
           duration,
           peakViewers: Math.max(prev.peakViewers, viewers),
@@ -169,30 +173,30 @@ clearInterval(chatInterval.current);
     }, 2000);
 
     // Start chat simulation
-    chatInterval.current = setInterval(() => {
+    chatInterval.current = setInterval((() => {
       if (Math.random() > 0.7) {
         generateRandomChatMessage();
       }
     
-        }, 3000);
+        }) as any, 3000);
 
     onStreamStart?.(settings);
   };
 
-  const pauseStream = () => {
+  const pauseStream: any = () => {
     setIsPaused(!isPaused);
-    if (stream) {
+    if (stream as any) {
       stream.getVideoTracks().forEach(track => {
         track.enabled = isPaused;
       });
     }
   };
 
-  const stopStream = () => {
+  const stopStream: any = () => {
     setIsStreaming(false);
     setIsPaused(false);
 
-    if (stream) {
+    if (stream as any) {
       stream.getTracks().forEach(track => track.stop());
       setStream(null);
     }
@@ -210,8 +214,8 @@ clearInterval(chatInterval.current);
     onStreamEnd?.(stats);
   };
 
-  const toggleAudio = () => {
-    if (stream) {
+  const toggleAudio: any = () => {
+    if (stream as any) {
       stream.getAudioTracks().forEach(track => {
         track.enabled = !audioEnabled;
       });
@@ -219,8 +223,8 @@ clearInterval(chatInterval.current);
     }
   };
 
-  const toggleVideo = () => {
-    if (stream) {
+  const toggleVideo: any = () => {
+    if (stream as any) {
       stream.getVideoTracks().forEach(track => {
         track.enabled = !videoEnabled;
       });
@@ -228,7 +232,7 @@ clearInterval(chatInterval.current);
     }
   };
 
-  const generateRandomChatMessage = () => {
+  const generateRandomChatMessage: any = () => {
     const usernames = ['StreamFan123', 'GamerPro', 'MusicLover', 'TechGuru', 'ChatMaster', 'ViewerOne', 'StreamWatcher'];
     const messages = [
       'Great stream!',
@@ -260,12 +264,12 @@ clearInterval(chatInterval.current);
 
     setChatMessages(prev => [...prev.slice(-49), newMessage]);
     setStats(prev => ({
-      ...prev,
+      ...prev as any,
       messages: prev.messages + 1,
           totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0) }));
   };
 
-  const sendChatMessage = () => {
+  const sendChatMessage: any = () => {
     if (!newMessage.trim()) {
 return;
 }
@@ -279,11 +283,11 @@ return;
           isOwner: true };
 
     setChatMessages(prev => [...prev.slice(-49), message]);
-    setStats(prev => ({ ...prev, messages: prev.messages + 1 }));
+    setStats(prev => ({ ...prev as any, messages: prev.messages + 1 }));
     setNewMessage('');
   };
 
-  const formatDuration = (seconds: any): string => {
+  const formatDuration: any = (seconds: any): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -355,7 +359,7 @@ return;
               <div className="flex items-center space-x-3">
                 {!isStreaming ? (
                   <button
-                    onClick={startStream}
+                    onClick={(e: any) => startStream(e)}
                     disabled={isSettingUp}
                     className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
                   >
@@ -365,14 +369,14 @@ return;
                 ) : (
                   <div className="flex items-center space-x-2">
                     <button
-                      onClick={pauseStream}
+                      onClick={(e: any) => pauseStream(e)}
                       className="flex items-center space-x-2 bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
                     >
                       {isPaused ? <PlayIcon className="w-5 h-5" /> : <PauseIcon className="w-5 h-5" />}
                       <span>{isPaused ? 'Resume' : 'Pause'}</span>
                     </button>
                     <button
-                      onClick={stopStream}
+                      onClick={(e: any) => stopStream(e)}
                       className="flex items-center space-x-2 bg-neutral-600 hover:bg-neutral-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
                     >
                       <StopIcon className="w-5 h-5" />
@@ -383,7 +387,7 @@ return;
 
                 <div className="flex items-center space-x-2">
                   <button
-                    onClick={toggleAudio}
+                    onClick={(e: any) => toggleAudio(e)}
                     className={`p-2 rounded-lg transition-colors ${
                       audioEnabled
                         ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
@@ -399,7 +403,7 @@ return;
                   </button>
 
                   <button
-                    onClick={toggleVideo}
+                    onClick={(e: any) => toggleVideo(e)}
                     className={`p-2 rounded-lg transition-colors ${
                       videoEnabled
                         ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
@@ -449,7 +453,7 @@ return;
                       id="stream-title"
                       type="text"
                       value={settings.title}
-                      onChange={(e) => setSettings(prev => ({ ...prev, title: e.target.value }))}
+                      onChange={(e) => setSettings(prev => ({ ...prev as any, title: e.target.value }))}
                       className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Enter stream title"
                     />
@@ -462,10 +466,10 @@ return;
                     <select
                       id="stream-category"
                       value={settings.category}
-                      onChange={(e) => setSettings(prev => ({ ...prev, category: e.target.value }))}
+                      onChange={(e) => setSettings(prev => ({ ...prev as any, category: e.target.value }))}
                       className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      {categories.map(category => (
+                      {categories.map((category: any) => (
                         <option key={category} value={category}>{category}</option>
                       ))}
                     </select>
@@ -478,7 +482,7 @@ return;
                     <select
                       id="stream-privacy"
                       value={settings.privacy}
-                      onChange={(e) => setSettings(prev => ({ ...prev, privacy: e.target.value as 'public' | 'unlisted' | 'private' }))}
+                      onChange={(e) => setSettings(prev => ({ ...prev as any, privacy: e.target.value as 'public' | 'unlisted' | 'private' }))}
                       className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="public">Public</option>
@@ -493,7 +497,7 @@ return;
                         id="enable-chat"
                         type="checkbox"
                         checked={settings.enableChat}
-                        onChange={(e) => setSettings(prev => ({ ...prev, enableChat: e.target.checked }))}
+                        onChange={(e) => setSettings(prev => ({ ...prev as any, enableChat: e.target.checked }))}
                         className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
                       />
                       <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Chat</span>
@@ -504,7 +508,7 @@ return;
                         id="enable-donations"
                         type="checkbox"
                         checked={settings.enableDonations}
-                        onChange={(e) => setSettings(prev => ({ ...prev, enableDonations: e.target.checked }))}
+                        onChange={(e) => setSettings(prev => ({ ...prev as any, enableDonations: e.target.checked }))}
                         className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
                       />
                       <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Donations</span>
@@ -519,7 +523,7 @@ return;
                   <textarea
                     id="stream-description"
                     value={settings.description}
-                    onChange={(e) => setSettings(prev => ({ ...prev, description: e.target.value }))}
+                    onChange={(e) => setSettings(prev => ({ ...prev as any, description: e.target.value }))}
                     rows={3}
                     className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Describe your stream..."
@@ -619,7 +623,7 @@ return;
                       className="flex-1 px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />
                     <button
-                      onClick={sendChatMessage}
+                      onClick={(e: any) => sendChatMessage(e)}
                       className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
                     >
                       Send

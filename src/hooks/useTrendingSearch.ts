@@ -1,4 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { getInitialSearchKeyword } from '../services/settingsService';
 
@@ -8,7 +11,7 @@ import { VideoService } from '../services/api';
 import type { Video } from '../types';
 
 // Convert search results to Video format for HomePage compatibility
-const convertSearchResultToVideo = (,
+const convertSearchResultToVideo: any = (,
   result: YouTubeSearchResult | GoogleSearchResult,
   index: number
 ): Video => {
@@ -86,10 +89,10 @@ interface UseInitialSearchResult {
  */
 export function useTrendingSearch(): UseInitialSearchResult {
   const [data, setData] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTrendingVideos = useCallback(async () => {
+  const fetchTrendingVideos = useCallback(async (): Promise<void> => {
     setLoading(true);
     setError(null);
 
@@ -115,8 +118,8 @@ export function useTrendingSearch(): UseInitialSearchResult {
       const localVideos = combinedResults.localVideos || [];
 
       // Combine and sort by view count (trending)
-      const allVideos = [...localVideos, ...convertedVideos];
-      const sortedVideos = allVideos.sort((a, b) => {
+      const allVideos = [...localVideos as any, ...convertedVideos];
+      const sortedVideos = allVideos.sort((a: any, b: any) => {
         const viewsA =
           typeof a.views === 'string'
             ? parseInt(a.views, 10) || 0
@@ -128,16 +131,16 @@ export function useTrendingSearch(): UseInitialSearchResult {
         return viewsB - viewsA;
       });
 
-      console.log(
+      (console as any).log(
         `✅ Successfully fetched ${sortedVideos.length} ${getInitialSearchKeyword()} videos`
       );
       setData(sortedVideos);
-    } catch (err) {
+    } catch (err: any) {
       const errorMessage =
         err instanceof Error
           ? err.message
           : `Failed to fetch ${getInitialSearchKeyword()} videos`;
-      console.error(
+      (console as any).error(
         `❌ Error fetching ${getInitialSearchKeyword()}, videos:`,
         errorMessage
       );
@@ -150,7 +153,7 @@ export function useTrendingSearch(): UseInitialSearchResult {
   // Effect to refetch videos when the keyword changes
   useEffect(() => {
     // Listen for storage changes to detect when the keyword is updated
-    const handleStorageChange = (event: StorageEvent) => {
+    const handleStorageChange: any = (event: StorageEvent) => {
       if (event.key === 'appSettings') {
         fetchTrendingVideos();
       }
@@ -160,7 +163,7 @@ export function useTrendingSearch(): UseInitialSearchResult {
     return () => window.removeEventListener('storage', handleStorageChange as EventListener);
   }, [fetchTrendingVideos]);
 
-  const refetch = useCallback(async () => {
+  const refetch = useCallback(async (): Promise<void> => {
     await fetchTrendingVideos();
   }, [fetchTrendingVideos]);
 

@@ -89,7 +89,7 @@ function isRetryableError(error: Error): boolean {
 }
 
 // Enhanced retry logic
-function createRetryFn(maxRetries: number = 3) {
+function createRetryFn(maxRetries: number = 3): any {
   return (failureCount: any, error: Error) => {
     const apiError = createApiError(error);
 
@@ -108,14 +108,14 @@ function createRetryFn(maxRetries: number = 3) {
 }
 
 // Enhanced delay function with exponential backoff and jitter
-function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
+function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000): any {
   return (attemptIndex: any, error: Error) => {
     // Create API error to ensure proper error handling
     createApiError(error);
 
     // Use server-provided retry-after header if available
     const retryAfter = error?.response?.headers?.['retry-after'];
-    if (retryAfter) {
+    if (retryAfter as any) {
       const retryAfterMs = parseInt(retryAfter, 10) * 1000;
       return Math.min(retryAfterMs, maxDelay);
     }
@@ -133,7 +133,7 @@ function withPerformanceMonitoring<T>(,
   queryFn: () => Promise<T>,
   queryKey: any
 ): () => Promise<T> {
-  return async () => {
+  return async (): Promise<void> => {
     const startTime = performance.now();
     const endpoint = queryKey.join('/');
 
@@ -144,7 +144,7 @@ function withPerformanceMonitoring<T>(,
       performanceMonitor.trackApiCall(endpoint, duration, 200);
 
       return result;
-    } catch (error) {
+    } catch (error: any) {
       const duration = performance.now() - startTime;
       const status = error?.status || error?.response?.status || 0;
 
@@ -189,7 +189,7 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(,
     queryFn: enhancedQueryFn,
     retry: createRetryFn(maxRetries),
     retryDelay: createRetryDelay(baseRetryDelay, maxRetryDelay),
-    ...presetConfig,
+    ...presetConfig as any,
     ...queryOptions });
 }
 
@@ -228,7 +228,7 @@ export function useEnhancedMutation<
   const queryClient = useQueryClient();
 
   const enhancedMutationFn = enablePerformanceMonitoring
-    ? async (variables: TVariables) => {
+    ? async (variables: TVariables): Promise<any> => {
         const startTime = performance.now();
         const endpoint = 'mutation'; // Could be enhanced to include specific mutation name
 
@@ -239,7 +239,7 @@ export function useEnhancedMutation<
           performanceMonitor.trackApiCall(endpoint, duration, 200);
 
           return result;
-        } catch (error) {
+        } catch (error: any) {
           const duration = performance.now() - startTime;
           const status = error?.status || error?.response?.status || 0;
 
@@ -256,7 +256,7 @@ export function useEnhancedMutation<
     retryDelay: createRetryDelay(baseRetryDelay, maxRetryDelay),
     onMutate: async variables => {
       // Handle optimistic updates
-      if (optimisticUpdate) {
+      if (optimisticUpdate as any) {
         await queryClient.cancelQueries({
           queryKey: optimisticUpdate.queryKey });
         const previousData = queryClient.getQueryData(
@@ -287,7 +287,7 @@ export function useEnhancedMutation<
 
       mutationOptions.onError?.(error, variables, context);
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data: any, variables: any, context: any) => {
       // Invalidate related queries
       invalidateQueries.forEach(queryKey => {
         queryClient.invalidateQueries({ queryKey });
@@ -301,7 +301,7 @@ export function useEnhancedMutation<
 // Utility hooks for common patterns
 export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(,
   _queryKey: any,
-  _queryFn: ({ pageParam }) => Promise<TData>,
+  _queryFn: ({ pageParam }: any) => Promise<TData>,
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
     getPreviousPageParam?: (firstPage: TData, allPages: TData) => unknown
@@ -313,7 +313,7 @@ export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(,
 }
 
 // Cache management utilities
-export function useCacheManager() {
+export function useCacheManager(): any {
   const queryClient = useQueryClient();
 
   return {
@@ -331,7 +331,7 @@ export function useCacheManager() {
 
     // Clear specific cache,
   clearCache: (queryKey?: string) => {
-      if (queryKey) {
+      if (queryKey as any) {
         queryClient.removeQueries({ queryKey });
       } else {
         queryClient.clear();
@@ -343,7 +343,7 @@ export function useCacheManager() {
       const cache = queryClient.getQueryCache();
       return {
         size: cache.getAll().length,
-        queries: cache.getAll().map(query => ({
+        queries: cache.getAll().map((query: any) => ({
           queryKey: query.queryKey,
           state: query.state.status,
           dataUpdatedAt: query.state.dataUpdatedAt,

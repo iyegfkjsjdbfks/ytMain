@@ -30,12 +30,12 @@ vi.mock('@hooks/useRefactoredHooks', () => ({
     likePost: vi.fn(),
           addComment: vi.fn() }) }));
 
-const createTestQueryClient = () => new QueryClient({
+const createTestQueryClient: any = () => new QueryClient({
   defaultOptions: {,
     queries: { retry: false },
           mutations: { retry: false } } });
 
-const renderWithQueryClient = (component: React.ReactElement) => {
+const renderWithQueryClient: any = (component: React.ReactElement) => {
   const queryClient = createTestQueryClient();
   return render(
     <QueryClientProvider client={queryClient}>
@@ -75,7 +75,7 @@ describe('CommunityPage', () => {
     expect(screen.getByRole('button', { name: /post/i })).toBeInTheDocument();
   });
 
-  it('handles post creation', async () => {
+  it('handles post creation', async (): Promise<void> => {
     const { useRefactoredHooks } = await import('../../src/hooks/useRefactoredHooks');
     const mockCreatePost = vi.fn();
 
@@ -115,7 +115,7 @@ describe('CommunityPage', () => {
     });
   });
 
-  it('handles like button clicks', async () => {
+  it('handles like button clicks', async (): Promise<void> => {
     const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
     const mockLikePost = vi.fn();
 
@@ -155,7 +155,7 @@ describe('CommunityPage', () => {
     });
   });
 
-  it('displays loading state', async () => {
+  it('displays loading state', async (): Promise<void> => {
     const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
@@ -186,7 +186,7 @@ describe('CommunityPage', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
-  it('displays error state', async () => {
+  it('displays error state', async (): Promise<void> => {
     const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
 
     vi.mocked(useRefactoredHooks).mockReturnValue({

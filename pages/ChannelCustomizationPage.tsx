@@ -1,4 +1,6 @@
 import React, { useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { PaintBrushIcon, PhotoIcon  } from '@heroicons/react/24/outline';
 import { XMarkIcon as XMarkSolidIcon, CheckIcon as CheckSolidIcon  } from '@heroicons/react/24/solid';
@@ -34,6 +36,7 @@ interface ChannelStats {
 }
 
 const ChannelCustomizationPage: React.FC = () => {
+  return null;
   const [branding, setBranding] = useState<ChannelBranding>({
     channelArt: '/api/placeholder/2560/1440',
           profilePicture: '/api/placeholder/800/800',
@@ -58,52 +61,52 @@ const ChannelCustomizationPage: React.FC = () => {
           joinDate: 'Jan 15, 2020' });
 
   const [activeTab, setActiveTab] = useState<'branding' | 'layout' | 'info' | 'featured'>('branding');
-  const [previewMode, setPreviewMode] = useState(false);
-  const [unsavedChanges, setUnsavedChanges] = useState(false);
+  const [previewMode, setPreviewMode] = useState<boolean>(false);
+  const [unsavedChanges, setUnsavedChanges] = useState<boolean>(false);
 
-  const handleInputChange = (field: keyof ChannelBranding,
+  const handleInputChange: any = (field: keyof ChannelBranding,
           value: string | number) => {
-    setBranding(prev => ({ ...prev, [field]: value }));
+    setBranding(prev => ({ ...prev as any, [field]: value }));
     setUnsavedChanges(true);
   };
 
-  const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'],
+  const handleSocialLinkChange: any = (platform: keyof ChannelBranding['socialLinks'],
           value: string | number) => {
     setBranding(prev => ({
-      ...prev,
+      ...prev as any,
       socialLinks: { ...prev.socialLinks, [platform]: value } }));
     setUnsavedChanges(true);
   };
 
-  const handleKeywordAdd = (keyword: any) => {
+  const handleKeywordAdd: any = (keyword: any) => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
       setBranding(prev => ({
-        ...prev,
+        ...prev as any,
         channelKeywords: [...prev.channelKeywords, keyword.trim()] }));
       setUnsavedChanges(true);
     }
   };
 
-  const handleKeywordRemove = (keyword: any) => {
+  const handleKeywordRemove: any = (keyword: any) => {
     setBranding(prev => ({
-      ...prev,
+      ...prev as any,
       channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword) }));
     setUnsavedChanges(true);
   };
 
-  const handleSave = () => {
+  const handleSave: any = () => {
     // Simulate API call
     setUnsavedChanges(false);
     alert('Channel customization saved successfully!');
   };
 
-  const handleDiscard = () => {
+  const handleDiscard: any = () => {
     // Reset to original state
     setUnsavedChanges(false);
     alert('Changes discarded');
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber: any = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -133,14 +136,14 @@ const ChannelCustomizationPage: React.FC = () => {
               {unsavedChanges && (
                 <div className="flex space-x-2">
                   <button
-                    onClick={handleDiscard}
+                    onClick={(e: any) => handleDiscard(e)}
                     className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600"
                   >
                     <XMarkIcon className="w-4 h-4 mr-2" />
                     Discard
                   </button>
                   <button
-                    onClick={handleSave}
+                    onClick={(e: any) => handleSave(e)}
                     className="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700"
                   >
                     <CheckIcon className="w-4 h-4 mr-2" />
@@ -231,9 +234,9 @@ const ChannelCustomizationPage: React.FC = () => {
                           const input = document.createElement('input');
                           input.type = 'file';
                           input.accept = 'image/*';
-                          input.onchange = (e) => {
-                            const file = (e.target as HTMLInputElement).files?.[0];
-                            if (file) {
+                          input.onchange = (e: any) => {
+                            const file: any = (e.target as HTMLInputElement).files?.[0];
+                            if (file as any) {
                               // Handle file upload
                             }
                           
@@ -269,9 +272,9 @@ const ChannelCustomizationPage: React.FC = () => {
                             const input = document.createElement('input');
                             input.type = 'file';
                             input.accept = 'image/*';
-                            input.onchange = (e) => {
-                              const file = (e.target as HTMLInputElement).files?.[0];
-                              if (file) {
+                            input.onchange = (e: any) => {
+                              const file: any = (e.target as HTMLInputElement).files?.[0];
+                              if (file as any) {
                                 // Handle file upload
                               }
                             
@@ -311,9 +314,9 @@ const ChannelCustomizationPage: React.FC = () => {
                           const input = document.createElement('input');
                           input.type = 'file';
                           input.accept = 'image/*';
-                          input.onchange = (e) => {
-                            const file = (e.target as HTMLInputElement).files?.[0];
-                            if (file) {
+                          input.onchange = (e: any) => {
+                            const file: any = (e.target as HTMLInputElement).files?.[0];
+                            if (file as any) {
                               // Handle file upload
                             }
                           
@@ -445,7 +448,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         id="channel-keywords"
                         placeholder="Add a keyword and press Enter"
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        onKeyPress={(e) => {
+                        onKeyPress={(e: any) => {
                           if (e.key === 'Enter') {
                             handleKeywordAdd(e.currentTarget.value);
                             e.currentTarget.value = '';

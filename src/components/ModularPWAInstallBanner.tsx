@@ -1,5 +1,9 @@
 import React, { useEffect, useCallback, useState, FC } from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 
@@ -74,10 +78,10 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
       return;
     }
 
-    const checkAutoShow = () => {
+    const checkAutoShow: any = () => {
       // Don't show if recently dismissed (within 24 hours)
-      const dismissedAt = localStorage.getItem('pwa-banner-dismissed');
-      if (dismissedAt) {
+      const dismissedAt = (localStorage as any).getItem('pwa-banner-dismissed');
+      if (dismissedAt as any) {
         const dismissedTime = parseInt(dismissedAt, 10);
         const dayInMs = 24 * 60 * 60 * 1000;
         if (Date.now() - dismissedTime < dayInMs) {
@@ -90,30 +94,30 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
       let currentView: BannerState['currentView'] = 'install';
       let shouldShow = false;
 
-      if (shouldShowUpdate) {
+      if (shouldShowUpdate as any) {
         currentView = 'update';
         shouldShow = true;
-      } else if (shouldShowInstall) {
+      } else if (shouldShowInstall as any) {
         currentView = 'install';
         shouldShow = true;
-      } else if (shouldShowNotification) {
+      } else if (shouldShowNotification as any) {
         currentView = 'notification';
         shouldShow = true;
-      } else if (shouldShowOffline) {
+      } else if (shouldShowOffline as any) {
         currentView = 'offline';
         shouldShow = true;
       }
 
-      if (shouldShow) {
+      if (shouldShow as any) {
         setState(prev => ({
-          ...prev,
+          ...prev as any,
           isVisible: true,
           currentView }));
       }
     };
 
     // Delay auto-show to avoid immediate popup
-    const timer = setTimeout(checkAutoShow, 2000);
+    const timer = setTimeout((checkAutoShow) as any, 2000);
     return () => clearTimeout(timer);
   }, [
     autoShow,
@@ -123,13 +127,13 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
     shouldShowNotification]);
 
   // Handle install
-  const handleInstall = useCallback(async () => {
-    setState(prev => ({ ...prev, isAnimating: true }));
+  const handleInstall = useCallback(async (): Promise<void> => {
+    setState(prev => ({ ...prev as any, isAnimating: true }));
 
     try {
       const success = await installPrompt.installApp();
 
-      if (success) {
+      if (success as any) {
         conditionalLogger.info(
           'PWA installed successfully',
           undefined,
@@ -138,30 +142,30 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
         onInstallSuccess?.();
 
         setState(prev => ({
-          ...prev,
+          ...prev as any,
           isVisible: false,
           isAnimating: false }));
       } else {
-        setState(prev => ({ ...prev, isAnimating: false }));
+        setState(prev => ({ ...prev as any, isAnimating: false }));
       }
-    } catch (error) {
+    } catch (error: any) {
       conditionalLogger.error(
         'Failed to install PWA',
         { error: error instanceof Error ? error.message : 'Unknown error' },
         'ModularPWAInstallBanner'
       );
-      setState(prev => ({ ...prev, isAnimating: false }));
+      setState(prev => ({ ...prev as any, isAnimating: false }));
     }
   }, [installPrompt.installApp, onInstallSuccess]);
 
   // Handle update
-  const handleUpdate = useCallback(async () => {
-    setState(prev => ({ ...prev, isAnimating: true }));
+  const handleUpdate = useCallback(async (): Promise<void> => {
+    setState(prev => ({ ...prev as any, isAnimating: true }));
 
     try {
       await pwaUpdates.installUpdate();
       onUpdateInstall?.();
-    } catch (error) {
+    } catch (error: any) {
       conditionalLogger.error(
         'Failed to install update',
         { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -169,32 +173,32 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
       );
     }
 
-    setState(prev => ({ ...prev, isAnimating: false }));
+    setState(prev => ({ ...prev as any, isAnimating: false }));
   }, [pwaUpdates.installUpdate, onUpdateInstall]);
 
   // Handle notification permission
-  const handleNotificationPermission = useCallback(async () => {
-    setState(prev => ({ ...prev, isAnimating: true }));
+  const handleNotificationPermission = useCallback(async (): Promise<void> => {
+    setState(prev => ({ ...prev as any, isAnimating: true }));
 
     try {
       await notifications.requestPermission();
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         isVisible: false,
           isAnimating: false }));
-    } catch (error) {
-      setState(prev => ({ ...prev, isAnimating: false }));
+    } catch (error: any) {
+      setState(prev => ({ ...prev as any, isAnimating: false }));
     }
   }, [notifications.requestPermission]);
 
   // Handle dismiss
   const handleDismiss = useCallback(() => {
     setState(prev => ({
-      ...prev,
+      ...prev as any,
       isVisible: false,
           dismissedAt: Date.now() }));
 
-    localStorage.setItem('pwa-banner-dismissed', Date.now().toString());
+    (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
     onInstallDismiss?.();
   }, [onInstallDismiss]);
 
@@ -224,7 +228,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
           floating: 'p-4 shadow-2xl rounded-full' };
 
   // Content based on current view
-  const renderContent = () => {
+  const renderContent: any = () => {
     switch (state.currentView) {
       case 'install':
         return (
@@ -260,7 +264,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
             </div>
             <div className='flex gap-2 ml-4'>
               <button
-                onClick={handleInstall}
+                onClick={(e: any) => handleInstall(e)}
                 disabled={state.isAnimating}
                 className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
                 style={{ backgroundColor: theme.primaryColor }}
@@ -268,7 +272,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
                 {state.isAnimating ? 'Installing...' : 'Install'}
               </button>
               <button
-                onClick={handleDismiss}
+                onClick={(e: any) => handleDismiss(e)}
                 className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
               >
                 ✕
@@ -304,7 +308,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
             </div>
             <div className='flex gap-2 ml-4'>
               <button
-                onClick={handleUpdate}
+                onClick={(e: any) => handleUpdate(e)}
                 disabled={state.isAnimating}
                 className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
                 style={{ backgroundColor: theme.primaryColor }}
@@ -340,7 +344,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
             </div>
             <div className='flex gap-2 ml-4'>
               <button
-                onClick={handleNotificationPermission}
+                onClick={(e: any) => handleNotificationPermission(e)}
                 disabled={state.isAnimating}
                 className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
                 style={{ backgroundColor: theme.primaryColor }}
@@ -348,7 +352,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
                 {state.isAnimating ? 'Requesting...' : 'Enable'}
               </button>
               <button
-                onClick={handleDismiss}
+                onClick={(e: any) => handleDismiss(e)}
                 className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
               >
                 ✕
@@ -392,7 +396,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
                 Retry
               </button>
               <button
-                onClick={handleDismiss}
+                onClick={(e: any) => handleDismiss(e)}
                 className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
               >
                 ✕

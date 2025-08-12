@@ -1,3 +1,5 @@
+import React from 'react';
+import { ReactNode } from 'react';
 
 import { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
 
@@ -45,17 +47,17 @@ class ErrorReportingService {
     try {
       // In development, log to console
       if (import.meta.env.DEV) {
-        console.group('🚨 Error Report');
-        console.error('Error:', error);
-        console.error('Error Info:', errorInfo);
-        console.error('Full Report:', report);
-        console.groupEnd();
+        (console as any).group('🚨 Error Report');
+        (console as any).error('Error:', error);
+        (console as any).error('Error Info:', errorInfo);
+        (console as any).error('Full Report:', report);
+        (console as any).groupEnd();
       }
 
       // In production, send to error reporting service
       if (import.meta.env.PROD) {
         // Example: Send to error reporting service
-        // await fetch('/api/errors', {
+        // await (fetch as any)('/api/errors', {
         //   method: 'POST',
         //   headers: { 'Content-Type': 'application/json' },
         //   body: JSON.stringify(report)
@@ -65,8 +67,8 @@ class ErrorReportingService {
         // Sentry.captureException(error, { contexts: { react: errorInfo } 
         });
       }
-    } catch (reportingError) {
-      console.error('Failed to report error:', reportingError);
+    } catch (reportingError: any) {
+      (console as any).error('Failed to report error:', reportingError);
     }
   }
 
@@ -78,7 +80,7 @@ class ErrorReportingService {
 const errorReporter = ErrorReportingService.getInstance();
 
 interface Props {
-  children?: ReactNode;
+  children?: React.ReactNode;
   fallback?: ReactNode;
   onError?: (error: Error,
           errorInfo: ErrorInfo) => void;
@@ -124,7 +126,7 @@ class ErrorBoundary extends Component<Props, State> {
       const hasResetKeyChanged = resetKeys.some(
         (key, index) => this.prevResetKeys[index] !== key);
 
-      if (hasResetKeyChanged) {
+      if (hasResetKeyChanged as any) {
         this.prevResetKeys = resetKeys;
         this.resetErrorBoundary();
       }
@@ -140,7 +142,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   public override componentDidCatch(error: Error,
           errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    (console as any).error('ErrorBoundary caught an error:', error, errorInfo);
 
     // Report error to external service
     errorReporter.reportError(error, errorInfo).catch(console.error);
@@ -181,9 +183,9 @@ class ErrorBoundary extends Component<Props, State> {
   private handleAutoRetry = () => {
     // Auto-retry after 5 seconds for the first error
     if (this.state.retryCount === 0) {
-      this.resetTimeoutId = window.setTimeout(() => {
+      this.resetTimeoutId = window.setTimeout((() => {
         this.handleRetry();
-      }, 5000);
+      }) as any, 5000);
     }
   };
 

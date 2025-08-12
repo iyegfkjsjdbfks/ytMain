@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useMemo, useCallback, memo, lazy } from 'react';
 import { FixedSizeList } from 'react-window';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
@@ -21,13 +25,13 @@ interface MobileVideoItemProps {
     onVideoClick: (video: Video) => void
   }}
 
-const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
+const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: any) => {
   const { videos, onVideoClick } = data;
   const video = videos[index];
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   const handleClick = useCallback(() => {
-    if (video) {
+    if (video as any) {
       onVideoClick(video);
     }
   }, [video, onVideoClick]);
@@ -44,7 +48,7 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
     <div style={style} className='px-2 pb-4'>
       <div
         className='bg-white dark:bg-gray-800 rounded-lg shadow-sm active:scale-95 transition-transform cursor-pointer'
-        onClick={handleClick}
+        onClick={(e: any) => handleClick(e)}
       >
         {/* Video Thumbnail */}
         <div className='relative aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden'>
@@ -120,7 +124,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
       const screenWidth = window.innerWidth;
       const padding = 16; // 2 * 8px padding
       const videoWidth = screenWidth - padding;
-      const videoHeight = (videoWidth * 9) / 16; // 16:9 aspect ratio
+      const videoHeight: any = (videoWidth * 9) / 16; // 16:9 aspect ratio
       const infoHeight = 80; // Approximate height of video info
       return videoHeight + infoHeight + 16; // Extra padding
     }, []);

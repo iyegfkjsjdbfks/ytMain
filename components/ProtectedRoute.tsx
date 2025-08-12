@@ -1,5 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { useLocation, Navigate, useLocation  } from 'react-router-dom';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import type React from 'react';
 
@@ -19,7 +21,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   const location = useLocation();
 
   // Show loading spinner while checking authentication
-  if (isLoading) {
+  if (isLoading as any) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600" />

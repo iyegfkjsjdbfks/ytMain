@@ -1,5 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import type { ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { QueryClientProvider, type QueryClient  } from '@tanstack/react-query';
 
@@ -16,7 +18,7 @@ import PWAStatus from '../src/components/PWAStatus';
 import PWAUpdateNotification from '../src/components/PWAUpdateNotification';
 
 interface RefactoredAppProvidersProps {
-  children: ReactNode
+  children?: React.ReactNode
 }
 
 /**
@@ -59,7 +61,7 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
  * Allows injection of custom QueryClient for testing
  */
 interface TestAppProvidersProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   queryClient?: QueryClient;
 }
 

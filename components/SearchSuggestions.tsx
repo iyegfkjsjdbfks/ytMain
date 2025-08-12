@@ -1,12 +1,16 @@
 import React from 'react';
 import SearchIcon from './icons/SearchIcon';
+import { MouseEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
+import { FC } from 'react';
 
 interface SearchSuggestionsProps {
   suggestions: string;,
   onSuggestionClick: (suggestion: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void; isVisible: boolean
 }
 
-const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSuggestionClick, isVisible }) => {
+const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSuggestionClick, isVisible }: any) => {
   if (!isVisible || suggestions.length === 0) {
     return null;
   }

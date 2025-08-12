@@ -1,3 +1,10 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useState, FC, ChangeEvent, MouseEvent } from 'react';
 
@@ -20,28 +27,28 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
   channelId,
   subscriberCount,
   onSubscriptionChange }) => {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showNotificationMenu, setShowNotificationMenu] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showNotificationMenu, setShowNotificationMenu] = useState<boolean>(false);
 
   useEffect(() => {
     // Load subscription status from localStorage
-    const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+    const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
     const channelData = subscriptions[channelId];
-    if (channelData) {
+    if (channelData as any) {
       setIsSubscribed(channelData.isSubscribed);
       setNotificationsEnabled(channelData.notificationsEnabled || false);
     }
   }, [channelId]);
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+      const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
       const newSubscriptionStatus = !isSubscribed;
 
-      if (newSubscriptionStatus) {
+      if (newSubscriptionStatus as any) {
         subscriptions[channelId] = {
           channelName,
           channelAvatarUrl,
@@ -55,29 +62,29 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
         setNotificationsEnabled(false);
       }
 
-      localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
+      (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
       setIsSubscribed(newSubscriptionStatus);
       onSubscriptionChange?.(newSubscriptionStatus);
 
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-    } catch (error) {
-      console.error('Error updating subscription:', error);
+      await new Promise(resolve => setTimeout((resolve) as any, 500));
+    } catch (error: any) {
+      (console as any).error('Error updating subscription:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleNotificationToggle = async (enabled: any) => {
+  const handleNotificationToggle = async (enabled: any): Promise<any> => {
     try {
-      const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+      const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
       if (subscriptions[channelId]) {
         subscriptions[channelId].notificationsEnabled = enabled;
-        localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
+        (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
         setNotificationsEnabled(enabled);
       }
-    } catch (error) {
-      console.error('Error updating notification settings:', error);
+    } catch (error: any) {
+      (console as any).error('Error updating notification settings:', error);
     }
     setShowNotificationMenu(false);
   };
@@ -87,7 +94,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
       {isSubscribed ? (
         <div className="flex items-center space-x-1">
           <button
-            onClick={handleSubscribe}
+            onClick={(e: any) => handleSubscribe(e)}
             disabled={isLoading}
             className="flex items-center space-x-2 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
           >
@@ -142,7 +149,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
         </div>
       ) : (
         <button
-          onClick={handleSubscribe}
+          onClick={(e: any) => handleSubscribe(e)}
           disabled={isLoading}
           className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
         >

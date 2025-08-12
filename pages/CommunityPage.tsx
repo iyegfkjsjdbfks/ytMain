@@ -3,11 +3,14 @@ import { ChartBarIcon, PlusIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 import { ShareIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const HeartIconSolid = HeartSolidIcon;
 
 interface CommunityPost {
   id: string;,
-  type: 'text' | 'image' | 'poll' | 'video';
+  type: "text" as const | 'image' | 'poll' | 'video';
   content: string;
   imageUrl?: string;
   videoUrl?: string;
@@ -31,7 +34,7 @@ interface CommunityStats {
   reachGrowth: number
 }
 
-const formatDate = (date: Date) => {
+const formatDate: any = (date: Date) => {
   const now = new Date();
   const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
 
@@ -49,15 +52,15 @@ return `${Math.floor(diffInHours / 24)}d ago`;
 
 const CommunityPage: React.FC = () => {
   const [posts, setPosts] = useState<CommunityPost[]>([]);
-  const [newPostContent, setNewPostContent] = useState('');
+  const [newPostContent, setNewPostContent] = useState<string>('');
   const [newPostType, setNewPostType] = useState<'text' | 'image' | 'poll'>('text');
   const [pollOptions, setPollOptions] = useState(['', '']);
-  const [showCreatePost, setShowCreatePost] = useState(false);
+  const [showCreatePost, setShowCreatePost] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<'posts' | 'analytics'>('posts');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [stats, setStats] = useState<CommunityStats | null>(null);
 
-  const handleCreatePost = () => {
+  const handleCreatePost: any = () => {
     if (!newPostContent.trim()) {
 return;
 }
@@ -86,17 +89,17 @@ return;
     setShowCreatePost(false);
   };
 
-  const toggleLike = (postId: any) => {
-    setPosts(posts.map(post =>
+  const toggleLike: any = (postId: any) => {
+    setPosts(posts.map((post: any) =>
       post.id === postId
-        ? { ...post, isLiked: !post.isLiked,
+        ? { ...post as any, isLiked: !post.isLiked,
           likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
         : post));
   };
 
   // Generate mock data
   useEffect(() => {
-    const generateMockPosts = (): CommunityPost[] => {
+    const generateMockPosts: any = (): CommunityPost[] => {
       const postTypes: Array<'text' | 'image' | 'poll'> = ['text', 'image', 'poll'];
       const sampleContent = [
         "What's your favorite video editing software? Let me know in the comments!",
@@ -117,7 +120,7 @@ return;
           content: 'Which collaboration would you like to see?',
           options: ['Tech reviewer', 'Gaming channel', 'Lifestyle vlogger', 'Educational creator'] }];
 
-      return Array.from({ length: 12 }, (_, i) => {
+      return Array.from({ length: 12 }, (_: any, i: any) => {
         const type = postTypes[Math.floor(Math.random() * postTypes.length)] || 'text';
 
         let content = sampleContent[Math.floor(Math.random() * sampleContent.length)] || 'Default content';
@@ -125,7 +128,7 @@ return;
 
         if (type === 'poll') {
           const pollQuestion = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
-          if (pollQuestion) {
+          if (pollQuestion as any) {
             const { content: pollContentValue,
           options: pollOptionsData } = pollQuestion;
             content = pollContentValue;
@@ -152,7 +155,7 @@ return;
           clickThroughRate: Math.random() * 15 + 2 } }}).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     };
 
-    const generateMockStats = (posts: CommunityPost): CommunityStats => {
+    const generateMockStats: any = (posts: CommunityPost): CommunityStats => {
       const totalLikes = posts.reduce((sum: any,
           post: any) => sum + post.likes, 0);
       const totalComments = posts.reduce((sum: any,
@@ -169,15 +172,15 @@ return;
         topPerformingPost: topPost ? `${topPost.content.substring(0, 50)  }...` : 'No posts yet',
         reachGrowth: Math.random() * 20 + 5 }};
 
-    setTimeout(() => {
+    setTimeout((() => {
       const mockPosts = generateMockPosts();
       setPosts(mockPosts);
       setStats(generateMockStats(mockPosts));
       setLoading(false);
-    }, 1000);
+    }) as any, 1000);
   }, []);
 
-  if (loading) {
+  if (loading as any) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
         <div className="max-w-4xl mx-auto">
@@ -287,7 +290,7 @@ return;
                         <input
                           key={index}
                           value={option}
-                          onChange={(e) => {
+                          onChange={(e: any) => {
                             const newOptions = [...pollOptions];
                             newOptions[index] = e.target.value;
                             setPollOptions(newOptions);
@@ -298,7 +301,7 @@ return;
                       ))}
                       {pollOptions.length < 4 && (
                         <button
-                          onClick={() => setPollOptions([...pollOptions, ''])}
+                          onClick={() => setPollOptions([...pollOptions as any, ''])}
                           className="text-blue-600 hover:text-blue-700 text-sm"
                         >
                           + Add option
@@ -316,7 +319,7 @@ return;
                       Cancel
                     </button>
                     <button
-                      onClick={handleCreatePost}
+                      onClick={(e: any) => handleCreatePost(e)}
                       disabled={!newPostContent.trim()}
                       className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
                     >
@@ -368,7 +371,7 @@ return;
 
                     {post.type === 'poll' && post.pollOptions && (
                       <div className="space-y-2 mt-3">
-                        {post.pollOptions.map((option) => {
+                        {post.pollOptions.map((option: any) => {
                           const pollOptions = post.pollOptions!;
                           const totalVotes = pollOptions.reduce((sum, opt) => sum + opt.votes, 0);
                           const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;

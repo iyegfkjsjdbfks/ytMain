@@ -1,6 +1,8 @@
 import React from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { ErrorState } from './LoadingStates';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 interface StandardPageLayoutProps {
   children: React.ReactNode;
@@ -40,14 +42,14 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
   className = '',
   containerClassName = 'container mx-auto px-4 py-6' }) => {
   // Default loading component
-  const defaultLoadingComponent = (
+  const defaultLoadingComponent: any = (
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size="lg" />
     </div>
   );
 
   // Default error component
-  const defaultErrorComponent = (
+  const defaultErrorComponent: any = (
     <ErrorState
       title="Something went wrong"
       message={error || 'An unexpected error occurred'}
@@ -55,7 +57,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
   );
 
   // Default empty component
-  const defaultEmptyComponent = (
+  const defaultEmptyComponent: any = (
     <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
       <div className="text-gray-400 mb-4">
         <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">

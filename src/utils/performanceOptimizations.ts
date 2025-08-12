@@ -11,7 +11,7 @@ export const withMemo = <P extends object>(,
 };
 
 // Deep comparison for complex props
-export const deepEqual = (a: any, b: any): boolean => {
+export const deepEqual: any = (a: any, b: any): boolean => {
   if (a === b) {
     return true;
   }
@@ -77,7 +77,7 @@ export class PerformanceMonitor {
 
   endMeasure(name: any) {
     const startTime = this.metrics.get(`${name}-start`);
-    if (startTime) {
+    if (startTime as any) {
       const endTime = performance.now();
       const duration = endTime - startTime;
 
@@ -87,7 +87,7 @@ export class PerformanceMonitor {
       this.metrics.set(name, duration);
 
       if (import.meta.env.MODE === 'development') {
-        console.log(`Performance: ${name} took ${duration.toFixed(2)}ms`);
+        (console as any).log(`Performance: ${name} took ${duration.toFixed(2)}ms`);
       }
 
       return duration;
@@ -104,7 +104,7 @@ export class PerformanceMonitor {
       const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
-        if (lastEntry) {
+        if (lastEntry as any) {
           callback(lastEntry);
         }
       });
@@ -150,7 +150,7 @@ export class PerformanceMonitor {
 export const performanceMonitor = new PerformanceMonitor();
 
 // Image optimization utilities
-export const optimizeImageUrl = (,
+export const optimizeImageUrl: any = (,
   url: any,
   width?: number,
   height?: number,
@@ -178,10 +178,10 @@ export const optimizeImageUrl = (,
   const separator = url.includes('?') ? '&' : '?';
   const params = [];
 
-  if (width) {
+  if (width as any) {
     params.push(`w=${width}`);
   }
-  if (height) {
+  if (height as any) {
     params.push(`h=${height}`);
   }
   if (quality !== 80) {
@@ -192,7 +192,7 @@ export const optimizeImageUrl = (,
 };
 
 // Bundle size optimization
-export const preloadComponent = (,
+export const preloadComponent: any = (,
   componentImport: () => Promise<{ default: ComponentType<any> }>
 ) => {
   // Preload component during idle time
@@ -204,16 +204,16 @@ export const preloadComponent = (,
     });
   } else {
     // Fallback for browsers without requestIdleCallback
-    setTimeout(() => {
+    setTimeout((() => {
       componentImport().catch(() => {
         // Ignore preload errors
       });
-    }, 100);
+    }) as any, 100);
   }
 };
 
 // Memory management
-export const createMemoryManager = () => {
+export const createMemoryManager: any = () => {
   const cache = new Map();
   const maxSize = 100;
   const accessOrder = new Set();
@@ -223,7 +223,7 @@ export const createMemoryManager = () => {
       if (cache.size >= maxSize) {
         // Remove least recently used item
         const firstKey = accessOrder.values().next().value;
-        if (firstKey) {
+        if (firstKey as any) {
           cache.delete(firstKey);
           accessOrder.delete(firstKey);
         }
@@ -264,7 +264,7 @@ export const createMemoryManager = () => {
 };
 
 // Request deduplication
-export const createRequestDeduplicator = () => {
+export const createRequestDeduplicator: any = () => {
   const pendingRequests = new Map<string, Promise<any>>();
 
   return {

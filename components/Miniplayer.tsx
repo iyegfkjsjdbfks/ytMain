@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
 import type React from 'react';
 
@@ -14,7 +15,7 @@ interface MiniplayerProps {
   onClose: () => void; onMaximize: (videoId: any) => void
 }
 
-const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) => {
+const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }: any) => {
   if (!video) {
 return null;
 }
@@ -27,7 +28,7 @@ return null;
     >
       <Link
         to={`/watch/${video.id}`}
-        onClick={(e) => {
+        onClick={(e: any) => {
  e.preventDefault(); onMaximize(video.id);
 }}
         className="w-[160px] aspect-video block flex-shrink-0 group relative bg-black"
@@ -42,7 +43,7 @@ return null;
       <div className="flex-grow p-3 overflow-hidden flex flex-col justify-center">
         <Link
             to={`/watch/${video.id}`}
-            onClick={(e) => {
+            onClick={(e: any) => {
  e.preventDefault(); onMaximize(video.id);
 }}
             className="text-sm font-medium text-neutral-800 dark:text-neutral-50 hover:text-neutral-600 dark:hover:text-neutral-100 line-clamp-2 leading-tight"
@@ -60,7 +61,7 @@ return null;
         </Link>
       </div>
       <button
-        onClick={(e) => {
+        onClick={(e: any) => {
  e.stopPropagation(); onClose();
 }}
         className="absolute top-1.5 right-1.5 p-1.5 text-neutral-500 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white hover:bg-neutral-200 dark:hover:bg-neutral-700/60 rounded-full transition-colors"

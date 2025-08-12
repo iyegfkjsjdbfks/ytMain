@@ -1,3 +1,6 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { useRef, useState, FC } from 'react';
 
@@ -69,9 +72,9 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
   onSetActiveCommentMenu,
   onSetExpandedReplies }) => {
   const replyInputRef = useRef<HTMLInputElement>(null);
-  const [editText, setEditText] = useState('');
+  const [editText, setEditText] = useState<string>('');
 
-  const parseRelativeDate = (timestamp: any): number => {
+  const parseRelativeDate: any = (timestamp: any): number => {
     if (timestamp.includes('Just now') || timestamp.includes('edited')) {
 return 0;
 }
@@ -96,7 +99,7 @@ return 0;
     return value * (multipliers[unit as keyof typeof multipliers] || 0);
   };
 
-  const sortedComments = [...comments].sort((a, b) => {
+  const sortedComments = [...comments].sort((a: any, b: any) => {
     if (commentSortOrder === 'top') {
       return b.likes - a.likes;
     }
@@ -104,7 +107,7 @@ return 0;
 
   });
 
-  const handleEditStart = (comment: Comment) => {
+  const handleEditStart: any = (comment: Comment) => {
     onSetEditingComment({
       id: comment.id,
       ...(comment.parentId ? { parentId: comment.parentId } : {}) });
@@ -112,19 +115,19 @@ return 0;
     onSetActiveCommentMenu(null);
   };
 
-  const handleEditCancel = () => {
+  const handleEditCancel: any = () => {
     onSetEditingComment(null);
     setEditText('');
   };
 
-  const handleEditSave = () => {
-    if (editingComment) {
+  const handleEditSave: any = () => {
+    if (editingComment as any) {
       onEditSave(editingComment.id, editText, editingComment.parentId);
       setEditText('');
     }
   };
 
-  const renderComment = (comment: Comment, isReply = false): React.JSX.Element => {
+  const renderComment: any = (comment: Comment, isReply = false): React.JSX.Element => {
     const isEditing = editingComment?.id === comment.id && editingComment?.parentId === comment.parentId;
     const isMenuOpen = activeCommentMenu === comment.id;
 
@@ -167,13 +170,13 @@ return 0;
                 </span>
                 <div className="space-x-2">
                   <button
-                    onClick={handleEditCancel}
+                    onClick={(e: any) => handleEditCancel(e)}
                     className="px-3 py-1 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700/70 rounded-full"
                   >
                     Cancel
                   </button>
                   <button
-                    onClick={handleEditSave}
+                    onClick={(e: any) => handleEditSave(e)}
                     disabled={!editText.trim() || editText.length > maxCommentLength}
                     className="px-3 py-1 text-xs font-medium bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white rounded-full disabled:opacity-60"
                   >
@@ -223,13 +226,13 @@ return 0;
                 </div>
 
                 <button
-                  onClick={(e) => {
+                  onClick={(e: any) => {
                     e.preventDefault();
                     e.stopPropagation();
                     try {
                       onToggleLikeDislike(comment.id, comment.parentId, 'like');
-                    } catch (error) {
-                      console.error('Error toggling like:', error);
+                    } catch (error: any) {
+                      (console as any).error('Error toggling like:', error);
                     }
                   }}
                   className={`p-1 rounded-full transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center space-x-1 ${
@@ -250,13 +253,13 @@ return 0;
                 </button>
 
                 <button
-                  onClick={(e) => {
+                  onClick={(e: any) => {
                     e.preventDefault();
                     e.stopPropagation();
                     try {
                       onToggleLikeDislike(comment.id, comment.parentId, 'dislike');
-                    } catch (error) {
-                      console.error('Error toggling dislike:', error);
+                    } catch (error: any) {
+                      (console as any).error('Error toggling dislike:', error);
                     }
                   }}
                   className={`p-1 rounded-full transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center ${
@@ -277,7 +280,7 @@ return 0;
                   <button
                     onClick={() => {
                       onSetReplyingTo(comment.id, `@${comment.userName} `);
-                      setTimeout(() => replyInputRef.current?.focus(), 0);
+                      setTimeout((() => replyInputRef.current?.focus()) as any, 0);
                     }}
                     className="hover:text-neutral-700 dark:hover:text-neutral-200 font-medium"
                   >
@@ -341,7 +344,7 @@ return 0;
           {!isReply && comment.replies && comment.replies.length > 0 && (
             <div className="mt-3">
               <button
-                onClick={() => onSetExpandedReplies(prev => ({ ...prev, [comment.id]: !prev[comment.id] }))}
+                onClick={() => onSetExpandedReplies(prev => ({ ...prev as any, [comment.id]: !prev[comment.id] }))}
                 className="flex items-center text-xs font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 rounded-full px-2 py-1 hover:bg-sky-50 dark:hover:bg-sky-500/10 mb-1"
               >
                 {expandedReplies[comment.id] ?
@@ -408,7 +411,7 @@ return 0;
 
       {/* Comments List */}
       <div className="space-y-5">
-        {sortedComments.map(comment => renderComment(comment))}
+        {sortedComments.map((comment: any) => renderComment(comment))}
       </div>
     </div>
   );

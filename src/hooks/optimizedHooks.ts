@@ -10,6 +10,10 @@ declare namespace NodeJS {
 }
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
@@ -25,9 +29,9 @@ export function useOptimizedDebounce<T>(value: T, delay: any): T {
     }
 
     // Set new timeout
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     // Cleanup on unmount
     return () => {
@@ -59,16 +63,16 @@ export function useOptimizedThrottle<T>(,
     if (leading && now - lastRan.current >= delay) {
       setThrottledValue(value);
       lastRan.current = now;
-    } else if (trailing) {
+    } else if (trailing as any) {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
 
-      timeoutRef.current = setTimeout(
+      timeoutRef.current = setTimeout((
         () => {
           setThrottledValue(value);
           lastRan.current = Date.now();
-        },
+        }) as any,
         delay - (now - lastRan.current)
       );
     }
@@ -92,10 +96,10 @@ export function useOptimizedLocalStorage<T>(,
 ): [T(value: T | ((val: T) => T)) => void() => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window.(localStorage as any).getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
     }
   });
@@ -106,9 +110,9 @@ export function useOptimizedLocalStorage<T>(,
         const valueToStore =
           value instanceof Function ? value(storedValue) : value;
         setStoredValue(valueToStore);
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error);
+        window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+      } catch (error: any) {
+        (console as any).error(`Error setting localStorage key "${key}":`, error);
       }
     },
     [key, storedValue]
@@ -118,8 +122,8 @@ export function useOptimizedLocalStorage<T>(,
     try {
       window.localStorage.removeItem(key);
       setStoredValue(initialValue);
-    } catch (error) {
-      console.error(`Error removing localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).error(`Error removing localStorage key "${key}":`, error);
     }
   }, [key, initialValue]);
 
@@ -150,14 +154,14 @@ export function useOptimizedAsync<T>(,
     loading: false,
     error: null });
 
-  const execute = useCallback(async () => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
+  const execute = useCallback(async (): Promise<void> => {
+    setState(prev => ({ ...prev as any, loading: true, error: null }));
 
     try {
       const result = await asyncFunction();
       setState({ data: result, loading: false, error: null });
       onSuccess?.(result);
-    } catch (err) {
+    } catch (err: any) {
       const errorMessage =
         err instanceof Error ? err.message : 'An error occurred';
       setState({ data: null, loading: false, error: errorMessage });
@@ -170,12 +174,12 @@ export function useOptimizedAsync<T>(,
   }, []);
 
   useEffect(() => {
-    if (immediate) {
+    if (immediate as any) {
       execute();
     }
   }, [immediate, execute, ...dependencies]);
 
-  return { ...state, execute, reset };
+  return { ...state as any, execute, reset };
 }
 
 /**
@@ -189,7 +193,7 @@ export function useOptimizedIntersectionObserver(,
   isIntersecting: boolean;
   entry: IntersectionObserverEntry | null
 } {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
 
@@ -199,10 +203,10 @@ export function useOptimizedIntersectionObserver(,
         observer.current.disconnect();
       }
 
-      if (node) {
+      if (node as any) {
         observer.current = new IntersectionObserver(
           ([entry]) => {
-            if (entry) {
+            if (entry as any) {
               setIsIntersecting(entry.isIntersecting);
               setEntry(entry);
             }
@@ -253,7 +257,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((item: T) => {
-    setArray(prev => [...prev, item]);
+    setArray(prev => [...prev as any, item]);
   }, []);
 
   const remove = useCallback((index: number) => {
@@ -262,14 +266,14 @@ export function useOptimizedArray<T>(initialArray: T = []) {
 
   const removeById = useCallback(
     (id: string | number, idKey: keyof T = 'id' as keyof T) => {
-      setArray(prev => prev.filter(item => item[idKey] !== id));
+      setArray(prev => prev.filter((item: any) => item[idKey] !== id));
     },
     []
   );
 
   const update = useCallback((index: number, newItem: Partial<T>) => {
     setArray(prev =>
-      prev.map((item, i) => (i === index ? { ...item, ...newItem } : item))
+      prev.map((item, i) => (i === index ? { ...item as any, ...newItem } : item))
     );
   }, []);
 
@@ -280,7 +284,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
   idKey: keyof T = 'id' as keyof T
     ) => {
       setArray(prev =>
-        prev.map(item => (item[idKey] === id ? { ...item, ...newItem } : item))
+        prev.map((item: any) => (item[idKey] === id ? { ...item as any, ...newItem } : item))
       );
     },
     []
@@ -320,7 +324,7 @@ export function useOptimizedMemo<T>(,
   const lastValue = useRef<T>(memoizedValue);
 
   // If custom comparison is provided, use it
-  if (compare) {
+  if (compare as any) {
     if (!compare(lastDeps.current, deps)) {
       lastValue.current = factory();
       lastDeps.current = deps;
@@ -347,7 +351,7 @@ export function useOptimizedCallback<T extends (...args) => any>(,
     const depsChanged = deps.some(
       (dep: any, index: number) => dep !== depsRef.current[index]
     );
-    if (depsChanged) {
+    if (depsChanged as any) {
       callbackRef.current = callback;
       depsRef.current = deps;
     }
@@ -373,19 +377,19 @@ export function useOptimizedForm<T extends Record<string, any>>(,
 
   const setValue = useCallback(
     (name: keyof T, value: string | number) => {
-      setValues(prev => ({ ...prev, [name]: value }));
+      setValues(prev => ({ ...prev as any, [name]: value }));
 
       // Validate field if rules exist
       if (validationRules?.[name]) {
         const error = validationRules[name](value);
-        setErrors(prev => ({ ...prev, [name]: error || undefined }));
+        setErrors(prev => ({ ...prev as any, [name]: error || undefined }));
       }
     },
     [validationRules]
   );
 
   const setTouched = useCallback((name: keyof T, isTouched: boolean = true) => {
-    setTouchedState(prev => ({ ...prev, [name]: isTouched }));
+    setTouchedState(prev => ({ ...prev as any, [name]: isTouched }));
   }, []);
 
   const reset = useCallback(() => {
@@ -404,9 +408,9 @@ export function useOptimizedForm<T extends Record<string, any>>(,
 
     Object.keys(validationRules).forEach(key => {
       const rule = validationRules[key as keyof T];
-      if (rule) {
+      if (rule as any) {
         const error = rule(values[key as keyof T]);
-        if (error) {
+        if (error as any) {
           newErrors[key as keyof T] = error;
           isValid = false;
         }

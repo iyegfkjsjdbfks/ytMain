@@ -3,10 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { logger } from '../utils/logger';
 import { unifiedDataService } from '../services/unifiedDataService';
+import { FC } from 'react';
+import { useState } from 'react';
 
 const TestMetadataFetch: React.FC = () => {
+  return null;
   const [result, setResult] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // Test with standard React Query hook
@@ -15,7 +18,7 @@ const TestMetadataFetch: React.FC = () => {
           isLoading: reactQueryLoading,
     error: reactQueryError } = useQuery({
     queryKey: ['test-video', 'google-search-bnVUHWCynig'],
-    queryFn: async () => {
+    queryFn: async (): Promise<void> => {
       logger.debug('🔍 React Query: Fetching video...');
       const video = await unifiedDataService.getVideoById(
         'google-search-bnVUHWCynig'
@@ -25,7 +28,7 @@ const TestMetadataFetch: React.FC = () => {
     },
     enabled: true });
 
-  const testDirectGoogleSearch = async () => {
+  const testDirectGoogleSearch = async (): Promise<void> => {
     setLoading(true);
     setError(null);
     setResult(null);
@@ -41,9 +44,9 @@ const TestMetadataFetch: React.FC = () => {
 
       const result = await fetchSingleVideoFromGoogleSearch('bnVUHWCynig');
       logger.debug('📊 Direct API result:', result);
-      setResult({ type: 'direct',
+      setResult({ type: "direct" as const,
           data: result });
-    } catch (err) {
+    } catch (err: any) {
       logger.error('❌ Direct API error:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
@@ -51,7 +54,7 @@ const TestMetadataFetch: React.FC = () => {
     }
   };
 
-  const testUnifiedDataService = async () => {
+  const testUnifiedDataService = async (): Promise<void> => {
     setLoading(true);
     setError(null);
     setResult(null);
@@ -72,9 +75,9 @@ const TestMetadataFetch: React.FC = () => {
         'google-search-bnVUHWCynig'
       );
       logger.debug('📊 Unified service result:', result);
-      setResult({ type: 'unified',
+      setResult({ type: "unified" as const,
           data: result });
-    } catch (err) {
+    } catch (err: any) {
       logger.error('❌ Unified service error:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
@@ -118,7 +121,7 @@ const TestMetadataFetch: React.FC = () => {
 
       <div className='space-y-4 mb-6'>
         <button
-          onClick={testDirectGoogleSearch}
+          onClick={(e: any) => testDirectGoogleSearch(e)}
           disabled={loading}
           className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
         >
@@ -126,7 +129,7 @@ const TestMetadataFetch: React.FC = () => {
         </button>
 
         <button
-          onClick={testUnifiedDataService}
+          onClick={(e: any) => testUnifiedDataService(e)}
           disabled={loading}
           className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50'
         >

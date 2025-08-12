@@ -1,5 +1,8 @@
 import React, { useEffect, useState, FC } from 'react';
 import { PWAUtils } from '../config/pwa';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { trackEvent } from '../utils/analytics';
 
@@ -40,23 +43,23 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
   const { isOnline } = useOfflineStatus();
   const { updateAvailable, isUpdating, installUpdate } = usePWAUpdates();
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isDismissed, setIsDismissed] = useState<boolean>(false);
 
   useEffect(() => {
     if (!autoShow) {
       return;
     }
 
-    const checkVisibility = () => {
+    const checkVisibility: any = () => {
       if (isInstalled || isDismissed || !canInstall) {
         setIsVisible(false);
         return;
       }
 
       // Check if user has dismissed the banner recently
-      const dismissedTime = localStorage.getItem('pwa-banner-dismissed');
-      if (dismissedTime) {
+      const dismissedTime = (localStorage as any).getItem('pwa-banner-dismissed');
+      if (dismissedTime as any) {
         const timeSinceDismissed = Date.now() - parseInt(dismissedTime, 10);
         const daysSinceDismissed = timeSinceDismissed / (1000 * 60 * 60 * 24);
 
@@ -78,11 +81,11 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
     checkVisibility();
   }, [canInstall, isInstalled, isDismissed, autoShow]);
 
-  const handleInstall = async () => {
+  const handleInstall = async (): Promise<void> => {
     try {
       resetError();
       const success = await installApp();
-      if (success) {
+      if (success as any) {
         trackEvent('pwa_install_success', {
           source: 'banner',
           variant,
@@ -90,8 +93,8 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
         onInstallSuccess?.();
         setIsVisible(false);
       }
-    } catch (error) {
-      console.error('Failed to install PWA:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to install PWA:', error);
       trackEvent('pwa_install_error', {
         source: 'banner',
         variant,
@@ -99,8 +102,8 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
     }
   };
 
-  const handleDismiss = () => {
-    localStorage.setItem('pwa-banner-dismissed', Date.now().toString());
+  const handleDismiss: any = () => {
+    (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
     setIsDismissed(true);
     setIsVisible(false);
     dismissPrompt();
@@ -111,20 +114,20 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
       timestamp: Date.now() });
   };
 
-  const handleUpdateInstall = async () => {
+  const handleUpdateInstall = async (): Promise<void> => {
     try {
       await installUpdate();
       trackEvent('pwa_update_installed', {
         source: 'banner',
           timestamp: Date.now() });
-    } catch (error) {
-      console.error('Failed to install update:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to install update:', error);
     }
   };
 
-  const getPositionClasses = () => {
+  const getPositionClasses: any = () => {
     const baseClasses = 'fixed z-50';
-    switch (position) {
+    switch (position as any) {
       case 'bottom-left':
         return `${baseClasses} bottom-4 left-4`;
       case 'bottom-center':
@@ -138,7 +141,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
     }
   };
 
-  const renderMinimalVariant = () => (
+  const renderMinimalVariant: any = () => (
     <div className='bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3 max-w-xs'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-2'>
@@ -161,14 +164,14 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
         </div>
         <div className='flex space-x-1'>
           <button
-            onClick={handleInstall}
+            onClick={(e: any) => handleInstall(e)}
             disabled={isInstalling}
             className='bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white text-xs font-medium py-1 px-2 rounded transition-colors'
           >
             {isInstalling ? 'Installing...' : 'Install'}
           </button>
           <button
-            onClick={handleDismiss}
+            onClick={(e: any) => handleDismiss(e)}
             className='text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1'
           >
             <svg className='w-4 h-4' fill='currentColor' viewBox='0 0 20 20'>
@@ -184,7 +187,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
     </div>
   );
 
-  const renderDefaultVariant = () => (
+  const renderDefaultVariant: any = () => (
     <div className='bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 max-w-sm'>
       {updateAvailable && (
         <div className='mb-3 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md'>
@@ -193,7 +196,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
               Update available
             </span>
             <button
-              onClick={handleUpdateInstall}
+              onClick={(e: any) => handleUpdateInstall(e)}
               disabled={isUpdating}
               className='text-xs bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white px-2 py-1 rounded'
             >
@@ -310,14 +313,14 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
 
       <div className='mt-4 flex space-x-2'>
         <button
-          onClick={handleInstall}
+          onClick={(e: any) => handleInstall(e)}
           disabled={isInstalling}
           className='flex-1 bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white text-sm font-medium py-2 px-3 rounded-md transition-colors'
         >
           {isInstalling ? 'Installing...' : 'Install'}
         </button>
         <button
-          onClick={handleDismiss}
+          onClick={(e: any) => handleDismiss(e)}
           className='px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors'
         >
           Not now

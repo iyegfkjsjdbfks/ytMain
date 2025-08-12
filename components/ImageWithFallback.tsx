@@ -1,3 +1,8 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useCallback, useEffect, useState, lazy, FC } from 'react';
 
@@ -26,14 +31,14 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   maxRetries = 3,
   retryDelay = 1000 }) => {
   const [currentSrc, setCurrentSrc] = useState(src);
-  const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [retryCount, setRetryCount] = useState(0);
-  const [isRateLimited, setIsRateLimited] = useState(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [retryCount, setRetryCount] = useState<number>(0);
+  const [isRateLimited, setIsRateLimited] = useState<boolean>(false);
 
   // Generate fallback URL
   const generateFallback = useCallback(() => {
-    if (fallbackSrc) {
+    if (fallbackSrc as any) {
 return fallbackSrc;
 }
 
@@ -67,11 +72,11 @@ return fallbackSrc;
       setIsRateLimited(true);
       const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff
 
-      setTimeout(() => {
+      setTimeout((() => {
         setRetryCount(prev => prev + 1);
         setCurrentSrc(src); // Retry original source
         setIsLoading(true);
-      }, delay);
+      }) as any, delay);
 
       return;
     }
@@ -88,12 +93,12 @@ return fallbackSrc;
     setIsRateLimited(false);
   }, [currentSrc, hasError, retryCount, maxRetries, retryDelay, src, width, height, alt, onError, generateFallback]);
 
-  const handleLoad = () => {
+  const handleLoad: any = () => {
     setIsLoading(false);
     onLoad?.();
   };
 
-  const generatePlaceholderDataUrl = (w: any,
+  const generatePlaceholderDataUrl: any = (w: any,
           h: any, text: any): string => {
     const canvas = document.createElement('canvas');
     canvas.width = w;

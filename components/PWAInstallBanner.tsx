@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useState, FC } from 'react';
 
@@ -9,10 +13,10 @@ interface PWAInstallBannerProps {
   className?: string;
 }
 
-const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
-  const [showBanner, setShowBanner] = useState(false);
+const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) => {
+  const [showBanner, setShowBanner] = useState<boolean>(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [isInstalling, setIsInstalling] = useState(false);
+  const [isInstalling, setIsInstalling] = useState<boolean>(false);
 
   useEffect(() => {
     // Check if PWA is already installed
@@ -26,7 +30,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
     }
 
     // Listen for beforeinstallprompt event
-    const handleBeforeInstallPrompt = (e: Event) => {
+    const handleBeforeInstallPrompt: any = (e: Event) => {
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
 
@@ -34,10 +38,10 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
       setDeferredPrompt(e);
 
       // Check if user has previously dismissed the banner
-      const dismissedTime = localStorage.getItem('pwa-banner-dismissed');
-      if (dismissedTime) {
+      const dismissedTime = (localStorage as any).getItem('pwa-banner-dismissed');
+      if (dismissedTime as any) {
         const dismissedDate = new Date(parseInt(dismissedTime, 10));
-        const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
+        const daysSinceDismissed: any = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
 
         // Don't show banner if dismissed within last 30 days
         if (daysSinceDismissed < 30) {
@@ -47,20 +51,20 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
         }
 
       // Show the banner after a delay
-      setTimeout(() => {
+      setTimeout((() => {
         setShowBanner(true);
         PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_SHOWN);
-      }, 3000);
+      }) as any, 3000);
     };
 
     // Listen for app installed event
-    const handleAppInstalled = () => {
+    const handleAppInstalled: any = () => {
       setShowBanner(false);
       setDeferredPrompt(null);
       PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
 
       // Store install date
-      localStorage.setItem('pwa-install-date', Date.now().toString());
+      (localStorage as any).setItem('pwa-install-date', Date.now().toString());
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
@@ -71,7 +75,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
       window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
     }}, []);
 
-  const handleInstall = async () => {
+  const handleInstall = async (): Promise<void> => {
     if (!deferredPrompt) {
       return;
     }
@@ -94,24 +98,24 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
       // Clear the deferredPrompt
       setDeferredPrompt(null);
       setShowBanner(false);
-    } catch (error) {
-      console.error('Error during PWA installation:', error);
+    } catch (error: any) {
+      (console as any).error('Error during PWA installation:', error);
       PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { error });
     } finally {
       setIsInstalling(false);
     }
   };
 
-  const handleDismiss = () => {
+  const handleDismiss: any = () => {
     setShowBanner(false);
 
     // Store dismissal time
-    localStorage.setItem('pwa-banner-dismissed', Date.now().toString());
+    (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
 
     PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_DISMISSED);
   };
 
-  const getInstallText = () => {
+  const getInstallText: any = () => {
     const platform = PWAUtils.getPlatform();
     const deviceType = PWAUtils.getDeviceType();
 
@@ -124,7 +128,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
     return 'Install YouTubeX app for faster access and offline features';
   };
 
-  const getInstallInstructions = () => {
+  const getInstallInstructions: any = () => {
     const platform = PWAUtils.getPlatform();
 
     if (platform === 'ios') {
@@ -157,7 +161,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
           <div className="flex items-center space-x-2">
             {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && (
               <button
-                onClick={handleInstall}
+                onClick={(e: any) => handleInstall(e)}
                 disabled={isInstalling}
                 className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -166,7 +170,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
             )}
 
             <button
-              onClick={handleDismiss}
+              onClick={(e: any) => handleDismiss(e)}
               className="p-1 hover:bg-white/20 rounded-lg transition-colors"
               aria-label="Dismiss install banner"
             >

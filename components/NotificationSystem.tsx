@@ -1,3 +1,9 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useCallback, useRef, useEffect, useState, FC, MouseEvent } from 'react';
 
@@ -9,7 +15,7 @@ import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Notification {
   id: string;,
-  type: 'video_upload' | 'like' | 'comment' | 'subscription' | 'live_stream' | 'community_post';
+  type: "video_upload" as const | 'like' | 'comment' | 'subscription' | 'live_stream' | 'community_post';
   title: string;,
   message: string;
   thumbnail?: string;
@@ -25,10 +31,10 @@ interface NotificationSystemProps {
   className?: string;
 }
 
-const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' }) => {
+const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' }: any) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState(0);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
   const [filter, setFilter] = useState<'all' | 'unread'>('all');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -36,18 +42,18 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     loadNotifications();
 
     // Simulate real-time notifications
-    const interval = setInterval(() => {
+    const interval = setInterval((() => {
       if (Math.random() > 0.8) { // 20% chance every 30 seconds
         generateMockNotification();
       }
     
-        }, 30000);
+        }) as any, 30000);
 
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
@@ -64,27 +70,27 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
 
   const loadNotifications = useCallback(() => {
     try {
-      const stored = localStorage.getItem('youtubeCloneNotifications_v1');
-      if (stored) {
+      const stored = (localStorage as any).getItem('youtubeCloneNotifications_v1');
+      if (stored as any) {
         const parsed = JSON.parse(stored);
         setNotifications(parsed);
       } else {
         // Generate initial mock notifications
         const initialNotifications = generateInitialNotifications();
         setNotifications(initialNotifications);
-        localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
+        (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
       }
     
-        } catch (error) {
-      console.error('Error loading notifications:', error);
+        } catch (error: any) {
+      (console as any).error('Error loading notifications:', error);
     }
   }, []);
 
-  const generateInitialNotifications = (): Notification[] => {
+  const generateInitialNotifications: any = (): Notification[] => {
     return [
       {
         id: '1',
-          type: 'video_upload',
+          type: "video_upload" as const,
         title: 'New video from TechReviews',
           message: 'iPhone 15 Pro Max Review - Is it worth the upgrade?',
         thumbnail: 'https://picsum.photos/120/68?random=1',
@@ -96,7 +102,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
           priority: 'medium' },
       {
         id: '2',
-          type: 'like',
+          type: "like" as const,
         title: 'Your video got 100 likes!',
           message: 'React Tutorial for Beginners reached 100 likes',
         thumbnail: 'https://picsum.photos/120/68?random=2',
@@ -105,7 +111,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
           priority: 'low' },
       {
         id: '3',
-          type: 'comment',
+          type: "comment" as const,
         title: 'New comment on your video',
           message: 'John Doe commented: "Great tutorial! Very helpful."',
           thumbnail: 'https://picsum.photos/120/68?random=3',
@@ -117,7 +123,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
           priority: 'medium' },
       {
         id: '4',
-          type: 'subscription',
+          type: "subscription" as const,
         title: 'New subscriber!',
           message: 'CodingMaster subscribed to your channel',
         channelName: 'CodingMaster',
@@ -127,7 +133,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
           priority: 'medium' },
       {
         id: '5',
-          type: 'live_stream',
+          type: "live_stream" as const,
         title: 'GameStreamer is live!',
           message: 'Playing the latest AAA game - Join now!',
         thumbnail: 'https://picsum.photos/120/68?random=5',
@@ -161,13 +167,13 @@ return;
 
     setNotifications(prev => {
       const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50
-      localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+      (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
   }, []);
 
-  const getNotificationTitle = (type: Notification['type']): string => {
-    switch (type) {
+  const getNotificationTitle: any = (type: Notification['type']): string => {
+    switch (type as any) {
       case 'video_upload': return 'New video uploaded';
       case 'like': return 'Your video got new likes!';
       case 'comment': return 'New comment on your video';
@@ -177,8 +183,8 @@ return;
     }
   };
 
-  const getNotificationMessage = (type: Notification['type']): string => {
-    switch (type) {
+  const getNotificationMessage: any = (type: Notification['type']): string => {
+    switch (type as any) {
       case 'video_upload': return 'Check out the latest content from your subscribed channel';
       case 'like': return `Your video reached ${Math.floor(Math.random() * 1000) + 100} likes`;
       case 'comment': return 'Someone left a comment on your video';
@@ -188,33 +194,33 @@ return;
     }
   };
 
-  const markAsRead = (notificationId: any) => {
+  const markAsRead: any = (notificationId: any) => {
     setNotifications(prev => {
-      const updated = prev.map(n =>
-        n.id === notificationId ? { ...n, isRead: true } : n);
-      localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+      const updated = prev.map((n: any) =>
+        n.id === notificationId ? { ...n as any, isRead: true } : n);
+      (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
   };
 
-  const markAllAsRead = () => {
+  const markAllAsRead: any = () => {
     setNotifications(prev => {
-      const updated = prev.map(n => ({ ...n, isRead: true }));
-      localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+      const updated = prev.map((n: any) => ({ ...n as any, isRead: true }));
+      (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
   };
 
-  const deleteNotification = (notificationId: any) => {
+  const deleteNotification: any = (notificationId: any) => {
     setNotifications(prev => {
       const updated = prev.filter((n) => n.id !== notificationId);
-      localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+      (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
   };
 
-  const getNotificationIcon = (type: Notification['type']) => {
-    switch (type) {
+  const getNotificationIcon: any = (type: Notification['type']) => {
+    switch (type as any) {
       case 'video_upload': return <PlayIcon className="w-4 h-4" />;
       case 'like': return <HeartIcon className="w-4 h-4" />;
       case 'comment': return <ChatBubbleLeftIcon className="w-4 h-4" />;
@@ -266,7 +272,7 @@ return;
                   {filter === 'all' ? 'Unread only' : 'Show all'}
                 </button>
                 <button
-                  onClick={markAllAsRead}
+                  onClick={(e: any) => markAllAsRead(e)}
                   className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
                   disabled={unreadCount === 0}
                 >

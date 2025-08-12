@@ -35,7 +35,7 @@ export interface SearchFilters {
 
 export interface SearchSuggestion {
   query: string;
-  type: 'query' | 'video' | 'channel' | 'trending';
+  type: "query" as const | 'video' | 'channel' | 'trending';
   metadata?: {
     videoCount?: number;
     channelName?: string;
@@ -44,7 +44,7 @@ export interface SearchSuggestion {
 }
 
 export interface SearchResult {
-  type: 'video' | 'channel' | 'playlist' | 'user';
+  type: "video" as const | 'channel' | 'playlist' | 'user';
   item: Video | Channel | Playlist | User;
   relevanceScore: number;
   snippet?: string;
@@ -72,7 +72,7 @@ class SearchService {
   ): Promise<ApiResponse<SearchResult[]>> {
     return api.get('/api/search', {
       q: query,
-      ...filters,
+      ...filters as any,
       page,
       limit });
   }
@@ -108,7 +108,7 @@ class SearchService {
   ): Promise<ApiResponse<Video[]>> {
     return api.get('/api/search/videos', {
       q: query,
-      ...filters,
+      ...filters as any,
       page,
       limit });
   }
@@ -124,7 +124,7 @@ class SearchService {
   ): Promise<ApiResponse<Channel[]>> {
     return api.get('/api/search/channels', {
       q: query,
-      ...filters,
+      ...filters as any,
       page,
       limit });
   }
@@ -140,7 +140,7 @@ class SearchService {
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get('/api/search/playlists', {
       q: query,
-      ...filters,
+      ...filters as any,
       page,
       limit });
   }
@@ -162,7 +162,7 @@ class SearchService {
   ): Promise<ApiResponse<Video[]>> {
     return api.post('/api/search/videos/advanced', {
       query,
-      ...options,
+      ...options as any,
       page,
       limit });
   }
@@ -299,7 +299,7 @@ class SearchService {
   ): Promise<ApiResponse<Video[]>> {
     return api.get(`/api/channels/${channelId}/search`, {
       q: query,
-      ...filters,
+      ...filters as any,
       page,
       limit });
   }

@@ -1,4 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 type SetValue<T> = T | ((val: T) => T);
 
@@ -19,10 +22,10 @@ export function useLocalStorage<T>(,
     }
 
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window.(localStorage as any).getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
     }
   });
@@ -40,10 +43,10 @@ export function useLocalStorage<T>(,
 
         // Save to local storage
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
         }
-      } catch (error) {
-        console.warn(`Error setting localStorage key "${key}":`, error);
+      } catch (error: any) {
+        (console as any).warn(`Error setting localStorage key "${key}":`, error);
       }
     },
     [key, storedValue]
@@ -56,8 +59,8 @@ export function useLocalStorage<T>(,
       if (typeof window !== 'undefined') {
         window.localStorage.removeItem(key);
       }
-    } catch (error) {
-      console.warn(`Error removing localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error removing localStorage key "${key}":`, error);
     }
   }, [key, initialValue]);
 
@@ -82,7 +85,7 @@ export function useLocalStorageWithExpiry<T>(,
     }
 
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window.(localStorage as any).getItem(key);
       if (!item) {
         return initialValue;
       }
@@ -97,13 +100,13 @@ export function useLocalStorageWithExpiry<T>(,
       }
 
       return parsed.value || initialValue;
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
     }
   });
 
-  const [isExpired, setIsExpired] = useState(false);
+  const [isExpired, setIsExpired] = useState<boolean>(false);
 
   const setValue = useCallback(
     (value: SetValue<T>) => {
@@ -121,10 +124,10 @@ export function useLocalStorageWithExpiry<T>(,
         setIsExpired(false);
 
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(key, JSON.stringify(item));
+          window.(localStorage as any).setItem(key, JSON.stringify(item));
         }
-      } catch (error) {
-        console.warn(`Error setting localStorage key "${key}":`, error);
+      } catch (error: any) {
+        (console as any).warn(`Error setting localStorage key "${key}":`, error);
       }
     },
     [key, storedValue, ttl]
@@ -137,20 +140,20 @@ export function useLocalStorageWithExpiry<T>(,
       if (typeof window !== 'undefined') {
         window.localStorage.removeItem(key);
       }
-    } catch (error) {
-      console.warn(`Error removing localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error removing localStorage key "${key}":`, error);
     }
   }, [key, initialValue]);
 
   // Check expiry on mount and set up interval
   useEffect(() => {
-    const checkExpiry = () => {
+    const checkExpiry: any = () => {
       if (typeof window === 'undefined') {
         return;
       }
 
       try {
-        const item = window.localStorage.getItem(key);
+        const item = window.(localStorage as any).getItem(key);
         if (!item) {
           return;
         }
@@ -162,8 +165,8 @@ export function useLocalStorageWithExpiry<T>(,
           setIsExpired(true);
           removeValue();
         }
-      } catch (error) {
-        console.warn(
+      } catch (error: any) {
+        (console as any).warn(
           `Error checking expiry for localStorage key "${key}":`,
           error
         );
@@ -174,7 +177,7 @@ export function useLocalStorageWithExpiry<T>(,
     checkExpiry();
 
     // Check every minute
-    const interval = setInterval(checkExpiry, 60000);
+    const interval = setInterval((checkExpiry) as any, 60000);
 
     return () => clearInterval(interval);
   }, [key, removeValue]);

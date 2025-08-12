@@ -107,7 +107,7 @@ class YouTubeService {
 
     const url = new URL(`${baseUrl}/${endpoint}`);
     Object.entries(params).forEach(([key, value]) => {
-      if (value) {
+      if (value as any) {
         url.searchParams.set(key, value);
       }
     });
@@ -145,7 +145,7 @@ class YouTubeService {
 
     const cacheKey = `videos_${videoIds.join(',')}`;
     const cached = this.getCachedData<Video[]>(cacheKey);
-    if (cached) {
+    if (cached as any) {
       return cached;
     }
 
@@ -154,7 +154,7 @@ class YouTubeService {
         part: 'snippet,statistics,contentDetails',
         id: videoIds.join(',') });
 
-      const response = await fetch(url);
+      const response = await (fetch as any)(url);
       if (!response.ok) {
         throw new ApiError(
           `YouTube API error: ${response.statusText}`,
@@ -165,7 +165,7 @@ class YouTubeService {
 
       const data: YouTubeVideoResponse = await response.json();
 
-      const videos: Video[] = (data.items || []).map(item => {
+      const videos: Video[] = (data.items || []).map((item: any) => {
         const { snippet, statistics, contentDetails } = item;
         return {
           id: item.id,
@@ -205,7 +205,7 @@ class YouTubeService {
 
       this.setCachedData(cacheKey, videos, CACHE_CONFIG.VIDEO_DATA_TTL);
       return videos;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error fetching videos:', error);
       if (error instanceof ApiError) {
         throw error;
@@ -233,7 +233,7 @@ class YouTubeService {
 
     const cacheKey = `channel_${channelId}`;
     const cached = this.getCachedData<Channel>(cacheKey);
-    if (cached) {
+    if (cached as any) {
       return cached;
     }
 
@@ -242,7 +242,7 @@ class YouTubeService {
         part: 'snippet,statistics',
         id: channelId });
 
-      const response = await fetch(url);
+      const response = await (fetch as any)(url);
       if (!response.ok) {
         throw new ApiError(
           `YouTube API error: ${response.statusText}`,
@@ -281,7 +281,7 @@ class YouTubeService {
 
       this.setCachedData(cacheKey, channel, CACHE_CONFIG.USER_DATA_TTL);
       return channel;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error fetching channel:', error);
       return null; // Return null for graceful degradation
     }
@@ -363,7 +363,7 @@ class YouTubeService {
 
     const cacheKey = `search_${query}_${JSON.stringify(options)}`;
     const cached = this.getCachedData<Video[]>(cacheKey);
-    if (cached) {
+    if (cached as any) {
       return cached;
     }
 
@@ -371,10 +371,10 @@ class YouTubeService {
       const searchUrl = this.buildUrl('search', {
         part: 'snippet',
         q: query,
-        type: 'video',
+        type: "video" as const,
         maxResults: String(options.maxResults || 25) });
 
-      const searchResponse = await fetch(searchUrl);
+      const searchResponse = await (fetch as any)(searchUrl);
       if (!searchResponse.ok) {
         throw new ApiError(
           `YouTube Search API error: ${searchResponse.statusText}`,
@@ -384,8 +384,8 @@ class YouTubeService {
       }
 
       const searchData: YouTubeSearchResponse = await searchResponse.json();
-      const videoIds = (searchData.items || [])
-        .map(item => item.id.videoId)
+      const videoIds: any = (searchData.items || [])
+        .map((item: any) => item.id.videoId)
         .filter(Boolean);
 
       if (videoIds.length === 0) {
@@ -396,7 +396,7 @@ class YouTubeService {
 
       this.setCachedData(cacheKey, videos, CACHE_CONFIG.VIDEO_DATA_TTL);
       return videos;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error searching videos:', error);
       if (error instanceof ApiError) {
         throw error;

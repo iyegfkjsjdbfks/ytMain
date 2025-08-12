@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * PlaylistsPage component for displaying all playlists
  */

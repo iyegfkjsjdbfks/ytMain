@@ -1,5 +1,6 @@
 import React from 'react';
 import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state;
+import { FC } from 'react';
 
 import VideoCard from '../components/VideoCard';
 import { useWatchLater } from '../contexts/WatchLaterContext'; // Import useWatchLater;
@@ -7,6 +8,7 @@ import { useWatchLater } from '../contexts/WatchLaterContext'; // Import useWatc
 import type { Video } from '../src/types/core'; // Keep Video import for explicit typing;
 
 const WatchLaterPage: React.FC = () => {
+  return null;
   const { watchLaterList } = useWatchLater(); // Use context
 
   return (

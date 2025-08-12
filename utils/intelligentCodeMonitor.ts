@@ -31,7 +31,7 @@ interface CodeQualityTrend {
 
 interface RefactoringOpportunity {
   id: string;
-  type: 'performance' | 'maintainability' | 'security' | 'accessibility' | 'testing';
+  type: "performance" as const | 'maintainability' | 'security' | 'accessibility' | 'testing';
   file: string;
   line: number;
   description: string;
@@ -136,15 +136,15 @@ return;
 }
 
     this.isMonitoring = true;
-    console.log('🔍 Starting intelligent code quality monitoring...');
+    (console as any).log('🔍 Starting intelligent code quality monitoring...');
 
     // Initial analysis
     this.performAnalysis();
 
     // Set up periodic monitoring
-    this.monitoringInterval = setInterval(() => {
+    this.monitoringInterval = setInterval((() => {
       this.performAnalysis();
-    }, 5 * 60 * 1000); // Every 5 minutes
+    }) as any, 5 * 60 * 1000); // Every 5 minutes
   }
 
   /**
@@ -161,7 +161,7 @@ return;
       this.monitoringInterval = null;
     }
 
-    console.log('⏹️ Stopped code quality monitoring');
+    (console as any).log('⏹️ Stopped code quality monitoring');
   }
 
   /**
@@ -176,7 +176,7 @@ return;
 return;
 } // 2 minutes
 
-      console.log('🔍 Performing code quality analysis...');
+      (console as any).log('🔍 Performing code quality analysis...');
 
       // Get current _metrics
       const _metrics = await this.collectCodeMetrics();
@@ -187,7 +187,7 @@ return;
       const improvements: string[] = [];
       const regressions: string[] = [];
 
-      if (previousTrend) {
+      if (previousTrend as any) {
         // Compare with previous _metrics
         Object.entries(_metrics).forEach(([key, value]) => {
           const previousValue = previousTrend._metrics[key as keyof CodeMetrics];
@@ -225,19 +225,19 @@ return;
 
       // Report significant changes
       if (regressions.length > 0) {
-        console.warn('⚠️ Code quality regressions detected:', regressions);
+        (console as any).warn('⚠️ Code quality regressions detected:', regressions);
         advancedAPM.recordMetric('code-quality-regression', regressions.length);
       }
 
       if (improvements.length > 0) {
-        console.log('✅ Code quality improvements:', improvements);
+        (console as any).log('✅ Code quality improvements:', improvements);
         advancedAPM.recordMetric('code-quality-improvement', improvements.length);
       }
 
       this.lastAnalysis = now;
 
-    } catch (error) {
-      console.error('Failed to perform code analysis:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to perform code analysis:', error);
     }
   }
 
@@ -261,8 +261,8 @@ return;
         accessibilityIssues: this.generateRealisticMetric('accessibilityIssues', 0, 8) };
 
       return _metrics;
-    } catch (error) {
-      console.error('Failed to collect code _metrics:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to collect code _metrics:', error);
 
       // Return default _metrics on error
       return {
@@ -285,10 +285,10 @@ return;
 
     // Add some trend based on previous values
     const previousTrend = this.trends[this.trends.length - 1];
-    if (previousTrend) {
+    if (previousTrend as any) {
       const previousValue = previousTrend._metrics[type as keyof CodeMetrics];
       // Small random walk
-      const change = (Math.random() * 0.5) * 2; // -1 to 1
+      const change: any = (Math.random() * 0.5) * 2; // -1 to 1
       return Math.max(min, Math.min(max, previousValue + change));
     }
 
@@ -334,7 +334,7 @@ return;
 return 0;
 }
 
-    const percentChange = ((current - previous) / previous) * 100;
+    const percentChange: any = ((current - previous) / previous) * 100;
 
     return lowerIsBetter.includes(metric) ? -percentChange : percentChange;
   }
@@ -349,7 +349,7 @@ return 0;
     if (metrics.complexity > 10) {
       opportunities.push({
         id: 'reduce-complexity',
-        type: 'maintainability',
+        type: "maintainability" as const,
         file: 'components/ComplexComponent.tsx,',
         line: 45,
         description: 'High cyclomatic complexity detected',
@@ -366,7 +366,7 @@ return 0;
     if (metrics.testCoverage < 80) {
       opportunities.push({
         id: 'improve-test-coverage',
-        type: 'testing',
+        type: "testing" as const,
         file: 'utils/uncoveredUtils.ts,',
         line: 1,
         description: 'Low test coverage detected',
@@ -383,7 +383,7 @@ return 0;
     if (metrics.performanceIssues > 3) {
       opportunities.push({
         id: 'optimize-performance',
-        type: 'performance',
+        type: "performance" as const,
         file: 'components/SlowComponent.tsx,',
         line: 20,
         description: 'Performance bottleneck detected',
@@ -392,15 +392,15 @@ return 0;
         automatable: true,
         suggestion: 'Add React.memo() to prevent unnecessary re-renders',
         codeExample: {
-          before: 'export const SlowComponent = ({ data }) => { ... }',
-          after: 'export const SlowComponent = React.memo(({ data }) => { ... });' } });
+          before: 'export const SlowComponent: any = ({ data }: any) => { ... }',
+          after: 'export const SlowComponent = React.memo(({ data }: any) => { ... });' } });
     }
 
     // Security opportunities
     if (metrics.securityVulnerabilities > 0) {
       opportunities.push({
         id: 'fix-security-issues',
-        type: 'security',
+        type: "security" as const,
         file: 'utils/apiUtils.ts,',
         line: 15,
         description: 'Potential XSS vulnerability',
@@ -417,7 +417,7 @@ return 0;
     if (metrics.accessibilityIssues > 5) {
       opportunities.push({
         id: 'improve-accessibility',
-        type: 'accessibility',
+        type: "accessibility" as const,
         file: 'components/Button.tsx,',
         line: 10,
         description: 'Missing ARIA labels',
@@ -513,12 +513,12 @@ return 0;
   private checkQualityGates(metrics: CodeMetrics): void {
     const failedGates: string[] = [];
 
-    this.qualityGates.forEach((gate) => {
+    this.qualityGates.forEach((gate: any) => {
       if (!gate.enabled) {
 return;
 }
 
-      const failed = gate.criteria.some((criterion) => {
+      const failed = gate.criteria.some((criterion: any) => {
         const value = metrics[criterion.metric as keyof CodeMetrics];
 
         switch (criterion.operator) {
@@ -536,20 +536,20 @@ return;
         }
       });
 
-      if (failed) {
+      if (failed as any) {
         failedGates.push(gate.name);
 
         if (gate.blocking) {
-          console.error(`🚫 Quality gate failed: ${gate.name}`);
+          (console as any).error(`🚫 Quality gate failed: ${gate.name}`);
           advancedAPM.recordMetric('quality-gate-failure', 1, { gate: gate.name });
         } else {
-          console.warn(`⚠️ Quality gate warning: ${gate.name}`);
+          (console as any).warn(`⚠️ Quality gate warning: ${gate.name}`);
         }
       }
     });
 
     if (failedGates.length === 0) {
-      console.log('✅ All quality gates passed');
+      (console as any).log('✅ All quality gates passed');
     }
   }
 
@@ -605,15 +605,15 @@ return;
     const automatableOpportunities = this.opportunities.filter((op) => opportunityIds.includes(op.id) && op.automatable
     );
 
-    console.log(`🔧 Auto-implementing ${automatableOpportunities.length} refactoring opportunities...`);
+    (console as any).log(`🔧 Auto-implementing ${automatableOpportunities.length} refactoring opportunities...`);
 
     for (const opportunity of automatableOpportunities) {
       try {
         // In a real implementation, this would apply the actual refactoring
-        console.log(`✅ Applied refactoring: ${opportunity.description}`);
+        (console as any).log(`✅ Applied refactoring: ${opportunity.description}`);
         advancedAPM.recordMetric('auto-refactoring-applied', 1, { type: opportunity.type });
-      } catch (error) {
-        console.error(`❌ Failed to apply refactoring: ${opportunity.description}`, error);
+      } catch (error: any) {
+        (console as any).error(`❌ Failed to apply refactoring: ${opportunity.description}`, error);
       }
     }
   }
@@ -667,7 +667,7 @@ export const intelligentCodeMonitor = new IntelligentCodeMonitor();
 
 // Auto-start in development mode
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  console.log('🚀 Intelligent Code Monitor initialized');
+  (console as any).log('🚀 Intelligent Code Monitor initialized');
 }
 
 export default intelligentCodeMonitor;

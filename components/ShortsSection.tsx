@@ -1,5 +1,8 @@
 import React, { useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // @ts-nocheck
 
 import { getShortsVideos } from '../services/realVideoService';
@@ -13,13 +16,13 @@ interface ShortsSectionProps {
   maxShorts?: number;
 }
 
-const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
+const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) => {
   const [shorts, setShorts] = useState<Short[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchShorts = async () => {
+    const fetchShorts = async (): Promise<void> => {
       try {
         setLoading(true);
         // Assuming your video service can filter by a 'Shorts' category or similar
@@ -28,7 +31,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         const shortsVideos = allShortsVideos.slice(0, maxShorts);
 
         // Convert Video objects to Short objects
-        const convertedShorts: Short[] = shortsVideos.map(video => {
+        const convertedShorts: Short[] = shortsVideos.map((video: any) => {
           const shortVideo: Short = {,
              id: video.id,
           title: video.title,
@@ -64,8 +67,8 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
 
         setShorts(convertedShorts);
         setError(null);
-      } catch (err) {
-        console.error('Failed to fetch shorts:', err);
+      } catch (err: any) {
+        (console as any).error('Failed to fetch shorts:', err);
         setError('Could not load Shorts at this time.');
       } finally {
         setLoading(false);
@@ -75,7 +78,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
     fetchShorts();
   }, [maxShorts]);
 
-  if (loading) {
+  if (loading as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-3">
@@ -91,7 +94,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
     );
   }
 
-  if (error) {
+  if (error as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-3">
@@ -122,7 +125,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         </Link>
       </div>
       <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">
-        {shorts.map(short => (
+        {shorts.map((short: any) => (
           <Link key={short.id} to={`/shorts?v=${short.id}`} className="flex-shrink-0">
             <ShortDisplayCard short={short} />
           </Link>

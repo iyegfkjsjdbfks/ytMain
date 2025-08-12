@@ -1,4 +1,9 @@
+import React from 'react';
 import { useState, useEffect, FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { ChevronRightIcon, ClockIcon } from '@heroicons/react/24/outline';
 import { QueueListIcon as QueueListSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -28,8 +33,8 @@ interface SectionProps {
   isPlaylistSection?: boolean;
 }
 
-const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, children, itemCount, isLoading, hasContent, emptyMessage, isPlaylistSection }) => {
-  const renderSkeletonItems = () => {
+const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, children, itemCount, isLoading, hasContent, emptyMessage, isPlaylistSection }: any) => {
+  const renderSkeletonItems: any = () => {
     const numSkeletons = isPlaylistSection ? (itemCount || 4) : (itemCount || MAX_HORIZONTAL_VIDEOS / 2);
     return Array.from({ length: numSkeletons }).map((_, index) => (
       <div key={index} className={`animate-pulse ${isPlaylistSection ? 'w-full' : 'w-48 md:w-52 lg:w-56 flex-shrink-0'}`}>
@@ -83,21 +88,21 @@ const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, chil
   );
 };
 
-function LibraryPage() { // Removed React.FC
+function LibraryPage(): any { // Removed React.FC
   const [historyVideos, setHistoryVideos] = useState<Video[]>([]);
   const [watchLaterVideos, setWatchLaterVideos] = useState<Video[]>([]);
   const [userPlaylists, setUserPlaylists] = useState<UserPlaylistDetails[]>([]);
   const [likedVideos, setLikedVideos] = useState<Video[]>([]);
 
-  const [loadingHistory, setLoadingHistory] = useState(true);
-  const [loadingWatchLater, setLoadingWatchLater] = useState(true);
-  const [loadingPlaylists, setLoadingPlaylists] = useState(true);
-  const [loadingLiked, setLoadingLiked] = useState(true);
+  const [loadingHistory, setLoadingHistory] = useState<boolean>(true);
+  const [loadingWatchLater, setLoadingWatchLater] = useState<boolean>(true);
+  const [loadingPlaylists, setLoadingPlaylists] = useState<boolean>(true);
+  const [loadingLiked, setLoadingLiked] = useState<boolean>(true);
 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchAllData = async () => {
+    const fetchAllData = async (): Promise<void> => {
       try {
         setLoadingHistory(true);
         getWatchHistoryVideos().then(data => setHistoryVideos(data.slice(0, MAX_HORIZONTAL_VIDEOS))).finally(() => setLoadingHistory(false));
@@ -114,8 +119,8 @@ function LibraryPage() { // Removed React.FC
         setLoadingLiked(true);
         getLikedVideos().then(data => setLikedVideos(data.slice(0, MAX_HORIZONTAL_VIDEOS))).finally(() => setLoadingLiked(false));
 
-      } catch (err) {
-        console.error('Error fetching library data:', err);
+      } catch (err: any) {
+        (console as any).error('Error fetching library data:', err);
         setError('Could not load library content. Please try again later.');
         // Individual loading states will handle UI for sections that might have loaded
       }
@@ -125,7 +130,7 @@ function LibraryPage() { // Removed React.FC
     window.scrollTo(0, 0);
   }, []);
 
-  if (error) {
+  if (error as any) {
     return <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">{error}</div>;
   }
 
@@ -149,7 +154,7 @@ function LibraryPage() { // Removed React.FC
         itemCount={historyVideos.length}
       >
         <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
-          {historyVideos.map(video => (
+          {historyVideos.map((video: any) => (
             <div key={`hist-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
               <VideoCard video={video} />
             </div>
@@ -168,7 +173,7 @@ function LibraryPage() { // Removed React.FC
         itemCount={watchLaterVideos.length}
       >
         <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
-          {watchLaterVideos.map(video => (
+          {watchLaterVideos.map((video: any) => (
              <div key={`wl-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
               <VideoCard video={video} />
             </div>
@@ -188,7 +193,7 @@ function LibraryPage() { // Removed React.FC
         isPlaylistSection
       >
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-          {userPlaylists.map(playlist => (
+          {userPlaylists.map((playlist: any) => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
                 <img
@@ -226,7 +231,7 @@ function LibraryPage() { // Removed React.FC
         itemCount={likedVideos.length}
       >
         <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
-          {likedVideos.map(video => (
+          {likedVideos.map((video: any) => (
             <div key={`liked-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
               <VideoCard video={video} />
             </div>

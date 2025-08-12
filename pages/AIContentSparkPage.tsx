@@ -1,3 +1,7 @@
+import React from 'react';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 
 import { useState, FC } from 'react';
@@ -9,12 +13,12 @@ import { generateVideoIdeas } from '../services/geminiService';
 import type { VideoIdeaResponse } from '../types';
 
 const AIContentSparkPage: React.FC = () => {
-  const [userInput, setUserInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [userInput, setUserInput] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [videoIdea, setVideoIdea] = useState<VideoIdeaResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<any> => {
     e.preventDefault();
     if (!userInput.trim()) {
       setError('Please enter a topic or some keywords to spark ideas.');
@@ -26,14 +30,14 @@ const AIContentSparkPage: React.FC = () => {
     try {
       const result = await generateVideoIdeas(userInput);
       setVideoIdea(result);
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message || 'An unexpected error occurred.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const renderSkeleton = () => (
+  const renderSkeleton: any = () => (
     <div className="mt-8 space-y-6 animate-pulse">
       <div>
         <div className="h-6 bg-neutral-200 dark:bg-neutral-700 rounded w-1/3 mb-2" />
@@ -78,7 +82,7 @@ const AIContentSparkPage: React.FC = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mb-8 p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700/50">
+        <form onSubmit={(e: any) => handleSubmit(e)} className="mb-8 p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700/50">
           <label htmlFor="userInput" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
             Your Topic or Keywords:
           </label>

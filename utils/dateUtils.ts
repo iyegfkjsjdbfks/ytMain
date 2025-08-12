@@ -1,5 +1,5 @@
 // utils/dateUtils.ts
-export const parseRelativeDate = (relativeDate: string | null | undefined): number => {
+export const parseRelativeDate: any = (relativeDate: string | null | undefined): number => {
   const now = new Date().getTime();
 
   // Safety check for null or undefined input
@@ -21,7 +21,7 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
     const unit = parts[2];
     let msAgo = 0;
 
-    switch (unit) {
+    switch (unit as any) {
       case 'hour':
         msAgo = quantity * 60 * 60 * 1000;
         break;
@@ -54,7 +54,7 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
   return now - (10 * 365 * 24 * 60 * 60 * 1000); // Approx 10 years ago
 };
 
-export const formatDistanceToNow = (date: string | Date | undefined, options?: { addSuffix?: boolean }): string => {
+export const formatDistanceToNow: any = (date: string | Date | undefined, options?: { addSuffix?: boolean }): string => {
   if (!date) {
     return 'Unknown date';
   }

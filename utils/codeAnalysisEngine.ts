@@ -1,4 +1,5 @@
 import { useMemo, lazy } from 'react';
+import { useMemo } from 'react';
 /**
  * Advanced Code Analysis and Refactoring Engine
  * Provides AI-powered code quality insights, automated refactoring suggestions,
@@ -79,7 +80,7 @@ return;
     this.isAnalyzing = true;
     this.startContinuousAnalysis();
 
-    console.log('🔬 Code analysis engine started');
+    (console as any).log('🔬 Code analysis engine started');
   }
 
   /**
@@ -87,7 +88,7 @@ return;
    */
   stop(): void {
     this.isAnalyzing = false;
-    console.log('🔬 Code analysis engine stopped');
+    (console as any).log('🔬 Code analysis engine stopped');
   }
 
   /**
@@ -101,7 +102,7 @@ return;
       const codeSmells = await this.detectCodeSmells(_filePath);
 
       const result: CodeMetrics = {
-        ...metrics,
+        ...metrics as any,
         codeSmells };
 
       // Store analysis history
@@ -118,8 +119,8 @@ return;
       advancedAPM.recordMetric('technical-debt', result.technicalDebt);
 
       return result;
-    } catch (error) {
-      console.error('Code analysis failed:', error);
+    } catch (error: any) {
+      (console as any).error('Code analysis failed:', error);
       throw error;
     }
   }
@@ -191,9 +192,9 @@ return;
     const recentHistory = history.slice(-days);
 
     return {
-      complexity: recentHistory.map(h => h.complexity),
-      maintainability: recentHistory.map(h => h.maintainabilityIndex),
-      technicalDebt: recentHistory.map(h => h.technicalDebt),
+      complexity: recentHistory.map((h: any) => h.complexity),
+      maintainability: recentHistory.map((h: any) => h.maintainabilityIndex),
+      technicalDebt: recentHistory.map((h: any) => h.technicalDebt),
       timestamps: recentHistory.map((_, i) => Date.now() - (days - i) * 24 * 60 * 60 * 1000) };
   }
 
@@ -300,7 +301,7 @@ return;
         files: ['utils/videoUtils.ts', 'components/VideoPlayer.tsx'] },
       {
         id: 'simplify-state-management',
-        type: 'simplify',
+        type: "simplify" as const,
         priority: 7,
         description: 'Simplify complex state management in video components',
         benefits: [
@@ -420,7 +421,7 @@ return;
       {
         type: 'extract-method',
         description: 'Extract validation logic into separate method',
-        code: 'const validateInput = (input) => { /* validation logic */ };',
+        code: 'const validateInput: any = (input: any) => { /* validation logic */ };',
         confidence: 0.85 }];
   }
 
@@ -438,7 +439,7 @@ return;
       {
         type: 'remove-duplication',
         description: 'Extract common error handling pattern',
-        code: 'const handleApiError = (_error: Error) => { /* common error handling */ };',
+        code: 'const handleApiError: any = (_error: Error) => { /* common error handling */ };',
         confidence: 0.90 }];
   }
 
@@ -453,22 +454,22 @@ return;
 
   private setupAnalysisRules(): void {
     // Setup default analysis rules and thresholds
-    console.log('📋 Code analysis rules configured');
+    (console as any).log('📋 Code analysis rules configured');
   }
 
   private startContinuousAnalysis(): void {
     // Run analysis every 5 minutes in development
     if (process.env.NODE_ENV === 'development') {
-      setInterval(async () => {
+      setInterval((async (): Promise<void> => {
         if (!this.isAnalyzing) {
 return;
 }
 
         try {
           await this.analyzeCode();
-          console.log('🔄 Continuous code analysis completed');
-        } catch (error) {
-          console.error('Continuous analysis failed:', error);
+          (console as any).log('🔄 Continuous code analysis completed');
+        } catch (error: any) {
+          (console as any).error('Continuous analysis failed:') as any, error);
         }
       }, 5 * 60 * 1000);
     }
@@ -498,7 +499,7 @@ class TechnicalDebtTracker {
     line?: number;
   }): void {
     this.debtItems.set(item.id, {
-      ...item,
+      ...item as any,
       createdAt: Date.now(),
       status: 'open' });
 
@@ -512,7 +513,7 @@ class TechnicalDebtTracker {
    */
   resolveDebt(id: string): void {
     const item = this.debtItems.get(id);
-    if (item) {
+    if (item as any) {
       item.status = 'resolved';
       item.resolvedAt = Date.now();
 
@@ -614,7 +615,7 @@ class AutomatedCodeReviewer {
       issues.push({
         file,
         line: 42,
-        type: 'complexity',
+        type: "complexity" as const,
         severity: 'medium',
         message: 'Function complexity is too high',
         suggestion: 'Consider breaking down into smaller functions' });
@@ -622,7 +623,7 @@ class AutomatedCodeReviewer {
 
     if (Math.random() > 0.9) {
       suggestions.push({
-        type: 'performance',
+        type: "performance" as const,
         description: 'Consider using useMemo for expensive calculations',
         confidence: 0.8 });
     }

@@ -51,7 +51,7 @@ return `0:${seconds.toString().padStart(2, '0')}`;
   formatDate: (date: Date | string, format: 'short' | 'long' | 'relative' = 'short'): string => {
     const targetDate = typeof date === 'string' ? new Date(date) : date;
 
-    switch (format) {
+    switch (format as any) {
       case 'short':
         return targetDate.toLocaleDateString('en-US', {
           month: 'short',
@@ -164,7 +164,7 @@ export const mediaUtils = {
 
     for (const pattern of patterns) {
       const match = url.match(pattern);
-      if (match) {
+      if (match as any) {
 return match[1] ?? null;
 }
     }
@@ -253,7 +253,7 @@ export const arrayUtils = {
     }
 
     const seen = new Set();
-    return array.filter((item) => {
+    return array.filter((item: any) => {
       const value = item[key];
       if (seen.has(value)) {
         return false;
@@ -264,7 +264,7 @@ export const arrayUtils = {
   },
 
   groupBy: <T, K extends keyof T>(array: T[], key: K): Record<string, T[]> => {
-    return array.reduce((groups, item) => {
+    return array.reduce((groups: any, item: any) => {
       const groupKey = String(item[key]);
       groups[groupKey] ??= [];
       groups[groupKey].push(item);
@@ -273,7 +273,7 @@ export const arrayUtils = {
   },
 
   sortBy: <T>(array: T[], key: keyof T, direction: 'asc' | 'desc' = 'asc'): T[] => {
-    return [...array].sort((a, b) => {
+    return [...array].sort((a: any, b: any) => {
       const aVal = a[key];
       const bVal = b[key];
 
@@ -291,21 +291,21 @@ export const arrayUtils = {
 export const storageUtils = {
   set: (key: string, value: unknown): void => {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      console.warn('Failed to save to localStorage:', error);
+      (localStorage as any).setItem(key, JSON.stringify(value));
+    } catch (error: any) {
+      (console as any).warn('Failed to save to localStorage:', error);
     }
   },
 
   get: <T>(key: string, defaultValue?: T): T | null => {
     try {
-      const item = localStorage.getItem(key);
+      const item = (localStorage as any).getItem(key);
       if (item !== null) {
         return JSON.parse(item) as T;
       }
       return defaultValue ?? null;
-    } catch (error) {
-      console.warn('Failed to read from localStorage:', error);
+    } catch (error: any) {
+      (console as any).warn('Failed to read from localStorage:', error);
       return defaultValue ?? null;
     }
   },
@@ -313,21 +313,21 @@ export const storageUtils = {
   remove: (key: string): void => {
     try {
       localStorage.removeItem(key);
-    } catch (error) {
-      console.warn('Failed to remove from localStorage:', error);
+    } catch (error: any) {
+      (console as any).warn('Failed to remove from localStorage:', error);
     }
   },
 
   clear: (): void => {
     try {
       localStorage.clear();
-    } catch (error) {
-      console.warn('Failed to clear localStorage:', error);
+    } catch (error: any) {
+      (console as any).warn('Failed to clear localStorage:', error);
     }
   },
 
   exists: (key: string): boolean => {
-    return localStorage.getItem(key) !== null;
+    return (localStorage as any).getItem(key) !== null;
   } };
 
 // Performance Utilities
@@ -338,7 +338,7 @@ export const performanceUtils = {
     let timeoutId: ReturnType<typeof setTimeout>;
     return (...args: Parameters<T>) => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => func(...args), delay);
+      timeoutId = setTimeout((() => func(...args)) as any, delay);
     };
   },
 
@@ -374,7 +374,7 @@ export const performanceUtils = {
     const result = await func();
     const duration = performance.now() - start;
 
-    if (label) {
+    if (label as any) {
       // Performance measurement logged
     }
 
@@ -422,7 +422,7 @@ return error.message;
   },
 
   logError: (error: unknown, context?: string): void => {
-    const isErrorWithDetails = (err: unknown): err is ErrorWithDetails => {
+    const isErrorWithDetails: any = (err: unknown): err is ErrorWithDetails => {
       return typeof err === 'object' && err !== null && 'message' in err;
     };
 
@@ -433,7 +433,7 @@ return error.message;
       stack: error instanceof Error ? error.stack : undefined,
       details: isErrorWithDetails(error) ? error.details : undefined };
 
-    console.error('Error logged:', errorInfo);
+    (console as any).error('Error logged:', errorInfo);
 
     // In production, you might want to send this to an error tracking service
     // errorTrackingService.log(errorInfo);

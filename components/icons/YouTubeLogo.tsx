@@ -1,5 +1,6 @@
 import React from 'react';
-const YouTubeLogo: React.FC<{ className?: string }> = ({ className = 'h-6' }) => (
+import { FC } from 'react';
+const YouTubeLogo: React.FC<{ className?: string }> = ({ className = 'h-6' }: any) => (
   <svg
     className={className}
     viewBox="0 0 28 20"

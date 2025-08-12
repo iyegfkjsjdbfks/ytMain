@@ -1,5 +1,7 @@
 import type { Channel } from '../types';
 import React from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 // Note: Keep React import minimal to avoid unused warnings
 import React from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
@@ -58,12 +60,12 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   queryClient?: QueryClient;
 }
 
-export const renderWithProviders = (,
+export const renderWithProviders: any = (,
   ui: React.ReactElement,
           options: CustomRenderOptions = {}): RenderResult => {
   const { queryClient, ...renderOptions } = options;
 
-  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }: any) => (
     <TestProviders queryClient={queryClient}>
       {children}
     </TestProviders>
@@ -84,7 +86,7 @@ export const renderHookWithProviders = <TResult, TProps>(,
           options: CustomRenderHookOptions<TProps> = {}) => {
   const { queryClient, ...renderHookOptions } = options;
 
-  const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }: any) => (
     <TestProviders queryClient={queryClient}>
       {children}
     </TestProviders>
@@ -94,7 +96,7 @@ export const renderHookWithProviders = <TResult, TProps>(,
 };
 
 // Mock Data Factories
-export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
+export const createMockVideo: any = (overrides: Partial<Video> = {}): Video => ({
   id: `video_${Math.random().toString(36).substr(2, 9)}`,
   title: 'Test Video Title',
           description: 'Test video description',
@@ -116,7 +118,7 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   updatedAt: new Date().toISOString(),
   ...overrides });
 
-export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => ({
+export const createMockChannel: any = (overrides: Partial<Channel> = {}): Channel => ({
   id: `channel_${Math.random().toString(36).substr(2, 9)}`,
   name: 'Test Channel',
           description: 'Test channel description',
@@ -129,7 +131,7 @@ export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => 
   updatedAt: new Date().toISOString(),
   ...overrides });
 
-export const createMockPlaylist = (overrides: Partial<UserPlaylist> = {}): UserPlaylist => ({
+export const createMockPlaylist: any = (overrides: Partial<UserPlaylist> = {}): UserPlaylist => ({
   id: `playlist_${Math.random().toString(36).substr(2, 9)}`,
   title: 'Test Playlist',
           description: 'Test playlist description',
@@ -139,12 +141,12 @@ export const createMockPlaylist = (overrides: Partial<UserPlaylist> = {}): UserP
   ...overrides });
 
 // Mock API Responses
-export const createMockVideoResponse = (count: number = 10) => ({,
+export const createMockVideoResponse: any = (count: number = 10) => ({,
   videos: Array.from({ length: count }, () => createMockVideo()),
   nextPageToken: Math.random() > 0.5 ? 'next_page_token' : undefined });
 
 // User Event Setup
-export const createUserEvent = () => userEvent.setup();
+export const createUserEvent: any = () => userEvent.setup();
 
 // Store Test Utilities removed to fix circular dependency
 
@@ -155,9 +157,9 @@ export const createMockFunction = <T extends (...args) => any>(
 };
 
 // Async Testing Utilities
-export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
+export const waitForNextTick: any = () => new Promise(resolve => setTimeout((resolve) as any, 0));
 
-export const waitForTime = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
+export const waitForTime: any = (ms: any) => new Promise(resolve => setTimeout((resolve) as any, ms));
 
 // Performance Testing Utilities
 export class PerformanceTestHelper {
@@ -203,7 +205,7 @@ return 0;
 }
 
 // Memory Testing Utilities
-export const measureMemoryUsage = (): number => {
+export const measureMemoryUsage: any = (): number => {
   if ('memory' in performance) {
     return (performance as Performance & { memory: { usedJSHeapSize: number } 
         }).memory.usedJSHeapSize;
@@ -211,9 +213,9 @@ export const measureMemoryUsage = (): number => {
   return 0;
 };
 
-export const createMemoryLeakTest = (testFn: () => void,
+export const createMemoryLeakTest: any = (testFn: () => void,
           iterations: number = 100) => {
-  return async () => {
+  return async (): Promise<void> => {
     const initialMemory = measureMemoryUsage();
 
     for (let i = 0; i < iterations; i++) {
@@ -236,7 +238,7 @@ export const createMemoryLeakTest = (testFn: () => void,
         }};
 
 // Component Testing Utilities
-export const getByTestId = (container: HTMLElement,
+export const getByTestId: any = (container: HTMLElement,
           testId: any): HTMLElement => {
   const element = container.querySelector(`[data-testid="${testId}"]`);
   if (!element) {
@@ -245,36 +247,36 @@ export const getByTestId = (container: HTMLElement,
   return element as HTMLElement;
 };
 
-export const queryByTestId = (container: HTMLElement,
+export const queryByTestId: any = (container: HTMLElement,
           testId: any): HTMLElement | null => {
   return container.querySelector(`[data-testid="${testId}"]`);
 };
 
 // Accessibility Testing Utilities
-export const checkAccessibility = async (container: HTMLElement) => {
+export const checkAccessibility = async (container: HTMLElement): Promise<any> => {
   try {
     const axeCore = await import('axe-core');
     const results = await axeCore.run(container);
 
     if (results.violations.length > 0) {
-      console.error('Accessibility violations:', results.violations);
+      (console as any).error('Accessibility violations:', results.violations);
     }
 
     expect(results.violations).toHaveLength(0);
-  } catch (error) {
-    console.warn('Accessibility testing not available:', error);
+  } catch (error: any) {
+    (console as any).warn('Accessibility testing not available:', error);
   }
 };
 
 // Visual Regression Testing Utilities
-export const takeSnapshot = (component: React.ReactElement,
+export const takeSnapshot: any = (component: React.ReactElement,
           name: any) => {
   const { container } = renderWithProviders(component);
   expect(container.firstChild).toMatchSnapshot(name);
 };
 
 // API Mocking Utilities
-export const mockFetch = (response: any,
+export const mockFetch: any = (response: any,
           status: number = 200) => {
   global.fetch = vi.fn(() =>
     Promise.resolve({
@@ -284,20 +286,20 @@ export const mockFetch = (response: any,
           text: () => Promise.resolve(JSON.stringify(response)) } as Response));
 };
 
-export const mockFetchError = (error: Error) => {
+export const mockFetchError: any = (error: Error) => {
   global.fetch = vi.fn(() => Promise.reject(new Error(error)));
 };
 
 // Local Storage Mocking
-export const mockLocalStorage = () => {
+export const mockLocalStorage: any = () => {
   const store: Record<string, string> = {};
 
   global.localStorage = {
     getItem: vi.fn((key) => store[key] ?? null),
-          setItem: vi.fn((key, value) => {
+          setItem: vi.fn((key: any, value: any) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key) => {
+    removeItem: vi.fn((key: any) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -307,7 +309,7 @@ export const mockLocalStorage = () => {
           key: vi.fn() }};
 
 // Intersection Observer Mocking
-export const mockIntersectionObserver = () => {
+export const mockIntersectionObserver: any = () => {
   global.IntersectionObserver = vi.fn().mockImplementation((_callback) => ({
     observe: vi.fn(),
           unobserve: vi.fn(),
@@ -318,7 +320,7 @@ export const mockIntersectionObserver = () => {
 };
 
 // Resize Observer Mocking
-export const mockResizeObserver = () => {
+export const mockResizeObserver: any = () => {
   global.ResizeObserver = vi.fn().mockImplementation((_callback) => ({
     observe: vi.fn(),
           unobserve: vi.fn(),
@@ -326,7 +328,7 @@ export const mockResizeObserver = () => {
 };
 
 // Media Query Mocking
-export const mockMatchMedia = (matches: boolean = false) => {
+export const mockMatchMedia: any = (matches: boolean = false) => {
   global.matchMedia = vi.fn().mockImplementation((query) => ({
     matches,
     media: query,
@@ -339,7 +341,7 @@ export const mockMatchMedia = (matches: boolean = false) => {
 };
 
 // Test Suite Helpers
-export const describeWithSetup = (,
+export const describeWithSetup: any = (,
   name: any,
           setup: () => void,
   tests: () => void) => {
@@ -366,25 +368,25 @@ export const testUtils = {
   generateMockVideo: createMockVideo,
           generateMockChannel: createMockChannel,
   generateMockPlaylist: createMockPlaylist,
-          waitForLoadingToFinish: async () => {
+          waitForLoadingToFinish: async (): Promise<void> => {
     await waitForTime(100);
   },
-  waitForError: async (_errorMessage?: string) => {
+  waitForError: async (_errorMessage?: string): Promise<any> => {
     await waitForTime(50);
   },
-  simulateNetworkDelay: async (ms: number = 100) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  simulateNetworkDelay: async (ms: number = 100): Promise<any> => {
+    return new Promise(resolve => setTimeout((resolve) as any, ms));
   },
   simulateKeyboardNavigation: async (element: HTMLElement,
-          key: string) => {
+          key: string): Promise<any> => {
     const user = createUserEvent();
     element.focus();
     await user.keyboard(`{${key}}`);
   },
   simulateMouseInteraction: async (element: HTMLElement,
-          interaction: 'click' | 'hover' | 'doubleClick' = 'click') => {
+          interaction: 'click' | 'hover' | 'doubleClick' = 'click'): Promise<any> => {
     const user = createUserEvent();
-    switch (interaction) {
+    switch (interaction as any) {
       case 'click':
         await user.click(element);
         break;
@@ -397,31 +399,31 @@ export const testUtils = {
     }
   },
   simulateFormInput: async (input: HTMLElement,
-          value: string | number) => {
+          value: string | number): Promise<any> => {
     const user = createUserEvent();
     await user.clear(input);
     await user.type(input, String(value));
   },
   simulateDragAndDrop: async (element: HTMLElement,
-          files: File) => {
+          files: File): Promise<any> => {
     const user = createUserEvent();
     await user.upload(element, files);
   } };
 
 // Accessibility testing helper with proper return type
-export const runAccessibilityAudit = async (_container: HTMLElement) => {
+export const runAccessibilityAudit = async (_container: HTMLElement): Promise<any> => {
   try {
     // Import axe-core for accessibility testing
     await import('@axe-core/react');
 
     // Return a compatible result format
     return {
-      issues: [] as Array<{ type: 'error' | 'warning'; message: string; element: HTMLElement }>,
+      issues: [] as Array<{ type: "error" as const | 'warning'; message: string; element: HTMLElement }>,
           score: 100,
       violations: [], // For backward compatibility
     
-        }} catch (error) {
-    console.warn('Accessibility testing not available:', error);
+        }} catch (error: any) {
+    (console as any).warn('Accessibility testing not available:', error);
     return {
       issues: [],
           score: 100,
@@ -432,7 +434,7 @@ export const runAccessibilityAudit = async (_container: HTMLElement) => {
 expect.extend({
   toBeInViewport(received: HTMLElement) {
     const rect = received.getBoundingClientRect();
-    const isInViewport = (
+    const isInViewport: any = (
       rect.top >= 0 &&
       rect.left >= 0 &&
       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
@@ -456,3 +458,5 @@ expect.extend({
 
 // Type declarations for custom matchers
 
+
+export default TestProviders;

@@ -1,5 +1,8 @@
 import React, { useEffect, useState, lazy, FC } from 'react';
 import { Link, useSearchParams  } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { getYouTubeVideoId } from '@/lib/youtube-utils';
 
@@ -13,7 +16,7 @@ const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
   const [videos, setVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -21,7 +24,7 @@ const SearchResultsPage: React.FC = () => {
       return;
     }
 
-    const performSearch = async () => {
+    const performSearch = async (): Promise<void> => {
       setLoading(true);
       setError(null);
       try {
@@ -94,7 +97,7 @@ const SearchResultsPage: React.FC = () => {
           dislikeCount: video.dislikeCount || 0,
             commentCount: video.commentCount || 0 }))];
         setVideos(videoResults);
-      } catch (err) {
+      } catch (err: any) {
         setError(
           err instanceof Error
             ? err.message
@@ -138,7 +141,7 @@ const SearchResultsPage: React.FC = () => {
 
       {!loading && videos.length > 0 && (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
-          {videos.map(video => {
+          {videos.map((video: any) => {
             // Extract YouTube video ID from the video object using utility function
             let videoId = getYouTubeVideoId(video.videoUrl) || video.id;
 

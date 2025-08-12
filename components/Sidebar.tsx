@@ -1,5 +1,7 @@
 import React, { memo, FC, ReactNode } from 'react';
 import { Link, useLocation  } from 'react-router-dom';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { QueueListIcon as QueueListSolidIcon, ChartBarIcon as ChartBarSolidIcon, CogIcon as CogSolidIcon, CurrencyDollarIcon as CurrencyDollarSolidIcon, DocumentTextIcon as DocumentTextSolidIcon, VideoCameraIcon as VideoCameraSolidIcon, ChatBubbleLeftRightIcon as ChatBubbleLeftRightSolidIcon, UserGroupIcon as UserGroupSolidIcon, PaintBrushIcon as PaintBrushSolidIcon, FilmIcon as FilmSolidIcon  } from '@heroicons/react/24/solid'; // Added for Library and Studio;
 const QueueListIconSolid = QueueListSolidIcon;
@@ -34,7 +36,7 @@ interface NavItemProps {
   title?: string;
 }
 
-const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }) => {
+const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }: any) => {
   const isActive = currentPath === to ||
                    (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
 
@@ -53,7 +55,7 @@ const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPa
 });
 NavItem.displayName = 'NavItem'; // For better debugging
 
-const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }: any) => {
   const location = useLocation();
 
   return (

@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState, useCallback, type RefObject, lazy } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 interface UseIntersectionObserverOptions {
   threshold?: number | number;
@@ -32,7 +35,7 @@ interface UseIntersectionObserverReturn {
  *
  * Reduces code duplication for intersection-based functionality
  */
-export const useIntersectionObserver = ({
+export const useIntersectionObserver: any = ({
   threshold = 0,
   root = null,
   rootMargin = '0%',
@@ -101,7 +104,7 @@ export const useIntersectionObserver = ({
  * - Configurable visibility threshold
  * - Cleanup on unmount
  */
-export const useIntersectionVideoAutoplay = ({
+export const useIntersectionVideoAutoplay: any = ({
   threshold = 0.7,
   rootMargin = '0px',
   enabled = true }: {
@@ -118,9 +121,9 @@ export const useIntersectionVideoAutoplay = ({
     // Video play/pause functionality disabled to prevent loading errors
     // const video = videoRef.current;
     // if (!video || !enabled) return;
-    // if (isIntersecting) {
+    // if (isIntersecting as any) {
     //   video.play().catch(error => {
-    //     console.warn('Video autoplay failed:', error);
+    //     (console as any).warn('Video autoplay failed:', error);
     //   });
     // } else {
     //   video.pause();
@@ -133,9 +136,9 @@ export const useIntersectionVideoAutoplay = ({
 /**
  * Hook for lazy loading images based on visibility
  */
-export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px' }) => {
+export const useLazyImage: any = ({ src, threshold = 0.1, rootMargin = '50px' }: any) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const { ref, isIntersecting } = useIntersectionObserver({
@@ -172,7 +175,7 @@ export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px' }) => {
 /**
  * Hook for infinite scrolling
  */
-export const useInfiniteScroll = ({
+export const useInfiniteScroll: any = ({
   hasNextPage = true,
   isFetchingNextPage = false,
   fetchNextPage,

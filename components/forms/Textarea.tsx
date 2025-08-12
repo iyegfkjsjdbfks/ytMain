@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;

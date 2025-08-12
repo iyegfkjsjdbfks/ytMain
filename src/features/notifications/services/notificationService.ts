@@ -211,7 +211,7 @@ class NotificationService {
    * Test notification delivery
    */
   async testNotification(,
-  type: 'email' | 'push' | 'sms',
+  type: "email" as const | 'push' | 'sms',
     message?: string
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/test', { type, message });
@@ -308,7 +308,7 @@ class NotificationService {
     scheduledFor: any
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/schedule', {
-      ...data,
+      ...data as any,
       scheduledFor });
   }
 
@@ -417,7 +417,7 @@ class NotificationService {
       try {
         const notification = JSON.parse(event.data);
         onNotification(notification);
-      } catch (error) {
+      } catch (error: any) {
         onError?.(new Error('Failed to parse notification'));
       }
     };

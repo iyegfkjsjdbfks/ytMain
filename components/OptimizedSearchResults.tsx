@@ -1,4 +1,9 @@
 import React, { useRef, memo, useMemo, useState, useEffect, lazy, FC, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useMemo } from 'react';
 // @ts-nocheck
 import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
@@ -8,7 +13,7 @@ import type { YouTubeSearchResult, GoogleSearchResult } from '../services/google
 import type { Video } from '../types';
 
 // Helper function to convert search results to Video type
-const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
+const convertToVideo: any = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
   if ('views' in item && 'likes' in item && 'visibility' in item) {
     // Already a Video type
     return item;
@@ -57,9 +62,9 @@ function useDebounce<T>(value: T,
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const handler = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => {
       clearTimeout(handler);
@@ -97,7 +102,7 @@ const sortingFunctions = {
   } };
 
 // Helper function to extract video ID for iframe embedding
-const extractVideoId = (video: Video) => {
+const extractVideoId: any = (video: Video) => {
   let videoId = getYouTubeVideoId(video.videoUrl);
   if (!videoId) {
     videoId = video.id;
@@ -117,10 +122,10 @@ const extractVideoId = (video: Video) => {
 const YouTubeSearchResultCard: React.FC<{,
   item: Video | YouTubeSearchResult | GoogleSearchResult;
   onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void
-}> = memo(({ item, onVideoClick }) => {
+}> = memo(({ item, onVideoClick }: any) => {
   const convertedVideo = convertToVideo(item);
 
-  const formatDuration = (duration: string | number) => {
+  const formatDuration: any = (duration: string | number) => {
     if (typeof duration === 'string') {
 return duration;
 }
@@ -132,7 +137,7 @@ return duration;
     return '0: 00'
   };
 
-  const formatViews = (views: string | number) => {
+  const formatViews: any = (views: string | number) => {
     const num = typeof views === 'string' ? parseInt(views, 10) || 0 : views || 0;
     if (num >= 1000000000) {
       return `${(num / 1000000000).toFixed(1)}B`;
@@ -144,7 +149,7 @@ return duration;
     return num.toString();
   };
 
-  const formatTimeAgo = (dateStr: any) => {
+  const formatTimeAgo: any = (dateStr: any) => {
     try {
       const date = new Date(dateStr);
       const now = new Date();
@@ -173,7 +178,7 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
 
   const videoId = extractVideoId(convertedVideo);
 
-  const handleCardClick = (e: React.MouseEvent) => {
+  const handleCardClick: any = (e: React.MouseEvent) => {
     // Prevent navigation when clicking on video player
     if (videoId && (e.target as HTMLElement).closest('iframe, [id*="youtube-player"]')) {
       e.stopPropagation();
@@ -185,8 +190,8 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
   return (
     <div
       className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors"
-      onClick={handleCardClick}
-      onKeyDown={(e) => {
+      onClick={(e: any) => handleCardClick(e)}
+      onKeyDown={(e: any) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           onVideoClick(item);
@@ -202,7 +207,7 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
             <div
               className="w-full h-full"
               onClick={(e) => e.stopPropagation()}
-              onKeyDown={(e) => {
+              onKeyDown={(e: any) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.stopPropagation();
                 }
@@ -295,11 +300,11 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     performanceMonitor.startMeasure('search-results-processing');
 
     const combined = [
-      ...(videos || []).map(v => ({ ...v, source: 'local' as const,
+      ...(videos || []).map((v: any) => ({ ...v as any, source: 'local' as const,
           contentType: 'video' as const })),
-      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const,
+      ...(youtubeVideos || []).map((v: any) => ({ ...v as any, source: 'youtube' as const,
           contentType: 'video' as const })),
-      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const,
+      ...(googleSearchVideos || []).map((v: any) => ({ ...v as any, source: 'google-search' as const,
           contentType: 'video' as const }))];
 
     let sorted = combined;
@@ -315,19 +320,19 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
   // Filter results based on active tab
   const filteredResults = useMemo(() => {
-    switch (activeTab) {
+    switch (activeTab as any) {
       case 'videos':
         return allResults; // All our current content are videos
       case 'channels':
       case 'playlists':
         return []; // Not implemented yet
       case 'live':
-        return allResults.filter((item) => {
+        return allResults.filter((item: any) => {
           const video = 'isLive' in item ? item : convertToVideo(item);
           return video.isLive;
         });
       case 'shorts':
-        return allResults.filter((item) => {
+        return allResults.filter((item: any) => {
           const video = 'duration' in item ? item : convertToVideo(item);
           if (typeof video.duration === 'string') {
             const parts = video.duration.split(':');
@@ -451,7 +456,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
           ) : (
             <button
-              onClick={onLoadMore}
+              onClick={(e: any) => onLoadMore(e)}
               className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
             >
               Load More Videos

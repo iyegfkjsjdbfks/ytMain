@@ -1,9 +1,10 @@
 import type { Video } from '../types';
 import React, { FC } from 'react';
 import { FunnelIcon, XMarkIcon, VideoCameraIcon, UserIcon, PlayIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
 
 export interface SearchFilters {
-  type: 'all' | 'video' | 'channel' | 'playlist' | 'live';,
+  type: "all" as const | 'video' | 'channel' | 'playlist' | 'live';,
   uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
   duration: 'any' | 'short' | 'medium' | 'long';,
   features: string;
@@ -33,11 +34,11 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
           value: SearchFilters[K]
   ) => {
     onFiltersChange({
-      ...filters,
+      ...filters as any,
       [key]: value });
   };
 
-  const toggleFeature = (feature: any) => {
+  const toggleFeature: any = (feature: any) => {
     const newFeatures = filters.features.includes(feature)
       ? filters.features.filter((f: any) => f !== feature)
       : [...filters.features, feature];
@@ -45,9 +46,9 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     updateFilter('features', newFeatures);
   };
 
-  const resetFilters = () => {
+  const resetFilters: any = () => {
     onFiltersChange({
-      type: 'all',
+      type: "all" as const,
           uploadDate: 'any',
       duration: 'any',
           features: [],
@@ -56,7 +57,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
       captions: 'any' });
   };
 
-  const hasActiveFilters = () => {
+  const hasActiveFilters: any = () => {
     return (
       filters.type !== 'all' ||
       filters.uploadDate !== 'any' ||
@@ -68,7 +69,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     );
   };
 
-  const getActiveFilterCount = () => {
+  const getActiveFilterCount: any = () => {
     let count = 0;
     if (filters.type !== 'all') {
       count++;
@@ -98,7 +99,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     <div className={className}>
       {/* Filter Toggle Button */}
       <button
-        onClick={onToggle}
+        onClick={(e: any) => onToggle(e)}
         className='flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
       >
         <FunnelIcon className='w-5 h-5' />
@@ -120,14 +121,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
             <div className='flex items-center gap-2'>
               {hasActiveFilters() && (
                 <button
-                  onClick={resetFilters}
+                  onClick={(e: any) => resetFilters(e)}
                   className='text-sm text-blue-600 hover:text-blue-700 font-medium'
                 >
                   Clear all
                 </button>
               )}
               <button
-                onClick={onToggle}
+                onClick={(e: any) => onToggle(e)}
                 className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
               >
                 <XMarkIcon className='w-5 h-5' />
@@ -152,7 +153,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                   { value: 'playlist',
           label: 'Playlist', icon: PlayIcon },
                   { value: 'live',
-          label: 'Live', icon: PlayIcon }].map(({ value, label, icon: Icon }) => (
+          label: 'Live', icon: PlayIcon }].map(({ value, label, icon: Icon }: any) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -194,7 +195,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                   { value: 'month',
           label: 'This month' },
                   { value: 'year',
-          label: 'This year' }].map(({ value, label }) => (
+          label: 'This year' }].map(({ value, label }: any) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -231,7 +232,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                   { value: 'medium',
           label: '4-20 minutes' },
                   { value: 'long',
-          label: 'Over 20 minutes' }].map(({ value, label }) => (
+          label: 'Over 20 minutes' }].map(({ value, label }: any) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -282,7 +283,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                   { value: 'location',
           label: 'Location' },
                   { value: 'purchased',
-          label: 'Purchased' }].map(({ value, label }) => (
+          label: 'Purchased' }].map(({ value, label }: any) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -315,7 +316,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                   { value: 'view_count',
           label: 'View count' },
                   { value: 'rating',
-          label: 'Rating' }].map(({ value, label }) => (
+          label: 'Rating' }].map(({ value, label }: any) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -352,7 +353,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                   { value: '4k',
           label: '4K' },
                   { value: 'hdr',
-          label: 'HDR' }].map(({ value, label }) => (
+          label: 'HDR' }].map(({ value, label }: any) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -379,7 +380,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
           {/* Apply Button */}
           <div className='flex justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700'>
             <button
-              onClick={onToggle}
+              onClick={(e: any) => onToggle(e)}
               className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
             >
               Apply Filters

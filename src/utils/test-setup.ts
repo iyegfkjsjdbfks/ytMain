@@ -212,7 +212,7 @@ Object.defineProperty(HTMLVideoElement.prototype, 'muted', {
 // Mock requestAnimationFrame
 Object.defineProperty(window, 'requestAnimationFrame', {
   writable: true,
-  value: vi.fn((cb: FrameRequestCallback) => setTimeout(cb, 16)) });
+  value: vi.fn((cb: FrameRequestCallback) => setTimeout((cb) as any, 16)) });
 
 Object.defineProperty(window, 'cancelAnimationFrame', {
   writable: true,

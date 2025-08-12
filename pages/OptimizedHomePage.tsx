@@ -1,5 +1,10 @@
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useMemo, useCallback, useState, lazy, Suspense, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { HomeIcon as HomeSolidIcon } from '@heroicons/react/24/solid';
 const HomeIconSolid = HomeSolidIcon;
@@ -36,7 +41,7 @@ const categories = [
   'Travel',
   'Food'];
 
-const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
+const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: any) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showSections] = useState({
@@ -79,18 +84,18 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
   }, []);
 
   const handleRefresh = useCallback(() => {
-    refetch();
+    re(fetch as any)();
   }, [refetch]);
 
   // const _toggleSection = useCallback((section: keyof typeof showSections) => {
   //   setShowSections(prev => ({
-  //     ...prev,
+  //     ...prev as any,
   //     [section]: !prev[section],
   //   }));
   // }, []);
 
   // Error state
-  if (error) {
+  if (error as any) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
         <div className="text-6xl mb-4">⚠️</div>
@@ -99,7 +104,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
           {error}
         </p>
         <button
-          onClick={handleRefresh}
+          onClick={(e: any) => handleRefresh(e)}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Try Again
@@ -146,7 +151,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
 
               {/* Refresh Button */}
               <button
-                onClick={handleRefresh}
+                onClick={(e: any) => handleRefresh(e)}
                 disabled={loading}
                 className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
                 title="Refresh"

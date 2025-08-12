@@ -1,4 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 interface UsePaginationProps {
   totalCount: number;
@@ -9,7 +12,7 @@ interface UsePaginationProps {
 
 export const DOTS = '...';
 
-const range = (start: any, end: any) => {
+const range: any = (start: any, end: any) => {
   const length = end - start + 1;
   return Array.from({ length }, (_, idx) => idx + start);
 };
@@ -26,7 +29,7 @@ export function usePagination({
   totalCount,
   pageSize,
   siblingCount = 1,
-  initialPage = 1 }: UsePaginationProps) {
+  initialPage = 1 }: UsePaginationProps): any {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
   const paginationRange = useMemo(() => {
@@ -68,7 +71,7 @@ export function usePagination({
       const leftItemCount = 3 + 2 * siblingCount;
       const leftRange = range(1, leftItemCount);
 
-      return [...leftRange, DOTS, totalPageCount];
+      return [...leftRange as any, DOTS, totalPageCount];
     }
 
     /*
@@ -88,7 +91,7 @@ export function usePagination({
     */
     if (shouldShowLeftDots && shouldShowRightDots) {
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+      return [firstPageIndex, DOTS, ...middleRange as any, DOTS, lastPageIndex];
     }
 
     // Should not happen, but as a fallback

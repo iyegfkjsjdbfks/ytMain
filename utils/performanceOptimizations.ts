@@ -1,4 +1,6 @@
 import { memo, useMemo, useCallback, lazy, type ComponentType } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 // Performance optimization utilities
 
@@ -15,7 +17,7 @@ export const withPerformanceOptimization = {
    * Shallow comparison memoization
    */,
   shallow: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component(prevProps, nextProps) => {
+    memo(Component(prevProps: any, nextProps: any) => {
       const prevKeys = Object.keys(prevProps);
       const nextKeys = Object.keys(nextProps);
 
@@ -37,7 +39,7 @@ export const withPerformanceOptimization = {
    */,
   ignoring: <P extends object>(ignoredProps: Array<keyof P>) =>
     (Component: ComponentType<P>) =>
-      memo(Component(prevProps, nextProps) => {
+      memo(Component(prevProps: any, nextProps: any) => {
         const filteredPrev = { ...prevProps };
         const filteredNext = { ...nextProps };
 
@@ -53,7 +55,7 @@ export const withPerformanceOptimization = {
    * Memoization for components with array props
    */,
   arrayOptimized: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component(prevProps, nextProps) => {
+    memo(Component(prevProps: any, nextProps: any) => {
       for (const key in prevProps) {
         const prevValue = prevProps[key];
         const nextValue = nextProps[key];
@@ -119,7 +121,7 @@ export const hookOptimizations = {
     shouldRecompute?: (newDeps: any, oldDeps: any) => boolean,
   ): T => {
     return useMemo(() => {
-      if (shouldRecompute) {
+      if (shouldRecompute as any) {
         // Custom recomputation logic would go here
         // For now, just use standard memoization
       }
@@ -176,7 +178,7 @@ export const imageOptimizations = {
    * Preload critical images
    */,
   preloadImage: (src: any): Promise<void> => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       const img = new Image();
       img.onload = () => resolve();
       img.onerror = reject;
@@ -191,7 +193,7 @@ export const imageOptimizations = {
   callback: (entry: IntersectionObserverEntry) => void,
     options?: IntersectionObserverInit,
   ): IntersectionObserver => {
-    return new IntersectionObserver((entries) => {
+    return new IntersectionObserver((entries: any) => {
       entries.forEach(callback);
     }, {
       rootMargin: '50px',
@@ -211,8 +213,8 @@ export const bundleOptimizations = {
   ): Promise<T | null> => {
     try {
       return await importFunc();
-    } catch (error) {
-      console.error('Dynamic import failed:', error);
+    } catch (error: any) {
+      (console as any).error('Dynamic import failed:', error);
       return null;
     }
   },
@@ -251,13 +253,13 @@ export const eventOptimizations = {
         func(...args);
         lastExecTime = currentTime;
       } else {
-        if (timeoutId) {
+        if (timeoutId as any) {
 clearTimeout(timeoutId);
 }
-        timeoutId = setTimeout(() => {
+        timeoutId = setTimeout((() => {
           func(...args);
           lastExecTime = Date.now();
-        }, delay - (currentTime - lastExecTime));
+        }) as any, delay - (currentTime - lastExecTime));
       }
     }) as T;
   },
@@ -271,10 +273,10 @@ clearTimeout(timeoutId);
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     return ((...args) => {
-      if (timeoutId) {
+      if (timeoutId as any) {
 clearTimeout(timeoutId);
 }
-      timeoutId = setTimeout(() => func(...args), delay);
+      timeoutId = setTimeout((() => func(...args)) as any, delay);
     }) as T;
   },
 

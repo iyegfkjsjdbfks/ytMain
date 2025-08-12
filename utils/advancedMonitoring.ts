@@ -24,7 +24,7 @@ interface AlertRule {
 }
 
 interface AlertAction {
-  type: 'email' | 'webhook' | 'console' | 'storage';
+  type: "email" as const | 'webhook' | 'console' | 'storage';
   _config: Record<string, any>;
 }
 
@@ -79,7 +79,7 @@ return undefined;
     this.startHealthChecks();
     this.startAlertProcessing();
 
-    console.log('🔍 Advanced monitoring system started');
+    (console as any).log('🔍 Advanced monitoring system started');
   }
 
   /**
@@ -87,7 +87,7 @@ return undefined;
    */
   stop(): void {
     this.isMonitoring = false;
-    console.log('🛑 Advanced monitoring system stopped');
+    (console as any).log('🛑 Advanced monitoring system stopped');
   }
 
   /**
@@ -129,7 +129,7 @@ return undefined;
 return metrics;
 }
 
-    return metrics.filter(m =>
+    return metrics.filter((m: any) =>
       m.timestamp >= timeRange.start && m.timestamp <= timeRange.end,
     );
   }
@@ -146,7 +146,7 @@ return metrics;
     p99: number
   } {
     const metrics = this.getMetrics(name, timeRange);
-    const values = metrics.map(m => m.value).sort((a, b) => a - b);
+    const values = metrics.map((m: any) => m.value).sort((a, b) => a - b);
 
     if (values.length === 0) {
       return { count: 0, avg: 0, min: 0, max: 0, p95: 0, p99: 0 };
@@ -241,7 +241,7 @@ continue;
         const result = await Promise.race([
           healthCheck.check(),
           new Promise<{ healthy: boolean }>((_, reject) =>
-            setTimeout(() => reject(new Error('Timeout')), healthCheck.timeout * 1000),
+            setTimeout((() => reject(new Error('Timeout'))) as any, healthCheck.timeout * 1000),
           )
         ]);
 
@@ -253,7 +253,7 @@ continue;
         if (!result.healthy) {
           overallHealthy = false;
         }
-      } catch (error) {
+      } catch (error: any) {
         checks.push({
           name,
           healthy: false,
@@ -288,7 +288,7 @@ continue;
       threshold: 100 * 1024 * 1024, // 100MB,
       severity: 'high',
       cooldown: 5,
-      actions: [{ type: 'console', _config: {} }] });
+      actions: [{ type: "console" as const, _config: {} }] });
 
     this.addAlert({
       id: 'slow-page-load',
@@ -297,7 +297,7 @@ continue;
       threshold: 3000, // 3 seconds,
       severity: 'medium',
       cooldown: 2,
-      actions: [{ type: 'console', _config: {} }] });
+      actions: [{ type: "console" as const, _config: {} }] });
 
     this.addAlert({
       id: 'high-error-rate',
@@ -306,16 +306,16 @@ continue;
       threshold: 0.05, // 5%,
   severity: 'critical',
       cooldown: 1,
-      actions: [{ type: 'console', _config: {} }] });
+      actions: [{ type: "console" as const, _config: {} }] });
   }
 
   private setupDefaultHealthChecks(): void {
     // API health check
     this.addHealthCheck({
       name: 'api-connectivity',
-      check: async () => {
+      check: async (): Promise<void> => {
         try {
-          const response = await fetch('/api/health', {
+          const response = await (fetch as any)('/api/health', {
             method: 'GET',
             signal: AbortSignal.timeout(5000) });
           return {
@@ -332,11 +332,11 @@ continue;
     // Local storage health check
     this.addHealthCheck({
       name: 'local-storage',
-      check: async () => {
+      check: async (): Promise<void> => {
         try {
           const testKey = '__health_check__';
-          localStorage.setItem(testKey, 'test');
-          const value = localStorage.getItem(testKey);
+          (localStorage as any).setItem(testKey, 'test');
+          const value = (localStorage as any).getItem(testKey);
           localStorage.removeItem(testKey);
           return { healthy: value === 'test' };
         } catch {
@@ -350,8 +350,8 @@ continue;
     // Memory health check
     this.addHealthCheck({
       name: 'memory-usage',
-      check: async () => {
-        const memInfo = (((performance as any))).memory;
+      check: async (): Promise<void> => {
+        const memInfo: any = (((performance as any))).memory;
         if (!memInfo) {
 return { healthy: true };
 }
@@ -413,20 +413,20 @@ return { healthy: true };
 
   private startMetricsCollection(): void {
     // Collect Core Web Vitals
-    setInterval(() => {
+    setInterval((() => {
       if (!this.isMonitoring) {
 return undefined;
 }
 
       // Memory usage
-      const memInfo = (((performance as any))).memory;
-      if (memInfo) {
-        this.recordMetric('memory-usage', memInfo.usedJSHeapSize);
+      const memInfo: any = (((performance as any))).memory;
+      if (memInfo as any) {
+        this.recordMetric('memory-usage') as any, memInfo.usedJSHeapSize);
       }
 
       // Connection info
       const { connection } = (((navigator as any)));
-      if (connection) {
+      if (connection as any) {
         this.recordMetric('network-downlink', connection.downlink);
         this.recordMetric('network-rtt', connection.rtt);
       }
@@ -443,7 +443,7 @@ return undefined;
 
   private startHealthChecks(): void {
     for (const [name, check] of this.healthChecks) {
-      const runCheck = async () => {
+      const runCheck = async (): Promise<void> => {
         if (!this.isMonitoring) {
 return undefined;
 }
@@ -451,9 +451,9 @@ return undefined;
         try {
           const result = await check.check();
           this.recordMetric(`health-${name}`, result.healthy ? 1 : 0);
-        } catch (error) {
+        } catch (error: any) {
           this.recordMetric(`health-${name}`, 0);
-          console.warn(`Health check ${name} failed:`, error);
+          (console as any).warn(`Health check ${name} failed:`, error);
         }
       };
 
@@ -461,19 +461,19 @@ return undefined;
       runCheck();
 
       // Schedule recurring checks
-      setInterval(runCheck, check.interval * 1000);
+      setInterval((runCheck) as any, check.interval * 1000);
     }
   }
 
   private startAlertProcessing(): void {
-    setInterval(() => {
+    setInterval((() => {
       if (!this.isMonitoring) {
 return undefined;
 }
 
       // Process any pending alerts
       this.processAlerts();
-    }, 10000); // Check every 10 seconds
+    }) as any, 10000); // Check every 10 seconds
   }
 
   private checkAlerts(metricName: any, value: string | number): void {
@@ -506,7 +506,7 @@ return undefined;
   private executeAlertAction(action: AlertAction, alert: AlertRule, value: string | number): void {
     switch (action.type) {
       case 'console':
-        console.warn(`🚨 Alert: ${alert.name} - Value: ${value}, Threshold: ${alert.threshold}`);
+        (console as any).warn(`🚨 Alert: ${alert.name} - Value: ${value}, Threshold: ${alert.threshold}`);
         break;
       case 'storage':
         const alertData = {
@@ -516,7 +516,7 @@ return undefined;
           threshold: alert.threshold,
           severity: alert.severity,
           timestamp: Date.now() };
-        localStorage.setItem(`alert_${alert.id}_${Date.now()}`, JSON.stringify(alertData));
+        (localStorage as any).setItem(`alert_${alert.id}_${Date.now()}`, JSON.stringify(alertData));
         break;
       // Add more action types as needed
     }
@@ -544,10 +544,10 @@ return undefined;
   }
 
   private getSessionId(): string {
-    let sessionId = sessionStorage.getItem('monitoring_session_id');
+    let sessionId = (sessionStorage as any).getItem('monitoring_session_id');
     if (!sessionId) {
       sessionId = this.generateSecureToken(16);
-      sessionStorage.setItem('monitoring_session_id', sessionId);
+      (sessionStorage as any).setItem('monitoring_session_id', sessionId);
     }
     return sessionId;
   }
@@ -584,19 +584,19 @@ return undefined;
     this.trackErrors();
     this.trackPerformance();
 
-    console.log('👥 Real User Monitoring started');
+    (console as any).log('👥 Real User Monitoring started');
   }
 
   stop(): void {
     this.isTracking = false;
-    console.log('👥 Real User Monitoring stopped');
+    (console as any).log('👥 Real User Monitoring stopped');
   }
 
   private trackUserInteractions(): void {
     const events = ['click', 'scroll', 'keydown', 'touchstart'];
 
     events.forEach(eventType => {
-      document.addEventListener(eventType(event) => {
+      document.addEventListener(eventType(event: any) => {
         if (!this.isTracking) {
 return undefined;
 }
@@ -670,7 +670,7 @@ return undefined;
     }
 
     // Track resource loading
-    const observer = new PerformanceObserver((list) => {
+    const observer = new PerformanceObserver((list: any) => {
       if (!this.isTracking) {
 return undefined;
 }

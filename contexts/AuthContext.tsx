@@ -1,4 +1,9 @@
+import React from 'react';
 import { createContext, useContext, useState, useEffect, type ReactNode, FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 interface User {
   id: string;,
@@ -24,8 +29,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
+export const useAuth: any = () => {
+  const context = useContext<any>(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
@@ -33,26 +38,26 @@ export const useAuth = () => {
 };
 
 interface AuthProviderProps {
-  children: ReactNode
+  children?: React.ReactNode
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }: any) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Check for existing session on mount
   useEffect(() => {
-    const checkAuthStatus = () => {
+    const checkAuthStatus: any = () => {
       try {
-        const storedUser = localStorage.getItem('youtube_clone_user');
-        const token = localStorage.getItem('youtube_clone_token');
+        const storedUser = (localStorage as any).getItem('youtube_clone_user');
+        const token = (localStorage as any).getItem('youtube_clone_token');
 
         if (storedUser && token) {
           setUser(JSON.parse(storedUser));
         }
       
-        } catch (error) {
-        console.error('Error checking auth status:', error);
+        } catch (error: any) {
+        (console as any).error('Error checking auth status:', error);
         // Clear invalid data
         localStorage.removeItem('youtube_clone_user');
         localStorage.removeItem('youtube_clone_token');
@@ -84,16 +89,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
         // Store in localStorage
-        localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));
-        localStorage.setItem('youtube_clone_token', mockToken);
+        (localStorage as any).setItem('youtube_clone_user', JSON.stringify(mockUser));
+        (localStorage as any).setItem('youtube_clone_token', mockToken);
 
         setUser(mockUser);
         return true;
       }
 
       return false;
-    } catch (error) {
-      console.error('Login error:', error);
+    } catch (error: any) {
+      (console as any).error('Login error:', error);
       return false;
     } finally {
       setIsLoading(false);
@@ -119,23 +124,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
         // Store in localStorage
-        localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));
-        localStorage.setItem('youtube_clone_token', mockToken);
+        (localStorage as any).setItem('youtube_clone_user', JSON.stringify(mockUser));
+        (localStorage as any).setItem('youtube_clone_token', mockToken);
 
         setUser(mockUser);
         return true;
       }
 
       return false;
-    } catch (error) {
-      console.error('Registration error:', error);
+    } catch (error: any) {
+      (console as any).error('Registration error:', error);
       return false;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = () => {
+  const logout: any = () => {
     localStorage.removeItem('youtube_clone_user');
     localStorage.removeItem('youtube_clone_token');
     setUser(null);
@@ -147,13 +152,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 return false;
 }
 
-      const updatedUser = { ...user, ...updates };
-      localStorage.setItem('youtube_clone_user', JSON.stringify(updatedUser));
+      const updatedUser = { ...user as any, ...updates };
+      (localStorage as any).setItem('youtube_clone_user', JSON.stringify(updatedUser));
       setUser(updatedUser);
 
       return true;
-    } catch (error) {
-      console.error('Profile update error:', error);
+    } catch (error: any) {
+      (console as any).error('Profile update error:', error);
       return false;
     }
   };

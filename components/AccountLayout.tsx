@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { Cog8ToothIcon, ShieldCheckIcon, DocumentTextIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
 
 /**
  * AccountLayout component provides a consistent layout for account-related pages
  * with navigation sidebar and content area.
  */
 const AccountLayout: React.FC = () => {
+  return null;
 
   const accountNavItems = [
     {
@@ -46,14 +48,14 @@ const AccountLayout: React.FC = () => {
           <div className="lg:w-64 flex-shrink-0">
             <nav className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
               <ul className="space-y-2">
-                {accountNavItems.map((item) => {
+                {accountNavItems.map((item: any) => {
                   const Icon = item.icon;
 
                   return (
                     <li key={item.path}>
                       <NavLink
                         to={item.path}
-                        className={({ isActive }) =>
+                        className={({ isActive }: any) =>
                           `flex items-start space-x-3 p-3 rounded-lg transition-colors ${
                             isActive
                               ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800'

@@ -13,7 +13,7 @@ export interface SubscriptionData {
   isSubscribed: boolean
 }
 
-export function useSubscription(channelId: any) {
+export function useSubscription(channelId: any): any {
   const queryClient = useQueryClient();
 
   const { data: subscription, isLoading: isQueryLoading } = useQuery({
@@ -55,7 +55,7 @@ export function useSubscription(channelId: any) {
     subscription };
 }
 
-export function useSubscriptions() {
+export function useSubscriptions(): any {
   const {
     data: subscriptions,
     isLoading,
@@ -69,7 +69,7 @@ export function useSubscriptions() {
     error };
 }
 
-export function useSubscriptionFeed() {
+export function useSubscriptionFeed(): any {
   const {
     data: videos,
     isLoading,

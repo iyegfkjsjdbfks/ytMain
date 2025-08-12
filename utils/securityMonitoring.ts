@@ -9,7 +9,7 @@ import { advancedAPM } from './advancedMonitoring';
 // Types for security monitoring
 interface SecurityThreat {
   id: string;
-  type: 'xss' | 'sql-injection' | 'csrf' | 'brute-force' | 'ddos' | 'malware' | 'data-breach' | 'unauthorized-access';
+  type: "xss" as const | 'sql-injection' | 'csrf' | 'brute-force' | 'ddos' | 'malware' | 'data-breach' | 'unauthorized-access';
   severity: 'low' | 'medium' | 'high' | 'critical';
   source: string;
   target: string;
@@ -32,7 +32,7 @@ interface SecurityResponse {
 
 interface VulnerabilityReport {
   id: string;
-  type: 'dependency' | 'code' | 'configuration' | 'infrastructure';
+  type: "dependency" as const | 'code' | 'configuration' | 'infrastructure';
   severity: 'low' | 'medium' | 'high' | 'critical';
   component: string;
   description: string;
@@ -101,7 +101,7 @@ interface SecurityAuditLog {
 
 interface SecurityAlert {
   id: string;
-  type: '_threat' | 'vulnerability' | 'policy-violation' | 'compliance-issue';
+  type: "_threat" as const | 'vulnerability' | 'policy-violation' | 'compliance-issue';
   severity: 'low' | 'medium' | 'high' | 'critical';
   title: string;
   description: string;
@@ -250,7 +250,7 @@ class SecurityMonitoringEngine {
         lastChecked: Date.now(),
         nextCheck: Date.now() + 604800000 }];
 
-    [...gdprChecks, ...iso27001Checks].forEach(check => {
+    [...gdprChecks as any, ...iso27001Checks].forEach(check => {
       this.complianceChecks.set(check.id, check);
     });
   }
@@ -264,27 +264,27 @@ return;
 }
 
     this.isMonitoring = true;
-    console.log('🛡️ Starting security monitoring engine...');
+    (console as any).log('🛡️ Starting security monitoring engine...');
 
     // Continuous _threat detection
-    setInterval(() => {
+    setInterval((() => {
       this.performThreatDetection();
-    }, 30000); // Every 30 seconds
+    }) as any, 30000); // Every 30 seconds
 
     // Vulnerability scanning
-    setInterval(() => {
+    setInterval((() => {
       this.performVulnerabilityScanning();
-    }, this.scanInterval);
+    }) as any, this.scanInterval);
 
     // Compliance monitoring
-    setInterval(() => {
+    setInterval((() => {
       this.performComplianceChecks();
-    }, 3600000); // Every hour
+    }) as any, 3600000); // Every hour
 
     // Audit log cleanup
-    setInterval(() => {
+    setInterval((() => {
       this.cleanupAuditLogs();
-    }, 86400000); // Daily
+    }) as any, 86400000); // Daily
   }
 
   /**
@@ -308,7 +308,7 @@ return;
 
         // Automated response
         const response = await this.respondToThreat(_threat);
-        if (response) {
+        if (response as any) {
           _threat.response = response;
           _threat.status = response.success ? 'mitigated' : 'investigating';
         }
@@ -323,8 +323,8 @@ return;
 
       advancedAPM.recordMetric('threats-detected', threats.length);
 
-    } catch (error) {
-      console.error('Threat detection error:', error);
+    } catch (error: any) {
+      (console as any).error('Threat detection error:', error);
     }
   }
 
@@ -383,7 +383,7 @@ return;
       }
 
       // Simulate response execution
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout((resolve) as any, 1000));
 
       const response: SecurityResponse = {
         id: `response-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -394,13 +394,13 @@ return;
   details: `Automated ${action} response executed`,
         automated: true };
 
-      console.log(`🚨 Security response: ${action} for ${threat.type} threat`);
+      (console as any).log(`🚨 Security response: ${action} for ${threat.type} threat`);
       advancedAPM.recordMetric('security-response', 1, { action, success: response.success.toString() });
 
       return response;
 
-    } catch (error) {
-      console.error('Security response error:', error);
+    } catch (error: any) {
+      (console as any).error('Security response error:', error);
       return null;
     }
   }
@@ -410,7 +410,7 @@ return;
    */
   private async performVulnerabilityScanning(): Promise<void> {
     try {
-      console.log('🔍 Performing vulnerability scan...');
+      (console as any).log('🔍 Performing vulnerability scan...');
 
       const vulnerabilities = await this.scanForVulnerabilities();
 
@@ -434,8 +434,8 @@ return;
 
       advancedAPM.recordMetric('vulnerabilities-scanned', vulnerabilities.length);
 
-    } catch (error) {
-      console.error('Vulnerability scanning error:', error);
+    } catch (error: any) {
+      (console as any).error('Vulnerability scanning error:', error);
     }
   }
 
@@ -455,7 +455,7 @@ return;
 
         const vulnerability: VulnerabilityReport = {
           id: `vuln-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-          type: 'dependency',
+          type: "dependency" as const,
           severity,
           component: dep,
           description: `Security vulnerability in ${dep}`,
@@ -481,7 +481,7 @@ return;
    */
   private async performComplianceChecks(): Promise<void> {
     try {
-      console.log('📋 Performing compliance checks...');
+      (console as any).log('📋 Performing compliance checks...');
 
       for (const [id, check] of this.complianceChecks) {
         if (Date.now() >= check.nextCheck) {
@@ -509,8 +509,8 @@ return;
         }
       }
 
-    } catch (error) {
-      console.error('Compliance check error:', error);
+    } catch (error: any) {
+      (console as any).error('Compliance check error:', error);
     }
   }
 
@@ -522,7 +522,7 @@ return;
     evidence?: string;
   }> {
     // Simulate compliance check execution
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout((resolve) as any, 500));
 
     const statuses: Array<ComplianceCheck['status']> = ['compliant', 'non-compliant', 'partial'];
     const status = statuses[Math.floor(Math.random() * statuses.length)] ?? 'partial';
@@ -559,7 +559,7 @@ return;
 
     this.alerts.set(alert.id, alert);
 
-    console.log(`🚨 Security Alert [${severity.toUpperCase()}]: ${title}`);
+    (console as any).log(`🚨 Security Alert [${severity.toUpperCase()}]: ${title}`);
     advancedAPM.recordMetric('security-alert', 1, { type, severity });
   }
 
@@ -590,7 +590,7 @@ return;
   private cleanupAuditLogs(): void {
     const cutoffTime = Date.now() - (30 * 24 * 60 * 60 * 1000); // 30 days
     this.auditLogs = this.auditLogs.filter((log) => log.timestamp > cutoffTime);
-    console.log(`🧹 Cleaned up old audit logs, ${this.auditLogs.length} logs remaining`);
+    (console as any).log(`🧹 Cleaned up old audit logs, ${this.auditLogs.length} logs remaining`);
   }
 
   /**
@@ -604,7 +604,7 @@ return;
     const threatsDetected = threats.length;
     const threatsBlocked = threats.filter((t) => t.response?.action === 'block').length;
 
-    const vulnCounts = vulnerabilities.reduce((acc, vuln) => {
+    const vulnCounts = vulnerabilities.reduce((acc: any, vuln: any) => {
       acc.total++;
       acc[vuln.severity]++;
       return acc;
@@ -675,7 +675,7 @@ return;
    */
   acknowledgeAlert(alertId: any, assignee?: string): void {
     const alert = this.alerts.get(alertId);
-    if (alert) {
+    if (alert as any) {
       alert.acknowledged = true;
       if (assignee !== undefined) {
         alert.assignee = assignee;
@@ -693,7 +693,7 @@ return;
    */
   resolveAlert(alertId: any, resolution: any): void {
     const alert = this.alerts.get(alertId);
-    if (alert) {
+    if (alert as any) {
       alert.resolution = resolution;
       alert.resolvedAt = Date.now();
 
@@ -709,7 +709,7 @@ return;
    */
   updateVulnerabilityStatus(vulnerabilityId: any, status: VulnerabilityReport['status']): void {
     const vulnerability = this.vulnerabilities.get(vulnerabilityId);
-    if (vulnerability) {
+    if (vulnerability as any) {
       vulnerability.status = status;
 
       this.logSecurityEvent('vulnerability-updated', {
@@ -770,7 +770,7 @@ export const securityMonitoring = new SecurityMonitoringEngine();
 
 // Auto-start in development mode
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  console.log('🛡️ Security Monitoring Engine initialized');
+  (console as any).log('🛡️ Security Monitoring Engine initialized');
 }
 
 export default securityMonitoring;

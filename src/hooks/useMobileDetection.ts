@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 interface MobileDetectionResult {
   isMobile: boolean;
@@ -10,7 +12,7 @@ interface MobileDetectionResult {
   deviceType: 'mobile' | 'tablet' | 'desktop'
 }
 
-export const useMobileDetection = (): MobileDetectionResult => {
+export const useMobileDetection: any = (): MobileDetectionResult => {
   const [detection, setDetection] = useState<MobileDetectionResult>(() => {
     if (typeof window === 'undefined') {
       return {
@@ -69,9 +71,9 @@ export const useMobileDetection = (): MobileDetectionResult => {
 
     // Device type
     let deviceType: MobileDetectionResult['deviceType'] = 'desktop';
-    if (isMobile) {
+    if (isMobile as any) {
       deviceType = 'mobile';
-    } else if (isTablet) {
+    } else if (isTablet as any) {
       deviceType = 'tablet';
     }
 
@@ -86,15 +88,15 @@ export const useMobileDetection = (): MobileDetectionResult => {
   }
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize: any = () => {
       setDetection(getDetectionResult());
     };
 
-    const handleOrientationChange = () => {
+    const handleOrientationChange: any = () => {
       // Delay to ensure dimensions are updated
-      setTimeout(() => {
+      setTimeout((() => {
         setDetection(getDetectionResult());
-      }, 100);
+      }) as any, 100);
     };
 
     window.addEventListener('resize', handleResize as EventListener);
@@ -110,7 +112,7 @@ export const useMobileDetection = (): MobileDetectionResult => {
 };
 
 // Hook for responsive breakpoints
-export const useBreakpoint = () => {
+export const useBreakpoint: any = () => {
   const { screenSize } = useMobileDetection();
 
   return {
@@ -124,7 +126,7 @@ export const useBreakpoint = () => {
 };
 
 // Hook for touch interactions
-export const useTouchInteractions = () => {
+export const useTouchInteractions: any = () => {
   const { isTouchDevice } = useMobileDetection();
 
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
@@ -134,21 +136,21 @@ export const useTouchInteractions = () => {
     null
   );
 
-  const handleTouchStart = (e: TouchEvent) => {
+  const handleTouchStart: any = (e: TouchEvent) => {
     const touch = e.touches[0];
-    if (touch) {
+    if (touch as any) {
       setTouchStart({ x: touch.clientX, y: touch.clientY });
     }
   };
 
-  const handleTouchEnd = (e: TouchEvent) => {
+  const handleTouchEnd: any = (e: TouchEvent) => {
     const touch = e.changedTouches[0];
-    if (touch) {
+    if (touch as any) {
       setTouchEnd({ x: touch.clientX, y: touch.clientY });
     }
   };
 
-  const getSwipeDirection = (): 'left' | 'right' | 'up' | 'down' | null => {
+  const getSwipeDirection: any = (): 'left' | 'right' | 'up' | 'down' | null => {
     if (!touchStart || !touchEnd) {
       return null;
     }
@@ -182,7 +184,7 @@ export const useTouchInteractions = () => {
 };
 
 // Hook for viewport dimensions
-export const useViewport = () => {
+export const useViewport: any = () => {
   const [viewport, setViewport] = useState(() => {
     if (typeof window === 'undefined') {
       return { width: 1024, height: 768 };
@@ -191,7 +193,7 @@ export const useViewport = () => {
   });
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize: any = () => {
       setViewport({ width: window.innerWidth, height: window.innerHeight });
     };
 

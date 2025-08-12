@@ -1,4 +1,5 @@
 import React, { type ReactNode, Fragment, ReactNode } from 'react';
+import { ReactNode } from 'react';
 /**
  * Safely render an array of items as React components
  *
@@ -25,7 +26,7 @@ export const safeArrayRender = <T,>(,
 
   return items
     .filter((item): item is T => item !== undefined && item !== null)
-    .map((item, index) => {
+    .map((item: any, index: any) => {
       const key = keyExtractor ? keyExtractor(item, index) : index;
       return (
         <React.Fragment key={key}>{renderItem(item, index)}</React.Fragment>
@@ -41,7 +42,7 @@ export const safeArrayRender = <T,>(,
  * @param fallback Optional fallback component if condition is false
  * @returns React node or null
  */
-export const renderIf = (,
+export const renderIf: any = (,
   condition: any,
           component: ReactNode,
   fallback: ReactNode = null
@@ -55,7 +56,7 @@ export const renderIf = (,
  * @param prefix Optional prefix for the ID
  * @returns Unique ID string
  */
-export const createUniqueId = (prefix = 'component'): string => {
+export const createUniqueId: any = (prefix = 'component'): string => {
   return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 };
 

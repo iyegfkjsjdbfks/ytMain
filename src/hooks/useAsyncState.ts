@@ -1,4 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 interface AsyncState<T> {
   data: T | null;
@@ -28,15 +31,15 @@ export const useAsyncState = <T>(,
     loading: initialLoading,
     error: null });
 
-  const execute = useCallback(async () => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
+  const execute = useCallback(async (): Promise<void> => {
+    setState(prev => ({ ...prev as any, loading: true, error: null }));
 
     try {
       const result = await asyncFunction();
       setState({ data: result, loading: false, error: null });
       onSuccess?.(result);
       return result;
-    } catch (err) {
+    } catch (err: any) {
       const errorMessage =
         err instanceof Error ? err.message : 'An error occurred';
       setState({ data: null, loading: false, error: errorMessage });
@@ -50,11 +53,11 @@ export const useAsyncState = <T>(,
   }, []);
 
   const setData = useCallback((data: T) => {
-    setState(prev => ({ ...prev, data }));
+    setState(prev => ({ ...prev as any, data }));
   }, []);
 
   const setError = useCallback((error: Error) => {
-    setState(prev => ({ ...prev, error, loading: false }));
+    setState(prev => ({ ...prev as any, error, loading: false }));
   }, []);
 
   useEffect(() => {
@@ -64,7 +67,7 @@ export const useAsyncState = <T>(,
   }, dependencies);
 
   return {
-    ...state,
+    ...state as any,
     execute,
     reset,
     setData,

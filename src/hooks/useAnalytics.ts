@@ -1,4 +1,7 @@
 import { useEffect, useCallback, useRef, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
@@ -22,8 +25,8 @@ const DEFAULT_OPTIONS: UseAnalyticsOptions = {
   trackScrollDepth: false,
   trackTimeOnPage: false };
 
-export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
-  const opts = { ...DEFAULT_OPTIONS, ...options };
+export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
+  const opts = { ...DEFAULT_OPTIONS as any, ...options };
   const location = useLocation();
   const pageStartTime = useRef<number>(Date.now());
   const maxScrollDepth = useRef<number>(0);
@@ -50,7 +53,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       return;
     }
 
-    const handleBeforeUnload = () => {
+    const handleBeforeUnload: any = () => {
       const timeOnPage = Date.now() - pageStartTime.current;
       analyticsService.track(
         'time_on_page',
@@ -72,7 +75,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       return;
     }
 
-    const handleScroll = () => {
+    const handleScroll: any = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
       const documentHeight =
@@ -114,7 +117,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       return;
     }
 
-    const handleClick = (event: MouseEvent) => {
+    const handleClick: any = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const tagName = target.tagName.toLowerCase();
       const { className } = target;
@@ -153,7 +156,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       analyticsService.track(
         eventName,
         {
-          ...properties,
+          ...properties as any,
           componentName: opts.componentName,
           path: location.pathname },
         category
@@ -165,7 +168,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
   const trackClick = useCallback(
     (element: HTMLElement, properties?: Record<string, any>) => {
       analyticsService.trackClick(element, {
-        ...properties,
+        ...properties as any,
         componentName: opts.componentName,
         path: location.pathname });
     },
@@ -175,7 +178,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
   const trackVideoEvent = useCallback(
     (action: any, videoId: any, properties?: Record<string, any>) => {
       analyticsService.trackVideoEvent(action, videoId, {
-        ...properties,
+        ...properties as any,
         componentName: opts.componentName,
         path: location.pathname });
     },
@@ -189,7 +192,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
   const trackEngagement = useCallback(
     (type: any, properties?: Record<string, any>) => {
       analyticsService.trackEngagement(type, {
-        ...properties,
+        ...properties as any,
         componentName: opts.componentName,
         path: location.pathname });
     },
@@ -213,7 +216,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
           ...properties });
 
         return result;
-      } catch (error) {
+      } catch (error: any) {
         const duration = Date.now() - startTime;
 
         track(`${actionName}_error`, {
@@ -254,7 +257,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
 };
 
 // Hook for video analytics
-export const useVideoAnalytics = (videoId?: string) => {
+export const useVideoAnalytics: any = (videoId?: string) => {
   const { trackVideoEvent } = useAnalytics();
   const watchStartTime = useRef<number | null>(null);
   const lastProgressUpdate = useRef<number>(0);
@@ -379,7 +382,7 @@ export const useVideoAnalytics = (videoId?: string) => {
 };
 
 // Hook for form analytics
-export const useFormAnalytics = (formName: any) => {
+export const useFormAnalytics: any = (formName: any) => {
   const { track } = useAnalytics();
   const formStartTime = useRef<number | null>(null);
   const fieldInteractions = useRef<Record<string, number>>({});
@@ -449,7 +452,7 @@ function throttle<T extends (...args) => any>(,
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+      setTimeout((() => (inThrottle = false)) as any, limit);
     }
   };
 }

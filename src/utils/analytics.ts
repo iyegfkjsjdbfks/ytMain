@@ -9,7 +9,7 @@ export interface AnalyticsEvent {
  * @param eventName - Name of the event to track
  * @param properties - Additional properties to include with the event
  */
-export const trackEvent = (,
+export const trackEvent: any = (,
   eventName: any,
   properties?: AnalyticsEvent
 ): void => {
@@ -29,8 +29,8 @@ export const trackEvent = (,
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', eventName, properties);
     }
-  } catch (error) {
-    console.warn('Failed to track analytics event:', error);
+  } catch (error: any) {
+    (console as any).warn('Failed to track analytics event:', error);
   }
 };
 
@@ -39,7 +39,7 @@ export const trackEvent = (,
  * @param pagePath - Path of the page being viewed
  * @param pageTitle - Title of the page
  */
-export const trackPageView = (pagePath: any, pageTitle?: string): void => {
+export const trackPageView: any = (pagePath: any, pageTitle?: string): void => {
   trackEvent('page_view', {
     page_path: pagePath,
     page_title: pageTitle });
@@ -50,7 +50,7 @@ export const trackPageView = (pagePath: any, pageTitle?: string): void => {
  * @param element - Element that was interacted with
  * @param action - Type of interaction (click, hover, etc.)
  */
-export const trackInteraction = (element: HTMLElement, action: any): void => {
+export const trackInteraction: any = (element: HTMLElement, action: any): void => {
   trackEvent('user_interaction', {
     element,
     action });

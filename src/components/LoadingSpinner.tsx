@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { FC } from 'react';
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;

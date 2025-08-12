@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * LibraryPage component for displaying the user's video library
  */

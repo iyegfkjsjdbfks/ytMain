@@ -1,9 +1,10 @@
 import React from 'react';
+import { FC } from 'react';
 interface SummarizeIconProps {
   className?: string;
 }
 
-export const SummarizeIcon: React.FC<SummarizeIconProps> = ({ className = 'w-6 h-6' }) => {
+export const SummarizeIcon: React.FC<SummarizeIconProps> = ({ className = 'w-6 h-6' }: any) => {
   return (
     <svg
       className={className}
@@ -21,3 +22,4 @@ export const SummarizeIcon: React.FC<SummarizeIconProps> = ({ className = 'w-6 h
     </svg>
   );
 };
+export default SummarizeIcon;

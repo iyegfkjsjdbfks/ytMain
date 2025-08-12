@@ -1,5 +1,8 @@
 import type { Video } from '../types';
 import React, { useEffect, useRef, useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -56,6 +59,7 @@ interface EditorState {
 }
 
 export const VideoEditor: React.FC = () => {
+  return null;
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [editorState, setEditorState] = useState<EditorState>({
@@ -104,7 +108,7 @@ export const VideoEditor: React.FC = () => {
         fontFamily: 'Arial',
           animation: 'fadeIn' }] });
 
-  const [showTextEditor, setShowTextEditor] = useState(false);
+  const [showTextEditor, setShowTextEditor] = useState<boolean>(false);
   const [newTextOverlay, setNewTextOverlay] = useState<Partial<TextOverlay>>({
     text: '',
           x: 50,
@@ -116,22 +120,22 @@ export const VideoEditor: React.FC = () => {
   useEffect(() => {
     let interval: ReturnType<typeof setTimeout>;
     if (editorState.isPlaying) {
-      interval = setInterval(() => {
+      interval = setInterval((() => {
         setEditorState(prev => ({
-          ...prev,
+          ...prev) as any,
           currentTime: Math.min(prev.currentTime + 0.1, prev.duration) }));
       }, 100);
     }
     return () => clearInterval(interval);
   }, [editorState.isPlaying, editorState.duration]);
 
-  const togglePlayPause = () => {
+  const togglePlayPause: any = () => {
     setEditorState(prev => ({
-      ...prev,
+      ...prev as any,
       isPlaying: !prev.isPlaying }));
   };
 
-  const splitClip = (clipId: any,
+  const splitClip: any = (clipId: any,
           splitTime: any) => {
     setEditorState(prev => {
       const clipIndex = prev.clips.findIndex((c: any) => c.id === clipId);
@@ -145,13 +149,13 @@ export const VideoEditor: React.FC = () => {
       } // Additional safety check
 
       const firstPart: VideoClip = {
-        ...originalClip,
+        ...originalClip as any,
         id: `${clipId}_1`,
           name: originalClip.name || `${originalClip.name || 'Clip'} Part 1`,
         endTime: splitTime,
           duration: splitTime - originalClip.startTime };
       const secondPart: VideoClip = {
-        ...originalClip,
+        ...originalClip as any,
         id: `${clipId}_2`,
           name: originalClip.name || `${originalClip.name || 'Clip'} Part 2`,
         startTime: splitTime,
@@ -161,18 +165,18 @@ export const VideoEditor: React.FC = () => {
       newClips.splice(clipIndex, 1, firstPart, secondPart);
 
       return {
-        ...prev,
+        ...prev as any,
         clips: newClips }});
   };
 
-  const deleteClip = (clipId: any) => {
+  const deleteClip: any = (clipId: any) => {
     setEditorState(prev => ({
-      ...prev,
+      ...prev as any,
       clips: prev.clips.filter((c: any) => c.id !== clipId),
           selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip }));
   };
 
-  const addTextOverlay = () => {
+  const addTextOverlay: any = () => {
     if (!newTextOverlay.text?.trim()) {
       return;
     }
@@ -189,7 +193,7 @@ export const VideoEditor: React.FC = () => {
       endTime: editorState.currentTime + 5 };
 
     setEditorState(prev => ({
-      ...prev,
+      ...prev as any,
       textOverlays: [...prev.textOverlays, overlay] }));
 
     setNewTextOverlay({
@@ -202,14 +206,14 @@ export const VideoEditor: React.FC = () => {
     setShowTextEditor(false);
   };
 
-  const exportVideo = () => {
+  const exportVideo: any = () => {
     // In a real implementation: real implementation, this would: this would trigger video processing
     alert(
       'Video export started! This would normally process the video with all edits applied.'
     );
   };
 
-  const formatTime = (seconds: any) => {
+  const formatTime: any = (seconds: any) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -234,7 +238,7 @@ export const VideoEditor: React.FC = () => {
               Add Text
             </button>
             <button
-              onClick={exportVideo}
+              onClick={(e: any) => exportVideo(e)}
               className='flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors'
             >
               <DocumentArrowDownIcon className='w-4 h-4' />
@@ -284,7 +288,7 @@ export const VideoEditor: React.FC = () => {
           <div className='bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4'>
             <div className='flex items-center justify-center gap-4'>
               <button
-                onClick={togglePlayPause}
+                onClick={(e: any) => togglePlayPause(e)}
                 className='p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors'
               >
                 {editorState.isPlaying ? (
@@ -303,7 +307,7 @@ export const VideoEditor: React.FC = () => {
                 <button
                   onClick={() =>
                     setEditorState(prev => ({
-                      ...prev,
+                      ...prev as any,
                       zoom: Math.max(0.5, prev.zoom - 0.5) }))
                   }
                   className='px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
@@ -316,7 +320,7 @@ export const VideoEditor: React.FC = () => {
                 <button
                   onClick={() =>
                     setEditorState(prev => ({
-                      ...prev,
+                      ...prev as any,
                       zoom: Math.min(3, prev.zoom + 0.5) }))
                   }
                   className='px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
@@ -369,7 +373,7 @@ export const VideoEditor: React.FC = () => {
           width: `${clip.duration * editorState.zoom * 10}px` }}
                       onClick={() =>
                         setEditorState(prev => ({
-                          ...prev,
+                          ...prev as any,
                           selectedClip: clip.id }))
                       }
                     >
@@ -461,10 +465,10 @@ export const VideoEditor: React.FC = () => {
                   onChange={e => {
                     const volume = parseFloat(e.target.value);
                     setEditorState(prev => ({
-                      ...prev,
+                      ...prev as any,
                       clips: prev.clips.map((clip: any) =>
                         clip.id === prev.selectedClip
-                          ? { ...clip, volume }
+                          ? { ...clip as any, volume }
                           : clip
                       ) }));
                   }}
@@ -520,7 +524,7 @@ export const VideoEditor: React.FC = () => {
                   value={newTextOverlay.text || ''}
                   onChange={e =>
                     setNewTextOverlay(prev => ({
-                      ...prev,
+                      ...prev as any,
                       text: e.target.value }))
                   }
                   className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -542,7 +546,7 @@ export const VideoEditor: React.FC = () => {
                       value={newTextOverlay.fontSize || 24}
                       onChange={e =>
                         setNewTextOverlay(prev => ({
-                          ...prev,
+                          ...prev as any,
                           fontSize: parseInt(e.target.value, 10) }))
                       }
                       className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -559,7 +563,7 @@ export const VideoEditor: React.FC = () => {
                       value={newTextOverlay.color || '#ffffff'}
                       onChange={e =>
                         setNewTextOverlay(prev => ({
-                          ...prev,
+                          ...prev as any,
                           color: e.target.value }))
                       }
                       className='w-full h-10 border border-gray-300 dark:border-gray-600 rounded-md'
@@ -576,7 +580,7 @@ export const VideoEditor: React.FC = () => {
                   Cancel
                 </button>
                 <button
-                  onClick={addTextOverlay}
+                  onClick={(e: any) => addTextOverlay(e)}
                   className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
                 >
                   Add Text

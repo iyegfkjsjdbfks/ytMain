@@ -1,5 +1,7 @@
 import React from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
 
 interface ErrorMessageProps {
   message: string;
@@ -32,8 +34,8 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
           inline: 'text-red-500',
     card: 'text-red-500' };
 
-  const handleClick = (e: React.MouseEvent) => {
-    if (onRetry) {
+  const handleClick: any = (e: React.MouseEvent) => {
+    if (onRetry as any) {
       e.stopPropagation();
       onRetry();
     }
@@ -42,7 +44,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   return (
     <div
       className={`${variantClasses[variant]} ${className}`}
-      onClick={handleClick}
+      onClick={(e: any) => handleClick(e)}
       role="alert"
     >
       <div className="text-center">

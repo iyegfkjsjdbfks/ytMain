@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import type { LiveStream } from '../types/livestream';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-export function useLiveStream(streamId?: string) {
+export function useLiveStream(streamId?: string): any {
   const [stream, setStream] = useState<LiveStream | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -67,26 +69,26 @@ export function useLiveStream(streamId?: string) {
         donationRevenue: 0,
         superChats: [] } };
 
-    setTimeout(() => {
+    setTimeout((() => {
       setStream(mockStream);
       setLoading(false);
-    }, 1000);
+    }) as any, 1000);
   }, [streamId]);
 
-  const updateStreamStats = (newStats: Partial<LiveStream['stats']>) => {
-    if (stream) {
+  const updateStreamStats: any = (newStats: Partial<LiveStream['stats']>) => {
+    if (stream as any) {
       setStream((prev: any) =>
         prev
           ? {
-              ...prev,
+              ...prev as any,
               stats: { ...prev.stats, ...newStats } }
           : null
       );
     }
   };
 
-  const addSuperChat = (amount: any, message: any, username: any) => {
-    if (stream) {
+  const addSuperChat: any = (amount: any, message: any, username: any) => {
+    if (stream as any) {
       const superChat = {
         id: Date.now().toString(),
         username,
@@ -100,7 +102,7 @@ export function useLiveStream(streamId?: string) {
       setStream((prev: any) =>
         prev
           ? {
-              ...prev,
+              ...prev as any,
               monetization: {
                 ...prev.monetization,
                 superChats: [...prev.monetization.superChats, superChat],
@@ -176,11 +178,11 @@ export function useLiveStream(streamId?: string) {
           donationRevenue: 0,
           superChats: [] } };
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout((resolve) as any, 1000));
       setStream(newStream);
       setLoading(false);
       return newStream;
-    } catch (err) {
+    } catch (err: any) {
       setError(err instanceof Error ? err.message : 'Failed to create stream');
       setLoading(false);
       return null;
@@ -196,11 +198,11 @@ export function useLiveStream(streamId?: string) {
     setError(null);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev: any) => (prev ? { ...prev, status: 'live' } : null));
+      await new Promise(resolve => setTimeout((resolve) as any, 1000));
+      setStream((prev: any) => (prev ? { ...prev as any, status: 'live' } : null));
       setLoading(false);
       return true;
-    } catch (err) {
+    } catch (err: any) {
       setError(err instanceof Error ? err.message : 'Failed to start stream');
       setLoading(false);
       return false;
@@ -216,11 +218,11 @@ export function useLiveStream(streamId?: string) {
     setError(null);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev: any) => (prev ? { ...prev, status: 'ended' } : null));
+      await new Promise(resolve => setTimeout((resolve) as any, 1000));
+      setStream((prev: any) => (prev ? { ...prev as any, status: 'ended' } : null));
       setLoading(false);
       return true;
-    } catch (err) {
+    } catch (err: any) {
       setError(err instanceof Error ? err.message : 'Failed to end stream');
       setLoading(false);
       return false;
@@ -238,8 +240,8 @@ export function useLiveStream(streamId?: string) {
     endStream };
 }
 
-export function useCreateLiveStream() {
-  const [creating, setCreating] = useState(false);
+export function useCreateLiveStream(): any {
+  const [creating, setCreating] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const createStream = async (
@@ -302,10 +304,10 @@ export function useCreateLiveStream() {
           donationRevenue: 0,
           superChats: [] } };
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout((resolve) as any, 1000));
       setCreating(false);
       return newStream;
-    } catch (err) {
+    } catch (err: any) {
       setError(err instanceof Error ? err.message : 'Failed to create stream');
       setCreating(false);
       return null;

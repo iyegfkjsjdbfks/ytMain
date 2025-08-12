@@ -289,14 +289,14 @@ export function debounce<T extends (...args: any[]) => any>(,
 ): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout>;
 
-  return function executedFunction(...args: Parameters<T>) {
-    const later = () => {
+  return function executedFunction(...args: Parameters<T>): any {
+    const later: any = () => {
       clearTimeout(timeout);
       func(...args);
     };
 
     clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+    timeout = setTimeout((later) as any, wait);
   };
 }
 
@@ -312,11 +312,11 @@ export function throttle<T extends (...args: any[]) => any>(,
 ): (...args: Parameters<T>) => void {
   let inThrottle = false;
 
-  return function executedFunction(...args: Parameters<T>) {
+  return function executedFunction(...args: Parameters<T>): any {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+      setTimeout((() => (inThrottle = false)) as any, limit);
     }
   };
 }
@@ -331,7 +331,7 @@ export function throttle<T extends (...args: any[]) => any>(,
  * @returns A promise that resolves to the base64 string
  */
 export function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve: any, reject: any) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
@@ -362,7 +362,7 @@ export function getFileExtension(filename: any): string {
  * Checks if the code is running in a browser environment
  * @returns True if running in a browser
  */
-export const isBrowser = (): boolean => {
+export const isBrowser: any = (): boolean => {
   return typeof window !== 'undefined' && typeof document !== 'undefined';
 };
 
@@ -378,7 +378,7 @@ export async function copyToClipboard(text: any): Promise<void> {
 
   try {
     await navigator.clipboard.writeText(text);
-  } catch (err) {
+  } catch (err: any) {
     // Fallback for older browsers
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -455,7 +455,7 @@ export function getColorContrast(hex: any): 'light' | 'dark' {
 
   // Calculate relative luminance (per ITU-R BT.709)
   const { r, g, b } = rgb;
-  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  const luminance: any = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
 
   // Return light or dark based on luminance threshold
   return luminance > 0.5 ? 'dark' : 'light';
@@ -485,7 +485,7 @@ export function groupBy<T extends Record<string, any> K extends keyof T>(,
   key: K
 ): Record<string, T[]> {
   return array.reduce(
-    (acc, item) => {
+    (acc: any, item: any) => {
       const groupKey = String(item[key]);
       if (!acc[groupKey]) {
         acc[groupKey] = [];
@@ -515,8 +515,8 @@ export function deepMerge<T extends object, U extends object>(,
 
   for (const key in source) {
     if (Object.prototype.hasOwnProperty.call(source, key)) {
-      const targetValue = (target as any)[key];
-      const sourceValue = (source as any)[key];
+      const targetValue: any = (target as any)[key];
+      const sourceValue: any = (source as any)[key];
 
       if (isObject(targetValue) && isObject(sourceValue)) {
         (output as any)[key] = deepMerge(targetValue, sourceValue);
@@ -539,7 +539,7 @@ export function deepMerge<T extends object, U extends object>(,
  * @returns A promise that resolves after the delay
  */
 export function sleep(ms: any): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout((resolve) as any, ms));
 }
 
 /**
@@ -557,7 +557,7 @@ export function timeout<T>(,
   return Promise.race([
     promise,
     new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error(error)), timeoutMs)
+      setTimeout((() => reject(new Error(error))) as any, timeoutMs)
     )]);
 }
 

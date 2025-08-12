@@ -1,5 +1,7 @@
 import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PhotoIcon, VideoCameraIcon, LinkIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -13,7 +15,7 @@ export interface CommunityPost {
   channelName: string;,
   channelAvatar: string;
   channelVerified: boolean;,
-  type: 'text' | 'image' | 'video' | 'poll' | 'link';
+  type: "text" as const | 'image' | 'video' | 'poll' | 'link';
   content: string;
   images?: string;
   videoId?: string;
@@ -63,7 +65,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
   className = '' }) => {
   const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
-  const toggleExpanded = (postId: any) => {
+  const toggleExpanded: any = (postId: any) => {
     setExpandedPosts(prev => {
       const newSet = new Set(prev);
       if (newSet.has(postId)) {
@@ -75,7 +77,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
     });
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber: any = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -84,8 +86,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
     return num.toString();
   };
 
-  const getPostIcon = (type: CommunityPost['type']) => {
-    switch (type) {
+  const getPostIcon: any = (type: CommunityPost['type']) => {
+    switch (type as any) {
       case 'image': return <PhotoIcon className="w-4 h-4" />;
       case 'video': return <VideoCameraIcon className="w-4 h-4" />;
       case 'poll': return <ChatBubbleLeftIcon className="w-4 h-4" />;
@@ -94,7 +96,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
     }
   };
 
-  const renderPostContent = (post: CommunityPost) => {
+  const renderPostContent: any = (post: CommunityPost) => {
     const isExpanded = expandedPosts.has(post.id);
     const shouldTruncate = post.content.length > 200;
     const displayContent = shouldTruncate && !isExpanded
@@ -167,7 +169,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
               {post.poll.question}
             </h4>
             <div className="space-y-2">
-              {post.poll.options.map((option) => {
+              {post.poll.options.map((option: any) => {
                 const percentage = post.poll!.totalVotes > 0
                   ? (option.votes / post.poll!.totalVotes) * 100
                   : 0;

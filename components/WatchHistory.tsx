@@ -1,4 +1,8 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useState, useEffect, FC } from 'react';
 
@@ -13,13 +17,13 @@ interface WatchHistoryProps {
   maxVideos?: number;
 }
 
-const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
+const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }: any) => {
   const [historyVideos, setHistoryVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchWatchHistory = async () => {
+    const fetchWatchHistory = async (): Promise<void> => {
       try {
         setLoading(true);
         const allVideos = await getVideos();
@@ -37,8 +41,8 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
 
         setHistoryVideos(historyFeed);
         setError(null);
-      } catch (err) {
-        console.error('Failed to fetch watch history:', err);
+      } catch (err: any) {
+        (console as any).error('Failed to fetch watch history:', err);
         setError('Could not load watch history at this time.');
       } finally {
         setLoading(false);
@@ -50,7 +54,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
     });
   }, [maxVideos]);
 
-  if (loading) {
+  if (loading as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-4">
@@ -78,7 +82,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
     );
   }
 
-  if (error) {
+  if (error as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-4">
@@ -120,7 +124,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {historyVideos.map(video => (
+        {historyVideos.map((video: any) => (
           <div key={video.id} className="relative">
             <VideoCard video={video} />
             {/* Progress bar overlay to simulate watch progress */}

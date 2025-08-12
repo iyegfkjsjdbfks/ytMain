@@ -1,5 +1,6 @@
 import React from 'react';
 import { DataWrapper } from './DataWrapper';
+import { ReactNode } from 'react';
 
 interface PageLayoutProps<T> {
   title: string;
@@ -29,7 +30,7 @@ export function PageLayout<T>({
   emptyState,
   className = '',
   skeletonCount = 18 }: PageLayoutProps<T>) {
-  const renderSkeleton = () => (
+  const renderSkeleton: any = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
       {Array.from({ length: skeletonCount }).map((_, index) => (
         <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">

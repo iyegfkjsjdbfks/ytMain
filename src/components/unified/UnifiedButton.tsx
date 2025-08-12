@@ -1,6 +1,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import LoadingSpinner from '@components/LoadingSpinner';
+import { ReactNode } from 'react';
 
 /**
  * Unified Button Component
@@ -123,7 +124,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
       className
     );
 
-    const content = (
+    const content: any = (
       <>
         {loading && (
           <LoadingSpinner
@@ -147,7 +148,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
       </>
     );
 
-    if (asChild) {
+    if (asChild as any) {
       return <span className={buttonClasses}>{content}</span>;
     }
 

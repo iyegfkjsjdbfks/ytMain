@@ -24,7 +24,7 @@ export { useVideosData } from './useVideosData';
 export { useShortsVideos } from './useShortsData';
 
 // Helper function for missing hooks
-export const useHomeVideos = () => {
+export const useHomeVideos: any = () => {
   // Placeholder implementation
   return [];
 };

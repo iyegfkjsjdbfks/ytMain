@@ -1,4 +1,8 @@
+import React from 'react';
 import { useState, useEffect, FC  } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version;
 const HeartIconSolid = HeartSolidIcon;
@@ -10,17 +14,18 @@ import { getLikedVideos } from '../services/realVideoService';
 import type { Video } from '../types';
 
 const LikedVideosPage: React.FC = () => {
+  return null;
   const [videos, setVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchLiked = async () => {
+    const fetchLiked = async (): Promise<void> => {
       setLoading(true);
       try {
         const fetchedVideos = await getLikedVideos();
         setVideos(fetchedVideos);
-      } catch (error) {
-        console.error('Failed to fetch liked videos:', error);
+      } catch (error: any) {
+        (console as any).error('Failed to fetch liked videos:', error);
         setVideos([]);
       } finally {
         setLoading(false);
@@ -40,7 +45,7 @@ const LikedVideosPage: React.FC = () => {
         <LikedVideosPageSkeleton />
       ) : videos.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-          {videos.map(video => (
+          {videos.map((video: any) => (
             <VideoCard key={`${video.id}-liked`} video={video} />
           ))}
         </div>

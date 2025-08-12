@@ -1,5 +1,8 @@
 import type { Video } from '../types';
 import React, { useEffect, useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 interface VideoPlayerState {
   isPlaying: boolean;
   isMuted: boolean;
@@ -80,7 +83,7 @@ interface UseVideoPlayerReturn {
  *
  * Reduces code duplication across video player components
  */
-export const useVideoPlayer = (,
+export const useVideoPlayer: any = (,
   options: VideoPlayerOptions = {}
 ): UseVideoPlayerReturn => {
   const {
@@ -108,7 +111,7 @@ export const useVideoPlayer = (,
     buffered: 0 });
 
   // Play function
-  const play = useCallback(async () => {
+  const play = useCallback(async (): Promise<void> => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -116,31 +119,31 @@ export const useVideoPlayer = (,
 
     try {
       await video.play();
-      setState(prev => ({ ...prev, isPlaying: true, error: null }));
-    } catch (error) {
+      setState(prev => ({ ...prev as any, isPlaying: true, error: null }));
+    } catch (error: any) {
       // Handle AbortError gracefully - this is common when play() is interrupted by pause()
       if (error instanceof DOMException && error.name === 'AbortError') {
         // This is expected behavior, don't log as error
-        console.debug('Play request was interrupted:', error.message);
-        setState(prev => ({ ...prev, isPlaying: false }));
+        (console as any).debug('Play request was interrupted:', error.message);
+        setState(prev => ({ ...prev as any, isPlaying: false }));
       } else {
         // More specific error handling for network and cache issues
         const errorMessage =
           error instanceof Error ? error.message : String(error);
-        console.warn('Video playback issue:', errorMessage);
+        (console as any).warn('Video playback issue:', errorMessage);
 
         // Don't treat network/cache errors as critical errors
         if (
           errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
           errorMessage.includes('ERR_NETWORK')
         ) {
-          console.info(
+          (console as any).info(
             'Video may be temporarily unavailable due to network/cache issues'
           );
-          setState(prev => ({ ...prev, isPlaying: false }));
+          setState(prev => ({ ...prev as any, isPlaying: false }));
         } else {
           setState(prev => ({
-            ...prev,
+            ...prev as any,
             error: 'Failed to play video',
             isPlaying: false }));
         }
@@ -155,10 +158,10 @@ export const useVideoPlayer = (,
     }
 
     video.pause();
-    setState(prev => ({ ...prev, isPlaying: false }));
+    setState(prev => ({ ...prev as any, isPlaying: false }));
   }, []);
 
-  const togglePlayPause = useCallback(async () => {
+  const togglePlayPause = useCallback(async (): Promise<void> => {
     if (state.isPlaying) {
       pause();
     } else {
@@ -173,7 +176,7 @@ export const useVideoPlayer = (,
     }
 
     video.muted = true;
-    setState(prev => ({ ...prev, isMuted: true }));
+    setState(prev => ({ ...prev as any, isMuted: true }));
   }, []);
 
   const unmute = useCallback(() => {
@@ -183,7 +186,7 @@ export const useVideoPlayer = (,
     }
 
     video.muted = false;
-    setState(prev => ({ ...prev, isMuted: false }));
+    setState(prev => ({ ...prev as any, isMuted: false }));
   }, []);
 
   const toggleMute = useCallback(() => {
@@ -202,7 +205,7 @@ export const useVideoPlayer = (,
 
     const clampedVolume = Math.max(0, Math.min(1, volume));
     video.volume = clampedVolume;
-    setState(prev => ({ ...prev, volume: clampedVolume }));
+    setState(prev => ({ ...prev as any, volume: clampedVolume }));
   }, []);
 
   const seek = useCallback((time: any) => {
@@ -212,7 +215,7 @@ export const useVideoPlayer = (,
     }
 
     video.currentTime = time;
-    setState(prev => ({ ...prev, currentTime: time }));
+    setState(prev => ({ ...prev as any, currentTime: time }));
   }, []);
 
   const setPlaybackRate = useCallback((rate: any) => {
@@ -222,14 +225,14 @@ export const useVideoPlayer = (,
     }
 
     video.playbackRate = rate;
-    setState(prev => ({ ...prev, playbackRate: rate }));
+    setState(prev => ({ ...prev as any, playbackRate: rate }));
   }, []);
 
   const setQuality = useCallback((quality: any) => {
-    setState(prev => ({ ...prev, quality }));
+    setState(prev => ({ ...prev as any, quality }));
   }, []);
 
-  const enterFullscreen = useCallback(async () => {
+  const enterFullscreen = useCallback(async (): Promise<void> => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -239,24 +242,24 @@ export const useVideoPlayer = (,
       if (video.requestFullscreen) {
         await video.requestFullscreen();
       }
-      setState(prev => ({ ...prev, isFullscreen: true }));
-    } catch (error) {
-      console.error('Error entering fullscreen:', error);
+      setState(prev => ({ ...prev as any, isFullscreen: true }));
+    } catch (error: any) {
+      (console as any).error('Error entering fullscreen:', error);
     }
   }, []);
 
-  const exitFullscreen = useCallback(async () => {
+  const exitFullscreen = useCallback(async (): Promise<void> => {
     try {
       if (document.exitFullscreen) {
         await document.exitFullscreen();
       }
-      setState(prev => ({ ...prev, isFullscreen: false }));
-    } catch (error) {
-      console.error('Error exiting fullscreen:', error);
+      setState(prev => ({ ...prev as any, isFullscreen: false }));
+    } catch (error: any) {
+      (console as any).error('Error exiting fullscreen:', error);
     }
   }, []);
 
-  const toggleFullscreen = useCallback(async () => {
+  const toggleFullscreen = useCallback(async (): Promise<void> => {
     if (state.isFullscreen) {
       await exitFullscreen();
     } else {
@@ -273,7 +276,7 @@ export const useVideoPlayer = (,
     video.currentTime = 0;
     video.pause();
     setState(prev => ({
-      ...prev,
+      ...prev as any,
       isPlaying: false,
       currentTime: 0,
       error: null }));
@@ -282,7 +285,7 @@ export const useVideoPlayer = (,
   // Event handlers
   const events = {
     onLoadStart: useCallback(() => {
-      setState(prev => ({ ...prev, isLoading: true, error: null }));
+      setState(prev => ({ ...prev as any, isLoading: true, error: null }));
     }, []),
 
     onLoadedMetadata: useCallback(() => {
@@ -292,21 +295,21 @@ export const useVideoPlayer = (,
       }
 
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         duration: video.duration,
         isLoading: false }));
     }, []),
 
     onCanPlay: useCallback(() => {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState(prev => ({ ...prev as any, isLoading: false }));
     }, []),
 
     onPlay: useCallback(() => {
-      setState(prev => ({ ...prev, isPlaying: true }));
+      setState(prev => ({ ...prev as any, isPlaying: true }));
     }, []),
 
     onPause: useCallback(() => {
-      setState(prev => ({ ...prev, isPlaying: false }));
+      setState(prev => ({ ...prev as any, isPlaying: false }));
     }, []),
 
     onTimeUpdate: useCallback(() => {
@@ -315,7 +318,7 @@ export const useVideoPlayer = (,
         return;
       }
 
-      setState(prev => ({ ...prev, currentTime: video.currentTime }));
+      setState(prev => ({ ...prev as any, currentTime: video.currentTime }));
     }, []),
 
     onDurationChange: useCallback(() => {
@@ -324,7 +327,7 @@ export const useVideoPlayer = (,
         return;
       }
 
-      setState(prev => ({ ...prev, duration: video.duration }));
+      setState(prev => ({ ...prev as any, duration: video.duration }));
     }, []),
 
     onVolumeChange: useCallback(() => {
@@ -334,22 +337,22 @@ export const useVideoPlayer = (,
       }
 
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         volume: video.volume,
         isMuted: video.muted }));
     }, []),
 
     onError: useCallback((error: Error) => {
-      console.error('Video error:', error);
+      (console as any).error('Video error:', error);
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         error: 'Failed to load video',
         isLoading: false,
         isPlaying: false }));
     }, []),
 
     onEnded: useCallback(() => {
-      setState(prev => ({ ...prev, isPlaying: false, currentTime: 0 }));
+      setState(prev => ({ ...prev as any, isPlaying: false, currentTime: 0 }));
     }, []),
 
     onProgress: useCallback(() => {
@@ -359,15 +362,15 @@ export const useVideoPlayer = (,
       }
 
       const buffered = video.buffered.end(video.buffered.length - 1);
-      setState(prev => ({ ...prev, buffered }));
+      setState(prev => ({ ...prev as any, buffered }));
     }, []),
 
     onWaiting: useCallback(() => {
-      setState(prev => ({ ...prev, isLoading: true }));
+      setState(prev => ({ ...prev as any, isLoading: true }));
     }, []),
 
     onCanPlayThrough: useCallback(() => {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState(prev => ({ ...prev as any, isLoading: false }));
     }, []) };
 
   // Set up video element and event listeners
@@ -429,9 +432,9 @@ export const useVideoPlayer = (,
 
   // Handle fullscreen changes
   useEffect(() => {
-    const handleFullscreenChange = () => {
+    const handleFullscreenChange: any = () => {
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         isFullscreen: !!document.fullscreenElement }));
     };
 

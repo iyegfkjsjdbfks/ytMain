@@ -1,4 +1,6 @@
 import React, { useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 // Import statements fixed
 
 interface StreamQuality {
@@ -23,8 +25,8 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
           enableChat: true,
     enableDonations: false });
 
-  const updateSettings = (newSettings: Partial<typeof settings>) => {
-    const updated = { ...settings, ...newSettings };
+  const updateSettings: any = (newSettings: Partial<typeof settings>) => {
+    const updated = { ...settings as any, ...newSettings };
     setSettings(updated);
     onSettingsChange?.(updated);
   };

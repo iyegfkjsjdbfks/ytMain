@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // Import statements fixed
 
 interface LiveStreamViewerProps {
@@ -11,30 +14,30 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
   streamId,
   autoplay = false,
   onViewerCountChange }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [viewerCount, setViewerCount] = useState(0);
+  const [viewerCount, setViewerCount] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     // Initialize live stream
-    const initStream = async () => {
+    const initStream = async (): Promise<void> => {
       try {
         setIsLoading(true);
         setError(null);
 
         // Simulate loading
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout((resolve) as any, 1000));
 
         setViewerCount(Math.floor(Math.random() * 1000));
         setIsLoading(false);
-      } catch (err) {
+      } catch (err: any) {
         setError((err as Error).message);
         setIsLoading(false);
       }
     };
 
-    if (streamId) {
+    if (streamId as any) {
       initStream();
     }
   }, [streamId]);
@@ -43,7 +46,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
     onViewerCountChange?.(viewerCount);
   }, [viewerCount, onViewerCountChange]);
 
-  if (isLoading) {
+  if (isLoading as any) {
     return (
       <div className='flex items-center justify-center h-64'>
         Loading live stream...
@@ -51,7 +54,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
     );
   }
 
-  if (error) {
+  if (error as any) {
     return (
       <div className='flex items-center justify-center h-64 text-red-500'>,
   Error: {error}

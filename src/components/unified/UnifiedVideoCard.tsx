@@ -1,5 +1,7 @@
 import React, { useState, memo, lazy, MouseEvent } from 'react';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { MouseEvent } from 'react';
+import { useState } from 'react';
 const HeartIconSolid = HeartSolidIcon;
 import { Link } from 'react-router-dom';
 import { formatRelativeTime, cn } from '../../lib/utils';
@@ -120,8 +122,8 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
     onChannelClick,
     className,
     keyPrefix = 'video' }) => {
-    const [imageLoaded, setImageLoaded] = useState(false);
-    const [imageError, setImageError] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+    const [imageError, setImageError] = useState<boolean>(false);
 
     const styles = variantStyles[variant];
     const sizeStyle = sizeStyles[size];
@@ -129,31 +131,31 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
     const videoUrl = `/watch?v=${video.id}`;
     const channelUrl = `/channel/${encodeURIComponent(video.channelName)}`;
 
-    const handleLike = (e: React.MouseEvent) => {
+    const handleLike: any = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       onLike?.(video.id);
     };
 
-    const handleSave = (e: React.MouseEvent) => {
+    const handleSave: any = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       onSave?.(video);
     };
 
-    const handleShare = (e: React.MouseEvent) => {
+    const handleShare: any = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       onShare?.(video);
     };
 
-    const handleChannelClick = (e: React.MouseEvent) => {
+    const handleChannelClick: any = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       onChannelClick?.(video.channelName);
     };
 
-    const ThumbnailContent = () => (
+    const ThumbnailContent: any = () => (
       <div
         className={cn(
           'relative group overflow-hidden',
@@ -211,7 +213,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
               <UnifiedButton
                 variant='ghost'
                 size='xs'
-                onClick={handleLike}
+                onClick={(e: any) => handleLike(e)}
                 className='bg-black/50 text-white hover:bg-black/70'
               >
                 {isLiked ? (
@@ -224,7 +226,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
               <UnifiedButton
                 variant='ghost'
                 size='xs'
-                onClick={handleSave}
+                onClick={(e: any) => handleSave(e)}
                 className='bg-black/50 text-white hover:bg-black/70'
               >
                 <BookmarkIcon
@@ -235,7 +237,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
               <UnifiedButton
                 variant='ghost'
                 size='xs'
-                onClick={handleShare}
+                onClick={(e: any) => handleShare(e)}
                 className='bg-black/50 text-white hover:bg-black/70'
               >
                 <ShareIcon className='w-4 h-4' />
@@ -246,7 +248,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
       </div>
     );
 
-    const ContentSection = () => (
+    const ContentSection: any = () => (
       <div className={styles.content}>
         {/* Channel Avatar (for default and list variants) */}
         {showChannel &&
@@ -254,7 +256,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
           (variant === 'default' || variant === 'list') && (
             <Link
               to={channelUrl}
-              onClick={handleChannelClick}
+              onClick={(e: any) => handleChannelClick(e)}
               className='flex-shrink-0'
             >
               <img
@@ -284,7 +286,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
           {showChannel && (
             <Link
               to={channelUrl}
-              onClick={handleChannelClick}
+              onClick={(e: any) => handleChannelClick(e)}
               className={cn(
                 styles.meta,
                 'hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors'

@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useMemo, useCallback, memo, lazy } from 'react';
 import { FixedSizeList } from 'react-window';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { performanceMonitor } from '../../utils/performanceOptimizations';
 
@@ -26,12 +30,12 @@ interface SearchResultItemProps {
   }}
 
 const SearchResultItem = memo<SearchResultItemProps>(
-  ({ index, style, data }) => {
+  ({ index, style, data }: any) => {
     const { videos, onVideoClick, query } = data;
     const video = videos[index];
 
     const handleClick = useCallback(() => {
-      if (video) {
+      if (video as any) {
         performanceMonitor.startMeasure('video-click');
         onVideoClick(video);
         performanceMonitor.endMeasure('video-click');
@@ -59,7 +63,7 @@ const SearchResultItem = memo<SearchResultItemProps>(
       >
         <div
           className='flex space-x-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-2 transition-colors'
-          onClick={handleClick}
+          onClick={(e: any) => handleClick(e)}
         >
           {/* Video Thumbnail */}
           <div className='flex-shrink-0'>
@@ -134,10 +138,10 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
 
     // Measure container height
     const containerRef = useCallback((node: HTMLDivElement | null) => {
-      if (node) {
+      if (node as any) {
         const resizeObserver = new ResizeObserver(entries => {
           const entry = entries[0];
-          if (entry) {
+          if (entry as any) {
             setContainerHeight(Math.min(entry.contentRect.height, 800));
           }
         

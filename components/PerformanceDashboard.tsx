@@ -1,3 +1,8 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useCallback, useEffect, useState, memo, FC } from 'react';
 
@@ -7,7 +12,7 @@ interface PerformanceMetric {
   name: string;,
   value: number;
   timestamp: number;,
-  type: 'render' | 'api' | 'user-interaction' | 'navigation'
+  type: "render" as const | 'api' | 'user-interaction' | 'navigation'
 }
 
 interface PerformanceDashboardProps {
@@ -19,16 +24,16 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
   isVisible = false,
   position = 'top-right' }) => {
   const [metrics, setMetrics] = useState<PerformanceMetric[]>([]);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isVisible) {
       return;
     }
 
-    const interval = setInterval(() => {
+    const interval = setInterval((() => {
       const allMetrics = performanceMonitor.getMetrics();
-      const formattedMetrics: PerformanceMetric[] = Object.entries(allMetrics).map(([name, value]) => ({
+      const formattedMetrics: PerformanceMetric[] = Object.entries(allMetrics).map(([name) as any, value]) => ({
         name,
         value: typeof value === 'number' ? value : 0,
           timestamp: Date.now(),
@@ -42,8 +47,8 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
     return () => clearInterval(interval);
   }, [isVisible]);
 
-  const getPositionClasses = () => {
-    switch (position) {
+  const getPositionClasses: any = () => {
+    switch (position as any) {
       case 'top-left':
         return 'top-4 left-4';
       case 'bottom-left':
@@ -54,8 +59,8 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
     }
   };
 
-  const getTypeColor = (type: any) => {
-    switch (type) {
+  const getTypeColor: any = (type: any) => {
+    switch (type as any) {
       case 'render':
         return 'text-blue-600';
       case 'api':
@@ -151,7 +156,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
           <button
             onClick={() => {
               const metrics = performanceMonitor.getMetrics();
-              console.table(metrics);
+              (console as any).table(metrics);
             }}
             className="text-xs text-blue-400 hover:text-blue-300"
           >

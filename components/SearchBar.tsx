@@ -1,4 +1,12 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent } from 'react';
 
@@ -12,16 +20,16 @@ import SearchIcon from './icons/SearchIcon';
 import SearchSuggestions from './SearchSuggestions';
 
 const SearchBar: React.FC = memo(() => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState<string>('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [showRecentSearches, setShowRecentSearches] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+  const [showRecentSearches, setShowRecentSearches] = useState<boolean>(false);
   const navigate = useNavigate();
   const searchBarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const loadRecentSearches = useCallback(async () => {
+  const loadRecentSearches = useCallback(async (): Promise<void> => {
     const fetchedRecent = await getRecentSearches();
     setRecentSearches(fetchedRecent);
     if (fetchedRecent.length > 0) {
@@ -32,7 +40,7 @@ const SearchBar: React.FC = memo(() => {
     }
   }, []);
 
-  const fetchSuggestionsDebounced = useCallback(async (currentQuery: any) => {
+  const fetchSuggestionsDebounced = useCallback(async (currentQuery: any): Promise<any> => {
     if (currentQuery.trim().length > 1) {
       const fetched = await getSearchSuggestions(currentQuery);
       setSuggestions(fetched);
@@ -50,14 +58,14 @@ const SearchBar: React.FC = memo(() => {
   }, [loadRecentSearches]);
 
   useEffect(() => {
-    const debounceTimer = setTimeout(() => {
+    const debounceTimer = setTimeout((() => {
       fetchSuggestionsDebounced(query).catch(console.error);
-    }, 300);
+    }) as any, 300);
 
     return () => clearTimeout(debounceTimer);
   }, [query, fetchSuggestionsDebounced]);
 
-  const handleSearch = (searchQuery: any) => {
+  const handleSearch: any = (searchQuery: any) => {
     if (searchQuery.trim()) {
       const trimmedQuery = searchQuery.trim();
       setQuery(trimmedQuery);
@@ -73,16 +81,16 @@ inputRef.current.blur();
   
         };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit: any = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSearch(query);
   };
 
-  const handleSuggestionClick = (suggestion: React.MouseEvent | React.ChangeEvent | React.FormEvent) => {
+  const handleSuggestionClick: any = (suggestion: React.MouseEvent | React.ChangeEvent | React.FormEvent) => {
     handleSearch(suggestion);
   };
 
-  const handleInputFocus = () => {
+  const handleInputFocus: any = () => {
     if (query.trim() === '') {
       loadRecentSearches().catch(console.error);
     } else if (suggestions.length > 0) {
@@ -91,7 +99,7 @@ inputRef.current.blur();
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange: any = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
     if (newQuery.trim() === '') {
@@ -104,7 +112,7 @@ inputRef.current.blur();
         };
 
   const handleRemoveRecentSearch = async (searchToRemove: any,
-          e: React.MouseEvent) => {
+          e: React.MouseEvent): Promise<any> => {
     e.stopPropagation(); // Prevent click on list item
     const updatedSearches = await removeRecentSearch(searchToRemove);
     setRecentSearches(updatedSearches);
@@ -114,7 +122,7 @@ inputRef.current.blur();
   
         };
 
-  const handleClearAllRecent = async (e: React.MouseEvent) => {
+  const handleClearAllRecent = async (e: React.MouseEvent): Promise<any> => {
     e.stopPropagation();
     await clearAllRecentSearches();
     setRecentSearches([]);
@@ -122,7 +130,7 @@ inputRef.current.blur();
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
         setShowRecentSearches(false);
@@ -133,7 +141,7 @@ inputRef.current.blur();
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
     }}, []);
 
-  const isDropdownOpen = (showSuggestions && suggestions.length > 0) || (showRecentSearches && recentSearches.length > 0);
+  const isDropdownOpen: any = (showSuggestions && suggestions.length > 0) || (showRecentSearches && recentSearches.length > 0);
 
   const inputBorderRadiusClass = isDropdownOpen
     ? 'rounded-t-xl rounded-b-none border-b-transparent dark:border-b-transparent'
@@ -145,12 +153,12 @@ inputRef.current.blur();
 
   return (
     <div ref={searchBarRef} className="flex-grow max-w-xl mx-1 sm:mx-2 md:mx-4 relative">
-      <form onSubmit={handleSubmit} className="flex items-center w-full" role="search">
+      <form onSubmit={(e: any) => handleSubmit(e)} className="flex items-center w-full" role="search">
         <input
           ref={inputRef}
           type="search"
           value={query}
-          onChange={handleInputChange}
+          onChange={(e: any) => handleInputChange(e)}
           onFocus={handleInputFocus}
           placeholder="Search"
           className={`w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white border border-neutral-300,
@@ -164,10 +172,10 @@ inputRef.current.blur();
           aria-autocomplete="list"
           aria-controls={
             (() => {
-               if (showSuggestions) {
+               if (showSuggestions as any) {
                  return 'search-suggestions-listbox';
                }
-               if (showRecentSearches) {
+               if (showRecentSearches as any) {
                  return 'recent-searches-listbox';
                }
                return undefined;
@@ -190,7 +198,7 @@ inputRef.current.blur();
           <div id="search-suggestions-listbox">
             <SearchSuggestions
               suggestions={suggestions}
-              onSuggestionClick={handleSuggestionClick}
+              onSuggestionClick={(e: any) => handleSuggestionClick(e)}
               isVisible={showSuggestions}
             />
           </div>
@@ -211,7 +219,7 @@ inputRef.current.blur();
                 <span>{searchTerm}</span>
               </button>
               <button
-                onClick={(e) => {
+                onClick={(e: any) => {
                   handleRemoveRecentSearch(searchTerm, e).catch(console.error);
                 }}
                 className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -224,7 +232,7 @@ inputRef.current.blur();
           ))}
            <li className="border-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
                 <button
-                    onClick={(e) => {
+                    onClick={(e: any) => {
                       handleClearAllRecent(e).catch(console.error);
                     }}
                     className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"

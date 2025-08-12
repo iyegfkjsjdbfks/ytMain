@@ -183,7 +183,7 @@ class YouTubeSearchService {
     // If we still don't have views, try to extract from meta tags
     if (views === '0' && metaTags) {
       const metaViewCount = metaTags.viewCount || metaTags['video:view_count'];
-      if (metaViewCount) {
+      if (metaViewCount as any) {
         viewCount = parseInt(metaViewCount, 10);
         views = viewCount.toString();
       }
@@ -207,7 +207,7 @@ class YouTubeSearchService {
     } else {
       // Try to extract duration from snippet
       const durationMatch = item.snippet.match(/(\d+):(\d+)/);
-      if (durationMatch) {
+      if (durationMatch as any) {
         duration = `${durationMatch[1]}:${durationMatch[2]}`;
       }
     }
@@ -373,7 +373,7 @@ class YouTubeSearchService {
       const titleWords = currentVideo.title
         .toLowerCase()
         .split(/\s+/)
-        .filter(word =>
+        .filter((word: any) =>
           word.length > 3 &&
           !['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'had', 'her', 'was', 'one', 'our', 'out', 'day', 'get', 'has', 'him', 'his', 'how', 'its', 'may', 'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did', 'man', 'end', 'few', 'got', 'let', 'put', 'say', 'she', 'too', 'use'].includes(word),
         )
@@ -392,7 +392,7 @@ class YouTubeSearchService {
     // Use tags
     if (currentVideo.tags && currentVideo.tags.length > 0) {
       const tag = currentVideo.tags[Math.floor(Math.random() * currentVideo.tags.length)];
-      if (tag) {
+      if (tag as any) {
         queries.push(tag.toLowerCase());
       }
     }
@@ -451,7 +451,7 @@ class YouTubeSearchService {
 
       conditionalLogger.debug('Searching YouTube with Custom Search API', { url: searchUrl.toString() }, 'YouTubeSearchService');
 
-      const response = await fetch(searchUrl.toString());
+      const response = await (fetch as any)(searchUrl.toString());
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -515,7 +515,7 @@ class YouTubeSearchService {
 
       return videos;
 
-    } catch (error) {
+    } catch (error: any) {
       const networkError = createNetworkError(
         `Failed to search for related videos: ${error instanceof Error ? error.message : 'Unknown error'}`,
         this.baseUrl,
@@ -546,7 +546,7 @@ class YouTubeSearchService {
       // Remove invalid parameter
       // searchUrl.searchParams.set('safe', 'moderate'); // Invalid parameter
 
-      const response = await fetch(searchUrl.toString());
+      const response = await (fetch as any)(searchUrl.toString());
 
       if (!response.ok) {
         throw new Error(`Search failed: ${response.status}`);
@@ -566,7 +566,7 @@ class YouTubeSearchService {
         .filter((item: any) => item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/'))
         .map((item: any, index: number) => this.convertToVideo(item, index));
 
-    } catch (error) {
+    } catch (error: any) {
       const networkError = createNetworkError(
         `Failed to search videos: ${error instanceof Error ? error.message : 'Unknown error'}`,
         this.baseUrl,

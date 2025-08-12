@@ -1,9 +1,12 @@
+import React from 'react';
 import { Suspense, type ReactNode, FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import FastLoadingSpinner from './FastLoadingSpinner';
 
 interface SuspenseWrapperProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   fallback?: ReactNode;
 }
 

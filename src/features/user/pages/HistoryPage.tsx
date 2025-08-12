@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * HistoryPage component for displaying user's watch history
  */

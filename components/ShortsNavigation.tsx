@@ -1,5 +1,7 @@
 import React from 'react';
 import { ChevronUpIcon, ChevronDownIcon  } from '@heroicons/react/24/outline';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
 
 interface ShortsNavigationProps {
   onPrevious: () => void;,
@@ -15,18 +17,18 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
   canGoPrevious,
   canGoNext,
   className = '' }) => {
-  const handlePrevious = (e: React.MouseEvent) => {
+  const handlePrevious: any = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (canGoPrevious) {
+    if (canGoPrevious as any) {
       onPrevious();
     }
   };
 
-  const handleNext = (e: React.MouseEvent) => {
+  const handleNext: any = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (canGoNext) {
+    if (canGoNext as any) {
       onNext();
     }
   };
@@ -35,7 +37,7 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
     <div className={`flex flex-col space-y-3 ${className}`}>
       {/* Previous button */}
       <button
-        onClick={handlePrevious}
+        onClick={(e: any) => handlePrevious(e)}
         disabled={!canGoPrevious}
         className={`p-4 rounded-full backdrop-blur-sm transition-all duration-200 border border-white/20 ${
           canGoPrevious
@@ -50,7 +52,7 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
 
       {/* Next button */}
       <button
-        onClick={handleNext}
+        onClick={(e: any) => handleNext(e)}
         disabled={!canGoNext}
         className={`p-4 rounded-full backdrop-blur-sm transition-all duration-200 border border-white/20 ${
           canGoNext

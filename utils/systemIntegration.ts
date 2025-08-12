@@ -19,7 +19,7 @@ import { securityMonitoring } from './securityMonitoring';
 // System integration types
 interface SystemEvent {
   id: string;
-  type: 'performance' | 'security' | 'deployment' | 'quality' | 'feature' | 'workflow';
+  type: "performance" as const | 'security' | 'deployment' | 'quality' | 'feature' | 'workflow';
   source: string;
   severity: 'low' | 'medium' | 'high' | 'critical';
   title: string;
@@ -140,7 +140,7 @@ return;
 }
 
     try {
-      console.log('🚀 Initializing System Integration Hub...');
+      (console as any).log('🚀 Initializing System Integration Hub...');
 
       // Setup event listeners for all systems
       this.setupEventListeners();
@@ -158,19 +158,19 @@ return;
       await this.collectMetrics();
 
       this.isInitialized = true;
-      console.log('✅ System Integration Hub initialized successfully');
+      (console as any).log('✅ System Integration Hub initialized successfully');
 
       // Emit initialization event
       this.emitEvent({
-        type: 'workflow',
+        type: "workflow" as const,
         source: 'SystemIntegrationHub',
         severity: 'low',
         title: 'System Integration Hub Initialized',
         description: 'All systems are now integrated and monitoring is active',
         data: { timestamp: Date.now() } });
 
-    } catch (error) {
-      console.error('❌ Failed to initialize System Integration Hub:', error);
+    } catch (error: any) {
+      (console as any).error('❌ Failed to initialize System Integration Hub:', error);
       throw error;
     }
   }
@@ -178,27 +178,27 @@ return;
   // Setup event listeners for all monitoring systems
   private setupEventListeners(): void {
     // Performance monitoring events
-    this.addEventListener('performance-alert', (data) => {
+    this.addEventListener('performance-alert', (data: any) => {
       this.handlePerformanceAlert(data);
     });
 
     // Security monitoring events
-    this.addEventListener('security-threat', (data) => {
+    this.addEventListener('security-threat', (data: any) => {
       this.handleSecurityThreat(data);
     });
 
     // Deployment events
-    this.addEventListener('deployment-failed', (data) => {
+    this.addEventListener('deployment-failed', (data: any) => {
       this.handleDeploymentFailure(data);
     });
 
     // Code quality events
-    this.addEventListener('quality-degraded', (data) => {
+    this.addEventListener('quality-degraded', (data: any) => {
       this.handleQualityDegradation(data);
     });
 
     // Feature flag events
-    this.addEventListener('feature-rollback', (data) => {
+    this.addEventListener('feature-rollback', (data: any) => {
       this.handleFeatureRollback(data);
     });
   }
@@ -206,31 +206,31 @@ return;
   // Setup cross-system integrations
   private setupCrossSystemIntegrations(): void {
     // When security threat is detected, pause deployments
-    this.addEventListener('security-threat', async (data) => {
+    this.addEventListener('security-threat', async (data: any): Promise<any> => {
       if (data.severity === 'critical') {
-        console.log('🛑 Critical security threat detected, pausing deployments');
+        (console as any).log('🛑 Critical security threat detected, pausing deployments');
         // deploymentAutomation.pauseAllDeployments();
       }
     });
 
     // When deployment fails, trigger code analysis
-    this.addEventListener('deployment-failed', async (_data) => {
-      console.log('🔍 Deployment failed, triggering code analysis');
+    this.addEventListener('deployment-failed', async (_data: any): Promise<any> => {
+      (console as any).log('🔍 Deployment failed, triggering code analysis');
       // codeAnalysisEngine.analyzeFailure(data);
     });
 
     // When performance degrades, check feature flags
-    this.addEventListener('performance-alert', async (data) => {
+    this.addEventListener('performance-alert', async (data: any): Promise<any> => {
       if (data.metric === 'response-time' && data.value > 2000) {
-        console.log('⚡ High response time detected, checking feature flags');
+        (console as any).log('⚡ High response time detected, checking feature flags');
         // featureFlagManager.checkPerformanceImpact();
       }
     });
 
     // When code quality drops, suggest feature flag rollback
-    this.addEventListener('quality-degraded', async (data) => {
+    this.addEventListener('quality-degraded', async (data: any): Promise<any> => {
       if (data.score < this.config.alertThresholds.quality) {
-        console.log('📉 Code quality degraded, reviewing recent feature releases');
+        (console as any).log('📉 Code quality degraded, reviewing recent feature releases');
         // featureFlagManager.reviewRecentReleases();
       }
     });
@@ -238,10 +238,10 @@ return;
 
   // Start health monitoring
   private startHealthMonitoring(): void {
-    this.healthCheckInterval = setInterval(async () => {
+    this.healthCheckInterval = setInterval((async (): Promise<void> => {
       await this.performHealthCheck();
       await this.collectMetrics();
-    }, this.config.healthCheckInterval);
+    }) as any, this.config.healthCheckInterval);
   }
 
   // Perform comprehensive health check
@@ -272,7 +272,7 @@ return;
 
       // Emit health status event
       this.emitEvent({
-        type: 'workflow',
+        type: "workflow" as const,
         source: 'HealthMonitor',
         severity: this.health.overall === 'critical' ? 'critical' :
                  this.health.overall === 'degraded' ? 'medium' : 'low',
@@ -280,8 +280,8 @@ return;
         description: `Overall system health: ${this.health.overall}`,
         data: this.health });
 
-    } catch (error) {
-      console.error('Health check failed:', error);
+    } catch (error: any) {
+      (console as any).error('Health check failed:', error);
       this.health.overall = 'critical';
     }
   }
@@ -436,7 +436,7 @@ return 'degraded';
 
       // Code quality metrics
       const qualityMetrics = intelligentCodeMonitor.getLatestMetrics();
-      if (qualityMetrics) {
+      if (qualityMetrics as any) {
         // Calculate quality score from available metrics
         const qualityScore = Math.max(0, 100 -
           (qualityMetrics.complexity * 0.2) -
@@ -460,15 +460,15 @@ return 'degraded';
         conversionRate: 0, // Default value since we don't have conversion tracking
       };
 
-    } catch (error) {
-      console.error('Failed to collect metrics:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to collect metrics:', error);
     }
   }
 
   // Event handling methods
   private handlePerformanceAlert(data: any): void {
     this.emitEvent({
-      type: 'performance',
+      type: "performance" as const,
       source: 'PerformanceMonitor',
       severity: data.severity || 'medium',
       title: 'Performance Alert',
@@ -478,7 +478,7 @@ return 'degraded';
 
   private handleSecurityThreat(data: any): void {
     this.emitEvent({
-      type: 'security',
+      type: "security" as const,
       source: 'SecurityMonitor',
       severity: 'high',
       title: 'Security Threat Detected',
@@ -488,7 +488,7 @@ return 'degraded';
 
   private handleDeploymentFailure(data: any): void {
     this.emitEvent({
-      type: 'deployment',
+      type: "deployment" as const,
       source: 'DeploymentAutomation',
       severity: 'high',
       title: 'Deployment Failed',
@@ -498,7 +498,7 @@ return 'degraded';
 
   private handleQualityDegradation(data: any): void {
     this.emitEvent({
-      type: 'quality',
+      type: "quality" as const,
       source: 'CodeQualityMonitor',
       severity: 'medium',
       title: 'Code Quality Degraded',
@@ -508,7 +508,7 @@ return 'degraded';
 
   private handleFeatureRollback(data: any): void {
     this.emitEvent({
-      type: 'feature',
+      type: "feature" as const,
       source: 'FeatureFlagManager',
       severity: 'medium',
       title: 'Feature Flag Rollback',
@@ -532,14 +532,14 @@ return 'degraded';
     handlers.forEach(handler => {
       try {
         handler(event);
-      } catch (error) {
-        console.error(`Event handler failed for ${event.type}:`, error);
+      } catch (error: any) {
+        (console as any).error(`Event handler failed for ${event.type}:`, error);
       }
     });
 
     // Log critical events
     if (event.severity === 'critical') {
-      console.error(`🚨 CRITICAL EVENT: ${event.title} - ${event.description}`);
+      (console as any).error(`🚨 CRITICAL EVENT: ${event.title} - ${event.description}`);
     }
   }
 
@@ -585,7 +585,7 @@ return 'degraded';
 
   acknowledgeEvent(eventId: any): void {
     const event = this.events.find((e: SystemEvent) => e.id === eventId);
-    if (event) {
+    if (event as any) {
       event.handled = true;
     }
   }

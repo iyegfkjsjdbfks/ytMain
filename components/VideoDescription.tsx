@@ -2,6 +2,7 @@ import type { Video } from '../types';
 import type { Channel } from '../types';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
 import type React from 'react';
 
@@ -68,7 +69,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
         </div>
         <div className="flex items-center space-x-2">
           <button
-            onClick={onSubscribe}
+            onClick={(e: any) => onSubscribe(e)}
             className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
               isSubscribed
                 ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600'
@@ -95,10 +96,10 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
         className={`text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap leading-relaxed cursor-pointer ${
           !showFullDescription ? 'max-h-20 overflow-hidden' : ''
         }`}
-        onClick={onToggleDescription}
+        onClick={(e: any) => onToggleDescription(e)}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
+        onKeyDown={(e: any) => {
           if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -118,10 +119,10 @@ onToggleDescription();
       {/* Show More/Less Button */}
       {(video.description.length > 150 || video.description.includes('\n')) && (
         <span
-          onClick={onToggleDescription}
+          onClick={(e: any) => onToggleDescription(e)}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => {
+          onKeyDown={(e: any) => {
             if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -136,7 +137,7 @@ onToggleDescription();
       {canSummarize && (
         <div className="mt-4">
           <button
-            onClick={onSummarizeDescription}
+            onClick={(e: any) => onSummarizeDescription(e)}
             disabled={isSummarizing}
             className="flex items-center space-x-1.5 bg-sky-500/10 dark:bg-sky-400/10 hover:bg-sky-500/20 dark:hover:bg-sky-400/20 text-sky-700 dark:text-sky-300 px-3.5 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             aria-label="Summarize video description with AI"

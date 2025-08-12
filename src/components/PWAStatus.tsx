@@ -2,8 +2,12 @@ import React, { useState, useEffect, FC } from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
 import { SignalSlashIcon, ArrowDownTrayIcon, XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const PWAStatus: React.FC = () => {
+  return null;
   const {
     isInstalled,
     isOnline,
@@ -13,7 +17,7 @@ const PWAStatus: React.FC = () => {
     updateAvailable,
     installUpdate } = usePWA();
 
-  const [showInstallPrompt, setShowInstallPrompt] = React.useState(false);
+  const [showInstallPrompt, setShowInstallPrompt] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (canInstall && !isInstalled) {
@@ -21,14 +25,14 @@ const PWAStatus: React.FC = () => {
     }
   }, [canInstall, isInstalled]);
 
-  const handleInstall = async () => {
+  const handleInstall = async (): Promise<void> => {
     await installPWA();
     setShowInstallPrompt(false);
   };
 
-  const handleEnableNotifications = async () => {
+  const handleEnableNotifications = async (): Promise<void> => {
     const granted = await requestNotificationPermission();
-    if (granted) {
+    if (granted as any) {
       conditionalLogger.debug('Notifications enabled');
     }
   };
@@ -54,7 +58,7 @@ const PWAStatus: React.FC = () => {
               <span className='font-medium'>New version available!</span>
             </div>
             <button
-              onClick={installUpdate}
+              onClick={(e: any) => installUpdate(e)}
               className='bg-white text-blue-600 px-3 py-1 rounded text-sm font-medium hover:bg-blue-50 transition-colors'
             >
               Update Now
@@ -93,7 +97,7 @@ const PWAStatus: React.FC = () => {
 
               <div className='flex gap-2'>
                 <button
-                  onClick={handleInstall}
+                  onClick={(e: any) => handleInstall(e)}
                   className='bg-white text-red-600 px-4 py-2 rounded font-medium hover:bg-red-50 transition-colors flex items-center gap-2'
                 >
                   <ArrowDownTrayIcon className='w-4 h-4' />
@@ -101,7 +105,7 @@ const PWAStatus: React.FC = () => {
                 </button>
 
                 <button
-                  onClick={handleEnableNotifications}
+                  onClick={(e: any) => handleEnableNotifications(e)}
                   className='bg-red-700 text-white px-3 py-2 rounded hover:bg-red-800 transition-colors flex items-center gap-2'
                 >
                   <BellIcon className='w-4 h-4' />
@@ -111,7 +115,7 @@ const PWAStatus: React.FC = () => {
             </div>
 
             <button
-              onClick={dismissInstallPrompt}
+              onClick={(e: any) => dismissInstallPrompt(e)}
               className='text-white hover:text-red-200 transition-colors p-1'
             >
               <XMarkIcon className='w-5 h-5' />

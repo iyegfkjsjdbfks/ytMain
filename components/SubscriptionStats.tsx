@@ -1,6 +1,7 @@
 import type { Video } from '../types';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
 import type React from 'react';
 
@@ -73,7 +74,7 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
 
   return (
     <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`}>
-      {stats.map((stat, index) => {
+      {stats.map((stat: any, index: any) => {
         const IconComponent = stat.icon;
         return (
           <div

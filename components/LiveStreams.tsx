@@ -1,5 +1,8 @@
 import React, { useState, useEffect, FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // @ts-nocheck
 
 import { getVideos } from '../services/realVideoService';
@@ -12,13 +15,13 @@ interface LiveStreamsProps {
   maxStreams?: number;
 }
 
-const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
+const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
   const [liveStreams, setLiveStreams] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchLiveStreams = async () => {
+    const fetchLiveStreams = async (): Promise<void> => {
       try {
         setLoading(true);
         const allVideos = await getVideos();
@@ -27,10 +30,10 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
         const mockLiveStreams = allVideos
           .filter((video) => !video.isShort)
           .slice(0, maxStreams * 2) // Get more videos to simulate live streams
-          .map((video, index) => {
+          .map((video: any, index: any) => {
             if (index < maxStreams) {
               return {
-                ...video,
+                ...video as any,
                 id: `live-${video.id}`,
           title: `🔴 LIVE: ${video.title}`,
           views: `${Math.floor(Math.random() * 5000) + 500} watching now`,
@@ -45,8 +48,8 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
 
         setLiveStreams(mockLiveStreams);
         setError(null);
-      } catch (err) {
-        console.error('Failed to fetch live streams:', err);
+      } catch (err: any) {
+        (console as any).error('Failed to fetch live streams:', err);
         setError('Could not load live streams at this time.');
       } finally {
         setLoading(false);
@@ -56,7 +59,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
     fetchLiveStreams().catch(console.error);
   }, [maxStreams]);
 
-  if (loading) {
+  if (loading as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-4">
@@ -86,7 +89,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
     );
   }
 
-  if (error) {
+  if (error as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-4">
@@ -128,7 +131,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {liveStreams.map(stream => (
+        {liveStreams.map((stream: any) => (
           <div key={stream.id} className="relative">
             <VideoCard video={stream} />
             {/* Live indicator overlay */}

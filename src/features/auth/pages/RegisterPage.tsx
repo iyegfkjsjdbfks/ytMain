@@ -1,5 +1,6 @@
 import React from 'react';
 import { RegisterForm } from '../components/RegisterForm';
+import { FC } from 'react';
 
 /**
  * Registration page component

@@ -1,14 +1,18 @@
+import React from 'react';
 import { useEffect, useState, FC } from 'react';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { logger } from '../utils/logger';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const GoogleSearchStoreDebug: FC = () => {
   const [storeVideos, setStoreVideos] = useState<any[]>([]);
   const [testVideoId, setTestVideoId] = useState('bnVUHWCynig');
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
   const [testResult, setTestResult] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     // Load videos from store
@@ -16,7 +20,7 @@ const GoogleSearchStoreDebug: FC = () => {
     setStoreVideos(videos);
   }, []);
 
-  const handleTestFetch = async () => {
+  const handleTestFetch = async (): Promise<void> => {
     setLoading(true);
     try {
       logger.debug(`🧪 Testing fetch for video ID: ${testVideoId}`);
@@ -43,7 +47,7 @@ const GoogleSearchStoreDebug: FC = () => {
       // Refresh store videos
       const videos = googleSearchVideoStore.getAllVideos();
       setStoreVideos(videos);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Test fetch error:', error);
       setTestResult({
         error: error instanceof Error ? error.message : String(error) });
@@ -52,12 +56,12 @@ const GoogleSearchStoreDebug: FC = () => {
     }
   };
 
-  const handleClearStore = () => {
+  const handleClearStore: any = () => {
     googleSearchVideoStore.clear();
     setStoreVideos([]);
   };
 
-  const handleTestUnifiedService = async () => {
+  const handleTestUnifiedService = async (): Promise<void> => {
     setLoading(true);
     try {
       logger.debug(
@@ -79,7 +83,7 @@ const GoogleSearchStoreDebug: FC = () => {
       setUnifiedServiceTest(result);
 
       logger.debug('🧪 Unified service result:', result);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Unified service test error:', error);
       setUnifiedServiceTest({
         error: error instanceof Error ? error.message : String(error) });
@@ -120,7 +124,7 @@ const GoogleSearchStoreDebug: FC = () => {
         <h2 className='text-lg font-semibold mb-2'>Store Statistics</h2>
         <p>Videos in store: {storeVideos.length}</p>
         <button
-          onClick={handleClearStore}
+          onClick={(e: any) => handleClearStore(e)}
           className='mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600'
         >
           Clear Store
@@ -139,14 +143,14 @@ const GoogleSearchStoreDebug: FC = () => {
             className='flex-1 px-3 py-2 border rounded'
           />
           <button
-            onClick={handleTestFetch}
+            onClick={(e: any) => handleTestFetch(e)}
             disabled={loading}
             className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
           >
             {loading ? 'Testing...' : 'Test Direct Fetch'}
           </button>
           <button
-            onClick={handleTestUnifiedService}
+            onClick={(e: any) => handleTestUnifiedService(e)}
             disabled={loading}
             className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 ml-2'
           >

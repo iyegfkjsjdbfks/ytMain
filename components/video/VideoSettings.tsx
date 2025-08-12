@@ -1,6 +1,7 @@
 import type { Video } from '../types';
 import React from 'react';
 import { XMarkIcon, CheckIcon  } from '@heroicons/react/24/outline';
+import { FC } from 'react';
 
 export interface VideoQuality {
   label: string;,
@@ -50,7 +51,7 @@ return null;
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Settings</h3>
         <button
-          onClick={onClose}
+          onClick={(e: any) => onClose(e)}
           className="text-gray-400 hover:text-white transition-colors"
           aria-label="Close settings"
         >

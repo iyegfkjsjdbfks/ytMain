@@ -5,6 +5,7 @@ import SubscriptionFeed from './SubscriptionFeed';
 import TrendingSection from './TrendingSection';
 import VideoGrid from './VideoGrid';
 import WatchHistory from './WatchHistory';
+import { FC } from 'react';
 
 import type { Video } from '../types'; // Assuming Video type is in types.ts;
 
@@ -12,7 +13,7 @@ interface HomeContentProps {
   selectedCategory: string; videos: Video
 }
 
-const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }) => {
+const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: any) => {
   return (
     <>
       {selectedCategory === 'All' && (

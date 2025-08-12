@@ -1,6 +1,7 @@
 import { Video } from '../types';
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
 // @ts-nocheck
 
 import { ChevronRightIcon as ChevronRightSolidIcon, PlayIcon as PlaySolidIcon  } from '@heroicons/react/24/solid';
@@ -25,7 +26,7 @@ interface ChannelTabContentProps {
   onPlaylistTabSelect: () => void
 }
 
-const ChannelTabContent = ({
+const ChannelTabContent: any = ({
   activeTab,
   channel,
   videos,
@@ -34,7 +35,7 @@ const ChannelTabContent = ({
   onPlaylistTabSelect }: ChannelTabContentProps) => {
 
   const popularVideos = useMemo(() => {
-    return [...videos].sort((a, b) => {
+    return [...videos].sort((a: any, b: any) => {
       const aViews = typeof a.views === 'string' ? typeof a.views === "string" ? parseInt(a.views.replace(/,/g, ""), 10) : a.views : Number(a.views) || 0;
       const bViews = typeof b.views === 'string' ? typeof b.views === "string" ? parseInt(b.views.replace(/,/g, ""), 10) : b.views : Number(b.views) || 0;
       return bViews - aViews;
@@ -47,7 +48,7 @@ const ChannelTabContent = ({
       .slice(0, 10);
   }, [videos]);
 
-  const renderHomeTab = () => {
+  const renderHomeTab: any = () => {
 
     return (
       <div className="space-y-8 pt-4">
@@ -55,7 +56,7 @@ const ChannelTabContent = ({
           <section>
             <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-3">Popular Videos</h2>
             <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-              {popularVideos.map(video => <VideoCard key={video.id} video={video} />)}
+              {popularVideos.map((video: any) => <VideoCard key={video.id} video={video} />)}
             </div>
           </section>
         )}
@@ -63,7 +64,7 @@ const ChannelTabContent = ({
            <section>
             <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-3">Uploads</h2>
              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-              {recentVideos.map(video => <VideoCard key={video.id} video={video} />)}
+              {recentVideos.map((video: any) => <VideoCard key={video.id} video={video} />)}
             </div>
           </section>
         )}
@@ -77,7 +78,7 @@ const ChannelTabContent = ({
     );
   };
 
-  const renderVideosTab = (isShorts: boolean = false) => {
+  const renderVideosTab: any = (isShorts: boolean = false) => {
     const filteredVideos = videos.filter((v: any) => isShorts ? v.isShort : !v.isShort);
     if (filteredVideos.length > 0) {
       return (
@@ -91,7 +92,7 @@ const ChannelTabContent = ({
     return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no {isShorts ? 'Shorts' : 'videos'} yet.</p>;
   };
 
-  const renderPlaylistsTab = (isHomePageSlice: boolean = false) => {
+  const renderPlaylistsTab: any = (isHomePageSlice: boolean = false) => {
     const playlistsToRender = isHomePageSlice ? playlists.slice(0, 4) : playlists;
      if (playlistsToRender.length > 0) {
       return (
@@ -116,7 +117,7 @@ const ChannelTabContent = ({
           ))}
           {isHomePageSlice && playlists.length > 4 && (
              <div className="flex items-center justify-center aspect-video bg-neutral-100 dark:bg-neutral-800 rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
-                <button onClick={onPlaylistTabSelect} className="text-sky-600 dark:text-sky-400 font-medium text-sm">
+                <button onClick={(e: any) => onPlaylistTabSelect(e)} className="text-sky-600 dark:text-sky-400 font-medium text-sm">
                     View All Playlists ({playlists.length})
                 </button>
              </div>
@@ -127,7 +128,7 @@ const ChannelTabContent = ({
     return <p className="text-neutral-600 dark: text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no playlists yet.</p>
   };
 
-  const renderCommunityTab = () => {
+  const renderCommunityTab: any = () => {
     if (communityPosts.length > 0) {
       return (
         <div className="max-w-2xl mx-auto space-y-6 py-6">
@@ -154,7 +155,7 @@ const ChannelTabContent = ({
     return <p className="text-neutral-600 dark: text-neutral-400 mt-8 text-center py-10 text-lg">No community posts yet.</p>
   };
 
-  const renderAboutTab = () => {
+  const renderAboutTab: any = () => {
     if (!channel) {
 return null;
 }
@@ -185,7 +186,7 @@ return null;
     );
   };
 
-  const renderLiveTab = () => {
+  const renderLiveTab: any = () => {
     return (
       <div className="text-center py-16 text-neutral-600 dark:text-neutral-400 mt-8">
         <SignalSlashIcon className="w-16 h-16 mx-auto mb-4 text-neutral-400 dark:text-neutral-500" />
@@ -195,7 +196,7 @@ return null;
     );
   };
 
-  switch (activeTab) {
+  switch (activeTab as any) {
     case 'HOME': return renderHomeTab();
     case 'VIDEOS': return renderVideosTab(false);
     case 'SHORTS': return renderVideosTab(true);

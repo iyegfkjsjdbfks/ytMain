@@ -80,7 +80,7 @@ export const videoApi = {
     params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/category', {
-      ...params,
+      ...params as any,
       category } as PaginatedRequest & { category: string });
   },
 

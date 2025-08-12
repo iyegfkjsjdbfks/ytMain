@@ -19,7 +19,7 @@ interface UseVideoAutoplayProps {
  * Custom hook to handle video autoplay logic based on intersection observer
  * and manual pause state. Provides intelligent autoplay that respects user interactions.
  */
-export const useVideoAutoplay = ({
+export const useVideoAutoplay: any = ({
   isIntersecting,
   isPlaying,
   isManuallyPaused,
@@ -35,7 +35,7 @@ export const useVideoAutoplay = ({
     if (isIntersecting && !isPlaying && !isManuallyPaused) {
       // Auto-play when video comes into view and hasn't been manually paused
       // Conditionally unmute the video when autoplay starts based on unmuteOnAutoplay flag
-      if (unmuteOnAutoplay) {
+      if (unmuteOnAutoplay as any) {
         actions.unmute();
       }
       actions.play().catch((error: Error) => {
@@ -46,12 +46,12 @@ export const useVideoAutoplay = ({
           errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
           errorMessage.includes('ERR_NETWORK')
         ) {
-          console.info(
+          (console as any).info(
             'Autoplay skipped due to network/cache issues:',
             errorMessage
           );
         } else {
-          console.warn('Autoplay failed:', errorMessage);
+          (console as any).warn('Autoplay failed:', errorMessage);
         }
         // Autoplay might be blocked by browser policy or network issues
       });

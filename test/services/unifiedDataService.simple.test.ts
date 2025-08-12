@@ -57,7 +57,7 @@ describe('UnifiedDataService', () => {
   });
 
   describe('API Methods', () => {
-    it('should call getTrendingVideos without errors', async () => {
+    it('should call getTrendingVideos without errors', async (): Promise<void> => {
       const result = await unifiedDataService.getTrendingVideos(10);
 
       expect(result).toBeDefined();
@@ -67,7 +67,7 @@ describe('UnifiedDataService', () => {
       expect(typeof result.totalCount).toBe('number');
     });
 
-    it('should call searchVideos with query', async () => {
+    it('should call searchVideos with query', async (): Promise<void> => {
       const result = await unifiedDataService.searchVideos('test query', {}, 10);
 
       expect(result).toBeDefined();
@@ -75,21 +75,21 @@ describe('UnifiedDataService', () => {
       expect(Array.isArray(result.data)).toBe(true);
     });
 
-    it('should handle getVideoById calls', async () => {
+    it('should handle getVideoById calls', async (): Promise<void> => {
       const result = await unifiedDataService.getVideoById('test-video');
 
       // Should either return video data or null, not throw
       expect(result === null || typeof result === 'object').toBe(true);
     });
 
-    it('should handle getChannelById calls', async () => {
+    it('should handle getChannelById calls', async (): Promise<void> => {
       const result = await unifiedDataService.getChannelById('test-channel');
 
       // Should either return channel data or null, not throw
       expect(result === null || typeof result === 'object').toBe(true);
     });
 
-    it('should handle getShortsVideos calls', async () => {
+    it('should handle getShortsVideos calls', async (): Promise<void> => {
       const result = await unifiedDataService.getShortsVideos(20);
 
       expect(result).toBeDefined();
@@ -99,13 +99,13 @@ describe('UnifiedDataService', () => {
   });
 
   describe('Error Handling', () => {
-    it('should handle errors gracefully in getTrendingVideos', async () => {
+    it('should handle errors gracefully in getTrendingVideos', async (): Promise<void> => {
       // This tests that the service doesn't throw unhandled errors
       const result = await unifiedDataService.getTrendingVideos(10);
       expect(result).toBeDefined();
     });
 
-    it('should handle empty search queries', async () => {
+    it('should handle empty search queries', async (): Promise<void> => {
       const result = await unifiedDataService.searchVideos('', {}, 10);
       expect(result).toBeDefined();
       expect(Array.isArray(result.data)).toBe(true);

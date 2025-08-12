@@ -1,4 +1,5 @@
 import React, { KeyboardEvent } from 'react';
+import { KeyboardEvent } from 'react';
 /**
  * Comprehensive testing setup and configuration
  */
@@ -26,15 +27,15 @@ const TEST_CONFIG = {
   mockFetch: true };
 
 // Mock implementations
-const mockLocalStorage = (() => {
+const mockLocalStorage: any = (() => {
   let store: Record<string, string> = {};
 
   return {
     getItem: vi.fn((key) => store[key] || null),
-    setItem: vi.fn((key, value) => {
+    setItem: vi.fn((key: any, value: any) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key) => {
+    removeItem: vi.fn((key: any) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -46,15 +47,15 @@ const mockLocalStorage = (() => {
     key: vi.fn((index) => Object.keys(store)[index] || null) };
 })();
 
-const mockSessionStorage = (() => {
+const mockSessionStorage: any = (() => {
   let store: Record<string, string> = {};
 
   return {
     getItem: vi.fn((key) => store[key] || null),
-    setItem: vi.fn((key, value) => {
+    setItem: vi.fn((key: any, value: any) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key) => {
+    removeItem: vi.fn((key: any) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -100,8 +101,8 @@ const mockNotification = {
   permission: 'granted' };
 
 // Fetch mock with realistic responses
-const createMockFetch = () => {
-  return vi.fn().mockImplementation(async (url, _options?: RequestInit) => {
+const createMockFetch: any = () => {
+  return vi.fn().mockImplementation(async (url, _options?: RequestInit): Promise<any> => {
     // Simulate network delay
     await testUtils.simulateNetworkDelay(TEST_CONFIG.mockApiDelay);
 
@@ -112,18 +113,18 @@ const createMockFetch = () => {
       statusText: 'OK',
       headers: new Headers({
         'Content-Type': 'application/json' }),
-      json: async () => ({
+      json: async (): Promise<void> => ({
         success: true,
         data: testUtils.generateMockVideo(),
         timestamp: Date.now() }),
-      text: async () => 'Mock response text',
-      blob: async () => new Blob(['mock blob']),
-      arrayBuffer: async () => new ArrayBuffer(8),
+      text: async (): Promise<void> => 'Mock response text',
+      blob: async (): Promise<void> => new Blob(['mock blob']),
+      arrayBuffer: async (): Promise<void> => new ArrayBuffer(8),
       clone: vi.fn() };
 
     // Handle specific endpoints
     if (url.includes('/api/videos')) {
-      mockResponse.json = async () => ({
+      mockResponse.json = async (): Promise<void> => ({
         success: true,
         data: {
           id: 'test-video-1',
@@ -149,7 +150,7 @@ const createMockFetch = () => {
     }
 
     if (url.includes('/api/channels')) {
-      mockResponse.json = async () => ({
+      mockResponse.json = async (): Promise<void> => ({
         success: true,
         data: {
           id: 'test-video-1',
@@ -175,7 +176,7 @@ const createMockFetch = () => {
     }
 
     if (url.includes('/api/users')) {
-      mockResponse.json = async () => ({
+      mockResponse.json = async (): Promise<void> => ({
         success: true,
         data: {
           id: 'test-video-1',
@@ -203,22 +204,22 @@ const createMockFetch = () => {
     // Simulate errors for specific patterns
     if (url.includes('/error')) {
       return {
-        ...mockResponse,
+        ...mockResponse as any,
         ok: false,
         status: 500,
         statusText: 'Internal Server Error',
-        json: async () => ({
+        json: async (): Promise<void> => ({
           success: false,
           error: 'Mock server error' }) };
     }
 
     if (url.includes('/unauthorized')) {
       return {
-        ...mockResponse,
+        ...mockResponse as any,
         ok: false,
         status: 401,
         statusText: 'Unauthorized',
-        json: async () => ({
+        json: async (): Promise<void> => ({
           success: false,
           error: 'Unauthorized access' }) };
     }
@@ -237,11 +238,11 @@ class TestPerformanceTracker {
 
   static startTest(testName: any): () => void {
     const startTime = performance.now();
-    const startMemory = (performance as any).memory?.usedJSHeapSize || 0;
+    const startMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
 
     return () => {
       const endTime = performance.now();
-      const endMemory = (performance as any).memory?.usedJSHeapSize || 0;
+      const endMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
 
       this.testMetrics.set(testName, {
         renderTime: 0, // Will be set by render tracking,
@@ -252,7 +253,7 @@ class TestPerformanceTracker {
 
   static trackRender(testName: any, renderTime: any): void {
     const metrics = this.testMetrics.get(testName);
-    if (metrics) {
+    if (metrics as any) {
       metrics.renderTime = renderTime;
     }
   }
@@ -332,7 +333,7 @@ beforeAll(() => {
   // Mock crypto for security utils
   Object.defineProperty(window, 'crypto', {
     value: {
-      getRandomValues: vi.fn((arr) => {
+      getRandomValues: vi.fn((arr: any) => {
         for (let i = 0; i < arr.length; i++) {
           arr[i] = Math.floor(Math.random() * 256);
         }
@@ -355,22 +356,22 @@ beforeAll(() => {
     // // performanceMonitor.init(); // Method not available // Method not available
   }
 
-  console.log('Test environment initialized');
+  (console as any).log('Test environment initialized');
 });
 
 // Cleanup after all tests
 afterAll(() => {
   // Generate performance report
   if (TEST_CONFIG.enablePerformanceTracking) {
-    console.log(`\n${  TestPerformanceTracker.generateReport()}`);
-    console.log('\nPerformance report not available');
-    // console.log(`\n${performanceMonitor.getReport()}`); // Method not available
+    (console as any).log(`\n${  TestPerformanceTracker.generateReport()}`);
+    (console as any).log('\nPerformance report not available');
+    // (console as any).log(`\n${performanceMonitor.getReport()}`); // Method not available
   }
 
   // Cleanup mocks
   vi.restoreAllMocks();
 
-  console.log('Test environment cleaned up');
+  (console as any).log('Test environment cleaned up');
 });
 
 // Setup before each test
@@ -407,7 +408,7 @@ afterEach(() => {
   document.head.innerHTML = '';
 
   // Clear any pending promises
-  return new Promise(resolve => setTimeout(resolve, 0));
+  return new Promise(resolve => setTimeout((resolve) as any, 0));
 });
 
 // Custom test utilities
@@ -428,14 +429,14 @@ export const testHelpers = {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
-      json: async () => ({ success: true, data }) });
+      json: async (): Promise<void> => ({ success: true, data }) });
   },
 
   mockApiError: (status: number = 500, message = 'Server Error') => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: false,
       status,
-      json: async () => ({ success: false, error: message }) });
+      json: async (): Promise<void> => ({ success: false, error: message }) });
   },
 
   // Storage helpers,
@@ -448,9 +449,9 @@ export const testHelpers = {
   },
 
   // Async helpers,
-  waitForNextTick: () => new Promise(resolve => setTimeout(resolve, 0)),
+  waitForNextTick: () => new Promise(resolve => setTimeout((resolve) as any, 0)),
 
-  waitForTime: (ms: any) => new Promise(resolve => setTimeout(resolve, ms)),
+  waitForTime: (ms: any) => new Promise(resolve => setTimeout((resolve) as any, ms)),
 
   // Error boundary testing,
   triggerError: (component: any) => {
@@ -460,7 +461,7 @@ export const testHelpers = {
   },
 
   // Accessibility testing,
-  checkAccessibility: async (container: HTMLElement) => {
+  checkAccessibility: async (container: HTMLElement): Promise<any> => {
     const { runAccessibilityAudit } = await import('../utils/accessibilityUtils');
     return runAccessibilityAudit(container);
   },
@@ -485,7 +486,7 @@ export const testHelpers = {
       return testHelpers.waitForNextTick();
     },
 
-    type: async (element: HTMLInputElement, text: any) => {
+    type: async (element: HTMLInputElement, text: any): Promise<any> => {
       element.focus();
       element.value = text;
       element.dispatchEvent(new Event('input', { bubbles: true }));
@@ -515,13 +516,13 @@ export { mockLocalStorage,
   mockGeolocation, mockNotification };
 
 // Global error handler for unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+process.on('unhandledRejection', (reason: any, promise: any) => {
+  (console as any).error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
 // Global error handler for uncaught exceptions
 process.on('uncaughtException', (error: Error) => {
-  console.error('Uncaught Exception:', error);
+  (console as any).error('Uncaught Exception:', error);
 });
 
-console.log('Test setup completed successfully');
+(console as any).log('Test setup completed successfully');

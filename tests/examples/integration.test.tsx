@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { FormEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 /**
  * Integration tests demonstrating how multiple components work together
  * and testing real user workflows
@@ -14,7 +17,7 @@ import { testUtils, customRender  } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
-const VideoPlayer = ({ video, onTimeUpdate, onEnded }) => (
+const VideoPlayer: any = ({ video, onTimeUpdate, onEnded }: any) => (
   <div data-testid="video-player">
     <video
       src={video.url}
@@ -30,7 +33,7 @@ const VideoPlayer = ({ video, onTimeUpdate, onEnded }) => (
   </div>
 );
 
-const VideoList = ({ videos, onVideoSelect, loading }) => (
+const VideoList: any = ({ videos, onVideoSelect, loading }: any) => (
   <div data-testid="video-list">
     {loading ? (
       <div>Loading videos...</div>
@@ -52,10 +55,10 @@ const VideoList = ({ videos, onVideoSelect, loading }) => (
   </div>
 );
 
-const CommentSection = ({ comments, onAddComment }) => {
-  const [newComment, setNewComment] = React.useState('');
+const CommentSection: any = ({ comments, onAddComment }: any) => {
+  const [newComment, setNewComment] = React.useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit: any = (e: React.FormEvent) => {
     e.preventDefault();
     if (newComment.trim()) {
       onAddComment(newComment);
@@ -67,7 +70,7 @@ const CommentSection = ({ comments, onAddComment }) => {
     <div data-testid="comment-section">
       <h3>Comments ({comments.length})</h3>
 
-      <form onSubmit={handleSubmit} data-testid="comment-form">
+      <form onSubmit={(e: any) => handleSubmit(e)} data-testid="comment-form">
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
@@ -96,21 +99,21 @@ const CommentSection = ({ comments, onAddComment }) => {
   );
 };
 
-const VideoPage = () => {
+const VideoPage: any = () => {
   const [currentVideo, setCurrentVideo] = React.useState<any>(null);
   const [videos, setVideos] = React.useState<any[]>([]);
   const [comments, setComments] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [_watchTime, setWatchTime] = React.useState(0);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [_watchTime, setWatchTime] = React.useState<number>(0);
 
   React.useEffect(() => {
     // Simulate API calls
-    const loadData = async () => {
+    const loadData = async (): Promise<void> => {
       try {
         setLoading(true);
 
         // Load videos
-        const videosResponse = await fetch('/api/videos');
+        const videosResponse = await (fetch as any)('/api/videos');
         const videosData = await videosResponse.json();
         setVideos(videosData.data);
 
@@ -119,12 +122,12 @@ const VideoPage = () => {
           setCurrentVideo(videosData.data[0]);
 
           // Load comments for first video
-          const commentsResponse = await fetch(`/api/videos/${videosData.data[0].id}/comments`);
+          const commentsResponse = await (fetch as any)(`/api/videos/${videosData.data[0].id}/comments`);
           const commentsData = await commentsResponse.json();
           setComments(commentsData.data);
         }
-      } catch (error) {
-        console.error('Failed to load data:', error);
+      } catch (error: any) {
+        (console as any).error('Failed to load data:', error);
       } finally {
         setLoading(false);
       }
@@ -133,48 +136,48 @@ const VideoPage = () => {
     loadData();
   }, []);
 
-  const handleVideoSelect = async (video: any) => {
+  const handleVideoSelect = async (video: any): Promise<any> => {
     setCurrentVideo(video);
     setWatchTime(0);
 
     // Load comments for selected video
     try {
-      const response = await fetch(`/api/videos/${video.id}/comments`);
+      const response = await (fetch as any)(`/api/videos/${video.id}/comments`);
       const data = await response.json();
       setComments(data.data);
-    } catch (error) {
-      console.error('Failed to load comments:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to load comments:', error);
     }
   };
 
-  const handleAddComment = async (text: any) => {
+  const handleAddComment = async (text: any): Promise<any> => {
     if (!currentVideo) {
 return;
 }
 
     try {
-      const response = await fetch(`/api/videos/${currentVideo.id}/comments`, {
+      const response = await (fetch as any)(`/api/videos/${currentVideo.id}/comments`, {
         method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }) });
 
       const newComment = await response.json();
       setComments(prev => [newComment.data, ...prev]);
-    } catch (error) {
-      console.error('Failed to add comment:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to add comment:', error);
     }
   };
 
-  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+  const handleTimeUpdate: any = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     setWatchTime(e.currentTarget.currentTime);
   };
 
-  const handleVideoEnded = () => {
+  const handleVideoEnded: any = () => {
     // Track video completion
     performanceMonitor.trackCustomMetric('video_completed', 1);
   };
 
-  if (loading) {
+  if (loading as any) {
     return <div data-testid="loading">Loading...</div>;
   }
 
@@ -232,13 +235,13 @@ describe('Integration Tests', () => {
     mockComments = Array.from({ length: 3 }, () => testUtils.generateMockComment());
 
     // Setup API mocks
-    global.fetch = vi.fn().mockImplementation(async (url, options?: RequestInit) => {
+    global.fetch = vi.fn().mockImplementation(async (url, options?: RequestInit): Promise<any> => {
       await testUtils.simulateNetworkDelay(50);
 
       if (url.includes('/api/videos') && !url.includes('/comments')) {
         return {
           ok: true,
-          json: async () => ({ success: true,
+          json: async (): Promise<void> => ({ success: true,
           data: mockVideos }) }}
 
       if (url.includes('/comments')) {
@@ -246,12 +249,12 @@ describe('Integration Tests', () => {
           const newComment = testUtils.generateMockComment();
           return {
             ok: true,
-          json: async () => ({ success: true,
+          json: async (): Promise<void> => ({ success: true,
           data: newComment }) }}
 
         return {
           ok: true,
-          json: async () => ({ success: true,
+          json: async (): Promise<void> => ({ success: true,
           data: mockComments }) }}
 
       return { ok: false,
@@ -263,7 +266,7 @@ describe('Integration Tests', () => {
   });
 
   describe('Video Watching Workflow', () => {
-    it('should load and display videos correctly', async () => {
+    it('should load and display videos correctly', async (): Promise<void> => {
       customRender(<VideoPage />);
 
       // Should show loading initially
@@ -287,7 +290,7 @@ describe('Integration Tests', () => {
       expect(screen.getByTestId('comment-section')).toBeInTheDocument();
     });
 
-    it('should switch videos when clicking on video list', async () => {
+    it('should switch videos when clicking on video list', async (): Promise<void> => {
       const user = userEvent.setup();
       customRender(<VideoPage />);
 
@@ -310,7 +313,7 @@ describe('Integration Tests', () => {
         expect.stringContaining(`/api/videos/${mockVideos[1].id}/comments`));
     });
 
-    it('should handle video player interactions', async () => {
+    it('should handle video player interactions', async (): Promise<void> => {
       const user = userEvent.setup();
       customRender(<VideoPage />);
 
@@ -336,7 +339,7 @@ describe('Integration Tests', () => {
   });
 
   describe('Comment System Workflow', () => {
-    it('should add new comments', async () => {
+    it('should add new comments', async (): Promise<void> => {
       const user = userEvent.setup();
       customRender(<VideoPage />);
 
@@ -365,7 +368,7 @@ describe('Integration Tests', () => {
       expect(commentInput).toHaveValue('');
     });
 
-    it('should validate comment input', async () => {
+    it('should validate comment input', async (): Promise<void> => {
       const user = userEvent.setup();
       customRender(<VideoPage />);
 
@@ -393,7 +396,7 @@ describe('Integration Tests', () => {
       expect(submitButton).toBeEnabled();
     });
 
-    it('should display existing comments', async () => {
+    it('should display existing comments', async (): Promise<void> => {
       customRender(<VideoPage />);
 
       await waitFor(() => {
@@ -413,7 +416,7 @@ describe('Integration Tests', () => {
   });
 
   describe('Performance and Monitoring', () => {
-    it('should track video completion', async () => {
+    it('should track video completion', async (): Promise<void> => {
       const performanceSpy = vi.spyOn(performanceMonitor, 'trackCustomMetric');
 
       customRender(<VideoPage />);
@@ -433,7 +436,7 @@ describe('Integration Tests', () => {
           videoId: mockVideos[0].id }));
     });
 
-    it('should track watch time', async () => {
+    it('should track watch time', async (): Promise<void> => {
       customRender(<VideoPage />);
 
       await waitFor(() => {
@@ -450,7 +453,7 @@ describe('Integration Tests', () => {
       // This would be verified through component state or analytics calls
     });
 
-    it('should handle API errors gracefully', async () => {
+    it('should handle API errors gracefully', async (): Promise<void> => {
       // Mock API error
       global.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
 
@@ -473,7 +476,7 @@ describe('Integration Tests', () => {
   });
 
   describe('Accessibility Integration', () => {
-    it('should support keyboard navigation across components', async () => {
+    it('should support keyboard navigation across components', async (): Promise<void> => {
       const user = userEvent.setup();
       customRender(<VideoPage />);
 
@@ -496,7 +499,7 @@ describe('Integration Tests', () => {
       expect(screen.getByTestId('comment-input')).toHaveFocus();
     });
 
-    it('should have proper ARIA labels and roles', async () => {
+    it('should have proper ARIA labels and roles', async (): Promise<void> => {
       customRender(<VideoPage />);
 
       await waitFor(() => {
@@ -521,7 +524,7 @@ describe('Integration Tests', () => {
   });
 
   describe('Security Integration', () => {
-    it('should sanitize user input in comments', async () => {
+    it('should sanitize user input in comments', async (): Promise<void> => {
       const user = userEvent.setup();
       customRender(<VideoPage />);
 
@@ -545,11 +548,11 @@ describe('Integration Tests', () => {
       });
     });
 
-    it('should validate API responses', async () => {
+    it('should validate API responses', async (): Promise<void> => {
       // Mock malicious API response
       global.fetch = vi.fn().mockResolvedValue({
         ok: true,
-          json: async () => ({,
+          json: async (): Promise<void> => ({,
           success: true,
           data: {
             ...mockVideos[0],
@@ -570,7 +573,7 @@ describe('Integration Tests', () => {
   });
 
   describe('Real User Scenarios', () => {
-    it('should handle complete video watching session', async () => {
+    it('should handle complete video watching session', async (): Promise<void> => {
       const user = userEvent.setup();
       customRender(<VideoPage />);
 
@@ -601,7 +604,7 @@ describe('Integration Tests', () => {
       expect(screen.getByTestId('video-page')).toBeInTheDocument();
     });
 
-    it('should handle mobile user interactions', async () => {
+    it('should handle mobile user interactions', async (): Promise<void> => {
       // Mock mobile viewport
       Object.defineProperty(window, 'innerWidth', { value: 375 });
       Object.defineProperty(window, 'innerHeight', { value: 667 });
@@ -624,13 +627,13 @@ describe('Integration Tests', () => {
       expect(videoPlayer).toBeInTheDocument();
     });
 
-    it('should handle slow network conditions', async () => {
+    it('should handle slow network conditions', async (): Promise<void> => {
       // Mock slow network
-      global.fetch = vi.fn().mockImplementation(async () => {
+      global.fetch = vi.fn().mockImplementation(async (): Promise<void> => {
         await testUtils.simulateNetworkDelay(2000); // 2 second delay
         return {
           ok: true,
-          json: async () => ({ success: true,
+          json: async (): Promise<void> => ({ success: true,
           data: mockVideos }) }});
 
       customRender(<VideoPage />);

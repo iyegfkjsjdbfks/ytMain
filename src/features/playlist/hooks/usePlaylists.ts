@@ -9,7 +9,7 @@ import type { Playlist } from '../../../types/core';
  */
 
 // Query hooks
-export function usePlaylists(filters: PlaylistFilters = {}) {
+export function usePlaylists(filters: PlaylistFilters = {}): any {
   return useQuery(
     ['playlists', JSON.stringify(filters)],
     () => playlistService.getUserPlaylists(filters),
@@ -19,7 +19,7 @@ export function usePlaylists(filters: PlaylistFilters = {}) {
   );
 }
 
-export function usePlaylist(playlistId: any) {
+export function usePlaylist(playlistId: any): any {
   return useQuery(
     ['playlist', playlistId],
     () => playlistService.getPlaylist(playlistId),
@@ -34,7 +34,7 @@ export function usePlaylistVideos(,
   playlistId: any,
   page: number = 1,
   limit: number = 50
-) {
+): any {
   return useQuery(
     ['playlist', playlistId, 'videos', page.toString(), limit.toString()],
     () => playlistService.getPlaylistVideos(playlistId, page, limit),
@@ -45,7 +45,7 @@ export function usePlaylistVideos(,
   );
 }
 
-export function useFeaturedPlaylists(page: number = 1, limit: number = 20) {
+export function useFeaturedPlaylists(page: number = 1, limit: number = 20): any {
   return useQuery(
     ['playlists', 'featured', page.toString(), limit.toString()],
     () => playlistService.getFeaturedPlaylists(page, limit),
@@ -55,7 +55,7 @@ export function useFeaturedPlaylists(page: number = 1, limit: number = 20) {
   );
 }
 
-export function useRecommendedPlaylists(page: number = 1, limit: number = 20) {
+export function useRecommendedPlaylists(page: number = 1, limit: number = 20): any {
   return useQuery(
     ['playlists', 'recommended', page.toString(), limit.toString()],
     () => playlistService.getRecommendedPlaylists(page, limit),
@@ -65,7 +65,7 @@ export function useRecommendedPlaylists(page: number = 1, limit: number = 20) {
   );
 }
 
-export function useFollowedPlaylists(page: number = 1, limit: number = 20) {
+export function useFollowedPlaylists(page: number = 1, limit: number = 20): any {
   return useQuery(
     ['playlists', 'followed', page.toString(), limit.toString()],
     () => playlistService.getFollowedPlaylists(page, limit),
@@ -75,7 +75,7 @@ export function useFollowedPlaylists(page: number = 1, limit: number = 20) {
   );
 }
 
-export function usePlaylistStats(playlistId: any) {
+export function usePlaylistStats(playlistId: any): any {
   return useQuery(
     ['playlist', playlistId, 'stats'],
     () => playlistService.getPlaylistStats(playlistId),
@@ -86,7 +86,7 @@ export function usePlaylistStats(playlistId: any) {
   );
 }
 
-export function usePlaylistCollaborators(playlistId: any) {
+export function usePlaylistCollaborators(playlistId: any): any {
   return useQuery(
     ['playlist', playlistId, 'collaborators'],
     () => playlistService.getPlaylistCollaborators(playlistId),
@@ -100,7 +100,7 @@ export function usePlaylistCollaborators(playlistId: any) {
 export function useSearchPlaylists(,
   query: any,
   filters: Omit<PlaylistFilters, 'search'> = {}
-) {
+): any {
   return useQuery(
     ['playlists', 'search', query, JSON.stringify(filters)],
     () => playlistService.searchPlaylists(query, filters),
@@ -112,7 +112,7 @@ export function useSearchPlaylists(,
 }
 
 // Mutation hooks
-export function useCreatePlaylist() {
+export function useCreatePlaylist(): any {
   return useMutation<Playlist, CreatePlaylistData>(
     data => playlistService.createPlaylist(data),
     {
@@ -123,11 +123,11 @@ export function useCreatePlaylist() {
   );
 }
 
-export function useUpdatePlaylist() {
+export function useUpdatePlaylist(): any {
   return useMutation<
     Playlist,
     { id: string; data: Partial<CreatePlaylistData> }
-  >(({ id, data }) => playlistService.updatePlaylist({ id, ...data }), {
+  >(({ id, data }: any) => playlistService.updatePlaylist({ id, ...data }), {
     onSuccess: (_, { id }) => {
       // Invalidate specific playlist and playlists list
       queryCache.invalidate(`playlist:${id}`);
@@ -135,11 +135,11 @@ export function useUpdatePlaylist() {
     } });
 }
 
-export function useDeletePlaylist() {
+export function useDeletePlaylist(): any {
   return useMutation<void, string>(
     playlistId => playlistService.deletePlaylist(playlistId),
     {
-      onSuccess: (_, playlistId) => {
+      onSuccess: (_: any, playlistId: any) => {
         // Invalidate caches
         queryCache.invalidate(`playlist:${playlistId}`);
         queryCache.invalidate('playlists');
@@ -147,7 +147,7 @@ export function useDeletePlaylist() {
   );
 }
 
-export function useAddVideoToPlaylist() {
+export function useAddVideoToPlaylist(): any {
   return useMutation<
     void,
     { playlistId: string; videoId: string; position?: number }
@@ -159,9 +159,9 @@ export function useAddVideoToPlaylist() {
     } });
 }
 
-export function useRemoveVideoFromPlaylist() {
+export function useRemoveVideoFromPlaylist(): any {
   return useMutation<void, { playlistId: string; videoId: string }>(
-    ({ playlistId, videoId }) =>
+    ({ playlistId, videoId }: any) =>
       playlistService.removeVideoFromPlaylist(playlistId, videoId),
     {
       onSuccess: (_, { playlistId }) => {
@@ -172,7 +172,7 @@ export function useRemoveVideoFromPlaylist() {
   );
 }
 
-export function useReorderPlaylistVideos() {
+export function useReorderPlaylistVideos(): any {
   return useMutation<
     void,
     { playlistId: string; videoId: string; newPosition: number }
@@ -183,9 +183,9 @@ export function useReorderPlaylistVideos() {
     } });
 }
 
-export function useDuplicatePlaylist() {
+export function useDuplicatePlaylist(): any {
   return useMutation<Playlist, { playlistId: string; newTitle?: string }>(
-    ({ playlistId, newTitle }) =>
+    ({ playlistId, newTitle }: any) =>
       playlistService.duplicatePlaylist(playlistId, newTitle),
     {
       onSuccess: () => {
@@ -195,7 +195,7 @@ export function useDuplicatePlaylist() {
   );
 }
 
-export function useFollowPlaylist() {
+export function useFollowPlaylist(): any {
   return useMutation<void, string>(
     playlistId => playlistService.followPlaylist(playlistId),
     {
@@ -206,7 +206,7 @@ export function useFollowPlaylist() {
   );
 }
 
-export function useUnfollowPlaylist() {
+export function useUnfollowPlaylist(): any {
   return useMutation<void, string>(
     playlistId => playlistService.unfollowPlaylist(playlistId),
     {
@@ -217,12 +217,12 @@ export function useUnfollowPlaylist() {
   );
 }
 
-export function useBulkAddVideos() {
+export function useBulkAddVideos(): any {
   return useMutation<
     { success: string; failed: string[] },
     { playlistId: string; videoIds: string[] }
   >(
-    ({ playlistId, videoIds }) =>
+    ({ playlistId, videoIds }: any) =>
       playlistService.bulkAddVideos(playlistId, videoIds),
     {
       onSuccess: (_, { playlistId }) => {
@@ -233,12 +233,12 @@ export function useBulkAddVideos() {
   );
 }
 
-export function useBulkRemoveVideos() {
+export function useBulkRemoveVideos(): any {
   return useMutation<
     { success: string; failed: string[] },
     { playlistId: string; videoIds: string[] }
   >(
-    ({ playlistId, videoIds }) =>
+    ({ playlistId, videoIds }: any) =>
       playlistService.bulkRemoveVideos(playlistId, videoIds),
     {
       onSuccess: (_, { playlistId }) => {
@@ -249,9 +249,9 @@ export function useBulkRemoveVideos() {
   );
 }
 
-export function useUploadPlaylistThumbnail() {
+export function useUploadPlaylistThumbnail(): any {
   return useMutation<string, { playlistId: string; thumbnail: File }>(
-    ({ playlistId, thumbnail }) =>
+    ({ playlistId, thumbnail }: any) =>
       playlistService.uploadThumbnail(playlistId, thumbnail),
     {
       onSuccess: (_, { playlistId }) => {
@@ -263,7 +263,7 @@ export function useUploadPlaylistThumbnail() {
 }
 
 // Combined hooks for common patterns
-export function usePlaylistWithVideos(playlistId: any) {
+export function usePlaylistWithVideos(playlistId: any): any {
   const playlist = usePlaylist(playlistId);
   const videos = usePlaylistVideos(playlistId);
   const stats = usePlaylistStats(playlistId);
@@ -275,13 +275,13 @@ export function usePlaylistWithVideos(playlistId: any) {
     loading: playlist.loading || videos.loading || stats.loading,
     error: playlist.error || videos.error || stats.error,
     refetch: () => {
-      playlist.refetch();
-      videos.refetch();
-      stats.refetch();
+      playlist.re(fetch as any)();
+      videos.re(fetch as any)();
+      stats.re(fetch as any)();
     } };
 }
 
-export function usePlaylistManagement() {
+export function usePlaylistManagement(): any {
   const createPlaylist = useCreatePlaylist();
   const updatePlaylist = useUpdatePlaylist();
   const deletePlaylist = useDeletePlaylist();

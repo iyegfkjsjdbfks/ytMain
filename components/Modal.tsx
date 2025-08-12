@@ -1,3 +1,8 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useEffect } from 'react';
 
 import { useRef, useEffect, FC, ReactNode, MouseEvent } from 'react';
 
@@ -26,13 +31,13 @@ const Modal: React.FC<ModalProps> = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
+    const handleOutsideClick: any = (event: MouseEvent) => {
       if (closeOnOutsideClick && modalRef.current && !modalRef.current.contains(event.target as Node)) {
         onClose();
       }
     };
 
-    if (isOpen) {
+    if (isOpen as any) {
       document.addEventListener('mousedown', handleOutsideClick as EventListener);
     } else {
       document.removeEventListener('mousedown', handleOutsideClick as EventListener);
@@ -43,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({
     }}, [isOpen, onClose, closeOnOutsideClick]);
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen as any) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -81,7 +86,7 @@ return null;
             </h3>
             {!hideCloseButton && (
               <button
-                onClick={onClose}
+                onClick={(e: any) => onClose(e)}
                 className="p-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
                 aria-label="Close modal"
               >

@@ -211,8 +211,8 @@ export class PWAUtils {
 
         return { used, available, percentage };
       }
-    } catch (error) {
-      console.warn('Failed to get storage usage:', error);
+    } catch (error: any) {
+      (console as any).warn('Failed to get storage usage:', error);
     }
 
     return { used: 0, available: 0, percentage: 0 };
@@ -226,12 +226,12 @@ export class PWAUtils {
       if ('caches' in window) {
         const cacheNames = await caches.keys();
         await Promise.all(
-          cacheNames.map(cacheName => caches.delete(cacheName))
+          cacheNames.map((cacheName: any) => caches.delete(cacheName))
         );
         return true;
       }
-    } catch (error) {
-      console.error('Failed to clear cache:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to clear cache:', error);
     }
 
     return false;
@@ -252,7 +252,7 @@ export class PWAUtils {
       (navigator as any).mozConnection ||
       (navigator as any).webkitConnection;
 
-    if (connection) {
+    if (connection as any) {
       return {
         type: connection.type || 'unknown',
         effectiveType: connection.effectiveType || 'unknown',
@@ -262,7 +262,7 @@ export class PWAUtils {
     }
 
     return {
-      type: 'unknown',
+      type: "unknown" as const,
       effectiveType: 'unknown',
       downlink: 0,
       rtt: 0,

@@ -1,12 +1,14 @@
 import React, { ReactNode, MouseEvent } from 'react';
 import type { ReactNode, RefObject, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { ReactNode } from 'react';
 
 import { cn } from '../../utils/cn';
 
 interface DropdownMenuProps {
   isOpen: boolean;,
   onClose: () => void;
-  children: ReactNode;
+  children?: React.ReactNode;
   className?: string;
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   menuRef?: RefObject<HTMLDivElement>;
@@ -14,7 +16,7 @@ interface DropdownMenuProps {
 
 interface DropdownMenuItemProps {
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;,
-  children: ReactNode;
+  children?: React.ReactNode;
   className?: string;
   variant?: 'default' | 'danger';
   icon?: ReactNode;
@@ -31,7 +33,7 @@ const positionClasses = {
   'bottom-left': 'top-full left-0 mt-2',
   'bottom-right': 'top-full right-0 mt-2' };
 
-const DropdownMenu = ({
+const DropdownMenu: any = ({
   isOpen,
   children,
   className = '',
@@ -54,7 +56,7 @@ return null;
   );
 };
 
-const DropdownMenuItem = ({
+const DropdownMenuItem: any = ({
   onClick,
   children,
   className = '',
@@ -67,7 +69,7 @@ const DropdownMenuItem = ({
 
   return (
     <button
-      onClick={onClick}
+      onClick={(e: any) => onClick(e)}
       disabled={disabled}
       className={cn(
         'w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors',
@@ -81,7 +83,7 @@ const DropdownMenuItem = ({
   );
 };
 
-const DropdownMenuSeparator = ({
+const DropdownMenuSeparator: any = ({
   className = '' }: DropdownMenuSeparatorProps) => {
   return (
     <hr className={cn('my-2 border-gray-200 dark:border-gray-600', className)} />

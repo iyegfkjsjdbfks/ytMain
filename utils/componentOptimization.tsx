@@ -1,4 +1,9 @@
 import React, { memo, lazy, Suspense, ReactNode, /// <reference types="node" />
+import { ReactNode } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
   memo, useMemo, useCallback, useRef, useEffect, useState, type ComponentType, type ReactNode, type MemoExoticComponent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -16,11 +21,11 @@ declare namespace NodeJS {
 import { performanceMonitor } from './performanceMonitor';
 
 // Performance monitoring hook for components
-export function useComponentPerformance(componentName: any) {
+export function useComponentPerformance(componentName: any): any {
   const renderStartTime = useRef<number>(0);
   const mountTime = useRef<number>(0);
   const renderCount = useRef<number>(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   // Track component mount time
@@ -32,7 +37,7 @@ export function useComponentPerformance(componentName: any) {
       const totalLifetime = unmountTime - mountTime.current;
 
       if (import.meta.env.DEV) {
-        console.log(`Component ${componentName} lifetime: ${totalLifetime.toFixed(2)}ms`);
+        (console as any).log(`Component ${componentName} lifetime: ${totalLifetime.toFixed(2)}ms`);
       }
     }}, [componentName]);
 
@@ -45,7 +50,7 @@ export function useComponentPerformance(componentName: any) {
     performanceMonitor.trackComponentRender(componentName, renderDuration);
 
     if (import.meta.env.DEV && renderDuration > 16) {
-      console.warn(`Slow render detected in ${componentName}: ${renderDuration.toFixed(2)}ms`);
+      (console as any).warn(`Slow render detected in ${componentName}: ${renderDuration.toFixed(2)}ms`);
     }
   });
 
@@ -56,9 +61,9 @@ return undefined;
 }
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries: any) => {
         const entry = entries[0];
-        if (entry) {
+        if (entry as any) {
           setIsVisible(entry.isIntersecting);
         }
       },
@@ -88,16 +93,16 @@ export function smartMemo<P extends object>(,
   componentName?: string): MemoExoticComponent<ComponentType<P>> {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  const MemoizedComponent = memo(Component(prevProps, nextProps) => {
+  const MemoizedComponent = memo(Component(prevProps: any, nextProps: any) => {
     const startTime = performance.now();
 
     // Use custom comparison if provided
-    if (propsAreEqual) {
+    if (propsAreEqual as any) {
       const result = propsAreEqual(prevProps, nextProps);
       const comparisonTime = performance.now() - startTime;
 
       if (import.meta.env.DEV && comparisonTime > 1) {
-        console.warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
+        (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
       }
 
       return result;
@@ -119,7 +124,7 @@ export function smartMemo<P extends object>(,
 
     const comparisonTime = performance.now() - startTime;
     if (import.meta.env.DEV && comparisonTime > 1) {
-      console.warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
+      (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
     }
 
     return true;
@@ -148,7 +153,7 @@ export function useOptimizedCallback<T extends (...args) => any>(,
 
     if (changed && import.meta.env.DEV && debugName) {
       const timeSinceCreation = performance.now() - creationTime.current;
-      console.log(`Callback ${debugName} recreated after ${timeSinceCreation.toFixed(2)}ms`);
+      (console as any).log(`Callback ${debugName} recreated after ${timeSinceCreation.toFixed(2)}ms`);
       creationTime.current = performance.now();
     }
 
@@ -190,14 +195,14 @@ export function useOptimizedMemo<T>(,
 
     if (import.meta.env.DEV) {
       if (computationTime.current > 5) {
-        console.warn(`Expensive memo computation${debugName ? ` in ${debugName}` : ''}: ${computationTime.current.toFixed(2)}ms`);
+        (console as any).warn(`Expensive memo computation${debugName ? ` in ${debugName}` : ''}: ${computationTime.current.toFixed(2)}ms`);
       }
 
       // Estimate memory usage for objects
       if (typeof result === 'object' && result !== null) {
         const jsonSize = JSON.stringify(result).length;
         if (jsonSize > 10000) { // 10KB threshold
-          console.warn(`Large memo value${debugName ? ` in ${debugName}` : ''}: ~${(jsonSize / 1024).toFixed(1)}KB`);
+          (console as any).warn(`Large memo value${debugName ? ` in ${debugName}` : ''}: ~${(jsonSize / 1024).toFixed(1)}KB`);
         }
       }
     }
@@ -213,10 +218,10 @@ export function createLazyComponent<P extends Record<string, any>>(,
   errorFallback?: ReactNode) {
   const LazyComponent = React.lazy(importFn);
 
-  return function LazyWrapper(props: P) {
+  return function LazyWrapper(props: P): any {
     const [error, setError] = useState<Error | null>(null);
 
-    if (error) {
+    if (error as any) {
       return errorFallback || (
         <div className="p-4 text-center text-red-600">
           <p>Failed to load component</p>
@@ -244,8 +249,8 @@ export function createLazyComponent<P extends Record<string, any>>(,
   }}
 
 // Virtual scrolling hook for large lists
-export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5 }) {
-  const [scrollTop, setScrollTop] = useState(0);
+export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5 }): any {
+  const [scrollTop, setScrollTop] = useState<number>(0);
 
   const visibleRange = useMemo(() => {
     const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
@@ -275,9 +280,9 @@ export function useOptimizedImage(src: any,
   sizes?: string;
   quality?: number;
   priority?: boolean;
-} = {}) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isError, setIsError] = useState(false);
+} = {}): any {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState(options.priority || false);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -288,7 +293,7 @@ return undefined;
 }
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries: any) => {
         const entry = entries[0];
         if (entry?.isIntersecting) {
           setIsVisible(true);
@@ -347,7 +352,7 @@ export function createAsyncComponent<_P extends object>(,
         const loadTime = performance.now() - startTime;
 
         if (import.meta.env.DEV) {
-          console.log(`Loaded chunk ${chunkName || componentPath} in ${loadTime.toFixed(2)}ms`);
+          (console as any).log(`Loaded chunk ${chunkName || componentPath} in ${loadTime.toFixed(2)}ms`);
         }
 
         performanceMonitor.trackCustomMetric(
@@ -357,7 +362,7 @@ export function createAsyncComponent<_P extends object>(,
         return module;
       })
       .catch(error => {
-        console.error(`Failed to load chunk ${chunkName || componentPath}:`, error);
+        (console as any).error(`Failed to load chunk ${chunkName || componentPath}:`, error);
         throw error;
       });
   });
@@ -369,12 +374,12 @@ export function withPerformanceMonitoring<P extends object>(,
   componentName?: string) {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  return function PerformanceMonitoredComponent(props: P) {
+  return function PerformanceMonitoredComponent(props: P): any {
     const { elementRef, isVisible, renderCount, trackCustomMetric } = useComponentPerformance(displayName);
 
     // Track visibility changes
     useEffect(() => {
-      if (isVisible) {
+      if (isVisible as any) {
         trackCustomMetric('visibility_time', performance.now());
       }
     
@@ -388,7 +393,7 @@ export function withPerformanceMonitoring<P extends object>(,
           _root: any,
           _priorityLevel: any) => {
           // Custom performance tracking logic
-          console.debug('Component committed to root');
+          (console as any).debug('Component committed to root');
         
         }}
     }, []);
@@ -408,9 +413,9 @@ export function useDebouncedState<T>(,
   const [debouncedValue, setDebouncedValue] = useState(initialValue);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => clearTimeout(timer);
   }, [value, delay]);
@@ -436,10 +441,10 @@ export function useThrottledCallback<T extends (...args) => any>(,
         clearTimeout(timeoutRef.current);
       }
 
-      timeoutRef.current = setTimeout(() => {
+      timeoutRef.current = setTimeout((() => {
         lastCall.current = Date.now();
         callback(...args);
-      }, delay - (now - lastCall.current));
+      }) as any, delay - (now - lastCall.current));
 
   }, [callback, delay]) as T;
 }

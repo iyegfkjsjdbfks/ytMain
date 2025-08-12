@@ -1,4 +1,7 @@
 import React from 'react';
+import { MouseEvent } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 interface ActionButtonProps {
   onClick: (e: React.MouseEvent) => void;,
   ariaLabel: string;
@@ -29,7 +32,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
 
   return (
     <button
-      onClick={onClick}
+      onClick={(e: any) => onClick(e)}
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       aria-label={ariaLabel}
     >

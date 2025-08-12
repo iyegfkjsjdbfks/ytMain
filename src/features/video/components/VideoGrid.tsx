@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
+import { FC } from 'react';
 
 interface VideoGridProps {
   title?: string;
@@ -22,8 +23,8 @@ const VideoGrid: React.FC<VideoGridProps> = ({
   emptyMessage = 'No videos available',
   onVideoClick }) => {
   // Determine grid column classes based on the columns prop
-  const getGridClass = () => {
-    switch (columns) {
+  const getGridClass: any = () => {
+    switch (columns as any) {
       case 1:
         return 'grid-cols-1';
       case 2:

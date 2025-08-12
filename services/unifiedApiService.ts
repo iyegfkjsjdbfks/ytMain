@@ -40,7 +40,7 @@ return null;
 }
 
     const isExpired = Date.now() - item.timestamp > item.ttl;
-    if (isExpired) {
+    if (isExpired as any) {
       this.cache.delete(key);
       return null;
     }
@@ -112,7 +112,7 @@ class UnifiedApiService {
   private requestQueue: Map<string, Promise<any>> = new Map();
 
   constructor(config: Partial<ApiConfig> = {}) {
-    this.config = { ...defaultConfig, ...config };
+    this.config = { ...defaultConfig as any, ...config };
     this.cache = new UnifiedCache();
     this.interceptors = {
       request: [],
@@ -120,7 +120,7 @@ class UnifiedApiService {
       error: [] };
 
     // Add default request interceptor for API key
-    this.addRequestInterceptor((config) => {
+    this.addRequestInterceptor((config: any) => {
       if (this.config.apiKey && !config.url.includes('key=')) {
         const separator = config.url.includes('?') ? '&' : '?';
         config.url += `${separator}key=${this.config.apiKey}`;
@@ -129,8 +129,8 @@ class UnifiedApiService {
     });
 
     // Add default error interceptor
-    this.addErrorInterceptor((error) => {
-      console.error('API Error:', error);
+    this.addErrorInterceptor((error: any) => {
+      (console as any).error('API Error:', error);
       return error;
     });
   }
@@ -156,9 +156,9 @@ class UnifiedApiService {
     cacheTTL?: number,
   ): Promise<T> {
     // Check cache first
-    if (cacheKey) {
+    if (cacheKey as any) {
       const cached = this.cache.get<T>(cacheKey);
-      if (cached) {
+      if (cached as any) {
         return cached;
       }
     }
@@ -187,7 +187,7 @@ class UnifiedApiService {
     cacheTTL?: number,
   ): Promise<T> {
     let config: RequestInit & { url: string } = {
-      ...options,
+      ...options as any,
       url: `${this.config.baseUrl}${endpoint}`,
       headers: {
         'Content-Type': 'application/json',
@@ -203,10 +203,10 @@ class UnifiedApiService {
     for (let attempt = 0; attempt <= this.config.retryAttempts; attempt++) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
+        const timeoutId = setTimeout((() => controller.abort()) as any, this.config.timeout);
 
-        let response = await fetch(config.url, {
-          ...config,
+        let response = await (fetch as any)(config.url, {
+          ...config as any,
           signal: controller.signal });
 
         clearTimeout(timeoutId);
@@ -227,12 +227,12 @@ class UnifiedApiService {
         const data = await response.json();
 
         // Cache successful response
-        if (cacheKey) {
+        if (cacheKey as any) {
           this.cache.set(cacheKey, data, cacheTTL);
         }
 
         return data;
-      } catch (error) {
+      } catch (error: any) {
         lastError = error as Error;
 
         // Apply error interceptors
@@ -248,7 +248,7 @@ class UnifiedApiService {
         // Wait before retry
         if (attempt < this.config.retryAttempts) {
           await new Promise(resolve =>
-            setTimeout(resolve, this.config.retryDelay * Math.pow(2, attempt)),
+            setTimeout((resolve) as any, this.config.retryDelay * Math.pow(2, attempt)),
           );
         }
       }
@@ -267,7 +267,7 @@ class UnifiedApiService {
   } = {}): Promise<{ items: Video; nextPageToken?: string }> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
-      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
       return { items: [] };
     }
     const queryParams = new URLSearchParams();
@@ -291,7 +291,7 @@ queryParams.set('pageToken', params.pageToken);
   } = {}): Promise<{ items: Video; nextPageToken?: string }> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
-      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
       return { items: [] };
     }
     const queryParams = new URLSearchParams();
@@ -313,7 +313,7 @@ queryParams.set('order', params.order);
   async getChannel(channelId: any): Promise<Channel> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
-      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
       throw new Error('YouTube Data API is disabled');
     }
     const queryParams = new URLSearchParams({
@@ -343,7 +343,7 @@ queryParams.set('order', params.order);
   async getPlaylist(playlistId: any): Promise<Playlist> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
-      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
       throw new Error('YouTube Data API is disabled');
     }
     const queryParams = new URLSearchParams({
@@ -377,7 +377,7 @@ queryParams.set('order', params.order);
   } = {}): Promise<{ items: Comment; nextPageToken?: string }> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
-      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
       return { items: [] };
     }
     const queryParams = new URLSearchParams();

@@ -1,4 +1,5 @@
 import React, { useEffect, forwardRef } from 'react';
+import { useEffect } from 'react';
 // / <reference types="vite/client" />
 // Performance monitoring utilities for React components
 interface PerformanceMetric {
@@ -23,8 +24,8 @@ class PerformanceMonitor {
   private setupObservers() {
     // Observe paint metrics
     try {
-      const paintObserver = new PerformanceObserver((list) => {
-        list.getEntries().forEach((_entry) => {
+      const paintObserver = new PerformanceObserver((list: any) => {
+        list.getEntries().forEach((_entry: any) => {
           });
       });
       paintObserver.observe({ entryTypes: ['paint'] });
@@ -35,11 +36,11 @@ class PerformanceMonitor {
 
     // Observe navigation metrics
     try {
-      const navigationObserver = new PerformanceObserver((list) => {
-        list.getEntries().forEach((_entry) => {
+      const navigationObserver = new PerformanceObserver((list: any) => {
+        list.getEntries().forEach((_entry: any) => {
           // Performance monitoring disabled
           // const navigation = _entry as PerformanceNavigationTiming;
-          // console.log('Navigation timing:', navigation);
+          // (console as any).log('Navigation timing:', navigation);
           });
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });
@@ -78,7 +79,7 @@ return null;
     const metric = this.metrics.get(name);
     if (!metric) {
       if (import.meta.env.MODE === 'development') {
-        console.warn(`Performance metric '${name}' not found`);
+        (console as any).warn(`Performance metric '${name}' not found`);
       }
       return null;
     }
@@ -95,7 +96,7 @@ return null;
     }
 
     // Log slow operations with different thresholds for different operation types
-    const getThreshold = (operationName: any): number => {
+    const getThreshold: any = (operationName: any): number => {
       if (operationName.startsWith('image-load')) {
 return 2000;
 } // 2s for images
@@ -107,7 +108,7 @@ return 1500;
 
     const threshold = getThreshold(name);
     if (duration > threshold) {
-      console.warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
+      (console as any).warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
     }
 
     return duration;
@@ -145,10 +146,10 @@ return;
       return;
     }
 
-    console.group('📊 Performance Summary');
+    (console as any).group('📊 Performance Summary');
 
     // Group by name and calculate averages
-    const grouped = metrics.reduce((acc, metric) => {
+    const grouped = metrics.reduce((acc: any, metric: any) => {
       if (metric.name && !acc[metric.name]) {
         acc[metric.name] = [];
       }
@@ -165,7 +166,7 @@ return;
 
       });
 
-    console.groupEnd();
+    (console as any).groupEnd();
   }
 
   disconnect(): void {
@@ -178,12 +179,12 @@ return;
 export const performanceMonitor = new PerformanceMonitor();
 
 // React Hook for component performance monitoring
-export function usePerformanceMonitor(componentName: any) {
-  const startRender = () => {
+export function usePerformanceMonitor(componentName: any): any {
+  const startRender: any = () => {
     performanceMonitor.startMeasure(`${componentName}-render`);
   };
 
-  const endRender = () => {
+  const endRender: any = () => {
     const metricName = `${componentName}-render`;
     return performanceMonitor.hasMetric(metricName)
       ? performanceMonitor.endMeasure(metricName)
@@ -199,7 +200,7 @@ export function usePerformanceMonitor(componentName: any) {
         performanceMonitor.endMeasure(fullName);
       }
       return result;
-    } catch (error) {
+    } catch (error: any) {
       if (performanceMonitor.hasMetric(fullName)) {
         performanceMonitor.endMeasure(fullName);
       }
@@ -216,7 +217,7 @@ export function usePerformanceMonitor(componentName: any) {
         performanceMonitor.endMeasure(fullName);
       }
       return result;
-    } catch (error) {
+    } catch (error: any) {
       if (performanceMonitor.hasMetric(fullName)) {
         performanceMonitor.endMeasure(fullName);
       }
@@ -237,7 +238,7 @@ export function withPerformanceMonitoring<P extends object>(,
   componentName?: string) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-  const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {
+  const MonitoredComponent = React.forwardRef<any, P>((props: any, ref: any) => {
     const { startRender, endRender } = usePerformanceMonitor(displayName);
 
     useEffect(() => {
@@ -247,7 +248,7 @@ export function withPerformanceMonitoring<P extends object>(,
       };
     });
 
-    return React.createElement(WrappedComponent, { ...props, ref });
+    return React.createElement(WrappedComponent, { ...props as any, ref });
   });
 
   MonitoredComponent.displayName = `withPerformanceMonitoring(${displayName})`;
@@ -256,7 +257,7 @@ export function withPerformanceMonitoring<P extends object>(,
 }
 
 // Utility functions
-export const measureRenderTime = (componentName: any) => {
+export const measureRenderTime: any = (componentName: any) => {
   return (_target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
 
@@ -275,7 +276,7 @@ export const measureRenderTime = (componentName: any) => {
 };
 
 // Bundle size analyzer
-export const analyzeBundleSize = () => {
+export const analyzeBundleSize: any = () => {
   if (typeof window === 'undefined') {
 return;
 }
@@ -283,31 +284,31 @@ return;
   const scripts = Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'));
   const styles = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
 
-  console.group('📦 Bundle Analysis');
+  (console as any).group('📦 Bundle Analysis');
   // Estimate bundle sizes (this is approximate)
-  scripts.forEach((script) => {
+  scripts.forEach((script: any) => {
     if (script.src && !script.src.includes('chrome-extension')) {
       // Placeholder for size analysis if needed
     }
   });
 
-  styles.forEach((style) => {
+  styles.forEach((style: any) => {
     if (style.href && !style.href.includes('chrome-extension')) {
       // Placeholder for size analysis if needed
     }
   });
 
-  console.groupEnd();
+  (console as any).groupEnd();
 };
 
 // Memory usage monitoring
-export const monitorMemoryUsage = () => {
+export const monitorMemoryUsage: any = () => {
   if (typeof window === 'undefined' || !(window.performance as any)?.memory) {
-    console.warn('Memory monitoring not supported in this browser');
+    (console as any).warn('Memory monitoring not supported in this browser');
     return;
   }
 
-  // const _memory = (window.performance as any).memory;
+  // const _memory: any = (window.performance as any).memory;
 
   };
 

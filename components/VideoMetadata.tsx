@@ -1,5 +1,6 @@
 import React from 'react';
 import { ClockIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, GlobeAltIcon, CalendarIcon, TagIcon, ShieldCheckIcon, CameraIcon, LanguageIcon, TvIcon, BoltIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
 
 import type { Video } from '../src/types/core';
 
@@ -13,7 +14,7 @@ const VideoMetadata: React.FC<VideoMetadataProps> = ({
   video,
   expanded = false,
   onToggleExpanded }) => {
-  const formatDate = (dateString: any) => {
+  const formatDate: any = (dateString: any) => {
     if (!dateString) {
 return 'N/A';
 }
@@ -26,7 +27,7 @@ return 'N/A';
       minute: '2-digit' });
   };
 
-  const formatNumber = (num: any) => {
+  const formatNumber: any = (num: any) => {
     if (num >= 1000000000) {
 return `${(num / 1000000000).toFixed(1)}B`;
 }
@@ -39,9 +40,9 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const getVideoQuality = () => {
+  const getVideoQuality: any = () => {
     const definition = video.definition || video.contentDetails?.definition;
-    switch (definition) {
+    switch (definition as any) {
       case 'hd': return 'HD (720p+)';
       case 'sd': return 'SD (480p)';
       case 'hfr': return 'High Frame Rate';
@@ -123,7 +124,7 @@ return `${(num / 1000).toFixed(1)}K`;
         </h3>
         {detailedMetadata.some(item => item.condition) && onToggleExpanded && (
           <button
-            onClick={onToggleExpanded}
+            onClick={(e: any) => onToggleExpanded(e)}
             className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
           >
             {expanded ? 'Show Less' : 'Show More'}

@@ -39,7 +39,7 @@ class PerformanceMonitor {
 
     // Log slow operations in development
     if (process.env.NODE_ENV === 'development' && duration > 100) {
-      console.warn(
+      (console as any).warn(
         `Slow operation detected: ${name} took ${duration.toFixed(2)}ms`
       );
     }
@@ -67,7 +67,7 @@ class PerformanceMonitor {
 export const performanceMonitor = PerformanceMonitor.getInstance();
 
 // React hook for performance monitoring
-export function usePerformanceMonitor(name: any) {
+export function usePerformanceMonitor(name: any): any {
   return {
     startMeasure: () => performanceMonitor.startMeasure(name),
     endMeasure: () => performanceMonitor.endMeasure(name),

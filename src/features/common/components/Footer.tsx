@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
 /**
  * Footer component with links to important pages and copyright information

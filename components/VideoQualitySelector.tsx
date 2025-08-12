@@ -1,3 +1,8 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import type { Video } from '../types';
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
@@ -66,14 +71,14 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   isPictureInPicture = false,
   onPictureInPictureToggle,
   className = '' }) => {
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
   const [activePanel, setActivePanel] = useState<'main' | 'quality' | 'speed'>('main');
-  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [showVolumeSlider, setShowVolumeSlider] = useState<boolean>(false);
   const settingsRef = useRef<HTMLDivElement>(null);
   const volumeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
         setShowSettings(false);
         setActivePanel('main');
@@ -87,23 +92,23 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
-  const getCurrentQualityLabel = () => {
+  const getCurrentQualityLabel: any = () => {
     const quality = qualities.find((q: any) => q.value === currentQuality);
     return quality?.label || 'Auto';
   };
 
-  const getCurrentSpeedLabel = () => {
+  const getCurrentSpeedLabel: any = () => {
     const speed = playbackSpeeds.find((s: any) => s.value === currentSpeed);
     return speed?.label || 'Normal';
   };
 
-  const handleQualitySelect = (qualityValue: any) => {
+  const handleQualitySelect: any = (qualityValue: any) => {
     onQualityChange(qualityValue);
     setShowSettings(false);
     setActivePanel('main');
   };
 
-  const handleSpeedSelect = (speedValue: any) => {
+  const handleSpeedSelect: any = (speedValue: any) => {
     onSpeedChange?.(speedValue);
     setShowSettings(false);
     setActivePanel('main');
@@ -114,7 +119,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
       {/* Play/Pause Button */}
       {onPlayPause && (
         <button
-          onClick={onPlayPause}
+          onClick={(e: any) => onPlayPause(e)}
           className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
           aria-label={isPlaying ? 'Pause' : 'Play'}
         >
@@ -188,7 +193,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
       {/* Picture-in-Picture */}
       {onPictureInPictureToggle && (
         <button
-          onClick={onPictureInPictureToggle}
+          onClick={(e: any) => onPictureInPictureToggle(e)}
           className={`p-2 text-white hover:bg-white/20 rounded-full transition-colors ${
             isPictureInPicture ? 'bg-white/20' : ''
           }`}
@@ -318,7 +323,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
       {/* Fullscreen */}
       {onFullscreenToggle && (
         <button
-          onClick={onFullscreenToggle}
+          onClick={(e: any) => onFullscreenToggle(e)}
           className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
           aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
         >

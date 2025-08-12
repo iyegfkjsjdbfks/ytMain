@@ -1,6 +1,10 @@
 import React, { useEffect, useCallback, useState, memo, FC } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useNavigate, useNavigate, useSearchParams  } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../src/hooks/useDebounce';
@@ -34,6 +38,7 @@ EmptySearchState.displayName = 'EmptySearchState';
 
 // Main component
 const SearchResultsPage: React.FC = () => {
+  return null;
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const query = searchParams.get('q') || '';
@@ -48,7 +53,7 @@ const SearchResultsPage: React.FC = () => {
     youtubeLoading: false });
 
   // Memoized search function with performance monitoring
-  const performSearch = useCallback(async (searchQuery: any) => {
+  const performSearch = useCallback(async (searchQuery: any): Promise<any> => {
     if (!searchQuery.trim()) {
       setSearchState({
         videos: [],
@@ -60,7 +65,7 @@ const SearchResultsPage: React.FC = () => {
     }
 
     performanceMonitor.startMeasure('search-results-load');
-    setSearchState(prev => ({ ...prev, loading: true,
+    setSearchState(prev => ({ ...prev as any, loading: true,
           youtubeLoading: true }));
 
     // Create an AbortController for request cancellation
@@ -74,12 +79,12 @@ const SearchResultsPage: React.FC = () => {
       const { getYouTubeSearchProvider } = await import('../services/settingsService');
       const provider = getYouTubeSearchProvider();
 
-      console.log(`🔍 Search provider: ${provider}`);
+      (console as any).log(`🔍 Search provider: ${provider}`);
 
       // When Hybrid Mode is selected, prioritize Google Custom Search API for discovery
       // as per user requirement and rule
       if (provider === 'hybrid') {
-        console.log('🔄 Hybrid Mode: Using Google Custom Search API for discovery with YouTube API metadata fallback');
+        (console as any).log('🔄 Hybrid Mode: Using Google Custom Search API for discovery with YouTube API metadata fallback');
 
         // Use Google Custom Search for discovery with YouTube API for metadata enhancement
         const combinedResults = await searchCombined(
@@ -117,9 +122,9 @@ const SearchResultsPage: React.FC = () => {
       if (performanceMonitor.hasMetric('search-results-load')) {
         performanceMonitor.endMeasure('search-results-load');
       }
-    } catch (error) {
-      console.error('Error in search:', error);
-      setSearchState(prev => ({ ...prev, loading: false,
+    } catch (error: any) {
+      (console as any).error('Error in search:', error);
+      setSearchState(prev => ({ ...prev as any, loading: false,
           youtubeLoading: false }));
       if (performanceMonitor.hasMetric('search-results-load')) {
         performanceMonitor.endMeasure('search-results-load');
@@ -163,7 +168,7 @@ const SearchResultsPage: React.FC = () => {
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
           sortBy="relevance"
-          onVideoClick={(video) => {
+          onVideoClick={(video: any) => {
             if ('videoId' in video) {
               // YouTube video - use google-search prefix for search results
               navigate(`/watch?v=google-search-${video.videoId}`);

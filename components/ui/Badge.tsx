@@ -1,4 +1,6 @@
 import React from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 export interface BadgeProps {
   children: React.ReactNode;
   variant?: 'default' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
@@ -36,3 +38,4 @@ export const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
+export default Badge;

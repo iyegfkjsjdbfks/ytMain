@@ -1,5 +1,7 @@
 import React, { memo, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon, QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
 
@@ -10,33 +12,33 @@ interface UserMenuProps {
   isOpen: boolean; onClose: () => void
 }
 
-const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }) => {
+const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }: any) => {
   const commonClasses = `flex items-center px-4 py-3 text-sm w-full text-left transition-colors duration-150
     ${isDestructive ? 'text-red-500 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-500/10'
                     : 'text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70'}`;
 
-  const content = (
+  const content: any = (
     <>
       {icon && <span className="mr-3.5 w-5 h-5 text-neutral-500 dark:text-neutral-300">{icon}</span>}
       {children}
     </>
   );
 
-  if (to) {
+  if (to as any) {
     return (
-      <Link to={to} className={commonClasses} onClick={onClick}>
+      <Link to={to} className={commonClasses} onClick={(e: any) => onClick(e)}>
         {content}
       </Link>
     );
   }
   return (
-    <button onClick={onClick} className={commonClasses}>
+    <button onClick={(e: any) => onClick(e)} className={commonClasses}>
       {content}
     </button>
   );
 };
 
-const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }) => {
+const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }: any) => {
   const { theme, toggleTheme } = useTheme();
   const { user, logout, isAuthenticated } = useAuth();
 
@@ -44,7 +46,7 @@ const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }) => {
 return null;
 }
 
-  const handleSignOut = () => {
+  const handleSignOut: any = () => {
     // Clear any stored user data
     localStorage.removeItem('youtubeCloneWatchHistory_v1');
     localStorage.removeItem('youtubeCloneLikedVideos_v1');
@@ -55,19 +57,19 @@ return null;
 
     // Show confirmation
     const confirmed = window.confirm('Are you sure you want to sign out? This will clear your watch history, liked videos, and search history.');
-    if (confirmed) {
+    if (confirmed as any) {
       // Reload the page to reset the app state
       window.location.reload();
     }
     onClose(); // Close menu
   };
 
-  const handleThemeToggle = () => {
+  const handleThemeToggle: any = () => {
     toggleTheme();
     onClose(); // Close menu after theme toggle
   };
 
-  const handleGenericClick = () => {
+  const handleGenericClick: any = () => {
     onClose(); // Close menu on any item click
   };
 
@@ -103,7 +105,7 @@ return null;
               )}
               <Link
                 to={`/channel/${user.username}`}
-                onClick={handleGenericClick}
+                onClick={(e: any) => handleGenericClick(e)}
                 className="text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-0.5 block"
               >
                 View your channel
@@ -124,23 +126,23 @@ return null;
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">
-        <MenuItem onClick={handleSignOut} icon={<ArrowRightStartOnRectangleIcon />} isDestructive>Sign out</MenuItem>
+        <MenuItem onClick={(e: any) => handleSignOut(e)} icon={<ArrowRightStartOnRectangleIcon />} isDestructive>Sign out</MenuItem>
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">
-         <MenuItem onClick={handleThemeToggle} icon={theme === 'dark' ? <SunIcon className="text-yellow-500 dark:text-yellow-400" /> : <MoonIcon className="text-sky-500 dark:text-sky-400" />}>,
+         <MenuItem onClick={(e: any) => handleThemeToggle(e)} icon={theme === 'dark' ? <SunIcon className="text-yellow-500 dark:text-yellow-400" /> : <MoonIcon className="text-sky-500 dark:text-sky-400" />}>,
           Appearance: {theme === 'dark' ? 'Light' : 'Dark'}
          </MenuItem>
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">
-        <MenuItem to="/account/data" icon={<PresentationChartLineIcon />} onClick={handleGenericClick}>Your data in YouTube</MenuItem> {/* Updated to prop */}
-        <MenuItem to="/account/settings" icon={<Cog8ToothIcon />} onClick={handleGenericClick}>Settings</MenuItem> {/* Updated to prop */}
+        <MenuItem to="/account/data" icon={<PresentationChartLineIcon />} onClick={(e: any) => handleGenericClick(e)}>Your data in YouTube</MenuItem> {/* Updated to prop */}
+        <MenuItem to="/account/settings" icon={<Cog8ToothIcon />} onClick={(e: any) => handleGenericClick(e)}>Settings</MenuItem> {/* Updated to prop */}
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">
-        <MenuItem to="#" icon={<QuestionMarkCircleIcon />} onClick={handleGenericClick}>Help</MenuItem>
-        <MenuItem to="#" icon={<ChatBubbleLeftEllipsisIcon />} onClick={handleGenericClick}>Send feedback</MenuItem>
+        <MenuItem to="#" icon={<QuestionMarkCircleIcon />} onClick={(e: any) => handleGenericClick(e)}>Help</MenuItem>
+        <MenuItem to="#" icon={<ChatBubbleLeftEllipsisIcon />} onClick={(e: any) => handleGenericClick(e)}>Send feedback</MenuItem>
       </div>
     </div>
   );

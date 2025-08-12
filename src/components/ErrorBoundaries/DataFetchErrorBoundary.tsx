@@ -1,3 +1,5 @@
+import React from 'react';
+import { ReactNode } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -17,7 +19,7 @@ import { createComponentError } from '@/utils/errorUtils';
 import { conditionalLogger } from '../../utils/conditionalLogger';
 
 export interface DataFetchErrorBoundaryProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   dataType?: string;
   onRetry?: () => void;
   fallback?: ReactNode;
@@ -44,7 +46,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = {
+    this.state: any = {
       hasError: false,
           error: null,
       errorInfo: null,
@@ -94,9 +96,9 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
         isOnline: navigator.onLine });
 
       // Add a small delay to prevent immediate retry
-      this.retryTimeout = setTimeout(() => {
+      this.retryTimeout = setTimeout((() => {
         this.setState({
-          hasError: false,
+          hasError: false) as any,
           error: null,
           errorInfo: null,
           retryCount: this.state.retryCount + 1,
@@ -115,7 +117,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
     const { dataType } = this.props;
     const isOffline = !navigator.onLine;
 
-    if (isOffline) {
+    if (isOffline as any) {
       return 'You appear to be offline. Please check your internet connection and try again.';
     }
 
@@ -133,7 +135,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
   private getErrorIcon = (): ReactNode => {
     const isOffline = !navigator.onLine;
 
-    if (isOffline) {
+    if (isOffline as any) {
       return <WifiIcon className='w-8 h-8 text-orange-600' />;
     }
 

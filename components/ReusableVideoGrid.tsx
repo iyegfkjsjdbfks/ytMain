@@ -2,6 +2,8 @@ import React from 'react';
 import { VideoGridSkeleton } from './LoadingStates';
 import OptimizedVideoCard from './OptimizedVideoCard';
 import VideoCard from './VideoCard';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import type { Video } from '../types';
 
@@ -49,7 +51,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
   emptyIcon,
   skeletonCount = 18 }) => {
   // Grid column classes
-  const getGridColumns = () => {
+  const getGridColumns: any = () => {
     if (columns === 'auto') {
       return 'grid-cols-1 sm: grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
     }
@@ -57,8 +59,8 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
   };
 
   // Gap classes
-  const getGapClass = () => {
-    switch (gap) {
+  const getGapClass: any = () => {
+    switch (gap as any) {
       case 'sm': return 'gap-3';
       case 'lg': return 'gap-6';
       default: return 'gap-4'
@@ -67,7 +69,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
         };
 
   // Loading state
-  if (loading) {
+  if (loading as any) {
     return (
       <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
         <VideoGridSkeleton count={skeletonCount} />
@@ -76,7 +78,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
   }
 
   // Error state
-  if (error) {
+  if (error as any) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
         <div className="text-red-500 mb-4">

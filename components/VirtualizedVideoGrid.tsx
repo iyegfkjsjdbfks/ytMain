@@ -1,3 +1,9 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { useState, useEffect, useCallback, useMemo, FC } from 'react';
 
@@ -35,7 +41,7 @@ interface GridItemProps {
           showChannel: boolean; showDescription: boolean;
   }}
 
-const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }) => {
+const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }: any) => {
   const {
     videos,
     columnsPerRow,
@@ -115,7 +121,7 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
 return;
 }
 
-    const resizeObserver = new ResizeObserver((entries) => {
+    const resizeObserver = new ResizeObserver((entries: any) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
         setContainerSize({ width, height });
@@ -128,12 +134,12 @@ return;
 
   // Handle infinite scrolling
   const handleScroll = useCallback(
-    ({ scrollTop, scrollHeight, clientHeight }) => {
+    ({ scrollTop, scrollHeight, clientHeight }: any) => {
       if (!hasMore || loading || !onLoadMore) {
 return;
 }
 
-      const scrollPercentage = (scrollTop + clientHeight) / scrollHeight;
+      const scrollPercentage: any = (scrollTop + clientHeight) / scrollHeight;
       if (scrollPercentage > 0.8) {
         onLoadMore();
       }
@@ -198,7 +204,7 @@ return;
             {hasMore && !loading && onLoadMore && (
               <div className="flex justify-center py-8">
                 <button
-                  onClick={onLoadMore}
+                  onClick={(e: any) => onLoadMore(e)}
                   className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
                 >
                   Load More Videos

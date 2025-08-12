@@ -1,5 +1,7 @@
 import type { Video } from '../types';
 import React, { ReactNode } from 'react';
+import { FormEvent } from 'react';
+import { ReactNode } from 'react';
 // Unified Type System for YouTube Studio Clone
 
 // Base Entity Types
@@ -136,7 +138,7 @@ export interface EndScreen {
 }
 
 export interface EndScreenElement {
-  type: 'video' | 'playlist' | 'subscribe' | 'channel';
+  type: "video" as const | 'playlist' | 'subscribe' | 'channel';
   position: { x: number; y: number; width: number; height: number };
   targetId?: string;
   customMessage?: string;
@@ -144,7 +146,7 @@ export interface EndScreenElement {
 
 export interface Card {
   id: string;
-  type: 'video' | 'playlist' | 'channel' | 'link' | 'poll';
+  type: "video" as const | 'playlist' | 'channel' | 'link' | 'poll';
   title: string;
   message?: string;
   startTime: number;
@@ -375,7 +377,7 @@ export interface UploadSettings {
 
 // Search Types
 export interface SearchResult {
-  type: 'video' | 'channel' | 'playlist';
+  type: "video" as const | 'channel' | 'playlist';
   id: string;
   title: string;
   description: string;
@@ -425,7 +427,7 @@ export interface ApiError {
 export interface FormField {
   name: string;
   label: string;
-  type: 'text' | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'date';
+  type: "text" as const | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'date';
   required: boolean;
   placeholder?: string;
   options?: Array<{ value: string; label: string }>;
@@ -434,7 +436,7 @@ export interface FormField {
 }
 
 export interface ValidationRule {
-  type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom';
+  type: "required" as const | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom';
   value?: any;
   message: string;
   validator?: (value: string | number) => boolean
@@ -475,7 +477,7 @@ export interface BreadcrumbItem {
 
 export interface ToastMessage {
   id: string;
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: "success" as const | 'error' | 'warning' | 'info';
   title: string;
   message?: string;
   duration?: number;
@@ -608,7 +610,7 @@ export interface CustomEvent<T = any> {
 }
 
 export interface VideoEvent extends CustomEvent {
-  type: 'play' | 'pause' | 'seek' | 'ended' | 'timeupdate' | 'volumechange' | 'fullscreen';
+  type: "play" as const | 'pause' | 'seek' | 'ended' | 'timeupdate' | 'volumechange' | 'fullscreen';
   data: {
     videoId: string;
     currentTime: number;
@@ -619,7 +621,7 @@ export interface VideoEvent extends CustomEvent {
 }
 
 export interface AnalyticsEvent extends CustomEvent {
-  type: 'page_view' | 'video_view' | 'click' | 'search' | 'engagement';
+  type: "page_view" as const | 'video_view' | 'click' | 'search' | 'engagement';
   data: {
     page?: string;
     videoId?: string;

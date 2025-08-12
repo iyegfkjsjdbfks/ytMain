@@ -8,6 +8,9 @@ declare namespace NodeJS {
 }
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { CONSTANTS } from '../../lib/constants';
 import type { ApiResponse } from '../../types/core';
@@ -68,7 +71,7 @@ class ApiCache {
     // Clean up old entries
     if (this.cache.size > CONSTANTS.CACHE_CONFIG.MAX_CACHE_SIZE) {
       const oldestKey = Array.from(this.cache.keys())[0];
-      if (oldestKey) {
+      if (oldestKey as any) {
         this.cache.delete(oldestKey);
       }
     }
@@ -169,7 +172,7 @@ export function useApi<T>(,
       // Create new abort controller
       abortControllerRef.current = new AbortController();
 
-      setState(prev => ({ ...prev, loading: true, error: null }));
+      setState(prev => ({ ...prev as any, loading: true, error: null }));
 
       try {
         const response = await queryFn();
@@ -194,7 +197,7 @@ export function useApi<T>(,
 
         // Call success callback
         onSuccess?.(newData);
-      } catch (error) {
+      } catch (error: any) {
         if (!mountedRef.current) {
           return;
         }
@@ -204,17 +207,17 @@ export function useApi<T>(,
 
         // Retry logic
         if (retryCount < retry && (error as Error).name !== 'AbortError') {
-          retryTimeoutRef.current = setTimeout(
+          retryTimeoutRef.current = setTimeout((
             () => {
               fetchData(retryCount + 1);
-            },
+            }) as any,
             retryDelay * Math.pow(2, retryCount)
           ); // Exponential backoff
           return;
         }
 
         setState(prev => ({
-          ...prev,
+          ...prev as any,
           loading: false,
           error: errorMessage }));
 
@@ -249,7 +252,7 @@ export function useApi<T>(,
 
       // Update state
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         data,
         isStale: false,
         lastUpdated: timestamp }));
@@ -281,7 +284,7 @@ export function useApi<T>(,
       return;
     }
 
-    const handleFocus = () => {
+    const handleFocus: any = () => {
       if (state.isStale) {
         fetchData();
       }
@@ -307,7 +310,7 @@ export function useApi<T>(,
   }, []);
 
   return {
-    ...state,
+    ...state as any,
     refetch,
     mutate,
     reset };
@@ -356,11 +359,11 @@ export function useMutation<T, TVariables = any>(,
         config.onSettled?.(data, null, variables);
 
         return data;
-      } catch (error) {
+      } catch (error: any) {
         const errorMessage =
           error instanceof Error ? error.message : 'An error occurred';
 
-        setState(prev => ({ ...prev, loading: false, error: errorMessage }));
+        setState(prev => ({ ...prev as any, loading: false, error: errorMessage }));
         config.onError?.(
           error instanceof Error ? error : new Error(errorMessage),
           variables
@@ -382,7 +385,7 @@ export function useMutation<T, TVariables = any>(,
   }, []);
 
   return {
-    ...state,
+    ...state as any,
     mutate,
     reset };
 }

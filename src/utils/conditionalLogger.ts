@@ -69,7 +69,7 @@ class ConditionalLogger {
         message,
         source
       );
-      console.error(formattedMessage, data || '');
+      (console as any).error(formattedMessage, data || '');
     }
   }
 
@@ -80,7 +80,7 @@ class ConditionalLogger {
         message,
         source
       );
-      console.warn(formattedMessage, data || '');
+      (console as any).warn(formattedMessage, data || '');
     }
   }
 
@@ -91,7 +91,7 @@ class ConditionalLogger {
         message,
         source
       );
-      console.info(formattedMessage, data || '');
+      (console as any).info(formattedMessage, data || '');
     }
   }
 
@@ -102,33 +102,33 @@ class ConditionalLogger {
         message,
         source
       );
-      console.debug(formattedMessage, data || '');
+      (console as any).debug(formattedMessage, data || '');
     }
   }
 
   // Performance logging for development
   time(label: any): void {
     if (this.isDevelopment) {
-      console.time(label);
+      (console as any).time(label);
     }
   }
 
   timeEnd(label: any): void {
     if (this.isDevelopment) {
-      console.timeEnd(label);
+      (console as any).timeEnd(label);
     }
   }
 
   // Group logging for complex operations
   group(label: any): void {
     if (this.isDevelopment) {
-      console.group(label);
+      (console as any).group(label);
     }
   }
 
   groupEnd(): void {
     if (this.isDevelopment) {
-      console.groupEnd();
+      (console as any).groupEnd();
     }
   }
 
@@ -158,7 +158,7 @@ class ConditionalLogger {
       const sanitized = { ...response };
 
       // Recursively remove sensitive fields
-      const removeSensitiveFields = (obj: any): any => {
+      const removeSensitiveFields: any = (obj: any): any => {
         if (typeof obj !== 'object' || obj === null) return obj;
 
         if (Array.isArray(obj)) {

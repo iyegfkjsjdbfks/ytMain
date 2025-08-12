@@ -1,5 +1,7 @@
 import React, { useEffect, FC } from 'react';
 import { LoginForm } from '../components/LoginForm';
+import { FC } from 'react';
+import { useEffect } from 'react';
 
 import { useAuthStore } from '../store/authStore';
 
@@ -7,6 +9,7 @@ import { useAuthStore } from '../store/authStore';
  * Login page component
  */
 const LoginPage: React.FC = () => {
+  return null;
   const { checkAuth } = useAuthStore();
 
   useEffect(() => {

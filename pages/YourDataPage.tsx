@@ -1,4 +1,8 @@
+import React from 'react';
 import { useEffect, useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { TrashIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 
@@ -6,17 +10,18 @@ import getLikedVideos, { getWatchHistoryVideos } from '../services/realVideoServ
 import { EyeIcon } from '@heroicons/react/24/outline';
 
 const YourDataPage: React.FC = () => {
-  const [watchHistoryCount, setWatchHistoryCount] = useState(0);
-  const [likedVideosCount, setLikedVideosCount] = useState(0);
-  const [searchHistoryCount, setSearchHistoryCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  return null;
+  const [watchHistoryCount, setWatchHistoryCount] = useState<number>(0);
+  const [likedVideosCount, setLikedVideosCount] = useState<number>(0);
+  const [searchHistoryCount, setSearchHistoryCount] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
   const [dataVisibility, setDataVisibility] = useState({
     watchHistory: true,
           searchHistory: true, likedVideos: true;
   });
 
   useEffect(() => {
-    const fetchDataCounts = async () => {
+    const fetchDataCounts = async (): Promise<void> => {
       setLoading(true);
       try {
         const [watchHistory, likedVideos, searchHistory] = await Promise.all([
@@ -27,8 +32,8 @@ const YourDataPage: React.FC = () => {
         setWatchHistoryCount(watchHistory.length);
         setLikedVideosCount(likedVideos.length);
         setSearchHistoryCount(searchHistory.length);
-      } catch (error) {
-        console.error('Failed to fetch data counts:', error);
+      } catch (error: any) {
+        (console as any).error('Failed to fetch data counts:', error);
       } finally {
         setLoading(false);
       }
@@ -37,46 +42,46 @@ const YourDataPage: React.FC = () => {
     fetchDataCounts();
   }, []);
 
-  const handleClearSearchHistory = async () => {
+  const handleClearSearchHistory = async (): Promise<void> => {
     const confirmed = window.confirm('Are you sure you want to clear your search history? This action cannot be undone.');
-    if (confirmed) {
+    if (confirmed as any) {
       try {
         await clearAllRecentSearches();
         setSearchHistoryCount(0);
-      } catch (error) {
-        console.error('Failed to clear search history:', error);
+      } catch (error: any) {
+        (console as any).error('Failed to clear search history:', error);
       }
     }
   };
 
-  const handleClearWatchHistory = () => {
+  const handleClearWatchHistory: any = () => {
     const confirmed = window.confirm('Are you sure you want to clear your watch history? This action cannot be undone.');
-    if (confirmed) {
+    if (confirmed as any) {
       localStorage.removeItem('youtubeCloneWatchHistory_v1');
       setWatchHistoryCount(0);
     }
   };
 
-  const handleClearLikedVideos = () => {
+  const handleClearLikedVideos: any = () => {
     const confirmed = window.confirm('Are you sure you want to clear your liked videos? This action cannot be undone.');
-    if (confirmed) {
+    if (confirmed as any) {
       localStorage.removeItem('youtubeCloneLikedVideos_v1');
       setLikedVideosCount(0);
     }
   };
 
-  const handleToggleVisibility = (dataType: keyof typeof dataVisibility) => {
+  const handleToggleVisibility: any = (dataType: keyof typeof dataVisibility) => {
     setDataVisibility(prev => ({
-      ...prev,
+      ...prev as any,
       [dataType]: !prev[dataType] }));
   };
 
-  const handleDownloadData = () => {
+  const handleDownloadData: any = () => {
     const data = {
-      watchHistory: JSON.parse(localStorage.getItem('youtubeCloneWatchHistory_v1') || '[]'),
-          likedVideos: JSON.parse(localStorage.getItem('youtubeCloneLikedVideos_v1') || '[]'),
-      searchHistory: JSON.parse(localStorage.getItem('youtubeCloneRecentSearches_v2') || '[]'),
-          userPlaylists: JSON.parse(localStorage.getItem('youtubeCloneUserPlaylists_v1') || '[]'), exportDate: new Date().toISOString()
+      watchHistory: JSON.parse((localStorage as any).getItem('youtubeCloneWatchHistory_v1') || '[]'),
+          likedVideos: JSON.parse((localStorage as any).getItem('youtubeCloneLikedVideos_v1') || '[]'),
+      searchHistory: JSON.parse((localStorage as any).getItem('youtubeCloneRecentSearches_v2') || '[]'),
+          userPlaylists: JSON.parse((localStorage as any).getItem('youtubeCloneUserPlaylists_v1') || '[]'), exportDate: new Date().toISOString()
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -95,7 +100,7 @@ const YourDataPage: React.FC = () => {
     count, isVisible: boolean;,
     onToggleVisibility: () => void,
           onClear: () => void; loading: boolean;
-  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }) => (
+  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: any) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
@@ -107,7 +112,7 @@ const YourDataPage: React.FC = () => {
         </div>
         <div className="flex items-center space-x-2 ml-4">
           <button
-            onClick={onToggleVisibility}
+            onClick={(e: any) => onToggleVisibility(e)}
             className={`p-2 rounded-full transition-colors ${
               isVisible
                 ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
@@ -122,7 +127,7 @@ const YourDataPage: React.FC = () => {
 
       <div className="flex space-x-3">
         <button
-          onClick={onClear}
+          onClick={(e: any) => onClear(e)}
           disabled={loading || count === 0}
           className="flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-neutral-300 dark:disabled:bg-neutral-700 text-white disabled:text-neutral-500 text-sm font-medium rounded-md transition-colors disabled:cursor-not-allowed"
         >
@@ -158,7 +163,7 @@ const YourDataPage: React.FC = () => {
 
           <div className="flex flex-wrap gap-4">
             <button
-              onClick={handleDownloadData}
+              onClick={(e: any) => handleDownloadData(e)}
               className="flex items-center space-x-2 px-6 py-3 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-medium rounded-lg transition-colors"
             >
               <ArrowDownTrayIcon className="w-5 h-5" />

@@ -1,6 +1,8 @@
 import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import type { Video } from '../types';
+import { FC } from 'react';
+import { useState } from 'react';
 
 interface StudioVideoGridProps {
   videos: Video;
@@ -31,11 +33,11 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     VideoVisibility | 'all'
   >('all');
 
-  const handleVideoSelect = (videoId: any,
+  const handleVideoSelect: any = (videoId: any,
           selected: any) => {
     const newSelection = new Set(selectedVideos);
 
-    if (selected) {
+    if (selected as any) {
       newSelection.add(videoId);
     } else {
       newSelection.delete(videoId);
@@ -44,8 +46,8 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     setSelectedVideos(newSelection);
   };
 
-  const handleSelectAll = (selected: any) => {
-    if (selected) {
+  const handleSelectAll: any = (selected: any) => {
+    if (selected as any) {
       const allIds = videos.map((video: any) => video.id);
       setSelectedVideos(new Set(allIds));
     } else {
@@ -53,7 +55,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     }
   };
 
-  const handleDeleteSelected = () => {
+  const handleDeleteSelected: any = () => {
     if (selectedVideos.size === 0 || !onDelete) {
       return;
     }
@@ -71,7 +73,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     }
   };
 
-  const formatDate = (dateString: any) => {
+  const formatDate: any = (dateString: any) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -86,8 +88,8 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
       : videos.filter((video: any) => video.visibility === filterVisibility);
 
   // Sort videos based on selected sort option
-  const sortedVideos = [...filteredVideos].sort((a, b) => {
-    switch (sortBy) {
+  const sortedVideos = [...filteredVideos].sort((a: any, b: any) => {
+    switch (sortBy as any) {
       case 'views':
         const aViews =
           typeof a.views === 'string' ? parseInt(a.views, 10) : a.views;
@@ -107,7 +109,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
         });
 
   // Show loading indicator if data is being fetched
-  if (loading) {
+  if (loading as any) {
     return (
       <div className='bg-white shadow-md rounded-md p-5'>
         <div className='animate-pulse space-y-4'>
@@ -201,7 +203,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
             {selectedVideos.size > 0 && (
               <button
                 className='text-red-600 hover:text-red-800 text-sm border border-red-600 hover:bg-red-50 rounded px-3 py-1'
-                onClick={handleDeleteSelected}
+                onClick={(e: any) => handleDeleteSelected(e)}
               >
                 Delete
               </button>
@@ -213,7 +215,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
       {/* Video list */}
       {sortedVideos.length > 0 ? (
         <div className='divide-y'>
-          {sortedVideos.map(video => (
+          {sortedVideos.map((video: any) => (
             <div
               key={video.id}
               className='flex items-center p-4 hover:bg-gray-50'

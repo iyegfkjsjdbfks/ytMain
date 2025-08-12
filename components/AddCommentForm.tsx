@@ -1,5 +1,8 @@
 import React, { useState, useRef, FC } from 'react';
 import { PaperAirplaneIcon as PaperAirplaneSolidIcon } from '@heroicons/react/24/solid';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 const PaperAirplaneIconSolid = PaperAirplaneSolidIcon;
 
 interface AddCommentFormProps {
@@ -12,11 +15,11 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({
   currentUserAvatarUrl,
   onCommentSubmit,
   maxCommentLength }) => {
-  const [commentText, setCommentText] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [commentText, setCommentText] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit: any = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!commentText.trim() || commentText.length > maxCommentLength) {
 return;
@@ -29,7 +32,7 @@ return;
     }
   };
 
-  const handleCancel = () => {
+  const handleCancel: any = () => {
     setCommentText('');
     setIsFocused(false);
     if (inputRef.current) {
@@ -47,7 +50,7 @@ return;
         className="w-10 h-10 rounded-full flex-shrink-0"
       />
       <div className="flex-grow">
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={(e: any) => handleSubmit(e)} className="w-full">
           <input
             ref={inputRef}
             type="text"
@@ -67,7 +70,7 @@ return;
               <div className="space-x-2">
                 <button
                   type="button"
-                  onClick={handleCancel}
+                  onClick={(e: any) => handleCancel(e)}
                   className="px-3 py-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700/70 rounded-full transition-colors"
                 >
                   Cancel

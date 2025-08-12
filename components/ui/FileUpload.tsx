@@ -1,3 +1,6 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { useState, useRef, FC } from 'react';
 
@@ -29,10 +32,10 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   description = 'Drag and drop files here, or click to select',
   files = [] }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isDragOver, setIsDragOver] = useState(false);
+  const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleFileSelect = (selectedFiles: FileList | null) => {
+  const handleFileSelect: any = (selectedFiles: FileList | null) => {
     if (!selectedFiles) {
 return;
 }
@@ -40,7 +43,7 @@ return;
     const fileArray = Array.from(selectedFiles);
 
     // Validate file size
-    if (maxSize) {
+    if (maxSize as any) {
       const oversizedFiles = fileArray.filter((file) => file.size > maxSize);
       if (oversizedFiles.length > 0) {
         setError(`Some files exceed the maximum size of ${formatFileSize(maxSize)}`);
@@ -52,19 +55,19 @@ return;
     onFileSelect(fileArray);
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver: any = (e: React.DragEvent) => {
     e.preventDefault();
     if (!disabled) {
       setIsDragOver(true);
     }
   };
 
-  const handleDragLeave = (e: React.DragEvent) => {
+  const handleDragLeave: any = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop: any = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
 
@@ -73,13 +76,13 @@ return;
     }
   };
 
-  const handleClick = () => {
+  const handleClick: any = () => {
     if (!disabled && fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
 
-  const formatFileSize = (bytes: any): string => {
+  const formatFileSize: any = (bytes: any): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }
@@ -104,7 +107,7 @@ return '0 Bytes';
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        onClick={handleClick}
+        onClick={(e: any) => handleClick(e)}
       >
         <input
           ref={fileInputRef}
@@ -163,7 +166,7 @@ return '0 Bytes';
                 </div>
                 {onFileRemove && (
                   <button
-                    onClick={(e) => {
+                    onClick={(e: any) => {
                       e.stopPropagation();
                       onFileRemove(index);
                     }}
@@ -180,3 +183,4 @@ return '0 Bytes';
     </div>
   );
 };
+export default FileUpload;

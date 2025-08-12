@@ -1,6 +1,10 @@
 import React, { useEffect, createContext, useReducer, useCallback, type ReactNode, FC, ReactNode } from 'react';
 import type { User } from '../src/types/core';
 import type { MiniplayerVideo, StrictNotification } from '../types/strictTypes';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 // Unified App State Interface
 interface UnifiedAppState {
@@ -26,16 +30,16 @@ interface UnifiedAppState {
 
 // Action Types
 type UnifiedAppAction =
-  | { type: 'SET_USER'; payload: User | null }
-  | { type: 'SET_AUTH_LOADING'; payload: boolean }
-  | { type: 'SET_THEME'; payload: 'light' | 'dark' | 'system' }
-  | { type: 'SET_MINIPLAYER_VIDEO'; payload: MiniplayerVideo | null }
-  | { type: 'TOGGLE_MINIPLAYER' }
-  | { type: 'ADD_TO_WATCH_LATER'; payload: string }
-  | { type: 'REMOVE_FROM_WATCH_LATER'; payload: string }
-  | { type: 'TOGGLE_SIDEBAR' }
-  | { type: 'ADD_NOTIFICATION'; payload: StrictNotification }
-  | { type: 'REMOVE_NOTIFICATION'; payload: string };
+  | { type: "SET_USER" as const; payload: User | null }
+  | { type: "SET_AUTH_LOADING" as const; payload: boolean }
+  | { type: "SET_THEME" as const; payload: 'light' | 'dark' | 'system' }
+  | { type: "SET_MINIPLAYER_VIDEO" as const; payload: MiniplayerVideo | null }
+  | { type: "TOGGLE_MINIPLAYER" as const }
+  | { type: "ADD_TO_WATCH_LATER" as const; payload: string }
+  | { type: "REMOVE_FROM_WATCH_LATER" as const; payload: string }
+  | { type: "TOGGLE_SIDEBAR" as const }
+  | { type: "ADD_NOTIFICATION" as const; payload: StrictNotification }
+  | { type: "REMOVE_NOTIFICATION" as const; payload: string };
 
 // Initial State
 const initialState: UnifiedAppState = {,
@@ -55,45 +59,45 @@ function unifiedAppReducer(state: UnifiedAppState,
   switch (action.type) {
     case 'SET_USER':
       return {
-        ...state,
+        ...state as any,
         user: action.payload,
           isAuthenticated: !!action.payload };
     case 'SET_AUTH_LOADING':
       return {
-        ...state,
+        ...state as any,
         isAuthLoading: action.payload };
     case 'SET_THEME':
       return {
-        ...state,
+        ...state as any,
         theme: action.payload };
     case 'SET_MINIPLAYER_VIDEO':
       return {
-        ...state,
+        ...state as any,
         miniplayerVideo: action.payload,
           isMiniplayerOpen: !!action.payload };
     case 'TOGGLE_MINIPLAYER':
       return {
-        ...state,
+        ...state as any,
         isMiniplayerOpen: !state.isMiniplayerOpen };
     case 'ADD_TO_WATCH_LATER':
       return {
-        ...state,
+        ...state as any,
         watchLaterVideos: [...state.watchLaterVideos, action.payload] };
     case 'REMOVE_FROM_WATCH_LATER':
       return {
-        ...state,
+        ...state as any,
         watchLaterVideos: state.watchLaterVideos.filter((id: string) => id !== action.payload) };
     case 'TOGGLE_SIDEBAR':
       return {
-        ...state,
+        ...state as any,
         sidebarCollapsed: !state.sidebarCollapsed };
     case 'ADD_NOTIFICATION':
       return {
-        ...state,
+        ...state as any,
         notifications: [...state.notifications, action.payload] };
     case 'REMOVE_NOTIFICATION':
       return {
-        ...state,
+        ...state as any,
         notifications: state.notifications.filter((n: any) => n.id !== action.payload) };
     default: return state
   }
@@ -136,17 +140,17 @@ export const UnifiedAppContext = createContext<UnifiedAppContextType | undefined
 
 // Provider Props
 interface UnifiedAppProviderProps {
-  children: ReactNode
+  children?: React.ReactNode
 }
 
 // Provider Component
-export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(unifiedAppReducer, initialState);
+export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children }: any) => {
+  const [state, dispatch] = useReducer<any, any>(unifiedAppReducer, initialState);
 
   // Auth actions
   const login = useCallback(async (email: any,
           password: any): Promise<boolean> => {
-    dispatch({ type: 'SET_AUTH_LOADING',
+    dispatch({ type: "SET_AUTH_LOADING" as const,
           payload: true });
 
     try {
@@ -154,7 +158,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
       if (password.length < 6) {
         return false;
       }
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout((resolve) as any, 1000));
 
       // Mock successful login
       const mockUser: User = {,
@@ -184,17 +188,17 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
         createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString() };
 
-      localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));
-      localStorage.setItem('youtube_clone_token', 'mock-token');
+      (localStorage as any).setItem('youtube_clone_user', JSON.stringify(mockUser));
+      (localStorage as any).setItem('youtube_clone_token', 'mock-token');
 
-      dispatch({ type: 'SET_USER',
+      dispatch({ type: "SET_USER" as const,
           payload: mockUser });
       return true;
-    } catch (error) {
-      console.error('Login failed:', error);
+    } catch (error: any) {
+      (console as any).error('Login failed:', error);
       return false;
     } finally {
-      dispatch({ type: 'SET_AUTH_LOADING',
+      dispatch({ type: "SET_AUTH_LOADING" as const,
           payload: false });
     }
   }, []);
@@ -202,7 +206,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   const logout = useCallback(() => {
     localStorage.removeItem('youtube_clone_user');
     localStorage.removeItem('youtube_clone_token');
-    dispatch({ type: 'SET_USER',
+    dispatch({ type: "SET_USER" as const,
           payload: null });
   }, []);
 
@@ -213,51 +217,51 @@ return false;
 
     try {
       const updatedUser = { ...state.user, ...updates };
-      localStorage.setItem('youtube_clone_user', JSON.stringify(updatedUser));
-      dispatch({ type: 'SET_USER',
+      (localStorage as any).setItem('youtube_clone_user', JSON.stringify(updatedUser));
+      dispatch({ type: "SET_USER" as const,
           payload: updatedUser });
       return true;
-    } catch (error) {
-      console.error('Profile update failed:', error);
+    } catch (error: any) {
+      (console as any).error('Profile update failed:', error);
       return false;
     }
   }, [state.user]);
 
   // Theme actions
   const setTheme = useCallback((theme: 'light' | 'dark' | 'system') => {
-    dispatch({ type: 'SET_THEME',
+    dispatch({ type: "SET_THEME" as const,
           payload: theme });
-    localStorage.setItem('youtube_clone_theme', theme);
+    (localStorage as any).setItem('youtube_clone_theme', theme);
   }, []);
 
   // Miniplayer actions
   const openMiniplayer = useCallback((video: MiniplayerVideo) => {
-    dispatch({ type: 'SET_MINIPLAYER_VIDEO',
+    dispatch({ type: "SET_MINIPLAYER_VIDEO" as const,
           payload: video });
   }, []);
 
   const closeMiniplayer = useCallback(() => {
-    dispatch({ type: 'SET_MINIPLAYER_VIDEO',
+    dispatch({ type: "SET_MINIPLAYER_VIDEO" as const,
           payload: null });
   }, []);
 
   const toggleMiniplayer = useCallback(() => {
-    dispatch({ type: 'TOGGLE_MINIPLAYER' });
+    dispatch({ type: "TOGGLE_MINIPLAYER" as const });
   }, []);
 
   // Watch Later actions
   const addToWatchLater = useCallback((videoId: any) => {
-    dispatch({ type: 'ADD_TO_WATCH_LATER',
+    dispatch({ type: "ADD_TO_WATCH_LATER" as const,
           payload: videoId });
     const updated = [...state.watchLaterVideos, videoId];
-    localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
+    (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 
   const removeFromWatchLater = useCallback((videoId: any) => {
-    dispatch({ type: 'REMOVE_FROM_WATCH_LATER',
+    dispatch({ type: "REMOVE_FROM_WATCH_LATER" as const,
           payload: videoId });
     const updated = state.watchLaterVideos.filter((id: string) => id !== videoId);
-    localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
+    (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 
   const isInWatchLater = useCallback((videoId: any) => {
@@ -266,76 +270,76 @@ return false;
 
   // UI actions
   const toggleSidebar = useCallback(() => {
-    dispatch({ type: 'TOGGLE_SIDEBAR' });
+    dispatch({ type: "TOGGLE_SIDEBAR" as const });
   }, []);
 
   const addNotification = useCallback((notification: Omit<StrictNotification, 'id' | 'timestamp'>) => {
     const notificationWithId: StrictNotification = {
-      ...notification,
+      ...notification as any,
       id: Date.now().toString(),
           timestamp: new Date().toISOString() };
-    dispatch({ type: 'ADD_NOTIFICATION',
+    dispatch({ type: "ADD_NOTIFICATION" as const,
           payload: notificationWithId });
   }, []);
 
   const removeNotification = useCallback((id: string) => {
-    dispatch({ type: 'REMOVE_NOTIFICATION',
+    dispatch({ type: "REMOVE_NOTIFICATION" as const,
           payload: id });
   }, []);
 
   // Initialize state from localStorage
   React.useEffect(() => {
-    const initializeState = () => {
+    const initializeState: any = () => {
       // Set loading to false immediately for faster perceived performance
-      dispatch({ type: 'SET_AUTH_LOADING',
+      dispatch({ type: "SET_AUTH_LOADING" as const,
           payload: false });
 
       try {
         // Initialize auth state
-        const storedUser = localStorage.getItem('youtube_clone_user');
-        const token = localStorage.getItem('youtube_clone_token');
+        const storedUser = (localStorage as any).getItem('youtube_clone_user');
+        const token = (localStorage as any).getItem('youtube_clone_token');
 
         if (storedUser && token) {
           try {
             const user = JSON.parse(storedUser);
-            dispatch({ type: 'SET_USER',
+            dispatch({ type: "SET_USER" as const,
           payload: user });
-          } catch (parseError) {
-            console.warn('Failed to parse stored user data, clearing:', parseError);
+          } catch (parseError: any) {
+            (console as any).warn('Failed to parse stored user data, clearing:', parseError);
             localStorage.removeItem('youtube_clone_user');
             localStorage.removeItem('youtube_clone_token');
           }
         }
 
         // Initialize theme
-        const storedTheme = localStorage.getItem('youtube_clone_theme') as 'light' | 'dark' | 'system';
+        const storedTheme = (localStorage as any).getItem('youtube_clone_theme') as 'light' | 'dark' | 'system';
         if (storedTheme && ['light', 'dark', 'system'].includes(storedTheme)) {
-          dispatch({ type: 'SET_THEME',
+          dispatch({ type: "SET_THEME" as const,
           payload: storedTheme });
         }
 
         // Initialize watch later asynchronously to not block initial render
-        setTimeout(() => {
-          const storedWatchLater = localStorage.getItem('youtube_clone_watch_later');
-          if (storedWatchLater) {
+        setTimeout((() => {
+          const storedWatchLater = (localStorage as any).getItem('youtube_clone_watch_later');
+          if (storedWatchLater as any) {
             try {
               const watchLaterVideos = JSON.parse(storedWatchLater);
               if (Array.isArray(watchLaterVideos)) {
-                watchLaterVideos.forEach((videoId) => {
+                watchLaterVideos.forEach((videoId: any) => {
                   if (typeof videoId === 'string') {
-                    dispatch({ type: 'ADD_TO_WATCH_LATER',
+                    dispatch({ type: "ADD_TO_WATCH_LATER" as const) as any,
           payload: videoId });
                   }
                 });
               }
-            } catch (parseError) {
-              console.warn('Failed to parse stored watch later data, clearing:', parseError);
+            } catch (parseError: any) {
+              (console as any).warn('Failed to parse stored watch later data, clearing:', parseError);
               localStorage.removeItem('youtube_clone_watch_later');
             }
           }
         }, 0);
-      } catch (error) {
-        console.error('Failed to initialize app state:', error);
+      } catch (error: any) {
+        (console as any).error('Failed to initialize app state:', error);
       }
     };
 

@@ -25,7 +25,7 @@ interface DeploymentConfig {
 interface HealthCheck {
   id: string;
   name: string;
-  type: 'http' | 'tcp' | 'command' | 'custom';
+  type: "http" as const | 'tcp' | 'command' | 'custom';
   _config: {
     url?: string;
     port?: number;
@@ -40,7 +40,7 @@ interface HealthCheck {
 interface QualityGateConfig {
   id: string;
   name: string;
-  type: 'performance' | 'security' | 'quality' | 'accessibility';
+  type: "performance" as const | 'security' | 'quality' | 'accessibility';
   criteria: Array<{
     metric: string;
     operator: '>' | '<' | '>=' | '<=' | '==';
@@ -50,7 +50,7 @@ interface QualityGateConfig {
 }
 
 interface NotificationConfig {
-  type: 'email' | 'slack' | 'webhook' | 'sms';
+  type: "email" as const | 'slack' | 'webhook' | 'sms';
   _config: {
     url?: string;
     channel?: string;
@@ -71,7 +71,7 @@ interface DeploymentPipeline {
 interface PipelineStage {
   id: string;
   name: string;
-  type: 'build' | 'test' | 'security-scan' | 'quality-check' | 'deploy' | 'verify';
+  type: "build" as const | 'test' | 'security-scan' | 'quality-check' | 'deploy' | 'verify';
   commands: string[];
   timeout: number;
   retries: number;
@@ -81,7 +81,7 @@ interface PipelineStage {
 }
 
 interface PipelineTrigger {
-  type: 'push' | 'pull-request' | 'schedule' | 'manual' | 'webhook';
+  type: "push" as const | 'pull-request' | 'schedule' | 'manual' | 'webhook';
   _config: {
     branches?: string[];
     schedule?: string;
@@ -169,13 +169,13 @@ class DeploymentAutomationEngine {
       parallelExecution: true,
       triggers: [
         {
-          type: 'push',
+          type: "push" as const,
           _config: { branches: ['develop', 'feature/*'] } }],
       stages: [
         {
           id: 'install',
           name: 'Install Dependencies',
-          type: 'build',
+          type: "build" as const,
           commands: ['npm ci'],
           timeout: 300000, // 5 minutes,
   retries: 2,
@@ -191,7 +191,7 @@ class DeploymentAutomationEngine {
         {
           id: 'test',
           name: 'Unit Tests',
-          type: 'test',
+          type: "test" as const,
           commands: ['npm run test:unit'],
           timeout: 600000, // 10 minutes,
   retries: 1,
@@ -199,7 +199,7 @@ class DeploymentAutomationEngine {
         {
           id: 'build',
           name: 'Build Application',
-          type: 'build',
+          type: "build" as const,
           commands: ['npm run build'],
           timeout: 600000, // 10 minutes,
   retries: 1,
@@ -208,7 +208,7 @@ class DeploymentAutomationEngine {
         {
           id: 'deploy-dev',
           name: 'Deploy to Development',
-          type: 'deploy',
+          type: "deploy" as const,
           commands: ['npm run deploy:dev'],
           timeout: 300000, // 5 minutes,
   retries: 2,
@@ -223,13 +223,13 @@ class DeploymentAutomationEngine {
       parallelExecution: false,
       triggers: [
         {
-          type: 'push',
+          type: "push" as const,
           _config: { branches: ['main', 'release/*'] } }],
       stages: [
         {
           id: 'install',
           name: 'Install Dependencies',
-          type: 'build',
+          type: "build" as const,
           commands: ['npm ci'],
           timeout: 300000,
           retries: 2,
@@ -253,7 +253,7 @@ class DeploymentAutomationEngine {
         {
           id: 'test-unit',
           name: 'Unit Tests',
-          type: 'test',
+          type: "test" as const,
           commands: ['npm run test:unit'],
           timeout: 600000,
           retries: 1,
@@ -261,7 +261,7 @@ class DeploymentAutomationEngine {
         {
           id: 'test-integration',
           name: 'Integration Tests',
-          type: 'test',
+          type: "test" as const,
           commands: ['npm run test:integration'],
           timeout: 900000, // 15 minutes,
   retries: 1,
@@ -269,7 +269,7 @@ class DeploymentAutomationEngine {
         {
           id: 'build',
           name: 'Build Application',
-          type: 'build',
+          type: "build" as const,
           commands: ['npm run build:staging'],
           timeout: 600000,
           retries: 1,
@@ -278,7 +278,7 @@ class DeploymentAutomationEngine {
         {
           id: 'deploy-staging',
           name: 'Deploy to Staging',
-          type: 'deploy',
+          type: "deploy" as const,
           commands: ['npm run deploy:staging'],
           timeout: 600000,
           retries: 2,
@@ -287,7 +287,7 @@ class DeploymentAutomationEngine {
         {
           id: 'verify-staging',
           name: 'Verify Deployment',
-          type: 'verify',
+          type: "verify" as const,
           commands: ['npm run test:e2e:staging'],
           timeout: 1200000, // 20 minutes,
   retries: 2,
@@ -302,7 +302,7 @@ class DeploymentAutomationEngine {
       parallelExecution: false,
       triggers: [
         {
-          type: 'manual',
+          type: "manual" as const,
           _config: {} }],
       stages: [
         {
@@ -316,7 +316,7 @@ class DeploymentAutomationEngine {
         {
           id: 'backup',
           name: 'Create Backup',
-          type: 'deploy',
+          type: "deploy" as const,
           commands: ['npm run backup:create'],
           timeout: 600000,
           retries: 2,
@@ -324,7 +324,7 @@ class DeploymentAutomationEngine {
         {
           id: 'deploy-blue-green',
           name: 'Blue-Green Deployment',
-          type: 'deploy',
+          type: "deploy" as const,
           commands: ['npm run deploy:blue-green'],
           timeout: 900000,
           retries: 1,
@@ -333,7 +333,7 @@ class DeploymentAutomationEngine {
         {
           id: 'health-check',
           name: 'Health Check',
-          type: 'verify',
+          type: "verify" as const,
           commands: ['npm run health:check'],
           timeout: 300000,
           retries: 3,
@@ -342,7 +342,7 @@ class DeploymentAutomationEngine {
         {
           id: 'smoke-tests',
           name: 'Smoke Tests',
-          type: 'test',
+          type: "test" as const,
           commands: ['npm run test:smoke'],
           timeout: 600000,
           retries: 2,
@@ -351,7 +351,7 @@ class DeploymentAutomationEngine {
         {
           id: 'switch-traffic',
           name: 'Switch Traffic',
-          type: 'deploy',
+          type: "deploy" as const,
           commands: ['npm run traffic:switch'],
           timeout: 300000,
           retries: 1,
@@ -360,7 +360,7 @@ class DeploymentAutomationEngine {
         {
           id: 'post-deployment-verify',
           name: 'Post-deployment Verification',
-          type: 'verify',
+          type: "verify" as const,
           commands: ['npm run verify:production'],
           timeout: 600000,
           retries: 2,
@@ -386,7 +386,7 @@ class DeploymentAutomationEngine {
         {
           id: 'app-health',
           name: 'Application Health',
-          type: 'http',
+          type: "http" as const,
           _config: {
             url: 'http://localhost:3001/health',
             timeout: 5000,
@@ -397,13 +397,13 @@ class DeploymentAutomationEngine {
         {
           id: 'test-coverage',
           name: 'Test Coverage',
-          type: 'quality',
+          type: "quality" as const,
           criteria: [
             { metric: 'coverage', operator: '>=', threshold: 70 }],
           blocking: false }],
       notifications: [
         {
-          type: 'webhook',
+          type: "webhook" as const,
           _config: { url: 'http://localhost:3001/api/notifications' },
           events: ['failure'] }] };
 
@@ -417,7 +417,7 @@ class DeploymentAutomationEngine {
         {
           id: 'app-health',
           name: 'Application Health',
-          type: 'http',
+          type: "http" as const,
           _config: {
             url: 'https://staging.example.com/health',
             timeout: 10000,
@@ -427,7 +427,7 @@ class DeploymentAutomationEngine {
         {
           id: 'api-health',
           name: 'API Health',
-          type: 'http',
+          type: "http" as const,
           _config: {
             url: 'https://staging-api.example.com/health',
             timeout: 5000,
@@ -438,21 +438,21 @@ class DeploymentAutomationEngine {
         {
           id: 'test-coverage',
           name: 'Test Coverage',
-          type: 'quality',
+          type: "quality" as const,
           criteria: [
             { metric: 'coverage', operator: '>=', threshold: 80 }],
           blocking: true },
         {
           id: 'performance',
           name: 'Performance',
-          type: 'performance',
+          type: "performance" as const,
           criteria: [
             { metric: 'lcp', operator: '<=', threshold: 2500 },
             { metric: 'fid', operator: '<=', threshold: 100 }],
           blocking: true }],
       notifications: [
         {
-          type: 'slack',
+          type: "slack" as const,
           _config: { channel: '#deployments' },
           events: ['start', 'success', 'failure', 'rollback'] }] };
 
@@ -466,7 +466,7 @@ class DeploymentAutomationEngine {
         {
           id: 'app-health',
           name: 'Application Health',
-          type: 'http',
+          type: "http" as const,
           _config: {
             url: 'https://app.example.com/health',
             timeout: 10000,
@@ -476,7 +476,7 @@ class DeploymentAutomationEngine {
         {
           id: 'api-health',
           name: 'API Health',
-          type: 'http',
+          type: "http" as const,
           _config: {
             url: 'https://api.example.com/health',
             timeout: 5000,
@@ -486,7 +486,7 @@ class DeploymentAutomationEngine {
         {
           id: 'database-health',
           name: 'Database Health',
-          type: 'tcp',
+          type: "tcp" as const,
           _config: {
             port: 5432,
             timeout: 5000,
@@ -497,14 +497,14 @@ class DeploymentAutomationEngine {
         {
           id: 'test-coverage',
           name: 'Test Coverage',
-          type: 'quality',
+          type: "quality" as const,
           criteria: [
             { metric: 'coverage', operator: '>=', threshold: 90 }],
           blocking: true },
         {
           id: 'performance',
           name: 'Performance',
-          type: 'performance',
+          type: "performance" as const,
           criteria: [
             { metric: 'lcp', operator: '<=', threshold: 2000 },
             { metric: 'fid', operator: '<=', threshold: 50 },
@@ -513,17 +513,17 @@ class DeploymentAutomationEngine {
         {
           id: 'security',
           name: 'Security',
-          type: 'security',
+          type: "security" as const,
           criteria: [
             { metric: 'vulnerabilities', operator: '==', threshold: 0 }],
           blocking: true }],
       notifications: [
         {
-          type: 'slack',
+          type: "slack" as const,
           _config: { channel: '#production-deployments' },
           events: ['start', 'success', 'failure', 'rollback'] },
         {
-          type: 'email',
+          type: "email" as const,
           _config: { recipients: ['devops@example.com', 'team-lead@example.com'] },
           events: ['failure', 'rollback'] }] };
 
@@ -541,12 +541,12 @@ return;
 }
 
     this.isRunning = true;
-    console.log('🚀 Starting deployment automation engine...');
+    (console as any).log('🚀 Starting deployment automation engine...');
 
     // Process _execution queue
-    setInterval(() => {
+    setInterval((() => {
       this.processExecutionQueue();
-    }, 5000); // Check every 5 seconds
+    }) as any, 5000); // Check every 5 seconds
   }
 
   /**
@@ -619,7 +619,7 @@ return;
     this.executions.set(_executionId, _execution);
     this.executionQueue.push(_executionId);
 
-    console.log(`📋 Deployment queued: ${pipeline.name} (${_executionId})`);
+    (console as any).log(`📋 Deployment queued: ${pipeline.name} (${_executionId})`);
     advancedAPM.recordMetric('deployment-triggered', 1, { pipeline: pipelineId, trigger });
 
     return _executionId;
@@ -658,7 +658,7 @@ return;
 
         // Check dependencies
         if (stage.dependencies && stage.dependencies.length > 0) {
-          const dependenciesMet = stage.dependencies.every((depId) => {
+          const dependenciesMet = stage.dependencies.every((depId: any) => {
             const depStage = _execution.stages.find((s: StageExecution) => s.stageId === depId);
             return !!depStage && depStage.status === 'success';
           });
@@ -693,7 +693,7 @@ return;
           s.status === 'success' || s.status === 'skipped',
         );
 
-        if (allStagesSuccessful) {
+        if (allStagesSuccessful as any) {
           _execution.status = 'success';
           this.addLog(_execution, 'info', 'Deployment completed successfully');
 
@@ -709,7 +709,7 @@ return;
         }
       }
 
-    } catch (error) {
+    } catch (error: any) {
       _execution.status = 'failed';
       this.addLog(_execution, 'error', `Deployment _error: ${error}`);
       await this.sendNotifications(pipeline._environment, 'failure', _execution);
@@ -724,7 +724,7 @@ return;
         status: _execution.status,
         duration: _execution.metrics.duration.toString() });
 
-      console.log(`🏁 Deployment ${_execution.status}: ${pipeline.name} (${_execution.metrics.duration}ms)`);
+      (console as any).log(`🏁 Deployment ${_execution.status}: ${pipeline.name} (${_execution.metrics.duration}ms)`);
     }
   }
 
@@ -750,7 +750,7 @@ return;
           this.addLog(_execution, 'info', `Executing: ${command}`, stage.id);
 
           // Simulate command _execution time
-          await new Promise(resolve => setTimeout(resolve, Math.random() * 2000 + 1000));
+          await new Promise(resolve => setTimeout((resolve) as any, Math.random() * 2000 + 1000));
 
           // Simulate occasional failures for testing
           if (Math.random() < 0.05 && attempts === 0) { // 5% failure rate on first attempt
@@ -766,13 +766,13 @@ return;
         this.addLog(_execution, 'info', `Stage completed: ${stage.name}`);
         return true;
 
-      } catch (error) {
+      } catch (error: any) {
         attempts++;
         this.addLog(_execution, 'error', `Stage failed (attempt ${attempts}/${maxAttempts}): ${error}`, stage.id);
 
         if (attempts < maxAttempts) {
           this.addLog(_execution, 'info', `Retrying stage: ${stage.name}`);
-          await new Promise(resolve => setTimeout(resolve, 2000)); // Wait before retry
+          await new Promise(resolve => setTimeout((resolve) as any, 2000)); // Wait before retry
         }
       }
     }
@@ -791,7 +791,7 @@ return;
       return true;
     }
 
-    console.log(`🚪 Checking quality gates for ${environment}...`);
+    (console as any).log(`🚪 Checking quality gates for ${environment}...`);
 
     const codeMetrics = intelligentCodeMonitor.getLatestMetrics();
     const performanceMetrics = performanceMonitor.getMetrics();
@@ -820,13 +820,13 @@ continue;
         const passed = this.evaluateCriterion(value, criterion.operator, criterion.threshold);
 
         if (!passed) {
-          console.error(`❌ Quality gate failed: ${gate.name} - ${criterion.metric} ${criterion.operator} ${criterion.threshold} (actual: ${value})`);
+          (console as any).error(`❌ Quality gate failed: ${gate.name} - ${criterion.metric} ${criterion.operator} ${criterion.threshold} (actual: ${value})`);
           return false;
         }
       }
     }
 
-    console.log('✅ All quality gates passed');
+    (console as any).log('✅ All quality gates passed');
     return true;
   }
 
@@ -834,7 +834,7 @@ continue;
    * Evaluate a criterion
    */
   private evaluateCriterion(value: string | number, operator: any, threshold: any): boolean {
-    switch (operator) {
+    switch (operator as any) {
       case '>':
         return value > threshold;
       case '<':
@@ -864,7 +864,7 @@ continue;
       try {
         const success = await this.executeHealthCheck(_healthCheck);
 
-        if (success) {
+        if (success as any) {
           this.addLog(execution, 'info', `✅ Health check passed: ${_healthCheck.name}`);
         } else {
           this.addLog(execution, 'error', `❌ Health check failed: ${_healthCheck.name}`);
@@ -874,7 +874,7 @@ continue;
             return;
           }
         }
-      } catch (error) {
+      } catch (error: any) {
         this.addLog(execution, 'error', `Health check error: ${_healthCheck.name} - ${error}`);
       }
     }
@@ -893,30 +893,30 @@ continue;
           case 'http':
             if (config.url) {
               // Simulate HTTP health check
-              await new Promise(resolve => setTimeout(resolve, 500));
+              await new Promise(resolve => setTimeout((resolve) as any, 500));
               return Math.random() > 0.1; // 90% success rate
             }
             break;
           case 'tcp':
             if (config.port) {
               // Simulate TCP health check
-              await new Promise(resolve => setTimeout(resolve, 200));
+              await new Promise(resolve => setTimeout((resolve) as any, 200));
               return Math.random() > 0.05; // 95% success rate
             }
             break;
           case 'command':
             if (config.command) {
               // Simulate command _execution
-              await new Promise(resolve => setTimeout(resolve, 1000));
+              await new Promise(resolve => setTimeout((resolve) as any, 1000));
               return Math.random() > 0.1; // 90% success rate
             }
             break;
         }
-      } catch (error) {
+      } catch (error: any) {
         if (attempt === maxRetries - 1) {
           throw error;
         }
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout((resolve) as any, 1000));
       }
     }
 
@@ -938,7 +938,7 @@ continue;
 
     try {
       // Simulate rollback process
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout((resolve) as any, 5000));
 
       rollbackInfo.success = Math.random() > 0.1; // 90% rollback success rate
 
@@ -949,7 +949,7 @@ continue;
         this.addLog(execution, 'error', 'Rollback failed');
       }
 
-    } catch (error) {
+    } catch (error: any) {
       this.addLog(execution, 'error', `Rollback _error: ${error}`);
     }
 
@@ -957,7 +957,7 @@ continue;
 
     // Send rollback notification
     const pipeline = this.pipelines.get(execution.pipelineId);
-    if (pipeline) {
+    if (pipeline as any) {
       await this.sendNotifications(pipeline._environment as any, 'rollback', execution);
     }
 
@@ -978,12 +978,12 @@ continue;
       return;
     }
 
-    const relevantNotifications = (config as any).notifications.filter((n: any) => n.events?.includes(event));
+    const relevantNotifications: any = (config as any).notifications.filter((n: any) => n.events?.includes(event));
 
     for (const notification of relevantNotifications) {
       try {
         // Simulate notification sending
-        console.log(`📢 Sending ${notification.type} notification for ${event}:`, {
+        (console as any).log(`📢 Sending ${notification.type} notification for ${event}:`, {
           execution: execution.id,
           status: execution.status,
           environment });
@@ -992,8 +992,8 @@ continue;
           type: notification.type,
           event,
           environment });
-      } catch (error) {
-        console.error(`Failed to send ${notification.type} notification:`, error);
+      } catch (error: any) {
+        (console as any).error(`Failed to send ${notification.type} notification:`, error);
       }
     }
   }
@@ -1099,7 +1099,7 @@ continue;
       _execution.endTime = Date.now();
       this.addLog(_execution, 'warn', 'Deployment cancelled by user');
 
-      console.log(`🛑 Deployment cancelled: ${_executionId}`);
+      (console as any).log(`🛑 Deployment cancelled: ${_executionId}`);
       advancedAPM.recordMetric('deployment-cancelled', 1, { _execution: _executionId });
     }
   }
@@ -1110,7 +1110,7 @@ export const deploymentAutomation = new DeploymentAutomationEngine();
 
 // Auto-start in development mode
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  console.log('🚀 Deployment Automation Engine initialized');
+  (console as any).log('🚀 Deployment Automation Engine initialized');
 }
 
 export default deploymentAutomation;

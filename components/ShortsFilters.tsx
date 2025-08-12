@@ -1,5 +1,6 @@
 import React from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
 
 interface ShortsFiltersProps {
   categories: string;,
@@ -13,7 +14,7 @@ const ShortsFilters: React.FC<ShortsFiltersProps> = ({
   selectedCategory,
   onCategoryChange,
   onClose }) => {
-  const formatCategoryName = (category: any) => {
+  const formatCategoryName: any = (category: any) => {
     if (category === 'all') {
 return 'All';
 }
@@ -26,7 +27,7 @@ return 'All';
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-white font-medium">Filter by Category</h3>
           <button
-            onClick={onClose}
+            onClick={(e: any) => onClose(e)}
             className="p-1 text-white/60 hover:text-white transition-colors"
             aria-label="Close filters"
           >

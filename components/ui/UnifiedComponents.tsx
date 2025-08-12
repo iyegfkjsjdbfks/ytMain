@@ -1,3 +1,7 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes, FC, ReactNode, MouseEvent, InputHTMLAttributes } from 'react';
 
@@ -147,7 +151,7 @@ UnifiedInput.displayName = 'UnifiedInput';
 
 // Unified Card Component
 export interface UnifiedCardProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   className?: string;
   padding?: 'none' | 'sm' | 'md' | 'lg';
   shadow?: 'none' | 'sm' | 'md' | 'lg';
@@ -193,7 +197,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
 export interface UnifiedAlertProps {
   type?: 'info' | 'success' | 'warning' | 'error';
   title?: string;
-  children: ReactNode;
+  children?: React.ReactNode;
   dismissible?: boolean;
   onDismiss?: () => void;
   className?: string;
@@ -263,7 +267,7 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
                   'inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors',
                   styles.icon,
                   'hover:bg-black/5 dark:hover:bg-white/5')}
-                onClick={onDismiss}
+                onClick={(e: any) => onDismiss(e)}
               >
                 <span className="sr-only">Dismiss</span>
                 <XMarkIcon className="h-5 w-5" />
@@ -296,8 +300,8 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
   className }) => {
   const sizeClass = loadingSizes[size];
 
-  const renderLoader = () => {
-    switch (type) {
+  const renderLoader: any = () => {
+    switch (type as any) {
       case 'spinner':
         return (
           <ArrowPathIcon
@@ -348,7 +352,7 @@ export interface UnifiedModalProps {
   isOpen: boolean;,
   onClose: () => void;
   title?: string;
-  children: ReactNode;
+  children?: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   closeOnOverlayClick?: boolean;
   showCloseButton?: boolean;
@@ -374,7 +378,7 @@ export const UnifiedModal: React.FC<UnifiedModalProps> = ({
 return null;
 }
 
-  const handleOverlayClick = (e: React.MouseEvent) => {
+  const handleOverlayClick: any = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget && closeOnOverlayClick) {
       onClose();
     }
@@ -383,7 +387,7 @@ return null;
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
-      onClick={handleOverlayClick}
+      onClick={(e: any) => handleOverlayClick(e)}
     >
       <div
         className={cn(
@@ -400,7 +404,7 @@ return null;
             )}
             {showCloseButton && (
               <button
-                onClick={onClose}
+                onClick={(e: any) => onClose(e)}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
               >
                 <XMarkIcon className="w-6 h-6" />

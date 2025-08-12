@@ -1,3 +1,9 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useEffect } from 'react';
 
 import { useRef, useEffect, FC, ReactNode, KeyboardEvent, MouseEvent } from 'react';
 
@@ -45,8 +51,8 @@ const BaseModal: React.FC<BaseModalProps> = ({
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
   // Size classes
-  const getSizeClasses = () => {
-    switch (size) {
+  const getSizeClasses: any = () => {
+    switch (size as any) {
       case 'sm': return 'max-w-md';
       case 'lg': return 'max-w-4xl';
       case 'xl': return 'max-w-6xl';
@@ -58,14 +64,14 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
   // Handle escape key
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
+    const handleEscape: any = (event: KeyboardEvent) => {
       if (closeOnEscape && event.key === 'Escape') {
         onClose();
       }
     
         };
 
-    if (isOpen) {
+    if (isOpen as any) {
       document.addEventListener('keydown', handleEscape as EventListener);
       return () => document.removeEventListener('keydown', handleEscape as EventListener);
     }
@@ -85,7 +91,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
   // Focus management
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen as any) {
       previousActiveElement.current = document.activeElement as HTMLElement;
       modalRef.current?.focus();
     } else {
@@ -94,7 +100,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   }, [isOpen]);
 
   // Handle overlay click
-  const handleOverlayClick = (event: React.MouseEvent) => {
+  const handleOverlayClick: any = (event: React.MouseEvent) => {
     if (closeOnOverlayClick && event.target === event.currentTarget) {
       onClose();
     }
@@ -108,8 +114,8 @@ return null;
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`}
-      onClick={handleOverlayClick}
-      onKeyDown={(e) => {
+      onClick={(e: any) => handleOverlayClick(e)}
+      onKeyDown={(e: any) => {
         if (e.key === 'Escape') {
           onClose();
         }
@@ -146,7 +152,7 @@ return null;
             )}
             {showCloseButton && (
               <button
-                onClick={onClose}
+                onClick={(e: any) => onClose(e)}
                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
                 aria-label="Close modal"
               >

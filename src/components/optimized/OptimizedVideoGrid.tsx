@@ -1,5 +1,8 @@
 import React, { useState, useMemo, useCallback, memo, lazy } from 'react';
 import { FixedSizeGrid } from 'react-window';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import type { Video } from '../../types/core';
 
@@ -23,13 +26,13 @@ const VideoGridItem = memo<{
     itemsPerRow: number;,
     onVideoClick: (video: Video) => void
   
-        }}>(({ columnIndex, rowIndex, style, data }) => {
+        }}>(({ columnIndex, rowIndex, style, data }: any) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
   const video = videos[index];
 
   const handleClick = useCallback(() => {
-    if (video) {
+    if (video as any) {
       onVideoClick(video);
     }
   }, [video, onVideoClick]);
@@ -42,7 +45,7 @@ const VideoGridItem = memo<{
     <div style={style} className='p-2'>
       <div
         className='bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer'
-        onClick={handleClick}
+        onClick={(e: any) => handleClick(e)}
       >
         <div className='aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden'>
           <img
@@ -79,7 +82,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
     itemsPerRow = 4,
     itemHeight = 280,
     containerHeight = 600 }) => {
-    const [containerWidth, setContainerWidth] = useState(0);
+    const [containerWidth, setContainerWidth] = useState<number>(0);
 
     // Calculate grid dimensions
     const { rowCount, columnCount, itemWidth } = useMemo(() => {
@@ -102,10 +105,10 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
 
     // Container ref for measuring width
     const containerRef = useCallback((node: HTMLDivElement | null) => {
-      if (node) {
+      if (node as any) {
         const resizeObserver = new ResizeObserver(entries => {
           const entry = entries[0];
-          if (entry) {
+          if (entry as any) {
             setContainerWidth(entry.contentRect.width);
           }
         
@@ -120,7 +123,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
       return undefined;
     }, []);
 
-    if (loading) {
+    if (loading as any) {
       return (
         <div
           className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ${className}`}

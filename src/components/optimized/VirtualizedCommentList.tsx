@@ -1,5 +1,7 @@
 import React, { useMemo, useCallback, memo } from 'react';
 import { FixedSizeList } from 'react-window';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
@@ -26,7 +28,7 @@ interface CommentItemProps {
     onDislike: (commentId: any) => void
   }}
 
-const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
+const CommentItem = memo<CommentItemProps>(({ index, style, data }: any) => {
   const { comments, onReply, onLike, onDislike } = data;
   const comment = comments[index];
 
@@ -38,13 +40,13 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
   }, [comment, onReply]);
 
   const handleLike = useCallback(() => {
-    if (comment) {
+    if (comment as any) {
       onLike(comment.id);
     }
   }, [comment, onLike]);
 
   const handleDislike = useCallback(() => {
-    if (comment) {
+    if (comment as any) {
       onDislike(comment.id);
     }
   }, [comment, onDislike]);
@@ -82,20 +84,20 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
           </p>
           <div className='flex items-center space-x-4 mt-2'>
             <button
-              onClick={handleLike}
+              onClick={(e: any) => handleLike(e)}
               className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
             >
               <span>👍</span>
               <span>{comment.likeCount || 0}</span>
             </button>
             <button
-              onClick={handleDislike}
+              onClick={(e: any) => handleDislike(e)}
               className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
             >
               <span>👎</span>
             </button>
             <button
-              onClick={handleReply}
+              onClick={(e: any) => handleReply(e)}
               className='text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
             >
               Reply

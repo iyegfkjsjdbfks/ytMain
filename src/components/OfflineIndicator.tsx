@@ -1,5 +1,8 @@
 import React, { useEffect, useState, FC } from 'react';
 import Wifi, { WifiOff } from 'lucide-react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -13,9 +16,9 @@ interface OfflineIndicatorProps {
   className?: string;
 }
 
-const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
+const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) => {
   const { isOnline } = usePWA();
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
   const [offlineData, setOfflineData] = useState({
     videos: 0,
           watchHistory: 0,
@@ -30,7 +33,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     }
   }, [isOnline]);
 
-  const loadOfflineData = async () => {
+  const loadOfflineData = async (): Promise<void> => {
     try {
       const [videos, watchHistory, pendingActions, pendingUploads, storage] =
         await Promise.all([
@@ -47,7 +50,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
           pendingUploads: pendingUploads.length });
 
       setStorageUsage(storage);
-    } catch (error) {
+    } catch (error: any) {
       const componentError = createComponentError(
         'OfflineIndicator',
         'Failed to load offline data',
@@ -57,7 +60,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     }
   };
 
-  const formatBytes = (bytes: any): string => {
+  const formatBytes: any = (bytes: any): string => {
     if (bytes === 0) {
       return '0 Bytes';
     }
@@ -67,14 +70,14 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
   };
 
-  const getStoragePercentage = (): number => {
+  const getStoragePercentage: any = (): number => {
     if (storageUsage.quota === 0) {
       return 0;
     }
     return (storageUsage.used / storageUsage.quota) * 100;
   };
 
-  if (isOnline) {
+  if (isOnline as any) {
     return (
       <div
         className={`flex items-center space-x-1 text-green-600 dark:text-green-400 ${className}`}

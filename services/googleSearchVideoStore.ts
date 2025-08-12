@@ -17,7 +17,7 @@ class GoogleSearchVideoStore {
   storeVideo(video: GoogleSearchResult): void {
     this.videos.set(video.id, video);
     this.saveToStorage();
-    console.log(`📦 Stored Google Search video: ${video.id} - ${video.title}`);
+    (console as any).log(`📦 Stored Google Search video: ${video.id} - ${video.title}`);
   }
 
   /**
@@ -28,7 +28,7 @@ class GoogleSearchVideoStore {
       this.videos.set(video.id, video);
     });
     this.saveToStorage();
-    console.log(`📦 Stored ${videos.length} Google Search videos`);
+    (console as any).log(`📦 Stored ${videos.length} Google Search videos`);
   }
 
   /**
@@ -36,11 +36,11 @@ class GoogleSearchVideoStore {
    */
   getVideo(id: string): GoogleSearchResult | null {
     const video = this.videos.get(id);
-    if (video) {
-      console.log(`✅ Retrieved Google Search video: ${id} - ${video.title}`);
+    if (video as any) {
+      (console as any).log(`✅ Retrieved Google Search video: ${id} - ${video.title}`);
       return video;
     }
-    console.log(`❌ Google Search video not found: ${id}`);
+    (console as any).log(`❌ Google Search video not found: ${id}`);
     return null;
   }
 
@@ -64,7 +64,7 @@ class GoogleSearchVideoStore {
   clear(): void {
     this.videos.clear();
     this.saveToStorage();
-    console.log('🗑️ Cleared all Google Search videos');
+    (console as any).log('🗑️ Cleared all Google Search videos');
   }
 
   /**
@@ -73,7 +73,7 @@ class GoogleSearchVideoStore {
   getStats(): { count: number; size: string } {
     const count = this.videos.size;
     const sizeBytes = JSON.stringify(Array.from(this.videos.entries())).length;
-    const sizeKB = (sizeBytes / 1024).toFixed(2);
+    const sizeKB: any = (sizeBytes / 1024).toFixed(2);
     return { count, size: `${sizeKB} KB` };
   }
 
@@ -83,9 +83,9 @@ class GoogleSearchVideoStore {
   private saveToStorage(): void {
     try {
       const data = Array.from(this.videos.entries());
-      localStorage.setItem(this.storageKey, JSON.stringify(data));
-    } catch (error) {
-      console.warn('Failed to save Google Search videos to storage:', error);
+      (localStorage as any).setItem(this.storageKey, JSON.stringify(data));
+    } catch (error: any) {
+      (console as any).warn('Failed to save Google Search videos to storage:', error);
     }
   }
 
@@ -94,14 +94,14 @@ class GoogleSearchVideoStore {
    */
   private loadFromStorage(): void {
     try {
-      const data = localStorage.getItem(this.storageKey);
-      if (data) {
+      const data = (localStorage as any).getItem(this.storageKey);
+      if (data as any) {
         const entries: Array<[string, GoogleSearchResult]> = JSON.parse(data);
         this.videos = new Map(entries);
-        console.log(`📂 Loaded ${this.videos.size} Google Search videos from storage`);
+        (console as any).log(`📂 Loaded ${this.videos.size} Google Search videos from storage`);
       }
-    } catch (error) {
-      console.warn('Failed to load Google Search videos from storage:', error);
+    } catch (error: any) {
+      (console as any).warn('Failed to load Google Search videos from storage:', error);
       this.videos = new Map();
     }
   }
@@ -126,7 +126,7 @@ class GoogleSearchVideoStore {
 
     if (cleanedCount > 0) {
       this.saveToStorage();
-      console.log(`🧹 Cleaned up ${cleanedCount} old Google Search videos`);
+      (console as any).log(`🧹 Cleaned up ${cleanedCount} old Google Search videos`);
     }
   }
 }
@@ -136,9 +136,9 @@ export const googleSearchVideoStore = new GoogleSearchVideoStore();
 
 // Auto-cleanup every hour
 if (typeof window !== 'undefined') {
-  setInterval(() => {
+  setInterval((() => {
     googleSearchVideoStore.cleanup();
-  }, 60 * 60 * 1000); // 1 hour
+  }) as any, 60 * 60 * 1000); // 1 hour
 }
 
 export default googleSearchVideoStore;

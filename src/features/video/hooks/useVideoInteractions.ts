@@ -1,4 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useState, useEffect } from 'react';
 
@@ -23,7 +25,7 @@ interface UseVideoInteractionsOptions {
 export function useVideoInteractions(,
   videoId: any,
   options: UseVideoInteractionsOptions = {}
-) {
+): any {
   const queryClient = useQueryClient();
 
   const [state, setState] = useState<VideoInteractionState>({
@@ -41,7 +43,7 @@ export function useVideoInteractions(,
 
   // Update state when data is loaded
   useEffect(() => {
-    if (interactionData) {
+    if (interactionData as any) {
       setState({
         isLiked: interactionData.isLiked,
         isDisliked: interactionData.isDisliked,
@@ -54,10 +56,10 @@ export function useVideoInteractions(,
   // Like mutation
   const likeMutation = useMutation({
     mutationFn: () => videoService.toggleLike(videoId),
-    onMutate: async () => {
+    onMutate: async (): Promise<void> => {
       // Optimistic update
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         isLiked: !prev.isLiked,
         isDisliked: false, // Remove dislike if liking,
   likes: prev.isLiked ? prev.likes - 1 : prev.likes + 1,
@@ -65,7 +67,7 @@ export function useVideoInteractions(,
     },
     onError: () => {
       // Revert optimistic update on error
-      if (interactionData) {
+      if (interactionData as any) {
         setState({
           isLiked: interactionData.isLiked,
           isDisliked: interactionData.isDisliked,
@@ -82,10 +84,10 @@ export function useVideoInteractions(,
   // Dislike mutation
   const dislikeMutation = useMutation({
     mutationFn: () => videoService.toggleDislike(videoId),
-    onMutate: async () => {
+    onMutate: async (): Promise<void> => {
       // Optimistic update
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         isDisliked: !prev.isDisliked,
         isLiked: false, // Remove like if disliking,
   dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes + 1,
@@ -93,7 +95,7 @@ export function useVideoInteractions(,
     },
     onError: () => {
       // Revert optimistic update on error
-      if (interactionData) {
+      if (interactionData as any) {
         setState({
           isLiked: interactionData.isLiked,
           isDisliked: interactionData.isDisliked,
@@ -110,15 +112,15 @@ export function useVideoInteractions(,
   // Save mutation
   const saveMutation = useMutation({
     mutationFn: () => videoService.toggleSave(videoId),
-    onMutate: async () => {
+    onMutate: async (): Promise<void> => {
       // Optimistic update
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         isSaved: !prev.isSaved }));
     },
     onError: () => {
       // Revert optimistic update on error
-      if (interactionData) {
+      if (interactionData as any) {
         setState({
           isLiked: interactionData.isLiked,
           isDisliked: interactionData.isDisliked,
@@ -141,7 +143,7 @@ export function useVideoInteractions(,
     } });
 
   return {
-    ...state,
+    ...state as any,
     isLoading:
       isLoadingInteractions ||
       likeMutation.isPending ||
@@ -154,7 +156,7 @@ export function useVideoInteractions(,
     isReporting: reportMutation.isPending };
 }
 
-export function useVideoStats(videoId: any) {
+export function useVideoStats(videoId: any): any {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['video-stats', videoId],
     queryFn: () => videoService.getVideoStats(videoId),
@@ -167,7 +169,7 @@ export function useVideoStats(videoId: any) {
     isLoading };
 }
 
-export function useVideoEngagement(videoId: any) {
+export function useVideoEngagement(videoId: any): any {
   const { data: engagement, isLoading } = useQuery({
     queryKey: ['video-engagement', videoId],
     queryFn: () => videoService.getVideoEngagement(videoId),

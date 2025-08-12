@@ -1,5 +1,7 @@
 import React, { lazy, FC, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
 
 import type React from 'react';
 
@@ -32,10 +34,10 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
   const channelUrl = buildChannelUrl(encodeURIComponent(video.channelName));
   const avatarFallback = getAvatarFallback(video.channelName);
 
-  const handleToggleWatchLater = (e: React.MouseEvent) => {
+  const handleToggleWatchLater: any = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isSaved) {
+    if (isSaved as any) {
       removeFromWatchLater(video.id);
     } else {
       addToWatchLater(video);
@@ -122,7 +124,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 
             <div className="flex-shrink-0">
               <IconButton
-                onClick={handleToggleWatchLater}
+                onClick={(e: any) => handleToggleWatchLater(e)}
                 variant="ghost"
                 size="sm"
                 className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400`}
@@ -203,7 +205,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 
         <div className="flex-shrink-0 ml-2">
           <IconButton
-            onClick={handleToggleWatchLater}
+            onClick={(e: any) => handleToggleWatchLater(e)}
             variant="ghost"
             size="sm"
             className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity`}

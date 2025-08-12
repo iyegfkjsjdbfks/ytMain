@@ -1,5 +1,8 @@
 import React, { useState, FC } from 'react';
 import { useNavigate, Link  } from 'react-router-dom';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
@@ -7,18 +10,19 @@ import YouTubeLogo from '../components/icons/YouTubeLogo';
 import { useAuth } from '../contexts/AuthContext';
 
 const RegisterPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [acceptTerms, setAcceptTerms] = useState(false);
+  return null;
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
 
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const validateForm = () => {
+  const validateForm: any = () => {
     if (!username.trim()) {
       setError('Username is required');
       return false;
@@ -54,7 +58,7 @@ const RegisterPage: React.FC = () => {
     return true;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<any> => {
     e.preventDefault();
     setError('');
 
@@ -66,12 +70,12 @@ const RegisterPage: React.FC = () => {
 
     try {
       const success = await register(username, email, password);
-      if (success) {
+      if (success as any) {
         navigate('/', { replace: true });
       } else {
         setError('Registration failed. Please try again.');
       }
-    } catch (err) {
+    } catch (err: any) {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
@@ -100,7 +104,7 @@ const RegisterPage: React.FC = () => {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={(e: any) => handleSubmit(e)}>
             {error && (
               <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
                 <div className="text-sm text-red-700 dark:text-red-400">

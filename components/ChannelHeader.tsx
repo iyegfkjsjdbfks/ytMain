@@ -1,5 +1,6 @@
 import React from 'react';
 import BellIcon from './icons/BellIcon';
+import { FC } from 'react';
 
 import type { Channel } from '../src/types/core';
 
@@ -41,7 +42,7 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-auto flex-shrink-0">
             <button
-              onClick={onSubscribeToggle}
+              onClick={(e: any) => onSubscribeToggle(e)}
               className={`text-sm font-medium px-5 py-2.5 rounded-full transition-colors flex items-center space-x-2
                 ${isSubscribed
                   ? 'bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-200'

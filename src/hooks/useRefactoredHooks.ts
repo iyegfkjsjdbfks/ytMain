@@ -1,4 +1,8 @@
 import React, { useEffect, useCallback, useRef, useState, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 // @ts-nocheck
 import { useUnifiedApp } from './useUnifiedApp';
 
@@ -11,10 +15,10 @@ export function useLocalStorage<T>(,
 ): [T(value: T | ((val: T) => T)) => void() => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window.(localStorage as any).getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
     }
   });
@@ -25,9 +29,9 @@ export function useLocalStorage<T>(,
         const valueToStore =
           value instanceof Function ? value(storedValue) : value;
         setStoredValue(valueToStore);
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      } catch (error) {
-        console.warn(`Error setting localStorage key "${key}":`, error);
+        window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+      } catch (error: any) {
+        (console as any).warn(`Error setting localStorage key "${key}":`, error);
       }
     },
     [key, storedValue]
@@ -37,8 +41,8 @@ export function useLocalStorage<T>(,
     try {
       window.localStorage.removeItem(key);
       setStoredValue(initialValue);
-    } catch (error) {
-      console.warn(`Error removing localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error removing localStorage key "${key}":`, error);
     }
   }, [key, initialValue]);
 
@@ -52,9 +56,9 @@ export function useDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const handler = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => {
       clearTimeout(handler);
@@ -78,10 +82,10 @@ export function useThrottle<T>(value: T, delay: any): T {
       return;
     }
 
-    const timer = setTimeout(() => {
+    const timer = setTimeout((() => {
       lastExecuted.current = Date.now();
       setThrottledValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => clearTimeout(timer);
   }, [value, delay]);
@@ -110,7 +114,7 @@ export function useArray<T>(initialArray: T[] = []) {
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((element: T) => {
-    setArray(arr => [...arr, element]);
+    setArray(arr => [...arr as any, element]);
   }, []);
 
   const filter = useCallback((callback: (item: T, index: number) => boolean) => {
@@ -155,7 +159,7 @@ export function useAsync<T, E = string>(,
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<E | null>(null);
 
-  const execute = useCallback(async () => {
+  const execute = useCallback(async (): Promise<void> => {
     setStatus('pending');
     setData(null);
     setError(null);
@@ -165,7 +169,7 @@ export function useAsync<T, E = string>(,
       setData(response);
       setStatus('success');
       return response;
-    } catch (error) {
+    } catch (error: any) {
       setError(error as E);
       setStatus('error');
       throw error;
@@ -173,7 +177,7 @@ export function useAsync<T, E = string>(,
   }, [asyncFunction]);
 
   useEffect(() => {
-    if (immediate) {
+    if (immediate as any) {
       execute();
     }
   }, [execute, immediate]);
@@ -195,7 +199,7 @@ export function useAsync<T, E = string>(,
 export function useIntersectionObserver(,
   options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLElement> boolean] {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -206,7 +210,7 @@ export function useIntersectionObserver(,
 
     const observer = new IntersectionObserver(entries => {
       const entry = entries[0];
-      if (entry) {
+      if (entry as any) {
         setIsIntersecting(entry.isIntersecting);
       }
     }, options);
@@ -230,7 +234,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(,
   const ref = useRef<T>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         handler();
       }
@@ -258,7 +262,7 @@ export function useMediaQuery(query: any): boolean {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
-    const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
+    const handler: any = (event: MediaQueryListEvent) => setMatches(event.matches);
 
     mediaQuery.addEventListener('change', handler as EventListener);
     return () => mediaQuery.removeEventListener('change', handler as EventListener);
@@ -283,7 +287,7 @@ export function usePrevious<T>(value: T): T | undefined {
 /**
  * Enhanced useUnifiedAppState hook that provides commonly used app state
  */
-export function useUnifiedAppState() {
+export function useUnifiedAppState(): any {
   const context = useUnifiedApp();
 
   return {

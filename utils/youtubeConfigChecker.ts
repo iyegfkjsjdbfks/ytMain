@@ -16,7 +16,7 @@ interface ConfigStatus {
   recommendations: string[]
 }
 
-export const checkYouTubeAPIConfig = (): ConfigStatus => {
+export const checkYouTubeAPIConfig: any = (): ConfigStatus => {
   const status = youtubeSearchService.getConfigStatus();
   const recommendations: string[] = [];
 
@@ -73,7 +73,7 @@ export const testYouTubeAPI = async (): Promise<{
         message: 'API responded but returned no results',
         results: 0 };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       message: 'YouTube Search API test failed',
@@ -84,19 +84,19 @@ export const testYouTubeAPI = async (): Promise<{
 /**
  * Log configuration status to console for debugging
  */
-export const logConfigStatus = (): void => {
+export const logConfigStatus: any = (): void => {
   const config = checkYouTubeAPIConfig();
 
-  console.group('🎯 YouTube API Configuration Status');
-  console.log('Configured:', config.isConfigured ? '✅' : '❌');
-  console.log('API Key:', config.hasApiKey ? '✅' : '❌', config.hasApiKey ? `(${config.apiKeyLength} chars)` : '');
-  console.log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
+  (console as any).group('🎯 YouTube API Configuration Status');
+  (console as any).log('Configured:', config.isConfigured ? '✅' : '❌');
+  (console as any).log('API Key:', config.hasApiKey ? '✅' : '❌', config.hasApiKey ? `(${config.apiKeyLength} chars)` : '');
+  (console as any).log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
 
-  console.group('📋 Recommendations:');
-  config.recommendations.forEach((rec) => console.log(`• ${rec}`));
-  console.groupEnd();
+  (console as any).group('📋 Recommendations:');
+  config.recommendations.forEach((rec) => (console as any).log(`• ${rec}`));
+  (console as any).groupEnd();
 
-  console.groupEnd();
+  (console as any).groupEnd();
 };
 
 /**

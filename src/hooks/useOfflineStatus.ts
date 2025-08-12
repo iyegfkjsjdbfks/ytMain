@@ -8,6 +8,9 @@ declare namespace NodeJS {
 }
 
 import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
 /// <reference types="node" />
@@ -60,7 +63,7 @@ interface UseOfflineStatusReturn {
  * Enhanced hook for managing offline status and network conditions
  * Provides detailed network information and offline handling
  */
-export const useOfflineStatus = (): UseOfflineStatusReturn => {
+export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
   const [state, setState] = useState<OfflineState>({
     isOnline: navigator.onLine,
     wasOffline: false,
@@ -112,12 +115,12 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
   // Get offline statistics
   const getOfflineStats = useCallback(() => {
-    const stats = localStorage.getItem('offline-stats');
+    const stats = (localStorage as any).getItem('offline-stats');
 
-    if (stats) {
+    if (stats as any) {
       try {
         return JSON.parse(stats);
-      } catch (error) {
+      } catch (error: any) {
         conditionalLogger.error(
           'Failed to parse offline stats',
           error,
@@ -137,7 +140,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     async (url = '/api/ping'): Promise<boolean> => {
       try {
         const startTime = Date.now();
-        const response = await fetch(url, {
+        const response = await (fetch as any)(url, {
           method: 'HEAD',
           cache: 'no-cache',
           signal: AbortSignal.timeout(5000), // 5 second timeout
@@ -152,7 +155,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
         );
 
         return response.ok;
-      } catch (error) {
+      } catch (error: any) {
         conditionalLogger.debug(
           'Server ping failed',
           { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -177,7 +180,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
     try {
       const startTime = Date.now();
-      const response = await fetch('/api/speed-test', {
+      const response = await (fetch as any)('/api/speed-test', {
         method: 'GET',
         cache: 'no-cache',
         signal: AbortSignal.timeout(10000) });
@@ -194,7 +197,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       }
 
       return { online, latency, speed };
-    } catch (error) {
+    } catch (error: any) {
       return { online: false, latency: -1, speed: 'offline' };
     }
   }, [state.isOnline, getNetworkQuality]);
@@ -216,8 +219,8 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       }
 
       try {
-        localStorage.setItem('offline-stats', JSON.stringify(stats));
-      } catch (error) {
+        (localStorage as any).setItem('offline-stats', JSON.stringify(stats));
+      } catch (error: any) {
         conditionalLogger.error(
           'Failed to save offline stats',
           error,
@@ -250,7 +253,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   useEffect(() => {
     let offlineTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const handleOnline = () => {
+    const handleOnline: any = () => {
       const now = Date.now();
 
       setState(prev => {
@@ -260,7 +263,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
             : 0;
 
         return {
-          ...prev,
+          ...prev as any,
           isOnline: true,
           lastOnlineTime: now,
           offlineDuration };
@@ -268,7 +271,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
       updateOfflineStats(false);
 
-      if (offlineTimer) {
+      if (offlineTimer as any) {
         clearInterval(offlineTimer);
         offlineTimer = null;
       }
@@ -280,18 +283,18 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       );
     };
 
-    const handleOffline = () => {
+    const handleOffline: any = () => {
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         isOnline: false,
         wasOffline: true }));
 
       updateOfflineStats(true);
 
       // Start tracking offline duration
-      offlineTimer = setInterval(() => {
+      offlineTimer = setInterval((() => {
         setState(prev => ({
-          ...prev,
+          ...prev) as any,
           offlineDuration: prev.lastOnlineTime
             ? Date.now() - prev.lastOnlineTime
             : 0 }));
@@ -300,12 +303,12 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       conditionalLogger.debug('Connection lost', undefined, 'useOfflineStatus');
     };
 
-    const handleConnectionChange = () => {
+    const handleConnectionChange: any = () => {
       const networkInfo = getNetworkInfo();
       const connectionType = networkInfo?.effectiveType || null;
 
       setState(prev => ({
-        ...prev,
+        ...prev as any,
         networkInfo,
         connectionType }));
 
@@ -322,7 +325,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
     // Listen for connection changes
     const { connection } = navigator as any;
-    if (connection) {
+    if (connection as any) {
       connection.addEventListener('change', handleConnectionChange as EventListener);
     }
 
@@ -334,11 +337,11 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       window.removeEventListener('online', handleOnline as EventListener);
       window.removeEventListener('offline', handleOffline as EventListener);
 
-      if (connection) {
+      if (connection as any) {
         connection.removeEventListener('change', handleConnectionChange as EventListener);
       }
 
-      if (offlineTimer) {
+      if (offlineTimer as any) {
         clearInterval(offlineTimer);
       }
     };

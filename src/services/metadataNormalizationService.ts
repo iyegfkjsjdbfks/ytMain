@@ -211,7 +211,7 @@ class MetadataNormalizationService {
         );
         channel = (fetchedChannel as unknown as YouTubeChannel) || undefined;
         logger.debug('Fetched channel data:', channel);
-      } catch (error) {
+      } catch (error: any) {
         logger.warn('Failed to fetch channel data:', error);
       }
     }
@@ -382,7 +382,7 @@ class MetadataNormalizationService {
             await this.normalizeYouTubeVideo(data as YouTubeVideo)
           );
         }
-      } catch (error) {
+      } catch (error: any) {
         logger.error(`Failed to normalize ${source} video:`, error);
         // Continue processing other videos
       }
@@ -565,7 +565,7 @@ class MetadataNormalizationService {
   private mapYouTubeVisibility(
     privacyStatus?: string
   ): 'public' | 'unlisted' | 'private' {
-    switch (privacyStatus) {
+    switch (privacyStatus as any) {
       case 'public':
         return 'public';
       case 'unlisted':

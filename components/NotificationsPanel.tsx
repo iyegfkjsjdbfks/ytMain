@@ -1,5 +1,7 @@
 import type { Video } from '../types';
 import React, { useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { ChatBubbleLeftRightIcon, BellAlertIcon  } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/24/outline';
@@ -36,7 +38,7 @@ interface NotificationsPanelProps {
   isOpen: boolean; onClose: () => void
 }
 
-const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }) => {
+const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }: any) => {
   const [notifications, setNotifications] = useState(mockNotifications);
 
   if (!isOpen) {
@@ -45,13 +47,13 @@ return null;
 
   const hasNewNotifications = notifications.some(n => n.isNew);
 
-  const markAllAsRead = () => {
-    setNotifications(prev => prev.map(notification => ({ ...notification, isNew: false })));
+  const markAllAsRead: any = () => {
+    setNotifications(prev => prev.map((notification: any) => ({ ...notification as any, isNew: false })));
   };
 
-  const markAsRead = (id: string) => {
-    setNotifications(prev => prev.map(notification =>
-      notification.id === id ? { ...notification, isNew: false } : notification));
+  const markAsRead: any = (id: string) => {
+    setNotifications(prev => prev.map((notification: any) =>
+      notification.id === id ? { ...notification as any, isNew: false } : notification));
   };
 
   return (
@@ -66,7 +68,7 @@ return null;
           Notifications
         </h2>
         <button
-          onClick={onClose}
+          onClick={(e: any) => onClose(e)}
           className="p-1.5 rounded-full text-neutral-500 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
           aria-label="Close notifications panel"
         >
@@ -118,7 +120,7 @@ return null;
          <footer className="p-3 border-t border-neutral-200 dark:border-neutral-700/80 text-center">
             <button
               onClick={() => {
-                if (hasNewNotifications) {
+                if (hasNewNotifications as any) {
                   markAllAsRead();
                 } else {
                   onClose();

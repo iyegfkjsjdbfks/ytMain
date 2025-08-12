@@ -6,9 +6,10 @@ import { QueryClientProvider, QueryClient  } from '@tanstack/react-query';
 import screen, { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { Video } from '../types/core';
+import { ReactNode } from 'react';
 
 // Test utilities for consistent testing
-export const createTestQueryClient = () => {
+export const createTestQueryClient: any = () => {
   return new QueryClient({
     defaultOptions: {,
       queries: {
@@ -20,11 +21,11 @@ export const createTestQueryClient = () => {
 
 // Wrapper component for tests
 interface TestWrapperProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   queryClient?: QueryClient;
 }
 
-export const TestWrapper = ({ children, queryClient }: TestWrapperProps) => {
+export const TestWrapper: any = ({ children, queryClient }: TestWrapperProps) => {
   const client = queryClient || createTestQueryClient();
 
   return (
@@ -35,7 +36,7 @@ export const TestWrapper = ({ children, queryClient }: TestWrapperProps) => {
 };
 
 // Custom render function
-export const renderWithProviders = (,
+export const renderWithProviders: any = (,
   ui: ReactElement,
   options?: {
     queryClient?: QueryClient;
@@ -51,14 +52,14 @@ export const renderWithProviders = (,
   } = options || {};
 
   return render(ui, {
-    wrapper: ({ children }) => (
+    wrapper: ({ children }: any) => (
       <TestWrapper queryClient={queryClient}>{children}</TestWrapper>
     ),
     ...renderOptions });
 };
 
 // Mock data factories
-export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
+export const createMockVideo: any = (overrides: Partial<Video> = {}): Video => ({
   id: 'test-video-1',
           title: 'Test Video Title',
   description: 'Test video description',
@@ -80,7 +81,7 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
           updatedAt: '2024-01-01T00:00:00Z',
   ...overrides });
 
-export const createMockChannel = (,
+export const createMockChannel: any = (,
   overrides: Partial<Channel> = {}
 ): Channel => ({
   id: 'test-channel-1',
@@ -97,7 +98,7 @@ export const createMockChannel = (,
           updatedAt: '2024-01-01T00:00:00Z',
   ...overrides });
 
-export const createMockComment = (,
+export const createMockComment: any = (,
   overrides: Partial<Comment> = {}
 ): Comment => ({
   id: 'test-comment-1',
@@ -139,7 +140,7 @@ export const measureRenderTime = async (
 };
 
 // Accessibility testing helpers
-export const checkAccessibility = async (_container: HTMLElement) => {
+export const checkAccessibility = async (_container: HTMLElement): Promise<any> => {
   const axeCore = await import('@axe-core/react');
   const React = await import('react');
   const ReactDOM = await import('react-dom');
@@ -149,25 +150,25 @@ export const checkAccessibility = async (_container: HTMLElement) => {
 
 // User interaction helpers
 export const userInteraction = {
-  clickVideo: async (videoTitle: any) => {
+  clickVideo: async (videoTitle: any): Promise<any> => {
     const video = screen.getByRole('button', {
       name: new RegExp(videoTitle, 'i') });
     await userEvent.click(video);
   },
 
-  searchFor: async (query: any) => {
+  searchFor: async (query: any): Promise<any> => {
     const searchInput = screen.getByRole('searchbox');
     await userEvent.clear(searchInput);
     await userEvent.type(searchInput, query);
     await userEvent.keyboard('{Enter}');
   },
 
-  likeVideo: async () => {
+  likeVideo: async (): Promise<void> => {
     const likeButton = screen.getByRole('button', { name: /like/i });
     await userEvent.click(likeButton);
   },
 
-  addComment: async (content: any) => {
+  addComment: async (content: any): Promise<any> => {
     const commentInput = screen.getByRole('textbox', { name: /add.*comment/i });
     await userEvent.clear(commentInput);
     await userEvent.type(commentInput, content);
@@ -176,7 +177,7 @@ export const userInteraction = {
     await userEvent.click(submitButton);
   },
 
-  subscribeToChannel: async () => {
+  subscribeToChannel: async (): Promise<void> => {
     const subscribeButton = screen.getByRole('button', { name: /subscribe/i });
     await userEvent.click(subscribeButton);
   } };
@@ -201,7 +202,7 @@ export const mockApiResponses = {
 // Test scenarios
 export const testScenarios = {
   videoPlayback: {
-    'should play video when clicked': async () => {
+    'should play video when clicked': async (): Promise<void> => {
       await userInteraction.clickVideo('Test Video');
       expect(
         screen.getByRole('button', { name: /pause/i })
@@ -214,25 +215,25 @@ export const testScenarios = {
     } },
 
   userInteractions: {
-    'should allow liking videos': async () => {
+    'should allow liking videos': async (): Promise<void> => {
       await userInteraction.likeVideo();
       expect(
         screen.getByRole('button', { name: /liked/i })
       ).toBeInTheDocument();
     },
 
-    'should allow adding comments': async () => {
+    'should allow adding comments': async (): Promise<void> => {
       await userInteraction.addComment('Great video!');
       expect(screen.getByText('Great video!')).toBeInTheDocument();
     } },
 
   navigation: {
-    'should navigate to video page': async () => {
+    'should navigate to video page': async (): Promise<void> => {
       await userInteraction.clickVideo('Test Video');
       expect(window.location.pathname).toMatch(/\/watch/);
     },
 
-    'should search for videos': async () => {
+    'should search for videos': async (): Promise<void> => {
       await userInteraction.searchFor('test query');
       expect(window.location.search).toContain('q=test+query');
     } } };

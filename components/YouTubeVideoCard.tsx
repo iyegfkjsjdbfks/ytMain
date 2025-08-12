@@ -1,5 +1,6 @@
 import React, { lazy, FC } from 'react';
 import { useNavigate, Navigate  } from 'react-router-dom';
+import { FC } from 'react';
 
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results
@@ -16,7 +17,7 @@ interface YouTubeVideoCardProps {
   className?: string;
 }
 
-const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }) => {
+const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }: any) => {
   const navigate = useNavigate();
 
   // Extract video ID from the video object
@@ -25,7 +26,7 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
 
   // Helper function to format duration is now imported from utils
 
-  const formatUploadDate = (uploadDate?: string) => {
+  const formatUploadDate: any = (uploadDate?: string) => {
     if (!uploadDate) {
 return null;
 }
@@ -54,7 +55,7 @@ return `${Math.floor(diffDays / 30)} months ago`;
     }
   };
 
-  const handleCardClick = () => {
+  const handleCardClick: any = () => {
     // Use the full video ID to preserve the source context (google-search- or youtube- prefix)
     const fullVideoId = video.id;
 
@@ -66,10 +67,10 @@ return `${Math.floor(diffDays / 30)} months ago`;
   return (
     <div
       className={`bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full cursor-pointer group ${className}`}
-      onClick={handleCardClick}
+      onClick={(e: any) => handleCardClick(e)}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
+      onKeyDown={(e: any) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           handleCardClick();

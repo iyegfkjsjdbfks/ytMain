@@ -13,7 +13,7 @@ interface FeatureFlag {
   id: string;
   name: string;
   description: string;
-  type: 'boolean' | 'string' | 'number' | 'json' | 'percentage';
+  type: "boolean" as const | 'string' | 'number' | 'json' | 'percentage';
   defaultValue;
   enabled: boolean;
   rolloutStrategy: RolloutStrategy;
@@ -39,7 +39,7 @@ interface FeatureFlag {
 }
 
 interface RolloutStrategy {
-  type: 'immediate' | 'gradual' | 'scheduled' | 'user-based' | 'geographic';
+  type: "immediate" as const | 'gradual' | 'scheduled' | 'user-based' | 'geographic';
   config: {
     percentage?: number;
     incrementPercentage?: number;
@@ -140,7 +140,7 @@ return undefined;
     this.startMonitoring();
     this.startRolloutScheduler();
 
-    console.log('🚩 Advanced feature _flag system started');
+    (console as any).log('🚩 Advanced feature _flag system started');
   }
 
   /**
@@ -153,7 +153,7 @@ return undefined;
     this.rolloutTimers.forEach(timer => clearTimeout(timer));
     this.rolloutTimers.clear();
 
-    console.log('🚩 Advanced feature _flag system stopped');
+    (console as any).log('🚩 Advanced feature _flag system stopped');
   }
 
   /**
@@ -162,7 +162,7 @@ return undefined;
   createFlag(_flag: Omit<FeatureFlag, 'metadata'> & { metadata?: Partial<FeatureFlag['metadata']> }): void {
     const now = Date.now();
     const fullFlag: FeatureFlag = {
-      ..._flag,
+      ..._flag as any,
       metadata: {
         createdAt: this.flags.has(_flag.id) ? this.flags.get(_flag.id)!.metadata.createdAt : now,
         updatedAt: now,
@@ -178,7 +178,7 @@ return undefined;
       this.startGradualRollout(fullFlag);
     }
 
-    console.log(`🚩 Feature _flag '${_flag.name}' created/updated`);
+    (console as any).log(`🚩 Feature _flag '${_flag.name}' created/updated`);
 
     advancedAPM.recordMetric('feature-_flag-created', 1, {
       flagId: _flag.id,
@@ -192,7 +192,7 @@ return undefined;
   evaluateFlag(flagId: any, _context: UserContext = {}, defaultValue: any?): any {
     const _flag = this.flags.get(flagId);
     if (!_flag) {
-      console.warn(`🚩 Feature _flag '${flagId}' not found`);
+      (console as any).warn(`🚩 Feature _flag '${flagId}' not found`);
       return defaultValue !== undefined ? defaultValue : false;
     }
 
@@ -255,17 +255,17 @@ return undefined;
    */
   deleteFlag(flagId: any): boolean {
     const deleted = this.flags.delete(flagId);
-    if (deleted) {
+    if (deleted as any) {
       this.clearEvaluationCache(flagId);
 
       // Clear rollout timer
       const timer = this.rolloutTimers.get(flagId);
-      if (timer) {
+      if (timer as any) {
         clearTimeout(timer);
         this.rolloutTimers.delete(flagId);
       }
 
-      console.log(`🚩 Feature _flag '${flagId}' deleted`);
+      (console as any).log(`🚩 Feature _flag '${flagId}' deleted`);
     }
     return deleted;
   }
@@ -286,7 +286,7 @@ return undefined;
 
     this.clearEvaluationCache(flagId);
 
-    console.log(`🚩 Updated rollout percentage for '${flagId}' to ${percentage}%`);
+    (console as any).log(`🚩 Updated rollout percentage for '${flagId}' to ${percentage}%`);
 
     advancedAPM.recordMetric('feature-_flag-rollout-updated', 1, {
       flagId,
@@ -307,7 +307,7 @@ return undefined;
 
     this.clearEvaluationCache(flagId);
 
-    console.log(`🚩 Feature _flag '${flagId}' ${enabled ? 'enabled' : 'disabled'}`);
+    (console as any).log(`🚩 Feature _flag '${flagId}' ${enabled ? 'enabled' : 'disabled'}`);
 
     advancedAPM.recordMetric('feature-_flag-toggled', 1, {
       flagId,
@@ -330,7 +330,7 @@ return undefined;
     const cutoff = Date.now() - (hours * 60 * 60 * 1000);
     let evaluations = this.evaluationHistory.filter((e: FlagEvaluation) => e.timestamp > cutoff);
 
-    if (flagId) {
+    if (flagId as any) {
       evaluations = evaluations.filter((e: FlagEvaluation) => e.flagId === flagId)
     }
 
@@ -377,11 +377,11 @@ return undefined;
       const variantResults: Record<string, { value: number; sampleSize: number }> = {};
 
       // Generate mock data for each variant
-      _flag.variants.forEach((variant) => {
+      _flag.variants.forEach((variant: any) => {
         const sampleSize = analytics.variantDistribution[variant.id] || 0;
         let value: number;
 
-        switch (metric) {
+        switch (metric as any) {
           case 'conversion_rate':
             value = analytics.conversionRates[variant.id] || 0;
             break;
@@ -436,7 +436,7 @@ return [];
 
     this.abTestResults.set(flagId, results);
 
-    console.log(`📊 A/B test analysis completed for _flag '${flagId}'`);
+    (console as any).log(`📊 A/B test analysis completed for _flag '${flagId}'`);
 
     return results;
   }
@@ -466,7 +466,7 @@ return [];
       return {
         action: 'extend_test',
         reason: 'No statistically significant differences found',
-        confidence: Math.max(...results.map(r => r.confidence)) };
+        confidence: Math.max(...results.map((r: any) => r.confidence)) };
     }
 
     // Check if there's a consistent winner
@@ -485,13 +485,13 @@ return [];
         action: 'promote_winner',
         reason: `Variant '${topWinner[0]}' shows consistent improvement across metrics`,
         winningVariant: topWinner[0],
-        confidence: Math.max(...significantResults.map(r => r.confidence)) };
+        confidence: Math.max(...significantResults.map((r: any) => r.confidence)) };
     }
 
     return {
       action: 'continue',
       reason: 'Mixed results, continue testing for clearer winner',
-      confidence: Math.max(...results.map(r => r.confidence)) };
+      confidence: Math.max(...results.map((r: any) => r.confidence)) };
   }
 
   /**
@@ -518,7 +518,7 @@ return undefined;
 
       this.clearEvaluationCache(flagId);
 
-      console.log(`🏆 Auto-promoted winning variant '${winningVariant.name}' for _flag '${flagId}'`);
+      (console as any).log(`🏆 Auto-promoted winning variant '${winningVariant.name}' for _flag '${flagId}'`);
 
       advancedAPM.recordMetric('feature-_flag-auto-promoted', 1, {
         flagId,
@@ -543,7 +543,7 @@ return undefined;
 
     this.clearEvaluationCache(flagId);
 
-    console.error(`🚨 Emergency rollback for _flag '${flagId}': ${reason}`);
+    (console as any).error(`🚨 Emergency rollback for _flag '${flagId}': ${reason}`);
 
     advancedAPM.recordMetric('feature-_flag-emergency-rollback', 1, {
       flagId,
@@ -589,7 +589,7 @@ continue;
 }
 
       const ruleMatches = this.evaluateTargetingRule(rule, _context);
-      if (ruleMatches) {
+      if (ruleMatches as any) {
         evaluation.value = rule.value as any;
         evaluation.reason = `targeting_rule_${rule.id}`;
         break;
@@ -655,7 +655,7 @@ continue;
   }
 
   private getContextValue(attribute: any, _context: UserContext): any {
-    switch (attribute) {
+    switch (attribute as any) {
       case 'userId':
         return _context.userId;
       case 'country':
@@ -771,10 +771,10 @@ continue;
   }
 
   private clearEvaluationCache(flagId?: string): void {
-    if (flagId) {
+    if (flagId as any) {
       // Clear cache entries for specific _flag
       const keysToDelete: string[] = [];
-      this.evaluationCache.forEach((_, key) => {
+      this.evaluationCache.forEach((_: any, key: any) => {
         if (key.startsWith(`${flagId}:`)) {
           keysToDelete.push(key);
         }
@@ -794,14 +794,14 @@ continue;
 
     const currentPercentage = strategy.config.percentage || 0;
     const { incrementPercentage } = strategy.config;
-    const incrementInterval = (strategy.config.incrementInterval || 0) * 60 * 1000; // Convert to ms
+    const incrementInterval: any = (strategy.config.incrementInterval || 0) * 60 * 1000; // Convert to ms
 
     if (currentPercentage >= 100) {
       return undefined; // Already at 100%
     }
 
-    const timer = setTimeout(() => {
-      const newPercentage = Math.min(100, currentPercentage + incrementPercentage);
+    const timer = setTimeout((() => {
+      const newPercentage = Math.min(100) as any, currentPercentage + incrementPercentage);
       this.updateRolloutPercentage(_flag.id, newPercentage);
 
       // Schedule next increment if not at 100%
@@ -825,7 +825,7 @@ continue;
 
   private startMonitoring(): void {
     // Monitor _flag performance and trigger alerts
-    setInterval(() => {
+    setInterval((() => {
       if (!this.isRunning) {
 return undefined;
 }
@@ -835,8 +835,8 @@ return undefined;
 return undefined;
 }
 
-        _flag.monitoring.alertThresholds.forEach((_threshold) => {
-          this.checkAlertThreshold(_flag, _threshold);
+        _flag.monitoring.alertThresholds.forEach((_threshold: any) => {
+          this.checkAlertThreshold(_flag) as any, _threshold);
         });
       });
     }, 60000); // Check every minute
@@ -844,7 +844,7 @@ return undefined;
 
   private startRolloutScheduler(): void {
     // Check for scheduled _flag activations
-    setInterval(() => {
+    setInterval((() => {
       if (!this.isRunning) {
 return undefined;
 }
@@ -860,8 +860,8 @@ return undefined;
         if (_flag.schedule.startTime &&
             _flag.schedule.startTime <= now &&
             !_flag.enabled) {
-          this.toggleFlag(_flag.id, true);
-          console.log(`🕐 Auto-enabled scheduled _flag '${_flag.id}'`);
+          this.toggleFlag(_flag.id) as any, true);
+          (console as any).log(`🕐 Auto-enabled scheduled _flag '${_flag.id}'`);
         }
 
         // Auto-disable flags that should end
@@ -869,7 +869,7 @@ return undefined;
             _flag.schedule.endTime <= now &&
             _flag.enabled) {
           this.toggleFlag(_flag.id, false);
-          console.log(`🕐 Auto-disabled expired _flag '${_flag.id}'`);
+          (console as any).log(`🕐 Auto-disabled expired _flag '${_flag.id}'`);
         }
       });
     }, 30000); // Check every 30 seconds
@@ -906,8 +906,8 @@ return undefined;
         break;
     }
 
-    if (shouldTrigger) {
-      console.warn(`🚨 Alert threshold triggered for flag '${flag.id}': ${threshold.metric} ${threshold.operator} ${threshold.value} (current: ${currentValue})`);
+    if (shouldTrigger as any) {
+      (console as any).warn(`🚨 Alert threshold triggered for flag '${flag.id}': ${threshold.metric} ${threshold.operator} ${threshold.value} (current: ${currentValue})`);
 
       switch (threshold.action) {
         case 'notify':
@@ -929,11 +929,11 @@ return undefined;
       id: 'new-video-player',
       name: 'New Video Player',
       description: 'Enable the new enhanced video player with improved controls',
-      type: 'boolean',
+      type: "boolean" as const,
       defaultValue: false,
       enabled: true,
       rolloutStrategy: {
-        type: 'gradual',
+        type: "gradual" as const,
         config: {
           percentage: 10,
           incrementPercentage: 10,
@@ -976,11 +976,11 @@ return undefined;
       id: 'dark-mode',
       name: 'Dark Mode',
       description: 'Enable dark mode theme',
-      type: 'boolean',
+      type: "boolean" as const,
       defaultValue: false,
       enabled: true,
       rolloutStrategy: {
-        type: 'immediate',
+        type: "immediate" as const,
         config: {} },
       targeting: [],
       monitoring: {
@@ -992,7 +992,7 @@ return undefined;
       id: 'recommendation-algorithm',
       name: 'Recommendation Algorithm',
       description: 'A/B test different recommendation algorithms',
-      type: 'string',
+      type: "string" as const,
       defaultValue: 'collaborative',
       enabled: true,
       rolloutStrategy: {

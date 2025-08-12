@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
+import { FC } from 'react';
 
 /**
  * PlaylistDetailPage component for displaying a specific playlist's videos
  */
 const PlaylistDetailPage: React.FC = () => {
+  return null;
   const { playlistId } = useParams<{ playlistId: string }>();
 
   return (

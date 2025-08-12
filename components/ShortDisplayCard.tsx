@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect, FC, MouseEvent } from 'react';
 import { useLocation } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // @ts-nocheck - Temporary during refactoring
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -34,10 +38,10 @@ interface PlayPauseOverlayProps {
   onToggle: () => void
 }
 
-const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }) => (
+const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }: any) => (
   <div
     className="absolute inset-0 flex items-center justify-center cursor-pointer"
-    onClick={(e) => {
+    onClick={(e: any) => {
       e.stopPropagation();
       onToggle();
     }}
@@ -84,7 +88,7 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
     </p>
     {onFollow && (
       <button
-        onClick={(e) => {
+        onClick={(e: any) => {
           e.stopPropagation();
           onFollow();
         }}
@@ -120,7 +124,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   <div className="flex flex-col space-y-3 pointer-events-auto">
     {/* Mute/Unmute */}
     <ActionButton
-      onClick={(e) => {
+      onClick={(e: any) => {
         e.stopPropagation();
         onToggleMute();
       }}
@@ -135,7 +139,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
     {/* Like */}
     <ActionButton
-      onClick={onLike}
+      onClick={(e: any) => onLike(e)}
       ariaLabel="Like video"
     >
       {isLiked ? (
@@ -147,7 +151,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
     {/* Comment */}
     <ActionButton
-      onClick={onComment}
+      onClick={(e: any) => onComment(e)}
       ariaLabel="Comment on video"
     >
       <ChatBubbleOvalLeftIcon className="w-5 h-5" />
@@ -155,7 +159,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
     {/* Share */}
     <ActionButton
-      onClick={onShare}
+      onClick={(e: any) => onShare(e)}
       ariaLabel="Share video"
     >
       <ShareIcon className="w-5 h-5" />
@@ -176,7 +180,7 @@ interface ErrorStateProps {
   onRetry: () => void
 }
 
-const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
+const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }: any) => (
   <ErrorMessage
     message={error}
     onRetry={onRetry}
@@ -199,7 +203,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   isActive = false }) => {
   const location = useLocation();
   const isOnShortsPage = location.pathname === '/shorts';
-  const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
+  const [isManuallyPaused, setIsManuallyPaused] = React.useState<boolean>(false);
 
   // Real video player implementation
   const videoPlayer = useVideoPlayer({
@@ -237,7 +241,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   });
 
   // Event handlers
-  const handlePlayPauseToggle = async () => {
+  const handlePlayPauseToggle = async (): Promise<void> => {
     try {
       if (videoPlayer.isPlaying) {
         videoPlayer.pause();
@@ -246,37 +250,37 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         await videoPlayer.play();
         setIsManuallyPaused(false);
       }
-    } catch (error) {
-      console.warn('Error toggling play/pause:', error);
+    } catch (error: any) {
+      (console as any).warn('Error toggling play/pause:', error);
     }
   };
 
-  const handleLike = (e: React.MouseEvent) => {
+  const handleLike: any = (e: React.MouseEvent) => {
     e.stopPropagation();
     onLike?.(short.id);
   };
 
-  const handleComment = (e: React.MouseEvent) => {
+  const handleComment: any = (e: React.MouseEvent) => {
     e.stopPropagation();
     onComment?.(short.id);
   };
 
-  const handleShare = (e: React.MouseEvent) => {
+  const handleShare: any = (e: React.MouseEvent) => {
     e.stopPropagation();
     onShare?.(short.id);
   };
 
-  const handleRetry = async () => {
+  const handleRetry = async (): Promise<void> => {
     if (videoRef.current) {
       videoRef.current.load();
     }
   };
 
-  const handleFollow = () => {
+  const handleFollow: any = () => {
     onFollow?.(short.channelName);
   };
 
-  const handleVideoEnd = () => {
+  const handleVideoEnd: any = () => {
     onVideoEnd?.();
   };
 
@@ -307,7 +311,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         muted={videoPlayer.isMuted}
         loop
         preload="metadata"
-        onClick={handlePlayPauseToggle}
+        onClick={(e: any) => handlePlayPauseToggle(e)}
         onEnded={() => {
           handleVideoEnd();
         }}

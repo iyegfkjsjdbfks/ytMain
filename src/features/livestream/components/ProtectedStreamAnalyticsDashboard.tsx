@@ -1,5 +1,7 @@
 import React, { useCallback, FC } from 'react';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
+import { FC } from 'react';
+import { useCallback } from 'react';
 
 import { DataFetchErrorBoundary } from '../../../components/ErrorBoundaries';
 import StreamAnalyticsDashboard from './StreamAnalyticsDashboard';
@@ -15,7 +17,7 @@ interface ProtectedStreamAnalyticsDashboardProps {
  */
 const ProtectedStreamAnalyticsDashboard: FC<
   ProtectedStreamAnalyticsDashboardProps
-> = ({ streamId, className }) => {
+> = ({ streamId, className }: any) => {
   const handleRetry = useCallback(() => {
     conditionalLogger.debug('Retrying analytics dashboard data fetch', {
       streamId });

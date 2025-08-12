@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useState, useRef, useEffect, FC } from 'react';
 
@@ -61,13 +65,13 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   onError }) => {
   const playerRef = useRef<HTMLDivElement>(null);
   const ytPlayerRef = useRef<YTPlayer | null>(null);
-  const [isAPIReady, setIsAPIReady] = useState(false);
-  const [ setIsPlayerReady] = useState(false);
+  const [isAPIReady, setIsAPIReady] = useState<boolean>(false);
+  const [ setIsPlayerReady] = useState<boolean>(false);
   const [playerError, setPlayerError] = useState<string | null>(null);
   const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
 
   // Extract video ID from the video object
-  const videoId = (() => {
+  const videoId: any = (() => {
     // Handle YouTubeSearchResult type
     if ('embedUrl' in video && video.embedUrl) {
       return video.embedUrl.split('/embed/')[1]?.split('?')[0] || '';
@@ -92,11 +96,11 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     // Check if script is already loading
     if (document.querySelector('script[src*="youtube.com/iframe_api"]')) {
       // Script is loading, wait for it
-      const checkAPI = () => {
+      const checkAPI: any = () => {
         if (window.YT?.Player) {
           setIsAPIReady(true);
         } else {
-          setTimeout(checkAPI, 100);
+          setTimeout((checkAPI) as any, 100);
         }
       };
       checkAPI();
@@ -109,9 +113,9 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     script.async = true;
 
     const originalCallback = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
+    (window as any).onYouTubeIframeAPIReady = () => {
       setIsAPIReady(true);
-      if (originalCallback) {
+      if (originalCallback as any) {
         originalCallback();
       }
     
@@ -121,8 +125,8 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
     return () => {
       // Cleanup: restore original callback
-      if (originalCallback) {
-        window.onYouTubeIframeAPIReady = originalCallback;
+      if (originalCallback as any) {
+        (window as any).onYouTubeIframeAPIReady = originalCallback;
       }
     
         }}, []);
@@ -140,8 +144,8 @@ return;
       if (ytPlayerRef.current) {
         try {
           ytPlayerRef.current.destroy();
-        } catch (error) {
-          console.warn('Error destroying previous player:', error);
+        } catch (error: any) {
+          (console as any).warn('Error destroying previous player:', error);
         }
         ytPlayerRef.current = null;
       }
@@ -156,8 +160,8 @@ return;
             container.innerHTML = '';
           }
         
-        } catch (error) {
-          console.debug('Error clearing container:', error);
+        } catch (error: any) {
+          (console as any).debug('Error clearing container:', error);
         }
       }
 
@@ -183,65 +187,65 @@ return;
           // Remove widget_referrer as it might cause origin issues
         },
         events: {,
-          onReady: (event) => {
-            if (isMounted) {
+          onReady: (event: any) => {
+            if (isMounted as any) {
               setIsPlayerReady(true);
               setPlayerError(null);
 
               // Call the external onReady callback if provided
-              if (onReady) {
+              if (onReady as any) {
                 try {
                   onReady(event);
-                } catch (error) {
-                  console.warn('Error in onReady callback:', error);
+                } catch (error: any) {
+                  (console as any).warn('Error in onReady callback:', error);
                 }
               }
 
               // Try to autoplay if autoplay is enabled
-              if (autoplay) {
+              if (autoplay as any) {
                 try {
-                  console.log('Attempting to autoplay YouTube video...');
+                  (console as any).log('Attempting to autoplay YouTube video...');
                   // Mute first for better autoplay compliance
                   event.target.mute();
                   event.target.playVideo();
 
                   // Fallback: try again after a short delay if not playing
-                  setTimeout(() => {
+                  setTimeout((() => {
                     try {
                       const playerState = event.target.getPlayerState();
                       if (playerState !== 1) { // 1 = playing
-                        console.log('Retrying autoplay...');
+                        (console as any).log('Retrying autoplay...');
                         event.target.playVideo();
                       }
                     
-        } catch (retryError) {
-                      console.warn('Autoplay retry failed:', retryError);
+        } catch (retryError: any) {
+                      (console as any).warn('Autoplay retry failed:') as any, retryError);
                     }
                   }, 1000);
-                } catch (error) {
-                  console.warn('Autoplay failed:', error);
+                } catch (error: any) {
+                  (console as any).warn('Autoplay failed:', error);
                 }
               }
             }
           },
-          onStateChange: (event) => {
+          onStateChange: (event: any) => {
             // Handle state changes if needed
-            console.log('YouTube player state changed:', event.data);
+            (console as any).log('YouTube player state changed:', event.data);
 
             // Call the external onStateChange callback if provided
-            if (onStateChange) {
+            if (onStateChange as any) {
               try {
                 onStateChange(event);
-              } catch (error) {
-                console.warn('Error in onStateChange callback:', error);
+              } catch (error: any) {
+                (console as any).warn('Error in onStateChange callback:', error);
               }
             }
 
             // Unmute video after autoplay starts (state 1 = playing)
             if (autoplay && event.data === 1) {
-              setTimeout(() => {
+              setTimeout((() => {
                 try {
-                  console.log('Unmuting video after autoplay...');
+                  (console as any).log('Unmuting video after autoplay...');
                   event.target.unMute();
 
                   // Resume playback after unmuting in case it paused
@@ -249,21 +253,21 @@ return;
                     try {
                       const currentState = event.target.getPlayerState();
                       if (currentState !== 1) { // If not playing
-                        console.log('Resuming playback after unmute...');
+                        (console as any).log('Resuming playback after unmute...');
                         event.target.playVideo();
                       }
                     
-        } catch (playError) {
-                      console.warn('Failed to resume playback after unmute:', playError);
+        } catch (playError: any) {
+                      (console as any).warn('Failed to resume playback after unmute:') as any, playError);
                     }
                   }, 100); // Short delay to let unmute complete
-                } catch (error) {
-                  console.warn('Failed to unmute video:', error);
+                } catch (error: any) {
+                  (console as any).warn('Failed to unmute video:', error);
                 }
               }, 1000);
             }
           },
-          onError: (event) => {
+          onError: (event: any) => {
             if (!isMounted) {
 return;
 }
@@ -277,25 +281,25 @@ return;
 
             // For embedding errors (101, 150), show a more user-friendly message
             if (event.data === 101 || event.data === 150) {
-              console.debug('Video cannot be embedded, this is expected for some videos');
+              (console as any).debug('Video cannot be embedded, this is expected for some videos');
               setPlayerError('This video cannot be played here. Click to watch on YouTube.');
             } else {
-              console.error('YouTube player error:', message, event.data);
+              (console as any).error('YouTube player error:', message, event.data);
               setPlayerError(message);
             }
 
             // Call the external onError callback if provided
-            if (onError) {
+            if (onError as any) {
               try {
                 onError(event);
-              } catch (error) {
-                console.warn('Error in onError callback:', error);
+              } catch (error: any) {
+                (console as any).warn('Error in onError callback:', error);
               }
             }
           } } });
-    } catch (error) {
-      console.error('Error creating YouTube player:', error);
-      if (isMounted) {
+    } catch (error: any) {
+      (console as any).error('Error creating YouTube player:', error);
+      if (isMounted as any) {
         setPlayerError('Failed to load video player');
       }
     }
@@ -309,9 +313,9 @@ return;
             ytPlayerRef.current.destroy();
           }
         
-        } catch (error) {
+        } catch (error: any) {
           // Silently handle cleanup errors
-          console.debug('YouTube player cleanup error:', error);
+          (console as any).debug('YouTube player cleanup error:', error);
         } finally {
           ytPlayerRef.current = null;
         }
@@ -328,7 +332,7 @@ return;
     );
   }
 
-  if (playerError) {
+  if (playerError as any) {
     return (
       <div className={`bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 ${className}`}>
         <p className="text-red-600 dark:text-red-400 text-center">

@@ -1,4 +1,8 @@
 import React, { useState, useRef, useEffect, FC, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -33,15 +37,15 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
   const [playerState, setPlayerState] = useState<YouTubePlayerState | null>(
     null
   );
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
   const [volume, setVolume] = useState(100);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const progressInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Format time in seconds to MM:SS format
-  const formatTime = (timeInSeconds: any): string => {
+  const formatTime: any = (timeInSeconds: any): string => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -60,7 +64,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 
     let isMounted = true;
 
-    const initializePlayer = async () => {
+    const initializePlayer = async (): Promise<void> => {
       try {
         const player = new YouTubePlayer('youtube-player', videoId, {
           width,
@@ -79,23 +83,23 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
               }
 
               // Start progress tracking
-              progressInterval.current = setInterval(async () => {
+              progressInterval.current = setInterval((async (): Promise<void> => {
                 if (playerRef.current && isMounted) {
                   try {
-                    const [time, dur, vol, muted] = await Promise.all([
+                    const [time) as any, dur, vol, muted] = await Promise.all([
                       playerRef.current.getCurrentTime(),
                       playerRef.current.getDuration(),
                       playerRef.current.getVolume(),
                       playerRef.current.isMuted()]);
 
-                    if (isMounted) {
+                    if (isMounted as any) {
                       setCurrentTime(time);
                       setDuration(dur);
                       setVolume(vol);
                       setIsMuted(muted);
                     }
                   
-        } catch (error) {
+        } catch (error: any) {
                     logger.error('Error updating player state:', error);
                   }
                 }
@@ -110,12 +114,12 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
               setIsPlaying(state === YouTubePlayerState.PLAYING);
             } } });
 
-        if (isMounted) {
+        if (isMounted as any) {
           playerRef.current = player;
         } else {
           player.destroy();
         }
-      } catch (error) {
+      } catch (error: any) {
         logger.error('Failed to initialize YouTube player:', error);
       }
     };
@@ -138,42 +142,42 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
     }}, [videoId, autoplay, controls, height, width]);
 
   // Player control methods
-  const togglePlay = async () => {
+  const togglePlay = async (): Promise<void> => {
     if (!playerRef.current) {
       return;
     }
 
     try {
-      if (isPlaying) {
+      if (isPlaying as any) {
         await playerRef.current.pauseVideo();
       } else {
         await playerRef.current.playVideo();
       }
       setIsPlaying(!isPlaying);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error toggling play/pause:', error);
     }
   };
 
-  const toggleMute = async () => {
+  const toggleMute = async (): Promise<void> => {
     if (!playerRef.current) {
       return;
     }
 
     try {
-      if (isMuted) {
+      if (isMuted as any) {
         await playerRef.current.unMute();
         setIsMuted(false);
       } else {
         await playerRef.current.mute();
         setIsMuted(true);
       }
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error toggling mute:', error);
     }
   };
 
-  const handleSeek = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSeek = async (e: ChangeEvent<HTMLInputElement>): Promise<any> => {
     if (!playerRef.current) {
       return;
     }
@@ -183,12 +187,12 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 
     try {
       await playerRef.current.seekTo(newTime, true);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error seeking video:', error);
     }
   };
 
-  const handleVolumeChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleVolumeChange = async (e: ChangeEvent<HTMLInputElement>): Promise<any> => {
     if (!playerRef.current) {
       return;
     }
@@ -202,10 +206,10 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
       // Update mute state based on volume
       if (newVolume === 0) {
         setIsMuted(true);
-      } else if (isMuted) {
+      } else if (isMuted as any) {
         setIsMuted(false);
       }
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error setting volume:', error);
     }
   };
@@ -219,7 +223,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
         <div className='mt-2 bg-gray-100 p-2 rounded'>
           <div className='flex items-center space-x-2 mb-2'>
             <button
-              onClick={togglePlay}
+              onClick={(e: any) => togglePlay(e)}
               className='p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600'
               aria-label={isPlaying ? 'Pause' : 'Play'}
             >
@@ -232,7 +236,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
                 min='0'
                 max={duration || 100}
                 value={currentTime}
-                onChange={handleSeek}
+                onChange={(e: any) => handleSeek(e)}
                 className='w-full'
                 aria-label='Seek'
               />
@@ -243,7 +247,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
             </div>
 
             <button
-              onClick={toggleMute}
+              onClick={(e: any) => toggleMute(e)}
               className='p-2 rounded-full hover:bg-gray-200'
               aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
@@ -256,7 +260,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
                 min='0'
                 max='100'
                 value={isMuted ? 0 : volume}
-                onChange={handleVolumeChange}
+                onChange={(e: any) => handleVolumeChange(e)}
                 className='w-full'
                 aria-label='Volume'
               />

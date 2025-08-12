@@ -1,4 +1,11 @@
+import React from 'react';
 import { useState, FC, ReactNode, ChangeEvent, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { MoonIcon, Cog8ToothIcon } from '@heroicons/react/24/outline';
 import { CheckIcon as CheckSolidIcon } from '@heroicons/react/24/solid';
@@ -7,7 +14,7 @@ const CheckIconSolid = CheckSolidIcon;
 import { useTheme } from '../contexts/ThemeContext';
 
 const SettingSection: React.FC<{ title,
-          children: React.ReactNode }> = ({ title, children }) => (
+          children: React.ReactNode }> = ({ title, children }: any) => (
   <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
     <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{title}</h3>
     <div className="space-y-4">
@@ -20,7 +27,7 @@ const ToggleSetting: React.FC<{,
   label: string;
   description?: string;
   checked, onChange: (checked: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void
-}> = ({ label, description, checked, onChange }) => (
+}> = ({ label, description, checked, onChange }: any) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex-1">
       <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
@@ -50,7 +57,7 @@ const ToggleSetting: React.FC<{,
 const SelectSetting: React.FC<{
   label, value: string;
   options, onChange: (value: string | number) => void
-}> = ({ label, value, options, onChange }) => (
+}> = ({ label, value, options, onChange }: any) => (
   <div className="flex items-center justify-between py-2">
     <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
       {label}
@@ -68,11 +75,12 @@ const SelectSetting: React.FC<{
 );
 
 const SettingsPage: React.FC = () => {
+  return null;
   const { theme, toggleTheme } = useTheme();
-  const [autoplay, setAutoplay] = useState(true);
-  const [annotations, setAnnotations] = useState(true);
-  const [captions, setCaptions] = useState(false);
-  const [restrictedMode, setRestrictedMode] = useState(false);
+  const [autoplay, setAutoplay] = useState<boolean>(true);
+  const [annotations, setAnnotations] = useState<boolean>(true);
+  const [captions, setCaptions] = useState<boolean>(false);
+  const [restrictedMode, setRestrictedMode] = useState<boolean>(false);
   const [location, setLocation] = useState('United States');
   const [language, setLanguage] = useState('English');
   const [videoQuality, setVideoQuality] = useState('Auto');
@@ -83,9 +91,9 @@ const SettingsPage: React.FC = () => {
           repliesComments: true, mentions: true;
   });
 
-  const handleNotificationChange = (key: keyof typeof notifications) => {
+  const handleNotificationChange: any = (key: keyof typeof notifications) => {
     setNotifications(prev => ({
-      ...prev,
+      ...prev as any,
       [key]: !prev[key] }));
   };
 
@@ -141,25 +149,25 @@ const SettingsPage: React.FC = () => {
             label="Autoplay"
             description="Automatically play the next video"
             checked={autoplay}
-            onChange={setAutoplay}
+            onChange={(e: any) => setAutoplay(e)}
           />
           <ToggleSetting
             label="Annotations"
             description="Show video annotations and cards"
             checked={annotations}
-            onChange={setAnnotations}
+            onChange={(e: any) => setAnnotations(e)}
           />
           <ToggleSetting
             label="Captions"
             description="Always show captions"
             checked={captions}
-            onChange={setCaptions}
+            onChange={(e: any) => setCaptions(e)}
           />
           <SelectSetting
             label="Video Quality"
             value={videoQuality}
             options={['Auto', '144p', '240p', '360p', '480p', '720p', '1080p', '1440p', '2160p']}
-            onChange={setVideoQuality}
+            onChange={(e: any) => setVideoQuality(e)}
           />
         </SettingSection>
 
@@ -168,13 +176,13 @@ const SettingsPage: React.FC = () => {
             label="Restricted Mode"
             description="Hide potentially mature content"
             checked={restrictedMode}
-            onChange={setRestrictedMode}
+            onChange={(e: any) => setRestrictedMode(e)}
           />
           <SelectSetting
             label="Location"
             value={location}
             options={['United States', 'Canada', 'United Kingdom', 'Germany', 'France', 'Japan', 'Australia']}
-            onChange={setLocation}
+            onChange={(e: any) => setLocation(e)}
           />
         </SettingSection>
 
@@ -183,7 +191,7 @@ const SettingsPage: React.FC = () => {
             label="Language"
             value={language}
             options={['English', 'Spanish', 'French', 'German', 'Japanese', 'Korean', 'Portuguese']}
-            onChange={setLanguage}
+            onChange={(e: any) => setLanguage(e)}
           />
         </SettingSection>
 

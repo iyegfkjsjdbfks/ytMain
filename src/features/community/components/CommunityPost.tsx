@@ -2,6 +2,8 @@ import React, { useState, FC } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
+import { FC } from 'react';
+import { useState } from 'react';
 
 export interface CommunityPostData {
   id: string;,
@@ -11,9 +13,9 @@ export interface CommunityPostData {
   channelHandle: string;,
   isVerified: boolean;
   content: string;,
-  type: 'text' | 'image' | 'video' | 'poll' | 'quiz';
+  type: "text" as const | 'image' | 'video' | 'poll' | 'quiz';
   media?: Array<{
-    type: 'image' | 'video';,
+    type: "image" as const | 'video';,
     url: string;
     thumbnail?: string;
     alt?: string;
@@ -61,10 +63,10 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
   onShare,
   onVote,
   className = '' }) => {
-  const [showFullContent, setShowFullContent] = useState(false);
+  const [showFullContent, setShowFullContent] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const formatCount = (count: any): string => {
+  const formatCount: any = (count: any): string => {
     if (count >= 1000000) {
       return `${(count / 1000000).toFixed(1)}M`;
     }
@@ -80,7 +82,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
       ? `${post.content.slice(0, 300)}...`
       : post.content;
 
-  const handleVote = (optionId: any) => {
+  const handleVote: any = (optionId: any) => {
     if (post.poll && !post.poll.hasVoted && onVote) {
       onVote(post.id, optionId);
     }
@@ -219,7 +221,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
             {post.poll.question}
           </h4>
           <div className='space-y-2'>
-            {post.poll.options.map(option => (
+            {post.poll.options.map((option: any) => (
               <button
                 key={option.id}
                 onClick={() => handleVote(option.id)}

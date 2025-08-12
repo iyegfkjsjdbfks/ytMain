@@ -69,14 +69,14 @@ export default defineConfig(({ mode }) => ({
         target: 'https://www.googleapis.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/youtube/, '/youtube'),
-        configure: (proxy, _options) => {
-          proxy.on('error', (err, _req, _res) => {
+        configure: (proxy: any, _options: any) => {
+          proxy.on('error', (err: any, _req: any, _res: any) => {
             console.log('YouTube API proxy error:', err);
           });
-          proxy.on('proxyReq', (proxyReq, _req, _res) => {
+          proxy.on('proxyReq', (proxyReq: any, _req: any, _res: any) => {
             console.log('Proxying request to:', proxyReq.path);
           });
-          proxy.on('proxyRes', (proxyRes, req, _res) => {
+          proxy.on('proxyRes', (proxyRes: any, req: any, _res: any) => {
             console.log('Proxy response status:', proxyRes.statusCode, 'for:', req.url);
           });
         } },
@@ -106,7 +106,7 @@ export default defineConfig(({ mode }) => ({
         main: resolve(__dirname, 'index.html') },
       output: {
         // Manual chunk splitting for better caching,
-  manualChunks: (id) => {
+  manualChunks: (id: any) => {
           // Vendor chunks
           if (id.includes('node_modules')) {
             if (id.includes('react') || id.includes('react-dom')) {
@@ -149,13 +149,13 @@ export default defineConfig(({ mode }) => ({
         },
         
         // Asset naming,
-  chunkFileNames: (chunkInfo) => {
+  chunkFileNames: (chunkInfo: any) => {
           const facadeModuleId = chunkInfo.facadeModuleId
             ? chunkInfo.facadeModuleId.split('/').pop()?.replace('.tsx', '').replace('.ts', '')
             : 'chunk';
           return `js/${facadeModuleId}-[hash].js`;
         },
-        assetFileNames: (assetInfo) => {
+        assetFileNames: (assetInfo: any) => {
           const fileName = assetInfo.names?.[0] || 'asset';
           const info = fileName.split('.');
           const ext = info[info.length - 1];

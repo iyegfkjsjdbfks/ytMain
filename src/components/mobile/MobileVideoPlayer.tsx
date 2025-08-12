@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef, memo, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -23,14 +27,14 @@ interface MobileVideoPlayerProps {
 }
 
 const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
-  ({ video, autoplay = false, onPlay, onPause, onEnded, className = '' }) => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
-    const [isMuted, setIsMuted] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
-    const [showControls, setShowControls] = useState(true);
-    const [buffered, setBuffered] = useState(0);
+  ({ video, autoplay = false, onPlay, onPause, onEnded, className = '' }: any) => {
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [currentTime, setCurrentTime] = useState<number>(0);
+    const [duration, setDuration] = useState<number>(0);
+    const [isMuted, setIsMuted] = useState<boolean>(false);
+    const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+    const [showControls, setShowControls] = useState<boolean>(true);
+    const [buffered, setBuffered] = useState<number>(0);
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -51,13 +55,13 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
     );
 
     // Handle play/pause
-    const togglePlay = useCallback(async () => {
+    const togglePlay = useCallback(async (): Promise<void> => {
       if (!videoRef.current) {
         return;
       }
 
       try {
-        if (isPlaying) {
+        if (isPlaying as any) {
           await videoRef.current.pause();
           setIsPlaying(false);
           onPause?.();
@@ -66,8 +70,8 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
           setIsPlaying(true);
           onPlay?.();
         }
-      } catch (error) {
-        console.error('Error toggling video playback:', error);
+      } catch (error: any) {
+        (console as any).error('Error toggling video playback:', error);
       }
     }, [isPlaying, onPlay, onPause]);
 
@@ -83,7 +87,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
     }, [isMuted]);
 
     // Handle fullscreen
-    const toggleFullscreen = useCallback(async () => {
+    const toggleFullscreen = useCallback(async (): Promise<void> => {
       if (!containerRef.current) {
         return;
       }
@@ -104,8 +108,8 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
           }
           setIsFullscreen(false);
         }
-      } catch (error) {
-        console.error('Error toggling fullscreen:', error);
+      } catch (error: any) {
+        (console as any).error('Error toggling fullscreen:', error);
       }
     }, [isFullscreen]);
 
@@ -128,11 +132,11 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
         clearTimeout(controlsTimeoutRef.current);
       }
 
-      controlsTimeoutRef.current = setTimeout(() => {
-        if (isPlaying) {
+      controlsTimeoutRef.current = setTimeout((() => {
+        if (isPlaying as any) {
           setShowControls(false);
         }
-      }, 3000);
+      }) as any, 3000);
     }, [isPlaying]);
 
     // Video event handlers
@@ -180,7 +184,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
     }, [autoplay, isIntersecting, isPlaying]);
 
     // Format time
-    const formatTime = (time: any) => {
+    const formatTime: any = (time: any) => {
       const minutes = Math.floor(time / 60);
       const seconds = Math.floor(time % 60);
       return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -191,7 +195,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
         ref={setRefs}
         className={`relative bg-black rounded-lg overflow-hidden ${className}`}
         onTouchStart={handleTouchStart}
-        onClick={showControlsTemporarily}
+        onClick={(e: any) => showControlsTemporarily(e)}
       >
         {/* Video Element */}
         <video
@@ -217,7 +221,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
           {/* Center Play Button */}
           <div className='absolute inset-0 flex items-center justify-center'>
             <button
-              onClick={togglePlay}
+              onClick={(e: any) => togglePlay(e)}
               className='bg-black/50 backdrop-blur-sm rounded-full p-4 text-white hover:bg-black/70 transition-colors'
               aria-label={isPlaying ? 'Pause' : 'Play'}
             >
@@ -232,7 +236,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
           {/* Top Controls */}
           <div className='absolute top-4 right-4 flex space-x-2'>
             <button
-              onClick={toggleMute}
+              onClick={(e: any) => toggleMute(e)}
               className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
               aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
@@ -244,7 +248,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
             </button>
 
             <button
-              onClick={toggleFullscreen}
+              onClick={(e: any) => toggleFullscreen(e)}
               className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
               aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
@@ -265,7 +269,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
                 min='0'
                 max={duration || 0}
                 value={currentTime}
-                onChange={handleSeek}
+                onChange={(e: any) => handleSeek(e)}
                 className='w-full h-1 bg-white/30 rounded-lg appearance-none slider-thumb'
                 style={{
                   background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)` }}

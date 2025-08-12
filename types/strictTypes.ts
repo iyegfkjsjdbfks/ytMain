@@ -1,6 +1,9 @@
 import type { Video } from '../types';
 import type { Channel } from '../types';
 import React, { ReactNode, KeyboardEvent, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { ReactNode } from 'react';
 // Strict Type Definitions to Replace 'any' Types
 
 // Video Related Types
@@ -144,7 +147,7 @@ export interface NotificationData {
 
 export interface StrictNotification {
   id: string;
-  type: 'info' | 'success' | 'warning' | 'error';
+  type: "info" as const | 'success' | 'warning' | 'error';
   data: NotificationData;
   timestamp: string;
   read: boolean;

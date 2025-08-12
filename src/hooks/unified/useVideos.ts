@@ -26,10 +26,10 @@ export function useUnifiedVideos(,
     success: boolean;
     message: string
   }>
-) {
+): any {
   return useQuery(
     ['unified-videos', String(limit), JSON.stringify(filters)],
-    async () => {
+    async (): Promise<void> => {
       const response = await unifiedDataService.getTrendingVideos(
         limit,
         filters
@@ -50,14 +50,14 @@ export function useUnifiedVideos(,
 export function useUnifiedVideo(,
   videoId: any,
   config?: UseApiConfig<UnifiedVideoMetadata>
-) {
+): any {
   logger.debug(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
   logger.debug(`🎬 useUnifiedVideo hook enabled: ${!!videoId}`);
 
   // Use standard React Query hook with proper caching
   const result = useReactQuery({
     queryKey: ['unified-video', videoId], // Stable cache key,
-  queryFn: async () => {
+  queryFn: async (): Promise<void> => {
       logger.debug(
         `🔍 useUnifiedVideo: Query function executing for ID: ${videoId}`
       );
@@ -76,7 +76,7 @@ export function useUnifiedVideo(,
   refetchOnWindowFocus: false, // Don't refetch on window focus,
   retry: 3, // Retry failed requests,
   retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
-    ...config, // Allow overriding these settings
+    ...config as any, // Allow overriding these settings
   });
 
   // Convert React Query result to match our custom hook format
@@ -101,10 +101,10 @@ export function useUnifiedTrendingVideos(,
     success: boolean;
     message: string
   }>
-) {
+): any {
   return useQuery(
     ['unified-trending', String(limit), JSON.stringify(filters)],
-    async () => {
+    async (): Promise<void> => {
       const response = await unifiedDataService.getTrendingVideos(
         limit,
         filters
@@ -123,7 +123,7 @@ export function useUnifiedTrendingVideos(,
   );
 }
 
-export function useFeaturedVideos(config?: UseApiConfig<Video[]>) {
+export function useFeaturedVideos(config?: UseApiConfig<Video[]>): any {
   return useQuery(['videos', 'featured'], () => videoApi.getFeaturedVideos(), {
     staleTime: 5 * 60 * 1000, // 5 minutes
     ...config });
@@ -132,7 +132,7 @@ export function useFeaturedVideos(config?: UseApiConfig<Video[]>) {
 export function useVideosByCategory(,
   category: any,
   config?: UseApiConfig<Video[]>
-) {
+): any {
   return useQuery(
     ['videos', 'category', category],
     () => videoApi.getVideosByCategory(category),
@@ -143,7 +143,7 @@ export function useVideosByCategory(,
   );
 }
 
-export function useSubscriptionFeed(config?: UseApiConfig<Video[]>) {
+export function useSubscriptionFeed(config?: UseApiConfig<Video[]>): any {
   return useQuery(
     ['videos', 'subscriptions'],
     () => videoApi.getSubscriptionFeed(),
@@ -154,7 +154,7 @@ export function useSubscriptionFeed(config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useRelatedVideos(videoId: any, config?: UseApiConfig<Video[]>) {
+export function useRelatedVideos(videoId: any, config?: UseApiConfig<Video[]>): any {
   return useQuery(
     ['videos', 'related', videoId],
     () => videoApi.getRelatedVideos(videoId),
@@ -165,7 +165,7 @@ export function useRelatedVideos(videoId: any, config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useRecommendations(config?: UseApiConfig<Video[]>) {
+export function useRecommendations(config?: UseApiConfig<Video[]>): any {
   return useQuery(
     ['videos', 'recommendations'],
     () => videoApi.getRecommendations(),
@@ -176,19 +176,19 @@ export function useRecommendations(config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useWatchHistory(config?: UseApiConfig<Video[]>) {
+export function useWatchHistory(config?: UseApiConfig<Video[]>): any {
   return useQuery(['videos', 'history'], () => videoApi.getWatchHistory(), {
     staleTime: 1 * 60 * 1000, // 1 minute
     ...config });
 }
 
-export function useLikedVideos(config?: UseApiConfig<Video[]>) {
+export function useLikedVideos(config?: UseApiConfig<Video[]>): any {
   return useQuery(['videos', 'liked'], () => videoApi.getLikedVideos(), {
     staleTime: 2 * 60 * 1000, // 2 minutes
     ...config });
 }
 
-export function useSavedVideos(config?: UseApiConfig<Video[]>) {
+export function useSavedVideos(config?: UseApiConfig<Video[]>): any {
   return useQuery(['videos', 'saved'], () => videoApi.getSavedVideos(), {
     staleTime: 2 * 60 * 1000, // 2 minutes
     ...config });
@@ -202,10 +202,10 @@ export function useUnifiedShorts(,
     success: boolean;
     message: string
   }>
-) {
+): any {
   return useQuery(
     ['unified-shorts', String(limit)],
-    async () => {
+    async (): Promise<void> => {
       const response = await unifiedDataService.getShortsVideos(limit);
       return {
         data: {
@@ -222,14 +222,14 @@ export function useUnifiedShorts(,
 }
 
 // Legacy shorts hooks (for backward compatibility)
-export function useShorts(config?: UseApiConfig<Short[]>) {
+export function useShorts(config?: UseApiConfig<Short[]>): any {
   return useQuery(['shorts'], () => videoApi.getShorts(), {
     staleTime: 2 * 60 * 1000, // 2 minutes,
   refetchOnWindowFocus: true,
     ...config });
 }
 
-export function useTrendingShorts(config?: UseApiConfig<Short[]>) {
+export function useTrendingShorts(config?: UseApiConfig<Short[]>): any {
   return useQuery(['shorts', 'trending'], () => videoApi.getTrendingShorts(), {
     staleTime: 1 * 60 * 1000, // 1 minute,
   refetchOnWindowFocus: true,
@@ -246,10 +246,10 @@ export function useUnifiedSearchVideos(,
     success: boolean;
     message: string
   }>
-) {
+): any {
   return useQuery(
     ['unified-search', query, JSON.stringify(filters), String(limit)],
-    async () => {
+    async (): Promise<void> => {
       const response = await unifiedDataService.searchVideos(
         query,
         filters,
@@ -270,7 +270,7 @@ export function useUnifiedSearchVideos(,
 }
 
 // Legacy search hook (for backward compatibility)
-export function useSearchVideos(query: any, config?: UseApiConfig<Video[]>) {
+export function useSearchVideos(query: any, config?: UseApiConfig<Video[]>): any {
   return useQuery(
     ['videos', 'search', query],
     () => videoApi.searchVideos({ query }),
@@ -282,9 +282,9 @@ export function useSearchVideos(query: any, config?: UseApiConfig<Video[]>) {
 }
 
 // Mutation hooks
-export function useUploadVideo() {
+export function useUploadVideo(): any {
   return useMutation<Video, { file: File; data: VideoUploadData }>(
-    ({ file, data }) => videoApi.uploadVideo(file, data),
+    ({ file, data }: any) => videoApi.uploadVideo(file, data),
     {
       onSuccess: _data => {},
       onError: error => {
@@ -293,49 +293,49 @@ export function useUploadVideo() {
   );
 }
 
-export function useUpdateVideo() {
+export function useUpdateVideo(): any {
   return useMutation<
     Video,
     { videoId: string; data: Partial<VideoUploadData> }
-  >(({ videoId, data }) => videoApi.updateVideo(videoId, data), {
+  >(({ videoId, data }: any) => videoApi.updateVideo(videoId, data), {
     onSuccess: _data => {} });
 }
 
-export function useDeleteVideo() {
+export function useDeleteVideo(): any {
   return useMutation<void, string>(videoId => videoApi.deleteVideo(videoId), {
-    onSuccess: (_, _videoId) => {} });
+    onSuccess: (_: any, _videoId: any) => {} });
 }
 
-export function useLikeVideo() {
+export function useLikeVideo(): any {
   return useMutation<void, string>(videoId => videoApi.likeVideo(videoId), {
-    onSuccess: (_, _videoId) => {} });
+    onSuccess: (_: any, _videoId: any) => {} });
 }
 
-export function useUnlikeVideo() {
+export function useUnlikeVideo(): any {
   return useMutation<void, string>(videoId => videoApi.unlikeVideo(videoId), {
-    onSuccess: (_, _videoId) => {} });
+    onSuccess: (_: any, _videoId: any) => {} });
 }
 
-export function useSaveVideo() {
+export function useSaveVideo(): any {
   return useMutation<void, string>(videoId => videoApi.saveVideo(videoId), {
-    onSuccess: (_, _videoId) => {} });
+    onSuccess: (_: any, _videoId: any) => {} });
 }
 
-export function useUnsaveVideo() {
+export function useUnsaveVideo(): any {
   return useMutation<void, string>(videoId => videoApi.unsaveVideo(videoId), {
-    onSuccess: (_, _videoId) => {} });
+    onSuccess: (_: any, _videoId: any) => {} });
 }
 
-export function useIncrementViews() {
+export function useIncrementViews(): any {
   return useMutation<void, string>(videoId => videoApi.incrementViews(videoId));
 }
 
-export function useReportVideo() {
+export function useReportVideo(): any {
   return useMutation<
     void,
     { videoId: string; reason: string; description?: string }
   >(
-    ({ videoId, reason, description }) =>
+    ({ videoId, reason, description }: any) =>
       videoApi.reportVideo(videoId, reason, description),
     {
       onSuccess: () => {} }
@@ -343,14 +343,14 @@ export function useReportVideo() {
 }
 
 // Utility hooks
-export function useVideoCategories(config?: UseApiConfig<string[]>) {
+export function useVideoCategories(config?: UseApiConfig<string[]>): any {
   return useQuery(['videos', 'categories'], () => videoApi.getCategories(), {
     staleTime: 60 * 60 * 1000, // 1 hour
     ...config });
 }
 
 // Legacy hooks for backward compatibility
-export function useVideos(params = {}, config?: UseApiConfig<Video[]>) {
+export function useVideos(params = {}, config?: UseApiConfig<Video[]>): any {
   return useQuery(
     ['videos', JSON.stringify(params)],
     () => videoApi.getVideos(params),
@@ -360,14 +360,14 @@ export function useVideos(params = {}, config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useVideo(videoId: any, config?: UseApiConfig<Video>) {
+export function useVideo(videoId: any, config?: UseApiConfig<Video>): any {
   return useQuery(['video', videoId], () => videoApi.getVideo(videoId), {
     enabled: !!videoId,
     staleTime: 10 * 60 * 1000, // 10 minutes
     ...config });
 }
 
-export function useTrendingVideos(config?: UseApiConfig<Video[]>) {
+export function useTrendingVideos(config?: UseApiConfig<Video[]>): any {
   return useQuery(['videos', 'trending'], () => videoApi.getTrendingVideos(), {
     staleTime: 2 * 60 * 1000, // 2 minutes,
   refetchOnWindowFocus: true,
@@ -375,7 +375,7 @@ export function useTrendingVideos(config?: UseApiConfig<Video[]>) {
 }
 
 // Combined hooks for common patterns
-export function useVideoWithRelated(videoId: any) {
+export function useVideoWithRelated(videoId: any): any {
   const video = useVideo(videoId);
   const relatedVideos = useRelatedVideos(videoId, {
     enabled: !!video.data });
@@ -386,12 +386,12 @@ export function useVideoWithRelated(videoId: any) {
     loading: video.loading || relatedVideos.loading,
     error: video.error || relatedVideos.error,
     refetch: () => {
-      video.refetch();
-      relatedVideos.refetch();
+      video.re(fetch as any)();
+      relatedVideos.re(fetch as any)();
     } };
 }
 
-export function useHomePageData() {
+export function useHomePageData(): any {
   const trendingVideos = useTrendingVideos();
   const featuredVideos = useFeaturedVideos();
   const recommendations = useRecommendations();
@@ -407,8 +407,8 @@ export function useHomePageData() {
     error:
       trendingVideos.error || featuredVideos.error || recommendations.error,
     refetch: () => {
-      trendingVideos.refetch();
-      featuredVideos.refetch();
-      recommendations.refetch();
+      trendingVideos.re(fetch as any)();
+      featuredVideos.re(fetch as any)();
+      recommendations.re(fetch as any)();
     } };
 }

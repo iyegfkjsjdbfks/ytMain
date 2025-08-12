@@ -120,7 +120,7 @@ export const PWAUtils = {
 
   // Check if install prompt was dismissed recently
   isInstallPromptDismissed(): boolean {
-    const dismissed = localStorage.getItem(
+    const dismissed = (localStorage as any).getItem(
       PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY
     );
     if (!dismissed) {
@@ -134,7 +134,7 @@ export const PWAUtils = {
 
   // Mark install prompt as dismissed
   dismissInstallPrompt(): void {
-    localStorage.setItem(
+    (localStorage as any).setItem(
       PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY,
       Date.now().toString()
     );
@@ -142,14 +142,14 @@ export const PWAUtils = {
 
   // Get app visit count
   getVisitCount(): number {
-    const count = localStorage.getItem('pwa-visit-count');
+    const count = (localStorage as any).getItem('pwa-visit-count');
     return count ? parseInt(count, 10) : 0;
   },
 
   // Increment app visit count
   incrementVisitCount(): number {
     const count = this.getVisitCount() + 1;
-    localStorage.setItem('pwa-visit-count', count.toString());
+    (localStorage as any).setItem('pwa-visit-count', count.toString());
     return count;
   },
 
@@ -189,12 +189,12 @@ export const PWAEvents = {
     // Notify user about update
     if (registration.waiting) {
       // Post message to service worker to skip waiting
-      registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      registration.waiting.postMessage({ type: "SKIP_WAITING" as const });
     }
   } };
 
 // PWA Manifest Generator (for dynamic manifest generation if needed)
-export const generateManifest = () => ({
+export const generateManifest: any = () => ({
   name: PWA_CONFIG.APP_NAME,
   short_name: PWA_CONFIG.APP_SHORT_NAME,
   description: PWA_CONFIG.APP_DESCRIPTION,

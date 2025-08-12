@@ -1,5 +1,7 @@
 import type { Video } from '../types';
 import React, { useState, FC } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { ClockIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
@@ -71,7 +73,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   className = '' }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'audience' | 'engagement' | 'revenue'>('overview');
 
-  const formatNumber = (num: any): string => {
+  const formatNumber: any = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -80,7 +82,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
     return num.toLocaleString();
   };
 
-  const formatDuration = (seconds: any): string => {
+  const formatDuration: any = (seconds: any): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
@@ -93,7 +95,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
     return `${secs}s`;
   };
 
-  const formatCurrency = (amount: any): string => {
+  const formatCurrency: any = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
           currency: 'USD' }).format(amount);
@@ -101,32 +103,32 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
 
   // Chart configurations
   const viewsChartData = {
-    labels: analytics.viewsOverTime.map(d => new Date(d.date).toLocaleDateString()),
+    labels: analytics.viewsOverTime.map((d: any) => new Date(d.date).toLocaleDateString()),
           datasets: [
       {
         label: 'Views',
-          data: analytics.viewsOverTime.map(d => d.views),
+          data: analytics.viewsOverTime.map((d: any) => d.views),
         borderColor: 'rgb(59, 130, 246)',
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.4,
           fill: true }] };
 
   const watchTimeChartData = {
-    labels: analytics.watchTimeOverTime.map(d => new Date(d.date).toLocaleDateString()),
+    labels: analytics.watchTimeOverTime.map((d: any) => new Date(d.date).toLocaleDateString()),
           datasets: [
       {
         label: 'Watch Time (hours)',
-          data: analytics.watchTimeOverTime.map(d => d.watchTime / 3600),
+          data: analytics.watchTimeOverTime.map((d: any) => d.watchTime / 3600),
         borderColor: 'rgb(16, 185, 129)',
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.4,
           fill: true }] };
 
   const deviceChartData = {
-    labels: analytics.deviceTypes.map(d => d.device),
+    labels: analytics.deviceTypes.map((d: any) => d.device),
           datasets: [
       {
-        data: analytics.deviceTypes.map(d => d.percentage),
+        data: analytics.deviceTypes.map((d: any) => d.percentage),
           backgroundColor: [
           'rgba(59, 130, 246, 0.8)',
           'rgba(16, 185, 129, 0.8)',
@@ -135,10 +137,10 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
         borderWidth: 0 }] };
 
   const trafficSourcesChartData = {
-    labels: analytics.trafficSources.map(d => d.source),
+    labels: analytics.trafficSources.map((d: any) => d.source),
           datasets: [
       {
-        data: analytics.trafficSources.map(d => d.percentage),
+        data: analytics.trafficSources.map((d: any) => d.percentage),
           backgroundColor: [
           'rgba(139, 92, 246, 0.8)',
           'rgba(236, 72, 153, 0.8)',

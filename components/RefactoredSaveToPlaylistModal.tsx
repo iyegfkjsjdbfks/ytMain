@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useState, FC } from 'react';
 
@@ -36,7 +40,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
   onSaveToPlaylist,
   onCreatePlaylist }) => {
   const [selectedPlaylistId, setSelectedPlaylistId] = useState<string>('');
-  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
 
   // Auto-select first playlist when modal opens
   useEffect(() => {
@@ -57,14 +61,14 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
 
   const {
     loading: saveLoading,
-          error: saveError } = useAsyncState(async () => {}, [], { initialLoading: false });
+          error: saveError } = useAsyncState(async (): Promise<void> => {}, [], { initialLoading: false });
 
   const {
     loading: createLoading,
-          error: createError } = useAsyncState(async () => {}, [], { initialLoading: false });
+          error: createError } = useAsyncState(async (): Promise<void> => {}, [], { initialLoading: false });
 
   // Handle saving to existing playlist
-  const handleSaveToExisting = async () => {
+  const handleSaveToExisting = async (): Promise<void> => {
     if (!selectedPlaylistId) {
 return;
 }
@@ -72,19 +76,19 @@ return;
     try {
       await onSaveToPlaylist(videoId, selectedPlaylistId);
       onClose();
-    } catch (error) {
-      console.error('Error saving to playlist:', error);
+    } catch (error: any) {
+      (console as any).error('Error saving to playlist:', error);
     }
   };
 
   // Handle creating new playlist
-  const handleCreatePlaylist = async (formData: Record<string, any>) => {
+  const handleCreatePlaylist = async (formData: Record<string, any>): Promise<any> => {
     try {
       const newPlaylist = await onCreatePlaylist(formData.name, formData.description);
       await onSaveToPlaylist(videoId, newPlaylist.id);
       onClose();
-    } catch (error) {
-      console.error('Error creating playlist:', error);
+    } catch (error: any) {
+      (console as any).error('Error creating playlist:', error);
     }
   };
 
@@ -93,7 +97,7 @@ return;
     {
       name: 'name',
           label: 'Playlist Name',
-      type: 'text' as const,
+      type: "text" as const as const,
           placeholder: 'Enter playlist name',
       required: true,
           validation: (value: string | number) => {
@@ -108,14 +112,14 @@ return 'Playlist name must be less than 100 characters';
     {
       name: 'description',
           label: 'Description (Optional)',
-      type: 'textarea' as const,
+      type: "textarea" as const as const,
           placeholder: 'Enter playlist description',
       rows: 3 }];
 
-  const modalFooter = (
+  const modalFooter: any = (
     <div className="flex gap-3">
       <button
-        onClick={onClose}
+        onClick={(e: any) => onClose(e)}
         className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
       >
         Cancel
@@ -131,7 +135,7 @@ return 'Playlist name must be less than 100 characters';
           </button>
 
           <button
-            onClick={handleSaveToExisting}
+            onClick={(e: any) => handleSaveToExisting(e)}
             disabled={!selectedPlaylistId || saveLoading}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
@@ -161,7 +165,7 @@ return 'Playlist name must be less than 100 characters';
         /* Create new playlist form */
         <BaseForm
           fields={createPlaylistFields}
-          onSubmit={handleCreatePlaylist}
+          onSubmit={(e: any) => handleCreatePlaylist(e)}
           loading={createLoading}
           error={createError}
           submitLabel="Create and Save"

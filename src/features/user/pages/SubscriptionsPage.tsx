@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * SubscriptionsPage component for displaying videos from subscribed channels
  */

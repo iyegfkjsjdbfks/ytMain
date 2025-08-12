@@ -1,4 +1,5 @@
 import React, { memo, FC } from 'react';
+import { FC } from 'react';
 
 import YouTubeVideoCard from './YouTubeVideoCard';
 
@@ -26,7 +27,7 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
     lg: 3,
           xl: 3,
     '2xl': 4 } }) => {
-  const getGridClasses = () => {
+  const getGridClasses: any = () => {
     const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
     const responsiveClasses = [
       columns.sm && `sm:grid-cols-${columns.sm}`,

@@ -9,7 +9,7 @@ import { getVideos, getVideosByCategory, getVideosByChannelName, getSubscribedCh
 /**
  * Hook for fetching all videos
  */
-export function useVideos() {
+export function useVideos(): any {
   const fetchVideos = useCallback(async (): Promise<Video[]> => {
     const data = await getVideos();
     return data as unknown as Video;
@@ -23,7 +23,7 @@ export function useVideos() {
 /**
  * Hook for fetching trending videos with category filtering
  */
-export function useTrendingVideos(category = 'all') {
+export function useTrendingVideos(category = 'all'): any {
   const fetchTrendingVideos = useCallback(async (): Promise<Video[]> => {
     // If category-specific API available, use it, then normalize to Video[]
     if (
@@ -32,10 +32,10 @@ export function useTrendingVideos(category = 'all') {
       typeof getVideosByCategory === 'function'
     ) {
       const byCategory = await getVideosByCategory(category);
-      const normalized = (byCategory as any).map((v: any) => ({
+      const normalized: any = (byCategory as any).map((v: any) => ({
         // realVideoService returns fields like thumbnailUrl/publishedAt etc.
         // Map to Video shape expected by UI where necessary
-        ...v,
+        ...v as any,
         thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
         publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
         channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '' })) as Video;
@@ -50,13 +50,13 @@ export function useTrendingVideos(category = 'all') {
 
     // Fallback: get all videos then sort/filter
     const allVideosRaw = await getVideos();
-    const allVideos = (allVideosRaw as any).map((v: any) => ({
-      ...v,
+    const allVideos: any = (allVideosRaw as any).map((v: any) => ({
+      ...v as any,
       thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
       publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
       channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '' })) as Video;
 
-    const sortedByViews = [...allVideos].sort((a, b) => {
+    const sortedByViews = [...allVideos].sort((a: any, b: any) => {
       const viewsA = parseViewCount(a.views as string);
       const viewsB = parseViewCount(b.views as string);
       return viewsB - viewsA;
@@ -72,7 +72,7 @@ export function useTrendingVideos(category = 'all') {
 /**
  * Hook for fetching subscription feed
  */
-export function useSubscriptionsFeed() {
+export function useSubscriptionsFeed(): any {
   const fetchSubscriptionsFeed = useCallback(async (): Promise<Video[]> => {
     // getSubscribedChannelNames is provided by services/realVideoService.ts
     const channelNames: string[] = await getSubscribedChannelNames();
@@ -80,7 +80,7 @@ export function useSubscriptionsFeed() {
       return [];
     }
 
-    const videosPromises = channelNames.map(name =>
+    const videosPromises = channelNames.map((name: any) =>
       getVideosByChannelName(name)
     );
     const videosByChannel = await Promise.all(videosPromises);
@@ -104,7 +104,7 @@ export function useSubscriptionsFeed() {
 /**
  * Hook for fetching videos by channel name
  */
-export function useChannelVideos(channelName: any) {
+export function useChannelVideos(channelName: any): any {
   const fetchChannelVideos = useCallback(
     () => getVideosByChannelName(channelName),
     [channelName]

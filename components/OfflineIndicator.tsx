@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useState, FC } from 'react';
 
@@ -7,17 +11,17 @@ interface OfflineIndicatorProps {
   className?: string;
 }
 
-const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
+const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [showOfflineMessage, setShowOfflineMessage] = useState(false);
+  const [showOfflineMessage, setShowOfflineMessage] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleOnline = () => {
+    const handleOnline: any = () => {
       setIsOnline(true);
       setShowOfflineMessage(false);
     };
 
-    const handleOffline = () => {
+    const handleOffline: any = () => {
       setIsOnline(false);
       setShowOfflineMessage(true);
     };
@@ -39,9 +43,9 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
   // Auto-hide offline message after 5 seconds when back online
   useEffect(() => {
     if (isOnline && showOfflineMessage) {
-      const timer = setTimeout(() => {
+      const timer = setTimeout((() => {
         setShowOfflineMessage(false);
-      }, 3000);
+      }) as any, 3000);
       return () => clearTimeout(timer);
     }
     return undefined;

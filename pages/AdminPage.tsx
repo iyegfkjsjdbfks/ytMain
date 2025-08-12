@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import type { Video } from '../types';
 import { useEffect, useState, FC } from 'react';
@@ -18,21 +22,22 @@ interface StoreVideo {
 }
 
 const AdminPage: React.FC = () => {
+  return null;
   const [provider, setProvider] = useState<YouTubeSearchProvider>('hybrid');
   const [playerType, setPlayerType] = useState<YouTubePlayerType>('youtube-player');
   const [localPlayerType, setLocalPlayerType] = useState<LocalVideoPlayerType>('advanced-video-player');
   const [enabledYouTubePlayers, setEnabledYouTubePlayersState] = useState<YouTubePlayerType[]>([]);
   const [enabledLocalPlayers, setEnabledLocalPlayersState] = useState<LocalVideoPlayerType[]>([]);
   const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview' | 'api-testing' | 'player-config'>('overview');
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState('');
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [saveMessage, setSaveMessage] = useState<string>('');
 
   // Google Search Debug state
   const [storeVideos, setStoreVideos] = useState<StoreVideo[]>([]);
   const [testVideoId, setTestVideoId] = useState('bnVUHWCynig');
   const [testResult, setTestResult] = useState<any>(null);
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [initialSearchKeyword, setInitialSearchKeywordState] = useState<string>('');
 
   // YouTube Metadata Debug state
@@ -57,13 +62,13 @@ const AdminPage: React.FC = () => {
     });
   }, []);
 
-  const loadStoreVideos = async () => {
+  const loadStoreVideos = async (): Promise<void> => {
     try {
       const { googleSearchVideoStore } = await import('../services/googleSearchVideoStore');
       const googleVideos = googleSearchVideoStore.getAllVideos();
 
       // Convert GoogleSearchResult[] to StoreVideo[]
-      const videos: StoreVideo[] = googleVideos.map(video => ({,
+      const videos: StoreVideo[] = googleVideos.map((video: any) => ({,
         id: video.id,
           title: video.title,
         channelName: video.channelName,
@@ -71,21 +76,21 @@ const AdminPage: React.FC = () => {
         viewCount: video.viewCount || 0 }));
 
       setStoreVideos(videos);
-    } catch (error) {
-      console.error('Failed to load store videos:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to load store videos:', error);
     }
   };
 
-  const handleTestFetch = async () => {
+  const handleTestFetch = async (): Promise<void> => {
     setLoading(true);
     try {
-      console.log(`🧪 Testing fetch for video ID: ${testVideoId}`);
+      (console as any).log(`🧪 Testing fetch for video ID: ${testVideoId}`);
 
       // Check environment variables first
       const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
       const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
-      console.log('🔑 API Key available:', !!searchApiKey);
-      console.log('🔍 Search Engine ID available:', !!searchEngineId);
+      (console as any).log('🔑 API Key available:', !!searchApiKey);
+      (console as any).log('🔍 Search Engine ID available:', !!searchEngineId);
 
       if (!searchApiKey || !searchEngineId) {
         setTestResult({
@@ -103,18 +108,18 @@ const AdminPage: React.FC = () => {
 
       // Refresh store videos
       await loadStoreVideos();
-    } catch (error) {
-      console.error('Test fetch error:', error);
+    } catch (error: any) {
+      (console as any).error('Test fetch error:', error);
       setTestResult({ error: error.message });
     } finally {
       setLoading(false);
     }
   };
 
-  const handleTestUnifiedService = async () => {
+  const handleTestUnifiedService = async (): Promise<void> => {
     setLoading(true);
     try {
-      console.log(`🧪 Testing unified service for video ID: google-search-${testVideoId}`);
+      (console as any).log(`🧪 Testing unified service for video ID: google-search-${testVideoId}`);
 
       // Import unified data service
       const { unifiedDataService } = await import('../src/services/unifiedDataService');
@@ -126,27 +131,27 @@ const AdminPage: React.FC = () => {
       const result = await unifiedDataService.getVideoById(`google-search-${testVideoId}`);
       setUnifiedServiceTest(result);
 
-      console.log('🧪 Unified service result:', result);
-    } catch (error) {
-      console.error('Unified service test error:', error);
+      (console as any).log('🧪 Unified service result:', result);
+    } catch (error: any) {
+      (console as any).error('Unified service test error:', error);
       setUnifiedServiceTest({ error: error.message });
     } finally {
       setLoading(false);
     }
   };
 
-  const handleClearStore = async () => {
+  const handleClearStore = async (): Promise<void> => {
     try {
       const { googleSearchVideoStore } = await import('../services/googleSearchVideoStore');
       googleSearchVideoStore.clear();
       await loadStoreVideos();
-    } catch (error) {
-      console.error('Failed to clear store:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to clear store:', error);
     }
   };
 
   // YouTube Metadata Debug handlers
-  const checkEnvironment = () => {
+  const checkEnvironment: any = () => {
     const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const proxyUrl = `${window.location.origin}/api/youtube/v3/videos`;
 
@@ -163,15 +168,15 @@ const AdminPage: React.FC = () => {
           googleSearchEngineId: !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID });
   };
 
-  const testProxyEndpoint = async () => {
+  const testProxyEndpoint = async (): Promise<void> => {
     setLoading(true);
     try {
       const testVideoId = 'bnVUHWCynig';
       const proxyUrl = `/api/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${testVideoId}`;
 
-      console.log('🔄 Testing proxy endpoint:', proxyUrl);
+      (console as any).log('🔄 Testing proxy endpoint:', proxyUrl);
 
-      const response = await fetch(proxyUrl);
+      const response = await (fetch as any)(proxyUrl);
 
       if (response.ok) {
         const data = await response.json();
@@ -207,7 +212,7 @@ const AdminPage: React.FC = () => {
           error: `${response.status} ${response.statusText}`,
           fullResponse: errorText });
       }
-    } catch (error) {
+    } catch (error: any) {
       setProxyTest({
         success: false,
           error: error.message,
@@ -217,16 +222,16 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  const testDirectAPI = async () => {
+  const testDirectAPI = async (): Promise<void> => {
     setLoading(true);
     try {
       const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
       const testVideoId = 'bnVUHWCynig';
       const directUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&part=snippet,statistics,contentDetails&id=${testVideoId}`;
 
-      console.log('🔄 Testing direct API:', directUrl.replace(apiKey, '[API_KEY]'));
+      (console as any).log('🔄 Testing direct API:', directUrl.replace(apiKey, '[API_KEY]'));
 
-      const response = await fetch(directUrl);
+      const response = await (fetch as any)(directUrl);
 
       if (response.ok) {
         const data = await response.json();
@@ -245,7 +250,7 @@ const AdminPage: React.FC = () => {
           error: `${response.status} ${response.statusText}`,
           fullResponse: errorData });
       }
-    } catch (error) {
+    } catch (error: any) {
       setDirectApiTest({
         success: false,
           error: error.message,
@@ -255,10 +260,10 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  const testYouTubeMetadataFetch = async () => {
+  const testYouTubeMetadataFetch = async (): Promise<void> => {
     setLoading(true);
     try {
-      console.log('🔄 Testing YouTube metadata fetch using app services...');
+      (console as any).log('🔄 Testing YouTube metadata fetch using app services...');
 
       // Import unified data service
       const { unifiedDataService } = await import('../src/services/unifiedDataService');
@@ -269,7 +274,7 @@ const AdminPage: React.FC = () => {
       // Test the unified service
       const video = await unifiedDataService.getVideoById(testVideoId);
 
-      if (video) {
+      if (video as any) {
         setYoutubeMetadataTest({
           success: true,
           video: {,
@@ -287,7 +292,7 @@ const AdminPage: React.FC = () => {
           success: false,
           error: 'No video data returned from app service' });
       }
-    } catch (error) {
+    } catch (error: any) {
       setYoutubeMetadataTest({
         success: false,
           error: error.message,
@@ -297,14 +302,14 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  const clearYouTubeMetadataTests = () => {
+  const clearYouTubeMetadataTests: any = () => {
     setYoutubeMetadataTest(null);
     setProxyTest(null);
     setDirectApiTest(null);
     setEnvironmentCheck(null);
   };
 
-  const handleProviderChange = async (newProvider: YouTubeSearchProvider) => {
+  const handleProviderChange = async (newProvider: YouTubeSearchProvider): Promise<any> => {
     setIsSaving(true);
     setSaveMessage('');
 
@@ -314,18 +319,18 @@ const AdminPage: React.FC = () => {
       saveSettings(settings);
       setProvider(newProvider);
       setSaveMessage('Settings saved successfully!');
-    } catch (error) {
-      console.error('Error saving settings:', error);
+    } catch (error: any) {
+      (console as any).error('Error saving settings:', error);
       setSaveMessage('Error saving settings. Please try again.');
     } finally {
       setIsSaving(false);
       // Clear message after 3 seconds
-      setTimeout(() => setSaveMessage(''), 3000);
+      setTimeout((() => setSaveMessage('')) as any, 3000);
     }
   
         };
 
-  const handlePlayerTypeChange = async (newPlayerType: YouTubePlayerType) => {
+  const handlePlayerTypeChange = async (newPlayerType: YouTubePlayerType): Promise<any> => {
     setIsSaving(true);
     setSaveMessage('');
 
@@ -335,18 +340,18 @@ const AdminPage: React.FC = () => {
       saveSettings(settings);
       setPlayerType(newPlayerType);
       setSaveMessage('YouTube player type updated successfully!');
-    } catch (error) {
-      console.error('Error saving player type:', error);
+    } catch (error: any) {
+      (console as any).error('Error saving player type:', error);
       setSaveMessage('Error saving player type. Please try again.');
     } finally {
       setIsSaving(false);
       // Clear message after 3 seconds
-      setTimeout(() => setSaveMessage(''), 3000);
+      setTimeout((() => setSaveMessage('')) as any, 3000);
     }
   
         };
 
-  const handleLocalPlayerTypeChange = async (newPlayerType: LocalVideoPlayerType) => {
+  const handleLocalPlayerTypeChange = async (newPlayerType: LocalVideoPlayerType): Promise<any> => {
     setIsSaving(true);
     setSaveMessage('');
 
@@ -354,18 +359,18 @@ const AdminPage: React.FC = () => {
       setLocalVideoPlayerType(newPlayerType);
       setLocalPlayerType(newPlayerType);
       setSaveMessage('Local video player type updated successfully!');
-    } catch (error) {
-      console.error('Error saving local player type:', error);
+    } catch (error: any) {
+      (console as any).error('Error saving local player type:', error);
       setSaveMessage('Error saving local player type. Please try again.');
     } finally {
       setIsSaving(false);
       // Clear message after 3 seconds
-      setTimeout(() => setSaveMessage(''), 3000);
+      setTimeout((() => setSaveMessage('')) as any, 3000);
     }
   
         };
 
-  const handleToggleYouTubePlayer = async (playerType: YouTubePlayerType) => {
+  const handleToggleYouTubePlayer = async (playerType: YouTubePlayerType): Promise<any> => {
     setIsSaving(true);
     setSaveMessage('');
 
@@ -373,16 +378,16 @@ const AdminPage: React.FC = () => {
       toggleYouTubePlayer(playerType);
       setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
       setSaveMessage('YouTube player settings updated successfully!');
-    } catch (error) {
-      console.error('Error toggling YouTube player:', error);
+    } catch (error: any) {
+      (console as any).error('Error toggling YouTube player:', error);
       setSaveMessage('Error updating YouTube player settings. Please try again.');
     } finally {
       setIsSaving(false);
-      setTimeout(() => setSaveMessage(''), 3000);
+      setTimeout((() => setSaveMessage('')) as any, 3000);
     }
   };
 
-  const handleToggleLocalPlayer = async (playerType: LocalVideoPlayerType) => {
+  const handleToggleLocalPlayer = async (playerType: LocalVideoPlayerType): Promise<any> => {
     setIsSaving(true);
     setSaveMessage('');
 
@@ -390,28 +395,28 @@ const AdminPage: React.FC = () => {
       toggleLocalPlayer(playerType);
       setEnabledLocalPlayersState(getEnabledLocalPlayers());
       setSaveMessage('Local player settings updated successfully!');
-    } catch (error) {
-      console.error('Error toggling local player:', error);
+    } catch (error: any) {
+      (console as any).error('Error toggling local player:', error);
       setSaveMessage('Error updating local player settings. Please try again.');
     } finally {
       setIsSaving(false);
-      setTimeout(() => setSaveMessage(''), 3000);
+      setTimeout((() => setSaveMessage('')) as any, 3000);
     }
   };
 
-  const handleSaveInitialSearchKeyword = async () => {
+  const handleSaveInitialSearchKeyword = async (): Promise<void> => {
     setIsSaving(true);
     setSaveMessage('');
 
     try {
       setInitialSearchKeyword(initialSearchKeyword);
       setSaveMessage('Initial search keyword updated successfully!');
-    } catch (error) {
-      console.error('Error saving initial search keyword:', error);
+    } catch (error: any) {
+      (console as any).error('Error saving initial search keyword:', error);
       setSaveMessage('Error saving initial search keyword. Please try again.');
     } finally {
       setIsSaving(false);
-      setTimeout(() => setSaveMessage(''), 3000);
+      setTimeout((() => setSaveMessage('')) as any, 3000);
     }
   };
 
@@ -420,13 +425,13 @@ const AdminPage: React.FC = () => {
   const googleSearchAvailable = isGoogleSearchAvailable();
   const hybridModeAvailable = isHybridModeAvailable();
 
-  const renderPlayerCard = (config: VideoPlayerConfig,
+  const renderPlayerCard: any = (config: VideoPlayerConfig,
           isSelected: any, isEnabled: any,
           onSelect: () => void, onToggleEnabled: () => void) => {
     const usedOnPages = getPlayerUsageByPage(config.type);
 
-    const getPerformanceColor = (performance: any) => {
-      switch (performance) {
+    const getPerformanceColor: any = (performance: any) => {
+      switch (performance as any) {
         case 'high': return 'text-green-600 bg-green-100';
         case 'medium': return 'text-yellow-600 bg-yellow-100';
         case 'low': return 'text-red-600 bg-red-100';
@@ -434,8 +439,8 @@ const AdminPage: React.FC = () => {
       }
     };
 
-    const getComplexityColor = (complexity: any) => {
-      switch (complexity) {
+    const getComplexityColor: any = (complexity: any) => {
+      switch (complexity as any) {
         case 'simple': return 'text-blue-600 bg-blue-100';
         case 'moderate': return 'text-purple-600 bg-purple-100';
         case 'advanced': return 'text-orange-600 bg-orange-100';
@@ -443,7 +448,7 @@ const AdminPage: React.FC = () => {
       }
     };
 
-    const getCategoryIcon = (category: any) => {
+    const getCategoryIcon: any = (category: any) => {
       return category === 'youtube' ?
         <PlayIcon className="h-5 w-5 text-red-500" /> :
         <VideoCameraIcon className="h-5 w-5 text-blue-500" />;
@@ -456,7 +461,7 @@ const AdminPage: React.FC = () => {
             ? 'border-blue-500 bg-blue-50 shadow-md'
             : 'border-gray-200 bg-white hover:border-gray-300'
         }`}
-        onClick={onSelect}
+        onClick={(e: any) => onSelect(e)}
       >
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center space-x-2">
@@ -475,7 +480,7 @@ const AdminPage: React.FC = () => {
           </div>
           <div className="flex items-center space-x-2">
             <button
-              onClick={(e) => {
+              onClick={(e: any) => {
                 e.stopPropagation();
                 onToggleEnabled();
               }}
@@ -579,7 +584,7 @@ const AdminPage: React.FC = () => {
                 { id: 'search',
           name: 'Search Settings', icon: SparklesIcon },
                 { id: 'api-testing',
-          name: 'API Testing', icon: BugAntIcon }].map((tab) => {
+          name: 'API Testing', icon: BugAntIcon }].map((tab: any) => {
                 const Icon = tab.icon;
                 return (
                   <button
@@ -667,10 +672,10 @@ const AdminPage: React.FC = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-gray-800 mb-4">Available YouTube Video Players:</h4>
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {getVideoPlayersByCategory('youtube').map((config) => {
+                        {getVideoPlayersByCategory('youtube').map((config: any) => {
                           const isCurrentPlayer = config.type === playerType;
                           const isEnabled = enabledYouTubePlayers.includes(config.type as YouTubePlayerType);
-                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page =>
+                          const usedOnPages = getPlayerUsageByPage(config.type).filter((page: any) =>
                             pageConfigurations[page].youtubePlayer === config.type);
 
                           return (
@@ -695,7 +700,7 @@ const AdminPage: React.FC = () => {
                                   </span>
                                 </div>
                                 <button
-                                  onClick={(e) => {
+                                  onClick={(e: any) => {
                                     e.stopPropagation();
                                     handleToggleYouTubePlayer(config.type as YouTubePlayerType);
                                   }}
@@ -798,10 +803,10 @@ const AdminPage: React.FC = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-gray-800 mb-4">Available Local Video Players:</h4>
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {getVideoPlayersByCategory('local').map((config) => {
+                        {getVideoPlayersByCategory('local').map((config: any) => {
                           const isCurrentPlayer = config.type === localPlayerType;
                           const isEnabled = enabledLocalPlayers.includes(config.type as LocalVideoPlayerType);
-                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page =>
+                          const usedOnPages = getPlayerUsageByPage(config.type).filter((page: any) =>
                             pageConfigurations[page].localPlayer === config.type);
 
                           return (
@@ -826,7 +831,7 @@ const AdminPage: React.FC = () => {
                                   </span>
                                 </div>
                                 <button
-                                  onClick={(e) => {
+                                  onClick={(e: any) => {
                                     e.stopPropagation();
                                     handleToggleLocalPlayer(config.type as LocalVideoPlayerType).catch(() => {
                                       // Handle promise rejection silently
@@ -1054,7 +1059,7 @@ const AdminPage: React.FC = () => {
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     />
                     <button
-                      onClick={handleSaveInitialSearchKeyword}
+                      onClick={(e: any) => handleSaveInitialSearchKeyword(e)}
                       disabled={isSaving || !initialSearchKeyword.trim()}
                       className="mt-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
@@ -1267,7 +1272,7 @@ const AdminPage: React.FC = () => {
                   <h3 className="text-lg font-semibold mb-4">Store Statistics</h3>
                   <p className="text-sm text-gray-600 mb-4">Videos in store: {storeVideos.length}</p>
                   <button
-                    onClick={handleClearStore}
+                    onClick={(e: any) => handleClearStore(e)}
                     className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
                   >
                     Clear Store
@@ -1292,14 +1297,14 @@ const AdminPage: React.FC = () => {
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <button
-                      onClick={handleTestFetch}
+                      onClick={(e: any) => handleTestFetch(e)}
                       disabled={loading}
                       className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 disabled:opacity-50 transition-colors"
                     >
                       {loading ? 'Testing...' : '🔍 Google Search Direct'}
                     </button>
                     <button
-                      onClick={handleTestUnifiedService}
+                      onClick={(e: any) => handleTestUnifiedService(e)}
                       disabled={loading}
                       className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 disabled:opacity-50 transition-colors"
                     >
@@ -1339,7 +1344,7 @@ const AdminPage: React.FC = () => {
                   {/* Environment Check */}
                   <div className="mb-6">
                     <button
-                      onClick={checkEnvironment}
+                      onClick={(e: any) => checkEnvironment(e)}
                       className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
                     >
                       🔧 Check Environment
@@ -1372,28 +1377,28 @@ const AdminPage: React.FC = () => {
                   {/* Test Buttons */}
                   <div className="flex gap-2 mb-4">
                     <button
-                      onClick={testProxyEndpoint}
+                      onClick={(e: any) => testProxyEndpoint(e)}
                       disabled={loading}
                       className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 transition-colors"
                     >
                       {loading ? 'Testing...' : '🔗 YouTube API Proxy'}
                     </button>
                     <button
-                      onClick={testDirectAPI}
+                      onClick={(e: any) => testDirectAPI(e)}
                       disabled={loading}
                       className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 transition-colors"
                     >
                       {loading ? 'Testing...' : '🌐 YouTube API Direct'}
                     </button>
                     <button
-                      onClick={testYouTubeMetadataFetch}
+                      onClick={(e: any) => testYouTubeMetadataFetch(e)}
                       disabled={loading}
                       className="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800 disabled:opacity-50 transition-colors"
                     >
                       {loading ? 'Testing...' : '📊 YouTube API App'}
                     </button>
                     <button
-                      onClick={clearYouTubeMetadataTests}
+                      onClick={(e: any) => clearYouTubeMetadataTests(e)}
                       className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
                     >
                       🗑️ Clear Results

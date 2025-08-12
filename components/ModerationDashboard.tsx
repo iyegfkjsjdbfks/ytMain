@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useState, FC } from 'react';
 
@@ -7,7 +11,7 @@ import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface ModerationItem {
   id: string;,
-  type: 'video' | 'comment' | 'user' | 'community_post';
+  type: "video" as const | 'comment' | 'user' | 'community_post';
   status: 'pending' | 'approved' | 'rejected' | 'flagged' | 'removed';,
   priority: 'low' | 'medium' | 'high' | 'critical';
   reportReason: string;,
@@ -66,20 +70,20 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   const [filterType, setFilterType] = useState<'all' | 'video' | 'comment' | 'user' | 'community_post'>('all');
   const [filterPriority, setFilterPriority] = useState<'all' | 'low' | 'medium' | 'high' | 'critical'>('all');
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'priority' | 'reports'>('newest');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [showModerationModal, setShowModerationModal] = useState<string | null>(null);
-  const [moderationReason, setModerationReason] = useState('');
+  const [moderationReason, setModerationReason] = useState<string>('');
 
   useEffect(() => {
     loadModerationItems();
   }, []);
 
-  const loadModerationItems = () => {
+  const loadModerationItems: any = () => {
     // Mock moderation items
     const mockItems: ModerationItem[] = [
       {
         id: '1',
-          type: 'video',
+          type: "video" as const,
         status: 'pending',
           priority: 'high',
         reportReason: 'Inappropriate content',
@@ -105,7 +109,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
         moderationHistory: [] },
       {
         id: '2',
-          type: 'comment',
+          type: "comment" as const,
         status: 'flagged',
           priority: 'critical',
         reportReason: 'Hate speech',
@@ -134,7 +138,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
             reason: 'High toxicity score detected' }] },
       {
         id: '3',
-          type: 'user',
+          type: "user" as const,
         status: 'pending',
           priority: 'medium',
         reportReason: 'Spam account',
@@ -153,7 +157,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   };
 
   const filteredItems = items
-    .filter((item) => {
+    .filter((item: any) => {
       if (filterStatus !== 'all' && item.status !== filterStatus) {
 return false;
 }
@@ -170,8 +174,8 @@ return false;
       }
       return true;
     })
-    .sort((a, b) => {
-      switch (sortBy) {
+    .sort((a: any, b: any) => {
+      switch (sortBy as any) {
         case 'newest':
           return new Date(b.reportedAt).getTime() - new Date(a.reportedAt).getTime();
         case 'oldest':
@@ -187,13 +191,13 @@ return false;
       }
     });
 
-  const handleModerate = (itemId: any,
+  const handleModerate: any = (itemId: any,
           action: 'approve' | 'reject' | 'remove' | 'flag') => {
     onModerate(itemId, action, moderationReason);
-    setItems(prev => prev.map(item =>
+    setItems(prev => prev.map((item: any) =>
       item.id === itemId
         ? {
-            ...item,
+            ...item as any,
             status: action === 'approve' ? 'approved' :
                    action === 'reject' ? 'rejected' :
                    action === 'remove' ? 'removed' : 'flagged',
@@ -210,21 +214,21 @@ return false;
     setModerationReason('');
   };
 
-  const handleBulkAction = (action: 'approve' | 'reject' | 'remove') => {
+  const handleBulkAction: any = (action: 'approve' | 'reject' | 'remove') => {
     const itemIds = Array.from(selectedItems);
     onBulkModerate(itemIds, action);
 
-    setItems(prev => prev.map(item =>
+    setItems(prev => prev.map((item: any) =>
       selectedItems.has(item.id)
         ? {
-            ...item,
+            ...item as any,
             status: action === 'approve' ? 'approved' :
                    action === 'reject' ? 'rejected' : 'removed' }
         : item));
     setSelectedItems(new Set());
   };
 
-  const toggleSelection = (itemId: any) => {
+  const toggleSelection: any = (itemId: any) => {
     setSelectedItems(prev => {
       const newSet = new Set(prev);
       if (newSet.has(itemId)) {
@@ -236,8 +240,8 @@ return false;
     });
   };
 
-  const getPriorityColor = (priority: any) => {
-    switch (priority) {
+  const getPriorityColor: any = (priority: any) => {
+    switch (priority as any) {
       case 'critical': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
       case 'high': return 'text-orange-600 bg-orange-100 dark:bg-orange-900/20';
       case 'medium': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20';
@@ -246,8 +250,8 @@ return false;
     }
   };
 
-  const getStatusColor = (status: any) => {
-    switch (status) {
+  const getStatusColor: any = (status: any) => {
+    switch (status as any) {
       case 'pending': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20';
       case 'approved': return 'text-green-600 bg-green-100 dark:bg-green-900/20';
       case 'rejected': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
@@ -257,8 +261,8 @@ return false;
     }
   };
 
-  const getTypeIcon = (type: any) => {
-    switch (type) {
+  const getTypeIcon: any = (type: any) => {
+    switch (type as any) {
       case 'video': return <VideoCameraIcon className="w-5 h-5" />;
       case 'comment': return <ChatBubbleLeftIcon className="w-5 h-5" />;
       case 'user': return <UserIcon className="w-5 h-5" />;

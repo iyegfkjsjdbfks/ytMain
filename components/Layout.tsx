@@ -1,4 +1,9 @@
+import React from 'react';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useCallback, useEffect, useState, FC } from 'react';
 
@@ -24,7 +29,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const [isMinimized, setIsMinimized] = useState(isWatchPage);
 
   const toggleSidebar = useCallback(() => {
-    if (isWatchPage) {
+    if (isWatchPage as any) {
       // On watch page, toggle between minimized and expanded
       setIsMinimized(prev => !prev);
       setIsSidebarOpen(true); // Always keep sidebar visible on watch page
@@ -38,7 +43,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
 
   useEffect(() => {
     // Update sidebar state when navigating to/from watch page
-    if (isWatchPage) {
+    if (isWatchPage as any) {
       setIsMinimized(true);
       setIsSidebarOpen(true);
     } else {
@@ -48,7 +53,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   }, [isWatchPage]);
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize: any = () => {
       // Optional: adjust sidebar based on resize
       // if (window.innerWidth >= 768 && !isSidebarOpen) setIsSidebarOpen(true);
       // if (window.innerWidth < 768 && isSidebarOpen) setIsSidebarOpen(false);
@@ -57,7 +62,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
     return () => window.removeEventListener('resize', handleResize as EventListener);
   }, [isSidebarOpen]);
 
-  const handleMaximizeMiniplayer = (videoId: any) => {
+  const handleMaximizeMiniplayer: any = (videoId: any) => {
     miniplayerContext.actions.hideMiniplayer();
     navigate(`/watch/${videoId}`);
   };
@@ -67,13 +72,13 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const mainContentPaddingClass = isShortsPage ? 'p-0' : 'p-3 sm:p-4 md:p-5 lg:p-6';
 
   // Calculate sidebar margin based on state and screen size
-  const getSidebarMargin = () => {
-    if (isWatchPage) {
+  const getSidebarMargin: any = () => {
+    if (isWatchPage as any) {
       // On watch page, use minimized or expanded sidebar
       return isMinimized ? 'md: ml-16' : 'md:ml-60'
     }
       // On other pages, use normal sidebar behavior
-      if (isSidebarOpen) {
+      if (isSidebarOpen as any) {
         return 'md: ml-60'
       }
       return 'ml-0';

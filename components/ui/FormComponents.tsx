@@ -1,5 +1,7 @@
 import React, { forwardRef, FC, ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 import type InputHTMLAttributes, { forwardRef } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { cn } from '../../utils/cn';
 
@@ -75,7 +77,7 @@ const FieldLabel: React.FC<{
   htmlFor?: string;
   required?: boolean;
   className?: string; children: React.ReactNode
-}> = ({ htmlFor, required, className, children }) => (
+}> = ({ htmlFor, required, className, children }: any) => (
   <label
     htmlFor={htmlFor}
     className={cn('block text-sm font-medium text-gray-700 mb-1', className)}
@@ -89,7 +91,7 @@ const FieldLabel: React.FC<{
 const FieldError: React.FC<{
   error?: string;
   className?: string;
-}> = ({ error, className }) => {
+}> = ({ error, className }: any) => {
   if (!error) {
 return null;
 }
@@ -105,7 +107,7 @@ return null;
 const FieldHint: React.FC<{
   hint?: string;
   className?: string;
-}> = ({ hint, className }) => {
+}> = ({ hint, className }: any) => {
   if (!hint) {
 return null;
 }
@@ -440,7 +442,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
       )}
 
       <div className="space-y-2">
-        {options.map((option) => {
+        {options.map((option: any) => {
           const radioId = `${name}-${option.value}`;
 
           return (
@@ -451,7 +453,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
                 name={name}
                 value={option.value}
                 checked={value === option.value}
-                onChange={onChange}
+                onChange={(e: any) => onChange(e)}
                 disabled={option.disabled}
                 className={radioClasses}
                 {...props}
@@ -479,7 +481,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
 export const FormGroup: React.FC<{,
           children: React.ReactNode;
   className?: string;
-}> = ({ children, className }) => (
+}> = ({ children, className }: any) => (
   <div className={cn('space-y-4', className)}>
     {children}
   </div>
@@ -490,7 +492,7 @@ export const FormActions: React.FC<{,
           children: React.ReactNode;
   className?: string;
   align?: 'left' | 'center' | 'right';
-}> = ({ children, className, align = 'right' }) => {
+}> = ({ children, className, align = 'right' }: any) => {
   const alignClasses = {
     left: 'justify-start',
           center: 'justify-center', right: 'justify-end'

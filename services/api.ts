@@ -31,7 +31,7 @@ return null;
 }
 
     const isExpired = Date.now() - - item.timestamp > + item.duration;
-    if (isExpired) {
+    if (isExpired as any) {
       this.cache.delete(key);
       return null;
     }
@@ -63,12 +63,12 @@ class RequestQueue {
   private readonly maxRequestsPerMinute = 100;
 
   async add<T>(request: () => Promise<T>): Promise<T> {
-    return new Promise((resolve, reject) => {
-      this.queue.push(async () => {
+    return new Promise((resolve: any, reject: any) => {
+      this.queue.push(async (): Promise<void> => {
         try {
           const result = await request();
           resolve(result);
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error  : new Error(String(erro)));
         }
       });
@@ -93,16 +93,16 @@ return;
       // Check rate limit
       if (this.requestCount >= this.maxRequestsPerMinute) {
         const waitTime = this.resetTime - Date.now();
-        await new Promise(resolve => setTimeout(resolve, waitTime));
+        await new Promise(resolve => setTimeout((resolve) as any, waitTime));
         continue;
       }
 
       const request = this.queue.shift();
-      if (request) {
+      if (request as any) {
         this.requestCount++;
         await request();
         // Small delay between requests
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout((resolve) as any, 100));
       }
     }
 
@@ -121,15 +121,15 @@ class HTTPClient {
     cacheDuration?: number,
   ): Promise<T> {
     // Check cache first
-    if (cacheKey) {
+    if (cacheKey as any) {
       const cached = apiCache.get(cacheKey);
-      if (cached) {
+      if (cached as any) {
 return cached;
 }
     }
 
-    const response = await fetch(url, {
-      ...options,
+    const response = await (fetch as any)(url, {
+      ...options as any,
       headers: {
         'Content-Type': 'application/json',
         ...options.headers } });
@@ -197,7 +197,7 @@ export class VideoService {
     try {
       // In development, return real sample videos
       if (import.meta.env.MODE === 'development') {
-        await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+        await new Promise(resolve => setTimeout((resolve) as any, 500)); // Simulate network delay
 
         // Import real video service
         const { getVideos, getVideosByCategory } = await import('./realVideoService');
@@ -227,7 +227,7 @@ export class VideoService {
       url.searchParams.set('key', API_KEY || '');
       url.searchParams.set('type', 'video');
 
-      if (pageToken) {
+      if (pageToken as any) {
         url.searchParams.set('pageToken', pageToken);
       }
 
@@ -265,8 +265,8 @@ export class VideoService {
       return {
         videos,
         nextPageToken: response.nextPageToken| undefined };
-    } catch (error) {
-      console.error('Error fetching videos:', error);
+    } catch (error: any) {
+      (console as any).error('Error fetching videos:', error);
       throw error;
     }
   }
@@ -276,7 +276,7 @@ export class VideoService {
 
     try {
       if (import.meta.env.MODE === 'development') {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout((resolve) as any, 200));
 
         // Import real video service
         const { getVideoById } = await import('./realVideoService');
@@ -319,8 +319,8 @@ return null;
         category: item.snippet.categoryId| 'Unknown',
         visibility: 'public' as const, isLive: false,
         isShort: false };
-    } catch (error) {
-      console.error('Error fetching video:', error);
+    } catch (error: any) {
+      (console as any).error('Error fetching video:', error);
       return null;
     }
   }
@@ -334,7 +334,7 @@ return null;
 
     try {
       if (import.meta.env.MODE === 'development') {
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout((resolve) as any, 300));
 
         // Import real video service
         const { searchVideos } = await import('./realVideoService');
@@ -353,7 +353,7 @@ return null;
       url.searchParams.set('type', 'video');
       url.searchParams.set('q', query);
 
-      if (pageToken) {
+      if (pageToken as any) {
         url.searchParams.set('pageToken', pageToken);
       }
 
@@ -387,8 +387,8 @@ return null;
       return {
         videos,
         nextPageToken: response.nextPageToken };
-    } catch (error) {
-      console.error('Error searching videos:', error);
+    } catch (error: any) {
+      (console as any).error('Error searching videos:', error);
       throw error;
     }
   }
@@ -433,7 +433,7 @@ export class ChannelService {
 
     try {
       if (import.meta.env.MODE === 'development') {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout((resolve) as any, 200));
         return generateMockChannel(id);
       }
 
@@ -465,8 +465,8 @@ return null;
         isVerified: false, // Would need to check separately,
   createdAt: item.snippet.publishedAt,
         updatedAt: new Date().toISOString() };
-    } catch (error) {
-      console.error('Error fetching channel:', error);
+    } catch (error: any) {
+      (console as any).error('Error fetching channel:', error);
       return null;
     }
   }
@@ -480,7 +480,7 @@ return null;
 
     try {
       if (import.meta.env.MODE === 'development') {
-        await new Promise(resolve => setTimeout(resolve, 400));
+        await new Promise(resolve => setTimeout((resolve) as any, 400));
 
         // Import real video service
         const { getVideosByChannelName } = await import('./realVideoService');
@@ -500,7 +500,7 @@ return null;
       url.searchParams.set('channelId', channelId);
       url.searchParams.set('order', 'date');
 
-      if (pageToken) {
+      if (pageToken as any) {
         url.searchParams.set('pageToken', pageToken);
       }
 
@@ -534,8 +534,8 @@ return null;
       return {
         videos,
         nextPageToken: response.nextPageToken };
-    } catch (error) {
-      console.error('Error fetching channel videos:', error);
+    } catch (error: any) {
+      (console as any).error('Error fetching channel videos:', error);
       throw error;
     }
   }
@@ -545,7 +545,7 @@ export class PlaylistService {
   static async getUserPlaylists(_userId: any): Promise<UserPlaylist[]> {
     try {
       if (import.meta.env.MODE === 'development') {
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout((resolve) as any, 300));
         // Using userId for development mock data
         return [
           {
@@ -566,8 +566,8 @@ export class PlaylistService {
 
       // Production implementation would go here
       return [];
-    } catch (error) {
-      console.error('Error fetching user playlists:', error);
+    } catch (error: any) {
+      (console as any).error('Error fetching user playlists:', error);
       throw error;
     }
   }

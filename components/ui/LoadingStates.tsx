@@ -1,5 +1,7 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 // Base loading props interface
 export interface LoadingProps {
@@ -131,8 +133,8 @@ export const Loading: React.FC<LoadingProps> = ({
   const textSizeClass = sizeMap[size].text;
   const colorClass = colorMap[color];
 
-  const renderLoader = () => {
-    switch (variant) {
+  const renderLoader: any = () => {
+    switch (variant as any) {
       case 'dots':
         return <DotsLoader size={size} color={color} />;
       case 'pulse':
@@ -161,7 +163,7 @@ export const Loading: React.FC<LoadingProps> = ({
 };
 
 // Specialized Loading Components for common use cases
-export const VideoCardSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+export const VideoCardSkeleton: React.FC<{ className?: string }> = ({ className }: any) => (
   <div className={cn('space-y-3', className)}>
     <Skeleton height="h-48" rounded="lg" />
     <div className="space-y-2">
@@ -172,7 +174,7 @@ export const VideoCardSkeleton: React.FC<{ className?: string }> = ({ className 
   </div>
 );
 
-export const CommentSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+export const CommentSkeleton: React.FC<{ className?: string }> = ({ className }: any) => (
   <div className={cn('flex space-x-3', className)}>
     <Skeleton width="w-8" height="h-8" rounded="full" />
     <div className="flex-1 space-y-2">
@@ -183,7 +185,7 @@ export const CommentSkeleton: React.FC<{ className?: string }> = ({ className })
   </div>
 );
 
-export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className }: any) => (
   <div className={cn('flex items-center space-x-3', className)}>
     <Skeleton width="w-12" height="h-12" rounded="full" />
     <div className="flex-1 space-y-2">
@@ -193,7 +195,7 @@ export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className })
   </div>
 );
 
-export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }: any) => (
   <div className={cn('space-y-3', className)}>
     <Skeleton height="h-32" rounded="lg" />
     <div className="space-y-2">
@@ -207,7 +209,7 @@ export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }
 export const LoadingScreen: React.FC<{
   message?: string;
   className?: string;
-}> = ({ message = 'Loading...', className }) => (
+}> = ({ message = 'Loading...', className }: any) => (
   <div className={cn('flex items-center justify-center min-h-screen', className)}>
     <Loading size="lg" text={message} />
   </div>
@@ -217,7 +219,7 @@ export const LoadingScreen: React.FC<{
 export const PageLoading: React.FC<{
   message?: string;
   className?: string;
-}> = ({ message = 'Loading...', className }) => (
+}> = ({ message = 'Loading...', className }: any) => (
   <div className={cn('flex items-center justify-center py-12', className)}>
     <Loading size="md" text={message} />
   </div>
@@ -227,7 +229,7 @@ export const PageLoading: React.FC<{
 export const ButtonLoading: React.FC<{
   size?: 'xs' | 'sm' | 'md';
   className?: string;
-}> = ({ size = 'sm', className = '' }) => (
+}> = ({ size = 'sm', className = '' }: any) => (
   <Spinner size={size} color="white" className={className} />
 );
 

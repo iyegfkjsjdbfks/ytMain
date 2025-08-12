@@ -50,7 +50,7 @@ class Logger {
 
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
-      console.debug(this.formatMessage('debug', message), ...args);
+      (console as any).debug(this.formatMessage('debug', message), ...args);
     }
   }
 
@@ -61,7 +61,7 @@ class Logger {
 
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
-      console.info(this.formatMessage('info', message), ...args);
+      (console as any).info(this.formatMessage('info', message), ...args);
     }
   }
 
@@ -71,7 +71,7 @@ class Logger {
     }
 
     if (this.config.enableConsole) {
-      console.warn(this.formatMessage('warn', message), ...args);
+      (console as any).warn(this.formatMessage('warn', message), ...args);
     }
   }
 
@@ -81,7 +81,7 @@ class Logger {
     }
 
     if (this.config.enableConsole) {
-      console.error(this.formatMessage('error', message), error, ...args);
+      (console as any).error(this.formatMessage('error', message), error, ...args);
     }
 
     // In production, you might want to send errors to a remote service

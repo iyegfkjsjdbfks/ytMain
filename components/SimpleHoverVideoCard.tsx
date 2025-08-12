@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // @ts-nocheck
 
 import { formatDistanceToNow } from 'date-fns';
@@ -15,9 +18,9 @@ interface SimpleHoverVideoCardProps {
   className?: string;
 }
 
-const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, className = '' }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
+const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, className = '' }: any) => {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [showPreview, setShowPreview] = useState<boolean>(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -25,7 +28,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
   const HIDE_DELAY = 150;  // Delay before hiding preview
 
   // Extract YouTube video ID from the video
-  const getVideoId = (video: Video): string | null => {
+  const getVideoId: any = (video: Video): string | null => {
     // Try to extract from video.id if it has prefixes
     if (video.id.startsWith('youtube-')) {
       return video.id.replace('youtube-', '');
@@ -49,7 +52,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
 
   const videoId = getVideoId(video);
 
-  const formatDuration = (duration: string | number) => {
+  const formatDuration: any = (duration: string | number) => {
     if (typeof duration === 'string') {
 return duration;
 }
@@ -61,7 +64,7 @@ return duration;
     return '0: 00'
   };
 
-  const formatViews = (views: string | number) => {
+  const formatViews: any = (views: string | number) => {
     const num = typeof views === 'string' ? parseInt(views, 10) || 0 : views || 0;
     if (num >= 1000000000) {
       return `${(num / 1000000000).toFixed(1)}B`;
@@ -73,7 +76,7 @@ return duration;
     return num.toString();
   };
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter: any = () => {
     setIsHovered(true);
 
     // Clear any existing hide timeout
@@ -83,15 +86,15 @@ return duration;
     }
 
     // Disabled: Show preview after delay
-    // if (videoId) {
-    //   hoverTimeoutRef.current = setTimeout(() => {
+    // if (videoId as any) {
+    //   hoverTimeoutRef.current = setTimeout((() => {
     //     setShowPreview(true);
-    //   }, HOVER_DELAY);
+    //   }) as any, HOVER_DELAY);
     // }
   
         };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave: any = () => {
     setIsHovered(false);
 
     // Clear the hover timeout if user leaves before delay completes
@@ -101,9 +104,9 @@ return duration;
     }
 
     // Hide preview after a brief delay
-    hideTimeoutRef.current = setTimeout(() => {
+    hideTimeoutRef.current = setTimeout((() => {
       setShowPreview(false);
-    }, HIDE_DELAY);
+    }) as any, HIDE_DELAY);
   };
 
   // Cleanup timeouts on unmount

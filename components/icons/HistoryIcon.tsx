@@ -1,5 +1,6 @@
 import React from 'react';
-const HistoryIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
+import { FC } from 'react';
+const HistoryIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }: any) => (
   <svg
     className={className}
     fill="none"

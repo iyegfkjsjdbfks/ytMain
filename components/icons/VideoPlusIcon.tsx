@@ -1,5 +1,6 @@
 import React from 'react';
-const VideoPlusIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (
+import { FC } from 'react';
+const VideoPlusIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }: any) => (
   <svg
     className={className}
     fill="none"

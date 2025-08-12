@@ -99,9 +99,9 @@ export const streamAPI = {
       creatorId: streamData.creatorId || 'user_123',
       creatorName: streamData.creatorName || 'Streamer',
       creatorAvatar: streamData.creatorAvatar || '/api/placeholder/40/40',
-      settings: { ...defaultSettings, ...streamData.settings },
-      stats: { ...defaultStats, ...streamData.stats },
-      monetization: { ...defaultMonetization, ...streamData.monetization } };
+      settings: { ...defaultSettings as any, ...streamData.settings },
+      stats: { ...defaultStats as any, ...streamData.stats },
+      monetization: { ...defaultMonetization as any, ...streamData.monetization } };
 
     mockStreams.push(stream);
     return stream;
@@ -119,7 +119,7 @@ export const streamAPI = {
    */
   async getUserStreams(userId): Promise<LiveStream[]> {
     // In a real implementation, filter by userId
-    return mockStreams.filter(stream => stream.creatorId === userId);
+    return mockStreams.filter((stream: any) => stream.creatorId === userId);
   },
 
   /**
@@ -137,8 +137,8 @@ export const streamAPI = {
     }
 
     mockStreams[streamIndex] = {
-      ...currentStream,
-      ...updates,
+      ...currentStream as any,
+      ...updates as any,
       // Ensure required fields aren't overwritten with undefined,
   id: currentStream.id,
       title: updates.title || currentStream.title,
@@ -207,7 +207,7 @@ export const streamAPI = {
    * Delete a stream
    */
   async deleteStream(id): Promise<void> {
-    mockStreams = mockStreams.filter(stream => stream.id !== id);
+    mockStreams = mockStreams.filter((stream: any) => stream.id !== id);
   } };
 
 /**
@@ -225,7 +225,7 @@ export const chatAPI = {
       username,
       message,
       timestamp: new Date(),
-      type: 'message',
+      type: "message" as const,
       isModerator: false,
       isOwner: false,
       isVerified: false,
@@ -266,7 +266,7 @@ export const chatAPI = {
       username,
       message,
       timestamp: new Date(),
-      type: 'super_chat',
+      type: "super_chat" as const,
       isModerator: false,
       isOwner: false,
       isVerified: false,
@@ -334,7 +334,7 @@ export const pollsAPI = {
       id: `poll_${Date.now()}`,
       streamId,
       question,
-      options: options.map(option => ({
+      options: options.map((option: any) => ({
         id: `option_${Math.random().toString(36).substr(2, 5)}`,
         text: option,
         votes: 0,
@@ -384,7 +384,7 @@ export const pollsAPI = {
    * Get polls for a stream
    */
   async getStreamPolls(streamId): Promise<LivePoll[]> {
-    return mockPolls.filter(poll => poll.streamId === streamId);
+    return mockPolls.filter((poll: any) => poll.streamId === streamId);
   } };
 
 /**
@@ -451,7 +451,7 @@ export const qaAPI = {
    */
   async getStreamQuestions(streamId): Promise<QAQuestion[]> {
     return mockQuestions
-      .filter(q => q.streamId === streamId)
+      .filter((q: any) => q.streamId === streamId)
       .sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
   } };
 
@@ -478,14 +478,14 @@ export const replayAPI = {
     mockReplays.push(replay);
 
     // Simulate processing time
-    setTimeout(() => {
+    setTimeout((() => {
       const replayIndex = mockReplays.findIndex(r => r.id === replay.id);
       if (replayIndex !== -1) {
         if (mockReplays[replayIndex]) {
           mockReplays[replayIndex].isProcessing = false;
         }
       }
-    }, 5000);
+    }) as any, 5000);
 
     return replay;
   },
@@ -501,7 +501,7 @@ export const replayAPI = {
    * Get replays for a stream
    */
   async getStreamReplays(streamId): Promise<StreamReplay[]> {
-    return mockReplays.filter(replay => replay.streamId === streamId);
+    return mockReplays.filter((replay: any) => replay.streamId === streamId);
   } };
 
 /**
@@ -528,7 +528,7 @@ export const multiPlatformAPI = {
    */
   async connectPlatform(platformId): Promise<boolean> {
     // Simulate connection process
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout((resolve) as any, 1000));
     return true;
   },
 
@@ -537,7 +537,7 @@ export const multiPlatformAPI = {
    */
   async startMultiPlatformStream(streamId, platforms): Promise<boolean> {
     // Simulate multi-platform streaming setup
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout((resolve) as any, 2000));
     return true;
   } };
 
@@ -553,7 +553,7 @@ export const schedulingAPI = {
   scheduledTime: Date
   ): Promise<LiveStream> {
     const stream = await streamAPI.createStream({
-      ...streamData,
+      ...streamData as any,
       scheduledStartTime: scheduledTime,
       status: 'scheduled' });
 
@@ -564,7 +564,7 @@ export const schedulingAPI = {
    * Get scheduled streams
    */
   async getScheduledStreams(): Promise<LiveStream[]> {
-    return mockStreams.filter(stream => stream.status === 'scheduled');
+    return mockStreams.filter((stream: any) => stream.status === 'scheduled');
   },
 
   /**

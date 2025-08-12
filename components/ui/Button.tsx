@@ -1,4 +1,6 @@
 import React, { forwardRef, FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { cn } from '../../utils/cn';
 
@@ -145,12 +147,12 @@ export const SubscribeButton: React.FC<{,
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isSubscribed, loading = false, onClick, className }) => (
+}> = ({ isSubscribed, loading = false, onClick, className }: any) => (
   <Button
     variant={isSubscribed ? 'outline' : 'primary'}
     size="sm"
     loading={loading}
-    onClick={onClick}
+    onClick={(e: any) => onClick(e)}
     className={className}
   >
     {isSubscribed ? 'Subscribed' : 'Subscribe'}
@@ -163,12 +165,12 @@ export const LikeButton: React.FC<{,
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isLiked, count, loading = false, onClick, className }) => (
+}> = ({ isLiked, count, loading = false, onClick, className }: any) => (
   <Button
     variant={isLiked ? 'primary' : 'ghost'}
     size="sm"
     loading={loading}
-    onClick={onClick}
+    onClick={(e: any) => onClick(e)}
     className={className}
     leftIcon={
       <svg className="w-4 h-4" fill={isLiked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">

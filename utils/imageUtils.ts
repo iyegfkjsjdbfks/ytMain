@@ -1,7 +1,7 @@
 import React from 'react';
 // Image utility functions for handling placeholders and fallbacks
 
-export const getImageWithFallback = (,
+export const getImageWithFallback: any = (,
   primaryUrl: any,
   fallbackUrl?: string,
   width?: number,
@@ -21,26 +21,26 @@ export const getImageWithFallback = (,
   }
 
   // Return fallback or generate one
-  if (fallbackUrl) {
+  if (fallbackUrl as any) {
     return fallbackUrl;
   }
 
   return `https://picsum.photos/${width || 320}/${height || 180}?random=${Math.floor(Math.random() * 1000)}`;
 };
 
-export const getVideoThumbnail = (videoId: any, width: number = 320, height: number = 180): string => {
+export const getVideoThumbnail: any = (videoId: any, width: number = 320, height: number = 180): string => {
   return `https://picsum.photos/${width}/${height}?random=${videoId}`;
 };
 
-export const getChannelAvatar = (channelId: any, size: number = 40): string => {
+export const getChannelAvatar: any = (channelId: any, size: number = 40): string => {
   return `https://picsum.photos/${size}/${size}?random=${channelId}`;
 };
 
-export const getUserAvatar = (userId: any, size: number = 40): string => {
+export const getUserAvatar: any = (userId: any, size: number = 40): string => {
   return `https://picsum.photos/${size}/${size}?random=user-${userId}`;
 };
 
-export const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+export const handleImageError: any = (event: React.SyntheticEvent<HTMLImageElement>) => {
   const img = event.currentTarget;
   const width = img.width || 320;
   const height = img.height || 180;
@@ -49,8 +49,8 @@ export const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) 
   img.src = `https://picsum.photos/${width}/${height}?random=${Date.now()}`;
 };
 
-export const preloadImage = (src: any): Promise<void> => {
-  return new Promise((resolve, reject) => {
+export const preloadImage: any = (src: any): Promise<void> => {
+  return new Promise((resolve: any, reject: any) => {
     const img = new Image();
     img.onload = () => resolve();
     img.onerror = reject;
@@ -58,7 +58,7 @@ export const preloadImage = (src: any): Promise<void> => {
   });
 };
 
-export const generatePlaceholderDataUrl = (width: any, height: any, text?: string): string => {
+export const generatePlaceholderDataUrl: any = (width: any, height: any, text?: string): string => {
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
@@ -73,7 +73,7 @@ return '';
   ctx.fillRect(0, 0, width, height);
 
   // Add text
-  if (text) {
+  if (text as any) {
     ctx.fillStyle = '#6b7280';
     ctx.font = `${Math.min(width, height) / 8}px Arial`;
     ctx.textAlign = 'center';
@@ -85,7 +85,7 @@ return '';
 };
 
 // Image optimization utilities
-export const getOptimizedImageUrl = (,
+export const getOptimizedImageUrl: any = (,
   originalUrl: any,
   width?: number,
   height?: number,
@@ -94,10 +94,10 @@ export const getOptimizedImageUrl = (,
   // For picsum photos, we can add quality and exact dimensions
   if (originalUrl.includes('picsum.photos')) {
     const url = new URL(originalUrl);
-    if (width) {
+    if (width as any) {
 url.searchParams.set('width', width.toString());
 }
-    if (height) {
+    if (height as any) {
 url.searchParams.set('height', height.toString());
 }
     if (quality !== 80) {
@@ -110,20 +110,20 @@ url.searchParams.set('quality', quality.toString());
 };
 
 // Responsive image utilities
-export const getResponsiveImageSrcSet = (baseUrl: any, sizes: any): string => {
+export const getResponsiveImageSrcSet: any = (baseUrl: any, sizes: any): string => {
   return sizes
     .map((size: any) => `${getOptimizedImageUrl(baseUrl, size)} ${size}w`)
     .join(', ');
 };
 
-export const getResponsiveImageSizes = (breakpoints: { [key: string]: string }): string => {
+export const getResponsiveImageSizes: any = (breakpoints: { [key: string]: string }): string => {
   return Object.entries(breakpoints)
     .map(([breakpoint, size]) => `(${breakpoint}) ${size}`)
     .join(', ');
 };
 
 // Image lazy loading utilities
-export const createIntersectionObserver = (,
+export const createIntersectionObserver: any = (,
   callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit,
 ): IntersectionObserver => {
@@ -137,14 +137,14 @@ export const createIntersectionObserver = (,
 };
 
 // Image format detection
-export const supportsWebP = (): boolean => {
+export const supportsWebP: any = (): boolean => {
   const canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = 1;
   return canvas.toDataURL('image/webp').indexOf('data: image/webp') === 0
 };
 
-export const supportsAvif = (): boolean => {
+export const supportsAvif: any = (): boolean => {
   const canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = 1;
@@ -152,7 +152,7 @@ export const supportsAvif = (): boolean => {
 };
 
 // Get the best supported image format
-export const getBestImageFormat = (): 'avif' | 'webp' | 'jpg' => {
+export const getBestImageFormat: any = (): 'avif' | 'webp' | 'jpg' => {
   if (supportsAvif()) {
 return 'avif';
 }
@@ -163,7 +163,7 @@ return 'webp';
 };
 
 // Color utilities for placeholder generation
-export const generateColorFromString = (str: any): string => {
+export const generateColorFromString: any = (str: any): string => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -173,25 +173,25 @@ export const generateColorFromString = (str: any): string => {
   return `hsl(${hue}, 70%, 80%)`;
 };
 
-export const getContrastColor = (backgroundColor: any): string => {
+export const getContrastColor: any = (backgroundColor: any): string => {
   // Simple contrast calculation - in production, use a more sophisticated algorithm
   const rgb = backgroundColor.match(/\d+/g);
   if (!rgb) {
 return '#000000';
 }
 
-  const brightness = (parseInt(rgb[0] || '0', 10) * 299 + parseInt(rgb[1] || '0', 10) * 587 + parseInt(rgb[2] || '0', 10) * 114) / 1000;
+  const brightness: any = (parseInt(rgb[0] || '0', 10) * 299 + parseInt(rgb[1] || '0', 10) * 587 + parseInt(rgb[2] || '0', 10) * 114) / 1000;
   return brightness > 128 ? '#000000' : '#ffffff';
 };
 
 // Image compression utilities (for upload)
-export const compressImage = (,
+export const compressImage: any = (,
   file: File,
   maxWidth: number = 1920,
   maxHeight: number = 1080,
   quality: number = 0.8,
 ): Promise<Blob> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve: any) => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const img = new Image();
@@ -225,7 +225,7 @@ export const compressImage = (,
 };
 
 // Image validation utilities
-export const validateImageFile = (file: File): { valid: boolean; error?: string } => {
+export const validateImageFile: any = (file: File): { valid: boolean; error?: string } => {
   const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
   const maxSize = 10 * 1024 * 1024; // 10MB
 
@@ -241,8 +241,8 @@ export const validateImageFile = (file: File): { valid: boolean; error?: string 
 };
 
 // Extract dominant color from image
-export const extractDominantColor = (imageUrl: any): Promise<string> => {
-  return new Promise((resolve) => {
+export const extractDominantColor: any = (imageUrl: any): Promise<string> => {
+  return new Promise((resolve: any) => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
 

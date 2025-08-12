@@ -3,6 +3,8 @@ import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
 import { useLiveQA } from '@/hooks/useLiveStream';
 import { QuestionMarkCircleIcon, HeartIcon, CheckCircleIcon, ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
+import { FC } from 'react';
+import { useState } from 'react';
 
 interface LiveQAProps {
   streamId: string;,
@@ -16,14 +18,14 @@ const LiveQA: React.FC<LiveQAProps> = ({
   className = '' }) => {
   const { questions, submitQuestion, answerQuestion, upvoteQuestion } =
     useLiveQA(streamId);
-  const [newQuestion, setNewQuestion] = useState('');
+  const [newQuestion, setNewQuestion] = useState<string>('');
   const [filter, setFilter] = useState<
     'all' | 'unanswered' | 'answered' | 'pinned'
   >('all');
   const [answerMode, setAnswerMode] = useState<string | null>(null);
-  const [answerText, setAnswerText] = useState('');
+  const [answerText, setAnswerText] = useState<string>('');
 
-  const handleSubmitQuestion = async () => {
+  const handleSubmitQuestion = async (): Promise<void> => {
     if (!newQuestion.trim()) {
       return;
     }
@@ -31,7 +33,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     try {
       await submitQuestion(newQuestion.trim());
       setNewQuestion('');
-    } catch (error) {
+    } catch (error: any) {
       const componentError = createComponentError(
         'LiveQA',
         'Failed to submit question',
@@ -41,10 +43,10 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handleLikeQuestion = async (questionId: any) => {
+  const handleLikeQuestion = async (questionId: any): Promise<any> => {
     try {
       await upvoteQuestion(questionId);
-    } catch (error) {
+    } catch (error: any) {
       const componentError = createComponentError(
         'LiveQA',
         'Failed to like question',
@@ -54,11 +56,11 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handlePinQuestion = async (questionId: any) => {
+  const handlePinQuestion = async (questionId: any): Promise<any> => {
     try {
       // TODO: Implement pin functionality in service
       conditionalLogger.debug('Pin question:', questionId);
-    } catch (error) {
+    } catch (error: any) {
       const componentError = createComponentError(
         'LiveQA',
         'Failed to pin question',
@@ -68,7 +70,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handleAnswerQuestion = async (questionId: any) => {
+  const handleAnswerQuestion = async (questionId: any): Promise<any> => {
     if (!answerText.trim()) {
       return;
     }
@@ -77,7 +79,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
       await answerQuestion(questionId, answerText.trim());
       setAnswerMode(null);
       setAnswerText('');
-    } catch (error) {
+    } catch (error: any) {
       const componentError = createComponentError(
         'LiveQA',
         'Failed to answer question',
@@ -87,14 +89,14 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const formatTimestamp = (timestamp: Date) => {
+  const formatTimestamp: any = (timestamp: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       hour: '2-digit',
           minute: '2-digit' }).format(timestamp);
   };
 
-  const filteredQuestions = questions.filter(question => {
-    switch (filter) {
+  const filteredQuestions = questions.filter((question: any) => {
+    switch (filter as any) {
       case 'unanswered':
         return !question.answered;
       case 'answered':
@@ -106,7 +108,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
   
         });
 
-  const sortedQuestions = filteredQuestions.sort((a, b) => {
+  const sortedQuestions = filteredQuestions.sort((a: any, b: any) => {
     // Highlighted questions first
     if (a.isHighlighted && !b.isHighlighted) {
       return -1;
@@ -152,7 +154,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
             className='flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
           />
           <button
-            onClick={handleSubmitQuestion}
+            onClick={(e: any) => handleSubmitQuestion(e)}
             disabled={!newQuestion.trim()}
             className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed'
           >
@@ -169,15 +171,15 @@ const LiveQA: React.FC<LiveQAProps> = ({
           {
             key: 'unanswered',
           label: 'Unanswered',
-            count: questions.filter(q => !q.answered).length },
+            count: questions.filter((q: any) => !q.answered).length },
           {
             key: 'answered',
           label: 'Answered',
-            count: questions.filter(q => q.answered).length },
+            count: questions.filter((q: any) => q.answered).length },
           {
             key: 'pinned',
           label: 'Pinned',
-            count: questions.filter(q => q.isHighlighted).length }].map(tab => (
+            count: questions.filter((q: any) => q.isHighlighted).length }].map((tab: any) => (
           <button
             key={tab.key}
             onClick={() => setFilter(tab.key as any)}
@@ -194,7 +196,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
 
       {/* Questions List */}
       <div className='space-y-3 max-h-96 overflow-y-auto'>
-        {sortedQuestions.map(question => (
+        {sortedQuestions.map((question: any) => (
           <div
             key={question.id}
             className={`p-4 border rounded-lg ${

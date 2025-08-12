@@ -5,6 +5,10 @@ import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/
 import type { Comment } from '../../../types/core';
 import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { MapPinIcon as MapPinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const MapPinIconSolid = MapPinSolidIcon;
 const HeartIconSolid = HeartSolidIcon;
 
@@ -21,7 +25,7 @@ interface CommentItemProps {
   onReply: (parentId: any,
           content: any) => void;,
   onReact: (commentId: any,
-          type: 'like' | 'dislike') => void;,
+          type: "like" as const | 'dislike') => void;,
   onPin: (commentId: any) => void | Promise<void>;,
   onHeart: (commentId: any) => void | Promise<void>;,
   onReport: (commentId: any,
@@ -38,14 +42,14 @@ const CommentItem: React.FC<CommentItemProps> = ({
   onHeart,
   onReport,
   level = 0 }) => {
-  const [showReplies, setShowReplies] = useState(false);
-  const [isReplying, setIsReplying] = useState(false);
-  const [replyText, setReplyText] = useState('');
-  const [showMenu, setShowMenu] = useState(false);
+  const [showReplies, setShowReplies] = useState<boolean>(false);
+  const [isReplying, setIsReplying] = useState<boolean>(false);
+  const [replyText, setReplyText] = useState<string>('');
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setShowMenu(false);
       }
@@ -55,7 +59,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
-  const handleReplySubmit = () => {
+  const handleReplySubmit: any = () => {
     if (replyText.trim()) {
       onReply(comment.id, replyText);
       setReplyText('');
@@ -64,7 +68,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
     }
   };
 
-  const formatCount = (count: any): string => {
+  const formatCount: any = (count: any): string => {
     if (count >= 1000000) {
       return `${(count / 1000000).toFixed(1)}M`;
     }
@@ -222,7 +226,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
               />
               <div className='flex gap-2 mt-2'>
                 <button
-                  onClick={handleReplySubmit}
+                  onClick={(e: any) => handleReplySubmit(e)}
                   disabled={!replyText.trim()}
                   className='px-4 py-1 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
                 >
@@ -282,9 +286,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   videoId,
   isChannelOwner = false,
   className = '' }) => {
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState<string>('');
   const [sortBy, setSortBy] = useState<'top' | 'newest'>('top');
-  const [showCommentInput, setShowCommentInput] = useState(false);
+  const [showCommentInput, setShowCommentInput] = useState<boolean>(false);
 
   const {
     data: comments,
@@ -293,7 +297,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   const createCommentMutation = useCreateComment();
   const reactToCommentMutation = useReactToComment();
 
-  const handleCommentSubmit = async () => {
+  const handleCommentSubmit = async (): Promise<void> => {
     if (!newComment.trim()) {
       return;
     }
@@ -304,48 +308,48 @@ const CommentSection: React.FC<CommentSectionProps> = ({
         videoId });
       setNewComment('');
       setShowCommentInput(false);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to post comment:', error);
     }
   };
 
   const handleReply = async (parentId: any,
-          content: any) => {
+          content: any): Promise<any> => {
     try {
       await createCommentMutation.mutate({
         content,
         videoId,
         parentId });
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to post reply:', error);
     }
   };
 
   const handleReact = async (commentId: any,
-          type: 'like' | 'dislike') => {
+          type: "like" as const | 'dislike'): Promise<any> => {
     try {
       await reactToCommentMutation.mutate({
         commentId,
         type });
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to react to comment:', error);
     }
   };
 
-  const handlePin = async (_commentId: any) => {
+  const handlePin = async (_commentId: any): Promise<any> => {
     // Implementation for pinning comments
   };
 
-  const handleHeart = async (_commentId: any) => {
+  const handleHeart = async (_commentId: any): Promise<any> => {
     // Implementation for hearting comments
   };
 
   const handleReport = async (_commentId: any,
-          _reason: any) => {
+          _reason: any): Promise<any> => {
     // Implementation for reporting comments
   };
 
-  if (error) {
+  if (error as any) {
     return (
       <div className={`p-4 text-center text-red-600 ${className}`}>
         Failed to load comments. Please try again.
@@ -425,7 +429,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
                 Cancel
               </button>
               <button
-                onClick={handleCommentSubmit}
+                onClick={(e: any) => handleCommentSubmit(e)}
                 disabled={!newComment.trim() || createCommentMutation.loading}
                 className='px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
               >

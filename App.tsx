@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { createBrowserRouter, RouterProvider  } from 'react-router-dom';
+import { FC } from 'react';
 
 import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';

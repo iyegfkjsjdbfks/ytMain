@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo, useCallback, useRef, useState, KeyboardEvent, MouseEvent } from 'react';
 import { safeLocalStorage, throttle  } from '../utils/componentUtils';
+import { MouseEvent } from 'react';
+import { FormEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 // Common hook patterns
 
@@ -20,8 +27,8 @@ export const useLocalStorage = <T>(,
           value instanceof Function ? value(storedValue) : value;
         setStoredValue(valueToStore);
         safeLocalStorage.setJSON(key, valueToStore);
-      } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error);
+      } catch (error: any) {
+        (console as any).error(`Error setting localStorage key "${key}":`, error);
       }
     },
     [key, storedValue]
@@ -31,8 +38,8 @@ export const useLocalStorage = <T>(,
     try {
       setStoredValue(initialValue);
       safeLocalStorage.removeItem(key);
-    } catch (error) {
-      console.error(`Error removing localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).error(`Error removing localStorage key "${key}":`, error);
     }
   }, [key, initialValue]);
 
@@ -44,9 +51,9 @@ export const useDebounce = <T>(value: T, delay: any): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const handler = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => {
       clearTimeout(handler);
@@ -79,7 +86,7 @@ export const usePrevious = <T>(value: T): T | undefined => {
 };
 
 // Toggle hook
-export const useToggle = (,
+export const useToggle: any = (,
   initialValue: boolean = false
 ): [boolean() => void(value: string | number) => void] => {
   const [value, setValue] = useState(initialValue);
@@ -91,7 +98,7 @@ export const useToggle = (,
 };
 
 // Counter hook
-export const useCounter = (,
+export const useCounter: any = (,
   initialValue: number = 0
 ): {
   count: number;
@@ -125,7 +132,7 @@ export const useArray = <T>(,
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((element: T) => {
-    setArray(arr => [...arr, element]);
+    setArray(arr => [...arr as any, element]);
   }, []);
 
   const filter = useCallback(
@@ -173,13 +180,13 @@ export const useAsync = <T, E = string>(,
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<E | null>(null);
 
-  const execute = useCallback(async () => {
+  const execute = useCallback(async (): Promise<void> => {
     setLoading(true);
     setError(null);
     try {
       const result = await asyncFunction();
       setData(result);
-    } catch (err) {
+    } catch (err: any) {
       setError(err as E);
     } finally {
       setLoading(false);
@@ -187,7 +194,7 @@ export const useAsync = <T, E = string>(,
   }, [asyncFunction]);
 
   useEffect(() => {
-    if (immediate) {
+    if (immediate as any) {
       execute().catch(console.error);
     }
   }, [execute, immediate]);
@@ -196,12 +203,12 @@ export const useAsync = <T, E = string>(,
 };
 
 // Click outside hook
-export const useClickOutside = (,
+export const useClickOutside: any = (,
   ref: React.RefObject<HTMLElement>,
   handler: (event: MouseEvent | TouchEvent) => void
 ): void => {
   useEffect(() => {
-    const listener = (event: MouseEvent | TouchEvent) => {
+    const listener: any = (event: MouseEvent | TouchEvent) => {
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
       }
@@ -219,7 +226,7 @@ export const useClickOutside = (,
 };
 
 // Keyboard shortcut hook
-export const useKeyPress = (,
+export const useKeyPress: any = (,
   targetKey: any,
   handler: () => void,
   options: {
@@ -230,7 +237,7 @@ export const useKeyPress = (,
   } = {}
 ): void => {
   useEffect(() => {
-    const handleKeyPress = (event: KeyboardEvent) => {
+    const handleKeyPress: any = (event: KeyboardEvent) => {
       const {
         ctrl = false,
         shift = false,
@@ -255,13 +262,13 @@ export const useKeyPress = (,
 };
 
 // Window size hook
-export const useWindowSize = (): { width: number; height: number } => {
+export const useWindowSize: any = (): { width: number; height: number } => {
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0 });
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize: any = () => {
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight });
@@ -275,8 +282,8 @@ export const useWindowSize = (): { width: number; height: number } => {
 };
 
 // Media query hook
-export const useMediaQuery = (query: any): boolean => {
-  const [matches, setMatches] = useState(false);
+export const useMediaQuery: any = (query: any): boolean => {
+  const [matches, setMatches] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -286,7 +293,7 @@ export const useMediaQuery = (query: any): boolean => {
     const media = window.matchMedia(query);
     setMatches(media.matches);
 
-    const listener = (event: MediaQueryListEvent) => {
+    const listener: any = (event: MediaQueryListEvent) => {
       setMatches(event.matches);
     };
 
@@ -298,7 +305,7 @@ export const useMediaQuery = (query: any): boolean => {
 };
 
 // Intersection observer hook
-export const useIntersectionObserver = (,
+export const useIntersectionObserver: any = (,
   elementRef: React.RefObject<Element>,
   options: IntersectionObserverInit = {}
 ): IntersectionObserverEntry | null => {
@@ -323,7 +330,7 @@ export const useIntersectionObserver = (,
 };
 
 // Scroll position hook
-export const useScrollPosition = (): { x: number; y: number } => {
+export const useScrollPosition: any = (): { x: number; y: number } => {
   const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -365,11 +372,11 @@ export const useFormValidation = <T extends Record<string, unknown>>(,
 
   const handleChange = useCallback(
     (name: keyof T, value: unknown) => {
-      setValues(prev => ({ ...prev, [name]: value }));
+      setValues(prev => ({ ...prev as any, [name]: value }));
 
       const error = validateField(name, value);
       setErrors(prev => ({
-        ...prev,
+        ...prev as any,
         [name]: error }));
     },
     [validateField]
@@ -381,7 +388,7 @@ export const useFormValidation = <T extends Record<string, unknown>>(,
 
     Object.keys(values).forEach(key => {
       const error = validateField(key as keyof T, values[key as keyof T]);
-      if (error) {
+      if (error as any) {
         newErrors[key as keyof T] = error;
         isFormValid = false;
       }

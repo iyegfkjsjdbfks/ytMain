@@ -14,7 +14,7 @@ export interface PlaylistSummary {
 
 export interface CommunityPost {
   id: string;
-  type: 'text' | 'image' | 'poll';
+  type: "text" as const | 'image' | 'poll';
   content: string;
   imageUrl?: string;
   pollOptions?: Array<{ id: string; text: string; votes: number }>;
@@ -198,7 +198,7 @@ export type Short = Omit<ExtendedVideo, 'isShort'> & {
   hasInteractiveElements?: boolean;
   // Thumbnail variants
   thumbnailOverlays?: Array<{
-    type: 'text' | 'image' | 'time';
+    type: "text" as const | 'image' | 'time';
     content: string;
     position: 'top' | 'bottom' | 'left' | 'right';
     style?: Record<string, any>;

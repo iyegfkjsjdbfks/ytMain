@@ -78,7 +78,7 @@ export interface ChatMessage {
   username: string;
   message: string;
   timestamp: Date;
-  type: 'message' | 'super_chat' | 'membership' | 'system';
+  type: "message" as const | 'super_chat' | 'membership' | 'system';
   isModerator: boolean;
   isOwner: boolean;
   isVerified: boolean;
@@ -104,7 +104,7 @@ export interface SuperChat {
 }
 
 export interface ChatBadge {
-  type: 'moderator' | 'owner' | 'member' | 'verified' | 'subscriber';
+  type: "moderator" as const | 'owner' | 'member' | 'verified' | 'subscriber';
   label: string;
   color?: string;
   icon?: string;
@@ -152,7 +152,7 @@ export interface QAQuestion {
 }
 
 export interface ChatModerationAction {
-  type: 'timeout' | 'ban' | 'delete' | 'warn' | 'approve';
+  type: "timeout" as const | 'ban' | 'delete' | 'warn' | 'approve';
   userId: string;
   moderatorId: string;
   reason: string;
@@ -178,6 +178,6 @@ export interface StreamHighlight {
   timestamp: number; // seconds from start,
   title: string;
   description?: string;
-  type: 'moment' | 'super_chat' | 'poll' | 'qa' | 'milestone';
+  type: "moment" as const | 'super_chat' | 'poll' | 'qa' | 'milestone';
   data?: any;
 }

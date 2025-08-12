@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 interface ShortsProgressIndicatorProps {
   currentIndex: number;,
   totalCount: number;
@@ -13,7 +14,7 @@ const ShortsProgressIndicator: React.FC<ShortsProgressIndicatorProps> = ({
 return null;
 }
 
-  const progress = ((currentIndex + 1) / totalCount) * 100;
+  const progress: any = ((currentIndex + 1) / totalCount) * 100;
   const displayIndex = currentIndex + 1;
 
   return (

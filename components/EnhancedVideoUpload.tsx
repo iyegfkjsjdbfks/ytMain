@@ -1,3 +1,8 @@
+import React from 'react';
+import { ChangeEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
 
 import type { Video } from '../types';
 import { useCallback, useRef, useState, FC, ChangeEvent } from 'react';
@@ -39,10 +44,10 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const [step, setStep] = useState<'upload' | 'details' | 'processing'>('upload');
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
 
   const [uploadData, setUploadData] = useState<VideoUploadData>({
     title: '',
@@ -98,7 +103,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     // Auto-generate title from filename
     const fileName = file.name.replace(/\.[^/.]+$/, '');
     setUploadData(prev => ({
-      ...prev,
+      ...prev as any,
       title: prev.title || fileName }));
 
     setStep('details');
@@ -111,43 +116,43 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     const files = Array.from(e.dataTransfer.files);
     const videoFile = files.find(file => allowedFormats.includes(file.type));
 
-    if (videoFile) {
+    if (videoFile as any) {
       handleFileSelect(videoFile);
     }
   }, [allowedFormats, handleFileSelect]);
 
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInputChange: any = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
+    if (file as any) {
       handleFileSelect(file);
     }
   };
 
-  const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleThumbnailUpload: any = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file?.type.startsWith('image/')) {
       setUploadData(prev => ({
-        ...prev,
+        ...prev as any,
         thumbnail: file,
           customThumbnail: URL.createObjectURL(file) }));
     }
   };
 
-  const addTag = (tag: string) => {
+  const addTag: any = (tag: string) => {
     if (tag.trim() && !uploadData.tags.includes(tag.trim())) {
       setUploadData(prev => ({
-        ...prev,
+        ...prev as any,
         tags: [...prev.tags, tag.trim()] }));
     }
   };
 
-  const removeTag = (tagToRemove: any) => {
+  const removeTag: any = (tagToRemove: any) => {
     setUploadData(prev => ({
-      ...prev,
+      ...prev as any,
       tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     if (!videoFile) {
 return;
 }
@@ -157,7 +162,7 @@ return;
 
     try {
       // Simulate upload progress
-      const progressInterval = setInterval(() => {
+      const progressInterval = setInterval((() => {
         setUploadProgress(prev => {
           if (prev >= 90) {
             clearInterval(progressInterval);
@@ -165,19 +170,19 @@ return;
           }
           return prev + Math.random() * 10;
         });
-      }, 500);
+      }) as any, 500);
 
       await onUpload(videoFile, uploadData);
 
       clearInterval(progressInterval);
       setUploadProgress(100);
-    } catch (error) {
-      console.error('Upload failed:', error);
+    } catch (error: any) {
+      (console as any).error('Upload failed:', error);
       setStep('details');
     }
   };
 
-  const formatFileSize = (bytes: any): string => {
+  const formatFileSize: any = (bytes: any): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }
@@ -187,7 +192,7 @@ return '0 Bytes';
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))  } ${  sizes[i]}`;
   };
 
-  const getVideoDuration = (): string => {
+  const getVideoDuration: any = (): string => {
     if (!videoRef.current) {
 return '0: 00'
 }
@@ -240,7 +245,7 @@ return '0: 00'
             ref={fileInputRef}
             type="file"
             accept={allowedFormats.join(',')}
-            onChange={handleFileInputChange}
+            onChange={(e: any) => handleFileInputChange(e)}
             className="hidden"
           />
 
@@ -253,7 +258,7 @@ return '0: 00'
         {onCancel && (
           <div className="mt-6 text-center">
             <button
-              onClick={onCancel}
+              onClick={(e: any) => onCancel(e)}
               className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
             >
               Cancel
@@ -343,7 +348,7 @@ return '0: 00'
                       <button
                         onClick={() => {
                           if (videoRef.current) {
-                            if (isPlaying) {
+                            if (isPlaying as any) {
                               videoRef.current.pause();
                             } else {
                               videoRef.current.play();
@@ -417,7 +422,7 @@ return '0: 00'
                 id="video-title"
                 type="text"
                 value={uploadData.title}
-                onChange={(e) => setUploadData(prev => ({ ...prev, title: e.target.value }))}
+                onChange={(e) => setUploadData(prev => ({ ...prev as any, title: e.target.value }))}
                 placeholder="Add a title that describes your video"
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 maxLength={100}
@@ -435,7 +440,7 @@ return '0: 00'
               <textarea
                 id="video-description"
                 value={uploadData.description}
-                onChange={(e) => setUploadData(prev => ({ ...prev, description: e.target.value }))}
+                onChange={(e) => setUploadData(prev => ({ ...prev as any, description: e.target.value }))}
                 placeholder="Tell viewers about your video"
                 rows={4}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -461,7 +466,7 @@ return '0: 00'
                     />
                     <button
                       onClick={() => setUploadData(prev => ({
-                        ...prev,
+                        ...prev as any,
                         thumbnail: null,
           customThumbnail: null }))}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
@@ -487,7 +492,7 @@ return '0: 00'
                   ref={thumbnailInputRef}
                   type="file"
                   accept="image/*"
-                  onChange={handleThumbnailUpload}
+                  onChange={(e: any) => handleThumbnailUpload(e)}
                   className="hidden"
                 />
               </div>
@@ -504,11 +509,11 @@ return '0: 00'
               <select
                 id="video-category"
                 value={uploadData.category}
-                onChange={(e) => setUploadData(prev => ({ ...prev, category: e.target.value }))}
+                onChange={(e) => setUploadData(prev => ({ ...prev as any, category: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select a category</option>
-                {categories.map(category => (
+                {categories.map((category: any) => (
                   <option key={category} value={category}>{category}</option>
                 ))}
               </select>
@@ -525,7 +530,7 @@ return '0: 00'
                   type="text"
                   placeholder="Add tags to help people find your video"
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onKeyPress={(e) => {
+                  onKeyPress={(e: any) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
                       const target = e.target as HTMLInputElement;
@@ -572,14 +577,14 @@ return '0: 00'
 
               <div className="space-x-3">
                 <button
-                  onClick={() => setUploadData(prev => ({ ...prev, visibility: 'private' }))}
+                  onClick={() => setUploadData(prev => ({ ...prev as any, visibility: 'private' }))}
                   className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                 >
                   Save as Draft
                 </button>
 
                 <button
-                  onClick={handleSubmit}
+                  onClick={(e: any) => handleSubmit(e)}
                   disabled={!uploadData.title.trim()}
                   className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >

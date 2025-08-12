@@ -1,5 +1,8 @@
 import { Channel } from '../types';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useCallback, useEffect, useState } from 'react';
 
@@ -33,7 +36,7 @@ const YOUTUBE_URL_PATTERNS = [
 ];
 
 // Type guard to detect YouTube videos
-const isYouTubeVideo = (video: Video | null): boolean => {
+const isYouTubeVideo: any = (video: Video | null): boolean => {
   if (!video) {
     return false;
   }
@@ -59,7 +62,7 @@ const isYouTubeVideo = (video: Video | null): boolean => {
   return false;
 };
 
-export const useWatchPage = () => {
+export const useWatchPage: any = () => {
   const { videoId: pathVideoId } = useParams<{ videoId: string }>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -73,18 +76,18 @@ export const useWatchPage = () => {
   const [video, setVideo] = useState<Video | null>(null);
   const [channel, setChannel] = useState<Channel | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // Video interaction state
-  const [liked, setLiked] = useState(false);
-  const [disliked, setDisliked] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isInWatchLater, setIsInWatchLater] = useState(false);
-  const [isSavedToAnyList, setIsSavedToAnyList] = useState(false);
+  const [liked, setLiked] = useState<boolean>(false);
+  const [disliked, setDisliked] = useState<boolean>(false);
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [isInWatchLater, setIsInWatchLater] = useState<boolean>(false);
+  const [isSavedToAnyList, setIsSavedToAnyList] = useState<boolean>(false);
 
   // UI state
-  const [showFullDescription, setShowFullDescription] = useState(false);
-  const [commentCount, setCommentCount] = useState(0);
+  const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
+  const [commentCount, setCommentCount] = useState<number>(0);
   const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>(
     'top'
   );
@@ -93,7 +96,7 @@ export const useWatchPage = () => {
   const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(
     null
   );
-  const [currentReplyText, setCurrentReplyText] = useState('');
+  const [currentReplyText, setCurrentReplyText] = useState<string>('');
   const [editingComment, setEditingComment] = useState<{
     id: string;
     parentId?: string;
@@ -106,19 +109,19 @@ export const useWatchPage = () => {
   >({});
 
   // Modal and loading state
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
 
   // AI Summary state
   const [summary, setSummary] = useState<string>('');
   const [summaryError, setSummaryError] = useState<string>('');
-  const [isSummarizing, setIsSummarizing] = useState(false);
+  const [isSummarizing, setIsSummarizing] = useState<boolean>(false);
 
   // Related videos state
   const [allRelatedVideos, setAllRelatedVideos] = useState<Video[]>([]);
 
   // Load video data
   useEffect(() => {
-    const loadVideoData = async () => {
+    const loadVideoData = async (): Promise<void> => {
       if (!videoId) {
         return;
       }
@@ -131,7 +134,7 @@ export const useWatchPage = () => {
 
         try {
           const unifiedVideo = await unifiedDataService.getVideoById(videoId);
-          if (unifiedVideo) {
+          if (unifiedVideo as any) {
             // Convert unified video format to expected format
             foundVideo = {
               id: unifiedVideo.id,
@@ -157,8 +160,8 @@ export const useWatchPage = () => {
               createdAt: unifiedVideo.publishedAt,
               updatedAt: unifiedVideo.publishedAt };
           }
-        } catch (error) {
-          console.warn(
+        } catch (error: any) {
+          (console as any).warn(
             'Failed to load from unified service, trying real video service:',
             error
           );
@@ -175,7 +178,7 @@ export const useWatchPage = () => {
           const isYouTubeVideoId =
             cleanVideoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(cleanVideoId);
 
-          if (isYouTubeVideoId) {
+          if (isYouTubeVideoId as any) {
             // Create a YouTube video object
             foundVideo = {
               id: cleanVideoId,
@@ -212,7 +215,7 @@ export const useWatchPage = () => {
 
         // Ensure video has channel info - preserve existing channel name if available
         const videoWithChannelInfo = {
-          ...foundVideo,
+          ...foundVideo as any,
           channelName: foundVideo.channelName || 'Unknown Channel',
           channelAvatarUrl:
             foundVideo.channelAvatarUrl || '/default-avatar.png' };
@@ -228,8 +231,8 @@ export const useWatchPage = () => {
           c => !('parentId' in c) || !c.parentId
         );
         // Ensure comments have all required properties
-        const commentsWithDefaults = topLevelComments.map(comment => ({
-          ...comment,
+        const commentsWithDefaults = topLevelComments.map((comment: any) => ({
+          ...comment as any,
           isLikedByCurrentUser:
             'isLikedByCurrentUser' in comment
               ? comment.isLikedByCurrentUser
@@ -270,11 +273,11 @@ export const useWatchPage = () => {
         // Load related videos
         const allVideos = await getVideos();
         const related = allVideos
-          .filter(v => v.id !== videoId && v.category === foundVideo.category)
+          .filter((v: any) => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
-      } catch (error) {
-        console.error('Error loading video data:', error);
+      } catch (error: any) {
+        (console as any).error('Error loading video data:', error);
       } finally {
         setLoading(false);
       }
@@ -284,39 +287,39 @@ export const useWatchPage = () => {
   }, [videoId]);
 
   // Video interaction handlers
-  const handleLike = () => {
+  const handleLike: any = () => {
     setLiked(!liked);
-    if (disliked) {
+    if (disliked as any) {
       setDisliked(false);
     }
   };
 
-  const handleDislike = () => {
+  const handleDislike: any = () => {
     setDisliked(!disliked);
-    if (liked) {
+    if (liked as any) {
       setLiked(false);
     }
   };
 
-  const handleSubscribe = () => {
+  const handleSubscribe: any = () => {
     setIsSubscribed(!isSubscribed);
   };
 
-  const handleShare = () => {
+  const handleShare: any = () => {
     // Share logic handled in VideoActions component
   };
 
-  const openSaveModal = () => {
+  const openSaveModal: any = () => {
     setIsSaveModalOpen(true);
   };
 
-  const closeSaveModal = () => {
+  const closeSaveModal: any = () => {
     setIsSaveModalOpen(false);
   };
 
-  const handleSaveToWatchLater = () => {
-    if (video) {
-      if (isInWatchLater) {
+  const handleSaveToWatchLater: any = () => {
+    if (video as any) {
+      if (isInWatchLater as any) {
         // Remove from watch later - this would need to be imported from context
         // For now, just update local state
         setIsInWatchLater(false);
@@ -328,9 +331,9 @@ export const useWatchPage = () => {
     }
   };
 
-  const handleSaveToPlaylist = async (playlistId: any) => {
+  const handleSaveToPlaylist = async (playlistId: any): Promise<any> => {
     // Simulate API call to save video to playlist
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise(resolve => setTimeout((resolve) as any, 300));
 
     // Check if this is the "Watch Later" playlist
     if (playlistId === 'playlist-1' && video) {
@@ -345,9 +348,9 @@ export const useWatchPage = () => {
     // Note: Modal will handle closing itself via the executeSave wrapper
   };
 
-  const handleCreatePlaylist = async (name: any, description?: string) => {
+  const handleCreatePlaylist = async (name: any, description?: string): Promise<any> => {
     // Simulate API call to create new playlist
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout((resolve) as any, 1000));
 
     const newPlaylist = {
       id: `playlist-${Date.now()}`,
@@ -396,11 +399,11 @@ export const useWatchPage = () => {
       updatedAt: '2024-01-01T00:00:00Z' }];
 
   // Description handlers
-  const handleToggleDescription = () => {
+  const handleToggleDescription: any = () => {
     setShowFullDescription(!showFullDescription);
   };
 
-  const handleSummarizeDescription = async () => {
+  const handleSummarizeDescription = async (): Promise<void> => {
     if (!video?.description) {
       return;
     }
@@ -410,13 +413,13 @@ export const useWatchPage = () => {
 
     try {
       // Simulate AI summarization
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout((resolve) as any, 2000));
 
       // Mock summary
       const mockSummary = `This video discusses ${video.title.toLowerCase()}. The content covers key points about the topic, providing viewers with valuable insights and information. The creator explains the main concepts in an accessible way, making it suitable for both beginners and those with some background knowledge.`;
 
       setSummary(mockSummary);
-    } catch (error) {
+    } catch (error: any) {
       setSummaryError('Failed to generate summary. Please try again later.');
     } finally {
       setIsSummarizing(false);
@@ -424,7 +427,7 @@ export const useWatchPage = () => {
   };
 
   // Comment handlers
-  const handleMainCommentSubmitCallback = (commentText: any) => {
+  const handleMainCommentSubmitCallback: any = (commentText: any) => {
     if (!commentText.trim()) {
       return;
     }
@@ -446,7 +449,7 @@ export const useWatchPage = () => {
     setCommentCount(prev => prev + 1);
   };
 
-  const handleReplySubmit = (parentId: any) => {
+  const handleReplySubmit: any = (parentId: any) => {
     if (!currentReplyText.trim()) {
       return;
     }
@@ -469,10 +472,10 @@ export const useWatchPage = () => {
       replyTo: parentComment.userName };
 
     setComments(prevComments =>
-      prevComments.map(c => {
+      prevComments.map((c: any) => {
         if (c.id === parentId) {
           return {
-            ...c,
+            ...c as any,
             replies: [newReply, ...(c.replies || [])],
             replyCount: (c.replyCount || 0) + 1 };
         }
@@ -483,22 +486,22 @@ export const useWatchPage = () => {
     setReplyingToCommentId(null);
   };
 
-  const handleEditSave = (commentId: any, newText: any, parentId?: string) => {
+  const handleEditSave: any = (commentId: any, newText: any, parentId?: string) => {
     if (!newText.trim()) {
       return;
     }
 
-    const updateCommentState = (prevComments: Comment): Comment[] =>
+    const updateCommentState: any = (prevComments: Comment): Comment[] =>
       prevComments.map((comment: any) => {
         if (comment.id === commentId && comment.parentId === parentId) {
           return {
-            ...comment,
+            ...comment as any,
             commentText: newText.trim(),
             isEdited: true,
             timestamp: 'Just now (edited)' };
         }
         if (comment.replies && comment.replies.length > 0) {
-          return { ...comment, replies: updateCommentState(comment.replies) };
+          return { ...comment as any, replies: updateCommentState(comment.replies) };
         }
         return comment;
       });
@@ -507,7 +510,7 @@ export const useWatchPage = () => {
     setEditingComment(null);
   };
 
-  const handleDeleteComment = (commentId: any, parentId?: string) => {
+  const handleDeleteComment: any = (commentId: any, parentId?: string) => {
     if (
       !window.confirm(
         'Are you sure you want to delete this comment? This action cannot be undone.'
@@ -516,7 +519,7 @@ export const useWatchPage = () => {
       return;
     }
 
-    const deleteCommentFromList = (,
+    const deleteCommentFromList: any = (,
   list: Comment,
       idToDelete: any,
       parentOfDeleted?: string
@@ -556,12 +559,12 @@ export const useWatchPage = () => {
     setActiveCommentMenu(null);
   };
 
-  const toggleLikeDislikeForCommentOrReply = (,
+  const toggleLikeDislikeForCommentOrReply: any = (,
   id: string,
     parentId: string | undefined,
     action: 'like' | 'dislike'
   ) => {
-    const updateList = (list: Comment): Comment[] => {
+    const updateList: any = (list: Comment): Comment[] => {
       return list.map((item: any) => {
         if (item.id === id && item.parentId === parentId) {
           let newLiked = item.isLikedByCurrentUser;
@@ -591,7 +594,7 @@ export const useWatchPage = () => {
           }
 
           return {
-            ...item,
+            ...item as any,
             isLikedByCurrentUser: newLiked,
             isDislikedByCurrentUser: newDisliked,
             likes: Math.max(0, newLikes), // Ensure likes never go below 0
@@ -599,7 +602,7 @@ export const useWatchPage = () => {
         }
 
         if (item.replies) {
-          return { ...item, replies: updateList(item.replies) };
+          return { ...item as any, replies: updateList(item.replies) };
         }
 
         return item;

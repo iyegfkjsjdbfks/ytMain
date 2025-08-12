@@ -2,6 +2,7 @@ import type { Video } from '../types';
 import type { Channel } from '../types';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
 import type React from 'react';
 
@@ -55,7 +56,7 @@ interface ChannelInfoProps {
   isSubscribed: boolean; onSubscribe: () => void
 }
 
-const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }) => {
+const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }: any) => {
   const channelLink = channel ? `/channel/${encodeURIComponent(channel.name)}` : '#';
 
   return (
@@ -101,10 +102,10 @@ interface SubscribeButtonProps {
   isSubscribed: boolean; onSubscribe: () => void
 }
 
-const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }) => {
+const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }: any) => {
   return (
     <button
-      onClick={onSubscribe}
+      onClick={(e: any) => onSubscribe(e)}
       className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105 ${
         isSubscribed
           ? 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
@@ -154,10 +155,10 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
         className={`text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed cursor-pointer transition-all duration-300 ${
           !showFullDescription ? 'max-h-20 overflow-hidden' : ''
         }`}
-        onClick={onToggleDescription}
+        onClick={(e: any) => onToggleDescription(e)}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
+        onKeyDown={(e: any) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onToggleDescription();
@@ -174,7 +175,7 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
       {/* Show More/Less Button */}
       {shouldShowToggle && (
         <button
-          onClick={onToggleDescription}
+          onClick={(e: any) => onToggleDescription(e)}
           className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-semibold text-sm transition-colors"
         >
           {showFullDescription ? 'Show less' : '...Show more'}
@@ -206,7 +207,7 @@ return null;
     <div className="space-y-3">
       {/* Summarize Button */}
       <button
-        onClick={onSummarizeDescription}
+        onClick={(e: any) => onSummarizeDescription(e)}
         disabled={isSummarizing}
         className="flex items-center space-x-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 text-blue-700 dark:text-blue-300 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed transform hover:scale-105"
         aria-label="Summarize video description with AI"

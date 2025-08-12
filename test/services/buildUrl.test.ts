@@ -12,7 +12,7 @@ class TestableYouTubeService {
 
     const url = new URL(endpoint, baseUrl);
     Object.entries(params).forEach(([key, value]) => {
-      if (value) {
+      if (value as any) {
 url.searchParams.set(key, value);
 }
     });
@@ -49,7 +49,7 @@ describe('buildUrl function with different MODE values', () => {
       // Mock import.meta.env for development
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'development',
           VITE_YOUTUBE_API_KEY: 'test-dev-api-key' },
         configurable: true });
@@ -95,7 +95,7 @@ describe('buildUrl function with different MODE values', () => {
     beforeEach(() => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: 'prod-api-key-123' },
         configurable: true });
@@ -129,7 +129,7 @@ describe('buildUrl function with different MODE values', () => {
     beforeEach(() => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'test',
           VITE_YOUTUBE_API_KEY: 'test-api-key-456' },
         configurable: true });
@@ -150,7 +150,7 @@ describe('buildUrl function with different MODE values', () => {
     beforeEach(() => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'staging',
           VITE_YOUTUBE_API_KEY: 'staging-api-key-789' },
         configurable: true });
@@ -172,7 +172,7 @@ describe('buildUrl function with different MODE values', () => {
     beforeEach(() => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: 'test-key' },
         configurable: true });
@@ -182,7 +182,7 @@ describe('buildUrl function with different MODE values', () => {
       const url = testService.buildUrl('search', {
         part: 'snippet',
         q: 'test search with spaces & symbols',
-        type: 'video',
+        type: "video" as const,
         order: 'relevance' });
 
       expect(url).toContain('q=test+search+with+spaces+%26+symbols');
@@ -224,7 +224,7 @@ describe('buildUrl function with different MODE values', () => {
     beforeEach(() => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: undefined },
         configurable: true });
@@ -249,7 +249,7 @@ describe('buildUrl function with different MODE values', () => {
     beforeEach(() => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: 'valid-key' },
         configurable: true });
@@ -273,7 +273,7 @@ describe('buildUrl function with different MODE values', () => {
       const url = testService.buildUrl('search', {
         part: 'snippet',
         q: 'javascript tutorial',
-        type: 'video',
+        type: "video" as const,
         maxResults: '25' });
 
       const urlObject = new URL(url);
@@ -289,7 +289,7 @@ describe('buildUrl function with different MODE values', () => {
     beforeEach(() => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: 'edge-case-key' },
         configurable: true });
@@ -328,13 +328,13 @@ describe('buildUrl function with different MODE values', () => {
       vi.stubGlobal('window', {
         location: { origin: 'http://localhost:3000' } });
       Object.defineProperty(import.meta, 'env', {
-        value: { ...originalEnv, MODE: 'development', VITE_YOUTUBE_API_KEY: 'dev-key' },
+        value: { ...originalEnv as any, MODE: 'development', VITE_YOUTUBE_API_KEY: 'dev-key' },
         configurable: true });
       const devUrl = testService.buildUrl('videos', params);
 
       // Test production mode
       Object.defineProperty(import.meta, 'env', {
-        value: { ...originalEnv, MODE: 'production', VITE_YOUTUBE_API_KEY: 'prod-key' },
+        value: { ...originalEnv as any, MODE: 'production', VITE_YOUTUBE_API_KEY: 'prod-key' },
         configurable: true });
       const prodUrl = testService.buildUrl('videos', params);
 
@@ -356,7 +356,7 @@ describe('buildUrl function with different MODE values', () => {
       modes.forEach(mode => {
         Object.defineProperty(import.meta, 'env', {
           value: {
-            ...originalEnv,
+            ...originalEnv as any,
             MODE: mode,
             VITE_YOUTUBE_API_KEY: `${mode}-secret-key` },
           configurable: true });

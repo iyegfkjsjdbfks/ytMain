@@ -1,4 +1,6 @@
+import React from 'react';
 import { forwardRef, type ReactNode, lazy, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import YouTubePlayer from './YouTubePlayer';
 
@@ -36,7 +38,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
   // YouTubePlayerWrapper rendering
 
   // Create mock video object for YouTubePlayer component
-  const createMockVideo = (videoId: any): YouTubeSearchResult => ({,
+  const createMockVideo: any = (videoId: any): YouTubeSearchResult => ({,
     id: videoId,
           title: 'Video',
     description: '',

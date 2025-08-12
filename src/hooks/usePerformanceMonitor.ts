@@ -1,4 +1,8 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 interface PerformanceMetrics {
   renderTime: number;
@@ -87,15 +91,15 @@ class PerformanceStore {
 
 const performanceStore = new PerformanceStore();
 
-export const usePerformanceMonitor = (,
+export const usePerformanceMonitor: any = (,
   componentName: any,
   config: PerformanceConfig = {}
 ) => {
-  const opts = { ...DEFAULT_CONFIG, ...config };
+  const opts = { ...DEFAULT_CONFIG as any, ...config };
   const renderStartTime = useRef<number>(0);
   const mountTime = useRef<number>(0);
   const updateCount = useRef<number>(0);
-  const [isTracking, setIsTracking] = useState(false);
+  const [isTracking, setIsTracking] = useState<boolean>(false);
 
   // Start tracking on mount
   useEffect(() => {
@@ -166,7 +170,7 @@ export const usePerformanceMonitor = (,
           timestamp: Date.now() });
 
         return result;
-      } catch (error) {
+      } catch (error: any) {
         const duration = performance.now() - startTime;
 
         performanceStore.addMetric({
@@ -211,11 +215,11 @@ export const usePerformanceMonitor = (,
 };
 
 // Hook to access performance data
-export const usePerformanceData = (componentName?: string) => {
+export const usePerformanceData: any = (componentName?: string) => {
   const [metrics, setMetrics] = useState<PerformanceMetrics[]>([]);
 
   useEffect(() => {
-    const updateMetrics = (allMetrics: PerformanceMetrics) => {
+    const updateMetrics: any = (allMetrics: PerformanceMetrics) => {
       const filteredMetrics = componentName
         ? allMetrics.filter((m: any) =>
             m.componentName.startsWith(componentName)
@@ -246,7 +250,7 @@ export const usePerformanceData = (componentName?: string) => {
 };
 
 // Hook for Core Web Vitals monitoring
-export const useWebVitals = () => {
+export const useWebVitals: any = () => {
   const [vitals, setVitals] = useState<{
     CLS?: number;
     FID?: number;
@@ -257,23 +261,23 @@ export const useWebVitals = () => {
 
   useEffect(() => {
     // Largest Contentful Paint
-    const observeLCP = () => {
+    const observeLCP: any = () => {
       const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1] as any;
-        setVitals(prev => ({ ...prev, LCP: lastEntry.startTime }));
+        setVitals(prev => ({ ...prev as any, LCP: lastEntry.startTime }));
       });
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
       return observer;
     };
 
     // First Contentful Paint
-    const observeFCP = () => {
+    const observeFCP: any = () => {
       const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach(entry => {
           if (entry.name === 'first-contentful-paint') {
-            setVitals(prev => ({ ...prev, FCP: entry.startTime }));
+            setVitals(prev => ({ ...prev as any, FCP: entry.startTime }));
           }
         });
       });
@@ -282,14 +286,14 @@ export const useWebVitals = () => {
     };
 
     // Cumulative Layout Shift
-    const observeCLS = () => {
+    const observeCLS: any = () => {
       let clsValue = 0;
       const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach(entry => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
-            setVitals(prev => ({ ...prev, CLS: clsValue }));
+            setVitals(prev => ({ ...prev as any, CLS: clsValue }));
           }
         });
       });
@@ -301,9 +305,9 @@ export const useWebVitals = () => {
 
     // TTFB from Navigation Timing
     const navigation = performance.getEntriesByType('navigation')[0] as any;
-    if (navigation) {
+    if (navigation as any) {
       setVitals(prev => ({
-        ...prev,
+        ...prev as any,
         TTFB: navigation.responseStart - navigation.requestStart }));
     }
 
@@ -316,7 +320,7 @@ export const useWebVitals = () => {
 };
 
 // Performance budget checker
-export const usePerformanceBudget = () => {
+export const usePerformanceBudget: any = () => {
   const budgets = {
     renderTime: 16, // 60fps,
   bundleSize: 250 * 1024, // 250KB,

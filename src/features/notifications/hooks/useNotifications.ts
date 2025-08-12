@@ -1,4 +1,6 @@
 import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -6,7 +8,7 @@ import { logger } from '../../../utils/logger';
 
 import { notificationService, type Notification } from '../services/notificationService';
 
-export function useNotifications() {
+export function useNotifications(): any {
   const queryClient = useQueryClient();
 
   // Fetch notifications
@@ -70,7 +72,7 @@ export function useNotifications() {
           icon: notification.fromUserAvatar || '/favicon.ico',
           tag: notification.id });
         // Auto-close after 5 seconds
-        setTimeout(() => browserNotification.close(), 5000);
+        setTimeout((() => browserNotification.close()) as any, 5000);
       }
 
       // Play notification sound (optional)
@@ -97,7 +99,7 @@ export function useNotifications() {
     );
 
     return () => {
-      if (cleanup) {
+      if (cleanup as any) {
         cleanup();
       }
     };
@@ -112,7 +114,7 @@ export function useNotifications() {
 
   // Calculate unread count
   const unreadCount = Array.isArray(notifications)
-    ? notifications.filter(n => !n.isRead).length
+    ? notifications.filter((n: any) => !n.isRead).length
     : 0;
 
   return {
@@ -128,7 +130,7 @@ export function useNotifications() {
     isDeleting: deleteNotificationMutation.isPending };
 }
 
-export function useNotificationSettings() {
+export function useNotificationSettings(): any {
   const queryClient = useQueryClient();
 
   const { data: settings, isLoading } = useQuery({
@@ -149,7 +151,7 @@ export function useNotificationSettings() {
     isUpdating: updateSettingsMutation.isPending };
 }
 
-export function useNotificationStats() {
+export function useNotificationStats(): any {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['notification-stats'],
     queryFn: () => notificationService.getNotificationStats(),

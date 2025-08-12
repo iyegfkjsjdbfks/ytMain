@@ -5,6 +5,9 @@ import type { LiveStream } from '../../../types/livestream';
 import { VideoCameraIcon, MicrophoneIcon, StopIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, SignalIcon, ClockIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
 import { AdvancedLiveChat, LivePolls, LiveQA, SuperChatPanel, StreamScheduler, MultiplatformStreaming } from '.';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 interface ComprehensiveLiveStudioProps {
   className?: string;
@@ -13,12 +16,12 @@ interface ComprehensiveLiveStudioProps {
 const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
   className = '' }) => {
   const [currentStream, setCurrentStream] = useState<LiveStream | null>(null);
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [isPreviewing, setIsPreviewing] = useState(false);
+  const [isStreaming, setIsStreaming] = useState<boolean>(false);
+  const [isPreviewing, setIsPreviewing] = useState<boolean>(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
-  const [isVideoEnabled, setIsVideoEnabled] = useState(true);
-  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
-  const [showSettings, setShowSettings] = useState(false);
+  const [isVideoEnabled, setIsVideoEnabled] = useState<boolean>(true);
+  const [isAudioEnabled, setIsAudioEnabled] = useState<boolean>(true);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<
     'chat' | 'polls' | 'qa' | 'superchat' | 'schedule' | 'multiplatform'
   >('chat');
@@ -55,7 +58,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     latency: 2000 });
 
   // Setup camera and microphone
-  const setupMedia = async () => {
+  const setupMedia = async (): Promise<void> => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: {,
@@ -72,7 +75,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         videoRef.current.srcObject = mediaStream;
       }
       setIsPreviewing(true);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to access media devices:', error);
       alert(
         'Could not access camera and microphone. Please check permissions.'
@@ -80,7 +83,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     }
   };
 
-  const startPreview = async () => {
+  const startPreview = async (): Promise<void> => {
     if (!stream) {
       await setupMedia();
     } else {
@@ -88,7 +91,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     }
   };
 
-  const stopPreview = () => {
+  const stopPreview: any = () => {
     setIsPreviewing(false);
     if (stream && !isStreaming) {
       stream.getTracks().forEach(track => track.stop());
@@ -96,7 +99,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     }
   };
 
-  const handleStartStream = async () => {
+  const handleStartStream = async (): Promise<void> => {
     if (!stream || !streamSettings.title.trim()) {
       alert('Please set up camera and enter a stream title');
       return;
@@ -133,7 +136,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       const newStream = await createStream(streamData);
 
       if (!newStream) {
-        console.error('Failed to create stream');
+        (console as any).error('Failed to create stream');
         return;
       }
 
@@ -156,13 +159,13 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
       }
     
-        } catch (error) {
+        } catch (error: any) {
       logger.error('Failed to start stream:', error);
       alert('Failed to start stream. Please try again.');
     }
   };
 
-  const handleEndStream = async () => {
+  const handleEndStream = async (): Promise<void> => {
     if (!currentStream) {
       return;
     }
@@ -172,7 +175,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       setIsStreaming(false);
       setCurrentStream(null);
 
-      if (stream) {
+      if (stream as any) {
         stream.getTracks().forEach(track => track.stop());
         setStream(null);
       }
@@ -180,25 +183,25 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
       // Show stream summary
       alert('Stream ended successfully!');
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to end stream:', error);
     }
   };
 
-  const toggleVideo = () => {
-    if (stream) {
+  const toggleVideo: any = () => {
+    if (stream as any) {
       const videoTrack = stream.getVideoTracks()[0];
-      if (videoTrack) {
+      if (videoTrack as any) {
         videoTrack.enabled = !videoTrack.enabled;
         setIsVideoEnabled(videoTrack.enabled);
       }
     }
   };
 
-  const toggleAudio = () => {
-    if (stream) {
+  const toggleAudio: any = () => {
+    if (stream as any) {
       const audioTrack = stream.getAudioTracks()[0];
-      if (audioTrack) {
+      if (audioTrack as any) {
         audioTrack.enabled = !audioTrack.enabled;
         setIsAudioEnabled(audioTrack.enabled);
       }
@@ -212,10 +215,10 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     }
 
     // TODO: Implement real-time stats updates
-    const interval = setInterval(() => {
-      if (isStreaming) {
+    const interval = setInterval((() => {
+      if (isStreaming as any) {
         setStats(prev => ({
-          ...prev,
+          ...prev) as any,
           viewers: Math.floor(Math.random() * 1000) + 100,
           duration: prev.duration + 1 }));
       }
@@ -224,7 +227,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     return () => clearInterval(interval);
   }, [currentStream]);
 
-  const getStreamHealthColor = () => {
+  const getStreamHealthColor: any = () => {
     switch (stats.streamHealth) {
       case 'excellent':
         return 'text-green-500';
@@ -238,7 +241,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     }
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration: any = (seconds: any) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -346,7 +349,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   value={streamSettings.title}
                   onChange={e =>
                     setStreamSettings(prev => ({
-                      ...prev,
+                      ...prev as any,
                       title: e.target.value }))
                   }
                   placeholder='Enter stream title'
@@ -366,7 +369,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   value={streamSettings.category}
                   onChange={e =>
                     setStreamSettings(prev => ({
-                      ...prev,
+                      ...prev as any,
                       category: e.target.value }))
                   }
                   className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -393,7 +396,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   value={streamSettings.visibility}
                   onChange={e =>
                     setStreamSettings(prev => ({
-                      ...prev,
+                      ...prev as any,
                       visibility: e.target.value as any }))
                   }
                   className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -417,7 +420,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                 value={streamSettings.description}
                 onChange={e =>
                   setStreamSettings(prev => ({
-                    ...prev,
+                    ...prev as any,
                     description: e.target.value }))
                 }
                 placeholder='Describe your stream...'
@@ -448,7 +451,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   <VideoCameraIcon className='w-16 h-16 text-gray-400 mx-auto mb-4' />
                   <p className='text-gray-400 mb-4'>Camera Preview Off</p>
                   <button
-                    onClick={startPreview}
+                    onClick={(e: any) => startPreview(e)}
                     className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
                   >
                     Start Preview
@@ -462,7 +465,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
               <div className='flex items-center justify-between'>
                 <div className='flex items-center space-x-2'>
                   <button
-                    onClick={toggleVideo}
+                    onClick={(e: any) => toggleVideo(e)}
                     className={`p-2 rounded-lg transition-colors ${
                       isVideoEnabled
                         ? 'bg-gray-700 hover:bg-gray-600 text-white'
@@ -476,7 +479,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                     )}
                   </button>
                   <button
-                    onClick={toggleAudio}
+                    onClick={(e: any) => toggleAudio(e)}
                     className={`p-2 rounded-lg transition-colors ${
                       isAudioEnabled
                         ? 'bg-gray-700 hover:bg-gray-600 text-white'
@@ -494,7 +497,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                 <div className='flex items-center space-x-2'>
                   {isPreviewing && !isStreaming && (
                     <button
-                      onClick={stopPreview}
+                      onClick={(e: any) => stopPreview(e)}
                       className='px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors'
                     >
                       Stop Preview
@@ -503,7 +506,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
                   {!isStreaming ? (
                     <button
-                      onClick={handleStartStream}
+                      onClick={(e: any) => handleStartStream(e)}
                       disabled={!stream || !streamSettings.title.trim()}
                       className='px-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white rounded-lg transition-colors flex items-center space-x-2'
                     >
@@ -512,7 +515,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                     </button>
                   ) : (
                     <button
-                      onClick={handleEndStream}
+                      onClick={(e: any) => handleEndStream(e)}
                       className='px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2'
                     >
                       <StopIcon className='w-4 h-4' />

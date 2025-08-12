@@ -26,7 +26,7 @@ export interface CommentFilters {
 }
 
 export interface CommentReaction {
-  type: 'like' | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad';
+  type: "like" as const | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad';
   commentId: string
 }
 

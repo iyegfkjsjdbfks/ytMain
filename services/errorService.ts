@@ -12,7 +12,7 @@ interface ErrorReport {
   id: string;
   message: string;
   stack?: string | undefined;
-  type: 'javascript' | 'network' | 'validation' | 'api' | 'performance';
+  type: "javascript" as const | 'network' | 'validation' | 'api' | 'performance';
   severity: 'low' | 'medium' | 'high' | 'critical';
   context: ErrorContext;
   resolved: boolean;
@@ -43,7 +43,7 @@ class ErrorService {
   private sessionId: string;
 
   constructor(config: Partial<ErrorServiceConfig> = {}) {
-    this.config = { ...DEFAULT_CONFIG, ...config };
+    this.config = { ...DEFAULT_CONFIG as any, ...config };
     this.sessionId = this.generateSessionId();
     this.initializeErrorHandlers();
     this.loadStoredErrors();
@@ -59,7 +59,7 @@ class ErrorService {
       this.captureError({
         message: event.message,
         stack: event.error?.stack,
-        type: 'javascript',
+        type: "javascript" as const,
         severity: 'high',
         context: {
           url: event.filename,
@@ -74,7 +74,7 @@ class ErrorService {
       this.captureError({
         message: `Unhandled Promise Rejection: ${event.reason}`,
         stack: event.reason?.stack,
-        type: 'javascript',
+        type: "javascript" as const,
         severity: 'high',
         context: {
           timestamp: Date.now(),
@@ -90,7 +90,7 @@ class ErrorService {
 
   private monitorNetworkErrors() {
     const originalFetch = window.fetch;
-    window.fetch = async (...args) => {
+    (window as any).fetch = async (...args): Promise<any> => {
       const startTime = performance.now();
       try {
         const response = await originalFetch(...args);
@@ -99,7 +99,7 @@ class ErrorService {
         if (!response.ok) {
           this.captureError({
             message: `Network Error: ${response.status} ${response.statusText}`,
-            type: 'network',
+            type: "network" as const,
             severity: response.status >= 500 ? 'high' : 'medium',
             context: {
               timestamp: Date.now(),
@@ -111,12 +111,12 @@ class ErrorService {
         }
 
         return response;
-      } catch (error) {
+      } catch (error: any) {
         const duration = performance.now() - startTime;
         this.captureError({
           message: `Network Request Failed: ${error}`,
           ...(error instanceof Error && error.stack ? { stack: error.stack } : {}),
-          type: 'network',
+          type: "network" as const,
           severity: 'high',
           context: {
             timestamp: Date.now(),
@@ -147,7 +147,7 @@ class ErrorService {
       timestamp: Date.now(),
       ...errorData.context };
 
-    if (existingError) {
+    if (existingError as any) {
       // Update existing error
       existingError.occurrenceCount++;
       existingError.context = context; // Update with latest context
@@ -184,8 +184,8 @@ class ErrorService {
   private getCurrentUserId(): string | undefined {
     // Try to get user ID from various sources
     try {
-      const authData = localStorage.getItem('auth');
-      if (authData) {
+      const authData = (localStorage as any).getItem('auth');
+      if (authData as any) {
         const parsed = JSON.parse(authData);
         return parsed.userId || parsed.id;
       }
@@ -216,7 +216,7 @@ class ErrorService {
   }
 
   private getConsoleMethod(severity: ErrorReport['severity']) {
-    switch (severity) {
+    switch (severity as any) {
       case 'low': return console.info;
       case 'medium': return console.warn;
       case 'high':
@@ -231,9 +231,9 @@ class ErrorService {
         .sort((a, b) => b.context.timestamp - a.context.timestamp)
         .slice(0, this.config.maxStoredErrors);
 
-      localStorage.setItem('errorService_errors', JSON.stringify(errorsArray));
-    } catch (error) {
-      console.warn('Failed to save errors to localStorage:', error);
+      (localStorage as any).setItem('errorService_errors', JSON.stringify(errorsArray));
+    } catch (error: any) {
+      (console as any).warn('Failed to save errors to localStorage:', error);
     }
   }
 
@@ -243,15 +243,15 @@ return;
 }
 
     try {
-      const stored = localStorage.getItem('errorService_errors');
-      if (stored) {
+      const stored = (localStorage as any).getItem('errorService_errors');
+      if (stored as any) {
         const errors: ErrorReport[] = JSON.parse(stored);
         errors.forEach(error => {
           this.errors.set(error.id, error);
         });
       }
-    } catch (error) {
-      console.warn('Failed to load stored errors:', error);
+    } catch (error: any) {
+      (console as any).warn('Failed to load stored errors:', error);
     }
   }
 
@@ -261,14 +261,14 @@ return;
 }
 
     try {
-      await fetch(this.config.apiEndpoint, {
+      await (fetch as any)(this.config.apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }) },
         body: JSON.stringify(error) });
-    } catch (networkError) {
-      console.warn('Failed to send error to remote service:', networkError);
+    } catch (networkError: any) {
+      (console as any).warn('Failed to send error to remote service:', networkError);
     }
   }
 
@@ -276,8 +276,8 @@ return;
     this.listeners.forEach(listener => {
       try {
         listener(error);
-      } catch (listenerError) {
-        console.warn('Error in error listener:', listenerError);
+      } catch (listenerError: any) {
+        (console as any).warn('Error in error listener:', listenerError);
       }
     });
   }
@@ -289,20 +289,20 @@ return;
   }
 
   getErrorsByType(type: ErrorReport['type'],): ErrorReport[] {
-    return this.getErrors().filter(error => error.type === type);
+    return this.getErrors().filter((error: any) => error.type === type);
   }
 
   getErrorsBySeverity(severity: ErrorReport['severity'],): ErrorReport[] {
-    return this.getErrors().filter(error => error.severity === severity);
+    return this.getErrors().filter((error: any) => error.severity === severity);
   }
 
   getUnresolvedErrors(): ErrorReport[] {
-    return this.getErrors().filter(error => !error.resolved);
+    return this.getErrors().filter((error: any) => !error.resolved);
   }
 
   markAsResolved(errorId: any) {
     const error = this.errors.get(errorId);
-    if (error) {
+    if (error as any) {
       error.resolved = true;
       this.saveToLocalStorage();
     }
@@ -329,7 +329,7 @@ return;
   reportValidationError(message: any, field?: string, value: any?) {
     this.captureError({
       message: `Validation Error: ${message}`,
-      type: 'validation',
+      type: "validation" as const,
       severity: 'medium',
       context: {
         timestamp: Date.now(),
@@ -339,7 +339,7 @@ return;
   reportApiError(message: any, endpoint: any, status?: number) {
     this.captureError({
       message: `API Error: ${message}`,
-      type: 'api',
+      type: "api" as const,
       severity: status && status >= 500 ? 'high' : 'medium',
       context: {
         timestamp: Date.now(),
@@ -350,7 +350,7 @@ return;
   reportPerformanceIssue(message: any, metric: any, value: string | number) {
     this.captureError({
       message: `Performance Issue: ${message}`,
-      type: 'performance',
+      type: "performance" as const,
       severity: 'medium',
       context: {
         timestamp: Date.now(),
@@ -366,8 +366,8 @@ return;
     return {
       total: errors.length,
       unresolved: this.getUnresolvedErrors().length,
-      lastHour: errors.filter(e => e.context.timestamp > oneHourAgo).length,
-      lastDay: errors.filter(e => e.context.timestamp > oneDayAgo).length,
+      lastHour: errors.filter((e: any) => e.context.timestamp > oneHourAgo).length,
+      lastDay: errors.filter((e: any) => e.context.timestamp > oneDayAgo).length,
       byType: {
         javascript: this.getErrorsByType('javascript',).length,
         network: this.getErrorsByType('network',).length,

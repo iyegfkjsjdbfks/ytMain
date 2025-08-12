@@ -16,7 +16,7 @@ class AuthService {
    * Log in with credentials
    */
   async login(credentials: LoginCredentials): Promise<User> {
-    const response = await fetch(`${this.baseUrl}/login`, {
+    const response = await (fetch as any)(`${this.baseUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json' },
@@ -36,7 +36,7 @@ class AuthService {
    * Register a new user
    */
   async register(data: RegisterData): Promise<User> {
-    const response = await fetch(`${this.baseUrl}/register`, {
+    const response = await (fetch as any)(`${this.baseUrl}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json' },
@@ -60,13 +60,13 @@ class AuthService {
 
     if (tokens?.refreshToken) {
       try {
-        await fetch(`${this.baseUrl}/logout`, {
+        await (fetch as any)(`${this.baseUrl}/logout`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${tokens.accessToken}` },
           body: JSON.stringify({ refreshToken: tokens.refreshToken }) });
-      } catch (error) {
+      } catch (error: any) {
         logger.error('Error during logout:', error);
       }
     }
@@ -85,7 +85,7 @@ class AuthService {
     }
 
     try {
-      const response = await fetch(`${this.baseUrl}/me`, {
+      const response = await (fetch as any)(`${this.baseUrl}/me`, {
         headers: {
           Authorization: `Bearer ${tokens.accessToken}` } });
 
@@ -93,7 +93,7 @@ class AuthService {
         if (response.status === 401) {
           // Token expired, try to refresh
           const newTokens = await this.refreshToken(tokens.refreshToken);
-          if (newTokens) {
+          if (newTokens as any) {
             return this.getCurrentUser();
           }
           return null;
@@ -102,7 +102,7 @@ class AuthService {
       }
 
       return response.json();
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error fetching current user:', error);
       return null;
     }
@@ -113,7 +113,7 @@ class AuthService {
    */
   private async refreshToken(refreshToken: any): Promise<AuthTokens | null> {
     try {
-      const response = await fetch(`${this.baseUrl}/refresh`, {
+      const response = await (fetch as any)(`${this.baseUrl}/refresh`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json' },
@@ -127,7 +127,7 @@ class AuthService {
       const tokens = await response.json();
       this.setTokens(tokens);
       return tokens;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error refreshing token:', error);
       this.clearTokens();
       return null;
@@ -138,21 +138,21 @@ class AuthService {
    * Set authentication tokens in localStorage
    */
   private setTokens(tokens: AuthTokens): void {
-    localStorage.setItem(this.tokenKey, JSON.stringify(tokens));
+    (localStorage as any).setItem(this.tokenKey, JSON.stringify(tokens));
   }
 
   /**
    * Get authentication tokens from localStorage
    */
   private getTokens(): AuthTokens | null {
-    const tokensString = localStorage.getItem(this.tokenKey);
+    const tokensString = (localStorage as any).getItem(this.tokenKey);
     if (!tokensString) {
       return null;
     }
 
     try {
       return JSON.parse(tokensString) as AuthTokens;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error parsing auth tokens:', error);
       return null;
     }

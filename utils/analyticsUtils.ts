@@ -43,7 +43,7 @@ export function formatWatchTime(seconds: any): string {
   return `${minutes}m`;
 }
 
-export function getAudienceDemographics() {
+export function getAudienceDemographics(): any {
   // This would come from your analytics API
   return {
     ageGroups: [
@@ -59,7 +59,7 @@ export function getAudienceDemographics() {
       { name: 'Other', value: 2 }] };
 }
 
-export function getTrafficSources() {
+export function getTrafficSources(): any {
   // This would come from your analytics API
   return [
     { name: 'YouTube Search', value: 40 },
@@ -69,7 +69,7 @@ export function getTrafficSources() {
     { name: 'Other', value: 5 }];
 }
 
-export function getGeographicData() {
+export function getGeographicData(): any {
   // This would come from your analytics API
   return [
     { country: 'United States', value: 30 },

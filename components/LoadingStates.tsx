@@ -1,11 +1,13 @@
 import React from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 interface VideoGridSkeletonProps {
   count?: number;
 }
 
-export const VideoGridSkeleton: React.FC<VideoGridSkeletonProps> = ({ count = 18 }) => (
+export const VideoGridSkeleton: React.FC<VideoGridSkeletonProps> = ({ count = 18 }: any) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
     {Array.from({ length: count }).map((_, index) => (
       <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
@@ -70,3 +72,4 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
     </p>
   </div>
 );
+export default VideoGridSkeleton;

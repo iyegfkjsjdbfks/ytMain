@@ -1,4 +1,8 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
+import { FormEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -34,19 +38,19 @@ export function useAsyncState<T>(initialData: T | null = null): [
 
   const setData = useCallback((data: T | null) => {
     setState(prev => ({
-      ...prev,
+      ...prev as any,
       data,
       error: null,
       lastFetch: Date.now() }));
   }, []);
 
   const setLoading = useCallback((loading: any) => {
-    setState(prev => ({ ...prev, loading }));
+    setState(prev => ({ ...prev as any, loading }));
   }, []);
 
   const setError = useCallback((error: Error | null) => {
     setState(prev => ({
-      ...prev,
+      ...prev as any,
       error,
       loading: false }));
   }, []);
@@ -92,7 +96,7 @@ export function useApi<T>(,
   const refreshIntervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mountedRef = useRef(true);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (): Promise<void> => {
     if (!mountedRef.current) {
       return;
     }
@@ -106,7 +110,7 @@ export function useApi<T>(,
         setData(result);
         retryCountRef.current = 0;
       }
-    } catch (error) {
+    } catch (error: any) {
       if (!mountedRef.current) {
         return;
       }
@@ -115,12 +119,12 @@ export function useApi<T>(,
 
       if (retryOnError && retryCountRef.current < maxRetries) {
         retryCountRef.current++;
-        setTimeout(
+        setTimeout((
           () => {
             if (mountedRef.current) {
               fetchData();
             }
-          },
+          }) as any,
           retryDelay * Math.pow(2, retryCountRef.current - 1)
         );
       } else {
@@ -137,18 +141,18 @@ export function useApi<T>(,
     maxRetries,
     retryDelay]);
 
-  const refetch = useCallback(async () => {
+  const refetch = useCallback(async (): Promise<void> => {
     retryCountRef.current = 0;
     await fetchData();
   }, [fetchData]);
 
-  const refresh = useCallback(async () => {
-    await refetch();
+  const refresh = useCallback(async (): Promise<void> => {
+    await re(fetch as any)();
   }, [refetch]);
 
   // Initial fetch
   useEffect(() => {
-    if (immediate) {
+    if (immediate as any) {
       fetchData();
     }
   }, [immediate, ...dependencies]);
@@ -156,7 +160,7 @@ export function useApi<T>(,
   // Refresh interval
   useEffect(() => {
     if (refreshInterval && refreshInterval > 0) {
-      refreshIntervalRef.current = setInterval(fetchData, refreshInterval);
+      refreshIntervalRef.current = setInterval((fetchData) as any, refreshInterval);
       return () => {
         if (refreshIntervalRef.current) {
           clearInterval(refreshIntervalRef.current);
@@ -177,7 +181,7 @@ export function useApi<T>(,
   }, []);
 
   return {
-    ...state,
+    ...state as any,
     refetch,
     refresh };
 }
@@ -243,7 +247,7 @@ export function useForm<T extends Record<string, any>>(,
         const isValid = Object.values(newFields).every(f => !f.error);
 
         return {
-          ...prev,
+          ...prev as any,
           fields: newFields,
           isValid };
       });
@@ -259,7 +263,7 @@ export function useForm<T extends Record<string, any>>(,
         const isValid = Object.values(newFields).every(f => !f.error);
 
         return {
-          ...prev,
+          ...prev as any,
           fields: newFields,
           isValid };
       });
@@ -274,7 +278,7 @@ export function useForm<T extends Record<string, any>>(,
         newFields[field] = { ...newFields[field], touched };
 
         return {
-          ...prev,
+          ...prev as any,
           fields: newFields };
       });
     },
@@ -282,11 +286,11 @@ export function useForm<T extends Record<string, any>>(,
   );
 
   const setSubmitting = useCallback((submitting: any) => {
-    setState(prev => ({ ...prev, isSubmitting: submitting }));
+    setState(prev => ({ ...prev as any, isSubmitting: submitting }));
   }, []);
 
   const setSubmitError = useCallback((error: string | null) => {
-    setState(prev => ({ ...prev, submitError: error }));
+    setState(prev => ({ ...prev as any, submitError: error }));
   }, []);
 
   const reset = useCallback(() => {
@@ -300,7 +304,7 @@ export function useForm<T extends Record<string, any>>(,
           dirty: false };
       }
       return {
-        ...prev,
+        ...prev as any,
         fields,
         isValid: true,
         isSubmitting: false,
@@ -319,17 +323,17 @@ export function useForm<T extends Record<string, any>>(,
 
       for (const key in validators) {
         const validator = validators[key];
-        if (validator) {
+        if (validator as any) {
           const error = validator(newFields[key].value);
           newFields[key] = { ...newFields[key], error };
-          if (error) {
+          if (error as any) {
             isValid = false;
           }
         }
       }
 
       return {
-        ...prev,
+        ...prev as any,
         fields: newFields,
         isValid };
     });
@@ -339,8 +343,8 @@ export function useForm<T extends Record<string, any>>(,
 
   const handleSubmit = useCallback(
     (onSubmit: (values: T) => Promise<void> | void) => {
-      return async (e?: React.FormEvent) => {
-        if (e) {
+      return async (e?: React.FormEvent): Promise<any> => {
+        if (e as any) {
           e.preventDefault();
         }
 
@@ -358,7 +362,7 @@ export function useForm<T extends Record<string, any>>(,
           }
 
           await onSubmit(values);
-        } catch (error) {
+        } catch (error: any) {
           setSubmitError(
             error instanceof Error ? error.message : 'An error occurred'
           );
@@ -405,9 +409,9 @@ export function useDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const handler = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => {
       clearTimeout(handler);
@@ -424,10 +428,10 @@ export function useLocalStorage<T>(,
 ): [T(value: T | ((prev: T) => T)) => void() => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window.(localStorage as any).getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.error(`Error reading localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).error(`Error reading localStorage key "${key}":`, error);
       return initialValue;
     }
   });
@@ -438,9 +442,9 @@ export function useLocalStorage<T>(,
         const valueToStore =
           value instanceof Function ? value(storedValue) : value;
         setStoredValue(valueToStore);
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error);
+        window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+      } catch (error: any) {
+        (console as any).error(`Error setting localStorage key "${key}":`, error);
       }
     },
     [key, storedValue]
@@ -450,8 +454,8 @@ export function useLocalStorage<T>(,
     try {
       window.localStorage.removeItem(key);
       setStoredValue(initialValue);
-    } catch (error) {
-      console.error(`Error removing localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).error(`Error removing localStorage key "${key}":`, error);
     }
   }, [key, initialValue]);
 
@@ -462,7 +466,7 @@ export function useLocalStorage<T>(,
 export function useIntersectionObserver(,
   options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLElement> boolean] {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
   const targetRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -472,7 +476,7 @@ export function useIntersectionObserver(,
     }
 
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry) {
+      if (entry as any) {
         setIsIntersecting(entry.isIntersecting);
       }
     }, options);
@@ -488,7 +492,7 @@ export function useIntersectionObserver(,
 }
 
 // Performance monitoring hook
-export function usePerformanceMonitor(name: any) {
+export function usePerformanceMonitor(name: any): any {
   const startTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {

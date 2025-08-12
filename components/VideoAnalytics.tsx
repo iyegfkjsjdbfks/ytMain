@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useState, FC } from 'react';
 
@@ -63,9 +67,9 @@ interface VideoAnalyticsProps {
   className?: string;
 }
 
-const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = '' }) => {
+const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = '' }: any) => {
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d');
   const [activeTab, setActiveTab] = useState<'overview' | 'audience' | 'revenue' | 'engagement'>('overview');
 
@@ -73,22 +77,22 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     loadAnalyticsData();
   }, [videoId, timeRange]);
 
-  const loadAnalyticsData = async () => {
+  const loadAnalyticsData = async (): Promise<void> => {
     setIsLoading(true);
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout((resolve) as any, 1000));
 
       const mockData = generateMockAnalyticsData(videoId);
       setAnalyticsData(mockData);
-    } catch (error) {
-      console.error('Error loading analytics data:', error);
+    } catch (error: any) {
+      (console as any).error('Error loading analytics data:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const generateMockAnalyticsData = (videoId: any): AnalyticsData => {
+  const generateMockAnalyticsData: any = (videoId: any): AnalyticsData => {
     const baseViews = Math.floor(Math.random() * 1000000) + 10000;
     const likes = Math.floor(baseViews * (0.02 + Math.random() * 0.08));
     const dislikes = Math.floor(likes * (0.05 + Math.random() * 0.15));
@@ -155,7 +159,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
           shareRate: (shares / baseViews) * 100,
         subscribeRate: Math.random() * 2 } }};
 
-  const generateRetentionData = (): number[] => {
+  const generateRetentionData: any = (): number[] => {
     const data = [];
     let retention = 100;
     for (let i = 0; i < 100; i += 5) {
@@ -165,7 +169,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     return data;
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber: any = (num: any): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -175,7 +179,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (seconds: any): string => {
+  const formatDuration: any = (seconds: any): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
@@ -186,14 +190,14 @@ return `${(num / 1000).toFixed(1)}K`;
     return `${minutes}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const formatCurrency = (amount: any): string => {
+  const formatCurrency: any = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
           currency: 'USD',
       minimumFractionDigits: 2 }).format(amount);
   };
 
-  if (isLoading) {
+  if (isLoading as any) {
     return (
       <div className={`p-6 ${className}`}>
         <div className="animate-pulse space-y-6">
@@ -217,7 +221,7 @@ return `${(num / 1000).toFixed(1)}K`;
     );
   }
 
-  const renderOverviewTab = () => (
+  const renderOverviewTab: any = () => (
     <div className="space-y-6">
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -318,7 +322,7 @@ return `${(num / 1000).toFixed(1)}K`;
     </div>
   );
 
-  const renderAudienceTab = () => (
+  const renderAudienceTab: any = () => (
     <div className="space-y-6">
       {/* Demographics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -404,7 +408,7 @@ return `${(num / 1000).toFixed(1)}K`;
     </div>
   );
 
-  const renderRevenueTab = () => (
+  const renderRevenueTab: any = () => (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
@@ -435,7 +439,7 @@ return `${(num / 1000).toFixed(1)}K`;
     </div>
   );
 
-  const renderEngagementTab = () => (
+  const renderEngagementTab: any = () => (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">

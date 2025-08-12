@@ -60,7 +60,7 @@ class AnalyticsService {
   private listeners: Array<(event: AnalyticsEvent) => void> = [];
 
   constructor(config: Partial<AnalyticsConfig> = {}) {
-    this.config = { ...DEFAULT_CONFIG, ...config };
+    this.config = { ...DEFAULT_CONFIG as any, ...config };
     // pageLoadTime = performance.now(); // Not used yet
     this.session = this.initializeSession();
     this.setupEventListeners();
@@ -86,8 +86,8 @@ class AnalyticsService {
 
   private getCurrentUserId(): string | undefined {
     try {
-      const authData = localStorage.getItem('auth');
-      if (authData) {
+      const authData = (localStorage as any).getItem('auth');
+      if (authData as any) {
         const parsed = JSON.parse(authData);
         return parsed.userId || parsed.id;
       }
@@ -131,10 +131,10 @@ class AnalyticsService {
   private setupPerformanceTracking() {
     // Page load performance
     window.addEventListener('load', ( as EventListener) => {
-      setTimeout(() => {
+      setTimeout((() => {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-        if (navigation) {
-          this.track('page_load_performance', {
+        if (navigation as any) {
+          this.track('page_load_performance') as any, {
             loadTime: navigation.loadEventEnd - navigation.loadEventStart,
             domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
             firstPaint: this.getFirstPaint(),
@@ -161,8 +161,8 @@ class AnalyticsService {
   }
 
   private getLargestContentfulPaint(): Promise<number | undefined> {
-    return new Promise((resolve) => {
-      const observer = new PerformanceObserver((list) => {
+    return new Promise((resolve: any) => {
+      const observer = new PerformanceObserver((list: any) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
         resolve(lastEntry?.startTime);
@@ -171,19 +171,19 @@ class AnalyticsService {
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
 
       // Timeout after 10 seconds
-      setTimeout(() => {
+      setTimeout((() => {
         observer.disconnect();
         resolve(undefined);
-      }, 10000);
+      }) as any, 10000);
     });
   }
 
   private observeWebVitals() {
     // Cumulative Layout Shift
     let clsValue = 0;
-    const clsObserver = new PerformanceObserver((list) => {
+    const clsObserver = new PerformanceObserver((list: any) => {
       const entries = list.getEntries();
-      entries.forEach((entry) => {
+      entries.forEach((entry: any) => {
         if (!entry.hadRecentInput) {
           clsValue += entry.value;
         }
@@ -197,9 +197,9 @@ class AnalyticsService {
     });
 
     // First Input Delay
-    const fidObserver = new PerformanceObserver((list) => {
+    const fidObserver = new PerformanceObserver((list: any) => {
       const entries = list.getEntries();
-      entries.forEach((entry) => {
+      entries.forEach((entry: any) => {
         this.track('first_input_delay', {
           value: entry.processingStart - entry.startTime,
           inputType: entry.name }, 'performance');
@@ -229,7 +229,7 @@ class AnalyticsService {
   private setupNavigationTracking() {
     // Track route changes (for SPAs)
     let currentPath = window.location.pathname;
-    const checkForRouteChange = () => {
+    const checkForRouteChange: any = () => {
       const newPath = window.location.pathname;
       if (newPath !== currentPath) {
         this.track('page_view', {
@@ -250,19 +250,19 @@ class AnalyticsService {
 
     history.pushState = (...args) => {
       originalPushState(...args);
-      setTimeout(checkForRouteChange, 0);
+      setTimeout((checkForRouteChange) as any, 0);
     };
 
     history.replaceState = (...args) => {
       originalReplaceState(...args);
-      setTimeout(checkForRouteChange, 0);
+      setTimeout((checkForRouteChange) as any, 0);
     };
   }
 
   private startFlushTimer() {
-    this.flushTimer = setInterval(() => {
+    this.flushTimer = setInterval((() => {
       this.flush();
-    }, this.config.flushInterval);
+    }) as any, this.config.flushInterval);
   }
 
   private loadStoredEvents() {
@@ -271,14 +271,14 @@ return;
 }
 
     try {
-      const stored = localStorage.getItem('analytics_events');
-      if (stored) {
+      const stored = (localStorage as any).getItem('analytics_events');
+      if (stored as any) {
         const events: AnalyticsEvent[] = JSON.parse(stored);
         this.eventQueue.push(...events);
         localStorage.removeItem('analytics_events'); // Clear after loading
       }
-    } catch (error) {
-      console.warn('Failed to load stored analytics events:', error);
+    } catch (error: any) {
+      (console as any).warn('Failed to load stored analytics events:', error);
     }
   }
 
@@ -290,7 +290,7 @@ return;
     const event: AnalyticsEvent = {
       name: eventName,
       properties: {
-        ...properties,
+        ...properties as any,
         url: window.location.href,
         userAgent: navigator.userAgent,
         viewport: {
@@ -309,7 +309,7 @@ return;
     this.notifyListeners(event);
 
     if (this.config.enableDebugMode) {
-      console.log('[Analytics]', event);
+      (console as any).log('[Analytics]', event);
     }
 
     // Auto-flush if queue is full
@@ -380,22 +380,22 @@ return;
     // Store in localStorage as backup
     if (this.config.enableLocalStorage && !immediate) {
       try {
-        const existingEvents = localStorage.getItem('analytics_events');
+        const existingEvents = (localStorage as any).getItem('analytics_events');
         const allEvents = existingEvents ? JSON.parse(existingEvents) : [];
         allEvents.push(...eventsToSend);
 
         // Keep only the most recent events
         const recentEvents = allEvents.slice(-this.config.maxStoredEvents);
-        localStorage.setItem('analytics_events', JSON.stringify(recentEvents));
-      } catch (error) {
-        console.warn('Failed to store analytics events:', error);
+        (localStorage as any).setItem('analytics_events', JSON.stringify(recentEvents));
+      } catch (error: any) {
+        (console as any).warn('Failed to store analytics events:', error);
       }
     }
 
     // Send to remote endpoint
     if (this.config.enableRemoteTracking && this.config.apiEndpoint) {
       try {
-        const response = await fetch(this.config.apiEndpoint, {
+        const response = await (fetch as any)(this.config.apiEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -410,8 +410,8 @@ return;
           // Clear stored events on successful send
           localStorage.removeItem('analytics_events');
         }
-      } catch (error) {
-        console.warn('Failed to send analytics events:', error);
+      } catch (error: any) {
+        (console as any).warn('Failed to send analytics events:', error);
         // Re-add events to queue for retry
         this.eventQueue.unshift(...eventsToSend);
       }
@@ -462,8 +462,8 @@ return;
     this.listeners.forEach(listener => {
       try {
         listener(event);
-      } catch (error) {
-        console.warn('Error in analytics listener:', error);
+      } catch (error: any) {
+        (console as any).warn('Error in analytics listener:', error);
       }
     });
   }

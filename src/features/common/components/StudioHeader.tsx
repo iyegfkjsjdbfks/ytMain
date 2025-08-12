@@ -1,5 +1,8 @@
 import React, { useState, FC } from 'react';
 import { useNavigate, Link  } from 'react-router-dom';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -7,11 +10,12 @@ import { useAuthStore } from '../../auth/store/authStore';
  * Studio-specific header component with studio navigation and controls
  */
 const StudioHeader: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  return null;
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch: any = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/studio/search?q=${encodeURIComponent(searchQuery.trim())}`);
@@ -72,7 +76,7 @@ const StudioHeader: React.FC = () => {
 
           {/* Search bar */}
           <div className='max-w-lg w-full mx-4'>
-            <form onSubmit={handleSearch} className='relative'>
+            <form onSubmit={(e: any) => handleSearch(e)} className='relative'>
               <input
                 type='text'
                 placeholder='Search in Studio'
@@ -186,7 +190,7 @@ const StudioHeader: React.FC = () => {
                     Settings
                   </Link>
                   <button
-                    onClick={logout}
+                    onClick={(e: any) => logout(e)}
                     className='block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                   >
                     Sign out

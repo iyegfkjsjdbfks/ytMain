@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const BellIconSolid = BellSolidIcon;
 import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
@@ -22,7 +26,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
   onMarkAsRead,
   onDelete,
   onClick }) => {
-  const getNotificationIcon = () => {
+  const getNotificationIcon: any = () => {
     switch (notification.type) {
       case 'video_upload':
         return '🎥';
@@ -44,7 +48,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
     }
   };
 
-  const getPriorityColor = () => {
+  const getPriorityColor: any = () => {
     switch (notification.priority) {
       case 'urgent':
         return 'border-l-red-500';
@@ -151,7 +155,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
 
 export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   className = '' }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [filter, setFilter] = useState<'all' | 'unread'>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -166,7 +170,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     clearAll } = useNotifications();
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -180,7 +184,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   }, []);
 
   const filteredNotifications = Array.isArray(notifications)
-    ? notifications.filter(notification => {
+    ? notifications.filter((notification: any) => {
         if (filter === 'unread' && notification.isRead) {
           return false;
         }
@@ -194,7 +198,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       })
     : [];
 
-  const handleNotificationClick = (notification: Notification) => {
+  const handleNotificationClick: any = (notification: Notification) => {
     if (!notification.isRead) {
       markAsRead(notification.id);
     }
@@ -307,7 +311,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 onChange={e => setSelectedCategory(e.target.value)}
                 className='w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm'
               >
-                {categories.map(category => (
+                {categories.map((category: any) => (
                   <option key={category.value} value={category.value}>
                     {category.label}
                   </option>
@@ -324,13 +328,13 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               </div>
             ) : filteredNotifications.length > 0 ? (
               <div className='divide-y divide-gray-200 dark:divide-gray-700'>
-                {filteredNotifications.map(notification => (
+                {filteredNotifications.map((notification: any) => (
                   <NotificationItem
                     key={notification.id}
                     notification={notification}
                     onMarkAsRead={markAsRead}
                     onDelete={deleteNotification}
-                    onClick={handleNotificationClick}
+                    onClick={(e: any) => handleNotificationClick(e)}
                   />
                 ))}
               </div>

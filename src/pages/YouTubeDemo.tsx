@@ -2,15 +2,18 @@ import React, { useState, FC } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { isYouTubeUrl, getYouTubeVideoId  } from '../lib/youtube-utils';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 const YouTubeDemo: React.FC = () => {
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState<string>('');
   const [videoId, setVideoId] = useState('dQw4w9WgXcQ'); // Default video
-  const [useCustomControls, setUseCustomControls] = useState(false);
-  const [autoplay, setAutoplay] = useState(false);
-  const [error, setError] = useState('');
+  const [useCustomControls, setUseCustomControls] = useState<boolean>(false);
+  const [autoplay, setAutoplay] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit: any = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!videoUrl.trim()) {
@@ -24,7 +27,7 @@ const YouTubeDemo: React.FC = () => {
     }
 
     const id = getYouTubeVideoId(videoUrl);
-    if (id) {
+    if (id as any) {
       setVideoId(id);
       setError('');
     } else {
@@ -37,7 +40,7 @@ const YouTubeDemo: React.FC = () => {
       <h1 className='text-3xl font-bold mb-6'>YouTube Player Demo</h1>
 
       <div className='bg-white rounded-lg shadow-md p-6 mb-8'>
-        <form onSubmit={handleSubmit} className='mb-6'>
+        <form onSubmit={(e: any) => handleSubmit(e)} className='mb-6'>
           <div className='flex flex-col md:flex-row gap-4 mb-4'>
             <div className='flex-1'>
               <input
@@ -131,9 +134,9 @@ const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
           controls: 1,
     modestbranding: 1 },
           events: {,
-    onReady: (event) => {
+    onReady: (event: any) => {
       },
-    onStateChange: (event) => {
+    onStateChange: (event: any) => {
       } } });
 
 // Control the player
@@ -165,7 +168,7 @@ player.seekTo(60); // Seek to 1 minute`}
   );
 };
 
-const YouTubeDemoWithErrorBoundary = () => (
+const YouTubeDemoWithErrorBoundary: any = () => (
   <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
     <YouTubeDemo />
   </ErrorBoundary>

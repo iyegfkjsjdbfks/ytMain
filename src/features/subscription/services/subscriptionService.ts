@@ -38,7 +38,7 @@ class SubscriptionService {
     try {
       const response = await api.get(`/api/subscriptions/status/${channelId}`);
       return response.data as Subscription;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to get subscription status:', error);
       return null;
     }
@@ -83,7 +83,7 @@ class SubscriptionService {
     try {
       const response = await api.get('/api/subscriptions', filters);
       return (response.data as Subscription) || [];
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to get subscriptions:', error);
       return [];
     }
@@ -104,7 +104,7 @@ class SubscriptionService {
     try {
       const response = await api.get('/api/subscriptions/feed', filters);
       return (response.data as Video) || [];
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to get subscription feed:', error);
       return [];
     }
@@ -117,7 +117,7 @@ class SubscriptionService {
     try {
       const response = await api.get('/api/subscriptions/stats');
       return response.data as SubscriptionStats;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to get subscription stats:', error);
       return {
         totalSubscriptions: 0,
@@ -180,7 +180,7 @@ class SubscriptionService {
           recentVideos: Video
         }>) || []
       );
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to get recommended channels:', error);
       return [];
     }
@@ -204,7 +204,7 @@ class SubscriptionService {
         q: query,
         ...filters });
       return response.data as { channels: Subscription; videos: Video[] };
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to search subscriptions:', error);
       return {
         channels: [],
@@ -224,7 +224,7 @@ class SubscriptionService {
   ): Promise<
     Array<{
       id: string;
-      type: 'upload' | 'live' | 'premiere' | 'community';
+      type: "upload" as const | 'live' | 'premiere' | 'community';
       channelId: string;
       channelName: string;
       channelAvatar: string;
@@ -241,7 +241,7 @@ class SubscriptionService {
       return (
         (response.data as Array<{
           id: string;
-          type: 'upload' | 'live' | 'premiere' | 'community';
+          type: "upload" as const | 'live' | 'premiere' | 'community';
           channelId: string;
           channelName: string;
           channelAvatar: string;
@@ -253,7 +253,7 @@ class SubscriptionService {
           isNew: boolean
         }>) || []
       );
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to get subscription activity:', error);
       return [];
     }
@@ -266,7 +266,7 @@ class SubscriptionService {
     try {
       const response = await api.get('/api/subscriptions/export', { format });
       return response.data as string;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to export subscriptions:', error);
       throw error;
     }
@@ -329,7 +329,7 @@ class SubscriptionService {
           averageCommentsPerVideo: number
         };
       };
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to get subscription insights:', error);
       return {
         growthRate: 0,

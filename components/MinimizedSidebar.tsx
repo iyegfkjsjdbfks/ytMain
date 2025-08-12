@@ -1,5 +1,7 @@
 import React, { memo, FC, ReactNode } from 'react';
 import { Link, useLocation  } from 'react-router-dom';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import { QueueListIcon as QueueListSolidIcon, ChartBarIcon as ChartBarSolidIcon, VideoCameraIcon as VideoCameraSolidIcon  } from '@heroicons/react/24/solid';
 const QueueListIconSolid = QueueListSolidIcon;
@@ -22,7 +24,7 @@ interface MinimizedNavItemProps {
   title?: string;
 }
 
-const MinimizedNavItem: React.FC<MinimizedNavItemProps> = React.memo(({ to, icon, label, currentPath, title }) => {
+const MinimizedNavItem: React.FC<MinimizedNavItemProps> = React.memo(({ to, icon, label, currentPath, title }: any) => {
   const isActive = currentPath === to ||
                    (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
 

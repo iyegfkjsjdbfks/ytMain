@@ -1,4 +1,7 @@
 import React, { useCallback, useState } from 'react';
+import { FormEvent } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
 interface UseFormStateOptions<T> {
   initialValues: T;
   validate?: (values: T) => Partial<Record<keyof T, string>>;
@@ -28,11 +31,11 @@ export function useFormState<T extends Record<string, any>>({
   onSubmit }: UseFormStateOptions<T>): UseFormStateReturn<T> {
   const [values, setValuesState] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const setValue = useCallback(
     (field: keyof T, value: string | number) => {
-      setValuesState(prev => ({ ...prev, [field]: value }));
+      setValuesState(prev => ({ ...prev as any, [field]: value }));
       // Clear error when user starts typing
       if (errors[field]) {
         setErrors(prev => {
@@ -46,11 +49,11 @@ export function useFormState<T extends Record<string, any>>({
   );
 
   const setValues = useCallback((newValues: Partial<T>) => {
-    setValuesState(prev => ({ ...prev, ...newValues }));
+    setValuesState(prev => ({ ...prev as any, ...newValues }));
   }, []);
 
   const setError = useCallback((field: keyof T, error: Error) => {
-    setErrors(prev => ({ ...prev, [field]: error }));
+    setErrors(prev => ({ ...prev as any, [field]: error }));
   }, []);
 
   const clearError = useCallback((field: keyof T) => {
@@ -72,13 +75,13 @@ export function useFormState<T extends Record<string, any>>({
   }, [initialValues]);
 
   const handleSubmit = useCallback(
-    async (e?: React.FormEvent) => {
-      if (e) {
+    async (e?: React.FormEvent): Promise<any> => {
+      if (e as any) {
         e.preventDefault();
       }
 
       // Run validation if provided
-      if (validate) {
+      if (validate as any) {
         const validationErrors = validate(values);
         setErrors(validationErrors);
 
@@ -94,8 +97,8 @@ export function useFormState<T extends Record<string, any>>({
       setIsSubmitting(true);
       try {
         await onSubmit(values);
-      } catch (error) {
-        console.error('Form submission error:', error);
+      } catch (error: any) {
+        (console as any).error('Form submission error:', error);
         // You might want to set a general error here
       } finally {
         setIsSubmitting(false);

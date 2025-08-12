@@ -1,4 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 interface UseAsyncDataOptions<T> {
   initialData?: T;
@@ -37,7 +40,7 @@ export function useAsyncData<T>(,
     asyncFunctionRef.current = asyncFunction;
   });
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (): Promise<void> => {
     setLoading(true);
     setError(null);
 
@@ -45,18 +48,18 @@ export function useAsyncData<T>(,
       const result = await asyncFunctionRef.current();
       // Handle empty or null results gracefully
       if (result === null || result === undefined) {
-        console.warn(
+        (console as any).warn(
           'useAsyncData: Received null/undefined result, using initial data'
         );
         setData(initialData as T);
       } else {
         setData(result);
       }
-    } catch (err) {
+    } catch (err: any) {
       const errorMessage =
         err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
-      console.error('useAsyncData error:', err);
+      (console as any).error('useAsyncData error:', err);
       // On error, use initial data if available
       if (initialData !== undefined) {
         setData(initialData as T);
@@ -69,9 +72,9 @@ export function useAsyncData<T>(,
   // Use a more stable dependencies array to prevent infinite re-renders
   // Also delay execution slightly if we have initial data to improve perceived performance
   useEffect(() => {
-    if (initialData) {
+    if (initialData as any) {
       // Delay fetch to improve initial render performance
-      const timeoutId = setTimeout(fetchData, 100);
+      const timeoutId = setTimeout((fetchData) as any, 100);
       return () => clearTimeout(timeoutId);
     }
     fetchData();

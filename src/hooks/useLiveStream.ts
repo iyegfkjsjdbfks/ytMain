@@ -1,5 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { LivePoll, QAQuestion } from '@/types/livestream';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 // Import statement fixed
 //
@@ -11,7 +14,7 @@ interface LiveStreamState {
   error: string | null
 }
 
-export const useLiveStream = (streamId?: string) => {
+export const useLiveStream: any = (streamId?: string) => {
   const [state, setState] = useState<LiveStreamState>({
     isLive: false,
     viewerCount: 0,
@@ -19,32 +22,32 @@ export const useLiveStream = (streamId?: string) => {
     streamQuality: 'auto',
     error: null });
 
-  const startStream = useCallback(async () => {
+  const startStream = useCallback(async (): Promise<void> => {
     try {
       // Implementation here
-      setState(prev => ({ ...prev, isLive: true, error: null }));
-    } catch (error) {
-      setState(prev => ({ ...prev, error: (error as Error).message }));
+      setState(prev => ({ ...prev as any, isLive: true, error: null }));
+    } catch (error: any) {
+      setState(prev => ({ ...prev as any, error: (error as Error).message }));
     }
   }, []);
 
-  const stopStream = useCallback(async () => {
+  const stopStream = useCallback(async (): Promise<void> => {
     try {
       // Implementation here
-      setState(prev => ({ ...prev, isLive: false, error: null }));
-    } catch (error) {
-      setState(prev => ({ ...prev, error: (error as Error).message }));
+      setState(prev => ({ ...prev as any, isLive: false, error: null }));
+    } catch (error: any) {
+      setState(prev => ({ ...prev as any, error: (error as Error).message }));
     }
   }, []);
 
   return {
-    ...state,
+    ...state as any,
     startStream,
     stopStream };
 };
 
 // Lightweight, in-memory implementation for live polls used by livestream components
-export const useLivePolls = (streamId?: string) => {
+export const useLivePolls: any = (streamId?: string) => {
   const [polls, setPolls] = useState<LivePoll[]>([]);
 
   // Reset polls when stream changes
@@ -52,12 +55,12 @@ export const useLivePolls = (streamId?: string) => {
     setPolls([]);
   }, [streamId]);
 
-  const recalcPercentages = (totalVotes: any, votes: any) => {
+  const recalcPercentages: any = (totalVotes: any, votes: any) => {
     if (totalVotes === 0) return 0;
     return (votes / totalVotes) * 100;
   };
 
-  const createPoll = async (question: any, options: any) => {
+  const createPoll = async (question: any, options: any): Promise<any> => {
     const id = `poll_${Math.random().toString(36).slice(2, 9)}`;
     const createdAt = new Date();
     const durationMs = 60 * 1000; // default 60s
@@ -79,19 +82,19 @@ export const useLivePolls = (streamId?: string) => {
     setPolls(prev => [poll, ...prev]);
   };
 
-  const votePoll = async (pollId: any, optionId: any) => {
+  const votePoll = async (pollId: any, optionId: any): Promise<any> => {
     setPolls(prev =>
-      prev.map(p => {
+      prev.map((p: any) => {
         if (p.id !== pollId || !p.isActive) return p;
         const total = p.totalVotes + 1;
         const options = p.options.map((o: any) => {
           const votes = o.id === optionId ? o.votes + 1 : o.votes;
-          return { ...o, votes };
+          return { ...o as any, votes };
         });
         const withPct = options.map((o: any) => ({
-          ...o,
+          ...o as any,
           percentage: recalcPercentages(total, o.votes) }));
-        return { ...p, options: withPct, totalVotes: total };
+        return { ...p as any, options: withPct, totalVotes: total };
       })
     );
   };
@@ -100,7 +103,7 @@ export const useLivePolls = (streamId?: string) => {
 };
 
 // Lightweight, in-memory implementation for Q&A used by livestream components
-export const useLiveQA = (streamId?: string) => {
+export const useLiveQA: any = (streamId?: string) => {
   const [questions, setQuestions] = useState<QAQuestion[]>([]);
 
   // Reset on stream change
@@ -108,7 +111,7 @@ export const useLiveQA = (streamId?: string) => {
     setQuestions([]);
   }, [streamId]);
 
-  const submitQuestion = async (text: any) => {
+  const submitQuestion = async (text: any): Promise<any> => {
     const q: QAQuestion = {
       id: `q_${Math.random().toString(36).slice(2, 9)}`,
       streamId,
@@ -125,12 +128,12 @@ export const useLiveQA = (streamId?: string) => {
     setQuestions(prev => [q, ...prev]);
   };
 
-  const answerQuestion = async (questionId: any, answer: any) => {
+  const answerQuestion = async (questionId: any, answer: any): Promise<any> => {
     setQuestions(prev =>
-      prev.map(q =>
+      prev.map((q: any) =>
         q.id === questionId
           ? {
-              ...q,
+              ...q as any,
               answer,
               answered: true,
               isAnswered: true,
@@ -140,10 +143,10 @@ export const useLiveQA = (streamId?: string) => {
     );
   };
 
-  const upvoteQuestion = async (questionId: any) => {
+  const upvoteQuestion = async (questionId: any): Promise<any> => {
     setQuestions(prev =>
-      prev.map(q =>
-        q.id === questionId ? { ...q, upvotes: (q.upvotes || 0) + 1 } : q
+      prev.map((q: any) =>
+        q.id === questionId ? { ...q as any, upvotes: (q.upvotes || 0) + 1 } : q
       )
     );
   };

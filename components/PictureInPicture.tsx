@@ -1,4 +1,9 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
@@ -25,23 +30,23 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
   isVisible,
   onClose,
   className = '' }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
   const [position, setPosition] = useState({ x: 20,
           y: 20 });
   const [dragOffset, setDragOffset] = useState({ x: 0,
           y: 0 });
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState<boolean>(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove: any = (e: MouseEvent) => {
       if (isDragging && containerRef.current) {
         const newX = e.clientX - dragOffset.x;
         const newY = e.clientY - dragOffset.y;
@@ -56,11 +61,11 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
       }
     };
 
-    const handleMouseUp = () => {
+    const handleMouseUp: any = () => {
       setIsDragging(false);
     };
 
-    if (isDragging) {
+    if (isDragging as any) {
       document.addEventListener('mousemove', handleMouseMove as EventListener);
       document.addEventListener('mouseup', handleMouseUp as EventListener);
     }
@@ -76,8 +81,8 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
 return;
 }
 
-    const updateTime = () => setCurrentTime(video.currentTime);
-    const updateDuration = () => setDuration(video.duration);
+    const updateTime: any = () => setCurrentTime(video.currentTime);
+    const updateDuration: any = () => setDuration(video.duration);
 
     video.addEventListener('timeupdate', updateTime as EventListener);
     video.addEventListener('loadedmetadata', updateDuration as EventListener);
@@ -87,7 +92,7 @@ return;
       video.removeEventListener('loadedmetadata', updateDuration as EventListener);
     }}, []);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown: any = (e: React.MouseEvent) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       setDragOffset({
@@ -97,9 +102,9 @@ return;
     }
   };
 
-  const togglePlay = () => {
+  const togglePlay: any = () => {
     if (videoRef.current) {
-      if (isPlaying) {
+      if (isPlaying as any) {
         videoRef.current.pause();
       } else {
         videoRef.current.play().catch(() => {
@@ -110,30 +115,30 @@ return;
     }
   };
 
-  const toggleMute = () => {
+  const toggleMute: any = () => {
     if (videoRef.current) {
       videoRef.current.muted = !isMuted;
       setIsMuted(!isMuted);
     }
   };
 
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleSeek: any = (e: React.MouseEvent<HTMLDivElement>) => {
     if (videoRef.current && duration > 0) {
       const rect = e.currentTarget.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
-      const newTime = (clickX / rect.width) * duration;
+      const newTime: any = (clickX / rect.width) * duration;
       videoRef.current.currentTime = newTime;
       setCurrentTime(newTime);
     }
   };
 
-  const formatTime = (time: any): string => {
+  const formatTime: any = (time: any): string => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const handleExpand = () => {
+  const handleExpand: any = () => {
     navigate(`/watch/${videoId}`);
     onClose();
   };
@@ -158,7 +163,7 @@ return null;
         // Minimized view
         <div className="w-full h-full flex items-center justify-center bg-gray-900">
           <button
-            onClick={(e) => {
+            onClick={(e: any) => {
               e.stopPropagation();
               setIsMinimized(false);
             
@@ -196,7 +201,7 @@ return null;
               <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
                 <div className="flex space-x-1">
                   <button
-                    onClick={(e) => {
+                    onClick={(e: any) => {
                       e.stopPropagation();
                       setIsMinimized(true);
                     }}
@@ -207,7 +212,7 @@ return null;
                   </button>
 
                   <button
-                    onClick={(e) => {
+                    onClick={(e: any) => {
                       e.stopPropagation();
                       handleExpand();
                     }}
@@ -219,7 +224,7 @@ return null;
                 </div>
 
                 <button
-                  onClick={(e) => {
+                  onClick={(e: any) => {
                     e.stopPropagation();
                     onClose();
                   }}
@@ -233,7 +238,7 @@ return null;
               {/* Center Play Button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <button
-                  onClick={(e) => {
+                  onClick={(e: any) => {
                     e.stopPropagation();
                     togglePlay();
                   }}
@@ -253,7 +258,7 @@ return null;
                 {duration > 0 && (
                   <div
                     className="w-full h-1 bg-white/30 rounded-full mb-2 cursor-pointer"
-                    onClick={handleSeek}
+                    onClick={(e: any) => handleSeek(e)}
                   >
                     <div
                       className="h-full bg-red-500 rounded-full transition-all"
@@ -265,7 +270,7 @@ return null;
                 <div className="flex items-center justify-between text-white text-xs">
                   <div className="flex items-center space-x-2">
                     <button
-                      onClick={(e) => {
+                      onClick={(e: any) => {
                         e.stopPropagation();
                         toggleMute();
                       }}
@@ -286,7 +291,7 @@ return null;
                   </div>
 
                   <button
-                    onClick={(e) => {
+                    onClick={(e: any) => {
                       e.stopPropagation();
                       handleExpand();
                     }}

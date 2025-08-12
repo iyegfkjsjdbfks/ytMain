@@ -37,7 +37,7 @@ class PWAAnalytics {
 
     // Store event for offline tracking
     this.events.push({
-      ...event,
+      ...event as any,
       timestamp: Date.now() } as PWAAnalyticsEvent & { timestamp: number });
 
     // Send to Google Analytics if available
@@ -331,7 +331,7 @@ class PWAAnalytics {
 
       // Clear events after successful sync
       this.clearStoredEvents();
-    } catch (error) {
+    } catch (error: any) {
       const networkError = createNetworkError(
         `Failed to sync PWA analytics events: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'analytics-endpoint'

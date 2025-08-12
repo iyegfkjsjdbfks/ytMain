@@ -128,115 +128,115 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     performance: 'high',
     complexity: 'moderate' } };
 
-export const getSettings = (): Settings => {
-  const stored = localStorage.getItem('appSettings');
-  if (stored) {
+export const getSettings: any = (): Settings => {
+  const stored = (localStorage as any).getItem('appSettings');
+  if (stored as any) {
     try {
-      return { ...defaultSettings, ...JSON.parse(stored) };
-    } catch (error) {
-      console.error('Error parsing stored settings:', error);
+      return { ...defaultSettings as any, ...JSON.parse(stored) };
+    } catch (error: any) {
+      (console as any).error('Error parsing stored settings:', error);
     }
   }
   return defaultSettings;
 };
 
-export const saveSettings = (settings: Settings): void => {
-  localStorage.setItem('appSettings', JSON.stringify(settings));
+export const saveSettings: any = (settings: Settings): void => {
+  (localStorage as any).setItem('appSettings', JSON.stringify(settings));
 };
 
-export const getYouTubePlayerType = (): YouTubePlayerType => {
+export const getYouTubePlayerType: any = (): YouTubePlayerType => {
   return getSettings().youtubePlayerType;
 };
 
-export const setYouTubePlayerType = (playerType: YouTubePlayerType): void => {
+export const setYouTubePlayerType: any = (playerType: YouTubePlayerType): void => {
   const settings = getSettings();
-  saveSettings({ ...settings, youtubePlayerType: playerType });
+  saveSettings({ ...settings as any, youtubePlayerType: playerType });
 };
 
-export const getLocalVideoPlayerType = (): LocalVideoPlayerType => {
+export const getLocalVideoPlayerType: any = (): LocalVideoPlayerType => {
   return getSettings().localVideoPlayerType;
 };
 
-export const setLocalVideoPlayerType = (playerType: LocalVideoPlayerType): void => {
+export const setLocalVideoPlayerType: any = (playerType: LocalVideoPlayerType): void => {
   const settings = getSettings();
-  saveSettings({ ...settings, localVideoPlayerType: playerType });
+  saveSettings({ ...settings as any, localVideoPlayerType: playerType });
 };
 
-export const getDefaultVideoPlayerCategory = (): 'youtube' | 'local' => {
+export const getDefaultVideoPlayerCategory: any = (): 'youtube' | 'local' => {
   return getSettings().defaultVideoPlayerCategory;
 };
 
-export const setDefaultVideoPlayerCategory = (category: 'youtube' | 'local'): void => {
+export const setDefaultVideoPlayerCategory: any = (category: 'youtube' | 'local'): void => {
   const settings = getSettings();
-  saveSettings({ ...settings, defaultVideoPlayerCategory: category });
+  saveSettings({ ...settings as any, defaultVideoPlayerCategory: category });
 };
 
-export const getVideoPlayerConfig = (type: VideoPlayerType): VideoPlayerConfig => {
+export const getVideoPlayerConfig: any = (type: VideoPlayerType): VideoPlayerConfig => {
   return VIDEO_PLAYER_CONFIGS[type];
 };
 
-export const getVideoPlayersByCategory = (category: 'youtube' | 'local'): VideoPlayerConfig[] => {
-  return Object.values(VIDEO_PLAYER_CONFIGS).filter(config => config.category === category);
+export const getVideoPlayersByCategory: any = (category: 'youtube' | 'local'): VideoPlayerConfig[] => {
+  return Object.values(VIDEO_PLAYER_CONFIGS).filter((config: any) => config.category === category);
 };
 
-export const getAllVideoPlayers = (): VideoPlayerConfig[] => {
+export const getAllVideoPlayers: any = (): VideoPlayerConfig[] => {
   return Object.values(VIDEO_PLAYER_CONFIGS);
 };
 
 // Enabled Players Management
-export const getEnabledYouTubePlayers = (): YouTubePlayerType[] => {
+export const getEnabledYouTubePlayers: any = (): YouTubePlayerType[] => {
   return getSettings().enabledYouTubePlayers;
 };
 
-export const getEnabledLocalPlayers = (): LocalVideoPlayerType[] => {
+export const getEnabledLocalPlayers: any = (): LocalVideoPlayerType[] => {
   return getSettings().enabledLocalPlayers;
 };
 
-export const setEnabledYouTubePlayers = (players: YouTubePlayerType): void => {
+export const setEnabledYouTubePlayers: any = (players: YouTubePlayerType): void => {
   const settings = getSettings();
-  saveSettings({ ...settings, enabledYouTubePlayers: players });
+  saveSettings({ ...settings as any, enabledYouTubePlayers: players });
 };
 
-export const setEnabledLocalPlayers = (players: LocalVideoPlayerType): void => {
+export const setEnabledLocalPlayers: any = (players: LocalVideoPlayerType): void => {
   const settings = getSettings();
-  saveSettings({ ...settings, enabledLocalPlayers: players });
+  saveSettings({ ...settings as any, enabledLocalPlayers: players });
 };
 
-export const toggleYouTubePlayer = (playerType: YouTubePlayerType): void => {
+export const toggleYouTubePlayer: any = (playerType: YouTubePlayerType): void => {
   const settings = getSettings();
   const enabled = settings.enabledYouTubePlayers;
   const isEnabled = enabled.includes(playerType);
 
-  if (isEnabled) {
+  if (isEnabled as any) {
     // Don't allow disabling if it's the only enabled player
     if (enabled.length > 1) {
       settings.enabledYouTubePlayers = enabled.filter((p: any) => p !== playerType)
     }
   } else {
-    settings.enabledYouTubePlayers = [...enabled, playerType];
+    settings.enabledYouTubePlayers = [...enabled as any, playerType];
   }
 
   saveSettings(settings);
 };
 
-export const toggleLocalPlayer = (playerType: LocalVideoPlayerType): void => {
+export const toggleLocalPlayer: any = (playerType: LocalVideoPlayerType): void => {
   const settings = getSettings();
   const enabled = settings.enabledLocalPlayers;
   const isEnabled = enabled.includes(playerType);
 
-  if (isEnabled) {
+  if (isEnabled as any) {
     // Don't allow disabling if it's the only enabled player
     if (enabled.length > 1) {
       settings.enabledLocalPlayers = enabled.filter((p: any) => p !== playerType)
     }
   } else {
-    settings.enabledLocalPlayers = [...enabled, playerType];
+    settings.enabledLocalPlayers = [...enabled as any, playerType];
   }
 
   saveSettings(settings);
 };
 
-export const isPlayerEnabled = (playerType: VideoPlayerType): boolean => {
+export const isPlayerEnabled: any = (playerType: VideoPlayerType): boolean => {
   const settings = getSettings();
   const config = VIDEO_PLAYER_CONFIGS[playerType];
 
@@ -248,76 +248,76 @@ export const isPlayerEnabled = (playerType: VideoPlayerType): boolean => {
 };
 
 // Get current YouTube search provider
-export const getYouTubeSearchProvider = (): YouTubeSearchProvider => {
+export const getYouTubeSearchProvider: any = (): YouTubeSearchProvider => {
   // Always use hybrid mode to ensure fallback mechanism works
   return 'hybrid';
 };
 
 // Set YouTube search provider
-export const setYouTubeSearchProvider = (provider: YouTubeSearchProvider): void => {
+export const setYouTubeSearchProvider: any = (provider: YouTubeSearchProvider): void => {
   const settings = getSettings();
   settings.youtubeSearchProvider = provider;
   saveSettings(settings);
 };
 
 // Check if Google Custom Search is available
-export const isGoogleSearchAvailable = (): boolean => {
+export const isGoogleSearchAvailable: any = (): boolean => {
   const apiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
   const engineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
   return !!(apiKey && engineId);
 };
 
 // Check if YouTube Data API is configured (has API key)
-export const isYouTubeApiConfigured = (): boolean => {
+export const isYouTubeApiConfigured: any = (): boolean => {
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   return !!apiKey;
 };
 
 // Check if YouTube Data API is available for use (configured and not blocked)
-export const isYouTubeApiAvailable = (): boolean => {
+export const isYouTubeApiAvailable: any = (): boolean => {
   return isYouTubeApiConfigured() && !isYouTubeDataApiBlocked();
 };
 
 // Check if hybrid mode is available (both APIs configured)
-export const isHybridModeAvailable = (): boolean => {
+export const isHybridModeAvailable: any = (): boolean => {
   return isYouTubeApiConfigured() && isGoogleSearchAvailable();
 };
 
 // Get initial search keyword
-export const getInitialSearchKeyword = (): string => {
+export const getInitialSearchKeyword: any = (): string => {
   return getSettings().initialSearchKeyword || 'trending';
 };
 
 // Set initial search keyword
-export const setInitialSearchKeyword = (keyword: any): void => {
+export const setInitialSearchKeyword: any = (keyword: any): void => {
   const settings = getSettings();
-  saveSettings({ ...settings, initialSearchKeyword: keyword });
+  saveSettings({ ...settings as any, initialSearchKeyword: keyword });
 };
 
 // Page-specific configuration management
 export type PageType = 'watchPage' | 'homePage' | 'searchResultsPage';
 
-export const getPagePlayerConfig = (page: PageType): PagePlayerConfig => {
+export const getPagePlayerConfig: any = (page: PageType): PagePlayerConfig => {
   const settings = getSettings();
   return settings.pageConfigurations?.[page] || defaultSettings.pageConfigurations![page];
 };
 
-export const setPagePlayerConfig = (page: PageType, config: PagePlayerConfig): void => {
+export const setPagePlayerConfig: any = (page: PageType, config: PagePlayerConfig): void => {
   const settings = getSettings();
   const pageConfigurations = settings.pageConfigurations || defaultSettings.pageConfigurations!;
   saveSettings({
-    ...settings,
+    ...settings as any,
     pageConfigurations: {
-      ...pageConfigurations,
+      ...pageConfigurations as any,
       [page]: config } });
 };
 
-export const getAllPageConfigurations = (): Record<PageType, PagePlayerConfig> => {
+export const getAllPageConfigurations: any = (): Record<PageType, PagePlayerConfig> => {
   const settings = getSettings();
   return settings.pageConfigurations || defaultSettings.pageConfigurations!;
 };
 
-export const getPageDisplayName = (page: PageType): string => {
+export const getPageDisplayName: any = (page: PageType): string => {
   const displayNames: Record<PageType, string> = {
     watchPage: 'WatchPage',
     homePage: 'HomePage',
@@ -325,7 +325,7 @@ export const getPageDisplayName = (page: PageType): string => {
   return displayNames[page];
 };
 
-export const getPlayerUsageByPage = (playerType: VideoPlayerType): PageType[] => {
+export const getPlayerUsageByPage: any = (playerType: VideoPlayerType): PageType[] => {
   const pageConfigs = getAllPageConfigurations();
   const config = VIDEO_PLAYER_CONFIGS[playerType];
   const pages: PageType = [];
@@ -335,7 +335,7 @@ export const getPlayerUsageByPage = (playerType: VideoPlayerType): PageType[] =>
       ? pageConfig.youtubePlayer === playerType
       : pageConfig.localPlayer === playerType;
 
-    if (isUsed) {
+    if (isUsed as any) {
       pages.push(page as PageType);
     }
   });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 interface Category {
   id: 'all' | 'music' | 'gaming' | 'news' | 'movies';,
   label: string; icon: string
@@ -9,7 +10,7 @@ interface CategoryTabsProps {
   activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies'; setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void
 }
 
-const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }) => {
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: any) => {
   return (
     <div className="mb-6">
       <div className="flex space-x-1 overflow-x-auto no-scrollbar">

@@ -1,5 +1,7 @@
 import React, { useState, FC } from 'react';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { FC } from 'react';
+import { useState } from 'react';
 const BellIconSolid = BellSolidIcon;
 
 import { BellSlashIcon, BellIcon  } from '@heroicons/react/24/outline';
@@ -24,7 +26,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
   size = 'md',
   showNotificationBell = true,
   variant = 'default' }) => {
-  const [showNotificationMenu, setShowNotificationMenu] = useState(false);
+  const [showNotificationMenu, setShowNotificationMenu] = useState<boolean>(false);
 
   const {
     isSubscribed,
@@ -34,8 +36,8 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
     unsubscribe,
     updateNotificationLevel } = useSubscription(channelId);
 
-  const handleSubscriptionToggle = async () => {
-    if (isSubscribed) {
+  const handleSubscriptionToggle = async (): Promise<void> => {
+    if (isSubscribed as any) {
       await unsubscribe();
     } else {
       await subscribe();
@@ -44,12 +46,12 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
 
   const handleNotificationChange = async (
   level: 'all' | 'personalized' | 'none'
-  ) => {
+  ): Promise<any> => {
     await updateNotificationLevel(level);
     setShowNotificationMenu(false);
   };
 
-  const formatSubscriberCount = (count?: number): string => {
+  const formatSubscriberCount: any = (count?: number): string => {
     if (!count) {
       return '';
     }
@@ -62,8 +64,8 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
     return count.toString();
   };
 
-  const getSizeClasses = () => {
-    switch (size) {
+  const getSizeClasses: any = () => {
+    switch (size as any) {
       case 'sm':
         return 'px-3 py-1.5 text-sm';
       case 'lg':
@@ -72,8 +74,8 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
     }
   };
 
-  const getNotificationIcon = () => {
-    switch (notificationLevel) {
+  const getNotificationIcon: any = () => {
+    switch (notificationLevel as any) {
       case 'all':
         return <BellSolidIcon className='w-4 h-4' />;
       case 'personalized':
@@ -88,7 +90,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
     return (
       <div className={`flex items-center gap-2 ${className}`}>
         <button
-          onClick={handleSubscriptionToggle}
+          onClick={(e: any) => handleSubscriptionToggle(e)}
           disabled={isLoading}
           className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 ${
             isSubscribed
@@ -187,7 +189,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <button
-        onClick={handleSubscriptionToggle}
+        onClick={(e: any) => handleSubscriptionToggle(e)}
         disabled={isLoading}
         className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 flex items-center gap-2 ${
           isSubscribed

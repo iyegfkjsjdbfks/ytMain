@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * GoLivePage component for starting and managing live streams
  */

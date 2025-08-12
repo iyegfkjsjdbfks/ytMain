@@ -1,4 +1,11 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { useEffect, useCallback, useRef, useState, memo, FC, ReactNode, MouseEvent  } from 'react';
 
@@ -21,26 +28,26 @@ interface HeaderProps {
   toggleSidebar: () => void
 }
 
-const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }) => {
+const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }: any) => {
   const commonClasses = 'flex items-center px-4 py-3 text-sm w-full text-left text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors duration-150';
 
-  const content = (
+  const content: any = (
     <>
       {icon && <span className="mr-3.5 w-5 h-5 text-neutral-500 dark:text-neutral-300">{icon}</span>}
       {children}
     </>
   );
 
-  if (to) {
+  if (to as any) {
     return (
-      <Link to={to} onClick={onClick} className={commonClasses} role="menuitem">
+      <Link to={to} onClick={(e: any) => onClick(e)} className={commonClasses} role="menuitem">
         {content}
       </Link>
     );
   }
   return (
     <button
-      onClick={onClick}
+      onClick={(e: any) => onClick(e)}
       className={commonClasses}
       role="menuitem"
     >
@@ -86,7 +93,7 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
     <div className="relative" ref={userMenuRef}>
       <button
         ref={userMenuButtonRef}
-        onClick={toggleUserMenu}
+        onClick={(e: any) => toggleUserMenu(e)}
         className={`p-1.5 rounded-full transition-colors ${isUserMenuOpen ? 'bg-neutral-300 dark:bg-neutral-700' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}`}
         aria-label="User account options"
         aria-expanded={isUserMenuOpen}
@@ -108,10 +115,10 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
   );
 };
 
-const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
-  const [isCreateMenuOpen, setIsCreateMenuOpen] = useState(false);
+const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }: any) => {
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
+  const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState<boolean>(false);
+  const [isCreateMenuOpen, setIsCreateMenuOpen] = useState<boolean>(false);
 
   const userMenuRef = useRef<HTMLDivElement>(null);
   const userMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -120,22 +127,22 @@ const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
   const createMenuRef = useRef<HTMLDivElement>(null);
   const createButtonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleUserMenu = () => {
+  const toggleUserMenu: any = () => {
     setIsUserMenuOpen(prev => !prev);
-    if (isNotificationsPanelOpen) {
+    if (isNotificationsPanelOpen as any) {
 setIsNotificationsPanelOpen(false);
 }
-    if (isCreateMenuOpen) {
+    if (isCreateMenuOpen as any) {
 setIsCreateMenuOpen(false);
 }
   };
 
-  const toggleCreateMenu = () => {
+  const toggleCreateMenu: any = () => {
     setIsCreateMenuOpen(prev => !prev);
-    if (isUserMenuOpen) {
+    if (isUserMenuOpen as any) {
 setIsUserMenuOpen(false);
 }
-    if (isNotificationsPanelOpen) {
+    if (isNotificationsPanelOpen as any) {
 setIsNotificationsPanelOpen(false);
 }
   };
@@ -145,7 +152,7 @@ setIsNotificationsPanelOpen(false);
   const handleCloseCreateMenu = useCallback(() => setIsCreateMenuOpen(false), []);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       // User Menu
       if (
         userMenuRef.current &&
@@ -190,7 +197,7 @@ setIsNotificationsPanelOpen(false);
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
       <div className="flex items-center">
         <button
-          onClick={toggleSidebar}
+          onClick={(e: any) => toggleSidebar(e)}
           className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
           aria-label="Toggle sidebar menu"
           title="Menu"
@@ -214,7 +221,7 @@ setIsNotificationsPanelOpen(false);
         <div className="relative">
             <button
               ref={createButtonRef}
-              onClick={toggleCreateMenu}
+              onClick={(e: any) => toggleCreateMenu(e)}
               className={`p-2 rounded-full text-neutral-700 dark:text-neutral-100 transition-all duration-150 ease-in-out
                 ${isCreateMenuOpen ? 'bg-neutral-300 dark:bg-neutral-600 scale-95' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}
               `}
@@ -236,8 +243,8 @@ setIsNotificationsPanelOpen(false);
                     aria-orientation="vertical"
                     aria-labelledby="create-button"
                 >
-                    <CreateMenuItem icon={<ArrowUpTrayIcon />} to="/upload" onClick={handleCloseCreateMenu}>Upload video</CreateMenuItem>
-                    <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={handleCloseCreateMenu}>Go live</CreateMenuItem>
+                    <CreateMenuItem icon={<ArrowUpTrayIcon />} to="/upload" onClick={(e: any) => handleCloseCreateMenu(e)}>Upload video</CreateMenuItem>
+                    <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={(e: any) => handleCloseCreateMenu(e)}>Go live</CreateMenuItem>
                     <CreateMenuItem icon={<PencilSquareIcon />} onClick={() => {
  window.open('https://studio.youtube.com/channel/community', '_blank'); handleCloseCreateMenu();
 
@@ -246,7 +253,7 @@ setIsNotificationsPanelOpen(false);
                     <CreateMenuItem
                         icon={<LightBulbIcon />}
                         to="/ai-content-spark"
-                        onClick={handleCloseCreateMenu}
+                        onClick={(e: any) => handleCloseCreateMenu(e)}
                     >
                         AI Content Spark ✨
                     </CreateMenuItem>

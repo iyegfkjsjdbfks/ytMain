@@ -1,3 +1,7 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useState, FC } from 'react';
 
@@ -36,20 +40,20 @@ interface SubscriptionsPageProps {
   className?: string;
 }
 
-const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }) => {
+const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }: any) => {
   const [subscriptions, setSubscriptions] = useState<SubscriptionData[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState('alphabetical');
   const [filterBy, setFilterBy] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [bulkActionMode, setBulkActionMode] = useState(false);
+  const [bulkActionMode, setBulkActionMode] = useState<boolean>(false);
   const [selectedSubscriptions, setSelectedSubscriptions] = useState<Set<string>>(new Set());
   const [showUnsubscribeModal, setShowUnsubscribeModal] = useState<string | null>(null);
 
   useEffect(() => {
     // Simulate fetching subscriptions from an API or local storage
-    const storedSubscriptions = localStorage.getItem('youtubeCloneSubscriptions_v1');
-    if (storedSubscriptions) {
+    const storedSubscriptions = (localStorage as any).getItem('youtubeCloneSubscriptions_v1');
+    if (storedSubscriptions as any) {
       setSubscriptions(JSON.parse(storedSubscriptions));
     } else {
       // Mock data if no subscriptions are found
@@ -170,15 +174,15 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           views: 70000, uploadedAt: '2024-06-08T14:00:00Z',
           duration: '25:00' }] }];
       setSubscriptions(mockSubscriptions);
-      localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(mockSubscriptions));
+      (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(mockSubscriptions));
     }
   }, []);
 
-  const filterSubscriptions = () => {
+  const filterSubscriptions: any = () => {
     let filtered = subscriptions;
 
-    if (searchQuery) {
-      filtered = filtered.filter(sub =>
+    if (searchQuery as any) {
+      filtered = filtered.filter((sub: any) =>
         sub.channelName.toLowerCase().includes(searchQuery.toLowerCase()));
     }
 
@@ -192,7 +196,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
       filtered = filtered.filter((sub) => sub.lastVideoUpload && (new Date().getTime() - new Date(sub.lastVideoUpload).getTime()) < (7 * 24 * 60 * 60 * 1000)); // Last 7 days
     }
 
-    switch (sortBy) {
+    switch (sortBy as any) {
       case 'alphabetical':
         filtered.sort((a, b) => a.channelName.localeCompare(b.channelName));
         break;
@@ -210,30 +214,30 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     return filtered;
   };
 
-  const toggleNotifications = (channelId: any) => {
-    setSubscriptions(prev => prev.map(sub =>
+  const toggleNotifications: any = (channelId: any) => {
+    setSubscriptions(prev => prev.map((sub: any) =>
       sub.channelId === channelId
-        ? { ...sub, notificationsEnabled: !sub.notificationsEnabled }
+        ? { ...sub as any, notificationsEnabled: !sub.notificationsEnabled }
         : sub));
     // Update localStorage
-    const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+    const stored = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
     const updatedStored = { ...stored };
     if (updatedStored[channelId]) {
       updatedStored[channelId].notificationsEnabled = !updatedStored[channelId].notificationsEnabled;
     }
-    localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(updatedStored));
+    (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(updatedStored));
   };
 
-  const handleUnsubscribe = (channelId: any) => {
+  const handleUnsubscribe: any = (channelId: any) => {
     setSubscriptions(prev => prev.filter((sub) => sub.channelId !== channelId));
     // Update localStorage
-    const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+    const stored = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
     delete stored[channelId];
-    localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(stored));
+    (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(stored));
     setShowUnsubscribeModal(null);
   };
 
-  const toggleBulkSelection = (channelId: any) => {
+  const toggleBulkSelection: any = (channelId: any) => {
     setSelectedSubscriptions(prev => {
       const newSet = new Set(prev);
       if (newSet.has(channelId)) {
@@ -245,7 +249,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     });
   };
 
-  const handleBulkAction = (action: 'unsubscribe' | 'toggle_notifications') => {
+  const handleBulkAction: any = (action: 'unsubscribe' | 'toggle_notifications') => {
     selectedSubscriptions.forEach(channelId => {
       if (action === 'unsubscribe') {
         handleUnsubscribe(channelId);

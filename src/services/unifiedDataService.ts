@@ -95,7 +95,7 @@ class UnifiedDataService {
   private cache = new Map<string, { data: any; timestamp: number }>();
 
   constructor(config: Partial<UnifiedDataConfig> = {}) {
-    this.config = { ...defaultConfig, ...config };
+    this.config = { ...defaultConfig as any, ...config };
   }
 
   /**
@@ -109,7 +109,7 @@ class UnifiedDataService {
     const cached =
       this.getCachedData<UnifiedDataResponse<UnifiedVideoMetadata>>(cacheKey);
 
-    if (cached) {
+    if (cached as any) {
       return cached;
     }
 
@@ -172,7 +172,7 @@ class UnifiedDataService {
     const cached =
       this.getCachedData<UnifiedDataResponse<UnifiedVideoMetadata>>(cacheKey);
 
-    if (cached) {
+    if (cached as any) {
       return cached;
     }
 
@@ -241,7 +241,7 @@ class UnifiedDataService {
 
     // Handle URLs that might be passed as IDs
     const youtubeId = getYouTubeVideoId(id);
-    if (youtubeId) {
+    if (youtubeId as any) {
       return youtubeId;
     }
 
@@ -262,7 +262,7 @@ class UnifiedDataService {
     const cacheKey = `video:${id}`;
     const cached = this.getCachedData<UnifiedVideoMetadata>(cacheKey);
 
-    if (cached) {
+    if (cached as any) {
       logger.debug(
         `✅ UnifiedDataService: Returning cached video for ID: ${id}`
       );
@@ -287,7 +287,7 @@ class UnifiedDataService {
         const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
         if (youtubeVideos.length > 0) {
           const video = youtubeVideos[0];
-          if (video) {
+          if (video as any) {
             logger.debug(
               '✅ Successfully fetched metadata from YouTube Data API v3 (primary source):',
               video.title
@@ -345,7 +345,7 @@ class UnifiedDataService {
             return normalized;
           }
         }
-      } catch (error) {
+      } catch (error: any) {
         logger.warn(
           '⚠️ YouTube Data API v3 failed for metadata, falling back to Google Custom Search:',
           error
@@ -370,7 +370,7 @@ class UnifiedDataService {
         googleSearchVideo
       );
 
-      if (googleSearchVideo) {
+      if (googleSearchVideo as any) {
         logger.debug(
           `✅ Found Google Custom Search video in store: ${googleSearchVideo.title}`
         );
@@ -466,7 +466,7 @@ class UnifiedDataService {
           '🔄 fetchSingleVideoFromGoogleSearch returned:',
           googleSearchVideo
         );
-        if (googleSearchVideo) {
+        if (googleSearchVideo as any) {
           logger.debug(
             `✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`
           );
@@ -527,7 +527,7 @@ class UnifiedDataService {
           this.setCachedData(cacheKey, normalized);
           return normalized;
         }
-      } catch (error) {
+      } catch (error: any) {
         logger.error(
           '❌ Failed to fetch video from Google Custom Search API:',
           error
@@ -560,7 +560,7 @@ class UnifiedDataService {
       `UnifiedDataService: Extracted YouTube ID: ${youtubeId} from ${id}`
     );
 
-    if (youtubeId) {
+    if (youtubeId as any) {
       // Check if YouTube API is blocked by admin settings
       const youtubeApiBlocked = isYouTubeDataApiBlocked();
 
@@ -576,7 +576,7 @@ class UnifiedDataService {
           if (youtubeVideos.length > 0) {
             const video = youtubeVideos[0];
             logger.debug('Successfully fetched YouTube video:', video);
-            if (video) {
+            if (video as any) {
               logger.debug('Video metadata details:', {
                 id: video.id,
                 title: video.title,
@@ -648,10 +648,10 @@ class UnifiedDataService {
             this.setCachedData(cacheKey, normalized);
             return normalized;
           }
-        } catch (error) {
+        } catch (error: any) {
           logger.warn('Failed to fetch YouTube video:', error);
         }
-      } else if (youtubeApiBlocked) {
+      } else if (youtubeApiBlocked as any) {
         logger.debug(
           '🔒 YouTube API is blocked by admin settings (Google Custom Search selected). Skipping YouTube API fetch.'
         );
@@ -721,7 +721,7 @@ class UnifiedDataService {
             this.setCachedData(cacheKey, normalized);
             return normalized;
           }
-        } catch (error) {
+        } catch (error: any) {
           logger.warn('Failed to fetch YouTube video as fallback:', error);
         }
       }
@@ -738,7 +738,7 @@ class UnifiedDataService {
     const cacheKey = `channel:${id}`;
     const cached = this.getCachedData<UnifiedChannelMetadata>(cacheKey);
 
-    if (cached) {
+    if (cached as any) {
       return cached;
     }
 
@@ -746,7 +746,7 @@ class UnifiedDataService {
     if (this.config.sources.youtube) {
       try {
         const youtubeChannel = await youtubeService.fetchChannel(id);
-        if (youtubeChannel) {
+        if (youtubeChannel as any) {
           const normalized =
             metadataNormalizationService.normalizeYouTubeChannel(
               youtubeChannel as any
@@ -754,7 +754,7 @@ class UnifiedDataService {
           this.setCachedData(cacheKey, normalized);
           return normalized;
         }
-      } catch (error) {
+      } catch (error: any) {
         logger.warn('Failed to fetch YouTube channel:', error);
       }
     }
@@ -768,7 +768,7 @@ class UnifiedDataService {
   async getShortsVideos(,
   limit: number = 30
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
-    const filters: UnifiedSearchFilters = { type: 'short' };
+    const filters: UnifiedSearchFilters = { type: "short" as const };
     return this.getTrendingVideos(limit, filters);
   }
 
@@ -799,14 +799,14 @@ class UnifiedDataService {
 
       // Try Google Custom Search for discovery first
       return this.searchGoogleCustomSearchVideos('trending videos', filters);
-    } catch (error) {
+    } catch (error: any) {
       logger.error(
         'Failed to fetch trending videos from Google Custom Search:',
         error
       );
 
       // Fallback to YouTube Data API v3 for discovery if Google Custom Search fails
-      if (API_KEY) {
+      if (API_KEY as any) {
         logger.debug('🔄 Falling back to YouTube Data API v3 for discovery');
         const trendingQueries = [
           'trending',
@@ -817,7 +817,7 @@ class UnifiedDataService {
           'news'];
         const randomQuery =
           trendingQueries[Math.floor(Math.random() * trendingQueries.length)];
-        if (randomQuery) {
+        if (randomQuery as any) {
           return this.searchYouTubeVideos(randomQuery, filters);
         }
       }
@@ -914,7 +914,7 @@ class UnifiedDataService {
         `✅ Converted ${unifiedVideos.length} Google Custom Search results to unified format`
       );
       return unifiedVideos;
-    } catch (error) {
+    } catch (error: any) {
       logger.error(
         'Failed to search videos using Google Custom Search:',
         error
@@ -998,7 +998,7 @@ class UnifiedDataService {
         `Found ${unifiedVideos.length} YouTube videos for query: ${query}`
       );
       return unifiedVideos;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to search YouTube videos:', error);
       return [];
     }
@@ -1074,9 +1074,9 @@ class UnifiedDataService {
     limit: number
   ): UnifiedVideoMetadata[] {
     // Combine all videos and sort by relevance (views, likes, recency)
-    const allVideos = [...localVideos, ...youtubeVideos];
+    const allVideos = [...localVideos as any, ...youtubeVideos];
 
-    allVideos.sort((a, b) => {
+    allVideos.sort((a: any, b: any) => {
       // Simple relevance scoring based on views and engagement
       const scoreA = a.views + a.likes * 10 + a.commentCount * 5;
       const scoreB = b.views + b.likes * 10 + b.commentCount * 5;
@@ -1099,7 +1099,7 @@ class UnifiedDataService {
     }
 
     const isExpired = Date.now() - cached.timestamp > this.config.caching.ttl;
-    if (isExpired) {
+    if (isExpired as any) {
       this.cache.delete(key);
       return null;
     }

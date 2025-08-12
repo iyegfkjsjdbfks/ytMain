@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef, FC, KeyboardEvent, MouseEvent } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon, ClockIcon, CalendarDaysIcon, VideoCameraIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import { MouseEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export interface SearchFilters {
   duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min,
   uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';,
-  type: 'any' | 'video' | 'channel' | 'playlist' | 'live';
+  type: "any" as const | 'video' | 'channel' | 'playlist' | 'live';
   quality: 'any' | 'hd' | '4k';,
   features: string[]; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr,
   sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating'
@@ -23,13 +28,13 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   initialQuery = '',
   className = '' }) => {
   const [query, setQuery] = useState(initialQuery);
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [filters, setFilters] = useState<SearchFilters>({
     duration: 'any',
           uploadDate: 'any',
-    type: 'any',
+    type: "any" as const,
           quality: 'any',
     features: [],
           sortBy: 'relevance' });
@@ -39,7 +44,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
         setShowFilters(false);
@@ -58,7 +63,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     }
   }, [query]);
 
-  const generateSuggestions = (searchQuery: any) => {
+  const generateSuggestions: any = (searchQuery: any) => {
     // Mock search suggestions - in real app, this would call an API
     const mockSuggestions = [
       'react tutorial',
@@ -73,20 +78,20 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       'data structures'];
 
     const filtered = mockSuggestions
-      .filter(suggestion =>
+      .filter((suggestion: any) =>
         suggestion.toLowerCase().includes(searchQuery.toLowerCase()))
       .slice(0, 8);
 
     setSuggestions(filtered);
   };
 
-  const handleSearch = (searchQuery?: string) => {
+  const handleSearch: any = (searchQuery?: string) => {
     const finalQuery = searchQuery || query;
     if (finalQuery.trim()) {
       // Save to search history
-      const searchHistory = JSON.parse(localStorage.getItem('youtubeCloneSearchHistory_v1') || '[]');
+      const searchHistory = JSON.parse((localStorage as any).getItem('youtubeCloneSearchHistory_v1') || '[]');
       const updatedHistory = [finalQuery, ...searchHistory.filter((h: any) => h !== finalQuery)].slice(0, 20);
-      localStorage.setItem('youtubeCloneSearchHistory_v1', JSON.stringify(updatedHistory));
+      (localStorage as any).setItem('youtubeCloneSearchHistory_v1', JSON.stringify(updatedHistory));
 
       onSearch(finalQuery, filters);
       setShowSuggestions(false);
@@ -120,7 +125,7 @@ searchParams.set('sort_by', filters.sortBy);
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress: any = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSearch();
     } else if (e.key === 'Escape') {
@@ -129,25 +134,25 @@ searchParams.set('sort_by', filters.sortBy);
     }
   };
 
-  const toggleFeature = (feature: any) => {
+  const toggleFeature: any = (feature: any) => {
     setFilters(prev => ({
-      ...prev,
+      ...prev as any,
       features: prev.features.includes(feature)
         ? prev.features.filter((f) => f !== feature)
         : [...prev.features, feature] }));
   };
 
-  const clearFilters = () => {
+  const clearFilters: any = () => {
     setFilters({
       duration: 'any',
           uploadDate: 'any',
-      type: 'any',
+      type: "any" as const,
           quality: 'any',
       features: [],
           sortBy: 'relevance' });
   };
 
-  const hasActiveFilters = () => {
+  const hasActiveFilters: any = () => {
     return filters.duration !== 'any' ||
            filters.uploadDate !== 'any' ||
            filters.type !== 'any' ||
@@ -233,7 +238,7 @@ searchParams.set('sort_by', filters.sortBy);
             <div className="flex space-x-2">
               {hasActiveFilters() && (
                 <button
-                  onClick={clearFilters}
+                  onClick={(e: any) => clearFilters(e)}
                   className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   Clear all
@@ -258,7 +263,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="duration-filter"
                 value={filters.duration}
-                onChange={(e) => setFilters(prev => ({ ...prev, duration: e.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev as any, duration: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="any">Any duration</option>
@@ -277,7 +282,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="upload-date-filter"
                 value={filters.uploadDate}
-                onChange={(e) => setFilters(prev => ({ ...prev, uploadDate: e.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev as any, uploadDate: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="any">Any time</option>
@@ -298,7 +303,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="type-filter"
                 value={filters.type}
-                onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev as any, type: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="any">Any type</option>
@@ -318,7 +323,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="sort-by-filter"
                 value={filters.sortBy}
-                onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev as any, sortBy: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="relevance">Relevance</option>

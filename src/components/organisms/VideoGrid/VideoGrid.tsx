@@ -10,13 +10,13 @@ export interface VideoGridProps
   onVideoMoreClick: (videoId: any) => void
 }
 
-export const VideoGrid = ({
+export const VideoGrid: any = ({
   videos,
   className,
   loading = false,
   skeletonCount = 12,
   onVideoMoreClick }: VideoGridProps) => {
-  if (loading) {
+  if (loading as any) {
     return (
       <div
         className={cn(
@@ -50,7 +50,7 @@ export const VideoGrid = ({
 };
 
 // Skeleton component for loading state
-const VideoCardSkeleton = () => {
+const VideoCardSkeleton: any = () => {
   return (
     <div className='flex flex-col space-y-2'>
       <div className='aspect-video bg-muted rounded-lg animate-pulse' />

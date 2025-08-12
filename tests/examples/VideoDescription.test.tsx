@@ -52,7 +52,7 @@ describe('VideoDescription Component', () => {
   });
 
   describe('Rendering', () => {
-    it('should render video information correctly', async () => {
+    it('should render video information correctly', async (): Promise<void> => {
       const { container } = customRender(
         <VideoDescription
           video={mockVideo}
@@ -108,7 +108,7 @@ describe('VideoDescription Component', () => {
 
     it('should handle missing channel data gracefully', () => {
       const videoWithoutChannel = {
-        ...mockVideo,
+        ...mockVideo as any,
         channelName: 'Unknown Channel' };
 
       customRender(
@@ -131,10 +131,10 @@ describe('VideoDescription Component', () => {
   });
 
   describe('Description Expansion', () => {
-    it('should expand and collapse description when clicked', async () => {
+    it('should expand and collapse description when clicked', async (): Promise<void> => {
       const longDescription = 'A'.repeat(300); // Long description to trigger truncation
       const videoWithLongDescription = {
-        ...mockVideo,
+        ...mockVideo as any,
         description: longDescription };
 
       customRender(
@@ -176,7 +176,7 @@ describe('VideoDescription Component', () => {
     it('should not show expand button for short descriptions', () => {
       const shortDescription = 'Short description';
       const videoWithShortDescription = {
-        ...mockVideo,
+        ...mockVideo as any,
         description: shortDescription };
 
       customRender(
@@ -199,7 +199,7 @@ describe('VideoDescription Component', () => {
   });
 
   describe('Interaction Handling', () => {
-    it('should handle subscribe button click', async () => {
+    it('should handle subscribe button click', async (): Promise<void> => {
       const onSubscribe = vi.fn();
 
       customRender(
@@ -224,7 +224,7 @@ describe('VideoDescription Component', () => {
   });
 
   describe('Keyboard Navigation', () => {
-    it('should support keyboard navigation', async () => {
+    it('should support keyboard navigation', async (): Promise<void> => {
       const onSubscribe = vi.fn();
 
       customRender(
@@ -261,7 +261,7 @@ describe('VideoDescription Component', () => {
   });
 
   describe('Performance', () => {
-    it('should render within performance budget', async () => {
+    it('should render within performance budget', async (): Promise<void> => {
       const startTime = performance.now();
 
       customRender(
@@ -288,8 +288,8 @@ describe('VideoDescription Component', () => {
       expect(renderTime).toBeLessThan(100);
     });
 
-    it('should not cause memory leaks', async () => {
-      const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
+    it('should not cause memory leaks', async (): Promise<void> => {
+      const initialMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
 
       const { unmount } = customRender(
         <VideoDescription
@@ -317,7 +317,7 @@ describe('VideoDescription Component', () => {
 
       await testHelpers.waitForTime(100);
 
-      const finalMemory = (performance as any).memory?.usedJSHeapSize || 0;
+      const finalMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
       const memoryIncrease = finalMemory - initialMemory;
 
       // Memory increase should be minimal (less than 1MB)
@@ -326,7 +326,7 @@ describe('VideoDescription Component', () => {
   });
 
   describe('Error Handling', () => {
-    it('should handle API errors gracefully', async () => {
+    it('should handle API errors gracefully', async (): Promise<void> => {
       testHelpers.mockApiError(500, 'Server Error');
 
       const { container } = customRender(
@@ -352,7 +352,7 @@ describe('VideoDescription Component', () => {
 
     it('should handle malformed video data', () => {
       const malformedVideo = {
-        ...mockVideo,
+        ...mockVideo as any,
         views: '0',
           likes: 0,
         publishedAt: 'invalid-date' };
@@ -498,7 +498,7 @@ describe('VideoDescription Component', () => {
       expect(channelName).toHaveTextContent(mockChannel.name);
     });
 
-    it('should have sufficient color contrast', async () => {
+    it('should have sufficient color contrast', async (): Promise<void> => {
       const { container } = customRender(
         <VideoDescription
           video={mockVideo}
@@ -525,7 +525,7 @@ describe('VideoDescription Component', () => {
     it('should sanitize description content', () => {
       const maliciousDescription = '<script>alert("XSS")</script><p>Safe content</p>';
       const videoWithMaliciousContent = {
-        ...mockVideo,
+        ...mockVideo as any,
         description: maliciousDescription };
 
       customRender(
@@ -552,7 +552,7 @@ describe('VideoDescription Component', () => {
     it('should validate external links', () => {
       const descriptionWithLinks = 'Check out https://example.com and https://malicious-site.com';
       const videoWithLinks = {
-        ...mockVideo,
+        ...mockVideo as any,
         description: descriptionWithLinks };
 
       customRender(
@@ -578,7 +578,7 @@ describe('VideoDescription Component', () => {
   });
 
   describe('Integration', () => {
-    it('should integrate with performance monitoring', async () => {
+    it('should integrate with performance monitoring', async (): Promise<void> => {
       const performanceSpy = vi.spyOn(performanceMonitor, 'trackCustomMetric');
 
       customRender(
@@ -602,7 +602,7 @@ describe('VideoDescription Component', () => {
         { component: 'VideoDescription' });
     });
 
-    it('should work with React Query', async () => {
+    it('should work with React Query', async (): Promise<void> => {
       // Mock React Query response
       testHelpers.mockApiSuccess({
         video: mockVideo,

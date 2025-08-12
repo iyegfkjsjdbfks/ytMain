@@ -1,4 +1,6 @@
 import React, { FC, ReactNode, ReactElement, InputHTMLAttributes } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;

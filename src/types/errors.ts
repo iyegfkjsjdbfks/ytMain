@@ -321,7 +321,7 @@ export const ERROR_CODES = {
 export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
 
 // Error Factory Functions
-export const createApiError = (,
+export const createApiError: any = (,
   message: any,
   endpoint: any,
   method: ApiError['method'],
@@ -346,7 +346,7 @@ export const createApiError = (,
   return error;
 };
 
-export const createValidationError = (,
+export const createValidationError: any = (,
   field: any,
   message: any,
   value?: unknown,
@@ -359,7 +359,7 @@ export const createValidationError = (,
   constraint: constraint || 'unknown',
   timestamp: new Date() });
 
-export const createNetworkError = (,
+export const createNetworkError: any = (,
   message: any,
   url: any,
   timeout = false,
@@ -372,7 +372,7 @@ export const createNetworkError = (,
   offline,
   timestamp: new Date() });
 
-export const createYouTubeError = (,
+export const createYouTubeError: any = (,
   message: any,
   endpoint: any,
   videoId?: string,
@@ -385,7 +385,7 @@ export const createYouTubeError = (,
 ): YouTubeApiError => {
   let code: ErrorCode = ERROR_CODES.API_SERVER_ERROR;
 
-  switch (errorType) {
+  switch (errorType as any) {
     case 'unavailable':
       code = ERROR_CODES.YOUTUBE_VIDEO_UNAVAILABLE;
       break;
@@ -413,7 +413,7 @@ export const createYouTubeError = (,
     embedDisabled: errorType === 'embed_disabled',
     regionBlocked: errorType === 'region_blocked' };
 
-  if (videoId) {
+  if (videoId as any) {
     error.details = { videoId };
   }
 

@@ -198,7 +198,7 @@ export class InputValidator {
       }
       let digit = parseInt(char, 10);
 
-      if (isEven) {
+      if (isEven as any) {
         digit *= 2;
         if (digit > 9) {
           digit -= 9;
@@ -284,7 +284,7 @@ export class TokenGenerator {
   }
 
   static generateUUID(): string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g(c) => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g(c: any) => {
       const r = Math.random() * 16 | 0;
       const v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
@@ -356,7 +356,7 @@ export class ClientEncryption {
     const encodedData = this.encoder.encode(data);
     const hashBuffer = await crypto.subtle.digest('SHA-256', encodedData);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashArray.map((b: any) => b.toString(16).padStart(2, '0')).join('');
   }
 }
 
@@ -368,28 +368,28 @@ export class SecureStorage {
     try {
       const storageKey = this.prefix + key;
 
-      if (encrypt) {
+      if (encrypt as any) {
         // Simple obfuscation (not true encryption for localStorage)
         const obfuscated = btoa(encodeURIComponent(String(value)));
-        localStorage.setItem(storageKey, obfuscated);
+        (localStorage as any).setItem(storageKey, obfuscated);
       } else {
-        localStorage.setItem(storageKey, String(value));
+        (localStorage as any).setItem(storageKey, String(value));
       }
-    } catch (error) {
-      console.error('Failed to store data securely:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to store data securely:', error);
     }
   }
 
   static getItem(key: string, encrypted: boolean = false): string | null {
     try {
       const storageKey = this.prefix + key;
-      const value = localStorage.getItem(storageKey);
+      const value = (localStorage as any).getItem(storageKey);
 
       if (!value) {
 return null;
 }
 
-      if (encrypted) {
+      if (encrypted as any) {
         try {
           return decodeURIComponent(atob(value));
         } catch {
@@ -398,8 +398,8 @@ return null;
       }
 
       return value;
-    } catch (error) {
-      console.error('Failed to retrieve data securely:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to retrieve data securely:', error);
       return null;
     }
   }
@@ -421,18 +421,18 @@ return null;
   static setSecureSession(key: string, value: string | number): void {
     try {
       const storageKey = this.prefix + key;
-      sessionStorage.setItem(storageKey, String(value));
-    } catch (error) {
-      console.error('Failed to store session data securely:', error);
+      (sessionStorage as any).setItem(storageKey, String(value));
+    } catch (error: any) {
+      (console as any).error('Failed to store session data securely:', error);
     }
   }
 
   static getSecureSession(key: string): string | null {
     try {
       const storageKey = this.prefix + key;
-      return sessionStorage.getItem(storageKey);
-    } catch (error) {
-      console.error('Failed to retrieve session data securely:', error);
+      return (sessionStorage as any).getItem(storageKey);
+    } catch (error: any) {
+      (console as any).error('Failed to retrieve session data securely:', error);
       return null;
     }
   }
@@ -504,12 +504,12 @@ export class CSRFProtection {
   static addTokenToRequest(request: RequestInit): RequestInit {
     const token = this.getToken();
 
-    if (token) {
+    if (token as any) {
       const headers = new Headers(request.headers);
       headers.set('X-CSRF-Token', token);
 
       return {
-        ...request,
+        ...request as any,
         headers };
     }
 
@@ -543,7 +543,7 @@ export class SecurityAudit {
 continue;
 }
 
-      const value = localStorage.getItem(key);
+      const value = (localStorage as any).getItem(key);
       if (!value) {
 continue;
 }

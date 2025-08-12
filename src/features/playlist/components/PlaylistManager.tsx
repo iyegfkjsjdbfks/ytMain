@@ -4,6 +4,9 @@ import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/use
 import type { CreatePlaylistData } from '../services/playlistService';
 import type { Playlist } from '../../../types/core';
 import { PlusIcon, MagnifyingGlassIcon, EllipsisVerticalIcon, PlayIcon, ShareIcon, PencilIcon, TrashIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, FolderIcon, ListBulletIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
+import { FormEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
 
 interface PlaylistManagerProps {
   className?: string;
@@ -24,9 +27,9 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
           description: '',
     visibility: 'public' as 'public' | 'unlisted' | 'private',
           tags: [] as string });
-  const [tagInput, setTagInput] = useState('');
+  const [tagInput, setTagInput] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit: any = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.title.trim()) {
       return;
@@ -42,18 +45,18 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
     onClose();
   };
 
-  const addTag = () => {
+  const addTag: any = () => {
     if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
       setFormData(prev => ({
-        ...prev,
+        ...prev as any,
         tags: [...prev.tags, tagInput.trim()] }));
       setTagInput('');
     }
   };
 
-  const removeTag = (tagToRemove: any) => {
+  const removeTag: any = (tagToRemove: any) => {
     setFormData(prev => ({
-      ...prev,
+      ...prev as any,
       tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
   };
 
@@ -68,7 +71,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
           Create New Playlist
         </h3>
 
-        <form onSubmit={handleSubmit} className='space-y-4'>
+        <form onSubmit={(e: any) => handleSubmit(e)} className='space-y-4'>
           <div>
             <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
               Title *
@@ -77,7 +80,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
               type='text'
               value={formData.title}
               onChange={e =>
-                setFormData(prev => ({ ...prev, title: e.target.value }))
+                setFormData(prev => ({ ...prev as any, title: e.target.value }))
               }
               className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
               placeholder='Enter playlist title...'
@@ -92,7 +95,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
             <textarea
               value={formData.description}
               onChange={e =>
-                setFormData(prev => ({ ...prev, description: e.target.value }))
+                setFormData(prev => ({ ...prev as any, description: e.target.value }))
               }
               className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
               rows={3}
@@ -108,7 +111,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
               value={formData.visibility}
               onChange={e =>
                 setFormData(prev => ({
-                  ...prev,
+                  ...prev as any,
                   visibility: e.target.value as any }))
               }
               className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -136,7 +139,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
               />
               <button
                 type='button'
-                onClick={addTag}
+                onClick={(e: any) => addTag(e)}
                 className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
               >
                 Add
@@ -164,7 +167,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
           <div className='flex gap-2 justify-end pt-4'>
             <button
               type='button'
-              onClick={onClose}
+              onClick={(e: any) => onClose(e)}
               className='px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors'
             >
               Cancel
@@ -184,12 +187,12 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
 
 export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   className = '' }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<
     'recent' | 'alphabetical' | 'most_videos'
   >('recent');
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
 
   const [showPlaylistMenu, setShowPlaylistMenu] = useState<string | null>(null);
 
@@ -213,25 +216,25 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
       playlist.description?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleCreatePlaylist = async (data: any) => {
+  const handleCreatePlaylist = async (data: any): Promise<any> => {
     try {
       await createPlaylistMutation.mutate(data);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to create playlist:', error);
     }
   };
 
-  const handleDeletePlaylist = async (playlistId: any) => {
+  const handleDeletePlaylist = async (playlistId: any): Promise<any> => {
     if (window.confirm('Are you sure you want to delete this playlist?')) {
       try {
         await deletePlaylistMutation.mutate(playlistId);
-      } catch (error) {
+      } catch (error: any) {
         logger.error('Failed to delete playlist:', error);
       }
     }
   };
 
-  const handleDuplicatePlaylist = async (playlist: Playlist) => {
+  const handleDuplicatePlaylist = async (playlist: Playlist): Promise<any> => {
     try {
       const duplicateData: CreatePlaylistData = {,
         title: `${playlist.title} (Copy)`,
@@ -239,13 +242,13 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
         ...(playlist.description && { description: playlist.description }),
         ...(playlist.tags && { tags: playlist.tags }) };
       await createPlaylistMutation.mutate(duplicateData);
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to duplicate playlist:', error);
     }
   };
 
-  const getVisibilityIcon = (visibility: any) => {
-    switch (visibility) {
+  const getVisibilityIcon: any = (visibility: any) => {
+    switch (visibility as any) {
       case 'public':
         return <EyeIcon className='w-4 h-4' />;
       case 'unlisted':
@@ -492,7 +495,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
       <CreatePlaylistModal
         isOpen={showCreateModal}
         onClose={() => setShowCreateModal(false)}
-        onSubmit={handleCreatePlaylist}
+        onSubmit={(e: any) => handleCreatePlaylist(e)}
       />
     </div>
   );

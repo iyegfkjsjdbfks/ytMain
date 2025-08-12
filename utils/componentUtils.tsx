@@ -1,4 +1,8 @@
 import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 // Component utilities and helpers
 // Type definitions
 export interface TruncateOptions {
@@ -8,19 +12,19 @@ export interface TruncateOptions {
 }
 
 export interface ComponentWrapperProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   className?: string;
   fallback?: ReactNode;
 }
 
 // Utility functions for components
-export const truncateText = (text: any,
+export const truncateText: any = (text: any,
           maxLength: number = 100, suffix = '...') => {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength) + suffix;
 };
 
-export const formatDuration = (seconds: any): string => {
+export const formatDuration: any = (seconds: any): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = Math.floor(seconds % 60);
@@ -31,7 +35,7 @@ export const formatDuration = (seconds: any): string => {
   return `${minutes}:${secs.toString().padStart(2, '0')}`;
 };
 
-export const formatViews = (views: any): string => {
+export const formatViews: any = (views: any): string => {
   if (views >= 1000000) {
     return `${(views / 1000000).toFixed(1)}M views`;
   } else if (views >= 1000) {
@@ -40,7 +44,7 @@ export const formatViews = (views: any): string => {
   return `${views} views`;
 };
 
-export const formatDate = (date: string | Date): string => {
+export const formatDate: any = (date: string | Date): string => {
   const d = new Date(date);
   const now = new Date();
   const diffTime = Math.abs(now.getTime() - d.getTime());
@@ -61,14 +65,14 @@ export const ComponentWrapper: React.FC<ComponentWrapperProps> = ({
 }) => {
   try {
     return <div className={className}>{children}</div>;
-  } catch (error) {
-    console.error('Component error:', error);
+  } catch (error: any) {
+    (console as any).error('Component error:', error);
     return <>{fallback}</>;
   }
 };
 
 // Build truncate classes utility
-export const buildTruncateClasses = (,
+export const buildTruncateClasses: any = (,
   lines: number = 1,
   baseClasses = ''
 ): string => {
@@ -81,11 +85,11 @@ export const safeLocalStorage = {
   getItem: (key: string): string | null => {
     try {
       if (typeof window !== 'undefined') {
-        return localStorage.getItem(key);
+        return (localStorage as any).getItem(key);
       }
     
-        } catch (error) {
-      console.warn('localStorage getItem failed:', error);
+        } catch (error: any) {
+      (console as any).warn('localStorage getItem failed:', error);
     }
     return null;
   },
@@ -94,11 +98,11 @@ export const safeLocalStorage = {
           value: string | number): boolean => {
     try {
       if (typeof window !== 'undefined') {
-        localStorage.setItem(key, String(value));
+        (localStorage as any).setItem(key, String(value));
         return true;
       }
-    } catch (error) {
-      console.warn('localStorage setItem failed:', error);
+    } catch (error: any) {
+      (console as any).warn('localStorage setItem failed:', error);
     }
     return false;
   },
@@ -109,8 +113,8 @@ export const safeLocalStorage = {
         localStorage.removeItem(key);
         return true;
       }
-    } catch (error) {
-      console.warn('localStorage removeItem failed:', error);
+    } catch (error: any) {
+      (console as any).warn('localStorage removeItem failed:', error);
     }
     return false;
   }
@@ -135,15 +139,15 @@ export default {
   useCallback: React.useCallback };
 
 // Additional utility functions
-export const buildVideoUrl = (videoId: any): string => {
+export const buildVideoUrl: any = (videoId: any): string => {
   return `/watch?v=${videoId}`;
 };
 
-export const buildChannelUrl = (channelId: any): string => {
+export const buildChannelUrl: any = (channelId: any): string => {
   return `/channel/${channelId}`;
 };
 
-export const getAvatarFallback = (name: any): string => {
+export const getAvatarFallback: any = (name: any): string => {
   return name.charAt(0).toUpperCase();
 };
 

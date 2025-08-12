@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * SettingsPage component for managing user account settings
  */

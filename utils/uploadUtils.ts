@@ -51,7 +51,7 @@ export function uploadVideo(,
   try {
     const xhr = new XMLHttpRequest();
 
-    xhr.upload.onprogress = (event) => {
+    xhr.upload.onprogress = (event: any) => {
       if (event.lengthComputable && onProgress) {
         const progress = {
           percentage: Math.round((event.loaded / event.total) * 100),
@@ -66,12 +66,12 @@ export function uploadVideo(,
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         const response = JSON.parse(xhr.responseText) as UploadResponse;
-        if (onComplete) {
+        if (onComplete as any) {
 onComplete(response);
 }
       } else {
         const error = new Error(`Upload failed with status ${xhr.status}`);
-        if (onError) {
+        if (onError as any) {
 onError(error);
 }
       }
@@ -79,7 +79,7 @@ onError(error);
 
     xhr.onerror = () => {
       const error = new Error('Upload failed');
-      if (onError) {
+      if (onError as any) {
 onError(error);
 }
     };
@@ -87,8 +87,8 @@ onError(error);
     const startTime = Date.now();
     xhr.open('POST', '/api/upload', true);
     xhr.send(formData);
-  } catch (error) {
-    if (onError) {
+  } catch (error: any) {
+    if (onError as any) {
 onError(error as Error);
 }
   }
@@ -150,7 +150,7 @@ export function getVideoMetadata(file: File): Promise<{
   codec: string;
   container: string
 }> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve: any, reject: any) => {
     const video = document.createElement('video');
 
     video.preload = 'metadata';
@@ -186,7 +186,7 @@ export function generateThumbnail(,
   videoFile: File,
   timeInSeconds: number = 0,
 ): Promise<string> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve: any, reject: any) => {
     const video = document.createElement('video');
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
@@ -208,7 +208,7 @@ export function generateThumbnail(,
       try {
         const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
         resolve(dataUrl);
-      } catch (error) {
+      } catch (error: any) {
         reject(error instanceof Error ? error : new Error(String(error)));
       }
 

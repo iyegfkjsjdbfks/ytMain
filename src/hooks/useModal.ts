@@ -1,4 +1,8 @@
 import { useState, useCallback, useEffect, KeyboardEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 interface UseModalOptions {
   defaultOpen?: boolean;
@@ -40,7 +44,7 @@ export function useModal({
   }, [onClose]);
 
   const toggle = useCallback(() => {
-    if (isOpen) {
+    if (isOpen as any) {
       close();
     } else {
       open();
@@ -53,7 +57,7 @@ export function useModal({
       return;
     }
 
-    const handleEscape = (event: KeyboardEvent) => {
+    const handleEscape: any = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         close();
       }
@@ -65,7 +69,7 @@ export function useModal({
 
   // Prevent body scroll when modal is open
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen as any) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -93,7 +97,7 @@ export function useModals<T extends string>() {
   const [openModals, setOpenModals] = useState<Set<T>>(new Set());
 
   const openModal = useCallback((key: T) => {
-    setOpenModals(prev => new Set([...prev, key]));
+    setOpenModals(prev => new Set([...prev as any, key]));
   }, []);
 
   const closeModal = useCallback((key: T) => {

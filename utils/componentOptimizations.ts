@@ -1,4 +1,6 @@
 import { memo, useMemo, forwardRef, lazy, createElement, useEffect, type ComponentType, type EffectCallback, type DependencyList, type LazyExoticComponent } from 'react';
+import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 /**
  * Higher-order component that adds React.memo with custom comparison
@@ -117,7 +119,7 @@ export const componentPerformance = {
    * HOC to measure component render time
    */,
   withRenderTime: <P extends object>(Component: ComponentType<P> _name?: string) => {
-    return forwardRef<any, P>((props, ref) => {
+    return forwardRef<any, P>((props: any, ref: any) => {
       useEffect(() => {
         // Performance monitoring disabled
         // const startTime = performance.now();
@@ -125,11 +127,11 @@ export const componentPerformance = {
         return () => {
           // const endTime = performance.now();
           // const componentName = name || Component.displayName || Component.name || 'Component';
-          // console.log(`${componentName} render time: ${endTime - startTime}ms`);
+          // (console as any).log(`${componentName} render time: ${endTime - startTime}ms`);
           };
       });
 
-      return createElement(Component, { ...props, ref } as any);
+      return createElement(Component, { ...props as any, ref } as any);
     });
   },
 
@@ -142,7 +144,7 @@ export const componentPerformance = {
       // const startTime = performance.now();
       const cleanup = effect();
       // const endTime = performance.now();
-      // console.log(`${_effectName} execution time: ${endTime - startTime}ms`);
+      // (console as any).log(`${_effectName} execution time: ${endTime - startTime}ms`);
 
       return cleanup;
     }, deps);
@@ -158,8 +160,8 @@ export const bundleOptimizations = {
   dynamicImport: async <T>(importFunc: () => Promise<T>): Promise<T | null> => {
     try {
       return await importFunc();
-    } catch (error) {
-      console.error('Dynamic import failed:', error);
+    } catch (error: any) {
+      (console as any).error('Dynamic import failed:', error);
       return null;
     }
   },
@@ -170,6 +172,6 @@ export const bundleOptimizations = {
   preloadComponent: (importFunc: () => Promise<any>) => {
     // Start loading the component but don't wait for it
     importFunc().catch(error => {
-      console.warn('Component preload failed:', error);
+      (console as any).warn('Component preload failed:', error);
     });
   } };

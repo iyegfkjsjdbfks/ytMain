@@ -10,9 +10,13 @@ declare namespace NodeJS {
 }
 
 import { useMemo, useCallback, useEffect, useRef, useState, lazy } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 // Performance monitoring hook
-export const usePerformanceMonitor = (componentName: any) => {
+export const usePerformanceMonitor: any = (componentName: any) => {
   const renderCount = useRef(0);
   const startTime = useRef(performance.now());
 
@@ -22,7 +26,7 @@ export const usePerformanceMonitor = (componentName: any) => {
     const renderTime = endTime - startTime.current;
 
     if (import.meta.env.MODE === 'development') {
-      console.log(
+      (console as any).log(
         `${componentName} render #${renderCount.current}: ${renderTime.toFixed(2)}ms`
       );
     }
@@ -38,9 +42,9 @@ export const useDebounce = <T>(value: T, delay: any): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const handler = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => {
       clearTimeout(handler);
@@ -67,11 +71,11 @@ export const useThrottle = <T extends (...args) => any>(,
         return callback(...args);
       }
       clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(
+      timeoutRef.current = setTimeout((
         () => {
           lastCall.current = Date.now();
           callback(...args);
-        },
+        }) as any,
         delay - (now - lastCall.current)
       );
     }) as T,
@@ -80,7 +84,7 @@ export const useThrottle = <T extends (...args) => any>(,
 };
 
 // Memory usage monitoring
-export const useMemoryMonitor = () => {
+export const useMemoryMonitor: any = () => {
   const [memoryInfo, setMemoryInfo] = useState<{
     usedJSHeapSize: number;
     totalJSHeapSize: number;
@@ -88,7 +92,7 @@ export const useMemoryMonitor = () => {
   } | null>(null);
 
   useEffect(() => {
-    const updateMemoryInfo = () => {
+    const updateMemoryInfo: any = () => {
       if ('memory' in performance) {
         const { memory } = performance as any;
         setMemoryInfo({
@@ -99,7 +103,7 @@ export const useMemoryMonitor = () => {
     };
 
     updateMemoryInfo();
-    const interval = setInterval(updateMemoryInfo, 5000);
+    const interval = setInterval((updateMemoryInfo) as any, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -108,10 +112,10 @@ export const useMemoryMonitor = () => {
 };
 
 // Intersection observer for lazy loading
-export const useIntersectionObserver = (,
+export const useIntersectionObserver: any = (,
   options: IntersectionObserverInit = {}
 ) => {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
   const elementRef = useRef<Element | null>(null);
 
@@ -127,7 +131,7 @@ export const useIntersectionObserver = (,
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry) {
+        if (entry as any) {
           setIsIntersecting(entry.isIntersecting);
           setEntry(entry);
         }
@@ -161,7 +165,7 @@ export const useBatchedUpdates = <T>(initialValue: T) => {
       clearTimeout(timeoutRef.current);
     }
 
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = setTimeout((() => {
       setValue(prev => {
         let result = prev;
         pendingUpdates.current.forEach(update => {
@@ -170,7 +174,7 @@ export const useBatchedUpdates = <T>(initialValue: T) => {
         pendingUpdates.current = [];
         return result;
       });
-    }, 0);
+    }) as any, 0);
   }, []);
 
   return [value, batchedSetValue] as const;

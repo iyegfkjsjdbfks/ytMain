@@ -1,4 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 /**
  * Custom hook for storing and managing Sets in localStorage
@@ -18,14 +21,14 @@ export function useLocalStorageSet<T>(,
   // Initialize state from localStorage
   const [items, setItems] = useState<T[]>(() => {
     try {
-      const storedValue = localStorage.getItem(key);
-      if (storedValue) {
+      const storedValue = (localStorage as any).getItem(key);
+      if (storedValue as any) {
         const parsed = JSON.parse(storedValue);
         return Array.isArray(parsed) ? parsed : Array.from(initialValue);
       }
       return Array.from(initialValue);
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error reading localStorage key "${key}":`, error);
       return Array.from(initialValue);
     }
   });
@@ -37,10 +40,10 @@ export function useLocalStorageSet<T>(,
   const updateLocalStorage = useCallback(
     (newItems: T) => {
       try {
-        localStorage.setItem(key, JSON.stringify(newItems));
+        (localStorage as any).setItem(key, JSON.stringify(newItems));
         setItems(newItems);
-      } catch (error) {
-        console.warn(`Error setting localStorage key "${key}":`, error);
+      } catch (error: any) {
+        (console as any).warn(`Error setting localStorage key "${key}":`, error);
       }
     },
     [key]
@@ -51,7 +54,7 @@ export function useLocalStorageSet<T>(,
     (item: T) => {
       setItems(prev => {
         if (!prev.includes(item)) {
-          const newItems = [...prev, item];
+          const newItems = [...prev as any, item];
           updateLocalStorage(newItems);
           return newItems;
         }
@@ -65,7 +68,7 @@ export function useLocalStorageSet<T>(,
   const removeItem = useCallback(
     (item: T) => {
       setItems(prev => {
-        const newItems = prev.filter(i => i !== item);
+        const newItems = prev.filter((i: any) => i !== item);
         if (newItems.length !== prev.length) {
           updateLocalStorage(newItems);
           return newItems;
@@ -81,8 +84,8 @@ export function useLocalStorageSet<T>(,
     (item: T) => {
       setItems(prev => {
         const newItems = prev.includes(item)
-          ? prev.filter(i => i !== item)
-          : [...prev, item];
+          ? prev.filter((i: any) => i !== item)
+          : [...prev as any, item];
         updateLocalStorage(newItems);
         return newItems;
       });
@@ -116,14 +119,14 @@ export function useLocalStorageSetState<T>(,
 ): [Set<T> (updater: (prev: Set<T>) => Set<T>) => void] {
   const [items, setItems] = useState<T[]>(() => {
     try {
-      const storedValue = localStorage.getItem(key);
-      if (storedValue) {
+      const storedValue = (localStorage as any).getItem(key);
+      if (storedValue as any) {
         const parsed = JSON.parse(storedValue);
         return Array.isArray(parsed) ? parsed : Array.from(initialValue);
       }
       return Array.from(initialValue);
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+    } catch (error: any) {
+      (console as any).warn(`Error reading localStorage key "${key}":`, error);
       return Array.from(initialValue);
     }
   });
@@ -138,9 +141,9 @@ export function useLocalStorageSetState<T>(,
         const newItems = Array.from(newSet);
 
         try {
-          localStorage.setItem(key, JSON.stringify(newItems));
-        } catch (error) {
-          console.warn(`Error setting localStorage key "${key}":`, error);
+          (localStorage as any).setItem(key, JSON.stringify(newItems));
+        } catch (error: any) {
+          (console as any).warn(`Error setting localStorage key "${key}":`, error);
         }
 
         return newItems;

@@ -60,7 +60,7 @@ class ApiCache {
     // Remove oldest entries if cache is full
     if (this.cache.size >= this.maxSize) {
       const oldestKey = this.cache.keys().next().value;
-      if (oldestKey) {
+      if (oldestKey as any) {
         this.cache.delete(oldestKey);
       }
     }
@@ -128,13 +128,13 @@ class RequestQueue {
   private maxConcurrent = 6;
 
   async add<T>(request: () => Promise<T>): Promise<T> {
-    return new Promise((resolve, reject) => {
-      this.queue.push(async () => {
+    return new Promise((resolve: any, reject: any) => {
+      this.queue.push(async (): Promise<void> => {
         try {
           this.running++;
           const result = await request();
           resolve(result);
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         } finally {
           this.running--;
@@ -152,7 +152,7 @@ class RequestQueue {
     }
 
     const request = this.queue.shift();
-    if (request) {
+    if (request as any) {
       request();
     }
   }
@@ -244,7 +244,7 @@ export class ApiService {
     }
 
     // Apply request interceptors
-    let interceptedConfig = { ...fullConfig, url: fullUrl };
+    let interceptedConfig = { ...fullConfig as any, url: fullUrl };
     for (const interceptor of this.requestInterceptors) {
       interceptedConfig = await interceptor(interceptedConfig);
     }
@@ -254,14 +254,14 @@ export class ApiService {
       const cacheKey = this.getCacheKey(interceptedConfig.url, interceptedConfig);
       const cachedResponse = this.cache.get<ApiResponse<T>>(cacheKey);
 
-      if (cachedResponse) {
+      if (cachedResponse as any) {
         performanceMonitor.trackCustomMetric('api_cache_hit', 1);
         return cachedResponse;
       }
     }
 
     // Add to request queue
-    return this.requestQueue.add(async () => {
+    return this.requestQueue.add(async (): Promise<void> => {
       const startTime = performance.now();
 
       try {
@@ -286,7 +286,7 @@ export class ApiService {
         performanceMonitor.trackApiCall(interceptedConfig.url, duration, interceptedResponse.status);
 
         return interceptedResponse;
-      } catch (error) {
+      } catch (error: any) {
         // Apply error interceptors
         let interceptedError: Error;
         if (error instanceof Error) {
@@ -338,7 +338,7 @@ export class ApiService {
     // Add CSRF token for non-GET requests
     if (method !== 'GET') {
       const csrfToken = securityUtils.CSRFProtection.getToken();
-      if (csrfToken) {
+      if (csrfToken as any) {
         requestHeaders.set('X-CSRF-Token', csrfToken);
       }
     }
@@ -361,7 +361,7 @@ export class ApiService {
 
     // Create timeout controller
     const timeoutController = new AbortController();
-    const timeoutId = setTimeout(() => timeoutController.abort(), timeout);
+    const timeoutId = setTimeout((() => timeoutController.abort()) as any, timeout);
 
     // Combine signals
     const combinedSignal = this.combineAbortSignals([
@@ -376,7 +376,7 @@ export class ApiService {
     // Retry logic
     for (let attempt = 0; attempt <= retries; attempt++) {
       try {
-        const response = await fetch(url, requestOptions);
+        const response = await (fetch as any)(url, requestOptions);
         clearTimeout(timeoutId);
 
         // Validate status
@@ -399,7 +399,7 @@ export class ApiService {
           statusText: response.statusText,
           headers: response.headers,
           timestamp: Date.now() };
-      } catch (error) {
+      } catch (error: any) {
         clearTimeout(timeoutId);
 
         if (error instanceof Error) {
@@ -489,7 +489,7 @@ export class ApiService {
   }
 
   private delay(ms: any): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout((resolve) as any, ms));
   }
 
   private combineAbortSignals(signals: AbortSignal): AbortSignal {
@@ -508,23 +508,23 @@ export class ApiService {
 
   // Convenience methods
   async get<T = any>(url: any, config?: RequestConfig): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'GET' });
+    return this.request<T>(url, { ...config as any, method: 'GET' });
   }
 
   async post<T = any>(url: any, data: any?, config?: RequestConfig): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'POST', body: data });
+    return this.request<T>(url, { ...config as any, method: 'POST', body: data });
   }
 
   async put<T = any>(url: any, data: any?, config?: RequestConfig): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'PUT', body: data });
+    return this.request<T>(url, { ...config as any, method: 'PUT', body: data });
   }
 
   async patch<T = any>(url: any, data: any?, config?: RequestConfig): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'PATCH', body: data });
+    return this.request<T>(url, { ...config as any, method: 'PATCH', body: data });
   }
 
   async delete<T = any>(url: any, config?: RequestConfig): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'DELETE' });
+    return this.request<T>(url, { ...config as any, method: 'DELETE' });
   }
 
   // File upload with progress
@@ -547,7 +547,7 @@ export class ApiService {
     }
 
     return this.request<T>(url, {
-      ...config,
+      ...config as any,
       method: 'POST',
       body: formData });
   }
@@ -557,7 +557,7 @@ export class ApiService {
     url: string;
     config?: RequestConfig;
   }>): Promise<Array<ApiResponse<T> | ApiError>> {
-    const promises = requests.map(({ url, config }) =>
+    const promises = requests.map(({ url, config }: any) =>
       this.request<T>(url, config).catch(error => error as ApiError),
     );
 
@@ -580,7 +580,7 @@ export class ApiService {
         status: 'healthy',
         responseTime,
         timestamp: Date.now() };
-    } catch (error) {
+    } catch (error: any) {
       const responseTime = performance.now() - startTime;
 
       return {
@@ -595,10 +595,10 @@ export class ApiService {
 export const apiService = new ApiService();
 
 // Setup default interceptors
-apiService.addRequestInterceptor(async (config) => {
+apiService.addRequestInterceptor(async (config: any): Promise<any> => {
   // Add authentication token if available
   const token = securityUtils.SecureStorage.getSecureSession('auth_token');
-  if (token) {
+  if (token as any) {
     config.headers = {
       ...config.headers,
       'Authorization': `Bearer ${token}` };
@@ -607,16 +607,16 @@ apiService.addRequestInterceptor(async (config) => {
   return config;
 });
 
-apiService.addResponseInterceptor(async (response) => {
+apiService.addResponseInterceptor(async (response: any): Promise<any> => {
   // Log successful responses in development
   if (import.meta.env.DEV) {
-    console.log(`API Response: ${response.status} ${response.statusText}`);
+    (console as any).log(`API Response: ${response.status} ${response.statusText}`);
   }
 
   return response;
 });
 
-apiService.addErrorInterceptor(async (error) => {
+apiService.addErrorInterceptor(async (error: any): Promise<any> => {
   // Handle authentication errors
   if (error.status === 401) {
     securityUtils.SecureStorage.removeItem('auth_token');
@@ -624,7 +624,7 @@ apiService.addErrorInterceptor(async (error) => {
   }
 
   // Log errors
-  console.error('API Error:', error);
+  (console as any).error('API Error:', error);
 
   return error;
 });

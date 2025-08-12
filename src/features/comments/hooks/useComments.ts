@@ -9,7 +9,7 @@ import type { Comment } from '../../../types/core';
  */
 
 // Query hooks
-export function useVideoComments(videoId: any, filters: CommentFilters = {}) {
+export function useVideoComments(videoId: any, filters: CommentFilters = {}): any {
   return useQuery(
     ['comments', 'video', videoId, JSON.stringify(filters)],
     () => commentService.getVideoComments(videoId, filters),
@@ -23,7 +23,7 @@ export function useVideoComments(videoId: any, filters: CommentFilters = {}) {
 export function useCommentReplies(,
   commentId: any,
   filters: Omit<CommentFilters, 'parentId'> = {}
-) {
+): any {
   return useQuery(
     ['comments', 'replies', commentId, JSON.stringify(filters)],
     () => commentService.getCommentReplies(commentId, filters),
@@ -34,7 +34,7 @@ export function useCommentReplies(,
   );
 }
 
-export function useComment(commentId: any) {
+export function useComment(commentId: any): any {
   return useQuery(
     ['comment', commentId],
     () => commentService.getComment(commentId),
@@ -45,7 +45,7 @@ export function useComment(commentId: any) {
   );
 }
 
-export function useCommentThread(commentId: any) {
+export function useCommentThread(commentId: any): any {
   return useQuery(
     ['comment', 'thread', commentId],
     () => commentService.getCommentThread(commentId),
@@ -59,7 +59,7 @@ export function useCommentThread(commentId: any) {
 export function useUserComments(,
   userId: any,
   filters: Omit<CommentFilters, 'parentId'> = {}
-) {
+): any {
   return useQuery(
     ['comments', 'user', userId, JSON.stringify(filters)],
     () => commentService.getUserComments(userId, filters),
@@ -73,7 +73,7 @@ export function useUserComments(,
 export function usePendingComments(
   videoId?: string,
   filters: CommentFilters = {}
-) {
+): any {
   return useQuery(
     ['comments', 'pending', videoId || '', JSON.stringify(filters)],
     () => commentService.getPendingComments(videoId, filters),
@@ -83,7 +83,7 @@ export function usePendingComments(
   );
 }
 
-export function useCommentStats(videoId: any) {
+export function useCommentStats(videoId: any): any {
   return useQuery(
     ['comments', 'stats', videoId],
     () => commentService.getCommentStats(videoId),
@@ -97,7 +97,7 @@ export function useCommentStats(videoId: any) {
 export function useTrendingComments(,
   timeframe: '1h' | '24h' | '7d' | '30d' = '24h',
   limit: number = 20
-) {
+): any {
   return useQuery(
     ['comments', 'trending', timeframe, limit.toString()],
     () => commentService.getTrendingComments(timeframe, limit),
@@ -107,7 +107,7 @@ export function useTrendingComments(,
   );
 }
 
-export function useCommentMentions(userId: any, filters: CommentFilters = {}) {
+export function useCommentMentions(userId: any, filters: CommentFilters = {}): any {
   return useQuery(
     ['comments', 'mentions', userId, JSON.stringify(filters)],
     () => commentService.getCommentMentions(userId, filters),
@@ -121,7 +121,7 @@ export function useCommentMentions(userId: any, filters: CommentFilters = {}) {
 export function useCommentAnalytics(,
   videoId: any,
   timeframe: '7d' | '30d' | '90d' = '30d'
-) {
+): any {
   return useQuery(
     ['comments', 'analytics', videoId, timeframe],
     () => commentService.getCommentAnalytics(videoId, timeframe),
@@ -136,7 +136,7 @@ export function useSearchComments(,
   query: any,
   videoId?: string,
   filters: CommentFilters = {}
-) {
+): any {
   return useQuery(
     ['comments', 'search', query, videoId || '', JSON.stringify(filters)],
     () => commentService.searchComments(query, videoId, filters),
@@ -148,14 +148,14 @@ export function useSearchComments(,
 }
 
 // Mutation hooks
-export function useCreateComment() {
+export function useCreateComment(): any {
   return useMutation<Comment, CreateCommentData>(
     data => commentService.createComment(data),
     {
       onSuccess: (_, { videoId, parentId }) => {
         // Invalidate relevant caches
         queryCache.invalidate(`comments:video:${videoId}`);
-        if (parentId) {
+        if (parentId as any) {
           queryCache.invalidate(`comments:replies:${parentId}`);
           queryCache.invalidate(`comment:thread:${parentId}`);
         }
@@ -164,7 +164,7 @@ export function useCreateComment() {
   );
 }
 
-export function useUpdateComment() {
+export function useUpdateComment(): any {
   return useMutation<Comment, { commentId: string; content: string }>(
     data => commentService.updateComment(data),
     {
@@ -181,11 +181,11 @@ export function useUpdateComment() {
   );
 }
 
-export function useDeleteComment() {
+export function useDeleteComment(): any {
   return useMutation<void, string>(
     commentId => commentService.deleteComment(commentId),
     {
-      onSuccess: (_, commentId) => {
+      onSuccess: (_: any, commentId: any) => {
         // Invalidate all comment-related caches
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments');
@@ -193,12 +193,12 @@ export function useDeleteComment() {
   );
 }
 
-export function useReactToComment() {
+export function useReactToComment(): any {
   return useMutation<
     void,
     {
       commentId: string;
-      type: 'like' | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad'
+      type: "like" as const | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad'
     }
   >(data => commentService.reactToComment(data), {
     onSuccess: (_, { commentId }) => {
@@ -207,22 +207,22 @@ export function useReactToComment() {
     } });
 }
 
-export function useRemoveReaction() {
+export function useRemoveReaction(): any {
   return useMutation<void, string>(
     commentId => commentService.removeReaction(commentId),
     {
-      onSuccess: (_, commentId) => {
+      onSuccess: (_: any, commentId: any) => {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
       } }
   );
 }
 
-export function usePinComment() {
+export function usePinComment(): any {
   return useMutation<void, string>(
     commentId => commentService.pinComment(commentId),
     {
-      onSuccess: (_, commentId) => {
+      onSuccess: (_: any, commentId: any) => {
         // Invalidate comment and video comments cache
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments: video')
@@ -230,11 +230,11 @@ export function usePinComment() {
   );
 }
 
-export function useUnpinComment() {
+export function useUnpinComment(): any {
   return useMutation<void, string>(
     commentId => commentService.unpinComment(commentId),
     {
-      onSuccess: (_, commentId) => {
+      onSuccess: (_: any, commentId: any) => {
         // Invalidate comment and video comments cache
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments: video')
@@ -242,41 +242,41 @@ export function useUnpinComment() {
   );
 }
 
-export function useHeartComment() {
+export function useHeartComment(): any {
   return useMutation<void, string>(
     commentId => commentService.heartComment(commentId),
     {
-      onSuccess: (_, commentId) => {
+      onSuccess: (_: any, commentId: any) => {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
       } }
   );
 }
 
-export function useUnheartComment() {
+export function useUnheartComment(): any {
   return useMutation<void, string>(
     commentId => commentService.unheartComment(commentId),
     {
-      onSuccess: (_, commentId) => {
+      onSuccess: (_: any, commentId: any) => {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
       } }
   );
 }
 
-export function useReportComment() {
+export function useReportComment(): any {
   return useMutation<
     void,
     { commentId: string; reason: string; description?: string }
   >(
-    ({ commentId, reason, description }) =>
+    ({ commentId, reason, description }: any) =>
       commentService.reportComment(commentId, reason, description),
     {
       onSuccess: () => {} }
   );
 }
 
-export function useModerateComment() {
+export function useModerateComment(): any {
   return useMutation<
     void,
     {
@@ -292,7 +292,7 @@ export function useModerateComment() {
     } });
 }
 
-export function useBulkModerateComments() {
+export function useBulkModerateComments(): any {
   return useMutation<
     { success: string; failed: string[] },
     {
@@ -301,7 +301,7 @@ export function useBulkModerateComments() {
       reason?: string;
     }
   >(
-    ({ commentIds, action, reason }) =>
+    ({ commentIds, action, reason }: any) =>
       commentService.bulkModerateComments(commentIds, action, reason),
     {
       onSuccess: () => {
@@ -312,9 +312,9 @@ export function useBulkModerateComments() {
   );
 }
 
-export function useAutoModerateComments() {
+export function useAutoModerateComments(): any {
   return useMutation<any, { videoId: string; settings }>(
-    ({ videoId, settings }) =>
+    ({ videoId, settings }: any) =>
       commentService.autoModerateComments(videoId, settings),
     {
       onSuccess: (_, { videoId }) => {
@@ -325,7 +325,7 @@ export function useAutoModerateComments() {
   );
 }
 
-export function useMarkMentionsAsRead() {
+export function useMarkMentionsAsRead(): any {
   return useMutation<void, string[]>(
     commentIds => commentService.markMentionsAsRead(commentIds),
     {
@@ -337,7 +337,7 @@ export function useMarkMentionsAsRead() {
 }
 
 // Combined hooks for common patterns
-export function useCommentManagement(videoId: any) {
+export function useCommentManagement(videoId: any): any {
   const comments = useVideoComments(videoId);
   const stats = useCommentStats(videoId);
   const createComment = useCreateComment();
@@ -356,12 +356,12 @@ export function useCommentManagement(videoId: any) {
       delete: deleteComment.mutate,
       moderate: moderateComment.mutate },
     refetch: () => {
-      comments.refetch();
-      stats.refetch();
+      comments.re(fetch as any)();
+      stats.re(fetch as any)();
     } };
 }
 
-export function useCommentInteractions(_commentId: any) {
+export function useCommentInteractions(_commentId: any): any {
   const reactToComment = useReactToComment();
   const removeReaction = useRemoveReaction();
   const pinComment = usePinComment();

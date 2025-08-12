@@ -14,13 +14,13 @@ import type { Video } from '../types/core';
  * @param useUnified - Whether to use the unified data service (default: true)
  */
 export function useVideosData(,
-  type: 'trending' | 'shorts' | 'all' = 'all',
+  type: "trending" as const | 'shorts' | 'all' = 'all',
   useUnified: boolean = true
-) {
-  const fetchVideos = useCallback(async () => {
-    if (useUnified) {
+): any {
+  const fetchVideos = useCallback(async (): Promise<void> => {
+    if (useUnified as any) {
       // Use unified data service for normalized results
-      switch (type) {
+      switch (type as any) {
         case 'shorts': {
           const response = await unifiedDataService.getShortsVideos(30);
           return response.data;
@@ -34,7 +34,7 @@ export function useVideosData(,
       }
     } else {
       // Legacy mode - use original mock service
-      switch (type) {
+      switch (type as any) {
         case 'shorts':
           return getShortsVideos();
         case 'trending':
@@ -52,11 +52,11 @@ export function useVideosData(,
  * Hook specifically for unified video data with better typing
  */
 export function useUnifiedVideosData(,
-  type: 'trending' | 'shorts' | 'all' = 'all',
+  type: "trending" as const | 'shorts' | 'all' = 'all',
   limit: number = 50
-) {
+): any {
   const fetchVideos = useCallback(async (): Promise<UnifiedVideoMetadata[]> => {
-    switch (type) {
+    switch (type as any) {
       case 'shorts': {
         const response = await unifiedDataService.getShortsVideos(limit);
         return response.data;

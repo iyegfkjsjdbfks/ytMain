@@ -1,4 +1,6 @@
 import React from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 // Base icon props interface
 export interface IconProps {
   className?: string;
@@ -174,3 +176,4 @@ export const YouTubeLogo: React.FC<IconProps & { variant?: 'full' | 'icon' }> = 
     </svg>
   );
 };
+export default BaseIcon;

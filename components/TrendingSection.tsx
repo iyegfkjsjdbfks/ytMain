@@ -1,4 +1,10 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { useMemo, useCallback, useEffect, useState, memo, FC } from 'react';
 
@@ -16,19 +22,19 @@ interface TrendingSectionProps {
 // Memoized VideoCard for better performance
 const MemoizedVideoCard = memo(VideoCard);
 
-const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }) => {
+const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }: any) => {
   const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTrendingVideos = useCallback(async () => {
+  const fetchTrendingVideos = useCallback(async (): Promise<void> => {
     try {
       setLoading(true);
       const allVideos = await getVideos();
       // Sort by views (convert string to number for sorting)
       const sortedByViews = allVideos
         .filter((video) => !video.isShort) // Exclude shorts from trending
-        .sort((a, b) => {
+        .sort((a: any, b: any) => {
           const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
           const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;
           return viewsB - viewsA;
@@ -37,9 +43,9 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
 
       setTrendingVideos(sortedByViews);
       setError(null);
-    } catch (err) {
+    } catch (err: any) {
       setError('Failed to load trending videos');
-      console.error('Error fetching trending videos:', err);
+      (console as any).error('Error fetching trending videos:', err);
     } finally {
       setLoading(false);
     }
@@ -59,7 +65,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
     ))
   , [trendingVideos]);
 
-  if (loading) {
+  if (loading as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-4">
@@ -87,7 +93,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
     );
   }
 
-  if (error) {
+  if (error as any) {
     return (
       <div className="mb-8 px-4">
         <div className="flex items-center mb-4">

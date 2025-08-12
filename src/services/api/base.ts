@@ -72,7 +72,7 @@ export function createApiUrl(,
       : endpoint;
     const url = new URL(relativeEndpoint, baseUrl);
 
-    if (params) {
+    if (params as any) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
           if (Array.isArray(value)) {
@@ -93,7 +93,7 @@ export function createApiUrl(,
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
   fullUrl = `${baseUrl}${cleanEndpoint}`;
 
-  if (params) {
+  if (params as any) {
     const searchParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
@@ -105,7 +105,7 @@ export function createApiUrl(,
       }
     });
     const queryString = searchParams.toString();
-    if (queryString) {
+    if (queryString as any) {
       fullUrl += `?${queryString}`;
     }
   }
@@ -142,13 +142,13 @@ export async function apiRequest<T>(,
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       // Create timeout promise
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        setTimeout(() => reject(new TimeoutError()), timeout);
+      const timeoutPromise = new Promise<never>((_: any, reject: any) => {
+        setTimeout((() => reject(new TimeoutError())) as any, timeout);
       });
 
       // Make the request
       const response = await Promise.race([
-        fetch(url, requestConfig),
+        (fetch as any)(url, requestConfig),
         timeoutPromise]);
 
       // Handle HTTP errors
@@ -166,7 +166,7 @@ export async function apiRequest<T>(,
       // Parse response
       const data = await response.json();
       return data;
-    } catch (error) {
+    } catch (error: any) {
       lastError = error as Error;
 
       // Don't retry on certain errors
@@ -185,7 +185,7 @@ export async function apiRequest<T>(,
 
       // Wait before retrying
       if (retryDelay > 0) {
-        await new Promise(resolve => setTimeout(resolve, retryDelay));
+        await new Promise(resolve => setTimeout((resolve) as any, retryDelay));
       }
     }
   }
@@ -207,7 +207,7 @@ export async function get<T>(,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint, params);
-  return apiRequest<T>(url, { ...config, method: 'GET' });
+  return apiRequest<T>(url, { ...config as any, method: 'GET' });
 }
 
 // POST request
@@ -218,7 +218,7 @@ export async function post<T>(,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
-    ...config,
+    ...config as any,
     method: 'POST',
     body: data ? JSON.stringify(data) : null });
 }
@@ -231,7 +231,7 @@ export async function put<T>(,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
-    ...config,
+    ...config as any,
     method: 'PUT',
     body: data ? JSON.stringify(data) : null });
 }
@@ -244,7 +244,7 @@ export async function patch<T>(,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
-    ...config,
+    ...config as any,
     method: 'PATCH',
     body: data ? JSON.stringify(data) : null });
 }
@@ -255,7 +255,7 @@ export async function del<T>(,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
-  return apiRequest<T>(url, { ...config, method: 'DELETE' });
+  return apiRequest<T>(url, { ...config as any, method: 'DELETE' });
 }
 
 // Upload file
@@ -270,14 +270,14 @@ export async function upload<T>(,
 
   formData.append('file', file);
 
-  if (additionalData) {
+  if (additionalData as any) {
     Object.entries(additionalData).forEach(([key, value]) => {
       formData.append(key, String(value));
     });
   }
 
   return apiRequest<T>(url, {
-    ...config,
+    ...config as any,
     method: 'POST',
     body: formData,
     headers: {

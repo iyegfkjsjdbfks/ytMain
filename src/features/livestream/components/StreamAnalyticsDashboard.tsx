@@ -3,6 +3,12 @@ import { conditionalLogger } from '../../../utils/conditionalLogger';
 import { createComponentError } from '../../../utils/errorUtils';
 import type { LiveStreamStats } from '../../../types/livestream';
 import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 /**
  * Props for the StreamAnalyticsDashboard component
@@ -49,7 +55,7 @@ interface AnalyticsData {
   /** Notable moments during the stream */,
   topMoments: Array<{
     timestamp;
-    type: 'peak_viewers' | 'super_chat' | 'viral_moment';
+    type: "peak_viewers" as const | 'super_chat' | 'viral_moment';
     description;
     value: number;
   }>;
@@ -65,7 +71,7 @@ type MetricType = 'viewers' | 'engagement' | 'revenue';
 type StreamHealth = 'excellent' | 'good' | 'fair' | 'poor';
 
 // Utility functions for better modularity
-const formatNumber = (num: any): string => {
+const formatNumber: any = (num: any): string => {
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(1)}M`;
   }
@@ -75,13 +81,13 @@ const formatNumber = (num: any): string => {
   return num.toString();
 };
 
-const formatDuration = (seconds: any): string => {
+const formatDuration: any = (seconds: any): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}h ${minutes}m`;
 };
 
-const getHealthColor = (health: StreamHealth): string => {
+const getHealthColor: any = (health: StreamHealth): string => {
   const healthColors: Record<StreamHealth, string> = {
     excellent: 'text-green-600',
           good: 'text-blue-600',
@@ -90,11 +96,11 @@ const getHealthColor = (health: StreamHealth): string => {
   return healthColors[health];
 };
 
-const getMetricValue = (,
+const getMetricValue: any = (,
   point: HistoricalDataPoint,
           metric: MetricType
 ): number => {
-  switch (metric) {
+  switch (metric as any) {
     case 'viewers':
       return point.count ?? 0;
     case 'engagement':
@@ -106,7 +112,7 @@ const getMetricValue = (,
 };
 
 // Mock data generation for development
-const generateMockAnalytics = (): AnalyticsData => ({
+const generateMockAnalytics: any = (): AnalyticsData => ({
   realTimeStats: {,
     viewers: 1247,
           peakViewers: 2156,
@@ -148,13 +154,13 @@ const generateMockAnalytics = (): AnalyticsData => ({
       { name: 'Others',
           percentage: 20 }],
     devices: [
-      { type: 'Desktop',
+      { type: "Desktop" as const,
           percentage: 45 },
-      { type: 'Mobile',
+      { type: "Mobile" as const,
           percentage: 40 },
-      { type: 'Tablet',
+      { type: "Tablet" as const,
           percentage: 10 },
-      { type: 'TV',
+      { type: "TV" as const,
           percentage: 5 }],
     ageGroups: [
       { range: '13-17',
@@ -170,27 +176,27 @@ const generateMockAnalytics = (): AnalyticsData => ({
   topMoments: [
     {
       timestamp: 1800,
-          type: 'peak_viewers',
+          type: "peak_viewers" as const,
       description: 'Peak viewership reached',
           value: 2156 },
     {
       timestamp: 2400,
-          type: 'super_chat',
+          type: "super_chat" as const,
       description: 'Largest Super Chat donation',
           value: 50 },
     {
       timestamp: 3000,
-          type: 'viral_moment',
+          type: "viral_moment" as const,
       description: 'Viral clip shared',
           value: 1000 }] });
 
 // Custom hook for analytics data management
-const useStreamAnalytics = (
+const useStreamAnalytics: any = (
   streamId?: string,
   timeRange: TimeRange = 'live'
 ) => {
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchAnalytics = useCallback(async (): Promise<void> => {
@@ -205,10 +211,10 @@ const useStreamAnalytics = (
 
     try {
       // Mock analytics data - in production, this would come from the API
-      // await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API delay
+      // await new Promise(resolve => setTimeout((resolve) as any, 500)); // Simulate API delay
       const mockAnalytics = generateMockAnalytics();
       setAnalytics(mockAnalytics);
-    } catch (err) {
+    } catch (err: any) {
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to fetch analytics';
       const componentError = createComponentError(
@@ -228,9 +234,9 @@ const useStreamAnalytics = (
     fetchAnalytics();
 
     // Update analytics every 30 seconds for live streams
-    const interval = setInterval(() => {
+    const interval = setInterval((() => {
       fetchAnalytics();
-    }, 30000);
+    }) as any, 30000);
 
     return () => {
       clearInterval(interval);
@@ -293,9 +299,9 @@ interface TopMomentsProps {
   moments: AnalyticsData['topMoments']
 }
 
-const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
-  const getIcon = (type: any): React.ReactNode => {
-    switch (type) {
+const TopMoments: React.FC<TopMomentsProps> = ({ moments }: any) => {
+  const getIcon: any = (type: any): React.ReactNode => {
+    switch (type as any) {
       case 'peak_viewers':
         return <EyeIcon className='h-5 w-5 text-blue-500' />;
       case 'super_chat':
@@ -306,7 +312,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
     }
   };
 
-  const formatMomentValue = (,
+  const formatMomentValue: any = (,
   moment: AnalyticsData['topMoments'][0]
   ): string => {
     switch (moment.type) {
@@ -336,7 +342,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
         Top Moments
       </h3>
       <div className='space-y-3'>
-        {moments.map(moment => (
+        {moments.map((moment: any) => (
           <div
             key={`moment-${moment.type}-${moment.timestamp}`}
             className='flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors'
@@ -370,7 +376,7 @@ interface DemographicsProps {
   demographics: AnalyticsData['demographics']
 }
 
-const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
+const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
   <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
     <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
       Audience Demographics
@@ -381,7 +387,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
           Top Countries
         </h4>
         <div className='space-y-3'>
-          {demographics.countries.slice(0, 3).map(country => (
+          {demographics.countries.slice(0, 3).map((country: any) => (
             <div
               key={`country-${country.name}`}
               className='flex items-center justify-between'
@@ -410,7 +416,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
           Devices
         </h4>
         <div className='grid grid-cols-2 gap-3'>
-          {demographics.devices.map(device => (
+          {demographics.devices.map((device: any) => (
             <div
               key={`device-${device.type}`}
               className='text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors'
@@ -467,9 +473,9 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
       }
 
       const maxValue =
-        Math.max(...rawData.map(p => getMetricValue(p, selectedMetric))) || 1;
+        Math.max(...rawData.map((p: any) => getMetricValue(p, selectedMetric))) || 1;
 
-      return rawData.map((point, index) => {
+      return rawData.map((point: any, index: any) => {
         const value = getMetricValue(point, selectedMetric);
         const height = maxValue > 0 ? (value / maxValue) * 100 : 0;
 
@@ -479,7 +485,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
           value,
           time: point.time,
           id: `chart-${selectedMetric}-${index}` }});
-    } catch (error) {
+    } catch (error: any) {
       const componentError = createComponentError(
         'StreamAnalyticsDashboard',
         'Error generating chart data',
@@ -490,7 +496,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
     }
   }, [analytics, selectedMetric]);
 
-  if (loading) {
+  if (loading as any) {
     return (
       <div className={`p-6 ${className}`}>
         <div className='animate-pulse space-y-4'>
@@ -636,7 +642,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
               role='img'
               aria-label={`${selectedMetric} chart`}
             >
-              {chartData.map(point => (
+              {chartData.map((point: any) => (
                 <div
                   key={point.id}
                   className='bg-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer'

@@ -1,5 +1,8 @@
 import React, { useEffect, useState, FC } from 'react';
 import X, { RefreshCw } from 'lucide-react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -14,21 +17,21 @@ interface PWAUpdateNotificationProps {
 const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
   className = '' }) => {
   const { updateAvailable, installUpdate } = usePWA();
-  const [isVisible, setIsVisible] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   useEffect(() => {
-    if (updateAvailable) {
+    if (updateAvailable as any) {
       setIsVisible(true);
     }
   }, [updateAvailable]);
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (): Promise<void> => {
     setIsUpdating(true);
     try {
       await installUpdate();
       // The page will reload automatically after update
-    } catch (error) {
+    } catch (error: any) {
       const componentError = createComponentError(
         'PWAUpdateNotification',
         'Failed to update app',
@@ -39,20 +42,20 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
     }
   };
 
-  const handleDismiss = () => {
+  const handleDismiss: any = () => {
     setIsVisible(false);
   };
 
-  const handleLater = () => {
+  const handleLater: any = () => {
     setIsVisible(false);
     // Show again after 1 hour
-    setTimeout(
+    setTimeout((
       () => {
-        if (updateAvailable) {
+        if (updateAvailable as any) {
           setIsVisible(true);
         }
       
-        },
+        }) as any,
       60 * 60 * 1000
     );
   };
@@ -79,7 +82,7 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
             </div>
           </div>
           <button
-            onClick={handleDismiss}
+            onClick={(e: any) => handleDismiss(e)}
             className='text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors'
             aria-label='Dismiss update notification'
           >
@@ -96,7 +99,7 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
 
         <div className='flex space-x-2'>
           <button
-            onClick={handleUpdate}
+            onClick={(e: any) => handleUpdate(e)}
             disabled={isUpdating}
             className='flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white text-sm font-medium py-2 px-3 rounded-md transition-colors flex items-center justify-center space-x-1'
           >
@@ -113,7 +116,7 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
             )}
           </button>
           <button
-            onClick={handleLater}
+            onClick={(e: any) => handleLater(e)}
             disabled={isUpdating}
             className='flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium py-2 px-3 rounded-md transition-colors disabled:opacity-50'
           >

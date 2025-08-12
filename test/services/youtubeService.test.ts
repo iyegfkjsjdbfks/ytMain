@@ -58,7 +58,7 @@ describe('YouTubeService', () => {
   });
 
   describe('fetchVideos', () => {
-    it('should fetch videos successfully', async () => {
+    it('should fetch videos successfully', async (): Promise<void> => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve(mockYouTubeVideoResponse) });
@@ -84,12 +84,12 @@ describe('YouTubeService', () => {
         isShort: false });
     });
 
-    it('should return empty array for empty input', async () => {
+    it('should return empty array for empty input', async (): Promise<void> => {
       const result = await youtubeService.fetchVideos([]);
       expect(result).toEqual([]);
     });
 
-    it('should handle API errors gracefully', async () => {
+    it('should handle API errors gracefully', async (): Promise<void> => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
         status: 403,
@@ -98,13 +98,13 @@ describe('YouTubeService', () => {
       await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow('YouTube API error: Forbidden')
     });
 
-    it('should handle network errors gracefully', async () => {
+    it('should handle network errors gracefully', async (): Promise<void> => {
       mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
       await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow('Failed to fetch video data');
     });
 
-    it('should use caching for repeated requests', async () => {
+    it('should use caching for repeated requests', async (): Promise<void> => {
       mockFetch.mockResolvedValue({
         ok: true,
         json: () => Promise.resolve(mockYouTubeVideoResponse) });
@@ -116,7 +116,7 @@ describe('YouTubeService', () => {
       expect(mockFetch).toHaveBeenCalledTimes(1);
     });
 
-    it('should parse duration correctly', async () => {
+    it('should parse duration correctly', async (): Promise<void> => {
       const testCases = [
         { input: 'PT5M30S', expected: '5:30' },
         { input: 'PT1H2M3S', expected: '1:02:03' },
@@ -142,7 +142,7 @@ describe('YouTubeService', () => {
       }
     });
 
-    it('should handle missing thumbnail URLs', async () => {
+    it('should handle missing thumbnail URLs', async (): Promise<void> => {
       const mockResponse = {
         items: [{
           ...mockYouTubeVideoResponse.items[0],
@@ -158,7 +158,7 @@ describe('YouTubeService', () => {
       expect(result[0]?.thumbnailUrl).toBe('');
     });
 
-    it('should handle missing statistics', async () => {
+    it('should handle missing statistics', async (): Promise<void> => {
       const mockResponse = {
         items: [{
           ...mockYouTubeVideoResponse.items[0],
@@ -194,7 +194,7 @@ describe('YouTubeService', () => {
             videoCount: '50',
             viewCount: '500000' } }] };
 
-    it('should fetch channel successfully', async () => {
+    it('should fetch channel successfully', async (): Promise<void> => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve(mockYouTubeChannelResponse) });
@@ -212,12 +212,12 @@ describe('YouTubeService', () => {
         country: 'US' });
     });
 
-    it('should return null for empty channel ID', async () => {
+    it('should return null for empty channel ID', async (): Promise<void> => {
       const result = await youtubeService.fetchChannel('');
       expect(result).toBeNull();
     });
 
-    it('should return null when channel not found', async () => {
+    it('should return null when channel not found', async (): Promise<void> => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve({ items: [] }) });
@@ -226,7 +226,7 @@ describe('YouTubeService', () => {
       expect(result).toBeNull();
     });
 
-    it('should handle API errors gracefully and return null', async () => {
+    it('should handle API errors gracefully and return null', async (): Promise<void> => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
         status: 404,
@@ -236,7 +236,7 @@ describe('YouTubeService', () => {
       expect(result).toBeNull();
     });
 
-    it('should format subscriber count correctly', async () => {
+    it('should format subscriber count correctly', async (): Promise<void> => {
       const testCases = [
         { input: 999, expected: '999' },
         { input: 1500, expected: '1.5K' },
@@ -260,7 +260,7 @@ describe('YouTubeService', () => {
       }
     });
 
-    it('should use caching for repeated requests', async () => {
+    it('should use caching for repeated requests', async (): Promise<void> => {
       mockFetch.mockResolvedValue({
         ok: true,
         json: () => Promise.resolve(mockYouTubeChannelResponse) });
@@ -287,7 +287,7 @@ describe('YouTubeService', () => {
       global.window = originalWindow;
     });
 
-    it('should build correct URLs for video requests', async () => {
+    it('should build correct URLs for video requests', async (): Promise<void> => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve({ items: [] }) });
@@ -305,7 +305,7 @@ describe('YouTubeService', () => {
       );
     });
 
-    it('should build correct URLs for channel requests', async () => {
+    it('should build correct URLs for channel requests', async (): Promise<void> => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve({ items: [] }) });
@@ -323,14 +323,14 @@ describe('YouTubeService', () => {
       );
     });
 
-    it('should use proxy endpoint in development mode', async () => {
+    it('should use proxy endpoint in development mode', async (): Promise<void> => {
       vi.stubGlobal('window', {
         location: {
           origin: 'http://localhost:3000' } });
 
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'development',
           VITE_YOUTUBE_API_KEY: 'test-api-key' },
         configurable: true });
@@ -349,10 +349,10 @@ describe('YouTubeService', () => {
       );
     });
 
-    it('should use direct Google API endpoint in production mode', async () => {
+    it('should use direct Google API endpoint in production mode', async (): Promise<void> => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: 'prod-api-key' },
         configurable: true });
@@ -371,10 +371,10 @@ describe('YouTubeService', () => {
       );
     });
 
-    it('should use direct Google API endpoint in test mode', async () => {
+    it('should use direct Google API endpoint in test mode', async (): Promise<void> => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'test',
           VITE_YOUTUBE_API_KEY: 'test-api-key' },
         configurable: true });
@@ -393,10 +393,10 @@ describe('YouTubeService', () => {
       );
     });
 
-    it('should use direct Google API endpoint for custom build modes', async () => {
+    it('should use direct Google API endpoint for custom build modes', async (): Promise<void> => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'staging',
           VITE_YOUTUBE_API_KEY: 'staging-api-key' },
         configurable: true });
@@ -415,14 +415,14 @@ describe('YouTubeService', () => {
       );
     });
 
-    it('should properly construct URLs with parameters for different endpoints', async () => {
+    it('should properly construct URLs with parameters for different endpoints', async (): Promise<void> => {
       vi.stubGlobal('window', {
         location: {
           origin: 'http://localhost:5173' } });
 
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'development',
           VITE_YOUTUBE_API_KEY: 'dev-key' },
         configurable: true });
@@ -440,10 +440,10 @@ describe('YouTubeService', () => {
       );
     });
 
-    it('should handle missing API key gracefully', async () => {
+    it('should handle missing API key gracefully', async (): Promise<void> => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: undefined },
         configurable: true });
@@ -462,10 +462,10 @@ describe('YouTubeService', () => {
       expect(url.searchParams.get('key')).toBe('');
     });
 
-    it('should preserve all query parameters in built URLs', async () => {
+    it('should preserve all query parameters in built URLs', async (): Promise<void> => {
       Object.defineProperty(import.meta, 'env', {
         value: {
-          ...originalEnv,
+          ...originalEnv as any,
           MODE: 'production',
           VITE_YOUTUBE_API_KEY: 'test-key' },
         configurable: true });
@@ -492,7 +492,7 @@ describe('YouTubeService', () => {
       expect(() => youtubeService.clearCache()).not.toThrow();
     });
 
-    it('should cache requests with proper TTL', async () => {
+    it('should cache requests with proper TTL', async (): Promise<void> => {
       mockFetch.mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({ items: [] }) });
@@ -508,7 +508,7 @@ describe('YouTubeService', () => {
   });
 
   describe('Edge Cases', () => {
-    it('should handle missing thumbnail URLs', async () => {
+    it('should handle missing thumbnail URLs', async (): Promise<void> => {
       const mockResponse = {
         items: [{
           ...mockYouTubeVideoResponse.items[0],
@@ -524,7 +524,7 @@ describe('YouTubeService', () => {
       expect(result[0]?.thumbnailUrl).toBe('');
     });
 
-    it('should handle missing statistics', async () => {
+    it('should handle missing statistics', async (): Promise<void> => {
       const mockResponse = {
         items: [{
           ...mockYouTubeVideoResponse.items[0],
@@ -540,7 +540,7 @@ describe('YouTubeService', () => {
       expect(result[0]?.commentCount).toBe(0);
     });
 
-    it('should handle invalid duration format', async () => {
+    it('should handle invalid duration format', async (): Promise<void> => {
       const mockResponse = {
         items: [{
           ...mockYouTubeVideoResponse.items[0],

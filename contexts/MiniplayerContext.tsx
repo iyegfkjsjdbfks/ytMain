@@ -1,4 +1,9 @@
+import React from 'react';
 import { createContext, useState, useContext, useCallback, type ReactNode, FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
 
 import type { Video } from '../src/types/core';
 
@@ -12,9 +17,9 @@ interface MiniplayerContextType {
 
 const MiniplayerContext = createContext<MiniplayerContextType | undefined>(undefined);
 
-export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const MiniplayerProvider: React.FC<{ children?: React.ReactNode }> = ({ children }: any) => {
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const showMiniplayer = useCallback((video: Video) => {
     setCurrentVideo(video);
@@ -38,11 +43,13 @@ export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children
   );
 };
 
-export const useMiniplayer = (): MiniplayerContextType => {
-  const context = useContext(MiniplayerContext);
+export const useMiniplayer: any = (): MiniplayerContextType => {
+  const context = useContext<any>(MiniplayerContext);
   if (!context) {
     throw new Error('useMiniplayer must be used within a MiniplayerProvider');
   }
   return context;
 };
 
+
+export default MiniplayerProvider;

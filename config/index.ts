@@ -1,3 +1,4 @@
+import { FC } from 'react';
 // Environment configuration
 export const ENV = {
   NODE_ENV: import.meta.env.NODE_ENV || 'development',
@@ -230,7 +231,7 @@ export type SecurityConfig = typeof SECURITY_CONFIG;
 export type DevConfig = typeof DEV_CONFIG;
 
 // Validation functions
-export const validateConfig = () => {
+export const validateConfig: any = () => {
   const errors: string = [];
 
   // Validate required API keys in production
@@ -268,7 +269,7 @@ export const validateConfig = () => {
 if (ENV.DEV) {
   const configErrors = validateConfig();
   if (configErrors.length > 0) {
-    console.warn('Configuration validation errors:', configErrors);
+    (console as any).warn('Configuration validation errors:', configErrors);
   }
 }
 

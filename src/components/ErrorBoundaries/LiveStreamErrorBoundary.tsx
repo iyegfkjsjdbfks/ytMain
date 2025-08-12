@@ -1,3 +1,5 @@
+import React from 'react';
+import { ReactNode } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined
@@ -17,7 +19,7 @@ import { createComponentError } from '@/utils/errorUtils';
 import { conditionalLogger } from '../../utils/conditionalLogger';
 
 export interface LiveStreamErrorBoundaryProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   streamId?: string;
   onRetry?: () => void;
   onReconnect?: () => void;
@@ -44,7 +46,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = {
+    this.state: any = {
       hasError: false,
           error: null,
       errorInfo: null,
@@ -106,9 +108,9 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
       streamId: this.props.streamId });
 
     // Simulate reconnection delay
-    this.reconnectTimeout = setTimeout(() => {
+    this.reconnectTimeout = setTimeout((() => {
       this.setState({
-        hasError: false,
+        hasError: false) as any,
           error: null,
         errorInfo: null,
           isReconnecting: false,

@@ -1,3 +1,8 @@
+import React from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 
 import { useState, useCallback, useEffect, useRef, FC } from 'react';
@@ -17,8 +22,8 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   onSelectCategory,
   className }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
+  const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
 
   // Check scroll position and update button states
   const checkScrollPosition = useCallback(() => {
@@ -108,7 +113,7 @@ return;
       {/* Left scroll button */}
       {canScrollLeft && (
         <button
-          onClick={scrollLeft}
+          onClick={(e: any) => scrollLeft(e)}
           className="absolute left-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
           aria-label="Scroll left"
         >
@@ -148,7 +153,7 @@ return;
       {/* Right scroll button */}
       {canScrollRight && (
         <button
-          onClick={scrollRight}
+          onClick={(e: any) => scrollRight(e)}
           className="absolute right-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
           aria-label="Scroll right"
         >

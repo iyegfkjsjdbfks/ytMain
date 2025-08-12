@@ -1,12 +1,15 @@
 import React, { useEffect, FC, ReactNode } from 'react';
 import { useLocation, Navigate, useLocation  } from 'react-router-dom';
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import { useEffect } from 'react';
 
 import LoadingSpinner from '@components/LoadingSpinner';
 
 import { useAuthStore } from '../store/authStore';
 
 interface ProtectedRouteProps {
-  children: ReactNode;
+  children?: React.ReactNode;
   requireAuth?: boolean;
   redirectTo?: string;
 }
@@ -27,7 +30,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     checkAuth();
   }, [checkAuth]);
 
-  if (isLoading) {
+  if (isLoading as any) {
     return <LoadingSpinner />;
   }
 

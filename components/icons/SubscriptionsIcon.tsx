@@ -1,5 +1,6 @@
 import React from 'react';
-const SubscriptionsIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
+import { FC } from 'react';
+const SubscriptionsIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }: any) => (
   <svg
     className={className}
     viewBox="0 0 24 24"

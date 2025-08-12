@@ -1,5 +1,10 @@
 import React, { useState, useCallback, useRef, useEffect, createContext, useContext, KeyboardEvent, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined }
@@ -22,9 +27,9 @@ interface AccessibilityContextType {
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
 
-export function AccessibilityProvider({ children }) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [highContrast, setHighContrast] = useState(false);
+export function AccessibilityProvider({ children }): any {
+  const [reducedMotion, setReducedMotion] = useState<boolean>(false);
+  const [highContrast, setHighContrast] = useState<boolean>(false);
   const [fontSize, setFontSize] = useState<AccessibilityContextType['fontSize']>('medium');
   const [announcements, setAnnouncements] = useState<string[]>([]);
 
@@ -34,19 +39,19 @@ export function AccessibilityProvider({ children }) {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(motionQuery.matches);
 
-    const handleMotionChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    const handleMotionChange: any = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     motionQuery.addEventListener('change', handleMotionChange as EventListener);
 
     // Check for high contrast preference
     const contrastQuery = window.matchMedia('(prefers-contrast: high)');
     setHighContrast(contrastQuery.matches);
 
-    const handleContrastChange = (e: MediaQueryListEvent) => setHighContrast(e.matches);
+    const handleContrastChange: any = (e: MediaQueryListEvent) => setHighContrast(e.matches);
     contrastQuery.addEventListener('change', handleContrastChange as EventListener);
 
     // Load saved preferences
-    const savedFontSize = localStorage.getItem('accessibility-font-size') as AccessibilityContextType['fontSize'];
-    if (savedFontSize) {
+    const savedFontSize = (localStorage as any).getItem('accessibility-font-size') as AccessibilityContextType['fontSize'];
+    if (savedFontSize as any) {
       setFontSize(savedFontSize);
     }
 
@@ -64,16 +69,16 @@ export function AccessibilityProvider({ children }) {
       'extra-large': '20px' };
 
     document.documentElement.style.fontSize = fontSizeMap[fontSize];
-    localStorage.setItem('accessibility-font-size', fontSize);
+    (localStorage as any).setItem('accessibility-font-size', fontSize);
   }, [fontSize]);
 
   const addAnnouncement = useCallback((message: any) => {
-    setAnnouncements(prev => [...prev, message]);
+    setAnnouncements(prev => [...prev as any, message]);
 
     // Auto-clear announcement after 5 seconds
-    setTimeout(() => {
+    setTimeout((() => {
       setAnnouncements(prev => prev.filter((msg) => msg !== message));
-    }, 5000);
+    }) as any, 5000);
   }, []);
 
   const clearAnnouncements = useCallback(() => {
@@ -93,8 +98,8 @@ export function AccessibilityProvider({ children }) {
   );
 }
 
-export function useAccessibility() {
-  const context = useContext(AccessibilityContext);
+export function useAccessibility(): any {
+  const context = useContext<any>(AccessibilityContext);
   if (!context) {
     throw new Error('useAccessibility must be used within AccessibilityProvider');
   }
@@ -102,7 +107,7 @@ export function useAccessibility() {
 }
 
 // Screen reader announcements
-export function ScreenReaderAnnouncer() {
+export function ScreenReaderAnnouncer(): any {
   const { announcements } = useAccessibility();
 
   return (
@@ -123,7 +128,7 @@ export function ScreenReaderAnnouncer() {
 }
 
 // Focus management hook
-export function useFocusManagement() {
+export function useFocusManagement(): any {
   const focusableElementsSelector = [
     'a[href]',
     'button:not([disabled])',
@@ -142,7 +147,7 @@ export function useFocusManagement() {
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
 
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown: any = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') {
 return;
 }
@@ -179,10 +184,10 @@ return;
     restoreFocus }}
 
 // Keyboard navigation hook
-export function useKeyboardNavigation(_options: any) {
+export function useKeyboardNavigation(_options: any): any {
   const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (disabled) {
+    if (disabled as any) {
 return;
 }
 
@@ -225,7 +230,7 @@ return;
   return { handleKeyDown }}
 
 // ARIA live region hook
-export function useAriaLiveRegion(_initialMessage = '') {
+export function useAriaLiveRegion(_initialMessage = ''): any {
   const [message, setMessage] = useState(_initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
@@ -235,7 +240,7 @@ export function useAriaLiveRegion(_initialMessage = '') {
     setMessage(newMessage);
 
     // Clear message after announcement
-    setTimeout(() => setMessage(''), 1000);
+    setTimeout((() => setMessage('')) as any, 1000);
   }, []);
 
   const LiveRegion = useCallback(() => (
@@ -254,7 +259,7 @@ export function useAriaLiveRegion(_initialMessage = '') {
 // Color contrast utilities
 export function getContrastRatio(color1: any,
           color2: any): number {
-  const getLuminance = (color: any): number => {
+  const getLuminance: any = (color: any): number => {
     const rgb = color.match(/\d+/g)?.map(Number) || [0, 0, 0];
     const [r = 0, g = 0, b = 0] = rgb.map((c: any) => {
       c = c / 255;
@@ -285,12 +290,12 @@ export function checkColorContrast(foreground: any,
   }}
 
 // Skip link component
-export function SkipLink({ href, children }) {
+export function SkipLink({ href, children }): any {
   return (
     <a
       href={href}
       className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg"
-      onFocus={(e) => {
+      onFocus={(e: any) => {
         e.currentTarget.scrollIntoView({ behavior: 'smooth',
           block: 'center' });
       }}
@@ -301,8 +306,8 @@ export function SkipLink({ href, children }) {
 }
 
 // Accessible modal hook
-export function useAccessibleModal() {
-  const [isOpen, setIsOpen] = useState(false);
+export function useAccessibleModal(): any {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const { trapFocus, restoreFocus } = useFocusManagement();
@@ -338,14 +343,14 @@ export function useAccessibleModal() {
 
   // Handle escape key
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleEscape: any = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
         closeModal();
       }
     
         };
 
-    if (isOpen) {
+    if (isOpen as any) {
       document.addEventListener('keydown', handleEscape as any as EventListener);
       return () => document.removeEventListener('keydown', handleEscape as any as EventListener);
     }
@@ -364,13 +369,13 @@ export function useAccessibleModal() {
       'aria-describedby': 'modal-description' } }}
 
 // Accessible form validation
-export function useAccessibleForm() {
+export function useAccessibleForm(): any {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { addAnnouncement } = useAccessibility();
 
   const setFieldError = useCallback((fieldName: any,
           error: Error) => {
-    setErrors(prev => ({ ...prev, [fieldName]: error }));
+    setErrors(prev => ({ ...prev as any, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
 
@@ -416,8 +421,8 @@ export function useAccessibleForm() {
   }}
 
 // Accessible tooltip hook
-export function useAccessibleTooltip() {
-  const [isVisible, setIsVisible] = useState(false);
+export function useAccessibleTooltip(): any {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [position, setPosition] = useState({ x: 0,
           y: 0 });
   const tooltipId = useRef(`tooltip-${Math.random().toString(36).substr(2, 9)}`);
@@ -431,7 +436,7 @@ export function useAccessibleTooltip() {
     });
 
     clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setIsVisible(true), 500);
+    timeoutRef.current = setTimeout((() => setIsVisible(true)) as any, 500);
   }, []);
 
   const hideTooltip = useCallback(() => {
@@ -465,12 +470,12 @@ export function useAccessibleTooltip() {
 // Accessibility testing utilities
 export function runAccessibilityAudit(element: HTMLElement): {,
   issues: Array<{
-    type: 'error' | 'warning',
+    type: "error" as const | 'warning',
           message: string; element: HTMLElement;
   }>;
   score: number } {
   const issues: Array<{,
-    type: 'error' | 'warning',
+    type: "error" as const | 'warning',
           message: string; element: HTMLElement;
   }> = [];
 
@@ -479,7 +484,7 @@ export function runAccessibilityAudit(element: HTMLElement): {,
   images.forEach(img => {
     if (!img.alt && !img.getAttribute('aria-label')) {
       issues.push({
-        type: 'error',
+        type: "error" as const,
           message: 'Image missing alt text', element: img;
       });
     }
@@ -493,7 +498,7 @@ export function runAccessibilityAudit(element: HTMLElement): {,
 
     if (!hasLabel && !hasAriaLabel) {
       issues.push({
-        type: 'error',
+        type: "error" as const,
           message: 'Form control missing label', element: input as HTMLElement
       });
     }
@@ -508,7 +513,7 @@ export function runAccessibilityAudit(element: HTMLElement): {,
 
     if (level > previousLevel + 1) {
       issues.push({
-        type: 'warning',
+        type: "warning" as const,
           message: `Heading level skipped from h${previousLevel} to h${level}`,
         element: heading as HTMLElement });
     }
@@ -528,7 +533,7 @@ export function runAccessibilityAudit(element: HTMLElement): {,
 
       if (!contrast.wcagAA) {
         issues.push({
-          type: 'warning',
+          type: "warning" as const,
           message: `Low color contrast ratio: ${contrast.ratio.toFixed(2)}`,
           element: el as HTMLElement });
       }

@@ -1,4 +1,7 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -20,9 +23,9 @@ export function useDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const handler = setTimeout((() => {
       setDebouncedValue(value);
-    }, delay);
+    }) as any, delay);
 
     return () => {
       clearTimeout(handler);
@@ -52,9 +55,9 @@ export function useDebouncedCallback<T extends (...args) => any>(,
         clearTimeout(timeoutRef.current);
       }
 
-      timeoutRef.current = setTimeout(() => {
+      timeoutRef.current = setTimeout((() => {
         callback(...args);
-      }, delay);
+      }) as any, delay);
     },
     [callback, delay, ...deps]
   ) as T;
@@ -81,15 +84,15 @@ export function useDebouncedSearch<T>(,
   searchFunction: (query: any) => Promise<T[]>,
   delay: number = 300
 ) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<T[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const debouncedQuery = useDebounce(query, delay);
   const abortControllerRef = useRef<AbortController>();
 
-  const search = useCallback(async (searchQuery: any) => {
+  const search = useCallback(async (searchQuery: any): Promise<any> => {
       if (!searchQuery.trim()) {
         setResults([]);
         setLoading(false);
@@ -111,7 +114,7 @@ export function useDebouncedSearch<T>(,
       try {
         const searchResults = await searchFunction(searchQuery);
         setResults(searchResults);
-      } catch (err) {
+      } catch (err: any) {
         if (err instanceof Error && err.name !== 'AbortError') {
           setError(err.message);
           setResults([]);

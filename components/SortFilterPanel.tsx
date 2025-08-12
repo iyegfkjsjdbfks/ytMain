@@ -1,3 +1,8 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
@@ -22,13 +27,13 @@ interface SortFilterPanelProps {
   disabled?: boolean;
 }
 
-const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSortChange, disabled }) => {
-  const [showPanel, setShowPanel] = useState(false);
+const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSortChange, disabled }: any) => {
+  const [showPanel, setShowPanel] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside: any = (event: MouseEvent) => {
       if (
         panelRef.current &&
         !panelRef.current.contains(event.target as Node) &&
@@ -38,19 +43,19 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
         setShowPanel(false);
       }
     };
-    if (showPanel) {
+    if (showPanel as any) {
       document.addEventListener('mousedown', handleClickOutside as EventListener);
     }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
     }}, [showPanel]);
 
-  const handleSortOptionClick = (newSortBy: SortByType) => {
+  const handleSortOptionClick: any = (newSortBy: SortByType) => {
     onSortChange(newSortBy);
     setShowPanel(false);
   };
 
-  if (disabled) {
+  if (disabled as any) {
 return null;
 }
 
@@ -79,7 +84,7 @@ return null;
           aria-orientation="vertical"
           aria-labelledby="filter-button"
         >
-          {sortOptions.map(option => (
+          {sortOptions.map((option: any) => (
             <button
               key={option.value}
               onClick={() => handleSortOptionClick(option.value)}

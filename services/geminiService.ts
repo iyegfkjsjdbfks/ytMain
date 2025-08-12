@@ -14,20 +14,20 @@ try {
         throw new Error('VITE_API_KEY environment variable is not set.');
     }
     ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
-} catch (e) {
-    console.error('Failed to initialize GoogleGenAI. Ensure VITE_API_KEY is set in import.meta.env.', e.message);
+} catch (e: any) {
+    (console as any).error('Failed to initialize GoogleGenAI. Ensure VITE_API_KEY is set in import.meta.env.', e.message);
     // Subsequent calls will fail if `ai` is not initialized.
     // The functions below will check for `ai` and throw if it's missing.
 }
 
-const checkAiInitialized = () => {
+const checkAiInitialized: any = () => {
   if (!ai) {
-    console.error('Gemini AI client is not initialized. API_KEY might be missing or invalid.');
+    (console as any).error('Gemini AI client is not initialized. API_KEY might be missing or invalid.');
     throw new Error('AI service is not available. Please check configuration.');
   }
 };
 
-const parseJsonFromText = (text: any): any => {
+const parseJsonFromText: any = (text: any): any => {
   let jsonStr = text.trim();
   const fenceRegex = /^```(\w*)?\s*\n?(.*?)\n?\s*```$/s;
   const match = jsonStr.match(fenceRegex);
@@ -36,8 +36,8 @@ const parseJsonFromText = (text: any): any => {
   }
   try {
     return JSON.parse(jsonStr);
-  } catch (e) {
-    console.error('Failed to parse JSON response string:', jsonStr, e);
+  } catch (e: any) {
+    (console as any).error('Failed to parse JSON response string:', jsonStr, e);
     throw new Error('AI returned an invalid JSON response format.');
   }
 };
@@ -61,13 +61,13 @@ export async function summarizeText(textToSummarize: any): Promise<string> {
 
     const summary = response.text;
     if (!summary) {
-        console.warn('Gemini API returned an empty summary for:', textToSummarize);
+        (console as any).warn('Gemini API returned an empty summary for:', textToSummarize);
         throw new Error('Failed to generate a summary (empty response).');
     }
     return summary;
 
-  } catch (error) {
-    console.error('Error summarizing text with Gemini:', error);
+  } catch (error: any) {
+    (console as any).error('Error summarizing text with Gemini:', error);
     if (error.message?.toLowerCase().includes('api key not valid')) {
         throw new Error('AI service authentication failed. Please check the API key configuration.');
     }
@@ -112,7 +112,7 @@ export async function generateVideoIdeas(userInput: any): Promise<VideoIdeaRespo
 
     const responseText = response.text;
     if (!responseText) {
-      console.warn('Gemini API returned an empty response for video ideas based on:', userInput);
+      (console as any).warn('Gemini API returned an empty response for video ideas based on:', userInput);
       throw new Error('Failed to generate video ideas (empty response).');
     }
 
@@ -126,14 +126,14 @@ export async function generateVideoIdeas(userInput: any): Promise<VideoIdeaRespo
       !Array.isArray(parsedData.talkingPoints) ||
       !Array.isArray(parsedData.tags)
     ) {
-      console.error('Parsed JSON does not match VideoIdeaResponse structure:', parsedData);
+      (console as any).error('Parsed JSON does not match VideoIdeaResponse structure:', parsedData);
       throw new Error('AI returned data in an unexpected format.');
     }
 
     return parsedData as VideoIdeaResponse;
 
-  } catch (error) {
-    console.error('Error generating video ideas with Gemini:', error);
+  } catch (error: any) {
+    (console as any).error('Error generating video ideas with Gemini:', error);
     if (error.message?.toLowerCase().includes('api key not valid')) {
         throw new Error('AI service authentication failed. Please check the API key configuration.');
     }

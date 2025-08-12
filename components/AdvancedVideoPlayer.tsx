@@ -1,3 +1,10 @@
+import React from 'react';
+import { MouseEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { FC } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 /// <reference types="node" />
 
 import { useRef, useCallback, useEffect, useState, FC, KeyboardEvent, MouseEvent } from 'react';
@@ -79,18 +86,18 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Local state for UI controls
-  const [showControls, setShowControls] = useState(true);
-  const [showSettings, setShowSettings] = useState(false);
-  const [showQualityMenu, setShowQualityMenu] = useState(false);
-  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
-  const [showChapters, setShowChapters] = useState(false);
+  const [showControls, setShowControls] = useState<boolean>(true);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [showQualityMenu, setShowQualityMenu] = useState<boolean>(false);
+  const [showSpeedMenu, setShowSpeedMenu] = useState<boolean>(false);
+  const [showChapters, setShowChapters] = useState<boolean>(false);
   const [selectedQuality, setSelectedQuality] = useState('auto');
-  // const [isDragging] = useState(false); // Not used yet
-  const [previewTime, setPreviewTime] = useState(0);
-  const [showPreview, setShowPreview] = useState(false);
-  const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
-  const [autoplayNext, setAutoplayNext] = useState(true);
-  const [annotations, setAnnotations] = useState(true);
+  // const [isDragging] = useState<boolean>(false); // Not used yet
+  const [previewTime, setPreviewTime] = useState<number>(0);
+  const [showPreview, setShowPreview] = useState<boolean>(false);
+  const [subtitlesEnabled, setSubtitlesEnabled] = useState<boolean>(false);
+  const [autoplayNext, setAutoplayNext] = useState<boolean>(true);
+  const [annotations, setAnnotations] = useState<boolean>(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -106,7 +113,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
         }, [videoPlayerInstance]);
 
   // Format time for display
-  const formatTime = (time: any): string => {
+  const formatTime: any = (time: any): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);
@@ -118,7 +125,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   };
 
   // Get current chapter
-  const getCurrentChapter = (): Chapter | undefined => {
+  const getCurrentChapter: any = (): Chapter | undefined => {
     return chapters.find((chapter: any) => videoPlayerInstance.currentTime >= chapter.startTime && videoPlayerInstance.currentTime < chapter.endTime
     );
   };
@@ -131,7 +138,7 @@ return;
 
     const rect = progressRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
-    const newTime = (clickX / rect.width) * videoPlayerInstance.duration;
+    const newTime: any = (clickX / rect.width) * videoPlayerInstance.duration;
     videoPlayerInstance.seek(newTime);
   }, [videoPlayerInstance.duration]);
 
@@ -142,7 +149,7 @@ return;
 
     const rect = progressRef.current.getBoundingClientRect();
     const hoverX = e.clientX - rect.left;
-    const hoverTime = (hoverX / rect.width) * videoPlayerInstance.duration;
+    const hoverTime: any = (hoverX / rect.width) * videoPlayerInstance.duration;
     setPreviewTime(hoverTime);
     setShowPreview(true);
   }, [videoPlayerInstance.duration]);
@@ -210,9 +217,9 @@ return;
     setShowControls(true);
 
     if (videoPlayerInstance.isPlaying) {
-      controlsTimeoutRef.current = setTimeout(() => {
+      controlsTimeoutRef.current = setTimeout((() => {
         setShowControls(false);
-      }, 3000);
+      }) as any, 3000);
     }
   }, [videoPlayerInstance.isPlaying]);
 
@@ -247,7 +254,7 @@ return;
   }, [videoPlayerInstance.currentTime]);
 
   // Picture-in-picture
-  const togglePictureInPicture = useCallback(async () => {
+  const togglePictureInPicture = useCallback(async (): Promise<void> => {
     if (!videoRef.current) {
 return;
 }
@@ -258,8 +265,8 @@ return;
       } else {
         await videoRef.current.requestPictureInPicture();
       }
-    } catch (error) {
-      console.error('Picture-in-picture failed:', error);
+    } catch (error: any) {
+      (console as any).error('Picture-in-picture failed:', error);
     }
   }, []);
 
@@ -347,7 +354,7 @@ return;
         <div className="absolute inset-0 flex items-center justify-center">
           <button
             onClick={videoPlayerInstance.togglePlay}
-            onKeyDown={(e) => {
+            onKeyDown={(e: any) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 videoPlayerInstance.togglePlay();
@@ -371,10 +378,10 @@ return;
             <div
               ref={progressRef}
               className="relative h-2 bg-white bg-opacity-30 rounded-full cursor-pointer group"
-              onClick={handleProgressClick}
+              onClick={(e: any) => handleProgressClick(e)}
               onMouseMove={handleProgressMouseMove}
               onMouseLeave={handleProgressMouseLeave}
-              onKeyDown={(e) => {
+              onKeyDown={(e: any) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
                   handleProgressClick(e as any);
@@ -448,7 +455,7 @@ return;
 
               {/* Skip Backward */}
               <button
-                onClick={skipBackward}
+                onClick={(e: any) => skipBackward(e)}
                 className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
                 title="Skip backward 10s"
               >
@@ -457,7 +464,7 @@ return;
 
               {/* Skip Forward */}
               <button
-                onClick={skipForward}
+                onClick={(e: any) => skipForward(e)}
                 className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
                 title="Skip forward 10s"
               >
@@ -529,7 +536,7 @@ return;
 
               {/* Picture-in-Picture */}
               <button
-                onClick={togglePictureInPicture}
+                onClick={(e: any) => togglePictureInPicture(e)}
                 className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
                 title="Picture-in-picture"
               >

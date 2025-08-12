@@ -1,4 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, memo, lazy, KeyboardEvent, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+import { KeyboardEvent } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 // @ts-nocheck
 
 import { PlayIcon, ClockIcon, EllipsisVerticalIcon, PlusIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -89,10 +95,10 @@ interface LazyImageProps {
   lazy?: boolean;
 }
 
-const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low', lazy = true }) => {
+const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low', lazy = true }: any) => {
   const [loaded, setLoaded] = useState(() => imageCache.has(src));
   const [error, setError] = useState(() => failedImages.has(src));
-  const [retryCount, setRetryCount] = useState(0);
+  const [retryCount, setRetryCount] = useState<number>(0);
   const imgRef = useRef<HTMLImageElement>(null);
   const maxRetries = 2;
 
@@ -115,14 +121,14 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
     if (retryCount < maxRetries) {
       setRetryCount(prev => prev + 1);
       // Retry after exponential backoff delay
-      setTimeout(() => {
+      setTimeout((() => {
         setError(false);
         setLoaded(false);
         // Force reload by updating src
         if (imgRef.current) {
           imgRef.current.src = `${src}?retry=${retryCount + 1}`;
         }
-      }, 1000 * Math.pow(2, retryCount));
+      }) as any, 1000 * Math.pow(2, retryCount));
     } else {
       setError(true);
       setLoaded(true);
@@ -141,12 +147,12 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
       performanceMonitor.startMeasure(`image-load-${src}`);
 
       // Set a timeout to prevent indefinite loading
-      const timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout((() => {
         if (!loaded && !error) {
-          console.warn(`Image loading timeout for: ${src}`);
+          (console as any).warn(`Image loading timeout for: ${src}`);
           handleError();
         }
-      }, 5000); // 5 second timeout
+      }) as any, 5000); // 5 second timeout
 
       return () => {
         clearTimeout(timeoutId);
@@ -235,7 +241,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
     index = 0 }) => {
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
-  const [isPlayingInline, setIsPlayingInline] = useState(false);
+  const [isPlayingInline, setIsPlayingInline] = useState<boolean>(false);
 
   const classes = sizeClasses[size];
   const isWatchLater = false; // Simplified for now
@@ -259,7 +265,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
       if (isYouTube && !isPlayingInline) {
         // For YouTube videos, start inline playback
         setIsPlayingInline(true);
-      } else if (onClick) {
+      } else if (onClick as any) {
         onClick(video);
       } else {
         showMiniplayer(video);
@@ -267,8 +273,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
       if (performanceMonitor.hasMetric('video-card-click')) {
         performanceMonitor.endMeasure('video-card-click');
       }
-    } catch (error) {
-      console.error('Failed to handle video click:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to handle video click:', error);
     }
   }, [onClick, video, showMiniplayer, isYouTube, isPlayingInline]);
 
@@ -285,24 +291,24 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
   const handleChannelClick = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     try {
-      if (onChannelClick) {
+      if (onChannelClick as any) {
         onChannelClick(video.channelId);
       }
-    } catch (error) {
-      console.error('Failed to navigate to channel:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to navigate to channel:', error);
     }
   }, [onChannelClick, video.channelId]);
 
   const handleWatchLaterToggle = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     try {
-      if (isWatchLater) {
+      if (isWatchLater as any) {
         removeFromWatchLater(video.id);
       } else {
         addToWatchLater(video);
       }
-    } catch (error) {
-      console.error('Failed to toggle watch later:', error);
+    } catch (error: any) {
+      (console as any).error('Failed to toggle watch later:', error);
     }
   }, [isWatchLater, video, addToWatchLater, removeFromWatchLater]);
 
@@ -327,7 +333,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
         classes.container,
         'group cursor-pointer transition-transform hover:scale-105',
         className)}
-      onClick={handleVideoClick}
+      onClick={(e: any) => handleVideoClick(e)}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
@@ -348,7 +354,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
             />
             {/* Close button for inline player */}
             <button
-              onClick={handleCloseInlinePlayer}
+              onClick={(e: any) => handleCloseInlinePlayer(e)}
               className="absolute top-2 right-2 p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors z-10"
               title="Close player"
             >
@@ -385,7 +391,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               {isYouTube ? (
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={handlePlayInline}
+                    onClick={(e: any) => handlePlayInline(e)}
                     className="p-2 bg-red-600 hover:bg-red-700 rounded-full transition-colors"
                     title="Play inline"
                   >
@@ -404,7 +410,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
         {!isPlayingInline && (
           <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
             <button
-              onClick={handleWatchLaterToggle}
+              onClick={(e: any) => handleWatchLaterToggle(e)}
               className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               title={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
               aria-label={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
@@ -416,7 +422,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               )}
             </button>
             <button
-              onClick={handleMenuClick}
+              onClick={(e: any) => handleMenuClick(e)}
               className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               title="More options"
               aria-label="More options"
@@ -489,10 +495,10 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               e.stopPropagation();
               closeMenu();
               // Mark video as not interested
-              const notInterestedVideos = JSON.parse(localStorage.getItem('youtubeCloneNotInterested_v1') || '[]');
+              const notInterestedVideos = JSON.parse((localStorage as any).getItem('youtubeCloneNotInterested_v1') || '[]');
               if (!notInterestedVideos.includes(video.id)) {
                 notInterestedVideos.push(video.id);
-                localStorage.setItem('youtubeCloneNotInterested_v1', JSON.stringify(notInterestedVideos));
+                (localStorage as any).setItem('youtubeCloneNotInterested_v1', JSON.stringify(notInterestedVideos));
 
                 // Dispatch event to remove video from current view
                 const event = new CustomEvent('videoNotInterested', { detail: { videoId: video.id } 
@@ -504,7 +510,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 feedback.className = 'fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg z-50';
                 feedback.textContent = 'Video marked as not interested';
                 document.body.appendChild(feedback);
-                setTimeout(() => feedback.remove(), 3000);
+                setTimeout((() => feedback.remove()) as any, 3000);
               }
             
         }}
@@ -539,13 +545,13 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                   const selectedReason = reportReasons[Number(reason) - 1];
 
                   // Store report (in real app, this would be sent to server)
-                  const reports = JSON.parse(localStorage.getItem('youtubeCloneReports_v1') || '[]');
+                  const reports = JSON.parse((localStorage as any).getItem('youtubeCloneReports_v1') || '[]');
                   reports.push({
                     videoId: video.id,
           reason: selectedReason,
                     timestamp: new Date().toISOString(),
           videoTitle: video.title });
-                  localStorage.setItem('youtubeCloneReports_v1', JSON.stringify(reports));
+                  (localStorage as any).setItem('youtubeCloneReports_v1', JSON.stringify(reports));
 
                   alert(`Thank you for your report. We'll review this video for: ${selectedReason}`);
                 }
@@ -581,7 +587,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               loading="lazy"
             />
             <button
-              onClick={handleChannelClick}
+              onClick={(e: any) => handleChannelClick(e)}
               className={cn(
                 classes.channel,
                 'hover:text-gray-900 transition-colors truncate focus:outline-none focus:ring-2 focus:ring-blue-500 rounded')}
@@ -630,7 +636,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 OptimizedVideoCard.displayName = 'OptimizedVideoCard';
 
 // Export with enhanced memoization
-export default withMemo(OptimizedVideoCard(prevProps, nextProps) => {
+export default withMemo(OptimizedVideoCard(prevProps: any, nextProps: any) => {
   return (
     prevProps.video.id === nextProps.video.id &&
     prevProps.video.title === nextProps.video.title &&

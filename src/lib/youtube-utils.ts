@@ -112,7 +112,7 @@ export function getYouTubeVideoId(,
       /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch(?:\?v=|\/))([^#&?]*).*/;
     const match = url.match(regExp);
     return match?.[1] ? match[1].substring(0, 11) : null;
-  } catch (e) {
+  } catch (e: any) {
     logger.error('Error extracting YouTube video ID:', e);
     return null;
   }
@@ -162,7 +162,7 @@ export class YouTubePlayer {
 
       // Preserve any existing callback
       const originalCallback = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => {
+      (window as any).onYouTubeIframeAPIReady = () => {
         resolve();
 
         // Call the original callback if it exists
@@ -178,13 +178,13 @@ export class YouTubePlayer {
       await this.loadYouTubeAPI();
 
       // Wait for YT.Player to be available
-      const checkYT = () => {
+      const checkYT: any = () => {
         return new Promise<void>(resolve => {
-          const check = () => {
+          const check: any = () => {
             if (window.YT?.Player) {
               resolve();
             } else {
-              setTimeout(check, 100);
+              setTimeout((check) as any, 100);
             }
           };
           check();
@@ -211,19 +211,19 @@ export class YouTubePlayer {
           onStateChange: event => {
             this.options.events?.onStateChange?.(event);
           } } });
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Error initializing YouTube player:', error);
     }
   }
 
   // Basic player controls
   playVideo(): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           this.player.playVideo();
           resolve();
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -233,12 +233,12 @@ export class YouTubePlayer {
   }
 
   pauseVideo(): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           this.player.pauseVideo();
           resolve();
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -248,12 +248,12 @@ export class YouTubePlayer {
   }
 
   stopVideo(): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           this.player.stopVideo();
           resolve();
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -263,12 +263,12 @@ export class YouTubePlayer {
   }
 
   seekTo(seconds: any, allowSeekAhead: boolean = true): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           this.player.seekTo(seconds, allowSeekAhead);
           resolve();
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -279,12 +279,12 @@ export class YouTubePlayer {
 
   // Additional player methods
   getCurrentTime(): Promise<number> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           const time = this.player.getCurrentTime();
           resolve(time);
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -294,12 +294,12 @@ export class YouTubePlayer {
   }
 
   getDuration(): Promise<number> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           const duration = this.player.getDuration();
           resolve(duration);
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -309,12 +309,12 @@ export class YouTubePlayer {
   }
 
   getVolume(): Promise<number> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           const volume = this.player.getVolume();
           resolve(volume);
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -324,12 +324,12 @@ export class YouTubePlayer {
   }
 
   setVolume(volume: any): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           this.player.setVolume(volume);
           resolve();
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -339,12 +339,12 @@ export class YouTubePlayer {
   }
 
   isMuted(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           const isMuted = this.player.isMuted();
           resolve(isMuted);
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -354,12 +354,12 @@ export class YouTubePlayer {
   }
 
   mute(): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           this.player.mute();
           resolve();
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -369,12 +369,12 @@ export class YouTubePlayer {
   }
 
   unMute(): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       if (this.player) {
         try {
           this.player.unMute();
           resolve();
-        } catch (error) {
+        } catch (error: any) {
           reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
@@ -487,13 +487,13 @@ export function extractVideoIdFromUrl(,
   for (const { regex, getter } of patterns) {
     try {
       const match = url.match(regex);
-      if (match) {
+      if (match as any) {
         const id = getter(match);
         if (id && id.length === 11) {
           return id;
         }
       }
-    } catch (e) {
+    } catch (e: any) {
       logger.warn('Error parsing YouTube URL:', e);
       continue;
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 /**
  * ShortsPage component for displaying short-form vertical videos
  */

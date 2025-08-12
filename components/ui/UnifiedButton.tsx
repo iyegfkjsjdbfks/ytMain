@@ -1,5 +1,7 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 interface UnifiedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'action' | 'link';
@@ -39,7 +41,7 @@ const iconSizeClasses = {
   md: 'w-5 h-5',
           lg: 'w-5 h-5' };
 
-const LoadingSpinner: React.FC<{ size: string }> = ({ size }) => (
+const LoadingSpinner: React.FC<{ size: string }> = ({ size }: any) => (
   <svg
     className={cn('animate-spin text-current', size)}
     xmlns="http://www.w3.org/2000/svg"
