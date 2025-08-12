@@ -226,11 +226,12 @@ export function customRender(_ui: ReactElement, _options: CustomRenderOptions = 
 // Custom render hook function
 export function customRenderHook<TResult, TProps>(
   hook: (props: TProps) => TResult,
-  options & {
+  options: {
     queryClient?: QueryClient;
     initialEntries?: string;
     mockUser?: any;
-  } = {},
+    wrapper?: ({ children }: { children: React.ReactNode }) => ReactElement;
+  } & any = {},
 ) {
   const {
     queryClient = createTestQueryClient(),
