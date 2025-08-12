@@ -1,4 +1,14 @@
-import React, { createContext, useContext, useReducer, useMemo, type ReactNode } from 'react';
+const fs = require('fs');
+const path = require('path');
+
+/**
+ * Fix critical structural issues in TypeScript files
+ */
+
+function fixOptimizedMiniplayerContext() {
+  const filePath = 'contexts/OptimizedMiniplayerContext.tsx';
+  
+  const content = `import React, { createContext, useContext, useReducer, useMemo, type ReactNode } from 'react';
 import type { Video } from '../src/types/core';
 
 // State interface
@@ -275,3 +285,84 @@ export const useMiniplayerActions = () => {
   const { actions } = useOptimizedMiniplayer();
   return actions;
 };
+`;
+
+  fs.writeFileSync(filePath, content, 'utf8');
+  console.log('✅ Fixed OptimizedMiniplayerContext.tsx');
+}
+
+function fixSimpleFiles() {
+  // Fix FastLoadingSpinner
+  const spinnerContent = `import React from 'react';
+
+const FastLoadingSpinner: React.FC = () => {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+  );
+};
+
+export default FastLoadingSpinner;
+`;
+  
+  fs.writeFileSync('components/FastLoadingSpinner.tsx', spinnerContent, 'utf8');
+  console.log('✅ Fixed FastLoadingSpinner.tsx');
+
+  // Fix SuspenseWrapper
+  const suspenseContent = `import React, { Suspense, ReactNode } from 'react';
+
+interface SuspenseWrapperProps {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({ children, fallback }) => {
+  return (
+    <Suspense fallback={fallback || <div>Loading...</div>}>
+      {children}
+    </Suspense>
+  );
+};
+
+export default SuspenseWrapper;
+`;
+  
+  fs.writeFileSync('components/SuspenseWrapper.tsx', suspenseContent, 'utf8');
+  console.log('✅ Fixed SuspenseWrapper.tsx');
+}
+
+function fixQueryClient() {
+  const queryClientContent = `import { QueryClient } from '@tanstack/react-query';
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 10, // 10 minutes
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+`;
+  
+  // Create the directory if it doesn't exist
+  const dir = 'src/hooks';
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  
+  fs.writeFileSync('src/hooks/useQueryClient.ts', queryClientContent, 'utf8');
+  console.log('✅ Fixed useQueryClient.ts');
+}
+
+console.log('🔧 Fixing critical structural issues...\n');
+
+// Fix all critical files
+fixOptimizedMiniplayerContext();
+fixSimpleFiles();
+fixQueryClient();
+
+console.log('\n✨ Critical fixes complete!');
+console.log('🎯 Ready to retry build.');

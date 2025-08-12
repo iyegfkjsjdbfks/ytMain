@@ -1,22 +1,16 @@
-import React, { Suspense, type ReactNode, FC, ReactNode } from 'react';
-
-import FastLoadingSpinner from './FastLoadingSpinner';
+import React, { Suspense, ReactNode } from 'react';
 
 interface SuspenseWrapperProps {
- children?: React.ReactNode;
- fallback?: ReactNode;
+  children: ReactNode;
+  fallback?: ReactNode;
 }
 
-const DefaultFallback: React.FC = () => <FastLoadingSpinner />;
-
-const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
- children,
- fallback = <DefaultFallback /> }) => {
- return (
- <Suspense fallback={fallback}>
- {children}
- </Suspense>
- );
+const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({ children, fallback }) => {
+  return (
+    <Suspense fallback={fallback || <div>Loading...</div>}>
+      {children}
+    </Suspense>
+  );
 };
 
 export default SuspenseWrapper;
