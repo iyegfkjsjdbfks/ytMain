@@ -81,12 +81,12 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   }, []);
 
   const getCurrentQualityLabel = () => {
-    const quality = qualities.find((q: any) => q: any.value === currentQuality);
+    const quality = qualities.find((q: any) => q.value === currentQuality);
     return quality?.label || 'Auto';
   };
 
   const getCurrentSpeedLabel = () => {
-    const speed = playbackSpeeds.find((s: any) => s: any.value === currentSpeed);
+    const speed = playbackSpeeds.find((s: any) => s.value === currentSpeed);
     return speed?.label || 'Normal';
   };
 

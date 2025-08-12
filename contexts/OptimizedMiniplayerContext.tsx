@@ -122,7 +122,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       };
 
     case 'REMOVE_FROM_QUEUE': {
-      const newQueue = state.queue.filter((video: any) => video: any.id !== action.payload);
+      const newQueue = state.queue.filter((video: any) => video.id !== action.payload);
       const newIndex = state.currentIndex >= newQueue.length ? newQueue.length - 1 : state.currentIndex;
       return {
         ...state,
@@ -211,9 +211,9 @@ export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProp
     showMiniplayer: (video: Video) => dispatch({ type: 'SHOW_MINIPLAYER', payload: video }),
     hideMiniplayer: () => dispatch({ type: 'HIDE_MINIPLAYER' }),
     togglePlay: () => dispatch({ type: 'TOGGLE_PLAY' }),
-    setPlaying: (playing: any) => dispatch({ type: 'SET_PLAYING', payload: playing: any }),
-    setVolume: (volume: any) => dispatch({ type: 'SET_VOLUME', payload: volume: any }),
-    setCurrentTime: (time: any) => dispatch({ type: 'SET_CURRENT_TIME', payload: time: any }),
+    setPlaying: (playing: any) => dispatch({ type: 'SET_PLAYING', payload: playing }),
+    setVolume: (volume: any) => dispatch({ type: 'SET_VOLUME', payload: volume }),
+    setCurrentTime: (time: any) => dispatch({ type: 'SET_CURRENT_TIME', payload: time }),
     setDuration: (duration: any) => dispatch({ type: 'SET_DURATION', payload: duration }),
     toggleMaximize: () => dispatch({ type: 'TOGGLE_MAXIMIZE' }),
     setMaximized: (maximized: any) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized }),
