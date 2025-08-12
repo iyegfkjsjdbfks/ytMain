@@ -1,5 +1,4 @@
-import React, { lazy } from 'react';
-import { memo, lazy, Suspense } from 'react';
+import React, { lazy, memo, Suspense } from 'react';
 import LoadingSpinner from '../LoadingSpinner';
 import type { Video } from '../../types/core';
 

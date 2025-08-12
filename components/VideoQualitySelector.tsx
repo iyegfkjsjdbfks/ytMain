@@ -28,12 +28,12 @@ export interface PlaybackSpeed {
 interface VideoQualitySelectorProps {
   qualities: VideoQuality;
   currentQuality: string;
-  onQualityChange: (quality: any) => void;
+  onQualityChange: (quality) => void;
   playbackSpeeds?: PlaybackSpeed;
   currentSpeed?: number;
-  onSpeedChange?: (speed: any) => void;
+  onSpeedChange?: (speed) => void;
   volume?: number;
-  onVolumeChange?: (volume: any) => void;
+  onVolumeChange?: (volume) => void;
   isPlaying?: boolean;
   onPlayPause?: () => void;
   isFullscreen?: boolean;
@@ -91,22 +91,22 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   }, []);
 
   const getCurrentQualityLabel = () => {
-    const quality = qualities.find((q: any) => q.value === currentQuality);
+    const quality = qualities.find((q) => q.value === currentQuality);
     return quality?.label || 'Auto';
   };
 
   const getCurrentSpeedLabel = () => {
-    const speed = playbackSpeeds.find((s: any) => s.value === currentSpeed);
+    const speed = playbackSpeeds.find((s) => s.value === currentSpeed);
     return speed?.label || 'Normal';
   };
 
-  const handleQualitySelect = (qualityValue: any) => {
+  const handleQualitySelect = (qualityValue) => {
     onQualityChange(qualityValue);
     setShowSettings(false);
     setActivePanel('main');
   };
 
-  const handleSpeedSelect = (speedValue: any) => {
+  const handleSpeedSelect = (speedValue) => {
     onSpeedChange?.(speedValue);
     setShowSettings(false);
     setActivePanel('main');
@@ -177,7 +177,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 value={volume}
                 onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
                 className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
-                style={{ writingMode: 'vertical-lr' as const, WebkitAppearance: 'slider-vertical' }}
+                style={{ writingMode: 'vertical-lr' as const WebkitAppearance: 'slider-vertical' }}
               />
             </div>
           </div>
@@ -274,7 +274,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 </button>
 
                 {/* Quality Options */}
-                {qualities.map((quality: any) => (
+                {qualities.map((quality) => (
                   <button
                     key={quality.value}
                     onClick={() => handleQualitySelect(quality.value)}
@@ -301,7 +301,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 </button>
 
                 {/* Speed Options */}
-                {playbackSpeeds.map((speed: any) => (
+                {playbackSpeeds.map((speed) => (
                   <button
                     key={speed.value}
                     onClick={() => handleSpeedSelect(speed.value)}

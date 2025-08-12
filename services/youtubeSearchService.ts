@@ -82,7 +82,7 @@ class YouTubeSearchService {
   /**
    * Extract YouTube video ID from various YouTube URL formats
    */
-  private extractVideoId(url: any): string | null {
+  private extractVideoId(url): string | null {
     const patterns = [
       /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&\n?#]+)/,
       /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^&\n?#]+)/,
@@ -103,7 +103,7 @@ class YouTubeSearchService {
   /**
    * Convert search result to Video object with enhanced metadata
    */
-  private convertToVideo(item: YouTubeSearchItem, index: number): Video {
+  private convertToVideo(item: YouTubeSearchItem, index): Video {
     const extractedVideoId = this.extractVideoId(item.link);
     // Ensure Google Custom Search videos have the google-search- prefix
     const videoId = extractedVideoId ? `google-search-${extractedVideoId}` : `google-search-${Date.now()}-${index}`;
@@ -279,7 +279,7 @@ class YouTubeSearchService {
     // Extract tags from various sources
     const tags: string = [];
     if (metaTags?.['og:video:tag']) {
-      tags.push(...metaTags['og:video:tag'].split(',').map((tag: any) => tag.trim()));
+      tags.push(...metaTags['og:video:tag'].split(',').map((tag) => tag.trim()));
     }
 
     // Enhanced category detection
@@ -347,8 +347,7 @@ class YouTubeSearchService {
       dislikeCount: Math.floor(Math.random() * 1000),
       commentCount: Math.floor(Math.random() * 5000),
       isLive: item.snippet.toLowerCase().includes('live') || item.title.toLowerCase().includes('live'),
-      visibility: 'public' as const,
-      createdAt: uploadedAt,
+      visibility: 'public' as const createdAt: uploadedAt,
       updatedAt: uploadedAt,
       publishedAt: uploadedAt,
     };
@@ -497,7 +496,7 @@ class YouTubeSearchService {
 
       // Convert search results to Video objects
       const videos = data.items
-        .filter((item: any) => {
+        .filter((item) => {
           // Only include YouTube video URLs
           const isYouTubeVideo = item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/');
           if (!isYouTubeVideo) {
@@ -505,8 +504,8 @@ class YouTubeSearchService {
           }
           return isYouTubeVideo;
         })
-        .map((item: any, index: number) => this.convertToVideo(item, index))
-        .filter((video: any) => {
+        .map((item, index) => this.convertToVideo(item, index))
+        .filter((video) => {
           // Exclude the current video from recommendations
           const isDifferent = video.id !== currentVideo.id &&
                              !video.videoUrl.includes(currentVideo.id);
@@ -519,7 +518,7 @@ class YouTubeSearchService {
       conditionalLogger.debug('Final recommendation results', { count: videos.length }, 'YouTubeSearchService');
       if (videos.length > 0) {
         conditionalLogger.debug('Sample recommendations', {
-          samples: videos.slice(0, 3).map((v: any) => ({ title: v.title, url: v.videoUrl })),
+          samples: videos.slice(0, 3).map((v) => ({ title: v.title, url: v.videoUrl })),
         }, 'YouTubeSearchService');
       }
 
@@ -539,7 +538,7 @@ class YouTubeSearchService {
    * Search for YouTube videos by specific query
    */
   async searchVideos(
-    query: any,
+    query,
     maxResults: number = 10,
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
@@ -573,8 +572,8 @@ class YouTubeSearchService {
       }
 
       return data.items
-        .filter((item: any) => item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/'))
-        .map((item: any, index: number) => this.convertToVideo(item, index));
+        .filter((item) => item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/'))
+        .map((item, index) => this.convertToVideo(item, index));
 
     } catch (error) {
       const networkError = createNetworkError(

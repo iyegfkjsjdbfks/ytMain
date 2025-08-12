@@ -25,7 +25,7 @@ class VideoService {
   /**
    * Fetch a single video by ID
    */
-  async getVideo(videoId: any): Promise<Video> {
+  async getVideo(videoId): Promise<Video> {
     const response = await fetch(`${this.baseUrl}/${videoId}`);
 
     if (!response.ok) {
@@ -66,7 +66,7 @@ class VideoService {
    * Fetch recommended videos based on a video ID
    */
   async getRecommendedVideos(
-    videoId: any,
+    videoId,
     limit: number = 10
   ): Promise<Video[]> {
     const url = new URL(this.baseUrl);
@@ -88,7 +88,7 @@ class VideoService {
   /**
    * Fetch video metrics
    */
-  async getVideoMetrics(videoId: any): Promise<VideoMetrics> {
+  async getVideoMetrics(videoId): Promise<VideoMetrics> {
     const response = await fetch(`${this.baseUrl}/${videoId}/metrics`);
 
     if (!response.ok) {
@@ -101,7 +101,7 @@ class VideoService {
   /**
    * Search for videos
    */
-  async searchVideos(query: any, limit: number = 20): Promise<Video[]> {
+  async searchVideos(query, limit: number = 20): Promise<Video[]> {
     const url = new URL(this.baseUrl);
     url.pathname += '/search';
     url.searchParams.append('q', query);
@@ -119,7 +119,7 @@ class VideoService {
   /**
    * Toggle like on a video
    */
-  async toggleLike(videoId: any): Promise<VideoInteractionResponse> {
+  async toggleLike(videoId): Promise<VideoInteractionResponse> {
     const response = await fetch(`${this.baseUrl}/${videoId}/like`, {
       method: 'POST',
       headers: {
@@ -137,7 +137,7 @@ class VideoService {
   /**
    * Toggle dislike on a video
    */
-  async toggleDislike(videoId: any): Promise<VideoInteractionResponse> {
+  async toggleDislike(videoId): Promise<VideoInteractionResponse> {
     const response = await fetch(`${this.baseUrl}/${videoId}/dislike`, {
       method: 'POST',
       headers: {
@@ -155,7 +155,7 @@ class VideoService {
   /**
    * Toggle save on a video
    */
-  async toggleSave(videoId: any): Promise<VideoInteractionResponse> {
+  async toggleSave(videoId): Promise<VideoInteractionResponse> {
     const response = await fetch(`${this.baseUrl}/${videoId}/save`, {
       method: 'POST',
       headers: {
@@ -173,7 +173,7 @@ class VideoService {
   /**
    * Report a video
    */
-  async reportVideo(videoId: any, reason: any): Promise<void> {
+  async reportVideo(videoId, reason): Promise<void> {
     const response = await fetch(`${this.baseUrl}/${videoId}/report`, {
       method: 'POST',
       headers: {
@@ -190,7 +190,7 @@ class VideoService {
   /**
    * Get video interactions (likes, dislikes, saves)
    */
-  async getVideoInteractions(videoId: any): Promise<VideoInteractionResponse> {
+  async getVideoInteractions(videoId): Promise<VideoInteractionResponse> {
     const response = await fetch(`${this.baseUrl}/${videoId}/interactions`);
 
     if (!response.ok) {
@@ -205,7 +205,7 @@ class VideoService {
   /**
    * Get video statistics
    */
-  async getVideoStats(videoId: any): Promise<VideoStats> {
+  async getVideoStats(videoId): Promise<VideoStats> {
     const response = await fetch(`${this.baseUrl}/${videoId}/stats`);
 
     if (!response.ok) {
@@ -218,7 +218,7 @@ class VideoService {
   /**
    * Get video engagement metrics
    */
-  async getVideoEngagement(videoId: any): Promise<VideoEngagement> {
+  async getVideoEngagement(videoId): Promise<VideoEngagement> {
     const response = await fetch(`${this.baseUrl}/${videoId}/engagement`);
 
     if (!response.ok) {
@@ -233,7 +233,7 @@ class VideoService {
    * @param videoIds Array of YouTube video IDs
    * @returns Promise resolving to array of Video objects with YouTube metadata
    */
-  async getYouTubeVideos(videoIds: any): Promise<Video[]> {
+  async getYouTubeVideos(videoIds): Promise<Video[]> {
     try {
       return await youtubeService.fetchVideos(videoIds);
     } catch (error) {
@@ -247,7 +247,7 @@ class VideoService {
    * @param videoId YouTube video ID
    * @returns Promise resolving to Video object or null
    */
-  async getYouTubeVideo(videoId: any): Promise<Video | null> {
+  async getYouTubeVideo(videoId): Promise<Video | null> {
     try {
       const videos = await youtubeService.fetchVideos([videoId]);
       return videos[0] || null;
@@ -262,7 +262,7 @@ class VideoService {
    * @param videoId Video ID
    * @returns Promise resolving to Video with enriched metadata
    */
-  async getEnhancedVideo(videoId: any): Promise<Video> {
+  async getEnhancedVideo(videoId): Promise<Video> {
     try {
       // First try to get YouTube metadata
       const youtubeVideo = await this.getYouTubeVideo(videoId);

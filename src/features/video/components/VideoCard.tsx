@@ -1,5 +1,4 @@
-import React from 'react';
-import { memo, FC } from 'react';
+import React, { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { formatDistanceToNow } from 'date-fns';
@@ -69,7 +68,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
         ? `${(commentCount / 1000).toFixed(1)}K`
         : commentCount?.toString() || '0';
 
-    const formatDuration = (seconds: any) => {
+    const formatDuration = (seconds) => {
       const hours = Math.floor(seconds / 3600);
       const minutes = Math.floor((seconds % 3600) / 60);
       const remainingSeconds = seconds % 60;

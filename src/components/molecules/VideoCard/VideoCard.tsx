@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import { User } from '../types';
 
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { MoreVertical, User } from 'lucide-react';
+import { MoreVertical, User  } from 'lucide-react';
 
 import { Button } from '@/components/atoms/Button';
 
@@ -35,7 +35,7 @@ const Image = ({
 
 export interface VideoCardProps
   extends Omit<VideoCardPropsBase, 'onMoreClick'> {
-  onMoreClick: (videoId: any) => void;
+  onMoreClick: (videoId) => void;
 }
 
 export const VideoCard = ({
@@ -140,7 +140,7 @@ export const VideoCard = ({
 };
 
 // Helper function to format duration (moved from utils.ts for self-containment)
-function formatDuration(seconds: any): string {
+function formatDuration(seconds): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);

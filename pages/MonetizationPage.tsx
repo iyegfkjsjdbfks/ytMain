@@ -1,10 +1,7 @@
-import React, { useEffect,  useState } from 'react';
-import { memo, lazy, Suspense, FC } from 'react';
-
-import { ArrowTrendingUpIcon, BanknotesIcon } from '@heroicons/react/24/outline';
+import React, { useEffect, useState, memo, lazy, Suspense, FC } from 'react';
+import { ArrowTrendingUpIcon, BanknotesIcon  } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
-import {
-  Chart as ChartJS,
+import { Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -12,9 +9,7 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend,
-  ArcElement,
-} from 'chart.js';
+  Legend, ArcElement } from 'chart.js';
 
 // Lazy load Chart.js components for better performance
 const LazyLineChart = lazy(() => import('react-chartjs-2').then(module => ({ default: module.Line })));
@@ -88,12 +83,12 @@ const MonetizationPage: React.FC = () => {
       setRevenueData(mockRevenueData);
 
       // Generate mock metrics
-      const totalRevenue = mockRevenueData.reduce((sum: any, day: any) =>
+      const totalRevenue = mockRevenueData.reduce((sum, day) =>
         sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0,
       );
 
-      const membershipRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.membershipRevenue, 0);
-      const superChatRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.superChatRevenue, 0);
+      const membershipRevenue = mockRevenueData.reduce((sum, day) => sum + day.membershipRevenue, 0);
+      const superChatRevenue = mockRevenueData.reduce((sum, day) => sum + day.superChatRevenue, 0);
 
       setMetrics({
         totalRevenue,
@@ -116,7 +111,7 @@ const MonetizationPage: React.FC = () => {
     generateMockData();
   }, [timeRange]);
 
-  const formatCurrency = (amount: any) => {
+  const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -124,7 +119,7 @@ const MonetizationPage: React.FC = () => {
     }).format(amount);
   };
 
-  const formatNumber = (num: any) => {
+  const formatNumber = (num) => {
     return new Intl.NumberFormat('en-US').format(num);
   };
 
@@ -220,17 +215,15 @@ return { labels: [], datasets: [] };
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top' as const,
-        labels: {
+        position: 'top' as const labels: {
           usePointStyle: true,
           padding: 20,
         },
       },
       tooltip: {
-        mode: 'index' as const,
-        intersect: false,
+        mode: 'index' as const intersect: false,
         callbacks: {
-          label: (context: any) => {
+          label: (context) => {
             return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
           },
         },
@@ -256,16 +249,15 @@ return { labels: [], datasets: [] };
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'bottom' as const,
-        labels: {
+        position: 'bottom' as const labels: {
           usePointStyle: true,
           padding: 20,
         },
       },
       tooltip: {
         callbacks: {
-          label: (context: any) => {
-            const total = context.dataset.data.reduce((a: any, b: any) => a + b, 0);
+          label: (context) => {
+            const total = context.dataset.data.reduce((a, b) => a + b, 0);
             const percentage = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
           },

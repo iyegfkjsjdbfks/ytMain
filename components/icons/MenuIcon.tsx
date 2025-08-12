@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-
-
 import type React from 'react';
 
 const MenuIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (

@@ -14,7 +14,7 @@ import type { Video } from '../types';
 // Convert search results to Video format for HomePage compatibility
 const convertSearchResultToVideo = (
   result: YouTubeSearchResult | GoogleSearchResult,
-  index: number
+  index
 ): Video => {
   // Generate a unique ID that preserves the source information
   const videoId =
@@ -39,8 +39,7 @@ const convertSearchResultToVideo = (
     category: result.categoryId || 'Entertainment',
     tags: result.tags || [],
     // Required Video interface properties
-    visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
+    visibility: 'public' as const createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     isLive: false,
     // isUpcoming: false, // Removed as it's not part of Video interface
@@ -106,9 +105,8 @@ export function useTrendingSearch(): UseInitialSearchResult {
       const initialKeyword = getInitialSearchKeyword();
 
       // Use home page specific search logic (YouTube API first in hybrid mode)
-      const combinedResults = await searchForHomePage(
-        initialKeyword,
-        (query: any) =>
+      const combinedResults = await searchForHomePage(initialKeyword,
+        (query) =>
           VideoService.searchVideos(query).then(result => result.videos)
       );
 

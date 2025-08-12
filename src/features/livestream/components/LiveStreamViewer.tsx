@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FC } from 'react';
-
+import React, { useState, useEffect, useRef, FC } from 'react';
 // Import statements fixed
 
 interface LiveStreamViewerProps {
   streamId: string;
   autoplay?: boolean;
-  onViewerCountChange?: (count: number) => void;
+  onViewerCountChange?: (count) => void;
 }
 
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({

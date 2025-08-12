@@ -1,16 +1,12 @@
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { logger } from '@/utils/logger';
 import { useLivePolls } from '@/hooks/useLiveStream';
 import type { LivePoll } from '@/types/livestream';
-import {
-  PlusIcon,
+import { PlusIcon,
   ClockIcon,
   CheckCircleIcon,
   ChartBarIcon,
-  TrashIcon,
-  StopIcon,
-} from '@heroicons/react/24/outline';
+  TrashIcon, StopIcon } from '@heroicons/react/24/outline';
 
 interface LivePollsProps {
   streamId: string;
@@ -56,7 +52,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleVote = async (pollId: any, optionId: any) => {
+  const handleVote = async (pollId, optionId) => {
     try {
       await votePoll(pollId, optionId);
     } catch (error) {
@@ -64,7 +60,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleEndPoll = async (pollId: any) => {
+  const handleEndPoll = async (pollId) => {
     try {
       // TODO: Implement end poll functionality
       logger.debug('End poll:', pollId);
@@ -79,7 +75,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const removeOption = (index: number) => {
+  const removeOption = (index) => {
     if (newPoll.options.length > 2) {
       setNewPoll(prev => ({
         ...prev,
@@ -88,14 +84,14 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const updateOption = (index: number, value: string | number) => {
+  const updateOption = (index, value: string | number) => {
     setNewPoll(prev => ({
       ...prev,
       options: prev.options.map((opt, i) => (i === index ? value : opt)),
     }));
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -258,7 +254,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
           </p>
 
           <div className='space-y-2'>
-            {activePoll.options.map((option: any) => (
+            {activePoll.options.map((option) => (
               <div key={option.id} className='relative'>
                 <button
                   onClick={() => handleVote(activePoll.id, option.id)}
@@ -313,7 +309,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
                   </div>
 
                   <div className='space-y-2'>
-                    {poll.options.map((option: any) => (
+                    {poll.options.map((option) => (
                       <div
                         key={option.id}
                         className='flex items-center justify-between text-sm'

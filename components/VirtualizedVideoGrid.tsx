@@ -16,7 +16,7 @@ interface VirtualizedVideoGridProps {
   hasMore?: boolean;
   onLoadMore?: () => void;
   onVideoClick?: (video: Video) => void;
-  onChannelClick?: (channelId: any) => void;
+  onChannelClick?: (channelId) => void;
   className?: string;
   cardSize?: 'sm' | 'md' | 'lg';
   showChannel?: boolean;
@@ -28,7 +28,7 @@ interface GridItemProps {
   style: React.CSSProperties, data: {
     videos: Video, columnsPerRow: number;
     onVideoClick?: (video: Video) => void;
-    onChannelClick?: (channelId: any) => void;
+    onChannelClick?: (channelId) => void;
     cardSize: 'sm' | 'md' | 'lg', showChannel: boolean; showDescription: boolean
   };
 }

@@ -331,7 +331,7 @@ export const useWatchPage = () => {
     }
   };
 
-  const handleSaveToPlaylist = async (playlistId: any) => {
+  const handleSaveToPlaylist = async (playlistId) => {
     // Simulate API call to save video to playlist
     await new Promise(resolve => setTimeout(resolve, 300));
 
@@ -348,7 +348,7 @@ export const useWatchPage = () => {
     // Note: Modal will handle closing itself via the executeSave wrapper
   };
 
-  const handleCreatePlaylist = async (name: string, description?: string) => {
+  const handleCreatePlaylist = async (name, description?: string) => {
     // Simulate API call to create new playlist
     await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -358,8 +358,7 @@ export const useWatchPage = () => {
       description: description || '',
       videoCount: 0,
       totalDuration: '0:00:00',
-      visibility: 'private' as const,
-      ownerId: 'user-1',
+      visibility: 'private' as const ownerId: 'user-1',
       ownerName: 'You',
       videos: [],
       tags: [],
@@ -379,8 +378,7 @@ export const useWatchPage = () => {
       description: 'Videos to watch later',
       videoCount: 5,
       totalDuration: '2:30:45',
-      visibility: 'private' as const,
-      ownerId: 'user-1',
+      visibility: 'private' as const ownerId: 'user-1',
       ownerName: 'You',
       videos: [],
       tags: [],
@@ -394,8 +392,7 @@ export const useWatchPage = () => {
       description: 'My favorite videos',
       videoCount: 12,
       totalDuration: '5:45:30',
-      visibility: 'private' as const,
-      ownerId: 'user-1',
+      visibility: 'private' as const ownerId: 'user-1',
       ownerName: 'You',
       videos: [],
       tags: [],
@@ -434,7 +431,7 @@ export const useWatchPage = () => {
   };
 
   // Comment handlers
-  const handleMainCommentSubmitCallback = (commentText: any) => {
+  const handleMainCommentSubmitCallback = (commentText) => {
     if (!commentText.trim()) {
       return;
     }
@@ -457,7 +454,7 @@ export const useWatchPage = () => {
     setCommentCount(prev => prev + 1);
   };
 
-  const handleReplySubmit = (parentId: any) => {
+  const handleReplySubmit = (parentId) => {
     if (!currentReplyText.trim()) {
       return;
     }
@@ -496,13 +493,13 @@ export const useWatchPage = () => {
     setReplyingToCommentId(null);
   };
 
-  const handleEditSave = (commentId: any, newText: any, parentId?: string) => {
+  const handleEditSave = (commentId, newText, parentId?: string) => {
     if (!newText.trim()) {
       return;
     }
 
     const updateCommentState = (prevComments: Comment): Comment[] =>
-      prevComments.map((comment: any) => {
+      prevComments.map((comment) => {
         if (comment.id === commentId && comment.parentId === parentId) {
           return {
             ...comment,
@@ -521,7 +518,7 @@ export const useWatchPage = () => {
     setEditingComment(null);
   };
 
-  const handleDeleteComment = (commentId: any, parentId?: string) => {
+  const handleDeleteComment = (commentId, parentId?: string) => {
     if (
       !window.confirm(
         'Are you sure you want to delete this comment? This action cannot be undone.'
@@ -532,10 +529,10 @@ export const useWatchPage = () => {
 
     const deleteCommentFromList = (
       list: Comment,
-      idToDelete: any,
+      idToDelete,
       parentOfDeleted?: string
     ): Comment[] => {
-      return list.reduce((acc: any, comment: any) => {
+      return list.reduce((acc, comment) => {
         if (comment.id === idToDelete && comment.parentId === parentOfDeleted) {
           if (!parentOfDeleted) {
             setCommentCount(prev => prev - 1 - (comment.replyCount || 0));
@@ -571,12 +568,12 @@ export const useWatchPage = () => {
   };
 
   const toggleLikeDislikeForCommentOrReply = (
-    id: string,
+    id,
     parentId: string | undefined,
     action: 'like' | 'dislike'
   ) => {
     const updateList = (list: Comment): Comment[] => {
-      return list.map((item: any) => {
+      return list.map((item) => {
         if (item.id === id && item.parentId === parentId) {
           let newLiked = item.isLikedByCurrentUser;
           let newDisliked = item.isDislikedByCurrentUser;

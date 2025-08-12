@@ -1,18 +1,16 @@
+import React, { useState, useEffect } from 'react';
 /**
  * Integration tests demonstrating how multiple components work together
  * and testing real user workflows
  */
 
-import { useState, useEffect } from 'react';
-import React from 'react';
-
-import { screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor  } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach  } from 'vitest';
 
 import VideoDescription from '../../components/VideoDescription';
 import { performanceMonitor } from '../../utils/performanceMonitor';
-import { testUtils, customRender } from '../../utils/testUtils';
+import { testUtils, customRender  } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
@@ -37,7 +35,7 @@ const VideoList = ({ videos, onVideoSelect, loading }) => (
     {loading ? (
       <div>Loading videos...</div>
     ) : (
-      videos.map((video: any) => (
+      videos.map((video) => (
         <div
           key={video.id}
           data-testid={`video-item-${video.id}`}
@@ -83,7 +81,7 @@ const CommentSection = ({ comments, onAddComment }) => {
       </form>
 
       <div className="comments-list">
-        {comments.map((comment: any) => (
+        {comments.map((comment) => (
           <div key={comment.id} data-testid={`comment-${comment.id}`} className="comment">
             <img src={comment.author.avatar} alt={comment.author.name} />
             <div>
@@ -135,7 +133,7 @@ const VideoPage = () => {
     loadData();
   }, []);
 
-  const handleVideoSelect = async (video: any) => {
+  const handleVideoSelect = async (video) => {
     setCurrentVideo(video);
     setWatchTime(0);
 
@@ -149,7 +147,7 @@ const VideoPage = () => {
     }
   };
 
-  const handleAddComment = async (text: string) => {
+  const handleAddComment = async (text) => {
     if (!currentVideo) {
 return;
 }
@@ -413,7 +411,7 @@ describe('Integration Tests', () => {
       expect(screen.getByText(`Comments (${mockComments.length})`)).toBeInTheDocument();
 
       // Should display each comment
-      mockComments.forEach((comment: any) => {
+      mockComments.forEach((comment) => {
         expect(screen.getByTestId(`comment-${comment.id}`)).toBeInTheDocument();
         expect(screen.getByText(comment.text)).toBeInTheDocument();
         expect(screen.getByText(comment.author.name)).toBeInTheDocument();

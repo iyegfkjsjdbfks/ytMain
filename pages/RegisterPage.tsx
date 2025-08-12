@@ -1,7 +1,5 @@
-import { useNavigate, Link } from 'react-router-dom';
-
-import React, { useState } from 'react';
-import { FC } from 'react';
+import React, { useState, FC } from 'react';
+import { useNavigate, Link  } from 'react-router-dom';
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';

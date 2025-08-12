@@ -22,8 +22,7 @@ const sampleVideos = [
     tags: ['animation', 'short film', 'comedy'],
     category: 'Entertainment',
     isShort: false,
-    visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
+    visibility: 'public' as const createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -43,8 +42,7 @@ const sampleVideos = [
     tags: ['animation', 'open source', 'experimental'],
     category: 'Film & Animation',
     isShort: false,
-    visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
+    visibility: 'public' as const createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -64,8 +62,7 @@ const sampleVideos = [
     tags: ['sample', 'demo', 'short'],
     category: 'Entertainment',
     isShort: true,
-    visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
+    visibility: 'public' as const createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -85,8 +82,7 @@ const sampleVideos = [
     tags: ['sample', 'demo', 'escape'],
     category: 'Entertainment',
     isShort: true,
-    visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
+    visibility: 'public' as const createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -106,8 +102,7 @@ const sampleVideos = [
     tags: ['animation', 'fantasy', 'short film'],
     category: 'Film & Animation',
     isShort: false,
-    visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
+    visibility: 'public' as const createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -127,34 +122,33 @@ const sampleVideos = [
     tags: ['sci-fi', 'animation', 'dystopian'],
     category: 'Film & Animation',
     isShort: false,
-    visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
+    visibility: 'public' as const createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
 ];
 
 // Video service functions
 export const getVideos = async () => sampleVideos;
-export const getVideoById = async (id: string) => sampleVideos.find(v => v.id === id) || null;
+export const getVideoById = async (id) => sampleVideos.find(v => v.id === id) || null;
 export const getShortsVideos = async () => sampleVideos.filter(v => v.isShort);
-export const getVideosByCategory = async (category: any) => sampleVideos.filter(v => v.category === category);
-export const searchVideos = async (query: any) => sampleVideos.filter(v =>
+export const getVideosByCategory = async (category) => sampleVideos.filter(v => v.category === category);
+export const searchVideos = async (query) => sampleVideos.filter(v =>
   v.title.toLowerCase().includes(query.toLowerCase()) ||
   v.description.toLowerCase().includes(query.toLowerCase()),
 );
 
 // Channel and playlist functions (simplified for now)
 export const getChannels = async () => [];
-export const getChannelById = async (_id: any) => null;
-export const getChannelByName = async (_name: any) => null;
-export const getVideosByChannelName = async (_name: any) => [];
-export const getChannelPlaylists = async (_name: any) => [];
-export const getChannelCommunityPosts = async (_name: any) => [];
-export const getCommentsByVideoId = async (_videoId: any) => [];
+export const getChannelById = async (_id) => null;
+export const getChannelByName = async (_name) => null;
+export const getVideosByChannelName = async (_name) => [];
+export const getChannelPlaylists = async (_name) => [];
+export const getChannelCommunityPosts = async (_name) => [];
+export const getCommentsByVideoId = async (_videoId) => [];
 export const getPlaylists = async () => [];
 export const getCommunityPosts = async () => [];
 export const getUserPlaylists = async () => [];
-export const getUserPlaylistById = async (_id: any) => null;
+export const getUserPlaylistById = async (_id) => null;
 
 // User interaction functions
 export const getWatchHistoryVideos = async () => sampleVideos.slice(0, 3);
@@ -164,19 +158,19 @@ export const getRecentSearches = async () => ['animation', 'blender', 'short fil
 export const clearAllRecentSearches = async () => {};
 
 // Search functions
-export const getSearchSuggestions = async (query: any) =>
+export const getSearchSuggestions = async (query) =>
   ['animation', 'blender', 'short film', 'sample video'].filter(s => s.includes(query.toLowerCase()));
-export const removeRecentSearch = async (_search: any) => [];
-export const saveRecentSearch = async (_query: any) => {};
+export const removeRecentSearch = async (_search) => [];
+export const saveRecentSearch = async (_query) => {};
 
 // Upload simulation
 export const uploadVideo = async (_data: VideoUploadData, onProgress?: (progress: UploadProgress) => void): Promise<void> => {
   const progressSteps = [
-    { percentage: 0, status: 'uploading' as const, message: 'Starting upload...' },
-    { percentage: 25, status: 'uploading' as const, message: 'Uploading video file...' },
-    { percentage: 50, status: 'uploading' as const, message: 'Processing video...' },
-    { percentage: 75, status: 'processing' as const, message: 'Generating thumbnail...' },
-    { percentage: 100, status: 'completed' as const, message: 'Upload completed successfully!' },
+    { percentage: 0, status: 'uploading' as const message: 'Starting upload...' },
+    { percentage: 25, status: 'uploading' as const message: 'Uploading video file...' },
+    { percentage: 50, status: 'uploading' as const message: 'Processing video...' },
+    { percentage: 75, status: 'processing' as const message: 'Generating thumbnail...' },
+    { percentage: 100, status: 'completed' as const message: 'Upload completed successfully!' },
   ];
 
   for (const step of progressSteps) {
@@ -198,16 +192,16 @@ export default {
 };
 
 // Playlist management functions (simplified for now)
-export const removeVideoFromPlaylist = async (_playlistId: any, _videoId: any) => {};
-export const updateUserPlaylistDetails = async (_playlistId: any, _details: any) => {};
+export const removeVideoFromPlaylist = async (_playlistId, _videoId) => {};
+export const updateUserPlaylistDetails = async (_playlistId, _details) => {};
 
 // Subscription management functions (simplified for now)
 export const getSubscribedChannels = async () => [];
-export const updateSubscriptionNotifications = async (_channelId: any, _enabled: any) => {};
-export const unsubscribeFromChannel = async (_channelId: any) => {};
+export const updateSubscriptionNotifications = async (_channelId, _enabled) => {};
+export const unsubscribeFromChannel = async (_channelId) => {};
 
 // Playlist creation function (simplified for now)
-export const createUserPlaylist = async (_name: any, _description?: string) => ({
+export const createUserPlaylist = async (_name, _description?: string) => ({
   id: `playlist-${Date.now()}`,
   name: _name,
   description: _description || '',

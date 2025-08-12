@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
+import React, { useState, FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { logger } from '../utils/logger';

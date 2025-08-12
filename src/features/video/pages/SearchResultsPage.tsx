@@ -1,6 +1,5 @@
-import React, { useEffect,  useState } from 'react';
-import { lazy, FC } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import React, { useEffect, useState, lazy, FC } from 'react';
+import { Link, useSearchParams  } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '@/lib/youtube-utils';
 
@@ -28,7 +27,7 @@ const SearchResultsPage: React.FC = () => {
       try {
         // Mock local video search function
         const searchLocalVideos = async (
-          _searchQuery: any
+          _searchQuery
         ): Promise<Video[]> => {
           // Return empty array for now - this would normally search local videos
           return [];
@@ -40,7 +39,7 @@ const SearchResultsPage: React.FC = () => {
         );
         // Convert search results to Video format
         const videoResults: Video[] = [
-          ...results.youtubeVideos.map((video: any) => ({
+          ...results.youtubeVideos.map((video) => ({
             id: video.id,
             title: video.title,
             description: video.description,
@@ -56,8 +55,7 @@ const SearchResultsPage: React.FC = () => {
             channelAvatarUrl: video.channelAvatarUrl || '',
             category: video.categoryId || 'Entertainment',
             tags: video.tags || [],
-            visibility: 'public' as const,
-            createdAt: new Date().toISOString(),
+            visibility: 'public' as const createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             isLive: false,
             isShort: false,
@@ -66,7 +64,7 @@ const SearchResultsPage: React.FC = () => {
             dislikeCount: video.dislikeCount || 0,
             commentCount: video.commentCount || 0,
           })),
-          ...(results.googleSearchVideos || []).map((video: any) => ({
+          ...(results.googleSearchVideos || []).map((video) => ({
             id: video.id,
             title: video.title,
             description: video.description,
@@ -86,8 +84,7 @@ const SearchResultsPage: React.FC = () => {
             uploadedAt: video.uploadedAt || new Date().toISOString(),
             tags: video.tags || [],
             category: video.categoryId || 'Entertainment',
-            visibility: 'public' as const,
-            createdAt: new Date().toISOString(),
+            visibility: 'public' as const createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             isLive: false,
             isShort: video.isShort || false,

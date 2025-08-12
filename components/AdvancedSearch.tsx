@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FC, KeyboardEvent, MouseEvent } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
-import {
-  MagnifyingGlassIcon,
+import React, { useState, useEffect, useRef, FC, KeyboardEvent, MouseEvent } from 'react';
+import { useNavigate, Navigate  } from 'react-router-dom';
+import { MagnifyingGlassIcon,
   FunnelIcon,
   XMarkIcon,
   ClockIcon,
   CalendarDaysIcon,
-  VideoCameraIcon,
-  AdjustmentsHorizontalIcon,
-} from '@heroicons/react/24/outline';
+  VideoCameraIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 export interface SearchFilters {
   duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min
@@ -21,7 +17,7 @@ export interface SearchFilters {
 }
 
 interface AdvancedSearchProps {
-  onSearch: (query: any, filters: SearchFilters) => void;
+  onSearch: (query, filters: SearchFilters) => void;
   initialQuery?: string;
   className?: string;
 }
@@ -68,7 +64,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     }
   }, [query]);
 
-  const generateSuggestions = (searchQuery: any) => {
+  const generateSuggestions = (searchQuery) => {
     // Mock search suggestions - in real app, this would call an API
     const mockSuggestions = [
       'react tutorial',
@@ -97,7 +93,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     if (finalQuery.trim()) {
       // Save to search history
       const searchHistory = JSON.parse(localStorage.getItem('youtubeCloneSearchHistory_v1') || '[]');
-      const updatedHistory = [finalQuery, ...searchHistory.filter((h: any) => h !== finalQuery)].slice(0, 20);
+      const updatedHistory = [finalQuery, ...searchHistory.filter((h) => h !== finalQuery)].slice(0, 20);
       localStorage.setItem('youtubeCloneSearchHistory_v1', JSON.stringify(updatedHistory));
 
       onSearch(finalQuery, filters);
@@ -141,7 +137,7 @@ searchParams.set('sort_by', filters.sortBy);
     }
   };
 
-  const toggleFeature = (feature: any) => {
+  const toggleFeature = (feature) => {
     setFilters(prev => ({
       ...prev,
       features: prev.features.includes(feature)

@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react';
-import { FC } from 'react';
+import React, { useState, useRef, FC } from 'react';
 import { PaperAirplaneIcon as PaperAirplaneSolidIcon } from '@heroicons/react/24/solid';
 const PaperAirplaneIconSolid = PaperAirplaneSolidIcon;
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;
-  onCommentSubmit: (commentText: any) => void;
+  onCommentSubmit: (commentText) => void;
   maxCommentLength: number;
 }
 

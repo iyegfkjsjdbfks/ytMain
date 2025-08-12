@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
-
+import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import type { Video } from '../types';
 
@@ -9,9 +7,9 @@ interface StudioVideoGridProps {
   title?: string;
   loading?: boolean;
   emptyMessage?: string;
-  onEdit?: (videoId: any) => void;
-  onDelete?: (videoId: any) => void;
-  onVisibilityChange?: (videoId: any, visibility: VideoVisibility) => void;
+  onEdit?: (videoId) => void;
+  onDelete?: (videoId) => void;
+  onVisibilityChange?: (videoId, visibility: VideoVisibility) => void;
 }
 
 /**
@@ -33,7 +31,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     VideoVisibility | 'all'
   >('all');
 
-  const handleVideoSelect = (videoId: any, selected: any) => {
+  const handleVideoSelect = (videoId, selected) => {
     const newSelection = new Set(selectedVideos);
 
     if (selected) {
@@ -45,9 +43,9 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     setSelectedVideos(newSelection);
   };
 
-  const handleSelectAll = (selected: any) => {
+  const handleSelectAll = (selected) => {
     if (selected) {
-      const allIds = videos.map((video: any) => video.id);
+      const allIds = videos.map((video) => video.id);
       setSelectedVideos(new Set(allIds));
     } else {
       setSelectedVideos(new Set());
@@ -72,7 +70,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     }
   };
 
-  const formatDate = (dateString: any) => {
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -85,7 +83,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   const filteredVideos =
     filterVisibility === 'all'
       ? videos
-      : videos.filter((video: any) => video.visibility === filterVisibility);
+      : videos.filter((video) => video.visibility === filterVisibility);
 
   // Sort videos based on selected sort option
   const sortedVideos = [...filteredVideos].sort((a, b) => {

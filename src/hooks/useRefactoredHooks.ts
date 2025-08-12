@@ -1,7 +1,5 @@
+import React, { useEffect, useCallback, useRef, useState, MouseEvent } from 'react';
 // @ts-nocheck
-import React, { useEffect, useCallback, useRef,  useState } from 'react';
-import { MouseEvent } from 'react';
-
 import { useUnifiedApp } from './useUnifiedApp';
 
 /**

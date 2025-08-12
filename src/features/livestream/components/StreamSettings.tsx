@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
-
+import React, { useState, FC } from 'react';
 // Import statements fixed
 
 interface StreamQuality {
@@ -10,7 +8,7 @@ interface StreamQuality {
 }
 
 interface StreamSettingsProps {
-  onSettingsChange?: (settings: any) => void;
+  onSettingsChange?: (settings) => void;
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({

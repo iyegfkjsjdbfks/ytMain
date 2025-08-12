@@ -1,9 +1,6 @@
+import React, { useEffect, useState, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import React, { useEffect,  useState } from 'react';
-import { FC, ReactNode } from 'react';
-
-import {
-  UserGroupIcon,
+import { UserGroupIcon,
   ChartBarIcon,
   LightBulbIcon,
   AcademicCapIcon,
@@ -12,9 +9,7 @@ import {
   CalendarDaysIcon,
   GlobeAltIcon,
   ArrowTrendingUpIcon,
-  ClockIcon,
-  EyeIcon,
-} from '@heroicons/react/24/outline';
+  ClockIcon, EyeIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
@@ -233,7 +228,7 @@ const CreatorStudioPage: React.FC = () => {
     },
   ];
 
-  const getDifficultyColor = (difficulty: any) => {
+  const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
       case 'Easy': return 'text-green-600 bg-green-100';
       case 'Medium': return 'text-yellow-600 bg-yellow-100';
@@ -242,7 +237,7 @@ const CreatorStudioPage: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status: any) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'ready': return 'text-green-600 bg-green-100';
       case 'processing': return 'text-yellow-600 bg-yellow-100';
@@ -251,7 +246,7 @@ const CreatorStudioPage: React.FC = () => {
     }
   };
 
-  const getTypeIcon = (type: any) => {
+  const getTypeIcon = (type) => {
     switch (type) {
       case 'video': return <CameraIcon className="w-4 h-4" />;
       case 'short': return <ClockIcon className="w-4 h-4" />;
@@ -378,7 +373,7 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {idea.tags.map((tag: any, tagIndex: any) => (
+                  {idea.tags.map((tag, tagIndex) => (
                     <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
                       #{tag}
                     </span>

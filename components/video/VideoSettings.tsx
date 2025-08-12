@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-
 import type React from 'react';
 
-import { XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, CheckIcon  } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
   label: string;
@@ -21,12 +20,12 @@ interface VideoSettingsProps {
   onClose: () => void;
   qualities: VideoQuality;
   currentQuality: string;
-  onQualityChange: (quality: any) => void;
+  onQualityChange: (quality) => void;
   subtitles: Subtitle;
   currentSubtitle: string | null;
   onSubtitleChange: (subtitle: string | null) => void;
   autoplay: boolean;
-  onAutoplayChange: (autoplay: any) => void;
+  onAutoplayChange: (autoplay) => void;
   className?: string;
 }
 
@@ -65,7 +64,7 @@ return null;
       <div className="mb-6">
         <h4 className="text-sm font-medium mb-2 text-gray-300">Quality</h4>
         <div className="space-y-1">
-          {qualities.map((quality: any) => (
+          {qualities.map((quality) => (
             <button
               key={quality.value}
               onClick={() => onQualityChange(quality.value)}
@@ -105,7 +104,7 @@ return null;
               )}
             </div>
           </button>
-          {subtitles.map((subtitle: any) => (
+          {subtitles.map((subtitle) => (
             <button
               key={subtitle.srcLang}
               onClick={() => onSubtitleChange(subtitle.srcLang)}

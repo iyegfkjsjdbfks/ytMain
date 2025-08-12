@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useRef, memo, ChangeEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -7,19 +8,14 @@ declare namespace NodeJS {
   }
 }
 
-import React, { useState, useEffect, useCallback, useRef,  memo } from 'react';
-import { memo, ChangeEvent } from 'react';
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
 /// <reference types="node" />
-import {
-  PlayIcon,
+import { PlayIcon,
   PauseIcon,
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-} from '@heroicons/react/24/outline';
+  ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 interface MobileVideoPlayerProps {
   video: Video;
@@ -187,7 +183,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
     }, [autoplay, isIntersecting, isPlaying]);
 
     // Format time
-    const formatTime = (time: any) => {
+    const formatTime = (time) => {
       const minutes = Math.floor(time / 60);
       const seconds = Math.floor(time % 60);
       return `${minutes}:${seconds.toString().padStart(2, '0')}`;

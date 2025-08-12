@@ -1,6 +1,5 @@
-import React from 'react';
-import { FC } from 'react';
-import { Link, Link, NavLink } from 'react-router-dom';
+import React, { FC } from 'react';
+import { Link, Link, NavLink  } from 'react-router-dom';
 
 import { useAuthStore } from '../../auth/store/authStore';
 

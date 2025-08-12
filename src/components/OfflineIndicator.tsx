@@ -1,6 +1,4 @@
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
-
+import React, { useEffect, useState, FC } from 'react';
 import Wifi, { WifiOff } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';
@@ -61,7 +59,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     }
   };
 
-  const formatBytes = (bytes: any): string => {
+  const formatBytes = (bytes): string => {
     if (bytes === 0) {
       return '0 Bytes';
     }

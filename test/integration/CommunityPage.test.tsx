@@ -1,11 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import React, { useRef, ReactElement } from 'react';
+import { QueryClient, QueryClientProvider  } from '@tanstack/react-query';
+import { render, screen, fireEvent, waitFor  } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach  } from 'vitest';
 
 import CommunityPage from '../../pages/CommunityPage';
-import { useRef, ReactElement } from 'react';
-import React from 'react';
-
 // Mock the hooks
 vi.mock('@hooks/useRefactoredHooks', () => ({
   useRefactoredHooks: () => ({
@@ -93,8 +91,7 @@ describe('CommunityPage', () => {
       isAuthenticated: false,
       login: vi.fn(),
       logout: vi.fn(),
-      theme: 'light' as const,
-      setTheme: vi.fn(),
+      theme: 'light' as const setTheme: vi.fn(),
       isDarkMode: false,
       miniplayerVideo: null,
       isMiniplayerOpen: false,
@@ -134,8 +131,7 @@ describe('CommunityPage', () => {
       isAuthenticated: false,
       login: vi.fn(),
       logout: vi.fn(),
-      theme: 'light' as const,
-      setTheme: vi.fn(),
+      theme: 'light' as const setTheme: vi.fn(),
       isDarkMode: false,
       miniplayerVideo: null,
       isMiniplayerOpen: false,
@@ -174,8 +170,7 @@ describe('CommunityPage', () => {
       isAuthenticated: false,
       login: vi.fn(),
       logout: vi.fn(),
-      theme: 'light' as const,
-      setTheme: vi.fn(),
+      theme: 'light' as const setTheme: vi.fn(),
       isDarkMode: false,
       miniplayerVideo: null,
       isMiniplayerOpen: false,
@@ -206,8 +201,7 @@ describe('CommunityPage', () => {
       isAuthenticated: false,
       login: vi.fn(),
       logout: vi.fn(),
-      theme: 'light' as const,
-      setTheme: vi.fn(),
+      theme: 'light' as const setTheme: vi.fn(),
       isDarkMode: false,
       miniplayerVideo: null,
       isMiniplayerOpen: false,

@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { FC } from 'react';
-
+import React, { useEffect, FC } from 'react';
 import { LoginForm } from '../components/LoginForm';
 
 import { useAuthStore } from '../store/authStore';

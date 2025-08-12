@@ -1,3 +1,4 @@
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -8,8 +9,6 @@ declare namespace NodeJS {
     env: ProcessEnv;
   }
 }
-
-import React, { useEffect, useCallback, useRef,  useState } from 'react';
 
 // Unified state management hook
 export interface AsyncState<T> {
@@ -23,7 +22,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
   AsyncState<T>,
   {
     setData: (data: T | null) => void;
-    setLoading: (loading: any) => void;
+    setLoading: (loading) => void;
     setError: (error: Error | null) => void;
     reset: () => void;
   },
@@ -44,7 +43,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
     }));
   }, []);
 
-  const setLoading = useCallback((loading: any) => {
+  const setLoading = useCallback((loading) => {
     setState(prev => ({ ...prev, loading }));
   }, []);
 
@@ -210,7 +209,7 @@ export interface FormActions<T extends Record<string, any>> {
   setValue: <K extends keyof T>(field: K, value: T[K]) => void;
   setError: <K extends keyof T>(field: K, error: string | null) => void;
   setTouched: <K extends keyof T>(field: K, touched?: boolean) => void;
-  setSubmitting: (submitting: any) => void;
+  setSubmitting: (submitting) => void;
   setSubmitError: (error: string | null) => void;
   reset: () => void;
   validate: () => boolean;
@@ -296,7 +295,7 @@ export function useForm<T extends Record<string, any>>(
     []
   );
 
-  const setSubmitting = useCallback((submitting: any) => {
+  const setSubmitting = useCallback((submitting) => {
     setState(prev => ({ ...prev, isSubmitting: submitting }));
   }, []);
 
@@ -413,7 +412,7 @@ export function useToggle(
     setValue(prev => !prev);
   }, []);
 
-  const setToggle = useCallback((newValue: any) => {
+  const setToggle = useCallback((newValue) => {
     setValue(newValue);
   }, []);
 
@@ -421,7 +420,7 @@ export function useToggle(
 }
 
 // Unified debounce hook
-export function useDebounce<T>(value: T, delay: any): T {
+export function useDebounce<T>(value: T, delay): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -439,7 +438,7 @@ export function useDebounce<T>(value: T, delay: any): T {
 
 // Unified local storage hook
 export function useLocalStorage<T>(
-  key: string,
+  key,
   initialValue: T
 ): [T, (value: T | ((prev: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -508,7 +507,7 @@ export function useIntersectionObserver(
 }
 
 // Performance monitoring hook
-export function usePerformanceMonitor(name: string) {
+export function usePerformanceMonitor(name) {
   const startTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
@@ -521,8 +520,7 @@ export function usePerformanceMonitor(name: string) {
     };
   }, [name]);
 
-  const mark = useCallback(
-    (__label: any) => {
+  const mark = useCallback((__label) => {
       // const __duration = Date.now() - startTimeRef.current;
       if (import.meta.env.MODE === 'development') {
       }

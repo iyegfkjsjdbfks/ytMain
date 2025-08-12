@@ -1,8 +1,6 @@
-import React, { useEffect, useCallback,  useState } from 'react';
-import { memo, FC } from 'react';
-
+import React, { useEffect, useCallback, useState, memo, FC } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useNavigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useNavigate, useSearchParams  } from 'react-router-dom';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../src/hooks/useDebounce';
@@ -51,7 +49,7 @@ const SearchResultsPage: React.FC = () => {
   });
 
   // Memoized search function with performance monitoring
-  const performSearch = useCallback(async (searchQuery: any) => {
+  const performSearch = useCallback(async (searchQuery) => {
     if (!searchQuery.trim()) {
       setSearchState({
         videos: [],

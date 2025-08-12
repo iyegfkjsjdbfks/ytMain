@@ -1,8 +1,7 @@
-import React, { Suspense } from 'react';
-import { FC, ReactNode } from 'react';
+import React, { Suspense, FC, ReactNode } from 'react';
 import type { ReactNode } from 'react';
 
-import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
+import { QueryClientProvider, type QueryClient  } from '@tanstack/react-query';
 
 import ErrorBoundary from '../components/ErrorBoundary';
 import FastLoadingSpinner from '../components/FastLoadingSpinner';

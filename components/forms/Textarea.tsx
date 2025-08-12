@@ -1,5 +1,4 @@
 import React, { FC, TextareaHTMLAttributes } from 'react';
-
 import type React from 'react';
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

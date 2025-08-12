@@ -13,8 +13,8 @@ interface RefactoredSaveToPlaylistModalProps {
   onClose: () => void;
   videoId: string;
   existingPlaylists: Playlist;
-  onSaveToPlaylist: (videoId: any, playlistId: any) => Promise<void>;
-  onCreatePlaylist: (name: string, description?: string) => Promise<Playlist>;
+  onSaveToPlaylist: (videoId, playlistId) => Promise<void>;
+  onCreatePlaylist: (name, description?: string) => Promise<Playlist>;
 }
 
 /**
@@ -93,8 +93,7 @@ return;
     {
       name: 'name',
       label: 'Playlist Name',
-      type: 'text' as const,
-      placeholder: 'Enter playlist name',
+      type: 'text' as const placeholder: 'Enter playlist name',
       required: true,
       validation: (value: string | number) => {
         if (value.length < 3) {
@@ -109,8 +108,7 @@ return 'Playlist name must be less than 100 characters';
     {
       name: 'description',
       label: 'Description (Optional)',
-      type: 'textarea' as const,
-      placeholder: 'Enter playlist description',
+      type: 'textarea' as const placeholder: 'Enter playlist description',
       rows: 3,
     },
   ];
@@ -193,7 +191,7 @@ return 'Playlist name must be less than 100 characters';
               </div>
             ) : (
               <div className="space-y-2 max-h-60 overflow-y-auto">
-                {existingPlaylists.map((playlist: any) => (
+                {existingPlaylists.map((playlist) => (
                   <label
                     key={playlist.id}
                     htmlFor={`playlist-${playlist.id}`}

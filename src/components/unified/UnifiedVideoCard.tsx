@@ -1,9 +1,8 @@
-import React, { useState,  memo } from 'react';
-import { memo, lazy, MouseEvent } from 'react';
+import React, { useState, memo, lazy, MouseEvent } from 'react';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 const HeartIconSolid = HeartSolidIcon;
 import { Link } from 'react-router-dom';
-import { formatRelativeTime, cn } from '../../lib/utils';
+import { formatRelativeTime, cn  } from '../../lib/utils';
 import { UnifiedButton } from './UnifiedButton';
 import type { Video } from '../../types/core';
 import { /**
@@ -11,7 +10,7 @@ import { /**
    * Consolidates all video card variants into a single, comprehensive component
    */
 
-  PlayIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon, BookmarkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
+  PlayIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon, BookmarkIcon, EllipsisVerticalIcon  } from '@heroicons/react/24/outline';
 
 export type VideoCardVariant =
   | 'default'
@@ -33,10 +32,10 @@ export interface UnifiedVideoCardProps {
   showDate?: boolean;
   isLiked?: boolean;
   isSaved?: boolean;
-  onLike?: (videoId: any) => void;
+  onLike?: (videoId) => void;
   onSave?: (video: Video) => void;
   onShare?: (video: Video) => void;
-  onChannelClick?: (channelName: any) => void;
+  onChannelClick?: (channelName) => void;
   className?: string;
   keyPrefix?: string;
 }

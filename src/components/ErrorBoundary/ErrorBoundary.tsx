@@ -1,6 +1,4 @@
-import React from 'react';
-import { ReactNode } from 'react';
-
+import React, { ReactNode } from 'react';
 interface ErrorBoundaryState {
   hasError: boolean;
   error?: Error;

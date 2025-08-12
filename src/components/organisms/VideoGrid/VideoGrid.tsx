@@ -6,7 +6,7 @@ import type { VideoGridProps as VideoGridPropsBase } from '@/types';
 
 export interface VideoGridProps
   extends Omit<VideoGridPropsBase, 'onVideoMoreClick'> {
-  onVideoMoreClick: (videoId: any) => void;
+  onVideoMoreClick: (videoId) => void;
 }
 
 export const VideoGrid = ({
@@ -38,7 +38,7 @@ export const VideoGrid = ({
         className
       )}
     >
-      {videos.map((video: any) => (
+      {videos.map((video) => (
         <VideoCard
           key={video.id}
           {...video}

@@ -97,7 +97,7 @@ export const logConfigStatus = (): void => {
   console.log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
 
   console.group('📋 Recommendations:');
-  config.recommendations.forEach((rec: any) => console.log(`• ${rec}`));
+  config.recommendations.forEach((rec) => console.log(`• ${rec}`));
   console.groupEnd();
 
   console.groupEnd();

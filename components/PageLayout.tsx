@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-
 import type React from 'react';
 
 import { DataWrapper } from './DataWrapper';

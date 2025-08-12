@@ -1,6 +1,4 @@
-
-import React, { memo } from 'react';
-import { memo, FC } from 'react';
+import React, { memo, FC } from 'react';
 
 import VideoCard from './VideoCard';
 
@@ -46,7 +44,7 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
 
   return (
     <div className={getGridClasses()}>
-      {videos.map((video: any, index: number) => (
+      {videos.map((video, index) => (
         <VideoCard
           key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
           video={video}

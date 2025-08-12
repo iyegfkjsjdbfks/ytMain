@@ -82,7 +82,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     }
   };
 
-  const generateMockAnalyticsData = (videoId: any): AnalyticsData => {
+  const generateMockAnalyticsData = (videoId): AnalyticsData => {
     const baseViews = Math.floor(Math.random() * 1000000) + 10000;
     const likes = Math.floor(baseViews * (0.02 + Math.random() * 0.08));
     const dislikes = Math.floor(likes * (0.05 + Math.random() * 0.15));
@@ -169,7 +169,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     return data;
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -179,7 +179,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (seconds: any): string => {
+  const formatDuration = (seconds): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
@@ -190,7 +190,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return `${minutes}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const formatCurrency = (amount: any): string => {
+  const formatCurrency = (amount): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -279,7 +279,7 @@ return `${(num / 1000).toFixed(1)}K`;
       <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700">
         <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">Audience Retention</h3>
         <div className="h-64 flex items-end space-x-1">
-          {analyticsData.retention.map((value: string | number, index: number) => (
+          {analyticsData.retention.map((value: string | number, index) => (
             <div
               key={index}
               className="bg-blue-500 rounded-t flex-1 transition-all hover:bg-blue-600"

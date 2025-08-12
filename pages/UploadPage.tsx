@@ -1,16 +1,11 @@
+import React, { useRef, useState, FC, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useRef,  useState } from 'react';
-import { FC, ChangeEvent } from 'react';
-
-import {
-  CloudArrowUpIcon,
+import { CloudArrowUpIcon,
   VideoCameraIcon,
   EyeIcon,
   GlobeAltIcon,
   LockClosedIcon,
-  XMarkIcon,
-  CheckCircleIcon,
-} from '@heroicons/react/24/outline';
+  XMarkIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
@@ -167,10 +162,10 @@ return null;
     }
   };
 
-  const removeTag = (tagToRemove: any) => {
+  const removeTag = (tagToRemove) => {
     setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -190,7 +185,7 @@ return null;
     navigate('/studio');
   };
 
-  const getVisibilityIcon = (visibility: any) => {
+  const getVisibilityIcon = (visibility) => {
     switch (visibility) {
       case 'public': return <GlobeAltIcon className="w-4 h-4" />;
       case 'unlisted': return <EyeIcon className="w-4 h-4" />;
@@ -360,7 +355,7 @@ return null;
                         Tags
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {metadata.tags.map((tag: any) => (
+                        {metadata.tags.map((tag) => (
                           <span
                             key={tag}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"

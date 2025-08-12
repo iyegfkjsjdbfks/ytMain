@@ -24,7 +24,7 @@ interface SystemEvent {
   severity: 'low' | 'medium' | 'high' | 'critical';
   title: string;
   description: string;
-  data: any;
+  data;
   timestamp: number;
   handled: boolean;
 }
@@ -96,7 +96,7 @@ class SystemIntegrationHub {
   private health: SystemHealth;
   private config: IntegrationConfig;
   private metrics: SystemMetrics;
-  private eventHandlers: Map<string, Array<(data: any) => void>> = new Map();
+  private eventHandlers: Map<string, Array<(data) => void>> = new Map();
   private healthCheckInterval?: ReturnType<typeof setTimeout>;
   private isInitialized = false;
 
@@ -480,7 +480,7 @@ return 'degraded';
   }
 
   // Event handling methods
-  private handlePerformanceAlert(data: any): void {
+  private handlePerformanceAlert(data): void {
     this.emitEvent({
       type: 'performance',
       source: 'PerformanceMonitor',
@@ -491,7 +491,7 @@ return 'degraded';
     });
   }
 
-  private handleSecurityThreat(data: any): void {
+  private handleSecurityThreat(data): void {
     this.emitEvent({
       type: 'security',
       source: 'SecurityMonitor',
@@ -502,7 +502,7 @@ return 'degraded';
     });
   }
 
-  private handleDeploymentFailure(data: any): void {
+  private handleDeploymentFailure(data): void {
     this.emitEvent({
       type: 'deployment',
       source: 'DeploymentAutomation',
@@ -513,7 +513,7 @@ return 'degraded';
     });
   }
 
-  private handleQualityDegradation(data: any): void {
+  private handleQualityDegradation(data): void {
     this.emitEvent({
       type: 'quality',
       source: 'CodeQualityMonitor',
@@ -524,7 +524,7 @@ return 'degraded';
     });
   }
 
-  private handleFeatureRollback(data: any): void {
+  private handleFeatureRollback(data): void {
     this.emitEvent({
       type: 'feature',
       source: 'FeatureFlagManager',
@@ -563,7 +563,7 @@ return 'degraded';
     }
   }
 
-  private addEventListener(eventType: any, handler: (data: any) => void): void {
+  private addEventListener(eventType, handler: (data) => void): void {
     if (!this.eventHandlers.has(eventType)) {
       this.eventHandlers.set(eventType, []);
     }
@@ -586,24 +586,24 @@ return 'degraded';
 
   getRecentEvents(limit: number = 50): SystemEvent[] {
     return this.events
-      .sort((a: any, b: any) => b.timestamp - a.timestamp)
+      .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, limit);
   }
 
   getEventsByType(type: SystemEvent['type'], limit: number = 20): SystemEvent[] {
     return this.events
       .filter((event: SystemEvent) => event.type === type)
-      .sort((a: any, b: any) => b.timestamp - a.timestamp)
+      .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, limit);
   }
 
   getCriticalEvents(): SystemEvent[] {
     return this.events
       .filter((event: SystemEvent) => event.severity === 'critical')
-      .sort((a: any, b: any) => b.timestamp - a.timestamp);
+      .sort((a, b) => b.timestamp - a.timestamp);
   }
 
-  acknowledgeEvent(eventId: any): void {
+  acknowledgeEvent(eventId): void {
     const event = this.events.find((e: SystemEvent) => e.id === eventId);
     if (event) {
       event.handled = true;

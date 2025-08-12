@@ -122,8 +122,7 @@ const DevOpsDashboard: React.FC = () => {
       const allAlerts: AlertItem[] = [
         ...securityMonitoring.getSecurityAlerts(false).map(alert => ({
           id: alert.id,
-          type: 'security' as const,
-          severity: alert.severity,
+          type: 'security' as const severity: alert.severity,
           title: alert.title,
           description: alert.description,
           timestamp: alert.timestamp, acknowledged: alert.acknowledged
@@ -133,9 +132,7 @@ const DevOpsDashboard: React.FC = () => {
           .slice(0, 5)
           .map(exec => ({
             id: exec.id,
-            type: 'deployment' as const,
-            severity: 'high' as const,
-            title: 'Deployment Failed',
+            type: 'deployment' as const severity: 'high' as const title: 'Deployment Failed',
             description: `Pipeline ${exec.pipelineId} failed`,
             timestamp: exec.endTime || exec.startTime,
             acknowledged: false,
@@ -188,7 +185,7 @@ const DevOpsDashboard: React.FC = () => {
   }, []);
 
   // Get severity color
-  const getSeverityColor = (severity: any) => {
+  const getSeverityColor = (severity) => {
     switch (severity) {
       case 'critical': return 'text-red-600 bg-red-100';
       case 'high': return 'text-orange-600 bg-orange-100';
@@ -198,7 +195,7 @@ const DevOpsDashboard: React.FC = () => {
   };
 
   // Get score color
-  const getScoreColor = (score: any) => {
+  const getScoreColor = (score) => {
     if (score >= 90) {
 return 'text-green-600';
 }

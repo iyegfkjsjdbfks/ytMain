@@ -1,18 +1,14 @@
-import React from 'react';
-import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode, FC, ReactNode } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, type FC, type ReactNode, FC, ReactNode } from 'react';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
 import { createComponentError } from '../../../utils/errorUtils';
 import type { LiveStreamStats } from '../../../types/livestream';
-import {
-  ChartBarIcon,
+import { ChartBarIcon,
   EyeIcon,
   HeartIcon,
   ChatBubbleLeftRightIcon,
   CurrencyDollarIcon,
   ClockIcon,
-  SignalIcon,
-  ArrowTrendingUpIcon as TrendingUpIcon,
-} from '@heroicons/react/24/outline';
+  SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
 
 /**
  * Props for the StreamAnalyticsDashboard component
@@ -75,7 +71,7 @@ type MetricType = 'viewers' | 'engagement' | 'revenue';
 type StreamHealth = 'excellent' | 'good' | 'fair' | 'poor';
 
 // Utility functions for better modularity
-const formatNumber = (num: any): string => {
+const formatNumber = (num): string => {
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(1)}M`;
   }
@@ -85,7 +81,7 @@ const formatNumber = (num: any): string => {
   return num.toString();
 };
 
-const formatDuration = (seconds: any): string => {
+const formatDuration = (seconds): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}h ${minutes}m`;
@@ -308,7 +304,7 @@ interface TopMomentsProps {
 }
 
 const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
-  const getIcon = (type: any): React.ReactNode => {
+  const getIcon = (type): React.ReactNode => {
     switch (type) {
       case 'peak_viewers':
         return <EyeIcon className='h-5 w-5 text-blue-500' />;

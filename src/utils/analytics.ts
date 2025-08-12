@@ -10,7 +10,7 @@ export interface AnalyticsEvent {
  * @param properties - Additional properties to include with the event
  */
 export const trackEvent = (
-  eventName: any,
+  eventName,
   properties?: AnalyticsEvent
 ): void => {
   try {
@@ -39,7 +39,7 @@ export const trackEvent = (
  * @param pagePath - Path of the page being viewed
  * @param pageTitle - Title of the page
  */
-export const trackPageView = (pagePath: any, pageTitle?: string): void => {
+export const trackPageView = (pagePath, pageTitle?: string): void => {
   trackEvent('page_view', {
     page_path: pagePath,
     page_title: pageTitle,
@@ -51,7 +51,7 @@ export const trackPageView = (pagePath: any, pageTitle?: string): void => {
  * @param element - Element that was interacted with
  * @param action - Type of interaction (click, hover, etc.)
  */
-export const trackInteraction = (element: HTMLElement, action: any): void => {
+export const trackInteraction = (element: HTMLElement, action): void => {
   trackEvent('user_interaction', {
     element,
     action,

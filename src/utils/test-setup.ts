@@ -1,8 +1,7 @@
+import React, { Fragment, createContext } from 'react';
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import React from 'react';
-import { Fragment, createContext } from 'react';
-import { afterEach, beforeAll, afterAll, vi } from 'vitest';
+import { afterEach, beforeAll, afterAll, vi  } from 'vitest';
 import { server } from './mocks/server';
 
 // Global type declarations
@@ -308,9 +307,9 @@ Object.defineProperty(navigator, 'clipboard', {
 Object.defineProperty(window, 'File', {
   writable: true,
   value: class MockFile {
-    constructor(bits: BlobPart, name: string, options?: FilePropertyBag) {
+    constructor(bits: BlobPart, name, options?: FilePropertyBag) {
       this.name = name;
-      this.size = bits.reduce((acc: any, bit: any) => {
+      this.size = bits.reduce((acc, bit) => {
         if (typeof bit === 'string') {
           return acc + bit.length;
         } else if (bit instanceof ArrayBuffer) {
@@ -453,7 +452,7 @@ declare global {
   namespace Vi {
     interface JestAssertion<T = any> {
       toBeInViewport(): T;
-      toHaveAccessibleName(expectedName: any): T;
+      toHaveAccessibleName(expectedName): T;
     }
   }
 }

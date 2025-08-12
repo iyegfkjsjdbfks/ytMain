@@ -1,13 +1,11 @@
-import React, { useEffect, useMemo, useCallback, useRef,  useState } from 'react';
-import { KeyboardEvent, MouseEvent } from 'react';
-
-import { safeLocalStorage, throttle } from '../utils/componentUtils';
+import React, { useEffect, useMemo, useCallback, useRef, useState, KeyboardEvent, MouseEvent } from 'react';
+import { safeLocalStorage, throttle  } from '../utils/componentUtils';
 
 // Common hook patterns
 
 // Enhanced local storage hook with error handling
 export const useLocalStorage = <T>(
-  key: string,
+  key,
   initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void, () => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -42,7 +40,7 @@ export const useLocalStorage = <T>(
 };
 
 // Debounced value hook
-export const useDebounce = <T>(value: T, delay: any): T => {
+export const useDebounce = <T>(value: T, delay): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -61,7 +59,7 @@ export const useDebounce = <T>(value: T, delay: any): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args: unknown) => unknown>(
   callback: T,
-  delay: any
+  delay
 ): T => {
   const throttledCallback = useMemo(
     () => throttle(callback, delay),
@@ -87,7 +85,7 @@ export const useToggle = (
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(v => !v), []);
-  const setToggle = useCallback((newValue: any) => setValue(newValue), []);
+  const setToggle = useCallback((newValue) => setValue(newValue), []);
 
   return [value, toggle, setToggle];
 };
@@ -119,9 +117,9 @@ export const useArray = <T>(
   array: T;
   set: (array: T) => void;
   push: (element: T) => void;
-  filter: (callback: (item: T, index: number) => boolean) => void;
-  update: (index: number, newElement: T) => void;
-  remove: (index: number) => void;
+  filter: (callback: (item: T, index) => boolean) => void;
+  update: (index, newElement: T) => void;
+  remove: (index) => void;
   clear: () => void;
 } => {
   const [array, setArray] = useState<T[]>(initialArray);
@@ -131,13 +129,13 @@ export const useArray = <T>(
   }, []);
 
   const filter = useCallback(
-    (callback: (item: T, index: number) => boolean) => {
+    (callback: (item: T, index) => boolean) => {
       setArray(arr => arr.filter(callback));
     },
     []
   );
 
-  const update = useCallback((index: number, newElement: T) => {
+  const update = useCallback((index, newElement: T) => {
     setArray(arr => {
       const newArray = [...arr];
       newArray[index] = newElement;
@@ -145,7 +143,7 @@ export const useArray = <T>(
     });
   }, []);
 
-  const remove = useCallback((index: number) => {
+  const remove = useCallback((index) => {
     setArray(arr => arr.filter((_, i) => i !== index));
   }, []);
 
@@ -223,7 +221,7 @@ export const useClickOutside = (
 
 // Keyboard shortcut hook
 export const useKeyPress = (
-  targetKey: any,
+  targetKey,
   handler: () => void,
   options: {
     ctrl?: boolean;
@@ -281,7 +279,7 @@ export const useWindowSize = (): { width: number; height: number } => {
 };
 
 // Media query hook
-export const useMediaQuery = (query: any): boolean => {
+export const useMediaQuery = (query): boolean => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {

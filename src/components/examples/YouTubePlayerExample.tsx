@@ -1,5 +1,4 @@
-import React, { useState, useRef,  useEffect } from 'react';
-import { FC, ChangeEvent } from 'react';
+import React, { useState, useRef, useEffect, FC, ChangeEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -12,7 +11,7 @@ declare namespace NodeJS {
 import { logger } from '../../utils/logger';
 /// <reference types="node" />
 
-import { YouTubePlayerState, YouTubePlayer } from '../../lib/youtube-utils';
+import { YouTubePlayerState, YouTubePlayer  } from '../../lib/youtube-utils';
 
 interface YouTubePlayerExampleProps {
   videoId: string;
@@ -43,7 +42,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
   const progressInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Format time in seconds to MM:SS format
-  const formatTime = (timeInSeconds: any): string => {
+  const formatTime = (timeInSeconds): string => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

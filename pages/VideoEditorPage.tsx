@@ -1,5 +1,4 @@
-import React, { useEffect, useRef,  useState } from 'react';
-import { FC, MouseEvent } from 'react';
+import React, { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -11,7 +10,7 @@ declare namespace NodeJS {
   }
 }
 
-import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { PauseIcon, PlayIcon  } from '@heroicons/react/24/outline';
 
 interface VideoProject {
   id: string;
@@ -104,7 +103,7 @@ const VideoEditorPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  const formatTime = (seconds: any): string => {
+  const formatTime = (seconds): string => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -131,11 +130,11 @@ const VideoEditorPage: React.FC = () => {
     }
   };
 
-  const handleClipSelect = (clipId: any) => {
+  const handleClipSelect = (clipId) => {
     setSelectedClip(selectedClip === clipId ? null : clipId);
   };
 
-  const handleClipSplit = (clipId: any, splitTime: any) => {
+  const handleClipSplit = (clipId, splitTime) => {
     const clip = clips.find(c => c.id === clipId);
     if (!clip) {
 return;
@@ -166,7 +165,7 @@ return;
     }]);
   };
 
-  const handleVolumeChange = (clipId: any, volume: any) => {
+  const handleVolumeChange = (clipId, volume) => {
     setClips(prev => prev.map(clip =>
       clip.id === clipId ? { ...clip, volume } : clip,
     ));
@@ -271,7 +270,7 @@ return;
     }
   };
 
-  const getTrackLabel = (track: any): string => {
+  const getTrackLabel = (track): string => {
     switch (track) {
       case 0: return 'Video';
       case 1: return 'Audio';

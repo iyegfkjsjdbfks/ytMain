@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
-
-import {
-  EyeIcon,
+import React, { useState, FC } from 'react';
+import { EyeIcon,
   ClockIcon,
   UserGroupIcon,
   CurrencyDollarIcon,
@@ -11,9 +8,7 @@ import {
   VideoCameraIcon,
   ChatBubbleLeftIcon,
   BellIcon,
-  ExclamationTriangleIcon,
-  CheckCircleIcon,
-} from '@heroicons/react/24/outline';
+  ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 // Icon wrapper components to fix type compatibility
 const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({
@@ -164,7 +159,7 @@ export const CreatorStudioDashboard: React.FC = () => {
     },
   ];
 
-  const formatNumber = (num: any): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)}M`;
     }
@@ -174,13 +169,13 @@ export const CreatorStudioDashboard: React.FC = () => {
     return num.toString();
   };
 
-  const formatDuration = (seconds: any): string => {
+  const formatDuration = (seconds): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     return `${hours}h ${minutes}m`;
   };
 
-  const getStatusColor = (status: any) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'published':
         return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
@@ -195,7 +190,7 @@ export const CreatorStudioDashboard: React.FC = () => {
     }
   };
 
-  const getNotificationIcon = (type: any) => {
+  const getNotificationIcon = (type) => {
     switch (type) {
       case 'milestone':
         return CheckCircleIcon;

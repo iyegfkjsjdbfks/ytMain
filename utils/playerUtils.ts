@@ -156,7 +156,7 @@ return NaN;
 
   try {
     // Handle each part of the time string
-    const parsePart = (index: number): number => {
+    const parsePart = (index): number => {
       const part = parts[index];
       return part !== undefined ? safeParse(part, 10) : 0;
     };
@@ -306,7 +306,7 @@ export function getPlaybackRateOptions(): PlaybackRateOption[] {
  * @param rate - The rate to find the closest option for
  * @returns The closest playback rate option
  */
-export function findClosestPlaybackRate(rate: any): PlaybackRateOption {
+export function findClosestPlaybackRate(rate): PlaybackRateOption {
   const options = getPlaybackRateOptions();
 
   // If exact match exists, return it
@@ -367,7 +367,7 @@ return [];
   }
 }
 
-function parseDuration(duration: any): number {
+function parseDuration(duration): number {
   if (!duration) {
 return 0;
 }
@@ -422,9 +422,9 @@ export function getVideoCaptions(video?: Partial<Video>): VideoCaption[] {
     ];
 
     // If video has captions, use them, otherwise return defaults
-    const captions: any[] = (video as any)?.captions || [];
+    const captions[] = (video as any)?.captions || [];
     if (captions.length) {
-      return captions.map((caption: any, index: number) => {
+      return captions.map((caption, index) => {
         const languageCode = caption.language?.code || 'en';
         const languageName = caption.language?.name || 'English';
 

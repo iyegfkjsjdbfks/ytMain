@@ -1,6 +1,4 @@
-import React, { useEffect, useCallback,  useState } from 'react';
-import { FC } from 'react';
-
+import React, { useEffect, useCallback, useState, FC } from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
 
 import { useInstallPrompt } from '../hooks/useInstallPrompt';

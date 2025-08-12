@@ -16,7 +16,7 @@ interface MetricData {
 interface AlertRule {
   id: string;
   name: string;
-  condition: (value: string | number, threshold: any) => boolean;
+  condition: (value: string | number, threshold) => boolean;
   threshold: number;
   severity: 'low' | 'medium' | 'high' | 'critical';
   cooldown: number; // minutes
@@ -93,7 +93,7 @@ return undefined;
   /**
    * Record a custom metric
    */
-  recordMetric(name: string, value: string | number, tags?: Record<string, string>): void {
+  recordMetric(name, value: string | number, tags?: Record<string, string>): void {
     const metric: MetricData = {
       timestamp: Date.now(),
       value,
@@ -124,7 +124,7 @@ return undefined;
   /**
    * Get metrics for a specific name
    */
-  getMetrics(name: string, timeRange?: { start: number; end: number }): MetricData[] {
+  getMetrics(name, timeRange?: { start: number; end: number }): MetricData[] {
     const metrics = this.metrics.get(name) || [];
 
     if (!timeRange) {
@@ -139,7 +139,7 @@ return metrics;
   /**
    * Get aggregated metrics
    */
-  getAggregatedMetrics(name: string, timeRange?: { start: number; end: number }): {
+  getAggregatedMetrics(name, timeRange?: { start: number; end: number }): {
     count: number;
     avg: number;
     min: number;
@@ -500,7 +500,7 @@ return undefined;
     }, 10000); // Check every 10 seconds
   }
 
-  private checkAlerts(metricName: any, value: string | number): void {
+  private checkAlerts(metricName, value: string | number): void {
     for (const [alertId, alert] of this.alerts) {
       const alertPrefix = alertId?.split('-')[0];
       if ((alertPrefix && metricName.includes(alertPrefix)) || alertId === metricName) {
@@ -577,7 +577,7 @@ return undefined;
     return sessionId;
   }
 
-  private generateSecureToken(length: any): string {
+  private generateSecureToken(length): string {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
@@ -830,9 +830,7 @@ export type {
 };
 
 // Export classes for custom implementations
-export {
-  APMSystem,
+export { APMSystem,
   RUMSystem,
-  CodeQualityMetrics,
-  BundleAnalyzer,
-};
+  CodeQualityMetrics, BundleAnalyzer,
+ };

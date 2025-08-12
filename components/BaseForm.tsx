@@ -1,6 +1,4 @@
-
-import React, { useState,  type FormEvent, type ReactNode } from 'react';
-import { FC, ReactNode, ChangeEvent } from 'react';
+import React, { useState, type FormEvent, type ReactNode, FC, ReactNode, ChangeEvent } from 'react';
 
 import { useFormState } from '../src/hooks';
 
@@ -89,9 +87,9 @@ const BaseForm: React.FC<BaseFormProps> = ({
   };
 
   // Handle field blur
-  const handleBlur = (fieldName: any) => {
+  const handleBlur = (fieldName) => {
     setTouched(prev => ({ ...prev, [fieldName]: true }));
-    const field = fields.find((f: any) => f.name === fieldName);
+    const field = fields.find((f) => f.name === fieldName);
     if (field) {
       const error = validateField(field, values[fieldName]);
       if (error) {
@@ -106,7 +104,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
     // Validate all fields
     const newErrors: Record<string, string> = {};
-    fields.forEach((field: any) => {
+    fields.forEach((field) => {
       const error = validateField(field, values[field.name]);
       if (error) {
         newErrors[field.name] = error;
@@ -116,7 +114,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
     // Mark all fields as touched
     const allTouched: Record<string, boolean> = {};
-    fields.forEach((field: any) => {
+    fields.forEach((field) => {
       allTouched[field.name] = true;
     });
     setTouched(allTouched);
@@ -252,7 +250,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
       )}
 
       {/* Form fields */}
-      {fields.map((field: any) => {
+      {fields.map((field) => {
         const fieldError = touched[field.name] ? validateField(field, values[field.name]) : null;
 
         return (

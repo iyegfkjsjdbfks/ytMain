@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo, useCallback,  useState } from 'react';
-import { FC } from 'react';
+import React, { useEffect, useMemo, useCallback, useState, FC } from 'react';
 // @ts-nocheck
 
 import { realVideos } from '../services/realVideoService';
@@ -15,7 +14,7 @@ interface RecommendationEngineProps {
   currentVideo?: Video;
   currentVideoId?: string;
   maxRecommendations?: number;
-  onVideoSelect?: (videoId: any) => void;
+  onVideoSelect?: (videoId) => void;
 }
 
 const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
@@ -133,8 +132,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             isLive: false, // GoogleSearchResult doesn't have isLive property
             commentCount: googleVideo.commentCount || 0,
             // Required Video interface properties
-            visibility: 'public' as const,
-            createdAt: new Date().toISOString(),
+            visibility: 'public' as const createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           }));
         } else {
@@ -166,8 +164,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             isLive: false, // GoogleSearchResult doesn't have isLive property
             commentCount: googleVideo.commentCount || 0,
             // Required Video interface properties
-            visibility: 'public' as const,
-            createdAt: new Date().toISOString(),
+            visibility: 'public' as const createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           }));
         }
@@ -204,8 +201,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
         // Fill remaining slots with other videos
         if (recommended.length < maxRecommendations) {
-          const remaining = availableVideos.filter(
-            video => !recommended.find((r: any) => r.id === video.id),
+          const remaining = availableVideos.filter(video => !recommended.find((r) => r.id === video.id),
           );
           recommended = [...recommended, ...remaining];
         }

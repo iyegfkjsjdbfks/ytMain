@@ -1,6 +1,6 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC  } from 'react';
 
-import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon
+import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon;
 import HistoryPageSkeleton from '../components/LoadingStates/HistoryPageSkeleton';
 import VideoCard from '../components/VideoCard';
 import { getWatchHistoryVideos } from '../services/realVideoService';

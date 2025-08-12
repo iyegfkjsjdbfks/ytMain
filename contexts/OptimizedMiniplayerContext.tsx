@@ -122,7 +122,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       };
 
     case 'REMOVE_FROM_QUEUE': {
-      const newQueue = state.queue.filter((video: any) => video.id !== action.payload);
+      const newQueue = state.queue.filter((video) => video.id !== action.payload);
       const newIndex = state.currentIndex >= newQueue.length ? newQueue.length - 1 : state.currentIndex;
       return {
         ...state,
@@ -180,18 +180,18 @@ interface MiniplayerContextValue {
     showMiniplayer: (video: Video) => void;
     hideMiniplayer: () => void;
     togglePlay: () => void;
-    setPlaying: (playing: any) => void;
-    setVolume: (volume: any) => void;
-    setCurrentTime: (time: any) => void;
-    setDuration: (duration: any) => void;
+    setPlaying: (playing) => void;
+    setVolume: (volume) => void;
+    setCurrentTime: (time) => void;
+    setDuration: (duration) => void;
     toggleMaximize: () => void;
-    setMaximized: (maximized: any) => void;
+    setMaximized: (maximized) => void;
     setQueue: (queue: Video) => void;
     addToQueue: (video: Video) => void;
-    removeFromQueue: (videoId: any) => void;
+    removeFromQueue: (videoId) => void;
     nextVideo: () => void;
     previousVideo: () => void;
-    setCurrentIndex: (index: number) => void;
+    setCurrentIndex: (index) => void;
   };
 }
 
@@ -211,18 +211,18 @@ export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProp
     showMiniplayer: (video: Video) => dispatch({ type: 'SHOW_MINIPLAYER', payload: video }),
     hideMiniplayer: () => dispatch({ type: 'HIDE_MINIPLAYER' }),
     togglePlay: () => dispatch({ type: 'TOGGLE_PLAY' }),
-    setPlaying: (playing: any) => dispatch({ type: 'SET_PLAYING', payload: playing }),
-    setVolume: (volume: any) => dispatch({ type: 'SET_VOLUME', payload: volume }),
-    setCurrentTime: (time: any) => dispatch({ type: 'SET_CURRENT_TIME', payload: time }),
-    setDuration: (duration: any) => dispatch({ type: 'SET_DURATION', payload: duration }),
+    setPlaying: (playing) => dispatch({ type: 'SET_PLAYING', payload: playing }),
+    setVolume: (volume) => dispatch({ type: 'SET_VOLUME', payload: volume }),
+    setCurrentTime: (time) => dispatch({ type: 'SET_CURRENT_TIME', payload: time }),
+    setDuration: (duration) => dispatch({ type: 'SET_DURATION', payload: duration }),
     toggleMaximize: () => dispatch({ type: 'TOGGLE_MAXIMIZE' }),
-    setMaximized: (maximized: any) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized }),
+    setMaximized: (maximized) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized }),
     setQueue: (queue: Video) => dispatch({ type: 'SET_QUEUE', payload: queue }),
     addToQueue: (video: Video) => dispatch({ type: 'ADD_TO_QUEUE', payload: video }),
-    removeFromQueue: (videoId: any) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId }),
+    removeFromQueue: (videoId) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId }),
     nextVideo: () => dispatch({ type: 'NEXT_VIDEO' }),
     previousVideo: () => dispatch({ type: 'PREVIOUS_VIDEO' }),
-    setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }),
+    setCurrentIndex: (index) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }),
   }), []);
 
   const value = useMemo(() => ({ state, actions }), [state]);

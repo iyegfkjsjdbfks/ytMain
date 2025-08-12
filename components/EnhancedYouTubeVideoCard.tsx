@@ -1,9 +1,7 @@
+import React, { memo, FC } from 'react';
 
 
-import React, { memo } from 'react';
-import { memo, FC } from 'react';
-
-import { ArrowTopRightOnSquareIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { ArrowTopRightOnSquareIcon, PlayIcon  } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
 
 import ImageWithFallback from './ImageWithFallback';
@@ -12,7 +10,7 @@ import type { Video } from '../types';
 
 interface EnhancedYouTubeVideoCardProps {
   video: Video;
-  onVideoSelect?: ((videoId: any) => void) | undefined;
+  onVideoSelect?: ((videoId) => void) | undefined;
   showChannel?: boolean;
   size?: 'sm' | 'md' | 'lg';
 }
@@ -44,7 +42,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
     return num.toString();
   };
 
-  const formatTimeAgo = (dateStr: any): string => {
+  const formatTimeAgo = (dateStr): string => {
     try {
       return formatDistanceToNow(new Date(dateStr || Date.now()), { addSuffix: true });
     } catch {

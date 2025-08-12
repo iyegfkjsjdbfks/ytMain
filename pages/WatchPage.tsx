@@ -1,13 +1,11 @@
-import React, { useState, useEffect,  memo, useCallback } from 'react';
-import { memo, FC } from 'react';
-
-import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
+import React, { useState, useEffect, memo, useCallback, FC } from 'react';
+import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine  } from '../components';
 import VideoMetadata from '../components/VideoMetadata';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useWatchPage } from '../src/hooks/useWatchPage';
 import { getYouTubePlayerType } from '../services/settingsService';
-import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { isYouTubeUrl, getYouTubeVideoId  } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
 
@@ -164,7 +162,7 @@ const WatchPage: React.FC = () => {
   const [metadataExpanded, setMetadataExpanded] = React.useState(false);
 
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId: any, playlistId: any) => {
+  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId, playlistId) => {
     // Call the original handler
     await handleSaveToPlaylist(playlistId);
 

@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-
-
 import type React from 'react';
 
 const AdjustmentsHorizontalIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (

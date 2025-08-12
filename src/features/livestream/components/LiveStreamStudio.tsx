@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect, FC } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -7,12 +8,9 @@ declare namespace NodeJS {
   }
 }
 
-import React, { useState, useRef, useEffect } from 'react';
-import { FC } from 'react';
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
-import {
-  VideoCameraIcon,
+import { VideoCameraIcon,
   MicrophoneIcon,
   StopIcon,
   PlayIcon,
@@ -20,13 +18,8 @@ import {
   ChatBubbleLeftRightIcon,
   EyeIcon,
   HeartIcon,
-  ShareIcon,
-  SignalIcon,
-} from '@heroicons/react/24/outline';
-import {
-  VideoCameraIcon as VideoCameraSolidIcon,
-  MicrophoneIcon as MicrophoneSolidIcon,
-} from '@heroicons/react/24/solid';
+  ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
 
 interface StreamSettings {
   title: string;
@@ -211,7 +204,7 @@ export const LiveStreamStudio: React.FC = () => {
     setStats(prev => ({ ...prev, chatMessages: prev.chatMessages + 1 }));
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -445,7 +438,7 @@ export const LiveStreamStudio: React.FC = () => {
                       >
                         {message.username}
                       </span>
-                      {message.badges?.map((badge: any) => (
+                      {message.badges?.map((badge) => (
                         <span
                           key={badge}
                           className='text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded'

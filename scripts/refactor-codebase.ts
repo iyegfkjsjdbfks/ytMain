@@ -80,7 +80,7 @@ class CodebaseRefactorer {
 
   async runRefactoring(): Promise<void> {
     // Sort tasks by priority
-    const sortedTasks = this.tasks.sort((a: any, b: any) => {
+    const sortedTasks = this.tasks.sort((a, b) => {
       const priorityOrder = { high: 3, medium: 2, low: 1 };
       return priorityOrder[b.priority] - priorityOrder[a.priority];
     });
@@ -287,7 +287,7 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
     }
   }
 
-  private async optimizeFileImports(filePath: any): Promise<void> {
+  private async optimizeFileImports(filePath): Promise<void> {
     const content = fs.readFileSync(filePath, 'utf8');
     let optimizedContent = content;
 
@@ -321,7 +321,7 @@ continue;
     }
   }
 
-  private sortImports(content: any): string {
+  private sortImports(content): string {
     const lines = content.split('\n');
     const importLines: string = [];
     const otherLines: string = [];
@@ -339,19 +339,19 @@ continue;
     }
 
     // Sort imports: React first, then libraries, then local imports
-    const reactImports = importLines.filter((line: any) => line.includes("'react'") || line.includes('"react"'));
-    const libraryImports = importLines.filter((line: any) =>
+    const reactImports = importLines.filter((line) => line.includes("'react'") || line.includes('"react"'));
+    const libraryImports = importLines.filter((line) =>
       !line.includes("'react'") &&
       !line.includes('"react"') &&
       !line.includes('./') &&
       !line.includes('../') &&
       line.trim().startsWith('import '),
     );
-    const localImports = importLines.filter((line: any) =>
+    const localImports = importLines.filter((line) =>
       (line.includes('./') || line.includes('../')) &&
       line.trim().startsWith('import '),
     );
-    const emptyLines = importLines.filter((line: any) => line.trim() === '');
+    const emptyLines = importLines.filter((line) => line.trim() === '');
 
     const sortedImports = [
       ...reactImports.sort(),
@@ -475,19 +475,19 @@ export interface ErrorWithSeverity extends AppError {
     // This would involve implementing code splitting and lazy loading
   }
 
-  private findFiles(directories: any, extensions: any, exclude: string = []): string[] {
+  private findFiles(directories, extensions, exclude: string = []): string[] {
     const files: string = [];
 
-    function searchDirectory(dir: any): void {
+    function searchDirectory(dir): void {
       const items = fs.readdirSync(dir);
 
       for (const item of items) {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
 
-        if (stat.isDirectory() && !exclude.some((ex: any) => fullPath.includes(ex))) {
+        if (stat.isDirectory() && !exclude.some((ex) => fullPath.includes(ex))) {
           searchDirectory(fullPath);
-        } else if (stat.isFile() && extensions.some((ext: any) => item.endsWith(ext))) {
+        } else if (stat.isFile() && extensions.some((ext) => item.endsWith(ext))) {
           files.push(fullPath);
         }
       }

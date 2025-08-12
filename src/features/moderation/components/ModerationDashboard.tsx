@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
+import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  FlagIcon,
+import { FlagIcon,
   EyeIcon,
   CheckIcon,
   XMarkIcon,
@@ -10,9 +8,7 @@ import {
   ShieldCheckIcon,
   ClockIcon,
   UserIcon,
-  ChatBubbleLeftIcon,
-  VideoCameraIcon,
-} from '@heroicons/react/24/outline';
+  ChatBubbleLeftIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
 
 interface ModerationItem {
   id: string;
@@ -150,7 +146,7 @@ export const ModerationDashboard: React.FC = () => {
     return true;
   });
 
-  const handleSelectItem = (itemId: any) => {
+  const handleSelectItem = (itemId) => {
     setSelectedItems(prev =>
       prev.includes(itemId)
         ? prev.filter(id => id !== itemId)
@@ -166,7 +162,7 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const handleModerationAction = (_itemId: any, _action: ModerationAction) => {
+  const handleModerationAction = (_itemId, _action: ModerationAction) => {
     // In a real app, this would make an API call
   };
 
@@ -177,7 +173,7 @@ export const ModerationDashboard: React.FC = () => {
     setSelectedItems([]);
   };
 
-  const getSeverityColor = (severity: any) => {
+  const getSeverityColor = (severity) => {
     switch (severity) {
       case 'low':
         return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
@@ -192,7 +188,7 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const getTypeIcon = (type: any) => {
+  const getTypeIcon = (type) => {
     switch (type) {
       case 'video':
         return VideoCameraIcon;
@@ -207,7 +203,7 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;

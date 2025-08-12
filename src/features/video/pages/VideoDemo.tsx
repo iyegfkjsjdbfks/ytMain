@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
-
+import React, { useState, FC } from 'react';
 import { realVideos } from '../../../../services/realVideoService';
 
-import {
-  VideoCard,
+import { VideoCard,
   VideoList,
-  VideoGrid,
-  StudioVideoGrid,
-} from '../components';
+  VideoGrid, StudioVideoGrid } from '../components';
 import type { Video } from '../types';
 
 /**
@@ -23,16 +18,16 @@ const VideoDemo: React.FC = () => {
     alert(`Video clicked: ${video.title}`);
   };
 
-  const handleVideoEdit = (videoId: any) => {
+  const handleVideoEdit = (videoId) => {
     alert(`Edit video: ${videoId}`);
   };
 
-  const handleVideoDelete = (videoId: any) => {
+  const handleVideoDelete = (videoId) => {
     alert(`Delete video: ${videoId}`);
   };
 
   const handleVisibilityChange = (
-    videoId: any,
+    videoId,
     visibility: VideoVisibility
   ) => {
     alert(`Changed visibility of ${videoId} to ${visibility}`);

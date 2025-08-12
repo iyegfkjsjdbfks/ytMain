@@ -1,6 +1,4 @@
-import React, { useCallback } from 'react';
-import { FC } from 'react';
-
+import React, { useCallback, FC } from 'react';
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
 import { conditionalLogger } from '../src/utils/conditionalLogger';
 

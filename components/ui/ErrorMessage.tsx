@@ -1,5 +1,4 @@
 import React, { FC, MouseEvent } from 'react';
-
 import type React from 'react';
 
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';

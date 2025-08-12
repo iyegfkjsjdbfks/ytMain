@@ -50,13 +50,13 @@ interface UsePWAReturn {
   notificationPermission: NotificationPermission;
   canShowNotifications: boolean;
   requestNotificationPermission: () => Promise<NotificationPermission>;
-  showNotification: (options: any) => Promise<boolean>;
+  showNotification: (options) => Promise<boolean>;
 
   // Features
   shareContent: (data: ShareData) => Promise<boolean>;
   addToHomeScreen: () => void;
-  registerBackgroundSync: (tag: any) => Promise<void>;
-  cacheVideo: (videoId: any, quality?: string) => Promise<boolean>;
+  registerBackgroundSync: (tag) => Promise<void>;
+  cacheVideo: (videoId, quality?: string) => Promise<boolean>;
 
   // Analytics
   getInstallStats: () => any;
@@ -235,8 +235,7 @@ export const usePWA = (): UsePWAReturn => {
   ]);
 
   // Register background sync
-  const registerBackgroundSync = useCallback(
-    async (tag: any): Promise<void> => {
+  const registerBackgroundSync = useCallback(async (tag): Promise<void> => {
       try {
         if (!state.features.backgroundSync) {
           conditionalLogger.warn(
@@ -270,7 +269,7 @@ export const usePWA = (): UsePWAReturn => {
 
   // Cache video for offline viewing
   const cacheVideo = useCallback(
-    async (videoId: any, quality?: string): Promise<boolean> => {
+    async (videoId, quality?: string): Promise<boolean> => {
       try {
         if (!('caches' in window)) {
           conditionalLogger.warn(
@@ -440,7 +439,7 @@ export const requestNotificationPermission = async (): Promise<boolean> => {
 };
 
 export const showNotification = (
-  title: any,
+  title,
   options?: NotificationOptions
 ): void => {
   if ('Notification' in window && Notification.permission === 'granted') {
@@ -522,7 +521,7 @@ export const getNetworkStatus = (): {
   };
 };
 
-export const enableBackgroundSync = (tag: any): void => {
+export const enableBackgroundSync = (tag): void => {
   if (
     'serviceWorker' in navigator &&
     'sync' in window.ServiceWorkerRegistration.prototype
@@ -547,8 +546,8 @@ export const enableBackgroundSync = (tag: any): void => {
 };
 
 export const cacheVideo = async (
-  videoUrl: any,
-  videoId: any
+  videoUrl,
+  videoId
 ): Promise<boolean> => {
   if ('caches' in window) {
     try {
@@ -573,7 +572,7 @@ export const cacheVideo = async (
 };
 
 export const getCachedVideo = async (
-  videoId: any
+  videoId
 ): Promise<Response | null> => {
   if ('caches' in window) {
     try {

@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-
-
 import type React from 'react';
 
 const ShareIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (

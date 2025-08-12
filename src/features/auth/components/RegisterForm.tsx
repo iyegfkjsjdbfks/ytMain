@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { FC, ChangeEvent } from 'react';
-
+import React, { useState, FC, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '../store/authStore';

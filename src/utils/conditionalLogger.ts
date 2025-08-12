@@ -54,7 +54,7 @@ class ConditionalLogger {
 
   private formatMessage(
     level: LogLevel,
-    message: any,
+    message,
     source?: string
   ): string {
     const timestamp = new Date().toISOString();
@@ -63,7 +63,7 @@ class ConditionalLogger {
     return `${timestamp} ${levelName}${sourcePrefix}: ${message}`;
   }
 
-  error(message: any, data?: unknown, source?: string): void {
+  error(message, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.ERROR)) {
       const formattedMessage = this.formatMessage(
         LogLevel.ERROR,
@@ -74,7 +74,7 @@ class ConditionalLogger {
     }
   }
 
-  warn(message: any, data?: unknown, source?: string): void {
+  warn(message, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.WARN)) {
       const formattedMessage = this.formatMessage(
         LogLevel.WARN,
@@ -85,7 +85,7 @@ class ConditionalLogger {
     }
   }
 
-  info(message: any, data?: unknown, source?: string): void {
+  info(message, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.INFO)) {
       const formattedMessage = this.formatMessage(
         LogLevel.INFO,
@@ -96,7 +96,7 @@ class ConditionalLogger {
     }
   }
 
-  debug(message: any, data?: unknown, source?: string): void {
+  debug(message, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.DEBUG)) {
       const formattedMessage = this.formatMessage(
         LogLevel.DEBUG,
@@ -108,20 +108,20 @@ class ConditionalLogger {
   }
 
   // Performance logging for development
-  time(label: any): void {
+  time(label): void {
     if (this.isDevelopment) {
       console.time(label);
     }
   }
 
-  timeEnd(label: any): void {
+  timeEnd(label): void {
     if (this.isDevelopment) {
       console.timeEnd(label);
     }
   }
 
   // Group logging for complex operations
-  group(label: any): void {
+  group(label): void {
     if (this.isDevelopment) {
       console.group(label);
     }
@@ -134,7 +134,7 @@ class ConditionalLogger {
   }
 
   // API response logging with sanitization
-  apiResponse(endpoint: any, response: any, duration?: number): void {
+  apiResponse(endpoint, response, duration?: number): void {
     if (this.isDevelopment) {
       const message = duration
         ? `API Response from ${endpoint} (${duration}ms)`
@@ -144,13 +144,13 @@ class ConditionalLogger {
   }
 
   // API error logging
-  apiError(endpoint: any, error: Error): void {
+  apiError(endpoint, error: Error): void {
     const message = `API Error from ${endpoint}`;
     this.error(message, this.sanitizeError(error), 'API');
   }
 
   // Sanitize API responses to avoid logging sensitive data
-  private sanitizeApiResponse(response: any): any {
+  private sanitizeApiResponse(response): any {
     if (!response) return response;
 
     try {
@@ -159,7 +159,7 @@ class ConditionalLogger {
       const sanitized = { ...response };
 
       // Recursively remove sensitive fields
-      const removeSensitiveFields = (obj: any): any => {
+      const removeSensitiveFields = (obj): any => {
         if (typeof obj !== 'object' || obj === null) return obj;
 
         if (Array.isArray(obj)) {

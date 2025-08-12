@@ -8,7 +8,7 @@ export interface FileUploadProps {
   multiple?: boolean;
   maxSize?: number; // in bytes
   onFileSelect: (files: File) => void;
-  onFileRemove?: (index: number) => void;
+  onFileRemove?: (index) => void;
   disabled?: boolean;
   className?: string;
   label?: string;
@@ -79,7 +79,7 @@ return;
     }
   };
 
-  const formatFileSize = (bytes: any): string => {
+  const formatFileSize = (bytes): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }
@@ -144,7 +144,7 @@ return '0 Bytes';
             Selected Files ({files.length})
           </h4>
           <div className="space-y-2">
-            {files.map((file: any, index: number) => (
+            {files.map((file, index) => (
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg"

@@ -59,7 +59,7 @@ class ApiCache {
     }
   >();
 
-  set<T>(key: string, data: T, staleTime: number = 0): void {
+  set<T>(key, data: T, staleTime: number = 0): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -75,7 +75,7 @@ class ApiCache {
     }
   }
 
-  get<T>(key: string): T | undefined {
+  get<T>(key): T | undefined {
     const entry = this.cache.get(key);
     if (!entry) {
       return undefined;
@@ -93,7 +93,7 @@ class ApiCache {
     return entry.data;
   }
 
-  isStale(key: string): boolean {
+  isStale(key): boolean {
     const entry = this.cache.get(key);
     if (!entry) {
       return true;
@@ -104,7 +104,7 @@ class ApiCache {
     return age > entry.staleTime;
   }
 
-  invalidate(key: string): void {
+  invalidate(key): void {
     this.cache.delete(key);
   }
 
@@ -400,10 +400,10 @@ export function useMutation<T, TVariables = any>(
 
 // Cache utilities
 export const queryCache = {
-  invalidate: (key: string) => apiCache.invalidate(key),
+  invalidate: (key) => apiCache.invalidate(key),
   clear: () => apiCache.clear(),
-  get: <T>(key: string) => apiCache.get<T>(key),
-  set: <T>(key: string, data: T, staleTime?: number) =>
+  get: <T>(key) => apiCache.get<T>(key),
+  set: <T>(key, data: T, staleTime?: number) =>
     apiCache.set(key, data, staleTime),
 };
 

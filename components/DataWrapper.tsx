@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import type React from 'react';
 
-import { VideoGridSkeleton, ErrorState, EmptyState } from './LoadingStates';
+import { VideoGridSkeleton, ErrorState, EmptyState  } from './LoadingStates';
 
 interface DataWrapperProps<T> {
   data: T;

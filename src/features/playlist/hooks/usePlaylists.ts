@@ -24,7 +24,7 @@ export function usePlaylists(filters: PlaylistFilters = {}) {
   );
 }
 
-export function usePlaylist(playlistId: any) {
+export function usePlaylist(playlistId) {
   return useQuery(
     ['playlist', playlistId],
     () => playlistService.getPlaylist(playlistId),
@@ -36,7 +36,7 @@ export function usePlaylist(playlistId: any) {
 }
 
 export function usePlaylistVideos(
-  playlistId: any,
+  playlistId,
   page: number = 1,
   limit: number = 50
 ) {
@@ -80,7 +80,7 @@ export function useFollowedPlaylists(page: number = 1, limit: number = 20) {
   );
 }
 
-export function usePlaylistStats(playlistId: any) {
+export function usePlaylistStats(playlistId) {
   return useQuery(
     ['playlist', playlistId, 'stats'],
     () => playlistService.getPlaylistStats(playlistId),
@@ -91,7 +91,7 @@ export function usePlaylistStats(playlistId: any) {
   );
 }
 
-export function usePlaylistCollaborators(playlistId: any) {
+export function usePlaylistCollaborators(playlistId) {
   return useQuery(
     ['playlist', playlistId, 'collaborators'],
     () => playlistService.getPlaylistCollaborators(playlistId),
@@ -103,7 +103,7 @@ export function usePlaylistCollaborators(playlistId: any) {
 }
 
 export function useSearchPlaylists(
-  query: any,
+  query,
   filters: Omit<PlaylistFilters, 'search'> = {}
 ) {
   return useQuery(
@@ -280,7 +280,7 @@ export function useUploadPlaylistThumbnail() {
 }
 
 // Combined hooks for common patterns
-export function usePlaylistWithVideos(playlistId: any) {
+export function usePlaylistWithVideos(playlistId) {
   const playlist = usePlaylist(playlistId);
   const videos = usePlaylistVideos(playlistId);
   const stats = usePlaylistStats(playlistId);

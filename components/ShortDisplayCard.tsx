@@ -1,17 +1,15 @@
+import React, { useState, useRef, useEffect, FC, MouseEvent } from 'react';
 import { useLocation } from 'react-router-dom';
 // @ts-nocheck - Temporary during refactoring
-import React, { useState,  useRef, useEffect } from 'react';
-import { FC, MouseEvent } from 'react';
-
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 const HeartIconSolid = HeartSolidIcon;
 
-import { useIntersectionObserver, useVideoAutoplay } from '../hooks';
+import { useIntersectionObserver, useVideoAutoplay  } from '../hooks';
 import { useVideoPlayer } from '../src/hooks/useVideoPlayer';
 
 import LoadingSpinner from './LoadingSpinner';
-import { ActionButton, ErrorMessage } from './ui';
+import { ActionButton, ErrorMessage  } from './ui';
 
 import type { Short } from '../src/types/core';
 
@@ -19,10 +17,10 @@ interface ShortDisplayCardProps {
   short: Short;
   isLiked?: boolean;
   isFollowed?: boolean;
-  onLike?: (shortId: any) => void;
-  onFollow?: (channelName: any) => void;
-  onComment?: (shortId: any) => void;
-  onShare?: (shortId: any) => void;
+  onLike?: (shortId) => void;
+  onFollow?: (channelName) => void;
+  onComment?: (shortId) => void;
+  onShare?: (shortId) => void;
   onVideoChange?: () => void;
   onVideoEnd?: () => void;
   isActive?: boolean;
@@ -365,7 +363,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
 export default ShortDisplayCard;
 
 // Export video-specific sub-components for reuse in other parts of the application
-export { PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState };
+export { PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState  };
 
 
 

@@ -1,13 +1,9 @@
-import React from 'react';
-import { FC } from 'react';
-import {
-  FunnelIcon,
+import React, { FC } from 'react';
+import { FunnelIcon,
   XMarkIcon,
   VideoCameraIcon,
   UserIcon,
-  PlayIcon,
-  DocumentTextIcon,
-} from '@heroicons/react/24/outline';
+  PlayIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 
 export interface SearchFilters {
   type: 'all' | 'video' | 'channel' | 'playlist' | 'live';
@@ -46,9 +42,9 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     });
   };
 
-  const toggleFeature = (feature: any) => {
+  const toggleFeature = (feature) => {
     const newFeatures = filters.features.includes(feature)
-      ? filters.features.filter((f: any) => f !== feature)
+      ? filters.features.filter((f) => f !== feature)
       : [...filters.features, feature];
 
     updateFilter('features', newFeatures);

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import type React from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';
@@ -7,7 +6,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 interface ShortsFiltersProps {
   categories: string;
   selectedCategory: string;
-  onCategoryChange: (category: any) => void;
+  onCategoryChange: (category) => void;
   onClose: () => void;
 }
 
@@ -17,7 +16,7 @@ const ShortsFilters: React.FC<ShortsFiltersProps> = ({
   onCategoryChange,
   onClose,
 }) => {
-  const formatCategoryName = (category: any) => {
+  const formatCategoryName = (category) => {
     if (category === 'all') {
 return 'All';
 }
@@ -39,7 +38,7 @@ return 'All';
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {categories.map((category: any) => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => onCategoryChange(category)}

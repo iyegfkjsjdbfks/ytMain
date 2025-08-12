@@ -1,12 +1,8 @@
-import React from 'react';
-import { FC } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
-import {
-  Cog8ToothIcon,
+import React, { FC } from 'react';
+import { Link, NavLink, Outlet  } from 'react-router-dom';
+import { Cog8ToothIcon,
   ShieldCheckIcon,
-  DocumentTextIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/outline';
+  DocumentTextIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 
 /**
  * AccountLayout component provides a consistent layout for account-related pages

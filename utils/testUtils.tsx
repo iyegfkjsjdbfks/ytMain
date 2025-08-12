@@ -1,11 +1,11 @@
+import React, { type ReactElement } from 'react';
 /**
  * Comprehensive testing utilities for React components with enhanced setup
  */
 
-import React, { type ReactElement } from 'react';
 // Removed unused imports to avoid duplicate identifiers and warnings
 
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { QueryClientProvider, QueryClient  } from '@tanstack/react-query';
 
 import screen, { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -63,8 +63,7 @@ export const mockGenerators = {
     isVerified: false,
     subscriberCount: 0,
     preferences: {
-      theme: 'system' as const,
-      language: 'en',
+      theme: 'system' as const language: 'en',
       autoplay: true,
       notifications: {
         email: true,
@@ -186,7 +185,7 @@ function createTestQueryClient(): QueryClient {
   });
 }
 
-function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockUser }: any) {
+function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockUser }) {
   return (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={initialEntries}>
@@ -227,7 +226,7 @@ export function customRender(_ui: ReactElement, _options: CustomRenderOptions = 
 // Custom render hook function
 export function customRenderHook<TResult, TProps>(
   hook: (props: TProps) => TResult,
-  options: any & {
+  options & {
     queryClient?: QueryClient;
     initialEntries?: string;
     mockUser?: any;
@@ -360,7 +359,7 @@ export const testUtils = {
 
     const dataTransfer = {
       files,
-      items: files.map((file: any) => ({
+      items: files.map((file) => ({
         kind: 'file',
         type: file.type,
         getAsFile: () => file,

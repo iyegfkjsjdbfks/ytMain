@@ -1,3 +1,4 @@
+import React, { useState, useCallback, useRef, useEffect, createContext, useContext, KeyboardEvent, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -10,14 +11,11 @@ declare namespace NodeJS {
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import React, { useState, useCallback, useRef,  useEffect } from 'react';
-import { createContext, useContext, KeyboardEvent, MouseEvent } from 'react';
-
 // Accessibility context for global settings
 interface AccessibilityContextType {
   reducedMotion, highContrast: boolean;
   fontSize: 'small' | 'medium' | 'large' | 'extra-large', announcements: string;
-  addAnnouncement: (message: any) => void, clearAnnouncements: () => void
+  addAnnouncement: (message) => void, clearAnnouncements: () => void
 }
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
@@ -69,7 +67,7 @@ export function AccessibilityProvider({ children }) {
     localStorage.setItem('accessibility-font-size', fontSize);
   }, [fontSize]);
 
-  const addAnnouncement = useCallback((message: any) => {
+  const addAnnouncement = useCallback((message) => {
     setAnnouncements(prev => [...prev, message]);
 
     // Auto-clear announcement after 5 seconds
@@ -115,7 +113,7 @@ export function ScreenReaderAnnouncer() {
       className="sr-only"
       role="status"
     >
-      {announcements.map((announcement: any, index: number) => (
+      {announcements.map((announcement, index) => (
         <div key={`${announcement}-${index}`}>
           {announcement}
         </div>
@@ -185,7 +183,7 @@ return;
 }
 
 // Keyboard navigation hook
-export function useKeyboardNavigation(_options: any) {
+export function useKeyboardNavigation(_options) {
   const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
@@ -236,7 +234,7 @@ export function useAriaLiveRegion(_initialMessage = '') {
   const [message, setMessage] = useState(_initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
-  const announce = useCallback((newMessage: any, priority: 'polite' | 'assertive' = 'polite') => {
+  const announce = useCallback((newMessage, priority: 'polite' | 'assertive' = 'polite') => {
     setPoliteness(priority);
     setMessage(newMessage);
 
@@ -259,10 +257,10 @@ export function useAriaLiveRegion(_initialMessage = '') {
 }
 
 // Color contrast utilities
-export function getContrastRatio(color1: any, color2: any): number {
-  const getLuminance = (color: any): number => {
+export function getContrastRatio(color1, color2): number {
+  const getLuminance = (color): number => {
     const rgb = color.match(/\d+/g)?.map(Number) || [0, 0, 0];
-    const [r = 0, g = 0, b = 0] = rgb.map((c: any) => {
+    const [r = 0, g = 0, b = 0] = rgb.map((c) => {
       c = c / 255;
       return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
     });
@@ -277,7 +275,7 @@ export function getContrastRatio(color1: any, color2: any): number {
   return (brightest + 0.05) / (darkest + 0.05);
 }
 
-export function checkColorContrast(foreground: any, background: any): {
+export function checkColorContrast(foreground, background): {
   ratio, wcagAA: boolean;
   wcagAAA, wcagAALarge: boolean
 } {
@@ -375,12 +373,12 @@ export function useAccessibleForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { addAnnouncement } = useAccessibility();
 
-  const setFieldError = useCallback((fieldName: any, error: Error) => {
+  const setFieldError = useCallback((fieldName, error: Error) => {
     setErrors(prev => ({ ...prev, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
 
-  const clearFieldError = useCallback((fieldName: any) => {
+  const clearFieldError = useCallback((fieldName) => {
     setErrors(prev => {
       const newErrors = { ...prev };
       delete newErrors[fieldName];
@@ -388,7 +386,7 @@ export function useAccessibleForm() {
     });
   }, []);
 
-  const getFieldProps = useCallback((fieldName: any) => {
+  const getFieldProps = useCallback((fieldName) => {
     const hasError = !!errors[fieldName];
 
     return {
@@ -405,14 +403,13 @@ export function useAccessibleForm() {
     };
   }, [errors, setFieldError, clearFieldError]);
 
-  const getErrorProps = useCallback((fieldName: any) => {
+  const getErrorProps = useCallback((fieldName) => {
     const error = errors[fieldName];
 
     return error ? {
       id: `${fieldName}-error`,
       role: 'alert',
-      'aria-live': 'polite' as const,
-      children: error,
+      'aria-live': 'polite' as const children: error,
     } : null;
   }, [errors]);
 
@@ -459,8 +456,7 @@ export function useAccessibleTooltip() {
     id: tooltipId.current,
     role: 'tooltip',
     style: {
-      position: 'absolute' as const,
-      left: position.x,
+      position: 'absolute' as const left: position.x,
       top: position.y, transform: 'translateX(-50%) translateY(-100%)'
     },
   };

@@ -574,8 +574,8 @@ return;
   private generateSecurityAlert(
     type: SecurityAlert['type'],
     severity: SecurityAlert['severity'],
-    title: any,
-    description: any,
+    title,
+    description,
   ): void {
     const alert: SecurityAlert = {
       id: `alert-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -596,7 +596,7 @@ return;
   /**
    * Log security event
    */
-  private logSecurityEvent(event: string, metadata: Record<string, any>): void {
+  private logSecurityEvent(event, metadata: Record<string, any>): void {
     const log: SecurityAuditLog = {
       id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: Date.now(),
@@ -620,7 +620,7 @@ return;
    */
   private cleanupAuditLogs(): void {
     const cutoffTime = Date.now() - (30 * 24 * 60 * 60 * 1000); // 30 days
-    this.auditLogs = this.auditLogs.filter((log: any) => log.timestamp > cutoffTime);
+    this.auditLogs = this.auditLogs.filter((log) => log.timestamp > cutoffTime);
     console.log(`🧹 Cleaned up old audit logs, ${this.auditLogs.length} logs remaining`);
   }
 
@@ -697,14 +697,14 @@ return;
    */
   getAuditLogs(limit = 100): SecurityAuditLog[] {
     return this.auditLogs
-      .sort((a: any, b: any) => b.timestamp - a.timestamp)
+      .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, limit);
   }
 
   /**
    * Acknowledge security alert
    */
-  acknowledgeAlert(alertId: any, assignee?: string): void {
+  acknowledgeAlert(alertId, assignee?: string): void {
     const alert = this.alerts.get(alertId);
     if (alert) {
       alert.acknowledged = true;
@@ -723,7 +723,7 @@ return;
   /**
    * Resolve security alert
    */
-  resolveAlert(alertId: any, resolution: any): void {
+  resolveAlert(alertId, resolution): void {
     const alert = this.alerts.get(alertId);
     if (alert) {
       alert.resolution = resolution;
@@ -740,7 +740,7 @@ return;
   /**
    * Update vulnerability status
    */
-  updateVulnerabilityStatus(vulnerabilityId: any, status: VulnerabilityReport['status']): void {
+  updateVulnerabilityStatus(vulnerabilityId, status: VulnerabilityReport['status']): void {
     const vulnerability = this.vulnerabilities.get(vulnerabilityId);
     if (vulnerability) {
       vulnerability.status = status;

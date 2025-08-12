@@ -68,7 +68,7 @@ class TestRunner {
     this.generateReport();
   }
 
-  private async runTestSuite(suiteName: any, testPatterns: any): Promise<void> {
+  private async runTestSuite(suiteName, testPatterns): Promise<void> {
     const suiteStartTime = Date.now();
 
     const suite: TestSuite = {
@@ -108,9 +108,9 @@ class TestRunner {
 
       // Calculate suite statistics
       suite.totalTests = suite.tests.length;
-      suite.passedTests = suite.tests.filter((t: any) => t.status === 'passed').length;
-      suite.failedTests = suite.tests.filter((t: any) => t.status === 'failed').length;
-      suite.skippedTests = suite.tests.filter((t: any) => t.status === 'skipped').length;
+      suite.passedTests = suite.tests.filter((t) => t.status === 'passed').length;
+      suite.failedTests = suite.tests.filter((t) => t.status === 'failed').length;
+      suite.skippedTests = suite.tests.filter((t) => t.status === 'skipped').length;
       suite.duration = Date.now() - suiteStartTime;
 
       } catch (error) {
@@ -126,7 +126,7 @@ class TestRunner {
     this.results.push(suite);
   }
 
-  private parseTestOutput(output: any): TestResult[] {
+  private parseTestOutput(output): TestResult[] {
     const results: TestResult = [];
 
     try {
@@ -179,18 +179,18 @@ class TestRunner {
 
   private generateReport(): void {
     const totalDuration = Date.now() - this.startTime;
-    const totalTests = this.results.reduce((sum: any, suite: any) => sum + suite.totalTests, 0);
-    const totalPassed = this.results.reduce((sum: any, suite: any) => sum + suite.passedTests, 0);
-    const totalFailed = this.results.reduce((sum: any, suite: any) => sum + suite.failedTests, 0);
-    const totalSkipped = this.results.reduce((sum: any, suite: any) => sum + suite.skippedTests, 0);
+    const totalTests = this.results.reduce((sum, suite) => sum + suite.totalTests, 0);
+    const totalPassed = this.results.reduce((sum, suite) => sum + suite.passedTests, 0);
+    const totalFailed = this.results.reduce((sum, suite) => sum + suite.failedTests, 0);
+    const totalSkipped = this.results.reduce((sum, suite) => sum + suite.skippedTests, 0);
 
     // Console report
     // Detailed suite results
     for (const suite of this.results) {
       if (suite.failedTests > 0) {
         suite.tests
-          .filter((test: any) => test.status === 'failed')
-          .forEach((test: any) => {
+          .filter((test) => test.status === 'failed')
+          .forEach((test) => {
             if (test.errors && test.errors.length > 0) {
               test.errors.forEach(() => {
                 });
@@ -233,7 +233,7 @@ class TestRunner {
     }
   }
 
-  private generateHtmlReport(reportData: any, reportsDir: any): void {
+  private generateHtmlReport(reportData, reportsDir): void {
     const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -287,13 +287,13 @@ class TestRunner {
             </div>
         </div>
         
-        ${reportData.suites.map((suite: any) => `
+        ${reportData.suites.map((suite) => `
             <div class="suite">
                 <div class="suite-header">
                     📋 ${suite.name} (${suite.passedTests}/${suite.totalTests} passed)
                 </div>
                 <div class="suite-content">
-                    ${suite.tests.map((test: any) => `
+                    ${suite.tests.map((test) => `
                         <div class="test-item test-${test.status}">
                             <strong>${test.status === 'passed' ? '✅' : test.status === 'failed' ? '❌' : '⏭️'}</strong>
                             ${test.name}

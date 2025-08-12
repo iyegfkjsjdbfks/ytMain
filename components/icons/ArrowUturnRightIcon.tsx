@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import type React from 'react';
 
 // Using a Heroicons v2 style path for ArrowUturnRightIcon (Share-like icon)

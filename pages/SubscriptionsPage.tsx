@@ -1,8 +1,6 @@
+import React, { useState, useMemo, useEffect, FC } from 'react';
 import { Link } from 'react-router-dom';
-import React, { useState, useMemo,  useEffect } from 'react';
-import { FC } from 'react';
-
-import { ViewColumnsIcon, Bars3Icon, AdjustmentsHorizontalIcon, BellIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { ViewColumnsIcon, Bars3Icon, AdjustmentsHorizontalIcon, BellIcon, UserGroupIcon  } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 const BellIconSolid = BellSolidIcon;
 
@@ -12,7 +10,7 @@ import SubscriptionStats from '../components/SubscriptionStats';
 import SubscriptionVideoCard from '../components/SubscriptionVideoCard';
 import { Button } from '../components/ui/Button';
 import TabsList, { Tabs } from '../components/ui/Tabs';
-import { useSubscriptions, useSubscriptionsFeed } from '../hooks';
+import { useSubscriptions, useSubscriptionsFeed  } from '../hooks';
 
 type TabType = 'all' | 'today' | 'week' | 'unwatched' | 'live' | 'posts';
 type SortType = 'latest' | 'popular' | 'oldest';

@@ -32,9 +32,9 @@ export interface RequestConfig {
   retryDelay?: number;
   cache?: boolean;
   cacheTTL?: number;
-  validateStatus?: (status: any) => boolean;
-  onUploadProgress?: (progress: any) => void;
-  onDownloadProgress?: (progress: any) => void;
+  validateStatus?: (status) => boolean;
+  onUploadProgress?: (progress) => void;
+  onDownloadProgress?: (progress) => void;
   signal?: AbortSignal;
 }
 
@@ -56,7 +56,7 @@ class ApiCache {
   private maxSize = 100;
   private defaultTTL = 5 * 60 * 1000; // 5 minutes
 
-  set<T>(key: string, data: T, ttl?: number, etag?: string): void {
+  set<T>(key, data: T, ttl?: number, etag?: string): void {
     // Remove oldest entries if cache is full
     if (this.cache.size >= this.maxSize) {
       const oldestKey = this.cache.keys().next().value;
@@ -73,7 +73,7 @@ class ApiCache {
     });
   }
 
-  get<T>(key: string): T | null {
+  get<T>(key): T | null {
     const entry = this.cache.get(key);
 
     if (!entry) {
@@ -89,7 +89,7 @@ return null;
     return entry.data;
   }
 
-  getEntry<T>(key: string): CacheEntry<T> | null {
+  getEntry<T>(key): CacheEntry<T> | null {
     const entry = this.cache.get(key);
 
     if (!entry) {
@@ -105,7 +105,7 @@ return null;
     return entry;
   }
 
-  delete(key: string): void {
+  delete(key): void {
     this.cache.delete(key);
   }
 
@@ -158,7 +158,7 @@ class RequestQueue {
     }
   }
 
-  setMaxConcurrent(max: any): void {
+  setMaxConcurrent(max): void {
     this.maxConcurrent = max;
   }
 
@@ -222,13 +222,13 @@ export class ApiService {
   }
 
   // Rate limiting
-  setRateLimit(maxRequests: any, windowMs: any): void {
+  setRateLimit(maxRequests, windowMs): void {
     this.rateLimiter = new securityUtils.RateLimiter(maxRequests, windowMs);
   }
 
   // Main request method
   async request<T = any>(
-    url: any,
+    url,
     config: RequestConfig = {},
   ): Promise<ApiResponse<T>> {
     const fullConfig = { ...this.defaultConfig, ...config };
@@ -329,7 +329,7 @@ export class ApiService {
   // Execute the actual HTTP request
   private async executeRequest<T>(
     config: RequestConfig & { url: string },
-    requestId: any,
+    requestId,
   ): Promise<ApiResponse<T>> {
     const { url, method = 'GET', headers = {}, body, timeout, retries = 0, retryDelay = 1000 } = config;
 
@@ -465,14 +465,14 @@ export class ApiService {
   }
 
   // Utility methods
-  private buildUrl(url: any): string {
+  private buildUrl(url): string {
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
     return `${this.baseURL}${url.startsWith('/') ? url : `/${  url}`}`;
   }
 
-  private getCacheKey(url: any, config: RequestConfig): string {
+  private getCacheKey(url, config: RequestConfig): string {
     const params = new URLSearchParams();
     if (config.body && typeof config.body === 'object') {
       params.append('body', JSON.stringify(config.body));
@@ -481,7 +481,7 @@ export class ApiService {
   }
 
   private createError(
-    message: any,
+    message,
     status?: number,
     code?: string,
     details?,
@@ -495,14 +495,14 @@ export class ApiService {
     return error;
   }
 
-  private delay(ms: any): Promise<void> {
+  private delay(ms): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   private combineAbortSignals(signals: AbortSignal): AbortSignal {
     const controller = new AbortController();
 
-    signals.forEach((signal: any) => {
+    signals.forEach((signal) => {
       if (signal.aborted) {
         controller.abort();
       } else {
@@ -514,29 +514,29 @@ export class ApiService {
   }
 
   // Convenience methods
-  async get<T = any>(url: any, config?: RequestConfig): Promise<ApiResponse<T>> {
+  async get<T = any>(url, config?: RequestConfig): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: 'GET' });
   }
 
-  async post<T = any>(url: any, data?, config?: RequestConfig): Promise<ApiResponse<T>> {
+  async post<T = any>(url, data?, config?: RequestConfig): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: 'POST', body: data });
   }
 
-  async put<T = any>(url: any, data?, config?: RequestConfig): Promise<ApiResponse<T>> {
+  async put<T = any>(url, data?, config?: RequestConfig): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: 'PUT', body: data });
   }
 
-  async patch<T = any>(url: any, data?, config?: RequestConfig): Promise<ApiResponse<T>> {
+  async patch<T = any>(url, data?, config?: RequestConfig): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: 'PATCH', body: data });
   }
 
-  async delete<T = any>(url: any, config?: RequestConfig): Promise<ApiResponse<T>> {
+  async delete<T = any>(url, config?: RequestConfig): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: 'DELETE' });
   }
 
   // File upload with progress
   async uploadFile<T = any>(
-    url: any,
+    url,
     file: File,
     config?: RequestConfig & {
       fieldName?: string;

@@ -1,9 +1,7 @@
+import React, { useState, FC } from 'react';
 
 
-import React, { useState } from 'react';
-import { FC } from 'react';
-
-import { ChatBubbleLeftRightIcon, BellAlertIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftRightIcon, BellAlertIcon  } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
   id: string;
@@ -39,7 +37,7 @@ return null;
     setNotifications(prev => prev.map(notification => ({ ...notification, isNew: false })));
   };
 
-  const markAsRead = (id: string) => {
+  const markAsRead = (id) => {
     setNotifications(prev => prev.map(notification =>
       notification.id === id ? { ...notification, isNew: false } : notification,
     ));

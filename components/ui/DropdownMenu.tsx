@@ -1,5 +1,4 @@
 import React, { ReactNode, MouseEvent } from 'react';
-
 import type { ReactNode, RefObject, MouseEvent } from 'react';
 
 import { cn } from '../../utils/cn';
@@ -96,5 +95,5 @@ const DropdownMenuSeparator = ({
   );
 };
 
-export { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator };
+export { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator  };
 export type { DropdownMenuProps, DropdownMenuItemProps, DropdownMenuSeparatorProps };

@@ -1,3 +1,5 @@
+import React, { memo, lazy, Suspense, ReactNode, /// <reference types="node" />
+  memo, useMemo, useCallback, useRef, useEffect, useState, type ComponentType, type ReactNode, type MemoExoticComponent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -7,29 +9,14 @@ declare namespace NodeJS {
   }
 }
 
-import React from 'react';
-import { memo, lazy, Suspense, ReactNode } from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */
 
-import React, {
-/// <reference types="node" />
-  memo,
-  useMemo,
-  useCallback,
-  useRef,
-  useEffect,
-  useState,
-    type ComponentType,
-    type ReactNode,
-    type MemoExoticComponent,
-} from 'react';
-
 import { performanceMonitor } from './performanceMonitor';
 
 // Performance monitoring hook for components
-export function useComponentPerformance(componentName: any) {
+export function useComponentPerformance(componentName) {
   const renderStartTime = useRef<number>(0);
   const mountTime = useRef<number>(0);
   const renderCount = useRef<number>(0);
@@ -90,7 +77,7 @@ return undefined;
     elementRef,
     isVisible,
     renderCount: renderCount.current,
-    trackCustomMetric: (metricName: any, value: string | number) => {
+    trackCustomMetric: (metricName, value: string | number) => {
       performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
     },
   };
@@ -293,7 +280,7 @@ export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, ov
 }
 
 // Image optimization hook with lazy loading
-export function useOptimizedImage(src: any, options: {
+export function useOptimizedImage(src, options: {
   placeholder?: string;
   sizes?: string;
   quality?: number;
@@ -363,7 +350,7 @@ return options.placeholder || '';
 
 // Bundle splitting utility
 export function createAsyncComponent<_P extends object>(
-  componentPath: any,
+  componentPath,
   chunkName?: string,
 ) {
   return React.lazy(() => {
@@ -412,9 +399,9 @@ export function withPerformanceMonitoring<P extends object>(
     useEffect(() => {
       if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
         (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
-          _id: any,
-          _root: any,
-          _priorityLevel: any,
+          _id,
+          _root,
+          _priorityLevel,
         ) => {
           // Custom performance tracking logic
           console.debug('Component committed to root');

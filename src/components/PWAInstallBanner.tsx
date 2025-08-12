@@ -1,6 +1,4 @@
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
-
+import React, { useEffect, useState, FC } from 'react';
 import { PWAUtils } from '../config/pwa';
 
 import { trackEvent } from '../utils/analytics';

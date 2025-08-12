@@ -1,6 +1,4 @@
-import React from 'react';
-import { ReactNode } from 'react';
-
+import React, { ReactNode } from 'react';
 // Unified Type System for YouTube Studio Clone
 
 // Base Entity Types
@@ -518,7 +516,7 @@ export interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: any, password: any) => Promise<void>;
+  login: (email, password) => Promise<void>;
   register: (userData: RegisterData) => Promise<void>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<void>;
@@ -553,7 +551,7 @@ export interface UseApiOptions {
   refreshInterval?: number;
   retryCount?: number;
   retryDelay?: number;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data) => void;
   onError?: (error: Error) => void;
 }
 
@@ -577,9 +575,9 @@ export interface UseFormReturn {
   touched: Record<string, boolean>;
   isSubmitting: boolean;
   isValid: boolean;
-  setValue: (name: string, value: string | number) => void;
-  setError: (name: string, error: Error) => void;
-  setTouched: (name: string, touched: any) => void;
+  setValue: (name, value: string | number) => void;
+  setError: (name, error: Error) => void;
+  setTouched: (name, touched) => void;
   handleSubmit: (e: React.FormEvent) => void;
   reset: () => void;
 }

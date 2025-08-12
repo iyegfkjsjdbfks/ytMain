@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
-
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, FC } from 'react';
+import { useNavigate, Link  } from 'react-router-dom';
 
 import { useAuthStore } from '../../auth/store/authStore';
 

@@ -37,7 +37,7 @@ class Logger {
 
   private formatMessage(
     level: LogLevel,
-    message: any,
+    message,
     ...args: unknown[]
   ): string {
     const timestamp = new Date().toISOString();
@@ -45,7 +45,7 @@ class Logger {
     return `${prefix} ${message}`;
   }
 
-  debug(message: any, ...args: unknown[]): void {
+  debug(message, ...args: unknown[]): void {
     if (!this.shouldLog('debug')) {
       return;
     }
@@ -56,7 +56,7 @@ class Logger {
     }
   }
 
-  info(message: any, ...args: unknown[]): void {
+  info(message, ...args: unknown[]): void {
     if (!this.shouldLog('info')) {
       return;
     }
@@ -67,7 +67,7 @@ class Logger {
     }
   }
 
-  warn(message: any, ...args: unknown[]): void {
+  warn(message, ...args: unknown[]): void {
     if (!this.shouldLog('warn')) {
       return;
     }
@@ -77,7 +77,7 @@ class Logger {
     }
   }
 
-  error(message: any, error?: Error | unknown, ...args: unknown[]): void {
+  error(message, error?: Error | unknown, ...args: unknown[]): void {
     if (!this.shouldLog('error')) {
       return;
     }
@@ -92,17 +92,17 @@ class Logger {
     }
   }
 
-  private sendToRemoteService(_message: any, _error: Error): void {
+  private sendToRemoteService(_message, _error: Error): void {
     // Implement remote logging service integration here
     // For example: Sentry, LogRocket, etc.
   }
 
   // Utility methods for common logging patterns
-  apiCall(method: any, url: any, data?: unknown): void {
+  apiCall(method, url, data?: unknown): void {
     this.debug(`API ${method} ${url}`, data);
   }
 
-  apiResponse(method: any, url: any, status: any, data?: unknown): void {
+  apiResponse(method, url, status, data?: unknown): void {
     if (status >= 400) {
       this.error(
         `API ${method} ${url} failed with status ${status}`,
@@ -114,11 +114,11 @@ class Logger {
     }
   }
 
-  userAction(action: any, data?: Record<string, unknown>): void {
+  userAction(action, data?: Record<string, unknown>): void {
     this.info(`User action: ${action}`, data);
   }
 
-  performance(operation: any, duration: any): void {
+  performance(operation, duration): void {
     this.debug(`Performance: ${operation} took ${duration}ms`);
   }
 }

@@ -10,7 +10,7 @@ import { useState, useCallback, useMemo } from 'react';
  * @returns [set, addItem, removeItem, toggleItem, clearSet, hasItem]
  */
 export function useLocalStorageSet<T>(
-  key: string,
+  key,
   initialValue: Set<T> = new Set()
 ): [
   Set<T>,
@@ -116,7 +116,7 @@ export function useLocalStorageSet<T>(
  * Similar to useState but for Sets stored in localStorage
  */
 export function useLocalStorageSetState<T>(
-  key: string,
+  key,
   initialValue: Set<T> = new Set()
 ): [Set<T>, (updater: (prev: Set<T>) => Set<T>) => void] {
   const [items, setItems] = useState<T[]>(() => {

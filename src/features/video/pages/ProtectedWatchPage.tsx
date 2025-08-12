@@ -1,7 +1,5 @@
-import React, { useCallback } from 'react';
-import { FC } from 'react';
-
-import { useSearchParams, useParams } from 'react-router-dom';
+import React, { useCallback, FC } from 'react';
+import { useSearchParams, useParams  } from 'react-router-dom';
 
 import { conditionalLogger } from '@/utils/conditionalLogger';
 

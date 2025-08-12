@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import type React from 'react';
 
 import BellIcon from './icons/BellIcon';

@@ -1,10 +1,8 @@
-import React, { useEffect, useRef,  useState } from 'react';
-import { FC } from 'react';
+import React, { useEffect, useRef, useState, FC } from 'react';
 import { logger } from '../../../utils/logger';
 import { useLiveStream } from '@/hooks/useLiveStream';
 import type { LiveStream } from '../../../types/livestream';
-import {
-  VideoCameraIcon,
+import { VideoCameraIcon,
   MicrophoneIcon,
   StopIcon,
   Cog6ToothIcon,
@@ -12,22 +10,14 @@ import {
   EyeIcon,
   HeartIcon,
   SignalIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
-} from '@heroicons/react/24/outline';
-import {
-  VideoCameraIcon as VideoCameraSolidIcon,
-  MicrophoneIcon as MicrophoneSolidIcon,
-  PlayIcon as PlaySolidIcon,
-} from '@heroicons/react/24/solid';
-import {
-  AdvancedLiveChat,
+  ClockIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon as VideoCameraSolidIcon,
+  MicrophoneIcon as MicrophoneSolidIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
+import { AdvancedLiveChat,
   LivePolls,
   LiveQA,
   SuperChatPanel,
-  StreamScheduler,
-  MultiplatformStreaming,
-} from '.';
+  StreamScheduler, MultiplatformStreaming } from '.';
 
 interface ComprehensiveLiveStudioProps {
   className?: string;
@@ -179,8 +169,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         streamSettings.platforms.length > 0
       ) {
         const enabledPlatforms = streamSettings.platforms
-          .filter((p: any) => p.enabled)
-          .map((p: any) => p.name);
+          .filter((p) => p.enabled)
+          .map((p) => p.name);
 
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
@@ -269,7 +259,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     }
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration = (seconds) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;

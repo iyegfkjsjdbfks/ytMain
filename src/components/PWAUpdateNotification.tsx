@@ -1,5 +1,4 @@
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import X, { RefreshCw } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';

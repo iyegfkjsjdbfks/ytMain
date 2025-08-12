@@ -1,20 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 
 
-import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent } from 'react';
+import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent  } from 'react';
 
-import { XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid'; // For remove button
+import { XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid'; // For remove button;
 const XMarkIconSolid = XMarkSolidIcon;
 
-import {
-  getSearchSuggestions,
+import { getSearchSuggestions,
   saveRecentSearch,
   getRecentSearches,
-  removeRecentSearch,
-  clearAllRecentSearches,
-} from '../services/realVideoService';
+  removeRecentSearch, clearAllRecentSearches } from '../services/realVideoService';
 
-import ClockIcon from './icons/ClockIcon'; // For recent searches
+import ClockIcon from './icons/ClockIcon'; // For recent searches;
 import SearchIcon from './icons/SearchIcon';
 import SearchSuggestions from './SearchSuggestions';
 
@@ -39,7 +36,7 @@ const SearchBar: React.FC = memo(() => {
     }
   }, []);
 
-  const fetchSuggestionsDebounced = useCallback(async (currentQuery: any) => {
+  const fetchSuggestionsDebounced = useCallback(async (currentQuery) => {
     if (currentQuery.trim().length > 1) {
       const fetched = await getSearchSuggestions(currentQuery);
       setSuggestions(fetched);
@@ -63,7 +60,7 @@ const SearchBar: React.FC = memo(() => {
     return () => clearTimeout(debounceTimer);
   }, [query, fetchSuggestionsDebounced]);
 
-  const handleSearch = (searchQuery: any) => {
+  const handleSearch = (searchQuery) => {
     if (searchQuery.trim()) {
       const trimmedQuery = searchQuery.trim();
       setQuery(trimmedQuery);
@@ -107,7 +104,7 @@ inputRef.current.blur();
     }
   };
 
-  const handleRemoveRecentSearch = async (searchToRemove: any, e: React.MouseEvent) => {
+  const handleRemoveRecentSearch = async (searchToRemove, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent click on list item
     const updatedSearches = await removeRecentSearch(searchToRemove);
     setRecentSearches(updatedSearches);

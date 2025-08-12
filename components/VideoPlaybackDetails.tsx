@@ -1,7 +1,6 @@
-
 import React, { type RefObject } from 'react';
 
-import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';
+import { getYouTubeVideoId, isYouTubeUrl  } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
 

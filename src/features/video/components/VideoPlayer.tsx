@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect, lazy, FC, MouseEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -7,21 +8,16 @@ declare namespace NodeJS {
   }
 }
 
-import React, { useState, useRef, useEffect } from 'react';
-import { lazy, FC, MouseEvent } from 'react';
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
-import {
-  PlayIcon,
+import { PlayIcon,
   PauseIcon,
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   ArrowsPointingOutIcon,
   ArrowsPointingInIcon,
   Cog6ToothIcon,
-  ForwardIcon,
-  BackwardIcon,
-} from '@heroicons/react/24/outline';
+  ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
 
 export interface VideoPlayerProps {
   videoId: string;
@@ -32,7 +28,7 @@ export interface VideoPlayerProps {
   startTime?: number;
   className?: string;
   onReady?: () => void;
-  onTimeUpdate?: (currentTime: any, duration: any) => void;
+  onTimeUpdate?: (currentTime, duration) => void;
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
@@ -228,7 +224,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   };
 
-  const seek = (time: any) => {
+  const seek = (time) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -237,7 +233,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     video.currentTime = Math.max(0, Math.min(time, state.duration));
   };
 
-  const setVolume = (volume: any) => {
+  const setVolume = (volume) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -272,7 +268,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   };
 
-  const setPlaybackRate = (rate: any) => {
+  const setPlaybackRate = (rate) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -309,7 +305,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }, 3000);
   };
 
-  const formatTime = (time: any): string => {
+  const formatTime = (time): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);

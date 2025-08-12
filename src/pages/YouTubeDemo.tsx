@@ -1,7 +1,6 @@
+import React, { useState, FC } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import React, { useState } from 'react';
-import { FC } from 'react';
-import { isYouTubeUrl, getYouTubeVideoId } from '../lib/youtube-utils';
+import { isYouTubeUrl, getYouTubeVideoId  } from '../lib/youtube-utils';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
 
 const YouTubeDemo: React.FC = () => {

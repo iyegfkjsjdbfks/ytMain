@@ -1,12 +1,7 @@
+import React, { useState, useEffect, useMemo, useCallback, useRef, FC, KeyboardEvent } from 'react';
 import { useLocation } from 'react-router-dom';
-import React, { useState, useEffect, useMemo, useCallback,  useRef } from 'react';
-import { FC, KeyboardEvent } from 'react';
-
-import {
-  MagnifyingGlassIcon,
-  AdjustmentsHorizontalIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon,
+  AdjustmentsHorizontalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import CommentModal from '../components/CommentModal';
 import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
@@ -15,7 +10,7 @@ import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
 import ShortDisplayCard from '../components/ShortDisplayCard';
 import ShortsFilters from '../components/ShortsFilters';
 import ShortsNavigation from '../components/ShortsNavigation';
-import { useLocalStorage, useShortsVideos } from '../src/hooks';
+import { useLocalStorage, useShortsVideos  } from '../src/hooks';
 
 import type { Short } from '../src/types/core';
 
@@ -129,7 +124,7 @@ return [];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking
-  const handleLike = useCallback((shortId: any) => {
+  const handleLike = useCallback((shortId) => {
     setLikedShortsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
@@ -140,7 +135,7 @@ return [];
     });
   }, [setLikedShortsArray]);
 
-  const handleFollow = useCallback((channelName: any) => {
+  const handleFollow = useCallback((channelName) => {
     setFollowedChannelsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
@@ -151,14 +146,14 @@ return [];
     });
   }, [setFollowedChannelsArray]);
 
-  const handleComment = useCallback((shortId: any) => {
+  const handleComment = useCallback((shortId) => {
     const currentFilteredShorts = filteredShorts;
     const short = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
     setCommentModalOpen(true);
   }, []);
 
-  const handleCommentSubmit = useCallback(async (_commentText: any) => {
+  const handleCommentSubmit = useCallback(async (_commentText) => {
     if (!selectedShortForComment) {
 return;
 }
@@ -171,7 +166,7 @@ return;
     }
   }, [selectedShortForComment]);
 
-  const handleVideoChange = useCallback((index: number) => {
+  const handleVideoChange = useCallback((index) => {
     setCurrentVideoIndex(index);
 
     // Update URL with current video ID
@@ -259,7 +254,7 @@ return;
     setShowFilters(prev => !prev);
   }, []);
 
-  const handleCategoryChange = useCallback((category: any) => {
+  const handleCategoryChange = useCallback((category) => {
     setSelectedCategory(category);
     setCurrentVideoIndex(0);
   }, []);
@@ -288,7 +283,7 @@ return;
     }
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId: any) => {
+  const handleShare = async (shortId) => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
@@ -307,7 +302,7 @@ return;
     }
   };
 
-  const copyToClipboard = async (text: string) => {
+  const copyToClipboard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
       // You could add a toast notification here

@@ -1,16 +1,12 @@
 import React, { FC, ChangeEvent, MouseEvent } from 'react';
-
 import type React from 'react';
 
-import {
-  PlayIcon,
+import { PlayIcon,
   PauseIcon,
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  Cog6ToothIcon,
-} from '@heroicons/react/24/outline';
+  ArrowsPointingInIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 
 import { ActionButton } from '../ui';
 
@@ -24,10 +20,10 @@ interface VideoControlsProps {
   playbackRate: number;
   onPlayPause: () => void;
   onMuteToggle: () => void;
-  onVolumeChange: (volume: any) => void;
-  onSeek: (time: any) => void;
+  onVolumeChange: (volume) => void;
+  onSeek: (time) => void;
   onFullscreenToggle: () => void;
-  onPlaybackRateChange: (rate: any) => void;
+  onPlaybackRateChange: (rate) => void;
   onSettingsToggle: () => void;
   className?: string;
 }
@@ -49,7 +45,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
   onSettingsToggle,
   className = '',
 }) => {
-  const formatTime = (time: any) => {
+  const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

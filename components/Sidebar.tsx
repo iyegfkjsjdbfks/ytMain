@@ -1,10 +1,8 @@
-import { Link, useLocation } from 'react-router-dom';
+import React, { memo, FC, ReactNode } from 'react';
+import { Link, useLocation  } from 'react-router-dom';
 
 
-import React, { memo } from 'react';
-import { memo, FC, ReactNode } from 'react';
-
-import { QueueListIcon as QueueListSolidIcon, ChartBarIcon as ChartBarSolidIcon, CogIcon as CogSolidIcon, CurrencyDollarIcon as CurrencyDollarSolidIcon, DocumentTextIcon as DocumentTextSolidIcon, VideoCameraIcon as VideoCameraSolidIcon, ChatBubbleLeftRightIcon as ChatBubbleLeftRightSolidIcon, UserGroupIcon as UserGroupSolidIcon, PaintBrushIcon as PaintBrushSolidIcon, FilmIcon as FilmSolidIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio
+import { QueueListIcon as QueueListSolidIcon, ChartBarIcon as ChartBarSolidIcon, CogIcon as CogSolidIcon, CurrencyDollarIcon as CurrencyDollarSolidIcon, DocumentTextIcon as DocumentTextSolidIcon, VideoCameraIcon as VideoCameraSolidIcon, ChatBubbleLeftRightIcon as ChatBubbleLeftRightSolidIcon, UserGroupIcon as UserGroupSolidIcon, PaintBrushIcon as PaintBrushSolidIcon, FilmIcon as FilmSolidIcon  } from '@heroicons/react/24/solid'; // Added for Library and Studio;
 const QueueListIconSolid = QueueListSolidIcon;
 const ChartBarIconSolid = ChartBarSolidIcon;
 const CogIconSolid = CogSolidIcon;

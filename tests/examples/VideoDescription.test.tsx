@@ -1,18 +1,17 @@
+import React, { memo } from 'react';
 import { Navigate } from 'react-router-dom';
 /**
-import React from 'react';
-import { memo } from 'react';
- * Example test file demonstrating comprehensive testing practices
+* Example test file demonstrating comprehensive testing practices
  * for the VideoDescription component
  */
 
-import { screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { screen, waitFor  } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach  } from 'vitest';
 
 import VideoDescription from '../../components/VideoDescription';
 import { performanceMonitor } from '../../utils/performanceMonitor';
-import { testUtils, customRender } from '../../utils/testUtils';
-import { testHelpers, TestPerformanceTracker } from '../setup';
+import { testUtils, customRender  } from '../../utils/testUtils';
+import { testHelpers, TestPerformanceTracker  } from '../setup';
 
 // Mock data
 const mockVideo = testUtils.generateMockVideo({

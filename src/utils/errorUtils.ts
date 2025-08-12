@@ -17,8 +17,8 @@ export interface ComponentError extends Error {
  * @returns ComponentError object
  */
 export function createComponentError(
-  component: any,
-  message: any,
+  component,
+  message,
   originalError?: unknown,
   context?: string
 ): ComponentError {
@@ -50,8 +50,8 @@ export function createComponentError(
  * @returns ComponentError object
  */
 export function createAsyncError(
-  component: any,
-  operation: any,
+  component,
+  operation,
   originalError?: unknown
 ): ComponentError {
   return createComponentError(
@@ -70,8 +70,8 @@ export function createAsyncError(
  * @returns ComponentError object
  */
 export function createNetworkError(
-  component: any,
-  url: any,
+  component,
+  url,
   originalError?: unknown
 ): ComponentError {
   return createComponentError(
@@ -90,8 +90,8 @@ export function createNetworkError(
  * @returns ComponentError object
  */
 export function createValidationError(
-  component: any,
-  field: any,
+  component,
+  field,
   value: unknown
 ): ComponentError {
   return createComponentError(

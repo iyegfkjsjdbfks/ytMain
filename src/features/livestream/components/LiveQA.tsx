@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
+import React, { useState, FC } from 'react';
 import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
 import { useLiveQA } from '@/hooks/useLiveStream';
-import {
-  QuestionMarkCircleIcon,
+import { QuestionMarkCircleIcon,
   HeartIcon,
   CheckCircleIcon,
-  ClockIcon,
-  MicrophoneIcon,
-} from '@heroicons/react/24/outline';
+  ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
 
 interface LiveQAProps {
   streamId: string;
@@ -49,7 +45,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handleLikeQuestion = async (questionId: any) => {
+  const handleLikeQuestion = async (questionId) => {
     try {
       await upvoteQuestion(questionId);
     } catch (error) {
@@ -62,7 +58,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handlePinQuestion = async (questionId: any) => {
+  const handlePinQuestion = async (questionId) => {
     try {
       // TODO: Implement pin functionality in service
       conditionalLogger.debug('Pin question:', questionId);
@@ -76,7 +72,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handleAnswerQuestion = async (questionId: any) => {
+  const handleAnswerQuestion = async (questionId) => {
     if (!answerText.trim()) {
       return;
     }

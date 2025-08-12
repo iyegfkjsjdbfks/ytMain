@@ -280,7 +280,7 @@ export class PWAUtils {
   /**
    * Emit PWA event
    */
-  static emitEvent(eventName: any, detail?: any): void {
+  static emitEvent(eventName, detail?): void {
     const event = new CustomEvent(eventName, { detail });
     window.dispatchEvent(event);
   }
@@ -288,14 +288,14 @@ export class PWAUtils {
   /**
    * Listen to PWA events
    */
-  static addEventListener(eventName: any, handler: EventListener): void {
+  static addEventListener(eventName, handler: EventListener): void {
     window.addEventListener(eventName, handler);
   }
 
   /**
    * Remove PWA event listener
    */
-  static removeEventListener(eventName: any, handler: EventListener): void {
+  static removeEventListener(eventName, handler: EventListener): void {
     window.removeEventListener(eventName, handler);
   }
 }

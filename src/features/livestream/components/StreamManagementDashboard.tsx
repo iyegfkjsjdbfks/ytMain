@@ -1,11 +1,10 @@
+import React, { useEffect, useState, FC } from 'react';
 import { Navigate } from 'react-router-dom';
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
 import { liveStreamService } from '../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 import type { LiveStream } from '../../../types/livestream';
-import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
-import { CheckCircleIcon as CheckCircleSolidIcon, ExclamationCircleIcon as ExclamationCircleSolidIcon, XCircleIcon as XCircleSolidIcon } from '@heroicons/react/24/solid';
+import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon  } from '@heroicons/react/24/outline';
+import { CheckCircleIcon as CheckCircleSolidIcon, ExclamationCircleIcon as ExclamationCircleSolidIcon, XCircleIcon as XCircleSolidIcon  } from '@heroicons/react/24/solid';
 const CheckCircleIconSolid = CheckCircleSolidIcon;
 const ExclamationCircleIconSolid = ExclamationCircleSolidIcon;
 const XCircleIconSolid = XCircleSolidIcon;
@@ -370,7 +369,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     }
   };
 
-  const handleBulkAction = async (action: any) => {
+  const handleBulkAction = async (action) => {
     try {
       switch (action) {
         case 'delete':
@@ -449,7 +448,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     }
   });
 
-  const formatNumber = (num: any) => {
+  const formatNumber = (num) => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)}M`;
     }
@@ -459,7 +458,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     return num.toString();
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     if (hours > 0) {

@@ -1,6 +1,4 @@
-import React from 'react';
-import { ReactNode, KeyboardEvent, MouseEvent } from 'react';
-
+import React, { ReactNode, KeyboardEvent, MouseEvent } from 'react';
 // Strict Type Definitions to Replace 'any' Types
 
 // Video Related Types

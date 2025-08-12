@@ -1,6 +1,4 @@
-
-import React, { useState } from 'react';
-import { FC } from 'react';
+import React, { useState, FC } from 'react';
 
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
@@ -11,7 +9,7 @@ interface CommentModalProps {
   onClose: () => void;
   shortId: string;
   shortTitle?: string;
-  onCommentSubmit?: (commentText: any) => void;
+  onCommentSubmit?: (commentText) => void;
 }
 
 /**
@@ -29,7 +27,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   // shortId is currently not used but kept for future functionality
 
-  const handleCommentSubmit = async (text: string) => {
+  const handleCommentSubmit = async (text) => {
     if (!text.trim()) {
 return;
 }

@@ -1,8 +1,5 @@
-import React, { useMemo,  useState } from 'react';
-import { FC } from 'react';
-
-import {
-  EyeIcon,
+import React, { useMemo, useState, FC } from 'react';
+import { EyeIcon,
   ClockIcon,
   UserGroupIcon,
   HeartIcon,
@@ -12,9 +9,7 @@ import {
   ArrowTrendingDownIcon,
   GlobeAltIcon,
   DevicePhoneMobileIcon,
-  ComputerDesktopIcon,
-  CalendarIcon,
-} from '@heroicons/react/24/outline';
+  ComputerDesktopIcon, CalendarIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
   overview: {

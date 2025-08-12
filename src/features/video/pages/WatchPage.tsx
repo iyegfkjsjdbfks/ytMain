@@ -1,6 +1,5 @@
-import { Link, useParams, useSearchParams } from 'react-router-dom';
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
+import { Link, useParams, useSearchParams  } from 'react-router-dom';
 import Link, { Link, useParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
 
@@ -126,12 +125,11 @@ const WatchPage: React.FC = () => {
         '📺 First few recommendations:',
         unifiedVideos
           .slice(0, 3)
-          .map((v: any) => ({ id: v.id, title: v.title }))
+          .map((v) => ({ id: v.id, title: v.title }))
       );
 
       // Convert UnifiedVideoMetadata to Video format for compatibility
-      const convertedRecommendations: Video[] = unifiedVideos.map(
-        (unifiedVideo: any) => ({
+      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo) => ({
           id: unifiedVideo.id,
           createdAt: unifiedVideo.publishedAt,
           updatedAt: unifiedVideo.publishedAt,
@@ -733,7 +731,7 @@ const WatchPage: React.FC = () => {
                     {/* Tags */}{' '}
                     {video.tags && video.tags.length > 0 && (
                       <div className='mt-4 flex flex-wrap gap-2'>
-                        {video.tags.map((tag: any, index: number) => (
+                        {video.tags.map((tag, index) => (
                           <span
                             key={index}
                             className='px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full'

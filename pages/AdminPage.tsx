@@ -453,10 +453,10 @@ const AdminPage: React.FC = () => {
   const googleSearchAvailable = isGoogleSearchAvailable();
   const hybridModeAvailable = isHybridModeAvailable();
 
-  const renderPlayerCard = (config: VideoPlayerConfig, isSelected: any, isEnabled: any, onSelect: () => void, onToggleEnabled: () => void) => {
+  const renderPlayerCard = (config: VideoPlayerConfig, isSelected, isEnabled, onSelect: () => void, onToggleEnabled: () => void) => {
     const usedOnPages = getPlayerUsageByPage(config.type);
 
-    const getPerformanceColor = (performance: any) => {
+    const getPerformanceColor = (performance) => {
       switch (performance) {
         case 'high': return 'text-green-600 bg-green-100';
         case 'medium': return 'text-yellow-600 bg-yellow-100';
@@ -465,7 +465,7 @@ const AdminPage: React.FC = () => {
       }
     };
 
-    const getComplexityColor = (complexity: any) => {
+    const getComplexityColor = (complexity) => {
       switch (complexity) {
         case 'simple': return 'text-blue-600 bg-blue-100';
         case 'moderate': return 'text-purple-600 bg-purple-100';
@@ -474,7 +474,7 @@ const AdminPage: React.FC = () => {
       }
     };
 
-    const getCategoryIcon = (category: any) => {
+    const getCategoryIcon = (category) => {
       return category === 'youtube' ?
         <PlayIcon className="h-5 w-5 text-red-500" /> :
         <VideoCameraIcon className="h-5 w-5 text-blue-500" />;
@@ -552,7 +552,7 @@ const AdminPage: React.FC = () => {
         <div className="mb-3">
           <h4 className="text-sm font-medium text-gray-700 mb-1">Features:</h4>
           <div className="flex flex-wrap gap-1">
-            {config.features.map((feature: any, index: number) => (
+            {config.features.map((feature, index) => (
               <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
                 {feature}
               </span>
@@ -563,7 +563,7 @@ const AdminPage: React.FC = () => {
         <div>
           <h4 className="text-sm font-medium text-gray-700 mb-1">Best for:</h4>
           <ul className="text-xs text-gray-600 list-disc list-inside">
-            {config.useCases.slice(0, 2).map((useCase: any, index: number) => (
+            {config.useCases.slice(0, 2).map((useCase, index) => (
               <li key={index}>{useCase}</li>
             ))}
           </ul>
@@ -660,7 +660,7 @@ const AdminPage: React.FC = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using YouTube Players:</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page: any) => {
+                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {
                           const pageConfig = pageConfigurations[page];
                           const isCurrentGlobalPlayer = pageConfig.youtubePlayer === playerType;
                           return (
@@ -753,7 +753,7 @@ const AdminPage: React.FC = () => {
                                 <div>
                                   <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
                                   <div className="flex flex-wrap gap-1">
-                                    {config.features.slice(0, 3).map((feature: any, index: number) => (
+                                    {config.features.slice(0, 3).map((feature, index) => (
                                       <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
                                         {feature}
                                       </span>
@@ -791,7 +791,7 @@ const AdminPage: React.FC = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using Local Video Players:</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page: any) => {
+                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {
                           const pageConfig = pageConfigurations[page];
                           const isCurrentGlobalPlayer = pageConfig.localPlayer === localPlayerType;
                           return (
@@ -886,7 +886,7 @@ const AdminPage: React.FC = () => {
                                 <div>
                                   <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
                                   <div className="flex flex-wrap gap-1">
-                                    {config.features.slice(0, 3).map((feature: any, index: number) => (
+                                    {config.features.slice(0, 3).map((feature, index) => (
                                       <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
                                         {feature}
                                       </span>

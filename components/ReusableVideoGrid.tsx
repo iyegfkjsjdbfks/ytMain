@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react';
-
 import type React from 'react';
 
 import { VideoGridSkeleton } from './LoadingStates';
@@ -129,7 +128,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
 
   return (
     <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
-      {videos.map((video: any) => (
+      {videos.map((video) => (
         <VideoComponent
           key={video.id}
           video={video}

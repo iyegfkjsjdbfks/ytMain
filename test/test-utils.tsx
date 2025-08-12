@@ -1,8 +1,7 @@
-import React, { memo } from 'react';
-import { ReactNode, ReactElement } from 'react';
+import React, { memo, ReactNode, ReactElement } from 'react';
 import type { ReactElement } from 'react';
 
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { QueryClientProvider, QueryClient  } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { vi } from 'vitest';
@@ -243,7 +242,7 @@ export const mockSessionStorage = () => {
 export const mockFetch = () => {
   const mockFetch = vi.fn();
 
-  const mockResponse = (data: any, options: { status?: number; ok?: boolean } = {}) => ({
+  const mockResponse = (data, options: { status?: number; ok?: boolean } = {}) => ({
     ok: options.ok ?? true,
     status: options.status ?? 200,
     json: vi.fn().mockResolvedValue(data),

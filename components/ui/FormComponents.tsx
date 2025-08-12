@@ -1,6 +1,4 @@
-import React, { forwardRef } from 'react';
-import { FC, ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
-
+import React, { forwardRef, FC, ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 import type InputHTMLAttributes, { forwardRef } from 'react';
 
 import { cn } from '../../utils/cn';

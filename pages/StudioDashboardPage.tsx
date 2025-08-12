@@ -1,9 +1,6 @@
+import React, { useEffect, useState, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import React, { useEffect,  useState } from 'react';
-import { FC, ReactNode } from 'react';
-
-import {
-  ChartBarIcon,
+import { ChartBarIcon,
   VideoCameraIcon,
   CurrencyDollarIcon,
   ChatBubbleLeftRightIcon,
@@ -11,12 +8,10 @@ import {
   UserGroupIcon,
   EyeIcon,
   ClockIcon,
-  HeartIcon,
-  ShareIcon,
-} from '@heroicons/react/24/outline';
+  HeartIcon, ShareIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
-import { formatDuration, formatNumber } from '../utils/numberUtils';
+import { formatDuration, formatNumber  } from '../utils/numberUtils';
 
 interface DashboardStats {
   totalViews: number;
@@ -157,7 +152,7 @@ const StudioDashboardPage: React.FC = () => {
     },
   ];
 
-  const getStatusColor = (status: any) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'published': return 'text-green-600 bg-green-100';
       case 'processing': return 'text-yellow-600 bg-yellow-100';

@@ -1,7 +1,5 @@
+import React, { useRef, memo, useMemo, useState, useEffect, lazy, FC, MouseEvent } from 'react';
 // @ts-nocheck
-import React, { useRef,  memo, useMemo, useState, useEffect } from 'react';
-import { memo, lazy, FC, MouseEvent } from 'react';
-
 import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { performanceMonitor } from '../utils/performance';
@@ -296,9 +294,9 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     performanceMonitor.startMeasure('search-results-processing');
 
     const combined = [
-      ...(videos || []).map(v => ({ ...v, source: 'local' as const, contentType: 'video' as const })),
-      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const, contentType: 'video' as const })),
-      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const, contentType: 'video' as const })),
+      ...(videos || []).map(v => ({ ...v, source: 'local' as const contentType: 'video' as const })),
+      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const contentType: 'video' as const })),
+      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const contentType: 'video' as const })),
     ];
 
     let sorted = combined;

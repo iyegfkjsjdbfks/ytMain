@@ -20,11 +20,11 @@ export class CSPManager {
     return nonce;
   }
 
-  validateNonce(nonce: any): boolean {
+  validateNonce(nonce): boolean {
     return this.nonces.has(nonce);
   }
 
-  removeNonce(nonce: any): void {
+  removeNonce(nonce): void {
     this.nonces.delete(nonce);
   }
 
@@ -75,13 +75,13 @@ export class CSPManager {
 // Input validation and sanitization
 export class InputValidator {
   // Email validation
-  static isValidEmail(email: any): boolean {
+  static isValidEmail(email): boolean {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     return emailRegex.test(email) && email.length <= 254;
   }
 
   // URL validation
-  static isValidURL(url: any, allowedProtocols: string[] = ['http', 'https']): boolean {
+  static isValidURL(url, allowedProtocols: string[] = ['http', 'https']): boolean {
     try {
       const urlObj = new URL(url);
       return allowedProtocols.includes(urlObj.protocol.slice(0, -1));
@@ -91,14 +91,14 @@ export class InputValidator {
   }
 
   // Phone number validation (international format)
-  static isValidPhoneNumber(phone: any): boolean {
+  static isValidPhoneNumber(phone): boolean {
     const phoneRegex = /^\+?[1-9]\d{1,14}$/;
     const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
     return phoneRegex.test(cleanPhone);
   }
 
   // Password strength validation
-  static validatePasswordStrength(password: any): {
+  static validatePasswordStrength(password): {
     isValid: boolean;
     score: number;
     feedback: string[];
@@ -157,19 +157,19 @@ export class InputValidator {
   }
 
   // SQL injection prevention
-  static sanitizeForSQL(input: any): string {
+  static sanitizeForSQL(input): string {
     return input.replace(/['"\\;]/g, '');
   }
 
   // XSS prevention
-  static sanitizeHTML(input: any): string {
+  static sanitizeHTML(input): string {
     const div = document.createElement('div');
     div.textContent = input;
     return div.innerHTML;
   }
 
   // File name validation
-  static isValidFileName(fileName: any): boolean {
+  static isValidFileName(fileName): boolean {
     // eslint-disable-next-line no-control-regex
     const invalidChars = /[<>:"/\\|?*\x00-\x1f]/;
     const reservedNames = /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/i;
@@ -183,7 +183,7 @@ export class InputValidator {
   }
 
   // Credit card validation (Luhn algorithm)
-  static isValidCreditCard(cardNumber: any): boolean {
+  static isValidCreditCard(cardNumber): boolean {
     const cleanNumber = cardNumber.replace(/\D/g, '');
 
     if (cleanNumber.length < 13 || cleanNumber.length > 19) {
@@ -224,7 +224,7 @@ export class RateLimiter {
     private windowMs: number = 60000, // 1 minute
   ) {}
 
-  isAllowed(identifier: any): boolean {
+  isAllowed(identifier): boolean {
     const now = Date.now();
     const windowStart = now - this.windowMs;
 
@@ -248,7 +248,7 @@ export class RateLimiter {
     return true;
   }
 
-  getRemainingRequests(identifier: any): number {
+  getRemainingRequests(identifier): number {
     const now = Date.now();
     const windowStart = now - this.windowMs;
 
@@ -262,7 +262,7 @@ export class RateLimiter {
     return Math.max(0, this.maxRequests - validRequests.length);
   }
 
-  getResetTime(identifier: any): number {
+  getResetTime(identifier): number {
     if (!this.requests.has(identifier)) {
       return 0;
     }
@@ -322,7 +322,7 @@ export class ClientEncryption {
     );
   }
 
-  static async encrypt(data: any, key: CryptoKey): Promise<{
+  static async encrypt(data, key: CryptoKey): Promise<{
     encrypted: ArrayBuffer;
     iv: Uint8Array;
   }> {
@@ -358,7 +358,7 @@ export class ClientEncryption {
     return this.decoder.decode(decrypted);
   }
 
-  static async hashData(data: any): Promise<string> {
+  static async hashData(data): Promise<string> {
     const encodedData = this.encoder.encode(data);
     const hashBuffer = await crypto.subtle.digest('SHA-256', encodedData);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -370,7 +370,7 @@ export class ClientEncryption {
 export class SecureStorage {
   private static prefix = 'secure_';
 
-  static setItem(key: string, value: string | number, encrypt: boolean = false): void {
+  static setItem(key, value: string | number, encrypt: boolean = false): void {
     try {
       const storageKey = this.prefix + key;
 
@@ -386,7 +386,7 @@ export class SecureStorage {
     }
   }
 
-  static getItem(key: string, encrypted: boolean = false): string | null {
+  static getItem(key, encrypted: boolean = false): string | null {
     try {
       const storageKey = this.prefix + key;
       const value = localStorage.getItem(storageKey);
@@ -410,7 +410,7 @@ return null;
     }
   }
 
-  static removeItem(key: string): void {
+  static removeItem(key): void {
     const storageKey = this.prefix + key;
     localStorage.removeItem(storageKey);
   }
@@ -424,7 +424,7 @@ return null;
     });
   }
 
-  static setSecureSession(key: string, value: string | number): void {
+  static setSecureSession(key, value: string | number): void {
     try {
       const storageKey = this.prefix + key;
       sessionStorage.setItem(storageKey, String(value));
@@ -433,7 +433,7 @@ return null;
     }
   }
 
-  static getSecureSession(key: string): string | null {
+  static getSecureSession(key): string | null {
     try {
       const storageKey = this.prefix + key;
       return sessionStorage.getItem(storageKey);
@@ -502,7 +502,7 @@ export class CSRFProtection {
     return SecureStorage.getSecureSession(this.tokenKey);
   }
 
-  static validateToken(token: any): boolean {
+  static validateToken(token): boolean {
     const storedToken = this.getToken();
     return storedToken !== null && storedToken === token;
   }

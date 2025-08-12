@@ -1,7 +1,5 @@
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
-
-import { ChartBarIcon, PlusIcon } from '@heroicons/react/24/outline';
+import React, { useEffect, useState, FC } from 'react';
+import { ChartBarIcon, PlusIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 const HeartIconSolid = HeartSolidIcon;
 
@@ -90,7 +88,7 @@ return;
     setShowCreatePost(false);
   };
 
-  const toggleLike = (postId: any) => {
+  const toggleLike = (postId) => {
     setPosts(posts.map(post =>
       post.id === postId
         ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
@@ -165,9 +163,9 @@ return;
     };
 
     const generateMockStats = (posts: CommunityPost): CommunityStats => {
-      const totalLikes = posts.reduce((sum: any, post: any) => sum + post.likes, 0);
-      const totalComments = posts.reduce((sum: any, post: any) => sum + post.comments, 0);
-      const topPost = posts.length > 0 ? posts.reduce((top: any, post: any) =>
+      const totalLikes = posts.reduce((sum, post) => sum + post.likes, 0);
+      const totalComments = posts.reduce((sum, post) => sum + post.comments, 0);
+      const topPost = posts.length > 0 ? posts.reduce((top, post) =>
         post.likes > (top?.likes || 0) ? post : top, posts[0],
       ) : null;
 

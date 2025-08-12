@@ -1,5 +1,4 @@
-import React, { useMemo, useCallback,  memo } from 'react';
-import { memo } from 'react';
+import React, { useMemo, useCallback, memo } from 'react';
 import { FixedSizeList } from 'react-window';
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
@@ -7,9 +6,9 @@ import type { Comment } from '../../types/core';
 
 interface VirtualizedCommentListProps {
   comments: Comment;
-  onReply: (commentId: any, content: any) => void;
-  onLike: (commentId: any) => void;
-  onDislike: (commentId: any) => void;
+  onReply: (commentId, content) => void;
+  onLike: (commentId) => void;
+  onDislike: (commentId) => void;
   className?: string;
   height?: number;
   itemHeight?: number;
@@ -20,9 +19,9 @@ interface CommentItemProps {
   style: React.CSSProperties;
   data: {
     comments: Comment;
-    onReply: (commentId: any, content: any) => void;
-    onLike: (commentId: any) => void;
-    onDislike: (commentId: any) => void;
+    onReply: (commentId, content) => void;
+    onLike: (commentId) => void;
+    onDislike: (commentId) => void;
   };
 }
 

@@ -73,8 +73,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
   }, [opts.enableIntersectionObserver]);
 
   // Observe video elements
-  const observeVideo = useCallback(
-    (element: Element, videoId: any) => {
+  const observeVideo = useCallback((element: Element, videoId) => {
       if (!observerRef.current || !opts.enableIntersectionObserver) {
         return;
       }
@@ -87,7 +86,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
   );
 
   // Unobserve video elements
-  const unobserveVideo = useCallback((videoId: any) => {
+  const unobserveVideo = useCallback((videoId) => {
     if (!observerRef.current) {
       return;
     }
@@ -100,8 +99,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
   }, []);
 
   // Prefetch video data
-  const prefetchVideo = useCallback(
-    async (videoId: any) => {
+  const prefetchVideo = useCallback(async (videoId) => {
       await queryClient.prefetchQuery({
         queryKey: ['video', videoId],
         queryFn: async () => {
@@ -120,8 +118,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
   );
 
   // Prefetch multiple videos
-  const prefetchVideos = useCallback(
-    async (videoIds: any) => {
+  const prefetchVideos = useCallback(async (videoIds) => {
       const promises = videoIds.slice(0, opts.prefetchCount).map(prefetchVideo);
       await Promise.allSettled(promises);
     },
@@ -129,16 +126,14 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
   );
 
   // Get cached video data
-  const getCachedVideo = useCallback(
-    (videoId: any): VideoData | undefined => {
+  const getCachedVideo = useCallback((videoId): VideoData | undefined => {
       return queryClient.getQueryData(['video', videoId]);
     },
     [queryClient]
   );
 
   // Check if video is cached
-  const isVideoCached = useCallback(
-    (videoId: any): boolean => {
+  const isVideoCached = useCallback((videoId): boolean => {
       const data = queryClient.getQueryData(['video', videoId]);
       return data !== undefined;
     },
@@ -146,8 +141,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
   );
 
   // Invalidate video cache
-  const invalidateVideo = useCallback(
-    async (videoId: any) => {
+  const invalidateVideo = useCallback(async (videoId) => {
       await queryClient.invalidateQueries({ queryKey: ['video', videoId] });
     },
     [queryClient]
@@ -176,7 +170,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
 
   // Preload video thumbnails
   const preloadThumbnails = useCallback((videos: VideoData) => {
-    videos.forEach((video: any) => {
+    videos.forEach((video) => {
       if (video.thumbnail) {
         const img = new Image();
         img.src = video.thumbnail;
@@ -185,8 +179,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
   }, []);
 
   // Smart prefetch based on user behavior
-  const smartPrefetch = useCallback(
-    async (currentVideoId: any, allVideoIds: any) => {
+  const smartPrefetch = useCallback(async (currentVideoId, allVideoIds) => {
       const currentIndex = allVideoIds.indexOf(currentVideoId);
       if (currentIndex === -1) {
         return;
@@ -237,7 +230,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
 
 // Hook for individual video with caching
 export const useCachedVideo = (
-  videoId: any,
+  videoId,
   options: VideoCacheOptions = {}
 ) => {
   const opts = { ...DEFAULT_OPTIONS, ...options };

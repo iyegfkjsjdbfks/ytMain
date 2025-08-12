@@ -1,24 +1,17 @@
+import React, { useState, FC, ReactNode } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import React, { useState } from 'react';
-import { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Play,
+import { Play,
   Settings,
   BarChart3,
   Eye,
   Users,
-  Calendar,
-  Zap,
-} from 'lucide-react';
+  Calendar, Zap } from 'lucide-react';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
-import {
-  Tabs,
+import { Tabs,
   TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '../../components/ui/Tabs';
+  TabsList, TabsTrigger } from '../../components/ui/Tabs';
 import { UnifiedCard } from '../../components/ui/UnifiedComponents';
 import LiveStreamViewer from '../features/livestream/components/LiveStreamViewer';
 import StreamAnalyticsDashboard from '../features/livestream/components/StreamAnalyticsDashboard';

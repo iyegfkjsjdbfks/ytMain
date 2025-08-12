@@ -1,6 +1,5 @@
-import React, { lazy } from 'react';
-import { FC } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import React, { lazy, FC } from 'react';
+import { useNavigate, Navigate  } from 'react-router-dom';
 
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results

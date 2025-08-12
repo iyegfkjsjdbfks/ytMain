@@ -1,5 +1,4 @@
-import React, { useState,  useEffect } from 'react';
-import { FC } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
 

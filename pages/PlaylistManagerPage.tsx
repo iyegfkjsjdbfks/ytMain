@@ -1,7 +1,5 @@
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
-
-import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
+import React, { useEffect, useState, FC } from 'react';
+import { PencilIcon, PlusIcon  } from '@heroicons/react/24/outline';
 import Droppable, { DragDropContext } from 'react-beautiful-dnd';
 
 interface PlaylistVideo {
@@ -53,7 +51,7 @@ const PlaylistManagerPage: React.FC = () => {
 
   // Generate mock data
   useEffect(() => {
-    const generateMockVideos = (count: number): PlaylistVideo[] => {
+    const generateMockVideos = (count): PlaylistVideo[] => {
       const titles = [
         'Getting Started with React Hooks',
         'Advanced TypeScript Patterns',
@@ -117,11 +115,11 @@ const PlaylistManagerPage: React.FC = () => {
     const generateMockStats = (playlists: Playlist): PlaylistStats => {
       return {
         totalPlaylists: playlists.length,
-        totalVideos: playlists.reduce((sum: any, playlist: any) => sum + playlist.videoCount, 0),
-        totalViews: playlists.reduce((sum: any, playlist: any) => sum + playlist.totalViews, 0),
-        publicPlaylists: playlists.filter((p: any) => p.visibility === 'public').length,
-        privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length,
+        totalVideos: playlists.reduce((sum, playlist) => sum + playlist.videoCount, 0),
+        totalViews: playlists.reduce((sum, playlist) => sum + playlist.totalViews, 0),
+        publicPlaylists: playlists.filter((p) => p.visibility === 'public').length,
+        privatePlaylists: playlists.filter((p) => p.visibility === 'private').length,
+        unlistedPlaylists: playlists.filter((p) => p.visibility === 'unlisted').length,
       };
     };
 
@@ -178,7 +176,7 @@ return;
     setShowCreateModal(false);
   };
 
-  const handleDeletePlaylist = (playlistId: any) => {
+  const handleDeletePlaylist = (playlistId) => {
     if (confirm('Are you sure you want to delete this playlist?')) {
       setPlaylists(playlists.filter((p) => p.id !== playlistId));
       if (selectedPlaylist?.id === playlistId) {
@@ -203,7 +201,7 @@ return;
     }
   };
 
-  const getVisibilityIcon = (visibility: any) => {
+  const getVisibilityIcon = (visibility) => {
     switch (visibility) {
       case 'public':
         return <GlobeAltIcon className="w-4 h-4" />;
@@ -430,8 +428,8 @@ return;
                   <DragDropContext onDragEnd={handleDragEnd}>
                     <Droppable droppableId="playlist-videos">
                       {(provided) => (
-                        <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
-                          {selectedPlaylist.videos.map((video: any, index: number) => (
+                        <div { ...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
+                          {selectedPlaylist.videos.map((video, index) => (
                             <Draggable key={video.id} draggableId={video.id} index={index}>
                               {(provided, snapshot) => (
                                 <div

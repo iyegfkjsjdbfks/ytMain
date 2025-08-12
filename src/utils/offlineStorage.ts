@@ -143,7 +143,7 @@ class OfflineStorage {
   }
 
   private async getStore(
-    storeName: any,
+    storeName,
     mode: IDBTransactionMode = 'readonly'
   ): Promise<IDBObjectStore> {
     if (!this.db) {
@@ -164,7 +164,7 @@ class OfflineStorage {
     });
   }
 
-  async getVideo(id: string): Promise<CachedVideo | null> {
+  async getVideo(id): Promise<CachedVideo | null> {
     const store = await this.getStore('videos');
     return new Promise((resolve, reject) => {
       const request = store.get(id);
@@ -184,7 +184,7 @@ class OfflineStorage {
     });
   }
 
-  async deleteVideo(id: string): Promise<void> {
+  async deleteVideo(id): Promise<void> {
     const store = await this.getStore('videos', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.delete(id);
@@ -226,7 +226,7 @@ class OfflineStorage {
     });
   }
 
-  async markActionSynced(id: string): Promise<void> {
+  async markActionSynced(id): Promise<void> {
     const store = await this.getStore('userActions', 'readwrite');
     return new Promise((resolve, reject) => {
       const getRequest = store.get(id);
@@ -249,7 +249,7 @@ class OfflineStorage {
     });
   }
 
-  async deleteAction(id: string): Promise<void> {
+  async deleteAction(id): Promise<void> {
     const store = await this.getStore('userActions', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.delete(id);
@@ -343,7 +343,7 @@ class OfflineStorage {
     });
   }
 
-  async removeSubscription(channelId: any): Promise<void> {
+  async removeSubscription(channelId): Promise<void> {
     const store = await this.getStore('subscriptions', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.delete(channelId);
@@ -387,7 +387,7 @@ class OfflineStorage {
   }
 
   async updateUploadStatus(
-    id: string,
+    id,
     status: 'pending' | 'uploading' | 'completed' | 'failed'
   ): Promise<void> {
     const store = await this.getStore('pendingUploads', 'readwrite');
@@ -415,7 +415,7 @@ class OfflineStorage {
     });
   }
 
-  async deletePendingUpload(id: string): Promise<void> {
+  async deletePendingUpload(id): Promise<void> {
     const store = await this.getStore('pendingUploads', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.delete(id);

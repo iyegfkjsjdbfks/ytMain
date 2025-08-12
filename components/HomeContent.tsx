@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import type React from 'react';
 
 import LiveStreams from './LiveStreams';
@@ -9,7 +8,7 @@ import TrendingSection from './TrendingSection';
 import VideoGrid from './VideoGrid';
 import WatchHistory from './WatchHistory';
 
-import type { Video } from '../types'; // Assuming Video type is in types.ts
+import type { Video } from '../types'; // Assuming Video type is in types.ts;
 
 interface HomeContentProps {
   selectedCategory: string; videos: Video

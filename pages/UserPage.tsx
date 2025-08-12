@@ -50,10 +50,10 @@ const UserPage: React.FC = () => {
   };
 
   const tabs = [
-    { id: 'videos' as const, label: 'Videos', icon: PlayIcon },
-    { id: 'playlists' as const, label: 'Playlists', icon: QueueListIcon },
-    { id: 'community' as const, label: 'Community', icon: ChatBubbleLeftRightIcon },
-    { id: 'about' as const, label: 'About', icon: InformationCircleIcon },
+    { id: 'videos' as const label: 'Videos', icon: PlayIcon },
+    { id: 'playlists' as const label: 'Playlists', icon: QueueListIcon },
+    { id: 'community' as const label: 'Community', icon: ChatBubbleLeftRightIcon },
+    { id: 'about' as const label: 'About', icon: InformationCircleIcon },
   ];
 
   const renderTabContent = () => {

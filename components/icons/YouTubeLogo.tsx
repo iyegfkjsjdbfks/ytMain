@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-
-
 import type React from 'react';
 
 const YouTubeLogo: React.FC<{ className?: string }> = ({ className = 'h-6' }) => (

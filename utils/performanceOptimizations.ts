@@ -108,9 +108,9 @@ export const hookOptimizations = {
   /**
    * Create stable callback with dependency optimization
    */
-  useOptimizedCallback: <T extends (...args: any[]) => any>(
+  useOptimizedCallback: <T extends (...args) => any>(
     callback: T,
-    deps: any,
+    deps,
   ): T => useCallback(callback, deps),
 
   /**
@@ -118,8 +118,8 @@ export const hookOptimizations = {
    */
   useExpensiveComputation: <T>(
     computeFn: () => T,
-    deps: any,
-    shouldRecompute?: (newDeps: any, oldDeps: any) => boolean,
+    deps,
+    shouldRecompute?: (newDeps, oldDeps) => boolean,
   ): T => {
     return useMemo(() => {
       if (shouldRecompute) {
@@ -138,7 +138,7 @@ export const listOptimizations = {
   /**
    * Generate stable keys for list items
    */
-  generateStableKey: (item: any, index: number, prefix = 'item'): string => {
+  generateStableKey: (item, index, prefix = 'item'): string => {
     if (item.id) {
 return `${prefix}-${item.id}`;
 }
@@ -154,7 +154,7 @@ return `${prefix}-${item.name}`;
   /**
    * Chunk large arrays for better performance
    */
-  chunkArray: <T>(array: T[], chunkSize: number): T[][] => {
+  chunkArray: <T>(array: T[], chunkSize): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));
@@ -167,8 +167,8 @@ return `${prefix}-${item.name}`;
    */
   getVisibleItems: <T>(
     items: T[],
-    startIndex: number,
-    visibleCount: number,
+    startIndex,
+    visibleCount,
   ): T[] => {
     return items.slice(startIndex, startIndex + visibleCount);
   },
@@ -181,7 +181,7 @@ export const imageOptimizations = {
   /**
    * Preload critical images
    */
-  preloadImage: (src: any): Promise<void> => {
+  preloadImage: (src): Promise<void> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve();
@@ -247,14 +247,14 @@ export const eventOptimizations = {
   /**
    * Throttled event handler
    */
-  throttle: <T extends (...args: any[]) => any>(
+  throttle: <T extends (...args) => any>(
     func: T,
-    delay: number,
+    delay,
   ): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastExecTime = 0;
 
-    return ((...args: any[]) => {
+    return ((...args) => {
       const currentTime = Date.now();
 
       if (currentTime - lastExecTime > delay) {
@@ -275,13 +275,13 @@ clearTimeout(timeoutId);
   /**
    * Debounced event handler
    */
-  debounce: <T extends (...args: any[]) => any>(
+  debounce: <T extends (...args) => any>(
     func: T,
-    delay: number,
+    delay,
   ): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-    return ((...args: any[]) => {
+    return ((...args) => {
       if (timeoutId) {
 clearTimeout(timeoutId);
 }
@@ -294,7 +294,7 @@ clearTimeout(timeoutId);
    */
   addPassiveListener: (
     element: Element,
-    event: string,
+    event,
     handler: EventListener,
     options?: AddEventListenerOptions,
   ): void => {
@@ -331,7 +331,7 @@ export const memoryOptimizations = {
   /**
    * LRU cache implementation
    */
-  createLRUCache: <K, V>(maxSize: any) => {
+  createLRUCache: <K, V>(maxSize) => {
     const cache = new Map<K, V>();
 
     return {

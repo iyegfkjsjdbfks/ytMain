@@ -1,17 +1,10 @@
-import React, { useEffect,  useState } from 'react';
-import { FC } from 'react';
-import {
-  liveStreamService,
-  type ScheduledStream,
-} from '../../../../services/livestreamAPI';
+import React, { useEffect, useState, FC } from 'react';
+import { liveStreamService, type ScheduledStream } from '../../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
-import {
-  CalendarIcon,
+import { CalendarIcon,
   ClockIcon,
   PlayIcon,
-  TrashIcon,
-  PencilIcon,
-} from '@heroicons/react/24/outline';
+  TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: ScheduledStream) => void;
@@ -102,7 +95,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     }
   };
 
-  const handleDeleteStream = async (streamId: any) => {
+  const handleDeleteStream = async (streamId) => {
     if (!confirm('Are you sure you want to delete this scheduled stream?')) {
       return;
     }
@@ -116,7 +109,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     }
   };
 
-  const handleStartStream = async (streamId: any) => {
+  const handleStartStream = async (streamId) => {
     try {
       // Start the scheduled stream
       await liveStreamService.startStream(streamId);
@@ -172,10 +165,10 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     }
   };
 
-  const removeTag = (tagToRemove: any) => {
+  const removeTag = (tagToRemove) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -389,7 +382,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
                 </button>
               </div>
               <div className='flex flex-wrap gap-2'>
-                {formData.tags.map((tag: any) => (
+                {formData.tags.map((tag) => (
                   <span
                     key={tag}
                     className='inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg'
@@ -486,7 +479,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
                   {stream.tags.length > 0 && (
                     <div className='flex flex-wrap gap-1 mt-2'>
-                      {stream.tags.slice(0, 3).map((tag: any) => (
+                      {stream.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
                           className='px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded'

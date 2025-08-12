@@ -18,7 +18,7 @@ return formatViewCount(video.viewCount);
   return 0;
 }
 
-export function formatViewCount(count: number): string {
+export function formatViewCount(count): string {
   if (count >= 1000000) {
     return `${(count / 1000000).toFixed(1)}M`;
   }
@@ -64,17 +64,17 @@ export function getVideoTags(video: Video): string[] {
     return [];
   }
   if (Array.isArray(tags)) {
-    return tags.map((tag: string) => tag.trim()).slice(0, 5);
+    return tags.map((tag) => tag.trim()).slice(0, 5);
   }
   // Split comma-separated string and return first 5
-  return tags.split(',').map((tag: string) => tag.trim()).slice(0, 5);
+  return tags.split(',').map((tag) => tag.trim()).slice(0, 5);
 }
 
 export function getVideoUploadDate(video: Video): string {
   return video.uploadedAt || '';
 }
 
-export function isVideoMonetized(video: any): boolean {
+export function isVideoMonetized(video): boolean {
   return !!(video.monetization?.enabled);
 }
 

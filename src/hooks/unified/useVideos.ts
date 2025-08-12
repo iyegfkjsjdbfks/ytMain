@@ -53,7 +53,7 @@ export function useUnifiedVideos(
 }
 
 export function useUnifiedVideo(
-  videoId: any,
+  videoId,
   config?: UseApiConfig<UnifiedVideoMetadata>
 ) {
   logger.debug(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
@@ -139,7 +139,7 @@ export function useFeaturedVideos(config?: UseApiConfig<Video[]>) {
 }
 
 export function useVideosByCategory(
-  category: any,
+  category,
   config?: UseApiConfig<Video[]>
 ) {
   return useQuery(
@@ -165,7 +165,7 @@ export function useSubscriptionFeed(config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useRelatedVideos(videoId: any, config?: UseApiConfig<Video[]>) {
+export function useRelatedVideos(videoId, config?: UseApiConfig<Video[]>) {
   return useQuery(
     ['videos', 'related', videoId],
     () => videoApi.getRelatedVideos(videoId),
@@ -259,7 +259,7 @@ export function useTrendingShorts(config?: UseApiConfig<Short[]>) {
 
 // Unified Search hook
 export function useUnifiedSearchVideos(
-  query: any,
+  query,
   filters: UnifiedSearchFilters = {},
   limit: number = 50,
   config?: UseApiConfig<{
@@ -294,7 +294,7 @@ export function useUnifiedSearchVideos(
 }
 
 // Legacy search hook (for backward compatibility)
-export function useSearchVideos(query: any, config?: UseApiConfig<Video[]>) {
+export function useSearchVideos(query, config?: UseApiConfig<Video[]>) {
   return useQuery(
     ['videos', 'search', query],
     () => videoApi.searchVideos({ query }),
@@ -395,7 +395,7 @@ export function useVideos(params = {}, config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useVideo(videoId: any, config?: UseApiConfig<Video>) {
+export function useVideo(videoId, config?: UseApiConfig<Video>) {
   return useQuery(['video', videoId], () => videoApi.getVideo(videoId), {
     enabled: !!videoId,
     staleTime: 10 * 60 * 1000, // 10 minutes
@@ -412,7 +412,7 @@ export function useTrendingVideos(config?: UseApiConfig<Video[]>) {
 }
 
 // Combined hooks for common patterns
-export function useVideoWithRelated(videoId: any) {
+export function useVideoWithRelated(videoId) {
   const video = useVideo(videoId);
   const relatedVideos = useRelatedVideos(videoId, {
     enabled: !!video.data,

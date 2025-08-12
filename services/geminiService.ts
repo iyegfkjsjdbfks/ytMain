@@ -1,6 +1,6 @@
-import { GoogleGenAI, type GenerateContentResponse } from '@google/genai';
+import { GoogleGenAI, type GenerateContentResponse  } from '@google/genai';
 
-import type { VideoIdeaResponse } from '../types'; // Import the new type
+import type { VideoIdeaResponse } from '../types'; // Import the new type;
 
 // API key is expected to be in process.env.API_KEY as per guidelines
 // Initialize the GoogleGenAI client
@@ -27,7 +27,7 @@ const checkAiInitialized = () => {
   }
 };
 
-const parseJsonFromText = (text: string): any => {
+const parseJsonFromText = (text): any => {
   let jsonStr = text.trim();
   const fenceRegex = /^```(\w*)?\s*\n?(.*?)\n?\s*```$/s;
   const match = jsonStr.match(fenceRegex);
@@ -48,7 +48,7 @@ const parseJsonFromText = (text: string): any => {
  * @returns A promise that resolves to the summary string.
  * @throws An error if summarization fails or API key is invalid.
  */
-export async function summarizeText(textToSummarize: any): Promise<string> {
+export async function summarizeText(textToSummarize): Promise<string> {
   checkAiInitialized();
 
   const model = 'gemini-2.5-flash-preview-04-17';
@@ -85,7 +85,7 @@ export async function summarizeText(textToSummarize: any): Promise<string> {
  * @returns A promise that resolves to a VideoIdeaResponse object.
  * @throws An error if idea generation fails or API key is invalid.
  */
-export async function generateVideoIdeas(userInput: any): Promise<VideoIdeaResponse> {
+export async function generateVideoIdeas(userInput): Promise<VideoIdeaResponse> {
   checkAiInitialized();
 
   const model = 'gemini-2.5-flash-preview-04-17';

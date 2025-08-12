@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import type React from 'react';
 
 // Solid Heart Icon path for a typical "like" button appearance

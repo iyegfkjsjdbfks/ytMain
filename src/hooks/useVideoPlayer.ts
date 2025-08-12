@@ -5,7 +5,7 @@ import { logger } from '../utils/logger';
 export interface VideoPlayerOptions {
   autoplay?: boolean;
   muted?: boolean;
-  onTimeUpdate?: (currentTime: any) => void;
+  onTimeUpdate?: (currentTime) => void;
   onEnded?: () => void;
   onPlay?: () => void;
   onPause?: () => void;
@@ -23,19 +23,19 @@ export interface VideoPlayerState {
   isLoading: boolean;
   error: Error | null;
   buffered?: TimeRanges;
-  setQuality?: (quality: any) => void;
+  setQuality?: (quality) => void;
 }
 
 export interface VideoPlayerControls {
   play: () => Promise<void>;
   pause: () => void;
   togglePlay: () => Promise<void>;
-  seek: (time: any) => void;
-  setVolume: (volume: any) => void;
+  seek: (time) => void;
+  setVolume: (volume) => void;
   mute: () => void;
   unmute: () => void;
   toggleMute: () => void;
-  setPlaybackRate: (rate: any) => void;
+  setPlaybackRate: (rate) => void;
   requestFullscreen: () => Promise<void>;
   exitFullscreen: () => Promise<void>;
   toggleFullscreen: () => Promise<void>;
@@ -43,7 +43,7 @@ export interface VideoPlayerControls {
   exitPictureInPicture: () => Promise<void>;
   togglePictureInPicture: () => Promise<void>;
   setVideoRef: (element: HTMLVideoElement | null) => void;
-  setQuality: (quality: any) => void;
+  setQuality: (quality) => void;
 }
 
 export const useVideoPlayer = (
@@ -278,7 +278,7 @@ export const useVideoPlayer = (
   }, [play, pause]);
 
   // Seek to a specific time
-  const seek = useCallback((time: any) => {
+  const seek = useCallback((time) => {
     if (videoRef.current) {
       videoRef.current.currentTime = time;
       setState(prev => ({ ...prev, currentTime: time }));
@@ -286,8 +286,7 @@ export const useVideoPlayer = (
   }, []);
 
   // Set volume (0-1)
-  const setVolume = useCallback(
-    (volume: any) => {
+  const setVolume = useCallback((volume) => {
       if (videoRef.current) {
         const newVolume = Math.min(1, Math.max(0, volume));
         videoRef.current.volume = newVolume;
@@ -331,8 +330,7 @@ export const useVideoPlayer = (
   }, []);
 
   // Set playback rate
-  const setPlaybackRate = useCallback(
-    (rate: any) => {
+  const setPlaybackRate = useCallback((rate) => {
       if (videoRef.current) {
         videoRef.current.playbackRate = rate;
         setState(prev => ({ ...prev, playbackRate: rate }));

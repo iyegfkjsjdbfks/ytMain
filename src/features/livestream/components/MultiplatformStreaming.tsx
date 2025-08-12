@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
-
+import React, { useState, FC } from 'react';
 // Import statements fixed
 
 interface Platform {
@@ -11,7 +9,7 @@ interface Platform {
 }
 
 interface MultiplatformStreamingProps {
-  onPlatformToggle?: (platformId: any, enabled: boolean) => void;
+  onPlatformToggle?: (platformId, enabled) => void;
 }
 
 export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
@@ -24,7 +22,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
     { id: 'twitter', name: 'Twitter', enabled: false },
   ]);
 
-  const togglePlatform = (platformId: any) => {
+  const togglePlatform = (platformId) => {
     setPlatforms(prev =>
       prev.map(platform => {
         if (platform.id === platformId) {

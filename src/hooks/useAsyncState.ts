@@ -8,7 +8,7 @@ interface AsyncState<T> {
 
 interface UseAsyncStateOptions {
   initialLoading?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data) => void;
   onError?: (error: Error) => void;
 }
 

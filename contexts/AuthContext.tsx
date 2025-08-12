@@ -14,8 +14,8 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: any, password: any) => Promise<boolean>;
-  register: (username: any, email: any, password: any) => Promise<boolean>;
+  login: (email, password) => Promise<boolean>;
+  register: (username, email, password) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<boolean>;
 }
@@ -61,7 +61,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkAuthStatus();
   }, []);
 
-  const login = async (email: any, password: any): Promise<boolean> => {
+  const login = async (email, password): Promise<boolean> => {
     try {
       setIsLoading(true);
 
@@ -97,7 +97,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (username: any, email: any, password: any): Promise<boolean> => {
+  const register = async (username, email, password): Promise<boolean> => {
     try {
       setIsLoading(true);
 

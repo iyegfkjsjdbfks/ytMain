@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import type React from 'react';
 
 const ShortsPageSkeleton: React.FC = () => {

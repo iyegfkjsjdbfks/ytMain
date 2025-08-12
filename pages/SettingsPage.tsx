@@ -59,7 +59,7 @@ const SelectSetting: React.FC<{
       onChange={(e) => onChange(e.target.value)}
       className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
     >
-      {options.map((option: any) => (
+      {options.map((option) => (
         <option key={option} value={option}>{option}</option>
       ))}
     </select>

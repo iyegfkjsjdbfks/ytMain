@@ -1,9 +1,7 @@
+import React, { useState, FC } from 'react';
 
-import React, { useState } from 'react';
-import { FC } from 'react';
-
-import { PaintBrushIcon, PhotoIcon } from '@heroicons/react/24/outline';
-import { XMarkIcon as XMarkSolidIcon, CheckIcon as CheckSolidIcon } from '@heroicons/react/24/solid';
+import { PaintBrushIcon, PhotoIcon  } from '@heroicons/react/24/outline';
+import { XMarkIcon as XMarkSolidIcon, CheckIcon as CheckSolidIcon  } from '@heroicons/react/24/solid';
 const XMarkIconSolid = XMarkSolidIcon;
 const CheckIconSolid = CheckSolidIcon;
 
@@ -77,7 +75,7 @@ const ChannelCustomizationPage: React.FC = () => {
     setUnsavedChanges(true);
   };
 
-  const handleKeywordAdd = (keyword: any) => {
+  const handleKeywordAdd = (keyword) => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
       setBranding(prev => ({
         ...prev,
@@ -87,10 +85,10 @@ const ChannelCustomizationPage: React.FC = () => {
     }
   };
 
-  const handleKeywordRemove = (keyword: any) => {
+  const handleKeywordRemove = (keyword) => {
     setBranding(prev => ({
       ...prev,
-      channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword),
+      channelKeywords: prev.channelKeywords.filter((k) => k !== keyword),
     }));
     setUnsavedChanges(true);
   };
@@ -107,7 +105,7 @@ const ChannelCustomizationPage: React.FC = () => {
     alert('Changes discarded');
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -421,7 +419,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         Channel Keywords
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {branding.channelKeywords.map((keyword: any) => (
+                        {branding.channelKeywords.map((keyword) => (
                           <span
                             key={keyword}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300"
