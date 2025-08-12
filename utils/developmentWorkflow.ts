@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+// React import removed as it's not used in this file
 /**
  * Intelligent Development Workflow Automation
  * Provides automated quality gates, deployment pipelines, and continuous improvement
@@ -72,7 +72,7 @@ class IntelligentWorkflowEngine {
   private deploymentStrategies: Map<string, DeploymentStrategy> = new Map();
   private qualityGateHistory: QualityGateResult[] = [];
   private isRunning = false;
-  private currentDeployment: { status: 'deploying' | 'idle'; startTime: number } | null = null;
+  private currentDeployment: { status: 'deploying' | 'idle' | 'failed'; startTime: number; error?: string } | null = null;
 
   constructor() {
     this.setupDefaultWorkflows();
@@ -161,7 +161,7 @@ return undefined;
     success: boolean;
     deploymentId: string;
     strategy: string;
-    healthStatus: { healthy: boolean; details };
+    healthStatus: { healthy: boolean; details: any };
   }> {
     const strategy = this.deploymentStrategies.get(strategyName);
     if (!strategy) {
@@ -214,7 +214,7 @@ return undefined;
 
       advancedAPM.recordMetric('deployment-failure', 1, {
         _strategy: strategyName,
-        _version,
+        _version: version,
         _error: this.currentDeployment.error,
       });
 
@@ -296,10 +296,10 @@ return undefined;
     averageDuration: number;
     failuresByStage: Record<string, number>;
     trends: {
-      executions: number;
-      successRates: number;
-      durations: number;
-      timestamps: number;
+      executions: number[];
+      successRates: number[];
+      durations: number[];
+      timestamps: number[];
     };
   } {
     const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
