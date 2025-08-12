@@ -23,8 +23,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   emptyMessage = 'No videos found',
   onEdit,
   onDelete,
-  onVisibilityChange,
-}) => {
+  onVisibilityChange }) => {
   const [selectedVideos, setSelectedVideos] = useState<Set<string>>(new Set());
   const [sortBy, setSortBy] = useState<'date' | 'views' | 'comments'>('date');
   const [filterVisibility, setFilterVisibility] = useState<
@@ -75,8 +74,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric',
-    });
+      day: 'numeric' });
   };
 
   // Filter videos based on visibility
@@ -381,5 +379,4 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
 };
 
 export default StudioVideoGrid;
-
 

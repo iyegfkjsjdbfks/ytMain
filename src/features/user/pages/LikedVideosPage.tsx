@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 /**
  * LikedVideosPage component for displaying videos the user has liked
  */
@@ -24,5 +22,4 @@ const LikedVideosPage: React.FC = () => {
 };
 
 export default LikedVideosPage;
-
 

@@ -28,4 +28,3 @@ export const StudioLayout: React.FC = () => {
 
 export default StudioLayout;
 
-

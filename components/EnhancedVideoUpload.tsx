@@ -1,4 +1,5 @@
 
+import type { Video } from '../types';
 import { useCallback, useRef, useState, FC, ChangeEvent } from 'react';
 
 import { CloudArrowUpIcon, XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, PhotoIcon, VideoCameraIcon, TagIcon } from '@heroicons/react/24/outline';
@@ -33,8 +34,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   onCancel,
   maxSizeGB = 2,
   allowedFormats = ['video/mp4', 'video/webm', 'video/mov', 'video/avi'],
-  className = '',
-}) => {
+  className = '' }) => {
   const [step, setStep] = useState<'upload' | 'details' | 'processing'>('upload');
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
@@ -53,8 +53,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     ageRestriction: false,
     commentsEnabled: true,
     likesVisible: true,
-    language: 'en',
-  });
+    language: 'en' });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -100,8 +99,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     const fileName = file.name.replace(/\.[^/.]+$/, '');
     setUploadData(prev => ({
       ...prev,
-      title: prev.title || fileName,
-    }));
+      title: prev.title || fileName }));
 
     setStep('details');
   }, [maxSizeGB, allowedFormats, setVideoFile, setVideoPreview, setUploadData, setStep]);
@@ -131,8 +129,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
       setUploadData(prev => ({
         ...prev,
         thumbnail: file,
-        customThumbnail: URL.createObjectURL(file),
-      }));
+        customThumbnail: URL.createObjectURL(file) }));
     }
   };
 
@@ -140,16 +137,14 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     if (tag.trim() && !uploadData.tags.includes(tag.trim())) {
       setUploadData(prev => ({
         ...prev,
-        tags: [...prev.tags, tag.trim()],
-      }));
+        tags: [...prev.tags, tag.trim()] }));
     }
   };
 
   const removeTag = (tagToRemove: any) => {
     setUploadData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
-    }));
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
   };
 
   const handleSubmit = async () => {
@@ -468,8 +463,7 @@ return '0:00';
                       onClick={() => setUploadData(prev => ({
                         ...prev,
                         thumbnail: null,
-                        customThumbnail: null,
-                      }))}
+                        customThumbnail: null }))}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                     >
                       <XMarkIcon className="w-3 h-3" />

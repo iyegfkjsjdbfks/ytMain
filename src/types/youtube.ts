@@ -536,8 +536,7 @@ export enum YouTubePlayerState {
   PLAYING = 1,
   PAUSED = 2,
   BUFFERING = 3,
-  CUED = 5,
-}
+  CUED = 5 }
 
 // Player Events
 export enum YouTubePlayerEvents {
@@ -546,8 +545,7 @@ export enum YouTubePlayerEvents {
   PLAYBACK_QUALITY_CHANGE = 'onPlaybackQualityChange',
   PLAYBACK_RATE_CHANGE = 'onPlaybackRateChange',
   ERROR = 'onError',
-  API_CHANGE = 'onApiChange',
-}
+  API_CHANGE = 'onApiChange' }
 
 // Player Error Codes
 export enum YouTubePlayerError {
@@ -555,5 +553,4 @@ export enum YouTubePlayerError {
   HTML5_ERROR = 5,
   VIDEO_NOT_FOUND = 100,
   EMBED_NOT_ALLOWED = 101,
-  EMBED_NOT_ALLOWED_DISGUISE = 150,
-}
+  EMBED_NOT_ALLOWED_DISGUISE = 150 }

@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 const PlaylistDetailSkeleton: React.FC = () => {
   return (
     <div className="p-4 md:p-6 animate-pulse bg-white dark:bg-neutral-950">

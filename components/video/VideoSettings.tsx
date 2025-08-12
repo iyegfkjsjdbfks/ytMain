@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import type { Video } from '../types';
+import React from 'react';
 import { XMarkIcon, CheckIcon  } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
@@ -40,8 +39,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   onSubtitleChange,
   autoplay,
   onAutoplayChange,
-  className = '',
-}) => {
+  className = '' }) => {
   if (!isOpen) {
 return null;
 }

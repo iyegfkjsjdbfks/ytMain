@@ -141,7 +141,7 @@ export class InputValidator {
       /123456/,
       /password/i,
       /qwerty/i,
-      /(.)\1{2,}/, // repeated characters
+      /(.)\1{2 }/, // repeated characters
     ];
 
     if (commonPatterns.some(pattern => pattern.test(password))) {
@@ -152,8 +152,7 @@ export class InputValidator {
     return {
       isValid: score >= 4 && feedback.length === 0,
       score: Math.max(0, score),
-      feedback,
-    };
+      feedback };
   }
 
   // SQL injection prevention
@@ -315,8 +314,7 @@ export class ClientEncryption {
     return crypto.subtle.generateKey(
       {
         name: 'AES-GCM',
-        length: 256,
-      },
+        length: 256 },
       true,
       ['encrypt', 'decrypt'],
     );
@@ -332,8 +330,7 @@ export class ClientEncryption {
     const encrypted = await crypto.subtle.encrypt(
       {
         name: 'AES-GCM',
-        iv,
-      },
+        iv },
       key,
       encodedData,
     );
@@ -344,13 +341,11 @@ export class ClientEncryption {
   static async decrypt(
     encrypted: ArrayBuffer,
     key: CryptoKey,
-    iv: Uint8Array,
-  ): Promise<string> {
+    iv: Uint8Array): Promise<string> {
     const decrypted = await crypto.subtle.decrypt(
       {
         name: 'AES-GCM',
-        iv,
-      },
+        iv },
       key,
       encrypted,
     );
@@ -516,8 +511,7 @@ export class CSRFProtection {
 
       return {
         ...request,
-        headers,
-      };
+        headers };
     }
 
     return request;
@@ -619,7 +613,6 @@ export const securityUtils = {
   SecureStorage,
   SecurityHeaders,
   CSRFProtection,
-  SecurityAudit,
-};
+  SecurityAudit };
 
 export default securityUtils;

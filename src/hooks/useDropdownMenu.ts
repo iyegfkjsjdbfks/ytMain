@@ -29,9 +29,9 @@ export const useDropdownMenu = () => {
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside as EventListener);
       return () =>
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('mousedown', handleClickOutside as EventListener);
     }
     return undefined;
   }, [isOpen]);
@@ -45,8 +45,8 @@ export const useDropdownMenu = () => {
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscapeKey);
-      return () => document.removeEventListener('keydown', handleEscapeKey);
+      document.addEventListener('keydown', handleEscapeKey as EventListener);
+      return () => document.removeEventListener('keydown', handleEscapeKey as EventListener);
     }
     return undefined;
   }, [isOpen]);
@@ -56,6 +56,5 @@ export const useDropdownMenu = () => {
     toggle,
     open,
     close,
-    menuRef,
-  };
+    menuRef };
 };

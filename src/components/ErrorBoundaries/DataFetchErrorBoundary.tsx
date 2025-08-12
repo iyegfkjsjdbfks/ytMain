@@ -49,15 +49,13 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
       error: null,
       errorInfo: null,
       retryCount: 0,
-      isRetrying: false,
-    };
+      isRetrying: false };
   }
 
   static getDerivedStateFromError(error: Error): Partial<State> {
     return {
       hasError: true,
-      error,
-    };
+      error };
   }
 
   override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -69,8 +67,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
         dataType: this.props.dataType,
         retryCount: this.state.retryCount,
         isOnline: navigator.onLine,
-        componentStack: errorInfo.componentStack,
-      })
+        componentStack: errorInfo.componentStack })
     );
 
     conditionalLogger.error(
@@ -79,8 +76,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
     );
 
     this.setState({
-      errorInfo,
-    });
+      errorInfo });
   }
 
   override componentWillUnmount(): void {
@@ -96,8 +92,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
       conditionalLogger.debug('Retrying data fetch component', {
         dataType: this.props.dataType,
         attempt: this.state.retryCount + 1,
-        isOnline: navigator.onLine,
-      });
+        isOnline: navigator.onLine });
 
       // Add a small delay to prevent immediate retry
       this.retryTimeout = setTimeout(() => {
@@ -106,8 +101,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
           error: null,
           errorInfo: null,
           retryCount: this.state.retryCount + 1,
-          isRetrying: false,
-        });
+          isRetrying: false });
 
         this.props.onRetry?.();
       }, 1000);
@@ -263,5 +257,4 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
 }
 
 export default DataFetchErrorBoundary;
-
 

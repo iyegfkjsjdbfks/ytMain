@@ -23,8 +23,7 @@ const SubscriptionsPage: React.FC = () => {
     loading: channelsLoading,
     error: channelsError,
     toggleNotifications,
-    unsubscribe,
-  } = useSubscriptions();
+    unsubscribe } = useSubscriptions();
 
   const [activeTab, setActiveTab] = useState<TabType>('all');
   const [sortBy, setSortBy] = useState<SortType>('latest');
@@ -106,8 +105,7 @@ return [];
       totalChannels: subscribedChannels.length,
       notificationsEnabled,
       totalVideos,
-      newVideosToday,
-    };
+      newVideosToday };
   }, [subscribedChannels, subscribedVideos]);
 
   const loading = videosLoading || channelsLoading;
@@ -339,6 +337,4 @@ return [];
 };
 
 export default SubscriptionsPage;
-
-
 

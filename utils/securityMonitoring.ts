@@ -147,22 +147,18 @@ class SecurityMonitoringEngine {
           id: 'rate-limit-api',
           condition: 'request.path.startsWith("/api/")',
           action: 'rate-limit',
-          parameters: { maxRequests: 100, windowMs: 60000 },
-        },
+          parameters: { maxRequests: 100, windowMs: 60000 } },
         {
           id: 'block-suspicious-ips',
           condition: 'request.ip in suspiciousIPs',
           action: 'deny',
-          parameters: {},
-        },
+          parameters: {} },
         {
           id: 'require-auth-admin',
           condition: 'request.path.startsWith("/admin/")',
           action: 'deny',
-          parameters: { requireAuth: true, requireRole: 'admin' },
-        },
-      ],
-    };
+          parameters: { requireAuth: true, requireRole: 'admin' } },
+      ] };
 
     const dataProtectionPolicy: SecurityPolicy = {
       id: 'data-protection-policy',
@@ -175,16 +171,13 @@ class SecurityMonitoringEngine {
           id: 'encrypt-sensitive-data',
           condition: 'data.type === "sensitive"',
           action: 'log',
-          parameters: { requireEncryption: true },
-        },
+          parameters: { requireEncryption: true } },
         {
           id: 'audit-data-access',
           condition: 'action === "data-access"',
           action: 'log',
-          parameters: { auditLevel: 'detailed' },
-        },
-      ],
-    };
+          parameters: { auditLevel: 'detailed' } },
+      ] };
 
     const applicationSecurityPolicy: SecurityPolicy = {
       id: 'app-security-policy',
@@ -197,22 +190,18 @@ class SecurityMonitoringEngine {
           id: 'detect-xss',
           condition: 'request.body contains script tags',
           action: 'alert',
-          parameters: { threatType: 'xss' },
-        },
+          parameters: { threatType: 'xss' } },
         {
           id: 'detect-sql-injection',
           condition: 'request.query contains SQL keywords',
           action: 'alert',
-          parameters: { threatType: 'sql-injection' },
-        },
+          parameters: { threatType: 'sql-injection' } },
         {
           id: 'validate-csrf-token',
           condition: 'request.method in ["POST", "PUT", "DELETE"]',
           action: 'deny',
-          parameters: { requireCSRFToken: true },
-        },
-      ],
-    };
+          parameters: { requireCSRFToken: true } },
+      ] };
 
     this.policies.set(accessControlPolicy.id, accessControlPolicy);
     this.policies.set(dataProtectionPolicy.id, dataProtectionPolicy);
@@ -238,16 +227,14 @@ class SecurityMonitoringEngine {
         requirement: 'User consent must be obtained and recorded',
         status: 'compliant',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 86400000,
-      },
+        nextCheck: Date.now() + 86400000 },
       {
         id: 'gdpr-data-retention',
         standard: 'GDPR',
         requirement: 'Data retention policies must be implemented',
         status: 'partial',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 86400000,
-      },
+        nextCheck: Date.now() + 86400000 },
     ];
 
     const iso27001Checks: ComplianceCheck[] = [
@@ -265,8 +252,7 @@ class SecurityMonitoringEngine {
         requirement: 'Incident response procedures must be documented',
         status: 'compliant',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 604800000,
-      },
+        nextCheck: Date.now() + 604800000 },
     ];
 
     [...gdprChecks, ...iso27001Checks].forEach(check => {
@@ -337,8 +323,7 @@ return;
           threatId: _threat.id,
           type: _threat.type,
           severity: _threat.severity,
-          source: _threat.source,
-        });
+          source: _threat.source });
       }
 
       advancedAPM.recordMetric('threats-detected', threats.length);
@@ -373,10 +358,8 @@ return;
         description: `Detected ${threatType} attempt from suspicious source`,
         metadata: {
           userAgent: 'Mozilla/5.0 (compatible; Bot/1.0)',
-          requestCount: Math.floor(Math.random() * 100) + 1,
-        },
-        status: 'detected',
-      };
+          requestCount: Math.floor(Math.random() * 100) + 1 },
+        status: 'detected' };
 
       threats.push(threat);
     }
@@ -415,8 +398,7 @@ return;
         timestamp: Date.now(),
         success: Math.random() > 0.1, // 90% success rate
         details: `Automated ${action} response executed`,
-        automated: true,
-      };
+        automated: true };
 
       console.log(`🚨 Security response: ${action} for ${threat.type} threat`);
       advancedAPM.recordMetric('security-response', 1, { action, success: response.success.toString() });
@@ -453,8 +435,7 @@ return;
           vulnerabilityId: vulnerability.id,
           component: vulnerability.component,
           severity: vulnerability.severity,
-          cve: vulnerability.cve,
-        });
+          cve: vulnerability.cve });
       }
 
       advancedAPM.recordMetric('vulnerabilities-scanned', vulnerabilities.length);
@@ -488,8 +469,7 @@ return;
           cvss: Math.random() * 10,
           fixAvailable: Math.random() > 0.3,
           detectedAt: Date.now(),
-          status: 'open',
-        };
+          status: 'open' };
 
         if (vulnerability.fixAvailable) {
           vulnerability.fixVersion = `${Math.floor(Math.random() * 5) + 1}.${Math.floor(Math.random() * 10)}.${Math.floor(Math.random() * 10)}`;
@@ -531,8 +511,7 @@ return;
           this.logSecurityEvent('compliance-check', {
             checkId: id,
             standard: check.standard,
-            status: check.status,
-          });
+            status: check.status });
         }
       }
 
@@ -558,8 +537,7 @@ return;
       status: ComplianceCheck['status'];
       evidence?: string;
     } = {
-      status,
-    };
+      status };
 
     if (status === 'compliant') {
       result.evidence = 'Automated verification passed';
@@ -575,8 +553,7 @@ return;
     type: SecurityAlert['type'],
     severity: SecurityAlert['severity'],
     title: any,
-    description: any,
-  ): void {
+    description: any): void {
     const alert: SecurityAlert = {
       id: `alert-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       type,
@@ -584,8 +561,7 @@ return;
       title,
       description,
       timestamp: Date.now(),
-      acknowledged: false,
-    };
+      acknowledged: false };
 
     this.alerts.set(alert.id, alert);
 
@@ -604,8 +580,7 @@ return;
       resource: metadata.resource || 'system',
       action: metadata.action || event,
       result: metadata.result || 'success',
-      metadata,
-    };
+      metadata };
 
     this.auditLogs.push(log);
 
@@ -715,8 +690,7 @@ return;
       this.logSecurityEvent('alert-acknowledged', {
         alertId,
         assignee,
-        alertType: alert.type,
-      });
+        alertType: alert.type });
     }
   }
 
@@ -732,8 +706,7 @@ return;
       this.logSecurityEvent('alert-resolved', {
         alertId,
         resolution,
-        alertType: alert.type,
-      });
+        alertType: alert.type });
     }
   }
 
@@ -748,8 +721,7 @@ return;
       this.logSecurityEvent('vulnerability-updated', {
         vulnerabilityId,
         status,
-        component: vulnerability.component,
-      });
+        component: vulnerability.component });
     }
   }
 
@@ -795,8 +767,7 @@ return;
       vulnerabilities,
       alerts,
       compliance,
-      recommendations,
-    };
+      recommendations };
   }
 }
 
@@ -816,5 +787,4 @@ export type {
   SecurityAlert,
   SecurityPolicy,
   ComplianceCheck,
-  SecurityAuditLog,
-};
+  SecurityAuditLog };

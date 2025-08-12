@@ -20,8 +20,7 @@ interface AdvancedSearchProps {
 const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   onSearch,
   initialQuery = '',
-  className = '',
-}) => {
+  className = '' }) => {
   const [query, setQuery] = useState(initialQuery);
   const [showFilters, setShowFilters] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -32,8 +31,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     type: 'any',
     quality: 'any',
     features: [],
-    sortBy: 'relevance',
-  });
+    sortBy: 'relevance' });
 
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,8 +45,8 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
   useEffect(() => {
@@ -137,8 +135,7 @@ searchParams.set('sort_by', filters.sortBy);
       ...prev,
       features: prev.features.includes(feature)
         ? prev.features.filter((f) => f !== feature)
-        : [...prev.features, feature],
-    }));
+        : [...prev.features, feature] }));
   };
 
   const clearFilters = () => {
@@ -148,8 +145,7 @@ searchParams.set('sort_by', filters.sortBy);
       type: 'any',
       quality: 'any',
       features: [],
-      sortBy: 'relevance',
-    });
+      sortBy: 'relevance' });
   };
 
   const hasActiveFilters = () => {

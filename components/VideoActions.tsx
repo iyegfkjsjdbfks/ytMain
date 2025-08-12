@@ -36,8 +36,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
   onClose,
   onShareToSocial,
   onCopyLink,
-  shareMessage,
-}) => {
+  shareMessage }) => {
   if (!isOpen) {
 return null;
 }
@@ -128,8 +127,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
   onDislike,
   onShare,
   onSave,
-  saveModalLoading = false,
-}) => {
+  saveModalLoading = false }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [shareMessage, setShareMessage] = useState<string>('');
   const saveButtonRef = useRef<HTMLButtonElement>(null);
@@ -185,8 +183,8 @@ const VideoActions: React.FC<VideoActionsProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, [isShareModalOpen]);
 
   return (

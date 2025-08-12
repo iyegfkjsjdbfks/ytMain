@@ -34,4 +34,3 @@ const ProtectedWatchPage: FC = () => {
 
 export default ProtectedWatchPage;
 
-

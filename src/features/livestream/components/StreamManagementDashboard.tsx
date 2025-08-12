@@ -30,8 +30,7 @@ interface StreamAction {
 }
 
 const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
-  className = '',
-}) => {
+  className = '' }) => {
   const [streams, setStreams] = useState<LiveStream[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedStreams, setSelectedStreams] = useState<string[]>([]);
@@ -78,8 +77,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               frameRate: 30,
               enableRecording: true,
               enableMultiplatform: false,
-              platforms: [{ name: 'youtube', enabled: true }],
-            },
+              platforms: [{ name: 'youtube', enabled: true }] },
             stats: {
               viewers: 1247,
               peakViewers: 2156,
@@ -95,17 +93,14 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               streamHealth: 'excellent',
               bitrate: 4500,
               frameDrops: 0,
-              latency: 1800,
-            },
+              latency: 1800 },
             monetization: {
               totalRevenue: 234.5,
               superChatRevenue: 234.5,
               adRevenue: 0,
               membershipRevenue: 0,
               donationRevenue: 0,
-              superChats: [],
-            },
-          },
+              superChats: [] } },
           {
             id: 'stream_2',
             title: 'Weekly Q&A Session',
@@ -139,8 +134,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               platforms: [
                 { name: 'youtube', enabled: true },
                 { name: 'twitch', enabled: true },
-              ],
-            },
+              ] },
             stats: {
               viewers: 0,
               peakViewers: 0,
@@ -156,17 +150,14 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               streamHealth: 'good',
               bitrate: 4500,
               frameDrops: 0,
-              latency: 2000,
-            },
+              latency: 2000 },
             monetization: {
               totalRevenue: 0,
               superChatRevenue: 0,
               adRevenue: 0,
               membershipRevenue: 0,
               donationRevenue: 0,
-              superChats: [],
-            },
-          },
+              superChats: [] } },
           {
             id: 'stream_3',
             title: 'Music Production Masterclass',
@@ -198,8 +189,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               frameRate: 30,
               enableRecording: true,
               enableMultiplatform: false,
-              platforms: [{ name: 'youtube', enabled: true }],
-            },
+              platforms: [{ name: 'youtube', enabled: true }] },
             stats: {
               viewers: 0,
               peakViewers: 1834,
@@ -215,17 +205,14 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               streamHealth: 'excellent',
               bitrate: 4500,
               frameDrops: 2,
-              latency: 1900,
-            },
+              latency: 1900 },
             monetization: {
               totalRevenue: 456.75,
               superChatRevenue: 456.75,
               adRevenue: 0,
               membershipRevenue: 0,
               donationRevenue: 0,
-              superChats: [],
-            },
-          },
+              superChats: [] } },
         ];
 
         setStreams(mockStreams);
@@ -247,45 +234,40 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         label: 'Edit',
         icon: PencilIcon as React.ComponentType<{
           className?: string | undefined;
-        }>,
-        color: 'text-blue-600 hover:text-blue-800',
-      },
+        }>
+        color: 'text-blue-600 hover:text-blue-800' },
       {
         id: 'duplicate',
         type: 'duplicate',
         label: 'Duplicate',
         icon: DocumentDuplicateIcon as React.ComponentType<{
           className?: string | undefined;
-        }>,
-        color: 'text-green-600 hover:text-green-800',
-      },
+        }>
+        color: 'text-green-600 hover:text-green-800' },
       {
         id: 'analytics',
         type: 'analytics',
         label: 'Analytics',
         icon: ChartBarIcon as React.ComponentType<{
           className?: string | undefined;
-        }>,
-        color: 'text-purple-600 hover:text-purple-800',
-      },
+        }>
+        color: 'text-purple-600 hover:text-purple-800' },
       {
         id: 'share',
         type: 'share',
         label: 'Share',
         icon: ShareIcon as React.ComponentType<{
           className?: string | undefined;
-        }>,
-        color: 'text-indigo-600 hover:text-indigo-800',
-      },
+        }>
+        color: 'text-indigo-600 hover:text-indigo-800' },
       {
         id: 'delete',
         type: 'delete',
         label: 'Delete',
         icon: TrashIcon as React.ComponentType<{
           className?: string | undefined;
-        }>,
-        color: 'text-red-600 hover:text-red-800',
-      },
+        }>
+        color: 'text-red-600 hover:text-red-800' },
     ];
 
     if (stream.status === 'live') {
@@ -296,9 +278,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           label: 'End Stream',
           icon: StopIcon as React.ComponentType<{
             className?: string | undefined;
-          }>,
-          color: 'text-red-600 hover:text-red-800',
-        },
+          }>
+          color: 'text-red-600 hover:text-red-800' },
         ...baseActions.filter(a => a.id !== 'delete'),
       ];
     }
@@ -311,9 +292,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           label: 'Start Now',
           icon: PlayIcon as React.ComponentType<{
             className?: string | undefined;
-          }>,
-          color: 'text-green-600 hover:text-green-800',
-        },
+          }>
+          color: 'text-green-600 hover:text-green-800' },
         ...baseActions,
       ];
     }
@@ -344,8 +324,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
             {
               ...stream,
               title: `${stream.title} (Copy)`,
-              status: 'scheduled',
-            }
+              status: 'scheduled' }
           );
           setStreams(prev => [...prev, duplicatedStream]);
           break;
@@ -675,5 +654,4 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
 };
 
 export default StreamManagementDashboard;
-
 

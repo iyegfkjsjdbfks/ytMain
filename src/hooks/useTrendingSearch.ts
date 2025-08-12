@@ -48,13 +48,11 @@ const convertSearchResultToVideo = (
       likeCount: result.likeCount || 0,
       dislikeCount: result.dislikeCount || 0,
       favoriteCount: 0,
-      commentCount: result.commentCount || 0,
-    },
+      commentCount: result.commentCount || 0 },
     topicDetails: {
       topicIds: [],
       relevantTopicIds: [],
-      topicCategories: [],
-    },
+      topicCategories: [] },
     contentDetails: {
       duration: result.duration
         ? `PT${result.duration.replace(':', 'M')}S`
@@ -64,9 +62,7 @@ const convertSearchResultToVideo = (
       caption: 'false',
       licensedContent: false,
       contentRating: {},
-      projection: 'rectangular',
-    },
-  };
+      projection: 'rectangular' } };
 };
 
 interface UseInitialSearchResult {
@@ -162,8 +158,8 @@ export function useTrendingSearch(): UseInitialSearchResult {
       }
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener('storage', handleStorageChange as EventListener);
+    return () => window.removeEventListener('storage', handleStorageChange as EventListener);
   }, [fetchTrendingVideos]);
 
   const refetch = useCallback(async () => {

@@ -86,8 +86,7 @@ class OfflineStorage {
         if (!db.objectStoreNames.contains('videos')) {
           const videosStore = db.createObjectStore('videos', { keyPath: 'id' });
           videosStore.createIndex('uploadDate', 'uploadDate', {
-            unique: false,
-          });
+            unique: false });
           videosStore.createIndex('channelId', 'channelId', { unique: false });
         }
 
@@ -95,8 +94,7 @@ class OfflineStorage {
         if (!db.objectStoreNames.contains('userActions')) {
           const actionsStore = db.createObjectStore('userActions', {
             keyPath: 'id',
-            autoIncrement: true,
-          });
+            autoIncrement: true });
           actionsStore.createIndex('type', 'type', { unique: false });
           actionsStore.createIndex('timestamp', 'timestamp', { unique: false });
           actionsStore.createIndex('synced', 'synced', { unique: false });
@@ -105,37 +103,31 @@ class OfflineStorage {
         // Watch history store
         if (!db.objectStoreNames.contains('watchHistory')) {
           const historyStore = db.createObjectStore('watchHistory', {
-            keyPath: 'id',
-          });
+            keyPath: 'id' });
           historyStore.createIndex('watchedAt', 'watchedAt', { unique: false });
         }
 
         // Playlists store
         if (!db.objectStoreNames.contains('playlists')) {
           const playlistsStore = db.createObjectStore('playlists', {
-            keyPath: 'id',
-          });
+            keyPath: 'id' });
           playlistsStore.createIndex('createdAt', 'createdAt', {
-            unique: false,
-          });
+            unique: false });
         }
 
         // Subscriptions store
         if (!db.objectStoreNames.contains('subscriptions')) {
           const subscriptionsStore = db.createObjectStore('subscriptions', {
-            keyPath: 'channelId',
-          });
+            keyPath: 'channelId' });
           subscriptionsStore.createIndex('subscribedAt', 'subscribedAt', {
-            unique: false,
-          });
+            unique: false });
         }
 
         // Pending uploads store
         if (!db.objectStoreNames.contains('pendingUploads')) {
           const uploadsStore = db.createObjectStore('pendingUploads', {
             keyPath: 'id',
-            autoIncrement: true,
-          });
+            autoIncrement: true });
           uploadsStore.createIndex('createdAt', 'createdAt', { unique: false });
         }
       };
@@ -144,7 +136,7 @@ class OfflineStorage {
 
   private async getStore(
     storeName: any,
-    mode: IDBTransactionMode = 'readonly'
+    mode: IDBTransactionMode = 'readonly',
   ): Promise<IDBObjectStore> {
     if (!this.db) {
       await this.init();
@@ -203,8 +195,7 @@ class OfflineStorage {
       const request = store.add({
         ...action,
         timestamp: Date.now(),
-        synced: false,
-      });
+        synced: false });
       request.onsuccess = () => resolve();
       request.onerror = () =>
         reject(
@@ -364,8 +355,7 @@ class OfflineStorage {
       const request = store.add({
         ...upload,
         createdAt: Date.now(),
-        status: 'pending',
-      });
+        status: 'pending' });
       request.onsuccess = () => resolve(request.result as number);
       request.onerror = () =>
         reject(
@@ -388,7 +378,7 @@ class OfflineStorage {
 
   async updateUploadStatus(
     id: string,
-    status: 'pending' | 'uploading' | 'completed' | 'failed'
+    status: 'pending' | 'uploading' | 'completed' | 'failed',
   ): Promise<void> {
     const store = await this.getStore('pendingUploads', 'readwrite');
     return new Promise((resolve, reject) => {
@@ -402,8 +392,8 @@ class OfflineStorage {
           putRequest.onsuccess = () => resolve();
           putRequest.onerror = () =>
             reject(
-              new Error(
-                putRequest.error?.message || 'Failed to update upload status'
+              new Error(,
+                putRequest.error?.message || 'Failed to update upload status',
               )
             );
         } else {
@@ -429,7 +419,7 @@ class OfflineStorage {
 
   // Cleanup operations
   async cleanupOldData(
-    maxAge: number = 7 * 24 * 60 * 60 * 1000
+    maxAge: number = 7 * 24 * 60 * 60 * 1000,
   ): Promise<void> {
     const cutoffTime = Date.now() - maxAge;
 
@@ -470,8 +460,7 @@ class OfflineStorage {
       const estimate = await navigator.storage.estimate();
       return {
         used: estimate.usage || 0,
-        quota: estimate.quota || 0,
-      };
+        quota: estimate.quota || 0 };
     }
     return { used: 0, quota: 0 };
   }
@@ -496,10 +485,10 @@ export const waitForOnline = (): Promise<void> => {
       resolve();
     } else {
       const handleOnline = () => {
-        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('online', handleOnline as EventListener);
         resolve();
       };
-      window.addEventListener('online', handleOnline);
+      window.addEventListener('online', handleOnline as EventListener);
     }
   });
 };
@@ -517,10 +506,8 @@ export const syncPendingActions = async (): Promise<void> => {
         const response = await fetch(action.endpoint, {
           method: action.method,
           headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(action.data),
-        });
+            'Content-Type': 'application/json' },
+          body: JSON.stringify(action.data) });
 
         if (response.ok && action.id !== undefined) {
           await offlineStorage.markActionSynced(action.id);
@@ -539,7 +526,7 @@ export const syncPendingActions = async (): Promise<void> => {
 };
 
 // Auto-sync when coming back online
-window.addEventListener('online', () => {
+window.addEventListener('online', ( as EventListener) => {
   syncPendingActions().catch(() => {
     // Handle sync failure silently
   });

@@ -21,8 +21,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   currentVideo,
   currentVideoId,
   maxRecommendations = 10,
-  onVideoSelect,
-}) => {
+  onVideoSelect }) => {
   const [recommendations, setRecommendations] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
   const [useGoogleCustomSearch, setUseGoogleCustomSearch] = useState(false);
@@ -75,8 +74,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           title: currentVideo?.title,
           category: currentVideo?.category,
           tags: currentVideo?.tags,
-          channelName: currentVideo?.channelName,
-        });
+          channelName: currentVideo?.channelName });
 
         if (currentVideo) {
           // Generate intelligent search query based on current video
@@ -133,8 +131,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             commentCount: googleVideo.commentCount || 0,
             // Required Video interface properties
             visibility: 'public' as const, createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          }));
+            updatedAt: new Date().toISOString() }));
         } else {
           // Get trending videos using Google Custom Search
           console.log('🔍 Getting trending videos using Google Custom Search...');
@@ -165,8 +162,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             commentCount: googleVideo.commentCount || 0,
             // Required Video interface properties
             visibility: 'public' as const, createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          }));
+            updatedAt: new Date().toISOString() }));
         }
 
         console.log(`📋 Google Custom Search returned ${recommendedVideos.length} recommendations`);
@@ -333,5 +329,4 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 };
 
 export default RecommendationEngine;
-
 

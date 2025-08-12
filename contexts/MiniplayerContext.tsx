@@ -45,4 +45,3 @@ export const useMiniplayer = (): MiniplayerContextType => {
   return context;
 };
 
-

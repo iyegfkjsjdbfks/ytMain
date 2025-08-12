@@ -62,8 +62,7 @@ const SearchResultsPage: React.FC = () => {
             viewCount: video.viewCount || 0,
             likeCount: video.likeCount || 0,
             dislikeCount: video.dislikeCount || 0,
-            commentCount: video.commentCount || 0,
-          })),
+            commentCount: video.commentCount || 0 })),
           ...(results.googleSearchVideos || []).map((video: any) => ({
             id: video.id,
             title: video.title,
@@ -91,8 +90,7 @@ const SearchResultsPage: React.FC = () => {
             viewCount: video.viewCount || 0,
             likeCount: video.likeCount || 0,
             dislikeCount: video.dislikeCount || 0,
-            commentCount: video.commentCount || 0,
-          })),
+            commentCount: video.commentCount || 0 })),
         ];
         setVideos(videoResults);
       } catch (err) {
@@ -228,5 +226,4 @@ const SearchResultsPage: React.FC = () => {
 };
 
 export default SearchResultsPage;
-
 

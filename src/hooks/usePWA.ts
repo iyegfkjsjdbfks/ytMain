@@ -27,42 +27,42 @@ interface PWAState {
 }
 
 interface UsePWAReturn {
-  // Installation
+  // Installation,
   canInstall: boolean;
   isInstalled: boolean;
   installPWA: () => Promise<boolean>;
   showInstallPrompt: () => Promise<boolean>;
   dismissInstallPrompt: () => void;
 
-  // Network & Offline
+  // Network & Offline,
   isOnline: boolean;
   isOffline: boolean;
   networkQuality: 'fast' | 'slow' | 'offline';
   shouldReduceData: boolean;
 
-  // Updates
+  // Updates,
   updateAvailable: boolean;
   isUpdating: boolean;
   checkForUpdates: () => Promise<boolean>;
   installUpdate: () => Promise<void>;
 
-  // Notifications
+  // Notifications,
   notificationPermission: NotificationPermission;
   canShowNotifications: boolean;
   requestNotificationPermission: () => Promise<NotificationPermission>;
   showNotification: (options: any) => Promise<boolean>;
 
-  // Features
+  // Features,
   shareContent: (data: ShareData) => Promise<boolean>;
   addToHomeScreen: () => void;
   registerBackgroundSync: (tag: string) => Promise<void>;
   cacheVideo: (videoId: any, quality?: string) => Promise<boolean>;
 
-  // Analytics
+  // Analytics,
   getInstallStats: () => any;
   getUsageStats: () => any;
 
-  // State
+  // State,
   isInitialized: boolean;
   supportedFeatures: string;
 }
@@ -75,9 +75,7 @@ export const usePWA = (): UsePWAReturn => {
       notifications: false,
       backgroundSync: false,
       sharing: false,
-      offlineSupport: false,
-    },
-  });
+      offlineSupport: false } });
 
   // Use specialized hooks
   const installPrompt = useInstallPrompt();
@@ -98,29 +96,26 @@ export const usePWA = (): UsePWAReturn => {
           'serviceWorker' in navigator &&
           'sync' in window.ServiceWorkerRegistration.prototype,
         sharing: 'share' in navigator,
-        offlineSupport: 'serviceWorker' in navigator,
-      };
+        offlineSupport: 'serviceWorker' in navigator };
 
       setState(prev => ({
         ...prev,
         features,
-        isInitialized: true,
-      }));
+        isInitialized: true }));
 
       conditionalLogger.info(
         'PWA features initialized',
         {
           supportedFeatures: Object.keys(features).filter(
-            key => features[key as keyof typeof features]
-          ),
-        },
+            key => features[key as keyof typeof features],
+          ) },
         'usePWA'
       );
     } catch (error) {
       conditionalLogger.error(
         'Failed to initialize PWA features',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWA'
+        'usePWA',
       );
     }
   }, [notifications.isSupported]);
@@ -147,11 +142,10 @@ export const usePWA = (): UsePWAReturn => {
         timestamp: Date.now(),
         features: state.features,
         userAgent: navigator.userAgent,
-        isStandalone: window.matchMedia('(display-mode: standalone)').matches,
-      };
+        isStandalone: window.matchMedia('(display-mode: standalone)').matches };
 
       try {
-        const existingData = JSON.parse(
+        const existingData = JSON.parse(;
           localStorage.getItem('pwa-usage-data') || '[]'
         );
         existingData.push(usageData);
@@ -166,7 +160,7 @@ export const usePWA = (): UsePWAReturn => {
         conditionalLogger.error(
           'Failed to track PWA usage',
           { error: error instanceof Error ? error.message : 'Unknown error' },
-          'usePWA'
+          'usePWA',
         );
       }
     }, 250); // debounce a bit to avoid StrictMode double logs
@@ -175,14 +169,14 @@ export const usePWA = (): UsePWAReturn => {
   }, [state.isInitialized, state.features]);
 
   // Share content using Web Share API
-  const shareContent = useCallback(
+  const shareContent = useCallback(;
     async (data: ShareData): Promise<boolean> => {
       try {
         if (!('share' in navigator)) {
           conditionalLogger.warn(
             'Web Share API not supported',
             undefined,
-            'usePWA'
+            'usePWA',
           );
           return false;
         }
@@ -191,7 +185,7 @@ export const usePWA = (): UsePWAReturn => {
         conditionalLogger.debug(
           'Content shared successfully',
           { title: data.title },
-          'usePWA'
+          'usePWA',
         );
         return true;
       } catch (error) {
@@ -199,13 +193,13 @@ export const usePWA = (): UsePWAReturn => {
           conditionalLogger.debug(
             'Share cancelled by user',
             undefined,
-            'usePWA'
+            'usePWA',
           );
         } else {
           conditionalLogger.error(
             'Failed to share content',
             { error: error instanceof Error ? error.message : 'Unknown error' },
-            'usePWA'
+            'usePWA',
           );
         }
         return false;
@@ -224,14 +218,13 @@ export const usePWA = (): UsePWAReturn => {
         notifications.showNotification({
           title: 'Add to Home Screen',
           body: 'Tap the share button and then "Add to Home Screen".',
-          icon: '/icons/icon-192x192.png',
-        });
+          icon: '/icons/icon-192x192.png' });
       }
     }
   }, [
     installPrompt.isInstallable,
     installPrompt.installApp,
-    notifications.showNotification,
+    notifications.showNotification
   ]);
 
   // Register background sync
@@ -241,7 +234,7 @@ export const usePWA = (): UsePWAReturn => {
           conditionalLogger.warn(
             'Background sync not supported',
             undefined,
-            'usePWA'
+            'usePWA',
           );
           return;
         }
@@ -251,16 +244,15 @@ export const usePWA = (): UsePWAReturn => {
         conditionalLogger.debug(
           'Background sync registered',
           { tag },
-          'usePWA'
+          'usePWA',
         );
       } catch (error) {
         conditionalLogger.error(
           'Failed to register background sync',
           {
             error: error instanceof Error ? error.message : 'Unknown error',
-            tag,
-          },
-          'usePWA'
+            tag },
+          'usePWA',
         );
       }
     },
@@ -268,20 +260,20 @@ export const usePWA = (): UsePWAReturn => {
   );
 
   // Cache video for offline viewing
-  const cacheVideo = useCallback(
+  const cacheVideo = useCallback(;
     async (videoId: any, quality?: string): Promise<boolean> => {
       try {
         if (!('caches' in window)) {
           conditionalLogger.warn(
             'Cache API not supported',
             undefined,
-            'usePWA'
+            'usePWA',
           );
           return false;
         }
 
-        const cache = await caches.open(
-          `youtubex-videos-${quality || 'default'}-v1`
+        const cache = await caches.open(;
+          `youtubex-videos-${quality || 'default'}-v1`,
         );
         const videoUrl = `/api/video/${videoId}${quality ? `?quality=${quality}` : ''}`;
 
@@ -291,7 +283,7 @@ export const usePWA = (): UsePWAReturn => {
           conditionalLogger.debug(
             'Video cached successfully',
             { videoId, quality },
-            'usePWA'
+            'usePWA',
           );
           return true;
         }
@@ -302,9 +294,8 @@ export const usePWA = (): UsePWAReturn => {
           'Failed to cache video',
           {
             error: error instanceof Error ? error.message : 'Unknown error',
-            videoId,
-          },
-          'usePWA'
+            videoId },
+          'usePWA',
         );
         return false;
       }
@@ -319,14 +310,13 @@ export const usePWA = (): UsePWAReturn => {
       isInstalled: installPrompt.isInstalled,
       installPromptShown: installPrompt.showPrompt,
       supportedFeatures: Object.keys(state.features).filter(
-        key => state.features[key as keyof typeof state.features]
-      ),
-    };
+        key => state.features[key as keyof typeof state.features],
+      ) };
   }, [
     installPrompt.isInstallable,
     installPrompt.isInstalled,
     installPrompt.showPrompt,
-    state.features,
+    state.features
   ]);
 
   // Get usage stats
@@ -336,14 +326,13 @@ export const usePWA = (): UsePWAReturn => {
       networkQuality: offlineStatus.getNetworkQuality(),
       updateAvailable: pwaUpdates.updateAvailable,
       notificationPermission: notifications.permission,
-      lastUpdateCheck: pwaUpdates.lastUpdateCheck,
-    };
+      lastUpdateCheck: pwaUpdates.lastUpdateCheck };
   }, [
     offlineStatus.isOnline,
     offlineStatus.getNetworkQuality(),
     pwaUpdates.updateAvailable,
     pwaUpdates.lastUpdateCheck,
-    notifications.permission,
+    notifications.permission
   ]);
 
   // const dismissInstallPrompt = (): void => {
@@ -372,26 +361,26 @@ export const usePWA = (): UsePWAReturn => {
   }, []);
 
   return {
-    // Installation
+    // Installation,
     canInstall: installPrompt.isInstallable,
     isInstalled: installPrompt.isInstalled,
     installPWA: installPrompt.installApp,
     showInstallPrompt: installPrompt.installApp,
     dismissInstallPrompt: installPrompt.dismissPrompt,
 
-    // Network & Offline
+    // Network & Offline,
     isOnline: offlineStatus.isOnline,
     isOffline: offlineStatus.isOffline,
     networkQuality: offlineStatus.getNetworkQuality(),
     shouldReduceData: offlineStatus.shouldReduceData(),
 
-    // Updates
+    // Updates,
     updateAvailable: pwaUpdates.updateAvailable,
     isUpdating: pwaUpdates.isUpdating,
     checkForUpdates: pwaUpdates.checkForUpdates,
     installUpdate: pwaUpdates.installUpdate,
 
-    // Notifications
+    // Notifications,
     notificationPermission: notifications.permission,
     canShowNotifications: notifications.canShowNotifications,
     requestNotificationPermission: notifications.requestPermission,
@@ -407,12 +396,11 @@ export const usePWA = (): UsePWAReturn => {
     getInstallStats,
     getUsageStats,
 
-    // State
+    // State,
     isInitialized: state.isInitialized,
     supportedFeatures: Object.keys(state.features).filter(
-      key => state.features[key as keyof typeof state.features]
-    ),
-  };
+      key => state.features[key as keyof typeof state.features],
+    ) };
 };
 
 // Utility functions for PWA features
@@ -421,7 +409,7 @@ export const requestNotificationPermission = async (): Promise<boolean> => {
     conditionalLogger.warn(
       'This browser does not support notifications',
       undefined,
-      'usePWA'
+      'usePWA',
     );
     return false;
   }
@@ -438,20 +426,19 @@ export const requestNotificationPermission = async (): Promise<boolean> => {
   return permission === 'granted';
 };
 
-export const showNotification = (
+export const showNotification = (;
   title: any,
-  options?: NotificationOptions
+  options?: NotificationOptions,
 ): void => {
   if ('Notification' in window && Notification.permission === 'granted') {
     const defaultOptions: NotificationOptions = {
       icon: '/icons/icon-192x192.svg',
       badge: '/icons/badge-72x72.svg',
-      ...options,
-    };
+      ...options };
 
     const notification = new Notification(title, defaultOptions);
     // Notification will auto-close, no need to manage it further
-    notification.addEventListener('click', () => notification.close());
+    notification.addEventListener('click', ( as EventListener) => notification.close());
   }
 };
 
@@ -459,7 +446,7 @@ export const addToHomeScreen = (): void => {
   // For iOS Safari
   if ((navigator as any).standalone === false) {
     alert(
-      'To install this app on your iOS device, tap the share button and then "Add to Home Screen".'
+      'To install this app on your iOS device, tap the share button and then "Add to Home Screen".',
     );
   }
 };
@@ -470,10 +457,10 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       await navigator.share(data);
       return true;
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         `Error sharing: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'shareContent'
+        'shareContent',
       );
       conditionalLogger.error('Error sharing', componentError, 'usePWA');
       return false;
@@ -487,15 +474,15 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       showNotification('Link copied to clipboard!');
       return true;
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         `Error copying to clipboard: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'shareContent'
+        'shareContent',
       );
       conditionalLogger.error(
         'Error copying to clipboard',
         componentError,
-        'usePWA'
+        'usePWA',
       );
       return false;
     }
@@ -509,7 +496,7 @@ export const getNetworkStatus = (): {
   effectiveType?: string;
   downlink?: number;
 } => {
-  const connection =
+  const connection =;
     (navigator as any).connection ||
     (navigator as any).mozConnection ||
     (navigator as any).webkitConnection;
@@ -517,38 +504,36 @@ export const getNetworkStatus = (): {
   return {
     online: navigator.onLine,
     effectiveType: connection?.effectiveType,
-    downlink: connection?.downlink,
-  };
+    downlink: connection?.downlink };
 };
 
 export const enableBackgroundSync = (tag: string): void => {
   if (
-    'serviceWorker' in navigator &&
-    'sync' in window.ServiceWorkerRegistration.prototype
+    'serviceWorker' in navigator &&,
+    'sync' in window.ServiceWorkerRegistration.prototype,
   ) {
     navigator.serviceWorker.ready
       .then(registration => {
         return (registration as any).sync.register(tag);
       })
       .catch(error => {
-        const componentError = createComponentError(
+        const componentError = createComponentError(,;
           `Background sync registration failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
           'usePWA',
-          'enableBackgroundSync'
+          'enableBackgroundSync',
         );
         conditionalLogger.error(
           'Background sync registration failed',
           componentError,
-          'usePWA'
+          'usePWA',
         );
       });
   }
 };
 
-export const cacheVideo = async (
+export const cacheVideo = async (;
   videoUrl: any,
-  videoId: any
-): Promise<boolean> => {
+  videoId: any): Promise<boolean> => {
   if ('caches' in window) {
     try {
       const cache = await caches.open('youtubex-videos-v1');
@@ -559,10 +544,10 @@ export const cacheVideo = async (
         return true;
       }
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         `Error caching video: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'cacheVideo'
+        'cacheVideo',
       );
       conditionalLogger.error('Error caching video', componentError, 'usePWA');
     }
@@ -571,24 +556,23 @@ export const cacheVideo = async (
   return false;
 };
 
-export const getCachedVideo = async (
-  videoId: any
-): Promise<Response | null> => {
+export const getCachedVideo = async (;
+  videoId: any): Promise<Response | null> => {
   if ('caches' in window) {
     try {
       const cache = await caches.open('youtubex-videos-v1');
       const response = await cache.match(`video-${videoId}`);
       return response || null;
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         `Error retrieving cached video: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'getCachedVideo'
+        'getCachedVideo',
       );
       conditionalLogger.error(
         'Error retrieving cached video',
         componentError,
-        'usePWA'
+        'usePWA',
       );
     }
   }

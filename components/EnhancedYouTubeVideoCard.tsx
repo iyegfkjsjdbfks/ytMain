@@ -1,6 +1,5 @@
 import React, { memo, FC } from 'react';
 
-
 import { ArrowTopRightOnSquareIcon, PlayIcon  } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -19,8 +18,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
   video,
   onVideoSelect,
   showChannel = true,
-  size = 'md',
-}) => {
+  size = 'md' }) => {
   const handleClick = () => {
     if (onVideoSelect) {
       onVideoSelect(video.id);
@@ -56,23 +54,19 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
       thumbnail: 'w-[168px] h-[94px] flex-shrink-0',
       content: 'flex-1 min-w-0',
       title: 'text-sm font-medium line-clamp-2 leading-5',
-      meta: 'text-xs text-gray-600',
-    },
+      meta: 'text-xs text-gray-600' },
     md: {
       container: 'flex gap-3',
       thumbnail: 'w-48 h-28 flex-shrink-0',
       content: 'flex-1 min-w-0',
       title: 'text-base font-medium line-clamp-2',
-      meta: 'text-sm text-gray-600',
-    },
+      meta: 'text-sm text-gray-600' },
     lg: {
       container: 'block',
       thumbnail: 'w-full h-48',
       content: 'mt-3',
       title: 'text-lg font-semibold line-clamp-2',
-      meta: 'text-sm text-gray-600',
-    },
-  };
+      meta: 'text-sm text-gray-600' } };
 
   const classes = sizeClasses[size];
 

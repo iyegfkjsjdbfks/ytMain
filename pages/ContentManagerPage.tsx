@@ -7,6 +7,12 @@ import { parseRelativeDate } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
 
 import type { ContentItem } from '../types';
+import { ChartBarIcon } from '@heroicons/react/24/outline';
+import { PlayIcon } from '@heroicons/react/24/outline';
+import { TrashIcon } from '@heroicons/react/24/outline';
+import { EyeIcon } from '@heroicons/react/24/outline';
+import { ClockIcon } from '@heroicons/react/24/outline';
+import { ShareIcon } from '@heroicons/react/24/outline';
 
 type ViewMode = 'grid' | 'list';
 type FilterType = 'all' | 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted';
@@ -36,8 +42,7 @@ const ContentManagerPage: React.FC = () => {
           const item: ContentItem = {
             ...video,
             status: status as 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted',
-            lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-          };
+            lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString() };
           if (Math.random() > 0.9) {
             item.scheduledDate = new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString();
           }
@@ -153,8 +158,7 @@ const ContentManagerPage: React.FC = () => {
           id: `${item.id}-copy`,
           title: `${item.title} (Copy)`,
           status: 'draft' as const, uploadedAt: new Date().toISOString(),
-          views: '0',
-        }));
+          views: '0' }));
       setContent(prev => [...prev, ...duplicatedItems]);
     }
 
@@ -174,8 +178,7 @@ return;
         if (selectedItems.has(item.id)) {
           return {
             ...item,
-            status: 'scheduled' as const, scheduledDate: scheduledDateTime,
-          };
+            status: 'scheduled' as const, scheduledDate: scheduledDateTime };
         }
         return item;
       }),
@@ -591,5 +594,4 @@ return content.length;
 };
 
 export default ContentManagerPage;
-
 

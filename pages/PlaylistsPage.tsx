@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { createUserPlaylist, getUserPlaylists } from '../services/realVideoService';
 
 import type { UserPlaylistDetails } from '../types';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const PlaylistsPage: React.FC = () => {
   const [playlists, setPlaylists] = useState<UserPlaylistDetails[]>([]);
@@ -53,8 +54,7 @@ const PlaylistsPage: React.FC = () => {
         videoIds: newPlaylist.videos?.map((v) => v.id) || [],
         videoCount: newPlaylist.videos?.length || 0,
         createdAt: newPlaylist.createdAt,
-        updatedAt: newPlaylist.updatedAt,
-      };
+        updatedAt: newPlaylist.updatedAt };
       setPlaylists(prev => [playlistWithDetails, ...prev]);
       setIsCreateModalOpen(false);
       setNewPlaylistName('');
@@ -204,6 +204,4 @@ const PlaylistsPage: React.FC = () => {
 };
 
 export default PlaylistsPage;
-
-
 

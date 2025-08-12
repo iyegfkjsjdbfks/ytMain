@@ -3,6 +3,7 @@ import { useEffect, useState, FC, ChangeEvent, MouseEvent } from 'react';
 
 import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { PlusIcon } from '@heroicons/react/24/outline';
 const BellIconSolid = BellSolidIcon;
 
 interface SubscriptionManagerProps {
@@ -18,8 +19,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
   channelAvatarUrl,
   channelId,
   subscriberCount,
-  onSubscriptionChange,
-}) => {
+  onSubscriptionChange }) => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,8 +48,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
           subscriberCount,
           isSubscribed: true,
           notificationsEnabled: true,
-          subscribedAt: new Date().toISOString(),
-        };
+          subscribedAt: new Date().toISOString() };
         setNotificationsEnabled(true);
       } else {
         delete subscriptions[channelId];

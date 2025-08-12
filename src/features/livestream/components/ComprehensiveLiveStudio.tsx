@@ -11,8 +11,7 @@ interface ComprehensiveLiveStudioProps {
 }
 
 const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
-  className = '',
-}) => {
+  className = '' }) => {
   const [currentStream, setCurrentStream] = useState<LiveStream | null>(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [isPreviewing, setIsPreviewing] = useState(false);
@@ -42,8 +41,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     bitrate: 4500,
     frameRate: 30 as 30 | 60,
     platforms: [] as any[],
-    scheduledStartTime: undefined as Date | undefined,
-  });
+    scheduledStartTime: undefined as Date | undefined });
 
   const [stats, setStats] = useState({
     viewers: 0,
@@ -54,8 +52,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     superChatAmount: 0,
     streamHealth: 'excellent' as 'excellent' | 'good' | 'fair' | 'poor',
     bitrate: 4500,
-    latency: 2000,
-  });
+    latency: 2000 });
 
   // Setup camera and microphone
   const setupMedia = async () => {
@@ -64,14 +61,11 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         video: {
           width: { ideal: 1920 },
           height: { ideal: 1080 },
-          frameRate: { ideal: streamSettings.frameRate },
-        },
+          frameRate: { ideal: streamSettings.frameRate } },
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
-          autoGainControl: true,
-        },
-      });
+          autoGainControl: true } });
 
       setStream(mediaStream);
       if (videoRef.current) {
@@ -129,9 +123,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
           frameRate: streamSettings.frameRate,
           enableRecording: streamSettings.enableRecording,
           enableMultiplatform: streamSettings.enableMultiplatform,
-          platforms: streamSettings.platforms,
-        },
-      };
+          platforms: streamSettings.platforms } };
 
       if (streamSettings.scheduledStartTime) {
         streamData.scheduledStartTime = streamSettings.scheduledStartTime;
@@ -223,8 +215,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         setStats(prev => ({
           ...prev,
           viewers: Math.floor(Math.random() * 1000) + 100,
-          duration: prev.duration + 1,
-        }));
+          duration: prev.duration + 1 }));
       }
     }, 1000);
 
@@ -355,8 +346,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   onChange={e =>
                     setStreamSettings(prev => ({
                       ...prev,
-                      title: e.target.value,
-                    }))
+                      title: e.target.value }))
                   }
                   placeholder='Enter stream title'
                   className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -376,8 +366,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   onChange={e =>
                     setStreamSettings(prev => ({
                       ...prev,
-                      category: e.target.value,
-                    }))
+                      category: e.target.value }))
                   }
                   className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                   disabled={isStreaming}
@@ -404,8 +393,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   onChange={e =>
                     setStreamSettings(prev => ({
                       ...prev,
-                      visibility: e.target.value as any,
-                    }))
+                      visibility: e.target.value as any }))
                   }
                   className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                   disabled={isStreaming}
@@ -429,8 +417,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                 onChange={e =>
                   setStreamSettings(prev => ({
                     ...prev,
-                    description: e.target.value,
-                  }))
+                    description: e.target.value }))
                 }
                 placeholder='Describe your stream...'
                 rows={3}
@@ -653,5 +640,4 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 };
 
 export default ComprehensiveLiveStudio;
-
 

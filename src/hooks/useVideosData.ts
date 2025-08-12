@@ -46,8 +46,7 @@ export function useVideosData(
   }, [type, useUnified]);
 
   return useAsyncData<UnifiedVideoMetadata[] | Video[]>(fetchVideos, {
-    initialData: [],
-  });
+    initialData: [] });
 }
 
 /**

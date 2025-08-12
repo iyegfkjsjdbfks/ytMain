@@ -1,7 +1,6 @@
 import React, { memo, lazy, FC, KeyboardEvent, MouseEvent } from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
 
-
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks';
 import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback  } from '../utils/componentUtils';

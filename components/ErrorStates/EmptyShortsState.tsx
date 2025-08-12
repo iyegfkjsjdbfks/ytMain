@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { PlayIcon, FunnelIcon  } from '@heroicons/react/24/outline';
 
 interface EmptyShortsStateProps {
@@ -10,8 +8,7 @@ interface EmptyShortsStateProps {
 
 const EmptyShortsState: React.FC<EmptyShortsStateProps> = ({
   hasFilters = false,
-  onClearFilters,
-}) => {
+  onClearFilters }) => {
   return (
     <div className="flex flex-col items-center justify-center h-full bg-black text-white p-8">
       <div className="text-center max-w-md">

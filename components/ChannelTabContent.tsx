@@ -1,3 +1,4 @@
+import { Video } from '../types';
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
@@ -11,6 +12,9 @@ import { parseRelativeDate } from '../utils/dateUtils';
 import VideoCard from './VideoCard';
 
 import type { Channel } from '../types';
+import { CalendarDaysIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon } from '@heroicons/react/24/outline';
+import { SignalSlashIcon } from '@heroicons/react/24/outline';
 
 interface ChannelTabContentProps {
   activeTab: string;
@@ -27,8 +31,7 @@ const ChannelTabContent = ({
   videos,
   playlists,
   communityPosts,
-  onPlaylistTabSelect,
-}: ChannelTabContentProps) => {
+  onPlaylistTabSelect }: ChannelTabContentProps) => {
 
   const popularVideos = useMemo(() => {
     return [...videos].sort((a, b) => {
@@ -206,6 +209,4 @@ return null;
 };
 
 export default ChannelTabContent;
-
-
 

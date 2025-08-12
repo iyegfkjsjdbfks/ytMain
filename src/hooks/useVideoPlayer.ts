@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { logger } from '../utils/logger';
@@ -46,8 +47,8 @@ export interface VideoPlayerControls {
   setQuality: (quality: any) => void;
 }
 
-export const useVideoPlayer = (
-  options: VideoPlayerOptions = {}
+export const useVideoPlayer = (;
+  options: VideoPlayerOptions = {},
 ): VideoPlayerState & VideoPlayerControls => {
   const {
     autoplay = false,
@@ -64,8 +65,7 @@ export const useVideoPlayer = (
     onVolumeChange,
     onPlaybackRateChange,
     onFullscreenChange,
-    onError,
-  } = options;
+    onError } = options;
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [state, setState] = useState<VideoPlayerState>({
@@ -78,8 +78,7 @@ export const useVideoPlayer = (
     isPictureInPicture: false,
     playbackRate: initialPlaybackRate,
     isLoading: true,
-    error: null,
-  });
+    error: null });
 
   // Set up event listeners
   useEffect(() => {
@@ -117,8 +116,7 @@ export const useVideoPlayer = (
         setState(prev => ({
           ...prev,
           volume: video.volume,
-          isMuted: video.muted,
-        }));
+          isMuted: video.muted }));
         onVolumeChange?.(video.volume);
       }
     };
@@ -137,8 +135,8 @@ export const useVideoPlayer = (
     };
 
     const handleError = () => {
-      const error = new Error(
-        `Video error: ${video.error?.message || 'Unknown error'}`
+      const error = new Error(;
+        `Video error: ${video.error?.message || 'Unknown error'}`,
       );
       setState(prev => ({ ...prev, error, isLoading: false }));
       onError?.(error);
@@ -166,47 +164,47 @@ export const useVideoPlayer = (
     }
 
     // Add event listeners
-    video.addEventListener('play', handlePlay);
-    video.addEventListener('pause', handlePause);
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('durationchange', handleDurationChange);
-    video.addEventListener('volumechange', handleVolumeChange);
-    video.addEventListener('ratechange', handlePlaybackRateChange);
-    video.addEventListener('enterpictureinpicture', () =>
+    video.addEventListener('play', handlePlay as EventListener);
+    video.addEventListener('pause', handlePause as EventListener);
+    video.addEventListener('timeupdate', handleTimeUpdate as EventListener);
+    video.addEventListener('durationchange', handleDurationChange as EventListener);
+    video.addEventListener('volumechange', handleVolumeChange as EventListener);
+    video.addEventListener('ratechange', handlePlaybackRateChange as EventListener);
+    video.addEventListener('enterpictureinpicture', ( as EventListener) =>
       setState(prev => ({ ...prev, isPictureInPicture: true }))
     );
-    video.addEventListener('leavepictureinpicture', () =>
+    video.addEventListener('leavepictureinpicture', ( as EventListener) =>
       setState(prev => ({ ...prev, isPictureInPicture: false }))
     );
-    video.addEventListener('error', handleError);
-    video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('waiting', handleWaiting);
-    video.addEventListener('playing', handlePlaying);
-    video.addEventListener('ended', () => onEnded?.());
+    video.addEventListener('error', handleError as EventListener);
+    video.addEventListener('loadeddata', handleLoadedData as EventListener);
+    video.addEventListener('waiting', handleWaiting as EventListener);
+    video.addEventListener('playing', handlePlaying as EventListener);
+    video.addEventListener('ended', ( as EventListener) => onEnded?.());
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('fullscreenchange', handleFullscreenChange as EventListener);
 
     // Clean up
     return () => {
-      video.removeEventListener('play', handlePlay);
-      video.removeEventListener('pause', handlePause);
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('durationchange', handleDurationChange);
-      video.removeEventListener('volumechange', handleVolumeChange);
-      video.removeEventListener('ratechange', handlePlaybackRateChange);
-      video.removeEventListener('enterpictureinpicture', () =>
+      video.removeEventListener('play', handlePlay as EventListener);
+      video.removeEventListener('pause', handlePause as EventListener);
+      video.removeEventListener('timeupdate', handleTimeUpdate as EventListener);
+      video.removeEventListener('durationchange', handleDurationChange as EventListener);
+      video.removeEventListener('volumechange', handleVolumeChange as EventListener);
+      video.removeEventListener('ratechange', handlePlaybackRateChange as EventListener);
+      video.removeEventListener('enterpictureinpicture', ( as EventListener) =>
         setState(prev => ({ ...prev, isPictureInPicture: true }))
       );
-      video.removeEventListener('leavepictureinpicture', () =>
+      video.removeEventListener('leavepictureinpicture', ( as EventListener) =>
         setState(prev => ({ ...prev, isPictureInPicture: false }))
       );
-      video.removeEventListener('error', handleError);
-      video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('waiting', handleWaiting);
-      video.removeEventListener('playing', handlePlaying);
-      video.removeEventListener('ended', () => onEnded?.());
+      video.removeEventListener('error', handleError as EventListener);
+      video.removeEventListener('loadeddata', handleLoadedData as EventListener);
+      video.removeEventListener('waiting', handleWaiting as EventListener);
+      video.removeEventListener('playing', handlePlaying as EventListener);
+      video.removeEventListener('ended', ( as EventListener) => onEnded?.());
 
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange as EventListener);
     };
   }, [
     autoplay,
@@ -221,7 +219,7 @@ export const useVideoPlayer = (
     onVolumeChange,
     onPlaybackRateChange,
     onFullscreenChange,
-    onError,
+    onError
   ]);
 
   // Play the video
@@ -238,7 +236,7 @@ export const useVideoPlayer = (
         setState(prev => ({ ...prev, isPlaying: false }));
       } else {
         // More specific error handling for network and cache issues
-        const errorMessage =
+        const errorMessage =;
           error instanceof Error ? error.message : String(error);
         logger.warn('Video playback issue:', errorMessage);
 
@@ -248,7 +246,7 @@ export const useVideoPlayer = (
           errorMessage.includes('ERR_NETWORK')
         ) {
           logger.info(
-            'Video may be temporarily unavailable due to network/cache issues'
+            'Video may be temporarily unavailable due to network/cache issues',
           );
           setState(prev => ({ ...prev, isPlaying: false }));
         } else {
@@ -294,8 +292,7 @@ export const useVideoPlayer = (
         setState(prev => ({
           ...prev,
           volume: newVolume,
-          isMuted: newVolume === 0,
-        }));
+          isMuted: newVolume === 0 }));
         onVolumeChange?.(newVolume);
       }
     },
@@ -324,8 +321,7 @@ export const useVideoPlayer = (
       videoRef.current.muted = !videoRef.current.muted;
       setState(prev => ({
         ...prev,
-        isMuted: videoRef.current?.muted ?? false,
-      }));
+        isMuted: videoRef.current?.muted ?? false }));
     }
   }, []);
 
@@ -422,8 +418,7 @@ export const useVideoPlayer = (
       currentTime,
       duration,
       isLoading,
-      error,
-    },
+      error },
     actions: {
       play,
       pause,
@@ -437,7 +432,5 @@ export const useVideoPlayer = (
       togglePictureInPicture,
       setVideoRef,
       seek,
-      reset,
-    },
-  };
+      reset } };
 };

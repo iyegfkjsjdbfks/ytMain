@@ -168,9 +168,7 @@ return undefined;
         updatedAt: now,
         createdBy: 'system',
         tags: _flag.metadata && _flag.metadata.tags || [],
-        environment: process.env.NODE_ENV || 'development',
-      },
-    };
+        environment: process.env.NODE_ENV || 'development' } };
 
     this.flags.set(_flag.id, fullFlag);
     this.clearEvaluationCache(_flag.id);
@@ -185,8 +183,7 @@ return undefined;
     advancedAPM.recordMetric('feature-_flag-created', 1, {
       flagId: _flag.id,
       flagName: _flag.name,
-      type: _flag.type,
-    });
+      type: _flag.type });
   }
 
   /**
@@ -212,8 +209,7 @@ return undefined;
     // Cache result (5 minute TTL)
     this.evaluationCache.set(cacheKey, {
       value: evaluation.value,
-      expiry: Date.now() + 5 * 60 * 1000,
-    });
+      expiry: Date.now() + 5 * 60 * 1000 });
 
     // Record evaluation
     this.evaluationHistory.push(evaluation);
@@ -229,8 +225,7 @@ return undefined;
         flagId,
         value: String(evaluation.value),
         variant: evaluation.variant || 'default',
-        reason: evaluation.reason,
-      });
+        reason: evaluation.reason });
     }
 
     // Track performance impact
@@ -295,8 +290,7 @@ return undefined;
 
     advancedAPM.recordMetric('feature-_flag-rollout-updated', 1, {
       flagId,
-      percentage: percentage.toString(),
-    });
+      percentage: percentage.toString() });
   }
 
   /**
@@ -317,8 +311,7 @@ return undefined;
 
     advancedAPM.recordMetric('feature-_flag-toggled', 1, {
       flagId,
-      enabled: enabled.toString(),
-    });
+      enabled: enabled.toString() });
   }
 
   /**
@@ -362,9 +355,7 @@ return undefined;
       conversionRates,
       performanceImpact: {
         averageLoadTime: Math.random() * 500 + 200,
-        errorRate: Math.random() * 0.02,
-      },
-    };
+        errorRate: Math.random() * 0.02 } };
   }
 
   /**
@@ -440,8 +431,7 @@ return [];
           sampleSize: testData.sampleSize,
           confidence,
           significantDifference,
-          winningVariant: significantDifference && winningVariant ? winningVariant : '',
-        });
+          winningVariant: significantDifference && winningVariant ? winningVariant : '' });
       }
     }
 
@@ -467,8 +457,7 @@ return [];
       return {
         action: 'continue',
         reason: 'Insufficient data for analysis',
-        confidence: 0,
-      };
+        confidence: 0 };
     }
 
     // Find results with significant differences
@@ -478,8 +467,7 @@ return [];
       return {
         action: 'extend_test',
         reason: 'No statistically significant differences found',
-        confidence: Math.max(...results.map(r => r.confidence)),
-      };
+        confidence: Math.max(...results.map(r => r.confidence)) };
     }
 
     // Check if there's a consistent winner
@@ -498,15 +486,13 @@ return [];
         action: 'promote_winner',
         reason: `Variant '${topWinner[0]}' shows consistent improvement across metrics`,
         winningVariant: topWinner[0],
-        confidence: Math.max(...significantResults.map(r => r.confidence)),
-      };
+        confidence: Math.max(...significantResults.map(r => r.confidence)) };
     }
 
     return {
       action: 'continue',
       reason: 'Mixed results, continue testing for clearer winner',
-      confidence: Math.max(...results.map(r => r.confidence)),
-    };
+      confidence: Math.max(...results.map(r => r.confidence)) };
   }
 
   /**
@@ -538,8 +524,7 @@ return undefined;
       advancedAPM.recordMetric('feature-_flag-auto-promoted', 1, {
         flagId,
         winningVariant: winningVariant.id,
-        confidence: recommendation.confidence.toString(),
-      });
+        confidence: recommendation.confidence.toString() });
     }
   }
 
@@ -563,8 +548,7 @@ return undefined;
 
     advancedAPM.recordMetric('feature-_flag-emergency-rollback', 1, {
       flagId,
-      reason,
-    });
+      reason });
   }
 
   private performEvaluation(_flag: FeatureFlag, _context: UserContext): FlagEvaluation {
@@ -573,8 +557,7 @@ return undefined;
       value: _flag.defaultValue,
       timestamp: Date.now(),
       _context,
-      reason: 'default',
-    };
+      reason: 'default' };
 
     // Add userId only if it exists
     if (_context.userId) {
@@ -702,8 +685,7 @@ continue;
         return {
           shouldApply: true,
           value: _flag.defaultValue,
-          reason: 'immediate_rollout',
-        };
+          reason: 'immediate_rollout' };
 
       case 'gradual':
       case 'user-based':
@@ -717,15 +699,13 @@ continue;
             shouldApply: true,
             value: variant.value,
             variant: variant.id,
-            reason: 'variant_selected',
-          };
+            reason: 'variant_selected' };
         }
 
         return {
           shouldApply: shouldInclude,
           value: _flag.defaultValue,
-          reason: shouldInclude ? 'rollout_included' : 'rollout_excluded',
-        };
+          reason: shouldInclude ? 'rollout_included' : 'rollout_excluded' };
 
       case 'geographic':
         const rawGeo = _flag.rolloutStrategy?.config.geoTargets as unknown;
@@ -737,15 +717,13 @@ continue;
         return {
           shouldApply: geoMatch,
           value: _flag.defaultValue,
-          reason: geoMatch ? 'geo_included' : 'geo_excluded',
-        };
+          reason: geoMatch ? 'geo_included' : 'geo_excluded' };
 
       default:
         return {
           shouldApply: false,
           value: _flag.defaultValue,
-          reason: 'unknown_strategy',
-        };
+          reason: 'unknown_strategy' };
     }
   }
 
@@ -756,8 +734,7 @@ continue;
         id: 'default',
         name: 'Default',
         value: null,
-        weight: 100,
-      };
+        weight: 100 };
     }
 
     // Normalize hash to 0-100 range
@@ -847,8 +824,7 @@ continue;
 
     advancedAPM.recordMetric('feature-_flag-performance-impact', loadTime, {
       flagId,
-      flagValue: String(flagValue),
-    });
+      flagValue: String(flagValue) });
   }
 
   private startMonitoring(): void {
@@ -967,8 +943,7 @@ return undefined;
           percentage: 10,
           incrementPercentage: 10,
           incrementInterval: 60, // 1 hour
-        },
-      },
+        } },
       targeting: [
         {
           id: 'premium-users',
@@ -977,27 +952,23 @@ return undefined;
             {
               attribute: 'userType',
               operator: 'equals',
-              value: 'premium',
-            },
+              value: 'premium' },
           ],
           operator: 'AND',
           value: true,
-          enabled: true,
-        },
+          enabled: true },
       ],
       variants: [
         {
           id: 'control',
           name: 'Control (Old Player)',
           value: false,
-          weight: 50,
-        },
+          weight: 50 },
         {
           id: 'treatment',
           name: 'Treatment (New Player)',
           value: true,
-          weight: 50,
-        },
+          weight: 50 },
       ],
       monitoring: {
         trackEvents: true,
@@ -1007,11 +978,8 @@ return undefined;
             metric: 'error_rate',
             operator: 'gt',
             value: 0.05,
-            action: 'rollback',
-          },
-        ],
-      },
-    });
+            action: 'rollback' },
+        ] } });
 
     this.createFlag({
       id: 'dark-mode',
@@ -1022,15 +990,12 @@ return undefined;
       enabled: true,
       rolloutStrategy: {
         type: 'immediate',
-        config: {},
-      },
+        config: {} },
       targeting: [],
       monitoring: {
         trackEvents: true,
         trackPerformance: false,
-        alertThresholds: [],
-      },
-    });
+        alertThresholds: [] } });
 
     this.createFlag({
       id: 'recommendation-algorithm',
@@ -1042,29 +1007,24 @@ return undefined;
       rolloutStrategy: {
         type: 'user-based',
         config: {
-          percentage: 100,
-        },
-      },
+          percentage: 100 } },
       targeting: [],
       variants: [
         {
           id: 'collaborative',
           name: 'Collaborative Filtering',
           value: 'collaborative',
-          weight: 33,
-        },
+          weight: 33 },
         {
           id: 'content-based',
           name: 'Content-Based',
           value: 'content-based',
-          weight: 33,
-        },
+          weight: 33 },
         {
           id: 'hybrid',
           name: 'Hybrid Approach',
           value: 'hybrid',
-          weight: 34,
-        },
+          weight: 34 },
       ],
       monitoring: {
         trackEvents: true,
@@ -1074,11 +1034,8 @@ return undefined;
             metric: 'conversion_rate',
             operator: 'lt',
             value: 0.05,
-            action: 'notify',
-          },
-        ],
-      },
-    });
+            action: 'notify' },
+        ] } });
   }
 }
 
@@ -1100,7 +1057,6 @@ export type {
   AlertThreshold,
   UserContext,
   FlagEvaluation,
-  ABTestResult,
-};
+  ABTestResult };
 
 // Export class for custom implementations

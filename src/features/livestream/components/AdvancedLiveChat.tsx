@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 interface AdvancedLiveChatProps {
   streamId: string;
   className?: string;
@@ -12,8 +10,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
   streamId,
   className,
   isOwner,
-  isModerator,
-}) => {
+  isModerator }) => {
   return (
     <div className={className}>
       <div className='p-4'>
@@ -33,5 +30,4 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
 };
 
 export default AdvancedLiveChat;
-
 

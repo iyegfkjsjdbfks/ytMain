@@ -22,9 +22,6 @@ const queryClient = new QueryClient({
     },
     mutations: {
       retry: 0, // No retries for mutations for faster UX
-      networkMode: 'offlineFirst',
-    },
-  },
-});
+      networkMode: 'offlineFirst' } } });
 
 export { queryClient };

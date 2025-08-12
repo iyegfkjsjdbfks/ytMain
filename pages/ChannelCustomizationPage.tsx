@@ -2,6 +2,8 @@ import React, { useState, FC } from 'react';
 
 import { PaintBrushIcon, PhotoIcon  } from '@heroicons/react/24/outline';
 import { XMarkIcon as XMarkSolidIcon, CheckIcon as CheckSolidIcon  } from '@heroicons/react/24/solid';
+import { EyeIcon } from '@heroicons/react/24/outline';
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
 const XMarkIconSolid = XMarkSolidIcon;
 const CheckIconSolid = CheckSolidIcon;
 
@@ -44,19 +46,16 @@ const ChannelCustomizationPage: React.FC = () => {
       website: '',
       twitter: '',
       instagram: '',
-      facebook: '',
-    },
+      facebook: '' },
     channelLayout: 'default',
     watermark: '',
-    endScreenTemplate: 'default',
-  });
+    endScreenTemplate: 'default' });
 
   const [stats] = useState<ChannelStats>({
     subscribers: 125000,
     totalViews: 2500000,
     videosCount: 156,
-    joinDate: 'Jan 15, 2020',
-  });
+    joinDate: 'Jan 15, 2020' });
 
   const [activeTab, setActiveTab] = useState<'branding' | 'layout' | 'info' | 'featured'>('branding');
   const [previewMode, setPreviewMode] = useState(false);
@@ -70,8 +69,7 @@ const ChannelCustomizationPage: React.FC = () => {
   const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value: string | number) => {
     setBranding(prev => ({
       ...prev,
-      socialLinks: { ...prev.socialLinks, [platform]: value },
-    }));
+      socialLinks: { ...prev.socialLinks, [platform]: value } }));
     setUnsavedChanges(true);
   };
 
@@ -79,8 +77,7 @@ const ChannelCustomizationPage: React.FC = () => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
       setBranding(prev => ({
         ...prev,
-        channelKeywords: [...prev.channelKeywords, keyword.trim()],
-      }));
+        channelKeywords: [...prev.channelKeywords, keyword.trim()] }));
       setUnsavedChanges(true);
     }
   };
@@ -88,8 +85,7 @@ const ChannelCustomizationPage: React.FC = () => {
   const handleKeywordRemove = (keyword: any) => {
     setBranding(prev => ({
       ...prev,
-      channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword),
-    }));
+      channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword) }));
     setUnsavedChanges(true);
   };
 

@@ -35,22 +35,18 @@ interface UnifiedDataConfig {
 const defaultConfig: UnifiedDataConfig = {
   sources: {
     local: false,
-    youtube: true,
-  },
+    youtube: true },
   limits: {
     local: 0,
     youtube: 50,
-    total: 50,
-  },
+    total: 50 },
   caching: {
     enabled: true,
     ttl: 10 * 60 * 1000, // 10 minutes
   },
   mixing: {
     strategy: 'source-priority',
-    sourcePriority: ['youtube'],
-  },
-};
+    sourcePriority: ['youtube'] } };
 
 /**
  * Search filters for unified queries
@@ -150,16 +146,12 @@ class UnifiedDataService {
       sources: {
         local: {
           count: localVideos.length,
-          hasMore: localVideos.length >= (this.config.limits.local || 25),
-        },
+          hasMore: localVideos.length >= (this.config.limits.local || 25) },
         youtube: {
           count: youtubeVideos.length,
-          hasMore: youtubeVideos.length >= (this.config.limits.youtube || 25),
-        },
-      },
+          hasMore: youtubeVideos.length >= (this.config.limits.youtube || 25) } },
       totalCount: mixedVideos.length,
-      hasMore: mixedVideos.length > limit,
-    };
+      hasMore: mixedVideos.length > limit };
 
     this.setCachedData(cacheKey, response);
     return response;
@@ -227,12 +219,9 @@ class UnifiedDataService {
         },
         youtube: {
           count: youtubeVideos.length,
-          hasMore: youtubeVideos.length >= (this.config.limits.youtube || 25),
-        },
-      },
+          hasMore: youtubeVideos.length >= (this.config.limits.youtube || 25) } },
       totalCount: mixedVideos.length,
-      hasMore: mixedVideos.length > limit,
-    };
+      hasMore: mixedVideos.length > limit };
 
     this.setCachedData(cacheKey, response);
     return response;
@@ -326,8 +315,7 @@ class UnifiedDataService {
                   `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
                 subscribers: 0,
                 subscribersFormatted: '0 subscribers',
-                isVerified: false,
-              },
+                isVerified: false },
               duration: video.duration || '0:00',
               publishedAt: video.publishedAt || new Date().toISOString(),
               publishedAtFormatted: this.formatTimeAgo(
@@ -344,8 +332,7 @@ class UnifiedDataService {
                 definition: 'hd',
                 captions: false,
                 language: 'en',
-                license: 'youtube',
-              },
+                license: 'youtube' },
               // Required properties for Video interface compatibility
               uploadedAt: video.publishedAt || new Date().toISOString(),
               channelName: video.channelName || '',
@@ -354,8 +341,7 @@ class UnifiedDataService {
                 video.channelAvatarUrl ||
                 `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
               createdAt: video.publishedAt || new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            };
+              updatedAt: new Date().toISOString() };
 
             this.setCachedData(cacheKey, normalized);
             return normalized;
@@ -396,8 +382,7 @@ class UnifiedDataService {
           channelName: googleSearchVideo.channelName,
           channelAvatarUrl: googleSearchVideo.channelAvatarUrl,
           views: googleSearchVideo.viewCount,
-          source: 'Google Custom Search JSON API',
-        });
+          source: 'Google Custom Search JSON API' });
 
         // Convert Google Custom Search result to unified format
         const normalized: UnifiedVideoMetadata = {
@@ -426,8 +411,7 @@ class UnifiedDataService {
             isVerified:
               googleSearchVideo.channelName?.includes('VEVO') ||
               googleSearchVideo.channelName?.includes('Official') ||
-              false,
-          },
+              false },
           duration: googleSearchVideo.duration || '0:00',
           publishedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
           publishedAtFormatted: this.formatTimeAgo(
@@ -439,8 +423,7 @@ class UnifiedDataService {
           isShort: false,
           visibility: 'public' as const, source: 'google-search' as const, metadata: {
             quality: 'hd',
-            definition: 'high',
-          },
+            definition: 'high' },
           // Required properties for Video interface compatibility
           uploadedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
           channelName: googleSearchVideo.channelName || 'YouTube Channel',
@@ -451,8 +434,7 @@ class UnifiedDataService {
             googleSearchVideo.channelAvatarUrl ||
             `https://ui-avatars.com/api/?name=${encodeURIComponent(googleSearchVideo.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
           createdAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
+          updatedAt: new Date().toISOString() };
 
         // Cache the result
         this.setCachedData(cacheKey, normalized);
@@ -517,8 +499,7 @@ class UnifiedDataService {
               isVerified:
                 googleSearchVideo.channelName?.includes('VEVO') ||
                 googleSearchVideo.channelName?.includes('Official') ||
-                false,
-            },
+                false },
             duration: googleSearchVideo.duration || '0:00',
             publishedAt:
               googleSearchVideo.uploadedAt || new Date().toISOString(),
@@ -531,8 +512,7 @@ class UnifiedDataService {
             isShort: false,
             visibility: 'public' as const, source: 'google-search' as const, metadata: {
               quality: 'hd',
-              definition: 'high',
-            },
+              definition: 'high' },
             // Required properties for Video interface compatibility
             uploadedAt:
               googleSearchVideo.uploadedAt || new Date().toISOString(),
@@ -543,8 +523,7 @@ class UnifiedDataService {
               googleSearchVideo.channelAvatarUrl ||
               `https://ui-avatars.com/api/?name=${encodeURIComponent(googleSearchVideo.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
             createdAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          };
+            updatedAt: new Date().toISOString() };
 
           // Cache the result
           this.setCachedData(cacheKey, normalized);
@@ -559,8 +538,7 @@ class UnifiedDataService {
           message: error instanceof Error ? error.message : String(error),
           stack: error instanceof Error ? error.stack : undefined,
           videoId: extractedYoutubeId,
-          originalId: id,
-        });
+          originalId: id });
 
         // Check if YouTube API is available as fallback
         if (isYouTubeDataApiBlocked()) {
@@ -607,8 +585,7 @@ class UnifiedDataService {
                 channelName: video.channelName,
                 channelAvatarUrl: video.channelAvatarUrl,
                 views: video.viewCount,
-                source: 'YouTube Data API v3',
-              });
+                source: 'YouTube Data API v3' });
             }
             // Convert already processed YouTube video to unified format
             const processedVideo = video;
@@ -635,8 +612,7 @@ class UnifiedDataService {
                   '',
                 subscribers: 0, // Will be fetched separately if needed
                 subscribersFormatted: '0 subscribers',
-                isVerified: processedVideo.channel?.isVerified || false,
-              },
+                isVerified: processedVideo.channel?.isVerified || false },
               duration: processedVideo.duration,
               publishedAt:
                 processedVideo.publishedAt || new Date().toISOString(),
@@ -654,8 +630,7 @@ class UnifiedDataService {
                 definition: 'hd',
                 captions: false,
                 language: 'en',
-                license: 'youtube',
-              },
+                license: 'youtube' },
               // Required properties for Video interface compatibility
               uploadedAt:
                 processedVideo.publishedAt ||
@@ -671,8 +646,7 @@ class UnifiedDataService {
                 processedVideo.publishedAt ||
                 processedVideo.uploadedAt ||
                 new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            };
+              updatedAt: new Date().toISOString() };
             this.setCachedData(cacheKey, normalized);
             return normalized;
           }
@@ -714,8 +688,7 @@ class UnifiedDataService {
                 avatarUrl: processedVideo.channelAvatarUrl || '',
                 subscribers: 0,
                 subscribersFormatted: '0 subscribers',
-                isVerified: processedVideo.channel?.isVerified || false,
-              },
+                isVerified: processedVideo.channel?.isVerified || false },
               duration: processedVideo.duration,
               publishedAt:
                 processedVideo.publishedAt || new Date().toISOString(),
@@ -733,8 +706,7 @@ class UnifiedDataService {
                 definition: 'hd',
                 captions: false,
                 language: 'en',
-                license: 'youtube',
-              },
+                license: 'youtube' },
               // Required properties for Video interface compatibility
               uploadedAt:
                 processedVideo.publishedAt ||
@@ -747,8 +719,7 @@ class UnifiedDataService {
                 processedVideo.publishedAt ||
                 processedVideo.uploadedAt ||
                 new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            };
+              updatedAt: new Date().toISOString() };
             this.setCachedData(cacheKey, normalized);
             return normalized;
           }
@@ -915,8 +886,7 @@ class UnifiedDataService {
             isVerified:
               video.channelName?.includes('VEVO') ||
               video.channelName?.includes('Official') ||
-              false,
-          },
+              false },
           duration: video.duration || '0:00',
           publishedAt: video.uploadedAt || new Date().toISOString(),
           publishedAtFormatted: this.formatTimeAgo(
@@ -929,8 +899,7 @@ class UnifiedDataService {
           visibility: 'public' as const, source: 'google-search' as const, // Discovery source
           metadata: {
             quality: 'hd',
-            definition: 'high',
-          },
+            definition: 'high' },
           // Required properties for Video interface compatibility
           uploadedAt: video.uploadedAt || new Date().toISOString(),
           channelName: video.channelName || 'YouTube Channel',
@@ -941,8 +910,7 @@ class UnifiedDataService {
             video.channelAvatarUrl ||
             `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
           createdAt: video.uploadedAt || new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        })
+          updatedAt: new Date().toISOString() })
       );
 
       logger.debug(
@@ -981,8 +949,7 @@ class UnifiedDataService {
 
       // Use the YouTube search service
       const searchResults = await youtubeService.searchVideos(query, {
-        maxResults: this.config.limits.youtube || 25,
-      });
+        maxResults: this.config.limits.youtube || 25 });
       const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map(
         video => ({
           id: video.id,
@@ -1001,8 +968,7 @@ class UnifiedDataService {
             avatarUrl: video.channelAvatarUrl || '',
             subscribers: 0,
             subscribersFormatted: '0 subscribers',
-            isVerified: video.channel?.isVerified || false,
-          },
+            isVerified: video.channel?.isVerified || false },
           duration: video.duration,
           publishedAt: video.publishedAt || new Date().toISOString(),
           publishedAtFormatted: this.formatTimeAgo(
@@ -1019,8 +985,7 @@ class UnifiedDataService {
             definition: 'hd',
             captions: false,
             language: 'en',
-            license: 'youtube',
-          },
+            license: 'youtube' },
           // Required properties for Video interface compatibility
           uploadedAt:
             video.publishedAt || video.uploadedAt || new Date().toISOString(),
@@ -1029,8 +994,7 @@ class UnifiedDataService {
           channelAvatarUrl: video.channelAvatarUrl || '',
           createdAt:
             video.publishedAt || video.uploadedAt || new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        })
+          updatedAt: new Date().toISOString() })
       );
 
       logger.debug(
@@ -1153,8 +1117,7 @@ class UnifiedDataService {
 
     this.cache.set(key, {
       data,
-      timestamp: Date.now(),
-    });
+      timestamp: Date.now() });
   }
 
   /**

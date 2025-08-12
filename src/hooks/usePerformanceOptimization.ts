@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import { useMemo, useCallback, useEffect, useRef, useState, memo, lazy } from 'react';
+import { useMemo, useCallback, useEffect, useRef, useState, lazy } from 'react';
 
 // Performance monitoring hook
 export const usePerformanceMonitor = (componentName: any) => {
@@ -94,8 +94,7 @@ export const useMemoryMonitor = () => {
         setMemoryInfo({
           usedJSHeapSize: memory.usedJSHeapSize,
           totalJSHeapSize: memory.totalJSHeapSize,
-          jsHeapSizeLimit: memory.jsHeapSizeLimit,
-        });
+          jsHeapSizeLimit: memory.jsHeapSizeLimit });
       }
     };
 
@@ -136,8 +135,7 @@ export const useIntersectionObserver = (
       {
         threshold: 0.1,
         rootMargin: '50px',
-        ...options,
-      }
+        ...options }
     );
 
     observer.observe(element);

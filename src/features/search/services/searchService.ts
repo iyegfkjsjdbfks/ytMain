@@ -1,11 +1,11 @@
+import type { Video } from '../types';
 import { api } from '../../../services/api/base';
 import type {
   Video,
   Channel,
   Playlist,
   User,
-  ApiResponse,
-} from '../../../types/core';
+  ApiResponse } from '../../../types/core';
 
 /**
  * Advanced Search Service
@@ -74,8 +74,7 @@ class SearchService {
       q: query,
       ...filters,
       page,
-      limit,
-    });
+      limit });
   }
 
   /**
@@ -111,8 +110,7 @@ class SearchService {
       q: query,
       ...filters,
       page,
-      limit,
-    });
+      limit });
   }
 
   /**
@@ -128,8 +126,7 @@ class SearchService {
       q: query,
       ...filters,
       page,
-      limit,
-    });
+      limit });
   }
 
   /**
@@ -145,8 +142,7 @@ class SearchService {
       q: query,
       ...filters,
       page,
-      limit,
-    });
+      limit });
   }
 
   /**
@@ -168,8 +164,7 @@ class SearchService {
       query,
       ...options,
       page,
-      limit,
-    });
+      limit });
   }
 
   /**
@@ -306,8 +301,7 @@ class SearchService {
       q: query,
       ...filters,
       page,
-      limit,
-    });
+      limit });
   }
 
   /**
@@ -322,8 +316,7 @@ class SearchService {
     return api.get(`/api/playlists/${playlistId}/search`, {
       q: query,
       page,
-      limit,
-    });
+      limit });
   }
 
   /**
@@ -350,8 +343,7 @@ class SearchService {
     return api.post('/api/search/report', {
       query,
       issue,
-      description,
-    });
+      description });
   }
 
   /**

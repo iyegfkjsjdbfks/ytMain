@@ -60,4 +60,3 @@ const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
 
 export default ProtectedVideoPlayer;
 
-

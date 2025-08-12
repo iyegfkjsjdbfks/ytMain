@@ -24,8 +24,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
   videoUrl,
   isVisible,
   onClose,
-  className = '',
-}) => {
+  className = '' }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
@@ -51,8 +50,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
 
         setPosition({
           x: Math.max(0, Math.min(newX, maxX)),
-          y: Math.max(0, Math.min(newY, maxY)),
-        });
+          y: Math.max(0, Math.min(newY, maxY)) });
       }
     };
 
@@ -61,13 +59,13 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
     };
 
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove as EventListener);
+      document.addEventListener('mouseup', handleMouseUp as EventListener);
     }
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMouseMove as EventListener);
+      document.removeEventListener('mouseup', handleMouseUp as EventListener);
     };
   }, [isDragging, dragOffset]);
 
@@ -80,12 +78,12 @@ return;
     const updateTime = () => setCurrentTime(video.currentTime);
     const updateDuration = () => setDuration(video.duration);
 
-    video.addEventListener('timeupdate', updateTime);
-    video.addEventListener('loadedmetadata', updateDuration);
+    video.addEventListener('timeupdate', updateTime as EventListener);
+    video.addEventListener('loadedmetadata', updateDuration as EventListener);
 
     return () => {
-      video.removeEventListener('timeupdate', updateTime);
-      video.removeEventListener('loadedmetadata', updateDuration);
+      video.removeEventListener('timeupdate', updateTime as EventListener);
+      video.removeEventListener('loadedmetadata', updateDuration as EventListener);
     };
   }, []);
 
@@ -94,8 +92,7 @@ return;
       const rect = containerRef.current.getBoundingClientRect();
       setDragOffset({
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
+        y: e.clientY - rect.top });
       setIsDragging(true);
     }
   };
@@ -154,8 +151,7 @@ return null;
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
-        cursor: isDragging ? 'grabbing' : 'grab',
-      }}
+        cursor: isDragging ? 'grabbing' : 'grab' }}
       onMouseDown={handleMouseDown}
     >
       {isMinimized ? (

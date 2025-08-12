@@ -26,9 +26,7 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
     md: 3,
     lg: 4,
     xl: 5,
-    '2xl': 6,
-  },
-}) => {
+    '2xl': 6 } }) => {
   const getGridClasses = () => {
     const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
     const responsiveClasses = [

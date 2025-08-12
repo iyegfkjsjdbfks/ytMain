@@ -17,8 +17,7 @@ interface PerformanceDashboardProps {
 
 const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
   isVisible = false,
-  position = 'top-right',
-}) => {
+  position = 'top-right' }) => {
   const [metrics, setMetrics] = useState<PerformanceMetric[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -35,8 +34,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
         timestamp: Date.now(),
         type: name.includes('render') ? 'render' :
               name.includes('api') ? 'api' :
-              name.includes('click') || name.includes('hover') ? 'user-interaction' : 'navigation',
-      }));
+              name.includes('click') || name.includes('hover') ? 'user-interaction' : 'navigation' }));
 
       setMetrics(formattedMetrics.slice(-20)); // Keep last 20 metrics
     }, 1000);

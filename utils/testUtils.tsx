@@ -36,8 +36,7 @@ export const mockGenerators = {
     category: 'Entertainment',
     tags: ['test', 'video'],
     visibility: 'public' as const,
-    ...overrides,
-  }),
+    ...overrides }),
 
   channel: (overrides: Partial<any> = {}) => ({
     id: `channel-${Math.random().toString(36).substr(2, 9)}`,
@@ -51,8 +50,7 @@ export const mockGenerators = {
     isVerified: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    ...overrides,
-  }),
+    ...overrides }),
 
   user: (overrides: Partial<any> = {}) => ({
     id: `user-${Math.random().toString(36).substr(2, 9)}`,
@@ -71,19 +69,15 @@ export const mockGenerators = {
         subscriptions: true,
         comments: true,
         likes: true,
-        mentions: true,
-      },
+        mentions: true },
       privacy: {
         showSubscriptions: true,
         showPlaylists: true,
         allowComments: true,
-        restrictedMode: false,
-      },
-    },
+        restrictedMode: false } },
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    ...overrides,
-  }),
+    ...overrides }),
 
   comment: (overrides: Partial<any> = {}) => ({
     id: `comment-${Math.random().toString(36).substr(2, 9)}`,
@@ -95,8 +89,7 @@ export const mockGenerators = {
     updatedAt: new Date().toISOString(),
     likes: 10,
     replies: [],
-    ...overrides,
-  }),
+    ...overrides }),
 
   playlist: (overrides: Partial<any> = {}) => ({
     id: `playlist-${Math.random().toString(36).substr(2, 9)}`,
@@ -107,9 +100,7 @@ export const mockGenerators = {
     owner: mockGenerators.user(),
     isPublic: true,
     createdAt: new Date().toISOString(),
-    ...overrides,
-  }),
-};
+    ...overrides }) };
 
 // API mocking utilities
 export const apiMocks = {
@@ -127,9 +118,7 @@ export const apiMocks = {
       message: error.message || 'Internal Server Error',
       response: {
         status: error.status || 500,
-        data: { message: error.message || 'Internal Server Error' },
-      },
-    };
+        data: { message: error.message || 'Internal Server Error' } } };
 
     return vi.fn().mockImplementation(() =>
       new Promise((_, reject) => setTimeout(() => reject(apiError instanceof Error ? apiError : new Error(JSON.stringify(apiError))), delay)),
@@ -150,11 +139,8 @@ export const apiMocks = {
         total: items.length,
         totalPages: Math.ceil(items.length / pageSize),
         hasNext: endIndex < items.length,
-        hasPrev: page > 1,
-      },
-    };
-  },
-};
+        hasPrev: page > 1 } };
+  } };
 
 // Custom render function with providers
 interface CustomRenderOptions extends Omit<any, 'wrapper'> {
@@ -176,13 +162,9 @@ function createTestQueryClient(): QueryClient {
     defaultOptions: {
       queries: {
         retry: false,
-        gcTime: 0,
-      },
+        gcTime: 0 },
       mutations: {
-        retry: false,
-      },
-    },
-  });
+        retry: false } } });
 }
 
 function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockUser }) {
@@ -219,8 +201,7 @@ export function customRender(_ui: ReactElement, _options: CustomRenderOptions = 
   return {
     ...result,
     user: userEvent.setup(),
-    queryClient,
-  };
+    queryClient };
 }
 
 // Custom render hook function
@@ -287,8 +268,7 @@ export const testUtils = {
     mockIntersectionObserver.mockReturnValue({
       observe: () => null,
       unobserve: () => null,
-      disconnect: () => null,
-    });
+      disconnect: () => null });
     window.IntersectionObserver = mockIntersectionObserver;
     return mockIntersectionObserver;
   },
@@ -299,8 +279,7 @@ export const testUtils = {
     mockResizeObserver.mockReturnValue({
       observe: () => null,
       unobserve: () => null,
-      disconnect: () => null,
-    });
+      disconnect: () => null });
     window.ResizeObserver = mockResizeObserver;
     return mockResizeObserver;
   },
@@ -315,13 +294,11 @@ export const testUtils = {
       removeListener: vi.fn(),
       addEventListener: vi.fn(),
       removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }));
+      dispatchEvent: vi.fn() }));
 
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: mockMatchMedia,
-    });
+      value: mockMatchMedia });
 
     return mockMatchMedia;
   },
@@ -332,12 +309,10 @@ export const testUtils = {
       getItem: vi.fn(),
       setItem: vi.fn(),
       removeItem: vi.fn(),
-      clear: vi.fn(),
-    };
+      clear: vi.fn() };
 
     Object.defineProperty(window, 'localStorage', {
-      value: localStorageMock,
-    });
+      value: localStorageMock });
 
     return localStorageMock;
   },
@@ -363,10 +338,8 @@ export const testUtils = {
       items: files.map((file) => ({
         kind: 'file',
         type: file.type,
-        getAsFile: () => file,
-      })),
-      types: ['Files'],
-    };
+        getAsFile: () => file })),
+      types: ['Files'] };
 
     await user.pointer([
       { target: element },
@@ -376,8 +349,7 @@ export const testUtils = {
     // Simulate drop event
     const dropEvent = new Event('drop', { bubbles: true });
     Object.defineProperty(dropEvent, 'dataTransfer', {
-      value: dataTransfer,
-    });
+      value: dataTransfer });
 
     element.dispatchEvent(dropEvent);
   },
@@ -386,8 +358,7 @@ export const testUtils = {
   generateMockVideo: mockGenerators.video,
   generateMockChannel: mockGenerators.channel,
   generateMockComment: mockGenerators.comment,
-  generateMockUser: mockGenerators.user,
-};
+  generateMockUser: mockGenerators.user };
 
 // Performance testing utilities
 export const performanceUtils = {
@@ -423,8 +394,7 @@ export const performanceUtils = {
       memoryIncrease,
       potentialLeak: memoryIncrease > 1024 * 1024, // 1MB threshold
     };
-  },
-};
+  } };
 
 // Accessibility testing utilities
 export const a11yUtils = {
@@ -448,8 +418,7 @@ export const a11yUtils = {
     return {
       headingLevels,
       imagesWithoutAlt: imagesWithoutAlt.length,
-      inputsWithoutLabels: inputsWithoutLabels.length,
-    };
+      inputsWithoutLabels: inputsWithoutLabels.length };
   },
 
   // Test keyboard navigation
@@ -474,14 +443,11 @@ export const a11yUtils = {
     }
 
     return focusableElements;
-  },
-};
+  } };
 
 // Re-export everything from testing-library
 export * from '@testing-library/react';
 export { userEvent };
 export { customRender as render };
 export { customRenderHook as renderHook };
-
-
 

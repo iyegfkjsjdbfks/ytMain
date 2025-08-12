@@ -23,22 +23,19 @@ export const queryPresets = {
     gcTime: 1000 * 60 * 5, // 5 minutes
     refetchInterval: 1000 * 30, // 30 seconds
     refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
-  },
+    refetchOnReconnect: true },
   // Moderately changing data (video lists, user profiles)
   standard: {
     staleTime: 1000 * 60 * 5, // 5 minutes
     gcTime: 1000 * 60 * 30, // 30 minutes
     refetchOnWindowFocus: false,
-    refetchOnReconnect: true,
-  },
+    refetchOnReconnect: true },
   // Rarely changing data (static content, configurations)
   stable: {
     staleTime: 1000 * 60 * 60, // 1 hour
     gcTime: 1000 * 60 * 60 * 24, // 24 hours
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  },
+    refetchOnReconnect: false },
   // Critical data that should always be fresh
   critical: {
     staleTime: 0,
@@ -47,9 +44,7 @@ export const queryPresets = {
     refetchOnReconnect: true,
     retry: 3,
     retryDelay: (attemptIndex: any) =>
-      Math.min(1000 * 2 ** attemptIndex, 30000),
-  },
-} as const;
+      Math.min(1000 * 2 ** attemptIndex, 30000) } } as const;
 
 // Enhanced error handler
 function createApiError(error: Error): ApiError {
@@ -61,8 +56,7 @@ function createApiError(error: Error): ApiError {
     details: error?.response?.data || error?.details,
     timestamp: Date.now(),
     retryable: isRetryableError(error),
-    stack: error?.stack,
-  };
+    stack: error?.stack };
 
   return apiError;
 }
@@ -136,7 +130,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
 
 // Performance monitoring wrapper
 function withPerformanceMonitoring<T>(
-  queryFn: () => Promise<T>,
+  queryFn: () => Promise<T>
   queryKey: any
 ): () => Promise<T> {
   return async () => {
@@ -164,7 +158,7 @@ function withPerformanceMonitoring<T>(
 // Enhanced useQuery hook
 export function useEnhancedQuery<TData = unknown, TError = ApiError>(
   queryKey: any,
-  queryFn: () => Promise<TData>,
+  queryFn: () => Promise<TData>
   options: {
     preset?: keyof typeof queryPresets;
     maxRetries?: number;
@@ -172,7 +166,7 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(
     maxRetryDelay?: number;
     enablePerformanceMonitoring?: boolean;
   } & Omit<
-    UseQueryOptions<TData, TError>,
+    UseQueryOptions<TData, TError>
     'queryKey' | 'queryFn' | 'retry' | 'retryDelay'
   > = {}
 ) {
@@ -196,8 +190,7 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(
     retry: createRetryFn(maxRetries),
     retryDelay: createRetryDelay(baseRetryDelay, maxRetryDelay),
     ...presetConfig,
-    ...queryOptions,
-  });
+    ...queryOptions });
 }
 
 // Enhanced useMutation hook
@@ -206,7 +199,7 @@ export function useEnhancedMutation<
   TError = ApiError,
   TVariables = void,
 >(
-  mutationFn: (variables: TVariables) => Promise<TData>,
+  mutationFn: (variables: TVariables) => Promise<TData>
   options: {
     maxRetries?: number;
     baseRetryDelay?: number;
@@ -218,7 +211,7 @@ export function useEnhancedMutation<
       updateFn: (oldData: any, variables: TVariables) => any;
     };
   } & Omit<
-    UseMutationOptions<TData, TError, TVariables>,
+    UseMutationOptions<TData, TError, TVariables>
     'mutationFn' | 'retry' | 'retryDelay'
   > = {}
 ) {
@@ -265,8 +258,7 @@ export function useEnhancedMutation<
       // Handle optimistic updates
       if (optimisticUpdate) {
         await queryClient.cancelQueries({
-          queryKey: optimisticUpdate.queryKey,
-        });
+          queryKey: optimisticUpdate.queryKey });
         const previousData = queryClient.getQueryData(
           optimisticUpdate.queryKey
         );
@@ -304,14 +296,13 @@ export function useEnhancedMutation<
 
       mutationOptions.onSuccess?.(data, variables, context);
     },
-    ...mutationOptions,
-  });
+    ...mutationOptions });
 }
 
 // Utility hooks for common patterns
 export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
   _queryKey: any,
-  _queryFn: ({ pageParam }) => Promise<TData>,
+  _queryFn: ({ pageParam }) => Promise<TData>
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
     getPreviousPageParam?: (firstPage: TData, allPages: TData) => unknown;
@@ -330,14 +321,13 @@ export function useCacheManager() {
     // Prefetch data
     prefetch: <TData>(
       queryKey: any,
-      queryFn: () => Promise<TData>,
+      queryFn: () => Promise<TData>
       preset: keyof typeof queryPresets = 'standard'
     ) => {
       return queryClient.prefetchQuery({
         queryKey,
         queryFn,
-        ...queryPresets[preset],
-      });
+        ...queryPresets[preset] });
     },
 
     // Clear specific cache
@@ -358,9 +348,6 @@ export function useCacheManager() {
           queryKey: query.queryKey,
           state: query.state.status,
           dataUpdatedAt: query.state.dataUpdatedAt,
-          errorUpdatedAt: query.state.errorUpdatedAt,
-        })),
-      };
-    },
-  };
+          errorUpdatedAt: query.state.errorUpdatedAt })) };
+    } };
 }

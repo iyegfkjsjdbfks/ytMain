@@ -1,6 +1,4 @@
-import React, { ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { DataWrapper } from './DataWrapper';
 
 interface PageLayoutProps<T> {
@@ -30,8 +28,7 @@ export function PageLayout<T>({
   headerActions,
   emptyState,
   className = '',
-  skeletonCount = 18,
-}: PageLayoutProps<T>) {
+  skeletonCount = 18 }: PageLayoutProps<T>) {
   const renderSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
       {Array.from({ length: skeletonCount }).map((_, index) => (

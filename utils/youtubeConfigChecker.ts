@@ -47,8 +47,7 @@ export const checkYouTubeAPIConfig = (): ConfigStatus => {
     hasEngineId: status.hasEngineId,
     apiKeyLength: API_CONFIG.GOOGLE_SEARCH_API_KEY?.length,
     engineIdLength: API_CONFIG.GOOGLE_SEARCH_ENGINE_ID?.length,
-    recommendations,
-  };
+    recommendations };
 };
 
 /**
@@ -67,21 +66,18 @@ export const testYouTubeAPI = async (): Promise<{
       return {
         success: true,
         message: 'YouTube Search API is working correctly',
-        results: results.length,
-      };
+        results: results.length };
     }
       return {
         success: false,
         message: 'API responded but returned no results',
-        results: 0,
-      };
+        results: 0 };
 
   } catch (error) {
     return {
       success: false,
       message: 'YouTube Search API test failed',
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
+      error: error instanceof Error ? error.message : 'Unknown error' };
   }
 };
 
@@ -113,5 +109,4 @@ if (import.meta.env.DEV) {
 export default {
   checkYouTubeAPIConfig,
   testYouTubeAPI,
-  logConfigStatus,
-};
+  logConfigStatus };

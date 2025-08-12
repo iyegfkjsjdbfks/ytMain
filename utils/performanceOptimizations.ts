@@ -72,8 +72,7 @@ export const withPerformanceOptimization = {
         }
       }
       return true;
-    }),
-};
+    }) };
 
 /**
  * Lazy loading utilities
@@ -83,11 +82,10 @@ export const lazyWithFallback = {
    * Create a lazy component
    */
   create: <P extends object>(
-    importFunc: () => Promise<{ default: ComponentType<P> }>,
+    importFunc: () => Promise<{ default: ComponentType<P> }>
   ) => {
     return lazy(importFunc);
-  },
-};
+  } };
 
 /**
  * Hook optimization utilities
@@ -110,8 +108,7 @@ export const hookOptimizations = {
    */
   useOptimizedCallback: <T extends (...args) => any>(
     callback: T,
-    deps: any,
-  ): T => useCallback(callback, deps),
+    deps: any): T => useCallback(callback, deps),
 
   /**
    * Memoized expensive computation
@@ -128,8 +125,7 @@ export const hookOptimizations = {
       }
       return computeFn();
     }, deps);
-  },
-};
+  } };
 
 /**
  * List rendering optimizations
@@ -168,11 +164,9 @@ return `${prefix}-${item.name}`;
   getVisibleItems: <T>(
     items: T[],
     startIndex: any,
-    visibleCount: any,
-  ): T[] => {
+    visibleCount: any): T[] => {
     return items.slice(startIndex, startIndex + visibleCount);
-  },
-};
+  } };
 
 /**
  * Image loading optimizations
@@ -202,10 +196,8 @@ export const imageOptimizations = {
     }, {
       rootMargin: '50px',
       threshold: 0.1,
-      ...options,
-    });
-  },
-};
+      ...options });
+  } };
 
 /**
  * Bundle size optimizations
@@ -215,7 +207,7 @@ export const bundleOptimizations = {
    * Dynamic import with error handling
    */
   dynamicImport: async <T>(
-    importFunc: () => Promise<T>,
+    importFunc: () => Promise<T>
   ): Promise<T | null> => {
     try {
       return await importFunc();
@@ -237,8 +229,7 @@ export const bundleOptimizations = {
       result[key] = module[key];
     });
     return result;
-  },
-};
+  } };
 
 /**
  * Event handler optimizations
@@ -249,8 +240,7 @@ export const eventOptimizations = {
    */
   throttle: <T extends (...args) => any>(
     func: T,
-    delay: any,
-  ): T => {
+    delay: any): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastExecTime = 0;
 
@@ -277,8 +267,7 @@ clearTimeout(timeoutId);
    */
   debounce: <T extends (...args) => any>(
     func: T,
-    delay: any,
-  ): T => {
+    delay: any): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     return ((...args) => {
@@ -300,10 +289,8 @@ clearTimeout(timeoutId);
   ): void => {
     element.addEventListener(event, handler, {
       passive: true,
-      ...options,
-    });
-  },
-};
+      ...options });
+  } };
 
 /**
  * Memory management utilities
@@ -324,8 +311,7 @@ export const memoryOptimizations = {
       get: (key: K) => cache.get(key),
       set: (key: K, value: V) => cache.set(key, value),
       has: (key: K) => cache.has(key),
-      delete: (key: K) => cache.delete(key),
-    };
+      delete: (key: K) => cache.delete(key) };
   },
 
   /**
@@ -357,10 +343,8 @@ export const memoryOptimizations = {
       },
       has: (key: K): boolean => cache.has(key),
       clear: (): void => cache.clear(),
-      size: (): number => cache.size,
-    };
-  },
-};
+      size: (): number => cache.size };
+  } };
 
 // Export all optimizations as a single object
 export const PerformanceOptimizations = {
@@ -371,7 +355,6 @@ export const PerformanceOptimizations = {
   imageOptimizations,
   bundleOptimizations,
   eventOptimizations,
-  memoryOptimizations,
-};
+  memoryOptimizations };
 
 export default PerformanceOptimizations;

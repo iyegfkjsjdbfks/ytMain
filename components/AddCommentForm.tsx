@@ -11,8 +11,7 @@ interface AddCommentFormProps {
 const AddCommentForm: React.FC<AddCommentFormProps> = ({
   currentUserAvatarUrl,
   onCommentSubmit,
-  maxCommentLength,
-}) => {
+  maxCommentLength }) => {
   const [commentText, setCommentText] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);

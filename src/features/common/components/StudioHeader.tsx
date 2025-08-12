@@ -203,4 +203,3 @@ const StudioHeader: React.FC = () => {
 
 export default StudioHeader;
 
-

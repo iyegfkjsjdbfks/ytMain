@@ -29,28 +29,24 @@ const LiveStreamingHubPage: React.FC = () => {
     {
       title: 'Go Live Now',
       description: 'Start streaming immediately',
-      icon: <Play className='h-5 w-5' />,
+      icon: <Play className='h-5 w-5' />
       action: () => (window.location.href = '/go-live'),
-      variant: 'default',
-    },
+      variant: 'default' },
     {
       title: 'Schedule Stream',
       description: 'Plan your next live stream',
-      icon: <Calendar className='h-5 w-5' />,
-      action: () => setActiveTab('management'),
-    },
+      icon: <Calendar className='h-5 w-5' />
+      action: () => setActiveTab('management') },
     {
       title: 'Stream Settings',
       description: 'Configure your streaming setup',
-      icon: <Settings className='h-5 w-5' />,
-      action: () => setActiveTab('settings'),
-    },
+      icon: <Settings className='h-5 w-5' />
+      action: () => setActiveTab('settings') },
     {
       title: 'View Analytics',
       description: 'Check your streaming performance',
-      icon: <BarChart3 className='h-5 w-5' />,
-      action: () => setActiveTab('analytics'),
-    },
+      icon: <BarChart3 className='h-5 w-5' />
+      action: () => setActiveTab('analytics') },
   ];
 
   const liveStreams = [
@@ -60,24 +56,21 @@ const LiveStreamingHubPage: React.FC = () => {
       thumbnail: '/api/placeholder/320/180',
       viewers: 1247,
       duration: '2:34:15',
-      status: 'live' as const,
-    },
+      status: 'live' as const },
     {
       id: '2',
       title: 'Q&A Session with Viewers',
       thumbnail: '/api/placeholder/320/180',
       viewers: 892,
       duration: '1:15:30',
-      status: 'live' as const,
-    },
+      status: 'live' as const },
     {
       id: '3',
       title: 'Gaming Stream - New Release',
       thumbnail: '/api/placeholder/320/180',
       viewers: 2156,
       duration: '3:45:22',
-      status: 'live' as const,
-    },
+      status: 'live' as const },
   ];
 
   return (
@@ -313,5 +306,4 @@ const LiveStreamingHubPageWithErrorBoundary = () => (
 );
 
 export default LiveStreamingHubPageWithErrorBoundary;
-
 

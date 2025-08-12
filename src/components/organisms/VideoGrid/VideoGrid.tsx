@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -14,8 +15,7 @@ export const VideoGrid = ({
   className,
   loading = false,
   skeletonCount = 12,
-  onVideoMoreClick,
-}: VideoGridProps) => {
+  onVideoMoreClick }: VideoGridProps) => {
   if (loading) {
     return (
       <div
@@ -65,5 +65,4 @@ const VideoCardSkeleton = () => {
     </div>
   );
 };
-
 

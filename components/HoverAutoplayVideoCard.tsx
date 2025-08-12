@@ -10,7 +10,6 @@ declare namespace NodeJS {
   }
 }
 
-
 import { useEffect, useRef, useState, lazy, FC, MouseEvent } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
@@ -187,8 +186,7 @@ return duration;
                   style={{
                     pointerEvents: 'none',
                     border: 'none',
-                    outline: 'none',
-                  }}
+                    outline: 'none' }}
                   onError={handleIframeError}
                 />
 

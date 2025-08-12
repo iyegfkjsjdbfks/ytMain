@@ -98,8 +98,7 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     rootMargin: '50px',
-    freezeOnceVisible: true,
-  });
+    freezeOnceVisible: true });
 
   const handleLoad = useCallback(() => {
     setLoaded(true);
@@ -207,23 +206,19 @@ const sizeClasses = {
     thumbnail: 'aspect-video',
     title: 'text-sm font-medium line-clamp-2',
     channel: 'text-xs text-gray-600',
-    meta: 'text-xs text-gray-500',
-  },
+    meta: 'text-xs text-gray-500' },
   md: {
     container: 'w-full max-w-md',
     thumbnail: 'aspect-video',
     title: 'text-base font-medium line-clamp-2',
     channel: 'text-sm text-gray-600',
-    meta: 'text-sm text-gray-500',
-  },
+    meta: 'text-sm text-gray-500' },
   lg: {
     container: 'w-full max-w-lg',
     thumbnail: 'aspect-video',
     title: 'text-lg font-semibold line-clamp-2',
     channel: 'text-base text-gray-600',
-    meta: 'text-base text-gray-500',
-  },
-};
+    meta: 'text-base text-gray-500' } };
 
 const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
   ({
@@ -236,8 +231,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
     onChannelClick,
     lazy = true,
     priority = 'low',
-    index = 0,
-  }) => {
+    index = 0 }) => {
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   const [isPlayingInline, setIsPlayingInline] = useState(false);
@@ -465,8 +459,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               const shareData = {
                 title: video.title,
                 text: `Check out this video: ${video.title}`,
-                url: `${window.location.origin}/watch?v=${video.id}`,
-              };
+                url: `${window.location.origin}/watch?v=${video.id}` };
 
               if (navigator.share) {
                 navigator.share(shareData).catch(console.error);
@@ -549,8 +542,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                     videoId: video.id,
                     reason: selectedReason,
                     timestamp: new Date().toISOString(),
-                    videoTitle: video.title,
-                  });
+                    videoTitle: video.title });
                   localStorage.setItem('youtubeCloneReports_v1', JSON.stringify(reports));
 
                   alert(`Thank you for your report. We'll review this video for: ${selectedReason}`);
@@ -652,5 +644,4 @@ export default withMemo(OptimizedVideoCard, (prevProps, nextProps) => {
     prevProps.index === nextProps.index
   );
 });
-
 

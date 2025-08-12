@@ -26,8 +26,7 @@ export const PWA_CONFIG = {
     STATIC: 'youtubex-static-v1',
     DYNAMIC: 'youtubex-dynamic-v1',
     IMAGES: 'youtubex-images-v1',
-    API: 'youtubex-api-v1',
-  },
+    API: 'youtubex-api-v1' },
 
   // Cache Durations (in milliseconds)
   CACHE_DURATIONS: {
@@ -41,8 +40,7 @@ export const PWA_CONFIG = {
   INSTALL_PROMPT: {
     SHOW_AFTER_VISITS: 3,
     DISMISS_DURATION: 7 * 24 * 60 * 60 * 1000, // 7 days
-    STORAGE_KEY: 'pwa-install-dismissed',
-  },
+    STORAGE_KEY: 'pwa-install-dismissed' },
 
   // Update Settings
   UPDATE_CHECK_INTERVAL: 60 * 60 * 1000, // 1 hour
@@ -51,8 +49,7 @@ export const PWA_CONFIG = {
   NOTIFICATION_SETTINGS: {
     BADGE: '/icons/badge-72x72.svg',
     DEFAULT_ICON: '/icons/icon-192x192.svg',
-    VIBRATE_PATTERN: [200, 100, 200],
-  },
+    VIBRATE_PATTERN: [200, 100, 200] },
 
   // Offline Storage Settings
   OFFLINE_STORAGE: {
@@ -69,11 +66,9 @@ export const PWA_CONFIG = {
     TAGS: {
       VIDEO_UPLOAD: 'video-upload',
       USER_ACTION: 'user-action',
-      ANALYTICS: 'analytics',
-    },
+      ANALYTICS: 'analytics' },
     RETRY_DELAY: 5 * 60 * 1000, // 5 minutes
-    MAX_RETRIES: 3,
-  },
+    MAX_RETRIES: 3 },
 
   // Feature Flags
   FEATURES: {
@@ -81,9 +76,7 @@ export const PWA_CONFIG = {
     BACKGROUND_SYNC: true,
     PUSH_NOTIFICATIONS: true,
     SHARE_TARGET: true,
-    SHORTCUTS: true,
-  },
-};
+    SHORTCUTS: true } };
 
 // PWA Detection Utilities
 export const PWAUtils = {
@@ -166,8 +159,7 @@ export const PWAUtils = {
       return false;
     }
     return this.getVisitCount() >= PWA_CONFIG.INSTALL_PROMPT.SHOW_AFTER_VISITS;
-  },
-};
+  } };
 
 // PWA Event Handlers
 export const PWAEvents = {
@@ -187,8 +179,7 @@ export const PWAEvents = {
     if ('gtag' in window) {
       (window as any).gtag('event', 'pwa_install', {
         event_category: 'PWA',
-        event_label: 'App Installed',
-      });
+        event_label: 'App Installed' });
     }
   },
 
@@ -200,8 +191,7 @@ export const PWAEvents = {
       // Post message to service worker to skip waiting
       registration.waiting.postMessage({ type: 'SKIP_WAITING' });
     }
-  },
-};
+  } };
 
 // PWA Manifest Generator (for dynamic manifest generation if needed)
 export const generateManifest = () => ({
@@ -219,50 +209,42 @@ export const generateManifest = () => ({
       src: '/icons/icon-72x72.svg',
       sizes: '72x72',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
     {
       src: '/icons/icon-96x96.svg',
       sizes: '96x96',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
     {
       src: '/icons/icon-128x128.svg',
       sizes: '128x128',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
     {
       src: '/icons/icon-144x144.svg',
       sizes: '144x144',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
     {
       src: '/icons/icon-152x152.svg',
       sizes: '152x152',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
     {
       src: '/icons/icon-192x192.svg',
       sizes: '192x192',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
     {
       src: '/icons/icon-384x384.svg',
       sizes: '384x384',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
     {
       src: '/icons/icon-512x512.svg',
       sizes: '512x512',
       type: 'image/svg+xml',
-      purpose: 'any maskable',
-    },
+      purpose: 'any maskable' },
   ],
   shortcuts: [
     {
@@ -270,30 +252,25 @@ export const generateManifest = () => ({
       short_name: 'Upload',
       description: 'Upload a new video',
       url: '/upload',
-      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }],
-    },
+      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }] },
     {
       name: 'Shorts',
       short_name: 'Shorts',
       description: 'Browse YouTube Shorts',
       url: '/shorts',
-      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }],
-    },
+      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }] },
     {
       name: 'Subscriptions',
       short_name: 'Subs',
       description: 'View your subscriptions',
       url: '/subscriptions',
-      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }],
-    },
+      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }] },
     {
       name: 'Library',
       short_name: 'Library',
       description: 'Access your library',
       url: '/library',
-      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }],
-    },
-  ],
-});
+      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }] },
+  ] });
 
 export default PWA_CONFIG;

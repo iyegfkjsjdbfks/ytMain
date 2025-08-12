@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+import type { Channel } from '../types';
 import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
 
 import type { Playlist } from '../src/types/core';
@@ -17,8 +19,7 @@ const defaultConfig: ApiConfig = {
   apiKey: import.meta.env.VITE_YOUTUBE_API_KEY || '',
   timeout: 10000,
   retryAttempts: 3,
-  retryDelay: 1000,
-};
+  retryDelay: 1000 };
 
 // Unified Cache System
 class UnifiedCache {
@@ -29,8 +30,7 @@ class UnifiedCache {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
-      ttl,
-    });
+      ttl });
   }
 
   get<T>(key: string): T | null {
@@ -118,8 +118,7 @@ class UnifiedApiService {
     this.interceptors = {
       request: [],
       response: [],
-      error: [],
-    };
+      error: [] };
 
     // Add default request interceptor for API key
     this.addRequestInterceptor((config) => {
@@ -193,9 +192,7 @@ class UnifiedApiService {
       url: `${this.config.baseUrl}${endpoint}`,
       headers: {
         'Content-Type': 'application/json',
-        ...(options.headers as Record<string, string>),
-      },
-    };
+        ...(options.headers as Record<string, string>) } };
 
     // Apply request interceptors
     for (const interceptor of this.interceptors.request) {
@@ -211,8 +208,7 @@ class UnifiedApiService {
 
         let response = await fetch(config.url, {
           ...config,
-          signal: controller.signal,
-        });
+          signal: controller.signal });
 
         clearTimeout(timeoutId);
 
@@ -323,8 +319,7 @@ queryParams.set('order', params.order);
     }
     const queryParams = new URLSearchParams({
       part: 'snippet,statistics,brandingSettings',
-      id: channelId,
-    });
+      id: channelId });
 
     const cacheKey = `channel:${channelId}`;
     const response = await this.makeRequest<{ items: Channel[] }>(
@@ -354,8 +349,7 @@ queryParams.set('order', params.order);
     }
     const queryParams = new URLSearchParams({
       part: 'snippet,status',
-      id: playlistId,
-    });
+      id: playlistId });
 
     const cacheKey = `playlist:${playlistId}`;
     const response = await this.makeRequest<{ items: Playlist[] }>(

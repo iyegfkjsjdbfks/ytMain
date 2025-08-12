@@ -49,8 +49,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
     duration: '0:00',
     uploadedAt: new Date().toISOString(),
-    isYouTube: true as const,
-  });
+    isYouTube: true as const });
 
   // Use YouTube Player - Best for simple YouTube integration
   return (
@@ -71,5 +70,4 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
 YouTubePlayerWrapper.displayName = 'YouTubePlayerWrapper';
 
 export default YouTubePlayerWrapper;
-
 

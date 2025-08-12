@@ -35,8 +35,7 @@ class PerformanceMonitor {
     const metrics: PerformanceMetrics = {
       name,
       duration,
-      timestamp: Date.now(),
-    };
+      timestamp: Date.now() };
 
     // Log slow operations in development
     if (process.env.NODE_ENV === 'development' && duration > 100) {
@@ -74,6 +73,5 @@ export function usePerformanceMonitor(name: any) {
     endMeasure: () => performanceMonitor.endMeasure(name),
     measure: <T>(fn: () => T) => performanceMonitor.measure(name, fn),
     measureAsync: <T>(fn: () => Promise<T>) =>
-      performanceMonitor.measureAsync(name, fn),
-  };
+      performanceMonitor.measureAsync(name, fn) };
 }

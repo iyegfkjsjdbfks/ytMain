@@ -16,8 +16,7 @@ export function useVideoComments(videoId: any, filters: CommentFilters = {}) {
     {
       enabled: !!videoId,
       staleTime: 30 * 1000, // 30 seconds
-      refetchOnWindowFocus: true,
-    }
+      refetchOnWindowFocus: true }
   );
 }
 
@@ -80,8 +79,7 @@ export function usePendingComments(
     () => commentService.getPendingComments(videoId, filters),
     {
       staleTime: 30 * 1000, // 30 seconds
-      refetchOnWindowFocus: true,
-    }
+      refetchOnWindowFocus: true }
   );
 }
 
@@ -116,8 +114,7 @@ export function useCommentMentions(userId: any, filters: CommentFilters = {}) {
     {
       enabled: !!userId,
       staleTime: 60 * 1000, // 1 minute
-      refetchOnWindowFocus: true,
-    }
+      refetchOnWindowFocus: true }
   );
 }
 
@@ -163,8 +160,7 @@ export function useCreateComment() {
           queryCache.invalidate(`comment:thread:${parentId}`);
         }
         queryCache.invalidate(`comments:stats:${videoId}`);
-      },
-    }
+      } }
   );
 }
 
@@ -181,8 +177,7 @@ export function useUpdateComment() {
         if (updatedComment.parentId) {
           queryCache.invalidate(`comments:replies:${updatedComment.parentId}`);
         }
-      },
-    }
+      } }
   );
 }
 
@@ -194,8 +189,7 @@ export function useDeleteComment() {
         // Invalidate all comment-related caches
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments');
-      },
-    }
+      } }
   );
 }
 
@@ -210,8 +204,7 @@ export function useReactToComment() {
     onSuccess: (_, { commentId }) => {
       // Invalidate comment cache
       queryCache.invalidate(`comment:${commentId}`);
-    },
-  });
+    } });
 }
 
 export function useRemoveReaction() {
@@ -221,8 +214,7 @@ export function useRemoveReaction() {
       onSuccess: (_, commentId) => {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
-      },
-    }
+      } }
   );
 }
 
@@ -234,8 +226,7 @@ export function usePinComment() {
         // Invalidate comment and video comments cache
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments:video');
-      },
-    }
+      } }
   );
 }
 
@@ -247,8 +238,7 @@ export function useUnpinComment() {
         // Invalidate comment and video comments cache
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments:video');
-      },
-    }
+      } }
   );
 }
 
@@ -259,8 +249,7 @@ export function useHeartComment() {
       onSuccess: (_, commentId) => {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
-      },
-    }
+      } }
   );
 }
 
@@ -271,8 +260,7 @@ export function useUnheartComment() {
       onSuccess: (_, commentId) => {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
-      },
-    }
+      } }
   );
 }
 
@@ -284,8 +272,7 @@ export function useReportComment() {
     ({ commentId, reason, description }) =>
       commentService.reportComment(commentId, reason, description),
     {
-      onSuccess: () => {},
-    }
+      onSuccess: () => {} }
   );
 }
 
@@ -302,8 +289,7 @@ export function useModerateComment() {
       // Invalidate moderation-related caches
       queryCache.invalidate(`comment:${commentId}`);
       queryCache.invalidate('comments:pending');
-    },
-  });
+    } });
 }
 
 export function useBulkModerateComments() {
@@ -322,8 +308,7 @@ export function useBulkModerateComments() {
         // Invalidate moderation-related caches
         queryCache.invalidate('comments:pending');
         queryCache.invalidate('comments');
-      },
-    }
+      } }
   );
 }
 
@@ -336,8 +321,7 @@ export function useAutoModerateComments() {
         // Invalidate video comments cache
         queryCache.invalidate(`comments:video:${videoId}`);
         queryCache.invalidate('comments:pending');
-      },
-    }
+      } }
   );
 }
 
@@ -348,8 +332,7 @@ export function useMarkMentionsAsRead() {
       onSuccess: () => {
         // Invalidate mentions cache
         queryCache.invalidate('comments:mentions');
-      },
-    }
+      } }
   );
 }
 
@@ -371,13 +354,11 @@ export function useCommentManagement(videoId: any) {
       create: createComment.mutate,
       update: updateComment.mutate,
       delete: deleteComment.mutate,
-      moderate: moderateComment.mutate,
-    },
+      moderate: moderateComment.mutate },
     refetch: () => {
       comments.refetch();
       stats.refetch();
-    },
-  };
+    } };
 }
 
 export function useCommentInteractions(_commentId: any) {
@@ -398,6 +379,5 @@ export function useCommentInteractions(_commentId: any) {
     unheart: unheartComment.mutate,
     report: reportComment.mutate,
     loading:
-      reactToComment.loading || pinComment.loading || heartComment.loading,
-  };
+      reactToComment.loading || pinComment.loading || heartComment.loading };
 }

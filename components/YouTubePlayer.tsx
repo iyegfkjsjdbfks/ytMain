@@ -57,8 +57,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   className = '',
   onReady,
   onStateChange,
-  onError,
-}) => {
+  onError }) => {
   const playerRef = useRef<HTMLDivElement>(null);
   const ytPlayerRef = useRef<YTPlayer | null>(null);
   const [isAPIReady, setIsAPIReady] = useState(false);
@@ -268,8 +267,7 @@ return;
               5: 'HTML5 player error',
               100: 'Video not found or private',
               101: 'Video not available in embedded players',
-              150: 'Video not available in embedded players',
-            };
+              150: 'Video not available in embedded players' };
             const message = errorMessages[event.data] || 'Unknown error occurred';
 
             // For embedding errors (101, 150), show a more user-friendly message
@@ -289,9 +287,7 @@ return;
                 console.warn('Error in onError callback:', error);
               }
             }
-          },
-        },
-      });
+          } } });
     } catch (error) {
       console.error('Error creating YouTube player:', error);
       if (isMounted) {
@@ -352,8 +348,7 @@ return;
         id={playerIdRef.current}
         className="w-full h-full"
         style={{
-          opacity: isAPIReady ? 1 : 0,
-        }}
+          opacity: isAPIReady ? 1 : 0 }}
       />
     </div>
   );

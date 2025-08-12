@@ -13,8 +13,7 @@ const TestMetadataFetch: React.FC = () => {
   const {
     data: reactQueryData,
     isLoading: reactQueryLoading,
-    error: reactQueryError,
-  } = useQuery({
+    error: reactQueryError } = useQuery({
     queryKey: ['test-video', 'google-search-bnVUHWCynig'],
     queryFn: async () => {
       logger.debug('🔍 React Query: Fetching video...');
@@ -24,8 +23,7 @@ const TestMetadataFetch: React.FC = () => {
       logger.debug('📊 React Query: Result:', video);
       return video;
     },
-    enabled: true,
-  });
+    enabled: true });
 
   const testDirectGoogleSearch = async () => {
     setLoading(true);
@@ -195,5 +193,4 @@ const TestMetadataFetch: React.FC = () => {
 };
 
 export default TestMetadataFetch;
-
 

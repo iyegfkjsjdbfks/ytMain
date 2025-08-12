@@ -1,4 +1,4 @@
-import React, { memo, KeyboardEvent } from 'react';
+import React, { KeyboardEvent } from 'react';
 /**
  * Comprehensive testing setup and configuration
  */
@@ -23,8 +23,7 @@ const TEST_CONFIG = {
   mockIntersectionObserver: true,
   mockResizeObserver: true,
   mockMatchMedia: true,
-  mockFetch: true,
-};
+  mockFetch: true };
 
 // Mock implementations
 const mockLocalStorage = (() => {
@@ -44,8 +43,7 @@ const mockLocalStorage = (() => {
     get length() {
       return Object.keys(store).length;
     },
-    key: vi.fn((index) => Object.keys(store)[index] || null),
-  };
+    key: vi.fn((index) => Object.keys(store)[index] || null) };
 })();
 
 const mockSessionStorage = (() => {
@@ -65,8 +63,7 @@ const mockSessionStorage = (() => {
     get length() {
       return Object.keys(store).length;
     },
-    key: vi.fn((index) => Object.keys(store)[index] || null),
-  };
+    key: vi.fn((index) => Object.keys(store)[index] || null) };
 })();
 
 const mockIntersectionObserver = vi.fn().mockImplementation((_callback) => ({
@@ -76,14 +73,12 @@ const mockIntersectionObserver = vi.fn().mockImplementation((_callback) => ({
   root: null,
   rootMargin: '',
   thresholds: [],
-  takeRecords: vi.fn(() => []),
-}));
+  takeRecords: vi.fn(() => []) }));
 
 const mockResizeObserver = vi.fn().mockImplementation((_callback) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
-  disconnect: vi.fn(),
-}));
+  disconnect: vi.fn() }));
 
 const mockMatchMedia = vi.fn().mockImplementation((query) => ({
   matches: false,
@@ -93,19 +88,16 @@ const mockMatchMedia = vi.fn().mockImplementation((query) => ({
   removeListener: vi.fn(),
   addEventListener: vi.fn(),
   removeEventListener: vi.fn(),
-  dispatchEvent: vi.fn(),
-}));
+  dispatchEvent: vi.fn() }));
 
 const mockGeolocation = {
   getCurrentPosition: vi.fn(),
   watchPosition: vi.fn(),
-  clearWatch: vi.fn(),
-};
+  clearWatch: vi.fn() };
 
 const mockNotification = {
   requestPermission: vi.fn(() => Promise.resolve('granted')),
-  permission: 'granted',
-};
+  permission: 'granted' };
 
 // Fetch mock with realistic responses
 const createMockFetch = () => {
@@ -119,18 +111,15 @@ const createMockFetch = () => {
       status: 200,
       statusText: 'OK',
       headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
+        'Content-Type': 'application/json' }),
       json: async () => ({
         success: true,
         data: testUtils.generateMockVideo(),
-        timestamp: Date.now(),
-      }),
+        timestamp: Date.now() }),
       text: async () => 'Mock response text',
       blob: async () => new Blob(['mock blob']),
       arrayBuffer: async () => new ArrayBuffer(8),
-      clone: vi.fn(),
-    };
+      clone: vi.fn() };
 
     // Handle specific endpoints
     if (url.includes('/api/videos')) {
@@ -155,10 +144,8 @@ const createMockFetch = () => {
           channelAvatarUrl: 'https://example.com/avatar.jpg',
           isLive: false,
           visibility: 'public' as const, createdAt: '2023-01-01',
-          updatedAt: '2023-01-01',
-        },
-        timestamp: Date.now(),
-      });
+          updatedAt: '2023-01-01' },
+        timestamp: Date.now() });
     }
 
     if (url.includes('/api/channels')) {
@@ -183,10 +170,8 @@ const createMockFetch = () => {
           channelAvatarUrl: 'https://example.com/avatar.jpg',
           isLive: false,
           visibility: 'public' as const, createdAt: '2023-01-01',
-          updatedAt: '2023-01-01',
-        },
-        timestamp: Date.now(),
-      });
+          updatedAt: '2023-01-01' },
+        timestamp: Date.now() });
     }
 
     if (url.includes('/api/users')) {
@@ -211,10 +196,8 @@ const createMockFetch = () => {
           channelAvatarUrl: 'https://example.com/avatar.jpg',
           isLive: false,
           visibility: 'public' as const, createdAt: '2023-01-01',
-          updatedAt: '2023-01-01',
-        },
-        timestamp: Date.now(),
-      });
+          updatedAt: '2023-01-01' },
+        timestamp: Date.now() });
     }
 
     // Simulate errors for specific patterns
@@ -226,9 +209,7 @@ const createMockFetch = () => {
         statusText: 'Internal Server Error',
         json: async () => ({
           success: false,
-          error: 'Mock server error',
-        }),
-      };
+          error: 'Mock server error' }) };
     }
 
     if (url.includes('/unauthorized')) {
@@ -239,9 +220,7 @@ const createMockFetch = () => {
         statusText: 'Unauthorized',
         json: async () => ({
           success: false,
-          error: 'Unauthorized access',
-        }),
-      };
+          error: 'Unauthorized access' }) };
     }
 
     return mockResponse;
@@ -267,8 +246,7 @@ class TestPerformanceTracker {
       this.testMetrics.set(testName, {
         renderTime: 0, // Will be set by render tracking
         memoryUsage: endMemory - startMemory,
-        testDuration: endTime - startTime,
-      });
+        testDuration: endTime - startTime });
     };
   }
 
@@ -311,36 +289,31 @@ beforeAll(() => {
   if (TEST_CONFIG.mockLocalStorage) {
     Object.defineProperty(window, 'localStorage', {
       value: mockLocalStorage,
-      writable: true,
-    });
+      writable: true });
   }
 
   if (TEST_CONFIG.mockSessionStorage) {
     Object.defineProperty(window, 'sessionStorage', {
       value: mockSessionStorage,
-      writable: true,
-    });
+      writable: true });
   }
 
   if (TEST_CONFIG.mockIntersectionObserver) {
     Object.defineProperty(window, 'IntersectionObserver', {
       value: mockIntersectionObserver,
-      writable: true,
-    });
+      writable: true });
   }
 
   if (TEST_CONFIG.mockResizeObserver) {
     Object.defineProperty(window, 'ResizeObserver', {
       value: mockResizeObserver,
-      writable: true,
-    });
+      writable: true });
   }
 
   if (TEST_CONFIG.mockMatchMedia) {
     Object.defineProperty(window, 'matchMedia', {
       value: mockMatchMedia,
-      writable: true,
-    });
+      writable: true });
   }
 
   if (TEST_CONFIG.mockFetch) {
@@ -350,13 +323,11 @@ beforeAll(() => {
   // Mock other browser APIs
   Object.defineProperty(navigator, 'geolocation', {
     value: mockGeolocation,
-    writable: true,
-  });
+    writable: true });
 
   Object.defineProperty(window, 'Notification', {
     value: mockNotification,
-    writable: true,
-  });
+    writable: true });
 
   // Mock crypto for security utils
   Object.defineProperty(window, 'crypto', {
@@ -371,11 +342,8 @@ beforeAll(() => {
         generateKey: vi.fn(() => Promise.resolve({})),
         encrypt: vi.fn(() => Promise.resolve(new ArrayBuffer(16))),
         decrypt: vi.fn(() => Promise.resolve(new ArrayBuffer(16))),
-        digest: vi.fn(() => Promise.resolve(new ArrayBuffer(32))),
-      },
-    },
-    writable: true,
-  });
+        digest: vi.fn(() => Promise.resolve(new ArrayBuffer(32))) } },
+    writable: true });
 
   // Setup console spies for testing
   vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -460,16 +428,14 @@ export const testHelpers = {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
-      json: async () => ({ success: true, data }),
-    });
+      json: async () => ({ success: true, data }) });
   },
 
   mockApiError: (status: number = 500, message = 'Server Error') => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: false,
       status,
-      json: async () => ({ success: false, error: message }),
-    });
+      json: async () => ({ success: false, error: message }) });
   },
 
   // Storage helpers
@@ -507,8 +473,7 @@ export const testHelpers = {
 
       return {
         storage: storageAudit,
-        cookies: cookieAudit,
-      };
+        cookies: cookieAudit };
     }
     return null;
   },
@@ -536,9 +501,7 @@ export const testHelpers = {
       element.scrollTop = scrollTop;
       element.dispatchEvent(new Event('scroll', { bubbles: true }));
       return testHelpers.waitForNextTick();
-    },
-  },
-};
+    } } };
 
 // Export test configuration
 export { TEST_CONFIG, TestPerformanceTracker  };
@@ -549,8 +512,7 @@ export { mockLocalStorage,
   mockIntersectionObserver,
   mockResizeObserver,
   mockMatchMedia,
-  mockGeolocation, mockNotification,
- };
+  mockGeolocation, mockNotification };
 
 // Global error handler for unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {

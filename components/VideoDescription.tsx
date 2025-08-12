@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+import type { Channel } from '../types';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -34,8 +36,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
   canSummarize,
   onSubscribe,
   onToggleDescription,
-  onSummarizeDescription,
-}) => {
+  onSummarizeDescription }) => {
   const channelLink = channel ? `/channel/${encodeURIComponent(channel.name)}` : '#';
 
   return (

@@ -36,11 +36,9 @@ export const searchForHomePage = async (
       views: 1000,
       publishedAt: new Date().toISOString(),
       channelId: 'channel1',
-      channelTitle: 'Mock Channel',
-    },
+      channelTitle: 'Mock Channel' },
   ];
 };
 
 export default {
-  searchForHomePage,
-};
+  searchForHomePage };

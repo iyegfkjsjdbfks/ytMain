@@ -115,8 +115,7 @@ export function useLocalStorageWithExpiry<T>(
 
         const item = {
           value: valueToStore,
-          expiry,
-        };
+          expiry };
 
         setStoredValue(valueToStore);
         setIsExpired(false);

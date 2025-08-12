@@ -6,6 +6,7 @@ import { getCommentsByVideoId, getVideos } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 
 import type { Comment } from '../types';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface CommentWithVideo extends Comment {
   videoTitle: string;
@@ -42,8 +43,7 @@ const CommentModerationPage: React.FC = () => {
             videoTitle: video.title,
             videoId: video.id,
             status: Math.random() > 0.7 ? 'pending' : Math.random() > 0.8 ? 'spam' : 'approved' as any,
-            flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : 'No issues detected',
-          }));
+            flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : 'No issues detected' }));
           allComments.push(...commentsWithVideo);
         }
 
@@ -130,8 +130,7 @@ const CommentModerationPage: React.FC = () => {
           }
           return {
             ...comment,
-            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden',
-          };
+            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden' };
         }
         return comment;
       }).filter(Boolean) as CommentWithVideo,
@@ -149,8 +148,7 @@ const CommentModerationPage: React.FC = () => {
           }
           return {
             ...comment,
-            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden',
-          };
+            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden' };
         }
         return comment;
       }).filter(Boolean) as CommentWithVideo,
@@ -418,5 +416,4 @@ return comments.filter((c) => c.flaggedReason).length;
 };
 
 export default CommentModerationPage;
-
 

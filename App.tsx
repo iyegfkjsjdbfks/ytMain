@@ -10,9 +10,7 @@ const router = createBrowserRouter(routes, {
     v7_normalizeFormMethod: true,
     v7_partialHydration: true,
     v7_relativeSplatPath: true,
-    v7_skipActionErrorRevalidation: true,
-  },
-});
+    v7_skipActionErrorRevalidation: true } });
 
 /**
  * Main application component that sets up the refactored provider structure

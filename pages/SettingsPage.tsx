@@ -85,8 +85,7 @@ const SettingsPage: React.FC = () => {
   const handleNotificationChange = (key: keyof typeof notifications) => {
     setNotifications(prev => ({
       ...prev,
-      [key]: !prev[key],
-    }));
+      [key]: !prev[key] }));
   };
 
   return (
@@ -238,5 +237,4 @@ const SettingsPage: React.FC = () => {
   ) };
 
 export default SettingsPage;
-
 

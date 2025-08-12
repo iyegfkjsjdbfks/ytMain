@@ -13,8 +13,7 @@ interface LivePollsProps {
 const LivePolls: React.FC<LivePollsProps> = ({
   streamId,
   isOwner,
-  className = '',
-}) => {
+  className = '' }) => {
   const { polls, createPoll, votePoll } = useLivePolls(streamId);
   const [activePoll, setActivePoll] = useState<LivePoll | null>(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -75,16 +74,14 @@ const LivePolls: React.FC<LivePollsProps> = ({
     if (newPoll.options.length > 2) {
       setNewPoll(prev => ({
         ...prev,
-        options: prev.options.filter((_, i) => i !== index),
-      }));
+        options: prev.options.filter((_, i) => i !== index) }));
     }
   };
 
   const updateOption = (index: number, value: string | number) => {
     setNewPoll(prev => ({
       ...prev,
-      options: prev.options.map((opt, i) => (i === index ? value : opt)),
-    }));
+      options: prev.options.map((opt, i) => (i === index ? value : opt)) }));
   };
 
   const formatDuration = (seconds: any) => {
@@ -197,8 +194,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
                 onChange={e =>
                   setNewPoll(prev => ({
                     ...prev,
-                    duration: parseInt(e.target.value, 10) || 60,
-                  }))
+                    duration: parseInt(e.target.value, 10) || 60 }))
                 }
                 min='30'
                 max='600'
@@ -349,5 +345,4 @@ const LivePolls: React.FC<LivePollsProps> = ({
 };
 
 export default LivePolls;
-
 

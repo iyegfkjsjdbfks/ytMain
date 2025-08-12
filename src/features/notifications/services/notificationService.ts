@@ -133,8 +133,7 @@ class NotificationService {
   async deleteMultiple(notificationIds: any): Promise<ApiResponse<void>> {
     return api.delete('/api/notifications/bulk', {
       body: JSON.stringify({ notificationIds }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+      headers: { 'Content-Type': 'application/json' } });
   }
 
   /**
@@ -198,9 +197,7 @@ class NotificationService {
       endpoint: subscription.endpoint,
       keys: {
         p256dh: subscription.getKey('p256dh'),
-        auth: subscription.getKey('auth'),
-      },
-    });
+        auth: subscription.getKey('auth') } });
   }
 
   /**
@@ -238,8 +235,7 @@ class NotificationService {
   ): Promise<ApiResponse<{ sent: number; failed: number }>> {
     return api.post('/api/notifications/bulk', {
       userIds,
-      notification,
-    });
+      notification });
   }
 
   /**
@@ -313,8 +309,7 @@ class NotificationService {
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/schedule', {
       ...data,
-      scheduledFor,
-    });
+      scheduledFor });
   }
 
   /**
@@ -350,8 +345,7 @@ class NotificationService {
     snoozeUntil: any
   ): Promise<ApiResponse<void>> {
     return api.patch(`/api/notifications/${notificationId}/snooze`, {
-      snoozeUntil,
-    });
+      snoozeUntil });
   }
 
   /**

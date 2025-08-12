@@ -88,8 +88,7 @@ return [];
           viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
           commentCount: 0,
           likeCount: video.likes || 0,
-          definition: 'hd' as 'hd' | 'sd',
-        };
+          definition: 'hd' as 'hd' | 'sd' };
         return shortVideo;
       });
 
@@ -182,8 +181,7 @@ return;
         targetElement.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
-          inline: 'nearest',
-        });
+          inline: 'nearest' });
       }
     }
   }, []);
@@ -205,8 +203,7 @@ return;
             targetElement.scrollIntoView({
               behavior: 'smooth',
               block: 'start',
-              inline: 'nearest',
-            });
+              inline: 'nearest' });
           }
         }
         return nextIndex;
@@ -232,8 +229,7 @@ return;
             targetElement.scrollIntoView({
               behavior: 'smooth',
               block: 'start',
-              inline: 'nearest',
-            });
+              inline: 'nearest' });
           }
         }
         return prevVideoIndex;
@@ -289,8 +285,7 @@ return;
       try {
         await navigator.share({
           title: 'Check out this Short!',
-          url: shareUrl,
-        });
+          url: shareUrl });
       } catch (error) {
         // Fallback to clipboard if share fails
         copyToClipboard(shareUrl);
@@ -416,16 +411,16 @@ return;
 
   // Enhanced useEffect hooks
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyboardNavigation);
-    return () => document.removeEventListener('keydown', handleKeyboardNavigation);
+    document.addEventListener('keydown', handleKeyboardNavigation as EventListener);
+    return () => document.removeEventListener('keydown', handleKeyboardNavigation as EventListener);
   }, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('wheel', handleWheel, { passive: false });
-      return () => container.removeEventListener('wheel', handleWheel);
+      container.addEventListener('wheel', handleWheel as EventListener, { passive: false });
+      return () => container.removeEventListener('wheel', handleWheel as EventListener);
     }
     return () => {}; // Return empty cleanup function if no container
   }, [handleWheel]);
@@ -434,11 +429,11 @@ return;
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('touchstart', handleTouchStart, { passive: true });
-      container.addEventListener('touchend', handleTouchEnd, { passive: true });
+      container.addEventListener('touchstart', handleTouchStart as EventListener, { passive: true });
+      container.addEventListener('touchend', handleTouchEnd as EventListener, { passive: true });
       return () => {
-        container.removeEventListener('touchstart', handleTouchStart);
-        container.removeEventListener('touchend', handleTouchEnd);
+        container.removeEventListener('touchstart', handleTouchStart as EventListener);
+        container.removeEventListener('touchend', handleTouchEnd as EventListener);
       };
     }
     return () => {}; // Return empty cleanup function if no container
@@ -511,8 +506,7 @@ return;
       {
         root: containerRef.current,
         threshold: 0.5,
-        rootMargin: '0px',
-      },
+        rootMargin: '0px' },
     );
 
     // Observe all video elements
@@ -716,6 +710,4 @@ return;
 };
 
 export default ShortsPage;
-
-
 

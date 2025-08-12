@@ -58,8 +58,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   onPlay,
   onPause,
   onEnded,
-  useYouTube = false,
-}) => {
+  useYouTube = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const controlsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -75,8 +74,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     showControls: true,
     buffered: 0,
     playbackRate: 1,
-    quality: 'auto',
-  });
+    quality: 'auto' });
 
   const [showSettings, setShowSettings] = useState(false);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
@@ -134,26 +132,25 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       setState(prev => ({
         ...prev,
         volume: video.volume,
-        isMuted: video.muted,
-      }));
+        isMuted: video.muted }));
     };
 
-    video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('progress', handleProgress);
-    video.addEventListener('play', handlePlay);
-    video.addEventListener('pause', handlePause);
-    video.addEventListener('ended', handleEnded);
-    video.addEventListener('volumechange', handleVolumeChange);
+    video.addEventListener('loadedmetadata', handleLoadedMetadata as EventListener);
+    video.addEventListener('timeupdate', handleTimeUpdate as EventListener);
+    video.addEventListener('progress', handleProgress as EventListener);
+    video.addEventListener('play', handlePlay as EventListener);
+    video.addEventListener('pause', handlePause as EventListener);
+    video.addEventListener('ended', handleEnded as EventListener);
+    video.addEventListener('volumechange', handleVolumeChange as EventListener);
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('progress', handleProgress);
-      video.removeEventListener('play', handlePlay);
-      video.removeEventListener('pause', handlePause);
-      video.removeEventListener('ended', handleEnded);
-      video.removeEventListener('volumechange', handleVolumeChange);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata as EventListener);
+      video.removeEventListener('timeupdate', handleTimeUpdate as EventListener);
+      video.removeEventListener('progress', handleProgress as EventListener);
+      video.removeEventListener('play', handlePlay as EventListener);
+      video.removeEventListener('pause', handlePause as EventListener);
+      video.removeEventListener('ended', handleEnded as EventListener);
+      video.removeEventListener('volumechange', handleVolumeChange as EventListener);
     };
   }, [
     onTimeUpdate,
@@ -171,13 +168,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const handleFullscreenChange = () => {
       setState(prev => ({
         ...prev,
-        isFullscreen: !!document.fullscreenElement,
-      }));
+        isFullscreen: !!document.fullscreenElement }));
     };
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('fullscreenchange', handleFullscreenChange as EventListener);
     return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange as EventListener);
     };
   }, []);
 
@@ -518,8 +514,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                         onChange={e =>
                           setState(prev => ({
                             ...prev,
-                            quality: e.target.value,
-                          }))
+                            quality: e.target.value }))
                         }
                         className='w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm'
                       >
@@ -563,5 +558,4 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 };
 
 export default VideoPlayer;
-
 

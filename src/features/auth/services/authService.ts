@@ -3,8 +3,7 @@ import type {
   AuthTokens,
   LoginCredentials,
   RegisterData,
-  User,
-} from '../types';
+  User } from '../types';
 
 /**
  * Service for handling authentication-related API requests
@@ -20,10 +19,8 @@ class AuthService {
     const response = await fetch(`${this.baseUrl}/login`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    });
+        'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials) });
 
     if (!response.ok) {
       const error = await response.json();
@@ -42,10 +39,8 @@ class AuthService {
     const response = await fetch(`${this.baseUrl}/register`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+        'Content-Type': 'application/json' },
+      body: JSON.stringify(data) });
 
     if (!response.ok) {
       const error = await response.json();
@@ -69,10 +64,8 @@ class AuthService {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${tokens.accessToken}`,
-          },
-          body: JSON.stringify({ refreshToken: tokens.refreshToken }),
-        });
+            Authorization: `Bearer ${tokens.accessToken}` },
+          body: JSON.stringify({ refreshToken: tokens.refreshToken }) });
       } catch (error) {
         logger.error('Error during logout:', error);
       }
@@ -94,9 +87,7 @@ class AuthService {
     try {
       const response = await fetch(`${this.baseUrl}/me`, {
         headers: {
-          Authorization: `Bearer ${tokens.accessToken}`,
-        },
-      });
+          Authorization: `Bearer ${tokens.accessToken}` } });
 
       if (!response.ok) {
         if (response.status === 401) {
@@ -125,10 +116,8 @@ class AuthService {
       const response = await fetch(`${this.baseUrl}/refresh`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ refreshToken }),
-      });
+          'Content-Type': 'application/json' },
+        body: JSON.stringify({ refreshToken }) });
 
       if (!response.ok) {
         this.clearTokens();

@@ -5,8 +5,7 @@ import type {
   Video,
   VideoMetrics,
   VideoEngagement,
-  VideoStats,
-} from '../types';
+  VideoStats } from '../types';
 
 interface VideoInteractionResponse {
   isLiked: boolean;
@@ -123,9 +122,7 @@ class VideoService {
     const response = await fetch(`${this.baseUrl}/${videoId}/like`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+        'Content-Type': 'application/json' } });
 
     if (!response.ok) {
       throw new Error(`Failed to toggle like: ${response.statusText}`);
@@ -141,9 +138,7 @@ class VideoService {
     const response = await fetch(`${this.baseUrl}/${videoId}/dislike`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+        'Content-Type': 'application/json' } });
 
     if (!response.ok) {
       throw new Error(`Failed to toggle dislike: ${response.statusText}`);
@@ -159,9 +154,7 @@ class VideoService {
     const response = await fetch(`${this.baseUrl}/${videoId}/save`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+        'Content-Type': 'application/json' } });
 
     if (!response.ok) {
       throw new Error(`Failed to toggle save: ${response.statusText}`);
@@ -177,10 +170,8 @@ class VideoService {
     const response = await fetch(`${this.baseUrl}/${videoId}/report`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ reason }),
-    });
+        'Content-Type': 'application/json' },
+      body: JSON.stringify({ reason }) });
 
     if (!response.ok) {
       throw new Error(`Failed to report video: ${response.statusText}`);
@@ -275,8 +266,7 @@ class VideoService {
             ...youtubeVideo,
             isLiked: interactions.isLiked,
             isDisliked: interactions.isDisliked,
-            isSaved: interactions.isSaved,
-          };
+            isSaved: interactions.isSaved };
         } catch (interactionError) {
           // If interactions fail, return YouTube data without local state
           logger.warn(

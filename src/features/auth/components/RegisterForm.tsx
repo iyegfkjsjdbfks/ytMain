@@ -15,8 +15,7 @@ export const RegisterForm: React.FC = () => {
     username: '',
     email: '',
     password: '',
-    displayName: '',
-  });
+    displayName: '' });
 
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -25,8 +24,7 @@ export const RegisterForm: React.FC = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    displayName: '',
-  });
+    displayName: '' });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -37,8 +35,7 @@ export const RegisterForm: React.FC = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      displayName: '',
-    };
+      displayName: '' };
 
     // Username validation
     if (!formData.username) {
@@ -91,8 +88,7 @@ export const RegisterForm: React.FC = () => {
     } else {
       setFormData({
         ...formData,
-        [name]: value,
-      });
+        [name]: value });
     }
   };
 
@@ -277,5 +273,4 @@ export const RegisterForm: React.FC = () => {
 };
 
 export default RegisterForm;
-
 

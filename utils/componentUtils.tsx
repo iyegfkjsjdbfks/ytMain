@@ -129,8 +129,7 @@ export default {
   safeLocalStorage,
   memo: React.memo,
   useMemo: React.useMemo,
-  useCallback: React.useCallback,
-};
+  useCallback: React.useCallback };
 
 // Additional utility functions
 export const buildVideoUrl = (videoId: any): string => {
@@ -144,5 +143,4 @@ export const buildChannelUrl = (channelId: any): string => {
 export const getAvatarFallback = (name: any): string => {
   return name.charAt(0).toUpperCase();
 };
-
 

@@ -31,50 +31,42 @@ class CodebaseRefactorer {
         name: 'consolidate-components',
         description: 'Consolidate duplicate components into unified versions',
         priority: 'high',
-        execute: this.consolidateComponents.bind(this),
-      },
+        execute: this.consolidateComponents.bind(this) },
       {
         name: 'optimize-imports',
         description: 'Optimize and standardize import statements',
         priority: 'high',
-        execute: this.optimizeImports.bind(this),
-      },
+        execute: this.optimizeImports.bind(this) },
       {
         name: 'enhance-type-safety',
         description: 'Improve TypeScript type definitions and usage',
         priority: 'high',
-        execute: this.enhanceTypeSafety.bind(this),
-      },
+        execute: this.enhanceTypeSafety.bind(this) },
       {
         name: 'consolidate-hooks',
         description: 'Merge duplicate custom hooks',
         priority: 'medium',
-        execute: this.consolidateHooks.bind(this),
-      },
+        execute: this.consolidateHooks.bind(this) },
       {
         name: 'optimize-performance',
         description: 'Add React.memo, useMemo, and useCallback optimizations',
         priority: 'medium',
-        execute: this.optimizePerformance.bind(this),
-      },
+        execute: this.optimizePerformance.bind(this) },
       {
         name: 'standardize-error-handling',
         description: 'Implement consistent error handling patterns',
         priority: 'medium',
-        execute: this.standardizeErrorHandling.bind(this),
-      },
+        execute: this.standardizeErrorHandling.bind(this) },
       {
         name: 'improve-accessibility',
         description: 'Enhance accessibility features across components',
         priority: 'low',
-        execute: this.improveAccessibility.bind(this),
-      },
+        execute: this.improveAccessibility.bind(this) },
       {
         name: 'optimize-bundle-size',
         description: 'Implement code splitting and lazy loading',
         priority: 'low',
-        execute: this.optimizeBundleSize.bind(this),
-      },
+        execute: this.optimizeBundleSize.bind(this) },
     ];
   }
 

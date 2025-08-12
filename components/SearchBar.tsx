@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-
 import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent } from 'react';
 
 import { XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid'; // For remove button;
@@ -124,9 +123,9 @@ inputRef.current.blur();
         setShowRecentSearches(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside as EventListener);
     };
   }, []);
 

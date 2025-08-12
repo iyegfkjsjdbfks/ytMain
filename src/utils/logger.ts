@@ -17,8 +17,7 @@ class Logger {
     debug: 0,
     info: 1,
     warn: 2,
-    error: 3,
-  };
+    error: 3 };
 
   constructor(config: Partial<LoggerConfig> = {}) {
     this.config = {
@@ -27,8 +26,7 @@ class Logger {
         typeof window !== 'undefined' &&
         window.location.hostname === 'localhost',
       enableRemote: false,
-      ...config,
-    };
+      ...config };
   }
 
   private shouldLog(level: LogLevel): boolean {

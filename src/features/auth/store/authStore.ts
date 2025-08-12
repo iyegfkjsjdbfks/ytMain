@@ -30,8 +30,7 @@ export const useAuthStore = create<AuthStore>(set => ({
     set({
       user,
       isAuthenticated: !!user,
-      error: null,
-    }),
+      error: null }),
 
   setError: (error: Error) => set({ error: Error }),
 
@@ -85,15 +84,12 @@ export const useAuthStore = create<AuthStore>(set => ({
       set({
         user,
         isAuthenticated: !!user,
-        isLoading: false,
-      });
+        isLoading: false });
     } catch (error) {
       logger.error('Auth check failed:', error);
       set({
         user: null,
         isAuthenticated: false,
-        isLoading: false,
-      });
+        isLoading: false });
     }
-  },
-}));
+  } }));

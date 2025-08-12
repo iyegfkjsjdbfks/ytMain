@@ -78,7 +78,7 @@ export function useDebouncedCallback<T extends (...args) => any>(
  * @returns Object with search state and functions
  */
 export function useDebouncedSearch<T>(
-  searchFunction: (query: any) => Promise<T[]>,
+  searchFunction: (query: any) => Promise<T[]>
   delay: number = 300
 ) {
   const [query, setQuery] = useState('');
@@ -150,6 +150,5 @@ export function useDebouncedSearch<T>(
     results,
     loading,
     error,
-    clearSearch,
-  };
+    clearSearch };
 }

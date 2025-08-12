@@ -59,8 +59,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
   onComment,
   onShare,
   onVote,
-  className = '',
-}) => {
+  className = '' }) => {
   const [showFullContent, setShowFullContent] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
@@ -123,8 +122,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
               <span>•</span>
               <span>
                 {formatDistanceToNow(new Date(post.createdAt), {
-                  addSuffix: true,
-                })}
+                  addSuffix: true })}
               </span>
             </div>
           </div>
@@ -261,8 +259,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
                 {' • '}
                 Ends{' '}
                 {formatDistanceToNow(new Date(post.poll.endsAt), {
-                  addSuffix: true,
-                })}
+                  addSuffix: true })}
               </>
             )}
           </div>
@@ -351,5 +348,4 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
 };
 
 export default CommunityPost;
-
 

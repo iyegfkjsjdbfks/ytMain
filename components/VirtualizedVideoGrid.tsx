@@ -41,8 +41,7 @@ const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data 
     onChannelClick,
     cardSize,
     showChannel,
-    showDescription,
-  } = data;
+    showDescription } = data;
 
   const videoIndex = rowIndex * columnsPerRow + columnIndex;
   const video = videos[videoIndex];
@@ -75,8 +74,7 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
   className,
   cardSize = 'md',
   showChannel = true,
-  showDescription = false,
-}) => {
+  showDescription = false }) => {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
 
@@ -149,8 +147,7 @@ return;
       ...(onChannelClick && { onChannelClick }),
       cardSize,
       showChannel,
-      showDescription,
-    }),
+      showDescription }),
     [videos, columnsPerRow, onVideoClick, onChannelClick, cardSize, showChannel, showDescription],
   );
 

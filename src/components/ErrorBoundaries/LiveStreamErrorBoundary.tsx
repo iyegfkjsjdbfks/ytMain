@@ -49,15 +49,13 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
       error: null,
       errorInfo: null,
       retryCount: 0,
-      isReconnecting: false,
-    };
+      isReconnecting: false };
   }
 
   static getDerivedStateFromError(error: Error): Partial<State> {
     return {
       hasError: true,
-      error,
-    };
+      error };
   }
 
   override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -68,8 +66,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
       JSON.stringify({
         streamId: this.props.streamId,
         retryCount: this.state.retryCount,
-        componentStack: errorInfo.componentStack,
-      })
+        componentStack: errorInfo.componentStack })
     );
 
     conditionalLogger.error(
@@ -78,8 +75,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
     );
 
     this.setState({
-      errorInfo,
-    });
+      errorInfo });
   }
 
   override componentWillUnmount(): void {
@@ -92,15 +88,13 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
     if (this.state.retryCount < this.maxRetries) {
       conditionalLogger.debug('Retrying live stream component', {
         streamId: this.props.streamId,
-        attempt: this.state.retryCount + 1,
-      });
+        attempt: this.state.retryCount + 1 });
 
       this.setState({
         hasError: false,
         error: null,
         errorInfo: null,
-        retryCount: this.state.retryCount + 1,
-      });
+        retryCount: this.state.retryCount + 1 });
 
       this.props.onRetry?.();
     }
@@ -110,8 +104,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
     this.setState({ isReconnecting: true });
 
     conditionalLogger.debug('Attempting to reconnect live stream', {
-      streamId: this.props.streamId,
-    });
+      streamId: this.props.streamId });
 
     // Simulate reconnection delay
     this.reconnectTimeout = setTimeout(() => {
@@ -235,5 +228,4 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
 }
 
 export default LiveStreamErrorBoundary;
-
 

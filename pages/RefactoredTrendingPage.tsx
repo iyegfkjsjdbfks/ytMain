@@ -46,8 +46,7 @@ const RefactoredTrendingPage: React.FC = () => {
     isLive: video.isLive || false,
     isShort: video.isShort || false,
     createdAt: video.publishedAt || '',
-    updatedAt: video.publishedAt || '',
-  })) : [];
+    updatedAt: video.publishedAt || '' })) : [];
 
   const handleVideoClick = (video: Video) => {
     // Navigate to video or handle click
@@ -94,5 +93,4 @@ const RefactoredTrendingPage: React.FC = () => {
 };
 
 export default RefactoredTrendingPage;
-
 

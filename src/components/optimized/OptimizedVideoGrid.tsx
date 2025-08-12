@@ -78,8 +78,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
     className = '',
     itemsPerRow = 4,
     itemHeight = 280,
-    containerHeight = 600,
-  }) => {
+    containerHeight = 600 }) => {
     const [containerWidth, setContainerWidth] = useState(0);
 
     // Calculate grid dimensions
@@ -90,8 +89,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
       return {
         rowCount: count,
         columnCount: itemsPerRow,
-        itemWidth: width,
-      };
+        itemWidth: width };
     }, [videos.length, itemsPerRow, containerWidth]);
 
     // Memoized grid data
@@ -99,8 +97,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
       () => ({
         videos,
         itemsPerRow,
-        onVideoClick,
-      }),
+        onVideoClick }),
       [videos, itemsPerRow, onVideoClick]
     );
 
@@ -173,5 +170,4 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
 OptimizedVideoGrid.displayName = 'OptimizedVideoGrid';
 
 export default OptimizedVideoGrid;
-
 

@@ -19,8 +19,7 @@ interface ProtectedRouteProps {
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requireAuth = true,
-  redirectTo,
-}) => {
+  redirectTo }) => {
   const { isAuthenticated, isLoading, checkAuth } = useAuthStore();
   const location = useLocation();
 
@@ -52,5 +51,4 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 };
 
 export default ProtectedRoute;
-
 

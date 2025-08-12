@@ -18,8 +18,7 @@ const ProtectedStreamAnalyticsDashboard: FC<
 > = ({ streamId, className }) => {
   const handleRetry = useCallback(() => {
     conditionalLogger.debug('Retrying analytics dashboard data fetch', {
-      streamId,
-    });
+      streamId });
     // The error boundary will reset and re-render the component
     // Additional retry logic can be implemented here if needed
   }, [streamId]);
@@ -39,5 +38,4 @@ const ProtectedStreamAnalyticsDashboard: FC<
 };
 
 export default ProtectedStreamAnalyticsDashboard;
-
 

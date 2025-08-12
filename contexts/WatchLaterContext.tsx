@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import { createContext, useContext, useState, useEffect } from 'react';
 
 import type { Video as VideoType } from '../src/types/core';
@@ -56,5 +57,4 @@ export const useWatchLater = () => {
   }
   return context;
 };
-
 

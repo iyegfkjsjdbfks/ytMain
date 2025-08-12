@@ -20,30 +20,25 @@ export const PWA_CONFIG = {
   updates: {
     checkInterval: 60 * 60 * 1000, // 1 hour
     promptDelay: 5 * 1000, // 5 seconds
-    autoUpdate: false,
-  },
+    autoUpdate: false },
 
   // Notifications
   notifications: {
     enabled: true,
     badge: '/icons/badge-72x72.png',
-    icon: '/icons/icon-192x192.png',
-  },
+    icon: '/icons/icon-192x192.png' },
 
   // Caching
   cache: {
     maxVideoSize: 100 * 1024 * 1024, // 100MB
     maxTotalSize: 500 * 1024 * 1024, // 500MB
-    videoQuality: 'medium',
-  },
+    videoQuality: 'medium' },
 
   // Analytics
   analytics: {
     trackInstalls: true,
     trackUsage: true,
-    trackPerformance: true,
-  },
-};
+    trackPerformance: true } };
 
 // PWA Events
 export const PWAEvents = {
@@ -59,8 +54,7 @@ export const PWAEvents = {
   NOTIFICATION_PERMISSION_GRANTED: 'pwa:notification-permission-granted',
   NOTIFICATION_PERMISSION_DENIED: 'pwa:notification-permission-denied',
   BACKGROUND_SYNC_REGISTERED: 'pwa:background-sync-registered',
-  CACHE_UPDATED: 'pwa:cache-updated',
-} as const;
+  CACHE_UPDATED: 'pwa:cache-updated' } as const;
 
 // PWA Utilities
 export class PWAUtils {
@@ -264,8 +258,7 @@ export class PWAUtils {
         effectiveType: connection.effectiveType || 'unknown',
         downlink: connection.downlink || 0,
         rtt: connection.rtt || 0,
-        saveData: connection.saveData || false,
-      };
+        saveData: connection.saveData || false };
     }
 
     return {
@@ -273,8 +266,7 @@ export class PWAUtils {
       effectiveType: 'unknown',
       downlink: 0,
       rtt: 0,
-      saveData: false,
-    };
+      saveData: false };
   }
 
   /**

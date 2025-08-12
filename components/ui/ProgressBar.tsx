@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 export interface ProgressBarProps {
   value: number; // 0-100
   max?: number;
@@ -14,15 +12,13 @@ export interface ProgressBarProps {
 const sizeClasses = {
   sm: 'h-1',
   md: 'h-2',
-  lg: 'h-3',
-};
+  lg: 'h-3' };
 
 const variantClasses = {
   default: 'bg-blue-500',
   success: 'bg-green-500',
   warning: 'bg-yellow-500',
-  error: 'bg-red-500',
-};
+  error: 'bg-red-500' };
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   value,
@@ -31,8 +27,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   variant = 'default',
   showLabel = false,
   label,
-  className = '',
-}) => {
+  className = '' }) => {
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
   return (

@@ -4,7 +4,7 @@ import { memo, useMemo, forwardRef, lazy, createElement, useEffect, type Compone
  * Higher-order component that adds React.memo with custom comparison
  */
 export function withMemo<P extends object>(
-  Component: ComponentType<P>,
+  Component: ComponentType<P>
   areEqual?: (prevProps: P, nextProps: P) => boolean,
 ): ComponentType<P> {
   return memo(Component, areEqual) as unknown as ComponentType<P>;
@@ -14,8 +14,8 @@ export function withMemo<P extends object>(
  * Higher-order component for lazy loading components
  */
 export function withLazyLoading<P extends object>(
-  importFunc: () => Promise<{ default: ComponentType<P> }>,
-  _fallback?: ComponentType<any>,
+  importFunc: () => Promise<{ default: ComponentType<P> }>
+  _fallback?: ComponentType<any>
 ): LazyExoticComponent<ComponentType<P>> {
   return lazy(importFunc);
 }
@@ -79,8 +79,7 @@ export const memoComparisons = {
       });
 
       return memoComparisons.shallow(filteredPrev, filteredNext);
-    },
-};
+    } };
 
 /**
  * Utility for optimizing list rendering
@@ -108,8 +107,7 @@ return `${prefix}-${item.key}`;
       chunks.push(array.slice(i, i + chunkSize));
     }
     return chunks;
-  },
-};
+  } };
 
 /**
  * Performance monitoring for components
@@ -118,7 +116,7 @@ export const componentPerformance = {
   /**
    * HOC to measure component render time
    */
-  withRenderTime: <P extends object>(Component: ComponentType<P>, _name?: string) => {
+  withRenderTime: <P extends object>(Component: ComponentType<P> _name?: string) => {
     return forwardRef<any, P>((props, ref) => {
       useEffect(() => {
         // Performance monitoring disabled
@@ -148,8 +146,7 @@ export const componentPerformance = {
 
       return cleanup;
     }, deps);
-  },
-};
+  } };
 
 /**
  * Bundle size optimization utilities
@@ -175,5 +172,4 @@ export const bundleOptimizations = {
     importFunc().catch(error => {
       console.warn('Component preload failed:', error);
     });
-  },
-};
+  } };

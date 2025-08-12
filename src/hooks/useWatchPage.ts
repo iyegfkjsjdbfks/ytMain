@@ -1,3 +1,4 @@
+import { Channel } from '../types';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -154,8 +155,7 @@ export const useWatchPage = () => {
               isLive: unifiedVideo.isLive || false,
               isShort: unifiedVideo.isShort || false,
               createdAt: unifiedVideo.publishedAt,
-              updatedAt: unifiedVideo.publishedAt,
-            };
+              updatedAt: unifiedVideo.publishedAt };
           }
         } catch (error) {
           console.warn(
@@ -197,8 +197,7 @@ export const useWatchPage = () => {
               isLive: false,
               isShort: false,
               createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            };
+              updatedAt: new Date().toISOString() };
           } else {
             // Try real video service for non-YouTube videos
             foundVideo = await getVideoById(cleanVideoId);
@@ -216,8 +215,7 @@ export const useWatchPage = () => {
           ...foundVideo,
           channelName: foundVideo.channelName || 'Unknown Channel',
           channelAvatarUrl:
-            foundVideo.channelAvatarUrl || '/default-avatar.png',
-        };
+            foundVideo.channelAvatarUrl || '/default-avatar.png' };
 
         setVideo(videoWithChannelInfo);
 
@@ -265,8 +263,7 @@ export const useWatchPage = () => {
               ? comment.authorAvatar
               : 'userAvatarUrl' in comment
                 ? comment.userAvatarUrl
-                : '',
-        }));
+                : '' }));
         setComments(commentsWithDefaults);
         setCommentCount(videoComments.length);
 
@@ -364,8 +361,7 @@ export const useWatchPage = () => {
       tags: [],
       thumbnailUrl: '',
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+      updatedAt: new Date().toISOString() };
 
     return newPlaylist;
   };
@@ -384,8 +380,7 @@ export const useWatchPage = () => {
       tags: [],
       thumbnailUrl: '',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-01T00:00:00Z',
-    },
+      updatedAt: '2024-01-01T00:00:00Z' },
     {
       id: 'playlist-2',
       title: 'Favorites',
@@ -398,8 +393,7 @@ export const useWatchPage = () => {
       tags: [],
       thumbnailUrl: '',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-01T00:00:00Z',
-    },
+      updatedAt: '2024-01-01T00:00:00Z' },
   ];
 
   // Description handlers
@@ -447,8 +441,7 @@ export const useWatchPage = () => {
       isDislikedByCurrentUser: false,
       isEdited: false,
       replies: [],
-      replyCount: 0,
-    };
+      replyCount: 0 };
 
     setComments(prev => [newComment, ...prev]);
     setCommentCount(prev => prev + 1);
@@ -474,8 +467,7 @@ export const useWatchPage = () => {
       isLikedByCurrentUser: false,
       isDislikedByCurrentUser: false,
       isEdited: false,
-      replyTo: parentComment.userName,
-    };
+      replyTo: parentComment.userName };
 
     setComments(prevComments =>
       prevComments.map(c => {
@@ -483,8 +475,7 @@ export const useWatchPage = () => {
           return {
             ...c,
             replies: [newReply, ...(c.replies || [])],
-            replyCount: (c.replyCount || 0) + 1,
-          };
+            replyCount: (c.replyCount || 0) + 1 };
         }
         return c;
       })
@@ -505,8 +496,7 @@ export const useWatchPage = () => {
             ...comment,
             commentText: newText.trim(),
             isEdited: true,
-            timestamp: 'Just now (edited)',
-          };
+            timestamp: 'Just now (edited)' };
         }
         if (comment.replies && comment.replies.length > 0) {
           return { ...comment, replies: updateCommentState(comment.replies) };
@@ -713,8 +703,7 @@ export const useWatchPage = () => {
     setExpandedReplies,
 
     // Navigation
-    navigate,
-  };
+    navigate };
 };
 
 export default useWatchPage;

@@ -75,8 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           avatar: `https://ui-avatars.com/api/?name=${username}&background=random`,
           isVerified: Math.random() > 0.5,
           subscriberCount: Math.floor(Math.random() * 10000),
-          createdAt: new Date().toISOString(),
-        };
+          createdAt: new Date().toISOString() };
 
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
@@ -110,8 +109,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           avatar: `https://ui-avatars.com/api/?name=${username}&background=random`,
           isVerified: false,
           subscriberCount: 0,
-          createdAt: new Date().toISOString(),
-        };
+          createdAt: new Date().toISOString() };
 
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
@@ -162,8 +160,7 @@ return false;
     login,
     register,
     logout,
-    updateProfile,
-  };
+    updateProfile };
 
   return (
     <AuthContext.Provider value={value}>
@@ -173,5 +170,4 @@ return false;
 };
 
 export default AuthProvider;
-
 

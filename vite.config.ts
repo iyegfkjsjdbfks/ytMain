@@ -12,36 +12,29 @@ export default defineConfig(({ mode }) => ({
       // Include .tsx files
       include: '**/*.{jsx,tsx}',
       // Enable automatic JSX runtime
-      jsxRuntime: 'automatic',
-    }),
+      jsxRuntime: 'automatic' }),
     // Gzip compression for production
     viteCompression({
       algorithm: 'gzip',
-      ext: '.gz',
-    }),
+      ext: '.gz' }),
     // Brotli compression for production
     viteCompression({
       algorithm: 'brotliCompress',
-      ext: '.br',
-    }),
+      ext: '.br' }),
     // HTML optimization
     createHtmlPlugin({
       minify: true,
       inject: {
         data: {
           title: 'YouTube Studio Clone',
-          description: 'A modern YouTube Studio clone built with React, TypeScript, and Vite',
-        },
-      },
-    }),
+          description: 'A modern YouTube Studio clone built with React, TypeScript, and Vite' } } }),
     // Bundle analyzer (only in build mode)
     ...(process.env.ANALYZE ? [visualizer({
       filename: 'dist/stats.html',
       open: true,
       gzipSize: true,
       brotliSize: true,
-      template: 'treemap',
-    })] : []),
+      template: 'treemap' })] : []),
   ],
   
   resolve: {
@@ -55,9 +48,7 @@ export default defineConfig(({ mode }) => ({
       '@contexts': resolve(__dirname, './contexts'),
       '@store': resolve(__dirname, './store'),
       '@types': resolve(__dirname, './types'),
-      '@config': resolve(__dirname, './config'),
-    },
-  },
+      '@config': resolve(__dirname, './config') } },
   
   // Development server configuration
   server: {
@@ -72,8 +63,7 @@ export default defineConfig(({ mode }) => ({
     // Add headers for YouTube iframe compatibility
     headers: {
       'Cross-Origin-Embedder-Policy': 'unsafe-none',
-      'Cross-Origin-Opener-Policy': 'unsafe-none',
-    },
+      'Cross-Origin-Opener-Policy': 'unsafe-none' },
     // Proxy configuration for API calls
     proxy: {
       '/api/youtube': {
@@ -90,15 +80,11 @@ export default defineConfig(({ mode }) => ({
           proxy.on('proxyRes', (proxyRes, req, _res) => {
             console.log('Proxy response status:', proxyRes.statusCode, 'for:', req.url);
           });
-        },
-      },
+        } },
       '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+        secure: false } } },
   
   // Build configuration
   build: {
@@ -113,15 +99,12 @@ export default defineConfig(({ mode }) => ({
     terserOptions: {
       compress: {
         drop_console: mode === 'production',
-        drop_debugger: true,
-      },
-    },
+        drop_debugger: true } },
     
     // Rollup options
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-      },
+        main: resolve(__dirname, 'index.html') },
       output: {
         // Manual chunk splitting for better caching
         manualChunks: (id) => {
@@ -185,22 +168,17 @@ export default defineConfig(({ mode }) => ({
           }
           return `assets/[name]-[hash][extname]`;
         },
-        entryFileNames: 'js/[name]-[hash].js',
-      },
-    },
-  },
+        entryFileNames: 'js/[name]-[hash].js' } } },
   
   // CSS configuration
   css: {
     postcss: './postcss.config.js',
-    devSourcemap: true,
-  },
+    devSourcemap: true },
   
   // Environment variables
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
-    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
-  },
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()) },
   
   // Optimization
   optimizeDeps: {
@@ -217,15 +195,13 @@ export default defineConfig(({ mode }) => ({
     ],
     exclude: [
       // Exclude large dependencies that should be loaded dynamically
-    ],
-  },
+    ] },
   
   // Preview configuration (for production preview)
   preview: {
     port: 4173,
     host: true,
-    cors: true,
-  },
+    cors: true },
   
   // Test configuration
   test: {
@@ -240,19 +216,14 @@ export default defineConfig(({ mode }) => ({
         '**/*.d.ts',
         '**/*.test.{ts,tsx}',
         '**/*.spec.{ts,tsx}',
-      ],
-    },
-  },
+      ] } },
   
   // ESBuild configuration
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
     target: 'esnext',
-    platform: 'browser',
-  },
+    platform: 'browser' },
   
   // Worker configuration
   worker: {
-    format: 'es',
-  },
-}));
+    format: 'es' } }));

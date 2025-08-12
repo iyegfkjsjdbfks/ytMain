@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 /**
  * PlaylistsPage component for displaying all playlists
  */
@@ -24,5 +22,4 @@ const PlaylistsPage: React.FC = () => {
 };
 
 export default PlaylistsPage;
-
 

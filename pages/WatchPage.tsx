@@ -151,8 +151,7 @@ const WatchPage: React.FC = () => {
     setExpandedReplies,
 
     // Navigation
-    navigate,
-  } = useWatchPage();
+    navigate } = useWatchPage();
 
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater } = useWatchLater();
@@ -352,5 +351,4 @@ const WatchPage: React.FC = () => {
 };
 
 export default WatchPage;
-
 

@@ -32,9 +32,7 @@ const GoogleSearchStoreDebug: FC = () => {
           error: 'Google Custom Search API not configured',
           details: {
             apiKey: !!searchApiKey,
-            engineId: !!searchEngineId,
-          },
-        });
+            engineId: !!searchEngineId } });
         return;
       }
 
@@ -47,8 +45,7 @@ const GoogleSearchStoreDebug: FC = () => {
     } catch (error) {
       logger.error('Test fetch error:', error);
       setTestResult({
-        error: error instanceof Error ? error.message : String(error),
-      });
+        error: error instanceof Error ? error.message : String(error) });
     } finally {
       setLoading(false);
     }
@@ -84,8 +81,7 @@ const GoogleSearchStoreDebug: FC = () => {
     } catch (error) {
       logger.error('Unified service test error:', error);
       setUnifiedServiceTest({
-        error: error instanceof Error ? error.message : String(error),
-      });
+        error: error instanceof Error ? error.message : String(error) });
     } finally {
       setLoading(false);
     }
@@ -213,5 +209,4 @@ const GoogleSearchStoreDebug: FC = () => {
 };
 
 export default GoogleSearchStoreDebug;
-
 

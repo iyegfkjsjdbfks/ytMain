@@ -56,22 +56,19 @@ return `0:${seconds.toString().padStart(2, '0')}`;
         return targetDate.toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
-          year: 'numeric',
-        });
+          year: 'numeric' });
       case 'long':
         return targetDate.toLocaleDateString('en-US', {
           weekday: 'long',
           year: 'numeric',
           month: 'long',
-          day: 'numeric',
-        });
+          day: 'numeric' });
       case 'relative':
         return dateUtils.formatTimeAgo(targetDate);
       default:
         return targetDate.toLocaleDateString();
     }
-  },
-};
+  } };
 
 // Number Formatting Utilities
 export const numberUtils = {
@@ -106,8 +103,7 @@ return '0 B';
       return '0%';
     }
     return `${((Number(value) / total) * 100).toFixed(1)}%`;
-  },
-};
+  } };
 
 // String Utilities
 export const stringUtils = {
@@ -148,8 +144,7 @@ export const stringUtils = {
   extractMentions: (text: any): string[] => {
     const mentionRegex = /@[\w]+/g;
     return text.match(mentionRegex) ?? [];
-  },
-};
+  } };
 
 // URL and Media Utilities
 export const mediaUtils = {
@@ -159,8 +154,7 @@ export const mediaUtils = {
       medium: 'mqdefault',
       high: 'hqdefault',
       standard: 'sddefault',
-      maxres: 'maxresdefault',
-    };
+      maxres: 'maxresdefault' };
     return `https://img.youtube.com/vi/${videoId}/${qualityMap[quality]}.jpg`;
   },
 
@@ -189,8 +183,7 @@ return match[1] ?? null;
   isValidVideoUrl: (url: any): boolean => {
     const videoExtensions = /\.(mp4|webm|ogg|avi|mov|wmv|flv)$/i;
     return videoExtensions.test(url) || /youtube|youtu\.be|vimeo|dailymotion/.test(url);
-  },
-};
+  } };
 
 // Validation Utilities
 export const validationUtils = {
@@ -230,15 +223,13 @@ errors.push('Password must contain at least one special character');
 
     return {
       isValid: errors.length === 0,
-      errors,
-    };
+      errors };
   },
 
   isPhoneNumber: (phone: any): boolean => {
     const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
     return phoneRegex.test(phone.replace(/[\s\-()]/g, ''));
-  },
-};
+  } };
 
 // Array Utilities
 export const arrayUtils = {
@@ -297,8 +288,7 @@ export const arrayUtils = {
 }
       return 0;
     });
-  },
-};
+  } };
 
 // Local Storage Utilities
 export const storageUtils = {
@@ -341,15 +331,13 @@ export const storageUtils = {
 
   exists: (key: string): boolean => {
     return localStorage.getItem(key) !== null;
-  },
-};
+  } };
 
 // Performance Utilities
 export const performanceUtils = {
   debounce: <T extends (...args: unknown[]) => unknown>(
     func: T,
-    delay: any,
-  ): (...args: Parameters<T>) => void => {
+    delay: any): (...args: Parameters<T>) => void => {
     let timeoutId: ReturnType<typeof setTimeout>;
     return (...args: Parameters<T>) => {
       clearTimeout(timeoutId);
@@ -359,8 +347,7 @@ export const performanceUtils = {
 
   throttle: <T extends (...args: unknown[]) => unknown>(
     func: T,
-    delay: any,
-  ): (...args: Parameters<T>) => void => {
+    delay: any): (...args: Parameters<T>) => void => {
     let lastCall = 0;
     return (...args: Parameters<T>) => {
       const now = Date.now();
@@ -395,8 +382,7 @@ export const performanceUtils = {
     }
 
     return { result, duration };
-  },
-};
+  } };
 
 // Error Handling Utilities
 export const errorUtils = {
@@ -448,15 +434,13 @@ return error.message;
       context,
       timestamp: new Date().toISOString(),
       stack: error instanceof Error ? error.stack : undefined,
-      details: isErrorWithDetails(error) ? error.details : undefined,
-    };
+      details: isErrorWithDetails(error) ? error.details : undefined };
 
     console.error('Error logged:', errorInfo);
 
     // In production, you might want to send this to an error tracking service
     // errorTrackingService.log(errorInfo);
-  },
-};
+  } };
 
 // Export all utilities as a single object for convenience
 export const utils = {
@@ -468,8 +452,7 @@ export const utils = {
   array: arrayUtils,
   storage: storageUtils,
   performance: performanceUtils,
-  error: errorUtils,
-};
+  error: errorUtils };
 
 // Export individual utilities for tree-shaking
 // All utilities are already exported individually above

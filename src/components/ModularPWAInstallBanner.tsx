@@ -46,14 +46,12 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
   customTheme,
   onInstallSuccess,
   onInstallDismiss,
-  onUpdateInstall,
-}) => {
+  onUpdateInstall }) => {
   const [state, setState] = useState<BannerState>({
     isVisible: false,
     currentView: 'install',
     isAnimating: false,
-    dismissedAt: null,
-  });
+    dismissedAt: null });
 
   // Use modular hooks
   const pwa = usePWA();
@@ -109,8 +107,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
         setState(prev => ({
           ...prev,
           isVisible: true,
-          currentView,
-        }));
+          currentView }));
       }
     };
 
@@ -143,8 +140,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
         setState(prev => ({
           ...prev,
           isVisible: false,
-          isAnimating: false,
-        }));
+          isAnimating: false }));
       } else {
         setState(prev => ({ ...prev, isAnimating: false }));
       }
@@ -185,8 +181,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
       setState(prev => ({
         ...prev,
         isVisible: false,
-        isAnimating: false,
-      }));
+        isAnimating: false }));
     } catch (error) {
       setState(prev => ({ ...prev, isAnimating: false }));
     }
@@ -197,8 +192,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
     setState(prev => ({
       ...prev,
       isVisible: false,
-      dismissedAt: Date.now(),
-    }));
+      dismissedAt: Date.now() }));
 
     localStorage.setItem('pwa-banner-dismissed', Date.now().toString());
     onInstallDismiss?.();
@@ -214,23 +208,20 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
     primaryColor: customTheme?.primaryColor || '#007bff',
     backgroundColor: customTheme?.backgroundColor || '#ffffff',
     textColor: customTheme?.textColor || '#333333',
-    borderRadius: customTheme?.borderRadius || '8px',
-  };
+    borderRadius: customTheme?.borderRadius || '8px' };
 
   // Position classes
   const positionClasses = {
     top: 'top-4 left-4 right-4',
     bottom: 'bottom-4 left-4 right-4',
-    center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
-  };
+    center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' };
 
   // Variant classes
   const variantClasses = {
     default: 'p-4 shadow-lg',
     minimal: 'p-2 shadow-md',
     detailed: 'p-6 shadow-xl',
-    floating: 'p-4 shadow-2xl rounded-full',
-  };
+    floating: 'p-4 shadow-2xl rounded-full' };
 
   // Content based on current view
   const renderContent = () => {
@@ -421,8 +412,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
         backgroundColor: theme.backgroundColor,
         borderRadius: theme.borderRadius,
         transform: state.isVisible ? 'translateY(0)' : 'translateY(100%)',
-        opacity: state.isVisible ? 1 : 0,
-      }}
+        opacity: state.isVisible ? 1 : 0 }}
     >
       {renderContent()}
 
@@ -446,5 +436,4 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
 };
 
 export default ModularPWAInstallBanner;
-
 

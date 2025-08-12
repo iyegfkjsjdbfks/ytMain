@@ -38,8 +38,7 @@ const UploadPage: React.FC = () => {
     thumbnail: null,
     monetization: false,
     commentsEnabled: true,
-    ageRestriction: false,
-  });
+    ageRestriction: false });
   // const [tagInput, setTagInput] = useState(''); // Commented out as unused
 
   const categories = [
@@ -71,8 +70,7 @@ return;
       file,
       preview,
       progress: 0,
-      status: 'uploading',
-    };
+      status: 'uploading' };
 
     setUploadedFile(newFile);
     setMetadata(prev => ({
@@ -98,14 +96,12 @@ return null;
           return {
             ...prev,
             progress: 100,
-            status: 'processing',
-          };
+            status: 'processing' };
         }
 
         return {
           ...prev,
-          progress: newProgress,
-        };
+          progress: newProgress };
       });
     }, 200);
 
@@ -113,8 +109,7 @@ return null;
     setTimeout(() => {
       setUploadedFile(prev => prev ? {
         ...prev,
-        status: 'completed',
-      } : null);
+        status: 'completed' } : null);
     }, 5000);
   };
 
@@ -133,8 +128,7 @@ return null;
         item: (index) => index === 0 ? file : null,
         *[Symbol.iterator] () {
           yield file;
-        },
-      } as FileList;
+        } } as FileList;
 
       const fakeEvent = {
         target: { files: fileList },
@@ -151,8 +145,7 @@ return null;
         type: 'change',
         persist: () => {},
         isDefaultPrevented: () => false,
-        isPropagationStopped: () => false,
-      } as React.ChangeEvent<HTMLInputElement>;
+        isPropagationStopped: () => false } as React.ChangeEvent<HTMLInputElement>;
       handleFileSelect(fakeEvent);
     }
   };
@@ -160,8 +153,7 @@ return null;
   const removeTag = (tagToRemove: any) => {
     setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
-    }));
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
   };
 
   const handlePublish = () => {
@@ -519,6 +511,4 @@ return null;
 };
 
 export default UploadPage;
-
-
 

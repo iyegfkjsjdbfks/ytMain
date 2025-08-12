@@ -97,8 +97,7 @@ export function useSubscriptions() {
     unsubscribe,
     isSubscribed,
     getChannelNotificationState,
-    totalSubscriptions: channels.length,
-  };
+    totalSubscriptions: channels.length };
 }
 
 export default useSubscriptions;

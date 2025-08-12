@@ -1,3 +1,5 @@
+import type { Channel } from '../types';
+import { Channel } from '../types';
 import React, { ReactNode, ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient  } from '@tanstack/react-query';
@@ -11,13 +13,9 @@ export const createTestQueryClient = () => {
     defaultOptions: {
       queries: {
         retry: false,
-        gcTime: 0,
-      },
+        gcTime: 0 },
       mutations: {
-        retry: false,
-      },
-    },
-  });
+        retry: false } } });
 };
 
 // Wrapper component for tests
@@ -48,9 +46,7 @@ export const renderWithProviders = (
     queryClient = new QueryClient({
       defaultOptions: {
         queries: { retry: false },
-        mutations: { retry: false },
-      },
-    }),
+        mutations: { retry: false } } }),
     ...renderOptions
   } = options || {};
 
@@ -58,8 +54,7 @@ export const renderWithProviders = (
     wrapper: ({ children }) => (
       <TestWrapper queryClient={queryClient}>{children}</TestWrapper>
     ),
-    ...renderOptions,
-  });
+    ...renderOptions });
 };
 
 // Mock data factories
@@ -83,8 +78,7 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   visibility: 'public',
   createdAt: '2024-01-01T00:00:00Z',
   updatedAt: '2024-01-01T00:00:00Z',
-  ...overrides,
-});
+  ...overrides });
 
 export const createMockChannel = (
   overrides: Partial<Channel> = {}
@@ -101,8 +95,7 @@ export const createMockChannel = (
   joinedDate: '2023-01-01',
   createdAt: '2023-01-01T00:00:00Z',
   updatedAt: '2024-01-01T00:00:00Z',
-  ...overrides,
-});
+  ...overrides });
 
 export const createMockComment = (
   overrides: Partial<Comment> = {}
@@ -130,8 +123,7 @@ export const createMockComment = (
   likeCount: 5,
   publishedAt: '2024-01-01T00:00:00Z',
   updatedAt: '2024-01-01T00:00:00Z',
-  ...overrides,
-});
+  ...overrides });
 
 // Performance testing utilities
 export const measureRenderTime = async (
@@ -159,8 +151,7 @@ export const checkAccessibility = async (_container: HTMLElement) => {
 export const userInteraction = {
   clickVideo: async (videoTitle: any) => {
     const video = screen.getByRole('button', {
-      name: new RegExp(videoTitle, 'i'),
-    });
+      name: new RegExp(videoTitle, 'i') });
     await userEvent.click(video);
   },
 
@@ -188,8 +179,7 @@ export const userInteraction = {
   subscribeToChannel: async () => {
     const subscribeButton = screen.getByRole('button', { name: /subscribe/i });
     await userEvent.click(subscribeButton);
-  },
-};
+  } };
 
 // Mock API responses
 export const mockApiResponses = {
@@ -197,20 +187,16 @@ export const mockApiResponses = {
     trending: [createMockVideo({ id: '1', title: 'Trending Video 1' })],
     search: (query: any) => [
       createMockVideo({ id: '2', title: `Search Result for ${query}` }),
-    ],
-  },
+    ] },
 
   channels: {
     byId: (id: string) =>
-      createMockChannel({ id, name: `Channel ${id}` }),
-  },
+      createMockChannel({ id, name: `Channel ${id}` }) },
 
   comments: {
     byVideoId: (videoId: any) => [
       createMockComment({ id: '1', content: `Comment for video ${videoId}` }),
-    ],
-  },
-};
+    ] } };
 
 // Test scenarios
 export const testScenarios = {
@@ -225,8 +211,7 @@ export const testScenarios = {
     'should show video controls': () => {
       expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
       expect(screen.getByRole('slider', { name: /seek/i })).toBeInTheDocument();
-    },
-  },
+    } },
 
   userInteractions: {
     'should allow liking videos': async () => {
@@ -239,8 +224,7 @@ export const testScenarios = {
     'should allow adding comments': async () => {
       await userInteraction.addComment('Great video!');
       expect(screen.getByText('Great video!')).toBeInTheDocument();
-    },
-  },
+    } },
 
   navigation: {
     'should navigate to video page': async () => {
@@ -251,9 +235,7 @@ export const testScenarios = {
     'should search for videos': async () => {
       await userInteraction.searchFor('test query');
       expect(window.location.search).toContain('q=test+query');
-    },
-  },
-};
+    } } };
 
 // Performance benchmarks
 export const performanceBenchmarks = {
@@ -270,9 +252,7 @@ export const performanceBenchmarks = {
   commentSection: {
     maxRenderTime: 50, // ms per 100 comments
     maxScrollPerformance: 60, // fps
-  },
-};
+  } };
 
 export { screen, fireEvent, waitFor, userEvent  };
-
 

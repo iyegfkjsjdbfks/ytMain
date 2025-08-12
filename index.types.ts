@@ -17,8 +17,7 @@ export type {
   YouTubeSearchResponse,
   YouTubeVideosResponse,
   YouTubeChannelsResponse,
-  YouTubePlaylistsResponse,
-} from './src/types/youtube';
+  YouTubePlaylistsResponse } from './src/types/youtube';
 
 // Error types (primary source for YouTubeApiError)
 export * from './src/types/errors';

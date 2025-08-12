@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 interface ShortsProgressIndicatorProps {
   currentIndex: number;
   totalCount: number;
@@ -10,8 +8,7 @@ interface ShortsProgressIndicatorProps {
 const ShortsProgressIndicator: React.FC<ShortsProgressIndicatorProps> = ({
   currentIndex,
   totalCount,
-  className = '',
-}) => {
+  className = '' }) => {
   if (totalCount <= 1) {
 return null;
 }

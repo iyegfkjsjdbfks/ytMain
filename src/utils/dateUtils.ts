@@ -134,8 +134,7 @@ export const formatDate = (
     const defaultOptions: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'short',
-      day: 'numeric',
-    };
+      day: 'numeric' };
 
     return targetDate.toLocaleDateString('en-US', options || defaultOptions);
   } catch (error) {
@@ -163,8 +162,7 @@ export const formatTime = (
 
     const defaultOptions: Intl.DateTimeFormatOptions = {
       hour: '2-digit',
-      minute: '2-digit',
-    };
+      minute: '2-digit' };
 
     return targetDate.toLocaleTimeString('en-US', options || defaultOptions);
   } catch (error) {

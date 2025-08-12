@@ -19,32 +19,28 @@ export function useSubscription(channelId: any) {
   const { data: subscription, isLoading: isQueryLoading } = useQuery({
     queryKey: ['subscription', channelId],
     queryFn: () => subscriptionService.getSubscriptionStatus(channelId),
-    enabled: !!channelId,
-  });
+    enabled: !!channelId });
 
   const subscribeMutation = useMutation({
     mutationFn: () => subscriptionService.subscribe(channelId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['subscription', channelId] });
       queryClient.invalidateQueries({ queryKey: ['subscriptions'] });
-    },
-  });
+    } });
 
   const unsubscribeMutation = useMutation({
     mutationFn: () => subscriptionService.unsubscribe(channelId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['subscription', channelId] });
       queryClient.invalidateQueries({ queryKey: ['subscriptions'] });
-    },
-  });
+    } });
 
   const updateNotificationMutation = useMutation({
     mutationFn: (level: 'all' | 'personalized' | 'none') =>
       subscriptionService.updateNotificationLevel(channelId, level),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['subscription', channelId] });
-    },
-  });
+    } });
 
   return {
     isSubscribed: subscription?.isSubscribed || false,
@@ -56,33 +52,28 @@ export function useSubscription(channelId: any) {
     subscribe: subscribeMutation.mutateAsync,
     unsubscribe: unsubscribeMutation.mutateAsync,
     updateNotificationLevel: updateNotificationMutation.mutateAsync,
-    subscription,
-  };
+    subscription };
 }
 
 export function useSubscriptions() {
   const {
     data: subscriptions,
     isLoading,
-    error,
-  } = useQuery({
+    error } = useQuery({
     queryKey: ['subscriptions'],
-    queryFn: () => subscriptionService.getSubscriptions(),
-  });
+    queryFn: () => subscriptionService.getSubscriptions() });
 
   return {
     subscriptions: subscriptions || [],
     isLoading,
-    error,
-  };
+    error };
 }
 
 export function useSubscriptionFeed() {
   const {
     data: videos,
     isLoading,
-    error,
-  } = useQuery({
+    error } = useQuery({
     queryKey: ['subscription-feed'],
     queryFn: () => subscriptionService.getSubscriptionFeed(),
     refetchInterval: 5 * 60 * 1000, // Refetch every 5 minutes
@@ -91,6 +82,5 @@ export function useSubscriptionFeed() {
   return {
     videos: videos || [],
     isLoading,
-    error,
-  };
+    error };
 }

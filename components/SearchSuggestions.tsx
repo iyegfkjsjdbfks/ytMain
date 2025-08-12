@@ -1,6 +1,4 @@
-import React, { FC, ChangeEvent, MouseEvent } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import SearchIcon from './icons/SearchIcon';
 
 interface SearchSuggestionsProps {

@@ -35,15 +35,13 @@ export class VideoErrorBoundary extends Component<Props, State> {
       hasError: false,
       error: null,
       errorInfo: null,
-      retryCount: 0,
-    };
+      retryCount: 0 };
   }
 
   static getDerivedStateFromError(error: Error): Partial<State> {
     return {
       hasError: true,
-      error,
-    };
+      error };
   }
 
   override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -54,30 +52,26 @@ export class VideoErrorBoundary extends Component<Props, State> {
       JSON.stringify({
         videoId: this.props.videoId,
         retryCount: this.state.retryCount,
-        componentStack: errorInfo.componentStack,
-      })
+        componentStack: errorInfo.componentStack })
     );
 
     conditionalLogger.error('Video component error caught:', componentError);
 
     this.setState({
-      errorInfo,
-    });
+      errorInfo });
   }
 
   private handleRetry = (): void => {
     if (this.state.retryCount < this.maxRetries) {
       conditionalLogger.debug('Retrying video component', {
         videoId: this.props.videoId,
-        attempt: this.state.retryCount + 1,
-      });
+        attempt: this.state.retryCount + 1 });
 
       this.setState({
         hasError: false,
         error: null,
         errorInfo: null,
-        retryCount: this.state.retryCount + 1,
-      });
+        retryCount: this.state.retryCount + 1 });
 
       this.props.onRetry?.();
     }
@@ -162,5 +156,4 @@ export class VideoErrorBoundary extends Component<Props, State> {
 }
 
 export default VideoErrorBoundary;
-
 

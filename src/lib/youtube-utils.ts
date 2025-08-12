@@ -203,17 +203,14 @@ export class YouTubePlayer {
         playerVars: {
           playsinline: 1,
           origin: window.location.origin,
-          ...this.options.playerVars,
-        },
+          ...this.options.playerVars },
         events: {
           onReady: event => {
             this.options.events?.onReady?.(event);
           },
           onStateChange: event => {
             this.options.events?.onStateChange?.(event);
-          },
-        },
-      });
+          } } });
     } catch (error) {
       logger.error('Error initializing YouTube player:', error);
     }
@@ -435,9 +432,7 @@ export function embedYouTubeVideo(
       rel: options.rel ? 1 : 0,
       showinfo: options.showinfo ? 1 : 0,
       enablejsapi: 1,
-      origin: window.location.origin,
-    },
-  };
+      origin: window.location.origin } };
 
   return new YouTubePlayer(containerId, videoId, playerOptions);
 }
@@ -476,23 +471,19 @@ export function extractVideoIdFromUrl(
     // youtu.be/ID
     {
       regex: /youtu\.be\/([^#&?/]+)/,
-      getter: match => match[1] || null,
-    },
+      getter: match => match[1] || null },
     // youtube.com/watch?v=ID
     {
       regex: /[?&]v=([^&#]+)/,
-      getter: match => match[1] || null,
-    },
+      getter: match => match[1] || null },
     // youtube.com/embed/ID
     {
       regex: /\/embed\/([^#&?/]+)/,
-      getter: match => match[1] || null,
-    },
+      getter: match => match[1] || null },
     // youtube.com/v/ID
     {
       regex: /\/v\/([^#&?/]+)/,
-      getter: match => match[1] || null,
-    },
+      getter: match => match[1] || null },
   ];
 
   for (const { regex, getter } of patterns) {
@@ -520,8 +511,7 @@ export enum YouTubePlayerState {
   PLAYING = 1,
   PAUSED = 2,
   BUFFERING = 3,
-  VIDEO_CUED = 5,
-}
+  VIDEO_CUED = 5 }
 
 // Type-safe interface for YouTube player events
 export interface YouTubePlayerEvent {

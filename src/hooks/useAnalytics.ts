@@ -20,8 +20,7 @@ const DEFAULT_OPTIONS: UseAnalyticsOptions = {
   trackPerformance: false,
   trackClicks: false,
   trackScrollDepth: false,
-  trackTimeOnPage: false,
-};
+  trackTimeOnPage: false };
 
 export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
   const opts = { ...DEFAULT_OPTIONS, ...options };
@@ -58,14 +57,13 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
         {
           duration: timeOnPage,
           path: location.pathname,
-          maxScrollDepth: maxScrollDepth.current,
-        },
+          maxScrollDepth: maxScrollDepth.current },
         'engagement'
       );
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('beforeunload', handleBeforeUnload as EventListener);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload as EventListener);
   }, [location.pathname, opts.trackTimeOnPage]);
 
   // Track scroll depth
@@ -98,8 +96,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
             'scroll_depth',
             {
               percentage: marker,
-              path: location.pathname,
-            },
+              path: location.pathname },
             'engagement'
           );
         }
@@ -107,8 +104,8 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
     };
 
     const throttledScroll = throttle(handleScroll, 100);
-    window.addEventListener('scroll', throttledScroll, { passive: true });
-    return () => window.removeEventListener('scroll', throttledScroll);
+    window.addEventListener('scroll', throttledScroll as EventListener, { passive: true });
+    return () => window.removeEventListener('scroll', throttledScroll as EventListener);
   }, [location.pathname, opts.trackScrollDepth]);
 
   // Track clicks
@@ -138,21 +135,19 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
           path: location.pathname,
           coordinates: {
             x: event.clientX,
-            y: event.clientY,
-          },
-        });
+            y: event.clientY } });
       }
     };
 
-    document.addEventListener('click', handleClick, { passive: true });
-    return () => document.removeEventListener('click', handleClick);
+    document.addEventListener('click', handleClick as EventListener, { passive: true });
+    return () => document.removeEventListener('click', handleClick as EventListener);
   }, [location.pathname, opts.trackClicks]);
 
   // Analytics methods
   const track = useCallback(
     (
       eventName: any,
-      properties?: Record<string, any>,
+      properties?: Record<string, any>
       category?: AnalyticsEvent['category']
     ) => {
       analyticsService.track(
@@ -160,8 +155,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
         {
           ...properties,
           componentName: opts.componentName,
-          path: location.pathname,
-        },
+          path: location.pathname },
         category
       );
     },
@@ -173,8 +167,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       analyticsService.trackClick(element, {
         ...properties,
         componentName: opts.componentName,
-        path: location.pathname,
-      });
+        path: location.pathname });
     },
     [location.pathname, opts.componentName]
   );
@@ -184,8 +177,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       analyticsService.trackVideoEvent(action, videoId, {
         ...properties,
         componentName: opts.componentName,
-        path: location.pathname,
-      });
+        path: location.pathname });
     },
     [location.pathname, opts.componentName]
   );
@@ -199,15 +191,14 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       analyticsService.trackEngagement(type, {
         ...properties,
         componentName: opts.componentName,
-        path: location.pathname,
-      });
+        path: location.pathname });
     },
     [location.pathname, opts.componentName]
   );
 
   const trackAsyncAction = useCallback(
     async <T>(
-      action: () => Promise<T>,
+      action: () => Promise<T>
       actionName: any,
       properties?: Record<string, any>
     ): Promise<T> => {
@@ -219,8 +210,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
 
         track(`${actionName}_success`, {
           duration,
-          ...properties,
-        });
+          ...properties });
 
         return result;
       } catch (error) {
@@ -229,8 +219,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
         track(`${actionName}_error`, {
           duration,
           error: error instanceof Error ? error.message : String(error),
-          ...properties,
-        });
+          ...properties });
 
         throw error;
       }
@@ -247,8 +236,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
       return measureFunction((...args: T) => {
         track(`function_${functionName}`, {
           args: args.length,
-          ...properties,
-        });
+          ...properties });
         return fn(...args);
       }, functionName);
     },
@@ -262,8 +250,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
     trackSearch,
     trackEngagement,
     trackAsyncAction,
-    trackFunction,
-  };
+    trackFunction };
 };
 
 // Hook for video analytics
@@ -278,8 +265,7 @@ export const useVideoAnalytics = (videoId?: string) => {
       watchStartTime.current = Date.now();
       trackVideoEvent('play', videoId || '', {
         currentTime,
-        timestamp: Date.now(),
-      });
+        timestamp: Date.now() });
     },
     [trackVideoEvent, videoId]
   );
@@ -291,8 +277,7 @@ export const useVideoAnalytics = (videoId?: string) => {
         trackVideoEvent('pause', videoId || '', {
           currentTime,
           watchDuration,
-          timestamp: Date.now(),
-        });
+          timestamp: Date.now() });
         watchStartTime.current = null;
       }
     },
@@ -312,8 +297,7 @@ export const useVideoAnalytics = (videoId?: string) => {
           trackVideoEvent('progress', videoId || '', {
             percentage: milestone,
             currentTime,
-            duration,
-          });
+            duration });
         }
       });
 
@@ -326,8 +310,7 @@ export const useVideoAnalytics = (videoId?: string) => {
       trackVideoEvent('seek', videoId || '', {
         fromTime,
         toTime,
-        seekDistance: Math.abs(toTime - fromTime),
-      });
+        seekDistance: Math.abs(toTime - fromTime) });
     },
     [trackVideoEvent, videoId]
   );
@@ -341,8 +324,7 @@ export const useVideoAnalytics = (videoId?: string) => {
       trackVideoEvent('complete', videoId || '', {
         duration,
         totalWatchTime,
-        completionRate: (totalWatchTime / duration) * 100,
-      });
+        completionRate: (totalWatchTime / duration) * 100 });
     },
     [trackVideoEvent, videoId]
   );
@@ -351,8 +333,7 @@ export const useVideoAnalytics = (videoId?: string) => {
     (error: Error) => {
       trackVideoEvent('error', videoId || '', {
         error,
-        timestamp: Date.now(),
-      });
+        timestamp: Date.now() });
     },
     [trackVideoEvent, videoId]
   );
@@ -360,8 +341,7 @@ export const useVideoAnalytics = (videoId?: string) => {
   const trackQualityChange = useCallback((quality: any) => {
       trackVideoEvent('quality_change', videoId || '', {
         quality,
-        timestamp: Date.now(),
-      });
+        timestamp: Date.now() });
     },
     [trackVideoEvent, videoId]
   );
@@ -370,8 +350,7 @@ export const useVideoAnalytics = (videoId?: string) => {
       trackVideoEvent('volume_change', videoId || '', {
         volume,
         muted,
-        timestamp: Date.now(),
-      });
+        timestamp: Date.now() });
     },
     [trackVideoEvent, videoId]
   );
@@ -381,8 +360,7 @@ export const useVideoAnalytics = (videoId?: string) => {
         isFullscreen ? 'fullscreen_enter' : 'fullscreen_exit',
         videoId || '',
         {
-          timestamp: Date.now(),
-        }
+          timestamp: Date.now() }
       );
     },
     [trackVideoEvent, videoId]
@@ -397,8 +375,7 @@ export const useVideoAnalytics = (videoId?: string) => {
     trackError,
     trackQualityChange,
     trackVolumeChange,
-    trackFullscreen,
-  };
+    trackFullscreen };
 };
 
 // Hook for form analytics
@@ -423,8 +400,7 @@ export const useFormAnalytics = (formName: any) => {
         success,
         duration,
         errors,
-        fieldInteractions: Object.keys(fieldInteractions.current).length,
-      });
+        fieldInteractions: Object.keys(fieldInteractions.current).length });
     },
     [track, formName]
   );
@@ -436,8 +412,7 @@ export const useFormAnalytics = (formName: any) => {
       track('form_field_interaction', {
         formName,
         fieldName,
-        interactionCount: fieldInteractions.current[fieldName],
-      });
+        interactionCount: fieldInteractions.current[fieldName] });
     },
     [track, formName]
   );
@@ -452,8 +427,7 @@ export const useFormAnalytics = (formName: any) => {
         formName,
         duration,
         lastField,
-        fieldInteractions: Object.keys(fieldInteractions.current).length,
-      });
+        fieldInteractions: Object.keys(fieldInteractions.current).length });
     },
     [track, formName]
   );
@@ -462,8 +436,7 @@ export const useFormAnalytics = (formName: any) => {
     trackFormStart,
     trackFormSubmit,
     trackFieldInteraction,
-    trackFormAbandon,
-  };
+    trackFormAbandon };
 };
 
 // Utility function for throttling

@@ -44,8 +44,7 @@ describe('UnifiedDataService', () => {
       const customService = new (unifiedDataService.constructor as any)({
         sources: { local: false, youtube: true },
         limits: { youtube: 50 },
-        mixing: { strategy: 'source-priority' },
-      });
+        mixing: { strategy: 'source-priority' } });
 
       const config = customService.getConfig();
       expect(config.sources.local).toBe(false);
@@ -57,8 +56,7 @@ describe('UnifiedDataService', () => {
     it('should update configuration dynamically', () => {
       service.updateConfig({
         sources: { local: false, youtube: true },
-        caching: { enabled: false, ttl: 0 },
-      });
+        caching: { enabled: false, ttl: 0 } });
 
       const config = service.getConfig();
       expect(config.sources.local).toBe(false);
@@ -79,8 +77,7 @@ describe('UnifiedDataService', () => {
       // Mock metadata normalization
       mockMetadataService.normalizeLocalVideo.mockImplementation((video) => ({
         ...video,
-        source: 'local',
-      }));
+        source: 'local' }));
     });
 
     it('should fetch and mix trending videos from both sources', async () => {
@@ -166,8 +163,7 @@ describe('UnifiedDataService', () => {
 
       mockMetadataService.normalizeLocalVideo.mockImplementation((video) => ({
         ...video,
-        source: 'local',
-      }));
+        source: 'local' }));
     });
 
     it('should search videos across local sources', async () => {
@@ -343,9 +339,7 @@ describe('UnifiedDataService', () => {
       service.updateConfig({
         mixing: {
           strategy: 'source-priority',
-          sourcePriority: ['local', 'youtube'],
-        },
-      });
+          sourcePriority: ['local', 'youtube'] } });
 
       const mixedVideos = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
 

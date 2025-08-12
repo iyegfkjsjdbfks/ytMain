@@ -4,6 +4,14 @@ import { useEffect, useState, FC } from 'react';
 import { EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
+import { ClockIcon } from '@heroicons/react/24/outline';
+import { HandThumbUpIcon } from '@heroicons/react/24/outline';
+import { ShareIcon } from '@heroicons/react/24/outline';
+import { DevicePhoneMobileIcon } from '@heroicons/react/24/outline';
+import { ComputerDesktopIcon } from '@heroicons/react/24/outline';
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
+import { TvIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
   videoId: string;
@@ -113,13 +121,11 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
           '35-44': Math.floor(Math.random() * 20) + 15,
           '45-54': Math.floor(Math.random() * 15) + 10,
           '55-64': Math.floor(Math.random() * 10) + 5,
-          '65+': Math.floor(Math.random() * 5),
-        },
+          '65+': Math.floor(Math.random() * 5) },
         genders: {
           'Male': 45 + Math.random() * 20,
           'Female': 35 + Math.random() * 20,
-          'Other': Math.random() * 5,
-        },
+          'Other': Math.random() * 5 },
         countries: {
           'United States': 25 + Math.random() * 20,
           'India': 15 + Math.random() * 15,
@@ -127,36 +133,29 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
           'Canada': 5 + Math.random() * 8,
           'Australia': 3 + Math.random() * 5,
           'Germany': 3 + Math.random() * 5,
-          'Other': 20 + Math.random() * 15,
-        },
-      },
+          'Other': 20 + Math.random() * 15 } },
       devices: {
         mobile: 60 + Math.random() * 20,
         desktop: 25 + Math.random() * 15,
         tablet: 8 + Math.random() * 7,
-        tv: 2 + Math.random() * 5,
-      },
+        tv: 2 + Math.random() * 5 },
       trafficSources: {
         search: 30 + Math.random() * 20,
         suggested: 25 + Math.random() * 15,
         external: 15 + Math.random() * 10,
         direct: 10 + Math.random() * 10,
-        playlist: 5 + Math.random() * 10,
-      },
+        playlist: 5 + Math.random() * 10 },
       revenueData: {
         estimatedRevenue: Math.floor(baseViews * (0.001 + Math.random() * 0.005)),
         rpm: 1 + Math.random() * 4,
         cpm: 2 + Math.random() * 8,
-        adViews: Math.floor(baseViews * (0.7 + Math.random() * 0.2)),
-      },
+        adViews: Math.floor(baseViews * (0.7 + Math.random() * 0.2)) },
       engagement: {
         likeRate: (likes / baseViews) * 100,
         dislikeRate: (dislikes / baseViews) * 100,
         commentRate: (comments / baseViews) * 100,
         shareRate: (shares / baseViews) * 100,
-        subscribeRate: Math.random() * 2,
-      },
-    };
+        subscribeRate: Math.random() * 2 } };
   };
 
   const generateRetentionData = (): number[] => {
@@ -194,8 +193,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2,
-    }).format(amount);
+      minimumFractionDigits: 2 }).format(amount);
   };
 
   if (isLoading) {

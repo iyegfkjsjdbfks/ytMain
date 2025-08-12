@@ -9,9 +9,7 @@ const videoKeys = {
   all: ['videos'] as const, lists: () => [...videoKeys.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
     [...videoKeys.lists(), filters] as const, details: () => [...videoKeys.all, 'detail'] as const, detail: (id: string) => [...videoKeys.details(), id] as const, unified: {
     all: ['unified-videos'] as const, lists: () => [...videoKeys.unified.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
-      [...videoKeys.unified.lists(), filters] as const, details: () => [...videoKeys.unified.all, 'detail'] as const, detail: (id: string) => [...videoKeys.unified.details(), id] as const,
-  },
-};
+      [...videoKeys.unified.lists(), filters] as const, details: () => [...videoKeys.unified.all, 'detail'] as const, detail: (id: string) => [...videoKeys.unified.details(), id] as const } };
 
 /**
  * Hook for fetching a single video by ID
@@ -20,8 +18,7 @@ export const useVideo = (videoId: any) => {
   return useQuery({
     queryKey: videoKeys.detail(videoId),
     queryFn: () => videoService.getVideo(videoId),
-    enabled: !!videoId,
-  });
+    enabled: !!videoId });
 };
 
 /**
@@ -30,8 +27,7 @@ export const useVideo = (videoId: any) => {
 export const useTrendingVideos = (category?: string, limit: number = 20) => {
   return useQuery({
     queryKey: videoKeys.list({ type: 'trending', category, limit }),
-    queryFn: () => videoService.getTrendingVideos(category, limit),
-  });
+    queryFn: () => videoService.getTrendingVideos(category, limit) });
 };
 
 /**
@@ -41,8 +37,7 @@ export const useRecommendedVideos = (videoId: any, limit: number = 10) => {
   return useQuery({
     queryKey: videoKeys.list({ type: 'recommended', videoId, limit }),
     queryFn: () => videoService.getRecommendedVideos(videoId, limit),
-    enabled: !!videoId,
-  });
+    enabled: !!videoId });
 };
 
 /**
@@ -52,8 +47,7 @@ export const useSearchVideos = (query: any, limit: number = 20) => {
   return useQuery({
     queryKey: videoKeys.list({ type: 'search', query, limit }),
     queryFn: () => videoService.searchVideos(query, limit),
-    enabled: !!query,
-  });
+    enabled: !!query });
 };
 
 // Unified video hooks for normalized metadata

@@ -127,8 +127,7 @@ export function formatRelativeTime(date: Date | string): string {
     day: 86400,
     hour: 3600,
     minute: 60,
-    second: 1,
-  };
+    second: 1 };
 
   for (const [unit, seconds] of Object.entries(intervals)) {
     const interval = Math.floor(diffInSeconds / seconds);
@@ -160,8 +159,7 @@ export function formatDate(
   options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',
-    day: 'numeric',
-  }
+    day: 'numeric' }
 ): string {
   return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
@@ -442,8 +440,7 @@ export function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
   return {
     r: parseInt(result[1], 16),
     g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16),
-  };
+    b: parseInt(result[3], 16) };
 }
 
 /**
@@ -484,7 +481,7 @@ export function uniq<T>(array: T[]): T[] {
  * @param key - The key to group by
  * @returns An object with keys and arrays of grouped items
  */
-export function groupBy<T extends Record<string, any>, K extends keyof T>(
+export function groupBy<T extends Record<string, any> K extends keyof T>(
   array: T[],
   key: K
 ): Record<string, T[]> {
@@ -554,7 +551,7 @@ export function sleep(ms: any): Promise<void> {
  * @returns A promise that rejects if it takes longer than the timeout
  */
 export function timeout<T>(
-  promise: Promise<T>,
+  promise: Promise<T>
   timeoutMs: any,
   error = 'Operation timed out'
 ): Promise<T> {

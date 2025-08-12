@@ -21,8 +21,7 @@ interface ScheduledStreamForm {
 
 const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   onStreamScheduled,
-  className = '',
-}) => {
+  className = '' }) => {
   const [scheduledStreams, setScheduledStreams] = useState<ScheduledStream[]>(
     []
   );
@@ -36,8 +35,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     visibility: 'public',
     scheduledStartTime: '',
     thumbnailUrl: '',
-    reminderSet: false,
-  });
+    reminderSet: false });
   const [newTag, setNewTag] = useState('');
 
   const categories = [
@@ -72,8 +70,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       const streamData = {
         ...formData,
         scheduledStartTime: formData.scheduledStartTime,
-        status: 'scheduled' as const,
-      };
+        status: 'scheduled' as const };
 
       // Create a new scheduled stream using the existing createStream method
       const stream = await liveStreamService.createStream(streamData);
@@ -124,8 +121,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       visibility: 'public',
       scheduledStartTime: '',
       thumbnailUrl: '',
-      reminderSet: false,
-    });
+      reminderSet: false });
     setNewTag('');
     setShowCreateForm(false);
     setEditingStream(null);
@@ -142,8 +138,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
         ? new Date(stream.scheduledStartTime).toISOString().slice(0, 16)
         : '',
       thumbnailUrl: stream.thumbnailUrl,
-      reminderSet: false,
-    });
+      reminderSet: false });
     setEditingStream(stream.id);
     setShowCreateForm(true);
   };
@@ -156,8 +151,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     ) {
       setFormData(prev => ({
         ...prev,
-        tags: [...prev.tags, newTag.trim()],
-      }));
+        tags: [...prev.tags, newTag.trim()] }));
       setNewTag('');
     }
   };
@@ -165,8 +159,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const removeTag = (tagToRemove: any) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
-    }));
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
   };
 
   const formatDateTime = (date: Date) => {
@@ -175,8 +168,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit',
-    }).format(date);
+      minute: '2-digit' }).format(date);
   };
 
   const getTimeUntilStream = (scheduledTime: Date) => {
@@ -295,8 +287,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
                 onChange={e =>
                   setFormData(prev => ({
                     ...prev,
-                    description: e.target.value,
-                  }))
+                    description: e.target.value }))
                 }
                 placeholder='Describe your stream...'
                 rows={3}
@@ -318,8 +309,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
                 onChange={e =>
                   setFormData(prev => ({
                     ...prev,
-                    scheduledStartTime: e.target.value,
-                  }))
+                    scheduledStartTime: e.target.value }))
                 }
                 min={new Date().toISOString().slice(0, 16)}
                 required
@@ -340,8 +330,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
                 onChange={e =>
                   setFormData(prev => ({
                     ...prev,
-                    visibility: e.target.value as any,
-                  }))
+                    visibility: e.target.value as any }))
                 }
                 className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               >
@@ -528,5 +517,4 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 };
 
 export default StreamScheduler;
-
 

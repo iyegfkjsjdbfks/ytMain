@@ -1,3 +1,4 @@
+import { Video } from '../types';
 import { useState, useRef, useEffect, FC, MouseEvent  } from 'react';
 
 import { QueueListIcon as QueueListSolidIcon, PlayIcon as PlaySolidIcon  } from '@heroicons/react/24/solid';
@@ -10,6 +11,7 @@ import PlaylistEditModal from '../components/PlaylistEditModal';
 import removeVideoFromPlaylist, { getUserPlaylistById } from '../services/realVideoService';
 
 import type { UserPlaylist } from '../types';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface PlaylistWithVideos extends UserPlaylist {
   videos: Video;
@@ -75,10 +77,10 @@ const PlaylistDetailPage: React.FC = () => {
       }
     };
     if (activeVideoMenuId || isEditModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside as EventListener);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside as EventListener);
     };
   }, [activeVideoMenuId, isEditModalOpen]);
 
@@ -138,8 +140,7 @@ return null;
           ...prev,
           title,
           description,
-          updatedAt: new Date().toISOString(),
-        }) : null);
+          updatedAt: new Date().toISOString() }) : null);
         setIsEditModalOpen(false);
       }
     } catch (err) {
@@ -285,6 +286,4 @@ return null;
 };
 
 export default PlaylistDetailPage;
-
-
 

@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 /**
  * AIContentSparkPage component for AI-assisted content creation
  */
@@ -26,5 +24,4 @@ const AIContentSparkPage: React.FC = () => {
 };
 
 export default AIContentSparkPage;
-
 

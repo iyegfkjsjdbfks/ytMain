@@ -35,8 +35,7 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
     onPlay,
     onPause,
     onEnded,
-    className,
-  }) => {
+    className }) => {
     const isYouTubeVideo =
       video.videoUrl?.includes('youtube.com') ||
       video.videoUrl?.includes('youtu.be');
@@ -82,5 +81,4 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(
 LazyVideoPlayer.displayName = 'LazyVideoPlayer';
 
 export default LazyVideoPlayer;
-
 

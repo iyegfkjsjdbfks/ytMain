@@ -10,8 +10,6 @@ declare namespace NodeJS {
   }
 }
 
-
-
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 
 import { useVideoPlayer } from '../src/hooks';
@@ -62,8 +60,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   onTimeUpdate,
   onEnded,
   onPlay,
-  onPause,
-}) => {
+  onPause }) => {
   // Use the custom video player hook
   const videoPlayerInstance = useVideoPlayer({
     autoplay,
@@ -71,8 +68,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     ...(onTimeUpdate && { onTimeUpdate }),
     ...(onEnded && { onEnded }),
     ...(onPlay && { onPlay }),
-    ...(onPause && { onPause }),
-  });
+    ...(onPause && { onPause }) });
 
   // Local video ref
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -262,12 +258,12 @@ return;
 
   // Effects
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown as EventListener);
+    document.addEventListener('click', handleClickOutside as EventListener);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown as EventListener);
+      document.removeEventListener('click', handleClickOutside as EventListener);
       if (controlsTimeoutRef.current) {
         clearTimeout(controlsTimeoutRef.current);
       }

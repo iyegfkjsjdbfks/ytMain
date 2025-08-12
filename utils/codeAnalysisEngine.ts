@@ -102,8 +102,7 @@ return;
 
       const result: CodeMetrics = {
         ...metrics,
-        codeSmells,
-      };
+        codeSmells };
 
       // Store analysis history
       const key = _filePath || 'project';
@@ -150,8 +149,7 @@ return;
       vulnerabilities: await this.findVulnerabilities(),
       unused: await this.findUnusedDependencies(),
       circular: await this.findCircularDependencies(),
-      bundleImpact: await this.analyzeBundleImpact(),
-    };
+      bundleImpact: await this.analyzeBundleImpact() };
   }
 
   /**
@@ -196,8 +194,7 @@ return;
       complexity: recentHistory.map(h => h.complexity),
       maintainability: recentHistory.map(h => h.maintainabilityIndex),
       technicalDebt: recentHistory.map(h => h.technicalDebt),
-      timestamps: recentHistory.map((_, i) => Date.now() - (days - i) * 24 * 60 * 60 * 1000),
-    };
+      timestamps: recentHistory.map((_, i) => Date.now() - (days - i) * 24 * 60 * 60 * 1000) };
   }
 
   /**
@@ -224,8 +221,7 @@ return;
       opportunities,
       insights,
       dependencies,
-      timestamp: Date.now(),
-    };
+      timestamp: Date.now() };
   }
 
   private async calculateCodeMetrics(_filePath?: string): Promise<Omit<CodeMetrics, 'codeSmells'>> {
@@ -241,8 +237,7 @@ return;
       maintainabilityIndex: baseMaintainability,
       technicalDebt: baseTechnicalDebt,
       testCoverage: baseTestCoverage,
-      duplicateCode: baseDuplicateCode,
-    };
+      duplicateCode: baseDuplicateCode };
   }
 
   private async detectCodeSmells(_filePath?: string): Promise<CodeSmell[]> {
@@ -258,8 +253,7 @@ return;
         line: 45,
         description: 'Method has too many lines (>50)',
         suggestion: 'Consider extracting smaller methods',
-        effort: 'medium',
-      });
+        effort: 'medium' });
     }
 
     if (Math.random() > 0.8) {
@@ -270,8 +264,7 @@ return;
         line: 23,
         description: 'Complex conditional logic detected',
         suggestion: 'Extract condition into separate method',
-        effort: 'low',
-      });
+        effort: 'low' });
     }
 
     if (Math.random() > 0.6) {
@@ -282,8 +275,7 @@ return;
         line: 12,
         description: 'Duplicate code block found',
         suggestion: 'Extract common functionality into utility',
-        effort: 'medium',
-      });
+        effort: 'medium' });
     }
 
     return smells;
@@ -308,8 +300,7 @@ return;
         ],
         estimatedEffort: 4,
         automatable: true,
-        files: ['utils/videoUtils.ts', 'components/VideoPlayer.tsx'],
-      },
+        files: ['utils/videoUtils.ts', 'components/VideoPlayer.tsx'] },
       {
         id: 'simplify-state-management',
         type: 'simplify',
@@ -325,8 +316,7 @@ return;
         ],
         estimatedEffort: 6,
         automatable: false,
-        files: ['components/VideoPlayer.tsx', 'stores/videoStore.ts'],
-      },
+        files: ['components/VideoPlayer.tsx', 'stores/videoStore.ts'] },
       {
         id: 'extract-api-methods',
         type: 'extract-method',
@@ -342,8 +332,7 @@ return;
         ],
         estimatedEffort: 3,
         automatable: true,
-        files: ['services/apiService.ts'],
-      },
+        files: ['services/apiService.ts'] },
     ];
   }
 
@@ -361,8 +350,7 @@ return;
         resources: [
           'https://react-window.vercel.app/',
           'https://web.dev/virtualize-long-lists-react-window/',
-        ],
-      },
+        ] },
       {
         category: 'maintainability',
         insight: 'Component composition could be improved using compound component patterns',
@@ -374,8 +362,7 @@ return;
         ],
         resources: [
           'https://kentcdodds.com/blog/compound-components-with-react-hooks',
-        ],
-      },
+        ] },
       {
         category: 'security',
         insight: 'API endpoints need additional rate limiting and input validation',
@@ -387,8 +374,7 @@ return;
         ],
         resources: [
           'https://owasp.org/www-project-api-security/',
-        ],
-      },
+        ] },
       {
         category: 'scalability',
         insight: 'Consider implementing micro-frontend architecture for better team scalability',
@@ -400,8 +386,7 @@ return;
         ],
         resources: [
           'https://webpack.js.org/concepts/module-federation/',
-        ],
-      },
+        ] },
     ];
   }
 
@@ -420,8 +405,7 @@ return;
       {
         name: 'lodash',
         severity: 'moderate',
-        description: 'Prototype pollution vulnerability',
-      },
+        description: 'Prototype pollution vulnerability' },
     ];
   }
 
@@ -458,8 +442,7 @@ return;
         type: 'extract-method',
         description: 'Extract validation logic into separate method',
         code: 'const validateInput = (input) => { /* validation logic */ };',
-        confidence: 0.85,
-      },
+        confidence: 0.85 },
     ];
   }
 
@@ -469,8 +452,7 @@ return;
         type: 'simplify-condition',
         description: 'Simplify complex boolean expression',
         code: 'const isValid = hasValue && isCorrectType && !isExpired;',
-        confidence: 0.75,
-      },
+        confidence: 0.75 },
     ];
   }
 
@@ -480,8 +462,7 @@ return;
         type: 'remove-duplication',
         description: 'Extract common error handling pattern',
         code: 'const handleApiError = (_error: Error) => { /* common error handling */ };',
-        confidence: 0.90,
-      },
+        confidence: 0.90 },
     ];
   }
 
@@ -491,8 +472,7 @@ return;
         type: 'improve-naming',
         description: 'Use more descriptive variable names',
         code: 'const videoMetadata = data; // instead of const d = data;',
-        confidence: 0.95,
-      },
+        confidence: 0.95 },
     ];
   }
 
@@ -545,13 +525,11 @@ class TechnicalDebtTracker {
     this.debtItems.set(item.id, {
       ...item,
       createdAt: Date.now(),
-      status: 'open',
-    });
+      status: 'open' });
 
     advancedAPM.recordMetric('technical-debt-item', 1, {
       type: item.type,
-      impact: item.impact,
-    });
+      impact: item.impact });
   }
 
   /**
@@ -565,8 +543,7 @@ class TechnicalDebtTracker {
 
       advancedAPM.recordMetric('technical-debt-resolved', 1, {
         type: item.type,
-        effort: item.effort.toString(),
-      });
+        effort: item.effort.toString() });
     }
   }
 
@@ -600,8 +577,7 @@ class TechnicalDebtTracker {
       byType,
       byImpact,
       totalEffort,
-      averageAge: items.length > 0 ? totalAge / items.length : 0,
-    };
+      averageAge: items.length > 0 ? totalAge / items.length : 0 };
   }
 }
 
@@ -666,16 +642,14 @@ class AutomatedCodeReviewer {
         type: 'complexity',
         severity: 'medium',
         message: 'Function complexity is too high',
-        suggestion: 'Consider breaking down into smaller functions',
-      });
+        suggestion: 'Consider breaking down into smaller functions' });
     }
 
     if (Math.random() > 0.9) {
       suggestions.push({
         type: 'performance',
         description: 'Consider using useMemo for expensive calculations',
-        confidence: 0.8,
-      });
+        confidence: 0.8 });
     }
 
     return { issues, suggestions };
@@ -705,12 +679,10 @@ export type {
   CodeSmell,
   RefactoringOpportunity,
   ArchitecturalInsight,
-  DependencyAnalysis,
-};
+  DependencyAnalysis };
 
 // Export classes for custom implementations
 export {
   CodeAnalysisEngine,
   TechnicalDebtTracker,
-  AutomatedCodeReviewer,
-};
+  AutomatedCodeReviewer };

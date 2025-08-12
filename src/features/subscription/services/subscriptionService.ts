@@ -66,8 +66,7 @@ class SubscriptionService {
     level: 'all' | 'personalized' | 'none'
   ): Promise<ApiResponse<Subscription>> {
     return api.patch(`/api/subscriptions/${channelId}/notifications`, {
-      notificationLevel: level,
-    });
+      notificationLevel: level });
   }
 
   /**
@@ -126,9 +125,7 @@ class SubscriptionService {
         notificationSettings: {
           all: 0,
           personalized: 0,
-          none: 0,
-        },
-      };
+          none: 0 } };
     }
   }
 
@@ -205,15 +202,13 @@ class SubscriptionService {
     try {
       const response = await api.get('/api/subscriptions/search', {
         q: query,
-        ...filters,
-      });
+        ...filters });
       return response.data as { channels: Subscription; videos: Video[] };
     } catch (error) {
       logger.error('Failed to search subscriptions:', error);
       return {
         channels: [],
-        videos: [],
-      };
+        videos: [] };
     }
   }
 
@@ -295,9 +290,7 @@ class SubscriptionService {
 
     return api.post('/api/subscriptions/import', formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+        'Content-Type': 'multipart/form-data' } });
   }
 
   /**
@@ -321,8 +314,7 @@ class SubscriptionService {
   }> {
     try {
       const response = await api.get('/api/subscriptions/insights', {
-        timeframe,
-      });
+        timeframe });
       return response.data as {
         growthRate: number;
         topCategories: Array<{
@@ -346,9 +338,7 @@ class SubscriptionService {
         engagementMetrics: {
           averageViewsPerVideo: 0,
           averageLikesPerVideo: 0,
-          averageCommentsPerVideo: 0,
-        },
-      };
+          averageCommentsPerVideo: 0 } };
     }
   }
 }

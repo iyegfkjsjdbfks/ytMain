@@ -144,8 +144,7 @@ return '$0.00';
   try {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency,
-    }).format(amount);
+      currency }).format(amount);
   } catch (error) {
     console.error('Error formatting currency:', error);
     return `${currency} ${amount.toFixed(2)}`;
@@ -161,8 +160,7 @@ export const formatDate = (dateString: any, options?: Intl.DateTimeFormatOptions
     const defaultOptions: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'short',
-      day: 'numeric',
-    };
+      day: 'numeric' };
 
     return date.toLocaleDateString('en-US', options || defaultOptions);
   } catch (error) {
@@ -179,8 +177,7 @@ export const formatTime = (dateString: any, options?: Intl.DateTimeFormatOptions
     const date = new Date(dateString);
     const defaultOptions: Intl.DateTimeFormatOptions = {
       hour: '2-digit',
-      minute: '2-digit',
-    };
+      minute: '2-digit' };
 
     return date.toLocaleTimeString('en-US', options || defaultOptions);
   } catch (error) {

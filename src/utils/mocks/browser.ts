@@ -10,9 +10,7 @@ if (import.meta.env.DEV && import.meta.env.VITE_ENABLE_MSW === 'true') {
     .start({
       onUnhandledRequest: 'warn',
       serviceWorker: {
-        url: '/mockServiceWorker.js',
-      },
-    })
+        url: '/mockServiceWorker.js' } })
     .catch(() => {
       // Handle MSW start failure silently
     });

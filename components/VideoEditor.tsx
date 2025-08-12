@@ -1,4 +1,5 @@
 
+import type { Video } from '../types';
 import { useEffect, useRef, useState, memo, FC, MouseEvent } from 'react';
 
 import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, SpeakerXMarkIcon, DocumentTextIcon, AdjustmentsHorizontalIcon, CloudArrowDownIcon } from '@heroicons/react/24/outline';
@@ -51,8 +52,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
   videoFile,
   onSave,
   onCancel,
-  className = '',
-}) => {
+  className = '' }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -94,8 +94,7 @@ return;
         startTime: 0,
         endTime: video.duration,
         duration: video.duration,
-        thumbnail: generateThumbnail(0),
-      };
+        thumbnail: generateThumbnail(0) };
       setClips([initialClip]);
     };
 
@@ -103,12 +102,12 @@ return;
       setCurrentTime(video.currentTime);
     };
 
-    video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('loadedmetadata', handleLoadedMetadata as EventListener);
+    video.addEventListener('timeupdate', handleTimeUpdate as EventListener);
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata as EventListener);
+      video.removeEventListener('timeupdate', handleTimeUpdate as EventListener);
     };
   }, []);
 
@@ -164,8 +163,7 @@ return;
       fontFamily: 'Arial',
       startTime: currentTime,
       endTime: currentTime + 5,
-      animation: 'fade',
-    };
+      animation: 'fade' };
     setTextOverlays(prev => [...prev, newText]);
     setSelectedText(newText.id);
   };
@@ -188,8 +186,7 @@ return;
       type,
       value: type === 'brightness' || type === 'contrast' ? 100 :
              type === 'saturation' ? 100 :
-             type === 'blur' ? 0 : 50,
-    };
+             type === 'blur' ? 0 : 50 };
     setFilters(prev => [...prev, newFilter]);
   };
 
@@ -209,8 +206,7 @@ return;
       startTime: trimStart,
       endTime: trimEnd,
       duration: trimEnd - trimStart,
-      thumbnail: generateThumbnail(trimStart),
-    };
+      thumbnail: generateThumbnail(trimStart) };
     setClips([newClip]);
   };
 
@@ -234,8 +230,7 @@ return;
         filters,
         trimStart,
         trimEnd,
-        duration: trimEnd - trimStart,
-      };
+        duration: trimEnd - trimStart };
 
       onSave(processedBlob, metadata);
     } catch (error) {
@@ -273,8 +268,7 @@ return;
               className="bg-blue-500 h-full flex items-center justify-center text-white text-xs"
               style={{
                 left: `${(clip.startTime / duration) * 100}%`,
-                width: `${(clip.duration / duration) * 100}%`,
-              }}
+                width: `${(clip.duration / duration) * 100}%` }}
             >
               Clip {index + 1}
             </div>

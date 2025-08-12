@@ -59,8 +59,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
   onComment,
   onShare,
   onVote,
-  className = '',
-}) => {
+  className = '' }) => {
   const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
   const toggleExpanded = (postId: any) => {

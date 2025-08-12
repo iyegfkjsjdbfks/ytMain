@@ -1,6 +1,8 @@
 import React, { useEffect, useState, FC } from 'react';
 import { ChartBarIcon, PlusIcon  } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
+import { ShareIcon } from '@heroicons/react/24/outline';
 const HeartIconSolid = HeartSolidIcon;
 
 interface CommunityPost {
@@ -69,8 +71,7 @@ return;
       pollOptions: newPostType === 'poll' ? pollOptions.filter((opt) => opt.trim()).map((opt, idx) => ({
         id: `option-${idx}`,
         text: opt,
-        votes: 0,
-      })) : [],
+        votes: 0 })) : [],
       likes: 0,
       comments: 0,
       shares: 0,
@@ -78,9 +79,7 @@ return;
       createdAt: new Date(),
       engagement: {
         views: 0,
-        clickThroughRate: 0,
-      },
-    };
+        clickThroughRate: 0 } };
 
     setPosts([newPost, ...posts]);
     setNewPostContent('');
@@ -112,16 +111,13 @@ return;
       const pollQuestions = [
         {
           content: 'Which video format do you prefer?',
-          options: ['Long-form tutorials', 'Quick tips', 'Live streams', 'Shorts'],
-        },
+          options: ['Long-form tutorials', 'Quick tips', 'Live streams', 'Shorts'] },
         {
           content: 'What time do you usually watch YouTube?',
-          options: ['Morning', 'Afternoon', 'Evening', 'Late night'],
-        },
+          options: ['Morning', 'Afternoon', 'Evening', 'Late night'] },
         {
           content: 'Which collaboration would you like to see?',
-          options: ['Tech reviewer', 'Gaming channel', 'Lifestyle vlogger', 'Educational creator'],
-        },
+          options: ['Tech reviewer', 'Gaming channel', 'Lifestyle vlogger', 'Educational creator'] },
       ];
 
       return Array.from({ length: 12 }, (_, i) => {
@@ -138,8 +134,7 @@ return;
             pollOptions = pollOptionsData.map((option, idx) => ({
               id: `option-${idx}`,
               text: option,
-              votes: Math.floor(Math.random() * 500) + 50,
-            }));
+              votes: Math.floor(Math.random() * 500) + 50 }));
           }
         }
 
@@ -156,9 +151,7 @@ return;
           createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
           engagement: {
             views: Math.floor(Math.random() * 10000) + (i < 3 ? 2000 : 500),
-            clickThroughRate: Math.random() * 15 + 2,
-          },
-        };
+            clickThroughRate: Math.random() * 15 + 2 } };
       }).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     };
 
@@ -175,8 +168,7 @@ return;
         averageLikes: posts.length > 0 ? Math.round(totalLikes / posts.length) : 0,
         averageComments: posts.length > 0 ? Math.round(totalComments / posts.length) : 0,
         topPerformingPost: topPost ? `${topPost.content.substring(0, 50)  }...` : 'No posts yet',
-        reachGrowth: Math.random() * 20 + 5,
-      };
+        reachGrowth: Math.random() * 20 + 5 };
     };
 
     setTimeout(() => {
@@ -505,5 +497,4 @@ return;
 };
 
 export default CommunityPage;
-
 

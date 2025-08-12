@@ -31,15 +31,13 @@ export function useVideoInteractions(
     isDisliked: options.initialIsDisliked || false,
     isSaved: options.initialIsSaved || false,
     likes: options.initialLikes || 0,
-    dislikes: options.initialDislikes || 0,
-  });
+    dislikes: options.initialDislikes || 0 });
 
   // Fetch current interaction state
   const { data: interactionData, isLoading: isLoadingInteractions } = useQuery({
     queryKey: ['video-interactions', videoId],
     queryFn: () => videoService.getVideoInteractions(videoId),
-    enabled: !!videoId,
-  });
+    enabled: !!videoId });
 
   // Update state when data is loaded
   useEffect(() => {
@@ -49,8 +47,7 @@ export function useVideoInteractions(
         isDisliked: interactionData.isDisliked,
         isSaved: interactionData.isSaved,
         likes: interactionData.likes,
-        dislikes: interactionData.dislikes,
-      });
+        dislikes: interactionData.dislikes });
     }
   }, [interactionData]);
 
@@ -64,8 +61,7 @@ export function useVideoInteractions(
         isLiked: !prev.isLiked,
         isDisliked: false, // Remove dislike if liking
         likes: prev.isLiked ? prev.likes - 1 : prev.likes + 1,
-        dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes,
-      }));
+        dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes }));
     },
     onError: () => {
       // Revert optimistic update on error
@@ -75,16 +71,13 @@ export function useVideoInteractions(
           isDisliked: interactionData.isDisliked,
           isSaved: interactionData.isSaved,
           likes: interactionData.likes,
-          dislikes: interactionData.dislikes,
-        });
+          dislikes: interactionData.dislikes });
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['video-interactions', videoId],
-      });
-    },
-  });
+        queryKey: ['video-interactions', videoId] });
+    } });
 
   // Dislike mutation
   const dislikeMutation = useMutation({
@@ -96,8 +89,7 @@ export function useVideoInteractions(
         isDisliked: !prev.isDisliked,
         isLiked: false, // Remove like if disliking
         dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes + 1,
-        likes: prev.isLiked ? prev.likes - 1 : prev.likes,
-      }));
+        likes: prev.isLiked ? prev.likes - 1 : prev.likes }));
     },
     onError: () => {
       // Revert optimistic update on error
@@ -107,16 +99,13 @@ export function useVideoInteractions(
           isDisliked: interactionData.isDisliked,
           isSaved: interactionData.isSaved,
           likes: interactionData.likes,
-          dislikes: interactionData.dislikes,
-        });
+          dislikes: interactionData.dislikes });
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['video-interactions', videoId],
-      });
-    },
-  });
+        queryKey: ['video-interactions', videoId] });
+    } });
 
   // Save mutation
   const saveMutation = useMutation({
@@ -125,8 +114,7 @@ export function useVideoInteractions(
       // Optimistic update
       setState(prev => ({
         ...prev,
-        isSaved: !prev.isSaved,
-      }));
+        isSaved: !prev.isSaved }));
     },
     onError: () => {
       // Revert optimistic update on error
@@ -136,25 +124,21 @@ export function useVideoInteractions(
           isDisliked: interactionData.isDisliked,
           isSaved: interactionData.isSaved,
           likes: interactionData.likes,
-          dislikes: interactionData.dislikes,
-        });
+          dislikes: interactionData.dislikes });
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['video-interactions', videoId],
-      });
+        queryKey: ['video-interactions', videoId] });
       queryClient.invalidateQueries({ queryKey: ['watch-later'] });
-    },
-  });
+    } });
 
   // Report mutation
   const reportMutation = useMutation({
     mutationFn: reason => videoService.reportVideo(videoId, reason),
     onSuccess: () => {
       // Show success message
-    },
-  });
+    } });
 
   return {
     ...state,
@@ -167,8 +151,7 @@ export function useVideoInteractions(
     toggleDislike: dislikeMutation.mutateAsync,
     toggleSave: saveMutation.mutateAsync,
     reportVideo: reportMutation.mutateAsync,
-    isReporting: reportMutation.isPending,
-  };
+    isReporting: reportMutation.isPending };
 }
 
 export function useVideoStats(videoId: any) {
@@ -181,19 +164,16 @@ export function useVideoStats(videoId: any) {
 
   return {
     stats,
-    isLoading,
-  };
+    isLoading };
 }
 
 export function useVideoEngagement(videoId: any) {
   const { data: engagement, isLoading } = useQuery({
     queryKey: ['video-engagement', videoId],
     queryFn: () => videoService.getVideoEngagement(videoId),
-    enabled: !!videoId,
-  });
+    enabled: !!videoId });
 
   return {
     engagement,
-    isLoading,
-  };
+    isLoading };
 }

@@ -1,6 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { ChevronUpIcon, ChevronDownIcon  } from '@heroicons/react/24/outline';
 
 interface ShortsNavigationProps {
@@ -16,8 +14,7 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
   onNext,
   canGoPrevious,
   canGoNext,
-  className = '',
-}) => {
+  className = '' }) => {
   const handlePrevious = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();

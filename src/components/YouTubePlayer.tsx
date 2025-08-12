@@ -45,8 +45,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       autoplay: autoplay ? '1' : '0',
       controls: controls ? '1' : '0',
       rel: '0',
-      modestbranding: '1',
-    }
+      modestbranding: '1' }
   ).toString()}`;
 
   return (
@@ -66,5 +65,4 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 };
 
 export default YouTubePlayer;
-
 

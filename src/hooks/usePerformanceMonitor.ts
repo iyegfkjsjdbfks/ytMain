@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useState, memo } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 
 interface PerformanceMetrics {
   renderTime: number;
@@ -22,8 +22,7 @@ const DEFAULT_CONFIG: Required<PerformanceConfig> = {
   enableRenderTracking: true,
   enableNetworkTracking: true,
   sampleRate: 0.1, // Track 10% of renders
-  maxMetricsHistory: 100,
-};
+  maxMetricsHistory: 100 };
 
 // Global performance store
 class PerformanceStore {
@@ -126,8 +125,7 @@ export const usePerformanceMonitor = (
       mountTime: performance.now() - mountTime.current,
       updateCount: updateCount.current,
       componentName,
-      timestamp: Date.now(),
-    };
+      timestamp: Date.now() };
 
     // Add memory usage if available and enabled
     if (opts.enableMemoryTracking && 'memory' in performance) {
@@ -154,7 +152,7 @@ export const usePerformanceMonitor = (
 
   // Manual tracking methods
   const trackAsyncOperation = useCallback(
-    async <T>(operation: () => Promise<T>, operationName: any): Promise<T> => {
+    async <T>(operation: () => Promise<T> operationName: any): Promise<T> => {
       const startTime = performance.now();
 
       try {
@@ -166,8 +164,7 @@ export const usePerformanceMonitor = (
           mountTime: 0,
           updateCount: 0,
           componentName: `${componentName}.${operationName}`,
-          timestamp: Date.now(),
-        });
+          timestamp: Date.now() });
 
         return result;
       } catch (error) {
@@ -178,8 +175,7 @@ export const usePerformanceMonitor = (
           mountTime: 0,
           updateCount: 0,
           componentName: `${componentName}.${operationName}.error`,
-          timestamp: Date.now(),
-        });
+          timestamp: Date.now() });
 
         throw error;
       }
@@ -199,8 +195,7 @@ export const usePerformanceMonitor = (
           mountTime: 0,
           updateCount: 0,
           componentName: `${componentName}.${functionName}`,
-          timestamp: Date.now(),
-        });
+          timestamp: Date.now() });
 
         return result;
       };
@@ -213,8 +208,7 @@ export const usePerformanceMonitor = (
     endRender,
     trackAsyncOperation,
     measureFunction,
-    isTracking,
-  };
+    isTracking };
 };
 
 // Hook to access performance data
@@ -244,14 +238,12 @@ export const usePerformanceData = (componentName?: string) => {
       .filter((m: any) => !componentName || m.componentName.startsWith(componentName)
       ),
     totalRenders: metrics.length,
-    lastRender: metrics[metrics.length - 1],
-  };
+    lastRender: metrics[metrics.length - 1] };
 
   return {
     metrics,
     stats,
-    clearMetrics: () => performanceStore.clear(),
-  };
+    clearMetrics: () => performanceStore.clear() };
 };
 
 // Hook for Core Web Vitals monitoring
@@ -313,8 +305,7 @@ export const useWebVitals = () => {
     if (navigation) {
       setVitals(prev => ({
         ...prev,
-        TTFB: navigation.responseStart - navigation.requestStart,
-      }));
+        TTFB: navigation.responseStart - navigation.requestStart }));
     }
 
     return () => {
@@ -348,8 +339,7 @@ export const usePerformanceBudget = () => {
 
   return {
     budgets,
-    checkBudget,
-  };
+    checkBudget };
 };
 
 export { performanceStore };

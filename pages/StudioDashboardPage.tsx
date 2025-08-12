@@ -45,8 +45,7 @@ const StudioDashboardPage: React.FC = () => {
     avgWatchTime: 0,
     totalComments: 0,
     totalLikes: 0,
-    totalShares: 0,
-  });
+    totalShares: 0 });
 
   const [recentVideos, setRecentVideos] = useState<RecentVideo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -65,8 +64,7 @@ const StudioDashboardPage: React.FC = () => {
         avgWatchTime: Math.floor(Math.random() * 600) + 120,
         totalComments: Math.floor(Math.random() * 100000) + 10000,
         totalLikes: Math.floor(Math.random() * 500000) + 50000,
-        totalShares: Math.floor(Math.random() * 50000) + 5000,
-      };
+        totalShares: Math.floor(Math.random() * 50000) + 5000 };
 
       const mockVideos: RecentVideo[] = Array.from({ length: 5 }, (_, i) => {
         const titles = [
@@ -85,8 +83,7 @@ const StudioDashboardPage: React.FC = () => {
         comments: Math.floor(Math.random() * 500) + 10,
         uploadDate: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
         duration: Math.floor(Math.random() * 1800) + 300,
-        status: ['published', 'processing', 'scheduled', 'draft'][Math.floor(Math.random() * 4)] as any,
-        };
+        status: ['published', 'processing', 'scheduled', 'draft'][Math.floor(Math.random() * 4)] as any };
       });
 
       setTimeout(() => {
@@ -103,45 +100,39 @@ const StudioDashboardPage: React.FC = () => {
     {
       title: 'Upload Video',
       description: 'Share your content with the world',
-      icon: <VideoCameraIcon className="w-6 h-6" />,
+      icon: <VideoCameraIcon className="w-6 h-6" />
       link: '/upload',
-      color: 'bg-red-500 hover:bg-red-600',
-    },
+      color: 'bg-red-500 hover:bg-red-600' },
     {
       title: 'Analytics',
       description: 'Track your channel performance',
-      icon: <ChartBarIcon className="w-6 h-6" />,
+      icon: <ChartBarIcon className="w-6 h-6" />
       link: '/analytics',
-      color: 'bg-blue-500 hover:bg-blue-600',
-    },
+      color: 'bg-blue-500 hover:bg-blue-600' },
     {
       title: 'Content Manager',
       description: 'Manage your videos and playlists',
-      icon: <DocumentTextIcon className="w-6 h-6" />,
+      icon: <DocumentTextIcon className="w-6 h-6" />
       link: '/studio/content',
-      color: 'bg-green-500 hover:bg-green-600',
-    },
+      color: 'bg-green-500 hover:bg-green-600' },
     {
       title: 'Monetization',
       description: 'Track earnings and revenue',
-      icon: <CurrencyDollarIcon className="w-6 h-6" />,
+      icon: <CurrencyDollarIcon className="w-6 h-6" />
       link: '/monetization',
-      color: 'bg-yellow-500 hover:bg-yellow-600',
-    },
+      color: 'bg-yellow-500 hover:bg-yellow-600' },
     {
       title: 'Comments',
       description: 'Moderate and respond to comments',
-      icon: <ChatBubbleLeftRightIcon className="w-6 h-6" />,
+      icon: <ChatBubbleLeftRightIcon className="w-6 h-6" />
       link: '/comment-moderation',
-      color: 'bg-purple-500 hover:bg-purple-600',
-    },
+      color: 'bg-purple-500 hover:bg-purple-600' },
     {
       title: 'Go Live',
       description: 'Start a live stream',
-      icon: <UserGroupIcon className="w-6 h-6" />,
+      icon: <UserGroupIcon className="w-6 h-6" />
       link: '/go-live',
-      color: 'bg-pink-500 hover:bg-pink-600',
-    },
+      color: 'bg-pink-500 hover:bg-pink-600' },
   ];
 
   const getStatusColor = (status: any) => {
@@ -364,6 +355,4 @@ const StudioDashboardPage: React.FC = () => {
 };
 
 export default StudioDashboardPage;
-
-
 

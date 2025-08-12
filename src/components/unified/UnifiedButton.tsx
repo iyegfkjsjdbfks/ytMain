@@ -49,8 +49,7 @@ const sizeStyles: Record<ButtonSize, string> = {
   sm: 'px-3 py-1.5 text-sm rounded-md gap-1.5',
   md: 'px-4 py-2 text-sm rounded-md gap-2',
   lg: 'px-6 py-3 text-base rounded-lg gap-2',
-  xl: 'px-8 py-4 text-lg rounded-lg gap-3',
-};
+  xl: 'px-8 py-4 text-lg rounded-lg gap-3' };
 
 // Variant styles
 const variantStyles: Record<ButtonVariant, string> = {
@@ -111,8 +110,7 @@ const variantStyles: Record<ButtonVariant, string> = {
     'focus:ring-red-500',
     'dark:text-red-400 dark:hover:text-red-300',
     'p-0 h-auto font-normal',
-  ].join(' '),
-};
+  ].join(' ') };
 
 export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
   (
@@ -217,5 +215,4 @@ GhostButton.displayName = 'GhostButton';
 LinkButton.displayName = 'LinkButton';
 
 export default UnifiedButton;
-
 

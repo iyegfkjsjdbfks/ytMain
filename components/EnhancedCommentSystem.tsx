@@ -1,5 +1,5 @@
 
-import { useMemo, useRef, useEffect, useState, memo, FC } from 'react';
+import { useMemo, useRef, useEffect, useState, FC } from 'react';
 
 import { HeartIcon, ChatBubbleLeftIcon, FlagIcon, PencilIcon, TrashIcon, ChevronDownIcon, ChevronUpIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -67,8 +67,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
   onReportComment,
   onModerateComment,
   onSortChange,
-  className = '',
-}) => {
+  className = '' }) => {
   const [newComment, setNewComment] = useState('');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [editingComment, setEditingComment] = useState<string | null>(null);

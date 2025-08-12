@@ -2,8 +2,7 @@ enum LogLevel {
   ERROR = 0,
   WARN = 1,
   INFO = 2,
-  DEBUG = 3,
-}
+  DEBUG = 3 }
 
 class ConditionalLogger {
   private logLevel: LogLevel;
@@ -191,8 +190,7 @@ class ConditionalLogger {
       return {
         name: error.name,
         message: error.message,
-        stack: this.isDebugMode ? error.stack : '[Stack trace hidden]',
-      };
+        stack: this.isDebugMode ? error.stack : '[Stack trace hidden]' };
     }
     return error;
   }

@@ -91,8 +91,7 @@ class CommentService {
    */
   async reactToComment(data: CommentReaction): Promise<ApiResponse<void>> {
     return api.post(`/api/comments/${data.commentId}/reactions`, {
-      type: data.type,
-    });
+      type: data.type });
   }
 
   /**
@@ -140,8 +139,7 @@ class CommentService {
   ): Promise<ApiResponse<void>> {
     return api.post(`/api/comments/${commentId}/report`, {
       reason,
-      description,
-    });
+      description });
   }
 
   /**
@@ -186,8 +184,7 @@ class CommentService {
     return api.post('/api/comments/bulk-moderate', {
       commentIds,
       action,
-      reason,
-    });
+      reason });
   }
 
   /**

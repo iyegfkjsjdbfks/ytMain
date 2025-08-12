@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 /**
  * HomePage component for displaying the main video feed
  */
@@ -23,5 +21,4 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-
 

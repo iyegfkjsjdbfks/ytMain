@@ -1,9 +1,13 @@
 
+import type { Video } from '../types';
 import { useEffect, useState, FC } from 'react';
 
 import { VideoCameraIcon, PlayIcon } from '@heroicons/react/24/outline';
 
 import { getSettings, saveSettings, VIDEO_PLAYER_CONFIGS, getVideoPlayersByCategory, getAllVideoPlayers, setLocalVideoPlayerType, getEnabledYouTubePlayers, getEnabledLocalPlayers, toggleYouTubePlayer, toggleLocalPlayer, isGoogleSearchAvailable, isYouTubeApiAvailable, isYouTubeApiConfigured, isHybridModeAvailable, getInitialSearchKeyword, setInitialSearchKeyword, getAllPageConfigurations, getPageDisplayName, getPlayerUsageByPage, type YouTubeSearchProvider, type YouTubePlayerType, type LocalVideoPlayerType, type VideoPlayerConfig, type PageType } from '../services/settingsService';
+import { CogIcon } from '@heroicons/react/24/outline';
+import { SparklesIcon } from '@heroicons/react/24/outline';
+import { BugAntIcon } from '@heroicons/react/24/outline';
 
 interface StoreVideo {
   id: string;
@@ -64,8 +68,7 @@ const AdminPage: React.FC = () => {
         title: video.title,
         channelName: video.channelName,
         videoUrl: video.videoUrl,
-        viewCount: video.viewCount || 0,
-      }));
+        viewCount: video.viewCount || 0 }));
 
       setStoreVideos(videos);
     } catch (error) {
@@ -89,9 +92,7 @@ const AdminPage: React.FC = () => {
           error: 'Google Custom Search API not configured',
           details: {
             apiKey: !!searchApiKey,
-            engineId: !!searchEngineId,
-          },
-        });
+            engineId: !!searchEngineId } });
         return;
       }
 
@@ -158,8 +159,7 @@ const AdminPage: React.FC = () => {
       proxyActive: isDevelopment,
       youtubeApiKey: !!import.meta.env.VITE_YOUTUBE_API_KEY,
       googleSearchApiKey: !!import.meta.env.VITE_GOOGLE_SEARCH_API_KEY,
-      googleSearchEngineId: !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID,
-    });
+      googleSearchEngineId: !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID });
   };
 
   const testProxyEndpoint = async () => {
@@ -187,18 +187,15 @@ const AdminPage: React.FC = () => {
               views: parseInt(video.statistics.viewCount, 10).toLocaleString(),
               likes: parseInt(video.statistics.likeCount || 0, 10).toLocaleString(),
               published: video.snippet.publishedAt,
-              duration: video.contentDetails.duration,
-            },
-            fullResponse: data,
-          });
+              duration: video.contentDetails.duration },
+            fullResponse: data });
         } else {
           setProxyTest({
             success: false,
             status: response.status,
             url: proxyUrl,
             error: 'No video data in response',
-            fullResponse: data,
-          });
+            fullResponse: data });
         }
       } else {
         const errorText = await response.text();
@@ -207,15 +204,13 @@ const AdminPage: React.FC = () => {
           status: response.status,
           url: proxyUrl,
           error: `${response.status} ${response.statusText}`,
-          fullResponse: errorText,
-        });
+          fullResponse: errorText });
       }
     } catch (error) {
       setProxyTest({
         success: false,
         error: error.message,
-        note: 'This might indicate proxy configuration issues or that the dev server is not running.',
-      });
+        note: 'This might indicate proxy configuration issues or that the dev server is not running.' });
     } finally {
       setLoading(false);
     }
@@ -239,8 +234,7 @@ const AdminPage: React.FC = () => {
           status: response.status,
           url: directUrl.replace(apiKey, '[API_KEY]'),
           note: 'Direct API call succeeded (CORS allowed)',
-          fullResponse: data,
-        });
+          fullResponse: data });
       } else {
         const errorData = await response.json();
         setDirectApiTest({
@@ -248,15 +242,13 @@ const AdminPage: React.FC = () => {
           status: response.status,
           url: directUrl.replace(apiKey, '[API_KEY]'),
           error: `${response.status} ${response.statusText}`,
-          fullResponse: errorData,
-        });
+          fullResponse: errorData });
       }
     } catch (error) {
       setDirectApiTest({
         success: false,
         error: error.message,
-        note: 'This is expected due to CORS restrictions. The proxy should handle this.',
-      });
+        note: 'This is expected due to CORS restrictions. The proxy should handle this.' });
     } finally {
       setLoading(false);
     }
@@ -287,22 +279,18 @@ const AdminPage: React.FC = () => {
             source: video.source,
             channelAvatar: video.channel.avatarUrl,
             publishedAt: video.publishedAtFormatted,
-            duration: video.duration,
-          },
-          fullVideo: video,
-        });
+            duration: video.duration },
+          fullVideo: video });
       } else {
         setYoutubeMetadataTest({
           success: false,
-          error: 'No video data returned from app service',
-        });
+          error: 'No video data returned from app service' });
       }
     } catch (error) {
       setYoutubeMetadataTest({
         success: false,
         error: error.message,
-        stack: error.stack,
-      });
+        stack: error.stack });
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,4 @@
-import React, { Suspense, FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import type { ReactNode } from 'react';
 
 import { QueryClientProvider, type QueryClient  } from '@tanstack/react-query';
@@ -30,8 +30,7 @@ interface RefactoredAppProvidersProps {
  * - Reduced provider nesting for better performance
  */
 export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
-  children,
-}) => {
+  children }) => {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
@@ -66,8 +65,7 @@ interface TestAppProvidersProps {
 
 export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
   children,
-  queryClient: customQueryClient,
-}) => {
+  queryClient: customQueryClient }) => {
   const client = customQueryClient || queryClient;
 
   return (
@@ -90,5 +88,4 @@ export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
 };
 
 export default RefactoredAppProviders;
-
 

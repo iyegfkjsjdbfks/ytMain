@@ -97,8 +97,7 @@ class IntelligentCodeMonitor {
           { metric: 'complexity', operator: '<=', threshold: 10 },
         ],
         blocking: true,
-        enabled: true,
-      },
+        enabled: true },
       {
         id: 'coverage-gate',
         name: 'Test Coverage',
@@ -106,8 +105,7 @@ class IntelligentCodeMonitor {
           { metric: 'testCoverage', operator: '>=', threshold: 80 },
         ],
         blocking: true,
-        enabled: true,
-      },
+        enabled: true },
       {
         id: 'security-gate',
         name: 'Security Vulnerabilities',
@@ -115,8 +113,7 @@ class IntelligentCodeMonitor {
           { metric: 'securityVulnerabilities', operator: '==', threshold: 0 },
         ],
         blocking: true,
-        enabled: true,
-      },
+        enabled: true },
       {
         id: 'maintainability-gate',
         name: 'Maintainability Index',
@@ -124,8 +121,7 @@ class IntelligentCodeMonitor {
           { metric: 'maintainability', operator: '>=', threshold: 70 },
         ],
         blocking: false,
-        enabled: true,
-      },
+        enabled: true },
       {
         id: 'duplicate-code-gate',
         name: 'Duplicate Code',
@@ -133,8 +129,7 @@ class IntelligentCodeMonitor {
           { metric: 'duplicateCode', operator: '<=', threshold: 5 },
         ],
         blocking: false,
-        enabled: true,
-      },
+        enabled: true },
     ];
   }
 
@@ -218,8 +213,7 @@ return;
         _metrics,
         score,
         improvements,
-        regressions,
-      };
+        regressions };
 
       this.trends.push(trend);
 
@@ -270,8 +264,7 @@ return;
         technicalDebt: this.generateRealisticMetric('technicalDebt', 0, 20),
         securityVulnerabilities: this.generateRealisticMetric('securityVulnerabilities', 0, 3),
         performanceIssues: this.generateRealisticMetric('performanceIssues', 0, 5),
-        accessibilityIssues: this.generateRealisticMetric('accessibilityIssues', 0, 8),
-      };
+        accessibilityIssues: this.generateRealisticMetric('accessibilityIssues', 0, 8) };
 
       return _metrics;
     } catch (error) {
@@ -286,8 +279,7 @@ return;
         technicalDebt: 5,
         securityVulnerabilities: 0,
         performanceIssues: 2,
-        accessibilityIssues: 3,
-      };
+        accessibilityIssues: 3 };
     }
   }
 
@@ -373,9 +365,7 @@ return 0;
         suggestion: 'Consider breaking down large functions into smaller, more focused functions',
         codeExample: {
           before: 'function complexFunction() /* 50+ lines of code */ }',
-          after: 'function mainFunction() helper1(); helper2(); helper3(); }',
-        },
-      });
+          after: 'function mainFunction() helper1(); helper2(); helper3(); }' } });
     }
 
     // Low test coverage opportunities
@@ -392,9 +382,7 @@ return 0;
         suggestion: 'Add unit tests for uncovered functions',
         codeExample: {
           before: '// No tests',
-          after: 'describe("utilFunction", () => { it("should work correctly", () => { ... }); });',
-        },
-      });
+          after: 'describe("utilFunction", () => { it("should work correctly", () => { ... }); });' } });
     }
 
     // Performance opportunities
@@ -411,9 +399,7 @@ return 0;
         suggestion: 'Add React.memo() to prevent unnecessary re-renders',
         codeExample: {
           before: 'export const SlowComponent = ({ data }) => { ... }',
-          after: 'export const SlowComponent = React.memo(({ data }) => { ... });',
-        },
-      });
+          after: 'export const SlowComponent = React.memo(({ data }) => { ... });' } });
     }
 
     // Security opportunities
@@ -430,9 +416,7 @@ return 0;
         suggestion: 'Sanitize user input before rendering',
         codeExample: {
           before: 'innerHTML = userInput',
-          after: 'innerHTML = DOMPurify.sanitize(userInput),',
-        },
-      });
+          after: 'innerHTML = DOMPurify.sanitize(userInput),' } });
     }
 
     // Accessibility opportunities
@@ -449,9 +433,7 @@ return 0;
         suggestion: 'Add proper ARIA labels for screen readers',
         codeExample: {
           before: '<button onClic={true}k={handleClick}>Submit</button>',
-          after: '<button onClic={true}k={handleClick} aria-label="Submit form">Submit</button>',
-        },
-      });
+          after: '<button onClic={true}k={handleClick} aria-label="Submit form">Submit</button>' } });
     }
 
     this.opportunities = opportunities;
@@ -473,8 +455,7 @@ return 0;
         description: 'The overall system complexity is higher than recommended',
         recommendation: 'Consider implementing Domain-Driven Design patterns to better organize code',
         files: ['src/components/', 'src/utils/', 'src/services/'],
-        estimatedImpact: 'Improved maintainability and reduced development time',
-      });
+        estimatedImpact: 'Improved maintainability and reduced development time' });
     }
 
     // Pattern insights
@@ -487,8 +468,7 @@ return 0;
         description: 'Multiple instances of similar code patterns found',
         recommendation: 'Extract common functionality into reusable hooks or utility functions',
         files: ['components/VideoCard.tsx', 'components/PlaylistCard.tsx'],
-        estimatedImpact: 'Reduced bundle size and improved maintainability',
-      });
+        estimatedImpact: 'Reduced bundle size and improved maintainability' });
     }
 
     // Performance insights
@@ -501,8 +481,7 @@ return 0;
         description: 'Multiple performance issues detected that may impact user experience',
         recommendation: 'Implement code splitting, lazy loading, and memoization strategies',
         files: ['components/VideoGrid.tsx', 'pages/Home.tsx'],
-        estimatedImpact: 'Faster page loads and better user experience',
-      });
+        estimatedImpact: 'Faster page loads and better user experience' });
     }
 
     // Security insights
@@ -515,8 +494,7 @@ return 0;
         description: 'Potential security issues that need immediate attention',
         recommendation: 'Implement input validation, output encoding, and security headers',
         files: ['utils/apiUtils.ts', 'components/SearchBar.tsx'],
-        estimatedImpact: 'Enhanced application security and user data protection',
-      });
+        estimatedImpact: 'Enhanced application security and user data protection' });
     }
 
     // Testing insights
@@ -529,8 +507,7 @@ return 0;
         description: 'Test coverage is below the recommended threshold',
         recommendation: 'Implement comprehensive unit and integration tests',
         files: ['tests/', 'src/'],
-        estimatedImpact: 'Reduced bugs and increased confidence in deployments',
-      });
+        estimatedImpact: 'Reduced bugs and increased confidence in deployments' });
     }
 
     this.insights = insights;
@@ -625,8 +602,7 @@ return;
   getQualityScoreTrend(): Array<{ timestamp: number; score: number }> {
     return this.trends.map((trend) => ({
       timestamp: trend.timestamp,
-      score: trend.score,
-    }));
+      score: trend.score }));
   }
 
   /**
@@ -708,5 +684,4 @@ export type {
   CodeQualityTrend,
   RefactoringOpportunity,
   CodeReviewInsight,
-  QualityGate,
-};
+  QualityGate };

@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 /**
  * YourDataPage component for displaying and managing user data and privacy settings
  */
@@ -26,5 +24,4 @@ const YourDataPage: React.FC = () => {
 };
 
 export default YourDataPage;
-
 

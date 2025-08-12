@@ -15,8 +15,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   categories,
   selectedCategory,
   onSelectCategory,
-  className,
-}) => {
+  className }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -42,8 +41,7 @@ return;
 
     container.scrollBy({
       left: -200,
-      behavior: 'smooth',
-    });
+      behavior: 'smooth' });
   }, []);
 
   const scrollRight = useCallback(() => {
@@ -54,8 +52,7 @@ return;
 
     container.scrollBy({
       left: 200,
-      behavior: 'smooth',
-    });
+      behavior: 'smooth' });
   }, []);
 
   // Set up scroll event listener
@@ -66,14 +63,14 @@ return;
 }
 
     checkScrollPosition();
-    container.addEventListener('scroll', checkScrollPosition);
+    container.addEventListener('scroll', checkScrollPosition as EventListener);
 
     // Check on resize
     const resizeObserver = new ResizeObserver(checkScrollPosition);
     resizeObserver.observe(container);
 
     return () => {
-      container.removeEventListener('scroll', checkScrollPosition);
+      container.removeEventListener('scroll', checkScrollPosition as EventListener);
       resizeObserver.disconnect();
     };
   }, [checkScrollPosition]);
@@ -102,8 +99,7 @@ return;
       const scrollLeft = selectedButton.offsetLeft - container.offsetWidth / 2 + selectedButton.offsetWidth / 2;
       container.scrollTo({
         left: Math.max(0, scrollLeft),
-        behavior: 'smooth',
-      });
+        behavior: 'smooth' });
     }
   }, [selectedCategory]);
 

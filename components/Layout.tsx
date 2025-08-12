@@ -52,8 +52,8 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
       // if (window.innerWidth >= 768 && !isSidebarOpen) setIsSidebarOpen(true);
       // if (window.innerWidth < 768 && isSidebarOpen) setIsSidebarOpen(false);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize as EventListener);
+    return () => window.removeEventListener('resize', handleResize as EventListener);
   }, [isSidebarOpen]);
 
   const handleMaximizeMiniplayer = (videoId: any) => {

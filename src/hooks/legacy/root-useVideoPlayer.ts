@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 interface VideoPlayerState {
   isPlaying: boolean;
@@ -90,8 +91,7 @@ export const useVideoPlayer = (
     playsinline = true,
     initialVolume = 1,
     initialPlaybackRate = 1,
-    initialQuality = 'auto',
-  } = options;
+    initialQuality = 'auto' } = options;
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [state, setState] = useState<VideoPlayerState>({
@@ -105,8 +105,7 @@ export const useVideoPlayer = (
     error: null,
     playbackRate: initialPlaybackRate,
     quality: initialQuality,
-    buffered: 0,
-  });
+    buffered: 0 });
 
   // Play function
   const play = useCallback(async () => {
@@ -143,8 +142,7 @@ export const useVideoPlayer = (
           setState(prev => ({
             ...prev,
             error: 'Failed to play video',
-            isPlaying: false,
-          }));
+            isPlaying: false }));
         }
       }
     }
@@ -278,8 +276,7 @@ export const useVideoPlayer = (
       ...prev,
       isPlaying: false,
       currentTime: 0,
-      error: null,
-    }));
+      error: null }));
   }, []);
 
   // Event handlers
@@ -297,8 +294,7 @@ export const useVideoPlayer = (
       setState(prev => ({
         ...prev,
         duration: video.duration,
-        isLoading: false,
-      }));
+        isLoading: false }));
     }, []),
 
     onCanPlay: useCallback(() => {
@@ -340,8 +336,7 @@ export const useVideoPlayer = (
       setState(prev => ({
         ...prev,
         volume: video.volume,
-        isMuted: video.muted,
-      }));
+        isMuted: video.muted }));
     }, []),
 
     onError: useCallback((error: Error) => {
@@ -350,8 +345,7 @@ export const useVideoPlayer = (
         ...prev,
         error: 'Failed to load video',
         isLoading: false,
-        isPlaying: false,
-      }));
+        isPlaying: false }));
     }, []),
 
     onEnded: useCallback(() => {
@@ -374,8 +368,7 @@ export const useVideoPlayer = (
 
     onCanPlayThrough: useCallback(() => {
       setState(prev => ({ ...prev, isLoading: false }));
-    }, []),
-  };
+    }, []) };
 
   // Set up video element and event listeners
   useEffect(() => {
@@ -394,35 +387,35 @@ export const useVideoPlayer = (
     video.playbackRate = initialPlaybackRate;
 
     // Attach event listeners
-    video.addEventListener('loadstart', events.onLoadStart);
-    video.addEventListener('loadedmetadata', events.onLoadedMetadata);
-    video.addEventListener('canplay', events.onCanPlay);
-    video.addEventListener('play', events.onPlay);
-    video.addEventListener('pause', events.onPause);
-    video.addEventListener('timeupdate', events.onTimeUpdate);
-    video.addEventListener('durationchange', events.onDurationChange);
-    video.addEventListener('volumechange', events.onVolumeChange);
-    video.addEventListener('error', events.onError);
-    video.addEventListener('ended', events.onEnded);
-    video.addEventListener('progress', events.onProgress);
-    video.addEventListener('waiting', events.onWaiting);
-    video.addEventListener('canplaythrough', events.onCanPlayThrough);
+    video.addEventListener('loadstart', events.onLoadStart as EventListener);
+    video.addEventListener('loadedmetadata', events.onLoadedMetadata as EventListener);
+    video.addEventListener('canplay', events.onCanPlay as EventListener);
+    video.addEventListener('play', events.onPlay as EventListener);
+    video.addEventListener('pause', events.onPause as EventListener);
+    video.addEventListener('timeupdate', events.onTimeUpdate as EventListener);
+    video.addEventListener('durationchange', events.onDurationChange as EventListener);
+    video.addEventListener('volumechange', events.onVolumeChange as EventListener);
+    video.addEventListener('error', events.onError as EventListener);
+    video.addEventListener('ended', events.onEnded as EventListener);
+    video.addEventListener('progress', events.onProgress as EventListener);
+    video.addEventListener('waiting', events.onWaiting as EventListener);
+    video.addEventListener('canplaythrough', events.onCanPlayThrough as EventListener);
 
     // Cleanup function
     return () => {
-      video.removeEventListener('loadstart', events.onLoadStart);
-      video.removeEventListener('loadedmetadata', events.onLoadedMetadata);
-      video.removeEventListener('canplay', events.onCanPlay);
-      video.removeEventListener('play', events.onPlay);
-      video.removeEventListener('pause', events.onPause);
-      video.removeEventListener('timeupdate', events.onTimeUpdate);
-      video.removeEventListener('durationchange', events.onDurationChange);
-      video.removeEventListener('volumechange', events.onVolumeChange);
-      video.removeEventListener('error', events.onError);
-      video.removeEventListener('ended', events.onEnded);
-      video.removeEventListener('progress', events.onProgress);
-      video.removeEventListener('waiting', events.onWaiting);
-      video.removeEventListener('canplaythrough', events.onCanPlayThrough);
+      video.removeEventListener('loadstart', events.onLoadStart as EventListener);
+      video.removeEventListener('loadedmetadata', events.onLoadedMetadata as EventListener);
+      video.removeEventListener('canplay', events.onCanPlay as EventListener);
+      video.removeEventListener('play', events.onPlay as EventListener);
+      video.removeEventListener('pause', events.onPause as EventListener);
+      video.removeEventListener('timeupdate', events.onTimeUpdate as EventListener);
+      video.removeEventListener('durationchange', events.onDurationChange as EventListener);
+      video.removeEventListener('volumechange', events.onVolumeChange as EventListener);
+      video.removeEventListener('error', events.onError as EventListener);
+      video.removeEventListener('ended', events.onEnded as EventListener);
+      video.removeEventListener('progress', events.onProgress as EventListener);
+      video.removeEventListener('waiting', events.onWaiting as EventListener);
+      video.removeEventListener('canplaythrough', events.onCanPlayThrough as EventListener);
     };
   }, [
     autoplay,
@@ -440,13 +433,12 @@ export const useVideoPlayer = (
     const handleFullscreenChange = () => {
       setState(prev => ({
         ...prev,
-        isFullscreen: !!document.fullscreenElement,
-      }));
+        isFullscreen: !!document.fullscreenElement }));
     };
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('fullscreenchange', handleFullscreenChange as EventListener);
     return () =>
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange as EventListener);
   }, []);
 
   return {
@@ -466,10 +458,8 @@ export const useVideoPlayer = (
       enterFullscreen,
       exitFullscreen,
       toggleFullscreen,
-      reset,
-    },
-    events,
-  };
+      reset },
+    events };
 };
 
 export default useVideoPlayer;

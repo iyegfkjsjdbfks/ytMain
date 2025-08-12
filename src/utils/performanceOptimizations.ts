@@ -2,7 +2,7 @@ import { memo, type ComponentType } from 'react';
 
 // Enhanced memoization with custom comparison
 export const withMemo = <P extends object>(
-  Component: ComponentType<P>,
+  Component: ComponentType<P>
   propsAreEqual?: (prevProps: P, nextProps: P) => boolean
 ) => {
   const MemoizedComponent = memo(Component, propsAreEqual);
@@ -260,8 +260,7 @@ export const createMemoryManager = () => {
 
     size() {
       return cache.size;
-    },
-  };
+    } };
 };
 
 // Request deduplication
@@ -284,8 +283,7 @@ export const createRequestDeduplicator = () => {
 
     clear() {
       pendingRequests.clear();
-    },
-  };
+    } };
 };
 
 export const requestDeduplicator = createRequestDeduplicator();

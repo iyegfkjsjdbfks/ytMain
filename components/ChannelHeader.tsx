@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import BellIcon from './icons/BellIcon';
 
 import type { Channel } from '../src/types/core';
@@ -16,8 +14,7 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
   channel,
   videoCount,
   isSubscribed,
-  onSubscribeToggle,
-}) => {
+  onSubscribeToggle }) => {
   return (
     <>
       <div className="h-32 sm:h-48 md:h-56 lg:h-64 bg-neutral-200 dark:bg-neutral-700/30">

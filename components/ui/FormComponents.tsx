@@ -20,7 +20,7 @@ export type InputVariant = 'default' | 'filled' | 'outlined';
 export type InputSize = 'sm' | 'md' | 'lg';
 
 // Input component props
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'required' | 'className'>, BaseFieldProps {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement> 'size' | 'required' | 'className'> BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
   leftIcon?: React.ReactNode;
@@ -29,14 +29,14 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 }
 
 // Textarea component props
-export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'required' | 'className'>, BaseFieldProps {
+export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement> 'required' | 'className'> BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
 }
 
 // Select component props
-export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'required' | 'className'>, BaseFieldProps {
+export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement> 'size' | 'required' | 'className'> BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
   options: Array<{ value, label: string; disabled?: boolean }>;
@@ -44,12 +44,12 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
 }
 
 // Checkbox component props
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'required' | 'className'>, BaseFieldProps {
+export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement> 'type' | 'size' | 'required' | 'className'> BaseFieldProps {
   size?: InputSize;
 }
 
 // Radio component props
-export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'required' | 'className'>, BaseFieldProps {
+export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement> 'type' | 'size' | 'required' | 'className'> BaseFieldProps {
   size?: InputSize;
   options: Array<{ value, label: string; disabled?: boolean }>;
 }
@@ -516,5 +516,4 @@ export default {
   Checkbox,
   RadioGroup,
   FormGroup,
-  FormActions,
-};
+  FormActions };

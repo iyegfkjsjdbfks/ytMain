@@ -30,8 +30,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
       viewCount,
       likeCount,
       commentCount,
-      publishedAt,
-    } = video;
+      publishedAt } = video;
 
     const handleClick = () => {
       if (onClick) {
@@ -42,8 +41,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
     const formattedDate =
       publishedAt || createdAt
         ? formatDistanceToNow(new Date(publishedAt || createdAt), {
-            addSuffix: true,
-          })
+            addSuffix: true })
         : '';
 
     // Use viewCount if available, fallback to views
@@ -329,5 +327,4 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
 );
 
 export default VideoCard;
-
 

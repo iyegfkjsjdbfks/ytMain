@@ -20,14 +20,12 @@ const buttonVariants = {
   secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900 border-transparent dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white',
   ghost: 'bg-transparent hover:bg-gray-100 text-gray-700 border-transparent dark:hover:bg-gray-800 dark:text-gray-300',
   danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent',
-  success: 'bg-green-600 hover:bg-green-700 text-white border-transparent',
-};
+  success: 'bg-green-600 hover:bg-green-700 text-white border-transparent' };
 
 const buttonSizes = {
   sm: 'px-3 py-1.5 text-sm',
   md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
-};
+  lg: 'px-6 py-3 text-base' };
 
 export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
   ({
@@ -165,15 +163,13 @@ const cardPadding = {
   none: '',
   sm: 'p-3',
   md: 'p-4',
-  lg: 'p-6',
-};
+  lg: 'p-6' };
 
 const cardShadow = {
   none: '',
   sm: 'shadow-sm',
   md: 'shadow-md',
-  lg: 'shadow-lg',
-};
+  lg: 'shadow-lg' };
 
 export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   children,
@@ -181,8 +177,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   padding = 'md',
   shadow = 'sm',
   border = true,
-  hover = false,
-}) => {
+  hover = false }) => {
   return (
     <div
       className={cn(
@@ -215,30 +210,25 @@ const alertStyles = {
     icon: 'text-blue-400',
     title: 'text-blue-800 dark:text-blue-200',
     content: 'text-blue-700 dark:text-blue-300',
-    IconComponent: InformationCircleIcon,
-  },
+    IconComponent: InformationCircleIcon },
   success: {
     container: 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800',
     icon: 'text-green-400',
     title: 'text-green-800 dark:text-green-200',
     content: 'text-green-700 dark:text-green-300',
-    IconComponent: CheckCircleIcon,
-  },
+    IconComponent: CheckCircleIcon },
   warning: {
     container: 'bg-yellow-50 border-yellow-200 dark:bg-yellow-900/20 dark:border-yellow-800',
     icon: 'text-yellow-400',
     title: 'text-yellow-800 dark:text-yellow-200',
     content: 'text-yellow-700 dark:text-yellow-300',
-    IconComponent: ExclamationTriangleIcon,
-  },
+    IconComponent: ExclamationTriangleIcon },
   error: {
     container: 'bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800',
     icon: 'text-red-400',
     title: 'text-red-800 dark:text-red-200',
     content: 'text-red-700 dark:text-red-300',
-    IconComponent: ExclamationTriangleIcon,
-  },
-};
+    IconComponent: ExclamationTriangleIcon } };
 
 export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
   type = 'info',
@@ -246,8 +236,7 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
   children,
   dismissible = false,
   onDismiss,
-  className,
-}) => {
+  className }) => {
   const styles = alertStyles[type];
   const { IconComponent } = styles;
 
@@ -305,15 +294,13 @@ export interface UnifiedLoadingProps {
 const loadingSizes = {
   sm: 'w-4 h-4',
   md: 'w-6 h-6',
-  lg: 'w-8 h-8',
-};
+  lg: 'w-8 h-8' };
 
 export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
   type = 'spinner',
   size = 'md',
   text,
-  className,
-}) => {
+  className }) => {
   const sizeClass = loadingSizes[size];
 
   const renderLoader = () => {
@@ -336,8 +323,7 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
                 )}
                 style={{
                   animationDelay: `${i * 0.2}s`,
-                  animationDuration: '1s',
-                }}
+                  animationDuration: '1s' }}
               />
             ))}
           </div>
@@ -383,8 +369,7 @@ const modalSizes = {
   sm: 'max-w-md',
   md: 'max-w-lg',
   lg: 'max-w-2xl',
-  xl: 'max-w-4xl',
-};
+  xl: 'max-w-4xl' };
 
 export const UnifiedModal: React.FC<UnifiedModalProps> = ({
   isOpen,
@@ -394,8 +379,7 @@ export const UnifiedModal: React.FC<UnifiedModalProps> = ({
   size = 'md',
   closeOnOverlayClick = true,
   showCloseButton = true,
-  className,
-}) => {
+  className }) => {
   if (!isOpen) {
 return null;
 }
@@ -450,5 +434,4 @@ export {
   UnifiedCard as Card,
   UnifiedAlert as Alert,
   UnifiedLoading as Loading,
-  UnifiedModal as Modal,
-};
+  UnifiedModal as Modal };

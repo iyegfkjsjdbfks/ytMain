@@ -1,6 +1,4 @@
-import React, { FC, ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 // Base icon props interface
 export interface IconProps {
   className?: string;
@@ -16,8 +14,7 @@ const sizeMap = {
   sm: 'w-4 h-4',
   md: 'w-5 h-5',
   lg: 'w-6 h-6',
-  xl: 'w-8 h-8',
-};
+  xl: 'w-8 h-8' };
 
 // Base icon component
 export const BaseIcon: React.FC<IconProps & { children: React.ReactNode; viewBox?: string }> = ({
@@ -27,8 +24,7 @@ export const BaseIcon: React.FC<IconProps & { children: React.ReactNode; viewBox
   strokeWidth = 1.5,
   fill = 'none',
   viewBox = '0 0 24 24',
-  children,
-}) => {
+  children }) => {
   const sizeClass = sizeMap[size];
   const combinedClassName = `${sizeClass} ${className}`.trim();
 

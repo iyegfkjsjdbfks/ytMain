@@ -1,4 +1,5 @@
 
+import type { Video } from '../types';
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
 import { Cog6ToothIcon, CheckIcon, PlayIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ForwardIcon, BackwardIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
@@ -57,8 +58,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   onFullscreenToggle,
   isPictureInPicture = false,
   onPictureInPictureToggle,
-  className = '',
-}) => {
+  className = '' }) => {
   const [showSettings, setShowSettings] = useState(false);
   const [activePanel, setActivePanel] = useState<'main' | 'quality' | 'speed'>('main');
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
@@ -76,8 +76,8 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
   const getCurrentQualityLabel = () => {

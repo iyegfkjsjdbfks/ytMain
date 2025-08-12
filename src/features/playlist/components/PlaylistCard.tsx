@@ -38,8 +38,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
   onFollow,
   onUnfollow,
   onShare,
-  className,
-}) => {
+  className }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -322,8 +321,8 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
   React.useEffect(() => {
     const handleClickOutside = () => setShowMenu(false);
     if (showMenu) {
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
+      document.addEventListener('click', handleClickOutside as EventListener);
+      return () => document.removeEventListener('click', handleClickOutside as EventListener);
     }
     return undefined;
   }, [showMenu]);
@@ -347,5 +346,4 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 };
 
 export default PlaylistCard;
-
 

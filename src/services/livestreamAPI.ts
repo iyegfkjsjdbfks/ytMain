@@ -20,8 +20,7 @@ import type {
   StreamReplay,
   LiveStreamSettings,
   LiveStreamStats,
-  LiveStreamMonetization,
-} from '../types/livestream';
+  LiveStreamMonetization } from '../types/livestream';
 
 /**
  * Pure service for live streaming API operations without React dependencies
@@ -57,8 +56,7 @@ export const streamAPI = {
       frameRate: 30,
       enableRecording: true,
       enableMultiplatform: false,
-      platforms: [{ name: 'youtube', enabled: true }],
-    };
+      platforms: [{ name: 'youtube', enabled: true }] };
 
     const defaultStats: LiveStreamStats = {
       viewers: 0,
@@ -75,8 +73,7 @@ export const streamAPI = {
       streamHealth: 'good',
       bitrate: 5000,
       frameDrops: 0,
-      latency: 2000,
-    };
+      latency: 2000 };
 
     const defaultMonetization: LiveStreamMonetization = {
       totalRevenue: 0,
@@ -84,8 +81,7 @@ export const streamAPI = {
       adRevenue: 0,
       membershipRevenue: 0,
       donationRevenue: 0,
-      superChats: [],
-    };
+      superChats: [] };
 
     const stream: LiveStream = {
       id: `stream_${Date.now()}`,
@@ -99,15 +95,13 @@ export const streamAPI = {
       visibility: streamData.visibility || 'public',
       status: 'scheduled',
       ...(streamData.scheduledStartTime && {
-        scheduledStartTime: streamData.scheduledStartTime,
-      }),
+        scheduledStartTime: streamData.scheduledStartTime }),
       creatorId: streamData.creatorId || 'user_123',
       creatorName: streamData.creatorName || 'Streamer',
       creatorAvatar: streamData.creatorAvatar || '/api/placeholder/40/40',
       settings: { ...defaultSettings, ...streamData.settings },
       stats: { ...defaultStats, ...streamData.stats },
-      monetization: { ...defaultMonetization, ...streamData.monetization },
-    };
+      monetization: { ...defaultMonetization, ...streamData.monetization } };
 
     mockStreams.push(stream);
     return stream;
@@ -151,8 +145,7 @@ export const streamAPI = {
       description: updates.description || currentStream.description,
       creatorId: updates.creatorId || currentStream.creatorId,
       creatorName: updates.creatorName || currentStream.creatorName,
-      creatorAvatar: updates.creatorAvatar || currentStream.creatorAvatar,
-    };
+      creatorAvatar: updates.creatorAvatar || currentStream.creatorAvatar };
     return mockStreams[streamIndex];
   },
 
@@ -167,8 +160,7 @@ export const streamAPI = {
 
     const updatedStream = await this.updateStream(id, {
       status: 'live',
-      actualStartTime: new Date(),
-    });
+      actualStartTime: new Date() });
 
     return updatedStream;
   },
@@ -194,9 +186,7 @@ export const streamAPI = {
       endTime,
       stats: {
         ...stream.stats,
-        duration,
-      },
-    });
+        duration } });
 
     // Create replay
     if (stream.actualStartTime) {
@@ -218,8 +208,7 @@ export const streamAPI = {
    */
   async deleteStream(id): Promise<void> {
     mockStreams = mockStreams.filter(stream => stream.id !== id);
-  },
-};
+  } };
 
 /**
  * Chat Management API
@@ -240,8 +229,7 @@ export const chatAPI = {
       isModerator: false,
       isOwner: false,
       isVerified: false,
-      badges: [],
-    };
+      badges: [] };
 
     mockChatMessages.push(chatMessage);
     return chatMessage;
@@ -283,8 +271,7 @@ export const chatAPI = {
       isOwner: false,
       isVerified: false,
       badges: [],
-      superChat,
-    };
+      superChat };
 
     mockChatMessages.push(chatMessage);
     return superChat;
@@ -333,8 +320,7 @@ export const chatAPI = {
           break;
       }
     }
-  },
-};
+  } };
 
 /**
  * Polls API
@@ -352,8 +338,7 @@ export const pollsAPI = {
         id: `option_${Math.random().toString(36).substr(2, 5)}`,
         text: option,
         votes: 0,
-        percentage: 0,
-      })),
+        percentage: 0 })),
       isActive: true,
       totalVotes: 0,
       createdAt: new Date(),
@@ -400,8 +385,7 @@ export const pollsAPI = {
    */
   async getStreamPolls(streamId): Promise<LivePoll[]> {
     return mockPolls.filter(poll => poll.streamId === streamId);
-  },
-};
+  } };
 
 /**
  * Q&A API
@@ -427,8 +411,7 @@ export const qaAPI = {
       isAnswered: false,
       upvotes: 0,
       timestamp: new Date(),
-      isHighlighted: false,
-    };
+      isHighlighted: false };
 
     mockQuestions.push(qaQuestion);
     return qaQuestion;
@@ -470,8 +453,7 @@ export const qaAPI = {
     return mockQuestions
       .filter(q => q.streamId === streamId)
       .sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
-  },
-};
+  } };
 
 /**
  * Replay API
@@ -491,8 +473,7 @@ export const replayAPI = {
       duration,
       createdAt: new Date(),
       views: 0,
-      isProcessing: true,
-    };
+      isProcessing: true };
 
     mockReplays.push(replay);
 
@@ -521,8 +502,7 @@ export const replayAPI = {
    */
   async getStreamReplays(streamId): Promise<StreamReplay[]> {
     return mockReplays.filter(replay => replay.streamId === streamId);
-  },
-};
+  } };
 
 /**
  * Multi-platform streaming API
@@ -540,8 +520,7 @@ export const multiPlatformAPI = {
         id: 'custom_rtmp',
         name: 'Custom RTMP',
         icon: '🔗',
-        isConnected: false,
-      },
+        isConnected: false },
     ];
   },
 
@@ -561,8 +540,7 @@ export const multiPlatformAPI = {
     // Simulate multi-platform streaming setup
     await new Promise(resolve => setTimeout(resolve, 2000));
     return true;
-  },
-};
+  } };
 
 /**
  * Scheduling API
@@ -572,14 +550,13 @@ export const schedulingAPI = {
    * Schedule a stream
    */
   async scheduleStream(
-    streamData: Partial<LiveStream>,
+    streamData: Partial<LiveStream>
     scheduledTime: Date
   ): Promise<LiveStream> {
     const stream = await streamAPI.createStream({
       ...streamData,
       scheduledStartTime: scheduledTime,
-      status: 'scheduled',
-    });
+      status: 'scheduled' });
 
     return stream;
   },
@@ -596,8 +573,7 @@ export const schedulingAPI = {
    */
   async cancelScheduledStream(streamId): Promise<void> {
     await streamAPI.deleteStream(streamId);
-  },
-};
+  } };
 
 // Export all APIs as a single service object
 export const liveStreamService = {
@@ -607,7 +583,6 @@ export const liveStreamService = {
   qa: qaAPI,
   replays: replayAPI,
   multiPlatform: multiPlatformAPI,
-  scheduling: schedulingAPI,
-};
+  scheduling: schedulingAPI };
 
 export default liveStreamService;

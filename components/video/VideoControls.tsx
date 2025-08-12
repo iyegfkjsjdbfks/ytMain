@@ -1,6 +1,4 @@
-import React, { FC, ChangeEvent, MouseEvent } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 
 import { ActionButton } from '../ui';
@@ -38,8 +36,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
   onFullscreenToggle,
   onPlaybackRateChange,
   onSettingsToggle,
-  className = '',
-}) => {
+  className = '' }) => {
   const formatTime = (time: any) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);

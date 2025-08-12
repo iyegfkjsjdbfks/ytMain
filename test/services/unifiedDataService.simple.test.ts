@@ -7,18 +7,14 @@ vi.mock('../../src/services/api/youtubeService', () => ({
   youtubeService: {
     fetchVideos: vi.fn(),
     fetchChannel: vi.fn(),
-    clearCache: vi.fn(),
-  },
-}));
+    clearCache: vi.fn() } }));
 
 vi.mock('../../src/services/metadataNormalizationService', () => ({
   metadataNormalizationService: {
     normalizeLocalVideo: vi.fn(),
     normalizeYouTubeVideo: vi.fn(),
     normalizeLocalChannel: vi.fn(),
-    normalizeYouTubeChannel: vi.fn(),
-  },
-}));
+    normalizeYouTubeChannel: vi.fn() } }));
 
 vi.mock('../../src/services/realVideoService', () => ({
   getVideos: vi.fn(),
@@ -26,8 +22,7 @@ vi.mock('../../src/services/realVideoService', () => ({
   getVideosByCategory: vi.fn(),
   searchVideos: vi.fn(),
   getVideoById: vi.fn(),
-  getChannelById: vi.fn(),
-}));
+  getChannelById: vi.fn() }));
 
 describe('UnifiedDataService', () => {
   beforeEach(() => {
@@ -48,8 +43,7 @@ describe('UnifiedDataService', () => {
     it('should allow configuration updates', () => {
       unifiedDataService.updateConfig({
         sources: { local: true, youtube: false },
-        caching: { enabled: false, ttl: 0 },
-      });
+        caching: { enabled: false, ttl: 0 } });
 
       const config = unifiedDataService.getConfig();
       expect(config.sources.youtube).toBe(false);

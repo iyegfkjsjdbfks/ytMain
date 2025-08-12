@@ -9,11 +9,15 @@ declare namespace NodeJS {
   }
 }
 
-
 import { useRef, useEffect, useState, FC } from 'react';
 
 import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
+import { EyeIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { StopIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
+import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 const VideoCameraIconSolid = VideoCameraSolidIcon;
 const MicrophoneIconSolid = MicrophoneSolidIcon;
 
@@ -59,8 +63,7 @@ interface LiveStreamManagerProps {
 const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   onStreamStart,
   onStreamEnd,
-  className = '',
-}) => {
+  className = '' }) => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isSettingUp, setIsSettingUp] = useState(false);
@@ -71,8 +74,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
     category: 'Gaming',
     privacy: 'public',
     enableChat: true,
-    enableDonations: true,
-  });
+    enableDonations: true });
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [stats, setStats] = useState<LiveStreamStats>({
@@ -81,8 +83,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
     messages: 0,
     duration: 0,
     peakViewers: 0,
-    totalDonations: 0,
-  });
+    totalDonations: 0 });
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
@@ -121,14 +122,11 @@ clearInterval(chatInterval.current);
         video: {
           width: { ideal: 1920 },
           height: { ideal: 1080 },
-          frameRate: { ideal: 30 },
-        },
+          frameRate: { ideal: 30 } },
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
-          autoGainControl: true,
-        },
-      });
+          autoGainControl: true } });
 
       setStream(mediaStream);
       if (videoRef.current) {
@@ -168,8 +166,7 @@ clearInterval(chatInterval.current);
           viewers,
           duration,
           peakViewers: Math.max(prev.peakViewers, viewers),
-          likes: prev.likes + (Math.random() > 0.9 ? 1 : 0),
-        };
+          likes: prev.likes + (Math.random() > 0.9 ? 1 : 0) };
       });
     }, 2000);
 
@@ -261,17 +258,13 @@ clearInterval(chatInterval.current);
       ...(isDonation && {
         donation: {
           amount: Math.floor(Math.random() * 50) + 5,
-          currency: 'USD',
-        },
-      }),
-    };
+          currency: 'USD' } }) };
 
     setChatMessages(prev => [...prev.slice(-49), newMessage]);
     setStats(prev => ({
       ...prev,
       messages: prev.messages + 1,
-      totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0),
-    }));
+      totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0) }));
   };
 
   const sendChatMessage = () => {
@@ -285,8 +278,7 @@ return;
       message: newMessage,
       timestamp: new Date().toISOString(),
       isModerator: false,
-      isOwner: true,
-    };
+      isOwner: true };
 
     setChatMessages(prev => [...prev.slice(-49), message]);
     setStats(prev => ({ ...prev, messages: prev.messages + 1 }));

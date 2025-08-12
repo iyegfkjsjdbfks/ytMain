@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import type { VideoUploadData } from '../types';
 
 interface UploadProgress {
@@ -57,8 +58,7 @@ export function uploadVideo(
           uploadedBytes: event.loaded,
           totalBytes: event.total,
           speed: event.loaded / ((Date.now() - startTime) / 1000), // bytes per second
-          timeRemaining: (event.total - event.loaded) / (event.loaded / ((Date.now() - startTime) / 1000)),
-        };
+          timeRemaining: (event.total - event.loaded) / (event.loaded / ((Date.now() - startTime) / 1000)) };
         onProgress(progress);
       }
     };
@@ -111,15 +111,13 @@ export function validateVideoFile(file: File): { valid: boolean; error?: string 
   if (!validTypes.includes(file.type)) {
     return {
       valid: false,
-      error: 'Invalid file type. Please upload a video file (MP4, WebM, MOV, AVI, WMV, MKV, 3GP, etc.)',
-    };
+      error: 'Invalid file type. Please upload a video file (MP4, WebM, MOV, AVI, WMV, MKV, 3GP, etc.)' };
   }
 
   if (file.size > maxSize) {
     return {
       valid: false,
-      error: `File is too large. Maximum size is ${maxSize / (1024 * 1024)}MB`,
-    };
+      error: `File is too large. Maximum size is ${maxSize / (1024 * 1024)}MB` };
   }
 
   return { valid: true };
@@ -132,15 +130,13 @@ export function validateThumbnailFile(file: File): { valid: boolean; error?: str
   if (!validTypes.includes(file.type)) {
     return {
       valid: false,
-      error: 'Invalid file type. Please upload an image (JPEG, PNG, or WebP)',
-    };
+      error: 'Invalid file type. Please upload an image (JPEG, PNG, or WebP)' };
   }
 
   if (file.size > maxSize) {
     return {
       valid: false,
-      error: `File is too large. Maximum size is ${maxSize / (1024 * 1024)}MB`,
-    };
+      error: `File is too large. Maximum size is ${maxSize / (1024 * 1024)}MB` };
   }
 
   return { valid: true };
@@ -176,8 +172,7 @@ export function getVideoMetadata(file: File): Promise<{
         aspectRatio,
         bitrate,
         codec: '', // Would require more complex extraction
-        container: file.type,
-      });
+        container: file.type });
     };
 
     video.onerror = () => {

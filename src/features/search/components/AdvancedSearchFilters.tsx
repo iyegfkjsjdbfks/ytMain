@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React, { FC } from 'react';
 import { FunnelIcon, XMarkIcon, VideoCameraIcon, UserIcon, PlayIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 
@@ -26,16 +27,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   onFiltersChange,
   isOpen,
   onToggle,
-  className = '',
-}) => {
+  className = '' }) => {
   const updateFilter = <K extends keyof SearchFilters>(
     key: K,
     value: SearchFilters[K]
   ) => {
     onFiltersChange({
       ...filters,
-      [key]: value,
-    });
+      [key]: value });
   };
 
   const toggleFeature = (feature: any) => {
@@ -54,8 +53,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
       features: [],
       sortBy: 'relevance',
       quality: 'any',
-      captions: 'any',
-    });
+      captions: 'any' });
   };
 
   const hasActiveFilters = () => {
@@ -366,5 +364,4 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 };
 
 export default AdvancedSearchFilters;
-
 

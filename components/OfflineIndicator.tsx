@@ -22,8 +22,8 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
       setShowOfflineMessage(true);
     };
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline as EventListener);
+    window.addEventListener('offline', handleOffline as EventListener);
 
     // Initial check
     setIsOnline(navigator.onLine);
@@ -32,8 +32,8 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     }
 
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline as EventListener);
+      window.removeEventListener('offline', handleOffline as EventListener);
     };
   }, []);
 

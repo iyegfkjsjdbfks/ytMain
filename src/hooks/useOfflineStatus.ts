@@ -67,8 +67,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     offlineDuration: 0,
     lastOnlineTime: Date.now(),
     connectionType: null,
-    networkInfo: null,
-  });
+    networkInfo: null });
 
   // Get network quality assessment
   const getNetworkQuality = useCallback((): 'fast' | 'slow' | 'offline' => {
@@ -130,8 +129,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     return {
       totalOfflineTime: 0,
       offlineEvents: 0,
-      lastOfflineTime: null,
-    };
+      lastOfflineTime: null };
   }, []);
 
   // Ping server to test connectivity
@@ -182,8 +180,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       const response = await fetch('/api/speed-test', {
         method: 'GET',
         cache: 'no-cache',
-        signal: AbortSignal.timeout(10000),
-      });
+        signal: AbortSignal.timeout(10000) });
 
       const latency = Date.now() - startTime;
       const online = response.ok;
@@ -246,8 +243,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       effectiveType: connection.effectiveType,
       downlink: connection.downlink,
       rtt: connection.rtt,
-      saveData: connection.saveData,
-    };
+      saveData: connection.saveData };
   }, []);
 
   // Set up event listeners and state management
@@ -267,8 +263,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
           ...prev,
           isOnline: true,
           lastOnlineTime: now,
-          offlineDuration,
-        };
+          offlineDuration };
       });
 
       updateOfflineStats(false);
@@ -289,8 +284,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       setState(prev => ({
         ...prev,
         isOnline: false,
-        wasOffline: true,
-      }));
+        wasOffline: true }));
 
       updateOfflineStats(true);
 
@@ -300,8 +294,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
           ...prev,
           offlineDuration: prev.lastOnlineTime
             ? Date.now() - prev.lastOnlineTime
-            : 0,
-        }));
+            : 0 }));
       }, 1000);
 
       conditionalLogger.debug('Connection lost', undefined, 'useOfflineStatus');
@@ -314,8 +307,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       setState(prev => ({
         ...prev,
         networkInfo,
-        connectionType,
-      }));
+        connectionType }));
 
       conditionalLogger.debug(
         'Network connection changed',
@@ -325,13 +317,13 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     };
 
     // Add event listeners
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline as EventListener);
+    window.addEventListener('offline', handleOffline as EventListener);
 
     // Listen for connection changes
     const { connection } = navigator as any;
     if (connection) {
-      connection.addEventListener('change', handleConnectionChange);
+      connection.addEventListener('change', handleConnectionChange as EventListener);
     }
 
     // Initialize network info
@@ -339,11 +331,11 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
     // Cleanup
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline as EventListener);
+      window.removeEventListener('offline', handleOffline as EventListener);
 
       if (connection) {
-        connection.removeEventListener('change', handleConnectionChange);
+        connection.removeEventListener('change', handleConnectionChange as EventListener);
       }
 
       if (offlineTimer) {
@@ -369,8 +361,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
     // Actions
     pingServer,
-    testConnection,
-  };
+    testConnection };
 };
 
 export default useOfflineStatus;

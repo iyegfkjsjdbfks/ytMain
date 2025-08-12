@@ -1,3 +1,5 @@
+import type { Channel } from '../types';
+import { Channel } from '../types';
 import React, { type RefObject } from 'react';
 
 import { getYouTubeVideoId, isYouTubeUrl  } from '../src/lib/youtube-utils';
@@ -52,8 +54,7 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
     handleSubscribe,
     openSaveModal,
     handleToggleDescription,
-    handleSummarizeDescription,
-  } = props;
+    handleSummarizeDescription } = props;
   if (!video) {
 return null;
 } // Should be handled by parent, but good practice

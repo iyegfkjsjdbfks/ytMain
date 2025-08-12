@@ -17,8 +17,7 @@ export {
   useVideos,
   useTrendingVideos,
   useSubscriptionsFeed,
-  useChannelVideos,
-} from './useVideoData';
+  useChannelVideos } from './useVideoData';
 export { useVideosData } from './useVideosData';
 
 // Shorts and specialized hooks

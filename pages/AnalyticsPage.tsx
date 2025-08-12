@@ -4,6 +4,8 @@ import { useEffect, useState, FC } from 'react';
 import { EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 import type { Video } from '../types';
+import { ArrowTrendingUpIcon } from '@heroicons/react/24/outline';
+import { ArrowTrendingDownIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
   totalViews: number;
@@ -56,8 +58,7 @@ const AnalyticsPage: React.FC = () => {
               const date = new Date();
               date.setDate(date.getDate() - (29 - i));
               return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            }),
-          },
+            }) },
           videoPerformance: [], // No local videos available
         };
 

@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+import type { Channel } from '../types';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -137,8 +139,7 @@ interface DescriptionContentProps {
 const DescriptionContent: React.FC<DescriptionContentProps> = ({
   video,
   showFullDescription,
-  onToggleDescription,
-}) => {
+  onToggleDescription }) => {
   const shouldShowToggle = video.description.length > 150 || video.description.includes('\n');
 
   return (
@@ -196,8 +197,7 @@ const AISummarySection: React.FC<AISummarySectionProps> = ({
   isSummarizing,
   summary,
   summaryError,
-  onSummarizeDescription,
-}) => {
+  onSummarizeDescription }) => {
   if (!canSummarize) {
 return null;
 }
@@ -257,8 +257,7 @@ const RefactoredVideoDescription: React.FC<RefactoredVideoDescriptionProps> = ({
   canSummarize,
   onSubscribe,
   onToggleDescription,
-  onSummarizeDescription,
-}) => {
+  onSummarizeDescription }) => {
   return (
     <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mt-4 shadow-sm border border-gray-200 dark:border-gray-700">
       {/* Channel Information */}

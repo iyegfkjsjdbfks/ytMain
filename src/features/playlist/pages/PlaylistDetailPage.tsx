@@ -31,4 +31,3 @@ const PlaylistDetailPage: React.FC = () => {
 
 export default PlaylistDetailPage;
 
-

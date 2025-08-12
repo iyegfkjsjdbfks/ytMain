@@ -12,8 +12,7 @@ interface PWAUpdateNotificationProps {
 }
 
 const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
-  className = '',
-}) => {
+  className = '' }) => {
   const { updateAvailable, installUpdate } = usePWA();
   const [isVisible, setIsVisible] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -130,5 +129,4 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
 };
 
 export default PWAUpdateNotification;
-
 

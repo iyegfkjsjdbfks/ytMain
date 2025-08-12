@@ -58,13 +58,11 @@ export const ModerationDashboard: React.FC = () => {
         id: 'user1',
         name: 'GamerPro123',
         avatar: 'https://picsum.photos/40/40?random=1',
-        isVerified: false,
-      },
+        isVerified: false },
       reportedBy: {
         id: 'reporter1',
         name: 'ConcernedViewer',
-        count: 15,
-      },
+        count: 15 },
       reportReason: 'Inappropriate content',
       severity: 'high',
       status: 'pending',
@@ -75,9 +73,7 @@ export const ModerationDashboard: React.FC = () => {
         views: 25000,
         likes: 1200,
         comments: 340,
-        duration: 720,
-      },
-    },
+        duration: 720 } },
     {
       id: '2',
       type: 'comment',
@@ -88,19 +84,16 @@ export const ModerationDashboard: React.FC = () => {
         id: 'user2',
         name: 'SpamBot2024',
         avatar: 'https://picsum.photos/40/40?random=2',
-        isVerified: false,
-      },
+        isVerified: false },
       reportedBy: {
         id: 'reporter2',
         name: 'RegularUser',
-        count: 8,
-      },
+        count: 8 },
       reportReason: 'Spam',
       severity: 'medium',
       status: 'pending',
       createdAt: '2024-01-15T12:45:00Z',
-      reportedAt: '2024-01-15T13:10:00Z',
-    },
+      reportedAt: '2024-01-15T13:10:00Z' },
     {
       id: '3',
       type: 'user',
@@ -110,19 +103,16 @@ export const ModerationDashboard: React.FC = () => {
         id: 'user3',
         name: 'ContentThief',
         avatar: 'https://picsum.photos/40/40?random=3',
-        isVerified: false,
-      },
+        isVerified: false },
       reportedBy: {
         id: 'reporter3',
         name: 'ContentCreator',
-        count: 25,
-      },
+        count: 25 },
       reportReason: 'Copyright infringement',
       severity: 'critical',
       status: 'pending',
       createdAt: '2024-01-14T09:15:00Z',
-      reportedAt: '2024-01-15T08:30:00Z',
-    },
+      reportedAt: '2024-01-15T08:30:00Z' },
   ];
 
   const filteredItems = moderationItems.filter(item => {
@@ -456,8 +446,7 @@ export const ModerationDashboard: React.FC = () => {
                         <button
                           onClick={() =>
                             handleModerationAction(item.id, {
-                              action: 'approve',
-                            })
+                              action: 'approve' })
                           }
                           className='flex items-center gap-1 px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700 transition-colors'
                         >
@@ -467,8 +456,7 @@ export const ModerationDashboard: React.FC = () => {
                         <button
                           onClick={() =>
                             handleModerationAction(item.id, {
-                              action: 'reject',
-                            })
+                              action: 'reject' })
                           }
                           className='flex items-center gap-1 px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition-colors'
                         >
@@ -478,8 +466,7 @@ export const ModerationDashboard: React.FC = () => {
                         <button
                           onClick={() =>
                             handleModerationAction(item.id, {
-                              action: 'escalate',
-                            })
+                              action: 'escalate' })
                           }
                           className='flex items-center gap-1 px-3 py-1 bg-purple-600 text-white rounded text-sm hover:bg-purple-700 transition-colors'
                         >
@@ -516,5 +503,4 @@ export const ModerationDashboard: React.FC = () => {
 };
 
 export default ModerationDashboard;
-
 

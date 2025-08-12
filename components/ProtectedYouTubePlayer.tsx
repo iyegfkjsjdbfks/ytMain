@@ -32,8 +32,7 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
   className = '',
   onReady,
   onStateChange,
-  onError,
-}) => {
+  onError }) => {
   const videoId = typeof video === 'object' && 'id' in video ? video.id : '';
 
   const handleRetry = useCallback(() => {
@@ -62,5 +61,4 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
 };
 
 export default ProtectedYouTubePlayer;
-
 

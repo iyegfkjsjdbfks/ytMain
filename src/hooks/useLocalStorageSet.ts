@@ -13,7 +13,7 @@ export function useLocalStorageSet<T>(
   key: string,
   initialValue: Set<T> = new Set()
 ): [
-  Set<T>,
+  Set<T>
   (item: T) => void,
   (item: T) => void,
   (item: T) => void,
@@ -118,7 +118,7 @@ export function useLocalStorageSet<T>(
 export function useLocalStorageSetState<T>(
   key: string,
   initialValue: Set<T> = new Set()
-): [Set<T>, (updater: (prev: Set<T>) => Set<T>) => void] {
+): [Set<T> (updater: (prev: Set<T>) => Set<T>) => void] {
   const [items, setItems] = useState<T[]>(() => {
     try {
       const storedValue = localStorage.getItem(key);

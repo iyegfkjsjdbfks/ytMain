@@ -129,8 +129,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
     onLoadMore,
     loading = false,
     hasMore = false,
-    className = '',
-  }) => {
+    className = '' }) => {
     const [containerHeight, setContainerHeight] = useState(600);
     const debouncedQuery = useDebounce(query, 300);
 
@@ -157,8 +156,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
     // Intersection observer for load more
     const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
       threshold: 0.1,
-      rootMargin: '100px',
-    });
+      rootMargin: '100px' });
 
     // Load more when intersecting
     useEffect(() => {
@@ -172,8 +170,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
       () => ({
         videos,
         onVideoClick,
-        query: debouncedQuery,
-      }),
+        query: debouncedQuery }),
       [videos, onVideoClick, debouncedQuery]
     );
 
@@ -253,5 +250,4 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
 OptimizedSearchResults.displayName = 'OptimizedSearchResults';
 
 export default OptimizedSearchResults;
-
 

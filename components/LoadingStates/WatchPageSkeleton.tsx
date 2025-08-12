@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 const WatchPageSkeleton: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">

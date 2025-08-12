@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 /**
  * SettingsPage component for managing user account settings
  */
@@ -24,5 +22,4 @@ const SettingsPage: React.FC = () => {
 };
 
 export default SettingsPage;
-
 

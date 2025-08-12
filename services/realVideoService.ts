@@ -1,6 +1,7 @@
 // Real Video Data Service
 // This service provides actual video data with playable video files
 
+import type { Video } from '../types';
 import type { VideoUploadData, UploadProgress } from '../types';
 
 // Sample real videos with actual playable content from Google's sample videos
@@ -23,8 +24,7 @@ const sampleVideos = [
     category: 'Entertainment',
     isShort: false,
     visibility: 'public' as const, createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
+    updatedAt: new Date().toISOString() },
   {
     id: 'sample-2',
     title: 'Elephant Dream',
@@ -43,8 +43,7 @@ const sampleVideos = [
     category: 'Film & Animation',
     isShort: false,
     visibility: 'public' as const, createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
+    updatedAt: new Date().toISOString() },
   {
     id: 'sample-3',
     title: 'For Bigger Blazes',
@@ -63,8 +62,7 @@ const sampleVideos = [
     category: 'Entertainment',
     isShort: true,
     visibility: 'public' as const, createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
+    updatedAt: new Date().toISOString() },
   {
     id: 'sample-4',
     title: 'For Bigger Escape',
@@ -83,8 +81,7 @@ const sampleVideos = [
     category: 'Entertainment',
     isShort: true,
     visibility: 'public' as const, createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
+    updatedAt: new Date().toISOString() },
   {
     id: 'sample-5',
     title: 'Sintel',
@@ -103,8 +100,7 @@ const sampleVideos = [
     category: 'Film & Animation',
     isShort: false,
     visibility: 'public' as const, createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
+    updatedAt: new Date().toISOString() },
   {
     id: 'sample-6',
     title: 'Tears of Steel',
@@ -123,8 +119,7 @@ const sampleVideos = [
     category: 'Film & Animation',
     isShort: false,
     visibility: 'public' as const, createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
+    updatedAt: new Date().toISOString() },
 ];
 
 // Video service functions
@@ -188,8 +183,7 @@ export default {
   getShortsVideos,
   searchVideos,
   getChannels,
-  getVideosByChannelName,
-};
+  getVideosByChannelName };
 
 // Playlist management functions (simplified for now)
 export const removeVideoFromPlaylist = async (_playlistId: any, _videoId: any) => {};
@@ -207,8 +201,7 @@ export const createUserPlaylist = async (_name: any, _description?: string) => (
   description: _description || '',
   videos: [],
   createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-});
+  updatedAt: new Date().toISOString() });
 
 // Export sample videos for compatibility
 export const realVideos = sampleVideos;

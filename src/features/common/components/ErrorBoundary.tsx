@@ -22,8 +22,7 @@ export class ErrorBoundary extends Component<Props, State> {
     this.state = {
       hasError: false,
       error: null,
-      errorInfo: null,
-    };
+      errorInfo: null };
   }
 
   static getDerivedStateFromError(error: Error): State {
@@ -31,16 +30,14 @@ export class ErrorBoundary extends Component<Props, State> {
     return {
       hasError: true,
       error,
-      errorInfo: null,
-    };
+      errorInfo: null };
   }
 
   override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // You can also log the error to an error reporting service
     logger.error('Error caught by ErrorBoundary:', error, errorInfo);
     this.setState({
-      errorInfo,
-    });
+      errorInfo });
   }
 
   override render(): ReactNode {
@@ -83,5 +80,4 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 
 export default ErrorBoundary;
-
 

@@ -119,10 +119,8 @@ export function createRequestConfig(config: RequestConfig = {}): RequestInit {
   return {
     headers: {
       'Content-Type': 'application/json',
-      ...fetchConfig.headers,
-    },
-    ...fetchConfig,
-  };
+      ...fetchConfig.headers },
+    ...fetchConfig };
 }
 
 // Request wrapper with timeout and retry logic
@@ -206,7 +204,7 @@ export async function apiRequest<T>(
 // GET request
 export async function get<T>(
   endpoint: any,
-  params?: Record<string, any>,
+  params?: Record<string, any>
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint, params);
@@ -223,8 +221,7 @@ export async function post<T>(
   return apiRequest<T>(url, {
     ...config,
     method: 'POST',
-    body: data ? JSON.stringify(data) : null,
-  });
+    body: data ? JSON.stringify(data) : null });
 }
 
 // PUT request
@@ -237,8 +234,7 @@ export async function put<T>(
   return apiRequest<T>(url, {
     ...config,
     method: 'PUT',
-    body: data ? JSON.stringify(data) : null,
-  });
+    body: data ? JSON.stringify(data) : null });
 }
 
 // PATCH request
@@ -251,8 +247,7 @@ export async function patch<T>(
   return apiRequest<T>(url, {
     ...config,
     method: 'PATCH',
-    body: data ? JSON.stringify(data) : null,
-  });
+    body: data ? JSON.stringify(data) : null });
 }
 
 // DELETE request
@@ -268,7 +263,7 @@ export async function del<T>(
 export async function upload<T>(
   endpoint: any,
   file: File,
-  additionalData?: Record<string, any>,
+  additionalData?: Record<string, any>
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
@@ -288,9 +283,7 @@ export async function upload<T>(
     body: formData,
     headers: {
       // Don't set Content-Type for FormData, let browser set it
-      ...config?.headers,
-    },
-  });
+      ...config?.headers } });
 }
 
 // Paginated request helper
@@ -311,8 +304,7 @@ export async function getPaginated<T>(
     page,
     limit: Math.min(limit, CONSTANTS.PAGINATION.MAX_PAGE_SIZE),
     ...(sortBy && { sortBy, sortOrder }),
-    ...otherParams,
-  };
+    ...otherParams };
 
   return get<T[]>(endpoint, queryParams, config) as Promise<
     ApiResponse<T[]> & { pagination: PaginationInfo }
@@ -329,7 +321,6 @@ export const api = {
   upload,
   getPaginated,
   createUrl: createApiUrl,
-  request: apiRequest,
-};
+  request: apiRequest };
 
 export default api;

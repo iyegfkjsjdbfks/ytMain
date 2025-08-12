@@ -11,15 +11,13 @@ interface SuperChatPanelProps {
 
 const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   streamId,
-  className = '',
-}) => {
+  className = '' }) => {
   const [superChats, setSuperChats] = useState<SuperChat[]>([]);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [showSendForm, setShowSendForm] = useState(false);
   const [newSuperChat, setNewSuperChat] = useState({
     amount: 5,
-    message: '',
-  });
+    message: '' });
 
   const superChatTiers = [
     { amount: 2, color: 'bg-blue-500', duration: 30 },
@@ -89,15 +87,13 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   const formatCurrency = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
-    }).format(amount);
+      currency: 'USD' }).format(amount);
   };
 
   const formatTimestamp = (timestamp: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       hour: '2-digit',
-      minute: '2-digit',
-    }).format(timestamp);
+      minute: '2-digit' }).format(timestamp);
   };
 
   const topSuperChats = superChats
@@ -145,8 +141,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
                     onClick={() =>
                       setNewSuperChat(prev => ({
                         ...prev,
-                        amount: tier.amount,
-                      }))
+                        amount: tier.amount }))
                     }
                     className={`p-2 rounded-lg text-white text-sm font-medium transition-all ${
                       newSuperChat.amount === tier.amount
@@ -166,8 +161,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
                   onChange={e =>
                     setNewSuperChat(prev => ({
                       ...prev,
-                      amount: parseInt(e.target.value, 10) || 1,
-                    }))
+                      amount: parseInt(e.target.value, 10) || 1 }))
                   }
                   min='1'
                   max='500'
@@ -190,8 +184,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
                 onChange={e =>
                   setNewSuperChat(prev => ({
                     ...prev,
-                    message: e.target.value,
-                  }))
+                    message: e.target.value }))
                 }
                 placeholder='Add a message to your Super Chat...'
                 rows={3}
@@ -366,5 +359,4 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
 };
 
 export default SuperChatPanel;
-
 

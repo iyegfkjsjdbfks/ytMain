@@ -28,8 +28,7 @@ interface FormProviderProps {
 export const FormProvider: React.FC<FormProviderProps> = ({
   children,
   initialValues = {},
-  validationSchema = {},
-}) => {
+  validationSchema = {} }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -67,8 +66,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
     setFieldValue,
     setFieldError,
     setFieldTouched,
-    validateField,
-  };
+    validateField };
 
   return (
     <FormContext.Provider value={contextValue}>
@@ -102,8 +100,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   required,
   helpText,
   children,
-  className,
-}) => {
+  className }) => {
   const { errors, touched } = useFormContext();
   const error = touched[name] ? errors[name] : undefined;
 
@@ -137,7 +134,7 @@ export const FormField: React.FC<FormFieldProps> = ({
 };
 
 // Enhanced Input Component
-interface UnifiedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+interface UnifiedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement> 'onChange'> {
   name: string;
   label?: string;
   required?: boolean;
@@ -152,14 +149,12 @@ interface UnifiedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
 const inputVariantClasses = {
   default: 'border-neutral-300 dark:border-neutral-600 focus:border-sky-500 focus:ring-sky-500',
   filled: 'border-transparent bg-neutral-100 dark:bg-neutral-800 focus:border-sky-500 focus:ring-sky-500',
-  outline: 'border-2 border-neutral-300 dark:border-neutral-600 focus:border-sky-500 focus:ring-sky-500',
-};
+  outline: 'border-2 border-neutral-300 dark:border-neutral-600 focus:border-sky-500 focus:ring-sky-500' };
 
 const inputSizeClasses = {
   sm: 'px-3 py-2 text-sm',
   md: 'px-4 py-2.5 text-sm',
-  lg: 'px-4 py-3 text-base',
-};
+  lg: 'px-4 py-3 text-base' };
 
 export const UnifiedInput: React.FC<UnifiedInputProps> = ({
   name,
@@ -199,8 +194,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
     {
       'border-red-500 focus:border-red-500 focus:ring-red-500': error,
       'pl-10': leftIcon,
-      'pr-10': rightIcon,
-    },
+      'pr-10': rightIcon },
     className,
   );
 
@@ -251,7 +245,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
 };
 
 // Enhanced Textarea Component
-interface UnifiedTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
+interface UnifiedTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement> 'onChange'> {
   name: string;
   label?: string;
   required?: boolean;
@@ -265,15 +259,13 @@ interface UnifiedTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
 const textareaSizeClasses = {
   sm: 'px-3 py-2 text-sm min-h-[80px]',
   md: 'px-4 py-2.5 text-sm min-h-[100px]',
-  lg: 'px-4 py-3 text-base min-h-[120px]',
-};
+  lg: 'px-4 py-3 text-base min-h-[120px]' };
 
 const resizeClasses = {
   none: 'resize-none',
   vertical: 'resize-y',
   horizontal: 'resize-x',
-  both: 'resize',
-};
+  both: 'resize' };
 
 export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
   name,
@@ -311,8 +303,7 @@ export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
     textareaSizeClasses[textareaSize],
     resizeClasses[resize],
     {
-      'border-red-500 focus:border-red-500 focus:ring-red-500': error,
-    },
+      'border-red-500 focus:border-red-500 focus:ring-red-500': error },
     className,
   );
 
@@ -345,7 +336,7 @@ export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
 };
 
 // Select Component
-interface UnifiedSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
+interface UnifiedSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement> 'onChange'> {
   name: string;
   label?: string;
   required?: boolean;
@@ -394,8 +385,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
     inputVariantClasses[variant],
     inputSizeClasses[selectSize],
     {
-      'border-red-500 focus:border-red-500 focus:ring-red-500': error,
-    },
+      'border-red-500 focus:border-red-500 focus:ring-red-500': error },
     className,
   );
 
@@ -410,8 +400,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
         onBlur={handleBlur}
         className={selectClasses}
         style={{
-          backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")',
-        }}
+          backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")' }}
       >
         {placeholder && (
           <option value="" disabled>
@@ -461,8 +450,7 @@ export const UnifiedForm: React.FC<UnifiedFormProps> = ({
   onSubmit,
   initialValues,
   validationSchema,
-  className,
-}) => {
+  className }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
@@ -519,5 +507,4 @@ export type {
   UnifiedInputProps,
   UnifiedTextareaProps,
   UnifiedSelectProps,
-  UnifiedFormProps,
-};
+  UnifiedFormProps };

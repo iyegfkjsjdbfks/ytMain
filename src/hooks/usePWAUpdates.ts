@@ -65,8 +65,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     lastUpdateCheck: null,
     updateSize: null,
     updateVersion: null,
-    skipWaiting: false,
-  });
+    skipWaiting: false });
 
   const [cacheInfo, setCacheInfo] = useState<CacheInfo | null>(null);
   const [autoUpdateEnabled, setAutoUpdateEnabled] = useState<boolean>(
@@ -104,8 +103,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
           ...prev,
           updateAvailable: true,
           updateSize: updateInfo.size,
-          updateVersion: updateInfo.version,
-        }));
+          updateVersion: updateInfo.version }));
 
         conditionalLogger.info(
           'PWA update available',
@@ -121,8 +119,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
       setState(prev => ({
         ...prev,
-        updateError: errorMessage,
-      }));
+        updateError: errorMessage }));
 
       conditionalLogger.error(
         'Failed to check for updates',
@@ -181,8 +178,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
         isUpdating: false,
         updateSize: null,
         updateVersion: null,
-        skipWaiting: false,
-      }));
+        skipWaiting: false }));
 
       conditionalLogger.info(
         'PWA update installed successfully',
@@ -199,8 +195,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       setState(prev => ({
         ...prev,
         isUpdating: false,
-        updateError: errorMessage,
-      }));
+        updateError: errorMessage }));
 
       conditionalLogger.error(
         'Failed to install update',
@@ -217,14 +212,12 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       updateAvailable: false,
       updateSize: null,
       updateVersion: null,
-      updateError: null,
-    }));
+      updateError: null }));
 
     // Store skip information
     const skipInfo = {
       version: state.updateVersion,
-      timestamp: Date.now(),
-    };
+      timestamp: Date.now() };
 
     localStorage.setItem('pwa-skipped-update', JSON.stringify(skipInfo));
 
@@ -240,8 +233,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     setState(prev => ({
       ...prev,
       updateAvailable: false,
-      updateError: null,
-    }));
+      updateError: null }));
   }, []);
 
   // Get cache size
@@ -294,8 +286,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       setCacheInfo({
         totalSize: 0,
         cacheNames: [],
-        lastCacheUpdate: Date.now(),
-      });
+        lastCacheUpdate: Date.now() });
 
       conditionalLogger.info(
         'All caches cleared',
@@ -389,8 +380,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       setCacheInfo({
         totalSize,
         cacheNames,
-        lastCacheUpdate: Date.now(),
-      });
+        lastCacheUpdate: Date.now() });
     } catch (error) {
       conditionalLogger.error(
         'Failed to update cache info',
@@ -417,7 +407,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     };
 
     // Listen for service worker updates
-    navigator.serviceWorker.addEventListener('message', handleMessage);
+    navigator.serviceWorker.addEventListener('message', handleMessage as EventListener);
 
     // Set up auto-update timer
     if (autoUpdateEnabled && updateInterval > 0) {
@@ -436,7 +426,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     checkForUpdates();
 
     return () => {
-      navigator.serviceWorker.removeEventListener('message', handleMessage);
+      navigator.serviceWorker.removeEventListener('message', handleMessage as EventListener);
 
       if (updateTimer) {
         clearInterval(updateTimer);
@@ -466,8 +456,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
     // Auto-update settings
     enableAutoUpdate,
-    setUpdateInterval,
-  };
+    setUpdateInterval };
 };
 
 export default usePWAUpdates;

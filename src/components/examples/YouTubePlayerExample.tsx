@@ -28,8 +28,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
   height = 450,
   autoplay = false,
   controls = true,
-  className = '',
-}) => {
+  className = '' }) => {
   const playerRef = useRef<YouTubePlayer | null>(null);
   const [playerState, setPlayerState] = useState<YouTubePlayerState | null>(
     null
@@ -72,8 +71,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
             modestbranding: 1,
             rel: 0,
             enablejsapi: 1,
-            origin: window.location.origin,
-          },
+            origin: window.location.origin },
           events: {
             onReady: async _event => {
               if (!isMounted) {
@@ -110,9 +108,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
               const state = event.data;
               setPlayerState(state);
               setIsPlaying(state === YouTubePlayerState.PLAYING);
-            },
-          },
-        });
+            } } });
 
         if (isMounted) {
           playerRef.current = player;
@@ -278,5 +274,4 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 };
 
 export default YouTubePlayerExample;
-
 

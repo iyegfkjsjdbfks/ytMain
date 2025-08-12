@@ -26,8 +26,7 @@ export function useModal({
   defaultOpen = false,
   onOpen,
   onClose,
-  closeOnEscape = true,
-}: UseModalOptions = {}): UseModalReturn {
+  closeOnEscape = true }: UseModalOptions = {}): UseModalReturn {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const open = useCallback(() => {
@@ -60,8 +59,8 @@ export function useModal({
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleEscape as EventListener);
+    return () => document.removeEventListener('keydown', handleEscape as EventListener);
   }, [isOpen, close, closeOnEscape]);
 
   // Prevent body scroll when modal is open
@@ -84,9 +83,7 @@ export function useModal({
     toggle,
     modalProps: {
       isOpen,
-      onClose: close,
-    },
-  };
+      onClose: close } };
 }
 
 /**
@@ -136,6 +133,5 @@ export function useModals<T extends string>() {
     toggleModal,
     closeAllModals,
     isModalOpen,
-    openModals: Array.from(openModals),
-  };
+    openModals: Array.from(openModals) };
 }

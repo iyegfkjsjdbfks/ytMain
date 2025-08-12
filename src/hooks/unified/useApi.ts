@@ -63,8 +63,7 @@ class ApiCache {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
-      staleTime,
-    });
+      staleTime });
 
     // Clean up old entries
     if (this.cache.size > CONSTANTS.CACHE_CONFIG.MAX_CACHE_SIZE) {
@@ -121,7 +120,7 @@ const apiCache = new ApiCache();
  */
 export function useApi<T>(
   queryKey: string | string[],
-  queryFn: () => Promise<ApiResponse<T>>,
+  queryFn: () => Promise<ApiResponse<T>>
   config: UseApiConfig<T> = {}
 ): UseApiReturn<T> {
   const {
@@ -134,8 +133,7 @@ export function useApi<T>(
     retry = 3,
     retryDelay = 1000,
     onSuccess,
-    onError,
-  } = config;
+    onError } = config;
 
   // Generate cache key
   const cacheKey = Array.isArray(queryKey) ? queryKey.join(':') : queryKey;
@@ -148,8 +146,7 @@ export function useApi<T>(
       loading: false,
       error: null,
       isStale: cachedData ? apiCache.isStale(cacheKey) : true,
-      lastUpdated: cachedData ? Date.now() : null,
-    };
+      lastUpdated: cachedData ? Date.now() : null };
   });
 
   // Refs
@@ -193,8 +190,7 @@ export function useApi<T>(
           loading: false,
           error: null,
           isStale: false,
-          lastUpdated: timestamp,
-        });
+          lastUpdated: timestamp });
 
         // Call success callback
         onSuccess?.(newData);
@@ -220,8 +216,7 @@ export function useApi<T>(
         setState(prev => ({
           ...prev,
           loading: false,
-          error: errorMessage,
-        }));
+          error: errorMessage }));
 
         // Call error callback
         onError?.(error instanceof Error ? error : new Error(errorMessage));
@@ -258,8 +253,7 @@ export function useApi<T>(
         ...prev,
         data,
         isStale: false,
-        lastUpdated: timestamp,
-      }));
+        lastUpdated: timestamp }));
     },
     [cacheKey, staleTime]
   );
@@ -272,8 +266,7 @@ export function useApi<T>(
       loading: false,
       error: null,
       isStale: true,
-      lastUpdated: null,
-    });
+      lastUpdated: null });
   }, [cacheKey, initialData]);
 
   // Initial fetch
@@ -295,8 +288,8 @@ export function useApi<T>(
       }
     };
 
-    window.addEventListener('focus', handleFocus);
-    return () => window.removeEventListener('focus', handleFocus);
+    window.addEventListener('focus', handleFocus as EventListener);
+    return () => window.removeEventListener('focus', handleFocus as EventListener);
   }, [refetchOnWindowFocus, fetchData, state.isStale]);
 
   // Cleanup
@@ -318,21 +311,20 @@ export function useApi<T>(
     ...state,
     refetch,
     mutate,
-    reset,
-  };
+    reset };
 }
 
 // Specialized hooks for common patterns
 export function useQuery<T>(
   queryKey: string | string[],
-  queryFn: () => Promise<ApiResponse<T>>,
+  queryFn: () => Promise<ApiResponse<T>>
   config?: UseApiConfig<T>
 ) {
   return useApi(queryKey, queryFn, config);
 }
 
 export function useMutation<T, TVariables = any>(
-  mutationFn: (variables: TVariables) => Promise<ApiResponse<T>>,
+  mutationFn: (variables: TVariables) => Promise<ApiResponse<T>>
   config: {
     onSuccess?: (data: T, variables: TVariables) => void;
     onError?: (error: Error, variables: TVariables) => void;
@@ -350,8 +342,7 @@ export function useMutation<T, TVariables = any>(
   }>({
     data: undefined,
     loading: false,
-    error: null,
-  });
+    error: null });
 
   const mutate = useCallback(
     async (variables: TVariables): Promise<T> => {
@@ -394,8 +385,7 @@ export function useMutation<T, TVariables = any>(
   return {
     ...state,
     mutate,
-    reset,
-  };
+    reset };
 }
 
 // Cache utilities
@@ -404,7 +394,6 @@ export const queryCache = {
   clear: () => apiCache.clear(),
   get: <T>(key: string) => apiCache.get<T>(key),
   set: <T>(key: string, data: T, staleTime?: number) =>
-    apiCache.set(key, data, staleTime),
-};
+    apiCache.set(key, data, staleTime) };
 
 export default useApi;

@@ -24,8 +24,7 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   onError,
   onLoad,
   maxRetries = 3,
-  retryDelay = 1000,
-}) => {
+  retryDelay = 1000 }) => {
   const [currentSrc, setCurrentSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

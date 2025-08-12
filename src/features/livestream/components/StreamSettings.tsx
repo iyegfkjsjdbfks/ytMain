@@ -12,8 +12,7 @@ interface StreamSettingsProps {
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({
-  onSettingsChange,
-}) => {
+  onSettingsChange }) => {
   const [settings, setSettings] = useState({
     title: '',
     description: '',
@@ -21,8 +20,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
     privacy: 'public',
     quality: { resolution: '1080p', bitrate: 5000, fps: 30 } as StreamQuality,
     enableChat: true,
-    enableDonations: false,
-  });
+    enableDonations: false });
 
   const updateSettings = (newSettings: Partial<typeof settings>) => {
     const updated = { ...settings, ...newSettings };
@@ -90,8 +88,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
               value={settings.quality.resolution}
               onChange={e =>
                 updateSettings({
-                  quality: { ...settings.quality, resolution: e.target.value },
-                })
+                  quality: { ...settings.quality, resolution: e.target.value } })
               }
               className='w-full px-3 py-2 border rounded-lg'
             >
@@ -113,9 +110,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
                 updateSettings({
                   quality: {
                     ...settings.quality,
-                    bitrate: parseInt(e.target.value),
-                  },
-                })
+                    bitrate: parseInt(e.target.value) } })
               }
               className='w-full px-3 py-2 border rounded-lg'
             />
@@ -129,9 +124,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
                 updateSettings({
                   quality: {
                     ...settings.quality,
-                    fps: parseInt(e.target.value),
-                  },
-                })
+                    fps: parseInt(e.target.value) } })
               }
               className='w-full px-3 py-2 border rounded-lg'
             >
@@ -170,5 +163,4 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
 };
 
 export default StreamSettings;
-
 

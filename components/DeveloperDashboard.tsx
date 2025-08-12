@@ -5,7 +5,7 @@
  * feature flags, workflow status, and continuous improvement insights.
  */
 
-import { useMemo, useEffect, useState, memo, FC } from 'react';
+import { useMemo, useEffect, useState, FC } from 'react';
 
 import { advancedAPM } from '../utils/advancedMonitoring';
 import { codeAnalysisEngine } from '../utils/codeAnalysisEngine';
@@ -98,26 +98,22 @@ export const DeveloperDashboard: React.FC = () => {
           coreWebVitals: {
             lcp: performanceMetrics.lcp || 0,
             fid: performanceMetrics.fid || 0,
-            cls: performanceMetrics.cls || 0,
-          },
+            cls: performanceMetrics.cls || 0 },
           memoryUsage: performanceMetrics.memoryUsage || 0,
           errorRate: performanceMetrics.errorRate || 0,
-          responseTime: performanceMetrics.responseTime || 0,
-        },
+          responseTime: performanceMetrics.responseTime || 0 },
         codeQuality: {
           complexity: codeAnalysis.complexity || 0,
           maintainability: codeAnalysis.maintainabilityIndex || 0,
           testCoverage: codeAnalysis.testCoverage || 0,
-          technicalDebt: 0, // technicalDebtTracker.getTechnicalDebtSummary().totalItems,
+          technicalDebt: 0, // technicalDebtTracker.getTechnicalDebtSummary().totalItems
         },
         workflow: workflowAnalytics,
         featureFlags: flagsData,
         security: {
           vulnerabilities: Math.floor(Math.random() * 3), // Mock data
           lastScan: Date.now() - Math.random() * 24 * 60 * 60 * 1000,
-          riskLevel: 'low',
-        },
-      };
+          riskLevel: 'low' } };
 
       setMetrics(dashboardMetrics);
 
@@ -161,8 +157,7 @@ export const DeveloperDashboard: React.FC = () => {
       cls: metrics.find(m => m.name === 'cls')?.value || 0,
       memoryUsage: (apmMetrics as any)?.['memory-usage']?.avg || 0,
       errorRate: (apmMetrics as any)?.['error-rate']?.avg || 0,
-      responseTime: (apmMetrics as any)?.['response-time']?.avg || 0,
-    };
+      responseTime: (apmMetrics as any)?.['response-time']?.avg || 0 };
   };
 
   const getFeatureFlagMetrics = async () => {
@@ -174,18 +169,16 @@ export const DeveloperDashboard: React.FC = () => {
       .map(f => ({
         id: f.id,
         name: f.name,
-        percentage: f.rolloutStrategy?.config.percentage || 0,
-      }));
+        percentage: f.rolloutStrategy?.config.percentage || 0 }));
 
     return {
       totalFlags: flags.length,
       activeFlags: activeFlags.length,
-      rolloutProgress,
-    };
+      rolloutProgress };
   };
 
   const generateAlerts = async (metrics: DashboardMetrics): Promise<AlertItem[]> => {
-    const alerts: AlertItem = [];
+    const alerts: AlertItem[] = [];
 
     // Performance alerts
     if (metrics.performance.coreWebVitals.lcp > 2500) {
@@ -196,8 +189,7 @@ export const DeveloperDashboard: React.FC = () => {
         message: `LCP is ${metrics.performance.coreWebVitals.lcp}ms (target: <2500ms)`,
         timestamp: Date.now(),
         severity: 6,
-        actionable: true,
-      });
+        actionable: true });
     }
 
     if (metrics.performance.errorRate > 0.05) {
@@ -208,8 +200,7 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Error rate is ${(metrics.performance.errorRate * 100).toFixed(2)}% (target: <5%)`,
         timestamp: Date.now(),
         severity: 8,
-        actionable: true,
-      });
+        actionable: true });
     }
 
     // Code quality alerts
@@ -221,8 +212,7 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Code complexity is ${metrics.codeQuality.complexity} (target: <8)`,
         timestamp: Date.now(),
         severity: 5,
-        actionable: true,
-      });
+        actionable: true });
     }
 
     if (metrics.codeQuality.testCoverage < 80) {
@@ -233,8 +223,7 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Test coverage is ${metrics.codeQuality.testCoverage}% (target: >80%)`,
         timestamp: Date.now(),
         severity: 6,
-        actionable: true,
-      });
+        actionable: true });
     }
 
     // Workflow alerts
@@ -246,8 +235,7 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Workflow success rate is ${(metrics.workflow.successRate * 100).toFixed(1)}% (target: >90%)`,
         timestamp: Date.now(),
         severity: 7,
-        actionable: true,
-      });
+        actionable: true });
     }
 
     // Security alerts
@@ -259,8 +247,7 @@ export const DeveloperDashboard: React.FC = () => {
         message: `${metrics.security.vulnerabilities} security vulnerabilities detected`,
         timestamp: Date.now(),
         severity: 9,
-        actionable: true,
-      });
+        actionable: true });
     }
 
     return alerts.sort((a: any, b: any) => b.severity - a.severity);
@@ -269,15 +256,14 @@ export const DeveloperDashboard: React.FC = () => {
   // Computed values
   const overallHealthScore = useMemo(() => {
     if (!metrics) {
-return 0;
-}
+      return 0;
+    }
 
     const scores = {
       performance: Math.max(0, 100 - (metrics.performance.errorRate * 1000)),
       quality: metrics.codeQuality.maintainability,
       workflow: metrics.workflow.successRate * 100,
-      security: metrics.security.vulnerabilities === 0 ? 100 : Math.max(0, 100 - (metrics.security.vulnerabilities * 20)),
-    };
+      security: metrics.security.vulnerabilities === 0 ? 100 : Math.max(0, 100 - (metrics.security.vulnerabilities * 20)) };
 
     return Math.round(Object.values(scores).reduce((sum, score) => sum + score, 0) / Object.keys(scores).length);
   }, [metrics]);

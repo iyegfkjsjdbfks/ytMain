@@ -78,8 +78,7 @@ class TestRunner {
       passedTests: 0,
       failedTests: 0,
       skippedTests: 0,
-      duration: 0,
-    };
+      duration: 0 };
 
     try {
       // Run tests for each pattern
@@ -101,8 +100,7 @@ class TestRunner {
             name: pattern,
             status: 'failed',
             duration: 0,
-            errors: [error instanceof Error ? error.message : String(error)],
-          });
+            errors: [error instanceof Error ? error.message : String(error)] });
         }
       }
 
@@ -119,8 +117,7 @@ class TestRunner {
         name: suiteName,
         status: 'failed',
         duration: Date.now() - suiteStartTime,
-        errors: [error instanceof Error ? error.message : String(error)],
-      });
+        errors: [error instanceof Error ? error.message : String(error)] });
     }
 
     this.results.push(suite);
@@ -141,8 +138,7 @@ class TestRunner {
               status: test.status === 'passed' ? 'passed' :
                      test.status === 'skipped' ? 'skipped' : 'failed',
               duration: test.duration || 0,
-              errors: test.failureMessages || [],
-            });
+              errors: test.failureMessages || [] });
           }
         }
       }
@@ -157,8 +153,7 @@ class TestRunner {
             results.push({
               name: testName,
               status: 'passed',
-              duration: 0,
-            });
+              duration: 0 });
           }
         } else if (line.includes('✗') || line.includes('FAIL')) {
           const testName = line.replace(/[✓✗]/g, '').trim();
@@ -167,8 +162,7 @@ class TestRunner {
               name: testName,
               status: 'failed',
               duration: 0,
-              errors: ['Test failed'],
-            });
+              errors: ['Test failed'] });
           }
         }
       }
@@ -208,10 +202,8 @@ class TestRunner {
         totalPassed,
         totalFailed,
         totalSkipped,
-        passRate: ((totalPassed / totalTests) * 100).toFixed(1),
-      },
-      suites: this.results,
-    };
+        passRate: ((totalPassed / totalTests) * 100).toFixed(1) },
+      suites: this.results };
 
     const reportPath = path.join(process.cwd(), 'test-reports', 'comprehensive-test-report.json');
 

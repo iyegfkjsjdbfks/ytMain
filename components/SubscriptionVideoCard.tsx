@@ -24,8 +24,7 @@ interface SubscriptionVideoCardProps {
 const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
   video,
   viewType = 'grid',
-  showChannel = true,
-}) => {
+  showChannel = true }) => {
   const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
   const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
 

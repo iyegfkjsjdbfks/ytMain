@@ -37,7 +37,7 @@ interface AnalyticsConfig {
   apiEndpoint?: string | undefined;
   apiKey?: string | undefined;
   batchSize: number;
-  flushInterval: number; // milliseconds
+  flushInterval: number; // milliseconds,
   maxStoredEvents: number;
   enableDebugMode: boolean;
 }
@@ -48,10 +48,9 @@ const DEFAULT_CONFIG: AnalyticsConfig = {
   enablePerformanceTracking: true,
   enableErrorTracking: true,
   batchSize: 10,
-  flushInterval: 30000, // 30 seconds
+  flushInterval: 30000, // 30 seconds,
   maxStoredEvents: 1000,
-  enableDebugMode: false,
-};
+  enableDebugMode: false };
 
 class AnalyticsService {
   private config: AnalyticsConfig;
@@ -78,8 +77,7 @@ class AnalyticsService {
       events: [],
       userAgent: navigator.userAgent,
       referrer: document.referrer,
-      userId: this.getCurrentUserId(),
-    };
+      userId: this.getCurrentUserId() };
   }
 
   private generateSessionId(): string {
@@ -101,7 +99,7 @@ class AnalyticsService {
 
   private setupEventListeners() {
     // Page visibility changes
-    document.addEventListener('visibilitychange', () => {
+    document.addEventListener('visibilitychange', ( as EventListener) => {
       if (document.hidden) {
         this.track('page_hidden', { timestamp: Date.now() });
         this.flush(); // Ensure events are sent before page becomes hidden
@@ -111,7 +109,7 @@ class AnalyticsService {
     });
 
     // Page unload
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener('beforeunload', ( as EventListener) => {
       this.endSession();
       this.flush(true); // Force immediate flush
     });
@@ -132,7 +130,7 @@ class AnalyticsService {
 
   private setupPerformanceTracking() {
     // Page load performance
-    window.addEventListener('load', () => {
+    window.addEventListener('load', ( as EventListener) => {
       setTimeout(() => {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (navigation) {
@@ -141,8 +139,7 @@ class AnalyticsService {
             domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
             firstPaint: this.getFirstPaint(),
             firstContentfulPaint: this.getFirstContentfulPaint(),
-            largestContentfulPaint: this.getLargestContentfulPaint(),
-          }, 'performance');
+            largestContentfulPaint: this.getLargestContentfulPaint() }, 'performance');
         }
       }, 0);
     });
@@ -195,7 +192,7 @@ class AnalyticsService {
     clsObserver.observe({ entryTypes: ['layout-shift'] });
 
     // Report CLS on page unload
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener('beforeunload', ( as EventListener) => {
       this.track('cumulative_layout_shift', { value: clsValue }, 'performance');
     });
 
@@ -205,8 +202,7 @@ class AnalyticsService {
       entries.forEach((entry) => {
         this.track('first_input_delay', {
           value: entry.processingStart - entry.startTime,
-          inputType: entry.name,
-        }, 'performance');
+          inputType: entry.name }, 'performance');
       });
       fidObserver.disconnect();
     });
@@ -214,21 +210,19 @@ class AnalyticsService {
   }
 
   private setupErrorTracking() {
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', (event as EventListener) => {
       this.track('javascript_error', {
         message: event.message,
         filename: event.filename,
         lineno: event.lineno,
         colno: event.colno,
-        stack: event.error?.stack,
-      }, 'error');
+        stack: event.error?.stack }, 'error');
     });
 
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', (event as EventListener) => {
       this.track('unhandled_promise_rejection', {
         reason: event.reason,
-        stack: event.reason?.stack,
-      }, 'error');
+        stack: event.reason?.stack }, 'error');
     });
   }
 
@@ -241,15 +235,14 @@ class AnalyticsService {
         this.track('page_view', {
           from: currentPath,
           to: newPath,
-          referrer: document.referrer,
-        }, 'navigation');
+          referrer: document.referrer }, 'navigation');
         currentPath = newPath;
         this.session.pageViews++;
       }
     };
 
     // Listen for popstate (back/forward buttons)
-    window.addEventListener('popstate', checkForRouteChange);
+    window.addEventListener('popstate', checkForRouteChange as EventListener);
 
     // Override pushState and replaceState to catch programmatic navigation
     const originalPushState = history.pushState.bind(history);
@@ -303,18 +296,14 @@ return;
         userAgent: navigator.userAgent,
         viewport: {
           width: window.innerWidth,
-          height: window.innerHeight,
-        },
+          height: window.innerHeight },
         screen: {
           width: screen.width,
-          height: screen.height,
-        },
-      },
+          height: screen.height } },
       timestamp: Date.now(),
       sessionId: this.session.id,
       userId: this.session.userId,
-      category,
-    };
+      category };
 
     this.eventQueue.push(event);
     this.session.events.push(event);
@@ -334,30 +323,26 @@ return;
   trackPageView(path?: string) {
     this.track('page_view', {
       path: path || window.location.pathname,
-      title: document.title,
-    }, 'navigation');
+      title: document.title }, 'navigation');
   }
 
   trackClick(element: HTMLElement, properties: Record<string, any> = {}) {
     this.track('click', {
       element,
-      ...properties,
-    });
+      ...properties });
   }
 
   trackVideoEvent(action: any, videoId: any, properties: Record<string, any> = {}) {
     this.track(`video_${action}`, {
       videoId,
-      ...properties,
-    }, 'video');
+      ...properties }, 'video');
   }
 
   trackSearch(query: any, results?: number) {
     this.track('search', {
       query,
       results,
-      timestamp: Date.now(),
-    });
+      timestamp: Date.now() });
   }
 
   trackEngagement(type: any, properties: Record<string, any> = {}) {
@@ -367,8 +352,7 @@ return;
   trackPerformance(metric: any, value: string | number, properties: Record<string, any> = {}) {
     this.track(`performance_${metric}`, {
       value,
-      ...properties,
-    }, 'performance');
+      ...properties }, 'performance');
   }
 
   // Session management
@@ -382,8 +366,7 @@ return;
     this.track('session_end', {
       duration: this.session.endTime - this.session.startTime,
       pageViews: this.session.pageViews,
-      eventCount: this.session.events.length,
-    });
+      eventCount: this.session.events.length });
   }
 
   // Data management
@@ -417,12 +400,10 @@ return;
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }),
-          },
+            ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }) },
           body: JSON.stringify({
             events: eventsToSend,
-            session: this.session,
-          }),
+            session: this.session }),
           keepalive: immediate, // Use keepalive for page unload
         });
 
@@ -462,11 +443,9 @@ return;
         error: events.filter((e: Event) => e.category === 'error').length,
         navigation: events.filter((e: Event) => e.category === 'navigation').length,
         video: events.filter((e: Event) => e.category === 'video').length,
-        engagement: events.filter((e: Event) => e.category === 'engagement').length,
-      },
+        engagement: events.filter((e: Event) => e.category === 'engagement').length },
       sessionDuration: now - this.session.startTime,
-      pageViews: this.session.pageViews,
-    };
+      pageViews: this.session.pageViews };
   }
 
   // Event listeners
@@ -508,8 +487,7 @@ export const analyticsService = new AnalyticsService({
   enableRemoteTracking: import.meta.env.MODE === 'production',
   enableDebugMode: import.meta.env.MODE === 'development',
   apiEndpoint: import.meta.env.VITE_ANALYTICS_ENDPOINT,
-  apiKey: import.meta.env.VITE_ANALYTICS_API_KEY,
-});
+  apiKey: import.meta.env.VITE_ANALYTICS_API_KEY });
 
 export default AnalyticsService;
 export type { AnalyticsEvent, UserSession, AnalyticsConfig };

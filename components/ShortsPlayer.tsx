@@ -26,8 +26,7 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
   onSubscribe,
   onComment,
   onShare,
-  className = '',
-}) => {
+  className = '' }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -64,16 +63,16 @@ return;
     const handleLoadStart = () => setIsLoading(true);
     const handleCanPlay = () => setIsLoading(false);
 
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('ended', handleEnded);
-    video.addEventListener('loadstart', handleLoadStart);
-    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('timeupdate', handleTimeUpdate as EventListener);
+    video.addEventListener('ended', handleEnded as EventListener);
+    video.addEventListener('loadstart', handleLoadStart as EventListener);
+    video.addEventListener('canplay', handleCanPlay as EventListener);
 
     return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('ended', handleEnded);
-      video.removeEventListener('loadstart', handleLoadStart);
-      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('timeupdate', handleTimeUpdate as EventListener);
+      video.removeEventListener('ended', handleEnded as EventListener);
+      video.removeEventListener('loadstart', handleLoadStart as EventListener);
+      video.removeEventListener('canplay', handleCanPlay as EventListener);
     };
   }, [currentIndex, shorts.length, onIndexChange]);
 
@@ -113,8 +112,8 @@ return;
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown as EventListener);
+    return () => document.removeEventListener('keydown', handleKeyDown as EventListener);
   }, []);
 
   const togglePlay = useCallback(() => {
@@ -381,5 +380,4 @@ return null;
 };
 
 export default ShortsPlayer;
-
 

@@ -2,6 +2,7 @@
 import { useState, useRef, FC } from 'react';
 
 import { DocumentIcon, CloudArrowUpIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export interface FileUploadProps {
   accept?: string;
@@ -26,8 +27,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   className = '',
   label = 'Upload files',
   description = 'Drag and drop files here, or click to select',
-  files = [],
-}) => {
+  files = [] }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);

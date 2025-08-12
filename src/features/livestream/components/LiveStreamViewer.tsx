@@ -10,8 +10,7 @@ interface LiveStreamViewerProps {
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
   streamId,
   autoplay = false,
-  onViewerCountChange,
-}) => {
+  onViewerCountChange }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [viewerCount, setViewerCount] = useState(0);
@@ -85,5 +84,4 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 };
 
 export default LiveStreamViewer;
-
 

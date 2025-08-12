@@ -21,8 +21,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
   onClose,
   shortId: _shortId,
   shortTitle,
-  onCommentSubmit,
-}) => {
+  onCommentSubmit }) => {
   const [commentText, setCommentText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   // shortId is currently not used but kept for future functionality

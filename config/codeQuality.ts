@@ -1,4 +1,4 @@
-import React, { memo, lazy } from 'react';
+import React, { lazy } from 'react';
 /**
  * Comprehensive code quality configuration and utilities
  */
@@ -55,9 +55,7 @@ export const eslintConfig = {
     'jsx-a11y/no-autofocus': 'warn',
     'jsx-a11y/no-redundant-roles': 'error',
     'jsx-a11y/role-has-required-aria-props': 'error',
-    'jsx-a11y/role-supports-aria-props': 'error',
-  },
-};
+    'jsx-a11y/role-supports-aria-props': 'error' } };
 
 // Prettier configuration
 export const prettierConfig = {
@@ -69,8 +67,7 @@ export const prettierConfig = {
   bracketSpacing: true,
   bracketSameLine: false,
   arrowParens: 'avoid' as const, endOfLine: 'lf' as const, quoteProps: 'as-needed' as const, jsxSingleQuote: false,
-  proseWrap: 'preserve' as const,
-};
+  proseWrap: 'preserve' as const };
 
 // Code complexity thresholds
 export const complexityThresholds = {
@@ -79,8 +76,7 @@ export const complexityThresholds = {
   maxLinesPerFunction: 50,
   maxLinesPerFile: 300,
   maxParametersPerFunction: 5,
-  maxDepthLevel: 4,
-};
+  maxDepthLevel: 4 };
 
 // Performance budgets
 export const performanceBudgets = {
@@ -111,8 +107,7 @@ export const securityConfig = {
     'img-src': ["'self'", 'data:', 'https:', 'blob:'],
     'media-src': ["'self'", 'https:', 'blob:'],
     'connect-src': ["'self'", 'https://api.youtube.com', 'wss:'],
-    'frame-src': ['https://www.youtube.com'],
-  },
+    'frame-src': ['https://www.youtube.com'] },
 
   // Sensitive data patterns to avoid
   sensitivePatterns: [
@@ -131,16 +126,14 @@ export const securityConfig = {
     'googleapis.com',
     'gstatic.com',
     'ytimg.com',
-  ],
-};
+  ] };
 
 // Accessibility standards
 export const a11yStandards = {
   // WCAG 2.1 AA compliance requirements
   wcag: {
     level: 'AA',
-    version: '2.1',
-  },
+    version: '2.1' },
 
   // Color contrast ratios
   colorContrast: {
@@ -162,9 +155,7 @@ export const a11yStandards = {
     tabIndex: true,
     focusVisible: true,
     skipLinks: true,
-    landmarkRoles: true,
-  },
-};
+    landmarkRoles: true } };
 
 // Testing configuration
 export const testingConfig = {
@@ -173,8 +164,7 @@ export const testingConfig = {
     statements: 80,
     branches: 75,
     functions: 80,
-    lines: 80,
-  },
+    lines: 80 },
 
   // Test file patterns
   testPatterns: [
@@ -193,8 +183,7 @@ export const testingConfig = {
     '^@/(.*)$',
     '\\.(css|less|scss|sass)$',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$',
-  ],
-};
+  ] };
 
 // Code review checklist
 export const codeReviewChecklist = {
@@ -238,8 +227,7 @@ export const codeReviewChecklist = {
     'Are integration tests included?',
     'Is the happy path tested?',
     'Are error scenarios tested?',
-  ],
-};
+  ] };
 
 // Monitoring and alerting configuration
 export const monitoringConfig = {
@@ -248,8 +236,7 @@ export const monitoringConfig = {
     enableInProduction: true,
     enableInDevelopment: false,
     sampleRate: 1.0,
-    maxBreadcrumbs: 50,
-  },
+    maxBreadcrumbs: 50 },
 
   // Performance monitoring
   performanceMonitoring: {
@@ -257,16 +244,14 @@ export const monitoringConfig = {
     enableInDevelopment: true,
     sampleRate: 0.1, // 10% sampling in production
     trackWebVitals: true,
-    trackUserInteractions: true,
-  },
+    trackUserInteractions: true },
 
   // Analytics
   analytics: {
     trackPageViews: true,
     trackUserEvents: true,
     trackPerformanceMetrics: true,
-    respectDoNotTrack: true,
-  },
+    respectDoNotTrack: true },
 
   // Alerts
   alerts: {
@@ -274,8 +259,7 @@ export const monitoringConfig = {
     responseTime: 5000, // Alert if response time > 5s
     memoryUsage: 0.8, // Alert if memory usage > 80%
     bundleSize: 1024 * 1024, // Alert if bundle > 1MB
-  },
-};
+  } };
 
 // Development workflow configuration
 export const workflowConfig = {
@@ -292,8 +276,7 @@ export const workflowConfig = {
     ],
     commitMsg: [
       'commitlint',
-    ],
-  },
+    ] },
 
   // CI/CD pipeline
   cicd: {
@@ -314,17 +297,13 @@ export const workflowConfig = {
       lintErrors: 0,
       typeErrors: 0,
       securityVulnerabilities: 0,
-      performanceScore: 90,
-    },
-  },
+      performanceScore: 90 } },
 
   // Code formatting
   formatting: {
     onSave: true,
     onCommit: true,
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.md'],
-  },
-};
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.md'] } };
 
 // Export all configurations
 export const codeQualityConfig = {
@@ -337,7 +316,6 @@ export const codeQualityConfig = {
   testing: testingConfig,
   codeReview: codeReviewChecklist,
   monitoring: monitoringConfig,
-  workflow: workflowConfig,
-};
+  workflow: workflowConfig };
 
 export default codeQualityConfig;

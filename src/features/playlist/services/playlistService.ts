@@ -98,8 +98,7 @@ class PlaylistService {
   ): Promise<ApiResponse<void>> {
     return api.post(`/api/playlists/${data.playlistId}/videos`, {
       videoId: data.videoId,
-      position: data.position,
-    });
+      position: data.position });
   }
 
   /**
@@ -121,8 +120,7 @@ class PlaylistService {
     return api.patch(
       `/api/playlists/${data.playlistId}/videos/${data.videoId}/position`,
       {
-        newPosition: data.newPosition,
-      }
+        newPosition: data.newPosition }
     );
   }
 
@@ -134,8 +132,7 @@ class PlaylistService {
     newTitle?: string
   ): Promise<ApiResponse<Playlist>> {
     return api.post(`/api/playlists/${playlistId}/duplicate`, {
-      title: newTitle,
-    });
+      title: newTitle });
   }
 
   /**
@@ -254,8 +251,7 @@ class PlaylistService {
   ): Promise<ApiResponse<void>> {
     return api.post(`/api/playlists/${playlistId}/collaborators`, {
       userId,
-      permissions,
-    });
+      permissions });
   }
 
   async removeCollaborator(
@@ -298,8 +294,7 @@ class PlaylistService {
   ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
     return api.delete(`/api/playlists/${playlistId}/videos/bulk`, {
       body: JSON.stringify({ videoIds }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+      headers: { 'Content-Type': 'application/json' } });
   }
 
   /**

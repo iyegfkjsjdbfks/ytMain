@@ -17,7 +17,7 @@ interface UseAsyncStateOptions {
  * Reduces code duplication across components that fetch data
  */
 export const useAsyncState = <T>(
-  asyncFunction: () => Promise<T>,
+  asyncFunction: () => Promise<T>
   dependencies = [],
   options: UseAsyncStateOptions = {}
 ) => {
@@ -26,8 +26,7 @@ export const useAsyncState = <T>(
   const [state, setState] = useState<AsyncState<T>>({
     data: null,
     loading: initialLoading,
-    error: null,
-  });
+    error: null });
 
   const execute = useCallback(async () => {
     setState(prev => ({ ...prev, loading: true, error: null }));
@@ -70,8 +69,7 @@ export const useAsyncState = <T>(
     reset,
     setData,
     setError,
-    isIdle: !state.loading && !state.error && !state.data,
-  };
+    isIdle: !state.loading && !state.error && !state.data };
 };
 
 export default useAsyncState;

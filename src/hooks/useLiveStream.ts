@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { LivePoll, QAQuestion } from '@/types/livestream';
 
 // Import statement fixed
@@ -17,8 +17,7 @@ export const useLiveStream = (streamId?: string) => {
     viewerCount: 0,
     chatMessages: [],
     streamQuality: 'auto',
-    error: null,
-  });
+    error: null });
 
   const startStream = useCallback(async () => {
     try {
@@ -41,8 +40,7 @@ export const useLiveStream = (streamId?: string) => {
   return {
     ...state,
     startStream,
-    stopStream,
-  };
+    stopStream };
 };
 
 // Lightweight, in-memory implementation for live polls used by livestream components
@@ -72,13 +70,11 @@ export const useLivePolls = (streamId?: string) => {
         id: `opt_${idx}_${Math.random().toString(36).slice(2, 6)}`,
         text,
         votes: 0,
-        percentage: 0,
-      })),
+        percentage: 0 })),
       isActive: true,
       totalVotes: 0,
       createdAt,
-      duration: durationMs,
-    };
+      duration: durationMs };
 
     setPolls(prev => [poll, ...prev]);
   };
@@ -94,8 +90,7 @@ export const useLivePolls = (streamId?: string) => {
         });
         const withPct = options.map((o: any) => ({
           ...o,
-          percentage: recalcPercentages(total, o.votes),
-        }));
+          percentage: recalcPercentages(total, o.votes) }));
         return { ...p, options: withPct, totalVotes: total };
       })
     );
@@ -126,8 +121,7 @@ export const useLiveQA = (streamId?: string) => {
       timestamp: new Date(),
       answeredAt: undefined,
       isHighlighted: false,
-      upvotes: 0,
-    };
+      upvotes: 0 };
     setQuestions(prev => [q, ...prev]);
   };
 
@@ -140,8 +134,7 @@ export const useLiveQA = (streamId?: string) => {
               answer,
               answered: true,
               isAnswered: true,
-              answeredAt: new Date(),
-            }
+              answeredAt: new Date() }
           : q
       )
     );

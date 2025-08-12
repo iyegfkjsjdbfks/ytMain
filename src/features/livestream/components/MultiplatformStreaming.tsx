@@ -13,8 +13,7 @@ interface MultiplatformStreamingProps {
 }
 
 export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
-  onPlatformToggle,
-}) => {
+  onPlatformToggle }) => {
   const [platforms, setPlatforms] = useState<Platform[]>([
     { id: 'youtube', name: 'YouTube', enabled: true },
     { id: 'twitch', name: 'Twitch', enabled: false },
@@ -81,5 +80,4 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
 };
 
 export default MultiplatformStreaming;
-
 

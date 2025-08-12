@@ -3,6 +3,7 @@ import { useEffect, useState, FC } from 'react';
 import { TrashIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 
 import getLikedVideos, { getWatchHistoryVideos } from '../services/realVideoService';
+import { EyeIcon } from '@heroicons/react/24/outline';
 
 const YourDataPage: React.FC = () => {
   const [watchHistoryCount, setWatchHistoryCount] = useState(0);
@@ -68,8 +69,7 @@ const YourDataPage: React.FC = () => {
   const handleToggleVisibility = (dataType: keyof typeof dataVisibility) => {
     setDataVisibility(prev => ({
       ...prev,
-      [dataType]: !prev[dataType],
-    }));
+      [dataType]: !prev[dataType] }));
   };
 
   const handleDownloadData = () => {
@@ -219,5 +219,4 @@ const YourDataPage: React.FC = () => {
 };
 
 export default YourDataPage;
-
 

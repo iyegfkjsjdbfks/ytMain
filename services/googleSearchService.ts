@@ -1,3 +1,4 @@
+import type { Channel } from '../types';
 import { Link } from 'react-router-dom';
 // / <reference types="vite/client" />
 // Google Custom Search API service for YouTube video search
@@ -323,8 +324,7 @@ const convertToYouTubeResult = (
     ...(videoDetails?.statistics.commentCount && { commentCount: parseInt(videoDetails.statistics.commentCount, 10) }),
     ...(videoDetails?.snippet.tags && { tags: videoDetails.snippet.tags }),
     ...(videoDetails?.snippet.categoryId && { categoryId: videoDetails.snippet.categoryId }),
-    isYouTube: true as const,
-  };
+    isYouTube: true as const };
 };
 
 // Convert Google Custom Search result to YouTube video result with YouTube API as primary, Google Custom Search as fallback
@@ -536,17 +536,13 @@ multiplier = 1000000000;
     isShort,
     // Use YouTube API statistics if available, otherwise fall back to extracted values
     ...(videoDetails?.statistics.viewCount && {
-      viewCount: parseInt(videoDetails.statistics.viewCount, 10),
-    }),
+      viewCount: parseInt(videoDetails.statistics.viewCount, 10) }),
     ...(videoDetails?.statistics.likeCount && {
-      likeCount: parseInt(videoDetails.statistics.likeCount, 10),
-    }),
+      likeCount: parseInt(videoDetails.statistics.likeCount, 10) }),
     ...(videoDetails?.statistics.dislikeCount && {
-      dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10),
-    }),
+      dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10) }),
     ...(videoDetails?.statistics.commentCount && {
-      commentCount: parseInt(videoDetails.statistics.commentCount, 10),
-    }),
+      commentCount: parseInt(videoDetails.statistics.commentCount, 10) }),
     // If YouTube API data not available, use extracted values from Google Custom Search
     ...(!videoDetails?.statistics.viewCount && viewCount && { viewCount }),
     ...(!videoDetails?.statistics.likeCount && likeCount && { likeCount }),
@@ -554,8 +550,7 @@ multiplier = 1000000000;
     ...(!videoDetails?.statistics.commentCount && commentCount && { commentCount }),
     ...(videoDetails?.snippet.tags && { tags: videoDetails.snippet.tags }),
     ...(videoDetails?.snippet.categoryId && { categoryId: videoDetails.snippet.categoryId }),
-    isYouTube: true as const, source: 'google-search' as const,
-  };
+    isYouTube: true as const, source: 'google-search' as const };
 };
 
 // Helper function to extract video ID from YouTube URL
@@ -883,8 +878,7 @@ export const searchForHomePage = async (query: any, searchLocalVideos: (query: a
         return {
           localVideos,
           youtubeVideos: youtubeResults,
-          googleSearchVideos: [],
-        };
+          googleSearchVideos: [] };
       } catch (youtubeError) {
         console.warn('🚨 YouTube Data API failed, falling back to Google Custom Search:', youtubeError.message);
         try {
@@ -894,8 +888,7 @@ export const searchForHomePage = async (query: any, searchLocalVideos: (query: a
           return {
             localVideos,
             youtubeVideos: [],
-            googleSearchVideos: youtubeResults,
-          };
+            googleSearchVideos: youtubeResults };
         } catch (fallbackError) {
           console.error('❌ Both YouTube Data API and Google Custom Search failed in hybrid mode (home page)');
           console.error('YouTube API Error:', youtubeError.message);
@@ -910,8 +903,7 @@ export const searchForHomePage = async (query: any, searchLocalVideos: (query: a
       return {
         localVideos,
         youtubeVideos: [],
-        googleSearchVideos: youtubeResults,
-      };
+        googleSearchVideos: youtubeResults };
     } else {
       console.log('🎯 Using YouTube Data API for home page');
       youtubeResults = await searchYouTubeVideos(query);
@@ -919,8 +911,7 @@ export const searchForHomePage = async (query: any, searchLocalVideos: (query: a
       return {
         localVideos,
         youtubeVideos: youtubeResults,
-        googleSearchVideos: [],
-      };
+        googleSearchVideos: [] };
     }
   } catch (error) {
     console.error('Error in home page search:', error);
@@ -929,8 +920,7 @@ export const searchForHomePage = async (query: any, searchLocalVideos: (query: a
     return {
       localVideos,
       youtubeVideos: [],
-      googleSearchVideos: [],
-    };
+      googleSearchVideos: [] };
   }
 };
 
@@ -958,8 +948,7 @@ export const searchForSearchResultsPage = async (query: any, searchLocalVideos: 
       return {
         localVideos,
         youtubeVideos: [],
-        googleSearchVideos: youtubeResults,
-      };
+        googleSearchVideos: youtubeResults };
     } catch (error) {
       console.error('❌ Google Custom Search failed on search results page:', error.message);
       // If Google Custom Search fails, still try YouTube API as last resort
@@ -971,8 +960,7 @@ export const searchForSearchResultsPage = async (query: any, searchLocalVideos: 
           return {
             localVideos,
             youtubeVideos: youtubeResults,
-            googleSearchVideos: [],
-          };
+            googleSearchVideos: [] };
         } catch (youtubeError) {
           console.error('❌ YouTube API also failed:', youtubeError);
         }
@@ -986,8 +974,7 @@ export const searchForSearchResultsPage = async (query: any, searchLocalVideos: 
     return {
       localVideos,
       youtubeVideos: [],
-      googleSearchVideos: [],
-    };
+      googleSearchVideos: [] };
   }
 };
 
@@ -1040,8 +1027,7 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: any): Pro
     console.log('📊 Search info:', {
       totalResults: data.searchInformation?.totalResults,
       itemsCount: data.items?.length || 0,
-      searchTime: data.searchInformation?.searchTime,
-    });
+      searchTime: data.searchInformation?.searchTime });
 
     if (!data.items || data.items.length === 0) {
       console.log(`❌ No Google Custom Search results found for video ID: ${youtubeVideoId}`);
@@ -1316,17 +1302,13 @@ multiplier = 1000000000;
       isShort,
       // Use YouTube API statistics if available, otherwise fall back to extracted values
       ...(enhancedMetadata?.statistics.viewCount && {
-        viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10),
-      }),
+        viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10) }),
       ...(enhancedMetadata?.statistics.likeCount && {
-        likeCount: parseInt(enhancedMetadata.statistics.likeCount, 10),
-      }),
+        likeCount: parseInt(enhancedMetadata.statistics.likeCount, 10) }),
       ...(enhancedMetadata?.statistics.dislikeCount && {
-        dislikeCount: parseInt(enhancedMetadata.statistics.dislikeCount, 10),
-      }),
+        dislikeCount: parseInt(enhancedMetadata.statistics.dislikeCount, 10) }),
       ...(enhancedMetadata?.statistics.commentCount && {
-        commentCount: parseInt(enhancedMetadata.statistics.commentCount, 10),
-      }),
+        commentCount: parseInt(enhancedMetadata.statistics.commentCount, 10) }),
       // If YouTube API data not available, use extracted values from Google Custom Search
       ...(!enhancedMetadata?.statistics.viewCount && viewCount && { viewCount }),
       ...(!enhancedMetadata?.statistics.likeCount && likeCount && { likeCount }),
@@ -1334,8 +1316,7 @@ multiplier = 1000000000;
       ...(!enhancedMetadata?.statistics.commentCount && commentCount && { commentCount }),
       categoryId: enhancedMetadata?.snippet.categoryId || 'General',
       tags: enhancedMetadata?.snippet.tags || tags,
-      isYouTube: true as const, source: 'google-search' as const,
-    };
+      isYouTube: true as const, source: 'google-search' as const };
 
     console.log('📦 Final result summary:');
     console.log(`  🆔 ID: ${result.id}`);
@@ -1363,8 +1344,7 @@ multiplier = 1000000000;
       console.log('  - Text sources for extraction:', {
         title: item.title,
         snippet: item.snippet,
-        htmlSnippet: item.htmlSnippet,
-      });
+        htmlSnippet: item.htmlSnippet });
     }
     console.log(`  🎯 Source: ${result.source}`);
     console.log(`  🔗 URL: ${result.videoUrl}`);

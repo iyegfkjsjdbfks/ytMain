@@ -78,8 +78,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     isRequesting: false,
     lastNotificationTime: null,
     notificationCount: 0,
-    pendingNotifications: [],
-  });
+    pendingNotifications: [] });
 
   // Check if notifications can be shown
   const canShowNotifications =
@@ -109,8 +108,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
         setState(prev => ({
           ...prev,
           permission: permission as NotificationPermission,
-          isRequesting: false,
-        }));
+          isRequesting: false }));
 
         conditionalLogger.info(
           'Notification permission requested',
@@ -126,8 +124,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
         setState(prev => ({
           ...prev,
           permission: 'denied',
-          isRequesting: false,
-        }));
+          isRequesting: false }));
 
         conditionalLogger.error(
           'Failed to request notification permission',
@@ -216,8 +213,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
         // Queue for later
         setState(prev => ({
           ...prev,
-          pendingNotifications: [...prev.pendingNotifications, options],
-        }));
+          pendingNotifications: [...prev.pendingNotifications, options] }));
 
         return false;
       }
@@ -249,8 +245,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
             silent: options.silent,
             ...(options.vibrate && ({ vibrate: options.vibrate } as any)),
             actions: options.actions,
-            timestamp: options.timestamp || Date.now(),
-          });
+            timestamp: options.timestamp || Date.now() });
         } else {
           // Fallback to regular notification
           const notification = new Notification(options.title, {
@@ -260,8 +255,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
             data: options.data,
             requireInteraction: options.requireInteraction,
             silent: options.silent,
-            ...(options.vibrate && ({ vibrate: options.vibrate } as any)),
-          });
+            ...(options.vibrate && ({ vibrate: options.vibrate } as any)) });
 
           // Handle notification events
           notification.onclick = () => {
@@ -283,15 +277,13 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
         setState(prev => ({
           ...prev,
           lastNotificationTime: Date.now(),
-          notificationCount: prev.notificationCount + 1,
-        }));
+          notificationCount: prev.notificationCount + 1 }));
 
         // Track notification
         trackNotificationEvent('sent', {
           tag: options.tag,
           title: options.title,
-          hasActions: !!(options.actions && options.actions.length > 0),
-        });
+          hasActions: !!(options.actions && options.actions.length > 0) });
 
         conditionalLogger.debug(
           'Notification sent',
@@ -305,8 +297,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           'Failed to show notification',
           {
             error: error instanceof Error ? error.message : 'Unknown error',
-            title: options.title,
-          },
+            title: options.title },
           'usePWANotifications'
         );
 
@@ -415,8 +406,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           clickRate:
             parsed.totalSent > 0
               ? (parsed.totalClicked / parsed.totalSent) * 100
-              : 0,
-        };
+              : 0 };
       } catch (error) {
         conditionalLogger.error(
           'Failed to parse notification stats',
@@ -431,8 +421,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       totalClicked: 0,
       totalDismissed: 0,
       lastSent: null,
-      clickRate: 0,
-    };
+      clickRate: 0 };
   }, []);
 
   // Reset statistics
@@ -461,8 +450,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       events.push({
         event,
         data,
-        timestamp: Date.now(),
-      });
+        timestamp: Date.now() });
 
       // Keep only last 1000 events
       if (events.length > 1000) {
@@ -514,8 +502,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     if (state.isSupported) {
       setState(prev => ({
         ...prev,
-        permission: Notification.permission as NotificationPermission,
-      }));
+        permission: Notification.permission as NotificationPermission }));
     }
   }, [state.isSupported]);
 
@@ -530,8 +517,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       // Clear pending notifications
       setState(prev => ({
         ...prev,
-        pendingNotifications: [],
-      }));
+        pendingNotifications: [] }));
     }
   }, [isQuietHours, state.pendingNotifications, showNotification]);
 
@@ -557,8 +543,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
 
     // Analytics
     getNotificationStats,
-    resetStats,
-  };
+    resetStats };
 };
 
 export default usePWANotifications;

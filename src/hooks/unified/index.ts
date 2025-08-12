@@ -14,8 +14,7 @@ export {
   useUnifiedVideo,
   useUnifiedTrendingVideos,
   useUnifiedShorts,
-  useUnifiedSearchVideos,
-} from '../../features/video/hooks/useVideo';
+  useUnifiedSearchVideos } from '../../features/video/hooks/useVideo';
 
 // Core type re-exports
 export type {
@@ -24,5 +23,4 @@ export type {
   User,
   Channel,
   Playlist,
-  Comment,
-} from '../../types/core';
+  Comment } from '../../types/core';

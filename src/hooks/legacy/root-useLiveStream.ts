@@ -43,8 +43,7 @@ export function useLiveStream(streamId?: string) {
         frameRate: 60,
         enableRecording: true,
         enableMultiplatform: false,
-        platforms: [],
-      },
+        platforms: [] },
       stats: {
         viewers: 0,
         peakViewers: 0,
@@ -59,17 +58,14 @@ export function useLiveStream(streamId?: string) {
         qaQuestions: 0,
         streamHealth: 'excellent' as const, bitrate: 5000,
         frameDrops: 0,
-        latency: 0,
-      },
+        latency: 0 },
       monetization: {
         totalRevenue: 0,
         superChatRevenue: 0,
         adRevenue: 0,
         membershipRevenue: 0,
         donationRevenue: 0,
-        superChats: [],
-      },
-    };
+        superChats: [] } };
 
     setTimeout(() => {
       setStream(mockStream);
@@ -83,8 +79,7 @@ export function useLiveStream(streamId?: string) {
         prev
           ? {
               ...prev,
-              stats: { ...prev.stats, ...newStats },
-            }
+              stats: { ...prev.stats, ...newStats } }
           : null
       );
     }
@@ -100,8 +95,7 @@ export function useLiveStream(streamId?: string) {
         message,
         timestamp: new Date(),
         color: '#FF5722',
-        duration: 5000,
-      };
+        duration: 5000 };
 
       setStream((prev: any) =>
         prev
@@ -111,14 +105,11 @@ export function useLiveStream(streamId?: string) {
                 ...prev.monetization,
                 superChats: [...prev.monetization.superChats, superChat],
                 superChatRevenue: prev.monetization.superChatRevenue + amount,
-                totalRevenue: prev.monetization.totalRevenue + amount,
-              },
+                totalRevenue: prev.monetization.totalRevenue + amount },
               stats: {
                 ...prev.stats,
                 superChatCount: prev.stats.superChatCount + 1,
-                superChatAmount: prev.stats.superChatAmount + amount,
-              },
-            }
+                superChatAmount: prev.stats.superChatAmount + amount } }
           : null
       );
     }
@@ -160,8 +151,7 @@ export function useLiveStream(streamId?: string) {
           frameRate: 60,
           enableRecording: true,
           enableMultiplatform: false,
-          platforms: [],
-        },
+          platforms: [] },
         stats: {
           viewers: 0,
           peakViewers: 0,
@@ -177,17 +167,14 @@ export function useLiveStream(streamId?: string) {
           streamHealth: 'excellent' as const,
           bitrate: 5000,
           frameDrops: 0,
-          latency: 0,
-        },
+          latency: 0 },
         monetization: {
           totalRevenue: 0,
           superChatRevenue: 0,
           adRevenue: 0,
           membershipRevenue: 0,
           donationRevenue: 0,
-          superChats: [],
-        },
-      };
+          superChats: [] } };
 
       await new Promise(resolve => setTimeout(resolve, 1000));
       setStream(newStream);
@@ -248,8 +235,7 @@ export function useLiveStream(streamId?: string) {
     addSuperChat,
     createStream,
     startStream,
-    endStream,
-  };
+    endStream };
 }
 
 export function useCreateLiveStream() {
@@ -292,8 +278,7 @@ export function useCreateLiveStream() {
           frameRate: 60,
           enableRecording: true,
           enableMultiplatform: false,
-          platforms: [],
-        },
+          platforms: [] },
         stats: {
           viewers: 0,
           peakViewers: 0,
@@ -308,17 +293,14 @@ export function useCreateLiveStream() {
           qaQuestions: 0,
           streamHealth: 'excellent' as const, bitrate: 5000,
           frameDrops: 0,
-          latency: 0,
-        },
+          latency: 0 },
         monetization: {
           totalRevenue: 0,
           superChatRevenue: 0,
           adRevenue: 0,
           membershipRevenue: 0,
           donationRevenue: 0,
-          superChats: [],
-        },
-      };
+          superChats: [] } };
 
       await new Promise(resolve => setTimeout(resolve, 1000));
       setCreating(false);
@@ -333,6 +315,5 @@ export function useCreateLiveStream() {
   return {
     createStream,
     creating,
-    error,
-  };
+    error };
 }

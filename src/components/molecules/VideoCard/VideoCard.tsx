@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React, { useState } from 'react';
 import { User } from '../types';
 
@@ -50,8 +51,7 @@ export const VideoCard = ({
   avatarUrl,
   showChannelInfo = true,
   className,
-  onMoreClick,
-}: VideoCardProps) => {
+  onMoreClick }: VideoCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -150,5 +150,4 @@ function formatDuration(seconds: any): string {
     .map(v => v.toString().padStart(2, '0'))
     .join(':');
 }
-
 

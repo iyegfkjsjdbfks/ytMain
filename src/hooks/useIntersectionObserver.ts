@@ -37,8 +37,7 @@ export const useIntersectionObserver = ({
   root = null,
   rootMargin = '0%',
   freezeOnceVisible = false,
-  initialIsIntersecting = false,
-}: UseIntersectionObserverOptions = {}): UseIntersectionObserverReturn => {
+  initialIsIntersecting = false }: UseIntersectionObserverOptions = {}): UseIntersectionObserverReturn => {
   const ref = useRef<Element>(null);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
   const [isIntersecting, setIsIntersecting] = useState(initialIsIntersecting);
@@ -105,8 +104,7 @@ export const useIntersectionObserver = ({
 export const useIntersectionVideoAutoplay = ({
   threshold = 0.7,
   rootMargin = '0px',
-  enabled = true,
-}: {
+  enabled = true }: {
   threshold?: number;
   rootMargin?: string;
   enabled?: boolean;
@@ -114,8 +112,7 @@ export const useIntersectionVideoAutoplay = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isIntersecting } = useIntersectionObserver({
     threshold,
-    rootMargin,
-  });
+    rootMargin });
 
   useEffect(() => {
     // Video play/pause functionality disabled to prevent loading errors
@@ -144,8 +141,7 @@ export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px' }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
     rootMargin,
-    freezeOnceVisible: true,
-  });
+    freezeOnceVisible: true });
 
   useEffect(() => {
     if (isIntersecting && !imageSrc) {
@@ -170,8 +166,7 @@ export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px' }) => {
     error,
     isIntersecting,
     onLoad: handleLoad,
-    onError: handleError,
-  };
+    onError: handleError };
 };
 
 /**
@@ -182,12 +177,10 @@ export const useInfiniteScroll = ({
   isFetchingNextPage = false,
   fetchNextPage,
   threshold = 1.0,
-  rootMargin = '100px',
-}) => {
+  rootMargin = '100px' }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
-    rootMargin,
-  });
+    rootMargin });
 
   useEffect(() => {
     if (isIntersecting && hasNextPage && !isFetchingNextPage) {

@@ -66,9 +66,8 @@ class SecureStorage {
 
 // Performance monitoring middleware
 const performanceMiddleware = <T>(
-  config: StateCreator<T, [], [], T>,
-  storeName: any,
-): StateCreator<T, [], [], T> => {
+  config: StateCreator<T, [], [], T>
+  storeName: any): StateCreator<T, [], [], T> => {
   return (set, get, api) => {
     const originalSet = set;
 
@@ -95,8 +94,7 @@ export function createAsyncState<T>(initialData: T | null = null): AsyncState<T>
     data: initialData,
     loading: false,
     error: null,
-    lastFetch: null,
-  };
+    lastFetch: null };
 }
 
 export function createAsyncActions<T>() {
@@ -125,8 +123,7 @@ export function createAsyncActions<T>() {
       state.loading = false;
       state.error = null;
       state.lastFetch = null;
-    },
-  };
+    } };
 }
 
 // Paginated state utilities
@@ -138,8 +135,7 @@ export function createPaginatedState<T>(pageSize: number = 20): PaginatedState<T
     total: 0,
     hasMore: true,
     loading: false,
-    error: null,
-  };
+    error: null };
 }
 
 export function createPaginatedActions<T>() {
@@ -191,8 +187,7 @@ export function createPaginatedActions<T>() {
       if (index !== -1) {
         Object.assign(state.items[index], updates);
       }
-    },
-  };
+    } };
 }
 
 // Optimistic updates manager
@@ -204,8 +199,7 @@ export class OptimisticUpdatesManager<T> {
       id,
       data,
       timestamp: Date.now(),
-      rollback,
-    });
+      rollback });
   }
 
   confirm(id: string): void {
@@ -244,9 +238,8 @@ export class OptimisticUpdatesManager<T> {
 
 // Enhanced store creator
 export function createEnhancedStore<T>(
-  stateCreator: StateCreator<T, [], [], T>,
-  config: StoreConfig,
-) {
+  stateCreator: StateCreator<T, [], [], T>
+  config: StoreConfig) {
   let enhancedCreator= stateCreator;
 
   // Apply immer middleware
@@ -275,8 +268,7 @@ export function createEnhancedStore<T>(
     const persistOptions= {
       name: config.name,
       storage: storage as any, // Type assertion for storage compatibility
-      version: config.persist.version || 1,
-    };
+      version: config.persist.version || 1 };
 
     if (config.persist.partialize) {
       persistOptions.partialize = config.persist.partialize;
@@ -299,8 +291,7 @@ export function createEnhancedStore<T>(
 
 // Store composition utilities
 export function combineStores<T extends Record<string, any>>(
-  stores: T,
-): () => { [K in keyof T]: ReturnType<T[K]> } {
+  stores: T): () => { [K in keyof T]: ReturnType<T[K]> } {
   return () => {
     const combined = {} as { [K in keyof T]: ReturnType<T[K]> };
 
@@ -371,8 +362,7 @@ return;
       action,
       timestamp: Date.now(),
       state: JSON.parse(JSON.stringify(state)),
-      prevState: JSON.parse(JSON.stringify(prevState)),
-    });
+      prevState: JSON.parse(JSON.stringify(prevState)) });
 
     // Keep only last 100 logs
     if (this.logs.length > 100) {
@@ -416,8 +406,7 @@ export function createValidator<T extends object>(schema: {
 
     return {
       isValid: Object.keys(errors).length === 0,
-      errors,
-    };
+      errors };
   };
 }
 
@@ -470,8 +459,7 @@ export class StorePerformanceAnalyzer {
       totalTime: 0,
       averageTime: 0,
       maxTime: 0,
-      minTime: Infinity,
-    };
+      minTime: Infinity };
 
     current.updateCount++;
     current.totalTime += duration;
@@ -523,7 +511,6 @@ export const storeUtils = {
   StoreDebugger,
   createValidator,
   StoreSynchronizer,
-  StorePerformanceAnalyzer,
-};
+  StorePerformanceAnalyzer };
 
 export default storeUtils;

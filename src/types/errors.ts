@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, {} from 'react';
 /**
  * Unified Error Type Definitions
  * Standardized error interfaces for consistent error handling
@@ -162,8 +162,7 @@ export enum ErrorSeverity {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
-  CRITICAL = 'critical',
-}
+  CRITICAL = 'critical' }
 
 // Error Categories
 export enum ErrorCategory {
@@ -178,8 +177,7 @@ export enum ErrorCategory {
   CONFIGURATION = 'configuration',
   COMPONENT = 'component',
   BUSINESS_LOGIC = 'business_logic',
-  EXTERNAL_SERVICE = 'external_service',
-}
+  EXTERNAL_SERVICE = 'external_service' }
 
 // Enhanced Error Interface with Metadata
 export interface EnhancedError extends BaseError {
@@ -318,8 +316,7 @@ export const ERROR_CODES = {
   // Generic Errors
   UNKNOWN_ERROR: 'UNKNOWN_ERROR',
   INTERNAL_ERROR: 'INTERNAL_ERROR',
-  FEATURE_NOT_SUPPORTED: 'FEATURE_NOT_SUPPORTED',
-} as const;
+  FEATURE_NOT_SUPPORTED: 'FEATURE_NOT_SUPPORTED' } as const;
 
 export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
 
@@ -336,8 +333,7 @@ export const createApiError = (
     message,
     endpoint,
     method,
-    timestamp: new Date(),
-  };
+    timestamp: new Date() };
 
   if (statusCode !== undefined) {
     error.statusCode = statusCode;
@@ -361,8 +357,7 @@ export const createValidationError = (
   field,
   value,
   constraint: constraint || 'unknown',
-  timestamp: new Date(),
-});
+  timestamp: new Date() });
 
 export const createNetworkError = (
   message: any,
@@ -375,8 +370,7 @@ export const createNetworkError = (
   url,
   timeout,
   offline,
-  timestamp: new Date(),
-});
+  timestamp: new Date() });
 
 export const createYouTubeError = (
   message: any,
@@ -417,8 +411,7 @@ export const createYouTubeError = (
     timestamp: new Date(),
     videoUnavailable: errorType === 'unavailable',
     embedDisabled: errorType === 'embed_disabled',
-    regionBlocked: errorType === 'region_blocked',
-  };
+    regionBlocked: errorType === 'region_blocked' };
 
   if (videoId) {
     error.details = { videoId };

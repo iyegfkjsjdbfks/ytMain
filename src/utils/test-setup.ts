@@ -43,14 +43,12 @@ class MockIntersectionObserver {
 Object.defineProperty(window, 'IntersectionObserver', {
   writable: true,
   configurable: true,
-  value: MockIntersectionObserver,
-});
+  value: MockIntersectionObserver });
 
 Object.defineProperty(global, 'IntersectionObserver', {
   writable: true,
   configurable: true,
-  value: MockIntersectionObserver,
-});
+  value: MockIntersectionObserver });
 
 // Mock ResizeObserver
 class MockResizeObserver {
@@ -62,14 +60,12 @@ class MockResizeObserver {
 Object.defineProperty(window, 'ResizeObserver', {
   writable: true,
   configurable: true,
-  value: MockResizeObserver,
-});
+  value: MockResizeObserver });
 
 Object.defineProperty(global, 'ResizeObserver', {
   writable: true,
   configurable: true,
-  value: MockResizeObserver,
-});
+  value: MockResizeObserver });
 
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -82,21 +78,17 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: vi.fn(), // deprecated
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
-});
+    dispatchEvent: vi.fn() })) });
 
 // Mock scrollTo
 Object.defineProperty(window, 'scrollTo', {
   writable: true,
-  value: vi.fn(),
-});
+  value: vi.fn() });
 
 // Mock scrollIntoView
 Object.defineProperty(Element.prototype, 'scrollIntoView', {
   writable: true,
-  value: vi.fn(),
-});
+  value: vi.fn() });
 
 // Mock localStorage
 const localStorageMock = {
@@ -105,13 +97,11 @@ const localStorageMock = {
   removeItem: vi.fn(),
   clear: vi.fn(),
   length: 0,
-  key: vi.fn(),
-};
+  key: vi.fn() };
 
 Object.defineProperty(window, 'localStorage', {
   writable: true,
-  value: localStorageMock,
-});
+  value: localStorageMock });
 
 // Mock sessionStorage
 const sessionStorageMock = {
@@ -120,24 +110,20 @@ const sessionStorageMock = {
   removeItem: vi.fn(),
   clear: vi.fn(),
   length: 0,
-  key: vi.fn(),
-};
+  key: vi.fn() };
 
 Object.defineProperty(window, 'sessionStorage', {
   writable: true,
-  value: sessionStorageMock,
-});
+  value: sessionStorageMock });
 
 // Mock URL.createObjectURL
 Object.defineProperty(URL, 'createObjectURL', {
   writable: true,
-  value: vi.fn(() => 'mocked-object-url'),
-});
+  value: vi.fn(() => 'mocked-object-url') });
 
 Object.defineProperty(URL, 'revokeObjectURL', {
   writable: true,
-  value: vi.fn(),
-});
+  value: vi.fn() });
 
 // Mock fetch if not already mocked by MSW
 if (!global.fetch) {
@@ -188,60 +174,49 @@ afterAll(() => {
 // Mock HTMLMediaElement
 Object.defineProperty(HTMLMediaElement.prototype, 'play', {
   writable: true,
-  value: vi.fn().mockImplementation(() => Promise.resolve()),
-});
+  value: vi.fn().mockImplementation(() => Promise.resolve()) });
 
 Object.defineProperty(HTMLMediaElement.prototype, 'pause', {
   writable: true,
-  value: vi.fn(),
-});
+  value: vi.fn() });
 
 Object.defineProperty(HTMLMediaElement.prototype, 'load', {
   writable: true,
-  value: vi.fn(),
-});
+  value: vi.fn() });
 
 // Mock HTMLVideoElement properties
 Object.defineProperty(HTMLVideoElement.prototype, 'currentTime', {
   writable: true,
-  value: 0,
-});
+  value: 0 });
 
 Object.defineProperty(HTMLVideoElement.prototype, 'duration', {
   writable: true,
-  value: 100,
-});
+  value: 100 });
 
 Object.defineProperty(HTMLVideoElement.prototype, 'paused', {
   writable: true,
-  value: true,
-});
+  value: true });
 
 Object.defineProperty(HTMLVideoElement.prototype, 'ended', {
   writable: true,
-  value: false,
-});
+  value: false });
 
 Object.defineProperty(HTMLVideoElement.prototype, 'volume', {
   writable: true,
-  value: 1,
-});
+  value: 1 });
 
 Object.defineProperty(HTMLVideoElement.prototype, 'muted', {
   writable: true,
-  value: false,
-});
+  value: false });
 
 // Mock requestAnimationFrame
 Object.defineProperty(window, 'requestAnimationFrame', {
   writable: true,
-  value: vi.fn((cb: FrameRequestCallback) => setTimeout(cb, 16)),
-});
+  value: vi.fn((cb: FrameRequestCallback) => setTimeout(cb, 16)) });
 
 Object.defineProperty(window, 'cancelAnimationFrame', {
   writable: true,
-  value: vi.fn(id => clearTimeout(id)),
-});
+  value: vi.fn(id => clearTimeout(id)) });
 
 // Mock getComputedStyle
 Object.defineProperty(window, 'getComputedStyle', {
@@ -249,9 +224,7 @@ Object.defineProperty(window, 'getComputedStyle', {
   value: vi.fn().mockImplementation(() => ({
     getPropertyValue: vi.fn().mockReturnValue(''),
     width: '1024px',
-    height: '768px',
-  })),
-});
+    height: '768px' })) });
 
 // Mock getBoundingClientRect
 Element.prototype.getBoundingClientRect = vi.fn(() => ({
@@ -263,8 +236,7 @@ Element.prototype.getBoundingClientRect = vi.fn(() => ({
   right: 1024,
   x: 0,
   y: 0,
-  toJSON: vi.fn(),
-}));
+  toJSON: vi.fn() }));
 
 // Mock Range for text selection
 Object.defineProperty(document, 'createRange', {
@@ -274,15 +246,12 @@ Object.defineProperty(document, 'createRange', {
     setEnd: vi.fn(),
     commonAncestorContainer: {
       nodeName: 'BODY',
-      ownerDocument: document,
-    },
+      ownerDocument: document },
     createContextualFragment: vi.fn().mockImplementation(html => {
       const div = document.createElement('div');
       div.innerHTML = html;
       return div;
-    }),
-  })),
-});
+    }) })) });
 
 // Mock Selection API
 Object.defineProperty(window, 'getSelection', {
@@ -290,18 +259,14 @@ Object.defineProperty(window, 'getSelection', {
   value: vi.fn().mockImplementation(() => ({
     removeAllRanges: vi.fn(),
     addRange: vi.fn(),
-    toString: vi.fn().mockReturnValue(''),
-  })),
-});
+    toString: vi.fn().mockReturnValue('') })) });
 
 // Mock Clipboard API
 Object.defineProperty(navigator, 'clipboard', {
   writable: true,
   value: {
     writeText: vi.fn().mockImplementation(() => Promise.resolve()),
-    readText: vi.fn().mockImplementation(() => Promise.resolve('')),
-  },
-});
+    readText: vi.fn().mockImplementation(() => Promise.resolve('')) } });
 
 // Mock File API
 Object.defineProperty(window, 'File', {
@@ -326,8 +291,7 @@ Object.defineProperty(window, 'File', {
     size: number;
     type: string;
     lastModified: number;
-  },
-});
+  } });
 
 // Mock FileReader
 Object.defineProperty(window, 'FileReader', {
@@ -382,8 +346,7 @@ Object.defineProperty(window, 'FileReader', {
     addEventListener = vi.fn();
     removeEventListener = vi.fn();
     dispatchEvent = vi.fn();
-  },
-});
+  } });
 
 // Set up environment variables for tests
 process.env.NODE_ENV = 'test';
@@ -408,10 +371,8 @@ global.testUtils = {
         console.log = originalLog;
         console.error = originalError;
         console.warn = originalWarn;
-      },
-    };
-  },
-};
+      } };
+  } };
 
 // Extend expect with custom matchers
 expect.extend({
@@ -427,8 +388,7 @@ expect.extend({
     return {
       message: () =>
         `expected element to ${isInViewport ? 'not ' : ''}be in viewport`,
-      pass: isInViewport,
-    };
+      pass: isInViewport };
   },
 
   toHaveAccessibleName(received: Element, expectedName) {
@@ -442,10 +402,8 @@ expect.extend({
     return {
       message: () =>
         `expected element to have accessible name "${expectedName}" but got "${accessibleName}"`,
-      pass: hasExpectedName,
-    };
-  },
-});
+      pass: hasExpectedName };
+  } });
 
 // Declare global types for TypeScript
 declare global {

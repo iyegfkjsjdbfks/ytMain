@@ -6,6 +6,8 @@ import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 const BellIconSolid = BellSolidIcon;
 
 import { formatDistanceToNow } from '../utils/dateUtils';
+import { CheckIcon } from '@heroicons/react/24/outline';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface Notification {
   id: string;
@@ -51,8 +53,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
   const loadNotifications = useCallback(() => {
@@ -82,8 +84,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         videoThumbnail: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=120&h=68&fit=crop',
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
         isRead: false,
-        actionUrl: '/watch?v=abc123',
-      },
+        actionUrl: '/watch?v=abc123' },
       {
         id: '2',
         type: 'comment_reply',
@@ -93,8 +94,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         channelAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face',
         timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
         isRead: false,
-        actionUrl: '/watch?v=def456',
-      },
+        actionUrl: '/watch?v=def456' },
       {
         id: '3',
         type: 'live_stream',
@@ -105,8 +105,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         videoThumbnail: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120&h=68&fit=crop',
         timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
         isRead: true,
-        actionUrl: '/watch?v=live123',
-      },
+        actionUrl: '/watch?v=live123' },
       {
         id: '4',
         type: 'subscription',
@@ -115,8 +114,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         channelName: 'YouTube',
         channelAvatar: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=40&h=40&fit=crop',
         timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-        isRead: true,
-      },
+        isRead: true },
     ];
   };
 
@@ -132,8 +130,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       channelName: getRandomChannelName(),
       channelAvatar: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000000)}?w=40&h=40&fit=crop&crop=face`,
       timestamp: new Date().toISOString(),
-      isRead: false,
-    };
+      isRead: false };
 
     const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50
     setNotifications(updatedNotifications);
@@ -184,8 +181,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         'posted in the community',
         'shared a new update',
         'created a poll',
-      ],
-    };
+      ] };
 
     const typeMessages = messages[type] || ['sent you a notification'];
     return typeMessages[Math.floor(Math.random() * typeMessages.length)] || 'sent you a notification';

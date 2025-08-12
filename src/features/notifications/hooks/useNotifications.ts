@@ -13,8 +13,7 @@ export function useNotifications() {
   const {
     data: notifications = [],
     isLoading,
-    error,
-  } = useQuery({
+    error } = useQuery({
     queryKey: ['notifications'],
     queryFn: () => notificationService.getNotifications(),
     refetchInterval: 30000, // Refetch every 30 seconds as fallback
@@ -26,16 +25,14 @@ export function useNotifications() {
       notificationService.markAsRead(notificationId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
-    },
-  });
+    } });
 
   // Mark all as read mutation
   const markAllAsReadMutation = useMutation({
     mutationFn: () => notificationService.markAllAsRead(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
-    },
-  });
+    } });
 
   // Delete notification mutation
   const deleteNotificationMutation = useMutation({
@@ -43,16 +40,14 @@ export function useNotifications() {
       notificationService.deleteNotification(notificationId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
-    },
-  });
+    } });
 
   // Clear all notifications mutation
   const clearAllMutation = useMutation({
     mutationFn: () => notificationService.clearAllNotifications(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
-    },
-  });
+    } });
 
   // Real-time notification handler
   const handleRealTimeNotification = useCallback(
@@ -73,8 +68,7 @@ export function useNotifications() {
         const browserNotification = new Notification(notification.title, {
           body: notification.message,
           icon: notification.fromUserAvatar || '/favicon.ico',
-          tag: notification.id,
-        });
+          tag: notification.id });
         // Auto-close after 5 seconds
         setTimeout(() => browserNotification.close(), 5000);
       }
@@ -131,8 +125,7 @@ export function useNotifications() {
     deleteNotification: deleteNotificationMutation.mutateAsync,
     clearAll: clearAllMutation.mutateAsync,
     isMarkingAsRead: markAsReadMutation.isPending,
-    isDeleting: deleteNotificationMutation.isPending,
-  };
+    isDeleting: deleteNotificationMutation.isPending };
 }
 
 export function useNotificationSettings() {
@@ -140,23 +133,20 @@ export function useNotificationSettings() {
 
   const { data: settings, isLoading } = useQuery({
     queryKey: ['notification-settings'],
-    queryFn: () => notificationService.getNotificationSettings(),
-  });
+    queryFn: () => notificationService.getNotificationSettings() });
 
   const updateSettingsMutation = useMutation({
     mutationFn: newSettings =>
       notificationService.updateNotificationSettings(newSettings),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notification-settings'] });
-    },
-  });
+    } });
 
   return {
     settings,
     isLoading,
     updateSettings: updateSettingsMutation.mutateAsync,
-    isUpdating: updateSettingsMutation.isPending,
-  };
+    isUpdating: updateSettingsMutation.isPending };
 }
 
 export function useNotificationStats() {
@@ -168,6 +158,5 @@ export function useNotificationStats() {
 
   return {
     stats,
-    isLoading,
-  };
+    isLoading };
 }

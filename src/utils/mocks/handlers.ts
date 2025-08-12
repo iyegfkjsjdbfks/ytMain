@@ -9,29 +9,23 @@ const mockYouTubeVideoResponse = {
         description: 'Test description 1',
         thumbnails: {
           medium: { url: 'https://example.com/thumb1.jpg' },
-          high: { url: 'https://example.com/thumb1_hq.jpg' },
-        },
+          high: { url: 'https://example.com/thumb1_hq.jpg' } },
         publishedAt: '2023-01-01T00:00:00Z',
         channelId: 'test-channel-1',
         channelTitle: 'Test Channel 1',
         tags: ['test', 'video'],
-        categoryId: '10',
-      },
+        categoryId: '10' },
       statistics: {
         viewCount: '1000',
         likeCount: '100',
         dislikeCount: '5',
-        commentCount: '20',
-      },
+        commentCount: '20' },
       contentDetails: {
         duration: 'PT5M30S',
         dimension: '2d',
         definition: 'hd',
-        caption: 'false',
-      },
-    },
-  ],
-};
+        caption: 'false' } },
+  ] };
 
 const mockYouTubeChannelResponse = {
   items: [
@@ -42,20 +36,15 @@ const mockYouTubeChannelResponse = {
         description: 'Test channel description',
         thumbnails: {
           medium: { url: 'https://example.com/channel1.jpg' },
-          high: { url: 'https://example.com/channel1_hq.jpg' },
-        },
+          high: { url: 'https://example.com/channel1_hq.jpg' } },
         publishedAt: '2020-01-01T00:00:00Z',
         customUrl: '@testchannel1',
-        country: 'US',
-      },
+        country: 'US' },
       statistics: {
         subscriberCount: '10000',
         videoCount: '50',
-        viewCount: '500000',
-      },
-    },
-  ],
-};
+        viewCount: '500000' } },
+  ] };
 
 export const handlers = [
   http.get('https://www.googleapis.com/youtube/v3/videos', () => {
@@ -67,10 +56,8 @@ export const handlers = [
       items: [
         {
           id: { videoId: 'test-video-1' },
-          snippet: { title: 'Test Search Result' },
-        },
-      ],
-    });
+          snippet: { title: 'Test Search Result' } },
+      ] });
   }),
 
   http.get('https://www.googleapis.com/youtube/v3/channels', () => {

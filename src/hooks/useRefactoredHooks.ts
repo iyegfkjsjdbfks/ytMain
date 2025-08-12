@@ -140,15 +140,14 @@ export function useArray<T>(initialArray: T[] = []) {
     filter,
     update,
     remove,
-    clear,
-  };
+    clear };
 }
 
 /**
  * Enhanced useAsync hook for async operations
  */
 export function useAsync<T, E = string>(
-  asyncFunction: () => Promise<T>,
+  asyncFunction: () => Promise<T>
   immediate: boolean = true
 ) {
   const [status, setStatus] = useState<
@@ -188,8 +187,7 @@ export function useAsync<T, E = string>(
     isIdle: status === 'idle',
     isPending: status === 'pending',
     isSuccess: status === 'success',
-    isError: status === 'error',
-  };
+    isError: status === 'error' };
 }
 
 /**
@@ -197,7 +195,7 @@ export function useAsync<T, E = string>(
  */
 export function useIntersectionObserver(
   options: IntersectionObserverInit = {}
-): [React.RefObject<HTMLElement>, boolean] {
+): [React.RefObject<HTMLElement> boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
@@ -239,9 +237,9 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside as EventListener);
     };
   }, [handler]);
 
@@ -263,8 +261,8 @@ export function useMediaQuery(query: any): boolean {
     const mediaQuery = window.matchMedia(query);
     const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
 
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
+    mediaQuery.addEventListener('change', handler as EventListener);
+    return () => mediaQuery.removeEventListener('change', handler as EventListener);
   }, [query]);
 
   return matches;
@@ -321,8 +319,7 @@ export function useUnifiedAppState() {
     // Notifications state
     notifications: context.state.notifications,
     addNotification: context.addNotification,
-    removeNotification: context.removeNotification,
-  };
+    removeNotification: context.removeNotification };
 }
 
 // Export useRefactoredHooks as an alias to useUnifiedAppState

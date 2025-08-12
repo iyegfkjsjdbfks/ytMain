@@ -15,8 +15,7 @@ export function usePlaylists(filters: PlaylistFilters = {}) {
     () => playlistService.getUserPlaylists(filters),
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
-      refetchOnWindowFocus: true,
-    }
+      refetchOnWindowFocus: true }
   );
 }
 
@@ -120,8 +119,7 @@ export function useCreatePlaylist() {
       onSuccess: () => {
         // Invalidate playlists cache
         queryCache.invalidate('playlists');
-      },
-    }
+      } }
   );
 }
 
@@ -134,8 +132,7 @@ export function useUpdatePlaylist() {
       // Invalidate specific playlist and playlists list
       queryCache.invalidate(`playlist:${id}`);
       queryCache.invalidate('playlists');
-    },
-  });
+    } });
 }
 
 export function useDeletePlaylist() {
@@ -146,8 +143,7 @@ export function useDeletePlaylist() {
         // Invalidate caches
         queryCache.invalidate(`playlist:${playlistId}`);
         queryCache.invalidate('playlists');
-      },
-    }
+      } }
   );
 }
 
@@ -160,8 +156,7 @@ export function useAddVideoToPlaylist() {
       // Invalidate playlist videos cache
       queryCache.invalidate(`playlist:${playlistId}:videos`);
       queryCache.invalidate(`playlist:${playlistId}`);
-    },
-  });
+    } });
 }
 
 export function useRemoveVideoFromPlaylist() {
@@ -173,8 +168,7 @@ export function useRemoveVideoFromPlaylist() {
         // Invalidate playlist videos cache
         queryCache.invalidate(`playlist:${playlistId}:videos`);
         queryCache.invalidate(`playlist:${playlistId}`);
-      },
-    }
+      } }
   );
 }
 
@@ -186,8 +180,7 @@ export function useReorderPlaylistVideos() {
     onSuccess: (_, { playlistId }) => {
       // Invalidate playlist videos cache
       queryCache.invalidate(`playlist:${playlistId}:videos`);
-    },
-  });
+    } });
 }
 
 export function useDuplicatePlaylist() {
@@ -198,8 +191,7 @@ export function useDuplicatePlaylist() {
       onSuccess: () => {
         // Invalidate playlists cache
         queryCache.invalidate('playlists');
-      },
-    }
+      } }
   );
 }
 
@@ -210,8 +202,7 @@ export function useFollowPlaylist() {
       onSuccess: () => {
         // Invalidate followed playlists cache
         queryCache.invalidate('playlists:followed');
-      },
-    }
+      } }
   );
 }
 
@@ -222,8 +213,7 @@ export function useUnfollowPlaylist() {
       onSuccess: () => {
         // Invalidate followed playlists cache
         queryCache.invalidate('playlists:followed');
-      },
-    }
+      } }
   );
 }
 
@@ -239,8 +229,7 @@ export function useBulkAddVideos() {
         // Invalidate playlist videos cache
         queryCache.invalidate(`playlist:${playlistId}:videos`);
         queryCache.invalidate(`playlist:${playlistId}`);
-      },
-    }
+      } }
   );
 }
 
@@ -256,8 +245,7 @@ export function useBulkRemoveVideos() {
         // Invalidate playlist videos cache
         queryCache.invalidate(`playlist:${playlistId}:videos`);
         queryCache.invalidate(`playlist:${playlistId}`);
-      },
-    }
+      } }
   );
 }
 
@@ -270,8 +258,7 @@ export function useUploadPlaylistThumbnail() {
         // Invalidate playlist cache
         queryCache.invalidate(`playlist:${playlistId}`);
         queryCache.invalidate('playlists');
-      },
-    }
+      } }
   );
 }
 
@@ -291,8 +278,7 @@ export function usePlaylistWithVideos(playlistId: any) {
       playlist.refetch();
       videos.refetch();
       stats.refetch();
-    },
-  };
+    } };
 }
 
 export function usePlaylistManagement() {
@@ -314,6 +300,5 @@ export function usePlaylistManagement() {
       createPlaylist.loading ||
       updatePlaylist.loading ||
       deletePlaylist.loading,
-    error: createPlaylist.error || updatePlaylist.error || deletePlaylist.error,
-  };
+    error: createPlaylist.error || updatePlaylist.error || deletePlaylist.error };
 }

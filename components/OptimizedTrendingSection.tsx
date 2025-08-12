@@ -145,5 +145,3 @@ TrendingSection.displayName = 'TrendingSection';
 
 export default TrendingSection;
 
-
-

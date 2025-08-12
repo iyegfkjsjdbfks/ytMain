@@ -36,8 +36,7 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
     visibility: 'public' as const,
     // Required BaseEntity properties
     createdAt: now,
-    updatedAt: now,
-  };
+    updatedAt: now };
 };
 
 interface OptimizedSearchResultsProps {
@@ -91,8 +90,7 @@ const sortingFunctions = {
       const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : (b.views || 0);
       return viewsB - viewsA;
     });
-  },
-};
+  } };
 
 // Helper function to extract video ID for iframe embedding
 const extractVideoId = (video: Video) => {
@@ -275,8 +273,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   sortBy,
   onVideoClick,
   onLoadMore,
-  hasMore = false,
-}) => {
+  hasMore = false }) => {
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -286,8 +283,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   // Intersection observer for infinite scroll
   const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
-    rootMargin: '100px',
-  });
+    rootMargin: '100px' });
 
   // Combine and sort all results
   const allResults = useMemo(() => {

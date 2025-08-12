@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import { useState, useEffect, useCallback, useMemo, useRef, memo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
@@ -136,7 +136,7 @@ export interface AsyncState<T> {
 }
 
 export function useOptimizedAsync<T>(
-  asyncFunction: () => Promise<T>,
+  asyncFunction: () => Promise<T>
   dependencies = [],
   options: {
     immediate?: boolean;
@@ -148,8 +148,7 @@ export function useOptimizedAsync<T>(
   const [state, setState] = useState<AsyncState<T>>({
     data: null,
     loading: false,
-    error: null,
-  });
+    error: null });
 
   const execute = useCallback(async () => {
     setState(prev => ({ ...prev, loading: true, error: null }));
@@ -211,8 +210,7 @@ export function useOptimizedIntersectionObserver(
           {
             threshold: 0.1,
             rootMargin: '50px',
-            ...options,
-          }
+            ...options }
         );
 
         observer.current.observe(node);
@@ -283,7 +281,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
   const updateById = useCallback(
     (
       id: string | number,
-      newItem: Partial<T>,
+      newItem: Partial<T>
       idKey: keyof T = 'id' as keyof T
     ) => {
       setArray(prev =>
@@ -311,8 +309,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
     clear,
     set,
     length: array.length,
-    isEmpty: array.length === 0,
-  };
+    isEmpty: array.length === 0 };
 }
 
 /**
@@ -433,8 +430,7 @@ export function useOptimizedForm<T extends Record<string, any>>(
     setTouched,
     reset,
     validate,
-    isValid: Object.keys(errors).length === 0,
-  };
+    isValid: Object.keys(errors).length === 0 };
 }
 
 // Export all optimized hooks
@@ -448,7 +444,6 @@ export const OptimizedHooks = {
   useOptimizedArray,
   useOptimizedMemo,
   useOptimizedCallback,
-  useOptimizedForm,
-};
+  useOptimizedForm };
 
 export default OptimizedHooks;

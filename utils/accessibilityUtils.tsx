@@ -33,14 +33,14 @@ export function AccessibilityProvider({ children }) {
     setReducedMotion(motionQuery.matches);
 
     const handleMotionChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    motionQuery.addEventListener('change', handleMotionChange);
+    motionQuery.addEventListener('change', handleMotionChange as EventListener);
 
     // Check for high contrast preference
     const contrastQuery = window.matchMedia('(prefers-contrast: high)');
     setHighContrast(contrastQuery.matches);
 
     const handleContrastChange = (e: MediaQueryListEvent) => setHighContrast(e.matches);
-    contrastQuery.addEventListener('change', handleContrastChange);
+    contrastQuery.addEventListener('change', handleContrastChange as EventListener);
 
     // Load saved preferences
     const savedFontSize = localStorage.getItem('accessibility-font-size') as AccessibilityContextType['fontSize'];
@@ -49,8 +49,8 @@ export function AccessibilityProvider({ children }) {
     }
 
     return () => {
-      motionQuery.removeEventListener('change', handleMotionChange);
-      contrastQuery.removeEventListener('change', handleContrastChange);
+      motionQuery.removeEventListener('change', handleMotionChange as EventListener);
+      contrastQuery.removeEventListener('change', handleContrastChange as EventListener);
     };
   }, []);
 
@@ -60,8 +60,7 @@ export function AccessibilityProvider({ children }) {
       'small': '14px',
       'medium': '16px',
       'large': '18px',
-      'extra-large': '20px',
-    };
+      'extra-large': '20px' };
 
     document.documentElement.style.fontSize = fontSizeMap[fontSize];
     localStorage.setItem('accessibility-font-size', fontSize);
@@ -87,8 +86,7 @@ export function AccessibilityProvider({ children }) {
       fontSize,
       announcements,
       addAnnouncement,
-      clearAnnouncements,
-    }}>
+      clearAnnouncements }}>
       {children}
     </AccessibilityContext.Provider>
   );
@@ -161,11 +159,11 @@ return;
       }
     };
 
-    container.addEventListener('keydown', handleKeyDown as any);
+    container.addEventListener('keydown', handleKeyDown as any as EventListener);
     (firstElement as HTMLElement)?.focus();
 
     return () => {
-      container.removeEventListener('keydown', handleKeyDown as any);
+      container.removeEventListener('keydown', handleKeyDown as any as EventListener);
     };
   }, [getFocusableElements]);
 
@@ -178,8 +176,7 @@ return;
   return {
     getFocusableElements,
     trapFocus,
-    restoreFocus,
-  };
+    restoreFocus };
 }
 
 // Keyboard navigation hook
@@ -348,8 +345,8 @@ export function useAccessibleModal() {
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape as any);
-      return () => document.removeEventListener('keydown', handleEscape as any);
+      document.addEventListener('keydown', handleEscape as any as EventListener);
+      return () => document.removeEventListener('keydown', handleEscape as any as EventListener);
     }
     return undefined;
   }, [isOpen, closeModal]);
@@ -363,9 +360,7 @@ export function useAccessibleModal() {
       role: 'dialog',
       'aria-modal': true,
       'aria-labelledby': 'modal-title',
-      'aria-describedby': 'modal-description',
-    },
-  };
+      'aria-describedby': 'modal-description' } };
 }
 
 // Accessible form validation
@@ -399,8 +394,7 @@ export function useAccessibleForm() {
         } else {
           clearFieldError(fieldName);
         }
-      },
-    };
+      } };
   }, [errors, setFieldError, clearFieldError]);
 
   const getErrorProps = useCallback((fieldName: any) => {
@@ -409,8 +403,7 @@ export function useAccessibleForm() {
     return error ? {
       id: `${fieldName}-error`,
       role: 'alert',
-      'aria-live': 'polite' as const, children: error,
-    } : null;
+      'aria-live': 'polite' as const, children: error } : null;
   }, [errors]);
 
   return {
@@ -458,14 +451,12 @@ export function useAccessibleTooltip() {
     style: {
       position: 'absolute' as const, left: position.x,
       top: position.y, transform: 'translateX(-50%) translateY(-100%)'
-    },
-  };
+    } };
 
   return {
     isVisible,
     triggerProps,
-    tooltipProps,
-  };
+    tooltipProps };
 }
 
 // Accessibility testing utilities
@@ -514,8 +505,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
       issues.push({
         type: 'warning',
         message: `Heading level skipped from h${previousLevel} to h${level}`,
-        element: heading as HTMLElement,
-      });
+        element: heading as HTMLElement });
     }
 
     previousLevel = level;
@@ -535,8 +525,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
         issues.push({
           type: 'warning',
           message: `Low color contrast ratio: ${contrast.ratio.toFixed(2)}`,
-          element: el as HTMLElement,
-        });
+          element: el as HTMLElement });
       }
     }
   });
@@ -564,10 +553,7 @@ export const accessibilityUtils = {
   useAccessibleModal,
   useAccessibleForm,
   useAccessibleTooltip,
-  runAccessibilityAudit,
-};
+  runAccessibilityAudit };
 
 export default accessibilityUtils;
-
-
 

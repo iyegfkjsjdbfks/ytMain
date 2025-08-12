@@ -19,7 +19,7 @@ export interface AsyncState<T> {
 }
 
 export function useAsyncState<T>(initialData: T | null = null): [
-  AsyncState<T>,
+  AsyncState<T>
   {
     setData: (data: T | null) => void;
     setLoading: (loading: any) => void;
@@ -31,16 +31,14 @@ export function useAsyncState<T>(initialData: T | null = null): [
     data: initialData,
     loading: false,
     error: null,
-    lastFetch: null,
-  });
+    lastFetch: null });
 
   const setData = useCallback((data: T | null) => {
     setState(prev => ({
       ...prev,
       data,
       error: null,
-      lastFetch: Date.now(),
-    }));
+      lastFetch: Date.now() }));
   }, []);
 
   const setLoading = useCallback((loading: any) => {
@@ -51,8 +49,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
     setState(prev => ({
       ...prev,
       error,
-      loading: false,
-    }));
+      loading: false }));
   }, []);
 
   const reset = useCallback(() => {
@@ -60,8 +57,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
       data: initialData,
       loading: false,
       error: null,
-      lastFetch: null,
-    });
+      lastFetch: null });
   }, [initialData]);
 
   return [state, { setData, setLoading, setError, reset }];
@@ -78,7 +74,7 @@ export interface UseApiOptions {
 }
 
 export function useApi<T>(
-  apiCall: () => Promise<T>,
+  apiCall: () => Promise<T>
   options: UseApiOptions = {}
 ): AsyncState<T> & {
   refetch: () => Promise<void>;
@@ -90,8 +86,7 @@ export function useApi<T>(
     retryOnError = false,
     retryDelay = 1000,
     maxRetries = 3,
-    dependencies = [],
-  } = options;
+    dependencies = [] } = options;
 
   const [state, { setData, setLoading, setError }] = useAsyncState<T>();
   const retryCountRef = useRef(0);
@@ -186,8 +181,7 @@ export function useApi<T>(
   return {
     ...state,
     refetch,
-    refresh,
-  };
+    refresh };
 }
 
 // Unified form state management
@@ -221,7 +215,7 @@ export interface FormActions<T extends Record<string, any>> {
 export function useForm<T extends Record<string, any>>(
   initialValues: T,
   validators?: { [K in keyof T]?: (value: T[K]) => string | null }
-): [FormState<T>, FormActions<T>] {
+): [FormState<T> FormActions<T>] {
   const [state, setState] = useState<FormState<T>>(() => {
     const fields = {} as { [K in keyof T]: FormField<T[K]> };
     for (const key in initialValues) {
@@ -229,15 +223,13 @@ export function useForm<T extends Record<string, any>>(
         value: initialValues[key],
         error: null,
         touched: false,
-        dirty: false,
-      };
+        dirty: false };
     }
     return {
       fields,
       isValid: true,
       isSubmitting: false,
-      submitError: null,
-    };
+      submitError: null };
   });
 
   const setValue = useCallback(
@@ -248,16 +240,14 @@ export function useForm<T extends Record<string, any>>(
           ...newFields[field],
           value,
           dirty: value !== initialValues[field],
-          error: validators?.[field] ? validators[field](value) : null,
-        };
+          error: validators?.[field] ? validators[field](value) : null };
 
         const isValid = Object.values(newFields).every(f => !f.error);
 
         return {
           ...prev,
           fields: newFields,
-          isValid,
-        };
+          isValid };
       });
     },
     [initialValues, validators]
@@ -273,8 +263,7 @@ export function useForm<T extends Record<string, any>>(
         return {
           ...prev,
           fields: newFields,
-          isValid,
-        };
+          isValid };
       });
     },
     []
@@ -288,8 +277,7 @@ export function useForm<T extends Record<string, any>>(
 
         return {
           ...prev,
-          fields: newFields,
-        };
+          fields: newFields };
       });
     },
     []
@@ -311,16 +299,14 @@ export function useForm<T extends Record<string, any>>(
           value: initialValues[key],
           error: null,
           touched: false,
-          dirty: false,
-        };
+          dirty: false };
       }
       return {
         ...prev,
         fields,
         isValid: true,
         isSubmitting: false,
-        submitError: null,
-      };
+        submitError: null };
     });
   }, [initialValues]);
 
@@ -347,8 +333,7 @@ export function useForm<T extends Record<string, any>>(
       return {
         ...prev,
         fields: newFields,
-        isValid,
-      };
+        isValid };
     });
 
     return isValid;
@@ -397,8 +382,7 @@ export function useForm<T extends Record<string, any>>(
       setSubmitError,
       reset,
       validate,
-      handleSubmit,
-    },
+      handleSubmit },
   ];
 }
 
@@ -480,7 +464,7 @@ export function useLocalStorage<T>(
 // Unified intersection observer hook
 export function useIntersectionObserver(
   options: IntersectionObserverInit = {}
-): [React.RefObject<HTMLElement>, boolean] {
+): [React.RefObject<HTMLElement> boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const targetRef = useRef<HTMLElement>(null);
 

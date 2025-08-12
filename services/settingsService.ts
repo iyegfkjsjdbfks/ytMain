@@ -1,5 +1,6 @@
 // / <reference types="vite/client" />
 // Settings service for managing application settings
+import type { Video } from '../types';
 import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
@@ -51,20 +52,15 @@ const defaultSettings: Settings = {
     watchPage: {
       youtubePlayer: 'youtube-player',
       localPlayer: 'video-player',
-      defaultCategory: 'youtube',
-    },
+      defaultCategory: 'youtube' },
     homePage: {
       youtubePlayer: 'youtube-player',
       localPlayer: 'advanced-video-player',
-      defaultCategory: 'youtube',
-    },
+      defaultCategory: 'youtube' },
     searchResultsPage: {
       youtubePlayer: 'youtube-player-wrapper',
       localPlayer: 'advanced-video-player',
-      defaultCategory: 'youtube',
-    },
-  },
-};
+      defaultCategory: 'youtube' } } };
 
 // Video Player Configurations
 export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = {
@@ -76,8 +72,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['YouTube API Integration', 'Responsive Design', 'Lightweight', 'Auto Quality', 'Fullscreen Support'],
     useCases: ['YouTube video embedding', 'Search result playback', 'Video streaming'],
     performance: 'high',
-    complexity: 'simple',
-  },
+    complexity: 'simple' },
   'youtube-player-wrapper': {
     type: 'youtube-player-wrapper',
     category: 'youtube',
@@ -86,8 +81,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Simplified API', 'Props-based configuration', 'Mock video object creation', 'YouTube Player integration'],
     useCases: ['Quick YouTube embedding', 'Simplified integration', 'Video cards', 'Component reusability'],
     performance: 'high',
-    complexity: 'simple',
-  },
+    complexity: 'simple' },
   'youtube-player-example': {
     type: 'youtube-player-example',
     category: 'youtube',
@@ -96,8 +90,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Demo functionality', 'Player state tracking', 'Control examples', 'Progress monitoring', 'Educational code'],
     useCases: ['Development demos', 'Testing', 'Learning examples', 'Prototyping'],
     performance: 'medium',
-    complexity: 'simple',
-  },
+    complexity: 'simple' },
   'advanced-video-player': {
     type: 'advanced-video-player',
     category: 'local',
@@ -106,8 +99,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Advanced Controls', 'Custom Hooks', 'State Management', 'Quality Selection', 'Fullscreen Support', 'Chapter Support'],
     useCases: ['Local video files', 'Advanced playback features', 'Custom video experiences', 'Professional video playback'],
     performance: 'high',
-    complexity: 'advanced',
-  },
+    complexity: 'advanced' },
   'video-player': {
     type: 'video-player',
     category: 'local',
@@ -116,8 +108,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Dual-mode operation', 'YouTube iframe support', 'HTML5 video', 'Custom controls', 'Fullscreen support', 'Time tracking'],
     useCases: ['Mixed content', 'Flexible video sources', 'Alternative watch page', 'Unified video interface'],
     performance: 'high',
-    complexity: 'moderate',
-  },
+    complexity: 'moderate' },
   'shorts-player': {
     type: 'shorts-player',
     category: 'local',
@@ -126,8 +117,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Vertical video optimization', 'Swipe navigation', 'Mobile-first design', 'Auto-loop', 'Social interactions'],
     useCases: ['Short-form content', 'Vertical videos', 'Mobile viewing', 'Social media style videos', 'TikTok-like experience'],
     performance: 'high',
-    complexity: 'moderate',
-  },
+    complexity: 'moderate' },
   'short-display-card': {
     type: 'short-display-card',
     category: 'local',
@@ -136,9 +126,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Intersection observer autoplay', 'Social action buttons', 'Loading states', 'Manual pause tracking', 'Muted autoplay'],
     useCases: ['Shorts feed', 'Home page shorts', 'Social video cards', 'Auto-playing video previews'],
     performance: 'high',
-    complexity: 'moderate',
-  },
-};
+    complexity: 'moderate' } };
 
 export const getSettings = (): Settings => {
   const stored = localStorage.getItem('appSettings');
@@ -321,9 +309,7 @@ export const setPagePlayerConfig = (page: PageType, config: PagePlayerConfig): v
     ...settings,
     pageConfigurations: {
       ...pageConfigurations,
-      [page]: config,
-    },
-  });
+      [page]: config } });
 };
 
 export const getAllPageConfigurations = (): Record<PageType, PagePlayerConfig> => {
@@ -335,8 +321,7 @@ export const getPageDisplayName = (page: PageType): string => {
   const displayNames: Record<PageType, string> = {
     watchPage: 'WatchPage',
     homePage: 'HomePage',
-    searchResultsPage: 'SearchResultsPage',
-  };
+    searchResultsPage: 'SearchResultsPage' };
   return displayNames[page];
 };
 

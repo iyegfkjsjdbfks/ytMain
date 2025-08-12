@@ -44,8 +44,7 @@ class LiveStreamService {
       tags: config.tags || [],
       visibility: config.visibility || 'public',
       thumbnailUrl: config.thumbnailUrl || '',
-      reminderSet: false,
-    };
+      reminderSet: false };
 
     return stream;
   }
@@ -89,8 +88,7 @@ class LiveStreamService {
         frameRate: 60,
         enableRecording: true,
         enableMultiplatform: false,
-        platforms: [],
-      },
+        platforms: [] },
       stats: {
         viewers: 0,
         peakViewers: 0,
@@ -106,17 +104,14 @@ class LiveStreamService {
         streamHealth: 'excellent',
         bitrate: 5000,
         frameDrops: 0,
-        latency: 0,
-      },
+        latency: 0 },
       monetization: {
         totalRevenue: 0,
         superChatRevenue: 0,
         adRevenue: 0,
         membershipRevenue: 0,
         donationRevenue: 0,
-        superChats: [],
-      },
-    };
+        superChats: [] } };
 
     return stream;
   }
@@ -136,8 +131,7 @@ class LiveStreamService {
       tags: config.tags || [],
       visibility: config.visibility || 'public',
       thumbnailUrl: config.thumbnailUrl || '',
-      reminderSet: false,
-    };
+      reminderSet: false };
 
     return stream;
   }
@@ -179,8 +173,7 @@ class LiveStreamService {
         frameRate: 60,
         enableRecording: true,
         enableMultiplatform: false,
-        platforms: [],
-      },
+        platforms: [] },
       stats: {
         viewers: 0,
         peakViewers: 0,
@@ -196,17 +189,14 @@ class LiveStreamService {
         streamHealth: 'excellent',
         bitrate: 5000,
         frameDrops: 0,
-        latency: 0,
-      },
+        latency: 0 },
       monetization: {
         totalRevenue: 0,
         superChatRevenue: 0,
         adRevenue: 0,
         membershipRevenue: 0,
         donationRevenue: 0,
-        superChats: [],
-      },
-    };
+        superChats: [] } };
 
     return stream;
   }
@@ -228,8 +218,7 @@ class LiveStreamService {
     return {
       viewers: 0,
       duration: 0,
-      chatMessages: 0,
-    };
+      chatMessages: 0 };
   }
 }
 
@@ -271,5 +260,4 @@ liveStreamService.streams = {
 
   async getStreamStats(id: string): Promise<any> {
     return liveStreamService.getStreamStats(id);
-  },
-};
+  } };

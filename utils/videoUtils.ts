@@ -83,6 +83,5 @@ export function getVideoDimensions(video: Video): { width: number; height: numbe
   const width = 1280; // Default width
   return {
     width,
-    height: Math.round(width / aspectRatio),
-  };
+    height: Math.round(width / aspectRatio) };
 }

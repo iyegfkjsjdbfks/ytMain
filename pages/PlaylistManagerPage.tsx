@@ -1,6 +1,9 @@
 import React, { useEffect, useState, FC } from 'react';
 import { PencilIcon, PlusIcon  } from '@heroicons/react/24/outline';
 import Droppable, { DragDropContext } from 'react-beautiful-dnd';
+import { TrashIcon } from '@heroicons/react/24/outline';
+import { UserGroupIcon } from '@heroicons/react/24/outline';
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
 
 interface PlaylistVideo {
   id: string;
@@ -46,8 +49,7 @@ const PlaylistManagerPage: React.FC = () => {
   const [newPlaylist, setNewPlaylist] = useState({
     title: '',
     description: '',
-    visibility: 'public' as 'public' | 'unlisted' | 'private',
-  });
+    visibility: 'public' as 'public' | 'unlisted' | 'private' });
 
   // Generate mock data
   useEffect(() => {
@@ -71,8 +73,7 @@ const PlaylistManagerPage: React.FC = () => {
         thumbnail: `https://picsum.photos/320/180?random=${i}`,
         duration: `${Math.floor(Math.random() * 20) + 5}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
         views: Math.floor(Math.random() * 100000) + 1000,
-        uploadDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
-      }));
+        uploadDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000) }));
     };
 
     const generateMockPlaylists = (): Playlist[] => {
@@ -107,8 +108,7 @@ const PlaylistManagerPage: React.FC = () => {
           visibility: visibilityOptions[Math.floor(Math.random() * visibilityOptions.length)] || 'public',
           createdDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
           lastUpdated: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-          videos,
-        };
+          videos };
       }).sort((a, b) => b.lastUpdated.getTime() - a.lastUpdated.getTime());
     };
 
@@ -119,8 +119,7 @@ const PlaylistManagerPage: React.FC = () => {
         totalViews: playlists.reduce((sum: any, playlist: any) => sum + playlist.totalViews, 0),
         publicPlaylists: playlists.filter((p: any) => p.visibility === 'public').length,
         privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length,
-      };
+        unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length };
     };
 
     setTimeout(() => {
@@ -168,8 +167,7 @@ return;
       visibility: newPlaylist.visibility,
       createdDate: new Date(),
       lastUpdated: new Date(),
-      videos: [],
-    };
+      videos: [] };
 
     setPlaylists([playlist, ...playlists]);
     setNewPlaylist({ title: '', description: '', visibility: 'public' });
@@ -218,8 +216,7 @@ return;
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric',
-    });
+      day: 'numeric' });
   };
 
   if (loading) {
@@ -543,5 +540,4 @@ return;
 };
 
 export default PlaylistManagerPage;
-
 

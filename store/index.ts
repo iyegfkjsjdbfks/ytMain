@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+import type { Channel } from '../types';
 import { create } from 'zustand';
 import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
@@ -129,8 +131,7 @@ const initialState: AppState = {
     id: null,
     name: null,
     avatar: null,
-    isAuthenticated: false,
-  },
+    isAuthenticated: false },
 
   videos: {
     home: [],
@@ -138,13 +139,11 @@ const initialState: AppState = {
     subscriptions: [],
     watchLater: [],
     history: [],
-    liked: [],
-  },
+    liked: [] },
 
   channels: {
     subscribed: [],
-    recommended: [],
-  },
+    recommended: [] },
 
   playlists: [],
 
@@ -152,23 +151,19 @@ const initialState: AppState = {
     query: '',
     results: [],
     suggestions: [],
-    isLoading: false,
-  },
+    isLoading: false },
 
   loading: {
     videos: false,
     channels: false,
     playlists: false,
-    user: false,
-  },
+    user: false },
 
   errors: {
     videos: null,
     channels: null,
     playlists: null,
-    user: null,
-  },
-};
+    user: null } };
 
 // Create Store
 export const useAppStore = create<AppState & AppActions>()(
@@ -284,8 +279,7 @@ export const useAppStore = create<AppState & AppActions>()(
               ...playlist,
               id: `playlist_${Date.now()}`,
               createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            };
+              updatedAt: new Date().toISOString() };
             state.playlists.push(newPlaylist);
           }),
 
@@ -293,8 +287,7 @@ export const useAppStore = create<AppState & AppActions>()(
             const index = state.playlists.findIndex((p: any) => p.id === id);
             if (index !== -1) {
               Object.assign(state.playlists[index], updates, {
-                updatedAt: new Date().toISOString(),
-              });
+                updatedAt: new Date().toISOString() });
             }
           }),
 
@@ -365,8 +358,7 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           // Utility Actions
-          reset: () => set(() => initialState),
-        })),
+          reset: () => set(() => initialState) })),
       ),
       {
         name: 'youtube-studio-store',
@@ -377,18 +369,13 @@ export const useAppStore = create<AppState & AppActions>()(
           videos: {
             watchLater: state.videos.watchLater,
             history: state.videos.history,
-            liked: state.videos.liked,
-          },
+            liked: state.videos.liked },
           channels: {
-            subscribed: state.channels.subscribed,
-          },
-          playlists: state.playlists,
-        }),
-      },
+            subscribed: state.channels.subscribed },
+          playlists: state.playlists }) },
     ),
     {
-      name: 'youtube-studio-store',
-    },
+      name: 'youtube-studio-store' },
   ));
 
 // Selectors
@@ -396,19 +383,16 @@ export const useTheme = () => useAppStore((state) => state.theme);
 export const useSidebar = () => useAppStore((state) => ({
   collapsed: state.sidebarCollapsed,
   toggle: state.toggleSidebar,
-  setCollapsed: state.setSidebarCollapsed,
-}));
+  setCollapsed: state.setSidebarCollapsed }));
 export const useMiniplayer = () => useAppStore((state) => ({
   visible: state.miniplayerVisible,
   video: state.miniplayerVideo,
   show: state.showMiniplayer,
-  hide: state.hideMiniplayer,
-}));
+  hide: state.hideMiniplayer }));
 export const useUser = () => useAppStore((state) => ({
   ...state.user,
   setUser: state.setUser,
-  logout: state.logout,
-}));
+  logout: state.logout }));
 export const useVideos = (category?: keyof AppState['videos']) => {
   return useAppStore((state) => {
     if (category) {
@@ -416,8 +400,7 @@ export const useVideos = (category?: keyof AppState['videos']) => {
         videos: state.videos[category],
         setVideos: (videos: Video) => state.setVideos(category, videos),
         loading: state.loading.videos,
-        error: state.errors.videos,
-      };
+        error: state.errors.videos };
     }
     return {
       videos: state.videos,
@@ -429,8 +412,7 @@ export const useVideos = (category?: keyof AppState['videos']) => {
       likeVideo: state.likeVideo,
       unlikeVideo: state.unlikeVideo,
       loading: state.loading.videos,
-      error: state.errors.videos,
-    };
+      error: state.errors.videos };
   });
 };
 export const useChannels = () => useAppStore((state) => ({
@@ -439,8 +421,7 @@ export const useChannels = () => useAppStore((state) => ({
   subscribe: state.subscribeToChannel,
   unsubscribe: state.unsubscribeFromChannel,
   loading: state.loading.channels,
-  error: state.errors.channels,
-}));
+  error: state.errors.channels }));
 export const usePlaylists = () => useAppStore((state) => ({
   playlists: state.playlists,
   setPlaylists: state.setPlaylists,
@@ -450,13 +431,11 @@ export const usePlaylists = () => useAppStore((state) => ({
   addVideo: state.addVideoToPlaylist,
   removeVideo: state.removeVideoFromPlaylist,
   loading: state.loading.playlists,
-  error: state.errors.playlists,
-}));
+  error: state.errors.playlists }));
 export const useSearch = () => useAppStore((state) => ({
   ...state.search,
   setQuery: state.setSearchQuery,
   setResults: state.setSearchResults,
   setSuggestions: state.setSearchSuggestions,
   setLoading: state.setSearchLoading,
-  clear: state.clearSearch,
-}));
+  clear: state.clearSearch }));

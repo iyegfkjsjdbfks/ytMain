@@ -65,8 +65,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
   onSetCurrentReplyText,
   onSetEditingComment,
   onSetActiveCommentMenu,
-  onSetExpandedReplies,
-}) => {
+  onSetExpandedReplies }) => {
   const replyInputRef = useRef<HTMLInputElement>(null);
   const [editText, setEditText] = useState('');
 
@@ -91,8 +90,7 @@ return 0;
       day: 86400,
       week: 604800,
       month: 2592000,
-      year: 31536000,
-    };
+      year: 31536000 };
     return value * (multipliers[unit as keyof typeof multipliers] || 0);
   };
 
@@ -107,8 +105,7 @@ return 0;
   const handleEditStart = (comment: Comment) => {
     onSetEditingComment({
       id: comment.id,
-      ...(comment.parentId ? { parentId: comment.parentId } : {}),
-    });
+      ...(comment.parentId ? { parentId: comment.parentId } : {}) });
     setEditText(comment.commentText);
     onSetActiveCommentMenu(null);
   };

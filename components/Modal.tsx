@@ -22,8 +22,7 @@ const Modal: React.FC<ModalProps> = ({
   footer,
   size = 'md',
   closeOnOutsideClick = true,
-  hideCloseButton = false,
-}) => {
+  hideCloseButton = false }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,13 +33,13 @@ const Modal: React.FC<ModalProps> = ({
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleOutsideClick);
+      document.addEventListener('mousedown', handleOutsideClick as EventListener);
     } else {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick as EventListener);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick as EventListener);
     };
   }, [isOpen, onClose, closeOnOutsideClick]);
 
@@ -64,8 +63,7 @@ return null;
     md: 'max-w-md',
     lg: 'max-w-lg',
     xl: 'max-w-xl',
-    full: 'max-w-full h-full',
-  };
+    full: 'max-w-full h-full' };
 
   return (
     <div

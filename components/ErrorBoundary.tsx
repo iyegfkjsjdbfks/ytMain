@@ -34,14 +34,12 @@ class ErrorReportingService {
       error: {
         name: error.name,
         message: error.message,
-        stack: error.stack || '',
-      } as Error,
+        stack: error.stack || '' } as Error,
       errorInfo,
       timestamp: Date.now(),
       url: window.location.href,
       userAgent: navigator.userAgent,
-      sessionId: this.sessionId,
-    };
+      sessionId: this.sessionId };
 
     try {
       // In development, log to console
@@ -100,8 +98,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   public override state: State = {
     hasError: false,
-    retryCount: 0,
-  };
+    retryCount: 0 };
 
   constructor(props: Props) {
     super(props);
@@ -113,8 +110,7 @@ class ErrorBoundary extends Component<Props, State> {
     return {
       hasError: true,
       error,
-      errorId,
-    };
+      errorId };
   }
 
   public override componentDidUpdate(prevProps: Props) {
@@ -164,8 +160,7 @@ class ErrorBoundary extends Component<Props, State> {
 
     this.setState({
       hasError: false,
-      retryCount: 0,
-    });
+      retryCount: 0 });
   };
 
   private handleRetry = () => {
@@ -175,8 +170,7 @@ class ErrorBoundary extends Component<Props, State> {
     if (retryCount < maxRetries) {
       this.setState(prevState => ({
         hasError: false,
-        retryCount: prevState.retryCount + 1,
-      }));
+        retryCount: prevState.retryCount + 1 }));
     }
   };
 

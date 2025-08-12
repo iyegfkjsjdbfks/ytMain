@@ -29,16 +29,14 @@ const positionClasses = {
   'top-left': 'bottom-full left-0 mb-2',
   'top-right': 'bottom-full right-0 mb-2',
   'bottom-left': 'top-full left-0 mt-2',
-  'bottom-right': 'top-full right-0 mt-2',
-};
+  'bottom-right': 'top-full right-0 mt-2' };
 
 const DropdownMenu = ({
   isOpen,
   children,
   className = '',
   position = 'bottom-right',
-  menuRef,
-}: DropdownMenuProps) => {
+  menuRef }: DropdownMenuProps) => {
   if (!isOpen) {
 return null;
 }
@@ -63,12 +61,10 @@ const DropdownMenuItem = ({
   className = '',
   variant = 'default',
   icon,
-  disabled = false,
-}: DropdownMenuItemProps) => {
+  disabled = false }: DropdownMenuItemProps) => {
   const variantClasses = {
     default: 'text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700',
-    danger: 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20',
-  };
+    danger: 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20' };
 
   return (
     <button
@@ -88,8 +84,7 @@ const DropdownMenuItem = ({
 };
 
 const DropdownMenuSeparator = ({
-  className = '',
-}: DropdownMenuSeparatorProps) => {
+  className = '' }: DropdownMenuSeparatorProps) => {
   return (
     <hr className={cn('my-2 border-gray-200 dark:border-gray-600', className)} />
   );

@@ -1,6 +1,4 @@
-import React, { FC, ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface VideoGridSkeletonProps {
@@ -38,8 +36,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   title = 'Something went wrong',
   message,
   icon,
-  className = '',
-}) => (
+  className = '' }) => (
   <div className={`text-center py-12 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg ${className}`}>
     {icon || <ExclamationTriangleIcon className="w-16 h-16 text-red-400 dark:text-red-600 mx-auto mb-6" />}
     <p className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
@@ -62,8 +59,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   title,
   message,
   icon,
-  className = '',
-}) => (
+  className = '' }) => (
   <div className={`text-center py-12 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg ${className}`}>
     {icon && <div className="mx-auto mb-6">{icon}</div>}
     <p className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">

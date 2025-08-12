@@ -1,4 +1,4 @@
-import React, { useEffect, memo, forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 // / <reference types="vite/client" />
 // Performance monitoring utilities for React components
 interface PerformanceMetric {
@@ -57,8 +57,7 @@ return;
     const metric: PerformanceMetric = {
       name,
       startTime: performance.now(),
-      metadata: metadata || {},
-    };
+      metadata: metadata || {} };
 
     this.metrics.set(name, metric);
 
@@ -229,13 +228,12 @@ export function usePerformanceMonitor(componentName: any) {
     startRender,
     endRender,
     measureAsync,
-    measureSync,
-  };
+    measureSync };
 }
 
 // Higher-order component for automatic performance monitoring
 export function withPerformanceMonitoring<P extends object>(
-  WrappedComponent: React.ComponentType<P>,
+  WrappedComponent: React.ComponentType<P>
   componentName?: string,
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';

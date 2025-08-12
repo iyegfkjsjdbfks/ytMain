@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+import type { Channel } from '../types';
 import { ApiError } from './base';
 import { CACHE_CONFIG } from '../../lib/constants';
 import { logger } from '../../utils/logger';
@@ -126,8 +128,7 @@ class YouTubeService {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
-      ttl,
-    });
+      ttl });
   }
 
   async fetchVideos(videoIds: any): Promise<Video[]> {
@@ -151,8 +152,7 @@ class YouTubeService {
     try {
       const url = this.buildUrl('videos', {
         part: 'snippet,statistics,contentDetails',
-        id: videoIds.join(','),
-      });
+        id: videoIds.join(',') });
 
       const response = await fetch(url);
       if (!response.ok) {
@@ -200,8 +200,7 @@ class YouTubeService {
             : false,
           createdAt: snippet?.publishedAt || new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
-        } as Video;
+          videoUrl: `https://www.youtube.com/watch?v=${item.id}` } as Video;
       });
 
       this.setCachedData(cacheKey, videos, CACHE_CONFIG.VIDEO_DATA_TTL);
@@ -241,8 +240,7 @@ class YouTubeService {
     try {
       const url = this.buildUrl('channels', {
         part: 'snippet,statistics',
-        id: channelId,
-      });
+        id: channelId });
 
       const response = await fetch(url);
       if (!response.ok) {
@@ -279,8 +277,7 @@ class YouTubeService {
         joinedDate: item.snippet?.publishedAt || new Date().toISOString(),
         country: item.snippet?.country || 'Unknown',
         createdAt: item.snippet?.publishedAt || new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+        updatedAt: new Date().toISOString() };
 
       this.setCachedData(cacheKey, channel, CACHE_CONFIG.USER_DATA_TTL);
       return channel;
@@ -345,8 +342,7 @@ class YouTubeService {
       '26': 'Howto & Style',
       '27': 'Education',
       '28': 'Science & Technology',
-      '29': 'Nonprofits & Activism',
-    };
+      '29': 'Nonprofits & Activism' };
     return categories[categoryId] || 'Unknown';
   }
 
@@ -376,8 +372,7 @@ class YouTubeService {
         part: 'snippet',
         q: query,
         type: 'video',
-        maxResults: String(options.maxResults || 25),
-      });
+        maxResults: String(options.maxResults || 25) });
 
       const searchResponse = await fetch(searchUrl);
       if (!searchResponse.ok) {

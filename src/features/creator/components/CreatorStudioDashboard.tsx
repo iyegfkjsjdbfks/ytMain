@@ -1,10 +1,10 @@
+import type { Video } from '../types';
 import React, { useState, FC } from 'react';
 import { EyeIcon, ClockIcon, UserGroupIcon, CurrencyDollarIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, VideoCameraIcon, ChatBubbleLeftIcon, BellIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 // Icon wrapper components to fix type compatibility
 const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({
-  className,
-}) => <VideoCameraIcon className={className} />;
+  className }) => <VideoCameraIcon className={className} />;
 
 interface DashboardMetrics {
   views: {
@@ -68,8 +68,7 @@ export const CreatorStudioDashboard: React.FC = () => {
     views: { total: 1250000, change: 12.5, trend: 'up' },
     watchTime: { total: 45000000, change: 8.3, trend: 'up' },
     subscribers: { total: 125000, change: -2.1, trend: 'down' },
-    revenue: { total: 3450, change: 15.7, trend: 'up' },
-  };
+    revenue: { total: 3450, change: 15.7, trend: 'up' } };
 
   const recentVideos: RecentVideo[] = [
     {
@@ -81,8 +80,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       comments: 1200,
       publishedAt: '2024-01-15T10:00:00Z',
       status: 'published',
-      visibility: 'public',
-    },
+      visibility: 'public' },
     {
       id: '2',
       title: 'Advanced TypeScript Tips',
@@ -92,8 +90,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       comments: 890,
       publishedAt: '2024-01-10T14:30:00Z',
       status: 'published',
-      visibility: 'public',
-    },
+      visibility: 'public' },
     {
       id: '3',
       title: 'CSS Grid vs Flexbox',
@@ -103,8 +100,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       comments: 0,
       publishedAt: '2024-01-20T09:00:00Z',
       status: 'scheduled',
-      visibility: 'public',
-    },
+      visibility: 'public' },
   ];
 
   const notifications: Notification[] = [
@@ -115,8 +111,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       message: 'Your video "React Tutorial" reached 100K views!',
       timestamp: '2024-01-15T12:00:00Z',
       isRead: false,
-      priority: 'high',
-    },
+      priority: 'high' },
     {
       id: '2',
       type: 'comment',
@@ -124,8 +119,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       message: 'Someone commented on your video "TypeScript Guide"',
       timestamp: '2024-01-15T11:30:00Z',
       isRead: false,
-      priority: 'medium',
-    },
+      priority: 'medium' },
     {
       id: '3',
       type: 'copyright',
@@ -133,8 +127,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       message: 'A copyright claim was made on your video',
       timestamp: '2024-01-14T16:20:00Z',
       isRead: true,
-      priority: 'high',
-    },
+      priority: 'high' },
   ];
 
   const quickActions: QuickAction[] = [
@@ -146,8 +139,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       action: () => {
         // Handle upload video action
       },
-      color: 'bg-purple-500',
-    },
+      color: 'bg-purple-500' },
   ];
 
   const formatNumber = (num: any): string => {
@@ -478,5 +470,4 @@ export const CreatorStudioDashboard: React.FC = () => {
 };
 
 export default CreatorStudioDashboard;
-
 

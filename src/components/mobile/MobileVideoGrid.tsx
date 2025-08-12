@@ -115,8 +115,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
     onLoadMore,
     loading = false,
     hasMore = false,
-    className = '',
-  }) => {
+    className = '' }) => {
     // Calculate item height based on screen width
     const itemHeight = useMemo(() => {
       const screenWidth = window.innerWidth;
@@ -131,16 +130,14 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
     const listData = useMemo(
       () => ({
         videos,
-        onVideoClick,
-      }),
+        onVideoClick }),
       [videos, onVideoClick]
     );
 
     // Intersection observer for load more
     const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
       threshold: 0.1,
-      rootMargin: '100px',
-    });
+      rootMargin: '100px' });
 
     // Load more when intersecting
     useEffect(() => {
@@ -221,5 +218,4 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
 MobileVideoGrid.displayName = 'MobileVideoGrid';
 
 export default MobileVideoGrid;
-
 

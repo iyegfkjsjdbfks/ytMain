@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ShortsFiltersProps {
@@ -14,8 +12,7 @@ const ShortsFilters: React.FC<ShortsFiltersProps> = ({
   categories,
   selectedCategory,
   onCategoryChange,
-  onClose,
-}) => {
+  onClose }) => {
   const formatCategoryName = (category: any) => {
     if (category === 'all') {
 return 'All';

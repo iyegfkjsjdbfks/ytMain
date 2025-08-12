@@ -15,8 +15,7 @@ interface ProtectedLiveStreamViewerProps {
  */
 const ProtectedLiveStreamViewer: FC<ProtectedLiveStreamViewerProps> = ({
   streamId,
-  className,
-}) => {
+  className }) => {
   const handleRetry = useCallback(() => {
     conditionalLogger.debug('Retrying live stream viewer', { streamId });
     // The error boundary will reset and re-render the component
@@ -40,5 +39,4 @@ const ProtectedLiveStreamViewer: FC<ProtectedLiveStreamViewerProps> = ({
 };
 
 export default ProtectedLiveStreamViewer;
-
 

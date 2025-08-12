@@ -11,8 +11,7 @@ const DefaultFallback: React.FC = () => <FastLoadingSpinner />;
 
 const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
   children,
-  fallback = <DefaultFallback />,
-}) => {
+  fallback = <DefaultFallback /> }) => {
   return (
     <Suspense fallback={fallback}>
       {children}
@@ -21,5 +20,4 @@ const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
 };
 
 export default SuspenseWrapper;
-
 

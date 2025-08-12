@@ -21,8 +21,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
   notification,
   onMarkAsRead,
   onDelete,
-  onClick,
-}) => {
+  onClick }) => {
   const getNotificationIcon = () => {
     switch (notification.type) {
       case 'video_upload':
@@ -101,8 +100,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
               <div className='flex items-center gap-2 mt-2'>
                 <span className='text-xs text-gray-500 dark:text-gray-400'>
                   {formatDistanceToNow(new Date(notification.createdAt), {
-                    addSuffix: true,
-                  })}
+                    addSuffix: true })}
                 </span>
                 {!notification.isRead && (
                   <span className='w-2 h-2 bg-blue-600 rounded-full' />
@@ -154,8 +152,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
 };
 
 export const NotificationCenter: React.FC<NotificationCenterProps> = ({
-  className = '',
-}) => {
+  className = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState<'all' | 'unread'>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -168,8 +165,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     markAsRead,
     markAllAsRead,
     deleteNotification,
-    clearAll,
-  } = useNotifications();
+    clearAll } = useNotifications();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -181,8 +177,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
   const filteredNotifications = Array.isArray(notifications)
@@ -362,5 +358,4 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 };
 
 export default NotificationCenter;
-
 

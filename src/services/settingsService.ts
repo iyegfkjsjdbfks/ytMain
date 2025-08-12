@@ -6,8 +6,7 @@ type AppSettings = {
 };
 
 let _settings: AppSettings = {
-  initialSearchKeyword: 'trending',
-};
+  initialSearchKeyword: 'trending' };
 
 /**
  * Returns the initial search keyword used by the app (defaults to 'trending').
@@ -34,7 +33,6 @@ export const getSettings = (): Readonly<AppSettings> => {
 const settings = {
   getInitialSearchKeyword,
   setInitialSearchKeyword,
-  getSettings,
-};
+  getSettings };
 
 export default settings;

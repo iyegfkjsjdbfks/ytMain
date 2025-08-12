@@ -312,8 +312,7 @@ class YouTubeSearchService {
       duration,
       category,
       tagsCount: tags.length,
-      thumbnailUrl: `${thumbnailUrl.substring(0, 50)}...`,
-    }, 'YouTubeSearchService');
+      thumbnailUrl: `${thumbnailUrl.substring(0, 50)}...` }, 'YouTubeSearchService');
 
     conditionalLogger.debug('Enhanced Metadata Extraction completed', {
       videoId,
@@ -323,8 +322,7 @@ class YouTubeSearchService {
       views,
       viewCount,
       duration,
-      category,
-    }, 'YouTubeSearchService');
+      category }, 'YouTubeSearchService');
 
     return {
       id: videoId,
@@ -349,8 +347,7 @@ class YouTubeSearchService {
       isLive: item.snippet.toLowerCase().includes('live') || item.title.toLowerCase().includes('live'),
       visibility: 'public' as const, createdAt: uploadedAt,
       updatedAt: uploadedAt,
-      publishedAt: uploadedAt,
-    };
+      publishedAt: uploadedAt };
   }
 
   /**
@@ -444,8 +441,7 @@ class YouTubeSearchService {
         title: currentVideo.title,
         category: currentVideo.category,
         tags: currentVideo.tags,
-        channelName: currentVideo.channelName,
-      }, 'YouTubeSearchService');
+        channelName: currentVideo.channelName }, 'YouTubeSearchService');
 
       // Build search URL
       const searchUrl = new URL(this.baseUrl);
@@ -518,8 +514,7 @@ class YouTubeSearchService {
       conditionalLogger.debug('Final recommendation results', { count: videos.length }, 'YouTubeSearchService');
       if (videos.length > 0) {
         conditionalLogger.debug('Sample recommendations', {
-          samples: videos.slice(0, 3).map((v: any) => ({ title: v.title, url: v.videoUrl })),
-        }, 'YouTubeSearchService');
+          samples: videos.slice(0, 3).map((v: any) => ({ title: v.title, url: v.videoUrl })) }, 'YouTubeSearchService');
       }
 
       return videos;
@@ -600,8 +595,7 @@ class YouTubeSearchService {
       sports: 'trending sports videos',
       entertainment: 'trending entertainment videos',
       education: 'trending educational videos',
-      popular: 'trending videos today',
-    };
+      popular: 'trending videos today' };
 
     const query = trendingQueries[category as keyof typeof trendingQueries] || trendingQueries.popular;
     return this.searchVideos(query, maxResults);
@@ -621,8 +615,7 @@ class YouTubeSearchService {
     return {
       configured: this.isConfigured(),
       hasApiKey: !!this.apiKey,
-      hasEngineId: !!this.engineId,
-    };
+      hasEngineId: !!this.engineId };
   }
 }
 

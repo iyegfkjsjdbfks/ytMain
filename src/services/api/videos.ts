@@ -1,10 +1,10 @@
+import type { Video } from '../types';
 import { api, type PaginatedRequest } from './base';
 import type {
   Video,
   Short,
   ApiResponse,
-  SearchFilters,
-} from '../../types/core';
+  SearchFilters } from '../../types/core';
 
 /**
  * Video API Service
@@ -81,8 +81,7 @@ export const videoApi = {
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/category', {
       ...params,
-      category,
-    } as PaginatedRequest & { category: string });
+      category } as PaginatedRequest & { category: string });
   },
 
   /**
@@ -194,8 +193,7 @@ export const videoApi = {
   ): Promise<ApiResponse<void>> {
     return api.post<void>(`/api/videos/${videoId}/report`, {
       reason,
-      description,
-    });
+      description });
   },
 
   /**
@@ -277,7 +275,6 @@ export const videoApi = {
    */
   async unsaveVideo(videoId: any): Promise<ApiResponse<void>> {
     return api.delete<void>(`/api/videos/${videoId}/save`);
-  },
-};
+  } };
 
 export default videoApi;

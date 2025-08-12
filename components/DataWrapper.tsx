@@ -1,6 +1,4 @@
-import React, { ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { VideoGridSkeleton, ErrorState, EmptyState  } from './LoadingStates';
 
 interface DataWrapperProps<T> {
@@ -37,8 +35,7 @@ export function DataWrapper<T>({
   loadingSkeleton,
   emptyState,
   errorTitle,
-  isEmpty = (data: T) => Array.isArray(data) ? data.length === 0 : !data,
-}: DataWrapperProps<T>) {
+  isEmpty = (data: T) => Array.isArray(data) ? data.length === 0 : !data }: DataWrapperProps<T>) {
   if (loading) {
     return loadingSkeleton || <VideoGridSkeleton />;
   }
@@ -66,5 +63,4 @@ export function DataWrapper<T>({
 }
 
 export default DataWrapper;
-
 

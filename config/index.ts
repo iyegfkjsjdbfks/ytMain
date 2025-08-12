@@ -3,8 +3,7 @@ export const ENV = {
   NODE_ENV: import.meta.env.NODE_ENV || 'development',
   PROD: import.meta.env.PROD,
   DEV: import.meta.env.DEV,
-  SSR: import.meta.env.SSR,
-} as const;
+  SSR: import.meta.env.SSR } as const;
 
 // API Configuration
 export const API_CONFIG = {
@@ -44,16 +43,13 @@ export const PERFORMANCE_CONFIG = {
     LCP: parseInt(import.meta.env.VITE_PERFORMANCE_LCP_BUDGET || '2500', 10),
     FCP: parseInt(import.meta.env.VITE_PERFORMANCE_FCP_BUDGET || '1800', 10),
     CLS: parseFloat(import.meta.env.VITE_PERFORMANCE_CLS_BUDGET || '0.1'),
-    TTFB: parseInt(import.meta.env.VITE_PERFORMANCE_TTFB_BUDGET || '800', 10),
-  },
+    TTFB: parseInt(import.meta.env.VITE_PERFORMANCE_TTFB_BUDGET || '800', 10) },
 
   // Bundle size limits (in KB)
   BUNDLE_SIZE_BUDGET: {
     MAIN: parseInt(import.meta.env.VITE_BUNDLE_MAIN_BUDGET || '500', 10),
     VENDOR: parseInt(import.meta.env.VITE_BUNDLE_VENDOR_BUDGET || '1000', 10),
-    CHUNK: parseInt(import.meta.env.VITE_BUNDLE_CHUNK_BUDGET || '200', 10),
-  },
-} as const;
+    CHUNK: parseInt(import.meta.env.VITE_BUNDLE_CHUNK_BUDGET || '200', 10) } } as const;
 
 // Analytics Configuration
 export const ANALYTICS_CONFIG = {
@@ -94,8 +90,7 @@ export const ERROR_CONFIG = {
 
   // Rate limiting for error reports
   MAX_ERRORS_PER_SESSION: parseInt(import.meta.env.VITE_MAX_ERRORS_PER_SESSION || '50', 10),
-  ERROR_THROTTLE_MS: parseInt(import.meta.env.VITE_ERROR_THROTTLE_MS || '1000', 10),
-} as const;
+  ERROR_THROTTLE_MS: parseInt(import.meta.env.VITE_ERROR_THROTTLE_MS || '1000', 10) } as const;
 
 // Feature Flags
 export const FEATURE_FLAGS = {
@@ -118,8 +113,7 @@ export const FEATURE_FLAGS = {
   // Development Features
   DEBUG_MODE: import.meta.env.VITE_DEBUG_MODE === 'true' || ENV.DEV,
   MOCK_API: import.meta.env.VITE_MOCK_API === 'true',
-  PERFORMANCE_OVERLAY: import.meta.env.VITE_PERFORMANCE_OVERLAY === 'true',
-} as const;
+  PERFORMANCE_OVERLAY: import.meta.env.VITE_PERFORMANCE_OVERLAY === 'true' } as const;
 
 // UI Configuration
 export const UI_CONFIG = {
@@ -148,9 +142,7 @@ export const UI_CONFIG = {
     MD: 768,
     LG: 1024,
     XL: 1280,
-    XXL: 1536,
-  },
-} as const;
+    XXL: 1536 } } as const;
 
 // Storage Configuration
 export const STORAGE_CONFIG = {
@@ -164,8 +156,7 @@ export const STORAGE_CONFIG = {
     CACHE: 'yt-cache',
     ANALYTICS: 'yt-analytics',
     ERRORS: 'yt-errors',
-    PERFORMANCE: 'yt-performance',
-  },
+    PERFORMANCE: 'yt-performance' },
 
   // Storage limits
   MAX_HISTORY_ITEMS: parseInt(import.meta.env.VITE_MAX_HISTORY_ITEMS || '1000', 10),
@@ -212,8 +203,7 @@ export const DEV_CONFIG = {
   // Debug tools
   REACT_DEVTOOLS: ENV.DEV,
   REDUX_DEVTOOLS: ENV.DEV,
-  PERFORMANCE_DEVTOOLS: ENV.DEV || FEATURE_FLAGS.PERFORMANCE_OVERLAY,
-} as const;
+  PERFORMANCE_DEVTOOLS: ENV.DEV || FEATURE_FLAGS.PERFORMANCE_OVERLAY } as const;
 
 // Export all configurations
 export const CONFIG = {
@@ -226,8 +216,7 @@ export const CONFIG = {
   UI: UI_CONFIG,
   STORAGE: STORAGE_CONFIG,
   SECURITY: SECURITY_CONFIG,
-  DEV: DEV_CONFIG,
-} as const;
+  DEV: DEV_CONFIG } as const;
 
 // Type definitions
 export type Config = typeof CONFIG;

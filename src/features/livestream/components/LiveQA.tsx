@@ -13,8 +13,7 @@ interface LiveQAProps {
 const LiveQA: React.FC<LiveQAProps> = ({
   streamId,
   isOwner,
-  className = '',
-}) => {
+  className = '' }) => {
   const { questions, submitQuestion, answerQuestion, upvoteQuestion } =
     useLiveQA(streamId);
   const [newQuestion, setNewQuestion] = useState('');
@@ -91,8 +90,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
   const formatTimestamp = (timestamp: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       hour: '2-digit',
-      minute: '2-digit',
-    }).format(timestamp);
+      minute: '2-digit' }).format(timestamp);
   };
 
   const filteredQuestions = questions.filter(question => {
@@ -170,18 +168,15 @@ const LiveQA: React.FC<LiveQAProps> = ({
           {
             key: 'unanswered',
             label: 'Unanswered',
-            count: questions.filter(q => !q.answered).length,
-          },
+            count: questions.filter(q => !q.answered).length },
           {
             key: 'answered',
             label: 'Answered',
-            count: questions.filter(q => q.answered).length,
-          },
+            count: questions.filter(q => q.answered).length },
           {
             key: 'pinned',
             label: 'Pinned',
-            count: questions.filter(q => q.isHighlighted).length,
-          },
+            count: questions.filter(q => q.isHighlighted).length },
         ].map(tab => (
           <button
             key={tab.key}
@@ -357,5 +352,4 @@ const LiveQA: React.FC<LiveQAProps> = ({
 };
 
 export default LiveQA;
-
 

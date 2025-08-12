@@ -21,19 +21,19 @@ interface InstallPromptState {
 }
 
 interface UseInstallPromptReturn {
-  // State
+  // State,
   isInstallable: boolean;
   isInstalled: boolean;
   showPrompt: boolean;
   isInstalling: boolean;
   installError: string | null;
 
-  // Actions
+  // Actions,
   installApp: () => Promise<boolean>;
   dismissPrompt: (permanent?: boolean) => void;
   resetError: () => void;
 
-  // Utilities
+  // Utilities,
   canShowPrompt: () => boolean;
   getInstallStats: () => {
     visitCount: number;
@@ -53,8 +53,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
     showPrompt: false,
     isInstalling: false,
     installError: null,
-    deferredPrompt: null,
-  });
+    deferredPrompt: null });
 
   // Check if prompt can be shown based on visit count and dismissal status
   const canShowPrompt = useCallback((): boolean => {
@@ -73,8 +72,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
     return {
       visitCount,
       lastDismissed,
-      canShow: canShowPrompt(),
-    };
+      canShow: canShowPrompt() };
   }, [canShowPrompt]);
 
   // Install the PWA
@@ -96,7 +94,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
         conditionalLogger.debug(
           'User accepted PWA install prompt',
           undefined,
-          'useInstallPrompt'
+          'useInstallPrompt',
         );
 
         // Update state
@@ -104,15 +102,14 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
           ...prev,
           isInstalling: false,
           showPrompt: false,
-          deferredPrompt: null,
-        }));
+          deferredPrompt: null }));
 
         return true;
       }
       conditionalLogger.debug(
         'User dismissed PWA install prompt',
         undefined,
-        'useInstallPrompt'
+        'useInstallPrompt',
       );
 
       // Mark as dismissed
@@ -122,29 +119,27 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
         ...prev,
         isInstalling: false,
         showPrompt: false,
-        deferredPrompt: null,
-      }));
+        deferredPrompt: null }));
 
       return false;
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         'useInstallPrompt',
         'Failed to install PWA',
-        error
+        error,
       );
 
       conditionalLogger.error(
         'PWA installation failed',
         componentError,
-        'useInstallPrompt'
+        'useInstallPrompt',
       );
 
       setState(prev => ({
         ...prev,
         isInstalling: false,
-        installError:
-          error instanceof Error ? error.message : 'Installation failed',
-      }));
+        installError:,
+          error instanceof Error ? error.message : 'Installation failed' }));
 
       return false;
     }
@@ -185,8 +180,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
       setState(prev => ({
         ...prev,
         deferredPrompt: installPrompt,
-        isInstallable: true,
-      }));
+        isInstallable: true }));
 
       // Show prompt after delay if conditions are met
       setTimeout(() => {
@@ -208,24 +202,22 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
         isInstalled: true,
         isInstallable: false,
         showPrompt: false,
-        deferredPrompt: null,
-      }));
+        deferredPrompt: null }));
 
       // Show success notification
       if ('Notification' in window && Notification.permission === 'granted') {
         const notification = new Notification('YouTubeX Installed!', {
           body: 'You can now access YouTubeX from your home screen.',
           icon: '/icons/icon-192x192.svg',
-          badge: '/icons/badge-72x72.svg',
-        });
+          badge: '/icons/badge-72x72.svg' });
         // Notification will auto-close, no need to manage it further
-        notification.addEventListener('click', () => notification.close());
+        notification.addEventListener('click', ( as EventListener) => notification.close());
       }
     };
 
     // Add event listeners
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
+    window.addEventListener('appinstalled', handleAppInstalled as EventListener);
 
     // Increment visit count
     PWAUtils.incrementVisitCount();
@@ -234,14 +226,14 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
     return () => {
       window.removeEventListener(
         'beforeinstallprompt',
-        handleBeforeInstallPrompt
+        handleBeforeInstallPrompt,
       );
-      window.removeEventListener('appinstalled', handleAppInstalled);
+      window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
     };
   }, [canShowPrompt]);
 
   return {
-    // State
+    // State,
     isInstallable: state.isInstallable,
     isInstalled: state.isInstalled,
     showPrompt: state.showPrompt,
@@ -255,8 +247,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
     // Utilities
     canShowPrompt,
-    getInstallStats,
-  };
+    getInstallStats };
 };
 
 export default useInstallPrompt;

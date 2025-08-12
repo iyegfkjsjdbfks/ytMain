@@ -79,13 +79,12 @@ return undefined;
     renderCount: renderCount.current,
     trackCustomMetric: (metricName: any, value: string | number) => {
       performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
-    },
-  };
+    } };
 }
 
 // Smart memo wrapper that includes performance tracking
 export function smartMemo<P extends object>(
-  Component: ComponentType<P>,
+  Component: ComponentType<P>
   propsAreEqual?: (prevProps: P, nextProps: P) => boolean,
   componentName?: string,
 ): MemoExoticComponent<ComponentType<P>> {
@@ -213,7 +212,7 @@ export function useOptimizedMemo<T>(
 
 // Lazy component wrapper with loading states
 export function createLazyComponent<P extends Record<string, any>>(
-  importFn: () => Promise<{ default: ComponentType<P> }>,
+  importFn: () => Promise<{ default: ComponentType<P> }>
   fallback?: ReactNode,
   errorFallback?: ReactNode,
 ) {
@@ -251,7 +250,7 @@ export function createLazyComponent<P extends Record<string, any>>(
 }
 
 // Virtual scrolling hook for large lists
-export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5,  }) {
+export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5 }) {
   const [scrollTop, setScrollTop] = useState(0);
 
   const visibleRange = useMemo(() => {
@@ -275,8 +274,7 @@ export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, ov
     visibleRange,
     totalHeight,
     offsetY,
-    handleScroll,
-  };
+    handleScroll };
 }
 
 // Image optimization hook with lazy loading
@@ -344,8 +342,7 @@ return options.placeholder || '';
     isError,
     isVisible,
     onLoad: handleLoad,
-    onError: handleError,
-  };
+    onError: handleError };
 }
 
 // Bundle splitting utility
@@ -380,7 +377,7 @@ export function createAsyncComponent<_P extends object>(
 
 // Performance monitoring wrapper for components
 export function withPerformanceMonitoring<P extends object>(
-  Component: ComponentType<P>,
+  Component: ComponentType<P>
   componentName?: string,
 ) {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
@@ -401,8 +398,7 @@ export function withPerformanceMonitoring<P extends object>(
         (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
           _id: any,
           _root: any,
-          _priorityLevel: any,
-        ) => {
+          _priorityLevel: any) => {
           // Custom performance tracking logic
           console.debug('Component committed to root');
         };
@@ -475,9 +471,7 @@ export const optimizationUtils = {
   withPerformanceMonitoring,
   useDebouncedState,
   useThrottledCallback,
-  useComponentPerformance,
-};
+  useComponentPerformance };
 
 export default optimizationUtils;
-
 

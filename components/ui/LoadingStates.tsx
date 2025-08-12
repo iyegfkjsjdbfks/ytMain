@@ -1,6 +1,4 @@
-import React, { FC, ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { cn } from '../../utils/cn';
 
 // Base loading props interface
@@ -18,23 +16,20 @@ const sizeMap = {
   sm: { spinner: 'w-4 h-4', text: 'text-sm' },
   md: { spinner: 'w-5 h-5', text: 'text-base' },
   lg: { spinner: 'w-6 h-6', text: 'text-lg' },
-  xl: { spinner: 'w-8 h-8', text: 'text-xl' },
-};
+  xl: { spinner: 'w-8 h-8', text: 'text-xl' } };
 
 // Color mappings
 const colorMap = {
   primary: 'text-red-600',
   secondary: 'text-gray-600',
   white: 'text-white',
-  gray: 'text-gray-400',
-};
+  gray: 'text-gray-400' };
 
 // Base Spinner Component
 export const Spinner: React.FC<LoadingProps> = ({
   className = '',
   size = 'md',
-  color = 'primary',
-}) => {
+  color = 'primary' }) => {
   const sizeClass = sizeMap[size].spinner;
   const colorClass = colorMap[color];
 
@@ -56,8 +51,7 @@ export const Spinner: React.FC<LoadingProps> = ({
 export const DotsLoader: React.FC<LoadingProps> = ({
   className = '',
   size = 'md',
-  color = 'primary',
-}) => {
+  color = 'primary' }) => {
   const colorClass = colorMap[color];
   const dotSize = size === 'xs' ? 'w-1 h-1' : size === 'sm' ? 'w-1.5 h-1.5' : size === 'md' ? 'w-2 h-2' : size === 'lg' ? 'w-2.5 h-2.5' : 'w-3 h-3';
 
@@ -74,8 +68,7 @@ export const DotsLoader: React.FC<LoadingProps> = ({
           )}
           style={{
             animationDelay: `${i * 0.2}s`,
-            animationDuration: '1s',
-          }}
+            animationDuration: '1s' }}
         />
       ))}
     </div>
@@ -85,8 +78,7 @@ export const DotsLoader: React.FC<LoadingProps> = ({
 // Pulse Loading Component
 export const PulseLoader: React.FC<LoadingProps & { children?: React.ReactNode }> = ({
   className = '',
-  children,
-}) => {
+  children }) => {
   return (
     <div className={cn('animate-pulse', className)} role="status" aria-label="Loading">
       {children}
@@ -104,15 +96,13 @@ export const Skeleton: React.FC<{
   className = '',
   width = 'w-full',
   height = 'h-4',
-  rounded = 'md',
-}) => {
+  rounded = 'md' }) => {
   const roundedClass = {
     none: 'rounded-none',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',
-    full: 'rounded-full',
-  }[rounded];
+    full: 'rounded-full' }[rounded];
 
   return (
     <div
@@ -135,8 +125,7 @@ export const Loading: React.FC<LoadingProps> = ({
   size = 'md',
   variant = 'spinner',
   color = 'primary',
-  text,
-}) => {
+  text }) => {
   const textSizeClass = sizeMap[size].text;
   const colorClass = colorMap[color];
 

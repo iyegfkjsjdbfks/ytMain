@@ -1,6 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface ErrorMessageProps {
@@ -18,25 +16,21 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   retryText = 'Click to retry',
   showIcon = true,
   className = '',
-  variant = 'overlay',
-}) => {
+  variant = 'overlay' }) => {
   const variantClasses = {
     overlay: 'absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 cursor-pointer',
     inline: 'flex items-center space-x-2 p-4 bg-red-50 border border-red-200 rounded-md',
-    card: 'p-6 bg-white border border-red-200 rounded-lg shadow-sm',
-  };
+    card: 'p-6 bg-white border border-red-200 rounded-lg shadow-sm' };
 
   const textColorClasses = {
     overlay: 'text-white',
     inline: 'text-red-800',
-    card: 'text-red-800',
-  };
+    card: 'text-red-800' };
 
   const iconColorClasses = {
     overlay: 'text-white',
     inline: 'text-red-500',
-    card: 'text-red-500',
-  };
+    card: 'text-red-500' };
 
   const handleClick = (e: React.MouseEvent) => {
     if (onRetry) {

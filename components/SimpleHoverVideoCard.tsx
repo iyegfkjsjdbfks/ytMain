@@ -305,5 +305,3 @@ return duration;
 
 export default SimpleHoverVideoCard;
 
-
-

@@ -33,8 +33,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
   videoId,
   existingPlaylists,
   onSaveToPlaylist,
-  onCreatePlaylist,
-}) => {
+  onCreatePlaylist }) => {
   const [selectedPlaylistId, setSelectedPlaylistId] = useState<string>('');
   const [showCreateForm, setShowCreateForm] = useState(false);
 
@@ -55,13 +54,11 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
 
   const {
     loading: saveLoading,
-    error: saveError,
-  } = useAsyncState(async () => {}, [], { initialLoading: false });
+    error: saveError } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   const {
     loading: createLoading,
-    error: createError,
-  } = useAsyncState(async () => {}, [], { initialLoading: false });
+    error: createError } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   // Handle saving to existing playlist
   const handleSaveToExisting = async () => {
@@ -103,14 +100,12 @@ return 'Playlist name must be at least 3 characters';
 return 'Playlist name must be less than 100 characters';
 }
         return null;
-      },
-    },
+      } },
     {
       name: 'description',
       label: 'Description (Optional)',
       type: 'textarea' as const, placeholder: 'Enter playlist description',
-      rows: 3,
-    },
+      rows: 3 },
   ];
 
   const modalFooter = (

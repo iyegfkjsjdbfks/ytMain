@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useState, useEffect, useCallback, useRef, lazy } from 'react';
@@ -24,8 +25,7 @@ const DEFAULT_OPTIONS: Required<VideoCacheOptions> = {
   prefetchCount: 5,
   cacheTime: 1000 * 60 * 30, // 30 minutes
   staleTime: 1000 * 60 * 5, // 5 minutes
-  enableIntersectionObserver: true,
-};
+  enableIntersectionObserver: true };
 
 export const useVideoCache = (options: VideoCacheOptions = {}) => {
   const opts = { ...DEFAULT_OPTIONS, ...options };
@@ -63,8 +63,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
       },
       {
         rootMargin: '100px', // Start loading 100px before element is visible
-        threshold: 0.1,
-      }
+        threshold: 0.1 }
     );
 
     return () => {
@@ -111,8 +110,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
           return response.json();
         },
         staleTime: opts.staleTime,
-        gcTime: opts.cacheTime,
-      });
+        gcTime: opts.cacheTime });
     },
     [queryClient, opts.staleTime, opts.cacheTime]
   );
@@ -164,8 +162,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
       cacheSize: videoQueries.reduce((size, query) => {
         const { data } = query.state;
         return size + (data ? JSON.stringify(data).length : 0);
-      }, 0),
-    };
+      }, 0) };
   }, [queryClient, visibleVideos.size]);
 
   // Preload video thumbnails
@@ -224,8 +221,7 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
     getCacheStats,
 
     // Configuration
-    options: opts,
-  };
+    options: opts };
 };
 
 // Hook for individual video with caching
@@ -247,8 +243,7 @@ export const useCachedVideo = (
     },
     staleTime: opts.staleTime,
     gcTime: opts.cacheTime,
-    enabled: !!videoId,
-  });
+    enabled: !!videoId });
 };
 
 export default useVideoCache;

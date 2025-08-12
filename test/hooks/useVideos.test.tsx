@@ -19,10 +19,7 @@ const createWrapper = () => {
       queries: {
         retry: false,
         staleTime: 0,
-        gcTime: 0,
-      },
-    },
-  });
+        gcTime: 0 } } });
 
   const Wrapper = ({ children }) => (
     <QueryClientProvider client={queryClient}>
@@ -59,8 +56,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar1.jpg',
               subscribers: 1000,
               subscribersFormatted: '1K subscribers',
-              isVerified: false,
-            },
+              isVerified: false },
             duration: '10:00',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '1 day ago',
@@ -75,8 +71,7 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-1',
             channelAvatarUrl: 'https://example.com/avatar1.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
           {
             id: 'video-2',
             title: 'Test Video 2',
@@ -94,8 +89,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar2.jpg',
               subscribers: 2000,
               subscribersFormatted: '2K subscribers',
-              isVerified: false,
-            },
+              isVerified: false },
             duration: '5:00',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '2 days ago',
@@ -110,16 +104,13 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-2',
             channelAvatarUrl: 'https://example.com/avatar2.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
         ],
         sources: {
           local: { count: 1, hasMore: false },
-          youtube: { count: 1, hasMore: false },
-        },
+          youtube: { count: 1, hasMore: false } },
         totalCount: 2,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
 
@@ -164,8 +155,7 @@ describe('Unified Video Hooks', () => {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
 
@@ -202,8 +192,7 @@ describe('Unified Video Hooks', () => {
           avatarUrl: 'https://example.com/avatar.jpg',
           subscribers: 1000,
           subscribersFormatted: '1K subscribers',
-          isVerified: false,
-        },
+          isVerified: false },
         duration: '10:00',
         publishedAt: new Date().toISOString(),
         publishedAtFormatted: '1 day ago',
@@ -218,8 +207,7 @@ describe('Unified Video Hooks', () => {
         channelId: 'channel-1',
         channelAvatarUrl: 'https://example.com/avatar.jpg',
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+        updatedAt: new Date().toISOString() };
 
       mockUnifiedDataService.getVideoById.mockResolvedValue(mockVideo);
 
@@ -306,8 +294,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar1.jpg',
               subscribers: 1000,
               subscribersFormatted: '1K subscribers',
-              isVerified: false,
-            },
+              isVerified: false },
             duration: '10:00',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '1 day ago',
@@ -322,8 +309,7 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-1',
             channelAvatarUrl: 'https://example.com/avatar1.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
           {
             id: 'trending-2',
             title: 'Trending Video 2',
@@ -341,8 +327,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar2.jpg',
               subscribers: 2000,
               subscribersFormatted: '2K subscribers',
-              isVerified: false,
-            },
+              isVerified: false },
             duration: '5:00',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '2 days ago',
@@ -357,16 +342,13 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-2',
             channelAvatarUrl: 'https://example.com/avatar2.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
         ],
         sources: {
           local: { count: 1, hasMore: false },
-          youtube: { count: 1, hasMore: false },
-        },
+          youtube: { count: 1, hasMore: false } },
         totalCount: 2,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
 
@@ -389,8 +371,7 @@ describe('Unified Video Hooks', () => {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
 
@@ -430,8 +411,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar1.jpg',
               subscribers: 5000,
               subscribersFormatted: '5K subscribers',
-              isVerified: false,
-            },
+              isVerified: false },
             duration: '0:30',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '1 hour ago',
@@ -446,8 +426,7 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-1',
             channelAvatarUrl: 'https://example.com/avatar1.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
           {
             id: 'short-2',
             title: 'Short Video 2',
@@ -465,8 +444,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar2.jpg',
               subscribers: 10000,
               subscribersFormatted: '10K subscribers',
-              isVerified: true,
-            },
+              isVerified: true },
             duration: '0:45',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '2 hours ago',
@@ -481,16 +459,13 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-2',
             channelAvatarUrl: 'https://example.com/avatar2.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
         ],
         sources: {
           local: { count: 2, hasMore: false },
-          youtube: { count: 0, hasMore: false },
-        },
+          youtube: { count: 0, hasMore: false } },
         totalCount: 2,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.getShortsVideos.mockResolvedValue(mockResponse);
 
@@ -530,8 +505,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar1.jpg',
               subscribers: 5000,
               subscribersFormatted: '5K subscribers',
-              isVerified: false,
-            },
+              isVerified: false },
             duration: '10:00',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '1 day ago',
@@ -546,8 +520,7 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-1',
             channelAvatarUrl: 'https://example.com/avatar1.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
           {
             id: 'search-2',
             title: 'Search Result 2',
@@ -565,8 +538,7 @@ describe('Unified Video Hooks', () => {
               avatarUrl: 'https://example.com/avatar2.jpg',
               subscribers: 10000,
               subscribersFormatted: '10K subscribers',
-              isVerified: true,
-            },
+              isVerified: true },
             duration: '5:00',
             publishedAt: new Date().toISOString(),
             publishedAtFormatted: '2 days ago',
@@ -581,16 +553,13 @@ describe('Unified Video Hooks', () => {
             channelId: 'channel-2',
             channelAvatarUrl: 'https://example.com/avatar2.jpg',
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
         ],
         sources: {
           local: { count: 1, hasMore: false },
-          youtube: { count: 1, hasMore: false },
-        },
+          youtube: { count: 1, hasMore: false } },
         totalCount: 2,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.searchVideos.mockResolvedValue(mockResponse);
 
@@ -694,15 +663,13 @@ describe('Unified Video Hooks', () => {
     it('should apply custom configuration options', async () => {
       const customConfig = {
         staleTime: 30000,
-        refetchOnWindowFocus: false,
-      };
+        refetchOnWindowFocus: false };
 
       const mockResponse = {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
 
@@ -745,8 +712,7 @@ describe('Unified Video Hooks', () => {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false,
-      };
+        hasMore: false };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
 
@@ -769,5 +735,4 @@ describe('Unified Video Hooks', () => {
     });
   });
 });
-
 

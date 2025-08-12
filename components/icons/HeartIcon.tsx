@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 // Solid Heart Icon path for a typical "like" button appearance
 const SolidHeartIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (
   <svg

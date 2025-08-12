@@ -11,8 +11,7 @@ const PWAStatus: React.FC = () => {
     installPWA,
     dismissInstallPrompt,
     updateAvailable,
-    installUpdate,
-  } = usePWA();
+    installUpdate } = usePWA();
 
   const [showInstallPrompt, setShowInstallPrompt] = React.useState(false);
 
@@ -152,5 +151,4 @@ const PWAStatus: React.FC = () => {
 };
 
 export default PWAStatus;
-
 

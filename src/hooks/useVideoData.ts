@@ -17,8 +17,7 @@ export function useVideos() {
   // Provide empty array as initial data to show UI immediately
   return useAsyncData<Video[]>(fetchVideos, {
     initialData: [],
-    dependencies: [],
-  });
+    dependencies: [] });
 }
 
 /**
@@ -39,8 +38,7 @@ export function useTrendingVideos(category = 'all') {
         ...v,
         thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
         publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
-        channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '',
-      })) as Video;
+        channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '' })) as Video;
       return [...normalized]
         .sort(
           (a, b) =>
@@ -56,8 +54,7 @@ export function useTrendingVideos(category = 'all') {
       ...v,
       thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
       publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
-      channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '',
-    })) as Video;
+      channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '' })) as Video;
 
     const sortedByViews = [...allVideos].sort((a, b) => {
       const viewsA = parseViewCount(a.views as string);
@@ -69,8 +66,7 @@ export function useTrendingVideos(category = 'all') {
 
   return useAsyncData<Video[]>(fetchTrendingVideos, {
     initialData: [],
-    dependencies: [category],
-  });
+    dependencies: [category] });
 }
 
 /**
@@ -102,8 +98,7 @@ export function useSubscriptionsFeed() {
 
   return useAsyncData<Video[]>(fetchSubscriptionsFeed, {
     initialData: [],
-    dependencies: [],
-  });
+    dependencies: [] });
 }
 
 /**
@@ -117,6 +112,5 @@ export function useChannelVideos(channelName: any) {
 
   return useAsyncData<Video[]>(fetchChannelVideos, {
     initialData: [],
-    dependencies: [channelName],
-  });
+    dependencies: [channelName] });
 }

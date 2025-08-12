@@ -55,15 +55,13 @@ const BaseForm: React.FC<BaseFormProps> = ({
   initialValues = {},
   children,
   showResetButton = false,
-  resetLabel = 'Reset',
-}) => {
+  resetLabel = 'Reset' }) => {
   const {
     values,
     isSubmitting,
     setValue,
     setError,
-    reset,
-  } = useFormState({ initialValues });
+    reset } = useFormState({ initialValues });
 
   // Track touched fields manually
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});

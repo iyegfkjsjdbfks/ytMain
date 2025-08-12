@@ -13,20 +13,17 @@ const AccountLayout: React.FC = () => {
       path: '/account/settings',
       label: 'General Settings',
       icon: Cog8ToothIcon,
-      description: 'Manage your account preferences',
-    },
+      description: 'Manage your account preferences' },
     {
       path: '/account/privacy',
       label: 'Privacy & Security',
       icon: ShieldCheckIcon,
-      description: 'Control your privacy settings',
-    },
+      description: 'Control your privacy settings' },
     {
       path: '/account/data',
       label: 'Your Data',
       icon: DocumentTextIcon,
-      description: 'Download and manage your data',
-    },
+      description: 'Download and manage your data' },
   ];
 
   return (

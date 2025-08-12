@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
+import React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
 
@@ -20,8 +19,7 @@ const VideoList: React.FC<VideoListProps> = ({
   layout = 'grid',
   variant = 'default',
   emptyMessage = 'No videos found',
-  onVideoClick,
-}) => {
+  onVideoClick }) => {
   if (!videos.length) {
     return (
       <div className='flex items-center justify-center py-10'>
@@ -83,5 +81,4 @@ const VideoList: React.FC<VideoListProps> = ({
 };
 
 export default VideoList;
-
 

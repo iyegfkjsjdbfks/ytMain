@@ -1,6 +1,4 @@
-import React, { FC, ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { cn } from '../../utils/cn';
 
 interface UnifiedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -21,29 +19,25 @@ const variantClasses = {
   ghost: 'bg-transparent hover:bg-neutral-100 text-neutral-700 border-transparent dark:hover:bg-neutral-800 dark:text-neutral-300 focus-visible:ring-sky-500',
   danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent focus-visible:ring-red-500',
   action: 'bg-black bg-opacity-50 hover:bg-opacity-70 text-white border-transparent focus-visible:ring-white focus-visible:ring-opacity-50',
-  link: 'bg-transparent hover:underline text-sky-600 dark:text-sky-400 border-transparent focus-visible:ring-sky-500 p-0',
-};
+  link: 'bg-transparent hover:underline text-sky-600 dark:text-sky-400 border-transparent focus-visible:ring-sky-500 p-0' };
 
 const sizeClasses = {
   xs: 'px-2.5 py-1.5 text-xs',
   sm: 'px-3 py-2 text-sm',
   md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
-};
+  lg: 'px-6 py-3 text-base' };
 
 const roundedClasses = {
   sm: 'rounded-sm',
   md: 'rounded-md',
   lg: 'rounded-lg',
-  full: 'rounded-full',
-};
+  full: 'rounded-full' };
 
 const iconSizeClasses = {
   xs: 'w-3.5 h-3.5',
   sm: 'w-4 h-4',
   md: 'w-5 h-5',
-  lg: 'w-5 h-5',
-};
+  lg: 'w-5 h-5' };
 
 const LoadingSpinner: React.FC<{ size: string }> = ({ size }) => (
   <svg
@@ -96,8 +90,7 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
       'border': !isActionVariant,
       'w-full': fullWidth,
       'opacity-70 cursor-not-allowed': isDisabled,
-      'font-semibold': !isLinkVariant,
-    },
+      'font-semibold': !isLinkVariant },
 
     // Size and variant classes
     !isLinkVariant && sizeClasses[size],

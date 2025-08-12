@@ -66,8 +66,7 @@ export const LiveStreamStudio: React.FC = () => {
     enableDonations: false,
     quality: '1080p',
     bitrate: 4500,
-    frameRate: 30,
-  });
+    frameRate: 30 });
 
   const [stats, setStats] = useState<StreamStats>({
     viewers: 0,
@@ -75,8 +74,7 @@ export const LiveStreamStudio: React.FC = () => {
     duration: 0,
     likes: 0,
     chatMessages: 0,
-    streamHealth: 'excellent',
-  });
+    streamHealth: 'excellent' });
 
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
@@ -85,8 +83,7 @@ export const LiveStreamStudio: React.FC = () => {
       message: 'Welcome to the stream! Please follow the community guidelines.',
       timestamp: new Date(),
       isModerator: true,
-      badges: ['moderator'],
-    },
+      badges: ['moderator'] },
   ]);
 
   useEffect(() => {
@@ -100,8 +97,7 @@ export const LiveStreamStudio: React.FC = () => {
             0,
             prev.viewers + Math.floor(Math.random() * 3) - 1
           ),
-          likes: prev.likes + (Math.random() > 0.95 ? 1 : 0),
-        }));
+          likes: prev.likes + (Math.random() > 0.95 ? 1 : 0) }));
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -113,14 +109,11 @@ export const LiveStreamStudio: React.FC = () => {
         video: {
           width: { ideal: 1920 },
           height: { ideal: 1080 },
-          frameRate: { ideal: settings.frameRate },
-        },
+          frameRate: { ideal: settings.frameRate } },
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
-          autoGainControl: true,
-        },
-      });
+          autoGainControl: true } });
 
       setStream(mediaStream);
       if (videoRef.current) {
@@ -188,8 +181,7 @@ export const LiveStreamStudio: React.FC = () => {
       message: chatMessage,
       timestamp: new Date(),
       isOwner: true,
-      badges: ['owner'],
-    };
+      badges: ['owner'] };
 
     setChatMessages(prev => [...prev, newMessage]);
     setChatMessage('');
@@ -388,8 +380,7 @@ export const LiveStreamStudio: React.FC = () => {
                     onChange={e =>
                       setSettings(prev => ({
                         ...prev,
-                        category: e.target.value,
-                      }))
+                        category: e.target.value }))
                     }
                     className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                   >
@@ -471,5 +462,4 @@ export const LiveStreamStudio: React.FC = () => {
 };
 
 export default LiveStreamStudio;
-
 

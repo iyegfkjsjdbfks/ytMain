@@ -156,8 +156,7 @@ return;
       const response = await fetch(`/api/videos/${currentVideo.id}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
-      });
+        body: JSON.stringify({ text }) });
 
       const newComment = await response.json();
       setComments(prev => [newComment.data, ...prev]);
@@ -239,8 +238,7 @@ describe('Integration Tests', () => {
       if (url.includes('/api/videos') && !url.includes('/comments')) {
         return {
           ok: true,
-          json: async () => ({ success: true, data: mockVideos }),
-        };
+          json: async () => ({ success: true, data: mockVideos }) };
       }
 
       if (url.includes('/comments')) {
@@ -248,14 +246,12 @@ describe('Integration Tests', () => {
           const newComment = testUtils.generateMockComment();
           return {
             ok: true,
-            json: async () => ({ success: true, data: newComment }),
-          };
+            json: async () => ({ success: true, data: newComment }) };
         }
 
         return {
           ok: true,
-          json: async () => ({ success: true, data: mockComments }),
-        };
+          json: async () => ({ success: true, data: mockComments }) };
       }
 
       return { ok: false, status: 404 };
@@ -363,8 +359,7 @@ describe('Integration Tests', () => {
           expect.stringContaining('/comments'),
           expect.objectContaining({
             method: 'POST',
-            body: JSON.stringify({ text: 'This is a test comment' }),
-          }),
+            body: JSON.stringify({ text: 'This is a test comment' }) }),
         );
       });
 
@@ -437,8 +432,7 @@ describe('Integration Tests', () => {
         'video_completed',
         1,
         expect.objectContaining({
-          videoId: mockVideos[0].id,
-        }),
+          videoId: mockVideos[0].id }),
       );
     });
 
@@ -550,8 +544,7 @@ describe('Integration Tests', () => {
         expect(global.fetch).toHaveBeenCalledWith(
           expect.any(String),
           expect.objectContaining({
-            body: expect.not.stringContaining('<script>'),
-          }),
+            body: expect.not.stringContaining('<script>') }),
         );
       });
     });
@@ -565,9 +558,7 @@ describe('Integration Tests', () => {
           data: {
             ...mockVideos[0],
             title: '<script>alert("XSS")</script>Malicious Title'
-          },
-        }),
-      });
+          } }) });
 
       customRender(<VideoPage />);
 
@@ -642,8 +633,7 @@ describe('Integration Tests', () => {
         await testUtils.simulateNetworkDelay(2000); // 2 second delay
         return {
           ok: true,
-          json: async () => ({ success: true, data: mockVideos }),
-        };
+          json: async () => ({ success: true, data: mockVideos }) };
       });
 
       customRender(<VideoPage />);
@@ -663,5 +653,4 @@ describe('Integration Tests', () => {
     });
   });
 });
-
 

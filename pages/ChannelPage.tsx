@@ -1,3 +1,4 @@
+import { Channel } from '../types';
 import { useState, useEffect, FC } from 'react';
 
 import { useParams } from 'react-router-dom';
@@ -76,8 +77,7 @@ const ChannelPage: React.FC = () => {
             videoCount: 0,
             isVerified: false,
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          };
+            updatedAt: new Date().toISOString() };
           setChannel(mockChannel);
 
           // Fetch videos for the channel name
@@ -144,6 +144,4 @@ const ChannelPage: React.FC = () => {
 };
 
 export default ChannelPage;
-
-
 

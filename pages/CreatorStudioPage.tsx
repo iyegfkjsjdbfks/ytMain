@@ -55,38 +55,32 @@ const CreatorStudioPage: React.FC = () => {
           metric: 'Average View Duration',
           value: '4:32',
           change: 12.5,
-          period: 'vs last month',
-        },
+          period: 'vs last month' },
         {
           metric: 'Subscriber Growth',
           value: formatNumber(1250),
           change: 8.3,
-          period: 'this month',
-        },
+          period: 'this month' },
         {
           metric: 'Top Traffic Source',
           value: 'YouTube Search',
           change: 15.2,
-          period: 'vs last month',
-        },
+          period: 'vs last month' },
         {
           metric: 'Peak Viewing Time',
           value: '8:00 PM',
           change: -2.1,
-          period: 'vs last month',
-        },
+          period: 'vs last month' },
         {
           metric: 'Audience Retention',
           value: '68%',
           change: 5.7,
-          period: 'vs last month',
-        },
+          period: 'vs last month' },
         {
           metric: 'Click-through Rate',
           value: '4.2%',
           change: 3.8,
-          period: 'vs last month',
-        },
+          period: 'vs last month' },
       ];
 
       // Mock content ideas
@@ -98,8 +92,7 @@ const CreatorStudioPage: React.FC = () => {
           trending: true,
           difficulty: 'Medium',
           estimatedViews: 25000,
-          tags: ['React', 'JavaScript', 'Web Development'],
-        },
+          tags: ['React', 'JavaScript', 'Web Development'] },
         {
           id: '2',
           title: 'AI Tools for Content Creators',
@@ -107,8 +100,7 @@ const CreatorStudioPage: React.FC = () => {
           trending: true,
           difficulty: 'Easy',
           estimatedViews: 35000,
-          tags: ['AI', 'Content Creation', 'Tools'],
-        },
+          tags: ['AI', 'Content Creation', 'Tools'] },
         {
           id: '3',
           title: 'Building a Personal Brand Online',
@@ -116,8 +108,7 @@ const CreatorStudioPage: React.FC = () => {
           trending: false,
           difficulty: 'Hard',
           estimatedViews: 18000,
-          tags: ['Branding', 'Marketing', 'Social Media'],
-        },
+          tags: ['Branding', 'Marketing', 'Social Media'] },
         {
           id: '4',
           title: 'TypeScript Best Practices 2024',
@@ -125,8 +116,7 @@ const CreatorStudioPage: React.FC = () => {
           trending: true,
           difficulty: 'Medium',
           estimatedViews: 22000,
-          tags: ['TypeScript', 'Programming', 'Best Practices'],
-        },
+          tags: ['TypeScript', 'Programming', 'Best Practices'] },
         {
           id: '5',
           title: 'Productivity Hacks for Developers',
@@ -134,8 +124,7 @@ const CreatorStudioPage: React.FC = () => {
           trending: false,
           difficulty: 'Easy',
           estimatedViews: 15000,
-          tags: ['Productivity', 'Development', 'Tips'],
-        },
+          tags: ['Productivity', 'Development', 'Tips'] },
       ];
 
       // Mock scheduled content
@@ -145,22 +134,19 @@ const CreatorStudioPage: React.FC = () => {
           title: 'Weekly Tech News Roundup',
           type: 'video',
           scheduledDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-          status: 'ready',
-        },
+          status: 'ready' },
         {
           id: '2',
           title: 'Quick CSS Tip #47',
           type: 'short',
           scheduledDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-          status: 'processing',
-        },
+          status: 'processing' },
         {
           id: '3',
           title: 'Live Q&A Session',
           type: 'live',
           scheduledDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-          status: 'scheduled',
-        },
+          status: 'scheduled' },
       ];
 
       setTimeout(() => {
@@ -180,43 +166,37 @@ const CreatorStudioPage: React.FC = () => {
       description: 'Professional thumbnail designs for your videos',
       type: 'template',
       link: '/resources/thumbnails',
-      icon: <CameraIcon className="w-5 h-5" />,
-    },
+      icon: <CameraIcon className="w-5 h-5" /> },
     {
       title: 'Content Calendar',
       description: 'Plan and schedule your content strategy',
       type: 'tool',
       link: '/resources/calendar',
-      icon: <CalendarDaysIcon className="w-5 h-5" />,
-    },
+      icon: <CalendarDaysIcon className="w-5 h-5" /> },
     {
       title: 'SEO Optimization Guide',
       description: 'Improve your video discoverability',
       type: 'guide',
       link: '/resources/seo-guide',
-      icon: <AcademicCapIcon className="w-5 h-5" />,
-    },
+      icon: <AcademicCapIcon className="w-5 h-5" /> },
     {
       title: 'Video Editing Tutorial',
       description: 'Learn professional editing techniques',
       type: 'tutorial',
       link: '/resources/editing-tutorial',
-      icon: <PencilSquareIcon className="w-5 h-5" />,
-    },
+      icon: <PencilSquareIcon className="w-5 h-5" /> },
     {
       title: 'Analytics Deep Dive',
       description: 'Understanding your channel metrics',
       type: 'guide',
       link: '/analytics',
-      icon: <ChartBarIcon className="w-5 h-5" />,
-    },
+      icon: <ChartBarIcon className="w-5 h-5" /> },
     {
       title: 'Community Building',
       description: 'Strategies to grow your audience',
       type: 'guide',
       link: '/resources/community',
-      icon: <UserGroupIcon className="w-5 h-5" />,
-    },
+      icon: <UserGroupIcon className="w-5 h-5" /> },
   ];
 
   const getDifficultyColor = (difficulty: any) => {
@@ -495,6 +475,4 @@ const CreatorStudioPage: React.FC = () => {
 };
 
 export default CreatorStudioPage;
-
-
 

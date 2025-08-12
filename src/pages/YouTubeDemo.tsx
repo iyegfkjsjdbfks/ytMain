@@ -129,15 +129,12 @@ const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
   playerVars: {
     autoplay: 0,
     controls: 1,
-    modestbranding: 1,
-  },
+    modestbranding: 1 },
   events: {
     onReady: (event) => {
       },
     onStateChange: (event) => {
-      },
-  },
-});
+      } } });
 
 // Control the player
 player.playVideo();
@@ -175,5 +172,4 @@ const YouTubeDemoWithErrorBoundary = () => (
 );
 
 export default YouTubeDemoWithErrorBoundary;
-
 

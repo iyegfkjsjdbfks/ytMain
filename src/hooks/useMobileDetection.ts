@@ -20,8 +20,7 @@ export const useMobileDetection = (): MobileDetectionResult => {
         isTouchDevice: false,
         screenSize: 'lg',
         orientation: 'landscape',
-        deviceType: 'desktop',
-      };
+        deviceType: 'desktop' };
     }
 
     return getDetectionResult();
@@ -83,8 +82,7 @@ export const useMobileDetection = (): MobileDetectionResult => {
       isTouchDevice,
       screenSize,
       orientation,
-      deviceType,
-    };
+      deviceType };
   }
 
   useEffect(() => {
@@ -99,12 +97,12 @@ export const useMobileDetection = (): MobileDetectionResult => {
       }, 100);
     };
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('orientationchange', handleOrientationChange);
+    window.addEventListener('resize', handleResize as EventListener);
+    window.addEventListener('orientationchange', handleOrientationChange as EventListener);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('orientationchange', handleOrientationChange);
+      window.removeEventListener('resize', handleResize as EventListener);
+      window.removeEventListener('orientationchange', handleOrientationChange as EventListener);
     };
   }, []);
 
@@ -122,8 +120,7 @@ export const useBreakpoint = () => {
     isLg: screenSize === 'lg',
     isXl: screenSize === 'xl',
     is2Xl: screenSize === '2xl',
-    screenSize,
-  };
+    screenSize };
 };
 
 // Hook for touch interactions
@@ -181,8 +178,7 @@ export const useTouchInteractions = () => {
     touchEnd,
     handleTouchStart,
     handleTouchEnd,
-    getSwipeDirection,
-  };
+    getSwipeDirection };
 };
 
 // Hook for viewport dimensions
@@ -199,8 +195,8 @@ export const useViewport = () => {
       setViewport({ width: window.innerWidth, height: window.innerHeight });
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize as EventListener);
+    return () => window.removeEventListener('resize', handleResize as EventListener);
   }, []);
 
   return viewport;

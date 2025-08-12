@@ -40,8 +40,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   footer,
   className = '',
   overlayClassName = '',
-  preventBodyScroll = true,
-}) => {
+  preventBodyScroll = true }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
@@ -65,8 +64,8 @@ const BaseModal: React.FC<BaseModalProps> = ({
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+      document.addEventListener('keydown', handleEscape as EventListener);
+      return () => document.removeEventListener('keydown', handleEscape as EventListener);
     }
     return undefined;
   }, [isOpen, closeOnEscape, onClose]);

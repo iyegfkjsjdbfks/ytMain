@@ -26,8 +26,7 @@ export const useVideoAutoplay = ({
   actions,
   setIsManuallyPaused,
   enableAutoplay = false,
-  unmuteOnAutoplay = false,
-}: UseVideoAutoplayProps) => {
+  unmuteOnAutoplay = false }: UseVideoAutoplayProps) => {
   useEffect(() => {
     if (!enableAutoplay) {
       return;

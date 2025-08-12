@@ -42,8 +42,7 @@ export const trackEvent = (
 export const trackPageView = (pagePath: any, pageTitle?: string): void => {
   trackEvent('page_view', {
     page_path: pagePath,
-    page_title: pageTitle,
-  });
+    page_title: pageTitle });
 };
 
 /**
@@ -54,6 +53,5 @@ export const trackPageView = (pagePath: any, pageTitle?: string): void => {
 export const trackInteraction = (element: HTMLElement, action: any): void => {
   trackEvent('user_interaction', {
     element,
-    action,
-  });
+    action });
 };

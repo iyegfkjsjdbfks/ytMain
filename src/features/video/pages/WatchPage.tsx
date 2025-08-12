@@ -27,8 +27,7 @@ const WatchPage: React.FC = () => {
   const {
     data: video,
     loading,
-    error,
-  } = useUnifiedVideo(videoId, {
+    error } = useUnifiedVideo(videoId, {
     staleTime: 0, // Force fresh data
   });
   logger.debug(
@@ -49,8 +48,7 @@ const WatchPage: React.FC = () => {
       likes: video.likes,
       dislikes: video.dislikes,
       publishedAt: video.publishedAt,
-      source: video.source,
-    });
+      source: video.source });
 
     // Enhanced debugging for Google Custom Search videos
     if (video.source === 'google-search') {
@@ -63,29 +61,24 @@ const WatchPage: React.FC = () => {
           name: video.channel?.name,
           avatarUrl: video.channel?.avatarUrl,
           subscribers: video.channel?.subscribersFormatted,
-          isVerified: video.channel?.isVerified,
-        },
+          isVerified: video.channel?.isVerified },
         stats: {
           views: video.views,
           viewsFormatted: video.viewsFormatted,
           likes: video.likes,
           dislikes: video.dislikes,
-          commentCount: video.commentCount,
-        },
+          commentCount: video.commentCount },
         metadata: {
           duration: video.duration,
           publishedAt: video.publishedAt,
           publishedAtFormatted: video.publishedAtFormatted,
           category: video.category,
           tags: video.tags,
-          source: video.source,
-        },
+          source: video.source },
         technicalData: {
           videoUrl: video.videoUrl,
           thumbnailUrl: video.thumbnailUrl,
-          visibility: video.visibility,
-        },
-      });
+          visibility: video.visibility } });
     }
   }
   logger.debug('📊 WatchPage: Video object:', video);
@@ -160,13 +153,11 @@ const WatchPage: React.FC = () => {
             likeCount: unifiedVideo.likes,
             dislikeCount: unifiedVideo.dislikes,
             favoriteCount: 0,
-            commentCount: unifiedVideo.commentCount,
-          },
+            commentCount: unifiedVideo.commentCount },
           topicDetails: {
             topicIds: [],
             relevantTopicIds: [],
-            topicCategories: [],
-          },
+            topicCategories: [] },
           contentDetails: {
             duration: unifiedVideo.duration,
             dimension: '2d',
@@ -174,9 +165,7 @@ const WatchPage: React.FC = () => {
             caption: 'false',
             licensedContent: false,
             contentRating: {},
-            projection: 'rectangular',
-          },
-        })
+            projection: 'rectangular' } })
       );
 
       logger.debug(
@@ -187,8 +176,7 @@ const WatchPage: React.FC = () => {
           views: v.viewCount,
           source: v.id.startsWith('google-search-')
             ? 'Google Custom Search'
-            : 'YouTube API',
-        }))
+            : 'YouTube API' }))
       );
 
       setRecommendedVideos(convertedRecommendations);
@@ -232,13 +220,11 @@ const WatchPage: React.FC = () => {
           likeCount: 1000,
           dislikeCount: 10,
           favoriteCount: 0,
-          commentCount: 100,
-        },
+          commentCount: 100 },
         topicDetails: {
           topicIds: [],
           relevantTopicIds: [],
-          topicCategories: [],
-        },
+          topicCategories: [] },
         contentDetails: {
           duration: 'PT3M30S',
           dimension: '2d',
@@ -246,9 +232,7 @@ const WatchPage: React.FC = () => {
           caption: 'false',
           licensedContent: false,
           contentRating: {},
-          projection: 'rectangular',
-        },
-      };
+          projection: 'rectangular' } };
 
       setRecommendedVideos([fallbackVideo]);
       logger.debug('✅ Fallback video set for testing');
@@ -546,8 +530,7 @@ const WatchPage: React.FC = () => {
                                 .toString(),
                               10
                             )
-                          : (video.duration as number) || 0,
-                    } as unknown as Video
+                          : (video.duration as number) || 0 } as unknown as Video
                   }
                   autoplay={true}
                   width='100%'
@@ -901,5 +884,4 @@ const WatchPage: React.FC = () => {
 };
 
 export default WatchPage;
-
 

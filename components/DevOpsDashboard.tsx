@@ -9,7 +9,7 @@
  * - Feature flag management
  */
 
-import { useEffect, useState, memo, FC } from 'react';
+import { useEffect, useState, FC } from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
@@ -86,11 +86,11 @@ const DevOpsDashboard: React.FC = () => {
       // Transform data for dashboard
       const dashboardMetrics: DashboardMetrics = {
         performance: {
-          score: Math.round(performanceMetrics.find(m => m.name === 'performance-score')?.value || 85),
-          lcp: performanceMetrics.find(m => m.name === 'lcp')?.value || 1500,
-          fid: performanceMetrics.find(m => m.name === 'fid')?.value || 50,
-          cls: performanceMetrics.find(m => m.name === 'cls')?.value || 0.05,
-          memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage')?.value || 45, errorRate: performanceMetrics.find(m => m.name === 'error-rate')?.value || 0.1
+          score: Math.round(performanceMetrics.find(m => m.name === 'performance-score',)?.value || 85),
+          lcp: performanceMetrics.find(m => m.name === 'lcp',)?.value || 1500,
+          fid: performanceMetrics.find(m => m.name === 'fid',)?.value || 50,
+          cls: performanceMetrics.find(m => m.name === 'cls',)?.value || 0.05,
+          memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage',)?.value || 45, errorRate: performanceMetrics.find(m => m.name === 'error-rate',)?.value || 0.1
         },
         security: {
           score: Math.round(securityMetrics.securityScore),
@@ -99,7 +99,7 @@ const DevOpsDashboard: React.FC = () => {
         },
         deployment: {
           successRate: Math.round(deploymentMetrics.successRate * 100),
-          averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes
+          averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes,
           frequency: deploymentMetrics.deploymentFrequency, activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length
         },
         codeQuality: {
@@ -112,9 +112,7 @@ const DevOpsDashboard: React.FC = () => {
         featureFlags: {
           totalFlags: flagMetrics.totalFlags,
           activeFlags: flagMetrics.activeFlags,
-          experimentsRunning: 0, // flagMetrics.experimentsRunning,
-        },
-      };
+          experimentsRunning: 0, // flagMetrics.experimentsRunning } };
 
       setMetrics(dashboardMetrics);
 
@@ -135,8 +133,7 @@ const DevOpsDashboard: React.FC = () => {
             type: 'deployment' as const, severity: 'high' as const, title: 'Deployment Failed',
             description: `Pipeline ${exec.pipelineId} failed`,
             timestamp: exec.endTime || exec.startTime,
-            acknowledged: false,
-          })),
+            acknowledged: false }))
       ];
 
       // Add performance alerts
@@ -148,8 +145,7 @@ const DevOpsDashboard: React.FC = () => {
           title: 'Low Performance Score',
           description: `Performance score is ${dashboardMetrics.performance.score}`,
           timestamp: Date.now(),
-          acknowledged: false,
-        });
+          acknowledged: false });
       }
 
       // Add code quality alerts
@@ -161,8 +157,7 @@ const DevOpsDashboard: React.FC = () => {
           title: 'Low Code Quality Score',
           description: `Code quality score is ${dashboardMetrics.codeQuality.score}`,
           timestamp: Date.now(),
-          acknowledged: false,
-        });
+          acknowledged: false });
       }
 
       setAlerts(allAlerts.sort((a, b) => b.timestamp - a.timestamp));
@@ -220,14 +215,14 @@ return 'text-orange-600';
         <div>
           <p className="text-sm font-medium text-gray-600">{title}</p>
           <p className={`text-2xl font-semibold ${color}`}>{value}</p>
-          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>},
         </div>
-        {trend && (
+        {trend && (,
           <div className={`text-sm ${
-            trend === 'up' ? 'text-green-600' :
+            trend === 'up' ? 'text-green-600' :,
             trend === 'down' ? 'text-red-600' : 'text-gray-600'
           }`}>
-            {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '→'}
+            {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '→'},
           </div>
         )}
       </div>
@@ -242,11 +237,11 @@ return <div>Loading...</div>;
 
     return (
       <div className="space-y-6">
-        {/* Key Metrics Grid */}
+        {/* Key Metrics Grid */},
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard
-            title="Performance Score"
-            value={metrics.performance.score}
+          <MetricCard,
+            title="Performance Score",
+            value={metrics.performance.score},
             color={getScoreColor(metrics.performance.score)}
             trend="stable"
           />
@@ -339,7 +334,7 @@ return <div>Loading...</div>;
             ))}
             {alerts.length === 0 && (
               <div className="p-6 text-center text-gray-500">
-                No active alerts
+                No active alerts,
               </div>
             )}
           </div>
@@ -357,18 +352,18 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <MetricCard
-            title="Largest Contentful Paint"
-            value={`${metrics.performance.lcp}ms`}
-            color={metrics.performance.lcp < 2500 ? 'text-green-600' : 'text-red-600'}
+          <MetricCard,
+            title="Largest Contentful Paint",
+            value={`${metrics.performance.lcp}ms`},
+            color={metrics.performance.lcp < 2500 ? 'text-green-600' : 'text-red-600'},
           />
-          <MetricCard
-            title="First Input Delay"
-            value={`${metrics.performance.fid}ms`}
-            color={metrics.performance.fid < 100 ? 'text-green-600' : 'text-red-600'}
+          <MetricCard,
+            title="First Input Delay",
+            value={`${metrics.performance.fid}ms`},
+            color={metrics.performance.fid < 100 ? 'text-green-600' : 'text-red-600'},
           />
-          <MetricCard
-            title="Cumulative Layout Shift"
+          <MetricCard,
+            title="Cumulative Layout Shift",
             value={metrics.performance.cls.toFixed(3)}
             color={metrics.performance.cls < 0.1 ? 'text-green-600' : 'text-red-600'}
           />
@@ -396,19 +391,19 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard
-            title="Threats Detected"
-            value={metrics.security.threatsDetected}
-            color="text-red-600"
+          <MetricCard,
+            title="Threats Detected",
+            value={metrics.security.threatsDetected},
+            color="text-red-600",
           />
-          <MetricCard
-            title="Vulnerabilities"
-            value={metrics.security.vulnerabilities}
-            color={metrics.security.vulnerabilities === 0 ? 'text-green-600' : 'text-red-600'}
+          <MetricCard,
+            title="Vulnerabilities",
+            value={metrics.security.vulnerabilities},
+            color={metrics.security.vulnerabilities === 0 ? 'text-green-600' : 'text-red-600'},
           />
-          <MetricCard
-            title="Compliance Score"
-            value={`${metrics.security.complianceScore}%`}
+          <MetricCard,
+            title="Compliance Score",
+            value={`${metrics.security.complianceScore}%`},
             color={getScoreColor(metrics.security.complianceScore)}
           />
           <MetricCard
@@ -430,9 +425,9 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard
-            title="Success Rate"
-            value={`${metrics.deployment.successRate}%`}
+          <MetricCard,
+            title="Success Rate",
+            value={`${metrics.deployment.successRate}%`},
             color={getScoreColor(metrics.deployment.successRate)}
           />
           <MetricCard
@@ -464,9 +459,9 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard
-            title="Code Quality Score"
-            value={metrics.codeQuality.score}
+          <MetricCard,
+            title="Code Quality Score",
+            value={metrics.codeQuality.score},
             color={getScoreColor(metrics.codeQuality.score)}
           />
           <MetricCard
@@ -498,20 +493,20 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <MetricCard
-            title="Total Flags"
-            value={metrics.featureFlags.totalFlags}
-            color="text-blue-600"
+          <MetricCard,
+            title="Total Flags",
+            value={metrics.featureFlags.totalFlags},
+            color="text-blue-600",
           />
-          <MetricCard
-            title="Active Flags"
-            value={metrics.featureFlags.activeFlags}
-            color="text-green-600"
+          <MetricCard,
+            title="Active Flags",
+            value={metrics.featureFlags.activeFlags},
+            color="text-green-600",
           />
-          <MetricCard
-            title="Running Experiments"
-            value={metrics.featureFlags.experimentsRunning}
-            color="text-purple-600"
+          <MetricCard,
+            title="Running Experiments",
+            value={metrics.featureFlags.experimentsRunning},
+            color="text-purple-600",
           />
         </div>
       </div>
@@ -531,7 +526,7 @@ return <div>Loading...</div>;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* Header */},
       <div className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
@@ -564,10 +559,10 @@ return <div>Loading...</div>;
               { id: 'security', label: 'Security' },
               { id: 'deployment', label: 'Deployment' },
               { id: 'quality', label: 'Code Quality' },
-              { id: 'features', label: 'Feature Flags' },
+              { id: 'features', label: 'Feature Flags' }
             ].map((tab) => (
-              <button
-                key={tab.id}
+              <button,
+                key={tab.id},
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === tab.id

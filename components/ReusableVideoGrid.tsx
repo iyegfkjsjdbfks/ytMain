@@ -1,6 +1,4 @@
-import React, { FC, ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { VideoGridSkeleton } from './LoadingStates';
 import OptimizedVideoCard from './OptimizedVideoCard';
 import VideoCard from './VideoCard';
@@ -49,8 +47,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
   className = '',
   emptyMessage = 'No videos found',
   emptyIcon,
-  skeletonCount = 18,
-}) => {
+  skeletonCount = 18 }) => {
   // Grid column classes
   const getGridColumns = () => {
     if (columns === 'auto') {

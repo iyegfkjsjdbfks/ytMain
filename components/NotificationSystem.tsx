@@ -52,8 +52,8 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
   useEffect(() => {
@@ -91,8 +91,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         videoId: 'tech-review-1',
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
         isRead: false,
-        priority: 'medium',
-      },
+        priority: 'medium' },
       {
         id: '2',
         type: 'like',
@@ -101,8 +100,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         thumbnail: 'https://picsum.photos/120/68?random=2',
         timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago
         isRead: false,
-        priority: 'low',
-      },
+        priority: 'low' },
       {
         id: '3',
         type: 'comment',
@@ -114,8 +112,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         videoId: 'my-video-1',
         timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
         isRead: true,
-        priority: 'medium',
-      },
+        priority: 'medium' },
       {
         id: '4',
         type: 'subscription',
@@ -125,8 +122,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         channelAvatar: 'https://picsum.photos/40/40?random=4',
         timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
         isRead: true,
-        priority: 'medium',
-      },
+        priority: 'medium' },
       {
         id: '5',
         type: 'live_stream',
@@ -137,8 +133,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         channelAvatar: 'https://picsum.photos/40/40?random=5',
         timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30 minutes ago
         isRead: false,
-        priority: 'high',
-      },
+        priority: 'high' },
     ];
   };
 
@@ -161,8 +156,7 @@ return;
       ...(type === 'video_upload' ? { videoId: `video-${Date.now()}` } : {}),
       timestamp: new Date().toISOString(),
       isRead: false,
-      priority: type === 'live_stream' ? 'high' : 'medium',
-    };
+      priority: type === 'live_stream' ? 'high' : 'medium' };
 
     setNotifications(prev => {
       const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50

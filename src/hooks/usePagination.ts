@@ -26,8 +26,7 @@ export function usePagination({
   totalCount,
   pageSize,
   siblingCount = 1,
-  initialPage = 1,
-}: UsePaginationProps) {
+  initialPage = 1 }: UsePaginationProps) {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
   const paginationRange = useMemo(() => {
@@ -125,6 +124,5 @@ export function usePagination({
     prevPage,
     canNextPage,
     canPrevPage,
-    totalPages: Math.ceil(totalCount / pageSize),
-  };
+    totalPages: Math.ceil(totalCount / pageSize) };
 }

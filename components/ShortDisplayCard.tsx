@@ -74,8 +74,7 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
   channelName,
   views,
   isFollowed = false,
-  onFollow,
-}) => (
+  onFollow }) => (
   <div className="flex-1 mr-4 pointer-events-auto">
     <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
       {title}
@@ -117,8 +116,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   onToggleMute,
   onLike,
   onComment,
-  onShare,
-}) => (
+  onShare }) => (
   <div className="flex flex-col space-y-3 pointer-events-auto">
     {/* Mute/Unmute */}
     <ActionButton
@@ -198,8 +196,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   onShare,
   onVideoChange,
   onVideoEnd,
-  isActive = false,
-}) => {
+  isActive = false }) => {
   const location = useLocation();
   const isOnShortsPage = location.pathname === '/shorts';
   const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
@@ -208,8 +205,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   const videoPlayer = useVideoPlayer({
     autoplay: false,
     muted: true,
-    loop: true,
-  });
+    loop: true });
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -223,8 +219,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   // Use intersection observer for visibility tracking and autoplay
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.7,
-    rootMargin: '0px',
-  });
+    rootMargin: '0px' });
 
   // Enable autoplay when video is in view (both on shorts page and home page)
   useVideoAutoplay({
@@ -234,8 +229,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     actions: {
       play: videoPlayer.play,
       pause: videoPlayer.pause,
-      unmute: videoPlayer.unmute,
-    },
+      unmute: videoPlayer.unmute },
     setIsManuallyPaused,
     enableAutoplay: true, // Enable autoplay on both shorts page and home page
     unmuteOnAutoplay: isOnShortsPage, // Only unmute on autoplay when on shorts page
@@ -364,6 +358,4 @@ export default ShortDisplayCard;
 
 // Export video-specific sub-components for reuse in other parts of the application
 export { PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState  };
-
-
 

@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 // Performance monitoring utility for React components
 
 export const withPerformanceProfiler = <P extends object>(
-  Component: React.ComponentType<P>,
+  Component: React.ComponentType<P>
   componentName: any
 ) => {
   const WrappedComponent = (props: P) => {
@@ -17,8 +17,7 @@ export const withPerformanceProfiler = <P extends object>(
                 `⚡ Slow render detected: ${id} (${phase}) took ${actualDuration.toFixed(2)}ms`
               );
             }
-          },
-        },
+          } },
         React.createElement(Component, props)
       );
     }

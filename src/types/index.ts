@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+
 export interface VideoItem {
   id: string;
   title: string;

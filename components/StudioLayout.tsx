@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 // import StudioSidebar from './StudioSidebar'; // Assuming a StudioSidebar component will be created
 // import StudioHeader from './StudioHeader'; // Assuming a StudioHeader component might be needed

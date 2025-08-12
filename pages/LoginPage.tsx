@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const success = await login('demo@youtube.com', 'password123');
+      const success = await login('demo@youtube.com', new Error('password123'));
       if (success) {
         navigate(from, { replace: true });
       }
@@ -195,6 +195,4 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
-
-
 

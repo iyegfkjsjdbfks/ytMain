@@ -45,8 +45,7 @@ const SearchResultsPage: React.FC = () => {
     youtubeVideos: [],
     googleSearchVideos: [],
     loading: false,
-    youtubeLoading: false,
-  });
+    youtubeLoading: false });
 
   // Memoized search function with performance monitoring
   const performSearch = useCallback(async (searchQuery: any) => {
@@ -56,8 +55,7 @@ const SearchResultsPage: React.FC = () => {
         youtubeVideos: [],
         googleSearchVideos: [],
         loading: false,
-        youtubeLoading: false,
-      });
+        youtubeLoading: false });
       return;
     }
 
@@ -98,8 +96,7 @@ const SearchResultsPage: React.FC = () => {
           youtubeVideos: combinedResults.youtubeVideos || [],
           googleSearchVideos: combinedResults.googleSearchVideos || [],
           loading: false,
-          youtubeLoading: false,
-        });
+          youtubeLoading: false });
       } else {
         // Use the original combined search for other modes
         const combinedResults = await searchCombined(
@@ -117,8 +114,7 @@ const SearchResultsPage: React.FC = () => {
           youtubeVideos: combinedResults.youtubeVideos || [],
           googleSearchVideos: combinedResults.googleSearchVideos || [],
           loading: false,
-          youtubeLoading: false,
-        });
+          youtubeLoading: false });
       }
 
       if (performanceMonitor.hasMetric('search-results-load')) {
@@ -186,6 +182,4 @@ const SearchResultsPage: React.FC = () => {
 
 // Export with memo for performance
 export default React.memo(SearchResultsPage);
-
-
 

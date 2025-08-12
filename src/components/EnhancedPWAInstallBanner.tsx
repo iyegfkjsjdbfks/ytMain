@@ -33,23 +33,19 @@ const BENEFITS = [
   {
     icon: Smartphone,
     title: 'Offline Access',
-    description: 'Watch videos even without internet',
-  },
+    description: 'Watch videos even without internet' },
   {
     icon: Zap,
     title: 'Faster Loading',
-    description: 'Lightning-fast app performance',
-  },
+    description: 'Lightning-fast app performance' },
   {
     icon: Shield,
     title: 'Secure & Private',
-    description: 'Enhanced security and privacy',
-  },
+    description: 'Enhanced security and privacy' },
   {
     icon: Star,
     title: 'Native Experience',
-    description: 'App-like experience on any device',
-  },
+    description: 'App-like experience on any device' },
 ];
 
 const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
@@ -61,24 +57,21 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
   showBenefits = true,
   autoShow = true,
   delayMs = 3000,
-  theme = 'auto',
-}) => {
+  theme = 'auto' }) => {
   const {
     canInstall,
     isInstalled,
     isOnline,
     installPWA,
     updateAvailable,
-    installUpdate,
-  } = usePWA();
+    installUpdate } = usePWA();
 
   const [state, setState] = useState<BannerState>({
     isVisible: false,
     isDismissed: false,
     isAnimating: false,
     showDetails: false,
-    installProgress: 'idle',
-  });
+    installProgress: 'idle' });
 
   // Memoized theme detection
   const effectiveTheme = useMemo(() => {
@@ -129,8 +122,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
       setState(prev => ({
         ...prev,
         installProgress: 'success',
-        isVisible: false,
-      }));
+        isVisible: false }));
       onInstall?.();
 
       // Track successful installation
@@ -162,8 +154,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
       ...prev,
       isVisible: false,
       isDismissed: true,
-      isAnimating: false,
-    }));
+      isAnimating: false }));
     PWAUtils.dismissInstallPrompt();
     onDismiss?.();
 
@@ -478,5 +469,4 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 };
 
 export default EnhancedPWAInstallBanner;
-
 

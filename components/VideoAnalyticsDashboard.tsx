@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React, { useState, FC } from 'react';
 
 import { ClockIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
@@ -68,8 +69,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   analytics,
   timeRange,
   onTimeRangeChange,
-  className = '',
-}) => {
+  className = '' }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'audience' | 'engagement' | 'revenue'>('overview');
 
   const formatNumber = (num: any): string => {
@@ -97,8 +97,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
-    }).format(amount);
+      currency: 'USD' }).format(amount);
   };
 
   // Chart configurations
@@ -111,10 +110,8 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
         borderColor: 'rgb(59, 130, 246)',
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.4,
-        fill: true,
-      },
-    ],
-  };
+        fill: true },
+    ] };
 
   const watchTimeChartData = {
     labels: analytics.watchTimeOverTime.map(d => new Date(d.date).toLocaleDateString()),
@@ -125,10 +122,8 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
         borderColor: 'rgb(16, 185, 129)',
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.4,
-        fill: true,
-      },
-    ],
-  };
+        fill: true },
+    ] };
 
   const deviceChartData = {
     labels: analytics.deviceTypes.map(d => d.device),
@@ -141,10 +136,8 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
           'rgba(245, 158, 11, 0.8)',
           'rgba(239, 68, 68, 0.8)',
         ],
-        borderWidth: 0,
-      },
-    ],
-  };
+        borderWidth: 0 },
+    ] };
 
   const trafficSourcesChartData = {
     labels: analytics.trafficSources.map(d => d.source),
@@ -158,42 +151,29 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
           'rgba(251, 146, 60, 0.8)',
           'rgba(156, 163, 175, 0.8)',
         ],
-        borderWidth: 0,
-      },
-    ],
-  };
+        borderWidth: 0 },
+    ] };
 
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false,
-      },
-    },
+        display: false } },
     scales: {
       x: {
         grid: {
-          display: false,
-        },
-      },
+          display: false } },
       y: {
         grid: {
-          color: 'rgba(156, 163, 175, 0.2)',
-        },
-      },
-    },
-  };
+          color: 'rgba(156, 163, 175, 0.2)' } } } };
 
   const doughnutOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'bottom' as const,
-      },
-    },
-  };
+        position: 'bottom' as const } } };
 
   return (
     <div className={`space-y-6 ${className}`}>

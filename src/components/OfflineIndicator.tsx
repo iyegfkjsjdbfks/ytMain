@@ -20,8 +20,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     videos: 0,
     watchHistory: 0,
     pendingActions: 0,
-    pendingUploads: 0,
-  });
+    pendingUploads: 0 });
   const [storageUsage, setStorageUsage] = useState({ used: 0, quota: 0 });
 
   useEffect(() => {
@@ -45,8 +44,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
         videos: videos.length,
         watchHistory: watchHistory.length,
         pendingActions: pendingActions.length,
-        pendingUploads: pendingUploads.length,
-      });
+        pendingUploads: pendingUploads.length });
 
       setStorageUsage(storage);
     } catch (error) {
@@ -200,8 +198,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
                     <div
                       className='bg-blue-500 h-1.5 rounded-full transition-all duration-300'
                       style={{
-                        width: `${Math.min(getStoragePercentage(), 100)}%`,
-                      }}
+                        width: `${Math.min(getStoragePercentage(), 100)}%` }}
                     />
                   </div>
                 </div>
@@ -223,5 +220,4 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
 };
 
 export default OfflineIndicator;
-
 

@@ -21,13 +21,11 @@ export const LoginForm: React.FC = () => {
   const [formData, setFormData] = useState<LoginCredentials>({
     email: '',
     password: '',
-    rememberMe: false,
-  });
+    rememberMe: false });
 
   const [formErrors, setFormErrors] = useState({
     email: '',
-    password: '',
-  });
+    password: '' });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -35,8 +33,7 @@ export const LoginForm: React.FC = () => {
     let isValid = true;
     const errors = {
       email: '',
-      password: '',
-    };
+      password: '' };
 
     // Email validation
     if (!formData.email) {
@@ -61,8 +58,7 @@ export const LoginForm: React.FC = () => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+      [name]: type === 'checkbox' ? checked : value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -200,5 +196,4 @@ export const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
-
 

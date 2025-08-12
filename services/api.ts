@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+import type { Channel } from '../types';
 import type { Video, Channel, UserPlaylist } from '../types';
 
 // API Configuration
@@ -19,8 +21,7 @@ class APICache {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
-      duration,
-    });
+      duration });
   }
 
   get(key: string): any | null {
@@ -131,9 +132,7 @@ return cached;
       ...options,
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers,
-      },
-    });
+        ...options.headers } });
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -163,8 +162,7 @@ return cached;
     return requestQueue.add(() =>
       this.requestT>(url, {
         method: 'POST',
-        body: JSON.stringify(data),
-      }),
+        body: JSON.stringify(data) }),
     );
   }
 
@@ -172,8 +170,7 @@ return cached;
     return requestQueue.add(() =>
       this.requestT>(url, {
         method: 'PUT',
-        body: JSON.stringify(data),
-      }),
+        body: JSON.stringify(data) }),
     );
   }
 
@@ -220,8 +217,7 @@ export class VideoService {
         const nextPageToken = endIndex < videos.length ? `token_${endIndex}` : undefined;
         return {
           videos: paginatedVideos,
-          ...(nextPageToken && { nextPageToken }),
-        };
+          ...(nextPageToken && { nextPageToken }) };
       }
 
       // Production API call
@@ -264,13 +260,11 @@ export class VideoService {
         tags: item.snippet.tags| [],
         category,
         visibility: 'public' as const, isLive: false,
-        isShort: false,
-      })) || [];
+        isShort: false })) || [];
 
       return {
         videos,
-        nextPageToken: response.nextPageToken| undefined,
-      };
+        nextPageToken: response.nextPageToken| undefined };
     } catch (error) {
       console.error('Error fetching videos:', error);
       throw error;
@@ -324,8 +318,7 @@ return null;
         tags: item.snippet.tags| [],
         category: item.snippet.categoryId| 'Unknown',
         visibility: 'public' as const, isLive: false,
-        isShort: false,
-      };
+        isShort: false };
     } catch (error) {
       console.error('Error fetching video:', error);
       return null;
@@ -350,8 +343,7 @@ return null;
         const nextPageToken = Math.random() > 0.5 ? `token_${Date.now()}` : undefined;
         return {
           videos,
-          ...(nextPageToken && { nextPageToken }),
-        };
+          ...(nextPageToken && { nextPageToken }) };
       }
 
       const url = new URL(`${API_BASE_URL}/search`);
@@ -390,13 +382,11 @@ return null;
         tags: item.snippet.tags| [],
         category: 'Search Result',
         visibility: 'public' as const, isLive: false,
-        isShort: false,
-      })) || [];
+        isShort: false })) || [];
 
       return {
         videos,
-        nextPageToken: response.nextPageToken,
-      };
+        nextPageToken: response.nextPageToken };
     } catch (error) {
       console.error('Error searching videos:', error);
       throw error;
@@ -434,8 +424,7 @@ function generateMockChannel(id: string): Channel {
     joinedDate: '2020-01-01',
     country: 'US',
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
+    updatedAt: new Date().toISOString() };
 }
 
 export class ChannelService {
@@ -475,8 +464,7 @@ return null;
         videoCount: parseInt(item.statistics.videoCount || '0', 10),
         isVerified: false, // Would need to check separately
         createdAt: item.snippet.publishedAt,
-        updatedAt: new Date().toISOString(),
-      };
+        updatedAt: new Date().toISOString() };
     } catch (error) {
       console.error('Error fetching channel:', error);
       return null;
@@ -501,8 +489,7 @@ return null;
         const nextPageToken = Math.random() > 0.4 ? `token_${Date.now()}` : undefined;
         return {
           videos,
-          ...(nextPageToken && { nextPageToken }),
-        };
+          ...(nextPageToken && { nextPageToken }) };
       }
 
       const url = new URL(`${API_BASE_URL}/search`);
@@ -542,13 +529,11 @@ return null;
         tags: item.snippet.tags| [],
         category: 'Channel Video',
         visibility: 'public' as const, isLive: false,
-        isShort: false,
-      })) || [];
+        isShort: false })) || [];
 
       return {
         videos,
-        nextPageToken: response.nextPageToken,
-      };
+        nextPageToken: response.nextPageToken };
     } catch (error) {
       console.error('Error fetching channel videos:', error);
       throw error;
@@ -569,16 +554,14 @@ export class PlaylistService {
             description: 'Videos to watch later',
             videoIds: Array.from({ length: 15 }, (_, i) => `playlist_video_${i}`),
             createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
+            updatedAt: new Date().toISOString() },
           {
             id: 'playlist_2',
             title: 'Favorites',
             description: 'My favorite videos',
             videoIds: Array.from({ length: 8 }, (_, i) => `favorite_video_${i}`),
             createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-            updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-          },
+            updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() },
         ];
       }
 
@@ -595,7 +578,6 @@ export class PlaylistService {
 export const cacheUtils = {
   clear: () => apiCache.clear(),
   delete: (key: string) => apiCache.delete(key),
-  size: () => apiCache.size(),
-};
+  size: () => apiCache.size() };
 
 // Export for testing

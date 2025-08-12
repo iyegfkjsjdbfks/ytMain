@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -20,37 +21,32 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
   notificationsEnabled,
   totalVideos,
   newVideosToday,
-  className = '',
-}) => {
+  className = '' }) => {
   const stats = [
     {
       label: 'Subscribed Channels',
       value: totalChannels,
       icon: UserGroupIcon,
       color: 'text-blue-600 dark:text-blue-400',
-      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-    },
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20' },
     {
       label: 'With Notifications',
       value: notificationsEnabled,
       icon: BellIconSolid,
       color: 'text-yellow-600 dark:text-yellow-400',
-      bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
-    },
+      bgColor: 'bg-yellow-50 dark:bg-yellow-900/20' },
     {
       label: 'Total Videos',
       value: totalVideos,
       icon: VideoCameraIcon,
       color: 'text-green-600 dark:text-green-400',
-      bgColor: 'bg-green-50 dark:bg-green-900/20',
-    },
+      bgColor: 'bg-green-50 dark:bg-green-900/20' },
     {
       label: 'New Today',
       value: newVideosToday,
       icon: ClockIcon,
       color: 'text-red-600 dark:text-red-400',
-      bgColor: 'bg-red-50 dark:bg-red-900/20',
-    },
+      bgColor: 'bg-red-50 dark:bg-red-900/20' },
   ];
 
   if (totalChannels === 0) {

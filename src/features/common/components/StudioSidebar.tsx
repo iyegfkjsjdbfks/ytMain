@@ -395,4 +395,3 @@ const StudioSidebar: React.FC = () => {
 
 export default StudioSidebar;
 
-

@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 /**
  * HistoryPage component for displaying user's watch history
  */
@@ -24,5 +22,4 @@ const HistoryPage: React.FC = () => {
 };
 
 export default HistoryPage;
-
 

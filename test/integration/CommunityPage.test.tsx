@@ -1,4 +1,4 @@
-import React, { useRef, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider  } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor  } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach  } from 'vitest';
@@ -15,8 +15,7 @@ vi.mock('@hooks/useRefactoredHooks', () => ({
         timestamp: '2024-01-01T00:00:00Z',
         likes: 10,
         comments: 5,
-        avatar: 'https://example.com/avatar.jpg',
-      },
+        avatar: 'https://example.com/avatar.jpg' },
       {
         id: '2',
         author: 'Another User',
@@ -24,30 +23,25 @@ vi.mock('@hooks/useRefactoredHooks', () => ({
         timestamp: '2024-01-02T00:00:00Z',
         likes: 25,
         comments: 12,
-        avatar: 'https://example.com/avatar2.jpg',
-      },
+        avatar: 'https://example.com/avatar2.jpg' },
     ],
     loading: false,
     error: null,
     createPost: vi.fn(),
     likePost: vi.fn(),
-    addComment: vi.fn(),
-  }),
-}));
+    addComment: vi.fn() }) }));
 
 const createTestQueryClient = () => new QueryClient({
   defaultOptions: {
     queries: { retry: false },
-    mutations: { retry: false },
-  },
-});
+    mutations: { retry: false } } });
 
 const renderWithQueryClient = (component: React.ReactElement) => {
   const queryClient = createTestQueryClient();
   return render(
     <QueryClientProvider client={queryClient}>
       {component}
-    </QueryClientProvider>,
+    </QueryClientProvider>
   );
 };
 
@@ -106,8 +100,7 @@ describe('CommunityPage', () => {
       toggleSidebar: vi.fn(),
       notifications: [],
       addNotification: vi.fn(),
-      removeNotification: vi.fn(),
-    });
+      removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);
 
@@ -147,8 +140,7 @@ describe('CommunityPage', () => {
       notifications: [
       ],
       addNotification: vi.fn(),
-      removeNotification: vi.fn(),
-    });
+      removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);
 
@@ -185,8 +177,7 @@ describe('CommunityPage', () => {
       toggleSidebar: vi.fn(),
       notifications: [],
       addNotification: vi.fn(),
-      removeNotification: vi.fn(),
-    });
+      removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);
 
@@ -216,13 +207,11 @@ describe('CommunityPage', () => {
       toggleSidebar: vi.fn(),
       notifications: [],
       addNotification: vi.fn(),
-      removeNotification: vi.fn(),
-    });
+      removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);
 
     expect(screen.getByText(/error loading posts/i)).toBeInTheDocument();
   });
 });
-
 

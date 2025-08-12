@@ -108,14 +108,11 @@ class SystemIntegrationHub {
       alertThresholds: {
         performance: 70,
         security: 80,
-        quality: 75,
-      },
+        quality: 75 },
       notifications: {
         email: false,
-        slack: false,
-      },
-      emergencyContacts: '',
-    };
+        slack: false },
+      emergencyContacts: '' };
 
     this.health = {
       overall: 'healthy',
@@ -125,18 +122,15 @@ class SystemIntegrationHub {
         deployment: 'healthy',
         codeQuality: 'healthy',
         featureFlags: 'healthy',
-        monitoring: 'healthy',
-      },
-      lastCheck: Date.now(),
-    };
+        monitoring: 'healthy' },
+      lastCheck: Date.now() };
 
     this.metrics = {
       performance: { score: 0, responseTime: 0, errorRate: 0, throughput: 0 },
       security: { score: 0, threats: 0, vulnerabilities: 0, compliance: 0 },
       deployment: { successRate: 0, frequency: 0, leadTime: 0, mttr: 0 },
       quality: { score: 0, coverage: 0, complexity: 0, debt: 0 },
-      features: { totalFlags: 0, activeExperiments: 0, conversionRate: 0 },
-    };
+      features: { totalFlags: 0, activeExperiments: 0, conversionRate: 0 } };
   }
 
   // Initialize the integration hub
@@ -173,8 +167,7 @@ return;
         severity: 'low',
         title: 'System Integration Hub Initialized',
         description: 'All systems are now integrated and monitoring is active',
-        data: { timestamp: Date.now() },
-      });
+        data: { timestamp: Date.now() } });
 
     } catch (error) {
       console.error('❌ Failed to initialize System Integration Hub:', error);
@@ -260,8 +253,7 @@ return;
         deployment: await this.checkDeploymentHealth(),
         codeQuality: await this.checkCodeQualityHealth(),
         featureFlags: await this.checkFeatureFlagsHealth(),
-        monitoring: await this.checkMonitoringHealth(),
-      };
+        monitoring: await this.checkMonitoringHealth() };
 
       this.health.systems = healthChecks;
       this.health.lastCheck = Date.now();
@@ -286,8 +278,7 @@ return;
                  this.health.overall === 'degraded' ? 'medium' : 'low',
         title: 'System Health Check',
         description: `Overall system health: ${this.health.overall}`,
-        data: this.health,
-      });
+        data: this.health });
 
     } catch (error) {
       console.error('Health check failed:', error);
@@ -426,8 +417,7 @@ return 'degraded';
         score: perfMetrics.find(m => m.name === 'performance-score')?.value || 0,
         responseTime: perfMetrics.find(m => m.name === 'response-time')?.value || 0,
         errorRate: perfMetrics.find(m => m.name === 'error-rate')?.value || 0,
-        throughput: perfMetrics.find(m => m.name === 'throughput')?.value || 0,
-      };
+        throughput: perfMetrics.find(m => m.name === 'throughput')?.value || 0 };
 
       // Security metrics
       const secMetrics = securityMonitoring.getSecurityMetrics();
@@ -435,8 +425,7 @@ return 'degraded';
         score: secMetrics.securityScore,
         threats: secMetrics.threatsDetected,
         vulnerabilities: secMetrics.vulnerabilities.total,
-        compliance: secMetrics.complianceScore,
-      };
+        compliance: secMetrics.complianceScore };
 
       // Deployment metrics
       const depMetrics = deploymentAutomation.getDeploymentMetrics();
@@ -444,8 +433,7 @@ return 'degraded';
         successRate: depMetrics.successRate,
         frequency: depMetrics.deploymentFrequency,
         leadTime: depMetrics.averageDeployTime,
-        mttr: depMetrics.recoveryTime || 0,
-      };
+        mttr: depMetrics.recoveryTime || 0 };
 
       // Code quality metrics
       const qualityMetrics = intelligentCodeMonitor.getLatestMetrics();
@@ -461,8 +449,7 @@ return 'degraded';
           score: qualityScore,
           coverage: qualityMetrics.testCoverage,
           complexity: qualityMetrics.complexity,
-          debt: qualityMetrics.technicalDebt,
-        };
+          debt: qualityMetrics.technicalDebt };
       }
 
       // Feature flag metrics
@@ -487,8 +474,7 @@ return 'degraded';
       severity: data.severity || 'medium',
       title: 'Performance Alert',
       description: data.message || 'Performance threshold exceeded',
-      data,
-    });
+      data });
   }
 
   private handleSecurityThreat(data: any): void {
@@ -498,8 +484,7 @@ return 'degraded';
       severity: 'high',
       title: 'Security Threat Detected',
       description: data.description || 'Security threat detected',
-      data,
-    });
+      data });
   }
 
   private handleDeploymentFailure(data: any): void {
@@ -509,8 +494,7 @@ return 'degraded';
       severity: 'high',
       title: 'Deployment Failed',
       description: data.error || 'Deployment pipeline failed',
-      data,
-    });
+      data });
   }
 
   private handleQualityDegradation(data: any): void {
@@ -520,8 +504,7 @@ return 'degraded';
       severity: 'medium',
       title: 'Code Quality Degraded',
       description: data.message || 'Code quality metrics have degraded',
-      data,
-    });
+      data });
   }
 
   private handleFeatureRollback(data: any): void {
@@ -531,8 +514,7 @@ return 'degraded';
       severity: 'medium',
       title: 'Feature Flag Rollback',
       description: data.reason || 'Feature flag was rolled back',
-      data,
-    });
+      data });
   }
 
   // Event system
@@ -541,8 +523,7 @@ return 'degraded';
       id: `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       timestamp: Date.now(),
       handled: false,
-      ...eventData,
-    };
+      ...eventData };
 
     this.events.push(event);
     this.cleanupOldEvents();
@@ -665,8 +646,7 @@ return 'degraded';
       metrics: this.metrics,
       recentEvents,
       summary,
-      recommendations,
-    };
+      recommendations };
   }
 
   // Cleanup method

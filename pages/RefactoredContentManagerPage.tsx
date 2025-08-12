@@ -79,8 +79,7 @@ const RefactoredContentManagerPage: React.FC = () => {
   const {
     loading: actionLoading,
     error: actionError,
-    execute: executeAction,
-  } = {
+    execute: executeAction } = {
     loading: false,
     error: null,
     execute: async (action: () => Promise<void>) => {
@@ -90,8 +89,7 @@ const RefactoredContentManagerPage: React.FC = () => {
         console.error('Action failed:', error);
         // Handle error if needed
       }
-    },
-  };
+    } };
 
   // Filter videos based on active tab
   const filteredVideos = videos.filter((video) => {
@@ -116,24 +114,20 @@ const RefactoredContentManagerPage: React.FC = () => {
       type: 'file' as const, label: 'Video File',
       required: true,
       accept: 'video/*',
-      placeholder: 'Select video file to upload',
-    },
+      placeholder: 'Select video file to upload' },
     {
       name: 'title',
       type: 'text' as const, label: 'Title',
       required: true,
-      placeholder: 'Enter video title',
-    },
+      placeholder: 'Enter video title' },
     {
       name: 'description',
       type: 'textarea' as const, label: 'Description',
-      placeholder: 'Enter video description',
-    },
+      placeholder: 'Enter video description' },
     {
       name: 'tags',
       type: 'text' as const, label: 'Tags',
-      placeholder: 'Enter tags separated by commas',
-    },
+      placeholder: 'Enter tags separated by commas' },
     {
       name: 'category',
       type: 'select' as const, label: 'Category',
@@ -145,8 +139,7 @@ const RefactoredContentManagerPage: React.FC = () => {
         { value: 'news', label: 'News' },
         { value: 'sports', label: 'Sports' },
         { value: 'technology', label: 'Technology' },
-      ],
-    },
+      ] },
     {
       name: 'visibility',
       type: 'select' as const, label: 'Visibility',
@@ -154,14 +147,12 @@ const RefactoredContentManagerPage: React.FC = () => {
         { value: 'public', label: 'Public' },
         { value: 'unlisted', label: 'Unlisted' },
         { value: 'private', label: 'Private' },
-      ],
-    },
+      ] },
     {
       name: 'thumbnail',
       type: 'file' as const, label: 'Thumbnail (Optional)',
       accept: 'image/*',
-      placeholder: 'Select thumbnail image',
-    },
+      placeholder: 'Select thumbnail image' },
   ];
 
   // Video edit form configuration
@@ -225,8 +216,7 @@ return {};
       description: selectedVideo.description || '',
       tags: selectedVideo.tags?.join(', ') || '',
       category: selectedVideo.category || '',
-      visibility: selectedVideo.visibility || 'public',
-    };
+      visibility: selectedVideo.visibility || 'public' };
   };
 
   // Custom video card with management actions
@@ -286,8 +276,7 @@ return {};
     published: videos.filter((v) => v.visibility === 'public').length,
     unlisted: videos.filter((v) => v.visibility === 'unlisted').length,
     private: videos.filter((v) => v.visibility === 'private').length,
-    drafts: videos.filter((v) => v.visibility === 'private').length,
-  };
+    drafts: videos.filter((v) => v.visibility === 'private').length };
 
   return (
     <StandardPageLayout
@@ -398,5 +387,4 @@ return {};
 };
 
 export default RefactoredContentManagerPage;
-
 

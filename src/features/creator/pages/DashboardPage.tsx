@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React, { useEffect, useState, FC } from 'react';
 import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ArrowTrendingUpIcon, CalendarDaysIcon, CurrencyDollarIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
@@ -66,8 +67,7 @@ const DashboardPage: React.FC = () => {
     revenue: 0,
     avgViewDuration: 0,
     engagement: 0,
-    clickThroughRate: 0,
-  });
+    clickThroughRate: 0 });
 
   const [topVideos, setTopVideos] = useState<VideoPerformance[]>([]);
 
@@ -116,8 +116,7 @@ const DashboardPage: React.FC = () => {
                 : 42000,
         avgViewDuration: 4.2,
         engagement: 8.5,
-        clickThroughRate: 12.3,
-      };
+        clickThroughRate: 12.3 };
 
       const mockTopVideos: VideoPerformance[] = [
         {
@@ -130,8 +129,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2024-01-15',
           thumbnail: 'https://picsum.photos/320/180?random=1',
           revenue: 1250,
-          watchTime: 95000,
-        },
+          watchTime: 95000 },
         {
           id: '2',
           title: 'Advanced TypeScript Tips and Tricks',
@@ -142,8 +140,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2024-01-10',
           thumbnail: 'https://picsum.photos/320/180?random=2',
           revenue: 890,
-          watchTime: 78000,
-        },
+          watchTime: 78000 },
         {
           id: '3',
           title: 'CSS Grid vs Flexbox: Complete Guide',
@@ -154,8 +151,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2024-01-05',
           thumbnail: 'https://picsum.photos/320/180?random=3',
           revenue: 670,
-          watchTime: 58000,
-        },
+          watchTime: 58000 },
         {
           id: '4',
           title: 'Node.js Performance Optimization',
@@ -166,8 +162,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2023-12-28',
           thumbnail: 'https://picsum.photos/320/180?random=4',
           revenue: 540,
-          watchTime: 45000,
-        },
+          watchTime: 45000 },
         {
           id: '5',
           title: 'Database Design Best Practices',
@@ -178,8 +173,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2023-12-20',
           thumbnail: 'https://picsum.photos/320/180?random=5',
           revenue: 420,
-          watchTime: 35000,
-        },
+          watchTime: 35000 },
       ];
 
       const mockAudienceData: AudienceData[] = [
@@ -232,8 +226,7 @@ const DashboardPage: React.FC = () => {
   const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
-    }).format(amount);
+      currency: 'USD' }).format(amount);
   };
 
   if (loading) {
@@ -666,5 +659,4 @@ const DashboardPage: React.FC = () => {
 };
 
 export default DashboardPage;
-
 

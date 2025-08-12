@@ -1,3 +1,4 @@
+import type { Channel } from '../types';
 import React from 'react';
 // Note: Keep React import minimal to avoid unused warnings
 import React from 'react';
@@ -40,11 +41,7 @@ const TestProviders: React.FC<TestProvidersProps> = ({
     defaultOptions: {
       queries: {
         retry: false,
-        gcTime: 0,
-      },
-    },
-  }),
-}) => {
+        gcTime: 0 } } }) }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -119,8 +116,7 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   visibility: 'public',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
-  ...overrides,
-});
+  ...overrides });
 
 export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => ({
   id: `channel_${Math.random().toString(36).substr(2, 9)}`,
@@ -134,8 +130,7 @@ export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => 
   isVerified: false,
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
-  ...overrides,
-});
+  ...overrides });
 
 export const createMockPlaylist = (overrides: Partial<UserPlaylist> = {}): UserPlaylist => ({
   id: `playlist_${Math.random().toString(36).substr(2, 9)}`,
@@ -144,14 +139,12 @@ export const createMockPlaylist = (overrides: Partial<UserPlaylist> = {}): UserP
   videoIds: 'video1,video2,video3',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
-  ...overrides,
-});
+  ...overrides });
 
 // Mock API Responses
 export const createMockVideoResponse = (count: number = 10) => ({
   videos: Array.from({ length: count }, () => createMockVideo()),
-  nextPageToken: Math.random() > 0.5 ? 'next_page_token' : undefined,
-});
+  nextPageToken: Math.random() > 0.5 ? 'next_page_token' : undefined });
 
 // User Event Setup
 export const createUserEvent = () => userEvent.setup();
@@ -286,8 +279,7 @@ export const mockFetch = (response: any, status: number = 200) => {
       ok: status >= 200 && status < 300,
       status,
       json: () => Promise.resolve(response),
-      text: () => Promise.resolve(JSON.stringify(response)),
-    } as Response),
+      text: () => Promise.resolve(JSON.stringify(response)) } as Response),
   );
 };
 
@@ -311,8 +303,7 @@ export const mockLocalStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn(),
-  };
+    key: vi.fn() };
 };
 
 // Intersection Observer Mocking
@@ -323,8 +314,7 @@ export const mockIntersectionObserver = () => {
     disconnect: vi.fn(),
     root: null,
     rootMargin: '',
-    thresholds: [],
-  }));
+    thresholds: [] }));
 };
 
 // Resize Observer Mocking
@@ -332,8 +322,7 @@ export const mockResizeObserver = () => {
   global.ResizeObserver = vi.fn().mockImplementation((_callback) => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
-    disconnect: vi.fn(),
-  }));
+    disconnect: vi.fn() }));
 };
 
 // Media Query Mocking
@@ -346,8 +335,7 @@ export const mockMatchMedia = (matches: boolean = false) => {
     removeListener: vi.fn(),
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  }));
+    dispatchEvent: vi.fn() }));
 };
 
 // Test Suite Helpers
@@ -415,8 +403,7 @@ export const testUtils = {
   simulateDragAndDrop: async (element: HTMLElement, files: File) => {
     const user = createUserEvent();
     await user.upload(element, files);
-  },
-};
+  } };
 
 // Accessibility testing helper with proper return type
 export const runAccessibilityAudit = async (_container: HTMLElement) => {
@@ -426,7 +413,7 @@ export const runAccessibilityAudit = async (_container: HTMLElement) => {
 
     // Return a compatible result format
     return {
-      issues: [] as Array<{ type: 'error' | 'warning'; message: string; element: HTMLElement }>,
+      issues: [] as Array<{ type: 'error' | 'warning'; message: string; element: HTMLElement }>
       score: 100,
       violations: [], // For backward compatibility
     };
@@ -435,8 +422,7 @@ export const runAccessibilityAudit = async (_container: HTMLElement) => {
     return {
       issues: [],
       score: 100,
-      violations: [],
-    };
+      violations: [] };
   }
 };
 
@@ -453,8 +439,7 @@ expect.extend({
 
     return {
       message: () => `expected element to ${isInViewport ? 'not ' : ''}be in viewport`,
-      pass: isInViewport,
-    };
+      pass: isInViewport };
   },
 
   toHaveAccessibleName(received: HTMLElement, expectedName) {
@@ -466,11 +451,8 @@ expect.extend({
 
     return {
       message: () => `expected element to have accessible name "${expectedName}", but got "${accessibleName}"`,
-      pass: hasExpectedName,
-    };
-  },
-});
+      pass: hasExpectedName };
+  } });
 
 // Type declarations for custom matchers
-
 

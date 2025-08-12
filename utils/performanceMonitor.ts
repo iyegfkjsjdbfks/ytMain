@@ -35,8 +35,7 @@ return;
         value: entry.startTime,
         timestamp: Date.now(),
         url: window.location.href,
-        userAgent: navigator.userAgent,
-      });
+        userAgent: navigator.userAgent });
     });
 
     // Track First Input Delay (FID)
@@ -46,8 +45,7 @@ return;
         value: entry.processingStart - entry.startTime,
         timestamp: Date.now(),
         url: window.location.href,
-        userAgent: navigator.userAgent,
-      });
+        userAgent: navigator.userAgent });
     });
 
     // Track Cumulative Layout Shift (CLS)
@@ -58,8 +56,7 @@ return;
           value: entry.value,
           timestamp: Date.now(),
           url: window.location.href,
-          userAgent: navigator.userAgent,
-        });
+          userAgent: navigator.userAgent });
       }
     });
   }
@@ -77,8 +74,7 @@ return;
       value: typeof value === 'string' ? parseFloat(value) || 0 : value,
       timestamp: Date.now(),
       url: window.location.href,
-      userAgent: navigator.userAgent,
-    });
+      userAgent: navigator.userAgent });
   }
 
   /**
@@ -89,7 +85,7 @@ return;
 return;
 }
 
-    window.addEventListener('load', () => {
+    window.addEventListener('load', ( as EventListener) => {
       const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
 
       if (navigation) {
@@ -98,24 +94,21 @@ return;
           value: navigation.responseStart - navigation.requestStart,
           timestamp: Date.now(),
           url: window.location.href,
-          userAgent: navigator.userAgent,
-        });
+          userAgent: navigator.userAgent });
 
         this.recordMetric({
           name: 'DOMContentLoaded',
           value: navigation.domContentLoadedEventEnd - navigation.startTime,
           timestamp: Date.now(),
           url: window.location.href,
-          userAgent: navigator.userAgent,
-        });
+          userAgent: navigator.userAgent });
 
         this.recordMetric({
           name: 'LoadComplete',
           value: navigation.loadEventEnd - navigation.startTime,
           timestamp: Date.now(),
           url: window.location.href,
-          userAgent: navigator.userAgent,
-        });
+          userAgent: navigator.userAgent });
       }
     });
   }
@@ -133,8 +126,7 @@ return;
       value: renderTime,
       timestamp: Date.now(),
       url: window.location.href,
-      userAgent: navigator.userAgent,
-    });
+      userAgent: navigator.userAgent });
   }
 
   /**
@@ -150,8 +142,7 @@ return;
       value: duration,
       timestamp: Date.now(),
       url: window.location.href,
-      userAgent: navigator.userAgent,
-    });
+      userAgent: navigator.userAgent });
 
     // Track API errors separately
     if (status >= 400) {
@@ -160,8 +151,7 @@ return;
         value: 1,
         timestamp: Date.now(),
         url: window.location.href,
-        userAgent: navigator.userAgent,
-      });
+        userAgent: navigator.userAgent });
     }
   }
 
@@ -245,8 +235,8 @@ export function usePerformanceTracking(componentName: any) {
 }
 
 // Higher-order component for automatic performance tracking
-export function withPerformanceTracking<P extends object>(
-  WrappedComponent: React.ComponentType<P>,
+export function withPerformanceTracking<P extends object>(;
+  WrappedComponent: React.ComponentType<P>
   componentName?: string,
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -277,7 +267,7 @@ if (typeof window !== 'undefined') {
   }, 30000); // Every 30 seconds
 
   // Send metrics before page unload
-  window.addEventListener('beforeunload', () => {
+  window.addEventListener('beforeunload', ( as EventListener) => {
     performanceMonitor.sendMetrics();
   });
 }

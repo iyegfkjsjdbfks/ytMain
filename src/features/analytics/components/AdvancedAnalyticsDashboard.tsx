@@ -63,8 +63,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
   change,
   icon: Icon,
   iconColor,
-  format = 'number',
-}) => {
+  format = 'number' }) => {
   const formatValue = (val: string | number) => {
     if (typeof val === 'string') {
       return val;
@@ -144,8 +143,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
         views: Math.floor(Math.random() * 50000) + 20000,
         watchTime: Math.floor(Math.random() * 2000000) + 500000,
         subscribers: Math.floor(Math.random() * 500) + 100,
-        revenue: Math.floor(Math.random() * 1000) + 200,
-      })),
+        revenue: Math.floor(Math.random() * 1000) + 200 })),
       demographics: {
         ageGroups: [
           { range: '13-17', percentage: 15.2 },
@@ -166,14 +164,12 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           { country: 'Canada', percentage: 8.9, views: 111250 },
           { country: 'Australia', percentage: 6.7, views: 83750 },
           { country: 'Germany', percentage: 5.4, views: 67500 },
-        ],
-      },
+        ] },
       devices: {
         mobile: 68.5,
         desktop: 24.3,
         tablet: 5.8,
-        tv: 1.4,
-      },
+        tv: 1.4 },
       topVideos: [
         {
           id: '1',
@@ -183,8 +179,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           likes: 8900,
           comments: 1200,
           thumbnail: 'https://picsum.photos/160/90?random=1',
-          publishedAt: '2024-01-15',
-        },
+          publishedAt: '2024-01-15' },
         {
           id: '2',
           title: 'Advanced TypeScript Tips',
@@ -193,8 +188,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           likes: 7200,
           comments: 890,
           thumbnail: 'https://picsum.photos/160/90?random=2',
-          publishedAt: '2024-01-10',
-        },
+          publishedAt: '2024-01-10' },
         {
           id: '3',
           title: 'CSS Grid vs Flexbox',
@@ -203,8 +197,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           likes: 6800,
           comments: 750,
           thumbnail: 'https://picsum.photos/160/90?random=3',
-          publishedAt: '2024-01-08',
-        },
+          publishedAt: '2024-01-08' },
       ],
       engagement: {
         likes: 45600,
@@ -212,16 +205,13 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
         comments: 12800,
         shares: 8900,
         subscribersGained: 2400,
-        subscribersLost: 180,
-      },
-    }),
+        subscribersLost: 180 } }),
     []
   );
 
   const chartData = analyticsData.timeSeriesData.map(item => ({
     ...item,
-    value: item[selectedMetric],
-  }));
+    value: item[selectedMetric] }));
 
   return (
     <div className='min-h-screen bg-gray-50 dark:bg-gray-900 p-6'>
@@ -322,8 +312,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
                 className='bg-blue-500 rounded-t flex-1 min-w-0 transition-all hover:bg-blue-600'
                 style={{
                   height: `${(item.value / Math.max(...chartData.map(d => d.value))) * 100}%`,
-                  minHeight: '4px',
-                }}
+                  minHeight: '4px' }}
                 title={`${new Date(item.date).toLocaleDateString()}: ${item.value.toLocaleString()}`}
               />
             ))}
@@ -537,5 +526,4 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
 };
 
 export default AdvancedAnalyticsDashboard;
-
 

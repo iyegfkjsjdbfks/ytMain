@@ -1,3 +1,5 @@
+import type { Video } from '../types';
+import type { Channel } from '../types';
 import React, { ReactNode, KeyboardEvent, MouseEvent } from 'react';
 // Strict Type Definitions to Replace 'any' Types
 

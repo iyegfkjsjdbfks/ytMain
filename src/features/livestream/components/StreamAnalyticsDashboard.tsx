@@ -86,8 +86,7 @@ const getHealthColor = (health: StreamHealth): string => {
     excellent: 'text-green-600',
     good: 'text-blue-600',
     fair: 'text-yellow-600',
-    poor: 'text-red-600',
-  };
+    poor: 'text-red-600' };
   return healthColors[health];
 };
 
@@ -124,22 +123,17 @@ const generateMockAnalytics = (): AnalyticsData => ({
     streamHealth: 'excellent',
     bitrate: 4500,
     frameDrops: 0,
-    latency: 1800,
-  },
+    latency: 1800 },
   historicalData: {
     viewers: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      count: Math.floor(Math.random() * 500) + 800,
-    })),
+      count: Math.floor(Math.random() * 500) + 800 })),
     engagement: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      rate: Math.random() * 20 + 10,
-    })),
+      rate: Math.random() * 20 + 10 })),
     revenue: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      amount: Math.random() * 50,
-    })),
-  },
+      amount: Math.random() * 50 })) },
   demographics: {
     countries: [
       { name: 'United States', percentage: 35 },
@@ -161,29 +155,24 @@ const generateMockAnalytics = (): AnalyticsData => ({
       { range: '25-34', percentage: 32 },
       { range: '35-44', percentage: 15 },
       { range: '45+', percentage: 10 },
-    ],
-  },
+    ] },
   topMoments: [
     {
       timestamp: 1800,
       type: 'peak_viewers',
       description: 'Peak viewership reached',
-      value: 2156,
-    },
+      value: 2156 },
     {
       timestamp: 2400,
       type: 'super_chat',
       description: 'Largest Super Chat donation',
-      value: 50,
-    },
+      value: 50 },
     {
       timestamp: 3000,
       type: 'viral_moment',
       description: 'Viral clip shared',
-      value: 1000,
-    },
-  ],
-});
+      value: 1000 },
+  ] });
 
 // Custom hook for analytics data management
 const useStreamAnalytics = (
@@ -264,8 +253,7 @@ const StatsCard: FC<StatsCardProps> = ({
   value,
   icon,
   subtitle,
-  trend,
-}) => (
+  trend }) => (
   <div className='bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow'>
     <div className='flex items-center justify-between'>
       <div className='flex-1'>
@@ -454,8 +442,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
 
 const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
   streamId,
-  className = '',
-}) => {
+  className = '' }) => {
   const [timeRange, setTimeRange] = useState<TimeRange>('live');
   const [selectedMetric, setSelectedMetric] = useState<MetricType>('viewers');
 
@@ -485,8 +472,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
           height: Math.max(height, 2), // Minimum height for visibility
           value,
           time: point.time,
-          id: `chart-${selectedMetric}-${index}`,
-        };
+          id: `chart-${selectedMetric}-${index}` };
       });
     } catch (error) {
       const componentError = createComponentError(
@@ -676,5 +662,4 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
 };
 
 export default StreamAnalyticsDashboard;
-
 

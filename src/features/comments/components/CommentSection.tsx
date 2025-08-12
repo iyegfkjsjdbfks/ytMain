@@ -34,8 +34,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
   onPin,
   onHeart,
   onReport,
-  level = 0,
-}) => {
+  level = 0 }) => {
   const [showReplies, setShowReplies] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const [replyText, setReplyText] = useState('');
@@ -49,8 +48,8 @@ const CommentItem: React.FC<CommentItemProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
   }, []);
 
   const handleReplySubmit = () => {
@@ -97,8 +96,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
           )}
           <span className='text-xs text-gray-500 dark:text-gray-400'>
             {formatDistanceToNow(new Date(comment.createdAt), {
-              addSuffix: true,
-            })}
+              addSuffix: true })}
           </span>
           {comment.isPinned && (
             <PinSolidIcon className='w-4 h-4 text-gray-500' />
@@ -280,8 +278,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
 const CommentSection: React.FC<CommentSectionProps> = ({
   videoId,
   isChannelOwner = false,
-  className = '',
-}) => {
+  className = '' }) => {
   const [newComment, setNewComment] = useState('');
   const [sortBy, setSortBy] = useState<'top' | 'newest'>('top');
   const [showCommentInput, setShowCommentInput] = useState(false);
@@ -289,8 +286,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   const {
     data: comments,
     loading,
-    error,
-  } = useVideoComments(videoId, { sortBy });
+    error } = useVideoComments(videoId, { sortBy });
   const createCommentMutation = useCreateComment();
   const reactToCommentMutation = useReactToComment();
 
@@ -302,8 +298,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     try {
       await createCommentMutation.mutate({
         content: newComment,
-        videoId,
-      });
+        videoId });
       setNewComment('');
       setShowCommentInput(false);
     } catch (error) {
@@ -316,8 +311,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
       await createCommentMutation.mutate({
         content,
         videoId,
-        parentId,
-      });
+        parentId });
     } catch (error) {
       logger.error('Failed to post reply:', error);
     }
@@ -327,8 +321,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     try {
       await reactToCommentMutation.mutate({
         commentId,
-        type,
-      });
+        type });
     } catch (error) {
       logger.error('Failed to react to comment:', error);
     }
@@ -478,5 +471,4 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
 export { CommentSection, CommentItem  };
 export default CommentSection;
-
 

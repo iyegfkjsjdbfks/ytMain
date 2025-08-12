@@ -14,8 +14,7 @@ interface VideoUploadProps {
 const VideoUpload: React.FC<VideoUploadProps> = ({
   onUploadComplete,
   allowedTypes = ['video/mp4', 'video/webm', 'video/ogg'],
-  maxSizeMB = 100,
-}) => {
+  maxSizeMB = 100 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -277,5 +276,4 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 };
 
 export default VideoUpload;
-
 

@@ -17,19 +17,19 @@ interface ServiceWorkerState {
 }
 
 interface UseServiceWorkerReturn {
-  // State
+  // State,
   isSupported: boolean;
   isRegistered: boolean;
   updateAvailable: boolean;
   isUpdating: boolean;
   error: string | null;
 
-  // Actions
+  // Actions,
   updateApp: () => Promise<boolean>;
   skipWaiting: () => void;
   unregister: () => Promise<boolean>;
 
-  // Utilities
+  // Utilities,
   getRegistration: () => ServiceWorkerRegistration | null;
   checkForUpdates: () => Promise<void>;
   getCacheInfo: () => Promise<{
@@ -50,8 +50,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
     isUpdating: false,
     registration: null,
     waitingWorker: null,
-    error: null,
-  });
+    error: null });
 
   // Update the app to the latest version
   const updateApp = useCallback(async (): Promise<boolean> => {
@@ -70,13 +69,13 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
         const handleControllerChange = () => {
           navigator.serviceWorker.removeEventListener(
             'controllerchange',
-            handleControllerChange
+            handleControllerChange,
           );
           resolve();
         };
         navigator.serviceWorker.addEventListener(
           'controllerchange',
-          handleControllerChange
+          handleControllerChange,
         );
       });
 
@@ -84,13 +83,12 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
         ...prev,
         isUpdating: false,
         updateAvailable: false,
-        waitingWorker: null,
-      }));
+        waitingWorker: null }));
 
       conditionalLogger.debug(
         'Service worker updated successfully',
         undefined,
-        'useServiceWorker'
+        'useServiceWorker',
       );
 
       // Reload the page to use the new service worker
@@ -98,23 +96,22 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
 
       return true;
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         'useServiceWorker',
         'Failed to update service worker',
-        error
+        error,
       );
 
       conditionalLogger.error(
         'Service worker update failed',
         componentError,
-        'useServiceWorker'
+        'useServiceWorker',
       );
 
       setState(prev => ({
         ...prev,
         isUpdating: false,
-        error: error instanceof Error ? error.message : 'Update failed',
-      }));
+        error: error instanceof Error ? error.message : 'Update failed' }));
 
       return false;
     }
@@ -142,28 +139,27 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
           isRegistered: false,
           registration: null,
           updateAvailable: false,
-          waitingWorker: null,
-        }));
+          waitingWorker: null }));
 
         conditionalLogger.debug(
           'Service worker unregistered',
           undefined,
-          'useServiceWorker'
+          'useServiceWorker',
         );
       }
 
       return result;
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         'useServiceWorker',
         'Failed to unregister service worker',
-        error
+        error,
       );
 
       conditionalLogger.error(
         'Service worker unregistration failed',
         componentError,
-        'useServiceWorker'
+        'useServiceWorker',
       );
       return false;
     }
@@ -185,19 +181,19 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
       conditionalLogger.debug(
         'Checked for service worker updates',
         undefined,
-        'useServiceWorker'
+        'useServiceWorker',
       );
     } catch (error) {
-      const componentError = createComponentError(
+      const componentError = createComponentError(;
         'useServiceWorker',
         'Failed to check for updates',
-        error
+        error,
       );
 
       conditionalLogger.error(
         'Update check failed',
         componentError,
-        'useServiceWorker'
+        'useServiceWorker',
       );
     }
   }, [state.registration]);
@@ -224,13 +220,12 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
 
       return {
         caches: cacheNames,
-        totalSize,
-      };
+        totalSize };
     } catch (error) {
       conditionalLogger.error(
         'Failed to get cache info',
         error,
-        'useServiceWorker'
+        'useServiceWorker',
       );
       return { caches: [], totalSize: 0 };
     }
@@ -245,50 +240,47 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
     const registerServiceWorker = async () => {
       try {
         const registration = await navigator.serviceWorker.register('/sw.js', {
-          scope: '/',
-        });
+          scope: '/' });
 
         setState(prev => ({
           ...prev,
           isRegistered: true,
-          registration,
-        }));
+          registration }));
 
         conditionalLogger.debug(
           'Service worker registered',
           { scope: registration.scope },
-          'useServiceWorker'
+          'useServiceWorker',
         );
 
         // Listen for updates
-        registration.addEventListener('updatefound', () => {
+        registration.addEventListener('updatefound', ( as EventListener) => {
           const newWorker = registration.installing;
 
           if (newWorker) {
             conditionalLogger.debug(
               'New service worker found',
               undefined,
-              'useServiceWorker'
+              'useServiceWorker',
             );
 
-            newWorker.addEventListener('statechange', () => {
+            newWorker.addEventListener('statechange', ( as EventListener) => {
               if (
-                newWorker.state === 'installed' &&
-                navigator.serviceWorker.controller
+                newWorker.state === 'installed' &&,
+                navigator.serviceWorker.controller,
               ) {
                 // New service worker is available
                 setState(prev => ({
                   ...prev,
                   updateAvailable: true,
-                  waitingWorker: newWorker,
-                }));
+                  waitingWorker: newWorker }));
 
                 PWAEvents.handleServiceWorkerUpdate(registration);
 
                 conditionalLogger.debug(
                   'Service worker update available',
                   undefined,
-                  'useServiceWorker'
+                  'useServiceWorker',
                 );
               }
             });
@@ -300,12 +292,11 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
           setState(prev => ({
             ...prev,
             updateAvailable: true,
-            waitingWorker: registration.waiting,
-          }));
+            waitingWorker: registration.waiting }));
         }
 
         // Set up periodic update checks
-        const updateInterval = setInterval(
+        const updateInterval = setInterval(;
           () => {
             checkForUpdates();
           },
@@ -316,22 +307,21 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
           clearInterval(updateInterval);
         };
       } catch (error) {
-        const componentError = createComponentError(
+        const componentError = createComponentError(;
           'useServiceWorker',
           'Failed to register service worker',
-          error
+          error,
         );
 
         conditionalLogger.error(
           'Service worker registration failed',
           componentError,
-          'useServiceWorker'
+          'useServiceWorker',
         );
 
         setState(prev => ({
           ...prev,
-          error: error instanceof Error ? error.message : 'Registration failed',
-        }));
+          error: error instanceof Error ? error.message : 'Registration failed' }));
 
         return () => {}; // Return empty cleanup function
       }
@@ -342,14 +332,14 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
       conditionalLogger.debug(
         'Service worker controller changed',
         undefined,
-        'useServiceWorker'
+        'useServiceWorker',
       );
       // Optionally reload the page or update UI
     };
 
     navigator.serviceWorker.addEventListener(
       'controllerchange',
-      handleControllerChange
+      handleControllerChange,
     );
 
     // Register the service worker
@@ -358,13 +348,13 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
     return () => {
       navigator.serviceWorker.removeEventListener(
         'controllerchange',
-        handleControllerChange
+        handleControllerChange,
       );
     };
   }, [state.isSupported, checkForUpdates]);
 
   return {
-    // State
+    // State,
     isSupported: state.isSupported,
     isRegistered: state.isRegistered,
     updateAvailable: state.updateAvailable,
@@ -379,8 +369,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
     // Utilities
     getRegistration,
     checkForUpdates,
-    getCacheInfo,
-  };
+    getCacheInfo };
 };
 
 export default useServiceWorker;

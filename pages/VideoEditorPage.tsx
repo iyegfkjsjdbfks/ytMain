@@ -11,6 +11,7 @@ declare namespace NodeJS {
 }
 
 import { PauseIcon, PlayIcon  } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
   id: string;
@@ -48,8 +49,7 @@ const VideoEditorPage: React.FC = () => {
     resolution: '1920x1080',
     fps: 30,
     lastModified: new Date(),
-    thumbnail: '/api/placeholder/320/180',
-  });
+    thumbnail: '/api/placeholder/320/180' });
 
   const [clips, setClips] = useState<TimelineClip[]>([
     {
@@ -60,8 +60,7 @@ const VideoEditorPage: React.FC = () => {
       duration: 120,
       track: 0,
       thumbnail: '/api/placeholder/160/90',
-      volume: 80,
-    },
+      volume: 80 },
     {
       id: '2',
       type: 'audio',
@@ -69,8 +68,7 @@ const VideoEditorPage: React.FC = () => {
       startTime: 0,
       duration: 180,
       track: 1,
-      volume: 40,
-    },
+      volume: 40 },
     {
       id: '3',
       type: 'video',
@@ -79,16 +77,14 @@ const VideoEditorPage: React.FC = () => {
       duration: 30,
       track: 0,
       thumbnail: '/api/placeholder/160/90',
-      volume: 90,
-    },
+      volume: 90 },
     {
       id: '4',
       type: 'text',
       name: 'Title Text',
       startTime: 5,
       duration: 10,
-      track: 2,
-    },
+      track: 2 },
   ]);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -149,8 +145,7 @@ return;
       ...clip,
       id: `${clipId}_split_${Date.now()}`,
       startTime: clip.startTime + relativeTime,
-      duration: clip.duration - relativeTime,
-    };
+      duration: clip.duration - relativeTime };
 
     setClips(prev => [
       ...prev.filter((c) => c.id !== clipId),
@@ -161,8 +156,7 @@ return;
     setEditHistory(prev => [...prev, {
       type: 'cut',
       timestamp: Date.now(),
-      description: `Split ${clip.name} at ${formatTime(splitTime)}`,
-    }]);
+      description: `Split ${clip.name} at ${formatTime(splitTime)}` }]);
   };
 
   const handleVolumeChange = (clipId: any, volume: any) => {
@@ -173,8 +167,7 @@ return;
     setEditHistory(prev => [...prev, {
       type: 'volume',
       timestamp: Date.now(),
-      description: `Changed volume to ${volume}%`,
-    }]);
+      description: `Changed volume to ${volume}%` }]);
   };
 
   const handleSaveProject = () => {
@@ -182,8 +175,7 @@ return;
       ...currentProject,
       clips,
       editHistory,
-      lastSaved: new Date().toISOString(),
-    };
+      lastSaved: new Date().toISOString() };
 
     localStorage.setItem(`youtubeCloneProject_${currentProject.id}`, JSON.stringify(projectData));
 
@@ -237,10 +229,8 @@ return;
             exportSettings: {
               format: 'mp4',
               quality: '1080p',
-              fps: currentProject.fps,
-            },
-            exportDate: new Date().toISOString(),
-          };
+              fps: currentProject.fps },
+            exportDate: new Date().toISOString() };
 
           const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
           const url = URL.createObjectURL(blob);
@@ -480,8 +470,7 @@ return;
                           } ${getClipColor(clip.type)}`}
                           style={{
                             left: `${(clip.startTime / currentProject.duration) * 100}%`,
-                            width: `${(clip.duration / currentProject.duration) * 100}%`,
-                          }}
+                            width: `${(clip.duration / currentProject.duration) * 100}%` }}
                           onClick={() => handleClipSelect(clip.id)}
                           onDoubleClick={() => handleClipSplit(clip.id, currentTime)}
                         >
@@ -634,5 +623,4 @@ return null;
 };
 
 export default VideoEditorPage;
-
 

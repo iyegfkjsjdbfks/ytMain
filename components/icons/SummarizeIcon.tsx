@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import type React from 'react';
-
+import React from 'react';
 interface SummarizeIconProps {
   className?: string;
 }

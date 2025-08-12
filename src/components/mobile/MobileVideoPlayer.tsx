@@ -39,8 +39,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
     // Intersection observer for autoplay on mobile
     const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
       threshold: 0.5,
-      rootMargin: '0px',
-    });
+      rootMargin: '0px' });
 
     // Combined ref callback using a mutable ref
     const setRefs = useCallback(
@@ -267,16 +266,14 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
                 onChange={handleSeek}
                 className='w-full h-1 bg-white/30 rounded-lg appearance-none slider-thumb'
                 style={{
-                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)`,
-                }}
+                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)` }}
               />
               {/* Buffered indicator */}
               <div
                 className='absolute h-1 bg-white/50 rounded-lg pointer-events-none'
                 style={{
                   width: `${(buffered / duration) * 100}%`,
-                  marginTop: '-4px',
-                }}
+                  marginTop: '-4px' }}
               />
             </div>
 
@@ -302,5 +299,4 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
 MobileVideoPlayer.displayName = 'MobileVideoPlayer';
 
 export default MobileVideoPlayer;
-
 

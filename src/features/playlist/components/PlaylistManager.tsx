@@ -18,14 +18,12 @@ interface CreatePlaylistModalProps {
 const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
   isOpen,
   onClose,
-  onSubmit,
-}) => {
+  onSubmit }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     visibility: 'public' as 'public' | 'unlisted' | 'private',
-    tags: [] as string,
-  });
+    tags: [] as string });
   const [tagInput, setTagInput] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,8 +37,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
       title: '',
       description: '',
       visibility: 'public',
-      tags: [],
-    });
+      tags: [] });
     setTagInput('');
     onClose();
   };
@@ -49,8 +46,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
     if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
       setFormData(prev => ({
         ...prev,
-        tags: [...prev.tags, tagInput.trim()],
-      }));
+        tags: [...prev.tags, tagInput.trim()] }));
       setTagInput('');
     }
   };
@@ -58,8 +54,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
   const removeTag = (tagToRemove: any) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
-    }));
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
   };
 
   if (!isOpen) {
@@ -114,8 +109,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
               onChange={e =>
                 setFormData(prev => ({
                   ...prev,
-                  visibility: e.target.value as any,
-                }))
+                  visibility: e.target.value as any }))
               }
               className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
             >
@@ -189,8 +183,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
 };
 
 export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
-  className = '',
-}) => {
+  className = '' }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<
@@ -208,8 +201,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
           ? 'title'
           : sortBy === 'most_videos'
             ? 'videoCount'
-            : 'updated',
-  });
+            : 'updated' });
   const isLoading = false; // Placeholder
   const createPlaylistMutation = useCreatePlaylist();
 
@@ -245,8 +237,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
         title: `${playlist.title} (Copy)`,
         visibility: playlist.visibility,
         ...(playlist.description && { description: playlist.description }),
-        ...(playlist.tags && { tags: playlist.tags }),
-      };
+        ...(playlist.tags && { tags: playlist.tags }) };
       await createPlaylistMutation.mutate(duplicateData);
     } catch (error) {
       logger.error('Failed to duplicate playlist:', error);
@@ -509,5 +500,4 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 };
 
 export default PlaylistManager;
-
 

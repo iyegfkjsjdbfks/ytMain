@@ -11,6 +11,7 @@ import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
 
 import type { Video } from '../types';
+import { QueueListIcon } from '@heroicons/react/24/outline';
 
 const UserPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
@@ -228,6 +229,4 @@ const UserPage: React.FC = () => {
 };
 
 export default UserPage;
-
-
 

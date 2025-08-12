@@ -58,8 +58,7 @@ export function getAudienceDemographics() {
       { name: 'Male', value: 60 },
       { name: 'Female', value: 38 },
       { name: 'Other', value: 2 },
-    ],
-  };
+    ] };
 }
 
 export function getTrafficSources() {

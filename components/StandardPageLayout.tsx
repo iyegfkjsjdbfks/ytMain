@@ -1,6 +1,4 @@
-import React, { FC, ReactNode } from 'react';
-import type React from 'react';
-
+import React from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { ErrorState } from './LoadingStates';
 
@@ -40,8 +38,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
   errorComponent,
   emptyComponent,
   className = '',
-  containerClassName = 'container mx-auto px-4 py-6',
-}) => {
+  containerClassName = 'container mx-auto px-4 py-6' }) => {
   // Default loading component
   const defaultLoadingComponent = (
     <div className="flex items-center justify-center min-h-[400px]">

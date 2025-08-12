@@ -3,13 +3,11 @@ import { logger } from '../utils/logger';
 import { youtubeService } from './api/youtubeService';
 import type {
   Video as LocalVideo,
-  Channel as LocalChannel,
-} from '../types/core';
+  Channel as LocalChannel } from '../types/core';
 import type {
   YouTubeVideo,
   YouTubeChannel,
-  YouTubeThumbnails,
-} from '../types/youtube';
+  YouTubeThumbnails } from '../types/youtube';
 
 /**
  * Unified Video Metadata Interface
@@ -132,8 +130,7 @@ class MetadataNormalizationService {
           localVideo.channelAvatarUrl || localVideo.channel?.avatarUrl || '',
         subscribers: subscriberCount,
         subscribersFormatted: this.formatSubscribers(subscriberCount),
-        isVerified: localVideo.channel?.isVerified || false,
-      },
+        isVerified: localVideo.channel?.isVerified || false },
       duration: this.normalizeDuration(localVideo.duration),
       publishedAt:
         localVideo.publishedAt || localVideo.uploadedAt || localVideo.createdAt,
@@ -149,16 +146,13 @@ class MetadataNormalizationService {
       metadata: {
         ...(localVideo.definition && { quality: localVideo.definition }),
         ...(localVideo.contentDetails?.definition && {
-          definition: localVideo.contentDetails.definition,
-        }),
+          definition: localVideo.contentDetails.definition }),
         captions: Boolean(
           localVideo.captions?.length || localVideo.subtitles?.length
         ),
         ...(localVideo.contentDetails?.caption && {
-          language: localVideo.contentDetails.caption,
-        }),
-        ...(localVideo.license && { license: localVideo.license }),
-      },
+          language: localVideo.contentDetails.caption }),
+        ...(localVideo.license && { license: localVideo.license }) },
       // Required properties for Video interface compatibility
       uploadedAt:
         localVideo.uploadedAt || localVideo.publishedAt || localVideo.createdAt,
@@ -170,8 +164,7 @@ class MetadataNormalizationService {
         localVideo.createdAt ||
         localVideo.publishedAt ||
         new Date().toISOString(),
-      updatedAt: localVideo.updatedAt || new Date().toISOString(),
-    };
+      updatedAt: localVideo.updatedAt || new Date().toISOString() };
   }
 
   /**
@@ -193,8 +186,7 @@ class MetadataNormalizationService {
       hasSnippet: !!youtubeVideo.snippet,
       snippetKeys: youtubeVideo.snippet
         ? Object.keys(youtubeVideo.snippet)
-        : 'no snippet',
-    });
+        : 'no snippet' });
 
     const viewCount = parseInt(youtubeVideo.statistics?.viewCount || '0', 10);
     const likeCount = parseInt(youtubeVideo.statistics?.likeCount || '0', 10);
@@ -263,38 +255,30 @@ class MetadataNormalizationService {
       source: 'youtube',
       metadata: {
         ...(youtubeVideo.contentDetails?.definition && {
-          quality: youtubeVideo.contentDetails.definition,
-        }),
+          quality: youtubeVideo.contentDetails.definition }),
         ...(youtubeVideo.contentDetails?.definition && {
-          definition: youtubeVideo.contentDetails.definition,
-        }),
+          definition: youtubeVideo.contentDetails.definition }),
         captions: youtubeVideo.contentDetails?.caption === 'true',
         ...(youtubeVideo.snippet?.defaultLanguage && {
-          language: youtubeVideo.snippet.defaultLanguage,
-        }),
+          language: youtubeVideo.snippet.defaultLanguage }),
         ...(!youtubeVideo.snippet?.defaultLanguage &&
           youtubeVideo.snippet?.defaultAudioLanguage && {
-            language: youtubeVideo.snippet.defaultAudioLanguage,
-          }),
+            language: youtubeVideo.snippet.defaultAudioLanguage }),
         ...(youtubeVideo.status?.license && {
-          license: youtubeVideo.status.license,
-        }),
-      },
+          license: youtubeVideo.status.license }) },
       // Required properties for Video interface compatibility
       uploadedAt: youtubeVideo.snippet?.publishedAt || '',
       channelName: youtubeVideo.snippet?.channelTitle || '',
       channelId: youtubeVideo.snippet?.channelId || '',
       channelAvatarUrl: channel?.snippet?.thumbnails?.default?.url || '',
       createdAt: youtubeVideo.snippet?.publishedAt || new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+      updatedAt: new Date().toISOString() };
 
     logger.debug('normalizeYouTubeVideo - Final normalized data:', {
       id: normalizedVideo.id,
       channelName: normalizedVideo.channel.name,
       channelId: normalizedVideo.channel.id,
-      title: normalizedVideo.title,
-    });
+      title: normalizedVideo.title });
 
     return normalizedVideo;
   }
@@ -319,8 +303,7 @@ class MetadataNormalizationService {
       isVerified: localChannel.isVerified || false,
       ...(localChannel.joinedDate && { joinedDate: localChannel.joinedDate }),
       ...(localChannel.country && { country: localChannel.country }),
-      source: 'local',
-    };
+      source: 'local' };
   }
 
   /**
@@ -352,8 +335,7 @@ class MetadataNormalizationService {
       videoCount,
       totalViews,
       isVerified: false, // Would need additional verification data
-      source: 'youtube',
-    };
+      source: 'youtube' };
 
     // Add optional properties only if they exist
     if (youtubeChannel.snippet?.customUrl) {

@@ -14,8 +14,7 @@ const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({
   onClose,
   initialTitle,
   initialDescription,
-  onSaveChanges,
-}) => {
+  onSaveChanges }) => {
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
   const modalRef = useRef<HTMLFormElement>(null);
@@ -32,10 +31,10 @@ const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({
       }
     };
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside as EventListener);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside as EventListener);
     };
   }, [isOpen, onClose]);
 

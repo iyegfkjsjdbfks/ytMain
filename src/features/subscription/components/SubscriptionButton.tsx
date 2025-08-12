@@ -23,8 +23,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
   className = '',
   size = 'md',
   showNotificationBell = true,
-  variant = 'default',
-}) => {
+  variant = 'default' }) => {
   const [showNotificationMenu, setShowNotificationMenu] = useState(false);
 
   const {
@@ -33,8 +32,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
     isLoading,
     subscribe,
     unsubscribe,
-    updateNotificationLevel,
-  } = useSubscription(channelId);
+    updateNotificationLevel } = useSubscription(channelId);
 
   const handleSubscriptionToggle = async () => {
     if (isSubscribed) {
@@ -288,5 +286,4 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
 };
 
 export default SubscriptionButton;
-
 

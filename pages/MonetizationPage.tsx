@@ -2,6 +2,8 @@ import React, { useEffect, useState, memo, lazy, Suspense, FC } from 'react';
 import { ArrowTrendingUpIcon, BanknotesIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { ChartBarIcon } from '@heroicons/react/24/outline';
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 
 // Lazy load Chart.js components for better performance
 const LazyLineChart = lazy(() => import('react-chartjs-2').then(module => ({ default: module.Line })));
@@ -68,8 +70,7 @@ const MonetizationPage: React.FC = () => {
           membershipRevenue: Math.random() * 30 + 10,
           superChatRevenue: Math.random() * 20 + 5,
           merchandiseRevenue: Math.random() * 15 + 2,
-          sponsorshipRevenue: Math.random() * 200 + 100,
-        });
+          sponsorshipRevenue: Math.random() * 200 + 100 });
       }
 
       setRevenueData(mockRevenueData);
@@ -94,8 +95,7 @@ const MonetizationPage: React.FC = () => {
         superChatCount: Math.floor(Math.random() * 200 + 50),
         merchandiseSales: Math.floor(Math.random() * 50 + 10),
         membershipRevenue,
-        superChatRevenue,
-      });
+        superChatRevenue });
 
       setLoading(false);
     };
@@ -107,8 +107,7 @@ const MonetizationPage: React.FC = () => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2,
-    }).format(amount);
+      minimumFractionDigits: 2 }).format(amount);
   };
 
   const formatNumber = (num: any) => {
@@ -131,31 +130,26 @@ const MonetizationPage: React.FC = () => {
           data: revenueData.map(d => d.adRevenue),
           borderColor: 'rgb(59, 130, 246)',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
-          tension: 0.4,
-        },
+          tension: 0.4 },
         {
           label: 'Membership Revenue',
           data: revenueData.map(d => d.membershipRevenue),
           borderColor: 'rgb(16, 185, 129)',
           backgroundColor: 'rgba(16, 185, 129, 0.1)',
-          tension: 0.4,
-        },
+          tension: 0.4 },
         {
           label: 'Super Chat',
           data: revenueData.map(d => d.superChatRevenue),
           borderColor: 'rgb(245, 158, 11)',
           backgroundColor: 'rgba(245, 158, 11, 0.1)',
-          tension: 0.4,
-        },
+          tension: 0.4 },
         {
           label: 'Sponsorships',
           data: revenueData.map(d => d.sponsorshipRevenue),
           borderColor: 'rgb(139, 92, 246)',
           backgroundColor: 'rgba(139, 92, 246, 0.1)',
-          tension: 0.4,
-        },
-      ],
-    };
+          tension: 0.4 },
+      ] };
   };
 
   const getRevenueSourcesData = () => {
@@ -168,8 +162,7 @@ return { labels: [], datasets: [] };
       membershipRevenue: acc.membershipRevenue + day.membershipRevenue,
       superChatRevenue: acc.superChatRevenue + day.superChatRevenue,
       merchandiseRevenue: acc.merchandiseRevenue + day.merchandiseRevenue,
-      sponsorshipRevenue: acc.sponsorshipRevenue + day.sponsorshipRevenue,
-    }), { adRevenue: 0, membershipRevenue: 0, superChatRevenue: 0, merchandiseRevenue: 0, sponsorshipRevenue: 0 });
+      sponsorshipRevenue: acc.sponsorshipRevenue + day.sponsorshipRevenue }), { adRevenue: 0, membershipRevenue: 0, superChatRevenue: 0, merchandiseRevenue: 0, sponsorshipRevenue: 0 });
 
     return {
       labels: ['Ad Revenue', 'Memberships', 'Super Chat', 'Merchandise', 'Sponsorships'],
@@ -196,10 +189,8 @@ return { labels: [], datasets: [] };
             'rgb(239, 68, 68)',
             'rgb(139, 92, 246)',
           ],
-          borderWidth: 2,
-        },
-      ],
-    };
+          borderWidth: 2 },
+      ] };
   };
 
   const chartOptions = {
@@ -209,32 +200,21 @@ return { labels: [], datasets: [] };
       legend: {
         position: 'top' as const, labels: {
           usePointStyle: true,
-          padding: 20,
-        },
-      },
+          padding: 20 } },
       tooltip: {
         mode: 'index' as const, intersect: false,
         callbacks: {
           label: (context: any) => {
             return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
-          },
-        },
-      },
-    },
+          } } } },
     scales: {
       x: {
         grid: {
-          display: false,
-        },
-      },
+          display: false } },
       y: {
         beginAtZero: true,
         ticks: {
-          callback: (value: string | number) => formatCurrency(value as number),
-        },
-      },
-    },
-  };
+          callback: (value: string | number) => formatCurrency(value as number) } } } };
 
   const doughnutOptions = {
     responsive: true,
@@ -243,20 +223,14 @@ return { labels: [], datasets: [] };
       legend: {
         position: 'bottom' as const, labels: {
           usePointStyle: true,
-          padding: 20,
-        },
-      },
+          padding: 20 } },
       tooltip: {
         callbacks: {
           label: (context: any) => {
             const total = context.dataset.data.reduce((a: any, b: any) => a + b, 0);
             const percentage = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
-          },
-        },
-      },
-    },
-  };
+          } } } } };
 
   if (loading || !metrics) {
     return (
@@ -516,5 +490,4 @@ return { labels: [], datasets: [] };
 };
 
 export default memo(MonetizationPage);
-
 

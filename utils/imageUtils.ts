@@ -131,8 +131,7 @@ export const createIntersectionObserver = (
     root: null,
     rootMargin: '50px',
     threshold: 0.1,
-    ...options,
-  };
+    ...options };
 
   return new IntersectionObserver(callback, defaultOptions);
 };
@@ -308,5 +307,4 @@ export default {
   getContrastColor,
   compressImage,
   validateImageFile,
-  extractDominantColor,
-};
+  extractDominantColor };

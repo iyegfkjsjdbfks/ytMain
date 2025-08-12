@@ -33,8 +33,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
   autoShow = true,
   showBenefits = true,
   onInstallSuccess,
-  onDismiss,
-}) => {
+  onDismiss }) => {
   const { canInstall, isInstalled } = usePWA();
   const { isInstalling, installError, installApp, dismissPrompt, resetError } =
     useInstallPrompt();
@@ -85,8 +84,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
         trackEvent('pwa_install_success', {
           source: 'banner',
           variant,
-          timestamp: Date.now(),
-        });
+          timestamp: Date.now() });
         onInstallSuccess?.();
         setIsVisible(false);
       }
@@ -95,8 +93,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
       trackEvent('pwa_install_error', {
         source: 'banner',
         variant,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      });
+        error: error instanceof Error ? error.message : 'Unknown error' });
     }
   };
 
@@ -109,8 +106,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
 
     trackEvent('pwa_banner_dismissed', {
       variant,
-      timestamp: Date.now(),
-    });
+      timestamp: Date.now() });
   };
 
   const handleUpdateInstall = async () => {
@@ -118,8 +114,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
       await installUpdate();
       trackEvent('pwa_update_installed', {
         source: 'banner',
-        timestamp: Date.now(),
-      });
+        timestamp: Date.now() });
     } catch (error) {
       console.error('Failed to install update:', error);
     }
@@ -339,5 +334,4 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
     </div>
   );
 };
-
 

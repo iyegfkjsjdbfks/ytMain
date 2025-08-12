@@ -43,8 +43,7 @@ const initialState: MiniplayerState = {
   duration: 0,
   isMaximized: false,
   queue: [],
-  currentIndex: -1,
-};
+  currentIndex: -1 };
 
 // Reducer
 const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): MiniplayerState => {
@@ -54,8 +53,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         ...state,
         isVisible: true,
         currentVideo: action.payload,
-        isPlaying: true,
-      };
+        isPlaying: true };
 
     case 'HIDE_MINIPLAYER':
       return {
@@ -63,63 +61,53 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         isVisible: false,
         currentVideo: null,
         isPlaying: false,
-        currentTime: 0,
-      };
+        currentTime: 0 };
 
     case 'TOGGLE_PLAY':
       return {
         ...state,
-        isPlaying: !state.isPlaying,
-      };
+        isPlaying: !state.isPlaying };
 
     case 'SET_PLAYING':
       return {
         ...state,
-        isPlaying: action.payload,
-      };
+        isPlaying: action.payload };
 
     case 'SET_VOLUME':
       return {
         ...state,
-        volume: Math.max(0, Math.min(1, action.payload)),
-      };
+        volume: Math.max(0, Math.min(1, action.payload)) };
 
     case 'SET_CURRENT_TIME':
       return {
         ...state,
-        currentTime: action.payload,
-      };
+        currentTime: action.payload };
 
     case 'SET_DURATION':
       return {
         ...state,
-        duration: action.payload,
-      };
+        duration: action.payload };
 
     case 'TOGGLE_MAXIMIZE':
       return {
         ...state,
-        isMaximized: !state.isMaximized,
-      };
+        isMaximized: !state.isMaximized };
 
     case 'SET_MAXIMIZED':
       return {
         ...state,
-        isMaximized: action.payload,
-      };
+        isMaximized: action.payload };
 
     case 'SET_QUEUE':
       return {
         ...state,
         queue: action.payload,
-        currentIndex: action.payload.length > 0 ? 0 : -1,
-      };
+        currentIndex: action.payload.length > 0 ? 0 : -1 };
 
     case 'ADD_TO_QUEUE':
       return {
         ...state,
-        queue: [...state.queue, action.payload],
-      };
+        queue: [...state.queue, action.payload] };
 
     case 'REMOVE_FROM_QUEUE': {
       const newQueue = state.queue.filter((video: any) => video.id !== action.payload);
@@ -127,8 +115,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       return {
         ...state,
         queue: newQueue,
-        currentIndex: newIndex,
-      };
+        currentIndex: newIndex };
     }
 
     case 'NEXT_VIDEO': {
@@ -138,8 +125,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: nextIndex,
           currentVideo: state.queue[nextIndex] || null,
-          currentTime: 0,
-        };
+          currentTime: 0 };
       }
       return state;
     }
@@ -151,8 +137,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: prevIndex,
           currentVideo: state.queue[prevIndex] || null,
-          currentTime: 0,
-        };
+          currentTime: 0 };
       }
       return state;
     }
@@ -163,8 +148,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: action.payload,
           currentVideo: state.queue[action.payload] || null,
-          currentTime: 0,
-        };
+          currentTime: 0 };
       }
       return state;
 
@@ -222,8 +206,7 @@ export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProp
     removeFromQueue: (videoId: any) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId }),
     nextVideo: () => dispatch({ type: 'NEXT_VIDEO' }),
     previousVideo: () => dispatch({ type: 'PREVIOUS_VIDEO' }),
-    setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }),
-  }), []);
+    setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }) }), []);
 
   const value = useMemo(() => ({ state, actions }), [state]);
 
@@ -260,21 +243,18 @@ export const useMiniplayerPlayback = () => {
     isPlaying: state.isPlaying,
     currentTime: state.currentTime,
     duration: state.duration,
-    volume: state.volume,
-  };
+    volume: state.volume };
 };
 
 export const useMiniplayerQueue = () => {
   const { state } = useOptimizedMiniplayer();
   return {
     queue: state.queue,
-    currentIndex: state.currentIndex,
-  };
+    currentIndex: state.currentIndex };
 };
 
 export const useMiniplayerActions = () => {
   const { actions } = useOptimizedMiniplayer();
   return actions;
 };
-
 

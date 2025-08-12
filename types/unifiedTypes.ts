@@ -1,3 +1,4 @@
+import type { Video } from '../types';
 import React, { ReactNode } from 'react';
 // Unified Type System for YouTube Studio Clone
 

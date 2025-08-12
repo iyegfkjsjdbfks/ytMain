@@ -57,8 +57,7 @@ export async function summarizeText(textToSummarize: any): Promise<string> {
   try {
     const response: GenerateContentResponse = await ai.models.generateContent({
       model,
-      contents: prompt,
-    });
+      contents: prompt });
 
     const summary = response.text;
     if (!summary) {
@@ -109,9 +108,7 @@ export async function generateVideoIdeas(userInput: any): Promise<VideoIdeaRespo
       model,
       contents: prompt,
       config: {
-        responseMimeType: 'application/json',
-      },
-    });
+        responseMimeType: 'application/json' } });
 
     const responseText = response.text;
     if (!responseText) {

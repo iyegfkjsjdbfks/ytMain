@@ -116,8 +116,7 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(
     onDislike,
     className = '',
     height = 400,
-    itemHeight = 120,
-  }) => {
+    itemHeight = 120 }) => {
     usePerformanceMonitor('VirtualizedCommentList');
 
     const listData = useMemo(
@@ -125,8 +124,7 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(
         comments,
         onReply,
         onLike,
-        onDislike,
-      }),
+        onDislike }),
       [comments, onReply, onLike, onDislike]
     );
 
@@ -158,5 +156,4 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(
 VirtualizedCommentList.displayName = 'VirtualizedCommentList';
 
 export default VirtualizedCommentList;
-
 

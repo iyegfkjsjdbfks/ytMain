@@ -1,4 +1,4 @@
-import React, { memo, ReactNode, ReactElement } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 import type { ReactElement } from 'react';
 
 import { QueryClientProvider, QueryClient  } from '@tanstack/react-query';
@@ -21,11 +21,9 @@ export const mockVideo = (overrides = {}) => ({
     id: 'channel-1',
     name: 'Test Channel',
     avatar: 'https://example.com/avatar.jpg',
-    subscribers: 10000,
-  },
+    subscribers: 10000 },
   url: 'https://example.com/video.mp4',
-  ...overrides,
-});
+  ...overrides });
 
 export const mockUser = (overrides = {}) => ({
   id: 'user-1',
@@ -37,10 +35,8 @@ export const mockUser = (overrides = {}) => ({
   preferences: {
     theme: 'light',
     autoplay: true,
-    quality: 'auto',
-  },
-  ...overrides,
-});
+    quality: 'auto' },
+  ...overrides });
 
 export const mockComment = (overrides = {}) => ({
   id: 'comment-1',
@@ -49,8 +45,7 @@ export const mockComment = (overrides = {}) => ({
   timestamp: '2024-01-01T00:00:00Z',
   likes: 10,
   replies: [],
-  ...overrides,
-});
+  ...overrides });
 
 export const mockPost = (overrides = {}) => ({
   id: 'post-1',
@@ -60,8 +55,7 @@ export const mockPost = (overrides = {}) => ({
   likes: 10,
   comments: 5,
   avatar: 'https://example.com/avatar.jpg',
-  ...overrides,
-});
+  ...overrides });
 
 // Test providers wrapper
 interface AllTheProvidersProps {
@@ -72,20 +66,15 @@ interface AllTheProvidersProps {
 
 const AllTheProviders = ({
   children,
-  queryClient,
-}: AllTheProvidersProps) => {
+  queryClient }: AllTheProvidersProps) => {
   const testQueryClient = queryClient || new QueryClient({
     defaultOptions: {
       queries: {
         retry: false,
         gcTime: 0,
-        staleTime: 0,
-      },
+        staleTime: 0 },
       mutations: {
-        retry: false,
-      },
-    },
-  });
+        retry: false } } });
 
   return (
     <QueryClientProvider client={testQueryClient}>
@@ -114,15 +103,12 @@ const customRender = (
         queryClient={queryClient || new QueryClient({
           defaultOptions: {
             queries: { retry: false, gcTime: 0, staleTime: 0 },
-            mutations: { retry: false },
-          },
-        })}
+            mutations: { retry: false } } })}
       >
         {children}
       </AllTheProviders>
     ),
-    ...renderOptions,
-  });
+    ...renderOptions });
 };
 
 // Mock implementations
@@ -131,20 +117,17 @@ export const mockIntersectionObserver = () => {
   mockIntersectionObserver.mockReturnValue({
     observe: vi.fn(),
     unobserve: vi.fn(),
-    disconnect: vi.fn(),
-  });
+    disconnect: vi.fn() });
 
   Object.defineProperty(window, 'IntersectionObserver', {
     writable: true,
     configurable: true,
-    value: mockIntersectionObserver,
-  });
+    value: mockIntersectionObserver });
 
   Object.defineProperty(global, 'IntersectionObserver', {
     writable: true,
     configurable: true,
-    value: mockIntersectionObserver,
-  });
+    value: mockIntersectionObserver });
 
   return mockIntersectionObserver;
 };
@@ -154,14 +137,12 @@ export const mockResizeObserver = () => {
   mockResizeObserver.mockReturnValue({
     observe: vi.fn(),
     unobserve: vi.fn(),
-    disconnect: vi.fn(),
-  });
+    disconnect: vi.fn() });
 
   Object.defineProperty(window, 'ResizeObserver', {
     writable: true,
     configurable: true,
-    value: mockResizeObserver,
-  });
+    value: mockResizeObserver });
 
   return mockResizeObserver;
 };
@@ -175,13 +156,11 @@ export const mockMatchMedia = (matches = false) => {
     removeListener: vi.fn(),
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  }));
+    dispatchEvent: vi.fn() }));
 
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: mockMatchMedia,
-  });
+    value: mockMatchMedia });
 
   return mockMatchMedia;
 };
@@ -201,13 +180,11 @@ export const mockLocalStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn(),
-  };
+    key: vi.fn() };
 
   Object.defineProperty(window, 'localStorage', {
     value: mockStorage,
-    writable: true,
-  });
+    writable: true });
 
   return mockStorage;
 };
@@ -227,13 +204,11 @@ export const mockSessionStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn(),
-  };
+    key: vi.fn() };
 
   Object.defineProperty(window, 'sessionStorage', {
     value: mockStorage,
-    writable: true,
-  });
+    writable: true });
 
   return mockStorage;
 };
@@ -249,15 +224,13 @@ export const mockFetch = () => {
     text: vi.fn().mockResolvedValue(JSON.stringify(data)),
     blob: vi.fn().mockResolvedValue(new Blob([JSON.stringify(data)])),
     headers: new Headers(),
-    statusText: 'OK',
-  });
+    statusText: 'OK' });
 
   mockFetch.mockResolvedValue(mockResponse({}));
 
   Object.defineProperty(global, 'fetch', {
     value: mockFetch,
-    writable: true,
-  });
+    writable: true });
 
   return { mockFetch, mockResponse };
 };
@@ -275,14 +248,11 @@ export const mockPerformance = () => {
     memory: {
       usedJSHeapSize: 1000000,
       totalJSHeapSize: 2000000,
-      jsHeapSizeLimit: 4000000,
-    },
-  };
+      jsHeapSizeLimit: 4000000 } };
 
   Object.defineProperty(global, 'performance', {
     value: mockPerformance,
-    writable: true,
-  });
+    writable: true });
 
   return mockPerformance;
 };
@@ -291,13 +261,11 @@ export const mockPerformance = () => {
 export const mockURL = () => {
   const mockURL = {
     createObjectURL: vi.fn(() => 'blob:mock-url'),
-    revokeObjectURL: vi.fn(),
-  };
+    revokeObjectURL: vi.fn() };
 
   Object.defineProperty(global, 'URL', {
     value: mockURL,
-    writable: true,
-  });
+    writable: true });
 
   return mockURL;
 };
@@ -317,18 +285,15 @@ export const mockVideoElement = () => {
     playbackRate: 1,
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  };
+    dispatchEvent: vi.fn() };
 
   Object.defineProperty(global.HTMLMediaElement.prototype, 'play', {
     value: mockVideo.play,
-    writable: true,
-  });
+    writable: true });
 
   Object.defineProperty(global.HTMLMediaElement.prototype, 'pause', {
     value: mockVideo.pause,
-    writable: true,
-  });
+    writable: true });
 
   return mockVideo;
 };
@@ -344,13 +309,9 @@ export const createMockQueryClient = () => {
       queries: {
         retry: false,
         gcTime: 0,
-        staleTime: 0,
-      },
+        staleTime: 0 },
       mutations: {
-        retry: false,
-      },
-    },
-  });
+        retry: false } } });
 };
 
 // Setup function for common mocks
@@ -380,6 +341,4 @@ export const cleanupTestEnvironment = () => {
 // Re-export everything from React Testing Library
 export * from '@testing-library/react';
 export { customRender as render };
-
-
 

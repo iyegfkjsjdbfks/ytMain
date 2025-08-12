@@ -156,13 +156,12 @@ export const useArray = <T>(
     filter,
     update,
     remove,
-    clear,
-  };
+    clear };
 };
 
 // Async state hook
 export const useAsync = <T, E = string>(
-  asyncFunction: () => Promise<T>,
+  asyncFunction: () => Promise<T>
   immediate: boolean = true
 ): {
   execute: () => Promise<void>;
@@ -198,7 +197,7 @@ export const useAsync = <T, E = string>(
 
 // Click outside hook
 export const useClickOutside = (
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement>
   handler: (event: MouseEvent | TouchEvent) => void
 ): void => {
   useEffect(() => {
@@ -209,12 +208,12 @@ export const useClickOutside = (
       handler(event);
     };
 
-    document.addEventListener('mousedown', listener);
-    document.addEventListener('touchstart', listener);
+    document.addEventListener('mousedown', listener as EventListener);
+    document.addEventListener('touchstart', listener as EventListener);
 
     return () => {
-      document.removeEventListener('mousedown', listener);
-      document.removeEventListener('touchstart', listener);
+      document.removeEventListener('mousedown', listener as EventListener);
+      document.removeEventListener('touchstart', listener as EventListener);
     };
   }, [ref, handler]);
 };
@@ -236,8 +235,7 @@ export const useKeyPress = (
         ctrl = false,
         shift = false,
         alt = false,
-        meta = false,
-      } = options;
+        meta = false } = options;
 
       if (
         event.key === targetKey &&
@@ -251,8 +249,8 @@ export const useKeyPress = (
       }
     };
 
-    document.addEventListener('keydown', handleKeyPress);
-    return () => document.removeEventListener('keydown', handleKeyPress);
+    document.addEventListener('keydown', handleKeyPress as EventListener);
+    return () => document.removeEventListener('keydown', handleKeyPress as EventListener);
   }, [targetKey, handler, options]);
 };
 
@@ -260,19 +258,17 @@ export const useKeyPress = (
 export const useWindowSize = (): { width: number; height: number } => {
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0,
-  });
+    height: typeof window !== 'undefined' ? window.innerHeight : 0 });
 
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
-        height: window.innerHeight,
-      });
+        height: window.innerHeight });
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize as EventListener);
+    return () => window.removeEventListener('resize', handleResize as EventListener);
   }, []);
 
   return windowSize;
@@ -294,8 +290,8 @@ export const useMediaQuery = (query: any): boolean => {
       setMatches(event.matches);
     };
 
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
+    media.addEventListener('change', listener as EventListener);
+    return () => media.removeEventListener('change', listener as EventListener);
   }, [query]);
 
   return matches;
@@ -303,7 +299,7 @@ export const useMediaQuery = (query: any): boolean => {
 
 // Intersection observer hook
 export const useIntersectionObserver = (
-  elementRef: React.RefObject<Element>,
+  elementRef: React.RefObject<Element>
   options: IntersectionObserverInit = {}
 ): IntersectionObserverEntry | null => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -334,12 +330,11 @@ export const useScrollPosition = (): { x: number; y: number } => {
     const handleScroll = throttle(() => {
       setScrollPosition({
         x: window.scrollX,
-        y: window.scrollY,
-      });
+        y: window.scrollY });
     }, 100);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll as EventListener);
+    return () => window.removeEventListener('scroll', handleScroll as EventListener);
   }, []);
 
   return scrollPosition;
@@ -375,8 +370,7 @@ export const useFormValidation = <T extends Record<string, unknown>>(
       const error = validateField(name, value);
       setErrors(prev => ({
         ...prev,
-        [name]: error,
-      }));
+        [name]: error }));
     },
     [validateField]
   );
@@ -422,8 +416,7 @@ export const useFormValidation = <T extends Record<string, unknown>>(
     isValid,
     handleChange,
     handleSubmit,
-    reset,
-  };
+    reset };
 };
 
 export default {
@@ -441,5 +434,4 @@ export default {
   useMediaQuery,
   useIntersectionObserver,
   useScrollPosition,
-  useFormValidation,
-};
+  useFormValidation };

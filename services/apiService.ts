@@ -69,8 +69,7 @@ class ApiCache {
       data,
       timestamp: Date.now(),
       ttl: ttl || this.defaultTTL,
-      ...(etag && { etag }),
-    });
+      ...(etag && { etag }) });
   }
 
   get<T>(key: string): T | null {
@@ -191,8 +190,7 @@ export class ApiService {
       cache: false,
       cacheTTL: 5 * 60 * 1000,
       validateStatus: (status) => status >= 200 && status < 300,
-      ...defaultConfig,
-    };
+      ...defaultConfig };
   }
 
   // Interceptor management
@@ -276,7 +274,7 @@ export class ApiService {
         }
 
         // Cache successful GET responses
-        if (interceptedConfig.method === 'GET' && interceptedConfig.cache &&
+        if (interceptedConfig.method === 'GET' && interceptedConfig.cache &&,
             interceptedResponse.status >= 200 && interceptedResponse.status < 300) {
           const cacheKey = this.getCacheKey(interceptedConfig.url, interceptedConfig);
           const etag = interceptedResponse.headers.get('etag') || undefined;
@@ -329,16 +327,14 @@ export class ApiService {
   // Execute the actual HTTP request
   private async executeRequest<T>(
     config: RequestConfig & { url: string },
-    requestId: any,
-  ): Promise<ApiResponse<T>> {
+    requestId: any): Promise<ApiResponse<T>> {
     const { url, method = 'GET', headers = {}, body, timeout, retries = 0, retryDelay = 1000 } = config;
 
     // Prepare headers
     const requestHeaders = new Headers({
       'Content-Type': 'application/json',
       'X-Request-ID': requestId,
-      ...headers,
-    });
+      ...headers });
 
     // Add CSRF token for non-GET requests
     if (method !== 'GET') {
@@ -352,8 +348,7 @@ export class ApiService {
     const requestOptions: RequestInit = {
       method,
       headers: requestHeaders,
-      signal: config.signal || null,
-    };
+      signal: config.signal || null };
 
     // Add body for non-GET requests
     if (body && method !== 'GET') {
@@ -370,14 +365,14 @@ export class ApiService {
     const timeoutId = setTimeout(() => timeoutController.abort(), timeout);
 
     // Combine signals
-    const combinedSignal = this.combineAbortSignals([
+    const combinedSignal = this.combineAbortSignals([,;
       config.signal,
-      timeoutController.signal,
+      timeoutController.signal
     ].filter(Boolean) as AbortSignal);
 
     requestOptions.signal = combinedSignal;
 
-    let lastError: Error = new Error('Request failed');
+    let lastError: Error = new Error('Request failed',);
 
     // Retry logic
     for (let attempt = 0; attempt <= retries; attempt++) {
@@ -404,8 +399,7 @@ export class ApiService {
           status: response.status,
           statusText: response.statusText,
           headers: response.headers,
-          timestamp: Date.now(),
-        };
+          timestamp: Date.now() };
       } catch (error) {
         clearTimeout(timeoutId);
 
@@ -466,7 +460,7 @@ export class ApiService {
 
   // Utility methods
   private buildUrl(url: any): string {
-    if (url.startsWith('http://') || url.startsWith('https://')) {
+    if (url.startsWith('http://') || url.startsWith('https://',)) {
       return url;
     }
     return `${this.baseURL}${url.startsWith('/') ? url : `/${  url}`}`;
@@ -506,7 +500,7 @@ export class ApiService {
       if (signal.aborted) {
         controller.abort();
       } else {
-        signal.addEventListener('abort', () => controller.abort());
+        signal.addEventListener('abort', ( as EventListener) => controller.abort());
       }
     });
 
@@ -556,8 +550,7 @@ export class ApiService {
     return this.request<T>(url, {
       ...config,
       method: 'POST',
-      body: formData,
-    });
+      body: formData });
   }
 
   // Batch requests
@@ -587,16 +580,14 @@ export class ApiService {
       return {
         status: 'healthy',
         responseTime,
-        timestamp: Date.now(),
-      };
+        timestamp: Date.now() };
     } catch (error) {
       const responseTime = performance.now() - startTime;
 
       return {
         status: 'unhealthy',
         responseTime,
-        timestamp: Date.now(),
-      };
+        timestamp: Date.now() };
     }
   }
 }
@@ -611,8 +602,7 @@ apiService.addRequestInterceptor(async (config) => {
   if (token) {
     config.headers = {
       ...config.headers,
-      'Authorization': `Bearer ${token}`,
-    };
+      'Authorization': `Bearer ${token}` };
   }
 
   return config;

@@ -20,7 +20,7 @@ interface UseAsyncDataReturn<T> {
  * @returns Object containing data, loading, error states and utility functions
  */
 export function useAsyncData<T>(
-  asyncFunction: () => Promise<T>,
+  asyncFunction: () => Promise<T>
   options: UseAsyncDataOptions<T> = {}
 ): UseAsyncDataReturn<T> {
   const { initialData, dependencies = [] } = options;
@@ -85,6 +85,5 @@ export function useAsyncData<T>(
     loading,
     error,
     refetch,
-    setData,
-  };
+    setData };
 }

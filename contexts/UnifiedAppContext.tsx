@@ -47,8 +47,7 @@ const initialState: UnifiedAppState = {
   isMiniplayerOpen: false,
   watchLaterVideos: [],
   sidebarCollapsed: false,
-  notifications: [],
-};
+  notifications: [] };
 
 // Reducer
 function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): UnifiedAppState {
@@ -57,54 +56,44 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
       return {
         ...state,
         user: action.payload,
-        isAuthenticated: !!action.payload,
-      };
+        isAuthenticated: !!action.payload };
     case 'SET_AUTH_LOADING':
       return {
         ...state,
-        isAuthLoading: action.payload,
-      };
+        isAuthLoading: action.payload };
     case 'SET_THEME':
       return {
         ...state,
-        theme: action.payload,
-      };
+        theme: action.payload };
     case 'SET_MINIPLAYER_VIDEO':
       return {
         ...state,
         miniplayerVideo: action.payload,
-        isMiniplayerOpen: !!action.payload,
-      };
+        isMiniplayerOpen: !!action.payload };
     case 'TOGGLE_MINIPLAYER':
       return {
         ...state,
-        isMiniplayerOpen: !state.isMiniplayerOpen,
-      };
+        isMiniplayerOpen: !state.isMiniplayerOpen };
     case 'ADD_TO_WATCH_LATER':
       return {
         ...state,
-        watchLaterVideos: [...state.watchLaterVideos, action.payload],
-      };
+        watchLaterVideos: [...state.watchLaterVideos, action.payload] };
     case 'REMOVE_FROM_WATCH_LATER':
       return {
         ...state,
-        watchLaterVideos: state.watchLaterVideos.filter((id: string) => id !== action.payload),
-      };
+        watchLaterVideos: state.watchLaterVideos.filter((id: string) => id !== action.payload) };
     case 'TOGGLE_SIDEBAR':
       return {
         ...state,
-        sidebarCollapsed: !state.sidebarCollapsed,
-      };
+        sidebarCollapsed: !state.sidebarCollapsed };
     case 'ADD_NOTIFICATION':
       return {
         ...state,
-        notifications: [...state.notifications, action.payload],
-      };
+        notifications: [...state.notifications, action.payload] };
     case 'REMOVE_NOTIFICATION':
       return {
         ...state,
-        notifications: state.notifications.filter((n: any) => n.id !== action.payload),
-      };
+        notifications: state.notifications.filter((n: any) => n.id !== action.payload) };
     default:
       return state;
   }
@@ -183,18 +172,14 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
             subscriptions: true,
             comments: true,
             likes: true,
-            mentions: true,
-          },
+            mentions: true },
           privacy: {
             showSubscriptions: true,
             showLikedVideos: true,
             showWatchHistory: true,
-            allowComments: true,
-          },
-        },
+            allowComments: true } },
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+        updatedAt: new Date().toISOString() };
 
       localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));
       localStorage.setItem('youtube_clone_token', 'mock-token');
@@ -276,8 +261,7 @@ return false;
     const notificationWithId: StrictNotification = {
       ...notification,
       id: Date.now().toString(),
-      timestamp: new Date().toISOString(),
-    };
+      timestamp: new Date().toISOString() };
     dispatch({ type: 'ADD_NOTIFICATION', payload: notificationWithId });
   }, []);
 
@@ -354,8 +338,7 @@ return false;
     isInWatchLater,
     toggleSidebar,
     addNotification,
-    removeNotification,
-  };
+    removeNotification };
 
   return (
     <UnifiedAppContext.Provider value={contextValue}>
@@ -365,5 +348,4 @@ return false;
 };
 
 export default UnifiedAppProvider;
-
 

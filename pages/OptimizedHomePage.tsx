@@ -43,8 +43,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
   const [showSections] = useState({
     shorts: true,
     trending: true,
-    subscriptions: true,
-  });
+    subscriptions: true });
 
   // Use optimized video data hook
   const {
@@ -53,8 +52,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
     error,
     refetch,
     hasMore,
-    loadMore,
-  } = useHomeVideos(selectedCategory === 'All' ? undefined : selectedCategory);
+    loadMore } = useHomeVideos(selectedCategory === 'All' ? undefined : selectedCategory);
 
   // Memoized filtered videos
   const filteredVideos = useMemo(() => {
@@ -252,5 +250,4 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
 };
 
 export default OptimizedHomePage;
-
 

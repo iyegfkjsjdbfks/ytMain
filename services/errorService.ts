@@ -34,8 +34,7 @@ const DEFAULT_CONFIG: ErrorServiceConfig = {
   enableRemoteLogging: false,
   enableLocalStorage: true,
   maxStoredErrors: 100,
-  enablePerformanceTracking: true,
-};
+  enablePerformanceTracking: true };
 
 class ErrorService {
   private config: ErrorServiceConfig;
@@ -56,7 +55,7 @@ class ErrorService {
 
   private initializeErrorHandlers() {
     // Global error handler
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', (event as EventListener) => {
       this.captureError({
         message: event.message,
         stack: event.error?.stack,
@@ -67,14 +66,11 @@ class ErrorService {
           timestamp: Date.now(),
           additionalData: {
             lineno: event.lineno,
-            colno: event.colno,
-          },
-        },
-      });
+            colno: event.colno } } });
     });
 
     // Unhandled promise rejection handler
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', (event as EventListener) => {
       this.captureError({
         message: `Unhandled Promise Rejection: ${event.reason}`,
         stack: event.reason?.stack,
@@ -83,10 +79,7 @@ class ErrorService {
         context: {
           timestamp: Date.now(),
           additionalData: {
-            reason: event.reason,
-          },
-        },
-      });
+            reason: event.reason } } });
     });
 
     // Network error monitoring
@@ -114,10 +107,7 @@ class ErrorService {
               additionalData: {
                 status: response.status,
                 statusText: response.statusText,
-                duration,
-              },
-            },
-          });
+                duration } } });
         }
 
         return response;
@@ -133,10 +123,7 @@ class ErrorService {
             url: typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
             additionalData: {
               duration,
-              error: error instanceof Error ? error.message : String(error),
-            },
-          },
-        });
+              error: error instanceof Error ? error.message : String(error) } } });
         throw error;
       }
     };
@@ -158,8 +145,7 @@ class ErrorService {
       userAgent: navigator.userAgent,
       url: window.location.href,
       timestamp: Date.now(),
-      ...errorData.context,
-    };
+      ...errorData.context };
 
     if (existingError) {
       // Update existing error
@@ -175,8 +161,7 @@ class ErrorService {
         severity: errorData.severity,
         context,
         resolved: false,
-        occurrenceCount: 1,
-      };
+        occurrenceCount: 1 };
 
       this.errors.set(errorId, errorReport);
       this.notifyListeners(errorReport);
@@ -216,8 +201,7 @@ class ErrorService {
       const logMethod = this.getConsoleMethod(error.severity);
       logMethod(`[ErrorService] ${error.type.toUpperCase()}: ${error.message}`, {
         error,
-        stack: error.stack,
-      });
+        stack: error.stack });
     }
 
     // Local storage
@@ -231,7 +215,7 @@ class ErrorService {
     }
   }
 
-  private getConsoleMethod(severity: ErrorReport['severity']) {
+  private getConsoleMethod(severity: ErrorReport['severity'],) {
     switch (severity) {
       case 'low': return console.info;
       case 'medium': return console.warn;
@@ -243,7 +227,7 @@ class ErrorService {
 
   private saveToLocalStorage() {
     try {
-      const errorsArray = Array.from(this.errors.values())
+      const errorsArray = Array.from(this.errors.values());
         .sort((a, b) => b.context.timestamp - a.context.timestamp)
         .slice(0, this.config.maxStoredErrors);
 
@@ -281,10 +265,8 @@ return;
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }),
-        },
-        body: JSON.stringify(error),
-      });
+          ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }) },
+        body: JSON.stringify(error) });
     } catch (networkError) {
       console.warn('Failed to send error to remote service:', networkError);
     }
@@ -306,11 +288,11 @@ return;
       .sort((a, b) => b.context.timestamp - a.context.timestamp);
   }
 
-  getErrorsByType(type: ErrorReport['type']): ErrorReport[] {
+  getErrorsByType(type: ErrorReport['type'],): ErrorReport[] {
     return this.getErrors().filter(error => error.type === type);
   }
 
-  getErrorsBySeverity(severity: ErrorReport['severity']): ErrorReport[] {
+  getErrorsBySeverity(severity: ErrorReport['severity'],): ErrorReport[] {
     return this.getErrors().filter(error => error.severity === severity);
   }
 
@@ -344,16 +326,14 @@ return;
   }
 
   // Utility methods for manual error reporting
-  reportValidationError(message: any, field?: string, value: any?) {
+  reportValidationError(message: any, field?: string, value: any?,) {
     this.captureError({
       message: `Validation Error: ${message}`,
       type: 'validation',
       severity: 'medium',
       context: {
         timestamp: Date.now(),
-        additionalData: { field, value },
-      },
-    });
+        additionalData: { field, value } } });
   }
 
   reportApiError(message: any, endpoint: any, status?: number) {
@@ -364,9 +344,7 @@ return;
       context: {
         timestamp: Date.now(),
         url: endpoint,
-        additionalData: { status },
-      },
-    });
+        additionalData: { status } } });
   }
 
   reportPerformanceIssue(message: any, metric: any, value: string | number) {
@@ -376,9 +354,7 @@ return;
       severity: 'medium',
       context: {
         timestamp: Date.now(),
-        additionalData: { metric, value },
-      },
-    });
+        additionalData: { metric, value } } });
   }
 
   getErrorStats() {
@@ -393,19 +369,16 @@ return;
       lastHour: errors.filter(e => e.context.timestamp > oneHourAgo).length,
       lastDay: errors.filter(e => e.context.timestamp > oneDayAgo).length,
       byType: {
-        javascript: this.getErrorsByType('javascript').length,
-        network: this.getErrorsByType('network').length,
-        validation: this.getErrorsByType('validation').length,
-        api: this.getErrorsByType('api').length,
-        performance: this.getErrorsByType('performance').length,
-      },
+        javascript: this.getErrorsByType('javascript',).length,
+        network: this.getErrorsByType('network',).length,
+        validation: this.getErrorsByType('validation',).length,
+        api: this.getErrorsByType('api',).length,
+        performance: this.getErrorsByType('performance',).length },
       bySeverity: {
-        low: this.getErrorsBySeverity('low').length,
-        medium: this.getErrorsBySeverity('medium').length,
-        high: this.getErrorsBySeverity('high').length,
-        critical: this.getErrorsBySeverity('critical').length,
-      },
-    };
+        low: this.getErrorsBySeverity('low',).length,
+        medium: this.getErrorsBySeverity('medium',).length,
+        high: this.getErrorsBySeverity('high',).length,
+        critical: this.getErrorsBySeverity('critical',).length } };
   }
 }
 
@@ -416,8 +389,7 @@ export const errorService = new ErrorService({
   enableLocalStorage: true,
   maxStoredErrors: 100,
   apiEndpoint: import.meta.env.VITE_ERROR_REPORTING_ENDPOINT,
-  apiKey: import.meta.env.VITE_ERROR_REPORTING_API_KEY,
-});
+  apiKey: import.meta.env.VITE_ERROR_REPORTING_API_KEY });
 
 export default ErrorService;
 export type { ErrorReport, ErrorContext, ErrorServiceConfig };

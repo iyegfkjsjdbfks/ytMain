@@ -19,14 +19,12 @@ const VideoUploadPage: React.FC = () => {
     visibility: 'public',
     videoFile: null,
     thumbnailFile: null,
-    isShorts: false,
-  });
+    isShorts: false });
 
   const [progress, setProgress] = useState<UploadProgress>({
     percentage: 0,
     status: 'idle',
-    message: '',
-  });
+    message: '' });
 
   const [tagInput, setTagInput] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -59,8 +57,7 @@ const VideoUploadPage: React.FC = () => {
       ...prev,
       videoFile: file,
       isShorts,
-      title: prev.title || file.name.replace(/\.[^/.]+$/, ''),
-    }));
+      title: prev.title || file.name.replace(/\.[^/.]+$/, '') }));
     setErrors(prev => ({ ...prev, videoFile: '' }));
   };
 
@@ -90,8 +87,7 @@ const VideoUploadPage: React.FC = () => {
     if (tagInput.trim() && !uploadData.tags.includes(tagInput.trim())) {
       setUploadData(prev => ({
         ...prev,
-        tags: [...prev.tags, tagInput.trim()],
-      }));
+        tags: [...prev.tags, tagInput.trim()] }));
       setTagInput('');
     }
   };
@@ -99,8 +95,7 @@ const VideoUploadPage: React.FC = () => {
   const handleRemoveTag = (tagToRemove: any) => {
     setUploadData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
-    }));
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -126,8 +121,7 @@ return;
       setProgress({
         percentage: 0,
         status: 'error',
-        message: 'Upload failed. Please try again.',
-      });
+        message: 'Upload failed. Please try again.' });
     }
   };
 
@@ -440,6 +434,4 @@ handleFileSelect(file);
 };
 
 export default VideoUploadPage;
-
-
 

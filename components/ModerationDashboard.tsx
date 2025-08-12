@@ -57,8 +57,7 @@ interface ModerationDashboardProps {
 const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   onModerate,
   onBulkModerate,
-  className = '',
-}) => {
+  className = '' }) => {
   const [items, setItems] = useState<ModerationItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [filterStatus, setFilterStatus] = useState<'all' | 'pending' | 'flagged' | 'approved' | 'rejected'>('all');
@@ -95,16 +94,13 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
           views: 15000,
           likes: 200,
-          comments: 45,
-        },
+          comments: 45 },
         aiAnalysis: {
           toxicityScore: 0.75,
           categories: ['harassment', 'hate_speech'],
           confidence: 0.85,
-          suggestedAction: 'review',
-        },
-        moderationHistory: [],
-      },
+          suggestedAction: 'review' },
+        moderationHistory: [] },
       {
         id: '2',
         type: 'comment',
@@ -121,24 +117,20 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           authorName: 'Anonymous User',
           authorAvatar: 'https://picsum.photos/40/40?random=2',
           createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-          likes: 0,
-        },
+          likes: 0 },
         aiAnalysis: {
           toxicityScore: 0.92,
           categories: ['hate_speech', 'harassment'],
           confidence: 0.95,
-          suggestedAction: 'remove',
-        },
+          suggestedAction: 'remove' },
         moderationHistory: [
           {
             action: 'flagged',
             moderatorId: 'ai_system',
             moderatorName: 'AI Moderator',
             timestamp: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
-            reason: 'High toxicity score detected',
-          },
-        ],
-      },
+            reason: 'High toxicity score detected' },
+        ] },
       {
         id: '3',
         type: 'user',
@@ -153,10 +145,8 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           authorId: 'user456',
           authorName: 'Suspicious Account',
           authorAvatar: 'https://picsum.photos/40/40?random=3',
-          createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-        },
-        moderationHistory: [],
-      },
+          createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() },
+        moderationHistory: [] },
     ];
 
     setItems(mockItems);
@@ -212,10 +202,8 @@ return false;
                 moderatorId: 'current_user',
                 moderatorName: 'Current Moderator',
                 timestamp: new Date().toISOString(),
-                reason: moderationReason,
-              },
-            ],
-          }
+                reason: moderationReason },
+            ] }
         : item,
     ));
     setShowModerationModal(null);
@@ -231,8 +219,7 @@ return false;
         ? {
             ...item,
             status: action === 'approve' ? 'approved' :
-                   action === 'reject' ? 'rejected' : 'removed',
-          }
+                   action === 'reject' ? 'rejected' : 'removed' }
         : item,
     ));
     setSelectedItems(new Set());

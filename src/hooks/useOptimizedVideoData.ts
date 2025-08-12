@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback, memo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 // import { getVideos, getVideosByCategory } // // from '../services/realVideoService' // Service not found // Service not found;
 import type { Video } from '../types';
@@ -35,8 +35,7 @@ export const useOptimizedVideoData = ({
   category,
   limit = 20,
   enableCache = true,
-  refetchInterval,
-}: UseVideoDataOptions = {}): UseVideoDataReturn => {
+  refetchInterval }: UseVideoDataOptions = {}): UseVideoDataReturn => {
   const [data, setData] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -86,8 +85,7 @@ export const useOptimizedVideoData = ({
         if (enableCache && pageNum === 1) {
           videoCache.set(cacheKey, {
             data: updatedData,
-            timestamp: Date.now(),
-          });
+            timestamp: Date.now() });
         }
       } catch (err) {
         const errorMessage =
@@ -139,8 +137,7 @@ export const useOptimizedVideoData = ({
     error,
     refetch,
     hasMore,
-    loadMore,
-  };
+    loadMore };
 };
 
 // Specialized hooks for different video types
@@ -148,8 +145,7 @@ export const useHomeVideos = (category?: string) => {
   return useOptimizedVideoData({
     ...(category && { category }),
     limit: 24,
-    enableCache: true,
-  });
+    enableCache: true });
 };
 
 export const useTrendingVideos = () => {
@@ -165,8 +161,7 @@ export const useChannelVideos = (channelId: any) => {
   return useOptimizedVideoData({
     category: `channel-${channelId}`,
     limit: 15,
-    enableCache: true,
-  });
+    enableCache: true });
 };
 
 export const useSearchVideos = (query: any) => {
