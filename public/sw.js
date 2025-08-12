@@ -111,6 +111,7 @@ self.addEventListener('fetch', (event) => {
  } else {
  event.respondWith(withResponseGuard(handleDynamicRequest(request)));
  }
+ };
 });
 
 // Check if request is for static assets
@@ -173,10 +174,12 @@ async function handleStaticAsset(request) {
  }
  return networkResponse;
  } catch (error) {
- console.error('[SW] Static asset fetch failed:', error);
- const cache = await caches.open(STATIC_CACHE_NAME);
- return cache.match(request) || new Response('Asset not available offline');
+  console.error('[SW] Static asset fetch failed:', error);
+  const cache = await caches.open(STATIC_CACHE_NAME);
+  return cache.match(request) || new Response('Asset not available offline');
  }
+}
+
 // Handle images with cache-first strategy
 async function handleImageRequest(request) {
  try {
@@ -212,8 +215,10 @@ async function handleImageRequest(request) {
  return new Response(
  '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180"><rect width="100%" height="100%" fill="#f0f0f0"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#999">Image unavailable</text></svg>',
  { headers: { 'Content-Type': 'image/svg+xml' }, status: 200 }
- );
+  );
  }
+}
+
 // Handle API requests with network-first strategy
 async function handleAPIRequest(request) {
  try {
@@ -244,8 +249,11 @@ async function handleAPIRequest(request) {
  {
  status: 503,
  headers: { 'Content-Type': 'application/json' }
- );
+   }
+  );
  }
+}
+
 // Handle navigation requests
 async function handleNavigationRequest(request) {
  try {
@@ -294,9 +302,11 @@ async function handleNavigationRequest(request) {
  </div>
  </body>
  </html>`,
- { headers: { 'Content-Type': 'text/html' }
- );
+  { headers: { 'Content-Type': 'text/html' } }
+  );
  }
+}
+
 // Handle other dynamic requests
 async function handleDynamicRequest(request) {
  try {
@@ -316,9 +326,11 @@ async function handleDynamicRequest(request) {
  const cache = await caches.open(DYNAMIC_CACHE_NAME);
  const cached = await cache.match(request);
  if (cached) return cached;
- // Provide a generic offline Response with proper headers
- return new Response('Content not available offline', { status: 503, headers: { 'Content-Type': 'text/plain' } });
+  // Provide a generic offline Response with proper headers
+  return new Response('Content not available offline', { status: 503, headers: { 'Content-Type': 'text/plain' } });
  }
+}
+
 // Check if cached response is expired
 function isExpired(response, maxAge) {
  const dateHeader = response.headers.get('date');
@@ -362,11 +374,14 @@ async function syncVideoUploads() {
  badge: '/icons/badge-72x72.png'
  });
  } catch (error) {
- console.error('[SW] Failed to sync upload:', error);
+   console.error('[SW] Failed to sync upload:', error);
+  }
  }
  } catch (error) {
- console.error('[SW] Background sync failed:', error);
+  console.error('[SW] Background sync failed:', error);
  }
+}
+
 // Sync user actions (likes, comments, etc.)
 async function syncUserActions() {
  try {
@@ -382,11 +397,14 @@ async function syncUserActions() {
 
  await removePendingAction(action.id);
  } catch (error) {
- console.error('[SW] Failed to sync action:', error);
+   console.error('[SW] Failed to sync action:', error);
+  }
  }
  } catch (error) {
- console.error('[SW] Action sync failed:', error);
+  console.error('[SW] Action sync failed:', error);
  }
+}
+
 // Push notification handling
 self.addEventListener('push', (event) => {
  console.log('[SW] Push notification received');
@@ -433,17 +451,18 @@ self.addEventListener('notificationclick', (event) => {
 
  event.waitUntil(
  clients.matchAll({ type: 'window' }).then((clientList) => {
- // Check if app is already open
- for (const client of clientList) {
- if (client.url.includes(url) && 'focus' in client) {
- return client.focus();
- }
- // Open new window
- if (clients.openWindow) {
- return clients.openWindow(url);
- }
- })
- );
+      // Check if app is already open
+      for (const client of clientList) {
+        if (client.url.includes(url) && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      // Open new window
+      if (clients.openWindow) {
+        return clients.openWindow(url);
+      }
+    })
+    );
  }
 });
 

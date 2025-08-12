@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Fixes</title>
+</head>
+<body>
+    <h1>Testing Fixes</h1>
+    <h2>Check Console for:</h2>
+    <ul>
+        <li>✅ No React Router v7 warning about startTransition</li>
+        <li>✅ Service Worker should register successfully</li>
+    </ul>
+    
+    <div id="test-results"></div>
+
+    <script>
+        const results = document.getElementById('test-results');
+        
+        // Check if Service Worker is supported and test registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    const successMsg = '✅ Service Worker registered successfully!';
+                    console.log(successMsg);
+                    results.innerHTML += `<p style="color: green;">${successMsg}</p>`;
+                })
+                .catch(error => {
+                    const errorMsg = `❌ Service Worker registration failed: ${error.message}`;
+                    console.error(errorMsg);
+                    results.innerHTML += `<p style="color: red;">${errorMsg}</p>`;
+                });
+        } else {
+            results.innerHTML += '<p style="color: orange;">⚠️ Service Workers not supported in this browser</p>';
+        }
+        
+        // Note about React Router fix
+        results.innerHTML += `
+            <hr>
+            <h3>React Router Fix Applied:</h3>
+            <p>✅ Added v7 future flags to createBrowserRouter configuration:</p>
+            <ul>
+                <li>v7_startTransition: true</li>
+                <li>v7_relativeSplatPath: true</li>
+                <li>v7_fetcherPersist: true</li>
+                <li>v7_normalizeFormMethod: true</li>
+                <li>v7_partialHydration: true</li>
+                <li>v7_skipActionErrorRevalidation: true</li>
+            </ul>
+            <p>The warning about React Router v7 startTransition should no longer appear in the console.</p>
+        `;
+    </script>
+</body>
+</html>
