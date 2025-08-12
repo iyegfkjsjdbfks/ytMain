@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef, FC, KeyboardEvent, MouseEvent } from 'react';
-import { useNavigate, Navigate  } from 'react-router-dom';
-import { MagnifyingGlassIcon,
-  FunnelIcon,
-  XMarkIcon,
-  ClockIcon,
-  CalendarDaysIcon,
-  VideoCameraIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon, ClockIcon, CalendarDaysIcon, VideoCameraIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 export interface SearchFilters {
   duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min

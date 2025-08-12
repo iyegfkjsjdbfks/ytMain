@@ -1,9 +1,7 @@
 import React, { useState, useEffect, FC } from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { usePWA, requestNotificationPermission  } from '../hooks/usePWA';
-import { SignalSlashIcon,
-  ArrowDownTrayIcon,
-  XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
+import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
+import { SignalSlashIcon, ArrowDownTrayIcon, XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
 
 const PWAStatus: React.FC = () => {
   const {

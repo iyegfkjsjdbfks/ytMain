@@ -4,15 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-import {
-  useUnifiedVideos,
-  useUnifiedVideo,
-  useUnifiedTrendingVideos,
-  useUnifiedShorts,
-  useUnifiedSearchVideos,
-  useVideoWithRelated,
-  useHomePageData,
-} from '../../src/hooks/unified/useVideos';
+import { useUnifiedVideos, useUnifiedVideo, useUnifiedTrendingVideos, useUnifiedShorts, useUnifiedSearchVideos, useVideoWithRelated, useHomePageData } from '../../src/hooks/unified/useVideos';
 import { unifiedDataService } from '../../src/services/unifiedDataService';
 
 // Mock the unified data service
@@ -76,7 +68,7 @@ describe('Unified Video Hooks', () => {
             tags: ['test'],
             isLive: false,
             isShort: false,
-            visibility: 'public' as const source: 'local' as const metadata: {},
+            visibility: 'public' as const, source: 'local' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Test Channel 1',
@@ -111,7 +103,7 @@ describe('Unified Video Hooks', () => {
             tags: ['test', 'gaming'],
             isLive: false,
             isShort: false,
-            visibility: 'public' as const source: 'youtube' as const metadata: {},
+            visibility: 'public' as const, source: 'youtube' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Test Channel 2',
@@ -219,7 +211,7 @@ describe('Unified Video Hooks', () => {
         tags: ['test'],
         isLive: false,
         isShort: false,
-        visibility: 'public' as const source: 'local' as const metadata: {},
+        visibility: 'public' as const, source: 'local' as const, metadata: {},
         // Required properties for UnifiedVideoMetadata
         uploadedAt: new Date().toISOString(),
         channelName: 'Test Channel',
@@ -323,7 +315,7 @@ describe('Unified Video Hooks', () => {
             tags: ['trending'],
             isLive: false,
             isShort: false,
-            visibility: 'public' as const source: 'youtube' as const metadata: {},
+            visibility: 'public' as const, source: 'youtube' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Channel 1',
@@ -358,7 +350,7 @@ describe('Unified Video Hooks', () => {
             tags: ['trending', 'gaming'],
             isLive: false,
             isShort: false,
-            visibility: 'public' as const source: 'youtube' as const metadata: {},
+            visibility: 'public' as const, source: 'youtube' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Channel 2',
@@ -447,7 +439,7 @@ describe('Unified Video Hooks', () => {
             tags: ['shorts'],
             isLive: false,
             isShort: true,
-            visibility: 'public' as const source: 'youtube' as const metadata: {},
+            visibility: 'public' as const, source: 'youtube' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Short Channel',
@@ -482,7 +474,7 @@ describe('Unified Video Hooks', () => {
             tags: ['shorts', 'funny'],
             isLive: false,
             isShort: true,
-            visibility: 'public' as const source: 'youtube' as const metadata: {},
+            visibility: 'public' as const, source: 'youtube' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Short Channel 2',
@@ -547,7 +539,7 @@ describe('Unified Video Hooks', () => {
             tags: ['search', 'tech'],
             isLive: false,
             isShort: false,
-            visibility: 'public' as const source: 'youtube' as const metadata: {},
+            visibility: 'public' as const, source: 'youtube' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Search Channel 1',
@@ -582,7 +574,7 @@ describe('Unified Video Hooks', () => {
             tags: ['search', 'tech', 'tutorial'],
             isLive: false,
             isShort: false,
-            visibility: 'public' as const source: 'youtube' as const metadata: {},
+            visibility: 'public' as const, source: 'youtube' as const, metadata: {},
             // Required properties for UnifiedVideoMetadata
             uploadedAt: new Date().toISOString(),
             channelName: 'Search Channel 2',

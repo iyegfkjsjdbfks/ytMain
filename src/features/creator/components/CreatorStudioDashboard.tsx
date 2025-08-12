@@ -1,14 +1,5 @@
 import React, { useState, FC } from 'react';
-import { EyeIcon,
-  ClockIcon,
-  UserGroupIcon,
-  CurrencyDollarIcon,
-  ArrowTrendingUpIcon,
-  ArrowTrendingDownIcon,
-  VideoCameraIcon,
-  ChatBubbleLeftIcon,
-  BellIcon,
-  ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, ClockIcon, UserGroupIcon, CurrencyDollarIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, VideoCameraIcon, ChatBubbleLeftIcon, BellIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 // Icon wrapper components to fix type compatibility
 const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({

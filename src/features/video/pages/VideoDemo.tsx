@@ -1,9 +1,7 @@
 import React, { useState, FC } from 'react';
 import { realVideos } from '../../../../services/realVideoService';
 
-import { VideoCard,
-  VideoList,
-  VideoGrid, StudioVideoGrid } from '../components';
+import { VideoCard, VideoList, VideoGrid, StudioVideoGrid } from '../components';
 import type { Video } from '../types';
 
 /**

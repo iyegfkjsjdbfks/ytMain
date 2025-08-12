@@ -10,14 +10,7 @@ declare namespace NodeJS {
 
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
-import { PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  Cog6ToothIcon,
-  ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
 
 export interface VideoPlayerProps {
   videoId: string;

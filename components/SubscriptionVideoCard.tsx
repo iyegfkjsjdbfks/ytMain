@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 
 import type React from 'react';
 
-import { EyeIcon,
-  CalendarDaysIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, CalendarDaysIcon, PlayIcon } from '@heroicons/react/24/outline';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks';
-import { buildVideoUrl, buildChannelUrl, getAvatarFallback  } from '../utils/componentUtils';
+import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 
 import { SaveIcon } from './icons/UnifiedIcon';
 import ImageWithFallback from './ImageWithFallback';

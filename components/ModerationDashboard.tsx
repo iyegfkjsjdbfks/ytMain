@@ -1,18 +1,7 @@
 
 import { useEffect, useState, FC } from 'react';
 
-import {
-  ShieldCheckIcon,
-  TrashIcon,
-  CheckIcon,
-  XMarkIcon,
-  FlagIcon,
-  ChatBubbleLeftIcon,
-  VideoCameraIcon,
-  UserIcon,
-  ClockIcon,
-  MagnifyingGlassIcon,
-} from '@heroicons/react/24/outline';
+import { ShieldCheckIcon, TrashIcon, CheckIcon, XMarkIcon, FlagIcon, ChatBubbleLeftIcon, VideoCameraIcon, UserIcon, ClockIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

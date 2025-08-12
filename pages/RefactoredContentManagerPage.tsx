@@ -113,30 +113,30 @@ const RefactoredContentManagerPage: React.FC = () => {
   const uploadFormFields = [
     {
       name: 'videoFile',
-      type: 'file' as const label: 'Video File',
+      type: 'file' as const, label: 'Video File',
       required: true,
       accept: 'video/*',
       placeholder: 'Select video file to upload',
     },
     {
       name: 'title',
-      type: 'text' as const label: 'Title',
+      type: 'text' as const, label: 'Title',
       required: true,
       placeholder: 'Enter video title',
     },
     {
       name: 'description',
-      type: 'textarea' as const label: 'Description',
+      type: 'textarea' as const, label: 'Description',
       placeholder: 'Enter video description',
     },
     {
       name: 'tags',
-      type: 'text' as const label: 'Tags',
+      type: 'text' as const, label: 'Tags',
       placeholder: 'Enter tags separated by commas',
     },
     {
       name: 'category',
-      type: 'select' as const label: 'Category',
+      type: 'select' as const, label: 'Category',
       options: [
         { value: 'entertainment', label: 'Entertainment' },
         { value: 'education', label: 'Education' },
@@ -149,7 +149,7 @@ const RefactoredContentManagerPage: React.FC = () => {
     },
     {
       name: 'visibility',
-      type: 'select' as const label: 'Visibility',
+      type: 'select' as const, label: 'Visibility',
       options: [
         { value: 'public', label: 'Public' },
         { value: 'unlisted', label: 'Unlisted' },
@@ -158,7 +158,7 @@ const RefactoredContentManagerPage: React.FC = () => {
     },
     {
       name: 'thumbnail',
-      type: 'file' as const label: 'Thumbnail (Optional)',
+      type: 'file' as const, label: 'Thumbnail (Optional)',
       accept: 'image/*',
       placeholder: 'Select thumbnail image',
     },

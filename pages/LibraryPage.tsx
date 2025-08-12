@@ -1,7 +1,7 @@
-import { useState, useEffect, FC, ReactNode  } from 'react';
+import { useState, useEffect, FC, ReactNode } from 'react';
 
-import { ChevronRightIcon, ClockIcon  } from '@heroicons/react/24/outline';
-import { QueueListIcon as QueueListSolidIcon, HeartIcon as HeartSolidIcon  } from '@heroicons/react/24/solid';
+import { ChevronRightIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { QueueListIcon as QueueListSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 const QueueListIconSolid = QueueListSolidIcon;
 const HeartIconSolid = HeartSolidIcon;
 import { Link } from 'react-router-dom';
@@ -9,9 +9,7 @@ import { Link } from 'react-router-dom';
 import LocalHistoryIcon from '../components/icons/HistoryIcon'; // Renamed to avoid clash with Heroicons;
 import CustomPlaylistIcon from '../components/icons/PlaylistIcon'; // Use custom playlist icon;
 import VideoCard from '../components/VideoCard';
-import { getWatchHistoryVideos,
-  getWatchLaterVideos,
-  getUserPlaylists, getLikedVideos } from '../services/realVideoService';
+import { getWatchHistoryVideos, getWatchLaterVideos, getUserPlaylists, getLikedVideos } from '../services/realVideoService';
 
 import type { Video } from '../types';
 

@@ -2,10 +2,7 @@ import React, { useEffect, useState, FC } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';
-import { CurrencyDollarIcon,
-  HeartIcon,
-  SparklesIcon,
-  TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 interface SuperChatPanelProps {
   streamId: string;

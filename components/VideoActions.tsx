@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
-import {
-  ShareIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { ShareIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { formatCount } from '../utils/numberUtils';
 

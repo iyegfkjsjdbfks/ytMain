@@ -1,18 +1,11 @@
-import {
-  fetchSingleVideoFromGoogleSearch,
-  searchYouTubeWithGoogleSearch,
-} from '../../services/googleSearchService';
+import { fetchSingleVideoFromGoogleSearch, searchYouTubeWithGoogleSearch } from '../../services/googleSearchService';
 import { getYouTubeSearchProvider } from '../../services/settingsService';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { isYouTubeDataApiBlocked } from '../utils/youtubeApiUtils';
 import { logger } from '../utils/logger';
 import { youtubeService } from './api/youtubeService';
-import {
-  metadataNormalizationService,
-  type UnifiedVideoMetadata,
-  type UnifiedChannelMetadata,
-} from './metadataNormalizationService';
+import { metadataNormalizationService, type UnifiedVideoMetadata, type UnifiedChannelMetadata } from './metadataNormalizationService';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -444,7 +437,7 @@ class UnifiedDataService {
           tags: googleSearchVideo.tags || [],
           isLive: false,
           isShort: false,
-          visibility: 'public' as const source: 'google-search' as const metadata: {
+          visibility: 'public' as const, source: 'google-search' as const, metadata: {
             quality: 'hd',
             definition: 'high',
           },
@@ -536,7 +529,7 @@ class UnifiedDataService {
             tags: googleSearchVideo.tags || [],
             isLive: false,
             isShort: false,
-            visibility: 'public' as const source: 'google-search' as const metadata: {
+            visibility: 'public' as const, source: 'google-search' as const, metadata: {
               quality: 'hd',
               definition: 'high',
             },
@@ -898,8 +891,7 @@ class UnifiedDataService {
       // Note: These will have google-search- prefixed IDs for metadata fetching
       const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map(
         video => ({
-          id: video.id, // This will be google-search-{youtubeId}
-          title: video.title,
+          id: video.id, // This will be google-search-{youtubeId}, title: video.title,
           description: video.description || '',
           thumbnailUrl: video.thumbnailUrl || '',
           videoUrl:
@@ -934,7 +926,7 @@ class UnifiedDataService {
           tags: video.tags || [],
           isLive: false,
           isShort: false,
-          visibility: 'public' as const source: 'google-search' as const, // Discovery source
+          visibility: 'public' as const, source: 'google-search' as const, // Discovery source
           metadata: {
             quality: 'hd',
             definition: 'high',

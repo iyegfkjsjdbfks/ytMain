@@ -122,7 +122,7 @@ const DevOpsDashboard: React.FC = () => {
       const allAlerts: AlertItem[] = [
         ...securityMonitoring.getSecurityAlerts(false).map(alert => ({
           id: alert.id,
-          type: 'security' as const severity: alert.severity,
+          type: 'security' as const, severity: alert.severity,
           title: alert.title,
           description: alert.description,
           timestamp: alert.timestamp, acknowledged: alert.acknowledged
@@ -132,7 +132,7 @@ const DevOpsDashboard: React.FC = () => {
           .slice(0, 5)
           .map(exec => ({
             id: exec.id,
-            type: 'deployment' as const severity: 'high' as const title: 'Deployment Failed',
+            type: 'deployment' as const, severity: 'high' as const, title: 'Deployment Failed',
             description: `Pipeline ${exec.pipelineId} failed`,
             timestamp: exec.endTime || exec.startTime,
             acknowledged: false,

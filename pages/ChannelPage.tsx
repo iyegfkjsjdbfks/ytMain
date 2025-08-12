@@ -6,12 +6,7 @@ import ChannelHeader from '../components/ChannelHeader';
 import ChannelTabContent from '../components/ChannelTabContent';
 import ChannelTabs from '../components/ChannelTabs';
 import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
-import {
-  getChannelByName,
-  getVideosByChannelName,
-  getChannelPlaylists,
-  getChannelCommunityPosts,
-} from '../services/realVideoService';
+import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChannelCommunityPosts } from '../services/realVideoService';
 
 import type { Video } from '../types';
 

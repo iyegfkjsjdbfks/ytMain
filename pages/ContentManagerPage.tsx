@@ -152,7 +152,7 @@ const ContentManagerPage: React.FC = () => {
           ...item,
           id: `${item.id}-copy`,
           title: `${item.title} (Copy)`,
-          status: 'draft' as const uploadedAt: new Date().toISOString(),
+          status: 'draft' as const, uploadedAt: new Date().toISOString(),
           views: '0',
         }));
       setContent(prev => [...prev, ...duplicatedItems]);
@@ -174,7 +174,7 @@ return;
         if (selectedItems.has(item.id)) {
           return {
             ...item,
-            status: 'scheduled' as const scheduledDate: scheduledDateTime,
+            status: 'scheduled' as const, scheduledDate: scheduledDateTime,
           };
         }
         return item;

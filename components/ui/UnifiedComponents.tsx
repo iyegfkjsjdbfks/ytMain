@@ -1,13 +1,7 @@
 
 import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes, FC, ReactNode, MouseEvent, InputHTMLAttributes } from 'react';
 
-import {
-  ExclamationTriangleIcon,
-  CheckCircleIcon,
-  InformationCircleIcon,
-  XMarkIcon,
-  ArrowPathIcon,
-} from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon, CheckCircleIcon, InformationCircleIcon, XMarkIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
 import { cn } from '../../utils/cn';
 

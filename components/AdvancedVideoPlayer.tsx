@@ -12,18 +12,7 @@ declare namespace NodeJS {
 
 
 
-import {
-  PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  Cog6ToothIcon,
-  ForwardIcon,
-  BackwardIcon,
-  ChevronUpIcon,
-} from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 
 import { useVideoPlayer } from '../src/hooks';
 

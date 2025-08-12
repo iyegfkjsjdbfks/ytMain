@@ -409,7 +409,7 @@ export function useAccessibleForm() {
     return error ? {
       id: `${fieldName}-error`,
       role: 'alert',
-      'aria-live': 'polite' as const children: error,
+      'aria-live': 'polite' as const, children: error,
     } : null;
   }, [errors]);
 
@@ -456,7 +456,7 @@ export function useAccessibleTooltip() {
     id: tooltipId.current,
     role: 'tooltip',
     style: {
-      position: 'absolute' as const left: position.x,
+      position: 'absolute' as const, left: position.x,
       top: position.y, transform: 'translateX(-50%) translateY(-100%)'
     },
   };

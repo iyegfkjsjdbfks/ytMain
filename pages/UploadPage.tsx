@@ -1,11 +1,6 @@
 import React, { useRef, useState, FC, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CloudArrowUpIcon,
-  VideoCameraIcon,
-  EyeIcon,
-  GlobeAltIcon,
-  LockClosedIcon,
-  XMarkIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import { CloudArrowUpIcon, VideoCameraIcon, EyeIcon, GlobeAltIcon, LockClosedIcon, XMarkIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';

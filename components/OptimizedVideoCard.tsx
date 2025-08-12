@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, memo, lazy, KeyboardEvent, MouseEvent } from 'react';
 // @ts-nocheck
 
-import { PlayIcon,
-  ClockIcon,
-  EllipsisVerticalIcon,
-  PlusIcon,
-  CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, ClockIcon, EllipsisVerticalIcon, PlusIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';

@@ -62,13 +62,13 @@ export const eslintConfig = {
 // Prettier configuration
 export const prettierConfig = {
   semi: true,
-  trailingComma: 'es5' as const singleQuote: true,
+  trailingComma: 'es5' as const, singleQuote: true,
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
   bracketSpacing: true,
   bracketSameLine: false,
-  arrowParens: 'avoid' as const endOfLine: 'lf' as const quoteProps: 'as-needed' as const jsxSingleQuote: false,
+  arrowParens: 'avoid' as const, endOfLine: 'lf' as const, quoteProps: 'as-needed' as const, jsxSingleQuote: false,
   proseWrap: 'preserve' as const,
 };
 

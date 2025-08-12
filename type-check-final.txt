@@ -1,0 +1,18 @@
+src/features/video/components/VideoEditor.tsx(13,11): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(13,21): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(14,13): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(15,15): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(16,20): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(17,18): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(18,19): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(19,20): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(20,17): error TS1005: ',' expected.
+src/features/video/components/VideoEditor.tsx(21,18): error TS1005: ',' expected.
+utils/playerUtils.ts(425,19): error TS1005: ',' expected.
+utils/testUtils.tsx(229,11): error TS1005: ',' expected.
+utils/testUtils.tsx(230,16): error TS1005: ',' expected.
+utils/testUtils.tsx(230,30): error TS1005: ',' expected.
+utils/testUtils.tsx(231,28): error TS1005: ',' expected.
+utils/testUtils.tsx(232,19): error TS1005: ',' expected.
+utils/testUtils.tsx(233,3): error TS1138: Parameter declaration expected.
+utils/testUtils.tsx(233,5): error TS1138: Parameter declaration expected.

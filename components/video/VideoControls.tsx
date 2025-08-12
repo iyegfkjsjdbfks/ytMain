@@ -1,12 +1,7 @@
 import React, { FC, ChangeEvent, MouseEvent } from 'react';
 import type React from 'react';
 
-import { PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 
 import { ActionButton } from '../ui';
 

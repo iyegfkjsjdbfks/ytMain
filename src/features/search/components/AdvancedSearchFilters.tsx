@@ -1,9 +1,5 @@
 import React, { FC } from 'react';
-import { FunnelIcon,
-  XMarkIcon,
-  VideoCameraIcon,
-  UserIcon,
-  PlayIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+import { FunnelIcon, XMarkIcon, VideoCameraIcon, UserIcon, PlayIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 
 export interface SearchFilters {
   type: 'all' | 'video' | 'channel' | 'playlist' | 'live';

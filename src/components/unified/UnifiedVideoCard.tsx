@@ -2,15 +2,10 @@ import React, { useState, memo, lazy, MouseEvent } from 'react';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 const HeartIconSolid = HeartSolidIcon;
 import { Link } from 'react-router-dom';
-import { formatRelativeTime, cn  } from '../../lib/utils';
+import { formatRelativeTime, cn } from '../../lib/utils';
 import { UnifiedButton } from './UnifiedButton';
 import type { Video } from '../../types/core';
-import { /**
-   * Unified Video Card Component
-   * Consolidates all video card variants into a single, comprehensive component
-   */
-
-  PlayIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon, BookmarkIcon, EllipsisVerticalIcon  } from '@heroicons/react/24/outline';
+import { /** * Unified Video Card Component * Consolidates all video card variants into a single, comprehensive component */ PlayIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon, BookmarkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 
 export type VideoCardVariant =
   | 'default'

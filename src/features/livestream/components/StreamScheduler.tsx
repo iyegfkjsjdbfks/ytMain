@@ -1,10 +1,7 @@
 import React, { useEffect, useState, FC } from 'react';
 import { liveStreamService, type ScheduledStream } from '../../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
-import { CalendarIcon,
-  ClockIcon,
-  PlayIcon,
-  TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ClockIcon, PlayIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: ScheduledStream) => void;

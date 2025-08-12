@@ -1,17 +1,7 @@
 
 import { useCallback, useRef, useState, FC, ChangeEvent } from 'react';
 
-import {
-  CloudArrowUpIcon,
-  XMarkIcon,
-  PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  PhotoIcon,
-  VideoCameraIcon,
-  TagIcon,
-} from '@heroicons/react/24/outline';
+import { CloudArrowUpIcon, XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, PhotoIcon, VideoCameraIcon, TagIcon } from '@heroicons/react/24/outline';
 
 export interface VideoUploadData {
   title: string;

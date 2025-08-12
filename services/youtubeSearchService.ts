@@ -347,7 +347,7 @@ class YouTubeSearchService {
       dislikeCount: Math.floor(Math.random() * 1000),
       commentCount: Math.floor(Math.random() * 5000),
       isLive: item.snippet.toLowerCase().includes('live') || item.title.toLowerCase().includes('live'),
-      visibility: 'public' as const createdAt: uploadedAt,
+      visibility: 'public' as const, createdAt: uploadedAt,
       updatedAt: uploadedAt,
       publishedAt: uploadedAt,
     };

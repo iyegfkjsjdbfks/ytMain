@@ -63,7 +63,7 @@ export const mockGenerators = {
     isVerified: false,
     subscriberCount: 0,
     preferences: {
-      theme: 'system' as const language: 'en',
+      theme: 'system' as const, language: 'en',
       autoplay: true,
       notifications: {
         email: true,

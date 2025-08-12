@@ -132,7 +132,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             isLive: false, // GoogleSearchResult doesn't have isLive property
             commentCount: googleVideo.commentCount || 0,
             // Required Video interface properties
-            visibility: 'public' as const createdAt: new Date().toISOString(),
+            visibility: 'public' as const, createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           }));
         } else {
@@ -164,7 +164,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             isLive: false, // GoogleSearchResult doesn't have isLive property
             commentCount: googleVideo.commentCount || 0,
             // Required Video interface properties
-            visibility: 'public' as const createdAt: new Date().toISOString(),
+            visibility: 'public' as const, createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           }));
         }

@@ -2,11 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { getInitialSearchKeyword } from '../services/settingsService';
 
-import {
-  searchForHomePage,
-  type YouTubeSearchResult,
-  type GoogleSearchResult,
-} from '../services/googleSearchService';
+import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
 
 import { VideoService } from '../services/api';
 import type { Video } from '../types';
@@ -39,7 +35,7 @@ const convertSearchResultToVideo = (
     category: result.categoryId || 'Entertainment',
     tags: result.tags || [],
     // Required Video interface properties
-    visibility: 'public' as const createdAt: new Date().toISOString(),
+    visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     isLive: false,
     // isUpcoming: false, // Removed as it's not part of Video interface
@@ -148,7 +144,7 @@ export function useTrendingSearch(): UseInitialSearchResult {
           ? err.message
           : `Failed to fetch ${getInitialSearchKeyword()} videos`;
       console.error(
-        `❌ Error fetching ${getInitialSearchKeyword()} videos:`,
+        `❌ Error fetching ${getInitialSearchKeyword()}, videos:`,
         errorMessage
       );
       setError(errorMessage);

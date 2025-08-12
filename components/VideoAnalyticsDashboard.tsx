@@ -1,21 +1,8 @@
 import React, { useState, FC } from 'react';
 
-import { ClockIcon,
-  HeartIcon,
-  ChatBubbleLeftIcon,
-  ShareIcon,
-  ArrowTrendingUpIcon,
-  EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
-import { Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend, ArcElement } from 'chart.js';
-import { Doughnut, Line  } from 'react-chartjs-2';
+import { ClockIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, EyeIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { Doughnut, Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,

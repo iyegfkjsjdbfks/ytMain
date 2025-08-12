@@ -1,16 +1,7 @@
 
 import { useEffect, useRef, useState, memo, FC, MouseEvent } from 'react';
 
-import {
-  PlayIcon,
-  PauseIcon,
-  ScissorsIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  DocumentTextIcon,
-  AdjustmentsHorizontalIcon,
-  CloudArrowDownIcon,
-} from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, SpeakerXMarkIcon, DocumentTextIcon, AdjustmentsHorizontalIcon, CloudArrowDownIcon } from '@heroicons/react/24/outline';
 
 export interface VideoClip {
   id: string;

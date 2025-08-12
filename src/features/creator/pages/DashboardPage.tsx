@@ -1,16 +1,5 @@
 import React, { useEffect, useState, FC } from 'react';
-import { ChartBarIcon,
-  EyeIcon,
-  ClockIcon,
-  UserGroupIcon,
-  HeartIcon,
-  ChatBubbleLeftIcon,
-  ArrowTrendingUpIcon,
-  CalendarDaysIcon,
-  CurrencyDollarIcon,
-  GlobeAltIcon,
-  DevicePhoneMobileIcon,
-  ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ArrowTrendingUpIcon, CalendarDaysIcon, CurrencyDollarIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
 const ResponsiveContainer = ({ children, width, height }) => (
   <div style={{ width, height }}>{children}</div>
@@ -24,7 +13,7 @@ const Pie = ({ data }) => (
 const Cell = (_props) => null;
 const Tooltip = (_props) => null;
 const Legend = (_props) => null;
-import { dateUtils, numberUtils  } from '../../../utils/unifiedUtils';
+import { dateUtils, numberUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
 

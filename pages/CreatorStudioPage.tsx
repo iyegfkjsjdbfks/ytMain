@@ -1,15 +1,6 @@
 import React, { useEffect, useState, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { UserGroupIcon,
-  ChartBarIcon,
-  LightBulbIcon,
-  AcademicCapIcon,
-  CameraIcon,
-  PencilSquareIcon,
-  CalendarDaysIcon,
-  GlobeAltIcon,
-  ArrowTrendingUpIcon,
-  ClockIcon, EyeIcon } from '@heroicons/react/24/outline';
+import { UserGroupIcon, ChartBarIcon, LightBulbIcon, AcademicCapIcon, CameraIcon, PencilSquareIcon, CalendarDaysIcon, GlobeAltIcon, ArrowTrendingUpIcon, ClockIcon, EyeIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';

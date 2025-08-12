@@ -4,10 +4,7 @@ import { logger } from '../../utils/logger';
 
 import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
 
-import {
-  unifiedDataService,
-  type UnifiedSearchFilters,
-} from '../../services/unifiedDataService';
+import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
 
 import { useQuery, useMutation, type UseApiConfig } from './useApi';
 

@@ -2,10 +2,7 @@ import { useEffect, useCallback, useRef, MouseEvent } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import {
-  analyticsService,
-  type AnalyticsEvent,
-} from '../services/analyticsService';
+import { analyticsService, type AnalyticsEvent } from '../services/analyticsService';
 
 import { usePerformanceMonitor } from './usePerformanceMonitor';
 

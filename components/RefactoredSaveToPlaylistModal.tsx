@@ -93,7 +93,7 @@ return;
     {
       name: 'name',
       label: 'Playlist Name',
-      type: 'text' as const placeholder: 'Enter playlist name',
+      type: 'text' as const, placeholder: 'Enter playlist name',
       required: true,
       validation: (value: string | number) => {
         if (value.length < 3) {
@@ -108,7 +108,7 @@ return 'Playlist name must be less than 100 characters';
     {
       name: 'description',
       label: 'Description (Optional)',
-      type: 'textarea' as const placeholder: 'Enter playlist description',
+      type: 'textarea' as const, placeholder: 'Enter playlist description',
       rows: 3,
     },
   ];

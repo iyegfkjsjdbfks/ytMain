@@ -1,17 +1,7 @@
 
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
-import {
-  Cog6ToothIcon,
-  CheckIcon,
-  PlayIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ForwardIcon,
-  BackwardIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-} from '@heroicons/react/24/outline';
+import { Cog6ToothIcon, CheckIcon, PlayIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ForwardIcon, BackwardIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
   label: string;
@@ -177,7 +167,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 value={volume}
                 onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
                 className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
-                style={{ writingMode: 'vertical-lr' as const WebkitAppearance: 'slider-vertical' }}
+                style={{ writingMode: 'vertical-lr' as const, WebkitAppearance: 'slider-vertical' }}
               />
             </div>
           </div>

@@ -2,15 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
-import {
-  XMarkIcon,
-  PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ArrowsPointingOutIcon,
-  ArrowTopRightOnSquareIcon,
-} from '@heroicons/react/24/outline';
+import { XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 interface PictureInPictureProps {
   videoId: string;

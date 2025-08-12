@@ -263,7 +263,7 @@ export class VideoService {
         channelAvatarUrl: '',
         tags: item.snippet.tags| [],
         category,
-        visibility: 'public' as const isLive: false,
+        visibility: 'public' as const, isLive: false,
         isShort: false,
       })) || [];
 
@@ -323,7 +323,7 @@ return null;
         channelAvatarUrl: '',
         tags: item.snippet.tags| [],
         category: item.snippet.categoryId| 'Unknown',
-        visibility: 'public' as const isLive: false,
+        visibility: 'public' as const, isLive: false,
         isShort: false,
       };
     } catch (error) {
@@ -389,7 +389,7 @@ return null;
         channelAvatarUrl: '',
         tags: item.snippet.tags| [],
         category: 'Search Result',
-        visibility: 'public' as const isLive: false,
+        visibility: 'public' as const, isLive: false,
         isShort: false,
       })) || [];
 
@@ -541,7 +541,7 @@ return null;
         channelAvatarUrl: '',
         tags: item.snippet.tags| [],
         category: 'Channel Video',
-        visibility: 'public' as const isLive: false,
+        visibility: 'public' as const, isLive: false,
         isShort: false,
       })) || [];
 

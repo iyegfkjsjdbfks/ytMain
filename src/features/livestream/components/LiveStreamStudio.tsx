@@ -10,15 +10,7 @@ declare namespace NodeJS {
 
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
-import { VideoCameraIcon,
-  MicrophoneIcon,
-  StopIcon,
-  PlayIcon,
-  Cog6ToothIcon,
-  ChatBubbleLeftRightIcon,
-  EyeIcon,
-  HeartIcon,
-  ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
 
 interface StreamSettings {

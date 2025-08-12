@@ -554,7 +554,7 @@ multiplier = 1000000000;
     ...(!videoDetails?.statistics.commentCount && commentCount && { commentCount }),
     ...(videoDetails?.snippet.tags && { tags: videoDetails.snippet.tags }),
     ...(videoDetails?.snippet.categoryId && { categoryId: videoDetails.snippet.categoryId }),
-    isYouTube: true as const source: 'google-search' as const,
+    isYouTube: true as const, source: 'google-search' as const,
   };
 };
 
@@ -782,7 +782,7 @@ export const searchYouTubeWithGoogleSearch = async (query): Promise<GoogleSearch
     const searchUrl = new URL('https://www.googleapis.com/customsearch/v1');
     searchUrl.searchParams.set('key', apiKey);
     searchUrl.searchParams.set('cx', engineId);
-    searchUrl.searchParams.set('q', `${query} site:youtube.com`);
+    searchUrl.searchParams.set('q', `${query}, site:youtube.com`);
     searchUrl.searchParams.set('num', '10');
     console.log('🔍 Google Custom Search URL:', searchUrl.toString());
     // Remove searchType parameter as it's not supported for general web search
@@ -1334,7 +1334,7 @@ multiplier = 1000000000;
       ...(!enhancedMetadata?.statistics.commentCount && commentCount && { commentCount }),
       categoryId: enhancedMetadata?.snippet.categoryId || 'General',
       tags: enhancedMetadata?.snippet.tags || tags,
-      isYouTube: true as const source: 'google-search' as const,
+      isYouTube: true as const, source: 'google-search' as const,
     };
 
     console.log('📦 Final result summary:');

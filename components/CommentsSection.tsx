@@ -1,11 +1,7 @@
 
 import { useRef, useState, FC } from 'react';
 
-import {
-  EllipsisHorizontalIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from '@heroicons/react/24/outline';
+import { EllipsisHorizontalIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 
 import AddCommentForm from './AddCommentForm';
 import ThumbsDownIcon from './icons/ThumbsDownIcon';

@@ -22,7 +22,7 @@ const sampleVideos = [
     tags: ['animation', 'short film', 'comedy'],
     category: 'Entertainment',
     isShort: false,
-    visibility: 'public' as const createdAt: new Date().toISOString(),
+    visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -42,7 +42,7 @@ const sampleVideos = [
     tags: ['animation', 'open source', 'experimental'],
     category: 'Film & Animation',
     isShort: false,
-    visibility: 'public' as const createdAt: new Date().toISOString(),
+    visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -62,7 +62,7 @@ const sampleVideos = [
     tags: ['sample', 'demo', 'short'],
     category: 'Entertainment',
     isShort: true,
-    visibility: 'public' as const createdAt: new Date().toISOString(),
+    visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -82,7 +82,7 @@ const sampleVideos = [
     tags: ['sample', 'demo', 'escape'],
     category: 'Entertainment',
     isShort: true,
-    visibility: 'public' as const createdAt: new Date().toISOString(),
+    visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -102,7 +102,7 @@ const sampleVideos = [
     tags: ['animation', 'fantasy', 'short film'],
     category: 'Film & Animation',
     isShort: false,
-    visibility: 'public' as const createdAt: new Date().toISOString(),
+    visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
@@ -122,7 +122,7 @@ const sampleVideos = [
     tags: ['sci-fi', 'animation', 'dystopian'],
     category: 'Film & Animation',
     isShort: false,
-    visibility: 'public' as const createdAt: new Date().toISOString(),
+    visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
 ];
@@ -166,11 +166,11 @@ export const saveRecentSearch = async (_query) => {};
 // Upload simulation
 export const uploadVideo = async (_data: VideoUploadData, onProgress?: (progress: UploadProgress) => void): Promise<void> => {
   const progressSteps = [
-    { percentage: 0, status: 'uploading' as const message: 'Starting upload...' },
-    { percentage: 25, status: 'uploading' as const message: 'Uploading video file...' },
-    { percentage: 50, status: 'uploading' as const message: 'Processing video...' },
-    { percentage: 75, status: 'processing' as const message: 'Generating thumbnail...' },
-    { percentage: 100, status: 'completed' as const message: 'Upload completed successfully!' },
+    { percentage: 0, status: 'uploading' as const, message: 'Starting upload...' },
+    { percentage: 25, status: 'uploading' as const, message: 'Uploading video file...' },
+    { percentage: 50, status: 'uploading' as const, message: 'Processing video...' },
+    { percentage: 75, status: 'processing' as const, message: 'Generating thumbnail...' },
+    { percentage: 100, status: 'completed' as const, message: 'Upload completed successfully!' },
   ];
 
   for (const step of progressSteps) {

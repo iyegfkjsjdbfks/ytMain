@@ -1,15 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
 
-import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent  } from 'react';
+import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent } from 'react';
 
 import { XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid'; // For remove button;
 const XMarkIconSolid = XMarkSolidIcon;
 
-import { getSearchSuggestions,
-  saveRecentSearch,
-  getRecentSearches,
-  removeRecentSearch, clearAllRecentSearches } from '../services/realVideoService';
+import { getSearchSuggestions, saveRecentSearch, getRecentSearches, removeRecentSearch, clearAllRecentSearches } from '../services/realVideoService';
 
 import ClockIcon from './icons/ClockIcon'; // For recent searches;
 import SearchIcon from './icons/SearchIcon';

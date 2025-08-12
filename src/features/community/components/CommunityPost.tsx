@@ -1,10 +1,6 @@
 import React, { useState, FC } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { HandThumbUpIcon,
-  HandThumbDownIcon,
-  ChatBubbleLeftIcon,
-  ShareIcon,
-  EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
 
 export interface CommunityPostData {

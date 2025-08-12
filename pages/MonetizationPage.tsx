@@ -1,15 +1,7 @@
 import React, { useEffect, useState, memo, lazy, Suspense, FC } from 'react';
-import { ArrowTrendingUpIcon, BanknotesIcon  } from '@heroicons/react/24/outline';
+import { ArrowTrendingUpIcon, BanknotesIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
-import { Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend, ArcElement } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 
 // Lazy load Chart.js components for better performance
 const LazyLineChart = lazy(() => import('react-chartjs-2').then(module => ({ default: module.Line })));
@@ -215,13 +207,13 @@ return { labels: [], datasets: [] };
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top' as const labels: {
+        position: 'top' as const, labels: {
           usePointStyle: true,
           padding: 20,
         },
       },
       tooltip: {
-        mode: 'index' as const intersect: false,
+        mode: 'index' as const, intersect: false,
         callbacks: {
           label: (context) => {
             return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
@@ -249,7 +241,7 @@ return { labels: [], datasets: [] };
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'bottom' as const labels: {
+        position: 'bottom' as const, labels: {
           usePointStyle: true,
           padding: 20,
         },

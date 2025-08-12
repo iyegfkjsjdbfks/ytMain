@@ -3,32 +3,7 @@ import { useEffect, useState, FC } from 'react';
 
 import { VideoCameraIcon, PlayIcon } from '@heroicons/react/24/outline';
 
-import {
-  getSettings,
-  saveSettings,
-  VIDEO_PLAYER_CONFIGS,
-  getVideoPlayersByCategory,
-  getAllVideoPlayers,
-  setLocalVideoPlayerType,
-  getEnabledYouTubePlayers,
-  getEnabledLocalPlayers,
-  toggleYouTubePlayer,
-  toggleLocalPlayer,
-  isGoogleSearchAvailable,
-  isYouTubeApiAvailable,
-  isYouTubeApiConfigured,
-  isHybridModeAvailable,
-  getInitialSearchKeyword,
-  setInitialSearchKeyword,
-  getAllPageConfigurations,
-  getPageDisplayName,
-  getPlayerUsageByPage,
-  type YouTubeSearchProvider,
-  type YouTubePlayerType,
-  type LocalVideoPlayerType,
-  type VideoPlayerConfig,
-  type PageType,
-} from '../services/settingsService';
+import { getSettings, saveSettings, VIDEO_PLAYER_CONFIGS, getVideoPlayersByCategory, getAllVideoPlayers, setLocalVideoPlayerType, getEnabledYouTubePlayers, getEnabledLocalPlayers, toggleYouTubePlayer, toggleLocalPlayer, isGoogleSearchAvailable, isYouTubeApiAvailable, isYouTubeApiConfigured, isHybridModeAvailable, getInitialSearchKeyword, setInitialSearchKeyword, getAllPageConfigurations, getPageDisplayName, getPlayerUsageByPage, type YouTubeSearchProvider, type YouTubePlayerType, type LocalVideoPlayerType, type VideoPlayerConfig, type PageType } from '../services/settingsService';
 
 interface StoreVideo {
   id: string;

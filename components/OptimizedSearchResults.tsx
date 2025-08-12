@@ -294,9 +294,9 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     performanceMonitor.startMeasure('search-results-processing');
 
     const combined = [
-      ...(videos || []).map(v => ({ ...v, source: 'local' as const contentType: 'video' as const })),
-      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const contentType: 'video' as const })),
-      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const contentType: 'video' as const })),
+      ...(videos || []).map(v => ({ ...v, source: 'local' as const, contentType: 'video' as const })),
+      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const, contentType: 'video' as const })),
+      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const, contentType: 'video' as const })),
     ];
 
     let sorted = combined;

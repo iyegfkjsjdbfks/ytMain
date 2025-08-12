@@ -8,11 +8,7 @@ declare namespace NodeJS {
   }
 }
 
-import { PlayIcon,
-  /// <reference types="node" />
-  PauseIcon,
-  ScissorsIcon,
-  DocumentArrowDownIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, ScissorsIcon, DocumentArrowDownIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
 
 interface VideoClip {
   id: string;
@@ -224,7 +220,7 @@ export const VideoEditor: React.FC = () => {
   };
 
   const exportVideo = () => {
-    // In a real implementation, this would trigger video processing
+    // In a real implementation: real implementation, this would: this would trigger video processing
     alert(
       'Video export started! This would normally process the video with all edits applied.'
     );

@@ -1,11 +1,5 @@
 import React, { useEffect, useMemo, useCallback, useState, FC } from 'react';
-import { X,
-  Download,
-  Smartphone,
-  Wifi,
-  WifiOff,
-  Star,
-  Zap, Shield } from 'lucide-react';
+import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';
 

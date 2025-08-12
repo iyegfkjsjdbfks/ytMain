@@ -1,6 +1,6 @@
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
-import { useCallback,  useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { unifiedDataService } from '../services/unifiedDataService';
 import type { Video } from '../types/core';
@@ -358,7 +358,7 @@ export const useWatchPage = () => {
       description: description || '',
       videoCount: 0,
       totalDuration: '0:00:00',
-      visibility: 'private' as const ownerId: 'user-1',
+      visibility: 'private' as const, ownerId: 'user-1',
       ownerName: 'You',
       videos: [],
       tags: [],
@@ -378,7 +378,7 @@ export const useWatchPage = () => {
       description: 'Videos to watch later',
       videoCount: 5,
       totalDuration: '2:30:45',
-      visibility: 'private' as const ownerId: 'user-1',
+      visibility: 'private' as const, ownerId: 'user-1',
       ownerName: 'You',
       videos: [],
       tags: [],
@@ -392,7 +392,7 @@ export const useWatchPage = () => {
       description: 'My favorite videos',
       videoCount: 12,
       totalDuration: '5:45:30',
-      visibility: 'private' as const ownerId: 'user-1',
+      visibility: 'private' as const, ownerId: 'user-1',
       ownerName: 'You',
       videos: [],
       tags: [],
@@ -718,8 +718,4 @@ export const useWatchPage = () => {
 };
 
 export default useWatchPage;
-import {
-  getVideoById,
-  getCommentsByVideoId,
-  getVideos,
-} from '../../services/realVideoService';
+import { getVideoById, getCommentsByVideoId, getVideos } from '../../services/realVideoService';

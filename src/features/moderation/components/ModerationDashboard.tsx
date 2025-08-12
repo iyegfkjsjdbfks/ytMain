@@ -1,14 +1,6 @@
 import React, { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
-import { FlagIcon,
-  EyeIcon,
-  CheckIcon,
-  XMarkIcon,
-  ExclamationTriangleIcon,
-  ShieldCheckIcon,
-  ClockIcon,
-  UserIcon,
-  ChatBubbleLeftIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
+import { FlagIcon, EyeIcon, CheckIcon, XMarkIcon, ExclamationTriangleIcon, ShieldCheckIcon, ClockIcon, UserIcon, ChatBubbleLeftIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
 
 interface ModerationItem {
   id: string;

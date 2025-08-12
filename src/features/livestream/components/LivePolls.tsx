@@ -2,11 +2,7 @@ import React, { useEffect, useState, FC } from 'react';
 import { logger } from '@/utils/logger';
 import { useLivePolls } from '@/hooks/useLiveStream';
 import type { LivePoll } from '@/types/livestream';
-import { PlusIcon,
-  ClockIcon,
-  CheckCircleIcon,
-  ChartBarIcon,
-  TrashIcon, StopIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, ClockIcon, CheckCircleIcon, ChartBarIcon, TrashIcon, StopIcon } from '@heroicons/react/24/outline';
 
 interface LivePollsProps {
   streamId: string;

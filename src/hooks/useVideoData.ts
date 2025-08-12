@@ -4,12 +4,7 @@ import { parseRelativeDate } from '../utils/dateUtils';
 import { parseViewCount } from '../utils/numberUtils';
 import { useAsyncData } from './useAsyncData';
 // Use the mock realVideoService for demo data (these functions exist)
-import {
-  getVideos,
-  getVideosByCategory,
-  getVideosByChannelName,
-  getSubscribedChannelNames,
-} from '../../services/realVideoService';
+import { getVideos, getVideosByCategory, getVideosByChannelName, getSubscribedChannelNames } from '../../services/realVideoService';
 
 /**
  * Hook for fetching all videos
