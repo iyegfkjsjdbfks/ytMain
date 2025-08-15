@@ -166,7 +166,7 @@ export function getYouTubeVideoId(
  originalCallback();
     };
   });
- }
+}
 
  private async initPlayer() {
  try {
@@ -204,8 +204,8 @@ export function getYouTubeVideoId(
  },
  onStateChange: event => {
  this.options.events?.onStateChange?.(event);
- } } });
- } catch (error: any) {
+ }   });
+} catch (error: any) {
  logger.error('Error initializing YouTube player:', error);
  }
  // Basic player controls
@@ -220,9 +220,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  pauseVideo(): Promise<void> {
  return new Promise((resolve: any, reject: any) => {
@@ -235,9 +234,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  stopVideo(): Promise<void> {
  return new Promise((resolve: any, reject: any) => {
@@ -250,9 +248,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  seekTo(seconds: any, allowSeekAhead: boolean = true): Promise<void> {
  return new Promise((resolve: any, reject: any) => {
@@ -265,9 +262,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  // Additional player methods
  getCurrentTime(): Promise<number> {
@@ -281,9 +277,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  getDuration(): Promise<number> {
  return new Promise((resolve: any, reject: any) => {
@@ -296,9 +291,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  getVolume(): Promise<number> {
  return new Promise((resolve: any, reject: any) => {
@@ -311,9 +305,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  setVolume(volume: any): Promise<void> {
  return new Promise((resolve: any, reject: any) => {
@@ -326,9 +319,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  isMuted(): Promise<boolean> {
  return new Promise((resolve: any, reject: any) => {
@@ -341,9 +333,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  mute(): Promise<void> {
  return new Promise((resolve: any, reject: any) => {
@@ -356,9 +347,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  unMute(): Promise<void> {
  return new Promise((resolve: any, reject: any) => {
@@ -371,9 +361,8 @@ export function getYouTubeVideoId(
  }
  } else {
  reject(new Error('YouTube player not initialized'));
- }
- });
- }
+   });
+}
 
  destroy(): void {
  if (this.player) {

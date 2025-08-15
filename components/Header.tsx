@@ -219,8 +219,7 @@ aria-expanded={isCreateMenuOpen}
 aria-haspopup="true"
 aria-controls="create-menu"
 id="create-button"
- title="Create"
-
+ title="Create">
  <VideoPlusIcon className="w-5 h-5 sm:w-6 sm:h-6" />
 </button>
  {isCreateMenuOpen && (
@@ -243,9 +242,9 @@ aria-labelledby="create-button" >
  icon={<LightBulbIcon />}
  to="/ai-content-spark"
  onClick={handleCloseCreateMenu}
-
+ >
  AI Content Spark ✨
-</CreateMenuItem>
+ </CreateMenuItem>
 </div>
  )}
 </div>

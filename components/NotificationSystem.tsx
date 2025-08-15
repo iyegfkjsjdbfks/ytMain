@@ -53,7 +53,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
 
  document.addEventListener('mousedown', handleClickOutside as EventListener);
  return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
- }, []);
+}, []);
 
  useEffect(() => {
  const count = notifications.filter((n) => !n.isRead).length;

@@ -64,6 +64,8 @@ const defaultSettings: Settings = {
   localPlayer: 'advanced-video-player',
   defaultCategory: 'youtube'
   }
+ }
+};
 
 // Video Player Configurations
 
@@ -128,9 +130,10 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
  name: 'Short Display Card',
  description: 'Individual short video player with social features and intersection observer autoplay',
  features: ['Intersection observer autoplay', 'Social action buttons', 'Loading states', 'Manual pause tracking', 'Muted autoplay'],
- useCases: ['Shorts feed', 'Home page shorts', 'Social video cards', 'Auto-playing video previews'],
- performance: 'high',
- complexity: 'moderate' };
+  useCases: ['Shorts feed', 'Home page shorts', 'Social video cards', 'Auto-playing video previews'],
+  performance: 'high',
+  complexity: 'moderate' }
+};
 
 export const getSettings: any = (): Settings => {
  const stored = (localStorage as any).getItem('appSettings');
@@ -139,6 +142,7 @@ export const getSettings: any = (): Settings => {
  return { ...defaultSettings as any, ...JSON.parse(stored) };
  } catch (error: any) {
  (console as any).error('Error parsing stored settings:', error);
+ }
  }
  return defaultSettings;
 };

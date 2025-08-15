@@ -155,6 +155,8 @@ function withPerformanceMonitoring<T>(
 }
 
 // Enhanced useQuery hook
+}
+
 export function useEnhancedQuery<TData = unknown, TError = ApiError>(
  queryKey: any,
  queryFn: () => Promise<TData>,
@@ -165,8 +167,8 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(
  maxRetryDelay?: number;
  enablePerformanceMonitoring?: boolean;
  } & Omit<
- UseQueryOptions<TData, TError>
- 'queryKey' | 'queryFn' | 'retry' | 'retryDelay'
+    UseQueryOptions<TData, TError>,
+    'queryKey' | 'queryFn' | 'retry' | 'retryDelay'
  > = {}
 ) {
  const {

@@ -157,7 +157,7 @@ interface UseInitialSearchResult {
 
  window.addEventListener('storage', handleStorageChange as EventListener);
  return () => window.removeEventListener('storage', handleStorageChange as EventListener);
- }, [fetchTrendingVideos]);
+  }, [fetchTrendingVideos]);
 
  const refetch = useCallback(async (): Promise<void> => {
  await fetchTrendingVideos();

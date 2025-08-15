@@ -12,8 +12,7 @@ const MenuIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }: a
  strokeLinejoin="round"
  strokeWidth={2}
  d="M4 6h16M4 12h16M4 18h16" />
- />
-// FIXED:  </svg>
+ </svg>
 );
 
 export default MenuIcon;

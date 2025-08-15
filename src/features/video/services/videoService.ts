@@ -223,7 +223,7 @@ class VideoService {
  * @param videoIds Array of YouTube video IDs
  * @returns Promise resolving to array of Video objects with YouTube metadata
  */
- async getYouTubeVideos(videoIds: any): Promise<Video[]> {
+  async getYouTubeVideos(videoIds: any): Promise<Video[]> {
  try {
  return await youtubeService.fetchVideos(videoIds);
  } catch (error: any) {
@@ -235,7 +235,7 @@ class VideoService {
  * @param videoId YouTube video ID
  * @returns Promise resolving to Video object or null
  */
- async getYouTubeVideo(videoId: any): Promise<Video | null> {
+  async getYouTubeVideo(videoId: any): Promise<Video | null> {
  try {
  const videos = await youtubeService.fetchVideos([videoId]);
  return videos[0] || null;

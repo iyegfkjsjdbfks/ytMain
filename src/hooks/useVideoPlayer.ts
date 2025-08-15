@@ -165,17 +165,17 @@ export const useVideoPlayer: any = (
  video.addEventListener('durationchange', handleDurationChange as EventListener);
  video.addEventListener('volumechange', handleVolumeChange as EventListener);
  video.addEventListener('ratechange', handlePlaybackRateChange as EventListener);
-  video.addEventListener('enterpictureinpicture', (() =>
+  video.addEventListener('enterpictureinpicture', () =>
  setState(prev => ({ ...prev as any, isPictureInPicture: true }))
  );
- video.addEventListener('leavepictureinpicture', (( =>
+ video.addEventListener('leavepictureinpicture', () =>
  setState(prev => ({ ...prev as any, isPictureInPicture: false }))
  );
  video.addEventListener('error', handleError as EventListener);
  video.addEventListener('loadeddata', handleLoadedData as EventListener);
  video.addEventListener('waiting', handleWaiting as EventListener);
  video.addEventListener('playing', handlePlaying as EventListener);
- video.addEventListener('ended', ( as EventListener) => onEnded?.());
+ video.addEventListener('ended', (() => onEnded?.()) as EventListener);
 
  document.addEventListener('fullscreenchange', handleFullscreenChange as EventListener);
 

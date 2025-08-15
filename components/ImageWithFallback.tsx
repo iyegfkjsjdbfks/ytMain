@@ -44,6 +44,7 @@ return fallbackSrc;
  const [w, h] = dimensions.split('x').map(Number);
  return `https://picsum.photos/${w || width}/${h || height}?random=${Math.floor(Math.random() * 1000)}`;
  }
+    }
     // Generate a picsum URL as fallback
     return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
   }, [fallbackSrc, src, width, height]);
@@ -168,6 +169,7 @@ return '';
  } else {
  line = testLine;
  }
+ }
  ctx.fillText(line, centerX, y);
 
  return canvas.toDataURL();
@@ -177,34 +179,34 @@ return '';
  <div className={`relative ${className}`} style={{ width, height }}>
  {isLoading && (
  <div
-// FIXED:  className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded"
-// FIXED:  style={{ width, height } />
+  className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded"
+  style={{ width, height }}
  />
  )}
 
  <img
-// FIXED:  src={currentSrc}
-// FIXED:  alt={alt}
- width={width}
- height={height}
-// FIXED:  className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`}
- onError={handleError}
- onLoad={handleLoad}
- loading="lazy" />
+  src={currentSrc}
+  alt={alt}
+  width={width}
+  height={height}
+  className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`}
+  onError={handleError}
+  onLoad={handleLoad}
+  loading="lazy"
  />
 
  {hasError && (
  <div className="absolute top-2 right-2 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">
- Fallback
-// FIXED:  </div>
+  Fallback
+ </div>
  )}
 
  {isRateLimited && (
  <div className="absolute top-2 left-2 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">
- Retrying... ({retryCount}/{maxRetries})
-// FIXED:  </div>
+  Retrying... ({retryCount}/{maxRetries})
+ </div>
  )}
-// FIXED:  </div>
+ </div>
  );
 };
 

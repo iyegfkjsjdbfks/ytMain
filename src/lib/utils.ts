@@ -204,6 +204,8 @@ export function formatCount(
 // 5. URL Utilities
 // =================================
 
+}
+
 // Re-export YouTube utilities
 export * from './youtube-utils';
 
@@ -225,10 +227,10 @@ export * from './youtube-utils';
  });
  } else {
  searchParams.append(key, String(value));
- }
- });
+    }
+  });
 
- return searchParams.toString();
+  return searchParams.toString();
 }
 
 // =================================

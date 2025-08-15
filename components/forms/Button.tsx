@@ -44,12 +44,12 @@ const Button: React.FC<ButtonProps> = ({
 // FIXED:  type="button"
 // FIXED:  className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
 // FIXED:  disabled={disabled || isLoading}
- {...props} />
+ {...props}
  >
  {isLoading && (
  <svg
-// FIXED:  className={`animate-spin h-5 w-5 ${children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : ''} text-current`}
- xmlns="http://www.w3.org/2000/svg"
+  className={`animate-spin h-5 w-5 ${children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : ''} text-current`}
+  xmlns="http://www.w3.org/2000/svg"
  fill="none"
  viewBox="0 0 24 24" />
  >

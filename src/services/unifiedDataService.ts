@@ -161,8 +161,8 @@ class UnifiedDataService {
  /**
  * Search videos across all enabled sources
  */
- async searchVideos(,
- query: string,
+ async searchVideos(
+    query: string,
  filters: UnifiedSearchFilters = {},
  limit: number = 50
  ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
@@ -345,8 +345,8 @@ class UnifiedDataService {
 
  this.setCachedData(cacheKey, normalized);
  return normalized;
- }
- } catch (error: any) {
+    }
+  } catch (error: any) {
  logger.warn(
  '⚠️ YouTube Data API v3 failed for metadata, falling back to Google Custom Search:',
  error
@@ -527,8 +527,8 @@ class UnifiedDataService {
  // Cache the result
  this.setCachedData(cacheKey, normalized);
  return normalized;
- }
- } catch (error: any) {
+    }
+  } catch (error: any) {
  logger.error(
  '❌ Failed to fetch video from Google Custom Search API:',
  error
@@ -646,8 +646,8 @@ class UnifiedDataService {
  updatedAt: new Date().toISOString() };
  this.setCachedData(cacheKey, normalized);
  return normalized;
- }
- } catch (error: any) {
+    }
+  } catch (error: any) {
  logger.warn('Failed to fetch YouTube video:', error);
  }
  } else if (youtubeApiBlocked as any) {
@@ -719,8 +719,8 @@ class UnifiedDataService {
  updatedAt: new Date().toISOString() };
  this.setCachedData(cacheKey, normalized);
  return normalized;
- }
- } catch (error: any) {
+    }
+  } catch (error: any) {
  logger.warn('Failed to fetch YouTube video as fallback:', error);
  }
  }
@@ -751,8 +751,8 @@ class UnifiedDataService {
  );
  this.setCachedData(cacheKey, normalized);
  return normalized;
- }
- } catch (error: any) {
+    }
+  } catch (error: any) {
  logger.warn('Failed to fetch YouTube channel:', error);
  }
  return null;

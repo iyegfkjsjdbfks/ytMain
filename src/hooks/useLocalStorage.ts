@@ -176,7 +176,7 @@ export function useLocalStorageWithExpiry<T>(
  const interval = setInterval((checkExpiry) as any, 60000);
 
  return () => clearInterval(interval);
- }, [key, removeValue]);
+  }, [key, removeValue]);
 
  return [storedValue, setValue, removeValue, isExpired];
 }

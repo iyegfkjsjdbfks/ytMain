@@ -44,7 +44,7 @@ const SearchBar: React.FC = memo(() => {
  if (currentQuery.trim().length === 0 && inputRef.current === document.activeElement) {
  loadRecentSearches().catch(console.error);
  }
- }, [loadRecentSearches]);
+}, [loadRecentSearches]);
 
  useEffect(() => {
  const debounceTimer = setTimeout((() => {

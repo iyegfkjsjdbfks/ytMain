@@ -65,7 +65,8 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  return () => {
  window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
  window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
- }}, []);
+ };
+}, []);
 
  const handleInstall = async (): Promise<void> => {
  if (!deferredPrompt) {

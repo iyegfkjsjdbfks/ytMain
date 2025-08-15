@@ -3,415 +3,462 @@ const path = require('path');
 
 // Track fixed files
 const fixedFiles = [];
+const failedFiles = [];
 
-// Helper function to fix file
-function fixFile(filePath, fixes) {
+function fixFile(filePath, description, fixes) {
   try {
+    if (!fs.existsSync(filePath)) {
+      console.log(`  ⚠️ File not found: ${filePath}`);
+      return false;
+    }
+    
     let content = fs.readFileSync(filePath, 'utf8');
+    let originalContent = content;
     let modified = false;
     
     fixes.forEach(fix => {
-      const before = content;
-      content = fix(content);
-      if (before !== content) {
-        modified = true;
+      if (fix.search && fix.replace !== undefined) {
+        if (content.includes(fix.search)) {
+          content = content.replace(fix.search, fix.replace);
+          console.log(`  ✓ Applied: ${fix.description}`);
+          modified = true;
+        }
       }
     });
     
-    if (modified) {
+    if (modified && content !== originalContent) {
       fs.writeFileSync(filePath, content, 'utf8');
-      fixedFiles.push(path.basename(filePath));
-      console.log(`✓ Fixed: ${path.basename(filePath)}`);
+      fixedFiles.push(filePath);
+      console.log(`✅ Fixed: ${path.basename(filePath)} - ${description}`);
+      return true;
     }
+    return false;
   } catch (error) {
-    console.error(`✗ Error fixing ${path.basename(filePath)}: ${error.message}`);
+    console.error(`❌ Error fixing ${filePath}:`, error.message);
+    failedFiles.push(filePath);
+    return false;
   }
 }
 
-// Fix OptimizedMiniplayerContext.tsx
-fixFile('contexts/OptimizedMiniplayerContext.tsx', [
-  (content) => {
-    // Fix the return statement outside function
-    const lines = content.split('\n');
-    let fixedLines = [];
-    let inFunction = false;
-    let braceCount = 0;
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      
-      // Check if we're entering a function
-      if (line.includes('export const useMiniplayerVisibility')) {
-        inFunction = true;
-        braceCount = 0;
+// Component files to fix
+const componentFixes = [
+  {
+    path: 'components/forms/Button.tsx',
+    description: 'Fix Button JSX syntax',
+    fixes: [
+      {
+        search: ` {...props} />
+ >
+ {isLoading && (
+ <svg
+// FIXED:  className={\`animate-spin h-5 w-5 \${children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : ''} text-current\`}
+ xmlns="http://www.w3.org/2000/svg"`,
+        replace: ` {...props}
+ >
+ {isLoading && (
+ <svg
+  className={\`animate-spin h-5 w-5 \${children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : ''} text-current\`}
+  xmlns="http://www.w3.org/2000/svg"`,
+        description: 'Fix button JSX closing and svg attributes'
       }
-      
-      if (inFunction) {
-        braceCount += (line.match(/{/g) || []).length;
-        braceCount -= (line.match(/}/g) || []).length;
-        
-        if (braceCount === 0 && line.includes('}')) {
-          inFunction = false;
-        }
+    ]
+  },
+  {
+    path: 'components/icons/MenuIcon.tsx',
+    description: 'Fix MenuIcon SVG syntax',
+    fixes: [
+      {
+        search: ` strokeWidth={2}
+ d="M4 6h16M4 12h16M4 18h16" />
+ />
+// FIXED:  </svg>`,
+        replace: ` strokeWidth={2}
+ d="M4 6h16M4 12h16M4 18h16" />
+ </svg>`,
+        description: 'Fix SVG closing tag'
       }
-      
-      // Fix orphaned code after function
-      if (!inFunction && i > 0 && lines[i-1].includes('}') && 
-          (line.includes('const { state }') || line.includes('return {'))) {
-        // Skip these orphaned lines
-        continue;
+    ]
+  },
+  {
+    path: 'components/icons/YouTubeLogo.tsx',
+    description: 'Fix YouTubeLogo SVG syntax',
+    fixes: [
+      {
+        search: ` fill="#FF0000" />
+ />
+ <path d="M11.1999 14.2857L18.3999 10L11.1999 5.71429V14.2857Z" fill="white" />
+// FIXED:  </svg>`,
+        replace: ` fill="#FF0000" />
+ <path d="M11.1999 14.2857L18.3999 10L11.1999 5.71429V14.2857Z" fill="white" />
+ </svg>`,
+        description: 'Fix SVG closing tag'
       }
-      
-      fixedLines.push(line);
+    ]
+  },
+  {
+    path: 'components/NotificationSystem.tsx',
+    description: 'Fix NotificationSystem useEffect',
+    fixes: [
+      {
+        search: ` document.addEventListener('mousedown', handleClickOutside as EventListener);
+ return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
+ }, []);`,
+        replace: ` document.addEventListener('mousedown', handleClickOutside as EventListener);
+ return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
+}, []);`,
+        description: 'Fix useEffect closing'
+      }
+    ]
+  },
+  {
+    path: 'components/PWAInstallBanner.tsx',
+    description: 'Fix PWAInstallBanner useEffect',
+    fixes: [
+      {
+        search: ` window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
+ window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
+ }}, []);`,
+        replace: ` window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
+ window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
+ };
+}, []);`,
+        description: 'Fix useEffect closing'
+      }
+    ]
+  },
+  {
+    path: 'components/SearchBar.tsx',
+    description: 'Fix SearchBar useEffect',
+    fixes: [
+      {
+        search: ` loadRecentSearches().catch(console.error);
+ }
+ }, [loadRecentSearches]);`,
+        replace: ` loadRecentSearches().catch(console.error);
+ }
+}, [loadRecentSearches]);`,
+        description: 'Fix useEffect closing'
+      }
+    ]
+  },
+  {
+    path: 'components/UserMenu.tsx',
+    description: 'Fix UserMenu JSX',
+    fixes: [
+      {
+        search: ` >
+ View your channel
+// FIXED:  </Link>
+// FIXED:  </div>
+// FIXED:  </div>
+// FIXED:  </div>`,
+        replace: ` >
+ View your channel
+ </Link>
+ </div>
+ </div>
+ </div>`,
+        description: 'Fix closing tags'
+      }
+    ]
+  }
+];
+
+// Hook files to fix
+const hookFixes = [
+  {
+    path: 'src/lib/utils.ts',
+    description: 'Fix utils.ts forEach',
+    fixes: [
+      {
+        search: `  searchParams.append(key, String(value));
     }
-    
-    return fixedLines.join('\n');
-  }
-]);
+  });
 
-// Fix Header.tsx
-fixFile('components/Header.tsx', [
-  (content) => {
-    // Fix the button element with missing closing >
-    return content
-      .replace(/role="menuitem"\s*\n\s*{\s*content}/g, 'role="menuitem">\n    {content}')
-      .replace(/role="menuitem"\s+{/g, 'role="menuitem">\n    {');
-  }
-]);
-
-// Fix Miniplayer.tsx
-fixFile('components/Miniplayer.tsx', [
-  (content) => {
-    // Remove comment lines that break JSX
-    return content
-      .replace(/\/\/ FIXED:.*$/gm, '')
-      .replace(/^\s*title={video\.title}\s*$/m, '')
-      .replace(/^\s*>\s*$/m, '')
-      .replace(/^\s*{video\.title}\s*$/m, '');
-  }
-]);
-
-// Fix settingsService.ts
-fixFile('services/settingsService.ts', [
-  (content) => {
-    // Fix the object closing and export placement
-    const lines = content.split('\n');
-    let fixedLines = [];
-    let inObject = false;
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      
-      // Fix the defaultCategory line
-      if (line.includes("defaultCategory: 'youtube' },")) {
-        fixedLines.push("  defaultCategory: 'youtube'");
-        fixedLines.push("};");
-        continue;
-      }
-      
-      // Skip malformed export inside object
-      if (line.includes('export const VIDEO_PLAYER_CONFIGS') && i > 0 && !lines[i-1].includes('}')) {
-        fixedLines.push('');
-        fixedLines.push(line);
-        continue;
-      }
-      
-      fixedLines.push(line);
+  return searchParams`,
+        replace: `  searchParams.append(key, String(value));
     }
-    
-    return fixedLines.join('\n');
-  }
-]);
+  });
 
-// Fix FireIcon.tsx
-fixFile('components/icons/FireIcon.tsx', [
-  (content) => {
-    // Fix fragment and closing tags
-    return content
-      .replace(/<\/><\/>/g, '')
-      .replace(/\/>\s*\/>/g, '/>')
-      .replace(/(<path[^>]*\/>)\s*(<\/svg>)/g, '$1\n$2');
-  }
-]);
-
-// Fix HomeIcon.tsx  
-fixFile('components/icons/HomeIcon.tsx', [
-  (content) => {
-    // Ensure path is properly closed and svg is closed
-    const lines = content.split('\n');
-    let fixedLines = [];
-    let inSvg = false;
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      
-      if (line.includes('<svg')) {
-        inSvg = true;
+  return searchParams`,
+        description: 'Already correct'
       }
-      
-      // Skip duplicate </svg> tags
-      if (line.trim() === '</svg>' && i > 0 && lines[i-1].includes('/>')) {
-        if (!inSvg) continue;
-        inSvg = false;
+    ]
+  },
+  {
+    path: 'src/lib/youtube-utils.ts',
+    description: 'Fix youtube-utils',
+    fixes: [
+      {
+        search: `  originalCallback();
+    };
+  });
+}`,
+        replace: `  originalCallback();
+    };
+  });
+}`,
+        description: 'Already fixed'
       }
-      
-      fixedLines.push(line);
+    ]
+  },
+  {
+    path: 'src/hooks/useFormState.ts',
+    description: 'Fix useFormState useCallback',
+    fixes: [
+      {
+        search: `  setIsSubmitting(false);
+        }
+  }, [values, validate, onSubmit]);`,
+        replace: `  setIsSubmitting(false);
     }
-    
-    return fixedLines.join('\n');
-  }
-]);
-
-// Fix ImageWithFallback.tsx
-fixFile('components/ImageWithFallback.tsx', [
-  (content) => {
-    // Fix useMemo closing
-    return content.replace(
-      /return `https:\/\/picsum\.photos\/\$\{width\}\/\$\{height\}\?random=\$\{Math\.floor\(Math\.random\(\) \* 1000\)\}`;[\s\n]*\}, \[fallbackSrc, src, width, height\]\);/g,
-      'return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;\n}, [fallbackSrc, src, width, height]);'
-    );
-  }
-]);
-
-// Fix useFormState.ts
-fixFile('src/hooks/useFormState.ts', [
-  (content) => {
-    // Fix the callback closing
-    return content.replace(
-      /setIsSubmitting\(false\);\s*}\s*}, \[values, validate, onSubmit\]/g,
-      'setIsSubmitting(false);\n    }\n  }, [values, validate, onSubmit]'
-    );
-  }
-]);
-
-// Fix useTrendingSearch.ts
-fixFile('src/hooks/useTrendingSearch.ts', [
-  (content) => {
-    // Remove nested export
-    const lines = content.split('\n');
-    let inFunction = false;
-    let braceCount = 0;
-    
-    return lines.map((line, i) => {
-      if (line.includes('function') && (line.includes('export') || lines[i-1]?.includes('export'))) {
-        inFunction = true;
-        braceCount = 0;
+  }, [values, validate, onSubmit]);`,
+        description: 'Fix indentation'
       }
-      
-      if (inFunction) {
-        braceCount += (line.match(/{/g) || []).length;
-        braceCount -= (line.match(/}/g) || []).length;
-        
-        if (braceCount === 0 && line.includes('}')) {
-          inFunction = false;
-        }
-        
-        // Remove nested export
-        if (braceCount > 0 && line.trim().startsWith('export')) {
-          return line.replace(/^\s*export\s+/, '  ');
-        }
+    ]
+  },
+  {
+    path: 'src/hooks/useDebounce.ts',
+    description: 'Fix useDebounce useEffect',
+    fixes: [
+      {
+        search: `  clearTimeout(timeoutRef.current);
+    };
+  }, []);`,
+        replace: `  clearTimeout(timeoutRef.current);
+    };
+  }, []);`,
+        description: 'Already correct'
       }
-      
-      return line;
-    }).join('\n');
-  }
-]);
-
-// Fix useLocalStorage.ts
-fixFile('src/hooks/useLocalStorage.ts', [
-  (content) => {
-    // Fix function parameter syntax
-    return content.replace(
-      /export function useLocalStorageWithExpiry<T>\(,/g,
-      'export function useLocalStorageWithExpiry<T>('
-    );
-  }
-]);
-
-// Fix youtube-utils.ts
-fixFile('src/lib/youtube-utils.ts', [
-  (content) => {
-    // Fix the closing bracket
-    return content.replace(
-      /originalCallback\(\);\s*};\s*}\);/g,
-      'originalCallback();\n    };\n  });'
-    );
-  }
-]);
-
-// Fix useWatchPage.ts
-fixFile('src/hooks/useWatchPage.ts', [
-  (content) => {
-    // Fix orphaned catch block
-    return content.replace(
-      /setAllRelatedVideos\(related\);\s*} catch \(error: any\) {/g,
-      'setAllRelatedVideos(related);\n  } catch (error: any) {'
-    );
-  }
-]);
-
-// Fix useDropdownMenu.ts
-fixFile('src/hooks/useDropdownMenu.ts', [
-  (content) => {
-    // Fix closing bracket
-    return content.replace(
-      /return undefined;\s*}, \[isOpen\]\);/g,
-      'return undefined;\n}, [isOpen]);'
-    );
-  }
-]);
-
-// Fix utils.ts
-fixFile('src/lib/utils.ts', [
-  (content) => {
-    // Fix function parameter
-    return content.replace(
-      /function formatDate\(,/g,
-      'function formatDate('
-    );
-  }
-]);
-
-// Fix useDebounce.ts
-fixFile('src/hooks/useDebounce.ts', [
-  (content) => {
-    // Fix closing bracket
-    return content.replace(
-      /clearTimeout\(timeoutRef\.current\);\s*};\s*}, \[\]\);/g,
-      'clearTimeout(timeoutRef.current);\n    };\n}, []);'
-    );
-  }
-]);
-
-// Fix useVideosData.ts
-fixFile('src/hooks/useVideosData.ts', [
-  (content) => {
-    // Fix else block placement
-    return content.replace(
-      /return response\.data;\s*} else {/g,
-      'return response.data;\n  } else {'
-    );
-  }
-]);
-
-// Fix useVideoPlayer.ts
-fixFile('src/hooks/useVideoPlayer.ts', [
-  (content) => {
-    // Fix event listener syntax
-    return content.replace(
-      /addEventListener\('enterpictureinpicture', \( as EventListener\)/g,
-      "addEventListener('enterpictureinpicture', (()"
-    );
-  }
-]);
-
-// Fix useOptimizedVideoData.ts
-fixFile('src/hooks/useOptimizedVideoData.ts', [
-  (content) => {
-    // Fix catch block
-    return content.replace(
-      /timestamp: Date\.now\(\) \}\);\s*}\s*} catch \(err: any\) {/g,
-      'timestamp: Date.now() });\n    }\n  } catch (err: any) {'
-    );
-  }
-]);
-
-// Fix unifiedHooks.ts
-fixFile('src/hooks/unifiedHooks.ts', [
-  (content) => {
-    // Fix function parameter
-    return content.replace(
-      /export function useApi<T>\(,/g,
-      'export function useApi<T>('
-    );
-  }
-]);
-
-// Fix useApi.ts
-fixFile('src/hooks/unified/useApi.ts', [
-  (content) => {
-    // This appears to be a class method, should be fine as is
-    return content;
-  }
-]);
-
-// Fix useEnhancedQuery.ts
-fixFile('src/hooks/useEnhancedQuery.ts', [
-  (content) => {
-    // Remove nested export
-    const lines = content.split('\n');
-    let inFunction = false;
-    let braceCount = 0;
-    
-    return lines.map((line, i) => {
-      if (line.includes('export function') && !inFunction) {
-        inFunction = true;
-        braceCount = 0;
+    ]
+  },
+  {
+    path: 'src/hooks/useDropdownMenu.ts',
+    description: 'Fix useDropdownMenu useMemo',
+    fixes: [
+      {
+        search: `  }
+  return undefined;
+  }, [isOpen]);`,
+        replace: `  }
+  return undefined;
+}, [isOpen]);`,
+        description: 'Fix closing'
       }
-      
-      if (inFunction) {
-        braceCount += (line.match(/{/g) || []).length;
-        braceCount -= (line.match(/}/g) || []).length;
-        
-        if (braceCount === 0 && line.includes('}')) {
-          inFunction = false;
-        }
-        
-        // Remove nested export
-        if (braceCount > 0 && line.trim().startsWith('export')) {
-          return line.replace(/^\s*export\s+/, '  ');
-        }
+    ]
+  },
+  {
+    path: 'src/hooks/useTrendingSearch.ts',
+    description: 'Fix useTrendingSearch useEffect',
+    fixes: [
+      {
+        search: `  window.addEventListener('storage', handleStorageChange as EventListener);
+  return () => window.removeEventListener('storage', handleStorageChange as EventListener);
+  }, [fetchTrendingVideos]);`,
+        replace: `  window.addEventListener('storage', handleStorageChange as EventListener);
+  return () => window.removeEventListener('storage', handleStorageChange as EventListener);
+}, [fetchTrendingVideos]);`,
+        description: 'Fix closing'
       }
-      
-      return line;
-    }).join('\n');
-  }
-]);
-
-// Fix dateUtils.ts
-fixFile('src/utils/dateUtils.ts', [
-  (content) => {
-    // Fix function parameter
-    return content.replace(
-      /const formatDate: any = \(,/g,
-      'const formatDate: any = ('
-    );
-  }
-]);
-
-// Fix unifiedDataService.ts
-fixFile('src/services/unifiedDataService.ts', [
-  (content) => {
-    // Fix missing closing brace before export
-    const lines = content.split('\n');
-    let fixedLines = [];
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      
-      // Add missing closing brace before export interface
-      if (line.includes('export interface UnifiedSearchFilters') && 
-          i > 0 && !lines[i-1].includes('}')) {
-        fixedLines.push('}');
-        fixedLines.push('');
+    ]
+  },
+  {
+    path: 'src/hooks/useLocalStorage.ts',
+    description: 'Fix useLocalStorage useEffect',
+    fixes: [
+      {
+        search: `
+  return () => clearInterval(interval);
+  }, [key, removeValue]);`,
+        replace: `
+  return () => clearInterval(interval);
+}, [key, removeValue]);`,
+        description: 'Fix closing'
       }
-      
-      fixedLines.push(line);
+    ]
+  },
+  {
+    path: 'src/hooks/useVideosData.ts',
+    description: 'Fix useVideosData if-else',
+    fixes: [
+      {
+        search: `  const response = await unifiedDataService.getTrendingVideos(50);
+  return response.data;
+  } else {`,
+        replace: `  const response = await unifiedDataService.getTrendingVideos(50);
+  return response.data;
+} else {`,
+        description: 'Fix if-else structure'
+      }
+    ]
+  },
+  {
+    path: 'src/hooks/useOptimizedVideoData.ts',
+    description: 'Fix useOptimizedVideoData try-catch',
+    fixes: [
+      {
+        search: `  timestamp: Date.now() });
     }
-    
-    return fixedLines.join('\n');
+  } catch (err: any) {`,
+        replace: `  timestamp: Date.now() });
   }
-]);
-
-// Fix videoService.ts
-fixFile('src/features/video/services/videoService.ts', [
-  (content) => {
-    // Fix async method syntax
-    return content
-      .replace(/async getVideoInteractions/g, 'async getVideoInteractions')
-      .replace(/async getRecommendedVideos\(\s*videoId/g, 'async getRecommendedVideos(videoId');
+} catch (err: any) {`,
+        description: 'Fix try-catch structure'
+      }
+    ]
+  },
+  {
+    path: 'src/hooks/useWatchPage.ts',
+    description: 'Fix useWatchPage try-catch',
+    fixes: [
+      {
+        search: `  .slice(0, 20);
+  setAllRelatedVideos(related);
+  } catch (error: any) {`,
+        replace: `  .slice(0, 20);
+  setAllRelatedVideos(related);
+} catch (error: any) {`,
+        description: 'Fix try-catch'
+      }
+    ]
+  },
+  {
+    path: 'src/hooks/unifiedHooks.ts',
+    description: 'Fix unifiedHooks useCallback',
+    fixes: [
+      {
+        search: `  retryCountRef.current = 0;
+    }
+  }, [
+  apiCall,`,
+        replace: `  retryCountRef.current = 0;
   }
-]);
+}, [
+  apiCall,`,
+        description: 'Fix dependency array'
+      }
+    ]
+  },
+  {
+    path: 'src/hooks/useVideoPlayer.ts',
+    description: 'Fix useVideoPlayer event listeners',
+    fixes: [
+      {
+        search: `  video.removeEventListener('enterpictureinpicture', ( as EventListener) =>`,
+        replace: `  video.removeEventListener('enterpictureinpicture', (() =>`,
+        description: 'Fix event listener syntax'
+      }
+    ]
+  },
+  {
+    path: 'src/hooks/unified/useApi.ts',
+    description: 'Fix useApi class method',
+    fixes: [
+      {
+        search: `  get<T>(key: string): T | undefined {`,
+        replace: `  get<T>(key: string): T | undefined {`,
+        description: 'Already correct'
+      }
+    ]
+  },
+  {
+    path: 'src/hooks/useEnhancedQuery.ts',
+    description: 'Fix useEnhancedQuery generic',
+    fixes: [
+      {
+        search: `  TError = ApiError,
+  TVariables = void,
+>(,
+  mutationFn:`,
+        replace: `  TError = ApiError,
+  TVariables = void
+>(
+  mutationFn:`,
+        description: 'Fix generic syntax'
+      }
+    ]
+  }
+];
 
-console.log('\n✨ Fix complete!');
-console.log(`📝 Fixed ${fixedFiles.length} files:`, fixedFiles.join(', '));
+// Service files to fix
+const serviceFixes = [
+  {
+    path: 'src/services/unifiedDataService.ts',
+    description: 'Fix unifiedDataService try-catch',
+    fixes: [
+      {
+        search: `  return normalized;
+    }
+  } catch (error: any) {`,
+        replace: `  return normalized;
+  }
+} catch (error: any) {`,
+        description: 'Fix try-catch'
+      }
+    ]
+  },
+  {
+    path: 'src/utils/dateUtils.ts',
+    description: 'Fix dateUtils export',
+    fixes: [
+      {
+        search: `  return now - 10 * 365 * 24 * 60 * 60 * 1000; // Approx 10 years ago
+};`,
+        replace: `  return now - 10 * 365 * 24 * 60 * 60 * 1000; // Approx 10 years ago
+};
+
+export { parseRelativeDate };`,
+        description: 'Add export'
+      }
+    ]
+  },
+  {
+    path: 'src/utils/youtubeApiUtils.ts',
+    description: 'Fix youtubeApiUtils function',
+    fixes: [
+      {
+        search: `export async function conditionalYouTubeApiCall<T>(,
+  apiCall:`,
+        replace: `export async function conditionalYouTubeApiCall<T>(
+  apiCall:`,
+        description: 'Fix function parameters'
+      }
+    ]
+  },
+  {
+    path: 'src/features/video/services/videoService.ts',
+    description: 'Fix videoService method',
+    fixes: [
+      {
+        search: `  */
+  async getYouTubeVideo`,
+        replace: `  */
+  async getYouTubeVideo`,
+        description: 'Already correct'
+      }
+    ]
+  }
+];
+
+console.log('Starting comprehensive error fixes...\n');
+
+// Apply all fixes
+[...componentFixes, ...hookFixes, ...serviceFixes].forEach(file => {
+  console.log(`Processing ${file.path}...`);
+  fixFile(file.path, file.description, file.fixes);
+});
+
+// Summary
+console.log('\n=== Fix Summary ===');
+console.log(`✅ Fixed files: ${fixedFiles.length}`);
+if (fixedFiles.length > 0) {
+  console.log('Files fixed:');
+  fixedFiles.forEach(file => console.log(`  - ${path.basename(file)}`));
+}
+
+if (failedFiles.length > 0) {
+  console.log(`\n❌ Failed files: ${failedFiles.length}`);
+  failedFiles.forEach(file => console.log(`  - ${path.basename(file)}`));
+}
+
+console.log('\nComprehensive fix script completed!');

@@ -172,8 +172,8 @@ import { logger } from './logger';
  * @param relativeDate Relative date string like "2 hours ago"
  * @returns Timestamp in milliseconds
  */
-  const parseRelativeDate: any = (,
- relativeDate: string | null | undefined
+  const parseRelativeDate: any = (
+    relativeDate: string | null | undefined
 ): number => {
  const now = new Date().getTime();
 

@@ -1,385 +1,270 @@
 const fs = require('fs');
 const path = require('path');
 
+// Track fixed files
+const fixedFiles = [];
+const failedFiles = [];
+
 function fixFile(filePath, fixes) {
-  if (!fs.existsSync(filePath)) {
-    console.log(`File not found: ${filePath}`);
+  try {
+    if (!fs.existsSync(filePath)) {
+      console.log(`  ⚠️ File not found: ${filePath}`);
+      return false;
+    }
+    
+    let content = fs.readFileSync(filePath, 'utf8');
+    let originalContent = content;
+    
+    fixes.forEach(fix => {
+      if (fix.pattern && fix.replacement) {
+        const before = content.length;
+        content = content.replace(fix.pattern, fix.replacement);
+        const after = content.length;
+        if (before !== after || content !== originalContent) {
+          console.log(`  ✓ Applied: ${fix.description}`);
+        }
+      }
+    });
+    
+    if (content !== originalContent) {
+      fs.writeFileSync(filePath, content, 'utf8');
+      fixedFiles.push(filePath);
+      console.log(`✅ Fixed: ${path.basename(filePath)}`);
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error(`❌ Error fixing ${filePath}:`, error.message);
+    failedFiles.push(filePath);
     return false;
   }
-  
-  let content = fs.readFileSync(filePath, 'utf8');
-  let changesMade = false;
-  
-  fixes.forEach(fix => {
-    if (typeof fix.search === 'string') {
-      if (content.includes(fix.search)) {
-        content = content.replace(fix.search, fix.replace);
-        changesMade = true;
-      }
-    } else if (fix.search instanceof RegExp) {
-      const newContent = content.replace(fix.search, fix.replace);
-      if (newContent !== content) {
-        content = newContent;
-        changesMade = true;
-      }
-    }
-  });
-  
-  if (changesMade) {
-    fs.writeFileSync(filePath, content);
-    console.log(`✓ Fixed ${path.basename(filePath)}`);
-    return true;
-  }
-  
-  return false;
 }
 
-const fixes = {
-  // Header.tsx - fix useEffect closing
-  'components/Header.tsx': [
-    {
-      search: ` return () => {
- document.removeEventListener('mousedown', handleClickOutside as EventListener);
- }}, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);`,
-      replace: ` return () => {
-  document.removeEventListener('mousedown', handleClickOutside as EventListener);
- };
- }, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);`
-    },
-    // Fix toggleUserMenu closing brace
-    {
-      search: `setIsCreateMenuOpen(false);
-};`,
-      replace: `setIsCreateMenuOpen(false);
- }
- };`
-    },
-    // Fix toggleCreateMenu closing brace
-    {
-      search: `setIsNotificationsPanelOpen(false);
-};`,
-      replace: `setIsNotificationsPanelOpen(false);
- }
- };`
-    },
-    // Fix handleClickOutside closing brace
-    {
-      search: `setIsCreateMenuOpen(false);
- };`,
-      replace: `setIsCreateMenuOpen(false);
- }
- };`
-    }
-  ],
-  
-  // OptimizedMiniplayerContext.tsx - fix return outside function
-  'contexts/OptimizedMiniplayerContext.tsx': [
-    {
-      search: `}
-  const { state } = useOptimizedMiniplayer();
-  return state.currentVideo;
-};`,
-      replace: `  const { state } = useOptimizedMiniplayer();
-  return state.currentVideo;
-};`
-    }
-  ],
-  
-  // Sidebar.tsx - fix aside tag
-  'components/Sidebar.tsx': [
-    {
-      search: ` <aside
-// FIXED:  className={\`fixed top-14 left-0 z-50 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-transform duration-300 ease-in-out overflow-y-auto w-64 md:hidden
- \${isOpen ? 'transform translate-x-0' : 'transform -translate-x-full'}
- \`}
-// FIXED:  aria-label="Mobile navigation" />
- >`,
-      replace: ` <aside
-  className={\`fixed top-14 left-0 z-50 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-transform duration-300 ease-in-out overflow-y-auto w-64 md:hidden \${isOpen ? 'transform translate-x-0' : 'transform -translate-x-full'}\`}
-  aria-label="Mobile navigation"
- >`
-    }
-  ],
-  
-  // CategoryChips.tsx - fix button attributes
-  'components/CategoryChips.tsx': [
-    {
-      search: `// FIXED:  onClick={() => onSelectCategory(category)}
-// FIXED:  className={cn(
- 'flex-shrink-0 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap touch-manipulation min-h-[36px] sm:min-h-[40px]',
- isSelected
- ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
- : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700')}`,
-      replace: ` onClick={() => onSelectCategory(category)}
- className={cn(
-  'flex-shrink-0 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap touch-manipulation min-h-[36px] sm:min-h-[40px]',
-  isSelected
-  ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
-  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
- )}`
-    }
-  ],
-  
-  // Miniplayer.tsx - fix onClick handler
-  'components/Miniplayer.tsx': [
-    {
-      search: ` e.preventDefault(); onMaximize(video.id);
-}
- className="w-[160px] aspect-video block flex-shrink-0 group relative bg-black"
- aria-label={\`Maximize video: \${video.title}\`}
- title={\`Maximize: \${video.title}\`}
- >`,
-      replace: ` e.preventDefault(); 
-  onMaximize(video.id);
- }}
- className="w-[160px] aspect-video block flex-shrink-0 group relative bg-black"
- aria-label={\`Maximize video: \${video.title}\`}
- title={\`Maximize: \${video.title}\`}
- >`
-    }
-  ],
-  
-  // HoverAutoplayVideoCard.tsx - remove declare keyword
-  'components/HoverAutoplayVideoCard.tsx': [
-    {
-      search: /declare\s+const\s+HoverAutoplayVideoCard/g,
-      replace: 'const HoverAutoplayVideoCard'
-    }
-  ],
-  
-  // MinimizedSidebar.tsx - fix closing tags
-  'components/MinimizedSidebar.tsx': [
-    {
-      search: /to="[^"]+"\s+\/>/g,
-      replace: (match) => {
-        // Extract the "to" value
-        const toMatch = match.match(/to="([^"]+)"/);
-        if (toMatch) {
-          return `to="${toMatch[1]}"`;
-        }
-        return match;
+// Fixes to apply
+const filesToFix = [
+  // Fix useFormState.ts
+  {
+    path: 'src/hooks/useFormState.ts',
+    fixes: [
+      {
+        pattern: /}\s*}, \[values, validate, onSubmit\]\);/g,
+        replacement: '    }\n  }, [values, validate, onSubmit]);',
+        description: 'Fix useCallback closing'
       }
-    },
-    // Fix remaining attributes
-    {
-      search: /\/>\n\s*icon=/g,
-      replace: '\n icon='
-    },
-    {
-      search: /\/>\n\s*label=/g,
-      replace: '\n label='
-    },
-    {
-      search: /\/>\n\s*currentPath=/g,
-      replace: '\n currentPath='
-    },
-    {
-      search: /\/>\n\s*title=/g,
-      replace: '\n title='
-    },
-    {
-      search: /title="[^"]+"\n\s*\/>/g,
-      replace: (match) => {
-        const titleMatch = match.match(/title="([^"]+)"/);
-        if (titleMatch) {
-          return `title="${titleMatch[1]}"\n />`;
-        }
-        return match;
-      }
-    }
-  ],
-  
-  // settingsService.ts - fix object syntax
-  'services/settingsService.ts': [
-    {
-      search: `  defaultCategory: 'youtube' } };`,
-      replace: `  defaultCategory: 'youtube'
-  }
-};`
-    }
-  ],
-  
-  // useFormState.ts - fix callback syntax
-  'src/hooks/useFormState.ts': [
-    {
-      search: `  setIsSubmitting(false);
-  }
+    ]
   },
-  [values, validate, onSubmit]
-  );`,
-      replace: `   setIsSubmitting(false);
+  
+  // Fix useVideosData.ts
+  {
+    path: 'src/hooks/useVideosData.ts',
+    fixes: [
+      {
+        pattern: /return response\.data;\s*} else {/g,
+        replacement: 'return response.data;\n  } else {',
+        description: 'Ensure proper if-else structure'
+      }
+    ]
+  },
+  
+  // Fix useLocalStorage.ts
+  {
+    path: 'src/hooks/useLocalStorage.ts',
+    fixes: [
+      {
+        pattern: /return \(\) => clearInterval\(interval\);\s*}, \[key, removeValue\]\);/g,
+        replacement: 'return () => clearInterval(interval);\n  }, [key, removeValue]);',
+        description: 'Fix useEffect closing'
+      }
+    ]
+  },
+  
+  // Fix useOptimizedVideoData.ts
+  {
+    path: 'src/hooks/useOptimizedVideoData.ts',
+    fixes: [
+      {
+        pattern: /timestamp: Date\.now\(\) \}\);\s*}\s*} catch \(err: any\) {/g,
+        replacement: 'timestamp: Date.now() });\n    }\n  } catch (err: any) {',
+        description: 'Fix try-catch structure'
+      }
+    ]
+  },
+  
+  // Fix youtube-utils.ts
+  {
+    path: 'src/lib/youtube-utils.ts',
+    fixes: [
+      {
+        pattern: /originalCallback\(\);\s*};\s*}\);\s*}/g,
+        replacement: 'originalCallback();\n    };\n  });\n}',
+        description: 'Fix function closing'
+      }
+    ]
+  },
+  
+  // Fix utils.ts
+  {
+    path: 'src/lib/utils.ts',
+    fixes: [
+      {
+        pattern: /searchParams\.append\(key, String\(value\)\);\s*}\s*}\);\s*return searchParams/g,
+        replacement: 'searchParams.append(key, String(value));\n    }\n  });\n\n  return searchParams',
+        description: 'Fix forEach and return statement'
+      }
+    ]
+  },
+  
+  // Fix useDropdownMenu.ts
+  {
+    path: 'src/hooks/useDropdownMenu.ts',
+    fixes: [
+      {
+        pattern: /return undefined;\s*}, \[isOpen\]\);/g,
+        replacement: 'return undefined;\n  }, [isOpen]);',
+        description: 'Fix useMemo closing'
+      }
+    ]
+  },
+  
+  // Fix useDebounce.ts
+  {
+    path: 'src/hooks/useDebounce.ts',
+    fixes: [
+      {
+        pattern: /clearTimeout\(timeoutRef\.current\);\s*};\s*}, \[\]\);/g,
+        replacement: 'clearTimeout(timeoutRef.current);\n    };\n  }, []);',
+        description: 'Fix useEffect closing'
+      }
+    ]
+  },
+  
+  // Fix useVideoPlayer.ts
+  {
+    path: 'src/hooks/useVideoPlayer.ts',
+    fixes: [
+      {
+        pattern: /video\.addEventListener\('ended', \( as EventListener\) => onEnded\?\.\(\)\);/g,
+        replacement: "video.addEventListener('ended', (() => onEnded?.()) as EventListener);",
+        description: 'Fix event listener syntax'
+      }
+    ]
+  },
+  
+  // Fix useTrendingSearch.ts
+  {
+    path: 'src/hooks/useTrendingSearch.ts',
+    fixes: [
+      {
+        pattern: /return \(\) => window\.removeEventListener\('storage', handleStorageChange as EventListener\);\s*}, \[fetchTrendingVideos\]\);/g,
+        replacement: "return () => window.removeEventListener('storage', handleStorageChange as EventListener);\n  }, [fetchTrendingVideos]);",
+        description: 'Fix useEffect closing'
+      }
+    ]
+  },
+  
+  // Fix unifiedHooks.ts
+  {
+    path: 'src/hooks/unifiedHooks.ts',
+    fixes: [
+      {
+        pattern: /retryCountRef\.current = 0;\s*}\s*}, \[/g,
+        replacement: 'retryCountRef.current = 0;\n    }\n  }, [',
+        description: 'Fix useCallback dependency array'
+      }
+    ]
+  },
+  
+  // Fix useWatchPage.ts
+  {
+    path: 'src/hooks/useWatchPage.ts',
+    fixes: [
+      {
+        pattern: /setAllRelatedVideos\(related\);\s*} catch \(error: any\) {/g,
+        replacement: 'setAllRelatedVideos(related);\n  } catch (error: any) {',
+        description: 'Fix try-catch structure'
+      }
+    ]
+  },
+  
+  // Fix useApi.ts
+  {
+    path: 'src/hooks/unified/useApi.ts',
+    fixes: [
+      {
+        pattern: /get<T>\(key: string\): T \| undefined {/g,
+        replacement: 'get<T>(key: string): T | undefined {',
+        description: 'Class method syntax already correct'
+      }
+    ]
+  },
+  
+  // Fix useEnhancedQuery.ts
+  {
+    path: 'src/hooks/useEnhancedQuery.ts',
+    fixes: [
+      {
+        pattern: /} & Omit<\s*UseQueryOptions<TData, TError>\s*'queryKey'/g,
+        replacement: "} & Omit<\n    UseQueryOptions<TData, TError>,\n    'queryKey'",
+        description: 'Fix generic type syntax'
+      }
+    ]
+  },
+  
+  // Fix unifiedDataService.ts
+  {
+    path: 'src/services/unifiedDataService.ts',
+    fixes: [
+      {
+        pattern: /return normalized;\s*}\s*} catch \(error: any\) {/g,
+        replacement: 'return normalized;\n    }\n  } catch (error: any) {',
+        description: 'Fix try-catch structure'
+      }
+    ]
+  },
+  
+  // Fix dateUtils.ts
+  {
+    path: 'src/utils/dateUtils.ts',
+    fixes: [
+      {
+        pattern: /return now - 10 \* 365 \* 24 \* 60 \* 60 \* 1000;[^}]*$/,
+        replacement: 'return now - 10 * 365 * 24 * 60 * 60 * 1000; // Approx 10 years ago\n};\n\nexport { parseRelativeDate };',
+        description: 'Add missing closing brace and export'
+      }
+    ]
+  },
+  
+  // Fix videoService.ts
+  {
+    path: 'src/features/video/services/videoService.ts',
+    fixes: [
+      {
+        pattern: /\*\/\s*async getYouTubeVideo/g,
+        replacement: '*/\n  async getYouTubeVideo',
+        description: 'Fix method declaration'
+      }
+    ]
   }
- },
- [values, validate, onSubmit]
-);`
-    }
-  ],
-  
-  // useAsyncState.ts - fix parameters
-  'src/hooks/useAsyncState.ts': [
-    {
-      search: `export const useAsyncState = <T>(
-  asyncFunction: () => Promise<T>
-  dependencies = [],`,
-      replace: `export const useAsyncState = <T>(
-  asyncFunction: () => Promise<T>,
-  dependencies = [],`
-    }
-  ],
-  
-  // useTrendingSearch.ts - fix object syntax
-  'src/hooks/useTrendingSearch.ts': [
-    {
-      search: `  projection: 'rectangular' };`,
-      replace: `  projection: 'rectangular'
- };`
-    }
-  ],
-  
-  // useDebounce.ts - fix useEffect return
-  'src/hooks/useDebounce.ts': [
-    {
-      search: `  clearTimeout(timeoutRef.current);
-  };
-  }, []);`,
-      replace: `   clearTimeout(timeoutRef.current);
-  };
- }, []);`
-    }
-  ],
-  
-  // useLocalStorage.ts - fix return type
-  'src/hooks/useLocalStorage.ts': [
-    {
-      search: `): [T(value: SetValue<T>) => void() => void] {`,
-      replace: `): [T, (value: SetValue<T>) => void, () => void] {`
-    }
-  ],
-  
-  // useOptimizedVideoData.ts - fix catch block
-  'src/hooks/useOptimizedVideoData.ts': [
-    {
-      search: `  timestamp: Date.now() });
-  }
-  } catch (err: any) {`,
-      replace: `  timestamp: Date.now()
-  });
- } catch (err: any) {`
-    }
-  ],
-  
-  // useVideosData.ts - fix else block
-  'src/hooks/useVideosData.ts': [
-    {
-      search: `  return response.data;
-  }
-  } else {`,
-      replace: `  return response.data;
-  } else {`
-    }
-  ],
-  
-  // useDropdownMenu.ts - fix useEffect
-  'src/hooks/useDropdownMenu.ts': [
-    {
-      search: `  return undefined;
-  }, [isOpen]);`,
-      replace: `  return undefined;
- }, [isOpen]);`
-    }
-  ],
-  
-  // useVideoPlayer.ts - fix error constructor
-  'src/hooks/useVideoPlayer.ts': [
-    {
-      search: `  const error = new Error(;
-  \`Video error: \${video.error?.message || 'Unknown error'}\`,
-  );`,
-      replace: `  const error = new Error(
-   \`Video error: \${video.error?.message || 'Unknown error'}\`
-  );`
-    }
-  ],
-  
-  // useWatchPage.ts - fix catch block
-  'src/hooks/useWatchPage.ts': [
-    {
-      search: `  .slice(0, 20);
-  setAllRelatedVideos(related);
-  } catch (error: any) {`,
-      replace: `  .slice(0, 20);
-  setAllRelatedVideos(related);
- } catch (error: any) {`
-    }
-  ],
-  
-  // unifiedHooks.ts - fix return type
-  'src/hooks/unifiedHooks.ts': [
-    {
-      search: `export function useAsyncState<T>(initialData: T | null = null): [
-  AsyncState<T>
-  {`,
-      replace: `export function useAsyncState<T>(initialData: T | null = null): [
-  AsyncState<T>,
-  {`
-    }
-  ],
-  
-  // useApi.ts - fix generic method
-  'src/hooks/unified/useApi.ts': [
-    {
-      search: `  get<T>(key: string): T | undefined {`,
-      replace: `  get<T>(key: string): T | undefined {`
-    }
-  ],
-  
-  // useEnhancedQuery.ts - fix function parameter
-  'src/hooks/useEnhancedQuery.ts': [
-    {
-      search: `export function useEnhancedQuery<TData = unknown, TError = ApiError>(,`,
-      replace: `export function useEnhancedQuery<TData = unknown, TError = ApiError>(`
-    }
-  ],
-  
-  // unifiedDataService.ts - fix object syntax
-  'src/services/unifiedDataService.ts': [
-    {
-      search: `  sourcePriority: ['youtube'] };`,
-      replace: `  sourcePriority: ['youtube']
-  }
-};`
-    }
-  ],
-  
-  // dateUtils.ts - fix export
-  'src/utils/dateUtils.ts': [
-    {
-      search: /export const formatShortDistanceToNow: any = \(/,
-      replace: 'export const formatShortDistanceToNow = ('
-    }
-  ],
-  
-  // realVideoService.ts - needs context check
-  'services/realVideoService.ts': [
-    // This might need the full context to fix properly
-  ],
-  
-  // useVideo.ts - fix export
-  'src/features/video/hooks/useVideo.ts': [
-    {
-      search: `export const useUnifiedSearchVideos: any = (,`,
-      replace: `export const useUnifiedSearchVideos = (`
-    }
-  ]
-};
+];
 
-console.log('Starting comprehensive error fixes...');
+console.log('Starting comprehensive error fixes...\n');
 
-Object.entries(fixes).forEach(([file, fileFixes]) => {
-  const filePath = path.join(__dirname, '..', file);
-  if (fileFixes.length > 0) {
-    fixFile(filePath, fileFixes);
-  }
+filesToFix.forEach(file => {
+  console.log(`Processing ${file.path}...`);
+  fixFile(file.path, file.fixes);
 });
 
-console.log('Fixes complete!');
+// Summary
+console.log('\n=== Fix Summary ===');
+console.log(`✅ Fixed files: ${fixedFiles.length}`);
+if (fixedFiles.length > 0) {
+  console.log('Files fixed:');
+  fixedFiles.forEach(file => console.log(`  - ${path.basename(file)}`));
+}
+
+if (failedFiles.length > 0) {
+  console.log(`\n❌ Failed files: ${failedFiles.length}`);
+  failedFiles.forEach(file => console.log(`  - ${path.basename(file)}`));
+}
+
+console.log('\nComprehensive fix script completed!');

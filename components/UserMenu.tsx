@@ -107,10 +107,10 @@ return null;
 // FIXED:  className="text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-0.5 block"
  >
  View your channel
-// FIXED:  </Link>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+ </Link>
+ </div>
+ </div>
+ </div>
  )}
  <div className="py-1">
  <MenuItem onClick={() => {

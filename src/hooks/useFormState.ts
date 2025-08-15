@@ -97,9 +97,8 @@ export function useFormState<T extends Record<string, any>>({
  // You might want to set a general error here
  } finally {
  setIsSubmitting(false);
-    }
-  }, [values, validate, onSubmit]
- );
+        }
+  }, [values, validate, onSubmit]);
 
  const isValid = Object.keys(errors).length === 0;
 
