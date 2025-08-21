@@ -264,7 +264,7 @@ return null;
 // FIXED:  </div>
  )}
 // FIXED:  </div>
- <p className="text-gray-300 text-sm">{formatNumber(parseInt(currentShort.views, 10) || 0)} views</p>
+<p className="text-gray-300 text-sm">{formatNumber(parseInt(currentShort.views, 10) || 0)} views</p>
 // FIXED:  </div>
 
  <button />

@@ -147,7 +147,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
  />
 // FIXED:  </svg>
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 dark:text-white'>
+<span className='text-sm font-medium text-gray-900 dark:text-white'>
  Install App
 // FIXED:  </span>
 // FIXED:  </div>

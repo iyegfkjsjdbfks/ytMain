@@ -12,7 +12,7 @@ const AccountLayout: React.FC = () => {
             </h1>
             <Outlet />
           </div>
-        </div>
+</div>
       </div>
     </div>
   );

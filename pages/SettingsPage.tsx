@@ -99,7 +99,7 @@ const SettingsPage: React.FC = () => {
  General Settings
 // FIXED:  </h2>
 // FIXED:  </div>
- <p className="text-sm text-neutral-600 dark:text-neutral-400">
+<p className="text-sm text-neutral-600 dark:text-neutral-400">
  Manage your account preferences and application settings
 // FIXED:  </p>
 // FIXED:  </div>
@@ -229,7 +229,7 @@ const SettingsPage: React.FC = () => {
  Reset all settings to their default values
 // FIXED:  </p>
 // FIXED:  </div>
- <button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
+<button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
  Reset to Defaults
 // FIXED:  </button>
 // FIXED:  </div>

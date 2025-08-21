@@ -576,7 +576,7 @@ return null;
  {editHistory.slice(-10).reverse().map((action, _index) => (
  <div key={action.timestamp} className="text-xs text-gray-400 p-2 bg-gray-700 rounded">
  <div className="font-medium capitalize">{action.type}</div>
- <div>{action.description}</div>
+<div>{action.description}</div>
  <div className="text-gray-500">
  {new Date(action.timestamp).toLocaleTimeString()}
 // FIXED:  </div>
@@ -603,7 +603,7 @@ return null;
 // FIXED:  style={{ width: `${exportProgress}%` } />
  />
 // FIXED:  </div>
- <p className="text-xs text-gray-400">
+<p className="text-xs text-gray-400">
  Estimated time remaining: {Math.ceil((100 - exportProgress) / 2)} seconds
 // FIXED:  </p>
 // FIXED:  </div>

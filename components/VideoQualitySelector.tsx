@@ -264,7 +264,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  >
  <div>
  <div>Auto</div>
- <div className="text-xs text-gray-400">Adjust to connection</div>
+<div className="text-xs text-gray-400">Adjust to connection</div>
 // FIXED:  </div>
  {currentQuality === 'auto' && <CheckIcon className="w-4 h-4" />}
 // FIXED:  </button>
@@ -278,7 +278,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  >
  <div>
  <div>{quality.label}</div>
- <div className="text-xs text-gray-400">{quality.resolution}</div>
+<div className="text-xs text-gray-400">{quality.resolution}</div>
 // FIXED:  </div>
  {currentQuality === quality.value && <CheckIcon className="w-4 h-4" />}
 // FIXED:  </button>

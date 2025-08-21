@@ -237,8 +237,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
  )}
 // FIXED:  </div>
 // FIXED:  </div>
-
- <p className='text-gray-900 mb-3 font-medium'>
+<p className='text-gray-900 mb-3 font-medium'>
  {activePoll.question}
 // FIXED:  </p>
 
@@ -270,8 +269,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
 // FIXED:  </div>
  ))}
 // FIXED:  </div>
-
- <div className='mt-3 text-sm text-gray-600'>
+<div className='mt-3 text-sm text-gray-600'>
  Total votes: {activePoll.totalVotes}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -315,8 +313,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
 // FIXED:  </div>
  ))}
 // FIXED:  </div>
-
- <div className='mt-2 text-xs text-gray-500'>
+<div className='mt-2 text-xs text-gray-500'>
  Total votes: {poll.totalVotes} • Duration:{' '}
  {formatDuration(poll.duration)}
 // FIXED:  </div>

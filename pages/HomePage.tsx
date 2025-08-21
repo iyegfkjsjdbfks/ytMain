@@ -99,7 +99,7 @@ const HomePage: React.FC = () => {
  {!loading && filteredVideos.length === 0 && (
  <div className="text-center py-12">
  <div className="text-6xl mb-4">🔥</div>
- <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">No {currentKeyword} videos found</h2>
+<h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">No {currentKeyword} videos found</h2>
  <p className="text-gray-600 dark:text-gray-400">
  {selectedCategory === 'All'
  ? `Unable to load ${currentKeyword} videos at the moment. Please try again later.`

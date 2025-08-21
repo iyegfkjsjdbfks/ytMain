@@ -90,8 +90,7 @@ export class VideoErrorBoundary extends Component<Props, State> {
  <div className='flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4'>
  <ExclamationTriangleIcon className='w-8 h-8 text-red-600' />
 // FIXED:  </div>
-
- <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+<h3 className='text-lg font-semibold text-gray-900 mb-2'>
  Video Error
 // FIXED:  </h3>
 
@@ -129,13 +128,13 @@ export class VideoErrorBoundary extends Component<Props, State> {
  <div className='font-semibold text-red-600 mb-2'>
  {this.state.error.name}: {this.state.error.message}
 // FIXED:  </div>
- <pre className='whitespace-pre-wrap text-xs'>
+<pre className='whitespace-pre-wrap text-xs'>
  {this.state.error.stack}
 // FIXED:  </pre>
  {this.state.errorInfo && (
  <div className='mt-2 pt-2 border-t border-gray-300'>
  <div className='font-semibold mb-1'>Component Stack:</div>
- <pre className='whitespace-pre-wrap text-xs'>
+<pre className='whitespace-pre-wrap text-xs'>
  {this.state.errorInfo.componentStack}
 // FIXED:  </pre>
 // FIXED:  </div>

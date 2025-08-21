@@ -160,7 +160,7 @@ return duration;
  <div className="bg-red-600 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
  ▶ Preview
 // FIXED:  </div>
- <div className="bg-black/70 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
+<div className="bg-black/70 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
  HD
 // FIXED:  </div>
 // FIXED:  </div>

@@ -304,7 +304,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  style={{ width: `${percentage}%` } />
  />
 // FIXED:  </div>
- <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-12">
+<span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-12">
  {percentage.toFixed(1)}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -332,7 +332,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  style={{ width: `${percentage}%` } />
  />
 // FIXED:  </div>
- <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-10">
+<span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-10">
  {percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -354,7 +354,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  style={{ width: `${percentage}%` } />
  />
 // FIXED:  </div>
- <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-10">
+<span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-10">
  {percentage.toFixed(1)}%
 // FIXED:  </span>
 // FIXED:  </div>

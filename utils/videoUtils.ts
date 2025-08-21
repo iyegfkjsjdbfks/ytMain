@@ -53,8 +53,10 @@ return null;
  return 'Private';
  case 'unlisted':
  return 'Unlisted';
- default: return null
- }
+    default:
+      return null;
+  }
+}
 export function getVideoTags(video: Video): string[] {
  const tags = video.tags;
  if (!tags || (Array.isArray(tags) && tags.length === 0) || (typeof tags === 'string' && tags.trim() === '')) {

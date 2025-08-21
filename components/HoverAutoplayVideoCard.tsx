@@ -230,7 +230,7 @@ return duration;
  )}
 </div>
 </Link>
-</div>
+  </div>
 
  {/* Video Info */}
  <div className="flex gap-3">

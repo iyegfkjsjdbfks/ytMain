@@ -357,7 +357,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
  <div className='absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity rounded'>
  <PlayIcon className='w-8 h-8 text-white' />
 // FIXED:  </div>
- <div className='absolute top-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs'>
+<div className='absolute top-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs'>
  {playlist.videoCount || 0} videos
 // FIXED:  </div>
 // FIXED:  </div>

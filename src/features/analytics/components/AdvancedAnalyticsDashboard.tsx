@@ -386,7 +386,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
 // FIXED:  style={{ width: `${group.percentage}%` } />
  />
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 dark:text-white w-12 text-right'>
+<span className='text-sm font-medium text-gray-900 dark:text-white w-12 text-right'>
  {group.percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -418,7 +418,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
 // FIXED:  style={{ width: `${country.percentage}%` } />
  />
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 dark:text-white w-12 text-right'>
+<span className='text-sm font-medium text-gray-900 dark:text-white w-12 text-right'>
  {country.percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -445,7 +445,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  Mobile
 // FIXED:  </span>
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 dark:text-white'>
+<span className='text-sm font-medium text-gray-900 dark:text-white'>
  {analyticsData.devices.mobile}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -456,7 +456,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  Desktop
 // FIXED:  </span>
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 dark:text-white'>
+<span className='text-sm font-medium text-gray-900 dark:text-white'>
  {analyticsData.devices.desktop}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -467,7 +467,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  Tablet
 // FIXED:  </span>
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 dark:text-white'>
+<span className='text-sm font-medium text-gray-900 dark:text-white'>
  {analyticsData.devices.tablet}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -484,7 +484,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  <div className='flex items-center justify-center w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full mx-auto mb-2'>
  <HeartIcon className='w-6 h-6 text-red-600' />
 // FIXED:  </div>
- <p className='text-lg font-semibold text-gray-900 dark:text-white'>
+<p className='text-lg font-semibold text-gray-900 dark:text-white'>
  {analyticsData.engagement.likes.toLocaleString()}
 // FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
@@ -495,7 +495,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  <div className='flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full mx-auto mb-2'>
  <ChatBubbleLeftIcon className='w-6 h-6 text-blue-600' />
 // FIXED:  </div>
- <p className='text-lg font-semibold text-gray-900 dark:text-white'>
+<p className='text-lg font-semibold text-gray-900 dark:text-white'>
  {analyticsData.engagement.comments.toLocaleString()}
 // FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
@@ -506,7 +506,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  <div className='flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full mx-auto mb-2'>
  <ShareIcon className='w-6 h-6 text-green-600' />
 // FIXED:  </div>
- <p className='text-lg font-semibold text-gray-900 dark:text-white'>
+<p className='text-lg font-semibold text-gray-900 dark:text-white'>
  {analyticsData.engagement.shares.toLocaleString()}
 // FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
@@ -517,7 +517,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  <div className='flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full mx-auto mb-2'>
  <UserGroupIcon className='w-6 h-6 text-purple-600' />
 // FIXED:  </div>
- <p className='text-lg font-semibold text-gray-900 dark:text-white'>
+<p className='text-lg font-semibold text-gray-900 dark:text-white'>
  +{analyticsData.engagement.subscribersGained.toLocaleString()}
 // FIXED:  </p>
  <p className='text-sm text-gray-600 dark:text-gray-400'>

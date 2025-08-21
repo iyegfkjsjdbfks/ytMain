@@ -93,11 +93,11 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
  <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
  <div className="bg-blue-900 bg-opacity-50 p-2 rounded">
  <div className="text-blue-300">Avg Render</div>
- <div className="font-bold">{averageRenderTime.toFixed(1)}ms</div>
+<div className="font-bold">{averageRenderTime.toFixed(1)}ms</div>
 // FIXED:  </div>
  <div className="bg-green-900 bg-opacity-50 p-2 rounded">
  <div className="text-green-300">API Calls</div>
- <div className="font-bold">{apiCallsCount}</div>
+<div className="font-bold">{apiCallsCount}</div>
 // FIXED:  </div>
 // FIXED:  </div>
 

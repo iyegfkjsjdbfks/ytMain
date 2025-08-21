@@ -100,7 +100,7 @@ const GoogleSearchStoreDebug: FC = () => {
  ? '✅ Set'
  : '❌ Missing'}
 // FIXED:  </div>
- <div>
+<div>
  Google Search Engine ID:{' '}
  {import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID
  ? '✅ Set'
@@ -184,13 +184,13 @@ const GoogleSearchStoreDebug: FC = () => {
 // FIXED:  className='bg-white dark:bg-gray-700 p-3 rounded' />
  >
  <div className='font-medium'>{video.title}</div>
- <div className='text-sm text-gray-600 dark:text-gray-400'>,
+<div className='text-sm text-gray-600 dark:text-gray-400'>,
  ID: {video.id}
 // FIXED:  </div>
  <div className='text-sm text-gray-600 dark:text-gray-400'>,
  Channel: {video.channelName}
 // FIXED:  </div>
- <div className='text-sm text-gray-600 dark:text-gray-400'>,
+<div className='text-sm text-gray-600 dark:text-gray-400'>,
  URL: {video.videoUrl}
 // FIXED:  </div>
  {video.viewCount && (

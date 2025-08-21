@@ -387,7 +387,7 @@ export const DeveloperDashboard: React.FC = () => {
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
- <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+<p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
  {overallHealthScore >= 80
  ? 'Excellent'
  : overallHealthScore >= 60

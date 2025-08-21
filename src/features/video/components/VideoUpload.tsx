@@ -198,7 +198,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 // FIXED:  </svg>
  <span className='text-lg font-medium'>{file.name}</span>
 // FIXED:  </div>
- <p className='text-sm text-gray-500'>
+<p className='text-sm text-gray-500'>
  {(file.size / (1024 * 1024)).toFixed(2)} MB • {file.type}
 // FIXED:  </p>
 

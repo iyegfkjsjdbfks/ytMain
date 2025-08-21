@@ -74,8 +74,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
  <div className='absolute top-4 left-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold'>
  LIVE
 // FIXED:  </div>
-
- <div className='absolute top-4 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm'>
+<div className='absolute top-4 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm'>
  {viewerCount.toLocaleString()} viewers
 // FIXED:  </div>
 // FIXED:  </div>

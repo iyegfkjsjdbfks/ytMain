@@ -205,7 +205,7 @@ export const LiveStreamStudio: React.FC = () => {
  <div className='w-3 h-3 bg-red-500 rounded-full animate-pulse' />
  <span className='text-red-600 font-medium'>LIVE</span>
 // FIXED:  </div>
- <span className='text-gray-600 dark:text-gray-400'>
+<span className='text-gray-600 dark:text-gray-400'>
  {formatDuration(stats.duration)}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -425,7 +425,7 @@ export const LiveStreamStudio: React.FC = () => {
 // FIXED:  </span>
  ))}
 // FIXED:  </div>
- <p className='text-gray-700 dark:text-gray-300'>
+<p className='text-gray-700 dark:text-gray-300'>
  {message.message}
 // FIXED:  </p>
 // FIXED:  </div>

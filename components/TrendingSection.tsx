@@ -93,7 +93,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
 // FIXED:  </div>
- <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
+<p className="text-neutral-600 dark:text-neutral-400">{error}</p>
 // FIXED:  </div>
  );
  }
@@ -116,7 +116,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  View All
 // FIXED:  </Link>
 // FIXED:  </div>
- <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
  {videoGrid}
 // FIXED:  </div>
 // FIXED:  </div>

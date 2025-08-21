@@ -253,8 +253,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
 // FIXED:  </div>
  )}
 // FIXED:  </div>
-
- <p className='text-gray-900 mb-3'>{question.question}</p>
+<p className='text-gray-900 mb-3'>{question.question}</p>
 
  {question.answered && question.answer && (
  <div className='mb-3 p-3 bg-blue-50 border border-blue-200 rounded-lg'>
@@ -269,7 +268,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
 // FIXED:  </span>
  )}
 // FIXED:  </div>
- <p className='text-blue-900'>{question.answer}</p>
+<p className='text-blue-900'>{question.answer}</p>
 // FIXED:  </div>
  )}
 

@@ -197,7 +197,7 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className={`w-12 h-12 ${action.color} rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
  {action.icon}
 // FIXED:  </div>
- <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+<h3 className="font-semibold text-gray-900 dark:text-white mb-1">
  {action.title}
 // FIXED:  </h3>
  <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -308,7 +308,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
- <UnifiedButton variant="outline" size="sm">
+<UnifiedButton variant="outline" size="sm">
  Edit
 // FIXED:  </UnifiedButton>
 // FIXED:  </div>

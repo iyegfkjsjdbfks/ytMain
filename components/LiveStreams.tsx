@@ -92,7 +92,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <div className="w-3 h-3 bg-red-600 rounded-full mr-2" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Live now</h2>
 // FIXED:  </div>
- <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
+<p className="text-neutral-600 dark:text-neutral-400">{error}</p>
 // FIXED:  </div>
  );
  }

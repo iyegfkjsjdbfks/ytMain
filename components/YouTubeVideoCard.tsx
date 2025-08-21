@@ -115,7 +115,7 @@ return `${Math.floor(diffDays / 30)} months ago`;
  <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1.5 block truncate">
  {video.channelName}
 // FIXED:  </div>
- <p className="text-xs text-neutral-600 dark:text-neutral-400">
+<p className="text-xs text-neutral-600 dark:text-neutral-400">
  YouTube • {formatUploadDate(video.uploadedAt)}
 // FIXED:  </p>
 // FIXED:  </div>

@@ -321,7 +321,7 @@ return;
  <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
  <span className="text-sm font-medium">LIVE</span>
 // FIXED:  </div>
- <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+<div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
  {formatDuration(stats.duration)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -591,7 +591,7 @@ return;
 // FIXED:  </span>
  )}
 // FIXED:  </div>
- <p className="text-sm text-neutral-700 dark:text-neutral-300">
+<p className="text-sm text-neutral-700 dark:text-neutral-300">
  {message.message}
 // FIXED:  </p>
 // FIXED:  </div>

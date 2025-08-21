@@ -230,7 +230,9 @@ return 'text-orange-600';
  // Render overview tab
  const OverviewTab = () => {
  if (!metrics) {
-return <div>Loading...</div>;
+return <div>Loading...
+  </div>
+);
 }
 
  return (
@@ -343,7 +345,9 @@ return <div>Loading...</div>;
  // Render performance tab
  const PerformanceTab = () => {
  if (!metrics) {
-return <div>Loading...</div>;
+return <div>Loading...
+  </div>
+);
 }
 
  return (
@@ -380,7 +384,9 @@ return <div>Loading...</div>;
  // Render security tab
  const SecurityTab = () => {
  if (!metrics) {
-return <div>Loading...</div>;
+return <div>Loading...
+  </div>
+);
 }
 
  return (
@@ -413,7 +419,9 @@ return <div>Loading...</div>;
  // Render deployment tab
  const DeploymentTab = () => {
  if (!metrics) {
-return <div>Loading...</div>;
+return <div>Loading...
+  </div>
+);
 }
 
  return (
@@ -447,7 +455,9 @@ return <div>Loading...</div>;
  // Render quality tab
  const QualityTab = () => {
  if (!metrics) {
-return <div>Loading...</div>;
+return <div>Loading...
+  </div>
+);
 }
 
  return (
@@ -481,7 +491,9 @@ return <div>Loading...</div>;
  // Render features tab
  const FeaturesTab = () => {
  if (!metrics) {
-return <div>Loading...</div>;
+return <div>Loading...
+  </div>
+);
 }
 
  return (

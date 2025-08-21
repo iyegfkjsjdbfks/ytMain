@@ -164,7 +164,7 @@ const LiveStreamingHubPage: React.FC = () => {
  Total Viewers
 // FIXED:  </span>
 // FIXED:  </div>
- <div className='text-3xl font-bold text-blue-600'>12.4K</div>
+<div className='text-3xl font-bold text-blue-600'>12.4K</div>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  +15% from last week
 // FIXED:  </p>
@@ -179,7 +179,7 @@ const LiveStreamingHubPage: React.FC = () => {
  Live Streams
 // FIXED:  </span>
 // FIXED:  </div>
- <div className='text-3xl font-bold text-green-600'>3</div>
+<div className='text-3xl font-bold text-green-600'>3</div>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Currently active
 // FIXED:  </p>
@@ -194,7 +194,7 @@ const LiveStreamingHubPage: React.FC = () => {
  Engagement
 // FIXED:  </span>
 // FIXED:  </div>
- <div className='text-3xl font-bold text-purple-600'>89%</div>
+<div className='text-3xl font-bold text-purple-600'>89%</div>
  <p className='text-sm text-gray-600 dark:text-gray-400'>
  Average engagement rate
 // FIXED:  </p>

@@ -84,7 +84,7 @@ const RegisterPage: React.FC = () => {
  <div className="flex justify-center">
  <YouTubeLogo className="h-12 w-auto" />
 // FIXED:  </div>
- <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+<h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
  Create your account
 // FIXED:  </h2>
  <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
@@ -126,7 +126,7 @@ const RegisterPage: React.FC = () => {
 // FIXED:  placeholder="Choose a username"
  />
 // FIXED:  </div>
- <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+<p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
  This will be your channel name
 // FIXED:  </p>
 // FIXED:  </div>
@@ -167,7 +167,7 @@ const RegisterPage: React.FC = () => {
 // FIXED:  placeholder="Create a password"
  />
 // FIXED:  </div>
- <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+<p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
  Must be at least 6 characters long
 // FIXED:  </p>
 // FIXED:  </div>

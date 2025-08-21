@@ -76,7 +76,7 @@ className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-
  Sign in
 </Button>
 </Link>
-</div>
+  </div>
  );
  }
 
@@ -197,7 +197,7 @@ aria-label="Toggle sidebar menu"
  <YouTubeLogo className="h-4 sm:h-5 md:h-[22px]" />
  <span className="ml-1 text-base sm:text-lg md:text-xl font-semibold text-black dark:text-white hidden sm:block tracking-tighter relative top-[-1px]">YoutubeX</span>
 </Link>
-</div>
+  </div>
 
  <div className="flex-1 flex justify-center px-1 sm:px-2 md:px-4">
  <SearchBar />

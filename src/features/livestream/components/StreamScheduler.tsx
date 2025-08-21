@@ -449,7 +449,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  formatDateTime(new Date(stream.scheduledStartTime))}
 // FIXED:  </span>
 // FIXED:  </div>
- <span>•</span>
+<span>•</span>
  <span>{stream.category}</span>
  <span>•</span>
  <span className='font-medium text-blue-600'>

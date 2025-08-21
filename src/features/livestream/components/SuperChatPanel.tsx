@@ -247,7 +247,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  Total Revenue
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-2xl font-bold text-green-900 mt-1'>
+<p className='text-2xl font-bold text-green-900 mt-1'>
  {formatCurrency(totalRevenue)}
 // FIXED:  </p>
  <p className='text-xs text-green-600'>
@@ -262,7 +262,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  Top Donation
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-2xl font-bold text-purple-900 mt-1'>
+<p className='text-2xl font-bold text-purple-900 mt-1'>
  {topSuperChats.length > 0 && topSuperChats[0]
  ? formatCurrency(topSuperChats[0].amount)
  : '$0'}
@@ -312,8 +312,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  {formatCurrency(superChat.amount)}
 // FIXED:  </div>
 // FIXED:  </div>
-
- <p className='text-gray-800'>{superChat.message}</p>
+<p className='text-gray-800'>{superChat.message}</p>
 
  <div className='flex items-center justify-between mt-2 text-xs text-gray-500'>
  <span>
@@ -351,7 +350,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  "{superChat.message}"
 // FIXED:  </span>
 // FIXED:  </div>
- <span className='text-sm font-bold text-green-600'>
+<span className='text-sm font-bold text-green-600'>
  {formatCurrency(superChat.amount)}
 // FIXED:  </span>
 // FIXED:  </div>

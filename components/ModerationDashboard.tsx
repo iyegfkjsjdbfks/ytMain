@@ -290,7 +290,7 @@ return false;
  count: items.reduce((sum, i) => sum + i.reportCount, 0), color: 'text-blue-600' }].map((stat, index) => (
  <div key={index} className="text-center">
  <div className={`text-2xl font-bold ${stat.color}`}>{stat.count}</div>
- <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+<div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
 // FIXED:  </div>
  ))}
 // FIXED:  </div>

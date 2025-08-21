@@ -129,7 +129,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  Cached Videos
 // FIXED:  </span>
 // FIXED:  </div>
- <span className='font-medium text-gray-900 dark:text-white'>
+<span className='font-medium text-gray-900 dark:text-white'>
  {offlineData.videos}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -140,7 +140,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  Watch History
 // FIXED:  </span>
 // FIXED:  </div>
- <span className='font-medium text-gray-900 dark:text-white'>
+<span className='font-medium text-gray-900 dark:text-white'>
  {offlineData.watchHistory}
 // FIXED:  </span>
 // FIXED:  </div>

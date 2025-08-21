@@ -95,7 +95,7 @@ return null;
  <CheckBadgeIcon className="w-4 h-4 text-blue-500 flex-shrink-0" title="Verified" />
  )}
 // FIXED:  </div>
- <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">{user.email}</p>
+<p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">{user.email}</p>
  {user.subscriberCount !== undefined && (
  <p className="text-xs text-neutral-500 dark:text-neutral-400">
  {user.subscriberCount.toLocaleString()} subscribers
@@ -108,7 +108,7 @@ return null;
  >
  View your channel
  </Link>
- </div>
+  </div>
  </div>
  </div>
  )}

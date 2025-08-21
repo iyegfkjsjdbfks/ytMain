@@ -346,7 +346,7 @@ return;
  {getVisibilityIcon(playlist.visibility)}
  <span className="capitalize">{playlist.visibility}</span>
 // FIXED:  </div>
- <span>{playlist.videoCount} videos</span>
+<span>{playlist.videoCount} videos</span>
  <span>{playlist.totalViews.toLocaleString()} views</span>
  <span>Updated {formatDate(playlist.lastUpdated)}</span>
 // FIXED:  </div>

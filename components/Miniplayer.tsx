@@ -43,8 +43,8 @@ const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) =
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <PlayIconSolid className="w-10 h-10 text-white/80" />
           </div>
-        </Link>
-      </div>
+</Link>
+  </div>
       
       <div className="p-3">
         <Link to={`/watch/${video.id}`} className="block hover:underline" onClick={handleMaximize}>
@@ -60,7 +60,7 @@ const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) =
         >
           {video.channelName || video.channelTitle || "Unknown"}
         </Link>
-      </div>
+  </div>
       
       <button
         onClick={handleClose}

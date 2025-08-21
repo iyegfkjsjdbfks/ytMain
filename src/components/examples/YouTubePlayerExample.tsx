@@ -229,8 +229,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 // FIXED:  aria-label='Seek'
  />
 // FIXED:  </div>
-
- <div className='text-sm text-gray-600 w-20 text-right'>
+<div className='text-sm text-gray-600 w-20 text-right'>
  {formatTime(currentTime)} / {formatTime(duration)}
 // FIXED:  </div>
 
@@ -254,8 +253,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  />
 // FIXED:  </div>
 // FIXED:  </div>
-
- <div className='text-xs text-gray-500'>
+<div className='text-xs text-gray-500'>
  Player State: {YouTubePlayerState[playerState || -1]}
 // FIXED:  </div>
 // FIXED:  </div>

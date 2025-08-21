@@ -270,7 +270,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  {stats.viewers.toLocaleString()}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-xs text-gray-500'>Viewers</p>
+<p className='text-xs text-gray-500'>Viewers</p>
 // FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center space-x-1'>
@@ -279,7 +279,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  {formatDuration(stats.duration)}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-xs text-gray-500'>Duration</p>
+<p className='text-xs text-gray-500'>Duration</p>
 // FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center space-x-1'>
@@ -288,7 +288,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  {stats.likes.toLocaleString()}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-xs text-gray-500'>Likes</p>
+<p className='text-xs text-gray-500'>Likes</p>
 // FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center space-x-1'>
@@ -297,7 +297,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  {stats.chatMessages.toLocaleString()}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-xs text-gray-500'>Messages</p>
+<p className='text-xs text-gray-500'>Messages</p>
 // FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center space-x-1'>
@@ -306,7 +306,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  ${stats.superChatAmount.toFixed(2)}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-xs text-gray-500'>Super Chat</p>
+<p className='text-xs text-gray-500'>Super Chat</p>
 // FIXED:  </div>
  <div className='text-center'>
  <div className='flex items-center justify-center space-x-1'>
@@ -315,7 +315,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  {stats.streamHealth.toUpperCase()}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-xs text-gray-500'>Health</p>
+<p className='text-xs text-gray-500'>Health</p>
 // FIXED:  </div>
 // FIXED:  </div>
  )}

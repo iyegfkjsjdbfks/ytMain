@@ -207,7 +207,7 @@ class ErrorBoundary extends Component<Props, State> {
  <div className="flex justify-center">
  <ExclamationTriangleIcon className="h-12 w-12 text-red-500" />
 // FIXED:  </div>
- <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
  Something went wrong
 // FIXED:  </h2>
  <p className="mt-2 text-center text-sm text-gray-600">
@@ -266,13 +266,13 @@ class ErrorBoundary extends Component<Props, State> {
  <div className="font-semibold text-red-600 mb-2">
  {error.name}: {error.message}
 // FIXED:  </div>
- <pre className="whitespace-pre-wrap">
+<pre className="whitespace-pre-wrap">
  {error.stack}
 // FIXED:  </pre>
  {errorInfo && (
  <div className="mt-2 pt-2 border-t border-gray-300">
  <div className="font-semibold mb-1">Component Stack:</div>
- <pre className="whitespace-pre-wrap">
+<pre className="whitespace-pre-wrap">
  {errorInfo.componentStack}
 // FIXED:  </pre>
 // FIXED:  </div>

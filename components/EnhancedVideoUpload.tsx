@@ -281,7 +281,7 @@ return '0: 00'
 // FIXED:  style={{ width: `${uploadProgress}%` } />
  />
 // FIXED:  </div>
- <p className="text-sm text-gray-600 dark:text-gray-400">
+<p className="text-sm text-gray-600 dark:text-gray-400">
  {uploadProgress.toFixed(0)}% complete
 // FIXED:  </p>
 // FIXED:  </div>
@@ -293,7 +293,7 @@ return '0: 00'
  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
 // FIXED:  </svg>
 // FIXED:  </div>
- <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+<h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
  Upload Complete!
 // FIXED:  </h3>
  <p className="text-gray-600 dark:text-gray-400">
@@ -487,7 +487,7 @@ return '0: 00'
 // FIXED:  className="hidden"
  />
 // FIXED:  </div>
- <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+<p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Upload a custom thumbnail (1280x720 recommended)
 // FIXED:  </p>
 // FIXED:  </div>
@@ -552,7 +552,7 @@ return '0: 00'
 // FIXED:  </div>
  )}
 // FIXED:  </div>
- <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+<p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  Press Enter to add tags. Tags help viewers find your video.
 // FIXED:  </p>
 // FIXED:  </div>

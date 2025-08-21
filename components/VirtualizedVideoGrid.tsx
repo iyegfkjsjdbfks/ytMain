@@ -153,7 +153,7 @@ return;
  return (
  <div className="flex flex-col items-center justify-center py-12 text-gray-500">
  <div className="text-6xl mb-4">📺</div>
- <h3 className="text-lg font-medium mb-2">No videos found</h3>
+<h3 className="text-lg font-medium mb-2">No videos found</h3>
  <p className="text-sm text-center max-w-md">
  There are no videos to display at the moment. Try adjusting your filters or check back later.
 // FIXED:  </p>

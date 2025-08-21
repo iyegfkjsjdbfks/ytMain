@@ -94,7 +94,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  <SubscriptionsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Latest from your subscriptions</h2>
 // FIXED:  </div>
- <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
+<p className="text-neutral-600 dark:text-neutral-400">{error}</p>
 // FIXED:  </div>
  );
  }

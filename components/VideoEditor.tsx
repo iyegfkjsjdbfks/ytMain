@@ -443,7 +443,7 @@ return;
  ×
 // FIXED:  </button>
 // FIXED:  </div>
- <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+<div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
  {formatTime(text.startTime)} - {formatTime(text.endTime)}
 // FIXED:  </div>
 // FIXED:  </div>

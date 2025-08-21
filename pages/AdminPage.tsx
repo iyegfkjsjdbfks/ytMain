@@ -478,8 +478,7 @@ const AdminPage: React.FC = () => {
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
-
- <p className="text-sm text-gray-600 mb-3">{config.description}</p>
+<p className="text-sm text-gray-600 mb-3">{config.description}</p>
 
  {/* Page Usage Information */}
  {usedOnPages.length > 0 && (
@@ -495,7 +494,7 @@ const AdminPage: React.FC = () => {
 // FIXED:  </span>
  ))}
 // FIXED:  </div>
- <p className="text-xs text-blue-700 mt-1">
+<p className="text-xs text-blue-700 mt-1">
  {config.category === 'youtube' ? 'For YouTube videos' : 'For local/custom videos'}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -691,8 +690,7 @@ const AdminPage: React.FC = () => {
  {isEnabled ? 'Disable' : 'Enable'}
 // FIXED:  </button>
 // FIXED:  </div>
-
- <p className="text-sm text-gray-600 mb-3">{config.description}</p>
+<p className="text-sm text-gray-600 mb-3">{config.description}</p>
 
  {usedOnPages.length > 0 && (
  <div className="mb-3 p-3 bg-red-100 rounded-lg border border-red-200">
@@ -824,8 +822,7 @@ const AdminPage: React.FC = () => {
  {isEnabled ? 'Disable' : 'Enable'}
 // FIXED:  </button>
 // FIXED:  </div>
-
- <p className="text-sm text-gray-600 mb-3">{config.description}</p>
+<p className="text-sm text-gray-600 mb-3">{config.description}</p>
 
  {usedOnPages.length > 0 && (
  <div className="mb-3 p-3 bg-blue-100 rounded-lg border border-blue-200">
@@ -960,8 +957,7 @@ const AdminPage: React.FC = () => {
  Choose which YouTube player implementation to use for YouTube video playback.
 // FIXED:  </p>
 // FIXED:  </div>
-
- <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
  {getVideoPlayersByCategory('youtube').map((config) =>
  renderPlayerCard(
  config,
@@ -985,8 +981,7 @@ const AdminPage: React.FC = () => {
  Choose which player implementation to use for local video files and custom video sources.
 // FIXED:  </p>
 // FIXED:  </div>
-
- <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
  {getVideoPlayersByCategory('local').map((config) =>
  renderPlayerCard(
  config,
@@ -1512,7 +1507,7 @@ const AdminPage: React.FC = () => {
  <div className="font-medium text-sm">{video.title || 'Unknown Title'}</div>
  <div className="text-xs text-gray-600 mt-1">
  <div>ID: {video.id || 'Unknown ID'}</div>
- <div>Channel: {video.channelName || 'Unknown Channel'}</div>
+<div>Channel: {video.channelName || 'Unknown Channel'}</div>
  <div>URL: {video.videoUrl || 'No URL'}</div>
  {video.viewCount && typeof video.viewCount === 'number' && (
  <div>Views: {video.viewCount.toLocaleString()}</div>

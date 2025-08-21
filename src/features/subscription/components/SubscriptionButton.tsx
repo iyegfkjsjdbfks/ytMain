@@ -134,7 +134,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <BellSolidIcon className='w-4 h-4' />
  <div>
  <div className='font-medium'>All</div>
- <div className='text-xs opacity-75'>
+<div className='text-xs opacity-75'>
  Get notified for all uploads
 // FIXED:  </div>
 // FIXED:  </div>
@@ -151,7 +151,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <BellIcon className='w-4 h-4' />
  <div>
  <div className='font-medium'>Personalized</div>
- <div className='text-xs opacity-75'>
+<div className='text-xs opacity-75'>
  Occasional notifications
 // FIXED:  </div>
 // FIXED:  </div>
@@ -168,7 +168,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <BellSlashIcon className='w-4 h-4' />
  <div>
  <div className='font-medium'>None</div>
- <div className='text-xs opacity-75'>
+<div className='text-xs opacity-75'>
  Turn off notifications
 // FIXED:  </div>
 // FIXED:  </div>
@@ -233,7 +233,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <BellSolidIcon className='w-4 h-4' />
  <div>
  <div className='font-medium'>All</div>
- <div className='text-xs opacity-75'>
+<div className='text-xs opacity-75'>
  Get notified for all uploads
 // FIXED:  </div>
 // FIXED:  </div>
@@ -250,7 +250,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <BellIcon className='w-4 h-4' />
  <div>
  <div className='font-medium'>Personalized</div>
- <div className='text-xs opacity-75'>
+<div className='text-xs opacity-75'>
  Occasional notifications
 // FIXED:  </div>
 // FIXED:  </div>
@@ -267,7 +267,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  <BellSlashIcon className='w-4 h-4' />
  <div>
  <div className='font-medium'>None</div>
- <div className='text-xs opacity-75'>
+<div className='text-xs opacity-75'>
  Turn off notifications
 // FIXED:  </div>
 // FIXED:  </div>

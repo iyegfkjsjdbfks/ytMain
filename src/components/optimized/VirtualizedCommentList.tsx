@@ -76,7 +76,7 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }: any) => {
  {comment.publishedAt}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className='text-sm text-gray-700 dark:text-gray-300 mt-1'>
+<p className='text-sm text-gray-700 dark:text-gray-300 mt-1'>
  {comment.content}
 // FIXED:  </p>
  <div className='flex items-center space-x-4 mt-2'>

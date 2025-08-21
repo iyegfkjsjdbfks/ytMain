@@ -191,25 +191,25 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.views)}
 // FIXED:  </div>
- <div className="text-sm text-gray-500 dark:text-gray-400">Views</div>
+<div className="text-sm text-gray-500 dark:text-gray-400">Views</div>
 // FIXED:  </div>
  <div className="text-center">
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatDuration(analytics.totalWatchTime)}
 // FIXED:  </div>
- <div className="text-sm text-gray-500 dark:text-gray-400">Watch time</div>
+<div className="text-sm text-gray-500 dark:text-gray-400">Watch time</div>
 // FIXED:  </div>
  <div className="text-center">
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {analytics.engagementRate.toFixed(1)}%
 // FIXED:  </div>
- <div className="text-sm text-gray-500 dark:text-gray-400">Engagement</div>
+<div className="text-sm text-gray-500 dark:text-gray-400">Engagement</div>
 // FIXED:  </div>
  <div className="text-center">
  <div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.subscribers)}
 // FIXED:  </div>
- <div className="text-sm text-gray-500 dark:text-gray-400">Subscribers</div>
+<div className="text-sm text-gray-500 dark:text-gray-400">Subscribers</div>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -298,7 +298,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <HeartIcon className="w-5 h-5 text-red-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Likes</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.likes)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -308,7 +308,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <ChatBubbleLeftIcon className="w-5 h-5 text-blue-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Comments</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.comments)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -318,7 +318,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <ShareIcon className="w-5 h-5 text-green-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Shares</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.shares)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -328,7 +328,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <ClockIcon className="w-5 h-5 text-purple-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg. Duration</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatDuration(analytics.averageViewDuration)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -376,7 +376,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <div className="text-sm font-medium text-gray-900 dark:text-white">
  {formatNumber(country.views)}
 // FIXED:  </div>
- <div className="text-xs text-gray-500 dark:text-gray-400">
+<div className="text-xs text-gray-500 dark:text-gray-400">
  {country.percentage.toFixed(1)}%
 // FIXED:  </div>
 // FIXED:  </div>
@@ -401,7 +401,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
 // FIXED:  style={{ width: `${group.percentage}%` } />
  />
 // FIXED:  </div>
- <span className="text-sm text-gray-600 dark:text-gray-400 w-12 text-right">
+<span className="text-sm text-gray-600 dark:text-gray-400 w-12 text-right">
  {group.percentage.toFixed(1)}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -421,7 +421,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <ArrowTrendingUpIcon className="w-5 h-5 text-green-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">CTR</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {analytics.clickThroughRate.toFixed(2)}%
 // FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -434,7 +434,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <ClockIcon className="w-5 h-5 text-blue-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Retention</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {((analytics.averageViewDuration / 600) * 100).toFixed(1)}%
 // FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -447,7 +447,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <HeartIcon className="w-5 h-5 text-red-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Like ratio</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {((analytics.likes / (analytics.likes + analytics.dislikes)) * 100).toFixed(1)}%
 // FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -465,7 +465,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <ChartBarIcon className="w-5 h-5 text-green-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Revenue</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatCurrency(analytics.revenue.total)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -475,7 +475,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <ArrowTrendingUpIcon className="w-5 h-5 text-blue-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">RPM</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatCurrency(analytics.revenue.rpm)}
 // FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -488,7 +488,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
  <EyeIcon className="w-5 h-5 text-purple-500" />
  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">CPM</span>
 // FIXED:  </div>
- <div className="text-2xl font-bold text-gray-900 dark:text-white">
+<div className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatCurrency(analytics.revenue.cpm)}
 // FIXED:  </div>
  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">

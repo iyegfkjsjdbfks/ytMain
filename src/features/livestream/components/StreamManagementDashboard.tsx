@@ -557,8 +557,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  <span className='ml-1 capitalize'>{stream.status}</span>
 // FIXED:  </div>
 // FIXED:  </div>
-
- <p className='text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2'>
+<p className='text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2'>
  {stream.description}
 // FIXED:  </p>
 

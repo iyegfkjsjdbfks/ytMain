@@ -173,8 +173,7 @@ const PlaylistsPage: React.FC = () => {
  <p className="text-sm text-red-500 dark:text-red-400 mt-1">{createError}</p>
  )}
 // FIXED:  </div>
-
- <div className="text-sm text-neutral-500 dark:text-neutral-400">,
+<div className="text-sm text-neutral-500 dark:text-neutral-400">,
  Privacy: Public (default)
 // FIXED:  </div>
 

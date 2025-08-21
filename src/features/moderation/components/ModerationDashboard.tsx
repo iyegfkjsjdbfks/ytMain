@@ -408,8 +408,7 @@ export const ModerationDashboard: React.FC = () => {
  {item.type.replace('_', ' ')}
 // FIXED:  </span>
 // FIXED:  </div>
-
- <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-1'>
+<h3 className='text-lg font-medium text-gray-900 dark:text-white mb-1'>
  {item.title}
 // FIXED:  </h3>
 

@@ -114,7 +114,9 @@ const ChannelPage: React.FC = () => {
  }
 
  if (error as any) {
- return <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">{error}</div>;
+ return <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">{error}
+  </div>
+);
  }
 
  if (!channel) {

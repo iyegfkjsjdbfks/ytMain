@@ -60,7 +60,9 @@ export const ComponentWrapper: React.FC<ComponentWrapperProps> = ({
  fallback = null 
 }) => {
  try {
- return <div className={className}>{children}</div>;
+ return <div className={className}>{children}
+  </div>
+);
  } catch (error) {
  (console as any).error('Component error:', error);
  return <>{fallback}</>;

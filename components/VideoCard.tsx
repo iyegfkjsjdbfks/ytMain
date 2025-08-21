@@ -106,7 +106,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
  >
  {video.channelName}
 // FIXED:  </div>
- <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+<p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
  {video.views} &bull; {video.uploadedAt}
 // FIXED:  </p>
 // FIXED:  </div>

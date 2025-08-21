@@ -200,7 +200,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  );
  })}
 // FIXED:  </div>
- <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
+<p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
  {formatNumber(post.poll.totalVotes)} votes
 // FIXED:  </p>
 // FIXED:  </div>
@@ -246,7 +246,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  <div className="text-gray-400 dark:text-gray-600 mb-4">
  <ChatBubbleLeftIcon className="w-16 h-16 mx-auto" />
 // FIXED:  </div>
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+<h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  No community posts yet
 // FIXED:  </h3>
  <p className="text-gray-600 dark:text-gray-400">
@@ -294,7 +294,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 // FIXED:  </span>
  )}
 // FIXED:  </div>
- <p className="text-sm text-gray-500 dark:text-gray-400">
+<p className="text-sm text-gray-500 dark:text-gray-400">
  {formatDistanceToNow(new Date(post.timestamp))} ago
 // FIXED:  </p>
 // FIXED:  </div>

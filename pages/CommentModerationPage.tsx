@@ -349,7 +349,7 @@ return comments.filter((c) => c.flaggedReason).length;
  {parseRelativeDate(comment.publishedAt)}
 // FIXED:  </span>
 // FIXED:  </div>
- <p className="text-neutral-700 dark:text-neutral-300 mb-2">
+<p className="text-neutral-700 dark:text-neutral-300 mb-2">
  {comment.text}
 // FIXED:  </p>
  <div className="flex items-center space-x-4 text-sm text-neutral-500 dark:text-neutral-400">

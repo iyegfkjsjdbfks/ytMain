@@ -111,7 +111,7 @@ const ChannelTabContent = ({
  <p className="text-xs font-semibold">{playlist.videoCount} videos</p>
 // FIXED:  </div>
 // FIXED:  </div>
- <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-100 mt-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2">{playlist.title}</h3>
+<h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-100 mt-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2">{playlist.title}</h3>
 // FIXED:  </Link>
  ))}
  {isHomePageSlice && playlists.length > 4 && (
@@ -140,7 +140,7 @@ const ChannelTabContent = ({
  <p className="text-xs text-neutral-500 dark:text-neutral-400">{post.timestamp}</p>
 // FIXED:  </div>
 // FIXED:  </div>
- <p className="text-sm text-neutral-700 dark:text-neutral-200 whitespace-pre-wrap mb-3 leading-relaxed">{post.textContent}</p>
+<p className="text-sm text-neutral-700 dark:text-neutral-200 whitespace-pre-wrap mb-3 leading-relaxed">{post.textContent}</p>
  {post.imageUrl && <img src={post.imageUrl} alt="Community post" className="rounded-md max-h-96 w-full object-cover my-3 border border-neutral-200 dark:border-neutral-700" />}
  <div className="flex items-center text-xs text-neutral-500 dark:text-neutral-400 space-x-4">
  <span>{post.likes} Likes</span>

@@ -62,7 +62,7 @@ return null;
  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mb-2">
  <span className="text-white font-bold text-sm">T</span>
 // FIXED:  </div>
- <span className="text-xs text-neutral-600 dark:text-neutral-400">Twitter</span>
+<span className="text-xs text-neutral-600 dark:text-neutral-400">Twitter</span>
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => onShareToSocial('facebook')}
@@ -71,7 +71,7 @@ return null;
  <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mb-2">
  <span className="text-white font-bold text-sm">f</span>
 // FIXED:  </div>
- <span className="text-xs text-neutral-600 dark:text-neutral-400">Facebook</span>
+<span className="text-xs text-neutral-600 dark:text-neutral-400">Facebook</span>
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => onShareToSocial('reddit')}
@@ -80,7 +80,7 @@ return null;
  <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mb-2">
  <span className="text-white font-bold text-sm">R</span>
 // FIXED:  </div>
- <span className="text-xs text-neutral-600 dark:text-neutral-400">Reddit</span>
+<span className="text-xs text-neutral-600 dark:text-neutral-400">Reddit</span>
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => onShareToSocial('email')}
@@ -89,7 +89,7 @@ return null;
  <div className="w-10 h-10 bg-neutral-500 rounded-full flex items-center justify-center mb-2">
  <span className="text-white font-bold text-sm">@</span>
 // FIXED:  </div>
- <span className="text-xs text-neutral-600 dark:text-neutral-400">Email</span>
+<span className="text-xs text-neutral-600 dark:text-neutral-400">Email</span>
 // FIXED:  </button>
 // FIXED:  </div>
 

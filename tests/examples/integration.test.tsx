@@ -171,7 +171,9 @@ return;
  };
 
  if (loading as any) {
- return <div data-testid="loading">Loading...</div>;
+ return <div data-testid="loading">Loading...
+  </div>
+);
  }
 
  return (

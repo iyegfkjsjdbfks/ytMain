@@ -271,7 +271,7 @@ const StatsCard: FC<StatsCardProps> = ({
  {typeof value === 'number' ? formatNumber(value) : value}
 // FIXED:  </p>
 // FIXED:  </div>
- <div className='flex-shrink-0 ml-4'>{icon}</div>
+<div className='flex-shrink-0 ml-4'>{icon}</div>
 // FIXED:  </div>
  {(subtitle || trend) && (
  <div className='mt-3 flex items-center text-sm'>
@@ -349,7 +349,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: any) => {
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className='text-sm font-bold text-gray-900 dark:text-white'>
+<div className='text-sm font-bold text-gray-900 dark:text-white'>
  {formatMomentValue(moment)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -393,7 +393,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
 // FIXED:  style={{ width: `${country.percentage}%` } />
  />
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 dark:text-white min-w-[2rem] text-right'>
+<span className='text-sm font-medium text-gray-900 dark:text-white min-w-[2rem] text-right'>
  {country.percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -415,7 +415,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
  <div className='text-lg font-bold text-gray-900 dark:text-white'>
  {device.percentage}%
 // FIXED:  </div>
- <div className='text-xs text-gray-600 dark:text-gray-400 font-medium'>
+<div className='text-xs text-gray-600 dark:text-gray-400 font-medium'>
  {device.type}
 // FIXED:  </div>
 // FIXED:  </div>

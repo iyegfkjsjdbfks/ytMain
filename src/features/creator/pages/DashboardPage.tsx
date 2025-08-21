@@ -441,7 +441,7 @@ const DashboardPage: React.FC = () => {
 // FIXED:  style={{ width: `${country.percentage}%` } />
  />
 // FIXED:  </div>
- <span className='text-sm font-medium text-gray-900 w-8'>
+<span className='text-sm font-medium text-gray-900 w-8'>
  {country.percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -552,7 +552,7 @@ const DashboardPage: React.FC = () => {
  <div className='text-sm font-medium text-gray-900 max-w-xs truncate'>
  {video.title}
 // FIXED:  </div>
- <div className='text-sm text-gray-500'>
+<div className='text-sm text-gray-500'>
  {video.duration}
 // FIXED:  </div>
 // FIXED:  </div>

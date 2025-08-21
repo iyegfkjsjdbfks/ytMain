@@ -283,7 +283,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
  <div className='w-6 h-6 bg-red-600 rounded flex items-center justify-center'>
  <div className='w-3 h-3 bg-white rounded-sm' />
 // FIXED:  </div>
- <span className='text-sm font-medium'>Install YouTubeX</span>
+<span className='text-sm font-medium'>Install YouTubeX</span>
 // FIXED:  </div>
  <div className='flex items-center space-x-1'>
  <button />

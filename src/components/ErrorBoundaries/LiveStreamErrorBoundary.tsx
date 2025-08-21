@@ -129,7 +129,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
  <div className='flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4'>
  <ArrowPathIcon className='w-8 h-8 text-blue-600 animate-spin' />
 // FIXED:  </div>
- <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+<h3 className='text-lg font-semibold text-gray-900 mb-2'>
  Reconnecting...
 // FIXED:  </h3>
  <p className='text-sm text-gray-600 text-center'>
@@ -144,8 +144,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
  <div className='flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4'>
  <SignalSlashIcon className='w-8 h-8 text-red-600' />
 // FIXED:  </div>
-
- <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+<h3 className='text-lg font-semibold text-gray-900 mb-2'>
  Live Stream Error
 // FIXED:  </h3>
 
@@ -182,8 +181,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
  Go Home
 // FIXED:  </button>
 // FIXED:  </div>
-
- <div className='mt-4 text-xs text-gray-500 text-center'>
+<div className='mt-4 text-xs text-gray-500 text-center'>
  Stream errors: {this.state.retryCount} / {this.maxRetries}
 // FIXED:  </div>
 
@@ -196,13 +194,13 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
  <div className='font-semibold text-red-600 mb-2'>
  {this.state.error.name}: {this.state.error.message}
 // FIXED:  </div>
- <pre className='whitespace-pre-wrap text-xs'>
+<pre className='whitespace-pre-wrap text-xs'>
  {this.state.error.stack}
 // FIXED:  </pre>
  {this.state.errorInfo && (
  <div className='mt-2 pt-2 border-t border-gray-300'>
  <div className='font-semibold mb-1'>Component Stack:</div>
- <pre className='whitespace-pre-wrap text-xs'>
+<pre className='whitespace-pre-wrap text-xs'>
  {this.state.errorInfo.componentStack}
 // FIXED:  </pre>
 // FIXED:  </div>

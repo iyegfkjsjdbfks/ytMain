@@ -19,7 +19,9 @@ const ThrowError = ({ shouldThrow }: any) => {
  if (shouldThrow as any) {
  throw new Error('Test error');
  }
- return <div>No error</div>;
+ return <div>No error
+  </div>
+);
 };
 
 describe('ErrorBoundary', () => {
@@ -46,8 +48,9 @@ describe('ErrorBoundary', () => {
  });
 
  it('renders custom fallback when provided', () => {
- const customFallback = <div>Custom error message</div>;
-
+ const customFallback = <div>Custom error message
+  </div>
+);
  render(
  <ErrorBoundary fallback={customFallback}>
  <ThrowError shouldThrow={true} />

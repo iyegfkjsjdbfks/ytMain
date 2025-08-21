@@ -67,7 +67,7 @@ const RefactoredTrendingPage: React.FC = () => {
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
 // FIXED:  </svg>
 // FIXED:  </div>
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+<h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  No trending videos available
 // FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400">

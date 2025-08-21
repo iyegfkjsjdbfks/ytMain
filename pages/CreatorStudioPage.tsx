@@ -299,7 +299,7 @@ const CreatorStudioPage: React.FC = () => {
  {Math.abs(insight.change)}%
 // FIXED:  </div>
 // FIXED:  </div>
- <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+<p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
  {insight.period}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -324,7 +324,7 @@ const CreatorStudioPage: React.FC = () => {
 // FIXED:  </span>
  )}
 // FIXED:  </div>
- <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+<p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
  {idea.category}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -389,7 +389,7 @@ const CreatorStudioPage: React.FC = () => {
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
- <p className="text-gray-600 dark:text-gray-400 text-sm">
+<p className="text-gray-600 dark:text-gray-400 text-sm">
  {resource.description}
 // FIXED:  </p>
 // FIXED:  </Link>

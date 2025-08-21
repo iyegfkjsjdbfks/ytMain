@@ -152,7 +152,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
  <div className='flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4'>
  <ArrowPathIcon className='w-8 h-8 text-blue-600 animate-spin' />
 // FIXED:  </div>
- <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+<h3 className='text-lg font-semibold text-gray-900 mb-2'>
  Retrying...
 // FIXED:  </h3>
  <p className='text-sm text-gray-600 text-center'>
@@ -169,8 +169,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
  >
  {this.getErrorIcon()}
 // FIXED:  </div>
-
- <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+<h3 className='text-lg font-semibold text-gray-900 mb-2'>
  {isOffline ? 'Connection Error' : 'Data Loading Error'}
 // FIXED:  </h3>
 
@@ -225,13 +224,13 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
  <strong>Network Status:</strong>{' '}
  {navigator.onLine ? 'Online' : 'Offline'}
 // FIXED:  </div>
- <pre className='whitespace-pre-wrap text-xs'>
+<pre className='whitespace-pre-wrap text-xs'>
  {this.state.error.stack}
 // FIXED:  </pre>
  {this.state.errorInfo && (
  <div className='mt-2 pt-2 border-t border-gray-300'>
  <div className='font-semibold mb-1'>Component Stack:</div>
- <pre className='whitespace-pre-wrap text-xs'>
+<pre className='whitespace-pre-wrap text-xs'>
  {this.state.errorInfo.componentStack}
 // FIXED:  </pre>
 // FIXED:  </div>

@@ -324,7 +324,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
  )}
 // FIXED:  </div>
- <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
+<p className="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
  {notification.channelName} {notification.message}
 // FIXED:  </p>
  <p className="text-xs text-neutral-500 dark:text-neutral-500">

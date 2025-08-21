@@ -112,8 +112,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
  <span>{video.uploadedAt}</span>
 // FIXED:  </div>
 // FIXED:  </div>
-
- <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 line-clamp-2">
+<p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 line-clamp-2">
  {video.description}
 // FIXED:  </p>
 // FIXED:  </div>

@@ -82,7 +82,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 // FIXED:  </svg>
 // FIXED:  </div>
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+<h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  Failed to load videos
 // FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400 mb-4">
@@ -109,7 +109,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
 // FIXED:  </svg>
  )}
 // FIXED:  </div>
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+<h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  {emptyMessage}
 // FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400">
