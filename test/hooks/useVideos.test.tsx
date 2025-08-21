@@ -25,11 +25,11 @@ const createWrapper: any = () => {
  const Wrapper: any = ({ children }: any) => (
  <QueryClientProvider client={queryClient}>
  {children}
-// FIXED:  </QueryClientProvider>
+ </QueryClientProvider>
  );
 
  return { Wrapper, queryClient };
-
+};
 describe('Unified Video Hooks', () => {
  beforeEach(() => {
  vi.clearAllMocks();

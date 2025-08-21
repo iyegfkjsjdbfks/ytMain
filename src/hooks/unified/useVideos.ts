@@ -18,7 +18,7 @@ import type { Video, Short } from '../../types/core';
  */
 
 // Unified Video hooks using normalized metadata
-export function useUnifiedVideos(,
+export function useUnifiedVideos(
  limit: number = 50,
  filters: UnifiedSearchFilters = {},
  config?: UseApiConfig<{
@@ -47,7 +47,7 @@ export function useUnifiedVideos(,
  );
 }
 
-export function useUnifiedVideo(,
+export function useUnifiedVideo(
  videoId: any,
  config?: UseApiConfig<UnifiedVideoMetadata>
 ): any {
@@ -93,7 +93,7 @@ export function useUnifiedVideo(,
  return customResult;
 }
 
-export function useUnifiedTrendingVideos(,
+export function useUnifiedTrendingVideos(
  limit: number = 50,
  filters: UnifiedSearchFilters = {},
  config?: UseApiConfig<{
@@ -129,7 +129,7 @@ export function useFeaturedVideos(config?: UseApiConfig<Video[]>): any {
  ...config });
 }
 
-export function useVideosByCategory(,
+export function useVideosByCategory(
  category: any,
  config?: UseApiConfig<Video[]>
 ): any {
@@ -195,7 +195,7 @@ export function useSavedVideos(config?: UseApiConfig<Video[]>): any {
 }
 
 // Unified Shorts hooks
-export function useUnifiedShorts(,
+export function useUnifiedShorts(
  limit: number = 30,
  config?: UseApiConfig<{
  data: UnifiedVideoMetadata;
@@ -237,7 +237,7 @@ export function useTrendingShorts(config?: UseApiConfig<Short[]>): any {
 }
 
 // Unified Search hook
-export function useUnifiedSearchVideos(,
+export function useUnifiedSearchVideos(
  query: any,
  filters: UnifiedSearchFilters = {},
  limit: number = 50,

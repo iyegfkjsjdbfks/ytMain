@@ -217,6 +217,7 @@ class YouTubeService {
  error
  );
  }
+ }
  async fetchChannel(channelId: any): Promise<Channel | null> {
  if (!API_KEY) {
  logger.warn(
@@ -283,6 +284,7 @@ class YouTubeService {
  logger.error('Error fetching channel:', error);
  return null; // Return null for graceful degradation
  }
+ }
  private parseDuration(duration: any): string {
  const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
  if (!match) {
@@ -342,7 +344,7 @@ class YouTubeService {
  return categories[categoryId] || 'Unknown';
  }
 
- async searchVideos(,
+ async searchVideos(
  query: any,
  options: { maxResults?: number } = {}
  ): Promise<Video[]> {
@@ -403,6 +405,7 @@ class YouTubeService {
  'searchVideosError',
  error
  );
+ }
  }
  clearCache(): void {
  this.cache.clear();
