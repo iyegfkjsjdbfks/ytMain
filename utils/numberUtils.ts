@@ -5,7 +5,7 @@
  * @param viewsStr The string representing the view count.
  * @returns A number representing the view count, or 0 if parsing fails.
  */
-export const parseViewCount: any = (viewsStr: any): number => {
+export const parseViewCount = (viewsStr): number => {
  if (!viewsStr) {
 return 0;
 }
@@ -30,7 +30,7 @@ return 0;
  * @param digits The number of decimal digits (optional, default 0 for K/M/B, 1 if needed).
  * @returns A string representation of the number with suffix.
  */
-export const formatCount: any = (num: any, digits: number = 0): string => {
+export const formatCount = (num, digits: number = 0): string => {
  const lookup = [
  { value: 1, symbol: '' },
  { value: 1e3, symbol: 'K' },
@@ -43,7 +43,7 @@ export const formatCount: any = (num: any, digits: number = 0): string => {
 return '0';
 } // Should not happen with the lookup table
 
- let numStr: any = (num / item.value).toFixed(digits);
+ let numStr = (num / item.value).toFixed(digits);
 
  // Only show decimal if it's not .0 and digits > 0 for K/M/B or if no symbol
  if (item.symbol !== '' && digits === 0) {
@@ -70,7 +70,7 @@ export const formatNumber = formatCount;
  * @param seconds The duration in seconds
  * @returns A string representation of the duration
  */
-export const formatDuration: any = (seconds: any): string => {
+export const formatDuration = (seconds): string => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  const secs = Math.floor(seconds % 60);

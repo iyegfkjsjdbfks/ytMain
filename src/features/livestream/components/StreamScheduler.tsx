@@ -76,18 +76,18 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
  setScheduledStreams(prev => {
  if (editingStream as any) {
- return prev.map((s: any) => (s.id === stream.id ? stream : s));
+ return prev.map((s) => (s.id === stream.id ? stream : s));
  }
  return [...prev as any, stream];
  });
 
  onStreamScheduled?.(stream);
  resetForm();
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to schedule stream:', error);
  };
 
- const handleDeleteStream = async (streamId: any): Promise<any> => {
+ const handleDeleteStream = async (streamId): Promise<any> => {
  if (!confirm('Are you sure you want to delete this scheduled stream?')) {
  return;
  }
@@ -95,20 +95,20 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  try {
  // For now, just remove from local state
  // In a real implementation, this would call a delete API
- setScheduledStreams(prev => prev.filter((s: any) => s.id !== streamId));
- } catch (error: any) {
+ setScheduledStreams(prev => prev.filter((s) => s.id !== streamId));
+ } catch (error) {
  logger.error('Failed to delete stream:', error);
  };
 
- const handleStartStream = async (streamId: any): Promise<any> => {
+ const handleStartStream = async (streamId): Promise<any> => {
  try {
  // Start the scheduled stream
  await liveStreamService.startStream(streamId);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to start stream:', error);
  };
 
- const resetForm: any = () => {
+ const resetForm = () => {
  setFormData({
  title: '',
  description: '',
@@ -123,7 +123,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  setEditingStream(null);
  };
 
- const handleEditStream: any = (stream: ScheduledStream) => {
+ const handleEditStream = (stream: ScheduledStream) => {
  setFormData({
  title: stream.title,
  description: stream.description,
@@ -139,7 +139,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  setShowCreateForm(true);
  };
 
- const addTag: any = () => {
+ const addTag = () => {
  if (
  newTag.trim() &&
  !formData.tags.includes(newTag.trim()) &&
@@ -151,13 +151,13 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  setNewTag('');
  };
 
- const removeTag: any = (tagToRemove: any) => {
+ const removeTag = (tagToRemove) => {
  setFormData(prev => ({
  ...prev as any,
- tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
+ tags: prev.tags.filter((tag) => tag !== tagToRemove) }));
  };
 
- const formatDateTime: any = (date: Date) => {
+ const formatDateTime = (date: Date) => {
  return new Intl.DateTimeFormat('en-US', {
  weekday: 'short',
  month: 'short',
@@ -166,7 +166,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  minute: '2-digit' }).format(date);
  };
 
- const getTimeUntilStream: any = (scheduledTime: Date) => {
+ const getTimeUntilStream = (scheduledTime: Date) => {
  const now = new Date();
  const diff = scheduledTime.getTime() - now.getTime();
 
@@ -187,7 +187,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  return `${minutes}m`;
  };
 
- const isStreamStartable: any = (stream: ScheduledStream) => {
+ const isStreamStartable = (stream: ScheduledStream) => {
  if (!stream.scheduledStartTime) {
  return false;
  }
@@ -222,7 +222,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  {/* Create/Edit Form */}
  {showCreateForm && (
  <form />
-// FIXED:  onSubmit={(e: any) => handleSubmit(e)}
+// FIXED:  onSubmit={(e) => handleSubmit(e)}
 // FIXED:  className='mb-6 p-4 bg-gray-50 rounded-lg border'
  >
  <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -261,7 +261,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  }
 // FIXED:  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  >
- {categories.map((category: any) => (
+ {categories.map((category) => (
  <option key={category} value={category}>
  {category}
 // FIXED:  </option>
@@ -356,14 +356,14 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
  />
  <button
 // FIXED:  type='button' />
-// FIXED:  onClick={(e: any) => addTag(e)}
+// FIXED:  onClick={(e) => addTag(e)}
 // FIXED:  className='px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700'
  >
  Add
 // FIXED:  </button>
 // FIXED:  </div>
  <div className='flex flex-wrap gap-2'>
- {formData.tags.map((tag: string) => (
+ {formData.tags.map((tag) => (
  <span
  key={tag}
 // FIXED:  className='inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg' />
@@ -391,7 +391,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 // FIXED:  </button>
  <button
 // FIXED:  type='button' />
-// FIXED:  onClick={(e: any) => resetForm(e)}
+// FIXED:  onClick={(e) => resetForm(e)}
 // FIXED:  className='px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50'
  >
  Cancel
@@ -411,7 +411,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 // FIXED:  </p>
 // FIXED:  </div>
  ) : (
- scheduledStreams.map((stream: any) => (
+ scheduledStreams.map((stream) => (
  <div
  key={stream.id}
 // FIXED:  className='p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors' />
@@ -460,7 +460,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
  {stream.tags.length > 0 && (
  <div className='flex flex-wrap gap-1 mt-2'>
- {stream.tags.slice(0, 3).map((tag: string) => (
+ {stream.tags.slice(0, 3).map((tag) => (
  <span
  key={tag}
 // FIXED:  className='px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded' />

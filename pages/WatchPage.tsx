@@ -162,8 +162,8 @@ const WatchPage: React.FC = () => {
  const [metadataExpanded, setMetadataExpanded] = React.useState<boolean>(false);
 
  // Enhanced save to playlist handler that integrates with Watch Later context
- const enhancedHandleSaveToPlaylist = useCallback(async (_videoId: any,
- playlistId: any): Promise<any> => {
+ const enhancedHandleSaveToPlaylist = useCallback(async (_videoId,
+ playlistId): Promise<any> => {
  // Call the original handler
  await handleSaveToPlaylist(playlistId);
 
@@ -332,7 +332,7 @@ const WatchPage: React.FC = () => {
  <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 px-1 sm:px-0">Up next</h2>
  <RecommendationEngine
  currentVideo={video} />
- onVideoSelect={(videoId: any) => {
+ onVideoSelect={(videoId) => {
  window.location.href = `/watch?v=${videoId}`;
  }
  />

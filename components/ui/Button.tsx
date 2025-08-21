@@ -150,7 +150,7 @@ export const SubscribeButton: React.FC<{,
  variant={isSubscribed ? 'outline' : 'primary'}
  size="sm"
  loading={loading} />
-// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  onClick={(e) => onClick(e)}
 // FIXED:  className={className}
  >
  {isSubscribed ? 'Subscribed' : 'Subscribe'}
@@ -168,7 +168,7 @@ export const LikeButton: React.FC<{,
  variant={isLiked ? 'primary' : 'ghost'}
  size="sm"
  loading={loading} />
-// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  onClick={(e) => onClick(e)}
 // FIXED:  className={className}
  leftIcon={
  <svg className="w-4 h-4" fill={isLiked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">

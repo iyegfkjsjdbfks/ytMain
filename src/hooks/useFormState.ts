@@ -92,7 +92,7 @@ export function useFormState<T extends Record<string, any>>({
  setIsSubmitting(true);
  try {
  await onSubmit(values);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Form submission error:', error);
  // You might want to set a general error here
  } finally {

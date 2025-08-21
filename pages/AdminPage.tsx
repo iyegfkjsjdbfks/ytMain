@@ -64,7 +64,7 @@ const AdminPage: React.FC = () => {
  const googleVideos = googleSearchVideoStore.getAllVideos();
 
  // Convert GoogleSearchResult[] to StoreVideo[]
- const videos: StoreVideo[] = googleVideos.map((video: any) => ({,
+ const videos: StoreVideo[] = googleVideos.map((video) => ({,
  id: video.id,
  title: video.title,
  channelName: video.channelName,
@@ -72,7 +72,7 @@ const AdminPage: React.FC = () => {
  viewCount: video.viewCount || 0 }));
 
  setStoreVideos(videos);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to load store videos:', error);
  };
 
@@ -103,7 +103,7 @@ const AdminPage: React.FC = () => {
 
  // Refresh store videos
  await loadStoreVideos();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Test fetch error:', error);
  setTestResult({ error: error.message });
  } finally {
@@ -126,7 +126,7 @@ const AdminPage: React.FC = () => {
  setUnifiedServiceTest(result);
 
  (console as any).log('🧪 Unified service result:', result);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Unified service test error:', error);
  setUnifiedServiceTest({ error: error.message });
  } finally {
@@ -138,12 +138,12 @@ const AdminPage: React.FC = () => {
  const { googleSearchVideoStore } = await import('../services/googleSearchVideoStore');
  googleSearchVideoStore.clear();
  await loadStoreVideos();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to clear store:', error);
  };
 
  // YouTube Metadata Debug handlers
- const checkEnvironment: any = () => {
+ const checkEnvironment = () => {
  const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
  const proxyUrl = `${window.location.origin}/api/youtube/v3/videos`;
 
@@ -204,7 +204,7 @@ const AdminPage: React.FC = () => {
  error: `${response.status} ${response.statusText}`,
  fullResponse: errorText });
  }
- } catch (error: any) {
+ } catch (error) {
  setProxyTest({
  success: false,
  error: error.message,
@@ -241,7 +241,7 @@ const AdminPage: React.FC = () => {
  error: `${response.status} ${response.statusText}`,
  fullResponse: errorData });
  }
- } catch (error: any) {
+ } catch (error) {
  setDirectApiTest({
  success: false,
  error: error.message,
@@ -282,7 +282,7 @@ const AdminPage: React.FC = () => {
  success: false,
  error: 'No video data returned from app service' });
  }
- } catch (error: any) {
+ } catch (error) {
  setYoutubeMetadataTest({
  success: false,
  error: error.message,
@@ -291,7 +291,7 @@ const AdminPage: React.FC = () => {
  setLoading(false);
  };
 
- const clearYouTubeMetadataTests: any = () => {
+ const clearYouTubeMetadataTests = () => {
  setYoutubeMetadataTest(null);
  setProxyTest(null);
  setDirectApiTest(null);
@@ -308,7 +308,7 @@ const AdminPage: React.FC = () => {
  saveSettings(settings);
  setProvider(newProvider);
  setSaveMessage('Settings saved successfully!');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error saving settings:', error);
  setSaveMessage('Error saving settings. Please try again.');
  } finally {
@@ -327,7 +327,7 @@ const AdminPage: React.FC = () => {
  saveSettings(settings);
  setPlayerType(newPlayerType);
  setSaveMessage('YouTube player type updated successfully!');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error saving player type:', error);
  setSaveMessage('Error saving player type. Please try again.');
  } finally {
@@ -344,7 +344,7 @@ const AdminPage: React.FC = () => {
  setLocalVideoPlayerType(newPlayerType);
  setLocalPlayerType(newPlayerType);
  setSaveMessage('Local video player type updated successfully!');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error saving local player type:', error);
  setSaveMessage('Error saving local player type. Please try again.');
  } finally {
@@ -361,7 +361,7 @@ const AdminPage: React.FC = () => {
  toggleYouTubePlayer(playerType);
  setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
  setSaveMessage('YouTube player settings updated successfully!');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error toggling YouTube player:', error);
  setSaveMessage('Error updating YouTube player settings. Please try again.');
  } finally {
@@ -377,7 +377,7 @@ const AdminPage: React.FC = () => {
  toggleLocalPlayer(playerType);
  setEnabledLocalPlayersState(getEnabledLocalPlayers());
  setSaveMessage('Local player settings updated successfully!');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error toggling local player:', error);
  setSaveMessage('Error updating local player settings. Please try again.');
  } finally {
@@ -392,7 +392,7 @@ const AdminPage: React.FC = () => {
  try {
  setInitialSearchKeyword(initialSearchKeyword);
  setSaveMessage('Initial search keyword updated successfully!');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error saving initial search keyword:', error);
  setSaveMessage('Error saving initial search keyword. Please try again.');
  } finally {
@@ -405,12 +405,12 @@ const AdminPage: React.FC = () => {
  const googleSearchAvailable = isGoogleSearchAvailable();
  const hybridModeAvailable = isHybridModeAvailable();
 
- const renderPlayerCard: any = (config: VideoPlayerConfig,
- isSelected: any, isEnabled: any,
+ const renderPlayerCard = (config: VideoPlayerConfig,
+ isSelected, isEnabled,
  onSelect: () => void, onToggleEnabled: () => void) => {
  const usedOnPages = getPlayerUsageByPage(config.type);
 
- const getPerformanceColor: any = (performance: any) => {
+ const getPerformanceColor = (performance) => {
  switch (performance as any) {
  case 'high': return 'text-green-600 bg-green-100';
  case 'medium': return 'text-yellow-600 bg-yellow-100';
@@ -418,7 +418,7 @@ const AdminPage: React.FC = () => {
  default: return 'text-gray-600 bg-gray-100'
  };
 
- const getComplexityColor: any = (complexity: any) => {
+ const getComplexityColor = (complexity) => {
  switch (complexity as any) {
  case 'simple': return 'text-blue-600 bg-blue-100';
  case 'moderate': return 'text-purple-600 bg-purple-100';
@@ -426,7 +426,7 @@ const AdminPage: React.FC = () => {
  default: return 'text-gray-600 bg-gray-100'
  };
 
- const getCategoryIcon: any = (category: any) => {
+ const getCategoryIcon = (category) => {
  return category === 'youtube' ?
  <PlayIcon className="h-5 w-5 text-red-500" /> :
  <VideoCameraIcon className="h-5 w-5 text-blue-500" />;
@@ -439,7 +439,7 @@ const AdminPage: React.FC = () => {
  ? 'border-blue-500 bg-blue-50 shadow-md'
  : 'border-gray-200 bg-white hover:border-gray-300'
  }`} />
-// FIXED:  onClick={(e: any) => onSelect(e)}
+// FIXED:  onClick={(e) => onSelect(e)}
  >
  <div className="flex items-start justify-between mb-3">
  <div className="flex items-center space-x-2">
@@ -458,7 +458,7 @@ const AdminPage: React.FC = () => {
 // FIXED:  </div>
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  onToggleEnabled();
  }
@@ -504,8 +504,8 @@ const AdminPage: React.FC = () => {
  <div className="mb-3">
  <h4 className="text-sm font-medium text-gray-700 mb-1">Features:</h4>
  <div className="flex flex-wrap gap-1">
- {config.features.map((feature: any,
- index: number) => (
+ {config.features.map((feature,
+ index) => (
  <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
  {feature}
 // FIXED:  </span>
@@ -516,8 +516,8 @@ const AdminPage: React.FC = () => {
  <div>
  <h4 className="text-sm font-medium text-gray-700 mb-1">Best for:</h4>
  <ul className="text-xs text-gray-600 list-disc list-inside">
- {config.useCases.slice(0, 2).map((useCase: any,
- index: number) => (
+ {config.useCases.slice(0, 2).map((useCase,
+ index) => (
  <li key={index}>{useCase}</li>
  ))}
 // FIXED:  </ul>
@@ -562,7 +562,7 @@ const AdminPage: React.FC = () => {
  { id: 'search',
  name: 'Search Settings', icon: SparklesIcon },
  { id: 'api-testing',
- name: 'API Testing', icon: BugAntIcon }].map((tab: any) => {
+ name: 'API Testing', icon: BugAntIcon }].map((tab) => {
  const Icon = tab.icon;
  return (
  <button
@@ -619,7 +619,7 @@ const AdminPage: React.FC = () => {
  <div>
  <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using YouTube Players:</h4>
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
- {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page: any) => {
+ {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {
  const pageConfig = pageConfigurations[page];
  const isCurrentGlobalPlayer = pageConfig.youtubePlayer === playerType;
  return (
@@ -650,10 +650,10 @@ const AdminPage: React.FC = () => {
  <div>
  <h4 className="text-lg font-semibold text-gray-800 mb-4">Available YouTube Video Players:</h4>
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
- {getVideoPlayersByCategory('youtube').map((config: any) => {
+ {getVideoPlayersByCategory('youtube').map((config) => {
  const isCurrentPlayer = config.type === playerType;
  const isEnabled = enabledYouTubePlayers.includes(config.type as YouTubePlayerType);
- const usedOnPages = getPlayerUsageByPage(config.type).filter((page: any) =>
+ const usedOnPages = getPlayerUsageByPage(config.type).filter((page) =>
  pageConfigurations[page].youtubePlayer === config.type);
 
  return (
@@ -678,7 +678,7 @@ const AdminPage: React.FC = () => {
 // FIXED:  </span>
 // FIXED:  </div>
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  handleToggleYouTubePlayer(config.type as YouTubePlayerType);
  }
@@ -711,8 +711,8 @@ const AdminPage: React.FC = () => {
  <div>
  <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
  <div className="flex flex-wrap gap-1">
- {config.features.slice(0, 3).map((feature: any,
- index: number) => (
+ {config.features.slice(0, 3).map((feature,
+ index) => (
  <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
  {feature}
 // FIXED:  </span>
@@ -750,7 +750,7 @@ const AdminPage: React.FC = () => {
  <div>
  <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using Local Video Players:</h4>
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
- {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page: any) => {
+ {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {
  const pageConfig = pageConfigurations[page];
  const isCurrentGlobalPlayer = pageConfig.localPlayer === localPlayerType;
  return (
@@ -781,10 +781,10 @@ const AdminPage: React.FC = () => {
  <div>
  <h4 className="text-lg font-semibold text-gray-800 mb-4">Available Local Video Players:</h4>
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
- {getVideoPlayersByCategory('local').map((config: any) => {
+ {getVideoPlayersByCategory('local').map((config) => {
  const isCurrentPlayer = config.type === localPlayerType;
  const isEnabled = enabledLocalPlayers.includes(config.type as LocalVideoPlayerType);
- const usedOnPages = getPlayerUsageByPage(config.type).filter((page: any) =>
+ const usedOnPages = getPlayerUsageByPage(config.type).filter((page) =>
  pageConfigurations[page].localPlayer === config.type);
 
  return (
@@ -809,7 +809,7 @@ const AdminPage: React.FC = () => {
 // FIXED:  </span>
 // FIXED:  </div>
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  handleToggleLocalPlayer(config.type as LocalVideoPlayerType).catch(() => {
  // Handle promise rejection silently
@@ -844,8 +844,8 @@ const AdminPage: React.FC = () => {
  <div>
  <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
  <div className="flex flex-wrap gap-1">
- {config.features.slice(0, 3).map((feature: any,
- index: number) => (
+ {config.features.slice(0, 3).map((feature,
+ index) => (
  <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
  {feature}
 // FIXED:  </span>
@@ -1037,7 +1037,7 @@ const AdminPage: React.FC = () => {
 // FIXED:  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
  />
  <button />
-// FIXED:  onClick={(e: any) => handleSaveInitialSearchKeyword(e)}
+// FIXED:  onClick={(e) => handleSaveInitialSearchKeyword(e)}
 // FIXED:  disabled={isSaving || !initialSearchKeyword.trim()}
 // FIXED:  className="mt-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
  >
@@ -1250,7 +1250,7 @@ const AdminPage: React.FC = () => {
  <h3 className="text-lg font-semibold mb-4">Store Statistics</h3>
  <p className="text-sm text-gray-600 mb-4">Videos in store: {storeVideos.length}</p>
  <button />
-// FIXED:  onClick={(e: any) => handleClearStore(e)}
+// FIXED:  onClick={(e) => handleClearStore(e)}
 // FIXED:  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
  >
  Clear Store
@@ -1275,14 +1275,14 @@ const AdminPage: React.FC = () => {
 // FIXED:  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
  />
  <button />
-// FIXED:  onClick={(e: any) => handleTestFetch(e)}
+// FIXED:  onClick={(e) => handleTestFetch(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 disabled:opacity-50 transition-colors"
  >
  {loading ? 'Testing...' : '🔍 Google Search Direct'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleTestUnifiedService(e)}
+// FIXED:  onClick={(e) => handleTestUnifiedService(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 disabled:opacity-50 transition-colors"
  >
@@ -1322,7 +1322,7 @@ const AdminPage: React.FC = () => {
  {/* Environment Check */}
  <div className="mb-6">
  <button />
-// FIXED:  onClick={(e: any) => checkEnvironment(e)}
+// FIXED:  onClick={(e) => checkEnvironment(e)}
 // FIXED:  className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
  >
  🔧 Check Environment
@@ -1355,28 +1355,28 @@ const AdminPage: React.FC = () => {
  {/* Test Buttons */}
  <div className="flex gap-2 mb-4">
  <button />
-// FIXED:  onClick={(e: any) => testProxyEndpoint(e)}
+// FIXED:  onClick={(e) => testProxyEndpoint(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 transition-colors"
  >
  {loading ? 'Testing...' : '🔗 YouTube API Proxy'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => testDirectAPI(e)}
+// FIXED:  onClick={(e) => testDirectAPI(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 transition-colors"
  >
  {loading ? 'Testing...' : '🌐 YouTube API Direct'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => testYouTubeMetadataFetch(e)}
+// FIXED:  onClick={(e) => testYouTubeMetadataFetch(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800 disabled:opacity-50 transition-colors"
  >
  {loading ? 'Testing...' : '📊 YouTube API App'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => clearYouTubeMetadataTests(e)}
+// FIXED:  onClick={(e) => clearYouTubeMetadataTests(e)}
 // FIXED:  className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
  >
  🗑️ Clear Results

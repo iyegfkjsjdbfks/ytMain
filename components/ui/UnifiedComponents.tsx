@@ -262,7 +262,7 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
  'inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors',
  styles.icon,
  'hover:bg-black/5 dark:hover:bg-white/5')} />
-// FIXED:  onClick={(e: any) => onDismiss(e)}
+// FIXED:  onClick={(e) => onDismiss(e)}
  >
  <span className="sr-only">Dismiss</span>
  <XMarkIcon className="h-5 w-5" />
@@ -295,7 +295,7 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
  className }) => {
  const sizeClass = loadingSizes[size];
 
- const renderLoader: any = () => {
+ const renderLoader = () => {
  switch (type as any) {
  case 'spinner':
  return (
@@ -372,7 +372,7 @@ export const UnifiedModal: React.FC<UnifiedModalProps> = ({
 return null;
 }
 
- const handleOverlayClick: any = (e: React.MouseEvent) => {
+ const handleOverlayClick = (e: React.MouseEvent) => {
  if (e.target === e.currentTarget && closeOnOverlayClick) {
  onClose();
  };
@@ -380,7 +380,7 @@ return null;
  return (
  <div
 // FIXED:  className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50" />
-// FIXED:  onClick={(e: any) => handleOverlayClick(e)}
+// FIXED:  onClick={(e) => handleOverlayClick(e)}
  >
  <div
 // FIXED:  className={cn(
@@ -397,7 +397,7 @@ return null;
  )}
  {showCloseButton && (
  <button />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
  >
  <XMarkIcon className="w-6 h-6" />

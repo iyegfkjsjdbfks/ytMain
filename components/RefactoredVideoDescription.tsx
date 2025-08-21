@@ -101,7 +101,7 @@ interface SubscribeButtonProps {
 const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }: any) => {
  return (
  <button />
-// FIXED:  onClick={(e: any) => onSubscribe(e)}
+// FIXED:  onClick={(e) => onSubscribe(e)}
 // FIXED:  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105 ${
  isSubscribed
  ? 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
@@ -151,10 +151,10 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
 // FIXED:  className={`text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed cursor-pointer transition-all duration-300 ${
  !showFullDescription ? 'max-h-20 overflow-hidden' : ''
  }`} />
-// FIXED:  onClick={(e: any) => onToggleDescription(e)}
+// FIXED:  onClick={(e) => onToggleDescription(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e: any) => {
+ onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.preventDefault();
  onToggleDescription();
@@ -171,7 +171,7 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
  {/* Show More/Less Button */}
  {shouldShowToggle && (
  <button />
-// FIXED:  onClick={(e: any) => onToggleDescription(e)}
+// FIXED:  onClick={(e) => onToggleDescription(e)}
 // FIXED:  className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-semibold text-sm transition-colors"
  >
  {showFullDescription ? 'Show less' : '...Show more'}
@@ -203,7 +203,7 @@ return null;
  <div className="space-y-3">
  {/* Summarize Button */}
  <button />
-// FIXED:  onClick={(e: any) => onSummarizeDescription(e)}
+// FIXED:  onClick={(e) => onSummarizeDescription(e)}
 // FIXED:  disabled={isSummarizing}
 // FIXED:  className="flex items-center space-x-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 text-blue-700 dark:text-blue-300 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed transform hover:scale-105"
 // FIXED:  aria-label="Summarize video description with AI"

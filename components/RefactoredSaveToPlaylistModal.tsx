@@ -12,9 +12,9 @@ interface RefactoredSaveToPlaylistModalProps {
  onClose: () => void;
  videoId: string;
  existingPlaylists: Playlist;
- onSaveToPlaylist: (videoId: any,
- playlistId: any) => Promise<void>;
- onCreatePlaylist: (name: any, description?: string) => Promise<Playlist>;
+ onSaveToPlaylist: (videoId,
+ playlistId) => Promise<void>;
+ onCreatePlaylist: (name, description?: string) => Promise<Playlist>;
 }
 
 /**
@@ -71,7 +71,7 @@ return;
  try {
  await onSaveToPlaylist(videoId, selectedPlaylistId);
  onClose();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error saving to playlist:', error);
  };
 
@@ -81,7 +81,7 @@ return;
  const newPlaylist = await onCreatePlaylist(formData.name, formData.description);
  await onSaveToPlaylist(videoId, newPlaylist.id);
  onClose();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error creating playlist:', error);
  };
 
@@ -90,8 +90,7 @@ return;
  {
  name: 'name',
  label: 'Playlist Name',
- type: "text" as const,
- placeholder: 'Enter playlist name',
+ type: "text" as const placeholder: 'Enter playlist name',
  required: true,
  validation: (value: string | number) => {
  if (value.length < 3) {
@@ -105,14 +104,13 @@ return 'Playlist name must be less than 100 characters';
  {
  name: 'description',
  label: 'Description (Optional)',
- type: "textarea" as const,
- placeholder: 'Enter playlist description',
+ type: "textarea" as const placeholder: 'Enter playlist description',
  rows: 3 }];
 
- const modalFooter: any = (
+ const modalFooter = (
  <div className="flex gap-3">
  <button />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
  >
  Cancel
@@ -128,7 +126,7 @@ return 'Playlist name must be less than 100 characters';
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => handleSaveToExisting(e)}
+// FIXED:  onClick={(e) => handleSaveToExisting(e)}
 // FIXED:  disabled={!selectedPlaylistId || saveLoading}
 // FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
  >
@@ -158,7 +156,7 @@ return 'Playlist name must be less than 100 characters';
  /* Create new playlist form */
  <BaseForm
  fields={createPlaylistFields} />
-// FIXED:  onSubmit={(e: any) => handleCreatePlaylist(e)}
+// FIXED:  onSubmit={(e) => handleCreatePlaylist(e)}
  loading={createLoading}
  error={createError}
  submitLabel="Create and Save"
@@ -187,7 +185,7 @@ return 'Playlist name must be less than 100 characters';
 // FIXED:  </div>
  ) : (
  <div className="space-y-2 max-h-60 overflow-y-auto">
- {existingPlaylists.map((playlist: any) => (
+ {existingPlaylists.map((playlist) => (
  <label
  key={playlist.id}
 // FIXED:  htmlFor={`playlist-${playlist.id}`}

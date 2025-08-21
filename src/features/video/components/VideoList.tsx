@@ -47,12 +47,12 @@ const VideoList: React.FC<VideoListProps> = ({
  if (layout === 'list') {
  return (
  <div className='space-y-4'>
- {videos.map((video: any) => (
+ {videos.map((video) => (
  <VideoCard
  key={video.id}
  video={video}
  variant={variant} />
-// FIXED:  onClick={(e: any) => onVideoClick(e)}
+// FIXED:  onClick={(e) => onVideoClick(e)}
  />
  ))}
 // FIXED:  </div>
@@ -68,12 +68,12 @@ const VideoList: React.FC<VideoListProps> = ({
  : 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
  }`} />
  >
- {videos.map((video: any) => (
+ {videos.map((video) => (
  <VideoCard
  key={video.id}
  video={video}
  variant={variant} />
-// FIXED:  onClick={(e: any) => onVideoClick(e)}
+// FIXED:  onClick={(e) => onVideoClick(e)}
  />
  ))}
 // FIXED:  </div>

@@ -74,7 +74,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  return;
  }
 
- const checkAutoShow: any = () => {
+ const checkAutoShow = () => {
  // Don't show if recently dismissed (within 24 hours)
  const dismissedAt = (localStorage as any).getItem('pwa-banner-dismissed');
  if (dismissedAt as any) {
@@ -140,7 +140,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  } else {
  setState(prev => ({ ...prev as any, isAnimating: false }));
  }
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to install PWA',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -157,7 +157,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  try {
  await pwaUpdates.installUpdate();
  onUpdateInstall?.();
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to install update',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -178,7 +178,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  ...prev as any,
  isVisible: false,
  isAnimating: false }));
- } catch (error: any) {
+ } catch (error) {
  setState(prev => ({ ...prev as any, isAnimating: false }));
  }
  }, [notifications.requestPermission]);
@@ -220,7 +220,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  floating: 'p-4 shadow-2xl rounded-full' };
 
  // Content based on current view
- const renderContent: any = () => {
+ const renderContent = () => {
  switch (state.currentView) {
  case 'install':
  return (
@@ -256,7 +256,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
 // FIXED:  </div>
  <div className='flex gap-2 ml-4'>
  <button />
-// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={state.isAnimating}
 // FIXED:  className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
 // FIXED:  style={{ backgroundColor: theme.primaryColor }
@@ -264,7 +264,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  {state.isAnimating ? 'Installing...' : 'Install'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
  >
  ✕
@@ -300,7 +300,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
 // FIXED:  </div>
  <div className='flex gap-2 ml-4'>
  <button />
-// FIXED:  onClick={(e: any) => handleUpdate(e)}
+// FIXED:  onClick={(e) => handleUpdate(e)}
 // FIXED:  disabled={state.isAnimating}
 // FIXED:  className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
 // FIXED:  style={{ backgroundColor: theme.primaryColor }
@@ -336,7 +336,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
 // FIXED:  </div>
  <div className='flex gap-2 ml-4'>
  <button />
-// FIXED:  onClick={(e: any) => handleNotificationPermission(e)}
+// FIXED:  onClick={(e) => handleNotificationPermission(e)}
 // FIXED:  disabled={state.isAnimating}
 // FIXED:  className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
 // FIXED:  style={{ backgroundColor: theme.primaryColor }
@@ -344,7 +344,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  {state.isAnimating ? 'Requesting...' : 'Enable'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
  >
  ✕
@@ -388,7 +388,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
  Retry
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
  >
  ✕

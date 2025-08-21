@@ -79,13 +79,13 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
 
  const mockData = generateMockAnalyticsData(videoId);
  setAnalyticsData(mockData);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error loading analytics data:', error);
  } finally {
  setIsLoading(false);
  };
 
- const generateMockAnalyticsData: any = (videoId: any): AnalyticsData => {
+ const generateMockAnalyticsData = (videoId): AnalyticsData => {
  const baseViews = Math.floor(Math.random() * 1000000) + 10000;
  const likes = Math.floor(baseViews * (0.02 + Math.random() * 0.08));
  const dislikes = Math.floor(likes * (0.05 + Math.random() * 0.15));
@@ -152,7 +152,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
  shareRate: (shares / baseViews) * 100,
  subscribeRate: Math.random() * 2 } };
 
- const generateRetentionData: any = (): number[] => {
+ const generateRetentionData = (): number[] => {
  const data = [];
  let retention = 100;
  for (let i = 0; i < 100; i += 5) {
@@ -162,7 +162,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
  return data;
  };
 
- const formatNumber: any = (num: any): string => {
+ const formatNumber = (num): string => {
  if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -172,7 +172,7 @@ return `${(num / 1000).toFixed(1)}K`;
  return num.toString();
  };
 
- const formatDuration: any = (seconds: any): string => {
+ const formatDuration = (seconds): string => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  const secs = Math.floor(seconds % 60);
@@ -183,7 +183,7 @@ return `${(num / 1000).toFixed(1)}K`;
  return `${minutes}:${secs.toString().padStart(2, '0')}`;
  };
 
- const formatCurrency: any = (amount: any): string => {
+ const formatCurrency = (amount): string => {
  return new Intl.NumberFormat('en-US', {
  style: 'currency',
  currency: 'USD',
@@ -214,7 +214,7 @@ return `${(num / 1000).toFixed(1)}K`;
  );
  }
 
- const renderOverviewTab: any = () => (
+ const renderOverviewTab = () => (
  <div className="space-y-6">
  {/* Key Metrics */}
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -272,7 +272,7 @@ return `${(num / 1000).toFixed(1)}K`;
  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">Audience Retention</h3>
  <div className="h-64 flex items-end space-x-1">
  {analyticsData.retention.map((value: string | number,
- index: number) => (
+ index) => (
  <div
  key={index}
 // FIXED:  className="bg-blue-500 rounded-t flex-1 transition-all hover:bg-blue-600"
@@ -315,7 +315,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
  );
 
- const renderAudienceTab: any = () => (
+ const renderAudienceTab = () => (
  <div className="space-y-6">
  {/* Demographics */}
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -401,7 +401,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
  );
 
- const renderRevenueTab: any = () => (
+ const renderRevenueTab = () => (
  <div className="space-y-6">
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
  <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
@@ -432,7 +432,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
  );
 
- const renderEngagementTab: any = () => (
+ const renderEngagementTab = () => (
  <div className="space-y-6">
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
  <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">

@@ -13,7 +13,7 @@ const VideoMetadata: React.FC<VideoMetadataProps> = ({
  video,
  expanded = false,
  onToggleExpanded }) => {
- const formatDate: any = (dateString: any) => {
+ const formatDate = (dateString) => {
  if (!dateString) {
 return 'N/A';
 }
@@ -26,7 +26,7 @@ return 'N/A';
  minute: '2-digit' });
  };
 
- const formatNumber: any = (num: any) => {
+ const formatNumber = (num) => {
  if (num >= 1000000000) {
 return `${(num / 1000000000).toFixed(1)}B`;
 }
@@ -39,7 +39,7 @@ return `${(num / 1000).toFixed(1)}K`;
  return num.toString();
  };
 
- const getVideoQuality: any = () => {
+ const getVideoQuality = () => {
  const definition = video.definition || video.contentDetails?.definition;
  switch (definition as any) {
  case 'hd': return 'HD (720p+)';
@@ -122,7 +122,7 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </h3>
  {detailedMetadata.some(item => item.condition) && onToggleExpanded && (
  <button />
-// FIXED:  onClick={(e: any) => onToggleExpanded(e)}
+// FIXED:  onClick={(e) => onToggleExpanded(e)}
 // FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
  >
  {expanded ? 'Show Less' : 'Show More'}
@@ -167,8 +167,8 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="mb-4">
  <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">Tags</h5>
  <div className="flex flex-wrap gap-2">
- {video.tags.slice(0, 10).map((tag: string,
- index: number) => (
+ {video.tags.slice(0, 10).map((tag,
+ index) => (
  <span
  key={index}
 // FIXED:  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full" />

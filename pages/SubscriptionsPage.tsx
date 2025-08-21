@@ -50,13 +50,13 @@ return [];
 
  switch (activeTab as any) {
  case 'today':
- filtered = filtered.filter((video: any) => {
+ filtered = filtered.filter((video) => {
  const uploadDate = new Date(video.uploadedAt);
  return uploadDate >= today;
  });
  break;
  case 'week':
- filtered = filtered.filter((video: any) => {
+ filtered = filtered.filter((video) => {
  const uploadDate = new Date(video.uploadedAt);
  return uploadDate >= weekAgo;
  });
@@ -98,7 +98,7 @@ return [];
  // Calculate new videos today (mock calculation)
  const today = new Date();
  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
- const newVideosToday = subscribedVideos?.filter((video: any) => {
+ const newVideosToday = subscribedVideos?.filter((video) => {
  const uploadDate = new Date(video.uploadedAt);
  return uploadDate >= todayStart;
  }).length || 0;
@@ -208,7 +208,7 @@ return [];
 // FIXED:  </div>
  ) : (
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
- {subscribedChannels.map((channel: any) => (
+ {subscribedChannels.map((channel) => (
  <div
  key={channel.id}
 // FIXED:  className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700" />
@@ -320,7 +320,7 @@ return [];
 // FIXED:  </div>
  ) : (
  <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
- {filteredVideos.map((video: any) => (
+ {filteredVideos.map((video) => (
  <SubscriptionVideoCard
  key={`${activeTab}-${video.id}`}
  video={video}

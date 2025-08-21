@@ -21,8 +21,8 @@ class PerformanceMonitor {
  private setupObservers() {
  // Observe paint metrics
  try {
- const paintObserver = new PerformanceObserver((list: any) => {
- list.getEntries().forEach((_entry: any) => {
+ const paintObserver = new PerformanceObserver((list) => {
+ list.getEntries().forEach((_entry) => {
  });
  });
  paintObserver.observe({ entryTypes: ['paint'] });
@@ -33,8 +33,8 @@ class PerformanceMonitor {
 
  // Observe navigation metrics
  try {
- const navigationObserver = new PerformanceObserver((list: any) => {
- list.getEntries().forEach((_entry: any) => {
+ const navigationObserver = new PerformanceObserver((list) => {
+ list.getEntries().forEach((_entry) => {
  // Performance monitoring disabled
  // const navigation = _entry as PerformanceNavigationTiming;
  // (console as any).log('Navigation timing:', navigation);
@@ -45,7 +45,7 @@ class PerformanceMonitor {
  } catch (e) {
  // PerformanceObserver not supported
  }
- startMeasure(name: any, metadata?: Record<string, any>): void {
+ startMeasure(name, metadata?: Record<string, any>): void {
  if (!this.isEnabled) {
 return;
 }
@@ -60,11 +60,11 @@ return;
  if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function') {
  performance.mark(`${name}-start`);
  }
- hasMetric(name: any): boolean {
+ hasMetric(name): boolean {
  return this.metrics.has(name);
  }
 
- endMeasure(name: any): number | null {
+ endMeasure(name): number | null {
  if (!this.isEnabled) {
 return null;
 }
@@ -89,7 +89,7 @@ return null;
  }
 
  // Log slow operations with different thresholds for different operation types
- const getThreshold: any = (operationName: any): number => {
+ const getThreshold = (operationName): number => {
  if (operationName.startsWith('image-load')) {
 return 2000;
 } // 2s for images
@@ -117,7 +117,7 @@ return 1500;
  performance.clearMarks();
  performance.clearMeasures();
  }
- getAverageTime(name: any): number | null {
+ getAverageTime(name): number | null {
  const metrics = this.getMetrics().filter((m) => m.name === name);
  if (metrics.length === 0) {
 return null;
@@ -140,7 +140,7 @@ return;
  (console as any).group('📊 Performance Summary');
 
  // Group by name and calculate averages
- const grouped = metrics.reduce((acc: any, metric: any) => {
+ const grouped = metrics.reduce((acc, metric) => {
  if (metric.name && !acc[metric.name]) {
  acc[metric.name] = [];
  }
@@ -168,19 +168,19 @@ return;
 export const performanceMonitor = new PerformanceMonitor();
 
 // React Hook for component performance monitoring
-export function usePerformanceMonitor(componentName: any): any {
- const startRender: any = () => {
+export function usePerformanceMonitor(componentName): any {
+ const startRender = () => {
  performanceMonitor.startMeasure(`${componentName}-render`);
  };
 
- const endRender: any = () => {
+ const endRender = () => {
  const metricName = `${componentName}-render`;
  return performanceMonitor.hasMetric(metricName)
  ? performanceMonitor.endMeasure(metricName)
  : null;
  };
 
- const measureAsync = async <T>(operationName: any, operation: () => Promise<T>): Promise<T> => {
+ const measureAsync = async <T>(operationName, operation: () => Promise<T>): Promise<T> => {
  const fullName = `${componentName}-${operationName}`;
  performanceMonitor.startMeasure(fullName);
  try {
@@ -189,14 +189,14 @@ export function usePerformanceMonitor(componentName: any): any {
  performanceMonitor.endMeasure(fullName);
  }
  return result;
- } catch (error: any) {
+ } catch (error) {
  if (performanceMonitor.hasMetric(fullName)) {
  performanceMonitor.endMeasure(fullName);
  }
  throw error;
  };
 
- const measureSync = <T>(operationName: any, operation: () => T): T => {
+ const measureSync = <T>(operationName, operation: () => T): T => {
  const fullName = `${componentName}-${operationName}`;
  performanceMonitor.startMeasure(fullName);
  try {
@@ -205,7 +205,7 @@ export function usePerformanceMonitor(componentName: any): any {
  performanceMonitor.endMeasure(fullName);
  }
  return result;
- } catch (error: any) {
+ } catch (error) {
  if (performanceMonitor.hasMetric(fullName)) {
  performanceMonitor.endMeasure(fullName);
  }
@@ -225,7 +225,7 @@ export function withPerformanceMonitoring<P extends object>(,
  componentName?: string) {
  const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
- const MonitoredComponent = React.forwardRef<any, P>((props: any, ref: any) => {
+ const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {
  const { startRender, endRender } = usePerformanceMonitor(displayName);
 
  useEffect(() => {
@@ -244,8 +244,8 @@ export function withPerformanceMonitoring<P extends object>(,
 }
 
 // Utility functions
-export const measureRenderTime: any = (componentName: any) => {
- return (_target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
+export const measureRenderTime = (componentName) => {
+ return (_target, propertyKey, descriptor: PropertyDescriptor) => {
  const originalMethod = descriptor.value;
 
  descriptor.value = function (...args) {
@@ -263,7 +263,7 @@ export const measureRenderTime: any = (componentName: any) => {
 };
 
 // Bundle size analyzer
-export const analyzeBundleSize: any = () => {
+export const analyzeBundleSize = () => {
  if (typeof window === 'undefined') {
 return;
 }
@@ -273,13 +273,13 @@ return;
 
  (console as any).group('📦 Bundle Analysis');
  // Estimate bundle sizes (this is approximate)
- scripts.forEach((script: any) => {
+ scripts.forEach((script) => {
  if (script.src && !script.src.includes('chrome-extension')) {
  // Placeholder for size analysis if needed
  }
  });
 
- styles.forEach((style: any) => {
+ styles.forEach((style) => {
  if (style.href && !style.href.includes('chrome-extension')) {
  // Placeholder for size analysis if needed
  }
@@ -289,13 +289,13 @@ return;
 };
 
 // Memory usage monitoring
-export const monitorMemoryUsage: any = () => {
+export const monitorMemoryUsage = () => {
  if (typeof window === 'undefined' || !(window.performance as any)?.memory) {
  (console as any).warn('Memory monitoring not supported in this browser');
  return;
  }
 
- // const _memory: any = (window.performance as any).memory;
+ // const _memory = (window.performance as any).memory;
 
  };
 

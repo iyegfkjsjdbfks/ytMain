@@ -46,7 +46,7 @@ interface UseInstallPromptReturn {
  * Enhanced hook for managing PWA installation prompts
  * Separated from main usePWA hook for better separation of concerns
  */
-export const useInstallPrompt: any = (): UseInstallPromptReturn => {
+export const useInstallPrompt = (): UseInstallPromptReturn => {
  const [state, setState] = useState<InstallPromptState>({
  isInstallable: false,
  isInstalled: PWAUtils.isInstalled(),
@@ -122,7 +122,7 @@ export const useInstallPrompt: any = (): UseInstallPromptReturn => {
  deferredPrompt: null }));
 
  return false;
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  'useInstallPrompt',
  'Failed to install PWA',
@@ -171,7 +171,7 @@ export const useInstallPrompt: any = (): UseInstallPromptReturn => {
  // Set up event listeners
  useEffect(() => {
  // Handle beforeinstallprompt event
- const handleBeforeInstallPrompt: any = (event: Event) => {
+ const handleBeforeInstallPrompt = (event: Event) => {
  event.preventDefault();
  PWAEvents.handleBeforeInstallPrompt(event);
 
@@ -194,7 +194,7 @@ export const useInstallPrompt: any = (): UseInstallPromptReturn => {
  };
 
  // Handle app installed event
- const handleAppInstalled: any = () => {
+ const handleAppInstalled = () => {
  PWAEvents.handleAppInstalled();
 
  setState(prev => ({

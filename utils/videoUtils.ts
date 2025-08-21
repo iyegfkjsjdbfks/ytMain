@@ -18,7 +18,7 @@ return formatViewCount(video.viewCount);
  return 0;
 }
 
-export function formatViewCount(count: any): string {
+export function formatViewCount(count): string {
  if (count >= 1000000) {
  return `${(count / 1000000).toFixed(1)}M`;
  }
@@ -71,7 +71,7 @@ export function getVideoUploadDate(video: Video): string {
  return video.uploadedAt || '';
 }
 
-export function isVideoMonetized(video: any): boolean {
+export function isVideoMonetized(video): boolean {
  return !!(video.monetization?.enabled);
 }
 

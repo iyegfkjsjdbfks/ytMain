@@ -14,16 +14,11 @@ const TrendingPage: React.FC = () => {
  const { data: trendingVideos, loading, error } = useTrendingVideos(activeCategory);
 
  const categories = [
- { id: 'all' as const,
- label: 'All', icon: '🔥' },
- { id: 'music' as const,
- label: 'Music', icon: '🎵' },
- { id: 'gaming' as const,
- label: 'Gaming', icon: '🎮' },
- { id: 'news' as const,
- label: 'News', icon: '📰' },
- { id: 'movies' as const,
- label: 'Movies', icon: '🎬' }];
+ { id: 'all' as const label: 'All', icon: '🔥' },
+ { id: 'music' as const label: 'Music', icon: '🎵' },
+ { id: 'gaming' as const label: 'Gaming', icon: '🎮' },
+ { id: 'news' as const label: 'News', icon: '📰' },
+ { id: 'movies' as const label: 'Movies', icon: '🎬' }];
 
  return (
  <PageLayout

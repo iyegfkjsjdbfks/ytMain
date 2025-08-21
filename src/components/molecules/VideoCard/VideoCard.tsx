@@ -12,7 +12,7 @@ import getTimeAgo, { formatNumber } from '@/lib/utils';
 import type { VideoCardProps } from '@/types';
 
 // Simple image component since we're not using Next.js
-const Image: any = ({
+const Image = ({
  src,
  alt,
  width,
@@ -36,10 +36,10 @@ const Image: any = ({
 
 export interface VideoCardProps
  extends Omit<VideoCardPropsBase, 'onMoreClick'> {
- onMoreClick: (videoId: any) => void
+ onMoreClick: (videoId) => void
 }
 
-export const VideoCard: any = ({
+export const VideoCard = ({
  id,
  title,
  channelName,
@@ -140,13 +140,13 @@ export const VideoCard: any = ({
 };
 
 // Helper function to format duration (moved from utils.ts for self-containment)
-function formatDuration(seconds: any): string {
+function formatDuration(seconds): string {
  const h = Math.floor(seconds / 3600);
  const m = Math.floor((seconds % 3600) / 60);
  const s = Math.floor(seconds % 60);
 
  return [h, m, s]
  .filter((v, i) => v > 0 || i > 0)
- .map((v: any) => v.toString().padStart(2, '0'))
+ .map((v) => v.toString().padStart(2, '0'))
  .join(':');
 }

@@ -19,12 +19,12 @@ export interface PlaybackSpeed {
 interface VideoQualitySelectorProps {
  qualities: VideoQuality;
  currentQuality: string;
- onQualityChange: (quality: any) => void;
+ onQualityChange: (quality) => void;
  playbackSpeeds?: PlaybackSpeed;
  currentSpeed?: number;
- onSpeedChange?: (speed: any) => void;
+ onSpeedChange?: (speed) => void;
  volume?: number;
- onVolumeChange?: (volume: any) => void;
+ onVolumeChange?: (volume) => void;
  isPlaying?: boolean;
  onPlayPause?: () => void;
  isFullscreen?: boolean;
@@ -73,7 +73,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  const volumeRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
  setShowSettings(false);
  setActivePanel('main');
@@ -86,23 +86,23 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
  }, []);
 
- const getCurrentQualityLabel: any = () => {
- const quality = qualities.find((q: any) => q.value === currentQuality);
+ const getCurrentQualityLabel = () => {
+ const quality = qualities.find((q) => q.value === currentQuality);
  return quality?.label || 'Auto';
  };
 
- const getCurrentSpeedLabel: any = () => {
- const speed = playbackSpeeds.find((s: any) => s.value === currentSpeed);
+ const getCurrentSpeedLabel = () => {
+ const speed = playbackSpeeds.find((s) => s.value === currentSpeed);
  return speed?.label || 'Normal';
  };
 
- const handleQualitySelect: any = (qualityValue: any) => {
+ const handleQualitySelect = (qualityValue) => {
  onQualityChange(qualityValue);
  setShowSettings(false);
  setActivePanel('main');
  };
 
- const handleSpeedSelect: any = (speedValue: any) => {
+ const handleSpeedSelect = (speedValue) => {
  onSpeedChange?.(speedValue);
  setShowSettings(false);
  setActivePanel('main');
@@ -113,7 +113,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  {/* Play/Pause Button */}
  {onPlayPause && (
  <button />
-// FIXED:  onClick={(e: any) => onPlayPause(e)}
+// FIXED:  onClick={(e) => onPlayPause(e)}
 // FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
 // FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
@@ -173,8 +173,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 // FIXED:  value={volume} />
 // FIXED:  onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
 // FIXED:  className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
-// FIXED:  style={{ writingMode: 'vertical-lr' as const,
- WebkitAppearance: 'slider-vertical' }
+// FIXED:  style={{ writingMode: 'vertical-lr' as const WebkitAppearance: 'slider-vertical' }
  />
 // FIXED:  </div>
 // FIXED:  </div>
@@ -187,7 +186,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  {/* Picture-in-Picture */}
  {onPictureInPictureToggle && (
  <button />
-// FIXED:  onClick={(e: any) => onPictureInPictureToggle(e)}
+// FIXED:  onClick={(e) => onPictureInPictureToggle(e)}
 // FIXED:  className={`p-2 text-white hover:bg-white/20 rounded-full transition-colors ${
  isPictureInPicture ? 'bg-white/20' : ''
  }`}
@@ -271,7 +270,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 // FIXED:  </button>
 
  {/* Quality Options */}
- {qualities.map((quality: any) => (
+ {qualities.map((quality) => (
  <button
  key={quality.value} />
 // FIXED:  onClick={() => handleQualitySelect(quality.value)}
@@ -298,7 +297,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 // FIXED:  </button>
 
  {/* Speed Options */}
- {playbackSpeeds.map((speed: any) => (
+ {playbackSpeeds.map((speed) => (
  <button
  key={speed.value} />
 // FIXED:  onClick={() => handleSpeedSelect(speed.value)}
@@ -317,7 +316,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  {/* Fullscreen */}
  {onFullscreenToggle && (
  <button />
-// FIXED:  onClick={(e: any) => onFullscreenToggle(e)}
+// FIXED:  onClick={(e) => onFullscreenToggle(e)}
 // FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
 // FIXED:  aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
  >

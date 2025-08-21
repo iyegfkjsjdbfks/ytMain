@@ -42,7 +42,7 @@ const VideoGridItem = memo<{
  <div style={style} className='p-2'>
  <div
 // FIXED:  className='bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer' />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  >
  <div className='aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden'>
  <img

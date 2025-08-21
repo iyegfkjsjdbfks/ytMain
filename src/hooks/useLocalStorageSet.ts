@@ -10,7 +10,7 @@ import { useState, useCallback, useMemo } from 'react';
  * @returns [set, addItem, removeItem, toggleItem, clearSet, hasItem]
  */
 export function useLocalStorageSet<T>(,
- key: string,
+ key,
  initialValue: Set<T> = new Set()
 ): [
  Set<T>
@@ -24,7 +24,7 @@ export function useLocalStorageSet<T>(,
  return Array.isArray(parsed) ? parsed : Array.from(initialValue);
  }
  return Array.from(initialValue);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error reading localStorage key "${key}":`, error);
  return Array.from(initialValue);
  }
@@ -39,7 +39,7 @@ export function useLocalStorageSet<T>(,
  try {
  (localStorage as any).setItem(key, JSON.stringify(newItems));
  setItems(newItems);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error setting localStorage key "${key}":`, error);
  }
  },
@@ -65,7 +65,7 @@ export function useLocalStorageSet<T>(,
  const removeItem = useCallback(
  (item: T) => {
  setItems(prev => {
- const newItems = prev.filter((i: any) => i !== item);
+ const newItems = prev.filter((i) => i !== item);
  if (newItems.length !== prev.length) {
  updateLocalStorage(newItems);
  return newItems;
@@ -81,7 +81,7 @@ export function useLocalStorageSet<T>(,
  (item: T) => {
  setItems(prev => {
  const newItems = prev.includes(item)
- ? prev.filter((i: any) => i !== item)
+ ? prev.filter((i) => i !== item)
  : [...prev as any, item];
  updateLocalStorage(newItems);
  return newItems;
@@ -111,7 +111,7 @@ export function useLocalStorageSet<T>(,
  * Similar to useState but for Sets stored in localStorage
  */
 export function useLocalStorageSetState<T>(,
- key: string,
+ key,
  initialValue: Set<T> = new Set()
 ): [Set<T> (updater: (prev: Set<T>) => Set<T>) => void] {
  const [items, setItems] = useState<T[]>(() => {
@@ -122,7 +122,7 @@ export function useLocalStorageSetState<T>(,
  return Array.isArray(parsed) ? parsed : Array.from(initialValue);
  }
  return Array.from(initialValue);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error reading localStorage key "${key}":`, error);
  return Array.from(initialValue);
  }
@@ -139,7 +139,7 @@ export function useLocalStorageSetState<T>(,
 
  try {
  (localStorage as any).setItem(key, JSON.stringify(newItems));
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error setting localStorage key "${key}":`, error);
  }
 

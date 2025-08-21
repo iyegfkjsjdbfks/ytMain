@@ -211,7 +211,7 @@ export class PWAUtils {
 
  return { used, available, percentage };
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to get storage usage:', error);
  }
 
@@ -225,12 +225,11 @@ export class PWAUtils {
  try {
  if ('caches' in window) {
  const cacheNames = await caches.keys();
- await Promise.all(
- cacheNames.map((cacheName: any) => caches.delete(cacheName))
+ await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName))
  );
  return true;
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to clear cache:', error);
  }
 
@@ -272,7 +271,7 @@ export class PWAUtils {
  /**
  * Emit PWA event
  */
- static emitEvent(eventName: any, detail: any?): void {
+ static emitEvent(eventName, detail?): void {
  const event = new CustomEvent(eventName, { detail });
  window.dispatchEvent(event);
  }
@@ -280,14 +279,14 @@ export class PWAUtils {
  /**
  * Listen to PWA events
  */
- static addEventListener(eventName: any, handler: EventListener): void {
+ static addEventListener(eventName, handler: EventListener): void {
  window.addEventListener(eventName, handler);
  }
 
  /**
  * Remove PWA event listener
  */
- static removeEventListener(eventName: any, handler: EventListener): void {
+ static removeEventListener(eventName, handler: EventListener): void {
  window.removeEventListener(eventName, handler);
  }
 // Export types

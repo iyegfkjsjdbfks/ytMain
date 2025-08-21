@@ -65,7 +65,7 @@ export async function conditionalYouTubeApiCall<T>(,
 
  try {
  return await apiCall();
- } catch (error: any) {
+ } catch (error) {
  logger.error('YouTube Data API call failed:', error);
  return fallbackValue;
  }
@@ -86,7 +86,7 @@ export function conditionalYouTubeOperation<T>(,
 
  try {
  return operation();
- } catch (error: any) {
+ } catch (error) {
  logger.error('YouTube Data API operation failed:', error);
  return fallbackValue;
  }

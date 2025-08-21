@@ -32,7 +32,7 @@ const YOUTUBE_URL_PATTERNS = [
 ];
 
 // Type guard to detect YouTube videos
-const isYouTubeVideo: any = (video: Video | null): boolean => {
+const isYouTubeVideo = (video: Video | null): boolean => {
  if (!video) {
  return false;
  }
@@ -58,7 +58,7 @@ const isYouTubeVideo: any = (video: Video | null): boolean => {
  return false;
 };
 
-export const useWatchPage: any = () => {
+export const useWatchPage = () => {
  const { videoId: pathVideoId } = useParams<{ videoId: string }>();
  const [searchParams] = useSearchParams();
  const navigate = useNavigate();
@@ -156,7 +156,7 @@ export const useWatchPage: any = () => {
  createdAt: unifiedVideo.publishedAt,
  updatedAt: unifiedVideo.publishedAt };
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(
  'Failed to load from unified service, trying real video service:',
  error
@@ -225,7 +225,7 @@ export const useWatchPage: any = () => {
  c => !('parentId' in c) || !c.parentId
  );
  // Ensure comments have all required properties
- const commentsWithDefaults = topLevelComments.map((comment: any) => ({
+ const commentsWithDefaults = topLevelComments.map((comment) => ({
  ...comment as any,
  isLikedByCurrentUser:
  'isLikedByCurrentUser' in comment
@@ -267,10 +267,10 @@ export const useWatchPage: any = () => {
  // Load related videos
  const allVideos = await getVideos();
  const related = allVideos
- .filter((v: any) => v.id !== videoId && v.category === foundVideo.category)
+ .filter((v) => v.id !== videoId && v.category === foundVideo.category)
  .slice(0, 20);
  setAllRelatedVideos(related);
-  } catch (error: any) {
+  } catch (error) {
  (console as any).error('Error loading video data:', error);
  } finally {
  setLoading(false);
@@ -280,35 +280,35 @@ export const useWatchPage: any = () => {
  }, [videoId]);
 
  // Video interaction handlers
- const handleLike: any = () => {
+ const handleLike = () => {
  setLiked(!liked);
  if (disliked as any) {
  setDisliked(false);
  };
 
- const handleDislike: any = () => {
+ const handleDislike = () => {
  setDisliked(!disliked);
  if (liked as any) {
  setLiked(false);
  };
 
- const handleSubscribe: any = () => {
+ const handleSubscribe = () => {
  setIsSubscribed(!isSubscribed);
  };
 
- const handleShare: any = () => {
+ const handleShare = () => {
  // Share logic handled in VideoActions component
  };
 
- const openSaveModal: any = () => {
+ const openSaveModal = () => {
  setIsSaveModalOpen(true);
  };
 
- const closeSaveModal: any = () => {
+ const closeSaveModal = () => {
  setIsSaveModalOpen(false);
  };
 
- const handleSaveToWatchLater: any = () => {
+ const handleSaveToWatchLater = () => {
  if (video as any) {
  if (isInWatchLater as any) {
  // Remove from watch later - this would need to be imported from context
@@ -321,7 +321,7 @@ export const useWatchPage: any = () => {
  }
  };
 
- const handleSaveToPlaylist = async (playlistId: any): Promise<any> => {
+ const handleSaveToPlaylist = async (playlistId): Promise<any> => {
  // Simulate API call to save video to playlist
  await new Promise(resolve => setTimeout((resolve) as any, 300));
 
@@ -338,7 +338,7 @@ export const useWatchPage: any = () => {
  // Note: Modal will handle closing itself via the executeSave wrapper
  };
 
- const handleCreatePlaylist = async (name: any, description?: string): Promise<any> => {
+ const handleCreatePlaylist = async (name, description?: string): Promise<any> => {
  // Simulate API call to create new playlist
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
 
@@ -348,7 +348,7 @@ export const useWatchPage: any = () => {
  description: description || '',
  videoCount: 0,
  totalDuration: '0:00:00',
- visibility: 'private' as const, ownerId: 'user-1',
+ visibility: 'private' as const ownerId: 'user-1',
  ownerName: 'You',
  videos: [],
  tags: [],
@@ -367,7 +367,7 @@ export const useWatchPage: any = () => {
  description: 'Videos to watch later',
  videoCount: 5,
  totalDuration: '2:30:45',
- visibility: 'private' as const, ownerId: 'user-1',
+ visibility: 'private' as const ownerId: 'user-1',
  ownerName: 'You',
  videos: [],
  tags: [],
@@ -380,7 +380,7 @@ export const useWatchPage: any = () => {
  description: 'My favorite videos',
  videoCount: 12,
  totalDuration: '5:45:30',
- visibility: 'private' as const, ownerId: 'user-1',
+ visibility: 'private' as const ownerId: 'user-1',
  ownerName: 'You',
  videos: [],
  tags: [],
@@ -389,7 +389,7 @@ export const useWatchPage: any = () => {
  updatedAt: '2024-01-01T00:00:00Z' }];
 
  // Description handlers
- const handleToggleDescription: any = () => {
+ const handleToggleDescription = () => {
  setShowFullDescription(!showFullDescription);
  };
 
@@ -409,14 +409,14 @@ export const useWatchPage: any = () => {
  const mockSummary = `This video discusses ${video.title.toLowerCase()}. The content covers key points about the topic, providing viewers with valuable insights and information. The creator explains the main concepts in an accessible way, making it suitable for both beginners and those with some background knowledge.`;
 
  setSummary(mockSummary);
- } catch (error: any) {
+ } catch (error) {
  setSummaryError('Failed to generate summary. Please try again later.');
  } finally {
  setIsSummarizing(false);
  };
 
  // Comment handlers
- const handleMainCommentSubmitCallback: any = (commentText: any) => {
+ const handleMainCommentSubmitCallback = (commentText) => {
  if (!commentText.trim()) {
  return;
  }
@@ -438,7 +438,7 @@ export const useWatchPage: any = () => {
  setCommentCount(prev => prev + 1);
  };
 
- const handleReplySubmit: any = (parentId: any) => {
+ const handleReplySubmit = (parentId) => {
  if (!currentReplyText.trim()) {
  return;
  }
@@ -461,7 +461,7 @@ export const useWatchPage: any = () => {
  replyTo: parentComment.userName };
 
  setComments(prevComments =>
- prevComments.map((c: any) => {
+ prevComments.map((c) => {
  if (c.id === parentId) {
  return {
  ...c as any,
@@ -475,13 +475,13 @@ export const useWatchPage: any = () => {
  setReplyingToCommentId(null);
  };
 
- const handleEditSave: any = (commentId: any, newText: any, parentId?: string) => {
+ const handleEditSave = (commentId, newText, parentId?: string) => {
  if (!newText.trim()) {
  return;
  }
 
- const updateCommentState: any = (prevComments: Comment): Comment[] =>
- prevComments.map((comment: any) => {
+ const updateCommentState = (prevComments: Comment): Comment[] =>
+ prevComments.map((comment) => {
  if (comment.id === commentId && comment.parentId === parentId) {
  return {
  ...comment as any,
@@ -499,7 +499,7 @@ export const useWatchPage: any = () => {
  setEditingComment(null);
  };
 
- const handleDeleteComment: any = (commentId: any, parentId?: string) => {
+ const handleDeleteComment = (commentId, parentId?: string) => {
  if (
  !window.confirm(
  'Are you sure you want to delete this comment? This action cannot be undone.'
@@ -508,12 +508,12 @@ export const useWatchPage: any = () => {
  return;
  }
 
- const deleteCommentFromList: any = (,
+ const deleteCommentFromList = (,
  list: Comment,
- idToDelete: any,
+ idToDelete,
  parentOfDeleted?: string
  ): Comment[] => {
- return list.reduce((acc: any, comment: any) => {
+ return list.reduce((acc, comment) => {
  if (comment.id === idToDelete && comment.parentId === parentOfDeleted) {
  if (!parentOfDeleted) {
  setCommentCount(prev => prev - 1 - (comment.replyCount || 0));
@@ -548,13 +548,13 @@ export const useWatchPage: any = () => {
  setActiveCommentMenu(null);
  };
 
- const toggleLikeDislikeForCommentOrReply: any = (,
- id: string,
+ const toggleLikeDislikeForCommentOrReply = (,
+ id,
  parentId: string | undefined,
  action: 'like' | 'dislike'
  ) => {
- const updateList: any = (list: Comment): Comment[] => {
- return list.map((item: any) => {
+ const updateList = (list: Comment): Comment[] => {
+ return list.map((item) => {
  if (item.id === id && item.parentId === parentId) {
  let newLiked = item.isLikedByCurrentUser;
  let newDisliked = item.isDislikedByCurrentUser;

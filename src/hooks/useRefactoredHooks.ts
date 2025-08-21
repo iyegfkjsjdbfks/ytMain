@@ -6,14 +6,14 @@ import { useUnifiedApp } from './useUnifiedApp';
  * Enhanced useLocalStorage hook with error handling and type safety
  */
 export function useLocalStorage<T>(,
- key: string,
+ key,
  initialValue: T
 ): [T(value: T | ((val: T) => T)) => void() => void] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  try {
  const item = window.(localStorage as any).getItem(key);
  return item ? JSON.parse(item) : initialValue;
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
@@ -26,7 +26,7 @@ export function useLocalStorage<T>(,
  value instanceof Function ? value(storedValue) : value;
  setStoredValue(valueToStore);
  window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error setting localStorage key "${key}":`, error);
  }
  },
@@ -37,7 +37,7 @@ export function useLocalStorage<T>(,
  try {
  window.localStorage.removeItem(key);
  setStoredValue(initialValue);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
@@ -48,7 +48,7 @@ export function useLocalStorage<T>(,
 /**
  * Enhanced useDebounce hook with cleanup
  */
-export function useDebounce<T>(value: T, delay: any): T {
+export function useDebounce<T>(value: T, delay): T {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
  useEffect(() => {
@@ -67,7 +67,7 @@ export function useDebounce<T>(value: T, delay: any): T {
 /**
  * Enhanced useThrottle hook
  */
-export function useThrottle<T>(value: T, delay: any): T {
+export function useThrottle<T>(value: T, delay): T {
  const [throttledValue, setThrottledValue] = useState<T>(value);
  const lastExecuted = useRef<number>(Date.now());
 
@@ -94,11 +94,11 @@ export function useThrottle<T>(value: T, delay: any): T {
  */
 export function useToggle(,
  initialValue: boolean = false
-): [boolean() => void(value: any) => void] {
+): [boolean() => void(value) => void] {
  const [value, setValue] = useState(initialValue);
 
  const toggle = useCallback(() => setValue(v => !v), []);
- const setToggle = useCallback((newValue: any) => setValue(newValue), []);
+ const setToggle = useCallback((newValue) => setValue(newValue), []);
 
  return [value, toggle, setToggle];
 }
@@ -113,18 +113,18 @@ export function useArray<T>(initialArray: T[] = []) {
  setArray(arr => [...arr as any, element]);
  }, []);
 
- const filter = useCallback((callback: (item: T, index: number) => boolean) => {
+ const filter = useCallback((callback: (item: T, index) => boolean) => {
  setArray(arr => arr.filter(callback));
  }, []);
 
- const update = useCallback((index: number, newElement: T) => {
+ const update = useCallback((index, newElement: T) => {
  setArray(arr => [
  ...arr.slice(0, index),
  newElement,
  ...arr.slice(index + 1)]);
  }, []);
 
- const remove = useCallback((index: number) => {
+ const remove = useCallback((index) => {
  setArray(arr => [...arr.slice(0, index), ...arr.slice(index + 1)]);
  }, []);
 
@@ -165,7 +165,7 @@ export function useAsync<T, E = string>(,
  setData(response);
  setStatus('success');
  return response;
- } catch (error: any) {
+ } catch (error) {
  setError(error as E);
  setStatus('error');
  throw error;
@@ -230,7 +230,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(,
  const ref = useRef<T>(null);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (ref.current && !ref.current.contains(event.target as Node)) {
  handler();
  };
@@ -247,7 +247,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(,
 /**
  * Enhanced useMediaQuery hook
  */
-export function useMediaQuery(query: any): boolean {
+export function useMediaQuery(query): boolean {
  const [matches, setMatches] = useState(() => {
  if (typeof window !== 'undefined') {
  return window.matchMedia(query).matches;
@@ -257,7 +257,7 @@ export function useMediaQuery(query: any): boolean {
 
  useEffect(() => {
  const mediaQuery = window.matchMedia(query);
- const handler: any = (event: MediaQueryListEvent) => setMatches(event.matches);
+ const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
 
  mediaQuery.addEventListener('change', handler as EventListener);
  return () => mediaQuery.removeEventListener('change', handler as EventListener);

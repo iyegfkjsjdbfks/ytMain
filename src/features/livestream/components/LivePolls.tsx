@@ -35,60 +35,59 @@ const LivePolls: React.FC<LivePollsProps> = ({
  }
 
  try {
- await createPoll(
- newPoll.question,
- newPoll.options.filter((opt: any) => opt.trim())
+ await createPoll(newPoll.question,
+ newPoll.options.filter((opt) => opt.trim())
  );
 
  setNewPoll({ question: '',
  options: ['', ''], duration: 60 });
  setShowCreateForm(false);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to create poll:', error);
  };
 
- const handleVote = async (pollId: any,
- optionId: any): Promise<any> => {
+ const handleVote = async (pollId,
+ optionId): Promise<any> => {
  try {
  await votePoll(pollId, optionId);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to vote:', error);
  };
 
- const handleEndPoll = async (pollId: any): Promise<any> => {
+ const handleEndPoll = async (pollId): Promise<any> => {
  try {
  // TODO: Implement end poll functionality
  logger.debug('End poll:', pollId);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to end poll:', error);
  };
 
- const addOption: any = () => {
+ const addOption = () => {
  if (newPoll.options.length < 5) {
  setNewPoll(prev => ({ ...prev as any, options: [...prev.options, ''] }));
  };
 
- const removeOption: any = (index: number) => {
+ const removeOption = (index) => {
  if (newPoll.options.length > 2) {
  setNewPoll(prev => ({
  ...prev as any,
  options: prev.options.filter((_, i) => i !== index) }));
  };
 
- const updateOption: any = (index: number,
+ const updateOption = (index,
  value: string | number) => {
  setNewPoll(prev => ({
  ...prev as any,
  options: prev.options.map((opt, i) => (i === index ? value : opt)) }));
  };
 
- const formatDuration: any = (seconds: any) => {
+ const formatDuration = (seconds) => {
  const mins = Math.floor(seconds / 60);
  const secs = seconds % 60;
  return `${mins}:${secs.toString().padStart(2, '0')}`;
  };
 
- const getTimeRemaining: any = (poll: LivePoll) => {
+ const getTimeRemaining = (poll: LivePoll) => {
  if (!poll.isActive) {
  return 0;
  }
@@ -170,7 +169,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
 // FIXED:  </div>
  {newPoll.options.length < 5 && (
  <button />
-// FIXED:  onClick={(e: any) => addOption(e)}
+// FIXED:  onClick={(e) => addOption(e)}
 // FIXED:  className='mt-2 text-sm text-blue-600 hover:text-blue-800'
  >
  + Add another option
@@ -202,7 +201,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
 
  <div className='flex space-x-2'>
  <button />
-// FIXED:  onClick={(e: any) => handleCreatePoll(e)}
+// FIXED:  onClick={(e) => handleCreatePoll(e)}
 // FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700'
  >
  Create & Start Poll
@@ -244,7 +243,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
 // FIXED:  </p>
 
  <div className='space-y-2'>
- {activePoll.options.map((option: any) => (
+ {activePoll.options.map((option) => (
  <div key={option.id} className='relative'>
  <button />
 // FIXED:  onClick={() => handleVote(activePoll.id, option.id)}
@@ -279,13 +278,13 @@ const LivePolls: React.FC<LivePollsProps> = ({
  )}
 
  {/* Past Polls */}
- {polls.filter((p: any) => !p.isActive).length > 0 && (
+ {polls.filter((p) => !p.isActive).length > 0 && (
  <div>
  <h3 className='font-medium text-gray-900 mb-3'>Past Polls</h3>
  <div className='space-y-3'>
  {polls
- .filter((p: any) => !p.isActive)
- .map((poll: any) => (
+ .filter((p) => !p.isActive)
+ .map((poll) => (
  <div
  key={poll.id}
 // FIXED:  className='p-3 border border-gray-200 rounded-lg' />
@@ -299,7 +298,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
 // FIXED:  </div>
 
  <div className='space-y-2'>
- {poll.options.map((option: any) => (
+ {poll.options.map((option) => (
  <div
  key={option.id}
 // FIXED:  className='flex items-center justify-between text-sm' />

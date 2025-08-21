@@ -8,7 +8,7 @@ interface StreamQuality {
 }
 
 interface StreamSettingsProps {
- onSettingsChange?: (settings: any) => void
+ onSettingsChange?: (settings) => void
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({
@@ -23,7 +23,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
  enableChat: true,
  enableDonations: false });
 
- const updateSettings: any = (newSettings: Partial<typeof settings>) => {
+ const updateSettings = (newSettings: Partial<typeof settings>) => {
  const updated = { ...settings as any, ...newSettings };
  setSettings(updated);
  onSettingsChange?.(updated);

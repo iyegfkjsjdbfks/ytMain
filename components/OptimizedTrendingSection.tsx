@@ -16,7 +16,7 @@ interface TrendingSectionProps {
 // Memoized VideoCard for better performance
 const MemoizedVideoCard = memo(VideoCard);
 
-const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }: any) => {
+const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }) => {
  const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
  const [loading, setLoading] = useState<boolean>(true);
  const [error, setError] = useState<string | null>(null);
@@ -28,7 +28,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  // Sort by views (convert string to number for sorting)
  const sortedByViews = allVideos
  .filter((video) => !video.isShort) // Exclude shorts from trending
- .sort((a: any, b: any) => {
+ .sort((a, b) => {
  const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
  const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;
  return viewsB - viewsA;
@@ -37,7 +37,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
 
  setTrendingVideos(sortedByViews);
  setError(null);
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Failed to fetch trending videos:', err);
  setError('Could not load trending videos at this time.');
  } finally {
@@ -97,7 +97,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }:
  <div className="text-center py-8">
  <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
  <button />
-// FIXED:  onClick={(e: any) => fetchTrendingVideos(e)}
+// FIXED:  onClick={(e) => fetchTrendingVideos(e)}
 // FIXED:  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
  >
  Try Again

@@ -118,12 +118,12 @@ const WatchPage: React.FC = () => {
  '📺 First few recommendations:',
  unifiedVideos
  .slice(0, 3)
- .map((v: any) => ({ id: v.id,
+ .map((v) => ({ id: v.id,
  title: v.title }))
  );
 
  // Convert UnifiedVideoMetadata to Video format for compatibility
- const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo: any) => ({,
+ const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo) => ({,
  id: unifiedVideo.id,
  createdAt: unifiedVideo.publishedAt,
  updatedAt: unifiedVideo.publishedAt,
@@ -169,9 +169,8 @@ const WatchPage: React.FC = () => {
  projection: 'rectangular' } })
  );
 
- logger.debug(
- '✅ Recommendations converted to Video format:',
- convertedRecommendations.map((v: any) => ({
+ logger.debug('✅ Recommendations converted to Video format:',
+ convertedRecommendations.map((v) => ({
  id: v.id,
  title: v.title,
  views: v.viewCount,
@@ -185,7 +184,7 @@ const WatchPage: React.FC = () => {
  '✅ Recommendations state updated, length:',
  convertedRecommendations.length
  );
- } catch (error: any) {
+ } catch (error) {
  logger.error('❌ Error loading recommendations:', error);
  logger.error('❌ Error details:', error);
 
@@ -239,7 +238,7 @@ const WatchPage: React.FC = () => {
  logger.debug('✅ Fallback video set for testing');
  };
 
- // const _handleSubscribe: any = () => {
+ // const _handleSubscribe = () => {
  // setIsSubscribed(!isSubscribed);
  // };
 
@@ -277,9 +276,8 @@ const WatchPage: React.FC = () => {
  );
  const allVideos = googleSearchVideoStore.getAllVideos();
  logger.debug('📦 Videos in Google Search store:', allVideos.length);
- logger.debug(
- '📦 Store contents:',
- allVideos.map((v: any) => ({ id: v.id,
+ logger.debug('📦 Store contents:',
+ allVideos.map((v) => ({ id: v.id,
  title: v.title }))
  );
 
@@ -326,7 +324,7 @@ const WatchPage: React.FC = () => {
  `❌ Test failed: No video found\nProvider: ${currentProvider}\nYouTube API Blocked: ${isBlocked}`
  );
  }
- } catch (error: any) {
+ } catch (error) {
  logger.error('🧪 Test error:', error);
  alert(`❌ Test error: ${error}`);
  };
@@ -361,7 +359,7 @@ const WatchPage: React.FC = () => {
 
  logger.debug('🔄 Reloading page...');
  window.location.reload();
- } catch (error: any) {
+ } catch (error) {
  logger.error('❌ Cache clear error:', error);
  };
 
@@ -457,7 +455,7 @@ const WatchPage: React.FC = () => {
  '❌ Failed to fetch video from Google Custom Search API'
  );
  }
- } catch (error: any) {
+ } catch (error) {
  logger.error('Manual retry error:', error);
  alert(
  `❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`
@@ -473,14 +471,14 @@ const WatchPage: React.FC = () => {
 
  <div className='space-y-4'>
  <button />
-// FIXED:  onClick={(e: any) => testGoogleSearchFallback(e)}
+// FIXED:  onClick={(e) => testGoogleSearchFallback(e)}
 // FIXED:  className='w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
  >
  🧪 Test Google Custom Search Fallback
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => clearCacheAndRefresh(e)}
+// FIXED:  onClick={(e) => clearCacheAndRefresh(e)}
 // FIXED:  className='w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium'
  >
  🗑️ Clear Cache & Refresh
@@ -548,7 +546,7 @@ const WatchPage: React.FC = () => {
  autoplay={true}
 // FIXED:  className='w-full'
  useYouTube={false} />
- onTimeUpdate={(_currentTime: any, _duration: any) => {
+ onTimeUpdate={(_currentTime, _duration) => {
  // Track watch progress
 
  }
@@ -714,8 +712,8 @@ const WatchPage: React.FC = () => {
  {/* Tags */}{' '}
  {video.tags && video.tags.length > 0 && (
  <div className='mt-4 flex flex-wrap gap-2'>
- {video.tags.map((tag: string,
- index: number) => (
+ {video.tags.map((tag,
+ index) => (
  <span
  key={index}
 // FIXED:  className='px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full' />
@@ -854,7 +852,7 @@ const WatchPage: React.FC = () => {
  Loading recommendations...
 // FIXED:  </div>
  ) : (
- _recommendedVideos.map((recommendedVideo: any) => {
+ _recommendedVideos.map((recommendedVideo) => {
  logger.debug(
  '🎬 Rendering recommendation:',
  recommendedVideo.id,

@@ -49,7 +49,7 @@ const PlaylistDetailPage: React.FC = () => {
  setError('Playlist not found.');
  setPlaylistDetails(null);
  }
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Error fetching playlist details:', err);
  setError('Failed to load playlist details.');
  } finally {
@@ -63,7 +63,7 @@ const PlaylistDetailPage: React.FC = () => {
 
  // Close video action menu on click outside
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (videoMenuRef.current && !videoMenuRef.current.contains(event.target as Node)) {
  setActiveVideoMenuId(null);
  }
@@ -82,13 +82,13 @@ const PlaylistDetailPage: React.FC = () => {
  document.removeEventListener('mousedown', handleClickOutside as EventListener);
  }}, [activeVideoMenuId, isEditModalOpen]);
 
- const handleToggleVideoMenu: any = (videoId: any,
+ const handleToggleVideoMenu = (videoId,
  e: React.MouseEvent) => {
  e.stopPropagation();
  setActiveVideoMenuId(prevId => (prevId=== videoId ? null : videoId));
  };
 
- const handleRemoveVideo = async (videoIdToRemove: any): Promise<any> => {
+ const handleRemoveVideo = async (videoIdToRemove): Promise<any> => {
  if (!playlistId || !playlistDetails) {
 return;
 }
@@ -107,26 +107,26 @@ return null;
 }
  return {
  ...prevDetails as any,
- videos: prevDetails.videos.filter((v: any) => v.id !== videoIdToRemove),
- videoIds: prevDetails.videoIds.filter((id: string) => id !== videoIdToRemove),
+ videos: prevDetails.videos.filter((v) => v.id !== videoIdToRemove),
+ videoIds: prevDetails.videoIds.filter((id) => id !== videoIdToRemove),
  // The count will be derived from videoIds.length, and updatedAt is handled by service
 
  }});
  setActiveVideoMenuId(null); // Close menu
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Failed to remove video from playlist:', err);
  alert('Error removing video. Please try again.'); // Or use a more sophisticated notification
  };
 
- const handleOpenEditModal: any = () => {
+ const handleOpenEditModal = () => {
  if (playlistDetails as any) {
  setEditingPlaylistTitle(playlistDetails.title);
  setEditingPlaylistDescription(playlistDetails.description || '');
  setIsEditModalOpen(true);
  };
 
- const handleSaveChanges = async (title: any,
- description: any): Promise<any> => {
+ const handleSaveChanges = async (title,
+ description): Promise<any> => {
  if (!playlistId || !title.trim()) {
  alert('Playlist title cannot be empty.');
  return;
@@ -141,7 +141,7 @@ return null;
  updatedAt: new Date().toISOString() }) : null);
  setIsEditModalOpen(false);
  }
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Error updating playlist details:', err);
  alert('Error saving changes. Please try again.');
  };
@@ -196,7 +196,7 @@ return null;
  {description && <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 line-clamp-2">{description}</p>}
  <button
 // FIXED:  id="edit-playlist-button" />
-// FIXED:  onClick={(e: any) => handleOpenEditModal(e)}
+// FIXED:  onClick={(e) => handleOpenEditModal(e)}
 // FIXED:  className="mt-2.5 flex items-center text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 font-medium"
  title="Edit playlist title and description"
  >
@@ -225,8 +225,8 @@ return null;
 
  {videos.length > 0 ? (
  <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
- {videos.map((video: any,
- index: number) => (
+ {videos.map((video,
+ index) => (
  <li key={video.id} className="py-3 hover:bg-neutral-50 dark:hover:bg-neutral-900/70 transition-colors rounded-md -mx-2 px-2 group flex items-center justify-between">
  <Link to={`/watch/${video.id}`} className="flex items-center space-x-3 flex-grow min-w-0">
  <div className="w-8 text-right text-xs text-neutral-500 dark:text-neutral-400 pr-1 group-hover:text-neutral-700 dark:group-hover:text-neutral-200">{index + 1}</div>

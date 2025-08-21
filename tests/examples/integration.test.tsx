@@ -14,7 +14,7 @@ import { testUtils, customRender } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
-const VideoPlayer: any = ({ video, onTimeUpdate, onEnded }: any) => (
+const VideoPlayer = ({ video, onTimeUpdate, onEnded }: any) => (
  <div data-testid="video-player">
  <video
 // FIXED:  src={video.url}
@@ -30,12 +30,12 @@ const VideoPlayer: any = ({ video, onTimeUpdate, onEnded }: any) => (
 // FIXED:  </div>
 );
 
-const VideoList: any = ({ videos, onVideoSelect, loading }: any) => (
+const VideoList = ({ videos, onVideoSelect, loading }: any) => (
  <div data-testid="video-list">
  {loading ? (
  <div>Loading videos...</div>
  ) : (
- videos.map((video: any) => (
+ videos.map((video) => (
  <div
  key={video.id}
 // FIXED:  data-testid={`video-item-${video.id}`} />
@@ -52,10 +52,10 @@ const VideoList: any = ({ videos, onVideoSelect, loading }: any) => (
 // FIXED:  </div>
 );
 
-const CommentSection: any = ({ comments, onAddComment }: any) => {
+const CommentSection = ({ comments, onAddComment }: any) => {
  const [newComment, setNewComment] = React.useState<string>('');
 
- const handleSubmit: any = (e: React.FormEvent) => {
+ const handleSubmit = (e: React.FormEvent) => {
  e.preventDefault();
  if (newComment.trim()) {
  onAddComment(newComment);
@@ -66,7 +66,7 @@ const CommentSection: any = ({ comments, onAddComment }: any) => {
  <div data-testid="comment-section">
  <h3>Comments ({comments.length})</h3>
 
- <form onSubmit={(e: any) => handleSubmit(e)} data-testid="comment-form">
+ <form onSubmit={(e) => handleSubmit(e)} data-testid="comment-form">
  <textarea
 // FIXED:  value={newComment} />
 // FIXED:  onChange={(e) => setNewComment(e.target.value)}
@@ -80,7 +80,7 @@ const CommentSection: any = ({ comments, onAddComment }: any) => {
 // FIXED:  </form>
 
  <div className="comments-list">
- {comments.map((comment: any) => (
+ {comments.map((comment) => (
  <div key={comment.id} data-testid={`comment-${comment.id}`} className="comment">
  <img src={comment.author.avatar} alt={comment.author.name} />
  <div>
@@ -95,7 +95,7 @@ const CommentSection: any = ({ comments, onAddComment }: any) => {
  );
 };
 
-const VideoPage: any = () => {
+const VideoPage = () => {
  const [currentVideo, setCurrentVideo] = React.useState<any>(null);
  const [videos, setVideos] = React.useState<any[]>([]);
  const [comments, setComments] = React.useState<any[]>([]);
@@ -122,7 +122,7 @@ const VideoPage: any = () => {
  const commentsData = await commentsResponse.json();
  setComments(commentsData.data);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to load data:', error);
  } finally {
  setLoading(false);
@@ -131,7 +131,7 @@ const VideoPage: any = () => {
  loadData();
  }, []);
 
- const handleVideoSelect = async (video: any): Promise<any> => {
+ const handleVideoSelect = async (video): Promise<any> => {
  setCurrentVideo(video);
  setWatchTime(0);
 
@@ -140,11 +140,11 @@ const VideoPage: any = () => {
  const response = await (fetch as any)(`/api/videos/${video.id}/comments`);
  const data = await response.json();
  setComments(data.data);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to load comments:', error);
  };
 
- const handleAddComment = async (text: any): Promise<any> => {
+ const handleAddComment = async (text): Promise<any> => {
  if (!currentVideo) {
 return;
 }
@@ -157,15 +157,15 @@ return;
 
  const newComment = await response.json();
  setComments(prev => [newComment.data, ...prev]);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to add comment:', error);
  };
 
- const handleTimeUpdate: any = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+ const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
  setWatchTime(e.currentTarget.currentTime);
  };
 
- const handleVideoEnded: any = () => {
+ const handleVideoEnded = () => {
  // Track video completion
  performanceMonitor.trackCustomMetric('video_completed', 1);
  };
@@ -397,7 +397,7 @@ describe('Integration Tests', () => {
  expect(screen.getByText(`Comments (${mockComments.length})`)).toBeInTheDocument();
 
  // Should display each comment
- mockComments.forEach((comment: any) => {
+ mockComments.forEach((comment) => {
  expect(screen.getByTestId(`comment-${comment.id}`)).toBeInTheDocument();
  expect(screen.getByText(comment.text)).toBeInTheDocument();
  expect(screen.getByText(comment.author.name)).toBeInTheDocument();

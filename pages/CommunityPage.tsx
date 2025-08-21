@@ -31,7 +31,7 @@ interface CommunityStats {
  reachGrowth: number;
 }
 
-const formatDate: any = (date: Date) => {
+const formatDate = (date: Date) => {
  const now = new Date();
  const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
 
@@ -57,7 +57,7 @@ const CommunityPage: React.FC = () => {
  const [loading, setLoading] = useState<boolean>(true);
  const [stats, setStats] = useState<CommunityStats | null>(null);
 
- const handleCreatePost: any = () => {
+ const handleCreatePost = () => {
  if (!newPostContent.trim()) {
 return;
 }
@@ -87,8 +87,8 @@ return;
  setShowCreatePost(false);
  };
 
- const toggleLike: any = (postId: any) => {
- setPosts(posts.map((post: any) =>
+ const toggleLike = (postId) => {
+ setPosts(posts.map((post) =>
  post.id === postId
  ? { ...post as any, isLiked: !post.isLiked,
  likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
@@ -97,7 +97,7 @@ return;
 
  // Generate mock data
  useEffect(() => {
- const generateMockPosts: any = (): CommunityPost[] => {
+ const generateMockPosts = (): CommunityPost[] => {
  const postTypes: Array<'text' | 'image' | 'poll'> = ['text', 'image', 'poll'];
  const sampleContent = [
  "What's your favorite video editing software? Let me know in the comments!",
@@ -118,7 +118,7 @@ return;
  content: 'Which collaboration would you like to see?',
  options: ['Tech reviewer', 'Gaming channel', 'Lifestyle vlogger', 'Educational creator'] }];
 
- return Array.from({ length: 12 }, (_: any, i: any) => {
+ return Array.from({ length: 12 }, (_, i) => {
  const type = postTypes[Math.floor(Math.random() * postTypes.length)] || 'text';
 
  let content = sampleContent[Math.floor(Math.random() * sampleContent.length)] || 'Default content';
@@ -151,13 +151,13 @@ return;
  clickThroughRate: Math.random() * 15 + 2 } }}).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
  };
 
- const generateMockStats: any = (posts: CommunityPost): CommunityStats => {
- const totalLikes = posts.reduce((sum: any,
- post: any) => sum + post.likes, 0);
- const totalComments = posts.reduce((sum: any,
- post: any) => sum + post.comments, 0);
- const topPost = posts.length > 0 ? posts.reduce((top: any,
- post: any) =>
+ const generateMockStats = (posts: CommunityPost): CommunityStats => {
+ const totalLikes = posts.reduce((sum,
+ post) => sum + post.likes, 0);
+ const totalComments = posts.reduce((sum,
+ post) => sum + post.comments, 0);
+ const topPost = posts.length > 0 ? posts.reduce((top,
+ post) =>
  post.likes > (top?.likes || 0) ? post : top, posts[0]) : null;
 
  return {
@@ -286,7 +286,7 @@ return;
  <input
  key={index}
 // FIXED:  value={option} />
-// FIXED:  onChange={(e: any) => {
+// FIXED:  onChange={(e) => {
  const newOptions = [...pollOptions];
  newOptions[index] = e.target.value;
  setPollOptions(newOptions);
@@ -315,7 +315,7 @@ return;
  Cancel
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleCreatePost(e)}
+// FIXED:  onClick={(e) => handleCreatePost(e)}
 // FIXED:  disabled={!newPostContent.trim()}
 // FIXED:  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
  >
@@ -367,7 +367,7 @@ return;
 
  {post.type === 'poll' && post.pollOptions && (
  <div className="space-y-2 mt-3">
- {post.pollOptions.map((option: any) => {
+ {post.pollOptions.map((option) => {
  const pollOptions = post.pollOptions!;
  const totalVotes = pollOptions.reduce((sum, opt) => sum + opt.votes, 0);
  const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;

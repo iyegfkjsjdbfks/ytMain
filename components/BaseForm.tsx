@@ -67,7 +67,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
  // Validate field
- const validateField: any = (field: FormField,
+ const validateField = (field: FormField,
  value: string | number): string | null => {
  if (field.required && (!value || (typeof value === 'string' && !value.trim()))) {
  return `${field.label} is required`;
@@ -79,16 +79,16 @@ const BaseForm: React.FC<BaseFormProps> = ({
  };
 
  // Handle field change
- const handleChange: any = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
  const { name, value, type } = e.target;
  const fieldValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
  setValue(name, fieldValue);
  };
 
  // Handle field blur
- const handleBlur: any = (fieldName: any) => {
+ const handleBlur = (fieldName) => {
  setTouched(prev => ({ ...prev as any, [fieldName]: true }));
- const field = fields.find((f: any) => f.name === fieldName);
+ const field = fields.find((f) => f.name === fieldName);
  if (field as any) {
  const error = validateField(field, values[fieldName]);
  if (error as any) {
@@ -102,7 +102,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
  // Validate all fields
  const newErrors: Record<string, string> = {};
- fields.forEach((field: any) => {
+ fields.forEach((field) => {
  const error = validateField(field, values[field.name]);
  if (error as any) {
  newErrors[field.name] = error;
@@ -112,7 +112,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
  // Mark all fields as touched
  const allTouched: Record<string, boolean> = {};
- fields.forEach((field: any) => {
+ fields.forEach((field) => {
  allTouched[field.name] = true;
  });
  setTouched(allTouched);
@@ -125,7 +125,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  };
 
  // Render field
- const renderField: any = (field: FormField) => {
+ const renderField = (field: FormField) => {
  const fieldError = touched[field.name] ? validateField(field, values[field.name]) : null;
  const fieldValue = values[field.name] || '';
 
@@ -147,7 +147,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 // FIXED:  id={field.name}
 // FIXED:  name={field.name}
 // FIXED:  value={fieldValue} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
  onBlur={() => handleBlur(field.name)}
 // FIXED:  placeholder={field.placeholder}
  required={field.required}
@@ -163,14 +163,14 @@ const BaseForm: React.FC<BaseFormProps> = ({
 // FIXED:  id={field.name}
 // FIXED:  name={field.name}
 // FIXED:  value={fieldValue} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
  onBlur={() => handleBlur(field.name)}
  required={field.required}
 // FIXED:  disabled={field.disabled || loading}
 // FIXED:  className={baseInputClasses}
  >
  <option value="">{field.placeholder || `Select ${field.label}`}</option>
- {field.options?.map((option: any) => (
+ {field.options?.map((option) => (
  <option key={option.value} value={option.value}>
  {option.label}
 // FIXED:  </option>
@@ -186,7 +186,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 // FIXED:  name={field.name}
 // FIXED:  type="checkbox"
 // FIXED:  checked={!!fieldValue} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
  onBlur={() => handleBlur(field.name)}
  required={field.required}
 // FIXED:  disabled={field.disabled || loading}
@@ -220,7 +220,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 // FIXED:  name={field.name}
 // FIXED:  type={field.type}
 // FIXED:  value={fieldValue} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
  onBlur={() => handleBlur(field.name)}
 // FIXED:  placeholder={field.placeholder}
  required={field.required}
@@ -231,7 +231,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  };
 
  return (
- <form onSubmit={(e: any) => handleFormSubmit(e)} className={`space-y-6 ${className}`}>
+ <form onSubmit={(e) => handleFormSubmit(e)} className={`space-y-6 ${className}`}>
  {/* Error message */}
  {error && (
  <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
@@ -247,7 +247,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  )}
 
  {/* Form fields */}
- {fields.map((field: any) => {
+ {fields.map((field) => {
  const fieldError = touched[field.name] ? validateField(field, values[field.name]) : null;
 
  return (
@@ -284,7 +284,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  {onCancel && (
  <button
 // FIXED:  type="button" />
-// FIXED:  onClick={(e: any) => onCancel(e)}
+// FIXED:  onClick={(e) => onCancel(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
  >

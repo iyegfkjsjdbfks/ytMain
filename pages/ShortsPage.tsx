@@ -29,7 +29,7 @@ const ShortsPage: React.FC = () => {
  // Ensure we have a valid array
  const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
  return new Set(validArray.filter((item) => typeof item === 'string'));
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error creating likedShorts Set:', error);
  // Clear invalid data and return empty Set
  setLikedShortsArray([]);
@@ -43,7 +43,7 @@ const ShortsPage: React.FC = () => {
  // Ensure we have a valid array
  const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
  return new Set(validArray.filter((item) => typeof item === 'string'));
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error creating followedChannels Set:', error);
  // Clear invalid data and return empty Set
  setFollowedChannelsArray([]);
@@ -78,7 +78,7 @@ return [];
  // Convert Video[] to Short[] with proper type conversion
  let converted: Short[] = allShorts
  .filter((video) => video.visibility !== 'scheduled') // Filter out scheduled videos
- .map((video: any) => {
+ .map((video) => {
  const shortVideo: Short = {
  ...video as any,
  duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
@@ -97,14 +97,14 @@ return [];
 
  // Apply category filter
  if (selectedCategory !== 'all') {
- converted = converted.filter((short: any) =>
+ converted = converted.filter((short) =>
  short.category.toLowerCase() === selectedCategory.toLowerCase());
  }
 
  // Apply search filter
  if (debouncedSearchQuery as any) {
  const query = debouncedSearchQuery.toLowerCase();
- converted = converted.filter((short: any) =>
+ converted = converted.filter((short) =>
  short.title.toLowerCase().includes(query) ||
  short.channelName.toLowerCase().includes(query) ||
  short.description.toLowerCase().includes(query));
@@ -118,12 +118,12 @@ return [];
  if (!allShorts) {
 return [];
 }
- const uniqueCategories = [...new Set(allShorts.map((short: any) => short.category))];
+ const uniqueCategories = [...new Set(allShorts.map((short) => short.category))];
  return ['all', ...uniqueCategories];
  }, [allShorts]);
 
  // Enhanced event handlers with proper type checking
- const handleLike = useCallback((shortId: any) => {
+ const handleLike = useCallback((shortId) => {
  setLikedShortsArray(prev => {
  const currentArray = Array.isArray(prev) ? prev : [];
  if (currentArray.includes(shortId)) {
@@ -134,7 +134,7 @@ return [];
  });
  }, [setLikedShortsArray]);
 
- const handleFollow = useCallback((channelName: any) => {
+ const handleFollow = useCallback((channelName) => {
  setFollowedChannelsArray(prev => {
  const currentArray = Array.isArray(prev) ? prev : [];
  if (currentArray.includes(channelName)) {
@@ -145,7 +145,7 @@ return [];
  });
  }, [setFollowedChannelsArray]);
 
- const handleComment = useCallback((shortId: any) => {
+ const handleComment = useCallback((shortId) => {
  const currentFilteredShorts = filteredShorts;
  const short = currentFilteredShorts.find(s => s.id === shortId);
  setSelectedShortForComment({ id: shortId,
@@ -153,7 +153,7 @@ return [];
  setCommentModalOpen(true);
  }, []);
 
- const handleCommentSubmit = useCallback(async (_commentText: any): Promise<any> => {
+ const handleCommentSubmit = useCallback(async (_commentText): Promise<any> => {
  if (!selectedShortForComment) {
 return;
 }
@@ -161,12 +161,12 @@ return;
  try { // Close modal and reset state
  setCommentModalOpen(false);
  setSelectedShortForComment(null);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to submit comment:', error);
  }
  }, [selectedShortForComment]);
 
- const handleVideoChange = useCallback((index: number) => {
+ const handleVideoChange = useCallback((index) => {
  setCurrentVideoIndex(index);
 
  // Update URL with current video ID
@@ -248,7 +248,7 @@ return;
  setShowFilters(prev => !prev);
  }, []);
 
- const handleCategoryChange = useCallback((category: any) => {
+ const handleCategoryChange = useCallback((category) => {
  setSelectedCategory(category);
  setCurrentVideoIndex(0);
  }, []);
@@ -277,7 +277,7 @@ return;
  }
  }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
- const handleShare = async (shortId: any): Promise<any> => {
+ const handleShare = async (shortId): Promise<any> => {
  const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
  if (navigator.share) {
@@ -285,7 +285,7 @@ return;
  await navigator.share({
  title: 'Check out this Short!',
  url: shareUrl });
- } catch (error: any) {
+ } catch (error) {
  // Fallback to clipboard if share fails
  copyToClipboard(shareUrl);
  }
@@ -295,11 +295,11 @@ return;
  copyToClipboard(shareUrl);
  };
 
- const copyToClipboard = async (text: any): Promise<any> => {
+ const copyToClipboard = async (text): Promise<any> => {
  try {
  await navigator.clipboard.writeText(text);
  // You could add a toast notification here
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to copy link:', error);
  };
 
@@ -324,7 +324,7 @@ return;
  localStorage.removeItem('followedChannels');
  setFollowedChannelsArray([]);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error during localStorage cleanup:', error);
  // Clear all potentially corrupted data
  localStorage.removeItem('likedShorts');
@@ -475,14 +475,13 @@ return;
  observerRef.current.disconnect();
  }
 
- observerRef.current = new IntersectionObserver(
- (entries: any) => {
- entries.forEach((entry: any) => {
+ observerRef.current = new IntersectionObserver((entries) => {
+ entries.forEach((entry) => {
  if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
  const videoElement = entry.target as HTMLElement;
  const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
  if (index !== -1) {
- setCurrentVideoIndex((prevIndex: any) => {
+ setCurrentVideoIndex((prevIndex) => {
  if (index !== prevIndex) {
  // Update URL without triggering scroll
  const currentFilteredShorts = filteredShorts;
@@ -503,7 +502,7 @@ return;
  rootMargin: '0px' });
 
  // Observe all video elements
- Array.from(containerRef.current.children).forEach((child: any) => {
+ Array.from(containerRef.current.children).forEach((child) => {
  observerRef.current?.observe(child);
  });
 
@@ -530,14 +529,14 @@ return;
  <h1 className="text-white text-lg font-semibold">Shorts</h1>
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  onClick={(e) => handleSearchToggle(e)}
 // FIXED:  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
 // FIXED:  aria-label="Search shorts"
  >
  <MagnifyingGlassIcon className="w-5 h-5" />
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleFilterToggle(e)}
+// FIXED:  onClick={(e) => handleFilterToggle(e)}
 // FIXED:  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
 // FIXED:  aria-label="Filter shorts"
  >
@@ -559,7 +558,7 @@ return;
  autoFocus
  />
  <button />
-// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  onClick={(e) => handleSearchToggle(e)}
 // FIXED:  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
  >
  <XMarkIcon className="w-4 h-4" />
@@ -598,7 +597,7 @@ return;
  <h1 className="text-white text-lg font-semibold">Shorts</h1>
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  onClick={(e) => handleSearchToggle(e)}
 // FIXED:  className={`p-2 rounded-full transition-colors ${
  showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
  }`}
@@ -607,7 +606,7 @@ return;
  <MagnifyingGlassIcon className="w-5 h-5" />
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleFilterToggle(e)}
+// FIXED:  onClick={(e) => handleFilterToggle(e)}
 // FIXED:  className={`p-2 rounded-full transition-colors ${
  showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
  }`}
@@ -631,7 +630,7 @@ return;
  autoFocus
  />
  <button />
-// FIXED:  onClick={(e: any) => handleSearchToggle(e)}
+// FIXED:  onClick={(e) => handleSearchToggle(e)}
 // FIXED:  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
  >
  <XMarkIcon className="w-4 h-4" />

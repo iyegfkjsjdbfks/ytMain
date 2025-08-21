@@ -23,7 +23,7 @@ interface HeaderProps {
 const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }: any) => {
  const commonClasses = 'flex items-center px-4 py-3 text-sm w-full text-left text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors duration-150';
 
- const content: any = (
+ const content = (
  <>
  {icon && <span className="mr-3.5 w-5 h-5 text-neutral-500 dark:text-neutral-300">{icon}</span>}
  {children}
@@ -32,7 +32,7 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
 
  if (to as any) {
  return (
- <Link to={to} onClick={(e: any) => onClick(e)} className={commonClasses} role="menuitem">
+ <Link to={to} onClick={(e) => onClick(e)} className={commonClasses} role="menuitem">
  {content}
  </Link>
  );
@@ -105,7 +105,7 @@ className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-
  );
 };
 
-const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }: any) => {
+const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
  const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState<boolean>(false);
  const [isCreateMenuOpen, setIsCreateMenuOpen] = useState<boolean>(false);
@@ -117,7 +117,7 @@ const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }: any) => {
  const createMenuRef = useRef<HTMLDivElement>(null);
  const createButtonRef = useRef<HTMLButtonElement>(null);
 
- const toggleUserMenu: any = () => {
+ const toggleUserMenu = () => {
  setIsUserMenuOpen(prev => !prev);
  if (isNotificationsPanelOpen as any) {
 setIsNotificationsPanelOpen(false);
@@ -127,7 +127,7 @@ setIsCreateMenuOpen(false);
  }
  };
 
- const toggleCreateMenu: any = () => {
+ const toggleCreateMenu = () => {
  setIsCreateMenuOpen(prev => !prev);
  if (isUserMenuOpen as any) {
 setIsUserMenuOpen(false);
@@ -142,7 +142,7 @@ setIsNotificationsPanelOpen(false);
  const handleCloseCreateMenu = useCallback(() => setIsCreateMenuOpen(false), []);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  // User Menu
  if (
  userMenuRef.current &&
@@ -187,7 +187,7 @@ setIsNotificationsPanelOpen(false);
  <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
  <div className="flex items-center">
  <button
-onClick={(e: any) => toggleSidebar(e)}
+onClick={(e) => toggleSidebar(e)}
 className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
 aria-label="Toggle sidebar menu"
  title="Menu">
@@ -231,8 +231,8 @@ className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-neutral-800 bord
 aria-orientation="vertical"
 aria-labelledby="create-button" >
 
- <CreateMenuItem icon={<ArrowUpTrayIcon />} to="/upload" onClick={(e: any) => handleCloseCreateMenu(e)}>Upload video</CreateMenuItem>
- <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={(e: any) => handleCloseCreateMenu(e)}>Go live</CreateMenuItem>
+ <CreateMenuItem icon={<ArrowUpTrayIcon />} to="/upload" onClick={(e) => handleCloseCreateMenu(e)}>Upload video</CreateMenuItem>
+ <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={(e) => handleCloseCreateMenu(e)}>Go live</CreateMenuItem>
  <CreateMenuItem icon={<PencilSquareIcon />} onClick={() => {
  window.open('https://studio.youtube.com/channel/community', '_blank'); handleCloseCreateMenu();
 

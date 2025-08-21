@@ -13,20 +13,20 @@ const VideoDemo: React.FC = () => {
  'components'
  );
 
- const handleVideoClick: any = (video: Video) => {
+ const handleVideoClick = (video: Video) => {
  alert(`Video clicked: ${video.title}`);
  };
 
- const handleVideoEdit: any = (videoId: any) => {
+ const handleVideoEdit = (videoId) => {
  alert(`Edit video: ${videoId}`);
  };
 
- const handleVideoDelete: any = (videoId: any) => {
+ const handleVideoDelete = (videoId) => {
  alert(`Delete video: ${videoId}`);
  };
 
- const handleVisibilityChange: any = (,
- videoId: any,
+ const handleVisibilityChange = (,
+ videoId,
  visibility: VideoVisibility
  ) => {
  alert(`Changed visibility of ${videoId} to ${visibility}`);
@@ -68,10 +68,10 @@ const VideoDemo: React.FC = () => {
 // FIXED:  </h2>
  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6'>
  {realVideos[0] && (
- <VideoCard video={realVideos[0]} onClick={(e: any) => handleVideoClick(e)} />
+ <VideoCard video={realVideos[0]} onClick={(e) => handleVideoClick(e)} />
  )}
  {realVideos[1] && (
- <VideoCard video={realVideos[1]} onClick={(e: any) => handleVideoClick(e)} />
+ <VideoCard video={realVideos[1]} onClick={(e) => handleVideoClick(e)} />
  )}
 // FIXED:  </div>
 // FIXED:  </section>
@@ -85,14 +85,14 @@ const VideoDemo: React.FC = () => {
  <VideoCard
  video={realVideos[2]}
  variant='compact' />
-// FIXED:  onClick={(e: any) => handleVideoClick(e)}
+// FIXED:  onClick={(e) => handleVideoClick(e)}
  />
  )}
  {realVideos[3] && (
  <VideoCard
  video={realVideos[3]}
  variant='compact' />
-// FIXED:  onClick={(e: any) => handleVideoClick(e)}
+// FIXED:  onClick={(e) => handleVideoClick(e)}
  />
  )}
 // FIXED:  </div>
@@ -105,7 +105,7 @@ const VideoDemo: React.FC = () => {
  <VideoCard
  video={realVideos[4]}
  variant='studio' />
-// FIXED:  onClick={(e: any) => handleVideoClick(e)}
+// FIXED:  onClick={(e) => handleVideoClick(e)}
  />
  )}
 // FIXED:  </div>

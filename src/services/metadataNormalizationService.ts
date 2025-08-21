@@ -211,7 +211,7 @@ class MetadataNormalizationService {
  );
  channel = (fetchedChannel as unknown as YouTubeChannel) || undefined;
  logger.debug('Fetched channel data:', channel);
- } catch (error: any) {
+ } catch (error) {
  logger.warn('Failed to fetch channel data:', error);
  }
  const subscriberCount = parseInt(
@@ -380,7 +380,7 @@ class MetadataNormalizationService {
  await this.normalizeYouTubeVideo(data as YouTubeVideo)
  );
  }
- } catch (error: any) {
+ } catch (error) {
  logger.error(`Failed to normalize ${source} video:`, error);
  // Continue processing other videos
  }

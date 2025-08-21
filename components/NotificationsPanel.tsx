@@ -45,12 +45,12 @@ return null;
 
  const hasNewNotifications = notifications.some(n => n.isNew);
 
- const markAllAsRead: any = () => {
- setNotifications(prev => prev.map((notification: any) => ({ ...notification as any, isNew: false })));
+ const markAllAsRead = () => {
+ setNotifications(prev => prev.map((notification) => ({ ...notification as any, isNew: false })));
  };
 
- const markAsRead: any = (id: string) => {
- setNotifications(prev => prev.map((notification: any) =>
+ const markAsRead = (id) => {
+ setNotifications(prev => prev.map((notification) =>
  notification.id === id ? { ...notification as any, isNew: false } : notification));
  };
 
@@ -66,7 +66,7 @@ return null;
  Notifications
 // FIXED:  </h2>
  <button />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="p-1.5 rounded-full text-neutral-500 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
 // FIXED:  aria-label="Close notifications panel"
  >

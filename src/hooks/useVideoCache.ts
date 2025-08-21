@@ -26,7 +26,7 @@ const DEFAULT_OPTIONS: Required<VideoCacheOptions> = {
  staleTime: 1000 * 60 * 5, // 5 minutes,
  enableIntersectionObserver: true };
 
-export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
+export const useVideoCache = (options: VideoCacheOptions = {}) => {
  const opts = { ...DEFAULT_OPTIONS as any, ...options };
  const queryClient = useQueryClient();
  const [visibleVideos, setVisibleVideos] = useState<Set<string>>(new Set());
@@ -71,7 +71,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  }, [opts.enableIntersectionObserver]);
 
  // Observe video elements
- const observeVideo = useCallback((element: Element, videoId: any) => {
+ const observeVideo = useCallback((element: Element, videoId) => {
  if (!observerRef.current || !opts.enableIntersectionObserver) {
  return;
  }
@@ -84,7 +84,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  );
 
  // Unobserve video elements
- const unobserveVideo = useCallback((videoId: any) => {
+ const unobserveVideo = useCallback((videoId) => {
  if (!observerRef.current) {
  return;
  }
@@ -97,7 +97,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  }, []);
 
  // Prefetch video data
- const prefetchVideo = useCallback(async (videoId: any): Promise<any> => {
+ const prefetchVideo = useCallback(async (videoId): Promise<any> => {
  await queryClient.prefetchQuery({
  queryKey: ['video', videoId],
  queryFn: async (): Promise<void> => {
@@ -115,7 +115,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  );
 
  // Prefetch multiple videos
- const prefetchVideos = useCallback(async (videoIds: any): Promise<any> => {
+ const prefetchVideos = useCallback(async (videoIds): Promise<any> => {
  const promises = videoIds.slice(0, opts.prefetchCount).map(prefetchVideo);
  await Promise.allSettled(promises);
  },
@@ -123,14 +123,14 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  );
 
  // Get cached video data
- const getCachedVideo = useCallback((videoId: any): VideoData | undefined => {
+ const getCachedVideo = useCallback((videoId): VideoData | undefined => {
  return queryClient.getQueryData(['video', videoId]);
  },
  [queryClient]
  );
 
  // Check if video is cached
- const isVideoCached = useCallback((videoId: any): boolean => {
+ const isVideoCached = useCallback((videoId): boolean => {
  const data = queryClient.getQueryData(['video', videoId]);
  return data !== undefined;
  },
@@ -138,7 +138,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  );
 
  // Invalidate video cache
- const invalidateVideo = useCallback(async (videoId: any): Promise<any> => {
+ const invalidateVideo = useCallback(async (videoId): Promise<any> => {
  await queryClient.invalidateQueries({ queryKey: ['video', videoId] });
  },
  [queryClient]
@@ -158,7 +158,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  totalCached: videoQueries.length,
  visibleCount: visibleVideos.size,
  observedCount: observedElements.current.size,
- cacheSize: videoQueries.reduce((size: any, query: any) => {
+ cacheSize: videoQueries.reduce((size, query) => {
  const { data } = query.state;
  return size + (data ? JSON.stringify(data).length : 0);
  }, 0) };
@@ -166,7 +166,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
 
  // Preload video thumbnails
  const preloadThumbnails = useCallback((videos: VideoData) => {
- videos.forEach((video: any) => {
+ videos.forEach((video) => {
  if (video.thumbnail) {
  const img = new Image();
  img.src = video.thumbnail;
@@ -175,7 +175,7 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
  }, []);
 
  // Smart prefetch based on user behavior
- const smartPrefetch = useCallback(async (currentVideoId: any, allVideoIds: any): Promise<any> => {
+ const smartPrefetch = useCallback(async (currentVideoId, allVideoIds): Promise<any> => {
  const currentIndex = allVideoIds.indexOf(currentVideoId);
  if (currentIndex === -1) {
  return;
@@ -224,8 +224,8 @@ export const useVideoCache: any = (options: VideoCacheOptions = {}) => {
 };
 
 // Hook for individual video with caching
-export const useCachedVideo: any = (,
- videoId: any,
+export const useCachedVideo = (,
+ videoId,
  options: VideoCacheOptions = {}
 ) => {
  const opts = { ...DEFAULT_OPTIONS as any, ...options };

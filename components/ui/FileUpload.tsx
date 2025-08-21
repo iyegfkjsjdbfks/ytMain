@@ -8,7 +8,7 @@ export interface FileUploadProps {
  multiple?: boolean;
  maxSize?: number; // in bytes,
  onFileSelect: (files: File) => void;
- onFileRemove?: (index: number) => void;
+ onFileRemove?: (index) => void;
  disabled?: boolean;
  className?: string;
  label?: string;
@@ -31,7 +31,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
  const [isDragOver, setIsDragOver] = useState<boolean>(false);
  const [error, setError] = useState<string | null>(null);
 
- const handleFileSelect: any = (selectedFiles: FileList | null) => {
+ const handleFileSelect = (selectedFiles: FileList | null) => {
  if (!selectedFiles) {
 return;
 }
@@ -49,18 +49,18 @@ return;
  onFileSelect(fileArray);
  };
 
- const handleDragOver: any = (e: React.DragEvent) => {
+ const handleDragOver = (e: React.DragEvent) => {
  e.preventDefault();
  if (!disabled) {
  setIsDragOver(true);
  };
 
- const handleDragLeave: any = (e: React.DragEvent) => {
+ const handleDragLeave = (e: React.DragEvent) => {
  e.preventDefault();
  setIsDragOver(false);
  };
 
- const handleDrop: any = (e: React.DragEvent) => {
+ const handleDrop = (e: React.DragEvent) => {
  e.preventDefault();
  setIsDragOver(false);
 
@@ -68,12 +68,12 @@ return;
  handleFileSelect(e.dataTransfer.files);
  };
 
- const handleClick: any = () => {
+ const handleClick = () => {
  if (!disabled && fileInputRef.current) {
  fileInputRef.current.click();
  };
 
- const formatFileSize: any = (bytes: any): string => {
+ const formatFileSize = (bytes): string => {
  if (bytes === 0) {
 return '0 Bytes';
 }
@@ -98,7 +98,7 @@ return '0 Bytes';
  onDragOver={handleDragOver}
  onDragLeave={handleDragLeave}
  onDrop={handleDrop} />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  >
  <input
  ref={fileInputRef}
@@ -138,8 +138,8 @@ return '0 Bytes';
  Selected Files ({files.length})
 // FIXED:  </h4>
  <div className="space-y-2">
- {files.map((file: any,
- index: number) => (
+ {files.map((file,
+ index) => (
  <div
  key={index}
 // FIXED:  className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg" />
@@ -157,7 +157,7 @@ return '0 Bytes';
 // FIXED:  </div>
  {onFileRemove && (
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  onFileRemove(index);
  }

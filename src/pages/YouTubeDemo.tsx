@@ -10,7 +10,7 @@ const YouTubeDemo: React.FC = () => {
  const [autoplay, setAutoplay] = useState<boolean>(false);
  const [error, setError] = useState<string>('');
 
- const handleSubmit: any = (e: React.FormEvent) => {
+ const handleSubmit = (e: React.FormEvent) => {
  e.preventDefault();
 
  if (!videoUrl.trim()) {
@@ -36,7 +36,7 @@ const YouTubeDemo: React.FC = () => {
  <h1 className='text-3xl font-bold mb-6'>YouTube Player Demo</h1>
 
  <div className='bg-white rounded-lg shadow-md p-6 mb-8'>
- <form onSubmit={(e: any) => handleSubmit(e)} className='mb-6'>
+ <form onSubmit={(e) => handleSubmit(e)} className='mb-6'>
  <div className='flex flex-col md:flex-row gap-4 mb-4'>
  <div className='flex-1'>
  <input
@@ -130,9 +130,9 @@ const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
  controls: 1,
  modestbranding: 1 },
  events: {
- onReady: (event: any) => {
+ onReady: (event) => {
  },
- onStateChange: (event: any) => {
+ onStateChange: (event) => {
  } } });
 
 // Control the player
@@ -164,7 +164,7 @@ player.seekTo(60); // Seek to 1 minute`}
  );
 };
 
-const YouTubeDemoWithErrorBoundary: any = () => (
+const YouTubeDemoWithErrorBoundary = () => (
  <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
  <YouTubeDemo />
 // FIXED:  </ErrorBoundary>

@@ -25,7 +25,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  }
 
  // Listen for beforeinstallprompt event
- const handleBeforeInstallPrompt: any = (e: Event) => {
+ const handleBeforeInstallPrompt = (e: Event) => {
  // Prevent the mini-infobar from appearing on mobile
  e.preventDefault();
 
@@ -36,7 +36,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  const dismissedTime = (localStorage as any).getItem('pwa-banner-dismissed');
  if (dismissedTime as any) {
  const dismissedDate = new Date(parseInt(dismissedTime, 10));
- const daysSinceDismissed: any = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
+ const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
 
  // Don't show banner if dismissed within last 30 days
  if (daysSinceDismissed < 30) {
@@ -50,7 +50,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  };
 
  // Listen for app installed event
- const handleAppInstalled: any = () => {
+ const handleAppInstalled = () => {
  setShowBanner(false);
  setDeferredPrompt(null);
  PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
@@ -91,14 +91,14 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  // Clear the deferredPrompt
  setDeferredPrompt(null);
  setShowBanner(false);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error during PWA installation:', error);
  PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { error });
  } finally {
  setIsInstalling(false);
  };
 
- const handleDismiss: any = () => {
+ const handleDismiss = () => {
  setShowBanner(false);
 
  // Store dismissal time
@@ -107,7 +107,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_DISMISSED);
  };
 
- const getInstallText: any = () => {
+ const getInstallText = () => {
  const platform = PWAUtils.getPlatform();
  const deviceType = PWAUtils.getDeviceType();
 
@@ -120,7 +120,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  return 'Install YouTubeX app for faster access and offline features';
  };
 
- const getInstallInstructions: any = () => {
+ const getInstallInstructions = () => {
  const platform = PWAUtils.getPlatform();
 
  if (platform === 'ios') {
@@ -153,7 +153,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  <div className="flex items-center space-x-2">
  {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && (
  <button />
-// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={isInstalling}
 // FIXED:  className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
  >
@@ -162,7 +162,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  )}
 
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className="p-1 hover:bg-white/20 rounded-lg transition-colors"
 // FIXED:  aria-label="Dismiss install banner"
  >

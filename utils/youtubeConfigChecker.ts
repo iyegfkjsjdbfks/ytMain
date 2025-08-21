@@ -16,7 +16,7 @@ interface ConfigStatus {
  recommendations: string[]
 }
 
-export const checkYouTubeAPIConfig: any = (): ConfigStatus => {
+export const checkYouTubeAPIConfig = (): ConfigStatus => {
  const status = youtubeSearchService.getConfigStatus();
  const recommendations: string[] = [];
 
@@ -73,7 +73,7 @@ export const testYouTubeAPI = async (): Promise<{
  message: 'API responded but returned no results',
  results: 0 };
 
- } catch (error: any) {
+ } catch (error) {
  return {
  success: false,
  message: 'YouTube Search API test failed',
@@ -83,7 +83,7 @@ export const testYouTubeAPI = async (): Promise<{
 /**
  * Log configuration status to console for debugging
  */
-export const logConfigStatus: any = (): void => {
+export const logConfigStatus = (): void => {
  const config = checkYouTubeAPIConfig();
 
  (console as any).group('🎯 YouTube API Configuration Status');

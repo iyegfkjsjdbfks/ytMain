@@ -32,7 +32,7 @@ interface UseIntersectionObserverReturn {
  *
  * Reduces code duplication for intersection-based functionality
  */
-export const useIntersectionObserver: any = ({
+export const useIntersectionObserver = ({
  threshold = 0,
  root = null,
  rootMargin = '0%',
@@ -101,7 +101,7 @@ export const useIntersectionObserver: any = ({
  * - Configurable visibility threshold
  * - Cleanup on unmount
  */
-export const useIntersectionVideoAutoplay: any = ({
+export const useIntersectionVideoAutoplay = ({
  threshold = 0.7,
  rootMargin = '0px',
  enabled = true }: {
@@ -133,7 +133,7 @@ export const useIntersectionVideoAutoplay: any = ({
 /**
  * Hook for lazy loading images based on visibility
  */
-export const useLazyImage: any = ({ src, threshold = 0.1, rootMargin = '50px' }: any) => {
+export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px' }: any) => {
  const [imageSrc, setImageSrc] = useState<string | null>(null);
  const [isLoaded, setIsLoaded] = useState<boolean>(false);
  const [error, setError] = useState<string | null>(null);
@@ -172,7 +172,7 @@ export const useLazyImage: any = ({ src, threshold = 0.1, rootMargin = '50px' }:
 /**
  * Hook for infinite scrolling
  */
-export const useInfiniteScroll: any = ({
+export const useInfiniteScroll = ({
  hasNextPage = true,
  isFetchingNextPage = false,
  fetchNextPage,

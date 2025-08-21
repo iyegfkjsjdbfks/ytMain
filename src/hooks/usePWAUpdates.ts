@@ -46,15 +46,15 @@ interface UsePWAUpdatesReturn {
  getCacheSize: () => Promise<number>;
 
  // Auto-update settings,
- enableAutoUpdate: (enabled: any) => void;
- setUpdateInterval: (minutes: any) => void
+ enableAutoUpdate: (enabled) => void;
+ setUpdateInterval: (minutes) => void
 }
 
 /**
  * Hook for managing PWA updates and cache operations
  * Handles service worker updates, cache management, and auto-update functionality
  */
-export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
+export const usePWAUpdates = (): UsePWAUpdatesReturn => {
  const [state, setState] = useState<UpdateState>({
  updateAvailable: false,
  isUpdating: false,
@@ -110,7 +110,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
  }
 
  return hasUpdate;
- } catch (error: any) {
+ } catch (error) {
  const errorMessage =
  error instanceof Error ? error.message : 'Unknown error';
 
@@ -145,7 +145,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
 
  // Wait for the new service worker to take control
  await new Promise<void>(resolve => {
- const handleControllerChange: any = () => {
+ const handleControllerChange = () => {
  navigator.serviceWorker.removeEventListener(
  'controllerchange',
  handleControllerChange
@@ -185,7 +185,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
 
  // Reload the page to use the new version
  window.location.reload();
- } catch (error: any) {
+ } catch (error) {
  const errorMessage =
  error instanceof Error ? error.message : 'Update failed';
 
@@ -256,7 +256,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
  }
 
  return totalSize;
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to calculate cache size',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -276,7 +276,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
 
  const cacheNames = await caches.keys();
 
- await Promise.all(cacheNames.map((cacheName: any) => caches.delete(cacheName)));
+ await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
 
  // Update cache info
  setCacheInfo({
@@ -289,7 +289,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
  { clearedCaches: cacheNames.length },
  'usePWAUpdates'
  );
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to clear cache',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -299,7 +299,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
  }, []);
 
  // Enable/disable auto-update
- const enableAutoUpdate = useCallback((enabled: any) => {
+ const enableAutoUpdate = useCallback((enabled) => {
  setAutoUpdateEnabled(enabled);
  (localStorage as any).setItem('pwa-auto-update', enabled.toString());
 
@@ -311,7 +311,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
  }, []);
 
  // Set update check interval
- const setUpdateInterval = useCallback((minutes: any) => {
+ const setUpdateInterval = useCallback((minutes) => {
  setUpdateIntervalState(minutes);
  (localStorage as any).setItem('pwa-update-interval', minutes.toString());
 
@@ -350,7 +350,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
  size: null, // Size calculation would require more complex implementation
  };
  }
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.debug(
  'Could not get update info',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -377,7 +377,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
  totalSize,
  cacheNames,
  lastCacheUpdate: Date.now() });
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to update cache info',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -396,7 +396,7 @@ export const usePWAUpdates: any = (): UsePWAUpdatesReturn => {
 
  // Service worker update handler removed - unused
 
- const handleMessage: any = (event: MessageEvent) => {
+ const handleMessage = (event: MessageEvent) => {
  if (event.data && event.data.type === 'SW_UPDATE_AVAILABLE') {
  setState(prev => ({ ...prev as any, updateAvailable: true }));
  };

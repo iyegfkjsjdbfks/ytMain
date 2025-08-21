@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 import type { Video } from '../types/core';
 
 // Test utilities for consistent testing
-export const createTestQueryClient: any = () => {
+export const createTestQueryClient = () => {
  return new QueryClient({
  defaultOptions: {
  queries: {
@@ -24,7 +24,7 @@ interface TestWrapperProps {
  queryClient?: QueryClient;
 }
 
-export const TestWrapper: any = ({ children, queryClient }: TestWrapperProps) => {
+export const TestWrapper = ({ children, queryClient }: TestWrapperProps) => {
  const client = queryClient || createTestQueryClient();
 
  return (
@@ -35,7 +35,7 @@ export const TestWrapper: any = ({ children, queryClient }: TestWrapperProps) =>
 };
 
 // Custom render function
-export const renderWithProviders: any = (,
+export const renderWithProviders = (,
  ui: ReactElement,
  options?: {
  queryClient?: QueryClient;
@@ -51,14 +51,14 @@ export const renderWithProviders: any = (,
  } = options || {};
 
  return render(ui, {
- wrapper: ({ children }: any) => (
+ wrapper: ({ children }) => (
  <TestWrapper queryClient={queryClient}>{children}</TestWrapper>
  ),
  ...renderOptions });
 };
 
 // Mock data factories
-export const createMockVideo: any = (overrides: Partial<Video> = {}): Video => ({
+export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
  id: 'test-video-1',
  title: 'Test Video Title',
  description: 'Test video description',
@@ -80,7 +80,7 @@ export const createMockVideo: any = (overrides: Partial<Video> = {}): Video => (
  updatedAt: '2024-01-01T00:00:00Z',
  ...overrides });
 
-export const createMockChannel: any = (,
+export const createMockChannel = (,
  overrides: Partial<Channel> = {}
 ): Channel => ({
  id: 'test-channel-1',
@@ -97,7 +97,7 @@ export const createMockChannel: any = (,
  updatedAt: '2024-01-01T00:00:00Z',
  ...overrides });
 
-export const createMockComment: any = (,
+export const createMockComment = (,
  overrides: Partial<Comment> = {}
 ): Comment => ({
  id: 'test-comment-1',
@@ -149,13 +149,13 @@ export const checkAccessibility = async (_container: HTMLElement): Promise<any> 
 
 // User interaction helpers
 export const userInteraction = {
- clickVideo: async (videoTitle: any): Promise<any> => {
+ clickVideo: async (videoTitle): Promise<any> => {
  const video = screen.getByRole('button', {
  name: new RegExp(videoTitle, 'i') });
  await userEvent.click(video);
  },
 
- searchFor: async (query: any): Promise<any> => {
+ searchFor: async (query): Promise<any> => {
  const searchInput = screen.getByRole('searchbox');
  await userEvent.clear(searchInput);
  await userEvent.type(searchInput, query);
@@ -167,7 +167,7 @@ export const userInteraction = {
  await userEvent.click(likeButton);
  },
 
- addComment: async (content: any): Promise<any> => {
+ addComment: async (content): Promise<any> => {
  const commentInput = screen.getByRole('textbox', { name: /add.*comment/i });
  await userEvent.clear(commentInput);
  await userEvent.type(commentInput, content);
@@ -186,15 +186,15 @@ export const mockApiResponses = {
  videos: {
  trending: [createMockVideo({ id: '1',
  title: 'Trending Video 1' })],
- search: (query: any) => [
+ search: (query) => [
  createMockVideo({ id: '2',
  title: `Search Result for ${query}` })] },
 
  channels: {
- byId: (id: string) =>
+ byId: (id) =>
  createMockChannel({ id, name: `Channel ${id}` }) },
  comments: {
- byVideoId: (videoId: any) => [
+ byVideoId: (videoId) => [
  createMockComment({ id: '1',
  content: `Comment for video ${videoId}` })] };
 

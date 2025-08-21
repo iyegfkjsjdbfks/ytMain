@@ -25,7 +25,7 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
  lg: 3,
  xl: 3,
  '2xl': 4 } }) => {
- const getGridClasses: any = () => {
+ const getGridClasses = () => {
  const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
  const responsiveClasses = [
  columns.sm && `sm:grid-cols-${columns.sm}`,
@@ -39,8 +39,8 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
 
  return (
  <div className={getGridClasses()}>
- {videos.map((video: any,
- index: number) => {
+ {videos.map((video,
+ index) => {
  // Generate a stable key using available identifiers
  const videoKey = video.id || (video as any).videoId || `video-${index}`;
  return (

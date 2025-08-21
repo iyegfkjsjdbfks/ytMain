@@ -8,9 +8,9 @@ import { VideoService } from '../services/api';
 import type { Video } from '../types';
 
 // Convert search results to Video format for HomePage compatibility
-const convertSearchResultToVideo: any = (
+const convertSearchResultToVideo = (
  result: YouTubeSearchResult | GoogleSearchResult,
- index: number
+ index
 ): Video => {
  // Generate a unique ID that preserves the source information
  const videoId =
@@ -35,7 +35,7 @@ const convertSearchResultToVideo: any = (
  category: result.categoryId || 'Entertainment',
  tags: result.tags || [],
  // Required Video interface properties,
- visibility: 'public' as const, createdAt: new Date().toISOString(),
+ visibility: 'public' as const createdAt: new Date().toISOString(),
  updatedAt: new Date().toISOString(),
  isLive: false,
  // isUpcoming: false, // Removed as it's not part of Video interface
@@ -97,7 +97,7 @@ interface UseInitialSearchResult {
  const initialKeyword = getInitialSearchKeyword();
 
  // Use home page specific search logic (YouTube API first in hybrid mode)
- const combinedResults = await searchForHomePage(initialKeyword, (query: any) =>
+ const combinedResults = await searchForHomePage(initialKeyword, (query) =>
  VideoService.searchVideos(query).then(result => result.videos)
  );
 
@@ -116,7 +116,7 @@ interface UseInitialSearchResult {
 
  // Combine and sort by view count (trending)
  const allVideos = [...localVideos as any, ...convertedVideos];
- const sortedVideos = allVideos.sort((a: any, b: any) => {
+ const sortedVideos = allVideos.sort((a, b) => {
  const viewsA =
  typeof a.views === 'string'
  ? parseInt(a.views, 10) || 0
@@ -132,7 +132,7 @@ interface UseInitialSearchResult {
  `✅ Successfully fetched ${sortedVideos.length} ${getInitialSearchKeyword()} videos`
  );
  setData(sortedVideos);
- } catch (err: any) {
+ } catch (err) {
  const errorMessage =
  err instanceof Error
  ? err.message
@@ -150,7 +150,7 @@ interface UseInitialSearchResult {
  // Effect to refetch videos when the keyword changes
  useEffect(() => {
  // Listen for storage changes to detect when the keyword is updated
- const handleStorageChange: any = (event: StorageEvent) => {
+ const handleStorageChange = (event: StorageEvent) => {
  if (event.key === 'appSettings') {
  fetchTrendingVideos();
  };

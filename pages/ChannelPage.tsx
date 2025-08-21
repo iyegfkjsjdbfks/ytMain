@@ -92,7 +92,7 @@ const ChannelPage: React.FC = () => {
  setChannelCommunityPosts([]);
  }
 
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Error fetching channel data:', err);
  setError('Failed to load channel data. Please try again later.');
  } finally {
@@ -105,7 +105,7 @@ const ChannelPage: React.FC = () => {
  window.scrollTo(0, 0);
  }, [channelIdOrName]);
 
- const handleSubscribeToggle: any = () => {
+ const handleSubscribeToggle = () => {
  setIsSubscribed(prev => !prev);
  };
 

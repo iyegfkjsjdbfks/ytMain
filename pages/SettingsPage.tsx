@@ -60,7 +60,7 @@ const SelectSetting: React.FC<{
 // FIXED:  onChange={(e) => onChange(e.target.value)}
 // FIXED:  className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
  >
- {options.map((option: any) => (
+ {options.map((option) => (
  <option key={option} value={option}>{option}</option>
  ))}
 // FIXED:  </select>
@@ -84,7 +84,7 @@ const SettingsPage: React.FC = () => {
  repliesComments: true, mentions: true;
  });
 
- const handleNotificationChange: any = (key: keyof typeof notifications) => {
+ const handleNotificationChange = (key: keyof typeof notifications) => {
  setNotifications(prev => ({
  ...prev as any,
  [key]: !prev[key] }));
@@ -142,25 +142,25 @@ const SettingsPage: React.FC = () => {
  label="Autoplay"
  description="Automatically play the next video"
 // FIXED:  checked={autoplay} />
-// FIXED:  onChange={(e: any) => setAutoplay(e)}
+// FIXED:  onChange={(e) => setAutoplay(e)}
  />
  <ToggleSetting
  label="Annotations"
  description="Show video annotations and cards"
 // FIXED:  checked={annotations} />
-// FIXED:  onChange={(e: any) => setAnnotations(e)}
+// FIXED:  onChange={(e) => setAnnotations(e)}
  />
  <ToggleSetting
  label="Captions"
  description="Always show captions"
 // FIXED:  checked={captions} />
-// FIXED:  onChange={(e: any) => setCaptions(e)}
+// FIXED:  onChange={(e) => setCaptions(e)}
  />
  <SelectSetting
  label="Video Quality"
 // FIXED:  value={videoQuality}
  options={['Auto', '144p', '240p', '360p', '480p', '720p', '1080p', '1440p', '2160p']} />
-// FIXED:  onChange={(e: any) => setVideoQuality(e)}
+// FIXED:  onChange={(e) => setVideoQuality(e)}
  />
 // FIXED:  </SettingSection>
 
@@ -169,13 +169,13 @@ const SettingsPage: React.FC = () => {
  label="Restricted Mode"
  description="Hide potentially mature content"
 // FIXED:  checked={restrictedMode} />
-// FIXED:  onChange={(e: any) => setRestrictedMode(e)}
+// FIXED:  onChange={(e) => setRestrictedMode(e)}
  />
  <SelectSetting
  label="Location"
 // FIXED:  value={location}
  options={['United States', 'Canada', 'United Kingdom', 'Germany', 'France', 'Japan', 'Australia']} />
-// FIXED:  onChange={(e: any) => setLocation(e)}
+// FIXED:  onChange={(e) => setLocation(e)}
  />
 // FIXED:  </SettingSection>
 
@@ -184,7 +184,7 @@ const SettingsPage: React.FC = () => {
  label="Language"
 // FIXED:  value={language}
  options={['English', 'Spanish', 'French', 'German', 'Japanese', 'Korean', 'Portuguese']} />
-// FIXED:  onChange={(e: any) => setLanguage(e)}
+// FIXED:  onChange={(e) => setLanguage(e)}
  />
 // FIXED:  </SettingSection>
 

@@ -22,7 +22,7 @@ const VideoGrid: React.FC<VideoGridProps> = ({
  emptyMessage = 'No videos available',
  onVideoClick }) => {
  // Determine grid column classes based on the columns prop
- const getGridClass: any = () => {
+ const getGridClass = () => {
  switch (columns as any) {
  case 1:
  return 'grid-cols-1';
@@ -58,7 +58,7 @@ const VideoGrid: React.FC<VideoGridProps> = ({
  {/* Video grid */}
  {videos.length > 0 ? (
  <div className={`grid ${getGridClass()} gap-4`}>
- {videos.map((video: any) => (
+ {videos.map((video) => (
  <VideoCard
  key={video.id}
  video={video}

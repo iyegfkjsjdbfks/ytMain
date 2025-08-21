@@ -118,9 +118,9 @@ const DevOpsDashboard: React.FC = () => {
 
  // Gather alerts from all systems
  const allAlerts: AlertItem[] = [
- ...securityMonitoring.getSecurityAlerts(false).map((alert: any) => ({
+ ...securityMonitoring.getSecurityAlerts(false).map((alert) => ({
  id: alert.id,
- type: "security" as const, severity: alert.severity,
+ type: "security" as const severity: alert.severity,
  title: alert.title,
  description: alert.description,
  timestamp: alert.timestamp, acknowledged: alert.acknowledged
@@ -128,10 +128,9 @@ const DevOpsDashboard: React.FC = () => {
  ...deploymentAutomation.getAllExecutions()
  .filter((exec) => exec.status === 'failed')
  .slice(0, 5)
- .map((exec: any) => ({
+ .map((exec) => ({
  id: exec.id,
- type: "deployment" as const, severity: 'high' as const,
- title: 'Deployment Failed',
+ type: "deployment" as const severity: 'high' as const title: 'Deployment Failed',
  description: `Pipeline ${exec.pipelineId} failed`,
  timestamp: exec.endTime || exec.startTime,
  acknowledged: false }))
@@ -164,7 +163,7 @@ const DevOpsDashboard: React.FC = () => {
  setAlerts(allAlerts.sort((a, b) => b.timestamp - a.timestamp));
  setLastUpdated(new Date());
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch dashboard data:', error);
  } finally {
  setIsLoading(false);
@@ -180,7 +179,7 @@ const DevOpsDashboard: React.FC = () => {
  }, []);
 
  // Get severity color
- const getSeverityColor: any = (severity: any) => {
+ const getSeverityColor = (severity) => {
  switch (severity as any) {
  case 'critical': return 'text-red-600 bg-red-100';
  case 'high': return 'text-orange-600 bg-orange-100';
@@ -189,7 +188,7 @@ const DevOpsDashboard: React.FC = () => {
  };
 
  // Get score color
- const getScoreColor: any = (score: any) => {
+ const getScoreColor = (score) => {
  if (score >= 90) {
 return 'text-green-600';
 }
@@ -229,7 +228,7 @@ return 'text-orange-600';
  );
 
  // Render overview tab
- const OverviewTab: any = () => {
+ const OverviewTab = () => {
  if (!metrics) {
 return <div>Loading...</div>;
 }
@@ -342,7 +341,7 @@ return <div>Loading...</div>;
  };
 
  // Render performance tab
- const PerformanceTab: any = () => {
+ const PerformanceTab = () => {
  if (!metrics) {
 return <div>Loading...</div>;
 }
@@ -379,7 +378,7 @@ return <div>Loading...</div>;
  };
 
  // Render security tab
- const SecurityTab: any = () => {
+ const SecurityTab = () => {
  if (!metrics) {
 return <div>Loading...</div>;
 }
@@ -412,7 +411,7 @@ return <div>Loading...</div>;
  };
 
  // Render deployment tab
- const DeploymentTab: any = () => {
+ const DeploymentTab = () => {
  if (!metrics) {
 return <div>Loading...</div>;
 }
@@ -446,7 +445,7 @@ return <div>Loading...</div>;
  };
 
  // Render quality tab
- const QualityTab: any = () => {
+ const QualityTab = () => {
  if (!metrics) {
 return <div>Loading...</div>;
 }
@@ -480,7 +479,7 @@ return <div>Loading...</div>;
  };
 
  // Render features tab
- const FeaturesTab: any = () => {
+ const FeaturesTab = () => {
  if (!metrics) {
 return <div>Loading...</div>;
 }
@@ -532,7 +531,7 @@ return <div>Loading...</div>;
 // FIXED:  </div>
  <div className="flex items-center space-x-4">
  <button />
-// FIXED:  onClick={(e: any) => fetchDashboardData(e)}
+// FIXED:  onClick={(e) => fetchDashboardData(e)}
 // FIXED:  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
 // FIXED:  disabled={isLoading}
  >

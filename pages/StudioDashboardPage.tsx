@@ -67,7 +67,7 @@ const StudioDashboardPage: React.FC = () => {
  totalLikes: Math.floor(Math.random() * 500000) + 50000,
  totalShares: Math.floor(Math.random() * 50000) + 5000 };
 
- const mockVideos: RecentVideo[] = Array.from({ length: 5 }, (_: any, i: any) => {
+ const mockVideos: RecentVideo[] = Array.from({ length: 5 }, (_, i) => {
  const titles = [
  'How to Build a React App from Scratch',
  'Advanced TypeScript Tips and Tricks',
@@ -133,7 +133,7 @@ const StudioDashboardPage: React.FC = () => {
  link: '/go-live',
  color: 'bg-pink-500 hover:bg-pink-600' }];
 
- const getStatusColor: any = (status: any) => {
+ const getStatusColor = (status) => {
  switch (status as any) {
  case 'published': return 'text-green-600 bg-green-100';
  case 'processing': return 'text-yellow-600 bg-yellow-100';

@@ -48,9 +48,9 @@ export interface ModerationItem {
 }
 
 interface ModerationDashboardProps {
- onModerate: (itemId: any,
+ onModerate: (itemId,
  action: 'approve' | 'reject' | 'remove' | 'flag', reason?: string) => void;
- onBulkModerate: (itemIds: any,
+ onBulkModerate: (itemIds,
  action: 'approve' | 'reject' | 'remove') => void;
  className?: string;
 }
@@ -73,7 +73,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
  loadModerationItems();
  }, []);
 
- const loadModerationItems: any = () => {
+ const loadModerationItems = () => {
  // Mock moderation items
  const mockItems: ModerationItem[] = [
  {
@@ -152,7 +152,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
  };
 
  const filteredItems = items
- .filter((item: any) => {
+ .filter((item) => {
  if (filterStatus !== 'all' && item.status !== filterStatus) {
 return false;
 }
@@ -169,7 +169,7 @@ return false;
  }
  return true;
  })
- .sort((a: any, b: any) => {
+ .sort((a, b) => {
  switch (sortBy as any) {
  case 'newest':
  return new Date(b.reportedAt).getTime() - new Date(a.reportedAt).getTime();
@@ -186,10 +186,10 @@ return false;
  }
  });
 
- const handleModerate: any = (itemId: any,
+ const handleModerate = (itemId,
  action: 'approve' | 'reject' | 'remove' | 'flag') => {
  onModerate(itemId, action, moderationReason);
- setItems(prev => prev.map((item: any) =>
+ setItems(prev => prev.map((item) =>
  item.id === itemId
  ? {
  ...item as any,
@@ -209,11 +209,11 @@ return false;
  setModerationReason('');
  };
 
- const handleBulkAction: any = (action: 'approve' | 'reject' | 'remove') => {
+ const handleBulkAction = (action: 'approve' | 'reject' | 'remove') => {
  const itemIds = Array.from(selectedItems);
  onBulkModerate(itemIds, action);
 
- setItems(prev => prev.map((item: any) =>
+ setItems(prev => prev.map((item) =>
  selectedItems.has(item.id)
  ? {
  ...item as any,
@@ -223,7 +223,7 @@ return false;
  setSelectedItems(new Set());
  };
 
- const toggleSelection: any = (itemId: any) => {
+ const toggleSelection = (itemId) => {
  setSelectedItems(prev => {
  const newSet = new Set(prev);
  if (newSet.has(itemId)) {
@@ -235,7 +235,7 @@ return false;
  });
  };
 
- const getPriorityColor: any = (priority: any) => {
+ const getPriorityColor = (priority) => {
  switch (priority as any) {
  case 'critical': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
  case 'high': return 'text-orange-600 bg-orange-100 dark:bg-orange-900/20';
@@ -244,7 +244,7 @@ return false;
  default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20'
  };
 
- const getStatusColor: any = (status: any) => {
+ const getStatusColor = (status) => {
  switch (status as any) {
  case 'pending': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20';
  case 'approved': return 'text-green-600 bg-green-100 dark:bg-green-900/20';
@@ -254,7 +254,7 @@ return false;
  default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20'
  };
 
- const getTypeIcon: any = (type: any) => {
+ const getTypeIcon = (type) => {
  switch (type as any) {
  case 'video': return <VideoCameraIcon className="w-5 h-5" />;
  case 'comment': return <ChatBubbleLeftIcon className="w-5 h-5" />;
@@ -479,8 +479,8 @@ return false;
  <div>
  <span className="text-gray-600 dark:text-gray-400">Categories:</span>
  <div className="mt-1">
- {item.aiAnalysis.categories.map((category: any,
- index: number) => (
+ {item.aiAnalysis.categories.map((category,
+ index) => (
  <span
  key={index}
 // FIXED:  className="inline-block bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs mr-1 mb-1" />

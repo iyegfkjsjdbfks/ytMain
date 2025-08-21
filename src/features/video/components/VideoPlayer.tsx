@@ -19,8 +19,8 @@ export interface VideoPlayerProps {
  startTime?: number;
  className?: string;
  onReady?: () => void;
- onTimeUpdate?: (currentTime: any,
- duration: any) => void;
+ onTimeUpdate?: (currentTime,
+ duration) => void;
  onPlay?: () => void;
  onPause?: () => void;
  onEnded?: () => void;
@@ -90,7 +90,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  return;
  }
 
- const handleLoadedMetadata: any = () => {
+ const handleLoadedMetadata = () => {
  setState(prev => ({ ...prev as any, duration: video.duration }));
  if (startTime > 0) {
  video.currentTime = startTime;
@@ -98,35 +98,35 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  onReady?.();
  };
 
- const handleTimeUpdate: any = () => {
+ const handleTimeUpdate = () => {
  const { currentTime } = video;
  const { duration } = video;
  setState(prev => ({ ...prev as any, currentTime }));
  onTimeUpdate?.(currentTime, duration);
  };
 
- const handleProgress: any = () => {
+ const handleProgress = () => {
  if (video.buffered.length > 0) {
- const buffered: any = (video.buffered.end(0) / video.duration) * 100;
+ const buffered = (video.buffered.end(0) / video.duration) * 100;
  setState(prev => ({ ...prev as any, buffered }));
  };
 
- const handlePlay: any = () => {
+ const handlePlay = () => {
  setState(prev => ({ ...prev as any, isPlaying: true }));
  onPlay?.();
  };
 
- const handlePause: any = () => {
+ const handlePause = () => {
  setState(prev => ({ ...prev as any, isPlaying: false }));
  onPause?.();
  };
 
- const handleEnded: any = () => {
+ const handleEnded = () => {
  setState(prev => ({ ...prev as any, isPlaying: false }));
  onEnded?.();
  };
 
- const handleVolumeChange: any = () => {
+ const handleVolumeChange = () => {
  setState(prev => ({
  ...prev as any,
  volume: video.volume,
@@ -161,7 +161,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  videoId]);
 
  useEffect(() => {
- const handleFullscreenChange: any = () => {
+ const handleFullscreenChange = () => {
  setState(prev => ({
  ...prev as any,
  isFullscreen: !!document.fullscreenElement }));
@@ -195,7 +195,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  }
 
  // Rest of the component for custom video player
- const togglePlay: any = () => {
+ const togglePlay = () => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -207,7 +207,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  video.play();
  };
 
- const seek: any = (time: any) => {
+ const seek = (time) => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -216,7 +216,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  video.currentTime = Math.max(0, Math.min(time, state.duration));
  };
 
- const setVolume: any = (volume: any) => {
+ const setVolume = (volume) => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -225,7 +225,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  video.volume = Math.max(0, Math.min(1, volume));
  };
 
- const toggleMute: any = () => {
+ const toggleMute = () => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -246,11 +246,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  } else {
  await container.requestFullscreen();
  }
- } catch (error: any) {
+ } catch (error) {
  logger.error('Fullscreen error:', error);
  };
 
- const setPlaybackRate: any = (rate: any) => {
+ const setPlaybackRate = (rate) => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -260,7 +260,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  setState(prev => ({ ...prev as any, playbackRate: rate }));
  };
 
- const handleProgressClick: any = (e: React.MouseEvent<HTMLDivElement>) => {
+ const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
  const progressBar = progressRef.current;
  if (!progressBar) {
  return;
@@ -273,7 +273,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  seek(newTime);
  };
 
- const showControlsTemporarily: any = () => {
+ const showControlsTemporarily = () => {
  setState(prev => ({ ...prev as any, showControls: true }));
 
  if (controlsTimeoutRef.current) {
@@ -287,7 +287,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  }, 3000);
  };
 
- const formatTime: any = (time: any): string => {
+ const formatTime = (time): string => {
  const hours = Math.floor(time / 3600);
  const minutes = Math.floor((time % 3600) / 60);
  const seconds = Math.floor(time % 60);
@@ -320,7 +320,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  poster={poster}
  autoPlay={autoplay}
  playsInline />
-// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  onClick={(e) => togglePlay(e)}
  >
  {src && <source src={src} type='video/mp4' />}
  Your browser does not support the video tag.
@@ -337,7 +337,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  {!state.isPlaying && state.duration > 0 && (
  <div className='absolute inset-0 flex items-center justify-center'>
  <button />
-// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  onClick={(e) => togglePlay(e)}
 // FIXED:  className='bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full p-4 transition-all duration-200 transform hover:scale-110'
  >
  <PlayIcon className='w-12 h-12 text-white ml-1' />
@@ -356,7 +356,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  <div
  ref={progressRef}
 // FIXED:  className='relative h-1 bg-white bg-opacity-30 rounded-full cursor-pointer hover:h-2 transition-all duration-200' />
-// FIXED:  onClick={(e: any) => handleProgressClick(e)}
+// FIXED:  onClick={(e) => handleProgressClick(e)}
  >
  {/* Buffered Progress */}
  <div
@@ -382,7 +382,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  <div className='flex items-center gap-2'>
  {/* Play/Pause */}
  <button />
-// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  onClick={(e) => togglePlay(e)}
 // FIXED:  className='text-white hover:text-red-400 transition-colors p-1'
  >
  {state.isPlaying ? (
@@ -415,7 +415,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
  onMouseLeave={() => setShowVolumeSlider(false)}
  >
  <button />
-// FIXED:  onClick={(e: any) => toggleMute(e)}
+// FIXED:  onClick={(e) => toggleMute(e)}
 // FIXED:  className='text-white hover:text-red-400 transition-colors p-1'
  >
  {state.isMuted || state.volume === 0 ? (
@@ -526,7 +526,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
  {/* Fullscreen */}
  <button />
-// FIXED:  onClick={(e: any) => toggleFullscreen(e)}
+// FIXED:  onClick={(e) => toggleFullscreen(e)}
 // FIXED:  className='text-white hover:text-red-400 transition-colors p-1'
  >
  {state.isFullscreen ? (

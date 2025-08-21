@@ -43,7 +43,7 @@ export const queryPresets = {
  refetchOnWindowFocus: true,
  refetchOnReconnect: true,
  retry: 3,
- retryDelay: (attemptIndex: any) =>
+ retryDelay: (attemptIndex) =>
  Math.min(1000 * 2 ** attemptIndex, 30000) } } as const;
 
 // Enhanced error handler
@@ -90,7 +90,7 @@ function isRetryableError(error: Error): boolean {
 
 // Enhanced retry logic
 function createRetryFn(maxRetries: number = 3): any {
- return (failureCount: any, error: Error) => {
+ return (failureCount, error: Error) => {
  const apiError = createApiError(error);
 
  // Don't retry if error is not retryable
@@ -109,7 +109,7 @@ function createRetryFn(maxRetries: number = 3): any {
 
 // Enhanced delay function with exponential backoff and jitter
 function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000): any {
- return (attemptIndex: any, error: Error) => {
+ return (attemptIndex, error: Error) => {
  // Create API error to ensure proper error handling
  createApiError(error);
 
@@ -131,7 +131,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000): a
 // Performance monitoring wrapper
 function withPerformanceMonitoring<T>(
  queryFn: () => Promise<T>,
- queryKey: any
+ queryKey
 ): () => Promise<T> {
  return async (): Promise<void> => {
  const startTime = performance.now();
@@ -144,7 +144,7 @@ function withPerformanceMonitoring<T>(
  performanceMonitor.trackApiCall(endpoint, duration, 200);
 
  return result;
- } catch (error: any) {
+ } catch (error) {
  const duration = performance.now() - startTime;
  const status = error?.status || error?.response?.status || 0;
 
@@ -158,7 +158,7 @@ function withPerformanceMonitoring<T>(
 }
 
 export function useEnhancedQuery<TData = unknown, TError = ApiError>(
- queryKey: any,
+ queryKey,
  queryFn: () => Promise<TData>,
  options: {
  preset?: keyof typeof queryPresets;
@@ -209,7 +209,7 @@ export function useEnhancedMutation<
  invalidateQueries?: string[][];
  optimisticUpdate?: {
  queryKey: string;
- updateFn: (oldData: any, variables: TVariables) => any
+ updateFn: (oldData, variables: TVariables) => any
  };
  } & Omit<
  UseMutationOptions<TData, TError, TVariables>
@@ -240,7 +240,7 @@ export function useEnhancedMutation<
  performanceMonitor.trackApiCall(endpoint, duration, 200);
 
  return result;
- } catch (error: any) {
+ } catch (error) {
  const duration = performance.now() - startTime;
  const status = error?.status || error?.response?.status || 0;
 
@@ -263,7 +263,7 @@ export function useEnhancedMutation<
  optimisticUpdate.queryKey
  );
 
- queryClient.setQueryData(optimisticUpdate.queryKey(oldData: any) =>
+ queryClient.setQueryData(optimisticUpdate.queryKey(oldData) =>
  optimisticUpdate.updateFn(oldData, variables)
  );
 
@@ -287,7 +287,7 @@ export function useEnhancedMutation<
 
  mutationOptions.onError?.(error, variables, context);
  },
- onSuccess: (data: any, variables: any, context: any) => {
+ onSuccess: (data, variables, context) => {
  // Invalidate related queries
  invalidateQueries.forEach(queryKey => {
  queryClient.invalidateQueries({ queryKey });
@@ -300,7 +300,7 @@ export function useEnhancedMutation<
 
 // Utility hooks for common patterns
 export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(,
- _queryKey: any,
+ _queryKey,
  _queryFn: ({ pageParam }: any) => Promise<TData>,
  _options: Parameters<typeof useEnhancedQuery>[2] & {
  getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
@@ -319,7 +319,7 @@ export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(,
  return {
  // Prefetch data,
  prefetch: <TData>(,
- queryKey: any,
+ queryKey,
  queryFn: () => Promise<TData>,
  preset: keyof typeof queryPresets = 'standard'
  ) => {
@@ -343,7 +343,7 @@ export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(,
  const cache = queryClient.getQueryCache();
  return {
  size: cache.getAll().length,
- queries: cache.getAll().map((query: any) => ({
+ queries: cache.getAll().map((query) => ({
  queryKey: query.queryKey,
  state: query.state.status,
  dataUpdatedAt: query.state.dataUpdatedAt,

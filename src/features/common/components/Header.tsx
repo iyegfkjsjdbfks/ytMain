@@ -12,7 +12,7 @@ const Header: React.FC = () => {
  const navigate = useNavigate();
  const { user, logout } = useAuthStore();
 
- const handleSearch: any = (e: React.FormEvent) => {
+ const handleSearch = (e: React.FormEvent) => {
  e.preventDefault();
  if (searchQuery.trim()) {
  navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
 
  {/* Search bar */}
  <div className='max-w-lg w-full lg:max-w-xs'>
- <form onSubmit={(e: any) => handleSearch(e)} className='relative'>
+ <form onSubmit={(e) => handleSearch(e)} className='relative'>
  <input
 // FIXED:  type='text'
 // FIXED:  placeholder='Search'
@@ -159,7 +159,7 @@ const Header: React.FC = () => {
  Settings
 // FIXED:  </Link>
  <button />
-// FIXED:  onClick={(e: any) => logout(e)}
+// FIXED:  onClick={(e) => logout(e)}
 // FIXED:  className='block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
  >
  Sign out

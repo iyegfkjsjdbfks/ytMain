@@ -25,7 +25,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
  const HIDE_DELAY = 150; // Delay before hiding preview
 
  // Extract YouTube video ID from the video
- const getVideoId: any = (video: Video): string | null => {
+ const getVideoId = (video: Video): string | null => {
  // Try to extract from video.id if it has prefixes
  if (video.id.startsWith('youtube-')) {
  return video.id.replace('youtube-', '');
@@ -49,7 +49,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
 
  const videoId = getVideoId(video);
 
- const formatDuration: any = (duration: string | number) => {
+ const formatDuration = (duration: string | number) => {
  if (typeof duration === 'string') {
 return duration;
 }
@@ -61,7 +61,7 @@ return duration;
  return '0: 00'
  };
 
- const formatViews: any = (views: string | number) => {
+ const formatViews = (views: string | number) => {
  const num = typeof views === 'string' ? parseInt(views, 10) || 0 : views || 0;
  if (num >= 1000000000) {
  return `${(num / 1000000000).toFixed(1)}B`;
@@ -73,7 +73,7 @@ return duration;
  return num.toString();
  };
 
- const handleMouseEnter: any = () => {
+ const handleMouseEnter = () => {
  setIsHovered(true);
 
  // Clear any existing hide timeout
@@ -89,7 +89,7 @@ return duration;
  // }) as any, HOVER_DELAY);
  // };
 
- const handleMouseLeave: any = () => {
+ const handleMouseLeave = () => {
  setIsHovered(false);
 
  // Clear the hover timeout if user leaves before delay completes

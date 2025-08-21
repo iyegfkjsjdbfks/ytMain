@@ -131,7 +131,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
  { variant },
  'EnhancedPWAInstallBanner'
  );
- } catch (error: any) {
+ } catch (error) {
  setState(prev => ({ ...prev as any, installProgress: 'error' }));
 
  const componentError = createComponentError(
@@ -240,7 +240,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 // FIXED:  </div>
 // FIXED:  </div>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='opacity-50 hover:opacity-75 transition-opacity'
 // FIXED:  aria-label='Dismiss update banner'
  >
@@ -250,13 +250,13 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
  <div className='flex space-x-2'>
  <button />
-// FIXED:  onClick={(e: any) => handleUpdate(e)}
+// FIXED:  onClick={(e) => handleUpdate(e)}
 // FIXED:  className='flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-3 rounded-md transition-colors'
  >
  Update Now
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleNotNow(e)}
+// FIXED:  onClick={(e) => handleNotNow(e)}
 // FIXED:  className={`flex-1 text-sm font-medium py-2 px-3 rounded-md transition-colors ${
  effectiveTheme === 'dark'
  ? 'bg-gray-700 hover:bg-gray-600 text-gray-300'
@@ -287,7 +287,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 // FIXED:  </div>
  <div className='flex items-center space-x-1'>
  <button />
-// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={state.installProgress === 'installing'}
 // FIXED:  className='bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-xs font-medium py-1 px-2 rounded transition-colors'
  >
@@ -296,7 +296,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
  : 'Install'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='opacity-50 hover:opacity-75 transition-opacity p-1'
 // FIXED:  aria-label='Dismiss'
  >
@@ -325,14 +325,14 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 // FIXED:  </div>
  <div className='flex items-center space-x-1'>
  <button />
-// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={state.installProgress === 'installing'}
 // FIXED:  className='bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-xs font-medium py-1 px-3 rounded-full transition-colors'
  >
  {state.installProgress === 'installing' ? '...' : 'Install'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='opacity-50 hover:opacity-75 transition-opacity p-1'
 // FIXED:  aria-label='Dismiss'
  >
@@ -376,7 +376,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
  )}
 // FIXED:  </div>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='opacity-50 hover:opacity-75 transition-opacity p-1'
 // FIXED:  aria-label='Dismiss install banner'
  >
@@ -390,8 +390,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
  {showBenefits && (
  <div className='px-4 pb-3'>
  <div className='grid grid-cols-2 gap-2'>
- {BENEFITS.slice(0, state.showDetails ? 4 : 2).map(
- (benefit: any, index: any) => {
+ {BENEFITS.slice(0, state.showDetails ? 4 : 2).map((benefit, index) => {
  const Icon = benefit.icon;
  return (
  <div key={index} className='flex items-center space-x-2'>
@@ -407,7 +406,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
  {BENEFITS.length > 2 && (
  <button />
-// FIXED:  onClick={(e: any) => toggleDetails(e)}
+// FIXED:  onClick={(e) => toggleDetails(e)}
 // FIXED:  className='text-xs opacity-50 hover:opacity-75 transition-opacity mt-2'
  >
  {state.showDetails ? 'Show less' : 'Show more benefits'}
@@ -420,7 +419,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
  <div className='p-4 pt-0'>
  <div className='flex space-x-2 mb-3'>
  <button />
-// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={state.installProgress === 'installing'}
 // FIXED:  className='flex-1 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-sm font-medium py-2.5 px-4 rounded-md transition-colors flex items-center justify-center space-x-2'
  >
@@ -437,7 +436,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
  )}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleNotNow(e)}
+// FIXED:  onClick={(e) => handleNotNow(e)}
 // FIXED:  className={`flex-1 text-sm font-medium py-2.5 px-4 rounded-md transition-colors ${
  effectiveTheme === 'dark'
  ? 'bg-gray-700 hover:bg-gray-600 text-gray-300'

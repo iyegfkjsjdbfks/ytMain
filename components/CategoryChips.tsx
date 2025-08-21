@@ -5,7 +5,7 @@ import { cn } from '../src/lib/utils';
 interface CategoryChipsProps {
  categories: string;
  selectedCategory: string;
- onSelectCategory: (category: any) => void;
+ onSelectCategory: (category) => void;
  className?: string;
 }
 
@@ -106,7 +106,7 @@ return;
  {/* Left scroll button */}
  {canScrollLeft && (
  <button />
-// FIXED:  onClick={(e: any) => scrollLeft(e)}
+// FIXED:  onClick={(e) => scrollLeft(e)}
 // FIXED:  className="absolute left-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
 // FIXED:  aria-label="Scroll left"
  >
@@ -122,7 +122,7 @@ return;
  className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
  >
- {categories?.map((category: any) => {
+ {categories?.map((category) => {
  const isSelected = category === selectedCategory;
 
  return (
@@ -146,7 +146,7 @@ return;
  {/* Right scroll button */}
  {canScrollRight && (
  <button />
-// FIXED:  onClick={(e: any) => scrollRight(e)}
+// FIXED:  onClick={(e) => scrollRight(e)}
 // FIXED:  className="absolute right-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
 // FIXED:  aria-label="Scroll right"
  >

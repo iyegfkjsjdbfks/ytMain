@@ -17,9 +17,9 @@ interface VideoDescriptionProps {
  isSubscribed?: boolean;
  showFullDescription?: boolean;
  isSummarizing?: boolean;
- onSubscribe?: (channelId: any) => void;
- onLike?: (videoId: any) => void;
- onShare?: (videoId: any) => void;
+ onSubscribe?: (channelId) => void;
+ onLike?: (videoId) => void;
+ onShare?: (videoId) => void;
  onToggleDescription?: () => void;
 }
 
@@ -66,7 +66,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 // FIXED:  </div>
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => onSubscribe(e)}
+// FIXED:  onClick={(e) => onSubscribe(e)}
 // FIXED:  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
  isSubscribed
  ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600'
@@ -93,10 +93,10 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 // FIXED:  className={`text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap leading-relaxed cursor-pointer ${
  !showFullDescription ? 'max-h-20 overflow-hidden' : ''
  }`} />
-// FIXED:  onClick={(e: any) => onToggleDescription(e)}
+// FIXED:  onClick={(e) => onToggleDescription(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e: any) => {
+ onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -116,10 +116,10 @@ onToggleDescription();
  {/* Show More/Less Button */}
  {(video.description.length > 150 || video.description.includes('\n')) && (
  <span />
-// FIXED:  onClick={(e: any) => onToggleDescription(e)}
+// FIXED:  onClick={(e) => onToggleDescription(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e: any) => {
+ onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -134,7 +134,7 @@ onToggleDescription();
  {canSummarize && (
  <div className="mt-4">
  <button />
-// FIXED:  onClick={(e: any) => onSummarizeDescription(e)}
+// FIXED:  onClick={(e) => onSummarizeDescription(e)}
 // FIXED:  disabled={isSummarizing}
 // FIXED:  className="flex items-center space-x-1.5 bg-sky-500/10 dark:bg-sky-400/10 hover:bg-sky-500/20 dark:hover:bg-sky-400/20 text-sky-700 dark:text-sky-300 px-3.5 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
 // FIXED:  aria-label="Summarize video description with AI"

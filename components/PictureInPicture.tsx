@@ -40,7 +40,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
  const navigate = useNavigate();
 
  useEffect(() => {
- const handleMouseMove: any = (e: MouseEvent) => {
+ const handleMouseMove = (e: MouseEvent) => {
  if (isDragging && containerRef.current) {
  const newX = e.clientX - dragOffset.x;
  const newY = e.clientY - dragOffset.y;
@@ -54,7 +54,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
  y: Math.max(0, Math.min(newY, maxY)) });
  };
 
- const handleMouseUp: any = () => {
+ const handleMouseUp = () => {
  setIsDragging(false);
  };
 
@@ -74,8 +74,8 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
 return;
 }
 
- const updateTime: any = () => setCurrentTime(video.currentTime);
- const updateDuration: any = () => setDuration(video.duration);
+ const updateTime = () => setCurrentTime(video.currentTime);
+ const updateDuration = () => setDuration(video.duration);
 
  video.addEventListener('timeupdate', updateTime as EventListener);
  video.addEventListener('loadedmetadata', updateDuration as EventListener);
@@ -85,7 +85,7 @@ return;
  video.removeEventListener('loadedmetadata', updateDuration as EventListener);
  }}, []);
 
- const handleMouseDown: any = (e: React.MouseEvent) => {
+ const handleMouseDown = (e: React.MouseEvent) => {
  if (containerRef.current) {
  const rect = containerRef.current.getBoundingClientRect();
  setDragOffset({
@@ -94,7 +94,7 @@ return;
  setIsDragging(true);
  };
 
- const togglePlay: any = () => {
+ const togglePlay = () => {
  if (videoRef.current) {
  if (isPlaying as any) {
  videoRef.current.pause();
@@ -106,28 +106,28 @@ return;
  setIsPlaying(!isPlaying);
  };
 
- const toggleMute: any = () => {
+ const toggleMute = () => {
  if (videoRef.current) {
  videoRef.current.muted = !isMuted;
  setIsMuted(!isMuted);
  };
 
- const handleSeek: any = (e: React.MouseEvent<HTMLDivElement>) => {
+ const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
  if (videoRef.current && duration > 0) {
  const rect = e.currentTarget.getBoundingClientRect();
  const clickX = e.clientX - rect.left;
- const newTime: any = (clickX / rect.width) * duration;
+ const newTime = (clickX / rect.width) * duration;
  videoRef.current.currentTime = newTime;
  setCurrentTime(newTime);
  };
 
- const formatTime: any = (time: any): string => {
+ const formatTime = (time): string => {
  const minutes = Math.floor(time / 60);
  const seconds = Math.floor(time % 60);
  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
  };
 
- const handleExpand: any = () => {
+ const handleExpand = () => {
  navigate(`/watch/${videoId}`);
  onClose();
  };
@@ -152,7 +152,7 @@ return null;
  // Minimized view
  <div className="w-full h-full flex items-center justify-center bg-gray-900">
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  setIsMinimized(false);
 
@@ -190,7 +190,7 @@ return null;
  <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
  <div className="flex space-x-1">
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  setIsMinimized(true);
  }
@@ -201,7 +201,7 @@ return null;
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  handleExpand();
  }
@@ -213,7 +213,7 @@ return null;
 // FIXED:  </div>
 
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  onClose();
  }
@@ -227,7 +227,7 @@ return null;
  {/* Center Play Button */}
  <div className="absolute inset-0 flex items-center justify-center">
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  togglePlay();
  }
@@ -247,7 +247,7 @@ return null;
  {duration > 0 && (
  <div
 // FIXED:  className="w-full h-1 bg-white/30 rounded-full mb-2 cursor-pointer" />
-// FIXED:  onClick={(e: any) => handleSeek(e)}
+// FIXED:  onClick={(e) => handleSeek(e)}
  >
  <div
 // FIXED:  className="h-full bg-red-500 rounded-full transition-all"
@@ -259,7 +259,7 @@ return null;
  <div className="flex items-center justify-between text-white text-xs">
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  toggleMute();
  }
@@ -280,7 +280,7 @@ return null;
 // FIXED:  </div>
 
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  handleExpand();
  }

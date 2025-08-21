@@ -13,7 +13,7 @@ vi.mock('../../src/services/unifiedDataService');
 const mockUnifiedDataService = vi.mocked(unifiedDataService);
 
 // Test wrapper component with React Query provider
-const createWrapper: any = () => {
+const createWrapper = () => {
  const queryClient = new QueryClient({
  defaultOptions: {
  queries: {
@@ -22,7 +22,7 @@ const createWrapper: any = () => {
  gcTime: 0 } 
  } });
 
- const Wrapper: any = ({ children }: any) => (
+ const Wrapper = ({ children }: any) => (
  <QueryClientProvider client={queryClient}>
  {children}
  </QueryClientProvider>
@@ -64,8 +64,7 @@ describe('Unified Video Hooks', () => {
  tags: ['test'],
  isLive: false,
  isShort: false,
- visibility: 'public' as const, source: 'local' as const,
- metadata: {},
+ visibility: 'public' as const source: 'local' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Test Channel 1',
@@ -98,8 +97,7 @@ describe('Unified Video Hooks', () => {
  tags: ['test', 'gaming'],
  isLive: false,
  isShort: false,
- visibility: 'public' as const,
- source: 'youtube' as const, metadata: {},
+ visibility: 'public' as const source: 'youtube' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Test Channel 2',
@@ -203,8 +201,7 @@ describe('Unified Video Hooks', () => {
  tags: ['test'],
  isLive: false,
  isShort: false,
- visibility: 'public' as const, source: 'local' as const,
- metadata: {},
+ visibility: 'public' as const source: 'local' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Test Channel',
@@ -302,8 +299,7 @@ describe('Unified Video Hooks', () => {
  tags: ['trending'],
  isLive: false,
  isShort: false,
- visibility: 'public' as const, source: 'youtube' as const,
- metadata: {},
+ visibility: 'public' as const source: 'youtube' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Channel 1',
@@ -336,8 +332,7 @@ describe('Unified Video Hooks', () => {
  tags: ['trending', 'gaming'],
  isLive: false,
  isShort: false,
- visibility: 'public' as const,
- source: 'youtube' as const, metadata: {},
+ visibility: 'public' as const source: 'youtube' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Channel 2',
@@ -422,8 +417,7 @@ describe('Unified Video Hooks', () => {
  tags: ['shorts'],
  isLive: false,
  isShort: true,
- visibility: 'public' as const, source: 'youtube' as const,
- metadata: {},
+ visibility: 'public' as const source: 'youtube' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Short Channel',
@@ -456,8 +450,7 @@ describe('Unified Video Hooks', () => {
  tags: ['shorts', 'funny'],
  isLive: false,
  isShort: true,
- visibility: 'public' as const,
- source: 'youtube' as const, metadata: {},
+ visibility: 'public' as const source: 'youtube' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Short Channel 2',
@@ -518,8 +511,7 @@ describe('Unified Video Hooks', () => {
  tags: ['search', 'tech'],
  isLive: false,
  isShort: false,
- visibility: 'public' as const,
- source: 'youtube' as const, metadata: {},
+ visibility: 'public' as const source: 'youtube' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Search Channel 1',
@@ -552,8 +544,7 @@ describe('Unified Video Hooks', () => {
  tags: ['search', 'tech', 'tutorial'],
  isLive: false,
  isShort: false,
- visibility: 'public' as const,
- source: 'youtube' as const, metadata: {},
+ visibility: 'public' as const source: 'youtube' as const metadata: {},
  // Required properties for UnifiedVideoMetadata,
  uploadedAt: new Date().toISOString(),
  channelName: 'Search Channel 2',

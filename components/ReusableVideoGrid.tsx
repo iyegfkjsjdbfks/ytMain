@@ -49,7 +49,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  emptyIcon,
  skeletonCount = 18 }) => {
  // Grid column classes
- const getGridColumns: any = () => {
+ const getGridColumns = () => {
  if (columns === 'auto') {
  return 'grid-cols-1 sm: grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
  }
@@ -57,7 +57,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  };
 
  // Gap classes
- const getGapClass: any = () => {
+ const getGapClass = () => {
  switch (gap as any) {
  case 'sm': return 'gap-3';
  case 'lg': return 'gap-6';
@@ -124,7 +124,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
 
  return (
  <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
- {videos.map((video: any) => (
+ {videos.map((video) => (
  <VideoComponent
  key={video.id}
  video={video}

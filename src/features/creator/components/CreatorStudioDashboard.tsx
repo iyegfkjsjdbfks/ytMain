@@ -142,7 +142,7 @@ export const CreatorStudioDashboard: React.FC = () => {
  },
  color: 'bg-purple-500' }];
 
- const formatNumber: any = (num: any): string => {
+ const formatNumber = (num): string => {
  if (num >= 1000000) {
  return `${(num / 1000000).toFixed(1)}M`;
  }
@@ -152,13 +152,13 @@ export const CreatorStudioDashboard: React.FC = () => {
  return num.toString();
  };
 
- const formatDuration: any = (seconds: any): string => {
+ const formatDuration = (seconds): string => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  return `${hours}h ${minutes}m`;
  };
 
- const getStatusColor: any = (status: any) => {
+ const getStatusColor = (status) => {
  switch (status as any) {
  case 'published':
  return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
@@ -171,7 +171,7 @@ export const CreatorStudioDashboard: React.FC = () => {
  default: return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
  };
 
- const getNotificationIcon: any = (type: any) => {
+ const getNotificationIcon = (type) => {
  switch (type as any) {
  case 'milestone':
  return CheckCircleIcon;
@@ -344,7 +344,7 @@ export const CreatorStudioDashboard: React.FC = () => {
  Quick Actions
 // FIXED:  </h2>
  <div className='grid grid-cols-2 gap-4'>
- {quickActions.map((action: any) => (
+ {quickActions.map((action) => (
  <button
  key={action.id}
 // FIXED:  onClick={action.action}
@@ -377,7 +377,7 @@ export const CreatorStudioDashboard: React.FC = () => {
 // FIXED:  </button>
 // FIXED:  </div>
  <div className='space-y-4'>
- {recentVideos.map((video: any) => (
+ {recentVideos.map((video) => (
  <div key={video.id} className='flex items-center gap-4'>
  <img
 // FIXED:  src={video.thumbnail}
@@ -421,7 +421,7 @@ export const CreatorStudioDashboard: React.FC = () => {
 // FIXED:  </button>
 // FIXED:  </div>
  <div className='space-y-4'>
- {notifications.map((notification: any) => {
+ {notifications.map((notification) => {
  const IconComponent = getNotificationIcon(notification.type);
  return (
  <div

@@ -104,7 +104,7 @@ return undefined;
  /**
  * Execute workflow
  */
- async executeWorkflow(workflowName: any, _context: Record<string, any> = {}): Promise<{
+ async executeWorkflow(workflowName, _context: Record<string, any> = {}): Promise<{
  success: boolean;
  results: QualityGateResult[];
  failedStage?: string;
@@ -135,7 +135,7 @@ return undefined;
  }
 
  (console as any).log(`✅ Stage '${stage.name}' completed`);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`💥 Stage '${stage.name}' error:`, error);
 
  if (stage.required) {
@@ -154,11 +154,11 @@ return undefined;
  /**
  * Execute deployment with _strategy
  */
- async executeDeployment(strategyName: any, version: any, config: Record<string, any> = {}): Promise<{
+ async executeDeployment(strategyName, version, config: Record<string, any> = {}): Promise<{
  success: boolean;
  deploymentId: string;
  strategy: string;
- healthStatus: { healthy: boolean; details: any };
+ healthStatus: { healthy: boolean; details };
  }> {
  const strategy = this.deploymentStrategies.get(strategyName);
  if (!strategy) {
@@ -201,7 +201,7 @@ return undefined;
  deploymentId,
  strategy: strategyName,
  healthStatus };
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('💥 Deployment failed:', error);
 
  this.currentDeployment.status = 'failed';
@@ -267,7 +267,7 @@ return undefined;
  await this.implementSuggestion(_suggestion);
  implemented.push(id);
  (console as any).log(`✅ Auto-implemented: ${_suggestion.description}`);
- } catch (error: any) {
+ } catch (error) {
  failed.push({
  id,
  _error: error instanceof Error ? error.message : 'Unknown error' });
@@ -299,7 +299,7 @@ return undefined;
  const successRate = totalExecutions > 0 ? successfulExecutions / totalExecutions : 0;
 
  const failuresByStage: Record<string, number> = {};
- recentResults.filter((r) => !r.passed).forEach((r: any) => {
+ recentResults.filter((r) => !r.passed).forEach((r) => {
  failuresByStage[r.stage] = (failuresByStage[r.stage] || 0) + 1;
  });
 
@@ -421,7 +421,7 @@ return undefined;
  message: passed ? 'Condition passed' : `Expected ${condition._source} to be ${condition.operator} ${condition.value}, got ${value}` };
  }
 
- private async executeAction(__action: WorkflowAction, ___context: any): Promise<void> {
+ private async executeAction(__action: WorkflowAction, ___context): Promise<void> {
  switch (_action.type) {
  case 'notify':
  (console as any).warn(`🔔 Notification: ${_action?._config.message || 'Quality gate failed'}`);
@@ -441,7 +441,7 @@ return undefined;
  await this.executeScaling(_action?._config);
  break;
  }
- private async executeDeploymentStrategy(_strategy: DeploymentStrategy, _version: any, _config: Record<string, any>): Promise<void> {
+ private async executeDeploymentStrategy(_strategy: DeploymentStrategy, _version, _config: Record<string, any>): Promise<void> {
  switch (_strategy.type) {
  case 'blue-green':
  await this.executeBlueGreenDeployment(_strategy, _version, _config);
@@ -456,7 +456,7 @@ return undefined;
  await this.executeFeatureFlagDeployment(_strategy, _version, _config);
  break;
  }
- private async executeBlueGreenDeployment(_strategy: DeploymentStrategy, _version: any, _config: Record<string, any>): Promise<void> {
+ private async executeBlueGreenDeployment(_strategy: DeploymentStrategy, _version, _config: Record<string, any>): Promise<void> {
  (console as any).log('🔵 Starting blue-green deployment for _strategy:', _strategy.name);
 
  // Deploy to green environment
@@ -472,7 +472,7 @@ return undefined;
  } else {
  throw new Error('Green environment health _checks failed');
  }
- private async executeCanaryDeployment(_strategy: DeploymentStrategy, _version: any, _config: Record<string, any>): Promise<void> {
+ private async executeCanaryDeployment(_strategy: DeploymentStrategy, _version, _config: Record<string, any>): Promise<void> {
  (console as any).log('🐤 Starting canary deployment');
 
  const trafficPercentages = _config.trafficPercentages || [10, 25, 50, 100];
@@ -492,7 +492,7 @@ return undefined;
  (console as any).log('🎉 Canary deployment completed successfully');
  }
 
- private async executeRollingDeployment(_strategy: DeploymentStrategy, _version: any, _config: Record<string, any>): Promise<void> {
+ private async executeRollingDeployment(_strategy: DeploymentStrategy, _version, _config: Record<string, any>): Promise<void> {
  const _batchSize = _config._batchSize || 5;
  (console as any).log('🔄 Starting rolling deployment');
 
@@ -515,7 +515,7 @@ return undefined;
  (console as any).log('🎉 Rolling deployment completed successfully');
  }
 
- private async executeFeatureFlagDeployment(_strategy: DeploymentStrategy, _version: any, _config: Record<string, any>): Promise<void> {
+ private async executeFeatureFlagDeployment(_strategy: DeploymentStrategy, _version, _config: Record<string, any>): Promise<void> {
  (console as any).log('🚩 Starting feature flag deployment');
 
  // Deploy code with feature flag disabled
@@ -540,17 +540,17 @@ return undefined;
  }
 
  // Mock implementations for deployment operations
- private async deployToEnvironment(__env: any, ___version: any): Promise<void> {
+ private async deployToEnvironment(__env, ___version): Promise<void> {
  (console as any).log(`🚀 Deploying ${_version} to ${_env} environment`);
  await new Promise(resolve => setTimeout((resolve) as any, 2000)); // Simulate deployment time
  }
 
- private async switchTraffic(__env: any): Promise<void> {
+ private async switchTraffic(__env): Promise<void> {
  (console as any).log(`🔀 Switching traffic to ${_env}`);
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
  }
 
- private async routeTrafficToCanary(__percentage: any, ___version: any): Promise<void> {
+ private async routeTrafficToCanary(__percentage, ___version): Promise<void> {
  (console as any).log(`📊 Routing ${_percentage}% traffic to canary ${_version}`);
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
  }
@@ -560,32 +560,32 @@ return undefined;
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
  }
 
- private async deployBatch(__startIndex: any, ___batchSize: any, ___version: any): Promise<void> {
+ private async deployBatch(__startIndex, ___batchSize, ___version): Promise<void> {
  (console as any).log(`📦 Deploying batch starting at ${_startIndex} (${_batchSize} instances) with ${_version}`);
  await new Promise(resolve => setTimeout((resolve) as any, 1500));
  }
 
- private async rollbackBatch(_startIndex: any, _batchSize: any): Promise<void> {
+ private async rollbackBatch(_startIndex, _batchSize): Promise<void> {
  (console as any).log(`⏪ Rolling back batch starting at ${_startIndex}`);
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
  }
 
- private async deployWithFeatureFlag(_version: any, enabled: any): Promise<void> {
+ private async deployWithFeatureFlag(_version, enabled): Promise<void> {
  (console as any).log(`🚀 Deploying ${_version} with feature flag ${enabled ? 'enabled' : 'disabled'}`);
  await new Promise(resolve => setTimeout((resolve) as any, 2000));
  }
 
- private async updateFeatureFlag(flagName: any, percentage: any): Promise<void> {
+ private async updateFeatureFlag(flagName, percentage): Promise<void> {
  (console as any).log(`🎯 Updating feature flag ${flagName} to ${percentage}%`);
  await new Promise(resolve => setTimeout((resolve) as any, 500));
  }
 
- private async disableFeatureFlag(flagName: any): Promise<void> {
+ private async disableFeatureFlag(flagName): Promise<void> {
  (console as any).log(`🚫 Disabling feature flag ${flagName}`);
  await new Promise(resolve => setTimeout((resolve) as any, 500));
  }
 
- private async waitForStabilization(seconds: any): Promise<void> {
+ private async waitForStabilization(seconds): Promise<void> {
  (console as any).log(`⏳ Waiting ${seconds}s for stabilization`);
  await new Promise(resolve => setTimeout((resolve) as any, Math.min(seconds * 1000, 5000))); // Cap at 5s for demo
  }
@@ -605,7 +605,7 @@ return undefined;
  responseTime: Math.random() * 100 + 50 })) };
  }
 
- private async evaluateRollback(strategy: DeploymentStrategy, healthStatus: any): Promise<void> {
+ private async evaluateRollback(strategy: DeploymentStrategy, healthStatus): Promise<void> {
  for (const trigger of strategy.rollbackTriggers) {
  const shouldRollback = await this.evaluateCondition(trigger, { healthStatus });
  if (shouldRollback.passed) {
@@ -616,26 +616,26 @@ return undefined;
  }
 
  // Mock implementations for various operations
- private async getMetricValue(source: any): Promise<number> {
+ private async getMetricValue(source): Promise<number> {
  const metrics = advancedAPM.getAggregatedMetrics(source);
  return metrics.avg || Math.random() * 100;
  }
 
- private async getTestResult(source: any): Promise<number> {
+ private async getTestResult(source): Promise<number> {
  (console as any).log(`Getting test results for source: ${source}`);
  return Math.random() > 0.1 ? 100 : 75; // 90% pass rate
  }
 
- private async getSecurityScanResult(source: any): Promise<number> {
+ private async getSecurityScanResult(source): Promise<number> {
  (console as any).log(`Getting security scan results for source: ${source}`);
  return Math.random() > 0.05 ? 0 : 1; // 95% clean rate
  }
 
- private async getPerformanceMetric(source: any): Promise<number> {
+ private async getPerformanceMetric(source): Promise<number> {
  return performanceMonitor.getMetrics().find(m => m.name === source)?.value ?? Math.random() * 1000;
  }
 
- private async getCodeQualityMetric(source: any): Promise<number> {
+ private async getCodeQualityMetric(source): Promise<number> {
  const analysis = await codeAnalysisEngine.analyzeCode();
  return ((analysis as any))[source] ?? Math.random() * 100;
  }
@@ -860,7 +860,7 @@ return undefined;
  _source: 'response-time' }] });
  }
 
- private generateSecureToken(length: any): string {
+ private generateSecureToken(length): string {
  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
  let result = '';
  for (let i = 0; i < length; i++) {

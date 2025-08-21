@@ -19,12 +19,12 @@ interface VideoSettingsProps {
  onClose: () => void;
  qualities: VideoQuality;
  currentQuality: string;
- onQualityChange: (quality: any) => void;
+ onQualityChange: (quality) => void;
  subtitles: Subtitle;
  currentSubtitle: string | null;
  onSubtitleChange: (subtitle: string | null) => void;
  autoplay: boolean;
- onAutoplayChange: (autoplay: any) => void;
+ onAutoplayChange: (autoplay) => void;
  className?: string;
 }
 
@@ -50,7 +50,7 @@ return null;
  <div className="flex items-center justify-between mb-4">
  <h3 className="text-lg font-semibold">Settings</h3>
  <button />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="text-gray-400 hover:text-white transition-colors"
 // FIXED:  aria-label="Close settings"
  >
@@ -62,7 +62,7 @@ return null;
  <div className="mb-6">
  <h4 className="text-sm font-medium mb-2 text-gray-300">Quality</h4>
  <div className="space-y-1">
- {qualities.map((quality: any) => (
+ {qualities.map((quality) => (
  <button
  key={quality.value} />
 // FIXED:  onClick={() => onQualityChange(quality.value)}
@@ -102,7 +102,7 @@ return null;
  )}
 // FIXED:  </div>
 // FIXED:  </button>
- {subtitles.map((subtitle: any) => (
+ {subtitles.map((subtitle) => (
  <button
  key={subtitle.srcLang} />
 // FIXED:  onClick={() => onSubtitleChange(subtitle.srcLang)}

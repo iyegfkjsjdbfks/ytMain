@@ -9,8 +9,8 @@ interface Platform {
 }
 
 interface MultiplatformStreamingProps {
- onPlatformToggle?: (platformId: any,
- enabled: any) => void
+ onPlatformToggle?: (platformId,
+ enabled) => void
 }
 
 export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
@@ -25,9 +25,9 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
  { id: 'twitter',
  name: 'Twitter', enabled: false }]);
 
- const togglePlatform: any = (platformId: any) => {
+ const togglePlatform = (platformId) => {
  setPlatforms(prev =>
- prev.map((platform: any) => {
+ prev.map((platform) => {
  if (platform.id === platformId) {
  const enabled = !platform.enabled;
  onPlatformToggle?.(platformId, enabled);
@@ -42,7 +42,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
  <h3 className='text-lg font-semibold'>Multiplatform Streaming</h3>
 
  <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
- {platforms.map((platform: any) => (
+ {platforms.map((platform) => (
  <div key={platform.id} className='border rounded-lg p-4'>
  <div className='flex items-center justify-between mb-2'>
  <span className='font-medium'>{platform.name}</span>
@@ -66,7 +66,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
 // FIXED:  value={platform.streamKey || ''} />
 // FIXED:  onChange={e => {
  setPlatforms(prev =>
- prev.map((p: any) =>
+ prev.map((p) =>
  p.id === platform.id
  ? { ...p as any, streamKey: e.target.value }
  : p

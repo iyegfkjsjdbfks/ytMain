@@ -39,7 +39,7 @@ const CommentModerationPage: React.FC = () => {
  // Fetch comments for each video
  for (const video of videos.slice(0, 5)) { // Limit to first 5 videos for demo
  const videoComments = await getCommentsByVideoId(video.id);
- const commentsWithVideo = videoComments.map((comment: any) => ({
+ const commentsWithVideo = videoComments.map((comment) => ({
  ...(comment as any),
  videoTitle: video.title,
  videoId: video.id,
@@ -49,7 +49,7 @@ const CommentModerationPage: React.FC = () => {
  }
 
  setComments(allComments);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch comments:', error);
  } finally {
  setLoading(false);
@@ -72,14 +72,14 @@ const CommentModerationPage: React.FC = () => {
  }
  // Apply search
  if (searchQuery as any) {
- filtered = filtered.filter((comment: any) =>
+ filtered = filtered.filter((comment) =>
  comment.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
  comment.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
  comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase()));
  }
 
  // Apply sort
- filtered.sort((a: any, b: any) => {
+ filtered.sort((a, b) => {
  switch (sortBy as any) {
  case 'newest':
  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
@@ -97,7 +97,7 @@ const CommentModerationPage: React.FC = () => {
  setFilteredComments(filtered);
  }, [comments, filter, searchQuery, sortBy]);
 
- const handleSelectComment: any = (commentId: any) => {
+ const handleSelectComment = (commentId) => {
  const newSelected = new Set(selectedComments);
  if (newSelected.has(commentId)) {
  newSelected.delete(commentId);
@@ -108,18 +108,18 @@ const CommentModerationPage: React.FC = () => {
  setShowBulkActions(newSelected.size > 0);
  };
 
- const handleSelectAll: any = () => {
+ const handleSelectAll = () => {
  if (selectedComments.size === filteredComments.length) {
  setSelectedComments(new Set());
  setShowBulkActions(false);
  } else {
- setSelectedComments(new Set(filteredComments.map((c: any) => c.id)));
+ setSelectedComments(new Set(filteredComments.map((c) => c.id)));
  setShowBulkActions(true);
  };
 
- const handleBulkAction: any = (action: 'approve' | 'spam' | 'hide' | 'delete') => {
+ const handleBulkAction = (action: 'approve' | 'spam' | 'hide' | 'delete') => {
  setComments(prevComments =>
- prevComments.map((comment: any) => {
+ prevComments.map((comment) => {
  if (selectedComments.has(comment.id)) {
  if (action === 'delete') {
  return null; // Will be filtered out
@@ -133,10 +133,10 @@ const CommentModerationPage: React.FC = () => {
  setShowBulkActions(false);
  };
 
- const handleSingleAction: any = (commentId: any,
+ const handleSingleAction = (commentId,
  action: 'approve' | 'spam' | 'hide' | 'delete') => {
  setComments(prevComments =>
- prevComments.map((comment: any) => {
+ prevComments.map((comment) => {
  if (comment.id === commentId) {
  if (action === 'delete') {
  return null; // Will be filtered out
@@ -148,7 +148,7 @@ const CommentModerationPage: React.FC = () => {
  }).filter(Boolean) as CommentWithVideo);
  };
 
- const getStatusBadge: any = (status: any, flaggedReason?: string) => {
+ const getStatusBadge = (status, flaggedReason?: string) => {
  const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
 
  if (flaggedReason as any) {
@@ -172,7 +172,7 @@ const CommentModerationPage: React.FC = () => {
  default: return null
  };
 
- const getFilterCount: any = (filterType: FilterType) => {
+ const getFilterCount = (filterType: FilterType) => {
  if (filterType === 'all') {
 return comments.length;
 }
@@ -214,7 +214,7 @@ return comments.filter((c) => c.flaggedReason).length;
  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
  {/* Filter Tabs */}
  <div className="flex flex-wrap gap-2">
- {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType).map((filterType: any) => (
+ {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType).map((filterType) => (
  <button
  key={filterType} />
 // FIXED:  onClick={() => setFilter(filterType)}
@@ -303,7 +303,7 @@ return comments.filter((c) => c.flaggedReason).length;
  <input
 // FIXED:  type="checkbox" />
 // FIXED:  checked={selectedComments.size === filteredComments.length && filteredComments.length > 0}
-// FIXED:  onChange={(e: any) => handleSelectAll(e)}
+// FIXED:  onChange={(e) => handleSelectAll(e)}
 // FIXED:  className="rounded border-neutral-300 dark:border-neutral-600 text-blue-500 focus:ring-blue-500"
  />
  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">

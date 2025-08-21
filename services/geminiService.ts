@@ -14,19 +14,19 @@ try {
  throw new Error('VITE_API_KEY environment variable is not set.');
  }
  ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
-} catch (e: any) {
+} catch (e) {
  (console as any).error('Failed to initialize GoogleGenAI. Ensure VITE_API_KEY is set in import.meta.env.', e.message);
  // Subsequent calls will fail if `ai` is not initialized.
  // The functions below will check for `ai` and throw if it's missing.
 }
 
-const checkAiInitialized: any = () => {
+const checkAiInitialized = () => {
  if (!ai) {
  (console as any).error('Gemini AI client is not initialized. API_KEY might be missing or invalid.');
  throw new Error('AI service is not available. Please check configuration.');
  };
 
-const parseJsonFromText: any = (text: any): any => {
+const parseJsonFromText = (text): any => {
  let jsonStr = text.trim();
  const fenceRegex = /^```(\w*)?\s*\n?(.*?)\n?\s*```$/s;
  const match = jsonStr.match(fenceRegex);
@@ -35,7 +35,7 @@ const parseJsonFromText: any = (text: any): any => {
  }
  try {
  return JSON.parse(jsonStr);
- } catch (e: any) {
+ } catch (e) {
  (console as any).error('Failed to parse JSON response string:', jsonStr, e);
  throw new Error('AI returned an invalid JSON response format.');
  };
@@ -46,7 +46,7 @@ const parseJsonFromText: any = (text: any): any => {
  * @returns A promise that resolves to the summary string.
  * @throws An error if summarization fails or API key is invalid.
  */
-export async function summarizeText(textToSummarize: any): Promise<string> {
+export async function summarizeText(textToSummarize): Promise<string> {
  checkAiInitialized();
 
  const model = 'gemini-2.5-flash-preview-04-17';
@@ -64,7 +64,7 @@ export async function summarizeText(textToSummarize: any): Promise<string> {
  }
  return summary;
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error summarizing text with Gemini:', error);
  if (error.message?.toLowerCase().includes('api key not valid')) {
  throw new Error('AI service authentication failed. Please check the API key configuration.');
@@ -80,7 +80,7 @@ export async function summarizeText(textToSummarize: any): Promise<string> {
  * @returns A promise that resolves to a VideoIdeaResponse object.
  * @throws An error if idea generation fails or API key is invalid.
  */
-export async function generateVideoIdeas(userInput: any): Promise<VideoIdeaResponse> {
+export async function generateVideoIdeas(userInput): Promise<VideoIdeaResponse> {
  checkAiInitialized();
 
  const model = 'gemini-2.5-flash-preview-04-17';
@@ -128,7 +128,7 @@ export async function generateVideoIdeas(userInput: any): Promise<VideoIdeaRespo
 
  return parsedData as VideoIdeaResponse;
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error generating video ideas with Gemini:', error);
  if (error.message?.toLowerCase().includes('api key not valid')) {
  throw new Error('AI service authentication failed. Please check the API key configuration.');

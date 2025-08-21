@@ -13,10 +13,10 @@ interface VideoControlsProps {
  playbackRate: number;
  onPlayPause: () => void;
  onMuteToggle: () => void;
- onVolumeChange: (volume: any) => void;
- onSeek: (time: any) => void;
+ onVolumeChange: (volume) => void;
+ onSeek: (time) => void;
  onFullscreenToggle: () => void;
- onPlaybackRateChange: (rate: any) => void;
+ onPlaybackRateChange: (rate) => void;
  onSettingsToggle: () => void;
  className?: string;
 }
@@ -37,20 +37,20 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  onPlaybackRateChange,
  onSettingsToggle,
  className = '' }) => {
- const formatTime: any = (time: any) => {
+ const formatTime = (time) => {
  const minutes = Math.floor(time / 60);
  const seconds = Math.floor(time % 60);
  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
  };
 
- const handleProgressClick: any = (e: React.MouseEvent<HTMLDivElement>) => {
+ const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
  const rect = e.currentTarget.getBoundingClientRect();
  const clickX = e.clientX - rect.left;
- const newTime: any = (clickX / rect.width) * duration;
+ const newTime = (clickX / rect.width) * duration;
  onSeek(newTime);
  };
 
- const handleVolumeChange: any = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
  onVolumeChange(parseFloat(e.target.value));
  };
 
@@ -61,7 +61,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  {/* Progress Bar */}
  <div
 // FIXED:  className="w-full h-1 bg-gray-600 rounded-full cursor-pointer mb-4 group" />
-// FIXED:  onClick={(e: any) => handleProgressClick(e)}
+// FIXED:  onClick={(e) => handleProgressClick(e)}
  >
  <div
 // FIXED:  className="h-full bg-red-600 rounded-full relative group-hover:h-1.5 transition-all"
@@ -76,7 +76,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  <div className="flex items-center space-x-4">
  {/* Play/Pause */}
  <ActionButton />
-// FIXED:  onClick={(e: any) => onPlayPause(e)}
+// FIXED:  onClick={(e) => onPlayPause(e)}
  ariaLabel={isPlaying ? 'Pause' : 'Play'}
  size="lg"
  >
@@ -90,7 +90,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  {/* Volume Controls */}
  <div className="flex items-center space-x-2 group">
  <ActionButton />
-// FIXED:  onClick={(e: any) => onMuteToggle(e)}
+// FIXED:  onClick={(e) => onMuteToggle(e)}
  ariaLabel={isMuted ? 'Unmute' : 'Mute'}
  >
  {isMuted ? (
@@ -106,7 +106,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
  max="1"
  step="0.1"
 // FIXED:  value={isMuted ? 0 : volume} />
-// FIXED:  onChange={(e: any) => handleVolumeChange(e)}
+// FIXED:  onChange={(e) => handleVolumeChange(e)}
 // FIXED:  className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
  />
 // FIXED:  </div>
@@ -135,7 +135,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
 
  {/* Settings */}
  <ActionButton />
-// FIXED:  onClick={(e: any) => onSettingsToggle(e)}
+// FIXED:  onClick={(e) => onSettingsToggle(e)}
  ariaLabel="Settings"
  >
  <Cog6ToothIcon className="w-5 h-5" />
@@ -143,7 +143,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
 
  {/* Fullscreen */}
  <ActionButton />
-// FIXED:  onClick={(e: any) => onFullscreenToggle(e)}
+// FIXED:  onClick={(e) => onFullscreenToggle(e)}
  ariaLabel={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
  >
  {isFullscreen ? (

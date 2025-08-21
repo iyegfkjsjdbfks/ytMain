@@ -218,7 +218,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  superChats: [] } }];
 
  setStreams(mockStreams);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to fetch streams:', error);
  } finally {
  setLoading(false);
@@ -227,7 +227,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  fetchStreams();
  }, []);
 
- const getStreamActions: any = (stream: LiveStream): StreamAction[] => {
+ const getStreamActions = (stream: LiveStream): StreamAction[] => {
  const baseActions: StreamAction[] = [
  {
  id: 'edit',
@@ -280,7 +280,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  className?: string | undefined;
  }>,
  color: 'text-red-600 hover:text-red-800' },
- ...baseActions.filter((a: any) => a.id !== 'delete')];
+ ...baseActions.filter((a) => a.id !== 'delete')];
  }
 
  if (stream.status === 'scheduled') {
@@ -329,7 +329,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  case 'delete':
  if (confirm('Are you sure you want to delete this stream?')) {
  // In production, call delete API
- setStreams(prev => prev.filter((s: any) => s.id !== stream.id));
+ setStreams(prev => prev.filter((s) => s.id !== stream.id));
  }
  break;
  case 'analytics':
@@ -342,11 +342,11 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  break;
  }
 
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to perform action:', error);
  };
 
- const handleBulkAction = async (action: any): Promise<any> => {
+ const handleBulkAction = async (action): Promise<any> => {
  try {
  switch (action as any) {
  case 'delete':
@@ -356,7 +356,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  )
  ) {
  setStreams(prev =>
- prev.filter((s: any) => !selectedStreams.includes(s.id))
+ prev.filter((s) => !selectedStreams.includes(s.id))
  );
  setSelectedStreams([]);
  }
@@ -367,11 +367,11 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  break;
  }
 
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to perform bulk action:', error);
  };
 
- const getStatusIcon: any = (status: LiveStream['status']) => {
+ const getStatusIcon = (status: LiveStream['status']) => {
  switch (status as any) {
  case 'live':
  return <CheckCircleIcon className='h-5 w-5 text-green-500' />;
@@ -384,7 +384,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  default: return <ExclamationCircleIcon className='h-5 w-5 text-yellow-500' />
  };
 
- const getStatusColor: any = (status: LiveStream['status']) => {
+ const getStatusColor = (status: LiveStream['status']) => {
  switch (status as any) {
  case 'live':
  return 'bg-green-100 text-green-800';
@@ -397,14 +397,14 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  default: return 'bg-yellow-100 text-yellow-800'
  };
 
- const filteredStreams = streams.filter((stream: any) => {
+ const filteredStreams = streams.filter((stream) => {
  if (filter === 'all') {
  return true;
  }
  return stream.status === filter;
  });
 
- const sortedStreams = [...filteredStreams].sort((a: any, b: any) => {
+ const sortedStreams = [...filteredStreams].sort((a, b) => {
  switch (sortBy as any) {
  case 'date':
  const dateA = a.actualStartTime || a.scheduledStartTime || new Date(0);
@@ -420,7 +420,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  }
  });
 
- const formatNumber: any = (num: any) => {
+ const formatNumber = (num) => {
  if (num >= 1000000) {
  return `${(num / 1000000).toFixed(1)}M`;
  }
@@ -430,7 +430,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  return num.toString();
  };
 
- const formatDuration: any = (seconds: any) => {
+ const formatDuration = (seconds) => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  if (hours > 0) {
@@ -515,7 +515,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
 
  {/* Streams List */}
  <div className='space-y-4'>
- {sortedStreams.map((stream: any) => (
+ {sortedStreams.map((stream) => (
  <div
  key={stream.id}
 // FIXED:  className='bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow' />
@@ -530,7 +530,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  setSelectedStreams(prev => [...prev as any, stream.id]);
  } else {
  setSelectedStreams(prev =>
- prev.filter((id: any) => id !== stream.id)
+ prev.filter((id) => id !== stream.id)
  );
  }
  }
@@ -601,7 +601,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
  <div className='flex items-center space-x-2'>
  {getStreamActions(stream)
  .slice(0, 3)
- .map((action: any) => (
+ .map((action) => (
  <button
  key={action.id} />
 // FIXED:  onClick={() => handleStreamAction(stream, action)}

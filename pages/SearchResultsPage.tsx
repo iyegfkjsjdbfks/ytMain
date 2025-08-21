@@ -49,7 +49,7 @@ const SearchResultsPage: React.FC = () => {
  youtubeLoading: false });
 
  // Memoized search function with performance monitoring
- const performSearch = useCallback(async (searchQuery: any): Promise<any> => {
+ const performSearch = useCallback(async (searchQuery): Promise<any> => {
  if (!searchQuery.trim()) {
  setSearchState({
  videos: [],
@@ -118,7 +118,7 @@ const SearchResultsPage: React.FC = () => {
  if (performanceMonitor.hasMetric('search-results-load')) {
  performanceMonitor.endMeasure('search-results-load');
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error in search:', error);
  setSearchState(prev => ({ ...prev as any, loading: false,
  youtubeLoading: false }));
@@ -162,7 +162,7 @@ const SearchResultsPage: React.FC = () => {
  loading={searchState.loading || searchState.youtubeLoading}
  query={debouncedQuery}
  sortBy="relevance" />
- onVideoClick={(video: any) => {
+ onVideoClick={(video) => {
  if ('videoId' in video) {
  // YouTube video - use google-search prefix for search results
  navigate(`/watch?v=google-search-${video.videoId}`);

@@ -9,7 +9,7 @@ interface CommentModalProps {
  onClose: () => void;
  shortId: string;
  shortTitle?: string;
- onCommentSubmit?: (commentText: any) => void
+ onCommentSubmit?: (commentText) => void
 }
 
 /**
@@ -26,7 +26,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
  // shortId is currently not used but kept for future functionality
 
- const handleCommentSubmit = async (text: any): Promise<any> => {
+ const handleCommentSubmit = async (text): Promise<any> => {
  if (!text.trim()) {
 return;
 }
@@ -42,17 +42,17 @@ return;
 
  setCommentText('');
  onClose();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to submit comment:', error);
  } finally {
  setIsSubmitting(false);
  };
 
- const modalFooter: any = (
+ const modalFooter = (
  <div className="flex justify-end space-x-3">
  <button
 // FIXED:  type="button" />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
 // FIXED:  disabled={isSubmitting}
  >

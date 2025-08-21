@@ -30,7 +30,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
  const channelUrl = buildChannelUrl(encodeURIComponent(video.channelName));
  const avatarFallback = getAvatarFallback(video.channelName);
 
- const handleToggleWatchLater: any = (e: React.MouseEvent) => {
+ const handleToggleWatchLater = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  if (isSaved as any) {
@@ -120,7 +120,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 
  <div className="flex-shrink-0">
  <IconButton />
-// FIXED:  onClick={(e: any) => handleToggleWatchLater(e)}
+// FIXED:  onClick={(e) => handleToggleWatchLater(e)}
  variant="ghost"
  size="sm"
 // FIXED:  className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400`}
@@ -201,7 +201,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 
  <div className="flex-shrink-0 ml-2">
  <IconButton />
-// FIXED:  onClick={(e: any) => handleToggleWatchLater(e)}
+// FIXED:  onClick={(e) => handleToggleWatchLater(e)}
  variant="ghost"
  size="sm"
 // FIXED:  className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity`}

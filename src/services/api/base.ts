@@ -27,10 +27,10 @@ export interface PaginatedRequest {
 // Error classes
 export class ApiError extends Error {
  constructor(,
- message: any,
- public status: any,
+ message,
+ public status,
  public code?: string,
- public details: any?
+ public details?
  ) {
  super(message);
  this.name = 'ApiError';
@@ -47,7 +47,7 @@ export class TimeoutError extends Error {
  }
 // Utility functions
 export function createApiUrl(,
- endpoint: any,
+ endpoint,
  params?: Record<string, any>
 ): string {
  let fullUrl: string;
@@ -115,7 +115,7 @@ export function createRequestConfig(config: RequestConfig = {}): RequestInit {
 
 // Request wrapper with timeout and retry logic
 export async function apiRequest<T>(,
- url: any,
+ url,
  config: RequestConfig = {}
 ): Promise<ApiResponse<T>> {
  const {
@@ -132,7 +132,7 @@ export async function apiRequest<T>(,
  for (let attempt = 0; attempt <= retries; attempt++) {
  try {
  // Create timeout promise
- const timeoutPromise = new Promise<never>((_: any, reject: any) => {
+ const timeoutPromise = new Promise<never>((_, reject) => {
  setTimeout((() => reject(new TimeoutError())) as any, timeout);
  });
 
@@ -156,7 +156,7 @@ export async function apiRequest<T>(,
  // Parse response
  const data = await response.json();
  return data;
- } catch (error: any) {
+ } catch (error) {
  lastError = error as Error;
 
  // Don't retry on certain errors
@@ -191,7 +191,7 @@ export async function apiRequest<T>(,
 
 // GET request
 export async function get<T>(,
- endpoint: any,
+ endpoint,
  params?: Record<string, any>
  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
@@ -201,8 +201,8 @@ export async function get<T>(,
 
 // POST request
 export async function post<T>(,
- endpoint: any,
- data: any?,
+ endpoint,
+ data?,
  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
  const url = createApiUrl(endpoint);
@@ -214,8 +214,8 @@ export async function post<T>(,
 
 // PUT request
 export async function put<T>(,
- endpoint: any,
- data: any?,
+ endpoint,
+ data?,
  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
  const url = createApiUrl(endpoint);
@@ -227,8 +227,8 @@ export async function put<T>(,
 
 // PATCH request
 export async function patch<T>(,
- endpoint: any,
- data: any?,
+ endpoint,
+ data?,
  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
  const url = createApiUrl(endpoint);
@@ -240,7 +240,7 @@ export async function patch<T>(,
 
 // DELETE request
 export async function del<T>(,
- endpoint: any,
+ endpoint,
  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
  const url = createApiUrl(endpoint);
@@ -249,7 +249,7 @@ export async function del<T>(,
 
 // Upload file
 export async function upload<T>(,
- endpoint: any,
+ endpoint,
  file: File,
  additionalData?: Record<string, any>
  config?: RequestConfig
@@ -276,7 +276,7 @@ export async function upload<T>(,
 
 // Paginated request helper
 export async function getPaginated<T>(,
- endpoint: any,
+ endpoint,
  params: PaginatedRequest = {},
  config?: RequestConfig
 ): Promise<ApiResponse<T[]> & { pagination: PaginationInfo }> {

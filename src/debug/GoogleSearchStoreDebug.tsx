@@ -43,7 +43,7 @@ const GoogleSearchStoreDebug: FC = () => {
  // Refresh store videos
  const videos = googleSearchVideoStore.getAllVideos();
  setStoreVideos(videos);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Test fetch error:', error);
  setTestResult({
  error: error instanceof Error ? error.message : String(error) });
@@ -51,7 +51,7 @@ const GoogleSearchStoreDebug: FC = () => {
  setLoading(false);
  };
 
- const handleClearStore: any = () => {
+ const handleClearStore = () => {
  googleSearchVideoStore.clear();
  setStoreVideos([]);
  };
@@ -78,7 +78,7 @@ const GoogleSearchStoreDebug: FC = () => {
  setUnifiedServiceTest(result);
 
  logger.debug('🧪 Unified service result:', result);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Unified service test error:', error);
  setUnifiedServiceTest({
  error: error instanceof Error ? error.message : String(error) });
@@ -118,7 +118,7 @@ const GoogleSearchStoreDebug: FC = () => {
  <h2 className='text-lg font-semibold mb-2'>Store Statistics</h2>
  <p>Videos in store: {storeVideos.length}</p>
  <button />
-// FIXED:  onClick={(e: any) => handleClearStore(e)}
+// FIXED:  onClick={(e) => handleClearStore(e)}
 // FIXED:  className='mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600'
  >
  Clear Store
@@ -137,14 +137,14 @@ const GoogleSearchStoreDebug: FC = () => {
 // FIXED:  className='flex-1 px-3 py-2 border rounded'
  />
  <button />
-// FIXED:  onClick={(e: any) => handleTestFetch(e)}
+// FIXED:  onClick={(e) => handleTestFetch(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
  >
  {loading ? 'Testing...' : 'Test Direct Fetch'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleTestUnifiedService(e)}
+// FIXED:  onClick={(e) => handleTestUnifiedService(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 ml-2'
  >

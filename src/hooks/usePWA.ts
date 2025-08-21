@@ -50,13 +50,13 @@ interface UsePWAReturn {
  notificationPermission: NotificationPermission;
  canShowNotifications: boolean;
  requestNotificationPermission: () => Promise<NotificationPermission>;
- showNotification: (options: any) => Promise<boolean>;
+ showNotification: (options) => Promise<boolean>;
 
  // Features,
  shareContent: (data: ShareData) => Promise<boolean>;
  addToHomeScreen: () => void;
- registerBackgroundSync: (tag: string) => Promise<void>;
- cacheVideo: (videoId: any, quality?: string) => Promise<boolean>;
+ registerBackgroundSync: (tag) => Promise<void>;
+ cacheVideo: (videoId, quality?: string) => Promise<boolean>;
 
  // Analytics,
  getInstallStats: () => any;
@@ -67,7 +67,7 @@ interface UsePWAReturn {
  supportedFeatures: string
 }
 
-export const usePWA: any = (): UsePWAReturn => {
+export const usePWA = (): UsePWAReturn => {
  const [state, setState] = useState<PWAState>({
  isInitialized: false,
  features: {
@@ -111,7 +111,7 @@ export const usePWA: any = (): UsePWAReturn => {
  ) },
  'usePWA'
  );
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to initialize PWA features',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -156,7 +156,7 @@ export const usePWA: any = (): UsePWAReturn => {
  }
 
  (localStorage as any).setItem('pwa-usage-data', JSON.stringify(existingData));
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to track PWA usage',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -188,7 +188,7 @@ export const usePWA: any = (): UsePWAReturn => {
  'usePWA',
  );
  return true;
- } catch (error: any) {
+ } catch (error) {
  if (error instanceof Error && error.name === 'AbortError') {
  conditionalLogger.debug(
  'Share cancelled by user',
@@ -227,7 +227,7 @@ export const usePWA: any = (): UsePWAReturn => {
  ]);
 
  // Register background sync
- const registerBackgroundSync = useCallback(async (tag: string): Promise<void> => {
+ const registerBackgroundSync = useCallback(async (tag): Promise<void> => {
  try {
  if (!state.features.backgroundSync) {
  conditionalLogger.warn(
@@ -245,7 +245,7 @@ export const usePWA: any = (): UsePWAReturn => {
  { tag },
  'usePWA',
  );
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to register background sync',
  {
@@ -260,7 +260,7 @@ export const usePWA: any = (): UsePWAReturn => {
 
  // Cache video for offline viewing
  const cacheVideo = useCallback(;
- async (videoId: any, quality?: string): Promise<boolean> => {
+ async (videoId, quality?: string): Promise<boolean> => {
  try {
  if (!('caches' in window)) {
  conditionalLogger.warn(
@@ -288,7 +288,7 @@ export const usePWA: any = (): UsePWAReturn => {
  }
 
  return false;
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to cache video',
  {
@@ -334,7 +334,7 @@ export const usePWA: any = (): UsePWAReturn => {
  notifications.permission
  ]);
 
- // const dismissInstallPrompt: any = (): void => {
+ // const dismissInstallPrompt = (): void => {
  // installPrompt.dismissPrompt(false);
 
  // // Don't show again for this session
@@ -344,7 +344,7 @@ export const usePWA: any = (): UsePWAReturn => {
  // const updateApp = async (): Promise<void> => {
  // try {
  // await pwaUpdates.installUpdate();
- // } catch (error: any) {
+ // } catch (error) {
  // conditionalLogger.error('Failed to update app', { error }, 'usePWA');
  // }
  // };
@@ -425,8 +425,8 @@ export const requestNotificationPermission = async (): Promise<boolean> => {
  return permission === 'granted';
 };
 
-export const showNotification: any = (;
- title: any,
+export const showNotification = (;
+ title,
  options?: NotificationOptions,
 ): void => {
  if ('Notification' in window && Notification.permission === 'granted') {
@@ -440,7 +440,7 @@ export const showNotification: any = (;
  notification.addEventListener('click', ( as EventListener) => notification.close());
  };
 
-export const addToHomeScreen: any = (): void => {
+export const addToHomeScreen = (): void => {
  // For iOS Safari
  if ((navigator as any).standalone === false) {
  alert(
@@ -453,7 +453,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
  try {
  await navigator.share(data);
  return true;
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  `Error sharing: ${error instanceof Error ? error.message : 'Unknown error'}`,
  'usePWA',
@@ -468,7 +468,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
  await (navigator as any).clipboard.writeText(data.url);
  showNotification('Link copied to clipboard!');
  return true;
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  `Error copying to clipboard: ${error instanceof Error ? error.message : 'Unknown error'}`,
  'usePWA',
@@ -484,7 +484,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
  return false;
 };
 
-export const getNetworkStatus: any = (): {
+export const getNetworkStatus = (): {
  online: boolean;
  effectiveType?: string;
  downlink?: number;
@@ -500,7 +500,7 @@ export const getNetworkStatus: any = (): {
  downlink: connection?.downlink };
 };
 
-export const enableBackgroundSync: any = (tag: string): void => {
+export const enableBackgroundSync = (tag): void => {
  if (
  'serviceWorker' in navigator &&,
  'sync' in window.ServiceWorkerRegistration.prototype) {
@@ -523,8 +523,8 @@ export const enableBackgroundSync: any = (tag: string): void => {
  };
 
 export const cacheVideo = async (;
- videoUrl: any,
- videoId: any): Promise<boolean> => {
+ videoUrl,
+ videoId): Promise<boolean> => {
  if ('caches' in window) {
  try {
  const cache = await caches.open('youtubex-videos-v1');
@@ -534,7 +534,7 @@ export const cacheVideo = async (;
  await cache.put(`video-${videoId}`, response);
  return true;
  }
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  `Error caching video: ${error instanceof Error ? error.message : 'Unknown error'}`,
  'usePWA',
@@ -546,13 +546,13 @@ export const cacheVideo = async (;
 };
 
 export const getCachedVideo = async (;
- videoId: any): Promise<Response | null> => {
+ videoId): Promise<Response | null> => {
  if ('caches' in window) {
  try {
  const cache = await caches.open('youtubex-videos-v1');
  const response = await cache.match(`video-${videoId}`);
  return response || null;
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  `Error retrieving cached video: ${error instanceof Error ? error.message : 'Unknown error'}`,
  'usePWA',

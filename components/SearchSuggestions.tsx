@@ -16,8 +16,8 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSu
 // FIXED:  className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
 // FIXED:  aria-label="Search suggestions" />
  >
- {suggestions.map((suggestion: any,
- index: number) => (
+ {suggestions.map((suggestion,
+ index) => (
  <li key={index}>
  <button />
 // FIXED:  onClick={() => onSuggestionClick(suggestion)}

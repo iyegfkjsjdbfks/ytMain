@@ -23,7 +23,7 @@ interface VideoPlayerOptions {
  initialVolume?: number;
  initialPlaybackRate?: number;
  initialQuality?: string;
- onTimeUpdate?: ((currentTime: any) => void) | undefined;
+ onTimeUpdate?: ((currentTime) => void) | undefined;
  onEnded?: (() => void) | undefined;
  onPlay?: (() => void) | undefined;
  onPause?: (() => void) | undefined;
@@ -39,10 +39,10 @@ interface UseVideoPlayerReturn {
  mute: () => void;
  unmute: () => void;
  toggleMute: () => void;
- setVolume: (volume: any) => void;
- seek: (time: any) => void;
- setPlaybackRate: (rate: any) => void;
- setQuality: (quality: any) => void;
+ setVolume: (volume) => void;
+ seek: (time) => void;
+ setPlaybackRate: (rate) => void;
+ setQuality: (quality) => void;
  enterFullscreen: () => Promise<void>;
  exitFullscreen: () => Promise<void>;
  toggleFullscreen: () => Promise<void>;
@@ -80,7 +80,7 @@ interface UseVideoPlayerReturn {
  *
  * Reduces code duplication across video player components
  */
-export const useVideoPlayer: any = (,
+export const useVideoPlayer = (,
  options: VideoPlayerOptions = {}
 ): UseVideoPlayerReturn => {
  const {
@@ -117,7 +117,7 @@ export const useVideoPlayer: any = (,
  try {
  await video.play();
  setState(prev => ({ ...prev as any, isPlaying: true, error: null }));
- } catch (error: any) {
+ } catch (error) {
  // Handle AbortError gracefully - this is common when play() is interrupted by pause()
  if (error instanceof DOMException && error.name === 'AbortError') {
  // This is expected behavior, don't log as error
@@ -193,7 +193,7 @@ export const useVideoPlayer: any = (,
  }
  }, [state.isMuted, mute, unmute]);
 
- const setVolume = useCallback((volume: any) => {
+ const setVolume = useCallback((volume) => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -204,7 +204,7 @@ export const useVideoPlayer: any = (,
  setState(prev => ({ ...prev as any, volume: clampedVolume }));
  }, []);
 
- const seek = useCallback((time: any) => {
+ const seek = useCallback((time) => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -214,7 +214,7 @@ export const useVideoPlayer: any = (,
  setState(prev => ({ ...prev as any, currentTime: time }));
  }, []);
 
- const setPlaybackRate = useCallback((rate: any) => {
+ const setPlaybackRate = useCallback((rate) => {
  const video = videoRef.current;
  if (!video) {
  return;
@@ -224,7 +224,7 @@ export const useVideoPlayer: any = (,
  setState(prev => ({ ...prev as any, playbackRate: rate }));
  }, []);
 
- const setQuality = useCallback((quality: any) => {
+ const setQuality = useCallback((quality) => {
  setState(prev => ({ ...prev as any, quality }));
  }, []);
 
@@ -239,7 +239,7 @@ export const useVideoPlayer: any = (,
  await video.requestFullscreen();
  }
  setState(prev => ({ ...prev as any, isFullscreen: true }));
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error entering fullscreen:', error);
  }
  }, []);
@@ -250,7 +250,7 @@ export const useVideoPlayer: any = (,
  await document.exitFullscreen();
  }
  setState(prev => ({ ...prev as any, isFullscreen: false }));
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error exiting fullscreen:', error);
  }
  }, []);
@@ -428,7 +428,7 @@ export const useVideoPlayer: any = (,
 
  // Handle fullscreen changes
  useEffect(() => {
- const handleFullscreenChange: any = () => {
+ const handleFullscreenChange = () => {
  setState(prev => ({
  ...prev as any,
  isFullscreen: !!document.fullscreenElement }));

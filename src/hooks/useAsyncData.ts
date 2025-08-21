@@ -52,7 +52,7 @@ export function useAsyncData<T>(
  } else {
  setData(result);
  }
- } catch (err: any) {
+ } catch (err) {
  const errorMessage =
  err instanceof Error ? err.message : 'An error occurred';
  setError(errorMessage);

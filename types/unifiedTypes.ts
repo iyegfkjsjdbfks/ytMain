@@ -517,7 +517,7 @@ export interface AuthContextType {
  user: User | null;
  isAuthenticated: boolean;
  isLoading: boolean;
- login: (email: any, password: any) => Promise<void>;
+ login: (email, password) => Promise<void>;
  register: (userData: RegisterData) => Promise<void>;
  logout: () => void;
  updateProfile: (data: Partial<User>) => Promise<void>;
@@ -552,7 +552,7 @@ export interface UseApiOptions {
  refreshInterval?: number;
  retryCount?: number;
  retryDelay?: number;
- onSuccess?: (data: any) => void;
+ onSuccess?: (data) => void;
  onError?: (error: Error) => void
 }
 
@@ -576,9 +576,9 @@ export interface UseFormReturn {
  touched: Record<string, boolean>;
  isSubmitting: boolean;
  isValid: boolean;
- setValue: (name: any, value: string | number) => void;
- setError: (name: any, error: Error) => void;
- setTouched: (name: any, touched: any) => void;
+ setValue: (name, value: string | number) => void;
+ setError: (name, error: Error) => void;
+ setTouched: (name, touched) => void;
  handleSubmit: (e: React.FormEvent) => void;
  reset: () => void
 }

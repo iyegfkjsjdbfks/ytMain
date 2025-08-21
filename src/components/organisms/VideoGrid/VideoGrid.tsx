@@ -7,10 +7,10 @@ import type { VideoGridProps as VideoGridPropsBase } from '@/types';
 
 export interface VideoGridProps
  extends Omit<VideoGridPropsBase, 'onVideoMoreClick'> {
- onVideoMoreClick: (videoId: any) => void
+ onVideoMoreClick: (videoId) => void
 }
 
-export const VideoGrid: any = ({
+export const VideoGrid = ({
  videos,
  className,
  loading = false,
@@ -38,7 +38,7 @@ export const VideoGrid: any = ({
  className
  )} />
  >
- {videos.map((video: any) => (
+ {videos.map((video) => (
  <VideoCard
  key={video.id}
  {...video} />
@@ -50,7 +50,7 @@ export const VideoGrid: any = ({
 };
 
 // Skeleton component for loading state
-const VideoCardSkeleton: any = () => {
+const VideoCardSkeleton = () => {
  return (
  <div className='flex flex-col space-y-2'>
  <div className='aspect-video bg-muted rounded-lg animate-pulse' />

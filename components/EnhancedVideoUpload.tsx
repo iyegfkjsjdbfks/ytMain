@@ -116,13 +116,13 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
  }
  }, [allowedFormats, handleFileSelect]);
 
- const handleFileInputChange: any = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
  const file = e.target.files?.[0];
  if (file as any) {
  handleFileSelect(file);
  };
 
- const handleThumbnailUpload: any = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
  const file = e.target.files?.[0];
  if (file?.type.startsWith('image/')) {
  setUploadData(prev => ({
@@ -131,17 +131,17 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
  customThumbnail: URL.createObjectURL(file) }));
  };
 
- const addTag: any = (tag: string) => {
+ const addTag = (tag) => {
  if (tag.trim() && !uploadData.tags.includes(tag.trim())) {
  setUploadData(prev => ({
  ...prev as any,
  tags: [...prev.tags, tag.trim()] }));
  };
 
- const removeTag: any = (tagToRemove: any) => {
+ const removeTag = (tagToRemove) => {
  setUploadData(prev => ({
  ...prev as any,
- tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
+ tags: prev.tags.filter((tag) => tag !== tagToRemove) }));
  };
 
  const handleSubmit = async (): Promise<void> => {
@@ -168,12 +168,12 @@ return;
 
  clearInterval(progressInterval);
  setUploadProgress(100);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Upload failed:', error);
  setStep('details');
  };
 
- const formatFileSize: any = (bytes: any): string => {
+ const formatFileSize = (bytes): string => {
  if (bytes === 0) {
 return '0 Bytes';
 }
@@ -183,7 +183,7 @@ return '0 Bytes';
  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2)) } ${ sizes[i]}`;
  };
 
- const getVideoDuration: any = (): string => {
+ const getVideoDuration = (): string => {
  if (!videoRef.current) {
 return '0: 00'
 }
@@ -236,7 +236,7 @@ return '0: 00'
  ref={fileInputRef}
 // FIXED:  type="file"
  accept={allowedFormats.join(',')} />
-// FIXED:  onChange={(e: any) => handleFileInputChange(e)}
+// FIXED:  onChange={(e) => handleFileInputChange(e)}
 // FIXED:  className="hidden"
  />
 
@@ -249,7 +249,7 @@ return '0: 00'
  {onCancel && (
  <div className="mt-6 text-center">
  <button />
-// FIXED:  onClick={(e: any) => onCancel(e)}
+// FIXED:  onClick={(e) => onCancel(e)}
 // FIXED:  className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
  >
  Cancel
@@ -483,7 +483,7 @@ return '0: 00'
  ref={thumbnailInputRef}
 // FIXED:  type="file"
  accept="image/*" />
-// FIXED:  onChange={(e: any) => handleThumbnailUpload(e)}
+// FIXED:  onChange={(e) => handleThumbnailUpload(e)}
 // FIXED:  className="hidden"
  />
 // FIXED:  </div>
@@ -504,7 +504,7 @@ return '0: 00'
 // FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
  >
  <option value="">Select a category</option>
- {categories.map((category: any) => (
+ {categories.map((category) => (
  <option key={category} value={category}>{category}</option>
  ))}
 // FIXED:  </select>
@@ -521,7 +521,7 @@ return '0: 00'
 // FIXED:  type="text"
 // FIXED:  placeholder="Add tags to help people find your video"
 // FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
- onKeyPress={(e: any) => {
+ onKeyPress={(e) => {
  if (e.key === 'Enter') {
  e.preventDefault();
  const target = e.target as HTMLInputElement;
@@ -533,8 +533,8 @@ return '0: 00'
 
  {uploadData.tags.length > 0 && (
  <div className="flex flex-wrap gap-2">
- {uploadData.tags.map((tag: string,
- index: number) => (
+ {uploadData.tags.map((tag,
+ index) => (
  <span
  key={index}
 // FIXED:  className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm" />
@@ -575,7 +575,7 @@ return '0: 00'
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => handleSubmit(e)}
+// FIXED:  onClick={(e) => handleSubmit(e)}
 // FIXED:  disabled={!uploadData.title.trim()}
 // FIXED:  className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
  >

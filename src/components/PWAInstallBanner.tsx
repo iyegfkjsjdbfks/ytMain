@@ -48,7 +48,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
  return;
  }
 
- const checkVisibility: any = () => {
+ const checkVisibility = () => {
  if (isInstalled || isDismissed || !canInstall) {
  setIsVisible(false);
  return;
@@ -85,7 +85,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
  onInstallSuccess?.();
  setIsVisible(false);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to install PWA:', error);
  trackEvent('pwa_install_error', {
  source: 'banner',
@@ -93,7 +93,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
  error: error instanceof Error ? error.message : 'Unknown error' });
  };
 
- const handleDismiss: any = () => {
+ const handleDismiss = () => {
  (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
  setIsDismissed(true);
  setIsVisible(false);
@@ -111,11 +111,11 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
  trackEvent('pwa_update_installed', {
  source: 'banner',
  timestamp: Date.now() });
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to install update:', error);
  };
 
- const getPositionClasses: any = () => {
+ const getPositionClasses = () => {
  const baseClasses = 'fixed z-50';
  switch (position as any) {
  case 'bottom-left':
@@ -130,7 +130,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
  return `${baseClasses} bottom-4 right-4`;
  };
 
- const renderMinimalVariant: any = () => (
+ const renderMinimalVariant = () => (
  <div className='bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3 max-w-xs'>
  <div className='flex items-center justify-between'>
  <div className='flex items-center space-x-2'>
@@ -153,14 +153,14 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
 // FIXED:  </div>
  <div className='flex space-x-1'>
  <button />
-// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={isInstalling}
 // FIXED:  className='bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white text-xs font-medium py-1 px-2 rounded transition-colors'
  >
  {isInstalling ? 'Installing...' : 'Install'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1'
  >
  <svg className='w-4 h-4' fill='currentColor' viewBox='0 0 20 20'>
@@ -176,7 +176,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
 // FIXED:  </div>
  );
 
- const renderDefaultVariant: any = () => (
+ const renderDefaultVariant = () => (
  <div className='bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 max-w-sm'>
  {updateAvailable && (
  <div className='mb-3 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md'>
@@ -185,7 +185,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
  Update available
 // FIXED:  </span>
  <button />
-// FIXED:  onClick={(e: any) => handleUpdateInstall(e)}
+// FIXED:  onClick={(e) => handleUpdateInstall(e)}
 // FIXED:  disabled={isUpdating}
 // FIXED:  className='text-xs bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white px-2 py-1 rounded'
  >
@@ -302,14 +302,14 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
 
  <div className='mt-4 flex space-x-2'>
  <button />
-// FIXED:  onClick={(e: any) => handleInstall(e)}
+// FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={isInstalling}
 // FIXED:  className='flex-1 bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white text-sm font-medium py-2 px-3 rounded-md transition-colors'
  >
  {isInstalling ? 'Installing...' : 'Install'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDismiss(e)}
+// FIXED:  onClick={(e) => handleDismiss(e)}
 // FIXED:  className='px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors'
  >
  Not now

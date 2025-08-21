@@ -24,13 +24,13 @@ const AIContentSparkPage: React.FC = () => {
  try {
  const result = await generateVideoIdeas(userInput);
  setVideoIdea(result);
- } catch (err: any) {
+ } catch (err) {
  setError(err.message || 'An unexpected error occurred.');
  } finally {
  setIsLoading(false);
  };
 
- const renderSkeleton: any = () => (
+ const renderSkeleton = () => (
  <div className="mt-8 space-y-6 animate-pulse">
  <div>
  <div className="h-6 bg-neutral-200 dark:bg-neutral-700 rounded w-1/3 mb-2" />
@@ -75,7 +75,7 @@ const AIContentSparkPage: React.FC = () => {
 // FIXED:  </p>
 // FIXED:  </div>
 
- <form onSubmit={(e: any) => handleSubmit(e)} className="mb-8 p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700/50">
+ <form onSubmit={(e) => handleSubmit(e)} className="mb-8 p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700/50">
  <label htmlFor="userInput" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
  Your Topic or Keywords:
 // FIXED:  </label>
@@ -122,8 +122,8 @@ const AIContentSparkPage: React.FC = () => {
  <section>
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-3 border-b border-neutral-300 dark:border-neutral-700 pb-2">Suggested Titles</h2>
  <ul className="list-disc list-inside space-y-1.5 pl-2 text-neutral-700 dark:text-neutral-200 text-sm">
- {videoIdea.titles.map((title: any,
- index: number) => (
+ {videoIdea.titles.map((title,
+ index) => (
  <li key={`title-${index}`}>{title}</li>
  ))}
 // FIXED:  </ul>
@@ -137,8 +137,8 @@ const AIContentSparkPage: React.FC = () => {
  <section>
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-3 border-b border-neutral-300 dark:border-neutral-700 pb-2">Key Talking Points / Outline</h2>
  <ul className="list-disc list-inside space-y-1.5 pl-2 text-neutral-700 dark:text-neutral-200 text-sm">
- {videoIdea.talkingPoints.map((point: any,
- index: number) => (
+ {videoIdea.talkingPoints.map((point,
+ index) => (
  <li key={`point-${index}`}>{point}</li>
  ))}
 // FIXED:  </ul>
@@ -147,8 +147,8 @@ const AIContentSparkPage: React.FC = () => {
  <section>
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-3 border-b border-neutral-300 dark:border-neutral-700 pb-2">Suggested Tags</h2>
  <div className="flex flex-wrap gap-2">
- {videoIdea.tags.map((tag: string,
- index: number) => (
+ {videoIdea.tags.map((tag,
+ index) => (
  <span key={`tag-${index}`} className="px-3 py-1 bg-sky-100 dark:bg-sky-700/50 text-sky-700 dark:text-sky-300 rounded-full text-xs font-medium">
  {tag}
 // FIXED:  </span>

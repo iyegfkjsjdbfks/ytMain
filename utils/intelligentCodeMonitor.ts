@@ -236,7 +236,7 @@ return;
 
  this.lastAnalysis = now;
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to perform code analysis:', error);
  }
  /**
@@ -259,7 +259,7 @@ return;
  accessibilityIssues: this.generateRealisticMetric('accessibilityIssues', 0, 8) };
 
  return _metrics;
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to collect code _metrics:', error);
 
  // Return default _metrics on error
@@ -276,7 +276,7 @@ return;
  /**
  * Generate realistic metric values with some variation
  */
- private generateRealisticMetric(type: any, min: any, max: any): number {
+ private generateRealisticMetric(type, min, max): number {
  const base = min + (max - min) * Math.random();
 
  // Add some trend based on previous values
@@ -284,7 +284,7 @@ return;
  if (previousTrend as any) {
  const previousValue = previousTrend._metrics[type as keyof CodeMetrics];
  // Small random walk
- const change: any = (Math.random() * 0.5) * 2; // -1 to 1
+ const change = (Math.random() * 0.5) * 2; // -1 to 1
  return Math.max(min, Math.min(max, previousValue + change));
  }
 
@@ -323,14 +323,14 @@ return;
  /**
  * Check if a metric change is an improvement
  */
- private isImprovement(metric: keyof CodeMetrics, current: any, previous: any): number {
+ private isImprovement(metric: keyof CodeMetrics, current, previous): number {
  const lowerIsBetter = ['complexity', 'duplicateCode', 'technicalDebt', 'securityVulnerabilities', 'performanceIssues', 'accessibilityIssues'];
 
  if (previous === 0) {
 return 0;
 }
 
- const percentChange: any = ((current - previous) / previous) * 100;
+ const percentChange = ((current - previous) / previous) * 100;
 
  return lowerIsBetter.includes(metric) ? -percentChange : percentChange;
  }
@@ -388,8 +388,8 @@ return 0;
  automatable: true,
  suggestion: 'Add React.memo() to prevent unnecessary re-renders',
  codeExample: {
- before: 'export const SlowComponent: any = ({ data }: any) => { ... }',
- after: 'export const SlowComponent = React.memo(({ data }: any) => { ... });' } });
+ before: 'export const SlowComponent = ({ data }: any) => { ... }',
+ after: 'export const SlowComponent = React.memo(({ data }) => { ... });' } });
  }
 
  // Security opportunities
@@ -509,12 +509,12 @@ return 0;
  private checkQualityGates(metrics: CodeMetrics): void {
  const failedGates: string[] = [];
 
- this.qualityGates.forEach((gate: any) => {
+ this.qualityGates.forEach((gate) => {
  if (!gate.enabled) {
 return;
 }
 
- const failed = gate.criteria.some((criterion: any) => {
+ const failed = gate.criteria.some((criterion) => {
  const value = metrics[criterion.metric as keyof CodeMetrics];
 
  switch (criterion.operator) {
@@ -605,7 +605,7 @@ return;
  // In a real implementation, this would apply the actual refactoring
  (console as any).log(`✅ Applied refactoring: ${opportunity.description}`);
  advancedAPM.recordMetric('auto-refactoring-applied', 1, { type: opportunity.type });
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`❌ Failed to apply refactoring: ${opportunity.description}`, error);
  }
  }

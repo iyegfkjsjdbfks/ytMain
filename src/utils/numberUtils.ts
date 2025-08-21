@@ -7,7 +7,7 @@
  * @param viewsStr The view count string to parse.
  * @returns The parsed number.
  */
-export const parseViewCount: any = (viewsStr: any): number => {
+export const parseViewCount = (viewsStr): number => {
  if (!viewsStr || typeof viewsStr !== 'string') {
  return 0;
  }
@@ -32,7 +32,7 @@ export const parseViewCount: any = (viewsStr: any): number => {
  * @param digits The number of decimal digits (optional, default 0 for K/M/B, 1 if needed).
  * @returns A string representation of the number with suffix.
  */
-export const formatCount: any = (num: any, digits: number = 0): string => {
+export const formatCount = (num, digits: number = 0): string => {
  if (isNaN(num) || num < 0) {
  return '0';
  }
@@ -67,7 +67,7 @@ export const formatNumber = formatCount;
  * @param seconds The duration in seconds
  * @returns A string representation of the duration
  */
-export const formatDuration: any = (seconds: any): string => {
+export const formatDuration = (seconds): string => {
  if (isNaN(seconds) || seconds < 0) {
  return '0: 00'
  }
@@ -87,7 +87,7 @@ export const formatDuration: any = (seconds: any): string => {
  * @param num The number to format
  * @returns A string with comma separators
  */
-export const formatWithCommas: any = (num: any): string => {
+export const formatWithCommas = (num): string => {
  if (isNaN(num)) {
  return '0';
  }
@@ -100,7 +100,7 @@ export const formatWithCommas: any = (num: any): string => {
  * @param decimals Number of decimal places
  * @returns Formatted percentage string
  */
-export const formatPercentage: any = (
+export const formatPercentage = (
  value: string | number,
  decimals: number = 1
 ): string => {
@@ -115,7 +115,7 @@ export const formatPercentage: any = (
  * @param bytes The size in bytes
  * @returns Formatted file size string
  */
-export const formatFileSize: any = (bytes: any): string => {
+export const formatFileSize = (bytes): string => {
  if (isNaN(bytes) || bytes < 0) {
  return '0 B';
  }
@@ -127,6 +127,6 @@ export const formatFileSize: any = (bytes: any): string => {
  return `${bytes} ${sizes[i]}`;
  }
 
- const formatted: any = (bytes / Math.pow(1024, i)).toFixed(1);
+ const formatted = (bytes / Math.pow(1024, i)).toFixed(1);
  return `${formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted} ${sizes[i]}`;
 };

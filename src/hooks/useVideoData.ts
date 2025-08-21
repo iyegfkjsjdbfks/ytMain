@@ -32,7 +32,7 @@ export function useTrendingVideos(category = 'all'): any {
  typeof getVideosByCategory === 'function'
  ) {
  const byCategory = await getVideosByCategory(category);
- const normalized: any = (byCategory as any).map((v: any) => ({
+ const normalized = (byCategory as any).map((v) => ({
  // realVideoService returns fields like thumbnailUrl/publishedAt etc.
  // Map to Video shape expected by UI where necessary
  ...v as any,
@@ -50,13 +50,13 @@ export function useTrendingVideos(category = 'all'): any {
 
  // Fallback: get all videos then sort/filter
  const allVideosRaw = await getVideos();
- const allVideos: any = (allVideosRaw as any).map((v: any) => ({
+ const allVideos = (allVideosRaw as any).map((v) => ({
  ...v as any,
  thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
  publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
  channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '' })) as Video;
 
- const sortedByViews = [...allVideos].sort((a: any, b: any) => {
+ const sortedByViews = [...allVideos].sort((a, b) => {
  const viewsA = parseViewCount(a.views as string);
  const viewsB = parseViewCount(b.views as string);
  return viewsB - viewsA;
@@ -80,7 +80,7 @@ export function useSubscriptionsFeed(): any {
  return [];
  }
 
- const videosPromises = channelNames.map((name: any) =>
+ const videosPromises = channelNames.map((name) =>
  getVideosByChannelName(name)
  );
  const videosByChannel = await Promise.all(videosPromises);
@@ -104,7 +104,7 @@ export function useSubscriptionsFeed(): any {
 /**
  * Hook for fetching videos by channel name
  */
-export function useChannelVideos(channelName: any): any {
+export function useChannelVideos(channelName): any {
  const fetchChannelVideos = useCallback(
  () => getVideosByChannelName(channelName),
  [channelName]

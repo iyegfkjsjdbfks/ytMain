@@ -18,7 +18,7 @@ const LoginPage: React.FC = () => {
  const location = useLocation();
 
  // Get the intended destination or default to home
- const from: any = (location.state)?.from?.pathname || '/';
+ const from = (location.state)?.from?.pathname || '/';
 
  const handleSubmit = async (e: React.FormEvent): Promise<any> => {
  e.preventDefault();
@@ -32,7 +32,7 @@ const LoginPage: React.FC = () => {
  } else {
  setError('Invalid email or password. Please try again.');
  }
- } catch (err: any) {
+ } catch (err) {
  setError('An error occurred. Please try again.');
  } finally {
  setIsLoading(false);
@@ -47,7 +47,7 @@ const LoginPage: React.FC = () => {
  if (success as any) {
  navigate(from, { replace: true });
  }
- } catch (err: any) {
+ } catch (err) {
  setError('Demo login failed. Please try again.');
  } finally {
  setIsLoading(false);
@@ -75,7 +75,7 @@ const LoginPage: React.FC = () => {
 
  <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
  <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
- <form className="space-y-6" onSubmit={(e: any) => handleSubmit(e)}>
+ <form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
  {error && (
  <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
  <div className="text-sm text-red-700 dark:text-red-400">
@@ -165,7 +165,7 @@ const LoginPage: React.FC = () => {
  <div className="mt-6">
  <Button
 // FIXED:  type="button" />
-// FIXED:  onClick={(e: any) => handleDemoLogin(e)}
+// FIXED:  onClick={(e) => handleDemoLogin(e)}
 // FIXED:  disabled={isLoading}
 // FIXED:  className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
  >

@@ -47,7 +47,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  }, []);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
  setIsOpen(false);
  };
@@ -72,7 +72,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
  }, []);
 
- const generateMockNotifications: any = (): Notification[] => {
+ const generateMockNotifications = (): Notification[] => {
  return [
  {
  id: '1',
@@ -137,7 +137,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
  }, [notifications]);
 
- const getNotificationTitle: any = (type: Notification['type']): string => {
+ const getNotificationTitle = (type: Notification['type']): string => {
  switch (type as any) {
  case 'video_upload': return 'New video uploaded';
  case 'comment_reply': return 'New reply to your comment';
@@ -148,7 +148,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  default: return 'New notification'
  };
 
- const getNotificationMessage: any = (type: Notification['type']): string => {
+ const getNotificationMessage = (type: Notification['type']): string => {
  const messages = {
  video_upload: [
  'uploaded: "Amazing Tutorial - You Need to See This!"',
@@ -179,27 +179,27 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  return typeMessages[Math.floor(Math.random() * typeMessages.length)] || 'sent you a notification';
  };
 
- const getRandomChannelName: any = (): string => {
+ const getRandomChannelName = (): string => {
  const names = ['TechGuru', 'CreativeStudio', 'GameMaster', 'MusicVibes', 'CookingPro', 'FitnessExpert'];
  return names[Math.floor(Math.random() * names.length)] || 'Unknown Channel';
  };
 
- const markAsRead: any = (notificationId: any) => {
- const updatedNotifications = notifications.map((n: any) =>
+ const markAsRead = (notificationId) => {
+ const updatedNotifications = notifications.map((n) =>
  n.id === notificationId ? { ...n as any, isRead: true } : n);
  setNotifications(updatedNotifications);
  setUnreadCount(prev => Math.max(0, prev - 1));
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
  };
 
- const markAllAsRead: any = () => {
- const updatedNotifications = notifications.map((n: any) => ({ ...n as any, isRead: true }));
+ const markAllAsRead = () => {
+ const updatedNotifications = notifications.map((n) => ({ ...n as any, isRead: true }));
  setNotifications(updatedNotifications);
  setUnreadCount(0);
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
  };
 
- const deleteNotification: any = (notificationId: any) => {
+ const deleteNotification = (notificationId) => {
  const notification = notifications.find(n => n.id === notificationId);
  const updatedNotifications = notifications.filter((n) => n.id !== notificationId);
  setNotifications(updatedNotifications);
@@ -213,7 +213,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  ? notifications.filter((n) => !n.isRead)
  : notifications;
 
- const getNotificationIcon: any = (type: Notification['type']) => {
+ const getNotificationIcon = (type: Notification['type']) => {
  switch (type as any) {
  case 'video_upload': return '🎥';
  case 'comment_reply': return '💬';
@@ -282,7 +282,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
  {unreadCount > 0 && (
  <button />
-// FIXED:  onClick={(e: any) => markAllAsRead(e)}
+// FIXED:  onClick={(e) => markAllAsRead(e)}
 // FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
  >
  Mark all read

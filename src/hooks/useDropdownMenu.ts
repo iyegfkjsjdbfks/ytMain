@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback, KeyboardEvent, MouseEvent } f
  * Custom hook for managing dropdown menu state and behavior
  * Handles opening/closing, click outside detection, and cleanup
  */
-export const useDropdownMenu: any = () => {
+export const useDropdownMenu = () => {
  const [isOpen, setIsOpen] = useState<boolean>(false);
  const menuRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +22,7 @@ export const useDropdownMenu: any = () => {
 
  // Close menu when clicking outside
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
  setIsOpen(false);
  };
@@ -37,7 +37,7 @@ export const useDropdownMenu: any = () => {
 
  // Close menu on escape key
  useEffect(() => {
- const handleEscapeKey: any = (event: KeyboardEvent) => {
+ const handleEscapeKey = (event: KeyboardEvent) => {
  if (event.key === 'Escape') {
  setIsOpen(false);
  };

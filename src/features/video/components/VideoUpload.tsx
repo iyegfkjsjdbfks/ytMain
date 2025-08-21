@@ -2,7 +2,7 @@ import React, { useRef, useState, FC, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface VideoUploadProps {
- onUploadComplete?: (videoId: any) => void;
+ onUploadComplete?: (videoId) => void;
  allowedTypes?: string;
  maxSizeMB?: number;
 }
@@ -25,7 +25,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 
  const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
- const validateFile: any = (file: File): boolean => {
+ const validateFile = (file: File): boolean => {
  if (!allowedTypes.includes(file.type)) {
  setError(`Invalid file type. Allowed types: ${allowedTypes.join(', ')}`);
  return false;
@@ -39,17 +39,17 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  return true;
  };
 
- const handleDragOver: any = (e: React.DragEvent<HTMLDivElement>) => {
+ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
  e.preventDefault();
  setIsDragging(true);
  };
 
- const handleDragLeave: any = (e: React.DragEvent<HTMLDivElement>) => {
+ const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
  e.preventDefault();
  setIsDragging(false);
  };
 
- const handleDrop: any = (e: React.DragEvent<HTMLDivElement>) => {
+ const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
  e.preventDefault();
  setIsDragging(false);
  setError(null);
@@ -59,7 +59,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  setFile(droppedFile);
  };
 
- const handleFileChange: any = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
  setError(null);
  const selectedFile = e.target.files?.[0];
 
@@ -67,7 +67,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  setFile(selectedFile);
  };
 
- const handleSelectFile: any = () => {
+ const handleSelectFile = () => {
  fileInputRef.current?.click();
  };
 
@@ -112,13 +112,13 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  navigate(`/studio/videos/edit/${videoId}`);
  }
  }) as any, 500);
- } catch (error: any) {
+ } catch (error) {
  clearInterval(interval);
  setError('Upload failed. Please try again.');
  setUploading(false);
  };
 
- const handleCancel: any = () => {
+ const handleCancel = () => {
  setFile(null);
  setError(null);
  setProgress(0);
@@ -160,7 +160,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 // FIXED:  </p>
  <button
 // FIXED:  type='button' />
-// FIXED:  onClick={(e: any) => handleSelectFile(e)}
+// FIXED:  onClick={(e) => handleSelectFile(e)}
 // FIXED:  className='mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
  >
  SELECT FILE
@@ -170,11 +170,11 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  ref={fileInputRef}
 // FIXED:  className='hidden'
  accept={allowedTypes.join(',')} />
-// FIXED:  onChange={(e: any) => handleFileChange(e)}
+// FIXED:  onChange={(e) => handleFileChange(e)}
  />
  <p className='text-xs text-gray-500 mt-2'>
  Accepted formats:{' '}
- {allowedTypes.map((type: any) => type.split('/')[1]).join(', ')}
+ {allowedTypes.map((type) => type.split('/')[1]).join(', ')}
  <br />
  Maximum file size: {maxSizeMB}MB
 // FIXED:  </p>
@@ -229,14 +229,14 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
  <div className='flex space-x-3'>
  <button
 // FIXED:  type='button' />
-// FIXED:  onClick={(e: any) => handleUpload(e)}
+// FIXED:  onClick={(e) => handleUpload(e)}
 // FIXED:  className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
  >
  UPLOAD
 // FIXED:  </button>
  <button
 // FIXED:  type='button' />
-// FIXED:  onClick={(e: any) => handleCancel(e)}
+// FIXED:  onClick={(e) => handleCancel(e)}
 // FIXED:  className='inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
  >
  CANCEL

@@ -54,7 +54,7 @@ const PlaylistManagerPage: React.FC = () => {
 
  // Generate mock data
  useEffect(() => {
- const generateMockVideos: any = (count: any): PlaylistVideo[] => {
+ const generateMockVideos = (count): PlaylistVideo[] => {
  const titles = [
  'Getting Started with React Hooks',
  'Advanced TypeScript Patterns',
@@ -76,7 +76,7 @@ const PlaylistManagerPage: React.FC = () => {
  uploadDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000) }));
  };
 
- const generateMockPlaylists: any = (): Playlist[] => {
+ const generateMockPlaylists = (): Playlist[] => {
  const playlistTitles = [
  'React Tutorial Series',
  'JavaScript Fundamentals',
@@ -91,7 +91,7 @@ const PlaylistManagerPage: React.FC = () => {
 
  const visibilityOptions: Array<'public' | 'unlisted' | 'private'> = ['public', 'unlisted', 'private'];
 
- return Array.from({ length: 8 }, (_: any, i: any) => {
+ return Array.from({ length: 8 }, (_, i) => {
  const videoCount = Math.floor(Math.random() * 15) + 3;
  const videos = generateMockVideos(videoCount);
  const totalViews = videos.reduce((sum, video) => sum + video.views, 0);
@@ -110,16 +110,16 @@ const PlaylistManagerPage: React.FC = () => {
  videos }}).sort((a, b) => b.lastUpdated.getTime() - a.lastUpdated.getTime());
  };
 
- const generateMockStats: any = (playlists: Playlist): PlaylistStats => {
+ const generateMockStats = (playlists: Playlist): PlaylistStats => {
  return {
  totalPlaylists: playlists.length,
- totalVideos: playlists.reduce((sum: any,
- playlist: any) => sum + playlist.videoCount, 0),
- totalViews: playlists.reduce((sum: any,
- playlist: any) => sum + playlist.totalViews, 0),
- publicPlaylists: playlists.filter((p: any) => p.visibility === 'public').length,
- privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
- unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length };
+ totalVideos: playlists.reduce((sum,
+ playlist) => sum + playlist.videoCount, 0),
+ totalViews: playlists.reduce((sum,
+ playlist) => sum + playlist.totalViews, 0),
+ publicPlaylists: playlists.filter((p) => p.visibility === 'public').length,
+ privatePlaylists: playlists.filter((p) => p.visibility === 'private').length,
+ unlistedPlaylists: playlists.filter((p) => p.visibility === 'unlisted').length };
 
  setTimeout((() => {
  const mockPlaylists = generateMockPlaylists();
@@ -130,13 +130,13 @@ const PlaylistManagerPage: React.FC = () => {
  }, []);
 
  const filteredPlaylists = playlists
- .filter((playlist: any) => {
+ .filter((playlist) => {
  const matchesSearch = playlist.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
  playlist.description.toLowerCase().includes(searchTerm.toLowerCase());
  const matchesVisibility = filterVisibility === 'all' || playlist.visibility === filterVisibility;
  return matchesSearch && matchesVisibility;
  })
- .sort((a: any, b: any) => {
+ .sort((a, b) => {
  switch (sortBy as any) {
  case 'title':
  return a.title.localeCompare(b.title);
@@ -150,7 +150,7 @@ const PlaylistManagerPage: React.FC = () => {
  }
  });
 
- const handleCreatePlaylist: any = () => {
+ const handleCreatePlaylist = () => {
  if (!newPlaylist.title.trim()) {
 return;
 }
@@ -173,7 +173,7 @@ return;
  setShowCreateModal(false);
  };
 
- const handleDeletePlaylist: any = (playlistId: any) => {
+ const handleDeletePlaylist = (playlistId) => {
  if (confirm('Are you sure you want to delete this playlist?')) {
  setPlaylists(playlists.filter((p) => p.id !== playlistId));
  if (selectedPlaylist?.id === playlistId) {
@@ -181,7 +181,7 @@ return;
  }
  };
 
- const handleDragEnd: any = (result: DropResult) => {
+ const handleDragEnd = (result: DropResult) => {
  if (!result.destination || !selectedPlaylist) {
 return;
 }
@@ -193,10 +193,10 @@ return;
 
  const updatedPlaylist = { ...selectedPlaylist as any, videos: items };
  setSelectedPlaylist(updatedPlaylist);
- setPlaylists(playlists.map((p: any) => p.id === selectedPlaylist.id ? updatedPlaylist : p));
+ setPlaylists(playlists.map((p) => p.id === selectedPlaylist.id ? updatedPlaylist : p));
  };
 
- const getVisibilityIcon: any = (visibility: any) => {
+ const getVisibilityIcon = (visibility) => {
  switch (visibility as any) {
  case 'public':
  return <GlobeAltIcon className="w-4 h-4" />;
@@ -207,7 +207,7 @@ return;
  default: return <GlobeAltIcon className="w-4 h-4" />
  };
 
- const formatDate: any = (date: Date) => {
+ const formatDate = (date: Date) => {
  return date.toLocaleDateString('en-US', {
  year: 'numeric',
  month: 'short',
@@ -353,7 +353,7 @@ return;
 // FIXED:  </div>
  <div className="flex items-center space-x-2 ml-4">
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  setSelectedPlaylist(playlist);
 }
@@ -362,7 +362,7 @@ return;
  <PencilIcon className="w-4 h-4" />
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  handleDeletePlaylist(playlist.id);
  }
@@ -419,13 +419,13 @@ return;
  <h4 className="font-medium text-gray-900 dark:text-white mb-3">Videos ({selectedPlaylist.videos.length})</h4>
  <DragDropContext onDragEnd={handleDragEnd}>
  <Droppable droppableId="playlist-videos">
- {(provided: any) => (
+ {(provided) => (
  <div { ...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
- {selectedPlaylist.videos.map((video: any,
- index: number) => (
+ {selectedPlaylist.videos.map((video,
+ index) => (
  <Draggable key={video.id} draggableId={video.id} index={index}>
- {(provided: any,
- snapshot: any) => (
+ {(provided,
+ snapshot) => (
  <div
  ref={provided.innerRef}
  {...provided.draggableProps}
@@ -521,7 +521,7 @@ return;
  Cancel
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleCreatePlaylist(e)}
+// FIXED:  onClick={(e) => handleCreatePlaylist(e)}
 // FIXED:  disabled={!newPlaylist.title.trim()}
 // FIXED:  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg transition-colors"
  >

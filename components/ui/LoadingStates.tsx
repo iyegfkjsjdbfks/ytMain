@@ -131,7 +131,7 @@ export const Loading: React.FC<LoadingProps> = ({
  const textSizeClass = sizeMap[size].text;
  const colorClass = colorMap[color];
 
- const renderLoader: any = () => {
+ const renderLoader = () => {
  switch (variant as any) {
  case 'dots':
  return <DotsLoader size={size} color={color} />;

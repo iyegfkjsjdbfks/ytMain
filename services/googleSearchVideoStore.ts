@@ -24,7 +24,7 @@ class GoogleSearchVideoStore {
  * Store multiple Google Custom Search video results
  */
  storeVideos(videos: GoogleSearchResult): void {
- videos.forEach((video: any) => {
+ videos.forEach((video) => {
  this.videos.set(video.id, video);
  });
  this.saveToStorage();
@@ -34,7 +34,7 @@ class GoogleSearchVideoStore {
  /**
  * Get a Google Custom Search video by ID
  */
- getVideo(id: string): GoogleSearchResult | null {
+ getVideo(id): GoogleSearchResult | null {
  const video = this.videos.get(id);
  if (video as any) {
  (console as any).log(`✅ Retrieved Google Search video: ${id} - ${video.title}`);
@@ -47,7 +47,7 @@ class GoogleSearchVideoStore {
  /**
  * Check if a video exists in the store
  */
- hasVideo(id: string): boolean {
+ hasVideo(id): boolean {
  return this.videos.has(id);
  }
 
@@ -73,7 +73,7 @@ class GoogleSearchVideoStore {
  getStats(): { count: number; size: string } {
  const count = this.videos.size;
  const sizeBytes = JSON.stringify(Array.from(this.videos.entries())).length;
- const sizeKB: any = (sizeBytes / 1024).toFixed(2);
+ const sizeKB = (sizeBytes / 1024).toFixed(2);
  return { count, size: `${sizeKB} KB` };
  }
 
@@ -84,7 +84,7 @@ class GoogleSearchVideoStore {
  try {
  const data = Array.from(this.videos.entries());
  (localStorage as any).setItem(this.storageKey, JSON.stringify(data));
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to save Google Search videos to storage:', error);
  }
  /**
@@ -98,7 +98,7 @@ class GoogleSearchVideoStore {
  this.videos = new Map(entries);
  (console as any).log(`📂 Loaded ${this.videos.size} Google Search videos from storage`);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to load Google Search videos from storage:', error);
  this.videos = new Map();
  }

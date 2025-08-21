@@ -24,12 +24,12 @@ class ImageCacheManager {
  private readonly maxSize = 100;
  private readonly maxAge = 30 * 60 * 1000; // 30 minutes
 
- add(url: any) {
+ add(url) {
  this.cleanup();
  this.cache.set(url, { timestamp: Date.now(), url });
  }
 
- has(url: any): boolean {
+ has(url): boolean {
  const entry = this.cache.get(url);
  if (!entry) {
 return false;
@@ -71,7 +71,7 @@ interface OptimizedVideoCardProps {
  showDescription?: boolean;
  className?: string;
  onClick?: (video: Video) => void;
- onChannelClick?: (channelId: any) => void;
+ onChannelClick?: (channelId) => void;
  lazy?: boolean;
  priority?: 'high' | 'low';
  index?: number;
@@ -262,7 +262,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  if (performanceMonitor.hasMetric('video-card-click')) {
  performanceMonitor.endMeasure('video-card-click');
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to handle video click:', error);
  }
  }, [onClick, video, showMiniplayer, isYouTube, isPlayingInline]);
@@ -283,7 +283,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  if (onChannelClick as any) {
  onChannelClick(video.channelId);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to navigate to channel:', error);
  }
  }, [onChannelClick, video.channelId]);
@@ -296,7 +296,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  } else {
  addToWatchLater(video);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to toggle watch later:', error);
  }
  }, [isWatchLater, video, addToWatchLater, removeFromWatchLater]);
@@ -322,7 +322,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  classes.container,
  'group cursor-pointer transition-transform hover:scale-105',
  className)} />
-// FIXED:  onClick={(e: any) => handleVideoClick(e)}
+// FIXED:  onClick={(e) => handleVideoClick(e)}
  onKeyDown={handleKeyDown}
  tabIndex={0}
  role="button"
@@ -343,7 +343,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  />
  {/* Close button for inline player */}
  <button />
-// FIXED:  onClick={(e: any) => handleCloseInlinePlayer(e)}
+// FIXED:  onClick={(e) => handleCloseInlinePlayer(e)}
 // FIXED:  className="absolute top-2 right-2 p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors z-10"
  title="Close player"
  >
@@ -380,7 +380,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  {isYouTube ? (
  <div className="flex items-center gap-2">
  <button />
-// FIXED:  onClick={(e: any) => handlePlayInline(e)}
+// FIXED:  onClick={(e) => handlePlayInline(e)}
 // FIXED:  className="p-2 bg-red-600 hover:bg-red-700 rounded-full transition-colors"
  title="Play inline"
  >
@@ -399,7 +399,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  {!isPlayingInline && (
  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
  <button />
-// FIXED:  onClick={(e: any) => handleWatchLaterToggle(e)}
+// FIXED:  onClick={(e) => handleWatchLaterToggle(e)}
 // FIXED:  className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
  title={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
 // FIXED:  aria-label={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
@@ -411,7 +411,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  )}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleMenuClick(e)}
+// FIXED:  onClick={(e) => handleMenuClick(e)}
 // FIXED:  className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
  title="More options"
 // FIXED:  aria-label="More options"
@@ -576,7 +576,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  loading="lazy" />
  />
  <button />
-// FIXED:  onClick={(e: any) => handleChannelClick(e)}
+// FIXED:  onClick={(e) => handleChannelClick(e)}
 // FIXED:  className={cn(
  classes.channel,
  'hover:text-gray-900 transition-colors truncate focus:outline-none focus:ring-2 focus:ring-blue-500 rounded')}
@@ -606,7 +606,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
  {/* Tags */}
  {video.tags && video.tags.length > 0 && (
  <div className="flex flex-wrap gap-1 mt-2" role="list" aria-label="Video tags">
- {video.tags.slice(0, 3).map((tag: string) => (
+ {video.tags.slice(0, 3).map((tag) => (
  <span
  key={tag}
 // FIXED:  className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
@@ -625,7 +625,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 OptimizedVideoCard.displayName = 'OptimizedVideoCard';
 
 // Export with enhanced memoization
-export default withMemo(OptimizedVideoCard(prevProps: any, nextProps: any) => {
+export default withMemo(OptimizedVideoCard(prevProps, nextProps) => {
  return (
  prevProps.video.id === nextProps.video.id &&
  prevProps.video.title === nextProps.video.title &&

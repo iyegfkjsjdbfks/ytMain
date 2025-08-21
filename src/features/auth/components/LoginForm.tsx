@@ -28,7 +28,7 @@ export const LoginForm: React.FC = () => {
 
  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
- const validateForm: any = (): boolean => {
+ const validateForm = (): boolean => {
  let isValid = true;
  const errors = {
  email: '',
@@ -53,7 +53,7 @@ export const LoginForm: React.FC = () => {
  return isValid;
  };
 
- const handleChange: any = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
  const { name, value, type, checked } = e.target;
  setFormData({
  ...formData as any,
@@ -76,7 +76,7 @@ export const LoginForm: React.FC = () => {
  const state = location.state as LocationState;
  const destination = state.from?.pathname || '/';
  navigate(destination, { replace: true });
- } catch (err: any) {
+ } catch (err) {
  // Error is handled by the authStore and displayed below
  } finally {
  setIsSubmitting(false);
@@ -92,7 +92,7 @@ export const LoginForm: React.FC = () => {
 // FIXED:  </div>
  )}
 
- <form onSubmit={(e: any) => handleSubmit(e)}>
+ <form onSubmit={(e) => handleSubmit(e)}>
  <div className='mb-4'>
  <label
 // FIXED:  className='block text-gray-700 text-sm font-bold mb-2'
@@ -110,7 +110,7 @@ export const LoginForm: React.FC = () => {
  : 'border-gray-300 focus:ring-blue-200'
  }`}
 // FIXED:  value={formData.email} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
 // FIXED:  disabled={isSubmitting}
  />
  {formErrors.email && (
@@ -135,7 +135,7 @@ export const LoginForm: React.FC = () => {
  : 'border-gray-300 focus:ring-blue-200'
  }`}
 // FIXED:  value={formData.password} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
 // FIXED:  disabled={isSubmitting}
  />
  {formErrors.password && (
@@ -150,7 +150,7 @@ export const LoginForm: React.FC = () => {
 // FIXED:  type='checkbox'
 // FIXED:  name='rememberMe'
 // FIXED:  checked={formData.rememberMe} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
 // FIXED:  className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
 // FIXED:  disabled={isSubmitting}
  />

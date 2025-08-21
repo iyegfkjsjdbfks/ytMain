@@ -14,7 +14,7 @@ declare namespace NodeJS {
  * @param delay - The delay in milliseconds
  * @returns The debounced value
  */
-export function useDebounce<T>(value: T, delay: any): T {
+export function useDebounce<T>(value: T, delay): T {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
  useEffect(() => {
@@ -37,9 +37,9 @@ export function useDebounce<T>(value: T, delay: any): T {
  * @param deps - Dependencies array for the callback
  * @returns The debounced callback function
  */
-export function useDebouncedCallback<T extends (...args: any[]) => any>(
+export function useDebouncedCallback<T extends (...args) => any>(
  callback: T,
- delay: any,
+ delay,
  deps: React.DependencyList = []
 ): T {
  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
@@ -75,7 +75,7 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
  * @returns Object with search state and functions
  */
 export function useDebouncedSearch<T>(,
- searchFunction: (query: any) => Promise<T[]>,
+ searchFunction: (query) => Promise<T[]>,
  delay: number = 300
 ) {
  const [query, setQuery] = useState<string>('');
@@ -86,7 +86,7 @@ export function useDebouncedSearch<T>(,
  const debouncedQuery = useDebounce(query, delay);
  const abortControllerRef = useRef<AbortController>();
 
- const search = useCallback(async (searchQuery: any): Promise<any> => {
+ const search = useCallback(async (searchQuery): Promise<any> => {
  if (!searchQuery.trim()) {
  setResults([]);
  setLoading(false);
@@ -108,7 +108,7 @@ export function useDebouncedSearch<T>(,
  try {
  const searchResults = await searchFunction(searchQuery);
  setResults(searchResults);
- } catch (err: any) {
+ } catch (err) {
  if (err instanceof Error && err.name !== 'AbortError') {
  setError(err.message);
  setResults([]);

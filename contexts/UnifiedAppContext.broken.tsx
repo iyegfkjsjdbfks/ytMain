@@ -82,7 +82,7 @@ function unifiedAppReducer(state: UnifiedAppState,
  case 'REMOVE_FROM_WATCH_LATER':
  return {
  ...state as any,
- watchLaterVideos: state.watchLaterVideos.filter((id: string) => id !== action.payload) };
+ watchLaterVideos: state.watchLaterVideos.filter((id) => id !== action.payload) };
  case 'TOGGLE_SIDEBAR':
  return {
  ...state as any,
@@ -94,7 +94,7 @@ function unifiedAppReducer(state: UnifiedAppState,
  case 'REMOVE_NOTIFICATION':
  return {
  ...state as any,
- notifications: state.notifications.filter((n: any) => n.id !== action.payload) };
+ notifications: state.notifications.filter((n) => n.id !== action.payload) };
  default: return state
  }
 // Context Interface
@@ -102,8 +102,8 @@ interface UnifiedAppContextType {
  state: UnifiedAppState;
 
  // Auth actions,
- login: (email: any,
- password: any) => Promise<boolean>;
+ login: (email,
+ password) => Promise<boolean>;
  logout: () => void;
  updateProfile: (updates: Partial<User>) => Promise<boolean>;
 
@@ -116,14 +116,14 @@ interface UnifiedAppContextType {
  toggleMiniplayer: () => void;
 
  // Watch Later actions,
- addToWatchLater: (videoId: any) => void;
- removeFromWatchLater: (videoId: any) => void;
- isInWatchLater: (videoId: any) => boolean;
+ addToWatchLater: (videoId) => void;
+ removeFromWatchLater: (videoId) => void;
+ isInWatchLater: (videoId) => boolean;
 
  // UI actions,
  toggleSidebar: () => void;
  addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
- removeNotification: (id: string) => void
+ removeNotification: (id) => void
 }
 
 // Create Context
@@ -142,8 +142,8 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
  const [state, dispatch] = useReducer<any, any>(unifiedAppReducer, initialState);
 
  // Auth actions
- const login = useCallback(async (email: any,
- password: any): Promise<boolean> => {
+ const login = useCallback(async (email,
+ password): Promise<boolean> => {
  dispatch({ type: "SET_AUTH_LOADING",
  payload: true });
 
@@ -188,7 +188,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
  dispatch({ type: "SET_USER",
  payload: mockUser });
  return true;
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Login failed:', error);
  return false;
  } finally {
@@ -215,7 +215,7 @@ return false;
  dispatch({ type: "SET_USER",
  payload: updatedUser });
  return true;
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Profile update failed:', error);
  return false;
  }
@@ -244,21 +244,21 @@ return false;
  }, []);
 
  // Watch Later actions
- const addToWatchLater = useCallback((videoId: any) => {
+ const addToWatchLater = useCallback((videoId) => {
  dispatch({ type: "ADD_TO_WATCH_LATER",
  payload: videoId });
  const updated = [...state.watchLaterVideos, videoId];
  (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
  }, [state.watchLaterVideos]);
 
- const removeFromWatchLater = useCallback((videoId: any) => {
+ const removeFromWatchLater = useCallback((videoId) => {
  dispatch({ type: "REMOVE_FROM_WATCH_LATER",
  payload: videoId });
- const updated = state.watchLaterVideos.filter((id: string) => id !== videoId);
+ const updated = state.watchLaterVideos.filter((id) => id !== videoId);
  (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
  }, [state.watchLaterVideos]);
 
- const isInWatchLater = useCallback((videoId: any) => {
+ const isInWatchLater = useCallback((videoId) => {
  return state.watchLaterVideos.includes(videoId);
  }, [state.watchLaterVideos]);
 
@@ -276,14 +276,14 @@ return false;
  payload: notificationWithId });
  }, []);
 
- const removeNotification = useCallback((id: string) => {
+ const removeNotification = useCallback((id) => {
  dispatch({ type: "REMOVE_NOTIFICATION",
  payload: id });
  }, []);
 
  // Initialize state from localStorage
  React.useEffect(() => {
- const initializeState: any = () => {
+ const initializeState = () => {
  // Set loading to false immediately for faster perceived performance
  dispatch({ type: "SET_AUTH_LOADING",
  payload: false });
@@ -298,7 +298,7 @@ return false;
  const user = JSON.parse(storedUser);
  dispatch({ type: "SET_USER",
  payload: user });
- } catch (parseError: any) {
+ } catch (parseError) {
  (console as any).warn('Failed to parse stored user data, clearing:', parseError);
  localStorage.removeItem('youtube_clone_user');
  localStorage.removeItem('youtube_clone_token');
@@ -317,19 +317,19 @@ return false;
  try {
  const watchLaterVideos = JSON.parse(storedWatchLater);
  if (Array.isArray(watchLaterVideos)) {
- watchLaterVideos.forEach((videoId: any) => {
+ watchLaterVideos.forEach((videoId) => {
  if (typeof videoId === 'string') {
  dispatch({ type: "ADD_TO_WATCH_LATER") as any,
  payload: videoId });
  }
  });
  }
- } catch (parseError: any) {
+ } catch (parseError) {
  (console as any).warn('Failed to parse stored watch later data, clearing:', parseError);
  localStorage.removeItem('youtube_clone_watch_later');
  }
  }, 0);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to initialize app state:', error);
  };
 

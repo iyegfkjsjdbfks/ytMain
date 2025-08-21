@@ -42,7 +42,7 @@ interface UseServiceWorkerReturn {
  * Enhanced hook for managing service worker functionality
  * Handles registration, updates, and cache management
  */
-export const useServiceWorker: any = (): UseServiceWorkerReturn => {
+export const useServiceWorker = (): UseServiceWorkerReturn => {
  const [state, setState] = useState<ServiceWorkerState>({
  isSupported: 'serviceWorker' in navigator,
  isRegistered: false,
@@ -66,7 +66,7 @@ export const useServiceWorker: any = (): UseServiceWorkerReturn => {
 
  // Wait for the new service worker to take control
  await new Promise<void>(resolve => {
- const handleControllerChange: any = () => {
+ const handleControllerChange = () => {
  navigator.serviceWorker.removeEventListener(
  'controllerchange',
  handleControllerChange,
@@ -95,7 +95,7 @@ export const useServiceWorker: any = (): UseServiceWorkerReturn => {
  window.location.reload();
 
  return true;
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  'useServiceWorker',
  'Failed to update service worker',
@@ -149,7 +149,7 @@ export const useServiceWorker: any = (): UseServiceWorkerReturn => {
  }
 
  return result;
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  'useServiceWorker',
  'Failed to unregister service worker',
@@ -183,7 +183,7 @@ export const useServiceWorker: any = (): UseServiceWorkerReturn => {
  undefined,
  'useServiceWorker',
  );
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  'useServiceWorker',
  'Failed to check for updates',
@@ -221,7 +221,7 @@ export const useServiceWorker: any = (): UseServiceWorkerReturn => {
  return {
  caches: cacheNames,
  totalSize };
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to get cache info',
  error,
@@ -305,7 +305,7 @@ export const useServiceWorker: any = (): UseServiceWorkerReturn => {
  return () => {
  clearInterval(updateInterval);
  };
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(;
  'useServiceWorker',
  'Failed to register service worker',
@@ -326,7 +326,7 @@ export const useServiceWorker: any = (): UseServiceWorkerReturn => {
  };
 
  // Handle controller change (when new SW takes control)
- const handleControllerChange: any = () => {
+ const handleControllerChange = () => {
  conditionalLogger.debug(
  'Service worker controller changed',
  undefined,

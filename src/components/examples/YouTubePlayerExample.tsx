@@ -39,7 +39,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  const progressInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
 
  // Format time in seconds to MM:SS format
- const formatTime: any = (timeInSeconds: any): string => {
+ const formatTime = (timeInSeconds): string => {
  const minutes = Math.floor(timeInSeconds / 60);
  const seconds = Math.floor(timeInSeconds % 60);
  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -93,7 +93,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  setIsMuted(muted);
  }
 
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error updating player state:', error);
  }
  }, 500);
@@ -112,7 +112,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  } else {
  player.destroy();
  }
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to initialize YouTube player:', error);
  };
 
@@ -146,7 +146,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  await playerRef.current.playVideo();
  }
  setIsPlaying(!isPlaying);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error toggling play/pause:', error);
  };
 
@@ -163,7 +163,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  await playerRef.current.mute();
  setIsMuted(true);
  }
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error toggling mute:', error);
  };
 
@@ -177,7 +177,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 
  try {
  await playerRef.current.seekTo(newTime, true);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error seeking video:', error);
  };
 
@@ -198,7 +198,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  } else if (isMuted as any) {
  setIsMuted(false);
  }
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error setting volume:', error);
  };
 
@@ -211,7 +211,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  <div className='mt-2 bg-gray-100 p-2 rounded'>
  <div className='flex items-center space-x-2 mb-2'>
  <button />
-// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  onClick={(e) => togglePlay(e)}
 // FIXED:  className='p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600'
 // FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
@@ -224,7 +224,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  min='0'
  max={duration || 100}
 // FIXED:  value={currentTime} />
-// FIXED:  onChange={(e: any) => handleSeek(e)}
+// FIXED:  onChange={(e) => handleSeek(e)}
 // FIXED:  className='w-full'
 // FIXED:  aria-label='Seek'
  />
@@ -235,7 +235,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 // FIXED:  </div>
 
  <button />
-// FIXED:  onClick={(e: any) => toggleMute(e)}
+// FIXED:  onClick={(e) => toggleMute(e)}
 // FIXED:  className='p-2 rounded-full hover:bg-gray-200'
 // FIXED:  aria-label={isMuted ? 'Unmute' : 'Mute'}
  >
@@ -248,7 +248,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  min='0'
  max='100'
 // FIXED:  value={isMuted ? 0 : volume} />
-// FIXED:  onChange={(e: any) => handleVolumeChange(e)}
+// FIXED:  onChange={(e) => handleVolumeChange(e)}
 // FIXED:  className='w-full'
 // FIXED:  aria-label='Volume'
  />

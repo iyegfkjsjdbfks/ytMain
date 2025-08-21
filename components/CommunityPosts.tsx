@@ -46,11 +46,11 @@ export interface CommunityPost {
 interface CommunityPostsProps {
  channelId?: string;
  posts: CommunityPost;
- onLike: (postId: any) => void;
- onComment: (postId: any) => void;
- onShare: (postId: any) => void;
- onVote?: (postId: any,
- optionId: any) => void;
+ onLike: (postId) => void;
+ onComment: (postId) => void;
+ onShare: (postId) => void;
+ onVote?: (postId,
+ optionId) => void;
  className?: string;
 }
 
@@ -63,7 +63,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  className = '' }) => {
  const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
- const toggleExpanded: any = (postId: any) => {
+ const toggleExpanded = (postId) => {
  setExpandedPosts(prev => {
  const newSet = new Set(prev);
  if (newSet.has(postId)) {
@@ -75,7 +75,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  });
  };
 
- const formatNumber: any = (num: any): string => {
+ const formatNumber = (num): string => {
  if (num >= 1000000) {
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {
@@ -84,7 +84,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  return num.toString();
  };
 
- const getPostIcon: any = (type: CommunityPost['type']) => {
+ const getPostIcon = (type: CommunityPost['type']) => {
  switch (type as any) {
  case 'image': return <PhotoIcon className="w-4 h-4" />;
  case 'video': return <VideoCameraIcon className="w-4 h-4" />;
@@ -93,7 +93,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  default: return null
  };
 
- const renderPostContent: any = (post: CommunityPost) => {
+ const renderPostContent = (post: CommunityPost) => {
  const isExpanded = expandedPosts.has(post.id);
  const shouldTruncate = post.content.length > 200;
  const displayContent = shouldTruncate && !isExpanded
@@ -122,8 +122,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  post.images.length === 2 ? 'grid-cols-2' :
  'grid-cols-2 md:grid-cols-3' />
  }`}>
- {post.images.map((image: any,
- index: number) => (
+ {post.images.map((image,
+ index) => (
  <img
  key={index}
 // FIXED:  src={image}
@@ -166,7 +166,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
  {post.poll.question}
 // FIXED:  </h4>
  <div className="space-y-2">
- {post.poll.options.map((option: any) => {
+ {post.poll.options.map((option) => {
  const percentage = post.poll!.totalVotes > 0
  ? (option.votes / post.poll!.totalVotes) * 100
  : 0;
@@ -258,7 +258,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 
  return (
  <div className={`space-y-6 ${className}`}>
- {posts.map((post: any) => (
+ {posts.map((post) => (
  <div
  key={post.id}
 // FIXED:  className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6" />

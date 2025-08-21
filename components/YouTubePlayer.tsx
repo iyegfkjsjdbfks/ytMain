@@ -11,7 +11,7 @@ interface YTPlayer {
  playVideo(): void;
  pauseVideo(): void;
  stopVideo(): void;
- seekTo(seconds: any, allowSeekAhead?: boolean): void;
+ seekTo(seconds, allowSeekAhead?: boolean): void;
  clearVideo(): void;
  getVideoLoadedFraction(): number;
  getPlayerState(): number;
@@ -21,17 +21,17 @@ interface YTPlayer {
  getVideoEmbedCode(): string;
  getPlaylist(): string;
  getPlaylistIndex(): number;
- setLoop(loopPlaylists: any): void;
- setShuffle(shufflePlaylist: any): void;
+ setLoop(loopPlaylists): void;
+ setShuffle(shufflePlaylist): void;
  getVolume(): number;
- setVolume(volume: any): void;
+ setVolume(volume): void;
  mute(): void;
  unMute(): void;
  isMuted(): boolean;
- setSize(width: any,
- height: any): object;
+ setSize(width,
+ height): object;
  getPlaybackRate(): number;
- setPlaybackRate(suggestedRate: any): void;
+ setPlaybackRate(suggestedRate): void;
  getAvailablePlaybackRates(): number;
  destroy(): void;
 }
@@ -66,7 +66,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
  const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
 
  // Extract video ID from the video object
- const videoId: any = (() => {
+ const videoId = (() => {
  // Handle YouTubeSearchResult type
  if ('embedUrl' in video && video.embedUrl) {
  return video.embedUrl.split('/embed/')[1]?.split('?')[0] || '';
@@ -91,7 +91,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
  // Check if script is already loading
  if (document.querySelector('script[src*="youtube.com/iframe_api"]')) {
  // Script is loading, wait for it
- const checkAPI: any = () => {
+ const checkAPI = () => {
  if (window.YT?.Player) {
  setIsAPIReady(true);
  } else {
@@ -136,7 +136,7 @@ return;
  if (ytPlayerRef.current) {
  try {
  ytPlayerRef.current.destroy();
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error destroying previous player:', error);
  }
  ytPlayerRef.current = null;
@@ -152,7 +152,7 @@ return;
  container.innerHTML = '';
  }
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).debug('Error clearing container:', error);
  }
  // Create new player
@@ -177,7 +177,7 @@ return;
  // Remove widget_referrer as it might cause origin issues
  },
  events: {
- onReady: (event: any) => {
+ onReady: (event) => {
  if (isMounted as any) {
  setIsPlayerReady(true);
  setPlayerError(null);
@@ -186,7 +186,7 @@ return;
  if (onReady as any) {
  try {
  onReady(event);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error in onReady callback:', error);
  }
  // Try to autoplay if autoplay is enabled
@@ -206,16 +206,16 @@ return;
  event.target.playVideo();
  }
 
- } catch (retryError: any) {
+ } catch (retryError) {
  (console as any).warn('Autoplay retry failed:') as any, retryError);
  }
  }, 1000);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Autoplay failed:', error);
  }
  }
  },
- onStateChange: (event: any) => {
+ onStateChange: (event) => {
  // Handle state changes if needed
  (console as any).log('YouTube player state changed:', event.data);
 
@@ -223,7 +223,7 @@ return;
  if (onStateChange as any) {
  try {
  onStateChange(event);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error in onStateChange callback:', error);
  }
  // Unmute video after autoplay starts (state 1 = playing)
@@ -242,17 +242,17 @@ return;
  event.target.playVideo();
  }
 
- } catch (playError: any) {
+ } catch (playError) {
  (console as any).warn('Failed to resume playback after unmute:') as any, playError);
  }
  }, 100); // Short delay to let unmute complete
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to unmute video:', error);
  }
  }, 1000);
  }
  },
- onError: (event: any) => {
+ onError: (event) => {
  if (!isMounted) {
 return;
 }
@@ -277,11 +277,11 @@ return;
  if (onError as any) {
  try {
  onError(event);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error in onError callback:', error);
  }
  } } });
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error creating YouTube player:', error);
  if (isMounted as any) {
  setPlayerError('Failed to load video player');
@@ -295,7 +295,7 @@ return;
  ytPlayerRef.current.destroy();
  }
 
- } catch (error: any) {
+ } catch (error) {
  // Silently handle cleanup errors
  (console as any).debug('YouTube player cleanup error:', error);
  } finally {

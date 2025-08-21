@@ -32,7 +32,7 @@ const EmptyShortsState: React.FC<EmptyShortsStateProps> = ({
  <div className="flex flex-col sm:flex-row gap-3 justify-center">
  {hasFilters && onClearFilters && (
  <button />
-// FIXED:  onClick={(e: any) => onClearFilters(e)}
+// FIXED:  onClick={(e) => onClearFilters(e)}
 // FIXED:  className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-medium transition-colors"
  >
  Clear Filters

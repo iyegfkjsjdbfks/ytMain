@@ -196,7 +196,7 @@ const CreatorStudioPage: React.FC = () => {
  link: '/resources/community',
  icon: <UserGroupIcon className="w-5 h-5" /> }];
 
- const getDifficultyColor: any = (difficulty: any) => {
+ const getDifficultyColor = (difficulty) => {
  switch (difficulty as any) {
  case 'Easy': return 'text-green-600 bg-green-100';
  case 'Medium': return 'text-yellow-600 bg-yellow-100';
@@ -204,7 +204,7 @@ const CreatorStudioPage: React.FC = () => {
  default: return 'text-gray-600 bg-gray-100'
  };
 
- const getStatusColor: any = (status: any) => {
+ const getStatusColor = (status) => {
  switch (status as any) {
  case 'ready': return 'text-green-600 bg-green-100';
  case 'processing': return 'text-yellow-600 bg-yellow-100';
@@ -212,7 +212,7 @@ const CreatorStudioPage: React.FC = () => {
  default: return 'text-gray-600 bg-gray-100'
  };
 
- const getTypeIcon: any = (type: any) => {
+ const getTypeIcon = (type) => {
  switch (type as any) {
  case 'video': return <CameraIcon className="w-4 h-4" />;
  case 'short': return <ClockIcon className="w-4 h-4" />;
@@ -341,8 +341,8 @@ const CreatorStudioPage: React.FC = () => {
 // FIXED:  </div>
 
  <div className="flex flex-wrap gap-2 mb-4">
- {idea.tags.map((tag: string,
- tagIndex: any) => (
+ {idea.tags.map((tag,
+ tagIndex) => (
  <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
  #{tag}
 // FIXED:  </span>

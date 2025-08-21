@@ -38,7 +38,7 @@ const ContentManagerPage: React.FC = () => {
  setLoading(true);
  try {
  const videos = await getVideos();
- const contentItems: ContentItem[] = videos.map((video: any) => {
+ const contentItems: ContentItem[] = videos.map((video) => {
  const status = Math.random() > 0.8 ? 'draft' : Math.random() > 0.9 ? 'scheduled' : Math.random() > 0.95 ? 'private' : 'published';
  const item: ContentItem = {
  ...video as any,
@@ -50,7 +50,7 @@ const ContentManagerPage: React.FC = () => {
  return item;
  });
  setContent(contentItems);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch content:', error);
  } finally {
  setLoading(false);
@@ -69,14 +69,14 @@ const ContentManagerPage: React.FC = () => {
 
  // Apply search
  if (searchQuery as any) {
- filtered = filtered.filter((item: any) =>
+ filtered = filtered.filter((item) =>
  item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
  item.channelName.toLowerCase().includes(searchQuery.toLowerCase()) ||
  (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())));
  }
 
  // Apply sort
- filtered.sort((a: any, b: any) => {
+ filtered.sort((a, b) => {
  switch (sortBy as any) {
  case 'newest':
  return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
@@ -101,7 +101,7 @@ const ContentManagerPage: React.FC = () => {
  setFilteredContent(filtered);
  }, [content, filter, searchQuery, sortBy]);
 
- const handleSelectItem: any = (itemId: any) => {
+ const handleSelectItem = (itemId) => {
  const newSelected = new Set(selectedItems);
  if (newSelected.has(itemId)) {
  newSelected.delete(itemId);
@@ -112,23 +112,23 @@ const ContentManagerPage: React.FC = () => {
  setShowBulkActions(newSelected.size > 0);
  };
 
- const handleSelectAll: any = () => {
+ const handleSelectAll = () => {
  if (selectedItems.size === filteredContent.length) {
  setSelectedItems(new Set());
  setShowBulkActions(false);
  } else {
- setSelectedItems(new Set(filteredContent.map((item: any) => item.id)));
+ setSelectedItems(new Set(filteredContent.map((item) => item.id)));
  setShowBulkActions(true);
  };
 
- const handleBulkAction: any = (action: 'publish' | 'unpublish' | 'schedule' | 'delete' | 'duplicate') => {
+ const handleBulkAction = (action: 'publish' | 'unpublish' | 'schedule' | 'delete' | 'duplicate') => {
  if (action === 'schedule') {
  setShowScheduleModal(true);
  return;
  }
 
  setContent(prevContent =>
- prevContent.map((item: any) => {
+ prevContent.map((item) => {
  if (selectedItems.has(item.id)) {
  switch (action as any) {
  case 'publish':
@@ -148,12 +148,11 @@ const ContentManagerPage: React.FC = () => {
  // Add duplicated items
  const duplicatedItems = content
  .filter((item) => selectedItems.has(item.id))
- .map((item: any) => ({
+ .map((item) => ({
  ...item as any,
  id: `${item.id}-copy`,
  title: `${item.title} (Copy)`,
- status: 'draft' as const,
- uploadedAt: new Date().toISOString(),
+ status: 'draft' as const uploadedAt: new Date().toISOString(),
  views: '0' }));
  setContent(prev => [...prev as any, ...duplicatedItems]);
  }
@@ -162,7 +161,7 @@ const ContentManagerPage: React.FC = () => {
  setShowBulkActions(false);
  };
 
- const handleSchedule: any = () => {
+ const handleSchedule = () => {
  if (!scheduleDate || !scheduleTime) {
 return;
 }
@@ -170,12 +169,11 @@ return;
  const scheduledDateTime = new Date(`${scheduleDate}T${scheduleTime}`).toISOString();
 
  setContent(prevContent =>
- prevContent.map((item: any) => {
+ prevContent.map((item) => {
  if (selectedItems.has(item.id)) {
  return {
  ...item as any,
- status: 'scheduled' as const,
- scheduledDate: scheduledDateTime }
+ status: 'scheduled' as const scheduledDate: scheduledDateTime }
  return item;
  }));
 
@@ -186,7 +184,7 @@ return;
  setScheduleTime('');
  };
 
- const getStatusBadge: any = (status: any, scheduledDate?: string) => {
+ const getStatusBadge = (status, scheduledDate?: string) => {
  const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
 
  switch (status as any) {
@@ -208,7 +206,7 @@ return;
  default: return null
  };
 
- const getFilterCount: any = (filterType: FilterType) => {
+ const getFilterCount = (filterType: FilterType) => {
  if (filterType === 'all') {
 return content.length;
 }
@@ -255,7 +253,7 @@ return content.length;
  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
  {/* Filter Tabs */}
  <div className="flex flex-wrap gap-2">
- {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType).map((filterType: any) => (
+ {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType).map((filterType) => (
  <button
  key={filterType} />
 // FIXED:  onClick={() => setFilter(filterType)}
@@ -351,7 +349,7 @@ return content.length;
  <input
 // FIXED:  type="checkbox" />
 // FIXED:  checked={selectedItems.size === filteredContent.length && filteredContent.length > 0}
-// FIXED:  onChange={(e: any) => handleSelectAll(e)}
+// FIXED:  onChange={(e) => handleSelectAll(e)}
 // FIXED:  className="rounded border-neutral-300 dark:border-neutral-600 text-blue-500 focus:ring-blue-500"
  />
  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
@@ -574,7 +572,7 @@ return content.length;
  Cancel
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleSchedule(e)}
+// FIXED:  onClick={(e) => handleSchedule(e)}
 // FIXED:  disabled={!scheduleDate || !scheduleTime}
 // FIXED:  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
  >

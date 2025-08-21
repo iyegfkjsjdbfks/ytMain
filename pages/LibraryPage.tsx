@@ -29,7 +29,7 @@ interface SectionProps {
 }
 
 const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, children, itemCount, isLoading, hasContent, emptyMessage, isPlaylistSection }: any) => {
- const renderSkeletonItems: any = () => {
+ const renderSkeletonItems = () => {
  const numSkeletons = isPlaylistSection ? (itemCount || 4) : (itemCount || MAX_HORIZONTAL_VIDEOS / 2);
  return Array.from({ length: numSkeletons }).map((_, index) => (
  <div key={index} className={`animate-pulse ${isPlaylistSection ? 'w-full' : 'w-48 md:w-52 lg:w-56 flex-shrink-0'}`}>
@@ -114,7 +114,7 @@ function LibraryPage(): any { // Removed React.FC
  setLoadingLiked(true);
  getLikedVideos().then(data => setLikedVideos(data.slice(0, MAX_HORIZONTAL_VIDEOS))).finally(() => setLoadingLiked(false));
 
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Error fetching library data:', err);
  setError('Could not load library content. Please try again later.');
  // Individual loading states will handle UI for sections that might have loaded
@@ -147,7 +147,7 @@ function LibraryPage(): any { // Removed React.FC
  itemCount={historyVideos.length}
  >
  <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
- {historyVideos.map((video: any) => (
+ {historyVideos.map((video) => (
  <div key={`hist-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
  <VideoCard video={video} />
 // FIXED:  </div>
@@ -166,7 +166,7 @@ function LibraryPage(): any { // Removed React.FC
  itemCount={watchLaterVideos.length}
  >
  <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
- {watchLaterVideos.map((video: any) => (
+ {watchLaterVideos.map((video) => (
  <div key={`wl-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
  <VideoCard video={video} />
 // FIXED:  </div>
@@ -186,7 +186,7 @@ function LibraryPage(): any { // Removed React.FC
  isPlaylistSection
  >
  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
- {userPlaylists.map((playlist: any) => (
+ {userPlaylists.map((playlist) => (
  <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
  <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
  <img
@@ -224,7 +224,7 @@ function LibraryPage(): any { // Removed React.FC
  itemCount={likedVideos.length}
  >
  <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
- {likedVideos.map((video: any) => (
+ {likedVideos.map((video) => (
  <div key={`liked-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
  <VideoCard video={video} />
 // FIXED:  </div>

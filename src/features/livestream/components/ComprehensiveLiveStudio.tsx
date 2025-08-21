@@ -72,7 +72,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  videoRef.current.srcObject = mediaStream;
  }
  setIsPreviewing(true);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to access media devices:', error);
  alert(
  'Could not access camera and microphone. Please check permissions.'
@@ -86,7 +86,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  setIsPreviewing(true);
  };
 
- const stopPreview: any = () => {
+ const stopPreview = () => {
  setIsPreviewing(false);
  if (stream && !isStreaming) {
  stream.getTracks().forEach(track => track.stop());
@@ -145,14 +145,14 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  streamSettings.platforms.length > 0
  ) {
  const enabledPlatforms = streamSettings.platforms
- .filter((p: any) => p.enabled)
- .map((p: any) => p.name);
+ .filter((p) => p.enabled)
+ .map((p) => p.name);
 
  // TODO: Implement multiplatform streaming
  logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
  }
 
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to start stream:', error);
  alert('Failed to start stream. Please try again.');
  };
@@ -175,11 +175,11 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
  // Show stream summary
  alert('Stream ended successfully!');
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to end stream:', error);
  };
 
- const toggleVideo: any = () => {
+ const toggleVideo = () => {
  if (stream as any) {
  const videoTrack = stream.getVideoTracks()[0];
  if (videoTrack as any) {
@@ -188,7 +188,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  }
  };
 
- const toggleAudio: any = () => {
+ const toggleAudio = () => {
  if (stream as any) {
  const audioTrack = stream.getAudioTracks()[0];
  if (audioTrack as any) {
@@ -216,7 +216,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  return () => clearInterval(interval);
  }, [currentStream]);
 
- const getStreamHealthColor: any = () => {
+ const getStreamHealthColor = () => {
  switch (stats.streamHealth) {
  case 'excellent':
  return 'text-green-500';
@@ -229,7 +229,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  default: return 'text-gray-500'
  };
 
- const formatDuration: any = (seconds: any) => {
+ const formatDuration = (seconds) => {
  const hrs = Math.floor(seconds / 3600);
  const mins = Math.floor((seconds % 3600) / 60);
  const secs = seconds % 60;
@@ -439,7 +439,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  <VideoCameraIcon className='w-16 h-16 text-gray-400 mx-auto mb-4' />
  <p className='text-gray-400 mb-4'>Camera Preview Off</p>
  <button />
-// FIXED:  onClick={(e: any) => startPreview(e)}
+// FIXED:  onClick={(e) => startPreview(e)}
 // FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  Start Preview
@@ -453,7 +453,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  <div className='flex items-center justify-between'>
  <div className='flex items-center space-x-2'>
  <button />
-// FIXED:  onClick={(e: any) => toggleVideo(e)}
+// FIXED:  onClick={(e) => toggleVideo(e)}
 // FIXED:  className={`p-2 rounded-lg transition-colors ${
  isVideoEnabled
  ? 'bg-gray-700 hover:bg-gray-600 text-white'
@@ -467,7 +467,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  )}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => toggleAudio(e)}
+// FIXED:  onClick={(e) => toggleAudio(e)}
 // FIXED:  className={`p-2 rounded-lg transition-colors ${
  isAudioEnabled
  ? 'bg-gray-700 hover:bg-gray-600 text-white'
@@ -485,7 +485,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  <div className='flex items-center space-x-2'>
  {isPreviewing && !isStreaming && (
  <button />
-// FIXED:  onClick={(e: any) => stopPreview(e)}
+// FIXED:  onClick={(e) => stopPreview(e)}
 // FIXED:  className='px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors'
  >
  Stop Preview
@@ -494,7 +494,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
  {!isStreaming ? (
  <button />
-// FIXED:  onClick={(e: any) => handleStartStream(e)}
+// FIXED:  onClick={(e) => handleStartStream(e)}
 // FIXED:  disabled={!stream || !streamSettings.title.trim()}
 // FIXED:  className='px-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white rounded-lg transition-colors flex items-center space-x-2'
  >
@@ -503,7 +503,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 // FIXED:  </button>
  ) : (
  <button />
-// FIXED:  onClick={(e: any) => handleEndStream(e)}
+// FIXED:  onClick={(e) => handleEndStream(e)}
 // FIXED:  className='px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2'
  >
  <StopIcon className='w-4 h-4' />

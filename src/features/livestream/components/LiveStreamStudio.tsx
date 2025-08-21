@@ -118,7 +118,7 @@ export const LiveStreamStudio: React.FC = () => {
  videoRef.current.srcObject = mediaStream;
  }
  setIsPreviewing(true);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error accessing camera:', error);
  alert('Could not access camera/microphone. Please check permissions.');
  };
@@ -138,7 +138,7 @@ export const LiveStreamStudio: React.FC = () => {
  setStats(prev => ({ ...prev as any, duration: 0 }));
  };
 
- const stopStream: any = () => {
+ const stopStream = () => {
  setIsStreaming(false);
  if (stream as any) {
  stream.getTracks().forEach(track => track.stop());
@@ -147,7 +147,7 @@ export const LiveStreamStudio: React.FC = () => {
  setIsPreviewing(false);
  };
 
- const toggleVideo: any = () => {
+ const toggleVideo = () => {
  if (stream as any) {
  const videoTrack = stream.getVideoTracks()[0];
  if (videoTrack as any) {
@@ -156,7 +156,7 @@ export const LiveStreamStudio: React.FC = () => {
  }
  };
 
- const toggleAudio: any = () => {
+ const toggleAudio = () => {
  if (stream as any) {
  const audioTrack = stream.getAudioTracks()[0];
  if (audioTrack as any) {
@@ -165,7 +165,7 @@ export const LiveStreamStudio: React.FC = () => {
  }
  };
 
- const sendChatMessage: any = () => {
+ const sendChatMessage = () => {
  if (!chatMessage.trim()) {
  return;
  }
@@ -183,7 +183,7 @@ export const LiveStreamStudio: React.FC = () => {
  setStats(prev => ({ ...prev as any, chatMessages: prev.chatMessages + 1 }));
  };
 
- const formatDuration: any = (seconds: any) => {
+ const formatDuration = (seconds) => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  const secs = seconds % 60;
@@ -285,7 +285,7 @@ export const LiveStreamStudio: React.FC = () => {
 // FIXED:  </button>
  ) : (
  <button />
-// FIXED:  onClick={(e: any) => stopStream(e)}
+// FIXED:  onClick={(e) => stopStream(e)}
 // FIXED:  className='flex items-center gap-2 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors'
  >
  <StopIcon className='w-5 h-5' />
@@ -294,7 +294,7 @@ export const LiveStreamStudio: React.FC = () => {
  )}
 
  <button />
-// FIXED:  onClick={(e: any) => toggleVideo(e)}
+// FIXED:  onClick={(e) => toggleVideo(e)}
 // FIXED:  className={`p-3 rounded-lg transition-colors ${
  isVideoEnabled
  ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -309,7 +309,7 @@ export const LiveStreamStudio: React.FC = () => {
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => toggleAudio(e)}
+// FIXED:  onClick={(e) => toggleAudio(e)}
 // FIXED:  className={`p-3 rounded-lg transition-colors ${
  isAudioEnabled
  ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -402,7 +402,7 @@ export const LiveStreamStudio: React.FC = () => {
  ref={chatContainerRef}
 // FIXED:  className='h-96 overflow-y-auto mb-4 space-y-2 border border-gray-200 dark:border-gray-600 rounded-lg p-3' />
  >
- {chatMessages.map((message: any) => (
+ {chatMessages.map((message) => (
  <div key={message.id} className='text-sm'>
  <div className='flex items-center gap-2 mb-1'>
  <span
@@ -416,7 +416,7 @@ export const LiveStreamStudio: React.FC = () => {
  >
  {message.username}
 // FIXED:  </span>
- {message.badges?.map((badge: any) => (
+ {message.badges?.map((badge) => (
  <span
  key={badge}
 // FIXED:  className='text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded' />
@@ -442,7 +442,7 @@ export const LiveStreamStudio: React.FC = () => {
 // FIXED:  className='flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm'
  />
  <button />
-// FIXED:  onClick={(e: any) => sendChatMessage(e)}
+// FIXED:  onClick={(e) => sendChatMessage(e)}
 // FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm'
  >
  Send

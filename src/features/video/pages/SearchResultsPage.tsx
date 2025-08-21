@@ -27,7 +27,7 @@ const SearchResultsPage: React.FC = () => {
  try {
  // Mock local video search function
  const searchLocalVideos = async (
- _searchQuery: any
+ _searchQuery
  ): Promise<Video[]> => {
  // Return empty array for now - this would normally search local videos
  return [];
@@ -39,7 +39,7 @@ const SearchResultsPage: React.FC = () => {
  );
  // Convert search results to Video format
  const videoResults: Video[] = [
- ...results.youtubeVideos.map((video: any) => ({,
+ ...results.youtubeVideos.map((video) => ({,
  id: video.id,
  title: video.title,
  description: video.description,
@@ -55,8 +55,7 @@ const SearchResultsPage: React.FC = () => {
  channelAvatarUrl: video.channelAvatarUrl || '',
  category: video.categoryId || 'Entertainment',
  tags: video.tags || [],
- visibility: 'public' as const,
- createdAt: new Date().toISOString(),
+ visibility: 'public' as const createdAt: new Date().toISOString(),
  updatedAt: new Date().toISOString(),
  isLive: false,
  isShort: false,
@@ -64,7 +63,7 @@ const SearchResultsPage: React.FC = () => {
  likeCount: video.likeCount || 0,
  dislikeCount: video.dislikeCount || 0,
  commentCount: video.commentCount || 0 })),
- ...(results.googleSearchVideos || []).map((video: any) => ({,
+ ...(results.googleSearchVideos || []).map((video) => ({,
  id: video.id,
  title: video.title,
  description: video.description,
@@ -84,8 +83,7 @@ const SearchResultsPage: React.FC = () => {
  uploadedAt: video.uploadedAt || new Date().toISOString(),
  tags: video.tags || [],
  category: video.categoryId || 'Entertainment',
- visibility: 'public' as const,
- createdAt: new Date().toISOString(),
+ visibility: 'public' as const createdAt: new Date().toISOString(),
  updatedAt: new Date().toISOString(),
  isLive: false,
  isShort: video.isShort || false,
@@ -94,7 +92,7 @@ const SearchResultsPage: React.FC = () => {
  dislikeCount: video.dislikeCount || 0,
  commentCount: video.commentCount || 0 }))];
  setVideos(videoResults);
- } catch (err: any) {
+ } catch (err) {
  setError(
  err instanceof Error
  ? err.message
@@ -137,7 +135,7 @@ const SearchResultsPage: React.FC = () => {
 
  {!loading && videos.length > 0 && (
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
- {videos.map((video: any) => {
+ {videos.map((video) => {
  // Extract YouTube video ID from the video object using utility function
  let videoId = getYouTubeVideoId(video.videoUrl) || video.id;
 

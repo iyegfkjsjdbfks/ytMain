@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
 // Mock data generators
-export const mockVideo: any = (overrides = {}) => ({
+export const mockVideo = (overrides = {}) => ({
  id: 'video-1',
  title: 'Test Video',
  description: 'Test video description',
@@ -24,7 +24,7 @@ export const mockVideo: any = (overrides = {}) => ({
  url: 'https://example.com/video.mp4',
  ...overrides });
 
-export const mockUser: any = (overrides = {}) => ({
+export const mockUser = (overrides = {}) => ({
  id: 'user-1',
  username: 'testuser',
  email: 'test@example.com',
@@ -37,7 +37,7 @@ export const mockUser: any = (overrides = {}) => ({
  quality: 'auto' },
  ...overrides });
 
-export const mockComment: any = (overrides = {}) => ({
+export const mockComment = (overrides = {}) => ({
  id: 'comment-1',
  content: 'Test comment',
  author: mockUser(),
@@ -46,7 +46,7 @@ export const mockComment: any = (overrides = {}) => ({
  replies: [],
  ...overrides });
 
-export const mockPost: any = (overrides = {}) => ({
+export const mockPost = (overrides = {}) => ({
  id: 'post-1',
  author: 'Test User',
  content: 'Test post content',
@@ -63,7 +63,7 @@ interface AllTheProvidersProps {
  initialEntries?: string;
 }
 
-const AllTheProviders: any = ({
+const AllTheProviders = ({
  children,
  queryClient }: AllTheProvidersProps) => {
  const testQueryClient = queryClient || new QueryClient({
@@ -90,13 +90,13 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
  initialEntries?: string;
 }
 
-const customRender: any = (,
+const customRender = (,
  ui: ReactElement,
  options: CustomRenderOptions = {}) => {
  const { queryClient, initialEntries, ...renderOptions } = options;
 
  return render(ui, {
- wrapper: ({ children }: any) => (
+ wrapper: ({ children }) => (
  <AllTheProviders
  queryClient={queryClient || new QueryClient({
  defaultOptions: {
@@ -111,7 +111,7 @@ const customRender: any = (,
 };
 
 // Mock implementations
-export const mockIntersectionObserver: any = () => {
+export const mockIntersectionObserver = () => {
  const mockIntersectionObserver = vi.fn();
  mockIntersectionObserver.mockReturnValue({
  observe: vi.fn(),
@@ -131,7 +131,7 @@ export const mockIntersectionObserver: any = () => {
  return mockIntersectionObserver;
 };
 
-export const mockResizeObserver: any = () => {
+export const mockResizeObserver = () => {
  const mockResizeObserver = vi.fn();
  mockResizeObserver.mockReturnValue({
  observe: vi.fn(),
@@ -146,7 +146,7 @@ export const mockResizeObserver: any = () => {
  return mockResizeObserver;
 };
 
-export const mockMatchMedia: any = (matches = false) => {
+export const mockMatchMedia = (matches = false) => {
  const mockMatchMedia = vi.fn().mockImplementation((query) => ({
  matches,
  media: query,
@@ -164,15 +164,15 @@ export const mockMatchMedia: any = (matches = false) => {
  return mockMatchMedia;
 };
 
-export const mockLocalStorage: any = () => {
+export const mockLocalStorage = () => {
  const store: Record<string, string> = {};
 
  const mockStorage = {
  getItem: vi.fn((key) => store[key] || null),
- setItem: vi.fn((key: any, value: any) => {
+ setItem: vi.fn((key, value) => {
  store[key] = value;
  }),
- removeItem: vi.fn((key: any) => {
+ removeItem: vi.fn((key) => {
  delete store[key];
  }),
  clear: vi.fn(() => {
@@ -188,15 +188,15 @@ export const mockLocalStorage: any = () => {
  return mockStorage;
 };
 
-export const mockSessionStorage: any = () => {
+export const mockSessionStorage = () => {
  const store: Record<string, string> = {};
 
  const mockStorage = {
  getItem: vi.fn((key) => store[key] || null),
- setItem: vi.fn((key: any, value: any) => {
+ setItem: vi.fn((key, value) => {
  store[key] = value;
  }),
- removeItem: vi.fn((key: any) => {
+ removeItem: vi.fn((key) => {
  delete store[key];
  }),
  clear: vi.fn(() => {
@@ -213,10 +213,10 @@ export const mockSessionStorage: any = () => {
 };
 
 // Mock fetch with response helpers
-export const mockFetch: any = () => {
+export const mockFetch = () => {
  const mockFetch = vi.fn();
 
- const mockResponse: any = (data: any,
+ const mockResponse = (data,
  options: { status?: number; ok?: boolean } = {}) => ({
  ok: options.ok ?? true,
  status: options.status ?? 200,
@@ -235,7 +235,7 @@ export const mockFetch: any = () => {
  return { mockFetch, mockResponse };
 
 // Performance mock
-export const mockPerformance: any = () => {
+export const mockPerformance = () => {
  const mockPerformance = {
  now: vi.fn(() => Date.now()),
  mark: vi.fn(),
@@ -257,7 +257,7 @@ export const mockPerformance: any = () => {
 };
 
 // URL mock
-export const mockURL: any = () => {
+export const mockURL = () => {
  const mockURL = {
  createObjectURL: vi.fn(() => 'blob:mock-url'),
  revokeObjectURL: vi.fn() };
@@ -270,7 +270,7 @@ export const mockURL: any = () => {
 };
 
 // Video element mock
-export const mockVideoElement: any = () => {
+export const mockVideoElement = () => {
  const mockVideo = {
  play: vi.fn().mockResolvedValue(undefined),
  pause: vi.fn(),
@@ -298,11 +298,11 @@ export const mockVideoElement: any = () => {
 };
 
 // Test helpers
-export const waitForLoadingToFinish: any = () => {
+export const waitForLoadingToFinish = () => {
  return new Promise(resolve => setTimeout((resolve) as any, 0));
 };
 
-export const createMockQueryClient: any = () => {
+export const createMockQueryClient = () => {
  return new QueryClient({
  defaultOptions: {
  queries: {
@@ -314,7 +314,7 @@ export const createMockQueryClient: any = () => {
 };
 
 // Setup function for common mocks
-export const setupTestEnvironment: any = () => {
+export const setupTestEnvironment = () => {
  mockIntersectionObserver();
  mockResizeObserver();
  mockMatchMedia();
@@ -332,7 +332,7 @@ export const setupTestEnvironment: any = () => {
 };
 
 // Cleanup function
-export const cleanupTestEnvironment: any = () => {
+export const cleanupTestEnvironment = () => {
  vi.restoreAllMocks();
  vi.clearAllMocks();
 };

@@ -38,7 +38,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
  const HIDE_DELAY = 100; // Delay before hiding video preview in milliseconds
 
  // Extract YouTube video ID from the video
- const getVideoId: any = (video: Video): string | null => {
+ const getVideoId = (video: Video): string | null => {
  // Try to extract from video.id if it has prefixes
  if (video.id.startsWith('youtube-')) {
  return video.id.replace('youtube-', '');
@@ -62,7 +62,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
 
  const videoId = getVideoId(video);
 
- const formatDuration: any = (duration: string | number) => {
+ const formatDuration = (duration: string | number) => {
  if (typeof duration === 'string') {
 return duration;
 }
@@ -74,7 +74,7 @@ return duration;
  return '0: 00'
  };
 
- const formatViews: any = (views: string | number) => {
+ const formatViews = (views: string | number) => {
  const num = typeof views === 'string' ? parseInt(views, 10) || 0 : views || 0;
  if (num >= 1000000000) {
  return `${(num / 1000000000).toFixed(1)}B`;
@@ -86,7 +86,7 @@ return duration;
  return num.toString();
  };
 
- const handleMouseEnter: any = () => {
+ const handleMouseEnter = () => {
  setIsHovered(true);
 
  // Clear any existing hide timeout
@@ -104,7 +104,7 @@ return duration;
  }
  };
 
- const handleMouseLeave: any = () => {
+ const handleMouseLeave = () => {
  setIsHovered(false);
 
  // Clear the hover timeout if user leaves before delay completes
@@ -122,14 +122,14 @@ return duration;
  };
 
  // Handle iframe errors
- const handleIframeError: any = () => {
+ const handleIframeError = () => {
  (console as any).warn('YouTube iframe failed to load for video:', videoId);
  setHasError(true);
  setShowIframe(false);
  };
 
  // Toggle mute/unmute
- const toggleMute: any = (e: React.MouseEvent) => {
+ const toggleMute = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  setIsMuted(!isMuted);

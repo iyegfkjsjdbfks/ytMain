@@ -30,7 +30,7 @@ return;
 }
 
  // Track Largest Contentful Paint (LCP)
- this.observePerformanceEntry('largest-contentful-paint', (entry: any) => {
+ this.observePerformanceEntry('largest-contentful-paint', (entry) => {
  this.recordMetric({
  name: 'LCP',
  value: entry.startTime,
@@ -40,7 +40,7 @@ return;
  });
 
  // Track First Input Delay (FID)
- this.observePerformanceEntry('first-input', (entry: any) => {
+ this.observePerformanceEntry('first-input', (entry) => {
  this.recordMetric({
  name: 'FID',
  value: entry.processingStart - entry.startTime,
@@ -50,7 +50,7 @@ return;
  });
 
  // Track Cumulative Layout Shift (CLS)
- this.observePerformanceEntry('layout-shift', (entry: any) => {
+ this.observePerformanceEntry('layout-shift', (entry) => {
  if (!entry.hadRecentInput) {
  this.recordMetric({
  name: 'CLS',
@@ -65,7 +65,7 @@ return;
  /**
  * Track custom performance metrics
  */
- public trackCustomMetric(name: any, value: string | number): void {
+ public trackCustomMetric(name, value: string | number): void {
  if (!this.isEnabled) {
 return;
 }
@@ -117,7 +117,7 @@ return;
  /**
  * Track React component render performance
  */
- public trackComponentRender(componentName: any, renderTime: any): void {
+ public trackComponentRender(componentName, renderTime): void {
  if (!this.isEnabled) {
 return;
 }
@@ -133,7 +133,7 @@ return;
  /**
  * Track API call performance
  */
- public trackApiCall(endpoint: any, duration: any, status: any): void {
+ public trackApiCall(endpoint, duration, status): void {
  if (!this.isEnabled) {
 return;
 }
@@ -181,7 +181,7 @@ return;
  // For now, we'll just log to console in development
  if (import.meta.env.DEV) {
  (console as any).group('Performance Metrics');
- this.metrics.forEach((metric: any) => {
+ this.metrics.forEach((metric) => {
  (console as any).log(`${metric.name}: ${metric.value}ms`);
  });
  (console as any).groupEnd();
@@ -195,16 +195,16 @@ return;
  // });
 
  this.clearMetrics();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to send performance metrics:', error);
  }
- private observePerformanceEntry(entryType: any, callback: (entry: any) => void): void {
+ private observePerformanceEntry(entryType, callback: (entry) => void): void {
  try {
- const observer = new PerformanceObserver((list: any) => {
+ const observer = new PerformanceObserver((list) => {
  list.getEntries().forEach(callback);
  });
  observer.observe({ entryTypes: [entryType] });
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Failed to observe ${entryType}:`, error);
  }
  private recordMetric(metric: PerformanceMetric): void {
@@ -220,8 +220,8 @@ return;
 export const performanceMonitor = new PerformanceMonitor();
 
 // React hook for component performance tracking
-export function usePerformanceTracking(componentName: any): any {
- const trackRender: any = (renderTime: any) => {
+export function usePerformanceTracking(componentName): any {
+ const trackRender = (renderTime) => {
  performanceMonitor.trackComponentRender(componentName, renderTime);
  };
 
@@ -234,7 +234,7 @@ export function withPerformanceTracking<P extends object>(;
  componentName?: string) {
  const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
- const WithPerformanceTracking: any = (props: P) => {
+ const WithPerformanceTracking = (props: P) => {
  const startTime = performance.now();
 
  React.useEffect(() => {

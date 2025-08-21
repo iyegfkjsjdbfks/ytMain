@@ -43,7 +43,7 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: any)
  <div style={style} className='px-2 pb-4'>
  <div
 // FIXED:  className='bg-white dark:bg-gray-800 rounded-lg shadow-sm active:scale-95 transition-transform cursor-pointer' />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  >
  {/* Video Thumbnail */}
  <div className='relative aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden'>
@@ -119,7 +119,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
  const screenWidth = window.innerWidth;
  const padding = 16; // 2 * 8px padding
  const videoWidth = screenWidth - padding;
- const videoHeight: any = (videoWidth * 9) / 16; // 16:9 aspect ratio
+ const videoHeight = (videoWidth * 9) / 16; // 16:9 aspect ratio
  const infoHeight = 80; // Approximate height of video info
  return videoHeight + infoHeight + 16; // Extra padding
  }, []);

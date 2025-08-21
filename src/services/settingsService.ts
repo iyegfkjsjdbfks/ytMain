@@ -11,21 +11,21 @@ let _settings: AppSettings = {
 /**
  * Returns the initial search keyword used by the app (defaults to 'trending').
  */
-export const getInitialSearchKeyword: any = (): string => {
+export const getInitialSearchKeyword = (): string => {
  return _settings.initialSearchKeyword || 'trending';
 };
 
 /**
  * Allows updating the initial search keyword at runtime.
  */
-export const setInitialSearchKeyword: any = (keyword: any) => {
+export const setInitialSearchKeyword = (keyword) => {
  _settings.initialSearchKeyword = keyword?.trim() || 'trending';
 };
 
 /**
  * Expose full settings (read-only copy)
  */
-export const getSettings: any = (): Readonly<AppSettings> => {
+export const getSettings = (): Readonly<AppSettings> => {
  return { ..._settings };
 };
 

@@ -35,7 +35,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  // Filter videos from subscribed channels and sort by upload date
  const subscriptionFeed = allVideos
  .filter((video) => subscribedChannels.includes(video.channelName) && !video.isShort)
- .sort((a: any, b: any) => {
+ .sort((a, b) => {
  // Sort by most recent (this is a simple mock - in reality you'd parse actual dates)
  const timeA = a.uploadedAt.includes('hour') ? 1 :
  a.uploadedAt.includes('day') ? parseInt(a.uploadedAt, 10) || 7 :
@@ -49,7 +49,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
 
  setSubscriptionVideos(subscriptionFeed);
  setError(null);
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Failed to fetch subscription videos:', err);
  setError('Could not load subscription feed at this time.');
  } finally {
@@ -134,7 +134,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
 // FIXED:  </Link>
 // FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
- {subscriptionVideos.map((video: any) => (
+ {subscriptionVideos.map((video) => (
  <VideoCard key={video.id} video={video} />
  ))}
 // FIXED:  </div>

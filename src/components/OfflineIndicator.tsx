@@ -47,7 +47,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  pendingUploads: pendingUploads.length });
 
  setStorageUsage(storage);
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(
  'OfflineIndicator',
  'Failed to load offline data',
@@ -56,7 +56,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  conditionalLogger.error('Failed to load offline data:', componentError);
  };
 
- const formatBytes: any = (bytes: any): string => {
+ const formatBytes = (bytes): string => {
  if (bytes === 0) {
  return '0 Bytes';
  }
@@ -66,7 +66,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
  };
 
- const getStoragePercentage: any = (): number => {
+ const getStoragePercentage = (): number => {
  if (storageUsage.quota === 0) {
  return 0;
  }

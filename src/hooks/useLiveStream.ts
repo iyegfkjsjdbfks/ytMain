@@ -11,7 +11,7 @@ interface LiveStreamState {
  error: string | null
 }
 
-export const useLiveStream: any = (streamId?: string) => {
+export const useLiveStream = (streamId?: string) => {
  const [state, setState] = useState<LiveStreamState>({
  isLive: false,
  viewerCount: 0,
@@ -23,7 +23,7 @@ export const useLiveStream: any = (streamId?: string) => {
  try {
  // Implementation here
  setState(prev => ({ ...prev as any, isLive: true, error: null }));
- } catch (error: any) {
+ } catch (error) {
  setState(prev => ({ ...prev as any, error: (error as Error).message }));
  }
  }, []);
@@ -32,7 +32,7 @@ export const useLiveStream: any = (streamId?: string) => {
  try {
  // Implementation here
  setState(prev => ({ ...prev as any, isLive: false, error: null }));
- } catch (error: any) {
+ } catch (error) {
  setState(prev => ({ ...prev as any, error: (error as Error).message }));
  }
  }, []);
@@ -44,7 +44,7 @@ export const useLiveStream: any = (streamId?: string) => {
 };
 
 // Lightweight, in-memory implementation for live polls used by livestream components
-export const useLivePolls: any = (streamId?: string) => {
+export const useLivePolls = (streamId?: string) => {
  const [polls, setPolls] = useState<LivePoll[]>([]);
 
  // Reset polls when stream changes
@@ -52,12 +52,12 @@ export const useLivePolls: any = (streamId?: string) => {
  setPolls([]);
  }, [streamId]);
 
- const recalcPercentages: any = (totalVotes: any, votes: any) => {
+ const recalcPercentages = (totalVotes, votes) => {
  if (totalVotes === 0) return 0;
  return (votes / totalVotes) * 100;
  };
 
- const createPoll = async (question: any, options: any): Promise<any> => {
+ const createPoll = async (question, options): Promise<any> => {
  const id = `poll_${Math.random().toString(36).slice(2, 9)}`;
  const createdAt = new Date();
  const durationMs = 60 * 1000; // default 60s
@@ -66,7 +66,7 @@ export const useLivePolls: any = (streamId?: string) => {
  id,
  streamId,
  question,
- options: options.map((text: any, idx: any) => ({
+ options: options.map((text, idx) => ({
  id: `opt_${idx}_${Math.random().toString(36).slice(2, 6)}`,
  text,
  votes: 0,
@@ -79,16 +79,16 @@ export const useLivePolls: any = (streamId?: string) => {
  setPolls(prev => [poll, ...prev]);
  };
 
- const votePoll = async (pollId: any, optionId: any): Promise<any> => {
+ const votePoll = async (pollId, optionId): Promise<any> => {
  setPolls(prev =>
- prev.map((p: any) => {
+ prev.map((p) => {
  if (p.id !== pollId || !p.isActive) return p;
  const total = p.totalVotes + 1;
- const options = p.options.map((o: any) => {
+ const options = p.options.map((o) => {
  const votes = o.id === optionId ? o.votes + 1 : o.votes;
  return { ...o as any, votes };
  });
- const withPct = options.map((o: any) => ({
+ const withPct = options.map((o) => ({
  ...o as any,
  percentage: recalcPercentages(total, o.votes) }));
  return { ...p as any, options: withPct, totalVotes: total };
@@ -100,7 +100,7 @@ export const useLivePolls: any = (streamId?: string) => {
 };
 
 // Lightweight, in-memory implementation for Q&A used by livestream components
-export const useLiveQA: any = (streamId?: string) => {
+export const useLiveQA = (streamId?: string) => {
  const [questions, setQuestions] = useState<QAQuestion[]>([]);
 
  // Reset on stream change
@@ -108,7 +108,7 @@ export const useLiveQA: any = (streamId?: string) => {
  setQuestions([]);
  }, [streamId]);
 
- const submitQuestion = async (text: any): Promise<any> => {
+ const submitQuestion = async (text): Promise<any> => {
  const q: QAQuestion = {
  id: `q_${Math.random().toString(36).slice(2, 9)}`,
  streamId,
@@ -125,9 +125,9 @@ export const useLiveQA: any = (streamId?: string) => {
  setQuestions(prev => [q, ...prev]);
  };
 
- const answerQuestion = async (questionId: any, answer: any): Promise<any> => {
+ const answerQuestion = async (questionId, answer): Promise<any> => {
  setQuestions(prev =>
- prev.map((q: any) =>
+ prev.map((q) =>
  q.id === questionId
  ? {
  ...q as any,
@@ -140,9 +140,9 @@ export const useLiveQA: any = (streamId?: string) => {
  );
  };
 
- const upvoteQuestion = async (questionId: any): Promise<any> => {
+ const upvoteQuestion = async (questionId): Promise<any> => {
  setQuestions(prev =>
- prev.map((q: any) =>
+ prev.map((q) =>
  q.id === questionId ? { ...q as any, upvotes: (q.upvotes || 0) + 1 } : q
  )
  );

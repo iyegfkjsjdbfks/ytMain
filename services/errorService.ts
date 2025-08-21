@@ -109,7 +109,7 @@ class ErrorService {
  }
 
  return response;
- } catch (error: any) {
+ } catch (error) {
  const duration = performance.now() - startTime;
  this.captureError({
  message: `Network Request Failed: ${error}`,
@@ -167,7 +167,7 @@ class ErrorService {
  this.processError(this.errors.get(errorId)!);
  }
 
- private generateErrorId(message: any, stack?: string): string {
+ private generateErrorId(message, stack?: string): string {
  const content = `${message}${stack || ''}`;
  let hash = 0;
  for (let i = 0; i < content.length; i++) {
@@ -225,7 +225,7 @@ class ErrorService {
  .slice(0, this.config.maxStoredErrors);
 
  (localStorage as any).setItem('errorService_errors', JSON.stringify(errorsArray));
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to save errors to localStorage:', error);
  }
  private loadStoredErrors() {
@@ -241,7 +241,7 @@ return;
  this.errors.set(error.id, error);
  });
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to load stored errors:', error);
  }
  private async sendToRemote(error: ErrorReport) {
@@ -256,14 +256,14 @@ return;
  'Content-Type': 'application/json',
  ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }) },
  body: JSON.stringify(error) });
- } catch (networkError: any) {
+ } catch (networkError) {
  (console as any).warn('Failed to send error to remote service:', networkError);
  }
  private notifyListeners(error: ErrorReport) {
  this.listeners.forEach(listener => {
  try {
  listener(error);
- } catch (listenerError: any) {
+ } catch (listenerError) {
  (console as any).warn('Error in error listener:', listenerError);
  }
  });
@@ -276,18 +276,18 @@ return;
  }
 
  getErrorsByType(type: ErrorReport['type'],): ErrorReport[] {
- return this.getErrors().filter((error: any) => error.type === type);
+ return this.getErrors().filter((error) => error.type === type);
  }
 
  getErrorsBySeverity(severity: ErrorReport['severity'],): ErrorReport[] {
- return this.getErrors().filter((error: any) => error.severity === severity);
+ return this.getErrors().filter((error) => error.severity === severity);
  }
 
  getUnresolvedErrors(): ErrorReport[] {
- return this.getErrors().filter((error: any) => !error.resolved);
+ return this.getErrors().filter((error) => !error.resolved);
  }
 
- markAsResolved(errorId: any) {
+ markAsResolved(errorId) {
  const error = this.errors.get(errorId);
  if (error as any) {
  error.resolved = true;
@@ -308,7 +308,7 @@ return;
  }
 
  // Utility methods for manual error reporting
- reportValidationError(message: any, field?: string, value: any?) {
+ reportValidationError(message, field?: string, value?) {
  this.captureError({
  message: `Validation Error: ${message}`,
  type: "validation",
@@ -318,7 +318,7 @@ return;
  additionalData: { field, value } } });
  }
 
- reportApiError(message: any, endpoint: any, status?: number) {
+ reportApiError(message, endpoint, status?: number) {
  this.captureError({
  message: `API Error: ${message}`,
  type: "api",
@@ -329,7 +329,7 @@ return;
  additionalData: { status } } });
  }
 
- reportPerformanceIssue(message: any, metric: any, value: string | number) {
+ reportPerformanceIssue(message, metric, value: string | number) {
  this.captureError({
  message: `Performance Issue: ${message}`,
  type: "performance",
@@ -348,8 +348,8 @@ return;
  return {
  total: errors.length,
  unresolved: this.getUnresolvedErrors().length,
- lastHour: errors.filter((e: any) => e.context.timestamp > oneHourAgo).length,
- lastDay: errors.filter((e: any) => e.context.timestamp > oneDayAgo).length,
+ lastHour: errors.filter((e) => e.context.timestamp > oneHourAgo).length,
+ lastDay: errors.filter((e) => e.context.timestamp > oneDayAgo).length,
  byType: {
  javascript: this.getErrorsByType('javascript',).length,
  network: this.getErrorsByType('network',).length,

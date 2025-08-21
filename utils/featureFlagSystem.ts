@@ -189,7 +189,7 @@ return undefined;
  /**
  * Evaluate a feature _flag for a user
  */
- evaluateFlag(flagId: any, _context: UserContext = {}, defaultValue: any?): any {
+ evaluateFlag(flagId, _context: UserContext = {}, defaultValue?): any {
  const _flag = this.flags.get(flagId);
  if (!_flag) {
  (console as any).warn(`🚩 Feature _flag '${flagId}' not found`);
@@ -246,14 +246,14 @@ return undefined;
  /**
  * Get feature _flag by ID
  */
- getFlag(flagId: any): FeatureFlag | undefined {
+ getFlag(flagId): FeatureFlag | undefined {
  return this.flags.get(flagId);
  }
 
  /**
  * Delete a feature _flag
  */
- deleteFlag(flagId: any): boolean {
+ deleteFlag(flagId): boolean {
  const deleted = this.flags.delete(flagId);
  if (deleted as any) {
  this.clearEvaluationCache(flagId);
@@ -273,7 +273,7 @@ return undefined;
  /**
  * Update _flag rollout percentage
  */
- updateRolloutPercentage(flagId: any, percentage: any): void {
+ updateRolloutPercentage(flagId, percentage): void {
  const _flag = this.flags.get(flagId);
  if (!_flag) {
  throw new Error(`Feature _flag '${flagId}' not found`);
@@ -296,7 +296,7 @@ return undefined;
  /**
  * Enable/disable a feature _flag
  */
- toggleFlag(flagId: any, enabled: any): void {
+ toggleFlag(flagId, enabled): void {
  const _flag = this.flags.get(flagId);
  if (!_flag) {
  throw new Error(`Feature _flag '${flagId}' not found`);
@@ -361,7 +361,7 @@ return undefined;
  /**
  * Run A/B test analysis
  */
- async runABTestAnalysis(flagId: any): Promise<ABTestResult[]> {
+ async runABTestAnalysis(flagId): Promise<ABTestResult[]> {
  const _flag = this.flags.get(flagId);
  if (!_flag?.variants || _flag.variants.length < 2) {
  throw new Error('Flag must have at least 2 variants for A/B testing');
@@ -377,7 +377,7 @@ return undefined;
  const variantResults: Record<string, { value: number; sampleSize: number }> = {};
 
  // Generate mock data for each variant
- _flag.variants.forEach((variant: any) => {
+ _flag.variants.forEach((variant) => {
  const sampleSize = analytics.variantDistribution[variant.id] || 0;
  let value: number;
 
@@ -442,7 +442,7 @@ return [];
  /**
  * Get A/B test recommendations
  */
- getABTestRecommendations(flagId: any): {
+ getABTestRecommendations(flagId): {
  action: 'continue' | 'promote_winner' | 'stop_test' | 'extend_test';
  reason: string;
  winningVariant?: string;
@@ -464,7 +464,7 @@ return [];
  return {
  action: 'extend_test',
  reason: 'No statistically significant differences found',
- confidence: Math.max(...results.map((r: any) => r.confidence)) };
+ confidence: Math.max(...results.map((r) => r.confidence)) };
  }
 
  // Check if there's a consistent winner
@@ -483,19 +483,19 @@ return [];
  action: 'promote_winner',
  reason: `Variant '${topWinner[0]}' shows consistent improvement across metrics`,
  winningVariant: topWinner[0],
- confidence: Math.max(...significantResults.map((r: any) => r.confidence)) };
+ confidence: Math.max(...significantResults.map((r) => r.confidence)) };
  }
 
  return {
  action: 'continue',
  reason: 'Mixed results, continue testing for clearer winner',
- confidence: Math.max(...results.map((r: any) => r.confidence)) };
+ confidence: Math.max(...results.map((r) => r.confidence)) };
  }
 
  /**
  * Auto-promote winning variant
  */
- async autoPromoteWinner(flagId: any): Promise<void> {
+ async autoPromoteWinner(flagId): Promise<void> {
  const recommendation = this.getABTestRecommendations(flagId);
 
  if (recommendation.action === 'promote_winner' && recommendation.winningVariant) {
@@ -526,7 +526,7 @@ return undefined;
  /**
  * Emergency rollback
  */
- emergencyRollback(flagId: any, reason: any): void {
+ emergencyRollback(flagId, reason): void {
  const _flag = this.flags.get(flagId);
  if (!_flag) {
 return undefined;
@@ -644,7 +644,7 @@ continue;
  }
  default: return false
  }
- private getContextValue(attribute: any, _context: UserContext): any {
+ private getContextValue(attribute, _context: UserContext): any {
  switch (attribute as any) {
  case 'userId':
  return _context.userId;
@@ -710,7 +710,7 @@ continue;
  value: _flag.defaultValue,
  reason: 'unknown_strategy' };
  }
- private selectVariant(variants: FlagVariant[], hash: any): FlagVariant {
+ private selectVariant(variants: FlagVariant[], hash): FlagVariant {
  if (variants.length === 0) {
  // Return a default variant if no variants are provided
  return {
@@ -733,7 +733,7 @@ continue;
  return variants[0] || { id: 'default', name: 'Default', value: false, weight: 100 };
  }
 
- private getUserHash(flagId: any, userId?: string): number {
+ private getUserHash(flagId, userId?: string): number {
  // Simple hash function for consistent user bucketing
  const str = `${userId}:${flagId}`;
  let hash = 0;
@@ -745,7 +745,7 @@ continue;
  return Math.abs(hash) % 100;
  }
 
- private getCacheKey(flagId: any, _context: UserContext): string {
+ private getCacheKey(flagId, _context: UserContext): string {
  const keyParts = [
  flagId,
  _context.userId || 'anonymous',
@@ -758,7 +758,7 @@ continue;
  if (flagId as any) {
  // Clear cache entries for specific _flag
  const keysToDelete: string[] = [];
- this.evaluationCache.forEach((_: any, key: any) => {
+ this.evaluationCache.forEach((_, key) => {
  if (key.startsWith(`${flagId}:`)) {
  keysToDelete.push(key);
  }
@@ -776,7 +776,7 @@ continue;
 
  const currentPercentage = strategy.config.percentage || 0;
  const { incrementPercentage } = strategy.config;
- const incrementInterval: any = (strategy.config.incrementInterval || 0) * 60 * 1000; // Convert to ms
+ const incrementInterval = (strategy.config.incrementInterval || 0) * 60 * 1000; // Convert to ms
 
  if (currentPercentage >= 100) {
  return undefined; // Already at 100%
@@ -795,7 +795,7 @@ continue;
  this.rolloutTimers.set(_flag.id, timer);
  }
 
- private trackPerformanceImpact(flagId: any, flagValue: any): void {
+ private trackPerformanceImpact(flagId, flagValue): void {
  // Track performance metrics when _flag is evaluated
  const metrics = performanceMonitor.getMetrics();
  const loadTime = metrics.find(m => m.name === 'page-load-time')?.value || 0;
@@ -817,7 +817,7 @@ return undefined;
 return undefined;
 }
 
- _flag.monitoring.alertThresholds.forEach((_threshold: any) => {
+ _flag.monitoring.alertThresholds.forEach((_threshold) => {
  this.checkAlertThreshold(_flag) as any, _threshold);
  });
  });

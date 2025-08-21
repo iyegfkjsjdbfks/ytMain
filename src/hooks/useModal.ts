@@ -53,7 +53,7 @@ export function useModal({
  return;
  }
 
- const handleEscape: any = (event: KeyboardEvent) => {
+ const handleEscape = (event: KeyboardEvent) => {
  if (event.key === 'Escape') {
  close();
  };

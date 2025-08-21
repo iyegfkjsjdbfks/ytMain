@@ -19,7 +19,7 @@ export function usePlaylists(filters: PlaylistFilters = {}): any {
  );
 }
 
-export function usePlaylist(playlistId: any): any {
+export function usePlaylist(playlistId): any {
  return useQuery(
  ['playlist', playlistId],
  () => playlistService.getPlaylist(playlistId),
@@ -31,7 +31,7 @@ export function usePlaylist(playlistId: any): any {
 }
 
 export function usePlaylistVideos(,
- playlistId: any,
+ playlistId,
  page: number = 1,
  limit: number = 50
 ): any {
@@ -75,7 +75,7 @@ export function useFollowedPlaylists(page: number = 1, limit: number = 20): any 
  );
 }
 
-export function usePlaylistStats(playlistId: any): any {
+export function usePlaylistStats(playlistId): any {
  return useQuery(
  ['playlist', playlistId, 'stats'],
  () => playlistService.getPlaylistStats(playlistId),
@@ -86,7 +86,7 @@ export function usePlaylistStats(playlistId: any): any {
  );
 }
 
-export function usePlaylistCollaborators(playlistId: any): any {
+export function usePlaylistCollaborators(playlistId): any {
  return useQuery(
  ['playlist', playlistId, 'collaborators'],
  () => playlistService.getPlaylistCollaborators(playlistId),
@@ -98,7 +98,7 @@ export function usePlaylistCollaborators(playlistId: any): any {
 }
 
 export function useSearchPlaylists(,
- query: any,
+ query,
  filters: Omit<PlaylistFilters, 'search'> = {}
 ): any {
  return useQuery(
@@ -139,7 +139,7 @@ export function useDeletePlaylist(): any {
  return useMutation<void, string>(
  playlistId => playlistService.deletePlaylist(playlistId),
  {
- onSuccess: (_: any, playlistId: any) => {
+ onSuccess: (_, playlistId) => {
  // Invalidate caches
  queryCache.invalidate(`playlist:${playlistId}`);
  queryCache.invalidate('playlists');
@@ -263,7 +263,7 @@ export function useUploadPlaylistThumbnail(): any {
 }
 
 // Combined hooks for common patterns
-export function usePlaylistWithVideos(playlistId: any): any {
+export function usePlaylistWithVideos(playlistId): any {
  const playlist = usePlaylist(playlistId);
  const videos = usePlaylistVideos(playlistId);
  const stats = usePlaylistStats(playlistId);

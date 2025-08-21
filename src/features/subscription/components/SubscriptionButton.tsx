@@ -48,7 +48,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  setShowNotificationMenu(false);
  };
 
- const formatSubscriberCount: any = (count?: number): string => {
+ const formatSubscriberCount = (count?: number): string => {
  if (!count) {
  return '';
  }
@@ -61,7 +61,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  return count.toString();
  };
 
- const getSizeClasses: any = () => {
+ const getSizeClasses = () => {
  switch (size as any) {
  case 'sm':
  return 'px-3 py-1.5 text-sm';
@@ -70,7 +70,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  default: return 'px-4 py-2 text-base'
  };
 
- const getNotificationIcon: any = () => {
+ const getNotificationIcon = () => {
  switch (notificationLevel as any) {
  case 'all':
  return <BellSolidIcon className='w-4 h-4' />;
@@ -85,7 +85,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  return (
  <div className={`flex items-center gap-2 ${className}`}>
  <button />
-// FIXED:  onClick={(e: any) => handleSubscriptionToggle(e)}
+// FIXED:  onClick={(e) => handleSubscriptionToggle(e)}
 // FIXED:  disabled={isLoading}
 // FIXED:  className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 ${
  isSubscribed
@@ -184,7 +184,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
  return (
  <div className={`flex items-center gap-2 ${className}`}>
  <button />
-// FIXED:  onClick={(e: any) => handleSubscriptionToggle(e)}
+// FIXED:  onClick={(e) => handleSubscriptionToggle(e)}
 // FIXED:  disabled={isLoading}
 // FIXED:  className={`${getSizeClasses()} font-medium rounded-full transition-all duration-200 disabled:opacity-50 flex items-center gap-2 ${
  isSubscribed

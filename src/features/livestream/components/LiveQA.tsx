@@ -31,7 +31,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
  try {
  await submitQuestion(newQuestion.trim());
  setNewQuestion('');
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(
  'LiveQA',
  'Failed to submit question',
@@ -40,10 +40,10 @@ const LiveQA: React.FC<LiveQAProps> = ({
  conditionalLogger.error('Failed to submit question:', componentError);
  };
 
- const handleLikeQuestion = async (questionId: any): Promise<any> => {
+ const handleLikeQuestion = async (questionId): Promise<any> => {
  try {
  await upvoteQuestion(questionId);
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(
  'LiveQA',
  'Failed to like question',
@@ -52,11 +52,11 @@ const LiveQA: React.FC<LiveQAProps> = ({
  conditionalLogger.error('Failed to like question:', componentError);
  };
 
- const handlePinQuestion = async (questionId: any): Promise<any> => {
+ const handlePinQuestion = async (questionId): Promise<any> => {
  try {
  // TODO: Implement pin functionality in service
  conditionalLogger.debug('Pin question:', questionId);
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(
  'LiveQA',
  'Failed to pin question',
@@ -65,7 +65,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
  conditionalLogger.error('Failed to pin question:', componentError);
  };
 
- const handleAnswerQuestion = async (questionId: any): Promise<any> => {
+ const handleAnswerQuestion = async (questionId): Promise<any> => {
  if (!answerText.trim()) {
  return;
  }
@@ -74,7 +74,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
  await answerQuestion(questionId, answerText.trim());
  setAnswerMode(null);
  setAnswerText('');
- } catch (error: any) {
+ } catch (error) {
  const componentError = createComponentError(
  'LiveQA',
  'Failed to answer question',
@@ -83,13 +83,13 @@ const LiveQA: React.FC<LiveQAProps> = ({
  conditionalLogger.error('Failed to answer question:', componentError);
  };
 
- const formatTimestamp: any = (timestamp: Date) => {
+ const formatTimestamp = (timestamp: Date) => {
  return new Intl.DateTimeFormat('en-US', {
  hour: '2-digit',
  minute: '2-digit' }).format(timestamp);
  };
 
- const filteredQuestions = questions.filter((question: any) => {
+ const filteredQuestions = questions.filter((question) => {
  switch (filter as any) {
  case 'unanswered':
  return !question.answered;
@@ -102,7 +102,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
 
  });
 
- const sortedQuestions = filteredQuestions.sort((a: any, b: any) => {
+ const sortedQuestions = filteredQuestions.sort((a, b) => {
  // Highlighted questions first
  if (a.isHighlighted && !b.isHighlighted) {
  return -1;
@@ -148,7 +148,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
 // FIXED:  className='flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
  />
  <button />
-// FIXED:  onClick={(e: any) => handleSubmitQuestion(e)}
+// FIXED:  onClick={(e) => handleSubmitQuestion(e)}
 // FIXED:  disabled={!newQuestion.trim()}
 // FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed'
  >
@@ -165,15 +165,15 @@ const LiveQA: React.FC<LiveQAProps> = ({
  {
  key: 'unanswered',
  label: 'Unanswered',
- count: questions.filter((q: any) => !q.answered).length },
+ count: questions.filter((q) => !q.answered).length },
  {
  key: 'answered',
  label: 'Answered',
- count: questions.filter((q: any) => q.answered).length },
+ count: questions.filter((q) => q.answered).length },
  {
  key: 'pinned',
  label: 'Pinned',
- count: questions.filter((q: any) => q.isHighlighted).length }].map((tab: any) => (
+ count: questions.filter((q) => q.isHighlighted).length }].map((tab) => (
  <button
  key={tab.key} />
 // FIXED:  onClick={() => setFilter(tab.key as any)}
@@ -190,7 +190,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
 
  {/* Questions List */}
  <div className='space-y-3 max-h-96 overflow-y-auto'>
- {sortedQuestions.map((question: any) => (
+ {sortedQuestions.map((question) => (
  <div
  key={question.id}
 // FIXED:  className={`p-4 border rounded-lg ${

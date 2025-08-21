@@ -9,7 +9,7 @@ import { logger } from './logger';
  * @param date Date object, date string, or timestamp
  * @returns Relative time string
  */
-  const formatDistanceToNow: any = (date: string | Date | number): string => {
+  const formatDistanceToNow = (date: string | Date | number): string => {
  try {
  const now = new Date();
  const targetDate = new Date(date);
@@ -52,7 +52,7 @@ import { logger } from './logger';
 
  const years = Math.floor(diffInSeconds / 31536000);
  return `${years} year${years === 1 ? '' : 's'} ago`;
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error formatting date:', error);
  return 'Invalid date';
  };
@@ -107,7 +107,7 @@ import { logger } from './logger';
 
  const years = Math.floor(diffInSeconds / 31536000);
  return `${years}y ago`;
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error formatting date:', error);
  return 'Invalid';
  };
@@ -118,7 +118,7 @@ import { logger } from './logger';
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted date string
  */
-  const formatDate: any = (
+  const formatDate = (
  date: string | Date | number,
  options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -135,7 +135,7 @@ import { logger } from './logger';
  day: 'numeric' };
 
  return targetDate.toLocaleDateString('en-US', options || defaultOptions);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error formatting date:', error);
  return 'Invalid date';
  };
@@ -146,7 +146,7 @@ import { logger } from './logger';
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted time string
  */
-  const formatTime: any = (
+  const formatTime = (
  date: string | Date | number,
  options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -162,7 +162,7 @@ import { logger } from './logger';
  minute: '2-digit' };
 
  return targetDate.toLocaleTimeString('en-US', options || defaultOptions);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error formatting time:', error);
  return 'Invalid time';
  };
@@ -172,7 +172,7 @@ import { logger } from './logger';
  * @param relativeDate Relative date string like "2 hours ago"
  * @returns Timestamp in milliseconds
  */
-  const parseRelativeDate: any = (
+  const parseRelativeDate = (
     relativeDate: string | null | undefined
 ): number => {
  const now = new Date().getTime();

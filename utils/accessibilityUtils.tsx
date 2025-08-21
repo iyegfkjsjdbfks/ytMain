@@ -14,7 +14,7 @@ interface AccessibilityContextType {
  reducedMotion, highContrast: boolean;
  fontSize: 'small' | 'medium' | 'large' | 'extra-large',
  announcements: string;
- addAnnouncement: (message: any) => void,
+ addAnnouncement: (message) => void,
  clearAnnouncements: () => void
 }
 
@@ -32,14 +32,14 @@ export function AccessibilityProvider({ children }): any {
  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
  setReducedMotion(motionQuery.matches);
 
- const handleMotionChange: any = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+ const handleMotionChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
  motionQuery.addEventListener('change', handleMotionChange as EventListener);
 
  // Check for high contrast preference
  const contrastQuery = window.matchMedia('(prefers-contrast: high)');
  setHighContrast(contrastQuery.matches);
 
- const handleContrastChange: any = (e: MediaQueryListEvent) => setHighContrast(e.matches);
+ const handleContrastChange = (e: MediaQueryListEvent) => setHighContrast(e.matches);
  contrastQuery.addEventListener('change', handleContrastChange as EventListener);
 
  // Load saved preferences
@@ -65,7 +65,7 @@ export function AccessibilityProvider({ children }): any {
  (localStorage as any).setItem('accessibility-font-size', fontSize);
  }, [fontSize]);
 
- const addAnnouncement = useCallback((message: any) => {
+ const addAnnouncement = useCallback((message) => {
  setAnnouncements(prev => [...prev as any, message]);
 
  // Auto-clear announcement after 5 seconds
@@ -110,8 +110,8 @@ export function ScreenReaderAnnouncer(): any {
 // FIXED:  className="sr-only"
  role="status" />
  >
- {announcements.map((announcement: any,
- index: number) => (
+ {announcements.map((announcement,
+ index) => (
  <div key={`${announcement}-${index}`}>
  {announcement}
 // FIXED:  </div>
@@ -140,7 +140,7 @@ export function useFocusManagement(): any {
  const firstElement = focusableElements[0];
  const lastElement = focusableElements[focusableElements.length - 1];
 
- const handleKeyDown: any = (e: KeyboardEvent) => {
+ const handleKeyDown = (e: KeyboardEvent) => {
  if (e.key !== 'Tab') {
 return;
 }
@@ -175,7 +175,7 @@ return;
  trapFocus,
  restoreFocus }
 // Keyboard navigation hook
-export function useKeyboardNavigation(_options: any): any {
+export function useKeyboardNavigation(_options): any {
  const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
  const handleKeyDown = useCallback((e: KeyboardEvent) => {
  if (disabled as any) {
@@ -224,7 +224,7 @@ export function useAriaLiveRegion(_initialMessage = ''): any {
  const [message, setMessage] = useState(_initialMessage);
  const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
- const announce = useCallback((newMessage: any,
+ const announce = useCallback((newMessage,
  priority: 'polite' | 'assertive' = 'polite') => {
  setPoliteness(priority);
  setMessage(newMessage);
@@ -246,11 +246,11 @@ export function useAriaLiveRegion(_initialMessage = ''): any {
 
  return { announce, LiveRegion }
 // Color contrast utilities
-export function getContrastRatio(color1: any,
- color2: any): number {
- const getLuminance: any = (color: any): number => {
+export function getContrastRatio(color1,
+ color2): number {
+ const getLuminance = (color): number => {
  const rgb = color.match(/\d+/g)?.map(Number) || [0, 0, 0];
- const [r = 0, g = 0, b = 0] = rgb.map((c: any) => {
+ const [r = 0, g = 0, b = 0] = rgb.map((c) => {
  c = c / 255;
  return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
  });
@@ -265,8 +265,8 @@ export function getContrastRatio(color1: any,
  return (brightest + 0.05) / (darkest + 0.05);
 }
 
-export function checkColorContrast(foreground: any,
- background: any): {
+export function checkColorContrast(foreground,
+ background): {
  ratio, wcagAA: boolean;
  wcagAAA, wcagAALarge: boolean
 } {
@@ -283,7 +283,7 @@ export function SkipLink({ href, children }): any {
  <a
 // FIXED:  href={href}
 // FIXED:  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg" />
- onFocus={(e: any) => {
+ onFocus={(e) => {
  e.currentTarget.scrollIntoView({ behavior: 'smooth',
  block: 'center' });
  }
@@ -331,7 +331,7 @@ export function useAccessibleModal(): any {
 
  // Handle escape key
  useEffect(() => {
- const handleEscape: any = (e: KeyboardEvent) => {
+ const handleEscape = (e: KeyboardEvent) => {
  if (e.key === 'Escape' && isOpen) {
  closeModal();
  };
@@ -358,13 +358,13 @@ export function useAccessibleForm(): any {
  const [errors, setErrors] = useState<Record<string, string>>({});
  const { addAnnouncement } = useAccessibility();
 
- const setFieldError = useCallback((fieldName: any,
+ const setFieldError = useCallback((fieldName,
  error: Error) => {
  setErrors(prev => ({ ...prev as any, [fieldName]: error }));
  addAnnouncement(`Error in ${fieldName}: ${error}`);
  }, [addAnnouncement]);
 
- const clearFieldError = useCallback((fieldName: any) => {
+ const clearFieldError = useCallback((fieldName) => {
  setErrors(prev => {
  const newErrors = { ...prev };
  delete newErrors[fieldName];
@@ -372,7 +372,7 @@ export function useAccessibleForm(): any {
  });
  }, []);
 
- const getFieldProps = useCallback((fieldName: any) => {
+ const getFieldProps = useCallback((fieldName) => {
  const hasError = !!errors[fieldName];
 
  return {
@@ -387,13 +387,13 @@ export function useAccessibleForm(): any {
  }
  } }}, [errors, setFieldError, clearFieldError]);
 
- const getErrorProps = useCallback((fieldName: any) => {
+ const getErrorProps = useCallback((fieldName) => {
  const error = errors[fieldName];
 
  return error ? {
  id: `${fieldName}-error`,
  role: 'alert',
- 'aria-live': 'polite' as const, children: error } : null;
+ 'aria-live': 'polite' as const children: error } : null;
  }, [errors]);
 
  return {
@@ -440,8 +440,7 @@ export function useAccessibleTooltip(): any {
  id: tooltipId.current,
  role: 'tooltip',
  style: {
- position: 'absolute' as const,
- left: position.x,
+ position: 'absolute' as const left: position.x,
  top: position.y,
  transform: 'translateX(-50%) translateY(-100%)'
  };

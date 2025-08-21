@@ -62,7 +62,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
  icon: Icon,
  iconColor,
  format = 'number' }) => {
- const formatValue: any = (val: string | number) => {
+ const formatValue = (val: string | number) => {
  if (typeof val === 'string') {
  return val;
  }
@@ -216,7 +216,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  []
  );
 
- const chartData = analyticsData.timeSeriesData.map((item: any) => ({
+ const chartData = analyticsData.timeSeriesData.map((item) => ({
  ...item as any,
  value: item[selectedMetric] }));
 
@@ -318,7 +318,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  key={index}
 // FIXED:  className='bg-blue-500 rounded-t flex-1 min-w-0 transition-all hover:bg-blue-600'
 // FIXED:  style={{ />
- height: `${(item.value / Math.max(...chartData.map((d: any) => d.value))) * 100}%`,
+ height: `${(item.value / Math.max(...chartData.map((d) => d.value))) * 100}%`,
  minHeight: '4px' }
  title={`${new Date(item.date).toLocaleDateString()}: ${item.value.toLocaleString()}`}
  />
@@ -371,7 +371,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  Age Groups
 // FIXED:  </h4>
  <div className='space-y-2'>
- {analyticsData.demographics.ageGroups.map((group: any) => (
+ {analyticsData.demographics.ageGroups.map((group) => (
  <div
  key={group.range}
 // FIXED:  className='flex items-center justify-between' />
@@ -403,7 +403,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
  <div className='space-y-2'>
  {analyticsData.demographics.countries
  .slice(0, 5)
- .map((country: any) => (
+ .map((country) => (
  <div
  key={country.country}
 // FIXED:  className='flex items-center justify-between' />

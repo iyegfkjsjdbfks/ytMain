@@ -11,12 +11,12 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  const [showOfflineMessage, setShowOfflineMessage] = useState<boolean>(false);
 
  useEffect(() => {
- const handleOnline: any = () => {
+ const handleOnline = () => {
  setIsOnline(true);
  setShowOfflineMessage(false);
  };
 
- const handleOffline: any = () => {
+ const handleOffline = () => {
  setIsOnline(false);
  setShowOfflineMessage(true);
  };

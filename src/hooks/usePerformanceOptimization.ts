@@ -9,7 +9,7 @@ declare namespace NodeJS {
  env: ProcessEnv
  }
 // Performance monitoring hook
-export const usePerformanceMonitor: any = (componentName: any) => {
+export const usePerformanceMonitor = (componentName) => {
  const renderCount = useRef(0);
  const startTime = useRef(performance.now());
 
@@ -31,7 +31,7 @@ export const usePerformanceMonitor: any = (componentName: any) => {
 };
 
 // Debounced value hook
-export const useDebounce = <T>(value: T, delay: any): T => {
+export const useDebounce = <T>(value: T, delay): T => {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
  useEffect(() => {
@@ -50,7 +50,7 @@ export const useDebounce = <T>(value: T, delay: any): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args) => any>(,
  callback: T,
- delay: any
+ delay
 ): T => {
  const lastCall = useRef(0);
  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
@@ -77,7 +77,7 @@ export const useThrottle = <T extends (...args) => any>(,
 };
 
 // Memory usage monitoring
-export const useMemoryMonitor: any = () => {
+export const useMemoryMonitor = () => {
  const [memoryInfo, setMemoryInfo] = useState<{
  usedJSHeapSize: number;
  totalJSHeapSize: number;
@@ -85,7 +85,7 @@ export const useMemoryMonitor: any = () => {
  } | null>(null);
 
  useEffect(() => {
- const updateMemoryInfo: any = () => {
+ const updateMemoryInfo = () => {
  if ('memory' in performance) {
  const { memory } = performance as any;
  setMemoryInfo({
@@ -104,7 +104,7 @@ export const useMemoryMonitor: any = () => {
 };
 
 // Intersection observer for lazy loading
-export const useIntersectionObserver: any = (,
+export const useIntersectionObserver = (,
  options: IntersectionObserverInit = {}
 ) => {
  const [isIntersecting, setIsIntersecting] = useState<boolean>(false);

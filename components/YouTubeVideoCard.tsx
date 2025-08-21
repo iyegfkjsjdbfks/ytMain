@@ -24,7 +24,7 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
 
  // Helper function to format duration is now imported from utils
 
- const formatUploadDate: any = (uploadDate?: string) => {
+ const formatUploadDate = (uploadDate?: string) => {
  if (!uploadDate) {
 return null;
 }
@@ -52,7 +52,7 @@ return `${Math.floor(diffDays / 30)} months ago`;
  return uploadDate;
  };
 
- const handleCardClick: any = () => {
+ const handleCardClick = () => {
  // Use the full video ID to preserve the source context (google-search- or youtube- prefix)
  const fullVideoId = video.id;
 
@@ -64,10 +64,10 @@ return `${Math.floor(diffDays / 30)} months ago`;
  return (
  <div
 // FIXED:  className={`bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full cursor-pointer group ${className}`} />
-// FIXED:  onClick={(e: any) => handleCardClick(e)}
+// FIXED:  onClick={(e) => handleCardClick(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e: any) => {
+ onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.preventDefault();
  handleCardClick();

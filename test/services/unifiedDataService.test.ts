@@ -318,7 +318,7 @@ describe('UnifiedDataService', () => {
  service.updateConfig({ mixing: { strategy: 'round-robin' } });
 
  // Use private method through service instance
- const mixedVideos: any = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
+ const mixedVideos = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
 
  expect(mixedVideos).toHaveLength(4);
  expect(mixedVideos[0].id).toBe('local-1');
@@ -333,7 +333,7 @@ describe('UnifiedDataService', () => {
  strategy: 'source-priority',
  sourcePriority: ['local', 'youtube'] } });
 
- const mixedVideos: any = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
+ const mixedVideos = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
 
  expect(mixedVideos).toHaveLength(4);
  expect(mixedVideos[0].id).toBe('local-1');
@@ -351,7 +351,7 @@ describe('UnifiedDataService', () => {
  { ...youtubeVideos[0], likes: 150, commentCount: 15 },
  { ...youtubeVideos[1], likes: 250, commentCount: 25 }];
 
- const mixedVideos: any = (service as any).mixVideoResults(
+ const mixedVideos = (service as any).mixVideoResults(
  videosWithEngagement.slice(0, 2),
  videosWithEngagement.slice(2),
  4,
@@ -368,7 +368,7 @@ describe('UnifiedDataService', () => {
  service.clearCache();
 
  // Test that cache is cleared
- const result: any = (service as any).getCachedData('test-key');
+ const result = (service as any).getCachedData('test-key');
  expect(result).toBeNull();
  });
 

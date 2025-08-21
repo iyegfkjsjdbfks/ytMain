@@ -86,13 +86,13 @@ return fallbackSrc;
  setIsRateLimited(false);
  }, [currentSrc, hasError, retryCount, maxRetries, retryDelay, src, width, height, alt, onError, generateFallback]);
 
- const handleLoad: any = () => {
+ const handleLoad = () => {
  setIsLoading(false);
  onLoad?.();
  };
 
- const generatePlaceholderDataUrl: any = (w: any,
- h: any, text: any): string => {
+ const generatePlaceholderDataUrl = (w,
+ h, text): string => {
  const canvas = document.createElement('canvas');
  canvas.width = w;
  canvas.height = h;

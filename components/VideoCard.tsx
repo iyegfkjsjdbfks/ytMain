@@ -15,7 +15,7 @@ interface VideoCardProps {
  video: Video
 }
 
-const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: any) => {
+const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
  const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
  const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
  const navigate = useNavigate();
@@ -24,7 +24,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: any) => {
  const channelUrl = buildChannelUrl(encodeURIComponent(video.channelName));
  const avatarFallback = getAvatarFallback(video.channelName);
 
- const handleToggleWatchLater: any = (e: React.MouseEvent) => {
+ const handleToggleWatchLater = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  if (isSaved as any) {
@@ -35,12 +35,12 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: any) => {
  toggleSaved();
  };
 
- const handleChannelNavigation: any = (e: React.MouseEvent | React.KeyboardEvent) => {
+ const handleChannelNavigation = (e: React.MouseEvent | React.KeyboardEvent) => {
  e.stopPropagation();
  navigate(channelUrl);
  };
 
- const handleChannelKeyDown: any = (e: React.KeyboardEvent) => {
+ const handleChannelKeyDown = (e: React.KeyboardEvent) => {
  if (e.key === 'Enter' || e.key === ' ') {
  handleChannelNavigation(e);
  };
@@ -61,7 +61,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: any) => {
  {video.duration}
 // FIXED:  </div>
  <IconButton />
-// FIXED:  onClick={(e: any) => handleToggleWatchLater(e)}
+// FIXED:  onClick={(e) => handleToggleWatchLater(e)}
  variant={isSaved ? 'primary' : 'ghost'}
  size="sm"
 // FIXED:  className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100 p-1.5 sm:p-1 touch-manipulation"
@@ -74,7 +74,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: any) => {
  <div
  role="button"
  tabIndex={0} />
-// FIXED:  onClick={(e: any) => handleChannelNavigation(e)}
+// FIXED:  onClick={(e) => handleChannelNavigation(e)}
  onKeyDown={handleChannelKeyDown}
 // FIXED:  className="flex-shrink-0 cursor-pointer z-10 relative"
 // FIXED:  aria-label={`Go to ${video.channelName} channel`}
@@ -99,7 +99,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: any) => {
  <div
  role="button"
  tabIndex={0} />
-// FIXED:  onClick={(e: any) => handleChannelNavigation(e)}
+// FIXED:  onClick={(e) => handleChannelNavigation(e)}
  onKeyDown={handleChannelKeyDown}
 // FIXED:  className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
 // FIXED:  aria-label={`Go to ${video.channelName} channel`}

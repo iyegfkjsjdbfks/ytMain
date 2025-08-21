@@ -173,11 +173,11 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  }
  }, []);
 
- const filterSubscriptions: any = () => {
+ const filterSubscriptions = () => {
  let filtered = subscriptions;
 
  if (searchQuery as any) {
- filtered = filtered.filter((sub: any) =>
+ filtered = filtered.filter((sub) =>
  sub.channelName.toLowerCase().includes(searchQuery.toLowerCase()));
  }
 
@@ -209,8 +209,8 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  return filtered;
  };
 
- const toggleNotifications: any = (channelId: any) => {
- setSubscriptions(prev => prev.map((sub: any) =>
+ const toggleNotifications = (channelId) => {
+ setSubscriptions(prev => prev.map((sub) =>
  sub.channelId === channelId
  ? { ...sub as any, notificationsEnabled: !sub.notificationsEnabled }
  : sub));
@@ -223,7 +223,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(updatedStored));
  };
 
- const handleUnsubscribe: any = (channelId: any) => {
+ const handleUnsubscribe = (channelId) => {
  setSubscriptions(prev => prev.filter((sub) => sub.channelId !== channelId));
  // Update localStorage
  const stored = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
@@ -232,7 +232,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  setShowUnsubscribeModal(null);
  };
 
- const toggleBulkSelection: any = (channelId: any) => {
+ const toggleBulkSelection = (channelId) => {
  setSelectedSubscriptions(prev => {
  const newSet = new Set(prev);
  if (newSet.has(channelId)) {
@@ -244,7 +244,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }:
  });
  };
 
- const handleBulkAction: any = (action: 'unsubscribe' | 'toggle_notifications') => {
+ const handleBulkAction = (action: 'unsubscribe' | 'toggle_notifications') => {
  selectedSubscriptions.forEach(channelId => {
  if (action === 'unsubscribe') {
  handleUnsubscribe(channelId);

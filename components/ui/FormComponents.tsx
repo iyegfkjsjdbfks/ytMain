@@ -439,7 +439,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
  )}
 
  <div className="space-y-2">
- {options.map((option: any) => {
+ {options.map((option) => {
  const radioId = `${name}-${option.value}`;
 
  return (
@@ -450,7 +450,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
 // FIXED:  name={name}
 // FIXED:  value={option.value}
 // FIXED:  checked={value === option.value} />
-// FIXED:  onChange={(e: any) => onChange(e)}
+// FIXED:  onChange={(e) => onChange(e)}
 // FIXED:  disabled={option.disabled}
 // FIXED:  className={radioClasses}
  {...props}

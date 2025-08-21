@@ -47,7 +47,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
  }, [isWatchPage]);
 
  useEffect(() => {
- const handleResize: any = () => {
+ const handleResize = () => {
  // Optional: adjust sidebar based on resize
  // if (window.innerWidth >= 768 && !isSidebarOpen) setIsSidebarOpen(true);
  // if (window.innerWidth < 768 && isSidebarOpen) setIsSidebarOpen(false);
@@ -56,7 +56,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
  return () => window.removeEventListener('resize', handleResize as EventListener);
  }, [isSidebarOpen]);
 
- const handleMaximizeMiniplayer: any = (videoId: any) => {
+ const handleMaximizeMiniplayer = (videoId) => {
  miniplayerContext.actions.hideMiniplayer();
  navigate(`/watch/${videoId}`);
  };
@@ -66,7 +66,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
  const mainContentPaddingClass = isShortsPage ? 'p-0' : 'p-3 sm:p-4 md:p-5 lg:p-6';
 
  // Calculate sidebar margin based on state and screen size
- const getSidebarMargin: any = () => {
+ const getSidebarMargin = () => {
  if (isWatchPage as any) {
  // On watch page, use minimized or expanded sidebar
  return isMinimized ? 'md: ml-16' : 'md:ml-60'

@@ -5,7 +5,7 @@ import { safeLocalStorage, throttle } from '../utils/componentUtils';
 
 // Enhanced local storage hook with error handling
 export const useLocalStorage = <T>(,
- key: string,
+ key,
  initialValue: T
 ): [T(value: T | ((val: T) => T)) => void() => void] => {
  const [storedValue, setStoredValue] = useState<T>(() => {
@@ -20,7 +20,7 @@ export const useLocalStorage = <T>(,
  value instanceof Function ? value(storedValue) : value;
  setStoredValue(valueToStore);
  safeLocalStorage.setJSON(key, valueToStore);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Error setting localStorage key "${key}":`, error);
  }
  },
@@ -31,7 +31,7 @@ export const useLocalStorage = <T>(,
  try {
  setStoredValue(initialValue);
  safeLocalStorage.removeItem(key);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
@@ -40,7 +40,7 @@ export const useLocalStorage = <T>(,
 };
 
 // Debounced value hook
-export const useDebounce = <T>(value: T, delay: any): T => {
+export const useDebounce = <T>(value: T, delay): T => {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
  useEffect(() => {
@@ -59,7 +59,7 @@ export const useDebounce = <T>(value: T, delay: any): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args: unknown) => unknown>(,
  callback: T,
- delay: any
+ delay
 ): T => {
  const throttledCallback = useMemo(
  () => throttle(callback, delay),
@@ -79,19 +79,19 @@ export const usePrevious = <T>(value: T): T | undefined => {
 };
 
 // Toggle hook
-export const useToggle: any = (,
+export const useToggle = (,
  initialValue: boolean = false
 ): [boolean() => void(value: string | number) => void] => {
  const [value, setValue] = useState(initialValue);
 
  const toggle = useCallback(() => setValue(v => !v), []);
- const setToggle = useCallback((newValue: any) => setValue(newValue), []);
+ const setToggle = useCallback((newValue) => setValue(newValue), []);
 
  return [value, toggle, setToggle];
 };
 
 // Counter hook
-export const useCounter: any = (,
+export const useCounter = (,
  initialValue: number = 0
 ): {
  count: number;
@@ -117,9 +117,9 @@ export const useArray = <T>(,
  array: T;
  set: (array: T) => void;
  push: (element: T) => void;
- filter: (callback: (item: T, index: number) => boolean) => void;
- update: (index: number, newElement: T) => void;
- remove: (index: number) => void;
+ filter: (callback: (item: T, index) => boolean) => void;
+ update: (index, newElement: T) => void;
+ remove: (index) => void;
  clear: () => void
 } => {
  const [array, setArray] = useState<T[]>(initialArray);
@@ -129,13 +129,13 @@ export const useArray = <T>(,
  }, []);
 
  const filter = useCallback(
- (callback: (item: T, index: number) => boolean) => {
+ (callback: (item: T, index) => boolean) => {
  setArray(arr => arr.filter(callback));
  },
  []
  );
 
- const update = useCallback((index: number, newElement: T) => {
+ const update = useCallback((index, newElement: T) => {
  setArray(arr => {
  const newArray = [...arr];
  newArray[index] = newElement;
@@ -143,7 +143,7 @@ export const useArray = <T>(,
  });
  }, []);
 
- const remove = useCallback((index: number) => {
+ const remove = useCallback((index) => {
  setArray(arr => arr.filter((_, i) => i !== index));
  }, []);
 
@@ -179,7 +179,7 @@ export const useAsync = <T, E = string>(,
  try {
  const result = await asyncFunction();
  setData(result);
- } catch (err: any) {
+ } catch (err) {
  setError(err as E);
  } finally {
  setLoading(false);
@@ -196,12 +196,12 @@ export const useAsync = <T, E = string>(,
 };
 
 // Click outside hook
-export const useClickOutside: any = (,
+export const useClickOutside = (,
  ref: React.RefObject<HTMLElement>,
  handler: (event: MouseEvent | TouchEvent) => void
 ): void => {
  useEffect(() => {
- const listener: any = (event: MouseEvent | TouchEvent) => {
+ const listener = (event: MouseEvent | TouchEvent) => {
  if (!ref.current || ref.current.contains(event.target as Node)) {
  return;
  }
@@ -219,8 +219,8 @@ export const useClickOutside: any = (,
 };
 
 // Keyboard shortcut hook
-export const useKeyPress: any = (,
- targetKey: any,
+export const useKeyPress = (,
+ targetKey,
  handler: () => void,
  options: {
  ctrl?: boolean;
@@ -230,7 +230,7 @@ export const useKeyPress: any = (,
  } = {}
 ): void => {
  useEffect(() => {
- const handleKeyPress: any = (event: KeyboardEvent) => {
+ const handleKeyPress = (event: KeyboardEvent) => {
  const {
  ctrl = false,
  shift = false,
@@ -254,13 +254,13 @@ export const useKeyPress: any = (,
 };
 
 // Window size hook
-export const useWindowSize: any = (): { width: number; height: number } => {
+export const useWindowSize = (): { width: number; height: number } => {
  const [windowSize, setWindowSize] = useState({
  width: typeof window !== 'undefined' ? window.innerWidth : 0,
  height: typeof window !== 'undefined' ? window.innerHeight : 0 });
 
  useEffect(() => {
- const handleResize: any = () => {
+ const handleResize = () => {
  setWindowSize({
  width: window.innerWidth,
  height: window.innerHeight });
@@ -274,7 +274,7 @@ export const useWindowSize: any = (): { width: number; height: number } => {
 };
 
 // Media query hook
-export const useMediaQuery: any = (query: any): boolean => {
+export const useMediaQuery = (query): boolean => {
  const [matches, setMatches] = useState<boolean>(false);
 
  useEffect(() => {
@@ -285,7 +285,7 @@ export const useMediaQuery: any = (query: any): boolean => {
  const media = window.matchMedia(query);
  setMatches(media.matches);
 
- const listener: any = (event: MediaQueryListEvent) => {
+ const listener = (event: MediaQueryListEvent) => {
  setMatches(event.matches);
  };
 
@@ -297,7 +297,7 @@ export const useMediaQuery: any = (query: any): boolean => {
 };
 
 // Intersection observer hook
-export const useIntersectionObserver: any = (,
+export const useIntersectionObserver = (,
  elementRef: React.RefObject<Element>,
  options: IntersectionObserverInit = {}
 ): IntersectionObserverEntry | null => {
@@ -322,7 +322,7 @@ export const useIntersectionObserver: any = (,
 };
 
 // Scroll position hook
-export const useScrollPosition: any = (): { x: number; y: number } => {
+export const useScrollPosition = (): { x: number; y: number } => {
  const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
 
  useEffect(() => {

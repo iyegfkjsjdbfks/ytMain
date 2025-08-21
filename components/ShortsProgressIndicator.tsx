@@ -13,7 +13,7 @@ const ShortsProgressIndicator: React.FC<ShortsProgressIndicatorProps> = ({
 return null;
 }
 
- const progress: any = ((currentIndex + 1) / totalCount) * 100;
+ const progress = ((currentIndex + 1) / totalCount) * 100;
  const displayIndex = currentIndex + 1;
 
  return (

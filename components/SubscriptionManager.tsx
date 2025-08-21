@@ -60,13 +60,13 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
 
  // Simulate API delay
  await new Promise(resolve => setTimeout((resolve) as any, 500));
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error updating subscription:', error);
  } finally {
  setIsLoading(false);
  };
 
- const handleNotificationToggle = async (enabled: any): Promise<any> => {
+ const handleNotificationToggle = async (enabled): Promise<any> => {
  try {
  const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
  if (subscriptions[channelId]) {
@@ -74,7 +74,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
  (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
  setNotificationsEnabled(enabled);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error updating notification settings:', error);
  }
  setShowNotificationMenu(false);
@@ -85,7 +85,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
  {isSubscribed ? (
  <div className="flex items-center space-x-1">
  <button />
-// FIXED:  onClick={(e: any) => handleSubscribe(e)}
+// FIXED:  onClick={(e) => handleSubscribe(e)}
 // FIXED:  disabled={isLoading}
 // FIXED:  className="flex items-center space-x-2 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
  >
@@ -140,7 +140,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
 // FIXED:  </div>
  ) : (
  <button />
-// FIXED:  onClick={(e: any) => handleSubscribe(e)}
+// FIXED:  onClick={(e) => handleSubscribe(e)}
 // FIXED:  disabled={isLoading}
 // FIXED:  className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
  >

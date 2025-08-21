@@ -19,7 +19,7 @@ const RegisterPage: React.FC = () => {
  const { register } = useAuth();
  const navigate = useNavigate();
 
- const validateForm: any = () => {
+ const validateForm = () => {
  if (!username.trim()) {
  setError('Username is required');
  return false;
@@ -72,7 +72,7 @@ const RegisterPage: React.FC = () => {
  } else {
  setError('Registration failed. Please try again.');
  }
- } catch (err: any) {
+ } catch (err) {
  setError('An error occurred. Please try again.');
  } finally {
  setIsLoading(false);
@@ -100,7 +100,7 @@ const RegisterPage: React.FC = () => {
 
  <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
  <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
- <form className="space-y-6" onSubmit={(e: any) => handleSubmit(e)}>
+ <form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
  {error && (
  <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
  <div className="text-sm text-red-700 dark:text-red-400">

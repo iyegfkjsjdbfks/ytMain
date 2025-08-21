@@ -17,10 +17,10 @@ interface ShortDisplayCardProps {
  short: Short;
  isLiked?: boolean;
  isFollowed?: boolean;
- onLike?: (shortId: any) => void;
- onFollow?: (channelName: any) => void;
- onComment?: (shortId: any) => void;
- onShare?: (shortId: any) => void;
+ onLike?: (shortId) => void;
+ onFollow?: (channelName) => void;
+ onComment?: (shortId) => void;
+ onShare?: (shortId) => void;
  onVideoChange?: () => void;
  onVideoEnd?: () => void;
  isActive?: boolean;
@@ -37,7 +37,7 @@ interface PlayPauseOverlayProps {
 const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }: any) => (
  <div
 // FIXED:  className="absolute inset-0 flex items-center justify-center cursor-pointer" />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  onToggle();
  }
@@ -84,7 +84,7 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
 // FIXED:  </p>
  {onFollow && (
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  onFollow();
  }
@@ -120,7 +120,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
  <div className="flex flex-col space-y-3 pointer-events-auto">
  {/* Mute/Unmute */}
  <ActionButton />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  onToggleMute();
  }
@@ -135,7 +135,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
  {/* Like */}
  <ActionButton />
-// FIXED:  onClick={(e: any) => onLike(e)}
+// FIXED:  onClick={(e) => onLike(e)}
  ariaLabel="Like video"
  >
  {isLiked ? (
@@ -147,7 +147,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
  {/* Comment */}
  <ActionButton />
-// FIXED:  onClick={(e: any) => onComment(e)}
+// FIXED:  onClick={(e) => onComment(e)}
  ariaLabel="Comment on video"
  >
  <ChatBubbleOvalLeftIcon className="w-5 h-5" />
@@ -155,7 +155,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
  {/* Share */}
  <ActionButton />
-// FIXED:  onClick={(e: any) => onShare(e)}
+// FIXED:  onClick={(e) => onShare(e)}
  ariaLabel="Share video"
  >
  <ShareIcon className="w-5 h-5" />
@@ -246,21 +246,21 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  await videoPlayer.play();
  setIsManuallyPaused(false);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error toggling play/pause:', error);
  };
 
- const handleLike: any = (e: React.MouseEvent) => {
+ const handleLike = (e: React.MouseEvent) => {
  e.stopPropagation();
  onLike?.(short.id);
  };
 
- const handleComment: any = (e: React.MouseEvent) => {
+ const handleComment = (e: React.MouseEvent) => {
  e.stopPropagation();
  onComment?.(short.id);
  };
 
- const handleShare: any = (e: React.MouseEvent) => {
+ const handleShare = (e: React.MouseEvent) => {
  e.stopPropagation();
  onShare?.(short.id);
  };
@@ -270,11 +270,11 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  videoRef.current.load();
  };
 
- const handleFollow: any = () => {
+ const handleFollow = () => {
  onFollow?.(short.channelName);
  };
 
- const handleVideoEnd: any = () => {
+ const handleVideoEnd = () => {
  onVideoEnd?.();
  };
 
@@ -305,7 +305,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  muted={videoPlayer.isMuted}
  loop
  preload="metadata" />
-// FIXED:  onClick={(e: any) => handlePlayPauseToggle(e)}
+// FIXED:  onClick={(e) => handlePlayPauseToggle(e)}
  onEnded={() => {
  handleVideoEnd();
  }

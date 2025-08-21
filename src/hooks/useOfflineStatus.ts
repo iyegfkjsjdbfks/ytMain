@@ -57,7 +57,7 @@ interface UseOfflineStatusReturn {
  * Enhanced hook for managing offline status and network conditions
  * Provides detailed network information and offline handling
  */
-export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
+export const useOfflineStatus = (): UseOfflineStatusReturn => {
  const [state, setState] = useState<OfflineState>({
  isOnline: navigator.onLine,
  wasOffline: false,
@@ -112,7 +112,7 @@ export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
  if (stats as any) {
  try {
  return JSON.parse(stats);
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to parse offline stats',
  error,
@@ -145,7 +145,7 @@ export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
  );
 
  return response.ok;
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.debug(
  'Server ping failed',
  { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -187,13 +187,13 @@ export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
  }
 
  return { online, latency, speed };
- } catch (error: any) {
+ } catch (error) {
  return { online: false, latency: -1, speed: 'offline' };
  }
  }, [state.isOnline, getNetworkQuality]);
 
  // Update offline statistics
- const updateOfflineStats = useCallback((isOffline: any) => {
+ const updateOfflineStats = useCallback((isOffline) => {
  const stats = getOfflineStats();
 
  if (isOffline && !state.wasOffline) {
@@ -208,7 +208,7 @@ export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
  }
  try {
  (localStorage as any).setItem('offline-stats', JSON.stringify(stats));
- } catch (error: any) {
+ } catch (error) {
  conditionalLogger.error(
  'Failed to save offline stats',
  error,
@@ -241,7 +241,7 @@ export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
  useEffect(() => {
  let offlineTimer: ReturnType<typeof setTimeout> | null = null;
 
- const handleOnline: any = () => {
+ const handleOnline = () => {
  const now = Date.now();
 
  setState(prev => {
@@ -271,7 +271,7 @@ export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
  );
  };
 
- const handleOffline: any = () => {
+ const handleOffline = () => {
  setState(prev => ({
  ...prev as any,
  isOnline: false,
@@ -291,7 +291,7 @@ export const useOfflineStatus: any = (): UseOfflineStatusReturn => {
  conditionalLogger.debug('Connection lost', undefined, 'useOfflineStatus');
  };
 
- const handleConnectionChange: any = () => {
+ const handleConnectionChange = () => {
  const networkInfo = getNetworkInfo();
  const connectionType = networkInfo?.effectiveType || null;
 

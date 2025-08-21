@@ -8,7 +8,7 @@ interface AsyncState<T> {
 
 interface UseAsyncStateOptions {
  initialLoading?: boolean;
- onSuccess?: (data: any) => void;
+ onSuccess?: (data) => void;
  onError?: (error: Error) => void
 }
 
@@ -36,7 +36,7 @@ export const useAsyncState = <T>(
  setState({ data: result, loading: false, error: null });
  onSuccess?.(result);
  return result;
- } catch (err: any) {
+ } catch (err) {
  const errorMessage =
  err instanceof Error ? err.message : 'An error occurred';
  setState({ data: null, loading: false, error: errorMessage });

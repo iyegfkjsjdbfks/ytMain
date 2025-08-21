@@ -72,7 +72,7 @@ interface AppActions {
  // UI Actions,
  setTheme: (theme: AppState['theme']) => void;
  toggleSidebar: () => void;
- setSidebarCollapsed: (collapsed: any) => void;
+ setSidebarCollapsed: (collapsed) => void;
  showMiniplayer: (video: Video) => void;
  hideMiniplayer: () => void;
 
@@ -83,34 +83,34 @@ interface AppActions {
  // Video Actions,
  setVideos: (category: keyof AppState['videos'], videos: Video[]) => void;
  addToWatchLater: (video: Video) => void;
- removeFromWatchLater: (videoId: any) => void;
+ removeFromWatchLater: (videoId) => void;
  addToHistory: (video: Video) => void;
  clearHistory: () => void;
  likeVideo: (video: Video) => void;
- unlikeVideo: (videoId: any) => void;
+ unlikeVideo: (videoId) => void;
 
  // Channel Actions,
  setChannels: (category: keyof AppState['channels'], channels: Channel[]) => void;
  subscribeToChannel: (channel: Channel) => void;
- unsubscribeFromChannel: (channelId: any) => void;
+ unsubscribeFromChannel: (channelId) => void;
 
  // Playlist Actions,
  setPlaylists: (playlists: UserPlaylist[]) => void;
  createPlaylist: (playlist: Omit<UserPlaylist, 'id' | 'createdAt' | 'updatedAt'>) => void;
- updatePlaylist: (id: string, updates: Partial<UserPlaylist>) => void;
- deletePlaylist: (id: string) => void;
- addVideoToPlaylist: (playlistId: any, video: Video) => void;
- removeVideoFromPlaylist: (playlistId: any, videoId: any) => void;
+ updatePlaylist: (id, updates: Partial<UserPlaylist>) => void;
+ deletePlaylist: (id) => void;
+ addVideoToPlaylist: (playlistId, video: Video) => void;
+ removeVideoFromPlaylist: (playlistId, videoId) => void;
 
  // Search Actions,
- setSearchQuery: (query: any) => void;
+ setSearchQuery: (query) => void;
  setSearchResults: (results: Video[]) => void;
- setSearchSuggestions: (suggestions: any) => void;
- setSearchLoading: (loading: any) => void;
+ setSearchSuggestions: (suggestions) => void;
+ setSearchLoading: (loading) => void;
  clearSearch: () => void;
 
  // Loading Actions,
- setLoading: (category: keyof AppState['loading'], loading: any) => void;
+ setLoading: (category: keyof AppState['loading'], loading) => void;
 
  // Error Actions,
  setError: (category: keyof AppState['errors'], error: string | null) => void;
@@ -174,34 +174,34 @@ export const useAppStore = create<AppState & AppActions>()(
  ...initialState as any,
 
  // UI Actions,
- setTheme: (theme) => set((state: any) => {
+ setTheme: (theme) => set((state) => {
  state.theme = theme;
  }),
 
- toggleSidebar: () => set((state: any) => {
+ toggleSidebar: () => set((state) => {
  state.sidebarCollapsed = !state.sidebarCollapsed;
  }),
 
- setSidebarCollapsed: (collapsed) => set((state: any) => {
+ setSidebarCollapsed: (collapsed) => set((state) => {
  state.sidebarCollapsed = collapsed;
  }),
 
- showMiniplayer: (video) => set((state: any) => {
+ showMiniplayer: (video) => set((state) => {
  state.miniplayerVisible = true;
  state.miniplayerVideo = video;
  }),
 
- hideMiniplayer: () => set((state: any) => {
+ hideMiniplayer: () => set((state) => {
  state.miniplayerVisible = false;
  state.miniplayerVideo = null;
  }),
 
  // User Actions,
- setUser: (user) => set((state: any) => {
+ setUser: (user) => set((state) => {
  Object.assign(state.user, user);
  }),
 
- logout: () => set((state: any) => {
+ logout: () => set((state) => {
  state.user = initialState.user;
  state.videos.subscriptions = [];
  state.videos.watchLater = [];
@@ -212,22 +212,22 @@ export const useAppStore = create<AppState & AppActions>()(
  }),
 
  // Video Actions,
- setVideos: (category, videos) => set((state: any) => {
+ setVideos: (category, videos) => set((state) => {
  state.videos[category] = videos;
  }),
 
- addToWatchLater: (video) => set((state: any) => {
+ addToWatchLater: (video) => set((state) => {
  const exists = state.videos.watchLater.find((v: Video) => v.id === video.id);
  if (!exists) {
  state.videos.watchLater.unshift(video);
  }
  }),
 
- removeFromWatchLater: (videoId) => set((state: any) => {
+ removeFromWatchLater: (videoId) => set((state) => {
  state.videos.watchLater = state.videos.watchLater.filter((v: Video) => v.id !== videoId)
  }),
 
- addToHistory: (video) => set((state: any) => {
+ addToHistory: (video) => set((state) => {
  // Remove if already exists
  state.videos.history = state.videos.history.filter((v: Video) => v.id !== video.id);
  // Add to beginning
@@ -238,43 +238,43 @@ export const useAppStore = create<AppState & AppActions>()(
  }
  }),
 
- clearHistory: () => set((state: any) => {
+ clearHistory: () => set((state) => {
  state.videos.history = [];
  }),
 
- likeVideo: (video) => set((state: any) => {
+ likeVideo: (video) => set((state) => {
  const exists = state.videos.liked.find((v: Video) => v.id === video.id);
  if (!exists) {
  state.videos.liked.unshift(video);
  }
  }),
 
- unlikeVideo: (videoId) => set((state: any) => {
+ unlikeVideo: (videoId) => set((state) => {
  state.videos.liked = state.videos.liked.filter((v: Video) => v.id !== videoId)
  }),
 
  // Channel Actions,
- setChannels: (category, channels) => set((state: any) => {
+ setChannels: (category, channels) => set((state) => {
  state.channels[category] = channels;
  }),
 
- subscribeToChannel: (channel) => set((state: any) => {
- const exists = state.channels.subscribed.find((c: any) => c.id === channel.id);
+ subscribeToChannel: (channel) => set((state) => {
+ const exists = state.channels.subscribed.find((c) => c.id === channel.id);
  if (!exists) {
  state.channels.subscribed.push(channel);
  }
  }),
 
- unsubscribeFromChannel: (channelId) => set((state: any) => {
- state.channels.subscribed = state.channels.subscribed.filter((c: any) => c.id !== channelId)
+ unsubscribeFromChannel: (channelId) => set((state) => {
+ state.channels.subscribed = state.channels.subscribed.filter((c) => c.id !== channelId)
  }),
 
  // Playlist Actions,
- setPlaylists: (playlists) => set((state: any) => {
+ setPlaylists: (playlists) => set((state) => {
  state.playlists = playlists;
  }),
 
- createPlaylist: (playlist) => set((state: any) => {
+ createPlaylist: (playlist) => set((state) => {
  const newPlaylist: UserPlaylist = {
  ...playlist as any,
  id: `playlist_${Date.now()}`,
@@ -283,20 +283,20 @@ export const useAppStore = create<AppState & AppActions>()(
  state.playlists.push(newPlaylist);
  }),
 
- updatePlaylist: (id, updates) => set((state: any) => {
- const index = state.playlists.findIndex((p: any) => p.id === id);
+ updatePlaylist: (id, updates) => set((state) => {
+ const index = state.playlists.findIndex((p) => p.id === id);
  if (index !== -1) {
  Object.assign(state.playlists[index], updates, {
  updatedAt: new Date().toISOString() });
  }
  }),
 
- deletePlaylist: (id) => set((state: any) => {
- state.playlists = state.playlists.filter((p: any) => p.id !== id)
+ deletePlaylist: (id) => set((state) => {
+ state.playlists = state.playlists.filter((p) => p.id !== id)
  }),
 
- addVideoToPlaylist: (playlistId, video) => set((state: any) => {
- const playlist = state.playlists.find((p: any) => p.id === playlistId);
+ addVideoToPlaylist: (playlistId, video) => set((state) => {
+ const playlist = state.playlists.find((p) => p.id === playlistId);
  if (playlist as any) {
  const exists = playlist.videos?.find((v: Video) => v.id === video.id);
  if (!exists) {
@@ -309,8 +309,8 @@ export const useAppStore = create<AppState & AppActions>()(
  }
  }),
 
- removeVideoFromPlaylist: (playlistId, videoId) => set((state: any) => {
- const playlist = state.playlists.find((p: any) => p.id === playlistId);
+ removeVideoFromPlaylist: (playlistId, videoId) => set((state) => {
+ const playlist = state.playlists.find((p) => p.id === playlistId);
  if (playlist?.videos) {
  playlist.videos = playlist.videos.filter((v: Video) => v.id !== videoId);
  playlist.videoCount = playlist.videos.length;
@@ -319,23 +319,23 @@ export const useAppStore = create<AppState & AppActions>()(
  }),
 
  // Search Actions,
- setSearchQuery: (query) => set((state: any) => {
+ setSearchQuery: (query) => set((state) => {
  state.search.query = query;
  }),
 
- setSearchResults: (results) => set((state: any) => {
+ setSearchResults: (results) => set((state) => {
  state.search.results = results;
  }),
 
- setSearchSuggestions: (suggestions) => set((state: any) => {
+ setSearchSuggestions: (suggestions) => set((state) => {
  state.search.suggestions = suggestions;
  }),
 
- setSearchLoading: (loading) => set((state: any) => {
+ setSearchLoading: (loading) => set((state) => {
  state.search.isLoading = loading;
  }),
 
- clearSearch: () => set((state: any) => {
+ clearSearch: () => set((state) => {
  state.search.query = '';
  state.search.results = [];
  state.search.suggestions = [];
@@ -343,16 +343,16 @@ export const useAppStore = create<AppState & AppActions>()(
  }),
 
  // Loading Actions,
- setLoading: (category, loading) => set((state: any) => {
+ setLoading: (category, loading) => set((state) => {
  state.loading[category] = loading;
  }),
 
  // Error Actions,
- setError: (category, error) => set((state: any) => {
+ setError: (category, error) => set((state) => {
  state.errors[category] = error;
  }),
 
- clearErrors: () => set((state: any) => {
+ clearErrors: () => set((state) => {
  state.errors = initialState.errors;
  }),
 
@@ -378,22 +378,22 @@ export const useAppStore = create<AppState & AppActions>()(
  ));
 
 // Selectors
-export const useTheme: any = () => useAppStore((state) => state.theme);
-export const useSidebar: any = () => useAppStore((state) => ({
+export const useTheme = () => useAppStore((state) => state.theme);
+export const useSidebar = () => useAppStore((state) => ({
  collapsed: state.sidebarCollapsed,
  toggle: state.toggleSidebar,
  setCollapsed: state.setSidebarCollapsed }));
-export const useMiniplayer: any = () => useAppStore((state) => ({
+export const useMiniplayer = () => useAppStore((state) => ({
  visible: state.miniplayerVisible,
  video: state.miniplayerVideo,
  show: state.showMiniplayer,
  hide: state.hideMiniplayer }));
-export const useUser: any = () => useAppStore((state) => ({
+export const useUser = () => useAppStore((state) => ({
  ...state.user,
  setUser: state.setUser,
  logout: state.logout }));
-export const useVideos: any = (category?: keyof AppState['videos']) => {
- return useAppStore((state: any) => {
+export const useVideos = (category?: keyof AppState['videos']) => {
+ return useAppStore((state) => {
  if (category as any) {
  return {
  videos: state.videos[category],
@@ -414,14 +414,14 @@ export const useVideos: any = (category?: keyof AppState['videos']) => {
  error: state.errors.videos };
  });
 };
-export const useChannels: any = () => useAppStore((state) => ({
+export const useChannels = () => useAppStore((state) => ({
  ...state.channels,
  setChannels: state.setChannels,
  subscribe: state.subscribeToChannel,
  unsubscribe: state.unsubscribeFromChannel,
  loading: state.loading.channels,
  error: state.errors.channels }));
-export const usePlaylists: any = () => useAppStore((state) => ({
+export const usePlaylists = () => useAppStore((state) => ({
  playlists: state.playlists,
  setPlaylists: state.setPlaylists,
  create: state.createPlaylist,
@@ -431,7 +431,7 @@ export const usePlaylists: any = () => useAppStore((state) => ({
  removeVideo: state.removeVideoFromPlaylist,
  loading: state.loading.playlists,
  error: state.errors.playlists }));
-export const useSearch: any = () => useAppStore((state) => ({
+export const useSearch = () => useAppStore((state) => ({
  ...state.search,
  setQuery: state.setSearchQuery,
  setResults: state.setSearchResults,

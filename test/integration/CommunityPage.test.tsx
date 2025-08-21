@@ -30,12 +30,12 @@ vi.mock('@hooks/useRefactoredHooks', () => ({
  likePost: vi.fn(),
  addComment: vi.fn() }) }));
 
-const createTestQueryClient: any = () => new QueryClient({
+const createTestQueryClient = () => new QueryClient({
  defaultOptions: {
  queries: { retry: false },
  mutations: { retry: false } } });
 
-const renderWithQueryClient: any = (component: React.ReactElement) => {
+const renderWithQueryClient = (component: React.ReactElement) => {
  const queryClient = createTestQueryClient();
  return render(
  <QueryClientProvider client={queryClient}>
@@ -84,8 +84,7 @@ describe('CommunityPage', () => {
  isAuthenticated: false,
  login: vi.fn(),
  logout: vi.fn(),
- theme: 'light' as const,
- setTheme: vi.fn(),
+ theme: 'light' as const setTheme: vi.fn(),
  isDarkMode: false,
  miniplayerVideo: null,
  isMiniplayerOpen: false,
@@ -124,8 +123,7 @@ describe('CommunityPage', () => {
  isAuthenticated: false,
  login: vi.fn(),
  logout: vi.fn(),
- theme: 'light' as const,
- setTheme: vi.fn(),
+ theme: 'light' as const setTheme: vi.fn(),
  isDarkMode: false,
  miniplayerVideo: null,
  isMiniplayerOpen: false,
@@ -163,8 +161,7 @@ describe('CommunityPage', () => {
  isAuthenticated: false,
  login: vi.fn(),
  logout: vi.fn(),
- theme: 'light' as const,
- setTheme: vi.fn(),
+ theme: 'light' as const setTheme: vi.fn(),
  isDarkMode: false,
  miniplayerVideo: null,
  isMiniplayerOpen: false,
@@ -194,8 +191,7 @@ describe('CommunityPage', () => {
  isAuthenticated: false,
  login: vi.fn(),
  logout: vi.fn(),
- theme: 'light' as const,
- setTheme: vi.fn(),
+ theme: 'light' as const setTheme: vi.fn(),
  isDarkMode: false,
  miniplayerVideo: null,
  isMiniplayerOpen: false,

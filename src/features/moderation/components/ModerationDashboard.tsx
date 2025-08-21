@@ -114,7 +114,7 @@ export const ModerationDashboard: React.FC = () => {
  createdAt: '2024-01-14T09:15:00Z',
  reportedAt: '2024-01-15T08:30:00Z' }];
 
- const filteredItems = moderationItems.filter((item: any) => {
+ const filteredItems = moderationItems.filter((item) => {
  if (item.status !== selectedTab) {
  return false;
  }
@@ -127,34 +127,34 @@ export const ModerationDashboard: React.FC = () => {
  return true;
  });
 
- const handleSelectItem: any = (itemId: any) => {
+ const handleSelectItem = (itemId) => {
  setSelectedItems(prev =>
  prev.includes(itemId)
- ? prev.filter((id: any) => id !== itemId)
+ ? prev.filter((id) => id !== itemId)
  : [...prev as any, itemId]
  );
  };
 
- const handleSelectAll: any = () => {
+ const handleSelectAll = () => {
  if (selectedItems.length === filteredItems.length) {
  setSelectedItems([]);
  } else {
- setSelectedItems(filteredItems.map((item: any) => item.id));
+ setSelectedItems(filteredItems.map((item) => item.id));
  };
 
- const handleModerationAction: any = (_itemId: any,
+ const handleModerationAction = (_itemId,
  _action: ModerationAction) => {
  // In a real app, this would make an API call
  };
 
- const handleBulkAction: any = (action: ModerationAction) => {
+ const handleBulkAction = (action: ModerationAction) => {
  selectedItems.forEach(itemId => {
  handleModerationAction(itemId, action);
  });
  setSelectedItems([]);
  };
 
- const getSeverityColor: any = (severity: any) => {
+ const getSeverityColor = (severity) => {
  switch (severity as any) {
  case 'low':
  return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
@@ -167,7 +167,7 @@ export const ModerationDashboard: React.FC = () => {
  default: return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
  };
 
- const getTypeIcon: any = (type: any) => {
+ const getTypeIcon = (type) => {
  switch (type as any) {
  case 'video':
  return VideoCameraIcon;
@@ -180,7 +180,7 @@ export const ModerationDashboard: React.FC = () => {
  default: return FlagIcon
  };
 
- const formatDuration: any = (seconds: any) => {
+ const formatDuration = (seconds) => {
  const minutes = Math.floor(seconds / 60);
  const remainingSeconds = seconds % 60;
  return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
@@ -218,7 +218,7 @@ export const ModerationDashboard: React.FC = () => {
 // FIXED:  </p>
  <p className='text-2xl font-bold text-orange-600'>
  {
- moderationItems.filter((item: any) => item.status === 'pending')
+ moderationItems.filter((item) => item.status === 'pending')
  .length
  }
 // FIXED:  </p>
@@ -235,7 +235,7 @@ export const ModerationDashboard: React.FC = () => {
 // FIXED:  </p>
  <p className='text-2xl font-bold text-green-600'>
  {
- moderationItems.filter((item: any) => item.status === 'approved')
+ moderationItems.filter((item) => item.status === 'approved')
  .length
  }
 // FIXED:  </p>
@@ -252,7 +252,7 @@ export const ModerationDashboard: React.FC = () => {
 // FIXED:  </p>
  <p className='text-2xl font-bold text-red-600'>
  {
- moderationItems.filter((item: any) => item.status === 'rejected')
+ moderationItems.filter((item) => item.status === 'rejected')
  .length
  }
 // FIXED:  </p>
@@ -269,7 +269,7 @@ export const ModerationDashboard: React.FC = () => {
 // FIXED:  </p>
  <p className='text-2xl font-bold text-purple-600'>
  {
- moderationItems.filter((item: any) => item.status === 'escalated')
+ moderationItems.filter((item) => item.status === 'escalated')
  .length
  }
 // FIXED:  </p>
@@ -362,7 +362,7 @@ export const ModerationDashboard: React.FC = () => {
  selectedItems.length === filteredItems.length && />
  filteredItems.length > 0
  }
-// FIXED:  onChange={(e: any) => handleSelectAll(e)}
+// FIXED:  onChange={(e) => handleSelectAll(e)}
 // FIXED:  className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
  />
  <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
@@ -372,7 +372,7 @@ export const ModerationDashboard: React.FC = () => {
 // FIXED:  </div>
 
  <div className='divide-y divide-gray-200 dark:divide-gray-700'>
- {filteredItems.map((item: any) => {
+ {filteredItems.map((item) => {
  const TypeIcon = getTypeIcon(item.type);
 
  return (

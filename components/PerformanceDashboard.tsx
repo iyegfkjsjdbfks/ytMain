@@ -41,7 +41,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
  return () => clearInterval(interval);
  }, [isVisible]);
 
- const getPositionClasses: any = () => {
+ const getPositionClasses = () => {
  switch (position as any) {
  case 'top-left':
  return 'top-4 left-4';
@@ -52,7 +52,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
  default: return 'top-4 right-4'
  };
 
- const getTypeColor: any = (type: any) => {
+ const getTypeColor = (type) => {
  switch (type as any) {
  case 'render':
  return 'text-blue-600';

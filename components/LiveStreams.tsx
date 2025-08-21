@@ -27,7 +27,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  const mockLiveStreams = allVideos
  .filter((video) => !video.isShort)
  .slice(0, maxStreams * 2) // Get more videos to simulate live streams
- .map((video: any, index: any) => {
+ .map((video, index) => {
  if (index < maxStreams) {
  return {
  ...video as any,
@@ -45,7 +45,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
 
  setLiveStreams(mockLiveStreams);
  setError(null);
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Failed to fetch live streams:', err);
  setError('Could not load live streams at this time.');
  } finally {
@@ -127,7 +127,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
 // FIXED:  </Link>
 // FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
- {liveStreams.map((stream: any) => (
+ {liveStreams.map((stream) => (
  <div key={stream.id} className="relative">
  <VideoCard video={stream} />
  {/* Live indicator overlay */}

@@ -71,7 +71,7 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
 
  return (
  <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`}>
- {stats.map((stat: any, index: any) => {
+ {stats.map((stat, index) => {
  const IconComponent = stat.icon;
  return (
  <div

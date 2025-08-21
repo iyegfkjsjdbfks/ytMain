@@ -11,7 +11,7 @@ declare namespace NodeJS {
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
  */
-export function useOptimizedDebounce<T>(value: T, delay: any): T {
+export function useOptimizedDebounce<T>(value: T, delay): T {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -41,7 +41,7 @@ export function useOptimizedDebounce<T>(value: T, delay: any): T {
  */
 export function useOptimizedThrottle<T>(,
  value: T,
- delay: any,
+ delay,
  options: { leading?: boolean; trailing?: boolean } = {}
 ): T {
  const { leading = true, trailing = true } = options;
@@ -82,14 +82,14 @@ export function useOptimizedThrottle<T>(,
  * Enhanced useLocalStorage with JSON support and error handling
  */
 export function useOptimizedLocalStorage<T>(,
- key: string,
+ key,
  initialValue: T
 ): [T(value: T | ((val: T) => T)) => void() => void] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  try {
  const item = window.(localStorage as any).getItem(key);
  return item ? JSON.parse(item) : initialValue;
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
@@ -102,7 +102,7 @@ export function useOptimizedLocalStorage<T>(,
  value instanceof Function ? value(storedValue) : value;
  setStoredValue(valueToStore);
  window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Error setting localStorage key "${key}":`, error);
  }
  },
@@ -113,7 +113,7 @@ export function useOptimizedLocalStorage<T>(,
  try {
  window.localStorage.removeItem(key);
  setStoredValue(initialValue);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
@@ -152,7 +152,7 @@ export function useOptimizedAsync<T>(,
  const result = await asyncFunction();
  setState({ data: result, loading: false, error: null });
  onSuccess?.(result);
- } catch (err: any) {
+ } catch (err) {
  const errorMessage =
  err instanceof Error ? err.message : 'An error occurred';
  setState({ data: null, loading: false, error: errorMessage });
@@ -250,18 +250,18 @@ export function useOptimizedArray<T>(initialArray: T = []) {
  setArray(prev => [...prev as any, item]);
  }, []);
 
- const remove = useCallback((index: number) => {
+ const remove = useCallback((index) => {
  setArray(prev => prev.filter((_, i) => i !== index));
  }, []);
 
  const removeById = useCallback(
  (id: string | number, idKey: keyof T = 'id' as keyof T) => {
- setArray(prev => prev.filter((item: any) => item[idKey] !== id));
+ setArray(prev => prev.filter((item) => item[idKey] !== id));
  },
  []
  );
 
- const update = useCallback((index: number, newItem: Partial<T>) => {
+ const update = useCallback((index, newItem: Partial<T>) => {
  setArray(prev =>
  prev.map((item, i) => (i === index ? { ...item as any, ...newItem } : item))
  );
@@ -274,7 +274,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
  idKey: keyof T = 'id' as keyof T
  ) => {
  setArray(prev =>
- prev.map((item: any) => (item[idKey] === id ? { ...item as any, ...newItem } : item))
+ prev.map((item) => (item[idKey] === id ? { ...item as any, ...newItem } : item))
  );
  },
  []
@@ -306,8 +306,8 @@ export function useOptimizedArray<T>(initialArray: T = []) {
  */
 export function useOptimizedMemo<T>(,
  factory: () => T,
- deps: any,
- compare?: (a: any, b: any) => boolean
+ deps,
+ compare?: (a, b) => boolean
 ): T {
  const memoizedValue = useMemo(factory, deps);
  const lastDeps = useRef<any[]>(deps);
@@ -331,7 +331,7 @@ export function useOptimizedMemo<T>(,
  */
 export function useOptimizedCallback<T extends (...args) => any>(,
  callback: T,
- deps: any
+ deps
 ): T {
  const callbackRef = useRef<T>(callback);
  const depsRef = useRef<any[]>(deps);
@@ -339,7 +339,7 @@ export function useOptimizedCallback<T extends (...args) => any>(,
  // Update callback if dependencies changed
  useEffect(() => {
  const depsChanged = deps.some(
- (dep: any, index: number) => dep !== depsRef.current[index]
+ (dep, index) => dep !== depsRef.current[index]
  );
  if (depsChanged as any) {
  callbackRef.current = callback;

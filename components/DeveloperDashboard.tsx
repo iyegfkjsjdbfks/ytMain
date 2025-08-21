@@ -122,7 +122,7 @@ export const DeveloperDashboard: React.FC = () => {
  setAlerts(alertsData);
  setSuggestions(suggestionsData);
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch dashboard data:', error);
  } finally {
  setIsLoading(false);
@@ -162,7 +162,7 @@ export const DeveloperDashboard: React.FC = () => {
 
  const rolloutProgress = flags
  .filter((f) => f.rolloutStrategy.type === 'gradual')
- .map((f: any) => ({
+ .map((f) => ({
  id: f.id,
  name: f.name,
  percentage: f.rolloutStrategy?.config.percentage || 0 }));
@@ -245,8 +245,8 @@ export const DeveloperDashboard: React.FC = () => {
  actionable: true });
  }
 
- return alerts.sort((a: any,
- b: any) => b.severity - a.severity)
+ return alerts.sort((a,
+ b) => b.severity - a.severity)
  };
 
  // Computed values
@@ -335,7 +335,7 @@ export const DeveloperDashboard: React.FC = () => {
 
  {/* Manual refresh */}
  <button />
-// FIXED:  onClick={(e: any) => fetchDashboardData(e)}
+// FIXED:  onClick={(e) => fetchDashboardData(e)}
 // FIXED:  disabled={isLoading}
 // FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
  >
@@ -438,7 +438,7 @@ export const DeveloperDashboard: React.FC = () => {
  {actionableSuggestions.length > 0 && (
  <button />
 // FIXED:  onClick={() => intelligentWorkflowEngine.autoImplementImprovements(
- actionableSuggestions.slice(0, 3).map((s: any) => s.id))}
+ actionableSuggestions.slice(0, 3).map((s) => s.id))}
 // FIXED:  className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
  >
  Auto-implement {actionableSuggestions.length} improvements

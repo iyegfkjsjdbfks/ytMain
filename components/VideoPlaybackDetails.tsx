@@ -37,7 +37,7 @@ interface VideoPlaybackDetailsProps {
  handleSummarizeDescription?: () => void; // Optional as per VideoDescription
 }
 
-const VideoPlaybackDetails: any = (props: VideoPlaybackDetailsProps) => {
+const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
  const {
  video,
  channel,

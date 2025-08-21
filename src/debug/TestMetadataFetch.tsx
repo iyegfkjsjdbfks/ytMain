@@ -44,7 +44,7 @@ const TestMetadataFetch: React.FC = () => {
  logger.debug('📊 Direct API result:', result);
  setResult({ type: "direct",
  data: result });
- } catch (err: any) {
+ } catch (err) {
  logger.error('❌ Direct API error:', err);
  setError(err instanceof Error ? err.message : 'Unknown error');
  } finally {
@@ -74,7 +74,7 @@ const TestMetadataFetch: React.FC = () => {
  logger.debug('📊 Unified service result:', result);
  setResult({ type: "unified",
  data: result });
- } catch (err: any) {
+ } catch (err) {
  logger.error('❌ Unified service error:', err);
  setError(err instanceof Error ? err.message : 'Unknown error');
  } finally {
@@ -117,7 +117,7 @@ const TestMetadataFetch: React.FC = () => {
 
  <div className='space-y-4 mb-6'>
  <button />
-// FIXED:  onClick={(e: any) => testDirectGoogleSearch(e)}
+// FIXED:  onClick={(e) => testDirectGoogleSearch(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50'
  >
@@ -125,7 +125,7 @@ const TestMetadataFetch: React.FC = () => {
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => testUnifiedDataService(e)}
+// FIXED:  onClick={(e) => testUnifiedDataService(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className='px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50'
  >

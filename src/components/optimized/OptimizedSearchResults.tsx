@@ -58,7 +58,7 @@ const SearchResultItem = memo<SearchResultItemProps>(
  >
  <div
 // FIXED:  className='flex space-x-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-2 transition-colors' />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  >
  {/* Video Thumbnail */}
  <div className='flex-shrink-0'>

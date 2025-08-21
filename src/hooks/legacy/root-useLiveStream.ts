@@ -56,7 +56,7 @@ export function useLiveStream(streamId?: string): any {
  superChatCount: 0,
  pollVotes: 0,
  qaQuestions: 0,
- streamHealth: 'excellent' as const, bitrate: 5000,
+ streamHealth: 'excellent' as const bitrate: 5000,
  frameDrops: 0,
  latency: 0 },
  monetization: {
@@ -73,9 +73,9 @@ export function useLiveStream(streamId?: string): any {
  }) as any, 1000);
  }, [streamId]);
 
- const updateStreamStats: any = (newStats: Partial<LiveStream['stats']>) => {
+ const updateStreamStats = (newStats: Partial<LiveStream['stats']>) => {
  if (stream as any) {
- setStream((prev: any) =>
+ setStream((prev) =>
  prev
  ? {
  ...prev as any,
@@ -84,7 +84,7 @@ export function useLiveStream(streamId?: string): any {
  );
  };
 
- const addSuperChat: any = (amount: any, message: any, username: any) => {
+ const addSuperChat = (amount, message, username) => {
  if (stream as any) {
  const superChat = {
  id: Date.now().toString(),
@@ -96,7 +96,7 @@ export function useLiveStream(streamId?: string): any {
  color: '#FF5722',
  duration: 5000 };
 
- setStream((prev: any) =>
+ setStream((prev) =>
  prev
  ? {
  ...prev as any,
@@ -162,8 +162,7 @@ export function useLiveStream(streamId?: string): any {
  superChatCount: 0,
  pollVotes: 0,
  qaQuestions: 0,
- streamHealth: 'excellent' as const,
- bitrate: 5000,
+ streamHealth: 'excellent' as const bitrate: 5000,
  frameDrops: 0,
  latency: 0 },
  monetization: {
@@ -178,7 +177,7 @@ export function useLiveStream(streamId?: string): any {
  setStream(newStream);
  setLoading(false);
  return newStream;
- } catch (err: any) {
+ } catch (err) {
  setError(err instanceof Error ? err.message : 'Failed to create stream');
  setLoading(false);
  return null;
@@ -194,10 +193,10 @@ export function useLiveStream(streamId?: string): any {
 
  try {
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
- setStream((prev: any) => (prev ? { ...prev as any, status: 'live' } : null));
+ setStream((prev) => (prev ? { ...prev as any, status: 'live' } : null));
  setLoading(false);
  return true;
- } catch (err: any) {
+ } catch (err) {
  setError(err instanceof Error ? err.message : 'Failed to start stream');
  setLoading(false);
  return false;
@@ -213,10 +212,10 @@ export function useLiveStream(streamId?: string): any {
 
  try {
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
- setStream((prev: any) => (prev ? { ...prev as any, status: 'ended' } : null));
+ setStream((prev) => (prev ? { ...prev as any, status: 'ended' } : null));
  setLoading(false);
  return true;
- } catch (err: any) {
+ } catch (err) {
  setError(err instanceof Error ? err.message : 'Failed to end stream');
  setLoading(false);
  return false;
@@ -286,7 +285,7 @@ export function useCreateLiveStream(): any {
  superChatCount: 0,
  pollVotes: 0,
  qaQuestions: 0,
- streamHealth: 'excellent' as const, bitrate: 5000,
+ streamHealth: 'excellent' as const bitrate: 5000,
  frameDrops: 0,
  latency: 0 },
  monetization: {
@@ -300,7 +299,7 @@ export function useCreateLiveStream(): any {
  await new Promise(resolve => setTimeout((resolve) as any, 1000));
  setCreating(false);
  return newStream;
- } catch (err: any) {
+ } catch (err) {
  setError(err instanceof Error ? err.message : 'Failed to create stream');
  setCreating(false);
  return null;

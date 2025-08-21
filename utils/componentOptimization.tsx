@@ -15,7 +15,7 @@ declare namespace NodeJS {
 import { performanceMonitor } from './performanceMonitor';
 
 // Performance monitoring hook for components
-export function useComponentPerformance(componentName: any): any {
+export function useComponentPerformance(componentName): any {
  const renderStartTime = useRef<number>(0);
  const mountTime = useRef<number>(0);
  const renderCount = useRef<number>(0);
@@ -54,8 +54,7 @@ export function useComponentPerformance(componentName: any): any {
 return undefined;
 }
 
- const observer = new IntersectionObserver(
- (entries: any) => {
+ const observer = new IntersectionObserver((entries) => {
  const entry = entries[0];
  if (entry as any) {
  setIsVisible(entry.isIntersecting);
@@ -74,7 +73,7 @@ return undefined;
  elementRef,
  isVisible,
  renderCount: renderCount.current,
- trackCustomMetric: (metricName: any,
+ trackCustomMetric: (metricName,
  value: string | number) => {
  performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
  } }
@@ -86,7 +85,7 @@ export function smartMemo<P extends object>(,
  componentName?: string): MemoExoticComponent<ComponentType<P>> {
  const displayName = componentName || Component.displayName || Component.name || 'Component';
 
- const MemoizedComponent = memo(Component(prevProps: any, nextProps: any) => {
+ const MemoizedComponent = memo(Component(prevProps, nextProps) => {
  const startTime = performance.now();
 
  // Use custom comparison if provided
@@ -262,7 +261,7 @@ export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, ov
  offsetY,
  handleScroll }
 // Image optimization hook with lazy loading
-export function useOptimizedImage(src: any,
+export function useOptimizedImage(src,
  options: {
  placeholder?: string;
  sizes?: string;
@@ -280,8 +279,7 @@ export function useOptimizedImage(src: any,
 return undefined;
 }
 
- const observer = new IntersectionObserver(
- (entries: any) => {
+ const observer = new IntersectionObserver((entries) => {
  const entry = entries[0];
  if (entry?.isIntersecting) {
  setIsVisible(true);
@@ -329,7 +327,7 @@ return options.placeholder || '';
  onError: handleError }
 // Bundle splitting utility
 export function createAsyncComponent<_P extends object>(,
- componentPath: any,
+ componentPath,
  chunkName?: string) {
  return React.lazy(() => {
  const startTime = performance.now();
@@ -376,9 +374,9 @@ export function withPerformanceMonitoring<P extends object>(,
  useEffect(() => {
  if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
  (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (,
- _id: any,
- _root: any,
- _priorityLevel: any) => {
+ _id,
+ _root,
+ _priorityLevel) => {
  // Custom performance tracking logic
  (console as any).debug('Component committed to root');
 

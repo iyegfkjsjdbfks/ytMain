@@ -14,13 +14,13 @@ export interface ComponentWrapperProps {
 }
 
 // Utility functions for components
-export const truncateText: any = (text: any,
+export const truncateText = (text,
  maxLength: number = 100, suffix = '...') => {
  if (text.length <= maxLength) return text;
  return text.slice(0, maxLength) + suffix;
 };
 
-export const formatDuration: any = (seconds: any): string => {
+export const formatDuration = (seconds): string => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  const secs = Math.floor(seconds % 60);
@@ -31,7 +31,7 @@ export const formatDuration: any = (seconds: any): string => {
  return `${minutes}:${secs.toString().padStart(2, '0')}`;
 };
 
-export const formatViews: any = (views: any): string => {
+export const formatViews = (views): string => {
  if (views >= 1000000) {
  return `${(views / 1000000).toFixed(1)}M views`;
  } else if (views >= 1000) {
@@ -40,7 +40,7 @@ export const formatViews: any = (views: any): string => {
  return `${views} views`;
 };
 
-export const formatDate: any = (date: string | Date): string => {
+export const formatDate = (date: string | Date): string => {
  const d = new Date(date);
  const now = new Date();
  const diffTime = Math.abs(now.getTime() - d.getTime());
@@ -61,13 +61,13 @@ export const ComponentWrapper: React.FC<ComponentWrapperProps> = ({
 }) => {
  try {
  return <div className={className}>{children}</div>;
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Component error:', error);
  return <>{fallback}</>;
  };
 
 // Build truncate classes utility
-export const buildTruncateClasses: any = (,
+export const buildTruncateClasses = (,
  lines: number = 1,
  baseClasses = ''
 ): string => {
@@ -77,38 +77,38 @@ export const buildTruncateClasses: any = (,
 
 // Safe localStorage utility
 export const safeLocalStorage = {
- getItem: (key: string): string | null => {
+ getItem: (key): string | null => {
  try {
  if (typeof window !== 'undefined') {
  return (localStorage as any).getItem(key);
  }
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('localStorage getItem failed:', error);
  }
  return null;
  },
 
- setItem: (key: string,
+ setItem: (key,
  value: string | number): boolean => {
  try {
  if (typeof window !== 'undefined') {
  (localStorage as any).setItem(key, String(value));
  return true;
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('localStorage setItem failed:', error);
  }
  return false;
  },
 
- removeItem: (key: string): boolean => {
+ removeItem: (key): boolean => {
  try {
  if (typeof window !== 'undefined') {
  localStorage.removeItem(key);
  return true;
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('localStorage removeItem failed:', error);
  }
  return false;
@@ -133,14 +133,14 @@ export default {
  useCallback: React.useCallback };
 
 // Additional utility functions
-export const buildVideoUrl: any = (videoId: any): string => {
+export const buildVideoUrl = (videoId): string => {
  return `/watch?v=${videoId}`;
 };
 
-export const buildChannelUrl: any = (channelId: any): string => {
+export const buildChannelUrl = (channelId): string => {
  return `/channel/${channelId}`;
 };
 
-export const getAvatarFallback: any = (name: any): string => {
+export const getAvatarFallback = (name): string => {
  return name.charAt(0).toUpperCase();
 };

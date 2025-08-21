@@ -289,7 +289,7 @@ describe('VideoDescription Component', () => {
  });
 
  it('should not cause memory leaks', async (): Promise<void> => {
- const initialMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
+ const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
  const { unmount } = customRender(
  <VideoDescription
@@ -317,7 +317,7 @@ describe('VideoDescription Component', () => {
 
  await testHelpers.waitForTime(100);
 
- const finalMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
+ const finalMemory = (performance as any).memory?.usedJSHeapSize || 0;
  const memoryIncrease = finalMemory - initialMemory;
 
  // Memory increase should be minimal (less than 1MB)

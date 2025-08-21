@@ -41,7 +41,7 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
 // FIXED:  </div>
  <div className="mt-4 sm:mt-0 sm:ml-auto flex-shrink-0">
  <button />
-// FIXED:  onClick={(e: any) => onSubscribeToggle(e)}
+// FIXED:  onClick={(e) => onSubscribeToggle(e)}
 // FIXED:  className={`text-sm font-medium px-5 py-2.5 rounded-full transition-colors flex items-center space-x-2
  ${isSubscribed
  ? 'bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-200'

@@ -159,8 +159,8 @@ class AnalyticsService {
  }
 
  private getLargestContentfulPaint(): Promise<number | undefined> {
- return new Promise((resolve: any) => {
- const observer = new PerformanceObserver((list: any) => {
+ return new Promise((resolve) => {
+ const observer = new PerformanceObserver((list) => {
  const entries = list.getEntries();
  const lastEntry = entries[entries.length - 1];
  resolve(lastEntry?.startTime);
@@ -179,9 +179,9 @@ class AnalyticsService {
  private observeWebVitals() {
  // Cumulative Layout Shift
  let clsValue = 0;
- const clsObserver = new PerformanceObserver((list: any) => {
+ const clsObserver = new PerformanceObserver((list) => {
  const entries = list.getEntries();
- entries.forEach((entry: any) => {
+ entries.forEach((entry) => {
  if (!entry.hadRecentInput) {
  clsValue += entry.value;
  }
@@ -195,9 +195,9 @@ class AnalyticsService {
  });
 
  // First Input Delay
- const fidObserver = new PerformanceObserver((list: any) => {
+ const fidObserver = new PerformanceObserver((list) => {
  const entries = list.getEntries();
- entries.forEach((entry: any) => {
+ entries.forEach((entry) => {
  this.track('first_input_delay', {
  value: entry.processingStart - entry.startTime,
  inputType: entry.name }, 'performance');
@@ -227,7 +227,7 @@ class AnalyticsService {
  private setupNavigationTracking() {
  // Track route changes (for SPAs)
  let currentPath = window.location.pathname;
- const checkForRouteChange: any = () => {
+ const checkForRouteChange = () => {
  const newPath = window.location.pathname;
  if (newPath !== currentPath) {
  this.track('page_view', {
@@ -274,12 +274,12 @@ return;
  this.eventQueue.push(...events);
  localStorage.removeItem('analytics_events'); // Clear after loading
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to load stored analytics events:', error);
  }
  // Public API
  track(,
- eventName: any,
+ eventName,
  properties: Record<string, any> = {},
  category: AnalyticsEvent['category'] = 'user_action') {
  const event: AnalyticsEvent = {
@@ -324,31 +324,31 @@ return;
  ...properties });
  }
 
- trackVideoEvent(action: any, videoId: any, properties: Record<string, any> = {}) {
+ trackVideoEvent(action, videoId, properties: Record<string, any> = {}) {
  this.track(`video_${action}`, {
  videoId,
  ...properties }, 'video');
  }
 
- trackSearch(query: any, results?: number) {
+ trackSearch(query, results?: number) {
  this.track('search', {
  query,
  results,
  timestamp: Date.now() });
  }
 
- trackEngagement(type: any, properties: Record<string, any> = {}) {
+ trackEngagement(type, properties: Record<string, any> = {}) {
  this.track(type, properties, 'engagement');
  }
 
- trackPerformance(metric: any, value: string | number, properties: Record<string, any> = {}) {
+ trackPerformance(metric, value: string | number, properties: Record<string, any> = {}) {
  this.track(`performance_${metric}`, {
  value,
  ...properties }, 'performance');
  }
 
  // Session management
- setUserId(userId: any) {
+ setUserId(userId) {
  this.session.userId = userId;
  this.track('user_identified', { userId });
  }
@@ -380,7 +380,7 @@ return;
  // Keep only the most recent events
  const recentEvents = allEvents.slice(-this.config.maxStoredEvents);
  (localStorage as any).setItem('analytics_events', JSON.stringify(recentEvents));
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to store analytics events:', error);
  }
  // Send to remote endpoint
@@ -401,7 +401,7 @@ return;
  // Clear stored events on successful send
  localStorage.removeItem('analytics_events');
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Failed to send analytics events:', error);
  // Re-add events to queue for retry
  this.eventQueue.unshift(...eventsToSend);
@@ -451,7 +451,7 @@ return;
  this.listeners.forEach(listener => {
  try {
  listener(event);
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn('Error in analytics listener:', error);
  }
  });

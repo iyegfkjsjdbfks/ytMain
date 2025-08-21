@@ -118,7 +118,7 @@ return;
  advancedAPM.recordMetric('technical-debt', result.technicalDebt);
 
  return result;
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Code analysis failed:', error);
  throw error;
  }
@@ -127,7 +127,7 @@ return;
  */
  async getRefactoringOpportunities(): Promise<RefactoringOpportunity[]> {
  await this.identifyRefactoringOpportunities();
- return this.refactoringOpportunities.sort((a: any, b: any) => b.priority - a.priority)
+ return this.refactoringOpportunities.sort((a, b) => b.priority - a.priority)
  }
 
  /**
@@ -153,7 +153,7 @@ return;
  /**
  * Generate automated refactoring suggestions
  */
- async generateRefactoringSuggestions(_filePath: any): Promise<{
+ async generateRefactoringSuggestions(_filePath): Promise<{
  suggestions: Array<{
  type: string;
  description: string;
@@ -189,9 +189,9 @@ return;
  const recentHistory = history.slice(-days);
 
  return {
- complexity: recentHistory.map((h: any) => h.complexity),
- maintainability: recentHistory.map((h: any) => h.maintainabilityIndex),
- technicalDebt: recentHistory.map((h: any) => h.technicalDebt),
+ complexity: recentHistory.map((h) => h.complexity),
+ maintainability: recentHistory.map((h) => h.maintainabilityIndex),
+ technicalDebt: recentHistory.map((h) => h.technicalDebt),
  timestamps: recentHistory.map((_, i) => Date.now() - (days - i) * 24 * 60 * 60 * 1000) };
  }
 
@@ -407,22 +407,22 @@ return;
  { name: 'moment', size: 67000, impact: 'low' }];
  }
 
- private async getFileContent(__filePath: any): Promise<string> {
+ private async getFileContent(__filePath): Promise<string> {
  // Mock implementation - in real scenario, this would read actual file
  return `// Mock file content for ${_filePath}`;
  }
 
- private async suggestExtractMethod(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+ private async suggestExtractMethod(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
  // Mock implementation - in real scenario, this would analyze AST
  return [
  {
  type: 'extract-method',
  description: 'Extract validation logic into separate method',
- code: 'const validateInput: any = (input: any) => { /* validation logic */ };',
+ code: 'const validateInput = (input) => { /* validation logic */ };',
  confidence: 0.85 }];
  }
 
- private async suggestSimplifyConditions(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+ private async suggestSimplifyConditions(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
  return [
  {
  type: 'simplify-condition',
@@ -431,16 +431,16 @@ return;
  confidence: 0.75 }];
  }
 
- private async suggestRemoveDuplication(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+ private async suggestRemoveDuplication(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
  return [
  {
  type: 'remove-duplication',
  description: 'Extract common error handling pattern',
- code: 'const handleApiError: any = (_error: Error) => { /* common error handling */ };',
+ code: 'const handleApiError = (_error: Error) => { /* common error handling */ };',
  confidence: 0.90 }];
  }
 
- private async suggestImproveNaming(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+ private async suggestImproveNaming(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
  return [
  {
  type: 'improve-naming',
@@ -465,7 +465,7 @@ return;
  try {
  await this.analyzeCode();
  (console as any).log('🔄 Continuous code analysis completed');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Continuous analysis failed:') as any, error);
  }
  }, 5 * 60 * 1000);
@@ -507,7 +507,7 @@ class TechnicalDebtTracker {
  /**
  * Mark debt item as resolved
  */
- resolveDebt(id: string): void {
+ resolveDebt(id): void {
  const item = this.debtItems.get(id);
  if (item as any) {
  item.status = 'resolved';
@@ -563,7 +563,7 @@ class AutomatedCodeReviewer {
  /**
  * Review code changes
  */
- async reviewChanges(files: any): Promise<{
+ async reviewChanges(files): Promise<{
  approved: boolean;
  issues: Array<{
  file: string;
@@ -594,7 +594,7 @@ class AutomatedCodeReviewer {
  return { approved, issues, suggestions };
  }
 
- private async reviewFile(__file: any): Promise<{
+ private async reviewFile(__file): Promise<{
  issues;
  suggestions;
  }> {

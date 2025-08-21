@@ -40,14 +40,14 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  className = '',
  containerClassName = 'container mx-auto px-4 py-6' }) => {
  // Default loading component
- const defaultLoadingComponent: any = (
+ const defaultLoadingComponent = (
  <div className="flex items-center justify-center min-h-[400px]">
  <LoadingSpinner size="lg" />
 // FIXED:  </div>
  );
 
  // Default error component
- const defaultErrorComponent: any = (
+ const defaultErrorComponent = (
  <ErrorState
  title="Something went wrong"
  message={error || 'An unexpected error occurred'} />
@@ -55,7 +55,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  );
 
  // Default empty component
- const defaultEmptyComponent: any = (
+ const defaultEmptyComponent = (
  <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
  <div className="text-gray-400 mb-4">
  <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">

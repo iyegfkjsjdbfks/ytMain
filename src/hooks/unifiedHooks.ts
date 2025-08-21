@@ -20,7 +20,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
   AsyncState<T>,
   {
  setData: (data: T | null) => void;
- setLoading: (loading: any) => void;
+ setLoading: (loading) => void;
  setError: (error: Error | null) => void;
  reset: () => void
  }] {
@@ -38,7 +38,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
  lastFetch: Date.now() }));
  }, []);
 
- const setLoading = useCallback((loading: any) => {
+ const setLoading = useCallback((loading) => {
  setState(prev => ({ ...prev as any, loading }));
  }, []);
 
@@ -104,7 +104,7 @@ export function useApi<T>(
  setData(result);
  retryCountRef.current = 0;
  }
- } catch (error: any) {
+ } catch (error) {
  if (!mountedRef.current) {
  return;
  }
@@ -196,7 +196,7 @@ export interface FormActions<T extends Record<string, any>> {
  setValue: <K extends keyof T>(field: K, value: T[K]) => void;
  setError: <K extends keyof T>(field: K, error: string | null) => void;
  setTouched: <K extends keyof T>(field: K, touched?: boolean) => void;
- setSubmitting: (submitting: any) => void;
+ setSubmitting: (submitting) => void;
  setSubmitError: (error: string | null) => void;
  reset: () => void;
  validate: () => boolean;
@@ -276,7 +276,7 @@ export function useForm<T extends Record<string, any>>(,
  []
  );
 
- const setSubmitting = useCallback((submitting: any) => {
+ const setSubmitting = useCallback((submitting) => {
  setState(prev => ({ ...prev as any, isSubmitting: submitting }));
  }, []);
 
@@ -352,7 +352,7 @@ export function useForm<T extends Record<string, any>>(,
  }
 
  await onSubmit(values);
- } catch (error: any) {
+ } catch (error) {
  setSubmitError(
  error instanceof Error ? error.message : 'An error occurred'
  );
@@ -386,7 +386,7 @@ export function useToggle(,
  setValue(prev => !prev);
  }, []);
 
- const setToggle = useCallback((newValue: any) => {
+ const setToggle = useCallback((newValue) => {
  setValue(newValue);
  }, []);
 
@@ -394,7 +394,7 @@ export function useToggle(,
 }
 
 // Unified debounce hook
-export function useDebounce<T>(value: T, delay: any): T {
+export function useDebounce<T>(value: T, delay): T {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
  useEffect(() => {
@@ -412,14 +412,14 @@ export function useDebounce<T>(value: T, delay: any): T {
 
 // Unified local storage hook
 export function useLocalStorage<T>(,
- key: string,
+ key,
  initialValue: T
 ): [T(value: T | ((prev: T) => T)) => void() => void] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  try {
  const item = window.(localStorage as any).getItem(key);
  return item ? JSON.parse(item) : initialValue;
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
@@ -432,7 +432,7 @@ export function useLocalStorage<T>(,
  value instanceof Function ? value(storedValue) : value;
  setStoredValue(valueToStore);
  window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Error setting localStorage key "${key}":`, error);
  }
  },
@@ -443,7 +443,7 @@ export function useLocalStorage<T>(,
  try {
  window.localStorage.removeItem(key);
  setStoredValue(initialValue);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
@@ -481,7 +481,7 @@ export function useIntersectionObserver(,
 }
 
 // Performance monitoring hook
-export function usePerformanceMonitor(name: any): any {
+export function usePerformanceMonitor(name): any {
  const startTimeRef = useRef<number>(Date.now());
 
  useEffect(() => {
@@ -493,7 +493,7 @@ export function usePerformanceMonitor(name: any): any {
  };
  }, [name]);
 
- const mark = useCallback((__label: any) => {
+ const mark = useCallback((__label) => {
  // const __duration = Date.now() - startTimeRef.current;
  if (import.meta.env.MODE === 'development') {
  }

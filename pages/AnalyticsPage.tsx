@@ -54,7 +54,7 @@ const AnalyticsPage: React.FC = () => {
  views: Array.from({ length: 30 }, () => Math.floor(Math.random() * 10000) + 1000),
  watchTime: Array.from({ length: 30 }, () => Math.floor(Math.random() * 500) + 100),
  subscribers: Array.from({ length: 30 }, () => Math.floor(Math.random() * 100) + 10),
- labels: Array.from({ length: 30 }, (_: any, i: any) => {
+ labels: Array.from({ length: 30 }, (_, i) => {
  const date = new Date();
  date.setDate(date.getDate() - (29 - i));
  return date.toLocaleDateString('en-US', { month: 'short',
@@ -64,7 +64,7 @@ const AnalyticsPage: React.FC = () => {
  };
 
  setAnalyticsData(mockAnalytics);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch analytics data:', error);
  } finally {
  setLoading(false);
@@ -75,7 +75,7 @@ const AnalyticsPage: React.FC = () => {
  });
  }, [timeRange]);
 
- const formatNumber: any = (num: any): string => {
+ const formatNumber = (num): string => {
  if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -85,7 +85,7 @@ return `${(num / 1000).toFixed(1)}K`;
  return num.toString();
  };
 
- const formatDuration: any = (hours: any): string => {
+ const formatDuration = (hours): string => {
  if (hours >= 24) {
 return `${Math.floor(hours / 24)}d ${hours % 24}h`;
 }
@@ -131,8 +131,8 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
  return (
  <div className="h-64 flex items-end space-x-1 p-4">
  {data.map((value: string | number,
- index: number) => {
- const height: any = ((value - minValue) / range) * 200 + 20;
+ index) => {
+ const height = ((value - minValue) / range) * 200 + 20;
  return (
  <div key={index} className="flex-1 flex flex-col items-center">
  <div

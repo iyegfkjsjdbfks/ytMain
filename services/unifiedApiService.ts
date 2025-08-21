@@ -26,14 +26,14 @@ class UnifiedCache {
  private cache = new Map<string, { data; timestamp: number; ttl: number }>();
  private readonly defaultTTL = 15 * 60 * 1000; // 15 minutes
 
- set(key: string, data: any, ttl: number = this.defaultTTL): void {
+ set(key, data, ttl: number = this.defaultTTL): void {
  this.cache.set(key, {
  data,
  timestamp: Date.now(),
  ttl });
  }
 
- get<T>(key: string): T | null {
+ get<T>(key): T | null {
  const item = this.cache.get(key);
  if (!item) {
 return null;
@@ -67,20 +67,20 @@ return null;
 // Unified Error Types
 export class ApiError extends Error {
  constructor(,
- message: any,
+ message,
  public status?: number,
  public code?: string,
- public details: any?) {
+ public details?) {
  super(message);
  this.name = 'ApiError';
  }
 export class NetworkError extends Error {
- constructor(message: any, public originalError?: Error) {
+ constructor(message, public originalError?: Error) {
  super(message);
  this.name = 'NetworkError';
  }
 export class ValidationError extends Error {
- constructor(message: any, public field?: string) {
+ constructor(message, public field?: string) {
  super(message);
  this.name = 'ValidationError';
  }
@@ -111,7 +111,7 @@ class UnifiedApiService {
  error: [] };
 
  // Add default request interceptor for API key
- this.addRequestInterceptor((config: any) => {
+ this.addRequestInterceptor((config) => {
  if (this.config.apiKey && !config.url.includes('key=')) {
  const separator = config.url.includes('?') ? '&' : '?';
  config.url += `${separator}key=${this.config.apiKey}`;
@@ -120,7 +120,7 @@ class UnifiedApiService {
  });
 
  // Add default error interceptor
- this.addErrorInterceptor((error: any) => {
+ this.addErrorInterceptor((error) => {
  (console as any).error('API Error:', error);
  return error;
  });
@@ -141,7 +141,7 @@ class UnifiedApiService {
 
  // Core request method with unified error handling
  private async makeRequest<T>(,
- endpoint: any,
+ endpoint,
  options: RequestInit = {},
  cacheKey?: string,
  cacheTTL?: number,
@@ -168,7 +168,7 @@ class UnifiedApiService {
  this.requestQueue.delete(requestKey);
  }
  private async executeRequest<T>(,
- endpoint: any,
+ endpoint,
  options: RequestInit,
  cacheKey?: string,
  cacheTTL?: number,
@@ -219,7 +219,7 @@ class UnifiedApiService {
  }
 
  return data;
- } catch (error: any) {
+ } catch (error) {
  lastError = error as Error;
 
  // Apply error interceptors
@@ -269,7 +269,7 @@ queryParams.set('pageToken', params.pageToken);
  return this.makeRequest(`/videos?${queryParams}`, {}, cacheKey, 10 * 60 * 1000);
  }
 
- async searchVideos(query: any, params: {
+ async searchVideos(query, params: {
  maxResults?: number;
  pageToken?: string;
  order?: string;
@@ -296,7 +296,7 @@ queryParams.set('order', params.order);
  return this.makeRequest(`/search?${queryParams}`, {}, cacheKey, 5 * 60 * 1000);
  }
 
- async getChannel(channelId: any): Promise<Channel> {
+ async getChannel(channelId): Promise<Channel> {
  // Check if YouTube Data API is blocked by admin settings
  if (isYouTubeDataApiBlocked()) {
  (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -326,7 +326,7 @@ queryParams.set('order', params.order);
  return channel;
  }
 
- async getPlaylist(playlistId: any): Promise<Playlist> {
+ async getPlaylist(playlistId): Promise<Playlist> {
  // Check if YouTube Data API is blocked by admin settings
  if (isYouTubeDataApiBlocked()) {
  (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -356,7 +356,7 @@ queryParams.set('order', params.order);
  return playlist;
  }
 
- async getComments(videoId: any, params: {
+ async getComments(videoId, params: {
  maxResults?: number;
  pageToken?: string;
  order?: string;

@@ -2,18 +2,18 @@ import React, { useEffect, useState, FC } from 'react';
 import type { Video } from '../types';
 import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ArrowTrendingUpIcon, CalendarDaysIcon, CurrencyDollarIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
-const ResponsiveContainer: any = ({ children, width, height }: any) => (
+const ResponsiveContainer = ({ children, width, height }: any) => (
  <div style={{ width, height }}>{children}</div>
 );
-const PieChart: any = ({ children }: any) => (
+const PieChart = ({ children }: any) => (
  <div className='flex items-center justify-center h-full'>{children}</div>
 );
-const Pie: any = ({ data }: any) => (
+const Pie = ({ data }: any) => (
  <div className='text-center'>Chart Data: {data?.length || 0} items</div>
 );
-const Cell: any = (_props: any) => null;
-const Tooltip: any = (_props: any) => null;
-const Legend: any = (_props: any) => null;
+const Cell = (_props) => null;
+const Tooltip = (_props) => null;
+const Legend = (_props) => null;
 import { dateUtils, numberUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
@@ -218,7 +218,7 @@ const DashboardPage: React.FC = () => {
  fetchDashboardData();
  }, [timeRange]);
 
- const formatNumber: any = (num: any): string => {
+ const formatNumber = (num): string => {
  if (num >= 1000000) {
  return `${(num / 1000000).toFixed(1)}M`;
  }
@@ -227,13 +227,13 @@ const DashboardPage: React.FC = () => {
  }
  return num.toString();
  };
- const formatDuration: any = (minutes: any): string => {
+ const formatDuration = (minutes): string => {
  const hours = Math.floor(minutes / 60);
  const mins = minutes % 60;
  return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
  };
 
- const formatCurrency: any = (amount: any): string => {
+ const formatCurrency = (amount): string => {
  return new Intl.NumberFormat('en-US', {
  style: 'currency',
  currency: 'USD' }).format(amount);
@@ -286,7 +286,7 @@ const DashboardPage: React.FC = () => {
 
  {/* Time Range Selector */}
  <div className='flex bg-white rounded-lg shadow-sm border mt-4 sm:mt-0'>
- {(['7d', '30d', '90d', '1y'] as const).map((range: any) => (
+ {(['7d', '30d', '90d', '1y'] as const).map((range) => (
  <button
  key={range} />
 // FIXED:  onClick={() => setTimeRange(range)}
@@ -477,7 +477,7 @@ const DashboardPage: React.FC = () => {
 // FIXED:  </PieChart>
 // FIXED:  </ResponsiveContainer>
  <div className='grid grid-cols-2 gap-4 mt-4'>
- {deviceData.map((device: any) => {
+ {deviceData.map((device) => {
  const Icon =
  device.device === 'Mobile'
  ? DevicePhoneMobileIcon
@@ -537,7 +537,7 @@ const DashboardPage: React.FC = () => {
 // FIXED:  </tr>
 // FIXED:  </thead>
  <tbody className='bg-white divide-y divide-gray-200'>
- {topVideos.map((video: any) => (
+ {topVideos.map((video) => (
  <tr key={video.id} className='hover:bg-gray-50'>
  <td className='px-6 py-4 whitespace-nowrap'>
  <div className='flex items-center'>

@@ -9,7 +9,7 @@ type SetValue<T> = T | ((val: T) => T);
  * @returns [storedValue, setValue, removeValue]
  */
 export function useLocalStorage<T>(
- key: string,
+ key,
  initialValue: T
 ): [T, (value: SetValue<T>) => void, () => void] {
  // Get from local storage then parse stored json or return initialValue
@@ -21,7 +21,7 @@ export function useLocalStorage<T>(
  try {
  const item = window.localStorage.getItem(key);
  return item ? JSON.parse(item) : initialValue;
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
@@ -42,7 +42,7 @@ export function useLocalStorage<T>(
  if (typeof window !== 'undefined') {
  window.localStorage.setItem(key, JSON.stringify(valueToStore));
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error setting localStorage key "${key}":`, error);
  }
  },
@@ -56,7 +56,7 @@ export function useLocalStorage<T>(
  if (typeof window !== 'undefined') {
  window.localStorage.removeItem(key);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
@@ -72,9 +72,9 @@ export function useLocalStorage<T>(
  * @returns [storedValue, setValue, removeValue, isExpired]
  */
 export function useLocalStorageWithExpiry<T>(
- key: string,
+ key,
  initialValue: T,
- ttl: any
+ ttl
 ): [T, (value: SetValue<T>) => void, () => void, boolean] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  if (typeof window === 'undefined') {
@@ -97,7 +97,7 @@ export function useLocalStorageWithExpiry<T>(
  }
 
  return parsed.value || initialValue;
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
@@ -123,7 +123,7 @@ export function useLocalStorageWithExpiry<T>(
  if (typeof window !== 'undefined') {
  window.localStorage.setItem(key, JSON.stringify(item));
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error setting localStorage key "${key}":`, error);
  }
  },
@@ -137,14 +137,14 @@ export function useLocalStorageWithExpiry<T>(
  if (typeof window !== 'undefined') {
  window.localStorage.removeItem(key);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
 
  // Check expiry on mount and set up interval
  useEffect(() => {
- const checkExpiry: any = () => {
+ const checkExpiry = () => {
  if (typeof window === 'undefined') {
  return;
  }
@@ -162,7 +162,7 @@ export function useLocalStorageWithExpiry<T>(
  setIsExpired(true);
  removeValue();
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).warn(
  `Error checking expiry for localStorage key "${key}":`,
  error

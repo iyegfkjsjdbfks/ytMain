@@ -12,7 +12,7 @@ interface PlaylistManagerProps {
 interface CreatePlaylistModalProps {
  isOpen: boolean;
  onClose: () => void;
- onSubmit: (data: any) => void
+ onSubmit: (data) => void
 }
 
 const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
@@ -26,7 +26,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
  tags: [] as string });
  const [tagInput, setTagInput] = useState<string>('');
 
- const handleSubmit: any = (e: React.FormEvent) => {
+ const handleSubmit = (e: React.FormEvent) => {
  e.preventDefault();
  if (!formData.title.trim()) {
  return;
@@ -42,7 +42,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
  onClose();
  };
 
- const addTag: any = () => {
+ const addTag = () => {
  if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
  setFormData(prev => ({
  ...prev as any,
@@ -50,10 +50,10 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
  setTagInput('');
  };
 
- const removeTag: any = (tagToRemove: any) => {
+ const removeTag = (tagToRemove) => {
  setFormData(prev => ({
  ...prev as any,
- tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
+ tags: prev.tags.filter((tag) => tag !== tagToRemove) }));
  };
 
  if (!isOpen) {
@@ -67,7 +67,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
  Create New Playlist
 // FIXED:  </h3>
 
- <form onSubmit={(e: any) => handleSubmit(e)} className='space-y-4'>
+ <form onSubmit={(e) => handleSubmit(e)} className='space-y-4'>
  <div>
  <div className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
  Title *
@@ -135,14 +135,14 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
  />
  <button
 // FIXED:  type='button' />
-// FIXED:  onClick={(e: any) => addTag(e)}
+// FIXED:  onClick={(e) => addTag(e)}
 // FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
  >
  Add
 // FIXED:  </button>
 // FIXED:  </div>
  <div className='flex flex-wrap gap-2'>
- {formData.tags.map((tag: string) => (
+ {formData.tags.map((tag) => (
  <span
  key={tag}
 // FIXED:  className='inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm' />
@@ -163,7 +163,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
  <div className='flex gap-2 justify-end pt-4'>
  <button
 // FIXED:  type='button' />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className='px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors'
  >
  Cancel
@@ -212,18 +212,18 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
  playlist.description?.toLowerCase().includes(searchQuery.toLowerCase())
  );
 
- const handleCreatePlaylist = async (data: any): Promise<any> => {
+ const handleCreatePlaylist = async (data): Promise<any> => {
  try {
  await createPlaylistMutation.mutate(data);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to create playlist:', error);
  };
 
- const handleDeletePlaylist = async (playlistId: any): Promise<any> => {
+ const handleDeletePlaylist = async (playlistId): Promise<any> => {
  if (window.confirm('Are you sure you want to delete this playlist?')) {
  try {
  await deletePlaylistMutation.mutate(playlistId);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to delete playlist:', error);
  }
  };
@@ -236,11 +236,11 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
  ...(playlist.description && { description: playlist.description }),
  ...(playlist.tags && { tags: playlist.tags }) };
  await createPlaylistMutation.mutate(duplicateData);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to duplicate playlist:', error);
  };
 
- const getVisibilityIcon: any = (visibility: any) => {
+ const getVisibilityIcon = (visibility) => {
  switch (visibility as any) {
  case 'public':
  return <EyeIcon className='w-4 h-4' />;
@@ -487,7 +487,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
  <CreatePlaylistModal
  isOpen={showCreateModal} />
  onClose={() => setShowCreateModal(false)}
-// FIXED:  onSubmit={(e: any) => handleCreatePlaylist(e)}
+// FIXED:  onSubmit={(e) => handleCreatePlaylist(e)}
  />
 // FIXED:  </div>
  );

@@ -25,7 +25,7 @@ interface ChannelTabContentProps {
  onPlaylistTabSelect: () => void
 }
 
-const ChannelTabContent: any = ({
+const ChannelTabContent = ({
  activeTab,
  channel,
  videos,
@@ -34,7 +34,7 @@ const ChannelTabContent: any = ({
  onPlaylistTabSelect }: ChannelTabContentProps) => {
 
  const popularVideos = useMemo(() => {
- return [...videos].sort((a: any, b: any) => {
+ return [...videos].sort((a, b) => {
  const aViews = typeof a.views === 'string' ? typeof a.views === "string" ? parseInt(a.views.replace(/,/g, ""), 10) : a.views : Number(a.views) || 0;
  const bViews = typeof b.views === 'string' ? typeof b.views === "string" ? parseInt(b.views.replace(/,/g, ""), 10) : b.views : Number(b.views) || 0;
  return bViews - aViews;
@@ -47,7 +47,7 @@ const ChannelTabContent: any = ({
  .slice(0, 10);
  }, [videos]);
 
- const renderHomeTab: any = () => {
+ const renderHomeTab = () => {
 
  return (
  <div className="space-y-8 pt-4">
@@ -55,7 +55,7 @@ const ChannelTabContent: any = ({
  <section>
  <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-3">Popular Videos</h2>
  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
- {popularVideos.map((video: any) => <VideoCard key={video.id} video={video} />)}
+ {popularVideos.map((video) => <VideoCard key={video.id} video={video} />)}
 // FIXED:  </div>
 // FIXED:  </section>
  )}
@@ -63,7 +63,7 @@ const ChannelTabContent: any = ({
  <section>
  <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-3">Uploads</h2>
  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
- {recentVideos.map((video: any) => <VideoCard key={video.id} video={video} />)}
+ {recentVideos.map((video) => <VideoCard key={video.id} video={video} />)}
 // FIXED:  </div>
 // FIXED:  </section>
  )}
@@ -77,12 +77,12 @@ const ChannelTabContent: any = ({
  );
  };
 
- const renderVideosTab: any = (isShorts: boolean = false) => {
- const filteredVideos = videos.filter((v: any) => isShorts ? v.isShort : !v.isShort);
+ const renderVideosTab = (isShorts: boolean = false) => {
+ const filteredVideos = videos.filter((v) => isShorts ? v.isShort : !v.isShort);
  if (filteredVideos.length > 0) {
  return (
  <div className={`grid grid-cols-1 ${isShorts ? 'xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7' : 'xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'} 2xl:${isShorts ? 'grid-cols-8' : 'grid-cols-5'} gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6 pt-4`}>
- {filteredVideos.map((video: any) => (
+ {filteredVideos.map((video) => (
  <VideoCard key={video.id} video={video} />
  ))}
 // FIXED:  </div>
@@ -91,12 +91,12 @@ const ChannelTabContent: any = ({
  return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no {isShorts ? 'Shorts' : 'videos'} yet.</p>;
  };
 
- const renderPlaylistsTab: any = (isHomePageSlice: boolean = false) => {
+ const renderPlaylistsTab = (isHomePageSlice: boolean = false) => {
  const playlistsToRender = isHomePageSlice ? playlists.slice(0, 4) : playlists;
  if (playlistsToRender.length > 0) {
  return (
  <div className={`grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${isHomePageSlice ? 'xl:grid-cols-4' : 'xl:grid-cols-5'} gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6 pt-4`}>
- {playlistsToRender.map((playlist: any) => (
+ {playlistsToRender.map((playlist) => (
  <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block">
  <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-xl overflow-hidden">
  <img
@@ -116,7 +116,7 @@ const ChannelTabContent: any = ({
  ))}
  {isHomePageSlice && playlists.length > 4 && (
  <div className="flex items-center justify-center aspect-video bg-neutral-100 dark:bg-neutral-800 rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
- <button onClick={(e: any) => onPlaylistTabSelect(e)} className="text-sky-600 dark:text-sky-400 font-medium text-sm">
+ <button onClick={(e) => onPlaylistTabSelect(e)} className="text-sky-600 dark:text-sky-400 font-medium text-sm">
  View All Playlists ({playlists.length})
 // FIXED:  </button>
 // FIXED:  </div>
@@ -127,11 +127,11 @@ const ChannelTabContent: any = ({
  return <p className="text-neutral-600 dark: text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no playlists yet.</p>
  };
 
- const renderCommunityTab: any = () => {
+ const renderCommunityTab = () => {
  if (communityPosts.length > 0) {
  return (
  <div className="max-w-2xl mx-auto space-y-6 py-6">
- {communityPosts.map((post: any) => (
+ {communityPosts.map((post) => (
  <div key={post.id} className="bg-white dark:bg-neutral-800/70 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700/50">
  <div className="flex items-center mb-3">
  <img src={post.channelAvatarUrl} alt={post.channelName} className="w-10 h-10 rounded-full mr-3"/>
@@ -154,7 +154,7 @@ const ChannelTabContent: any = ({
  return <p className="text-neutral-600 dark: text-neutral-400 mt-8 text-center py-10 text-lg">No community posts yet.</p>
  };
 
- const renderAboutTab: any = () => {
+ const renderAboutTab = () => {
  if (!channel) {
 return null;
 }
@@ -185,7 +185,7 @@ return null;
  );
  };
 
- const renderLiveTab: any = () => {
+ const renderLiveTab = () => {
  return (
  <div className="text-center py-16 text-neutral-600 dark:text-neutral-400 mt-8">
  <SignalSlashIcon className="w-16 h-16 mx-auto mb-4 text-neutral-400 dark:text-neutral-500" />

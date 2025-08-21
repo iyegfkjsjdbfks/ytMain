@@ -15,7 +15,7 @@ const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?:
  ${isDestructive ? 'text-red-500 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-500/10'
  : 'text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70'}`;
 
- const content: any = (
+ const content = (
  <>
  {icon && <span className="mr-3.5 w-5 h-5 text-neutral-500 dark:text-neutral-300">{icon}</span>}
  {children}
@@ -24,19 +24,19 @@ const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?:
 
  if (to as any) {
  return (
- <Link to={to} className={commonClasses} onClick={(e: any) => onClick(e)}>
+ <Link to={to} className={commonClasses} onClick={(e) => onClick(e)}>
  {content}
 // FIXED:  </Link>
  );
  }
  return (
- <button onClick={(e: any) => onClick(e)} className={commonClasses}>
+ <button onClick={(e) => onClick(e)} className={commonClasses}>
  {content}
 // FIXED:  </button>
  );
 };
 
-const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }: any) => {
+const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }) => {
  const { theme, toggleTheme } = useTheme();
  const { user, logout, isAuthenticated } = useAuth();
 
@@ -44,7 +44,7 @@ const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }: any) => {
 return null;
 }
 
- const handleSignOut: any = () => {
+ const handleSignOut = () => {
  // Clear any stored user data
  localStorage.removeItem('youtubeCloneWatchHistory_v1');
  localStorage.removeItem('youtubeCloneLikedVideos_v1');
@@ -62,12 +62,12 @@ return null;
  onClose(); // Close menu
  };
 
- const handleThemeToggle: any = () => {
+ const handleThemeToggle = () => {
  toggleTheme();
  onClose(); // Close menu after theme toggle
  };
 
- const handleGenericClick: any = () => {
+ const handleGenericClick = () => {
  onClose(); // Close menu on any item click
  };
 
@@ -103,7 +103,7 @@ return null;
  )}
  <Link
  to={`/channel/${user.username}`} />
-// FIXED:  onClick={(e: any) => handleGenericClick(e)}
+// FIXED:  onClick={(e) => handleGenericClick(e)}
 // FIXED:  className="text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-0.5 block"
  >
  View your channel
@@ -124,23 +124,23 @@ return null;
 // FIXED:  </div>
  <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
  <div className="py-1">
- <MenuItem onClick={(e: any) => handleSignOut(e)} icon={<ArrowRightStartOnRectangleIcon />} isDestructive>Sign out</MenuItem>
+ <MenuItem onClick={(e) => handleSignOut(e)} icon={<ArrowRightStartOnRectangleIcon />} isDestructive>Sign out</MenuItem>
 // FIXED:  </div>
  <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
  <div className="py-1">
- <MenuItem onClick={(e: any) => handleThemeToggle(e)} icon={theme === 'dark' ? <SunIcon className="text-yellow-500 dark:text-yellow-400" /> : <MoonIcon className="text-sky-500 dark:text-sky-400" />}>,
+ <MenuItem onClick={(e) => handleThemeToggle(e)} icon={theme === 'dark' ? <SunIcon className="text-yellow-500 dark:text-yellow-400" /> : <MoonIcon className="text-sky-500 dark:text-sky-400" />}>,
  Appearance: {theme === 'dark' ? 'Light' : 'Dark'}
 // FIXED:  </MenuItem>
 // FIXED:  </div>
  <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
  <div className="py-1">
- <MenuItem to="/account/data" icon={<PresentationChartLineIcon />} onClick={(e: any) => handleGenericClick(e)}>Your data in YouTube</MenuItem> {/* Updated to prop */}
- <MenuItem to="/account/settings" icon={<Cog8ToothIcon />} onClick={(e: any) => handleGenericClick(e)}>Settings</MenuItem> {/* Updated to prop */}
+ <MenuItem to="/account/data" icon={<PresentationChartLineIcon />} onClick={(e) => handleGenericClick(e)}>Your data in YouTube</MenuItem> {/* Updated to prop */}
+ <MenuItem to="/account/settings" icon={<Cog8ToothIcon />} onClick={(e) => handleGenericClick(e)}>Settings</MenuItem> {/* Updated to prop */}
 // FIXED:  </div>
  <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
  <div className="py-1">
- <MenuItem to="#" icon={<QuestionMarkCircleIcon />} onClick={(e: any) => handleGenericClick(e)}>Help</MenuItem>
- <MenuItem to="#" icon={<ChatBubbleLeftEllipsisIcon />} onClick={(e: any) => handleGenericClick(e)}>Send feedback</MenuItem>
+ <MenuItem to="#" icon={<QuestionMarkCircleIcon />} onClick={(e) => handleGenericClick(e)}>Help</MenuItem>
+ <MenuItem to="#" icon={<ChatBubbleLeftEllipsisIcon />} onClick={(e) => handleGenericClick(e)}>Send feedback</MenuItem>
 // FIXED:  </div>
 // FIXED:  </div>
  );

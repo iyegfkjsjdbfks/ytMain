@@ -64,7 +64,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  setIsPlaying(true);
  onPlay?.();
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error toggling video playback:', error);
  }
  }, [isPlaying, onPlay, onPause]);
@@ -102,7 +102,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  }
  setIsFullscreen(false);
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error toggling fullscreen:', error);
  }
  }, [isFullscreen]);
@@ -178,7 +178,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  }, [autoplay, isIntersecting, isPlaying]);
 
  // Format time
- const formatTime: any = (time: any) => {
+ const formatTime = (time) => {
  const minutes = Math.floor(time / 60);
  const seconds = Math.floor(time % 60);
  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -189,7 +189,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  ref={setRefs}
 // FIXED:  className={`relative bg-black rounded-lg overflow-hidden ${className}`}
  onTouchStart={handleTouchStart} />
-// FIXED:  onClick={(e: any) => showControlsTemporarily(e)}
+// FIXED:  onClick={(e) => showControlsTemporarily(e)}
  >
  {/* Video Element */}
  <video
@@ -215,7 +215,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  {/* Center Play Button */}
  <div className='absolute inset-0 flex items-center justify-center'>
  <button />
-// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  onClick={(e) => togglePlay(e)}
 // FIXED:  className='bg-black/50 backdrop-blur-sm rounded-full p-4 text-white hover:bg-black/70 transition-colors'
 // FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
@@ -230,7 +230,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  {/* Top Controls */}
  <div className='absolute top-4 right-4 flex space-x-2'>
  <button />
-// FIXED:  onClick={(e: any) => toggleMute(e)}
+// FIXED:  onClick={(e) => toggleMute(e)}
 // FIXED:  className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
 // FIXED:  aria-label={isMuted ? 'Unmute' : 'Mute'}
  >
@@ -242,7 +242,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => toggleFullscreen(e)}
+// FIXED:  onClick={(e) => toggleFullscreen(e)}
 // FIXED:  className='bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors'
 // FIXED:  aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
  >
@@ -263,7 +263,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
  min='0'
  max={duration || 0}
 // FIXED:  value={currentTime} />
-// FIXED:  onChange={(e: any) => handleSeek(e)}
+// FIXED:  onChange={(e) => handleSeek(e)}
 // FIXED:  className='w-full h-1 bg-white/30 rounded-lg appearance-none slider-thumb'
 // FIXED:  style={{
  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)` }

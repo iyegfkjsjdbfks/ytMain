@@ -47,7 +47,7 @@ const UploadPage: React.FC = () => {
  'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
  'Comedy', 'Film & Animation', 'Autos & Vehicles'];
 
- const handleFileSelect: any = (event: React.ChangeEvent<HTMLInputElement>) => {
+ const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
  const file = event.target.files?.[0];
  if (!file) {
 return;
@@ -82,7 +82,7 @@ return;
  simulateUpload(newFile);
  };
 
- const simulateUpload: any = (_file: UploadedFile) => {
+ const simulateUpload = (_file: UploadedFile) => {
  const interval = setInterval((() => {
  setUploadedFile(prev => {
  if (!prev) {
@@ -110,11 +110,11 @@ return null;
  }, 5000);
  };
 
- const handleDragOver: any = (event: React.DragEvent) => {
+ const handleDragOver = (event: React.DragEvent) => {
  event.preventDefault();
  };
 
- const handleDrop: any = (event: React.DragEvent) => {
+ const handleDrop = (event: React.DragEvent) => {
  event.preventDefault();
  const file = event.dataTransfer.files[0];
  if (file as any) {
@@ -147,13 +147,13 @@ return null;
  handleFileSelect(fakeEvent);
  };
 
- const removeTag: any = (tagToRemove: any) => {
+ const removeTag = (tagToRemove) => {
  setMetadata(prev => ({
  ...prev as any,
- tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
+ tags: prev.tags.filter((tag) => tag !== tagToRemove) }));
  };
 
- const handlePublish: any = () => {
+ const handlePublish = () => {
  if (!uploadedFile || uploadedFile.status !== 'completed') {
  alert('Please wait for the video to finish processing');
  return;
@@ -169,7 +169,7 @@ return null;
  navigate('/studio');
  };
 
- const getVisibilityIcon: any = (visibility: any) => {
+ const getVisibilityIcon = (visibility) => {
  switch (visibility as any) {
  case 'public': return <GlobeAltIcon className="w-4 h-4" />;
  case 'unlisted': return <EyeIcon className="w-4 h-4" />;
@@ -222,7 +222,7 @@ return null;
  ref={fileInputRef}
 // FIXED:  type="file"
  accept="video/*" />
-// FIXED:  onChange={(e: any) => handleFileSelect(e)}
+// FIXED:  onChange={(e) => handleFileSelect(e)}
 // FIXED:  className="hidden"
  />
  <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
@@ -325,7 +325,7 @@ return null;
 // FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, category: e.target.value }))}
 // FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  >
- {categories.map((category: any) => (
+ {categories.map((category) => (
  <option key={category} value={category}>
  {category}
 // FIXED:  </option>
@@ -338,7 +338,7 @@ return null;
  Tags
 // FIXED:  </label>
  <div className="flex flex-wrap gap-2 mb-2">
- {metadata.tags.map((tag: string) => (
+ {metadata.tags.map((tag) => (
  <span
  key={tag}
 // FIXED:  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200" />
@@ -367,7 +367,7 @@ return null;
  { value: 'unlisted',
  label: 'Unlisted', description: 'Anyone with the link can view' },
  { value: 'private',
- label: 'Private', description: 'Only you can view' }].map((option: any) => (
+ label: 'Private', description: 'Only you can view' }].map((option) => (
  <label
  key={option.value}
 // FIXED:  className="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800" />
@@ -473,7 +473,7 @@ return null;
  <UnifiedButton
  variant="primary"
  fullWidth />
-// FIXED:  onClick={(e: any) => handlePublish(e)}
+// FIXED:  onClick={(e) => handlePublish(e)}
 // FIXED:  disabled={!uploadedFile || uploadedFile.status !== 'completed' || !metadata.title.trim()}
  >
  Publish

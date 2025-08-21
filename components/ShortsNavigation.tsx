@@ -15,14 +15,14 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
  canGoPrevious,
  canGoNext,
  className = '' }) => {
- const handlePrevious: any = (e: React.MouseEvent) => {
+ const handlePrevious = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  if (canGoPrevious as any) {
  onPrevious();
  };
 
- const handleNext: any = (e: React.MouseEvent) => {
+ const handleNext = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  if (canGoNext as any) {
@@ -33,7 +33,7 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
  <div className={`flex flex-col space-y-3 ${className}`}>
  {/* Previous button */}
  <button />
-// FIXED:  onClick={(e: any) => handlePrevious(e)}
+// FIXED:  onClick={(e) => handlePrevious(e)}
 // FIXED:  disabled={!canGoPrevious}
 // FIXED:  className={`p-4 rounded-full backdrop-blur-sm transition-all duration-200 border border-white/20 ${
  canGoPrevious
@@ -48,7 +48,7 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
 
  {/* Next button */}
  <button />
-// FIXED:  onClick={(e: any) => handleNext(e)}
+// FIXED:  onClick={(e) => handleNext(e)}
 // FIXED:  disabled={!canGoNext}
 // FIXED:  className={`p-4 rounded-full backdrop-blur-sm transition-all duration-200 border border-white/20 ${
  canGoNext

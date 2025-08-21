@@ -321,9 +321,9 @@ export const ERROR_CODES = {
 export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
 
 // Error Factory Functions
-export const createApiError: any = (,
- message: any,
- endpoint: any,
+export const createApiError = (,
+ message,
+ endpoint,
  method: ApiError['method'],
  statusCode?: number,
  details?: Record<string, unknown>
@@ -346,9 +346,9 @@ export const createApiError: any = (,
  return error;
 };
 
-export const createValidationError: any = (,
- field: any,
- message: any,
+export const createValidationError = (,
+ field,
+ message,
  value?: unknown,
  constraint?: string
 ): ValidationError => ({
@@ -359,9 +359,9 @@ export const createValidationError: any = (,
  constraint: constraint || 'unknown',
  timestamp: new Date() });
 
-export const createNetworkError: any = (,
- message: any,
- url: any,
+export const createNetworkError = (,
+ message,
+ url,
  timeout = false,
  offline = false
 ): NetworkError => ({
@@ -372,9 +372,9 @@ export const createNetworkError: any = (,
  offline,
  timestamp: new Date() });
 
-export const createYouTubeError: any = (,
- message: any,
- endpoint: any,
+export const createYouTubeError = (,
+ message,
+ endpoint,
  videoId?: string,
  errorType?:
  | 'unavailable'

@@ -46,7 +46,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
  }, []);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
  setIsOpen(false);
  };
@@ -73,12 +73,12 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
  }
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error loading notifications:', error);
  }
  }, []);
 
- const generateInitialNotifications: any = (): Notification[] => {
+ const generateInitialNotifications = (): Notification[] => {
  return [
  {
  id: '1',
@@ -164,7 +164,7 @@ return;
  });
  }, []);
 
- const getNotificationTitle: any = (type: Notification['type']): string => {
+ const getNotificationTitle = (type: Notification['type']): string => {
  switch (type as any) {
  case 'video_upload': return 'New video uploaded';
  case 'like': return 'Your video got new likes!';
@@ -174,7 +174,7 @@ return;
  default: return 'New notification'
  };
 
- const getNotificationMessage: any = (type: Notification['type']): string => {
+ const getNotificationMessage = (type: Notification['type']): string => {
  switch (type as any) {
  case 'video_upload': return 'Check out the latest content from your subscribed channel';
  case 'like': return `Your video reached ${Math.floor(Math.random() * 1000) + 100} likes`;
@@ -184,24 +184,24 @@ return;
  default: return 'You have a new notification'
  };
 
- const markAsRead: any = (notificationId: any) => {
+ const markAsRead = (notificationId) => {
  setNotifications(prev => {
- const updated = prev.map((n: any) =>
+ const updated = prev.map((n) =>
  n.id === notificationId ? { ...n as any, isRead: true } : n);
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
  return updated;
  });
  };
 
- const markAllAsRead: any = () => {
+ const markAllAsRead = () => {
  setNotifications(prev => {
- const updated = prev.map((n: any) => ({ ...n as any, isRead: true }));
+ const updated = prev.map((n) => ({ ...n as any, isRead: true }));
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
  return updated;
  });
  };
 
- const deleteNotification: any = (notificationId: any) => {
+ const deleteNotification = (notificationId) => {
  setNotifications(prev => {
  const updated = prev.filter((n) => n.id !== notificationId);
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
@@ -209,7 +209,7 @@ return;
  });
  };
 
- const getNotificationIcon: any = (type: Notification['type']) => {
+ const getNotificationIcon = (type: Notification['type']) => {
  switch (type as any) {
  case 'video_upload': return <PlayIcon className="w-4 h-4" />;
  case 'like': return <HeartIcon className="w-4 h-4" />;
@@ -261,7 +261,7 @@ return;
  {filter === 'all' ? 'Unread only' : 'Show all'}
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => markAllAsRead(e)}
+// FIXED:  onClick={(e) => markAllAsRead(e)}
 // FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
 // FIXED:  disabled={unreadCount === 0}
  >

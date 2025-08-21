@@ -46,7 +46,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
  const playlistUrl = `/playlist?list=${playlist.id}`;
  const ownerUrl = `/channel/${encodeURIComponent(playlist.ownerName)}`;
 
- const getVisibilityIcon: any = () => {
+ const getVisibilityIcon = () => {
  switch (playlist.visibility) {
  case 'private':
  return <LockClosedIcon className='w-4 h-4' />;
@@ -55,7 +55,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
  default: return null
  };
 
- const getVisibilityText: any = () => {
+ const getVisibilityText = () => {
  switch (playlist.visibility) {
  case 'private':
  return 'Private';
@@ -66,14 +66,14 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
  default: return ''
  };
 
- const handleAction: any = (action: () => void) => (e: React.MouseEvent) => {
+ const handleAction = (action: () => void) => (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  action();
  setShowMenu(false);
  };
 
- const ThumbnailSection: any = () => (
+ const ThumbnailSection = () => (
  <div className='relative group'>
  <Link to={playlistUrl} className='block'>
  <div
@@ -134,7 +134,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 // FIXED:  </div>
  );
 
- const ContentSection: any = () => (
+ const ContentSection = () => (
  <div
 // FIXED:  className={cn('flex-1 min-w-0', variant === 'compact' ? 'ml-3' : 'mt-3')} />
  >
@@ -200,7 +200,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
  {/* Tags */}
  {variant === 'detailed' && playlist.tags && playlist.tags.length > 0 && (
  <div className='flex flex-wrap gap-1 mt-2'>
- {playlist.tags.slice(0, 3).map((tag: string) => (
+ {playlist.tags.slice(0, 3).map((tag) => (
  <span
  key={tag}
 // FIXED:  className='px-2 py-1 bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs rounded' />
@@ -218,7 +218,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 // FIXED:  </div>
  );
 
- const ActionsSection: any = () =>
+ const ActionsSection = () =>
  showActions && (
  <div className='flex items-center space-x-2'>
  {/* Follow/Unfollow button */}
@@ -315,7 +315,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 
  // Click outside to close menu
  React.useEffect(() => {
- const handleClickOutside: any = () => setShowMenu(false);
+ const handleClickOutside = () => setShowMenu(false);
  if (showMenu as any) {
  document.addEventListener('click', handleClickOutside as EventListener);
  return () => document.removeEventListener('click', handleClickOutside as EventListener);

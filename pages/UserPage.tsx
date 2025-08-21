@@ -30,12 +30,12 @@ const UserPage: React.FC = () => {
  try {
  const allVideos = await getVideos();
  // Filter videos by channel name (mock implementation)
- const filteredVideos = allVideos.filter((video: any) =>
+ const filteredVideos = allVideos.filter((video) =>
  video.channelName.toLowerCase().includes(decodedUserName.toLowerCase()) ||
  Math.random() > 0.7, // Random selection for demo
  ).slice(0, 12);
  setUserVideos(filteredVideos);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch user videos:', error);
  } finally {
  setLoading(false);
@@ -44,22 +44,18 @@ const UserPage: React.FC = () => {
  fetchUserVideos();
  }, [decodedUserName]);
 
- const handleSubscribe: any = () => {
+ const handleSubscribe = () => {
  setIsSubscribed(!isSubscribed);
  setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1);
  };
 
  const tabs = [
- { id: 'videos' as const,
- label: 'Videos', icon: PlayIcon },
- { id: 'playlists' as const,
- label: 'Playlists', icon: QueueListIcon },
- { id: 'community' as const,
- label: 'Community', icon: ChatBubbleLeftRightIcon },
- { id: 'about' as const,
- label: 'About', icon: InformationCircleIcon }];
+ { id: 'videos' as const label: 'Videos', icon: PlayIcon },
+ { id: 'playlists' as const label: 'Playlists', icon: QueueListIcon },
+ { id: 'community' as const label: 'Community', icon: ChatBubbleLeftRightIcon },
+ { id: 'about' as const label: 'About', icon: InformationCircleIcon }];
 
- const renderTabContent: any = () => {
+ const renderTabContent = () => {
  switch (activeTab as any) {
  case 'videos':
  return (
@@ -78,7 +74,7 @@ const UserPage: React.FC = () => {
 // FIXED:  </div>
  ) : userVideos.length > 0 ? (
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
- {userVideos.map((video: any) => (
+ {userVideos.map((video) => (
  <VideoCard key={video.id} video={video} />
  ))}
 // FIXED:  </div>
@@ -164,7 +160,7 @@ const UserPage: React.FC = () => {
 
  <div className="flex items-center space-x-3">
  <button />
-// FIXED:  onClick={(e: any) => handleSubscribe(e)}
+// FIXED:  onClick={(e) => handleSubscribe(e)}
 // FIXED:  className={`flex items-center space-x-2 px-6 py-2.5 rounded-full font-medium text-sm transition-colors ${
  isSubscribed
  ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600'
@@ -200,7 +196,7 @@ const UserPage: React.FC = () => {
  {/* Tabs */}
  <div className="border-b border-neutral-200 dark:border-neutral-700 mb-8">
  <nav className="flex space-x-8 overflow-x-auto">
- {tabs.map((tab: any) => {
+ {tabs.map((tab) => {
  const Icon = tab.icon;
  return (
  <button

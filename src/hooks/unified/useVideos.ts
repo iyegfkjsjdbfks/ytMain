@@ -48,7 +48,7 @@ export function useUnifiedVideos(
 }
 
 export function useUnifiedVideo(
- videoId: any,
+ videoId,
  config?: UseApiConfig<UnifiedVideoMetadata>
 ): any {
  logger.debug(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
@@ -130,7 +130,7 @@ export function useFeaturedVideos(config?: UseApiConfig<Video[]>): any {
 }
 
 export function useVideosByCategory(
- category: any,
+ category,
  config?: UseApiConfig<Video[]>
 ): any {
  return useQuery(
@@ -154,7 +154,7 @@ export function useSubscriptionFeed(config?: UseApiConfig<Video[]>): any {
  );
 }
 
-export function useRelatedVideos(videoId: any, config?: UseApiConfig<Video[]>): any {
+export function useRelatedVideos(videoId, config?: UseApiConfig<Video[]>): any {
  return useQuery(
  ['videos', 'related', videoId],
  () => videoApi.getRelatedVideos(videoId),
@@ -238,7 +238,7 @@ export function useTrendingShorts(config?: UseApiConfig<Short[]>): any {
 
 // Unified Search hook
 export function useUnifiedSearchVideos(
- query: any,
+ query,
  filters: UnifiedSearchFilters = {},
  limit: number = 50,
  config?: UseApiConfig<{
@@ -270,7 +270,7 @@ export function useUnifiedSearchVideos(
 }
 
 // Legacy search hook (for backward compatibility)
-export function useSearchVideos(query: any, config?: UseApiConfig<Video[]>): any {
+export function useSearchVideos(query, config?: UseApiConfig<Video[]>): any {
  return useQuery(
  ['videos', 'search', query],
  () => videoApi.searchVideos({ query }),
@@ -303,27 +303,27 @@ export function useUpdateVideo(): any {
 
 export function useDeleteVideo(): any {
  return useMutation<void, string>(videoId => videoApi.deleteVideo(videoId), {
- onSuccess: (_: any, _videoId: any) => {} });
+ onSuccess: (_, _videoId) => {} });
 }
 
 export function useLikeVideo(): any {
  return useMutation<void, string>(videoId => videoApi.likeVideo(videoId), {
- onSuccess: (_: any, _videoId: any) => {} });
+ onSuccess: (_, _videoId) => {} });
 }
 
 export function useUnlikeVideo(): any {
  return useMutation<void, string>(videoId => videoApi.unlikeVideo(videoId), {
- onSuccess: (_: any, _videoId: any) => {} });
+ onSuccess: (_, _videoId) => {} });
 }
 
 export function useSaveVideo(): any {
  return useMutation<void, string>(videoId => videoApi.saveVideo(videoId), {
- onSuccess: (_: any, _videoId: any) => {} });
+ onSuccess: (_, _videoId) => {} });
 }
 
 export function useUnsaveVideo(): any {
  return useMutation<void, string>(videoId => videoApi.unsaveVideo(videoId), {
- onSuccess: (_: any, _videoId: any) => {} });
+ onSuccess: (_, _videoId) => {} });
 }
 
 export function useIncrementViews(): any {
@@ -360,7 +360,7 @@ export function useVideos(params = {}, config?: UseApiConfig<Video[]>): any {
  );
 }
 
-export function useVideo(videoId: any, config?: UseApiConfig<Video>): any {
+export function useVideo(videoId, config?: UseApiConfig<Video>): any {
  return useQuery(['video', videoId], () => videoApi.getVideo(videoId), {
  enabled: !!videoId,
  staleTime: 10 * 60 * 1000, // 10 minutes
@@ -375,7 +375,7 @@ export function useTrendingVideos(config?: UseApiConfig<Video[]>): any {
 }
 
 // Combined hooks for common patterns
-export function useVideoWithRelated(videoId: any): any {
+export function useVideoWithRelated(videoId): any {
  const video = useVideo(videoId);
  const relatedVideos = useRelatedVideos(videoId, {
  enabled: !!video.data });

@@ -15,7 +15,7 @@ interface VirtualizedVideoGridProps {
  hasMore?: boolean;
  onLoadMore?: () => void;
  onVideoClick?: (video: Video) => void;
- onChannelClick?: (channelId: any) => void;
+ onChannelClick?: (channelId) => void;
  className?: string;
  cardSize?: 'sm' | 'md' | 'lg';
  showChannel?: boolean;
@@ -29,7 +29,7 @@ interface GridItemProps {
  videos: Video,
  columnsPerRow: number;
  onVideoClick?: (video: Video) => void;
- onChannelClick?: (channelId: any) => void;
+ onChannelClick?: (channelId) => void;
  cardSize: 'sm' | 'md' | 'lg',
  showChannel: boolean; showDescription: boolean;
  }
@@ -113,7 +113,7 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
 return;
 }
 
- const resizeObserver = new ResizeObserver((entries: any) => {
+ const resizeObserver = new ResizeObserver((entries) => {
  for (const entry of entries) {
  const { width, height } = entry.contentRect;
  setContainerSize({ width, height });
@@ -125,13 +125,12 @@ return;
  }, [containerRef]);
 
  // Handle infinite scrolling
- const handleScroll = useCallback(
- ({ scrollTop, scrollHeight, clientHeight }: any) => {
+ const handleScroll = useCallback(({ scrollTop, scrollHeight, clientHeight }) => {
  if (!hasMore || loading || !onLoadMore) {
 return;
 }
 
- const scrollPercentage: any = (scrollTop + clientHeight) / scrollHeight;
+ const scrollPercentage = (scrollTop + clientHeight) / scrollHeight;
  if (scrollPercentage > 0.8) {
  onLoadMore();
  }
@@ -196,7 +195,7 @@ return;
  {hasMore && !loading && onLoadMore && (
  <div className="flex justify-center py-8">
  <button />
-// FIXED:  onClick={(e: any) => onLoadMore(e)}
+// FIXED:  onClick={(e) => onLoadMore(e)}
 // FIXED:  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
  >
  Load More Videos

@@ -41,8 +41,8 @@ class PerformanceStore {
  return [...this.metrics];
  }
 
- getMetricsByComponent(componentName: any) {
- return this.metrics.filter((m: any) => m.componentName === componentName)
+ getMetricsByComponent(componentName) {
+ return this.metrics.filter((m) => m.componentName === componentName)
  }
 
  subscribe(observer: (metrics: PerformanceMetrics) => void) {
@@ -72,7 +72,7 @@ class PerformanceStore {
  return 0;
  }
 
- const totalTime = relevantMetrics.reduce((sum: any, m: any) => sum + m.renderTime,
+ const totalTime = relevantMetrics.reduce((sum, m) => sum + m.renderTime,
  0
  );
  return totalTime / relevantMetrics.length;
@@ -80,12 +80,12 @@ class PerformanceStore {
 
  getSlowRenders(threshold = 16) {
  // 16ms = 60fps
- return this.metrics.filter((m: any) => m.renderTime > threshold)
+ return this.metrics.filter((m) => m.renderTime > threshold)
  }
 const performanceStore = new PerformanceStore();
 
-export const usePerformanceMonitor: any = (,
- componentName: any,
+export const usePerformanceMonitor = (,
+ componentName,
  config: PerformanceConfig = {}
 ) => {
  const opts = { ...DEFAULT_CONFIG as any, ...config };
@@ -148,7 +148,7 @@ export const usePerformanceMonitor: any = (,
 
  // Manual tracking methods
  const trackAsyncOperation = useCallback(
- async <T>(operation: () => Promise<T> operationName: any): Promise<T> => {
+ async <T>(operation: () => Promise<T> operationName): Promise<T> => {
  const startTime = performance.now();
 
  try {
@@ -163,7 +163,7 @@ export const usePerformanceMonitor: any = (,
  timestamp: Date.now() });
 
  return result;
- } catch (error: any) {
+ } catch (error) {
  const duration = performance.now() - startTime;
 
  performanceStore.addMetric({
@@ -180,7 +180,7 @@ export const usePerformanceMonitor: any = (,
  );
 
  const measureFunction = useCallback(
- <T extends any, R>(fn: (...args: T) => R, functionName: any) => {
+ <T extends any, R>(fn: (...args: T) => R, functionName) => {
  return (...args: T): R => {
  const startTime = performance.now();
  const result = fn(...args);
@@ -208,13 +208,13 @@ export const usePerformanceMonitor: any = (,
 };
 
 // Hook to access performance data
-export const usePerformanceData: any = (componentName?: string) => {
+export const usePerformanceData = (componentName?: string) => {
  const [metrics, setMetrics] = useState<PerformanceMetrics[]>([]);
 
  useEffect(() => {
- const updateMetrics: any = (allMetrics: PerformanceMetrics) => {
+ const updateMetrics = (allMetrics: PerformanceMetrics) => {
  const filteredMetrics = componentName
- ? allMetrics.filter((m: any) =>
+ ? allMetrics.filter((m) =>
  m.componentName.startsWith(componentName)
  )
  : allMetrics;
@@ -231,7 +231,7 @@ export const usePerformanceData: any = (componentName?: string) => {
  averageRenderTime: performanceStore.getAverageRenderTime(componentName),
  slowRenders: performanceStore
  .getSlowRenders()
- .filter((m: any) => !componentName || m.componentName.startsWith(componentName)
+ .filter((m) => !componentName || m.componentName.startsWith(componentName)
  ),
  totalRenders: metrics.length,
  lastRender: metrics[metrics.length - 1] };
@@ -243,7 +243,7 @@ export const usePerformanceData: any = (componentName?: string) => {
 };
 
 // Hook for Core Web Vitals monitoring
-export const useWebVitals: any = () => {
+export const useWebVitals = () => {
  const [vitals, setVitals] = useState<{
  CLS?: number;
  FID?: number;
@@ -254,7 +254,7 @@ export const useWebVitals: any = () => {
 
  useEffect(() => {
  // Largest Contentful Paint
- const observeLCP: any = () => {
+ const observeLCP = () => {
  const observer = new PerformanceObserver(list => {
  const entries = list.getEntries();
  const lastEntry = entries[entries.length - 1] as any;
@@ -265,7 +265,7 @@ export const useWebVitals: any = () => {
  };
 
  // First Contentful Paint
- const observeFCP: any = () => {
+ const observeFCP = () => {
  const observer = new PerformanceObserver(list => {
  const entries = list.getEntries();
  entries.forEach(entry => {
@@ -279,7 +279,7 @@ export const useWebVitals: any = () => {
  };
 
  // Cumulative Layout Shift
- const observeCLS: any = () => {
+ const observeCLS = () => {
  let clsValue = 0;
  const observer = new PerformanceObserver(list => {
  const entries = list.getEntries();
@@ -313,7 +313,7 @@ export const useWebVitals: any = () => {
 };
 
 // Performance budget checker
-export const usePerformanceBudget: any = () => {
+export const usePerformanceBudget = () => {
  const budgets = {
  renderTime: 16, // 60fps,
  bundleSize: 250 * 1024, // 250KB,
@@ -321,7 +321,7 @@ export const usePerformanceBudget: any = () => {
  apiResponse: 1000, // 1 second
  };
 
- const checkBudget = useCallback((metric: any, value: string | number) => {
+ const checkBudget = useCallback((metric, value: string | number) => {
  const budget = budgets[metric as keyof typeof budgets];
  if (!budget) {
  return { withinBudget: true, budget: 0, overage: 0 };

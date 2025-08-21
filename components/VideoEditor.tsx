@@ -44,7 +44,7 @@ export interface VideoFilter {
 interface VideoEditorProps {
  videoFile: File;
  onSave: (editedVideo: Blob,
- metadata: any) => void;
+ metadata) => void;
  onCancel: () => void;
  className?: string;
 }
@@ -85,7 +85,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
 return;
 }
 
- const handleLoadedMetadata: any = () => {
+ const handleLoadedMetadata = () => {
  setDuration(video.duration);
  setTrimEnd(video.duration);
 
@@ -99,7 +99,7 @@ return;
  setClips([initialClip]);
  };
 
- const handleTimeUpdate: any = () => {
+ const handleTimeUpdate = () => {
  setCurrentTime(video.currentTime);
  };
 
@@ -111,12 +111,12 @@ return;
  video.removeEventListener('timeupdate', handleTimeUpdate as EventListener);
  }}, []);
 
- const generateThumbnail: any = (time: any): string => {
+ const generateThumbnail = (time): string => {
  // In a real implementation, this would capture a frame from the video
  return `https://picsum.photos/160/90?random=${Math.floor(time)}`;
  };
 
- const togglePlay: any = () => {
+ const togglePlay = () => {
  const video = videoRef.current;
  if (!video) {
 return;
@@ -130,7 +130,7 @@ return;
  setIsPlaying(!isPlaying);
  };
 
- const seekTo: any = (time: any) => {
+ const seekTo = (time) => {
  const video = videoRef.current;
  if (!video) {
 return;
@@ -140,7 +140,7 @@ return;
  setCurrentTime(video.currentTime);
  };
 
- const handleTimelineClick: any = (e: React.MouseEvent) => {
+ const handleTimelineClick = (e: React.MouseEvent) => {
  const timeline = timelineRef.current;
  if (!timeline) {
 return;
@@ -148,11 +148,11 @@ return;
 
  const rect = timeline.getBoundingClientRect();
  const clickX = e.clientX - rect.left;
- const newTime: any = (clickX / rect.width) * duration;
+ const newTime = (clickX / rect.width) * duration;
  seekTo(newTime);
  };
 
- const addTextOverlay: any = () => {
+ const addTextOverlay = () => {
  const newText: TextOverlay = {
  id: `text-${Date.now()}`,
  text: 'New Text',
@@ -168,18 +168,18 @@ return;
  setSelectedText(newText.id);
  };
 
- const updateTextOverlay: any = (id: string,
+ const updateTextOverlay = (id,
  updates: Partial<TextOverlay>) => {
- setTextOverlays(prev => prev.map((text: any) =>
+ setTextOverlays(prev => prev.map((text) =>
  text.id === id ? { ...text as any, ...updates } : text));
  };
 
- const deleteTextOverlay: any = (id: string) => {
+ const deleteTextOverlay = (id) => {
  setTextOverlays(prev => prev.filter((text) => text.id !== id));
  setSelectedText(null);
  };
 
- const addFilter: any = (type: VideoFilter['type']) => {
+ const addFilter = (type: VideoFilter['type']) => {
  const newFilter: VideoFilter = {
  id: `filter-${Date.now()}`,
  name: type.charAt(0).toUpperCase() + type.slice(1),
@@ -190,17 +190,17 @@ return;
  setFilters(prev => [...prev as any, newFilter]);
  };
 
- const updateFilter: any = (id: string,
+ const updateFilter = (id,
  value: string | number) => {
- setFilters(prev => prev.map((filter: any) =>
+ setFilters(prev => prev.map((filter) =>
  filter.id === id ? { ...filter as any, value } : filter));
  };
 
- const removeFilter: any = (id: string) => {
+ const removeFilter = (id) => {
  setFilters(prev => prev.filter((filter) => filter.id !== id));
  };
 
- const trimVideo: any = () => {
+ const trimVideo = () => {
  const newClip: VideoClip = {
  id: `clip-${Date.now()}`,
  startTime: trimStart,
@@ -233,19 +233,19 @@ return;
  duration: trimEnd - trimStart };
 
  onSave(processedBlob, metadata);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error exporting video:', error);
  } finally {
  setIsProcessing(false);
  };
 
- const formatTime: any = (time: any): string => {
+ const formatTime = (time): string => {
  const minutes = Math.floor(time / 60);
  const seconds = Math.floor(time % 60);
  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
  };
 
- const renderTimeline: any = () => (
+ const renderTimeline = () => (
  <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
  <div className="flex items-center justify-between mb-4">
  <h3 className="font-medium text-gray-900 dark:text-white">Timeline</h3>
@@ -257,7 +257,7 @@ return;
  <div
  ref={timelineRef}
 // FIXED:  className="relative h-16 bg-gray-200 dark:bg-gray-700 rounded cursor-pointer" />
-// FIXED:  onClick={(e: any) => handleTimelineClick(e)}
+// FIXED:  onClick={(e) => handleTimelineClick(e)}
  >
  {/* Timeline track */}
  <div className="absolute inset-0 flex">
@@ -300,7 +300,7 @@ return;
  {/* Controls */}
  <div className="flex items-center justify-center space-x-4 mt-4">
  <button />
-// FIXED:  onClick={(e: any) => togglePlay(e)}
+// FIXED:  onClick={(e) => togglePlay(e)}
 // FIXED:  className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700"
  >
  {isPlaying ? (
@@ -347,7 +347,7 @@ return;
 // FIXED:  </div>
  );
 
- const renderTrimPanel: any = () => (
+ const renderTrimPanel = () => (
  <div className="space-y-4">
  <h3 className="font-medium text-gray-900 dark:text-white">Trim Video</h3>
 
@@ -398,7 +398,7 @@ return;
 // FIXED:  </div>
 
  <button />
-// FIXED:  onClick={(e: any) => trimVideo(e)}
+// FIXED:  onClick={(e) => trimVideo(e)}
 // FIXED:  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
  >
  Apply Trim
@@ -406,12 +406,12 @@ return;
 // FIXED:  </div>
  );
 
- const renderTextPanel: any = () => (
+ const renderTextPanel = () => (
  <div className="space-y-4">
  <div className="flex items-center justify-between">
  <h3 className="font-medium text-gray-900 dark:text-white">Text Overlays</h3>
  <button />
-// FIXED:  onClick={(e: any) => addTextOverlay(e)}
+// FIXED:  onClick={(e) => addTextOverlay(e)}
 // FIXED:  className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
  >
  Add Text
@@ -434,7 +434,7 @@ return;
  {text.text}
 // FIXED:  </span>
  <button />
-// FIXED:  onClick={(e: any) => {
+// FIXED:  onClick={(e) => {
  e.stopPropagation();
  deleteTextOverlay(text.id);
  }
@@ -506,7 +506,7 @@ return null;
 // FIXED:  </div>
  );
 
- const renderFiltersPanel: any = () => (
+ const renderFiltersPanel = () => (
  <div className="space-y-4">
  <div className="flex items-center justify-between">
  <h3 className="font-medium text-gray-900 dark:text-white">Filters & Effects</h3>
@@ -611,7 +611,7 @@ return null;
  {/* Action Buttons */}
  <div className="space-y-3">
  <button />
-// FIXED:  onClick={(e: any) => exportVideo(e)}
+// FIXED:  onClick={(e) => exportVideo(e)}
 // FIXED:  disabled={isProcessing}
 // FIXED:  className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
  >
@@ -629,7 +629,7 @@ return null;
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => onCancel(e)}
+// FIXED:  onClick={(e) => onCancel(e)}
 // FIXED:  className="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
  >
  Cancel

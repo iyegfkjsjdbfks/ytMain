@@ -44,7 +44,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
  const previousActiveElement = useRef<HTMLElement | null>(null);
 
  // Size classes
- const getSizeClasses: any = () => {
+ const getSizeClasses = () => {
  switch (size as any) {
  case 'sm': return 'max-w-md';
  case 'lg': return 'max-w-4xl';
@@ -55,7 +55,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
  // Handle escape key
  useEffect(() => {
- const handleEscape: any = (event: KeyboardEvent) => {
+ const handleEscape = (event: KeyboardEvent) => {
  if (closeOnEscape && event.key === 'Escape') {
  onClose();
  };
@@ -89,7 +89,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
  }, [isOpen]);
 
  // Handle overlay click
- const handleOverlayClick: any = (event: React.MouseEvent) => {
+ const handleOverlayClick = (event: React.MouseEvent) => {
  if (closeOnOverlayClick && event.target === event.currentTarget) {
  onClose();
  };
@@ -101,8 +101,8 @@ return null;
  return (
  <div
 // FIXED:  className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`} />
-// FIXED:  onClick={(e: any) => handleOverlayClick(e)}
- onKeyDown={(e: any) => {
+// FIXED:  onClick={(e) => handleOverlayClick(e)}
+ onKeyDown={(e) => {
  if (e.key === 'Escape') {
  onClose();
  }
@@ -139,7 +139,7 @@ return null;
  )}
  {showCloseButton && (
  <button />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
 // FIXED:  aria-label="Close modal"
  >

@@ -62,13 +62,13 @@ const ChannelCustomizationPage: React.FC = () => {
  const [previewMode, setPreviewMode] = useState<boolean>(false);
  const [unsavedChanges, setUnsavedChanges] = useState<boolean>(false);
 
- const handleInputChange: any = (field: keyof ChannelBranding,
+ const handleInputChange = (field: keyof ChannelBranding,
  value: string | number) => {
  setBranding(prev => ({ ...prev as any, [field]: value }));
  setUnsavedChanges(true);
  };
 
- const handleSocialLinkChange: any = (platform: keyof ChannelBranding['socialLinks'],
+ const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'],
  value: string | number) => {
  setBranding(prev => ({
  ...prev as any,
@@ -76,7 +76,7 @@ const ChannelCustomizationPage: React.FC = () => {
  setUnsavedChanges(true);
  };
 
- const handleKeywordAdd: any = (keyword: any) => {
+ const handleKeywordAdd = (keyword) => {
  if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
  setBranding(prev => ({
  ...prev as any,
@@ -84,26 +84,26 @@ const ChannelCustomizationPage: React.FC = () => {
  setUnsavedChanges(true);
  };
 
- const handleKeywordRemove: any = (keyword: any) => {
+ const handleKeywordRemove = (keyword) => {
  setBranding(prev => ({
  ...prev as any,
- channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword) }));
+ channelKeywords: prev.channelKeywords.filter((k) => k !== keyword) }));
  setUnsavedChanges(true);
  };
 
- const handleSave: any = () => {
+ const handleSave = () => {
  // Simulate API call
  setUnsavedChanges(false);
  alert('Channel customization saved successfully!');
  };
 
- const handleDiscard: any = () => {
+ const handleDiscard = () => {
  // Reset to original state
  setUnsavedChanges(false);
  alert('Changes discarded');
  };
 
- const formatNumber: any = (num: any): string => {
+ const formatNumber = (num): string => {
  if (num >= 1000000) {
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {
@@ -133,14 +133,14 @@ const ChannelCustomizationPage: React.FC = () => {
  {unsavedChanges && (
  <div className="flex space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => handleDiscard(e)}
+// FIXED:  onClick={(e) => handleDiscard(e)}
 // FIXED:  className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600"
  >
  <XMarkIcon className="w-4 h-4 mr-2" />
  Discard
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleSave(e)}
+// FIXED:  onClick={(e) => handleSave(e)}
 // FIXED:  className="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700"
  >
  <CheckIcon className="w-4 h-4 mr-2" />
@@ -231,8 +231,8 @@ const ChannelCustomizationPage: React.FC = () => {
  const input = document.createElement('input');
  input.type = 'file';
  input.accept = 'image/*';
- input.onchange = (e: any) => {
- const file: any = (e.target as HTMLInputElement).files?.[0];
+ input.onchange = (e) => {
+ const file = (e.target as HTMLInputElement).files?.[0];
  if (file as any) {
  // Handle file upload
  };
@@ -267,8 +267,8 @@ const ChannelCustomizationPage: React.FC = () => {
  const input = document.createElement('input');
  input.type = 'file';
  input.accept = 'image/*';
- input.onchange = (e: any) => {
- const file: any = (e.target as HTMLInputElement).files?.[0];
+ input.onchange = (e) => {
+ const file = (e.target as HTMLInputElement).files?.[0];
  if (file as any) {
  // Handle file upload
  };
@@ -307,8 +307,8 @@ const ChannelCustomizationPage: React.FC = () => {
  const input = document.createElement('input');
  input.type = 'file';
  input.accept = 'image/*';
- input.onchange = (e: any) => {
- const file: any = (e.target as HTMLInputElement).files?.[0];
+ input.onchange = (e) => {
+ const file = (e.target as HTMLInputElement).files?.[0];
  if (file as any) {
  // Handle file upload
  };
@@ -419,7 +419,7 @@ const ChannelCustomizationPage: React.FC = () => {
  Channel Keywords
 // FIXED:  </label>
  <div className="flex flex-wrap gap-2 mb-2">
- {branding.channelKeywords.map((keyword: any) => (
+ {branding.channelKeywords.map((keyword) => (
  <span
  key={keyword}
 // FIXED:  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300" />
@@ -439,7 +439,7 @@ const ChannelCustomizationPage: React.FC = () => {
 // FIXED:  id="channel-keywords"
 // FIXED:  placeholder="Add a keyword and press Enter"
 // FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
- onKeyPress={(e: any) => {
+ onKeyPress={(e) => {
  if (e.key === 'Enter') {
  handleKeywordAdd(e.currentTarget.value);
  e.currentTarget.value = '';

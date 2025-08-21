@@ -1,10 +1,279 @@
 {
-  "timestamp": "2025-08-11T15:03:37.272Z",
-  "totalErrors": 0,
-  "errorsByType": {},
-  "errorsByFile": {},
-  "topFiles": [],
+  "timestamp": "2025-08-21T20:55:49.109Z",
+  "totalErrors": 72,
+  "errorsByType": {
+    "Syntax Errors - Expected comma/token": {
+      "code": "1005",
+      "count": 36,
+      "percentage": "50.0",
+      "priority": 1,
+      "examples": [
+        {
+          "message": "',' expected.",
+          "line": "pages/CreatorStudioPage.tsx(3,13): error TS1005: ',' expected.\r"
+        },
+        {
+          "message": "',' expected.",
+          "line": "pages/CreatorStudioPage.tsx(4,13): error TS1005: ',' expected.\r"
+        },
+        {
+          "message": "',' expected.",
+          "line": "pages/HomePage.tsx(2,13): error TS1005: ',' expected.\r"
+        },
+        {
+          "message": "',' expected.",
+          "line": "pages/HomePage.tsx(3,13): error TS1005: ',' expected.\r"
+        },
+        {
+          "message": "',' expected.",
+          "line": "pages/LoginPage.tsx(3,13): error TS1005: ',' expected.\r"
+        }
+      ],
+      "fixScript": "fix-malformed-type-annotations.js"
+    },
+    "TS1128": {
+      "code": "1128",
+      "count": 36,
+      "percentage": "50.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Declaration or statement expected.",
+          "line": "pages/CreatorStudioPage.tsx(2,1): error TS1128: Declaration or statement expected.\r"
+        },
+        {
+          "message": "Declaration or statement expected.",
+          "line": "pages/CreatorStudioPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+        },
+        {
+          "message": "Declaration or statement expected.",
+          "line": "pages/HomePage.tsx(1,1): error TS1128: Declaration or statement expected.\r"
+        },
+        {
+          "message": "Declaration or statement expected.",
+          "line": "pages/HomePage.tsx(8,1): error TS1128: Declaration or statement expected.\r"
+        },
+        {
+          "message": "Declaration or statement expected.",
+          "line": "pages/LoginPage.tsx(2,1): error TS1128: Declaration or statement expected.\r"
+        }
+      ],
+      "fixScript": null
+    }
+  },
+  "errorsByFile": {
+    "pages/CreatorStudioPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/CreatorStudioPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/CreatorStudioPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/CreatorStudioPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/CreatorStudioPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/HomePage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/HomePage.tsx(1,1): error TS1128: Declaration or statement expected.\r",
+        "pages/HomePage.tsx(2,13): error TS1005: ',' expected.\r",
+        "pages/HomePage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/HomePage.tsx(8,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/LoginPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/LoginPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/LoginPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/LoginPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/LoginPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/MonetizationPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/MonetizationPage.tsx(1,1): error TS1128: Declaration or statement expected.\r",
+        "pages/MonetizationPage.tsx(2,13): error TS1005: ',' expected.\r",
+        "pages/MonetizationPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/MonetizationPage.tsx(8,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/PlaylistManagerPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/PlaylistManagerPage.tsx(3,1): error TS1128: Declaration or statement expected.\r",
+        "pages/PlaylistManagerPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/PlaylistManagerPage.tsx(5,13): error TS1005: ',' expected.\r",
+        "pages/PlaylistManagerPage.tsx(10,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/RefactoredContentManagerPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/RefactoredContentManagerPage.tsx(1,1): error TS1128: Declaration or statement expected.\r",
+        "pages/RefactoredContentManagerPage.tsx(2,13): error TS1005: ',' expected.\r",
+        "pages/RefactoredContentManagerPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/RefactoredContentManagerPage.tsx(8,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/RegisterPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/RegisterPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/RegisterPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/RegisterPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/RegisterPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/ShortsPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/ShortsPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/ShortsPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/ShortsPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/ShortsPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/StudioDashboardPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/StudioDashboardPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/StudioDashboardPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/StudioDashboardPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/StudioDashboardPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/SubscriptionsPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/SubscriptionsPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/SubscriptionsPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/SubscriptionsPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/SubscriptionsPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/UploadPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/UploadPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/UploadPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/UploadPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/UploadPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/UserPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/UserPage.tsx(2,1): error TS1128: Declaration or statement expected.\r",
+        "pages/UserPage.tsx(3,13): error TS1005: ',' expected.\r",
+        "pages/UserPage.tsx(4,13): error TS1005: ',' expected.\r",
+        "pages/UserPage.tsx(9,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "pages/VideoEditorPage.tsx": {
+      "count": 4,
+      "errors": [
+        "pages/VideoEditorPage.tsx(13,1): error TS1128: Declaration or statement expected.\r",
+        "pages/VideoEditorPage.tsx(14,13): error TS1005: ',' expected.\r",
+        "pages/VideoEditorPage.tsx(15,13): error TS1005: ',' expected.\r",
+        "pages/VideoEditorPage.tsx(20,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "src/components/YouTubePlayer.tsx": {
+      "count": 4,
+      "errors": [
+        "src/components/YouTubePlayer.tsx(4,1): error TS1128: Declaration or statement expected.\r",
+        "src/components/YouTubePlayer.tsx(5,13): error TS1005: ',' expected.\r",
+        "src/components/YouTubePlayer.tsx(6,13): error TS1005: ',' expected.\r",
+        "src/components/YouTubePlayer.tsx(11,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "src/types/common.ts": {
+      "count": 4,
+      "errors": [
+        "src/types/common.ts(3,1): error TS1128: Declaration or statement expected.\r",
+        "src/types/common.ts(4,13): error TS1005: ',' expected.\r",
+        "src/types/common.ts(5,13): error TS1005: ',' expected.\r",
+        "src/types/common.ts(10,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "test/integration/CommunityPage.test.tsx": {
+      "count": 4,
+      "errors": [
+        "test/integration/CommunityPage.test.tsx(1,1): error TS1128: Declaration or statement expected.\r",
+        "test/integration/CommunityPage.test.tsx(2,13): error TS1005: ',' expected.\r",
+        "test/integration/CommunityPage.test.tsx(3,13): error TS1005: ',' expected.\r",
+        "test/integration/CommunityPage.test.tsx(8,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "types/strictTypes.ts": {
+      "count": 4,
+      "errors": [
+        "types/strictTypes.ts(3,1): error TS1128: Declaration or statement expected.\r",
+        "types/strictTypes.ts(4,13): error TS1005: ',' expected.\r",
+        "types/strictTypes.ts(5,13): error TS1005: ',' expected.\r",
+        "types/strictTypes.ts(10,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    },
+    "types/unifiedTypes.ts": {
+      "count": 4,
+      "errors": [
+        "types/unifiedTypes.ts(3,1): error TS1128: Declaration or statement expected.\r",
+        "types/unifiedTypes.ts(4,13): error TS1005: ',' expected.\r",
+        "types/unifiedTypes.ts(5,13): error TS1005: ',' expected.\r",
+        "types/unifiedTypes.ts(10,1): error TS1128: Declaration or statement expected.\r"
+      ]
+    }
+  },
+  "topFiles": [
+    {
+      "file": "pages/CreatorStudioPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/HomePage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/LoginPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/MonetizationPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/PlaylistManagerPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/RefactoredContentManagerPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/RegisterPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/ShortsPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/StudioDashboardPage.tsx",
+      "errorCount": 4
+    },
+    {
+      "file": "pages/SubscriptionsPage.tsx",
+      "errorCount": 4
+    }
+  ],
   "recommendations": [
-    "🎉 No TypeScript errors found! The codebase is clean."
+    "🔧 Run fixes in this priority order:",
+    "1. Fix Syntax Errors - Expected comma/token (36 errors) - npm run node scripts/fix-malformed-type-annotations.js",
+    "\n📁 Files with most errors:",
+    "   • pages/CreatorStudioPage.tsx: 4 errors",
+    "   • pages/HomePage.tsx: 4 errors",
+    "   • pages/LoginPage.tsx: 4 errors",
+    "\n⚡ Strategy: Focus on high-priority errors first"
   ]
 }

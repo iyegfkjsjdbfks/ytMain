@@ -22,7 +22,7 @@ const DEFAULT_OPTIONS: UseAnalyticsOptions = {
  trackScrollDepth: false,
  trackTimeOnPage: false };
 
-export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
+export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
  const opts = { ...DEFAULT_OPTIONS as any, ...options };
  const location = useLocation();
  const pageStartTime = useRef<number>(Date.now());
@@ -50,7 +50,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  return;
  }
 
- const handleBeforeUnload: any = () => {
+ const handleBeforeUnload = () => {
  const timeOnPage = Date.now() - pageStartTime.current;
  analyticsService.track(
  'time_on_page',
@@ -72,7 +72,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  return;
  }
 
- const handleScroll: any = () => {
+ const handleScroll = () => {
  const scrollTop =
  window.pageYOffset || document.documentElement.scrollTop;
  const documentHeight =
@@ -114,7 +114,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  return;
  }
 
- const handleClick: any = (event: MouseEvent) => {
+ const handleClick = (event: MouseEvent) => {
  const target = event.target as HTMLElement;
  const tagName = target.tagName.toLowerCase();
  const { className } = target;
@@ -145,7 +145,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  // Analytics methods
  const track = useCallback(
  (,
- eventName: any,
+ eventName,
  properties?: Record<string, any>
  category?: AnalyticsEvent['category']
  ) => {
@@ -172,7 +172,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  );
 
  const trackVideoEvent = useCallback(
- (action: any, videoId: any, properties?: Record<string, any>) => {
+ (action, videoId, properties?: Record<string, any>) => {
  analyticsService.trackVideoEvent(action, videoId, {
  ...properties as any,
  componentName: opts.componentName,
@@ -181,12 +181,12 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  [location.pathname, opts.componentName]
  );
 
- const trackSearch = useCallback((query: any, results?: number) => {
+ const trackSearch = useCallback((query, results?: number) => {
  analyticsService.trackSearch(query, results);
  }, []);
 
  const trackEngagement = useCallback(
- (type: any, properties?: Record<string, any>) => {
+ (type, properties?: Record<string, any>) => {
  analyticsService.trackEngagement(type, {
  ...properties as any,
  componentName: opts.componentName,
@@ -198,7 +198,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  const trackAsyncAction = useCallback(
  async <T>(,
  action: () => Promise<T>,
- actionName: any,
+ actionName,
  properties?: Record<string, any>
  ): Promise<T> => {
  const startTime = Date.now();
@@ -212,7 +212,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  ...properties });
 
  return result;
- } catch (error: any) {
+ } catch (error) {
  const duration = Date.now() - startTime;
 
  track(`${actionName}_error`, {
@@ -229,7 +229,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
  const trackFunction = useCallback(
  <T extends any, R>(,
  fn: (...args: T) => R,
- functionName: any,
+ functionName,
  properties?: Record<string, any>
  ) => {
  return measureFunction((...args: T) => {
@@ -253,7 +253,7 @@ export const useAnalytics: any = (options: UseAnalyticsOptions = {}) => {
 };
 
 // Hook for video analytics
-export const useVideoAnalytics: any = (videoId?: string) => {
+export const useVideoAnalytics = (videoId?: string) => {
  const { trackVideoEvent } = useAnalytics();
  const watchStartTime = useRef<number | null>(null);
  const lastProgressUpdate = useRef<number>(0);
@@ -283,7 +283,7 @@ export const useVideoAnalytics: any = (videoId?: string) => {
  [trackVideoEvent, videoId]
  );
 
- const trackProgress = useCallback((currentTime: any, duration: any) => {
+ const trackProgress = useCallback((currentTime, duration) => {
  const progressPercentage = Math.round((currentTime / duration) * 100);
 
  // Track progress milestones
@@ -305,7 +305,7 @@ export const useVideoAnalytics: any = (videoId?: string) => {
  [trackVideoEvent, videoId]
  );
 
- const trackSeek = useCallback((fromTime: any, toTime: any) => {
+ const trackSeek = useCallback((fromTime, toTime) => {
  trackVideoEvent('seek', videoId || '', {
  fromTime,
  toTime,
@@ -314,7 +314,7 @@ export const useVideoAnalytics: any = (videoId?: string) => {
  [trackVideoEvent, videoId]
  );
 
- const trackComplete = useCallback((duration: any) => {
+ const trackComplete = useCallback((duration) => {
  const totalWatchTime = watchedSegments.current.reduce(
  (total, segment) => total + (segment.end - segment.start),
  0
@@ -337,7 +337,7 @@ export const useVideoAnalytics: any = (videoId?: string) => {
  [trackVideoEvent, videoId]
  );
 
- const trackQualityChange = useCallback((quality: any) => {
+ const trackQualityChange = useCallback((quality) => {
  trackVideoEvent('quality_change', videoId || '', {
  quality,
  timestamp: Date.now() });
@@ -345,7 +345,7 @@ export const useVideoAnalytics: any = (videoId?: string) => {
  [trackVideoEvent, videoId]
  );
 
- const trackVolumeChange = useCallback((volume: any, muted: any) => {
+ const trackVolumeChange = useCallback((volume, muted) => {
  trackVideoEvent('volume_change', videoId || '', {
  volume,
  muted,
@@ -354,7 +354,7 @@ export const useVideoAnalytics: any = (videoId?: string) => {
  [trackVideoEvent, videoId]
  );
 
- const trackFullscreen = useCallback((isFullscreen: any) => {
+ const trackFullscreen = useCallback((isFullscreen) => {
  trackVideoEvent(
  isFullscreen ? 'fullscreen_enter' : 'fullscreen_exit',
  videoId || '',
@@ -378,7 +378,7 @@ export const useVideoAnalytics: any = (videoId?: string) => {
 };
 
 // Hook for form analytics
-export const useFormAnalytics: any = (formName: any) => {
+export const useFormAnalytics = (formName) => {
  const { track } = useAnalytics();
  const formStartTime = useRef<number | null>(null);
  const fieldInteractions = useRef<Record<string, number>>({});
@@ -389,7 +389,7 @@ export const useFormAnalytics: any = (formName: any) => {
  }, [track, formName]);
 
  const trackFormSubmit = useCallback(
- (success: any, errors?: string) => {
+ (success, errors?: string) => {
  const duration = formStartTime.current
  ? Date.now() - formStartTime.current
  : 0;
@@ -404,7 +404,7 @@ export const useFormAnalytics: any = (formName: any) => {
  [track, formName]
  );
 
- const trackFieldInteraction = useCallback((fieldName: any) => {
+ const trackFieldInteraction = useCallback((fieldName) => {
  fieldInteractions.current[fieldName] =
  (fieldInteractions.current[fieldName] || 0) + 1;
 
@@ -441,10 +441,10 @@ export const useFormAnalytics: any = (formName: any) => {
 // Utility function for throttling
 function throttle<T extends (...args) => any>(,
  func: T,
- limit: any
+ limit
 ): (...args: Parameters<T>) => void {
  let inThrottle: boolean;
- return function (this: any, ...args: Parameters<T>) {
+ return function (this, ...args: Parameters<T>) {
  if (!inThrottle) {
  func.apply(this, args);
  inThrottle = true;

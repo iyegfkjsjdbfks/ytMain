@@ -12,7 +12,7 @@ interface AuthStore extends AuthState {
  checkAuth: () => Promise<void>;
  setUser: (user: User | null) => void;
  setError: (error: string | null) => void;
- setLoading: (isLoading: any) => void
+ setLoading: (isLoading) => void
 }
 
 /**
@@ -43,7 +43,7 @@ export const useAuthStore = create<AuthStore>(set => ({
  const user = await authService.login(credentials);
  set({ user, isAuthenticated: true, isLoading: false });
  return user;
- } catch (error: any) {
+ } catch (error) {
  const errorMessage =
  error instanceof Error ? error.message : 'Failed to login';
  set({ error: errorMessage, isLoading: false });
@@ -58,7 +58,7 @@ export const useAuthStore = create<AuthStore>(set => ({
  const user = await authService.register(data);
  set({ user, isAuthenticated: true, isLoading: false });
  return user;
- } catch (error: any) {
+ } catch (error) {
  const errorMessage =
  error instanceof Error ? error.message : 'Failed to register';
  set({ error: errorMessage, isLoading: false });
@@ -85,7 +85,7 @@ export const useAuthStore = create<AuthStore>(set => ({
  user,
  isAuthenticated: !!user,
  isLoading: false });
- } catch (error: any) {
+ } catch (error) {
  logger.error('Auth check failed:', error);
  set({
  user: null,

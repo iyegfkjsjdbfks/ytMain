@@ -6,10 +6,10 @@ import type { Comment } from '../../types/core';
 
 interface VirtualizedCommentListProps {
  comments: Comment;
- onReply: (commentId: any,
- content: any) => void;
- onLike: (commentId: any) => void;
- onDislike: (commentId: any) => void;
+ onReply: (commentId,
+ content) => void;
+ onLike: (commentId) => void;
+ onDislike: (commentId) => void;
  className?: string;
  height?: number;
  itemHeight?: number;
@@ -20,10 +20,10 @@ interface CommentItemProps {
  style: React.CSSProperties;
  data: {
  comments: Comment;
- onReply: (commentId: any,
- content: any) => void;
- onLike: (commentId: any) => void;
- onDislike: (commentId: any) => void
+ onReply: (commentId,
+ content) => void;
+ onLike: (commentId) => void;
+ onDislike: (commentId) => void
  }
 const CommentItem = memo<CommentItemProps>(({ index, style, data }: any) => {
  const { comments, onReply, onLike, onDislike } = data;
@@ -81,20 +81,20 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }: any) => {
 // FIXED:  </p>
  <div className='flex items-center space-x-4 mt-2'>
  <button />
-// FIXED:  onClick={(e: any) => handleLike(e)}
+// FIXED:  onClick={(e) => handleLike(e)}
 // FIXED:  className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
  >
  <span>👍</span>
  <span>{comment.likeCount || 0}</span>
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleDislike(e)}
+// FIXED:  onClick={(e) => handleDislike(e)}
 // FIXED:  className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
  >
  <span>👎</span>
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleReply(e)}
+// FIXED:  onClick={(e) => handleReply(e)}
 // FIXED:  className='text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
  >
  Reply

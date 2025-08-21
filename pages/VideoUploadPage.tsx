@@ -36,7 +36,7 @@ const VideoUploadPage: React.FC = () => {
  'Education', 'Science & Technology', 'Comedy', 'Film & Animation',
  'Howto & Style', 'Travel & Events', 'Pets & Animals'];
 
- const validateForm: any = (): boolean => {
+ const validateForm = (): boolean => {
  const newErrors: Record<string, string> = {};
 
  if (!uploadData.title.trim()) {
@@ -51,7 +51,7 @@ const VideoUploadPage: React.FC = () => {
  return Object.keys(newErrors).length === 0;
  };
 
- const handleFileSelect: any = (file: File) => {
+ const handleFileSelect = (file: File) => {
  const isShorts = file.size < 100 * 1024 * 1024; // Less than 100MB considered Shorts
  setUploadData(prev => ({
  ...prev as any,
@@ -83,7 +83,7 @@ const VideoUploadPage: React.FC = () => {
  }
  }, []);
 
- const handleAddTag: any = () => {
+ const handleAddTag = () => {
  if (tagInput.trim() && !uploadData.tags.includes(tagInput.trim())) {
  setUploadData(prev => ({
  ...prev as any,
@@ -91,10 +91,10 @@ const VideoUploadPage: React.FC = () => {
  setTagInput('');
  };
 
- const handleRemoveTag: any = (tagToRemove: any) => {
+ const handleRemoveTag = (tagToRemove) => {
  setUploadData(prev => ({
  ...prev as any,
- tags: prev.tags.filter((tag: string) => tag !== tagToRemove) }));
+ tags: prev.tags.filter((tag) => tag !== tagToRemove) }));
  };
 
  const handleSubmit = async (e: React.FormEvent): Promise<any> => {
@@ -108,7 +108,7 @@ return;
  setProgress({ percentage: 0,
  status: 'uploading', message: 'Starting upload...' });
 
- await uploadVideo(uploadData(progressData: any) => {
+ await uploadVideo(uploadData(progressData) => {
  setProgress(progressData);
  });
 
@@ -118,7 +118,7 @@ return;
  setTimeout((() => {
  navigate('/');
  }) as any, 2000);
- } catch (error: any) {
+ } catch (error) {
  setProgress({
  percentage: 0,
  status: 'error',
@@ -133,7 +133,7 @@ return;
  Upload Video
 // FIXED:  </h1>
 
- <form onSubmit={(e: any) => handleSubmit(e)} className="space-y-6">
+ <form onSubmit={(e) => handleSubmit(e)} className="space-y-6">
  {/* Video Upload Area */}
  <div className="space-y-2">
  <label htmlFor="video-file" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -203,7 +203,7 @@ return;
  ref={fileInputRef}
 // FIXED:  type="file"
  accept="video/*" />
-// FIXED:  onChange={(e: any) => {
+// FIXED:  onChange={(e) => {
  const file = e.target.files?.[0];
  if (file as any) {
 handleFileSelect(file);
@@ -225,7 +225,7 @@ handleFileSelect(file);
  <input
 // FIXED:  type="text"
 // FIXED:  value={uploadData.title} />
-// FIXED:  onChange={(e: any) => {
+// FIXED:  onChange={(e) => {
  setUploadData(prev => ({ ...prev as any, title: e.target.value }));
  setErrors(prev => ({ ...prev as any, title: '' }));
  }
@@ -286,7 +286,7 @@ handleFileSelect(file);
  ref={thumbnailInputRef}
 // FIXED:  type="file"
  accept="image/*" />
-// FIXED:  onChange={(e: any) => {
+// FIXED:  onChange={(e) => {
  const file = e.target.files?.[0];
  if (file as any) {
  setUploadData(prev => ({ ...prev as any, thumbnailFile: file }));
@@ -307,7 +307,7 @@ handleFileSelect(file);
 // FIXED:  onChange={(e) => setUploadData(prev => ({ ...prev as any, category: e.target.value }))}
 // FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  >
- {categories.map((category: any) => (
+ {categories.map((category) => (
  <option key={category} value={category}>{category}</option>
  ))}
 // FIXED:  </select>
@@ -340,7 +340,7 @@ handleFileSelect(file);
 // FIXED:  type="text"
 // FIXED:  value={tagInput} />
 // FIXED:  onChange={(e) => setTagInput(e.target.value)}
- onKeyPress={(e: any) => {
+ onKeyPress={(e) => {
  if (e.key === 'Enter') {
  e.preventDefault();
  handleAddTag();
@@ -351,7 +351,7 @@ handleFileSelect(file);
  />
  <button
 // FIXED:  type="button" />
-// FIXED:  onClick={(e: any) => handleAddTag(e)}
+// FIXED:  onClick={(e) => handleAddTag(e)}
 // FIXED:  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
  >
  Add
@@ -360,8 +360,8 @@ handleFileSelect(file);
 
  {uploadData.tags.length > 0 && (
  <div className="flex flex-wrap gap-2 mt-2">
- {uploadData.tags.map((tag: string,
- index: number) => (
+ {uploadData.tags.map((tag,
+ index) => (
  <span
  key={index}
 // FIXED:  className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm" />

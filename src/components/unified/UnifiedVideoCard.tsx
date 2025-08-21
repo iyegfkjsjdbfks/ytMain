@@ -27,10 +27,10 @@ export interface UnifiedVideoCardProps {
  showDate?: boolean;
  isLiked?: boolean;
  isSaved?: boolean;
- onLike?: (videoId: any) => void;
+ onLike?: (videoId) => void;
  onSave?: (video: Video) => void;
  onShare?: (video: Video) => void;
- onChannelClick?: (channelName: any) => void;
+ onChannelClick?: (channelName) => void;
  className?: string;
  keyPrefix?: string;
 }
@@ -129,31 +129,31 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  const videoUrl = `/watch?v=${video.id}`;
  const channelUrl = `/channel/${encodeURIComponent(video.channelName)}`;
 
- const handleLike: any = (e: React.MouseEvent) => {
+ const handleLike = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  onLike?.(video.id);
  };
 
- const handleSave: any = (e: React.MouseEvent) => {
+ const handleSave = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  onSave?.(video);
  };
 
- const handleShare: any = (e: React.MouseEvent) => {
+ const handleShare = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  onShare?.(video);
  };
 
- const handleChannelClick: any = (e: React.MouseEvent) => {
+ const handleChannelClick = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  onChannelClick?.(video.channelName);
  };
 
- const ThumbnailContent: any = () => (
+ const ThumbnailContent = () => (
  <div
 // FIXED:  className={cn(
  'relative group overflow-hidden',
@@ -211,7 +211,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  <UnifiedButton
  variant='ghost'
  size='xs' />
-// FIXED:  onClick={(e: any) => handleLike(e)}
+// FIXED:  onClick={(e) => handleLike(e)}
 // FIXED:  className='bg-black/50 text-white hover:bg-black/70'
  >
  {isLiked ? (
@@ -224,7 +224,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  <UnifiedButton
  variant='ghost'
  size='xs' />
-// FIXED:  onClick={(e: any) => handleSave(e)}
+// FIXED:  onClick={(e) => handleSave(e)}
 // FIXED:  className='bg-black/50 text-white hover:bg-black/70'
  >
  <BookmarkIcon
@@ -235,7 +235,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  <UnifiedButton
  variant='ghost'
  size='xs' />
-// FIXED:  onClick={(e: any) => handleShare(e)}
+// FIXED:  onClick={(e) => handleShare(e)}
 // FIXED:  className='bg-black/50 text-white hover:bg-black/70'
  >
  <ShareIcon className='w-4 h-4' />
@@ -246,7 +246,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
 // FIXED:  </div>
  );
 
- const ContentSection: any = () => (
+ const ContentSection = () => (
  <div className={styles.content}>
  {/* Channel Avatar (for default and list variants) */}
  {showChannel &&
@@ -254,7 +254,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  (variant === 'default' || variant === 'list') && (
  <Link
  to={channelUrl} />
-// FIXED:  onClick={(e: any) => handleChannelClick(e)}
+// FIXED:  onClick={(e) => handleChannelClick(e)}
 // FIXED:  className='flex-shrink-0'
  >
  <img
@@ -284,7 +284,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(
  {showChannel && (
  <Link
  to={channelUrl} />
-// FIXED:  onClick={(e: any) => handleChannelClick(e)}
+// FIXED:  onClick={(e) => handleChannelClick(e)}
 // FIXED:  className={cn(
  styles.meta,
  'hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors'

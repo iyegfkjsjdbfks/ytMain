@@ -8,13 +8,13 @@ interface FormContextValue {
  errors: Record<string, string>;
  touched: Record<string, boolean>;
  values: Record<string, any>;
- setFieldValue: (name: any,
+ setFieldValue: (name,
  value: string | number) => void;
- setFieldError: (name: any,
+ setFieldError: (name,
  error: Error) => void;
- setFieldTouched: (name: any,
- touched: any) => void;
- validateField: (name: any) => void
+ setFieldTouched: (name,
+ touched) => void;
+ validateField: (name) => void
 }
 
 const FormContext = createContext<FormContextValue | null>(null);
@@ -35,7 +35,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
  const [errors, setErrors] = useState<Record<string, string>>({});
  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
- const setFieldValue = useCallback((name: any,
+ const setFieldValue = useCallback((name,
  value: string | number) => {
  setValues(prev => ({ ...prev as any, [name]: value }));
  // Clear error when user starts typing
@@ -44,17 +44,17 @@ export const FormProvider: React.FC<FormProviderProps> = ({
  }
  }, [errors]);
 
- const setFieldError = useCallback((name: any,
+ const setFieldError = useCallback((name,
  error: Error) => {
  setErrors(prev => ({ ...prev as any, [name]: error }));
  }, []);
 
- const setFieldTouched = useCallback((name: any,
- touched: any) => {
+ const setFieldTouched = useCallback((name,
+ touched) => {
  setTouched(prev => ({ ...prev as any, [name]: touched }));
  }, []);
 
- const validateField = useCallback((name: any) => {
+ const validateField = useCallback((name) => {
  const validator = validationSchema[name];
  if (validator as any) {
  const error = validator(values[name]);
@@ -80,7 +80,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
 };
 
 // Hook to use form context
-export const useFormContext: any = () => {
+export const useFormContext = () => {
  const context = useContext<any>(FormContext);
  if (!context) {
  throw new Error('useFormContext must be used within a FormProvider');
@@ -201,7 +201,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
  'pr-10': rightIcon },
  className);
 
- const input: any = (
+ const input = (
  <div className="relative">
  {leftIcon && (
  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -216,7 +216,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
 // FIXED:  id={name}
 // FIXED:  name={name}
 // FIXED:  value={value} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
  onBlur={handleBlur}
 // FIXED:  className={inputClasses}
  />
@@ -309,13 +309,13 @@ export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
  'border-red-500 focus:border-red-500 focus:ring-red-500': error },
  className);
 
- const textarea: any = (
+ const textarea = (
  <textarea
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
 // FIXED:  value={value} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
  onBlur={handleBlur}
 // FIXED:  className={textareaClasses}
  />
@@ -390,14 +390,14 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
  'border-red-500 focus:border-red-500 focus:ring-red-500': error },
  className);
 
- const select: any = (
+ const select = (
  <div className="relative">
  <select
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
 // FIXED:  value={value} />
-// FIXED:  onChange={(e: any) => handleChange(e)}
+// FIXED:  onChange={(e) => handleChange(e)}
  onBlur={handleBlur}
 // FIXED:  className={selectClasses}
 // FIXED:  style={{
@@ -467,7 +467,7 @@ return;
  // Get form data from context would be handled here
  // For now, we'll pass empty object
  await onSubmit({});
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Form submission error:', error);
  } finally {
  setIsSubmitting(false);
@@ -480,7 +480,7 @@ return;
  {...(validationSchema && { validationSchema })} />
  >
  <form />
-// FIXED:  onSubmit={(e: any) => handleSubmit(e)}
+// FIXED:  onSubmit={(e) => handleSubmit(e)}
 // FIXED:  className={cn('space-y-6', className)}
  noValidate
  >

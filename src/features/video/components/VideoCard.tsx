@@ -14,8 +14,7 @@ interface VideoCardProps {
  * VideoCard component displays a video thumbnail with metadata
  * Can be displayed in different variants: default, compact, or studio
  */
-const VideoCard: React.FC<VideoCardProps> = React.memo(
- ({ video, variant = 'default', onClick }: any) => {
+const VideoCard: React.FC<VideoCardProps> = React.memo(({ video, variant = 'default', onClick }) => {
  const {
  id,
  title,
@@ -32,7 +31,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
  commentCount,
  publishedAt } = video;
 
- const handleClick: any = () => {
+ const handleClick = () => {
  if (onClick as any) {
  onClick(video);
  };
@@ -65,7 +64,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
  ? `${(commentCount / 1000).toFixed(1)}K`
  : commentCount?.toString() || '0';
 
- const formatDuration: any = (seconds: any) => {
+ const formatDuration = (seconds) => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  const remainingSeconds = seconds % 60;
@@ -81,7 +80,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
  return (
  <div
 // FIXED:  className='flex space-x-2 mb-2 hover:bg-gray-100 rounded p-1 cursor-pointer' />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  >
  <div className='relative flex-shrink-0 w-40 h-24'>
  <Link to={`/watch/${id}`}>
@@ -150,7 +149,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
  return (
  <div
 // FIXED:  className='border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer' />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  >
  <div className='flex p-3'>
  <div className='relative w-40 h-24 flex-shrink-0'>

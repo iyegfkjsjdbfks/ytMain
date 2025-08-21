@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, FC } from 'react';
 interface LiveStreamViewerProps {
  streamId: string;
  autoplay?: boolean;
- onViewerCountChange?: (count: any) => void
+ onViewerCountChange?: (count) => void
 }
 
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
@@ -28,7 +28,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
  setViewerCount(Math.floor(Math.random() * 1000));
  setIsLoading(false);
- } catch (err: any) {
+ } catch (err) {
  setError((err as Error).message);
  setIsLoading(false);
  };

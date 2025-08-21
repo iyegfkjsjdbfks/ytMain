@@ -14,7 +14,7 @@ interface RecommendationEngineProps {
  currentVideo?: Video;
  currentVideoId?: string;
  maxRecommendations?: number;
- onVideoSelect?: (videoId: any) => void
+ onVideoSelect?: (videoId) => void
 }
 
 const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
@@ -84,7 +84,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  const titleWords = currentVideo.title
  .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special characters
  .split(' ')
- .filter((word: any) =>
+ .filter((word) =>
  word.length > 3 &&
  !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase()))
  .slice(0, 3); // Take first 3 meaningful words
@@ -130,8 +130,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  isLive: false, // GoogleSearchResult doesn't have isLive property,
  commentCount: googleVideo.commentCount || 0,
  // Required Video interface properties,
- visibility: 'public' as const,
- createdAt: new Date().toISOString(),
+ visibility: 'public' as const createdAt: new Date().toISOString(),
  updatedAt: new Date().toISOString() }));
  } else {
  // Get trending videos using Google Custom Search
@@ -162,8 +161,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  isLive: false, // GoogleSearchResult doesn't have isLive property,
  commentCount: googleVideo.commentCount || 0,
  // Required Video interface properties,
- visibility: 'public' as const,
- createdAt: new Date().toISOString(),
+ visibility: 'public' as const createdAt: new Date().toISOString(),
  updatedAt: new Date().toISOString() }));
  }
 
@@ -172,7 +170,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  // Fallback to local videos only if Google Custom Search fails
  if (recommendedVideos.length === 0) {
  (console as any).log('⚠️ No results from Google Custom Search, falling back to local videos');
- const availableVideos = realVideos.filter((video: any) =>
+ const availableVideos = realVideos.filter((video) =>
  !activeVideoId || video.id !== activeVideoId);
  recommendedVideos = availableVideos.slice(0, maxRecommendations);
  } else {
@@ -181,7 +179,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  } else {
  // Fallback to real videos with basic recommendation logic
  (console as any).log('Using fallback recommendation system');
- const availableVideos = realVideos.filter((video: any) =>
+ const availableVideos = realVideos.filter((video) =>
  !activeVideoId || video.id !== activeVideoId);
 
  // Simple recommendation logic - prioritize similar categories if available
@@ -196,7 +194,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
  // Fill remaining slots with other videos
  if (recommended.length < maxRecommendations) {
- const remaining = availableVideos.filter((video: any) => !recommended.find((r: any) => r.id === video.id));
+ const remaining = availableVideos.filter((video) => !recommended.find((r) => r.id === video.id));
  recommended = [...recommended as any, ...remaining];
  }
 
@@ -206,11 +204,11 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  }
 
  setRecommendations(recommendedVideos);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error generating recommendations:', error);
 
  // Fallback to real videos in case of error
- const availableVideos = realVideos.filter((video: any) =>
+ const availableVideos = realVideos.filter((video) =>
  !activeVideoId || video.id !== activeVideoId);
  const fallbackVideos = availableVideos.slice(0, maxRecommendations);
  setRecommendations(fallbackVideos);

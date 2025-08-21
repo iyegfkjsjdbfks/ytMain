@@ -86,7 +86,7 @@ export const listOptimizations = {
  /**
  * Generate stable keys for list items
  */,
- generateKey: (item: any, index: number, prefix = 'item: any'): string => {
+ generateKey: (item, index, prefix = 'item'): string => {
  if (item.id) {
 return `${prefix}-${item.id}`;
 }
@@ -99,7 +99,7 @@ return `${prefix}-${item.key}`;
  /**
  * Chunk large arrays for better performance
  */,
- chunkArray: <T>(array: T, chunkSize: any): T[][] => {
+ chunkArray: <T>(array: T, chunkSize): T[][] => {
  const chunks: T[][] = [];
  for (let i = 0; i < array.length; i += chunkSize) {
  chunks.push(array.slice(i, i + chunkSize));
@@ -115,7 +115,7 @@ export const componentPerformance = {
  * HOC to measure component render time
  */,
  withRenderTime: <P extends object>(Component: ComponentType<P> _name?: string) => {
- return forwardRef<any, P>((props: any, ref: any) => {
+ return forwardRef<any, P>((props, ref) => {
  useEffect(() => {
  // Performance monitoring disabled
  // const startTime = performance.now();
@@ -156,7 +156,7 @@ export const bundleOptimizations = {
  dynamicImport: async <T>(importFunc: () => Promise<T>): Promise<T | null> => {
  try {
  return await importFunc();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Dynamic import failed:', error);
  return null;
  }

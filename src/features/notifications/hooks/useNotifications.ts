@@ -111,7 +111,7 @@ export function useNotifications(): any {
 
  // Calculate unread count
  const unreadCount = Array.isArray(notifications)
- ? notifications.filter((n: any) => !n.isRead).length
+ ? notifications.filter((n) => !n.isRead).length
  : 0;
 
  return {

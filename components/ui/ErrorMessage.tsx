@@ -32,7 +32,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
  inline: 'text-red-500',
  card: 'text-red-500' };
 
- const handleClick: any = (e: React.MouseEvent) => {
+ const handleClick = (e: React.MouseEvent) => {
  if (onRetry as any) {
  e.stopPropagation();
  onRetry();
@@ -41,7 +41,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
  return (
  <div
 // FIXED:  className={`${variantClasses[variant]} ${className}`} />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  role="alert"
  >
  <div className="text-center">

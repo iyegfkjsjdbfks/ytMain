@@ -5,7 +5,7 @@
 /**
  * Format duration from seconds to MM:SS or HH:MM:SS format
  */
-export const formatDuration: any = (seconds: any): string => {
+export const formatDuration = (seconds): string => {
  if (isNaN(seconds) || seconds < 0) {
 return '0: 00'
 }
@@ -24,7 +24,7 @@ return '0: 00'
 /**
  * Format view count with appropriate suffixes (K, M, B)
  */
-export const formatViews: any = (views: any): string => {
+export const formatViews = (views): string => {
  if (isNaN(views) || views < 0) {
 return '0';
 }
@@ -34,23 +34,23 @@ return '0';
  }
 
  if (views < 1000000) {
- const formatted: any = (views / 1000).toFixed(1);
+ const formatted = (views / 1000).toFixed(1);
  return `${formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted}K`;
  }
 
  if (views < 1000000000) {
- const formatted: any = (views / 1000000).toFixed(1);
+ const formatted = (views / 1000000).toFixed(1);
  return `${formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted}M`;
  }
 
- const formatted: any = (views / 1000000000).toFixed(1);
+ const formatted = (views / 1000000000).toFixed(1);
  return `${formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted}B`;
 };
 
 /**
  * Format upload date to relative time (e.g., "2 hours ago", "3 days ago")
  */
-export const formatTimeAgo: any = (dateString: any): string => {
+export const formatTimeAgo = (dateString): string => {
  try {
  const date = new Date(dateString);
  const now = new Date();
@@ -87,7 +87,7 @@ export const formatTimeAgo: any = (dateString: any): string => {
 
  const diffInYears = Math.floor(diffInDays / 365);
  return `${diffInYears} year${diffInYears === 1 ? '' : 's'} ago`;
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error formatting date:', error);
  return 'Unknown';
  };
@@ -95,7 +95,7 @@ export const formatTimeAgo: any = (dateString: any): string => {
 /**
  * Format file size in bytes to human readable format
  */
-export const formatFileSize: any = (bytes: any): string => {
+export const formatFileSize = (bytes): string => {
  if (isNaN(bytes) || bytes < 0) {
 return '0 B';
 }
@@ -107,14 +107,14 @@ return '0 B';
 return `${bytes} ${sizes[i]}`;
 }
 
- const formatted: any = (bytes / Math.pow(1024, i)).toFixed(1);
+ const formatted = (bytes / Math.pow(1024, i)).toFixed(1);
  return `${formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted} ${sizes[i]}`;
 };
 
 /**
  * Format number with commas as thousand separators
  */
-export const formatNumber: any = (num: any): string => {
+export const formatNumber = (num): string => {
  if (isNaN(num)) {
 return '0';
 }
@@ -124,7 +124,7 @@ return '0';
 /**
  * Format percentage with specified decimal places
  */
-export const formatPercentage: any = (value: string | number, decimals: number = 1): string => {
+export const formatPercentage = (value: string | number, decimals: number = 1): string => {
  const num = typeof value === 'string' ? Number(value) : value;
  if (Number.isNaN(num)) {
  return '0%';
@@ -135,7 +135,7 @@ export const formatPercentage: any = (value: string | number, decimals: number =
 /**
  * Format currency with specified currency code
  */
-export const formatCurrency: any = (amount: any, currency = 'USD'): string => {
+export const formatCurrency = (amount, currency = 'USD'): string => {
  if (isNaN(amount)) {
 return '$0.00';
 }
@@ -144,7 +144,7 @@ return '$0.00';
  return new Intl.NumberFormat('en-US', {
  style: 'currency',
  currency }).format(amount);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error formatting currency:', error);
  return `${currency} ${amount.toFixed(2)}`;
  };
@@ -152,7 +152,7 @@ return '$0.00';
 /**
  * Format date to localized string
  */
-export const formatDate: any = (dateString: any, options?: Intl.DateTimeFormatOptions): string => {
+export const formatDate = (dateString, options?: Intl.DateTimeFormatOptions): string => {
  try {
  const date = new Date(dateString);
  const defaultOptions: Intl.DateTimeFormatOptions = {
@@ -161,7 +161,7 @@ export const formatDate: any = (dateString: any, options?: Intl.DateTimeFormatOp
  day: 'numeric' };
 
  return date.toLocaleDateString('en-US', options || defaultOptions);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error formatting date:', error);
  return 'Invalid date';
  };
@@ -169,7 +169,7 @@ export const formatDate: any = (dateString: any, options?: Intl.DateTimeFormatOp
 /**
  * Format time to localized string
  */
-export const formatTime: any = (dateString: any, options?: Intl.DateTimeFormatOptions): string => {
+export const formatTime = (dateString, options?: Intl.DateTimeFormatOptions): string => {
  try {
  const date = new Date(dateString);
  const defaultOptions: Intl.DateTimeFormatOptions = {
@@ -177,7 +177,7 @@ export const formatTime: any = (dateString: any, options?: Intl.DateTimeFormatOp
  minute: '2-digit' };
 
  return date.toLocaleTimeString('en-US', options || defaultOptions);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error formatting time:', error);
  return 'Invalid time';
  };
@@ -185,7 +185,7 @@ export const formatTime: any = (dateString: any, options?: Intl.DateTimeFormatOp
 /**
  * Truncate text to specified length with ellipsis
  */
-export const truncateText: any = (text: any, maxLength: any): string => {
+export const truncateText = (text, maxLength): string => {
  if (!text || text.length <= maxLength) {
 return text;
 }
@@ -195,7 +195,7 @@ return text;
 /**
  * Format phone number to (XXX) XXX-XXXX format
  */
-export const formatPhoneNumber: any = (phoneNumber: any): string => {
+export const formatPhoneNumber = (phoneNumber): string => {
  const cleaned = phoneNumber.replace(/\D/g, '');
 
  if (cleaned.length !== 10) {

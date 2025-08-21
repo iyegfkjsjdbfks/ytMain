@@ -44,12 +44,12 @@ export interface CommunityPostData {
 
 interface CommunityPostProps {
  post: CommunityPostData;
- onLike: (postId: any) => void;
- onDislike: (postId: any) => void;
- onComment: (postId: any) => void;
- onShare: (postId: any) => void;
- onVote?: (postId: any,
- optionId: any) => void;
+ onLike: (postId) => void;
+ onDislike: (postId) => void;
+ onComment: (postId) => void;
+ onShare: (postId) => void;
+ onVote?: (postId,
+ optionId) => void;
  className?: string;
 }
 
@@ -64,7 +64,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
  const [showFullContent, setShowFullContent] = useState<boolean>(false);
  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
- const formatCount: any = (count: any): string => {
+ const formatCount = (count): string => {
  if (count >= 1000000) {
  return `${(count / 1000000).toFixed(1)}M`;
  }
@@ -80,7 +80,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
  ? `${post.content.slice(0, 300)}...`
  : post.content;
 
- const handleVote: any = (optionId: any) => {
+ const handleVote = (optionId) => {
  if (post.poll && !post.poll.hasVoted && onVote) {
  onVote(post.id, optionId);
  };
@@ -218,7 +218,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
  {post.poll.question}
 // FIXED:  </h4>
  <div className='space-y-2'>
- {post.poll.options.map((option: any) => (
+ {post.poll.options.map((option) => (
  <button
  key={option.id} />
 // FIXED:  onClick={() => handleVote(option.id)}

@@ -34,7 +34,7 @@ import React from 'react';
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-  function formatNumber(num: any, decimals: number = 1): string {
+  function formatNumber(num, decimals: number = 1): string {
  if (num >= 1000000000) {
  return `${(num / 1000000000).toFixed(decimals)}B`;
  }
@@ -55,7 +55,7 @@ import React from 'react';
  * @param num - The number to format
  * @returns Formatted number string with commas
  */
-  function formatNumberWithCommas(num: any): string {
+  function formatNumberWithCommas(num): string {
  return num.toString().replace(/\B(?=(\d{3})(?!\d))/g, ',');
 }
 
@@ -66,7 +66,7 @@ import React from 'react';
  * @param max - The maximum value
  * @returns The clamped number
  */
-  function clamp(num: any, min: any, max: any): number {
+  function clamp(num, min, max): number {
  return Math.min(Math.max(num, min), max);
 }
 
@@ -93,7 +93,7 @@ export function formatCount(
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-  function formatDuration(seconds: any): string {
+  function formatDuration(seconds): string {
  const h = Math.floor(seconds / 3600);
  const m = Math.floor((seconds % 3600) / 60);
  const s = Math.floor(seconds % 60);
@@ -171,7 +171,7 @@ export function formatCount(
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-  function truncate(str: any, maxLength: any, ellipsis = '...'): string {
+  function truncate(str, maxLength, ellipsis = '...'): string {
  if (!str || str.length <= maxLength) {
  return str;
  }
@@ -183,8 +183,8 @@ export function formatCount(
  * @param str - The string to convert
  * @returns String in title case
  */
-  function toTitleCase(str: any): string {
- return str.replace(/\w\S*/g, (txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+  function toTitleCase(str): string {
+ return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
  );
 }
 
@@ -193,7 +193,7 @@ export function formatCount(
  * @param str - The string to convert
  * @returns kebab-case string
  */
-  function toKebabCase(str: any): string {
+  function toKebabCase(str): string {
  return str
  .replace(/([a-z])([A-Z])/g, '$1-$2')
  .replace(/[\s_]+/g, '-')
@@ -251,7 +251,7 @@ export * from './youtube-utils';
  * @param value - The value to check
  * @returns True if the value is a function
  */
-  function isFunction(value: string | number): value is (...args: any[]) => any {
+  function isFunction(value: string | number): value is (...args) => any {
  return typeof value === 'function';
 }
 
@@ -260,7 +260,7 @@ export * from './youtube-utils';
  * @param str - The string to check
  * @returns True if the string is a valid URL
  */
-  function isValidUrl(str: any): boolean {
+  function isValidUrl(str): boolean {
  try {
  const url = new URL(str);
  return Boolean(url);
@@ -278,14 +278,14 @@ export * from './youtube-utils';
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-  function debounce<T extends (...args: any[]) => any>(,
+  function debounce<T extends (...args) => any>(,
  func: T,
- wait: any
+ wait
 ): (...args: Parameters<T>) => void {
  let timeout: ReturnType<typeof setTimeout>;
 
  return function executedFunction(...args: Parameters<T>): any {
- const later: any = () => {
+ const later = () => {
  clearTimeout(timeout);
  func(...args);
  };
@@ -301,9 +301,9 @@ export * from './youtube-utils';
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-  function throttle<T extends (...args: any[]) => any>(,
+  function throttle<T extends (...args) => any>(,
  func: T,
- limit: any
+ limit
 ): (...args: Parameters<T>) => void {
  let inThrottle = false;
 
@@ -325,7 +325,7 @@ export * from './youtube-utils';
  * @returns A promise that resolves to the base64 string
  */
   function fileToBase64(file: File): Promise<string> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  const reader = new FileReader();
  reader.readAsDataURL(file);
  reader.onload = () => resolve(reader.result as string);
@@ -344,7 +344,7 @@ export * from './youtube-utils';
  * @param filename - The filename
  * @returns The file extension (without the dot)
  */
-  function getFileExtension(filename: any): string {
+  function getFileExtension(filename): string {
  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
@@ -356,7 +356,7 @@ export * from './youtube-utils';
  * Checks if the code is running in a browser environment
  * @returns True if running in a browser
  */
-  const isBrowser: any = (): boolean => {
+  const isBrowser = (): boolean => {
  return typeof window !== 'undefined' && typeof document !== 'undefined';
 };
 
@@ -365,14 +365,14 @@ export * from './youtube-utils';
  * @param text - The text to copy
  * @returns A promise that resolves when the text is copied
  */
-  async function copyToClipboard(text: any): Promise<void> {
+  async function copyToClipboard(text): Promise<void> {
  if (!isBrowser()) {
  return;
  }
 
  try {
  await navigator.clipboard.writeText(text);
- } catch (err: any) {
+ } catch (err) {
  // Fallback for older browsers
  const textarea = document.createElement('textarea');
  textarea.value = text;
@@ -422,7 +422,7 @@ export * from './youtube-utils';
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-  function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
+  function hexToRgb(hex): { r: number; g: number; b: number } | null {
  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
  if (!result) {
  return null;
@@ -439,7 +439,7 @@ export * from './youtube-utils';
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-  function getColorContrast(hex: any): 'light' | 'dark' {
+  function getColorContrast(hex): 'light' | 'dark' {
  const rgb = hexToRgb(hex);
  if (!rgb) {
  return 'dark';
@@ -447,7 +447,7 @@ export * from './youtube-utils';
 
  // Calculate relative luminance (per ITU-R BT.709)
  const { r, g, b } = rgb;
- const luminance: any = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+ const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
 
  // Return light or dark based on luminance threshold
  return luminance > 0.5 ? 'dark' : 'light';
@@ -476,8 +476,7 @@ export * from './youtube-utils';
  array: T[],
  key: K
 ): Record<string, T[]> {
- return array.reduce(
- (acc: any, item: any) => {
+ return array.reduce((acc, item) => {
  const groupKey = String(item[key]);
  if (!acc[groupKey]) {
  acc[groupKey] = [];
@@ -507,8 +506,8 @@ export * from './youtube-utils';
 
  for (const key in source) {
  if (Object.prototype.hasOwnProperty.call(source, key)) {
- const targetValue: any = (target as any)[key];
- const sourceValue: any = (source as any)[key];
+ const targetValue = (target as any)[key];
+ const sourceValue = (source as any)[key];
 
  if (isObject(targetValue) && isObject(sourceValue)) {
  (output as any)[key] = deepMerge(targetValue, sourceValue);
@@ -529,7 +528,7 @@ export * from './youtube-utils';
  * @param ms - The delay in milliseconds
  * @returns A promise that resolves after the delay
  */
-  function sleep(ms: any): Promise<void> {
+  function sleep(ms): Promise<void> {
  return new Promise(resolve => setTimeout((resolve) as any, ms));
 }
 
@@ -542,7 +541,7 @@ export * from './youtube-utils';
  */
   function timeout<T>(,
  promise: Promise<T>,
- timeoutMs: any,
+ timeoutMs,
  error = 'Operation timed out'
 ): Promise<T> {
  return Promise.race([
@@ -579,6 +578,6 @@ export * from './youtube-utils';
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-  function randomInt(min: any, max: any): number {
+  function randomInt(min, max): number {
  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

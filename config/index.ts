@@ -231,7 +231,7 @@ export type SecurityConfig = typeof SECURITY_CONFIG;
 export type DevConfig = typeof DEV_CONFIG;
 
 // Validation functions
-export const validateConfig: any = () => {
+export const validateConfig = () => {
  const errors: string = [];
 
  // Validate required API keys in production

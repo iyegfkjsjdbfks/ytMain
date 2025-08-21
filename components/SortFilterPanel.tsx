@@ -27,7 +27,7 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
  const panelRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (
  panelRef.current &&
  !panelRef.current.contains(event.target as Node) &&
@@ -43,7 +43,7 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
  document.removeEventListener('mousedown', handleClickOutside as EventListener);
  }}, [showPanel]);
 
- const handleSortOptionClick: any = (newSortBy: SortByType) => {
+ const handleSortOptionClick = (newSortBy: SortByType) => {
  onSortChange(newSortBy);
  setShowPanel(false);
  };
@@ -77,7 +77,7 @@ return null;
 // FIXED:  aria-orientation="vertical"
 // FIXED:  aria-labelledby="filter-button" />
  >
- {sortOptions.map((option: any) => (
+ {sortOptions.map((option) => (
  <button
  key={option.value} />
 // FIXED:  onClick={() => handleSortOptionClick(option.value)}

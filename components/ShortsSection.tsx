@@ -28,7 +28,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
  const shortsVideos = allShortsVideos.slice(0, maxShorts);
 
  // Convert Video objects to Short objects
- const convertedShorts: Short[] = shortsVideos.map((video: any) => {
+ const convertedShorts: Short[] = shortsVideos.map((video) => {
  const shortVideo: Short = {
  id: video.id,
  title: video.title,
@@ -64,7 +64,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
 
  setShorts(convertedShorts);
  setError(null);
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Failed to fetch shorts:', err);
  setError('Could not load Shorts at this time.');
  } finally {
@@ -121,7 +121,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
 // FIXED:  </Link>
 // FIXED:  </div>
  <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">
- {shorts.map((short: any) => (
+ {shorts.map((short) => (
  <Link key={short.id} to={`/shorts?v=${short.id}`} className="flex-shrink-0">
  <ShortDisplayCard short={short} />
 // FIXED:  </Link>

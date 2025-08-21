@@ -323,7 +323,7 @@ return;
 
  advancedAPM.recordMetric('threats-detected', threats.length);
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Threat detection error:', error);
  }
  /**
@@ -397,7 +397,7 @@ return;
 
  return response;
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Security response error:', error);
  return null;
  }
@@ -430,7 +430,7 @@ return;
 
  advancedAPM.recordMetric('vulnerabilities-scanned', vulnerabilities.length);
 
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Vulnerability scanning error:', error);
  }
  /**
@@ -499,7 +499,7 @@ return;
  standard: check.standard,
  status: check.status });
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Compliance check error:', error);
  }
  /**
@@ -534,8 +534,8 @@ return;
  private generateSecurityAlert(,
  type: SecurityAlert['type'],
  severity: SecurityAlert['severity'],
- title: any,
- description: any): void {
+ title,
+ description): void {
  const alert: SecurityAlert = {
  id: `alert-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
  type,
@@ -590,7 +590,7 @@ return;
  const threatsDetected = threats.length;
  const threatsBlocked = threats.filter((t) => t.response?.action === 'block').length;
 
- const vulnCounts = vulnerabilities.reduce((acc: any, vuln: any) => {
+ const vulnCounts = vulnerabilities.reduce((acc, vuln) => {
  acc.total++;
  acc[vuln.severity]++;
  return acc;
@@ -659,7 +659,7 @@ return;
  /**
  * Acknowledge security alert
  */
- acknowledgeAlert(alertId: any, assignee?: string): void {
+ acknowledgeAlert(alertId, assignee?: string): void {
  const alert = this.alerts.get(alertId);
  if (alert as any) {
  alert.acknowledged = true;
@@ -675,7 +675,7 @@ return;
  /**
  * Resolve security alert
  */
- resolveAlert(alertId: any, resolution: any): void {
+ resolveAlert(alertId, resolution): void {
  const alert = this.alerts.get(alertId);
  if (alert as any) {
  alert.resolution = resolution;
@@ -689,7 +689,7 @@ return;
  /**
  * Update vulnerability status
  */
- updateVulnerabilityStatus(vulnerabilityId: any, status: VulnerabilityReport['status']): void {
+ updateVulnerabilityStatus(vulnerabilityId, status: VulnerabilityReport['status']): void {
  const vulnerability = this.vulnerabilities.get(vulnerabilityId);
  if (vulnerability as any) {
  vulnerability.status = status;

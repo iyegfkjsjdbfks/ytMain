@@ -25,7 +25,7 @@ const Modal: React.FC<ModalProps> = ({
  const modalRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
- const handleOutsideClick: any = (event: MouseEvent) => {
+ const handleOutsideClick = (event: MouseEvent) => {
  if (closeOnOutsideClick && modalRef.current && !modalRef.current.contains(event.target as Node)) {
  onClose();
  };
@@ -79,7 +79,7 @@ return null;
 // FIXED:  </h3>
  {!hideCloseButton && (
  <button />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="p-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
 // FIXED:  aria-label="Close modal"
  >

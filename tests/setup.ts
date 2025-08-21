@@ -26,15 +26,15 @@ const TEST_CONFIG = {
  mockFetch: true };
 
 // Mock implementations
-const mockLocalStorage: any = (() => {
+const mockLocalStorage = (() => {
  let store: Record<string, string> = {};
 
  return {
  getItem: vi.fn((key) => store[key] || null),
- setItem: vi.fn((key: any, value: any) => {
+ setItem: vi.fn((key, value) => {
  store[key] = value;
  }),
- removeItem: vi.fn((key: any) => {
+ removeItem: vi.fn((key) => {
  delete store[key];
  }),
  clear: vi.fn(() => {
@@ -46,15 +46,15 @@ const mockLocalStorage: any = (() => {
  key: vi.fn((index) => Object.keys(store)[index] || null) };
 })();
 
-const mockSessionStorage: any = (() => {
+const mockSessionStorage = (() => {
  let store: Record<string, string> = {};
 
  return {
  getItem: vi.fn((key) => store[key] || null),
- setItem: vi.fn((key: any, value: any) => {
+ setItem: vi.fn((key, value) => {
  store[key] = value;
  }),
- removeItem: vi.fn((key: any) => {
+ removeItem: vi.fn((key) => {
  delete store[key];
  }),
  clear: vi.fn(() => {
@@ -100,7 +100,7 @@ const mockNotification = {
  permission: 'granted' };
 
 // Fetch mock with realistic responses
-const createMockFetch: any = () => {
+const createMockFetch = () => {
  return vi.fn().mockImplementation(async (url, _options?: RequestInit): Promise<any> => {
  // Simulate network delay
  await testUtils.simulateNetworkDelay(TEST_CONFIG.mockApiDelay);
@@ -143,7 +143,7 @@ const createMockFetch: any = () => {
  channelName: 'Test Channel',
  channelAvatarUrl: 'https://example.com/avatar.jpg',
  isLive: false,
- visibility: 'public' as const, createdAt: '2023-01-01',
+ visibility: 'public' as const createdAt: '2023-01-01',
  updatedAt: '2023-01-01' },
  timestamp: Date.now() });
  }
@@ -169,7 +169,7 @@ const createMockFetch: any = () => {
  channelName: 'Test Channel',
  channelAvatarUrl: 'https://example.com/avatar.jpg',
  isLive: false,
- visibility: 'public' as const, createdAt: '2023-01-01',
+ visibility: 'public' as const createdAt: '2023-01-01',
  updatedAt: '2023-01-01' },
  timestamp: Date.now() });
  }
@@ -195,7 +195,7 @@ const createMockFetch: any = () => {
  channelName: 'Test Channel',
  channelAvatarUrl: 'https://example.com/avatar.jpg',
  isLive: false,
- visibility: 'public' as const, createdAt: '2023-01-01',
+ visibility: 'public' as const createdAt: '2023-01-01',
  updatedAt: '2023-01-01' },
  timestamp: Date.now() });
  }
@@ -235,13 +235,13 @@ class TestPerformanceTracker {
  testDuration: number
  }>();
 
- static startTest(testName: any): () => void {
+ static startTest(testName): () => void {
  const startTime = performance.now();
- const startMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
+ const startMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
  return () => {
  const endTime = performance.now();
- const endMemory: any = (performance as any).memory?.usedJSHeapSize || 0;
+ const endMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
  this.testMetrics.set(testName, {
  renderTime: 0, // Will be set by render tracking,
@@ -250,7 +250,7 @@ class TestPerformanceTracker {
  };
  }
 
- static trackRender(testName: any, renderTime: any): void {
+ static trackRender(testName, renderTime): void {
  const metrics = this.testMetrics.get(testName);
  if (metrics as any) {
  metrics.renderTime = renderTime;
@@ -328,7 +328,7 @@ beforeAll(() => {
  // Mock crypto for security utils
  Object.defineProperty(window, 'crypto', {
  value: {
- getRandomValues: vi.fn((arr: any) => {
+ getRandomValues: vi.fn((arr) => {
  for (let i = 0; i < arr.length; i++) {
  arr[i] = Math.floor(Math.random() * 256);
  }
@@ -420,7 +420,7 @@ export const testHelpers = {
  },
 
  // API mocking,
- mockApiSuccess: (data: any) => {
+ mockApiSuccess: (data) => {
  global.fetch = vi.fn().mockResolvedValue({
  ok: true,
  status: 200,
@@ -435,21 +435,21 @@ export const testHelpers = {
  },
 
  // Storage helpers,
- setLocalStorageItem: (key: string, value: string | number) => {
+ setLocalStorageItem: (key, value: string | number) => {
  mockLocalStorage.setItem(key, value);
  },
 
- getLocalStorageItem: (key: string) => {
+ getLocalStorageItem: (key) => {
  return mockLocalStorage.getItem(key);
  },
 
  // Async helpers,
  waitForNextTick: () => new Promise(resolve => setTimeout((resolve) as any, 0)),
 
- waitForTime: (ms: any) => new Promise(resolve => setTimeout((resolve) as any, ms)),
+ waitForTime: (ms) => new Promise(resolve => setTimeout((resolve) as any, ms)),
 
  // Error boundary testing,
- triggerError: (component: any) => {
+ triggerError: (component) => {
  const error = new Error('Test error');
  component.componentDidCatch?.(error, { componentStack: 'test stack' });
  throw error;
@@ -481,19 +481,19 @@ export const testHelpers = {
  return testHelpers.waitForNextTick();
  },
 
- type: async (element: HTMLInputElement, text: any): Promise<any> => {
+ type: async (element: HTMLInputElement, text): Promise<any> => {
  element.focus();
  element.value = text;
  element.dispatchEvent(new Event('input', { bubbles: true }));
  return testHelpers.waitForNextTick();
  },
 
- keyPress: (element: HTMLElement, key: string) => {
+ keyPress: (element: HTMLElement, key) => {
  element.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
  return testHelpers.waitForNextTick();
  },
 
- scroll: (element: HTMLElement, scrollTop: any) => {
+ scroll: (element: HTMLElement, scrollTop) => {
  element.scrollTop = scrollTop;
  element.dispatchEvent(new Event('scroll', { bubbles: true }));
  return testHelpers.waitForNextTick();
@@ -511,7 +511,7 @@ export { mockLocalStorage,
  mockGeolocation, mockNotification };
 
 // Global error handler for unhandled promise rejections
-process.on('unhandledRejection', (reason: any, promise: any) => {
+process.on('unhandledRejection', (reason, promise) => {
  (console as any).error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 

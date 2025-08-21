@@ -64,7 +64,7 @@ class ErrorReportingService {
         // Or use a service like Sentry
         // Sentry.captureException(error, { contexts: { react: errorInfo } });
  }
- } catch (reportingError: any) {
+ } catch (reportingError) {
  (console as any).error('Failed to report error:', reportingError);
  }
  private generateSessionId(): string {

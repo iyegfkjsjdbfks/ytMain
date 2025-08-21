@@ -4,7 +4,7 @@ import { logger } from '../utils/logger';
 
 // YouTube API type declarations
 interface YT {
- Player: new (elementId: any, config: YTPlayerConfig) => YTPlayer;
+ Player: new (elementId, config: YTPlayerConfig) => YTPlayer;
  PlayerState: {
  UNSTARTED: number;
  ENDED: number;
@@ -56,7 +56,7 @@ interface YTPlayer {
  playVideo(): void;
  pauseVideo(): void;
  stopVideo(): void;
- seekTo(seconds: any, allowSeekAhead?: boolean): void;
+ seekTo(seconds, allowSeekAhead?: boolean): void;
  clearVideo(): void;
  getVideoLoadedFraction(): number;
  getPlayerState(): number;
@@ -66,16 +66,16 @@ interface YTPlayer {
  getVideoEmbedCode(): string;
  getPlaylist(): string;
  getPlaylistIndex(): number;
- setLoop(loopPlaylists: any): void;
- setShuffle(shufflePlaylist: any): void;
+ setLoop(loopPlaylists): void;
+ setShuffle(shufflePlaylist): void;
  getVolume(): number;
- setVolume(volume: any): void;
+ setVolume(volume): void;
  mute(): void;
  unMute(): void;
  isMuted(): boolean;
- setSize(width: any, height: any): object;
+ setSize(width, height): object;
  getPlaybackRate(): number;
- setPlaybackRate(suggestedRate: any): void;
+ setPlaybackRate(suggestedRate): void;
  getAvailablePlaybackRates(): number;
  destroy(): void;
 }
@@ -110,7 +110,7 @@ export function getYouTubeVideoId(
  /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch(?:\?v=|\/))([^#&?]*).*/;
  const match = url.match(regExp);
  return match?.[1] ? match[1].substring(0, 11) : null;
- } catch (e: any) {
+ } catch (e) {
  logger.error('Error extracting YouTube video ID:', e);
  return null;
  }
@@ -121,8 +121,8 @@ export function getYouTubeVideoId(
  private player;
 
  constructor(
- private readonly elementId: any,
- private readonly videoId: any,
+ private readonly elementId,
+ private readonly videoId,
  private readonly options: {
  width?: number;
  height?: number;
@@ -173,9 +173,9 @@ export function getYouTubeVideoId(
  await this.loadYouTubeAPI();
 
  // Wait for YT.Player to be available
- const checkYT: any = () => {
+ const checkYT = () => {
  return new Promise<void>(resolve => {
- const check: any = () => {
+ const check = () => {
  if (window.YT?.Player) {
  resolve();
  } else {
@@ -205,17 +205,17 @@ export function getYouTubeVideoId(
  onStateChange: event => {
  this.options.events?.onStateChange?.(event);
  }   });
-} catch (error: any) {
+} catch (error) {
  logger.error('Error initializing YouTube player:', error);
  }
  // Basic player controls
  playVideo(): Promise<void> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  this.player.playVideo();
  resolve();
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -224,12 +224,12 @@ export function getYouTubeVideoId(
 }
 
  pauseVideo(): Promise<void> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  this.player.pauseVideo();
  resolve();
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -238,12 +238,12 @@ export function getYouTubeVideoId(
 }
 
  stopVideo(): Promise<void> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  this.player.stopVideo();
  resolve();
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -251,13 +251,13 @@ export function getYouTubeVideoId(
    });
 }
 
- seekTo(seconds: any, allowSeekAhead: boolean = true): Promise<void> {
- return new Promise((resolve: any, reject: any) => {
+ seekTo(seconds, allowSeekAhead: boolean = true): Promise<void> {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  this.player.seekTo(seconds, allowSeekAhead);
  resolve();
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -267,12 +267,12 @@ export function getYouTubeVideoId(
 
  // Additional player methods
  getCurrentTime(): Promise<number> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  const time = this.player.getCurrentTime();
  resolve(time);
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -281,12 +281,12 @@ export function getYouTubeVideoId(
 }
 
  getDuration(): Promise<number> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  const duration = this.player.getDuration();
  resolve(duration);
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -295,12 +295,12 @@ export function getYouTubeVideoId(
 }
 
  getVolume(): Promise<number> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  const volume = this.player.getVolume();
  resolve(volume);
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -308,13 +308,13 @@ export function getYouTubeVideoId(
    });
 }
 
- setVolume(volume: any): Promise<void> {
- return new Promise((resolve: any, reject: any) => {
+ setVolume(volume): Promise<void> {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  this.player.setVolume(volume);
  resolve();
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -323,12 +323,12 @@ export function getYouTubeVideoId(
 }
 
  isMuted(): Promise<boolean> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  const isMuted = this.player.isMuted();
  resolve(isMuted);
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -337,12 +337,12 @@ export function getYouTubeVideoId(
 }
 
  mute(): Promise<void> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  this.player.mute();
  resolve();
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -351,12 +351,12 @@ export function getYouTubeVideoId(
 }
 
  unMute(): Promise<void> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  if (this.player) {
  try {
  this.player.unMute();
  resolve();
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(error)));
  }
  } else {
@@ -373,8 +373,8 @@ export function getYouTubeVideoId(
 
 // Utility function to safely handle YouTube embeds
   function embedYouTubeVideo(,
- containerId: any,
- videoId: any,
+ containerId,
+ videoId,
  options: {
  width?: number;
  height?: number;
@@ -418,7 +418,7 @@ export function getYouTubeVideoId(
 }
 
 // Type-safe function to check if a string is a valid YouTube URL
-  function isYouTubeUrl(url: any): boolean {
+  function isYouTubeUrl(url): boolean {
  if (!url) {
  return false;
  }
@@ -472,7 +472,7 @@ export function getYouTubeVideoId(
  if (id && id.length === 11) {
  return id;
  }
- } catch (e: any) {
+ } catch (e) {
  logger.warn('Error parsing YouTube URL:', e);
  continue;
  }

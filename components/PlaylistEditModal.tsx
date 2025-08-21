@@ -5,8 +5,8 @@ interface PlaylistEditModalProps {
  onClose: () => void;
  initialTitle: string;
  initialDescription: string;
- onSaveChanges: (title: any,
- description: any) => Promise<void>
+ onSaveChanges: (title,
+ description) => Promise<void>
 }
 
 const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({
@@ -25,7 +25,7 @@ const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({
  }, [initialTitle, initialDescription, isOpen]);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
  onClose();
  };
@@ -54,7 +54,7 @@ return null;
  <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-[100] flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in-fast">
  <form
  ref={modalRef} />
-// FIXED:  onSubmit={(e: any) => handleSubmit(e)}
+// FIXED:  onSubmit={(e) => handleSubmit(e)}
 // FIXED:  className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-xl w-full max-w-md space-y-4"
  role="dialog"
 // FIXED:  aria-modal="true"
@@ -85,7 +85,7 @@ return null;
  <div className="flex justify-end space-x-3">
  <button
 // FIXED:  type="button" />
-// FIXED:  onClick={(e: any) => onClose(e)}
+// FIXED:  onClick={(e) => onClose(e)}
 // FIXED:  className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded-md border border-neutral-300 dark:border-neutral-500 transition-colors"
  >
  Cancel

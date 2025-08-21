@@ -9,7 +9,7 @@ import type { Video } from '../types';
 
 interface EnhancedYouTubeVideoCardProps {
  video: Video;
- onVideoSelect?: ((videoId: any) => void) | undefined;
+ onVideoSelect?: ((videoId) => void) | undefined;
  showChannel?: boolean;
  size?: 'sm' | 'md' | 'lg';
 }
@@ -19,7 +19,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
  onVideoSelect,
  showChannel = true,
  size = 'md' }) => {
- const handleClick: any = () => {
+ const handleClick = () => {
  if (onVideoSelect as any) {
  onVideoSelect(video.id);
  } else {
@@ -27,7 +27,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
  window.open(video.videoUrl, '_blank', 'noopener,noreferrer');
  };
 
- const formatViews: any = (views: string | number): string => {
+ const formatViews = (views: string | number): string => {
  const num = typeof views === 'string' ? parseInt(views, 10) : views;
  if (num >= 1000000000) {
  return `${(num / 1000000000).toFixed(1)}B`;
@@ -39,7 +39,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
  return num.toString();
  };
 
- const formatTimeAgo: any = (dateStr: any): string => {
+ const formatTimeAgo = (dateStr): string => {
  try {
  return formatDistanceToNow(new Date(dateStr || Date.now()), { addSuffix: true });
  } catch (e) {
@@ -71,10 +71,10 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
  return (
  <div
 // FIXED:  className={`${classes.container} cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-md p-1 transition-colors`} />
-// FIXED:  onClick={(e: any) => handleClick(e)}
+// FIXED:  onClick={(e) => handleClick(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e: any) => {
+ onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.preventDefault();
  handleClick();

@@ -29,7 +29,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
 
  return (
  <button />
-// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  onClick={(e) => onClick(e)}
 // FIXED:  className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
 // FIXED:  aria-label={ariaLabel}
  >

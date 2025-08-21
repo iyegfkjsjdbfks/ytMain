@@ -28,7 +28,7 @@ const YourDataPage: React.FC = () => {
  setWatchHistoryCount(watchHistory.length);
  setLikedVideosCount(likedVideos.length);
  setSearchHistoryCount(searchHistory.length);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch data counts:', error);
  } finally {
  setLoading(false);
@@ -43,32 +43,32 @@ const YourDataPage: React.FC = () => {
  try {
  await clearAllRecentSearches();
  setSearchHistoryCount(0);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to clear search history:', error);
  }
  };
 
- const handleClearWatchHistory: any = () => {
+ const handleClearWatchHistory = () => {
  const confirmed = window.confirm('Are you sure you want to clear your watch history? This action cannot be undone.');
  if (confirmed as any) {
  localStorage.removeItem('youtubeCloneWatchHistory_v1');
  setWatchHistoryCount(0);
  };
 
- const handleClearLikedVideos: any = () => {
+ const handleClearLikedVideos = () => {
  const confirmed = window.confirm('Are you sure you want to clear your liked videos? This action cannot be undone.');
  if (confirmed as any) {
  localStorage.removeItem('youtubeCloneLikedVideos_v1');
  setLikedVideosCount(0);
  };
 
- const handleToggleVisibility: any = (dataType: keyof typeof dataVisibility) => {
+ const handleToggleVisibility = (dataType: keyof typeof dataVisibility) => {
  setDataVisibility(prev => ({
  ...prev as any,
  [dataType]: !prev[dataType] }));
  };
 
- const handleDownloadData: any = () => {
+ const handleDownloadData = () => {
  const data = {
  watchHistory: JSON.parse((localStorage as any).getItem('youtubeCloneWatchHistory_v1') || '[]'),
  likedVideos: JSON.parse((localStorage as any).getItem('youtubeCloneLikedVideos_v1') || '[]'),
@@ -104,7 +104,7 @@ const YourDataPage: React.FC = () => {
 // FIXED:  </div>
  <div className="flex items-center space-x-2 ml-4">
  <button />
-// FIXED:  onClick={(e: any) => onToggleVisibility(e)}
+// FIXED:  onClick={(e) => onToggleVisibility(e)}
 // FIXED:  className={`p-2 rounded-full transition-colors ${
  isVisible
  ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
@@ -119,7 +119,7 @@ const YourDataPage: React.FC = () => {
 
  <div className="flex space-x-3">
  <button />
-// FIXED:  onClick={(e: any) => onClear(e)}
+// FIXED:  onClick={(e) => onClear(e)}
 // FIXED:  disabled={loading || count === 0}
 // FIXED:  className="flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-neutral-300 dark:disabled:bg-neutral-700 text-white disabled:text-neutral-500 text-sm font-medium rounded-md transition-colors disabled:cursor-not-allowed"
  >
@@ -155,7 +155,7 @@ const YourDataPage: React.FC = () => {
 
  <div className="flex flex-wrap gap-4">
  <button />
-// FIXED:  onClick={(e: any) => handleDownloadData(e)}
+// FIXED:  onClick={(e) => handleDownloadData(e)}
 // FIXED:  className="flex items-center space-x-2 px-6 py-3 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-medium rounded-lg transition-colors"
  >
  <ArrowDownTrayIcon className="w-5 h-5" />

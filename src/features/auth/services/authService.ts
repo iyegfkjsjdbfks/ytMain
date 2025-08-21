@@ -66,7 +66,7 @@ class AuthService {
  'Content-Type': 'application/json',
  Authorization: `Bearer ${tokens.accessToken}` },
  body: JSON.stringify({ refreshToken: tokens.refreshToken }) });
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error during logout:', error);
  }
  this.clearTokens();
@@ -100,14 +100,14 @@ class AuthService {
  }
 
  return response.json();
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error fetching current user:', error);
  return null;
  }
  /**
  * Refresh the access token
  */
- private async refreshToken(refreshToken: any): Promise<AuthTokens | null> {
+ private async refreshToken(refreshToken): Promise<AuthTokens | null> {
  try {
  const response = await (fetch as any)(`${this.baseUrl}/refresh`, {
  method: 'POST',
@@ -123,7 +123,7 @@ class AuthService {
  const tokens = await response.json();
  this.setTokens(tokens);
  return tokens;
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error refreshing token:', error);
  this.clearTokens();
  return null;
@@ -146,7 +146,7 @@ class AuthService {
 
  try {
  return JSON.parse(tokensString) as AuthTokens;
- } catch (error: any) {
+ } catch (error) {
  logger.error('Error parsing auth tokens:', error);
  return null;
  }

@@ -15,9 +15,9 @@ import React, { type ReactNode, Fragment, ReactNode } from 'react';
 export const safeArrayRender = <T>(,
  items: T[] | null | undefined,
  renderItem: (item: T,
- index: number) => ReactNode,
+ index) => ReactNode,
  keyExtractor?: (item: T,
- index: number) => string | number
+ index) => string | number
 ): ReactNode[] => {
  if (!items || !Array.isArray(items)) {
  return [];
@@ -25,7 +25,7 @@ export const safeArrayRender = <T>(,
 
  return items
  .filter((item): item is T => item !== undefined && item !== null)
- .map((item: any, index: any) => {
+ .map((item, index) => {
  const key = keyExtractor ? keyExtractor(item, index) : index;
  return (
  <React.Fragment key={key}>{renderItem(item, index)}</React.Fragment>
@@ -41,8 +41,8 @@ export const safeArrayRender = <T>(,
  * @param fallback Optional fallback component if condition is false
  * @returns React node or null
  */
-export const renderIf: any = (,
- condition: any,
+export const renderIf = (,
+ condition,
  component: ReactNode,
  fallback: ReactNode = null
 ): ReactNode => {
@@ -55,7 +55,7 @@ export const renderIf: any = (,
  * @param prefix Optional prefix for the ID
  * @returns Unique ID string
  */
-export const createUniqueId: any = (prefix = 'component'): string => {
+export const createUniqueId = (prefix = 'component'): string => {
  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 };
 
@@ -68,7 +68,7 @@ export const createUniqueId: any = (prefix = 'component'): string => {
  * @returns Array of chunks
  */
 export const chunkArray = <T>(array: T,
- size: any): T[][] => {
+ size): T[][] => {
  if (!array.length) {
  return [];
  }

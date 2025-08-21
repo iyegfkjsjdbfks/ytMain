@@ -36,7 +36,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
  // YouTubePlayerWrapper rendering
 
  // Create mock video object for YouTubePlayer component
- const createMockVideo: any = (videoId: any): YouTubeSearchResult => ({,
+ const createMockVideo = (videoId): YouTubeSearchResult => ({,
  id: videoId,
  title: 'Video',
  description: '',

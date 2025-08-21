@@ -126,7 +126,7 @@ clearInterval(chatInterval.current);
  if (videoRef.current) {
  videoRef.current.srcObject = mediaStream;
  }
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error accessing media devices:', error);
  alert('Could not access camera/microphone. Please check permissions.');
  } finally {
@@ -174,7 +174,7 @@ clearInterval(chatInterval.current);
  onStreamStart?.(settings);
  };
 
- const pauseStream: any = () => {
+ const pauseStream = () => {
  setIsPaused(!isPaused);
  if (stream as any) {
  stream.getVideoTracks().forEach(track => {
@@ -182,7 +182,7 @@ clearInterval(chatInterval.current);
  });
  };
 
- const stopStream: any = () => {
+ const stopStream = () => {
  setIsStreaming(false);
  setIsPaused(false);
 
@@ -204,7 +204,7 @@ clearInterval(chatInterval.current);
  onStreamEnd?.(stats);
  };
 
- const toggleAudio: any = () => {
+ const toggleAudio = () => {
  if (stream as any) {
  stream.getAudioTracks().forEach(track => {
  track.enabled = !audioEnabled;
@@ -212,7 +212,7 @@ clearInterval(chatInterval.current);
  setAudioEnabled(!audioEnabled);
  };
 
- const toggleVideo: any = () => {
+ const toggleVideo = () => {
  if (stream as any) {
  stream.getVideoTracks().forEach(track => {
  track.enabled = !videoEnabled;
@@ -220,7 +220,7 @@ clearInterval(chatInterval.current);
  setVideoEnabled(!videoEnabled);
  };
 
- const generateRandomChatMessage: any = () => {
+ const generateRandomChatMessage = () => {
  const usernames = ['StreamFan123', 'GamerPro', 'MusicLover', 'TechGuru', 'ChatMaster', 'ViewerOne', 'StreamWatcher'];
  const messages = [
  'Great stream!',
@@ -257,7 +257,7 @@ clearInterval(chatInterval.current);
  totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0) }));
  };
 
- const sendChatMessage: any = () => {
+ const sendChatMessage = () => {
  if (!newMessage.trim()) {
 return;
 }
@@ -275,7 +275,7 @@ return;
  setNewMessage('');
  };
 
- const formatDuration: any = (seconds: any): string => {
+ const formatDuration = (seconds): string => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  const secs = seconds % 60;
@@ -347,7 +347,7 @@ return;
  <div className="flex items-center space-x-3">
  {!isStreaming ? (
  <button />
-// FIXED:  onClick={(e: any) => startStream(e)}
+// FIXED:  onClick={(e) => startStream(e)}
 // FIXED:  disabled={isSettingUp}
 // FIXED:  className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
  >
@@ -357,14 +357,14 @@ return;
  ) : (
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => pauseStream(e)}
+// FIXED:  onClick={(e) => pauseStream(e)}
 // FIXED:  className="flex items-center space-x-2 bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
  >
  {isPaused ? <PlayIcon className="w-5 h-5" /> : <PauseIcon className="w-5 h-5" />}
  <span>{isPaused ? 'Resume' : 'Pause'}</span>
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => stopStream(e)}
+// FIXED:  onClick={(e) => stopStream(e)}
 // FIXED:  className="flex items-center space-x-2 bg-neutral-600 hover:bg-neutral-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
  >
  <StopIcon className="w-5 h-5" />
@@ -375,7 +375,7 @@ return;
 
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => toggleAudio(e)}
+// FIXED:  onClick={(e) => toggleAudio(e)}
 // FIXED:  className={`p-2 rounded-lg transition-colors ${
  audioEnabled
  ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
@@ -391,7 +391,7 @@ return;
 // FIXED:  </button>
 
  <button />
-// FIXED:  onClick={(e: any) => toggleVideo(e)}
+// FIXED:  onClick={(e) => toggleVideo(e)}
 // FIXED:  className={`p-2 rounded-lg transition-colors ${
  videoEnabled
  ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
@@ -457,7 +457,7 @@ return;
 // FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, category: e.target.value }))}
 // FIXED:  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
  >
- {categories.map((category: any) => (
+ {categories.map((category) => (
  <option key={category} value={category}>{category}</option>
  ))}
 // FIXED:  </select>
@@ -611,7 +611,7 @@ return;
 // FIXED:  className="flex-1 px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
  />
  <button />
-// FIXED:  onClick={(e: any) => sendChatMessage(e)}
+// FIXED:  onClick={(e) => sendChatMessage(e)}
 // FIXED:  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm"
  >
  Send

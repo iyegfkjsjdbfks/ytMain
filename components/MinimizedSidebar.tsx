@@ -22,7 +22,7 @@ interface MinimizedNavItemProps {
  title?: string;
 }
 
-const MinimizedNavItem: React.FC<MinimizedNavItemProps> = React.memo(({ to, icon, label, currentPath, title }: any) => {
+const MinimizedNavItem: React.FC<MinimizedNavItemProps> = React.memo(({ to, icon, label, currentPath, title }) => {
  const isActive = currentPath === to ||
  (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
 

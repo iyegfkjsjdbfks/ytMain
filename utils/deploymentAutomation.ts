@@ -577,7 +577,7 @@ return;
  /**
  * Trigger a deployment pipeline
  */
- async triggerDeployment(pipelineId: any, trigger: 'manual' | 'auto' = 'manual'): Promise<string> {
+ async triggerDeployment(pipelineId, trigger: 'manual' | 'auto' = 'manual'): Promise<string> {
  const pipeline = this.pipelines.get(pipelineId);
  if (!pipeline) {
  throw new Error(`Pipeline ${pipelineId} not found`);
@@ -596,7 +596,7 @@ return;
  pipelineId,
  status: 'pending',
  startTime: Date.now(),
- stages: pipeline.stages.map((stage: any) => ({
+ stages: pipeline.stages.map((stage) => ({
  stageId: stage.id,
  status: 'pending',
  logs: [] })),
@@ -628,7 +628,7 @@ return;
  /**
  * Execute a deployment
  */
- private async executeDeployment(_executionId: any): Promise<void> {
+ private async executeDeployment(_executionId): Promise<void> {
  const _execution = this.executions.get(_executionId);
  if (!_execution) {
 return;
@@ -658,7 +658,7 @@ return;
 
  // Check dependencies
  if (stage.dependencies && stage.dependencies.length > 0) {
- const dependenciesMet = stage.dependencies.every((depId: any) => {
+ const dependenciesMet = stage.dependencies.every((depId) => {
  const depStage = _execution.stages.find((s: StageExecution) => s.stageId === depId);
  return !!depStage && depStage.status === 'success';
  });
@@ -703,7 +703,7 @@ return;
  this.addLog(_execution, 'error', 'Deployment failed');
  await this.sendNotifications(pipeline._environment, 'failure', _execution);
  }
- } catch (error: any) {
+ } catch (error) {
  _execution.status = 'failed';
  this.addLog(_execution, 'error', `Deployment _error: ${error}`);
  await this.sendNotifications(pipeline._environment, 'failure', _execution);
@@ -758,7 +758,7 @@ return;
  this.addLog(_execution, 'info', `Stage completed: ${stage.name}`);
  return true;
 
- } catch (error: any) {
+ } catch (error) {
  attempts++;
  this.addLog(_execution, 'error', `Stage failed (attempt ${attempts}/${maxAttempts}): ${error}`, stage.id);
 
@@ -776,7 +776,7 @@ return;
  /**
  * Check quality gates
  */
- private async checkQualityGates(environment: any): Promise<boolean> {
+ private async checkQualityGates(environment): Promise<boolean> {
  const config = this.configs.get(`${environment}-config`) as any;
  if (!config) {
  return true;
@@ -823,7 +823,7 @@ continue;
  /**
  * Evaluate a criterion
  */
- private evaluateCriterion(value: string | number, operator: any, threshold: any): boolean {
+ private evaluateCriterion(value: string | number, operator, threshold): boolean {
  switch (operator as any) {
  case '>':
  return value > threshold;
@@ -840,7 +840,7 @@ continue;
  /**
  * Perform health checks
  */
- private async performHealthChecks(environment: any, execution: DeploymentExecution): Promise<void> {
+ private async performHealthChecks(environment, execution: DeploymentExecution): Promise<void> {
  const config = this.configs.get(`${environment}-config`) as any;
  if (!config) {
  return;
@@ -861,7 +861,7 @@ continue;
  await this.performRollback(execution, `Critical health check failed: ${_healthCheck.name}`);
  return;
  }
- } catch (error: any) {
+ } catch (error) {
  this.addLog(execution, 'error', `Health check error: ${_healthCheck.name} - ${error}`);
  }
  }
@@ -898,7 +898,7 @@ continue;
  }
  break;
  }
- } catch (error: any) {
+ } catch (error) {
  if (attempt === maxRetries - 1) {
  throw error;
  }
@@ -910,7 +910,7 @@ continue;
  /**
  * Perform rollback
  */
- private async performRollback(execution: DeploymentExecution, reason: any): Promise<void> {
+ private async performRollback(execution: DeploymentExecution, reason): Promise<void> {
  this.addLog(execution, 'warn', `Initiating rollback: ${reason}`);
 
  const rollbackInfo: RollbackInfo = {
@@ -933,7 +933,7 @@ continue;
  this.addLog(execution, 'error', 'Rollback failed');
  }
 
- } catch (error: any) {
+ } catch (error) {
  this.addLog(execution, 'error', `Rollback _error: ${error}`);
  }
 
@@ -954,7 +954,7 @@ continue;
  * Send notifications
  */
  private async sendNotifications(,
- environment: any,
+ environment,
  event: 'start' | 'success' | 'failure' | 'rollback',
  execution: DeploymentExecution): Promise<void> {
  const config = this.configs.get(`${environment}-config`);
@@ -962,7 +962,7 @@ continue;
  return;
  }
 
- const relevantNotifications: any = (config as any).notifications.filter((n: any) => n.events?.includes(event));
+ const relevantNotifications = (config as any).notifications.filter((n) => n.events?.includes(event));
 
  for (const notification of relevantNotifications) {
  try {
@@ -976,7 +976,7 @@ continue;
  type: notification.type,
  event,
  environment });
- } catch (error: any) {
+ } catch (error) {
  (console as any).error(`Failed to send ${notification.type} notification:`, error);
  }
  }
@@ -987,7 +987,7 @@ continue;
  private addLog(,
  execution: DeploymentExecution,
  level: 'info' | 'warn' | 'error' | 'debug',
- message: any,
+ message,
  stage?: string,
  ): void {
  const log: DeploymentLogEntry = {
@@ -1005,7 +1005,7 @@ continue;
  /**
  * Get deployment _execution
  */
- getExecution(_executionId: any): DeploymentExecution | undefined {
+ getExecution(_executionId): DeploymentExecution | undefined {
  return this.executions.get(_executionId);
  }
 
@@ -1069,7 +1069,7 @@ continue;
  /**
  * Cancel deployment
  */
- async cancelDeployment(_executionId: any): Promise<void> {
+ async cancelDeployment(_executionId): Promise<void> {
  const _execution = this.executions.get(_executionId);
  if (!_execution) {
  throw new Error(`Execution ${_executionId} not found`);

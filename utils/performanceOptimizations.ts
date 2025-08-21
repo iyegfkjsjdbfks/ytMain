@@ -15,7 +15,7 @@ export const withPerformanceOptimization = {
  * Shallow comparison memoization
  */,
  shallow: <P extends object>(Component: ComponentType<P>) =>
- memo(Component(prevProps: any, nextProps: any) => {
+ memo(Component(prevProps, nextProps) => {
  const prevKeys = Object.keys(prevProps);
  const nextKeys = Object.keys(nextProps);
 
@@ -35,7 +35,7 @@ export const withPerformanceOptimization = {
  */,
  ignoring: <P extends object>(ignoredProps: Array<keyof P>) =>
  (Component: ComponentType<P>) =>
- memo(Component(prevProps: any, nextProps: any) => {
+ memo(Component(prevProps, nextProps) => {
  const filteredPrev = { ...prevProps };
  const filteredNext = { ...nextProps };
 
@@ -51,7 +51,7 @@ export const withPerformanceOptimization = {
  * Memoization for components with array props
  */,
  arrayOptimized: <P extends object>(Component: ComponentType<P>) =>
- memo(Component(prevProps: any, nextProps: any) => {
+ memo(Component(prevProps, nextProps) => {
  for (const key in prevProps) {
  const prevValue = prevProps[key];
  const nextValue = nextProps[key];
@@ -104,15 +104,15 @@ export const hookOptimizations = {
  */,
  useOptimizedCallback: <T extends (...args) => any>(,
  callback: T,
- deps: any): T => useCallback(callback, deps),
+ deps): T => useCallback(callback, deps),
 
  /**
  * Memoized expensive computation
  */,
  useExpensiveComputation: <T>(,
  computeFn: () => T,
- deps: any,
- shouldRecompute?: (newDeps: any, oldDeps: any) => boolean,
+ deps,
+ shouldRecompute?: (newDeps, oldDeps) => boolean,
  ): T => {
  return useMemo(() => {
  if (shouldRecompute as any) {
@@ -130,7 +130,7 @@ export const listOptimizations = {
  /**
  * Generate stable keys for list items
  */,
- generateStableKey: (item: any, index: number, prefix = 'item: any'): string => {
+ generateStableKey: (item, index, prefix = 'item'): string => {
  if (item.id) {
 return `${prefix}-${item.id}`;
 }
@@ -146,7 +146,7 @@ return `${prefix}-${item.name}`;
  /**
  * Chunk large arrays for better performance
  */,
- chunkArray: <T>(array: T[], chunkSize: any): T[][] => {
+ chunkArray: <T>(array: T[], chunkSize): T[][] => {
  const chunks: T[][] = [];
  for (let i = 0; i < array.length; i += chunkSize) {
  chunks.push(array.slice(i, i + chunkSize));
@@ -159,8 +159,8 @@ return `${prefix}-${item.name}`;
  */,
  getVisibleItems: <T>(,
  items: T[],
- startIndex: any,
- visibleCount: any): T[] => {
+ startIndex,
+ visibleCount): T[] => {
  return items.slice(startIndex, startIndex + visibleCount);
  };
 
@@ -171,8 +171,8 @@ export const imageOptimizations = {
  /**
  * Preload critical images
  */,
- preloadImage: (src: any): Promise<void> => {
- return new Promise((resolve: any, reject: any) => {
+ preloadImage: (src): Promise<void> => {
+ return new Promise((resolve, reject) => {
  const img = new Image();
  img.onload = () => resolve();
  img.onerror = reject;
@@ -187,7 +187,7 @@ export const imageOptimizations = {
  callback: (entry: IntersectionObserverEntry) => void,
  options?: IntersectionObserverInit,
  ): IntersectionObserver => {
- return new IntersectionObserver((entries: any) => {
+ return new IntersectionObserver((entries) => {
  entries.forEach(callback);
  }, {
  rootMargin: '50px',
@@ -207,7 +207,7 @@ export const bundleOptimizations = {
  ): Promise<T | null> => {
  try {
  return await importFunc();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Dynamic import failed:', error);
  return null;
  }
@@ -236,7 +236,7 @@ export const eventOptimizations = {
  */,
  throttle: <T extends (...args) => any>(,
  func: T,
- delay: any): T => {
+ delay): T => {
  let timeoutId: ReturnType<typeof setTimeout> | null = null;
  let lastExecTime = 0;
 
@@ -263,7 +263,7 @@ clearTimeout(timeoutId);
  */,
  debounce: <T extends (...args) => any>(,
  func: T,
- delay: any): T => {
+ delay): T => {
  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
  return ((...args) => {
@@ -313,7 +313,7 @@ export const memoryOptimizations = {
  /**
  * LRU cache implementation
  */,
- createLRUCache: <K, V>(maxSize: any) => {
+ createLRUCache: <K, V>(maxSize) => {
  const cache = new Map<K, V>();
 
  return {

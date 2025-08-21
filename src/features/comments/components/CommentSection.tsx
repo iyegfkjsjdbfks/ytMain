@@ -18,14 +18,14 @@ interface CommentSectionProps {
 interface CommentItemProps {
  comment: Comment;
  isChannelOwner?: boolean;
- onReply: (parentId: any,
- content: any) => void;
- onReact: (commentId: any,
+ onReply: (parentId,
+ content) => void;
+ onReact: (commentId,
  type: "like" | 'dislike') => void;
- onPin: (commentId: any) => void | Promise<void>;
- onHeart: (commentId: any) => void | Promise<void>;
- onReport: (commentId: any,
- reason: any) => void | Promise<void>;
+ onPin: (commentId) => void | Promise<void>;
+ onHeart: (commentId) => void | Promise<void>;
+ onReport: (commentId,
+ reason) => void | Promise<void>;
  level?: number;
 }
 
@@ -45,7 +45,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
  const menuRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
  setShowMenu(false);
  };
@@ -54,7 +54,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
  return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
  }, []);
 
- const handleReplySubmit: any = () => {
+ const handleReplySubmit = () => {
  if (replyText.trim()) {
  onReply(comment.id, replyText);
  setReplyText('');
@@ -62,7 +62,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
  setShowReplies(true);
  };
 
- const formatCount: any = (count: any): string => {
+ const formatCount = (count): string => {
  if (count >= 1000000) {
  return `${(count / 1000000).toFixed(1)}M`;
  }
@@ -220,7 +220,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
  />
  <div className='flex gap-2 mt-2'>
  <button />
-// FIXED:  onClick={(e: any) => handleReplySubmit(e)}
+// FIXED:  onClick={(e) => handleReplySubmit(e)}
 // FIXED:  disabled={!replyText.trim()}
 // FIXED:  className='px-4 py-1 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
  >
@@ -302,41 +302,41 @@ const CommentSection: React.FC<CommentSectionProps> = ({
  videoId });
  setNewComment('');
  setShowCommentInput(false);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to post comment:', error);
  };
 
- const handleReply = async (parentId: any,
- content: any): Promise<any> => {
+ const handleReply = async (parentId,
+ content): Promise<any> => {
  try {
  await createCommentMutation.mutate({
  content,
  videoId,
  parentId });
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to post reply:', error);
  };
 
- const handleReact = async (commentId: any,
+ const handleReact = async (commentId,
  type: "like" | 'dislike'): Promise<any> => {
  try {
  await reactToCommentMutation.mutate({
  commentId,
  type });
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to react to comment:', error);
  };
 
- const handlePin = async (_commentId: any): Promise<any> => {
+ const handlePin = async (_commentId): Promise<any> => {
  // Implementation for pinning comments
  };
 
- const handleHeart = async (_commentId: any): Promise<any> => {
+ const handleHeart = async (_commentId): Promise<any> => {
  // Implementation for hearting comments
  };
 
- const handleReport = async (_commentId: any,
- _reason: any): Promise<any> => {
+ const handleReport = async (_commentId,
+ _reason): Promise<any> => {
  // Implementation for reporting comments
  };
 
@@ -420,7 +420,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
  Cancel
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleCommentSubmit(e)}
+// FIXED:  onClick={(e) => handleCommentSubmit(e)}
 // FIXED:  disabled={!newComment.trim() || createCommentMutation.loading}
 // FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors'
  >

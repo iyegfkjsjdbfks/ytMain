@@ -97,13 +97,13 @@ const VideoEditorPage: React.FC = () => {
  const videoRef = useRef<HTMLVideoElement>(null);
  const timelineRef = useRef<HTMLDivElement>(null);
 
- const formatTime: any = (seconds: any): string => {
+ const formatTime = (seconds): string => {
  const mins = Math.floor(seconds / 60);
  const secs = Math.floor(seconds % 60);
  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
  };
 
- const handlePlayPause: any = () => {
+ const handlePlayPause = () => {
  setIsPlaying(!isPlaying);
  if (videoRef.current) {
  if (isPlaying as any) {
@@ -113,21 +113,21 @@ const VideoEditorPage: React.FC = () => {
  }
  };
 
- const handleTimelineClick: any = (e: React.MouseEvent<HTMLDivElement>) => {
+ const handleTimelineClick = (e: React.MouseEvent<HTMLDivElement>) => {
  if (timelineRef.current) {
  const rect = timelineRef.current.getBoundingClientRect();
  const clickX = e.clientX - rect.left;
  const timelineWidth = rect.width;
- const newTime: any = (clickX / timelineWidth) * currentProject.duration;
+ const newTime = (clickX / timelineWidth) * currentProject.duration;
  setCurrentTime(Math.max(0, Math.min(newTime, currentProject.duration)));
  };
 
- const handleClipSelect: any = (clipId: any) => {
+ const handleClipSelect = (clipId) => {
  setSelectedClip(selectedClip === clipId ? null : clipId);
  };
 
- const handleClipSplit: any = (clipId: any,
- splitTime: any) => {
+ const handleClipSplit = (clipId,
+ splitTime) => {
  const clip = clips.find(c => c.id === clipId);
  if (!clip) {
 return;
@@ -155,9 +155,9 @@ return;
  description: `Split ${clip.name} at ${formatTime(splitTime)}` }]);
  };
 
- const handleVolumeChange: any = (clipId: any,
- volume: any) => {
- setClips(prev => prev.map((clip: any) =>
+ const handleVolumeChange = (clipId,
+ volume) => {
+ setClips(prev => prev.map((clip) =>
  clip.id === clipId ? { ...clip as any, volume } : clip));
 
  setEditHistory(prev => [...prev as any, {
@@ -166,7 +166,7 @@ return;
  description: `Changed volume to ${volume}%` }]);
  };
 
- const handleSaveProject: any = () => {
+ const handleSaveProject = () => {
  const projectData = {
  ...currentProject as any,
  clips,
@@ -183,7 +183,7 @@ return;
  setTimeout((() => notification.remove()) as any, 3000);
  };
 
- const handleUndo: any = () => {
+ const handleUndo = () => {
  if (editHistory.length > 0) {
  const lastAction = editHistory[editHistory.length - 1];
  setEditHistory(prev => prev.slice(0, -1));
@@ -201,11 +201,11 @@ return;
  }
  };
 
- const handleRedo: any = () => {
+ const handleRedo = () => {
  // In a real app, you'd maintain a separate redo stack
  };
 
- const handleExport: any = () => {
+ const handleExport = () => {
  setIsExporting(true);
  setExportProgress(0);
 
@@ -244,7 +244,7 @@ return;
  }, 100);
  };
 
- const getClipColor: any = (type: TimelineClip['type']): string => {
+ const getClipColor = (type: TimelineClip['type']): string => {
  switch (type as any) {
  case 'video': return 'bg-blue-500';
  case 'audio': return 'bg-green-500';
@@ -253,7 +253,7 @@ return;
  default: return 'bg-gray-500'
  };
 
- const getTrackLabel: any = (track: any): string => {
+ const getTrackLabel = (track): string => {
  switch (track as any) {
  case 0: return 'Video';
  case 1: return 'Audio';
@@ -292,7 +292,7 @@ return;
 // FIXED:  </div>
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e: any) => handleUndo(e)}
+// FIXED:  onClick={(e) => handleUndo(e)}
 // FIXED:  disabled={editHistory.length === 0}
 // FIXED:  className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
  >
@@ -300,21 +300,21 @@ return;
  Undo
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleRedo(e)}
+// FIXED:  onClick={(e) => handleRedo(e)}
 // FIXED:  className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600"
  >
  <ArrowUturnRightIcon className="w-4 h-4 mr-1" />
  Redo
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleSaveProject(e)}
+// FIXED:  onClick={(e) => handleSaveProject(e)}
 // FIXED:  className="flex items-center px-3 py-2 text-sm bg-blue-600 rounded hover:bg-blue-700"
  >
  <DocumentIcon className="w-4 h-4 mr-1" />
  Save
 // FIXED:  </button>
  <button />
-// FIXED:  onClick={(e: any) => handleExport(e)}
+// FIXED:  onClick={(e) => handleExport(e)}
 // FIXED:  disabled={isExporting}
 // FIXED:  className="flex items-center px-4 py-2 text-sm bg-red-600 rounded hover:bg-red-700 disabled:opacity-50"
  >
@@ -346,7 +346,7 @@ return;
  <div className="flex items-center justify-between">
  <div className="flex items-center space-x-4">
  <button />
-// FIXED:  onClick={(e: any) => handlePlayPause(e)}
+// FIXED:  onClick={(e) => handlePlayPause(e)}
 // FIXED:  className="flex items-center justify-center w-10 h-10 bg-red-600 rounded-full hover:bg-red-700"
  >
  {isPlaying ? (
@@ -420,7 +420,7 @@ return;
  <div
  ref={timelineRef}
 // FIXED:  className="flex-1 h-6 bg-gray-700 rounded relative cursor-pointer" />
-// FIXED:  onClick={(e: any) => handleTimelineClick(e)}
+// FIXED:  onClick={(e) => handleTimelineClick(e)}
  >
  {/* Time markers */}
  {Array.from({ length: Math.ceil(currentProject.duration / 10) + 1 }, (_, i) => (

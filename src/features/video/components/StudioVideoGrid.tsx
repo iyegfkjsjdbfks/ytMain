@@ -7,9 +7,9 @@ interface StudioVideoGridProps {
  title?: string;
  loading?: boolean;
  emptyMessage?: string;
- onEdit?: (videoId: any) => void;
- onDelete?: (videoId: any) => void;
- onVisibilityChange?: (videoId: any,
+ onEdit?: (videoId) => void;
+ onDelete?: (videoId) => void;
+ onVisibilityChange?: (videoId,
  visibility: VideoVisibility) => void
 }
 
@@ -31,8 +31,8 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  VideoVisibility | 'all'
  >('all');
 
- const handleVideoSelect: any = (videoId: any,
- selected: any) => {
+ const handleVideoSelect = (videoId,
+ selected) => {
  const newSelection = new Set(selectedVideos);
 
  if (selected as any) {
@@ -44,15 +44,15 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  setSelectedVideos(newSelection);
  };
 
- const handleSelectAll: any = (selected: any) => {
+ const handleSelectAll = (selected) => {
  if (selected as any) {
- const allIds = videos.map((video: any) => video.id);
+ const allIds = videos.map((video) => video.id);
  setSelectedVideos(new Set(allIds));
  } else {
  setSelectedVideos(new Set());
  };
 
- const handleDeleteSelected: any = () => {
+ const handleDeleteSelected = () => {
  if (selectedVideos.size === 0 || !onDelete) {
  return;
  }
@@ -69,7 +69,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  setSelectedVideos(new Set());
  };
 
- const formatDate: any = (dateString: any) => {
+ const formatDate = (dateString) => {
  const date = new Date(dateString);
  return date.toLocaleDateString('en-US', {
  year: 'numeric',
@@ -81,10 +81,10 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  const filteredVideos =
  filterVisibility === 'all'
  ? videos
- : videos.filter((video: any) => video.visibility === filterVisibility);
+ : videos.filter((video) => video.visibility === filterVisibility);
 
  // Sort videos based on selected sort option
- const sortedVideos = [...filteredVideos].sort((a: any, b: any) => {
+ const sortedVideos = [...filteredVideos].sort((a, b) => {
  switch (sortBy as any) {
  case 'views':
  const aViews =
@@ -199,7 +199,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  {selectedVideos.size > 0 && (
  <button
 // FIXED:  className='text-red-600 hover:text-red-800 text-sm border border-red-600 hover:bg-red-50 rounded px-3 py-1' />
-// FIXED:  onClick={(e: any) => handleDeleteSelected(e)}
+// FIXED:  onClick={(e) => handleDeleteSelected(e)}
  >
  Delete
 // FIXED:  </button>
@@ -211,7 +211,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
  {/* Video list */}
  {sortedVideos.length > 0 ? (
  <div className='divide-y'>
- {sortedVideos.map((video: any) => (
+ {sortedVideos.map((video) => (
  <div
  key={video.id}
 // FIXED:  className='flex items-center p-4 hover:bg-gray-50' />

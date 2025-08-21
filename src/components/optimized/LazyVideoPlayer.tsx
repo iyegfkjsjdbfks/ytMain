@@ -18,7 +18,7 @@ interface LazyVideoPlayerProps {
  className?: string;
 }
 
-const VideoPlayerFallback: any = () => (
+const VideoPlayerFallback = () => (
  <div className='aspect-video bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center'>
  <LoadingSpinner size='lg' />
  <span className='ml-2 text-gray-600 dark:text-gray-400'>

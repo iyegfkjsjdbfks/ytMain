@@ -30,7 +30,7 @@ const positionClasses = {
  'bottom-left': 'top-full left-0 mt-2',
  'bottom-right': 'top-full right-0 mt-2' };
 
-const DropdownMenu: any = ({
+const DropdownMenu = ({
  isOpen,
  children,
  className = '',
@@ -53,7 +53,7 @@ return null;
  );
 };
 
-const DropdownMenuItem: any = ({
+const DropdownMenuItem = ({
  onClick,
  children,
  className = '',
@@ -66,7 +66,7 @@ const DropdownMenuItem: any = ({
 
  return (
  <button />
-// FIXED:  onClick={(e: any) => onClick(e)}
+// FIXED:  onClick={(e) => onClick(e)}
 // FIXED:  disabled={disabled}
 // FIXED:  className={cn(
  'w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors',
@@ -80,7 +80,7 @@ const DropdownMenuItem: any = ({
  );
 };
 
-const DropdownMenuSeparator: any = ({
+const DropdownMenuSeparator = ({
  className = '' }: DropdownMenuSeparatorProps) => {
  return (
  <hr className={cn('my-2 border-gray-200 dark:border-gray-600', className)} />

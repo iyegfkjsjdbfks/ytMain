@@ -25,7 +25,7 @@ const PlaylistsPage: React.FC = () => {
  try {
  const fetchedPlaylists = await getUserPlaylists();
  setPlaylists(fetchedPlaylists);
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to fetch user playlists:', error);
  setPlaylists([]);
  } finally {
@@ -58,20 +58,20 @@ const PlaylistsPage: React.FC = () => {
  setPlaylists(prev => [playlistWithDetails, ...prev]);
  setIsCreateModalOpen(false);
  setNewPlaylistName('');
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Failed to create playlist:', error);
  setCreateError('Failed to create playlist. Please try again.');
  } finally {
  setIsCreating(false);
  };
 
- const closeCreateModal: any = () => {
+ const closeCreateModal = () => {
  setIsCreateModalOpen(false);
  setNewPlaylistName('');
  setCreateError(null);
  };
 
- const renderSkeleton: any = () => (
+ const renderSkeleton = () => (
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
  {Array.from({ length: 5 }).map((_, index) => (
  <div key={index} className="bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm animate-pulse">
@@ -106,7 +106,7 @@ const PlaylistsPage: React.FC = () => {
  renderSkeleton()
  ) : playlists.length > 0 ? (
  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
- {playlists.map((playlist: any) => (
+ {playlists.map((playlist) => (
  <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
  <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
  <img
@@ -146,12 +146,12 @@ const PlaylistsPage: React.FC = () => {
  <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl w-full max-w-md">
  <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Create New Playlist</h2>
- <button onClick={(e: any) => closeCreateModal(e)} className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700">
+ <button onClick={(e) => closeCreateModal(e)} className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700">
  <XMarkIcon className="w-5 h-5 text-neutral-500 dark:text-neutral-300" />
 // FIXED:  </button>
 // FIXED:  </div>
 
- <form onSubmit={(e: any) => handleCreatePlaylist(e)} className="p-4 space-y-4">
+ <form onSubmit={(e) => handleCreatePlaylist(e)} className="p-4 space-y-4">
  <div>
  <label htmlFor="playlistName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
  Playlist Name
@@ -160,7 +160,7 @@ const PlaylistsPage: React.FC = () => {
 // FIXED:  id="playlistName"
 // FIXED:  type="text"
 // FIXED:  value={newPlaylistName} />
-// FIXED:  onChange={(e: any) => {
+// FIXED:  onChange={(e) => {
  setNewPlaylistName(e.target.value);
  setCreateError(null);
  }
@@ -181,7 +181,7 @@ const PlaylistsPage: React.FC = () => {
  <div className="flex justify-end space-x-3 pt-2">
  <button
 // FIXED:  type="button" />
-// FIXED:  onClick={(e: any) => closeCreateModal(e)}
+// FIXED:  onClick={(e) => closeCreateModal(e)}
 // FIXED:  className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md transition-colors"
  >
  Cancel

@@ -115,7 +115,7 @@ interface UnifiedAppContextType {
   state: UnifiedAppState;
   
   // Auth actions
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email, password) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<boolean>;
   
@@ -128,14 +128,14 @@ interface UnifiedAppContextType {
   toggleMiniplayer: () => void;
   
   // Watch Later actions
-  addToWatchLater: (videoId: string) => void;
-  removeFromWatchLater: (videoId: string) => void;
-  isInWatchLater: (videoId: string) => boolean;
+  addToWatchLater: (videoId) => void;
+  removeFromWatchLater: (videoId) => void;
+  isInWatchLater: (videoId) => boolean;
   
   // UI actions
   toggleSidebar: () => void;
   addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
-  removeNotification: (id: string) => void;
+  removeNotification: (id) => void;
 }
 
 // Create Context
@@ -170,7 +170,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   }, []);
 
   // Auth actions
-  const login = useCallback(async (email: string, password: string): Promise<boolean> => {
+  const login = useCallback(async (email, password): Promise<boolean> => {
     dispatch({ type: "SET_AUTH_LOADING", payload: true });
 
     try {
@@ -273,15 +273,15 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   }, []);
 
   // Watch Later actions
-  const addToWatchLater = useCallback((videoId: string) => {
+  const addToWatchLater = useCallback((videoId) => {
     dispatch({ type: "ADD_TO_WATCH_LATER", payload: videoId });
   }, []);
 
-  const removeFromWatchLater = useCallback((videoId: string) => {
+  const removeFromWatchLater = useCallback((videoId) => {
     dispatch({ type: "REMOVE_FROM_WATCH_LATER", payload: videoId });
   }, []);
 
-  const isInWatchLater = useCallback((videoId: string): boolean => {
+  const isInWatchLater = useCallback((videoId): boolean => {
     return state.watchLaterVideos.includes(videoId);
   }, [state.watchLaterVideos]);
 
@@ -304,7 +304,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     }, 5000);
   }, []);
 
-  const removeNotification = useCallback((id: string) => {
+  const removeNotification = useCallback((id) => {
     dispatch({ type: "REMOVE_NOTIFICATION", payload: id });
   }, []);
 

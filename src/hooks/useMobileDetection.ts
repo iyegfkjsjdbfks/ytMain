@@ -10,7 +10,7 @@ interface MobileDetectionResult {
  deviceType: 'mobile' | 'tablet' | 'desktop'
 }
 
-export const useMobileDetection: any = (): MobileDetectionResult => {
+export const useMobileDetection = (): MobileDetectionResult => {
  const [detection, setDetection] = useState<MobileDetectionResult>(() => {
  if (typeof window === 'undefined') {
  return {
@@ -86,11 +86,11 @@ export const useMobileDetection: any = (): MobileDetectionResult => {
  }
 
  useEffect(() => {
- const handleResize: any = () => {
+ const handleResize = () => {
  setDetection(getDetectionResult());
  };
 
- const handleOrientationChange: any = () => {
+ const handleOrientationChange = () => {
  // Delay to ensure dimensions are updated
  setTimeout((() => {
  setDetection(getDetectionResult());
@@ -110,7 +110,7 @@ export const useMobileDetection: any = (): MobileDetectionResult => {
 };
 
 // Hook for responsive breakpoints
-export const useBreakpoint: any = () => {
+export const useBreakpoint = () => {
  const { screenSize } = useMobileDetection();
 
  return {
@@ -124,7 +124,7 @@ export const useBreakpoint: any = () => {
 };
 
 // Hook for touch interactions
-export const useTouchInteractions: any = () => {
+export const useTouchInteractions = () => {
  const { isTouchDevice } = useMobileDetection();
 
  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
@@ -134,19 +134,19 @@ export const useTouchInteractions: any = () => {
  null
  );
 
- const handleTouchStart: any = (e: TouchEvent) => {
+ const handleTouchStart = (e: TouchEvent) => {
  const touch = e.touches[0];
  if (touch as any) {
  setTouchStart({ x: touch.clientX, y: touch.clientY });
  };
 
- const handleTouchEnd: any = (e: TouchEvent) => {
+ const handleTouchEnd = (e: TouchEvent) => {
  const touch = e.changedTouches[0];
  if (touch as any) {
  setTouchEnd({ x: touch.clientX, y: touch.clientY });
  };
 
- const getSwipeDirection: any = (): 'left' | 'right' | 'up' | 'down' | null => {
+ const getSwipeDirection = (): 'left' | 'right' | 'up' | 'down' | null => {
  if (!touchStart || !touchEnd) {
  return null;
  }
@@ -178,7 +178,7 @@ export const useTouchInteractions: any = () => {
 };
 
 // Hook for viewport dimensions
-export const useViewport: any = () => {
+export const useViewport = () => {
  const [viewport, setViewport] = useState(() => {
  if (typeof window === 'undefined') {
  return { width: 1024, height: 768 };
@@ -187,7 +187,7 @@ export const useViewport: any = () => {
  });
 
  useEffect(() => {
- const handleResize: any = () => {
+ const handleResize = () => {
  setViewport({ width: window.innerWidth, height: window.innerHeight });
  };
 

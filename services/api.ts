@@ -17,14 +17,14 @@ const CACHE_DURATION = {
 class APICache {
  private cache = new Map<string, { data; timestamp: number; duration: number }>();
 
- set(key: string, data: any, duration: number = CACHE_DURATION.MEDIUM): void {
+ set(key, data, duration: number = CACHE_DURATION.MEDIUM): void {
  this.cache.set(key, {
  data,
  timestamp: Date.now(),
  duration });
  }
 
- get(key: string): any | null {
+ get(key): any | null {
  const item = this.cache.get(key);
  if (!item) {
 return null;
@@ -43,7 +43,7 @@ return null;
  this.cache.clear();
  }
 
- delete(key: string): void {
+ delete(key): void {
  this.cache.delete(key);
  }
 
@@ -61,12 +61,12 @@ class RequestQueue {
  private readonly maxRequestsPerMinute = 100;
 
  async add<T>(request: () => Promise<T>): Promise<T> {
- return new Promise((resolve: any, reject: any) => {
+ return new Promise((resolve, reject) => {
  this.queue.push(async (): Promise<void> => {
  try {
  const result = await request();
  resolve(result);
- } catch (error: any) {
+ } catch (error) {
  reject(error instanceof Error ? error : new Error(String(erro)));
  }
  });
@@ -109,7 +109,7 @@ const requestQueue = new RequestQueue();
 // HTTP Client
 class HTTPClient {
  private async request<T>(,
- url: any,
+ url,
  options: RequestInit = {},
  cacheKey?: string,
  cacheDuration?: number,
@@ -141,7 +141,7 @@ return cached;
  }
 
  async get<T>(,
- url: any,
+ url,
  cacheKey?: string,
  cacheDuration?: number,
  ): Promise<T> {
@@ -150,7 +150,7 @@ return cached;
  );
  }
 
- async post<T>(url: any, data: any): Promise<T> {
+ async post<T>(url, data): Promise<T> {
  return requestQueue.add(() =>
  this.requestT>(url, {
  method: 'POST',
@@ -158,7 +158,7 @@ return cached;
  );
  }
 
- async put<T>(url: any, data: any): Promise<T> {
+ async put<T>(url, data): Promise<T> {
  return requestQueue.add(() =>
  this.requestT>(url, {
  method: 'PUT',
@@ -166,7 +166,7 @@ return cached;
  );
  }
 
- async delete<T>(url: any): Promise<T> {
+ async delete<T>(url): Promise<T> {
  return requestQueue.add(() =>
  this.requestT>(url, { method: 'DELETE' }),
  );
@@ -231,7 +231,7 @@ export class VideoService {
  CACHE_DURATION.MEDIUM,
  );
 
- const videos: Video[] = response.items?.map((item: any) => ({
+ const videos: Video[] = response.items?.map((item) => ({
  id: item.id.videoId,
  title: item.snippet.title,
  description: item.snippet.description,
@@ -249,17 +249,17 @@ export class VideoService {
  channelAvatarUrl: '',
  tags: item.snippet.tags| [],
  category,
- visibility: 'public' as const, isLive: false,
+ visibility: 'public' as const isLive: false,
  isShort: false })) || [];
 
  return {
  videos,
  nextPageToken: response.nextPageToken| undefined };
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error fetching videos:', error);
  throw error;
  }
- static async getVideoById(id: string): Promise<Video | null> {
+ static async getVideoById(id): Promise<Video | null> {
  const cacheKey = `video_${id}`;
 
  try {
@@ -305,14 +305,14 @@ return null;
  channelAvatarUrl: '',
  tags: item.snippet.tags| [],
  category: item.snippet.categoryId| 'Unknown',
- visibility: 'public' as const, isLive: false,
+ visibility: 'public' as const isLive: false,
  isShort: false };
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error fetching video:', error);
  return null;
  }
  static async searchVideos(,
- query: any,
+ query,
  limit: number = 20,
  pageToken?: string,
  ): Promise<{ videos: Video[]; nextPageToken?: string }> {
@@ -349,7 +349,7 @@ return null;
  CACHE_DURATION.SHORT,
  );
 
- const videos: Video[] = response.items?.map((item: any) => ({
+ const videos: Video[] = response.items?.map((item) => ({
  id: item.id.videoId,
  title: item.snippet.title,
  description: item.snippet.description,
@@ -367,17 +367,17 @@ return null;
  channelAvatarUrl: '',
  tags: item.snippet.tags| [],
  category: 'Search Result',
- visibility: 'public' as const, isLive: false,
+ visibility: 'public' as const isLive: false,
  isShort: false })) || [];
 
  return {
  videos,
  nextPageToken: response.nextPageToken };
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error searching videos:', error);
  throw error;
  }
- private static parseDuration(duration: any): number {
+ private static parseDuration(duration): number {
  // Parse ISO 8601 duration (PT4M13S) to seconds
  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
  if (!match) {
@@ -391,7 +391,7 @@ return 0;
  return hours * 3600 + minutes * 60 + seconds;
  }
 // Mock data generator for development
-function generateMockChannel(id: string): Channel {
+function generateMockChannel(id): Channel {
  return {
  id,
  name: `Channel ${id}`,
@@ -410,7 +410,7 @@ function generateMockChannel(id: string): Channel {
 }
 
 export class ChannelService {
- static async getChannel(id: string): Promise<Channel | null> {
+ static async getChannel(id): Promise<Channel | null> {
  const cacheKey = `channel_${id}`;
 
  try {
@@ -447,12 +447,12 @@ return null;
  isVerified: false, // Would need to check separately,
  createdAt: item.snippet.publishedAt,
  updatedAt: new Date().toISOString() };
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error fetching channel:', error);
  return null;
  }
  static async getChannelVideos(,
- channelId: any,
+ channelId,
  limit: number = 20,
  pageToken?: string,
  ): Promise<{ videos: Video; nextPageToken?: string }> {
@@ -490,7 +490,7 @@ return null;
  CACHE_DURATION.MEDIUM,
  );
 
- const videos: Video[] = response.items?.map((item: any) => ({
+ const videos: Video[] = response.items?.map((item) => ({
  id: item.id.videoId,
  title: item.snippet.title,
  description: item.snippet.description,
@@ -508,20 +508,20 @@ return null;
  channelAvatarUrl: '',
  tags: item.snippet.tags| [],
  category: 'Channel Video',
- visibility: 'public' as const, isLive: false,
+ visibility: 'public' as const isLive: false,
  isShort: false })) || [];
 
  return {
  videos,
  nextPageToken: response.nextPageToken };
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error fetching channel videos:', error);
  throw error;
  }
 }
 
 export class PlaylistService {
- static async getUserPlaylists(_userId: any): Promise<UserPlaylist[]> {
+ static async getUserPlaylists(_userId): Promise<UserPlaylist[]> {
  try {
  if (import.meta.env.MODE === 'development') {
  await new Promise(resolve => setTimeout((resolve) as any, 300));
@@ -545,7 +545,7 @@ export class PlaylistService {
 
  // Production implementation would go here
  return [];
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Error fetching user playlists:', error);
  throw error;
  }
@@ -554,7 +554,7 @@ export class PlaylistService {
 // Export cache utilities
 export const cacheUtils = {
  clear: () => apiCache.clear(),
- delete: (key: string) => apiCache.delete(key),
+ delete: (key) => apiCache.delete(key),
  size: () => apiCache.size() };
 
 // Export for testing

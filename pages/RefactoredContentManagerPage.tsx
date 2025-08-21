@@ -57,16 +57,16 @@ const RefactoredContentManagerPage: React.FC = () => {
  // Mock implementation
  };
 
- const updateVideo = async (_id: any,
+ const updateVideo = async (_id,
  _formData: VideoEditFormData): Promise<any> => {
  // Mock implementation
  };
 
- // const deleteVideo = async (_id: any): Promise<any> => {
+ // const deleteVideo = async (_id): Promise<any> => {
  // // Mock implementation
  // };
 
- // const toggleVideoVisibility = async (_id: any, _visibility: any): Promise<any> => {
+ // const toggleVideoVisibility = async (_id, _visibility): Promise<any> => {
  // // Mock implementation
  // };
 
@@ -86,7 +86,7 @@ const RefactoredContentManagerPage: React.FC = () => {
  execute: async (action: () => Promise<void>) => {
  try {
  await action();
- } catch (error: any) {
+ } catch (error) {
  (console as any).error('Action failed:', error);
  // Handle error if needed
  }
@@ -94,7 +94,7 @@ const RefactoredContentManagerPage: React.FC = () => {
  };
 
  // Filter videos based on active tab
- const filteredVideos = videos.filter((video: any) => {
+ const filteredVideos = videos.filter((video) => {
  switch (activeTab as any) {
  case 'published':
  return video.visibility === 'public';
@@ -113,26 +113,26 @@ const RefactoredContentManagerPage: React.FC = () => {
  const uploadFormFields = [
  {
  name: 'videoFile',
- type: "file" as const, label: 'Video File',
+ type: "file" as const label: 'Video File',
  required: true,
  accept: 'video/*',
  placeholder: 'Select video file to upload' },
  {
  name: 'title',
- type: "text" as const, label: 'Title',
+ type: "text" as const label: 'Title',
  required: true,
  placeholder: 'Enter video title' },
  {
  name: 'description',
- type: "textarea" as const, label: 'Description',
+ type: "textarea" as const label: 'Description',
  placeholder: 'Enter video description' },
  {
  name: 'tags',
- type: "text" as const, label: 'Tags',
+ type: "text" as const label: 'Tags',
  placeholder: 'Enter tags separated by commas' },
  {
  name: 'category',
- type: "select" as const, label: 'Category',
+ type: "select" as const label: 'Category',
  options: [
  { value: 'entertainment',
  label: 'Entertainment' },
@@ -150,7 +150,7 @@ const RefactoredContentManagerPage: React.FC = () => {
  label: 'Technology' }] },
  {
  name: 'visibility',
- type: "select" as const, label: 'Visibility',
+ type: "select" as const label: 'Visibility',
  options: [
  { value: 'public',
  label: 'Public' },
@@ -160,7 +160,7 @@ const RefactoredContentManagerPage: React.FC = () => {
  label: 'Private' }] },
  {
  name: 'thumbnail',
- type: "file" as const, label: 'Thumbnail (Optional)',
+ type: "file" as const label: 'Thumbnail (Optional)',
  accept: 'image/*',
  placeholder: 'Select thumbnail image' }];
 
@@ -191,7 +191,7 @@ return;
  };
 
  // Handle video delete
- // const handleVideoDelete = async (videoId: any): Promise<any> => {
+ // const handleVideoDelete = async (videoId): Promise<any> => {
  // if (!confirm('Are you sure you want to delete this video?')) return;
  //
  // await executeAction(async (): Promise<void> => {
@@ -201,7 +201,7 @@ return;
  // };
 
  // Handle video visibility toggle
- // const _handleVisibilityToggle = async (videoId: any, newVisibility: any): Promise<any> => {
+ // const _handleVisibilityToggle = async (videoId, newVisibility): Promise<any> => {
  // await executeAction(async (): Promise<void> => {
  // await toggleVideoVisibility(videoId, newVisibility);
  // await refreshVideos();
@@ -209,13 +209,13 @@ return;
  // };
 
  // Open edit modal
- // const openEditModal: any = (video: Video) => {
+ // const openEditModal = (video: Video) => {
  // setSelectedVideo(video);
  // setIsEditModalOpen(true);
  // };
 
  // Get initial values for edit form
- const getEditFormInitialValues: any = () => {
+ const getEditFormInitialValues = () => {
  if (!selectedVideo) {
 return {
  }
@@ -363,7 +363,7 @@ return {
  >
  <BaseForm
  fields={uploadFormFields} />
-// FIXED:  onSubmit={(e: any) => handleVideoUpload(e)}
+// FIXED:  onSubmit={(e) => handleVideoUpload(e)}
  submitLabel="Upload Video"
  loading={actionLoading}
  error={actionError}
@@ -382,7 +382,7 @@ return {
  >
  <BaseForm
  fields={editFormFields} />
-// FIXED:  onSubmit={(e: any) => handleVideoEdit(e)}
+// FIXED:  onSubmit={(e) => handleVideoEdit(e)}
  submitLabel="Update Video"
  loading={actionLoading}
  error={actionError}

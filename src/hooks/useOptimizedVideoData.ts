@@ -31,7 +31,7 @@ const fetchRealVideos = async (category?: string): Promise<Video[]> => {
  return getVideos();
 };
 
-export const useOptimizedVideoData: any = ({
+export const useOptimizedVideoData = ({
  category,
  limit = 20,
  enableCache = true,
@@ -67,7 +67,7 @@ export const useOptimizedVideoData: any = ({
  const allVideos = await fetchRealVideos(category);
 
  // Simulate pagination with real videos
- const startIndex: any = (pageNum - 1) * limit;
+ const startIndex = (pageNum - 1) * limit;
  const endIndex = startIndex + limit;
  const newVideos = allVideos.slice(startIndex, endIndex);
 
@@ -85,7 +85,7 @@ export const useOptimizedVideoData: any = ({
  data: updatedData,
  timestamp: Date.now() });
     }
-  } catch (err: any) {
+  } catch (err) {
  const errorMessage =
  err instanceof Error ? err.message : 'Failed to fetch videos';
  setError(errorMessage);
@@ -139,14 +139,14 @@ export const useOptimizedVideoData: any = ({
 };
 
 // Specialized hooks for different video types
-export const useHomeVideos: any = (category?: string) => {
+export const useHomeVideos = (category?: string) => {
  return useOptimizedVideoData({
  ...(category && { category }),
  limit: 24,
  enableCache: true });
 };
 
-export const useTrendingVideos: any = () => {
+export const useTrendingVideos = () => {
  return useOptimizedVideoData({
  category: 'trending',
  limit: 20,
@@ -155,14 +155,14 @@ export const useTrendingVideos: any = () => {
  });
 };
 
-export const useChannelVideos: any = (channelId: any) => {
+export const useChannelVideos = (channelId) => {
  return useOptimizedVideoData({
  category: `channel-${channelId}`,
  limit: 15,
  enableCache: true });
 };
 
-export const useSearchVideos: any = (query: any) => {
+export const useSearchVideos = (query) => {
  return useOptimizedVideoData({
  category: `search-${query}`,
  limit: 20,

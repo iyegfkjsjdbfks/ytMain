@@ -8,7 +8,7 @@ import type { YouTubeSearchResult, GoogleSearchResult } from '../services/google
 import type { Video } from '../types';
 
 // Helper function to convert search results to Video type
-const convertToVideo: any = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
+const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
  if ('views' in item && 'likes' in item && 'visibility' in item) {
  // Already a Video type
  return item;
@@ -53,7 +53,7 @@ interface OptimizedSearchResultsProps {
 
 // Debounce hook for search optimization
 function useDebounce<T>(value: T,
- delay: any): T {
+ delay): T {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
  useEffect(() => {
@@ -70,26 +70,26 @@ function useDebounce<T>(value: T,
 
 // Memoized sorting functions
 const sortingFunctions = {
- relevance: (items: any,
- query: any) => {
- return items.sort((a: any,
- b: any) => {
+ relevance: (items,
+ query) => {
+ return items.sort((a,
+ b) => {
  const aRelevance = a.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
  const bRelevance = b.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
  return bRelevance - aRelevance;
  });
  },
- date: (items: any) => {
- return items.sort((a: any,
- b: any) => {
+ date: (items) => {
+ return items.sort((a,
+ b) => {
  const dateA = a.uploadedAt || a.publishedAt || '';
  const dateB = b.uploadedAt || b.publishedAt || '';
  return new Date(dateB).getTime() - new Date(dateA).getTime();
  });
  },
- views: (items: any) => {
- return items.sort((a: any,
- b: any) => {
+ views: (items) => {
+ return items.sort((a,
+ b) => {
  const viewsA = typeof a.views === 'string' ? parseInt(a.views, 10) || 0 : (a.views || 0);
  const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : (b.views || 0);
  return viewsB - viewsA;
@@ -97,7 +97,7 @@ const sortingFunctions = {
  };
 
 // Helper function to extract video ID for iframe embedding
-const extractVideoId: any = (video: Video) => {
+const extractVideoId = (video: Video) => {
  let videoId = getYouTubeVideoId(video.videoUrl);
  if (!videoId) {
  videoId = video.id;
@@ -115,10 +115,10 @@ const extractVideoId: any = (video: Video) => {
 const YouTubeSearchResultCard: React.FC<{,
  item: Video | YouTubeSearchResult | GoogleSearchResult;
  onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void
-}> = memo(({ item, onVideoClick }: any) => {
+}> = memo(({ item, onVideoClick }) => {
  const convertedVideo = convertToVideo(item);
 
- const formatDuration: any = (duration: string | number) => {
+ const formatDuration = (duration: string | number) => {
  if (typeof duration === 'string') {
 return duration;
 }
@@ -130,7 +130,7 @@ return duration;
  return '0: 00'
  };
 
- const formatViews: any = (views: string | number) => {
+ const formatViews = (views: string | number) => {
  const num = typeof views === 'string' ? parseInt(views, 10) || 0 : views || 0;
  if (num >= 1000000000) {
  return `${(num / 1000000000).toFixed(1)}B`;
@@ -142,7 +142,7 @@ return duration;
  return num.toString();
  };
 
- const formatTimeAgo: any = (dateStr: any) => {
+ const formatTimeAgo = (dateStr) => {
  try {
  const date = new Date(dateStr);
  const now = new Date();
@@ -170,7 +170,7 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
 
  const videoId = extractVideoId(convertedVideo);
 
- const handleCardClick: any = (e: React.MouseEvent) => {
+ const handleCardClick = (e: React.MouseEvent) => {
  // Prevent navigation when clicking on video player
  if (videoId && (e.target as HTMLElement).closest('iframe, [id*="youtube-player"]')) {
  e.stopPropagation();
@@ -182,8 +182,8 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  return (
  <div
 // FIXED:  className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors" />
-// FIXED:  onClick={(e: any) => handleCardClick(e)}
- onKeyDown={(e: any) => {
+// FIXED:  onClick={(e) => handleCardClick(e)}
+ onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.preventDefault();
  onVideoClick(item);
@@ -199,7 +199,7 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  <div
 // FIXED:  className="w-full h-full" />
 // FIXED:  onClick={(e) => e.stopPropagation()}
- onKeyDown={(e: any) => {
+ onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.stopPropagation();
  }
@@ -292,12 +292,9 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  performanceMonitor.startMeasure('search-results-processing');
 
  const combined = [
- ...(videos || []).map((v: any) => ({ ...v as any, source: 'local' as const,
- contentType: 'video' as const })),
- ...(youtubeVideos || []).map((v: any) => ({ ...v as any, source: 'youtube' as const,
- contentType: 'video' as const })),
- ...(googleSearchVideos || []).map((v: any) => ({ ...v as any, source: 'google-search' as const,
- contentType: 'video' as const }))];
+ ...(videos || []).map((v) => ({ ...v as any, source: 'local' as const contentType: 'video' as const })),
+ ...(youtubeVideos || []).map((v) => ({ ...v as any, source: 'youtube' as const contentType: 'video' as const })),
+ ...(googleSearchVideos || []).map((v) => ({ ...v as any, source: 'google-search' as const contentType: 'video' as const }))];
 
  let sorted = combined;
  if (sortingFunctions[sortBy as keyof typeof sortingFunctions]) {
@@ -319,12 +316,12 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  case 'playlists':
  return []; // Not implemented yet
  case 'live':
- return allResults.filter((item: any) => {
+ return allResults.filter((item) => {
  const video = 'isLive' in item ? item : convertToVideo(item);
  return video.isLive;
  });
  case 'shorts':
- return allResults.filter((item: any) => {
+ return allResults.filter((item) => {
  const video = 'duration' in item ? item : convertToVideo(item);
  if (typeof video.duration === 'string') {
  const parts = video.duration.split(':');
@@ -447,7 +444,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
  ) : (
  <button />
-// FIXED:  onClick={(e: any) => onLoadMore(e)}
+// FIXED:  onClick={(e) => onLoadMore(e)}
 // FIXED:  className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
  >
  Load More Videos

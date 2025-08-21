@@ -9,7 +9,7 @@ interface UseVideoAutoplayProps {
  pause: () => void;
  unmute: () => void
  };
- setIsManuallyPaused: (paused: any) => void;
+ setIsManuallyPaused: (paused) => void;
  threshold?: number; // Intersection threshold for autoplay
  enableAutoplay?: boolean; // Allow disabling autoplay entirely
  unmuteOnAutoplay?: boolean; // Whether to unmute video when autoplay starts
@@ -19,7 +19,7 @@ interface UseVideoAutoplayProps {
  * Custom hook to handle video autoplay logic based on intersection observer
  * and manual pause state. Provides intelligent autoplay that respects user interactions.
  */
-export const useVideoAutoplay: any = ({
+export const useVideoAutoplay = ({
  isIntersecting,
  isPlaying,
  isManuallyPaused,

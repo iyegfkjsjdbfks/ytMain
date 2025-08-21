@@ -16,7 +16,7 @@ interface MetricData {
 interface AlertRule {
  id: string;
  name: string;
- condition: (value: string | number, threshold: any) => boolean;
+ condition: (value: string | number, threshold) => boolean;
  threshold: number;
  severity: 'low' | 'medium' | 'high' | 'critical';
  cooldown: number; // minutes
@@ -93,7 +93,7 @@ return undefined;
  /**
  * Record a custom metric
  */
- recordMetric(name: string, value: number, tags?: Record<string, string>): void {
+ recordMetric(name, value, tags?: Record<string, string>): void {
  const metric: MetricData = {
  timestamp: Date.now(),
  value,
@@ -122,14 +122,14 @@ return undefined;
  /**
  * Get metrics for a specific name
  */
- getMetrics(name: any, timeRange?: { start: number; end: number }): MetricData[] {
+ getMetrics(name, timeRange?: { start: number; end: number }): MetricData[] {
  const metrics = this.metrics.get(name) || [];
 
  if (!timeRange) {
 return metrics;
 }
 
- return metrics.filter((m: any) =>
+ return metrics.filter((m) =>
  m.timestamp >= timeRange.start && m.timestamp <= timeRange.end,
  );
  }
@@ -137,7 +137,7 @@ return metrics;
  /**
  * Get aggregated metrics
  */
- getAggregatedMetrics(name: any, timeRange?: { start: number; end: number }): {
+ getAggregatedMetrics(name, timeRange?: { start: number; end: number }): {
  count: number;
  avg: number;
  min: number;
@@ -146,7 +146,7 @@ return metrics;
  p99: number;
   } {
  const metrics = this.getMetrics(name, timeRange);
- const values = metrics.map((m: any) => m.value).sort((a, b) => a - b);
+ const values = metrics.map((m) => m.value).sort((a, b) => a - b);
 
  if (values.length === 0) {
  return { count: 0, avg: 0, min: 0, max: 0, p95: 0, p99: 0 };
@@ -252,7 +252,7 @@ continue;
  if (!result.healthy) {
  overallHealthy = false;
  }
- } catch (error: any) {
+ } catch (error) {
  checks.push({
  name,
  healthy: false,
@@ -348,7 +348,7 @@ continue;
  this.addHealthCheck({
  name: 'memory-usage',
  check: async (): Promise<void> => {
- const memInfo: any = (((performance as any))).memory;
+ const memInfo = (((performance as any))).memory;
  if (!memInfo) {
 return { healthy: true };
 }
@@ -416,7 +416,7 @@ return undefined;
 }
 
  // Memory usage
- const memInfo: any = (((performance as any))).memory;
+ const memInfo = (((performance as any))).memory;
  if (memInfo as any) {
  this.recordMetric('memory-usage') as any, memInfo.usedJSHeapSize);
  }
@@ -448,7 +448,7 @@ return undefined;
  try {
  const result = await check.check();
  this.recordMetric(`health-${name}`, result.healthy ? 1 : 0);
- } catch (error: any) {
+ } catch (error) {
  this.recordMetric(`health-${name}`, 0);
  (console as any).warn(`Health check ${name} failed:`, error);
  };
@@ -470,7 +470,7 @@ return undefined;
  }) as any, 10000); // Check every 10 seconds
  }
 
- private checkAlerts(metricName: any, value: string | number): void {
+ private checkAlerts(metricName, value: string | number): void {
  for (const [alertId, alert] of this.alerts) {
  const alertPrefix = alertId?.split('-')[0];
  if ((alertPrefix && metricName.includes(alertPrefix)) || alertId === metricName) {
@@ -536,7 +536,7 @@ return undefined;
  return sessionId;
  }
 
- private generateSecureToken(length: any): string {
+ private generateSecureToken(length): string {
  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
  let result = '';
  for (let i = 0; i < length; i++) {
@@ -578,7 +578,7 @@ return undefined;
  const events = ['click', 'scroll', 'keydown', 'touchstart'];
 
  events.forEach(eventType => {
- document.addEventListener(eventType(event: any) => {
+ document.addEventListener(eventType(event) => {
  if (!this.isTracking) {
 return undefined;
 }
@@ -650,7 +650,7 @@ return undefined;
  }
 
  // Track resource loading
- const observer = new PerformanceObserver((list: any) => {
+ const observer = new PerformanceObserver((list) => {
  if (!this.isTracking) {
 return undefined;
 }
@@ -679,10 +679,10 @@ class CodeQualityMetrics {
  }
 
  async collectMetrics(): Promise<{
-  bundle: any;
-  performance: any;
-  accessibility: any;
-  security: any;
+  bundle;
+  performance;
+  accessibility;
+  security;
   }> {
  const [bundle, performance, accessibility, security] = await Promise.all([
  this.bundleAnalyzer.analyze(),

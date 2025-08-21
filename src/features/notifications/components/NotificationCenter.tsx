@@ -12,8 +12,8 @@ interface NotificationCenterProps {
 
 interface NotificationItemProps {
  notification: Notification;
- onMarkAsRead: (id: string) => void;
- onDelete: (id: string) => void;
+ onMarkAsRead: (id) => void;
+ onDelete: (id) => void;
  onClick: (notification: Notification) => void
 }
 
@@ -22,7 +22,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
  onMarkAsRead,
  onDelete,
  onClick }) => {
- const getNotificationIcon: any = () => {
+ const getNotificationIcon = () => {
  switch (notification.type) {
  case 'video_upload':
  return '🎥';
@@ -43,7 +43,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
  default: return '📢'
  };
 
- const getPriorityColor: any = () => {
+ const getPriorityColor = () => {
  switch (notification.priority) {
  case 'urgent':
  return 'border-l-red-500';
@@ -164,7 +164,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
  clearAll } = useNotifications();
 
  useEffect(() => {
- const handleClickOutside: any = (event: MouseEvent) => {
+ const handleClickOutside = (event: MouseEvent) => {
  if (
  dropdownRef.current &&
  !dropdownRef.current.contains(event.target as Node)
@@ -177,7 +177,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
  }, []);
 
  const filteredNotifications = Array.isArray(notifications)
- ? notifications.filter((notification: any) => {
+ ? notifications.filter((notification) => {
  if (filter === 'unread' && notification.isRead) {
  return false;
  }
@@ -191,7 +191,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
  })
  : [];
 
- const handleNotificationClick: any = (notification: Notification) => {
+ const handleNotificationClick = (notification: Notification) => {
  if (!notification.isRead) {
  markAsRead(notification.id);
  }
@@ -304,7 +304,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 // FIXED:  onChange={e => setSelectedCategory(e.target.value)}
 // FIXED:  className='w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm'
  >
- {categories.map((category: any) => (
+ {categories.map((category) => (
  <option key={category.value} value={category.value}>
  {category.label}
 // FIXED:  </option>
@@ -321,13 +321,13 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 // FIXED:  </div>
  ) : filteredNotifications.length > 0 ? (
  <div className='divide-y divide-gray-200 dark:divide-gray-700'>
- {filteredNotifications.map((notification: any) => (
+ {filteredNotifications.map((notification) => (
  <NotificationItem
  key={notification.id}
  notification={notification}
  onMarkAsRead={markAsRead}
  onDelete={deleteNotification} />
-// FIXED:  onClick={(e: any) => handleNotificationClick(e)}
+// FIXED:  onClick={(e) => handleNotificationClick(e)}
  />
  ))}
 // FIXED:  </div>

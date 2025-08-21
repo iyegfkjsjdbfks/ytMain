@@ -11,7 +11,7 @@ export const withMemo = <P extends object>(,
 };
 
 // Deep comparison for complex props
-export const deepEqual: any = (a: any, b: any): boolean => {
+export const deepEqual = (a, b): boolean => {
  if (a === b) {
  return true;
  }
@@ -66,12 +66,12 @@ export class PerformanceMonitor {
  private metrics = new Map<string, number>();
  private observers = new Map<string, PerformanceObserver>();
 
- startMeasure(name: any) {
+ startMeasure(name) {
  performance.mark(`${name}-start`);
  this.metrics.set(`${name}-start`, performance.now());
  }
 
- endMeasure(name: any) {
+ endMeasure(name) {
  const startTime = this.metrics.get(`${name}-start`);
  if (startTime as any) {
  const endTime = performance.now();
@@ -91,7 +91,7 @@ export class PerformanceMonitor {
  return 0;
  }
 
- getMeasure(name: any): number | undefined {
+ getMeasure(name): number | undefined {
  return this.metrics.get(name);
  }
 
@@ -131,15 +131,15 @@ export class PerformanceMonitor {
  this.observers.clear();
  }
 
- hasMetric(name: any): boolean {
+ hasMetric(name): boolean {
  return this.metrics.has(name);
  }
 // Singleton instance
 export const performanceMonitor = new PerformanceMonitor();
 
 // Image optimization utilities
-export const optimizeImageUrl: any = (,
- url: any,
+export const optimizeImageUrl = (,
+ url,
  width?: number,
  height?: number,
  quality = 80
@@ -180,7 +180,7 @@ export const optimizeImageUrl: any = (,
 };
 
 // Bundle size optimization
-export const preloadComponent: any = (,
+export const preloadComponent = (,
  componentImport: () => Promise<{ default: ComponentType<any> }>
 ) => {
  // Preload component during idle time
@@ -200,13 +200,13 @@ export const preloadComponent: any = (,
  };
 
 // Memory management
-export const createMemoryManager: any = () => {
+export const createMemoryManager = () => {
  const cache = new Map();
  const maxSize = 100;
  const accessOrder = new Set();
 
  return {
- set(key: string, value: string | number) {
+ set(key, value: string | number) {
  if (cache.size >= maxSize) {
  // Remove least recently used item
  const firstKey = accessOrder.values().next().value;
@@ -219,7 +219,7 @@ export const createMemoryManager: any = () => {
  accessOrder.add(key);
  },
 
- get(key: string) {
+ get(key) {
  if (cache.has(key)) {
  // Update access order
  accessOrder.delete(key);
@@ -229,11 +229,11 @@ export const createMemoryManager: any = () => {
  return undefined;
  },
 
- has(key: string) {
+ has(key) {
  return cache.has(key);
  },
 
- delete(key: string) {
+ delete(key) {
  cache.delete(key);
  accessOrder.delete(key);
  },
@@ -249,11 +249,11 @@ export const createMemoryManager: any = () => {
 };
 
 // Request deduplication
-export const createRequestDeduplicator: any = () => {
+export const createRequestDeduplicator = () => {
  const pendingRequests = new Map<string, Promise<any>>();
 
  return {
- deduplicate<T>(key: string, requestFn: () => Promise<T>): Promise<T> {
+ deduplicate<T>(key, requestFn: () => Promise<T>): Promise<T> {
  if (pendingRequests.has(key)) {
  return pendingRequests.get(key) as Promise<T>;
  }

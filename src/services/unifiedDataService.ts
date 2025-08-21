@@ -97,7 +97,7 @@ export interface UnifiedDataResponse<T> {
  */
 class UnifiedDataService {
  private config: UnifiedDataConfig;
- private cache = new Map<string, { data: any; timestamp: number }>();
+ private cache = new Map<string, { data; timestamp: number }>();
 
  constructor(config: Partial<UnifiedDataConfig> = {}) {
  this.config = { ...defaultConfig as any, ...config };
@@ -169,7 +169,7 @@ class UnifiedDataService {
  * Search videos across all enabled sources
  */
  async searchVideos(
-    query: string,
+    query,
  filters: UnifiedSearchFilters = {},
  limit: number = 50
  ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
@@ -237,7 +237,7 @@ class UnifiedDataService {
  /**
  * Check if ID is a YouTube video format and extract actual YouTube ID
  */
- private extractYouTubeId(id: string): string | null {
+ private extractYouTubeId(id): string | null {
  // Handle youtube-prefixed IDs (e.g., youtube-YQHsXMglC9A)
  if (id.startsWith('youtube-')) {
  return id.substring(8); // Remove 'youtube-' prefix
@@ -266,7 +266,7 @@ class UnifiedDataService {
  * Get video by ID from any source
  * NEW STRATEGY: Always prioritize YouTube Data API v3 for metadata, regardless of video source
  */
- async getVideoById(id: string): Promise<UnifiedVideoMetadata | null> {
+ async getVideoById(id): Promise<UnifiedVideoMetadata | null> {
  logger.debug(`🚀 UnifiedDataService.getVideoById called with ID: ${id}`);
  const cacheKey = `video:${id}`;
  const cached = this.getCachedData<UnifiedVideoMetadata>(cacheKey);
@@ -353,7 +353,7 @@ class UnifiedDataService {
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
- } catch (error: any) {
+ } catch (error) {
  logger.warn(
  '⚠️ YouTube Data API v3 failed for metadata, falling back to Google Custom Search:',
  error
@@ -427,7 +427,7 @@ class UnifiedDataService {
  tags: googleSearchVideo.tags || [],
  isLive: false,
  isShort: false,
- visibility: 'public' as const, source: 'google-search' as const, metadata: {
+ visibility: 'public' as const source: 'google-search' as const metadata: {
  quality: 'hd',
  definition: 'high' },
  // Required properties for Video interface compatibility,
@@ -516,7 +516,7 @@ class UnifiedDataService {
  tags: googleSearchVideo.tags || [],
  isLive: false,
  isShort: false,
- visibility: 'public' as const, source: 'google-search' as const, metadata: {
+ visibility: 'public' as const source: 'google-search' as const metadata: {
  quality: 'hd',
  definition: 'high' },
  // Required properties for Video interface compatibility,
@@ -535,7 +535,7 @@ class UnifiedDataService {
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
- } catch (error: any) {
+ } catch (error) {
  logger.error(
  '❌ Failed to fetch video from Google Custom Search API:',
  error
@@ -654,7 +654,7 @@ class UnifiedDataService {
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
-  } catch (error: any) {
+  } catch (error) {
  logger.warn('Failed to fetch YouTube video:', error);
  }
  } else if (youtubeApiBlocked as any) {
@@ -727,7 +727,7 @@ class UnifiedDataService {
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
-  } catch (error: any) {
+  } catch (error) {
  logger.warn('Failed to fetch YouTube video as fallback:', error);
  }
  }
@@ -739,7 +739,7 @@ class UnifiedDataService {
  /**
  * Get channel by ID from any source
  */
- async getChannelById(id: string): Promise<UnifiedChannelMetadata | null> {
+ async getChannelById(id): Promise<UnifiedChannelMetadata | null> {
  const cacheKey = `channel:${id}`;
  const cached = this.getCachedData<UnifiedChannelMetadata>(cacheKey);
 
@@ -759,7 +759,7 @@ class UnifiedDataService {
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
-  } catch (error: any) {
+  } catch (error) {
  logger.warn('Failed to fetch YouTube channel:', error);
  }
  return null;
@@ -802,7 +802,7 @@ class UnifiedDataService {
 
  // Try Google Custom Search for discovery first
  return this.searchGoogleCustomSearchVideos('trending videos', filters);
- } catch (error: any) {
+ } catch (error) {
  logger.error(
  'Failed to fetch trending videos from Google Custom Search:',
  error
@@ -826,7 +826,7 @@ class UnifiedDataService {
  return [];
  }
  private async searchLocalVideos(
-    query: string,
+    query,
     filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
  // Local video search disabled - returning empty array
@@ -839,7 +839,7 @@ class UnifiedDataService {
  * Note: Metadata will still be fetched using YouTube Data API v3 via getVideoById
  */
  private async searchGoogleCustomSearchVideos(
-    query: string,
+    query,
     _filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
  try {
@@ -893,7 +893,7 @@ class UnifiedDataService {
  tags: video.tags || [],
  isLive: false,
  isShort: false,
- visibility: 'public' as const, source: 'google-search' as const, // Discovery source,
+ visibility: 'public' as const source: 'google-search' as const, // Discovery source,
  metadata: {
  quality: 'hd',
  definition: 'high' },
@@ -914,7 +914,7 @@ class UnifiedDataService {
  `✅ Converted ${unifiedVideos.length} Google Custom Search results to unified format`
  );
  return unifiedVideos;
- } catch (error: any) {
+ } catch (error) {
  logger.error(
  'Failed to search videos using Google Custom Search:',
  error
@@ -922,7 +922,7 @@ class UnifiedDataService {
  return [];
  }
  private async searchYouTubeVideos(
-    query: string,
+    query,
     filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
  try {
@@ -996,7 +996,7 @@ class UnifiedDataService {
  `Found ${unifiedVideos.length} YouTube videos for query: ${query}`
  );
  return unifiedVideos;
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to search YouTube videos:', error);
  return [];
  }
@@ -1005,7 +1005,7 @@ class UnifiedDataService {
  private mixVideoResults(
     localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
-    limit: number
+    limit
   ): UnifiedVideoMetadata[] {
  switch (this.config.mixing.strategy) {
  case 'round-robin':
@@ -1020,7 +1020,7 @@ class UnifiedDataService {
  private roundRobinMix(
     localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
-    limit: number
+    limit
   ): UnifiedVideoMetadata[] {
  const mixed: UnifiedVideoMetadata[] = [];
  const maxLength = Math.max(localVideos.length, youtubeVideos.length);
@@ -1043,7 +1043,7 @@ class UnifiedDataService {
  private sourcePriorityMix(
     localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
-    limit: number
+    limit
   ): UnifiedVideoMetadata[] {
  const priority = this.config.mixing.sourcePriority || ['local', 'youtube'];
  const mixed: UnifiedVideoMetadata[] = [];
@@ -1063,12 +1063,12 @@ class UnifiedDataService {
  private relevanceMix(
     localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
-    limit: number
+    limit
   ): UnifiedVideoMetadata[] {
  // Combine all videos and sort by relevance (views, likes, recency)
  const allVideos = [...localVideos as any, ...youtubeVideos];
 
- allVideos.sort((a: any, b: any) => {
+ allVideos.sort((a, b) => {
  // Simple relevance scoring based on views and engagement
  const scoreA = a.views + a.likes * 10 + a.commentCount * 5;
  const scoreB = b.views + b.likes * 10 + b.commentCount * 5;
@@ -1080,7 +1080,7 @@ class UnifiedDataService {
 
  // Cache management
 
- private getCachedData<T>(key: string): T | null {
+ private getCachedData<T>(key): T | null {
  if (!this.config.caching.enabled) {
  return null;
  }
@@ -1099,7 +1099,7 @@ class UnifiedDataService {
  return cached.data as T;
  }
 
- private setCachedData(key: string, data: any): void {
+ private setCachedData(key, data): void {
  if (!this.config.caching.enabled) {
  return;
  }
@@ -1141,7 +1141,7 @@ class UnifiedDataService {
 
  // Utility methods
 
- private formatViews(count: number): string {
+ private formatViews(count): string {
  if (count >= 1000000000) {
  return `${(count / 1000000000).toFixed(1)}B views`;
  }
@@ -1154,7 +1154,7 @@ class UnifiedDataService {
  return `${count} views`;
  }
 
- private formatTimeAgo(dateString: string): string {
+ private formatTimeAgo(dateString): string {
  if (!dateString) {
  return '';
  }

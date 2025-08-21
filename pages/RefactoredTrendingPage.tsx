@@ -22,7 +22,7 @@ const RefactoredTrendingPage: React.FC = () => {
  const { data: unifiedVideos, loading, error } = useVideosData('trending');
 
  // Convert UnifiedVideoMetadata to Video format for compatibility
- const videos: Video[] = unifiedVideos ? unifiedVideos.map((video: any) => ({,
+ const videos: Video[] = unifiedVideos ? unifiedVideos.map((video) => ({,
  id: video.id,
  title: video.title,
  description: video.description,
@@ -48,7 +48,7 @@ const RefactoredTrendingPage: React.FC = () => {
  createdAt: video.publishedAt || '',
  updatedAt: video.publishedAt || '' })) : [];
 
- const handleVideoClick: any = (video: Video) => {
+ const handleVideoClick = (video: Video) => {
  // Navigate to video or handle click
  window.location.href = `/watch?v=${video.id}`;
  };

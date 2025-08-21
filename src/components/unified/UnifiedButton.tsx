@@ -123,7 +123,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
  className
  );
 
- const content: any = (
+ const content = (
  <>
  {loading && (
  <LoadingSpinner

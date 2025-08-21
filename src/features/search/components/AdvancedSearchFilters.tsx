@@ -37,15 +37,15 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  [key]: value });
  };
 
- const toggleFeature: any = (feature: any) => {
+ const toggleFeature = (feature) => {
  const newFeatures = filters.features.includes(feature)
- ? filters.features.filter((f: any) => f !== feature)
+ ? filters.features.filter((f) => f !== feature)
  : [...filters.features, feature];
 
  updateFilter('features', newFeatures);
  };
 
- const resetFilters: any = () => {
+ const resetFilters = () => {
  onFiltersChange({
  type: "all",
  uploadDate: 'any',
@@ -56,7 +56,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  captions: 'any' });
  };
 
- const hasActiveFilters: any = () => {
+ const hasActiveFilters = () => {
  return (
  filters.type !== 'all' ||
  filters.uploadDate !== 'any' ||
@@ -68,7 +68,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  );
  };
 
- const getActiveFilterCount: any = () => {
+ const getActiveFilterCount = () => {
  let count = 0;
  if (filters.type !== 'all') {
  count++;
@@ -98,7 +98,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  <div className={className}>
  {/* Filter Toggle Button */}
  <button />
-// FIXED:  onClick={(e: any) => onToggle(e)}
+// FIXED:  onClick={(e) => onToggle(e)}
 // FIXED:  className='flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
  >
  <FunnelIcon className='w-5 h-5' />
@@ -120,14 +120,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  <div className='flex items-center gap-2'>
  {hasActiveFilters() && (
  <button />
-// FIXED:  onClick={(e: any) => resetFilters(e)}
+// FIXED:  onClick={(e) => resetFilters(e)}
 // FIXED:  className='text-sm text-blue-600 hover:text-blue-700 font-medium'
  >
  Clear all
 // FIXED:  </button>
  )}
  <button />
-// FIXED:  onClick={(e: any) => onToggle(e)}
+// FIXED:  onClick={(e) => onToggle(e)}
 // FIXED:  className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
  >
  <XMarkIcon className='w-5 h-5' />
@@ -152,7 +152,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  { value: 'playlist',
  label: 'Playlist', icon: PlayIcon },
  { value: 'live',
- label: 'Live', icon: PlayIcon }].map(({ value, label, icon: Icon }: any) => (
+ label: 'Live', icon: PlayIcon }].map(({ value, label, icon: Icon }) => (
  <label
  key={value}
 // FIXED:  className='flex items-center gap-2 cursor-pointer' />
@@ -194,7 +194,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  { value: 'month',
  label: 'This month' },
  { value: 'year',
- label: 'This year' }].map(({ value, label }: any) => (
+ label: 'This year' }].map(({ value, label }) => (
  <label
  key={value}
 // FIXED:  className='flex items-center gap-2 cursor-pointer' />
@@ -231,7 +231,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  { value: 'medium',
  label: '4-20 minutes' },
  { value: 'long',
- label: 'Over 20 minutes' }].map(({ value, label }: any) => (
+ label: 'Over 20 minutes' }].map(({ value, label }) => (
  <label
  key={value}
 // FIXED:  className='flex items-center gap-2 cursor-pointer' />
@@ -282,7 +282,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  { value: 'location',
  label: 'Location' },
  { value: 'purchased',
- label: 'Purchased' }].map(({ value, label }: any) => (
+ label: 'Purchased' }].map(({ value, label }) => (
  <label
  key={value}
 // FIXED:  className='flex items-center gap-2 cursor-pointer' />
@@ -315,7 +315,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  { value: 'view_count',
  label: 'View count' },
  { value: 'rating',
- label: 'Rating' }].map(({ value, label }: any) => (
+ label: 'Rating' }].map(({ value, label }) => (
  <label
  key={value}
 // FIXED:  className='flex items-center gap-2 cursor-pointer' />
@@ -352,7 +352,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  { value: '4k',
  label: '4K' },
  { value: 'hdr',
- label: 'HDR' }].map(({ value, label }: any) => (
+ label: 'HDR' }].map(({ value, label }) => (
  <label
  key={value}
 // FIXED:  className='flex items-center gap-2 cursor-pointer' />
@@ -379,7 +379,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  {/* Apply Button */}
  <div className='flex justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700'>
  <button />
-// FIXED:  onClick={(e: any) => onToggle(e)}
+// FIXED:  onClick={(e) => onToggle(e)}
 // FIXED:  className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  Apply Filters

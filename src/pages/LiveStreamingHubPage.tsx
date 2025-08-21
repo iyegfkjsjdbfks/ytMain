@@ -214,7 +214,7 @@ const LiveStreamingHubPage: React.FC = () => {
 // FIXED:  </p>
 // FIXED:  </div>
  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
- {liveStreams.map((stream: any) => (
+ {liveStreams.map((stream) => (
  <div
  key={stream.id}
 // FIXED:  className='relative group cursor-pointer' />
@@ -298,7 +298,7 @@ const LiveStreamingHubPage: React.FC = () => {
  );
 };
 
-const LiveStreamingHubPageWithErrorBoundary: any = () => (
+const LiveStreamingHubPageWithErrorBoundary = () => (
  <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
  <LiveStreamingHubPage />
 // FIXED:  </ErrorBoundary>

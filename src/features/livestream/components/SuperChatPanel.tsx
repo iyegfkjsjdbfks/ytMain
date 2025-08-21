@@ -37,9 +37,9 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  // Load existing super chats from API
  liveStreamService.chat.getChatMessages(streamId).then(messages => {
  const existingSuperChats = messages
- .filter((msg: any) => msg.superChat)
- .map((msg: any) => msg.superChat!)
- .sort((a: any, b: any) => {
+ .filter((msg) => msg.superChat)
+ .map((msg) => msg.superChat!)
+ .sort((a, b) => {
  const aTime = a.timestamp ? new Date(a.timestamp).getTime() : 0;
  const bTime = b.timestamp ? new Date(b.timestamp).getTime() : 0;
  return bTime - aTime;
@@ -69,11 +69,11 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  setNewSuperChat({ amount: 5,
  message: '' });
  setShowSendForm(false);
- } catch (error: any) {
+ } catch (error) {
  logger.error('Failed to send Super Chat:', error);
  };
 
- const getTierColor: any = (amount: any) => {
+ const getTierColor = (amount) => {
  const tier = superChatTiers
  .slice()
  .reverse()
@@ -81,7 +81,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  return tier?.color || 'bg-blue-500';
  };
 
- const getTierDuration: any = (amount: any) => {
+ const getTierDuration = (amount) => {
  const tier = superChatTiers
  .slice()
  .reverse()
@@ -89,13 +89,13 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  return tier?.duration || 30;
  };
 
- const formatCurrency: any = (amount: any) => {
+ const formatCurrency = (amount) => {
  return new Intl.NumberFormat('en-US', {
  style: 'currency',
  currency: 'USD' }).format(amount);
  };
 
- const formatTimestamp: any = (timestamp: Date) => {
+ const formatTimestamp = (timestamp: Date) => {
  return new Intl.DateTimeFormat('en-US', {
  hour: '2-digit',
  minute: '2-digit' }).format(timestamp);
@@ -140,7 +140,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  Amount
 // FIXED:  </label>
  <div className='grid grid-cols-3 gap-2'>
- {superChatTiers.map((tier: any) => (
+ {superChatTiers.map((tier) => (
  <button
  key={tier.amount} />
 // FIXED:  onClick={() =>
@@ -221,7 +221,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
 
  <div className='flex space-x-2'>
  <button />
-// FIXED:  onClick={(e: any) => handleSendSuperChat(e)}
+// FIXED:  onClick={(e) => handleSendSuperChat(e)}
 // FIXED:  disabled={!newSuperChat.message.trim()}
 // FIXED:  className='flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed'
  >
@@ -286,7 +286,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
  <p className='text-sm mt-1'>Be the first to send a Super Chat!</p>
 // FIXED:  </div>
  ) : (
- superChats.map((superChat: any) => (
+ superChats.map((superChat) => (
  <div
  key={superChat.id}
 // FIXED:  className={`p-3 rounded-lg border-l-4 ${getTierColor(superChat.amount)}`}

@@ -53,7 +53,7 @@ const MonetizationPage: React.FC = () => {
  const [selectedMetric, setSelectedMetric] = useState<'revenue' | 'rpm' | 'cpm'>('revenue');
 
  useEffect(() => {
- const generateMockData: any = () => {
+ const generateMockData = () => {
  setLoading(true);
 
  // Generate mock revenue data
@@ -76,14 +76,14 @@ const MonetizationPage: React.FC = () => {
  setRevenueData(mockRevenueData);
 
  // Generate mock metrics
- const totalRevenue = mockRevenueData.reduce((sum: any,
- day: any) =>
+ const totalRevenue = mockRevenueData.reduce((sum,
+ day) =>
  sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0);
 
- const membershipRevenue = mockRevenueData.reduce((sum: any,
- day: any) => sum + day.membershipRevenue, 0);
- const superChatRevenue = mockRevenueData.reduce((sum: any,
- day: any) => sum + day.superChatRevenue, 0);
+ const membershipRevenue = mockRevenueData.reduce((sum,
+ day) => sum + day.membershipRevenue, 0);
+ const superChatRevenue = mockRevenueData.reduce((sum,
+ day) => sum + day.superChatRevenue, 0);
 
  setMetrics({
  totalRevenue,
@@ -105,19 +105,19 @@ const MonetizationPage: React.FC = () => {
  generateMockData();
  }, [timeRange]);
 
- const formatCurrency: any = (amount: any) => {
+ const formatCurrency = (amount) => {
  return new Intl.NumberFormat('en-US', {
  style: 'currency',
  currency: 'USD',
  minimumFractionDigits: 2 }).format(amount);
  };
 
- const formatNumber: any = (num: any) => {
+ const formatNumber = (num) => {
  return new Intl.NumberFormat('en-US').format(num);
  };
 
- const getRevenueChartData: any = () => {
- const labels = revenueData.map((data: any) => {
+ const getRevenueChartData = () => {
+ const labels = revenueData.map((data) => {
  const date = new Date(data.date);
  return timeRange === '7d' || timeRange === '30d'
  ? date.toLocaleDateString('en-US', { month: 'short',
@@ -131,30 +131,30 @@ const MonetizationPage: React.FC = () => {
  datasets: [
  {
  label: 'Ad Revenue',
- data: revenueData.map((d: any) => d.adRevenue),
+ data: revenueData.map((d) => d.adRevenue),
  borderColor: 'rgb(59, 130, 246)',
  backgroundColor: 'rgba(59, 130, 246, 0.1)',
  tension: 0.4 },
  {
  label: 'Membership Revenue',
- data: revenueData.map((d: any) => d.membershipRevenue),
+ data: revenueData.map((d) => d.membershipRevenue),
  borderColor: 'rgb(16, 185, 129)',
  backgroundColor: 'rgba(16, 185, 129, 0.1)',
  tension: 0.4 },
  {
  label: 'Super Chat',
- data: revenueData.map((d: any) => d.superChatRevenue),
+ data: revenueData.map((d) => d.superChatRevenue),
  borderColor: 'rgb(245, 158, 11)',
  backgroundColor: 'rgba(245, 158, 11, 0.1)',
  tension: 0.4 },
  {
  label: 'Sponsorships',
- data: revenueData.map((d: any) => d.sponsorshipRevenue),
+ data: revenueData.map((d) => d.sponsorshipRevenue),
  borderColor: 'rgb(139, 92, 246)',
  backgroundColor: 'rgba(139, 92, 246, 0.1)',
  tension: 0.4 }] };
 
- const getRevenueSourcesData: any = () => {
+ const getRevenueSourcesData = () => {
  if (!revenueData.length) {
 return { labels: [],
  datasets: [] }
@@ -196,15 +196,13 @@ return { labels: [],
  maintainAspectRatio: false,
  plugins: {
  legend: {
- position: 'top' as const,
- labels: {
+ position: 'top' as const labels: {
  usePointStyle: true,
  padding: 20 } },
  tooltip: {
- mode: 'index' as const,
- intersect: false,
+ mode: 'index' as const intersect: false,
  callbacks: {
- label: (context: any) => {
+ label: (context) => {
  return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
  } } } },
  scales: {
@@ -221,16 +219,15 @@ return { labels: [],
  maintainAspectRatio: false,
  plugins: {
  legend: {
- position: 'bottom' as const,
- labels: {
+ position: 'bottom' as const labels: {
  usePointStyle: true,
  padding: 20 } },
  tooltip: {
  callbacks: {
- label: (context: any) => {
- const total = context.dataset.data.reduce((a: any,
- b: any) => a + b, 0);
- const percentage: any = ((context.parsed / total) * 100).toFixed(1);
+ label: (context) => {
+ const total = context.dataset.data.reduce((a,
+ b) => a + b, 0);
+ const percentage = ((context.parsed / total) * 100).toFixed(1);
  return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
  } } } };
 

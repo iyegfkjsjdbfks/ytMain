@@ -10,11 +10,11 @@ import type { Short } from '../src/types/core';
 interface ShortsPlayerProps {
  shorts: Short;
  currentIndex: number;
- onIndexChange: (index: number) => void;
- onLike: (shortId: any) => void;
- onSubscribe: (channelId: any) => void;
- onComment: (shortId: any) => void;
- onShare: (shortId: any) => void;
+ onIndexChange: (index) => void;
+ onLike: (shortId) => void;
+ onSubscribe: (channelId) => void;
+ onComment: (shortId) => void;
+ onShare: (shortId) => void;
  className?: string;
 }
 
@@ -45,12 +45,12 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
 return;
 }
 
- const handleTimeUpdate: any = () => {
- const progress: any = (video.currentTime / video.duration) * 100;
+ const handleTimeUpdate = () => {
+ const progress = (video.currentTime / video.duration) * 100;
  setProgress(progress);
  };
 
- const handleEnded: any = () => {
+ const handleEnded = () => {
  // Auto-advance to next short
  if (currentIndex < shorts.length - 1) {
  onIndexChange(currentIndex + 1);
@@ -59,8 +59,8 @@ return;
  onIndexChange(0);
  };
 
- const handleLoadStart: any = () => setIsLoading(true);
- const handleCanPlay: any = () => setIsLoading(false);
+ const handleLoadStart = () => setIsLoading(true);
+ const handleCanPlay = () => setIsLoading(false);
 
  video.addEventListener('timeupdate', handleTimeUpdate as EventListener);
  video.addEventListener('ended', handleEnded as EventListener);
@@ -89,7 +89,7 @@ return;
 
  useEffect(() => {
  // Handle keyboard navigation
- const handleKeyDown: any = (e: KeyboardEvent) => {
+ const handleKeyDown = (e: KeyboardEvent) => {
  switch (e.key) {
  case ' ':
  e.preventDefault();
@@ -146,13 +146,13 @@ return;
  }
  }, [currentIndex, shorts.length, onIndexChange]);
 
- const handleVideoClick: any = () => {
+ const handleVideoClick = () => {
  togglePlay();
  setShowControls(true);
  setTimeout((() => setShowControls(false)) as any, 2000);
  };
 
- const handleSeek: any = (e: React.MouseEvent) => {
+ const handleSeek = (e: React.MouseEvent) => {
  const video = videoRef.current;
  const progressBar = progressRef.current;
  if (!video || !progressBar) {
@@ -161,12 +161,12 @@ return;
 
  const rect = progressBar.getBoundingClientRect();
  const clickY = e.clientY - rect.top;
- const newTime: any = ((rect.height - clickY) / rect.height) * video.duration;
+ const newTime = ((rect.height - clickY) / rect.height) * video.duration;
 
  video.currentTime = newTime;
  };
 
- const formatNumber: any = (num: any): string => {
+ const formatNumber = (num): string => {
  if (num >= 1000000) {
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {
@@ -189,7 +189,7 @@ return null;
  loop={false}
  muted={isMuted}
  playsInline />
-// FIXED:  onClick={(e: any) => handleVideoClick(e)}
+// FIXED:  onClick={(e) => handleVideoClick(e)}
  poster={currentShort.thumbnailUrl}
  />
 
@@ -204,7 +204,7 @@ return null;
  <div
  ref={progressRef}
 // FIXED:  className="absolute right-2 top-20 bottom-20 w-1 bg-white/30 rounded-full cursor-pointer" />
-// FIXED:  onClick={(e: any) => handleSeek(e)}
+// FIXED:  onClick={(e) => handleSeek(e)}
  >
  <div
 // FIXED:  className="w-full bg-white rounded-full transition-all duration-100"
@@ -290,8 +290,8 @@ return null;
  {/* Hashtags */}
  {currentShort.tags.length > 0 && (
  <div className="flex flex-wrap gap-2 mb-3">
- {currentShort.tags.slice(0, 3).map((tag: string,
- index: number) => (
+ {currentShort.tags.slice(0, 3).map((tag,
+ index) => (
  <span
  key={index}
 // FIXED:  className="text-blue-400 text-sm hover:text-blue-300 cursor-pointer" />
@@ -359,7 +359,7 @@ return null;
 
  {/* Mute/Unmute */}
  <button />
-// FIXED:  onClick={(e: any) => toggleMute(e)}
+// FIXED:  onClick={(e) => toggleMute(e)}
 // FIXED:  className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
  >
  {isMuted ? (

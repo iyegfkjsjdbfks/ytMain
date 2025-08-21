@@ -58,11 +58,11 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: any)
  if (selectedCategory === 'All') {
  return videos;
  }
- return videos.filter((video: any) => video.category === selectedCategory)
+ return videos.filter((video) => video.category === selectedCategory)
  }, [videos, selectedCategory]);
 
  // Event handlers
- const handleCategorySelect = useCallback((category: any) => {
+ const handleCategorySelect = useCallback((category) => {
  setSelectedCategory(category);
  window.scrollTo({ top: 0,
  behavior: 'smooth' });
@@ -73,7 +73,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: any)
  window.location.hash = `/watch/${video.id}`;
  }, []);
 
- const handleChannelClick = useCallback((channelId: any) => {
+ const handleChannelClick = useCallback((channelId) => {
  // Navigate to channel page
  window.location.hash = `/channel/${channelId}`;
  }, []);
@@ -99,7 +99,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: any)
  {error}
 // FIXED:  </p>
  <button />
-// FIXED:  onClick={(e: any) => handleRefresh(e)}
+// FIXED:  onClick={(e) => handleRefresh(e)}
 // FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
  >
  Try Again
@@ -146,7 +146,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: any)
 
  {/* Refresh Button */}
  <button />
-// FIXED:  onClick={(e: any) => handleRefresh(e)}
+// FIXED:  onClick={(e) => handleRefresh(e)}
 // FIXED:  disabled={loading}
 // FIXED:  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
  title="Refresh"

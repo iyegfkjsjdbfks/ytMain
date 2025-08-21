@@ -15,7 +15,7 @@ export const PWA_CONFIG = {
  SERVICE_WORKER_PATH: '/sw.js',
 
  // Display Settings,
- DISPLAY: 'standalone' as const, ORIENTATION: 'portrait-primary' as const,
+ DISPLAY: 'standalone' as const ORIENTATION: 'portrait-primary' as const,
 
  // Theme Colors,
  THEME_COLOR: '#dc2626',
@@ -194,7 +194,7 @@ export const PWAEvents = {
  };
 
 // PWA Manifest Generator (for dynamic manifest generation if needed)
-export const generateManifest: any = () => ({
+export const generateManifest = () => ({
  name: PWA_CONFIG.APP_NAME,
  short_name: PWA_CONFIG.APP_SHORT_NAME,
  description: PWA_CONFIG.APP_DESCRIPTION,

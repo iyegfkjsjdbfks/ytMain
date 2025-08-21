@@ -6,7 +6,7 @@ interface TabsContextType {
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined);
 
-const useTabsContext: any = () => {
+const useTabsContext = () => {
  const context = useContext<any>(TabsContext);
  if (!context) {
  throw new Error('Tabs components must be used within a Tabs provider');

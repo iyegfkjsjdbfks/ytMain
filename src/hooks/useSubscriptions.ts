@@ -3,10 +3,10 @@ import { useState, useEffect, useCallback } from 'react';
 // Temporarily mock these functions until service is implemented
 const getSubscribedChannels = async (): Promise<SubscribedChannel[]> => [];
 const updateSubscriptionNotifications = async (
- channelId: any,
- enabled: any
+ channelId,
+ enabled
 ): Promise<void> => {};
-const unsubscribeFromChannel = async (channelId: any): Promise<void> => {};
+const unsubscribeFromChannel = async (channelId): Promise<void> => {};
 
 export interface SubscribedChannel {
  id: string;
@@ -28,7 +28,7 @@ export function useSubscriptions(): any {
  setError(null);
  const subscribedChannels = await getSubscribedChannels();
  setChannels(subscribedChannels);
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Error loading subscribed channels:', err);
  setError('Failed to load subscribed channels');
  } finally {
@@ -36,7 +36,7 @@ export function useSubscriptions(): any {
  }
  }, []);
 
- const toggleNotifications = useCallback(async (channelId: any): Promise<any> => {
+ const toggleNotifications = useCallback(async (channelId): Promise<any> => {
  try {
  const channel = channels.find(c => c.id === channelId);
  if (!channel) {
@@ -47,13 +47,13 @@ export function useSubscriptions(): any {
  await updateSubscriptionNotifications(channelId, newNotificationState);
 
  setChannels(prev =>
- prev.map((c: any) =>
+ prev.map((c) =>
  c.id === channelId
  ? { ...c as any, notificationsEnabled: newNotificationState }
  : c
  )
  );
- } catch (err: any) {
+ } catch (err) {
  (console as any).error('Error updating notification settings:', err);
  setError('Failed to update notification settings');
  }
@@ -61,23 +61,23 @@ export function useSubscriptions(): any {
  [channels]
  );
 
- const unsubscribe = useCallback(async (channelId: any): Promise<any> => {
+ const unsubscribe = useCallback(async (channelId): Promise<any> => {
  try {
  await unsubscribeFromChannel(channelId);
- setChannels(prev => prev.filter((c: any) => c.id !== channelId));
- } catch (err: any) {
+ setChannels(prev => prev.filter((c) => c.id !== channelId));
+ } catch (err) {
  (console as any).error('Error unsubscribing from channel:', err);
  setError('Failed to unsubscribe from channel');
  }
  }, []);
 
- const isSubscribed = useCallback((channelId: any) => {
+ const isSubscribed = useCallback((channelId) => {
  return channels.some(c => c.id === channelId);
  },
  [channels]
  );
 
- const getChannelNotificationState = useCallback((channelId: any) => {
+ const getChannelNotificationState = useCallback((channelId) => {
  const channel = channels.find(c => c.id === channelId);
  return channel?.notificationsEnabled || false;
  },
