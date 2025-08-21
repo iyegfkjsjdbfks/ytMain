@@ -353,7 +353,7 @@ class UnifiedDataService {
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
-  } catch (error: any) {
+ } catch (error: any) {
  logger.warn(
  '⚠️ YouTube Data API v3 failed for metadata, falling back to Google Custom Search:',
  error
@@ -535,7 +535,7 @@ class UnifiedDataService {
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
-  } catch (error: any) {
+ } catch (error: any) {
  logger.error(
  '❌ Failed to fetch video from Google Custom Search API:',
  error

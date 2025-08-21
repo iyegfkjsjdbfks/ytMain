@@ -6,7 +6,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import CommunityPage from '../../pages/CommunityPage';
 // Mock the hooks
 vi.mock('@hooks/useRefactoredHooks', () => ({
- useRefactoredHooks: () => ({,
+ useRefactoredHooks: () => ({
  posts: [
  {
  id: '1',

@@ -49,6 +49,7 @@ export default defineConfig({
  include: ['test/services/**/*.test.{ts,tsx}'],
  environment: 'node'
  }
+ }
  ],
  hookTimeout: 10000,
 

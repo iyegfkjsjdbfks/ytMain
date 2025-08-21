@@ -20,14 +20,15 @@ interface CommunityPost {
  engagement: {
  views: number;
  clickThroughRate: number;
- }
+ };
+};
 interface CommunityStats {
  totalPosts: number;
  totalEngagement: number;
  averageLikes: number;
  averageComments: number;
  topPerformingPost: string;
- reachGrowth: number
+ reachGrowth: number;
 }
 
 const formatDate: any = (date: Date) => {
@@ -77,7 +78,8 @@ return;
  createdAt: new Date(),
  engagement: {
  views: 0,
- clickThroughRate: 0 };
+ clickThroughRate: 0 }
+ };
 
  setPosts([newPost, ...posts]);
  setNewPostContent('');

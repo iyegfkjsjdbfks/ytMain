@@ -19,6 +19,7 @@ url.searchParams.set(key, value);
  url.searchParams.set('key', import.meta.env.VITE_YOUTUBE_API_KEY || '');
  return url.toString();
  }
+}
 describe('buildUrl function with different MODE values', () => {
  let testService: TestableYouTubeService;
  const originalEnv = import.meta.env;
@@ -312,7 +313,7 @@ describe('buildUrl function with different MODE values', () => {
  const url = testService.buildUrl('search', {
  part: 'snippet' });
 
- expect(url).toContain('https: //www.googleapis.com/youtube/v3/search')
+ expect(url).toContain('https://www.googleapis.com/youtube/v3/search')
  });
  });
 
