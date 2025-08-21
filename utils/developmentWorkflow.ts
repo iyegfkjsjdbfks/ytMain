@@ -17,14 +17,14 @@ interface WorkflowStage {
  timeout: number; // _seconds,
  retries: number;
  conditions: WorkflowCondition[];
- actions: WorkflowAction[]
+ actions: WorkflowAction[];
 }
 
 interface WorkflowCondition {
  type: "metric" | 'test-result' | 'security-scan' | 'performance' | 'code-quality';
  operator: 'gt' | 'lt' | 'eq' | 'gte' | 'lte' | 'contains' | 'not-contains';
  value: unknown;
- _source: string
+ _source: string;
 }
 
 interface WorkflowAction {
@@ -37,7 +37,7 @@ interface DeploymentStrategy {
  type: 'blue-green' | 'canary' | 'rolling' | 'feature-flag';
  _config: Record<string, any>;
  healthChecks: string[];
- rollbackTriggers: WorkflowCondition[]
+ rollbackTriggers: WorkflowCondition[];
 }
 
 interface QualityGateResult {
@@ -48,9 +48,9 @@ interface QualityGateResult {
  passed: boolean;
  value: unknown;
  threshold: unknown;
- message: string
+ message: string;
  }>;
- timestamp: number
+ timestamp: number;
 }
 
 interface ContinuousImprovementSuggestion {
@@ -61,7 +61,7 @@ interface ContinuousImprovementSuggestion {
  implementation: string;
  estimatedImpact: string;
  automatable: boolean;
- dependencies: string[]
+ dependencies: string[];
 }
 
 /**
