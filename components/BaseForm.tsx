@@ -144,88 +144,88 @@ const BaseForm: React.FC<BaseFormProps> = ({
  case 'textarea':
  return (
  <textarea
-// FIXED:  id={field.name}
-// FIXED:  name={field.name}
-// FIXED:  value={fieldValue} />
-// FIXED:  onChange={(e) => handleChange(e)}
+
+
+
+
  onBlur={() => handleBlur(field.name)}
-// FIXED:  placeholder={field.placeholder}
+
  required={field.required}
-// FIXED:  disabled={field.disabled || loading}
+
  rows={field.rows || 4}
-// FIXED:  className={baseInputClasses}
+
  />
  );
 
  case 'select':
  return (
  <select
-// FIXED:  id={field.name}
-// FIXED:  name={field.name}
-// FIXED:  value={fieldValue} />
-// FIXED:  onChange={(e) => handleChange(e)}
+
+
+
+
  onBlur={() => handleBlur(field.name)}
  required={field.required}
-// FIXED:  disabled={field.disabled || loading}
-// FIXED:  className={baseInputClasses}
+
+
  >
  <option value="">{field.placeholder || `Select ${field.label}`}</option>
  {field.options?.map((option) => (
  <option key={option.value} value={option.value}>
  {option.label}
-// FIXED:  </option>
+
  ))}
-// FIXED:  </select>
+
  );
 
  case 'checkbox':
  return (
  <div className="flex items-center">
  <input
-// FIXED:  id={field.name}
-// FIXED:  name={field.name}
-// FIXED:  type="checkbox"
-// FIXED:  checked={!!fieldValue} />
-// FIXED:  onChange={(e) => handleChange(e)}
+
+
+
+
+
  onBlur={() => handleBlur(field.name)}
  required={field.required}
-// FIXED:  disabled={field.disabled || loading}
-// FIXED:  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+
+
  />
  <label htmlFor={field.name} className="ml-2 text-sm text-gray-900 dark:text-white">
  {field.label}
-// FIXED:  </label>
-// FIXED:  </div>
+
+
  );
 
  case 'file':
  return (
  <input
-// FIXED:  id={field.name}
-// FIXED:  name={field.name}
-// FIXED:  type="file" />
-// FIXED:  onChange={(e) => setValue(field.name, e.target.files?.[0] || null)}
+
+
+
+
  onBlur={() => handleBlur(field.name)}
  required={field.required}
-// FIXED:  disabled={field.disabled || loading}
+
  accept={field.accept}
-// FIXED:  className={baseInputClasses}
+
  />
  );
 
  default:
  return (
  <input
-// FIXED:  id={field.name}
-// FIXED:  name={field.name}
-// FIXED:  type={field.type}
-// FIXED:  value={fieldValue} />
-// FIXED:  onChange={(e) => handleChange(e)}
+
+
+
+
+
  onBlur={() => handleBlur(field.name)}
-// FIXED:  placeholder={field.placeholder}
+
  required={field.required}
-// FIXED:  disabled={field.disabled || loading}
-// FIXED:  className={baseInputClasses}
+
+
  />
  );
  };
@@ -236,14 +236,14 @@ const BaseForm: React.FC<BaseFormProps> = ({
  {error && (
  <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
  <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
-// FIXED:  </div>
+
  )}
 
  {/* Success message */}
  {success && (
  <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
  <p className="text-green-600 dark:text-green-400 text-sm">{success}</p>
-// FIXED:  </div>
+
  )}
 
  {/* Form fields */}
@@ -256,7 +256,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  <label htmlFor={field.name} className="block text-sm font-medium text-gray-700 dark:text-gray-300">
  {field.label}
  {field.required && <span className="text-red-500 ml-1">*</span>}
-// FIXED:  </label>
+
  )}
 
  {renderField(field)}
@@ -264,7 +264,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  {fieldError && (
  <p className="text-red-500 text-sm">{fieldError}</p>
  )}
-// FIXED:  </div>
+
  );
  })}
 
@@ -274,40 +274,40 @@ const BaseForm: React.FC<BaseFormProps> = ({
  {/* Form actions */}
  <div className="flex gap-3 pt-4">
  <button
-// FIXED:  type="submit"
-// FIXED:  disabled={loading || isSubmitting}
-// FIXED:  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors" />
+
+
+
  >
  {loading || isSubmitting ? 'Loading...' : submitLabel}
-// FIXED:  </button>
+
 
  {onCancel && (
  <button
-// FIXED:  type="button" />
-// FIXED:  onClick={(e) => onCancel(e)}
-// FIXED:  disabled={loading}
-// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+
+
+
+
  >
  {cancelLabel}
-// FIXED:  </button>
+
  )}
 
  {showResetButton && (
- <button
-// FIXED:  type="button" />
-// FIXED:  onClick={() => {
- reset();
- setTouched({});
- }
-// FIXED:  disabled={loading}
-// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
- >
- {resetLabel}
-// FIXED:  </button>
- )}
-// FIXED:  </div>
-// FIXED:  </form>
- );
+          <button
+            type="button"
+            onClick={() => {
+              reset();
+              setTouched({});
+            }}
+            disabled={loading}
+            className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {resetLabel}
+          </button>
+        )}
+      </div>
+    </form>
+  );
 };
 
 export default BaseForm;

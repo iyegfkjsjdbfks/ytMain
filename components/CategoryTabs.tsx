@@ -16,8 +16,8 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory,
  {categories.map((category) => (
  <button
  key={category.id} />
-// FIXED:  onClick={() => setActiveCategory(category.id)}
-// FIXED:  className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+
+
  activeCategory === category.id
  ? 'bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900'
  : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
@@ -25,10 +25,10 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory,
  >
  <span>{category.icon}</span>
  <span>{category.label}</span>
-// FIXED:  </button>
+
  ))}
-// FIXED:  </div>
-// FIXED:  </div>
+
+
  );
 };
 
