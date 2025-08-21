@@ -15,7 +15,7 @@ const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 interface UnifiedDataConfig {
  sources: {
  local: boolean;
- youtube: boolean
+ youtube: boolean;
  };
  limits: {
  local?: number;
@@ -24,7 +24,7 @@ interface UnifiedDataConfig {
  };
  caching: {
  enabled: boolean;
- ttl: number
+ ttl: number;
  };
  mixing: {
  strategy: 'round-robin' | 'source-priority' | 'relevance';
@@ -35,18 +35,21 @@ interface UnifiedDataConfig {
 const defaultConfig: UnifiedDataConfig = {
  sources: {
  local: false,
- youtube: true },
+ youtube: true
+ },
  limits: {
  local: 0,
  youtube: 50,
- total: 50 },
+ total: 50
+ },
  caching: {
  enabled: true,
  ttl: 10 * 60 * 1000, // 10 minutes
  },
  mixing: {
  strategy: 'source-priority',
- sourcePriority: ['youtube'] }
+ sourcePriority: ['youtube']
+ }
 
 /**
  * Search filters for unified queries
@@ -71,9 +74,9 @@ export interface UnifiedDataResponse<T> {
  data: T;
  sources: {
  local: {
- count: number;
- hasMore: boolean
- };
+  count: number;
+  hasMore: boolean;
+  };
  youtube: {
  count: number;
  hasMore: boolean;
@@ -83,10 +86,10 @@ export interface UnifiedDataResponse<T> {
  totalCount: number;
  hasMore: boolean;
  pagination?: {
- page: number;
- limit: number;
- total: number
- };
+  page: number;
+  limit: number;
+  total: number;
+  };
 }
 
 /**
@@ -146,13 +149,17 @@ class UnifiedDataService {
  data: mixedVideos.slice(0, limit),
  sources: {
  local: {
- count: localVideos.length,
- hasMore: localVideos.length >= (this.config.limits.local || 25) },
+  count: localVideos.length,
+  hasMore: localVideos.length >= (this.config.limits.local || 25)
+  },
  youtube: {
- count: youtubeVideos.length,
- hasMore: youtubeVideos.length >= (this.config.limits.youtube || 25) } },
+  count: youtubeVideos.length,
+  hasMore: youtubeVideos.length >= (this.config.limits.youtube || 25)
+  }
+  },
  totalCount: mixedVideos.length,
- hasMore: mixedVideos.length > limit };
+ hasMore: mixedVideos.length > limit
+ };
 
  this.setCachedData(cacheKey, response);
  return response;
@@ -770,16 +777,16 @@ class UnifiedDataService {
 
  // Private methods for fetching from specific sources
 
- private async fetchLocalTrendingVideos(,
- _filters: UnifiedSearchFilters
- ): Promise<UnifiedVideoMetadata[]> {
+ private async fetchLocalTrendingVideos(
+    _filters: UnifiedSearchFilters
+  ): Promise<UnifiedVideoMetadata[]> {
  // Local trending videos disabled - returning empty array
  return [];
  }
 
- private async fetchYouTubeTrendingVideos(,
- filters: UnifiedSearchFilters
- ): Promise<UnifiedVideoMetadata[]> {
+ private async fetchYouTubeTrendingVideos(
+    filters: UnifiedSearchFilters
+  ): Promise<UnifiedVideoMetadata[]> {
  try {
  logger.debug(
  '🎯 NEW DISCOVERY STRATEGY: Google Custom Search (primary discovery) with YouTube Data API v3 metadata'
@@ -818,10 +825,10 @@ class UnifiedDataService {
  }
  return [];
  }
- private async searchLocalVideos(,
- query: string,
- filters: UnifiedSearchFilters
- ): Promise<UnifiedVideoMetadata[]> {
+ private async searchLocalVideos(
+    query: string,
+    filters: UnifiedSearchFilters
+  ): Promise<UnifiedVideoMetadata[]> {
  // Local video search disabled - returning empty array
  logger.debug('Local video search disabled for query:', query, filters);
  return [];
@@ -831,10 +838,10 @@ class UnifiedDataService {
  * NEW: Search using Google Custom Search for discovery
  * Note: Metadata will still be fetched using YouTube Data API v3 via getVideoById
  */
- private async searchGoogleCustomSearchVideos(,
- query: string,
- _filters: UnifiedSearchFilters
- ): Promise<UnifiedVideoMetadata[]> {
+ private async searchGoogleCustomSearchVideos(
+    query: string,
+    _filters: UnifiedSearchFilters
+  ): Promise<UnifiedVideoMetadata[]> {
  try {
  logger.debug(
  '🔍 Using Google Custom Search for video discovery with query:',
@@ -914,10 +921,10 @@ class UnifiedDataService {
  );
  return [];
  }
- private async searchYouTubeVideos(,
- query: string,
- filters: UnifiedSearchFilters
- ): Promise<UnifiedVideoMetadata[]> {
+ private async searchYouTubeVideos(
+    query: string,
+    filters: UnifiedSearchFilters
+  ): Promise<UnifiedVideoMetadata[]> {
  try {
  logger.debug(
  '🎯 Using YouTube Data API v3 for video discovery (fallback)'
@@ -995,11 +1002,11 @@ class UnifiedDataService {
  }
  // Video mixing strategies
 
- private mixVideoResults(,
- localVideos: UnifiedVideoMetadata[],
- youtubeVideos: UnifiedVideoMetadata[],
- limit: number
- ): UnifiedVideoMetadata[] {
+ private mixVideoResults(
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
+  ): UnifiedVideoMetadata[] {
  switch (this.config.mixing.strategy) {
  case 'round-robin':
  return this.roundRobinMix(localVideos, youtubeVideos, limit);
@@ -1010,11 +1017,11 @@ class UnifiedDataService {
  default:
  return this.roundRobinMix(localVideos, youtubeVideos, limit);
  }
- private roundRobinMix(,
- localVideos: UnifiedVideoMetadata[],
- youtubeVideos: UnifiedVideoMetadata[],
- limit: number
- ): UnifiedVideoMetadata[] {
+ private roundRobinMix(
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
+  ): UnifiedVideoMetadata[] {
  const mixed: UnifiedVideoMetadata[] = [];
  const maxLength = Math.max(localVideos.length, youtubeVideos.length);
 
@@ -1026,17 +1033,18 @@ class UnifiedDataService {
  i < youtubeVideos.length &&
  mixed.length < limit &&
  youtubeVideos[i]
- ) {
- mixed.push(youtubeVideos[i]!);
- }
- return mixed;
- }
+    ) {
+      mixed.push(youtubeVideos[i]!);
+    }
+  }
+  return mixed;
+}
 
- private sourcePriorityMix(,
- localVideos: UnifiedVideoMetadata[],
- youtubeVideos: UnifiedVideoMetadata[],
- limit: number
- ): UnifiedVideoMetadata[] {
+ private sourcePriorityMix(
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
+  ): UnifiedVideoMetadata[] {
  const priority = this.config.mixing.sourcePriority || ['local', 'youtube'];
  const mixed: UnifiedVideoMetadata[] = [];
 
@@ -1046,16 +1054,17 @@ class UnifiedDataService {
  mixed.push(...videos.slice(0, remainingLimit));
 
  if (mixed.length >= limit) {
- break;
- }
- return mixed;
- }
+      break;
+    }
+  }
+  return mixed;
+}
 
- private relevanceMix(,
- localVideos: UnifiedVideoMetadata[],
- youtubeVideos: UnifiedVideoMetadata[],
- limit: number
- ): UnifiedVideoMetadata[] {
+ private relevanceMix(
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number
+  ): UnifiedVideoMetadata[] {
  // Combine all videos and sort by relevance (views, likes, recency)
  const allVideos = [...localVideos as any, ...youtubeVideos];
 

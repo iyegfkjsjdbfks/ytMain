@@ -291,7 +291,9 @@ export class TokenGenerator {
  }
 
  return result;
- }
+  }
+}
+
 // Encryption utilities (for client-side data)
 export class ClientEncryption {
  private static encoder = new TextEncoder();
@@ -325,10 +327,10 @@ export class ClientEncryption {
  return { encrypted, iv };
  }
 
- static async decrypt(,
- encrypted: ArrayBuffer,
- key: CryptoKey,
- iv: Uint8Array): Promise<string> {
+ static async decrypt(
+    encrypted: ArrayBuffer,
+    key: CryptoKey,
+    iv: Uint8Array): Promise<string> {
  const decrypted = await crypto.subtle.decrypt(
  {
  name: 'AES-GCM',

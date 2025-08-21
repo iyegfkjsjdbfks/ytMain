@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React from 'react';
 /**
  * Advanced Monitoring and Observability System
  * Provides comprehensive application health monitoring, performance insights,
@@ -19,8 +19,8 @@ interface AlertRule {
  condition: (value: string | number, threshold: any) => boolean;
  threshold: number;
  severity: 'low' | 'medium' | 'high' | 'critical';
- cooldown: number; // minutes,
- actions: AlertAction
+ cooldown: number; // minutes
+ actions: AlertAction;
 }
 
 interface AlertAction {
@@ -31,22 +31,22 @@ interface AlertAction {
 interface HealthCheck {
  name: string;
  check: () => Promise<{ healthy: boolean; details?: any }>;
- interval: number; // seconds,
- timeout: number; // seconds,
- retries: number
+ interval: number; // seconds
+ timeout: number; // seconds
+ retries: number;
 }
 
 interface QualityGate {
  name: string;
- rules: QualityRule;
- blocking: boolean
+ rules: QualityRule[];
+ blocking: boolean;
 }
 
 interface QualityRule {
  metric: string;
  operator: 'gt' | 'lt' | 'eq' | 'gte' | 'lte';
  threshold: number;
- message: string
+ message: string;
 }
 
 /**
@@ -93,7 +93,7 @@ return undefined;
  /**
  * Record a custom metric
  */
- recordMetric(name: any, value: string | number, tags?: Record<string, string>): void {
+ recordMetric(name: string, value: number, tags?: Record<string, string>): void {
  const metric: MetricData = {
  timestamp: Date.now(),
  value,
@@ -143,8 +143,8 @@ return metrics;
  min: number;
  max: number;
  p95: number;
- p99: number
- } {
+ p99: number;
+  } {
  const metrics = this.getMetrics(name, timeRange);
  const values = metrics.map((m: any) => m.value).sort((a, b) => a - b);
 
@@ -679,11 +679,11 @@ class CodeQualityMetrics {
  }
 
  async collectMetrics(): Promise<{
- bundle;
- performance;
- accessibility;
- security;
- }> {
+  bundle: any;
+  performance: any;
+  accessibility: any;
+  security: any;
+  }> {
  const [bundle, performance, accessibility, security] = await Promise.all([
  this.bundleAnalyzer.analyze(),
  this.collectPerformanceMetrics(),
@@ -734,18 +734,19 @@ class BundleAnalyzer {
  totalSize: number;
  gzippedSize: number;
  chunks: Array<{ name: string; size: number }>;
- duplicates: string
+ duplicates: string[];
  }> {
  // This would integrate with webpack-bundle-analyzer or similar
  // For now, return mock data
  return {
- totalSize: 500000, // 500KB,
- gzippedSize: 150000, // 150KB,
+ totalSize: 500000, // 500KB
+ gzippedSize: 150000, // 150KB
  chunks: [
  { name: 'main', size: 300000 },
  { name: 'vendor', size: 200000 }
  ],
- duplicates: [] };
+ duplicates: []
+ };
  }
 // Create singleton instances
 export const advancedAPM = new APMSystem();
@@ -765,9 +766,13 @@ export type {
  AlertAction,
  HealthCheck,
  QualityGate,
- QualityRule };
+ QualityRule
+};
 
 // Export classes for custom implementations
-export { APMSystem;
+export {
+ APMSystem,
  RUMSystem,
- CodeQualityMetrics, BundleAnalyzer };
+ CodeQualityMetrics,
+ BundleAnalyzer
+};

@@ -563,22 +563,26 @@ return 'degraded';
  .sort((a, b) => b.timestamp - a.timestamp);
  }
 
- acknowledgeEvent(eventId: any): void {
- const event = this.events.find((e: SystemEvent) => e.id === eventId);
- if (event as any) {
- event.handled = true;
- }
- updateConfig(newConfig: Partial<IntegrationConfig>): void {
- this.config = { ...this.config, ...newConfig };
+  acknowledgeEvent(eventId: any): void {
+    const event = this.events.find((e: SystemEvent) => e.id === eventId);
+    if (event as any) {
+      event.handled = true;
+    }
+  }
 
- // Restart health monitoring if interval changed
- if (newConfig.healthCheckInterval && this.healthCheckInterval) {
- clearInterval(this.healthCheckInterval);
- this.startHealthMonitoring();
- }
- getConfig(): IntegrationConfig {
- return { ...this.config };
- }
+  updateConfig(newConfig: Partial<IntegrationConfig>): void {
+    this.config = { ...this.config, ...newConfig };
+
+    // Restart health monitoring if interval changed
+    if (newConfig.healthCheckInterval && this.healthCheckInterval) {
+      clearInterval(this.healthCheckInterval);
+      this.startHealthMonitoring();
+    }
+  }
+
+  getConfig(): IntegrationConfig {
+    return { ...this.config };
+  }
 
  // Generate comprehensive system report
  generateSystemReport(): {
