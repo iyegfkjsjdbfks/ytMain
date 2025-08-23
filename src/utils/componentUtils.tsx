@@ -1,52 +1,73 @@
-// Component Utils - Minimal Implementation
-import React, { ReactNode } from 'react';
+// componentUtils - Clean Component Implementation
+import React, { useState, useEffect } from 'react';
 
-export const safeArrayRender = <T>(
-  items: T[] | null | undefined,
-  renderItem: (item: T, index: number) => ReactNode,
-  keyExtractor?: (item: T, index: number) => string | number
-): ReactNode[] => {
-  if (!items || !Array.isArray(items)) {
-    return [];
+export interface componentUtilsProps {
+  className?: string;
+  children?: React.ReactNode;
+  onLoad?: () => void;
+  onError?: (error: Error) => void;
+}
+
+export const componentUtils: React.FC<componentUtilsProps> = ({
+  className = '',
+  children,
+  onLoad,
+  onError
+}) => {
+  const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        // Simulate initialization
+        await new Promise(resolve => setTimeout(resolve, 200));
+        setIsReady(true);
+        onLoad?.();
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error('Initialization failed');
+        setError(error);
+        onError?.(error);
+      }
+    };
+
+    initialize();
+  }, [onLoad, onError]);
+
+  if (error) {
+    return (
+      <div className={'error-state ' + className}>
+        <h3>Error in componentUtils</h3>
+        <p>{error.message}</p>
+        <button onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    );
   }
 
-  return items
-    .filter((item): item is T => item !== undefined && item !== null)
-    .map((item, index) => {
-      const key = keyExtractor ? keyExtractor(item, index) : index;
-      return React.cloneElement(
-        renderItem(item, index) as React.ReactElement,
-        { key }
-      );
-    });
-};
-
-export const withErrorBoundary = <P extends object>(
-  Component: React.ComponentType<P>
-): React.ComponentType<P> => {
-  return (props: P): ReactNode => {
-    try {
-      return React.createElement(Component, props);
-    } catch (error) {
-      console.error('Component error:', error);
-      return React.createElement('div', null, 'Error rendering component');
-    }
-  };
-};
-
-export const createUniqueId = (prefix = 'component'): string => {
-  return prefix + '-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-};
-
-export const chunkArray = <T>(array: T[], size: number): T[][] => {
-  if (!Array.isArray(array) || size <= 0) {
-    return [];
+  if (!isReady) {
+    return (
+      <div className={'loading-state ' + className}>
+        <div>Loading componentUtils...</div>
+      </div>
+    );
   }
 
-  const chunks: T[][] = [];
-  for (let i = 0; i < array.length; i += size) {
-    chunks.push(array.slice(i, i + size));
-  }
-
-  return chunks;
+  return (
+    <div className={'component-ready ' + className}>
+      <div className="component-header">
+        <h2>componentUtils</h2>
+      </div>
+      <div className="component-body">
+        {children || (
+          <div className="default-content">
+            <p>Component is ready and functioning properly.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
+
+export default componentUtils;

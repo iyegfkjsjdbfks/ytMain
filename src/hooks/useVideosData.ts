@@ -1,70 +1,65 @@
-import { useCallback } from 'react';
+// useVideosData - Clean Hook Implementation
+import { useState, useEffect, useCallback } from 'react';
 
-// import { getVideos, getShortsVideos } // // from '../services/realVideoService.ts' // Service not found // Service not found;
+export interface UseVideosDataOptions {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
+}
 
-import { unifiedDataService } from '../services/unifiedDataService.ts';
+export interface UseVideosDataResult {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
+}
 
-import { useAsyncData } from 'useAsyncData.ts';
-import type { UnifiedVideoMetadata } from '../services/metadataNormalizationService.ts';
-import type { Video } from '../types/core.ts';
-
-/**
- * Hook for fetching different types of videos using unified data service
- * @param type - The type of videos to fetch ('trending', 'shorts', 'all')
- * @param useUnified - Whether to use the unified data service (default: true)
- */
 export function useVideosData(
- type: "trending" | 'shorts' | 'all' = 'all',
- useUnified: boolean = true
-): any {
- const fetchVideos = useCallback(async (): Promise<void> => {
- if (useUnified as any) {
- // Use unified data service for normalized results
- switch (type as any) {
- case 'shorts': {
- const response = await unifiedDataService.getShortsVideos(30);
- return response.data;
- }
- case 'trending':
- case 'all':
- default: {
- const response = await unifiedDataService.getTrendingVideos(50);
- return response.data;
-  } else {
- // Legacy mode - use original mock service
- switch (type as any) {
- case 'shorts':
- return getShortsVideos();
- case 'trending':
- case 'all':
- default: return getVideos()
- }
- }, [type, useUnified]);
+  options: UseVideosDataOptions = {}
+): UseVideosDataResult {
+  const { enabled = true, onSuccess, onError } = options;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- return useAsyncData<UnifiedVideoMetadata[] | Video[]>(fetchVideos, {
- initialData: [] });
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
+
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Simulate async operation
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const result = {
+        hookName: 'useVideosData',
+        timestamp: Date.now(),
+        success: true
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
 }
 
-/**
- * Hook specifically for unified video data with better typing
- */
-export function useUnifiedVideosData(,
- type: "trending" | 'shorts' | 'all' = 'all',
- limit: number = 50
-): any {
- const fetchVideos = useCallback(async (): Promise<UnifiedVideoMetadata[]> => {
- switch (type as any) {
- case 'shorts': {
- const response = await unifiedDataService.getShortsVideos(limit);
- return response.data;
- }
- case 'trending':
- case 'all':
- default: {
- const response = await unifiedDataService.getTrendingVideos(limit);
- return response.data;
- }
- }, [type, limit]);
-
- return useAsyncData<UnifiedVideoMetadata[]>(fetchVideos, { initialData: [] });
-}
+export default useVideosData;

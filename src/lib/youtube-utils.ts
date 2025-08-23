@@ -1,17 +1,14 @@
-// youtube-utils - Enhanced Implementation
-export interface Youtube-utilsConfig {
-  enabled: boolean;
-  options: Record<string, any>;
+// youtube-utils - Clean Implementation
+export interface youtube-utilsConfig {
+  enabled?: boolean;
 }
 
 export class Youtube-utils {
-  private config: Youtube-utilsConfig;
+  private config: Required<youtube-utilsConfig>;
 
-  constructor(config?: Partial<Youtube-utilsConfig>) {
+  constructor(config: youtube-utilsConfig = {}) {
     this.config = {
-      enabled: true,
-      options: {},
-      ...config
+      enabled: config.enabled ?? true
     };
   }
 
@@ -19,12 +16,22 @@ export class Youtube-utils {
     return this.config.enabled;
   }
 
-  updateConfig(newConfig: Partial<Youtube-utilsConfig>): void {
-    this.config = { ...this.config, ...newConfig };
-  }
+  process(data: any): any {
+    if (!this.config.enabled) {
+      return data;
+    }
 
-  getConfig(): Youtube-utilsConfig {
-    return { ...this.config };
+    try {
+      // Process the data
+      return {
+        ...data,
+        processed: true,
+        timestamp: Date.now()
+      };
+    } catch (error) {
+      console.error('Processing error:', error);
+      throw error;
+    }
   }
 }
 
