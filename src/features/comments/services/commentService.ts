@@ -1,330 +1,63 @@
-import { api } from '../../../services / api / base';
-import type { Comment, ApiResponse } from '../../../types / core';
-
-/**
- * Comment Service
- * Comprehensive comment management service
- */
-
-export interface CreateCommentData {
- content: string;,
- videoId: string;
- parentId?: string; // For replies
-}
-
-export interface UpdateCommentData {
- commentId: string;,
- content: string
-}
-
-export interface CommentFilters {
- sortBy?: 'newest' | 'oldest' | 'top' | 'controversial';
- parentId?: string; // Get replies for specific comment
- includeReplies?: boolean;
- page?: number;
- limit?: number;
-}
-
-export interface CommentReaction {
- type: "like" | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad';,
- commentId: string
-}
-
-export interface CommentModerationAction {
- commentId: string;,
- action: 'approve' | 'reject' | 'hold' | 'spam';
- reason?: string;
+// commentService - Enhanced Service
+export interface CommentServiceConfig {
+  apiUrl?: string;
+  timeout?: number;
+  retries?: number;
 }
 
 export class CommentService {
- /**
- * Get comments for a video
- */
- async getVideoComments(,
- videoId,
- filters: CommentFilters = {}
- ): Promise<any> < ApiResponse < Comment[]>> {
- return api.get(`/api / videos/${videoId}/comments`, filters);
- }
+  private config: CommentServiceConfig;
 
- /**
- * Get replies for a comment
- */
- async getCommentReplies(,
- commentId,
- filters: Omit < CommentFilters, 'parentId'> = {}
- ): Promise<any> < ApiResponse < Comment[]>> {
- return api.get(`/api / comments/${commentId}/replies`, filters);
- }
+  constructor(config: CommentServiceConfig = {}) {
+    this.config = {
+      apiUrl: '/api',
+      timeout: 5000,
+      retries: 3,
+      ...config
+    };
+  }
 
- /**
- * Get a specific comment
- */
- async getComment(commentId): Promise<any> < ApiResponse < Comment>> {
- return api.get(`/api / comments/${commentId}`);
- }
+  async fetchData<T>(endpoint: string): Promise<T> {
+    try {
+      const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
- /**
- * Create a new comment
- */
- async createComment(data: CreateCommentData): Promise<any> < ApiResponse < Comment>> {
- return api.post('/api / comments', data);
- }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
- /**
- * Update a comment
- */
- async updateComment(data: UpdateCommentData): Promise<any> < ApiResponse < Comment>> {
- const { commentId, ...updateData } = data;
- return api.put(`/api / comments/${commentId}`, updateData);
- }
+      return await response.json();
+    } catch (error) {
+      console.error('Service fetch error:', error);
+      throw error;
+    }
+  }
 
- /**
- * Delete a comment
- */
- async deleteComment(commentId): Promise<any> < ApiResponse < void>> {
- return api.delete(`/api / comments/${commentId}`);
- }
+  async postData<T>(endpoint: string, data: any): Promise<T> {
+    try {
+      const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
 
- /**
- * React to a comment (like, dislike, etc.)
- */
- async reactToComment(data: CommentReaction): Promise<any> < ApiResponse < void>> {
- return api.post(`/api / comments/${data.commentId}/reactions`, {
- type: data.type });
- }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
- /**
- * Remove reaction from comment
- */
- async removeReaction(commentId): Promise<any> < ApiResponse < void>> {
- return api.delete(`/api / comments/${commentId}/reactions`);
- }
+      return await response.json();
+    } catch (error) {
+      console.error('Service post error:', error);
+      throw error;
+    }
+  }
+}
 
- /**
- * Pin a comment (video owner only)
- */
- async pinComment(commentId): Promise<any> < ApiResponse < void>> {
- return api.post(`/api / comments/${commentId}/pin`);
- }
-
- /**
- * Unpin a comment
- */
- async unpinComment(commentId): Promise<any> < ApiResponse < void>> {
- return api.delete(`/api / comments/${commentId}/pin`);
- }
-
- /**
- * Heart a comment (video owner only)
- */
- async heartComment(commentId): Promise<any> < ApiResponse < void>> {
- return api.post(`/api / comments/${commentId}/heart`);
- }
-
- /**
- * Remove heart from comment
- */
- async unheartComment(commentId): Promise<any> < ApiResponse < void>> {
- return api.delete(`/api / comments/${commentId}/heart`);
- }
-
- /**
- * Report a comment
- */
- async reportComment(,
- commentId,
- reason,
- description?: string
- ): Promise<any> < ApiResponse < void>> {
- return api.post(`/api / comments/${commentId}/report`, {
- reason,
- description });
- }
-
- /**
- * Get user's comments
- */
- async getUserComments(,
- userId,
- filters: Omit < CommentFilters, 'parentId'> = {}
- ): Promise<any> < ApiResponse < Comment[]>> {
- return api.get(`/api / users/${userId}/comments`, filters);
- }
-
- /**
- * Get comments awaiting moderation
- */
- async getPendingComments(
- videoId?: string,
- filters: CommentFilters = {}
- ): Promise<any> < ApiResponse < Comment[]>> {
- const params = videoId ? { videoId, ...filters } : filters;
- return api.get('/api / comments / pending', params);
- }
-
- /**
- * Moderate a comment
- */
- async moderateComment(,
- data: CommentModerationAction
- ): Promise<any> < ApiResponse < void>> {
- const { commentId, ...moderationData } = data;
- return api.post(`/api / comments/${commentId}/moderate`, moderationData);
- }
-
- /**
- * Bulk moderate comments
- */
- async bulkModerateComments(,
- commentIds,
- action: CommentModerationAction['action'],
- reason?: string
- ): Promise<any> < ApiResponse<{ success: string; failed: string[] }>> {
- return api.post('/api / comments / bulk - moderate', {
- commentIds,
- action,
- reason });
- }
-
- /**
- * Search comments
- */
- async searchComments(,
- query,
- videoId?: string,
- filters: CommentFilters = {}
- ): Promise<any> < ApiResponse < Comment[]>> {
- const params: object = { query, ...(videoId && { videoId }), ...filters };
- return api.get('/api / comments / search', params);
- }
-
- /**
- * Get comment statistics
- */
- async getCommentStats(videoId): Promise<
- ApiResponse<{
- totalComments: number;,
- totalReplies: number;
- averageRating: number;,
- topCommenters: Array<{
- userId: string;,
- username: string;
- commentCount: number
- }>;
- sentimentAnalysis: {,
- positive: number;
- negative: number;,
- neutral: number
- };
- }>
- > {
- return api.get(`/api / videos/${videoId}/comments / stats`);
- }
-
- /**
- * Get trending comments
- */
- async getTrendingComments(,
- timeframe: '1h' | '24h' | '7d' | '30d' = '24h',
- limit: number = 20
- ): Promise<any> < ApiResponse < Comment[]>> {
- return api.get('/api / comments / trending', { timeframe, limit });
- }
-
- /**
- * Get comment thread (comment + all replies)
- */
- async getCommentThread(commentId): Promise<
- ApiResponse<{
- comment: Comment;,
- replies: Comment;
- totalReplies: number
- }>
- > {
- return api.get(`/api / comments/${commentId}/thread`);
- }
-
- /**
- * Subscribe to comment notifications
- */
- async subscribeToComments(videoId): Promise<any> < ApiResponse < void>> {
- return api.post(`/api / videos/${videoId}/comments / subscribe`);
- }
-
- /**
- * Unsubscribe from comment notifications
- */
- async unsubscribeFromComments(videoId): Promise<any> < ApiResponse < void>> {
- return api.delete(`/api / videos/${videoId}/comments / subscribe`);
- }
-
- /**
- * Get comment mentions for user
- */
- async getCommentMentions(,
- userId,
- filters: CommentFilters = {}
- ): Promise<any> < ApiResponse < Comment[]>> {
- return api.get(`/api / users/${userId}/mentions`, filters);
- }
-
- /**
- * Mark comment mentions as read
- */
- async markMentionsAsRead(commentIds): Promise<any> < ApiResponse < void>> {
- return api.post('/api / comments / mentions / read', { commentIds });
- }
-
- /**
- * Get comment analytics for video owner
- */
- async getCommentAnalytics(,
- videoId,
- timeframe: '7d' | '30d' | '90d' = '30d'
- ): Promise<
- ApiResponse<{
- totalComments: number;,
- commentsOverTime: Array<{ date: string; count: number }>;
- topKeywords: Array<{ keyword: string; count: number }>;
- engagementRate: number;,
- responseRate: number;
- averageResponseTime: number
- }>
- > {
- return api.get(`/api / videos/${videoId}/comments / analytics`, { timeframe });
- }
-
- /**
- * Auto - moderate comments using AI
- */
- async autoModerateComments(,
- videoId,
- settings: {,
- enableSpamDetection: boolean;
- enableToxicityDetection: boolean;,
- enableLanguageFilter: boolean;
- customKeywords?: string;
- }
- ): Promise<
- ApiResponse<{
- processed: number;,
- flagged: number;
- approved: number;,
- rejected: number
- }>
- > {
- return api.post(`/api / videos/${videoId}/comments / auto - moderate`, settings);
- }
-
- /**
- * Export comments
- */
- async exportComments(,
- videoId,
- format: 'csv' | 'json' | 'xlsx'
- ): Promise<any> < ApiResponse < string>> {
- return api.get(`/api / videos/${videoId}/comments / export`, { format });
- }
 export const commentService = new CommentService();
 export default commentService;
