@@ -1,13 +1,13 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
 
-import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { getYouTubeVideoId } from '../src / lib / youtube - utils';
 
-import type { YouTubeSearchResult } from '../services/googleSearchService';
-import type { Video } from '../src/types/core';
+import type { YouTubeSearchResult } from '../services / googleSearchService';
+import type { Video } from '../src / types / core';
 
 // YouTube Player API types
 
-interface YTPlayer {
+export interface YTPlayer {}
  playVideo(): void;
  pauseVideo(): void;
  stopVideo(): void;
@@ -36,7 +36,7 @@ interface YTPlayer {
  destroy(): void;
 }
 
-interface YouTubePlayerProps {
+export interface YouTubePlayerProps {}
  video: YouTubeSearchResult | Video;
  width?: string | number;
  height?: string | number;
@@ -48,7 +48,7 @@ interface YouTubePlayerProps {
  onError?: (event: Event) => void
 }
 
-const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
+const YouTubePlayer: React.FC < YouTubePlayerProps> = ({}
  video,
  width = '100%',
  height = '100%',
@@ -57,44 +57,44 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
  className = '',
  onReady,
  onStateChange,
- onError }) => {
- const playerRef = useRef<HTMLDivElement>(null);
- const ytPlayerRef = useRef<YTPlayer | null>(null);
- const [isAPIReady, setIsAPIReady] = useState<boolean>(false);
- const [ setIsPlayerReady] = useState<boolean>(false);
- const [playerError, setPlayerError] = useState<string | null>(null);
- const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
+ onError }) => {}
+ const playerRef = useRef < HTMLDivElement>(null);
+ const ytPlayerRef = useRef < YTPlayer | null>(null);
+ const [isAPIReady, setIsAPIReady] = useState < boolean>(false);
+ const [ setIsPlayerReady] = useState < boolean>(false);
+ const [playerError, setPlayerError] = useState < string | null>(null);
+ const playerIdRef = useRef(`youtube - player-${Math.random().toString(36).substr(2, 9)}`);
 
  // Extract video ID from the video object
- const videoId = (() => {
+ const videoId = ((: any) => {}
  // Handle YouTubeSearchResult type
- if ('embedUrl' in video && video.embedUrl) {
+ if ('embedUrl' in video && video.embedUrl) {}
  return video.embedUrl.split('/embed/')[1]?.split('?')[0] || '';
  }
  // Handle Video type
- if ('videoUrl' in video && video.videoUrl) {
+ if ('videoUrl' in video && video.videoUrl) {}
  return getYouTubeVideoId(video.videoUrl) || '';
  }
  return '';
  })();
 
  // Validate video ID
- const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId);
+ const isValidVideoId = videoId && videoId.length === 11 && /^[a - zA - Z0 - 9_-]+$/.test(videoId);
 
  // Load YouTube IFrame API
- useEffect(() => {
- if (window.YT?.Player) {
+ useEffect(() => {}
+ if (window.YT?.Player) {}
  setIsAPIReady(true);
  return;
  }
 
  // Check if script is already loading
- if (document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+ if (document.querySelector('script[src*="youtube.com / iframe_api"]') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement) {}
  // Script is loading, wait for it
- const checkAPI = () => {
- if (window.YT?.Player) {
+ const checkAPI = () => {}
+ if (window.YT?.Player) {}
  setIsAPIReady(true);
- } else {
+ } else {}
  setTimeout((checkAPI) as any, 100);
  };
  checkAPI();
@@ -103,67 +103,67 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
  // Load the API script
  const script = document.createElement('script');
- script.src = 'https://www.youtube.com/iframe_api';
+ script.src = 'https://www.youtube.com / iframe_api';
  script.async = true;
 
  const originalCallback = window.onYouTubeIframeAPIReady;
- (window as any).onYouTubeIframeAPIReady = () => {
+ (window as any).onYouTubeIframeAPIReady = () => {}
  setIsAPIReady(true);
- if (originalCallback as any) {
+ if (originalCallback as any) {}
  originalCallback();
  };
 
  document.head.appendChild(script);
 
- return () => {
+ return () => {}
  // Cleanup: restore original callback
- if (originalCallback as any) {
+ if (originalCallback as any) {}
  (window as any).onYouTubeIframeAPIReady = originalCallback;
  }
 
  }}, []);
 
  // Initialize player when API is ready
- useEffect(() => {
- if (!isAPIReady || !playerRef.current || !isValidVideoId) {
+ useEffect(() => {}
+ if (!isAPIReady || !playerRef.current || !isValidVideoId) {}
 return;
 }
 
- let isMounted = true;
+ let isMounted: boolean = true;
 
- try {
+ try {}
  // Destroy existing player if any
- if (ytPlayerRef.current) {
- try {
+ if (ytPlayerRef.current) {}
+ try {}
  ytPlayerRef.current.destroy();
- } catch (error) {
+ } catch (error) {}
  (console as any).warn('Error destroying previous player:', error);
  }
  ytPlayerRef.current = null;
  }
 
  // Ensure the container element exists and is properly prepared
- const container = document.getElementById(playerIdRef.current);
- if (container && document.body.contains(container)) {
+ const container = document.getElementById(playerIdRef.current) as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
+ if (container && document.body.contains(container)) {}
  // Clear any existing content safely
- try {
+ try {}
  // Check if container is still in DOM before clearing
- if (container.parentNode) {
+ if (container.parentNode) {}
  container.innerHTML = '';
  }
 
- } catch (error) {
+ } catch (error) {}
  (console as any).debug('Error clearing container:', error);
  }
  // Create new player
- if (!window.YT) {
+ if (!window.YT) {}
  throw new Error('YouTube API not available');
  }
- ytPlayerRef.current = new window.YT.Player(playerIdRef.current, {
+ ytPlayerRef.current = new window.YT.Player(playerIdRef.current, {}
  height,
  width,
  videoId,
- playerVars: {
+ playerVars: {,}
  autoplay: autoplay ? 1 : 0,
  controls: controls ? 1 : 0,
  modestbranding: 1,
@@ -176,87 +176,87 @@ return;
  disablekb: 0, // Enable keyboard controls
  // Remove widget_referrer as it might cause origin issues
  },
- events: {
- onReady: (event) => {
- if (isMounted as any) {
+ events: {,}
+ onReady: (event) => {}
+ if (isMounted as any) {}
  setIsPlayerReady(true);
  setPlayerError(null);
 
  // Call the external onReady callback if provided
- if (onReady as any) {
- try {
+ if (onReady as any) {}
+ try {}
  onReady(event);
- } catch (error) {
+ } catch (error) {}
  (console as any).warn('Error in onReady callback:', error);
  }
  // Try to autoplay if autoplay is enabled
- if (autoplay as any) {
- try {
+ if (autoplay as any) {}
+ try {}
  (console as any).log('Attempting to autoplay YouTube video...');
  // Mute first for better autoplay compliance
  event.target.mute();
  event.target.playVideo();
 
  // Fallback: try again after a short delay if not playing
- setTimeout((() => {
- try {
+ setTimeout((() => {}
+ try {}
  const playerState = event.target.getPlayerState();
- if (playerState !== 1) { // 1 = playing
+ if (playerState !== 1) { // 1 = playing}
  (console as any).log('Retrying autoplay...');
  event.target.playVideo();
  }
 
- } catch (retryError) {
+ } catch (retryError) {}
  (console as any).warn('Autoplay retry failed:') as any, retryError);
  }
  }, 1000);
- } catch (error) {
+ } catch (error) {}
  (console as any).warn('Autoplay failed:', error);
  }
  }
  },
- onStateChange: (event) => {
+ onStateChange: (event) => {}
  // Handle state changes if needed
  (console as any).log('YouTube player state changed:', event.data);
 
  // Call the external onStateChange callback if provided
- if (onStateChange as any) {
- try {
+ if (onStateChange as any) {}
+ try {}
  onStateChange(event);
- } catch (error) {
+ } catch (error) {}
  (console as any).warn('Error in onStateChange callback:', error);
  }
  // Unmute video after autoplay starts (state 1 = playing)
- if (autoplay && event.data === 1) {
- setTimeout((() => {
- try {
+ if (autoplay && event.data === 1) {}
+ setTimeout((() => {}
+ try {}
  (console as any).log('Unmuting video after autoplay...');
  event.target.unMute();
 
  // Resume playback after unmuting in case it paused
- setTimeout(() => {
- try {
+ setTimeout(() => {}
+ try {}
  const currentState = event.target.getPlayerState();
- if (currentState !== 1) { // If not playing
+ if (currentState !== 1) { // If not playing}
  (console as any).log('Resuming playback after unmute...');
  event.target.playVideo();
  }
 
- } catch (playError) {
+ } catch (playError) {}
  (console as any).warn('Failed to resume playback after unmute:') as any, playError);
  }
  }, 100); // Short delay to let unmute complete
- } catch (error) {
+ } catch (error) {}
  (console as any).warn('Failed to unmute video:', error);
  }
  }, 1000);
  }
  },
- onError: (event) => {
- if (!isMounted) {
+ onError: (event) => {}
+ if (!isMounted) {}
 return;
 }
- const errorMessages: { [key]: string } = {
+ const errorMessages: { [key]: string } = {}
  2: 'Invalid video ID',
  5: 'HTML5 player error',
  100: 'Video not found or private',
@@ -264,59 +264,59 @@ return;
  150: 'Video not available in embedded players' };
  const message = errorMessages[event.data] || 'Unknown error occurred';
 
- // For embedding errors (101, 150), show a more user-friendly message
- if (event.data === 101 || event.data === 150) {
+ // For embedding errors (101, 150), show a more user - friendly message
+ if (event.data === 101 || event.data === 150) {}
  (console as any).debug('Video cannot be embedded, this is expected for some videos');
  setPlayerError('This video cannot be played here. Click to watch on YouTube.');
- } else {
+ } else {}
  (console as any).error('YouTube player error:', message, event.data);
  setPlayerError(message);
  }
 
  // Call the external onError callback if provided
- if (onError as any) {
- try {
+ if (onError as any) {}
+ try {}
  onError(event);
- } catch (error) {
+ } catch (error) {}
  (console as any).warn('Error in onError callback:', error);
  }
  } } });
- } catch (error) {
+ } catch (error) {}
  (console as any).error('Error creating YouTube player:', error);
- if (isMounted as any) {
+ if (isMounted as any) {}
  setPlayerError('Failed to load video player');
  }
- return () => {
+ return () => {}
  isMounted = false;
- if (ytPlayerRef.current) {
- try {
+ if (ytPlayerRef.current) {}
+ try {}
  // Check if player still exists and has destroy method
- if (typeof ytPlayerRef.current.destroy === 'function') {
+ if (typeof ytPlayerRef.current.destroy === 'function') {}
  ytPlayerRef.current.destroy();
  }
 
- } catch (error) {
+ } catch (error) {}
  // Silently handle cleanup errors
  (console as any).debug('YouTube player cleanup error:', error);
- } finally {
+ } finally {}
  ytPlayerRef.current = null;
  }
  }}, [isAPIReady, videoId, height, width, autoplay, controls, isValidVideoId, onError, onReady, onStateChange]);
 
- if (!isValidVideoId) {
+ if (!isValidVideoId) {}
  return (
- <div className={`bg-gray-100 dark:bg-gray-800 rounded-lg p-4 ${className}`}>
- <p className="text-gray-600 dark:text-gray-400 text-center">
+ <div className={`bg - gray - 100 dark:bg - gray - 800 rounded - lg p - 4 ${className}`}>
+ <p className="text - gray - 600 dark:text - gray - 400 text - center">
  Invalid YouTube video ID
 // FIXED:  </p>
 // FIXED:  </div>
  );
  }
 
- if (playerError as any) {
+ if (playerError as any) {}
  return (
- <div className={`bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 ${className}`}>
- <p className="text-red-600 dark:text-red-400 text-center">
+ <div className={`bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded - lg p - 4 ${className}`}>
+ <p className="text - red - 600 dark:text - red - 400 text - center">
  {playerError}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -324,20 +324,20 @@ return;
  }
 
  return (
- <div className={`relative w-full h-full ${className}`}>
- {!isAPIReady && (
- <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
- <div className="text-gray-600 dark:text-gray-400 text-center">
- <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2" />
- <p>Loading YouTube player...</p>
+ <div className={`relative w - full h - full ${className}`}>
+ {!isAPIReady && (}
+ <div className="absolute inset - 0 bg - gray - 100 dark:bg - gray - 800 rounded - lg flex items - center justify - center">
+ <div className="text - gray - 600 dark:text - gray - 400 text - center">
+ <div className="animate - spin rounded - full h - 8 w - 8 border - b - 2 border - blue - 500 mx - auto mb - 2" />
+ <p > Loading YouTube player...</p>
 // FIXED:  </div>
 // FIXED:  </div>
  )}
  <div
  ref={playerRef}
 // FIXED:  id={playerIdRef.current}
-// FIXED:  className="w-full h-full"
-// FIXED:  style={{
+// FIXED:  className="w - full h - full"
+// FIXED:  style={{,}
  opacity: isAPIReady ? 1 : 0 } />
  />
 // FIXED:  </div>

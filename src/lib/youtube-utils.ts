@@ -1,22 +1,22 @@
-import { logger } from '../utils/logger';
+import { logger } from '../utils / logger';
 
 // YouTube utilities for video handling and API integration
 
 // YouTube API type declarations
 interface YT {
- Player: new (elementId, config: YTPlayerConfig) => YTPlayer;
+ Player: new (elementId, config: YTPlayerConfig) => YTPlayer;,
  PlayerState: {
- UNSTARTED: number;
+ UNSTARTED: number;,
  ENDED: number;
- PLAYING: number;
+ PLAYING: number;,
  PAUSED: number;
- BUFFERING: number;
+ BUFFERING: number;,
  CUED: number
  };
 }
 
 interface YTPlayerConfig {
- height: string | number;
+ height: string | number;,
  width: string | number;
  videoId: string;
  playerVars?: {
@@ -42,7 +42,7 @@ interface YTPlayerConfig {
  events?: {
  onReady?: (event: { target: YTPlayer }) => void;
  onStateChange?: (event: { target: YTPlayer; data: number }) => void;
- onPlaybackQualityChange?: (event: {
+ onPlaybackQualityChange?: (event: {,
  target: YTPlayer;
  data: string
  }) => void;
@@ -91,9 +91,8 @@ declare global {
  * @param url - YouTube URL (can be null or undefined)
  * @returns Video ID or null if not found
  */
-export function getYouTubeVideoId(
- url: string | null | undefined
-): string | null {
+export function getYouTubeVideoId(;
+ url: string | null | undefined): string | null {
  if (!url) {
  return null;
  }
@@ -106,7 +105,7 @@ export function getYouTubeVideoId(
  }
 
  // Handle regular YouTube URLs
- const regExp =
+ const regExp =;
  /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch(?:\?v=|\/))([^#&?]*).*/;
  const match = url.match(regExp);
  return match?.[1] ? match[1].substring(0, 11) : null;
@@ -115,7 +114,7 @@ export function getYouTubeVideoId(
  return null;
  }
 /**
- * Type-safe wrapper for YouTube Player API
+ * Type - safe wrapper for YouTube Player API
  */
   class YouTubePlayer {
  private player;
@@ -126,7 +125,7 @@ export function getYouTubeVideoId(
  private readonly options: {
  width?: number;
  height?: number;
- playerVars?: Record<string, any>;
+ playerVars?: Record < string, any>;
  events?: {
  onReady?: (event: Event) => void;
  onStateChange?: (event: Event) => void
@@ -138,15 +137,15 @@ export function getYouTubeVideoId(
  });
  }
 
- private loadYouTubeAPI(): Promise<void> {
- return new Promise(resolve => {
+ private loadYouTubeAPI(): Promise<any> < void> {
+ return new Promise<any>((resolve) => {
  if (window.YT?.Player) {
  resolve();
  return;
  }
 
  const tag = document.createElement('script');
- tag.src = 'https://www.youtube.com/iframe_api';
+ tag.src = 'https://www.youtube.com / iframe_api';
  const firstScriptTag = document.getElementsByTagName('script')[0];
 
  if (firstScriptTag?.parentNode) {
@@ -174,7 +173,7 @@ export function getYouTubeVideoId(
 
  // Wait for YT.Player to be available
  const checkYT = () => {
- return new Promise<void>(resolve => {
+ return new Promise<any> < void>((resolve) => {
  const check = () => {
  if (window.YT?.Player) {
  resolve();
@@ -194,23 +193,23 @@ export function getYouTubeVideoId(
  height: this.options.height || '360',
  width: this.options.width || '640',
  videoId: this.videoId,
- playerVars: {
+ playerVars: {,
  playsinline: 1,
  origin: window.location.origin,
  ...this.options.playerVars },
- events: {
- onReady: event => {
+ events: {,
+ onReady: (event) => {
  this.options.events?.onReady?.(event);
  },
- onStateChange: event => {
+ onStateChange: (event) => {
  this.options.events?.onStateChange?.(event);
  }   });
 } catch (error) {
  logger.error('Error initializing YouTube player:', error);
  }
  // Basic player controls
- playVideo(): Promise<void> {
- return new Promise((resolve, reject) => {
+ playVideo(): Promise<any> < void> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  this.player.playVideo();
@@ -223,8 +222,8 @@ export function getYouTubeVideoId(
    });
 }
 
- pauseVideo(): Promise<void> {
- return new Promise((resolve, reject) => {
+ pauseVideo(): Promise<any> < void> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  this.player.pauseVideo();
@@ -237,8 +236,8 @@ export function getYouTubeVideoId(
    });
 }
 
- stopVideo(): Promise<void> {
- return new Promise((resolve, reject) => {
+ stopVideo(): Promise<any> < void> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  this.player.stopVideo();
@@ -251,8 +250,8 @@ export function getYouTubeVideoId(
    });
 }
 
- seekTo(seconds, allowSeekAhead: boolean = true): Promise<void> {
- return new Promise((resolve, reject) => {
+ seekTo(seconds, allowSeekAhead: boolean = true): Promise<any> < void> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  this.player.seekTo(seconds, allowSeekAhead);
@@ -266,8 +265,8 @@ export function getYouTubeVideoId(
 }
 
  // Additional player methods
- getCurrentTime(): Promise<number> {
- return new Promise((resolve, reject) => {
+ getCurrentTime(): Promise<any> < number> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  const time = this.player.getCurrentTime();
@@ -280,8 +279,8 @@ export function getYouTubeVideoId(
    });
 }
 
- getDuration(): Promise<number> {
- return new Promise((resolve, reject) => {
+ getDuration(): Promise<any> < number> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  const duration = this.player.getDuration();
@@ -294,8 +293,8 @@ export function getYouTubeVideoId(
    });
 }
 
- getVolume(): Promise<number> {
- return new Promise((resolve, reject) => {
+ getVolume(): Promise<any> < number> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  const volume = this.player.getVolume();
@@ -308,8 +307,8 @@ export function getYouTubeVideoId(
    });
 }
 
- setVolume(volume): Promise<void> {
- return new Promise((resolve, reject) => {
+ setVolume(volume): Promise<any> < void> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  this.player.setVolume(volume);
@@ -322,8 +321,8 @@ export function getYouTubeVideoId(
    });
 }
 
- isMuted(): Promise<boolean> {
- return new Promise((resolve, reject) => {
+ isMuted(): Promise<any> < boolean> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  const isMuted = this.player.isMuted();
@@ -336,8 +335,8 @@ export function getYouTubeVideoId(
    });
 }
 
- mute(): Promise<void> {
- return new Promise((resolve, reject) => {
+ mute(): Promise<any> < void> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  this.player.mute();
@@ -350,8 +349,8 @@ export function getYouTubeVideoId(
    });
 }
 
- unMute(): Promise<void> {
- return new Promise((resolve, reject) => {
+ unMute(): Promise<any> < void> {
+ return new Promise<any>((resolve, reject) => {
  if (this.player) {
  try {
  this.player.unMute();
@@ -372,10 +371,7 @@ export function getYouTubeVideoId(
 }
 
 // Utility function to safely handle YouTube embeds
-  function embedYouTubeVideo(,
- containerId,
- videoId,
- options: {
+  function embedYouTubeVideo(: string | number, containerId: string | number, videoId: string | number, options: {
  width?: number;
  height?: number;
  autoplay?: boolean;
@@ -386,10 +382,9 @@ export function getYouTubeVideoId(
  modestbranding?: boolean;
  rel?: boolean;
  showinfo?: boolean;
- } = {}
-): YouTubePlayer {
+ } = {}): YouTubePlayer {
  // Validate container exists
- if (!document.getElementById(containerId)) {
+ if (!document.getElementById(containerId) as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement) {
  throw new Error(`Container element with id "${containerId}" not found`);
  }
 
@@ -402,7 +397,7 @@ export function getYouTubeVideoId(
  const playerOptions = {
  width: options.width || 640,
  height: options.height || 360,
- playerVars: {
+ playerVars: {,
  autoplay: options.autoplay ? 1 : 0,
  controls: options.controls !== false ? 1 : 0,
  start: options.start,
@@ -417,13 +412,13 @@ export function getYouTubeVideoId(
  return new YouTubePlayer(containerId, videoId, playerOptions);
 }
 
-// Type-safe function to check if a string is a valid YouTube URL
-  function isYouTubeUrl(url): boolean {
+// Type - safe function to check if a string is a valid YouTube URL
+  function isYouTubeUrl(url: any): boolean {
  if (!url) {
  return false;
  }
 
- const patterns = [
+ const patterns = [;
  /^https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
  /^https?:\/\/(?:www\.)?youtube\.com\/embed\/([^?]+)/,
  /^https?:\/\/youtu\.be\/([^?]+)/,
@@ -433,33 +428,31 @@ export function getYouTubeVideoId(
  return patterns.some(pattern => pattern.test(url));
 }
 
-// Type-safe function to get video ID from various YouTube URL formats
-  function extractVideoIdFromUrl(,
- url: string | null | undefined
-): string | null {
+// Type - safe function to get video ID from various YouTube URL formats
+  function extractVideoIdFromUrl(: string | number, url: string | null | undefined): string | null {
  if (!url) {
  return null;
  }
 
  interface Pattern {
- regex: RegExp;
- getter: (match: RegExpMatchArray) => string | null
+ regex: RegExp;,
+ getter: (match: RegExpMatchArray<any>) => string | null
  }
 
- const patterns: Pattern[] = [
- // youtu.be/ID
+ const patterns: Pattern[] = [;
+ // youtu.be / ID
  {
  regex: /youtu\.be\/([^#&?/]+)/,
  getter: match => match[1] || null },
- // youtube.com/watch?v=ID
+ // youtube.com / watch?v = ID
  {
  regex: /[?&]v=([^&#]+)/,
  getter: match => match[1] || null },
- // youtube.com/embed/ID
+ // youtube.com / embed / ID
  {
  regex: /\/embed\/([^#&?/]+)/,
  getter: match => match[1] || null },
- // youtube.com/v/ID
+ // youtube.com / v/ID
  {
  regex: /\/v\/([^#&?/]+)/,
  getter: match => match[1] || null }];
@@ -479,7 +472,7 @@ export function getYouTubeVideoId(
  return null;
 }
 
-// Type-safe YouTube player states
+// Type - safe YouTube player states
   enum YouTubePlayerState {
  UNSTARTED = -1,
  ENDED = 0,
@@ -488,13 +481,13 @@ export function getYouTubeVideoId(
  BUFFERING = 3,
  VIDEO_CUED = 5 }
 
-// Type-safe interface for YouTube player events
+// Type - safe interface for YouTube player events
   interface YouTubePlayerEvent {
- target;
+ target: any;
  data: number
 }
 
-// Type-safe interface for YouTube player parameters
+// Type - safe interface for YouTube player parameters
   interface YouTubePlayerParameters {
  autoplay?: 0 | 1;
  cc_load_policy?: 1;

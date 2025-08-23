@@ -61,10 +61,10 @@ class SyntaxErrorEliminator {
         let fixCount = 0;
         const fixes = [];
         
-        // Fix 1: Missing semicolons at end of statements
-        const missingSemicolonRegex = /^(\s*(?:import|export|const|let|var|return|throw|break|continue)\s+[^;\n]+)(?<!;)\s*$/gm;
+        // Fix 1: Missing semicolons at end of statements (more conservative)
+        const missingSemicolonRegex = /^(\s*(?:import\s+[^\n]+from\s+['"][^'"]+['"]|export\s+(?:default\s+)?\w+|const\s+\w+\s*=\s*[^{\n]+|let\s+\w+\s*=\s*[^{\n]+|var\s+\w+\s*=\s*[^{\n]+|return\s+[^{\n]+))(?<!;)\s*$/gm;
         fixedContent = fixedContent.replace(missingSemicolonRegex, (match, statement) => {
-            if (!statement.trim().endsWith(';') && !statement.includes('{') && !statement.includes('(')) {
+            if (!statement.trim().endsWith(';') && !statement.includes('{') && !statement.includes('(') && !statement.includes('function') && !statement.includes('=>')) {
                 fixCount++;
                 fixes.push('Added missing semicolon');
                 return statement + ';';
@@ -72,12 +72,16 @@ class SyntaxErrorEliminator {
             return match;
         });
         
-        // Fix 2: Missing commas in object literals and arrays
-        const missingCommaRegex = /(\w+\s*:\s*[^,\n}]+)\s*\n(\s*\w+\s*:)/g;
+        // Fix 2: Missing commas in object literals (more conservative)
+        const missingCommaRegex = /(\w+\s*:\s*(?:['"][^'"]*['"]|\d+|true|false|null))\s*\n(\s*\w+\s*:)/g;
         fixedContent = fixedContent.replace(missingCommaRegex, (match, prop1, prop2) => {
-            fixCount++;
-            fixes.push('Added missing comma in object literal');
-            return prop1 + ',\n' + prop2;
+            // Only fix if it's clearly a simple property value
+            if (!prop1.includes('{') && !prop1.includes('(') && !prop1.includes('=>')) {
+                fixCount++;
+                fixes.push('Added missing comma in object literal');
+                return prop1 + ',\n' + prop2;
+            }
+            return match;
         });
         
         // Fix 3: Missing commas in function parameters
@@ -99,22 +103,9 @@ class SyntaxErrorEliminator {
             return match;
         });
         
-        // Fix 5: Missing export keywords
-        const missingExportRegex = /^(\s*)((?:const|let|var|function|class|interface|type)\s+\w+)/gm;
-        if (filePath.includes('components/') || filePath.includes('utils/') || filePath.includes('services/')) {
-            fixedContent = fixedContent.replace(missingExportRegex, (match, indent, declaration) => {
-                // Only add export if it's likely meant to be exported
-                if (declaration.includes('function') || declaration.includes('class') || declaration.includes('interface')) {
-                    const isAlreadyExported = content.includes(`export ${declaration}`);
-                    if (!isAlreadyExported && !declaration.includes('test') && !declaration.includes('Test')) {
-                        fixCount++;
-                        fixes.push('Added missing export keyword');
-                        return `${indent}export ${declaration}`;
-                    }
-                }
-                return match;
-            });
-        }
+        // Fix 5: Missing export keywords (disabled - too aggressive)
+        // This fix was causing too many false positives
+        // const missingExportRegex = /^(\s*)((?:const|let|var|function|class|interface|type)\s+\w+)/gm;
         
         // Fix 6: Unclosed brackets and parentheses (basic cases)
         const lines = fixedContent.split('\n');
@@ -140,11 +131,12 @@ class SyntaxErrorEliminator {
             fixes.push('Removed duplicate semicolons');
         }
         
-        // Fix 8: Fix spacing around operators
-        const operatorSpacingRegex = /(\w)([=+\-*/<>!])([=]?)(\w)/g;
+        // Fix 8: Fix spacing around operators (more conservative)
+        const operatorSpacingRegex = /(\w)([=+\-*])([=]?)(\w)/g;
         fixedContent = fixedContent.replace(operatorSpacingRegex, (match, before, op, equals, after) => {
             const operator = op + (equals || '');
-            if (match !== `${before} ${operator} ${after}`) {
+            // Only fix basic operators, avoid complex cases
+            if (match !== `${before} ${operator} ${after}` && !match.includes('<') && !match.includes('>')) {
                 fixCount++;
                 fixes.push('Fixed operator spacing');
                 return `${before} ${operator} ${after}`;
@@ -163,13 +155,9 @@ class SyntaxErrorEliminator {
             return match;
         });
         
-        // Fix 10: Fix incomplete statements
-        const incompleteStatementRegex = /^(\s*)(if|while|for)\s*\([^)]*\)\s*$/gm;
-        fixedContent = fixedContent.replace(incompleteStatementRegex, (match, indent, keyword) => {
-            fixCount++;
-            fixes.push(`Fixed incomplete ${keyword} statement`);
-            return `${match} {\n${indent}    // TODO: Add implementation\n${indent}}`;
-        });
+        // Fix 10: Fix incomplete statements (disabled - too aggressive)
+        // This fix was adding unwanted code blocks
+        // const incompleteStatementRegex = /^(\s*)(if|while|for)\s*\([^)]*\)\s*$/gm;
         
         if (fixCount > 0) {
             this.log(`  ✅ Applied ${fixCount} fixes: ${fixes.join(', ')}`);
