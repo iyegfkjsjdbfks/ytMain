@@ -13,7 +13,7 @@ export interface ScriptCommand {
   file: string;
   pattern?: RegExp;
   replacement?: string;
-  position?: { line: number; column: number };
+  position?: { line: number; column: number } | undefined;
   description: string;
 }
 
