@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FC } from 'react';
 import { Wifi, WifiOff, AlertCircle, Download, Clock } from 'lucide-react';
 import { createComponentError } from '@/utils/errorUtils';
-import { conditionalLogger } from '../utils/conditionalLogger';
+import { logger } from '../utils/conditionalLogger';
 import { offlineStorage } from '../utils/offlineStorage';
 import { usePWA } from '../hooks/usePWA';
 
@@ -51,7 +51,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
         'Failed to load offline data',
         error
       );
-      conditionalLogger.error('Failed to load offline data:', componentError);
+      logger.error('Failed to load offline data:', componentError);
     }
   };
 

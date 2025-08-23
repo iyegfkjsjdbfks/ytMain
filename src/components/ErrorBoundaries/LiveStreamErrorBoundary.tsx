@@ -1,7 +1,7 @@
 import React, { ReactNode, Component, ErrorInfo } from 'react';
 import { SignalSlashIcon, ArrowPathIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { createComponentError } from '../../utils/errorUtils';
-import { conditionalLogger } from '../../utils/conditionalLogger';
+import { logger } from '../../utils/conditionalLogger';
 
 export interface LiveStreamErrorBoundaryProps {
   children?: React.ReactNode;
@@ -57,7 +57,7 @@ export class LiveStreamErrorBoundary extends Component<LiveStreamErrorBoundaryPr
       })
     );
 
-    conditionalLogger.error('Live stream component error caught:', componentError);
+    logger.error('Live stream component error caught:', componentError);
 
     this.setState({ errorInfo });
   }
@@ -70,7 +70,7 @@ export class LiveStreamErrorBoundary extends Component<LiveStreamErrorBoundaryPr
 
   private handleRetry = (): void => {
     if (this.state.retryCount < this.maxRetries) {
-      conditionalLogger.debug('Retrying live stream component', {
+      logger.debug('Retrying live stream component', {
         streamId: this.props.streamId,
         attempt: this.state.retryCount + 1,
       });
@@ -89,7 +89,7 @@ export class LiveStreamErrorBoundary extends Component<LiveStreamErrorBoundaryPr
   private handleReconnect = (): void => {
     this.setState({ isReconnecting: true });
 
-    conditionalLogger.debug('Attempting to reconnect live stream', {
+    logger.debug('Attempting to reconnect live stream', {
       streamId: this.props.streamId,
     });
 

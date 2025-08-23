@@ -1,5 +1,5 @@
 import React, { useCallback, FC } from 'react';
-import { conditionalLogger } from '@/utils/conditionalLogger';
+import { logger } from '@/utils/conditionalLogger';
 
 import { LiveStreamErrorBoundary } from '@/components/ErrorBoundaries';
 import LiveStreamViewer from 'LiveStreamViewer.tsx';
@@ -17,12 +17,12 @@ const ProtectedLiveStreamViewer: FC<ProtectedLiveStreamViewerProps> = ({
  streamId,
  className }) => {
  const handleRetry = useCallback(() => {
- conditionalLogger.debug('Retrying live stream viewer', { streamId });
+ logger.debug('Retrying live stream viewer', { streamId });
  // The error boundary will reset and re-render the component
  }, [streamId]);
 
  const handleReconnect = useCallback(() => {
- conditionalLogger.debug('Reconnecting live stream', { streamId });
+ logger.debug('Reconnecting live stream', { streamId });
  // Additional reconnection logic can be added here
  // For example, clearing cached stream data or resetting connection state
  }, [streamId]);

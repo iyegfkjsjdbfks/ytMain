@@ -13,8 +13,8 @@ export interface VideoPlayerConfig {
  category: 'youtube' | 'local';
  name: string;
  description: string;
- features: string;
- useCases: string;
+ features: string[];
+ useCases: string[];
  performance: 'high' | 'medium' | 'low';
  complexity: 'simple' | 'moderate' | 'advanced'
 }
@@ -30,8 +30,8 @@ export interface Settings {
  youtubePlayerType: YouTubePlayerType;
  localVideoPlayerType: LocalVideoPlayerType;
  defaultVideoPlayerCategory: 'youtube' | 'local';
- enabledYouTubePlayers: YouTubePlayerType;
- enabledLocalPlayers: LocalVideoPlayerType;
+ enabledYouTubePlayers: YouTubePlayerType[];
+ enabledLocalPlayers: LocalVideoPlayerType[];
  initialSearchKeyword?: string;
  pageConfigurations?: {
  watchPage: PagePlayerConfig;
@@ -199,12 +199,12 @@ export const getEnabledLocalPlayers = (): LocalVideoPlayerType[] => {
  return getSettings().enabledLocalPlayers;
 };
 
-export const setEnabledYouTubePlayers = (players: YouTubePlayerType): void => {
+export const setEnabledYouTubePlayers = (players: YouTubePlayerType[]): void => {
  const settings = getSettings();
  saveSettings({ ...settings as any, enabledYouTubePlayers: players });
 };
 
-export const setEnabledLocalPlayers = (players: LocalVideoPlayerType): void => {
+export const setEnabledLocalPlayers = (players: LocalVideoPlayerType[]): void => {
  const settings = getSettings();
  saveSettings({ ...settings as any, enabledLocalPlayers: players });
 };
@@ -296,7 +296,7 @@ export const getInitialSearchKeyword = (): string => {
 };
 
 // Set initial search keyword
-export const setInitialSearchKeyword = (keyword): void => {
+export const setInitialSearchKeyword = (keyword: string): void => {
  const settings = getSettings();
  saveSettings({ ...settings as any, initialSearchKeyword: keyword });
 };
@@ -335,7 +335,7 @@ export const getPageDisplayName = (page: PageType): string => {
 export const getPlayerUsageByPage = (playerType: VideoPlayerType): PageType[] => {
  const pageConfigs = getAllPageConfigurations();
  const config = VIDEO_PLAYER_CONFIGS[playerType];
- const pages: PageType = [];
+ const pages: PageType[] = [];
 
  Object.entries(pageConfigs).forEach(([page, pageConfig]) => {
  const isUsed = config.category === 'youtube'

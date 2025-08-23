@@ -1,7 +1,7 @@
 import React, { useCallback, FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { conditionalLogger } from '@/utils/conditionalLogger';
+import { logger } from '@/utils/conditionalLogger';
 
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import SearchResultsPage from 'SearchResultsPage.tsx';

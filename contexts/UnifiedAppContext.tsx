@@ -115,7 +115,7 @@ interface UnifiedAppContextType {
   state: UnifiedAppState;
   
   // Auth actions
-  login: (email, password) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<boolean>;
   
@@ -128,14 +128,14 @@ interface UnifiedAppContextType {
   toggleMiniplayer: () => void;
   
   // Watch Later actions
-  addToWatchLater: (videoId) => void;
-  removeFromWatchLater: (videoId) => void;
-  isInWatchLater: (videoId) => boolean;
+  addToWatchLater: (videoId: string) => void;
+  removeFromWatchLater: (videoId: string) => void;
+  isInWatchLater: (videoId: string) => boolean;
   
   // UI actions
   toggleSidebar: () => void;
   addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
-  removeNotification: (id) => void;
+  removeNotification: (id: string) => void;
 }
 
 // Create Context
@@ -169,7 +169,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   }, []);
 
   // Auth actions
-  const login = useCallback(async (email, password): Promise<boolean> => {
+  const login = useCallback(async (email: string, password: string): Promise<boolean> => {
     dispatch({ type: "SET_AUTH_LOADING", payload: true });
 
     try {
@@ -182,33 +182,9 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
 
       const mockUser: User = {
         id: '1',
-        username: email.split('@')[0] || 'user',
+        name: email.split('@')[0] || 'user',
         email,
-        displayName: email.split('@')[0] || 'user',
-        avatar: 'https://via.placeholder.com/40',
-        isVerified: false,
-        subscriberCount: 0,
-        preferences: {
-          theme: 'system',
-          language: 'en',
-          autoplay: true,
-          notifications: {
-            email: true,
-            push: true,
-            subscriptions: true,
-            comments: true,
-            likes: true,
-            mentions: true
-          },
-          privacy: {
-            showSubscriptions: true,
-            showLikedVideos: true,
-            showWatchHistory: true,
-            allowComments: true
-          }
-        },
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        avatar: 'https://via.placeholder.com/40'
       };
 
       localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));
@@ -272,15 +248,15 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   }, []);
 
   // Watch Later actions
-  const addToWatchLater = useCallback((videoId) => {
+  const addToWatchLater = useCallback((videoId: string) => {
     dispatch({ type: "ADD_TO_WATCH_LATER", payload: videoId });
   }, []);
 
-  const removeFromWatchLater = useCallback((videoId) => {
+  const removeFromWatchLater = useCallback((videoId: string) => {
     dispatch({ type: "REMOVE_FROM_WATCH_LATER", payload: videoId });
   }, []);
 
-  const isInWatchLater = useCallback((videoId): boolean => {
+  const isInWatchLater = useCallback((videoId: string): boolean => {
     return state.watchLaterVideos.includes(videoId);
   }, [state.watchLaterVideos]);
 
@@ -303,7 +279,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     }, 5000);
   }, []);
 
-  const removeNotification = useCallback((id) => {
+  const removeNotification = useCallback((id: string) => {
     dispatch({ type: "REMOVE_NOTIFICATION", payload: id });
   }, []);
 

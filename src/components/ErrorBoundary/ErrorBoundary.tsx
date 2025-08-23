@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 interface ErrorBoundaryState {
  hasError: boolean;
- error?: Error;
- errorInfo?: React.ErrorInfo;
+ error?: Error | null;
+ errorInfo?: React.ErrorInfo | null;
 }
 
 interface ErrorBoundaryProps {
@@ -28,8 +28,7 @@ class ErrorBoundary extends React.Component<
     };
   }
 
- componentDidCatch(error: Error,
- errorInfo: React.ErrorInfo) {
+ override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
  this.setState({
  error,
  errorInfo,
@@ -45,8 +44,7 @@ class ErrorBoundary extends React.Component<
   }
 
  resetError = () => {
- this.setState({ hasError: false,
- error: undefined, errorInfo: undefined });
+    this.setState({ hasError: false, error: null, errorInfo: null });
   };
 
  render() {

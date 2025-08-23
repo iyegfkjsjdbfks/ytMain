@@ -22,7 +22,7 @@ export const CommentCard: React.FC<CommentCardProps> = ({
   currentUserId,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedText, setEditedText] = useState(comment.commentText);
+  const [editedText, setEditedText] = useState(comment.text);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleEdit = () => {
@@ -43,22 +43,18 @@ export const CommentCard: React.FC<CommentCardProps> = ({
     <div className="flex items-start space-x-2.5">
       <img
         className="w-10 h-10 rounded-full"
-        src={comment.userAvatarUrl}
-        alt={comment.userName}
+        src={comment.authorAvatar}
+        alt={comment.authorName}
       />
       <div className="flex-grow min-w-0">
         <div className="flex items-center space-x-1.5 mb-1">
           <span className="text-sm font-medium text-neutral-900 dark:text-neutral-50">
-            {comment.userName}
+            {comment.authorName}
           </span>
           <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            {comment.timestamp}
+            {comment.publishedAt}
           </span>
-          {comment.isEdited && (
-            <span className="text-xs text-neutral-400 dark:text-neutral-500">
-              (edited)
-            </span>
-          )}
+
         </div>
         {isEditing ? (
           <div className="space-y-2">
@@ -79,29 +75,29 @@ export const CommentCard: React.FC<CommentCardProps> = ({
           </div>
         ) : (
           <p className="text-sm text-neutral-800 dark:text-neutral-200">
-            {comment.commentText}
+            {comment.text}
           </p>
         )}
         <div className="flex items-center space-x-4 text-xs text-neutral-500 dark:text-neutral-400 mt-2">
           <button
             onClick={() => onLike(comment.id)}
             className={`flex items-center space-x-1 ${
-              comment.isLikedByCurrentUser ? 'text-blue-500' : ''
+              false ? 'text-blue-500' : ''
             }`}
           >
             <ThumbsUpIcon className="w-4 h-4" />
-            <span>{comment.likes}</span>
+            <span>{comment.likeCount}</span>
           </button>
           <button
             onClick={() => onDislike(comment.id)}
             className={`flex items-center space-x-1 ${
-              comment.isDislikedByCurrentUser ? 'text-red-500' : ''
+              false ? 'text-red-500' : ''
             }`}
           >
             <ThumbsDownIcon className="w-4 h-4" />
           </button>
           <button onClick={() => onReply(comment.id, '')}>Reply</button>
-          {comment.userId === currentUserId && (
+          {false && (
             <div className="relative">
               <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 <EllipsisHorizontalIcon className="w-5 h-5" />
