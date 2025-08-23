@@ -1,56 +1,47 @@
-// Analytics utility for tracking events
-
+// Analytics - Minimal Implementation
 export interface AnalyticsEvent {
- [key]: any;
+  name: string;
+  properties?: Record<string, any>;
+  timestamp: number;
 }
 
-/**
- * Track an analytics event
- * @param eventName - Name of the event to track
- * @param properties - Additional properties to include with the event
- */
-export const trackEvent = (,
- eventName,
- properties?: AnalyticsEvent
+export const trackEvent = (
+  name: string,
+  properties?: AnalyticsEvent['properties']
 ): void => {
- try {
- // In a real implementation, this would send to your analytics service
- // For now, we'll just log to console in development
- if (process.env.NODE_ENV === 'development') {
- }
-
- // Example integrations you might add:
- // - Google Analytics
- // - Mixpanel
- // - Amplitude
- // - Custom analytics service
-
- // Google Analytics example (if gtag is available)
- if (typeof window !== 'undefined' && (window as any).gtag) {
- (window as any).gtag('event', eventName, properties);
- }
- } catch (error) {
- (console as any).warn('Failed to track analytics event:', error);
- };
-
-/**
- * Track page view
- * @param pagePath - Path of the page being viewed
- * @param pageTitle - Title of the page
- */
-export const trackPageView = (pagePath, pageTitle?: string): void => {
- trackEvent('page_view', {
- page_path: pagePath,
- page_title: pageTitle });
+  try {
+    const event: AnalyticsEvent = {
+      name,
+      properties,
+      timestamp: Date.now()
+    };
+    
+    // Log to console in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Analytics Event:', event);
+    }
+    
+    // Send to analytics service (placeholder)
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', name, properties);
+    }
+  } catch (error) {
+    console.warn('Analytics tracking failed:', error);
+  }
 };
 
-/**
- * Track user interaction
- * @param element - Element that was interacted with
- * @param action - Type of interaction (click, hover, etc.)
- */
-export const trackInteraction = (element: HTMLElement, action): void => {
- trackEvent('user_interaction', {
- element,
- action });
+export const trackPageView = (path: string): void => {
+  trackEvent('page_view', { path });
+};
+
+export const trackUserAction = (action: string, details?: Record<string, any>): void => {
+  trackEvent('user_action', { action, ...details });
+};
+
+export const trackError = (error: Error, context?: string): void => {
+  trackEvent('error', {
+    message: error.message,
+    stack: error.stack,
+    context
+  });
 };

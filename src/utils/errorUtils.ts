@@ -1,125 +1,85 @@
-/**
- * Error utilities for component error handling
- */
-
+// Error Utils - Minimal Implementation
 export interface ComponentError extends Error {
- component: string;
- context?: string;
- originalError?: unknown;
+  component: string;
+  props?: Record<string, any>;
+  stack?: string;
 }
 
-/**
- * Creates a standardized component error
- * @param component - The component name where the error occurred
- * @param message - Error message
- * @param originalError - The original error that was caught
- * @param context - Additional context about the error
- * @returns ComponentError object
- */
-export function createComponentError(,
- component,
- message,
- originalError?: unknown,
- context?: string
+export interface AsyncError extends Error {
+  operation: string;
+  retryable: boolean;
+}
+
+export interface NetworkError extends Error {
+  url: string;
+  status?: number;
+  timeout?: boolean;
+}
+
+export interface ValidationError extends Error {
+  field: string;
+  value: any;
+  constraint: string;
+}
+
+export function createComponentError(
+  message: string,
+  component: string,
+  props?: Record<string, any>
 ): ComponentError {
- const error = new Error(message) as ComponentError;
- error.component = component;
- if (context !== undefined) {
- error.context = context;
- }
- if (originalError !== undefined) {
- error.originalError = originalError;
- }
-
- // Include original error message if available
- if (originalError instanceof Error) {
- error.message = `${message}: ${originalError.message}`;
- if (originalError.stack !== undefined) {
- error.stack = originalError.stack;
- }
- return error;
+  const error = new Error(message) as ComponentError;
+  error.name = 'ComponentError';
+  error.component = component;
+  error.props = props;
+  return error;
 }
 
-/**
- * Creates an async operation error
- * @param component - The component name
- * @param operation - The operation that failed
- * @param originalError - The original error
- * @returns ComponentError object
- */
-export function createAsyncError(,
- component,
- operation,
- originalError?: unknown
-): ComponentError {
- return createComponentError(
- component,
- `Async operation failed: ${operation}`,
- originalError,
- 'async'
- );
+export function createAsyncError(
+  message: string,
+  operation: string,
+  retryable = false
+): AsyncError {
+  const error = new Error(message) as AsyncError;
+  error.name = 'AsyncError';
+  error.operation = operation;
+  error.retryable = retryable;
+  return error;
 }
 
-/**
- * Creates a network-related error
- * @param component - The component name
- * @param url - The URL that failed
- * @param originalError - The original error
- * @returns ComponentError object
- */
-export function createNetworkError(,
- component,
- url,
- originalError?: unknown
-): ComponentError {
- return createComponentError(
- component,
- `Network request failed: ${url}`,
- originalError,
- 'network'
- );
+export function createNetworkError(
+  message: string,
+  url: string,
+  status?: number,
+  timeout?: boolean
+): NetworkError {
+  const error = new Error(message) as NetworkError;
+  error.name = 'NetworkError';
+  error.url = url;
+  error.status = status;
+  error.timeout = timeout;
+  return error;
 }
 
-/**
- * Creates a validation error
- * @param component - The component name
- * @param field - The field that failed validation
- * @param value - The invalid value
- * @returns ComponentError object
- */
-export function createValidationError(,
- component,
- field,
- value: unknown
-): ComponentError {
- return createComponentError(
- component,
- `Validation failed for field: ${field}`,
- new Error(`Invalid value: ${JSON.stringify(value)}`),
- 'validation'
- );
+export function createValidationError(
+  message: string,
+  field: string,
+  value: any,
+  constraint: string
+): ValidationError {
+  const error = new Error(message) as ValidationError;
+  error.name = 'ValidationError';
+  error.field = field;
+  error.value = value;
+  error.constraint = constraint;
+  return error;
 }
 
-/**
- * Safely extracts error message from unknown error
- * @param error - The error to extract message from
- * @returns Error message string
- */
 export function getErrorMessage(error: unknown): string {
- if (error instanceof Error) {
- return error.message;
- }
- if (typeof error === 'string') {
- return error;
- }
- return 'Unknown error occurred';
-}
-
-/**
- * Checks if an error is a ComponentError
- * @param error - The error to check
- * @returns True if error is a ComponentError
- */
-export function isComponentError(error: unknown): error is ComponentError {
- return error instanceof Error && 'component' in error;
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return 'An unknown error occurred';
 }

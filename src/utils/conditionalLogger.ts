@@ -1,202 +1,104 @@
-enum LogLevel {
- ERROR = 0,
- WARN = 1,
- INFO = 2,
- DEBUG = 3 }
+// Conditional Logger - Minimal Implementation
+export enum LogLevel {
+  ERROR = 0,
+  WARN = 1,
+  INFO = 2,
+  DEBUG = 3
+}
 
 export class ConditionalLogger {
- private logLevel: LogLevel;
- private isDevelopment: boolean;
- private isDebugMode: boolean;
+  private level: LogLevel;
+  private isDevelopment: boolean;
 
- constructor() {
- this.isDevelopment = this.detectDevelopmentMode();
- this.isDebugMode = this.detectDebugMode();
- this.logLevel = this.isDevelopment ? LogLevel.DEBUG : LogLevel.WARN;
- }
+  constructor(level: LogLevel = LogLevel.INFO) {
+    this.level = level;
+    this.isDevelopment = process.env.NODE_ENV === 'development';
+  }
 
- private detectDevelopmentMode(): boolean {
- try {
- // Check Vite environment first
- if (typeof import.meta !== 'undefined' && import.meta.env) {
- return import.meta.env.MODE === 'development';
- }
- } catch (e) {}
+  private shouldLog(level: LogLevel): boolean {
+    return level <= this.level;
+  }
 
- try {
- // Check Node.js environment
- return process.env.NODE_ENV === 'development';
- } catch (e) {}
+  private formatMessage(
+    level: string,
+    message: string,
+    data?: unknown,
+    source?: string
+  ): string {
+    const timestamp = new Date().toISOString();
+    const sourceStr = source ? '[' + source + ']' : '';
+    return timestamp + ' [' + level + '] ' + sourceStr + ' ' + message;
+  }
 
- // Browser fallback - assume development if we can't determine
- return typeof window !== 'undefined';
- }
+  error(message: string, data?: unknown, source?: string): void {
+    if (this.shouldLog(LogLevel.ERROR)) {
+      const formatted = this.formatMessage('ERROR', message, data, source);
+      console.error(formatted, data);
+    }
+  }
 
- private detectDebugMode(): boolean {
- try {
- // Check Vite debug flag first
- return import.meta.env?.VITE_DEBUG === 'true';
- } catch (e) {}
+  warn(message: string, data?: unknown, source?: string): void {
+    if (this.shouldLog(LogLevel.WARN)) {
+      const formatted = this.formatMessage('WARN', message, data, source);
+      console.warn(formatted, data);
+    }
+  }
 
- try {
- // Check Node.js debug flag
- return process.env.DEBUG === 'true';
- } catch (e) {}
+  info(message: string, data?: unknown, source?: string): void {
+    if (this.shouldLog(LogLevel.INFO)) {
+      const formatted = this.formatMessage('INFO', message, data, source);
+      console.info(formatted, data);
+    }
+  }
 
- // Default to development mode setting
- return this.isDevelopment;
- }
+  debug(message: string, data?: unknown, source?: string): void {
+    if (this.shouldLog(LogLevel.DEBUG)) {
+      const formatted = this.formatMessage('DEBUG', message, data, source);
+      console.debug(formatted, data);
+    }
+  }
 
- private shouldLog(level: LogLevel): boolean {
- return level <= this.logLevel;
- }
+  time(label: string): void {
+    if (this.isDevelopment) {
+      console.time(label);
+    }
+  }
 
- private formatMessage(,
- level: LogLevel,
- message,
- source?: string
- ): string {
- const timestamp = new Date().toISOString();
- const levelName = LogLevel.level;
- const sourcePrefix = source ? `[${source}]` : '';
- return `${timestamp} ${levelName}${sourcePrefix}: ${message}`;
- }
+  timeEnd(label: string): void {
+    if (this.isDevelopment) {
+      console.timeEnd(label);
+    }
+  }
 
- error(message, data?: unknown, source?: string): void {
- if (this.shouldLog(LogLevel.ERROR)) {
- const formattedMessage = this.formatMessage(
- LogLevel.ERROR,
- message,
- source
- );
- (console as any).error(formattedMessage, data || '');
- }
- warn(message, data?: unknown, source?: string): void {
- if (this.shouldLog(LogLevel.WARN)) {
- const formattedMessage = this.formatMessage(
- LogLevel.WARN,
- message,
- source
- );
- (console as any).warn(formattedMessage, data || '');
- }
- info(message, data?: unknown, source?: string): void {
- if (this.shouldLog(LogLevel.INFO)) {
- const formattedMessage = this.formatMessage(
- LogLevel.INFO,
- message,
- source
- );
- (console as any).info(formattedMessage, data || '');
- }
- debug(message, data?: unknown, source?: string): void {
- if (this.shouldLog(LogLevel.DEBUG)) {
- const formattedMessage = this.formatMessage(
- LogLevel.DEBUG,
- message,
- source
- );
- (console as any).debug(formattedMessage, data || '');
- }
- // Performance logging for development
- time(label): void {
- if (this.isDevelopment) {
- (console as any).time(label);
- }
- timeEnd(label): void {
- if (this.isDevelopment) {
- (console as any).timeEnd(label);
- }
- // Group logging for complex operations
- group(label): void {
- if (this.isDevelopment) {
- (console as any).group(label);
- }
- groupEnd(): void {
- if (this.isDevelopment) {
- (console as any).groupEnd();
- }
- // API response logging with sanitization
- apiResponse(endpoint, response, duration?: number): void {
- if (this.isDevelopment) {
- const message = duration;
- ? `API Response from ${endpoint} (${duration}ms)`
- : `API Response from ${endpoint}`;
- this.debug(message, this.sanitizeApiResponse(response), 'API');
- }
- // API error logging
- apiError(endpoint, error: Error): void {
- const message: string = `API Error from ${endpoint}`;
- this.error(message, this.sanitizeError(error), 'API');
- }
+  group(label: string): void {
+    if (this.isDevelopment) {
+      console.group(label);
+    }
+  }
 
- // Sanitize API responses to avoid logging sensitive data
- private sanitizeApiResponse(response): any {
- if (!response) return response;
+  groupEnd(): void {
+    if (this.isDevelopment) {
+      console.groupEnd();
+    }
+  }
 
- try {
- // Remove common sensitive fields
- const sensitiveFields: any[] = ['password', 'token', 'key', 'secret', 'auth'];
- const sanitized: object = { ...response };
+  apiResponse(endpoint: string, response: any, duration?: number): void {
+    if (this.isDevelopment) {
+      const message = duration
+        ? 'API Response from ' + endpoint + ' (' + duration + 'ms)'
+        : 'API Response from ' + endpoint;
+      this.info(message, response, 'API');
+    }
+  }
 
- // Recursively remove sensitive fields
- const removeSensitiveFields = (obj): (any) => {
- if (typeof obj !== 'object' || obj === null) return obj;
+  apiError(endpoint: string, error: Error): void {
+    const message = 'API Error from ' + endpoint;
+    this.error(message, error, 'API');
+  }
+}
 
- if (Array<any>.isArray<any>(obj)) {
- return obj.map(removeSensitiveFields);
- }
+export const logger = new ConditionalLogger(
+  process.env.NODE_ENV === 'development' ? LogLevel.DEBUG : LogLevel.INFO
+);
 
- const result: object = {};
- for (const [key, value] of Object.entries(obj)) {
- if (
- sensitiveFields.some(field => key.toLowerCase().includes(field))
- ) {
- result.key = '[REDACTED]';
- } else {
- result.key = removeSensitiveFields(value);
- }
- return result;
- };
-
- return removeSensitiveFields(sanitized);
- } catch (e) {
- return '[Sanitization Error]';
- }
- // Sanitize error objects
- private sanitizeError(error: Error): any {
- if (error instanceof Error) {
- return {
- name: error.name,
- message: error.message,
- stack: this.isDebugMode ? error.stack : '[Stack trace hidden]' };
- }
- return error;
- }
-
- // Set log level dynamically
- setLogLevel(level: LogLevel): void {
- this.logLevel = level;
- }
-
- // Get current log level
- getLogLevel(): LogLevel {
- return this.logLevel;
- }
-
- // Check if development mode
- isDev(): boolean {
- return this.isDevelopment;
- }
-
- // Check if debug mode
- isDebug(): boolean {
- return this.isDebugMode;
- }
-// Create singleton instance
-const logger = new ConditionalLogger();
-
-// Export both the class and instance
 export { ConditionalLogger, LogLevel, logger };
-export { logger as conditionalLogger };
-export default logger;
