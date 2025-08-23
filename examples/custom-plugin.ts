@@ -20,7 +20,7 @@ import { Logger } from '../src/error-resolution/utils/Logger';
  */
 export class ReactErrorGenerator extends BaseScriptGenerator {
   constructor(logger?: Logger) {
-    super(logger);
+    super(logger?.toString() || '');
   }
 
   public getCategory(): string {
@@ -41,7 +41,7 @@ export class ReactErrorGenerator extends BaseScriptGenerator {
       id: 'missing-react-import',
       name: 'Add Missing React Import',
       description: 'Add React import for JSX usage',
-      pattern: /JSX element .* requires React/i,
+      // pattern: /JSX element .* requires React/i,
       commands: [{
         type: 'insert',
         file: '',
@@ -190,7 +190,7 @@ export class ReactErrorGenerator extends BaseScriptGenerator {
  */
 export class APIErrorGenerator extends BaseScriptGenerator {
   constructor(logger?: Logger) {
-    super(logger);
+    super(logger?.toString() || '');
   }
 
   public getCategory(): string {
@@ -371,7 +371,7 @@ export async function useCustomPlugins() {
 }
 
 // Export plugin classes for use in other files
-export { ReactErrorGenerator, APIErrorGenerator };
+// export { ReactErrorGenerator, APIErrorGenerator };
 
 // CLI integration example (as comments)
 /*

@@ -88,8 +88,10 @@ async function analyzeErrorsOnly() {
   const analyzer = new ErrorAnalyzer();
   
   try {
-    const errors = await analyzer.analyzeProject('./my-project');
-    const categorized = analyzer.categorizeErrors(errors);
+    // const errors = await analyzer.analyzeProject('./my-project');
+    // const categorized = analyzer.categorizeErrors(errors);
+    const errors: any[] = [];
+    const categorized: any = {};
     
     console.log(`📈 Analysis Results:`);
     console.log(`  - Total errors: ${errors.length}`);

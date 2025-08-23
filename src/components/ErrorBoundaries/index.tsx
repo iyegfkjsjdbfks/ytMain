@@ -1,9 +1,6 @@
-import DataFetchErrorBoundary, {;
- type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
-import LiveStreamErrorBoundary, {;
- type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
-import VideoErrorBoundary, {;
- type VideoErrorBoundaryProps } from './VideoErrorBoundary';
+import DataFetchErrorBoundary, { type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
+import LiveStreamErrorBoundary, { type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
+import VideoErrorBoundary, { type VideoErrorBoundaryProps } from './VideoErrorBoundary';
 
 // Re-export all error boundaries and their types
 export { default as VideoErrorBoundary } from './VideoErrorBoundary';
