@@ -41,24 +41,20 @@ async function analyzeRealErrors() {
   log('\n🔍 Analyzing Real TypeScript Errors...', 'cyan');
   
   return new Promise((resolve, reject) => {
-    const tsc = spawn('npx', ['tsc', '--noEmit', '--skipLibCheck'], {
-      stdio: 'pipe'
+    const tsc = spawn('npx tsc --noEmit --skipLibCheck 2>&1', {
+      stdio: 'pipe',
+      shell: true
     });
-    
+
     let output = '';
-    let errorOutput = '';
-    
+
     tsc.stdout.on('data', (data) => {
       output += data.toString();
     });
-    
-    tsc.stderr.on('data', (data) => {
-      errorOutput += data.toString();
-    });
-    
+
     tsc.on('close', (code) => {
-      const errors = parseTypeScriptErrors(errorOutput);
-      resolve({ errors, rawOutput: errorOutput, exitCode: code });
+      const errors = parseTypeScriptErrors(output);
+      resolve({ errors, rawOutput: output, exitCode: code });
     });
     
     tsc.on('error', (error) => {
