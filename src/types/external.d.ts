@@ -1,51 +1,53 @@
-// External library type declarations
-declare module 'lucide-react' {
-  export const Download: React.ComponentType<any>;
-  export const X: React.ComponentType<any>;
-  export const Check: React.ComponentType<any>;
-  export const AlertCircle: React.ComponentType<any>;
-  export const Loader2: React.ComponentType<any>;
-  export const Play: React.ComponentType<any>;
-  export const Pause: React.ComponentType<any>;
-  export const Volume2: React.ComponentType<any>;
-  export const VolumeX: React.ComponentType<any>;
-  export const Maximize: React.ComponentType<any>;
-  export const Minimize: React.ComponentType<any>;
-  export const Settings: React.ComponentType<any>;
-  export const MoreHorizontal: React.ComponentType<any>;
-}
-
-declare module '@heroicons/react/24/outline' {
-  export const HeartIcon: React.ComponentType<any>;
-  export const ChatBubbleLeftIcon: React.ComponentType<any>;
-  export const ShareIcon: React.ComponentType<any>;
-  export const BookmarkIcon: React.ComponentType<any>;
-  export const EllipsisHorizontalIcon: React.ComponentType<any>;
-  export const PlayIcon: React.ComponentType<any>;
-  export const PauseIcon: React.ComponentType<any>;
-  export const SpeakerWaveIcon: React.ComponentType<any>;
-  export const SpeakerXMarkIcon: React.ComponentType<any>;
-  export const ArrowsPointingOutIcon: React.ComponentType<any>;
-  export const Cog6ToothIcon: React.ComponentType<any>;
+// Comprehensive type declarations
+declare module 'clsx' {
+  export type ClassValue = string | number | boolean | undefined | null | { [key: string]: any } | ClassValue[];
+  export function clsx(...inputs: ClassValue[]): string;
 }
 
 declare module 'class-variance-authority' {
-  export function cva(base: string, options?: any): any;
-  export type VariantProps<T> = any;
+  export interface VariantProps<T> {
+    [key: string]: any;
+  }
+  
+  export function cva(
+    base: string | string[],
+    config?: {
+      variants?: Record<string, Record<string, string>>;
+      defaultVariants?: Record<string, string>;
+    }
+  ): (props?: Record<string, any>) => string;
 }
 
-declare module '@/lib/utils' {
-  export function cn(...classes: any[]): string;
+declare module 'lucide-react' {
+  import { ComponentType } from 'react';
+  
+  export const Download: ComponentType<{ className?: string; size?: number }>;
+  export const X: ComponentType<{ className?: string; size?: number }>;
+  export const Check: ComponentType<{ className?: string; size?: number }>;
+  export const AlertCircle: ComponentType<{ className?: string; size?: number }>;
+  export const Loader2: ComponentType<{ className?: string; size?: number }>;
+  export const Play: ComponentType<{ className?: string; size?: number }>;
+  export const Pause: ComponentType<{ className?: string; size?: number }>;
+  export const Volume2: ComponentType<{ className?: string; size?: number }>;
+  export const VolumeX: ComponentType<{ className?: string; size?: number }>;
+  export const Maximize: ComponentType<{ className?: string; size?: number }>;
+  export const Minimize: ComponentType<{ className?: string; size?: number }>;
+  export const Settings: ComponentType<{ className?: string; size?: number }>;
+  export const MoreHorizontal: ComponentType<{ className?: string; size?: number }>;
 }
 
-declare module '@/utils/errorUtils' {
-  export function handleError(error: any): void;
-  export function logError(error: any): void;
-}
-
-declare module './icons' {
-  export const LikeIcon: React.ComponentType<any>;
-  export const DislikeIcon: React.ComponentType<any>;
-  export const CommentIcon: React.ComponentType<any>;
-  export const ShareIcon: React.ComponentType<any>;
+declare module '@heroicons/react/24/outline' {
+  import { ComponentType } from 'react';
+  
+  export const HeartIcon: ComponentType<{ className?: string }>;
+  export const ChatBubbleLeftIcon: ComponentType<{ className?: string }>;
+  export const ShareIcon: ComponentType<{ className?: string }>;
+  export const BookmarkIcon: ComponentType<{ className?: string }>;
+  export const EllipsisHorizontalIcon: ComponentType<{ className?: string }>;
+  export const PlayIcon: ComponentType<{ className?: string }>;
+  export const PauseIcon: ComponentType<{ className?: string }>;
+  export const SpeakerWaveIcon: ComponentType<{ className?: string }>;
+  export const SpeakerXMarkIcon: ComponentType<{ className?: string }>;
+  export const ArrowsPointingOutIcon: ComponentType<{ className?: string }>;
+  export const Cog6ToothIcon: ComponentType<{ className?: string }>;
 }
