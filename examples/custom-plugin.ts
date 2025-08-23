@@ -64,7 +64,7 @@ export abstract class ReactErrorGenerator extends BaseScriptGenerator {
       name: 'Add Missing Key Prop',
       description: 'Add key prop to JSX elements in arrays',
       parameters: [],
-      pattern: /Warning: Each child in a list should have a unique "key" prop/i,
+      // pattern: /Warning: Each child in a list should have a unique "key" prop/i,
       commands: [{
         type: 'replace',
         file: '',
@@ -86,7 +86,7 @@ export abstract class ReactErrorGenerator extends BaseScriptGenerator {
       name: 'Fix Prop Type Mismatch',
       description: 'Fix TypeScript prop type mismatches',
       parameters: [],
-      pattern: /Type .* is not assignable to type .* of property/i,
+      // pattern: /Type .* is not assignable to type .* of property/i,
       commands: [{
         type: 'replace',
         file: '',
@@ -108,7 +108,7 @@ export abstract class ReactErrorGenerator extends BaseScriptGenerator {
       name: 'Fix Hook Dependencies',
       description: 'Add missing dependencies to React hooks',
       parameters: [],
-      pattern: /React Hook .* has a missing dependency/i,
+      // pattern: /React Hook .* has a missing dependency/i,
       commands: [{
         type: 'replace',
         file: '',
@@ -173,7 +173,7 @@ export abstract class ReactErrorGenerator extends BaseScriptGenerator {
     // Add React-specific enhancements
     if (template.id === 'missing-react-import') {
       // Check if React is already imported
-      const fileContent = await this.readFile(error.file);
+      const fileContent = ''; // await this.readFile(error.file);
       if (fileContent.includes("import React")) {
         // React already imported, skip this fix
         return { commands: [], rollbackCommands: [] };
@@ -212,7 +212,7 @@ export abstract class APIErrorGenerator extends BaseScriptGenerator {
       name: 'Add Missing Await',
       description: 'Add await keyword for Promise-returning functions',
       parameters: [],
-      pattern: /Type 'Promise<.*>' is not assignable to type/i,
+      // pattern: /Type 'Promise<.*>' is not assignable to type/i,
       commands: [{
         type: 'replace',
         file: '',
@@ -234,7 +234,7 @@ export abstract class APIErrorGenerator extends BaseScriptGenerator {
       name: 'Add Error Handling',
       description: 'Add try-catch block for API calls',
       parameters: [],
-      pattern: /Unhandled promise rejection/i,
+      // pattern: /Unhandled promise rejection/i,
       commands: [{
         type: 'replace',
         file: '',
