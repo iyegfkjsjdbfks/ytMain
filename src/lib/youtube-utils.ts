@@ -1,12 +1,12 @@
-// youtube-utils - Generic Implementation
-export interface youtube-utilsConfig {
+// youtubeUtils - Generic Implementation
+export interface YoutubeUtilsConfig {
   enabled?: boolean;
 }
 
-export class Youtube-utils {
-  private config: Required<youtube-utilsConfig>;
+export class YoutubeUtils {
+  private config: Required<YoutubeUtilsConfig>;
 
-  constructor(config: youtube-utilsConfig = {}) {
+  constructor(config: YoutubeUtilsConfig = {}) {
     this.config = {
       enabled: config.enabled ?? true
     };
@@ -34,5 +34,5 @@ export class Youtube-utils {
   }
 }
 
-export const youtube-utils = new Youtube-utils();
-export default youtube-utils;
+export const youtubeUtils = new YoutubeUtils();
+export default youtubeUtils;

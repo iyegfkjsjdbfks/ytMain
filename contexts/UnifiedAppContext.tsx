@@ -157,7 +157,6 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
         const storedUser = localStorage.getItem('youtube_clone_user');
         if (storedUser) {
           const user = JSON.parse(storedUser);
-}
           dispatch({ type: "SET_USER", payload: user });
         }
       } catch (error) {
@@ -353,7 +352,6 @@ export const useUnifiedApp = () => {
   const context = useContext(UnifiedAppContext);
   if (context === undefined) {
     throw new Error('useUnifiedApp must be used within a UnifiedAppProvider');
-}
   }
   return context;
 };

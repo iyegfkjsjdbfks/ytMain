@@ -1,12 +1,12 @@
-// root-useLiveStream - Generic Implementation
-export interface root-useLiveStreamConfig {
+// rootUseLiveStream - Generic Implementation
+export interface RootUseLiveStreamConfig {
   enabled?: boolean;
 }
 
-export class Root-useLiveStream {
-  private config: Required<root-useLiveStreamConfig>;
+export class RootUseLiveStream {
+  private config: Required<RootUseLiveStreamConfig>;
 
-  constructor(config: root-useLiveStreamConfig = {}) {
+  constructor(config: RootUseLiveStreamConfig = {}) {
     this.config = {
       enabled: config.enabled ?? true
     };
@@ -34,5 +34,5 @@ export class Root-useLiveStream {
   }
 }
 
-export const root-useLiveStream = new Root-useLiveStream();
-export default root-useLiveStream;
+export const rootUseLiveStream = new RootUseLiveStream();
+export default rootUseLiveStream;

@@ -55,7 +55,6 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
  {...(onReady && { onReady })}
  {...(onStateChange && { onStateChange })}
  {...(onError && { onError })} />
- />
 // FIXED:  </VideoErrorBoundary>
  );
 };

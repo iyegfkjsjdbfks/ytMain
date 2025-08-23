@@ -1,12 +1,12 @@
-// root-useVideoPlayer - Generic Implementation
-export interface root-useVideoPlayerConfig {
+// rootUseVideoPlayer - Generic Implementation
+export interface RootUseVideoPlayerConfig {
   enabled?: boolean;
 }
 
-export class Root-useVideoPlayer {
-  private config: Required<root-useVideoPlayerConfig>;
+export class RootUseVideoPlayer {
+  private config: Required<RootUseVideoPlayerConfig>;
 
-  constructor(config: root-useVideoPlayerConfig = {}) {
+  constructor(config: RootUseVideoPlayerConfig = {}) {
     this.config = {
       enabled: config.enabled ?? true
     };
@@ -34,5 +34,5 @@ export class Root-useVideoPlayer {
   }
 }
 
-export const root-useVideoPlayer = new Root-useVideoPlayer();
-export default root-useVideoPlayer;
+export const rootUseVideoPlayer = new RootUseVideoPlayer();
+export default rootUseVideoPlayer;
