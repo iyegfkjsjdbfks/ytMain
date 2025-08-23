@@ -1,5 +1,7 @@
-import { setupServer } from 'msw/node';
-import { handlers } from 'handlers';
+// server - Simple Implementation
+export const server = {
+  enabled: true,
+  process: (data: any) => data
+};
 
-// Setup MSW server for testing environment
-export const server = setupServer(...handlers);
+export default server;

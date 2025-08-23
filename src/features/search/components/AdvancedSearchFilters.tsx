@@ -1,20 +1,15 @@
-// AdvancedSearchFilters - Enhanced Component
+// AdvancedSearchFilters - Simple Component
 import React from 'react';
 
-interface AdvancedSearchFiltersProps {
+export interface AdvancedSearchFiltersProps {
   className?: string;
   children?: React.ReactNode;
 }
 
-export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
-  className = '',
-  children
-}) => {
-  return (
-    <div className={`${componentName.toLowerCase()} ${className}`}>
-      {children || <div>Component content goes here</div>}
-    </div>
-  );
+export const AdvancedSearchFilters = (props: AdvancedSearchFiltersProps) => {
+  return React.createElement('div', {
+    className: props.className
+  }, props.children || 'Component ready');
 };
 
 export default AdvancedSearchFilters;

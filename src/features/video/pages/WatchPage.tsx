@@ -1,24 +1,15 @@
-// WatchPage - Enhanced Page Component
+// WatchPage - Simple Component
 import React from 'react';
 
-interface WatchPageProps {
+export interface WatchPageProps {
   className?: string;
+  children?: React.ReactNode;
 }
 
-export const WatchPage: React.FC<WatchPageProps> = ({
-  className = ''
-}) => {
-  return (
-    <div className={`page ${className}`}>
-      <div className="page-header">
-        <h1>{componentName.replace(/([A-Z])/g, ' $1').trim()}</h1>
-      </div>
-      
-      <div className="page-content">
-        <p>This is the {componentName} page.</p>
-      </div>
-    </div>
-  );
+export const WatchPage = (props: WatchPageProps) => {
+  return React.createElement('div', {
+    className: props.className
+  }, props.children || 'Component ready');
 };
 
 export default WatchPage;

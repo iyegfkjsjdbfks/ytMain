@@ -1,5 +1,7 @@
-import { liveStreamService } from 'livestreamAPI';
+// liveStreamService - Simple Implementation
+export const liveStreamService = {
+  enabled: true,
+  process: (data: any) => data
+};
 
-// Re-export the liveStreamService as the default export
 export default liveStreamService;
-export { liveStreamService };

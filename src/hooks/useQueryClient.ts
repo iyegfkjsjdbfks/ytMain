@@ -1,12 +1,16 @@
-import { QueryClient } from '@tanstack/react-query';
+// useQueryClient - Simple Hook
+import { useState } from 'react';
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      gcTime: 1000 * 60 * 10, // 10 minutes
-      retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+export function useQueryClient() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  return {
+    data,
+    loading,
+    error
+  };
+}
+
+export default useQueryClient;

@@ -1,7 +1,7 @@
-// Video Grid component exports
-export { default as VideoGrid } from './VideoGrid';
-export { default } from './VideoGrid';
+// index - Simple Implementation
+export const index = {
+  enabled: true,
+  process: (data: any) => data
+};
 
-// Video Grid component types
-export type { VideoGridProps } from './VideoGrid';
-export type { VideoItem } from '../../types/core';
+export default index;

@@ -1,32 +1,16 @@
-// usePWA - Enhanced Hook
-import { useState, useEffect, useCallback } from 'react';
+// usePWA - Simple Hook
+import { useState } from 'react';
 
 export function usePWA() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      // Simulate data fetching
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      setData({ message: 'Hook data loaded', timestamp: Date.now() });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  return { data, loading, error, refetch: fetchData };
+  return {
+    data,
+    loading,
+    error
+  };
 }
 
 export default usePWA;

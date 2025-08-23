@@ -1,20 +1,15 @@
-// ComprehensiveLiveStudio - Enhanced Component
+// ComprehensiveLiveStudio - Simple Component
 import React from 'react';
 
-interface ComprehensiveLiveStudioProps {
+export interface ComprehensiveLiveStudioProps {
   className?: string;
   children?: React.ReactNode;
 }
 
-export const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
-  className = '',
-  children
-}) => {
-  return (
-    <div className={`${componentName.toLowerCase()} ${className}`}>
-      {children || <div>Component content goes here</div>}
-    </div>
-  );
+export const ComprehensiveLiveStudio = (props: ComprehensiveLiveStudioProps) => {
+  return React.createElement('div', {
+    className: props.className
+  }, props.children || 'Component ready');
 };
 
 export default ComprehensiveLiveStudio;
