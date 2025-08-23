@@ -1,5 +1,5 @@
 import React, { MouseEvent, ChangeEvent, FormEvent, FC } from 'react';
-import SearchIcon from './icons/SearchIcon';
+import SearchIcon from 'icons/SearchIcon.tsx';
 
 interface SearchSuggestionsProps {
  suggestions: string;

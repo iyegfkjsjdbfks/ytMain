@@ -95,7 +95,7 @@ class NoExportedMemberFixer {
     let content = readFileSync(modulePath, 'utf8');
     
     // Check if export already exists
-    if (content.includes(`export { ${memberName}`) || 
+    if (content.includes(`export { ${memberName};`) || 
         content.includes(`export const ${memberName}`) ||
         content.includes(`export function ${memberName}`) ||
         content.includes(`export class ${memberName}`) ||

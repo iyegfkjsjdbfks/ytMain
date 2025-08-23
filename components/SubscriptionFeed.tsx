@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getVideos } from '../services/realVideoService';
+import { getVideos } from '../services/realVideoService.ts';
 
-import SubscriptionsIcon from './icons/SubscriptionsIcon';
-import VideoCard from './VideoCard';
+import SubscriptionsIcon from 'icons/SubscriptionsIcon.tsx';
+import VideoCard from 'VideoCard.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface SubscriptionFeedProps {
  maxVideos?: number;

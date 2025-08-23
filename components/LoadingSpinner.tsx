@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { cn } from '../utils/cn';
+import { cn } from '../utils/cn.ts';
 
 interface LoadingSpinnerProps {
  size?: 'sm' | 'md' | 'lg' | 'xl';

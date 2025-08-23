@@ -69,7 +69,7 @@ const PlaylistDetailPage: React.FC = () => {}
  }
  if (editModalRef.current && !editModalRef.current.contains(event.target as Node)) {}
  // Check if the click was on the trigger button to prevent immediate closing
- const editButton = document.getElementById('edit - playlist - button') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
+ const editButton = document.getElementById('edit - playlist - button') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
  if (editButton && editButton.contains(event.target as Node)) {}
  return;
  }

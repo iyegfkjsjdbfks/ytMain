@@ -199,7 +199,7 @@ export function usePerformanceMonitor() {
       }
       
       if (!existsSync(errorBoundaryPath)) {
-        const errorBoundaryContent = `import React, { Component, ReactNode } from 'react';
+        const errorBoundaryContent = `import React, { Component, ReactNode, useCallback } from 'react';
 
 interface ErrorBoundaryState {
   hasError: boolean;

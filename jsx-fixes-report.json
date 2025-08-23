@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-23T10:29:20.378Z",
-  "duration": "99 seconds",
+  "timestamp": "2025-08-23T15:44:21.268Z",
+  "duration": "34 seconds",
   "processedFiles": 125,
-  "fixedErrors": 37,
-  "averageFixesPerFile": 0.3
+  "fixedErrors": 0,
+  "averageFixesPerFile": 0
 }

@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { getInitialSearchKeyword } from '../services/settingsService';
+import { getInitialSearchKeyword } from '../services/settingsService.ts';
 
-import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
+import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService.ts';
 
-import { VideoService } from '../services/api';
-import type { Video } from '../types';
+import { VideoService } from '../services/api/index.ts';
+import type { Video } from '../types/index.ts';
 
 // Convert search results to Video format for HomePage compatibility
 const convertSearchResultToVideo = (

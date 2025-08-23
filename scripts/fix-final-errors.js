@@ -43,8 +43,8 @@ class FinalErrorFixer {
     // Remove unused import
     await this.fixFile('tests/setup.ts', [
       {
-        search: "import { performanceMonitor } from '../utils/performanceMonitor';",
-        replace: "// import { performanceMonitor } from '../utils/performanceMonitor'; // Unused import"
+        search: "import { performanceMonitor } from '../utils/performanceMonitor.ts';",
+        replace: "// import { performanceMonitor } from '../utils/performanceMonitor.ts'; // Unused import"
       }
     ]);
 

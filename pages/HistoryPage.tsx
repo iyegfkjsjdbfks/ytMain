@@ -1,11 +1,11 @@
 import React, { useState, useEffect, FC } from 'react';
 
-import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon;
-import HistoryPageSkeleton from '../components/LoadingStates/HistoryPageSkeleton';
-import VideoCard from '../components/VideoCard';
-import { getWatchHistoryVideos } from '../services/realVideoService';
+import HistoryIcon from '../components/icons/HistoryIcon.tsx'; // Using local icon;
+import HistoryPageSkeleton from '../components/LoadingStates/HistoryPageSkeleton.tsx';
+import VideoCard from '../components/VideoCard.tsx';
+import { getWatchHistoryVideos } from '../services/realVideoService.ts';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 const HistoryPage: React.FC = () => {
  return null;

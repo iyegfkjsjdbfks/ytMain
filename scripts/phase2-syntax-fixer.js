@@ -284,7 +284,7 @@ export type { Video, Short, User, Channel, Playlist, Comment } from '../../types
     this.fixFile('src/hooks/useLiveStream.ts', `import { useState, useEffect, useCallback } from 'react';
 
 // Import statement fixed
-import { liveStreamService } from '../services/livestreamAPI';
+import { liveStreamService } from '../services/livestreamAPI.ts';
 
 interface LiveStreamState {
   isLive: boolean;
@@ -333,7 +333,7 @@ export default useLiveStream;
 
     // Fix utils/componentUtils.tsx
     this.fixFile('utils/componentUtils.tsx', `// Component utilities and helpers
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState, useEffect, useCallback } from 'react';
 
 // Type definitions
 export interface TruncateOptions {
@@ -472,7 +472,7 @@ export default {
     this.fixFile('src/features/livestream/components/LiveStreamViewer.tsx', `import React, { useState, useEffect, useRef } from 'react';
 
 // Import statements fixed
-import { liveStreamService } from '../services/livestreamAPI';
+import { liveStreamService } from '../services/livestreamAPI.ts';
 
 interface LiveStreamViewerProps {
   streamId: string;

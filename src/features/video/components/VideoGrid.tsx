@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import type { Video } from '../types';
-import VideoCard from './VideoCard';
+import type { Video } from '../types/index.ts';
+import VideoCard from 'VideoCard.tsx';
 
 interface VideoGridProps {
  title?: string;

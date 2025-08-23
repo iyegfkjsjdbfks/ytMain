@@ -1,8 +1,8 @@
 import React, { forwardRef, type ReactNode, lazy, ReactNode } from 'react';
 
-import YouTubePlayer from './YouTubePlayer';
+import YouTubePlayer from 'YouTubePlayer.tsx';
 
-import type { YouTubeSearchResult } from '../services/googleSearchService';
+import type { YouTubeSearchResult } from '../services/googleSearchService.ts';
 
 interface YouTubePlayerWrapperProps {
  videoId: string;

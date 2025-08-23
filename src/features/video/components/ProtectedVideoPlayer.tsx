@@ -3,7 +3,7 @@ import { conditionalLogger } from '@/utils/conditionalLogger';
 
 import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
 
-import { type VideoPlayerProps, VideoPlayer } from './VideoPlayer';
+import { type VideoPlayerProps, VideoPlayer } from 'VideoPlayer.tsx';
 
 interface ProtectedVideoPlayerProps extends VideoPlayerProps {
  // Additional props specific to the protected version can be added here

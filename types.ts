@@ -1,6 +1,6 @@
 // Import and re-export VideoVisibility type
 import type { Video } from '../types';
-import type { VideoVisibility } from './src/types/core';
+import type { VideoVisibility } from 'src/types/core.ts';
 
 export type { VideoVisibility };
 

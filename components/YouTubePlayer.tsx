@@ -89,7 +89,7 @@ const YouTubePlayer: React.FC < YouTubePlayerProps> = ({}
  }
 
  // Check if script is already loading
- if (document.querySelector('script[src*="youtube.com / iframe_api"]') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement) {}
+ if (document.querySelector('script[src*="youtube.com / iframe_api"]') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement) {}
  // Script is loading, wait for it
  const checkAPI = () => {}
  if (window.YT?.Player) {}
@@ -143,7 +143,7 @@ return;
  }
 
  // Ensure the container element exists and is properly prepared
- const container = document.getElementById(playerIdRef.current) as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
+ const container = document.getElementById(playerIdRef.current) as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
  if (container && document.body.contains(container)) {}
  // Clear any existing content safely
  try {}

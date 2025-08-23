@@ -129,7 +129,7 @@ class CriticalSyntaxFixer {
     }
 
     // Fix 4: Handle malformed export statements
-    fixed = fixed.replace(/export\s*\{\s*([^}]+)\s*,\s*\s+([^}]+)\s*\}/g, 'export { $1, $2 }');
+    fixed = fixed.replace(/export\s*\{\s*([^}]+)\s*,\s*\s+([^}]+)\s*\}/g, 'export { $1, $2 };');
 
     return { fixed, changes };
   }

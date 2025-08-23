@@ -136,7 +136,7 @@ class CriticalErrorFixer {
       // Comment out problematic imports
       content = content.replace(
         /^import.*performanceMonitor.*$/m, 
-        '// import { performanceMonitor } from \'../utils/performanceMonitor\'; // Commented out due to missing methods'
+        '// import { performanceMonitor } from \'../utils/performanceMonitor.ts'; // Commented out due to missing methods'
       );
       
       fs.writeFileSync(fullPath, content);

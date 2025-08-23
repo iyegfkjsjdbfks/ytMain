@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 import { EyeIcon, CalendarDaysIcon, PlayIcon } from '@heroicons/react/24/outline';
 
-import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useToggle } from '../src/hooks/unifiedHooks';
-import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
+import { useWatchLater } from '../contexts/WatchLaterContext.tsx';
+import { useToggle } from '../src/hooks/unifiedHooks.ts';
+import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils.tsx';
 
-import { SaveIcon } from './icons/UnifiedIcon';
-import ImageWithFallback from './ImageWithFallback';
-import { IconButton } from './ui/Button';
+import { SaveIcon } from 'icons/UnifiedIcon.tsx';
+import ImageWithFallback from 'ImageWithFallback.tsx';
+import { IconButton } from 'ui/Button.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface SubscriptionVideoCardProps {
  video: Video;

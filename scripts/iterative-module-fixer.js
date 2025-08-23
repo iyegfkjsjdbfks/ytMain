@@ -74,16 +74,16 @@ class IterativeModuleFixer {
     // Common import path fixes
     const pathFixes = [
       // Root-level imports that should point to src
-      { from: "import { useVideoPlayer } from '../hooks'", to: "import { useVideoPlayer } from '../src/hooks'" },
-      { from: "import { useFormState } from '../hooks'", to: "import { useFormState } from '../src/hooks'" },
-      { from: "import { useAsyncState } from '../hooks'", to: "import { useAsyncState } from '../src/hooks'" },
-      { from: "import { useTrendingSearch } from '../hooks'", to: "import { useTrendingSearch } from '../src/hooks'" },
+      { from: "import { useVideoPlayer } from '../hooks/index.ts'", to: "import { useVideoPlayer } from '../src/hooks/index.ts'" },
+      { from: "import { useFormState } from '../hooks/index.ts'", to: "import { useFormState } from '../src/hooks/index.ts'" },
+      { from: "import { useAsyncState } from '../hooks/index.ts'", to: "import { useAsyncState } from '../src/hooks/index.ts'" },
+      { from: "import { useTrendingSearch } from '../hooks/index.ts'", to: "import { useTrendingSearch } from '../src/hooks/index.ts'" },
       
       // Hook-specific imports
-      { from: "import { useIntersectionObserver } from '../hooks/useIntersectionObserver'", to: "import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver'" },
-      { from: "import { useDropdownMenu } from '../hooks/useDropdownMenu'", to: "import { useDropdownMenu } from '../src/hooks/useDropdownMenu'" },
-      { from: "import { useToggle } from '../hooks/unifiedHooks'", to: "import { useToggle } from '../src/hooks/unifiedHooks'" },
-      { from: "import { useHomeVideos } from '../hooks/useOptimizedVideoData'", to: "import { useHomeVideos } from '../src/hooks/useOptimizedVideoData'" },
+      { from: "import { useIntersectionObserver } from '../hooks/useIntersectionObserver'", to: "import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver.ts'" },
+      { from: "import { useDropdownMenu } from '../hooks/useDropdownMenu'", to: "import { useDropdownMenu } from '../src/hooks/useDropdownMenu.ts'" },
+      { from: "import { useToggle } from '../hooks/unifiedHooks'", to: "import { useToggle } from '../src/hooks/unifiedHooks.ts'" },
+      { from: "import { useHomeVideos } from '../hooks/useOptimizedVideoData'", to: "import { useHomeVideos } from '../src/hooks/useOptimizedVideoData.ts'" },
     ];
 
     const files = this.findAllTypeScriptFiles();

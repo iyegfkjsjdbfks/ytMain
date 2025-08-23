@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { subscriptionService } from '../services/subscriptionService';
+import { subscriptionService } from '../services/subscriptionService.ts';
 
 // This file is currently empty but kept for future subscription hook implementations
 

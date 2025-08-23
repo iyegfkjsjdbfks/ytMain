@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
-import { youtubeService } from '../../src/services/api/youtubeService';
-import { metadataNormalizationService } from '../../src/services/metadataNormalizationService';
-import * as realVideoService from '../../src/services/realVideoService';
-import { unifiedDataService } from '../../src/services/unifiedDataService';
+import { youtubeService } from '../../src/services/api/youtubeService.ts';
+import { metadataNormalizationService } from '../../src/services/metadataNormalizationService.ts';
+import * as realVideoService from '../../src/services/realVideoService.ts';
+import { unifiedDataService } from '../../src/services/unifiedDataService.ts';
 
 // Mock dependencies
 vi.mock('../../src/services/api/youtubeService');

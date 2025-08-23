@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ComprehensiveLiveStudio } from '../src/features/livestream/components';
+import { ComprehensiveLiveStudio } from '../src/features/livestream/components/index.ts';
 
 /**
  * GoLivePage component that integrates the comprehensive live streaming studio

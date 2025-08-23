@@ -6,13 +6,13 @@ const QueueListIconSolid = QueueListSolidIcon;
 const ChartBarIconSolid = ChartBarSolidIcon;
 const VideoCameraIconSolid = VideoCameraSolidIcon;
 
-import ClockIcon from './icons/ClockIcon';
-import FireIcon from './icons/FireIcon';
-import HistoryIcon from './icons/HistoryIcon';
-import HomeIcon from './icons/HomeIcon';
-import PlaylistIcon from './icons/PlaylistIcon';
-import ShortsIcon from './icons/ShortsIcon';
-import SubscriptionsIcon from './icons/SubscriptionsIcon';
+import ClockIcon from 'icons/ClockIcon.tsx';
+import FireIcon from 'icons/FireIcon.tsx';
+import HistoryIcon from 'icons/HistoryIcon.tsx';
+import HomeIcon from 'icons/HomeIcon.tsx';
+import PlaylistIcon from 'icons/PlaylistIcon.tsx';
+import ShortsIcon from 'icons/ShortsIcon.tsx';
+import SubscriptionsIcon from 'icons/SubscriptionsIcon.tsx';
 
 interface MinimizedNavItemProps {
  to: string;

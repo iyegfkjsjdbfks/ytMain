@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useCallback, memo, lazy } from 'react';
 import { FixedSizeGrid } from 'react-window';
 
-import type { Video } from '../../types/core';
+import type { Video } from '../../types/core.ts';
 
 interface OptimizedVideoGridProps {
  videos: Video;

@@ -5,7 +5,7 @@ import * as matchers from '@testing-library/jest-dom/matchers';
 import { afterEach, beforeAll, afterAll, vi, expect } from 'vitest';
 
 expect.extend(matchers);
-import { server } from './mocks/server';
+import { server } from 'mocks/server.ts';
 
 // Global type declarations
 declare global {

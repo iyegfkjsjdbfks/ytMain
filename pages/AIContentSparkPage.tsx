@@ -2,9 +2,9 @@ import React, { FormEvent, FC, useState } from 'react';
 
 import { LightBulbIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
-import { generateVideoIdeas } from '../services/geminiService';
+import { generateVideoIdeas } from '../services/geminiService.ts';
 
-import type { VideoIdeaResponse } from '../types';
+import type { VideoIdeaResponse } from '../types.ts';
 
 const AIContentSparkPage: React.FC = () => {
  const [userInput, setUserInput] = useState<string>('');

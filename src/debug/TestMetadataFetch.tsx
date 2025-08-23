@@ -1,8 +1,8 @@
 import React, { useState, FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
-import { logger } from '../utils/logger';
-import { unifiedDataService } from '../services/unifiedDataService';
+import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService.ts';
+import { logger } from '../utils/logger.ts';
+import { unifiedDataService } from '../services/unifiedDataService.ts';
 
 const TestMetadataFetch: React.FC = () => {
  return null;

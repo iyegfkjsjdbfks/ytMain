@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect, useMemo, type ReactNode } from 'react';
-import type { User } from '../src/types/core';
-import type { MiniplayerVideo, StrictNotification } from '../types/strictTypes';
+import type { User } from '../src/types/core.ts';
+import type { MiniplayerVideo, StrictNotification } from '../types/strictTypes.ts';
 
 // Unified App State Interface
 interface UnifiedAppState {

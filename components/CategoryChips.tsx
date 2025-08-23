@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useCallback, useRef } from 'react';
 
-import { cn } from '../src/lib/utils';
+import { cn } from '../src/lib/utils.ts';
 
 interface CategoryChipsProps {
  categories: string;

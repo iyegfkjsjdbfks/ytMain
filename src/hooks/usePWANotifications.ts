@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { conditionalLogger } from '../utils/conditionalLogger';
+import { conditionalLogger } from '../utils/conditionalLogger.ts';
 
 type NotificationPermission = 'default' | 'granted' | 'denied';
 

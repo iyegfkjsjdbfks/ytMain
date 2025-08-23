@@ -1041,7 +1041,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
     
     // Add import
     if (!content.includes('import { ErrorBoundary }')) {
-      content = `import { ErrorBoundary } from '../components/ErrorBoundary';\n${content}`;
+      content = `import { ErrorBoundary } from '../components/ErrorBoundary.tsx';\n${content}`;
     }
     
     // Find the main component export and wrap it

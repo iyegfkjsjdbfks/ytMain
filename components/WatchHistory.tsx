@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getVideos } from '../services/realVideoService';
+import { getVideos } from '../services/realVideoService.ts';
 
-import HistoryIcon from './icons/HistoryIcon';
-import VideoCard from './VideoCard';
+import HistoryIcon from 'icons/HistoryIcon.tsx';
+import VideoCard from 'VideoCard.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface WatchHistoryProps {
  maxVideos?: number;

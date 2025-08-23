@@ -2,11 +2,11 @@ import React, { useState, useEffect, FC } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
 
-import { getVideos } from '../services/realVideoService';
+import { getVideos } from '../services/realVideoService.ts';
 
-import VideoCard from './VideoCard';
+import VideoCard from 'VideoCard.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface LiveStreamsProps {
  maxStreams?: number;

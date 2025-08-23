@@ -1,4 +1,4 @@
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 export function calculateEngagementRate(video: Video): number {
  if (!video.likes || !video.viewCount) {

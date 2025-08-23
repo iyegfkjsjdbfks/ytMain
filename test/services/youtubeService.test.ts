@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import { youtubeService } from '../../src/services/api/youtubeService';
+import { youtubeService } from '../../src/services/api/youtubeService.ts';
 
 // Mock external dependencies
 vi.mock('../../src/utils/logger', () => ({

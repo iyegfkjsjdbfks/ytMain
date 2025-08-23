@@ -1,9 +1,9 @@
 import type { Video } from '../types';
 import type { Channel } from '../types';
-import { ApiError } from './base';
-import { CACHE_CONFIG } from '../../lib/constants';
-import { logger } from '../../utils/logger';
-import type { Video, Channel } from '../../types/core';
+import { ApiError } from 'base.ts';
+import { CACHE_CONFIG } from '../../lib/constants.ts';
+import { logger } from '../../utils/logger.ts';
+import type { Video, Channel } from '../../types/core.ts';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const GOOGLE_API_URL = 'https://www.googleapis.com/youtube/v3';

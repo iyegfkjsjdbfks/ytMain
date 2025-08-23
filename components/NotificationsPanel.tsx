@@ -1,5 +1,5 @@
 import React, { useState, FC } from 'react';
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 import { ChatBubbleLeftRightIcon, BellAlertIcon } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/24/outline';

@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { unifiedDataService } from '../../../services/unifiedDataService';
+import { unifiedDataService } from '../../../services/unifiedDataService.ts';
 
-import { videoService } from '../services/videoService';
+import { videoService } from '../services/videoService.ts';
 
 // Video query key factory
 const videoKeys = {

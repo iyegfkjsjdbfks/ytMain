@@ -1,6 +1,6 @@
-import { getYouTubeSearchProvider } from '../../services/settingsService';
+import { getYouTubeSearchProvider } from '../../services/settingsService.ts';
 import React from 'react';
-import { logger } from './logger';
+import { logger } from 'logger.ts';
 
 /**
  * Utility functions for managing YouTube Data API usage based on admin settings

@@ -219,9 +219,9 @@ class TS2304Fixer {
     // Pattern 3: Fix missing type imports
     if (filePath.includes('.ts') || filePath.includes('.tsx')) {
       const typeImports = {
-        'Video': "import { Video } from '../types';",
-        'User': "import { User } from '../types';",
-        'Channel': "import { Channel } from '../types';"
+        'Video': "import { Video } from '../types.ts';",
+        'User': "import { User } from '../types.ts';",
+        'Channel': "import { Channel } from '../types.ts';"
       };
 
       if (typeImports[varName] && !content.includes(`import.*${varName}`)) {

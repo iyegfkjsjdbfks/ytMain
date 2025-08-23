@@ -1,8 +1,8 @@
 import React, { memo, FC } from 'react';
 
-import YouTubeVideoCard from './YouTubeVideoCard';
+import YouTubeVideoCard from 'YouTubeVideoCard.tsx';
 
-import type { YouTubeSearchResult } from '../services/googleSearchService';
+import type { YouTubeSearchResult } from '../services/googleSearchService.ts';
 
 interface YouTubeVideoGridProps {
  videos: YouTubeSearchResult;

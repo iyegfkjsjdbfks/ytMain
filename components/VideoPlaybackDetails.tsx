@@ -1,17 +1,17 @@
-import type { Channel } from '../types';
-import { Channel } from '../types';
+import type { Channel } from '../types.ts';
+import { Channel } from '../types.ts';
 import React, { type RefObject } from 'react';
 
-import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';
-import { formatDistanceToNow } from '../utils/dateUtils';
-import { formatCount } from '../utils/numberUtils';
+import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils.ts';
+import { formatDistanceToNow } from '../utils/dateUtils.ts';
+import { formatCount } from '../utils/numberUtils.ts';
 
-import AdvancedVideoPlayer from './AdvancedVideoPlayer';
-import VideoActions from './VideoActions';
-import VideoDescription from './VideoDescription';
-import YouTubePlayerWrapper from './YouTubePlayerWrapper';
+import AdvancedVideoPlayer from 'AdvancedVideoPlayer.tsx';
+import VideoActions from 'VideoActions.tsx';
+import VideoDescription from 'VideoDescription.tsx';
+import YouTubePlayerWrapper from 'YouTubePlayerWrapper.tsx';
 
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 interface VideoPlaybackDetailsProps {
  video: Video;

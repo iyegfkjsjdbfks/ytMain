@@ -1,11 +1,11 @@
 import React, { useCallback, FC } from 'react';
-import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
-import { conditionalLogger } from '../src/utils/conditionalLogger';
+import { VideoErrorBoundary } from '../src/components/ErrorBoundaries/index.tsx';
+import { conditionalLogger } from '../src/utils/conditionalLogger.ts';
 
-import YouTubePlayer from './YouTubePlayer';
+import YouTubePlayer from 'YouTubePlayer.tsx';
 
-import type { YouTubeSearchResult } from '../services/googleSearchService';
-import type { Video } from '../src/types/core';
+import type { YouTubeSearchResult } from '../services/googleSearchService.ts';
+import type { Video } from '../src/types/core.ts';
 
 interface ProtectedYouTubePlayerProps {
  video: YouTubeSearchResult | Video;

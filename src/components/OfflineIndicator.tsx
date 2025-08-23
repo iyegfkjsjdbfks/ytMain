@@ -3,11 +3,11 @@ import Wifi, { WifiOff } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
-import { conditionalLogger } from '../utils/conditionalLogger';
+import { conditionalLogger } from '../utils/conditionalLogger.ts';
 
-import { offlineStorage } from '../utils/offlineStorage';
+import { offlineStorage } from '../utils/offlineStorage.ts';
 
-import { usePWA } from '../hooks/usePWA';
+import { usePWA } from '../hooks/usePWA.ts';
 
 interface OfflineIndicatorProps {
  className?: string;

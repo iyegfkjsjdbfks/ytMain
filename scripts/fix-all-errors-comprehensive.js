@@ -204,11 +204,11 @@ class ComprehensiveErrorFixer {
       if (content.includes(': Video') && !content.includes('import.*Video.*from')) {
         const typeImports = [];
         if (!content.includes("import type { Video }") && !content.includes("import { Video }")) {
-          typeImports.push("import type { Video } from '../types';");
+          typeImports.push("import type { Video } from '../types.ts';");
           fixes++;
         }
         if (!content.includes("import type { Channel }") && content.includes(': Channel')) {
-          typeImports.push("import type { Channel } from '../types';");
+          typeImports.push("import type { Channel } from '../types.ts';");
           fixes++;
         }
         if (typeImports.length > 0) {

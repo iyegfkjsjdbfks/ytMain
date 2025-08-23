@@ -1,8 +1,8 @@
 import React, { useMemo, useCallback, memo } from 'react';
 import { FixedSizeList } from 'react-window';
 
-import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
-import type { Comment } from '../../types/core';
+import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization.ts';
+import type { Comment } from '../../types/core.ts';
 
 interface VirtualizedCommentListProps {
  comments: Comment;

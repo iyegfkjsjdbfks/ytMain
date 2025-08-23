@@ -2,9 +2,9 @@ import { useEffect, useCallback } from 'react';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { logger } from '../../../utils/logger';
+import { logger } from '../../../utils/logger.ts';
 
-import { notificationService, type Notification } from '../services/notificationService';
+import { notificationService, type Notification } from '../services/notificationService.ts';
 
 export function useNotifications(): any {
  const queryClient = useQueryClient();

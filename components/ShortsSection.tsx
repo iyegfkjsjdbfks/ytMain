@@ -2,12 +2,12 @@ import React, { useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
 
-import { getShortsVideos } from '../services/realVideoService';
+import { getShortsVideos } from '../services/realVideoService.ts';
 
-import ShortsIcon from './icons/ShortsIcon';
-import ShortDisplayCard from './ShortDisplayCard';
+import ShortsIcon from 'icons/ShortsIcon.tsx';
+import ShortDisplayCard from 'ShortDisplayCard.tsx';
 
-import type { Short } from '../src/types/core';
+import type { Short } from '../src/types/core.ts';
 
 interface ShortsSectionProps {
  maxShorts?: number;

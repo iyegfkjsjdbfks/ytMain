@@ -2,13 +2,13 @@ import React, { useState, FC, ReactNode } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Link } from 'react-router-dom';
 import { Play, Settings, BarChart3, Eye, Users, Calendar, Zap } from 'lucide-react';
-import { Badge } from '../../components/ui/Badge';
-import { Button } from '../../components/ui/Button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Tabs';
-import { UnifiedCard } from '../../components/ui/UnifiedComponents';
-import LiveStreamViewer from '../features/livestream/components/LiveStreamViewer';
-import StreamAnalyticsDashboard from '../features/livestream/components/StreamAnalyticsDashboard';
-import StreamManagementDashboard from '../features/livestream/components/StreamManagementDashboard';
+import { Badge } from '../../components/ui/Badge.tsx';
+import { Button } from '../../components/ui/Button.tsx';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Tabs.tsx';
+import { UnifiedCard } from '../../components/ui/UnifiedComponents.tsx';
+import LiveStreamViewer from '../features/livestream/components/LiveStreamViewer.tsx';
+import StreamAnalyticsDashboard from '../features/livestream/components/StreamAnalyticsDashboard.tsx';
+import StreamManagementDashboard from '../features/livestream/components/StreamManagementDashboard.tsx';
 
 // Import live streaming components
 

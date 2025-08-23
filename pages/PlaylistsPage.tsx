@@ -5,9 +5,9 @@ const PlusCircleIconSolid = PlusCircleSolidIcon;
 const QueueListIconSolid = QueueListSolidIcon;
 import { Link } from 'react-router-dom';
 
-import { createUserPlaylist, getUserPlaylists } from '../services/realVideoService';
+import { createUserPlaylist, getUserPlaylists } from '../services/realVideoService.ts';
 
-import type { UserPlaylistDetails } from '../types';
+import type { UserPlaylistDetails } from '../types.ts';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const PlaylistsPage: React.FC = () => {

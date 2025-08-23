@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useMemo, type ReactNode } from 'react';
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 // State interface
 interface MiniplayerState {

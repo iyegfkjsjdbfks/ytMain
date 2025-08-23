@@ -1,5 +1,5 @@
 import React, { ReactNode, FC } from 'react';
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils/cn.ts';
 
 interface UnifiedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'action' | 'link';

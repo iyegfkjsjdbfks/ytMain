@@ -2,8 +2,8 @@ import React, { useEffect, useState, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ChartBarIcon, VideoCameraIcon, CurrencyDollarIcon, ChatBubbleLeftRightIcon, DocumentTextIcon, UserGroupIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon } from '@heroicons/react/24/outline';
 
-import { formatDistanceToNow } from '../utils/dateUtils';
-import { formatDuration, formatNumber } from '../utils/numberUtils';
+import { formatDistanceToNow } from '../utils/dateUtils.ts';
+import { formatDuration, formatNumber } from '../utils/numberUtils.ts';
 
 interface DashboardStats {
  totalViews: number;

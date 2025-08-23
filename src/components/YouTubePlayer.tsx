@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import type { Video } from '../types/core';
+import type { Video } from '../types/core.ts';
 export interface YouTubePlayerProps {
  video: Video;
  autoplay?: boolean;

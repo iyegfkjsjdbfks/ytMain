@@ -1,5 +1,5 @@
 import React, { ReactNode, FormEvent } from 'react';
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 // Unified Type System for YouTube Studio Clone
 
 // Base Entity Types

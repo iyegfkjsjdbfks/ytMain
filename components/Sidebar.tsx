@@ -13,14 +13,14 @@ const UserGroupIconSolid = UserGroupSolidIcon;
 const PaintBrushIconSolid = PaintBrushSolidIcon;
 const FilmIconSolid = FilmSolidIcon;
 
-import ClockIcon from './icons/ClockIcon';
-import FireIcon from './icons/FireIcon';
-import HistoryIcon from './icons/HistoryIcon';
-import HomeIcon from './icons/HomeIcon';
-import PlaylistIcon from './icons/PlaylistIcon';
-import PlaylistPlayIcon from './icons/PlaylistPlayIcon';
-import ShortsIcon from './icons/ShortsIcon';
-import SubscriptionsIcon from './icons/SubscriptionsIcon';
+import ClockIcon from 'icons/ClockIcon.tsx';
+import FireIcon from 'icons/FireIcon.tsx';
+import HistoryIcon from 'icons/HistoryIcon.tsx';
+import HomeIcon from 'icons/HomeIcon.tsx';
+import PlaylistIcon from 'icons/PlaylistIcon.tsx';
+import PlaylistPlayIcon from 'icons/PlaylistPlayIcon.tsx';
+import ShortsIcon from 'icons/ShortsIcon.tsx';
+import SubscriptionsIcon from 'icons/SubscriptionsIcon.tsx';
 
 interface SidebarProps {
  isOpen: boolean

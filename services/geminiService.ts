@@ -1,6 +1,6 @@
 import { GoogleGenAI, type GenerateContentResponse } from '@google/genai';
 
-import type { VideoIdeaResponse } from '../types'; // Import the new type;
+import type { VideoIdeaResponse } from '../types.ts'; // Import the new type;
 
 // API key is expected to be in process.env.API_KEY as per guidelines
 // Initialize the GoogleGenAI client

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FC } from 'react';
-import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
-import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
-import { logger } from '../utils/logger';
+import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService.ts';
+import { googleSearchVideoStore } from '../../services/googleSearchVideoStore.ts';
+import { logger } from '../utils/logger.ts';
 
 const GoogleSearchStoreDebug: FC = () => {
  const [storeVideos, setStoreVideos] = useState<any[]>([]);

@@ -5,7 +5,7 @@ import { PlayIcon as PlaySolidIcon, XMarkIcon as XMarkSolidIcon } from '@heroico
 const PlayIconSolid = PlaySolidIcon;
 const XMarkIconSolid = XMarkSolidIcon;
 
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 interface MiniplayerProps {
   video: Video | null;

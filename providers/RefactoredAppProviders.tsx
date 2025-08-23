@@ -1,17 +1,17 @@
 import React, { FC, ReactNode } from 'react';
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 
-import ErrorBoundary from '../components/ErrorBoundary';
-import FastLoadingSpinner from '../components/FastLoadingSpinner';
-import SuspenseWrapper from '../components/SuspenseWrapper';
-import { AuthProvider } from '../contexts/AuthContext';
-import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerContext';
-import { ThemeProvider } from '../contexts/ThemeContext';
-import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
-import { WatchLaterProvider } from '../contexts/WatchLaterContext';
-import { queryClient } from '../src/hooks/useQueryClient';
-import PWAStatus from '../src/components/PWAStatus';
-import PWAUpdateNotification from '../src/components/PWAUpdateNotification';
+import ErrorBoundary from '../components/ErrorBoundary.tsx';
+import FastLoadingSpinner from '../components/FastLoadingSpinner.tsx';
+import SuspenseWrapper from '../components/SuspenseWrapper.tsx';
+import { AuthProvider } from '../contexts/AuthContext.tsx';
+import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerContext.tsx';
+import { ThemeProvider } from '../contexts/ThemeContext.tsx';
+import { UnifiedAppProvider } from '../contexts/UnifiedAppContext.tsx';
+import { WatchLaterProvider } from '../contexts/WatchLaterContext.tsx';
+import { queryClient } from '../src/hooks/useQueryClient.ts';
+import PWAStatus from '../src/components/PWAStatus.tsx';
+import PWAUpdateNotification from '../src/components/PWAUpdateNotification.tsx';
 
 interface RefactoredAppProvidersProps {
  children?: React.ReactNode

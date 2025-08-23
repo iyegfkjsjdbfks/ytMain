@@ -3,11 +3,11 @@ import React, { useState, useEffect, FC } from 'react';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version;
 const HeartIconSolid = HeartSolidIcon;
 
-import LikedVideosPageSkeleton from '../components/LoadingStates/LikedVideosPageSkeleton';
-import VideoCard from '../components/VideoCard';
-import { getLikedVideos } from '../services/realVideoService';
+import LikedVideosPageSkeleton from '../components/LoadingStates/LikedVideosPageSkeleton.tsx';
+import VideoCard from '../components/VideoCard.tsx';
+import { getLikedVideos } from '../services/realVideoService.ts';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 const LikedVideosPage: React.FC = () => {
  return null;

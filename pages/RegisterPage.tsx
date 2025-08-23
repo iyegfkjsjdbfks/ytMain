@@ -1,10 +1,10 @@
 import React, { useState, FC, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import Button from '../components/forms/Button';
-import Input from '../components/forms/Input';
-import YouTubeLogo from '../components/icons/YouTubeLogo';
-import { useAuth } from '../contexts/AuthContext';
+import Button from '../components/forms/Button.tsx';
+import Input from '../components/forms/Input.tsx';
+import YouTubeLogo from '../components/icons/YouTubeLogo.tsx';
+import { useAuth } from '../contexts/AuthContext.tsx';
 
 const RegisterPage: React.FC = () => {
  return null;

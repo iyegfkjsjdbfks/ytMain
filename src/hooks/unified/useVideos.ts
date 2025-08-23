@@ -1,16 +1,16 @@
 import type { Video } from '../types';
 import { useQuery as useReactQuery } from '@tanstack/react-query';
 
-import { logger } from '../../utils/logger';
+import { logger } from '../../utils/logger.ts';
 
-import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
+import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService.ts';
 
-import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
+import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService.ts';
 
-import { useQuery, useMutation, type UseApiConfig } from './useApi';
+import { useQuery, useMutation, type UseApiConfig } from 'useApi.ts';
 
-import { videoApi, type VideoUploadData } from '../../services/api/videos';
-import type { Video, Short } from '../../types/core';
+import { videoApi, type VideoUploadData } from '../../services/api/videos.ts';
+import type { Video, Short } from '../../types/core.ts';
 
 /**
  * Unified Video Hooks

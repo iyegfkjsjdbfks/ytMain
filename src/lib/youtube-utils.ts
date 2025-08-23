@@ -384,7 +384,7 @@ export function getYouTubeVideoId(;
  showinfo?: boolean;
  } = {}): YouTubePlayer {
  // Validate container exists
- if (!document.getElementById(containerId) as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement) {
+ if (!document.getElementById(containerId) as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement) {
  throw new Error(`Container element with id "${containerId}" not found`);
  }
 

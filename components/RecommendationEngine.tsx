@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useCallback, useState, FC } from 'react';
 // @ts-nocheck
 
-import { realVideos } from '../services/realVideoService';
-import { getYouTubeSearchProvider } from '../services/settingsService';
-import { youtubeSearchService } from '../services/youtubeSearchService';
+import { realVideos } from '../services/realVideoService.ts';
+import { getYouTubeSearchProvider } from '../services/settingsService.ts';
+import { youtubeSearchService } from '../services/youtubeSearchService.ts';
 
-import EnhancedYouTubeVideoCard from './EnhancedYouTubeVideoCard';
-import OptimizedVideoCard from './OptimizedVideoCard';
+import EnhancedYouTubeVideoCard from 'EnhancedYouTubeVideoCard.tsx';
+import OptimizedVideoCard from 'OptimizedVideoCard.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface RecommendationEngineProps {
  currentVideo?: Video;

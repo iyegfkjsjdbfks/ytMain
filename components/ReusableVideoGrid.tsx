@@ -1,9 +1,9 @@
 import React, { ReactNode, FC } from 'react';
-import { VideoGridSkeleton } from './LoadingStates';
-import OptimizedVideoCard from './OptimizedVideoCard';
-import VideoCard from './VideoCard';
+import { VideoGridSkeleton } from 'LoadingStates.tsx';
+import OptimizedVideoCard from 'OptimizedVideoCard.tsx';
+import VideoCard from 'VideoCard.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface ReusableVideoGridProps {
  videos: Video;

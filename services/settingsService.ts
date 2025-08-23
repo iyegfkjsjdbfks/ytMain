@@ -1,7 +1,7 @@
 // / <reference types="vite/client" />
 // Settings service for managing application settings
-import type { Video } from '../types';
-import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
+import type { Video } from '../types.ts';
+import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils.ts';
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
 export type YouTubePlayerType = 'youtube-player' | 'youtube-player-wrapper' | 'youtube-player-example';

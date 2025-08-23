@@ -1,12 +1,12 @@
 import React, { lazy } from 'react';
-import AccountLayout from '../components/AccountLayout';
-import ErrorBoundary from '../components/ErrorBoundary';
-import Layout from '../components/Layout';
-import ProtectedRoute from '../components/ProtectedRoute';
-import StudioLayout from '../components/StudioLayout';
+import AccountLayout from '../components/AccountLayout.tsx';
+import ErrorBoundary from '../components/ErrorBoundary.tsx';
+import Layout from '../components/Layout.tsx';
+import ProtectedRoute from '../components/ProtectedRoute.tsx';
+import StudioLayout from '../components/StudioLayout.tsx';
 import { Route, Routes, RouteObject } from 'react-router-dom';
 // Import HomePage directly for faster initial load
-import HomePage from '../pages/HomePage';
+import HomePage from '../pages/HomePage.tsx';
 
 // Lazy load secondary components for better performance
 // HomePage is loaded directly for faster initial render

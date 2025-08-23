@@ -3,9 +3,9 @@
  * Helps verify and validate Google Custom Search API setup
  */
 
-import { API_CONFIG } from '../config';
+import { API_CONFIG } from '../config/index.ts';
 
-import { youtubeSearchService } from '../services/youtubeSearchService';
+import { youtubeSearchService } from '../services/youtubeSearchService.ts';
 
 interface ConfigStatus {
  isConfigured: boolean;

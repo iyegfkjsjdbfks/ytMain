@@ -13,11 +13,11 @@ declare namespace NodeJS {
 
 import { formatDistanceToNow } from 'date-fns';
 
-import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { getYouTubeVideoId } from '../src/lib/youtube-utils.ts';
 
-import ImageWithFallback from './ImageWithFallback';
+import ImageWithFallback from 'ImageWithFallback.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface HoverAutoplayVideoCardProps {
  video: Video;

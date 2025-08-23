@@ -344,7 +344,7 @@ if (import.meta.url.endsWith('fix-ts${errorCode}-simple.js')) {
   fixer.run().catch(console.error);
 }
 
-export { SimpleTS${errorCode}Fixer };
+export { SimpleTS${errorCode};Fixer };
 `;
 
     writeFileSync(scriptPath, scriptContent);

@@ -1,5 +1,5 @@
 import React, { FC, type React } from 'react';
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 import { Link } from 'react-router-dom';
 
 import { UserGroupIcon, VideoCameraIcon, ClockIcon } from '@heroicons/react/24/outline';

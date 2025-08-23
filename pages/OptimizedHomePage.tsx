@@ -4,14 +4,14 @@ import { Navigate } from 'react-router-dom';
 import { HomeIcon as HomeSolidIcon } from '@heroicons/react/24/solid';
 const HomeIconSolid = HomeSolidIcon;
 
-import CategoryChips from '../components/CategoryChips';
-import ErrorBoundary from '../components/ErrorBoundary';
-import LoadingSpinner from '../components/LoadingSpinner';
-import VirtualizedVideoGrid from '../components/VirtualizedVideoGrid';
-import { useHomeVideos } from '../src/hooks/useOptimizedVideoData';
-import { cn } from '../src/lib/utils';
+import CategoryChips from '../components/CategoryChips.tsx';
+import ErrorBoundary from '../components/ErrorBoundary.tsx';
+import LoadingSpinner from '../components/LoadingSpinner.tsx';
+import VirtualizedVideoGrid from '../components/VirtualizedVideoGrid.tsx';
+import { useHomeVideos } from '../src/hooks/useOptimizedVideoData.ts';
+import { cn } from '../src/lib/utils.ts';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 // Lazy load additional sections
 const ShortsSection = React.lazy(() => import('../components/ShortsSection'));

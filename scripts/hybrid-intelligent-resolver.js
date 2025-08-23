@@ -175,7 +175,7 @@ class HybridIntelligentResolver {
           
           // Fix export syntax
           [/export\s*\{\s*,/g, 'export {'],
-          [/,\s*\}\s*from/g, ' } from']
+          [/,\s*\};\s*from/g, ' } from']
         ];
 
         for (const [pattern, replacement] of fixes) {

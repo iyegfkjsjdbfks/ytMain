@@ -1,6 +1,6 @@
 import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 import { Cog6ToothIcon, CheckIcon, PlayIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ForwardIcon, BackwardIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 

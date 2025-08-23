@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
-import { authService } from '../services/authService';
+import { authService } from '../services/authService.ts';
 
-import { logger } from '../../../utils/logger';
-import type { AuthState, LoginCredentials, RegisterData, User } from '../types';
+import { logger } from '../../../utils/logger.ts';
+import type { AuthState, LoginCredentials, RegisterData, User } from '../types/index.ts';
 
 interface AuthStore extends AuthState {
  login: (credentials: LoginCredentials) => Promise<User>;

@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo, useState, memo, FC } from 'react';
 
-import CategoryChips from '../components/CategoryChips';
-import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
-import { useTrendingSearch } from '../src/hooks';
-import { getInitialSearchKeyword } from '../services/settingsService';
+import CategoryChips from '../components/CategoryChips.tsx';
+import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard.tsx';
+import { useTrendingSearch } from '../src/hooks/index.ts';
+import { getInitialSearchKeyword } from '../services/settingsService.ts';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 // Memoized video card to prevent unnecessary re-renders
 const MemoizedVideoCard = memo(HoverAutoplayVideoCard);

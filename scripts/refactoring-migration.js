@@ -27,15 +27,15 @@ const MIGRATION_PATTERNS = {
   componentImports: [
     {
       from: /import\s+{\s*VideoCard\s*}\s+from\s+['"]\.\.?\/.*VideoCard['"];?/g,
-      to: "import { ConsolidatedVideoCard as VideoCard } from '../components';"
+      to: "import { ConsolidatedVideoCard as VideoCard } from '../components/index.ts';"
     },
     {
       from: /import\s+{\s*OptimizedVideoCard\s*}\s+from\s+['"]\.\.?\/.*OptimizedVideoCard['"];?/g,
-      to: "import { ConsolidatedVideoCard as OptimizedVideoCard } from '../components';"
+      to: "import { ConsolidatedVideoCard as OptimizedVideoCard } from '../components/index.ts';"
     },
     {
       from: /import\s+{\s*AppProviders\s*}\s+from\s+['"]\.\.?\/.*AppProviders['"];?/g,
-      to: "import { RefactoredAppProviders as AppProviders } from '../providers/RefactoredAppProviders';"
+      to: "import { RefactoredAppProviders as AppProviders } from '../providers/RefactoredAppProviders.tsx';"
     }
   ],
 
@@ -43,15 +43,15 @@ const MIGRATION_PATTERNS = {
   hookImports: [
     {
       from: /import\s+{\s*useLocalStorage\s*}\s+from\s+['"]\.\.?\/.*useCommon['"];?/g,
-      to: "import { useLocalStorage } from '../hooks/useRefactoredHooks';"
+      to: "import { useLocalStorage } from '../hooks/useRefactoredHooks.ts';"
     },
     {
       from: /import\s+{\s*useDebounce\s*}\s+from\s+['"]\.\.?\/.*useCommon['"];?/g,
-      to: "import { useDebounce } from '../hooks/useRefactoredHooks';"
+      to: "import { useDebounce } from '../hooks/useRefactoredHooks.ts';"
     },
     {
       from: /import\s+{\s*useToggle\s*}\s+from\s+['"]\.\.?\/.*useCommon['"];?/g,
-      to: "import { useToggle } from '../hooks/useRefactoredHooks';"
+      to: "import { useToggle } from '../hooks/useRefactoredHooks.ts';"
     }
   ],
 

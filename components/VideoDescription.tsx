@@ -1,15 +1,15 @@
 import React, { FC, type React } from 'react';
-import type { Video } from '../types';
-import type { Channel } from '../types';
+import type { Video } from '../types.ts';
+import type { Channel } from '../types.ts';
 import { Link } from 'react-router-dom';
 
 import { BellIcon } from '@heroicons/react/24/outline';
 
-import { formatCount } from '../utils/numberUtils';
+import { formatCount } from '../utils/numberUtils.ts';
 
-import { SummarizeIcon } from './icons/SummarizeIcon';
+import { SummarizeIcon } from 'icons/SummarizeIcon.tsx';
 
-import type { Video, Channel } from '../src/types/core';
+import type { Video, Channel } from '../src/types/core.ts';
 
 interface VideoDescriptionProps {
  video: Video;

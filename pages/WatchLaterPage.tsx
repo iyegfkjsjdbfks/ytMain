@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state;
 
-import VideoCard from '../components/VideoCard';
-import { useWatchLater } from '../contexts/WatchLaterContext'; // Import useWatchLater;
+import VideoCard from '../components/VideoCard.tsx';
+import { useWatchLater } from '../contexts/WatchLaterContext.tsx'; // Import useWatchLater;
 
-import type { Video } from '../src/types/core'; // Keep Video import for explicit typing;
+import type { Video } from '../src/types/core.ts'; // Keep Video import for explicit typing;
 
 const WatchLaterPage: React.FC = () => {
  return null;

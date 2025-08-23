@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import { useAsyncData } from './useAsyncData';
-import type { Video } from '../types';
+import { useAsyncData } from 'useAsyncData.ts';
+import type { Video } from '../types/index.ts';
 // Prefer unified data service which is already used elsewhere
-import unifiedDataService from '../services/unifiedDataService';
+import unifiedDataService from '../services/unifiedDataService.ts';
 
 /**
  * Hook for fetching shorts videos

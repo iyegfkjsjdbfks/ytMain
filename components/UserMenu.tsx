@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon, QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
 
-import { useAuth } from '../contexts/AuthContext';
-import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext.tsx';
+import { useTheme } from '../contexts/ThemeContext.tsx';
 
 interface UserMenuProps {
  isOpen: boolean; onClose: () => void

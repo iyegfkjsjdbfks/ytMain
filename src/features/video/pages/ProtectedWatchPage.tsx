@@ -4,7 +4,7 @@ import { useSearchParams, useParams } from 'react-router-dom';
 import { conditionalLogger } from '@/utils/conditionalLogger';
 
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
-import WatchPage from './WatchPage';
+import WatchPage from 'WatchPage.tsx';
 
 /**
  * WatchPage wrapped with specialized error boundary

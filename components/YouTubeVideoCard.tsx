@@ -4,11 +4,11 @@ import { useNavigate, Navigate } from 'react-router-dom';
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results
 
-import { buildVideoUrl } from '../utils/componentUtils';
+import { buildVideoUrl } from '../utils/componentUtils.tsx';
 
-import YouTubePlayerWrapper from './YouTubePlayerWrapper';
+import YouTubePlayerWrapper from 'YouTubePlayerWrapper.tsx';
 
-import type { YouTubeSearchResult } from '../services/googleSearchService';
+import type { YouTubeSearchResult } from '../services/googleSearchService.ts';
 
 interface YouTubeVideoCardProps {
  video: YouTubeSearchResult;

@@ -1,15 +1,15 @@
 import React, { memo, lazy, FC, KeyboardEvent, MouseEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useToggle } from '../src/hooks/unifiedHooks';
-import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
+import { useWatchLater } from '../contexts/WatchLaterContext.tsx';
+import { useToggle } from '../src/hooks/unifiedHooks.ts';
+import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils.tsx';
 
-import { SaveIcon } from './icons/UnifiedIcon';
-import ImageWithFallback from './ImageWithFallback';
-import { IconButton } from './ui/Button';
+import { SaveIcon } from 'icons/UnifiedIcon.tsx';
+import ImageWithFallback from 'ImageWithFallback.tsx';
+import { IconButton } from 'ui/Button.tsx';
 
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 interface VideoCardProps {
  video: Video

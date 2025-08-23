@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 
 import { ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import { PWAEvents, PWAUtils } from '../src/utils/pwa';
+import { PWAEvents, PWAUtils } from '../src/utils/pwa.ts';
 
 interface PWAInstallBannerProps {
  className?: string;

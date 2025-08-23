@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-import { unifiedDataService } from '../../src/services/unifiedDataService';
+import { unifiedDataService } from '../../src/services/unifiedDataService.ts';
 
 // Mock dependencies
 vi.mock('../../src/services/api/youtubeService', () => ({

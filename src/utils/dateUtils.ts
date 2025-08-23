@@ -1,4 +1,4 @@
-import { logger } from './logger';
+import { logger } from 'logger.ts';
 
 /**
  * Date and time formatting utilities

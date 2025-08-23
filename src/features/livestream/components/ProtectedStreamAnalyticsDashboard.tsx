@@ -1,8 +1,8 @@
 import React, { useCallback, FC } from 'react';
-import { conditionalLogger } from '../../../utils/conditionalLogger';
+import { conditionalLogger } from '../../../utils/conditionalLogger.ts';
 
-import { DataFetchErrorBoundary } from '../../../components/ErrorBoundaries';
-import StreamAnalyticsDashboard from './StreamAnalyticsDashboard';
+import { DataFetchErrorBoundary } from '../../../components/ErrorBoundaries/index.tsx';
+import StreamAnalyticsDashboard from 'StreamAnalyticsDashboard.tsx';
 
 interface ProtectedStreamAnalyticsDashboardProps {
  streamId: string;

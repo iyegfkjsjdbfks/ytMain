@@ -1,15 +1,15 @@
 import React, { useState, useEffect, FC } from 'react';
-import { Channel } from '../types';
+import { Channel } from '../types.ts';
 
 import { useParams } from 'react-router-dom';
 
-import ChannelHeader from '../components/ChannelHeader';
-import ChannelTabContent from '../components/ChannelTabContent';
-import ChannelTabs from '../components/ChannelTabs';
-import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
-import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChannelCommunityPosts } from '../services/realVideoService';
+import ChannelHeader from '../components/ChannelHeader.tsx';
+import ChannelTabContent from '../components/ChannelTabContent.tsx';
+import ChannelTabs from '../components/ChannelTabs.tsx';
+import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton.tsx';
+import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChannelCommunityPosts } from '../services/realVideoService.ts';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 const ChannelPage: React.FC = () => {
  return null;

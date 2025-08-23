@@ -66,45 +66,46 @@ class JSXStructureFixer {
         let fixCount = 0;
         const fixes = [];
         
+        // DISABLED: All JSX fixes are disabled due to causing corruption
         // Fix 1: Add missing React import for JSX files (disabled - too aggressive)
         // This was adding React imports to files that don't need them
         // Modern React (17+) doesn't require React imports for JSX
         // if (this.isJSXFile(filePath) && !fixedContent.includes('import React') && !fixedContent.includes('import * as React')) {
         
-        // Fix 2: Fix unclosed JSX tags (more conservative)
+        // Fix 2: Fix unclosed JSX tags (more conservative) - DISABLED
         // Only fix obvious self-closing HTML tags
-        const selfClosingTags = ['img', 'br', 'hr', 'input', 'meta', 'link', 'area', 'base', 'col', 'embed', 'source', 'track', 'wbr'];
-        const selfClosingRegex = new RegExp(`<(${selfClosingTags.join('|')})([^>]*?)(?<!/)>`, 'g');
-        fixedContent = fixedContent.replace(selfClosingRegex, (match, tagName, attributes) => {
-            if (!attributes.includes('/')) {
-                fixCount++;
-                fixes.push(`Fixed self-closing tag: ${tagName}`);
-                return `<${tagName}${attributes} />`;
-            }
-            return match;
-        });
+        // const selfClosingTags = ['img', 'br', 'hr', 'input', 'meta', 'link', 'area', 'base', 'col', 'embed', 'source', 'track', 'wbr'];
+        // const selfClosingRegex = new RegExp(`<(${selfClosingTags.join('|')})([^>]*?)(?<!/)>`, 'g');
+        // fixedContent = fixedContent.replace(selfClosingRegex, (match, tagName, attributes) => {
+        //     if (!attributes.includes('/')) {
+        //         fixCount++;
+        //         fixes.push(`Fixed self-closing tag: ${tagName}`);
+        //         return `<${tagName}${attributes} />`;
+        //     }
+        //     return match;
+        // });
         
-        // Fix 3: Fix malformed JSX expressions
-        const malformedExpressionRegex = /{([^}]*?)(?<!})$/gm;
-        fixedContent = fixedContent.replace(malformedExpressionRegex, (match, expression) => {
-            if (!match.endsWith('}')) {
-                fixCount++;
-                fixes.push('Fixed unclosed JSX expression');
-                return `{${expression}}`;
-            }
-            return match;
-        });
+        // Fix 3: Fix malformed JSX expressions - DISABLED
+        // const malformedExpressionRegex = /{([^}]*?)(?<!})$/gm;
+        // fixedContent = fixedContent.replace(malformedExpressionRegex, (match, expression) => {
+        //     if (!match.endsWith('}')) {
+        //         fixCount++;
+        //         fixes.push('Fixed unclosed JSX expression');
+        //         return `{${expression}}`;
+        //     }
+        //     return match;
+        // });
         
-        // Fix 4: Fix JSX fragments
-        const malformedFragmentRegex = /<>([\s\S]*?)(?!<\/>)/g;
-        fixedContent = fixedContent.replace(malformedFragmentRegex, (match, content) => {
-            if (!match.includes('</>')) {
-                fixCount++;
-                fixes.push('Fixed unclosed JSX fragment');
-                return `<>${content}</>`;
-            }
-            return match;
-        });
+        // Fix 4: Fix JSX fragments - DISABLED
+        // const malformedFragmentRegex = /<>([\s\S]*?)(?!<\/>)/g;
+        // fixedContent = fixedContent.replace(malformedFragmentRegex, (match, content) => {
+        //     if (!match.includes('</>')) {
+        //         fixCount++;
+        //         fixes.push('Fixed unclosed JSX fragment');
+        //         return `<>${content}</>`;
+        //     }
+        //     return match;
+        // });
         
         // Fix 5: Fix nested JSX structure
         const lines = fixedContent.split('\n');
@@ -138,45 +139,45 @@ class JSXStructureFixer {
             }
         }
         
-        // Fix 6: Fix JSX attribute syntax
-        const malformedAttributeRegex = /(\w+)=([^"'{\s][^\s>]*)/g;
-        fixedContent = fixedContent.replace(malformedAttributeRegex, (match, attrName, attrValue) => {
-            // Skip if already properly quoted
-            if (attrValue.startsWith('"') || attrValue.startsWith("'") || attrValue.startsWith('{')) {
-                return match;
-            }
-            
-            fixCount++;
-            fixes.push(`Fixed JSX attribute: ${attrName}`);
-            
-            // Determine if it should be a string or expression
-            if (/^\d+$/.test(attrValue) || /^(true|false)$/.test(attrValue)) {
-                return `${attrName}={${attrValue}}`;
-            } else {
-                return `${attrName}="${attrValue}"`;
-            }
-        });
+        // Fix 6: Fix JSX attribute syntax - DISABLED
+        // const malformedAttributeRegex = /(\w+)=([^"'{\s][^\s>]*)/g;
+        // fixedContent = fixedContent.replace(malformedAttributeRegex, (match, attrName, attrValue) => {
+        //     // Skip if already properly quoted
+        //     if (attrValue.startsWith('"') || attrValue.startsWith("'") || attrValue.startsWith('{')) {
+        //         return match;
+        //     }
+        //     
+        //     fixCount++;
+        //     fixes.push(`Fixed JSX attribute: ${attrName}`);
+        //     
+        //     // Determine if it should be a string or expression
+        //     if (/^\d+$/.test(attrValue) || /^(true|false)$/.test(attrValue)) {
+        //         return `${attrName}={${attrValue}}`;
+        //     } else {
+        //         return `${attrName}="${attrValue}"`;
+        //     }
+        // });
         
         // Fix 7: Fix JSX comments (disabled - too aggressive)
         // This was incorrectly converting regular comments to JSX comments
         // const malformedCommentRegex = /\/\*([\s\S]*?)\*\//g;
         
-        // Fix 8: Fix JSX conditional rendering
-        const conditionalRegex = /{([^}]*?)\?([^}]*?):([^}]*?)}/g;
-        fixedContent = fixedContent.replace(conditionalRegex, (match, condition, trueCase, falseCase) => {
-            // Ensure proper spacing and parentheses
-            const cleanCondition = condition.trim();
-            const cleanTrue = trueCase.trim();
-            const cleanFalse = falseCase.trim();
-            
-            if (match !== `{${cleanCondition} ? ${cleanTrue} : ${cleanFalse}}`) {
-                fixCount++;
-                fixes.push('Fixed JSX conditional rendering');
-                return `{${cleanCondition} ? ${cleanTrue} : ${cleanFalse}}`;
-            }
-            
-            return match;
-        });
+        // Fix 8: Fix JSX conditional rendering - DISABLED
+        // const conditionalRegex = /{([^}]*?)\?([^}]*?):([^}]*?)}/g;
+        // fixedContent = fixedContent.replace(conditionalRegex, (match, condition, trueCase, falseCase) => {
+        //     // Ensure proper spacing and parentheses
+        //     const cleanCondition = condition.trim();
+        //     const cleanTrue = trueCase.trim();
+        //     const cleanFalse = falseCase.trim();
+        //     
+        //     if (match !== `{${cleanCondition} ? ${cleanTrue} : ${cleanFalse}}`) {
+        //         fixCount++;
+        //         fixes.push('Fixed JSX conditional rendering');
+        //         return `{${cleanCondition} ? ${cleanTrue} : ${cleanFalse}}`;
+        //     }
+        //     
+        //     return match;
+        // });
         
         // Fix 9: Fix JSX map expressions
         const mapExpressionRegex = /{([^}]*?\.map\([^}]*?)}/g;
@@ -192,31 +193,31 @@ class JSXStructureFixer {
             return match;
         });
         
-        // Fix 10: Fix JSX prop spreading
-        const propSpreadRegex = /{\.\.\.(\w+)}/g;
-        fixedContent = fixedContent.replace(propSpreadRegex, (match, propName) => {
-            // Ensure proper spacing
-            if (match !== `{...${propName}}`) {
-                fixCount++;
-                fixes.push('Fixed JSX prop spreading syntax');
-                return `{...${propName}}`;
-            }
-            return match;
-        });
+        // Fix 10: Fix JSX prop spreading - DISABLED
+        // const propSpreadRegex = /{\.\.\.(\w+)}/g;
+        // fixedContent = fixedContent.replace(propSpreadRegex, (match, propName) => {
+        //     // Ensure proper spacing
+        //     if (match !== `{...${propName}}`) {
+        //         fixCount++;
+        //         fixes.push('Fixed JSX prop spreading syntax');
+        //         return `{...${propName}}`;
+        //     }
+        //     return match;
+        // });
         
         // Fix 11: Fix JSX boolean attributes (disabled - can break functionality)
         // This was removing {true} which might be intentional
         // const booleanAttrRegex = /(\w+)={true}/g;
         
-        // Fix 12: Fix JSX className vs class
-        const classAttrRegex = /\bclass=/g;
-        if (this.isJSXFile(filePath)) {
-            fixedContent = fixedContent.replace(classAttrRegex, (match) => {
-                fixCount++;
-                fixes.push('Fixed class attribute to className');
-                return 'className=';
-            });
-        }
+        // Fix 12: Fix JSX className vs class - DISABLED
+        // const classAttrRegex = /\bclass=/g;
+        // if (this.isJSXFile(filePath)) {
+        //     fixedContent = fixedContent.replace(classAttrRegex, (match) => {
+        //         fixCount++;
+        //         fixes.push('Fixed class attribute to className');
+        //         return 'className=';
+        //     });
+        // }
         
         if (fixCount > 0) {
             this.log(`  ✅ Applied ${fixCount} JSX fixes: ${fixes.join(', ')}`);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { Video } from '../types';
-import { User } from '../types';
+import type { Video } from '../types.ts';
+import { User } from '../types.ts';
 
 import { Link } from 'react-router-dom';
 

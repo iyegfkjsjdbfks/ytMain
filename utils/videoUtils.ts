@@ -1,4 +1,4 @@
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 export function getVideoThumbnail(video: Video): string {
  return video.thumbnailUrl || '';

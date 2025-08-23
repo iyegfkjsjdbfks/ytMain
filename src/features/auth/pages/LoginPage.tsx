@@ -1,7 +1,7 @@
 import React, { useEffect, FC } from 'react';
-import { LoginForm } from '../components/LoginForm';
+import { LoginForm } from '../components/LoginForm.tsx';
 
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../store/authStore.ts';
 
 /**
  * Login page component

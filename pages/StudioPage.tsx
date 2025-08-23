@@ -4,8 +4,8 @@ import { VideoCameraIcon, ChartBarIcon, CogIcon, BellIcon, PlayIcon, EyeIcon, He
 import { VideoCameraIcon as VideoCameraSolidIcon } from '@heroicons/react/24/solid';
 const VideoCameraIconSolid = VideoCameraSolidIcon;
 
-import TabsList, { Tabs } from '../components/ui/Tabs';
-import { UnifiedButton } from '../components/ui/UnifiedButton';
+import TabsList, { Tabs } from '../components/ui/Tabs.tsx';
+import { UnifiedButton } from '../components/ui/UnifiedButton.tsx';
 
 interface StudioVideo {
  id: string;

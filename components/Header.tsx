@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 
 import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon;
 
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext.tsx';
 
-import Button from './forms/Button';
-import MenuIcon from './icons/MenuIcon';
-import VideoPlusIcon from './icons/VideoPlusIcon';
-import YouTubeLogo from './icons/YouTubeLogo';
-import NotificationSystem from './NotificationSystem';
-import OfflineIndicator from './OfflineIndicator';
-import PWAInstallBanner from './PWAInstallBanner';
-import SearchBar from './SearchBar';
-import UserMenu from './UserMenu';
+import Button from 'forms/Button.tsx';
+import MenuIcon from 'icons/MenuIcon.tsx';
+import VideoPlusIcon from 'icons/VideoPlusIcon.tsx';
+import YouTubeLogo from 'icons/YouTubeLogo.tsx';
+import NotificationSystem from 'NotificationSystem.tsx';
+import OfflineIndicator from 'OfflineIndicator.tsx';
+import PWAInstallBanner from 'PWAInstallBanner.tsx';
+import SearchBar from 'SearchBar.tsx';
+import UserMenu from 'UserMenu.tsx';
 // UserIcon not used if avatar image is present
 
 interface HeaderProps {

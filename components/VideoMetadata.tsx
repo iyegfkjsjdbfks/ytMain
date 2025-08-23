@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ClockIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, GlobeAltIcon, CalendarIcon, TagIcon, ShieldCheckIcon, CameraIcon, LanguageIcon, TvIcon, BoltIcon } from '@heroicons/react/24/outline';
 
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 interface VideoMetadataProps {
  video: Video;

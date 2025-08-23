@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getVideos } from '../services/realVideoService';
+import { getVideos } from '../services/realVideoService.ts';
 
-import FireIcon from './icons/FireIcon';
-import VideoCard from './VideoCard';
+import FireIcon from 'icons/FireIcon.tsx';
+import VideoCard from 'VideoCard.tsx';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 interface TrendingSectionProps {
  maxVideos?: number;

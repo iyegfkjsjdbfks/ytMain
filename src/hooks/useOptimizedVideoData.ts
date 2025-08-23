@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
-// import { getVideos, getVideosByCategory } // // from '../services/realVideoService' // Service not found // Service not found;
-import type { Video } from '../types';
+// import { getVideos, getVideosByCategory } // // from '../services/realVideoService.ts' // Service not found // Service not found;
+import type { Video } from '../types/index.ts';
 
 interface UseVideoDataOptions {
  category?: string;

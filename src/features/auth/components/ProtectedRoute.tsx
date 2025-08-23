@@ -3,7 +3,7 @@ import { useLocation, Navigate, useLocation } from 'react-router-dom';
 
 import LoadingSpinner from '@components/LoadingSpinner';
 
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../store/authStore.ts';
 
 interface ProtectedRouteProps {
  children?: React.ReactNode;

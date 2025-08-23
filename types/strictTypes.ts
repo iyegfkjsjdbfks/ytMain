@@ -1,6 +1,6 @@
 import React, { ReactNode, KeyboardEvent, MouseEvent } from 'react';
-import type { Video } from '../types';
-import type { Channel } from '../types';
+import type { Video } from '../types.ts';
+import type { Channel } from '../types.ts';
 // Strict Type Definitions to Replace 'any' Types
 
 // Video Related Types

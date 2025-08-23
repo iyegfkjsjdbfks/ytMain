@@ -1,8 +1,8 @@
 import React, { memo, FC } from 'react';
 
-import VideoCard from './VideoCard';
+import VideoCard from 'VideoCard.tsx';
 
-import type { Video } from '../src/types/core';
+import type { Video } from '../src/types/core.ts';
 
 interface VideoGridProps {
  videos: Video;

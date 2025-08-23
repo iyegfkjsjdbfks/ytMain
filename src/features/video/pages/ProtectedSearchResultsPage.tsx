@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { conditionalLogger } from '@/utils/conditionalLogger';
 
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
-import SearchResultsPage from './SearchResultsPage';
+import SearchResultsPage from 'SearchResultsPage.tsx';
 
 /**
  * SearchResultsPage wrapped with specialized error boundary

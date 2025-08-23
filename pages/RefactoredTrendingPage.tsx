@@ -1,11 +1,11 @@
 import React, { FC, type React } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import ReusableVideoGrid from '../components/ReusableVideoGrid';
-import StandardPageLayout from '../components/StandardPageLayout';
-import { useVideosData } from '../hooks';
+import ReusableVideoGrid from '../components/ReusableVideoGrid.tsx';
+import StandardPageLayout from '../components/StandardPageLayout.tsx';
+import { useVideosData } from '../hooks/index.ts';
 
-import type { Video } from '../types';
+import type { Video } from '../types.ts';
 
 /**
  * Refactored Trending Page demonstrating the use of reusable components

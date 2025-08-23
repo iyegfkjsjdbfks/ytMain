@@ -1,7 +1,7 @@
 import React, { useState, FC, FormEvent } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { isYouTubeUrl, getYouTubeVideoId } from '../lib/youtube-utils';
-import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
+import { isYouTubeUrl, getYouTubeVideoId } from '../lib/youtube-utils.ts';
+import YouTubePlayerExample from '../components/examples/YouTubePlayerExample.tsx';
 
 const YouTubeDemo: React.FC = () => {
  const [videoUrl, setVideoUrl] = useState<string>('');

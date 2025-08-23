@@ -51,7 +51,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  return;
  }
 
- const playerElement = document.getElementById('youtube - player') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
+ const playerElement = document.getElementById('youtube - player') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
  if (!playerElement) {}
  return;
  }

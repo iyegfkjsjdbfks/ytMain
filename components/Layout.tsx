@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 
-import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
+import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext.tsx';
 
-import Header from './Header';
-import MinimizedSidebar from './MinimizedSidebar';
-import Miniplayer from './Miniplayer';
-import Sidebar from './Sidebar';
+import Header from 'Header.tsx';
+import MinimizedSidebar from 'MinimizedSidebar.tsx';
+import Miniplayer from 'Miniplayer.tsx';
+import Sidebar from 'Sidebar.tsx';
 
 interface LayoutProps {}
 

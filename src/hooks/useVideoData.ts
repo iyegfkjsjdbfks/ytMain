@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
-import type { Video } from '../types/core';
-import { parseRelativeDate } from '../utils/dateUtils';
-import { parseViewCount } from '../utils/numberUtils';
-import { useAsyncData } from './useAsyncData';
+import type { Video } from '../types/core.ts';
+import { parseRelativeDate } from '../utils/dateUtils.ts';
+import { parseViewCount } from '../utils/numberUtils.ts';
+import { useAsyncData } from 'useAsyncData.ts';
 // Use the mock realVideoService for demo data (these functions exist)
-import { getVideos, getVideosByCategory, getVideosByChannelName, getSubscribedChannelNames } from '../../services/realVideoService';
+import { getVideos, getVideosByCategory, getVideosByChannelName, getSubscribedChannelNames } from '../../services/realVideoService.ts';
 
 /**
  * Hook for fetching all videos

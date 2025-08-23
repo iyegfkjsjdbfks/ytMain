@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { videoService } from '../services/videoService';
+import { videoService } from '../services/videoService.ts';
 
 interface VideoInteractionState {
  isLiked: boolean;
