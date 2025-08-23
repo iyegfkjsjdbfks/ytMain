@@ -1,27 +1,34 @@
-import { AnalyzedError, ErrorCategory } from '../core/ErrorAnalyzer';
-import { ScriptCommand, FixingScript, ValidationCheck } from '../types';
+import { AnalyzedError, ScriptCommand, FixingScript, ValidationCheck } from '../types';
 import { logger } from '../utils/Logger';
 
 export interface ScriptTemplate {
   id: string;
   name: string;
   description: string;
-  targetErrorTypes: string[];
+  parameters: TemplateParameter[];
   commands: ScriptCommand[];
   validationChecks: ValidationCheck[];
-  parameters?: Record<string, any>;
+}
+
+export interface TemplateParameter {
+  name: string;
+  type: 'string' | 'number' | 'boolean' | 'array';
+  description: string;
+  required: boolean;
+  defaultValue?: any;
 }
 
 export interface GenerationContext {
   errors: AnalyzedError[];
   projectRoot: string;
-  dryRun: boolean;
-  safetyChecks: boolean;
+  targetFiles: string[];
+  options: Record<string, any>;
 }
 
 export abstract class BaseScriptGenerator {
   protected templates: Map<string, ScriptTemplate> = new Map();
-  
+  protected generatedScripts: FixingScript[] = [];
+
   constructor(protected category: string) {
     this.initializeTemplates();
   }
@@ -29,49 +36,60 @@ export abstract class BaseScriptGenerator {
   /**
    * Generates fixing scripts for the given errors
    */
-  public async generateScripts(
-    errors: AnalyzedError[], 
-    context: GenerationContext
-  ): Promise<FixingScript[]> {
-    logger.info(`Generating ${this.category} scripts for ${errors.length} errors`, 'script-generator');
-    
-    const scripts: FixingScript[] = [];
-    const errorGroups = this.groupErrorsByPattern(errors);
+  public async generateScripts(context: GenerationContext): Promise<FixingScript[]> {
+    logger.startOperation(`Generating ${this.category} scripts`, {
+      errorCount: context.errors.length,
+      fileCount: context.targetFiles.length
+    });
 
-    for (const [pattern, groupedErrors] of errorGroups.entries()) {
-      try {
-        const script = await this.generateScriptForGroup(pattern, groupedErrors, context);
+    try {
+      // Group errors by pattern for bulk processing
+      const errorGroups = this.groupErrorsByPattern(context.errors);
+      const scripts: FixingScript[] = [];
+
+      for (const [pattern, errors] of errorGroups.entries()) {
+        const script = await this.generateScriptForPattern(pattern, errors, context);
         if (script) {
           scripts.push(script);
         }
-      } catch (error) {
-        logger.error(`Failed to generate script for pattern ${pattern}: ${error}`, 'script-generator');
       }
-    }
 
-    logger.info(`Generated ${scripts.length} ${this.category} scripts`, 'script-generator');
-    return scripts;
+      // Generate individual scripts for ungrouped errors
+      const individualScripts = await this.generateIndividualScripts(context);
+      scripts.push(...individualScripts);
+
+      this.generatedScripts = scripts;
+      
+      logger.completeOperation(`${this.category} script generation`, Date.now(), {
+        scriptsGenerated: scripts.length
+      });
+
+      return scripts;
+
+    } catch (error) {
+      logger.failOperation(`${this.category} script generation`, error as Error);
+      throw error;
+    }
   }
 
   /**
-   * Validates that a script can be safely executed
+   * Validates a generated script
    */
   public async validateScript(script: FixingScript): Promise<boolean> {
-    logger.debug(`Validating script: ${script.id}`, 'script-generator');
-    
     try {
-      // Check if all target files exist
-      for (const error of script.targetErrors) {
-        if (!await this.fileExists(error.file)) {
-          logger.warn(`Target file does not exist: ${error.file}`, 'script-generator');
-          return false;
-        }
+      // Check script structure
+      if (!script.id || !script.category || !script.commands.length) {
+        logger.warn('Invalid script structure', { scriptId: script.id });
+        return false;
       }
 
       // Validate commands
       for (const command of script.commands) {
-        if (!await this.validateCommand(command)) {
-          logger.warn(`Invalid command in script ${script.id}`, 'script-generator');
+        if (!this.validateCommand(command)) {
+          logger.warn('Invalid command in script', { 
+            scriptId: script.id, 
+            commandType: command.type 
+          });
           return false;
         }
       }
@@ -79,14 +97,18 @@ export abstract class BaseScriptGenerator {
       // Run validation checks
       for (const check of script.validationChecks) {
         if (!await this.runValidationCheck(check)) {
-          logger.warn(`Validation check failed for script ${script.id}`, 'script-generator');
+          logger.warn('Validation check failed', { 
+            scriptId: script.id, 
+            checkType: check.type 
+          });
           return false;
         }
       }
 
       return true;
+
     } catch (error) {
-      logger.error(`Script validation failed: ${error}`, 'script-generator');
+      logger.error('Script validation failed', error as Error, { scriptId: script.id });
       return false;
     }
   }
@@ -99,71 +121,201 @@ export abstract class BaseScriptGenerator {
   }
 
   /**
-   * Gets a specific template by ID
+   * Creates a script from a template with parameters
    */
-  public getTemplate(id: string): ScriptTemplate | undefined {
-    return this.templates.get(id);
+  public createScriptFromTemplate(
+    templateId: string, 
+    parameters: Record<string, any>,
+    targetErrors: AnalyzedError[]
+  ): FixingScript {
+    const template = this.templates.get(templateId);
+    if (!template) {
+      throw new Error(`Template not found: ${templateId}`);
+    }
+
+    // Validate parameters
+    this.validateTemplateParameters(template, parameters);
+
+    // Generate script ID
+    const scriptId = `${this.category}-${templateId}-${Date.now()}`;
+
+    // Process template commands with parameters
+    const commands = this.processTemplateCommands(template.commands, parameters);
+    const rollbackCommands = this.generateRollbackCommands(commands);
+
+    return {
+      id: scriptId,
+      category: this.category,
+      targetErrors,
+      commands,
+      rollbackCommands,
+      validationChecks: template.validationChecks,
+      estimatedRuntime: this.estimateRuntime(commands)
+    };
   }
 
   /**
-   * Abstract method to initialize templates - must be implemented by subclasses
+   * Abstract method to initialize category-specific templates
    */
   protected abstract initializeTemplates(): void;
 
   /**
-   * Abstract method to generate script for a group of errors
+   * Abstract method to group errors by pattern
    */
-  protected abstract generateScriptForGroup(
-    pattern: string,
-    errors: AnalyzedError[],
+  protected abstract groupErrorsByPattern(errors: AnalyzedError[]): Map<string, AnalyzedError[]>;
+
+  /**
+   * Abstract method to generate script for a specific pattern
+   */
+  protected abstract generateScriptForPattern(
+    pattern: string, 
+    errors: AnalyzedError[], 
     context: GenerationContext
   ): Promise<FixingScript | null>;
 
   /**
-   * Groups errors by their patterns for batch processing
+   * Generates individual scripts for errors that don't fit patterns
    */
-  protected groupErrorsByPattern(errors: AnalyzedError[]): Map<string, AnalyzedError[]> {
-    const groups = new Map<string, AnalyzedError[]>();
-
-    for (const error of errors) {
-      const pattern = this.getErrorPattern(error);
-      
-      if (!groups.has(pattern)) {
-        groups.set(pattern, []);
+  protected async generateIndividualScripts(context: GenerationContext): Promise<FixingScript[]> {
+    const scripts: FixingScript[] = [];
+    
+    // Default implementation - can be overridden by subclasses
+    for (const error of context.errors) {
+      const script = await this.generateScriptForSingleError(error, context);
+      if (script) {
+        scripts.push(script);
       }
-      
-      groups.get(pattern)!.push(error);
     }
 
-    return groups;
+    return scripts;
   }
 
   /**
-   * Gets a pattern identifier for an error
+   * Generates a script for a single error
    */
-  protected getErrorPattern(error: AnalyzedError): string {
-    // Default implementation uses error code + category
-    return `${error.code}-${error.category.name}`;
+  protected async generateScriptForSingleError(
+    error: AnalyzedError, 
+    context: GenerationContext
+  ): Promise<FixingScript | null> {
+    // Default implementation - should be overridden by subclasses
+    logger.debug('Generating individual script for error', { 
+      file: error.file, 
+      code: error.code 
+    });
+
+    return null;
   }
 
   /**
-   * Creates a basic fixing script structure
+   * Validates a script command
    */
-  protected createBaseScript(
-    id: string,
-    category: string,
-    errors: AnalyzedError[],
-    commands: ScriptCommand[]
-  ): FixingScript {
-    return {
-      id,
-      category,
-      targetErrors: errors,
-      commands,
-      rollbackCommands: this.generateRollbackCommands(commands),
-      validationChecks: this.generateValidationChecks(errors),
-      estimatedRuntime: this.estimateRuntime(commands)
-    };
+  protected validateCommand(command: ScriptCommand): boolean {
+    // Check required fields
+    if (!command.type || !command.file) {
+      return false;
+    }
+
+    // Validate command type
+    const validTypes = ['replace', 'insert', 'delete', 'move'];
+    if (!validTypes.includes(command.type)) {
+      return false;
+    }
+
+    // Type-specific validation
+    switch (command.type) {
+      case 'replace':
+        return !!(command.pattern && command.replacement);
+      case 'insert':
+        return !!(command.replacement && command.position);
+      case 'move':
+        return !!command.replacement; // replacement serves as target path
+      case 'delete':
+        return true; // Only needs file
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * Runs a validation check
+   */
+  protected async runValidationCheck(check: ValidationCheck): Promise<boolean> {
+    try {
+      // This is a placeholder - actual implementation would run the check
+      logger.debug('Running validation check', { type: check.type, command: check.command });
+      return true;
+    } catch (error) {
+      logger.error('Validation check failed', error as Error, { checkType: check.type });
+      return false;
+    }
+  }
+
+  /**
+   * Validates template parameters
+   */
+  protected validateTemplateParameters(
+    template: ScriptTemplate, 
+    parameters: Record<string, any>
+  ): void {
+    for (const param of template.parameters) {
+      const value = parameters[param.name];
+
+      // Check required parameters
+      if (param.required && (value === undefined || value === null)) {
+        throw new Error(`Required parameter missing: ${param.name}`);
+      }
+
+      // Type validation
+      if (value !== undefined && value !== null) {
+        if (!this.validateParameterType(value, param.type)) {
+          throw new Error(`Invalid type for parameter ${param.name}: expected ${param.type}`);
+        }
+      }
+    }
+  }
+
+  /**
+   * Validates parameter type
+   */
+  protected validateParameterType(value: any, expectedType: string): boolean {
+    switch (expectedType) {
+      case 'string':
+        return typeof value === 'string';
+      case 'number':
+        return typeof value === 'number';
+      case 'boolean':
+        return typeof value === 'boolean';
+      case 'array':
+        return Array.isArray(value);
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * Processes template commands with parameter substitution
+   */
+  protected processTemplateCommands(
+    templateCommands: ScriptCommand[], 
+    parameters: Record<string, any>
+  ): ScriptCommand[] {
+    return templateCommands.map(command => ({
+      ...command,
+      file: this.substituteParameters(command.file, parameters),
+      pattern: command.pattern ? new RegExp(this.substituteParameters(command.pattern.source, parameters)) : command.pattern,
+      replacement: command.replacement ? this.substituteParameters(command.replacement, parameters) : command.replacement,
+      description: this.substituteParameters(command.description, parameters)
+    }));
+  }
+
+  /**
+   * Substitutes template parameters in strings
+   */
+  protected substituteParameters(template: string, parameters: Record<string, any>): string {
+    return template.replace(/\{\{(\w+)\}\}/g, (match, paramName) => {
+      const value = parameters[paramName];
+      return value !== undefined ? String(value) : match;
+    });
   }
 
   /**
@@ -176,7 +328,6 @@ export abstract class BaseScriptGenerator {
     for (let i = commands.length - 1; i >= 0; i--) {
       const command = commands[i];
       const rollback = this.createRollbackCommand(command);
-      
       if (rollback) {
         rollbackCommands.push(rollback);
       }
@@ -191,123 +342,41 @@ export abstract class BaseScriptGenerator {
   protected createRollbackCommand(command: ScriptCommand): ScriptCommand | null {
     switch (command.type) {
       case 'replace':
-        // For replace operations, we need to store the original content
+        // For replace operations, we'd need to store the original content
+        // This is a simplified version
         return {
           type: 'replace',
           file: command.file,
           pattern: command.replacement ? new RegExp(this.escapeRegex(command.replacement)) : undefined,
-          replacement: command.pattern?.source || '',
+          replacement: '', // Would need original content
           description: `Rollback: ${command.description}`
         };
-      
+
       case 'insert':
-        // For insert operations, we need to delete the inserted content
+        // For insert operations, delete the inserted content
         return {
           type: 'delete',
           file: command.file,
-          pattern: command.replacement ? new RegExp(this.escapeRegex(command.replacement)) : undefined,
+          position: command.position,
           description: `Rollback: ${command.description}`
         };
-      
+
       case 'delete':
-        // Delete operations are harder to rollback without backup
-        logger.warn('Delete operations cannot be automatically rolled back', 'script-generator');
-        return null;
-      
-      default:
-        return null;
-    }
-  }
+        // For delete operations, we'd need to restore the original content
+        // This would require backup functionality
+        return null; // Cannot rollback without backup
 
-  /**
-   * Generates validation checks for errors
-   */
-  protected generateValidationChecks(errors: AnalyzedError[]): ValidationCheck[] {
-    const checks: ValidationCheck[] = [];
-
-    // Add TypeScript compilation check
-    checks.push({
-      type: 'compilation',
-      command: 'npx tsc --noEmit --skipLibCheck',
-      expectedResult: 'success',
-      timeoutSeconds: 120
-    });
-
-    // Add syntax check for each affected file
-    const uniqueFiles = [...new Set(errors.map(e => e.file))];
-    
-    for (const file of uniqueFiles.slice(0, 5)) { // Limit to first 5 files
-      checks.push({
-        type: 'syntax',
-        command: `npx tsc --noEmit --skipLibCheck ${file}`,
-        expectedResult: 'improved-count',
-        timeoutSeconds: 30
-      });
-    }
-
-    return checks;
-  }
-
-  /**
-   * Estimates runtime for commands
-   */
-  protected estimateRuntime(commands: ScriptCommand[]): number {
-    // Basic estimation: 2 seconds per command + 1 second per file operation
-    let estimate = commands.length * 2;
-    
-    const uniqueFiles = new Set(commands.map(c => c.file));
-    estimate += uniqueFiles.size * 1;
-    
-    return estimate;
-  }
-
-  /**
-   * Validates a single command
-   */
-  protected async validateCommand(command: ScriptCommand): Promise<boolean> {
-    // Check if file exists
-    if (!await this.fileExists(command.file)) {
-      return false;
-    }
-
-    // Validate command structure
-    switch (command.type) {
-      case 'replace':
-        return !!(command.pattern && command.replacement !== undefined);
-      
-      case 'insert':
-        return !!(command.replacement && command.position);
-      
-      case 'delete':
-        return !!command.pattern;
-      
       case 'move':
-        return !!(command.file && command.position);
-      
+        // For move operations, move back to original location
+        return {
+          type: 'move',
+          file: command.replacement || '', // target becomes source
+          replacement: command.file, // source becomes target
+          description: `Rollback: ${command.description}`
+        };
+
       default:
-        return false;
-    }
-  }
-
-  /**
-   * Runs a validation check
-   */
-  protected async runValidationCheck(check: ValidationCheck): Promise<boolean> {
-    // In a real implementation, this would execute the command and check results
-    // For now, we'll just validate the check structure
-    return !!(check.command && check.expectedResult && check.timeoutSeconds > 0);
-  }
-
-  /**
-   * Checks if a file exists
-   */
-  protected async fileExists(filePath: string): Promise<boolean> {
-    try {
-      const fs = await import('fs');
-      await fs.promises.access(filePath);
-      return true;
-    } catch {
-      return false;
+        return null;
     }
   }
 
@@ -319,84 +388,41 @@ export abstract class BaseScriptGenerator {
   }
 
   /**
-   * Creates a parameterized template
+   * Estimates runtime for a set of commands
    */
-  protected createTemplate(
-    id: string,
-    name: string,
-    description: string,
-    targetErrorTypes: string[],
-    commandFactory: (params: Record<string, any>) => ScriptCommand[],
-    validationFactory?: (params: Record<string, any>) => ValidationCheck[]
-  ): ScriptTemplate {
-    return {
-      id,
-      name,
-      description,
-      targetErrorTypes,
-      commands: [], // Will be populated by factory
-      validationChecks: validationFactory ? validationFactory({}) : [],
-      parameters: {}
-    };
-  }
+  protected estimateRuntime(commands: ScriptCommand[]): number {
+    // Simple estimation based on command types
+    let totalTime = 0;
 
-  /**
-   * Applies template parameters to generate actual commands
-   */
-  protected applyTemplate(
-    template: ScriptTemplate,
-    parameters: Record<string, any>
-  ): { commands: ScriptCommand[]; validationChecks: ValidationCheck[] } {
-    // This is a simplified implementation
-    // In a real scenario, you'd have a more sophisticated templating system
-    
-    const commands = template.commands.map(cmd => ({
-      ...cmd,
-      file: this.substituteParameters(cmd.file, parameters),
-      replacement: cmd.replacement ? this.substituteParameters(cmd.replacement, parameters) : undefined,
-      description: this.substituteParameters(cmd.description, parameters)
-    }));
-
-    const validationChecks = template.validationChecks.map(check => ({
-      ...check,
-      command: this.substituteParameters(check.command, parameters)
-    }));
-
-    return { commands, validationChecks };
-  }
-
-  /**
-   * Substitutes parameters in a string template
-   */
-  protected substituteParameters(template: string, parameters: Record<string, any>): string {
-    let result = template;
-    
-    for (const [key, value] of Object.entries(parameters)) {
-      const placeholder = `{{${key}}}`;
-      result = result.replace(new RegExp(placeholder, 'g'), String(value));
-    }
-    
-    return result;
-  }
-
-  /**
-   * Merges multiple script commands, removing duplicates
-   */
-  protected mergeCommands(commandSets: ScriptCommand[][]): ScriptCommand[] {
-    const merged: ScriptCommand[] = [];
-    const seen = new Set<string>();
-
-    for (const commands of commandSets) {
-      for (const command of commands) {
-        const key = `${command.type}-${command.file}-${command.pattern?.source || ''}-${command.replacement || ''}`;
-        
-        if (!seen.has(key)) {
-          seen.add(key);
-          merged.push(command);
-        }
+    for (const command of commands) {
+      switch (command.type) {
+        case 'replace':
+          totalTime += 100; // 100ms per replace
+          break;
+        case 'insert':
+          totalTime += 50; // 50ms per insert
+          break;
+        case 'delete':
+          totalTime += 25; // 25ms per delete
+          break;
+        case 'move':
+          totalTime += 200; // 200ms per move
+          break;
       }
     }
 
-    return merged;
+    return totalTime;
+  }
+
+  /**
+   * Adds a template to the generator
+   */
+  protected addTemplate(template: ScriptTemplate): void {
+    this.templates.set(template.id, template);
+    logger.debug('Added template', { 
+      category: this.category, 
+      templateId: template.id, 
+      name: template.name 
+    });
   }
 }

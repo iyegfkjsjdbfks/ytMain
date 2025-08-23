@@ -1,6 +1,6 @@
-# Contributing to YouTube Studio Clone
+# Contributing to TypeScript Error Resolution
 
-Thank you for your interest in contributing to the YouTube Studio Clone project! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to the TypeScript Error Resolution system! This document provides guidelines and information for contributors.
 
 ## Table of Contents
 
@@ -9,263 +9,235 @@ Thank you for your interest in contributing to the YouTube Studio Clone project!
 - [Development Setup](#development-setup)
 - [Contributing Guidelines](#contributing-guidelines)
 - [Pull Request Process](#pull-request-process)
-- [Coding Standards](#coding-standards)
-- [Testing Guidelines](#testing-guidelines)
-- [Documentation](#documentation)
 - [Issue Reporting](#issue-reporting)
-- [Security](#security)
+- [Development Workflow](#development-workflow)
+- [Testing](#testing)
+- [Documentation](#documentation)
 
 ## Code of Conduct
 
-This project adheres to a code of conduct that we expect all contributors to follow. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a welcoming environment for everyone.
+This project adheres to a code of conduct that we expect all contributors to follow. Please be respectful and constructive in all interactions.
 
 ## Getting Started
 
+1. Fork the repository on GitHub
+2. Clone your fork locally
+3. Set up the development environment
+4. Create a feature branch
+5. Make your changes
+6. Test your changes
+7. Submit a pull request
+
+## Development Setup
+
 ### Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 16+ 
+- npm or yarn
 - Git
-- A code editor (VS Code recommended)
-- Basic knowledge of React, TypeScript, and Tailwind CSS
+- TypeScript knowledge
 
-### Development Setup
+### Installation
 
-1. **Fork the repository**
-   ```bash
-   # Fork the repo on GitHub, then clone your fork
-   git clone https://github.com/YOUR_USERNAME/ytastudioaug2.git
-   cd ytastudioaug2
-   ```
+```bash
+# Clone your fork
+git clone https://github.com/your-username/typescript-error-resolution.git
+cd typescript-error-resolution
 
-2. **Install dependencies**
-   ```bash
-   npm ci
-   ```
+# Install dependencies
+npm install
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your API keys and configuration
-   ```
+# Build the project
+npm run build
 
-4. **Start development server**
-   ```bash
-   npm run dev
-   ```
+# Run tests
+npm test
+```
 
-5. **Run tests**
-   ```bash
-   npm run test
-   ```
+### Development Commands
+
+```bash
+# Development mode with auto-reload
+npm run dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+npm run test:watch
+npm run test:coverage
+
+# Linting and formatting
+npm run lint
+npm run lint:fix
+npm run format
+
+# Clean build artifacts
+npm run clean
+```
 
 ## Contributing Guidelines
 
 ### Types of Contributions
 
-We welcome various types of contributions:
+We welcome several types of contributions:
 
-- **Bug fixes**: Fix existing issues
-- **Feature additions**: Add new functionality
-- **Documentation**: Improve or add documentation
-- **Performance improvements**: Optimize existing code
-- **UI/UX enhancements**: Improve user interface and experience
-- **Testing**: Add or improve test coverage
-- **Accessibility**: Improve accessibility features
+- **Bug fixes** - Fix issues in existing functionality
+- **New features** - Add new error resolution capabilities
+- **Improvements** - Enhance existing features or performance
+- **Documentation** - Improve or add documentation
+- **Tests** - Add or improve test coverage
+- **Examples** - Provide usage examples or tutorials
 
-### Before You Start
+### Coding Standards
 
-1. **Check existing issues**: Look for existing issues or discussions
-2. **Create an issue**: For new features or significant changes, create an issue first
-3. **Discuss**: Engage with maintainers and community before starting work
+- **TypeScript**: Use strict TypeScript with proper type annotations
+- **ESLint**: Follow the project's ESLint configuration
+- **Prettier**: Use Prettier for code formatting
+- **Naming**: Use descriptive names for variables, functions, and classes
+- **Comments**: Add JSDoc comments for public APIs
+- **Error Handling**: Implement comprehensive error handling
+- **Logging**: Use the project's logging system appropriately
+
+### Architecture Guidelines
+
+- **Modularity**: Keep components focused and loosely coupled
+- **Interfaces**: Define clear interfaces for all major components
+- **Dependency Injection**: Use dependency injection for testability
+- **Event-Driven**: Use events for communication between components
+- **Safety First**: Always prioritize data safety and rollback capabilities
+- **Performance**: Consider performance implications of changes
 
 ## Pull Request Process
 
-### 1. Create a Branch
+### Before Submitting
 
-```bash
-# Create a new branch for your feature/fix
-git checkout -b feature/your-feature-name
-# or
-git checkout -b fix/issue-number
+1. **Create an Issue**: For significant changes, create an issue first to discuss the approach
+2. **Branch Naming**: Use descriptive branch names (e.g., `feature/import-fixer-improvements`, `fix/validation-timeout`)
+3. **Commit Messages**: Write clear, descriptive commit messages
+4. **Tests**: Add tests for new functionality
+5. **Documentation**: Update documentation as needed
+
+### PR Requirements
+
+- [ ] All tests pass
+- [ ] Code follows project standards (ESLint, Prettier)
+- [ ] New functionality includes tests
+- [ ] Documentation is updated
+- [ ] No breaking changes (or clearly documented)
+- [ ] Performance impact is considered
+- [ ] Security implications are reviewed
+
+### PR Template
+
+```markdown
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Unit tests added/updated
+- [ ] Integration tests added/updated
+- [ ] Manual testing performed
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated
+- [ ] Tests pass locally
 ```
 
-### 2. Make Changes
+## Issue Reporting
 
-- Follow our [coding standards](#coding-standards)
-- Write tests for new functionality
-- Update documentation as needed
-- Ensure all tests pass
+### Bug Reports
 
-### 3. Commit Changes
+When reporting bugs, please include:
 
-We use [Conventional Commits](https://www.conventionalcommits.org/):
+- **Environment**: OS, Node.js version, TypeScript version
+- **Steps to Reproduce**: Clear steps to reproduce the issue
+- **Expected Behavior**: What should happen
+- **Actual Behavior**: What actually happens
+- **Error Messages**: Full error messages and stack traces
+- **Sample Code**: Minimal code example that demonstrates the issue
 
-```bash
-# Examples:
-git commit -m "feat: add video upload functionality"
-git commit -m "fix: resolve video player loading issue"
-git commit -m "docs: update API documentation"
-git commit -m "test: add unit tests for video component"
-```
+### Feature Requests
 
-**Commit Types:**
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, etc.)
-- `refactor`: Code refactoring
-- `test`: Adding or updating tests
-- `chore`: Maintenance tasks
-- `perf`: Performance improvements
-- `ci`: CI/CD changes
+For feature requests, please include:
 
-### 4. Push and Create PR
+- **Use Case**: Why is this feature needed?
+- **Proposed Solution**: How should it work?
+- **Alternatives**: What alternatives have you considered?
+- **Examples**: Provide examples of the desired functionality
 
-```bash
-git push origin your-branch-name
-```
+## Development Workflow
 
-Then create a Pull Request on GitHub with:
-
-- **Clear title**: Descriptive title following conventional commits
-- **Detailed description**: What changes were made and why
-- **Issue reference**: Link to related issues
-- **Screenshots**: For UI changes
-- **Testing notes**: How to test the changes
-
-### 5. PR Review Process
-
-- **Automated checks**: Ensure all CI checks pass
-- **Code review**: Address feedback from reviewers
-- **Testing**: Verify functionality works as expected
-- **Documentation**: Update docs if needed
-
-## Coding Standards
-
-### TypeScript
-
-- Use strict TypeScript configuration
-- Define proper types and interfaces
-- Avoid `any` type unless absolutely necessary
-- Use meaningful variable and function names
-
-```typescript
-// Good
-interface VideoMetadata {
-  title: string;
-  duration: number;
-  thumbnailUrl: string;
-}
-
-const formatVideoDuration = (seconds: number): string => {
-  // Implementation
-};
-
-// Avoid
-const data: any = {};
-const fn = (x: any) => x;
-```
-
-### React Components
-
-- Use functional components with hooks
-- Implement proper prop types
-- Use meaningful component names
-- Keep components focused and reusable
-
-```tsx
-// Good
-interface VideoCardProps {
-  video: Video;
-  onPlay: (videoId: string) => void;
-  className?: string;
-}
-
-const VideoCard: React.FC<VideoCardProps> = ({ video, onPlay, className }) => {
-  return (
-    <div className={cn('video-card', className)}>
-      {/* Component content */}
-    </div>
-  );
-};
-```
-
-### Styling
-
-- Use Tailwind CSS utility classes
-- Create reusable component classes when needed
-- Follow responsive design principles
-- Ensure accessibility compliance
-
-```tsx
-// Good
-<button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-  Upload Video
-</button>
-```
-
-### File Organization
+### Project Structure
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── ui/             # Basic UI components
-│   └── features/       # Feature-specific components
-├── pages/              # Page components
-├── hooks/              # Custom React hooks
-├── utils/              # Utility functions
-├── types/              # TypeScript type definitions
-├── services/           # API services
-├── stores/             # State management
-└── assets/             # Static assets
+├── error-resolution/
+│   ├── core/           # Core system components
+│   ├── generators/     # Script generators
+│   ├── fixers/         # Category-specific fixers
+│   ├── utils/          # Utility functions
+│   ├── cli/            # Command-line interface
+│   ├── config/         # Configuration management
+│   ├── test/           # Test files
+│   └── types/          # TypeScript type definitions
 ```
 
-## Testing Guidelines
+### Adding New Error Fixers
 
-### Unit Tests
+1. Create a new fixer class extending appropriate base classes
+2. Implement error detection and fixing logic
+3. Add comprehensive tests
+4. Register the fixer in the appropriate generator
+5. Update documentation
 
-- Write tests for all new functionality
-- Use descriptive test names
-- Follow AAA pattern (Arrange, Act, Assert)
-- Mock external dependencies
+### Adding New Script Generators
 
-```typescript
-describe('VideoCard', () => {
-  it('should display video title and duration', () => {
-    // Arrange
-    const mockVideo = {
-      id: '1',
-      title: 'Test Video',
-      duration: 120
-    };
+1. Extend `BaseScriptGenerator`
+2. Implement category-specific logic
+3. Add template system support
+4. Include validation checks
+5. Add comprehensive tests
 
-    // Act
-    render(<VideoCard video={mockVideo} onPlay={jest.fn()} />);
+### Adding New Validation Checks
 
-    // Assert
-    expect(screen.getByText('Test Video')).toBeInTheDocument();
-    expect(screen.getByText('2:00')).toBeInTheDocument();
-  });
-});
-```
+1. Extend validation engine with new check types
+2. Implement check execution logic
+3. Add result interpretation
+4. Include timeout and error handling
+5. Add tests for all scenarios
 
-### Integration Tests
+## Testing
 
-- Test component interactions
-- Test API integrations
-- Use MSW for API mocking
+### Test Structure
 
-### E2E Tests
+- **Unit Tests**: Test individual components in isolation
+- **Integration Tests**: Test component interactions
+- **End-to-End Tests**: Test complete workflows
+- **Performance Tests**: Verify performance characteristics
 
-- Test critical user journeys
-- Use Playwright for browser testing
-- Focus on happy paths and error scenarios
+### Test Guidelines
+
+- **Coverage**: Aim for >90% test coverage
+- **Mocking**: Mock external dependencies appropriately
+- **Assertions**: Use descriptive assertions
+- **Edge Cases**: Test error conditions and edge cases
+- **Performance**: Include performance regression tests
 
 ### Running Tests
 
 ```bash
 # Run all tests
-npm run test
+npm test
 
 # Run tests in watch mode
 npm run test:watch
@@ -273,115 +245,29 @@ npm run test:watch
 # Run tests with coverage
 npm run test:coverage
 
-# Run E2E tests
-npm run test:e2e
+# Run specific test file
+npm test -- ImportFixer.test.ts
+
+# Run tests matching pattern
+npm test -- --testNamePattern="validation"
 ```
 
 ## Documentation
 
-### Code Documentation
+### Types of Documentation
 
-- Add JSDoc comments for complex functions
-- Document component props and interfaces
-- Include usage examples
+- **API Documentation**: JSDoc comments for all public APIs
+- **User Guides**: How-to guides for end users
+- **Developer Guides**: Technical documentation for contributors
+- **Examples**: Code examples and tutorials
+- **Architecture**: System design and architecture decisions
 
-```typescript
-/**
- * Formats video duration from seconds to MM:SS or HH:MM:SS format
- * @param seconds - Duration in seconds
- * @returns Formatted duration string
- * @example
- * formatDuration(125) // returns "2:05"
- * formatDuration(3665) // returns "1:01:05"
- */
-const formatDuration = (seconds: number): string => {
-  // Implementation
-};
-```
+### Documentation Standards
 
-### README Updates
-
-- Update README.md for new features
-- Include setup instructions
-- Add usage examples
-- Update dependencies list
-
-## Issue Reporting
-
-### Bug Reports
-
-When reporting bugs, include:
-
-- **Clear title**: Brief description of the issue
-- **Steps to reproduce**: Detailed steps
-- **Expected behavior**: What should happen
-- **Actual behavior**: What actually happens
-- **Environment**: Browser, OS, Node.js version
-- **Screenshots**: If applicable
-- **Console errors**: Any error messages
-
-### Feature Requests
-
-For feature requests, include:
-
-- **Problem description**: What problem does this solve?
-- **Proposed solution**: How should it work?
-- **Alternatives**: Other solutions considered
-- **Use cases**: When would this be used?
-- **Mockups**: Visual examples if applicable
-
-## Security
-
-### Reporting Security Issues
-
-- **Do not** create public issues for security vulnerabilities
-- Email security issues to: [security@example.com]
-- Include detailed description and steps to reproduce
-- Allow time for investigation before public disclosure
-
-### Security Best Practices
-
-- Never commit API keys or secrets
-- Use environment variables for configuration
-- Validate all user inputs
-- Follow OWASP security guidelines
-- Keep dependencies updated
-
-## Performance Guidelines
-
-### Code Performance
-
-- Use React.memo for expensive components
-- Implement proper lazy loading
-- Optimize bundle size
-- Use efficient algorithms
-
-### Bundle Optimization
-
-- Code splitting for routes
-- Tree shaking for unused code
-- Optimize images and assets
-- Use CDN for static assets
-
-## Accessibility
-
-### Requirements
-
-- Follow WCAG 2.1 AA guidelines
-- Ensure keyboard navigation
-- Provide proper ARIA labels
-- Test with screen readers
-- Maintain color contrast ratios
-
-### Testing
-
-```bash
-# Run accessibility tests
-npm run test:a11y
-
-# Lighthouse accessibility audit
-npm run lighthouse
-```
+- **Clarity**: Write clear, concise documentation
+- **Examples**: Include practical examples
+- **Updates**: Keep documentation in sync with code changes
+- **Accessibility**: Ensure documentation is accessible to all users
 
 ## Release Process
 
@@ -393,43 +279,36 @@ We follow [Semantic Versioning](https://semver.org/):
 - **MINOR**: New features (backward compatible)
 - **PATCH**: Bug fixes (backward compatible)
 
-### Release Steps
+### Release Checklist
 
-1. Update version in `package.json`
-2. Update `CHANGELOG.md`
-3. Create release PR
-4. Tag release after merge
-5. Deploy to production
+- [ ] All tests pass
+- [ ] Documentation updated
+- [ ] CHANGELOG.md updated
+- [ ] Version bumped in package.json
+- [ ] Git tag created
+- [ ] NPM package published
 
 ## Getting Help
 
-### Communication Channels
-
-- **GitHub Issues**: Bug reports and feature requests
-- **GitHub Discussions**: General questions and discussions
-- **Discord**: Real-time chat (if available)
-- **Email**: Direct contact for sensitive issues
-
 ### Resources
 
-- [Project Documentation](./docs/)
-- [API Documentation](./docs/api/)
-- [Component Library](./docs/components/)
-- [Deployment Guide](./docs/deployment/)
+- **Documentation**: Check the README and docs/ directory
+- **Issues**: Search existing issues for similar problems
+- **Discussions**: Use GitHub Discussions for questions
+- **Code Review**: Ask for code review feedback
+
+### Communication
+
+- **GitHub Issues**: For bug reports and feature requests
+- **GitHub Discussions**: For questions and general discussion
+- **Pull Request Comments**: For code-specific discussions
 
 ## Recognition
 
-We appreciate all contributions! Contributors will be:
+Contributors will be recognized in:
 
-- Listed in `CONTRIBUTORS.md`
-- Mentioned in release notes
-- Invited to contributor events
-- Eligible for contributor swag
+- **CONTRIBUTORS.md**: List of all contributors
+- **Release Notes**: Major contributions highlighted
+- **Documentation**: Attribution for significant documentation contributions
 
-## License
-
-By contributing to this project, you agree that your contributions will be licensed under the same license as the project (MIT License).
-
----
-
-Thank you for contributing to YouTube Studio Clone! Your efforts help make this project better for everyone. 🚀
+Thank you for contributing to TypeScript Error Resolution! 🎉

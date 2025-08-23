@@ -1,105 +1,39 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "downlevelIteration": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* TEMPORARILY RELAXED - Type checking disabled for buildability */
-    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "strictFunctionTypes": false,
-    "strictBindCallApply": false,
-    "strictPropertyInitialization": false,
-    "noImplicitThis": false,
-    "alwaysStrict": false,
-    "noImplicitReturns": false,
-    "noImplicitOverride": false,
-    "exactOptionalPropertyTypes": false,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noUncheckedIndexedAccess": false,
-
-    /* Allow JavaScript */
-    "allowJs": true,
-    "checkJs": false,
-
-    /* Path mapping */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["./components/*"],
-      "@services/*": ["./services/*"],
-      "@types/*": ["./src/types/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@utils/*": ["./utils/*"]
-    },
-
-    /* Additional options */
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "declaration": false,
-    "declarationMap": false,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "removeComments": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
-    "src/**/*",
-    "test/**/*",
-    "tests/**/*",
-    "*.ts",
-    "*.tsx",
-    "components/**/*",
-    "config/**/*",
-    "contexts/**/*",
-    "hooks/**/*",
-    "pages/**/*",
-    "providers/**/*",
-    "scripts/**/*",
-    "services/**/*",
-    "store/**/*",
-    "stores/**/*",
-    "types/**/*",
-    "utils/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "build",
-    "coverage",
-    "public",
-    "*.config.js",
-    "*.config.cjs",
-    "*.config.ts",
-    "vite.config.ts",
-    "vitest.config.ts",
-    "vitest.workspace.ts",
-    "postcss.config.js",
-    "tailwind.config.js",
-    "debug-*.html",
-    "debug-*.js",
-    "test-*.html",
-    "test-*.js",
-    "verify-*.js",
-    "fix-*.js",
-    "reset-*.js"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+    "**/*.test.ts",
+    "**/*.spec.ts"
   ]
 }

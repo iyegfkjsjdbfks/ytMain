@@ -1,6 +1,5 @@
-import { BaseScriptGenerator, ScriptTemplate, GenerationContext } from './BaseScriptGenerator';
-import { AnalyzedError } from '../core/ErrorAnalyzer';
-import { FixingScript, ScriptCommand } from '../types';
+import { BaseScriptGenerator, GenerationContext, ScriptTemplate } from './BaseScriptGenerator';
+import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types';
 import { logger } from '../utils/Logger';
 
 export class FormattingScriptGenerator extends BaseScriptGenerator {
@@ -10,280 +9,313 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
 
   protected initializeTemplates(): void {
     // Template for removing trailing spaces
-    this.templates.set('remove-trailing-spaces', {
+    this.addTemplate({
       id: 'remove-trailing-spaces',
       name: 'Remove Trailing Spaces',
       description: 'Removes trailing whitespace from lines',
-      targetErrorTypes: ['trailing-space', 'formatting'],
-      commands: [{
-        type: 'replace',
-        file: '{{file}}',
-        pattern: /\s+$/gm,
-        replacement: '',
-        description: 'Remove trailing spaces from {{file}}'
-      }],
-      validationChecks: [{
-        type: 'lint',
-        command: 'npx eslint {{file}} --fix-dry-run',
-        expectedResult: 'improved-count',
-        timeoutSeconds: 30
-      }]
+      parameters: [
+        {
+          name: 'filePattern',
+          type: 'string',
+          description: 'File pattern to process',
+          required: true,
+          defaultValue: '**/*.{ts,tsx,js,jsx}'
+        }
+      ],
+      commands: [
+        {
+          type: 'replace',
+          file: '{{filePattern}}',
+          pattern: /\s+$/gm,
+          replacement: '',
+          description: 'Remove trailing spaces from {{filePattern}}'
+        }
+      ],
+      validationChecks: [
+        {
+          type: 'lint',
+          command: 'eslint --fix {{filePattern}}',
+          expectedResult: 'improved-count',
+          timeoutSeconds: 30
+        }
+      ]
     });
 
-    // Template for adding missing semicolons
-    this.templates.set('add-semicolons', {
-      id: 'add-semicolons',
+    // Template for fixing missing semicolons
+    this.addTemplate({
+      id: 'add-missing-semicolons',
       name: 'Add Missing Semicolons',
       description: 'Adds missing semicolons to statements',
-      targetErrorTypes: ['TS1005'],
-      commands: [{
-        type: 'replace',
-        file: '{{file}}',
-        pattern: /^(\s*(?:const|let|var|return|throw|break|continue|import|export)\s+[^;]+)$/gm,
-        replacement: '$1;',
-        description: 'Add missing semicolons in {{file}}'
-      }],
-      validationChecks: [{
-        type: 'syntax',
-        command: 'npx tsc --noEmit {{file}}',
-        expectedResult: 'improved-count',
-        timeoutSeconds: 30
-      }]
+      parameters: [
+        {
+          name: 'targetFile',
+          type: 'string',
+          description: 'Target file to fix',
+          required: true
+        }
+      ],
+      commands: [
+        {
+          type: 'replace',
+          file: '{{targetFile}}',
+          pattern: /^(\s*(?:const|let|var|return|throw|break|continue|import|export)\s+[^;{}\n]+)$/gm,
+          replacement: '$1;',
+          description: 'Add semicolons to statements in {{targetFile}}'
+        }
+      ],
+      validationChecks: [
+        {
+          type: 'syntax',
+          command: 'npx tsc --noEmit {{targetFile}}',
+          expectedResult: 'improved-count',
+          timeoutSeconds: 15
+        }
+      ]
     });
 
-    // Template for adding missing commas
-    this.templates.set('add-commas', {
-      id: 'add-commas',
+    // Template for fixing missing commas
+    this.addTemplate({
+      id: 'add-missing-commas',
       name: 'Add Missing Commas',
       description: 'Adds missing commas in object literals and arrays',
-      targetErrorTypes: ['TS1005'],
-      commands: [{
-        type: 'replace',
-        file: '{{file}}',
-        pattern: /(\w+:\s*[^,}\]]+)(\s*[\n\r]\s*)([}\]])/gm,
-        replacement: '$1,$2$3',
-        description: 'Add missing commas in {{file}}'
-      }],
-      validationChecks: [{
-        type: 'syntax',
-        command: 'npx tsc --noEmit {{file}}',
-        expectedResult: 'improved-count',
-        timeoutSeconds: 30
-      }]
+      parameters: [
+        {
+          name: 'targetFile',
+          type: 'string',
+          description: 'Target file to fix',
+          required: true
+        }
+      ],
+      commands: [
+        {
+          type: 'replace',
+          file: '{{targetFile}}',
+          pattern: /(\w+:\s*[^,\n}]+)(\n\s*\w+:)/g,
+          replacement: '$1,$2',
+          description: 'Add missing commas in object properties in {{targetFile}}'
+        },
+        {
+          type: 'replace',
+          file: '{{targetFile}}',
+          pattern: /(\w+)(\n\s*\})/g,
+          replacement: '$1$2',
+          description: 'Clean up object endings in {{targetFile}}'
+        }
+      ],
+      validationChecks: [
+        {
+          type: 'syntax',
+          command: 'npx tsc --noEmit {{targetFile}}',
+          expectedResult: 'improved-count',
+          timeoutSeconds: 15
+        }
+      ]
     });
 
-    // Template for fixing import ordering
-    this.templates.set('fix-import-order', {
-      id: 'fix-import-order',
-      name: 'Fix Import Order',
-      description: 'Organizes imports according to ESLint rules',
-      targetErrorTypes: ['import-order', 'eslint'],
-      commands: [{
-        type: 'replace',
-        file: '{{file}}',
-        pattern: /^(import\s+.*?;?\s*\n)+/gm,
-        replacement: '{{organizedImports}}',
-        description: 'Organize imports in {{file}}'
-      }],
-      validationChecks: [{
-        type: 'lint',
-        command: 'npx eslint {{file}} --rule "import/order: error"',
-        expectedResult: 'improved-count',
-        timeoutSeconds: 30
-      }]
+    // Template for organizing imports
+    this.addTemplate({
+      id: 'organize-imports',
+      name: 'Organize Imports',
+      description: 'Organizes and deduplicates import statements',
+      parameters: [
+        {
+          name: 'targetFile',
+          type: 'string',
+          description: 'Target file to organize',
+          required: true
+        }
+      ],
+      commands: [
+        {
+          type: 'replace',
+          file: '{{targetFile}}',
+          pattern: /^import\s+React\s*,\s*\{\s*([^}]+)\s*\}\s+from\s+['"]react['"];?\s*$/gm,
+          replacement: 'import React, { $1 } from \'react\';',
+          description: 'Standardize React imports in {{targetFile}}'
+        }
+      ],
+      validationChecks: [
+        {
+          type: 'lint',
+          command: 'eslint {{targetFile}}',
+          expectedResult: 'improved-count',
+          timeoutSeconds: 10
+        }
+      ]
     });
 
-    // Template for removing duplicate imports
-    this.templates.set('remove-duplicate-imports', {
-      id: 'remove-duplicate-imports',
-      name: 'Remove Duplicate Imports',
-      description: 'Removes duplicate import statements',
-      targetErrorTypes: ['duplicate-import', 'eslint'],
-      commands: [{
-        type: 'replace',
-        file: '{{file}}',
-        pattern: /^(import\s+.*from\s+['"][^'"]+['"];?\s*\n)(?=[\s\S]*^\1)/gm,
-        replacement: '',
-        description: 'Remove duplicate imports from {{file}}'
-      }],
-      validationChecks: [{
-        type: 'syntax',
-        command: 'npx tsc --noEmit {{file}}',
-        expectedResult: 'success',
-        timeoutSeconds: 30
-      }]
+    // Template for fixing indentation
+    this.addTemplate({
+      id: 'fix-indentation',
+      name: 'Fix Indentation',
+      description: 'Fixes inconsistent indentation',
+      parameters: [
+        {
+          name: 'targetFile',
+          type: 'string',
+          description: 'Target file to fix',
+          required: true
+        },
+        {
+          name: 'indentSize',
+          type: 'number',
+          description: 'Number of spaces for indentation',
+          required: false,
+          defaultValue: 2
+        }
+      ],
+      commands: [
+        {
+          type: 'replace',
+          file: '{{targetFile}}',
+          pattern: /^\t+/gm,
+          replacement: (match: string) => ' '.repeat(match.length * 2),
+          description: 'Convert tabs to spaces in {{targetFile}}'
+        }
+      ],
+      validationChecks: [
+        {
+          type: 'lint',
+          command: 'eslint {{targetFile}}',
+          expectedResult: 'improved-count',
+          timeoutSeconds: 10
+        }
+      ]
     });
   }
 
-  protected async generateScriptForGroup(
+  protected groupErrorsByPattern(errors: AnalyzedError[]): Map<string, AnalyzedError[]> {
+    const groups = new Map<string, AnalyzedError[]>();
+
+    for (const error of errors) {
+      let pattern = 'unknown';
+
+      // Group by error patterns
+      if (error.message.includes("';' expected")) {
+        pattern = 'missing-semicolon';
+      } else if (error.message.includes("',' expected")) {
+        pattern = 'missing-comma';
+      } else if (error.message.includes('trailing')) {
+        pattern = 'trailing-spaces';
+      } else if (error.message.includes('import') || error.message.includes('duplicate')) {
+        pattern = 'import-issues';
+      } else if (error.message.includes('indent') || error.message.includes('Expected indentation')) {
+        pattern = 'indentation';
+      }
+
+      if (!groups.has(pattern)) {
+        groups.set(pattern, []);
+      }
+      groups.get(pattern)!.push(error);
+    }
+
+    return groups;
+  }
+
+  protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
     context: GenerationContext
   ): Promise<FixingScript | null> {
-    logger.debug(`Generating formatting script for pattern: ${pattern}`, 'formatting-generator');
+    logger.debug('Generating formatting script for pattern', { pattern, errorCount: errors.length });
 
     const scriptId = `formatting-${pattern}-${Date.now()}`;
-    const commands: ScriptCommand[] = [];
+    let commands: ScriptCommand[] = [];
+    let validationChecks: ValidationCheck[] = [];
 
-    // Group errors by file for efficient processing
-    const fileGroups = this.groupErrorsByFile(errors);
+    // Get unique files affected by these errors
+    const affectedFiles = [...new Set(errors.map(e => e.file))];
 
-    for (const [file, fileErrors] of fileGroups.entries()) {
-      const fileCommands = await this.generateCommandsForFile(file, fileErrors, context);
-      commands.push(...fileCommands);
+    switch (pattern) {
+      case 'missing-semicolon':
+        commands = this.generateSemicolonFixCommands(affectedFiles);
+        validationChecks = this.createSyntaxValidationChecks(affectedFiles);
+        break;
+
+      case 'missing-comma':
+        commands = this.generateCommaFixCommands(affectedFiles);
+        validationChecks = this.createSyntaxValidationChecks(affectedFiles);
+        break;
+
+      case 'trailing-spaces':
+        commands = this.generateTrailingSpaceFixCommands(affectedFiles);
+        validationChecks = this.createLintValidationChecks(affectedFiles);
+        break;
+
+      case 'import-issues':
+        commands = this.generateImportFixCommands(affectedFiles);
+        validationChecks = this.createLintValidationChecks(affectedFiles);
+        break;
+
+      case 'indentation':
+        commands = this.generateIndentationFixCommands(affectedFiles);
+        validationChecks = this.createLintValidationChecks(affectedFiles);
+        break;
+
+      default:
+        logger.warn('Unknown formatting pattern', { pattern });
+        return null;
     }
 
     if (commands.length === 0) {
       return null;
     }
 
-    return this.createBaseScript(scriptId, this.category, errors, commands);
-  }
-
-  /**
-   * Groups errors by file for batch processing
-   */
-  private groupErrorsByFile(errors: AnalyzedError[]): Map<string, AnalyzedError[]> {
-    const groups = new Map<string, AnalyzedError[]>();
-
-    for (const error of errors) {
-      if (!groups.has(error.file)) {
-        groups.set(error.file, []);
-      }
-      groups.get(error.file)!.push(error);
-    }
-
-    return groups;
-  }
-
-  /**
-   * Generates commands for a specific file
-   */
-  private async generateCommandsForFile(
-    file: string,
-    errors: AnalyzedError[],
-    context: GenerationContext
-  ): Promise<ScriptCommand[]> {
-    const commands: ScriptCommand[] = [];
-
-    // Analyze error types in this file
-    const errorTypes = new Set(errors.map(e => e.code));
-    const hasTrailingSpaces = errors.some(e => e.message.includes('trailing'));
-    const hasMissingSemicolons = errorTypes.has('TS1005') && errors.some(e => e.message.includes("';' expected"));
-    const hasMissingCommas = errorTypes.has('TS1005') && errors.some(e => e.message.includes("',' expected"));
-    const hasDuplicateImports = errors.some(e => e.message.includes('duplicate') || e.message.includes('import'));
-
-    // Generate appropriate commands based on error analysis
-    if (hasTrailingSpaces) {
-      commands.push({
-        type: 'replace',
-        file,
-        pattern: /\s+$/gm,
-        replacement: '',
-        description: `Remove trailing spaces from ${file}`
-      });
-    }
-
-    if (hasMissingSemicolons) {
-      commands.push(...await this.generateSemicolonCommands(file, errors));
-    }
-
-    if (hasMissingCommas) {
-      commands.push(...await this.generateCommaCommands(file, errors));
-    }
-
-    if (hasDuplicateImports) {
-      commands.push(...await this.generateImportCleanupCommands(file, errors));
-    }
-
-    // Add general formatting command
-    commands.push({
-      type: 'replace',
-      file,
-      pattern: /\r\n/g,
-      replacement: '\n',
-      description: `Normalize line endings in ${file}`
-    });
-
-    return commands;
+    return {
+      id: scriptId,
+      category: this.category,
+      targetErrors: errors,
+      commands,
+      rollbackCommands: this.generateRollbackCommands(commands),
+      validationChecks,
+      estimatedRuntime: this.estimateRuntime(commands)
+    };
   }
 
   /**
    * Generates commands to fix missing semicolons
    */
-  private async generateSemicolonCommands(file: string, errors: AnalyzedError[]): Promise<ScriptCommand[]> {
-    const commands: ScriptCommand[] = [];
-
-    // Find specific lines that need semicolons
-    const semicolonErrors = errors.filter(e => 
-      e.code === 'TS1005' && e.message.includes("';' expected")
-    );
-
-    if (semicolonErrors.length > 0) {
-      // Add semicolons to common statement patterns
-      commands.push({
-        type: 'replace',
-        file,
-        pattern: /^(\s*(?:const|let|var)\s+[^;=]+=[^;]+)$/gm,
-        replacement: '$1;',
-        description: `Add semicolons to variable declarations in ${file}`
-      });
-
-      commands.push({
-        type: 'replace',
-        file,
-        pattern: /^(\s*(?:return|throw|break|continue)\s+[^;]+)$/gm,
-        replacement: '$1;',
-        description: `Add semicolons to control statements in ${file}`
-      });
-
-      commands.push({
-        type: 'replace',
-        file,
-        pattern: /^(\s*(?:import|export)\s+[^;]+)$/gm,
-        replacement: '$1;',
-        description: `Add semicolons to import/export statements in ${file}`
-      });
-    }
-
-    return commands;
+  private generateSemicolonFixCommands(files: string[]): ScriptCommand[] {
+    return files.map(file => ({
+      type: 'replace' as const,
+      file,
+      pattern: /^(\s*(?:const|let|var|return|throw|break|continue|import|export)\s+[^;{}\n]+)$/gm,
+      replacement: '$1;',
+      description: `Add missing semicolons in ${file}`
+    }));
   }
 
   /**
    * Generates commands to fix missing commas
    */
-  private async generateCommaCommands(file: string, errors: AnalyzedError[]): Promise<ScriptCommand[]> {
+  private generateCommaFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
-    const commaErrors = errors.filter(e => 
-      e.code === 'TS1005' && e.message.includes("',' expected")
-    );
-
-    if (commaErrors.length > 0) {
-      // Add commas in object literals
+    for (const file of files) {
+      // Fix missing commas in object properties
       commands.push({
         type: 'replace',
         file,
-        pattern: /(\w+:\s*[^,}\]]+)(\s*\n\s*)(\w+:)/gm,
-        replacement: '$1,$2$3',
-        description: `Add missing commas in object literals in ${file}`
+        pattern: /(\w+:\s*[^,\n}]+)(\n\s*\w+:)/g,
+        replacement: '$1,$2',
+        description: `Add missing commas in object properties in ${file}`
       });
 
-      // Add commas in arrays
+      // Fix missing commas in array elements
       commands.push({
         type: 'replace',
         file,
-        pattern: /([^,\[\s][^,\]]*?)(\s*\n\s*)([^,\]\s])/gm,
-        replacement: '$1,$2$3',
+        pattern: /(\w+)(\n\s*\w+)(?=\s*\])/g,
+        replacement: '$1,$2',
         description: `Add missing commas in arrays in ${file}`
       });
 
-      // Add commas in function parameters
+      // Fix function parameter commas
       commands.push({
         type: 'replace',
         file,
-        pattern: /(\w+:\s*\w+)(\s*\n\s*)(\w+:)/gm,
-        replacement: '$1,$2$3',
+        pattern: /(\w+:\s*\w+)(\n\s*\w+:)/g,
+        replacement: '$1,$2',
         description: `Add missing commas in function parameters in ${file}`
       });
     }
@@ -292,90 +324,205 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to clean up imports
+   * Generates commands to fix trailing spaces
    */
-  private async generateImportCleanupCommands(file: string, errors: AnalyzedError[]): Promise<ScriptCommand[]> {
+  private generateTrailingSpaceFixCommands(files: string[]): ScriptCommand[] {
+    return files.map(file => ({
+      type: 'replace' as const,
+      file,
+      pattern: /\s+$/gm,
+      replacement: '',
+      description: `Remove trailing spaces from ${file}`
+    }));
+  }
+
+  /**
+   * Generates commands to fix import issues
+   */
+  private generateImportFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
-    // Remove duplicate React imports (common issue)
-    commands.push({
-      type: 'replace',
-      file,
-      pattern: /^import\s+React\s*,?\s*\{[^}]*\}\s+from\s+['"]react['"];?\s*\n(?=[\s\S]*^import\s+React)/gm,
-      replacement: '',
-      description: `Remove duplicate React imports from ${file}`
-    });
+    for (const file of files) {
+      // Remove duplicate React imports
+      commands.push({
+        type: 'replace',
+        file,
+        pattern: /^import\s+React\s*;\s*\nimport\s+React\s*,/gm,
+        replacement: 'import React,',
+        description: `Remove duplicate React imports in ${file}`
+      });
 
-    // Remove duplicate imports from same module
-    commands.push({
-      type: 'replace',
-      file,
-      pattern: /^(import\s+.*from\s+['"]([^'"]+)['"];?\s*\n)(?=[\s\S]*^import\s+.*from\s+['"]\2['"])/gm,
-      replacement: '',
-      description: `Remove duplicate imports from same modules in ${file}`
-    });
+      // Standardize import formatting
+      commands.push({
+        type: 'replace',
+        file,
+        pattern: /^import\s+React\s*,\s*\{\s*([^}]+)\s*\}\s+from\s+['"]react['"];?\s*$/gm,
+        replacement: 'import React, { $1 } from \'react\';',
+        description: `Standardize React import formatting in ${file}`
+      });
 
-    // Consolidate multiple imports from same module
-    commands.push({
-      type: 'replace',
-      file,
-      pattern: /^import\s*\{\s*([^}]+)\s*\}\s*from\s*['"]([^'"]+)['"];?\s*\n^import\s*\{\s*([^}]+)\s*\}\s*from\s*['"]\2['"];?/gm,
-      replacement: 'import { $1, $3 } from \'$2\';',
-      description: `Consolidate imports from same modules in ${file}`
-    });
+      // Fix import ordering (React first, then other libraries, then local imports)
+      commands.push({
+        type: 'replace',
+        file,
+        pattern: /^(import.*from\s+['"][^.\/].*['"];?\s*\n)(import\s+React.*['"];?\s*\n)/gm,
+        replacement: '$2$1',
+        description: `Fix import ordering in ${file}`
+      });
+    }
 
     return commands;
   }
 
   /**
-   * Gets error pattern specific to formatting issues
+   * Generates commands to fix indentation
    */
-  protected getErrorPattern(error: AnalyzedError): string {
-    // Create more specific patterns for formatting errors
-    if (error.code === 'TS1005') {
-      if (error.message.includes("';' expected")) {
-        return 'missing-semicolon';
-      }
-      if (error.message.includes("',' expected")) {
-        return 'missing-comma';
-      }
-      if (error.message.includes("'}' expected")) {
-        return 'missing-brace';
-      }
+  private generateIndentationFixCommands(files: string[]): ScriptCommand[] {
+    const commands: ScriptCommand[] = [];
+
+    for (const file of files) {
+      // Convert tabs to spaces
+      commands.push({
+        type: 'replace',
+        file,
+        pattern: /^\t+/gm,
+        replacement: (match: string) => ' '.repeat(match.length * 2),
+        description: `Convert tabs to spaces in ${file}`
+      });
+
+      // Fix inconsistent spacing
+      commands.push({
+        type: 'replace',
+        file,
+        pattern: /^( {1,3})(\S)/gm,
+        replacement: '  $2', // Normalize to 2 spaces
+        description: `Normalize indentation to 2 spaces in ${file}`
+      });
     }
 
-    if (error.message.includes('trailing')) {
-      return 'trailing-spaces';
-    }
-
-    if (error.message.includes('import') || error.message.includes('duplicate')) {
-      return 'import-issues';
-    }
-
-    return `${error.code}-${error.category.name}`;
+    return commands;
   }
 
   /**
-   * Estimates runtime more accurately for formatting operations
+   * Creates syntax validation checks for files
    */
-  protected estimateRuntime(commands: ScriptCommand[]): number {
-    // Formatting operations are generally fast
-    let estimate = 0;
-    
-    for (const command of commands) {
-      switch (command.type) {
-        case 'replace':
-          estimate += 1; // 1 second per replace operation
-          break;
-        default:
-          estimate += 0.5;
-      }
-    }
+  private createSyntaxValidationChecks(files: string[]): ValidationCheck[] {
+    return files.map(file => ({
+      type: 'syntax' as const,
+      command: `npx tsc --noEmit ${file}`,
+      expectedResult: 'improved-count' as const,
+      timeoutSeconds: 15
+    }));
+  }
 
-    // Add overhead for file I/O
-    const uniqueFiles = new Set(commands.map(c => c.file));
-    estimate += uniqueFiles.size * 0.5;
+  /**
+   * Creates lint validation checks for files
+   */
+  private createLintValidationChecks(files: string[]): ValidationCheck[] {
+    return files.map(file => ({
+      type: 'lint' as const,
+      command: `eslint ${file}`,
+      expectedResult: 'improved-count' as const,
+      timeoutSeconds: 10
+    }));
+  }
 
-    return Math.max(estimate, 5); // Minimum 5 seconds
+  /**
+   * Generates a bulk formatting script for all common issues
+   */
+  public async generateBulkFormattingScript(
+    context: GenerationContext
+  ): Promise<FixingScript> {
+    const scriptId = `formatting-bulk-${Date.now()}`;
+    const commands: ScriptCommand[] = [];
+    const validationChecks: ValidationCheck[] = [];
+
+    // Get all unique files
+    const allFiles = [...new Set(context.errors.map(e => e.file))];
+
+    // Add commands for each type of formatting fix
+    commands.push(...this.generateTrailingSpaceFixCommands(allFiles));
+    commands.push(...this.generateSemicolonFixCommands(allFiles));
+    commands.push(...this.generateCommaFixCommands(allFiles));
+    commands.push(...this.generateImportFixCommands(allFiles));
+    commands.push(...this.generateIndentationFixCommands(allFiles));
+
+    // Add comprehensive validation
+    validationChecks.push(...this.createLintValidationChecks(allFiles));
+    validationChecks.push(...this.createSyntaxValidationChecks(allFiles));
+
+    return {
+      id: scriptId,
+      category: this.category,
+      targetErrors: context.errors,
+      commands,
+      rollbackCommands: this.generateRollbackCommands(commands),
+      validationChecks,
+      estimatedRuntime: this.estimateRuntime(commands)
+    };
+  }
+
+  /**
+   * Generates a Prettier formatting script
+   */
+  public generatePrettierScript(files: string[]): FixingScript {
+    const scriptId = `formatting-prettier-${Date.now()}`;
+
+    return {
+      id: scriptId,
+      category: this.category,
+      targetErrors: [],
+      commands: [
+        {
+          type: 'replace',
+          file: files.join(' '),
+          pattern: /.*/,
+          replacement: '',
+          description: `Run Prettier on ${files.length} files`
+        }
+      ],
+      rollbackCommands: [],
+      validationChecks: [
+        {
+          type: 'lint',
+          command: `npx prettier --write ${files.join(' ')}`,
+          expectedResult: 'success',
+          timeoutSeconds: 60
+        }
+      ],
+      estimatedRuntime: files.length * 100 // 100ms per file
+    };
+  }
+
+  /**
+   * Generates an ESLint auto-fix script
+   */
+  public generateESLintScript(files: string[]): FixingScript {
+    const scriptId = `formatting-eslint-${Date.now()}`;
+
+    return {
+      id: scriptId,
+      category: this.category,
+      targetErrors: [],
+      commands: [
+        {
+          type: 'replace',
+          file: files.join(' '),
+          pattern: /.*/,
+          replacement: '',
+          description: `Run ESLint --fix on ${files.length} files`
+        }
+      ],
+      rollbackCommands: [],
+      validationChecks: [
+        {
+          type: 'lint',
+          command: `npx eslint --fix ${files.join(' ')}`,
+          expectedResult: 'improved-count',
+          timeoutSeconds: 120
+        }
+      ],
+      estimatedRuntime: files.length * 200 // 200ms per file
+    };
   }
 }

@@ -12,209 +12,122 @@ export interface LogEntry {
   timestamp: Date;
   level: LogLevel;
   message: string;
-  category: string;
-  metadata?: any;
+  context?: Record<string, any>;
+  error?: Error;
 }
 
 export interface LoggerConfig {
   level: LogLevel;
-  outputFile?: string;
-  maxFileSize: number;
-  maxFiles: number;
   enableConsole: boolean;
   enableFile: boolean;
+  logDir: string;
+  maxFileSize: number; // in bytes
+  maxFiles: number;
 }
 
 export class Logger {
   private config: LoggerConfig;
   private logEntries: LogEntry[] = [];
-  private currentLogFile?: string;
+  private currentLogFile: string | null = null;
 
   constructor(config: Partial<LoggerConfig> = {}) {
     this.config = {
       level: LogLevel.INFO,
-      maxFileSize: 10 * 1024 * 1024, // 10MB
-      maxFiles: 5,
       enableConsole: true,
       enableFile: true,
+      logDir: 'logs',
+      maxFileSize: 10 * 1024 * 1024, // 10MB
+      maxFiles: 5,
       ...config
     };
 
-    if (this.config.enableFile) {
-      this.initializeLogFile();
-    }
+    this.initializeLogging();
   }
 
   /**
    * Logs a debug message
    */
-  public debug(message: string, category = 'general', metadata?: any): void {
-    this.log(LogLevel.DEBUG, message, category, metadata);
+  public debug(message: string, context?: Record<string, any>): void {
+    this.log(LogLevel.DEBUG, message, context);
   }
 
   /**
    * Logs an info message
    */
-  public info(message: string, category = 'general', metadata?: any): void {
-    this.log(LogLevel.INFO, message, category, metadata);
+  public info(message: string, context?: Record<string, any>): void {
+    this.log(LogLevel.INFO, message, context);
   }
 
   /**
    * Logs a warning message
    */
-  public warn(message: string, category = 'general', metadata?: any): void {
-    this.log(LogLevel.WARN, message, category, metadata);
+  public warn(message: string, context?: Record<string, any>): void {
+    this.log(LogLevel.WARN, message, context);
   }
 
   /**
    * Logs an error message
    */
-  public error(message: string, category = 'general', metadata?: any): void {
-    this.log(LogLevel.ERROR, message, category, metadata);
+  public error(message: string, error?: Error, context?: Record<string, any>): void {
+    this.log(LogLevel.ERROR, message, context, error);
   }
 
   /**
-   * Logs a message with specified level
+   * Logs progress information
    */
-  public log(level: LogLevel, message: string, category = 'general', metadata?: any): void {
-    if (level < this.config.level) {
-      return; // Skip if below configured level
-    }
-
-    const entry: LogEntry = {
-      timestamp: new Date(),
-      level,
-      message,
-      category,
-      metadata
-    };
-
-    this.logEntries.push(entry);
-
-    // Output to console if enabled
-    if (this.config.enableConsole) {
-      this.outputToConsole(entry);
-    }
-
-    // Output to file if enabled
-    if (this.config.enableFile) {
-      this.outputToFile(entry);
-    }
-
-    // Cleanup old entries to prevent memory issues
-    if (this.logEntries.length > 10000) {
-      this.logEntries = this.logEntries.slice(-5000);
-    }
+  public progress(phase: string, progress: number, message: string): void {
+    const progressBar = this.createProgressBar(progress);
+    const formattedMessage = `[${phase}] ${progressBar} ${progress.toFixed(1)}% - ${message}`;
+    this.info(formattedMessage, { phase, progress });
   }
 
   /**
-   * Gets log entries with optional filtering
+   * Logs performance metrics
    */
-  public getEntries(filter?: {
-    level?: LogLevel;
-    category?: string;
-    since?: Date;
-    limit?: number;
-  }): LogEntry[] {
-    let entries = [...this.logEntries];
-
-    if (filter) {
-      if (filter.level !== undefined) {
-        entries = entries.filter(e => e.level >= filter.level!);
-      }
-      
-      if (filter.category) {
-        entries = entries.filter(e => e.category === filter.category);
-      }
-      
-      if (filter.since) {
-        entries = entries.filter(e => e.timestamp >= filter.since!);
-      }
-      
-      if (filter.limit) {
-        entries = entries.slice(-filter.limit);
-      }
-    }
-
-    return entries;
+  public metrics(metrics: Record<string, number>): void {
+    const metricsStr = Object.entries(metrics)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join(', ');
+    this.info(`📊 Metrics: ${metricsStr}`, { metrics });
   }
 
   /**
-   * Generates a log report
+   * Logs operation start
    */
-  public generateReport(since?: Date): string {
-    const entries = this.getEntries({ since });
-    const report = [];
+  public startOperation(operation: string, details?: Record<string, any>): void {
+    this.info(`🚀 Starting: ${operation}`, { operation: 'start', ...details });
+  }
 
-    report.push('📋 LOG REPORT');
-    report.push('=============');
-    report.push(`Total Entries: ${entries.length}`);
-    
-    if (since) {
-      report.push(`Since: ${since.toLocaleString()}`);
-    }
-
-    // Count by level
-    const levelCounts = {
-      [LogLevel.DEBUG]: 0,
-      [LogLevel.INFO]: 0,
-      [LogLevel.WARN]: 0,
-      [LogLevel.ERROR]: 0
-    };
-
-    entries.forEach(entry => {
-      levelCounts[entry.level]++;
+  /**
+   * Logs operation completion
+   */
+  public completeOperation(operation: string, duration: number, details?: Record<string, any>): void {
+    this.info(`✅ Completed: ${operation} (${this.formatDuration(duration)})`, {
+      operation: 'complete',
+      duration,
+      ...details
     });
-
-    report.push('');
-    report.push('📊 BY LEVEL');
-    report.push('===========');
-    report.push(`Debug: ${levelCounts[LogLevel.DEBUG]}`);
-    report.push(`Info: ${levelCounts[LogLevel.INFO]}`);
-    report.push(`Warn: ${levelCounts[LogLevel.WARN]}`);
-    report.push(`Error: ${levelCounts[LogLevel.ERROR]}`);
-
-    // Count by category
-    const categoryMap = new Map<string, number>();
-    entries.forEach(entry => {
-      const count = categoryMap.get(entry.category) || 0;
-      categoryMap.set(entry.category, count + 1);
-    });
-
-    if (categoryMap.size > 0) {
-      report.push('');
-      report.push('📂 BY CATEGORY');
-      report.push('==============');
-      Array.from(categoryMap.entries())
-        .sort((a, b) => b[1] - a[1])
-        .forEach(([category, count]) => {
-          report.push(`${category}: ${count}`);
-        });
-    }
-
-    // Recent errors
-    const recentErrors = entries
-      .filter(e => e.level === LogLevel.ERROR)
-      .slice(-10);
-
-    if (recentErrors.length > 0) {
-      report.push('');
-      report.push('🚨 RECENT ERRORS');
-      report.push('================');
-      recentErrors.forEach(entry => {
-        report.push(`[${entry.timestamp.toLocaleTimeString()}] ${entry.category}: ${entry.message}`);
-      });
-    }
-
-    return report.join('\n');
   }
 
   /**
-   * Clears all log entries
+   * Logs operation failure
    */
-  public clear(): void {
-    this.logEntries = [];
-    this.info('Log entries cleared', 'logger');
+  public failOperation(operation: string, error: Error, details?: Record<string, any>): void {
+    this.error(`❌ Failed: ${operation}`, error, { operation: 'fail', ...details });
+  }
+
+  /**
+   * Gets recent log entries
+   */
+  public getRecentLogs(count = 100): LogEntry[] {
+    return this.logEntries.slice(-count);
+  }
+
+  /**
+   * Gets logs by level
+   */
+  public getLogsByLevel(level: LogLevel): LogEntry[] {
+    return this.logEntries.filter(entry => entry.level === level);
   }
 
   /**
@@ -233,9 +146,100 @@ export class Logger {
       }
 
       await fs.promises.writeFile(filePath, content, 'utf8');
-      this.info(`Logs exported to ${filePath}`, 'logger');
+      this.info(`📄 Logs exported to: ${filePath}`);
     } catch (error) {
-      this.error(`Failed to export logs: ${error}`, 'logger');
+      this.error('Failed to export logs', error as Error, { filePath, format });
+    }
+  }
+
+  /**
+   * Clears log entries from memory
+   */
+  public clearLogs(): void {
+    const count = this.logEntries.length;
+    this.logEntries = [];
+    this.info(`🧹 Cleared ${count} log entries from memory`);
+  }
+
+  /**
+   * Creates a summary report of logged activities
+   */
+  public createSummaryReport(): {
+    totalEntries: number;
+    entriesByLevel: Record<string, number>;
+    errorCount: number;
+    warningCount: number;
+    timeRange: { start: Date; end: Date } | null;
+    topErrors: string[];
+  } {
+    const entriesByLevel: Record<string, number> = {
+      DEBUG: 0,
+      INFO: 0,
+      WARN: 0,
+      ERROR: 0
+    };
+
+    const errors: string[] = [];
+
+    for (const entry of this.logEntries) {
+      const levelName = LogLevel[entry.level];
+      entriesByLevel[levelName]++;
+
+      if (entry.level === LogLevel.ERROR && entry.error) {
+        errors.push(entry.error.message);
+      }
+    }
+
+    // Get top 5 most common errors
+    const errorCounts = errors.reduce((acc, error) => {
+      acc[error] = (acc[error] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    const topErrors = Object.entries(errorCounts)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5)
+      .map(([error]) => error);
+
+    const timeRange = this.logEntries.length > 0 ? {
+      start: this.logEntries[0].timestamp,
+      end: this.logEntries[this.logEntries.length - 1].timestamp
+    } : null;
+
+    return {
+      totalEntries: this.logEntries.length,
+      entriesByLevel,
+      errorCount: entriesByLevel.ERROR,
+      warningCount: entriesByLevel.WARN,
+      timeRange,
+      topErrors
+    };
+  }
+
+  /**
+   * Core logging method
+   */
+  private log(level: LogLevel, message: string, context?: Record<string, any>, error?: Error): void {
+    if (level < this.config.level) return;
+
+    const entry: LogEntry = {
+      timestamp: new Date(),
+      level,
+      message,
+      context,
+      error
+    };
+
+    this.logEntries.push(entry);
+
+    // Console output
+    if (this.config.enableConsole) {
+      this.outputToConsole(entry);
+    }
+
+    // File output
+    if (this.config.enableFile) {
+      this.outputToFile(entry);
     }
   }
 
@@ -244,20 +248,23 @@ export class Logger {
    */
   private outputToConsole(entry: LogEntry): void {
     const formatted = this.formatLogEntry(entry);
-    const levelIcon = this.getLevelIcon(entry.level);
-    
+    const levelName = LogLevel[entry.level];
+
     switch (entry.level) {
       case LogLevel.DEBUG:
-        console.debug(`${levelIcon} ${formatted}`);
+        console.debug(formatted);
         break;
       case LogLevel.INFO:
-        console.log(`${levelIcon} ${formatted}`);
+        console.log(formatted);
         break;
       case LogLevel.WARN:
-        console.warn(`${levelIcon} ${formatted}`);
+        console.warn(formatted);
         break;
       case LogLevel.ERROR:
-        console.error(`${levelIcon} ${formatted}`);
+        console.error(formatted);
+        if (entry.error) {
+          console.error(entry.error.stack);
+        }
         break;
     }
   }
@@ -266,109 +273,24 @@ export class Logger {
    * Outputs log entry to file
    */
   private async outputToFile(entry: LogEntry): Promise<void> {
-    if (!this.currentLogFile) {
-      return;
-    }
-
     try {
-      const formatted = this.formatLogEntry(entry) + '\n';
-      await fs.promises.appendFile(this.currentLogFile, formatted, 'utf8');
-      
-      // Check file size and rotate if needed
-      await this.checkAndRotateLog();
-    } catch (error) {
-      console.error('Failed to write to log file:', error);
-    }
-  }
+      if (!this.currentLogFile) {
+        this.currentLogFile = this.createLogFileName();
+      }
 
-  /**
-   * Initializes the log file
-   */
-  private initializeLogFile(): void {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const fileName = this.config.outputFile || `error-resolution-${timestamp}.log`;
-    this.currentLogFile = path.resolve(fileName);
-    
-    // Ensure directory exists
-    const dir = path.dirname(this.currentLogFile);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-  }
-
-  /**
-   * Checks log file size and rotates if necessary
-   */
-  private async checkAndRotateLog(): Promise<void> {
-    if (!this.currentLogFile) {
-      return;
-    }
-
-    try {
-      const stats = await fs.promises.stat(this.currentLogFile);
-      
-      if (stats.size > this.config.maxFileSize) {
+      // Check if current log file is too large
+      if (await this.isLogFileTooLarge(this.currentLogFile)) {
         await this.rotateLogFile();
+        this.currentLogFile = this.createLogFileName();
       }
+
+      const formatted = this.formatLogEntry(entry) + '\n';
+      const logPath = path.join(this.config.logDir, this.currentLogFile);
+
+      await fs.promises.appendFile(logPath, formatted, 'utf8');
     } catch (error) {
-      // File might not exist yet, ignore
-    }
-  }
-
-  /**
-   * Rotates the current log file
-   */
-  private async rotateLogFile(): Promise<void> {
-    if (!this.currentLogFile) {
-      return;
-    }
-
-    try {
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const rotatedFile = this.currentLogFile.replace('.log', `-${timestamp}.log`);
-      
-      await fs.promises.rename(this.currentLogFile, rotatedFile);
-      
-      // Clean up old log files
-      await this.cleanupOldLogs();
-      
-      this.info(`Log file rotated to ${rotatedFile}`, 'logger');
-    } catch (error) {
-      console.error('Failed to rotate log file:', error);
-    }
-  }
-
-  /**
-   * Cleans up old log files
-   */
-  private async cleanupOldLogs(): Promise<void> {
-    if (!this.currentLogFile) {
-      return;
-    }
-
-    try {
-      const dir = path.dirname(this.currentLogFile);
-      const baseName = path.basename(this.currentLogFile, '.log');
-      const files = await fs.promises.readdir(dir);
-      
-      const logFiles = files
-        .filter(file => file.startsWith(baseName) && file.endsWith('.log'))
-        .map(file => ({
-          name: file,
-          path: path.join(dir, file),
-          stats: fs.statSync(path.join(dir, file))
-        }))
-        .sort((a, b) => b.stats.mtime.getTime() - a.stats.mtime.getTime());
-
-      // Keep only the most recent files
-      const filesToDelete = logFiles.slice(this.config.maxFiles);
-      
-      for (const file of filesToDelete) {
-        await fs.promises.unlink(file.path);
-        this.info(`Deleted old log file: ${file.name}`, 'logger');
-      }
-    } catch (error) {
-      console.error('Failed to cleanup old logs:', error);
+      // Avoid infinite recursion by not logging this error
+      console.error('Failed to write to log file:', error);
     }
   }
 
@@ -378,33 +300,127 @@ export class Logger {
   private formatLogEntry(entry: LogEntry): string {
     const timestamp = entry.timestamp.toISOString();
     const level = LogLevel[entry.level].padEnd(5);
-    const category = entry.category.padEnd(12);
-    
-    let formatted = `[${timestamp}] ${level} [${category}] ${entry.message}`;
-    
-    if (entry.metadata) {
-      formatted += ` | ${JSON.stringify(entry.metadata)}`;
+    let formatted = `[${timestamp}] ${level} ${entry.message}`;
+
+    if (entry.context && Object.keys(entry.context).length > 0) {
+      formatted += ` | Context: ${JSON.stringify(entry.context)}`;
     }
-    
+
+    if (entry.error) {
+      formatted += ` | Error: ${entry.error.message}`;
+    }
+
     return formatted;
   }
 
   /**
-   * Gets icon for log level
+   * Creates a progress bar string
    */
-  private getLevelIcon(level: LogLevel): string {
-    switch (level) {
-      case LogLevel.DEBUG: return '🔍';
-      case LogLevel.INFO: return 'ℹ️';
-      case LogLevel.WARN: return '⚠️';
-      case LogLevel.ERROR: return '❌';
-      default: return '📝';
+  private createProgressBar(progress: number, width = 20): string {
+    const filled = Math.round((progress / 100) * width);
+    const empty = width - filled;
+    return '█'.repeat(filled) + '░'.repeat(empty);
+  }
+
+  /**
+   * Formats duration in human readable format
+   */
+  private formatDuration(milliseconds: number): string {
+    if (milliseconds < 1000) {
+      return `${milliseconds}ms`;
+    }
+
+    const seconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+
+    if (hours > 0) {
+      return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+    } else if (minutes > 0) {
+      return `${minutes}m ${seconds % 60}s`;
+    } else {
+      return `${seconds}s`;
+    }
+  }
+
+  /**
+   * Initializes logging system
+   */
+  private async initializeLogging(): Promise<void> {
+    if (this.config.enableFile) {
+      try {
+        await fs.promises.mkdir(this.config.logDir, { recursive: true });
+      } catch (error) {
+        console.error('Failed to create log directory:', error);
+        this.config.enableFile = false;
+      }
+    }
+  }
+
+  /**
+   * Creates a new log file name
+   */
+  private createLogFileName(): string {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    return `error-resolution-${timestamp}.log`;
+  }
+
+  /**
+   * Checks if log file is too large
+   */
+  private async isLogFileTooLarge(fileName: string): Promise<boolean> {
+    try {
+      const logPath = path.join(this.config.logDir, fileName);
+      const stats = await fs.promises.stat(logPath);
+      return stats.size >= this.config.maxFileSize;
+    } catch {
+      return false; // File doesn't exist yet
+    }
+  }
+
+  /**
+   * Rotates log files when they get too large
+   */
+  private async rotateLogFile(): Promise<void> {
+    try {
+      // Get all log files
+      const files = await fs.promises.readdir(this.config.logDir);
+      const logFiles = files
+        .filter(file => file.startsWith('error-resolution-') && file.endsWith('.log'))
+        .map(file => ({
+          name: file,
+          path: path.join(this.config.logDir, file),
+          stats: null as any
+        }));
+
+      // Get file stats
+      for (const file of logFiles) {
+        try {
+          file.stats = await fs.promises.stat(file.path);
+        } catch {
+          // Ignore files that can't be accessed
+        }
+      }
+
+      // Sort by creation time (oldest first)
+      logFiles.sort((a, b) => {
+        if (!a.stats || !b.stats) return 0;
+        return a.stats.birthtime.getTime() - b.stats.birthtime.getTime();
+      });
+
+      // Delete old files if we have too many
+      while (logFiles.length >= this.config.maxFiles) {
+        const oldestFile = logFiles.shift();
+        if (oldestFile) {
+          await fs.promises.unlink(oldestFile.path);
+          this.info(`🗑️ Deleted old log file: ${oldestFile.name}`);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to rotate log files:', error);
     }
   }
 }
 
 // Create default logger instance
-export const logger = new Logger({
-  level: LogLevel.INFO,
-  outputFile: 'logs/error-resolution.log'
-});
+export const logger = new Logger();
