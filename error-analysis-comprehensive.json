@@ -1,0 +1,2834 @@
+{
+  "timestamp": "2025-08-22T19:49:22.604Z",
+  "summary": {
+    "totalErrors": 7720,
+    "totalFiles": 315,
+    "corruptedFiles": 190,
+    "averageErrorsPerFile": 24.51
+  },
+  "corruptedFiles": [
+    {
+      "file": "components/BaseForm.tsx",
+      "totalErrors": 23,
+      "criticalErrors": 21,
+      "errorCodes": [
+        "TS17008",
+        "TS1381",
+        "TS17002",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "components/BaseModal.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS17008",
+        "TS1003",
+        "TS1381",
+        "TS1382"
+      ]
+    },
+    {
+      "file": "components/ChannelHeader.tsx",
+      "totalErrors": 11,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS17014",
+        "TS17008",
+        "TS1381",
+        "TS1382",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "components/ChannelTabs.tsx",
+      "totalErrors": 11,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS17008",
+        "TS1005",
+        "TS1381",
+        "TS1382"
+      ]
+    },
+    {
+      "file": "components/CommentsSection.tsx",
+      "totalErrors": 75,
+      "criticalErrors": 75,
+      "errorCodes": [
+        "TS17008",
+        "TS1381",
+        "TS1382",
+        "TS1005",
+        "TS1003"
+      ]
+    },
+    {
+      "file": "components/CommunityPosts.tsx",
+      "totalErrors": 36,
+      "criticalErrors": 36,
+      "errorCodes": [
+        "TS17008",
+        "TS1005",
+        "TS1109",
+        "TS1003",
+        "TS1382",
+        "TS1381",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "components/DeveloperDashboard.tsx",
+      "totalErrors": 131,
+      "criticalErrors": 119,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1161",
+        "TS1136",
+        "TS1109",
+        "TS1128",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS17008"
+      ]
+    },
+    {
+      "file": "components/DevOpsDashboard.tsx",
+      "totalErrors": 108,
+      "criticalErrors": 105,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1109",
+        "TS1136",
+        "TS1472",
+        "TS1128",
+        "TS1003",
+        "TS1382",
+        "TS17002",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "components/EnhancedCommentSystem.tsx",
+      "totalErrors": 42,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS1003",
+        "TS1005",
+        "TS1109",
+        "TS1434",
+        "TS1128",
+        "TS1161",
+        "TS2657",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "components/EnhancedVideoUpload.tsx",
+      "totalErrors": 35,
+      "criticalErrors": 24,
+      "errorCodes": [
+        "TS2657",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS1109",
+        "TS1005",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/EnhancedYouTubeVideoCard.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1136",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/forms/UnifiedFormSystem.tsx",
+      "totalErrors": 54,
+      "criticalErrors": 53,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "components/LiveStreamManager.tsx",
+      "totalErrors": 24,
+      "criticalErrors": 15,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1134",
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/ModerationDashboard.tsx",
+      "totalErrors": 38,
+      "criticalErrors": 29,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1382",
+        "TS17002",
+        "TS1003",
+        "TS1381",
+        "TS1161"
+      ]
+    },
+    {
+      "file": "components/NotificationCenter.tsx",
+      "totalErrors": 33,
+      "criticalErrors": 27,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1128",
+        "TS1003",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "components/NotificationSystem.tsx",
+      "totalErrors": 32,
+      "criticalErrors": 26,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1003",
+        "TS1381",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/OptimizedSearchResults.tsx",
+      "totalErrors": 30,
+      "criticalErrors": 27,
+      "errorCodes": [
+        "TS1005",
+        "TS1131",
+        "TS1109",
+        "TS1382",
+        "TS1128",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "components/OptimizedVideoCard.tsx",
+      "totalErrors": 81,
+      "criticalErrors": 72,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS1109",
+        "TS17002",
+        "TS2657",
+        "TS1068",
+        "TS1136",
+        "TS1127"
+      ]
+    },
+    {
+      "file": "components/PerformanceDashboard.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 15,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "components/PictureInPicture.tsx",
+      "totalErrors": 14,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1443",
+        "TS1434",
+        "TS1109",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "components/RefactoredSaveToPlaylistModal.tsx",
+      "totalErrors": 23,
+      "criticalErrors": 20,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS17015",
+        "TS1128",
+        "TS1136",
+        "TS1161"
+      ]
+    },
+    {
+      "file": "components/RefactoredVideoDescription.tsx",
+      "totalErrors": 11,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS1005",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "components/SearchBar.tsx",
+      "totalErrors": 31,
+      "criticalErrors": 25,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS2657"
+      ]
+    },
+    {
+      "file": "components/ShortDisplayCard.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS1003",
+        "TS1128",
+        "TS1109",
+        "TS1005",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "components/ShortsFilters.tsx",
+      "totalErrors": 14,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1381",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/ShortsPlayer.tsx",
+      "totalErrors": 30,
+      "criticalErrors": 22,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS2657",
+        "TS1003",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/SimpleHoverVideoCard.tsx",
+      "totalErrors": 22,
+      "criticalErrors": 19,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1381",
+        "TS1109",
+        "TS1003",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/SortFilterPanel.tsx",
+      "totalErrors": 16,
+      "criticalErrors": 14,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1381",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/SubscriptionManager.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/SubscriptionsPage.tsx",
+      "totalErrors": 30,
+      "criticalErrors": 19,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1382",
+        "TS17002",
+        "TS17015"
+      ]
+    },
+    {
+      "file": "components/ui/Button.tsx",
+      "totalErrors": 38,
+      "criticalErrors": 37,
+      "errorCodes": [
+        "TS1003",
+        "TS1138",
+        "TS2657",
+        "TS1005",
+        "TS1128",
+        "TS1131",
+        "TS1109",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "components/ui/DropdownMenu.tsx",
+      "totalErrors": 14,
+      "criticalErrors": 14,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1128",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "components/ui/FileUpload.tsx",
+      "totalErrors": 14,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS1005",
+        "TS17002",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/ui/FormComponents.tsx",
+      "totalErrors": 56,
+      "criticalErrors": 54,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1382",
+        "TS17002",
+        "TS1128",
+        "TS1003",
+        "TS1131"
+      ]
+    },
+    {
+      "file": "components/ui/LoadingStates.tsx",
+      "totalErrors": 23,
+      "criticalErrors": 23,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1109",
+        "TS1128",
+        "TS1161",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "components/ui/UnifiedComponents.tsx",
+      "totalErrors": 56,
+      "criticalErrors": 55,
+      "errorCodes": [
+        "TS1003",
+        "TS1005",
+        "TS1128",
+        "TS1161",
+        "TS1382",
+        "TS17002",
+        "TS1180",
+        "TS1109",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "components/video/VideoControls.tsx",
+      "totalErrors": 20,
+      "criticalErrors": 16,
+      "errorCodes": [
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1003",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/video/VideoSettings.tsx",
+      "totalErrors": 21,
+      "criticalErrors": 17,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1381",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/VideoActions.tsx",
+      "totalErrors": 36,
+      "criticalErrors": 25,
+      "errorCodes": [
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1128",
+        "TS1136",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "components/VideoAnalytics.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 16,
+      "errorCodes": [
+        "TS1131",
+        "TS1109",
+        "TS1005",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/VideoAnalyticsDashboard.tsx",
+      "totalErrors": 26,
+      "criticalErrors": 24,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1003",
+        "TS1136",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/VideoEditor.tsx",
+      "totalErrors": 53,
+      "criticalErrors": 40,
+      "errorCodes": [
+        "TS1003",
+        "TS1005",
+        "TS1381",
+        "TS1382",
+        "TS2657",
+        "TS17002",
+        "TS1127",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "components/VirtualizedVideoGrid.tsx",
+      "totalErrors": 15,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17015",
+        "TS17002",
+        "TS1003",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "components/YouTubePlayer.tsx",
+      "totalErrors": 26,
+      "criticalErrors": 26,
+      "errorCodes": [
+        "TS1005",
+        "TS1472",
+        "TS1128",
+        "TS1003",
+        "TS1381",
+        "TS1382"
+      ]
+    },
+    {
+      "file": "config/codeQuality.ts",
+      "totalErrors": 29,
+      "criticalErrors": 29,
+      "errorCodes": [
+        "TS1005"
+      ]
+    },
+    {
+      "file": "contexts/UnifiedAppContext.broken.tsx",
+      "totalErrors": 11,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1472",
+        "TS1134"
+      ]
+    },
+    {
+      "file": "pages/AdminPage.tsx",
+      "totalErrors": 167,
+      "criticalErrors": 167,
+      "errorCodes": [
+        "TS1136",
+        "TS1003",
+        "TS1005",
+        "TS1109",
+        "TS1434",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "pages/AnalyticsPage.tsx",
+      "totalErrors": 31,
+      "criticalErrors": 30,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1161",
+        "TS1381",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "pages/ChannelCustomizationPage.tsx",
+      "totalErrors": 51,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1381",
+        "TS17008",
+        "TS1109",
+        "TS1434",
+        "TS1351",
+        "TS1003",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "pages/CommentModerationPage.tsx",
+      "totalErrors": 34,
+      "criticalErrors": 25,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS2657"
+      ]
+    },
+    {
+      "file": "pages/CommunityPage.tsx",
+      "totalErrors": 62,
+      "criticalErrors": 50,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1381",
+        "TS1145",
+        "TS1109",
+        "TS2657",
+        "TS1003"
+      ]
+    },
+    {
+      "file": "pages/ContentManagerPage.tsx",
+      "totalErrors": 62,
+      "criticalErrors": 45,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382",
+        "TS17002",
+        "TS1381",
+        "TS2657",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "pages/CreatorStudioPage.tsx",
+      "totalErrors": 21,
+      "criticalErrors": 17,
+      "errorCodes": [
+        "TS1005",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS2657",
+        "TS1161",
+        "TS1003",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "pages/LibraryPage.tsx",
+      "totalErrors": 25,
+      "criticalErrors": 24,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382",
+        "TS17002",
+        "TS1136",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "pages/MonetizationPage.tsx",
+      "totalErrors": 11,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS1005",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "pages/PlaylistDetailPage.tsx",
+      "totalErrors": 24,
+      "criticalErrors": 19,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382",
+        "TS1381",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "pages/PlaylistManagerPage.tsx",
+      "totalErrors": 33,
+      "criticalErrors": 23,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1003",
+        "TS1381",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "pages/RefactoredContentManagerPage.tsx",
+      "totalErrors": 35,
+      "criticalErrors": 33,
+      "errorCodes": [
+        "TS1005",
+        "TS1161",
+        "TS17002",
+        "TS1136",
+        "TS2657",
+        "TS1128",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "pages/SearchResultsPage.tsx",
+      "totalErrors": 13,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382"
+      ]
+    },
+    {
+      "file": "pages/SettingsPage.tsx",
+      "totalErrors": 24,
+      "criticalErrors": 20,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1109",
+        "TS1382",
+        "TS1003",
+        "TS1381",
+        "TS17002",
+        "TS2657",
+        "TS17008"
+      ]
+    },
+    {
+      "file": "pages/ShortsPage.tsx",
+      "totalErrors": 60,
+      "criticalErrors": 54,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1136",
+        "TS1161",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "pages/SubscriptionsPage.tsx",
+      "totalErrors": 15,
+      "criticalErrors": 10,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "pages/TrendingPage.tsx",
+      "totalErrors": 24,
+      "criticalErrors": 24,
+      "errorCodes": [
+        "TS1005",
+        "TS1136",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "pages/UploadPage.tsx",
+      "totalErrors": 24,
+      "criticalErrors": 20,
+      "errorCodes": [
+        "TS1005",
+        "TS1134",
+        "TS1128",
+        "TS1382",
+        "TS17002",
+        "TS2657",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "pages/UserPage.tsx",
+      "totalErrors": 19,
+      "criticalErrors": 17,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1381",
+        "TS17008",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "pages/VideoEditorPage.tsx",
+      "totalErrors": 55,
+      "criticalErrors": 42,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1134",
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1381",
+        "TS1003",
+        "TS1109",
+        "TS17015"
+      ]
+    },
+    {
+      "file": "pages/VideoUploadPage.tsx",
+      "totalErrors": 33,
+      "criticalErrors": 32,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS17008",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS1109",
+        "TS1161",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "pages/WatchPage.tsx",
+      "totalErrors": 16,
+      "criticalErrors": 15,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1109",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "pages/YourDataPage.tsx",
+      "totalErrors": 17,
+      "criticalErrors": 10,
+      "errorCodes": [
+        "TS1005",
+        "TS2657",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "scripts/typescript-error-orchestrator.js",
+      "totalErrors": 122,
+      "criticalErrors": 99,
+      "errorCodes": [
+        "TS18026",
+        "TS1005",
+        "TS1434",
+        "TS1109",
+        "TS1128",
+        "TS1443",
+        "TS1127",
+        "TS1068",
+        "TS8010",
+        "TS1435",
+        "TS1161"
+      ]
+    },
+    {
+      "file": "services/analyticsService.ts",
+      "totalErrors": 82,
+      "criticalErrors": 81,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1068",
+        "TS1135",
+        "TS1109",
+        "TS1434",
+        "TS1011",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "services/api.ts",
+      "totalErrors": 34,
+      "criticalErrors": 34,
+      "errorCodes": [
+        "TS1068",
+        "TS1138",
+        "TS1434",
+        "TS1135",
+        "TS1109",
+        "TS1005",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "services/apiService.ts",
+      "totalErrors": 39,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS1005",
+        "TS1434",
+        "TS1011",
+        "TS1138",
+        "TS1109",
+        "TS1128",
+        "TS1068"
+      ]
+    },
+    {
+      "file": "services/errorService.ts",
+      "totalErrors": 38,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1109",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "services/googleSearchService.ts",
+      "totalErrors": 23,
+      "criticalErrors": 23,
+      "errorCodes": [
+        "TS1109",
+        "TS1005",
+        "TS1134",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "services/googleSearchVideoStore.ts",
+      "totalErrors": 16,
+      "criticalErrors": 16,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1359",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "services/livestreamAPI.ts",
+      "totalErrors": 36,
+      "criticalErrors": 36,
+      "errorCodes": [
+        "TS1005",
+        "TS1434",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "services/realVideoService.ts",
+      "totalErrors": 11,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS1005"
+      ]
+    },
+    {
+      "file": "services/unifiedApiService.ts",
+      "totalErrors": 33,
+      "criticalErrors": 33,
+      "errorCodes": [
+        "TS1005",
+        "TS1434",
+        "TS1138",
+        "TS1068",
+        "TS1128",
+        "TS1359",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "services/youtubeSearchService.ts",
+      "totalErrors": 36,
+      "criticalErrors": 33,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1434",
+        "TS1135",
+        "TS1011",
+        "TS1003",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "src/components/atoms/Button/Button.tsx",
+      "totalErrors": 13,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1138",
+        "TS1128",
+        "TS1109",
+        "TS1134"
+      ]
+    },
+    {
+      "file": "src/components/EnhancedPWAInstallBanner.tsx",
+      "totalErrors": 38,
+      "criticalErrors": 28,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/components/ErrorBoundaries/DataFetchErrorBoundary.tsx",
+      "totalErrors": 28,
+      "criticalErrors": 28,
+      "errorCodes": [
+        "TS1128",
+        "TS1434",
+        "TS1005",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "src/components/ErrorBoundaries/LiveStreamErrorBoundary.tsx",
+      "totalErrors": 32,
+      "criticalErrors": 32,
+      "errorCodes": [
+        "TS1128",
+        "TS1434",
+        "TS1005",
+        "TS1136",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "src/components/ErrorBoundaries/VideoErrorBoundary.tsx",
+      "totalErrors": 16,
+      "criticalErrors": 16,
+      "errorCodes": [
+        "TS1128",
+        "TS1434",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/components/examples/YouTubePlayerExample.tsx",
+      "totalErrors": 16,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1005",
+        "TS1135",
+        "TS1472",
+        "TS1128",
+        "TS2657",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/components/mobile/MobileVideoGrid.tsx",
+      "totalErrors": 13,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1131",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/components/mobile/MobileVideoPlayer.tsx",
+      "totalErrors": 40,
+      "criticalErrors": 36,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1136",
+        "TS1161",
+        "TS1003",
+        "TS1128",
+        "TS1127",
+        "TS1351",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/components/ModularPWAInstallBanner.tsx",
+      "totalErrors": 44,
+      "criticalErrors": 35,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS2657",
+        "TS1003",
+        "TS1109",
+        "TS17002",
+        "TS1127",
+        "TS1381",
+        "TS1382"
+      ]
+    },
+    {
+      "file": "src/components/optimized/OptimizedSearchResults.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 17,
+      "errorCodes": [
+        "TS1131",
+        "TS1382",
+        "TS17008",
+        "TS1109",
+        "TS1161",
+        "TS1005",
+        "TS1003",
+        "TS1381",
+        "TS1128",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/components/organisms/VideoGrid/VideoGrid.tsx",
+      "totalErrors": 21,
+      "criticalErrors": 21,
+      "errorCodes": [
+        "TS1003",
+        "TS1128",
+        "TS1161",
+        "TS1005",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "src/components/PWAInstallBanner.tsx",
+      "totalErrors": 41,
+      "criticalErrors": 29,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS2657"
+      ]
+    },
+    {
+      "file": "src/components/unified/UnifiedVideoCard.tsx",
+      "totalErrors": 73,
+      "criticalErrors": 66,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1003",
+        "TS1128",
+        "TS1161",
+        "TS1136",
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "src/config/pwa.ts",
+      "totalErrors": 12,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/analytics/components/AdvancedAnalyticsDashboard.tsx",
+      "totalErrors": 33,
+      "criticalErrors": 32,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1109",
+        "TS1136",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS1003"
+      ]
+    },
+    {
+      "file": "src/features/auth/components/LoginForm.tsx",
+      "totalErrors": 19,
+      "criticalErrors": 17,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/features/auth/components/RegisterForm.tsx",
+      "totalErrors": 33,
+      "criticalErrors": 31,
+      "errorCodes": [
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/auth/services/authService.ts",
+      "totalErrors": 17,
+      "criticalErrors": 17,
+      "errorCodes": [
+        "TS1434",
+        "TS1005",
+        "TS1003",
+        "TS1136",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/comments/components/CommentSection.tsx",
+      "totalErrors": 33,
+      "criticalErrors": 30,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS17002",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/features/comments/hooks/useComments.ts",
+      "totalErrors": 19,
+      "criticalErrors": 19,
+      "errorCodes": [
+        "TS1138",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/comments/services/commentService.ts",
+      "totalErrors": 15,
+      "criticalErrors": 15,
+      "errorCodes": [
+        "TS1138",
+        "TS1434",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/common/components/ErrorBoundary.tsx",
+      "totalErrors": 13,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1128",
+        "TS1434",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/common/components/Header.tsx",
+      "totalErrors": 30,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/common/components/Sidebar.tsx",
+      "totalErrors": 58,
+      "criticalErrors": 50,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1109",
+        "TS17015",
+        "TS2657",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/common/components/StudioHeader.tsx",
+      "totalErrors": 31,
+      "criticalErrors": 17,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS2657",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/common/components/StudioSidebar.tsx",
+      "totalErrors": 58,
+      "criticalErrors": 50,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS2657"
+      ]
+    },
+    {
+      "file": "src/features/community/components/CommunityPost.tsx",
+      "totalErrors": 22,
+      "criticalErrors": 16,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS2657",
+        "TS17002",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/creator/components/CreatorStudioDashboard.tsx",
+      "totalErrors": 60,
+      "criticalErrors": 59,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1109",
+        "TS2657",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17008",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/features/creator/pages/DashboardPage.tsx",
+      "totalErrors": 14,
+      "criticalErrors": 10,
+      "errorCodes": [
+        "TS1005",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/ComprehensiveLiveStudio.tsx",
+      "totalErrors": 76,
+      "criticalErrors": 60,
+      "errorCodes": [
+        "TS1005",
+        "TS1136",
+        "TS1472",
+        "TS1128",
+        "TS1134",
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1003",
+        "TS1381",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/LivePolls.tsx",
+      "totalErrors": 23,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS2657",
+        "TS1003",
+        "TS1382",
+        "TS1005",
+        "TS1381",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/LiveQA.tsx",
+      "totalErrors": 37,
+      "criticalErrors": 29,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1381",
+        "TS1128",
+        "TS1003",
+        "TS2657"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/LiveStreamStudio.tsx",
+      "totalErrors": 45,
+      "criticalErrors": 36,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382",
+        "TS17002",
+        "TS1381",
+        "TS1003",
+        "TS2657"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/StreamAnalyticsDashboard.tsx",
+      "totalErrors": 40,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS1131",
+        "TS1109",
+        "TS1005",
+        "TS1128",
+        "TS1181",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/StreamManagementDashboard.tsx",
+      "totalErrors": 16,
+      "criticalErrors": 14,
+      "errorCodes": [
+        "TS1005",
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1003",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/StreamScheduler.tsx",
+      "totalErrors": 49,
+      "criticalErrors": 41,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS2657",
+        "TS1003",
+        "TS1381",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/StreamSettings.tsx",
+      "totalErrors": 29,
+      "criticalErrors": 26,
+      "errorCodes": [
+        "TS2657",
+        "TS1003",
+        "TS1005",
+        "TS1381",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/features/livestream/components/SuperChatPanel.tsx",
+      "totalErrors": 26,
+      "criticalErrors": 22,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1381",
+        "TS1003",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/moderation/components/ModerationDashboard.tsx",
+      "totalErrors": 28,
+      "criticalErrors": 20,
+      "errorCodes": [
+        "TS1131",
+        "TS1005",
+        "TS1381",
+        "TS1382",
+        "TS17002",
+        "TS2657",
+        "TS1003",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/notifications/components/NotificationCenter.tsx",
+      "totalErrors": 22,
+      "criticalErrors": 22,
+      "errorCodes": [
+        "TS1003",
+        "TS1005",
+        "TS1434",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/features/notifications/services/notificationService.ts",
+      "totalErrors": 13,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1138",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/playlist/components/PlaylistCard.tsx",
+      "totalErrors": 57,
+      "criticalErrors": 47,
+      "errorCodes": [
+        "TS17008",
+        "TS1003",
+        "TS1382",
+        "TS1381",
+        "TS17002",
+        "TS1005",
+        "TS1128",
+        "TS1161",
+        "TS17015",
+        "TS1109",
+        "TS2657"
+      ]
+    },
+    {
+      "file": "src/features/playlist/components/PlaylistManager.tsx",
+      "totalErrors": 74,
+      "criticalErrors": 62,
+      "errorCodes": [
+        "TS17008",
+        "TS1003",
+        "TS1382",
+        "TS1005",
+        "TS1381",
+        "TS17002",
+        "TS1161",
+        "TS1109",
+        "TS2657",
+        "TS1128",
+        "TS17015",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "src/features/playlist/hooks/usePlaylists.ts",
+      "totalErrors": 13,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1138",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/playlist/services/playlistService.ts",
+      "totalErrors": 24,
+      "criticalErrors": 24,
+      "errorCodes": [
+        "TS1138",
+        "TS1434",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/search/components/AdvancedSearchFilters.tsx",
+      "totalErrors": 32,
+      "criticalErrors": 27,
+      "errorCodes": [
+        "TS1138",
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS2657",
+        "TS1381",
+        "TS1003",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/search/services/searchService.ts",
+      "totalErrors": 20,
+      "criticalErrors": 20,
+      "errorCodes": [
+        "TS1138",
+        "TS1434",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/features/subscription/components/SubscriptionButton.tsx",
+      "totalErrors": 62,
+      "criticalErrors": 58,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS2657",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/features/subscription/services/subscriptionService.ts",
+      "totalErrors": 120,
+      "criticalErrors": 118,
+      "errorCodes": [
+        "TS1434",
+        "TS1005",
+        "TS1109",
+        "TS1135",
+        "TS1011",
+        "TS1136",
+        "TS1138"
+      ]
+    },
+    {
+      "file": "src/features/video/components/StudioVideoGrid.tsx",
+      "totalErrors": 53,
+      "criticalErrors": 43,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1003",
+        "TS1381",
+        "TS1005",
+        "TS1128",
+        "TS2657",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/features/video/components/VideoCard.tsx",
+      "totalErrors": 42,
+      "criticalErrors": 27,
+      "errorCodes": [
+        "TS1382",
+        "TS17002",
+        "TS1005",
+        "TS1381",
+        "TS1128",
+        "TS2657",
+        "TS1003"
+      ]
+    },
+    {
+      "file": "src/features/video/components/VideoEditor.tsx",
+      "totalErrors": 84,
+      "criticalErrors": 74,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS2657",
+        "TS1382",
+        "TS17002",
+        "TS1003",
+        "TS1381",
+        "TS1109",
+        "TS1161"
+      ]
+    },
+    {
+      "file": "src/features/video/components/VideoPlayer.tsx",
+      "totalErrors": 35,
+      "criticalErrors": 34,
+      "errorCodes": [
+        "TS1005",
+        "TS1382",
+        "TS1128",
+        "TS1134",
+        "TS1136",
+        "TS1109",
+        "TS1434",
+        "TS1003",
+        "TS17002",
+        "TS1160"
+      ]
+    },
+    {
+      "file": "src/features/video/components/VideoUpload.tsx",
+      "totalErrors": 20,
+      "criticalErrors": 15,
+      "errorCodes": [
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS2657",
+        "TS17002",
+        "TS1109",
+        "TS1005",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/features/video/pages/SearchResultsPage.tsx",
+      "totalErrors": 45,
+      "criticalErrors": 44,
+      "errorCodes": [
+        "TS1136",
+        "TS1005",
+        "TS1472",
+        "TS1128",
+        "TS1109",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/features/video/pages/VideoDemo.tsx",
+      "totalErrors": 34,
+      "criticalErrors": 32,
+      "errorCodes": [
+        "TS1109",
+        "TS1005",
+        "TS1128",
+        "TS1003",
+        "TS1381",
+        "TS1382",
+        "TS17002"
+      ]
+    },
+    {
+      "file": "src/features/video/pages/WatchPage.tsx",
+      "totalErrors": 47,
+      "criticalErrors": 36,
+      "errorCodes": [
+        "TS1136",
+        "TS1005",
+        "TS2657",
+        "TS1109",
+        "TS1127",
+        "TS17002",
+        "TS1382",
+        "TS1003",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "src/features/video/services/videoService.ts",
+      "totalErrors": 12,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1434",
+        "TS1005",
+        "TS1472"
+      ]
+    },
+    {
+      "file": "src/hooks/legacy/root-useLiveStream.ts",
+      "totalErrors": 29,
+      "criticalErrors": 29,
+      "errorCodes": [
+        "TS1005",
+        "TS1138",
+        "TS1134",
+        "TS1128",
+        "TS1359",
+        "TS1472"
+      ]
+    },
+    {
+      "file": "src/hooks/optimizedHooks.ts",
+      "totalErrors": 33,
+      "criticalErrors": 33,
+      "errorCodes": [
+        "TS1005",
+        "TS1138",
+        "TS1003",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/hooks/unified/useApi.ts",
+      "totalErrors": 25,
+      "criticalErrors": 25,
+      "errorCodes": [
+        "TS1005",
+        "TS1434",
+        "TS1138",
+        "TS1110",
+        "TS1131",
+        "TS1144",
+        "TS1109",
+        "TS2809",
+        "TS1068",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/hooks/unifiedHooks.ts",
+      "totalErrors": 25,
+      "criticalErrors": 25,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1110",
+        "TS1131",
+        "TS1138",
+        "TS1003"
+      ]
+    },
+    {
+      "file": "src/hooks/useAnalytics.ts",
+      "totalErrors": 15,
+      "criticalErrors": 15,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1138"
+      ]
+    },
+    {
+      "file": "src/hooks/useCommon.ts",
+      "totalErrors": 67,
+      "criticalErrors": 67,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1137",
+        "TS1134",
+        "TS2809"
+      ]
+    },
+    {
+      "file": "src/hooks/useEnhancedQuery.ts",
+      "totalErrors": 15,
+      "criticalErrors": 15,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1003",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/hooks/useInstallPrompt.ts",
+      "totalErrors": 18,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/hooks/useOfflineStatus.ts",
+      "totalErrors": 12,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1134"
+      ]
+    },
+    {
+      "file": "src/hooks/usePWA.ts",
+      "totalErrors": 56,
+      "criticalErrors": 56,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1109",
+        "TS1434"
+      ]
+    },
+    {
+      "file": "src/hooks/usePWAUpdates.ts",
+      "totalErrors": 11,
+      "criticalErrors": 11,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1472"
+      ]
+    },
+    {
+      "file": "src/hooks/useRefactoredHooks.ts",
+      "totalErrors": 13,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1003"
+      ]
+    },
+    {
+      "file": "src/hooks/useServiceWorker.ts",
+      "totalErrors": 38,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1434"
+      ]
+    },
+    {
+      "file": "src/hooks/useVideoPlayer.ts",
+      "totalErrors": 25,
+      "criticalErrors": 25,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "src/hooks/useWatchPage.ts",
+      "totalErrors": 23,
+      "criticalErrors": 22,
+      "errorCodes": [
+        "TS1005",
+        "TS1472",
+        "TS1109",
+        "TS1134",
+        "TS1128",
+        "TS1011"
+      ]
+    },
+    {
+      "file": "src/lib/youtube-utils.ts",
+      "totalErrors": 68,
+      "criticalErrors": 68,
+      "errorCodes": [
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1136",
+        "TS1068",
+        "TS1138",
+        "TS1472"
+      ]
+    },
+    {
+      "file": "src/services/api/base.ts",
+      "totalErrors": 18,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS1138",
+        "TS1068",
+        "TS1128",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/services/api/videos.ts",
+      "totalErrors": 20,
+      "criticalErrors": 20,
+      "errorCodes": [
+        "TS1138",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/services/livestreamAPI.ts",
+      "totalErrors": 39,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS1005",
+        "TS1011",
+        "TS1128",
+        "TS1138"
+      ]
+    },
+    {
+      "file": "src/services/metadataNormalizationService.ts",
+      "totalErrors": 38,
+      "criticalErrors": 37,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1434",
+        "TS1135",
+        "TS1011",
+        "TS1359",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/services/unifiedDataService.ts",
+      "totalErrors": 43,
+      "criticalErrors": 43,
+      "errorCodes": [
+        "TS1005",
+        "TS1472",
+        "TS1434",
+        "TS1136",
+        "TS1135",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/types/errors.ts",
+      "totalErrors": 38,
+      "criticalErrors": 38,
+      "errorCodes": [
+        "TS1110",
+        "TS1109",
+        "TS1128",
+        "TS1131",
+        "TS1005",
+        "TS1181"
+      ]
+    },
+    {
+      "file": "src/utils/componentUtils.tsx",
+      "totalErrors": 28,
+      "criticalErrors": 28,
+      "errorCodes": [
+        "TS17008",
+        "TS1382",
+        "TS1109",
+        "TS1381",
+        "TS1003",
+        "TS1005"
+      ]
+    },
+    {
+      "file": "src/utils/conditionalLogger.ts",
+      "totalErrors": 50,
+      "criticalErrors": 50,
+      "errorCodes": [
+        "TS1138",
+        "TS1109",
+        "TS1005",
+        "TS1136",
+        "TS1128",
+        "TS1068"
+      ]
+    },
+    {
+      "file": "src/utils/logger.ts",
+      "totalErrors": 32,
+      "criticalErrors": 29,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1011",
+        "TS1003",
+        "TS1136",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/utils/offlineStorage.ts",
+      "totalErrors": 21,
+      "criticalErrors": 21,
+      "errorCodes": [
+        "TS1005",
+        "TS1138",
+        "TS1135",
+        "TS1434",
+        "TS1003",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/utils/performanceOptimizations.ts",
+      "totalErrors": 35,
+      "criticalErrors": 35,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1109",
+        "TS1434",
+        "TS1134",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "src/utils/pwa.ts",
+      "totalErrors": 79,
+      "criticalErrors": 79,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1434",
+        "TS1003",
+        "TS1136",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "src/utils/pwaAnalytics.ts",
+      "totalErrors": 57,
+      "criticalErrors": 56,
+      "errorCodes": [
+        "TS1005",
+        "TS1011",
+        "TS1434",
+        "TS1109",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "src/utils/testingHelpers.tsx",
+      "totalErrors": 124,
+      "criticalErrors": 124,
+      "errorCodes": [
+        "TS1109",
+        "TS1005",
+        "TS1134",
+        "TS1180",
+        "TS1128",
+        "TS17008",
+        "TS1382",
+        "TS1381"
+      ]
+    },
+    {
+      "file": "store/index.ts",
+      "totalErrors": 21,
+      "criticalErrors": 21,
+      "errorCodes": [
+        "TS1005",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "stores/storeUtils.ts",
+      "totalErrors": 19,
+      "criticalErrors": 19,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1359",
+        "TS1136",
+        "TS1128",
+        "TS1068",
+        "TS1434"
+      ]
+    },
+    {
+      "file": "test/hooks/useVideos.test.tsx",
+      "totalErrors": 18,
+      "criticalErrors": 18,
+      "errorCodes": [
+        "TS1005"
+      ]
+    },
+    {
+      "file": "test/test-utils.tsx",
+      "totalErrors": 12,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1005",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "tests/examples/integration.test.tsx",
+      "totalErrors": 13,
+      "criticalErrors": 13,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1382",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "tests/examples/VideoDescription.test.tsx",
+      "totalErrors": 225,
+      "criticalErrors": 225,
+      "errorCodes": [
+        "TS1005",
+        "TS1136",
+        "TS1161",
+        "TS1128",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "tests/setup.ts",
+      "totalErrors": 16,
+      "criticalErrors": 16,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1138",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "utils/accessibilityUtils.tsx",
+      "totalErrors": 31,
+      "criticalErrors": 31,
+      "errorCodes": [
+        "TS1136",
+        "TS1109",
+        "TS1003",
+        "TS1128",
+        "TS1005",
+        "TS1131",
+        "TS1134"
+      ]
+    },
+    {
+      "file": "utils/advancedMonitoring.ts",
+      "totalErrors": 216,
+      "criticalErrors": 215,
+      "errorCodes": [
+        "TS1005",
+        "TS1003",
+        "TS1136",
+        "TS1434",
+        "TS1068",
+        "TS1128",
+        "TS1109",
+        "TS1011",
+        "TS1472",
+        "TS1138",
+        "TS1359"
+      ]
+    },
+    {
+      "file": "utils/codeAnalysisEngine.ts",
+      "totalErrors": 61,
+      "criticalErrors": 59,
+      "errorCodes": [
+        "TS1434",
+        "TS1005",
+        "TS1011",
+        "TS1109",
+        "TS1128",
+        "TS1068"
+      ]
+    },
+    {
+      "file": "utils/componentOptimization.tsx",
+      "totalErrors": 28,
+      "criticalErrors": 26,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1128",
+        "TS1434",
+        "TS1382",
+        "TS17002",
+        "TS1161",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "utils/componentOptimizations.ts",
+      "totalErrors": 25,
+      "criticalErrors": 25,
+      "errorCodes": [
+        "TS1138",
+        "TS1005",
+        "TS1136",
+        "TS1128",
+        "TS1109",
+        "TS1131"
+      ]
+    },
+    {
+      "file": "utils/componentUtils.tsx",
+      "totalErrors": 24,
+      "criticalErrors": 24,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1109"
+      ]
+    },
+    {
+      "file": "utils/deploymentAutomation.ts",
+      "totalErrors": 41,
+      "criticalErrors": 39,
+      "errorCodes": [
+        "TS1005",
+        "TS1136",
+        "TS1128",
+        "TS1138",
+        "TS1472",
+        "TS1011",
+        "TS1434",
+        "TS1109",
+        "TS1003",
+        "TS1359"
+      ]
+    },
+    {
+      "file": "utils/developmentWorkflow.ts",
+      "totalErrors": 87,
+      "criticalErrors": 80,
+      "errorCodes": [
+        "TS1434",
+        "TS1005",
+        "TS1003",
+        "TS1136",
+        "TS1011",
+        "TS1109",
+        "TS1128"
+      ]
+    },
+    {
+      "file": "utils/featureFlagSystem.ts",
+      "totalErrors": 185,
+      "criticalErrors": 182,
+      "errorCodes": [
+        "TS1005",
+        "TS1136",
+        "TS1068",
+        "TS1128",
+        "TS1109",
+        "TS1434",
+        "TS1011",
+        "TS1003",
+        "TS1138"
+      ]
+    },
+    {
+      "file": "utils/imageUtils.ts",
+      "totalErrors": 26,
+      "criticalErrors": 26,
+      "errorCodes": [
+        "TS1109",
+        "TS1005",
+        "TS1128",
+        "TS1134"
+      ]
+    },
+    {
+      "file": "utils/intelligentCodeMonitor.ts",
+      "totalErrors": 32,
+      "criticalErrors": 27,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1011",
+        "TS1434",
+        "TS1109",
+        "TS1136"
+      ]
+    },
+    {
+      "file": "utils/performance.ts",
+      "totalErrors": 26,
+      "criticalErrors": 26,
+      "errorCodes": [
+        "TS1128",
+        "TS1109",
+        "TS1005",
+        "TS1003",
+        "TS1136",
+        "TS1359",
+        "TS1068",
+        "TS1138"
+      ]
+    },
+    {
+      "file": "utils/performanceMonitor.ts",
+      "totalErrors": 12,
+      "criticalErrors": 12,
+      "errorCodes": [
+        "TS1005",
+        "TS1128",
+        "TS1068",
+        "TS1138"
+      ]
+    },
+    {
+      "file": "utils/performanceOptimizations.ts",
+      "totalErrors": 109,
+      "criticalErrors": 109,
+      "errorCodes": [
+        "TS1136",
+        "TS1005",
+        "TS1109",
+        "TS1128",
+        "TS1359",
+        "TS1138",
+        "TS1131",
+        "TS1003"
+      ]
+    },
+    {
+      "file": "utils/securityMonitoring.ts",
+      "totalErrors": 21,
+      "criticalErrors": 16,
+      "errorCodes": [
+        "TS1128",
+        "TS1005",
+        "TS1138",
+        "TS1011"
+      ]
+    }
+  ],
+  "topErrorFiles": [
+    {
+      "file": "tests/examples/VideoDescription.test.tsx",
+      "count": 225
+    },
+    {
+      "file": "utils/advancedMonitoring.ts",
+      "count": 216
+    },
+    {
+      "file": "utils/featureFlagSystem.ts",
+      "count": 185
+    },
+    {
+      "file": "pages/AdminPage.tsx",
+      "count": 167
+    },
+    {
+      "file": "components/DeveloperDashboard.tsx",
+      "count": 131
+    },
+    {
+      "file": "src/utils/testingHelpers.tsx",
+      "count": 124
+    },
+    {
+      "file": "scripts/typescript-error-orchestrator.js",
+      "count": 122
+    },
+    {
+      "file": "src/features/subscription/services/subscriptionService.ts",
+      "count": 120
+    },
+    {
+      "file": "utils/performanceOptimizations.ts",
+      "count": 109
+    },
+    {
+      "file": "components/DevOpsDashboard.tsx",
+      "count": 108
+    },
+    {
+      "file": "utils/developmentWorkflow.ts",
+      "count": 87
+    },
+    {
+      "file": "src/features/video/components/VideoEditor.tsx",
+      "count": 84
+    },
+    {
+      "file": "services/analyticsService.ts",
+      "count": 82
+    },
+    {
+      "file": "components/OptimizedVideoCard.tsx",
+      "count": 81
+    },
+    {
+      "file": "src/utils/pwa.ts",
+      "count": 79
+    },
+    {
+      "file": "src/features/livestream/components/ComprehensiveLiveStudio.tsx",
+      "count": 76
+    },
+    {
+      "file": "components/CommentsSection.tsx",
+      "count": 75
+    },
+    {
+      "file": "src/features/playlist/components/PlaylistManager.tsx",
+      "count": 74
+    },
+    {
+      "file": "src/components/unified/UnifiedVideoCard.tsx",
+      "count": 73
+    },
+    {
+      "file": "src/lib/youtube-utils.ts",
+      "count": 68
+    }
+  ],
+  "errorCategories": {
+    "critical": 7057,
+    "high": 498,
+    "medium": 165
+  },
+  "commonErrors": [
+    {
+      "error": "TS1005: ',' expected....",
+      "count": 1465
+    },
+    {
+      "error": "TS1005: ';' expected....",
+      "count": 903
+    },
+    {
+      "error": "TS1128: Declaration or statement expected....",
+      "count": 878
+    },
+    {
+      "error": "TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?...",
+      "count": 816
+    },
+    {
+      "error": "TS1109: Expression expected....",
+      "count": 620
+    },
+    {
+      "error": "TS17002: Expected corresponding JSX closing tag for 'div'....",
+      "count": 413
+    },
+    {
+      "error": "TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace...",
+      "count": 381
+    },
+    {
+      "error": "TS1005: ')' expected....",
+      "count": 275
+    },
+    {
+      "error": "TS1005: ':' expected....",
+      "count": 272
+    },
+    {
+      "error": "TS1005: '}' expected....",
+      "count": 257
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "action": "DELETE_CORRUPTED_FILES",
+      "description": "Delete 190 severely corrupted files",
+      "files": [
+        "components/BaseForm.tsx",
+        "components/BaseModal.tsx",
+        "components/ChannelHeader.tsx",
+        "components/ChannelTabs.tsx",
+        "components/CommentsSection.tsx",
+        "components/CommunityPosts.tsx",
+        "components/DeveloperDashboard.tsx",
+        "components/DevOpsDashboard.tsx",
+        "components/EnhancedCommentSystem.tsx",
+        "components/EnhancedVideoUpload.tsx",
+        "components/EnhancedYouTubeVideoCard.tsx",
+        "components/forms/UnifiedFormSystem.tsx",
+        "components/LiveStreamManager.tsx",
+        "components/ModerationDashboard.tsx",
+        "components/NotificationCenter.tsx",
+        "components/NotificationSystem.tsx",
+        "components/OptimizedSearchResults.tsx",
+        "components/OptimizedVideoCard.tsx",
+        "components/PerformanceDashboard.tsx",
+        "components/PictureInPicture.tsx",
+        "components/RefactoredSaveToPlaylistModal.tsx",
+        "components/RefactoredVideoDescription.tsx",
+        "components/SearchBar.tsx",
+        "components/ShortDisplayCard.tsx",
+        "components/ShortsFilters.tsx",
+        "components/ShortsPlayer.tsx",
+        "components/SimpleHoverVideoCard.tsx",
+        "components/SortFilterPanel.tsx",
+        "components/SubscriptionManager.tsx",
+        "components/SubscriptionsPage.tsx",
+        "components/ui/Button.tsx",
+        "components/ui/DropdownMenu.tsx",
+        "components/ui/FileUpload.tsx",
+        "components/ui/FormComponents.tsx",
+        "components/ui/LoadingStates.tsx",
+        "components/ui/UnifiedComponents.tsx",
+        "components/video/VideoControls.tsx",
+        "components/video/VideoSettings.tsx",
+        "components/VideoActions.tsx",
+        "components/VideoAnalytics.tsx",
+        "components/VideoAnalyticsDashboard.tsx",
+        "components/VideoEditor.tsx",
+        "components/VirtualizedVideoGrid.tsx",
+        "components/YouTubePlayer.tsx",
+        "config/codeQuality.ts",
+        "contexts/UnifiedAppContext.broken.tsx",
+        "pages/AdminPage.tsx",
+        "pages/AnalyticsPage.tsx",
+        "pages/ChannelCustomizationPage.tsx",
+        "pages/CommentModerationPage.tsx",
+        "pages/CommunityPage.tsx",
+        "pages/ContentManagerPage.tsx",
+        "pages/CreatorStudioPage.tsx",
+        "pages/LibraryPage.tsx",
+        "pages/MonetizationPage.tsx",
+        "pages/PlaylistDetailPage.tsx",
+        "pages/PlaylistManagerPage.tsx",
+        "pages/RefactoredContentManagerPage.tsx",
+        "pages/SearchResultsPage.tsx",
+        "pages/SettingsPage.tsx",
+        "pages/ShortsPage.tsx",
+        "pages/SubscriptionsPage.tsx",
+        "pages/TrendingPage.tsx",
+        "pages/UploadPage.tsx",
+        "pages/UserPage.tsx",
+        "pages/VideoEditorPage.tsx",
+        "pages/VideoUploadPage.tsx",
+        "pages/WatchPage.tsx",
+        "pages/YourDataPage.tsx",
+        "scripts/typescript-error-orchestrator.js",
+        "services/analyticsService.ts",
+        "services/api.ts",
+        "services/apiService.ts",
+        "services/errorService.ts",
+        "services/googleSearchService.ts",
+        "services/googleSearchVideoStore.ts",
+        "services/livestreamAPI.ts",
+        "services/realVideoService.ts",
+        "services/unifiedApiService.ts",
+        "services/youtubeSearchService.ts",
+        "src/components/atoms/Button/Button.tsx",
+        "src/components/EnhancedPWAInstallBanner.tsx",
+        "src/components/ErrorBoundaries/DataFetchErrorBoundary.tsx",
+        "src/components/ErrorBoundaries/LiveStreamErrorBoundary.tsx",
+        "src/components/ErrorBoundaries/VideoErrorBoundary.tsx",
+        "src/components/examples/YouTubePlayerExample.tsx",
+        "src/components/mobile/MobileVideoGrid.tsx",
+        "src/components/mobile/MobileVideoPlayer.tsx",
+        "src/components/ModularPWAInstallBanner.tsx",
+        "src/components/optimized/OptimizedSearchResults.tsx",
+        "src/components/organisms/VideoGrid/VideoGrid.tsx",
+        "src/components/PWAInstallBanner.tsx",
+        "src/components/unified/UnifiedVideoCard.tsx",
+        "src/config/pwa.ts",
+        "src/features/analytics/components/AdvancedAnalyticsDashboard.tsx",
+        "src/features/auth/components/LoginForm.tsx",
+        "src/features/auth/components/RegisterForm.tsx",
+        "src/features/auth/services/authService.ts",
+        "src/features/comments/components/CommentSection.tsx",
+        "src/features/comments/hooks/useComments.ts",
+        "src/features/comments/services/commentService.ts",
+        "src/features/common/components/ErrorBoundary.tsx",
+        "src/features/common/components/Header.tsx",
+        "src/features/common/components/Sidebar.tsx",
+        "src/features/common/components/StudioHeader.tsx",
+        "src/features/common/components/StudioSidebar.tsx",
+        "src/features/community/components/CommunityPost.tsx",
+        "src/features/creator/components/CreatorStudioDashboard.tsx",
+        "src/features/creator/pages/DashboardPage.tsx",
+        "src/features/livestream/components/ComprehensiveLiveStudio.tsx",
+        "src/features/livestream/components/LivePolls.tsx",
+        "src/features/livestream/components/LiveQA.tsx",
+        "src/features/livestream/components/LiveStreamStudio.tsx",
+        "src/features/livestream/components/StreamAnalyticsDashboard.tsx",
+        "src/features/livestream/components/StreamManagementDashboard.tsx",
+        "src/features/livestream/components/StreamScheduler.tsx",
+        "src/features/livestream/components/StreamSettings.tsx",
+        "src/features/livestream/components/SuperChatPanel.tsx",
+        "src/features/moderation/components/ModerationDashboard.tsx",
+        "src/features/notifications/components/NotificationCenter.tsx",
+        "src/features/notifications/services/notificationService.ts",
+        "src/features/playlist/components/PlaylistCard.tsx",
+        "src/features/playlist/components/PlaylistManager.tsx",
+        "src/features/playlist/hooks/usePlaylists.ts",
+        "src/features/playlist/services/playlistService.ts",
+        "src/features/search/components/AdvancedSearchFilters.tsx",
+        "src/features/search/services/searchService.ts",
+        "src/features/subscription/components/SubscriptionButton.tsx",
+        "src/features/subscription/services/subscriptionService.ts",
+        "src/features/video/components/StudioVideoGrid.tsx",
+        "src/features/video/components/VideoCard.tsx",
+        "src/features/video/components/VideoEditor.tsx",
+        "src/features/video/components/VideoPlayer.tsx",
+        "src/features/video/components/VideoUpload.tsx",
+        "src/features/video/pages/SearchResultsPage.tsx",
+        "src/features/video/pages/VideoDemo.tsx",
+        "src/features/video/pages/WatchPage.tsx",
+        "src/features/video/services/videoService.ts",
+        "src/hooks/legacy/root-useLiveStream.ts",
+        "src/hooks/optimizedHooks.ts",
+        "src/hooks/unified/useApi.ts",
+        "src/hooks/unifiedHooks.ts",
+        "src/hooks/useAnalytics.ts",
+        "src/hooks/useCommon.ts",
+        "src/hooks/useEnhancedQuery.ts",
+        "src/hooks/useInstallPrompt.ts",
+        "src/hooks/useOfflineStatus.ts",
+        "src/hooks/usePWA.ts",
+        "src/hooks/usePWAUpdates.ts",
+        "src/hooks/useRefactoredHooks.ts",
+        "src/hooks/useServiceWorker.ts",
+        "src/hooks/useVideoPlayer.ts",
+        "src/hooks/useWatchPage.ts",
+        "src/lib/youtube-utils.ts",
+        "src/services/api/base.ts",
+        "src/services/api/videos.ts",
+        "src/services/livestreamAPI.ts",
+        "src/services/metadataNormalizationService.ts",
+        "src/services/unifiedDataService.ts",
+        "src/types/errors.ts",
+        "src/utils/componentUtils.tsx",
+        "src/utils/conditionalLogger.ts",
+        "src/utils/logger.ts",
+        "src/utils/offlineStorage.ts",
+        "src/utils/performanceOptimizations.ts",
+        "src/utils/pwa.ts",
+        "src/utils/pwaAnalytics.ts",
+        "src/utils/testingHelpers.tsx",
+        "store/index.ts",
+        "stores/storeUtils.ts",
+        "test/hooks/useVideos.test.tsx",
+        "test/test-utils.tsx",
+        "tests/examples/integration.test.tsx",
+        "tests/examples/VideoDescription.test.tsx",
+        "tests/setup.ts",
+        "utils/accessibilityUtils.tsx",
+        "utils/advancedMonitoring.ts",
+        "utils/codeAnalysisEngine.ts",
+        "utils/componentOptimization.tsx",
+        "utils/componentOptimizations.ts",
+        "utils/componentUtils.tsx",
+        "utils/deploymentAutomation.ts",
+        "utils/developmentWorkflow.ts",
+        "utils/featureFlagSystem.ts",
+        "utils/imageUtils.ts",
+        "utils/intelligentCodeMonitor.ts",
+        "utils/performance.ts",
+        "utils/performanceMonitor.ts",
+        "utils/performanceOptimizations.ts",
+        "utils/securityMonitoring.ts"
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "action": "FIX_JSX_STRUCTURE",
+      "description": "Fix 666 JSX structure errors",
+      "count": 666
+    },
+    {
+      "priority": "HIGH",
+      "action": "FIX_SYNTAX_ERRORS",
+      "description": "Fix 6910 syntax errors",
+      "count": 6910
+    }
+  ]
+}
