@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 interface ErrorBoundaryState {
  hasError: boolean;
- error?: Error | null;
- errorInfo?: React.ErrorInfo | null;
+ error?: Error;
+ errorInfo?: React.ErrorInfo;
 }
 
 interface ErrorBoundaryProps {
@@ -44,10 +44,10 @@ class ErrorBoundary extends React.Component<
   }
 
  resetError = () => {
-    this.setState({ hasError: false, error: null, errorInfo: null });
+     this.setState({ hasError: false });
   };
 
- render() {
+ override render() {
  if (this.state.hasError) {
  if (this.props.fallback) {
  const FallbackComponent = this.props.fallback;
