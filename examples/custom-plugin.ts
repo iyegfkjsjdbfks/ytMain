@@ -18,7 +18,7 @@ import { Logger } from '../src/error-resolution/utils/Logger';
  * - Missing key props in lists
  * - Hook dependency issues
  */
-export class ReactErrorGenerator extends BaseScriptGenerator {
+export abstract class ReactErrorGenerator extends BaseScriptGenerator {
   constructor(logger?: Logger) {
     super(logger?.toString() || '');
   }
@@ -41,6 +41,7 @@ export class ReactErrorGenerator extends BaseScriptGenerator {
       id: 'missing-react-import',
       name: 'Add Missing React Import',
       description: 'Add React import for JSX usage',
+      parameters: [],
       // pattern: /JSX element .* requires React/i,
       commands: [{
         type: 'insert',
@@ -62,6 +63,7 @@ export class ReactErrorGenerator extends BaseScriptGenerator {
       id: 'missing-key-prop',
       name: 'Add Missing Key Prop',
       description: 'Add key prop to JSX elements in arrays',
+      parameters: [],
       pattern: /Warning: Each child in a list should have a unique "key" prop/i,
       commands: [{
         type: 'replace',
@@ -83,6 +85,7 @@ export class ReactErrorGenerator extends BaseScriptGenerator {
       id: 'prop-type-mismatch',
       name: 'Fix Prop Type Mismatch',
       description: 'Fix TypeScript prop type mismatches',
+      parameters: [],
       pattern: /Type .* is not assignable to type .* of property/i,
       commands: [{
         type: 'replace',
@@ -104,6 +107,7 @@ export class ReactErrorGenerator extends BaseScriptGenerator {
       id: 'hook-dependency',
       name: 'Fix Hook Dependencies',
       description: 'Add missing dependencies to React hooks',
+      parameters: [],
       pattern: /React Hook .* has a missing dependency/i,
       commands: [{
         type: 'replace',
@@ -188,7 +192,7 @@ export class ReactErrorGenerator extends BaseScriptGenerator {
  * - Incorrect response type handling
  * - Missing error handling for API calls
  */
-export class APIErrorGenerator extends BaseScriptGenerator {
+export abstract class APIErrorGenerator extends BaseScriptGenerator {
   constructor(logger?: Logger) {
     super(logger?.toString() || '');
   }
@@ -207,6 +211,7 @@ export class APIErrorGenerator extends BaseScriptGenerator {
       id: 'missing-await',
       name: 'Add Missing Await',
       description: 'Add await keyword for Promise-returning functions',
+      parameters: [],
       pattern: /Type 'Promise<.*>' is not assignable to type/i,
       commands: [{
         type: 'replace',
@@ -228,6 +233,7 @@ export class APIErrorGenerator extends BaseScriptGenerator {
       id: 'missing-error-handling',
       name: 'Add Error Handling',
       description: 'Add try-catch block for API calls',
+      parameters: [],
       pattern: /Unhandled promise rejection/i,
       commands: [{
         type: 'replace',
@@ -353,7 +359,7 @@ export async function useCustomPlugins() {
     rollbackOnFailure: true,
     continueOnValidationFailure: false,
     generateReports: true,
-    reportFormats: ['json', 'html'] as const
+    reportFormats: ['json', 'html'] as Array<'json' | 'html'>
   };
   
   try {

@@ -65,7 +65,7 @@ async function advancedWorkflow() {
     rollbackOnFailure: true,
     continueOnValidationFailure: false,
     generateReports: true,
-    reportFormats: ['json', 'html', 'markdown'] as const
+    reportFormats: ['json', 'html', 'markdown'] as Array<'json' | 'html' | 'markdown'>
   };
 
   try {

@@ -9,7 +9,7 @@ interface ErrorBoundaryProps {
  children: React.ReactNode;
  fallback?: React.ComponentType<{ error?: Error; resetError: () => void }>;
  onError?: (error: Error,
- errorInfo: React.ErrorInfo) => void
+ errorInfo: React.ErrorInfo) => void;
 }
 
 class ErrorBoundary extends React.Component<
@@ -18,28 +18,36 @@ class ErrorBoundary extends React.Component<
 > {
  constructor(props: ErrorBoundaryProps) {
  super(props);
- this.state = { hasError: false }
+ this.state = { hasError: false };
+ }
+
  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
  return {
  hasError: true,
- error }
+ error,
+    };
+  }
+
  componentDidCatch(error: Error,
  errorInfo: React.ErrorInfo) {
  this.setState({
  error,
- errorInfo });
+ errorInfo,
+    });
 
  // Log error
- (console as any).error('Error caught by boundary:', error, errorInfo);
+    (console as any).error('Error caught by boundary:', error, errorInfo);
 
  // Call custom error handler
  if (this.props.onError) {
  this.props.onError(error, errorInfo);
- }
+    }
+  }
+
  resetError = () => {
  this.setState({ hasError: false,
  error: undefined, errorInfo: undefined });
- };
+  };
 
  render() {
  if (this.state.hasError) {
@@ -48,10 +56,10 @@ class ErrorBoundary extends React.Component<
  return (
  <FallbackComponent
  error={this.state.error}
- resetError={this.resetError} />
+ resetError={this.resetError}
  />
  );
- }
+      }
 
  return (
  <div className='error-boundary'>
@@ -60,12 +68,14 @@ class ErrorBoundary extends React.Component<
  <summary>Error details</summary>
  <pre>{this.state.error?.message}</pre>
  <pre>{this.state.error?.stack}</pre>
-// FIXED:  </details>
+ </details>
  <button onClick={this.resetError}>Try again</button>
-// FIXED:  </div>
+ </div>
  );
- }
+    }
 
  return this.props.children;
- }
+  }
+}
+
 export default ErrorBoundary;
