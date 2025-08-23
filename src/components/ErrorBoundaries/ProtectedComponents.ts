@@ -1,10 +1,10 @@
 // Re-export all protected components for easy access
-export { default as ProtectedLiveStreamViewer } from '../../features/livestream/components/ProtectedLiveStreamViewer';
-export { default as ProtectedStreamAnalyticsDashboard } from '../../features/livestream/components/ProtectedStreamAnalyticsDashboard';
-export { default as ProtectedYouTubePlayer } from '../../../components/ProtectedYouTubePlayer';
-export { default as ProtectedVideoPlayer } from '../../features/video/components/ProtectedVideoPlayer';
-export { default as ProtectedWatchPage } from '../../features/video/pages/ProtectedWatchPage';
-export { default as ProtectedSearchResultsPage } from '../../features/video/pages/ProtectedSearchResultsPage';
+export { default as ProtectedLiveStreamViewer } from '../src/../features/livestream/components/ProtectedLiveStreamViewer';
+export { default as ProtectedStreamAnalyticsDashboard } from '../src/../features/livestream/components/ProtectedStreamAnalyticsDashboard';
+export { default as ProtectedYouTubePlayer } from '../src/../../components/ProtectedYouTubePlayer';
+export { default as ProtectedVideoPlayer } from '../src/../features/video/components/ProtectedVideoPlayer';
+export { default as ProtectedWatchPage } from '../src/../features/video/pages/ProtectedWatchPage';
+export { default as ProtectedSearchResultsPage } from '../src/../features/video/pages/ProtectedSearchResultsPage';
 
 // Type exports for protected components
 // Note: These types should be defined in their respective component files

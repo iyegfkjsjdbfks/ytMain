@@ -1,8 +1,8 @@
-import type { Video } from '@/types';
+import type { Video } from './types';
 import React from 'react';
-import { cn } from '@/lib/utils';
-import { VideoCard } from '@/components/molecules/VideoCard';
-import type { VideoGridProps as VideoGridPropsBase } from '@/types';
+import { cn } from './lib/utils';
+import { VideoCard } from './components/molecules/VideoCard';
+import type { VideoGridProps as VideoGridPropsBase } from './types';
 
 export interface VideoGridProps extends Omit<VideoGridPropsBase, 'onVideoMoreClick'> {
   videos: Video[];

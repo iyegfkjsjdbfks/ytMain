@@ -1,4 +1,4 @@
-import type { Video } from 'index.ts';
+import type { Video } from 'index';
 
 export interface VideoItem {
  id: string;

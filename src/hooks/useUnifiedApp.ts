@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UnifiedAppContext } from '../../contexts/UnifiedAppContext.tsx';
+import { UnifiedAppContext } from '../src/../contexts/UnifiedAppContext';
 
 export const useUnifiedApp = () => {
   const context = useContext(UnifiedAppContext);

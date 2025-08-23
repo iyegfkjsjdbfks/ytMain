@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import StudioHeader from 'StudioHeader.tsx';
-import StudioSidebar from 'StudioSidebar.tsx';
+import StudioHeader from 'StudioHeader';
+import StudioSidebar from 'StudioSidebar';
 
 /**
  * Studio layout component for the YouTube Studio section

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { RegisterForm } from '../components/RegisterForm.tsx';
+import { RegisterForm } from '../src/components/RegisterForm';
 
 /**
  * Registration page component

@@ -1,9 +1,10 @@
+import React from 'react';
 import { create } from 'zustand';
 
-import { authService } from '../services/authService.ts';
+import { authService } from '../src/services/authService';
 
-import { logger } from '../../../utils/logger.ts';
-import type { AuthState, LoginCredentials, RegisterData, User } from '../types/index.ts';
+import { logger } from '../src/../../utils/logger';
+import type { AuthState, LoginCredentials, RegisterData, User } from '../src/types/index';
 
 interface AuthStore extends AuthState {
  login: (credentials: LoginCredentials) => Promise<User>;

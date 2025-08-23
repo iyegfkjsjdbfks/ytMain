@@ -1,8 +1,8 @@
 import React, { useCallback, FC } from 'react';
-import { logger } from '@/utils/conditionalLogger';
+import { logger } from './utils/conditionalLogger';
 
-import { LiveStreamErrorBoundary } from '@/components/ErrorBoundaries';
-import LiveStreamViewer from 'LiveStreamViewer.tsx';
+import { LiveStreamErrorBoundary } from './components/ErrorBoundaries';
+import LiveStreamViewer from 'LiveStreamViewer';
 
 interface ProtectedLiveStreamViewerProps {
  streamId: string;

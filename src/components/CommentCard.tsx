@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { ThumbsUpIcon, ThumbsDownIcon } from './icons';
-import { Comment } from '../../types';
+import { Comment } from '../src/../types';
 
 interface CommentCardProps {
   comment: Comment;

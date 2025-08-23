@@ -1,9 +1,9 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import { FixedSizeGrid as Grid } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import { Video } from '../../types/video';
-import EnhancedYouTubeVideoCard from '../EnhancedYouTubeVideoCard';
-import { useMobileDetection } from '../../hooks/useMobileDetection';
+import { Video } from '../src/../types/video';
+import EnhancedYouTubeVideoCard from '../src/EnhancedYouTubeVideoCard';
+import { useMobileDetection } from '../src/../hooks/useMobileDetection';
 
 interface MobileVideoGridProps {
   videos: Video[];

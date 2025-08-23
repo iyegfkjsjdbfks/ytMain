@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MoreVertical, User } from 'lucide-react';
-import { Button } from '@/components/atoms/Button/Button';
-import { cn } from '@/lib/utils';
-import { formatNumber, getTimeAgo } from '@/lib/utils';
-import { Video } from '@/types';
+import { Button } from './components/atoms/Button/Button';
+import { cn } from './lib/utils';
+import { formatNumber, getTimeAgo } from './lib/utils';
+import { Video } from './types';
 
 // Simple image component since we're not using Next.js
 const Image = ({

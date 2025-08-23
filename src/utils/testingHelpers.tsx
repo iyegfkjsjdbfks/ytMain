@@ -1,5 +1,5 @@
 import React, { ReactNode, ReactElement } from 'react';
-import type { Channel, Comment, Video } from '../types/index';
+import type { Channel, Comment, Video } from '../src/types/index';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';

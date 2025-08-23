@@ -1,7 +1,7 @@
 import React, { ReactNode, Component, ErrorInfo } from 'react';
 import { SignalSlashIcon, ArrowPathIcon, HomeIcon } from '@heroicons/react/24/outline';
-import { createComponentError } from '../../utils/errorUtils';
-import { logger } from '../../utils/conditionalLogger';
+import { createComponentError } from '../src/../utils/errorUtils';
+import { logger } from '../src/../utils/conditionalLogger';
 
 export interface LiveStreamErrorBoundaryProps {
   children?: React.ReactNode;

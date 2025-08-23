@@ -1,6 +1,7 @@
+import React from 'react';
 // Import and re-export VideoVisibility type
-import type { Video } from '../types';
-import type { VideoVisibility } from 'src/types/core.ts';
+import type { Video } from '../src/types';
+import type { VideoVisibility } from 'src/types/core';
 
 export type { VideoVisibility };
 

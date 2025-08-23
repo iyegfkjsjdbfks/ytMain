@@ -1,5 +1,6 @@
+import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
-import type { LivePoll, QAQuestion } from '@/types/livestream';
+import type { LivePoll, QAQuestion } from './types/livestream';
 
 // Import statement fixed
 //

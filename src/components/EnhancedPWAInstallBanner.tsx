@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useCallback, useState, FC } from 'react';
 import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
-import { createComponentError } from '@/utils/errorUtils';
-import { logger } from '../utils/conditionalLogger';
-import { pwa } from '../config/pwa';
-import { usePWA } from '../hooks/usePWA';
+import { createComponentError } from './utils/errorUtils';
+import { logger } from '../src/utils/conditionalLogger';
+import { pwa } from '../src/config/pwa';
+import { usePWA } from '../src/hooks/usePWA';
 
 export interface EnhancedPWAInstallBannerProps {
   onDismiss?: () => void;
