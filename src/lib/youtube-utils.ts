@@ -1,4 +1,4 @@
-// youtube-utils - Clean Implementation
+// youtube-utils - Generic Implementation
 export interface youtube-utilsConfig {
   enabled?: boolean;
 }
@@ -22,7 +22,6 @@ export class Youtube-utils {
     }
 
     try {
-      // Process the data
       return {
         ...data,
         processed: true,

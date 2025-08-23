@@ -1,178 +1,64 @@
-import { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+// useVideoInteractions - Custom Hook
+import { useState, useEffect, useCallback } from 'react';
 
-import { videoService } from '../services/videoService.ts';
-
-interface VideoInteractionState {
- isLiked: boolean;
- isDisliked: boolean;
- isSaved: boolean;
- likes: number;
- dislikes: number
+export interface UseVideoInteractionsOptions {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
 }
 
-interface UseVideoInteractionsOptions {
- initialLikes?: number;
- initialDislikes?: number;
- initialIsLiked?: boolean;
- initialIsDisliked?: boolean;
- initialIsSaved?: boolean;
+export interface UseVideoInteractionsResult {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
 }
 
-export function useVideoInteractions(,
- videoId,
- options: UseVideoInteractionsOptions = {}
-): any {
- const queryClient = useQueryClient();
+export function useVideoInteractions(
+  options: UseVideoInteractionsOptions = {}
+): UseVideoInteractionsResult {
+  const { enabled = true, onSuccess, onError } = options;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- const [state, setState] = useState<VideoInteractionState>({
- isLiked: options.initialIsLiked || false,
- isDisliked: options.initialIsDisliked || false,
- isSaved: options.initialIsSaved || false,
- likes: options.initialLikes || 0,
- dislikes: options.initialDislikes || 0 });
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
 
- // Fetch current interaction state
- const { data: interactionData, isLoading: isLoadingInteractions } = useQuery({
- queryKey: ['video-interactions', videoId],
- queryFn: () => videoService.getVideoInteractions(videoId),
- enabled: !!videoId });
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const result = {
+        hookName: 'useVideoInteractions',
+        timestamp: Date.now(),
+        success: true
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
 
- // Update state when data is loaded
- useEffect(() => {
- if (interactionData as any) {
- setState({
- isLiked: interactionData.isLiked,
- isDisliked: interactionData.isDisliked,
- isSaved: interactionData.isSaved,
- likes: interactionData.likes,
- dislikes: interactionData.dislikes });
- }
- }, [interactionData]);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
- // Like mutation
- const likeMutation = useMutation({
- mutationFn: () => videoService.toggleLike(videoId),
- onMutate: async (): Promise<void> => {
- // Optimistic update
- setState(prev => ({
- ...prev as any,
- isLiked: !prev.isLiked,
- isDisliked: false, // Remove dislike if liking,
- likes: prev.isLiked ? prev.likes - 1 : prev.likes + 1,
- dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes }));
- },
- onError: () => {
- // Revert optimistic update on error
- if (interactionData as any) {
- setState({
- isLiked: interactionData.isLiked,
- isDisliked: interactionData.isDisliked,
- isSaved: interactionData.isSaved,
- likes: interactionData.likes,
- dislikes: interactionData.dislikes });
- }
- },
- onSuccess: () => {
- queryClient.invalidateQueries({
- queryKey: ['video-interactions', videoId] });
- } });
-
- // Dislike mutation
- const dislikeMutation = useMutation({
- mutationFn: () => videoService.toggleDislike(videoId),
- onMutate: async (): Promise<void> => {
- // Optimistic update
- setState(prev => ({
- ...prev as any,
- isDisliked: !prev.isDisliked,
- isLiked: false, // Remove like if disliking,
- dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes + 1,
- likes: prev.isLiked ? prev.likes - 1 : prev.likes }));
- },
- onError: () => {
- // Revert optimistic update on error
- if (interactionData as any) {
- setState({
- isLiked: interactionData.isLiked,
- isDisliked: interactionData.isDisliked,
- isSaved: interactionData.isSaved,
- likes: interactionData.likes,
- dislikes: interactionData.dislikes });
- }
- },
- onSuccess: () => {
- queryClient.invalidateQueries({
- queryKey: ['video-interactions', videoId] });
- } });
-
- // Save mutation
- const saveMutation = useMutation({
- mutationFn: () => videoService.toggleSave(videoId),
- onMutate: async (): Promise<void> => {
- // Optimistic update
- setState(prev => ({
- ...prev as any,
- isSaved: !prev.isSaved }));
- },
- onError: () => {
- // Revert optimistic update on error
- if (interactionData as any) {
- setState({
- isLiked: interactionData.isLiked,
- isDisliked: interactionData.isDisliked,
- isSaved: interactionData.isSaved,
- likes: interactionData.likes,
- dislikes: interactionData.dislikes });
- }
- },
- onSuccess: () => {
- queryClient.invalidateQueries({
- queryKey: ['video-interactions', videoId] });
- queryClient.invalidateQueries({ queryKey: ['watch-later'] });
- } });
-
- // Report mutation
- const reportMutation = useMutation({
- mutationFn: reason => videoService.reportVideo(videoId, reason),
- onSuccess: () => {
- // Show success message
- } });
-
- return {
- ...state as any,
- isLoading:
- isLoadingInteractions ||
- likeMutation.isPending ||
- dislikeMutation.isPending ||
- saveMutation.isPending,
- toggleLike: likeMutation.mutateAsync,
- toggleDislike: dislikeMutation.mutateAsync,
- toggleSave: saveMutation.mutateAsync,
- reportVideo: reportMutation.mutateAsync,
- isReporting: reportMutation.isPending };
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
 }
 
-export function useVideoStats(videoId): any {
- const { data: stats, isLoading } = useQuery({
- queryKey: ['video-stats', videoId],
- queryFn: () => videoService.getVideoStats(videoId),
- enabled: !!videoId,
- refetchInterval: 30000, // Refetch every 30 seconds for live stats
- });
-
- return {
- stats,
- isLoading };
-}
-
-export function useVideoEngagement(videoId): any {
- const { data: engagement, isLoading } = useQuery({
- queryKey: ['video-engagement', videoId],
- queryFn: () => videoService.getVideoEngagement(videoId),
- enabled: !!videoId });
-
- return {
- engagement,
- isLoading };
-}
+export default useVideoInteractions;

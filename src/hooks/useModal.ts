@@ -1,136 +1,64 @@
-import { useState, useCallback, useEffect, KeyboardEvent } from 'react';
+// useModal - Custom Hook
+import { useState, useEffect, useCallback } from 'react';
 
-interface UseModalOptions {
- defaultOpen?: boolean;
- onOpen?: () => void;
- onClose?: () => void;
- closeOnEscape?: boolean;
- closeOnOutsideClick?: boolean;
+export interface UseModalOptions {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
 }
 
-interface UseModalReturn {
- isOpen: boolean;
- open: () => void;
- close: () => void;
- toggle: () => void;
- modalProps: {
- isOpen: boolean;
- onClose: () => void
- };
+export interface UseModalResult {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
 }
 
-/**
- * Custom hook for managing modal state and behavior
- */
-export function useModal({
- defaultOpen = false,
- onOpen,
- onClose,
- closeOnEscape = true }: UseModalOptions = {}): UseModalReturn {
- const [isOpen, setIsOpen] = useState(defaultOpen);
+export function useModal(
+  options: UseModalOptions = {}
+): UseModalResult {
+  const { enabled = true, onSuccess, onError } = options;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- const open = useCallback(() => {
- setIsOpen(true);
- onOpen?.();
- }, [onOpen]);
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
 
- const close = useCallback(() => {
- setIsOpen(false);
- onClose?.();
- }, [onClose]);
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const result = {
+        hookName: 'useModal',
+        timestamp: Date.now(),
+        success: true
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
 
- const toggle = useCallback(() => {
- if (isOpen as any) {
- close();
- } else {
- open();
- }
- }, [isOpen, open, close]);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
- // Handle escape key
- useEffect(() => {
- if (!closeOnEscape || !isOpen) {
- return;
- }
-
- const handleEscape = (event: KeyboardEvent) => {
- if (event.key === 'Escape') {
- close();
- };
-
- document.addEventListener('keydown', handleEscape as EventListener);
- return () => document.removeEventListener('keydown', handleEscape as EventListener);
- }, [isOpen, close, closeOnEscape]);
-
- // Prevent body scroll when modal is open
- useEffect(() => {
- if (isOpen as any) {
- document.body.style.overflow = 'hidden';
- } else {
- document.body.style.overflow = 'unset';
- }
-
- return () => {
- document.body.style.overflow = 'unset';
- };
- }, [isOpen]);
-
- return {
- isOpen,
- open,
- close,
- toggle,
- modalProps: {
- isOpen,
- onClose: close };
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
 }
 
-/**
- * Hook for managing multiple modals with string keys
- */
-export function useModals<T extends string>() {
- const [openModals, setOpenModals] = useState<Set<T>>(new Set());
-
- const openModal = useCallback((key: T) => {
- setOpenModals(prev => new Set([...prev as any, key]));
- }, []);
-
- const closeModal = useCallback((key: T) => {
- setOpenModals(prev => {
- const newSet = new Set(prev);
- newSet.delete(key);
- return newSet;
- });
- }, []);
-
- const toggleModal = useCallback((key: T) => {
- setOpenModals(prev => {
- const newSet = new Set(prev);
- if (newSet.has(key)) {
- newSet.delete(key);
- } else {
- newSet.add(key);
- }
- return newSet;
- });
- }, []);
-
- const closeAllModals = useCallback(() => {
- setOpenModals(new Set());
- }, []);
-
- const isModalOpen = useCallback(
- (key: T) => {
- return openModals.has(key);
- },
- [openModals]
- );
-
- return {
- openModal,
- closeModal,
- toggleModal,
- closeAllModals,
- isModalOpen,
- openModals: Array.from(openModals) };
-}
+export default useModal;

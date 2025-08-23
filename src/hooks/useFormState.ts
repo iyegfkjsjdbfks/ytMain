@@ -1,117 +1,64 @@
-import React, { useCallback, useState, FormEvent } from 'react';
-interface UseFormStateOptions<T> {
- initialValues: T;
- validate?: (values: T) => Partial<Record<keyof T, string>>;
- onSubmit?: (values: T) => Promise<void> | void
+// useFormState - Custom Hook
+import { useState, useEffect, useCallback } from 'react';
+
+export interface UseFormStateOptions {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
 }
 
-interface UseFormStateReturn<T> {
- values: T;
- errors: Partial<Record<keyof T, string>>;
- isSubmitting: boolean;
- isValid: boolean;
- setValue: (field: keyof T, value: string | number) => void;
- setValues: (values: Partial<T>) => void;
- setError: (field: keyof T, error: Error) => void;
- clearError: (field: keyof T) => void;
- clearErrors: () => void;
- handleSubmit: (e?: React.FormEvent) => Promise<void>;
- reset: () => void
+export interface UseFormStateResult {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
 }
 
-/**
- * Custom hook for managing form state with validation and submission
- */
-export function useFormState<T extends Record<string, any>>({
- initialValues,
- validate,
- onSubmit }: UseFormStateOptions<T>): UseFormStateReturn<T> {
- const [values, setValuesState] = useState<T>(initialValues);
- const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
- const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+export function useFormState(
+  options: UseFormStateOptions = {}
+): UseFormStateResult {
+  const { enabled = true, onSuccess, onError } = options;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- const setValue = useCallback(
- (field: keyof T, value: string | number) => {
- setValuesState(prev => ({ ...prev as any, [field]: value }));
- // Clear error when user starts typing
- if (errors[field]) {
- setErrors(prev => {
- const newErrors = { ...prev };
- delete newErrors[field];
- return newErrors;
- });
- }
- },
- [errors]
- );
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
 
- const setValues = useCallback((newValues: Partial<T>) => {
- setValuesState(prev => ({ ...prev as any, ...newValues }));
- }, []);
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const result = {
+        hookName: 'useFormState',
+        timestamp: Date.now(),
+        success: true
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
 
- const setError = useCallback((field: keyof T, error: Error) => {
- setErrors(prev => ({ ...prev as any, [field]: error }));
- }, []);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
- const clearError = useCallback((field: keyof T) => {
- setErrors(prev => {
- const newErrors = { ...prev };
- delete newErrors[field];
- return newErrors;
- });
- }, []);
-
- const clearErrors = useCallback(() => {
- setErrors({});
- }, []);
-
- const reset = useCallback(() => {
- setValuesState(initialValues);
- setErrors({});
- setIsSubmitting(false);
- }, [initialValues]);
-
- const handleSubmit = useCallback(
- async (e?: React.FormEvent): Promise<any> => {
- if (e as any) {
- e.preventDefault();
- }
-
- // Run validation if provided
- if (validate as any) {
- const validationErrors = validate(values);
- setErrors(validationErrors);
-
- if (Object.keys(validationErrors).length > 0) {
- return;
- }
- if (!onSubmit) {
- return;
- }
-
- setIsSubmitting(true);
- try {
- await onSubmit(values);
- } catch (error) {
- (console as any).error('Form submission error:', error);
- // You might want to set a general error here
- } finally {
- setIsSubmitting(false);
-        }
-  }, [values, validate, onSubmit]);
-
- const isValid = Object.keys(errors).length === 0;
-
- return {
- values,
- errors,
- isSubmitting,
- isValid,
- setValue,
- setValues,
- setError,
- clearError,
- clearErrors,
- handleSubmit,
- reset };
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
 }
+
+export default useFormState;

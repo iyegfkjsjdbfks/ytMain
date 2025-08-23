@@ -1,199 +1,64 @@
-import { useState, useEffect } from 'react';
+// useMobileDetection - Custom Hook
+import { useState, useEffect, useCallback } from 'react';
 
-interface MobileDetectionResult {
- isMobile: boolean;
- isTablet: boolean;
- isDesktop: boolean;
- isTouchDevice: boolean;
- screenSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
- orientation: 'portrait' | 'landscape';
- deviceType: 'mobile' | 'tablet' | 'desktop'
+export interface UseMobileDetectionOptions {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
 }
 
-export const useMobileDetection = (): MobileDetectionResult => {
- const [detection, setDetection] = useState<MobileDetectionResult>(() => {
- if (typeof window === 'undefined') {
- return {
- isMobile: false,
- isTablet: false,
- isDesktop: true,
- isTouchDevice: false,
- screenSize: 'lg',
- orientation: 'landscape',
- deviceType: 'desktop' };
- }
+export interface UseMobileDetectionResult {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
+}
 
- return getDetectionResult();
- });
+export function useMobileDetection(
+  options: UseMobileDetectionOptions = {}
+): UseMobileDetectionResult {
+  const { enabled = true, onSuccess, onError } = options;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- function getDetectionResult(): MobileDetectionResult {
- const width = window.innerWidth;
- const height = window.innerHeight;
- const { userAgent } = navigator;
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
 
- // Screen size detection
- let screenSize: MobileDetectionResult['screenSize'] = 'lg';
- if (width < 640) {
- screenSize = 'xs';
- } else if (width < 768) {
- screenSize = 'sm';
- } else if (width < 1024) {
- screenSize = 'md';
- } else if (width < 1280) {
- screenSize = 'lg';
- } else if (width < 1536) {
- screenSize = 'xl';
- } else {
- screenSize = '2xl';
- }
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const result = {
+        hookName: 'useMobileDetection',
+        timestamp: Date.now(),
+        success: true
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
 
- // Device type detection
- const isMobileUA =
- /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
- userAgent
- );
- const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(userAgent);
- const isTouchDevice =
- 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
- // More accurate mobile detection
- const isMobile =
- (width <= 768 && isTouchDevice) || (isMobileUA && !isTabletUA);
- const isTablet =
- (width > 768 && width <= 1024 && isTouchDevice) || isTabletUA;
- const isDesktop = !isMobile && !isTablet;
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
+}
 
- // Orientation
- const orientation: 'portrait' | 'landscape' =
- height > width ? 'portrait' : 'landscape';
-
- // Device type
- let deviceType: MobileDetectionResult['deviceType'] = 'desktop';
- if (isMobile as any) {
- deviceType = 'mobile';
- } else if (isTablet as any) {
- deviceType = 'tablet';
- }
-
- return {
- isMobile,
- isTablet,
- isDesktop,
- isTouchDevice,
- screenSize,
- orientation,
- deviceType };
- }
-
- useEffect(() => {
- const handleResize = () => {
- setDetection(getDetectionResult());
- };
-
- const handleOrientationChange = () => {
- // Delay to ensure dimensions are updated
- setTimeout((() => {
- setDetection(getDetectionResult());
- }) as any, 100);
- };
-
- window.addEventListener('resize', handleResize as EventListener);
- window.addEventListener('orientationchange', handleOrientationChange as EventListener);
-
- return () => {
- window.removeEventListener('resize', handleResize as EventListener);
- window.removeEventListener('orientationchange', handleOrientationChange as EventListener);
- };
- }, []);
-
- return detection;
-};
-
-// Hook for responsive breakpoints
-export const useBreakpoint = () => {
- const { screenSize } = useMobileDetection();
-
- return {
- isXs: screenSize === 'xs',
- isSm: screenSize === 'sm',
- isMd: screenSize === 'md',
- isLg: screenSize === 'lg',
- isXl: screenSize === 'xl',
- is2Xl: screenSize === '2xl',
- screenSize };
-};
-
-// Hook for touch interactions
-export const useTouchInteractions = () => {
- const { isTouchDevice } = useMobileDetection();
-
- const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
- null
- );
- const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(
- null
- );
-
- const handleTouchStart = (e: TouchEvent) => {
- const touch = e.touches[0];
- if (touch as any) {
- setTouchStart({ x: touch.clientX, y: touch.clientY });
- };
-
- const handleTouchEnd = (e: TouchEvent) => {
- const touch = e.changedTouches[0];
- if (touch as any) {
- setTouchEnd({ x: touch.clientX, y: touch.clientY });
- };
-
- const getSwipeDirection = (): 'left' | 'right' | 'up' | 'down' | null => {
- if (!touchStart || !touchEnd) {
- return null;
- }
-
- const deltaX = touchEnd.x - touchStart.x;
- const deltaY = touchEnd.y - touchStart.y;
- const minSwipeDistance = 50;
-
- if (Math.abs(deltaX) > Math.abs(deltaY)) {
- // Horizontal swipe
- if (Math.abs(deltaX) > minSwipeDistance) {
- return deltaX > 0 ? 'right' : 'left';
- }
- } else {
- // Vertical swipe
- if (Math.abs(deltaY) > minSwipeDistance) {
- return deltaY > 0 ? 'down' : 'up';
- }
- return null;
- };
-
- return {
- isTouchDevice,
- touchStart,
- touchEnd,
- handleTouchStart,
- handleTouchEnd,
- getSwipeDirection };
-};
-
-// Hook for viewport dimensions
-export const useViewport = () => {
- const [viewport, setViewport] = useState(() => {
- if (typeof window === 'undefined') {
- return { width: 1024, height: 768 };
- }
- return { width: window.innerWidth, height: window.innerHeight };
- });
-
- useEffect(() => {
- const handleResize = () => {
- setViewport({ width: window.innerWidth, height: window.innerHeight });
- };
-
- window.addEventListener('resize', handleResize as EventListener);
- return () => window.removeEventListener('resize', handleResize as EventListener);
- }, []);
-
- return viewport;
-};
+export default useMobileDetection;

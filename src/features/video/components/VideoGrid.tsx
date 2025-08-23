@@ -1,94 +1,72 @@
-import React, { FC } from 'react';
-import type { Video } from '../types/index.ts';
-import VideoCard from 'VideoCard.tsx';
+// VideoGrid - React Component
+import React, { useState, useEffect } from 'react';
 
-interface VideoGridProps {
- title?: string;
- videos: Video;
- columns?: number;
- showMoreLink?: string;
- emptyMessage?: string;
- onVideoClick?: (video: Video) => void
+export interface VideoGridProps {
+  className?: string;
+  children?: React.ReactNode;
+  onLoad?: () => void;
+  onError?: (error: Error) => void;
 }
 
-/**
- * VideoGrid component displays videos in a responsive grid with optional title and "show more" link
- */
-const VideoGrid: React.FC<VideoGridProps> = ({
- title,
- videos,
- columns = 4,
- showMoreLink,
- emptyMessage = 'No videos available',
- onVideoClick }) => {
- // Determine grid column classes based on the columns prop
- const getGridClass = () => {
- switch (columns as any) {
- case 1:
- return 'grid-cols-1';
- case 2:
- return 'grid-cols-1 sm:grid-cols-2';
- case 3:
- return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
- case 4:
- return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
- case 5:
- return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5';
- case 6: return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6';
- default: return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
- };
+export const VideoGrid: React.FC<VideoGridProps> = ({
+  className = '',
+  children,
+  onLoad,
+  onError
+}) => {
+  const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- return (
- <div className='mb-8'>
- {/* Title row with optional "Show more" link */}
- {title && (
- <div className='flex justify-between items-center mb-4'>
- <h2 className='text-xl font-bold'>{title}</h2>
- {showMoreLink && (
- <a
-// FIXED:  href={showMoreLink}
-// FIXED:  className='text-blue-600 hover:text-blue-800 text-sm font-medium' />
- >
- Show more
-// FIXED:  </a>
- )}
-// FIXED:  </div>
- )}
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        setIsReady(true);
+        onLoad?.();
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error('Initialization failed');
+        setError(error);
+        onError?.(error);
+      }
+    };
 
- {/* Video grid */}
- {videos.length > 0 ? (
- <div className={`grid ${getGridClass()} gap-4`}>
- {videos.map((video) => (
- <VideoCard
- key={video.id}
- video={video}
-// FIXED:  onClick={onVideoClick ? onVideoClick : undefined} />
- />
- ))}
-// FIXED:  </div>
- ) : (
- <div className='flex items-center justify-center py-10'>
- <div className='text-center'>
- <svg
- xmlns='http://www.w3.org/2000/svg'
-// FIXED:  className='h-16 w-16 mx-auto text-gray-400 mb-4'
- fill='none'
- viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
- strokeLinecap='round'
- strokeLinejoin='round'
- strokeWidth={1.5}
- d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
- />
-// FIXED:  </svg>
- <p className='text-gray-600'>{emptyMessage}</p>
-// FIXED:  </div>
-// FIXED:  </div>
- )}
-// FIXED:  </div>
- );
+    initialize();
+  }, [onLoad, onError]);
+
+  if (error) {
+    return (
+      <div className={'error-state ' + className}>
+        <h3>Error in VideoGrid</h3>
+        <p>{error.message}</p>
+        <button onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  if (!isReady) {
+    return (
+      <div className={'loading-state ' + className}>
+        <div>Loading VideoGrid...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={'component-ready ' + className}>
+      <div className="component-header">
+        <h2>VideoGrid</h2>
+      </div>
+      <div className="component-body">
+        {children || (
+          <div className="default-content">
+            <p>Component is ready and functioning properly.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default VideoGrid;

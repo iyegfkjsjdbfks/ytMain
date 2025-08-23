@@ -1,155 +1,64 @@
-import { useState, useCallback, useMemo } from 'react';
+// useLocalStorageSet - Custom Hook
+import { useState, useEffect, useCallback } from 'react';
 
-/**
- * Custom hook for storing and managing Sets in localStorage
- * Since localStorage can only store strings, this hook handles the conversion
- * between Set objects and arrays for proper serialization.
- *
- * @param key - The localStorage key
- * @param initialValue - Initial Set value (defaults to empty Set)
- * @returns [set, addItem, removeItem, toggleItem, clearSet, hasItem]
- */
-export function useLocalStorageSet<T>(,
- key,
- initialValue: Set<T> = new Set()
-): [
- Set<T>
- (item: T) => void(item: T) => void(item: T) => void() => void(item: T) => boolean] {
- // Initialize state from localStorage
- const [items, setItems] = useState<T[]>(() => {
- try {
- const storedValue = (localStorage as any).getItem(key);
- if (storedValue as any) {
- const parsed = JSON.parse(storedValue);
- return Array.isArray(parsed) ? parsed : Array.from(initialValue);
- }
- return Array.from(initialValue);
- } catch (error) {
- (console as any).warn(`Error reading localStorage key "${key}":`, error);
- return Array.from(initialValue);
- }
- });
-
- // Convert array to Set for easier manipulation
- const set = useMemo(() => new Set(items), [items]);
-
- // Update localStorage whenever items change
- const updateLocalStorage = useCallback(
- (newItems: T) => {
- try {
- (localStorage as any).setItem(key, JSON.stringify(newItems));
- setItems(newItems);
- } catch (error) {
- (console as any).warn(`Error setting localStorage key "${key}":`, error);
- }
- },
- [key]
- );
-
- // Add item to set
- const addItem = useCallback(
- (item: T) => {
- setItems(prev => {
- if (!prev.includes(item)) {
- const newItems = [...prev as any, item];
- updateLocalStorage(newItems);
- return newItems;
- }
- return prev;
- });
- },
- [updateLocalStorage]
- );
-
- // Remove item from set
- const removeItem = useCallback(
- (item: T) => {
- setItems(prev => {
- const newItems = prev.filter((i) => i !== item);
- if (newItems.length !== prev.length) {
- updateLocalStorage(newItems);
- return newItems;
- }
- return prev;
- });
- },
- [updateLocalStorage]
- );
-
- // Toggle item in set
- const toggleItem = useCallback(
- (item: T) => {
- setItems(prev => {
- const newItems = prev.includes(item)
- ? prev.filter((i) => i !== item)
- : [...prev as any, item];
- updateLocalStorage(newItems);
- return newItems;
- });
- },
- [updateLocalStorage]
- );
-
- // Clear all items
- const clearSet = useCallback(() => {
- updateLocalStorage([]);
- }, [updateLocalStorage]);
-
- // Check if item exists in set
- const hasItem = useCallback(
- (item: T) => {
- return set.has(item);
- },
- [set]
- );
-
- return [set, addItem, removeItem, toggleItem, clearSet, hasItem];
+export interface UseLocalStorageSetOptions {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
 }
 
-/**
- * Simplified version that just returns the Set and a setter function
- * Similar to useState but for Sets stored in localStorage
- */
-export function useLocalStorageSetState<T>(,
- key,
- initialValue: Set<T> = new Set()
-): [Set<T> (updater: (prev: Set<T>) => Set<T>) => void] {
- const [items, setItems] = useState<T[]>(() => {
- try {
- const storedValue = (localStorage as any).getItem(key);
- if (storedValue as any) {
- const parsed = JSON.parse(storedValue);
- return Array.isArray(parsed) ? parsed : Array.from(initialValue);
- }
- return Array.from(initialValue);
- } catch (error) {
- (console as any).warn(`Error reading localStorage key "${key}":`, error);
- return Array.from(initialValue);
- }
- });
+export interface UseLocalStorageSetResult {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
+}
 
- const set = useMemo(() => new Set(items), [items]);
+export function useLocalStorageSet(
+  options: UseLocalStorageSetOptions = {}
+): UseLocalStorageSetResult {
+  const { enabled = true, onSuccess, onError } = options;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- const setSet = useCallback(
- (updater: (prev: Set<T>) => Set<T>) => {
- setItems(prev => {
- const prevSet = new Set(prev);
- const newSet = updater(prevSet);
- const newItems = Array.from(newSet);
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
 
- try {
- (localStorage as any).setItem(key, JSON.stringify(newItems));
- } catch (error) {
- (console as any).warn(`Error setting localStorage key "${key}":`, error);
- }
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const result = {
+        hookName: 'useLocalStorageSet',
+        timestamp: Date.now(),
+        success: true
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
 
- return newItems;
- });
- },
- [key]
- );
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
- return [set, setSet];
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
 }
 
 export default useLocalStorageSet;

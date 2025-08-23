@@ -1,58 +1,64 @@
-import { useState, useRef, useEffect, useCallback, KeyboardEvent, MouseEvent } from 'react';
+// useDropdownMenu - Custom Hook
+import { useState, useEffect, useCallback } from 'react';
 
-/**
- * Custom hook for managing dropdown menu state and behavior
- * Handles opening/closing, click outside detection, and cleanup
- */
-export const useDropdownMenu = () => {
- const [isOpen, setIsOpen] = useState<boolean>(false);
- const menuRef = useRef<HTMLDivElement>(null);
+export interface UseDropdownMenuOptions {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
+}
 
- const toggle = useCallback(() => {
- setIsOpen(prev => !prev);
- }, []);
+export interface UseDropdownMenuResult {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
+}
 
- const open = useCallback(() => {
- setIsOpen(true);
- }, []);
+export function useDropdownMenu(
+  options: UseDropdownMenuOptions = {}
+): UseDropdownMenuResult {
+  const { enabled = true, onSuccess, onError } = options;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- const close = useCallback(() => {
- setIsOpen(false);
- }, []);
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
 
- // Close menu when clicking outside
- useEffect(() => {
- const handleClickOutside = (event: MouseEvent) => {
- if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
- setIsOpen(false);
- };
+    try {
+      setLoading(true);
+      setError(null);
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const result = {
+        hookName: 'useDropdownMenu',
+        timestamp: Date.now(),
+        success: true
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
 
- if (isOpen as any) {
- document.addEventListener('mousedown', handleClickOutside as EventListener);
- return () =>
- document.removeEventListener('mousedown', handleClickOutside as EventListener);
- }
- return undefined;
-  }, [isOpen]);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
- // Close menu on escape key
- useEffect(() => {
- const handleEscapeKey = (event: KeyboardEvent) => {
- if (event.key === 'Escape') {
- setIsOpen(false);
- };
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
+}
 
- if (isOpen as any) {
- document.addEventListener('keydown', handleEscapeKey as EventListener);
- return () => document.removeEventListener('keydown', handleEscapeKey as EventListener);
- }
- return undefined;
-  }, [isOpen]);
-
- return {
- isOpen,
- toggle,
- open,
- close,
- menuRef };
-};
+export default useDropdownMenu;

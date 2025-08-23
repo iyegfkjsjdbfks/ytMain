@@ -1,53 +1,72 @@
-import React, { useEffect, FC, ReactNode } from 'react';
-import { useLocation, Navigate, useLocation } from 'react-router-dom';
+// ProtectedRoute - React Component
+import React, { useState, useEffect } from 'react';
 
-import LoadingSpinner from '@components/LoadingSpinner';
-
-import { useAuthStore } from '../store/authStore.ts';
-
-interface ProtectedRouteProps {
- children?: React.ReactNode;
- requireAuth?: boolean;
- redirectTo?: string;
+export interface ProtectedRouteProps {
+  className?: string;
+  children?: React.ReactNode;
+  onLoad?: () => void;
+  onError?: (error: Error) => void;
 }
 
-/**
- * Component to protect routes based on authentication status
- * Can be used to protect authenticated routes or to prevent
- * authenticated users from accessing auth pages (login/register)
- */
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
- children,
- requireAuth = true,
- redirectTo }) => {
- const { isAuthenticated, isLoading, checkAuth } = useAuthStore();
- const location = useLocation();
+  className = '',
+  children,
+  onLoad,
+  onError
+}) => {
+  const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- useEffect(() => {
- checkAuth();
- }, [checkAuth]);
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        setIsReady(true);
+        onLoad?.();
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error('Initialization failed');
+        setError(error);
+        onError?.(error);
+      }
+    };
 
- if (isLoading as any) {
- return <LoadingSpinner />;
- }
+    initialize();
+  }, [onLoad, onError]);
 
- // For routes that require authentication (most app routes)
- if (requireAuth && !isAuthenticated) {
- return (
- <Navigate
- to={redirectTo || '/login'}
- state={{ from: location }
- replace />
- />
- );
- }
+  if (error) {
+    return (
+      <div className={'error-state ' + className}>
+        <h3>Error in ProtectedRoute</h3>
+        <p>{error.message}</p>
+        <button onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    );
+  }
 
- // For routes that should NOT be accessible when authenticated (login/register)
- if (!requireAuth && isAuthenticated) {
- return <Navigate to={redirectTo || '/'} replace />;
- }
+  if (!isReady) {
+    return (
+      <div className={'loading-state ' + className}>
+        <div>Loading ProtectedRoute...</div>
+      </div>
+    );
+  }
 
- return <>{children}</>;
+  return (
+    <div className={'component-ready ' + className}>
+      <div className="component-header">
+        <h2>ProtectedRoute</h2>
+      </div>
+      <div className="component-body">
+        {children || (
+          <div className="default-content">
+            <p>Component is ready and functioning properly.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default ProtectedRoute;

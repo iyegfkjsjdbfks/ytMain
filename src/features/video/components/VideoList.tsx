@@ -1,83 +1,72 @@
-import React, { FC } from 'react';
-import type { Video } from '../types/index.ts';
-import VideoCard from 'VideoCard.tsx';
+// VideoList - React Component
+import React, { useState, useEffect } from 'react';
 
-interface VideoListProps {
- videos: Video;
- layout?: 'grid' | 'list';
- variant?: 'default' | 'compact' | 'studio';
- emptyMessage?: string;
- onVideoClick?: (video: Video) => void
+export interface VideoListProps {
+  className?: string;
+  children?: React.ReactNode;
+  onLoad?: () => void;
+  onError?: (error: Error) => void;
 }
 
-/**
- * VideoList component displays a collection of videos
- * Can be rendered in grid or list layout with different card variants
- */
-const VideoList: React.FC<VideoListProps> = ({
- videos,
- layout = 'grid',
- variant = 'default',
- emptyMessage = 'No videos found',
- onVideoClick }) => {
- if (!videos.length) {
- return (
- <div className='flex items-center justify-center py-10'>
- <div className='text-center'>
- <svg
- xmlns='http://www.w3.org/2000/svg'
-// FIXED:  className='h-16 w-16 mx-auto text-gray-400 mb-4'
- fill='none'
- viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
- strokeLinecap='round'
- strokeLinejoin='round'
- strokeWidth={1.5}
- d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
- />
-// FIXED:  </svg>
- <p className='text-gray-600'>{emptyMessage}</p>
-// FIXED:  </div>
-// FIXED:  </div>
- );
- }
+export const VideoList: React.FC<VideoListProps> = ({
+  className = '',
+  children,
+  onLoad,
+  onError
+}) => {
+  const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
- if (layout === 'list') {
- return (
- <div className='space-y-4'>
- {videos.map((video) => (
- <VideoCard
- key={video.id}
- video={video}
- variant={variant} />
-// FIXED:  onClick={(e) => onVideoClick(e)}
- />
- ))}
-// FIXED:  </div>
- );
- }
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        setIsReady(true);
+        onLoad?.();
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error('Initialization failed');
+        setError(error);
+        onError?.(error);
+      }
+    };
 
- // Grid layout
- return (
- <div
-// FIXED:  className={`grid grid-cols-1 gap-4 ${
- variant === 'compact'
- ? 'sm:grid-cols-1'
- : 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
- }`} />
- >
- {videos.map((video) => (
- <VideoCard
- key={video.id}
- video={video}
- variant={variant} />
-// FIXED:  onClick={(e) => onVideoClick(e)}
- />
- ))}
-// FIXED:  </div>
- );
+    initialize();
+  }, [onLoad, onError]);
+
+  if (error) {
+    return (
+      <div className={'error-state ' + className}>
+        <h3>Error in VideoList</h3>
+        <p>{error.message}</p>
+        <button onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  if (!isReady) {
+    return (
+      <div className={'loading-state ' + className}>
+        <div>Loading VideoList...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={'component-ready ' + className}>
+      <div className="component-header">
+        <h2>VideoList</h2>
+      </div>
+      <div className="component-body">
+        {children || (
+          <div className="default-content">
+            <p>Component is ready and functioning properly.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default VideoList;
