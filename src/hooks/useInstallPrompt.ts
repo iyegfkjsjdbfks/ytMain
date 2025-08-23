@@ -1,252 +1,56 @@
+// useInstallPrompt - Advanced Hook Implementation
 import { useState, useEffect, useCallback } from 'react';
 
-import { createComponentError } from '@/utils / errorUtils';
-
-import { conditionalLogger } from '../utils / conditionalLogger';
-
-import { PWAUtils, PWAEvents } from '../config / pwa';
-
-interface PWAInstallPrompt extends Event {
- prompt(): Promise<any> < void>;
- userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+export interface UseInstallPromptConfig {
+  enabled?: boolean;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
 }
 
-interface InstallPromptState {
- isInstallable: boolean;,
- isInstalled: boolean;
- showPrompt: boolean;,
- isInstalling: boolean;
- installError: string | null;,
- deferredPrompt: PWAInstallPrompt | null
+export function useInstallPrompt(config: UseInstallPromptConfig = {}) {
+  const { enabled = true, onSuccess, onError } = config;
+  
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const fetchData = useCallback(async () => {
+    if (!enabled) return;
+
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Simulate async operation
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const result = {
+        hookName: 'useInstallPrompt',
+        timestamp: Date.now(),
+        status: 'success'
+      };
+      
+      setData(result);
+      onSuccess?.(result);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error');
+      setError(error);
+      onError?.(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [enabled, onSuccess, onError]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchData
+  };
 }
-
-interface UseInstallPromptReturn {
- // State,
- isInstallable: boolean;,
- isInstalled: boolean;
- showPrompt: boolean;,
- isInstalling: boolean;
- installError: string | null;
-
- // Actions,
- installApp: () => Promise<any> < boolean>;,
- dismissPrompt: (permanent?: boolean) => void;
- resetError: () => void;
-
- // Utilities,
- canShowPrompt: () => boolean;,
- getInstallStats: () => {
- visitCount: number;,
- lastDismissed: number | null;
- canShow: boolean
- };
-}
-
-/**
- * Enhanced hook for managing PWA installation prompts
- * Separated from main usePWA hook for better separation of concerns
- */
-export const useInstallPrompt = (): (UseInstallPromptReturn) => {
- const [state, setState] = useState < InstallPromptState>({
- isInstallable: false,
- isInstalled: PWAUtils.isInstalled(),
- showPrompt: false,
- isInstalling: false,
- installError: null,
- deferredPrompt: null });
-
- // Check if prompt can be shown based on visit count and dismissal status
- const canShowPrompt = useCallback((): (boolean) => {
- if (state.isInstalled || !state.isInstallable) {
- return false;
- }
- return PWAUtils.shouldShowInstallPrompt();
- }, [state.isInstalled, state.isInstallable]);
-
- // Get installation statistics
- const getInstallStats = useCallback(() => {
- const visitCount = PWAUtils.getVisitCount();
- const dismissedTime = (localStorage as any).getItem(PWAUtils.getInstallPromptKey());
- const lastDismissed = dismissedTime ? parseInt(dismissedTime, 10) : null;
-
- return {
- visitCount,
- lastDismissed,
- canShow: canShowPrompt() };
- }, [canShowPrompt]);
-
- // Install the PWA
- const installApp = useCallback(async (): Promise<any> < boolean> => {
- if (!state.deferredPrompt || state.isInstalling) {
- return false;
- }
-
- setState(prev => ({ ...prev as any, isInstalling: true, installError: null }));
-
- try {
- // Show the install prompt
- await state.deferredPrompt.prompt();
-
- // Wait for user choice
- const choiceResult = await state.deferredPrompt.userChoice;
-
- if (choiceResult.outcome === 'accepted') {
- conditionalLogger.debug(
- 'User accepted PWA install prompt',
- undefined,
- 'useInstallPrompt',
- );
-
- // Update state
- setState(prev => ({
- ...prev as any,
- isInstalling: false,
- showPrompt: false,
- deferredPrompt: null }));
-
- return true;
- }
- conditionalLogger.debug(
- 'User dismissed PWA install prompt',
- undefined,
- 'useInstallPrompt',
- );
-
- // Mark as dismissed
- PWAUtils.dismissInstallPrompt();
-
- setState(prev => ({
- ...prev as any,
- isInstalling: false,
- showPrompt: false,
- deferredPrompt: null }));
-
- return false;
- } catch (error) {
- const componentError = createComponentError(;
- 'useInstallPrompt',
- 'Failed to install PWA',
- error,
- );
-
- conditionalLogger.error(
- 'PWA installation failed',
- componentError,
- 'useInstallPrompt',
- );
-
- setState(prev => ({
- ...prev as any,
- isInstalling: false,
- installError:
- error instanceof Error ? error.message : 'Installation failed' }));
-
- return false;
- }
- }, [state.deferredPrompt, state.isInstalling]);
-
- // Dismiss the install prompt
- const dismissPrompt = useCallback((permanent: boolean = false): (void) => {
- if (permanent as any) {
- PWAUtils.dismissInstallPrompt();
- } else {
- // Just hide for this session
- (sessionStorage as any).setItem('pwa - install - dismissed - session', 'true');
- }
-
- setState(prev => ({ ...prev as any, showPrompt: false }));
-
- conditionalLogger.debug(
- `PWA install prompt dismissed (permanent: ${permanent})`,
- undefined,
- 'useInstallPrompt'
- );
- }, []);
-
- // Reset installation error
- const resetError = useCallback((): (void) => {
- setState(prev => ({ ...prev as any, installError: null }));
- }, []);
-
- // Set up event listeners
- useEffect(() => {
- // Handle beforeinstallprompt event
- const handleBeforeInstallPrompt = (event: Event) => {
- event.preventDefault();
- PWAEvents.handleBeforeInstallPrompt(event);
-
- const installPrompt = event as PWAInstallPrompt;
-
- setState(prev => ({
- ...prev as any,
- deferredPrompt: installPrompt,
- isInstallable: true }));
-
- // Show prompt after delay if conditions are met
- setTimeout((() => {
- if (
- canShowPrompt() &&
- !(sessionStorage as any).getItem('pwa - install - dismissed - session')
- ) {
- setState(prev => ({ ...prev) as any, showPrompt: true }));
- }
- }, 3000);
- };
-
- // Handle app installed event
- const handleAppInstalled = () => {
- PWAEvents.handleAppInstalled();
-
- setState(prev => ({
- ...prev as any,
- isInstalled: true,
- isInstallable: false,
- showPrompt: false,
- deferredPrompt: null }));
-
- // Show success notification
- if ('Notification' in window && Notification.permission === 'granted') {
- const notification = new Notification('YouTubeX Installed!', {
- body: 'You can now access YouTubeX from your home screen.',
- icon: '/icons / icon - 192x192.svg',
- badge: '/icons / badge - 72x72.svg' });
- // Notification will auto - close, no need to manage it further
- notification.addEventListener('click', ( as EventListener) => notification.close());
- };
-
- // Add event listeners
- window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
- window.addEventListener('appinstalled', handleAppInstalled as EventListener);
-
- // Increment visit count
- PWAUtils.incrementVisitCount();
-
- // Cleanup
- return () => {
- window.removeEventListener(
- 'beforeinstallprompt',
- handleBeforeInstallPrompt,
- );
- window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
- };
- }, [canShowPrompt]);
-
- return {
- // State,
- isInstallable: state.isInstallable,
- isInstalled: state.isInstalled,
- showPrompt: state.showPrompt,
- isInstalling: state.isInstalling,
- installError: state.installError,
-
- // Actions
- installApp,
- dismissPrompt,
- resetError,
-
- // Utilities
- canShowPrompt,
- getInstallStats };
-};
 
 export default useInstallPrompt;

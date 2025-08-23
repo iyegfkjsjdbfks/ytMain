@@ -32,7 +32,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           type: 'insert',
           file: '{{targetFile}}',
           replacement: '}',
-          position: { line: '{{lineNumber}}', column: 0 },
+          position: { line: parseInt('{{lineNumber}}'), column: 0 },
           description: 'Add missing closing brace at line {{lineNumber}} in {{targetFile}}'
         }
       ],

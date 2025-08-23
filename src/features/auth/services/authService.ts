@@ -1,48 +1,53 @@
-// authService - Auth Component/Service
-import React, { useState } from 'react';
-
-export interface AuthState {
-  isAuthenticated: boolean;
-  user: any;
-  loading: boolean;
+// authService - Advanced Service Implementation
+export interface authServiceConfig {
+  baseUrl?: string;
+  timeout?: number;
 }
 
-export const authService: React.FC = () => {
-  const [authState, setAuthState] = useState<AuthState>({
-    isAuthenticated: false,
-    user: null,
-    loading: false
-  });
+export class AuthService {
+  private config: Required<authServiceConfig>;
 
-  const handleAuth = async () => {
-    setAuthState(prev => ({ ...prev, loading: true }));
+  constructor(config: authServiceConfig = {}) {
+    this.config = {
+      baseUrl: config.baseUrl || '/api',
+      timeout: config.timeout || 5000
+    };
+  }
+
+  async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+    const url = this.config.baseUrl + endpoint;
     
     try {
-      // Simulate auth process
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setAuthState({
-        isAuthenticated: true,
-        user: { id: '1', name: 'User' },
-        loading: false
+      const response = await fetch(url, {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers
+        }
       });
+
+      if (!response.ok) {
+        throw new Error('Request failed: ' + response.status);
+      }
+
+      return await response.json();
     } catch (error) {
-      setAuthState(prev => ({ ...prev, loading: false }));
+      console.error('Service error:', error);
+      throw error;
     }
-  };
+  }
 
-  return (
-    <div className="auth-component">
-      <h3>auth Service</h3>
-      {authState.loading ? (
-        <p>Loading...</p>
-      ) : authState.isAuthenticated ? (
-        <p>Welcome, {authState.user?.name}!</p>
-      ) : (
-        <button onClick={handleAuth}>Authenticate</button>
-      )}
-    </div>
-  );
-};
+  async get<T>(endpoint: string): Promise<T> {
+    return this.request<T>(endpoint, { method: 'GET' });
+  }
 
+  async post<T>(endpoint: string, data: any): Promise<T> {
+    return this.request<T>(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+}
+
+export const authService = new AuthService();
 export default authService;

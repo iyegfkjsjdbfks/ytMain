@@ -302,8 +302,8 @@ export abstract class BaseScriptGenerator {
     return templateCommands.map(command => ({
       ...command,
       file: this.substituteParameters(command.file, parameters),
-      pattern: command.pattern ? new RegExp(this.substituteParameters(command.pattern.source, parameters)) : command.pattern,
-      replacement: command.replacement ? this.substituteParameters(command.replacement, parameters) : command.replacement,
+      pattern: command.pattern ? new RegExp(this.substituteParameters(command.pattern.source, parameters)) : undefined,
+      replacement: command.replacement ? this.substituteParameters(command.replacement, parameters) : undefined,
       description: this.substituteParameters(command.description, parameters)
     }));
   }
@@ -348,7 +348,7 @@ export abstract class BaseScriptGenerator {
           type: 'replace',
           file: command.file,
           pattern: command.replacement ? new RegExp(this.escapeRegex(command.replacement)) : undefined,
-          replacement: '', // Would need original content
+          replacement: undefined, // Would need original content
           description: `Rollback: ${command.description}`
         };
 
@@ -357,7 +357,7 @@ export abstract class BaseScriptGenerator {
         return {
           type: 'delete',
           file: command.file,
-          position: command.position,
+          position: command.position || undefined,
           description: `Rollback: ${command.description}`
         };
 
