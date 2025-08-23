@@ -54,7 +54,7 @@ export function getYouTubeApiBlockedMessage(): string {
  * @param fallbackValue - Value to return when API is blocked (default: null)
  * @returns API result or fallback value
  */
-export async function conditionalYouTubeApiCall<T>(,
+export async function conditionalYouTubeApiCall<T>(
  apiCall: () => Promise<T>,
  fallbackValue: T | null = null
 ): Promise<T | null> {
@@ -69,13 +69,15 @@ export async function conditionalYouTubeApiCall<T>(,
  logger.error('YouTube Data API call failed:', error);
  return fallbackValue;
  }
+}
+
 /**
  * Synchronous conditional wrapper for YouTube Data API operations
  * @param operation - Function that requires YouTube Data API
  * @param fallbackValue - Value to return when API is blocked
  * @returns Operation result or fallback value
  */
-export function conditionalYouTubeOperation<T>(,
+export function conditionalYouTubeOperation<T>(
  operation: () => T,
  fallbackValue: T
 ): T {
@@ -90,3 +92,4 @@ export function conditionalYouTubeOperation<T>(,
  logger.error('YouTube Data API operation failed:', error);
  return fallbackValue;
  }
+}

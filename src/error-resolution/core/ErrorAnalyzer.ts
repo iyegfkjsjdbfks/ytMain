@@ -394,7 +394,7 @@ export class ErrorAnalyzer {
     }
     
     // Category-specific recommendations
-    for (const [categoryName, errors] of errorsByCategory.entries()) {
+    for (const [categoryName, errors] of Array.from(errorsByCategory.entries())) {
       if (errors.length > 10) {
         const category = errors[0].category;
         recommendations.push(

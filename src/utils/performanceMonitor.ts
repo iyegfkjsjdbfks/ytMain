@@ -1,76 +1,50 @@
-/**
- * Performance monitoring utilities
- */
-
-interface PerformanceMetrics {
- name: string;
- duration: number;
- timestamp: number
+// Performance Monitor - Minimal Implementation
+export interface PerformanceMetrics {
+  renderTime: number;
+  loadTime: number;
+  memoryUsage: number;
+  timestamp: number;
 }
 
-class PerformanceMonitor {
- private metrics: Map<string, number> = new Map();
- private static instance: PerformanceMonitor;
-
- static getInstance(): PerformanceMonitor {
- if (!PerformanceMonitor.instance) {
- PerformanceMonitor.instance = new PerformanceMonitor();
- }
- return PerformanceMonitor.instance;
- }
-
- startMeasure(name): void {
- this.metrics.set(name, performance.now());
- }
-
- endMeasure(name): PerformanceMetrics | null {
- const startTime = this.metrics.get(name);
- if (!startTime) return null;
-
- const endTime = performance.now();
- const duration = endTime - startTime;
-
- this.metrics.delete(name);
-
- const metrics: PerformanceMetrics = {
- name,
- duration,
- timestamp: Date.now() };
-
- // Log slow operations in development
- if (process.env.NODE_ENV === 'development' && duration > 100) {
- (console as any).warn(
- `Slow operation detected: ${name} took ${duration.toFixed(2)}ms`
- );
- }
-
- return metrics;
- }
-
- measureAsync<T>(name, fn: () => Promise<T>): Promise<T> {
- this.startMeasure(name);
- return fn().finally(() => {
- this.endMeasure(name);
- });
- }
-
- measure<T>(name, fn: () => T): T {
- this.startMeasure(name);
- try {
- return fn();
- } finally {
- this.endMeasure(name);
- }
+export class PerformanceMonitor {
+  private metrics: PerformanceMetrics[] = [];
+  
+  startMeasure(name: string): void {
+    performance.mark(`${name}-start`);
+  }
+  
+  endMeasure(name: string): number {
+    performance.mark(`${name}-end`);
+    performance.measure(name, `${name}-start`, `${name}-end`);
+    
+    const measure = performance.getEntriesByName(name)[0];
+    return measure ? measure.duration : 0;
+  }
+  
+  recordMetric(metric: PerformanceMetrics): void {
+    this.metrics.push(metric);
+    
+    // Keep only last 100 metrics
+    if (this.metrics.length > 100) {
+      this.metrics.shift();
+    }
+  }
+  
+  getMetrics(): PerformanceMetrics[] {
+    return [...this.metrics];
+  }
+  
+  clearMetrics(): void {
+    this.metrics = [];
+  }
 }
 
-export const performanceMonitor = PerformanceMonitor.getInstance();
+export const performanceMonitor = new PerformanceMonitor();
 
-// React hook for performance monitoring
-export function usePerformanceMonitor(name): any {
- return {
- startMeasure: () => performanceMonitor.startMeasure(name),
- endMeasure: () => performanceMonitor.endMeasure(name),
- measure: <T>(fn: () => T) => performanceMonitor.measure(name, fn),
- measureAsync: <T>(fn: () => Promise<T>) =>
- performanceMonitor.measureAsync(name, fn) };
+export function usePerformanceMonitor(name: string): any {
+  // Placeholder hook implementation
+  return {
+    startMeasure: () => performanceMonitor.startMeasure(name),
+    endMeasure: () => performanceMonitor.endMeasure(name)
+  };
 }

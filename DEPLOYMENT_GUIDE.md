@@ -112,34 +112,34 @@ spec:
   template:
     spec:
       containers:
-      - name: error-resolver
-        image: node:18-alpine
-        command: ["/bin/sh"]
-        args:
-          - -c
-          - |
-            npm install -g typescript-error-resolution
-            cd /workspace
-            error-resolver fix --project . --timeout 1800
-        volumeMounts:
-        - name: source-code
-          mountPath: /workspace
-        - name: reports
-          mountPath: /reports
-        resources:
-          requests:
-            memory: "2Gi"
-            cpu: "1000m"
-          limits:
-            memory: "4Gi"
-            cpu: "2000m"
+        - name: error-resolver
+          image: node:18-alpine
+          command: ['/bin/sh']
+          args:
+            - -c
+            - |
+              npm install -g typescript-error-resolution
+              cd /workspace
+              error-resolver fix --project . --timeout 1800
+          volumeMounts:
+            - name: source-code
+              mountPath: /workspace
+            - name: reports
+              mountPath: /reports
+          resources:
+            requests:
+              memory: '2Gi'
+              cpu: '1000m'
+            limits:
+              memory: '4Gi'
+              cpu: '2000m'
       volumes:
-      - name: source-code
-        persistentVolumeClaim:
-          claimName: source-code-pvc
-      - name: reports
-        persistentVolumeClaim:
-          claimName: reports-pvc
+        - name: source-code
+          persistentVolumeClaim:
+            claimName: source-code-pvc
+        - name: reports
+          persistentVolumeClaim:
+            claimName: reports-pvc
       restartPolicy: Never
 ```
 
@@ -153,74 +153,74 @@ name: TypeScript Error Resolution
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   fix-typescript-errors:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Install TypeScript Error Resolver
-      run: npm install -g typescript-error-resolution
-    
-    - name: Analyze TypeScript errors
-      run: |
-        error-resolver analyze --project . --output analysis.json
-        echo "::set-output name=error-count::$(jq '.totalErrors' analysis.json)"
-      id: analysis
-    
-    - name: Fix TypeScript errors
-      if: steps.analysis.outputs.error-count > 0
-      run: error-resolver fix --project . --timeout 1800
-    
-    - name: Validate fixes
-      run: error-resolver validate --project .
-    
-    - name: Upload reports
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: error-resolution-reports
-        path: error-resolution-reports/
-    
-    - name: Comment PR with results
-      if: github.event_name == 'pull_request'
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const fs = require('fs');
-          const analysis = JSON.parse(fs.readFileSync('analysis.json', 'utf8'));
-          
-          const comment = `## TypeScript Error Resolution Results
-          
-          - **Total Errors Found**: ${analysis.totalErrors}
-          - **Errors by Category**: 
-            ${Object.entries(analysis.errorsByCategory)
-              .map(([cat, count]) => `  - ${cat}: ${count}`)
-              .join('\n')}
-          
-          ${analysis.totalErrors > 0 ? '✅ Errors have been automatically fixed!' : '🎉 No errors found!'}
-          `;
-          
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: comment
-          });
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install TypeScript Error Resolver
+        run: npm install -g typescript-error-resolution
+
+      - name: Analyze TypeScript errors
+        run: |
+          error-resolver analyze --project . --output analysis.json
+          echo "::set-output name=error-count::$(jq '.totalErrors' analysis.json)"
+        id: analysis
+
+      - name: Fix TypeScript errors
+        if: steps.analysis.outputs.error-count > 0
+        run: error-resolver fix --project . --timeout 1800
+
+      - name: Validate fixes
+        run: error-resolver validate --project .
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: error-resolution-reports
+          path: error-resolution-reports/
+
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const analysis = JSON.parse(fs.readFileSync('analysis.json', 'utf8'));
+
+            const comment = `## TypeScript Error Resolution Results
+
+            - **Total Errors Found**: ${analysis.totalErrors}
+            - **Errors by Category**: 
+              ${Object.entries(analysis.errorsByCategory)
+                .map(([cat, count]) => `  - ${cat}: ${count}`)
+                .join('\n')}
+
+            ${analysis.totalErrors > 0 ? '✅ Errors have been automatically fixed!' : '🎉 No errors found!'}
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
 ```
 
 ### Jenkins Pipeline
@@ -229,12 +229,12 @@ jobs:
 // Jenkinsfile
 pipeline {
     agent any
-    
+
     environment {
         NODE_VERSION = '18'
         NODE_OPTIONS = '--max-old-space-size=4096'
     }
-    
+
     stages {
         stage('Setup') {
             steps {
@@ -244,16 +244,16 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Analyze Errors') {
             steps {
                 nodejs(nodeJSInstallationName: "${NODE_VERSION}") {
                     sh 'error-resolver analyze --project . --output analysis.json'
-                    
+
                     script {
                         def analysis = readJSON file: 'analysis.json'
                         env.ERROR_COUNT = analysis.totalErrors
-                        
+
                         if (analysis.totalErrors > 0) {
                             echo "Found ${analysis.totalErrors} TypeScript errors"
                             currentBuild.description = "Errors found: ${analysis.totalErrors}"
@@ -263,11 +263,11 @@ pipeline {
                         }
                     }
                 }
-                
+
                 archiveArtifacts artifacts: 'analysis.json'
             }
         }
-        
+
         stage('Fix Errors') {
             when {
                 expression { env.ERROR_COUNT.toInteger() > 0 }
@@ -278,7 +278,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Validate') {
             steps {
                 nodejs(nodeJSInstallationName: "${NODE_VERSION}") {
@@ -286,7 +286,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Build') {
             steps {
                 nodejs(nodeJSInstallationName: "${NODE_VERSION}") {
@@ -295,11 +295,11 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             archiveArtifacts artifacts: 'error-resolution-reports/**/*', allowEmptyArchive: true
-            
+
             publishHTML([
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
@@ -309,11 +309,11 @@ pipeline {
                 reportName: 'Error Resolution Report'
             ])
         }
-        
+
         success {
             echo 'TypeScript error resolution completed successfully!'
         }
-        
+
         failure {
             echo 'TypeScript error resolution failed!'
             emailext (
@@ -337,8 +337,8 @@ stages:
   - build
 
 variables:
-  NODE_VERSION: "18"
-  NODE_OPTIONS: "--max-old-space-size=4096"
+  NODE_VERSION: '18'
+  NODE_OPTIONS: '--max-old-space-size=4096'
 
 before_script:
   - npm ci
@@ -507,19 +507,19 @@ const register = new client.Registry();
 const errorResolutionDuration = new client.Histogram({
   name: 'typescript_error_resolution_duration_seconds',
   help: 'Duration of TypeScript error resolution process',
-  labelNames: ['project', 'success']
+  labelNames: ['project', 'success'],
 });
 
 const errorsFixed = new client.Counter({
   name: 'typescript_errors_fixed_total',
   help: 'Total number of TypeScript errors fixed',
-  labelNames: ['project', 'category']
+  labelNames: ['project', 'category'],
 });
 
 const errorResolutionSuccess = new client.Gauge({
   name: 'typescript_error_resolution_success_rate',
   help: 'Success rate of TypeScript error resolution',
-  labelNames: ['project']
+  labelNames: ['project'],
 });
 
 register.registerMetric(errorResolutionDuration);
@@ -535,32 +535,23 @@ app.get('/metrics', async (req, res) => {
 // Run error resolution and collect metrics
 async function runWithMetrics(projectPath) {
   const startTime = Date.now();
-  
+
   try {
     const result = await resolveTypeScriptErrors(projectPath);
-    
+
     const duration = (Date.now() - startTime) / 1000;
     const successRate = (result.errorsFixed / result.initialErrorCount) * 100;
-    
-    errorResolutionDuration
-      .labels(projectPath, 'true')
-      .observe(duration);
-    
-    errorsFixed
-      .labels(projectPath, 'all')
-      .inc(result.errorsFixed);
-    
-    errorResolutionSuccess
-      .labels(projectPath)
-      .set(successRate);
-    
+
+    errorResolutionDuration.labels(projectPath, 'true').observe(duration);
+
+    errorsFixed.labels(projectPath, 'all').inc(result.errorsFixed);
+
+    errorResolutionSuccess.labels(projectPath).set(successRate);
+
     console.log(`Metrics updated for ${projectPath}`);
-    
   } catch (error) {
-    errorResolutionDuration
-      .labels(projectPath, 'false')
-      .observe((Date.now() - startTime) / 1000);
-    
+    errorResolutionDuration.labels(projectPath, 'false').observe((Date.now() - startTime) / 1000);
+
     console.error(`Error resolution failed for ${projectPath}:`, error);
   }
 }
@@ -587,39 +578,39 @@ async function notifySlack(result, projectName) {
         type: 'header',
         text: {
           type: 'plain_text',
-          text: '🔧 TypeScript Error Resolution Complete'
-        }
+          text: '🔧 TypeScript Error Resolution Complete',
+        },
       },
       {
         type: 'section',
         fields: [
           {
             type: 'mrkdwn',
-            text: `*Project:* ${projectName}`
+            text: `*Project:* ${projectName}`,
           },
           {
             type: 'mrkdwn',
-            text: `*Status:* ${result.success ? '✅ Success' : '⚠️ Partial'}`
+            text: `*Status:* ${result.success ? '✅ Success' : '⚠️ Partial'}`,
           },
           {
             type: 'mrkdwn',
-            text: `*Errors Fixed:* ${result.errorsFixed}/${result.initialErrorCount}`
+            text: `*Errors Fixed:* ${result.errorsFixed}/${result.initialErrorCount}`,
           },
           {
             type: 'mrkdwn',
-            text: `*Success Rate:* ${((result.errorsFixed / result.initialErrorCount) * 100).toFixed(1)}%`
+            text: `*Success Rate:* ${((result.errorsFixed / result.initialErrorCount) * 100).toFixed(1)}%`,
           },
           {
             type: 'mrkdwn',
-            text: `*Execution Time:* ${(result.executionTime / 1000).toFixed(1)}s`
+            text: `*Execution Time:* ${(result.executionTime / 1000).toFixed(1)}s`,
           },
           {
             type: 'mrkdwn',
-            text: `*Phases Completed:* ${result.phasesCompleted.length}`
-          }
-        ]
-      }
-    ]
+            text: `*Phases Completed:* ${result.phasesCompleted.length}`,
+          },
+        ],
+      },
+    ],
   };
 
   if (result.rollbackPerformed) {
@@ -627,8 +618,8 @@ async function notifySlack(result, projectName) {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: '⚠️ *Rollback was performed due to validation failures*'
-      }
+        text: '⚠️ *Rollback was performed due to validation failures*',
+      },
     });
   }
 

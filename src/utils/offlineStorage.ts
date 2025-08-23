@@ -1,525 +1,255 @@
-import { conditionalLogger } from 'conditionalLogger.ts';
-import type { Video } from '../types / core';
-
-// Offline Storage Utilities for PWA functionality
-
-// Define interfaces for offline storage
-export interface CachedVideo extends Video {
- cachedAt: number
-}
-
-export interface UserAction {
- id?: number;
- type: "like" | 'dislike' | 'comment' | 'subscribe' | 'unsubscribe';
- videoId?: string;
- channelId?: string;
- data: Record < string, unknown>;
- endpoint: string;,
- method: string;
- timestamp: number;,
- synced: boolean
-}
-
-export interface WatchHistoryEntry {
- id: string;,
- videoId: string;
- title: string;,
- thumbnail: string;
- channelName: string;,
- duration: number;
- watchedAt: number;,
- progress: number
-}
-
-export interface Playlist {
- id: string;,
- name: string;
- description?: string;
- videos: string;,
- createdAt: number;
- updatedAt?: number;
+// Offline Storage - Minimal Implementation
+export interface OfflineVideo {
+  id: string;
+  title: string;
+  url: string;
+  thumbnail: string;
+  duration: string;
+  downloadedAt: number;
 }
 
 export interface Subscription {
- channelId: string;,
- channelName: string;
- channelAvatar: string;,
- subscribedAt: number
+  channelId: string;
+  channelName: string;
+  subscribedAt: number;
 }
 
 export interface PendingUpload {
- id?: number;
- title: string;,
- description: string;
- file: File;
- thumbnail?: File;
- privacy: string;,
- tags: string;
- createdAt: number;,
- status: 'pending' | 'uploading' | 'completed' | 'failed';
- updatedAt?: number;
+  id: string;
+  title: string;
+  file: File;
+  status: 'pending' | 'uploading' | 'completed' | 'failed';
+  createdAt: number;
 }
 
-// IndexedDB wrapper for offline data storage
 export class OfflineStorage {
- private dbName = 'youtubex - offline';
- private version = 1;
- private db: IDBDatabase | null = null;
+  private dbName = 'YouTubeOfflineDB';
+  private version = 1;
+  private db: IDBDatabase | null = null;
 
- async init(): Promise<any> < void> {
- return new Promise<any>((resolve, reject) => {
- const request = indexedDB.open(this.dbName, this.version);
+  async init(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(this.dbName, this.version);
+      
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        this.db = request.result;
+        resolve();
+      };
+      
+      request.onupgradeneeded = (event) => {
+        const db = (event.target as IDBOpenDBRequest).result;
+        
+        if (!db.objectStoreNames.contains('videos')) {
+          db.createObjectStore('videos', { keyPath: 'id' });
+        }
+        
+        if (!db.objectStoreNames.contains('subscriptions')) {
+          db.createObjectStore('subscriptions', { keyPath: 'channelId' });
+        }
+        
+        if (!db.objectStoreNames.contains('pendingUploads')) {
+          db.createObjectStore('pendingUploads', { keyPath: 'id', autoIncrement: true });
+        }
+      };
+    });
+  }
 
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Database initialization failed')
- );
- request.onsuccess = () => {
- this.db = request.result;
- resolve();
- };
+  private async getStore(storeName: string, mode: IDBTransactionMode = 'readonly'): Promise<IDBObjectStore> {
+    if (!this.db) {
+      await this.init();
+    }
+    const transaction = this.db!.transaction([storeName], mode);
+    return transaction.objectStore(storeName);
+  }
 
- request.onupgradeneeded = (event) => {
- const db = (event.target as IDBOpenDBRequest).result;
+  async saveVideo(video: OfflineVideo): Promise<void> {
+    const store = await this.getStore('videos', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const request = store.put(video);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- // Videos store
- if (!db.objectStoreNames.contains('videos')) {
- const videosStore = db.createObjectStore('videos', { keyPath: 'id' });
- videosStore.createIndex('uploadDate', 'uploadDate', {
- unique: false });
- videosStore.createIndex('channelId', 'channelId', { unique: false });
- }
+  async getVideos(): Promise<OfflineVideo[]> {
+    const store = await this.getStore('videos');
+    return new Promise((resolve, reject) => {
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- // User actions store (likes, comments, etc.)
- if (!db.objectStoreNames.contains('userActions')) {
- const actionsStore = db.createObjectStore('userActions', {
- keyPath: 'id',
- autoIncrement: true });
- actionsStore.createIndex('type', 'type', { unique: false });
- actionsStore.createIndex('timestamp', 'timestamp', { unique: false });
- actionsStore.createIndex('synced', 'synced', { unique: false });
- }
+  async deleteVideo(id: string): Promise<void> {
+    const store = await this.getStore('videos', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const request = store.delete(id);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- // Watch history store
- if (!db.objectStoreNames.contains('watchHistory')) {
- const historyStore = db.createObjectStore('watchHistory', {
- keyPath: 'id' });
- historyStore.createIndex('watchedAt', 'watchedAt', { unique: false });
- }
+  async saveSubscription(subscription: Subscription): Promise<void> {
+    const store = await this.getStore('subscriptions', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const request = store.put(subscription);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- // Playlists store
- if (!db.objectStoreNames.contains('playlists')) {
- const playlistsStore = db.createObjectStore('playlists', {
- keyPath: 'id' });
- playlistsStore.createIndex('createdAt', 'createdAt', {
- unique: false });
- }
+  async getSubscriptions(): Promise<Subscription[]> {
+    const store = await this.getStore('subscriptions');
+    return new Promise((resolve, reject) => {
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- // Subscriptions store
- if (!db.objectStoreNames.contains('subscriptions')) {
- const subscriptionsStore = db.createObjectStore('subscriptions', {
- keyPath: 'channelId' });
- subscriptionsStore.createIndex('subscribedAt', 'subscribedAt', {
- unique: false });
- }
+  async removeSubscription(channelId: string): Promise<void> {
+    const store = await this.getStore('subscriptions', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const request = store.delete(channelId);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- // Pending uploads store
- if (!db.objectStoreNames.contains('pendingUploads')) {
- const uploadsStore = db.createObjectStore('pendingUploads', {
- keyPath: 'id',
- autoIncrement: true });
- uploadsStore.createIndex('createdAt', 'createdAt', { unique: false });
- };
- });
- }
+  async savePendingUpload(upload: Omit<PendingUpload, 'id' | 'createdAt' | 'status'>): Promise<number> {
+    const store = await this.getStore('pendingUploads', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const uploadData = {
+        ...upload,
+        status: 'pending' as const,
+        createdAt: Date.now()
+      };
+      const request = store.add(uploadData);
+      request.onsuccess = () => resolve(request.result as number);
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- private async getStore(,
- storeName,
- mode: IDBTransactionMode = 'readonly',
- ): Promise<any> < IDBObjectStore> {
- if (!this.db) {
- await this.init();
- }
- const transaction = this.db!.transaction([storeName], mode);
- return transaction.objectStore(storeName);
- }
+  async getPendingUploads(): Promise<PendingUpload[]> {
+    const store = await this.getStore('pendingUploads');
+    return new Promise((resolve, reject) => {
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- // Video operations
- async saveVideo(video: Video): Promise<any> < void> {
- const store = await this.getStore('videos', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.put({ ...video as any, cachedAt: Date.now() });
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(new Error(request.error?.message || 'Failed to cache video'));
- });
- }
+  async updateUploadStatus(id: number, status: 'pending' | 'uploading' | 'completed' | 'failed'): Promise<void> {
+    const store = await this.getStore('pendingUploads', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const getRequest = store.get(id);
+      getRequest.onsuccess = () => {
+        const upload = getRequest.result;
+        if (upload) {
+          upload.status = status;
+          const putRequest = store.put(upload);
+          putRequest.onsuccess = () => resolve();
+          putRequest.onerror = () => reject(putRequest.error);
+        } else {
+          reject(new Error('Upload not found'));
+        }
+      };
+      getRequest.onerror = () => reject(getRequest.error);
+    });
+  }
 
- async getVideo(id): Promise<any> < CachedVideo | null> {
- const store = await this.getStore('videos');
- return new Promise<any>((resolve, reject) => {
- const request = store.get(id);
- request.onsuccess = () => resolve(request.result || null);
- request.onerror = () =>
- reject(new Error(request.error?.message || 'Failed to get video'));
- });
- }
+  async deletePendingUpload(id: number): Promise<void> {
+    const store = await this.getStore('pendingUploads', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const request = store.delete(id);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
 
- async getAllVideos(): Promise<any> < CachedVideo[]> {
- const store = await this.getStore('videos');
- return new Promise<any>((resolve, reject) => {
- const request = store.getAll();
- request.onsuccess = () => resolve(request.result);
- request.onerror = () =>
- reject(new Error(request.error?.message || 'Failed to get all videos'));
- });
- }
+  async cleanupOldData(maxAge: number = 7 * 24 * 60 * 60 * 1000): Promise<void> {
+    const cutoffTime = Date.now() - maxAge;
+    
+    // Clean up old videos
+    const videosStore = await this.getStore('videos', 'readwrite');
+    const videosRequest = videosStore.openCursor();
+    
+    videosRequest.onsuccess = (event) => {
+      const cursor = (event.target as IDBRequest).result;
+      if (cursor) {
+        const video = cursor.value;
+        if (video.downloadedAt < cutoffTime) {
+          cursor.delete();
+        }
+        cursor.continue();
+      }
+    };
+  }
 
- async deleteVideo(id): Promise<any> < void> {
- const store = await this.getStore('videos', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.delete(id);
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(new Error(request.error?.message || 'Failed to delete video'));
- });
- }
+  async getStorageUsage(): Promise<{ used: number; quota: number }> {
+    if ('storage' in navigator && 'estimate' in navigator.storage) {
+      try {
+        const estimate = await navigator.storage.estimate();
+        return {
+          used: estimate.usage || 0,
+          quota: estimate.quota || 0
+        };
+      } catch (error) {
+        console.warn('Storage estimation failed:', error);
+      }
+    }
+    return { used: 0, quota: 0 };
+  }
+}
 
- // User actions operations (for background sync)
- async saveUserAction(,
- action: Omit < UserAction, 'id' | 'timestamp' | 'synced'>
- ): Promise<any> < void> {
- const store = await this.getStore('userActions', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.add({
- ...action as any,
- timestamp: Date.now(),
- synced: false });
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to add user action')
- );
- });
- }
-
- async getPendingActions(): Promise<any> < UserAction[]> {
- const store = await this.getStore('userActions');
- return new Promise<any>((resolve, reject) => {
- const index = store.index('synced');
- const request = index.getAll(IDBKeyRange.only(false));
- request.onsuccess = () => resolve(request.result);
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to get pending actions')
- );
- });
- }
-
- async markActionSynced(id): Promise<any> < void> {
- const store = await this.getStore('userActions', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const getRequest = store.get(id);
- getRequest.onsuccess = () => {
- const action = getRequest.result;
- if (action as any) {
- action.synced = true;
- const putRequest = store.put(action);
- putRequest.onsuccess = () => resolve();
- putRequest.onerror = () =>
- reject(
- new Error(putRequest.error?.message || 'Failed to update action')
- );
- } else {
- resolve();
- };
- getRequest.onerror = () =>
- reject(new Error(getRequest.error?.message || 'Failed to get action'));
- });
- }
-
- async deleteAction(id): Promise<any> < void> {
- const store = await this.getStore('userActions', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.delete(id);
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(new Error(request.error?.message || 'Failed to delete action'));
- });
- }
-
- // Watch history operations
- async saveWatchHistory(entry: WatchHistoryEntry): Promise<any> < void> {
- const store = await this.getStore('watchHistory', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.put(entry);
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to save watch history')
- );
- });
- }
-
- async getWatchHistory(limit: number = 50): Promise<any> < WatchHistoryEntry[]> {
- const store = await this.getStore('watchHistory');
- return new Promise<any>((resolve, reject) => {
- const index = store.index('watchedAt');
- const request = index.openCursor(null, 'prev');
- const results: WatchHistoryEntry = [];
- let count: number = 0;
-
- request.onsuccess = (event) => {
- const cursor = (event.target as IDBRequest).result;
- if (cursor && count < limit) {
- results.push(cursor.value);
- count++;
- cursor.continue();
- } else {
- resolve(results);
- };
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to get watch history')
- );
- });
- }
-
- // Playlist operations
- async savePlaylist(playlist: Playlist): Promise<any> < void> {
- const store = await this.getStore('playlists', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.put(playlist);
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(new Error(request.error?.message || 'Failed to save playlist'));
- });
- }
-
- async getPlaylists(): Promise<any> < Playlist[]> {
- const store = await this.getStore('playlists');
- return new Promise<any>((resolve, reject) => {
- const request = store.getAll();
- request.onsuccess = () => resolve(request.result);
- request.onerror = () =>
- reject(new Error(request.error?.message || 'Failed to get playlists'));
- });
- }
-
- // Subscription operations
- async saveSubscription(subscription: Subscription): Promise<any> < void> {
- const store = await this.getStore('subscriptions', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.put(subscription);
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to save subscription')
- );
- });
- }
-
- async getSubscriptions(): Promise<any> < Subscription[]> {
- const store = await this.getStore('subscriptions');
- return new Promise<any>((resolve, reject) => {
- const request = store.getAll();
- request.onsuccess = () => resolve(request.result);
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to get subscriptions')
- );
- });
- }
-
- async removeSubscription(channelId): Promise<any> < void> {
- const store = await this.getStore('subscriptions', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.delete(channelId);
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to remove subscription')
- );
- });
- }
-
- // Pending uploads operations
- async savePendingUpload(,
- upload: Omit < PendingUpload, 'id' | 'createdAt' | 'status'>
- ): Promise<any> < number> {
- const store = await this.getStore('pendingUploads', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.add({
- ...upload as any,
- createdAt: Date.now(),
- status: 'pending' });
- request.onsuccess = () => resolve(request.result as number);
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to save pending upload')
- );
- });
- }
-
- async getPendingUploads(): Promise<any> < PendingUpload[]> {
- const store = await this.getStore('pendingUploads');
- return new Promise<any>((resolve, reject) => {
- const request = store.getAll();
- request.onsuccess = () => resolve(request.result);
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to get pending uploads')
- );
- });
- }
-
- async updateUploadStatus(,
- id,
- status: 'pending' | 'uploading' | 'completed' | 'failed',
- ): Promise<any> < void> {
- const store = await this.getStore('pendingUploads', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const getRequest = store.get(id);
- getRequest.onsuccess = () => {
- const upload = getRequest.result;
- if (upload as any) {
- upload.status = status;
- upload.updatedAt = Date.now();
- const putRequest = store.put(upload);
- putRequest.onsuccess = () => resolve();
- putRequest.onerror = () =>
- reject(
- new Error(,
- putRequest.error?.message || 'Failed to update upload status',
- )
- );
- } else {
- resolve();
- };
- getRequest.onerror = () =>
- reject(new Error(getRequest.error?.message || 'Failed to get upload'));
- });
- }
-
- async deletePendingUpload(id): Promise<any> < void> {
- const store = await this.getStore('pendingUploads', 'readwrite');
- return new Promise<any>((resolve, reject) => {
- const request = store.delete(id);
- request.onsuccess = () => resolve();
- request.onerror = () =>
- reject(
- new Error(request.error?.message || 'Failed to delete pending upload')
- );
- });
- }
-
- // Cleanup operations
- async cleanupOldData(,
- maxAge: number = 7 * 24 * 60 * 60 * 1000,
- ): Promise<any> < void> {
- const cutoffTime = Date.now() - maxAge;
-
- // Clean old cached videos
- const videosStore = await this.getStore('videos', 'readwrite');
- const videosRequest = videosStore.openCursor();
-
- videosRequest.onsuccess = (event) => {
- const cursor = (event.target as IDBRequest).result;
- if (cursor as any) {
- const video = cursor.value;
- if (video.cachedAt && video.cachedAt < cutoffTime) {
- cursor.delete();
- }
- cursor.continue();
- };
-
- // Clean old watch history
- const historyStore = await this.getStore('watchHistory', 'readwrite');
- const historyRequest = historyStore.openCursor();
-
- historyRequest.onsuccess = (event) => {
- const cursor = (event.target as IDBRequest).result;
- if (cursor as any) {
- const entry = cursor.value;
- if (entry.watchedAt < cutoffTime) {
- cursor.delete();
- }
- cursor.continue();
- };
- }
-
- // Get storage usage
- async getStorageUsage(): Promise<{ used: number; quota: number }> {
- if ('storage' in navigator && 'estimate' in navigator.storage) {
- const estimate = await navigator.storage.estimate();
- return {
- used: estimate.usage || 0,
- quota: estimate.quota || 0 };
- }
- return { used: 0, quota: 0 };
- }
-// Create singleton instance
 export const offlineStorage = new OfflineStorage();
 
-// Initialize storage when module loads
+// Initialize on load
 offlineStorage
- .init()
- .catch(error =>
- conditionalLogger.error('Failed to initialize offline storage:', error)
- );
+  .init()
+  .catch((error) => {
+    console.error('Failed to initialize offline storage:', error);
+  });
 
-// Utility functions
 export const isOnline = (): boolean => navigator.onLine;
 
-export const waitForOnline = (): Promise<any> < void> => {
- return new Promise<any>((resolve) => {
- if (navigator.onLine) {
- resolve();
- } else {
- const handleOnline = () => {
- window.removeEventListener('online', handleOnline as EventListener);
- resolve();
- };
- window.addEventListener('online', handleOnline as EventListener);
- }
- });
+export const waitForOnline = (): Promise<void> => {
+  return new Promise((resolve) => {
+    if (navigator.onLine) {
+      resolve();
+    } else {
+      const handleOnline = () => {
+        window.removeEventListener('online', handleOnline);
+        resolve();
+      };
+      window.addEventListener('online', handleOnline);
+    }
+  });
 };
 
-export const syncPendingActions = async (): Promise<any> < void> => {
- if (!navigator.onLine) {
- return;
- }
+export const syncPendingActions = async (): Promise<void> => {
+  if (!navigator.onLine) return;
+  
+  try {
+    const pendingUploads = await offlineStorage.getPendingUploads();
+    const pendingUploadsToProcess = pendingUploads.filter(upload => upload.status === 'pending');
+    
+    for (const upload of pendingUploadsToProcess) {
+      try {
+        await offlineStorage.updateUploadStatus(upload.id, 'uploading');
+        // Actual upload logic would go here
+        await offlineStorage.updateUploadStatus(upload.id, 'completed');
+      } catch (error) {
+        await offlineStorage.updateUploadStatus(upload.id, 'failed');
+        console.error('Upload failed:', error);
+      }
+    }
+  } catch (error) {
+    console.error('Sync failed:', error);
+  }
+};
 
- try {
- const pendingActions = await offlineStorage.getPendingActions();
-
- for (const action of pendingActions) {
- try {
- const response = await (fetch as any)(action.endpoint, {
- method: action.method,
- headers: {
- 'Content - Type': 'application / json' },
- body: JSON.stringify(action.data) });
-
- if (response.ok && action.id !== undefined) {
- await offlineStorage.markActionSynced(action.id);
- }
- } catch (error) {
- conditionalLogger.error(
- 'Failed to sync action:',
- action,
- String(error)
- );
- }
- } catch (error) {
- conditionalLogger.error('Failed to sync pending actions:', error);
- };
-
-// Auto - sync when coming back online
-window.addEventListener('online', ( as EventListener) => {
- syncPendingActions().catch(() => {
- // Handle sync failure silently
- });
+window.addEventListener('online', () => {
+  syncPendingActions().catch(console.error);
 });
-
-export default offlineStorage;

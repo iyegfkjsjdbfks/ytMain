@@ -1,4 +1,4 @@
-import { BaseScriptGenerator, GenerationContext, ScriptTemplate } from './BaseScriptGenerator';
+import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types';
 import { logger } from '../utils/Logger';
 
@@ -169,7 +169,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'replace',
           file: '{{targetFile}}',
           pattern: /^\t+/gm,
-          replacement: (match: string) => ' '.repeat(match.length * 2),
+          replacement: '  ',
           description: 'Convert tabs to spaces in {{targetFile}}'
         }
       ],
@@ -224,7 +224,8 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     let validationChecks: ValidationCheck[] = [];
 
     // Get unique files affected by these errors
-    const affectedFiles = [...new Set(errors.map(e => e.file))];
+    const fileSet = new Set(errors.map(e => e.file));
+    const affectedFiles = Array.from(fileSet);
 
     switch (pattern) {
       case 'missing-semicolon':
@@ -386,7 +387,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
         type: 'replace',
         file,
         pattern: /^\t+/gm,
-        replacement: (match: string) => ' '.repeat(match.length * 2),
+        replacement: '  ',
         description: `Convert tabs to spaces in ${file}`
       });
 
@@ -438,7 +439,8 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     const validationChecks: ValidationCheck[] = [];
 
     // Get all unique files
-    const allFiles = [...new Set(context.errors.map(e => e.file))];
+    const fileSet = new Set(context.errors.map(e => e.file));
+    const allFiles = Array.from(fileSet);
 
     // Add commands for each type of formatting fix
     commands.push(...this.generateTrailingSpaceFixCommands(allFiles));

@@ -1,274 +1,193 @@
-import { memo, type ComponentType } from 'react';
+// Performance Optimizations - Minimal Implementation
+import React from 'react';
 
-// Enhanced memoization with custom comparison
-export const withMemo = <P extends object>(,;
- Component: ComponentType < P>
- propsAreEqual?: (prevProps: P, nextProps: P) => boolean
+export const withMemo = <P extends object>(
+  Component: React.ComponentType<P>,
+  propsAreEqual?: (prevProps: P, nextProps: P) => boolean
 ) => {
- const MemoizedComponent = memo(Component, propsAreEqual);
- MemoizedComponent.displayName = `Memo(${Component.displayName || Component.name})`;
- return MemoizedComponent;
+  return React.memo(Component, propsAreEqual);
 };
 
-// Deep comparison for complex props
-export const deepEqual = (a, b): (boolean) => {
- if (a === b) {
- return true;
- }
-
- if (a == null || b == null) {
- return false;
- }
-
- if (typeof a !== typeof b) {
- return false;
- }
-
- if (typeof a !== 'object') {
- return false;
- }
-
- const keysA = Object.keys(a);
- const keysB = Object.keys(b);
-
- if (keysA.length !== keysB.length) {
- return false;
- }
-
- for (const key of keysA) {
- if (!keysB.includes(key)) {
- return false;
- }
- if (!deepEqual(a.key, b.key)) {
- return false;
- }
- return true;
+export const deepEqual = (a: any, b: any): boolean => {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (typeof a !== typeof b) return false;
+  
+  if (typeof a === 'object') {
+    const keysA = Object.keys(a);
+    const keysB = Object.keys(b);
+    
+    if (keysA.length !== keysB.length) return false;
+    
+    for (const key of keysA) {
+      if (!keysB.includes(key)) return false;
+      if (!deepEqual(a[key], b[key])) return false;
+    }
+    
+    return true;
+  }
+  
+  return false;
 };
 
-// Shallow comparison for props
-export const shallowEqual = <T extends object>(a: T, b: T): (boolean) => {
- const keysA = Object.keys(a) as Array<any> < keyof T>;
- const keysB = Object.keys(b) as Array<any> < keyof T>;
-
- if (keysA.length !== keysB.length) {
- return false;
- }
-
- for (const key of keysA) {
- if (a.key !== b.key) {
- return false;
- }
- return true;
+export const shallowEqual = <T extends object>(a: T, b: T): boolean => {
+  const keysA = Object.keys(a) as Array<keyof T>;
+  const keysB = Object.keys(b) as Array<keyof T>;
+  
+  if (keysA.length !== keysB.length) return false;
+  
+  for (const key of keysA) {
+    if (a[key] !== b[key]) return false;
+  }
+  
+  return true;
 };
 
-// Performance monitoring utilities
-export class PerformanceMonitor {
- private metrics = new Map < string, number>();
- private observers = new Map < string, PerformanceObserver>();
+export class PerformanceObserver {
+  private observers: PerformanceObserver[] = [];
 
- startMeasure(name) {
- performance.mark(`${name}-start`);
- this.metrics.set(`${name}-start`, performance.now());
- }
+  observeFID(callback: (entry: PerformanceEntry) => void): void {
+    if ('PerformanceObserver' in window) {
+      try {
+        const observer = new window.PerformanceObserver((list) => {
+          list.getEntries().forEach(callback);
+        });
+        observer.observe({ entryTypes: ['first-input'] });
+        this.observers.push(observer);
+      } catch (error) {
+        console.warn('FID observation failed:', error);
+      }
+    }
+  }
 
- endMeasure(name) {
- const startTime = this.metrics.get(`${name}-start`);
- if (startTime as any) {
- const endTime = performance.now();
- const duration = endTime - startTime;
+  observeCLS(callback: (entry: PerformanceEntry) => void): void {
+    if ('PerformanceObserver' in window) {
+      try {
+        const observer = new window.PerformanceObserver((list) => {
+          list.getEntries().forEach(callback);
+        });
+        observer.observe({ entryTypes: ['layout-shift'] });
+        this.observers.push(observer);
+      } catch (error) {
+        console.warn('CLS observation failed:', error);
+      }
+    }
+  }
 
- performance.mark(`${name}-end`);
- performance.measure(name, `${name}-start`, `${name}-end`);
+  disconnect(): void {
+    this.observers.forEach(observer => observer.disconnect());
+    this.observers = [];
+  }
 
- this.metrics.set(name, duration);
+  hasMetric(name: string): boolean {
+    return performance.getEntriesByName(name).length > 0;
+  }
+}
 
- if (import.meta.env.MODE === 'development') {
- (console as any).log(`Performance: ${name} took ${duration.toFixed(2)}ms`);
- }
-
- return duration;
- }
- return 0;
- }
-
- getMeasure(name): number | undefined {
- return this.metrics.get(name);
- }
-
- observeLCP(callback: (entry: PerformanceEntry) => void) {
- if ('PerformanceObserver' in window) {
- const observer = new PerformanceObserver((list) => {
- const entries = list.getEntries();
- const lastEntry = entries[entries.length - 1];
- if (lastEntry as any) {
- callback(lastEntry);
- }
- });
-
- observer.observe({ entryTypes: ['largest - contentful - paint'] });
- this.observers.set('lcp', observer);
- }
- observeFID(callback: (entry: PerformanceEntry) => void) {
- if ('PerformanceObserver' in window) {
- const observer = new PerformanceObserver((list) => {
- list.getEntries().forEach(callback);
- });
-
- observer.observe({ entryTypes: ['first - input'] });
- this.observers.set('fid', observer);
- }
- observeCLS(callback: (entry: PerformanceEntry) => void) {
- if ('PerformanceObserver' in window) {
- const observer = new PerformanceObserver((list) => {
- list.getEntries().forEach(callback);
- });
-
- observer.observe({ entryTypes: ['layout - shift'] });
- this.observers.set('cls', observer);
- }
- disconnect() {
- this.observers.forEach(observer => observer.disconnect());
- this.observers.clear();
- }
-
- hasMetric(name): boolean {
- return this.metrics.has(name);
- }
-// Singleton instance
-export const performanceMonitor = new PerformanceMonitor();
-
-// Image optimization utilities
-export const optimizeImageUrl = (,;
- url,
- width?: number,
- height?: number,
- quality = 80
-): (string) => {
- if (!url) {
- return url;
- }
-
- // For YouTube thumbnails, use different quality versions
- if (url.includes('youtube.com') || url.includes('ytimg.com')) {
- if (width && width <= 120) {
- return url.replace(/maxresdefault|hqdefault|mqdefault/, 'default');
- }
- if (width && width <= 320) {
- return url.replace(/maxresdefault|hqdefault/, 'mqdefault');
- }
- if (width && width <= 480) {
- return url.replace(/maxresdefault/, 'hqdefault');
- }
- return url;
- }
-
- // For other images, add query parameters if supported
- const separator = url.includes('?') ? '&' : '?';
- const params: any[] = [];
-
- if (width as any) {
- params.push(`w=${width}`);
- }
- if (height as any) {
- params.push(`h=${height}`);
- }
- if (quality !== 80) {
- params.push(`q=${quality}`);
- }
-
- return params.length > 0 ? `${url}${separator}${params.join('&')}` : url;
+export const optimizeImageUrl = (
+  url: string,
+  options: {
+    width?: number;
+    height?: number;
+    quality?: number;
+  } = {}
+): string => {
+  if (!url) return '';
+  
+  try {
+    const urlObj = new URL(url);
+    
+    if (options.width) {
+      urlObj.searchParams.set('w', options.width.toString());
+    }
+    
+    if (options.height) {
+      urlObj.searchParams.set('h', options.height.toString());
+    }
+    
+    if (options.quality) {
+      urlObj.searchParams.set('q', options.quality.toString());
+    }
+    
+    return urlObj.toString();
+  } catch (error) {
+    console.warn('Image URL optimization failed:', error);
+    return url;
+  }
 };
 
-// Bundle size optimization
-export const preloadComponent = (, ;
- componentImport: () => Promise<{ default: ComponentType < any> }>
+export const preloadComponent = (
+  componentImport: () => Promise<any>
 ) => {
- // Preload component during idle time
- if ('requestIdleCallback' in window) {
- requestIdleCallback(() => {
- componentImport().catch(() => {
- // Ignore preload errors
- });
- });
- } else {
- // Fallback for browsers without requestIdleCallback
- setTimeout((() => {
- componentImport().catch(() => {
- // Ignore preload errors
- });
- }) as any, 100);
- };
+  let componentPromise: Promise<any> | null = null;
+  
+  return {
+    preload: () => {
+      if (!componentPromise) {
+        componentPromise = componentImport();
+      }
+      return componentPromise;
+    },
+    
+    load: () => {
+      if (!componentPromise) {
+        componentPromise = componentImport();
+      }
+      return componentPromise;
+    }
+  };
+};
 
-// Memory management
 export const createMemoryManager = () => {
- const cache = new Map();
- const maxSize: number = 100;
- const accessOrder = new Set();
-
- return {
- set(key, value: string | number) {
- if (cache.size >= maxSize) {
- // Remove least recently used item
- const firstKey = accessOrder.values().next().value;
- if (firstKey as any) {
- cache.delete(firstKey);
- accessOrder.delete(firstKey);
- }
- cache.set(key, value);
- accessOrder.delete(key);
- accessOrder.add(key);
- },
-
- get(key) {
- if (cache.has(key)) {
- // Update access order
- accessOrder.delete(key);
- accessOrder.add(key);
- return cache.get(key);
- }
- return undefined;
- },
-
- has(key) {
- return cache.has(key);
- },
-
- delete(key) {
- cache.delete(key);
- accessOrder.delete(key);
- },
-
- clear() {
- cache.clear();
- accessOrder.clear();
- },
-
- size() {
- return cache.size;
- };
+  const cache = new Map<string, any>();
+  const maxSize = 100;
+  
+  return {
+    set(key: string, value: any): void {
+      if (cache.size >= maxSize) {
+        const firstKey = cache.keys().next().value;
+        cache.delete(firstKey);
+      }
+      cache.set(key, value);
+    },
+    
+    get(key: string): any {
+      return cache.get(key);
+    },
+    
+    has(key: string): boolean {
+      return cache.has(key);
+    },
+    
+    delete(key: string): boolean {
+      return cache.delete(key);
+    },
+    
+    clear(): void {
+      cache.clear();
+    },
+    
+    size(): number {
+      return cache.size;
+    }
+  };
 };
 
-// Request deduplication
 export const createRequestDeduplicator = () => {
- const pendingRequests = new Map < string, Promise<any> < any>>();
-
- return {
- deduplicate < T>(key, requestFn: () => Promise<any> < T>): Promise<any> < T> {
- if (pendingRequests.has(key)) {
- return pendingRequests.get(key) as Promise<any> < T>;
- }
-
- const promise = requestFn().finally(() => {
- pendingRequests.delete(key);
- });
-
- pendingRequests.set(key, promise);
- return promise;
- },
-
- clear() {
- pendingRequests.clear();
- };
+  const pendingRequests = new Map<string, Promise<any>>();
+  
+  return {
+    deduplicate<T>(key: string, requestFn: () => Promise<T>): Promise<T> {
+      if (pendingRequests.has(key)) {
+        return pendingRequests.get(key) as Promise<T>;
+      }
+      
+      const promise = requestFn().finally(() => {
+        pendingRequests.delete(key);
+      });
+      
+      pendingRequests.set(key, promise);
+      return promise;
+    }
+  };
 };
-
-export const requestDeduplicator = createRequestDeduplicator();

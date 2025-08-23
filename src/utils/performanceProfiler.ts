@@ -1,27 +1,26 @@
-import React, { memo } from 'react';
-// Performance monitoring utility for React components
+// Performance Profiler - Minimal Implementation
+import React from 'react';
 
-export const withPerformanceProfiler = <P extends object>(,
- Component: React.ComponentType<P>,
- componentName
+export const withPerformanceProfiler = <P extends object>(
+  Component: React.ComponentType<P>
 ) => {
- const WrappedComponent = (props: P) => {
- if (process.env.NODE_ENV === 'development') {
- return React.createElement(React.Profiler,
- {
- id: componentName,
- onRender: (id, phase, actualDuration) => {
- if (actualDuration > 16) {
- (console as any).warn(
- `⚡ Slow render detected: ${id} (${phase}) took ${actualDuration.toFixed(2)}ms`
- );
- }
- } },
- React.createElement(Component, props)
- );
- }
- return React.createElement(Component, props);
- };
-
- return React.memo(WrappedComponent);
+  return React.forwardRef<any, P>((props, ref) => {
+    React.useEffect(() => {
+      const componentName = Component.displayName || Component.name || 'Component';
+      performance.mark(`${componentName}-render-start`);
+      
+      return () => {
+        performance.mark(`${componentName}-render-end`);
+        performance.measure(
+          `${componentName}-render`,
+          `${componentName}-render-start`,
+          `${componentName}-render-end`
+        );
+      };
+    });
+    
+    return React.createElement(Component, { ...props, ref });
+  });
 };
+
+export default withPerformanceProfiler;

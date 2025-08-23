@@ -47,7 +47,7 @@ export abstract class BaseScriptGenerator {
       const errorGroups = this.groupErrorsByPattern(context.errors);
       const scripts: FixingScript[] = [];
 
-      for (const [pattern, errors] of errorGroups.entries()) {
+      for (const [pattern, errors] of Array.from(errorGroups.entries())) {
         const script = await this.generateScriptForPattern(pattern, errors, context);
         if (script) {
           scripts.push(script);
