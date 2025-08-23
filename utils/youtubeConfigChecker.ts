@@ -78,7 +78,8 @@ export const testYouTubeAPI = async (): Promise<{
  success: false,
  message: 'YouTube Search API test failed',
  error: error instanceof Error ? error.message : 'Unknown error' };
- };
+ }
+};
 
 /**
  * Log configuration status to console for debugging
