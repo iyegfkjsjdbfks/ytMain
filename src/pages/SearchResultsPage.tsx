@@ -57,11 +57,9 @@ const SearchResultsPage: React.FC = () => {
       return;
     }
 
-    setSearchState(prev => ({ 
-      ...prev, 
+    setSearchState(prev => ({...prev, 
       loading: true,
-      youtubeLoading: true 
-    }));
+      youtubeLoading: true}));
 
     try {
       const result = await VideoService.searchVideos(searchQuery);
@@ -75,18 +73,14 @@ const SearchResultsPage: React.FC = () => {
       });
     } catch (error) {
       console.error('Error in search:', error);
-      setSearchState(prev => ({ 
-        ...prev, 
+      setSearchState(prev => ({...prev, 
         loading: false,
-        youtubeLoading: false 
-      }));
+        youtubeLoading: false}));
     }
   }, []);
 
   // Effect for debounced search
-  useEffect(() => {
-    performSearch(debouncedQuery);
-  }, [debouncedQuery, performSearch]);
+  useEffect(() => {performSearch(debouncedQuery);}, [debouncedQuery, performSearch]);
 
   // Early return for empty query
   if (!query) {
@@ -97,8 +91,7 @@ const SearchResultsPage: React.FC = () => {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 pt-4">
+  return (<div className="min-h-screen bg-white dark:bg-gray-900 pt-4">
       <div className="max-w-[1280px] mx-auto">
         <OptimizedSearchResults
           videos={searchState.videos}
@@ -107,8 +100,7 @@ const SearchResultsPage: React.FC = () => {
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
           sortBy="relevance"
-          onVideoClick={(video: any) => {
-            if ('videoId' in video) {
+          onVideoClick={(video: any) => {if ('videoId' in video) {
               navigate(`/watch?v=${video.videoId}`);
             } else {
               navigate(`/watch?v=${video.id}`);

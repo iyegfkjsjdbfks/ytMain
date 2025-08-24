@@ -19,7 +19,7 @@ const ERROR_FIXES = {
 
   // TS1005: Missing comma in array/object literals
   'missing-comma-literal': {
-    pattern: /(\w+):\s*[^,}\]]*)\s*$/m,
+    pattern: /(\w+):\s*([^,}\]]*)\s*$/m,
     replacement: '$1,',
     description: 'Add missing comma in object/array literals'
   },

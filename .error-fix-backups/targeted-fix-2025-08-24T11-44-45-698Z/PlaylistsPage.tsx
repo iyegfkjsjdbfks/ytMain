@@ -99,7 +99,7 @@ const PlaylistsPage: React.FC = () => {
  >
  <PlusCircleIcon className="w-5 h-5 mr-2" />
  Create New Playlist
-</button>
+// FIXED:  </button>
 // FIXED:  </div>
 
  {loading ? (
