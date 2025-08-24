@@ -5,7 +5,18 @@ import { QueueListIcon as QueueListSolidIcon, PlayIcon as PlaySolidIcon } from '
 import PlaylistDetailSkeleton from '../components/LoadingStates/PlaylistDetailSkeleton';
 import PlaylistEditModal from '../components/PlaylistEditModal';
 import { removeVideoFromPlaylist, getUserPlaylistById, updateUserPlaylistDetails } from '../services/realVideoService';
-import type { Video, UserPlaylist } from '../types';
+import type { Video } from '../types';
+
+interface UserPlaylist {
+  id: string;
+  title: string;
+  description?: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  isPublic: boolean;
+  thumbnailUrl?: string;
+}
 
 interface PlaylistWithVideos extends UserPlaylist {
   videos: Video[];
@@ -101,11 +112,10 @@ const PlaylistDetailPage: React.FC = () => {
           return null;
         }
         return {
-          ...prevDetails,
-          videos: prevDetails.videos.filter((v) => v.id !== videoIdToRemove),
-          videoIds: prevDetails.videoIds.filter((id) => id !== videoIdToRemove),
-          // The count will be derived from videoIds.length, and updatedAt is handled by service
-        };
+            ...prevDetails,
+            videos: prevDetails.videos.filter((video) => video.id !== videoIdToRemove),
+            // The count will be derived from videos.length, and updatedAt is handled by service
+          };
       });
       setActiveVideoMenuId(null); // Close menu
     } catch (err) {
