@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/cli/main.js",
+    "start": "node dist/error-resolution/cli/main.js",
     "dev": "tsx src/error-resolution/cli/main.ts",
     "test": "jest",
     "test:watch": "jest --watch",
