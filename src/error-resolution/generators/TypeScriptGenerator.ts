@@ -501,7 +501,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   /**
    * Creates type validation checks for files
    */
-  private createTypeValidationChecks(files: string[]): ValidationCheck[] {
+  protected createTypeValidationChecks(files: string[]): ValidationCheck[] {
     return files.map(file => ({
       type: 'syntax' as const,
       command: `npx tsc --noEmit --strict ${file}`,
@@ -521,7 +521,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     const validationChecks: ValidationCheck[] = [];
 
     // Get all unique files
-    const allFiles = [...new Set(context.errors.map(e => e.file))];
+    const allFiles = [...new Set((context.errors || []).map(e => e.file))];
 
     // Add commands for common TypeScript fixes
     for (const file of allFiles) {
@@ -559,7 +559,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     return {
       id: scriptId,
       category: this.category,
-      targetErrors: context.errors,
+      targetErrors: context.errors || [],
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks,
