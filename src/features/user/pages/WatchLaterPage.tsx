@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 /**
  * WatchLaterPage component for displaying videos saved to watch later
  */

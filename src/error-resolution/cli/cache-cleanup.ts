@@ -1,3 +1,4 @@
+import React from 'react';
 #!/usr/bin/env node
 
 import { CacheManager } from '../core/CacheManager';

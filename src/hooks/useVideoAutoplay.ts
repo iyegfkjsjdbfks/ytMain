@@ -1,3 +1,4 @@
+import React from 'react';
 // useVideoAutoplay - Simple Hook
 import { useState } from 'react';
 

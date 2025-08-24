@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React from 'react';
 // Environment configuration
 export const ENV = {
  NODE_ENV: import.meta.env.NODE_ENV || 'development',
@@ -42,7 +42,6 @@ export const PERFORMANCE_CONFIG = {
  PERFORMANCE_SAMPLE_RATE: parseFloat(import.meta.env.VITE_PERFORMANCE_SAMPLE_RATE || '0.1'),
  PERFORMANCE_BUDGET: {
  LCP: parseInt(import.meta.env.VITE_PERFORMANCE_LCP_BUDGET || '2500', 10),
- FCP: parseInt(import.meta.env.VITE_PERFORMANCE_FCP_BUDGET || '1800', 10),
  CLS: parseFloat(import.meta.env.VITE_PERFORMANCE_CLS_BUDGET || '0.1'),
  TTFB: parseInt(import.meta.env.VITE_PERFORMANCE_TTFB_BUDGET || '800', 10) },
 

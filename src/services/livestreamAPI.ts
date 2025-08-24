@@ -1,3 +1,4 @@
+import React from 'react';
 // Livestream API - Enhanced Implementation
 export interface LiveStreamConfig {
   streamKey: string;

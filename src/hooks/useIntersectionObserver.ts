@@ -1,3 +1,4 @@
+import React from 'react';
 // useIntersectionObserver - Simple Hook
 import { useState } from 'react';
 

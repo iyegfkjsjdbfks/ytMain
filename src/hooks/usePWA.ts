@@ -1,3 +1,4 @@
+import React from 'react';
 // usePWA - Simple Hook
 import { useState } from 'react';
 

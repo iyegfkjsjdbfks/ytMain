@@ -1,3 +1,4 @@
+import React from 'react';
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
 import { Logger } from '../utils/Logger';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { WorkflowCoordinator } from '../core/WorkflowCoordinator';
 import { Logger } from '../utils/Logger';
 

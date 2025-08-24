@@ -1,3 +1,4 @@
+import React from 'react';
 import { EventEmitter } from 'events';
 import { PerformanceMetrics, ExecutionPhase } from '../types/ErrorTypes';
 

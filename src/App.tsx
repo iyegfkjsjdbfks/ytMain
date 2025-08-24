@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { routes } from '@/config/routes.tsx';
+import { routes } from './config/routes.tsx';
 
 // Create router with v7 future flags to prevent deprecation warnings
 const router = createBrowserRouter(

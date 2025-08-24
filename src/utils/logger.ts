@@ -1,3 +1,4 @@
+import React from 'react';
 // Logger - Minimal Implementation
 export enum LogLevel {
   ERROR = 0,

@@ -1,3 +1,4 @@
+import React from 'react';
 import { ValidationEngine } from '../core/ValidationEngine';
 import { Logger } from '../utils/Logger';
 

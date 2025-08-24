@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 /**
  * AIContentSparkPage component for AI-assisted content creation
  */

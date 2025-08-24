@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, FC, KeyboardEvent } from 'react';
-import { useLocation } from 'react - router - dom';
-import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon, XMarkIcon } from '@heroicons / react / 24 / outline';
+import { useLocation } from 'react-router-dom';
+import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import CommentModal from '../components / CommentModal';
-import EmptyShortsState from '../components / ErrorStates / EmptyShortsState';
-import ShortsPageError from '../components / ErrorStates / ShortsPageError';
-import ShortsPageSkeleton from '../components / LoadingStates / ShortsPageSkeleton';
-import ShortDisplayCard from '../components / ShortDisplayCard';
-import ShortsFilters from '../components / ShortsFilters';
-import ShortsNavigation from '../components / ShortsNavigation';
-import { useLocalStorage, useShortsVideos } from '../src / hooks';
+import CommentModal from '../components/CommentModal';
+import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
+import ShortsPageError from '../components/ErrorStates/ShortsPageError';
+import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
+import ShortDisplayCard from '../components/ShortDisplayCard';
+import ShortsFilters from '../components/ShortsFilters';
+import ShortsNavigation from '../components/ShortsNavigation';
+import { useLocalStorage, useShortsVideos } from '../src/hooks';
 
-import type { Short } from '../src / types / core';
+import type { Short } from '../src/types/core';
 
 const ShortsPage: React.FC = () => {}
  return null;
