@@ -4,7 +4,7 @@
     "module": "CommonJS",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -30,15 +30,27 @@
     "moduleResolution": "node",
     "allowJs": true,
     "isolatedModules": true,
-    "noEmit": false
+    "noEmit": false,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
+      "@pages/*": ["./pages/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@utils/*": ["./utils/*"],
+      "@services/*": ["./services/*"],
+      "@contexts/*": ["./contexts/*"],
+      "@store/*": ["./store/*"],
+      "@types/*": ["./types/*"],
+      "@config/*": ["./config/*"]
+    }
   },
   "include": [
-    "src/**/*"
+    "src",
+    "vite-env.d.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "**/*.test.ts",
-    "**/*.spec.ts"
+    "dist"
   ]
 }

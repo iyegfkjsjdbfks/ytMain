@@ -4,7 +4,7 @@ import { VideoCameraIcon, ChartBarIcon, CogIcon, BellIcon, PlayIcon, EyeIcon, He
 import { VideoCameraIcon as VideoCameraSolidIcon } from '@heroicons/react/24/solid';
 const VideoCameraIconSolid = VideoCameraSolidIcon;
 
-import TabsList, { Tabs } from '../components/ui/Tabs.tsx';
+import TabsList, { Tabs, TabsTrigger, TabsContent } from '../components/ui/Tabs.tsx';
 import { UnifiedButton } from '../components/ui/UnifiedButton.tsx';
 
 interface StudioVideo {
@@ -43,7 +43,7 @@ const StudioPage: React.FC = () => {
  setLoading(true);
 
  // Simulate API call
- await new Promise(resolve => setTimeout((resolve) as any, 1000));
+ await new Promise(resolve => setTimeout(resolve, 1000));
 
  // Mock videos data
  const mockVideos: StudioVideo[] = [
@@ -99,7 +99,7 @@ const StudioPage: React.FC = () => {
  loadStudioData();
  }, []);
 
- const formatNumber = (num): string => {
+ const formatNumber = (num: number): string => {
  if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -109,14 +109,15 @@ return `${(num / 1000).toFixed(1)}K`;
  return num.toString();
  };
 
- const getStatusColor = (status): string => {
- switch (status as any) {
+ const getStatusColor = (status: string): string => {
+ switch (status) {
  case 'published': return 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900/30';
  case 'draft': return 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900/30';
  case 'scheduled': return 'text-blue-600 bg-blue-100 dark:text-blue-400 dark:bg-blue-900/30';
  case 'processing': return 'text-purple-600 bg-purple-100 dark: text-purple-400 dark:bg-purple-900/30';
  default: return 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-gray-900/30'
  };
+}
 
  const quickActions = [
  {
@@ -154,11 +155,11 @@ return `${(num / 1000).toFixed(1)}K`;
  {[...Array(4)].map((_, i) => (
  <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg" />
  ))}
-// FIXED:  </div>
+ </div>
  <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg" />
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+ </div>
+ </div>
+ </div>
  );
  }
 
@@ -171,20 +172,20 @@ return `${(num / 1000).toFixed(1)}K`;
  <VideoCameraIconSolid className="w-8 h-8 text-red-600" />
  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
  YouTube Studio
-// FIXED:  </h1>
-// FIXED:  </div>
+ </h1>
+ </div>
 
  <div className="flex items-center space-x-3">
  <UnifiedButton variant="outline" size="sm">
  <BellIcon className="w-4 h-4 mr-2" />
  Notifications
-// FIXED:  </UnifiedButton>
+ </UnifiedButton>
  <UnifiedButton variant="primary" size="sm">
  <PlusIcon className="w-4 h-4 mr-2" />
  Create
-// FIXED:  </UnifiedButton>
-// FIXED:  </div>
-// FIXED:  </div>
+ </UnifiedButton>
+ </div>
+ </div>
 
  {/* Quick Actions */}
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -192,20 +193,19 @@ return `${(num / 1000).toFixed(1)}K`;
  <Link
  key={action.title}
  to={action.link}
-// FIXED:  className="group p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105" />
- >
+ className="group p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105">
  <div className={`w-12 h-12 ${action.color} rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
  {action.icon}
-// FIXED:  </div>
+ </div>
 <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
  {action.title}
-// FIXED:  </h3>
+ </h3>
  <p className="text-sm text-gray-600 dark:text-gray-400">
  {action.description}
-// FIXED:  </p>
-// FIXED:  </Link>
+ </p>
+ </Link>
  ))}
-// FIXED:  </div>
+ </div>
 
  {/* Analytics Overview */}
  {analytics && (
@@ -216,14 +216,14 @@ return `${(num / 1000).toFixed(1)}K`;
  <p className="text-sm text-gray-600 dark:text-gray-400">Total Views</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.totalViews)}
-// FIXED:  </p>
-// FIXED:  </div>
+ </p>
+ </div>
  <div className="flex items-center text-green-600">
  <ArrowUpIcon className="w-4 h-4 mr-1" />
  <span className="text-sm">{analytics.viewsChange}%</span>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+ </div>
+ </div>
+ </div>
 
  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
  <div className="flex items-center justify-between">
@@ -231,33 +231,33 @@ return `${(num / 1000).toFixed(1)}K`;
  <p className="text-sm text-gray-600 dark:text-gray-400">Subscribers</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {formatNumber(analytics.totalSubscribers)}
-// FIXED:  </p>
-// FIXED:  </div>
+ </p>
+ </div>
  <div className="flex items-center text-green-600">
  <ArrowUpIcon className="w-4 h-4 mr-1" />
  <span className="text-sm">{analytics.subscribersChange}%</span>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+ </div>
+ </div>
+ </div>
 
  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
  <div>
  <p className="text-sm text-gray-600 dark:text-gray-400">Total Videos</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  {analytics.totalVideos}
-// FIXED:  </p>
-// FIXED:  </div>
-// FIXED:  </div>
+ </p>
+ </div>
+ </div>
 
  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
  <div>
  <p className="text-sm text-gray-600 dark:text-gray-400">Revenue</p>
  <p className="text-2xl font-bold text-gray-900 dark:text-white">
  ${analytics.totalRevenue.toFixed(2)}
-// FIXED:  </p>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+ </p>
+ </div>
+ </div>
+ </div>
  )}
 
  {/* Content Management */}
@@ -270,64 +270,64 @@ return `${(num / 1000).toFixed(1)}K`;
  <TabsTrigger value="analytics">Analytics</TabsTrigger>
  <TabsTrigger value="comments">Comments</TabsTrigger>
  <TabsTrigger value="settings">Settings</TabsTrigger>
-// FIXED:  </TabsList>
-// FIXED:  </div>
+ </TabsList>
+ </div>
 
  <TabsContent value="dashboard" className="p-6">
  <div className="space-y-6">
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
  Recent Videos
-// FIXED:  </h2>
+ </h2>
  <div className="space-y-4">
  {videos.slice(0, 3).map((video) => (
  <div key={video.id} className="flex items-center space-x-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
  <img
-// FIXED:  src={video.thumbnail}
-// FIXED:  alt={video.title}
-// FIXED:  className="w-24 h-14 object-cover rounded" />
+ src={video.thumbnail}
+ alt={video.title}
+ className="w-24 h-14 object-cover rounded"
  />
  <div className="flex-1">
  <h3 className="font-medium text-gray-900 dark:text-white">
  {video.title}
-// FIXED:  </h3>
+ </h3>
  <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
  <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(video.status)}`}>
  {video.status}
-// FIXED:  </span>
+ </span>
  <span className="flex items-center">
  <EyeIcon className="w-4 h-4 mr-1" />
  {formatNumber(video.views)}
-// FIXED:  </span>
+ </span>
  <span className="flex items-center">
  <HeartIcon className="w-4 h-4 mr-1" />
  {formatNumber(video.likes)}
-// FIXED:  </span>
+ </span>
  <span className="flex items-center">
  <ChatBubbleLeftIcon className="w-4 h-4 mr-1" />
  {formatNumber(video.comments)}
-// FIXED:  </span>
-// FIXED:  </div>
-// FIXED:  </div>
+ </span>
+ </div>
+ </div>
 <UnifiedButton variant="outline" size="sm">
  Edit
-// FIXED:  </UnifiedButton>
-// FIXED:  </div>
+ </UnifiedButton>
+ </div>
  ))}
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </TabsContent>
+ </div>
+ </div>
+ </TabsContent>
 
  <TabsContent value="videos" className="p-6">
  <div className="space-y-4">
  <div className="flex items-center justify-between">
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
  All Videos
-// FIXED:  </h2>
+ </h2>
  <UnifiedButton variant="primary">
  <PlusIcon className="w-4 h-4 mr-2" />
  Upload Video
-// FIXED:  </UnifiedButton>
-// FIXED:  </div>
+ </UnifiedButton>
+ </div>
 
  <div className="overflow-x-auto">
  <table className="w-full">
@@ -339,99 +339,99 @@ return `${(num / 1000).toFixed(1)}K`;
  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Likes</th>
  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Comments</th>
  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Actions</th>
-// FIXED:  </tr>
-// FIXED:  </thead>
+ </tr>
+ </thead>
  <tbody>
  {videos.map((video) => (
  <tr key={video.id} className="border-b border-gray-100 dark:border-gray-800">
  <td className="py-4 px-4">
  <div className="flex items-center space-x-3">
  <img
-// FIXED:  src={video.thumbnail}
-// FIXED:  alt={video.title}
-// FIXED:  className="w-16 h-9 object-cover rounded" />
+ src={video.thumbnail}
+ alt={video.title}
+ className="w-16 h-9 object-cover rounded"
  />
  <div>
  <p className="font-medium text-gray-900 dark:text-white">
  {video.title}
-// FIXED:  </p>
+ </p>
  <p className="text-sm text-gray-600 dark:text-gray-400">
  {video.duration} • {new Date(video.uploadDate).toLocaleDateString()}
-// FIXED:  </p>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </td>
+ </p>
+ </div>
+ </div>
+ </td>
  <td className="py-4 px-4">
  <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(video.status)}`}>
  {video.status}
-// FIXED:  </span>
-// FIXED:  </td>
+ </span>
+ </td>
  <td className="py-4 px-4 text-gray-900 dark:text-white">
  {formatNumber(video.views)}
-// FIXED:  </td>
+ </td>
  <td className="py-4 px-4 text-gray-900 dark:text-white">
  {formatNumber(video.likes)}
-// FIXED:  </td>
+ </td>
  <td className="py-4 px-4 text-gray-900 dark:text-white">
  {formatNumber(video.comments)}
-// FIXED:  </td>
+ </td>
  <td className="py-4 px-4">
  <div className="flex items-center space-x-2">
  <UnifiedButton variant="ghost" size="sm">
  Edit
-// FIXED:  </UnifiedButton>
+ </UnifiedButton>
  <UnifiedButton variant="ghost" size="sm">
  Analytics
-// FIXED:  </UnifiedButton>
-// FIXED:  </div>
-// FIXED:  </td>
-// FIXED:  </tr>
+ </UnifiedButton>
+ </div>
+ </td>
+ </tr>
  ))}
-// FIXED:  </tbody>
-// FIXED:  </table>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </TabsContent>
+ </tbody>
+ </table>
+ </div>
+ </div>
+ </TabsContent>
 
  <TabsContent value="analytics" className="p-6">
  <div className="text-center py-12">
  <ChartBarIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  Detailed Analytics
-// FIXED:  </h3>
+ </h3>
  <p className="text-gray-600 dark:text-gray-400">
  Advanced analytics features coming soon
-// FIXED:  </p>
-// FIXED:  </div>
-// FIXED:  </TabsContent>
+ </p>
+ </div>
+ </TabsContent>
 
  <TabsContent value="comments" className="p-6">
  <div className="text-center py-12">
  <ChatBubbleLeftIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  Comment Management
-// FIXED:  </h3>
+ </h3>
  <p className="text-gray-600 dark:text-gray-400">
  Comment moderation tools coming soon
-// FIXED:  </p>
-// FIXED:  </div>
-// FIXED:  </TabsContent>
+ </p>
+ </div>
+ </TabsContent>
 
  <TabsContent value="settings" className="p-6">
  <div className="text-center py-12">
  <CogIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
  Channel Settings
-// FIXED:  </h3>
+ </h3>
  <p className="text-gray-600 dark:text-gray-400">
  Channel customization options coming soon
-// FIXED:  </p>
-// FIXED:  </div>
-// FIXED:  </TabsContent>
-// FIXED:  </Tabs>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+ </p>
+ </div>
+ </TabsContent>
+ </Tabs>
+ </div>
+ </div>
+ </div>
  );
 };
 
