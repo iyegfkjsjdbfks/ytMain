@@ -14,11 +14,11 @@ import { useLocalStorage, useShortsVideos } from '../src/hooks';
 import type { Short } from '../src/types/core';
 
 // Custom hook for debouncing
-function useDebounce<T>(value: any, T, delay: any, number): T {
+function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  useEffect((: any) => {
-    const handler = setTimeout((: any) => {
+  useEffect(() => {
+    const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
 
@@ -30,8 +30,8 @@ function useDebounce<T>(value: any, T, delay: any, number): T {
   return debouncedValue;
 }
 
-const ShortsPage: any, React.FC = () => {
-  const { data: any, allShorts, loading, error } = useShortsVideos();
+const ShortsPage: React.FC = () => {
+  const { data: allShorts, loading, error } = useShortsVideos();
   const containerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
@@ -40,26 +40,26 @@ const ShortsPage: any, React.FC = () => {
   const [followedChannelsArray, setFollowedChannelsArray] = useLocalStorage<string[]>('followedChannels', []);
 
   // Convert arrays to Sets for easier manipulation with comprehensive type checking
-  const likedShorts = useMemo((: any) => {
+  const likedShorts = useMemo(() => {
     try {
       // Ensure we have a valid array
-      const validArray = Array.isArray(likedShortsArray) ? likedShortsArray: any, [];
-      return new Set(validArray.filter((item: any) => typeof item === 'string'));
+      const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
+      return new Set(validArray.filter((item) => typeof item === 'string'));
     } catch (error) {
-      console.warn('Error creating likedShorts Set: any,', error);
+      console.warn('Error creating likedShorts Set:', error);
       // Clear invalid data and return empty Set
       setLikedShortsArray([]);
       return new Set<string>();
     }
   }, [likedShortsArray, setLikedShortsArray]);
 
-  const followedChannels = useMemo((: any) => {
+  const followedChannels = useMemo(() => {
     try {
       // Ensure we have a valid array
-      const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray: any, [];
-      return new Set(validArray.filter((item: any) => typeof item === 'string'));
+      const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
+      return new Set(validArray.filter((item) => typeof item === 'string'));
     } catch (error) {
-      console.warn('Error creating followedChannels Set: any,', error);
+      console.warn('Error creating followedChannels Set:', error);
       // Clear invalid data and return empty Set
       setFollowedChannelsArray([]);
       return new Set<string>();
@@ -67,7 +67,7 @@ const ShortsPage: any, React.FC = () => {
   }, [followedChannelsArray, setFollowedChannelsArray]);
 
   const [commentModalOpen, setCommentModalOpen] = useState<boolean>(false);
-  const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: any, string; title: any, string } | null>(null);
+  const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string; title: string } | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
   const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true);
 
@@ -91,36 +91,36 @@ const ShortsPage: any, React.FC = () => {
     }
 
     // Convert Video[] to Short[] with proper type conversion
-    let converted: any, Short[] = allShorts
-      .filter((video: any) => video.visibility !== 'scheduled') // Filter out scheduled videos
-      .map((video: any) => {
-        const shortVideo: any, Short = {
+    let converted: Short[] = allShorts
+      .filter((video) => video.visibility !== 'scheduled') // Filter out scheduled videos
+      .map((video) => {
+        const shortVideo: Short = {
           ...video as any,
-          duration: any, typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60: any, video.duration,
-          isShort: any, true,
-          isVertical: any, true,
-          visibility: any, video.visibility || 'public',
-          createdAt: any, video.createdAt || new Date().toISOString(),
-          updatedAt: any, video.updatedAt || new Date().toISOString(),
+          duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
+          isShort: true,
+          isVertical: true,
+          visibility: video.visibility || 'public',
+          createdAt: video.createdAt || new Date().toISOString(),
+          updatedAt: video.updatedAt || new Date().toISOString(),
           // Additional properties for Short type compatibility
-          viewCount: any, typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
-          commentCount: any, 0,
-          likeCount: any, video.likes || 0,
-          definition: any, 'hd' as 'hd' | 'sd'
+          viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
+          commentCount: 0,
+          likeCount: video.likes || 0,
+          definition: 'hd' as 'hd' | 'sd'
         };
         return shortVideo;
       });
 
     // Apply category filter
     if (selectedCategory !== 'all') {
-      converted = converted.filter((short: any) =>
+      converted = converted.filter((short) =>
         short.category.toLowerCase() === selectedCategory.toLowerCase());
     }
 
     // Apply search filter
     if (debouncedSearchQuery) {
       const query = debouncedSearchQuery.toLowerCase();
-      converted = converted.filter((short: any) =>
+      converted = converted.filter((short) =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
         short.description.toLowerCase().includes(query));
@@ -130,46 +130,46 @@ const ShortsPage: any, React.FC = () => {
   }, [allShorts, selectedCategory, debouncedSearchQuery]);
 
   // Get unique categories for filtering
-  const categories = useMemo((: any) => {
+  const categories = useMemo(() => {
     if (!allShorts) {
       return [];
     }
-    const uniqueCategories = [...new Set(allShorts.map((short: any) => short.category))];
+    const uniqueCategories = [...new Set(allShorts.map((short) => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking
-  const handleLike = useCallback((shortId: any, string) => {
-    setLikedShortsArray((prev: any) => {
-      const currentArray = Array.isArray(prev) ? prev: any, [];
+  const handleLike = useCallback((shortId: string) => {
+    setLikedShortsArray((prev) => {
+      const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
-        return currentArray.filter((id: any) => id !== shortId);
+        return currentArray.filter((id) => id !== shortId);
       }
       return [...currentArray, shortId];
     });
   }, [setLikedShortsArray]);
 
-  const handleFollow = useCallback((channelName: any, string) => {
-    setFollowedChannelsArray((prev: any) => {
-      const currentArray = Array.isArray(prev) ? prev: any, [];
+  const handleFollow = useCallback((channelName: string) => {
+    setFollowedChannelsArray((prev) => {
+      const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
-        return currentArray.filter((name: any) => name !== channelName);
+        return currentArray.filter((name) => name !== channelName);
       }
       return [...currentArray, channelName];
     });
   }, [setFollowedChannelsArray]);
 
-  const handleComment = useCallback((shortId: any, string) => {
+  const handleComment = useCallback((shortId: string) => {
     const currentFilteredShorts = filteredShorts;
     const short = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({
-      id: any, shortId,
-      title: any, short?.title || 'Short video'
+      id: shortId,
+      title: short?.title || 'Short video'
     });
     setCommentModalOpen(true);
   }, [filteredShorts]);
 
-  const handleCommentSubmit = useCallback(async (_commentText: any, string): Promise<void> => {
+  const handleCommentSubmit = useCallback(async (_commentText: string): Promise<void> => {
     if (!selectedShortForComment) {
       return;
     }
@@ -179,11 +179,11 @@ const ShortsPage: any, React.FC = () => {
       setCommentModalOpen(false);
       setSelectedShortForComment(null);
     } catch (error) {
-      console.error('Failed to submit comment: any,', error);
+      console.error('Failed to submit comment:', error);
     }
   }, [selectedShortForComment]);
 
-  const handleVideoChange = useCallback((index: any, number) => {
+  const handleVideoChange = useCallback((index: number) => {
     setCurrentVideoIndex(index);
 
     // Update URL with current video ID
@@ -198,16 +198,16 @@ const ShortsPage: any, React.FC = () => {
       const targetElement = containerRef.current.children[index] as HTMLElement;
       if (targetElement) {
         targetElement.scrollIntoView({
-          behavior: any, 'smooth',
-          block: any, 'start',
-          inline: any, 'nearest'
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
         });
       }
     }
   }, [filteredShorts]);
 
-  const handleNextVideo = useCallback((: any) => {
-    setCurrentVideoIndex((prevIndex: any) => {
+  const handleNextVideo = useCallback(() => {
+    setCurrentVideoIndex((prevIndex) => {
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
@@ -221,9 +221,9 @@ const ShortsPage: any, React.FC = () => {
           const targetElement = containerRef.current.children[nextIndex] as HTMLElement;
           if (targetElement) {
             targetElement.scrollIntoView({
-              behavior: any, 'smooth',
-              block: any, 'start',
-              inline: any, 'nearest'
+              behavior: 'smooth',
+              block: 'start',
+              inline: 'nearest'
             });
           }
         }
@@ -233,8 +233,8 @@ const ShortsPage: any, React.FC = () => {
     });
   }, [filteredShorts]);
 
-  const handlePreviousVideo = useCallback((: any) => {
-    setCurrentVideoIndex((prevIndex: any) => {
+  const handlePreviousVideo = useCallback(() => {
+    setCurrentVideoIndex((prevIndex) => {
       if (prevIndex > 0) {
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
@@ -248,9 +248,9 @@ const ShortsPage: any, React.FC = () => {
           const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement;
           if (targetElement) {
             targetElement.scrollIntoView({
-              behavior: any, 'smooth',
-              block: any, 'start',
-              inline: any, 'nearest'
+              behavior: 'smooth',
+              block: 'start',
+              inline: 'nearest'
             });
           }
         }
@@ -260,23 +260,23 @@ const ShortsPage: any, React.FC = () => {
     });
   }, [filteredShorts]);
 
-  const handleSearchToggle = useCallback((: any) => {
+  const handleSearchToggle = useCallback(() => {
     setShowSearch(prev => !prev);
     if (showSearch) {
       setSearchQuery('');
     }
   }, [showSearch]);
 
-  const handleFilterToggle = useCallback((: any) => {
+  const handleFilterToggle = useCallback(() => {
     setShowFilters(prev => !prev);
   }, []);
 
-  const handleCategoryChange = useCallback((category: any, string) => {
+  const handleCategoryChange = useCallback((category: string) => {
     setSelectedCategory(category);
     setCurrentVideoIndex(0);
   }, []);
 
-  const handleKeyboardNavigation = useCallback((event: any, KeyboardEvent) => {
+  const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
     if (commentModalOpen) {
       return;
     }
@@ -300,14 +300,14 @@ const ShortsPage: any, React.FC = () => {
     }
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId: any, string): Promise<void> => {
+  const handleShare = async (shortId: string): Promise<void> => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
       try {
         await navigator.share({
-          title: any, 'Check out this Short!',
-          url: any, shareUrl
+          title: 'Check out this Short!',
+          url: shareUrl
         });
       } catch (error) {
         // Fallback to clipboard if share fails
@@ -319,17 +319,17 @@ const ShortsPage: any, React.FC = () => {
     }
   };
 
-  const copyToClipboard = async (text: any, string): Promise<void> => {
+  const copyToClipboard = async (text: string): Promise<void> => {
     try {
       await navigator.clipboard.writeText(text);
       // You could add a toast notification here
     } catch (error) {
-      console.error('Failed to copy link: any,', error);
+      console.error('Failed to copy link:', error);
     }
   };
 
   // One-time cleanup effect to handle corrupted localStorage data
-  useEffect((: any) => {
+  useEffect(() => {
     try {
       // Check if localStorage contains invalid data and clean it up
       const likedShortsRaw = localStorage.getItem('likedShorts');
@@ -352,7 +352,7 @@ const ShortsPage: any, React.FC = () => {
         }
       }
     } catch (error) {
-      console.warn('Error during localStorage cleanup: any,', error);
+      console.warn('Error during localStorage cleanup:', error);
       // Clear all potentially corrupted data
       localStorage.removeItem('likedShorts');
       localStorage.removeItem('followedChannels');
@@ -366,7 +366,7 @@ const ShortsPage: any, React.FC = () => {
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
 
   // Wheel event handler for scroll navigation
-  const handleWheel = useCallback((event: any, WheelEvent) => {
+  const handleWheel = useCallback((event: WheelEvent) => {
     if (commentModalOpen || showSearch || showFilters || isScrolling) {
       return;
     }
@@ -389,12 +389,12 @@ const ShortsPage: any, React.FC = () => {
       }
 
       // Reset scrolling flag after a delay
-      setTimeout((: any) => setIsScrolling(false), 500);
+      setTimeout(() => setIsScrolling(false), 500);
     }
   }, [commentModalOpen, showSearch, showFilters, isScrolling, handleNextVideo, handlePreviousVideo]);
 
   // Touch event handlers for mobile navigation
-  const handleTouchStart = useCallback((event: any, TouchEvent) => {
+  const handleTouchStart = useCallback((event: TouchEvent) => {
     if (commentModalOpen || showSearch || showFilters) {
       return;
     }
@@ -403,7 +403,7 @@ const ShortsPage: any, React.FC = () => {
     }
   }, [commentModalOpen, showSearch, showFilters]);
 
-  const handleTouchEnd = useCallback((event: any, TouchEvent) => {
+  const handleTouchEnd = useCallback((event: TouchEvent) => {
     if (commentModalOpen || showSearch || showFilters || touchStartY === null || isScrolling) {
       return;
     }
@@ -424,34 +424,34 @@ const ShortsPage: any, React.FC = () => {
         }
 
         // Reset scrolling flag after a delay
-        setTimeout((: any) => setIsScrolling(false), 500);
+        setTimeout(() => setIsScrolling(false), 500);
       }
     }
     setTouchStartY(null);
   }, [commentModalOpen, showSearch, showFilters, touchStartY, isScrolling, handleNextVideo, handlePreviousVideo]);
 
   // Enhanced useEffect hooks
-  useEffect((: any) => {
+  useEffect(() => {
     document.addEventListener('keydown', handleKeyboardNavigation as any);
     return () => document.removeEventListener('keydown', handleKeyboardNavigation as any);
   }, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation
-  useEffect((: any) => {
+  useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('wheel', handleWheel as any, { passive: any, false });
+      container.addEventListener('wheel', handleWheel as any, { passive: false });
       return () => container.removeEventListener('wheel', handleWheel as any);
     }
     return () => {}; // Return empty cleanup function if no container
   }, [handleWheel]);
 
   // Add touch event listeners for mobile navigation
-  useEffect((: any) => {
+  useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('touchstart', handleTouchStart as any, { passive: any, true });
-      container.addEventListener('touchend', handleTouchEnd as any, { passive: any, true });
+      container.addEventListener('touchstart', handleTouchStart as any, { passive: true });
+      container.addEventListener('touchend', handleTouchEnd as any, { passive: true });
       return () => {
         container.removeEventListener('touchstart', handleTouchStart as any);
         container.removeEventListener('touchend', handleTouchEnd as any);
@@ -462,7 +462,7 @@ const ShortsPage: any, React.FC = () => {
 
   // Scroll to specific video when component mounts or when shorts data changes
   const initializedRef = useRef(false);
-  useEffect((: any) => {
+  useEffect(() => {
     if (targetVideoId && !initializedRef.current && containerRef.current) {
       const currentFilteredShorts = filteredShorts;
       if (currentFilteredShorts.length > 0) {
@@ -472,8 +472,8 @@ const ShortsPage: any, React.FC = () => {
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
           if (targetElement) {
             targetElement.scrollIntoView({
-              behavior: any, 'smooth',
-              block: any, 'start'
+              behavior: 'smooth',
+              block: 'start'
             });
           }
         }
@@ -483,7 +483,7 @@ const ShortsPage: any, React.FC = () => {
   }, [targetVideoId, filteredShorts]);
 
   // Auto-advance to next video when current video ends
-  useEffect((: any) => {
+  useEffect(() => {
     const currentFilteredShorts = filteredShorts;
     if (isAutoAdvanceEnabled && currentVideoIndex < currentFilteredShorts.length - 1) {
       // This would be triggered by video end event in ShortDisplayCard
@@ -494,7 +494,7 @@ const ShortsPage: any, React.FC = () => {
   // Set up intersection observer to track which video is currently in view
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  useEffect((: any) => {
+  useEffect(() => {
     if (!containerRef.current || !filteredShorts.length) {
       return;
     }
@@ -504,13 +504,13 @@ const ShortsPage: any, React.FC = () => {
       observerRef.current.disconnect();
     }
 
-    observerRef.current = new IntersectionObserver((entries: any) => {
-      entries.forEach((entry: any) => {
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           const videoElement = entry.target as HTMLElement;
           const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
           if (index !== -1) {
-            setCurrentVideoIndex((prevIndex: any) => {
+            setCurrentVideoIndex((prevIndex) => {
               if (index !== prevIndex) {
                 // Update URL without triggering scroll
                 const currentFilteredShorts = filteredShorts;
@@ -526,13 +526,13 @@ const ShortsPage: any, React.FC = () => {
         }
       });
     }, {
-      root: any, containerRef.current,
-      threshold: any, 0.5,
-      rootMargin: any, '0px'
+      root: containerRef.current,
+      threshold: 0.5,
+      rootMargin: '0px'
     });
 
     // Observe all video elements
-    Array.from(containerRef.current.children).forEach((child: any) => {
+    Array.from(containerRef.current.children).forEach((child) => {
       observerRef.current?.observe(child);
     });
 
@@ -561,14 +561,14 @@ const ShortsPage: any, React.FC = () => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={handleSearchToggle}
-                className="p-2 text-white hover: any,bg-white/10 rounded-full transition-colors"
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Search shorts"
               >
                 <MagnifyingGlassIcon className="w-5 h-5" />
               </button>
               <button
                 onClick={handleFilterToggle}
-                className="p-2 text-white hover: any,bg-white/10 rounded-full transition-colors"
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Filter shorts"
               >
                 <AdjustmentsHorizontalIcon className="w-5 h-5" />
@@ -577,19 +577,20 @@ const ShortsPage: any, React.FC = () => {
           </div>
 
           {/* Search Bar */}
-          {showSearch && (<div className="px-4 pb-4">
+          {showSearch && (
+            <div className="px-4 pb-4">
               <div className="relative">
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e: any) => setSearchQuery(e.target.value)}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search shorts..."
-                  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus: any,outline-none focus: any,ring-2 focus: any,ring-white/20"
+                  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus
                 />
                 <button
                   onClick={handleSearchToggle}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover: any,text-white"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
                 >
                   <XMarkIcon className="w-4 h-4" />
                 </button>
@@ -598,11 +599,12 @@ const ShortsPage: any, React.FC = () => {
           )}
 
           {/* Filters */}
-          {showFilters && (<ShortsFilters
+          {showFilters && (
+            <ShortsFilters
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
-              onClose={(: any) => setShowFilters(false)}
+              onClose={() => setShowFilters(false)}
             />
           )}
         </div>
@@ -628,7 +630,7 @@ const ShortsPage: any, React.FC = () => {
             <button
               onClick={handleSearchToggle}
               className={`p-2 rounded-full transition-colors ${
-                showSearch ? 'bg-white/20 text-white' : 'text-white hover: any,bg-white/10'
+                showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Search shorts"
             >
@@ -637,7 +639,7 @@ const ShortsPage: any, React.FC = () => {
             <button
               onClick={handleFilterToggle}
               className={`p-2 rounded-full transition-colors ${
-                showFilters ? 'bg-white/20 text-white' : 'text-white hover: any,bg-white/10'
+                showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Filter shorts"
             >
@@ -647,19 +649,20 @@ const ShortsPage: any, React.FC = () => {
         </div>
 
         {/* Search Bar */}
-        {showSearch && (<div className="px-4 pb-4">
+        {showSearch && (
+          <div className="px-4 pb-4">
             <div className="relative">
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e: any) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search shorts..."
-                className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus: any,outline-none focus: any,ring-2 focus: any,ring-white/20"
+                className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus
               />
               <button
                 onClick={handleSearchToggle}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover: any,text-white"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
               >
                 <XMarkIcon className="w-4 h-4" />
               </button>
@@ -668,11 +671,12 @@ const ShortsPage: any, React.FC = () => {
         )}
 
         {/* Filters */}
-        {showFilters && (<ShortsFilters
+        {showFilters && (
+          <ShortsFilters
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
-            onClose={(: any) => setShowFilters(false)}
+            onClose={() => setShowFilters(false)}
           />
         )}
       </div>
@@ -694,7 +698,7 @@ const ShortsPage: any, React.FC = () => {
         role="feed"
         aria-label="Shorts feed"
       >
-        {filteredShorts.map((short: any, index: any) => (
+        {filteredShorts.map((short, index) => (
           <div key={short.id || index} className="h-full w-full snap-start">
             <ShortDisplayCard
               short={short}
@@ -705,7 +709,7 @@ const ShortsPage: any, React.FC = () => {
               onComment={handleComment}
               onShare={handleShare}
               onVideoChange={() => handleVideoChange(index)}
-              onVideoEnd={isAutoAdvanceEnabled ? handleNextVideo: any, () => {}}
+              onVideoEnd={isAutoAdvanceEnabled ? handleNextVideo : () => {}}
               isActive={index === currentVideoIndex}
             />
           </div>
