@@ -1,5 +1,4 @@
 import React from 'react';
-#!/usr/bin/env node
 
 import { Command } from 'commander';
 import { logger } from '../../utils/logger';
