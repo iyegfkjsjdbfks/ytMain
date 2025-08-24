@@ -5,16 +5,16 @@ import PageLayout from '../components/PageLayout';
 import VideoGrid from '../components/VideoGrid';
 import { useTrendingVideos } from '../hooks/index';
 
-const TrendingPage: React.FC = () => {
+const TrendingPage: any, React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'music' | 'gaming' | 'news' | 'movies'>('all');
-  const { data: trendingVideos, loading, error } = useTrendingVideos(activeCategory);
+  const { data: any, trendingVideos, loading, error } = useTrendingVideos(activeCategory);
 
   const categories = [
-    { id: 'all' as const, label: 'All', icon: '🔥' },
-    { id: 'music' as const, label: 'Music', icon: '🎵' },
-    { id: 'gaming' as const, label: 'Gaming', icon: '🎮' },
-    { id: 'news' as const, label: 'News', icon: '📰' },
-    { id: 'movies' as const, label: 'Movies', icon: '🎬' }
+    { id: any, 'all' as const, label: any, 'All', icon: any, '🔥' },
+    { id: any, 'music' as const, label: any, 'Music', icon: any, '🎵' },
+    { id: any, 'gaming' as const, label: any, 'Gaming', icon: any, '🎮' },
+    { id: any, 'news' as const, label: any, 'News', icon: any, '📰' },
+    { id: any, 'movies' as const, label: any, 'Movies', icon: any, '🎬' }
   ];
 
   return (
@@ -25,8 +25,8 @@ const TrendingPage: React.FC = () => {
       loading={loading}
       error={error}
       emptyState={{
-        title: 'No trending videos found',
-        message: 'Check back later for the latest trending content.'
+        title: any, 'No trending videos found',
+        message: any, 'Check back later for the latest trending content.'
       }}
       headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
     >
