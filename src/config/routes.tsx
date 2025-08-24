@@ -3,6 +3,8 @@ import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Layout from '../components/Layout';
 import StudioLayout from '../components/StudioLayout';
+import { RouteObject } from 'react-router-dom';
+import ProtectedRoute from '../components/ProtectedRoute';
 // Import HomePage directly for faster initial load
 import HomePage from '../pages/HomePage';
 
@@ -25,7 +27,7 @@ const PlaylistDetailPage = lazy(() => import('../pages/PlaylistDetailPage'));
 const LibraryPage = lazy(() => import('../pages/LibraryPage'));
 const YourDataPage = lazy(() => import('../pages/YourDataPage'));
 const GoLivePage = lazy(() => import('../pages/GoLivePage'));
-const LiveStreamingHubPage = lazy(() => import('../src/pages/LiveStreamingHubPage'));
+const LiveStreamingHubPage = lazy(() => import('../pages/LiveStreamingHubPage'));
 const AIContentSparkPage = lazy(() => import('../pages/AIContentSparkPage'));
 const VideoUploadPage = lazy(() => import('../pages/VideoUploadPage'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
@@ -46,8 +48,8 @@ const ChannelCustomizationPage = lazy(() => import('../pages/ChannelCustomizatio
 const VideoEditorPage = lazy(() => import('../pages/VideoEditorPage'));
 
 // Debug components
-const TestMetadataFetch = lazy(() => import('../src/debug/TestMetadataFetch'));
-const GoogleSearchStoreDebug = lazy(() => import('../src/debug/GoogleSearchStoreDebug'));
+const TestMetadataFetch = lazy(() => import('../debug/TestMetadataFetch'));
+const GoogleSearchStoreDebug = lazy(() => import('../debug/GoogleSearchStoreDebug'));
 
 // Route configuration for main application
 export const mainRoutes: RouteObject[] = [

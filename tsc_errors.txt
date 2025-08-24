@@ -1,1 +1,1 @@
-bash: c:UsershpDocumentsGitHubYTytMainnode_modules.bintsc: command not found
+bash: cmd /c: No such file or directory
