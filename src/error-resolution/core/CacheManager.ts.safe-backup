@@ -1,7 +1,7 @@
-import React from 'react';
+import _React from 'react';
 import * as fs from 'fs';
 import * as path from 'path';
-import { execSync } from 'child_process';
+import { _execSync } from 'child_process';
 
 export interface CacheCleanupResult {
   filesDeleted: string[];

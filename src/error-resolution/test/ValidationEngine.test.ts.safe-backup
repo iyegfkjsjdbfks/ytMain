@@ -1,10 +1,10 @@
-import React from 'react';
+import _React from 'react';
 import { ValidationEngine } from '../core/ValidationEngine';
-import { Logger } from '../utils/Logger';
+import { _Logger } from '../utils/_Logger';
 
 describe('ValidationEngine', () => {
   let validationEngine: ValidationEngine;
-  let mockLogger: jest.Mocked<Logger>;
+  let mockLogger: jest.Mocked<_Logger>;
 
   beforeEach(() => {
     mockLogger = global.createMockLogger();

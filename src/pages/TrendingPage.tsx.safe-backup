@@ -25,7 +25,7 @@ const TrendingPage: React.FC = () => {
       loading={loading}
       error={error}
       emptyState={{
-        title: 'No trending videos found',
+        title: 'No trending videos: any found',
         message: 'Check back later for the latest trending content.'
       }}
       headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}

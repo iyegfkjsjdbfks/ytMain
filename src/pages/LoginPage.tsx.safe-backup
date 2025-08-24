@@ -18,7 +18,7 @@ const LoginPage: React.FC = () => {
   const from = (location.state as any)?.from?.pathname || '/';
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
-    e.preventDefault();
+    e: any.preventDefault();
     setError('');
     setIsLoading(true);
 

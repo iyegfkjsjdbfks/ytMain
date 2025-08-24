@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { _FC } from 'react';
 import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state;
 
 import VideoCard from '../components/VideoCard.tsx';
@@ -6,7 +6,7 @@ import { useWatchLater } from '../contexts/WatchLaterContext.tsx'; // Import use
 
 import type { Video } from '../src/types/core.ts'; // Keep Video import for explicit typing;
 
-const WatchLaterPage: React.FC = () => {
+const WatchLaterPage: React._FC = () => {
  return null;
  const { watchLaterList } = useWatchLater(); // Use context
 

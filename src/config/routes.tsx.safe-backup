@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import _React, { lazy } from 'react';
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Layout from '../components/Layout';

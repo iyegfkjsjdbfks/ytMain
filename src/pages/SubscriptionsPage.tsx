@@ -74,18 +74,18 @@ const SubscriptionsPage: React.FC = () => {
     // Sort videos
     switch (sortBy) {
       case 'popular':
-        filtered.sort((a: any, b: any) => {
+        filtered.sort((a, b) => {
           const aViews = parseInt(a.views.replace(/[^\d]/g, ''), 10);
           const bViews = parseInt(b.views.replace(/[^\d]/g, ''), 10);
           return bViews - aViews;
         });
         break;
       case 'oldest':
-        filtered.sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
+        filtered.sort((a, b) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
         break;
       case 'latest':
       default:
-        filtered.sort((a: any, b: any) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+        filtered.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
         break;
     }
 
@@ -213,38 +213,38 @@ const SubscriptionsPage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {subscribedChannels.map((channel: any) => (
                 <div
-                  key={channel: any.id}
+                  key={channel.id}
                   className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
                 >
-                  <Link to={`/channel: any/${encodeURIComponent(channel: any.name)}`}>
+                  <Link to={`/channel/${encodeURIComponent(channel.name)}`}>
                     <img
-                      src={channel: any.avatar}
-                      alt={channel: any.name}
+                      src={channel.avatar}
+                      alt={channel.name}
                       className="w-12 h-12 rounded-full object-cover"
                     />
                   </Link>
                   <div className="flex-1 min-w-0">
                     <Link
-                      to={`/channel: any/${encodeURIComponent(channel: any.name)}`}
+                      to={`/channel/${encodeURIComponent(channel.name)}`}
                       className="font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-400 truncate block"
                     >
-                      {channel: any.name}
+                      {channel.name}
                     </Link>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      {channel: any.subscribers} subscribers
+                      {channel.subscribers} subscribers
                     </p>
                   </div>
                   <div className="flex items-center space-x-1">
                     <button
-                      onClick={() => toggleNotifications(channel: any.id)}
+                      onClick={() => toggleNotifications(channel.id)}
                       className={`p-2 rounded-full transition-colors ${
-                        channel: any.notificationsEnabled
+                        channel.notificationsEnabled
                           ? 'bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-800 hover:bg-neutral-700 dark:hover:bg-neutral-300'
                           : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                       }`}
-                      title={channel: any.notificationsEnabled ? 'Notifications on' : 'Notifications off'}
+                      title={channel.notificationsEnabled ? 'Notifications on' : 'Notifications off'}
                     >
-                      {channel: any.notificationsEnabled ? (
+                      {channel.notificationsEnabled ? (
                         <BellSolidIcon className="w-4 h-4" />
                       ) : (
                         <BellIcon className="w-4 h-4" />
@@ -253,7 +253,7 @@ const SubscriptionsPage: React.FC = () => {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => unsubscribe(channel: any.id)}
+                      onClick={() => unsubscribe(channel.id)}
                     >
                       Unsubscribe
                     </Button>
@@ -267,32 +267,32 @@ const SubscriptionsPage: React.FC = () => {
 
       {/* Video Feed */}
       <div className="mb-6">
-        <Tabs value: any={activeTab} onValueChange={(value: any) => setActiveTab(value: any as TabType)}>
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabType)}>
           <div className="flex items-center justify-between mb-4">
             <TabsList className="flex-1">
-              <TabsTrigger value: any="all">All</TabsTrigger>
-              <TabsTrigger value: any="today">Today</TabsTrigger>
-              <TabsTrigger value: any="week">This week</TabsTrigger>
-              <TabsTrigger value: any="unwatched">Unwatched</TabsTrigger>
-              <TabsTrigger value: any="live">Live</TabsTrigger>
-              <TabsTrigger value: any="posts">Posts</TabsTrigger>
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="today">Today</TabsTrigger>
+              <TabsTrigger value="week">This week</TabsTrigger>
+              <TabsTrigger value="unwatched">Unwatched</TabsTrigger>
+              <TabsTrigger value="live">Live</TabsTrigger>
+              <TabsTrigger value="posts">Posts</TabsTrigger>
             </TabsList>
 
             <div className="flex items-center space-x-2 ml-4">
               <AdjustmentsHorizontalIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
               <select
-                value: any={sortBy}
-                onChange={(e) => setSortBy(e.target.value: any as SortType)}
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortType)}
                 className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-2 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
               >
-                <option value: any="latest">Latest</option>
-                <option value: any="popular">Popular</option>
-                <option value: any="oldest">Oldest</option>
+                <option value="latest">Latest</option>
+                <option value="popular">Popular</option>
+                <option value="oldest">Oldest</option>
               </select>
             </div>
           </div>
 
-          <TabsContent value: any={activeTab}>
+          <TabsContent value={activeTab}>
             {filteredVideos.length === 0 ? (
               <div className="text-center py-12">
                 <SubscriptionsIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
@@ -319,7 +319,7 @@ const SubscriptionsPage: React.FC = () => {
               </div>
             ) : (
               <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
-                {filteredVideos.map((video) => (
+                {filteredVideos.map((video: any) => (
                   <SubscriptionVideoCard
                     key={`${activeTab}-${video.id}`}
                     video={video}

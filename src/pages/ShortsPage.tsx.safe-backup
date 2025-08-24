@@ -95,7 +95,7 @@ const ShortsPage: React.FC = () => {
       .filter((video) => video.visibility !== 'scheduled') // Filter out scheduled videos
       .map((video) => {
         const shortVideo: Short = {
-          ...video as any,
+          ...video,
           duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
           isShort: true,
           isVertical: true,
@@ -161,7 +161,7 @@ const ShortsPage: React.FC = () => {
 
   const handleComment = useCallback((shortId: string) => {
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s => s.id === shortId);
+    const short: any = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({
       id: shortId,
       title: short?.title || 'Short video'
@@ -440,8 +440,8 @@ const ShortsPage: React.FC = () => {
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('wheel', handleWheel as any, { passive: false });
-      return () => container.removeEventListener('wheel', handleWheel as any);
+      container.addEventListener('wheel', handleWheel, { passive: false });
+      return () => container.removeEventListener('wheel', handleWheel);
     }
     return () => {}; // Return empty cleanup function if no container
   }, [handleWheel]);
@@ -450,11 +450,11 @@ const ShortsPage: React.FC = () => {
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('touchstart', handleTouchStart as any, { passive: true });
-      container.addEventListener('touchend', handleTouchEnd as any, { passive: true });
+      container.addEventListener('touchstart', handleTouchStart, { passive: true });
+      container.addEventListener('touchend', handleTouchEnd, { passive: true });
       return () => {
-        container.removeEventListener('touchstart', handleTouchStart as any);
-        container.removeEventListener('touchend', handleTouchEnd as any);
+        container.removeEventListener('touchstart', handleTouchStart);
+        container.removeEventListener('touchend', handleTouchEnd);
       };
     }
     return () => {}; // Return empty cleanup function if no container

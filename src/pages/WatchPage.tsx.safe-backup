@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useCallback, FC } from 'react';
+import React, { _useState, _useEffect, memo, _useCallback, _FC } from 'react';
 import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components/index.ts';
 import VideoMetadata from '../components/VideoMetadata';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
@@ -84,7 +84,7 @@ const LoadingSkeleton = memo(() => (
 
 LoadingSkeleton.displayName = 'LoadingSkeleton';
 
-const WatchPage: React.FC = () => {
+const WatchPage: React._FC = () => {
   const {
     video,
     channel,
@@ -135,7 +135,7 @@ const WatchPage: React.FC = () => {
   } = useWatchPage();
 
   const { navigate } = useMiniplayerActions();
-  const { addToWatchLater } = useWatchLater();
+  const { _addToWatchLater } = useWatchLater();
 
   const MAX_COMMENT_LENGTH = 500;
 

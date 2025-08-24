@@ -1,10 +1,10 @@
-import React from 'react';
+import _React from 'react';
 import { WorkflowCoordinator } from '../core/WorkflowCoordinator';
-import { Logger } from '../utils/Logger';
+import { _Logger } from '../utils/_Logger';
 
 describe('WorkflowCoordinator', () => {
   let coordinator: WorkflowCoordinator;
-  let mockLogger: jest.Mocked<Logger>;
+  let mockLogger: jest.Mocked<_Logger>;
 
   beforeEach(() => {
     mockLogger = global.createMockLogger();

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, memo, FC } from 'react';
+import React, { useCallback, useMemo, useState, memo, _FC } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
@@ -10,7 +10,7 @@ import type { Video } from '../types';
 // Memoized video card to prevent unnecessary re-renders
 const MemoizedVideoCard = memo(HoverAutoplayVideoCard);
 
-const HomePage: React.FC = () => {
+const HomePage: React._FC = () => {
   const { data: videos, loading, error } = useTrendingSearch();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const currentKeyword = getInitialSearchKeyword();
