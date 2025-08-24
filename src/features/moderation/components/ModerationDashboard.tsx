@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 
 interface ModerationDashboardProps {
   className?: string;
-  onDataUpdate?: (data) => void;
+  onDataUpdate?: (data: DashboardData) => void;
 }
 
 interface DashboardData {
   metrics: Record<string, number>;
-  charts[];
+  charts: any[];
   lastUpdated: string;
 }
 

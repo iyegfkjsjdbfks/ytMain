@@ -10,7 +10,7 @@ import type { Video } from '../types';
 interface SearchState {
   videos: Video[];
   youtubeVideos: any[];
-  googleSearchVideos[];
+  googleSearchVideos: any[];
   loading: boolean;
   youtubeLoading: boolean;
 }
