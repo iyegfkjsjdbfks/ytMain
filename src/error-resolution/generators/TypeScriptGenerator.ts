@@ -330,7 +330,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           type: 'replace',
           file: error.file,
           pattern: new RegExp(`(interface\\s+\\w+\\s*\\{[^}]*)(\\})`, 'g'),
-          replacement: `$1  ${propertyName}?: any;\n$2`,
+          replacement: `$1  ${propertyName}?;\n$2`,
           description: `Add missing property '${propertyName}' to interface in ${error.file}`
         });
       }
@@ -351,7 +351,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\s*=\s*([^;]+);/g,
-        replacement: '$1 = $2 as any;',
+        replacement: '$1 = $2;',
         description: `Add type assertion to fix assignment in ${error.file} at line ${error.line}`
       });
     }
@@ -429,7 +429,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         commands.push({
           type: 'insert',
           file: error.file,
-          replacement: `const ${variableName}: any = undefined;\n`,
+          replacement: `const ${variableName} = undefined;\n`,
           position: { line: 1, column: 0 },
           description: `Declare undefined variable '${variableName}' in ${error.file}`
         });
@@ -451,7 +451,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\(/g,
-        replacement: '($1 as any)(',
+        replacement: '($1)(',
         description: `Add callable type assertion in ${error.file} at line ${error.line}`
       });
     }
@@ -471,7 +471,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         type: 'replace',
         file: error.file,
         pattern: /(interface\s+\w+\s*\{)/g,
-        replacement: '$1\n  [key: string]: any;',
+        replacement: '$1\n  [key: string];',
         description: `Add index signature to interface in ${error.file}`
       });
     }
@@ -491,7 +491,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\(([^)]+)\)/g,
-        replacement: '$1($2 as any)',
+        replacement: '$1($2)',
         description: `Add type assertion to function argument in ${error.file} at line ${error.line}`
       });
     }
@@ -549,7 +549,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         type: 'replace',
         file,
         pattern: /function\s+(\w+)\s*\([^)]*\)\s*\{/g,
-        replacement: 'function $1(): any {',
+        replacement: 'function $1() {',
         description: `Add return type annotations in ${file}`
       });
     }

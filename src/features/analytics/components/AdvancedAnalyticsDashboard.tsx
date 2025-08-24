@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 
 interface AdvancedAnalyticsDashboardProps {
   className?: string;
-  onDataUpdate?: (data: any) => void;
+  onDataUpdate?: (data) => void;
 }
 
 interface DashboardData {
   metrics: Record<string, number>;
-  charts: any[];
+  charts[];
   lastUpdated: string;
 }
 

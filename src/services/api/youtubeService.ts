@@ -53,7 +53,7 @@ export class YoutubeService {
     return this.request<T>(endpoint, { method: 'GET' });
   }
 
-  async post<T>(endpoint: string, data: any): Promise<ServiceResponse<T>> {
+  async post<T>(endpoint: string, data): Promise<ServiceResponse<T>> {
     return this.request<T>(endpoint, {
       method: 'POST',
       body: JSON.stringify(data)

@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseRefactoredHooksConfig {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data) => void;
   onError?: (error: Error) => void;
 }
 

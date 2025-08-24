@@ -53,7 +53,7 @@ export const formatRelativeTime = (date: Date | string | number): string => {
   }
 };
 
-export const isValidDate = (date: any): boolean => {
+export const isValidDate = (date): boolean => {
   try {
     const d = new Date(date);
     return !isNaN(d.getTime());

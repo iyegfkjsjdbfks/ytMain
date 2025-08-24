@@ -1,7 +1,7 @@
 // setup - Simple Implementation
 export const setup = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default setup;

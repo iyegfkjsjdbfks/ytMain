@@ -1,7 +1,7 @@
 // pwaAnalytics - Simple Implementation
 export const pwaAnalytics = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default pwaAnalytics;

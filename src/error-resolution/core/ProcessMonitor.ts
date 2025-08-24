@@ -1,7 +1,7 @@
 // ProcessMonitor - Simple Implementation
 export const ProcessMonitor = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default ProcessMonitor;

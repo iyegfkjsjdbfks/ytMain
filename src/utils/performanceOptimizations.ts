@@ -1,7 +1,7 @@
 // performanceOptimizations - Simple Implementation
 export const performanceOptimizations = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default performanceOptimizations;

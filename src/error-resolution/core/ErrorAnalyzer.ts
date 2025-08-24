@@ -196,7 +196,7 @@ export class ErrorAnalyzer {
       
       return ''; // No errors if we reach here
       
-    } catch (error: any) {
+    } catch (error) {
       // TypeScript errors are captured in stderr
       return error.stdout || error.stderr || '';
     }

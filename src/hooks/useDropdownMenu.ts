@@ -3,12 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseDropdownMenuOptions {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data) => void;
   onError?: (error: Error) => void;
 }
 
 export interface UseDropdownMenuResult {
-  data: any;
+  data;
   loading: boolean;
   error: Error | null;
   refetch: () => void;

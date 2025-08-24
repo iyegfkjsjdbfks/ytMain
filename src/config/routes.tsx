@@ -223,4 +223,4 @@ const authRoutes: RouteObject[] = [
  errorElement: <ErrorBoundary /> }];
 
 // Combined route configuration
-export const routes: RouteObject[] = [...mainRoutes as any, ...studioRoutes as any, ...authRoutes];
+export const routes: RouteObject[] = [...mainRoutes, ...studioRoutes, ...authRoutes];

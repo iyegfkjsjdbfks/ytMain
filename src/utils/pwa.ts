@@ -81,7 +81,7 @@ export class PWAUtils {
   }
 
   static getNetworkInfo(): { type: string; effectiveType: string; downlink: number } {
-    const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+    const connection = (navigator).connection || (navigator).mozConnection || (navigator).webkitConnection;
     
     if (connection) {
       return {
@@ -98,7 +98,7 @@ export class PWAUtils {
     };
   }
 
-  static emitEvent(eventName: string, detail?: any): void {
+  static emitEvent(eventName: string, detail?): void {
     const event = new CustomEvent(eventName, { detail });
     window.dispatchEvent(event);
   }

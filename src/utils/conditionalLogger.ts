@@ -1,7 +1,7 @@
 // conditionalLogger - Simple Implementation
 export const conditionalLogger = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default conditionalLogger;

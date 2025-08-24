@@ -23,7 +23,7 @@ export function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
 
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args[]) => any>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {

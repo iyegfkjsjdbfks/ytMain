@@ -1,9 +1,9 @@
-import React, { _ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 // Common TypeScript interfaces and types
 
 export interface BaseComponent {
  className?: string;
- children?: React._ReactNode;
+ children?: React.ReactNode;
 }
 
 export interface LoadingState {

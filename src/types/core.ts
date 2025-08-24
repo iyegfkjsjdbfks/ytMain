@@ -26,7 +26,7 @@ export interface Video {
  tags?: string | string[]; // Video tags
  likeCount?: number; // Some code uses likeCount
  visibility?: string;
- metadata?: any;
+ metadata?;
  statistics?: {
  viewCount?: number;
  likeCount?: number;

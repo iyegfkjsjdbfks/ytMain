@@ -39,7 +39,7 @@ describe('ImportFixer', () => {
       };
 
       // Access private method for testing
-      const isModuleNotFound = (importFixer as any).isModuleNotFoundError(error);
+      const isModuleNotFound = (importFixer).isModuleNotFoundError(error);
       expect(isModuleNotFound).toBe(true);
     });
 
@@ -58,7 +58,7 @@ describe('ImportFixer', () => {
         }
       };
 
-      const isImportNotFound = (importFixer as any).isImportNotFoundError(error);
+      const isImportNotFound = (importFixer).isImportNotFoundError(error);
       expect(isImportNotFound).toBe(true);
     });
   });
@@ -76,7 +76,7 @@ const MyComponent = () => {
 };
       `.trim();
 
-      const imports = (importFixer as any).extractImports(fileContent);
+      const imports = (importFixer).extractImports(fileContent);
       
       expect(imports).toHaveLength(4);
       
@@ -124,7 +124,7 @@ const MyComponent = () => {
         }
       ];
 
-      const duplicates = (importFixer as any).findDuplicateImports(imports);
+      const duplicates = (importFixer).findDuplicateImports(imports);
       
       expect(duplicates).toHaveLength(1);
       expect(duplicates[0].module).toBe('react');
@@ -134,13 +134,13 @@ const MyComponent = () => {
 
   describe('similarity calculation', () => {
     it('should calculate string similarity correctly', () => {
-      const similarity1 = (importFixer as any).calculateSimilarity('react', 'react');
+      const similarity1 = (importFixer).calculateSimilarity('react', 'react');
       expect(similarity1).toBe(1);
 
-      const similarity2 = (importFixer as any).calculateSimilarity('react', 'reacts');
+      const similarity2 = (importFixer).calculateSimilarity('react', 'reacts');
       expect(similarity2).toBeGreaterThan(0.8);
 
-      const similarity3 = (importFixer as any).calculateSimilarity('react', 'completely-different');
+      const similarity3 = (importFixer).calculateSimilarity('react', 'completely-different');
       expect(similarity3).toBeLessThan(0.5);
     });
   });
@@ -198,7 +198,7 @@ export { helper1, helper2 };
 export interface MyInterface {}
       `.trim();
 
-      const moduleInfo = (importFixer as any).parseModuleExports(fileContent, '/test/file.ts');
+      const moduleInfo = (importFixer).parseModuleExports(fileContent, '/test/file.ts');
       
       expect(moduleInfo.exports).toContain('myFunction');
       expect(moduleInfo.exports).toContain('helper1');

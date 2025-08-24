@@ -1,7 +1,7 @@
 // youtubeApiUtils - Simple Implementation
 export const youtubeApiUtils = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default youtubeApiUtils;

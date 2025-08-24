@@ -49,28 +49,28 @@ export class MetadataNormalizationService {
     };
   }
 
-  private normalizeId(id: any): string {
+  private normalizeId(id): string {
     if (typeof id === 'string' && id.trim()) {
       return id.trim();
     }
     return 'unknown-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
   }
 
-  private normalizeTitle(title: any): string {
+  private normalizeTitle(title): string {
     if (typeof title === 'string' && title.trim()) {
       return title.trim().substring(0, 200);
     }
     return 'Untitled Video';
   }
 
-  private normalizeDescription(description: any): string {
+  private normalizeDescription(description): string {
     if (typeof description === 'string') {
       return description.trim().substring(0, 1000);
     }
     return '';
   }
 
-  private normalizeThumbnail(thumbnail: any): string {
+  private normalizeThumbnail(thumbnail): string {
     if (typeof thumbnail === 'string' && thumbnail.trim()) {
       const url = thumbnail.trim();
       if (url.startsWith('http://') || url.startsWith('https://')) {
@@ -80,7 +80,7 @@ export class MetadataNormalizationService {
     return 'https://via.placeholder.com/320x180?text=No+Thumbnail';
   }
 
-  private normalizeDuration(duration: any): string {
+  private normalizeDuration(duration): string {
     if (typeof duration === 'string') {
       if (duration.includes(':')) {
         return duration;
@@ -94,7 +94,7 @@ export class MetadataNormalizationService {
     return '0:00';
   }
 
-  private normalizeCount(count: any): number {
+  private normalizeCount(count): number {
     if (typeof count === 'number') {
       return Math.max(0, count);
     }
@@ -116,7 +116,7 @@ export class MetadataNormalizationService {
     return 0;
   }
 
-  private normalizeDate(date: any): string {
+  private normalizeDate(date): string {
     if (typeof date === 'string' && date.trim()) {
       try {
         return new Date(date).toISOString();

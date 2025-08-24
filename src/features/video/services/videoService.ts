@@ -37,7 +37,7 @@ export class VideoService {
     }
   }
 
-  async postData<T>(endpoint: string, data: any): Promise<T> {
+  async postData<T>(endpoint: string, data): Promise<T> {
     try {
       const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
         method: 'POST',

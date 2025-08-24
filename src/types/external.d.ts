@@ -1,12 +1,12 @@
 // Comprehensive type declarations
 declare module 'clsx' {
-  export type ClassValue = string | number | boolean | undefined | null | { [key: string]: any } | ClassValue[];
+  export type ClassValue = string | number | boolean | undefined | null | { [key: string] } | ClassValue[];
   export function clsx(...inputs: ClassValue[]): string;
 }
 
 declare module 'class-variance-authority' {
   export interface VariantProps<T> {
-    [key: string]: any;
+    [key: string];
   }
   
   export function cva(

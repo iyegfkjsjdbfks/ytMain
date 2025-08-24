@@ -3,12 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseWatchPageOptions {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data) => void;
   onError?: (error: Error) => void;
 }
 
 export interface UseWatchPageResult {
-  data: any;
+  data;
   loading: boolean;
   error: Error | null;
   refetch: () => void;

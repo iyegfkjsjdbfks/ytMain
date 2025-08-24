@@ -41,7 +41,7 @@ export class PerformanceMonitor {
 
 export const performanceMonitor = new PerformanceMonitor();
 
-export function usePerformanceMonitor(name: string): any {
+export function usePerformanceMonitor(name: string) {
   // Placeholder hook implementation
   return {
     startMeasure: () => performanceMonitor.startMeasure(name),

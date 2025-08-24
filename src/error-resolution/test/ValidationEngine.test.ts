@@ -115,7 +115,7 @@ describe('ValidationEngine', () => {
       };
       
       // Mock the executeTypeScriptCheck method
-      jest.spyOn(validationEngine as any, 'executeTypeScriptCheck')
+      jest.spyOn(validationEngine, 'executeTypeScriptCheck')
         .mockResolvedValue(mockResult);
       
       const result = await validationEngine.validateErrorCountImprovement(files, beforeCount);

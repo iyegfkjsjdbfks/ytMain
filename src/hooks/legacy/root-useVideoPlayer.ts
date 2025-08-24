@@ -16,7 +16,7 @@ export class RootUseVideoPlayer {
     return this.config.enabled;
   }
 
-  process(data: any): any {
+  process(data): any {
     if (!this.config.enabled) {
       return data;
     }

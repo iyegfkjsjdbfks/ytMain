@@ -1,7 +1,7 @@
 // constants - Simple Implementation
 export const constants = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default constants;

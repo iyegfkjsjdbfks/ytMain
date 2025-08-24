@@ -3,12 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseVideosOptions {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data) => void;
   onError?: (error: Error) => void;
 }
 
 export interface UseVideosResult {
-  data: any;
+  data;
   loading: boolean;
   error: Error | null;
   refetch: () => void;

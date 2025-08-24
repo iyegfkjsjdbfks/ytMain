@@ -92,8 +92,8 @@ const ShortsPage: React.FC = () => {
 
     // Convert Video[] to Short[] with proper type conversion
     let converted: Short[] = allShorts
-      .filter((video: any) => video.visibility !== 'scheduled') // Filter out scheduled videos
-      .map((video: any) => {
+      .filter((video) => video.visibility !== 'scheduled') // Filter out scheduled videos
+      .map((video) => {
         const shortVideo: Short = {
           ...video,
           duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
@@ -113,14 +113,14 @@ const ShortsPage: React.FC = () => {
 
     // Apply category filter
     if (selectedCategory !== 'all') {
-      converted = converted.filter((short: any) =>
+      converted = converted.filter((short) =>
         short.category.toLowerCase() === selectedCategory.toLowerCase());
     }
 
     // Apply search filter
     if (debouncedSearchQuery) {
       const query = debouncedSearchQuery.toLowerCase();
-      converted = converted.filter((short: any) =>
+      converted = converted.filter((short) =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
         short.description.toLowerCase().includes(query));
@@ -134,13 +134,13 @@ const ShortsPage: React.FC = () => {
     if (!allShorts) {
       return [];
     }
-    const uniqueCategories = [...new Set(allShorts.map((short: any) => short.category))];
+    const uniqueCategories = [...new Set(allShorts.map((short) => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking
   const handleLike = useCallback((shortId: string) => {
-    setLikedShortsArray((prev: any) => {
+    setLikedShortsArray((prev) => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
         return currentArray.filter((id) => id !== shortId);
@@ -150,7 +150,7 @@ const ShortsPage: React.FC = () => {
   }, [setLikedShortsArray]);
 
   const handleFollow = useCallback((channelName: string) => {
-    setFollowedChannelsArray((prev: any) => {
+    setFollowedChannelsArray((prev) => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
         return currentArray.filter((name) => name !== channelName);
@@ -161,7 +161,7 @@ const ShortsPage: React.FC = () => {
 
   const handleComment = useCallback((shortId: string) => {
     const currentFilteredShorts = filteredShorts;
-    const short: any = currentFilteredShorts.find(s => s.id === shortId);
+    const short = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({
       id: shortId,
       title: short?.title || 'Short video'
@@ -432,8 +432,8 @@ const ShortsPage: React.FC = () => {
 
   // Enhanced useEffect hooks
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyboardNavigation as any);
-    return () => document.removeEventListener('keydown', handleKeyboardNavigation as any);
+    document.addEventListener('keydown', handleKeyboardNavigation);
+    return () => document.removeEventListener('keydown', handleKeyboardNavigation);
   }, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation
@@ -482,7 +482,7 @@ const ShortsPage: React.FC = () => {
     }
   }, [targetVideoId, filteredShorts]);
 
-  // Auto-advance to next video: any when current video: any ends
+  // Auto-advance to next video: any when current video ends
   useEffect(() => {
     const currentFilteredShorts = filteredShorts;
     if (isAutoAdvanceEnabled && currentVideoIndex < currentFilteredShorts.length - 1) {
@@ -698,7 +698,7 @@ const ShortsPage: React.FC = () => {
         role="feed"
         aria-label="Shorts feed"
       >
-        {filteredShorts.map((short: any, index) => (
+        {filteredShorts.map((short, index) => (
           <div key={short.id || index} className="h-full w-full snap-start">
             <ShortDisplayCard
               short={short}

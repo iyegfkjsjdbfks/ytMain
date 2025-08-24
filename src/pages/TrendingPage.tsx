@@ -25,12 +25,12 @@ const TrendingPage: React.FC = () => {
       loading={loading}
       error={error}
       emptyState={{
-        title: 'No trending videos: any found',
+        title: 'No trending videos found',
         message: 'Check back later for the latest trending content.'
       }}
       headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
     >
-      {(videos: any) => <VideoGrid videos: any={videos: any || []} />}
+      {(videos) => <VideoGrid videos={videos || []} />}
     </PageLayout>
   );
 };

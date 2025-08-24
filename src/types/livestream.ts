@@ -179,5 +179,5 @@ export interface StreamHighlight {
  title: string;
  description?: string;
  type: "moment" | 'super_chat' | 'poll' | 'qa' | 'milestone';
- data?: any;
+ data?;
 }

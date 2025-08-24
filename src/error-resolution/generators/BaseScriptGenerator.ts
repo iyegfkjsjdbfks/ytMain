@@ -23,7 +23,7 @@ export interface TemplateParameter {
   type: 'string' | 'number' | 'boolean';
   description: string;
   required: boolean;
-  defaultValue?: any;
+  defaultValue?;
 }
 
 export abstract class BaseScriptGenerator {

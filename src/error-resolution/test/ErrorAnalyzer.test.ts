@@ -12,7 +12,7 @@ describe('ErrorAnalyzer', () => {
       const mockErrorLine = "utils/securityMonitoring.ts:515:58 - error TS1005: ';' expected.";
       
       // Use reflection to access private method for testing
-      const parseErrorLine = (analyzer as any).parseErrorLine.bind(analyzer);
+      const parseErrorLine = (analyzer).parseErrorLine.bind(analyzer);
       const result = parseErrorLine(mockErrorLine);
       
       expect(result).toBeDefined();
@@ -27,7 +27,7 @@ describe('ErrorAnalyzer', () => {
     it('should categorize import errors correctly', () => {
       const mockErrorLine = "src/components/Test.tsx:1:1 - error TS2307: Cannot find module 'missing-module'.";
       
-      const parseErrorLine = (analyzer as any).parseErrorLine.bind(analyzer);
+      const parseErrorLine = (analyzer).parseErrorLine.bind(analyzer);
       const result = parseErrorLine(mockErrorLine);
       
       expect(result).toBeDefined();
@@ -39,7 +39,7 @@ describe('ErrorAnalyzer', () => {
     it('should categorize type errors correctly', () => {
       const mockErrorLine = "src/components/Test.tsx:10:5 - error TS2339: Property 'nonExistent' does not exist on type 'TestType'.";
       
-      const parseErrorLine = (analyzer as any).parseErrorLine.bind(analyzer);
+      const parseErrorLine = (analyzer).parseErrorLine.bind(analyzer);
       const result = parseErrorLine(mockErrorLine);
       
       expect(result).toBeDefined();
@@ -52,7 +52,7 @@ describe('ErrorAnalyzer', () => {
   describe('Error Analysis', () => {
     it('should handle empty error output', async () => {
       // Mock the captureTypeScriptErrors method to return empty string
-      jest.spyOn(analyzer as any, 'captureTypeScriptErrors').mockReturnValue('');
+      jest.spyOn(analyzer, 'captureTypeScriptErrors').mockReturnValue('');
       
       const result = await analyzer.analyzeErrors();
       
@@ -83,7 +83,7 @@ describe('ErrorAnalyzer', () => {
         }
       ];
 
-      const generateAnalysisResult = (analyzer as any).generateAnalysisResult.bind(analyzer);
+      const generateAnalysisResult = (analyzer).generateAnalysisResult.bind(analyzer);
       const result = generateAnalysisResult(mockErrors);
       
       expect(result.totalErrors).toBe(1);
@@ -97,7 +97,7 @@ describe('ErrorAnalyzer', () => {
     it('should parse complex error messages', () => {
       const complexError = "utils/securityMonitoring.ts:515:58 - error TS1005: ';' expected.";
       
-      const parseErrorLine = (analyzer as any).parseErrorLine.bind(analyzer);
+      const parseErrorLine = (analyzer).parseErrorLine.bind(analyzer);
       const result = parseErrorLine(complexError);
       
       expect(result).toBeDefined();
@@ -111,7 +111,7 @@ describe('ErrorAnalyzer', () => {
     it('should handle malformed error lines gracefully', () => {
       const malformedError = "This is not a valid TypeScript error line";
       
-      const parseErrorLine = (analyzer as any).parseErrorLine.bind(analyzer);
+      const parseErrorLine = (analyzer).parseErrorLine.bind(analyzer);
       const result = parseErrorLine(malformedError);
       
       expect(result).toBeNull();

@@ -15,10 +15,10 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = (location.state as any)?.from?.pathname || '/';
+  const from = (location.state)?.from?.pathname || '/';
 
   const handleSubmit = async (_e: FormEvent): Promise<void> => {
-    _e: any.preventDefault();
+    _e.preventDefault();
     setError('');
     setIsLoading(true);
 

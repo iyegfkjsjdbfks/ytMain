@@ -34,7 +34,7 @@ describe('CacheManager', () => {
       mockFs.stat.mockResolvedValue({
         isDirectory: () => false,
         size: 1024
-      } as any);
+      });
 
       const result = await cacheManager.cleanupTypeScriptCache();
 
@@ -55,12 +55,12 @@ describe('CacheManager', () => {
 
     it('should delete error files by pattern', async () => {
       // Mock readdir to return matching files
-      mockFs.readdir.mockResolvedValue(['error-analysis.json', 'other-file.txt'] as any);
+      mockFs.readdir.mockResolvedValue(['error-analysis.json', 'other-file.txt']);
       mockFs.access.mockResolvedValue(undefined);
       mockFs.stat.mockResolvedValue({
         isFile: () => true,
         size: 512
-      } as any);
+      });
 
       const result = await cacheManager.deleteErrorFiles();
 
@@ -122,7 +122,7 @@ describe('CacheManager', () => {
 
       // Mock directory listing and metadata reading
       mockFs.access.mockResolvedValue(undefined);
-      mockFs.readdir.mockResolvedValue(['backup-123'] as any);
+      mockFs.readdir.mockResolvedValue(['backup-123']);
       mockFs.readFile.mockResolvedValue(JSON.stringify(mockBackupInfo));
 
       const backups = await cacheManager.listBackups();
@@ -146,7 +146,7 @@ describe('CacheManager', () => {
 
   describe('Pattern Matching', () => {
     it('should match wildcard patterns correctly', () => {
-      const cacheManagerAny = cacheManager as any;
+      const cacheManagerAny = cacheManager;
       
       expect(cacheManagerAny.matchesPattern('error-analysis.json', 'error-*.json')).toBe(true);
       expect(cacheManagerAny.matchesPattern('test.txt', '*.txt')).toBe(true);
@@ -157,7 +157,7 @@ describe('CacheManager', () => {
 
   describe('Utility Functions', () => {
     it('should format bytes correctly', () => {
-      const cacheManagerAny = cacheManager as any;
+      const cacheManagerAny = cacheManager;
       
       expect(cacheManagerAny.formatBytes(0)).toBe('0 Bytes');
       expect(cacheManagerAny.formatBytes(1024)).toBe('1 KB');
@@ -166,7 +166,7 @@ describe('CacheManager', () => {
     });
 
     it('should check file existence', async () => {
-      const cacheManagerAny = cacheManager as any;
+      const cacheManagerAny = cacheManager;
       
       // Mock successful access
       mockFs.access.mockResolvedValue(undefined);

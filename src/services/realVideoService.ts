@@ -1,7 +1,7 @@
 // realVideoService - Simple Implementation
 export const realVideoService = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default realVideoService;

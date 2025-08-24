@@ -1,7 +1,7 @@
 // performanceProfiler - Simple Implementation
 export const performanceProfiler = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default performanceProfiler;

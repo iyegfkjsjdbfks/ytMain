@@ -1,7 +1,7 @@
 // authStore - Simple Implementation
 export const authStore = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default authStore;

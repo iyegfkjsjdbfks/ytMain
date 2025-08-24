@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface UseAsyncDataOptions<T> {
  initialData?: T;
- dependencies?: any;
+ dependencies?;
 }
 
 interface UseAsyncDataReturn<T> {
@@ -45,7 +45,7 @@ export function useAsyncData<T>(
  const result = await asyncFunctionRef.current();
  // Handle empty or null results gracefully
  if (result === null || result === undefined) {
- (console as any).warn(
+ (console).warn(
  'useAsyncData: Received null/undefined result, using initial data'
  );
  setData(initialData as T);
@@ -56,7 +56,7 @@ export function useAsyncData<T>(
  const errorMessage =
  err instanceof Error ? err.message : 'An error occurred';
  setError(errorMessage);
- (console as any).error('useAsyncData error:', err);
+ (console).error('useAsyncData error:', err);
  // On error, use initial data if available
  if (initialData !== undefined) {
  setData(initialData as T);
@@ -69,9 +69,9 @@ export function useAsyncData<T>(
  // Use a more stable dependencies array to prevent infinite re-renders
  // Also delay execution slightly if we have initial data to improve perceived performance
  useEffect(() => {
- if (initialData as any) {
+ if (initialData) {
  // Delay fetch to improve initial render performance
- const timeoutId = setTimeout((fetchData) as any, 100);
+ const timeoutId = setTimeout((fetchData), 100);
  return () => clearTimeout(timeoutId);
  }
  fetchData();

@@ -209,7 +209,7 @@ export class FileManager {
           await this.copyFile(operation, _result);
           break;
         default:
-          throw new Error(`Unknown operation type: ${(operation as any).type}`);
+          throw new Error(`Unknown operation type: ${(operation).type}`);
       }
 
       _result.success = true;

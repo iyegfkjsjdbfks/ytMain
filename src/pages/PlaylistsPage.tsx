@@ -45,7 +45,7 @@ const PlaylistsPage: React.FC = () => {
         id: newPlaylist.id,
         title: newPlaylist.name || newPlaylistName.trim(),
         description: newPlaylist.description || '',
-        videoIds: newPlaylist.videos?.map((v: any) => v.id) || [],
+        videoIds: newPlaylist.videos?.map((v) => v.id) || [],
         videoCount: newPlaylist.videos?.length || 0,
         createdAt: newPlaylist.createdAt,
         updatedAt: newPlaylist.updatedAt

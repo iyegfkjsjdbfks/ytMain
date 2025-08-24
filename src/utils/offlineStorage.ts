@@ -1,7 +1,7 @@
 // offlineStorage - Simple Implementation
 export const offlineStorage = {
   enabled: true,
-  process: (data: any) => data
+  process: (data) => data
 };
 
 export default offlineStorage;

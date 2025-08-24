@@ -19,7 +19,7 @@ export class SubscriptionService {
     }
   }
 
-  async post<T>(endpoint: string, data: any): Promise<T> {
+  async post<T>(endpoint: string, data): Promise<T> {
     try {
       const response = await fetch(this.apiUrl + endpoint, {
         method: 'POST',

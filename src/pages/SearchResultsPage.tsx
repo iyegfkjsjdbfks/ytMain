@@ -10,7 +10,7 @@ import type { Video } from '../types';
 interface SearchState {
   videos: Video[];
   youtubeVideos: any[];
-  googleSearchVideos: any[];
+  googleSearchVideos[];
   loading: boolean;
   youtubeLoading: boolean;
 }
@@ -100,7 +100,7 @@ const SearchResultsPage: React.FC = () => {
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
           sortBy="relevance"
-          onVideoClick={(video: any) => {if ('videoId' in video) {
+          onVideoClick={(video) => {if ('videoId' in video) {
               navigate(`/watch?v=${video.videoId}`);
             } else {
               navigate(`/watch?v=${video.id}`);

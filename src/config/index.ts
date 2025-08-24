@@ -267,7 +267,7 @@ export const validateConfig = () => {
 if (ENV.DEV) {
  const configErrors = validateConfig();
  if (configErrors.length > 0) {
- (console as any).warn('Configuration validation errors:', configErrors);
+ (console).warn('Configuration validation errors:', configErrors);
  }
 }
 
