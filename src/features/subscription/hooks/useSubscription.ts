@@ -12,7 +12,7 @@ interface Subscription {
 export function useSubscription() {
   const [data, setData] = useState<Subscription | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     data,

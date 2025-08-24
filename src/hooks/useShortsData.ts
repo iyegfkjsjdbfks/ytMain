@@ -14,7 +14,7 @@ interface ShortVideo {
 export function useShortsData() {
   const [data, setData] = useState<ShortVideo[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     data,
@@ -28,7 +28,7 @@ export function useShortsData() {
 export function useShortsVideos() {
   const [shortsVideos, setShortsVideos] = useState<ShortVideo[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     shortsVideos,

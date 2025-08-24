@@ -14,7 +14,7 @@ interface Video {
 export function useVideoData() {
   const [data, setData] = useState<Video[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     data,
@@ -28,7 +28,7 @@ export function useVideoData() {
 export function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     videos,
@@ -41,7 +41,7 @@ export function useVideos() {
 export function useTrendingVideos() {
   const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     trendingVideos,
@@ -54,7 +54,7 @@ export function useTrendingVideos() {
 export function useSubscriptionsFeed() {
   const [subscriptionsFeed, setSubscriptionsFeed] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     subscriptionsFeed,
@@ -67,7 +67,7 @@ export function useSubscriptionsFeed() {
 export function useChannelVideos() {
   const [channelVideos, setChannelVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return {
     channelVideos,
