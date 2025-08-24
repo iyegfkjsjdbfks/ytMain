@@ -1,15 +1,21 @@
 // StreamAnalyticsDashboard - Enhanced Dashboard Component
 import React, { useState, useEffect } from 'react';
 
-interface StreamAnalyticsDashboardProps {
-  className?: string;
-  onDataUpdate?: (data: any) => void;
+interface ChartData {
+  type: 'line' | 'bar';
+  data: number[];
+  labels: string[];
 }
 
 interface DashboardData {
   metrics: Record<string, number>;
-  charts: any[];
+  charts: ChartData[];
   lastUpdated: string;
+}
+
+interface StreamAnalyticsDashboardProps {
+  className?: string;
+  onDataUpdate?: (data: DashboardData) => void;
 }
 
 export const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
@@ -39,7 +45,9 @@ export const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> =
             totalLikes: 50,
             totalComments: 25
           },
-          charts: [],
+          charts: [
+            { type: 'line', data: [10, 40, 20, 80], labels: ['Mon', 'Tue', 'Wed', 'Thu'] }
+          ],
           lastUpdated: new Date().toISOString()
         };
         
@@ -97,7 +105,7 @@ export const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> =
           data.charts.map((chart, index) => (
             <div key={index} className="chart-container">
               {/* Chart component would go here */}
-              <div>Chart {index + 1}</div>
+              <div>Chart {index + 1}: {chart.type}</div>
             </div>
           ))
         ) : (

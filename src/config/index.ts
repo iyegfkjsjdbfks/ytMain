@@ -232,7 +232,7 @@ export type DevConfig = typeof DEV_CONFIG;
 
 // Validation functions
 export const validateConfig = () => {
- const errors: string = [];
+ const errors: string[] = [];
 
  // Validate required API keys in production
  if (ENV.PROD) {
@@ -259,6 +259,7 @@ export const validateConfig = () => {
  if (PERFORMANCE_CONFIG.PERFORMANCE_SAMPLE_RATE < 0 || PERFORMANCE_CONFIG.PERFORMANCE_SAMPLE_RATE > 1) {
  errors.push('PERFORMANCE_SAMPLE_RATE must be between 0 and 1');
  }
+ }
 
  return errors;
 };
@@ -269,4 +270,6 @@ if (ENV.DEV) {
  if (configErrors.length > 0) {
  (console as any).warn('Configuration validation errors:', configErrors);
  }
+}
+
 export default CONFIG;

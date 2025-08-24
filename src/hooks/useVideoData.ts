@@ -1,21 +1,32 @@
 // useVideoData - Simple Hook
 import { useState } from 'react';
 
+// Define a generic video type
+interface Video {
+  id: string;
+  title: string;
+  thumbnail: string;
+  channel: string;
+  views: number;
+  uploadedAt: Date;
+}
+
 export function useVideoData() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<Video[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   return {
     data,
     loading,
-    error
+    error,
+    setData
   };
 }
 
 // Additional video-related hooks
 export function useVideos() {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -28,7 +39,7 @@ export function useVideos() {
 }
 
 export function useTrendingVideos() {
-  const [trendingVideos, setTrendingVideos] = useState([]);
+  const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -41,7 +52,7 @@ export function useTrendingVideos() {
 }
 
 export function useSubscriptionsFeed() {
-  const [subscriptionsFeed, setSubscriptionsFeed] = useState([]);
+  const [subscriptionsFeed, setSubscriptionsFeed] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -54,7 +65,7 @@ export function useSubscriptionsFeed() {
 }
 
 export function useChannelVideos() {
-  const [channelVideos, setChannelVideos] = useState([]);
+  const [channelVideos, setChannelVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
