@@ -1,362 +1,149 @@
 #!/usr/bin/env node
 
-/**
- * Targeted TypeScript Error Fixer
- * Fixes specific error patterns found in the current codebase
- */
-
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
-// Error patterns and their fixes
-const ERROR_FIXES = {
-  // TS1005: Missing comma in useEffect dependencies
-  'missing-comma-useeffect': {
-    pattern: /}, \[\]\);$/,
-    replacement: '}, []);',
-    description: 'Add missing comma in useEffect dependencies'
-  },
+console.log('🎯 Starting Targeted TypeScript Error Resolution...');
 
-  // TS1005: Missing comma in array/object literals
-  'missing-comma-literal': {
-    pattern: /(\w+):\s*([^,}\]]*)\s*$/m,
-    replacement: '$1,',
-    description: 'Add missing comma in object/array literals'
-  },
+// Read configuration
+const config = JSON.parse(fs.readFileSync('error-resolver.config.json', 'utf8'));
+const { targetedFiles, criticalErrorPatterns } = config;
 
-  // TS1381/TS1382: Fix JSX expression syntax
-  'jsx-expression-fix': {
-    pattern: /<(\w+)([^>]*)>\s*{\s*([^}]+)\s*}\s*<\/\1>/g,
-    replacement: '<$1$2>{$3}</$1>',
-    description: 'Fix JSX expression syntax'
-  },
-
-  // TS1005: Fix malformed type annotations
-  'type-annotation-fix': {
-    pattern: /Promise<any>\s*<[^>]+>/g,
-    replacement: 'Promise<$1>',
-    description: 'Fix malformed type annotations'
-  },
-
-  // TS1128: Fix malformed object syntax
-  'object-syntax-fix': {
-    pattern: /{\s*([^}]+?)\s*}\s*;/g,
-    replacement: '{$1};',
-    description: 'Fix malformed object syntax'
-  },
-
-  // TS1381: Fix malformed function syntax
-  'function-syntax-fix': {
-    pattern: /\)\s*=>\s*{\s*([^}]+?)\s*}\s*\(/g,
-    replacement: ') => {$1}(',
-    description: 'Fix malformed function syntax'
-  },
-
-  // TS1005: Fix missing closing braces
-  'missing-brace-fix': {
-    pattern: /export default (\w+);$/m,
-    replacement: 'export default $1;\n}',
-    description: 'Add missing closing brace'
-  }
-};
-
-// Files with known errors and specific fixes
-const FILE_FIXES = {
-  'src/pages/HistoryPage.tsx': [
-    {
-      line: 28,
-      pattern: /}, \[\]\);$/,
-      replacement: '}, []);'
-    }
-  ],
-
-  'src/pages/LikedVideosPage.tsx': [
-    {
-      line: 30,
-      pattern: /}, \[\]\);$/,
-      replacement: '}, []);'
-    }
-  ],
-
-  'src/pages/PlaylistsPage.tsx': [
-    {
-      line: 35,
-      pattern: /}, \[\]\);$/,
-      replacement: '}, []);'
-    },
-    {
-      line: 102,
-      pattern: /\/\/ FIXED:\s*<\/button>/,
-      replacement: '</button>'
-    }
-  ],
-
-  'src/pages/TrendingPage.tsx': [
-    {
-      line: 16,
-      pattern: /const categories = \[;/,
-      replacement: 'const categories = ['
-    },
-    {
-      line: 17,
-      pattern: /{ id: 'all' as const label: 'All', icon: '🔥' },/,
-      replacement: "{ id: 'all', label: 'All', icon: '🔥' },"
-    },
-    {
-      line: 18,
-      pattern: /{ id: 'music' as const label: 'Music', icon: '🎵' },/,
-      replacement: "{ id: 'music', label: 'Music', icon: '🎵' },"
-    },
-    {
-      line: 19,
-      pattern: /{ id: 'gaming' as const label: 'Gaming', icon: '🎮' },/,
-      replacement: "{ id: 'gaming', label: 'Gaming', icon: '🎮' },"
-    },
-    {
-      line: 20,
-      pattern: /{ id: 'news' as const label: 'News', icon: '📰' },/,
-      replacement: "{ id: 'news', label: 'News', icon: '📰' },"
-    },
-    {
-      line: 21,
-      pattern: /{ id: 'movies' as const label: 'Movies', icon: '🎬' }\];/,
-      replacement: "{ id: 'movies', label: 'Movies', icon: '🎬' }];"
-    }
-  ]
-};
-
-class TargetedErrorFixer {
-  constructor() {
-    this.fixedFiles = [];
-    this.errorsFixed = 0;
-    this.backupDir = path.join(process.cwd(), '.error-fix-backups');
-  }
-
-  async run() {
-    console.log('🎯 Starting Targeted TypeScript Error Fixer...\n');
-
-    // Create backup
-    await this.createBackup();
-
-    // Fix files with specific known issues
-    for (const [filePath, fixes] of Object.entries(FILE_FIXES)) {
-      if (fs.existsSync(filePath)) {
-        console.log(`🔧 Fixing ${path.basename(filePath)}...`);
-        const fixed = await this.fixFile(filePath, fixes);
-        if (fixed) {
-          this.fixedFiles.push(filePath);
-          this.errorsFixed += fixes.length;
-        }
-      }
-    }
-
-    // Apply general pattern fixes
-    await this.applyPatternFixes();
-
-    // Validate fixes
-    await this.validateFixes();
-
-    // Generate report
-    this.generateReport();
-  }
-
-  async createBackup() {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const backupPath = path.join(this.backupDir, `targeted-fix-${timestamp}`);
-
-    console.log(`💾 Creating backup: ${backupPath}`);
-
-    // Create backup directory
-    fs.mkdirSync(backupPath, { recursive: true });
-
-    // Copy affected files
-    for (const filePath of Object.keys(FILE_FIXES)) {
-      if (fs.existsSync(filePath)) {
-        const backupFilePath = path.join(backupPath, path.basename(filePath));
-        fs.copyFileSync(filePath, backupFilePath);
-      }
-    }
-  }
-
-  async fixFile(filePath, fixes) {
-    try {
-      let content = fs.readFileSync(filePath, 'utf8');
-      let modified = false;
-
-      for (const fix of fixes) {
-        if (fix.pattern && fix.replacement) {
-          const newContent = content.replace(fix.pattern, fix.replacement);
-          if (newContent !== content) {
-            content = newContent;
-            modified = true;
-          }
-        }
-      }
-
-      if (modified) {
-        fs.writeFileSync(filePath, content);
-        console.log(`  ✅ Fixed ${fixes.length} issues in ${path.basename(filePath)}`);
-        return true;
-      }
-
-      return false;
-    } catch (error) {
-      console.error(`  ❌ Error fixing ${filePath}:`, error.message);
-      return false;
-    }
-  }
-
-  async applyPatternFixes() {
-    console.log('\n🔍 Applying general pattern fixes...');
-
-    const files = [
-      'src/pages/SearchResultsPage.tsx',
-      'src/pages/LoginPage.tsx',
-      'src/pages/RegisterPage.tsx'
-    ];
-
-    for (const file of files) {
-      if (fs.existsSync(file)) {
-        console.log(`🔧 Applying patterns to ${path.basename(file)}...`);
-        await this.fixFileWithPatterns(file);
-      }
-    }
-  }
-
-  async fixFileWithPatterns(filePath) {
-    try {
-      let content = fs.readFileSync(filePath, 'utf8');
-      let modified = false;
-
-      // Fix common syntax issues
-      const patterns = [
-        // Fix JSX expression issues
-        { pattern: /{\s*\.\.\.([^}]+?)\s*}/g, replacement: '{...$1}' },
-        // Fix malformed type annotations
-        { pattern: /Promise<any>\s*<([^>]+)>/g, replacement: 'Promise<$1>' },
-        // Fix object literal syntax
-        { pattern: /{\s*([^}]+?)\s*}\s*;/g, replacement: '{$1};' },
-        // Fix function parameter syntax
-        { pattern: /\(\s*([^)]+?)\s*\)\s*=>\s*{\s*([^}]+?)\s*}/g, replacement: '($1) => {$2}' }
-      ];
-
-      for (const { pattern, replacement } of patterns) {
-        const newContent = content.replace(pattern, replacement);
-        if (newContent !== content) {
-          content = newContent;
-          modified = true;
-        }
-      }
-
-      if (modified) {
-        fs.writeFileSync(filePath, content);
-        console.log(`  ✅ Applied pattern fixes to ${path.basename(filePath)}`);
-        this.fixedFiles.push(filePath);
-      }
-    } catch (error) {
-      console.error(`  ❌ Error applying patterns to ${filePath}:`, error.message);
-    }
-  }
-
-  async validateFixes() {
-    console.log('\n🔍 Validating fixes...');
-
-    return new Promise((resolve) => {
-      const { exec } = require('child_process');
-      exec('npx tsc --noEmit --pretty', (error, stdout, stderr) => {
-        const output = stdout + stderr;
-        const remainingErrors = (output.match(/error TS\d+:/g) || []).length;
-
-        console.log(`📊 Validation Results:`);
-        console.log(`  - Files processed: ${this.fixedFiles.length}`);
-        console.log(`  - Errors before: 67`);
-        console.log(`  - Errors after: ${remainingErrors}`);
-        console.log(`  - Errors fixed: ${67 - remainingErrors}`);
-
-        if (remainingErrors > 0) {
-          console.log(`\n⚠️  ${remainingErrors} errors remain. Check the output above for details.`);
-        } else {
-          console.log('\n✅ All errors fixed successfully!');
-        }
-
-        resolve();
-      });
+// Get current TypeScript errors
+function getCurrentErrors() {
+  try {
+    const result = execSync('npx tsc --noEmit --pretty false', { 
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+      maxBuffer: 1024 * 1024 * 50, // 50MB buffer
+      cwd: process.cwd()
     });
-  }
-
-  generateReport() {
-    const report = {
-      timestamp: new Date().toISOString(),
-      system: 'Targeted TypeScript Error Fixer',
-      summary: {
-        filesProcessed: this.fixedFiles.length,
-        errorsBefore: 67,
-        errorsFixed: this.errorsFixed
-      },
-      fixedFiles: this.fixedFiles,
-      patternsApplied: Object.keys(ERROR_FIXES)
-    };
-
-    const reportPath = path.join(process.cwd(), 'targeted-fix-report.json');
-    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-
-    console.log(`\n📄 Report saved: ${reportPath}`);
-    console.log('\n🎉 Targeted error fixing complete!');
+    return [];
+  } catch (error) {
+    const output = error.stdout || error.stderr || error.message || '';
+    console.log(`Raw TSC output length: ${output.length} characters`);
+    console.log('First 1000 characters:');
+    console.log(output.substring(0, 1000));
+    return parseTypeScriptErrors(output);
   }
 }
 
-// CLI Interface
-function showHelp() {
-  console.log(`
-Targeted TypeScript Error Fixer v1.0.0
+// Parse TypeScript error output
+function parseTypeScriptErrors(output) {
+  const errors = [];
+  const lines = output.split('\n');
+  
+  let completeLines = 0;
+  let matchedLines = 0;
+  
+  for (const line of lines) {
+    if (line.includes('error TS')) {
+      const trimmedLine = line.trim();
+      
+      // Look for complete error lines that end with a period
+      // Format: file.tsx(line,col): error TScode: message.
+      if (trimmedLine.endsWith('.')) {
+        const match = trimmedLine.match(/^(.+?)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.+)\.$/);
+        if (match) {
+          matchedLines++;
+          const [, file, lineStr, colStr, code, message] = match;
+          errors.push({
+            file: path.resolve(file.trim()),
+            line: parseInt(lineStr),
+            column: parseInt(colStr),
+            code,
+            message: message.trim()
+          });
+        }
+      }
+      completeLines++;
+    }
+  }
+  
+  console.log(`Found ${completeLines} complete error lines, matched ${matchedLines}`);
+  console.log(`Parsed ${errors.length} errors from TSC output`);
+  if (errors.length > 0) {
+    console.log('Sample error:', errors[0]);
+  }
+  
+  return errors;
+}
 
-Usage:
-  node targeted-error-fix.js [options]
+// Filter errors for targeted files and critical patterns
+function filterTargetedErrors(errors, config) {
+  const targetedFiles = config.targetedFiles || [];
+  const criticalPatterns = config.criticalErrorPatterns || [];
+  
+  console.log(`Filtering ${errors.length} errors...`);
+  console.log('Targeted files:', targetedFiles);
+  console.log('Critical patterns:', criticalPatterns);
+  
+  const filtered = errors.filter(error => {
+    // Check if error is in a targeted file
+    // Convert both paths to use forward slashes for comparison
+    const normalizedErrorFile = error.file.replace(/\\/g, '/');
+    const isTargetedFile = targetedFiles.some(target => {
+      const normalizedTarget = target.replace(/\\/g, '/');
+      return normalizedErrorFile.endsWith(normalizedTarget) || normalizedErrorFile.includes(normalizedTarget);
+    });
+    
+    // Check if error matches critical patterns
+    const isCriticalError = criticalPatterns.some(pattern => 
+      error.code.includes(pattern)
+    );
+    
+    if (isTargetedFile || isCriticalError) {
+      console.log(`Match found: ${error.file} - ${error.code} - Targeted: ${isTargetedFile}, Critical: ${isCriticalError}`);
+    }
+    
+    return isTargetedFile && isCriticalError;
+  });
+  
+  console.log(`Filtered to ${filtered.length} targeted errors`);
+  return filtered;
+}
 
-Options:
-  --help          Show this help message
-  --dry-run       Show what would be fixed without making changes
-  --backup-only   Only create backup, don't apply fixes
+// Apply targeted fixes
+function applyFixes(errors) {
+  let fixedCount = 0;
+  
+  for (const error of errors) {
+    console.log(`\n🔍 Applying fix for: ${error.file} (Line ${error.line})`);
+    console.log(`   Error: ${error.message}`);
+    
+    let content = fs.readFileSync(error.file, 'utf8');
+    const lines = content.split('\n');
 
-Description:
-  Fixes specific TypeScript syntax errors found in the current codebase:
-  - Missing commas in useEffect dependencies
-  - Malformed JSX expressions
-  - Type annotation syntax issues
-  - Object/array literal syntax errors
-  - Function syntax problems
+    if (error.code === 'TS1005' && error.message.includes("expected")) {
+        const line = lines[error.line - 1];
+        const trimmedLine = line.trim();
+        if (trimmedLine.endsWith("}")) {
+            lines[error.line - 1] = line.replace("}", ",");
+        }
+    }
 
-Files targeted:
-  - src/pages/HistoryPage.tsx
-  - src/pages/LikedVideosPage.tsx
-  - src/pages/PlaylistsPage.tsx
-  - src/pages/TrendingPage.tsx
-  - src/pages/SearchResultsPage.tsx
-  - src/pages/LoginPage.tsx
-  - src/pages/RegisterPage.tsx
-`);
+    fs.writeFileSync(error.file, lines.join('\n'));
+    fixedCount++;
+  }
+  
+  return fixedCount;
 }
 
 // Main execution
-if (require.main === module) {
-  const args = process.argv.slice(2);
+function main() {
+  const allErrors = getCurrentErrors();
+  const targetedErrors = filterTargetedErrors(allErrors, config);
+  
+  console.log(`🎯 Found ${targetedErrors.length} targeted TypeScript errors`);
 
-  if (args.includes('--help')) {
-    showHelp();
-    process.exit(0);
+  if (targetedErrors.length === 0) {
+    console.log('🎉 No targeted errors found!');
+    return;
   }
 
-  if (args.includes('--dry-run')) {
-    console.log('🔍 Dry run mode - no changes will be made');
-    // In a real implementation, you'd implement dry-run logic
-    process.exit(0);
-  }
-
-  const fixer = new TargetedErrorFixer();
-  fixer.run().catch(error => {
-    console.error('❌ Error during targeted fixing:', error);
-    process.exit(1);
-  });
+  const fixedCount = applyFixes(targetedErrors);
+  console.log(`\n📈 Summary: Applied fixes for ${fixedCount} targeted errors`);
 }
 
-module.exports = { TargetedErrorFixer };
+main();
