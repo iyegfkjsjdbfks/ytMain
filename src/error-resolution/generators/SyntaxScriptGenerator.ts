@@ -1,6 +1,6 @@
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
-import { logger } from '../utils/Logger';
+import { Logger } from '../utils/Logger';
 
 export class SyntaxScriptGenerator extends BaseScriptGenerator {
   constructor() {
@@ -242,7 +242,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
     errors: AnalyzedError[],
     context: GenerationContext
   ): Promise<FixingScript | null> {
-    logger.debug('Generating syntax script for pattern', { pattern, errorCount: errors.length });
+    Logger.process({ message: 'Generating syntax script for pattern', pattern, errorCount: errors.length });
 
     const scriptId = `syntax-${pattern}-${Date.now()}`;
     let commands: ScriptCommand[] = [];
@@ -293,7 +293,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         break;
 
       default:
-        logger.warn('Unknown syntax pattern', { pattern });
+        Logger.process({ message: 'Unknown syntax pattern', pattern });
         return null;
     }
 
@@ -575,21 +575,21 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
     const validationChecks: ValidationCheck[] = [];
 
     // Get all unique files
-    const allFiles = [...new Set(context.errors.map(e => e.file))];
+    const affectedFiles = [...new Set((context.errors || []).map(e => e.file))];
 
     // Add commands for each type of syntax fix
-    commands.push(...this.generateJSXFixCommands(allFiles.filter(f => f.endsWith('.tsx') || f.endsWith('.jsx'))));
-    commands.push(...this.generateObjectSyntaxFixCommands(allFiles));
-    commands.push(...this.generateStatementSyntaxFixCommands(allFiles));
-    commands.push(...this.generateExpressionSyntaxFixCommands(allFiles));
+    commands.push(...this.generateJSXFixCommands(affectedFiles.filter(f => f.endsWith('.tsx') || f.endsWith('.jsx'))));
+    commands.push(...this.generateObjectSyntaxFixCommands(affectedFiles));
+    commands.push(...this.generateStatementSyntaxFixCommands(affectedFiles));
+    commands.push(...this.generateExpressionSyntaxFixCommands(affectedFiles));
 
-    // Add comprehensive validation
-    validationChecks.push(...this.createSyntaxValidationChecks(allFiles));
+    // Add validation checks
+    validationChecks.push(...this.createSyntaxValidationChecks(affectedFiles));
 
     return {
       id: scriptId,
       category: this.category,
-      targetErrors: context.errors,
+      targetErrors: context.errors || [],
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks,

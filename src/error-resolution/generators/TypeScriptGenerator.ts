@@ -1,6 +1,6 @@
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
-import { logger } from '../utils/Logger';
+import { Logger } from '../utils/Logger';
 
 export class TypeScriptGenerator extends BaseScriptGenerator {
   constructor() {
@@ -242,7 +242,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     errors: AnalyzedError[],
     context: GenerationContext
   ): Promise<FixingScript | null> {
-    logger.debug('Generating TypeScript script for pattern', { pattern, errorCount: errors.length });
+    Logger.process({ message: 'Generating TypeScript script for pattern', pattern, errorCount: errors.length });
 
     const scriptId = `typescript-${pattern}-${Date.now()}`;
     let commands: ScriptCommand[] = [];
@@ -294,7 +294,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         break;
 
       default:
-        logger.warn('Unknown TypeScript pattern', { pattern });
+        Logger.process({ message: 'Unknown TypeScript pattern', pattern });
         return null;
     }
 
@@ -501,7 +501,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   /**
    * Creates type validation checks for files
    */
-  protected createTypeValidationChecks(files: string[]): ValidationCheck[] {
+  protected override createTypeValidationChecks(files: string[]): ValidationCheck[] {
     return files.map(file => ({
       type: 'syntax' as const,
       command: `npx tsc --noEmit --strict ${file}`,

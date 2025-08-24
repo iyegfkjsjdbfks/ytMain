@@ -1,6 +1,6 @@
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
-import { logger } from '../utils/Logger';
+import { Logger } from '../utils/Logger';
 
 export class FormattingScriptGenerator extends BaseScriptGenerator {
   constructor() {
@@ -217,7 +217,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     errors: AnalyzedError[],
     context: GenerationContext
   ): Promise<FixingScript | null> {
-    logger.debug('Generating formatting script for pattern', { pattern, errorCount: errors.length });
+    Logger.process({ message: 'Generating formatting script for pattern', pattern, errorCount: errors.length });
 
     const scriptId = `formatting-${pattern}-${Date.now()}`;
     let commands: ScriptCommand[] = [];
@@ -456,7 +456,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     return {
       id: scriptId,
       category: this.category,
-      targetErrors: context.errors,
+      targetErrors: context.errors || [],
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks,
