@@ -187,22 +187,25 @@ class ComprehensiveErrorAnalyzer {
     // Save raw error output for reference
     writeFileSync(join(projectRoot, 'error-analysis-raw.txt'), typeCheckResult.output);
     
-    // Categorize by root cause
-    const rootCauseCategories = this.categorizeByRootCause(errors);
-    
-    // Categorize by error type
-    const typeCategories = this.categorizeByErrorType(errors);
-    
     // Generate analysis report
+    const typeCategories = this.categorizeByErrorType(errors);
     const analysis = {
       totalErrors: errors.length,
-      categories: rootCauseCategories,
-      typeCategories,
+      categories: this.categorizeByRootCause(errors),
+      typeCategories: typeCategories,
       fileCount: new Set(errors.map(e => e.file)).size,
       mostCommonErrors: Array.from(typeCategories.entries())
         .sort((a, b) => b[1].length - a[1].length)
         .slice(0, 10)
     };
+
+    writeFileSync(join(projectRoot, 'analysis.json'), JSON.stringify(analysis, (key, value) => {
+      if (value instanceof Map) {
+        return Array.from(value.entries());
+      } else {
+        return value;
+      }
+    }, 2));
     
     this.report.phases.push({
       name: 'Error Analysis',
