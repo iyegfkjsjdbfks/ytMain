@@ -254,7 +254,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
         break;
 
       default:
-        logger.warn('Unknown formatting pattern', { pattern });
+        Logger.process({ message: 'Unknown formatting pattern', pattern });
         return null;
     }
 
@@ -439,7 +439,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     const validationChecks: ValidationCheck[] = [];
 
     // Get all unique files
-    const fileSet = new Set(context.errors.map(e => e.file));
+    const fileSet = new Set((context.errors || []).map(e => e.file));
     const allFiles = Array.from(fileSet);
 
     // Add commands for each type of formatting fix

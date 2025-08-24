@@ -96,9 +96,8 @@ export abstract class BaseScriptGenerator {
     // Generate rollback commands for the given commands
     return commands.map(cmd => ({
       type: cmd.type,
-      command: `# Rollback for: ${cmd.command}`,
-      args: [],
-      workingDirectory: cmd.workingDirectory
+      file: cmd.file,
+      description: `Rollback for: ${cmd.description}`
     }));
   }
 
