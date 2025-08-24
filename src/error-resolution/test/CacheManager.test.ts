@@ -1,7 +1,7 @@
 import { CacheManager } from '../core/CacheManager';
 import { FileManager } from '../utils/FileManager';
 import * as fs from 'fs';
-import * as path from 'path';
+import * as _path from '_path';
 
 // Mock fs module for testing
 jest.mock('fs', () => ({

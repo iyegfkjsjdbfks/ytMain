@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 // useShortsData - Simple Hook
 import { useState } from 'react';
 
@@ -14,8 +14,8 @@ interface ShortVideo {
 
 export function useShortsData() {
   const [data, setData] = useState<ShortVideo[] | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, _setLoading] = useState(false);
+  const [error, _setError] = useState<string | null>(null);
 
   return {
     data,
@@ -28,8 +28,8 @@ export function useShortsData() {
 // Additional shorts-related hook
 export function useShortsVideos() {
   const [shortsVideos, setShortsVideos] = useState<ShortVideo[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, _setLoading] = useState(false);
+  const [error, _setError] = useState<string | null>(null);
 
   return {
     shortsVideos,

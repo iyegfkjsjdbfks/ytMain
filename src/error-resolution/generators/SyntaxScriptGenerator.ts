@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
 import { Logger } from '../utils/Logger';
@@ -241,7 +241,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    context: GenerationContext
+    _context: GenerationContext
   ): Promise<FixingScript | null> {
     Logger.process({ message: 'Generating syntax script for pattern', pattern, errorCount: errors.length });
 
@@ -569,14 +569,14 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
    * Generates a comprehensive syntax fixing script
    */
   public async generateComprehensiveSyntaxScript(
-    context: GenerationContext
+    _context: GenerationContext
   ): Promise<FixingScript> {
     const scriptId = `syntax-comprehensive-${Date.now()}`;
     const commands: ScriptCommand[] = [];
     const validationChecks: ValidationCheck[] = [];
 
     // Get all unique files
-    const affectedFiles = [...new Set((context.errors || []).map(e => e.file))];
+    const affectedFiles = [...new Set((_context.errors || []).map(e => e.file))];
 
     // Add commands for each type of syntax fix
     commands.push(...this.generateJSXFixCommands(affectedFiles.filter(f => f.endsWith('.tsx') || f.endsWith('.jsx'))));
@@ -590,7 +590,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
     return {
       id: scriptId,
       category: this.category,
-      targetErrors: context.errors || [],
+      targetErrors: _context.errors || [],
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks,

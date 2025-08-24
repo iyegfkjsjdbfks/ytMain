@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 
 import { CacheManager } from '../core/CacheManager';
 import { FileManager } from '../utils/FileManager';

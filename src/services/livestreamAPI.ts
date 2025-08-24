@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 // Livestream API - Enhanced Implementation
 export interface LiveStreamConfig {
   streamKey: string;
@@ -18,12 +18,12 @@ export interface LiveStreamStatus {
 }
 
 export class LiveStreamAPI {
-  private apiKey: string;
-  private baseUrl: string;
+  private _apiKey: string;
+  private _baseUrl: string;
 
-  constructor(apiKey?: string) {
-    this.apiKey = apiKey || process.env.YOUTUBE_API_KEY || '';
-    this.baseUrl = 'https://www.googleapis.com/youtube/v3';
+  constructor(_apiKey?: string) {
+    this._apiKey = _apiKey || process.env.YOUTUBE_API_KEY || '';
+    this._baseUrl = 'https://www.googleapis.com/youtube/v3';
   }
 
   async createLiveStream(config: LiveStreamConfig): Promise<LiveStreamStatus> {

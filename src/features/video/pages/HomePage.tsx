@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { _FC } from 'react';
 /**
  * HomePage component for displaying the main video feed
  */
-const HomePage: React.FC = () => {
+const HomePage: React._FC = () => {
  return (
  <div className='container mx-auto py-6'>
  <h1 className='text-2xl font-bold mb-6'>Home Page</h1>

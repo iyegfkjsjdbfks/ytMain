@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 // Logger - Minimal Implementation
 export enum LogLevel {
   ERROR = 0,
@@ -23,7 +23,7 @@ export class Logger {
   private formatMessage(
     level: string,
     message: string,
-    data?: unknown
+    _data?: unknown
   ): string {
     const timestamp = new Date().toISOString();
     return timestamp + ' [' + level + '] ' + message;
@@ -62,14 +62,14 @@ export class Logger {
     console.debug(formatted, ...args);
   }
 
-  apiResponse(method: string, url: string, status: number, data?: unknown): void {
+  apiResponse(method: string, url: string, status: number, _data?: unknown): void {
     if (this.isDevelopment) {
-      this.debug('API ' + method + ' ' + url + ' - ' + status, data);
+      this.debug('API ' + method + ' ' + url + ' - ' + status, _data);
     }
   }
 
-  userAction(action: string, data?: Record<string, unknown>): void {
-    this.info('User action: ' + action, data);
+  userAction(action: string, _data?: Record<string, unknown>): void {
+    this.info('User action: ' + action, _data);
   }
 
   performance(operation: string, duration: number): void {

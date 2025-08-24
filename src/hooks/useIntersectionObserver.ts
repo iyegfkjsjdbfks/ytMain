@@ -1,11 +1,11 @@
-import React from 'react';
+import _React from 'react';
 // useIntersectionObserver - Simple Hook
 import { useState } from 'react';
 
 export function useIntersectionObserver() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [data, _setData] = useState(null);
+  const [loading, _setLoading] = useState(false);
+  const [error, _setError] = useState<Error | null>(null);
 
   return {
     data,

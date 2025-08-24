@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect, _FC } from 'react';
 import { Channel } from '../types.ts';
 import { useParams } from 'react-router-dom';
 import ChannelHeader from '../components/ChannelHeader.tsx';
@@ -24,7 +24,7 @@ interface CommunityPost {
   comments: number;
 }
 
-const ChannelPage: React.FC = () => {
+const ChannelPage: React._FC = () => {
   const { channelIdOrName } = useParams<{ channelIdOrName: string }>();
   const [channel, setChannel] = useState<Channel | null>(null);
   const [videos, setVideos] = useState<Video[]>([]);

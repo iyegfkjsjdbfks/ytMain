@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 // Environment configuration
 export const ENV = {
  NODE_ENV: import.meta.env.NODE_ENV || 'development',

@@ -6,200 +6,180 @@ import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
 import type { Video } from '../types';
 
-const UserPage: any, React.FC = () => {
-  const { userName } = useParams<{ userName: any, string }>();
-  const [activeTab, setActiveTab] = useState<'videos' | 'playlists' | 'community' | 'about'>('videos');
-  const [userVideos, setUserVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
-  const [subscriberCount, setSubscriberCount] = useState(125000);
+const UserPage: React.FC = () => {
+  const { userId } = useParams<{ userId: string }>();
+  const [activeTab, setActiveTab] = useState('videos');
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [subscriberCount, setSubscriberCount] = useState(1234567);
 
-  const decodedUserName = decodeURIComponent(userName || 'User');
-  const channelHandle: any, string = `@${decodedUserName.toLowerCase().replace(/\s+/g, '')}`;
-
-  useEffect((: any) => {
-    const fetchUserVideos = async (): Promise<void> => {
-      setLoading(true);
+  useEffect(() => {
+    const fetchUserData = async () => {
       try {
-        const allVideos = await getVideos();
-        // Filter videos by channel name (mock implementation)
-        const filteredVideos = allVideos.filter((video: any) =>
-          video.channelName.toLowerCase().includes(decodedUserName.toLowerCase()) ||
-          Math.random() > 0.7 // Random selection for demo
-        ).slice(0, 12);
-        setUserVideos(filteredVideos);
+        setLoading(true);
+        const userVideos = await getVideos();
+        setVideos(userVideos.slice(0, 12));
       } catch (error) {
-        console.error('Failed to fetch user videos: any,', error);
+        console.error('Error fetching user data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUserVideos();
-  }, [decodedUserName]);
+    fetchUserData();
+  }, [userId]);
 
-  const handleSubscribe = (): any => {
+  const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
-    setSubscriberCount(prev => isSubscribed ? prev - 1: any, prev + 1);
+    setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1);
+  };
+
+  const formatSubscriberCount = (count: number) => {
+    if (count >= 1000000) {
+      return `${(count / 1000000).toFixed(1)}M`;
+    } else if (count >= 1000) {
+      return `${(count / 1000).toFixed(0)}K`;
+    }
+    return count.toString();
   };
 
   const tabs = [
-    { id: any, 'videos' as const, label: any, 'Videos', icon: any, PlayIcon },
-    { id: any, 'playlists' as const, label: any, 'Playlists', icon: any, QueueListIcon },
-    { id: any, 'community' as const, label: any, 'Community', icon: any, ChatBubbleLeftRightIcon },
-    { id: any, 'about' as const, label: any, 'About', icon: any, InformationCircleIcon }
+    { id: 'videos', label: 'Videos', icon: PlayIcon },
+    { id: 'playlists', label: 'Playlists', icon: QueueListIcon },
+    { id: 'community', label: 'Community', icon: ChatBubbleLeftRightIcon },
+    { id: 'about', label: 'About', icon: InformationCircleIcon },
   ];
 
-  const renderTabContent = (): any => {
+  const renderTabContent = () => {
     switch (activeTab) {
       case 'videos':
         return (
-          <div>
-            {loading ? (
-              <div className="grid grid-cols-1 sm: any,grid-cols-2 md: any,grid-cols-3 lg: any,grid-cols-4 gap-4">
-                {Array.from({ length: any, 8 }).map((_: any, index: any) => (
-                  <div key={index} className="bg-neutral-100 dark: any,bg-neutral-800 rounded-lg animate-pulse">
-                    <div className="aspect-video bg-neutral-200 dark: any,bg-neutral-700 rounded-lg" />
-                    <div className="p-3 space-y-2">
-                      <div className="h-4 bg-neutral-200 dark: any,bg-neutral-700 rounded" />
-                      <div className="h-3 bg-neutral-200 dark: any,bg-neutral-700 rounded w-3/4" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : userVideos.length > 0 ? (
-              <div className="grid grid-cols-1 sm: any,grid-cols-2 md: any,grid-cols-3 lg: any,grid-cols-4 gap-4">
-                {userVideos.map((video) => (
-                  <VideoCard key={video.id} video={video} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <PlayIcon className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
-                <p className="text-lg font-medium text-neutral-600 dark: any,text-neutral-400">No videos uploaded yet</p>
-                <p className="text-sm text-neutral-500 dark: any,text-neutral-500 mt-2">Check back later for new content!</p>
-              </div>
-            )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {videos.map((video) => (
+              <VideoCard key={video.id} video={video} />
+            ))}
           </div>
         );
-
       case 'playlists':
         return (
           <div className="text-center py-12">
-            <QueueListIcon className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
-            <p className="text-lg font-medium text-neutral-600 dark: any,text-neutral-400">No public playlists</p>
-            <p className="text-sm text-neutral-500 dark: any,text-neutral-500 mt-2">This channel hasn't created any public playlists yet.</p>
+            <QueueListIcon className="w-16 h-16 mx-auto text-neutral-400 mb-4" />
+            <p className="text-neutral-600 dark:text-neutral-400">No playlists available</p>
           </div>
         );
-
       case 'community':
         return (
           <div className="text-center py-12">
-            <ChatBubbleLeftRightIcon className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
-            <p className="text-lg font-medium text-neutral-600 dark: any,text-neutral-400">No community posts</p>
-            <p className="text-sm text-neutral-500 dark: any,text-neutral-500 mt-2">This channel hasn't posted to the community tab yet.</p>
+            <ChatBubbleLeftRightIcon className="w-16 h-16 mx-auto text-neutral-400 mb-4" />
+            <p className="text-neutral-600 dark:text-neutral-400">No community posts yet</p>
           </div>
         );
-
       case 'about':
         return (
           <div className="max-w-2xl">
-            <div className="bg-neutral-50 dark: any,bg-neutral-800 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-neutral-900 dark: any,text-neutral-100 mb-4">About {decodedUserName}</h3>
-              <div className="space-y-4 text-sm text-neutral-600 dark: any,text-neutral-400">
-                <div>
-                  <span className="font-medium text-neutral-800 dark: any,text-neutral-200">Channel handle: any,</span> {channelHandle}
-                </div>
-                <div>
-                  <span className="font-medium text-neutral-800 dark: any,text-neutral-200">Joined: any,</span> March 2020
-                </div>
-                <div>
-                  <span className="font-medium text-neutral-800 dark: any,text-neutral-200">Total views: any,</span> 2.5M views
-                </div>
-                <div>
-                  <span className="font-medium text-neutral-800 dark: any,text-neutral-200">Description: any,</span>
-                  <p className="mt-2">Welcome to {decodedUserName}'s channel! This is a demo profile showcasing the YTA Studio Aug2 application. In a real implementation, this would contain the channel's actual description and information.</p>
+            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold mb-4 text-neutral-900 dark:text-white">About this channel</h3>
+              <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
+                <p>Welcome to our channel! We create amazing content for our viewers.</p>
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+                  <div>
+                    <p className="font-medium text-neutral-900 dark:text-white">Joined</p>
+                    <p>Jan 1, 2020</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-neutral-900 dark:text-white">Views</p>
+                    <p>10.5M total views</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         );
-
-      default: any,
+      default:
         return null;
     }
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white dark: any,bg-neutral-950 min-h-screen">
-      {/* Channel Header */}
-      <div className="bg-gradient-to-r from-sky-400 to-blue-500 h-32 sm: any,h-48" />
-
-      <div className="max-w-6xl mx-auto px-4 sm: any,px-6 lg: any,px-8">
-        {/* Channel Info */}
-        <div className="relative -mt-16 sm: any,-mt-24 mb-8">
-          <div className="flex flex-col sm: any,flex-row items-start sm: any,items-end space-y-4 sm: any,space-y-0 sm: any,space-x-6">
-            <div className="w-32 h-32 sm: any,w-40 sm: any,h-40 bg-white dark: any,bg-neutral-800 rounded-full flex items-center justify-center ring-4 ring-white dark: any,ring-neutral-900 shadow-lg">
-              <UserIcon className="w-20 h-20 sm: any,w-24 sm: any,h-24 text-neutral-500 dark: any,text-neutral-400" />
-            </div>
-
-            <div className="flex-1 min-w-0">
-              <h1 className="text-2xl sm: any,text-4xl font-bold text-neutral-900 dark: any,text-neutral-50 mb-2">
-                {decodedUserName}
-              </h1>
-              <p className="text-neutral-600 dark: any,text-neutral-400 text-sm sm: any,text-base mb-2">
-                {channelHandle} • {subscriberCount.toLocaleString()} subscribers
-              </p>
-              <p className="text-neutral-500 dark: any,text-neutral-500 text-sm">
-                Content creator and demo channel for YTA Studio Aug2
-              </p>
-            </div>
-
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={handleSubscribe}
-                className={`flex items-center space-x-2 px-6 py-2.5 rounded-full font-medium text-sm transition-colors ${
-                  isSubscribed
-                    ? 'bg-neutral-200 dark: any,bg-neutral-700 text-neutral-800 dark: any,text-neutral-200 hover: any,bg-neutral-300 dark: any,hover: any,bg-neutral-600'
-                    : 'bg-red-600 hover: any,bg-red-700 text-white'
-                }`}
-              >
-                {isSubscribed ? (
-                  <>
-                    <CheckIcon className="w-4 h-4" />
-                    <span>Subscribed</span>
-                  </>
-                ) : (
-                  <span>Subscribe</span>
-                )}
-              </button>
-
-              {isSubscribed && (<button
-                  onClick={(: any) => {
-                    // Toggle notification settings for this channel
-                  }}
-                  className="p-2.5 bg-neutral-200 dark: any,bg-neutral-700 hover: any,bg-neutral-300 dark: any,hover: any,bg-neutral-600 rounded-full transition-colors"
-                  title="Notification settings"
-                >
-                  <BellIcon className="w-5 h-5 text-neutral-600 dark: any,text-neutral-400" />
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Channel Header */}
+        <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8">
+          {/* Banner */}
+          <div className="h-32 sm:h-48 bg-gradient-to-r from-red-500 to-red-600 rounded-t-lg"></div>
+          
+          {/* Channel Info */}
+          <div className="px-6 pb-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-end -mt-12 sm:-mt-16">
+              {/* Avatar */}
+              <div className="w-24 h-24 sm:w-32 sm:h-32 bg-white dark:bg-neutral-700 rounded-full border-4 border-white dark:border-neutral-800 flex items-center justify-center mb-4 sm:mb-0 sm:mr-6">
+                <UserIcon className="w-12 h-12 sm:w-16 sm:h-16 text-neutral-400" />
+              </div>
+              
+              {/* Channel Details */}
+              <div className="flex-1 min-w-0">
+                <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white mb-2">
+                  Channel Name
+                </h1>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-neutral-600 dark:text-neutral-400">
+                  <span>@channelhandle</span>
+                  <span>{formatSubscriberCount(subscriberCount)} subscribers</span>
+                  <span>123 videos</span>
+                </div>
+                <p className="mt-2 text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                  Welcome to our amazing channel! We create content that you'll love.
+                </p>
+              </div>
+              
+              {/* Subscribe Button */}
+              <div className="flex items-center gap-3 mt-4 sm:mt-0">
+                <button className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+                  <BellIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
                 </button>
-              )}
+                <button
+                  onClick={handleSubscribe}
+                  className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                    isSubscribed
+                      ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                      : 'bg-red-600 text-white hover:bg-red-700'
+                  }`}
+                >
+                  {isSubscribed ? (
+                    <>
+                      <CheckIcon className="w-4 h-4 inline mr-2" />
+                      Subscribed
+                    </>
+                  ) : (
+                    'Subscribe'
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="border-b border-neutral-200 dark: any,border-neutral-700 mb-8">
-          <nav className="flex space-x-8 overflow-x-auto">
-            {tabs.map((tab: any) => {
+        <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8">
+          <nav className="flex border-b border-neutral-200 dark:border-neutral-700">
+            {tabs.map((tab) => {
               const Icon = tab.icon;
-              return (<button
+              return (
+                <button
                   key={tab.id}
-                  onClick={(: any) => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors ${
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-6 py-4 border-b-2 font-medium transition-colors ${
                     activeTab === tab.id
-                      ? 'border-red-500 text-red-600 dark: any,text-red-400'
-                      : 'border-transparent text-neutral-500 dark: any,text-neutral-400 hover: any,text-neutral-700 dark: any,hover: any,text-neutral-300'
+                      ? 'border-red-500 text-red-600 dark:text-red-400'
+                      : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
                   }`}
                 >
                   <Icon className="w-5 h-5" />

@@ -80,7 +80,7 @@ const ShortsPage: React.FC = () => {
   // Debounced search
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-  // Get video ID from query parameter
+  // Get video: any ID from query parameter
   const searchParams = new URLSearchParams(location.search);
   const targetVideoId = searchParams.get('v');
 
@@ -95,7 +95,7 @@ const ShortsPage: React.FC = () => {
       .filter((video) => video.visibility !== 'scheduled') // Filter out scheduled videos
       .map((video) => {
         const shortVideo: Short = {
-          ...video as any,
+          ...video,
           duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
           isShort: true,
           isVertical: true,
@@ -113,17 +113,17 @@ const ShortsPage: React.FC = () => {
 
     // Apply category filter
     if (selectedCategory !== 'all') {
-      converted = converted.filter((short) =>
-        short.category.toLowerCase() === selectedCategory.toLowerCase());
+      converted = converted.filter((short: any) =>
+        short: any.category.toLowerCase() === selectedCategory.toLowerCase());
     }
 
     // Apply search filter
     if (debouncedSearchQuery) {
       const query = debouncedSearchQuery.toLowerCase();
-      converted = converted.filter((short) =>
-        short.title.toLowerCase().includes(query) ||
-        short.channelName.toLowerCase().includes(query) ||
-        short.description.toLowerCase().includes(query));
+      converted = converted.filter((short: any) =>
+        short: any.title.toLowerCase().includes(query) ||
+        short: any.channelName.toLowerCase().includes(query) ||
+        short: any.description.toLowerCase().includes(query));
     }
 
     return converted;
@@ -134,14 +134,14 @@ const ShortsPage: React.FC = () => {
     if (!allShorts) {
       return [];
     }
-    const uniqueCategories = [...new Set(allShorts.map((short) => short.category))];
+    const uniqueCategories = [...new Set(allShorts.map((short: any) => short: any.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking
   const handleLike = useCallback((shortId: string) => {
-    setLikedShortsArray((prev) => {
-      const currentArray = Array.isArray(prev) ? prev : [];
+    setLikedShortsArray((prev: any) => {
+      const currentArray = Array.isArray(prev: any) ? prev: any : [];
       if (currentArray.includes(shortId)) {
         return currentArray.filter((id) => id !== shortId);
       }
@@ -150,8 +150,8 @@ const ShortsPage: React.FC = () => {
   }, [setLikedShortsArray]);
 
   const handleFollow = useCallback((channelName: string) => {
-    setFollowedChannelsArray((prev) => {
-      const currentArray = Array.isArray(prev) ? prev : [];
+    setFollowedChannelsArray((prev: any) => {
+      const currentArray = Array.isArray(prev: any) ? prev: any : [];
       if (currentArray.includes(channelName)) {
         return currentArray.filter((name) => name !== channelName);
       }
@@ -161,10 +161,10 @@ const ShortsPage: React.FC = () => {
 
   const handleComment = useCallback((shortId: string) => {
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s => s.id === shortId);
+    const short: any = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({
       id: shortId,
-      title: short?.title || 'Short video'
+      title: short: any?.title || 'Short video: any'
     });
     setCommentModalOpen(true);
   }, [filteredShorts]);
@@ -186,14 +186,14 @@ const ShortsPage: React.FC = () => {
   const handleVideoChange = useCallback((index: number) => {
     setCurrentVideoIndex(index);
 
-    // Update URL with current video ID
+    // Update URL with current video: any ID
     const currentFilteredShorts = filteredShorts;
     if (currentFilteredShorts[index]) {
       const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
       window.history.replaceState(null, '', newUrl);
     }
 
-    // Scroll to the video
+    // Scroll to the video: any
     if (containerRef.current) {
       const targetElement = containerRef.current.children[index] as HTMLElement;
       if (targetElement) {
@@ -211,12 +211,12 @@ const ShortsPage: React.FC = () => {
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
-        // Update URL with current video ID
+        // Update URL with current video: any ID
         if (currentFilteredShorts[nextIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[nextIndex].id}`;
           window.history.replaceState(null, '', newUrl);
         }
-        // Scroll to the video
+        // Scroll to the video: any
         if (containerRef.current) {
           const targetElement = containerRef.current.children[nextIndex] as HTMLElement;
           if (targetElement) {
@@ -238,12 +238,12 @@ const ShortsPage: React.FC = () => {
       if (prevIndex > 0) {
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
-        // Update URL with current video ID
+        // Update URL with current video: any ID
         if (currentFilteredShorts[prevVideoIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[prevVideoIndex].id}`;
           window.history.replaceState(null, '', newUrl);
         }
-        // Scroll to the video
+        // Scroll to the video: any
         if (containerRef.current) {
           const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement;
           if (targetElement) {
@@ -261,14 +261,14 @@ const ShortsPage: React.FC = () => {
   }, [filteredShorts]);
 
   const handleSearchToggle = useCallback(() => {
-    setShowSearch(prev => !prev);
+    setShowSearch(prev: any => !prev: any);
     if (showSearch) {
       setSearchQuery('');
     }
   }, [showSearch]);
 
   const handleFilterToggle = useCallback(() => {
-    setShowFilters(prev => !prev);
+    setShowFilters(prev: any => !prev: any);
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {
@@ -381,10 +381,10 @@ const ShortsPage: React.FC = () => {
     if (Math.abs(deltaY) > 50) {
       setIsScrolling(true);
       if (deltaY > 0) {
-        // Scrolling down - next video
+        // Scrolling down - next video: any
         handleNextVideo();
       } else {
-        // Scrolling up - previous video
+        // Scrolling up - previous video: any
         handlePreviousVideo();
       }
 
@@ -416,10 +416,10 @@ const ShortsPage: React.FC = () => {
       if (Math.abs(deltaY) > minSwipeDistance) {
         setIsScrolling(true);
         if (deltaY > 0) {
-          // Swiped up - next video
+          // Swiped up - next video: any
           handleNextVideo();
         } else {
-          // Swiped down - previous video
+          // Swiped down - previous video: any
           handlePreviousVideo();
         }
 
@@ -460,13 +460,13 @@ const ShortsPage: React.FC = () => {
     return () => {}; // Return empty cleanup function if no container
   }, [handleTouchStart, handleTouchEnd]);
 
-  // Scroll to specific video when component mounts or when shorts data changes
+  // Scroll to specific video: any when component mounts or when shorts data changes
   const initializedRef = useRef(false);
   useEffect(() => {
     if (targetVideoId && !initializedRef.current && containerRef.current) {
       const currentFilteredShorts = filteredShorts;
       if (currentFilteredShorts.length > 0) {
-        const targetIndex = currentFilteredShorts.findIndex(short => short.id === targetVideoId);
+        const targetIndex = currentFilteredShorts.findIndex(short: any => short: any.id === targetVideoId);
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
@@ -482,16 +482,16 @@ const ShortsPage: React.FC = () => {
     }
   }, [targetVideoId, filteredShorts]);
 
-  // Auto-advance to next video when current video ends
+  // Auto-advance to next video: any when current video: any ends
   useEffect(() => {
     const currentFilteredShorts = filteredShorts;
     if (isAutoAdvanceEnabled && currentVideoIndex < currentFilteredShorts.length - 1) {
-      // This would be triggered by video end event in ShortDisplayCard
-      // Implementation would be in the video player component
+      // This would be triggered by video: any end event in ShortDisplayCard
+      // Implementation would be in the video: any player component
     }
   }, [isAutoAdvanceEnabled, currentVideoIndex, filteredShorts]);
 
-  // Set up intersection observer to track which video is currently in view
+  // Set up intersection observer to track which video: any is currently in view
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -531,7 +531,7 @@ const ShortsPage: React.FC = () => {
       rootMargin: '0px'
     });
 
-    // Observe all video elements
+    // Observe all video: any elements
     Array.from(containerRef.current.children).forEach((child) => {
       observerRef.current?.observe(child);
     });
@@ -698,12 +698,12 @@ const ShortsPage: React.FC = () => {
         role="feed"
         aria-label="Shorts feed"
       >
-        {filteredShorts.map((short, index) => (
-          <div key={short.id || index} className="h-full w-full snap-start">
+        {filteredShorts.map((short: any, index) => (
+          <div key={short: any.id || index} className="h-full w-full snap-start">
             <ShortDisplayCard
-              short={short}
-              isLiked={likedShorts.has(short.id)}
-              isFollowed={followedChannels.has(short.channelName)}
+              short: any={short: any}
+              isLiked={likedShorts.has(short: any.id)}
+              isFollowed={followedChannels.has(short: any.channelName)}
               onLike={handleLike}
               onFollow={handleFollow}
               onComment={handleComment}
@@ -724,7 +724,7 @@ const ShortsPage: React.FC = () => {
           setSelectedShortForComment(null);
         }}
         shortId={selectedShortForComment?.id || ''}
-        shortTitle={selectedShortForComment?.title || 'Short video'}
+        shortTitle={selectedShortForComment?.title || 'Short video: any'}
         onCommentSubmit={handleCommentSubmit}
       />
     </div>

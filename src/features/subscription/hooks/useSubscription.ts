@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 // useSubscription - Simple Hook
 import { useState } from 'react';
 
@@ -12,8 +12,8 @@ interface Subscription {
 
 export function useSubscription() {
   const [data, setData] = useState<Subscription | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, _setLoading] = useState(false);
+  const [error, _setError] = useState<string | null>(null);
 
   return {
     data,

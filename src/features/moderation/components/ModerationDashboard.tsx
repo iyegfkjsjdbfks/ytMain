@@ -94,8 +94,8 @@ export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
       
       <div className="dashboard-charts">
         {data.charts.length > 0 ? (
-          data.charts.map((chart, index) => (
-            <div key={index} className="chart-container">
+          data.charts.map((_chart, index) => (
+            <div key={index} className="_chart-container">
               {/* Chart component would go here */}
               <div>Chart {index + 1}</div>
             </div>

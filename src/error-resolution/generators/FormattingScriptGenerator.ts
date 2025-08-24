@@ -215,7 +215,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    context: GenerationContext
+    _context: GenerationContext
   ): Promise<FixingScript | null> {
     Logger.process({ message: 'Generating formatting script for pattern', pattern, errorCount: errors.length });
 
@@ -432,14 +432,14 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates a bulk formatting script for all common issues
    */
   public async generateBulkFormattingScript(
-    context: GenerationContext
+    _context: GenerationContext
   ): Promise<FixingScript> {
     const scriptId = `formatting-bulk-${Date.now()}`;
     const commands: ScriptCommand[] = [];
     const validationChecks: ValidationCheck[] = [];
 
     // Get all unique files
-    const fileSet = new Set((context.errors || []).map(e => e.file));
+    const fileSet = new Set((_context.errors || []).map(e => e.file));
     const allFiles = Array.from(fileSet);
 
     // Add commands for each type of formatting fix
@@ -456,7 +456,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     return {
       id: scriptId,
       category: this.category,
-      targetErrors: context.errors || [],
+      targetErrors: _context.errors || [],
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks,

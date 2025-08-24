@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -38,11 +38,11 @@ export class FileManager {
 
     try {
       for (const operation of operations) {
-        const result = await this.performSingleOperation(operation);
-        results.push(result);
-        this.operationHistory.push(result);
+        const _result = await this.performSingleOperation(operation);
+        results.push(_result);
+        this.operationHistory.push(_result);
 
-        if (!result.success) {
+        if (!_result.success) {
           console.error(`❌ Operation failed: ${operation.type} ${operation.source}`);
           
           // Rollback previous operations
@@ -51,7 +51,7 @@ export class FileManager {
         }
 
         // Track rollback operation
-        const rollbackOp = this.createRollbackOperation(operation, result);
+        const rollbackOp = this.createRollbackOperation(operation, _result);
         if (rollbackOp) {
           rollbackOperations.unshift(rollbackOp); // Add to beginning for reverse order
         }
@@ -71,8 +71,8 @@ export class FileManager {
   /**
    * Validates file syntax and structure
    */
-  public async validateFile(filePath: string): Promise<FileValidationResult> {
-    const result: FileValidationResult = {
+  public async validateFile(_filePath: string): Promise<FileValidationResult> {
+    const _result: FileValidationResult = {
       isValid: true,
       errors: [],
       warnings: [],
@@ -81,42 +81,42 @@ export class FileManager {
 
     try {
       // Check if file exists
-      if (!await this.fileExists(filePath)) {
-        result.isValid = false;
-        result.errors.push(`File does not exist: ${filePath}`);
-        return result;
+      if (!await this.fileExists(_filePath)) {
+        _result.isValid = false;
+        _result.errors.push(`File does not exist: ${_filePath}`);
+        return _result;
       }
 
       // Read file content
-      const content = await fs.promises.readFile(filePath, 'utf8');
-      const ext = path.extname(filePath).toLowerCase();
+      const content = await fs.promises.readFile(_filePath, 'utf8');
+      const ext = path.extname(_filePath).toLowerCase();
 
       // Perform validation based on file type
       switch (ext) {
         case '.ts':
         case '.tsx':
-          await this.validateTypeScriptFile(content, result);
+          await this.validateTypeScriptFile(content, _result);
           break;
         case '.js':
         case '.jsx':
-          await this.validateJavaScriptFile(content, result);
+          await this.validateJavaScriptFile(content, _result);
           break;
         case '.json':
-          await this.validateJsonFile(content, result);
+          await this.validateJsonFile(content, _result);
           break;
         default:
-          result.warnings.push(`No specific validation available for ${ext} files`);
+          _result.warnings.push(`No specific validation available for ${ext} files`);
       }
 
       // General file validation
-      await this.validateGeneralFile(content, filePath, result);
+      await this.validateGeneralFile(content, _filePath, _result);
 
     } catch (error) {
-      result.isValid = false;
-      result.errors.push(`Validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      _result.isValid = false;
+      _result.errors.push(`Validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
 
-    return result;
+    return _result;
   }
 
   /**
@@ -125,9 +125,9 @@ export class FileManager {
   public async safeDelete(filePaths: string[], createBackup = true): Promise<FileOperationResult[]> {
     console.log(`🗑️ Safely deleting ${filePaths.length} files...`);
     
-    const operations: FileOperation[] = filePaths.map(filePath => ({
+    const operations: FileOperation[] = filePaths.map(_filePath => ({
       type: 'delete',
-      source: filePath,
+      source: _filePath,
       backup: createBackup
     }));
 
@@ -186,7 +186,7 @@ export class FileManager {
    * Performs a single file operation
    */
   private async performSingleOperation(operation: FileOperation): Promise<FileOperationResult> {
-    const result: FileOperationResult = {
+    const _result: FileOperationResult = {
       success: false,
       operation
     };
@@ -194,37 +194,37 @@ export class FileManager {
     try {
       switch (operation.type) {
         case 'create':
-          await this.createFile(operation, result);
+          await this.createFile(operation, _result);
           break;
         case 'update':
-          await this.updateFile(operation, result);
+          await this.updateFile(operation, _result);
           break;
         case 'delete':
-          await this.deleteFile(operation, result);
+          await this.deleteFile(operation, _result);
           break;
         case 'move':
-          await this.moveFile(operation, result);
+          await this.moveFile(operation, _result);
           break;
         case 'copy':
-          await this.copyFile(operation, result);
+          await this.copyFile(operation, _result);
           break;
         default:
           throw new Error(`Unknown operation type: ${(operation as any).type}`);
       }
 
-      result.success = true;
+      _result.success = true;
 
     } catch (error) {
-      result.error = error instanceof Error ? error.message : 'Unknown error';
+      _result.error = error instanceof Error ? error.message : 'Unknown error';
     }
 
-    return result;
+    return _result;
   }
 
   /**
    * Creates a new file
    */
-  private async createFile(operation: FileOperation, result: FileOperationResult): Promise<void> {
+  private async createFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.content) {
       throw new Error('Content is required for create operation');
     }
@@ -244,7 +244,7 @@ export class FileManager {
   /**
    * Updates an existing file
    */
-  private async updateFile(operation: FileOperation, result: FileOperationResult): Promise<void> {
+  private async updateFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.content) {
       throw new Error('Content is required for update operation');
     }
@@ -257,7 +257,7 @@ export class FileManager {
     if (operation.backup) {
       const backupPath = `${operation.source}.backup.${Date.now()}`;
       await fs.promises.copyFile(operation.source, backupPath);
-      result.backupPath = backupPath;
+      _result.backupPath = backupPath;
     }
 
     // Update file
@@ -268,7 +268,7 @@ export class FileManager {
   /**
    * Deletes a file
    */
-  private async deleteFile(operation: FileOperation, result: FileOperationResult): Promise<void> {
+  private async deleteFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!await this.fileExists(operation.source)) {
       throw new Error(`File does not exist: ${operation.source}`);
     }
@@ -277,7 +277,7 @@ export class FileManager {
     if (operation.backup) {
       const backupPath = `${operation.source}.deleted.${Date.now()}`;
       await fs.promises.copyFile(operation.source, backupPath);
-      result.backupPath = backupPath;
+      _result.backupPath = backupPath;
     }
 
     // Delete file
@@ -288,7 +288,7 @@ export class FileManager {
   /**
    * Moves a file
    */
-  private async moveFile(operation: FileOperation, result: FileOperationResult): Promise<void> {
+  private async moveFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.target) {
       throw new Error('Target is required for move operation');
     }
@@ -304,7 +304,7 @@ export class FileManager {
     if (operation.backup) {
       const backupPath = `${operation.source}.moved.${Date.now()}`;
       await fs.promises.copyFile(operation.source, backupPath);
-      result.backupPath = backupPath;
+      _result.backupPath = backupPath;
     }
 
     // Move file
@@ -315,7 +315,7 @@ export class FileManager {
   /**
    * Copies a file
    */
-  private async copyFile(operation: FileOperation, result: FileOperationResult): Promise<void> {
+  private async copyFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.target) {
       throw new Error('Target is required for copy operation');
     }
@@ -335,14 +335,14 @@ export class FileManager {
   /**
    * Creates a rollback operation for the given operation
    */
-  private createRollbackOperation(operation: FileOperation, result: FileOperationResult): FileOperation | null {
+  private createRollbackOperation(operation: FileOperation, _result: FileOperationResult): FileOperation | null {
     switch (operation.type) {
       case 'create':
         return { type: 'delete', source: operation.source };
       
       case 'delete':
-        if (result.backupPath) {
-          return { type: 'move', source: result.backupPath, target: operation.source };
+        if (_result.backupPath) {
+          return { type: 'move', source: _result.backupPath, target: operation.source };
         }
         break;
       
@@ -353,8 +353,8 @@ export class FileManager {
         break;
       
       case 'update':
-        if (result.backupPath) {
-          return { type: 'move', source: result.backupPath, target: operation.source };
+        if (_result.backupPath) {
+          return { type: 'move', source: _result.backupPath, target: operation.source };
         }
         break;
     }
@@ -382,7 +382,7 @@ export class FileManager {
   /**
    * Validates TypeScript files
    */
-  private async validateTypeScriptFile(content: string, result: FileValidationResult): Promise<void> {
+  private async validateTypeScriptFile(content: string, _result: FileValidationResult): Promise<void> {
     // Check for common TypeScript syntax issues
     const lines = content.split('\n');
 
@@ -392,60 +392,60 @@ export class FileManager {
 
       // Check for missing semicolons
       if (line.trim().match(/^(const|let|var|return|throw)\s+.*[^;{}\s]$/)) {
-        result.warnings.push(`Line ${lineNum}: Missing semicolon`);
+        _result.warnings.push(`Line ${lineNum}: Missing semicolon`);
       }
 
       // Check for unused imports
       if (line.trim().startsWith('import') && !content.includes(line.match(/import\s+.*?\s+from/)?.[0]?.replace(/import\s+/, '').replace(/\s+from/, '') || '')) {
-        result.warnings.push(`Line ${lineNum}: Potentially unused import`);
+        _result.warnings.push(`Line ${lineNum}: Potentially unused import`);
       }
 
       // Check for console.log statements
       if (line.includes('console.log')) {
-        result.suggestions.push(`Line ${lineNum}: Consider removing console.log for production`);
+        _result.suggestions.push(`Line ${lineNum}: Consider removing console.log for production`);
       }
     }
 
     // Check for TypeScript-specific issues
     if (content.includes('any') && !content.includes('// @ts-ignore')) {
-      result.warnings.push('File contains "any" types - consider using more specific types');
+      _result.warnings.push('File contains "any" types - consider using more specific types');
     }
   }
 
   /**
    * Validates JavaScript files
    */
-  private async validateJavaScriptFile(content: string, result: FileValidationResult): Promise<void> {
+  private async validateJavaScriptFile(content: string, _result: FileValidationResult): Promise<void> {
     // Basic JavaScript validation
     try {
       // Check for syntax errors by attempting to parse
       new Function(content);
     } catch (error) {
-      result.isValid = false;
-      result.errors.push(`Syntax error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      _result.isValid = false;
+      _result.errors.push(`Syntax error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
   /**
    * Validates JSON files
    */
-  private async validateJsonFile(content: string, result: FileValidationResult): Promise<void> {
+  private async validateJsonFile(content: string, _result: FileValidationResult): Promise<void> {
     try {
       JSON.parse(content);
     } catch (error) {
-      result.isValid = false;
-      result.errors.push(`Invalid JSON: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      _result.isValid = false;
+      _result.errors.push(`Invalid JSON: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
   /**
    * Validates general file properties
    */
-  private async validateGeneralFile(content: string, filePath: string, result: FileValidationResult): Promise<void> {
+  private async validateGeneralFile(content: string, _filePath: string, _result: FileValidationResult): Promise<void> {
     // Check file size
     const sizeInMB = Buffer.byteLength(content, 'utf8') / (1024 * 1024);
     if (sizeInMB > 10) {
-      result.warnings.push(`Large file size: ${sizeInMB.toFixed(2)}MB`);
+      _result.warnings.push(`Large file size: ${sizeInMB.toFixed(2)}MB`);
     }
 
     // Check for trailing whitespace
@@ -456,21 +456,21 @@ export class FileManager {
       .map(({ number }) => number);
 
     if (trailingWhitespaceLines.length > 0) {
-      result.suggestions.push(`Trailing whitespace found on lines: ${trailingWhitespaceLines.slice(0, 5).join(', ')}${trailingWhitespaceLines.length > 5 ? '...' : ''}`);
+      _result.suggestions.push(`Trailing whitespace found on lines: ${trailingWhitespaceLines.slice(0, 5).join(', ')}${trailingWhitespaceLines.length > 5 ? '...' : ''}`);
     }
 
     // Check line endings
     if (content.includes('\r\n') && content.includes('\n')) {
-      result.warnings.push('Mixed line endings detected (CRLF and LF)');
+      _result.warnings.push('Mixed line endings detected (CRLF and LF)');
     }
   }
 
   /**
    * Checks if a file exists
    */
-  private async fileExists(filePath: string): Promise<boolean> {
+  private async fileExists(_filePath: string): Promise<boolean> {
     try {
-      await fs.promises.access(filePath);
+      await fs.promises.access(_filePath);
       return true;
     } catch {
       return false;

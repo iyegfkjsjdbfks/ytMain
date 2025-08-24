@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 
 import { Command } from 'commander';
 import { logger } from '../../utils/logger';

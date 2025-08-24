@@ -1,4 +1,4 @@
-import React from 'react';
+import _React from 'react';
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
 import { Logger } from '../utils/Logger';
@@ -241,7 +241,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    context: GenerationContext
+    _context: GenerationContext
   ): Promise<FixingScript | null> {
     Logger.process({ message: 'Generating TypeScript script for pattern', pattern, errorCount: errors.length });
 
@@ -515,14 +515,14 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
    * Generates a comprehensive TypeScript fixing script
    */
   public async generateComprehensiveTypeScript(
-    context: GenerationContext
+    _context: GenerationContext
   ): Promise<FixingScript> {
     const scriptId = `typescript-comprehensive-${Date.now()}`;
     const commands: ScriptCommand[] = [];
     const validationChecks: ValidationCheck[] = [];
 
     // Get all unique files
-    const allFiles = [...new Set((context.errors || []).map(e => e.file))];
+    const allFiles = [...new Set((_context.errors || []).map(e => e.file))];
 
     // Add commands for common TypeScript fixes
     for (const file of allFiles) {
@@ -560,7 +560,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     return {
       id: scriptId,
       category: this.category,
-      targetErrors: context.errors || [],
+      targetErrors: _context.errors || [],
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks,
