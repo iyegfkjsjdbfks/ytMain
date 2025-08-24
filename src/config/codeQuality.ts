@@ -60,14 +60,19 @@ export const eslintConfig = {
 // Prettier configuration
 export const prettierConfig = {
  semi: true,
- trailingComma: 'es5' as const singleQuote: true,
+ trailingComma: 'es5' as const,
+ singleQuote: true,
  printWidth: 100,
  tabWidth: 2,
  useTabs: false,
  bracketSpacing: true,
  bracketSameLine: false,
- arrowParens: 'avoid' as const endOfLine: 'lf' as const quoteProps: 'as - needed' as const jsxSingleQuote: false,
- proseWrap: 'preserve' as const };
+ arrowParens: 'avoid' as const,
+ endOfLine: 'lf' as const,
+ quoteProps: 'as-needed' as const,
+ jsxSingleQuote: false,
+ proseWrap: 'preserve' as const,
+};
 
 // Code complexity thresholds
 export const complexityThresholds = {
@@ -129,12 +134,13 @@ export const securityConfig = {
 // Accessibility standards
 export const a11yStandards = {
  // WCAG 2.1 AA compliance requirements,
- wcag: {,
+ wcag: {
  level: 'AA',
- version: '2.1' },
+ version: '2.1',
+ },
 
  // Color contrast ratios,
- colorContrast: {,
+ colorContrast: {
  normal: 4.5, // AA standard,
  large: 3, // AA standard for large text,
  enhanced: 7, // AAA standard
@@ -142,26 +148,30 @@ export const a11yStandards = {
 
  // Required ARIA attributes,
  requiredAria: [
- 'aria - label',
- 'aria - labelledby',
- 'aria - describedby',
- 'role'],
+ 'aria-label',
+ 'aria-labelledby',
+ 'aria-describedby',
+ 'role',
+],
 
  // Keyboard navigation requirements,
- keyboardNav: {,
+ keyboardNav: {
  tabIndex: true,
  focusVisible: true,
  skipLinks: true,
- landmarkRoles: true };
+ landmarkRoles: true,
+ },
+};
 
 // Testing configuration
 export const testingConfig = {
  // Coverage thresholds,
- coverage: {,
+ coverage: {
  statements: 80,
  branches: 75,
  functions: 80,
- lines: 80 },
+ lines: 80,
+ },
 
  // Test file patterns,
  testPatterns: [
@@ -220,74 +230,87 @@ export const codeReviewChecklist = {
 // Monitoring and alerting configuration
 export const monitoringConfig = {
  // Error tracking,
- errorTracking: {,
+ errorTracking: {
  enableInProduction: true,
  enableInDevelopment: false,
  sampleRate: 1.0,
- maxBreadcrumbs: 50 },
+ maxBreadcrumbs: 50,
+ },
 
  // Performance monitoring,
- performanceMonitoring: {,
+ performanceMonitoring: {
  enableInProduction: true,
  enableInDevelopment: true,
  sampleRate: 0.1, // 10% sampling in production,
  trackWebVitals: true,
- trackUserInteractions: true },
+ trackUserInteractions: true,
+ },
 
  // Analytics,
- analytics: {,
+ analytics: {
  trackPageViews: true,
  trackUserEvents: true,
  trackPerformanceMetrics: true,
- respectDoNotTrack: true },
+ respectDoNotTrack: true,
+ },
 
  // Alerts,
- alerts: {,
+ alerts: {
  errorRate: 0.05, // Alert if error rate > 5%,
  responseTime: 5000, // Alert if response time > 5s,
  memoryUsage: 0.8, // Alert if memory usage > 80%,
  bundleSize: 1024 * 1024, // Alert if bundle > 1MB
- };
+ },
+};
 
 // Development workflow configuration
 export const workflowConfig = {
  // Git hooks,
- gitHooks: {,
+ gitHooks: {
  preCommit: [
- 'lint - staged',
- 'type - check',
- 'test:changed'],
+ 'lint-staged',
+ 'type-check',
+ 'test:changed',
+],
  prePush: [
  'test:all',
- 'build'],
+ 'build',
+],
  commitMsg: [
- 'commitlint'] },
+ 'commitlint',
+],
+ },
 
  // CI / CD pipeline,
- cicd: {,
+ cicd: {
  stages: [
  'install',
  'lint',
- 'type - check',
+ 'type-check',
  'test',
  'build',
- 'security - scan',
- 'performance - audit',
- 'deploy'],
+ 'security-scan',
+ 'performance-audit',
+ 'deploy',
+],
 
  // Quality gates,
- qualityGates: {,
+ qualityGates: {
  testCoverage: 80,
  lintErrors: 0,
  typeErrors: 0,
  securityVulnerabilities: 0,
- performanceScore: 90 } },
+ performanceScore: 90,
+ },
+ },
 
  // Code formatting,
- formatting: {,
+ formatting: {
  onSave: true,
  onCommit: true,
- extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.md'] };
+ extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.md'],
+ },
+};
 
 // Export all configurations
 export const codeQualityConfig = {
