@@ -3,9 +3,9 @@
  */
 
 export interface ComponentError extends Error {
- component: string;
- context?: string;
- originalError?: unknown;
+  component: string;
+  context?: string;
+  originalError?: unknown;
 }
 
 /**
@@ -16,28 +16,29 @@ export interface ComponentError extends Error {
  * @param context - Additional context about the error
  * @returns ComponentError object
  */
-export function createComponentError(,
- component,
- message,
- originalError?: unknown,
- context?: string
+export function createComponentError(
+  component: string,
+  message: string,
+  originalError?: unknown,
+  context?: string
 ): ComponentError {
- const error = new Error(message) as ComponentError;
- error.component = component;
- if (context !== undefined) {
- error.context = context;
- }
- if (originalError !== undefined) {
- error.originalError = originalError;
- }
+  const error = new Error(message) as ComponentError;
+  error.component = component;
+  if (context !== undefined) {
+    error.context = context;
+  }
+  if (originalError !== undefined) {
+    error.originalError = originalError;
+  }
 
- // Include original error message if available
- if (originalError instanceof Error) {
- error.message = `${message}: ${originalError.message}`;
- if (originalError.stack !== undefined) {
- error.stack = originalError.stack;
- }
- return error;
+  // Include original error message if available
+  if (originalError instanceof Error) {
+    error.message = `${message}: ${originalError.message}`;
+    if (originalError.stack !== undefined) {
+      error.stack = originalError.stack;
+    }
+  }
+  return error;
 }
 
 /**
@@ -47,17 +48,17 @@ export function createComponentError(,
  * @param originalError - The original error
  * @returns ComponentError object
  */
-export function createAsyncError(,
- component,
- operation,
- originalError?: unknown
+export function createAsyncError(
+  component: string,
+  operation: string,
+  originalError?: unknown
 ): ComponentError {
- return createComponentError(
- component,
- `Async operation failed: ${operation}`,
- originalError,
- 'async'
- );
+  return createComponentError(
+    component,
+    `Async operation failed: ${operation}`,
+    originalError,
+    'async'
+  );
 }
 
 /**
@@ -67,17 +68,17 @@ export function createAsyncError(,
  * @param originalError - The original error
  * @returns ComponentError object
  */
-export function createNetworkError(,
- component,
- url,
- originalError?: unknown
+export function createNetworkError(
+  component: string,
+  url: string,
+  originalError?: unknown
 ): ComponentError {
- return createComponentError(
- component,
- `Network request failed: ${url}`,
- originalError,
- 'network'
- );
+  return createComponentError(
+    component,
+    `Network request failed: ${url}`,
+    originalError,
+    'network'
+  );
 }
 
 /**
@@ -87,17 +88,17 @@ export function createNetworkError(,
  * @param value - The invalid value
  * @returns ComponentError object
  */
-export function createValidationError(,
- component,
- field,
- value: unknown
+export function createValidationError(
+  component: string,
+  field: string,
+  value: unknown
 ): ComponentError {
- return createComponentError(
- component,
- `Validation failed for field: ${field}`,
- new Error(`Invalid value: ${JSON.stringify(value)}`),
- 'validation'
- );
+  return createComponentError(
+    component,
+    `Validation failed for field: ${field}`,
+    new Error(`Invalid value: ${JSON.stringify(value)}`),
+    'validation'
+  );
 }
 
 /**
@@ -106,13 +107,13 @@ export function createValidationError(,
  * @returns Error message string
  */
 export function getErrorMessage(error: unknown): string {
- if (error instanceof Error) {
- return error.message;
- }
- if (typeof error === 'string') {
- return error;
- }
- return 'Unknown error occurred';
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return 'Unknown error occurred';
 }
 
 /**
@@ -121,5 +122,5 @@ export function getErrorMessage(error: unknown): string {
  * @returns True if error is a ComponentError
  */
 export function isComponentError(error: unknown): error is ComponentError {
- return error instanceof Error && 'component' in error;
+  return error instanceof Error && 'component' in error;
 }
