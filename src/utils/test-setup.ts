@@ -1,7 +1,7 @@
-// test-setup - Simple Implementation
-export const test-setup = {
-  enabled: true,
-  process: (data: any) => data
+// Test setup - Simple configuration
+export const testSetup = {
+  version: '1.0.0',
+  name: 'test-setup'
 };
 
-export default test-setup;
+export default testSetup;

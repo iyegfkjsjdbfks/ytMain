@@ -13,4 +13,18 @@ export function useShortsData() {
   };
 }
 
+// Additional shorts-related hook
+export function useShortsVideos() {
+  const [shortsVideos, setShortsVideos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  return {
+    shortsVideos,
+    loading,
+    error,
+    setShortsVideos
+  };
+}
+
 export default useShortsData;

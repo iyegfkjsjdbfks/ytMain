@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { PerformanceMetrics, ExecutionPhase } from '../types';
+import { PerformanceMetrics, ExecutionPhase } from '../types/ErrorTypes';
 
 export interface ProgressUpdate {
   phase: string;

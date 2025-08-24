@@ -1,7 +1,7 @@
-// root-index - Simple Implementation
-export const root-index = {
-  enabled: true,
-  process: (data: any) => data
+// Root index - Simple export
+export const rootIndex = {
+  version: '1.0.0',
+  name: 'root-index'
 };
 
-export default root-index;
+export default rootIndex;

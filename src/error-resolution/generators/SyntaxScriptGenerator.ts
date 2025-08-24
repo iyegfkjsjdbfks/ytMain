@@ -1,5 +1,5 @@
-import { BaseScriptGenerator, GenerationContext, ScriptTemplate } from './BaseScriptGenerator';
-import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types';
+import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
+import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
 import { logger } from '../utils/Logger';
 
 export class SyntaxScriptGenerator extends BaseScriptGenerator {

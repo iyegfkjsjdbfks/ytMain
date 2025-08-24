@@ -1,5 +1,5 @@
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
-import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types';
+import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
 import { logger } from '../utils/Logger';
 
 export class FormattingScriptGenerator extends BaseScriptGenerator {
