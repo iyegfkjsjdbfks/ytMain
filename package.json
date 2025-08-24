@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli/main.js",
-    "dev": "ts-node src/error-resolution/cli/main.ts",
+    "dev": "tsx src/error-resolution/cli/main.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -51,7 +51,8 @@
     "prettier": "^3.0.0",
     "rimraf": "^5.0.0",
     "ts-jest": "^29.0.0",
-    "ts-node": "^10.0.0"
+    "ts-node": "^10.0.0",
+    "tsx": "^4.20.4"
   },
   "engines": {
     "node": ">=16.0.0"
