@@ -1,0 +1,1 @@
+c:\Users\hp\Documents\GitHub\YT\ytMain\node_modules\.bin\tsc --noEmit > tsc_errors.txt 2>&1

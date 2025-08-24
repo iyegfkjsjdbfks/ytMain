@@ -1,0 +1,1 @@
+bash: c:UsershpDocumentsGitHubYTytMainnode_modules.bintsc: command not found
