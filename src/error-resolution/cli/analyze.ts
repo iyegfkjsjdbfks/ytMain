@@ -60,6 +60,7 @@ async function main() {
     
     // Save detailed analysis
     const outputPath = path.join(process.cwd(), 'error-analysis-result.json');
+    console.log(`Saving analysis to: ${outputPath}`);
     await analyzer.saveAnalysisResult(result, outputPath);
     
     console.log(`\n✅ Analysis complete! Detailed results saved to: ${outputPath}`);
