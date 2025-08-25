@@ -1,0 +1,117 @@
+{
+  "timestamp": "2025-08-25T12:22:58.608Z",
+  "deployment": {
+    "projectPath": "/home/runner/work/ytMain/ytMain",
+    "options": {
+      "projectPath": "/home/runner/work/ytMain/ytMain",
+      "dryRun": true,
+      "backup": true,
+      "maxIterations": 5,
+      "timeoutSeconds": 300,
+      "generateReports": true
+    },
+    "duration": 53104
+  },
+  "initialState": {
+    "totalErrors": 0,
+    "errorsByCategory": {},
+    "errorsByFile": {},
+    "criticalFiles": [],
+    "recommendations": []
+  },
+  "resolutionPhases": [
+    {
+      "name": "Critical Syntax",
+      "description": "Fix critical syntax errors that prevent compilation",
+      "scriptsExecuted": [
+        "fix-ts1005-critical-syntax.js (dry run)",
+        "fix-ts1128-declaration-expected.js (dry run)"
+      ],
+      "errorsFixed": 0,
+      "success": false
+    },
+    {
+      "name": "Import Resolution",
+      "description": "Resolve import and module errors",
+      "scriptsExecuted": [
+        "fix-ts2307-cannot-find-module.js (dry run)",
+        "fix-ts2305-no-exported-member.js (dry run)"
+      ],
+      "errorsFixed": 0,
+      "success": false
+    },
+    {
+      "name": "Type Resolution",
+      "description": "Fix type compatibility and property errors",
+      "scriptsExecuted": [
+        "fix-ts2339-property-errors.js (dry run)",
+        "fix-ts2322-type-not-assignable.js (dry run)"
+      ],
+      "errorsFixed": 0,
+      "success": false
+    },
+    {
+      "name": "Cleanup",
+      "description": "Remove unused imports and fix implicit any",
+      "scriptsExecuted": [
+        "fix-ts6133-declared-not-used.js (dry run)",
+        "fix-ts7006-implicit-any-param.js (dry run)"
+      ],
+      "errorsFixed": 0,
+      "success": false
+    }
+  ],
+  "finalState": {
+    "totalErrors": 0,
+    "errorsByCategory": {},
+    "errorsByFile": {},
+    "criticalFiles": [],
+    "recommendations": []
+  },
+  "executionLog": [
+    "[2025-08-25T12:22:05.504Z] [INFO] 🚀 Deploying TypeScript Error Resolution System...",
+    "[2025-08-25T12:22:05.505Z] [INFO] 🔍 Analyzing TypeScript errors...",
+    "[2025-08-25T12:22:11.427Z] [INFO] 📋 Error breakdown: {}",
+    "[2025-08-25T12:22:11.428Z] [INFO] 📊 Initial analysis: 0 errors found",
+    "[2025-08-25T12:22:11.428Z] [INFO] 🔄 Starting resolution phases...",
+    "[2025-08-25T12:22:11.428Z] [INFO] \n--- Fix critical syntax errors that prevent compilation ---",
+    "[2025-08-25T12:22:17.288Z] [INFO] 🔧 Running fix-ts1005-critical-syntax.js...",
+    "[2025-08-25T12:22:17.288Z] [INFO] 🔍 DRY RUN: Would execute fix-ts1005-critical-syntax.js",
+    "[2025-08-25T12:22:17.288Z] [INFO] 🔧 Running fix-ts1128-declaration-expected.js...",
+    "[2025-08-25T12:22:17.288Z] [INFO] 🔍 DRY RUN: Would execute fix-ts1128-declaration-expected.js",
+    "[2025-08-25T12:22:23.178Z] [INFO] 📊 Critical Syntax: 400 → 400 (fixed 0) in 11750ms",
+    "[2025-08-25T12:22:23.178Z] [WARN] ⚠️ No progress made in this phase",
+    "[2025-08-25T12:22:23.178Z] [INFO] \n--- Resolve import and module errors ---",
+    "[2025-08-25T12:22:29.183Z] [INFO] 🔧 Running fix-ts2307-cannot-find-module.js...",
+    "[2025-08-25T12:22:29.184Z] [INFO] 🔍 DRY RUN: Would execute fix-ts2307-cannot-find-module.js",
+    "[2025-08-25T12:22:29.184Z] [INFO] 🔧 Running fix-ts2305-no-exported-member.js...",
+    "[2025-08-25T12:22:29.184Z] [INFO] 🔍 DRY RUN: Would execute fix-ts2305-no-exported-member.js",
+    "[2025-08-25T12:22:35.099Z] [INFO] 📊 Import Resolution: 400 → 400 (fixed 0) in 11921ms",
+    "[2025-08-25T12:22:35.100Z] [WARN] ⚠️ No progress made in this phase",
+    "[2025-08-25T12:22:35.100Z] [INFO] \n--- Fix type compatibility and property errors ---",
+    "[2025-08-25T12:22:41.035Z] [INFO] 🔧 Running fix-ts2339-property-errors.js...",
+    "[2025-08-25T12:22:41.035Z] [INFO] 🔍 DRY RUN: Would execute fix-ts2339-property-errors.js",
+    "[2025-08-25T12:22:41.036Z] [INFO] 🔧 Running fix-ts2322-type-not-assignable.js...",
+    "[2025-08-25T12:22:41.036Z] [INFO] 🔍 DRY RUN: Would execute fix-ts2322-type-not-assignable.js",
+    "[2025-08-25T12:22:46.941Z] [INFO] 📊 Type Resolution: 400 → 400 (fixed 0) in 11841ms",
+    "[2025-08-25T12:22:46.941Z] [WARN] ⚠️ No progress made in this phase",
+    "[2025-08-25T12:22:46.941Z] [INFO] \n--- Remove unused imports and fix implicit any ---",
+    "[2025-08-25T12:22:52.833Z] [INFO] 🔧 Running fix-ts6133-declared-not-used.js...",
+    "[2025-08-25T12:22:52.833Z] [INFO] 🔍 DRY RUN: Would execute fix-ts6133-declared-not-used.js",
+    "[2025-08-25T12:22:52.834Z] [INFO] 🔧 Running fix-ts7006-implicit-any-param.js...",
+    "[2025-08-25T12:22:52.834Z] [INFO] 🔍 DRY RUN: Would execute fix-ts7006-implicit-any-param.js",
+    "[2025-08-25T12:22:58.607Z] [INFO] 📊 Cleanup: 400 → 400 (fixed 0) in 11666ms",
+    "[2025-08-25T12:22:58.607Z] [WARN] ⚠️ No progress made in this phase",
+    "[2025-08-25T12:22:58.608Z] [INFO] 🔍 Analyzing TypeScript errors...",
+    "[2025-08-25T12:23:04.425Z] [INFO] 📋 Error breakdown: {}",
+    "[2025-08-25T12:23:04.425Z] [INFO] 🔍 Analyzing TypeScript errors...",
+    "[2025-08-25T12:23:10.442Z] [INFO] 📋 Error breakdown: {}"
+  ],
+  "summary": {
+    "totalErrorsInitial": 0,
+    "totalErrorsFixed": 0,
+    "totalErrorsRemaining": 0,
+    "success": false,
+    "recommendations": []
+  }
+}
