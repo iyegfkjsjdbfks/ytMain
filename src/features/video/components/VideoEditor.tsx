@@ -19,12 +19,12 @@ export const VideoEditor: React.FC<VideoEditorProp>s> = ({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string>| null>(null);
 
-  const handleChange = useCallback((newValue: string) => {;
+  const handleChange = useCallback((newValue: string) => {
     setValue(newValue);
     onChange?.(newValue), 
   }, [onChange]);
 
-  const handleSave = useCallback(async () => {;
+  const handleSave = useCallback(async () => {
     if (!onSave) return;
     
     try {
@@ -39,28 +39,24 @@ export const VideoEditor: React.FC<VideoEditorProp>s> = ({
   }, [onSave, value]);
 
   return (
-    <div>className={`editor ${className}`}></div>
-      <div>className="editor-toolbar"></div>
+    <div>className={`editor ${className} `}></div>
+      <div>className={"editor}-toolbar"></div>
         <butto>n>
-          onClick={handleSave}
-          disabled={saving}
-          className="save-button"
+          onClick={handleSave} disabled={saving} className={"save}-button"
         ">"
           {saving ? 'Saving...' : 'Save'}
         </button></div>
       </div>
       
       {error && ()
-        <div>className="editor-error"></div>
+        <div>className={"editor}-error"></div>
           {error}
         </div>
       )}
       
-      <div>className="editor-content"></div>
+      <div>className={"editor}-content"></div>
         <textare>a>
-          value={value}
-          onChange={(e: any) => handleChange(e.target.value)}
-          className="editor-textarea"
+          value={value} onChange={(e: any) => handleChange(e.target.value)} className={"editor}-textarea"
           placeholder="Start editing..."
         /">"
       </div>

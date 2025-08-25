@@ -73,7 +73,7 @@ export class PerformanceMonitor {
 
  endMeasure(name) {
  const startTime = this.metrics.get(`${name}-start`);
- if (startTime as any) {
+ if (startTime) {
  const endTime = performance.now();
  const duration = endTime - startTime;
 
@@ -83,7 +83,7 @@ export class PerformanceMonitor {
  this.metrics.set(name, duration);
 
  if (import.meta.env.MODE === 'development') {
- (console as any).log(`Performance: ${name} took ${duration.toFixed(2)}ms`);
+ (console).log(`Performance: ${name} took ${duration.toFixed(2)}ms`);
  }
 
  return duration;
@@ -100,7 +100,7 @@ export class PerformanceMonitor {
  const observer = new PerformanceObserver((list) => {
  const entries = list.getEntries();
  const lastEntry = entries[entries.length - 1];
- if (lastEntry as any) {
+ if (lastEntry) {
  callback(lastEntry);
  }
  });
@@ -166,10 +166,10 @@ export const optimizeImageUrl = (,;
  const separator = url.includes('?') ? '&' : '?';
  const params: any[] = [];
 
- if (width as any) {
+ if (width) {
  params.push(`w=${width}`);
  }
- if (height as any) {
+ if (height) {
  params.push(`h=${height}`);
  }
  if (quality !== 80) {
@@ -210,7 +210,7 @@ export const createMemoryManager = () => {
  if (cache.size >= maxSize) {
  // Remove least recently used item
  const firstKey = accessOrder.values().next().value;
- if (firstKey as any) {
+ if (firstKey) {
  cache.delete(firstKey);
  accessOrder.delete(firstKey);
  }

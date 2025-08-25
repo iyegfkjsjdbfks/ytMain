@@ -133,9 +133,9 @@ inputRef.current.blur();
  : 'rounded-r-full';
 
  return (
- <div ref={searchBarRef} className="flex-grow max-w-xl mx-1 sm:mx-2 md:mx-4 relative">
- <form onSubmit={(e) => handleSubmit(e)} className="flex items-center w-full" role="search">
- <input
+ <div ref={searchBarRef} className={"flex}-grow max-w-xl mx-1 sm:mx-2 md:mx-4 relative">
+ <form onSubmit={(e) => handleSubmit(e)} className={"fle}x items-center w-full" role="search">
+ <input>
  ref={inputRef}
 // FIXED:  type="search"
 // FIXED:  value={query} />
@@ -153,31 +153,30 @@ inputRef.current.blur();
 // FIXED:  aria-autocomplete="list"
 // FIXED:  aria-controls={
  (() => {
- if (showSuggestions as any) {
+ if (showSuggestions) {
  return 'search-suggestions-listbox';
  }
- if (showRecentSearches as any) {
+ if (showRecentSearches) {
  return 'recent-searches-listbox';
  }
  return undefined;
  })()
  }
  />
- <button
+ <button>
 // FIXED:  type="submit"
 // FIXED:  className={`px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 
  border border-neutral-300 dark:border-neutral-700 border-l-0 
  flex items-center justify-center transition-all duration-100 ease-in-out min-w-[44px]
  ${buttonBorderRadiusClass}
  `}
-// FIXED:  aria-label="Perform search" />
- >
- <SearchIcon className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-600 dark:text-neutral-300" />
+// FIXED:  aria-label="Perform search"/>
+ <SearchIcon className={"w}-4 h-4 sm:w-5 sm:h-5 text-neutral-600 dark:text-neutral-300" />
 // FIXED:  </button>
 // FIXED:  </form>
  {showSuggestions && suggestions.length > 0 && (
  <div id="search-suggestions-listbox">
- <SearchSuggestions
+ <SearchSuggestions>
  suggestions={suggestions} />
  onSuggestionClick={(e) => handleSuggestionClick(e)}
  isVisible={showSuggestions}
@@ -185,38 +184,37 @@ inputRef.current.blur();
 // FIXED:  </div>
  )}
  {showRecentSearches && recentSearches.length > 0 && (
- <ul
+ <ul>
 // FIXED:  id="recent-searches-listbox"
-// FIXED:  className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
-// FIXED:  aria-label="Recent searches" />
- >
+// FIXED:  className={"absolut}e top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
+// FIXED:  aria-label="Recent searches"/>
  {recentSearches.map((searchTerm) => (
- <li key={searchTerm} className="flex items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
+ <li key={searchTerm} className={"fle}x items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
  <button />
 // FIXED:  onClick={() => handleSearch(searchTerm)}
-// FIXED:  className="flex items-center flex-grow text-left"
+// FIXED:  className={"fle}x items-center flex-grow text-left"
  >
- <ClockIcon className="w-4 h-4 mr-3 text-neutral-500 dark:text-neutral-400 flex-shrink-0" />
+ <ClockIcon className={"w}-4 h-4 mr-3 text-neutral-500 dark:text-neutral-400 flex-shrink-0" />
  <span>{searchTerm}</span>
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e) => {
  handleRemoveRecentSearch(searchTerm, e).catch(console.error);
  }
-// FIXED:  className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
+// FIXED:  className={"p}-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
 // FIXED:  aria-label={`Remove ${searchTerm} from recent searches`}
  title="Remove"
  >
- <XMarkIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+ <XMarkIcon className={"w}-4 h-4 text-neutral-500 dark:text-neutral-400" />
 // FIXED:  </button>
 // FIXED:  </li>
  ))}
- <li className="border-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
+ <li className={"border}-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
  <button />
 // FIXED:  onClick={(e) => {
  handleClearAllRecent(e).catch(console.error);
  }
-// FIXED:  className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
+// FIXED:  className={"w}-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
  >
  Clear all recent searches
 // FIXED:  </button>

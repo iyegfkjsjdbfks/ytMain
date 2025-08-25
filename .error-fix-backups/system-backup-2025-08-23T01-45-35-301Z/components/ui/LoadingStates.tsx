@@ -39,7 +39,7 @@ export const Spinner: React.FC < LoadingProps> = ({}
  const colorClass = colorMap.color;
 
  return (
- <div
+ <div>
 // FIXED:  className={cn(}
  'animate - spin rounded - full border - 2 border - current border - t-transparent',
  sizeClass,
@@ -62,7 +62,7 @@ export const DotsLoader: React.FC < LoadingProps> = ({}
  return (
  <div className={cn('flex space - x-1', className)} role="status" aria - label="Loading">
  {[0, 1, 2].map((i) => (}
- <div
+ <div>
  key={i}
 // FIXED:  className={cn(}
  'rounded - full animate - pulse',
@@ -108,7 +108,7 @@ export const Skeleton: React.FC<{}
  full: 'rounded - full' }[rounded];
 
  return (
- <div
+ <div>
 // FIXED:  className={cn(}
  'animate - pulse bg - gray - 200 dark:bg - gray - 700',
  width,
@@ -132,7 +132,7 @@ export const Loading: React.FC < LoadingProps> = ({}
  const colorClass = colorMap.color;
 
  const renderLoader = () => {}
- switch (variant as any) {}
+ switch (variant) {}
  case 'dots':
  return <DotsLoader size={size} color={color} />;
  case 'pulse':
@@ -163,7 +163,7 @@ export const Loading: React.FC < LoadingProps> = ({}
 export const VideoCardSkeleton: React.FC<{className ?  : string}> = ({ className }: any) => (
  <div className={cn('space - y-3', className)}>
  <Skeleton height="h - 48" rounded="lg" />
- <div className="space - y-2">
+ <div className={"spac}e - y-2">
  <Skeleton height="h - 4" width="w - 3/4" />
  <Skeleton height="h - 3" width="w - 1/2" />
  <Skeleton height="h - 3" width="w - 1/3" />
@@ -174,7 +174,7 @@ export const VideoCardSkeleton: React.FC<{className ?  : string}> = ({ className
 export const CommentSkeleton: React.FC<{className ?  : string}> = ({ className }: any) => (
  <div className={cn('flex space - x-3', className)}>
  <Skeleton width="w - 8" height="h - 8" rounded="full" />
- <div className="flex - 1 space - y-2">
+ <div className={"fle}x - 1 space - y-2">
  <Skeleton height="h - 3" width="w - 1/4" />
  <Skeleton height="h - 4" width="w - full" />
  <Skeleton height="h - 4" width="w - 3/4" />
@@ -185,7 +185,7 @@ export const CommentSkeleton: React.FC<{className ?  : string}> = ({ className }
 export const ChannelSkeleton: React.FC<{className ?  : string}> = ({ className }: any) => (
  <div className={cn('flex items - center space - x-3', className)}>
  <Skeleton width="w - 12" height="h - 12" rounded="full" />
- <div className="flex - 1 space - y-2">
+ <div className={"fle}x - 1 space - y-2">
  <Skeleton height="h - 4" width="w - 1/2" />
  <Skeleton height="h - 3" width="w - 1/3" />
 // FIXED:  </div>
@@ -195,7 +195,7 @@ export const ChannelSkeleton: React.FC<{className ?  : string}> = ({ className }
 export const PlaylistSkeleton: React.FC<{className ?  : string}> = ({ className }: any) => (
  <div className={cn('space - y-3', className)}>
  <Skeleton height="h - 32" rounded="lg" />
- <div className="space - y-2">
+ <div className={"spac}e - y-2">
  <Skeleton height="h - 4" width="w - 2/3" />
  <Skeleton height="h - 3" width="w - 1/2" />
 // FIXED:  </div>

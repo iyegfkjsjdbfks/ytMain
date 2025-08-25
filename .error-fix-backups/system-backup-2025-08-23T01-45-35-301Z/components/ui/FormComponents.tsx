@@ -75,12 +75,11 @@ const FieldLabel: React.FC<{}
  required?: boolean;
  className?: string; children: React.ReactNode
 }> = ({ htmlFor, required, className, children }: any) => (
- <label
+ <label>
 // FIXED:  htmlFor={htmlFor}
-// FIXED:  className={cn('block text - sm font - medium text - gray - 700 mb - 1', className)} />
- >
+// FIXED:  className={cn('block text - sm font - medium text - gray - 700 mb - 1', className)}/>
  {children}
- {required && <span className="text - red - 500 ml - 1">*</span>}
+ {required && <span className={"tex}t - red - 500 ml - 1">*</span>}
 // FIXED:  </label>
 );
 
@@ -151,23 +150,22 @@ export const Input = forwardRef < HTMLInputElement, InputProps>((;
  return (
  <div className="w - full">
  {label && (}
- <FieldLabel
+ <FieldLabel>
 // FIXED:  htmlFor={inputId}
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })} />
- >
+ {...(labelClassName && { className: labelClassName })}/>
  {label}
 // FIXED:  </FieldLabel>
  )}
 
- <div className="relative">
+ <div className={"relative}">
  {leftIcon && (}
- <div className="absolute inset - y-0 left - 0 pl - 3 flex items - center pointer - events - none">
- <div className="text - gray - 400">{leftIcon}</div>
+ <div className={"absolut}e inset - y-0 left - 0 pl - 3 flex items - center pointer - events - none">
+ <div className={"tex}t - gray - 400">{leftIcon}</div>
 // FIXED:  </div>
  )}
 
- <input
+ <input>
  ref={ref}
 // FIXED:  id={inputId}
 // FIXED:  className={inputClasses}
@@ -175,11 +173,11 @@ export const Input = forwardRef < HTMLInputElement, InputProps>((;
  />
 
  {(rightIcon || loading) && (}
- <div className="absolute inset - y-0 right - 0 pr - 3 flex items - center">
+ <div className={"absolut}e inset - y-0 right - 0 pr - 3 flex items - center">
  {loading ? (}
- <div className="animate - spin rounded - full h - 4 w - 4 border - 2 border - gray - 300 border - t-red - 600" />
+ <div className={"animat}e - spin rounded - full h - 4 w - 4 border - 2 border - gray - 300 border - t-red - 600" />
  ) : (
- <div className="text - gray - 400">{rightIcon}</div>
+ <div className={"tex}t - gray - 400">{rightIcon}</div>
  )}
 // FIXED:  </div>
  )}
@@ -232,16 +230,15 @@ export const Textarea = forwardRef < HTMLTextAreaElement, TextareaProps>((;
  return (
  <div className="w - full">
  {label && (}
- <FieldLabel
+ <FieldLabel>
 // FIXED:  htmlFor={textareaId}
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })} />
- >
+ {...(labelClassName && { className: labelClassName })}/>
  {label}
 // FIXED:  </FieldLabel>
  )}
 
- <textarea
+ <textarea>
  ref={ref}
 // FIXED:  id={textareaId}
 // FIXED:  className={textareaClasses}
@@ -289,39 +286,36 @@ export const Select = forwardRef < HTMLSelectElement, SelectProps>((;
  return (
  <div className="w - full">
  {label && (}
- <FieldLabel
+ <FieldLabel>
 // FIXED:  htmlFor={selectId}
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })} />
- >
+ {...(labelClassName && { className: labelClassName })}/>
  {label}
 // FIXED:  </FieldLabel>
  )}
 
- <div className="relative">
- <select
+ <div className={"relative}">
+ <select>
  ref={ref}
 // FIXED:  id={selectId}
 // FIXED:  className={selectClasses}
- {...props} />
- >
+ {...props}/>
  {placeholder && (}
  <option value="" disabled>
  {placeholder}
 // FIXED:  </option>
  )}
  {options.map((option) => (}
- <option
+ <option>
  key={option.value}
 // FIXED:  value={option.value}
-// FIXED:  disabled={option.disabled} />
- >
+// FIXED:  disabled={option.disabled}/>
  {option.label}
 // FIXED:  </option>
  ))}
 // FIXED:  </select>
 
- <div className="absolute inset - y-0 right - 0 pr - 3 flex items - center pointer - events - none">
+ <div className={"absolut}e inset - y-0 right - 0 pr - 3 flex items - center pointer - events - none">
  <svg className="h - 4 w - 4 text - gray - 400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l - 7 7 - 7-7" />
 // FIXED:  </svg>
@@ -368,8 +362,8 @@ export const Checkbox = forwardRef < HTMLInputElement, CheckboxProps>((;
 
  return (
  <div className="w - full">
- <div className="flex items - start">
- <input
+ <div className={"fle}x items - start">
+ <input>
  ref={ref}
 // FIXED:  type="checkbox"
 // FIXED:  id={checkboxId}
@@ -378,12 +372,11 @@ export const Checkbox = forwardRef < HTMLInputElement, CheckboxProps>((;
  />
 
  {label && (}
- <div className="ml - 2 flex - 1">
- <FieldLabel
+ <div className={"m}l - 2 flex - 1">
+ <FieldLabel>
 // FIXED:  htmlFor={checkboxId}
  {...(required !== undefined && { required })}
-// FIXED:  className={cn('mb - 0', labelClassName)} />
- >
+// FIXED:  className={cn('mb - 0', labelClassName)}/>
  {label}
 // FIXED:  </FieldLabel>
 // FIXED:  </div>
@@ -430,21 +423,20 @@ export const RadioGroup: React.FC < RadioProps> = ({}
  return (
  <div className={cn('w - full', className)}>
  {label && (}
- <FieldLabel
+ <FieldLabel>
  {...(required !== undefined && { required })}
- {...(labelClassName && { className: labelClassName })} />
- >
+ {...(labelClassName && { className: labelClassName })}/>
  {label}
 // FIXED:  </FieldLabel>
  )}
 
- <div className="space - y-2">
+ <div className={"spac}e - y-2">
  {options.map((option) => {}
  const radioId: string = `${name}-${option.value}`;
 
  return (
- <div key={option.value} className="flex items - center">
- <input
+ <div key={option.value} className={"fle}x items - center">
+ <input>
 // FIXED:  type="radio"
 // FIXED:  id={radioId}
 // FIXED:  name={name}
@@ -455,12 +447,11 @@ export const RadioGroup: React.FC < RadioProps> = ({}
 // FIXED:  className={radioClasses}
  {...props}
  />
- <label
+ <label>
 // FIXED:  htmlFor={radioId}
 // FIXED:  className={cn(}
  'ml - 2 text - sm text - gray - 700',
- option.disabled && 'opacity - 50 cursor - not - allowed')} />
- >
+ option.disabled && 'opacity - 50 cursor - not - allowed')}/>
  {option.label}
 // FIXED:  </label>
 // FIXED:  </div>

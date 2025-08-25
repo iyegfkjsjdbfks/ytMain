@@ -27,30 +27,30 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ className }) => {
 
   return (
     <div className={`settings-page ${className || ''}`}>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Settings</h1>
+      <div className={"containe}r mx-auto px-4 py-8">
+        <h1 className={"text}-3xl font-bold mb-6">Settings</h1>
         
-        <div className="max-w-2xl space-y-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Playback</h2>
+        <div className={"max}-w-2xl space-y-6">
+          <div className={"bg}-white rounded-lg shadow-md p-6">
+            <h2 className={"text}-xl font-semibold mb-4">Playback</h2>
             
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Autoplay</label>
-                <input;
+            <div className={"space}-y-4">
+              <div className={"fle}x items-center justify-between">
+                <label className={"text}-sm font-medium">Autoplay</label>
+                <input;>
                   type="checkbox"
                   checked={settings.autoplay}
                   onChange={(e: any) => handleSettingChange('autoplay', e.target.checked)}
-                  className="toggle"
+                  className={"toggle}"
                 /{">"}
               </div>
               
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Video Quality</label>
-                <select;
+              <div className={"fle}x items-center justify-between">
+                <label className={"text}-sm font-medium">Video Quality</label>
+                <select;>
                   value={settings.quality}
                   onChange={(e: any) => handleSettingChange('quality', e.target.value)}
-                  className="border rounded px-3 py-1"
+                  className={"borde}r rounded px-3 py-1"
                 {">"}
                   <option value="auto">Auto</option>
                   <option value="1080p">1080p</option>
@@ -61,40 +61,40 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ className }) => {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Notifications</h2>
+          <div className={"bg}-white rounded-lg shadow-md p-6">
+            <h2 className={"text}-xl font-semibold mb-4">Notifications</h2>
             
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium">Enable Notifications</label>
-              <input;
+            <div className={"fle}x items-center justify-between">
+              <label className={"text}-sm font-medium">Enable Notifications</label>
+              <input;>
                 type="checkbox"
                 checked={settings.notifications}
                 onChange={(e: any) => handleSettingChange('notifications', e.target.checked)}
-                className="toggle"
+                className={"toggle}"
               /{">"}
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Appearance</h2>
+          <div className={"bg}-white rounded-lg shadow-md p-6">
+            <h2 className={"text}-xl font-semibold mb-4">Appearance</h2>
             
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Dark Mode</label>
-                <input;
+            <div className={"space}-y-4">
+              <div className={"fle}x items-center justify-between">
+                <label className={"text}-sm font-medium">Dark Mode</label>
+                <input;>
                   type="checkbox"
                   checked={settings.darkMode}
                   onChange={(e: any) => handleSettingChange('darkMode', e.target.checked)}
-                  className="toggle"
+                  className={"toggle}"
                 /{">"}
               </div>
               
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Language</label>
-                <select;
+              <div className={"fle}x items-center justify-between">
+                <label className={"text}-sm font-medium">Language</label>
+                <select;>
                   value={settings.language}
                   onChange={(e: any) => handleSettingChange('language', e.target.value)}
-                  className="border rounded px-3 py-1"
+                  className={"borde}r rounded px-3 py-1"
                 {">"}
                   <option value="en">English</option>
                   <option value="es">Spanish</option>

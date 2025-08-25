@@ -86,7 +86,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  playerRef.current.getVolume(),
  playerRef.current.isMuted()]);
 
- if (isMounted as any) {
+ if (isMounted) {
  setCurrentTime(time);
  setDuration(dur);
  setVolume(vol);
@@ -107,7 +107,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  setIsPlaying(state === YouTubePlayerState.PLAYING);
  } } });
 
- if (isMounted as any) {
+ if (isMounted) {
  playerRef.current = player;
  } else {
  player.destroy();
@@ -140,7 +140,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  }
 
  try {
- if (isPlaying as any) {
+ if (isPlaying) {
  await playerRef.current.pauseVideo();
  } else {
  await playerRef.current.playVideo();
@@ -156,7 +156,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  }
 
  try {
- if (isMuted as any) {
+ if (isMuted) {
  await playerRef.current.unMute();
  setIsMuted(false);
  } else {
@@ -195,7 +195,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
  // Update mute state based on volume
  if (newVolume === 0) {
  setIsMuted(true);
- } else if (isMuted as any) {
+ } else if (isMuted) {
  setIsMuted(false);
  }
  } catch (error) {
@@ -204,56 +204,56 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 
  return (
  <div className={`youtube-player-container ${className}`}>
- <div id='youtube-player' className='w-full' />
+ <div id='youtube-player' className={'w}-full' />
 
  {/* Custom Controls */}
  {!controls && (
- <div className='mt-2 bg-gray-100 p-2 rounded'>
- <div className='flex items-center space-x-2 mb-2'>
+ <div className={'mt}-2 bg-gray-100 p-2 rounded'>
+ <div className={'fle}x items-center space-x-2 mb-2'>
  <button />
 // FIXED:  onClick={(e) => togglePlay(e)}
-// FIXED:  className='p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600'
+// FIXED:  className={'p}-2 rounded-full bg-blue-500 text-white hover:bg-blue-600'
 // FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
  {isPlaying ? '⏸' : '▶️'}
 // FIXED:  </button>
 
- <div className='flex-1'>
- <input
+ <div className={'flex}-1'>
+ <input>
 // FIXED:  type='range'
  min='0'
  max={duration || 100}
 // FIXED:  value={currentTime} />
 // FIXED:  onChange={(e) => handleSeek(e)}
-// FIXED:  className='w-full'
+// FIXED:  className={'w}-full'
 // FIXED:  aria-label='Seek'
  />
 // FIXED:  </div>
-<div className='text-sm text-gray-600 w-20 text-right'>
+<div className={'text}-sm text-gray-600 w-20 text-right'>
  {formatTime(currentTime)} / {formatTime(duration)}
 // FIXED:  </div>
 
  <button />
 // FIXED:  onClick={(e) => toggleMute(e)}
-// FIXED:  className='p-2 rounded-full hover:bg-gray-200'
+// FIXED:  className={'p}-2 rounded-full hover:bg-gray-200'
 // FIXED:  aria-label={isMuted ? 'Unmute' : 'Mute'}
  >
  {isMuted ? '🔇' : volume > 50 ? '🔊' : '🔉'}
 // FIXED:  </button>
 
- <div className='w-24'>
- <input
+ <div className={'w}-24'>
+ <input>
 // FIXED:  type='range'
  min='0'
  max='100'
 // FIXED:  value={isMuted ? 0 : volume} />
 // FIXED:  onChange={(e) => handleVolumeChange(e)}
-// FIXED:  className='w-full'
+// FIXED:  className={'w}-full'
 // FIXED:  aria-label='Volume'
  />
 // FIXED:  </div>
 // FIXED:  </div>
-<div className='text-xs text-gray-500'>
+<div className={'text}-xs text-gray-500'>
  Player State: {YouTubePlayerState[playerState || -1]}
 // FIXED:  </div>
 // FIXED:  </div>

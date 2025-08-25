@@ -5,14 +5,14 @@ import { Outlet } from 'react-router-dom';
 
 const StudioLayout: React.FC = () => {
  return (
- <div className="flex flex-col h-screen">
+ <div className={"fle}x flex-col h-screen">
  {/* <StudioHeader /> */}
- <div className="flex flex-1 pt-14"> {/* Adjust pt-14 if StudioHeader has different height */}
+ <div className={"fle}x flex-1 pt-14"> {/* Adjust pt-14 if StudioHeader has different height */}
  {/* <StudioSidebar /> */}
-      <main
+      <main>
         id="studio-main-content"
         role="main"
-        className="flex-1 overflow-y-auto bg-white dark:bg-neutral-900 p-4 md:p-6">
+        className={"flex}-1 overflow-y-auto bg-white dark:bg-neutral-900 p-4 md:p-6">
         {/* Add margin-left if StudioSidebar is present and fixed: e.g., md:ml-64 */}
         <Outlet /> {/* This is where the nested studio routes will render their components */}
       </main>

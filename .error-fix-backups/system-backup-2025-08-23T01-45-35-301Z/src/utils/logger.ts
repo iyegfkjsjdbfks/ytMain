@@ -50,7 +50,7 @@ export class Logger {
 
  if (this.config.enableConsole) {
  // eslint - disable - next - line no - console
- (console as any).debug(this.formatMessage('debug', message), ...args);
+ (console).debug(this.formatMessage('debug', message), ...args);
  }
  info(message, ...args: unknown[]): void {
  if (!this.shouldLog('info')) {
@@ -59,7 +59,7 @@ export class Logger {
 
  if (this.config.enableConsole) {
  // eslint - disable - next - line no - console
- (console as any).info(this.formatMessage('info', message), ...args);
+ (console).info(this.formatMessage('info', message), ...args);
  }
  warn(message, ...args: unknown[]): void {
  if (!this.shouldLog('warn')) {
@@ -67,7 +67,7 @@ export class Logger {
  }
 
  if (this.config.enableConsole) {
- (console as any).warn(this.formatMessage('warn', message), ...args);
+ (console).warn(this.formatMessage('warn', message), ...args);
  }
  error(message, error?: Error | unknown, ...args: unknown[]): void {
  if (!this.shouldLog('error')) {
@@ -75,7 +75,7 @@ export class Logger {
  }
 
  if (this.config.enableConsole) {
- (console as any).error(this.formatMessage('error', message), error, ...args);
+ (console).error(this.formatMessage('error', message), error, ...args);
  }
 
  // In production, you might want to send errors to a remote service

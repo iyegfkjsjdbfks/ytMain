@@ -53,14 +53,14 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  return (
  <div className={`flex items-center space-x-2 ${className}`}>
  {!isOnline ? (
- <div className="flex items-center space-x-2 px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 rounded-full text-sm">
- <ExclamationTriangleIcon className="w-4 h-4" />
- <span className="font-medium">Offline</span>
+ <div className={"fle}x items-center space-x-2 px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 rounded-full text-sm">
+ <ExclamationTriangleIcon className={"w}-4 h-4" />
+ <span className={"font}-medium">Offline</span>
 // FIXED:  </div>
  ) : (
- <div className="flex items-center space-x-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full text-sm">
- <WifiIcon className="w-4 h-4" />
- <span className="font-medium">Back Online</span>
+ <div className={"fle}x items-center space-x-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full text-sm">
+ <WifiIcon className={"w}-4 h-4" />
+ <span className={"font}-medium">Back Online</span>
 // FIXED:  </div>
  )}
 // FIXED:  </div>

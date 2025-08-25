@@ -192,7 +192,7 @@ export const DeveloperDashboard: React.FC = () => {
         id: 'lcp-warning',
         type: "warning",
         category: 'performance',
-        message: `LCP is ${metrics.performance.coreWebVitals.lcp}ms (target: <2500ms)`,
+        message: `LCP is ${metrics.performance.coreWebVitals.lcp}ms (target: <2500ms)`,>
         timestamp: Date.now(),
         severity: 6,
         actionable: true;
@@ -204,7 +204,7 @@ export const DeveloperDashboard: React.FC = () => {
         id: 'error-rate-high',
         type: "error",
         category: 'performance',
-        message: `Error rate is ${(metrics.performance.errorRate * 100).toFixed(2)}% (target: <5%)`,
+        message: `Error rate is ${(metrics.performance.errorRate * 100).toFixed(2)}% (target: <5%)`,>
         timestamp: Date.now(),
         severity: 8,
         actionable: true;
@@ -217,7 +217,7 @@ export const DeveloperDashboard: React.FC = () => {
         id: 'complexity-high',
         type: "warning",
         category: 'quality',
-        message: `Code complexity is ${metrics.codeQuality.complexity} (target: <8)`,
+        message: `Code complexity is ${metrics.codeQuality.complexity} (target: <8)`,>
         timestamp: Date.now(),
         severity: 5,
         actionable: true;
@@ -285,16 +285,16 @@ export const DeveloperDashboard: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className={"min}-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+        <div className={"max}-w-7xl mx-auto">
+          <div className={"animate}-pulse">
+            <div className={"h}-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6" />
+            <div className={"gri}d grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg" />
+                <div key={i} className={"h}-32 bg-gray-200 dark:bg-gray-700 rounded-lg" />
               ))}
             </div>
-            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-lg" />
+            <div className={"h}-96 bg-gray-200 dark:bg-gray-700 rounded-lg" />
           </div>
         </div>
       </div>
@@ -302,33 +302,33 @@ export const DeveloperDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className={"min}-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+      <div className={"max}-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className={"fle}x justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className={"text}-3xl font-bold text-gray-900 dark:text-white">
               Developer Dashboard;
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
+            <p className={"text}-gray-600 dark:text-gray-400 mt-1">
               Real-time insights into application health and development metrics;
             </p>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className={"fle}x items-center space-x-4">
             {/* Auto-refresh toggle */}
-            <div className="flex items-center space-x-2">
-              <label htmlFor="auto-refresh-toggle" className="text-sm text-gray-600 dark:text-gray-400">
+            <div className={"fle}x items-center space-x-2">
+              <label htmlFor="auto-refresh-toggle" className={"text}-sm text-gray-600 dark:text-gray-400">
                 Auto-refresh;
               </label>
-              <button;
+              <button;>
                 id="auto-refresh-toggle"
                 onClick={() => setAutoRefresh(!autoRefresh)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                   autoRefresh ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'
                 }`}
               >
-                <span;
+                <span;>
                   className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                     autoRefresh ? 'translate-x-6' : 'translate-x-1'
                   }`}
@@ -337,10 +337,10 @@ export const DeveloperDashboard: React.FC = () => {
             </div>
 
             {/* Refresh interval */}
-            <select;
+            <select;>
               value={refreshInterval}
               onChange={(e: any) => setRefreshInterval(Number(e.target.value))}
-              className="text-sm border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              className={"text}-sm border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
               disabled={!autoRefresh}
             >
               <option value={10}>10s</option>
@@ -349,10 +349,10 @@ export const DeveloperDashboard: React.FC = () => {
               <option value={300}>5m</option>
             </select>
 
-            <button;
+            <button;>
               onClick={() => fetchDashboardData()}
               disabled={isLoading}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+              className={"px}-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
             >
               {isLoading ? 'Refreshing...' : 'Refresh'}
             </button>
@@ -360,25 +360,25 @@ export const DeveloperDashboard: React.FC = () => {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className={"gri}d grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Overall Health Score */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+            <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">
               Overall Health Score;
             </h3>
-            <div className="flex items-center justify-center">
-              <div className="relative w-24 h-24">
-                <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                  <circle;
+            <div className={"fle}x items-center justify-center">
+              <div className={"relativ}e w-24 h-24">
+                <svg className={"w}-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                  <circle;>
                     cx="50"
                     cy="50"
                     r="40"
                     stroke="currentColor"
                     strokeWidth="8"
                     fill="transparent"
-                    className="text-gray-200 dark:text-gray-700"
+                    className={"text}-gray-200 dark:text-gray-700"
                   />
-                  <circle;
+                  <circle;>
                     cx="50"
                     cy="50"
                     r="40"
@@ -395,14 +395,14 @@ export const DeveloperDashboard: React.FC = () => {
                     }`}
                   />
                 </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className={"absolut}e inset-0 flex items-center justify-center">
+                  <span className={"text}-2xl font-bold text-gray-900 dark:text-white">
                     {overallHealthScore}
                   </span>
                 </div>
               </div>
             </div>
-            <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <p className={"text}-center text-sm text-gray-600 dark:text-gray-400 mt-2">
               {overallHealthScore >= 80;
                 ? 'Excellent'
                 : overallHealthScore >= 60;
@@ -412,29 +412,29 @@ export const DeveloperDashboard: React.FC = () => {
           </div>
 
           {/* Critical Alerts */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+            <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">
               Critical Alerts;
             </h3>
-            <div className="space-y-3">
+            <div className={"space}-y-3">
               {criticalAlerts.length === 0 ? (
-                <p className="text-green-600 dark:text-green-400 text-sm">
+                <p className={"text}-green-600 dark:text-green-400 text-sm">
                   ✅ No critical alerts;
                 </p>
               ) : (
                 criticalAlerts.slice(0, 3).map((alert) => (
-                  <div;
+                  <div;>
                     key={alert.id}
-                    className="flex items-start space-x-3 p-3 rounded-md bg-red-50 dark:bg-red-900/20"
+                    className={"fle}x items-start space-x-3 p-3 rounded-md bg-red-50 dark:bg-red-900/20"
                   >
-                    <div className="flex-shrink-0">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2" />
+                    <div className={"flex}-shrink-0">
+                      <div className={"w}-2 h-2 bg-red-500 rounded-full mt-2" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm text-red-800 dark:text-red-200">
+                    <div className={"flex}-1 min-w-0">
+                      <p className={"text}-sm text-red-800 dark:text-red-200">
                         {alert.message}
                       </p>
-                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+                      <p className={"text}-xs text-red-600 dark:text-red-400 mt-1">
                         {new Date(alert.timestamp).toLocaleTimeString()}
                       </p>
                     </div>
@@ -445,33 +445,33 @@ export const DeveloperDashboard: React.FC = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+            <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">
               Quick Actions;
             </h3>
-            <div className="space-y-3">
+            <div className={"space}-y-3">
               {actionableSuggestions.length > 0 && (
-                <button;
+                <button;>
                   onClick={() => {
                     // Auto-implement suggestions logic;
                     console.log('Auto-implementing:', actionableSuggestions.slice(0, 3).map((s) => s.id));
                   }}
-                  className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm"
+                  className={"w}-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm"
                 >
                   Auto-implement {actionableSuggestions.length} improvements;
                 </button>
               )}
 
-              <button;
+              <button;>
                 onClick={() => console.log('Running CI/CD pipeline...')}
-                className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
+                className={"w}-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
               >
                 Run CI/CD Pipeline;
               </button>
 
-              <button;
+              <button;>
                 onClick={() => console.log('Running code analysis...')}
-                className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 text-sm"
+                className={"w}-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 text-sm"
               >
                 Run Code Analysis;
               </button>
@@ -481,40 +481,40 @@ export const DeveloperDashboard: React.FC = () => {
 
         {/* Metrics Grid */}
         {metrics && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className={"gri}d grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {/* Performance Metrics */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Performance;
               </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">LCP</span>
-                  <span className={`text-sm font-medium ${
+              <div className={"space}-y-3">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">LCP</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.performance.coreWebVitals.lcp <= 2500 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {metrics.performance.coreWebVitals.lcp}ms;
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">FID</span>
-                  <span className={`text-sm font-medium ${
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">FID</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.performance.coreWebVitals.fid <= 100 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {metrics.performance.coreWebVitals.fid}ms;
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">CLS</span>
-                  <span className={`text-sm font-medium ${
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">CLS</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.performance.coreWebVitals.cls <= 0.1 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {metrics.performance.coreWebVitals.cls.toFixed(3)}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Error Rate</span>
-                  <span className={`text-sm font-medium ${
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Error Rate</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.performance.errorRate <= 0.05 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {(metrics.performance.errorRate * 100).toFixed(2)}%
@@ -524,38 +524,38 @@ export const DeveloperDashboard: React.FC = () => {
             </div>
 
             {/* Code Quality Metrics */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Code Quality;
               </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Complexity</span>
-                  <span className={`text-sm font-medium ${
+              <div className={"space}-y-3">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Complexity</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.codeQuality.complexity <= 8 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {metrics.codeQuality.complexity.toFixed(1)}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Maintainability</span>
-                  <span className={`text-sm font-medium ${
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Maintainability</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.codeQuality.maintainability >= 80 ? 'text-green-600' : 'text-yellow-600'
                   }`}>
                     {metrics.codeQuality.maintainability.toFixed(0)}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Test Coverage</span>
-                  <span className={`text-sm font-medium ${
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Test Coverage</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.codeQuality.testCoverage >= 80 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {metrics.codeQuality.testCoverage.toFixed(0)}%
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Tech Debt</span>
-                  <span className={`text-sm font-medium ${
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Tech Debt</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.codeQuality.technicalDebt === 0 ? 'text-green-600' : 'text-yellow-600'
                   }`}>
                     {metrics.codeQuality.technicalDebt} items;
@@ -565,28 +565,28 @@ export const DeveloperDashboard: React.FC = () => {
             </div>
 
             {/* Workflow Metrics */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Workflow;
               </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Success Rate</span>
-                  <span className={`text-sm font-medium ${
+              <div className={"space}-y-3">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Success Rate</span>
+                  <span className={`text-sm font-medium ${>
                     metrics.workflow.successRate >= 0.9 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {(metrics.workflow.successRate * 100).toFixed(1)}%
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Avg Duration</span>
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Avg Duration</span>
+                  <span className={"text}-sm font-medium text-gray-900 dark:text-white">
                     {Math.round(metrics.workflow.averageDuration)}s;
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Executions</span>
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Executions</span>
+                  <span className={"text}-sm font-medium text-gray-900 dark:text-white">
                     {metrics.workflow.totalExecutions}
                   </span>
                 </div>
@@ -594,26 +594,26 @@ export const DeveloperDashboard: React.FC = () => {
             </div>
 
             {/* Feature Flags Metrics */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Feature Flags;
               </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Total Flags</span>
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
+              <div className={"space}-y-3">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Total Flags</span>
+                  <span className={"text}-sm font-medium text-gray-900 dark:text-white">
                     {metrics.featureFlags.totalFlags}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Active</span>
-                  <span className="text-sm font-medium text-green-600">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Active</span>
+                  <span className={"text}-sm font-medium text-green-600">
                     {metrics.featureFlags.activeFlags}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Rolling Out</span>
-                  <span className="text-sm font-medium text-blue-600">
+                <div className={"fle}x justify-between items-center">
+                  <span className={"text}-sm text-gray-600 dark:text-gray-400">Rolling Out</span>
+                  <span className={"text}-sm font-medium text-blue-600">
                     {metrics.featureFlags.rolloutProgress.length}
                   </span>
                 </div>
@@ -623,7 +623,7 @@ export const DeveloperDashboard: React.FC = () => {
         )}
 
         {/* Detailed View Tabs */}
-        <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
+        <div className={"border}-b border-gray-200 dark:border-gray-700 mb-6">
           <nav className="-mb-px flex space-x-8">
             {[
               { id: 'overview', label: 'Overview' },
@@ -633,9 +633,9 @@ export const DeveloperDashboard: React.FC = () => {
               { id: 'flags', label: 'Feature Flags' },
               { id: 'security', label: 'Security' }
             ].map((tab) => (
-              <button;
+              <button;>
                 key={tab.id}
-                onClick={() => setSelectedTab(tab.id as any)}
+                onClick={() => setSelectedTab(tab.id)}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   selectedTab === tab.id;
                     ? 'border-blue-500 text-blue-600 dark:text-blue-400'
@@ -649,21 +649,21 @@ export const DeveloperDashboard: React.FC = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+        <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
           {selectedTab === 'overview' && (
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+              <h3 className={"text}-xl font-semibold text-gray-900 dark:text-white mb-6">
                 System Overview;
               </h3>
 
               {/* Recent Alerts */}
-              <div className="mb-8">
-                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+              <div className={"mb}-8">
+                <h4 className={"text}-lg font-medium text-gray-900 dark:text-white mb-4">
                   Recent Alerts ({alerts.length})
                 </h4>
-                <div className="space-y-3">
+                <div className={"space}-y-3">
                   {alerts.slice(0, 5).map((alert) => (
-                    <div;
+                    <div;>
                       key={alert.id}
                       className={`p-4 rounded-lg ${
                         alert.type === 'error'
@@ -673,9 +673,9 @@ export const DeveloperDashboard: React.FC = () => {
                           : 'bg-blue-50 dark:bg-blue-900/20'
                       }`}
                     >
-                      <div className="flex items-start space-x-3">
-                        <div className="flex-shrink-0">
-                          <div className={`w-3 h-3 rounded-full mt-1 ${
+                      <div className={"fle}x items-start space-x-3">
+                        <div className={"flex}-shrink-0">
+                          <div className={`w-3 h-3 rounded-full mt-1 ${>
                             alert.type === 'error'
                               ? 'bg-red-500'
                               : alert.type === 'warning'
@@ -683,10 +683,10 @@ export const DeveloperDashboard: React.FC = () => {
                               : 'bg-blue-500'
                           }`} />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex justify-between items-start">
+                        <div className={"flex}-1 min-w-0">
+                          <div className={"fle}x justify-between items-start">
                             <div>
-                              <p className={`text-sm font-medium ${
+                              <p className={`text-sm font-medium ${>
                                 alert.type === 'error'
                                   ? 'text-red-800 dark:text-red-200'
                                   : alert.type === 'warning'
@@ -695,7 +695,7 @@ export const DeveloperDashboard: React.FC = () => {
                               }`}>
                                 {alert.message}
                               </p>
-                              <p className={`text-xs mt-1 ${
+                              <p className={`text-xs mt-1 ${>
                                 alert.type === 'error'
                                   ? 'text-red-600 dark:text-red-400'
                                   : alert.type === 'warning'
@@ -705,7 +705,7 @@ export const DeveloperDashboard: React.FC = () => {
                                 {alert.category} • {new Date(alert.timestamp).toLocaleString()}
                               </p>
                             </div>
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${>
                               alert.severity >= 8;
                                 ? 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
                                 : alert.severity >= 6;
@@ -724,18 +724,18 @@ export const DeveloperDashboard: React.FC = () => {
 
               {/* Improvement Suggestions */}
               <div>
-                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                <h4 className={"text}-lg font-medium text-gray-900 dark:text-white mb-4">
                   Improvement Suggestions ({suggestions.length})
                 </h4>
-                <div className="space-y-3">
+                <div className={"space}-y-3">
                   {suggestions.slice(0, 5).map((suggestion) => (
-                    <div;
+                    <div;>
                       key={suggestion.id}
-                      className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700"
+                      className={"p}-4 rounded-lg bg-gray-50 dark:bg-gray-700"
                     >
-                      <div className="flex items-start space-x-3">
-                        <div className="flex-shrink-0">
-                          <div className={`w-3 h-3 rounded-full mt-1 ${
+                      <div className={"fle}x items-start space-x-3">
+                        <div className={"flex}-shrink-0">
+                          <div className={`w-3 h-3 rounded-full mt-1 ${>
                             suggestion.priority >= 8;
                               ? 'bg-red-500'
                               : suggestion.priority >= 6;
@@ -743,23 +743,23 @@ export const DeveloperDashboard: React.FC = () => {
                               : 'bg-green-500'
                           }`} />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex justify-between items-start">
+                        <div className={"flex}-1 min-w-0">
+                          <div className={"fle}x justify-between items-start">
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white">
+                              <p className={"text}-sm font-medium text-gray-900 dark:text-white">
                                 {suggestion.description}
                               </p>
-                              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                              <p className={"text}-xs text-gray-600 dark:text-gray-400 mt-1">
                                 {suggestion.category} • Impact: {suggestion.estimatedImpact}
                               </p>
                             </div>
-                            <div className="flex items-center space-x-2">
+                            <div className={"fle}x items-center space-x-2">
                               {suggestion.automatable && (
-                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200">
+                                <span className={"inline}-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200">
                                   Auto-fixable;
                                 </span>
                               )}
-                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${>
                                 suggestion.priority >= 8;
                                   ? 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
                                   : suggestion.priority >= 6;
@@ -780,8 +780,8 @@ export const DeveloperDashboard: React.FC = () => {
           )}
 
           {selectedTab !== 'overview' && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 dark:text-gray-400">
+            <div className={"text}-center py-12">
+              <p className={"text}-gray-500 dark:text-gray-400">
                 {selectedTab.charAt(0).toUpperCase() + selectedTab.slice(1)} details coming soon...
               </p>
             </div>

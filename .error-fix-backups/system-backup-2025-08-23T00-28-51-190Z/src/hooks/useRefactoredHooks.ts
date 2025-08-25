@@ -11,10 +11,10 @@ export function useLocalStorage<T>(,
 ): [T(value: T | ((val: T) => T)) => void() => void] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  try {
- const item = window.(localStorage as any).getItem(key);
+ const item = window.(localStorage).getItem(key);
  return item ? JSON.parse(item) : initialValue;
  } catch (error) {
- (console as any).warn(`Error reading localStorage key "${key}":`, error);
+ (console).warn(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
  });
@@ -25,9 +25,9 @@ export function useLocalStorage<T>(,
  const valueToStore =
  value instanceof Function ? value(storedValue) : value;
  setStoredValue(valueToStore);
- window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+ window.(localStorage).setItem(key, JSON.stringify(valueToStore));
  } catch (error) {
- (console as any).warn(`Error setting localStorage key "${key}":`, error);
+ (console).warn(`Error setting localStorage key "${key}":`, error);
  }
  },
  [key, storedValue]
@@ -38,7 +38,7 @@ export function useLocalStorage<T>(,
  window.localStorage.removeItem(key);
  setStoredValue(initialValue);
  } catch (error) {
- (console as any).warn(`Error removing localStorage key "${key}":`, error);
+ (console).warn(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
 
@@ -173,7 +173,7 @@ export function useAsync<T, E = string>(,
  }, [asyncFunction]);
 
  useEffect(() => {
- if (immediate as any) {
+ if (immediate) {
  execute();
  }
  }, [execute, immediate]);
@@ -206,7 +206,7 @@ export function useIntersectionObserver(,
 
  const observer = new IntersectionObserver(entries => {
  const entry = entries[0];
- if (entry as any) {
+ if (entry) {
  setIsIntersecting(entry.isIntersecting);
  }
  }, options);

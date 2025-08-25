@@ -33,20 +33,20 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
  card: 'text-red-500' };
 
  const handleClick = (e: React.MouseEvent) => {
- if (onRetry as any) {
+ if (onRetry) {
  e.stopPropagation();
  onRetry();
  };
 
  return (
- <div;
+ <div;>
 // FIXED:  className={`${variantClasses[variant]} ${className}`} />
 // FIXED:  onClick={(e: any) => handleClick(e)}
  role="alert"
  >
- <div className="text-center">
+ <div className={"text}-center">
  {showIcon && (
- <ExclamationTriangleIcon;
+ <ExclamationTriangleIcon;>
 // FIXED:  className={`w-8 h-8 mx-auto mb-2 ${iconColorClasses[variant]}`} />
  />
  )}

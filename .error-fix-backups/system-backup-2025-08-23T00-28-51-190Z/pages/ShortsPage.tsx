@@ -30,7 +30,7 @@ const ShortsPage: React.FC = () => {
  const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
  return new Set(validArray.filter((item) => typeof item === 'string'));
  } catch (error) {
- (console as any).warn('Error creating likedShorts Set:', error);
+ (console).warn('Error creating likedShorts Set:', error);
  // Clear invalid data and return empty Set
  setLikedShortsArray([]);
  return new Set<string>();
@@ -44,7 +44,7 @@ const ShortsPage: React.FC = () => {
  const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
  return new Set(validArray.filter((item) => typeof item === 'string'));
  } catch (error) {
- (console as any).warn('Error creating followedChannels Set:', error);
+ (console).warn('Error creating followedChannels Set:', error);
  // Clear invalid data and return empty Set
  setFollowedChannelsArray([]);
  return new Set<string>();
@@ -102,7 +102,7 @@ return [];
  }
 
  // Apply search filter
- if (debouncedSearchQuery as any) {
+ if (debouncedSearchQuery) {
  const query = debouncedSearchQuery.toLowerCase();
  converted = converted.filter((short) =>
  short.title.toLowerCase().includes(query) ||
@@ -162,7 +162,7 @@ return;
  setCommentModalOpen(false);
  setSelectedShortForComment(null);
  } catch (error) {
- (console as any).error('Failed to submit comment:', error);
+ (console).error('Failed to submit comment:', error);
  }
  }, [selectedShortForComment]);
 
@@ -179,7 +179,7 @@ return;
  // Scroll to the video
  if (containerRef.current) {
  const targetElement = containerRef.current.children[index] as HTMLElement;
- if (targetElement as any) {
+ if (targetElement) {
  targetElement.scrollIntoView({
  behavior: 'smooth',
  block: 'start',
@@ -200,7 +200,7 @@ return;
  // Scroll to the video
  if (containerRef.current) {
  const targetElement = containerRef.current.children[nextIndex] as HTMLElement;
- if (targetElement as any) {
+ if (targetElement) {
  targetElement.scrollIntoView({
  behavior: 'smooth',
  block: 'start',
@@ -225,7 +225,7 @@ return;
  // Scroll to the video
  if (containerRef.current) {
  const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement;
- if (targetElement as any) {
+ if (targetElement) {
  targetElement.scrollIntoView({
  behavior: 'smooth',
  block: 'start',
@@ -239,7 +239,7 @@ return;
 
  const handleSearchToggle = useCallback(() => {
  setShowSearch(prev => !prev);
- if (showSearch as any) {
+ if (showSearch) {
  setSearchQuery('');
  }
  }, [showSearch]);
@@ -254,7 +254,7 @@ return;
  }, []);
 
  const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
- if (commentModalOpen as any) {
+ if (commentModalOpen) {
 return;
 }
 
@@ -268,9 +268,9 @@ return;
  handleNextVideo();
  break;
  case 'Escape':
- if (showSearch as any) {
+ if (showSearch) {
  handleSearchToggle();
- } else if (showFilters as any) {
+ } else if (showFilters) {
  handleFilterToggle();
  }
  break;
@@ -300,32 +300,32 @@ return;
  await navigator.clipboard.writeText(text);
  // You could add a toast notification here
  } catch (error) {
- (console as any).error('Failed to copy link:', error);
+ (console).error('Failed to copy link:', error);
  };
 
  // One-time cleanup effect to handle corrupted localStorage data
  useEffect(() => {
  try {
  // Check if localStorage contains invalid data and clean it up
- const likedShortsRaw = (localStorage as any).getItem('likedShorts');
- const followedChannelsRaw = (localStorage as any).getItem('followedChannels');
+ const likedShortsRaw = (localStorage).getItem('likedShorts');
+ const followedChannelsRaw = (localStorage).getItem('followedChannels');
 
  if (likedShortsRaw && likedShortsRaw !== 'null') {
  const parsed = JSON.parse(likedShortsRaw);
  if (!Array.isArray(parsed)) {
- (console as any).warn('Cleaning up invalid likedShorts data');
+ (console).warn('Cleaning up invalid likedShorts data');
  localStorage.removeItem('likedShorts');
  setLikedShortsArray([]);
  }
  if (followedChannelsRaw && followedChannelsRaw !== 'null') {
  const parsed = JSON.parse(followedChannelsRaw);
  if (!Array.isArray(parsed)) {
- (console as any).warn('Cleaning up invalid followedChannels data');
+ (console).warn('Cleaning up invalid followedChannels data');
  localStorage.removeItem('followedChannels');
  setFollowedChannelsArray([]);
  }
  } catch (error) {
- (console as any).warn('Error during localStorage cleanup:', error);
+ (console).warn('Error during localStorage cleanup:', error);
  // Clear all potentially corrupted data
  localStorage.removeItem('likedShorts');
  localStorage.removeItem('followedChannels');
@@ -413,7 +413,7 @@ return;
  // Add wheel event listener for scroll navigation
  useEffect(() => {
  const container = containerRef.current;
- if (container as any) {
+ if (container) {
  container.addEventListener('wheel', handleWheel as EventListener, { passive: false });
  return () => container.removeEventListener('wheel', handleWheel as EventListener);
  }
@@ -423,7 +423,7 @@ return;
  // Add touch event listeners for mobile navigation
  useEffect(() => {
  const container = containerRef.current;
- if (container as any) {
+ if (container) {
  container.addEventListener('touchstart', handleTouchStart as EventListener, { passive: true });
  container.addEventListener('touchend', handleTouchEnd as EventListener, { passive: true });
  return () => {
@@ -443,7 +443,7 @@ return;
  if (targetIndex !== -1) {
  setCurrentVideoIndex(targetIndex);
  const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
- if (targetElement as any) {
+ if (targetElement) {
  targetElement.scrollIntoView({ behavior: 'smooth',
  block: 'start' });
  }
@@ -512,56 +512,56 @@ return;
  }
  }}, [filteredShorts.length]); // Only depend on length, not the entire array
 
- if (loading as any) {
+ if (loading) {
  return <ShortsPageSkeleton />;
  }
 
- if (error as any) {
+ if (error) {
  return <ShortsPageError error={error} />;
  }
 
  if (filteredShorts.length === 0) {
  return (
- <div className="h-[calc(100vh-3.5rem)] bg-black flex flex-col">
+ <div className={"h}-[calc(100vh-3.5rem)] bg-black flex flex-col">
  {/* Enhanced Header with Search and Filters */}
- <div className="relative z-10 bg-black/80 backdrop-blur-sm">
- <div className="flex items-center justify-between p-4">
- <h1 className="text-white text-lg font-semibold">Shorts</h1>
- <div className="flex items-center space-x-2">
+ <div className={"relativ}e z-10 bg-black/80 backdrop-blur-sm">
+ <div className={"fle}x items-center justify-between p-4">
+ <h1 className={"text}-white text-lg font-semibold">Shorts</h1>
+ <div className={"fle}x items-center space-x-2">
  <button />
 // FIXED:  onClick={(e) => handleSearchToggle(e)}
-// FIXED:  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+// FIXED:  className={"p}-2 text-white hover:bg-white/10 rounded-full transition-colors"
 // FIXED:  aria-label="Search shorts"
  >
- <MagnifyingGlassIcon className="w-5 h-5" />
+ <MagnifyingGlassIcon className={"w}-5 h-5" />
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e) => handleFilterToggle(e)}
-// FIXED:  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+// FIXED:  className={"p}-2 text-white hover:bg-white/10 rounded-full transition-colors"
 // FIXED:  aria-label="Filter shorts"
  >
- <AdjustmentsHorizontalIcon className="w-5 h-5" />
+ <AdjustmentsHorizontalIcon className={"w}-5 h-5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Search Bar */}
  {showSearch && (
- <div className="px-4 pb-4">
- <div className="relative">
- <input
+ <div className={"px}-4 pb-4">
+ <div className={"relative}">
+ <input>
 // FIXED:  type="text"
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={(e) => setSearchQuery(e.target.value)}
 // FIXED:  placeholder="Search shorts..."
-// FIXED:  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+// FIXED:  className={"w}-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
  autoFocus
  />
  <button />
 // FIXED:  onClick={(e) => handleSearchToggle(e)}
-// FIXED:  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+// FIXED:  className={"absolut}e right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
  >
- <XMarkIcon className="w-4 h-4" />
+ <XMarkIcon className={"w}-4 h-4" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -569,7 +569,7 @@ return;
 
  {/* Filters */}
  {showFilters && (
- <ShortsFilters
+ <ShortsFilters>
  categories={categories}
  selectedCategory={selectedCategory}
  onCategoryChange={handleCategoryChange} />
@@ -578,7 +578,7 @@ return;
  )}
 // FIXED:  </div>
 
- <EmptyShortsState
+ <EmptyShortsState>
  hasFilters={selectedCategory !== 'all' || debouncedSearchQuery !== ''} />
  onClearFilters={() => {
  setSelectedCategory('all');
@@ -590,12 +590,12 @@ return;
  }
 
  return (
- <div className="h-[calc(100vh-3.5rem)] bg-black relative">
+ <div className={"h}-[calc(100vh-3.5rem)] bg-black relative">
  {/* Enhanced Header with Search and Filters */}
- <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent">
- <div className="flex items-center justify-between p-4">
- <h1 className="text-white text-lg font-semibold">Shorts</h1>
- <div className="flex items-center space-x-2">
+ <div className={"absolut}e top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent">
+ <div className={"fle}x items-center justify-between p-4">
+ <h1 className={"text}-white text-lg font-semibold">Shorts</h1>
+ <div className={"fle}x items-center space-x-2">
  <button />
 // FIXED:  onClick={(e) => handleSearchToggle(e)}
 // FIXED:  className={`p-2 rounded-full transition-colors ${
@@ -603,7 +603,7 @@ return;
  }`}
 // FIXED:  aria-label="Search shorts"
  >
- <MagnifyingGlassIcon className="w-5 h-5" />
+ <MagnifyingGlassIcon className={"w}-5 h-5" />
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e) => handleFilterToggle(e)}
@@ -612,28 +612,28 @@ return;
  }`}
 // FIXED:  aria-label="Filter shorts"
  >
- <AdjustmentsHorizontalIcon className="w-5 h-5" />
+ <AdjustmentsHorizontalIcon className={"w}-5 h-5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Search Bar */}
  {showSearch && (
- <div className="px-4 pb-4">
- <div className="relative">
- <input
+ <div className={"px}-4 pb-4">
+ <div className={"relative}">
+ <input>
 // FIXED:  type="text"
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={(e) => setSearchQuery(e.target.value)}
 // FIXED:  placeholder="Search shorts..."
-// FIXED:  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+// FIXED:  className={"w}-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
  autoFocus
  />
  <button />
 // FIXED:  onClick={(e) => handleSearchToggle(e)}
-// FIXED:  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+// FIXED:  className={"absolut}e right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
  >
- <XMarkIcon className="w-4 h-4" />
+ <XMarkIcon className={"w}-4 h-4" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -641,7 +641,7 @@ return;
 
  {/* Filters */}
  {showFilters && (
- <ShortsFilters
+ <ShortsFilters>
  categories={categories}
  selectedCategory={selectedCategory}
  onCategoryChange={handleCategoryChange} />
@@ -651,8 +651,8 @@ return;
 // FIXED:  </div>
 
  {/* Navigation Controls */}
- <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">
- <ShortsNavigation
+ <div className={"absolut}e right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">
+ <ShortsNavigation>
  onPrevious={handlePreviousVideo}
  onNext={handleNextVideo} />
  canGoPrevious={currentVideoIndex > 0}
@@ -661,15 +661,14 @@ return;
 // FIXED:  </div>
 
  {/* Shorts Feed */}
- <div
+ <div>
  ref={containerRef}
-// FIXED:  className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
+// FIXED:  className={"h}-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
  role="feed"
-// FIXED:  aria-label="Shorts feed" />
- >
+// FIXED:  aria-label="Shorts feed"/>
  {filteredShorts.map((short, index) => (
- <div key={short.id || index} className="h-full w-full snap-start">
- <ShortDisplayCard
+ <div key={short.id || index} className={"h}-full w-full snap-start">
+ <ShortDisplayCard>
  short={short}
  isLiked={likedShorts.has(short.id)}
  isFollowed={followedChannels.has(short.channelName)}
@@ -686,7 +685,7 @@ return;
 // FIXED:  </div>
 
  {/* Comment Modal */}
- <CommentModal
+ <CommentModal>
  isOpen={commentModalOpen} />
  onClose={() => {
  setCommentModalOpen(false);

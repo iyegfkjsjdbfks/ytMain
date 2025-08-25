@@ -114,7 +114,7 @@ export class UnifiedDataService {
  const cached =;
  this.getCachedData < UnifiedDataResponse < UnifiedVideoMetadata>>(cacheKey);
 
- if (cached as any) {
+ if (cached) {
  return cached;
  }
 
@@ -181,7 +181,7 @@ export class UnifiedDataService {
  const cached =;
  this.getCachedData < UnifiedDataResponse < UnifiedVideoMetadata>>(cacheKey);
 
- if (cached as any) {
+ if (cached) {
  return cached;
  }
 
@@ -250,7 +250,7 @@ export class UnifiedDataService {
 
  // Handle URLs that might be passed as IDs
  const youtubeId = getYouTubeVideoId(id);
- if (youtubeId as any) {
+ if (youtubeId) {
  return youtubeId;
  }
 
@@ -271,7 +271,7 @@ export class UnifiedDataService {
  const cacheKey = `video:${id}`;
  const cached = this.getCachedData < UnifiedVideoMetadata>(cacheKey);
 
- if (cached as any) {
+ if (cached) {
  logger.debug(
  `✅ UnifiedDataService: Returning cached video for ID: ${id}`
  );
@@ -296,7 +296,7 @@ export class UnifiedDataService {
  const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
  if (youtubeVideos.length > 0) {
  const video = youtubeVideos[0];
- if (video as any) {
+ if (video) {
  logger.debug(
  '✅ Successfully fetched metadata from YouTube Data API v3 (primary source):',
  video.title
@@ -378,7 +378,7 @@ export class UnifiedDataService {
  googleSearchVideo
  );
 
- if (googleSearchVideo as any) {
+ if (googleSearchVideo) {
  logger.debug(
  `✅ Found Google Custom Search video in store: ${googleSearchVideo.title}`
  );
@@ -474,7 +474,7 @@ export class UnifiedDataService {
  '🔄 fetchSingleVideoFromGoogleSearch returned:',
  googleSearchVideo
  );
- if (googleSearchVideo as any) {
+ if (googleSearchVideo) {
  logger.debug(
  `✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`
  );
@@ -566,7 +566,7 @@ export class UnifiedDataService {
  `UnifiedDataService: Extracted YouTube ID: ${youtubeId} from ${id}`
  );
 
- if (youtubeId as any) {
+ if (youtubeId) {
  // Check if YouTube API is blocked by admin settings
  const youtubeApiBlocked = isYouTubeDataApiBlocked();
 
@@ -582,7 +582,7 @@ export class UnifiedDataService {
  if (youtubeVideos.length > 0) {
  const video = youtubeVideos[0];
  logger.debug('Successfully fetched YouTube video:', video);
- if (video as any) {
+ if (video) {
  logger.debug('Video metadata details:', {
  id: video.id,
  title: video.title,
@@ -657,7 +657,7 @@ export class UnifiedDataService {
   } catch (error) {
  logger.warn('Failed to fetch YouTube video:', error);
  }
- } else if (youtubeApiBlocked as any) {
+ } else if (youtubeApiBlocked) {
  logger.debug(
  '🔒 YouTube API is blocked by admin settings (Google Custom Search selected). Skipping YouTube API fetch.'
  );
@@ -743,7 +743,7 @@ export class UnifiedDataService {
  const cacheKey = `channel:${id}`;
  const cached = this.getCachedData < UnifiedChannelMetadata>(cacheKey);
 
- if (cached as any) {
+ if (cached) {
  return cached;
  }
 
@@ -751,11 +751,10 @@ export class UnifiedDataService {
  if (this.config.sources.youtube) {
  try {
  const youtubeChannel = await youtubeService.fetchChannel(id);
- if (youtubeChannel as any) {
+ if (youtubeChannel) {
  const normalized =;
  metadataNormalizationService.normalizeYouTubeChannel(
- youtubeChannel as any
- );
+ youtubeChannel);
  this.setCachedData(cacheKey, normalized);
  return normalized;
     }
@@ -809,7 +808,7 @@ export class UnifiedDataService {
  );
 
  // Fallback to YouTube Data API v3 for discovery if Google Custom Search fails
- if (API_KEY as any) {
+ if (API_KEY) {
  logger.debug('🔄 Falling back to YouTube Data API v3 for discovery');
  const trendingQueries = [;
  'trending',
@@ -820,7 +819,7 @@ export class UnifiedDataService {
  'news'];
  const randomQuery =;
  trendingQueries[Math.floor(Math.random() * trendingQueries.length)];
- if (randomQuery as any) {
+ if (randomQuery) {
  return this.searchYouTubeVideos(randomQuery, filters);
  }
  return [];
@@ -1091,7 +1090,7 @@ export class UnifiedDataService {
  }
 
  const isExpired = Date.now() - cached.timestamp > this.config.caching.ttl;
- if (isExpired as any) {
+ if (isExpired) {
  this.cache.delete(key);
  return null;
  }

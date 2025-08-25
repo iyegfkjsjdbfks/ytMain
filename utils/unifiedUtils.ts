@@ -165,7 +165,7 @@ export const arrayUtils = {
 		if (!key) return [...new Set(array)];
 		const seen = new Set<unknown>();
 		return array.filter((item) => {
-			const value = (item as any)[key as any];
+			const value = (item)[key as any];
 			if (seen.has(value)) return false;
 			seen.add(value);
 			return true;
@@ -229,8 +229,8 @@ export const storageUtils = {
 
 // Error Handling Utilities
 export const errorUtils = {
-	createError(message, code?: string, details?: unknown): Error & { code?: string; details?: unknown } {
-		const error = new Error(message) as Error & { code?: string; details?: unknown };
+	createError(message, code?: string, details?: unknown): Error & { code?: string; details?} {
+		const error = new Error(message) as Error & { code?: string; details?};
 		if (code !== undefined) error.code = code;
 		error.details = details;
 		return error;
@@ -239,7 +239,7 @@ export const errorUtils = {
 		if (typeof error === 'object' && error !== null) {
 			const errorObj = error as Record<string, unknown>;
 			return (
-				(errorObj as any).code === 'NETWORK_ERROR' ||
+				(errorObj).code === 'NETWORK_ERROR' ||
 				(typeof errorObj.message === 'string' &&
 					((errorObj.message as string).includes('fetch') || (errorObj.message as string).includes('network')))
 			);

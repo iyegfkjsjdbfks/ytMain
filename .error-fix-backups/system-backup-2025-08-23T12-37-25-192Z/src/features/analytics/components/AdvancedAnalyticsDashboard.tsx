@@ -67,7 +67,7 @@ const MetricCard: React.FC < MetricCardProps> = ({}
  return val;
  }
 
- switch (format as any) {}
+ switch (format) {}
  case 'duration':
  const hours = Math.floor(val / 3600);
  const minutes = Math.floor((val % 3600) / 60);
@@ -80,17 +80,17 @@ const MetricCard: React.FC < MetricCardProps> = ({}
  };
 
  return (
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  {title}
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - gray - 900 dark:text - white mt - 1'>
+ <p className={'tex}t - 2xl font - bold text - gray - 900 dark:text - white mt - 1'>
  {formatValue(value)}
 // FIXED:  </p>
  {change !== undefined && (}
- <div
+ <div>
 // FIXED:  className={`flex items - center mt - 2 text - sm ${ />}
  change >= 0 ? 'text - green - 600' : 'text - red - 600'
  }`}
@@ -221,24 +221,24 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
  value: item.selectedMetric }));
 
  return (
- <div className='min - h - screen bg - gray - 50 dark:bg - gray - 900 p - 6'>
- <div className='max - w - 7xl mx - auto'>
+ <div className={'mi}n - h - screen bg - gray - 50 dark:bg - gray - 900 p - 6'>
+ <div className={'ma}x - w - 7xl mx - auto'>
  {/* Header */}
- <div className='flex items - center justify - between mb - 8'>
+ <div className={'fle}x items - center justify - between mb - 8'>
  <div>
- <h1 className='text - 3xl font - bold text - gray - 900 dark:text - white'>
+ <h1 className={'tex}t - 3xl font - bold text - gray - 900 dark:text - white'>
  Analytics Dashboard
 // FIXED:  </h1>
- <p className='text - gray - 600 dark:text - gray - 400 mt - 2'>
+ <p className={'tex}t - gray - 600 dark:text - gray - 400 mt - 2'>
  Track your channel's performance and audience insights
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className='flex items - center gap - 4'>
- <select
+ <div className={'fle}x items - center gap - 4'>
+ <select>
 // FIXED:  value={timeRange} />
 // FIXED:  onChange={e => setTimeRange(e.target.value as any: React.ChangeEvent)}
-// FIXED:  className='px - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - lg bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white'
+// FIXED:  className={'p}x - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - lg bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white'
  >
  <option value='7d'>Last 7 days</option>
  <option value='30d'>Last 30 days</option>
@@ -246,7 +246,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
  <option value='1y'>Last year</option>
 // FIXED:  </select>
 
- <button className='flex items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'>
+ <button className={'fle}x items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'>
  <CalendarIcon className='w - 4 h - 4' />
  Export Report
 // FIXED:  </button>
@@ -254,15 +254,15 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Key Metrics */}
- <div className='grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 8'>
- <MetricCard
+ <div className={'gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 8'>
+ <MetricCard>
  title='Total Views'
 // FIXED:  value={analyticsData.overview.totalViews}
  change={12.5}
  icon={EyeIcon}
  iconColor='bg - blue - 500' />
  />
- <MetricCard
+ <MetricCard>
  title='Watch Time'
 // FIXED:  value={analyticsData.overview.totalWatchTime}
  change={8.3}
@@ -270,14 +270,14 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
  iconColor='bg - green - 500'
  format='duration' />
  />
- <MetricCard
+ <MetricCard>
  title='Subscribers'
 // FIXED:  value={analyticsData.overview.subscribers}
  change={-2.1}
  icon={UserGroupIcon}
  iconColor='bg - purple - 500' />
  />
- <MetricCard
+ <MetricCard>
  title='Avg. View Duration'
 // FIXED:  value={analyticsData.overview.averageViewDuration}
  change={5.7}
@@ -287,15 +287,15 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Performance Chart */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700 mb - 8'>
- <div className='flex items - center justify - between mb - 6'>
- <h2 className='text - lg font - semibold text - gray - 900 dark:text - white'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700 mb - 8'>
+ <div className={'fle}x items - center justify - between mb - 6'>
+ <h2 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  Performance Overview
 // FIXED:  </h2>
- <div className='flex space - x - 2'>
+ <div className={'fle}x space - x - 2'>
  {(['views', 'watchTime', 'subscribers', 'revenue'] as const).map(}
  metric => (
- <button
+ <button>
  key={metric} />
 // FIXED:  onClick={() => setSelectedMetric(metric: React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 1 rounded - full text - sm font - medium transition - colors ${}
@@ -314,9 +314,9 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
  {/* Simple chart representation */}
  <div className='h - 64 flex items - end justify - between gap - 1'>
  {chartData.slice(-14).map((item, index) => (}
- <div
+ <div>
  key={index}
-// FIXED:  className='bg - blue - 500 rounded - t flex - 1 min - w - 0 transition - all hover:bg - blue - 600'
+// FIXED:  className={'b}g - blue - 500 rounded - t flex - 1 min - w - 0 transition - all hover:bg - blue - 600'
 // FIXED:  style={{ />,}
  height: `${(item.value / Math.max(...chartData.map((d) => d.value))) * 100}%`,
  minHeight: '4px' }
@@ -326,28 +326,28 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='grid grid - cols - 1 lg:grid - cols - 2 gap - 8 mb - 8'>
+ <div className={'gri}d grid - cols - 1 lg:grid - cols - 2 gap - 8 mb - 8'>
  {/* Top Videos */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
  Top Performing Videos
 // FIXED:  </h3>
- <div className='space - y - 4'>
+ <div className={'spac}e - y - 4'>
  {analyticsData.topVideos.map((video, index) => (}
- <div key={video.id} className='flex items - center gap - 4'>
- <div className='text - sm font - medium text - gray - 500 dark:text - gray - 400 w - 6'>
+ <div key={video.id} className={'fle}x items - center gap - 4'>
+ <div className={'tex}t - sm font - medium text - gray - 500 dark:text - gray - 400 w - 6'>
  #{index + 1}
 // FIXED:  </div>
- <img
+ <img>
 // FIXED:  src={video.thumbnail}
 // FIXED:  alt={video.title}
 // FIXED:  className='w - 16 h - 9 object - cover rounded' />
  />
- <div className='flex - 1 min - w - 0'>
- <h4 className='text - sm font - medium text - gray - 900 dark:text - white truncate'>
+ <div className={'fle}x - 1 min - w - 0'>
+ <h4 className={'tex}t - sm font - medium text - gray - 900 dark:text - white truncate'>
  {video.title}
 // FIXED:  </h4>
- <div className='flex items - center gap - 4 mt - 1 text - xs text - gray - 500 dark:text - gray - 400'>
+ <div className={'fle}x items - center gap - 4 mt - 1 text - xs text - gray - 500 dark:text - gray - 400'>
  <span>{video.views.toLocaleString()} views</span>
  <span>{video.likes.toLocaleString()} likes</span>
  <span>{video.comments.toLocaleString()} comments</span>
@@ -359,34 +359,33 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Demographics */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
  Audience Demographics
 // FIXED:  </h3>
 
- <div className='space - y - 6'>
+ <div className={'spac}e - y - 6'>
  {/* Age Groups */}
  <div>
- <h4 className='text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 3'>
+ <h4 className={'tex}t - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 3'>
  Age Groups
 // FIXED:  </h4>
- <div className='space - y - 2'>
+ <div className={'spac}e - y - 2'>
  {analyticsData.demographics.ageGroups.map((group) => (}
- <div
+ <div>
  key={group.range}
-// FIXED:  className='flex items - center justify - between' />
- >
- <span className='text - sm text - gray - 600 dark:text - gray - 400'>
+// FIXED:  className={'fle}x items - center justify - between'/>
+ <span className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  {group.range}
 // FIXED:  </span>
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  <div className='w - 20 h - 2 bg - gray - 200 dark:bg - gray - 700 rounded - full overflow - hidden'>
- <div
+ <div>
 // FIXED:  className='h - full bg - blue - 500'
 // FIXED:  style={{ width: `${group.percentage}%` } />
  />
 // FIXED:  </div>
-<span className='text - sm font - medium text - gray - 900 dark:text - white w - 12 text - right'>
+<span className={'tex}t - sm font - medium text - gray - 900 dark:text - white w - 12 text - right'>
  {group.percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -397,28 +396,27 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
 
  {/* Top Countries */}
  <div>
- <h4 className='text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 3'>
+ <h4 className={'tex}t - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 3'>
  Top Countries
 // FIXED:  </h4>
- <div className='space - y - 2'>
+ <div className={'spac}e - y - 2'>
  {analyticsData.demographics.countries}
  .slice(0, 5)
  .map((country) => (
- <div
+ <div>
  key={country.country}
-// FIXED:  className='flex items - center justify - between' />
- >
- <span className='text - sm text - gray - 600 dark:text - gray - 400'>
+// FIXED:  className={'fle}x items - center justify - between'/>
+ <span className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  {country.country}
 // FIXED:  </span>
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  <div className='w - 16 h - 2 bg - gray - 200 dark:bg - gray - 700 rounded - full overflow - hidden'>
- <div
+ <div>
 // FIXED:  className='h - full bg - green - 500'
 // FIXED:  style={{ width: `${country.percentage}%` } />
  />
 // FIXED:  </div>
-<span className='text - sm font - medium text - gray - 900 dark:text - white w - 12 text - right'>
+<span className={'tex}t - sm font - medium text - gray - 900 dark:text - white w - 12 text - right'>
  {country.percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -431,43 +429,43 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Device & Engagement Stats */}
- <div className='grid grid - cols - 1 lg:grid - cols - 2 gap - 8'>
+ <div className={'gri}d grid - cols - 1 lg:grid - cols - 2 gap - 8'>
  {/* Device Breakdown */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
  Device Breakdown
 // FIXED:  </h3>
- <div className='space - y - 4'>
- <div className='flex items - center justify - between'>
- <div className='flex items - center gap - 3'>
+ <div className={'spac}e - y - 4'>
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center gap - 3'>
  <DevicePhoneMobileIcon className='w - 5 h - 5 text - blue - 500' />
- <span className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <span className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  Mobile
 // FIXED:  </span>
 // FIXED:  </div>
-<span className='text - sm font - medium text - gray - 900 dark:text - white'>
+<span className={'tex}t - sm font - medium text - gray - 900 dark:text - white'>
  {analyticsData.devices.mobile}%
 // FIXED:  </span>
 // FIXED:  </div>
- <div className='flex items - center justify - between'>
- <div className='flex items - center gap - 3'>
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center gap - 3'>
  <ComputerDesktopIcon className='w - 5 h - 5 text - green - 500' />
- <span className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <span className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  Desktop
 // FIXED:  </span>
 // FIXED:  </div>
-<span className='text - sm font - medium text - gray - 900 dark:text - white'>
+<span className={'tex}t - sm font - medium text - gray - 900 dark:text - white'>
  {analyticsData.devices.desktop}%
 // FIXED:  </span>
 // FIXED:  </div>
- <div className='flex items - center justify - between'>
- <div className='flex items - center gap - 3'>
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center gap - 3'>
  <GlobeAltIcon className='w - 5 h - 5 text - purple - 500' />
- <span className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <span className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  Tablet
 // FIXED:  </span>
 // FIXED:  </div>
-<span className='text - sm font - medium text - gray - 900 dark:text - white'>
+<span className={'tex}t - sm font - medium text - gray - 900 dark:text - white'>
  {analyticsData.devices.tablet}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -475,52 +473,52 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Engagement Metrics */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
  Engagement Metrics
 // FIXED:  </h3>
- <div className='grid grid - cols - 2 gap - 4'>
- <div className='text - center'>
- <div className='flex items - center justify - center w - 12 h - 12 bg - red - 100 dark:bg - red - 900 rounded - full mx - auto mb - 2'>
+ <div className={'gri}d grid - cols - 2 gap - 4'>
+ <div className={'tex}t - center'>
+ <div className={'fle}x items - center justify - center w - 12 h - 12 bg - red - 100 dark:bg - red - 900 rounded - full mx - auto mb - 2'>
  <HeartIcon className='w - 6 h - 6 text - red - 600' />
 // FIXED:  </div>
-<p className='text - lg font - semibold text - gray - 900 dark:text - white'>
+<p className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  {analyticsData.engagement.likes.toLocaleString()}
 // FIXED:  </p>
- <p className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  Likes
 // FIXED:  </p>
 // FIXED:  </div>
- <div className='text - center'>
- <div className='flex items - center justify - center w - 12 h - 12 bg - blue - 100 dark:bg - blue - 900 rounded - full mx - auto mb - 2'>
+ <div className={'tex}t - center'>
+ <div className={'fle}x items - center justify - center w - 12 h - 12 bg - blue - 100 dark:bg - blue - 900 rounded - full mx - auto mb - 2'>
  <ChatBubbleLeftIcon className='w - 6 h - 6 text - blue - 600' />
 // FIXED:  </div>
-<p className='text - lg font - semibold text - gray - 900 dark:text - white'>
+<p className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  {analyticsData.engagement.comments.toLocaleString()}
 // FIXED:  </p>
- <p className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  Comments
 // FIXED:  </p>
 // FIXED:  </div>
- <div className='text - center'>
- <div className='flex items - center justify - center w - 12 h - 12 bg - green - 100 dark:bg - green - 900 rounded - full mx - auto mb - 2'>
+ <div className={'tex}t - center'>
+ <div className={'fle}x items - center justify - center w - 12 h - 12 bg - green - 100 dark:bg - green - 900 rounded - full mx - auto mb - 2'>
  <ShareIcon className='w - 6 h - 6 text - green - 600' />
 // FIXED:  </div>
-<p className='text - lg font - semibold text - gray - 900 dark:text - white'>
+<p className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  {analyticsData.engagement.shares.toLocaleString()}
 // FIXED:  </p>
- <p className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  Shares
 // FIXED:  </p>
 // FIXED:  </div>
- <div className='text - center'>
- <div className='flex items - center justify - center w - 12 h - 12 bg - purple - 100 dark:bg - purple - 900 rounded - full mx - auto mb - 2'>
+ <div className={'tex}t - center'>
+ <div className={'fle}x items - center justify - center w - 12 h - 12 bg - purple - 100 dark:bg - purple - 900 rounded - full mx - auto mb - 2'>
  <UserGroupIcon className='w - 6 h - 6 text - purple - 600' />
 // FIXED:  </div>
-<p className='text - lg font - semibold text - gray - 900 dark:text - white'>
+<p className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  +{analyticsData.engagement.subscribersGained.toLocaleString()}
 // FIXED:  </p>
- <p className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  New Subscribers
 // FIXED:  </p>
 // FIXED:  </div>

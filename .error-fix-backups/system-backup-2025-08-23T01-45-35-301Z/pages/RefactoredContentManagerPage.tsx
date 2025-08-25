@@ -87,7 +87,7 @@ const RefactoredContentManagerPage: React.FC = () => {}
  try {}
  await action();
  } catch (error) {}
- (console as any).error('Action failed:', error);
+ (console).error('Action failed:', error);
  // Handle error if needed
  }
 
@@ -95,7 +95,7 @@ const RefactoredContentManagerPage: React.FC = () => {}
 
  // Filter videos based on active tab
  const filteredVideos = videos.filter((video) => {}
- switch (activeTab as any) {}
+ switch (activeTab) {}
  case 'published':
  return video.visibility === 'public';
  case 'unlisted':
@@ -228,12 +228,12 @@ return {}
 
  // Custom video card with management actions
  // const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }: any) => (
- // <div className="relative group">
+ // <div className={"relativ}e group">
  // <VideoCard video={video} />
  //
  // {/* Management Overlay */}
- // <div className="absolute inset - 0 bg - black / 50 opacity - 0 group - hover:opacity - 100 transition - opacity duration - 200 flex items - center justify - center space - x-2">
- // <Button
+ // <div className={"absolut}e inset - 0 bg - black / 50 opacity - 0 group - hover:opacity - 100 transition - opacity duration - 200 flex items - center justify - center space - x-2">
+ // <Button>
  // size="sm"
  // variant="secondary" />
  // onClick={() => openEditModal(video: React.MouseEvent)}
@@ -241,7 +241,7 @@ return {}
  // >
  // Edit
  // </Button>
- // <Button
+ // <Button>
  // size="sm"
  // variant="danger" />
  // onClick={() => handleVideoDelete(video.id: React.MouseEvent)}
@@ -252,10 +252,10 @@ return {}
  // </div>
  //
  // {/* Status Badge */}
- // <div className="absolute top - 2 right - 2">
- // <Badge
+ // <div className={"absolut}e top - 2 right - 2">
+ // <Badge>
  // variant={video.visibility === 'public' ? 'default' : 'secondary'}
- // className="text - xs" />
+ // className={"tex}t - xs" />
  // >
  // {video.visibility}
  // </Badge>
@@ -263,13 +263,13 @@ return {}
  //
  // {/* Upload Progress */}
  // {uploadProgress[video.id] && (}
- // <div className="absolute bottom - 0 left - 0 right - 0 p - 2 bg - black / 75">
- // <ProgressBar
+ // <div className={"absolut}e bottom - 0 left - 0 right - 0 p - 2 bg - black / 75">
+ // <ProgressBar>
  // value={uploadProgress[video.id].progress || 0}
  // size="sm"
  // className="h - 1" />
  // />
- // <p className="text - white text - xs mt - 1">
+ // <p className={"tex}t - white text - xs mt - 1">
  // {uploadProgress[video.id].status}
  // </p>
  // </div>
@@ -286,7 +286,7 @@ return {}
  drafts: videos.filter((v) => v.visibility === 'private').length };
 
  return (
- <StandardPageLayout
+ <StandardPageLayout>
  loading={videosLoading}
  error={videosError}
  isEmpty={videos.length === 0}
@@ -297,16 +297,16 @@ return {}
 // FIXED:  </Button>
  }
  emptyComponent={}
- <div className="flex flex - col items - center justify - center min - h-[400px] text - center">
- <div className="text - gray - 400 mb - 4">
+ <div className={"fle}x flex - col items - center justify - center min - h-[400px] text - center">
+ <div className={"tex}t - gray - 400 mb - 4">
  <svg className="w - 16 h - 16 mx - auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553 - 2.276A1 1 0 0121 8.618v6.764a1 1 0 01 - 1.447.894L15 14M5 18h8a2 2 0 002 - 2V8a2 2 0 00 - 2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
 // FIXED:  </svg>
 // FIXED:  </div>
-<h3 className="text - lg font - medium text - gray - 900 dark:text - white mb - 2">
+<h3 className={"tex}t - lg font - medium text - gray - 900 dark:text - white mb - 2">
  No videos found
 // FIXED:  </h3>
- <p className="text - gray - 500 dark:text - gray - 400 mb - 4">
+ <p className={"tex}t - gray - 500 dark:text - gray - 400 mb - 4">
  Upload your first video to get started!
 // FIXED:  </p>
  <Button onClick={() => setIsUploadModalOpen(true: React.MouseEvent)}>
@@ -317,14 +317,14 @@ return {}
  >
  {/* Action Error */}
  {actionError && (}
- <div className="mb - 4 p - 4 bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded - lg">
- <p className="text - red - 600 dark:text - red - 400 text - sm">{actionError}</p>
+ <div className={"m}b - 4 p - 4 bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded - lg">
+ <p className={"tex}t - red - 600 dark:text - red - 400 text - sm">{actionError}</p>
 // FIXED:  </div>
  )}
 
  {/* Content Tabs */}
  <Tabs value={activeTab} onValueChange={setActiveTab} className="w - full">
- <TabsList className="grid w - full grid - cols - 5">
+ <TabsList className={"gri}d w - full grid - cols - 5">
  <TabsTrigger value="all">
  All ({tabCounts.all})
 // FIXED:  </TabsTrigger>
@@ -342,26 +342,26 @@ return {}
 // FIXED:  </TabsTrigger>
 // FIXED:  </TabsList>
 
- <TabsContent value={activeTab} className="mt - 6">
- <ReusableVideoGrid
+ <TabsContent value={activeTab} className={"m}t - 6">
+ <ReusableVideoGrid>
  videos={filteredVideos}
  loading={false}
  error={null}
  emptyMessage={`No ${activeTab} videos found.`}
  columns={4}
-// FIXED:  className="grid - cols - 1 sm:grid - cols - 2 lg:grid - cols - 3 xl:grid - cols - 4" />
+// FIXED:  className={"gri}d - cols - 1 sm:grid - cols - 2 lg:grid - cols - 3 xl:grid - cols - 4" />
  />
 // FIXED:  </TabsContent>
 // FIXED:  </Tabs>
 
  {/* Upload Modal */}
- <BaseModal
+ <BaseModal>
  isOpen={isUploadModalOpen} />
  onClose={() => setIsUploadModalOpen(false)}
  title="Upload Video"
  size="lg"
  >
- <BaseForm
+ <BaseForm>
  fields={uploadFormFields} />
 // FIXED:  onSubmit={(e: React.FormEvent) => handleVideoUpload(e)}
  submitLabel="Upload Video"
@@ -371,7 +371,7 @@ return {}
 // FIXED:  </BaseModal>
 
  {/* Edit Modal */}
- <BaseModal
+ <BaseModal>
  isOpen={isEditModalOpen} />
  onClose={() => {}
  setIsEditModalOpen(false);
@@ -380,7 +380,7 @@ return {}
  title="Edit Video"
  size="lg"
  >
- <BaseForm
+ <BaseForm>
  fields={editFormFields} />
 // FIXED:  onSubmit={(e: React.FormEvent) => handleVideoEdit(e)}
  submitLabel="Update Video"

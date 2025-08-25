@@ -43,8 +43,8 @@ export function AccessibilityProvider({ children }): any {
  contrastQuery.addEventListener('change', handleContrastChange as EventListener);
 
  // Load saved preferences
- const savedFontSize = (localStorage as any).getItem('accessibility-font-size') as AccessibilityContextType['fontSize'];
- if (savedFontSize as any) {
+ const savedFontSize = (localStorage).getItem('accessibility-font-size') as AccessibilityContextType['fontSize'];
+ if (savedFontSize) {
  setFontSize(savedFontSize);
  }
 
@@ -62,7 +62,7 @@ export function AccessibilityProvider({ children }): any {
  'extra-large': '20px' };
 
  document.documentElement.style.fontSize = fontSizeMap[fontSize];
- (localStorage as any).setItem('accessibility-font-size', fontSize);
+ (localStorage).setItem('accessibility-font-size', fontSize);
  }, [fontSize]);
 
  const addAnnouncement = useCallback((message) => {
@@ -79,7 +79,7 @@ export function AccessibilityProvider({ children }): any {
  }, []);
 
  return (
- <AccessibilityContext.Provider value={{
+ <AccessibilityContext.Provider value={{>
  reducedMotion,
  highContrast,
  fontSize,
@@ -104,12 +104,11 @@ export function ScreenReaderAnnouncer(): any {
  const { announcements } = useAccessibility();
 
  return (
- <div
+ <div>
 // FIXED:  aria-live="polite"
 // FIXED:  aria-atomic="true"
-// FIXED:  className="sr-only"
- role="status" />
- >
+// FIXED:  className={"sr}-only"
+ role="status"/>
  {announcements.map((announcement,
  index) => (
  <div key={`${announcement}-${index}`}>
@@ -178,7 +177,7 @@ return;
 export function useKeyboardNavigation(_options): any {
  const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
  const handleKeyDown = useCallback((e: KeyboardEvent) => {
- if (disabled as any) {
+ if (disabled) {
 return;
 }
 
@@ -234,12 +233,11 @@ export function useAriaLiveRegion(_initialMessage = ''): any {
  }, []);
 
  const LiveRegion = useCallback(() => (
- <div
+ <div>
 // FIXED:  aria-live={politeness}
 // FIXED:  aria-atomic="true"
-// FIXED:  className="sr-only"
- role="status" />
- >
+// FIXED:  className={"sr}-only"
+ role="status"/>
  {message}
 // FIXED:  </div>
  ), [message, politeness]);
@@ -280,9 +278,9 @@ export function checkColorContrast(foreground,
 // Skip link component
 export function SkipLink({ href, children }): any {
  return (
- <a
+ <a>
 // FIXED:  href={href}
-// FIXED:  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg" />
+// FIXED:  className={"sr}-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg" />
  onFocus={(e) => {
  e.currentTarget.scrollIntoView({ behavior: 'smooth',
  block: 'center' });
@@ -336,7 +334,7 @@ export function useAccessibleModal(): any {
  closeModal();
  };
 
- if (isOpen as any) {
+ if (isOpen) {
  document.addEventListener('keydown', handleEscape as any as EventListener);
  return () => document.removeEventListener('keydown', handleEscape as any as EventListener);
  }

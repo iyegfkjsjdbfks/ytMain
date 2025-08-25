@@ -24,7 +24,7 @@ export class VideoService {
         method: 'GET', headers: {
           'Content-Type': 'application/json'
         };
-      }: unknown);
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

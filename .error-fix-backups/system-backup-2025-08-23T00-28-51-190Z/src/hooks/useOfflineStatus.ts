@@ -107,9 +107,9 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
  // Get offline statistics
  const getOfflineStats = useCallback(() => {
- const stats = (localStorage as any).getItem('offline-stats');
+ const stats = (localStorage).getItem('offline-stats');
 
- if (stats as any) {
+ if (stats) {
  try {
  return JSON.parse(stats);
  } catch (error) {
@@ -130,7 +130,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
  async (url = '/api/ping'): Promise<boolean> => {
  try {
  const startTime = Date.now();
- const response = await (fetch as any)(url, {
+ const response = await (fetch)(url, {
  method: 'HEAD',
  cache: 'no-cache',
  signal: AbortSignal.timeout(5000), // 5 second timeout
@@ -170,7 +170,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
  try {
  const startTime = Date.now();
- const response = await (fetch as any)('/api/speed-test', {
+ const response = await (fetch)('/api/speed-test', {
  method: 'GET',
  cache: 'no-cache',
  signal: AbortSignal.timeout(10000) });
@@ -207,7 +207,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
  stats.totalOfflineTime += offlineTime;
  }
  try {
- (localStorage as any).setItem('offline-stats', JSON.stringify(stats));
+ (localStorage).setItem('offline-stats', JSON.stringify(stats));
  } catch (error) {
  conditionalLogger.error(
  'Failed to save offline stats',
@@ -222,9 +222,9 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
  // Get network information
  const getNetworkInfo = useCallback((): NetworkConnection | null => {
  const connection =
- (navigator as any).connection ||
- (navigator as any).mozConnection ||
- (navigator as any).webkitConnection;
+ (navigator).connection ||
+ (navigator).mozConnection ||
+ (navigator).webkitConnection;
 
  if (!connection) {
  return null;
@@ -259,7 +259,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
  updateOfflineStats(false);
 
- if (offlineTimer as any) {
+ if (offlineTimer) {
  clearInterval(offlineTimer);
  offlineTimer = null;
  }
@@ -313,7 +313,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
  // Listen for connection changes
  const { connection } = navigator as any;
- if (connection as any) {
+ if (connection) {
  connection.addEventListener('change', handleConnectionChange as EventListener);
  }
 
@@ -325,11 +325,11 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
  window.removeEventListener('online', handleOnline as EventListener);
  window.removeEventListener('offline', handleOffline as EventListener);
 
- if (connection as any) {
+ if (connection) {
  connection.removeEventListener('change', handleConnectionChange as EventListener);
  }
 
- if (offlineTimer as any) {
+ if (offlineTimer) {
  clearInterval(offlineTimer);
  };
  }, [getNetworkInfo, updateOfflineStats]);

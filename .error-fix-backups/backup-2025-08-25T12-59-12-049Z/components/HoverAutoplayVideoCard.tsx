@@ -123,7 +123,7 @@ return duration;
 
  // Handle iframe errors
  const handleIframeError = () => {
- (console as any).warn('YouTube iframe failed to load for video:', videoId);
+ (console).warn('YouTube iframe failed to load for video:', videoId);
  setHasError(true);
  setShowIframe(false);
  };
@@ -149,17 +149,17 @@ return duration;
  }}, []);
 
  return (
- <div
+ <div>
   className={`group cursor-pointer ${className}`}
   onMouseEnter={handleMouseEnter}
   onMouseLeave={handleMouseLeave}
  >
  {/* Video Thumbnail/Player */}
- <div className="relative mb-3">
+ <div className={"relativ}e mb-3">
  <Link to={`/watch/${video.id}`}>
- <div className="relative w-full" style={{ height: '250px' }}>
+ <div className={"relativ}e w-full" style={{ height: '250px' }}>
  {/* Thumbnail - always visible as background */}
- <ImageWithFallback
+ <ImageWithFallback>
  src={video.thumbnailUrl || video.thumbnail}
   alt={video.title}
   className={`absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-300 ${
@@ -172,12 +172,12 @@ return duration;
 
  {/* YouTube iframe - shown on hover */}
  {showIframe && videoId && (
- <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden bg-black">
- <iframe
+ <div className={"absolut}e inset-0 w-full h-full rounded-lg overflow-hidden bg-black">
+ <iframe>
  key={`hover-${videoId}-${iframeKey}`} // Force remount when mute changes
  src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&rel=0&modestbranding=1&playsinline=1&fs=0&disablekb=1&iv_load_policy=3&start=0&end=30&loop=1&playlist=${videoId}&origin=${encodeURIComponent(window.location.origin)}&enablejsapi=0`}
  title={`Preview: ${video.title}`}
- className="w-full h-full border-0"
+ className={"w}-full h-full border-0"
  allow="autoplay; encrypted-media"
  allowFullScreen={false}
  loading="lazy"
@@ -190,9 +190,9 @@ return duration;
  />
 
  {/* Mute/Unmute Button */}
- <button
+ <button>
   onClick={toggleMute}
-  className="absolute bottom-2 left-2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition-all duration-200 z-10"
+  className={"absolut}e bottom-2 left-2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition-all duration-200 z-10"
   style={{ pointerEvents: 'auto' }}
   title={isMuted ? 'Unmute video' : 'Mute video'}
  >
@@ -213,7 +213,7 @@ return duration;
 
  {/* Duration Badge */}
  {video.duration && video.duration !== '0:00' && (
- <div className={`absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded-sm font-medium transition-opacity duration-200 ${
+ <div className={`absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded-sm font-medium transition-opacity duration-200 ${>
  showIframe ? 'opacity-0' : 'opacity-100'
  }`}>
  {formatDuration(video.duration)}
@@ -222,7 +222,7 @@ return duration;
 
  {/* Hover indicator */}
  {isHovered && !showIframe && videoId && (
- <div className={`absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-sm font-medium ${
+ <div className={`absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-sm font-medium ${>
  hasError ? 'bg-gray-600' : 'bg-red-600'
  }`}>
  {hasError ? 'Thumbnail Only' : 'Preview'}
@@ -233,14 +233,14 @@ return duration;
   </div>
 
  {/* Video Info */}
- <div className="flex gap-3">
+ <div className={"fle}x gap-3">
  {/* Channel Avatar */}
  {(video.channelAvatarUrl || video.thumbnail) && (
- <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
- <ImageWithFallback
+ <Link to={`/channel/${video.channelId}`} className={"flex}-shrink-0">
+ <ImageWithFallback>
  src={video.channelAvatarUrl || video.thumbnail}
   alt={video.channelName || video.channelTitle || 'Channel'}
-  className="w-9 h-9 rounded-full object-cover"
+  className={"w}-9 h-9 rounded-full object-cover"
  width={36}
  height={36}
  fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName || 'channel'}`}
@@ -249,25 +249,25 @@ return duration;
  )}
 
  {/* Video Details */}
- <div className="flex-1 min-w-0">
+ <div className={"flex}-1 min-w-0">
  {/* Video Title */}
  <Link to={`/watch/${video.id}`}>
- <h3 className="font-medium text-black dark:text-white line-clamp-2 text-sm leading-5 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+ <h3 className={"font}-medium text-black dark:text-white line-clamp-2 text-sm leading-5 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
  {video.title}
 </h3>
 </Link>
 
  {/* Channel Name */}
  <Link to={`/channel/${video.channelId}`}>
- <p className="text-gray-600 dark:text-gray-400 text-sm hover:text-gray-800 dark:hover:text-white transition-colors">
+ <p className={"text}-gray-600 dark:text-gray-400 text-sm hover:text-gray-800 dark:hover:text-white transition-colors">
  {video.channelName || video.channelTitle || 'Unknown Channel'}
 </p>
 </Link>
 
  {/* Views and Upload Time */}
- <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+ <div className={"fle}x items-center text-gray-600 dark:text-gray-400 text-sm">
  <span>{formatViews(video.views)} views</span>
- <span className="mx-1">•</span>
+ <span className={"mx}-1">•</span>
  <span>
  {(() => {
  try {

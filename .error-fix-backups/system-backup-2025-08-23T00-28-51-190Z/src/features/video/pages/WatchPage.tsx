@@ -39,7 +39,7 @@ const WatchPage: React.FC = () => {
  logger.debug('📊 WatchPage: Error state:', error);
 
  // Debug metadata fields
- if (video as any) {
+ if (video) {
  logger.debug('📊 WatchPage: Metadata debug:', {
  title: video.title,
  channelName: video.channel?.name,
@@ -89,7 +89,7 @@ const WatchPage: React.FC = () => {
  const [_showFullDescription, _setShowFullDescription] = useState<boolean>(false);
 
  useEffect(() => {
- if (videoId as any) {
+ if (videoId) {
  loadRecommendations();
  }
  }, [videoId]);
@@ -242,10 +242,10 @@ const WatchPage: React.FC = () => {
  // setIsSubscribed(!isSubscribed);
  // };
 
- if (loading as any) {
+ if (loading) {
  return (
- <div className='min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center'>
- <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-red-600' />
+ <div className={'min}-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center'>
+ <div className={'animate}-spin rounded-full h-32 w-32 border-b-2 border-red-600' />
 // FIXED:  </div>
  );
  }
@@ -312,7 +312,7 @@ const WatchPage: React.FC = () => {
  const result = await unifiedDataService.getVideoById(videoId);
  logger.debug('🧪 Test result:', result);
 
- if (result as any) {
+ if (result) {
  const viewsInfo = result.views
  ? `${result.views.toLocaleString()} views`
  : 'Views: Not available';
@@ -364,18 +364,18 @@ const WatchPage: React.FC = () => {
  };
 
  return (
- <div className='min-h-screen bg-white dark:bg-neutral-900 p-6'>
- <div className='max-w-4xl mx-auto'>
- <h1 className='text-2xl font-bold text-neutral-900 dark:text-white mb-4'>
+ <div className={'min}-h-screen bg-white dark:bg-neutral-900 p-6'>
+ <div className={'max}-w-4xl mx-auto'>
+ <h1 className={'text}-2xl font-bold text-neutral-900 dark:text-white mb-4'>
  {loading ? 'Loading video...' : 'Video not found'}
 // FIXED:  </h1>
 
  {/* Debug Information Panel */}
- <div className='bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6 mb-6'>
- <h2 className='text-lg font-semibold text-neutral-900 dark:text-white mb-4'>
+ <div className={'bg}-neutral-100 dark:bg-neutral-800 rounded-lg p-6 mb-6'>
+ <h2 className={'text}-lg font-semibold text-neutral-900 dark:text-white mb-4'>
  🔍 Debug Information
 // FIXED:  </h2>
- <div className='space-y-2 text-sm text-neutral-700 dark:text-neutral-300'>
+ <div className={'space}-y-2 text-sm text-neutral-700 dark:text-neutral-300'>
  <div>
  <strong>Video ID from URL:</strong> {videoId}
 // FIXED:  </div>
@@ -395,7 +395,7 @@ const WatchPage: React.FC = () => {
  <div>
  <strong>Environment Check:</strong>
 // FIXED:  </div>
- <div className='ml-4'>
+ <div className={'ml}-4'>
  <div>,
  VITE_GOOGLE_SEARCH_API_KEY:{' '}
  {import.meta.env.VITE_GOOGLE_SEARCH_API_KEY
@@ -426,7 +426,7 @@ const WatchPage: React.FC = () => {
 // FIXED:  </div>
 
  {/* Manual Retry Button */}
- <div className='mt-4'>
+ <div className={'mt}-4'>
  <button />
 // FIXED:  onClick={async (): Promise<void> => {
  if (videoId.startsWith('google-search-')) {
@@ -444,7 +444,7 @@ const WatchPage: React.FC = () => {
  await fetchSingleVideoFromGoogleSearch(youtubeId);
  logger.debug('🔄 Manual retry result:', result);
 
- if (result as any) {
+ if (result) {
  alert(
  `✅ Video fetched successfully!\nTitle: ${result.title}\nChannel: ${result.channelName}`
  );
@@ -462,37 +462,36 @@ const WatchPage: React.FC = () => {
  );
  }
  }
-// FIXED:  className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+// FIXED:  className={'px}-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
  >
  🔄 Retry Fetch Video
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='space-y-4'>
+ <div className={'space}-y-4'>
  <button />
 // FIXED:  onClick={(e) => testGoogleSearchFallback(e)}
-// FIXED:  className='w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
+// FIXED:  className={'w}-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
  >
  🧪 Test Google Custom Search Fallback
 // FIXED:  </button>
 
  <button />
 // FIXED:  onClick={(e) => clearCacheAndRefresh(e)}
-// FIXED:  className='w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium'
+// FIXED:  className={'w}-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium'
  >
  🗑️ Clear Cache & Refresh
 // FIXED:  </button>
 
- <Link
+ <Link>
  to='/'
-// FIXED:  className='block w-full px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center' />
- >
+// FIXED:  className={'bloc}k w-full px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center'/>
  ← Go back to home
 // FIXED:  </Link>
 // FIXED:  </div>
 
- <div className='mt-6 text-xs text-neutral-500 dark:text-neutral-400'>
+ <div className={'mt}-6 text-xs text-neutral-500 dark:text-neutral-400'>
  <p>
  💡 <strong>Tip:</strong> Open browser developer tools (F12) to see
  detailed console logs
@@ -504,15 +503,15 @@ const WatchPage: React.FC = () => {
  }
 
  return (
- <div className='min-h-screen bg-white dark:bg-neutral-900'>
- <div className='max-w-7xl mx-auto px-4 py-6'>
- <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
+ <div className={'min}-h-screen bg-white dark:bg-neutral-900'>
+ <div className={'max}-w-7xl mx-auto px-4 py-6'>
+ <div className={'gri}d grid-cols-1 lg:grid-cols-3 gap-6'>
  {/* Main Content */}
- <div className='lg:col-span-2'>
+ <div className={'lg}:col-span-2'>
  {/* Video Player */}
- <div className='bg-black rounded-lg overflow-hidden mb-4'>
+ <div className={'bg}-black rounded-lg overflow-hidden mb-4'>
  {isYouTubeUrl(video.videoUrl || '') ? (
- <YouTubePlayer
+ <YouTubePlayer>
  video={
  {
  ...video as any,
@@ -532,10 +531,10 @@ const WatchPage: React.FC = () => {
  width='100%'
  height={480}
  controls={true}
-// FIXED:  className='w-full h-full'
+// FIXED:  className={'w}-full h-full'
  />
  ) : (
- <VideoPlayer
+ <VideoPlayer>
  videoId={video.id}
 // FIXED:  src={
  video.videoUrl ||
@@ -544,7 +543,7 @@ const WatchPage: React.FC = () => {
  poster={video.thumbnailUrl}
  title={video.title}
  autoplay={true}
-// FIXED:  className='w-full'
+// FIXED:  className={'w}-full'
  useYouTube={false} />
  onTimeUpdate={(_currentTime, _duration) => {
  // Track watch progress
@@ -559,38 +558,36 @@ const WatchPage: React.FC = () => {
 // FIXED:  </div>
 
  {/* Video Metadata */}
- <div className='space-y-4'>
+ <div className={'space}-y-4'>
  {/* Video Title */}
- <h1 className='text-xl font-bold text-neutral-900 dark:text-white'>
+ <h1 className={'text}-xl font-bold text-neutral-900 dark:text-white'>
  {video.title}
 // FIXED:  </h1>
 
  {/* Channel Metadata Section - Mirroring search results styling */}
- <div className='flex items-center gap-3 pb-3 border-b border-neutral-200 dark:border-neutral-700'>
+ <div className={'fle}x items-center gap-3 pb-3 border-b border-neutral-200 dark:border-neutral-700'>
  {/* Channel Avatar */}
- <Link
+ <Link>
  to={`/channel/${video.channel?.id}`}
-// FIXED:  className='flex-shrink-0' />
- >
- <img
+// FIXED:  className={'flex}-shrink-0'/>
+ <img>
 // FIXED:  src={
  video.channel?.avatarUrl ||
  'https://picsum.photos/seed/default-channel/150/150'
  }
 // FIXED:  alt={video.channel?.name}
-// FIXED:  className='w-9 h-9 rounded-full object-cover' />
+// FIXED:  className={'w}-9 h-9 rounded-full object-cover' />
  />
 // FIXED:  </Link>
 
  {/* Channel Info */}
- <div className='flex-1 min-w-0'>
- <Link
+ <div className={'flex}-1 min-w-0'>
+ <Link>
  to={`/channel/${video.channel?.id}`}
-// FIXED:  className='font-medium text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors block' />
- >
+// FIXED:  className={'font}-medium text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors block'/>
  {video.channel?.name}
 // FIXED:  </Link>
- <div className='flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400'>
+ <div className={'fle}x items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400'>
  {/* Subscriber Count */}
  <span>
  {video.channel?.subscribersFormatted || '0 subscribers'}
@@ -602,29 +599,28 @@ const WatchPage: React.FC = () => {
 // FIXED:  </div>
 
  {/* Subscribe Button */}
- <button className='px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium'>
+ <button className={'px}-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium'>
  Subscribe
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Video Stats and Actions */}
- <div className='flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-neutral-200 dark:border-neutral-700'>
- <div className='flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400'>
+ <div className={'fle}x flex-wrap items-center justify-between gap-4 pb-4 border-b border-neutral-200 dark:border-neutral-700'>
+ <div className={'fle}x items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400'>
  <span>
  {new Date(video.publishedAt).toLocaleDateString()}
 // FIXED:  </span>
 // FIXED:  </div>
 
- <div className='flex items-center gap-2'>
+ <div className={'fle}x items-center gap-2'>
  {/* Like Button */}
- <button className='flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
- <svg
-// FIXED:  className='w-5 h-5'
+ <button className={'fle}x items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
+ <svg>
+// FIXED:  className={'w}-5 h-5'
  fill='none'
  stroke='currentColor'
- viewBox='0 0 24 24' />
- >
- <path
+ viewBox='0 0 24 24'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -636,14 +632,13 @@ const WatchPage: React.FC = () => {
 
  {/* Dislike Button */}
  {video.dislikes && (
- <button className='flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
- <svg
-// FIXED:  className='w-5 h-5 rotate-180'
+ <button className={'fle}x items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
+ <svg>
+// FIXED:  className={'w}-5 h-5 rotate-180'
  fill='none'
  stroke='currentColor'
- viewBox='0 0 24 24' />
- >
- <path
+ viewBox='0 0 24 24'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -655,14 +650,13 @@ const WatchPage: React.FC = () => {
  )}
 
  {/* Share Button */}
- <button className='flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
- <svg
-// FIXED:  className='w-5 h-5'
+ <button className={'fle}x items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors'>
+ <svg>
+// FIXED:  className={'w}-5 h-5'
  fill='none'
  stroke='currentColor'
- viewBox='0 0 24 24' />
- >
- <path
+ viewBox='0 0 24 24'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -675,82 +669,79 @@ const WatchPage: React.FC = () => {
 // FIXED:  </div>
 
  {/* Channel Information */}
- <div className='flex items-start gap-4'>
- <Link
+ <div className={'fle}x items-start gap-4'>
+ <Link>
  to={`/channel/${video.channel?.id}`}
-// FIXED:  className='flex-shrink-0' />
- >
- <img
+// FIXED:  className={'flex}-shrink-0'/>
+ <img>
 // FIXED:  src={
  video.channel?.avatarUrl ||
  'https://picsum.photos/seed/default-channel/150/150'
  }
 // FIXED:  alt={video.channel?.name}
-// FIXED:  className='w-12 h-12 rounded-full object-cover' />
+// FIXED:  className={'w}-12 h-12 rounded-full object-cover' />
  />
 // FIXED:  </Link>
 
- <div className='flex-1 min-w-0'>
+ <div className={'flex}-1 min-w-0'>
  <div>
- <Link
+ <Link>
  to={`/channel/${video.channel?.id}`}
-// FIXED:  className='font-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors' />
- >
+// FIXED:  className={'font}-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors'/>
  {video.channel?.name}
 // FIXED:  </Link>
- <p className='text-sm text-neutral-600 dark:text-neutral-400'>
+ <p className={'text}-sm text-neutral-600 dark:text-neutral-400'>
  {video.channel?.subscribersFormatted || '0 subscribers'} •{' '}
  {video.viewsFormatted || '0 views'}
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* Video Description */}
- <div className='mt-4 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg'>
- <div className='text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap'>
+ <div className={'mt}-4 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg'>
+ <div className={'text}-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap'>
  {video.description}
 // FIXED:  </div>
  {/* Tags */}{' '}
  {video.tags && video.tags.length > 0 && (
- <div className='mt-4 flex flex-wrap gap-2'>
+ <div className={'mt}-4 flex flex-wrap gap-2'>
  {video.tags.map((tag,
  index) => (
- <span
+ <span>
  key={index}
-// FIXED:  className='px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full' />
- >
+// FIXED:  className={'px}-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full'/>
  #{tag}
 // FIXED:  </span>
  ))}
 // FIXED:  </div>
  )}
  {/* Additional Metadata */}
- <div className='mt-4 space-y-3'>
+ <div className={'mt}-4 space-y-3'>
  {/* Basic Stats */}
- <div className='grid grid-cols-2 gap-4 text-xs text-neutral-600 dark:text-neutral-400'>
+ <div className={'gri}d grid-cols-2 gap-4 text-xs text-neutral-600 dark:text-neutral-400'>
  <div>
- <span className='font-medium'>Category:</span>{' '}
+ <span className={'font}-medium'>Category:</span>{' '}
  {video.category}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Duration:</span>{' '}
+ <span className={'font}-medium'>Duration:</span>{' '}
  {video.duration || '0:00'}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Views:</span>{' '}
+ <span className={'font}-medium'>Views:</span>{' '}
  {video.viewsFormatted}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Likes:</span>{' '}
+ <span className={'font}-medium'>Likes:</span>{' '}
  {(video.likes || 0).toLocaleString()}
 // FIXED:  </div>
  {video.commentCount && (
  <div>
- <span className='font-medium'>Comments:</span>{' '}
+ <span className={'font}-medium'>Comments:</span>{' '}
  {video.commentCount.toLocaleString()}
 // FIXED:  </div>
  )}
  <div>
- <span className='font-medium'>Source:</span>{' '}
+ <span className={'font}-medium'>Source:</span>{' '}
  {video.source || 'local'}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -758,31 +749,31 @@ const WatchPage: React.FC = () => {
  {/* YouTube Specific Metadata */}
  {(video.source === 'youtube' ||
  video.source === 'google-search') && (
- <div className='pt-3 border-t border-neutral-200 dark:border-neutral-600'>
- <h4 className='font-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2'>
+ <div className={'pt}-3 border-t border-neutral-200 dark:border-neutral-600'>
+ <h4 className={'font}-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2'>
  {video.source === 'google-search'
  ? 'Google Custom Search Metadata'
  : 'YouTube Metadata'}
 // FIXED:  </h4>
- <div className='grid grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400'>
+ <div className={'gri}d grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400'>
  <div>
- <span className='font-medium'>Published:</span>{' '}
+ <span className={'font}-medium'>Published:</span>{' '}
  {video.publishedAtFormatted}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Quality:</span>{' '}
+ <span className={'font}-medium'>Quality:</span>{' '}
  {video.metadata?.definition || 'HD'}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Captions:</span>{' '}
+ <span className={'font}-medium'>Captions:</span>{' '}
  {video.metadata?.captions ? 'Available' : 'None'}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>License:</span>{' '}
+ <span className={'font}-medium'>License:</span>{' '}
  {video.metadata?.license || 'Standard'}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Source:</span>{' '}
+ <span className={'font}-medium'>Source:</span>{' '}
  {video.source === 'google-search'
  ? 'Google Custom Search JSON API'
  : 'YouTube Data API v3'}
@@ -793,25 +784,25 @@ const WatchPage: React.FC = () => {
 
  {/* Channel Metadata */}
  {video.channel && (
- <div className='pt-3 border-t border-neutral-200 dark:border-neutral-600'>
- <h4 className='font-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2'>
+ <div className={'pt}-3 border-t border-neutral-200 dark:border-neutral-600'>
+ <h4 className={'font}-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2'>
  Channel Details
 // FIXED:  </h4>
- <div className='grid grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400'>
+ <div className={'gri}d grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400'>
  <div>
- <span className='font-medium'>Channel ID:</span>{' '}
+ <span className={'font}-medium'>Channel ID:</span>{' '}
  {video.channel.id}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Subscribers:</span>{' '}
+ <span className={'font}-medium'>Subscribers:</span>{' '}
  {video.channel.subscribersFormatted}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Verified:</span>{' '}
+ <span className={'font}-medium'>Verified:</span>{' '}
  {video.channel.isVerified ? 'Yes' : 'No'}
 // FIXED:  </div>
  <div>
- <span className='font-medium'>Name:</span>{' '}
+ <span className={'font}-medium'>Name:</span>{' '}
  {video.channel.name}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -819,11 +810,11 @@ const WatchPage: React.FC = () => {
  )}
 
  {/* Debug Info */}
- <details className='pt-3 border-t border-neutral-200 dark:border-neutral-600'>
- <summary className='cursor-pointer text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200'>
+ <details className={'pt}-3 border-t border-neutral-200 dark:border-neutral-600'>
+ <summary className={'cursor}-pointer text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200'>
  Raw Video Data (Debug)
 // FIXED:  </summary>
- <pre className='mt-2 p-2 bg-neutral-100 dark:bg-neutral-700 rounded text-xs overflow-auto max-h-40 text-neutral-700 dark:text-neutral-300'>
+ <pre className={'mt}-2 p-2 bg-neutral-100 dark:bg-neutral-700 rounded text-xs overflow-auto max-h-40 text-neutral-700 dark:text-neutral-300'>
  {JSON.stringify(video, null, 2)}
 // FIXED:  </pre>
 // FIXED:  </details>
@@ -835,11 +826,11 @@ const WatchPage: React.FC = () => {
 // FIXED:  </div>
 
  {/* Sidebar - Recommended Videos */}
- <div className='lg:col-span-1'>
- <h3 className='text-lg font-semibold text-neutral-900 dark:text-white mb-4'>
+ <div className={'lg}:col-span-1'>
+ <h3 className={'text}-lg font-semibold text-neutral-900 dark:text-white mb-4'>
  Recommended Videos
 // FIXED:  </h3>
- <div className='space-y-4'>
+ <div className={'space}-y-4'>
  {(() => {
  logger.debug(
  '🎬 Rendering recommendations, count:',
@@ -848,7 +839,7 @@ const WatchPage: React.FC = () => {
  return null;
  })()}
  {_recommendedVideos.length === 0 ? (
- <div className='text-neutral-500 dark:text-neutral-400 text-sm'>
+ <div className={'text}-neutral-500 dark:text-neutral-400 text-sm'>
  Loading recommendations...
 // FIXED:  </div>
  ) : (
@@ -859,7 +850,7 @@ const WatchPage: React.FC = () => {
  recommendedVideo.title
  );
  return (
- <VideoCard
+ <VideoCard>
  key={recommendedVideo.id}
  video={recommendedVideo}
  variant='compact' />

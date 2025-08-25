@@ -55,10 +55,10 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
 
   return (
     <div className={'component-ready ' + className}>
-      <div className="component-header">
+      <div className={"component}-header">
         <h2>PWAInstallBanner</h2>
       </div>
-      <div className="component-body">
+      <div className={"component}-body">
         {children || <p>Component is ready and functioning properly.</p>}
       </div>
     </div>

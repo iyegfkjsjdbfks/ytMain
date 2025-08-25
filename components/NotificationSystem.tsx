@@ -62,19 +62,19 @@ const NotificationSystem: React.FC < NotificationSystemProps> = ({ className = '
 
  const loadNotifications = useCallback(() => {}
  try {}
- const stored = (localStorage as any).getItem('youtubeCloneNotifications_v1');
- if (stored as any) {}
+ const stored = (localStorage).getItem('youtubeCloneNotifications_v1');
+ if (stored) {}
  const parsed = JSON.parse(stored);
  setNotifications(parsed);
  } else {}
  // Generate initial mock notifications;
  const initialNotifications = generateInitialNotifications();
  setNotifications(initialNotifications);
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
  }
 
  } catch (error) {}
- (console as any).error('Error loading notifications:', error);
+ (console).error('Error loading notifications:', error);
  }
  }, []);
 
@@ -159,13 +159,13 @@ return;
 
  setNotifications((prev) => {}
  const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50;
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
  return updated;
  });
  }, []);
 
  const getNotificationTitle = (type: Notification['type']): (string) => {}
- switch (type as any) {}
+ switch (type) {}
  case 'video_upload': return 'New video uploaded';
  case 'like': return 'Your video got new likes!';
  case 'comment': return 'New comment on your video';
@@ -175,7 +175,7 @@ return;
  };
 
  const getNotificationMessage = (type: Notification['type']): (string) => {}
- switch (type as any) {}
+ switch (type) {}
  case 'video_upload': return 'Check out the latest content from your subscribed channel';
  case 'like': return `Your video reached ${Math.floor(Math.random() * 1000) + 100} likes`;
  case 'comment': return 'Someone left a comment on your video';
@@ -188,7 +188,7 @@ return;
  setNotifications((prev) => {}
  const updated = prev.map((n) =>
  n.id === notificationId ? { ...n as any, isRead: true } : n);
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
  return updated;
  });
  };
@@ -196,7 +196,7 @@ return;
  const markAllAsRead = () => {}
  setNotifications((prev) => {}
  const updated = prev.map((n) => ({ ...n as any, isRead: true }));
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
  return updated;
  });
  };
@@ -204,13 +204,13 @@ return;
  const deleteNotification = (notificationId: any) => {}
  setNotifications((prev) => {}
  const updated = prev.filter((n) => n.id !== notificationId);
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
  return updated;
  });
  };
 
  const getNotificationIcon = (type: Notification['type']) => {}
- switch (type as any) {}
+ switch (type) {}
  case 'video_upload': return <PlayIcon className="w - 4 h - 4" />;
  case 'like': return <HeartIcon className="w - 4 h - 4" />;
  case 'comment': return <ChatBubbleLeftIcon className="w - 4 h - 4" />;
@@ -228,7 +228,7 @@ return;
  {/* Notification Bell Button */}
  <button />
 // FIXED:  onClick={() => setIsOpen(!isOpen: React.MouseEvent)}
-// FIXED:  className="relative p - 2 text - gray - 600 dark:text - gray - 300 hover:text - gray - 900 dark:hover:text - white transition - colors"
+// FIXED:  className={"relativ}e p - 2 text - gray - 600 dark:text - gray - 300 hover:text - gray - 900 dark:hover:text - white transition - colors"
 // FIXED:  aria - label="Notifications"
  >
  {unreadCount > 0 ? (}
@@ -238,7 +238,7 @@ return;
  )}
 
  {unreadCount > 0 && (}
- <span className="absolute -top - 1 -right - 1 bg - red - 500 text - white text - xs rounded - full w - 5 h - 5 flex items - center justify - center">
+ <span className={"absolut}e -top - 1 -right - 1 bg - red - 500 text - white text - xs rounded - full w - 5 h - 5 flex items - center justify - center">
  {unreadCount > 99 ? '99+' : unreadCount}
 // FIXED:  </span>
  )}
@@ -246,30 +246,30 @@ return;
 
  {/* Notification Dropdown */}
  {isOpen && (}
- <div className="absolute right - 0 mt - 2 w - 96 bg - white dark:bg - gray - 800 rounded - lg shadow - lg border border - gray - 200 dark:border - gray - 700 z - 50 max - h - 96 overflow - hidden">
+ <div className={"absolut}e right - 0 mt - 2 w - 96 bg - white dark:bg - gray - 800 rounded - lg shadow - lg border border - gray - 200 dark:border - gray - 700 z - 50 max - h - 96 overflow - hidden">
  {/* Header */}
  <div className="p - 4 border - b border - gray - 200 dark:border - gray - 700">
- <div className="flex items - center justify - between">
- <h3 className="text - lg font - semibold text - gray - 900 dark:text - white">
+ <div className={"fle}x items - center justify - between">
+ <h3 className={"tex}t - lg font - semibold text - gray - 900 dark:text - white">
  Notifications;
 // FIXED:  </h3>
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center space - x - 2">
  <button />
 // FIXED:  onClick={() => setFilter(filter === 'all' ? 'unread' : 'all')}
-// FIXED:  className="text - sm text - blue - 600 dark:text - blue - 400 hover:underline"
+// FIXED:  className={"tex}t - sm text - blue - 600 dark:text - blue - 400 hover:underline"
  >
  {filter === 'all' ? 'Unread only' : 'Show all'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => markAllAsRead(e)}
-// FIXED:  className="text - sm text - blue - 600 dark:text - blue - 400 hover:underline"
+// FIXED:  className={"tex}t - sm text - blue - 600 dark:text - blue - 400 hover:underline"
 // FIXED:  disabled={unreadCount === 0}
  >
  Mark all read;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => setIsOpen(false: React.MouseEvent)}
-// FIXED:  className="text - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300"
+// FIXED:  className={"tex}t - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300"
  >
  <XIcon className="w - 5 h - 5" />
 // FIXED:  </button>
@@ -278,24 +278,23 @@ return;
 // FIXED:  </div>
 
  {/* Notifications List */}
- <div className="max - h - 80 overflow - y - auto">
+ <div className={"ma}x - h - 80 overflow - y - auto">
  {filteredNotifications.length === 0 ? (}
  <div className="p - 8 text - center text - gray - 500 dark:text - gray - 400">
  <BellIcon className="w - 12 h - 12 mx - auto mb - 4 opacity - 50" />
  <p > No notifications</p>
- <p className="text - sm">You're all caught up!</p>
+ <p className={"tex}t - sm">You're all caught up!</p>
 // FIXED:  </div>
  ) : (
  filteredNotifications.map((notification) => (
- <div;
+ <div;>
  key={notification.id}
 // FIXED:  className={`p - 4 border - b border - gray - 100 dark:border - gray - 700 hover:bg - gray - 50 dark:hover:bg - gray - 700 transition - colors ${}
  !notification.isRead ? 'bg - blue - 50 dark:bg - blue - 900 / 20' : ''
- }`} />
- >
- <div className="flex items - start space - x - 3">
+ }`}/>
+ <div className={"fle}x items - start space - x - 3">
  {/* Notification Icon */}
- <div className={`flex - shrink - 0 w - 8 h - 8 rounded - full flex items - center justify - center ${}
+ <div className={`flex - shrink - 0 w - 8 h - 8 rounded - full flex items - center justify - center ${}>
  notification.type === 'live_stream' ? 'bg - red - 100 text - red - 600' :
  notification.type === 'like' ? 'bg - pink - 100 text - pink - 600' :
  notification.type === 'comment' ? 'bg - blue - 100 text - blue - 600' :
@@ -306,37 +305,37 @@ return;
 // FIXED:  </div>
 
  {/* Content */}
- <div className="flex - 1 min - w - 0">
- <div className="flex items - start justify - between">
- <div className="flex - 1">
- <p className="text - sm font - medium text - gray - 900 dark:text - white">
+ <div className={"fle}x - 1 min - w - 0">
+ <div className={"fle}x items - start justify - between">
+ <div className={"fle}x - 1">
+ <p className={"tex}t - sm font - medium text - gray - 900 dark:text - white">
  {notification.title}
 // FIXED:  </p>
- <p className="text - sm text - gray - 600 dark:text - gray - 300 mt - 1">
+ <p className={"tex}t - sm text - gray - 600 dark:text - gray - 300 mt - 1">
  {notification.message}
 // FIXED:  </p>
  {notification.channelName && (}
- <div className="flex items - center mt - 2">
+ <div className={"fle}x items - center mt - 2">
  {notification.channelAvatar && (}
- <img;
+ <img;>
 // FIXED:  src={notification.channelAvatar}
 // FIXED:  alt={notification.channelName}
 // FIXED:  className="w - 4 h - 4 rounded - full mr - 2" />
  />
  )}
- <span className="text - xs text - gray - 500 dark:text - gray - 400">
+ <span className={"tex}t - xs text - gray - 500 dark:text - gray - 400">
  {notification.channelName}
 // FIXED:  </span>
 // FIXED:  </div>
  )}
- <p className="text - xs text - gray - 400 dark:text - gray - 500 mt - 1">
+ <p className={"tex}t - xs text - gray - 400 dark:text - gray - 500 mt - 1">
  {formatDistanceToNow(new Date(notification.timestamp))} ago;
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* Thumbnail */}
  {notification.thumbnail && (}
- <img;
+ <img;>
 // FIXED:  src={notification.thumbnail}
 // FIXED:  alt=""
 // FIXED:  className="w - 16 h - 9 object - cover rounded ml - 3 flex - shrink - 0" />
@@ -345,12 +344,12 @@ return;
 // FIXED:  </div>
 
  {/* Actions */}
- <div className="flex items - center justify - between mt - 2">
- <div className="flex space - x - 2">
+ <div className={"fle}x items - center justify - between mt - 2">
+ <div className={"fle}x space - x - 2">
  {!notification.isRead && (}
  <button />
 // FIXED:  onClick={() => markAsRead(notification.id: React.MouseEvent)}
-// FIXED:  className="text - xs text - blue - 600 dark:text - blue - 400 hover:underline"
+// FIXED:  className={"tex}t - xs text - blue - 600 dark:text - blue - 400 hover:underline"
  >
  Mark as read;
 // FIXED:  </button>
@@ -361,7 +360,7 @@ return;
  markAsRead(notification.id);
  window.location.href = `/watch/${notification.videoId}`;
  }
-// FIXED:  className="text - xs text - blue - 600 dark:text - blue - 400 hover:underline"
+// FIXED:  className={"tex}t - xs text - blue - 600 dark:text - blue - 400 hover:underline"
  >
  Watch video;
 // FIXED:  </button>
@@ -369,7 +368,7 @@ return;
 // FIXED:  </div>
  <button />
 // FIXED:  onClick={() => deleteNotification(notification.id: React.MouseEvent)}
-// FIXED:  className="text - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300"
+// FIXED:  className={"tex}t - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300"
  >
  <XIcon className="w - 4 h - 4" />
 // FIXED:  </button>
@@ -384,7 +383,7 @@ return;
  {/* Footer */}
  {filteredNotifications.length > 0 && (}
  <div className="p - 3 border - t border - gray - 200 dark:border - gray - 700 text - center">
- <button className="text - sm text - blue - 600 dark:text - blue - 400 hover:underline flex items - center justify - center space - x - 1">
+ <button className={"tex}t - sm text - blue - 600 dark:text - blue - 400 hover:underline flex items - center justify - center space - x - 1">
  <Cog6ToothIcon className="w - 4 h - 4" />
  <span > Notification settings</span>
 // FIXED:  </button>

@@ -99,12 +99,12 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  {/* Filter Toggle Button */}
  <button />
 // FIXED:  onClick={(e) => onToggle(e)}
-// FIXED:  className='flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
+// FIXED:  className={'fle}x items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
  >
- <FunnelIcon className='w-5 h-5' />
+ <FunnelIcon className={'w}-5 h-5' />
  <span>Filters</span>
  {hasActiveFilters() && (
- <span className='bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full'>
+ <span className={'bg}-blue-600 text-white text-xs px-2 py-0.5 rounded-full'>
  {getActiveFilterCount()}
 // FIXED:  </span>
  )}
@@ -112,36 +112,36 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
  {/* Filter Panel */}
  {isOpen && (
- <div className='absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-10 p-6'>
- <div className='flex items-center justify-between mb-6'>
- <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
+ <div className={'absolut}e top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-10 p-6'>
+ <div className={'fle}x items-center justify-between mb-6'>
+ <h3 className={'text}-lg font-semibold text-gray-900 dark:text-white'>
  Search Filters
 // FIXED:  </h3>
- <div className='flex items-center gap-2'>
+ <div className={'fle}x items-center gap-2'>
  {hasActiveFilters() && (
  <button />
 // FIXED:  onClick={(e) => resetFilters(e)}
-// FIXED:  className='text-sm text-blue-600 hover:text-blue-700 font-medium'
+// FIXED:  className={'text}-sm text-blue-600 hover:text-blue-700 font-medium'
  >
  Clear all
 // FIXED:  </button>
  )}
  <button />
 // FIXED:  onClick={(e) => onToggle(e)}
-// FIXED:  className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
+// FIXED:  className={'p}-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
  >
- <XMarkIcon className='w-5 h-5' />
+ <XMarkIcon className={'w}-5 h-5' />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+ <div className={'gri}d grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
  {/* Type Filter */}
  <div>
- <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+ <h4 className={'font}-medium text-gray-900 dark:text-white mb-3'>
  Type
 // FIXED:  </h4>
- <div className='space-y-2'>
+ <div className={'space}-y-2'>
  {[
  { value: 'all',
  label: 'All', icon: DocumentTextIcon },
@@ -153,22 +153,21 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'Playlist', icon: PlayIcon },
  { value: 'live',
  label: 'Live', icon: PlayIcon }].map(({ value, label, icon: Icon }) => (
- <label
+ <label>
  key={value}
-// FIXED:  className='flex items-center gap-2 cursor-pointer' />
- >
- <input
+// FIXED:  className={'fle}x items-center gap-2 cursor-pointer'/>
+ <input>
 // FIXED:  type='radio'
 // FIXED:  name='type'
 // FIXED:  value={value}
 // FIXED:  checked={filters.type === value} />
 // FIXED:  onChange={e =>
- updateFilter('type', e.target.value as any)
+ updateFilter('type', e.target.value)
  }
-// FIXED:  className='text-blue-600'
+// FIXED:  className={'text}-blue-600'
  />
- <Icon className='w-4 h-4 text-gray-500' />
- <span className='text-sm text-gray-700 dark:text-gray-300'>
+ <Icon className={'w}-4 h-4 text-gray-500' />
+ <span className={'text}-sm text-gray-700 dark:text-gray-300'>
  {label}
 // FIXED:  </span>
 // FIXED:  </label>
@@ -178,10 +177,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
  {/* Upload Date Filter */}
  <div>
- <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+ <h4 className={'font}-medium text-gray-900 dark:text-white mb-3'>
  Upload Date
 // FIXED:  </h4>
- <div className='space-y-2'>
+ <div className={'space}-y-2'>
  {[
  { value: 'any',
  label: 'Any time' },
@@ -195,21 +194,20 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'This month' },
  { value: 'year',
  label: 'This year' }].map(({ value, label }) => (
- <label
+ <label>
  key={value}
-// FIXED:  className='flex items-center gap-2 cursor-pointer' />
- >
- <input
+// FIXED:  className={'fle}x items-center gap-2 cursor-pointer'/>
+ <input>
 // FIXED:  type='radio'
 // FIXED:  name='uploadDate'
 // FIXED:  value={value}
 // FIXED:  checked={filters.uploadDate === value} />
 // FIXED:  onChange={e =>
- updateFilter('uploadDate', e.target.value as any)
+ updateFilter('uploadDate', e.target.value)
  }
-// FIXED:  className='text-blue-600'
+// FIXED:  className={'text}-blue-600'
  />
- <span className='text-sm text-gray-700 dark:text-gray-300'>
+ <span className={'text}-sm text-gray-700 dark:text-gray-300'>
  {label}
 // FIXED:  </span>
 // FIXED:  </label>
@@ -219,10 +217,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
  {/* Duration Filter */}
  <div>
- <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+ <h4 className={'font}-medium text-gray-900 dark:text-white mb-3'>
  Duration
 // FIXED:  </h4>
- <div className='space-y-2'>
+ <div className={'space}-y-2'>
  {[
  { value: 'any',
  label: 'Any duration' },
@@ -232,21 +230,20 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: '4-20 minutes' },
  { value: 'long',
  label: 'Over 20 minutes' }].map(({ value, label }) => (
- <label
+ <label>
  key={value}
-// FIXED:  className='flex items-center gap-2 cursor-pointer' />
- >
- <input
+// FIXED:  className={'fle}x items-center gap-2 cursor-pointer'/>
+ <input>
 // FIXED:  type='radio'
 // FIXED:  name='duration'
 // FIXED:  value={value}
 // FIXED:  checked={filters.duration === value} />
 // FIXED:  onChange={e =>
- updateFilter('duration', e.target.value as any)
+ updateFilter('duration', e.target.value)
  }
-// FIXED:  className='text-blue-600'
+// FIXED:  className={'text}-blue-600'
  />
- <span className='text-sm text-gray-700 dark:text-gray-300'>
+ <span className={'text}-sm text-gray-700 dark:text-gray-300'>
  {label}
 // FIXED:  </span>
 // FIXED:  </label>
@@ -256,10 +253,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
  {/* Features Filter */}
  <div>
- <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+ <h4 className={'font}-medium text-gray-900 dark:text-white mb-3'>
  Features
 // FIXED:  </h4>
- <div className='space-y-2'>
+ <div className={'space}-y-2'>
  {[
  { value: 'live',
  label: 'Live' },
@@ -283,17 +280,16 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'Location' },
  { value: 'purchased',
  label: 'Purchased' }].map(({ value, label }) => (
- <label
+ <label>
  key={value}
-// FIXED:  className='flex items-center gap-2 cursor-pointer' />
- >
- <input
+// FIXED:  className={'fle}x items-center gap-2 cursor-pointer'/>
+ <input>
 // FIXED:  type='checkbox'
 // FIXED:  checked={filters.features.includes(value)} />
 // FIXED:  onChange={() => toggleFeature(value)}
-// FIXED:  className='text-blue-600'
+// FIXED:  className={'text}-blue-600'
  />
- <span className='text-sm text-gray-700 dark:text-gray-300'>
+ <span className={'text}-sm text-gray-700 dark:text-gray-300'>
  {label}
 // FIXED:  </span>
 // FIXED:  </label>
@@ -303,10 +299,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
  {/* Sort By Filter */}
  <div>
- <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+ <h4 className={'font}-medium text-gray-900 dark:text-white mb-3'>
  Sort by
 // FIXED:  </h4>
- <div className='space-y-2'>
+ <div className={'space}-y-2'>
  {[
  { value: 'relevance',
  label: 'Relevance' },
@@ -316,21 +312,20 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: 'View count' },
  { value: 'rating',
  label: 'Rating' }].map(({ value, label }) => (
- <label
+ <label>
  key={value}
-// FIXED:  className='flex items-center gap-2 cursor-pointer' />
- >
- <input
+// FIXED:  className={'fle}x items-center gap-2 cursor-pointer'/>
+ <input>
 // FIXED:  type='radio'
 // FIXED:  name='sortBy'
 // FIXED:  value={value}
 // FIXED:  checked={filters.sortBy === value} />
 // FIXED:  onChange={e =>
- updateFilter('sortBy', e.target.value as any)
+ updateFilter('sortBy', e.target.value)
  }
-// FIXED:  className='text-blue-600'
+// FIXED:  className={'text}-blue-600'
  />
- <span className='text-sm text-gray-700 dark:text-gray-300'>
+ <span className={'text}-sm text-gray-700 dark:text-gray-300'>
  {label}
 // FIXED:  </span>
 // FIXED:  </label>
@@ -340,10 +335,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
  {/* Quality Filter */}
  <div>
- <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+ <h4 className={'font}-medium text-gray-900 dark:text-white mb-3'>
  Quality
 // FIXED:  </h4>
- <div className='space-y-2'>
+ <div className={'space}-y-2'>
  {[
  { value: 'any',
  label: 'Any quality' },
@@ -353,21 +348,20 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
  label: '4K' },
  { value: 'hdr',
  label: 'HDR' }].map(({ value, label }) => (
- <label
+ <label>
  key={value}
-// FIXED:  className='flex items-center gap-2 cursor-pointer' />
- >
- <input
+// FIXED:  className={'fle}x items-center gap-2 cursor-pointer'/>
+ <input>
 // FIXED:  type='radio'
 // FIXED:  name='quality'
 // FIXED:  value={value}
 // FIXED:  checked={filters.quality === value} />
 // FIXED:  onChange={e =>
- updateFilter('quality', e.target.value as any)
+ updateFilter('quality', e.target.value)
  }
-// FIXED:  className='text-blue-600'
+// FIXED:  className={'text}-blue-600'
  />
- <span className='text-sm text-gray-700 dark:text-gray-300'>
+ <span className={'text}-sm text-gray-700 dark:text-gray-300'>
  {label}
 // FIXED:  </span>
 // FIXED:  </label>
@@ -377,10 +371,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 // FIXED:  </div>
 
  {/* Apply Button */}
- <div className='flex justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700'>
+ <div className={'fle}x justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700'>
  <button />
 // FIXED:  onClick={(e) => onToggle(e)}
-// FIXED:  className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+// FIXED:  className={'px}-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  Apply Filters
 // FIXED:  </button>

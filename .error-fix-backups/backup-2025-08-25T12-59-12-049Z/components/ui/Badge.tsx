@@ -25,13 +25,12 @@ export const Badge: React.FC<BadgeProps> = ({
  size = 'md',
  className = '' }) => {
  return (
- <span
+ <span>
 // FIXED:  className={`inline-flex items-center font-medium rounded-full ${
  variantClasses[variant]
  } ${
  sizeClasses[size]
- } ${className}`} />
- >
+ } ${className}`}/>
  {children}
 // FIXED:  </span>
  );

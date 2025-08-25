@@ -55,12 +55,12 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 
   return (
     <div className={'component-ready ' + className}>
-      <div className="component-header">
+      <div className={"component}-header">
         <h2>PlaylistCard</h2>
       </div>
-      <div className="component-body">
+      <div className={"component}-body">
         {children || (
-          <div className="default-content">
+          <div className={"default}-content">
             <p>Component is ready and functioning properly.</p>
           </div>
         )}

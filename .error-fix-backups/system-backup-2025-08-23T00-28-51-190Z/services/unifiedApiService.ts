@@ -40,7 +40,7 @@ return null;
 }
 
  const isExpired = Date.now() - item.timestamp > item.ttl;
- if (isExpired as any) {
+ if (isExpired) {
  this.cache.delete(key);
  return null;
  }
@@ -121,7 +121,7 @@ class UnifiedApiService {
 
  // Add default error interceptor
  this.addErrorInterceptor((error) => {
- (console as any).error('API Error:', error);
+ (console).error('API Error:', error);
  return error;
  });
  }
@@ -147,9 +147,9 @@ class UnifiedApiService {
  cacheTTL?: number,
  ): Promise<T> {
  // Check cache first
- if (cacheKey as any) {
+ if (cacheKey) {
  const cached = this.cache.get<T>(cacheKey);
- if (cached as any) {
+ if (cached) {
  return cached;
  }
  // Deduplicate identical requests
@@ -192,7 +192,7 @@ class UnifiedApiService {
  const controller = new AbortController();
  const timeoutId = setTimeout((() => controller.abort()) as any, this.config.timeout);
 
- let response = await (fetch as any)(config.url, {
+ let response = await (fetch)(config.url, {
  ...config as any,
  signal: controller.signal });
 
@@ -214,7 +214,7 @@ class UnifiedApiService {
  const data = await response.json();
 
  // Cache successful response
- if (cacheKey as any) {
+ if (cacheKey) {
  this.cache.set(cacheKey, data, cacheTTL);
  }
 
@@ -253,7 +253,7 @@ class UnifiedApiService {
  } = {}): Promise<{ items: Video; nextPageToken?: string }> {
  // Check if YouTube Data API is blocked by admin settings
  if (isYouTubeDataApiBlocked()) {
- (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+ (console).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
  return { items: [] };
  }
  const queryParams = new URLSearchParams();
@@ -277,7 +277,7 @@ queryParams.set('pageToken', params.pageToken);
  } = {}): Promise<{ items: Video; nextPageToken?: string }> {
  // Check if YouTube Data API is blocked by admin settings
  if (isYouTubeDataApiBlocked()) {
- (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+ (console).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
  return { items: [] };
  }
  const queryParams = new URLSearchParams();
@@ -299,7 +299,7 @@ queryParams.set('order', params.order);
  async getChannel(channelId): Promise<Channel> {
  // Check if YouTube Data API is blocked by admin settings
  if (isYouTubeDataApiBlocked()) {
- (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+ (console).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
  throw new Error('YouTube Data API is disabled');
  }
  const queryParams = new URLSearchParams({
@@ -329,7 +329,7 @@ queryParams.set('order', params.order);
  async getPlaylist(playlistId): Promise<Playlist> {
  // Check if YouTube Data API is blocked by admin settings
  if (isYouTubeDataApiBlocked()) {
- (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+ (console).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
  throw new Error('YouTube Data API is disabled');
  }
  const queryParams = new URLSearchParams({
@@ -363,7 +363,7 @@ queryParams.set('order', params.order);
  } = {}): Promise<{ items: Comment; nextPageToken?: string }> {
  // Check if YouTube Data API is blocked by admin settings
  if (isYouTubeDataApiBlocked()) {
- (console as any).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+ (console).warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
  return { items: [] };
  }
  const queryParams = new URLSearchParams();

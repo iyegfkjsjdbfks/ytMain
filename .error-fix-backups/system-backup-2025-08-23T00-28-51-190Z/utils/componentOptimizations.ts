@@ -123,11 +123,11 @@ export const componentPerformance = {
  return () => {
  // const endTime = performance.now();
  // const componentName = name || Component.displayName || Component.name || 'Component';
- // (console as any).log(`${componentName} render time: ${endTime - startTime}ms`);
+ // (console).log(`${componentName} render time: ${endTime - startTime}ms`);
  };
  });
 
- return createElement(Component, { ...props as any, ref } as any);
+ return createElement(Component, { ...props as any, ref });
  });
  },
 
@@ -140,7 +140,7 @@ export const componentPerformance = {
  // const startTime = performance.now();
  const cleanup = effect();
  // const endTime = performance.now();
- // (console as any).log(`${_effectName} execution time: ${endTime - startTime}ms`);
+ // (console).log(`${_effectName} execution time: ${endTime - startTime}ms`);
 
  return cleanup;
  }, deps);
@@ -157,7 +157,7 @@ export const bundleOptimizations = {
  try {
  return await importFunc();
  } catch (error) {
- (console as any).error('Dynamic import failed:', error);
+ (console).error('Dynamic import failed:', error);
  return null;
  }
  },
@@ -168,6 +168,6 @@ export const bundleOptimizations = {
  preloadComponent: (importFunc: () => Promise<any>) => {
  // Start loading the component but don't wait for it
  importFunc().catch(error => {
- (console as any).warn('Component preload failed:', error);
+ (console).warn('Component preload failed:', error);
  });
  };

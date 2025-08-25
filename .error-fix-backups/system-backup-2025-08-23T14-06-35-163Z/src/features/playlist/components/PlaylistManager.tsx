@@ -61,18 +61,18 @@ const CreatePlaylistModal: React.FC < CreatePlaylistModalProps> = ({}
  }
 
  return (
- <div className='fixed inset - 0 bg - black bg - opacity - 50 flex items - center justify - center z - 50'>
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 w - full max - w - md mx - 4'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
+ <div className={'fixe}d inset - 0 bg - black bg - opacity - 50 flex items - center justify - center z - 50'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 w - full max - w - md mx - 4'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
  Create New Playlist
 // FIXED:  </h3>
 
- <form onSubmit={(e: React.FormEvent) => handleSubmit(e)} className='space - y - 4'>
+ <form onSubmit={(e: React.FormEvent) => handleSubmit(e)} className={'spac}e - y - 4'>
  <div>
- <div className='block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
+ <div className={'bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
  Title *
 // FIXED:  </div>
- <input
+ <input>
 // FIXED:  type='text'
 // FIXED:  value={formData.title} />
 // FIXED:  onChange={e =>}
@@ -85,10 +85,10 @@ const CreatePlaylistModal: React.FC < CreatePlaylistModalProps> = ({}
 // FIXED:  </div>
 
  <div>
- <div className='block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
+ <div className={'bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
  Description
 // FIXED:  </div>
- <textarea
+ <textarea>
 // FIXED:  value={formData.description} />
 // FIXED:  onChange={e =>}
  setFormData(prev => ({ ...prev as any, description: e.target.value }))
@@ -100,15 +100,15 @@ const CreatePlaylistModal: React.FC < CreatePlaylistModalProps> = ({}
 // FIXED:  </div>
 
  <div>
- <div className='block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
+ <div className={'bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
  Visibility
 // FIXED:  </div>
- <select
+ <select>
 // FIXED:  value={formData.visibility} />
 // FIXED:  onChange={e =>}
  setFormData(prev => ({}
  ...prev as any,
- visibility: e.target.value as any }))
+ visibility: e.target.value}))
  }
 // FIXED:  className='w - full px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - gray - 900 dark:text - white'
  >
@@ -119,39 +119,38 @@ const CreatePlaylistModal: React.FC < CreatePlaylistModalProps> = ({}
 // FIXED:  </div>
 
  <div>
- <div className='block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
+ <div className={'bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2'>
  Tags
 // FIXED:  </div>
- <div className='flex gap - 2 mb - 2'>
- <input
+ <div className={'fle}x gap - 2 mb - 2'>
+ <input>
 // FIXED:  type='text'
 // FIXED:  value={tagInput} />
 // FIXED:  onChange={e => setTagInput(e.target.value: React.ChangeEvent)}
  onKeyPress={e =>}
  e.key === 'Enter' && (e.preventDefault(), addTag())
  }
-// FIXED:  className='flex - 1 px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - gray - 900 dark:text - white'
+// FIXED:  className={'fle}x - 1 px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - gray - 900 dark:text - white'
 // FIXED:  placeholder='Add tags...'
  />
- <button
+ <button>
 // FIXED:  type='button' />
 // FIXED:  onClick={(e: React.MouseEvent) => addTag(e)}
-// FIXED:  className='px - 4 py - 2 bg - blue - 600 text - white rounded - md hover:bg - blue - 700 transition - colors'
+// FIXED:  className={'p}x - 4 py - 2 bg - blue - 600 text - white rounded - md hover:bg - blue - 700 transition - colors'
  >
  Add
 // FIXED:  </button>
 // FIXED:  </div>
- <div className='flex flex - wrap gap - 2'>
+ <div className={'fle}x flex - wrap gap - 2'>
  {formData.tags.map((tag) => (}
- <span
+ <span>
  key={tag}
-// FIXED:  className='inline - flex items - center gap - 1 px - 2 py - 1 bg - blue - 100 dark:bg - blue - 900 text - blue - 800 dark:text - blue - 200 rounded - full text - sm' />
- >
+// FIXED:  className={'inlin}e - flex items - center gap - 1 px - 2 py - 1 bg - blue - 100 dark:bg - blue - 900 text - blue - 800 dark:text - blue - 200 rounded - full text - sm'/>
  {tag}
- <button
+ <button>
 // FIXED:  type='button' />
 // FIXED:  onClick={() => removeTag(tag: React.MouseEvent)}
-// FIXED:  className='text - blue - 600 dark:text - blue - 400 hover:text - blue - 800 dark:hover:text - blue - 200'
+// FIXED:  className={'tex}t - blue - 600 dark:text - blue - 400 hover:text - blue - 800 dark:hover:text - blue - 200'
  >
  ×
 // FIXED:  </button>
@@ -160,18 +159,17 @@ const CreatePlaylistModal: React.FC < CreatePlaylistModalProps> = ({}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='flex gap - 2 justify - end pt - 4'>
- <button
+ <div className={'fle}x gap - 2 justify - end pt - 4'>
+ <button>
 // FIXED:  type='button' />
 // FIXED:  onClick={(e: React.MouseEvent) => onClose(e)}
-// FIXED:  className='px - 4 py - 2 text - gray - 600 dark:text - gray - 400 hover:bg - gray - 100 dark:hover:bg - gray - 700 rounded transition - colors'
+// FIXED:  className={'p}x - 4 py - 2 text - gray - 600 dark:text - gray - 400 hover:bg - gray - 100 dark:hover:bg - gray - 700 rounded transition - colors'
  >
  Cancel
 // FIXED:  </button>
- <button
+ <button>
 // FIXED:  type='submit'
-// FIXED:  className='px - 4 py - 2 bg - blue - 600 text - white rounded hover:bg - blue - 700 transition - colors' />
- >
+// FIXED:  className={'p}x - 4 py - 2 bg - blue - 600 text - white rounded hover:bg - blue - 700 transition - colors'/>
  Create Playlist
 // FIXED:  </button>
 // FIXED:  </div>
@@ -241,7 +239,7 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  };
 
  const getVisibilityIcon = (visibility: any) => {}
- switch (visibility as any) {}
+ switch (visibility) {}
  case 'public':
  return <EyeIcon className='w - 4 h - 4' />;
  case 'unlisted':
@@ -254,19 +252,19 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  return (
  <div className={`space - y - 6 ${className}`}>
  {/* Header */}
- <div className='flex items - center justify - between'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <h1 className='text - 2xl font - bold text - gray - 900 dark:text - white'>
+ <h1 className={'tex}t - 2xl font - bold text - gray - 900 dark:text - white'>
  Playlist Manager
 // FIXED:  </h1>
- <p className='text - gray - 600 dark:text - gray - 400 mt - 1'>
+ <p className={'tex}t - gray - 600 dark:text - gray - 400 mt - 1'>
  Organize and manage your video playlists
 // FIXED:  </p>
 // FIXED:  </div>
 
  <button />
 // FIXED:  onClick={() => setShowCreateModal(true: React.MouseEvent)}
-// FIXED:  className='flex items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'
+// FIXED:  className={'fle}x items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'
  >
  <PlusIcon className='w - 5 h - 5' />
  Create Playlist
@@ -274,10 +272,10 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
 // FIXED:  </div>
 
  {/* Search and Filters */}
- <div className='flex items - center justify - between gap - 4'>
- <div className='flex - 1 max - w - md relative'>
- <MagnifyingGlassIcon className='absolute left - 3 top - 1/2 transform -translate - y - 1 / 2 w - 5 h - 5 text - gray - 400' />
- <input
+ <div className={'fle}x items - center justify - between gap - 4'>
+ <div className={'fle}x - 1 max - w - md relative'>
+ <MagnifyingGlassIcon className={'absolut}e left - 3 top - 1/2 transform -translate - y - 1 / 2 w - 5 h - 5 text - gray - 400' />
+ <input>
 // FIXED:  type='text'
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={e => setSearchQuery(e.target.value: React.ChangeEvent)}
@@ -286,18 +284,18 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  />
 // FIXED:  </div>
 
- <div className='flex items - center gap - 4'>
- <select
+ <div className={'fle}x items - center gap - 4'>
+ <select>
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={e => setSortBy(e.target.value as any: React.ChangeEvent)}
-// FIXED:  className='px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - lg bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white'
+// FIXED:  className={'p}x - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - lg bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white'
  >
  <option value='recent'>Recently updated</option>
  <option value='alphabetical'>Alphabetical</option>
  <option value='most_videos'>Most videos</option>
 // FIXED:  </select>
 
- <div className='flex items - center border border - gray - 300 dark:border - gray - 600 rounded - lg'>
+ <div className={'fle}x items - center border border - gray - 300 dark:border - gray - 600 rounded - lg'>
  <button />
 // FIXED:  onClick={() => setViewMode('grid': React.MouseEvent)}
 // FIXED:  className={`p - 2 ${viewMode === 'grid' ? 'bg - blue - 600 text - white' : 'text - gray - 600 dark:text - gray - 400'}`}
@@ -316,12 +314,11 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
 
  {/* Playlists Grid / List */}
  {isLoading ? (}
- <div className='grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6'>
+ <div className={'gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6'>
  {[...Array<any>(6)].map((_, i) => (}
- <div
+ <div>
  key={i}
-// FIXED:  className='bg - white dark:bg - gray - 800 rounded - lg p - 4 animate - pulse' />
- >
+// FIXED:  className={'b}g - white dark:bg - gray - 800 rounded - lg p - 4 animate - pulse'/>
  <div className='w - full h - 32 bg - gray - 300 dark:bg - gray - 700 rounded mb - 4' />
  <div className='h - 4 bg - gray - 300 dark:bg - gray - 700 rounded mb - 2' />
  <div className='h - 3 bg - gray - 300 dark:bg - gray - 700 rounded w - 2/3' />
@@ -329,24 +326,22 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  ))}
 // FIXED:  </div>
  ) : filteredPlaylists.length > 0 ? (
- <div
+ <div>
 // FIXED:  className={}
  viewMode === 'grid'
  ? 'grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6'
  : 'space - y - 4'
- } />
- >
+ }/>
  {filteredPlaylists.map((playlist: Playlist) => (}
- <div
+ <div>
  key={playlist.id}
 // FIXED:  className={`bg - white dark:bg - gray - 800 rounded - lg border border - gray - 200 dark:border - gray - 700 hover:shadow - lg transition - shadow ${}
  viewMode === 'list' ? 'flex items - center p - 4' : 'p - 4'
- }`} />
- >
+ }`}/>
  {viewMode === 'grid' ? (}
  <><</>/><</>/><</>/>
- <div className='relative mb - 4'>
- <img
+ <div className={'relativ}e mb - 4'>
+ <img>
 // FIXED:  src={}
  playlist.thumbnailUrl ||
  `https://picsum.photos / 300 / 200?random="${playlist.id}`"
@@ -354,33 +349,33 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
 // FIXED:  alt={playlist.title}
 // FIXED:  className='w - full h - 32 object - cover rounded' />
  />
- <div className='absolute inset - 0 bg - black bg - opacity - 40 flex items - center justify - center opacity - 0 hover:opacity - 100 transition - opacity rounded'>
+ <div className={'absolut}e inset - 0 bg - black bg - opacity - 40 flex items - center justify - center opacity - 0 hover:opacity - 100 transition - opacity rounded'>
  <PlayIcon className='w - 8 h - 8 text - white' />
 // FIXED:  </div>
-<div className='absolute top - 2 right - 2 bg - black bg - opacity - 70 text - white px - 2 py - 1 rounded text - xs'>
+<div className={'absolut}e top - 2 right - 2 bg - black bg - opacity - 70 text - white px - 2 py - 1 rounded text - xs'>
  {playlist.videoCount || 0} videos
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='flex items - start justify - between'>
- <div className='flex - 1 min - w - 0'>
- <h3 className='font - semibold text - gray - 900 dark:text - white truncate'>
+ <div className={'fle}x items - start justify - between'>
+ <div className={'fle}x - 1 min - w - 0'>
+ <h3 className={'fon}t - semibold text - gray - 900 dark:text - white truncate'>
  {playlist.title}
 // FIXED:  </h3>
  {playlist.description && (}
- <p className='text - sm text - gray - 600 dark:text - gray - 400 mt - 1 line - clamp - 2'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400 mt - 1 line - clamp - 2'>
  {playlist.description}
 // FIXED:  </p>
  )}
- <div className='flex items - center gap - 2 mt - 2'>
+ <div className={'fle}x items - center gap - 2 mt - 2'>
  {getVisibilityIcon(playlist.visibility)}
- <span className='text - xs text - gray - 500 dark:text - gray - 400 capitalize'>
+ <span className={'tex}t - xs text - gray - 500 dark:text - gray - 400 capitalize'>
  {playlist.visibility}
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='relative'>
+ <div className={'relative}'>
  <button />
 // FIXED:  onClick={() =>}
  setShowPlaylistMenu(
@@ -395,7 +390,7 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
 // FIXED:  </button>
 
  {showPlaylistMenu === playlist.id && (}
- <div className='absolute right - 0 top - 8 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 2 z - 10 min - w-[160px]'>
+ <div className={'absolut}e right - 0 top - 8 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 2 z - 10 min - w-[160px]'>
  <button className='w - full px - 4 py - 2 text - left text - sm hover:bg - gray - 100 dark:hover:bg - gray - 700 flex items - center gap - 2'>
  <PlayIcon className='w - 4 h - 4' />
  Play all
@@ -415,7 +410,7 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  <ShareIcon className='w - 4 h - 4' />
  Share
 // FIXED:  </button>
- <hr className='my - 2 border - gray - 200 dark:border - gray - 600' />
+ <hr className={'m}y - 2 border - gray - 200 dark:border - gray - 600' />
  <button />
 // FIXED:  onClick={() => handleDeletePlaylist(playlist.id: React.MouseEvent)}
 // FIXED:  className='w - full px - 4 py - 2 text - left text - sm hover:bg - gray - 100 dark:hover:bg - gray - 700 flex items - center gap - 2 text - red - 600'
@@ -430,7 +425,7 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
 // FIXED:  </>
  ) : (
  <><</>/><</>/><</>/>
- <img
+ <img>
 // FIXED:  src={}
  playlist.thumbnailUrl ||
  `https://picsum.photos / 120 / 80?random="${playlist.id}`"
@@ -438,11 +433,11 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
 // FIXED:  alt={playlist.title}
 // FIXED:  className='w - 20 h - 12 object - cover rounded mr - 4' />
  />
- <div className='flex - 1 min - w - 0'>
- <h3 className='font - semibold text - gray - 900 dark:text - white'>
+ <div className={'fle}x - 1 min - w - 0'>
+ <h3 className={'fon}t - semibold text - gray - 900 dark:text - white'>
  {playlist.title}
 // FIXED:  </h3>
- <p className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  {playlist.videoCount || 0} videos • {playlist.visibility}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -462,12 +457,12 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  ))}
 // FIXED:  </div>
  ) : (
- <div className='text - center py - 12'>
+ <div className={'tex}t - center py - 12'>
  <FolderIcon className='w - 16 h - 16 text - gray - 400 mx - auto mb - 4' />
- <h3 className='text - lg font - medium text - gray - 900 dark:text - white mb - 2'>
+ <h3 className={'tex}t - lg font - medium text - gray - 900 dark:text - white mb - 2'>
  No playlists found
 // FIXED:  </h3>
- <p className='text - gray - 600 dark:text - gray - 400 mb - 4'>
+ <p className={'tex}t - gray - 600 dark:text - gray - 400 mb - 4'>
  {searchQuery}
  ? 'Try adjusting your search terms'
  : 'Create your first playlist to get started'}
@@ -475,7 +470,7 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  {!searchQuery && (}
  <button />
 // FIXED:  onClick={() => setShowCreateModal(true: React.MouseEvent)}
-// FIXED:  className='px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'
+// FIXED:  className={'p}x - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'
  >
  Create Playlist
 // FIXED:  </button>
@@ -484,7 +479,7 @@ export const PlaylistManager: React.FC < PlaylistManagerProps> = ({}
  )}
 
  {/* Create Playlist Modal */}
- <CreatePlaylistModal
+ <CreatePlaylistModal>
  isOpen={showCreateModal} />
  onClose={() => setShowCreateModal(false)}
 // FIXED:  onSubmit={(e: React.FormEvent) => handleCreatePlaylist(e)}

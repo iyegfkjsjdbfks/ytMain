@@ -71,7 +71,7 @@ import { Component, useState } from 'react';
 import * as fs from 'fs';
 import './styles.css';
 
-const MyComponent = () => {;
+const MyComponent = () => {
   return <div>Hello</div>, ;
 };
       `.trim();

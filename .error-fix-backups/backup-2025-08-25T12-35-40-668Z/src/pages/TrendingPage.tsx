@@ -18,9 +18,9 @@ const TrendingPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout
+    <PageLayout>
       title="Trending"
-      icon={<FireIcon className="w-8 h-8 text-red-500" />}
+      icon={<FireIcon className={"w}-8 h-8 text-red-500" />}
       data={trendingVideos}
       loading={loading}
       error={error}

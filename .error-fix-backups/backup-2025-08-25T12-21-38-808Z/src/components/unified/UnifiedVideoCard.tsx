@@ -14,11 +14,11 @@ export const UnifiedVideoCard: React.FC<UnifiedVideoCardProps> = ({
 
   return (
     <div className={'component ' + className}>
-      <div className="component-header">
+      <div className={"component}-header">
         <h3>Unified Video Card</h3>
       </div>
       
-      <div className="component-content">
+      <div className={"component}-content">
         {children || (
           <div>
             <button onClick={() => setIsActive(!isActive)}>

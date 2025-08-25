@@ -5,7 +5,7 @@ import type { Video } from '../src/types/core.ts';
 
 const AdvancedVideoPlayer = () => {
     return (
-        <div className="p-4">
+        <div className={"p}-4">
             <h2>AdvancedVideoPlayer - Temporarily Simplified</h2>
             <p>This component has been temporarily simplified due to syntax errors.</p>
             <p>Original functionality will be restored soon.</p>

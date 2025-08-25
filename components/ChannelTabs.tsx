@@ -15,10 +15,10 @@ const ChannelTabs: React.FC<ChannelTabsProps> = ({ activeTab, onTabChange }) => 
   ];
 
   return (
-    <div className="border-b border-gray-200">
-      <nav className="flex space-x-8">
+    <div className={"border}-b border-gray-200">
+      <nav className={"fle}x space-x-8">
         {tabs.map((tab) => (
-          <button
+          <button>
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={`

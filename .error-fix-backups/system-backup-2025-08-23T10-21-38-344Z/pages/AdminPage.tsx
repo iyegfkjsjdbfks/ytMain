@@ -73,19 +73,19 @@ const AdminPage: React.FC = () => {}
 
  setStoreVideos(videos);
  } catch (error) {}
- (console as any).error('Failed to load store videos:', error);
+ (console).error('Failed to load store videos:', error);
  };
 
  const handleTestFetch = async (): Promise<any> < void> => {}
  setLoading(true);
  try {}
- (console as any).log(`🧪 Testing fetch for video ID: ${testVideoId}`);
+ (console).log(`🧪 Testing fetch for video ID: ${testVideoId}`);
 
  // Check environment variables first
  const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
  const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
- (console as any).log('🔑 API Key available:', !!searchApiKey);
- (console as any).log('🔍 Search Engine ID available:', !!searchEngineId);
+ (console).log('🔑 API Key available:', !!searchApiKey);
+ (console).log('🔍 Search Engine ID available:', !!searchEngineId);
 
  if (!searchApiKey || !searchEngineId) {}
  setTestResult({}
@@ -104,7 +104,7 @@ const AdminPage: React.FC = () => {}
  // Refresh store videos
  await loadStoreVideos();
  } catch (error) {}
- (console as any).error('Test fetch error:', error);
+ (console).error('Test fetch error:', error);
  setTestResult({ error: error.message });
  } finally {}
  setLoading(false);
@@ -113,7 +113,7 @@ const AdminPage: React.FC = () => {}
  const handleTestUnifiedService = async (): Promise<any> < void> => {}
  setLoading(true);
  try {}
- (console as any).log(`🧪 Testing unified service for video ID: google - search-${testVideoId}`);
+ (console).log(`🧪 Testing unified service for video ID: google - search-${testVideoId}`);
 
  // Import unified data service
  const { unifiedDataService } = await import('../src / services / unifiedDataService');
@@ -125,9 +125,9 @@ const AdminPage: React.FC = () => {}
  const result = await unifiedDataService.getVideoById(`google - search-${testVideoId}`);
  setUnifiedServiceTest(result);
 
- (console as any).log('🧪 Unified service result:', result);
+ (console).log('🧪 Unified service result:', result);
  } catch (error) {}
- (console as any).error('Unified service test error:', error);
+ (console).error('Unified service test error:', error);
  setUnifiedServiceTest({ error: error.message });
  } finally {}
  setLoading(false);
@@ -139,7 +139,7 @@ const AdminPage: React.FC = () => {}
  googleSearchVideoStore.clear();
  await loadStoreVideos();
  } catch (error) {}
- (console as any).error('Failed to clear store:', error);
+ (console).error('Failed to clear store:', error);
  };
 
  // YouTube Metadata Debug handlers
@@ -166,9 +166,9 @@ const AdminPage: React.FC = () => {}
  const testVideoId: string = 'bnVUHWCynig';
  const proxyUrl: string = `/api / youtube / v3 / videos?part = snippet,statistics,contentDetails&id="${testVideoId}`;"
 
- (console as any).log('🔄 Testing proxy endpoint:', proxyUrl);
+ (console).log('🔄 Testing proxy endpoint:', proxyUrl);
 
- const response = await (fetch as any)(proxyUrl);
+ const response = await (fetch)(proxyUrl);
 
  if (response.ok) {}
  const data = await response.json();
@@ -220,9 +220,9 @@ const AdminPage: React.FC = () => {}
  const testVideoId: string = 'bnVUHWCynig';
  const directUrl = `https://www.googleapis.com / youtube / v3 / videos?key="${apiKey}&part" = snippet,statistics,contentDetails&id="${testVideoId}`;"
 
- (console as any).log('🔄 Testing direct API:', directUrl.replace(apiKey, '[API_KEY]'));
+ (console).log('🔄 Testing direct API:', directUrl.replace(apiKey, '[API_KEY]'));
 
- const response = await (fetch as any)(directUrl);
+ const response = await (fetch)(directUrl);
 
  if (response.ok) {}
  const data = await response.json();
@@ -253,7 +253,7 @@ const AdminPage: React.FC = () => {}
  const testYouTubeMetadataFetch = async (): Promise<any> < void> => {}
  setLoading(true);
  try {}
- (console as any).log('🔄 Testing YouTube metadata fetch using app services...');
+ (console).log('🔄 Testing YouTube metadata fetch using app services...');
 
  // Import unified data service
  const { unifiedDataService } = await import('../src / services / unifiedDataService');
@@ -264,7 +264,7 @@ const AdminPage: React.FC = () => {}
  // Test the unified service
  const video = await unifiedDataService.getVideoById(testVideoId);
 
- if (video as any) {}
+ if (video) {}
  setYoutubeMetadataTest({}
  success: true,
  video: {,}
@@ -309,7 +309,7 @@ const AdminPage: React.FC = () => {}
  setProvider(newProvider);
  setSaveMessage('Settings saved successfully!');
  } catch (error) {}
- (console as any).error('Error saving settings:', error);
+ (console).error('Error saving settings:', error);
  setSaveMessage('Error saving settings. Please try again.');
  } finally {}
  setIsSaving(false);
@@ -328,7 +328,7 @@ const AdminPage: React.FC = () => {}
  setPlayerType(newPlayerType);
  setSaveMessage('YouTube player type updated successfully!');
  } catch (error) {}
- (console as any).error('Error saving player type:', error);
+ (console).error('Error saving player type:', error);
  setSaveMessage('Error saving player type. Please try again.');
  } finally {}
  setIsSaving(false);
@@ -345,7 +345,7 @@ const AdminPage: React.FC = () => {}
  setLocalPlayerType(newPlayerType);
  setSaveMessage('Local video player type updated successfully!');
  } catch (error) {}
- (console as any).error('Error saving local player type:', error);
+ (console).error('Error saving local player type:', error);
  setSaveMessage('Error saving local player type. Please try again.');
  } finally {}
  setIsSaving(false);
@@ -362,7 +362,7 @@ const AdminPage: React.FC = () => {}
  setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
  setSaveMessage('YouTube player settings updated successfully!');
  } catch (error) {}
- (console as any).error('Error toggling YouTube player:', error);
+ (console).error('Error toggling YouTube player:', error);
  setSaveMessage('Error updating YouTube player settings. Please try again.');
  } finally {}
  setIsSaving(false);
@@ -378,7 +378,7 @@ const AdminPage: React.FC = () => {}
  setEnabledLocalPlayersState(getEnabledLocalPlayers());
  setSaveMessage('Local player settings updated successfully!');
  } catch (error) {}
- (console as any).error('Error toggling local player:', error);
+ (console).error('Error toggling local player:', error);
  setSaveMessage('Error updating local player settings. Please try again.');
  } finally {}
  setIsSaving(false);
@@ -393,7 +393,7 @@ const AdminPage: React.FC = () => {}
  setInitialSearchKeyword(initialSearchKeyword);
  setSaveMessage('Initial search keyword updated successfully!');
  } catch (error) {}
- (console as any).error('Error saving initial search keyword:', error);
+ (console).error('Error saving initial search keyword:', error);
  setSaveMessage('Error saving initial search keyword. Please try again.');
  } finally {}
  setIsSaving(false);
@@ -409,7 +409,7 @@ const AdminPage: React.FC = () => {}
  const usedOnPages = getPlayerUsageByPage(config.type);
 
  const getPerformanceColor = (performance: any) => {}
- switch (performance as any) {}
+ switch (performance) {}
  case 'high': return 'text - green - 600 bg - green - 100';
  case 'medium': return 'text - yellow - 600 bg - yellow - 100';
  case 'low': return 'text - red - 600 bg - red - 100';
@@ -417,7 +417,7 @@ const AdminPage: React.FC = () => {}
  };
 
  const getComplexityColor = (complexity: any) => {}
- switch (complexity as any) {}
+ switch (complexity) {}
  case 'simple': return 'text - blue - 600 bg - blue - 100';
  case 'moderate': return 'text - purple - 600 bg - purple - 100';
  case 'advanced': return 'text - orange - 600 bg - orange - 100';
@@ -431,7 +431,7 @@ const AdminPage: React.FC = () => {}
  };
 
  return (
- <div
+ <div>
 // FIXED:  className={`relative p - 4 border - 2 rounded - lg cursor - pointer transition - all duration - 200 hover:shadow - md ${}
  isSelected
  ? 'border - blue - 500 bg - blue - 50 shadow - md'
@@ -439,22 +439,22 @@ const AdminPage: React.FC = () => {}
  }`} />
 // FIXED:  onClick={(e: React.MouseEvent) => onSelect(e)}
  >
- <div className="flex items - start justify - between mb - 3">
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - start justify - between mb - 3">
+ <div className={"fle}x items - center space - x - 2">
  {getCategoryIcon(config.category)}
- <h3 className="text - lg font - semibold text - gray - 900">{config.name}</h3>
- <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}
+ <h3 className={"tex}t - lg font - semibold text - gray - 900">{config.name}</h3>
+ <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}>
  isEnabled ? 'text - green - 600 bg - green - 100' : 'text - gray - 600 bg - gray - 100' />
  }`}>
  {isEnabled ? 'Enabled' : 'Disabled'}
 // FIXED:  </span>
  {isSelected && (}
- <span className="px - 2 py - 1 text - xs font - medium rounded - full bg - blue - 600 text - white">
+ <span className={"p}x - 2 py - 1 text - xs font - medium rounded - full bg - blue - 600 text - white">
  ACTIVE
 // FIXED:  </span>
  )}
 // FIXED:  </div>
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center space - x - 2">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
  e.stopPropagation();
@@ -476,34 +476,34 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
-<p className="text - sm text - gray - 600 mb - 3">{config.description}</p>
+<p className={"tex}t - sm text - gray - 600 mb - 3">{config.description}</p>
 
  {/* Page Usage Information */}
  {usedOnPages.length > 0 && (}
- <div className="mb - 3 p - 3 bg - blue - 50 rounded - lg border border - blue - 200">
- <h4 className="text - sm font - medium text - blue - 900 mb - 2 flex items - center">
+ <div className={"m}b - 3 p - 3 bg - blue - 50 rounded - lg border border - blue - 200">
+ <h4 className={"tex}t - sm font - medium text - blue - 900 mb - 2 flex items - center">
  <CogIcon className="h - 4 w - 4 mr - 1" />
  Currently Used On:
 // FIXED:  </h4>
- <div className="flex flex - wrap gap - 1">
+ <div className={"fle}x flex - wrap gap - 1">
  {usedOnPages.map((page) => (}
- <span key={page} className="px - 2 py - 1 text - xs bg - blue - 600 text - white rounded font - medium">
+ <span key={page} className={"p}x - 2 py - 1 text - xs bg - blue - 600 text - white rounded font - medium">
  {getPageDisplayName(page)}
 // FIXED:  </span>
  ))}
 // FIXED:  </div>
-<p className="text - xs text - blue - 700 mt - 1">
+<p className={"tex}t - xs text - blue - 700 mt - 1">
  {config.category === 'youtube' ? 'For YouTube videos' : 'For local / custom videos'}
 // FIXED:  </p>
 // FIXED:  </div>
  )}
 
- <div className="mb - 3">
- <h4 className="text - sm font - medium text - gray - 700 mb - 1">Features:</h4>
- <div className="flex flex - wrap gap - 1">
+ <div className={"m}b - 3">
+ <h4 className={"tex}t - sm font - medium text - gray - 700 mb - 1">Features:</h4>
+ <div className={"fle}x flex - wrap gap - 1">
  {config.features.map((feature,}
  index) => (
- <span key={index} className="px - 2 py - 1 text - xs bg - gray - 100 text - gray - 700 rounded">
+ <span key={index} className={"p}x - 2 py - 1 text - xs bg - gray - 100 text - gray - 700 rounded">
  {feature}
 // FIXED:  </span>
  ))}
@@ -511,8 +511,8 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  <div>
- <h4 className="text - sm font - medium text - gray - 700 mb - 1">Best for:</h4>
- <ul className="text - xs text - gray - 600 list - disc list - inside">
+ <h4 className={"tex}t - sm font - medium text - gray - 700 mb - 1">Best for:</h4>
+ <ul className={"tex}t - xs text - gray - 600 list - disc list - inside">
  {config.useCases.slice(0, 2).map((useCase,}
  index) => (
  <li key={index}>{useCase}</li>
@@ -521,7 +521,7 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {isSelected && (}
- <div className="absolute top - 2 right - 2">
+ <div className={"absolut}e top - 2 right - 2">
  <div className="w - 4 h - 4 bg - blue - 500 rounded - full flex items - center justify - center">
  <div className="w - 2 h - 2 bg - white rounded - full" />
 // FIXED:  </div>
@@ -534,18 +534,18 @@ const AdminPage: React.FC = () => {}
  const pageConfigurations = getAllPageConfigurations();
 
  return (
- <div className="min - h - screen bg - gray - 50 py - 8">
- <div className="max - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8">
- <div className="bg - white shadow rounded - lg">
- <div className="px - 6 py - 4 border - b border - gray - 200">
- <h1 className="text - 2xl font - bold text - gray - 900">Video Player Management</h1>
- <p className="mt - 1 text - sm text - gray - 600">
+ <div className={"mi}n - h - screen bg - gray - 50 py - 8">
+ <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8">
+ <div className={"b}g - white shadow rounded - lg">
+ <div className={"p}x - 6 py - 4 border - b border - gray - 200">
+ <h1 className={"tex}t - 2xl font - bold text - gray - 900">Video Player Management</h1>
+ <p className={"m}t - 1 text - sm text - gray - 600">
  Configure video players, search providers, and default settings for your application.
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* Tab Navigation */}
- <div className="border - b border - gray - 200">
+ <div className={"borde}r - b border - gray - 200">
  <nav className="-mb - px flex space - x - 8 px - 6" aria - label="Tabs">
  {[}
  { id: 'overview',}
@@ -562,7 +562,7 @@ const AdminPage: React.FC = () => {}
  name: 'API Testing', icon: BugAntIcon }].map((tab) => {}
  const Icon = tab.icon;
  return (
- <button
+ <button>
  key={tab.id} />
 // FIXED:  onClick={() => setActiveTab(tab.id as any: React.MouseEvent)}
 // FIXED:  className={`${}
@@ -579,10 +579,10 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </nav>
 // FIXED:  </div>
 
- <div className="px - 6 py - 6">
+ <div className={"p}x - 6 py - 6">
  {/* Save Message */}
  {saveMessage && (}
- <div className={`mb - 6 p - 4 rounded - md ${}
+ <div className={`mb - 6 p - 4 rounded - md ${}>
  saveMessage.includes('Error')
  ? 'bg - red - 50 border border - red - 200 text - red - 700'
  : 'bg - green - 50 border border - green - 200 text - green - 700' />
@@ -593,46 +593,46 @@ const AdminPage: React.FC = () => {}
 
  {/* Player Configuration Tab */}
  {activeTab === 'player - config' && (}
- <div className="space - y - 8">
+ <div className={"spac}e - y - 8">
  <div>
- <h2 className="text - lg font - medium text - gray - 900 mb - 2 flex items - center">
+ <h2 className={"tex}t - lg font - medium text - gray - 900 mb - 2 flex items - center">
  <CogIcon className="h - 5 w - 5 mr - 2 text - purple - 500" />
  Video Player Configuration
 // FIXED:  </h2>
- <p className="text - sm text - gray - 600 mb - 6">
+ <p className={"tex}t - sm text - gray - 600 mb - 6">
  Configure video players by category and page. Currently used players are highlighted in each section.
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* 1. YouTube Players Category */}
- <div className="bg - red - 50 rounded - lg p - 6 border border - red - 200">
- <h3 className="text - xl font - bold text - gray - 900 mb - 6 flex items - center">
+ <div className={"b}g - red - 50 rounded - lg p - 6 border border - red - 200">
+ <h3 className={"tex}t - xl font - bold text - gray - 900 mb - 6 flex items - center">
  <PlayIcon className="h - 6 w - 6 mr - 3 text - red - 500" />
  YouTube Players
 // FIXED:  </h3>
 
  {/* Pages within YouTube Category */}
- <div className="space - y - 6">
+ <div className={"spac}e - y - 6">
  <div>
- <h4 className="text - lg font - semibold text - gray - 800 mb - 4">Pages using YouTube Players:</h4>
- <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 4 mb - 6">
+ <h4 className={"tex}t - lg font - semibold text - gray - 800 mb - 4">Pages using YouTube Players:</h4>
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 4 mb - 6">
  {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {}
  const pageConfig = pageConfigurations.page;
  const isCurrentGlobalPlayer = pageConfig.youtubePlayer === playerType;
  return (
- <div key={page} className={`bg - white border - 2 rounded - lg p - 4 transition - colors ${}
+ <div key={page} className={`bg - white border - 2 rounded - lg p - 4 transition - colors ${}>
  isCurrentGlobalPlayer ? 'border - red - 500 bg - red - 50' : 'border - gray - 200 hover:border - red - 300' />
  }`}>
- <h5 className="font - semibold text - gray - 800 mb - 2 flex items - center">
+ <h5 className={"fon}t - semibold text - gray - 800 mb - 2 flex items - center">
  <SparklesIcon className="h - 4 w - 4 mr - 1 text - green - 500" />
  {getPageDisplayName(page)}
 // FIXED:  </h5>
- <div className="text - sm">
- <div className="font - medium text - gray - 900">
+ <div className={"tex}t - sm">
+ <div className={"fon}t - medium text - gray - 900">
  {VIDEO_PLAYER_CONFIGS[pageConfig.youtubePlayer].name}
 // FIXED:  </div>
  {isCurrentGlobalPlayer && (}
- <span className="inline - block mt - 1 px - 2 py - 1 text - xs font - medium rounded - full bg - red - 600 text - white">
+ <span className={"inlin}e - block mt - 1 px - 2 py - 1 text - xs font - medium rounded - full bg - red - 600 text - white">
  ACTIVE GLOBAL
 // FIXED:  </span>
  )}
@@ -645,8 +645,8 @@ const AdminPage: React.FC = () => {}
 
  {/* Available YouTube Players */}
  <div>
- <h4 className="text - lg font - semibold text - gray - 800 mb - 4">Available YouTube Video Players:</h4>
- <div className="grid grid - cols - 1 lg:grid - cols - 2 gap - 6">
+ <h4 className={"tex}t - lg font - semibold text - gray - 800 mb - 4">Available YouTube Video Players:</h4>
+ <div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">
  {getVideoPlayersByCategory('youtube').map((config) => {}
  const isCurrentPlayer = config.type === playerType;
  const isEnabled = enabledYouTubePlayers.includes(config.type as YouTubePlayerType);
@@ -654,21 +654,21 @@ const AdminPage: React.FC = () => {}
  pageConfigurations.page.youtubePlayer === config.type);
 
  return (
- <div key={config.type} className={`relative p - 4 border - 2 rounded - lg cursor - pointer transition - all duration - 200 hover:shadow - md ${}
+ <div key={config.type} className={`relative p - 4 border - 2 rounded - lg cursor - pointer transition - all duration - 200 hover:shadow - md ${}>
  isCurrentPlayer
  ? 'border - red - 500 bg - red - 50 shadow - md'
  : 'border - gray - 200 bg - white hover:border - red - 300' />
  }`} onClick={() => handlePlayerTypeChange(config.type as YouTubePlayerType: React.MouseEvent)}>
- <div className="flex items - start justify - between mb - 3">
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - start justify - between mb - 3">
+ <div className={"fle}x items - center space - x - 2">
  <PlayIcon className="h - 5 w - 5 text - red - 500" />
- <h5 className="text - lg font - semibold text - gray - 900">{config.name}</h5>
+ <h5 className={"tex}t - lg font - semibold text - gray - 900">{config.name}</h5>
  {isCurrentPlayer && (}
- <span className="px - 2 py - 1 text - xs font - medium rounded - full bg - red - 600 text - white">
+ <span className={"p}x - 2 py - 1 text - xs font - medium rounded - full bg - red - 600 text - white">
  CURRENT GLOBAL
 // FIXED:  </span>
  )}
- <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}
+ <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}>
  isEnabled ? 'text - green - 600 bg - green - 100' : 'text - gray - 600 bg - gray - 100' />
  }`}>
  {isEnabled ? 'Enabled' : 'Disabled'}
@@ -688,14 +688,14 @@ const AdminPage: React.FC = () => {}
  {isEnabled ? 'Disable' : 'Enable'}
 // FIXED:  </button>
 // FIXED:  </div>
-<p className="text - sm text - gray - 600 mb - 3">{config.description}</p>
+<p className={"tex}t - sm text - gray - 600 mb - 3">{config.description}</p>
 
  {usedOnPages.length > 0 && (}
- <div className="mb - 3 p - 3 bg - red - 100 rounded - lg border border - red - 200">
- <h6 className="text - sm font - medium text - red - 900 mb - 2">Currently Used On:</h6>
- <div className="flex flex - wrap gap - 1">
+ <div className={"m}b - 3 p - 3 bg - red - 100 rounded - lg border border - red - 200">
+ <h6 className={"tex}t - sm font - medium text - red - 900 mb - 2">Currently Used On:</h6>
+ <div className={"fle}x flex - wrap gap - 1">
  {usedOnPages.map((page) => (}
- <span key={page} className="px - 2 py - 1 text - xs bg - red - 600 text - white rounded font - medium">
+ <span key={page} className={"p}x - 2 py - 1 text - xs bg - red - 600 text - white rounded font - medium">
  {getPageDisplayName(page)}
 // FIXED:  </span>
  ))}
@@ -703,21 +703,21 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
  )}
 
- <div className="grid grid - cols - 1 md:grid - cols - 2 gap - 3">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 gap - 3">
  <div>
- <h6 className="text - sm font - medium text - gray - 700 mb - 1">Features:</h6>
- <div className="flex flex - wrap gap - 1">
+ <h6 className={"tex}t - sm font - medium text - gray - 700 mb - 1">Features:</h6>
+ <div className={"fle}x flex - wrap gap - 1">
  {config.features.slice(0, 3).map((feature,}
  index) => (
- <span key={index} className="px - 2 py - 1 text - xs bg - gray - 100 text - gray - 700 rounded">
+ <span key={index} className={"p}x - 2 py - 1 text - xs bg - gray - 100 text - gray - 700 rounded">
  {feature}
 // FIXED:  </span>
  ))}
 // FIXED:  </div>
 // FIXED:  </div>
  <div>
- <h6 className="text - sm font - medium text - gray - 700 mb - 1">Performance:</h6>
- <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}
+ <h6 className={"tex}t - sm font - medium text - gray - 700 mb - 1">Performance:</h6>
+ <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}>
  config.performance === 'high' ? 'text - green - 600 bg - green - 100' :
  config.performance === 'medium' ? 'text - yellow - 600 bg - yellow - 100' :
  'text - red - 600 bg - red - 100' />
@@ -735,34 +735,34 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* 2. Local Video Players Category */}
- <div className="bg - blue - 50 rounded - lg p - 6 border border - blue - 200">
- <h3 className="text - xl font - bold text - gray - 900 mb - 6 flex items - center">
+ <div className={"b}g - blue - 50 rounded - lg p - 6 border border - blue - 200">
+ <h3 className={"tex}t - xl font - bold text - gray - 900 mb - 6 flex items - center">
  <VideoCameraIcon className="h - 6 w - 6 mr - 3 text - blue - 500" />
  Local Video Players
 // FIXED:  </h3>
 
  {/* Pages within Local Video Category */}
- <div className="space - y - 6">
+ <div className={"spac}e - y - 6">
  <div>
- <h4 className="text - lg font - semibold text - gray - 800 mb - 4">Pages using Local Video Players:</h4>
- <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 4 mb - 6">
+ <h4 className={"tex}t - lg font - semibold text - gray - 800 mb - 4">Pages using Local Video Players:</h4>
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 4 mb - 6">
  {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {}
  const pageConfig = pageConfigurations.page;
  const isCurrentGlobalPlayer = pageConfig.localPlayer === localPlayerType;
  return (
- <div key={page} className={`bg - white border - 2 rounded - lg p - 4 transition - colors ${}
+ <div key={page} className={`bg - white border - 2 rounded - lg p - 4 transition - colors ${}>
  isCurrentGlobalPlayer ? 'border - blue - 500 bg - blue - 50' : 'border - gray - 200 hover:border - blue - 300' />
  }`}>
- <h5 className="font - semibold text - gray - 800 mb - 2 flex items - center">
+ <h5 className={"fon}t - semibold text - gray - 800 mb - 2 flex items - center">
  <SparklesIcon className="h - 4 w - 4 mr - 1 text - green - 500" />
  {getPageDisplayName(page)}
 // FIXED:  </h5>
- <div className="text - sm">
- <div className="font - medium text - gray - 900">
+ <div className={"tex}t - sm">
+ <div className={"fon}t - medium text - gray - 900">
  {VIDEO_PLAYER_CONFIGS[pageConfig.localPlayer].name}
 // FIXED:  </div>
  {isCurrentGlobalPlayer && (}
- <span className="inline - block mt - 1 px - 2 py - 1 text - xs font - medium rounded - full bg - blue - 600 text - white">
+ <span className={"inlin}e - block mt - 1 px - 2 py - 1 text - xs font - medium rounded - full bg - blue - 600 text - white">
  ACTIVE GLOBAL
 // FIXED:  </span>
  )}
@@ -775,8 +775,8 @@ const AdminPage: React.FC = () => {}
 
  {/* Available Local Video Players */}
  <div>
- <h4 className="text - lg font - semibold text - gray - 800 mb - 4">Available Local Video Players:</h4>
- <div className="grid grid - cols - 1 lg:grid - cols - 2 gap - 6">
+ <h4 className={"tex}t - lg font - semibold text - gray - 800 mb - 4">Available Local Video Players:</h4>
+ <div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">
  {getVideoPlayersByCategory('local').map((config) => {}
  const isCurrentPlayer = config.type === localPlayerType;
  const isEnabled = enabledLocalPlayers.includes(config.type as LocalVideoPlayerType);
@@ -784,21 +784,21 @@ const AdminPage: React.FC = () => {}
  pageConfigurations.page.localPlayer === config.type);
 
  return (
- <div key={config.type} className={`relative p - 4 border - 2 rounded - lg cursor - pointer transition - all duration - 200 hover:shadow - md ${}
+ <div key={config.type} className={`relative p - 4 border - 2 rounded - lg cursor - pointer transition - all duration - 200 hover:shadow - md ${}>
  isCurrentPlayer
  ? 'border - blue - 500 bg - blue - 50 shadow - md'
  : 'border - gray - 200 bg - white hover:border - blue - 300' />
  }`} onClick={() => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType: React.MouseEvent)}>
- <div className="flex items - start justify - between mb - 3">
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - start justify - between mb - 3">
+ <div className={"fle}x items - center space - x - 2">
  <VideoCameraIcon className="h - 5 w - 5 text - blue - 500" />
- <h5 className="text - lg font - semibold text - gray - 900">{config.name}</h5>
+ <h5 className={"tex}t - lg font - semibold text - gray - 900">{config.name}</h5>
  {isCurrentPlayer && (}
- <span className="px - 2 py - 1 text - xs font - medium rounded - full bg - blue - 600 text - white">
+ <span className={"p}x - 2 py - 1 text - xs font - medium rounded - full bg - blue - 600 text - white">
  CURRENT GLOBAL
 // FIXED:  </span>
  )}
- <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}
+ <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}>
  isEnabled ? 'text - green - 600 bg - green - 100' : 'text - gray - 600 bg - gray - 100' />
  }`}>
  {isEnabled ? 'Enabled' : 'Disabled'}
@@ -820,14 +820,14 @@ const AdminPage: React.FC = () => {}
  {isEnabled ? 'Disable' : 'Enable'}
 // FIXED:  </button>
 // FIXED:  </div>
-<p className="text - sm text - gray - 600 mb - 3">{config.description}</p>
+<p className={"tex}t - sm text - gray - 600 mb - 3">{config.description}</p>
 
  {usedOnPages.length > 0 && (}
- <div className="mb - 3 p - 3 bg - blue - 100 rounded - lg border border - blue - 200">
- <h6 className="text - sm font - medium text - blue - 900 mb - 2">Currently Used On:</h6>
- <div className="flex flex - wrap gap - 1">
+ <div className={"m}b - 3 p - 3 bg - blue - 100 rounded - lg border border - blue - 200">
+ <h6 className={"tex}t - sm font - medium text - blue - 900 mb - 2">Currently Used On:</h6>
+ <div className={"fle}x flex - wrap gap - 1">
  {usedOnPages.map((page) => (}
- <span key={page} className="px - 2 py - 1 text - xs bg - blue - 600 text - white rounded font - medium">
+ <span key={page} className={"p}x - 2 py - 1 text - xs bg - blue - 600 text - white rounded font - medium">
  {getPageDisplayName(page)}
 // FIXED:  </span>
  ))}
@@ -835,21 +835,21 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
  )}
 
- <div className="grid grid - cols - 1 md:grid - cols - 2 gap - 3">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 gap - 3">
  <div>
- <h6 className="text - sm font - medium text - gray - 700 mb - 1">Features:</h6>
- <div className="flex flex - wrap gap - 1">
+ <h6 className={"tex}t - sm font - medium text - gray - 700 mb - 1">Features:</h6>
+ <div className={"fle}x flex - wrap gap - 1">
  {config.features.slice(0, 3).map((feature,}
  index) => (
- <span key={index} className="px - 2 py - 1 text - xs bg - gray - 100 text - gray - 700 rounded">
+ <span key={index} className={"p}x - 2 py - 1 text - xs bg - gray - 100 text - gray - 700 rounded">
  {feature}
 // FIXED:  </span>
  ))}
 // FIXED:  </div>
 // FIXED:  </div>
  <div>
- <h6 className="text - sm font - medium text - gray - 700 mb - 1">Performance:</h6>
- <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}
+ <h6 className={"tex}t - sm font - medium text - gray - 700 mb - 1">Performance:</h6>
+ <span className={`px - 2 py - 1 text - xs font - medium rounded - full ${}>
  config.performance === 'high' ? 'text - green - 600 bg - green - 100' :
  config.performance === 'medium' ? 'text - yellow - 600 bg - yellow - 100' :
  'text - red - 600 bg - red - 100' />
@@ -870,34 +870,34 @@ const AdminPage: React.FC = () => {}
 
  {/* Overview Tab */}
  {activeTab === 'overview' && (}
- <div className="space - y - 6">
- <div className="grid grid - cols - 1 md:grid - cols - 2 gap - 6">
+ <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 gap - 6">
  {/* Current Settings Summary */}
- <div className="bg - gray - 50 rounded - lg p - 6">
- <h3 className="text - lg font - semibold text - gray - 900 mb - 4 flex items - center">
+ <div className={"b}g - gray - 50 rounded - lg p - 6">
+ <h3 className={"tex}t - lg font - semibold text - gray - 900 mb - 4 flex items - center">
  <CogIcon className="h - 5 w - 5 mr - 2" />
  Current Configuration
 // FIXED:  </h3>
- <div className="space - y - 3">
+ <div className={"spac}e - y - 3">
  <div>
- <span className="text - sm font - medium text - gray - 600">Search Provider:</span>
- <span className="ml - 2 text - sm text - gray - 900 capitalize">{provider.replace('-', ' ')}</span>
+ <span className={"tex}t - sm font - medium text - gray - 600">Search Provider:</span>
+ <span className={"m}l - 2 text - sm text - gray - 900 capitalize">{provider.replace('-', ' ')}</span>
 // FIXED:  </div>
  <div>
- <span className="text - sm font - medium text - gray - 600">YouTube Player:</span>
- <span className="ml - 2 text - sm text - gray - 900">{VIDEO_PLAYER_CONFIGS.playerType.name}</span>
+ <span className={"tex}t - sm font - medium text - gray - 600">YouTube Player:</span>
+ <span className={"m}l - 2 text - sm text - gray - 900">{VIDEO_PLAYER_CONFIGS.playerType.name}</span>
 // FIXED:  </div>
  <div>
- <span className="text - sm font - medium text - gray - 600">Local Video Player:</span>
- <span className="ml - 2 text - sm text - gray - 900">{VIDEO_PLAYER_CONFIGS.localPlayerType.name}</span>
+ <span className={"tex}t - sm font - medium text - gray - 600">Local Video Player:</span>
+ <span className={"m}l - 2 text - sm text - gray - 900">{VIDEO_PLAYER_CONFIGS.localPlayerType.name}</span>
 // FIXED:  </div>
  <div>
- <span className="text - sm font - medium text - gray - 600">Enabled YouTube Players:</span>
- <span className="ml - 2 text - sm text - gray - 900">{enabledYouTubePlayers.length}</span>
+ <span className={"tex}t - sm font - medium text - gray - 600">Enabled YouTube Players:</span>
+ <span className={"m}l - 2 text - sm text - gray - 900">{enabledYouTubePlayers.length}</span>
 // FIXED:  </div>
  <div>
- <span className="text - sm font - medium text - gray - 600">Enabled Local Players:</span>
- <span className="ml - 2 text - sm text - gray - 900">{enabledLocalPlayers.length}</span>
+ <span className={"tex}t - sm font - medium text - gray - 600">Enabled Local Players:</span>
+ <span className={"m}l - 2 text - sm text - gray - 900">{enabledLocalPlayers.length}</span>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -905,37 +905,37 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Quick Stats */}
- <div className="grid grid - cols - 1 md:grid - cols - 3 gap - 4">
- <div className="bg - white border border - gray - 200 rounded - lg p - 4">
- <div className="flex items - center">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 3 gap - 4">
+ <div className={"b}g - white border border - gray - 200 rounded - lg p - 4">
+ <div className={"fle}x items - center">
  <PlayIcon className="h - 8 w - 8 text - red - 500" />
- <div className="ml - 3">
- <p className="text - sm font - medium text - gray - 600">YouTube Players</p>
- <p className="text - 2xl font - semibold text - gray - 900">
+ <div className={"m}l - 3">
+ <p className={"tex}t - sm font - medium text - gray - 600">YouTube Players</p>
+ <p className={"tex}t - 2xl font - semibold text - gray - 900">
  {enabledYouTubePlayers.length} / {getVideoPlayersByCategory('youtube').length}
 // FIXED:  </p>
- <p className="text - xs text - gray - 500">Enabled / Total</p>
+ <p className={"tex}t - xs text - gray - 500">Enabled / Total</p>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className="bg - white border border - gray - 200 rounded - lg p - 4">
- <div className="flex items - center">
+ <div className={"b}g - white border border - gray - 200 rounded - lg p - 4">
+ <div className={"fle}x items - center">
  <VideoCameraIcon className="h - 8 w - 8 text - blue - 500" />
- <div className="ml - 3">
- <p className="text - sm font - medium text - gray - 600">Local Players</p>
- <p className="text - 2xl font - semibold text - gray - 900">
+ <div className={"m}l - 3">
+ <p className={"tex}t - sm font - medium text - gray - 600">Local Players</p>
+ <p className={"tex}t - 2xl font - semibold text - gray - 900">
  {enabledLocalPlayers.length} / {getVideoPlayersByCategory('local').length}
 // FIXED:  </p>
- <p className="text - xs text - gray - 500">Enabled / Total</p>
+ <p className={"tex}t - xs text - gray - 500">Enabled / Total</p>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className="bg - white border border - gray - 200 rounded - lg p - 4">
- <div className="flex items - center">
+ <div className={"b}g - white border border - gray - 200 rounded - lg p - 4">
+ <div className={"fle}x items - center">
  <SparklesIcon className="h - 8 w - 8 text - green - 500" />
- <div className="ml - 3">
- <p className="text - sm font - medium text - gray - 600">Total Players</p>
- <p className="text - 2xl font - semibold text - gray - 900">{getAllVideoPlayers().length}</p>
+ <div className={"m}l - 3">
+ <p className={"tex}t - sm font - medium text - gray - 600">Total Players</p>
+ <p className={"tex}t - 2xl font - semibold text - gray - 900">{getAllVideoPlayers().length}</p>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -945,17 +945,17 @@ const AdminPage: React.FC = () => {}
 
  {/* YouTube Players Tab */}
  {activeTab === 'youtube - players' && (}
- <div className="space - y - 6">
+ <div className={"spac}e - y - 6">
  <div>
- <h2 className="text - lg font - medium text - gray - 900 mb - 2 flex items - center">
+ <h2 className={"tex}t - lg font - medium text - gray - 900 mb - 2 flex items - center">
  <PlayIcon className="h - 5 w - 5 mr - 2 text - red - 500" />
  YouTube Video Players
 // FIXED:  </h2>
- <p className="text - sm text - gray - 600 mb - 6">
+ <p className={"tex}t - sm text - gray - 600 mb - 6">
  Choose which YouTube player implementation to use for YouTube video playback.
 // FIXED:  </p>
 // FIXED:  </div>
-<div className="grid grid - cols - 1 lg:grid - cols - 2 gap - 6">
+<div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">
  {getVideoPlayersByCategory('youtube').map((config) =>}
  renderPlayerCard(
  config,
@@ -969,17 +969,17 @@ const AdminPage: React.FC = () => {}
 
  {/* Local Video Players Tab */}
  {activeTab === 'local - players' && (}
- <div className="space - y - 6">
+ <div className={"spac}e - y - 6">
  <div>
- <h2 className="text - lg font - medium text - gray - 900 mb - 2 flex items - center">
+ <h2 className={"tex}t - lg font - medium text - gray - 900 mb - 2 flex items - center">
  <VideoCameraIcon className="h - 5 w - 5 mr - 2 text - blue - 500" />
  Local Video Players
 // FIXED:  </h2>
- <p className="text - sm text - gray - 600 mb - 6">
+ <p className={"tex}t - sm text - gray - 600 mb - 6">
  Choose which player implementation to use for local video files and custom video sources.
 // FIXED:  </p>
 // FIXED:  </div>
-<div className="grid grid - cols - 1 lg:grid - cols - 2 gap - 6">
+<div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">
  {getVideoPlayersByCategory('local').map((config) =>}
  renderPlayerCard(
  config,
@@ -997,101 +997,101 @@ const AdminPage: React.FC = () => {}
 
  {/* Search Settings Tab */}
  {activeTab === 'search' && (}
- <div className="space - y - 6">
+ <div className={"spac}e - y - 6">
  <div>
- <h2 className="text - lg font - medium text - gray - 900 mb - 2 flex items - center">
+ <h2 className={"tex}t - lg font - medium text - gray - 900 mb - 2 flex items - center">
  <SparklesIcon className="h - 5 w - 5 mr - 2 text - green - 500" />
  Search Settings
 // FIXED:  </h2>
- <p className="text - sm text - gray - 600 mb - 6">
+ <p className={"tex}t - sm text - gray - 600 mb - 6">
  Configure search provider and initial search keyword for the homepage.
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* Initial Search Keyword Section */}
- <div className="bg - blue - 50 rounded - lg p - 6">
- <h3 className="text - lg font - semibold text - gray - 900 mb - 4 flex items - center">
+ <div className={"b}g - blue - 50 rounded - lg p - 6">
+ <h3 className={"tex}t - lg font - semibold text - gray - 900 mb - 4 flex items - center">
  <SparklesIcon className="h - 5 w - 5 mr - 2 text - blue - 500" />
  Initial Search Keyword
 // FIXED:  </h3>
- <p className="text - sm text - gray - 600 mb - 4">
+ <p className={"tex}t - sm text - gray - 600 mb - 4">
  Set the keyword that will be used to search and display results when the app loads initially.
 // FIXED:  </p>
- <div className="space - y - 3">
- <label htmlFor="initial - search - keyword" className="block text - sm font - medium text - gray - 700">
+ <div className={"spac}e - y - 3">
+ <label htmlFor="initial - search - keyword" className={"bloc}k text - sm font - medium text - gray - 700">
  Keyword
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id="initial - search - keyword"
 // FIXED:  type="text"
 // FIXED:  value={initialSearchKeyword} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setInitialSearchKeywordState(e.target.value)}
 // FIXED:  placeholder="Enter keyword for initial search (e.g., trending, music, gaming)"
-// FIXED:  className="mt - 1 block w - full px - 3 py - 2 border border - gray - 300 rounded - md shadow - sm focus:outline - none focus:ring - blue - 500 focus:border - blue - 500 sm:text - sm"
+// FIXED:  className={"m}t - 1 block w - full px - 3 py - 2 border border - gray - 300 rounded - md shadow - sm focus:outline - none focus:ring - blue - 500 focus:border - blue - 500 sm:text - sm"
  />
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSaveInitialSearchKeyword(e)}
 // FIXED:  disabled={isSaving || !initialSearchKeyword.trim()}
-// FIXED:  className="mt - 2 px - 4 py - 2 bg - blue - 500 text - white text - sm font - medium rounded - md hover:bg - blue - 600 disabled:opacity - 50 disabled:cursor - not - allowed transition - colors"
+// FIXED:  className={"m}t - 2 px - 4 py - 2 bg - blue - 500 text - white text - sm font - medium rounded - md hover:bg - blue - 600 disabled:opacity - 50 disabled:cursor - not - allowed transition - colors"
  >
  {isSaving ? 'Saving...' : 'Save Keyword'}
 // FIXED:  </button>
- <p className="text - xs text - gray - 500">
- Current keyword: <span className="font - medium">{getInitialSearchKeyword()}</span>
+ <p className={"tex}t - xs text - gray - 500">
+ Current keyword: <span className={"fon}t - medium">{getInitialSearchKeyword()}</span>
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* YouTube Search Provider Section */}
  <div>
- <h3 className="text - lg font - semibold text - gray - 900 mb - 4">YouTube Search Provider</h3>
- <p className="text - sm text - gray - 600 mb - 6">
+ <h3 className={"tex}t - lg font - semibold text - gray - 900 mb - 4">YouTube Search Provider</h3>
+ <p className={"tex}t - sm text - gray - 600 mb - 6">
  Choose which API to use for searching YouTube videos.
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className="space - y - 4">
+ <div className={"spac}e - y - 4">
  {/* YouTube Data API v3 Option */}
- <div className="flex items - start">
- <div className="flex items - center h - 5">
- <input
+ <div className={"fle}x items - start">
+ <div className={"fle}x items - center h - 5">
+ <input>
 // FIXED:  id="youtube - api"
 // FIXED:  name="search - provider"
 // FIXED:  type="radio"
 // FIXED:  checked={provider === 'youtube - api'} />
 // FIXED:  onChange={() => handleProviderChange('youtube - api': React.ChangeEvent)}
 // FIXED:  disabled={!youtubeApiConfigured || isSaving}
-// FIXED:  className="focus:ring - blue - 500 h - 4 w - 4 text - blue - 600 border - gray - 300 disabled:opacity - 50"
+// FIXED:  className={"focus}:ring - blue - 500 h - 4 w - 4 text - blue - 600 border - gray - 300 disabled:opacity - 50"
  />
 // FIXED:  </div>
- <div className="ml - 3 text - sm">
- <label htmlFor="youtube - api" className="font - medium text - gray - 700">
+ <div className={"m}l - 3 text - sm">
+ <label htmlFor="youtube - api" className={"fon}t - medium text - gray - 700">
  YouTube Data API v3
  {!youtubeApiConfigured && (}
- <span className="ml - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - red - 100 text - red - 800">
+ <span className={"m}l - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - red - 100 text - red - 800">
  Not Configured
 // FIXED:  </span>
  )}
  {youtubeApiConfigured && !youtubeApiAvailable && (}
- <span className="ml - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - yellow - 100 text - yellow - 800">
+ <span className={"m}l - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - yellow - 100 text - yellow - 800">
  Disabled
 // FIXED:  </span>
  )}
  {youtubeApiAvailable && (}
- <span className="ml - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - green - 100 text - green - 800">
+ <span className={"m}l - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - green - 100 text - green - 800">
  Available
 // FIXED:  </span>
  )}
 // FIXED:  </label>
- <p className="text - gray - 500">
+ <p className={"tex}t - gray - 500">
  Official YouTube API with detailed video information and metadata.
  {!youtubeApiConfigured && (}
- <span className="block mt - 1 text - red - 600">
+ <span className={"bloc}k mt - 1 text - red - 600">
  Missing VITE_YOUTUBE_API_KEY in environment variables.
 // FIXED:  </span>
  )}
  {youtubeApiConfigured && !youtubeApiAvailable && provider === 'google - search' && (}
- <span className="block mt - 1 text - yellow - 600">
+ <span className={"bloc}k mt - 1 text - yellow - 600">
  YouTube Data API is disabled when Google Custom Search is selected. Switch to enable YouTube API features.
 // FIXED:  </span>
  )}
@@ -1100,31 +1100,31 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Google Custom Search Option */}
- <div className="flex items - start">
- <div className="flex items - center h - 5">
- <input
+ <div className={"fle}x items - start">
+ <div className={"fle}x items - center h - 5">
+ <input>
 // FIXED:  id="google - search"
 // FIXED:  name="search - provider"
 // FIXED:  type="radio"
 // FIXED:  checked={provider === 'google - search'} />
 // FIXED:  onChange={() => handleProviderChange('google - search': React.ChangeEvent)}
 // FIXED:  disabled={!googleSearchAvailable || isSaving}
-// FIXED:  className="focus:ring - blue - 500 h - 4 w - 4 text - blue - 600 border - gray - 300 disabled:opacity - 50"
+// FIXED:  className={"focus}:ring - blue - 500 h - 4 w - 4 text - blue - 600 border - gray - 300 disabled:opacity - 50"
  />
 // FIXED:  </div>
- <div className="ml - 3 text - sm">
- <label htmlFor="google - search" className="font - medium text - gray - 700">
+ <div className={"m}l - 3 text - sm">
+ <label htmlFor="google - search" className={"fon}t - medium text - gray - 700">
  Google Custom Search JSON API
  {!googleSearchAvailable && (}
- <span className="ml - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - red - 100 text - red - 800">
+ <span className={"m}l - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - red - 100 text - red - 800">
  Not Configured
 // FIXED:  </span>
  )}
 // FIXED:  </label>
- <p className="text - gray - 500">
+ <p className={"tex}t - gray - 500">
  Search YouTube videos through Google Custom Search with iframe embedding.
  {!googleSearchAvailable && (}
- <span className="block mt - 1 text - red - 600">
+ <span className={"bloc}k mt - 1 text - red - 600">
  Missing VITE_GOOGLE_SEARCH_API_KEY or VITE_GOOGLE_SEARCH_ENGINE_ID in environment variables.
 // FIXED:  </span>
  )}
@@ -1133,36 +1133,36 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Hybrid Mode Option */}
- <div className="flex items - start">
- <div className="flex items - center h - 5">
- <input
+ <div className={"fle}x items - start">
+ <div className={"fle}x items - center h - 5">
+ <input>
 // FIXED:  id="hybrid - mode"
 // FIXED:  name="search - provider"
 // FIXED:  type="radio"
 // FIXED:  checked={provider === 'hybrid'} />
 // FIXED:  onChange={() => handleProviderChange('hybrid': React.ChangeEvent)}
 // FIXED:  disabled={!hybridModeAvailable || isSaving}
-// FIXED:  className="focus:ring - blue - 500 h - 4 w - 4 text - blue - 600 border - gray - 300 disabled:opacity - 50"
+// FIXED:  className={"focus}:ring - blue - 500 h - 4 w - 4 text - blue - 600 border - gray - 300 disabled:opacity - 50"
  />
 // FIXED:  </div>
- <div className="ml - 3 text - sm">
- <label htmlFor="hybrid - mode" className="font - medium text - gray - 700">
+ <div className={"m}l - 3 text - sm">
+ <label htmlFor="hybrid - mode" className={"fon}t - medium text - gray - 700">
  Hybrid Mode (YouTube API + Custom Search Fallback)
  {!hybridModeAvailable && (}
- <span className="ml - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - red - 100 text - red - 800">
+ <span className={"m}l - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - red - 100 text - red - 800">
  Not Configured
 // FIXED:  </span>
  )}
  {hybridModeAvailable && (}
- <span className="ml - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - green - 100 text - green - 800">
+ <span className={"m}l - 2 inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium bg - green - 100 text - green - 800">
  Recommended
 // FIXED:  </span>
  )}
 // FIXED:  </label>
- <p className="text - gray - 500">
+ <p className={"tex}t - gray - 500">
  Uses YouTube Data API v3 first for optimal results, then automatically switches to Google Custom Search when quota is reached.
  {!hybridModeAvailable && (}
- <span className="block mt - 1 text - red - 600">
+ <span className={"bloc}k mt - 1 text - red - 600">
  Requires both VITE_YOUTUBE_API_KEY and VITE_GOOGLE_SEARCH_API_KEY + VITE_GOOGLE_SEARCH_ENGINE_ID in environment variables.
 // FIXED:  </span>
  )}
@@ -1172,21 +1172,21 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* API Configuration Help */}
- <div className="mt - 6 p - 4 bg - blue - 50 rounded - md">
- <h3 className="text - sm font - medium text - blue - 900 mb - 2">
+ <div className={"m}t - 6 p - 4 bg - blue - 50 rounded - md">
+ <h3 className={"tex}t - sm font - medium text - blue - 900 mb - 2">
  API Configuration Help
 // FIXED:  </h3>
- <div className="text - sm text - blue - 700 space - y - 2">
+ <div className={"tex}t - sm text - blue - 700 space - y - 2">
  <p>
- <strong > YouTube Data API v3:</strong> Add <code className="bg - blue - 100 px - 1 rounded">VITE_YOUTUBE_API_KEY</code> to your .env.local file.
+ <strong > YouTube Data API v3:</strong> Add <code className={"b}g - blue - 100 px - 1 rounded">VITE_YOUTUBE_API_KEY</code> to your .env.local file.
 // FIXED:  </p>
  <p>
- <strong > Google Custom Search:</strong> Add both <code className="bg - blue - 100 px - 1 rounded">VITE_GOOGLE_SEARCH_API_KEY</code> and <code className="bg - blue - 100 px - 1 rounded">VITE_GOOGLE_SEARCH_ENGINE_ID</code> to your .env.local file.
+ <strong > Google Custom Search:</strong> Add both <code className={"b}g - blue - 100 px - 1 rounded">VITE_GOOGLE_SEARCH_API_KEY</code> and <code className={"b}g - blue - 100 px - 1 rounded">VITE_GOOGLE_SEARCH_ENGINE_ID</code> to your .env.local file.
 // FIXED:  </p>
  <p>
  <strong > Hybrid Mode:</strong> Requires all three environment variables above. Provides the best user experience by using YouTube API first, then falling back to Custom Search when quota limits are reached.
 // FIXED:  </p>
- <p className="text - xs">
+ <p className={"tex}t - xs">
  Restart the development server after adding environment variables.
 // FIXED:  </p>
 // FIXED:  </div>
@@ -1196,40 +1196,40 @@ const AdminPage: React.FC = () => {}
 
  {/* API Testing Tab */}
  {activeTab === 'api - testing' && (}
- <div className="space - y - 6">
+ <div className={"spac}e - y - 6">
  <div>
- <h2 className="text - lg font - medium text - gray - 900 mb - 2 flex items - center">
+ <h2 className={"tex}t - lg font - medium text - gray - 900 mb - 2 flex items - center">
  <BugAntIcon className="h - 5 w - 5 mr - 2 text - purple - 500" />
  API Testing & Debugging
 // FIXED:  </h2>
- <p className="text - sm text - gray - 600 mb - 6">
+ <p className={"tex}t - sm text - gray - 600 mb - 6">
  Test and debug both Google Custom Search API and YouTube Data API v3, manage video store, and troubleshoot metadata issues.
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* API Configuration Check */}
- <div className="bg - gray - 50 rounded - lg p - 6">
- <h3 className="text - lg font - semibold mb - 4">API Configuration</h3>
- <div className="space - y - 2 text - sm">
- <div className="flex items - center">
+ <div className={"b}g - gray - 50 rounded - lg p - 6">
+ <h3 className={"tex}t - lg font - semibold mb - 4">API Configuration</h3>
+ <div className={"spac}e - y - 2 text - sm">
+ <div className={"fle}x items - center">
  <span className="w - 48">Google Search API Key:</span>
- <span className={`px - 2 py - 1 rounded text - xs font - medium ${}
+ <span className={`px - 2 py - 1 rounded text - xs font - medium ${}>
  import.meta.env.VITE_GOOGLE_SEARCH_API_KEY ? 'bg - green - 100 text - green - 800' : 'bg - red - 100 text - red - 800' />
  }`}>
  {import.meta.env.VITE_GOOGLE_SEARCH_API_KEY ? '✅ Set' : '❌ Missing'}
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex items - center">
+ <div className={"fle}x items - center">
  <span className="w - 48">Google Search Engine ID:</span>
- <span className={`px - 2 py - 1 rounded text - xs font - medium ${}
+ <span className={`px - 2 py - 1 rounded text - xs font - medium ${}>
  import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID ? 'bg - green - 100 text - green - 800' : 'bg - red - 100 text - red - 800' />
  }`}>
  {import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID ? '✅ Set' : '❌ Missing'}
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex items - center">
+ <div className={"fle}x items - center">
  <span className="w - 48">YouTube API Key:</span>
- <span className={`px - 2 py - 1 rounded text - xs font - medium ${}
+ <span className={`px - 2 py - 1 rounded text - xs font - medium ${}>
  import.meta.env.VITE_YOUTUBE_API_KEY ? 'bg - green - 100 text - green - 800' : 'bg - red - 100 text - red - 800' />
  }`}>
  {import.meta.env.VITE_YOUTUBE_API_KEY ? '✅ Set' : '❌ Missing'}
@@ -1239,63 +1239,63 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Store Statistics */}
- <div className="bg - gray - 50 rounded - lg p - 6">
- <h3 className="text - lg font - semibold mb - 4">Store Statistics</h3>
- <p className="text - sm text - gray - 600 mb - 4">Videos in store: {storeVideos.length}</p>
+ <div className={"b}g - gray - 50 rounded - lg p - 6">
+ <h3 className={"tex}t - lg font - semibold mb - 4">Store Statistics</h3>
+ <p className={"tex}t - sm text - gray - 600 mb - 4">Videos in store: {storeVideos.length}</p>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleClearStore(e)}
-// FIXED:  className="px - 4 py - 2 bg - red - 500 text - white rounded hover:bg - red - 600 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - red - 500 text - white rounded hover:bg - red - 600 transition - colors"
  >
  Clear Store
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Google Custom Search API Tests */}
- <div className="bg - orange - 50 rounded - lg p - 6 border border - orange - 200">
- <h3 className="text - lg font - semibold mb - 4 flex items - center">
- <span className="text - xl mr - 2">🔍</span>
+ <div className={"b}g - orange - 50 rounded - lg p - 6 border border - orange - 200">
+ <h3 className={"tex}t - lg font - semibold mb - 4 flex items - center">
+ <span className={"tex}t - xl mr - 2">🔍</span>
  Google Custom Search API Tests
 // FIXED:  </h3>
- <p className="text - sm text - gray - 600 mb - 4">
+ <p className={"tex}t - sm text - gray - 600 mb - 4">
  Test Google Custom Search JSON API for video discovery and metadata fetching.
 // FIXED:  </p>
- <div className="flex gap - 2 mb - 4">
- <input
+ <div className={"fle}x gap - 2 mb - 4">
+ <input>
 // FIXED:  type="text"
 // FIXED:  value={testVideoId} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setTestVideoId(e.target.value)}
 // FIXED:  placeholder="YouTube Video ID"
-// FIXED:  className="flex - 1 px - 3 py - 2 border border - gray - 300 rounded - md focus:outline - none focus:ring - 2 focus:ring - blue - 500"
+// FIXED:  className={"fle}x - 1 px - 3 py - 2 border border - gray - 300 rounded - md focus:outline - none focus:ring - 2 focus:ring - blue - 500"
  />
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleTestFetch(e)}
 // FIXED:  disabled={loading}
-// FIXED:  className="px - 4 py - 2 bg - orange - 500 text - white rounded hover:bg - orange - 600 disabled:opacity - 50 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - orange - 500 text - white rounded hover:bg - orange - 600 disabled:opacity - 50 transition - colors"
  >
  {loading ? 'Testing...' : '🔍 Google Search Direct'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleTestUnifiedService(e)}
 // FIXED:  disabled={loading}
-// FIXED:  className="px - 4 py - 2 bg - orange - 600 text - white rounded hover:bg - orange - 700 disabled:opacity - 50 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - orange - 600 text - white rounded hover:bg - orange - 700 disabled:opacity - 50 transition - colors"
  >
  {loading ? 'Testing...' : '🔄 Google Search Unified'}
 // FIXED:  </button>
 // FIXED:  </div>
 
  {testResult && (}
- <div className="mt - 4 p - 3 bg - white rounded border">
- <h4 className="font - semibold mb - 2">🔍 Google Custom Search Direct API Result:</h4>
- <pre className="text - sm overflow - auto bg - gray - 100 p - 2 rounded max - h - 64">
+ <div className={"m}t - 4 p - 3 bg - white rounded border">
+ <h4 className={"fon}t - semibold mb - 2">🔍 Google Custom Search Direct API Result:</h4>
+ <pre className={"tex}t - sm overflow - auto bg - gray - 100 p - 2 rounded max - h - 64">
  {JSON.stringify(testResult, null, 2)}
 // FIXED:  </pre>
 // FIXED:  </div>
  )}
 
  {unifiedServiceTest && (}
- <div className="mt - 4 p - 3 bg - white rounded border">
- <h4 className="font - semibold mb - 2">🔄 Google Custom Search Unified Service Result:</h4>
- <pre className="text - sm overflow - auto bg - gray - 100 p - 2 rounded max - h - 64">
+ <div className={"m}t - 4 p - 3 bg - white rounded border">
+ <h4 className={"fon}t - semibold mb - 2">🔄 Google Custom Search Unified Service Result:</h4>
+ <pre className={"tex}t - sm overflow - auto bg - gray - 100 p - 2 rounded max - h - 64">
  {JSON.stringify(unifiedServiceTest, null, 2)}
 // FIXED:  </pre>
 // FIXED:  </div>
@@ -1303,28 +1303,28 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* YouTube Data API Tests */}
- <div className="bg - red - 50 rounded - lg p - 6 border border - red - 200">
- <h3 className="text - lg font - semibold mb - 4 flex items - center">
- <span className="text - xl mr - 2">📺</span>
+ <div className={"b}g - red - 50 rounded - lg p - 6 border border - red - 200">
+ <h3 className={"tex}t - lg font - semibold mb - 4 flex items - center">
+ <span className={"tex}t - xl mr - 2">📺</span>
  YouTube Data API v3 Tests
 // FIXED:  </h3>
- <p className="text - sm text - gray - 600 mb - 6">
+ <p className={"tex}t - sm text - gray - 600 mb - 6">
  Test YouTube Data API v3 for metadata fetching, proxy configuration, and debugging issues.
 // FIXED:  </p>
 
  {/* Environment Check */}
- <div className="mb - 6">
+ <div className={"m}b - 6">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => checkEnvironment(e)}
-// FIXED:  className="px - 4 py - 2 bg - purple - 500 text - white rounded hover:bg - purple - 600 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - purple - 500 text - white rounded hover:bg - purple - 600 transition - colors"
  >
  🔧 Check Environment
 // FIXED:  </button>
 
  {environmentCheck && (}
- <div className="mt - 4 p - 3 bg - white rounded border">
- <h4 className="font - semibold mb - 2">Environment Configuration:</h4>
- <div className="grid grid - cols - 2 gap - 4 text - sm">
+ <div className={"m}t - 4 p - 3 bg - white rounded border">
+ <h4 className={"fon}t - semibold mb - 2">Environment Configuration:</h4>
+ <div className={"gri}d grid - cols - 2 gap - 4 text - sm">
  <div>
  <strong > Mode:</strong> {environmentCheck.mode}<br/>
  <strong > Host:</strong> {environmentCheck.host}<br/>
@@ -1338,57 +1338,57 @@ const AdminPage: React.FC = () => {}
  <strong > Search Engine ID:</strong> {environmentCheck.googleSearchEngineId ? '✅ Set' : '❌ Missing'}
 // FIXED:  </div>
 // FIXED:  </div>
- <div className="mt - 3 text - sm text - gray - 600">
- <strong > Proxy URL:</strong> <code className="bg - gray - 100 px - 1 rounded">{environmentCheck.proxyUrl}</code>
+ <div className={"m}t - 3 text - sm text - gray - 600">
+ <strong > Proxy URL:</strong> <code className={"b}g - gray - 100 px - 1 rounded">{environmentCheck.proxyUrl}</code>
 // FIXED:  </div>
 // FIXED:  </div>
  )}
 // FIXED:  </div>
 
  {/* Test Buttons */}
- <div className="flex gap - 2 mb - 4">
+ <div className={"fle}x gap - 2 mb - 4">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => testProxyEndpoint(e)}
 // FIXED:  disabled={loading}
-// FIXED:  className="px - 4 py - 2 bg - red - 500 text - white rounded hover:bg - red - 600 disabled:opacity - 50 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - red - 500 text - white rounded hover:bg - red - 600 disabled:opacity - 50 transition - colors"
  >
  {loading ? 'Testing...' : '🔗 YouTube API Proxy'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => testDirectAPI(e)}
 // FIXED:  disabled={loading}
-// FIXED:  className="px - 4 py - 2 bg - red - 600 text - white rounded hover:bg - red - 700 disabled:opacity - 50 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - red - 600 text - white rounded hover:bg - red - 700 disabled:opacity - 50 transition - colors"
  >
  {loading ? 'Testing...' : '🌐 YouTube API Direct'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => testYouTubeMetadataFetch(e)}
 // FIXED:  disabled={loading}
-// FIXED:  className="px - 4 py - 2 bg - red - 700 text - white rounded hover:bg - red - 800 disabled:opacity - 50 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - red - 700 text - white rounded hover:bg - red - 800 disabled:opacity - 50 transition - colors"
  >
  {loading ? 'Testing...' : '📊 YouTube API App'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => clearYouTubeMetadataTests(e)}
-// FIXED:  className="px - 4 py - 2 bg - gray - 500 text - white rounded hover:bg - gray - 600 transition - colors"
+// FIXED:  className={"p}x - 4 py - 2 bg - gray - 500 text - white rounded hover:bg - gray - 600 transition - colors"
  >
  🗑️ Clear Results
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Test Results */}
- <div className="space - y - 4">
+ <div className={"spac}e - y - 4">
  {/* Proxy Test Results */}
  {proxyTest && (}
- <div className={`p - 3 rounded border ${}
+ <div className={`p - 3 rounded border ${}>
  proxyTest.success ? 'bg - green - 50 border - green - 200' : 'bg - red - 50 border - red - 200' />
  }`}>
- <h4 className="font - semibold mb - 2 flex items - center">
+ <h4 className={"fon}t - semibold mb - 2 flex items - center">
  {proxyTest.success ? '✅' : '❌'} YouTube Data API v3 Proxy Test
 // FIXED:  </h4>
  {proxyTest.success ? (}
  <div>
- <div className="grid grid - cols - 2 gap - 4 mb - 3">
+ <div className={"gri}d grid - cols - 2 gap - 4 mb - 3">
  <div>
  <strong > Title:</strong> {proxyTest.video.title}<br/>
  <strong > Channel:</strong> {proxyTest.video.channel}<br/>
@@ -1404,12 +1404,12 @@ const AdminPage: React.FC = () => {}
  ) : (
  <div>
  <strong > Error:</strong> {proxyTest.error}<br/>
- {proxyTest.note && <div className="text - sm text - gray - 600 mt - 1">{proxyTest.note}</div>}
+ {proxyTest.note && <div className={"tex}t - sm text - gray - 600 mt - 1">{proxyTest.note}</div>}
 // FIXED:  </div>
  )}
- <details className="mt - 2">
- <summary className="cursor - pointer text - sm text - gray - 600">Show Full Response</summary>
- <pre className="text - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
+ <details className={"m}t - 2">
+ <summary className={"curso}r - pointer text - sm text - gray - 600">Show Full Response</summary>
+ <pre className={"tex}t - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
  {typeof proxyTest.fullResponse === 'object'}
  ? JSON.stringify(proxyTest.fullResponse, null, 2)
  : proxyTest.fullResponse}
@@ -1420,20 +1420,20 @@ const AdminPage: React.FC = () => {}
 
  {/* Direct API Test Results */}
  {directApiTest && (}
- <div className={`p - 3 rounded border ${}
+ <div className={`p - 3 rounded border ${}>
  directApiTest.success ? 'bg - green - 50 border - green - 200' : 'bg - red - 50 border - red - 200' />
  }`}>
- <h4 className="font - semibold mb - 2 flex items - center">
+ <h4 className={"fon}t - semibold mb - 2 flex items - center">
  {directApiTest.success ? '✅' : '❌'} YouTube Data API v3 Direct Test
 // FIXED:  </h4>
  <div>
  <strong > Status:</strong> {directApiTest.status}<br/>
  {directApiTest.error && <div><strong > Error:</strong> {directApiTest.error}</div>}
- {directApiTest.note && <div className="text - sm text - gray - 600 mt - 1">{directApiTest.note}</div>}
+ {directApiTest.note && <div className={"tex}t - sm text - gray - 600 mt - 1">{directApiTest.note}</div>}
 // FIXED:  </div>
- <details className="mt - 2">
- <summary className="cursor - pointer text - sm text - gray - 600">Show Full Response</summary>
- <pre className="text - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
+ <details className={"m}t - 2">
+ <summary className={"curso}r - pointer text - sm text - gray - 600">Show Full Response</summary>
+ <pre className={"tex}t - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
  {typeof directApiTest.fullResponse === 'object'}
  ? JSON.stringify(directApiTest.fullResponse, null, 2)
  : directApiTest.fullResponse}
@@ -1444,15 +1444,15 @@ const AdminPage: React.FC = () => {}
 
  {/* App Metadata Test Results */}
  {youtubeMetadataTest && (}
- <div className={`p - 3 rounded border ${}
+ <div className={`p - 3 rounded border ${}>
  youtubeMetadataTest.success ? 'bg - green - 50 border - green - 200' : 'bg - red - 50 border - red - 200' />
  }`}>
- <h4 className="font - semibold mb - 2 flex items - center">
+ <h4 className={"fon}t - semibold mb - 2 flex items - center">
  {youtubeMetadataTest.success ? '✅' : '❌'} YouTube Data API v3 App Integration Test
 // FIXED:  </h4>
  {youtubeMetadataTest.success ? (}
  <div>
- <div className="grid grid - cols - 2 gap - 4 mb - 3">
+ <div className={"gri}d grid - cols - 2 gap - 4 mb - 3">
  <div>
  <strong > ID:</strong> {youtubeMetadataTest.video.id}<br/>
  <strong > Title:</strong> {youtubeMetadataTest.video.title}<br/>
@@ -1471,9 +1471,9 @@ const AdminPage: React.FC = () => {}
  <div>
  <strong > Error:</strong> {youtubeMetadataTest.error}<br/>
  {youtubeMetadataTest.stack && (}
- <details className="mt - 2">
- <summary className="cursor - pointer text - sm text - gray - 600">Show Stack Trace</summary>
- <pre className="text - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
+ <details className={"m}t - 2">
+ <summary className={"curso}r - pointer text - sm text - gray - 600">Show Stack Trace</summary>
+ <pre className={"tex}t - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
  {youtubeMetadataTest.stack}
 // FIXED:  </pre>
 // FIXED:  </details>
@@ -1481,9 +1481,9 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
  )}
  {youtubeMetadataTest.success && (}
- <details className="mt - 2">
- <summary className="cursor - pointer text - sm text - gray - 600">Show Full Video Object</summary>
- <pre className="text - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
+ <details className={"m}t - 2">
+ <summary className={"curso}r - pointer text - sm text - gray - 600">Show Full Video Object</summary>
+ <pre className={"tex}t - xs overflow - auto bg - gray - 100 p - 2 rounded mt - 2 max - h - 32">
  {JSON.stringify(youtubeMetadataTest.fullVideo, null, 2)}
 // FIXED:  </pre>
 // FIXED:  </details>
@@ -1494,16 +1494,16 @@ const AdminPage: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Store Contents */}
- <div className="bg - gray - 50 rounded - lg p - 6">
- <h3 className="text - lg font - semibold mb - 4">Videos in Store</h3>
+ <div className={"b}g - gray - 50 rounded - lg p - 6">
+ <h3 className={"tex}t - lg font - semibold mb - 4">Videos in Store</h3>
  {storeVideos.length === 0 ? (}
- <p className="text - gray - 500">No videos in store</p>
+ <p className={"tex}t - gray - 500">No videos in store</p>
  ) : (
- <div className="space - y - 3 max - h - 96 overflow - y - auto">
+ <div className={"spac}e - y - 3 max - h - 96 overflow - y - auto">
  {storeVideos.map((video, index) => (}
- <div key={index} className="bg - white p - 3 rounded border">
- <div className="font - medium text - sm">{video.title || 'Unknown Title'}</div>
- <div className="text - xs text - gray - 600 mt - 1">
+ <div key={index} className={"b}g - white p - 3 rounded border">
+ <div className={"fon}t - medium text - sm">{video.title || 'Unknown Title'}</div>
+ <div className={"tex}t - xs text - gray - 600 mt - 1">
  <div > ID: {video.id || 'Unknown ID'}</div>
 <div > Channel: {video.channelName || 'Unknown Channel'}</div>
  <div > URL: {video.videoUrl || 'No URL'}</div>

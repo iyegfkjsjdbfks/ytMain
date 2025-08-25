@@ -65,7 +65,7 @@ class ApiCache {
  // Clean up old entries
  if (this.cache.size > CONSTANTS.CACHE_CONFIG.MAX_CACHE_SIZE) {
  const oldestKey = Array<any>.from(this.cache.keys())[0];
- if (oldestKey as any) {
+ if (oldestKey) {
  this.cache.delete(oldestKey);
  }
  }

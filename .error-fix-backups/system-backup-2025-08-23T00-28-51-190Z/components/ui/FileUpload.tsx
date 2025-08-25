@@ -39,7 +39,7 @@ return;
  const fileArray = Array.from(selectedFiles);
 
  // Validate file size
- if (maxSize as any) {
+ if (maxSize) {
  const oversizedFiles = fileArray.filter((file) => file.size > maxSize);
  if (oversizedFiles.length > 0) {
  setError(`Some files exceed the maximum size of ${formatFileSize(maxSize)}`);
@@ -85,7 +85,7 @@ return '0 Bytes';
 
  return (
  <div className={`w-full ${className}`}>
- <div
+ <div>
 // FIXED:  className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${
  isDragOver
  ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/10'
@@ -100,27 +100,27 @@ return '0 Bytes';
  onDrop={handleDrop} />
 // FIXED:  onClick={(e) => handleClick(e)}
  >
- <input
+ <input>
  ref={fileInputRef}
 // FIXED:  type="file"
  accept={accept}
  multiple={multiple} />
 // FIXED:  onChange={(e) => handleFileSelect(e.target.files)}
-// FIXED:  className="hidden"
+// FIXED:  className={"hidden}"
 // FIXED:  disabled={disabled}
  />
 
- <div className="text-center">
- <CloudArrowUpIcon className="mx-auto h-12 w-12 text-neutral-400" />
- <div className="mt-4">
- <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+ <div className={"text}-center">
+ <CloudArrowUpIcon className={"mx}-auto h-12 w-12 text-neutral-400" />
+ <div className={"mt}-4">
+ <p className={"text}-sm font-medium text-neutral-900 dark:text-neutral-100">
  {label}
 // FIXED:  </p>
- <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+ <p className={"text}-sm text-neutral-500 dark:text-neutral-400 mt-1">
  {description}
 // FIXED:  </p>
  {maxSize && (
- <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1">
+ <p className={"text}-xs text-neutral-400 dark:text-neutral-500 mt-1">
  Maximum file size: {formatFileSize(maxSize)}
 // FIXED:  </p>
  )}
@@ -129,28 +129,27 @@ return '0 Bytes';
 // FIXED:  </div>
 
  {error && (
- <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
+ <p className={"mt}-2 text-sm text-red-600 dark:text-red-400">{error}</p>
  )}
 
  {files.length > 0 && (
- <div className="mt-4 space-y-2">
- <h4 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+ <div className={"mt}-4 space-y-2">
+ <h4 className={"text}-sm font-medium text-neutral-900 dark:text-neutral-100">
  Selected Files ({files.length})
 // FIXED:  </h4>
- <div className="space-y-2">
+ <div className={"space}-y-2">
  {files.map((file,
  index) => (
- <div
- key={index}
-// FIXED:  className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg" />
- >
- <div className="flex items-center space-x-3">
- <DocumentIcon className="h-5 w-5 text-neutral-400" />
  <div>
- <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+ key={index}
+// FIXED:  className={"fle}x items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg"/>
+ <div className={"fle}x items-center space-x-3">
+ <DocumentIcon className={"h}-5 w-5 text-neutral-400" />
+ <div>
+ <p className={"text}-sm font-medium text-neutral-900 dark:text-neutral-100">
  {file.name}
 // FIXED:  </p>
- <p className="text-xs text-neutral-500 dark:text-neutral-400">
+ <p className={"text}-xs text-neutral-500 dark:text-neutral-400">
  {formatFileSize(file.size)}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -161,9 +160,9 @@ return '0 Bytes';
  e.stopPropagation();
  onFileRemove(index);
  }
-// FIXED:  className="p-1 text-neutral-400 hover:text-red-500 transition-colors"
+// FIXED:  className={"p}-1 text-neutral-400 hover:text-red-500 transition-colors"
  >
- <XMarkIcon className="h-4 w-4" />
+ <XMarkIcon className={"h}-4 w-4" />
 // FIXED:  </button>
  )}
 // FIXED:  </div>

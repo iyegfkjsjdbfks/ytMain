@@ -76,8 +76,8 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
 
  const checkAutoShow = () => {}
  // Don't show if recently dismissed (within 24 hours)
- const dismissedAt = (localStorage as any).getItem('pwa - banner - dismissed');
- if (dismissedAt as any) {}
+ const dismissedAt = (localStorage).getItem('pwa - banner - dismissed');
+ if (dismissedAt) {}
  const dismissedTime = parseInt(dismissedAt, 10);
  const dayInMs = 24 * 60 * 60 * 1000;
  if (Date.now() - dismissedTime < dayInMs) {}
@@ -87,21 +87,21 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
  let currentView: BannerState['currentView'] = 'install';
  let shouldShow: boolean = false;
 
- if (shouldShowUpdate as any) {}
+ if (shouldShowUpdate) {}
  currentView = 'update';
  shouldShow = true;
- } else if (shouldShowInstall as any) {}
+ } else if (shouldShowInstall) {}
  currentView = 'install';
  shouldShow = true;
- } else if (shouldShowNotification as any) {}
+ } else if (shouldShowNotification) {}
  currentView = 'notification';
  shouldShow = true;
- } else if (shouldShowOffline as any) {}
+ } else if (shouldShowOffline) {}
  currentView = 'offline';
  shouldShow = true;
  }
 
- if (shouldShow as any) {}
+ if (shouldShow) {}
  setState(prev => ({}
  ...prev as any,
  isVisible: true,
@@ -125,7 +125,7 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
  try {}
  const success = await installPrompt.installApp();
 
- if (success as any) {}
+ if (success) {}
  conditionalLogger.info(
  'PWA installed successfully',
  undefined,
@@ -190,7 +190,7 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
  isVisible: false,
  dismissedAt: Date.now() }));
 
- (localStorage as any).setItem('pwa - banner - dismissed', Date.now().toString());
+ (localStorage).setItem('pwa - banner - dismissed', Date.now().toString());
  onInstallDismiss?.();
  }, [onInstallDismiss]);
 
@@ -224,48 +224,46 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
  switch (state.currentView) {}
  case 'install':
  return (
- <div className='flex items - center justify - between'>
- <div className='flex - 1'>
- <h3
-// FIXED:  className='font - semibold text - lg mb - 1'
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x - 1'>
+ <h3>
+// FIXED:  className={'fon}t - semibold text - lg mb - 1'
 // FIXED:  style={{ color: theme.textColor }
- } />
- >
+ }/>
  Install YouTubeX
 // FIXED:  </h3>
- <p
-// FIXED:  className='text - sm opacity - 80'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <p>
+// FIXED:  className={'tex}t - sm opacity - 80'
+// FIXED:  style={{ color: theme.textColor }/>
  Get the full app experience with offline access and
  notifications.
 // FIXED:  </p>
  {showBenefits && variant !== 'minimal' && (}
- <div className='mt - 2 flex flex - wrap gap - 2'>
- <span className='text - xs px - 2 py - 1 bg - blue - 100 text - blue - 800 rounded'>
+ <div className={'m}t - 2 flex flex - wrap gap - 2'>
+ <span className={'tex}t - xs px - 2 py - 1 bg - blue - 100 text - blue - 800 rounded'>
  📱 Home Screen Access
 // FIXED:  </span>
- <span className='text - xs px - 2 py - 1 bg - green - 100 text - green - 800 rounded'>
+ <span className={'tex}t - xs px - 2 py - 1 bg - green - 100 text - green - 800 rounded'>
  🔔 Push Notifications
 // FIXED:  </span>
- <span className='text - xs px - 2 py - 1 bg - purple - 100 text - purple - 800 rounded'>
+ <span className={'tex}t - xs px - 2 py - 1 bg - purple - 100 text - purple - 800 rounded'>
  📶 Offline Support
 // FIXED:  </span>
 // FIXED:  </div>
  )}
 // FIXED:  </div>
- <div className='flex gap - 2 ml - 4'>
+ <div className={'fle}x gap - 2 ml - 4'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleInstall(e)}
 // FIXED:  disabled={state.isAnimating}
-// FIXED:  className='px - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity disabled:opacity - 50'
+// FIXED:  className={'p}x - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity disabled:opacity - 50'
 // FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  {state.isAnimating ? 'Installing...' : 'Install'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDismiss(e)}
-// FIXED:  className='px - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
+// FIXED:  className={'p}x - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
  >
  ✕
 // FIXED:  </button>
@@ -275,41 +273,38 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
 
  case 'update':
  return (
- <div className='flex items - center justify - between'>
- <div className='flex - 1'>
- <h3
-// FIXED:  className='font - semibold text - lg mb - 1'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x - 1'>
+ <h3>
+// FIXED:  className={'fon}t - semibold text - lg mb - 1'
+// FIXED:  style={{ color: theme.textColor }/>
  Update Available
 // FIXED:  </h3>
- <p
-// FIXED:  className='text - sm opacity - 80'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <p>
+// FIXED:  className={'tex}t - sm opacity - 80'
+// FIXED:  style={{ color: theme.textColor }/>
  A new version of YouTubeX is ready to install.
 // FIXED:  </p>
  {pwaUpdates.updateVersion && (}
- <p
-// FIXED:  className='text - xs mt - 1 opacity - 60'
-// FIXED:  style={{ color: theme.textColor } />
- >,
+ <p>
+// FIXED:  className={'tex}t - xs mt - 1 opacity - 60'
+// FIXED:  style={{ color: theme.textColor }/>,
  Version: {pwaUpdates.updateVersion}
 // FIXED:  </p>
  )}
 // FIXED:  </div>
- <div className='flex gap - 2 ml - 4'>
+ <div className={'fle}x gap - 2 ml - 4'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleUpdate(e)}
 // FIXED:  disabled={state.isAnimating}
-// FIXED:  className='px - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity disabled:opacity - 50'
+// FIXED:  className={'p}x - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity disabled:opacity - 50'
 // FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  {state.isAnimating ? 'Updating...' : 'Update'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => pwaUpdates.skipUpdate()}
-// FIXED:  className='px - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
+// FIXED:  className={'p}x - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
  >
  Skip
 // FIXED:  </button>
@@ -319,33 +314,31 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
 
  case 'notification':
  return (
- <div className='flex items - center justify - between'>
- <div className='flex - 1'>
- <h3
-// FIXED:  className='font - semibold text - lg mb - 1'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x - 1'>
+ <h3>
+// FIXED:  className={'fon}t - semibold text - lg mb - 1'
+// FIXED:  style={{ color: theme.textColor }/>
  Enable Notifications
 // FIXED:  </h3>
- <p
-// FIXED:  className='text - sm opacity - 80'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <p>
+// FIXED:  className={'tex}t - sm opacity - 80'
+// FIXED:  style={{ color: theme.textColor }/>
  Stay updated with new videos and important updates.
 // FIXED:  </p>
 // FIXED:  </div>
- <div className='flex gap - 2 ml - 4'>
+ <div className={'fle}x gap - 2 ml - 4'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleNotificationPermission(e)}
 // FIXED:  disabled={state.isAnimating}
-// FIXED:  className='px - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity disabled:opacity - 50'
+// FIXED:  className={'p}x - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity disabled:opacity - 50'
 // FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  {state.isAnimating ? 'Requesting...' : 'Enable'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDismiss(e)}
-// FIXED:  className='px - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
+// FIXED:  className={'p}x - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
  >
  ✕
 // FIXED:  </button>
@@ -355,41 +348,38 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
 
  case 'offline':
  return (
- <div className='flex items - center justify - between'>
- <div className='flex - 1'>
- <h3
-// FIXED:  className='font - semibold text - lg mb - 1'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x - 1'>
+ <h3>
+// FIXED:  className={'fon}t - semibold text - lg mb - 1'
+// FIXED:  style={{ color: theme.textColor }/>
  You're Offline
 // FIXED:  </h3>
- <p
-// FIXED:  className='text - sm opacity - 80'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <p>
+// FIXED:  className={'tex}t - sm opacity - 80'
+// FIXED:  style={{ color: theme.textColor }/>
  Some features may be limited. Check your connection.
 // FIXED:  </p>
  {offlineStatus.offlineDuration > 0 && (}
- <p
-// FIXED:  className='text - xs mt - 1 opacity - 60'
-// FIXED:  style={{ color: theme.textColor } />
- >
+ <p>
+// FIXED:  className={'tex}t - xs mt - 1 opacity - 60'
+// FIXED:  style={{ color: theme.textColor }/>
  Offline for:{' '}
  {Math.floor(offlineStatus.offlineDuration / 1000)}s
 // FIXED:  </p>
  )}
 // FIXED:  </div>
- <div className='flex gap - 2 ml - 4'>
+ <div className={'fle}x gap - 2 ml - 4'>
  <button />
 // FIXED:  onClick={() => offlineStatus.testConnection()}
-// FIXED:  className='px - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity'
+// FIXED:  className={'p}x - 4 py - 2 text - white rounded font - medium hover:opacity - 90 transition - opacity'
 // FIXED:  style={{ backgroundColor: theme.primaryColor }
  >
  Retry
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDismiss(e)}
-// FIXED:  className='px - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
+// FIXED:  className={'p}x - 3 py - 2 text - gray - 500 hover:text - gray - 700 transition - colors'
  >
  ✕
 // FIXED:  </button>
@@ -401,20 +391,19 @@ const ModularPWAInstallBanner: FC < ModularPWAInstallBannerProps> = ({}
  };
 
  return (
- <div
+ <div>
 // FIXED:  className={`fixed z - 50 ${positionClasses.position} ${variantClasses.variant} transition - all duration - 300 ease - in - out`}
 // FIXED:  style={{,}
  backgroundColor: theme.backgroundColor,
  borderRadius: theme.borderRadius,
  transform: state.isVisible ? 'translateY(0)' : 'translateY(100%)',
- opacity: state.isVisible ? 1 : 0 } />
- >
+ opacity: state.isVisible ? 1 : 0 }/>
  {renderContent()}
 
  {/* Network status indicator */}
  {showNetworkStatus && (}
- <div className='absolute top - 2 right - 2'>
- <div
+ <div className={'absolut}e top - 2 right - 2'>
+ <div>
 // FIXED:  className={`w - 2 h - 2 rounded - full ${}
  offlineStatus.isOnline
  ? offlineStatus.getNetworkQuality() === 'fast'

@@ -75,8 +75,8 @@ const CommentItem: React.FC < CommentItemProps> = ({}
  return (
  <div className={`flex gap - 3 ${level > 0 ? 'ml - 12' : ''}`}>
  {/* Avatar */}
- <div className='flex - shrink - 0'>
- <img
+ <div className={'fle}x - shrink - 0'>
+ <img>
 // FIXED:  src={comment.authorAvatar || '/default - avatar.png'}
 // FIXED:  alt={comment.authorName}
 // FIXED:  className='w - 10 h - 10 rounded - full object - cover' />
@@ -84,18 +84,18 @@ const CommentItem: React.FC < CommentItemProps> = ({}
 // FIXED:  </div>
 
  {/* Comment Content */}
- <div className='flex - 1 min - w-0'>
+ <div className={'fle}x - 1 min - w-0'>
  {/* Header */}
- <div className='flex items - center gap - 2 mb - 1'>
- <span className='font - medium text - sm text - gray - 900 dark:text - white'>
+ <div className={'fle}x items - center gap - 2 mb - 1'>
+ <span className={'fon}t - medium text - sm text - gray - 900 dark:text - white'>
  {comment.authorName}
 // FIXED:  </span>
  {isChannelOwner && (}
- <span className='bg - gray - 100 dark:bg - gray - 700 text - xs px - 2 py - 0.5 rounded text - gray - 600 dark:text - gray - 300'>
+ <span className={'b}g - gray - 100 dark:bg - gray - 700 text - xs px - 2 py - 0.5 rounded text - gray - 600 dark:text - gray - 300'>
  Creator
 // FIXED:  </span>
  )}
- <span className='text - xs text - gray - 500 dark:text - gray - 400'>
+ <span className={'tex}t - xs text - gray - 500 dark:text - gray - 400'>
  {formatDistanceToNow(new Date(comment.createdAt), {}
  addSuffix: true })}
 // FIXED:  </span>
@@ -105,14 +105,14 @@ const CommentItem: React.FC < CommentItemProps> = ({}
 // FIXED:  </div>
 
  {/* Comment Text */}
- <div className='text - sm text - gray - 900 dark:text - white mb - 2 whitespace - pre - wrap'>
+ <div className={'tex}t - sm text - gray - 900 dark:text - white mb - 2 whitespace - pre - wrap'>
  {comment.content}
 // FIXED:  </div>
 
  {/* Actions */}
- <div className='flex items - center gap - 4'>
+ <div className={'fle}x items - center gap - 4'>
  {/* Like / Dislike */}
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  <button />
 // FIXED:  onClick={() => onReact(comment.id, 'like': React.MouseEvent)}
 // FIXED:  className={}
@@ -121,7 +121,7 @@ const CommentItem: React.FC < CommentItemProps> = ({}
  >
  <HandThumbUpIcon className='w - 4 h - 4' />
  {comment.likes > 0 && (}
- <span className='text - xs'>{formatCount(comment.likes)}</span>
+ <span className={'tex}t - xs'>{formatCount(comment.likes)}</span>
  )}
 // FIXED:  </button>
 
@@ -138,7 +138,7 @@ const CommentItem: React.FC < CommentItemProps> = ({}
  {/* Reply */}
  <button />
 // FIXED:  onClick={() => setIsReplying(!isReplying: React.MouseEvent)}
-// FIXED:  className='text - xs font - medium text - gray - 600 dark:text - gray - 400 hover:text - gray - 900 dark:hover:text - white transition - colors'
+// FIXED:  className={'tex}t - xs font - medium text - gray - 600 dark:text - gray - 400 hover:text - gray - 900 dark:hover:text - white transition - colors'
  >
  Reply
 // FIXED:  </button>
@@ -162,7 +162,7 @@ const CommentItem: React.FC < CommentItemProps> = ({}
  )}
 
  {/* Menu */}
- <div className='relative' ref={menuRef}>
+ <div className={'relative}' ref={menuRef}>
  <button />
 // FIXED:  onClick={() => setShowMenu(!showMenu: React.MouseEvent)}
 // FIXED:  className='p - 1 rounded hover:bg - gray - 100 dark:hover:bg - gray - 700 transition - colors text - gray - 600 dark:text - gray - 400'
@@ -171,7 +171,7 @@ const CommentItem: React.FC < CommentItemProps> = ({}
 // FIXED:  </button>
 
  {showMenu && (}
- <div className='absolute right - 0 top - 8 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 1 z - 10 min - w-[120px]'>
+ <div className={'absolut}e right - 0 top - 8 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 1 z - 10 min - w-[120px]'>
  {isChannelOwner && onPin && (}
  <button />
 // FIXED:  onClick={() => {}
@@ -203,14 +203,14 @@ const CommentItem: React.FC < CommentItemProps> = ({}
 
  {/* Reply Input */}
  {isReplying && (}
- <div className='mt - 3 flex gap - 3'>
- <img
+ <div className={'m}t - 3 flex gap - 3'>
+ <img>
 // FIXED:  src='/default - avatar.png'
 // FIXED:  alt='Your avatar'
 // FIXED:  className='w - 8 h - 8 rounded - full object - cover flex - shrink - 0' />
  />
- <div className='flex - 1'>
- <textarea
+ <div className={'fle}x - 1'>
+ <textarea>
 // FIXED:  value={replyText} />
 // FIXED:  onChange={e => setReplyText(e.target.value: React.ChangeEvent)}
 // FIXED:  placeholder='Add a reply...'
@@ -218,11 +218,11 @@ const CommentItem: React.FC < CommentItemProps> = ({}
  rows={2}
  autoFocus
  />
- <div className='flex gap - 2 mt - 2'>
+ <div className={'fle}x gap - 2 mt - 2'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleReplySubmit(e)}
 // FIXED:  disabled={!replyText.trim()}
-// FIXED:  className='px - 4 py - 1 bg - blue - 600 text - white rounded - full text - sm font - medium disabled:opacity - 50 disabled:cursor - not - allowed hover:bg - blue - 700 transition - colors'
+// FIXED:  className={'p}x - 4 py - 1 bg - blue - 600 text - white rounded - full text - sm font - medium disabled:opacity - 50 disabled:cursor - not - allowed hover:bg - blue - 700 transition - colors'
  >
  Reply
 // FIXED:  </button>
@@ -231,7 +231,7 @@ const CommentItem: React.FC < CommentItemProps> = ({}
  setIsReplying(false);
  setReplyText('');
  }
-// FIXED:  className='px - 4 py - 1 text - gray - 600 dark:text - gray - 400 rounded - full text - sm font - medium hover:bg - gray - 100 dark:hover:bg - gray - 700 transition - colors'
+// FIXED:  className={'p}x - 4 py - 1 text - gray - 600 dark:text - gray - 400 rounded - full text - sm font - medium hover:bg - gray - 100 dark:hover:bg - gray - 700 transition - colors'
  >
  Cancel
 // FIXED:  </button>
@@ -242,10 +242,10 @@ const CommentItem: React.FC < CommentItemProps> = ({}
 
  {/* Show Replies */}
  {comment.replies && comment.replies.length > 0 && (}
- <div className='mt - 3'>
+ <div className={'m}t - 3'>
  <button />
 // FIXED:  onClick={() => setShowReplies(!showReplies: React.MouseEvent)}
-// FIXED:  className='flex items - center gap - 2 text - blue - 600 hover:text - blue - 700 text - sm font - medium'
+// FIXED:  className={'fle}x items - center gap - 2 text - blue - 600 hover:text - blue - 700 text - sm font - medium'
  >
  <ChatBubbleLeftIcon className='w - 4 h - 4' />
  {showReplies ? 'Hide' : 'Show'} {comment.replies.length}{' '}
@@ -253,9 +253,9 @@ const CommentItem: React.FC < CommentItemProps> = ({}
 // FIXED:  </button>
 
  {showReplies && (}
- <div className='mt - 3 space - y-4'>
+ <div className={'m}t - 3 space - y-4'>
  {comment.replies.map((reply) => (}
- <CommentItem
+ <CommentItem>
  key={reply.id}
  comment={reply}
  isChannelOwner={isChannelOwner}
@@ -340,7 +340,7 @@ const CommentSection: React.FC < CommentSectionProps> = ({}
  // Implementation for reporting comments
  };
 
- if (error as any) {}
+ if (error) {}
  return (
  <div className={`p - 4 text - center text - red - 600 ${className}`}>
  Failed to load comments. Please try again.
@@ -351,14 +351,14 @@ const CommentSection: React.FC < CommentSectionProps> = ({}
  return (
  <div className={`space - y-6 ${className}`}>
  {/* Comments Header */}
- <div className='flex items - center justify - between'>
- <div className='flex items - center gap - 4'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white'>
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center gap - 4'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  {comments?.length || 0} Comments
 // FIXED:  </h3>
 
  {/* Sort Options */}
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  <button />
 // FIXED:  onClick={() => setSortBy('top': React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 1 rounded - full text - sm font - medium transition - colors ${}
@@ -384,21 +384,20 @@ const CommentSection: React.FC < CommentSectionProps> = ({}
 // FIXED:  </div>
 
  {/* Add Comment */}
- <div className='flex gap - 3'>
- <img
+ <div className={'fle}x gap - 3'>
+ <img>
 // FIXED:  src='/default - avatar.png'
 // FIXED:  alt='Your avatar'
 // FIXED:  className='w - 10 h - 10 rounded - full object - cover flex - shrink - 0' />
  />
- <div className='flex - 1'>
- <div
+ <div className={'fle}x - 1'>
+ <div>
 // FIXED:  className={`border - b-2 transition - colors ${}
  showCommentInput
  ? 'border - blue - 600'
  : 'border - gray - 300 dark:border - gray - 600'
- }`} />
- >
- <textarea
+ }`}/>
+ <textarea>
 // FIXED:  value={newComment} />
 // FIXED:  onChange={e => setNewComment(e.target.value: React.ChangeEvent)}
  onFocus={() => setShowCommentInput(true)}
@@ -409,20 +408,20 @@ const CommentSection: React.FC < CommentSectionProps> = ({}
 // FIXED:  </div>
 
  {showCommentInput && (}
- <div className='flex justify - end gap - 2 mt - 2'>
+ <div className={'fle}x justify - end gap - 2 mt - 2'>
  <button />
 // FIXED:  onClick={() => {}
  setShowCommentInput(false);
  setNewComment('');
  }
-// FIXED:  className='px - 4 py - 2 text - gray - 600 dark:text - gray - 400 rounded - full text - sm font - medium hover:bg - gray - 100 dark:hover:bg - gray - 700 transition - colors'
+// FIXED:  className={'p}x - 4 py - 2 text - gray - 600 dark:text - gray - 400 rounded - full text - sm font - medium hover:bg - gray - 100 dark:hover:bg - gray - 700 transition - colors'
  >
  Cancel
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleCommentSubmit(e)}
 // FIXED:  disabled={!newComment.trim() || createCommentMutation.loading}
-// FIXED:  className='px - 4 py - 2 bg - blue - 600 text - white rounded - full text - sm font - medium disabled:opacity - 50 disabled:cursor - not - allowed hover:bg - blue - 700 transition - colors'
+// FIXED:  className={'p}x - 4 py - 2 bg - blue - 600 text - white rounded - full text - sm font - medium disabled:opacity - 50 disabled:cursor - not - allowed hover:bg - blue - 700 transition - colors'
  >
  {createCommentMutation.loading ? 'Posting...' : 'Comment'}
 // FIXED:  </button>
@@ -433,11 +432,11 @@ const CommentSection: React.FC < CommentSectionProps> = ({}
 
  {/* Comments List */}
  {loading ? (}
- <div className='space - y-4'>
+ <div className={'spac}e - y-4'>
  {[...Array<any>(3)].map((_, i) => (}
- <div key={i} className='flex gap - 3 animate - pulse'>
+ <div key={i} className={'fle}x gap - 3 animate - pulse'>
  <div className='w - 10 h - 10 bg - gray - 300 dark:bg - gray - 700 rounded - full' />
- <div className='flex - 1 space - y-2'>
+ <div className={'fle}x - 1 space - y-2'>
  <div className='h - 4 bg - gray - 300 dark:bg - gray - 700 rounded w - 1/4' />
  <div className='h - 4 bg - gray - 300 dark:bg - gray - 700 rounded w - 3/4' />
  <div className='h - 4 bg - gray - 300 dark:bg - gray - 700 rounded w - 1/2' />
@@ -446,9 +445,9 @@ const CommentSection: React.FC < CommentSectionProps> = ({}
  ))}
 // FIXED:  </div>
  ) : comments && comments.length > 0 ? (
- <div className='space - y-6'>
+ <div className={'spac}e - y-6'>
  {comments.map((comment: Comment) => (}
- <CommentItem
+ <CommentItem>
  key={comment.id}
  comment={comment}
  isChannelOwner={isChannelOwner}
@@ -461,7 +460,7 @@ const CommentSection: React.FC < CommentSectionProps> = ({}
  ))}
 // FIXED:  </div>
  ) : (
- <div className='text - center py - 8 text - gray - 500 dark:text - gray - 400'>
+ <div className={'tex}t - center py - 8 text - gray - 500 dark:text - gray - 400'>
  <ChatBubbleLeftIcon className='w - 12 h - 12 mx - auto mb - 4 opacity - 50' />
  <p > No comments yet. Be the first to comment!</p>
 // FIXED:  </div>

@@ -123,7 +123,7 @@ const ChannelPage: React._FC = () => {
 
   if (error) {
     return (
-      <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">
+      <div className={"p}-6 text-center text-red-500 dark:text-red-400 text-lg">
         {error}
       </div>
     );
@@ -131,27 +131,27 @@ const ChannelPage: React._FC = () => {
 
   if (!channel) {
     return (
-      <div className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg">
+      <div className={"p}-6 text-center text-neutral-600 dark:text-neutral-400 text-lg">
         Channel not found.
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-neutral-950 min-h-full">
-      <ChannelHeader
+    <div className={"bg}-white dark:bg-neutral-950 min-h-full">
+      <ChannelHeader>
         channel={channel}
         videoCount={videos.length}
         isSubscribed={isSubscribed}
         onSubscribeToggle={handleSubscribeToggle}
       />
 
-      <div className="px-4 md:px-6 lg:px-8">
+      <div className={"px}-4 md:px-6 lg:px-8">
         <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
       </div>
 
-      <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3">
-        <ChannelTabContent
+      <div className={"px}-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3">
+        <ChannelTabContent>
           activeTab={activeTab}
           channel={channel}
           videos={videos}

@@ -39,27 +39,27 @@ export const VideoEditor: React.FC<VideoEditorProps> = ({
 
   return (
     <div className={`editor ${className}`}>
-      <div className="editor-toolbar">
-        <button 
+      <div className={"editor}-toolbar">
+        <button>
           onClick={handleSave}
           disabled={saving}
-          className="save-button"
+          className={"save}-button"
         >
           {saving ? 'Saving...' : 'Save'}
         </button>
       </div>
       
       {error && (
-        <div className="editor-error">
+        <div className={"editor}-error">
           {error}
         </div>
       )}
       
-      <div className="editor-content">
-        <textarea
+      <div className={"editor}-content">
+        <textarea>
           value={value}
           onChange={(e) => handleChange(e.target.value)}
-          className="editor-textarea"
+          className={"editor}-textarea"
           placeholder="Start editing..."
         />
       </div>

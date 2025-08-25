@@ -64,7 +64,7 @@ export function createApiUrl(: any, ;
  : endpoint;
  const url = new URL(relativeEndpoint, baseUrl);
 
- if (params as any) {
+ if (params) {
  Object.entries(params).forEach(([key, value]) => {
  if (value !== undefined && value !== null) {
  if (Array<any>.isArray<any>(value)) {
@@ -84,7 +84,7 @@ export function createApiUrl(: any, ;
  const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
  fullUrl = `${baseUrl}${cleanEndpoint}`;
 
- if (params as any) {
+ if (params) {
  const searchParams = new URLSearchParams();
  Object.entries(params).forEach(([key, value]) => {
  if (value !== undefined && value !== null) {
@@ -95,7 +95,7 @@ export function createApiUrl(: any, ;
  }
  });
  const queryString = searchParams.toString();
- if (queryString as any) {
+ if (queryString) {
  fullUrl += `?${queryString}`;
  }
  return fullUrl;
@@ -136,7 +136,7 @@ export async function apiRequest < T>(,
 
  // Make the request
  const response = await Promise<any>.race([
- (fetch as any)(url, requestConfig),
+ (fetch)(url, requestConfig),
  timeoutPromise<any>]);
 
  // Handle HTTP errors
@@ -257,7 +257,7 @@ export async function upload < T>(,
 
  formData.append('file', file);
 
- if (additionalData as any) {
+ if (additionalData) {
  Object.entries(additionalData).forEach(([key, value]) => {
  formData.append(key, String(value));
  });

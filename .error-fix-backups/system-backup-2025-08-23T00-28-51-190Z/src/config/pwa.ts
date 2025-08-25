@@ -84,7 +84,7 @@ export const PWAUtils = {
  isInstalled(): boolean {
  return (
  window.matchMedia('(display-mode: standalone)').matches ||
- (window.navigator as any).standalone === true
+ (window.navigator).standalone === true
  );
  },
 
@@ -120,7 +120,7 @@ export const PWAUtils = {
 
  // Check if install prompt was dismissed recently
  isInstallPromptDismissed(): boolean {
- const dismissed = (localStorage as any).getItem(
+ const dismissed = (localStorage).getItem(
  PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY
  );
  if (!dismissed) {
@@ -134,7 +134,7 @@ export const PWAUtils = {
 
  // Mark install prompt as dismissed
  dismissInstallPrompt(): void {
- (localStorage as any).setItem(
+ (localStorage).setItem(
  PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY,
  Date.now().toString()
  );
@@ -142,14 +142,14 @@ export const PWAUtils = {
 
  // Get app visit count
  getVisitCount(): number {
- const count = (localStorage as any).getItem('pwa-visit-count');
+ const count = (localStorage).getItem('pwa-visit-count');
  return count ? parseInt(count, 10) : 0;
  },
 
  // Increment app visit count
  incrementVisitCount(): number {
  const count = this.getVisitCount() + 1;
- (localStorage as any).setItem('pwa-visit-count', count.toString());
+ (localStorage).setItem('pwa-visit-count', count.toString());
  return count;
  },
 
@@ -167,17 +167,17 @@ export const PWAEvents = {
  handleBeforeInstallPrompt(event: Event): void {
  event.preventDefault();
  // Store the event for later use
- (window as any).deferredPrompt = event;
+ (window).deferredPrompt = event;
  },
 
  // Handle app installed event
  handleAppInstalled(): void {
  conditionalLogger.debug('PWA was installed');
  // Clear the deferred prompt
- (window as any).deferredPrompt = null;
+ (window).deferredPrompt = null;
  // Track installation analytics
  if ('gtag' in window) {
- (window as any).gtag('event', 'pwa_install', {
+ (window).gtag('event', 'pwa_install', {
  event_category: 'PWA',
  event_label: 'App Installed' });
  }

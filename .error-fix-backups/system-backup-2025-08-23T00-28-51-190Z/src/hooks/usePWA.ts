@@ -146,7 +146,7 @@ export const usePWA = (): UsePWAReturn => {
 
  try {
  const existingData = JSON.parse(;
- (localStorage as any).getItem('pwa-usage-data') || '[]'
+ (localStorage).getItem('pwa-usage-data') || '[]'
  );
  existingData.push(usageData);
 
@@ -155,7 +155,7 @@ export const usePWA = (): UsePWAReturn => {
  existingData.splice(0, existingData.length - 100);
  }
 
- (localStorage as any).setItem('pwa-usage-data', JSON.stringify(existingData));
+ (localStorage).setItem('pwa-usage-data', JSON.stringify(existingData));
  } catch (error) {
  conditionalLogger.error(
  'Failed to track PWA usage',
@@ -214,7 +214,7 @@ export const usePWA = (): UsePWAReturn => {
  installPrompt.installApp();
  } else {
  // For iOS Safari
- if ((navigator as any).standalone === false) {
+ if ((navigator).standalone === false) {
  notifications.showNotification({
  title: 'Add to Home Screen',
  body: 'Tap the share button and then "Add to Home Screen".',
@@ -239,7 +239,7 @@ export const usePWA = (): UsePWAReturn => {
  }
 
  const registration = await navigator.serviceWorker.ready;
- await (registration as any).sync.register(tag);
+ await (registration).sync.register(tag);
  conditionalLogger.debug(
  'Background sync registered',
  { tag },
@@ -276,7 +276,7 @@ export const usePWA = (): UsePWAReturn => {
  );
  const videoUrl = `/api/video/${videoId}${quality ? `?quality=${quality}` : ''}`;
 
- const response = await (fetch as any)(videoUrl);
+ const response = await (fetch)(videoUrl);
  if (response.ok) {
  await cache.put(`video-${videoId}`, response.clone());
  conditionalLogger.debug(
@@ -338,7 +338,7 @@ export const usePWA = (): UsePWAReturn => {
  // installPrompt.dismissPrompt(false);
 
  // // Don't show again for this session
- // (sessionStorage as any).setItem('pwa-install-dismissed', 'true');
+ // (sessionStorage).setItem('pwa-install-dismissed', 'true');
  // };
 
  // const updateApp = async (): Promise<void> => {
@@ -351,8 +351,8 @@ export const usePWA = (): UsePWAReturn => {
 
  // Check if install prompt was previously dismissed
  useEffect(() => {
- const dismissed = (sessionStorage as any).getItem('pwa-install-dismissed');
- if (dismissed as any) {
+ const dismissed = (sessionStorage).getItem('pwa-install-dismissed');
+ if (dismissed) {
  installPrompt.dismissPrompt(false);
  }
  // do not re-run unnecessarily
@@ -442,7 +442,7 @@ export const showNotification = (;
 
 export const addToHomeScreen = (): void => {
  // For iOS Safari
- if ((navigator as any).standalone === false) {
+ if ((navigator).standalone === false) {
  alert(
  'To install this app on your iOS device, tap the share button and then "Add to Home Screen".',
  );
@@ -463,9 +463,9 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
  return false;
  }
  // Fallback to clipboard
- if ('clipboard' in navigator && (navigator as any).clipboard && data.url) {
+ if ('clipboard' in navigator && (navigator).clipboard && data.url) {
  try {
- await (navigator as any).clipboard.writeText(data.url);
+ await (navigator).clipboard.writeText(data.url);
  showNotification('Link copied to clipboard!');
  return true;
  } catch (error) {
@@ -490,9 +490,9 @@ export const getNetworkStatus = (): {
  downlink?: number;
 } => {
  const connection =;
- (navigator as any).connection ||
- (navigator as any).mozConnection ||
- (navigator as any).webkitConnection;
+ (navigator).connection ||
+ (navigator).mozConnection ||
+ (navigator).webkitConnection;
 
  return {
  online: navigator.onLine,
@@ -506,7 +506,7 @@ export const enableBackgroundSync = (tag): void => {
  'sync' in window.ServiceWorkerRegistration.prototype) {
  navigator.serviceWorker.ready
  .then(registration => {
- return (registration as any).sync.register(tag);
+ return (registration).sync.register(tag);
  })
  .catch(error => {
  const componentError = createComponentError(;
@@ -528,7 +528,7 @@ export const cacheVideo = async (;
  if ('caches' in window) {
  try {
  const cache = await caches.open('youtubex-videos-v1');
- const response = await (fetch as any)(videoUrl);
+ const response = await (fetch)(videoUrl);
 
  if (response.ok) {
  await cache.put(`video-${videoId}`, response);

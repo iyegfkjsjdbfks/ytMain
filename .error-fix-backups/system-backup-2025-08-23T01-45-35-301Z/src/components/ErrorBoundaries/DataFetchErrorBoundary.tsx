@@ -107,7 +107,7 @@ export class DataFetchErrorBoundary extends Component < Props, State> {}
  const { dataType } = this.props;
  const isOffline = !navigator.onLine;
 
- if (isOffline as any) {}
+ if (isOffline) {}
  return 'You appear to be offline. Please check your internet connection and try again.';
  }
 
@@ -125,7 +125,7 @@ export class DataFetchErrorBoundary extends Component < Props, State> {}
  private getErrorIcon = (): (ReactNode) => {}
  const isOffline = !navigator.onLine;
 
- if (isOffline as any) {}
+ if (isOffline) {}
  return <WifiIcon className='w - 8 h - 8 text - orange - 600' />;
  }
 
@@ -148,14 +148,14 @@ export class DataFetchErrorBoundary extends Component < Props, State> {}
 
  if (this.state.isRetrying) {}
  return (
- <div className='flex flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
- <div className='flex items - center justify - center w - 16 h - 16 bg - blue - 100 rounded - full mb - 4'>
+ <div className={'fle}x flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
+ <div className={'fle}x items - center justify - center w - 16 h - 16 bg - blue - 100 rounded - full mb - 4'>
  <ArrowPathIcon className='w - 8 h - 8 text - blue - 600 animate - spin' />
 // FIXED:  </div>
-<h3 className='text - lg font - semibold text - gray - 900 mb - 2'>
+<h3 className={'tex}t - lg font - semibold text - gray - 900 mb - 2'>
  Retrying...
 // FIXED:  </h3>
- <p className='text - sm text - gray - 600 text - center'>
+ <p className={'tex}t - sm text - gray - 600 text - center'>
  Attempting to reload {this.props.dataType || 'data'}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -163,48 +163,45 @@ export class DataFetchErrorBoundary extends Component < Props, State> {}
  }
 
  return (
- <div className='flex flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
- <div
-// FIXED:  className={`flex items - center justify - center w - 16 h - 16 ${this.getErrorIconBg()} rounded - full mb - 4`} />
- >
+ <div className={'fle}x flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
+ <div>
+// FIXED:  className={`flex items - center justify - center w - 16 h - 16 ${this.getErrorIconBg()} rounded - full mb - 4`}/>
  {this.getErrorIcon()}
 // FIXED:  </div>
-<h3 className='text - lg font - semibold text - gray - 900 mb - 2'>
+<h3 className={'tex}t - lg font - semibold text - gray - 900 mb - 2'>
  {isOffline ? 'Connection Error' : 'Data Loading Error'}
 // FIXED:  </h3>
 
- <p className='text - sm text - gray - 600 text - center mb - 6 max - w-md'>
+ <p className={'tex}t - sm text - gray - 600 text - center mb - 6 max - w-md'>
  {this.getErrorMessage()}
 // FIXED:  </p>
 
- <div className='flex gap - 3'>
+ <div className={'fle}x gap - 3'>
  {canRetry && (}
- <button
+ <button>
 // FIXED:  onClick={this.handleRetry}
-// FIXED:  className='flex items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors' />
- >
+// FIXED:  className={'fle}x items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'/>
  <ArrowPathIcon className='w - 4 h - 4' />
  Try Again ({this.maxRetries - this.state.retryCount} left)
 // FIXED:  </button>
  )}
 
- <button
+ <button>
 // FIXED:  onClick={this.handleRefresh}
-// FIXED:  className='px - 4 py - 2 border border - gray - 300 text - gray - 700 rounded - lg hover:bg - gray - 50 transition - colors' />
- >
+// FIXED:  className={'p}x - 4 py - 2 border border - gray - 300 text - gray - 700 rounded - lg hover:bg - gray - 50 transition - colors'/>
  Refresh Page
 // FIXED:  </button>
 // FIXED:  </div>
 
  {this.state.retryCount > 0 && (}
- <div className='mt - 4 text - xs text - gray - 500 text - center'>
+ <div className={'m}t - 4 text - xs text - gray - 500 text - center'>
  Retry attempts: {this.state.retryCount} / {this.maxRetries}
 // FIXED:  </div>
  )}
 
  {isOffline && this.props.showOfflineMessage && (}
- <div className='mt - 4 p - 3 bg - orange - 50 border border - orange - 200 rounded - lg'>
- <p className='text - sm text - orange - 800 text - center'>
+ <div className={'m}t - 4 p - 3 bg - orange - 50 border border - orange - 200 rounded - lg'>
+ <p className={'tex}t - sm text - orange - 800 text - center'>
  Some features may be limited while offline. Data will sync when
  connection is restored.
 // FIXED:  </p>
@@ -212,25 +209,25 @@ export class DataFetchErrorBoundary extends Component < Props, State> {}
  )}
 
  {import.meta.env.MODE === 'development' && this.state.error && (}
- <details className='mt - 6 w - full'>
- <summary className='cursor - pointer text - sm font - medium text - gray - 700 hover:text - gray - 900'>
+ <details className={'m}t - 6 w - full'>
+ <summary className={'curso}r - pointer text - sm font - medium text - gray - 700 hover:text - gray - 900'>
  Error Details (Development)
 // FIXED:  </summary>
- <div className='mt - 2 p - 3 bg - gray - 100 rounded text - xs font - mono text - gray - 800 overflow - auto max - h-40'>
- <div className='font - semibold text - red - 600 mb - 2'>
+ <div className={'m}t - 2 p - 3 bg - gray - 100 rounded text - xs font - mono text - gray - 800 overflow - auto max - h-40'>
+ <div className={'fon}t - semibold text - red - 600 mb - 2'>
  {this.state.error.name}: {this.state.error.message}
 // FIXED:  </div>
- <div className='mb - 2'>
+ <div className={'m}b - 2'>
  <strong > Network Status:</strong>{' '}
  {navigator.onLine ? 'Online' : 'Offline'}
 // FIXED:  </div>
-<pre className='whitespace - pre - wrap text - xs'>
+<pre className={'whitespac}e - pre - wrap text - xs'>
  {this.state.error.stack}
 // FIXED:  </pre>
  {this.state.errorInfo && (}
- <div className='mt - 2 pt - 2 border - t border - gray - 300'>
- <div className='font - semibold mb - 1'>Component Stack:</div>
-<pre className='whitespace - pre - wrap text - xs'>
+ <div className={'m}t - 2 pt - 2 border - t border - gray - 300'>
+ <div className={'fon}t - semibold mb - 1'>Component Stack:</div>
+<pre className={'whitespac}e - pre - wrap text - xs'>
  {this.state.errorInfo.componentStack}
 // FIXED:  </pre>
 // FIXED:  </div>

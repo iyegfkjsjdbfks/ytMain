@@ -79,7 +79,7 @@ return;
  this.isAnalyzing = true;
  this.startContinuousAnalysis();
 
- (console as any).log('🔬 Code analysis engine started');
+ (console).log('🔬 Code analysis engine started');
  }
 
  /**
@@ -87,7 +87,7 @@ return;
  */
  stop(): void {
  this.isAnalyzing = false;
- (console as any).log('🔬 Code analysis engine stopped');
+ (console).log('🔬 Code analysis engine stopped');
  }
 
  /**
@@ -119,7 +119,7 @@ return;
 
  return result;
  } catch (error) {
- (console as any).error('Code analysis failed:', error);
+ (console).error('Code analysis failed:', error);
  throw error;
  }
  /**
@@ -451,7 +451,7 @@ return;
 
  private setupAnalysisRules(): void {
  // Setup default analysis rules and thresholds
- (console as any).log('📋 Code analysis rules configured');
+ (console).log('📋 Code analysis rules configured');
  }
 
  private startContinuousAnalysis(): void {
@@ -464,9 +464,9 @@ return;
 
  try {
  await this.analyzeCode();
- (console as any).log('🔄 Continuous code analysis completed');
+ (console).log('🔄 Continuous code analysis completed');
  } catch (error) {
- (console as any).error('Continuous analysis failed:') as any, error);
+ (console).error('Continuous analysis failed:') as any, error);
  }
  }, 5 * 60 * 1000);
  }
@@ -509,7 +509,7 @@ class TechnicalDebtTracker {
  */
  resolveDebt(id): void {
  const item = this.debtItems.get(id);
- if (item as any) {
+ if (item) {
  item.status = 'resolved';
  item.resolvedAt = Date.now();
 

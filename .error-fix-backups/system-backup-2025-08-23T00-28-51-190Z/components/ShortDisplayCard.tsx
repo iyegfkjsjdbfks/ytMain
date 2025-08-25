@@ -35,26 +35,25 @@ interface PlayPauseOverlayProps {
 }
 
 const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }: any) => (
- <div
-// FIXED:  className="absolute inset-0 flex items-center justify-center cursor-pointer" />
+ <div>
+// FIXED:  className={"absolut}e inset-0 flex items-center justify-center cursor-pointer" />
 // FIXED:  onClick={(e) => {
  e.stopPropagation();
  onToggle();
  }
  >
- <button
+ <button>
 // FIXED:  className={`
  bg-black bg-opacity-50 text-white p-4 rounded-full 
  transition-opacity duration-200 pointer-events-none
  ${!isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 hover:opacity-100'}
  hover:bg-opacity-70
  `}
-// FIXED:  aria-label={isPlaying ? 'Pause video' : 'Play video'} />
- >
+// FIXED:  aria-label={isPlaying ? 'Pause video' : 'Play video'}/>
  {isPlaying ? (
- <PauseIcon className="w-8 h-8" />
+ <PauseIcon className={"w}-8 h-8" />
  ) : (
- <PlayIcon className="w-8 h-8" />
+ <PlayIcon className={"w}-8 h-8" />
  )}
 // FIXED:  </button>
 // FIXED:  </div>
@@ -75,11 +74,11 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
  views,
  isFollowed = false,
  onFollow }) => (
- <div className="flex-1 mr-4 pointer-events-auto">
- <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
+ <div className={"flex}-1 mr-4 pointer-events-auto">
+ <h3 className={"text}-white font-medium text-sm mb-1 line-clamp-2">
  {title}
 // FIXED:  </h3>
- <p className="text-gray-300 text-xs mb-2">
+ <p className={"text}-gray-300 text-xs mb-2">
  {channelName} • {views}
 // FIXED:  </p>
  {onFollow && (
@@ -117,7 +116,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
  onLike,
  onComment,
  onShare }) => (
- <div className="flex flex-col space-y-3 pointer-events-auto">
+ <div className={"fle}x flex-col space-y-3 pointer-events-auto">
  {/* Mute/Unmute */}
  <ActionButton />
 // FIXED:  onClick={(e) => {
@@ -127,9 +126,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
  ariaLabel={isMuted ? 'Unmute video' : 'Mute video'}
  >
  {isMuted ? (
- <SpeakerXMarkIcon className="w-5 h-5" />
+ <SpeakerXMarkIcon className={"w}-5 h-5" />
  ) : (
- <SpeakerWaveIcon className="w-5 h-5" />
+ <SpeakerWaveIcon className={"w}-5 h-5" />
  )}
 // FIXED:  </ActionButton>
 
@@ -139,9 +138,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
  ariaLabel="Like video"
  >
  {isLiked ? (
- <HeartIconSolid className="w-5 h-5 text-red-500" />
+ <HeartIconSolid className={"w}-5 h-5 text-red-500" />
  ) : (
- <HeartIcon className="w-5 h-5" />
+ <HeartIcon className={"w}-5 h-5" />
  )}
 // FIXED:  </ActionButton>
 
@@ -150,7 +149,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 // FIXED:  onClick={(e) => onComment(e)}
  ariaLabel="Comment on video"
  >
- <ChatBubbleOvalLeftIcon className="w-5 h-5" />
+ <ChatBubbleOvalLeftIcon className={"w}-5 h-5" />
 // FIXED:  </ActionButton>
 
  {/* Share */}
@@ -158,14 +157,14 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 // FIXED:  onClick={(e) => onShare(e)}
  ariaLabel="Share video"
  >
- <ShareIcon className="w-5 h-5" />
+ <ShareIcon className={"w}-5 h-5" />
 // FIXED:  </ActionButton>
 // FIXED:  </div>
 );
 
 // Extracted LoadingIndicator component
 const LoadingIndicator: React.FC = () => (
- <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+ <div className={"absolut}e inset-0 flex items-center justify-center bg-black bg-opacity-50">
  <LoadingSpinner size="md" color="white" />
 // FIXED:  </div>
 );
@@ -177,7 +176,7 @@ interface ErrorStateProps {
 }
 
 const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }: any) => (
- <ErrorMessage
+ <ErrorMessage>
  message={error}
  onRetry={onRetry}
  variant="overlay"
@@ -247,7 +246,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  setIsManuallyPaused(false);
  }
  } catch (error) {
- (console as any).warn('Error toggling play/pause:', error);
+ (console).warn('Error toggling play/pause:', error);
  };
 
  const handleLike = (e: React.MouseEvent) => {
@@ -296,11 +295,11 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  }`}
  >
  {/* Real video element */}
- <video
+ <video>
  ref={videoRef}
 // FIXED:  src={short.videoUrl}
  poster={short.thumbnailUrl}
-// FIXED:  className="w-full h-full object-cover cursor-pointer"
+// FIXED:  className={"w}-full h-full object-cover cursor-pointer"
  playsInline
  muted={videoPlayer.isMuted}
  loop
@@ -316,22 +315,22 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
 
  {/* Error State */}
  {videoPlayer.error && (
- <ErrorState
+ <ErrorState>
  error={videoPlayer.error.message}
  onRetry={handleRetry} />
  />
  )}
 
  {/* Play/Pause Overlay */}
- <PlayPauseOverlay
+ <PlayPauseOverlay>
  isPlaying={videoPlayer.isPlaying}
  onToggle={handlePlayPauseToggle} />
  />
 
  {/* Video Info Overlay */}
- <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
- <div className="flex items-end justify-between">
- <VideoInfo
+ <div className={"absolut}e bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
+ <div className={"fle}x items-end justify-between">
+ <VideoInfo>
  title={short.title}
  channelName={short.channelName}
  views={short.views}
@@ -340,7 +339,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
  />
 
  {/* Action Buttons */}
- <ActionButtons
+ <ActionButtons>
  isMuted={videoPlayer.isMuted}
  isLiked={isLiked}
  onToggleMute={videoPlayer.toggleMute}

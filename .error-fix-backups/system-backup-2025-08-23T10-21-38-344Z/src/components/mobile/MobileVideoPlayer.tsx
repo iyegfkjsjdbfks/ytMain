@@ -55,7 +55,7 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
  }
 
  try {}
- if (isPlaying as any) {}
+ if (isPlaying) {}
  await videoRef.current.pause();
  setIsPlaying(false);
  onPause?.();
@@ -65,7 +65,7 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
  onPlay?.();
  }
  } catch (error) {}
- (console as any).error('Error toggling video playback:', error);
+ (console).error('Error toggling video playback:', error);
  }
  }, [isPlaying, onPlay, onPause]);
 
@@ -90,20 +90,20 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
  if (!isFullscreen) {}
  if (containerRef.current.requestFullscreen) {}
  await containerRef.current.requestFullscreen();
- } else if ((containerRef.current as any).webkitRequestFullscreen) {}
- await (containerRef.current as any).webkitRequestFullscreen();
+ } else if ((containerRef.current).webkitRequestFullscreen) {}
+ await (containerRef.current).webkitRequestFullscreen();
  }
  setIsFullscreen(true);
  } else {}
  if (document.exitFullscreen) {}
  await document.exitFullscreen();
- } else if ((document as any).webkitExitFullscreen) {}
- await (document as any).webkitExitFullscreen();
+ } else if ((document).webkitExitFullscreen) {}
+ await (document).webkitExitFullscreen();
  }
  setIsFullscreen(false);
  }
  } catch (error) {}
- (console as any).error('Error toggling fullscreen:', error);
+ (console).error('Error toggling fullscreen:', error);
  }
  }, [isFullscreen]);
 
@@ -127,7 +127,7 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
  }
 
  controlsTimeoutRef.current = setTimeout((() => {}
- if (isPlaying as any) {}
+ if (isPlaying) {}
  setShowControls(false);
  }
  }) as any, 3000);
@@ -185,14 +185,14 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
  };
 
  return (
- <div
+ <div>
  ref={setRefs}
 // FIXED:  className={`relative bg - black rounded - lg overflow - hidden ${className}`}
  onTouchStart={handleTouchStart} />
 // FIXED:  onClick={(e: React.MouseEvent) => showControlsTemporarily(e)}
  >
  {/* Video Element */}
- <video
+ <video>
  ref={videoRef}
 // FIXED:  src={video.videoUrl}
  poster={video.thumbnailUrl}
@@ -207,16 +207,15 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
  />
 
  {/* Mobile Controls Overlay */}
- <div
+ <div>
 // FIXED:  className={`absolute inset - 0 bg - gradient - to - t from - black / 60 via - transparent to - black / 30 transition - opacity duration - 300 ${}
  showControls ? 'opacity - 100' : 'opacity - 0'
- }`} />
- >
+ }`}/>
  {/* Center Play Button */}
- <div className='absolute inset - 0 flex items - center justify - center'>
+ <div className={'absolut}e inset - 0 flex items - center justify - center'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => togglePlay(e)}
-// FIXED:  className='bg - black / 50 backdrop - blur - sm rounded - full p - 4 text - white hover:bg - black / 70 transition - colors'
+// FIXED:  className={'b}g - black / 50 backdrop - blur - sm rounded - full p - 4 text - white hover:bg - black / 70 transition - colors'
 // FIXED:  aria - label={isPlaying ? 'Pause' : 'Play'}
  >
  {isPlaying ? (}
@@ -228,10 +227,10 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
 // FIXED:  </div>
 
  {/* Top Controls */}
- <div className='absolute top - 4 right - 4 flex space - x - 2'>
+ <div className={'absolut}e top - 4 right - 4 flex space - x - 2'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => toggleMute(e)}
-// FIXED:  className='bg - black / 50 backdrop - blur - sm rounded - full p - 2 text - white hover:bg - black / 70 transition - colors'
+// FIXED:  className={'b}g - black / 50 backdrop - blur - sm rounded - full p - 2 text - white hover:bg - black / 70 transition - colors'
 // FIXED:  aria - label={isMuted ? 'Unmute' : 'Mute'}
  >
  {isMuted ? (}
@@ -243,7 +242,7 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
 
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => toggleFullscreen(e)}
-// FIXED:  className='bg - black / 50 backdrop - blur - sm rounded - full p - 2 text - white hover:bg - black / 70 transition - colors'
+// FIXED:  className={'b}g - black / 50 backdrop - blur - sm rounded - full p - 2 text - white hover:bg - black / 70 transition - colors'
 // FIXED:  aria - label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
  >
  {isFullscreen ? (}
@@ -255,10 +254,10 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
 // FIXED:  </div>
 
  {/* Bottom Controls */}
- <div className='absolute bottom - 0 left - 0 right - 0 p - 4'>
+ <div className={'absolut}e bottom - 0 left - 0 right - 0 p - 4'>
  {/* Progress Bar */}
- <div className='mb - 3'>
- <input
+ <div className={'m}b - 3'>
+ <input>
 // FIXED:  type='range'
  min='0'
  max={duration || 0}
@@ -269,8 +268,8 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
  background: `linear - gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)` }
  />
  {/* Buffered indicator */}
- <div
-// FIXED:  className='absolute h - 1 bg - white / 50 rounded - lg pointer - events - none'
+ <div>
+// FIXED:  className={'absolut}e h - 1 bg - white / 50 rounded - lg pointer - events - none'
 // FIXED:  style={{,}
  width: `${(buffered / duration) * 100}%`,
  marginTop: '-4px' } />
@@ -278,7 +277,7 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
 // FIXED:  </div>
 
  {/* Time Display */}
- <div className='flex justify - between items - center text - white text - sm'>
+ <div className={'fle}x justify - between items - center text - white text - sm'>
  <span>{formatTime(currentTime)}</span>
  <span>{formatTime(duration)}</span>
 // FIXED:  </div>
@@ -287,8 +286,8 @@ const MobileVideoPlayer = memo < MobileVideoPlayerProps>(
 
  {/* Loading Indicator */}
  {!duration && (}
- <div className='absolute inset - 0 flex items - center justify - center bg - black / 50'>
- <div className='animate - spin rounded - full h - 8 w - 8 border - b - 2 border - white' />
+ <div className={'absolut}e inset - 0 flex items - center justify - center bg - black / 50'>
+ <div className={'animat}e - spin rounded - full h - 8 w - 8 border - b - 2 border - white' />
 // FIXED:  </div>
  )}
 // FIXED:  </div>

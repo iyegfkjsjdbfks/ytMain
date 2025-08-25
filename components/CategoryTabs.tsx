@@ -11,10 +11,10 @@ interface CategoryTabsProps {
 
 const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: any) => {
  return (
- <div className="mb-6">
- <div className="flex space-x-1 overflow-x-auto no-scrollbar">
+ <div className={"mb}-6">
+ <div className={"fle}x space-x-1 overflow-x-auto no-scrollbar">
  {categories.map((category: any) => (
- <button;
+ <button;>
  key={category.id} />
 
 

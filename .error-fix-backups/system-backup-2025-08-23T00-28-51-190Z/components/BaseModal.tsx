@@ -45,7 +45,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
  // Size classes
  const getSizeClasses = () => {
- switch (size as any) {
+ switch (size) {
  case 'sm': return 'max-w-md';
  case 'lg': return 'max-w-4xl';
  case 'xl': return 'max-w-6xl';
@@ -60,7 +60,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
  onClose();
  };
 
- if (isOpen as any) {
+ if (isOpen) {
  document.addEventListener('keydown', handleEscape as EventListener);
  return () => document.removeEventListener('keydown', handleEscape as EventListener);
  }
@@ -80,7 +80,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
  // Focus management
  useEffect(() => {
- if (isOpen as any) {
+ if (isOpen) {
  previousActiveElement.current = document.activeElement as HTMLElement;
  modalRef.current?.focus();
  } else {
@@ -99,9 +99,7 @@ return null;
 }
 
  return (
- <div
-
-
+ <div>
  onKeyDown={(e) => {
  if (e.key === 'Escape') {
  onClose();
@@ -112,10 +110,10 @@ return null;
  tabIndex={0}
  >
  {/* Backdrop */}
- <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity" />
+ <div className={"absolut}e inset-0 bg-black bg-opacity-50 transition-opacity" />
 
  {/* Modal */}
- <div
+ <div>
  ref={modalRef}
  tabIndex={-1}
 
@@ -131,29 +129,28 @@ return null;
  >
  {/* Header */}
  {(title || showCloseButton) && (
- <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+ <div className={"fle}x items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
  {title && (
- <h2 id="modal-title" className="text-xl font-semibold text-gray-900 dark:text-white">
+ <h2 id="modal-title" className={"text}-xl font-semibold text-gray-900 dark:text-white">
  {title}
 
  )}
  {showCloseButton && (
- <button />
- >
- <XMarkIcon className="w-5 h-5" />
+ <button/>
+ <XMarkIcon className={"w}-5 h-5" />
 
  )}
 
  )}
 
  {/* Content */}
- <div className="flex-1 overflow-y-auto p-6">
+ <div className={"flex}-1 overflow-y-auto p-6">
  {children}
 
 
  {/* Footer */}
  {footer && (
- <div className="p-6 border-t border-gray-200 dark:border-gray-700">
+ <div className={"p}-6 border-t border-gray-200 dark:border-gray-700">
  {footer}
 
  )}

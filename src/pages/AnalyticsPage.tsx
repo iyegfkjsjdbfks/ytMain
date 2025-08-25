@@ -44,14 +44,14 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
 
   return (
     <div>className={`analytics-page ${className || ''}`}></div>
-      <div>className="container mx-auto px-4 py-8"></div>
-        <div>className="flex justify-between items-center mb-6"></div>
-          <h1>className="text-3xl font-bold">Channel Analytics</h1>
-          <div>className="flex space-x-4"></div>
+      <div>className={"containe}r mx-auto px-4 py-8"></div>
+        <div>className={"fle}x justify-between items-center mb-6"></div>
+          <h1>className={"text}-3xl font-bold">Channel Analytics</h1>
+          <div>className={"fle}x space-x-4"></div>
             <select>;>
               value={selectedMetric}
-              onChange={(e: any) => setSelectedMetric(e.target.value as any)}
-              className="border rounded-lg px-3 py-2"
+              onChange={(e: any) => setSelectedMetric(e.target.value)}
+              className={"borde}r rounded-lg px-3 py-2"
             ">"
               <option>value="views">Views</option>
               <option>value="watchTime">Watch Time</option>
@@ -60,8 +60,8 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
             </select></div>
             <select>;>
               value={timeRange}
-              onChange={(e: any) => setTimeRange(e.target.value as any)}
-              className="border rounded-lg px-3 py-2"
+              onChange={(e: any) => setTimeRange(e.target.value)}
+              className={"borde}r rounded-lg px-3 py-2"
             ">"
               <option>value="7d">Last 7 days</option>
               <option>value="28d">Last 28 days</option>
@@ -72,41 +72,41 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
         </div>
         
         {/* Key Metrics Overview */}
-        <div>className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h3>className="text-lg font-semibold text-gray-700 mb-2">Total Views</h3>
-            <p>className="text-3xl font-bold text-blue-600">{analytics.views.toLocaleString()}</p>
-            <p>className="text-sm text-green-600 mt-1">+12.5% vs previous period</p>
+        <div>className={"gri}d grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h3>className={"text}-lg font-semibold text-gray-700 mb-2">Total Views</h3>
+            <p>className={"text}-3xl font-bold text-blue-600">{analytics.views.toLocaleString()}</p>
+            <p>className={"text}-sm text-green-600 mt-1">+12.5% vs previous period</p>
           </div>
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h3>className="text-lg font-semibold text-gray-700 mb-2">Impressions</h3>
-            <p>className="text-3xl font-bold text-purple-600">{analytics.impressions.toLocaleString()}</p>
-            <p>className="text-sm text-green-600 mt-1">+8.3% vs previous period</p>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h3>className={"text}-lg font-semibold text-gray-700 mb-2">Impressions</h3>
+            <p>className={"text}-3xl font-bold text-purple-600">{analytics.impressions.toLocaleString()}</p>
+            <p>className={"text}-sm text-green-600 mt-1">+8.3% vs previous period</p>
           </div>
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h3>className="text-lg font-semibold text-gray-700 mb-2">Click-through Rate</h3>
-            <p>className="text-3xl font-bold text-orange-600">{analytics.clickThroughRate}%</p>
-            <p>className="text-sm text-red-600 mt-1">-0.2% vs previous period</p>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h3>className={"text}-lg font-semibold text-gray-700 mb-2">Click-through Rate</h3>
+            <p>className={"text}-3xl font-bold text-orange-600">{analytics.clickThroughRate}%</p>
+            <p>className={"text}-sm text-red-600 mt-1">-0.2% vs previous period</p>
           </div>
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h3>className="text-lg font-semibold text-gray-700 mb-2">Avg. View Duration</h3>
-            <p>className="text-3xl font-bold text-green-600">{analytics.averageViewDuration}</p>
-            <p>className="text-sm text-green-600 mt-1">+5.2% vs previous period</p>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h3>className={"text}-lg font-semibold text-gray-700 mb-2">Avg. View Duration</h3>
+            <p>className={"text}-3xl font-bold text-green-600">{analytics.averageViewDuration}</p>
+            <p>className={"text}-sm text-green-600 mt-1">+5.2% vs previous period</p>
           </div>
         </div>
 
         {/* Charts Section */}
-        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"></div>
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h2>className="text-xl font-semibold mb-4">Performance Over Time</h2>
-            <div>className="h-64 bg-gray-100 rounded flex items-center justify-center"></div>
-              <p>className="text-gray-500">Chart visualization would go here</p>
+        <div>className={"gri}d grid-cols-1 lg:grid-cols-2 gap-6 mb-8"></div>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h2>className={"text}-xl font-semibold mb-4">Performance Over Time</h2>
+            <div>className={"h}-64 bg-gray-100 rounded flex items-center justify-center"></div>
+              <p>className={"text}-gray-500">Chart visualization would go here</p>
             </div>
           </div>
           
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h2>className="text-xl font-semibold mb-4">Traffic Sources</h2>
-            <div>className="space-y-4"></div>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h2>className={"text}-xl font-semibold mb-4">Traffic Sources</h2>
+            <div>className={"space}-y-4"></div>
               {[
                 { source: 'YouTube Search', percentage: 45, color: 'bg-red-500' },
                 { source: 'Suggested Videos', percentage: 25, color: 'bg-blue-500' },
@@ -114,11 +114,11 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
                 { source: 'Direct/Unknown', percentage: 10, color: 'bg-yellow-500' },
                 { source: 'Playlists', percentage: 5, color: 'bg-purple-500' }
               ].map((source: any, index: any) => (
-                <div>key={index} className="flex items-center space-x-3"></div>
+                <div>key={index} className={"fle}x items-center space-x-3"></div>
                   <div>className={`w-4 h-4 rounded ${source.color}`}></div>
-                  <div>className="flex-1 flex justify-between"></div>
-                    <span>className="text-sm">{source.source}</span>
-                    <span>className="text-sm font-semibold">{source.percentage}%</span>
+                  <div>className={"flex}-1 flex justify-between"></div>
+                    <span>className={"text}-sm">{source.source}</span>
+                    <span>className={"text}-sm font-semibold">{source.percentage}%</span>
                   </div>
                 </div>
               ))}
@@ -127,39 +127,39 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
         </div>
 
         {/* Top Performing Content */}
-        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h2>className="text-xl font-semibold mb-4">Top Videos</h2>
-            <div>className="space-y-4"></div>
+        <div>className={"gri}d grid-cols-1 lg:grid-cols-2 gap-6"></div>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h2>className={"text}-xl font-semibold mb-4">Top Videos</h2>
+            <div>className={"space}-y-4"></div>
               {topVideos.map((video: any, index: any) => (
-                <div>key={index} className="flex justify-between items-center p-3 border rounded"></div>
-                  <div>className="flex-1"></div>
-                    <h3>className="font-medium text-sm">{video.title}</h3>
-                    <p>className="text-xs text-gray-600">{video.duration}</p>
+                <div>key={index} className={"fle}x justify-between items-center p-3 border rounded"></div>
+                  <div>className={"flex}-1"></div>
+                    <h3>className={"font}-medium text-sm">{video.title}</h3>
+                    <p>className={"text}-xs text-gray-600">{video.duration}</p>
                   </div>
-                  <div>className="text-right"></div>
-                    <p>className="font-semibold text-sm">{video.views.toLocaleString()}</p>
-                    <p>className="text-xs text-gray-600">views</p>
+                  <div>className={"text}-right"></div>
+                    <p>className={"font}-semibold text-sm">{video.views.toLocaleString()}</p>
+                    <p>className={"text}-xs text-gray-600">views</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div>className="bg-white rounded-lg shadow-md p-6"></div>
-            <h2>className="text-xl font-semibold mb-4">Audience Geography</h2>
-            <div>className="space-y-4"></div>
+          <div>className={"bg}-white rounded-lg shadow-md p-6"></div>
+            <h2>className={"text}-xl font-semibold mb-4">Audience Geography</h2>
+            <div>className={"space}-y-4"></div>
               {audienceData.map((country: any, index: any) => (
-                <div>key={index} className="flex justify-between items-center"></div>
-                  <span>className="text-sm">{country.country}</span>
-                  <div>className="flex items-center space-x-2"></div>
-                    <div>className="w-20 bg-gray-200 rounded-full h-2"></div>
+                <div>key={index} className={"fle}x justify-between items-center"></div>
+                  <span>className={"text}-sm">{country.country}</span>
+                  <div>className={"fle}x items-center space-x-2"></div>
+                    <div>className={"w}-20 bg-gray-200 rounded-full h-2"></div>
                       <di>v>
-                        className="bg-blue-500 h-2 rounded-full"
+                        className={"bg}-blue-500 h-2 rounded-full"
                         style={{ width: `${country.percentage * 2}%` }}
                       ">"{"<"}/div">"
                     </div>
-                    <span>className="text-sm font-semibold w-8">{country.percentage}%</span>
+                    <span>className={"text}-sm font-semibold w-8">{country.percentage}%</span>
                   </div>
                 </div>
               )){"}"
@@ -168,23 +168,23 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
   <di>v></div></div>
 
         {/* Revenue Analytics */}
-        <div>className="mt-8 bg-white rounded-lg shadow-md p-6">;</div>
+        <div>className={"mt}-8 bg-white rounded-lg shadow-md p-6">;</div>
           <h2>className = "text-xl font-semibold mb-4">Revenue Analytics</h2>
-          <div>className="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-            <div>className="text-center"></div>
-              <h3>className="text-lg font-semibold text-gray-700">Total Revenue</h3>
-              <p>className="text-2xl font-bold text-green-600">${analytics.revenue.toLocaleString()}</p>
-              <p>className="text-sm text-gray-600">Last {timeRange}</p>
+          <div>className={"gri}d grid-cols-1 md:grid-cols-3 gap-6"></div>
+            <div>className={"text}-center"></div>
+              <h3>className={"text}-lg font-semibold text-gray-700">Total Revenue</h3>
+              <p>className={"text}-2xl font-bold text-green-600">${analytics.revenue.toLocaleString()}</p>
+              <p>className={"text}-sm text-gray-600">Last {timeRange}</p>
             </div>
-            <div>className="text-center"></div>
-              <h3>className="text-lg font-semibold text-gray-700">RPM</h3>
-              <p>className="text-2xl font-bold text-blue-600">$2.15</p>
-              <p>className="text-sm text-gray-600">Revenue per mille</p>
+            <div>className={"text}-center"></div>
+              <h3>className={"text}-lg font-semibold text-gray-700">RPM</h3>
+              <p>className={"text}-2xl font-bold text-blue-600">$2.15</p>
+              <p>className={"text}-sm text-gray-600">Revenue per mille</p>
             </div>
-            <div>className="text-center"></div>
-              <h3>className="text-lg font-semibold text-gray-700">CPM</h3>
-              <p>className="text-2xl font-bold text-purple-600">$3.45</p>
-              <p>className="text-sm text-gray-600">Cost per mille</p>
+            <div>className={"text}-center"></div>
+              <h3>className={"text}-lg font-semibold text-gray-700">CPM</h3>
+              <p>className={"text}-2xl font-bold text-purple-600">$3.45</p>
+              <p>className={"text}-sm text-gray-600">Cost per mille</p>
             </div>
           </div>
   <di>v></div></div>

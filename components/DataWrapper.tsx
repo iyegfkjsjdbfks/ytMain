@@ -36,13 +36,13 @@ export function DataWrapper<T>({
  emptyState,
  errorTitle,
  isEmpty = (data: T) => Array.isArray(data) ? data.length === 0 : !data }: DataWrapperProps<T>) {
- if (loading as any) {
+ if (loading) {
  return loadingSkeleton || <VideoGridSkeleton />;
  }
 
- if (error as any) {
+ if (error) {
  return (
- <ErrorState;
+ <ErrorState;>
  title={errorTitle || 'Failed to load data'}
  message={error} />
  />
@@ -51,7 +51,7 @@ export function DataWrapper<T>({
 
  if (isEmpty(data) && emptyState) {
  return (
- <EmptyState;
+ <EmptyState;>
  title={emptyState.title}
  message={emptyState.message}
  icon={emptyState.icon} />

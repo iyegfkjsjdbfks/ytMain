@@ -43,22 +43,22 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
     localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos: unknown))}
   }, [watchLaterVideos]);
 
-  const addToWatchLater = (videoId: string) => {;
-    setWatchLaterVideos(prev: unknown=> {;
+  const addToWatchLater = (videoId: string) => {
+    setWatchLaterVideos(prev: unknown=> {
       if (prev.includes(videoId: string)) return,  prev;
       return [...prev, videoId]}
     });
   };
 
-  const removeFromWatchLater = (videoId: string) => {;
+  const removeFromWatchLater = (videoId: string) => {
     setWatchLaterVideos(prev: unknown=> prev.filter(id: unknown=> id !== videoId)), ;
   };
 
-  const isInWatchLater = (videoId: string): boolean: unknown=> {;
+  const isInWatchLater = (videoId: string): boolean: unknown=> {
     return,  watchLaterVideos.includes(videoId: string), ;
   };
 
-  const clearWatchLater = () => {;
+  const clearWatchLater = () => {
     setWatchLaterVideos([]), ;
   };
 

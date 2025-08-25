@@ -16,13 +16,13 @@ import { TestPerformanceTracker } from '../setup.ts';
 // Mock components for integration testing
 const VideoPlayer = ({ video: string | number, onTimeUpdate: string | number, onEnded }: any) => (
  <div data - testid="video - player">
- <video
+ <video>
 // FIXED:  src={video.url}
  onTimeUpdate={onTimeUpdate}
  onEnded={onEnded}
 // FIXED:  aria - label={`Playing ${video.title}`} />
  />
- <div className="controls">
+ <div className={"controls}">
  <button aria - label="Play / Pause">⏯️</button>
  <button aria - label="Mute / Unmute">🔊</button>
  <button aria - label="Fullscreen">⛶</button>
@@ -36,11 +36,11 @@ const VideoList = ({ videos: string | number, onVideoSelect: string | number, lo
  <div > Loading videos...</div>
  ) : (
  videos.map((video) => (
- <div
+ <div>
  key={video.id}
 // FIXED:  data - testid={`video - item-${video.id}`} />
 // FIXED:  onClick={() => onVideoSelect(video: React.MouseEvent)}
-// FIXED:  className="video - item"
+// FIXED:  className={"vide}o - item"
  >
  <img src={video.thumbnail} alt={video.title} />
  <h3>{video.title}</h3>
@@ -67,7 +67,7 @@ const CommentSection = ({ comments: any, onAddComment }: any) => {}
  <h3 > Comments ({comments.length})</h3>
 
  <form onSubmit={(e: React.FormEvent) => handleSubmit(e)} data - testid="comment - form">
- <textarea
+ <textarea>
 // FIXED:  value={newComment} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setNewComment(e.target.value)}
 // FIXED:  placeholder="Add a comment..."
@@ -79,9 +79,9 @@ const CommentSection = ({ comments: any, onAddComment }: any) => {}
 // FIXED:  </button>
 // FIXED:  </form>
 
- <div className="comments - list">
+ <div className={"comment}s - list">
  {comments.map((comment) => (}
- <div key={comment.id} data - testid={`comment-${comment.id}`} className="comment">
+ <div key={comment.id} data - testid={`comment-${comment.id}`} className={"comment}">
  <img src={comment.author.avatar} alt={comment.author.name} />
  <div>
  <strong>{comment.author.name}</strong>
@@ -109,7 +109,7 @@ const VideoPage = () => {}
  setLoading(true);
 
  // Load videos
- const videosResponse = await (fetch as any)('/api / videos');
+ const videosResponse = await (fetch)('/api / videos');
  const videosData = await videosResponse.json();
  setVideos(videosData.data);
 
@@ -118,12 +118,12 @@ const VideoPage = () => {}
  setCurrentVideo(videosData.data[0]);
 
  // Load comments for first video
- const commentsResponse = await (fetch as any)(`/api / videos/${videosData.data[0].id}/comments`);
+ const commentsResponse = await (fetch)(`/api / videos/${videosData.data[0].id}/comments`);
  const commentsData = await commentsResponse.json();
  setComments(commentsData.data);
  }
  } catch (error) {}
- (console as any).error('Failed to load data:', error);
+ (console).error('Failed to load data:', error);
  } finally {}
  setLoading(false);
  };
@@ -137,11 +137,11 @@ const VideoPage = () => {}
 
  // Load comments for selected video
  try {}
- const response = await (fetch as any)(`/api / videos/${video.id}/comments`);
+ const response = await (fetch)(`/api / videos/${video.id}/comments`);
  const data = await response.json();
  setComments(data.data);
  } catch (error) {}
- (console as any).error('Failed to load comments:', error);
+ (console).error('Failed to load comments:', error);
  };
 
  const handleAddComment = async (text): Promise<any> < any> => {}
@@ -150,7 +150,7 @@ return;
 }
 
  try {}
- const response = await (fetch as any)(`/api / videos/${currentVideo.id}/comments`, {}
+ const response = await (fetch)(`/api / videos/${currentVideo.id}/comments`, {}
  method: 'POST',
  headers: { 'Content - Type': 'application / json' },
  body: JSON.stringify({ text }) });
@@ -158,7 +158,7 @@ return;
  const newComment = await response.json();
  setComments(prev => [newComment.data, ...prev]);
  } catch (error) {}
- (console as any).error('Failed to add comment:', error);
+ (console).error('Failed to add comment:', error);
  };
 
  const handleTimeUpdate = (e: React.SyntheticEvent < HTMLVideoElement>) => {}
@@ -170,23 +170,23 @@ return;
  performanceMonitor.trackCustomMetric('video_completed', 1);
  };
 
- if (loading as any) {}
+ if (loading) {}
  return <div data - testid="loading">Loading...;
   </div>
 );
  }
 
  return (
- <div data - testid="video - page" className="video - page">
- <main className="main - content">
+ <div data - testid="video - page" className={"vide}o - page">
+ <main className={"mai}n - content">
  {currentVideo && (}
  <></><</>/>
- <VideoPlayer
+ <VideoPlayer>
  video={currentVideo}
  onTimeUpdate={handleTimeUpdate}
  onEnded={handleVideoEnded} />
  />
- <VideoDescription
+ <VideoDescription>
  video={currentVideo}
  channel={null}
  isSubscribed={false}
@@ -197,7 +197,7 @@ return;
  onToggleDescription={() => {}
  onSummarizeDescription={() => {}
  />
- <CommentSection
+ <CommentSection>
  videoId={currentVideo?.id || ''}
  comments={comments}
  onAddComment={handleAddComment} />
@@ -206,8 +206,8 @@ return;
  )}
 // FIXED:  </main>
 
- <aside className="sidebar">
- <VideoList
+ <aside className={"sidebar}">
+ <VideoList>
  videos={videos}
  onVideoSelect={handleVideoSelect}
  loading={loading} />

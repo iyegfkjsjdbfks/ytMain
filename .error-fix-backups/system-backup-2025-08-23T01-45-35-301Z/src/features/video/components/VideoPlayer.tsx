@@ -178,8 +178,8 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
 
  return (
  <div className={`video - player - container ${className}`}>
- <div className='video - player - wrapper relative'>
- <iframe
+ <div className={'vide}o - player - wrapper relative'>
+ <iframe>
 // FIXED:  src={videoUrl}
  title={title || `Video ${videoId}`}
  allow='accelerometer; autoplay; clipboard - write; encrypted - media; gyroscope; picture - in - picture; web - share'
@@ -303,7 +303,7 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
  const bufferedPercentage = state.buffered;
 
  return (
- <div
+ <div>
  ref={containerRef}
 // FIXED:  className={`relative bg - black group ${className} ${state.isFullscreen ? 'fixed inset - 0 z - 50' : 'aspect - video'}`}
  onMouseMove={showControlsTemporarily} />
@@ -314,7 +314,7 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
  }
  >
  {/* Video Element */}
- <video
+ <video>
  ref={videoRef}
 // FIXED:  className='w - full h - full object - contain'
  poster={poster}
@@ -328,17 +328,17 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
 
  {/* Loading Overlay */}
  {!state.duration && (}
- <div className='absolute inset - 0 flex items - center justify - center bg - black bg - opacity - 50'>
- <div className='animate - spin rounded - full h - 12 w - 12 border - b-2 border - white' />
+ <div className={'absolut}e inset - 0 flex items - center justify - center bg - black bg - opacity - 50'>
+ <div className={'animat}e - spin rounded - full h - 12 w - 12 border - b-2 border - white' />
 // FIXED:  </div>
  )}
 
  {/* Play Button Overlay */}
  {!state.isPlaying && state.duration > 0 && (}
- <div className='absolute inset - 0 flex items - center justify - center'>
+ <div className={'absolut}e inset - 0 flex items - center justify - center'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => togglePlay(e)}
-// FIXED:  className='bg - black bg - opacity - 50 hover:bg - opacity - 70 rounded - full p - 4 transition - all duration - 200 transform hover:scale - 110'
+// FIXED:  className={'b}g - black bg - opacity - 50 hover:bg - opacity - 70 rounded - full p - 4 transition - all duration - 200 transform hover:scale - 110'
  >
  <PlayIcon className='w - 12 h - 12 text - white ml - 1' />
 // FIXED:  </button>
@@ -346,31 +346,30 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
  )}
 
  {/* Controls */}
- <div
+ <div>
 // FIXED:  className={`absolute bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black via - black / 50 to - transparent p - 4 transition - opacity duration - 300 ${}
  state.showControls || !state.isPlaying ? 'opacity - 100' : 'opacity - 0'
- }`} />
- >
+ }`}/>
  {/* Progress Bar */}
- <div className='mb - 4'>
- <div
+ <div className={'m}b - 4'>
+ <div>
  ref={progressRef}
-// FIXED:  className='relative h - 1 bg - white bg - opacity - 30 rounded - full cursor - pointer hover:h - 2 transition - all duration - 200' />
+// FIXED:  className={'relativ}e h - 1 bg - white bg - opacity - 30 rounded - full cursor - pointer hover:h - 2 transition - all duration - 200' />
 // FIXED:  onClick={(e: React.MouseEvent) => handleProgressClick(e)}
  >
  {/* Buffered Progress */}
- <div
-// FIXED:  className='absolute top - 0 left - 0 h - full bg - white bg - opacity - 50 rounded - full'
+ <div>
+// FIXED:  className={'absolut}e top - 0 left - 0 h - full bg - white bg - opacity - 50 rounded - full'
 // FIXED:  style={{ width: `${bufferedPercentage}%` } />
  />
  {/* Current Progress */}
- <div
-// FIXED:  className='absolute top - 0 left - 0 h - full bg - red - 600 rounded - full'
+ <div>
+// FIXED:  className={'absolut}e top - 0 left - 0 h - full bg - red - 600 rounded - full'
 // FIXED:  style={{ width: `${progressPercentage}%` } />
  />
  {/* Progress Handle */}
- <div
-// FIXED:  className='absolute top - 1/2 transform -translate - y-1 / 2 w - 3 h - 3 bg - red - 600 rounded - full opacity - 0 group - hover:opacity - 100 transition - opacity duration - 200'
+ <div>
+// FIXED:  className={'absolut}e top - 1/2 transform -translate - y-1 / 2 w - 3 h - 3 bg - red - 600 rounded - full opacity - 0 group - hover:opacity - 100 transition - opacity duration - 200'
 // FIXED:  style={{ left: `${progressPercentage}%`,
  marginLeft: '-6px' } />
  />
@@ -378,12 +377,12 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
 // FIXED:  </div>
 
  {/* Control Buttons */}
- <div className='flex items - center justify - between'>
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center gap - 2'>
  {/* Play / Pause */}
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => togglePlay(e)}
-// FIXED:  className='text - white hover:text - red - 400 transition - colors p - 1'
+// FIXED:  className={'tex}t - white hover:text - red - 400 transition - colors p - 1'
  >
  {state.isPlaying ? (}
  <PauseIcon className='w - 6 h - 6' />
@@ -395,7 +394,7 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
  {/* Skip Backward */}
  <button />
 // FIXED:  onClick={() => seek(state.currentTime - 10: React.MouseEvent)}
-// FIXED:  className='text - white hover:text - red - 400 transition - colors p - 1'
+// FIXED:  className={'tex}t - white hover:text - red - 400 transition - colors p - 1'
  >
  <BackwardIcon className='w - 5 h - 5' />
 // FIXED:  </button>
@@ -403,20 +402,20 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
  {/* Skip Forward */}
  <button />
 // FIXED:  onClick={() => seek(state.currentTime + 10: React.MouseEvent)}
-// FIXED:  className='text - white hover:text - red - 400 transition - colors p - 1'
+// FIXED:  className={'tex}t - white hover:text - red - 400 transition - colors p - 1'
  >
  <ForwardIcon className='w - 5 h - 5' />
 // FIXED:  </button>
 
  {/* Volume */}
- <div
-// FIXED:  className='flex items - center gap - 2 relative' />
+ <div>
+// FIXED:  className={'fle}x items - center gap - 2 relative' />
  onMouseEnter={() => setShowVolumeSlider(true)}
  onMouseLeave={() => setShowVolumeSlider(false)}
  >
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => toggleMute(e)}
-// FIXED:  className='text - white hover:text - red - 400 transition - colors p - 1'
+// FIXED:  className={'tex}t - white hover:text - red - 400 transition - colors p - 1'
  >
  {state.isMuted || state.volume === 0 ? (}
  <SpeakerXMarkIcon className='w - 5 h - 5' />
@@ -427,8 +426,8 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
 
  {/* Volume Slider */}
  {showVolumeSlider && (}
- <div className='absolute bottom - full left - 0 mb - 2 bg - black bg - opacity - 80 p - 2 rounded'>
- <input
+ <div className={'absolut}e bottom - full left - 0 mb - 2 bg - black bg - opacity - 80 p - 2 rounded'>
+ <input>
 // FIXED:  type='range'
  min='0'
  max='1'
@@ -448,34 +447,33 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
 // FIXED:  </div>
 
  {/* Time Display */}
- <span className='text - white text - sm font - mono'>
+ <span className={'tex}t - white text - sm font - mono'>
  {formatTime(state.currentTime)} / {formatTime(state.duration)}
 // FIXED:  </span>
 // FIXED:  </div>
 
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  {/* Settings */}
- <div className='relative'>
+ <div className={'relative}'>
  <button />
 // FIXED:  onClick={() => setShowSettings(!showSettings: React.MouseEvent)}
-// FIXED:  className='text - white hover:text - red - 400 transition - colors p - 1'
+// FIXED:  className={'tex}t - white hover:text - red - 400 transition - colors p - 1'
  >
  <Cog6ToothIcon className='w - 5 h - 5' />
 // FIXED:  </button>
 
  {/* Settings Menu */}
  {showSettings && (}
- <div className='absolute bottom - full right - 0 mb - 2 bg - black bg - opacity - 90 rounded - lg p - 3 min - w-48'>
- <div className='space - y-3'>
+ <div className={'absolut}e bottom - full right - 0 mb - 2 bg - black bg - opacity - 90 rounded - lg p - 3 min - w-48'>
+ <div className={'spac}e - y-3'>
  {/* Playback Speed */}
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='playback - speed'
-// FIXED:  className='text - white text - sm font - medium block mb - 1' />
- >
+// FIXED:  className={'tex}t - white text - sm font - medium block mb - 1'/>
  Playback Speed
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id='playback - speed'
 // FIXED:  value={state.playbackRate} />
 // FIXED:  onChange={e =>}
@@ -496,13 +494,12 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
 
  {/* Quality */}
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='video - quality'
-// FIXED:  className='text - white text - sm font - medium block mb - 1' />
- >
+// FIXED:  className={'tex}t - white text - sm font - medium block mb - 1'/>
  Quality
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id='video - quality'
 // FIXED:  value={state.quality} />
 // FIXED:  onChange={e =>}
@@ -527,7 +524,7 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
  {/* Fullscreen */}
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => toggleFullscreen(e)}
-// FIXED:  className='text - white hover:text - red - 400 transition - colors p - 1'
+// FIXED:  className={'tex}t - white hover:text - red - 400 transition - colors p - 1'
  >
  {state.isFullscreen ? (}
  <ArrowsPointingInIcon className='w - 5 h - 5' />
@@ -541,8 +538,8 @@ export const VideoPlayer: React.FC < VideoPlayerProps> = ({}
 
  {/* Title Overlay */}
  {title && state.showControls && (}
- <div className='absolute top - 4 left - 4 right - 4'>
- <h2 className='text - white text - lg font - medium truncate bg - black bg - opacity - 50 px - 3 py - 2 rounded'>
+ <div className={'absolut}e top - 4 left - 4 right - 4'>
+ <h2 className={'tex}t - white text - lg font - medium truncate bg - black bg - opacity - 50 px - 3 py - 2 rounded'>
  {title}
 // FIXED:  </h2>
 // FIXED:  </div>

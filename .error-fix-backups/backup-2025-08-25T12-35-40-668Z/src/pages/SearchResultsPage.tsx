@@ -17,10 +17,10 @@ interface SearchState {
 
 // Memoized empty state component
 const EmptySearchState = memo(() => (
-  <div className="text-center py-12">
-    <div className="text-neutral-500 dark:text-neutral-400">
-      <MagnifyingGlassIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
-      <h3 className="text-lg font-medium mb-2">Enter a search term</h3>
+  <div className={"text}-center py-12">
+    <div className={"text}-neutral-500 dark:text-neutral-400">
+      <MagnifyingGlassIcon className={"w}-16 h-16 mx-auto mb-4 opacity-50" />
+      <h3 className={"text}-lg font-medium mb-2">Enter a search term</h3>
       <p>Use the search bar above to find videos.</p>
     </div>
   </div>
@@ -85,15 +85,15 @@ const SearchResultsPage: React.FC = () => {
   // Early return for empty query
   if (!query) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className={"max}-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <EmptySearchState />
       </div>
     );
   }
 
-  return (<div className="min-h-screen bg-white dark:bg-gray-900 pt-4">
-      <div className="max-w-[1280px] mx-auto">
-        <OptimizedSearchResults
+  return (<div className={"min}-h-screen bg-white dark:bg-gray-900 pt-4">
+      <div className={"max}-w-[1280px] mx-auto">
+        <OptimizedSearchResults>
           videos={searchState.videos}
           youtubeVideos={searchState.youtubeVideos}
           googleSearchVideos={searchState.googleSearchVideos}

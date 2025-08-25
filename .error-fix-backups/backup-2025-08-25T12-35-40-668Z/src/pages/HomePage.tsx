@@ -38,13 +38,13 @@ const HomePage: React._FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+      <div className={"min}-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
+        <div className={"text}-center">
+          <h1 className={"text}-2xl font-bold text-gray-900 dark:text-white mb-2">
             Unable to load {currentKeyword} videos
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">{error}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
+          <p className={"text}-gray-600 dark:text-gray-400">{error}</p>
+          <p className={"text}-sm text-gray-500 dark:text-gray-500 mt-2">
             Please check your internet connection and try again.
           </p>
         </div>
@@ -53,11 +53,11 @@ const HomePage: React._FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className={"min}-h-screen bg-white dark:bg-gray-900">
       {/* Category Filter Bar - YouTube style */}
-      <div className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-[1440px] mx-auto px-6 py-3">
-          <CategoryChips
+      <div className={"stick}y top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+        <div className={"max}-w-[1440px] mx-auto px-6 py-3">
+          <CategoryChips>
             categories={categories}
             selectedCategory={selectedCategory}
             onSelectCategory={handleSelectCategory}
@@ -66,25 +66,25 @@ const HomePage: React._FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-[1440px] mx-auto px-6 py-6">
+      <div className={"max}-w-[1440px] mx-auto px-6 py-6">
         {loading && filteredVideos.length === 0 ? (
           /* Loading skeleton - YouTube grid style */
           <div>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+            <div className={"fle}x items-center gap-2 mb-6">
+              <div className={"text}-sm text-gray-500 dark:text-gray-400">
                 🔥 Loading {currentKeyword} videos...
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
+            <div className={"gri}d grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
               {Array.from({ length: 12 }).map((_, index) => (
-                <div key={index} className="animate-pulse">
-                  <div className="bg-gray-200 dark:bg-gray-700 rounded-xl mb-3 w-full h-[250px]" />
-                  <div className="flex gap-3">
-                    <div className="w-9 h-9 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0" />
-                    <div className="flex-1 space-y-2">
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded" />
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
+                <div key={index} className={"animate}-pulse">
+                  <div className={"bg}-gray-200 dark:bg-gray-700 rounded-xl mb-3 w-full h-[250px]" />
+                  <div className={"fle}x gap-3">
+                    <div className={"w}-9 h-9 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0" />
+                    <div className={"flex}-1 space-y-2">
+                      <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded" />
+                      <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
+                      <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
                     </div>
                   </div>
                 </div>
@@ -93,9 +93,9 @@ const HomePage: React._FC = () => {
           </div>
         ) : (
           /* Video Grid with Enhanced Hover Effects - YouTube style */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
+          <div className={"gri}d grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
             {filteredVideos.map((video: Video) => (
-              <MemoizedVideoCard
+              <MemoizedVideoCard>
                 key={video.id}
                 video={video}
                 className=""
@@ -106,12 +106,12 @@ const HomePage: React._FC = () => {
 
         {/* Empty State */}
         {!loading && filteredVideos.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-6xl mb-4">🔥</div>
-            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+          <div className={"text}-center py-12">
+            <div className={"text}-6xl mb-4">🔥</div>
+            <h2 className={"text}-xl font-semibold mb-2 text-gray-900 dark:text-white">
               No {currentKeyword} videos found
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className={"text}-gray-600 dark:text-gray-400">
               {selectedCategory === 'All'
                 ? `Unable to load ${currentKeyword} videos at the moment. Please try again later.`
                 : `No ${currentKeyword} videos found for "${selectedCategory}". Try selecting another category.`}

@@ -50,15 +50,14 @@ const Button = forwardRef < HTMLButtonElement, ButtonProps>(
  const Comp = asChild ? 'span' : 'button';
 
  return (
- <Comp
+ <Comp>
 // FIXED:  className={cn(buttonVariants({ variant, size, className }))}
  ref={ref}
 // FIXED:  disabled={isLoading}
- {...props} />
- >
+ {...props}/>
  {isLoading ? (}
  <><</>/><</>/>
- <span className='mr - 2 h - 4 w - 4 animate - spin' />
+ <span className={'m}r - 2 h - 4 w - 4 animate - spin' />
  Loading...
 // FIXED:  </>
  ) : (

@@ -84,32 +84,32 @@ export const CreatorStudioDashboard: React.FC<CreatorStudioDashboardProps> = ({
 
   return (
     <div className={`dashboard ${className}`}>
-      <div className="dashboard-header">
+      <div className={"dashboard}-header">
         <h1>Creator Studio Dashboard</h1>
-        <div className="last-updated">
+        <div className={"last}-updated">
           Last updated: {new Date(data.lastUpdated).toLocaleString()}
         </div>
       </div>
       
-      <div className="dashboard-metrics">
+      <div className={"dashboard}-metrics">
         {Object.entries(data.metrics).map(([key, value]) => (
-          <div key={key} className="metric-card">
-            <div className="metric-label">{key}</div>
-            <div className="metric-value">{value.toLocaleString()}</div>
+          <div key={key} className={"metric}-card">
+            <div className={"metric}-label">{key}</div>
+            <div className={"metric}-value">{value.toLocaleString()}</div>
           </div>
         ))}
       </div>
       
-      <div className="dashboard-charts">
+      <div className={"dashboard}-charts">
         {data.charts.length > 0 ? (
           data.charts.map((chart: any, index: any) => (
-            <div key={index} className="chart-container">
+            <div key={index} className={"chart}-container">
               {/* Chart component would go here */}
               <div>Chart {index + 1}: {chart.type}</div>
             </div>
           ))
         ) : (
-          <div className="no-charts">No charts available</div>
+          <div className={"no}-charts">No charts available</div>
         )}
       </div>
     </div>

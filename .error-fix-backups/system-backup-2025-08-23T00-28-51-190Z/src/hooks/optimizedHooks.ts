@@ -55,7 +55,7 @@ export function useOptimizedThrottle<T>(,
  if (leading && now - lastRan.current >= delay) {
  setThrottledValue(value);
  lastRan.current = now;
- } else if (trailing as any) {
+ } else if (trailing) {
  if (timeoutRef.current) {
  clearTimeout(timeoutRef.current);
  }
@@ -87,10 +87,10 @@ export function useOptimizedLocalStorage<T>(,
 ): [T(value: T | ((val: T) => T)) => void() => void] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  try {
- const item = window.(localStorage as any).getItem(key);
+ const item = window.(localStorage).getItem(key);
  return item ? JSON.parse(item) : initialValue;
  } catch (error) {
- (console as any).warn(`Error reading localStorage key "${key}":`, error);
+ (console).warn(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
  });
@@ -101,9 +101,9 @@ export function useOptimizedLocalStorage<T>(,
  const valueToStore =
  value instanceof Function ? value(storedValue) : value;
  setStoredValue(valueToStore);
- window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+ window.(localStorage).setItem(key, JSON.stringify(valueToStore));
  } catch (error) {
- (console as any).error(`Error setting localStorage key "${key}":`, error);
+ (console).error(`Error setting localStorage key "${key}":`, error);
  }
  },
  [key, storedValue]
@@ -114,7 +114,7 @@ export function useOptimizedLocalStorage<T>(,
  window.localStorage.removeItem(key);
  setStoredValue(initialValue);
  } catch (error) {
- (console as any).error(`Error removing localStorage key "${key}":`, error);
+ (console).error(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
 
@@ -165,7 +165,7 @@ export function useOptimizedAsync<T>(,
  }, []);
 
  useEffect(() => {
- if (immediate as any) {
+ if (immediate) {
  execute();
  }
  }, [immediate, execute, ...dependencies]);
@@ -194,10 +194,10 @@ export function useOptimizedIntersectionObserver(,
  observer.current.disconnect();
  }
 
- if (node as any) {
+ if (node) {
  observer.current = new IntersectionObserver(
  ([entry]) => {
- if (entry as any) {
+ if (entry) {
  setIsIntersecting(entry.isIntersecting);
  setEntry(entry);
  }
@@ -314,7 +314,7 @@ export function useOptimizedMemo<T>(,
  const lastValue = useRef<T>(memoizedValue);
 
  // If custom comparison is provided, use it
- if (compare as any) {
+ if (compare) {
  if (!compare(lastDeps.current, deps)) {
  lastValue.current = factory();
  lastDeps.current = deps;
@@ -341,7 +341,7 @@ export function useOptimizedCallback<T extends (...args) => any>(,
  const depsChanged = deps.some(
  (dep, index) => dep !== depsRef.current[index]
  );
- if (depsChanged as any) {
+ if (depsChanged) {
  callbackRef.current = callback;
  depsRef.current = deps;
  }
@@ -398,9 +398,9 @@ export function useOptimizedForm<T extends Record<string, any>>(,
 
  Object.keys(validationRules).forEach(key => {
  const rule = validationRules[key as keyof T];
- if (rule as any) {
+ if (rule) {
  const error = rule(values[key as keyof T]);
- if (error as any) {
+ if (error) {
  newErrors[key as keyof T] = error;
  isValid = false;
  }

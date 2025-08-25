@@ -723,7 +723,7 @@ describe('Unified Video Hooks', () => {}
  expect(typeof result.current.refetch).toBe('function');
 
  // Test refetch functionality
- await result.current.re(fetch as any)();
+ await result.current.re(fetch)();
  expect(mockUnifiedDataService.getTrendingVideos).toHaveBeenCalledTimes(2);
  });
  });

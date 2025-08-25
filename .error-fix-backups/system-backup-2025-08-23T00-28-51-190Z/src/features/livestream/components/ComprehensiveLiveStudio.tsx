@@ -129,7 +129,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  const newStream = await createStream(streamData);
 
  if (!newStream) {
- (console as any).error('Failed to create stream');
+ (console).error('Failed to create stream');
  return;
  }
 
@@ -167,7 +167,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  setIsStreaming(false);
  setCurrentStream(null);
 
- if (stream as any) {
+ if (stream) {
  stream.getTracks().forEach(track => track.stop());
  setStream(null);
  }
@@ -180,18 +180,18 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  };
 
  const toggleVideo = () => {
- if (stream as any) {
+ if (stream) {
  const videoTrack = stream.getVideoTracks()[0];
- if (videoTrack as any) {
+ if (videoTrack) {
  videoTrack.enabled = !videoTrack.enabled;
  setIsVideoEnabled(videoTrack.enabled);
  }
  };
 
  const toggleAudio = () => {
- if (stream as any) {
+ if (stream) {
  const audioTrack = stream.getAudioTracks()[0];
- if (audioTrack as any) {
+ if (audioTrack) {
  audioTrack.enabled = !audioTrack.enabled;
  setIsAudioEnabled(audioTrack.enabled);
  }
@@ -205,7 +205,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
  // TODO: Implement real-time stats updates
  const interval = setInterval((() => {
- if (isStreaming as any) {
+ if (isStreaming) {
  setStats(prev => ({
  ...prev) as any,
  viewers: Math.floor(Math.random() * 1000) + 100,
@@ -239,99 +239,98 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  return (
  <div className={`max-w-7xl mx-auto p-6 space-y-6 ${className}`}>
  {/* Header */}
- <div className='bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6'>
- <div className='flex items-center justify-between mb-4'>
- <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
+ <div className={'bg}-white dark:bg-gray-800 rounded-lg shadow-lg p-6'>
+ <div className={'fle}x items-center justify-between mb-4'>
+ <h1 className={'text}-2xl font-bold text-gray-900 dark:text-white'>
  Live Studio
 // FIXED:  </h1>
- <div className='flex items-center space-x-2'>
+ <div className={'fle}x items-center space-x-2'>
  {isStreaming && (
- <div className='flex items-center space-x-2 text-red-500'>
- <div className='w-2 h-2 bg-red-500 rounded-full animate-pulse' />
- <span className='text-sm font-medium'>LIVE</span>
+ <div className={'fle}x items-center space-x-2 text-red-500'>
+ <div className={'w}-2 h-2 bg-red-500 rounded-full animate-pulse' />
+ <span className={'text}-sm font-medium'>LIVE</span>
 // FIXED:  </div>
  )}
  <button />
 // FIXED:  onClick={() => setShowSettings(!showSettings)}
-// FIXED:  className='p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors'
+// FIXED:  className={'p}-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors'
  >
- <Cog6ToothIcon className='w-5 h-5' />
+ <Cog6ToothIcon className={'w}-5 h-5' />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Stream Stats */}
  {isStreaming && (
- <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-4'>
- <div className='text-center'>
- <div className='flex items-center justify-center space-x-1'>
- <EyeIcon className='w-4 h-4 text-gray-500' />
- <span className='text-lg font-bold text-gray-900 dark:text-white'>
+ <div className={'gri}d grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-4'>
+ <div className={'text}-center'>
+ <div className={'fle}x items-center justify-center space-x-1'>
+ <EyeIcon className={'w}-4 h-4 text-gray-500' />
+ <span className={'text}-lg font-bold text-gray-900 dark:text-white'>
  {stats.viewers.toLocaleString()}
 // FIXED:  </span>
 // FIXED:  </div>
-<p className='text-xs text-gray-500'>Viewers</p>
+<p className={'text}-xs text-gray-500'>Viewers</p>
 // FIXED:  </div>
- <div className='text-center'>
- <div className='flex items-center justify-center space-x-1'>
- <ClockIcon className='w-4 h-4 text-gray-500' />
- <span className='text-lg font-bold text-gray-900 dark:text-white'>
+ <div className={'text}-center'>
+ <div className={'fle}x items-center justify-center space-x-1'>
+ <ClockIcon className={'w}-4 h-4 text-gray-500' />
+ <span className={'text}-lg font-bold text-gray-900 dark:text-white'>
  {formatDuration(stats.duration)}
 // FIXED:  </span>
 // FIXED:  </div>
-<p className='text-xs text-gray-500'>Duration</p>
+<p className={'text}-xs text-gray-500'>Duration</p>
 // FIXED:  </div>
- <div className='text-center'>
- <div className='flex items-center justify-center space-x-1'>
- <HeartIcon className='w-4 h-4 text-gray-500' />
- <span className='text-lg font-bold text-gray-900 dark:text-white'>
+ <div className={'text}-center'>
+ <div className={'fle}x items-center justify-center space-x-1'>
+ <HeartIcon className={'w}-4 h-4 text-gray-500' />
+ <span className={'text}-lg font-bold text-gray-900 dark:text-white'>
  {stats.likes.toLocaleString()}
 // FIXED:  </span>
 // FIXED:  </div>
-<p className='text-xs text-gray-500'>Likes</p>
+<p className={'text}-xs text-gray-500'>Likes</p>
 // FIXED:  </div>
- <div className='text-center'>
- <div className='flex items-center justify-center space-x-1'>
- <ChatBubbleLeftRightIcon className='w-4 h-4 text-gray-500' />
- <span className='text-lg font-bold text-gray-900 dark:text-white'>
+ <div className={'text}-center'>
+ <div className={'fle}x items-center justify-center space-x-1'>
+ <ChatBubbleLeftRightIcon className={'w}-4 h-4 text-gray-500' />
+ <span className={'text}-lg font-bold text-gray-900 dark:text-white'>
  {stats.chatMessages.toLocaleString()}
 // FIXED:  </span>
 // FIXED:  </div>
-<p className='text-xs text-gray-500'>Messages</p>
+<p className={'text}-xs text-gray-500'>Messages</p>
 // FIXED:  </div>
- <div className='text-center'>
- <div className='flex items-center justify-center space-x-1'>
- <CurrencyDollarIcon className='w-4 h-4 text-gray-500' />
- <span className='text-lg font-bold text-gray-900 dark:text-white'>
+ <div className={'text}-center'>
+ <div className={'fle}x items-center justify-center space-x-1'>
+ <CurrencyDollarIcon className={'w}-4 h-4 text-gray-500' />
+ <span className={'text}-lg font-bold text-gray-900 dark:text-white'>
  ${stats.superChatAmount.toFixed(2)}
 // FIXED:  </span>
 // FIXED:  </div>
-<p className='text-xs text-gray-500'>Super Chat</p>
+<p className={'text}-xs text-gray-500'>Super Chat</p>
 // FIXED:  </div>
- <div className='text-center'>
- <div className='flex items-center justify-center space-x-1'>
+ <div className={'text}-center'>
+ <div className={'fle}x items-center justify-center space-x-1'>
  <SignalIcon className={`w-4 h-4 ${getStreamHealthColor()}`} />
  <span className={`text-lg font-bold ${getStreamHealthColor()}`}>
  {stats.streamHealth.toUpperCase()}
 // FIXED:  </span>
 // FIXED:  </div>
-<p className='text-xs text-gray-500'>Health</p>
+<p className={'text}-xs text-gray-500'>Health</p>
 // FIXED:  </div>
 // FIXED:  </div>
  )}
 
  {/* Settings Panel */}
  {showSettings && (
- <div className='border-t pt-4 space-y-4'>
- <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+ <div className={'border}-t pt-4 space-y-4'>
+ <div className={'gri}d grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='stream-title'
-// FIXED:  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1' />
- >
+// FIXED:  className={'bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'/>
  Stream Title *
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='stream-title'
 // FIXED:  type='text'
 // FIXED:  value={streamSettings.title} />
@@ -341,18 +340,17 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  title: e.target.value }))
  }
 // FIXED:  placeholder='Enter stream title'
-// FIXED:  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className={'w}-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
 // FIXED:  disabled={isStreaming}
  />
 // FIXED:  </div>
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='stream-category'
-// FIXED:  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1' />
- >
+// FIXED:  className={'bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'/>
  Category
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id='stream-category'
 // FIXED:  value={streamSettings.category} />
 // FIXED:  onChange={e =>
@@ -360,7 +358,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  ...prev as any,
  category: e.target.value }))
  }
-// FIXED:  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className={'w}-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
 // FIXED:  disabled={isStreaming}
  >
  <option value='Gaming'>Gaming</option>
@@ -373,21 +371,20 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 // FIXED:  </select>
 // FIXED:  </div>
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='stream-visibility'
-// FIXED:  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1' />
- >
+// FIXED:  className={'bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'/>
  Visibility
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id='stream-visibility'
 // FIXED:  value={streamSettings.visibility} />
 // FIXED:  onChange={e =>
  setStreamSettings(prev => ({
  ...prev as any,
- visibility: e.target.value as any }))
+ visibility: e.target.value}))
  }
-// FIXED:  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className={'w}-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
 // FIXED:  disabled={isStreaming}
  >
  <option value='public'>Public</option>
@@ -397,13 +394,12 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 // FIXED:  </div>
 // FIXED:  </div>
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='stream-description'
-// FIXED:  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1' />
- >
+// FIXED:  className={'bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'/>
  Description
 // FIXED:  </label>
- <textarea
+ <textarea>
 // FIXED:  id='stream-description'
 // FIXED:  value={streamSettings.description} />
 // FIXED:  onChange={e =>
@@ -413,7 +409,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  }
 // FIXED:  placeholder='Describe your stream...'
  rows={3}
-// FIXED:  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className={'w}-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
 // FIXED:  disabled={isStreaming}
  />
 // FIXED:  </div>
@@ -421,26 +417,26 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  )}
 // FIXED:  </div>
 
- <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
+ <div className={'gri}d grid-cols-1 lg:grid-cols-3 gap-6'>
  {/* Video Preview */}
- <div className='lg:col-span-2'>
- <div className='bg-black rounded-lg overflow-hidden aspect-video relative'>
- <video
+ <div className={'lg}:col-span-2'>
+ <div className={'bg}-black rounded-lg overflow-hidden aspect-video relative'>
+ <video>
  ref={videoRef}
  autoPlay
  muted
  playsInline
-// FIXED:  className='w-full h-full object-cover' />
+// FIXED:  className={'w}-full h-full object-cover' />
  />
 
  {!isPreviewing && !isStreaming && (
- <div className='absolute inset-0 flex items-center justify-center bg-gray-900'>
- <div className='text-center'>
- <VideoCameraIcon className='w-16 h-16 text-gray-400 mx-auto mb-4' />
- <p className='text-gray-400 mb-4'>Camera Preview Off</p>
+ <div className={'absolut}e inset-0 flex items-center justify-center bg-gray-900'>
+ <div className={'text}-center'>
+ <VideoCameraIcon className={'w}-16 h-16 text-gray-400 mx-auto mb-4' />
+ <p className={'text}-gray-400 mb-4'>Camera Preview Off</p>
  <button />
 // FIXED:  onClick={(e) => startPreview(e)}
-// FIXED:  className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+// FIXED:  className={'px}-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
  >
  Start Preview
 // FIXED:  </button>
@@ -449,9 +445,9 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  )}
 
  {/* Stream Controls Overlay */}
- <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4'>
- <div className='flex items-center justify-between'>
- <div className='flex items-center space-x-2'>
+ <div className={'absolut}e bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4'>
+ <div className={'fle}x items-center justify-between'>
+ <div className={'fle}x items-center space-x-2'>
  <button />
 // FIXED:  onClick={(e) => toggleVideo(e)}
 // FIXED:  className={`p-2 rounded-lg transition-colors ${
@@ -461,9 +457,9 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  }`}
  >
  {isVideoEnabled ? (
- <VideoCameraSolidIcon className='w-5 h-5' />
+ <VideoCameraSolidIcon className={'w}-5 h-5' />
  ) : (
- <VideoCameraIcon className='w-5 h-5' />
+ <VideoCameraIcon className={'w}-5 h-5' />
  )}
 // FIXED:  </button>
  <button />
@@ -475,18 +471,18 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  }`}
  >
  {isAudioEnabled ? (
- <MicrophoneSolidIcon className='w-5 h-5' />
+ <MicrophoneSolidIcon className={'w}-5 h-5' />
  ) : (
- <MicrophoneIcon className='w-5 h-5' />
+ <MicrophoneIcon className={'w}-5 h-5' />
  )}
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className='flex items-center space-x-2'>
+ <div className={'fle}x items-center space-x-2'>
  {isPreviewing && !isStreaming && (
  <button />
 // FIXED:  onClick={(e) => stopPreview(e)}
-// FIXED:  className='px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors'
+// FIXED:  className={'px}-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors'
  >
  Stop Preview
 // FIXED:  </button>
@@ -496,17 +492,17 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  <button />
 // FIXED:  onClick={(e) => handleStartStream(e)}
 // FIXED:  disabled={!stream || !streamSettings.title.trim()}
-// FIXED:  className='px-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white rounded-lg transition-colors flex items-center space-x-2'
+// FIXED:  className={'px}-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white rounded-lg transition-colors flex items-center space-x-2'
  >
- <PlaySolidIcon className='w-4 h-4' />
+ <PlaySolidIcon className={'w}-4 h-4' />
  <span>Go Live</span>
 // FIXED:  </button>
  ) : (
  <button />
 // FIXED:  onClick={(e) => handleEndStream(e)}
-// FIXED:  className='px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2'
+// FIXED:  className={'px}-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2'
  >
- <StopIcon className='w-4 h-4' />
+ <StopIcon className={'w}-4 h-4' />
  <span>End Stream</span>
 // FIXED:  </button>
  )}
@@ -517,10 +513,10 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 // FIXED:  </div>
 
  {/* Side Panel */}
- <div className='space-y-4'>
+ <div className={'space}-y-4'>
  {/* Tab Navigation */}
- <div className='bg-white dark:bg-gray-800 rounded-lg shadow-lg p-1'>
- <div className='grid grid-cols-3 gap-1'>
+ <div className={'bg}-white dark:bg-gray-800 rounded-lg shadow-lg p-1'>
+ <div className={'gri}d grid-cols-3 gap-1'>
  <button />
 // FIXED:  onClick={() => setActiveTab('chat')}
 // FIXED:  className={`p-2 rounded-lg text-xs font-medium transition-colors ${
@@ -552,7 +548,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  Q&A
 // FIXED:  </button>
 // FIXED:  </div>
- <div className='grid grid-cols-3 gap-1 mt-1'>
+ <div className={'gri}d grid-cols-3 gap-1 mt-1'>
  <button />
 // FIXED:  onClick={() => setActiveTab('superchat')}
 // FIXED:  className={`p-2 rounded-lg text-xs font-medium transition-colors ${
@@ -587,9 +583,9 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 // FIXED:  </div>
 
  {/* Tab Content */}
- <div className='bg-white dark:bg-gray-800 rounded-lg shadow-lg'>
+ <div className={'bg}-white dark:bg-gray-800 rounded-lg shadow-lg'>
  {activeTab === 'chat' && currentStream && (
- <AdvancedLiveChat
+ <AdvancedLiveChat>
  streamId={currentStream.id}
  isOwner={true}
  isModerator={true} />
@@ -618,8 +614,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
  {!currentStream &&
  activeTab !== 'schedule' &&
  activeTab !== 'multiplatform' && (
- <div className='p-6 text-center'>
- <p className='text-gray-500'>
+ <div className={'p}-6 text-center'>
+ <p className={'text}-gray-500'>
  Start a stream to access this feature
 // FIXED:  </p>
 // FIXED:  </div>

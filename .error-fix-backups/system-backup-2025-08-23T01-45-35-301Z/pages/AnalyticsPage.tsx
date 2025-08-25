@@ -65,7 +65,7 @@ const AnalyticsPage: React.FC = () => {}
 
  setAnalyticsData(mockAnalytics);
  } catch (error) {}
- (console as any).error('Failed to fetch analytics data:', error);
+ (console).error('Failed to fetch analytics data:', error);
  } finally {}
  setLoading(false);
  };
@@ -98,11 +98,11 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
  change?: number;
  icon: React.ElementType; iconColor: string;
  }> = ({ title, value, change, icon: Icon, iconColor }: any) => (
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center justify - between">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
  <div>
- <p className="text - sm font - medium text - neutral - 600 dark:text - neutral - 400">{title}</p>
- <p className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mt - 1">{value}</p>
+ <p className={"tex}t - sm font - medium text - neutral - 600 dark:text - neutral - 400">{title}</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mt - 1">{value}</p>
  {change !== undefined && (}
  <div className={`flex items - center mt - 2 text - sm ${ />}
  change >= 0 ? 'text - green - 600 dark:text - green - 400' : 'text - red - 600 dark:text - red - 400'
@@ -134,14 +134,14 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
  index) => {}
  const height = ((value - minValue) / range) * 200 + 20;
  return (
- <div key={index} className="flex - 1 flex flex - col items - center">
- <div
-// FIXED:  className="bg - blue - 500 dark:bg - blue - 400 rounded - t transition - all duration - 300 hover:bg - blue - 600 dark:hover:bg - blue - 300 w - full min - w-[8px]"
+ <div key={index} className={"fle}x - 1 flex flex - col items - center">
+ <div>
+// FIXED:  className={"b}g - blue - 500 dark:bg - blue - 400 rounded - t transition - all duration - 300 hover:bg - blue - 600 dark:hover:bg - blue - 300 w - full min - w-[8px]"
 // FIXED:  style={{ height: `${height}px` }
  title={`${labels.index}: ${formatNumber(value)}`} />
  />
  {index % 5 === 0 && (}
- <span className="text - xs text - neutral - 500 dark:text - neutral - 400 mt - 2 transform -rotate - 45 origin - left">
+ <span className={"tex}t - xs text - neutral - 500 dark:text - neutral - 400 mt - 2 transform -rotate - 45 origin - left">
  {labels.index}
 // FIXED:  </span>
  )}
@@ -152,12 +152,12 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
  );
  };
 
- if (loading as any) {}
+ if (loading) {}
  return (
  <div className="p - 6 space - y-6">
- <div className="animate - pulse">
+ <div className={"animat}e - pulse">
  <div className="h - 8 bg - neutral - 200 dark:bg - neutral - 700 rounded w - 1/4 mb - 6" />
- <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 8">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 8">
  {Array<any>.from({ length: 4 }).map((_, i) => (
  <div key={i} className="h - 32 bg - neutral - 200 dark:bg - neutral - 700 rounded - lg" />
  ))}
@@ -172,10 +172,10 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
  return (
  <div className="p - 6 text - center">
  <ChartBarIcon className="w - 16 h - 16 text - neutral - 400 dark:text - neutral - 500 mx - auto mb - 4" />
- <h2 className="text - xl font - semibold text - neutral - 700 dark:text - neutral - 300 mb - 2">
+ <h2 className={"tex}t - xl font - semibold text - neutral - 700 dark:text - neutral - 300 mb - 2">
  Analytics Unavailable
 // FIXED:  </h2>
- <p className="text - neutral - 500 dark:text - neutral - 400">
+ <p className={"tex}t - neutral - 500 dark:text - neutral - 400">
  Unable to load analytics data. Please try again later.
 // FIXED:  </p>
 // FIXED:  </div>
@@ -185,15 +185,15 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
  return (
  <div className="p - 6 space - y-6">
  {/* Header */}
- <div className="flex flex - col sm:flex - row sm:items - center sm:justify - between">
- <h1 className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mb - 4 sm:mb - 0">
+ <div className={"fle}x flex - col sm:flex - row sm:items - center sm:justify - between">
+ <h1 className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mb - 4 sm:mb - 0">
  Channel Analytics
 // FIXED:  </h1>
- <div className="flex items - center space - x-4">
- <select
+ <div className={"fle}x items - center space - x-4">
+ <select>
 // FIXED:  value={timeRange} />
-// FIXED:  onChange={(e: React.ChangeEvent) => setTimeRange(e.target.value as any)}
-// FIXED:  className="px - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent"
+// FIXED:  onChange={(e: React.ChangeEvent) => setTimeRange(e.target.value)}
+// FIXED:  className={"p}x - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent"
  >
  <option value="7d">Last 7 days</option>
  <option value="28d">Last 28 days</option>
@@ -204,29 +204,29 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
 // FIXED:  </div>
 
  {/* Key Metrics */}
- <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
- <StatCard
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
+ <StatCard>
  title="Total Views"
 // FIXED:  value={formatNumber(analyticsData.totalViews)}
  change={12.5}
  icon={EyeIcon}
  iconColor="bg - blue - 500" />
  />
- <StatCard
+ <StatCard>
  title="Watch Time"
 // FIXED:  value={formatDuration(analyticsData.totalWatchTime)}
  change={8.3}
  icon={ClockIcon}
  iconColor="bg - green - 500" />
  />
- <StatCard
+ <StatCard>
  title="Subscribers"
 // FIXED:  value={formatNumber(analyticsData.subscriberGrowth)}
  change={-2.1}
  icon={UserGroupIcon}
  iconColor="bg - purple - 500" />
  />
- <StatCard
+ <StatCard>
  title="Total Videos"
 // FIXED:  value={analyticsData.totalVideos.toString()}
  icon={ChartBarIcon}
@@ -235,14 +235,14 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
 // FIXED:  </div>
 
  {/* Performance Chart */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center justify - between mb - 6">
- <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between mb - 6">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
  Performance Overview
 // FIXED:  </h2>
- <div className="flex space - x-2">
+ <div className={"fle}x space - x-2">
  {(['views', 'watchTime', 'subscribers'] as const).map((metric) => (}
- <button
+ <button>
  key={metric} />
 // FIXED:  onClick={() => setSelectedMetric(metric: React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 1 rounded - full text - sm font - medium transition - colors ${}
@@ -256,62 +256,62 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
  ))}
 // FIXED:  </div>
 // FIXED:  </div>
- <SimpleChart
+ <SimpleChart>
  data={analyticsData.recentPerformance.selectedMetric}
  labels={analyticsData.recentPerformance.labels} />
  />
 // FIXED:  </div>
 
  {/* Top Performing Videos */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 6">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 6">
  Top Performing Videos
 // FIXED:  </h2>
- <div className="overflow - x-auto">
+ <div className={"overflo}w - x-auto">
  <table className="w - full">
  <thead>
- <tr className="border - b border - neutral - 200 dark:border - neutral - 700">
- <th className="text - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Video</th>
- <th className="text - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Views</th>
- <th className="text - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Likes</th>
- <th className="text - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Comments</th>
- <th className="text - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">CTR</th>
- <th className="text - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Retention</th>
+ <tr className={"borde}r - b border - neutral - 200 dark:border - neutral - 700">
+ <th className={"tex}t - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Video</th>
+ <th className={"tex}t - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Views</th>
+ <th className={"tex}t - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Likes</th>
+ <th className={"tex}t - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Comments</th>
+ <th className={"tex}t - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">CTR</th>
+ <th className={"tex}t - left py - 3 px - 4 font - medium text - neutral - 700 dark:text - neutral - 300">Retention</th>
 // FIXED:  </tr>
 // FIXED:  </thead>
  <tbody>
  {analyticsData.videoPerformance.map((item) => (}
- <tr key={item.video.id} className="border - b border - neutral - 100 dark:border - neutral - 700 / 50 hover:bg - neutral - 50 dark:hover:bg - neutral - 700 / 30">
- <td className="py - 3 px - 4">
- <div className="flex items - center space - x-3">
- <img
+ <tr key={item.video.id} className={"borde}r - b border - neutral - 100 dark:border - neutral - 700 / 50 hover:bg - neutral - 50 dark:hover:bg - neutral - 700 / 30">
+ <td className={"p}y - 3 px - 4">
+ <div className={"fle}x items - center space - x-3">
+ <img>
 // FIXED:  src={item.video.thumbnailUrl}
 // FIXED:  alt={item.video.title}
 // FIXED:  className="w - 16 h - 9 object - cover rounded" />
  />
- <div className="flex - 1 min - w-0">
- <p className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50 truncate">
+ <div className={"fle}x - 1 min - w-0">
+ <p className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50 truncate">
  {item.video.title}
 // FIXED:  </p>
- <p className="text - xs text - neutral - 500 dark:text - neutral - 400">
+ <p className={"tex}t - xs text - neutral - 500 dark:text - neutral - 400">
  {item.video.uploadedAt}
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </td>
- <td className="py - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
+ <td className={"p}y - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
  {formatNumber(item.views)}
 // FIXED:  </td>
- <td className="py - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
+ <td className={"p}y - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
  {formatNumber(item.likes)}
 // FIXED:  </td>
- <td className="py - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
+ <td className={"p}y - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
  {formatNumber(item.comments)}
 // FIXED:  </td>
- <td className="py - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
+ <td className={"p}y - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
  {item.ctr.toFixed(1)}%
 // FIXED:  </td>
- <td className="py - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
+ <td className={"p}y - 3 px - 4 text - sm text - neutral - 700 dark:text - neutral - 300">
  {item.retention.toFixed(1)}%
 // FIXED:  </td>
 // FIXED:  </tr>

@@ -30,37 +30,37 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
  };
 
  return (
- <div className='space-y-6'>
- <h3 className='text-lg font-semibold'>Stream Settings</h3>
+ <div className={'space}-y-6'>
+ <h3 className={'text}-lg font-semibold'>Stream Settings</h3>
 
- <div className='space-y-4'>
+ <div className={'space}-y-4'>
  <div>
- <label className='block text-sm font-medium mb-1'>Stream Title</label>
- <input
+ <label className={'bloc}k text-sm font-medium mb-1'>Stream Title</label>
+ <input>
 // FIXED:  type='text'
 // FIXED:  value={settings.title} />
 // FIXED:  onChange={e => updateSettings({ title: e.target.value })}
-// FIXED:  className='w-full px-3 py-2 border rounded-lg'
+// FIXED:  className={'w}-full px-3 py-2 border rounded-lg'
 // FIXED:  placeholder='Enter stream title'
  />
 // FIXED:  </div>
 
  <div>
- <label className='block text-sm font-medium mb-1'>Description</label>
- <textarea
+ <label className={'bloc}k text-sm font-medium mb-1'>Description</label>
+ <textarea>
 // FIXED:  value={settings.description} />
 // FIXED:  onChange={e => updateSettings({ description: e.target.value })}
-// FIXED:  className='w-full px-3 py-2 border rounded-lg h-24'
+// FIXED:  className={'w}-full px-3 py-2 border rounded-lg h-24'
 // FIXED:  placeholder='Enter stream description'
  />
 // FIXED:  </div>
 
  <div>
- <label className='block text-sm font-medium mb-1'>Category</label>
- <select
+ <label className={'bloc}k text-sm font-medium mb-1'>Category</label>
+ <select>
 // FIXED:  value={settings.category} />
 // FIXED:  onChange={e => updateSettings({ category: e.target.value })}
-// FIXED:  className='w-full px-3 py-2 border rounded-lg'
+// FIXED:  className={'w}-full px-3 py-2 border rounded-lg'
  >
  <option value='Gaming'>Gaming</option>
  <option value='Music'>Music</option>
@@ -70,11 +70,11 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
 // FIXED:  </div>
 
  <div>
- <label className='block text-sm font-medium mb-1'>Privacy</label>
- <select
+ <label className={'bloc}k text-sm font-medium mb-1'>Privacy</label>
+ <select>
 // FIXED:  value={settings.privacy} />
 // FIXED:  onChange={e => updateSettings({ privacy: e.target.value })}
-// FIXED:  className='w-full px-3 py-2 border rounded-lg'
+// FIXED:  className={'w}-full px-3 py-2 border rounded-lg'
  >
  <option value='public'>Public</option>
  <option value='unlisted'>Unlisted</option>
@@ -82,17 +82,17 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
 // FIXED:  </select>
 // FIXED:  </div>
 
- <div className='grid grid-cols-3 gap-4'>
+ <div className={'gri}d grid-cols-3 gap-4'>
  <div>
- <label className='block text-sm font-medium mb-1'>Resolution</label>
- <select
+ <label className={'bloc}k text-sm font-medium mb-1'>Resolution</label>
+ <select>
 // FIXED:  value={settings.quality.resolution} />
 // FIXED:  onChange={e =>
  updateSettings({
  quality: { ...settings.quality,
  resolution: e.target.value } })
  }
-// FIXED:  className='w-full px-3 py-2 border rounded-lg'
+// FIXED:  className={'w}-full px-3 py-2 border rounded-lg'
  >
  <option value='720p'>720p</option>
  <option value='1080p'>1080p</option>
@@ -102,10 +102,10 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
 // FIXED:  </div>
 
  <div>
- <label className='block text-sm font-medium mb-1'>
+ <label className={'bloc}k text-sm font-medium mb-1'>
  Bitrate (kbps)
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type='number'
 // FIXED:  value={settings.quality.bitrate} />
 // FIXED:  onChange={e =>
@@ -114,13 +114,13 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
  ...settings.quality,
  bitrate: parseInt(e.target.value) } })
  }
-// FIXED:  className='w-full px-3 py-2 border rounded-lg'
+// FIXED:  className={'w}-full px-3 py-2 border rounded-lg'
  />
 // FIXED:  </div>
 
  <div>
- <label className='block text-sm font-medium mb-1'>FPS</label>
- <select
+ <label className={'bloc}k text-sm font-medium mb-1'>FPS</label>
+ <select>
 // FIXED:  value={settings.quality.fps} />
 // FIXED:  onChange={e =>
  updateSettings({
@@ -128,7 +128,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
  ...settings.quality,
  fps: parseInt(e.target.value) } })
  }
-// FIXED:  className='w-full px-3 py-2 border rounded-lg'
+// FIXED:  className={'w}-full px-3 py-2 border rounded-lg'
  >
  <option value={30}>30</option>
  <option value={60}>60</option>
@@ -136,25 +136,25 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='space-y-2'>
- <label className='flex items-center'>
- <input
+ <div className={'space}-y-2'>
+ <label className={'fle}x items-center'>
+ <input>
 // FIXED:  type='checkbox'
 // FIXED:  checked={settings.enableChat} />
 // FIXED:  onChange={e => updateSettings({ enableChat: e.target.checked })}
-// FIXED:  className='mr-2'
+// FIXED:  className={'mr}-2'
  />
  Enable Live Chat
 // FIXED:  </label>
 
- <label className='flex items-center'>
- <input
+ <label className={'fle}x items-center'>
+ <input>
 // FIXED:  type='checkbox'
 // FIXED:  checked={settings.enableDonations} />
 // FIXED:  onChange={e =>
  updateSettings({ enableDonations: e.target.checked })
  }
-// FIXED:  className='mr-2'
+// FIXED:  className={'mr}-2'
  />
  Enable Donations/Super Chat
 // FIXED:  </label>

@@ -79,7 +79,7 @@ return undefined;
  this.startHealthChecks();
  this.startAlertProcessing();
 
- (console as any).log('🔍 Advanced monitoring system started');
+ (console).log('🔍 Advanced monitoring system started');
  }
 
  /**
@@ -87,7 +87,7 @@ return undefined;
  */
  stop(): void {
  this.isMonitoring = false;
- (console as any).log('🛑 Advanced monitoring system stopped');
+ (console).log('🛑 Advanced monitoring system stopped');
  }
 
  /**
@@ -247,7 +247,7 @@ continue;
  checks.push({
  name,
  healthy: result.healthy,
- details: (result as any)?.details });
+ details: (result)?.details });
 
  if (!result.healthy) {
  overallHealthy = false;
@@ -312,7 +312,7 @@ continue;
  name: 'api-connectivity',
  check: async (): Promise<void> => {
  try {
- const response = await (fetch as any)('/api/health', {
+ const response = await (fetch)('/api/health', {
  method: 'GET',
  signal: AbortSignal.timeout(5000) });
  return {
@@ -332,8 +332,8 @@ continue;
  check: async (): Promise<void> => {
  try {
  const testKey = '__health_check__';
- (localStorage as any).setItem(testKey, 'test');
- const value = (localStorage as any).getItem(testKey);
+ (localStorage).setItem(testKey, 'test');
+ const value = (localStorage).getItem(testKey);
  localStorage.removeItem(testKey);
  return { healthy: value === 'test' };
  } catch (e) {
@@ -348,7 +348,7 @@ continue;
  this.addHealthCheck({
  name: 'memory-usage',
  check: async (): Promise<void> => {
- const memInfo = (((performance as any))).memory;
+ const memInfo = (((performance))).memory;
  if (!memInfo) {
 return { healthy: true };
 }
@@ -416,14 +416,14 @@ return undefined;
 }
 
  // Memory usage
- const memInfo = (((performance as any))).memory;
- if (memInfo as any) {
+ const memInfo = (((performance))).memory;
+ if (memInfo) {
  this.recordMetric('memory-usage') as any, memInfo.usedJSHeapSize);
  }
 
  // Connection info
- const { connection } = (((navigator as any)));
- if (connection as any) {
+ const { connection } = (((navigator)));
+ if (connection) {
  this.recordMetric('network-downlink', connection.downlink);
  this.recordMetric('network-rtt', connection.rtt);
  }
@@ -450,7 +450,7 @@ return undefined;
  this.recordMetric(`health-${name}`, result.healthy ? 1 : 0);
  } catch (error) {
  this.recordMetric(`health-${name}`, 0);
- (console as any).warn(`Health check ${name} failed:`, error);
+ (console).warn(`Health check ${name} failed:`, error);
  };
 
  // Run immediately
@@ -495,7 +495,7 @@ return undefined;
  private executeAlertAction(action: AlertAction, alert: AlertRule, value: string | number): void {
  switch (action.type) {
  case 'console':
- (console as any).warn(`🚨 Alert: ${alert.name} - Value: ${value}, Threshold: ${alert.threshold}`);
+ (console).warn(`🚨 Alert: ${alert.name} - Value: ${value}, Threshold: ${alert.threshold}`);
  break;
  case 'storage':
  const alertData = {
@@ -505,7 +505,7 @@ return undefined;
  threshold: alert.threshold,
  severity: alert.severity,
  timestamp: Date.now() };
- (localStorage as any).setItem(`alert_${alert.id}_${Date.now()}`, JSON.stringify(alertData));
+ (localStorage).setItem(`alert_${alert.id}_${Date.now()}`, JSON.stringify(alertData));
  break;
  // Add more action types as needed
  }
@@ -528,10 +528,10 @@ return undefined;
  default: return false
  }
  private getSessionId(): string {
- let sessionId = (sessionStorage as any).getItem('monitoring_session_id');
+ let sessionId = (sessionStorage).getItem('monitoring_session_id');
  if (!sessionId) {
  sessionId = this.generateSecureToken(16);
- (sessionStorage as any).setItem('monitoring_session_id', sessionId);
+ (sessionStorage).setItem('monitoring_session_id', sessionId);
  }
  return sessionId;
  }
@@ -566,12 +566,12 @@ return undefined;
  this.trackErrors();
  this.trackPerformance();
 
- (console as any).log('👥 Real User Monitoring started');
+ (console).log('👥 Real User Monitoring started');
  }
 
  stop(): void {
  this.isTracking = false;
- (console as any).log('👥 Real User Monitoring stopped');
+ (console).log('👥 Real User Monitoring stopped');
  }
 
  private trackUserInteractions(): void {

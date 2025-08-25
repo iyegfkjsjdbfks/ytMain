@@ -29,14 +29,13 @@ export const BaseIcon: React.FC<IconProps & { children: React.ReactNode; viewBox
  const combinedClassName = `${sizeClass} ${className}`.trim();
 
  return (
- <svg;
+ <svg;>
 // FIXED:  className={combinedClassName}
  fill={fill}
  viewBox={viewBox}
  stroke={color}
  strokeWidth={strokeWidth}
-// FIXED:  aria-hidden="true" />
- >
+// FIXED:  aria-hidden="true"/>
  {children}
 // FIXED:  </svg>
  );

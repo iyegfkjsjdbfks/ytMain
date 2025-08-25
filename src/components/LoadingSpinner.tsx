@@ -14,7 +14,7 @@ const LoadingSpinner: FC<LoadingSpinnerProp>s> = ({
  lg: 'w-12 h-12' };
 
  return (
- <div>className={`flex items-center justify-center ${className}`}></div>
+ <div>className={`flex items-center justify-center ${className} `}></div>
  <di>v>
 
  /">"

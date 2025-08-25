@@ -95,18 +95,17 @@ const LivePolls: React.FC < LivePollsProps> = ({}
  };
 
  return (
- <div
-// FIXED:  className={`bg - white border border - gray - 200 rounded - lg p - 4 ${className}`} />
- >
- <div className='flex items - center justify - between mb - 4'>
- <div className='flex items - center space - x - 2'>
+ <div>
+// FIXED:  className={`bg - white border border - gray - 200 rounded - lg p - 4 ${className}`}/>
+ <div className={'fle}x items - center justify - between mb - 4'>
+ <div className={'fle}x items - center space - x - 2'>
  <ChartBarIcon className='w - 5 h - 5 text - gray - 600' />
- <span className='font - medium text - gray - 900'>Live Polls</span>
+ <span className={'fon}t - medium text - gray - 900'>Live Polls</span>
 // FIXED:  </div>
  {isOwner && (}
  <button />
 // FIXED:  onClick={() => setShowCreateForm(!showCreateForm: React.MouseEvent)}
-// FIXED:  className='flex items - center space - x - 1 px - 3 py - 1 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 text - sm'
+// FIXED:  className={'fle}x items - center space - x - 1 px - 3 py - 1 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 text - sm'
  >
  <PlusIcon className='w - 4 h - 4' />
  <span > Create Poll</span>
@@ -116,16 +115,15 @@ const LivePolls: React.FC < LivePollsProps> = ({}
 
  {/* Create Poll Form */}
  {showCreateForm && isOwner && (}
- <div className='mb - 4 p - 4 bg - gray - 50 rounded - lg border'>
- <div className='space - y - 3'>
+ <div className={'m}b - 4 p - 4 bg - gray - 50 rounded - lg border'>
+ <div className={'spac}e - y - 3'>
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='poll - question'
-// FIXED:  className='block text - sm font - medium text - gray - 700 mb - 1' />
- >
+// FIXED:  className={'bloc}k text - sm font - medium text - gray - 700 mb - 1'/>
  Question
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='poll - question'
 // FIXED:  type='text'
 // FIXED:  value={newPoll.question} />
@@ -138,22 +136,21 @@ const LivePolls: React.FC < LivePollsProps> = ({}
 // FIXED:  </div>
 
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='poll - option - 1'
-// FIXED:  className='block text - sm font - medium text - gray - 700 mb - 2' />
- >
+// FIXED:  className={'bloc}k text - sm font - medium text - gray - 700 mb - 2'/>
  Options
 // FIXED:  </label>
- <div className='space - y - 2'>
+ <div className={'spac}e - y - 2'>
  {newPoll.options.map((option, index) => (}
- <div key={index} className='flex items - center space - x - 2'>
- <input
+ <div key={index} className={'fle}x items - center space - x - 2'>
+ <input>
 // FIXED:  id={`poll - option-${index + 1}`}
 // FIXED:  type='text'
 // FIXED:  value={option} />
 // FIXED:  onChange={e => updateOption(index, e.target.value: React.ChangeEvent)}
 // FIXED:  placeholder={`Option ${index + 1}`}
-// FIXED:  className='flex - 1 px - 3 py - 2 border border - gray - 300 rounded - lg focus:ring - 2 focus:ring - blue - 500 focus:border - transparent'
+// FIXED:  className={'fle}x - 1 px - 3 py - 2 border border - gray - 300 rounded - lg focus:ring - 2 focus:ring - blue - 500 focus:border - transparent'
  />
  {newPoll.options.length > 2 && (}
  <button />
@@ -169,7 +166,7 @@ const LivePolls: React.FC < LivePollsProps> = ({}
  {newPoll.options.length < 5 && (}
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => addOption(e)}
-// FIXED:  className='mt - 2 text - sm text - blue - 600 hover:text - blue - 800'
+// FIXED:  className={'m}t - 2 text - sm text - blue - 600 hover:text - blue - 800'
  >
  + Add another option
 // FIXED:  </button>
@@ -177,13 +174,12 @@ const LivePolls: React.FC < LivePollsProps> = ({}
 // FIXED:  </div>
 
  <div>
- <label
+ <label>
 // FIXED:  htmlFor='poll - duration'
-// FIXED:  className='block text - sm font - medium text - gray - 700 mb - 1' />
- >
+// FIXED:  className={'bloc}k text - sm font - medium text - gray - 700 mb - 1'/>
  Duration (seconds)
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='poll - duration'
 // FIXED:  type='number'
 // FIXED:  value={newPoll.duration} />
@@ -198,16 +194,16 @@ const LivePolls: React.FC < LivePollsProps> = ({}
  />
 // FIXED:  </div>
 
- <div className='flex space - x - 2'>
+ <div className={'fle}x space - x - 2'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleCreatePoll(e)}
-// FIXED:  className='px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700'
+// FIXED:  className={'p}x - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700'
  >
  Create & Start Poll
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => setShowCreateForm(false: React.MouseEvent)}
-// FIXED:  className='px - 4 py - 2 text - gray - 600 border border - gray - 300 rounded - lg hover:bg - gray - 50'
+// FIXED:  className={'p}x - 4 py - 2 text - gray - 600 border border - gray - 300 rounded - lg hover:bg - gray - 50'
  >
  Cancel
 // FIXED:  </button>
@@ -218,49 +214,49 @@ const LivePolls: React.FC < LivePollsProps> = ({}
 
  {/* Active Poll */}
  {activePoll && (}
- <div className='mb - 4 p - 4 bg - blue - 50 border border - blue - 200 rounded - lg'>
- <div className='flex items - center justify - between mb - 3'>
- <h3 className='font - medium text - blue - 900'>Active Poll</h3>
- <div className='flex items - center space - x - 2'>
+ <div className={'m}b - 4 p - 4 bg - blue - 50 border border - blue - 200 rounded - lg'>
+ <div className={'fle}x items - center justify - between mb - 3'>
+ <h3 className={'fon}t - medium text - blue - 900'>Active Poll</h3>
+ <div className={'fle}x items - center space - x - 2'>
  <ClockIcon className='w - 4 h - 4 text - blue - 600' />
- <span className='text - sm text - blue - 600'>
+ <span className={'tex}t - sm text - blue - 600'>
  {formatDuration(getTimeRemaining(activePoll))} left
 // FIXED:  </span>
  {isOwner && (}
  <button />
 // FIXED:  onClick={() => handleEndPoll(activePoll.id: React.MouseEvent)}
-// FIXED:  className='ml - 2 p - 1 text - red - 500 hover:bg - red - 50 rounded'
+// FIXED:  className={'m}l - 2 p - 1 text - red - 500 hover:bg - red - 50 rounded'
  >
  <StopIcon className='w - 4 h - 4' />
 // FIXED:  </button>
  )}
 // FIXED:  </div>
 // FIXED:  </div>
-<p className='text - gray - 900 mb - 3 font - medium'>
+<p className={'tex}t - gray - 900 mb - 3 font - medium'>
  {activePoll.question}
 // FIXED:  </p>
 
- <div className='space - y - 2'>
+ <div className={'spac}e - y - 2'>
  {activePoll.options.map((option) => (}
- <div key={option.id} className='relative'>
+ <div key={option.id} className={'relative}'>
  <button />
 // FIXED:  onClick={() => handleVote(activePoll.id, option.id: React.MouseEvent)}
 // FIXED:  className='w - full text - left p - 3 border border - gray - 200 rounded - lg hover:bg - white transition - colors group'
  >
- <div className='flex items - center justify - between'>
- <span className='text - gray - 900'>{option.text}</span>
- <div className='flex items - center space - x - 2'>
- <span className='text - sm font - medium text - gray - 600'>
+ <div className={'fle}x items - center justify - between'>
+ <span className={'tex}t - gray - 900'>{option.text}</span>
+ <div className={'fle}x items - center space - x - 2'>
+ <span className={'tex}t - sm font - medium text - gray - 600'>
  {option.votes} votes
 // FIXED:  </span>
- <span className='text - sm text - gray - 500'>
+ <span className={'tex}t - sm text - gray - 500'>
  {option.percentage.toFixed(1)}%
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className='mt - 2 bg - gray - 200 rounded - full h - 2'>
- <div
-// FIXED:  className='bg - blue - 600 h - 2 rounded - full transition - all duration - 300'
+ <div className={'m}t - 2 bg - gray - 200 rounded - full h - 2'>
+ <div>
+// FIXED:  className={'b}g - blue - 600 h - 2 rounded - full transition - all duration - 300'
 // FIXED:  style={{ width: `${option.percentage}%` } />
  />
 // FIXED:  </div>
@@ -268,7 +264,7 @@ const LivePolls: React.FC < LivePollsProps> = ({}
 // FIXED:  </div>
  ))}
 // FIXED:  </div>
-<div className='mt - 3 text - sm text - gray - 600'>
+<div className={'m}t - 3 text - sm text - gray - 600'>
  Total votes: {activePoll.totalVotes}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -277,42 +273,40 @@ const LivePolls: React.FC < LivePollsProps> = ({}
  {/* Past Polls */}
  {polls.filter((p) => !p.isActive).length > 0 && (}
  <div>
- <h3 className='font - medium text - gray - 900 mb - 3'>Past Polls</h3>
- <div className='space - y - 3'>
+ <h3 className={'fon}t - medium text - gray - 900 mb - 3'>Past Polls</h3>
+ <div className={'spac}e - y - 3'>
  {polls}
  .filter((p) => !p.isActive)
  .map((poll) => (
- <div
+ <div>
  key={poll.id}
-// FIXED:  className='p - 3 border border - gray - 200 rounded - lg' />
- >
- <div className='flex items - center justify - between mb - 2'>
- <p className='font - medium text - gray - 900'>{poll.question}</p>
- <div className='flex items - center space - x - 1 text - green - 600'>
+// FIXED:  className='p - 3 border border - gray - 200 rounded - lg'/>
+ <div className={'fle}x items - center justify - between mb - 2'>
+ <p className={'fon}t - medium text - gray - 900'>{poll.question}</p>
+ <div className={'fle}x items - center space - x - 1 text - green - 600'>
  <CheckCircleIcon className='w - 4 h - 4' />
- <span className='text - sm'>Ended</span>
+ <span className={'tex}t - sm'>Ended</span>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='space - y - 2'>
+ <div className={'spac}e - y - 2'>
  {poll.options.map((option) => (}
- <div
+ <div>
  key={option.id}
-// FIXED:  className='flex items - center justify - between text - sm' />
- >
- <span className='text - gray - 700'>{option.text}</span>
- <div className='flex items - center space - x - 2'>
- <span className='text - gray - 600'>
+// FIXED:  className={'fle}x items - center justify - between text - sm'/>
+ <span className={'tex}t - gray - 700'>{option.text}</span>
+ <div className={'fle}x items - center space - x - 2'>
+ <span className={'tex}t - gray - 600'>
  {option.votes} votes
 // FIXED:  </span>
- <span className='text - gray - 500'>
+ <span className={'tex}t - gray - 500'>
  ({option.percentage.toFixed(1)}%)
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
  ))}
 // FIXED:  </div>
-<div className='mt - 2 text - xs text - gray - 500'>
+<div className={'m}t - 2 text - xs text - gray - 500'>
  Total votes: {poll.totalVotes} • Duration:{' '}
  {formatDuration(poll.duration)}
 // FIXED:  </div>
@@ -323,11 +317,11 @@ const LivePolls: React.FC < LivePollsProps> = ({}
  )}
 
  {polls.length === 0 && (}
- <div className='text - center py - 8 text - gray - 500'>
+ <div className={'tex}t - center py - 8 text - gray - 500'>
  <ChartBarIcon className='w - 12 h - 12 mx - auto mb - 3 text - gray - 300' />
  <p > No polls yet</p>
  {isOwner && (}
- <p className='text - sm mt - 1'>
+ <p className={'tex}t - sm mt - 1'>
  Create your first poll to engage with your audience!
 // FIXED:  </p>
  )}

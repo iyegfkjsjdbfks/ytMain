@@ -154,7 +154,7 @@ export const ModerationDashboard: React.FC = () => {}
  };
 
  const getSeverityColor = (severity: any) => {}
- switch (severity as any) {}
+ switch (severity) {}
  case 'low':
  return 'text - green - 600 bg - green - 100 dark:bg - green - 900 dark:text - green - 300';
  case 'medium':
@@ -167,7 +167,7 @@ export const ModerationDashboard: React.FC = () => {}
  };
 
  const getTypeIcon = (type: any) => {}
- switch (type as any) {}
+ switch (type) {}
  case 'video':
  return VideoCameraIcon;
  case 'comment':
@@ -186,21 +186,21 @@ export const ModerationDashboard: React.FC = () => {}
  };
 
  return (
- <div className='min - h-screen bg - gray - 50 dark:bg - gray - 900 p - 6'>
- <div className='max - w-7xl mx - auto'>
+ <div className={'mi}n - h-screen bg - gray - 50 dark:bg - gray - 900 p - 6'>
+ <div className={'ma}x - w-7xl mx - auto'>
  {/* Header */}
- <div className='flex items - center justify - between mb - 8'>
+ <div className={'fle}x items - center justify - between mb - 8'>
  <div>
- <h1 className='text - 3xl font - bold text - gray - 900 dark:text - white'>
+ <h1 className={'tex}t - 3xl font - bold text - gray - 900 dark:text - white'>
  Content Moderation
 // FIXED:  </h1>
- <p className='text - gray - 600 dark:text - gray - 400 mt - 2'>
+ <p className={'tex}t - gray - 600 dark:text - gray - 400 mt - 2'>
  Review and moderate reported content
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className='flex items - center gap - 4'>
- <div className='flex items - center gap - 2 text - sm text - gray - 600 dark:text - gray - 400'>
+ <div className={'fle}x items - center gap - 4'>
+ <div className={'fle}x items - center gap - 2 text - sm text - gray - 600 dark:text - gray - 400'>
  <ExclamationTriangleIcon className='w - 4 h - 4' />
  <span>{filteredItems.length} items pending review</span>
 // FIXED:  </div>
@@ -208,14 +208,14 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Stats Cards */}
- <div className='grid grid - cols - 1 md:grid - cols - 4 gap - 6 mb - 8'>
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'gri}d grid - cols - 1 md:grid - cols - 4 gap - 6 mb - 8'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Pending
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - orange - 600'>
+ <p className={'tex}t - 2xl font - bold text - orange - 600'>
  {}
  moderationItems.filter((item) => item.status === 'pending')
  .length
@@ -226,13 +226,13 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Approved
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - green - 600'>
+ <p className={'tex}t - 2xl font - bold text - green - 600'>
  {}
  moderationItems.filter((item) => item.status === 'approved')
  .length
@@ -243,13 +243,13 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Rejected
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - red - 600'>
+ <p className={'tex}t - 2xl font - bold text - red - 600'>
  {}
  moderationItems.filter((item) => item.status === 'rejected')
  .length
@@ -260,13 +260,13 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Escalated
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - purple - 600'>
+ <p className={'tex}t - 2xl font - bold text - purple - 600'>
  {}
  moderationItems.filter((item) => item.status === 'escalated')
  .length
@@ -279,12 +279,12 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Filters and Tabs */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg border border - gray - 200 dark:border - gray - 700 mb - 6'>
- <div className='border - b border - gray - 200 dark:border - gray - 700'>
- <nav className='flex space - x-8 px - 6'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg border border - gray - 200 dark:border - gray - 700 mb - 6'>
+ <div className={'borde}r - b border - gray - 200 dark:border - gray - 700'>
+ <nav className={'fle}x space - x-8 px - 6'>
  {(['pending', 'approved', 'rejected', 'escalated'] as const).map(}
  tab => (
- <button
+ <button>
  key={tab} />
 // FIXED:  onClick={() => setSelectedTab(tab: React.MouseEvent)}
 // FIXED:  className={`py - 4 px - 1 border - b-2 font - medium text - sm capitalize ${}
@@ -301,12 +301,12 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  <div className='p - 6'>
- <div className='flex items - center justify - between'>
- <div className='flex items - center gap - 4'>
- <select
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center gap - 4'>
+ <select>
 // FIXED:  value={filterSeverity} />
 // FIXED:  onChange={e => setFilterSeverity(e.target.value: React.ChangeEvent)}
-// FIXED:  className='px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - gray - 900 dark:text - white'
+// FIXED:  className={'p}x - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - gray - 900 dark:text - white'
  >
  <option value='all'>All Severities</option>
  <option value='low'>Low</option>
@@ -315,10 +315,10 @@ export const ModerationDashboard: React.FC = () => {}
  <option value='critical'>Critical</option>
 // FIXED:  </select>
 
- <select
+ <select>
 // FIXED:  value={filterType} />
 // FIXED:  onChange={e => setFilterType(e.target.value: React.ChangeEvent)}
-// FIXED:  className='px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - gray - 900 dark:text - white'
+// FIXED:  className={'p}x - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - gray - 900 dark:text - white'
  >
  <option value='all'>All Types</option>
  <option value='video'>Videos</option>
@@ -329,19 +329,19 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {selectedItems.length > 0 && (}
- <div className='flex items - center gap - 2'>
- <span className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <div className={'fle}x items - center gap - 2'>
+ <span className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  {selectedItems.length} selected
 // FIXED:  </span>
  <button />
 // FIXED:  onClick={() => handleBulkAction({ action: 'approve' })}
-// FIXED:  className='px - 3 py - 1 bg - green - 600 text - white rounded text - sm hover:bg - green - 700 transition - colors'
+// FIXED:  className={'p}x - 3 py - 1 bg - green - 600 text - white rounded text - sm hover:bg - green - 700 transition - colors'
  >
  Approve All
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction({ action: 'reject' })}
-// FIXED:  className='px - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700 transition - colors'
+// FIXED:  className={'p}x - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700 transition - colors'
  >
  Reject All
 // FIXED:  </button>
@@ -352,70 +352,68 @@ export const ModerationDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Moderation Items */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg border border - gray - 200 dark:border - gray - 700'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg border border - gray - 200 dark:border - gray - 700'>
  <div className='p - 6 border - b border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center gap - 4'>
- <input
+ <div className={'fle}x items - center gap - 4'>
+ <input>
 // FIXED:  type='checkbox'
 // FIXED:  checked={}
  selectedItems.length === filteredItems.length && />
  filteredItems.length > 0
  }
 // FIXED:  onChange={(e: React.ChangeEvent) => handleSelectAll(e)}
-// FIXED:  className='rounded border - gray - 300 text - blue - 600 focus:ring - blue - 500'
+// FIXED:  className={'rounde}d border - gray - 300 text - blue - 600 focus:ring - blue - 500'
  />
- <span className='text - sm font - medium text - gray - 700 dark:text - gray - 300'>
+ <span className={'tex}t - sm font - medium text - gray - 700 dark:text - gray - 300'>
  Select All
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='divide - y divide - gray - 200 dark:divide - gray - 700'>
+ <div className={'divid}e - y divide - gray - 200 dark:divide - gray - 700'>
  {filteredItems.map((item) => {}
  const TypeIcon = getTypeIcon(item.type);
 
  return (
- <div
+ <div>
  key={item.id}
-// FIXED:  className='p - 6 hover:bg - gray - 50 dark:hover:bg - gray - 700 transition - colors' />
- >
- <div className='flex items - start gap - 4'>
- <input
+// FIXED:  className='p - 6 hover:bg - gray - 50 dark:hover:bg - gray - 700 transition - colors'/>
+ <div className={'fle}x items - start gap - 4'>
+ <input>
 // FIXED:  type='checkbox'
 // FIXED:  checked={selectedItems.includes(item.id)} />
 // FIXED:  onChange={() => handleSelectItem(item.id: React.ChangeEvent)}
-// FIXED:  className='mt - 1 rounded border - gray - 300 text - blue - 600 focus:ring - blue - 500'
+// FIXED:  className={'m}t - 1 rounded border - gray - 300 text - blue - 600 focus:ring - blue - 500'
  />
 
  {item.thumbnail && (}
- <img
+ <img>
 // FIXED:  src={item.thumbnail}
 // FIXED:  alt={item.title}
 // FIXED:  className='w - 20 h - 12 object - cover rounded' />
  />
  )}
 
- <div className='flex - 1 min - w-0'>
- <div className='flex items - center gap - 2 mb - 2'>
+ <div className={'fle}x - 1 min - w-0'>
+ <div className={'fle}x items - center gap - 2 mb - 2'>
  <TypeIcon className='w - 4 h - 4 text - gray - 500' />
- <span
-// FIXED:  className={`px - 2 py - 1 rounded - full text - xs font - medium ${getSeverityColor(item.severity)}`} />
- >
+ <span>
+// FIXED:  className={`px - 2 py - 1 rounded - full text - xs font - medium ${getSeverityColor(item.severity)}`}/>
  {item.severity}
 // FIXED:  </span>
- <span className='text - xs text - gray - 500 dark:text - gray - 400'>
+ <span className={'tex}t - xs text - gray - 500 dark:text - gray - 400'>
  {item.type.replace('_', ' ')}
 // FIXED:  </span>
 // FIXED:  </div>
-<h3 className='text - lg font - medium text - gray - 900 dark:text - white mb - 1'>
+<h3 className={'tex}t - lg font - medium text - gray - 900 dark:text - white mb - 1'>
  {item.title}
 // FIXED:  </h3>
 
- <p className='text - sm text - gray - 600 dark:text - gray - 400 mb - 2'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400 mb - 2'>
  {item.content}
 // FIXED:  </p>
 
- <div className='flex items - center gap - 4 text - xs text - gray - 500 dark:text - gray - 400 mb - 3'>
+ <div className={'fle}x items - center gap - 4 text - xs text - gray - 500 dark:text - gray - 400 mb - 3'>
  <span > By {item.author.name}</span>
  <span > Reported by {item.reportedBy.name}</span>
  <span > Reason: {item.reportReason}</span>
@@ -435,13 +433,13 @@ export const ModerationDashboard: React.FC = () => {}
  )}
 // FIXED:  </div>
 
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  <button />
 // FIXED:  onClick={() =>}
  handleModerationAction(item.id, {}
  action: 'approve' })
  }
-// FIXED:  className='flex items - center gap - 1 px - 3 py - 1 bg - green - 600 text - white rounded text - sm hover:bg - green - 700 transition - colors'
+// FIXED:  className={'fle}x items - center gap - 1 px - 3 py - 1 bg - green - 600 text - white rounded text - sm hover:bg - green - 700 transition - colors'
  >
  <CheckIcon className='w - 4 h - 4' />
  Approve
@@ -451,7 +449,7 @@ export const ModerationDashboard: React.FC = () => {}
  handleModerationAction(item.id, {}
  action: 'reject' })
  }
-// FIXED:  className='flex items - center gap - 1 px - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700 transition - colors'
+// FIXED:  className={'fle}x items - center gap - 1 px - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700 transition - colors'
  >
  <XMarkIcon className='w - 4 h - 4' />
  Reject
@@ -461,12 +459,12 @@ export const ModerationDashboard: React.FC = () => {}
  handleModerationAction(item.id, {}
  action: 'escalate' })
  }
-// FIXED:  className='flex items - center gap - 1 px - 3 py - 1 bg - purple - 600 text - white rounded text - sm hover:bg - purple - 700 transition - colors'
+// FIXED:  className={'fle}x items - center gap - 1 px - 3 py - 1 bg - purple - 600 text - white rounded text - sm hover:bg - purple - 700 transition - colors'
  >
  <ShieldCheckIcon className='w - 4 h - 4' />
  Escalate
 // FIXED:  </button>
- <button className='flex items - center gap - 1 px - 3 py - 1 bg - gray - 600 text - white rounded text - sm hover:bg - gray - 700 transition - colors'>
+ <button className={'fle}x items - center gap - 1 px - 3 py - 1 bg - gray - 600 text - white rounded text - sm hover:bg - gray - 700 transition - colors'>
  <EyeIcon className='w - 4 h - 4' />
  View Details
 // FIXED:  </button>
@@ -481,10 +479,10 @@ export const ModerationDashboard: React.FC = () => {}
  {filteredItems.length === 0 && (}
  <div className='p - 12 text - center'>
  <ShieldCheckIcon className='w - 12 h - 12 text - gray - 400 mx - auto mb - 4' />
- <h3 className='text - lg font - medium text - gray - 900 dark:text - white mb - 2'>
+ <h3 className={'tex}t - lg font - medium text - gray - 900 dark:text - white mb - 2'>
  No items to review
 // FIXED:  </h3>
- <p className='text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - gray - 600 dark:text - gray - 400'>
  All content in this category has been reviewed.
 // FIXED:  </p>
 // FIXED:  </div>

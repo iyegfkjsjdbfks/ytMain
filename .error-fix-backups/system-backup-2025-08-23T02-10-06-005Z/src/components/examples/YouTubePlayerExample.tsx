@@ -86,7 +86,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  playerRef.current.getVolume(),
  playerRef.current.isMuted()]);
 
- if (isMounted as any) {}
+ if (isMounted) {}
  setCurrentTime(time);
  setDuration(dur);
  setVolume(vol);
@@ -107,7 +107,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  setIsPlaying(state === YouTubePlayerState.PLAYING);
  } } });
 
- if (isMounted as any) {}
+ if (isMounted) {}
  playerRef.current = player;
  } else {}
  player.destroy();
@@ -140,7 +140,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  }
 
  try {}
- if (isPlaying as any) {}
+ if (isPlaying) {}
  await playerRef.current.pauseVideo();
  } else {}
  await playerRef.current.playVideo();
@@ -156,7 +156,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  }
 
  try {}
- if (isMuted as any) {}
+ if (isMuted) {}
  await playerRef.current.unMute();
  setIsMuted(false);
  } else {}
@@ -195,7 +195,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  // Update mute state based on volume
  if (newVolume === 0) {}
  setIsMuted(true);
- } else if (isMuted as any) {}
+ } else if (isMuted) {}
  setIsMuted(false);
  }
  } catch (error) {}
@@ -208,8 +208,8 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
 
  {/* Custom Controls */}
  {!controls && (}
- <div className='mt - 2 bg - gray - 100 p - 2 rounded'>
- <div className='flex items - center space - x - 2 mb - 2'>
+ <div className={'m}t - 2 bg - gray - 100 p - 2 rounded'>
+ <div className={'fle}x items - center space - x - 2 mb - 2'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => togglePlay(e)}
 // FIXED:  className='p - 2 rounded - full bg - blue - 500 text - white hover:bg - blue - 600'
@@ -218,8 +218,8 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  {isPlaying ? '⏸' : '▶️'}
 // FIXED:  </button>
 
- <div className='flex - 1'>
- <input
+ <div className={'fle}x - 1'>
+ <input>
 // FIXED:  type='range'
  min='0'
  max={duration || 100}
@@ -229,7 +229,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
 // FIXED:  aria - label='Seek'
  />
 // FIXED:  </div>
-<div className='text - sm text - gray - 600 w - 20 text - right'>
+<div className={'tex}t - sm text - gray - 600 w - 20 text - right'>
  {formatTime(currentTime)} / {formatTime(duration)}
 // FIXED:  </div>
 
@@ -242,7 +242,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
 // FIXED:  </button>
 
  <div className='w - 24'>
- <input
+ <input>
 // FIXED:  type='range'
  min='0'
  max='100'
@@ -253,7 +253,7 @@ export const YouTubePlayerExample: FC < YouTubePlayerExampleProps> = ({}
  />
 // FIXED:  </div>
 // FIXED:  </div>
-<div className='text - xs text - gray - 500'>
+<div className={'tex}t - xs text - gray - 500'>
  Player State: {YouTubePlayerState[playerState || -1]}
 // FIXED:  </div>
 // FIXED:  </div>

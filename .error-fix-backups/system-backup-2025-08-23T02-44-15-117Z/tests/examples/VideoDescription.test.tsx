@@ -54,7 +54,7 @@ describe('VideoDescription Component', () => {}
  describe('Rendering', () => {}
  it('should render video information correctly', async (): Promise<any> < void> => {}
  const { container } = customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -89,7 +89,7 @@ describe('VideoDescription Component', () => {}
 
  it('should render verified badge for verified channels', () => {}
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -112,7 +112,7 @@ describe('VideoDescription Component', () => {}
  channelName: 'Unknown Channel' };
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={videoWithoutChannel}
  channel={null}
  isSubscribed={false}
@@ -138,7 +138,7 @@ describe('VideoDescription Component', () => {}
  description: longDescription };
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={videoWithLongDescription}
  channel={mockChannel}
  isSubscribed={false}
@@ -180,7 +180,7 @@ describe('VideoDescription Component', () => {}
  description: shortDescription };
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={videoWithShortDescription}
  channel={mockChannel}
  isSubscribed={false}
@@ -203,7 +203,7 @@ describe('VideoDescription Component', () => {}
  const onSubscribe = vi.fn();
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -228,7 +228,7 @@ describe('VideoDescription Component', () => {}
  const onSubscribe = vi.fn();
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -265,7 +265,7 @@ describe('VideoDescription Component', () => {}
  const startTime = performance.now();
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -289,10 +289,10 @@ describe('VideoDescription Component', () => {}
  });
 
  it('should not cause memory leaks', async (): Promise<any> < void> => {}
- const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
+ const initialMemory = (performance).memory?.usedJSHeapSize || 0;
 
  const { unmount } = customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -317,7 +317,7 @@ describe('VideoDescription Component', () => {}
 
  await testHelpers.waitForTime(100);
 
- const finalMemory = (performance as any).memory?.usedJSHeapSize || 0;
+ const finalMemory = (performance).memory?.usedJSHeapSize || 0;
  const memoryIncrease = finalMemory - initialMemory;
 
  // Memory increase should be minimal (less than 1MB)
@@ -330,7 +330,7 @@ describe('VideoDescription Component', () => {}
  testHelpers.mockApiError(500, 'Server Error');
 
  const { container } = customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -359,7 +359,7 @@ describe('VideoDescription Component', () => {}
 
  expect(() => {}
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={malformedVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -389,7 +389,7 @@ describe('VideoDescription Component', () => {}
  window.dispatchEvent(new Event('resize'));
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -417,7 +417,7 @@ describe('VideoDescription Component', () => {}
  window.dispatchEvent(new Event('resize'));
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -438,7 +438,7 @@ describe('VideoDescription Component', () => {}
  describe('Accessibility', () => {}
  it('should have proper ARIA labels', () => {}
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -458,7 +458,7 @@ describe('VideoDescription Component', () => {}
 
  it('should support screen readers', () => {}
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -478,7 +478,7 @@ describe('VideoDescription Component', () => {}
 
  it('should have proper heading hierarchy', () => {}
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -500,7 +500,7 @@ describe('VideoDescription Component', () => {}
 
  it('should have sufficient color contrast', async (): Promise<any> < void> => {}
  const { container } = customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -529,7 +529,7 @@ describe('VideoDescription Component', () => {}
  description: maliciousDescription };
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={videoWithMaliciousContent}
  channel={mockChannel}
  isSubscribed={false}
@@ -556,7 +556,7 @@ describe('VideoDescription Component', () => {}
  description: descriptionWithLinks };
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={videoWithLinks}
  channel={mockChannel}
  isSubscribed={false}
@@ -582,7 +582,7 @@ describe('VideoDescription Component', () => {}
  const performanceSpy = vi.spyOn(performanceMonitor, 'trackCustomMetric');
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}
@@ -609,7 +609,7 @@ describe('VideoDescription Component', () => {}
  relatedVideos: [testUtils.generateMockVideo()] });
 
  customRender(
- <VideoDescription
+ <VideoDescription>
  video={mockVideo}
  channel={mockChannel}
  isSubscribed={false}

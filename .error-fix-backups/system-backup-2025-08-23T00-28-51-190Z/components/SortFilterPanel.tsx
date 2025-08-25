@@ -36,7 +36,7 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
  ) {
  setShowPanel(false);
  };
- if (showPanel as any) {
+ if (showPanel) {
  document.addEventListener('mousedown', handleClickOutside as EventListener);
  }
  return () => {
@@ -48,16 +48,16 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
  setShowPanel(false);
  };
 
- if (disabled as any) {
+ if (disabled) {
 return null;
 }
 
  return (
- <div className="relative">
- <button
+ <div className={"relative}">
+ <button>
  ref={buttonRef} />
 // FIXED:  onClick={() => setShowPanel(prev => !prev)}
-// FIXED:  className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+// FIXED:  className={"fle}x items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 // FIXED:  aria-expanded={showPanel}
 // FIXED:  aria-haspopup="true"
 // FIXED:  aria-controls="sort-options-panel"
@@ -65,20 +65,19 @@ return null;
  title="Sort search results"
 // FIXED:  disabled={disabled}
  >
- <AdjustmentsHorizontalIcon className="w-4 h-4 mr-1.5" />
+ <AdjustmentsHorizontalIcon className={"w}-4 h-4 mr-1.5" />
  Sort by
 // FIXED:  </button>
  {showPanel && (
- <div
+ <div>
  ref={panelRef}
 // FIXED:  id="sort-options-panel"
-// FIXED:  className="absolute top-full right-0 mt-1.5 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl z-30 py-1 animate-fade-in-fast"
+// FIXED:  className={"absolut}e top-full right-0 mt-1.5 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl z-30 py-1 animate-fade-in-fast"
  role="menu"
 // FIXED:  aria-orientation="vertical"
-// FIXED:  aria-labelledby="filter-button" />
- >
+// FIXED:  aria-labelledby="filter-button"/>
  {sortOptions.map((option) => (
- <button
+ <button>
  key={option.value} />
 // FIXED:  onClick={() => handleSortOptionClick(option.value)}
 // FIXED:  className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between
@@ -90,7 +89,7 @@ return null;
 // FIXED:  aria-checked={currentSortBy === option.value}
  >
  <span>{option.label}</span>
- {currentSortBy === option.value && <CheckIcon className="w-4 h-4 text-sky-600 dark:text-sky-400" />}
+ {currentSortBy === option.value && <CheckIcon className={"w}-4 h-4 text-sky-600 dark:text-sky-400" />}
 // FIXED:  </button>
  ))}
 // FIXED:  </div>

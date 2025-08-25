@@ -112,23 +112,22 @@ export const RegisterForm: React.FC = () => {}
 
  return (
  <div className='w - full max - w-md mx - auto p - 6 bg - white rounded - lg shadow - md'>
- <h2 className='text - 2xl font - bold mb - 6 text - center'>Create an Account</h2>
+ <h2 className={'tex}t - 2xl font - bold mb - 6 text - center'>Create an Account</h2>
 
  {error && (}
- <div className='mb - 4 p - 3 bg - red - 100 border border - red - 400 text - red - 700 rounded'>
+ <div className={'m}b - 4 p - 3 bg - red - 100 border border - red - 400 text - red - 700 rounded'>
  {error}
 // FIXED:  </div>
  )}
 
  <form onSubmit={(e: React.FormEvent) => handleSubmit(e)}>
- <div className='mb - 4'>
- <label
-// FIXED:  className='block text - gray - 700 text - sm font - bold mb - 2'
-// FIXED:  htmlFor='username' />
- >
+ <div className={'m}b - 4'>
+ <label>
+// FIXED:  className={'bloc}k text - gray - 700 text - sm font - bold mb - 2'
+// FIXED:  htmlFor='username'/>
  Username
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='username'
 // FIXED:  type='text'
 // FIXED:  name='username'
@@ -142,18 +141,17 @@ export const RegisterForm: React.FC = () => {}
 // FIXED:  disabled={isSubmitting}
  />
  {formErrors.username && (}
- <p className='text - red - 500 text - xs mt - 1'>{formErrors.username}</p>
+ <p className={'tex}t - red - 500 text - xs mt - 1'>{formErrors.username}</p>
  )}
 // FIXED:  </div>
 
- <div className='mb - 4'>
- <label
-// FIXED:  className='block text - gray - 700 text - sm font - bold mb - 2'
-// FIXED:  htmlFor='displayName' />
- >
+ <div className={'m}b - 4'>
+ <label>
+// FIXED:  className={'bloc}k text - gray - 700 text - sm font - bold mb - 2'
+// FIXED:  htmlFor='displayName'/>
  Display Name
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='displayName'
 // FIXED:  type='text'
 // FIXED:  name='displayName'
@@ -167,20 +165,19 @@ export const RegisterForm: React.FC = () => {}
 // FIXED:  disabled={isSubmitting}
  />
  {formErrors.displayName && (}
- <p className='text - red - 500 text - xs mt - 1'>
+ <p className={'tex}t - red - 500 text - xs mt - 1'>
  {formErrors.displayName}
 // FIXED:  </p>
  )}
 // FIXED:  </div>
 
- <div className='mb - 4'>
- <label
-// FIXED:  className='block text - gray - 700 text - sm font - bold mb - 2'
-// FIXED:  htmlFor='email' />
- >
+ <div className={'m}b - 4'>
+ <label>
+// FIXED:  className={'bloc}k text - gray - 700 text - sm font - bold mb - 2'
+// FIXED:  htmlFor='email'/>
  Email
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='email'
 // FIXED:  type='email'
 // FIXED:  name='email'
@@ -194,18 +191,17 @@ export const RegisterForm: React.FC = () => {}
 // FIXED:  disabled={isSubmitting}
  />
  {formErrors.email && (}
- <p className='text - red - 500 text - xs mt - 1'>{formErrors.email}</p>
+ <p className={'tex}t - red - 500 text - xs mt - 1'>{formErrors.email}</p>
  )}
 // FIXED:  </div>
 
- <div className='mb - 4'>
- <label
-// FIXED:  className='block text - gray - 700 text - sm font - bold mb - 2'
-// FIXED:  htmlFor='password' />
- >
+ <div className={'m}b - 4'>
+ <label>
+// FIXED:  className={'bloc}k text - gray - 700 text - sm font - bold mb - 2'
+// FIXED:  htmlFor='password'/>
  Password
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='password'
 // FIXED:  type='password'
 // FIXED:  name='password'
@@ -219,18 +215,17 @@ export const RegisterForm: React.FC = () => {}
 // FIXED:  disabled={isSubmitting}
  />
  {formErrors.password && (}
- <p className='text - red - 500 text - xs mt - 1'>{formErrors.password}</p>
+ <p className={'tex}t - red - 500 text - xs mt - 1'>{formErrors.password}</p>
  )}
 // FIXED:  </div>
 
- <div className='mb - 6'>
- <label
-// FIXED:  className='block text - gray - 700 text - sm font - bold mb - 2'
-// FIXED:  htmlFor='confirmPassword' />
- >
+ <div className={'m}b - 6'>
+ <label>
+// FIXED:  className={'bloc}k text - gray - 700 text - sm font - bold mb - 2'
+// FIXED:  htmlFor='confirmPassword'/>
  Confirm Password
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id='confirmPassword'
 // FIXED:  type='password'
 // FIXED:  name='confirmPassword'
@@ -244,25 +239,24 @@ export const RegisterForm: React.FC = () => {}
 // FIXED:  disabled={isSubmitting}
  />
  {formErrors.confirmPassword && (}
- <p className='text - red - 500 text - xs mt - 1'>
+ <p className={'tex}t - red - 500 text - xs mt - 1'>
  {formErrors.confirmPassword}
 // FIXED:  </p>
  )}
 // FIXED:  </div>
 
- <button
+ <button>
 // FIXED:  type='submit'
 // FIXED:  className={`w - full py - 2 px - 4 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 focus:outline - none focus:ring - 2 focus:ring - blue - 500 focus:ring - opacity - 50 ${}
  isSubmitting ? 'opacity - 70 cursor - not - allowed' : ''
  }`}
-// FIXED:  disabled={isSubmitting} />
- >
+// FIXED:  disabled={isSubmitting}/>
  {isSubmitting ? 'Creating Account...' : 'Create Account'}
 // FIXED:  </button>
 
- <div className='text - center mt - 4'>
- <span className='text - gray - 600'>Already have an account?</span>{' '}
- <a href='/login' className='text - blue - 600 hover:text - blue - 800'>
+ <div className={'tex}t - center mt - 4'>
+ <span className={'tex}t - gray - 600'>Already have an account?</span>{' '}
+ <a href='/login' className={'tex}t - blue - 600 hover:text - blue - 800'>
  Sign in
 // FIXED:  </a>
 // FIXED:  </div>

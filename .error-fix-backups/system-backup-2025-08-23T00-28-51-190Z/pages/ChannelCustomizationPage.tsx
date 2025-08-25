@@ -113,37 +113,37 @@ const ChannelCustomizationPage: React.FC = () => {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+ <div className={"min}-h-screen bg-gray-50 dark:bg-gray-900">
  {/* Header */}
- <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
- <div className="flex justify-between items-center py-6">
+ <div className={"bg}-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+ <div className={"max}-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+ <div className={"fle}x justify-between items-center py-6">
  <div>
- <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Channel Customization</h1>
- <p className="text-gray-600 dark:text-gray-400 mt-1">Customize your channel's appearance and branding</p>
+ <h1 className={"text}-2xl font-bold text-gray-900 dark:text-white">Channel Customization</h1>
+ <p className={"text}-gray-600 dark:text-gray-400 mt-1">Customize your channel's appearance and branding</p>
 // FIXED:  </div>
- <div className="flex items-center space-x-4">
+ <div className={"fle}x items-center space-x-4">
  <button />
 // FIXED:  onClick={() => setPreviewMode(!previewMode)}
-// FIXED:  className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600"
+// FIXED:  className={"fle}x items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600"
  >
- <EyeIcon className="w-4 h-4 mr-2" />
+ <EyeIcon className={"w}-4 h-4 mr-2" />
  {previewMode ? 'Edit Mode' : 'Preview'}
 // FIXED:  </button>
  {unsavedChanges && (
- <div className="flex space-x-2">
+ <div className={"fle}x space-x-2">
  <button />
 // FIXED:  onClick={(e) => handleDiscard(e)}
-// FIXED:  className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600"
+// FIXED:  className={"fle}x items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600"
  >
- <XMarkIcon className="w-4 h-4 mr-2" />
+ <XMarkIcon className={"w}-4 h-4 mr-2" />
  Discard
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e) => handleSave(e)}
-// FIXED:  className="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700"
+// FIXED:  className={"fle}x items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700"
  >
- <CheckIcon className="w-4 h-4 mr-2" />
+ <CheckIcon className={"w}-4 h-4 mr-2" />
  Save Changes
 // FIXED:  </button>
 // FIXED:  </div>
@@ -153,11 +153,11 @@ const ChannelCustomizationPage: React.FC = () => {
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
- <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+ <div className={"max}-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+ <div className={"gri}d grid-cols-1 lg:grid-cols-4 gap-8">
  {/* Sidebar Navigation */}
- <div className="lg:col-span-1">
- <nav className="space-y-2">
+ <div className={"lg}:col-span-1">
+ <nav className={"space}-y-2">
  {[
  { id: 'branding',
  label: 'Branding', icon: PaintBrushIcon },
@@ -167,63 +167,63 @@ const ChannelCustomizationPage: React.FC = () => {
  label: 'Basic Info', icon: DocumentTextIcon },
  { id: 'featured',
  label: 'Featured Content', icon: LinkIcon }].map((tab) => (
- <button
+ <button>
  key={tab.id} />
-// FIXED:  onClick={() => setActiveTab(tab.id as any)}
+// FIXED:  onClick={() => setActiveTab(tab.id)}
 // FIXED:  className={`w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors ${
  activeTab === tab.id
  ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800'
  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
  }`}
  >
- <tab.icon className="w-5 h-5 mr-3" />
+ <tab.icon className={"w}-5 h-5 mr-3" />
  {tab.label}
 // FIXED:  </button>
  ))}
 // FIXED:  </nav>
 
  {/* Channel Stats */}
- <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
- <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Channel Stats</h3>
- <div className="space-y-3">
- <div className="flex justify-between">
- <span className="text-gray-600 dark:text-gray-400">Subscribers</span>
- <span className="font-semibold text-gray-900 dark:text-white">{formatNumber(stats.subscribers)}</span>
+ <div className={"mt}-8 bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+ <h3 className={"text}-lg font-semibold text-gray-900 dark:text-white mb-4">Channel Stats</h3>
+ <div className={"space}-y-3">
+ <div className={"fle}x justify-between">
+ <span className={"text}-gray-600 dark:text-gray-400">Subscribers</span>
+ <span className={"font}-semibold text-gray-900 dark:text-white">{formatNumber(stats.subscribers)}</span>
 // FIXED:  </div>
- <div className="flex justify-between">
- <span className="text-gray-600 dark:text-gray-400">Total Views</span>
- <span className="font-semibold text-gray-900 dark:text-white">{formatNumber(stats.totalViews)}</span>
+ <div className={"fle}x justify-between">
+ <span className={"text}-gray-600 dark:text-gray-400">Total Views</span>
+ <span className={"font}-semibold text-gray-900 dark:text-white">{formatNumber(stats.totalViews)}</span>
 // FIXED:  </div>
- <div className="flex justify-between">
- <span className="text-gray-600 dark:text-gray-400">Videos</span>
- <span className="font-semibold text-gray-900 dark:text-white">{stats.videosCount}</span>
+ <div className={"fle}x justify-between">
+ <span className={"text}-gray-600 dark:text-gray-400">Videos</span>
+ <span className={"font}-semibold text-gray-900 dark:text-white">{stats.videosCount}</span>
 // FIXED:  </div>
- <div className="flex justify-between">
- <span className="text-gray-600 dark:text-gray-400">Joined</span>
- <span className="font-semibold text-gray-900 dark:text-white">{stats.joinDate}</span>
+ <div className={"fle}x justify-between">
+ <span className={"text}-gray-600 dark:text-gray-400">Joined</span>
+ <span className={"font}-semibold text-gray-900 dark:text-white">{stats.joinDate}</span>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Main Content */}
- <div className="lg:col-span-3">
- <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+ <div className={"lg}:col-span-3">
+ <div className={"bg}-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
  {/* Branding Tab */}
  {activeTab === 'branding' && (
- <div className="p-6">
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Channel Branding</h2>
+ <div className={"p}-6">
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white mb-6">Channel Branding</h2>
 
  {/* Channel Art */}
- <div className="mb-8">
- <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <div className={"mb}-8">
+ <div className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Channel Art
 // FIXED:  </div>
- <div className="relative">
- <img
+ <div className={"relative}">
+ <img>
 // FIXED:  src={branding.channelArt}
 // FIXED:  alt="Channel Art"
-// FIXED:  className="w-full h-48 object-cover rounded-lg border border-gray-200 dark:border-gray-700" />
+// FIXED:  className={"w}-full h-48 object-cover rounded-lg border border-gray-200 dark:border-gray-700" />
  />
  <button />
 // FIXED:  onClick={() => {
@@ -233,33 +233,33 @@ const ChannelCustomizationPage: React.FC = () => {
  input.accept = 'image/*';
  input.onchange = (e) => {
  const file = (e.target as HTMLInputElement).files?.[0];
- if (file as any) {
+ if (file) {
  // Handle file upload
  };
  input.click();
  }
-// FIXED:  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-lg opacity-0 hover:opacity-100 transition-opacity"
+// FIXED:  className={"absolut}e inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-lg opacity-0 hover:opacity-100 transition-opacity"
  >
- <PhotoIcon className="w-8 h-8 mr-2" />
+ <PhotoIcon className={"w}-8 h-8 mr-2" />
  Change Channel Art
 // FIXED:  </button>
 // FIXED:  </div>
-<p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+<p className={"text}-xs text-gray-500 dark:text-gray-400 mt-2">
  Recommended size: 2560 x 1440 pixels. Max file size: 6MB.
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* Profile Picture */}
- <div className="mb-8">
- <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <div className={"mb}-8">
+ <div className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Profile Picture
 // FIXED:  </div>
- <div className="flex items-center space-x-4">
- <div className="relative">
- <img
+ <div className={"fle}x items-center space-x-4">
+ <div className={"relative}">
+ <img>
 // FIXED:  src={branding.profilePicture}
 // FIXED:  alt="Profile"
-// FIXED:  className="w-24 h-24 rounded-full border border-gray-200 dark:border-gray-700" />
+// FIXED:  className={"w}-24 h-24 rounded-full border border-gray-200 dark:border-gray-700" />
  />
  <button />
 // FIXED:  onClick={() => {
@@ -269,22 +269,22 @@ const ChannelCustomizationPage: React.FC = () => {
  input.accept = 'image/*';
  input.onchange = (e) => {
  const file = (e.target as HTMLInputElement).files?.[0];
- if (file as any) {
+ if (file) {
  // Handle file upload
  };
  input.click();
  }
-// FIXED:  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity"
+// FIXED:  className={"absolut}e inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity"
  title="Change profile picture"
  >
- <PhotoIcon className="w-6 h-6" />
+ <PhotoIcon className={"w}-6 h-6" />
 // FIXED:  </button>
 // FIXED:  </div>
  <div>
- <p className="text-sm text-gray-600 dark:text-gray-400">
+ <p className={"text}-sm text-gray-600 dark:text-gray-400">
  Recommended size: 800 x 800 pixels
 // FIXED:  </p>
- <p className="text-xs text-gray-500 dark:text-gray-400">
+ <p className={"text}-xs text-gray-500 dark:text-gray-400">
  Your profile picture will appear across YouTube
 // FIXED:  </p>
 // FIXED:  </div>
@@ -293,12 +293,12 @@ const ChannelCustomizationPage: React.FC = () => {
 
  {/* Watermark */}
  <div>
- <div id="video-watermark-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <div id="video-watermark-label" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Video Watermark
 // FIXED:  </div>
- <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
- <PhotoIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
- <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+ <div className={"border}-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+ <PhotoIcon className={"w}-12 h-12 text-gray-400 mx-auto mb-4" />
+ <p className={"text}-sm text-gray-600 dark:text-gray-400 mb-2">
  Upload a watermark to appear on your videos
 // FIXED:  </p>
  <button />
@@ -309,12 +309,12 @@ const ChannelCustomizationPage: React.FC = () => {
  input.accept = 'image/*';
  input.onchange = (e) => {
  const file = (e.target as HTMLInputElement).files?.[0];
- if (file as any) {
+ if (file) {
  // Handle file upload
  };
  input.click();
  }
-// FIXED:  className="text-red-600 hover:text-red-700 text-sm font-medium"
+// FIXED:  className={"text}-red-600 hover:text-red-700 text-sm font-medium"
 // FIXED:  aria-labelledby="video-watermark-label"
  >
  Choose File
@@ -326,15 +326,15 @@ const ChannelCustomizationPage: React.FC = () => {
 
  {/* Layout Tab */}
  {activeTab === 'layout' && (
- <div className="p-6">
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Channel Layout</h2>
+ <div className={"p}-6">
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white mb-6">Channel Layout</h2>
 
- <div className="space-y-6">
+ <div className={"space}-y-6">
  <div>
- <div id="layout-style-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+ <div id="layout-style-label" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
  Layout Style
 // FIXED:  </div>
- <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-labelledby="layout-style-label">
+ <div className={"gri}d grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-labelledby="layout-style-label">
  {[
  { id: 'default',
  name: 'Default', description: 'Standard YouTube layout' },
@@ -342,7 +342,7 @@ const ChannelCustomizationPage: React.FC = () => {
  name: 'Compact', description: 'More videos visible' },
  { id: 'showcase',
  name: 'Showcase', description: 'Highlight featured content' }].map((layout) => (
- <button
+ <button>
  key={layout.id} />
 // FIXED:  onClick={() => handleInputChange('channelLayout', layout.id)}
 // FIXED:  className={`p-4 border rounded-lg text-left transition-colors ${
@@ -353,22 +353,22 @@ const ChannelCustomizationPage: React.FC = () => {
  role="radio"
 // FIXED:  aria-checked={branding.channelLayout === layout.id}
  >
- <h3 className="font-medium text-gray-900 dark:text-white">{layout.name}</h3>
- <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{layout.description}</p>
+ <h3 className={"font}-medium text-gray-900 dark:text-white">{layout.name}</h3>
+ <p className={"text}-sm text-gray-600 dark:text-gray-400 mt-1">{layout.description}</p>
 // FIXED:  </button>
  ))}
 // FIXED:  </div>
 // FIXED:  </div>
 
  <div>
- <label htmlFor="end-screen-template" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="end-screen-template" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  End Screen Template
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id="end-screen-template"
 // FIXED:  value={branding.endScreenTemplate} />
 // FIXED:  onChange={(e) => handleInputChange('endScreenTemplate', e.target.value)}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  >
  <option value="default">Default Template</option>
  <option value="subscribe">Subscribe Focus</option>
@@ -382,63 +382,62 @@ const ChannelCustomizationPage: React.FC = () => {
 
  {/* Basic Info Tab */}
  {activeTab === 'info' && (
- <div className="p-6">
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Basic Information</h2>
+ <div className={"p}-6">
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white mb-6">Basic Information</h2>
 
- <div className="space-y-6">
+ <div className={"space}-y-6">
  <div>
- <label htmlFor="channel-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="channel-name" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Channel Name
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="text"
 // FIXED:  id="channel-name"
 // FIXED:  value={branding.channelName} />
 // FIXED:  onChange={(e) => handleInputChange('channelName', e.target.value)}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
 // FIXED:  placeholder="Enter your channel name"
  />
 // FIXED:  </div>
 
  <div>
- <label htmlFor="channel-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="channel-description" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Channel Description
 // FIXED:  </label>
- <textarea
+ <textarea>
 // FIXED:  id="channel-description"
 // FIXED:  value={branding.channelDescription} />
 // FIXED:  onChange={(e) => handleInputChange('channelDescription', e.target.value)}
  rows={4}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
 // FIXED:  placeholder="Describe your channel..."
  />
 // FIXED:  </div>
 
  <div>
- <label htmlFor="channel-keywords" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="channel-keywords" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Channel Keywords
 // FIXED:  </label>
- <div className="flex flex-wrap gap-2 mb-2">
+ <div className={"fle}x flex-wrap gap-2 mb-2">
  {branding.channelKeywords.map((keyword) => (
- <span
+ <span>
  key={keyword}
-// FIXED:  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300" />
- >
+// FIXED:  className={"inline}-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300"/>
  {keyword}
  <button />
 // FIXED:  onClick={() => handleKeywordRemove(keyword)}
-// FIXED:  className="ml-2 text-red-600 hover:text-red-800"
+// FIXED:  className={"ml}-2 text-red-600 hover:text-red-800"
  >
- <XMarkIcon className="w-4 h-4" />
+ <XMarkIcon className={"w}-4 h-4" />
 // FIXED:  </button>
 // FIXED:  </span>
  ))}
 // FIXED:  </div>
- <input
+ <input>
 // FIXED:  type="text"
 // FIXED:  id="channel-keywords"
 // FIXED:  placeholder="Add a keyword and press Enter"
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
  onKeyPress={(e) => {
  if (e.key === 'Enter') {
  handleKeywordAdd(e.currentTarget.value);
@@ -449,21 +448,21 @@ const ChannelCustomizationPage: React.FC = () => {
 // FIXED:  </div>
 
  <div>
- <div id="social-links-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+ <div id="social-links-label" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
  Social Links
 // FIXED:  </div>
- <div className="space-y-4" aria-labelledby="social-links-label">
+ <div className={"space}-y-4" aria-labelledby="social-links-label">
  {Object.entries(branding.socialLinks).map(([platform, url]) => (
  <div key={platform}>
- <label htmlFor={`${platform}-link`} className="block text-sm text-gray-600 dark:text-gray-400 mb-1 capitalize">
+ <label htmlFor={`${platform}-link`} className={"bloc}k text-sm text-gray-600 dark:text-gray-400 mb-1 capitalize">
  {platform}
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="url"
 // FIXED:  id={`${platform}-link`}
 // FIXED:  value={url} />
 // FIXED:  onChange={(e) => handleSocialLinkChange(platform as keyof ChannelBranding['socialLinks'], e.target.value)}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
 // FIXED:  placeholder={`Your ${platform} URL`}
  />
 // FIXED:  </div>
@@ -476,39 +475,39 @@ const ChannelCustomizationPage: React.FC = () => {
 
  {/* Featured Content Tab */}
  {activeTab === 'featured' && (
- <div className="p-6">
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Featured Content</h2>
+ <div className={"p}-6">
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white mb-6">Featured Content</h2>
 
- <div className="space-y-6">
+ <div className={"space}-y-6">
  <div>
- <label htmlFor="channel-trailer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="channel-trailer" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Channel Trailer
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="text"
 // FIXED:  id="channel-trailer"
 // FIXED:  value={branding.channelTrailer} />
 // FIXED:  onChange={(e) => handleInputChange('channelTrailer', e.target.value)}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
 // FIXED:  placeholder="Video ID or URL for your channel trailer"
  />
- <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+ <p className={"text}-xs text-gray-500 dark:text-gray-400 mt-1">
  This video will be shown to new visitors to introduce your channel
 // FIXED:  </p>
 // FIXED:  </div>
 
  <div>
- <div id="featured-channels-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <div id="featured-channels-label" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Featured Channels
 // FIXED:  </div>
- <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
- <GlobeAltIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
- <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+ <div className={"border}-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+ <GlobeAltIcon className={"w}-12 h-12 text-gray-400 mx-auto mb-4" />
+ <p className={"text}-sm text-gray-600 dark:text-gray-400 mb-2">
  Add channels you want to feature on your channel page
 // FIXED:  </p>
  <button />
 // FIXED:  onClick={() => { }
-// FIXED:  className="text-red-600 hover:text-red-700 text-sm font-medium"
+// FIXED:  className={"text}-red-600 hover:text-red-700 text-sm font-medium"
 // FIXED:  aria-labelledby="featured-channels-label"
  >
  Add Featured Channels

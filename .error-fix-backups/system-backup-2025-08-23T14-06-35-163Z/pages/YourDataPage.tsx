@@ -29,7 +29,7 @@ const YourDataPage: React.FC = () => {}
  setLikedVideosCount(likedVideos.length);
  setSearchHistoryCount(searchHistory.length);
  } catch (error) {}
- (console as any).error('Failed to fetch data counts:', error);
+ (console).error('Failed to fetch data counts:', error);
  } finally {}
  setLoading(false);
  };
@@ -39,25 +39,25 @@ const YourDataPage: React.FC = () => {}
 
  const handleClearSearchHistory = async (): Promise<any> < void> => {}
  const confirmed = window.confirm('Are you sure you want to clear your search history? This action cannot be undone.');
- if (confirmed as any) {}
+ if (confirmed) {}
  try {}
  await clearAllRecentSearches();
  setSearchHistoryCount(0);
  } catch (error) {}
- (console as any).error('Failed to clear search history:', error);
+ (console).error('Failed to clear search history:', error);
  }
  };
 
  const handleClearWatchHistory = () => {}
  const confirmed = window.confirm('Are you sure you want to clear your watch history? This action cannot be undone.');
- if (confirmed as any) {}
+ if (confirmed) {}
  localStorage.removeItem('youtubeCloneWatchHistory_v1');
  setWatchHistoryCount(0);
  };
 
  const handleClearLikedVideos = () => {}
  const confirmed = window.confirm('Are you sure you want to clear your liked videos? This action cannot be undone.');
- if (confirmed as any) {}
+ if (confirmed) {}
  localStorage.removeItem('youtubeCloneLikedVideos_v1');
  setLikedVideosCount(0);
  };
@@ -70,10 +70,10 @@ const YourDataPage: React.FC = () => {}
 
  const handleDownloadData = () => {}
  const data: object = {}
- watchHistory: JSON.parse((localStorage as any).getItem('youtubeCloneWatchHistory_v1') || '[]'),
- likedVideos: JSON.parse((localStorage as any).getItem('youtubeCloneLikedVideos_v1') || '[]'),
- searchHistory: JSON.parse((localStorage as any).getItem('youtubeCloneRecentSearches_v2') || '[]'),
- userPlaylists: JSON.parse((localStorage as any).getItem('youtubeCloneUserPlaylists_v1') || '[]'), exportDate: new Date().toISOString()
+ watchHistory: JSON.parse((localStorage).getItem('youtubeCloneWatchHistory_v1') || '[]'),
+ likedVideos: JSON.parse((localStorage).getItem('youtubeCloneLikedVideos_v1') || '[]'),
+ searchHistory: JSON.parse((localStorage).getItem('youtubeCloneRecentSearches_v2') || '[]'),
+ userPlaylists: JSON.parse((localStorage).getItem('youtubeCloneUserPlaylists_v1') || '[]'), exportDate: new Date().toISOString()
  };
 
  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application / json' });
@@ -93,16 +93,16 @@ const YourDataPage: React.FC = () => {}
  onToggleVisibility: () => void,
  onClear: () => void; loading: boolean;
  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: any) => (
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - start justify - between mb - 4">
- <div className="flex - 1">
- <h3 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 2">{title}</h3>
- <p className="text - sm text - neutral - 600 dark:text - neutral - 400 mb - 3">{description}</p>
- <p className="text - sm font - medium text - neutral - 800 dark:text - neutral - 200">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - start justify - between mb - 4">
+ <div className={"fle}x - 1">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 2">{title}</h3>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400 mb - 3">{description}</p>
+ <p className={"tex}t - sm font - medium text - neutral - 800 dark:text - neutral - 200">
  {loading ? 'Loading...' : `${count} items`}
 // FIXED:  </p>
 // FIXED:  </div>
- <div className="flex items - center space - x - 2 ml - 4">
+ <div className={"fle}x items - center space - x - 2 ml - 4">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onToggleVisibility(e)}
 // FIXED:  className={`p - 2 rounded - full transition - colors ${}
@@ -117,18 +117,18 @@ const YourDataPage: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="flex space - x - 3">
+ <div className={"fle}x space - x - 3">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onClear(e)}
 // FIXED:  disabled={loading || count === 0}
-// FIXED:  className="flex items - center space - x - 2 px - 4 py - 2 bg - red - 500 hover:bg - red - 600 disabled:bg - neutral - 300 dark:disabled:bg - neutral - 700 text - white disabled:text - neutral - 500 text - sm font - medium rounded - md transition - colors disabled:cursor - not - allowed"
+// FIXED:  className={"fle}x items - center space - x - 2 px - 4 py - 2 bg - red - 500 hover:bg - red - 600 disabled:bg - neutral - 300 dark:disabled:bg - neutral - 700 text - white disabled:text - neutral - 500 text - sm font - medium rounded - md transition - colors disabled:cursor - not - allowed"
  >
  <TrashIcon className="w - 4 h - 4" />
  <span > Clear All</span>
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => window.open(`/${title.toLowerCase(: React.MouseEvent).replace(' ', '-')}`, '_blank')}
-// FIXED:  className="flex items - center space - x - 2 px - 4 py - 2 bg - neutral - 100 dark:bg - neutral - 700 hover:bg - neutral - 200 dark:hover:bg - neutral - 600 text - neutral - 700 dark:text - neutral - 300 text - sm font - medium rounded - md transition - colors"
+// FIXED:  className={"fle}x items - center space - x - 2 px - 4 py - 2 bg - neutral - 100 dark:bg - neutral - 700 hover:bg - neutral - 200 dark:hover:bg - neutral - 600 text - neutral - 700 dark:text - neutral - 300 text - sm font - medium rounded - md transition - colors"
  >
  <EyeIcon className="w - 4 h - 4" />
  <span > View</span>
@@ -139,31 +139,31 @@ const YourDataPage: React.FC = () => {}
 
  return (
  <div className="p - 4 md:p - 6 bg - white dark:bg - neutral - 950 min - h - screen">
- <div className="max - w - 4xl mx - auto">
- <div className="flex items - center mb - 8">
+ <div className={"ma}x - w - 4xl mx - auto">
+ <div className={"fle}x items - center mb - 8">
  <ShieldCheckIcon className="w - 8 h - 8 text - sky - 500 dark:text - sky - 400 mr - 3" />
- <h1 className="text - 3xl font - bold text - neutral - 900 dark:text - neutral - 50">
+ <h1 className={"tex}t - 3xl font - bold text - neutral - 900 dark:text - neutral - 50">
  Your Data in YouTube
 // FIXED:  </h1>
 // FIXED:  </div>
 
- <div className="bg - neutral - 50 dark:bg - neutral - 900 rounded - xl p - 6 mb - 8">
- <h2 className="text - xl font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Data Overview</h2>
- <p className="text - neutral - 600 dark:text - neutral - 400 mb - 6">
+ <div className={"b}g - neutral - 50 dark:bg - neutral - 900 rounded - xl p - 6 mb - 8">
+ <h2 className={"tex}t - xl font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Data Overview</h2>
+ <p className={"tex}t - neutral - 600 dark:text - neutral - 400 mb - 6">
  Manage your YouTube activity data, control what's saved, and download your information.
 // FIXED:  </p>
 
- <div className="flex flex - wrap gap - 4">
+ <div className={"fle}x flex - wrap gap - 4">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDownloadData(e)}
-// FIXED:  className="flex items - center space - x - 2 px - 6 py - 3 bg - sky - 500 hover:bg - sky - 600 dark:bg - sky - 600 dark:hover:bg - sky - 500 text - white font - medium rounded - lg transition - colors"
+// FIXED:  className={"fle}x items - center space - x - 2 px - 6 py - 3 bg - sky - 500 hover:bg - sky - 600 dark:bg - sky - 600 dark:hover:bg - sky - 500 text - white font - medium rounded - lg transition - colors"
  >
  <ArrowDownTrayIcon className="w - 5 h - 5" />
  <span > Download Your Data</span>
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => window.open('https://myaccount.google.com / data - and - privacy', '_blank')}
-// FIXED:  className="flex items - center space - x - 2 px - 6 py - 3 bg - neutral - 100 dark:bg - neutral - 800 hover:bg - neutral - 200 dark:hover:bg - neutral - 700 text - neutral - 700 dark:text - neutral - 300 font - medium rounded - lg transition - colors"
+// FIXED:  className={"fle}x items - center space - x - 2 px - 6 py - 3 bg - neutral - 100 dark:bg - neutral - 800 hover:bg - neutral - 200 dark:hover:bg - neutral - 700 text - neutral - 700 dark:text - neutral - 300 font - medium rounded - lg transition - colors"
  >
  <ShieldCheckIcon className="w - 5 h - 5" />
  <span > Google Account Privacy</span>
@@ -171,8 +171,8 @@ const YourDataPage: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="space - y - 6">
- <DataSection
+ <div className={"spac}e - y - 6">
+ <DataSection>
  title="Watch History"
  description="Videos you've watched are saved here to improve your recommendations and help you find videos you've seen before."
  count={watchHistoryCount}
@@ -182,7 +182,7 @@ const YourDataPage: React.FC = () => {}
  loading={loading}
  />
 
- <DataSection
+ <DataSection>
  title="Search History"
  description="Your searches help improve your search suggestions and recommendations."
  count={searchHistoryCount}
@@ -192,7 +192,7 @@ const YourDataPage: React.FC = () => {}
  loading={loading}
  />
 
- <DataSection
+ <DataSection>
  title="Liked Videos"
  description="Videos you've liked are saved here for easy access."
  count={likedVideosCount}
@@ -203,9 +203,9 @@ const YourDataPage: React.FC = () => {}
  />
 // FIXED:  </div>
 
- <div className="mt - 8 p - 6 bg - yellow - 50 dark:bg - yellow - 900 / 20 border border - yellow - 200 dark:border - yellow - 700 / 50 rounded - lg">
- <h3 className="text - lg font - semibold text - yellow - 800 dark:text - yellow - 200 mb - 2">Important Note</h3>
- <p className="text - sm text - yellow - 700 dark:text - yellow - 300">
+ <div className={"m}t - 8 p - 6 bg - yellow - 50 dark:bg - yellow - 900 / 20 border border - yellow - 200 dark:border - yellow - 700 / 50 rounded - lg">
+ <h3 className={"tex}t - lg font - semibold text - yellow - 800 dark:text - yellow - 200 mb - 2">Important Note</h3>
+ <p className={"tex}t - sm text - yellow - 700 dark:text - yellow - 300">
  This is a demo application. In the real YouTube, your data would be managed through your Google Account settings.
  The data shown here is stored locally in your browser and can be cleared at any time.
 // FIXED:  </p>

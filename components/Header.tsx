@@ -25,12 +25,12 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
 
  const content = (
  <>
- {icon && <span className="mr-3.5 w-5 h-5 text-neutral-500 dark:text-neutral-300">{icon}</span>}
+ {icon && <span className={"mr}-3.5 w-5 h-5 text-neutral-500 dark:text-neutral-300">{icon}</span>}
  {children}
  </>  
  );
 
- if (to as any) {
+ if (to) {
  return (
  <Link to={to} onClick={(e: any) => onClick(e)} className={commonClasses} role="menuitem">
  {content}
@@ -38,7 +38,7 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
  );
  }
  return (
-  <button;
+  <button;>
    onClick={onClick}
    className={commonClasses}
    role="menuitem">
@@ -65,14 +65,14 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
 
  if (!isAuthenticated || !user) {
  return (
- <div className="flex items-center space-x-2">
+ <div className={"fle}x items-center space-x-2">
  <Link to="/login">
- <Button;
+ <Button;>
  variant="secondary"
  size="sm"
-className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900/20" >
+className={"text}-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900/20" >
 
- <UserIcon className="w-4 h-4 mr-1" />
+ <UserIcon className={"w}-4 h-4 mr-1" />
  Sign in;
 </Button>
 </Link>
@@ -81,8 +81,8 @@ className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-
  }
 
  return (
- <div className="relative" ref={userMenuRef}>
- <button;
+ <div className={"relative}" ref={userMenuRef}>
+ <button;>
  ref={userMenuButtonRef}
  onClick={toggleUserMenu}
  className={`p-1.5 rounded-full transition-colors ${isUserMenuOpen ? 'bg-neutral-300 dark:bg-neutral-700' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}`}
@@ -93,10 +93,10 @@ className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-
  id="user-menu-button"
   title="Your Account">
   {user.avatar ? (
- <img src={user.avatar} alt="User Avatar" className="w-8 h-8 rounded-full" />
+ <img src={user.avatar} alt="User Avatar" className={"w}-8 h-8 rounded-full" />
  ) : (
- <div className="w-8 h-8 rounded-full bg-gray-400 dark:bg-gray-600 flex items-center justify-center">
- <UserIcon className="w-5 h-5 text-white" />
+ <div className={"w}-8 h-8 rounded-full bg-gray-400 dark:bg-gray-600 flex items-center justify-center">
+ <UserIcon className={"w}-5 h-5 text-white" />
 </div>
  )}
 </button>
@@ -119,20 +119,20 @@ const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
 
  const toggleUserMenu = () => {
  setIsUserMenuOpen(prev => !prev);
- if (isNotificationsPanelOpen as any) {
+ if (isNotificationsPanelOpen) {
 setIsNotificationsPanelOpen(false);
 }
- if (isCreateMenuOpen as any) {
+ if (isCreateMenuOpen) {
 setIsCreateMenuOpen(false);
  }
  };
 
  const toggleCreateMenu = () => {
  setIsCreateMenuOpen(prev => !prev);
- if (isUserMenuOpen as any) {
+ if (isUserMenuOpen) {
 setIsUserMenuOpen(false);
 }
- if (isNotificationsPanelOpen as any) {
+ if (isNotificationsPanelOpen) {
 setIsNotificationsPanelOpen(false);
  }
  };
@@ -184,31 +184,31 @@ setIsNotificationsPanelOpen(false);
  }, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);
 
  return (
- <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
- <div className="flex items-center">
- <button;
+ <header className={"fixe}d top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
+ <div className={"fle}x items-center">
+ <button;>
 onClick={(e: any) => toggleSidebar(e)}
-className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
+className={"p}-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
 aria-label="Toggle sidebar menu"
  title="Menu">
- <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+ <MenuIcon className={"w}-5 h-5 sm:w-6 sm:h-6" />
 </button>
- <Link to="/" className="flex items-center" aria-label="YoutubeX Home">
- <YouTubeLogo className="h-4 sm:h-5 md:h-[22px]" />
- <span className="ml-1 text-base sm:text-lg md:text-xl font-semibold text-black dark:text-white hidden sm:block tracking-tighter relative top-[-1px]">YoutubeX</span>
+ <Link to="/" className={"fle}x items-center" aria-label="YoutubeX Home">
+ <YouTubeLogo className={"h}-4 sm:h-5 md:h-[22px]" />
+ <span className={"ml}-1 text-base sm:text-lg md:text-xl font-semibold text-black dark:text-white hidden sm:block tracking-tighter relative top-[-1px]">YoutubeX</span>
 </Link>
   </div>
 
- <div className="flex-1 flex justify-center px-1 sm:px-2 md:px-4">
+ <div className={"flex}-1 flex justify-center px-1 sm:px-2 md:px-4">
  <SearchBar />
 </div>
 
- <div className="flex items-center space-x-0.5 sm:space-x-1 md:space-x-1.5">
+ <div className={"fle}x items-center space-x-0.5 sm:space-x-1 md:space-x-1.5">
  {/* PWA Offline Indicator */}
- <OfflineIndicator className="hidden md:flex" />
+ <OfflineIndicator className={"hidde}n md:flex" />
 
- <div className="relative">
- <button;
+ <div className={"relative}">
+ <button;>
  ref={createButtonRef}
  onClick={toggleCreateMenu}
 className={`p-2 rounded-full text-neutral-700 dark:text-neutral-100 transition-all duration-150 ease-in-out;
@@ -220,13 +220,13 @@ aria-haspopup="true"
 aria-controls="create-menu"
 id="create-button"
  title="Create">
- <VideoPlusIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+ <VideoPlusIcon className={"w}-5 h-5 sm:w-6 sm:h-6" />
 </button>
  {isCreateMenuOpen && (
- <div;
+ <div;>
  ref={createMenuRef}
 id="create-menu"
-className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/80 rounded-xl shadow-2xl z-[100] py-1.5 animate-fade-in-down-menu"
+className={"absolut}e top-full right-0 mt-2 w-72 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/80 rounded-xl shadow-2xl z-[100] py-1.5 animate-fade-in-down-menu"
  role="menu"
 aria-orientation="vertical"
 aria-labelledby="create-button" >
@@ -237,8 +237,8 @@ aria-labelledby="create-button" >
  window.open('https://studio.youtube.com/channel/community', '_blank'); handleCloseCreateMenu();
 
  }}>Create post</CreateMenuItem>
- <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
- <CreateMenuItem;
+ <hr className={"border}-neutral-200 dark:border-neutral-700/70 my-1" />
+ <CreateMenuItem;>
  icon={<LightBulbIcon />}
  to="/ai-content-spark"
  onClick={handleCloseCreateMenu}
@@ -250,11 +250,11 @@ aria-labelledby="create-button" >
 </div>
 
  {/* Enhanced Notification System */}
- <div className="hidden sm:block">
- <NotificationSystem className="relative" />
+ <div className={"hidde}n sm:block">
+ <NotificationSystem className={"relative}" />
 </div>
 
- <AuthenticatedUserSection;
+ <AuthenticatedUserSection;>
  userMenuRef={userMenuRef}
  userMenuButtonRef={userMenuButtonRef}
  toggleUserMenu={toggleUserMenu}

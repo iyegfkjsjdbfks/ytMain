@@ -89,7 +89,7 @@ return;
  window.addEventListener('load', ( as EventListener) => {
  const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
 
- if (navigation as any) {
+ if (navigation) {
  this.recordMetric({
  name: 'TTFB',
  value: navigation.responseStart - navigation.requestStart,
@@ -180,15 +180,15 @@ return;
  // In a real application, you would send this to your analytics service
  // For now, we'll just log to console in development
  if (import.meta.env.DEV) {
- (console as any).group('Performance Metrics');
+ (console).group('Performance Metrics');
  this.metrics.forEach((metric) => {
- (console as any).log(`${metric.name}: ${metric.value}ms`);
+ (console).log(`${metric.name}: ${metric.value}ms`);
  });
- (console as any).groupEnd();
+ (console).groupEnd();
  }
 
  // Example: Send to analytics service
- // await (fetch as any)('/api / analytics / performance', {
+ // await (fetch)('/api / analytics / performance', {
  // method: 'POST',
  // headers: { 'Content - Type': 'application / json' },
  // body: JSON.stringify({ metrics: this.metrics })
@@ -196,7 +196,7 @@ return;
 
  this.clearMetrics();
  } catch (error) {
- (console as any).error('Failed to send performance metrics:', error);
+ (console).error('Failed to send performance metrics:', error);
  }
  private observePerformanceEntry(entryType, callback: (entry) => void): void {
  try {
@@ -205,7 +205,7 @@ return;
  });
  observer.observe({ entryTypes: [entryType] });
  } catch (error) {
- (console as any).warn(`Failed to observe ${entryType}:`, error);
+ (console).warn(`Failed to observe ${entryType}:`, error);
  }
  private recordMetric(metric: PerformanceMetric): void {
  this.metrics.push(metric);

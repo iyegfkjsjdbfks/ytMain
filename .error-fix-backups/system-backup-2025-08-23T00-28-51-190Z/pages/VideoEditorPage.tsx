@@ -106,7 +106,7 @@ const VideoEditorPage: React.FC = () => {
  const handlePlayPause = () => {
  setIsPlaying(!isPlaying);
  if (videoRef.current) {
- if (isPlaying as any) {
+ if (isPlaying) {
  videoRef.current.pause();
  } else {
  videoRef.current.play();
@@ -173,7 +173,7 @@ return;
  editHistory,
  lastSaved: new Date().toISOString() };
 
- (localStorage as any).setItem(`youtubeCloneProject_${currentProject.id}`, JSON.stringify(projectData));
+ (localStorage).setItem(`youtubeCloneProject_${currentProject.id}`, JSON.stringify(projectData));
 
  // Show save confirmation
  const notification = document.createElement('div');
@@ -195,7 +195,7 @@ return;
  if (splitClips.length > 0 && splitClips[0]) {
  const originalId = splitClips[0].id.split('_split_')[0];
  const originalClip = clips.find(c => c.id === originalId);
- if (originalClip as any) {
+ if (originalClip) {
  setClips(prev => prev.filter((c) => !c.id.includes('_split_') && c.id !== originalId));
  }
  }
@@ -245,7 +245,7 @@ return;
  };
 
  const getClipColor = (type: TimelineClip['type']): string => {
- switch (type as any) {
+ switch (type) {
  case 'video': return 'bg-blue-500';
  case 'audio': return 'bg-green-500';
  case 'text': return 'bg-purple-500';
@@ -254,7 +254,7 @@ return;
  };
 
  const getTrackLabel = (track): string => {
- switch (track as any) {
+ switch (track) {
  case 0: return 'Video';
  case 1: return 'Audio';
  case 2: return 'Text/Graphics';
@@ -263,7 +263,7 @@ return;
 
  useEffect(() => {
  let interval: ReturnType<typeof setTimeout>;
- if (isPlaying as any) {
+ if (isPlaying) {
  interval = setInterval((() => {
  setCurrentTime(prev => {
  const newTime = prev + 0.1;
@@ -279,46 +279,46 @@ return;
  }, [isPlaying, currentProject.duration]);
 
  return (
- <div className="min-h-screen bg-gray-900 text-white">
+ <div className={"min}-h-screen bg-gray-900 text-white">
  {/* Header */}
- <div className="bg-gray-800 border-b border-gray-700">
- <div className="max-w-full px-4 py-3">
- <div className="flex justify-between items-center">
- <div className="flex items-center space-x-4">
- <h1 className="text-xl font-bold">{currentProject.name}</h1>
- <span className="text-sm text-gray-400">
+ <div className={"bg}-gray-800 border-b border-gray-700">
+ <div className={"max}-w-full px-4 py-3">
+ <div className={"fle}x justify-between items-center">
+ <div className={"fle}x items-center space-x-4">
+ <h1 className={"text}-xl font-bold">{currentProject.name}</h1>
+ <span className={"text}-sm text-gray-400">
  {currentProject.resolution} • {currentProject.fps}fps • {formatTime(currentProject.duration)}
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex items-center space-x-2">
+ <div className={"fle}x items-center space-x-2">
  <button />
 // FIXED:  onClick={(e) => handleUndo(e)}
 // FIXED:  disabled={editHistory.length === 0}
-// FIXED:  className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
+// FIXED:  className={"fle}x items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
  >
- <ArrowUturnLeftIcon className="w-4 h-4 mr-1" />
+ <ArrowUturnLeftIcon className={"w}-4 h-4 mr-1" />
  Undo
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e) => handleRedo(e)}
-// FIXED:  className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600"
+// FIXED:  className={"fle}x items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600"
  >
- <ArrowUturnRightIcon className="w-4 h-4 mr-1" />
+ <ArrowUturnRightIcon className={"w}-4 h-4 mr-1" />
  Redo
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e) => handleSaveProject(e)}
-// FIXED:  className="flex items-center px-3 py-2 text-sm bg-blue-600 rounded hover:bg-blue-700"
+// FIXED:  className={"fle}x items-center px-3 py-2 text-sm bg-blue-600 rounded hover:bg-blue-700"
  >
- <DocumentIcon className="w-4 h-4 mr-1" />
+ <DocumentIcon className={"w}-4 h-4 mr-1" />
  Save
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e) => handleExport(e)}
 // FIXED:  disabled={isExporting}
-// FIXED:  className="flex items-center px-4 py-2 text-sm bg-red-600 rounded hover:bg-red-700 disabled:opacity-50"
+// FIXED:  className={"fle}x items-center px-4 py-2 text-sm bg-red-600 rounded hover:bg-red-700 disabled:opacity-50"
  >
- <DocumentArrowDownIcon className="w-4 h-4 mr-2" />
+ <DocumentArrowDownIcon className={"w}-4 h-4 mr-2" />
  {isExporting ? `Exporting... ${exportProgress}%` : 'Export'}
 // FIXED:  </button>
 // FIXED:  </div>
@@ -326,47 +326,46 @@ return;
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="flex h-screen">
+ <div className={"fle}x h-screen">
  {/* Main Editor Area */}
- <div className="flex-1 flex flex-col">
+ <div className={"flex}-1 flex flex-col">
  {/* Video Preview */}
- <div className="flex-1 bg-black flex items-center justify-center p-4">
- <div className="relative max-w-4xl w-full">
- <video
+ <div className={"flex}-1 bg-black flex items-center justify-center p-4">
+ <div className={"relativ}e max-w-4xl w-full">
+ <video>
  ref={videoRef}
-// FIXED:  className="w-full h-auto rounded-lg"
+// FIXED:  className={"w}-full h-auto rounded-lg"
  poster={currentProject.thumbnail}
- controls={false} />
- >
+ controls={false}/>
  <source src="/api/placeholder/video" type="video/mp4" />
 // FIXED:  </video>
 
  {/* Video Controls Overlay */}
- <div className="absolute bottom-4 left-4 right-4 bg-black bg-opacity-50 rounded-lg p-4">
- <div className="flex items-center justify-between">
- <div className="flex items-center space-x-4">
+ <div className={"absolut}e bottom-4 left-4 right-4 bg-black bg-opacity-50 rounded-lg p-4">
+ <div className={"fle}x items-center justify-between">
+ <div className={"fle}x items-center space-x-4">
  <button />
 // FIXED:  onClick={(e) => handlePlayPause(e)}
-// FIXED:  className="flex items-center justify-center w-10 h-10 bg-red-600 rounded-full hover:bg-red-700"
+// FIXED:  className={"fle}x items-center justify-center w-10 h-10 bg-red-600 rounded-full hover:bg-red-700"
  >
  {isPlaying ? (
- <PauseIcon className="w-5 h-5" />
+ <PauseIcon className={"w}-5 h-5" />
  ) : (
- <PlayIcon className="w-5 h-5 ml-0.5" />
+ <PlayIcon className={"w}-5 h-5 ml-0.5" />
  )}
 // FIXED:  </button>
- <span className="text-sm font-mono">
+ <span className={"text}-sm font-mono">
  {formatTime(currentTime)} / {formatTime(currentProject.duration)}
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex items-center space-x-2">
- <SpeakerWaveIcon className="w-5 h-5" />
- <input
+ <div className={"fle}x items-center space-x-2">
+ <SpeakerWaveIcon className={"w}-5 h-5" />
+ <input>
 // FIXED:  type="range"
  min="0"
  max="100"
  defaultValue="80"
-// FIXED:  className="w-20" />
+// FIXED:  className={"w}-20" />
  />
 // FIXED:  </div>
 // FIXED:  </div>
@@ -375,31 +374,31 @@ return;
 // FIXED:  </div>
 
  {/* Timeline */}
- <div className="bg-gray-800 border-t border-gray-700 p-4">
- <div className="mb-4 flex items-center justify-between">
- <div className="flex items-center space-x-4">
- <span className="text-sm text-gray-400">Timeline</span>
- <div className="flex items-center space-x-2">
+ <div className={"bg}-gray-800 border-t border-gray-700 p-4">
+ <div className={"mb}-4 flex items-center justify-between">
+ <div className={"fle}x items-center space-x-4">
+ <span className={"text}-sm text-gray-400">Timeline</span>
+ <div className={"fle}x items-center space-x-2">
  <button />
 // FIXED:  onClick={() => setZoom(Math.max(0.5, zoom - 0.25))}
-// FIXED:  className="px-2 py-1 text-xs bg-gray-700 rounded hover:bg-gray-600"
+// FIXED:  className={"px}-2 py-1 text-xs bg-gray-700 rounded hover:bg-gray-600"
  >
  -
 // FIXED:  </button>
- <span className="text-xs text-gray-400">{Math.round(zoom * 100)}%</span>
+ <span className={"text}-xs text-gray-400">{Math.round(zoom * 100)}%</span>
  <button />
 // FIXED:  onClick={() => setZoom(Math.min(3, zoom + 0.25))}
-// FIXED:  className="px-2 py-1 text-xs bg-gray-700 rounded hover:bg-gray-600"
+// FIXED:  className={"px}-2 py-1 text-xs bg-gray-700 rounded hover:bg-gray-600"
  >
  +
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className="flex space-x-2">
+ <div className={"fle}x space-x-2">
  {['timeline', 'effects', 'audio', 'text'].map((tab) => (
- <button
+ <button>
  key={tab} />
-// FIXED:  onClick={() => setActiveTab(tab as any)}
+// FIXED:  onClick={() => setActiveTab(tab)}
 // FIXED:  className={`px-3 py-1 text-sm rounded capitalize ${
  activeTab === tab
  ? 'bg-red-600 text-white'
@@ -413,49 +412,47 @@ return;
 // FIXED:  </div>
 
  {/* Timeline Tracks */}
- <div className="relative">
+ <div className={"relative}">
  {/* Time Ruler */}
- <div className="flex items-center mb-2">
- <div className="w-20 text-xs text-gray-400">Time</div>
- <div
+ <div className={"fle}x items-center mb-2">
+ <div className={"w}-20 text-xs text-gray-400">Time</div>
+ <div>
  ref={timelineRef}
-// FIXED:  className="flex-1 h-6 bg-gray-700 rounded relative cursor-pointer" />
+// FIXED:  className={"flex}-1 h-6 bg-gray-700 rounded relative cursor-pointer" />
 // FIXED:  onClick={(e) => handleTimelineClick(e)}
  >
  {/* Time markers */}
  {Array.from({ length: Math.ceil(currentProject.duration / 10) + 1 }, (_, i) => (
- <div
+ <div>
  key={i}
-// FIXED:  className="absolute top-0 bottom-0 border-l border-gray-600"
-// FIXED:  style={{ left: `${(i * 10 / currentProject.duration) * 100}%` } />
- >
- <span className="absolute -top-5 text-xs text-gray-400 transform -translate-x-1/2">
+// FIXED:  className={"absolut}e top-0 bottom-0 border-l border-gray-600"
+// FIXED:  style={{ left: `${(i * 10 / currentProject.duration) * 100}%` }/>
+ <span className={"absolut}e -top-5 text-xs text-gray-400 transform -translate-x-1/2">
  {formatTime(i * 10)}
 // FIXED:  </span>
 // FIXED:  </div>
  ))}
 
  {/* Playhead */}
- <div
-// FIXED:  className="absolute top-0 bottom-0 w-0.5 bg-red-500 z-10"
-// FIXED:  style={{ left: `${(currentTime / currentProject.duration) * 100}%` } />
- >
- <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full" />
+ <div>
+// FIXED:  className={"absolut}e top-0 bottom-0 w-0.5 bg-red-500 z-10"
+// FIXED:  style={{ left: `${(currentTime / currentProject.duration) * 100}%` }/>
+ <div className={"absolut}e -top-2 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full" />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Tracks */}
  {[0, 1, 2].map((trackIndex) => (
- <div key={trackIndex} className="flex items-center mb-2">
- <div className="w-20 text-xs text-gray-400 pr-2">
+ <div key={trackIndex} className={"fle}x items-center mb-2">
+ <div className={"w}-20 text-xs text-gray-400 pr-2">
  {getTrackLabel(trackIndex)}
 // FIXED:  </div>
- <div className="flex-1 h-12 bg-gray-700 rounded relative">
+ <div className={"flex}-1 h-12 bg-gray-700 rounded relative">
  {clips
  .filter((clip) => clip.track === trackIndex)
  .map((clip) => (
- <div
+ <div>
  key={clip.id}
 // FIXED:  className={`absolute top-1 bottom-1 rounded cursor-pointer border-2 ${
  selectedClip === clip.id ? 'border-white' : 'border-transparent'
@@ -466,15 +463,15 @@ return;
 // FIXED:  onClick={() => handleClipSelect(clip.id)}
  onDoubleClick={() => handleClipSplit(clip.id, currentTime)}
  >
- <div className="p-1 h-full flex items-center">
+ <div className={"p}-1 h-full flex items-center">
  {clip.thumbnail && (
- <img
+ <img>
 // FIXED:  src={clip.thumbnail}
 // FIXED:  alt={clip.name}
-// FIXED:  className="w-6 h-6 rounded mr-1 object-cover" />
+// FIXED:  className={"w}-6 h-6 rounded mr-1 object-cover" />
  />
  )}
- <span className="text-xs font-medium truncate">
+ <span className={"text}-xs font-medium truncate">
  {clip.name}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -488,13 +485,13 @@ return;
 // FIXED:  </div>
 
  {/* Right Sidebar */}
- <div className="w-80 bg-gray-800 border-l border-gray-700">
+ <div className={"w}-80 bg-gray-800 border-l border-gray-700">
  {/* Properties Panel */}
- <div className="p-4">
- <h3 className="text-lg font-semibold mb-4">Properties</h3>
+ <div className={"p}-4">
+ <h3 className={"text}-lg font-semibold mb-4">Properties</h3>
 
  {selectedClip ? (
- <div className="space-y-4">
+ <div className={"space}-y-4">
  {(() => {
  const clip = clips.find(c => c.id === selectedClip);
  if (!clip) {
@@ -504,47 +501,47 @@ return null;
  return (
  <>
  <div>
- <div className="block text-sm text-gray-400 mb-1">Clip Name</div>
- <input
+ <div className={"bloc}k text-sm text-gray-400 mb-1">Clip Name</div>
+ <input>
 // FIXED:  type="text"
 // FIXED:  value={clip.name}
-// FIXED:  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+// FIXED:  className={"w}-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
  readOnly />
  />
 // FIXED:  </div>
 
  <div>
- <div className="block text-sm text-gray-400 mb-1">Duration</div>
- <input
+ <div className={"bloc}k text-sm text-gray-400 mb-1">Duration</div>
+ <input>
 // FIXED:  type="text"
 // FIXED:  value={formatTime(clip.duration)}
-// FIXED:  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+// FIXED:  className={"w}-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
  readOnly />
  />
 // FIXED:  </div>
 
  {clip.volume !== undefined && (
  <div>
- <div className="block text-sm text-gray-400 mb-1">,
+ <div className={"bloc}k text-sm text-gray-400 mb-1">,
  Volume: {clip.volume}%
 // FIXED:  </div>
- <input
+ <input>
 // FIXED:  type="range"
  min="0"
  max="100"
 // FIXED:  value={clip.volume} />
 // FIXED:  onChange={(e) => handleVolumeChange(clip.id, parseInt(e.target.value, 10))}
-// FIXED:  className="w-full"
+// FIXED:  className={"w}-full"
  />
 // FIXED:  </div>
  )}
 
- <div className="flex space-x-2">
+ <div className={"fle}x space-x-2">
  <button />
 // FIXED:  onClick={() => handleClipSplit(clip.id, currentTime)}
-// FIXED:  className="flex-1 flex items-center justify-center px-3 py-2 bg-blue-600 rounded hover:bg-blue-700"
+// FIXED:  className={"flex}-1 flex items-center justify-center px-3 py-2 bg-blue-600 rounded hover:bg-blue-700"
  >
- <ScissorsIcon className="w-4 h-4 mr-1" />
+ <ScissorsIcon className={"w}-4 h-4 mr-1" />
  Split
 // FIXED:  </button>
  <button />
@@ -553,10 +550,10 @@ return null;
  // setClips(clips.filter((c) => c.id !== clip.id));
 
  }
-// FIXED:  className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
+// FIXED:  className={"flex}-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
  title="Delete clip"
  >
- <XMarkIcon className="w-4 h-4 mr-1" />
+ <XMarkIcon className={"w}-4 h-4 mr-1" />
  Delete
 // FIXED:  </button>
 // FIXED:  </div>
@@ -565,45 +562,45 @@ return null;
  })()}
 // FIXED:  </div>
  ) : (
- <p className="text-gray-400 text-sm">Select a clip to edit its properties</p>
+ <p className={"text}-gray-400 text-sm">Select a clip to edit its properties</p>
  )}
 // FIXED:  </div>
 
  {/* Edit History */}
- <div className="border-t border-gray-700 p-4">
- <h3 className="text-lg font-semibold mb-4">Edit History</h3>
- <div className="space-y-2 max-h-40 overflow-y-auto">
+ <div className={"border}-t border-gray-700 p-4">
+ <h3 className={"text}-lg font-semibold mb-4">Edit History</h3>
+ <div className={"space}-y-2 max-h-40 overflow-y-auto">
  {editHistory.slice(-10).reverse().map((action, _index) => (
- <div key={action.timestamp} className="text-xs text-gray-400 p-2 bg-gray-700 rounded">
- <div className="font-medium capitalize">{action.type}</div>
+ <div key={action.timestamp} className={"text}-xs text-gray-400 p-2 bg-gray-700 rounded">
+ <div className={"font}-medium capitalize">{action.type}</div>
 <div>{action.description}</div>
- <div className="text-gray-500">
+ <div className={"text}-gray-500">
  {new Date(action.timestamp).toLocaleTimeString()}
 // FIXED:  </div>
 // FIXED:  </div>
  ))}
  {editHistory.length === 0 && (
- <p className="text-gray-500 text-sm">No edits yet</p>
+ <p className={"text}-gray-500 text-sm">No edits yet</p>
  )}
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Export Progress */}
  {isExporting && (
- <div className="border-t border-gray-700 p-4">
- <h3 className="text-lg font-semibold mb-4">Exporting</h3>
- <div className="space-y-2">
- <div className="flex justify-between text-sm">
+ <div className={"border}-t border-gray-700 p-4">
+ <h3 className={"text}-lg font-semibold mb-4">Exporting</h3>
+ <div className={"space}-y-2">
+ <div className={"fle}x justify-between text-sm">
  <span>Progress</span>
  <span>{exportProgress}%</span>
 // FIXED:  </div>
- <div className="w-full bg-gray-700 rounded-full h-2">
- <div
-// FIXED:  className="bg-red-600 h-2 rounded-full transition-all duration-300"
+ <div className={"w}-full bg-gray-700 rounded-full h-2">
+ <div>
+// FIXED:  className={"bg}-red-600 h-2 rounded-full transition-all duration-300"
 // FIXED:  style={{ width: `${exportProgress}%` } />
  />
 // FIXED:  </div>
-<p className="text-xs text-gray-400">
+<p className={"text}-xs text-gray-400">
  Estimated time remaining: {Math.ceil((100 - exportProgress) / 2)} seconds
 // FIXED:  </p>
 // FIXED:  </div>

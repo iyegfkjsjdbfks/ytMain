@@ -37,7 +37,7 @@ export function useAsyncData<T>(
  asyncFunctionRef.current = asyncFunction;
  });
 
- const fetchData = useCallback(async (): Promise<void> => {;
+ const fetchData = useCallback(async (): Promise<void> => {
  setLoading(true);
  setError(null);
 

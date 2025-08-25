@@ -155,7 +155,7 @@ export function useCreateComment(): any {
  onSuccess: (_, { videoId, parentId }) => {
  // Invalidate relevant caches
  queryCache.invalidate(`comments:video:${videoId}`);
- if (parentId as any) {
+ if (parentId) {
  queryCache.invalidate(`comments:replies:${parentId}`);
  queryCache.invalidate(`comment:thread:${parentId}`);
  }
@@ -356,8 +356,8 @@ export function useCommentManagement(videoId): any {
  delete: deleteComment.mutate,
  moderate: moderateComment.mutate },
  refetch: () => {
- comments.re(fetch as any)();
- stats.re(fetch as any)();
+ comments.re(fetch)();
+ stats.re(fetch)();
  };
 }
 

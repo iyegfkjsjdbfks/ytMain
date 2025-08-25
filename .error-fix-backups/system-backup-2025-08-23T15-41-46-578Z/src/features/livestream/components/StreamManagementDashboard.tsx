@@ -348,7 +348,7 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
 
  const handleBulkAction = async (action): Promise<any> < any> => {}
  try {}
- switch (action as any) {}
+ switch (action) {}
  case 'delete':
  if (
  confirm(
@@ -374,7 +374,7 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  };
 
  const getStatusIcon = (status: LiveStream['status']) => {}
- switch (status as any) {}
+ switch (status) {}
  case 'live':
  return <CheckCircleIcon className='h - 5 w - 5 text - green - 500' />;
  case 'scheduled':
@@ -387,7 +387,7 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  };
 
  const getStatusColor = (status: LiveStream['status']) => {}
- switch (status as any) {}
+ switch (status) {}
  case 'live':
  return 'bg - green - 100 text - green - 800';
  case 'scheduled':
@@ -407,7 +407,7 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  });
 
  const sortedStreams = [...filteredStreams].sort((a, b) => {}
- switch (sortBy as any) {}
+ switch (sortBy) {}
  case 'date':
  const dateA = a.actualStartTime || a.scheduledStartTime || new Date(0);
  const dateB = b.actualStartTime || b.scheduledStartTime || new Date(0);
@@ -441,12 +441,12 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  return `${minutes}m`;
  };
 
- if (loading as any) {}
+ if (loading) {}
  return (
  <div className={`p - 6 ${className}`}>
- <div className='animate - pulse space - y - 4'>
+ <div className={'animat}e - pulse space - y - 4'>
  <div className='h - 8 bg - gray - 200 rounded w - 1/3' />
- <div className='space - y - 3'>
+ <div className={'spac}e - y - 3'>
  {[...Array<any>(3)].map((_, i) => (}
  <div key={i} className='h - 20 bg - gray - 200 rounded' />
  ))}
@@ -459,22 +459,22 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  return (
  <div className={`p - 6 space - y - 6 ${className}`}>
  {/* Header */}
- <div className='flex items - center justify - between'>
- <h2 className='text - 2xl font - bold text - gray - 900 dark:text - white'>
+ <div className={'fle}x items - center justify - between'>
+ <h2 className={'tex}t - 2xl font - bold text - gray - 900 dark:text - white'>
  Stream Management
 // FIXED:  </h2>
- <button className='px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'>
+ <button className={'p}x - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'>
  Create New Stream
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Filters and Controls */}
- <div className='flex flex - col sm:flex - row sm:items - center sm:justify - between space - y - 4 sm:space - y - 0'>
- <div className='flex items - center space - x - 4'>
- <select
+ <div className={'fle}x flex - col sm:flex - row sm:items - center sm:justify - between space - y - 4 sm:space - y - 0'>
+ <div className={'fle}x items - center space - x - 4'>
+ <select>
 // FIXED:  value={filter} />
 // FIXED:  onChange={e => setFilter(e.target.value as any: React.ChangeEvent)}
-// FIXED:  className='px - 3 py - 2 border border - gray - 300 rounded - md text - sm focus:outline - none focus:ring - 2 focus:ring - blue - 500'
+// FIXED:  className={'p}x - 3 py - 2 border border - gray - 300 rounded - md text - sm focus:outline - none focus:ring - 2 focus:ring - blue - 500'
  >
  <option value='all'>All Streams</option>
  <option value='live'>Live</option>
@@ -482,10 +482,10 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  <option value='ended'>Ended</option>
 // FIXED:  </select>
 
- <select
+ <select>
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={e => setSortBy(e.target.value as any: React.ChangeEvent)}
-// FIXED:  className='px - 3 py - 2 border border - gray - 300 rounded - md text - sm focus:outline - none focus:ring - 2 focus:ring - blue - 500'
+// FIXED:  className={'p}x - 3 py - 2 border border - gray - 300 rounded - md text - sm focus:outline - none focus:ring - 2 focus:ring - blue - 500'
  >
  <option value='date'>Sort by Date</option>
  <option value='viewers'>Sort by Viewers</option>
@@ -495,19 +495,19 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
 // FIXED:  </div>
 
  {selectedStreams.length > 0 && (}
- <div className='flex items - center space - x - 2'>
- <span className='text - sm text - gray - 600'>
+ <div className={'fle}x items - center space - x - 2'>
+ <span className={'tex}t - sm text - gray - 600'>
  {selectedStreams.length} selected
 // FIXED:  </span>
  <button />
 // FIXED:  onClick={() => handleBulkAction('archive': React.MouseEvent)}
-// FIXED:  className='px - 3 py - 1 bg - gray - 600 text - white rounded text - sm hover:bg - gray - 700'
+// FIXED:  className={'p}x - 3 py - 1 bg - gray - 600 text - white rounded text - sm hover:bg - gray - 700'
  >
  Archive
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction('delete': React.MouseEvent)}
-// FIXED:  className='px - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700'
+// FIXED:  className={'p}x - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700'
  >
  Delete
 // FIXED:  </button>
@@ -516,15 +516,14 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
 // FIXED:  </div>
 
  {/* Streams List */}
- <div className='space - y - 4'>
+ <div className={'spac}e - y - 4'>
  {sortedStreams.map((stream) => (}
- <div
+ <div>
  key={stream.id}
-// FIXED:  className='bg - white dark:bg - gray - 800 rounded - lg shadow p - 6 hover:shadow - md transition - shadow' />
- >
- <div className='flex items - start space - x - 4'>
+// FIXED:  className={'b}g - white dark:bg - gray - 800 rounded - lg shadow p - 6 hover:shadow - md transition - shadow'/>
+ <div className={'fle}x items - start space - x - 4'>
  {/* Checkbox */}
- <input
+ <input>
 // FIXED:  type='checkbox'
 // FIXED:  checked={selectedStreams.includes(stream.id)} />
 // FIXED:  onChange={(e: React.ChangeEvent) => {}
@@ -536,35 +535,34 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  );
  }
  }
-// FIXED:  className='mt - 1 h - 4 w - 4 text - blue - 600 focus:ring - blue - 500 border - gray - 300 rounded'
+// FIXED:  className={'m}t - 1 h - 4 w - 4 text - blue - 600 focus:ring - blue - 500 border - gray - 300 rounded'
  />
 
  {/* Thumbnail */}
- <img
+ <img>
 // FIXED:  src={stream.thumbnailUrl}
 // FIXED:  alt={stream.title}
 // FIXED:  className='w - 24 h - 14 object - cover rounded' />
  />
 
  {/* Stream Info */}
- <div className='flex - 1 min - w - 0'>
- <div className='flex items - center space - x - 2 mb - 2'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white truncate'>
+ <div className={'fle}x - 1 min - w - 0'>
+ <div className={'fle}x items - center space - x - 2 mb - 2'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white truncate'>
  {stream.title}
 // FIXED:  </h3>
- <div
-// FIXED:  className={`inline - flex items - center px - 2 py - 1 rounded - full text - xs font - medium ${getStatusColor(stream.status)}`} />
- >
+ <div>
+// FIXED:  className={`inline - flex items - center px - 2 py - 1 rounded - full text - xs font - medium ${getStatusColor(stream.status)}`}/>
  {getStatusIcon(stream.status)}
- <span className='ml - 1 capitalize'>{stream.status}</span>
+ <span className={'m}l - 1 capitalize'>{stream.status}</span>
 // FIXED:  </div>
 // FIXED:  </div>
-<p className='text - sm text - gray - 600 dark:text - gray - 400 mb - 3 line - clamp - 2'>
+<p className={'tex}t - sm text - gray - 600 dark:text - gray - 400 mb - 3 line - clamp - 2'>
  {stream.description}
 // FIXED:  </p>
 
- <div className='flex items - center space - x - 6 text - sm text - gray - 500'>
- <div className='flex items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 6 text - sm text - gray - 500'>
+ <div className={'fle}x items - center space - x - 1'>
  <EyeIcon className='h - 4 w - 4' />
  <span>
  {formatNumber(stream.stats.peakViewers)} peak viewers
@@ -572,21 +570,21 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
 // FIXED:  </div>
 
  {stream.stats.duration > 0 && (}
- <div className='flex items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 1'>
  <ClockIcon className='h - 4 w - 4' />
  <span>{formatDuration(stream.stats.duration)}</span>
 // FIXED:  </div>
  )}
 
  {stream.monetization.totalRevenue > 0 && (}
- <div className='flex items - center space - x - 1'>
- <span className='text - green - 600 font - medium'>
+ <div className={'fle}x items - center space - x - 1'>
+ <span className={'tex}t - green - 600 font - medium'>
  ${stream.monetization.totalRevenue.toFixed(2)}
 // FIXED:  </span>
 // FIXED:  </div>
  )}
 
- <div className='flex items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 1'>
  <CalendarIcon className='h - 4 w - 4' />
  <span>
  {stream.actualStartTime}
@@ -599,11 +597,11 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
 // FIXED:  </div>
 
  {/* Actions */}
- <div className='flex items - center space - x - 2'>
+ <div className={'fle}x items - center space - x - 2'>
  {getStreamActions(stream)}
  .slice(0, 3)
  .map((action) => (
- <button
+ <button>
  key={action.id} />
 // FIXED:  onClick={() => handleStreamAction(stream, action: React.MouseEvent)}
 // FIXED:  disabled={action.disabled}
@@ -615,7 +613,7 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
  ))}
 
  {getStreamActions(stream).length > 3 && (}
- <div className='relative'>
+ <div className={'relative}'>
  <button className='p - 2 rounded - lg hover:bg - gray - 100 dark:hover:bg - gray - 700 text - gray - 600'>
  <Cog6ToothIcon className='h - 4 w - 4' />
 // FIXED:  </button>
@@ -628,17 +626,17 @@ const StreamManagementDashboard: React.FC < StreamManagementDashboardProps> = ({
 // FIXED:  </div>
 
  {sortedStreams.length === 0 && (}
- <div className='text - center py - 12'>
+ <div className={'tex}t - center py - 12'>
  <VideoCameraIcon className='h - 12 w - 12 text - gray - 400 mx - auto mb - 4' />
- <h3 className='text - lg font - medium text - gray - 900 dark:text - white mb - 2'>
+ <h3 className={'tex}t - lg font - medium text - gray - 900 dark:text - white mb - 2'>
  No streams found
 // FIXED:  </h3>
- <p className='text - gray - 600 dark:text - gray - 400 mb - 4'>
+ <p className={'tex}t - gray - 600 dark:text - gray - 400 mb - 4'>
  {filter === 'all'}
  ? "You haven't created any streams yet."
  : `No ${filter} streams found.`}
 // FIXED:  </p>
- <button className='px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'>
+ <button className={'p}x - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'>
  Create Your First Stream
 // FIXED:  </button>
 // FIXED:  </div>

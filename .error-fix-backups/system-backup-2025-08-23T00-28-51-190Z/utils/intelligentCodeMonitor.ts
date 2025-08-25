@@ -136,7 +136,7 @@ return;
 }
 
  this.isMonitoring = true;
- (console as any).log('🔍 Starting intelligent code quality monitoring...');
+ (console).log('🔍 Starting intelligent code quality monitoring...');
 
  // Initial analysis
  this.performAnalysis();
@@ -161,7 +161,7 @@ return;
  this.monitoringInterval = null;
  }
 
- (console as any).log('⏹️ Stopped code quality monitoring');
+ (console).log('⏹️ Stopped code quality monitoring');
  }
 
  /**
@@ -176,7 +176,7 @@ return;
 return;
 } // 2 minutes
 
- (console as any).log('🔍 Performing code quality analysis...');
+ (console).log('🔍 Performing code quality analysis...');
 
  // Get current _metrics
  const _metrics = await this.collectCodeMetrics();
@@ -187,7 +187,7 @@ return;
  const improvements: string[] = [];
  const regressions: string[] = [];
 
- if (previousTrend as any) {
+ if (previousTrend) {
  // Compare with previous _metrics
  Object.entries(_metrics).forEach(([key, value]) => {
  const previousValue = previousTrend._metrics[key as keyof CodeMetrics];
@@ -225,19 +225,19 @@ return;
 
  // Report significant changes
  if (regressions.length > 0) {
- (console as any).warn('⚠️ Code quality regressions detected:', regressions);
+ (console).warn('⚠️ Code quality regressions detected:', regressions);
  advancedAPM.recordMetric('code-quality-regression', regressions.length);
  }
 
  if (improvements.length > 0) {
- (console as any).log('✅ Code quality improvements:', improvements);
+ (console).log('✅ Code quality improvements:', improvements);
  advancedAPM.recordMetric('code-quality-improvement', improvements.length);
  }
 
  this.lastAnalysis = now;
 
  } catch (error) {
- (console as any).error('Failed to perform code analysis:', error);
+ (console).error('Failed to perform code analysis:', error);
  }
  /**
  * Collect comprehensive code _metrics
@@ -260,7 +260,7 @@ return;
 
  return _metrics;
  } catch (error) {
- (console as any).error('Failed to collect code _metrics:', error);
+ (console).error('Failed to collect code _metrics:', error);
 
  // Return default _metrics on error
  return {
@@ -281,7 +281,7 @@ return;
 
  // Add some trend based on previous values
  const previousTrend = this.trends[this.trends.length - 1];
- if (previousTrend as any) {
+ if (previousTrend) {
  const previousValue = previousTrend._metrics[type as keyof CodeMetrics];
  // Small random walk
  const change = (Math.random() * 0.5) * 2; // -1 to 1
@@ -532,19 +532,19 @@ return;
  }
  });
 
- if (failed as any) {
+ if (failed) {
  failedGates.push(gate.name);
 
  if (gate.blocking) {
- (console as any).error(`🚫 Quality gate failed: ${gate.name}`);
+ (console).error(`🚫 Quality gate failed: ${gate.name}`);
  advancedAPM.recordMetric('quality-gate-failure', 1, { gate: gate.name });
  } else {
- (console as any).warn(`⚠️ Quality gate warning: ${gate.name}`);
+ (console).warn(`⚠️ Quality gate warning: ${gate.name}`);
  }
  });
 
  if (failedGates.length === 0) {
- (console as any).log('✅ All quality gates passed');
+ (console).log('✅ All quality gates passed');
  }
  /**
  * Get current trends
@@ -598,15 +598,15 @@ return;
  const automatableOpportunities = this.opportunities.filter((op) => opportunityIds.includes(op.id) && op.automatable
  );
 
- (console as any).log(`🔧 Auto-implementing ${automatableOpportunities.length} refactoring opportunities...`);
+ (console).log(`🔧 Auto-implementing ${automatableOpportunities.length} refactoring opportunities...`);
 
  for (const opportunity of automatableOpportunities) {
  try {
  // In a real implementation, this would apply the actual refactoring
- (console as any).log(`✅ Applied refactoring: ${opportunity.description}`);
+ (console).log(`✅ Applied refactoring: ${opportunity.description}`);
  advancedAPM.recordMetric('auto-refactoring-applied', 1, { type: opportunity.type });
  } catch (error) {
- (console as any).error(`❌ Failed to apply refactoring: ${opportunity.description}`, error);
+ (console).error(`❌ Failed to apply refactoring: ${opportunity.description}`, error);
  }
  }
 
@@ -657,7 +657,7 @@ export const intelligentCodeMonitor = new IntelligentCodeMonitor();
 
 // Auto-start in development mode
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
- (console as any).log('🚀 Intelligent Code Monitor initialized');
+ (console).log('🚀 Intelligent Code Monitor initialized');
 }
 
 export default intelligentCodeMonitor;

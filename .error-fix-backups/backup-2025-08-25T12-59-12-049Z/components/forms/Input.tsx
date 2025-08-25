@@ -22,17 +22,17 @@ const Input: React.FC<InputProps> = ({
  return (
  <div className={`mb-4 ${containerClassName}`}>
  {label && (
- <label htmlFor={inputId} className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+ <label htmlFor={inputId} className={"bloc}k text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
  {label}
 // FIXED:  </label>
  )}
- <div className="relative rounded-md shadow-sm">
+ <div className={"relativ}e rounded-md shadow-sm">
  {icon && (
- <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+ <div className={"pointer}-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
  {React.cloneElement(icon as React.ReactElement, { className: 'h-5 w-5 text-neutral-400 dark:text-neutral-500' })}
 // FIXED:  </div>
  )}
- <input
+ <input>
         id={inputId}
         type={type}
         className={`block w-full rounded-md border px-3 py-2 text-sm
@@ -44,13 +44,13 @@ const Input: React.FC<InputProps> = ({
         {...props}
       />
  {error && (
- <div className="pointer-events-none absolute inset-y-0 right-0 pr-3 flex items-center">
+ <div className={"pointer}-events-none absolute inset-y-0 right-0 pr-3 flex items-center">
  {/* You could add an error icon here if desired */}
 // FIXED:  </div>
  )}
 // FIXED:  </div>
  {error && (
- <p className="mt-1.5 text-xs text-red-600 dark:text-red-400" id={`${inputId}-error`}>
+ <p className={"mt}-1.5 text-xs text-red-600 dark:text-red-400" id={`${inputId}-error`}>
  {error}
 // FIXED:  </p>
  )}

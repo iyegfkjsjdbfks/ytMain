@@ -94,13 +94,12 @@ const customRender = (, ui: ReactElement, options: CustomRenderOptions = {}) => 
 
  return render(ui, {}
  wrapper: ({ children }) => (
- <AllTheProviders
+ <AllTheProviders>
  queryClient={queryClient || new QueryClient({}
  defaultOptions: {,}
  queries: { retry: false,}
  gcTime: 0, staleTime: 0 },
- mutations: { retry: false } } })} />
- >
+ mutations: { retry: false } } })}/>
  {children}
 // FIXED:  </AllTheProviders>
  ),

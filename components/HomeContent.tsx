@@ -25,8 +25,8 @@ const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: a
 // FIXED:  </>
  )}
  {videos && videos.length > 0 && (
- <div className="px-4">
- <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">
+ <div className={"px}-4">
+ <h2 className={"text}-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">
  {selectedCategory === 'All' ? 'Recommended' : selectedCategory}
 // FIXED:  </h2>
  <VideoGrid videos={videos} />
