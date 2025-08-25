@@ -86,9 +86,8 @@ export class ValidationError extends Error {
  }
 // Request / Response Interceptors
 type RequestInterceptor = (config: RequestInit & { url: string }) => RequestInit & { url: string };
-type ResponseInterceptor = (response: Response) => Response | Promise<any> < Response>;
-type ErrorInterceptor = (error: Error) => Error | Promise<any> < Error>;
-
+type ResponseInterceptor = (response: Response) => Response | Promise<any> < Response>
+type ErrorInterceptor = (error: Error) => Error | Promise<any> < Error>
 export interface Interceptors {
  request: RequestInterceptor;,
  response: ResponseInterceptor;
@@ -162,7 +161,7 @@ export class UnifiedApiService {
  this.requestQueue.set(requestKey, requestPromise<any>);
 
  try {
- const result = await requestPromise<any>;
+ const result = await requestPromise<any>
  return result;
  } finally {
  this.requestQueue.delete(requestKey);

@@ -16,8 +16,8 @@ const TrendingPage: React.FC = () => {
     { id: 'news' as const, label: 'News', icon: '📰' },;
     { id: 'movies' as const, label: 'Movies', icon: '🎬' };
 
-  return (;)
-    <PageLayout />; />;
+  return (
+    <PageLayout />; />
       title="Trending";
       icon={<FireIcon />className="w-8 h-8 text-red-500" />}
       data={trendingVideos}
@@ -28,6 +28,5 @@ const TrendingPage: React.FC = () => {
         message: 'Check back later for the latest trending content.', }}
       headerActions={<CategoryTabs />categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />} />
       {(videos: unknown) => <VideoGrid />videos={videos  []} />, }
-  <di />v /></PageLayout /></div />;
-
+  <di />v /></PageLayout /></div />
 export default TrendingPage;

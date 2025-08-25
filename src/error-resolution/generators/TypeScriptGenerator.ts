@@ -398,7 +398,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\(/g,)
-        replacement: '($1)('})
+        replacement: '($1)('}) => {
         ,descriptio,n: `Add callable type assertion in ${error.file} at line ${error.line}`;
 
     return commands;

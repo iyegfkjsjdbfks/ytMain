@@ -224,74 +224,74 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({)
  }, [onVideoSelect]);
 
  if (loading) {
- return (;)
- <div className={"space}-y-0">;
- <div className={"mb}-4">;
- <div className={"fle}x items-center justify-between mb-2">;
- <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">;
+ return (
+ <div className={"space}-y-0">
+ <div className={"mb}-4">
+ <div className={"fle}x items-center justify-between mb-2">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">
  Recommended for you;
 // FIXED:  </h3>
  {useGoogleCustomSearch && ()
- <div className={"fle}x items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">;
- <div className={"w}-2 h-2 bg-blue-500 rounded-full animate-pulse" />;
- <span>Loading...</span>;
+ <div className={"fle}x items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">
+ <div className={"w}-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+ <span>Loading...</span>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className={"space}-y-2">;
+ <div className={"space}-y-2">
  {[...Array(5)].map((_, i) => ())
-          <div key={i} className={"fle}x gap-2 p-1">;
- <div className={"w}-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />;
- <div className={"flex}-1 min-w-0">;
- <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />;
- <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />;
- <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />;
+          <div key={i} className={"fle}x gap-2 p-1">
+ <div className={"w}-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />
+ <div className={"flex}-1 min-w-0">
+ <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
+ <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
+ <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  if (recommendations.length === 0) {
- return (;)
- <div className={"space}-y-0">;
- <div className={"mb}-4">;
- <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">;
+ return (
+ <div className={"space}-y-0">
+ <div className={"mb}-4">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">
  Recommended for you;
 // FIXED:  </h3>
 // FIXED:  </div>
-<div className={"text}-center py-8 text-gray-500">;
+<div className={"text}-center py-8 text-gray-500">
  No recommendations available;
 // FIXED:  </div>
 // FIXED:  </div>
 
- return (;)
- <div className={"space}-y-0">;
+ return (
+ <div className={"space}-y-0">
  {/* YouTube-style section header - more compact */}
- <div className={"mb}-4">;
- <div className={"fle}x items-center justify-between mb-2">;
- <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">;
+ <div className={"mb}-4">
+ <div className={"fle}x items-center justify-between mb-2">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">
  Recommended for you;
 // FIXED:  </h3>
  {useGoogleCustomSearch && ()
- <div className={"fle}x items-center space-x-1 text-xs text-green-600 dark:text-green-400">;
- <div className={"w}-2 h-2 bg-green-500 rounded-full animate-pulse" />;
- <span>Live</span>;
+ <div className={"fle}x items-center space-x-1 text-xs text-green-600 dark:text-green-400">
+ <div className={"w}-2 h-2 bg-green-500 rounded-full animate-pulse" />
+ <span>Live</span>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* YouTube-style video grid - more compact spacing */}
- <div className={"space}-y-2">;
+ <div className={"space}-y-2">
  {recommendations.map((video) => ())
-          <div key={video.id} className={"cursor}-pointer" onClick={() => handleVideoClick(video)}>;
+          <div key={video.id} className={"cursor}-pointer" onClick={() => handleVideoClick(video)}>
  {useGoogleCustomSearch ? ()
- <EnhancedYouTubeVideoCard;>;
+ <EnhancedYouTubeVideoCard;>
  video={video}
  onVideoSelect={onVideoSelect}
  showChannel={true}
  size="sm" />; />
  ) : (;
- <OptimizedVideoCard;>;
+ <OptimizedVideoCard;>
  video={video}
  showChannel={true}
  size="sm" />; />

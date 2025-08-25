@@ -58,7 +58,7 @@ export interface QualityGate {
  metric: keyof CodeMetrics;
  operator: '>' | '<' | '>=' | '<=' | '==';,
  threshold: number;
- }>;
+ }>
  blocking: boolean;,
  enabled: boolean;
 

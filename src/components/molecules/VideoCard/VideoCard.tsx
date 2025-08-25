@@ -9,6 +9,7 @@ export interface VideoCardProps {
 export const VideoCard = (props: VideoCardProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default VideoCard;

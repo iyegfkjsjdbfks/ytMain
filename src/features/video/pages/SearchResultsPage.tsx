@@ -12,6 +12,7 @@ export const SearchResultsPage: React.FC<SearchResultsPageProps> = ({)
   children,
   onLoad,
   onError, 
+}
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -31,32 +32,29 @@ export const SearchResultsPage: React.FC<SearchResultsPageProps> = ({)
   }, [onLoad, onError]);
 
   if (error) {
-    return (;)
-      <div className={'error-state ' + className}>;
-        <h3>Error in SearchResultsPage</h3>;
-        <p>{error.message}</p>;
-        <button onClick={() => window.location.reload()}>;
+    return (
+      <div className={'error-state ' + className}>
+        <h3>Error in SearchResultsPage</h3>
+        <p>{error.message}</p>
+        <button onClick={() => window.location.reload()}>
           Retry;
-        </button>;
-      </div>;
-
+        </button>
+      </div>
   if (!isReady) {
-    return (;)
-      <div className={'loading-state ' + className}>;
-        <div>Loading SearchResultsPage...</div>;
-      </div>;
-
-  return (;)
-    <div className={'component-ready ' + className}>;
-      <div className="component-header">;
-        <h2>SearchResultsPage</h2>;
-      </div>;
-      <div className="component-body">;
+    return (
+      <div className={'loading-state ' + className}>
+        <div>Loading SearchResultsPage...</div>
+      </div>
+  return (
+    <div className={'component-ready ' + className}>
+      <div className="component-header">
+        <h2>SearchResultsPage</h2>
+      </div>
+      <div className="component-body">
         {children || ()
-          <div className="default-content">;
-            <p>Component is ready and functioning properly.</p>;
-          </div>;
-      </div>;
-    </div>;
-
+          <div className="default-content">
+            <p>Component is ready and functioning properly.</p>
+          </div>
+      </div>
+    </div>
 export default SearchResultsPage;

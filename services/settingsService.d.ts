@@ -31,7 +31,7 @@ export interface Settings {
         searchResultsPage: PagePlayerConfig;
     };
 }
-export declare const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig>;
+export declare const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig>
 export declare const getSettings: () => Settings;
 export declare const saveSettings: (settings: Settings) => void;
 export declare const getYouTubePlayerType: () => YouTubePlayerType;
@@ -61,7 +61,7 @@ export declare const setInitialSearchKeyword: (keyword: any) => void;
 export type PageType = 'watchPage' | 'homePage' | 'searchResultsPage';
 export declare const getPagePlayerConfig: (page: PageType) => PagePlayerConfig;
 export declare const setPagePlayerConfig: (page: PageType, config: PagePlayerConfig) => void;
-export declare const getAllPageConfigurations: () => Record<PageType, PagePlayerConfig>;
+export declare const getAllPageConfigurations: () => Record<PageType, PagePlayerConfig>
 export declare const getPageDisplayName: (page: PageType) => string;
 export declare const getPlayerUsageByPage: (playerType: VideoPlayerType) => PageType[];
 //# sourceMappingURL=settingsService.d.ts.map

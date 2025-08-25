@@ -208,15 +208,15 @@ const authRoutes: RouteObject[] = [;
  {
  path: '/login',
  element: (;)
- <ProtectedRoute requireAuth={false}>;
- <LoginPage />;
+ <ProtectedRoute requireAuth={false}>
+ <LoginPage />
 // FIXED:  </ProtectedRoute>
  errorElement: <ErrorBoundary /> },
  {
  path: '/register',
  element: (;)
- <ProtectedRoute requireAuth={false}>;
- <RegisterPage />;
+ <ProtectedRoute requireAuth={false}>
+ <RegisterPage />
 // FIXED:  </ProtectedRoute>
  errorElement: <ErrorBoundary /> }];
 

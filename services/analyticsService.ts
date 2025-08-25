@@ -9,7 +9,7 @@ declare namespace NodeJS {
  }
 export interface AnalyticsEvent {
  name: string;
- properties?: Record < string, any>;
+ properties?: Record < string, any>
  timestamp: number;,
  sessionId: string;
  userId?: string | undefined;
@@ -54,7 +54,7 @@ export class AnalyticsService {
  private config: AnalyticsConfig;
  private session: UserSession;
  private eventQueue: AnalyticsEvent = [];
- private flushTimer?: ReturnType < typeof setTimeout>;
+ private flushTimer?: ReturnType < typeof setTimeout>
  private listeners: Array<(event: AnalyticsEvent) => void> = [];
 
  constructor(config: Partial < AnalyticsConfig> = {}) {

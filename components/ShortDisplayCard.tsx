@@ -33,24 +33,24 @@ export interface PlayPauseOverlayProps {}
  onToggle: () => void;
 
 const PlayPauseOverlay: React.FC < PlayPauseOverlayProps> = ({ isPlaying, onToggle }: any) => (;)
-          <div;>;
+          <div>
 // FIXED:  className={"absolut}e inset - 0 flex items - center justify - center cursor - pointer" />
 // FIXED:  onClick={(e: React.MouseEvent) => {, }
  e.stopPropagation();
  onToggle();
  >
- <button;>;
+ <button>
 // FIXED:  className={`, }
  bg - black bg - opacity - 50 text - white p - 4 rounded - full; 
  transition - opacity duration - 200 pointer - events - none;
  ${!isPlaying ? 'opacity - 100' : 'opacity - 0 group - hover:opacity - 100 hover:opacity - 100', }
- hover:bg - opacity - 70;
+ hover:bg - opacity - 70
  `}
 // FIXED:  aria - label={isPlaying ? 'Pause video' : 'Play video'} />
- {isPlaying ? (})
- <PauseIcon className="w - 8 h - 8" />;
+ {isPlaying ? (}) => {
+ <PauseIcon className="w - 8 h - 8" />
  ) : (;
- <PlayIcon className="w - 8 h - 8" />;
+ <PlayIcon className="w - 8 h - 8" />
 // FIXED:  </button>
 // FIXED:  </div>
 
@@ -62,28 +62,28 @@ export interface VideoInfoProps {}
  isFollowed: boolean;
  onFollow: (() => void) | undefined;
 
-const VideoInfo: React.FC < VideoInfoProps> = ({, })
+const VideoInfo: React.FC < VideoInfoProps> = ({, }) => {
  title,
  channelName,
  views,
  isFollowed = false,
  onFollow }) => (;
-          <div className={"fle}x - 1 mr - 4 pointer - events - auto">;
- <h3 className={"tex}t - white font - medium text - sm mb - 1 line - clamp - 2">;
+          <div className={"fle}x - 1 mr - 4 pointer - events - auto">
+ <h3 className={"tex}t - white font - medium text - sm mb - 1 line - clamp - 2">
  {title}
 // FIXED:  </h3>
- <p className={"tex}t - gray - 300 text - xs mb - 2">;
+ <p className={"tex}t - gray - 300 text - xs mb - 2">
  {channelName} • {views}
 // FIXED:  </p>
- {onFollow && (})
- <button />;
+ {onFollow && (}) => {
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {, }
  e.stopPropagation();
  onFollow();
 // FIXED:  className={`px - 3 py - 1 text - xs font - medium rounded - full transition - colors ${, }
  isFollowed;
  ? 'bg - gray - 600 text - white hover:bg - gray - 700';
- : 'bg - white text - black hover:bg - gray - 200';
+ : 'bg - white text - black hover:bg - gray - 200'
  }`}
  >
  {isFollowed ? 'Following' : 'Follow', }
@@ -99,59 +99,59 @@ export interface ActionButtonsProps {}
  onComment: (e: React.MouseEvent) => void;,
  onShare: (e: React.MouseEvent) => void;
 
-const ActionButtons: React.FC < ActionButtonsProps> = ({, })
+const ActionButtons: React.FC < ActionButtonsProps> = ({, }) => {
  isMuted,
  isLiked,
  onToggleMute,
  onLike,
  onComment,
  onShare }) => (;
-          <div className={"fle}x flex - col space - y - 3 pointer - events - auto">;
+          <div className={"fle}x flex - col space - y - 3 pointer - events - auto">
  {/* Mute / Unmute */}
- <ActionButton />;
+ <ActionButton />
 // FIXED:  onClick={(e: React.MouseEvent) => {, }
  e.stopPropagation();
  onToggleMute();
  ariaLabel={isMuted ? 'Unmute video' : 'Mute video', }
  >
- {isMuted ? (})
- <SpeakerXIcon className="w - 5 h - 5" />;
+ {isMuted ? (}) => {
+ <SpeakerXIcon className="w - 5 h - 5" />
  ) : (;
- <SpeakerWaveIcon className="w - 5 h - 5" />;
+ <SpeakerWaveIcon className="w - 5 h - 5" />
 // FIXED:  </ActionButton>
 
  {/* Like */}
- <ActionButton />;
+ <ActionButton />
 // FIXED:  onClick={(e: React.MouseEvent) => onLike(e), }
  ariaLabel="Like video";
  >
- {isLiked ? (})
- <HeartIconSolid className="w - 5 h - 5 text - red - 500" />;
+ {isLiked ? (}) => {
+ <HeartIconSolid className="w - 5 h - 5 text - red - 500" />
  ) : (;
- <HeartIcon className="w - 5 h - 5" />;
+ <HeartIcon className="w - 5 h - 5" />
 // FIXED:  </ActionButton>
 
  {/* Comment */}
- <ActionButton />;
+ <ActionButton />
 // FIXED:  onClick={(e: React.MouseEvent) => onComment(e), }
  ariaLabel="Comment on video";
  >
- <ChatBubbleLeftIcon className="w - 5 h - 5" />;
+ <ChatBubbleLeftIcon className="w - 5 h - 5" />
 // FIXED:  </ActionButton>
 
  {/* Share */}
- <ActionButton />;
+ <ActionButton />
 // FIXED:  onClick={(e: React.MouseEvent) => onShare(e), }
  ariaLabel="Share video";
  >
- <ShareIcon className="w - 5 h - 5" />;
+ <ShareIcon className="w - 5 h - 5" />
 // FIXED:  </ActionButton>
 // FIXED:  </div>
 
 // Extracted LoadingIndicator component;
 const LoadingIndicator: React.FC = () => (;)
-          <div className={"absolut}e inset - 0 flex items - center justify - center bg - black bg - opacity - 50">;
- <LoadingSpinner size="md" color="white" />;
+          <div className={"absolut}e inset - 0 flex items - center justify - center bg - black bg - opacity - 50">
+ <LoadingSpinner size="md" color="white" />
 // FIXED:  </div>
 
 // Extracted ErrorState component
@@ -160,14 +160,14 @@ export interface ErrorStateProps {}
  onRetry: () => void;
 
 const ErrorState: React.FC < ErrorStateProps> = ({ error, onRetry }: any) => (;)
-          <ErrorMessage;>;
+          <ErrorMessage;>
  message={error}
  onRetry={onRetry}
  variant="overlay";
  showIcon={false} />; />
 
 // Main component;
-const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, })
+const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, }) => {
  short,
  isLiked = false,
  isFollowed = false,
@@ -183,7 +183,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, })
  const [isManuallyPaused, setIsManuallyPaused] = React.useState < boolean>(false);
 
  // Real video player implementation;
- const videoPlayer = useVideoPlayer({})
+ const videoPlayer = useVideoPlayer({}) => {
  autoplay: false,
  muted: true,
  loop: true });
@@ -191,19 +191,19 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, })
  const videoRef = useRef < HTMLVideoElement>(null);
 
  // Set video ref when component mounts;
- useEffect(() => {})
+ useEffect(() => {}) => {
  if (videoRef.current) {}
  videoPlayer.setVideoRef(videoRef.current);
 
  }, [videoPlayer]);
 
  // Use intersection observer for visibility tracking and autoplay;
- const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({})
+ const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({}) => {
  threshold: 0.7,
  rootMargin: '0px' });
 
  // Enable autoplay when video is in view (both on shorts page and home page)
- useVideoAutoplay({})
+ useVideoAutoplay({}) => {
  isIntersecting,
  isPlaying: videoPlayer.isPlaying,
  isManuallyPaused,
@@ -250,23 +250,23 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, })
  onVideoEnd?.();
 
  // Notify parent when video becomes active;
- React.useEffect(() => {})
+ React.useEffect(() => {}) => {
  if (isActive && onVideoChange) {}
  onVideoChange();
 
  }, [isActive, onVideoChange]);
 
- return (;)
- <div />;
+ return (
+ <div />
  ref={intersectionRef as React.RefObject < HTMLDivElement>}
 // FIXED:  className={`relative bg - black overflow - hidden group cursor - pointer ${, }
  isOnShortsPage;
  ? 'w - full h - full';
- : 'w - 40 h - 72 rounded - lg';
+ : 'w - 40 h - 72 rounded - lg'
  }`}
  >
  {/* Real video element */}
- <video;>;
+ <video;>
  ref={videoRef}
 // FIXED:  src={short.videoUrl, }
  poster={short.thumbnailUrl}
@@ -274,7 +274,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, })
  playsInline;
  muted={videoPlayer.isMuted}
  loop;
- preload="metadata" />;
+ preload="metadata" />
 // FIXED:  onClick={(e: React.MouseEvent) => handlePlayPauseToggle(e), }
  onEnded={() => {}
  handleVideoEnd(); />
@@ -283,20 +283,20 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, })
  {videoPlayer.isLoading && <LoadingIndicator />}
 
  {/* Error State */}
- {videoPlayer.error && (})
- <ErrorState;>;
+ {videoPlayer.error && (}) => {
+ <ErrorState;>
  error={videoPlayer.error.message}
  onRetry={handleRetry} />; />
 
  {/* Play / Pause Overlay */}
- <PlayPauseOverlay;>;
+ <PlayPauseOverlay;>
  isPlaying={videoPlayer.isPlaying}
  onToggle={handlePlayPauseToggle} />; />
 
  {/* Video Info Overlay */}
- <div className={"absolut}e bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 80 to - transparent p - 4 pointer - events - none">;
- <div className={"fle}x items - end justify - between">;
- <VideoInfo;>;
+ <div className={"absolut}e bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 80 to - transparent p - 4 pointer - events - none">
+ <div className={"fle}x items - end justify - between">
+ <VideoInfo;>
  title={short.title}
  channelName={short.channelName}
  views={short.views}
@@ -304,7 +304,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({, })
  onFollow={onFollow ? handleFollow : undefined} />; />
 
  {/* Action Buttons */}
- <ActionButtons;>;
+ <ActionButtons;>
  isMuted={videoPlayer.isMuted}
  isLiked={isLiked}
  onToggleMute={videoPlayer.toggleMute}

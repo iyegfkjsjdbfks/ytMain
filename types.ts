@@ -17,7 +17,7 @@ export interface CommunityPost {
  type: "text" | 'image' | 'poll';
  content: string;
  imageUrl?: string;
- pollOptions?: Array<{ id: string; text: string; votes: number }>;
+ pollOptions?: Array<{ id: string; text: string; votes: number }>
  likes: number;
  comments: number;
  shares: number;
@@ -76,7 +76,7 @@ export interface ExtendedVideo {
  dimension?: '2d' | '3d';
  caption?: boolean;
  licensedContent?: boolean;
- contentRating?: Record<string, any>;
+ contentRating?: Record<string, any>
  projection?: 'rectangular' | '360' | '3d';
  // Engagement
  likeCount?: number;
@@ -201,6 +201,6 @@ export type Short = Omit<ExtendedVideo, 'isShort'> & {
  type: "text" | 'image' | 'time';
  content: string;
  position: 'top' | 'bottom' | 'left' | 'right';
- style?: Record<string, any>;
- }>;
+ style?: Record<string, any>
+ }>
 };

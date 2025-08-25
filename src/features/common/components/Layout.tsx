@@ -9,6 +9,7 @@ export interface LayoutProps {
 export const Layout = (props: LayoutProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default Layout;

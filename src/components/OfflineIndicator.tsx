@@ -9,6 +9,7 @@ export interface OfflineIndicatorProps {
 export const OfflineIndicator = (props: OfflineIndicatorProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default OfflineIndicator;

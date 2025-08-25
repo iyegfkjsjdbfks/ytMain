@@ -31,8 +31,8 @@ const Button = React.forwardRef<HTMLButtonElement>, ButtonProps,>(;)
     const variantClass = buttonVariants.variant[variant];
     const sizeClass = buttonVariants.size[size];
     
-    return (;)
-      <butto />n />;
+    return (
+      <butto />n />
         className={cn(;)
           "inline-flex items-center justify-center rounded-md font-medium transition-colors focus: outline-none focus: ring-2 focus: ring-offset-2 disabled: opacity-50 disabled: pointer-events-none",
           variantClass,

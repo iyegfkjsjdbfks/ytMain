@@ -9,6 +9,7 @@ export interface LazyVideoPlayerProps {
 export const LazyVideoPlayer = (props: LazyVideoPlayerProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default LazyVideoPlayer;

@@ -54,8 +54,7 @@ export interface SecurityAuditLog {
   resource: string;
   action: string;
   result: string;
-  metadata: Record<string, any>;
-
+  metadata: Record<string, any>
 export class SecurityMonitoringEngine {
   private threats = new Map<string, SecurityThreat>();
   private vulnerabilities = new Map<string, VulnerabilityReport>();

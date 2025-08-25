@@ -1,6 +1,6 @@
 export declare class GoogleSearchService {
     constructor();
-    search(query: string): Promise<any[]>;
+    search(query: string): Promise<any[]>
 }
 declare const _default: GoogleSearchService;
 export default _default;

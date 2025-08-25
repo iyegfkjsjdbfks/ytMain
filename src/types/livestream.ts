@@ -40,8 +40,7 @@ export interface StreamPlatform {
  name: 'youtube' | 'twitch' | 'facebook' | 'twitter';
  enabled: boolean;
  streamKey?: string;
- settings?: Record<string, any>;
-
+ settings?: Record<string, any>
 export interface LiveStreamStats {
  viewers: number;
  peakViewers: number;

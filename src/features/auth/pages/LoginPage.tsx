@@ -9,6 +9,7 @@ export interface LoginPageProps {
 export const LoginPage = (props: LoginPageProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default LoginPage;

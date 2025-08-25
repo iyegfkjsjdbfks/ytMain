@@ -5,8 +5,8 @@ interface SuspenseWrapperProps {
   fallback?: ReactNode;
 
 const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({ children, fallback }) => {
-  return (;)
-    <Suspense fallback={fallback || <div>Loading...</div>}>;
+  return (
+    <Suspense fallback={fallback || <div>Loading...</div>}>
       {children}
 // FIXED:     </Suspense>
 

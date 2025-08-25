@@ -39,11 +39,11 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({)
  // The error boundary will reset and re-render the component;
  }, [videoId]);
 
- return (;)
- <VideoErrorBoundary;>;
+ return (
+ <VideoErrorBoundary;>
  videoId={videoId}
- onRetry={handleRetry} />;
- <YouTubePlayer;>;
+ onRetry={handleRetry} />
+ <YouTubePlayer;>
  video={video}
  width={width || 560}
  height={height || 315}

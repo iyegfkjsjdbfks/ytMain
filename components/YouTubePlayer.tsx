@@ -46,7 +46,7 @@ export interface YouTubePlayerProps {}
  onStateChange?: (event: Event) => void;
  onError?: (event: Event) => void;
 
-const YouTubePlayer: React.FC < YouTubePlayerProps> = ({, })
+const YouTubePlayer: React.FC < YouTubePlayerProps> = ({, }) => {
  video,
  width = '100%',
  height = '100%',
@@ -64,7 +64,7 @@ const YouTubePlayer: React.FC < YouTubePlayerProps> = ({, })
  const playerIdRef = useRef(`youtube - player-${Math.random().toString(36).substr(2, 9)}`);
 
  // Extract video ID from the video object;
- const videoId = ((: any) => {, })
+ const videoId = ((: any) => {, }) => {
  // Handle YouTubeSearchResult type;
  if ('embedUrl' in video && video.embedUrl) {}
  return video.embedUrl.split('/embed/')[1]?.split('?')[0] || '';
@@ -78,7 +78,7 @@ const YouTubePlayer: React.FC < YouTubePlayerProps> = ({, })
  const isValidVideoId = videoId && videoId.length === 11 && /^[a - zA - Z0 - 9_-]+$/.test(videoId: string);
 
  // Load YouTube IFrame API;
- useEffect(() => {})
+ useEffect(() => {}) => {
  if (window.YT?.Player) {}
  setIsAPIReady(true);
  return;
@@ -115,7 +115,7 @@ const YouTubePlayer: React.FC < YouTubePlayerProps> = ({, })
  }}, []);
 
  // Initialize player when API is ready;
- useEffect(() => {})
+ useEffect(() => {}) => {
  if (!isAPIReady || !playerRef.current || !isValidVideoId) {}
 return;
 
@@ -144,7 +144,7 @@ return;
  // Create new player;
  if (!window.YT) {}
  throw new Error('YouTube API not available');
- ytPlayerRef.current = new window.YT.Player(playerIdRef.current, {})
+ ytPlayerRef.current = new window.YT.Player(playerIdRef.current, {}) => {
  height,
  width,
  videoId,
@@ -211,7 +211,7 @@ return;
  event.target.unMute();
 
  // Resume playback after unmuting in case it paused;
- setTimeout(() => {})
+ setTimeout(() => {}) => {
  try {}
  const currentState = event.target.getPlayerState();
  if (currentState !== 1) { // If not playing}
@@ -270,31 +270,31 @@ return;
  }}, [isAPIReady, videoId, height, width, autoplay, controls, isValidVideoId, onError, onReady, onStateChange]);
 
  if (!isValidVideoId) {}
- return (;)
- <div className={`bg - gray - 100 dark:bg - gray - 800 rounded - lg p - 4 ${className}`}>;
- <p className={"tex}t - gray - 600 dark:text - gray - 400 text - center">;
+ return (
+ <div className={`bg - gray - 100 dark:bg - gray - 800 rounded - lg p - 4 ${className}`}>
+ <p className={"tex}t - gray - 600 dark:text - gray - 400 text - center">
  Invalid YouTube video ID;
 // FIXED:  </p>
 // FIXED:  </div>
 
  if (playerError) {}
- return (;)
- <div className={`bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded - lg p - 4 ${className}`}>;
- <p className={"tex}t - red - 600 dark:text - red - 400 text - center">;
+ return (
+ <div className={`bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded - lg p - 4 ${className}`}>
+ <p className={"tex}t - red - 600 dark:text - red - 400 text - center">
  {playerError}
 // FIXED:  </p>
 // FIXED:  </div>
 
- return (;)
- <div className={`relative w - full h - full ${className}`}>;
- {!isAPIReady && (})
- <div className={"absolut}e inset - 0 bg - gray - 100 dark:bg - gray - 800 rounded - lg flex items - center justify - center">;
- <div className={"tex}t - gray - 600 dark:text - gray - 400 text - center">;
- <div className={"animat}e - spin rounded - full h - 8 w - 8 border - b - 2 border - blue - 500 mx - auto mb - 2" />;
- <p > Loading YouTube player...</p>;
+ return (
+ <div className={`relative w - full h - full ${className}`}>
+ {!isAPIReady && (}) => {
+ <div className={"absolut}e inset - 0 bg - gray - 100 dark:bg - gray - 800 rounded - lg flex items - center justify - center">
+ <div className={"tex}t - gray - 600 dark:text - gray - 400 text - center">
+ <div className={"animat}e - spin rounded - full h - 8 w - 8 border - b - 2 border - blue - 500 mx - auto mb - 2" />
+ <p > Loading YouTube player...</p>
 // FIXED:  </div>
 // FIXED:  </div>
- <div;>;
+ <div>
  ref={playerRef}
 // FIXED:  id={playerIdRef.current, }
 // FIXED:  className="w - full h - full"

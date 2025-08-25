@@ -72,34 +72,32 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props;
  return 'ml-0';
 
 
- return (;)
- <div className={"fle}x flex-col h-screen">;
- <Header toggleSidebar={toggleSidebar} />;
- <div className={"fle}x flex-1 pt-14">;
+ return (
+ <div className={"fle}x flex-col h-screen">
+ <Header toggleSidebar={toggleSidebar} />
+ <div className={"fle}x flex-1 pt-14">
  {isWatchPage ? ()
  isMinimized ? (;)
- <MinimizedSidebar />;
+ <MinimizedSidebar />
  ) : (;
- <Sidebar isOpen={true} />;
+ <Sidebar isOpen={true} />
  ) : (;
- <Sidebar isOpen={isSidebarOpen} />;
-      <main;>;
+ <Sidebar isOpen={isSidebarOpen} />
+      <main;>
         id="main-content";
         role="main";
-        className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}>;
+        className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}>
  <div className={mainContentPaddingClass}> {/* Apply conditional padding */}
- <div className={"min}-h-[calc(100vh-3.5rem)]">;
+ <div className={"min}-h-[calc(100vh-3.5rem)]">
  <Outlet /> {/* Render child routes */}
-</div>;
-</div>;
-</main>;
-</div>;
+</div>
+</div>
+</main>
+</div>
  {miniplayerContext.state.isVisible && miniplayerContext.state.currentVideo && ()
- <Miniplayer;>;
+ <Miniplayer;>
  video={miniplayerContext.state.currentVideo}
  onClose={miniplayerContext.actions.hideMiniplayer}
- onMaximize={handleMaximizeMiniplayer} />;
-
-</div>;
-
+ onMaximize={handleMaximizeMiniplayer} />
+</div>
 export default Layout;

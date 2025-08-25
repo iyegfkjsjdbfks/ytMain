@@ -48,138 +48,131 @@ const UserPage: React.FC = () => {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'videos':;
-        return (;)
-          <div />className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div />;
+        return (
+          <div />className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div />
             {videos.map((video: any) => ())
           <VideoCard;
-          key={video.id} video={video} />;
-          </div>;
+          key={video.id} video={video} />
+          </div>
       case 'playlists':;
-        return (;)
-          <div />className="text-center py-12"></div />;
-            <QueueListIcon />className="w-16 h-16 mx-auto text-neutral-400 mb-4" / />;
-            <p />className="text-neutral-600 dark:text-neutral-400">No playlists available</p />;
-          </div>;
+        return (
+          <div />className="text-center py-12"></div />
+            <QueueListIcon />className="w-16 h-16 mx-auto text-neutral-400 mb-4" / />
+            <p />className="text-neutral-600 dark:text-neutral-400">No playlists available</p />
+          </div>
       case 'community':;
-        return (;)
-          <div />className="text-center py-12"></div />;
-            <ChatBubbleLeftRightIcon />className="w-16 h-16 mx-auto text-neutral-400 mb-4" / />;
-            <p />className="text-neutral-600 dark:text-neutral-400">No community posts yet</p />;
-          </div>;
+        return (
+          <div />className="text-center py-12"></div />
+            <ChatBubbleLeftRightIcon />className="w-16 h-16 mx-auto text-neutral-400 mb-4" / />
+            <p />className="text-neutral-600 dark:text-neutral-400">No community posts yet</p />
+          </div>
       case 'about':;
-        return (;)
-          <div />className="max-w-2xl"></div />;
-            <div />className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm"></div />;
-              <h3 />className="text-lg font-semibold mb-4 text-neutral-900 dark:text-white">About this channel</h3 />;
-              <div />className="space-y-4 text-neutral-600 dark:text-neutral-400"></div />;
-                <p>Welcome to our channel! We create amazing content for our viewers.</p>;
-                <div />className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-200 dark:border-neutral-700"></div />;
-                  <di />v />;
-                    <p />className="font-medium text-neutral-900 dark:text-white">Joined</p />;
-                    <p>Jan 1, 2020</p>;
-                  </div>;
-                  <di />v />;
-                    <p />className="font-medium text-neutral-900 dark:text-white">Views</p />;
-                    <p>10.5M total views</p>;
-                  </div>;
-                </div>;
-              </div>;
-            </div>;
-          </div>;
+        return (
+          <div />className="max-w-2xl"></div />
+            <div />className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm"></div />
+              <h3 />className="text-lg font-semibold mb-4 text-neutral-900 dark:text-white">About this channel</h3 />
+              <div />className="space-y-4 text-neutral-600 dark:text-neutral-400"></div />
+                <p>Welcome to our channel! We create amazing content for our viewers.</p>
+                <div />className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-200 dark:border-neutral-700"></div />
+                  <di />v />
+                    <p />className="font-medium text-neutral-900 dark:text-white">Joined</p />
+                    <p>Jan 1, 2020</p>
+                  </div>
+                  <di />v />
+                    <p />className="font-medium text-neutral-900 dark:text-white">Views</p />
+                    <p>10.5M total views</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       default:;
         return null;
 
 
   if (loading) {
-    return (;)
-      <div />className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center"></div />;
-        <div />className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div />;
-      </div>;
-
-  return (;)
-    <div />className="min-h-screen bg-neutral-50 dark:bg-neutral-900"></div />;
-      <div />className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"></div />;
+    return (
+      <div />className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center"></div />
+        <div />className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div />
+      </div>
+  return (
+    <div />className="min-h-screen bg-neutral-50 dark:bg-neutral-900"></div />
+      <div />className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"></div />
         {/* Channel Header */}
-        <div />className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8"></div />;
+        <div />className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8"></div />
           {/* Banner */}
-          <div />className="h-32 sm:h-48 bg-gradient-to-r from-red-500 to-red-600 rounded-t-lg"></div />;
-          
+          <div />className="h-32 sm:h-48 bg-gradient-to-r from-red-500 to-red-600 rounded-t-lg"></div />
           {/* Channel Info */}
-          <div />className="px-6 pb-6"></div />;
-            <div />className="flex flex-col sm:flex-row items-start sm:items-end -mt-12 sm:-mt-16"></div />;
+          <div />className="px-6 pb-6"></div />
+            <div />className="flex flex-col sm:flex-row items-start sm:items-end -mt-12 sm:-mt-16"></div />
               {/* Avatar */}
-              <div />className="w-24 h-24 sm:w-32 sm:h-32 bg-white dark:bg-neutral-700 rounded-full border-4 border-white dark:border-neutral-800 flex items-center justify-center mb-4 sm:mb-0 sm:mr-6"></div />;
-                <UserIcon />className="w-12 h-12 sm:w-16 sm:h-16 text-neutral-400" / />;
-              </div>;
-              
+              <div />className="w-24 h-24 sm:w-32 sm:h-32 bg-white dark:bg-neutral-700 rounded-full border-4 border-white dark:border-neutral-800 flex items-center justify-center mb-4 sm:mb-0 sm:mr-6"></div />
+                <UserIcon />className="w-12 h-12 sm:w-16 sm:h-16 text-neutral-400" / />
+              </div>
               {/* Channel Details */}
-              <div />className="flex-1 min-w-0"></div />;
-                <h1 />className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white mb-2"></h1 />;
+              <div />className="flex-1 min-w-0"></div />
+                <h1 />className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white mb-2"></h1 />
                   Channel Name;
-                </h1>;
-                <div />className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-neutral-600 dark:text-neutral-400"></div />;
-                  <spa />n />@channelhandle</span />;
-                  <spa />n />{formatSubscriberCount(subscriberCount)} subscribers</span />;
-                  <spa />n />123 videos</span />;
-                </div>;
-                <p />className="mt-2 text-neutral-600 dark:text-neutral-400 line-clamp-2"></p />;
+                </h1>
+                <div />className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-neutral-600 dark:text-neutral-400"></div />
+                  <spa />n />@channelhandle</span />
+                  <spa />n />{formatSubscriberCount(subscriberCount)} subscribers</span />
+                  <spa />n />123 videos</span />
+                </div>
+                <p />className="mt-2 text-neutral-600 dark:text-neutral-400 line-clamp-2"></p />
                   Welcome to our amazing channel! We create content that you'll love.;
-                </p>;
-              </div>;
-              
+                </p>
+              </div>
               {/* Subscribe Button */}
-              <div>className="flex items-center gap-3 mt-4 sm:mt-0"></div>;
-                <button />className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors"></button />;
-                  <BellIcon />className="w-5 h-5 text-neutral-600 dark:text-neutral-400" / />;
-                </button>;
-                <butto />n />;
+              <div>className="flex items-center gap-3 mt-4 sm:mt-0"></div>
+                <button />className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors"></button />
+                  <BellIcon />className="w-5 h-5 text-neutral-600 dark:text-neutral-400" / />
+                </button>
+                <butto />n />
                   onClick={handleSubscribe}
                   className={`px-6 py-2 rounded-full font-medium transition-colors ${
                     isSubscribed, 
-                      ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600';
-                      : 'bg-red-600 text-white hover:bg-red-700';
+                      ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+                      : 'bg-red-600 text-white hover:bg-red-700'
                   {"{"}""`{"{"}""
                 ">";
                   {isSubscribed ? ()
-                    <>;
-                      <CheckIcon />className="w-4 h-4 inline mr-2" / />;
+                    <>
+                      <CheckIcon />className="w-4 h-4 inline mr-2" / />
                       Subscribed, 
-                    < />;
+                    < />
                   ) : (;
                     'Subscribe';
-                </button /></div />;
-              </div>;
-            </div>;
-          </div>;
-        </div>;
-
+                </button /></div />
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Tabs */}
-        <div>className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8"></div>;
-          <nav />className="flex border-b border-neutral-200 dark:border-neutral-700" />;
+        <div>className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8"></div>
+          <nav />className="flex border-b border-neutral-200 dark:border-neutral-700" />
             {tabs.map((tab: any) => {)
               const Icon = tab.icon, 
-              return (;)
+              return (
                 <butto>n;
           key={tab.id}
                   onClick:{() ={">"{"}" :setActiveTab(tab.id),{"}";
                   className={`flex items-center gap-2 px-6 py-4 border-b-2 font-medium transition-colors ${
                     activeTab === tab.id, 
-                      ? 'border-red-500 text-red-600 dark:text-red-400';
-                      : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300';
+                      ? 'border-red-500 text-red-600 dark:text-red-400'
+                      : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
                   {"{"}""`{"{"}""
                 ">";
-                  <Icon />className="w-5 h-5" / />;
-                  <spa />n />{tab.label}</span />;
-                </button></nav>;
+                  <Icon />className="w-5 h-5" / />
+                  <spa />n />{tab.label}</span />
+                </button></nav>
             {"{"}""){"{"}""
-          </nav></div>;
-        </div>;
-
+          </nav></div>
+        </div>
         {/* Tab Content */}
-        <div>className="pb-12"></div>;
+        <div>className="pb-12"></div>
           {renderTabContent()}
-        </div>;
-  <di />v /></div /></div />;
-    </div>;
-
+        </div>
+  <di />v /></div /></div />
+    </div>
 export default UserPage;

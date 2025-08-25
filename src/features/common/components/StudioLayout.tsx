@@ -9,6 +9,7 @@ export interface StudioLayoutProps {
 export const StudioLayout = (props: StudioLayoutProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default StudioLayout;

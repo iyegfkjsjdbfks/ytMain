@@ -9,6 +9,7 @@ export interface CommentCardProps {
 export const CommentCard = (props: CommentCardProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default CommentCard;

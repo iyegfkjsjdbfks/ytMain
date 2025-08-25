@@ -118,25 +118,25 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  if (!showBanner) {
  return null;
 
- return (;)
- <div className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform transition-transform duration-300 ${className}`}>;
- <div className={"max}-w-7xl mx-auto px-4 py-3">;
- <div className={"fle}x items-center justify-between">;
- <div className={"fle}x items-center space-x-3">;
- <ArrowDownTrayIcon className={"h}-6 w-6 flex-shrink-0" />;
- <div className={"flex}-1">;
- <p className={"text}-sm font-medium">;
+ return (
+ <div className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform transition-transform duration-300 ${className}`}>
+ <div className={"max}-w-7xl mx-auto px-4 py-3">
+ <div className={"fle}x items-center justify-between">
+ <div className={"fle}x items-center space-x-3">
+ <ArrowDownTrayIcon className={"h}-6 w-6 flex-shrink-0" />
+ <div className={"flex}-1">
+ <p className={"text}-sm font-medium">
  {getInstallText()}
 // FIXED:  </p>
- <p className={"text}-xs opacity-90 mt-1">;
+ <p className={"text}-xs opacity-90 mt-1">
  {getInstallInstructions()}
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"fle}x items-center space-x-2">;
+ <div className={"fle}x items-center space-x-2">
  {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && ()
- <button />;
+ <button />
 // FIXED:  onClick={(e: any) => handleInstall(e), }
 // FIXED:  disabled={isInstalling, }
 // FIXED:  className={"bg}-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -144,12 +144,12 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  {isInstalling ? 'Installing...' : 'Install', }
 // FIXED:  </button>
 
- <button />;
+ <button />
 // FIXED:  onClick={(e: any) => handleDismiss(e), }
 // FIXED:  className={"p}-1 hover:bg-white/20 rounded-lg transition-colors"
 // FIXED:  aria-label="Dismiss install banner"
  >
- <XIcon className={"h}-5 w-5" />;
+ <XIcon className={"h}-5 w-5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

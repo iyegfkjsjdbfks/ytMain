@@ -35,13 +35,13 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({))
 
  return `${baseClasses} ${responsiveClasses} ${className}`;
 
- return (;)
- <div className={getGridClasses()}>;
+ return (
+ <div className={getGridClasses()}>
  {videos.map((video,))
  index) => {
  // Generate a stable key using available identifiers;
  const videoKey = video.id || (video).videoId || `video-${index}`;
- return (;)
+ return (
  <YouTubeVideoCard;
           key={keyPrefix ? `${keyPrefix}-${videoKey}` : videoKey, }
  video={video} />; />

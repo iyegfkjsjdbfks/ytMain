@@ -28,7 +28,7 @@ export interface CommentsSectionProps {}
  currentReplyText: string;,
  editingComment: {id: string; parentId ?  : string} | null;
  activeCommentMenu: string | null;,
- expandedReplies: Record < string, boolean>;
+ expandedReplies: Record < string, boolean>
  maxCommentLength: number;,
  onCommentSubmit: (commentText: string) => void;
  onReplySubmit: (parentId) => void;,
@@ -44,7 +44,7 @@ export interface CommentsSectionProps {}
  onSetActiveCommentMenu: (commentId: string | null) => void;,
  onSetExpandedReplies: (updater: (prev: Record < string, boolean>) => Record < string, boolean>) => void;
 
-const CommentsSection: React.FC < CommentsSectionProps> = ({, })
+const CommentsSection: React.FC < CommentsSectionProps> = ({, }) => {
  comments,
  commentCount,
  commentSortOrder,
@@ -89,14 +89,14 @@ return 0;
  year: 31536000 };
  return value * (multipliers[unit as keyof typeof multipliers] || 0);
 
- const sortedComments = [...comments].sort((a, b) => {})
+ const sortedComments = [...comments].sort((a, b) => {}) => {
  if (commentSortOrder === 'top') {}
  return b.likes - a.likes;
  return parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp);
 
 
  const handleEditStart = (comment: Comment) => {, }
- onSetEditingComment({})
+ onSetEditingComment({}) => {
  id: comment.id,
  ...(comment.parentId ? { parentId: comment.parentId } : {}) });
  setEditText(comment.commentText);
@@ -115,58 +115,56 @@ return 0;
  const isEditing = editingComment?.id === comment.id && editingComment?.parentId === comment.parentId;
  const isMenuOpen = activeCommentMenu === comment.id;
 
- return (;)
- <div key={comment.id} className={`flex items - start space - x - 2.5 ${isReply ? 'ml - 8' : ''}`}>;
- <img />;
- <div className={"fle}x - grow min - w - 0">;
- <div className={"fle}x items - center space - x - 1.5 mb - 1">;
- <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">;
+ return (
+ <div key={comment.id} className={`flex items - start space - x - 2.5 ${isReply ? 'ml - 8' : ''}`}>
+ <img />
+ <div className={"fle}x - grow min - w - 0">
+ <div className={"fle}x items - center space - x - 1.5 mb - 1">
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {comment.userName}
 
- <span className={"tex}t - xs text - neutral - 500 dark:text - neutral - 400">;
+ <span className={"tex}t - xs text - neutral - 500 dark:text - neutral - 400">
  {comment.timestamp}
 
- {comment.isEdited && (})
- <span className={"tex}t - xs text - neutral - 400 dark:text - neutral - 500">(edited)</span>;
-
-
- {isEditing ? (})
- <div className={"spac}e - y - 2">;
- <textarea;>;
+ {comment.isEdited && (}) => {
+ <span className={"tex}t - xs text - neutral - 400 dark:text - neutral - 500">(edited)</span>
+ {isEditing ? (}) => {
+ <div className={"spac}e - y - 2">
+ <textarea;>
  rows={3}
  maxLength={maxCommentLength} />
- <div className={"fle}x justify - between items - center">;
- <span className={`text - xs ${}>;
+ <div className={"fle}x justify - between items - center">
+ <span className={`text - xs ${}>
  editText.length > maxCommentLength;
  ? 'text - red - 500 dark:text - red - 400';
- : 'text - neutral - 500 dark:text - neutral - 400';
+ : 'text - neutral - 500 dark:text - neutral - 400'
  }`}>
  {editText.length}/{maxCommentLength}
 
- <div className={"spac}e - x - 2">;
- <button />;
- <span className={"tex}t - sky - 600 dark:text - sky - 400 font - medium">@{comment.replyTo} </span>;
+ <div className={"spac}e - x - 2">
+ <button />
+ <span className={"tex}t - sky - 600 dark:text - sky - 400 font - medium">@{comment.replyTo} </span>
  {comment.commentText}
 
 
- <div className={"fle}x items - center space - x - 4 text - xs text - neutral - 500 dark:text - neutral - 400">;
- <div className={"fle}x items - center space - x - 3">;
- <div className={"relative}">;
- {comment.userName === 'You' && (})
- <button />;
- {isMenuOpen && (})
- <div className={"absolut}e top - full left - 0 mt - 1 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 10 py - 1 min - w-[120px]">;
- <button />;
+ <div className={"fle}x items - center space - x - 4 text - xs text - neutral - 500 dark:text - neutral - 400">
+ <div className={"fle}x items - center space - x - 3">
+ <div className={"relative}">
+ {comment.userName === 'You' && (}) => {
+ <button />
+ {isMenuOpen && (}) => {
+ <div className={"absolut}e top - full left - 0 mt - 1 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 10 py - 1 min - w-[120px]">
+ <button />
  Edit;
 
- <button />;
+ <button />
  Delete;
 
 
 
 
 
- <button />;
+ <button />
  e.preventDefault();
  e.stopPropagation();
  try {}
@@ -182,13 +180,11 @@ return 0;
 
 
  >
- <ThumbsUpIcon className="">;
+ <ThumbsUpIcon className="">
  }`} />
- {comment.likes > 0 && (})
- <span className={"tex}t - xs font - medium">{comment.likes}</span>;
-
-
- <button />;
+ {comment.likes > 0 && (}) => {
+ <span className={"tex}t - xs font - medium">{comment.likes}</span>
+ <button />
  e.preventDefault();
  e.stopPropagation();
  try {}
@@ -204,12 +200,12 @@ return 0;
 
 
  >
- <ThumbsDownIcon className="">;
+ <ThumbsDownIcon className="">
  }`} />
 
 
- {!isReply && (})
- <button />;
+ {!isReply && (}) => {
+ <button />
  onSetReplyingTo(comment.id, `@${comment.userName} `);
  setTimeout((() => replyInputRef.current?.focus()) as any, 0);
 
@@ -220,11 +216,11 @@ return 0;
 
 
  {/* Reply Input */}
- {replyingToCommentId === comment.id && !isReply && (})
- <div className={"fle}x items - start space - x - 2.5 mt - 3">;
- <img />;
- <div className={"fle}x - grow">;
- <input;>;
+ {replyingToCommentId === comment.id && !isReply && (}) => {
+ <div className={"fle}x items - start space - x - 2.5 mt - 3">
+ <img />
+ <div className={"fle}x - grow">
+ <input;>
  ref={replyInputRef}
 
 
@@ -232,23 +228,23 @@ return 0;
 
 
  maxLength={maxCommentLength + 20} />
- <div className={"fle}x justify - between items - center mt - 1.5">;
- <span className={`text - xs ${}>;
+ <div className={"fle}x justify - between items - center mt - 1.5">
+ <span className={`text - xs ${}>
  currentReplyText.length > maxCommentLength;
  ? 'text - red - 500 dark:text - red - 400';
- : 'text - neutral - 500 dark:text - neutral - 400';
+ : 'text - neutral - 500 dark:text - neutral - 400'
  }`}>
  {currentReplyText.length}/{maxCommentLength}
 
- <div className={"spac}e - x - 2">;
- <button />;
+ <div className={"spac}e - x - 2">
+ <button />
  onSetReplyingTo(null);
  onSetCurrentReplyText('');
 
  >
  Cancel;
 
- <button />;
+ <button />
  Reply;
 
 
@@ -257,13 +253,13 @@ return 0;
 
 
  {/* Replies */}
- {!isReply && comment.replies && comment.replies.length > 0 && (})
- <div className={"m}t - 3">;
- <button />;
+ {!isReply && comment.replies && comment.replies.length > 0 && (}) => {
+ <div className={"m}t - 3">
+ <button />
  {expandedReplies[comment.id] ? 'Hide' : 'View'} {comment.replyCount} repl{comment.replyCount === 1 ? 'y' : 'ies', }
 
- {expandedReplies[comment.id] && (})
- <div className={"spac}e - y - 3 pt - 2">;
+ {expandedReplies[comment.id] && (}) => {
+ <div className={"spac}e - y - 3 pt - 2">
  {comment.replies}
  .sort((a,))
  b) => parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp));
@@ -273,15 +269,15 @@ return 0;
 
 
 
- return (;)
- <div className={"m}t - 6">;
+ return (
+ <div className={"m}t - 6">
  {/* Comments Header */}
- <div className={"fle}x items - center justify - between mb - 3">;
- <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50">;
+ <div className={"fle}x items - center justify - between mb - 3">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
  {commentCount} Comments;
 
- <div className={"fle}x items - center space - x - 2 text - sm">;
- <button />;
+ <div className={"fle}x items - center space - x - 2 text - sm">
+ <button />
  commentSortOrder === 'top';
  ? 'bg - neutral - 200 dark:bg - neutral - 700 font - medium';
  : 'hover:bg - neutral - 100 dark:hover:bg - neutral - 800';
@@ -289,7 +285,7 @@ return 0;
  >
  Top;
 
- <button />;
+ <button />
  commentSortOrder === 'newest';
  ? 'bg - neutral - 200 dark:bg - neutral - 700 font - medium';
  : 'hover:bg - neutral - 100 dark:hover:bg - neutral - 800';
@@ -301,15 +297,15 @@ return 0;
 
 
  {/* Add Comment Form */}
- <div className={"m}b - 6">;
- <AddCommentForm;>;
+ <div className={"m}b - 6">
+ <AddCommentForm;>
  currentUserAvatarUrl="https://picsum.photos / seed / currentUserComment / 40 / 40"
  onCommentSubmit={onCommentSubmit}
  maxCommentLength={maxCommentLength} />; />
 
 
  {/* Comments List */}
- <div className={"spac}e - y - 5">;
+ <div className={"spac}e - y - 5">
  {sortedComments.map((comment) => renderComment(comment))}
 
 

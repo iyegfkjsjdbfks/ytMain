@@ -73,24 +73,24 @@ export const Button = forwardRef < HTMLButtonElement, ButtonProps>((;))
  variant === 'link' && 'inline',
  className);
 
- return (;)
- <button;>;
+ return (
+ <button>
  ref={ref}
 // FIXED:  className={buttonClasses, }
 // FIXED:  disabled={isDisabled, }
  {...props} />
- {loading ? (})
- <><< /> /><< /> /><< /> />;
- <ButtonLoading size={size === 'xs' ? 'xs' : size === 'sm' ? 'sm' : 'md'} className={"m}r - 2" />;
- <span > Loading...</span>;
+ {loading ? (}) => {
+ <><< /> /><< /> /><< /> />
+ <ButtonLoading size={size === 'xs' ? 'xs' : size === 'sm' ? 'sm' : 'md'} className={"m}r - 2" />
+ <span > Loading...</span>
 // FIXED:  < />
  ) : (;
- <><< /> /><< /> /><< /> />;
- {leftIcon && (})
- <span className={"m}r - 2 flex - shrink - 0">{leftIcon}</span>;
- <span>{children}</span>;
- {rightIcon && (})
- <span className={"m}l - 2 flex - shrink - 0">{rightIcon}</span>;
+ <><< /> /><< /> /><< /> />
+ {leftIcon && (}) => {
+ <span className={"m}r - 2 flex - shrink - 0">{leftIcon}</span>
+ <span>{children}</span>
+ {rightIcon && (}) => {
+ <span className={"m}l - 2 flex - shrink - 0">{rightIcon}</span>
 // FIXED:  < />
 // FIXED:  </button>
 
@@ -110,8 +110,8 @@ export const IconButton = forwardRef < HTMLButtonElement, IconButtonProps>((;))
  className,
  ...props;
  ref) => {}
- return (;)
- <Button;>;
+ return (
+ <Button;>
  ref={ref}
  variant={variant}
  size={size}
@@ -130,10 +130,10 @@ export const SubscribeButton: React.FC<{,}
  onClick?: () => void;
  className?: string;
 }> = ({ isSubscribed, loading = false, onClick, className }: any) => ()
-          <Button;>;
+          <Button;>
  variant={isSubscribed ? 'outline' : 'primary', }
  size="sm";
- loading={loading} />;
+ loading={loading} />
 // FIXED:  onClick={(e: React.MouseEvent) => onClick(e), }
 // FIXED:  className={className, }
  >
@@ -147,15 +147,15 @@ export const LikeButton: React.FC<{,}
  onClick?: () => void;
  className?: string;
 }> = ({ isLiked, count, loading = false, onClick, className }: any) => ()
-          <Button;>;
+          <Button;>
  variant={isLiked ? 'primary' : 'ghost', }
  size="sm";
- loading={loading} />;
+ loading={loading} />
 // FIXED:  onClick={(e: React.MouseEvent) => onClick(e), }
 // FIXED:  className={className, }
  leftIcon={}
- <svg className="w - 4 h - 4" fill={isLiked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">;
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l - 3.5 7A2 2 0 0115.263 21h - 4.017c-.163 0-.326-.02-.485-.06L7 20m7 - 10V5a2 2 0 00 - 2 - 2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7 - 10h - 2M7 20H5a2 2 0 01 - 2 - 2v - 6a2 2 0 012 - 2h2.5" />;
+ <svg className="w - 4 h - 4" fill={isLiked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+ <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l - 3.5 7A2 2 0 0115.263 21h - 4.017c-.163 0-.326-.02-.485-.06L7 20m7 - 10V5a2 2 0 00 - 2 - 2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7 - 10h - 2M7 20H5a2 2 0 01 - 2 - 2v - 6a2 2 0 012 - 2h2.5" />
 // FIXED:  </svg>
  >
  {count !== undefined ? count : '', }

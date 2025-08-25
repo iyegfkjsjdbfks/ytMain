@@ -139,7 +139,7 @@ export interface NotificationData {
  message: string;
  actionUrl?: string;
  actionText?: string;
- metadata?: Record<string, string | number | boolean>;
+ metadata?: Record<string, string | number | boolean>
 }
 
 export interface StrictNotification {
@@ -171,11 +171,11 @@ export interface FormFieldValue {
 }
 
 export interface StrictFormState {
- fields: Record<string, FormFieldValue>;
+ fields: Record<string, FormFieldValue>
  isValid: boolean;
  isSubmitting: boolean;
  submitCount: number;
- errors: Record<string, string>;
+ errors: Record<string, string>
 }
 
 export interface FormValidationRule {
@@ -196,8 +196,8 @@ export interface FormFieldConfig {
 export interface ApiRequestConfig {
  url: string;
  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
- headers?: Record<string, string>;
- params?: Record<string, string | number | boolean>;
+ headers?: Record<string, string>
+ params?: Record<string, string | number | boolean>
  data?: Record<string, unknown> | FormData;
  timeout?: number;
  retries?: number;
@@ -230,7 +230,7 @@ export interface ApiResponse<T> {
  hasNext: boolean;
  hasPrev: boolean
  };
- metadata?: Record<string, string | number | boolean>;
+ metadata?: Record<string, string | number | boolean>
 }
 
 // Cache Types
@@ -254,7 +254,7 @@ export interface CustomEventData {
  source: string;
  action: string;
  target?: string;
- metadata?: Record<string, unknown>;
+ metadata?: Record<string, unknown>
 }
 
 export interface StrictCustomEvent {
@@ -281,7 +281,7 @@ export interface StorageConfig {
 export interface AnalyticsEvent {
  name: string;
  category: string;
- properties: Record<string, string | number | boolean>;
+ properties: Record<string, string | number | boolean>
  timestamp: string;
  userId?: string;
  sessionId: string
@@ -305,21 +305,16 @@ export type StrictRecord<K extends string | number | symbol, V> = {
 
 export type NonEmptyArray<T> = [T, ...T[]];
 
-export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
-
-export type OptionalFields<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-
+export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>
+export type OptionalFields<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 // Function Types
-export type AsyncFunction<T extends unknown, R> = (...args: T) => Promise<R>;
+export type AsyncFunction<T extends unknown, R> = (...args: T) => Promise<R>
 export type SyncFunction<T extends unknown, R> = (...args: T) => R;
-export type AnyFunction<T extends unknown, R> = AsyncFunction<T, R> | SyncFunction<T, R>;
-
+export type AnyFunction<T extends unknown, R> = AsyncFunction<T, R> | SyncFunction<T, R>
 export type EventHandler<T = Event> = (event: T) => void;
-export type AsyncEventHandler<T = Event> = (event: T) => Promise<void>;
-
+export type AsyncEventHandler<T = Event> = (event: T) => Promise<void>
 export type Validator<T> = (value: T) => string | undefined;
-export type AsyncValidator<T> = (value: T) => Promise<string | undefined>;
-
+export type AsyncValidator<T> = (value: T) => Promise<string | undefined>
 // Component Props Types
 export interface BaseComponentProps {
  className?: string;
@@ -327,12 +322,13 @@ export interface BaseComponentProps {
  'data-testid'?: string;
  children?: React.ReactNode;
 }
+}
 
 export interface InteractiveComponentProps extends BaseComponentProps {
  disabled?: boolean;
  loading?: boolean;
- onClick?: EventHandler<React.MouseEvent>;
- onKeyDown?: EventHandler<React.KeyboardEvent>;
+ onClick?: EventHandler<React.MouseEvent>
+ onKeyDown?: EventHandler<React.KeyboardEvent>
 }
 
 export interface FormComponentProps extends InteractiveComponentProps {
@@ -341,8 +337,8 @@ export interface FormComponentProps extends InteractiveComponentProps {
  error?: string;
  required?: boolean;
  onChange?: (value: FormFieldValue['value']) => void;
- onBlur?: EventHandler<React.FocusEvent>;
- onFocus?: EventHandler<React.FocusEvent>;
+ onBlur?: EventHandler<React.FocusEvent>
+ onFocus?: EventHandler<React.FocusEvent>
 }
 
 // All types are already exported above with their definitions

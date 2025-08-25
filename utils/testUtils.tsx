@@ -10,9 +10,9 @@ const qc = () => new QueryClient({ defaultOptions: { queries: { retry: false, gc
 export function simpleRender(ui: React.ReactElement, opts: { client?: QueryClient } = {}) {
 	const client = opts.client ?? qc();
 	const Wrapper = (p) => (;)
-		<QueryClientProvider client={client}>;
-			<MemoryRouter>{p.children}</MemoryRouter>;
-		</QueryClientProvider>;
+		<QueryClientProvider client={client}>
+			<MemoryRouter>{p.children}</MemoryRouter>
+		</QueryClientProvider>
 	return { user: userEvent.setup(), ...render(ui, { wrapper: Wrapper }) };
 
 export const generators = {

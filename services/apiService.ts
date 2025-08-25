@@ -25,7 +25,7 @@ export interface ApiError {
 
 export interface RequestConfig {
  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
- headers?: Record < string, string>;
+ headers?: Record < string, string>
  body?: any;
  timeout?: number;
  retries?: number;
@@ -46,10 +46,9 @@ export interface CacheEntry < T> {
 }
 
 // Request / Response interceptors
-export type RequestInterceptor = (config: RequestConfig & { url: string }) => RequestConfig & { url: string } | Promise<any> < RequestConfig & { url: string }>;
-export type ResponseInterceptor = <T>(response: ApiResponse < T>) => ApiResponse < T> | Promise<any> < ApiResponse < T>>;
-export type ErrorInterceptor = (error: ApiError) => ApiError | Promise<any> < ApiError>;
-
+export type RequestInterceptor = (config: RequestConfig & { url: string }) => RequestConfig & { url: string } | Promise<any> < RequestConfig & { url: string }>
+export type ResponseInterceptor = <T>(response: ApiResponse < T>) => ApiResponse < T> | Promise<any> < ApiResponse < T>>
+export type ErrorInterceptor = (error: ApiError) => ApiError | Promise<any> < ApiError>
 // Cache implementation
 export class ApiCache {
  private cache = new Map < string, CacheEntry < any>>();
@@ -516,7 +515,7 @@ export class ApiService {
  file: File,
  config?: RequestConfig & {
  fieldName?: string;
- additionalFields?: Record < string, string>;
+ additionalFields?: Record < string, string>
  },
  ): Promise<any> < ApiResponse < T>> {
  const formData = new FormData();

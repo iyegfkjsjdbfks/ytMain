@@ -37,9 +37,9 @@ export interface AnalyzedError {
 
 export interface ErrorAnalysisResult {
   totalErrors: number,
-  errorsByCategory: Map<string, AnalyzedError[]>;
-  errorsByFile: Map<string, AnalyzedError[]>;
-  errorsBySeverity: Map<ErrorSeverity, AnalyzedError[]>;
+  errorsByCategory: Map<string, AnalyzedError[]>
+  errorsByFile: Map<string, AnalyzedError[]>
+  errorsBySeverity: Map<ErrorSeverity, AnalyzedError[]>
   criticalFiles: string[];
   recommendations: string[], 
 

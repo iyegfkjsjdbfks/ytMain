@@ -27,12 +27,11 @@ export interface WorkflowCondition {
 
 export interface WorkflowAction {
  type: "notify" | 'block' | 'auto - fix' | 'create - issue' | 'rollback' | 'scale';,
- _config: Record < string, any>;
-
+ _config: Record < string, any>
 export interface DeploymentStrategy {
  name: string;,
  type: 'blue - green' | 'canary' | 'rolling' | 'feature - flag';
- _config: Record < string, any>;
+ _config: Record < string, any>
  healthChecks: string[];,
  rollbackTriggers: WorkflowCondition[];
 
@@ -45,7 +44,7 @@ export interface QualityGateResult {
  value: unknown;
  threshold: unknown;,
  message: string;
- }>;
+ }>
  timestamp: number;
 
 export interface ContinuousImprovementSuggestion {
@@ -110,7 +109,7 @@ return undefined;
 
  for (const stage of workflow) {
  try {
- const context = {} as Record < string, any>;
+ const context = {} as Record < string, any>
  const stageResult = await this.executeStage(stage, context);
  results.push(stageResult);
 
@@ -223,7 +222,7 @@ return undefined;
  */
  async autoImplementImprovements(suggestionIds: string[]): Promise<{,
  implemented: string[];
- failed: Array<{ id: string; _error: string }>;
+ failed: Array<{ id: string; _error: string }>
  }> {
  const implemented: string[] = [];
  const failed: Array<{ id: string; _error: string }> = [];
@@ -258,7 +257,7 @@ return undefined;
  totalExecutions: number;,
  successRate: number;
  averageDuration: number;,
- failuresByStage: Record < string, number>;
+ failuresByStage: Record < string, number>
  trends: {,
  executions: number[];
  successRates: number[];,

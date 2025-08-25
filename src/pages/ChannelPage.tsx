@@ -110,32 +110,29 @@ const ChannelPage: React._FC = () => {
     return <ChannelPageSkeleton /> />, 
 
   if (error) {
-    return (;)
-      <div />className="p-6 text-center text-red-500 dark:text-red-400 text-lg"></div />;
+    return (
+      <div />className="p-6 text-center text-red-500 dark:text-red-400 text-lg"></div />
         {error}
-      </div>;
-
+      </div>
   if (!channel) {
-    return (;)
-      <div />className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg"></div />;
+    return (
+      <div />className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg"></div />
         Channel not found.;
-      </div>;
-
-  return (;)
-    <div />className="bg-white dark:bg-neutral-950 min-h-full"></div />;
-      <ChannelHeader />; />;
+      </div>
+  return (
+    <div />className="bg-white dark:bg-neutral-950 min-h-full"></div />
+      <ChannelHeader />; />
         channel={channel}
         videoCount={videos.length}
         isSubscribed={isSubscribed}
         onSubscribeToggle={handleSubscribeToggle}
       /">"
 
-      <div />className="px-4 md:px-6 lg:px-8"></div />;
-        <ChannelTabs />tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} / />;
-      </div>;
-
-      <div />className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"></div />;
-        <ChannelTabContent />; />;
+      <div />className="px-4 md:px-6 lg:px-8"></div />
+        <ChannelTabs />tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} / />
+      </div>
+      <div />className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"></div />
+        <ChannelTabContent />; />
           activeTab={activeTab}
           channel={channel}
           videos={videos}
@@ -143,7 +140,6 @@ const ChannelPage: React._FC = () => {
           communityPosts={channelCommunityPosts}
           onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
         /">"
-      </div>;
-    </div>;
-
+      </div>
+    </div>
 export default ChannelPage;

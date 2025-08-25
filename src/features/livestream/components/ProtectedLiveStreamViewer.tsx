@@ -9,6 +9,7 @@ export interface ProtectedLiveStreamViewerProps {
 export const ProtectedLiveStreamViewer = (props: ProtectedLiveStreamViewerProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default ProtectedLiveStreamViewer;

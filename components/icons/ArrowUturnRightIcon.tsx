@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 // Using a Heroicons v2 style path for ArrowUturnRightIcon (Share-like icon)
 const ArrowUturnRightIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }: any) => (;)
-          <svg;>;
+          <svg;>
 // FIXED:  className={className, }
  fill="none";
  stroke="currentColor";
  viewBox="0 0 24 24";
  xmlns="http://www.w3.org/2000/svg"
 // FIXED:  aria-hidden="true" />
- <path;>;
+ <path;>
  strokeLinecap="round";
  strokeLinejoin="round";
  strokeWidth="2";

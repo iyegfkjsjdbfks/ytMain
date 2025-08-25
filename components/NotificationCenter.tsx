@@ -30,7 +30,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  const [filter, setFilter] = useState<'all' | 'unread'>('all');
  const dropdownRef = useRef < HTMLDivElement>(null);
 
- useEffect(() => {})
+ useEffect(() => {}) => {
  loadNotifications();
 
  // Simulate real - time notifications;
@@ -43,7 +43,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  return () => clearInterval(interval);
  }, []);
 
- useEffect(() => {})
+ useEffect(() => {}) => {
  const handleClickOutside = (event: MouseEvent) => {, }
  if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {}
  setIsOpen(false);
@@ -52,7 +52,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  return () => document.removeEventListener('mousedown', handleClickOutside as EventListener);
  }, []);
 
- const loadNotifications = useCallback(() => {})
+ const loadNotifications = useCallback(() => {}) => {
  const stored = (localStorage).getItem('youtubeCloneNotifications_v1');
  if (stored) {}
  const parsedNotifications = JSON.parse(stored);
@@ -111,7 +111,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
  isRead: true }];
 
- const generateRandomNotification = useCallback(() => {})
+ const generateRandomNotification = useCallback(() => {}) => {
  const types: Array<any> < Notification['type']> = ['video_upload', 'comment_reply', 'like', 'live_stream', 'subscription', 'community_post'];
  const randomType = types[Math.floor(Math.random() * types.length)] || 'video_upload';
 
@@ -210,62 +210,62 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  case 'community_post': return '📝';
  default: return '🔔';
 
- return (;)
- <div className={`relative ${className}`} ref={dropdownRef}>;
- <button />;
+ return (
+ <div className={`relative ${className}`} ref={dropdownRef}>
+ <button />
 // FIXED:  onClick={() => setIsOpen(!isOpen: React.MouseEvent), }
 // FIXED:  className={"relativ}e p - 2 text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 800 dark:hover:text - neutral - 200 transition - colors"
  title="Notifications";
  >
- {unreadCount > 0 ? (})
- <BellIconSolid className="w - 6 h - 6" />;
+ {unreadCount > 0 ? (}) => {
+ <BellIconSolid className="w - 6 h - 6" />
  ) : (;
- <BellIcon className="w - 6 h - 6" />;
- {unreadCount > 0 && (})
- <span className={"absolut}e -top - 1 -right - 1 bg - red - 600 text - white text - xs rounded - full w - 5 h - 5 flex items - center justify - center font - medium">;
+ <BellIcon className="w - 6 h - 6" />
+ {unreadCount > 0 && (}) => {
+ <span className={"absolut}e -top - 1 -right - 1 bg - red - 600 text - white text - xs rounded - full w - 5 h - 5 flex items - center justify - center font - medium">
  {unreadCount > 99 ? '99+' : unreadCount, }
 // FIXED:  </span>
 // FIXED:  </button>
 
- {isOpen && (})
- <div className={"absolut}e top - full right - 0 mt - 2 w - 96 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - xl z - 50 max - h - 96 overflow - hidden">;
- <div className="p - 4 border - b border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between mb - 3">;
- <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">Notifications</h3>;
- <button />;
+ {isOpen && (}) => {
+ <div className={"absolut}e top - full right - 0 mt - 2 w - 96 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - xl z - 50 max - h - 96 overflow - hidden">
+ <div className="p - 4 border - b border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between mb - 3">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">Notifications</h3>
+ <button />
 // FIXED:  onClick={() => setIsOpen(false: React.MouseEvent), }
 // FIXED:  className="p - 1 text - neutral - 500 hover:text - neutral - 700 dark:hover:text - neutral - 300"
  >
- <XIcon className="w - 5 h - 5" />;
+ <XIcon className="w - 5 h - 5" />
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className={"fle}x items - center justify - between">;
- <div className={"fle}x space - x - 2">;
- <button />;
+ <div className={"fle}x items - center justify - between">
+ <div className={"fle}x space - x - 2">
+ <button />
 // FIXED:  onClick={() => setFilter('all': React.MouseEvent), }
 // FIXED:  className={`px - 3 py - 1 text - sm rounded - full transition - colors ${, }
  filter === 'all';
  ? 'bg - blue - 100 dark:bg - blue - 900 text - blue - 800 dark:text - blue - 200';
- : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700';
+ : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700'
  }`}
  >
  All;
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => setFilter('unread': React.MouseEvent), }
 // FIXED:  className={`px - 3 py - 1 text - sm rounded - full transition - colors ${, }
  filter === 'unread';
  ? 'bg - blue - 100 dark:bg - blue - 900 text - blue - 800 dark:text - blue - 200';
- : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700';
+ : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700'
  }`}
  >
  Unread ({unreadCount});
 // FIXED:  </button>
 // FIXED:  </div>
 
- {unreadCount > 0 && (})
- <button />;
+ {unreadCount > 0 && (}) => {
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => markAllAsRead(e), }
 // FIXED:  className={"tex}t - sm text - blue - 600 dark:text - blue - 400 hover:text - blue - 800 dark:hover:text - blue - 300"
  >
@@ -274,65 +274,65 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"ma}x - h - 80 overflow - y - auto">;
- {filteredNotifications.length === 0 ? (})
- <div className="p - 8 text - center text - neutral - 500 dark:text - neutral - 400">;
- <BellIcon className="w - 12 h - 12 mx - auto mb - 3 opacity - 50" />;
- <p > No notifications</p>;
+ <div className={"ma}x - h - 80 overflow - y - auto">
+ {filteredNotifications.length === 0 ? (}) => {
+ <div className="p - 8 text - center text - neutral - 500 dark:text - neutral - 400">
+ <BellIcon className="w - 12 h - 12 mx - auto mb - 3 opacity - 50" />
+ <p > No notifications</p>
 // FIXED:  </div>
  ) : (;
  filteredNotifications.map((notification) => (;))
-          <div;
+          <div
           key={notification.id}
 // FIXED:  className={`p - 4 border - b border - neutral - 100 dark:border - neutral - 700 hover:bg - neutral - 50 dark:hover:bg - neutral - 750 transition - colors ${, }
- !notification.isRead ? 'bg - blue - 50 dark:bg - blue - 950 / 20' : '';
+ !notification.isRead ? 'bg - blue - 50 dark:bg - blue - 950 / 20' : ''
  }`} />
- <div className={"fle}x items - start space - x - 3">;
- <img;>;
+ <div className={"fle}x items - start space - x - 3">
+ <img;>
 // FIXED:  src={notification.channelAvatar, }
 // FIXED:  alt={notification.channelName, }
 // FIXED:  className="w - 10 h - 10 rounded - full flex - shrink - 0" /> />
 
- <div className={"fle}x - 1 min - w - 0">;
- <div className={"fle}x items - start justify - between">;
- <div className={"fle}x - 1">;
- <div className={"fle}x items - center space - x - 2 mb - 1">;
- <span className={"tex}t - lg">{getNotificationIcon(notification.type)}</span>;
- <p className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"fle}x - 1 min - w - 0">
+ <div className={"fle}x items - start justify - between">
+ <div className={"fle}x - 1">
+ <div className={"fle}x items - center space - x - 2 mb - 1">
+ <span className={"tex}t - lg">{getNotificationIcon(notification.type)}</span>
+ <p className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">
  {notification.title}
 // FIXED:  </p>
- {!notification.isRead && (})
- <div className="w - 2 h - 2 bg - blue - 600 rounded - full flex - shrink - 0" />;
+ {!notification.isRead && (}) => {
+ <div className="w - 2 h - 2 bg - blue - 600 rounded - full flex - shrink - 0" />
 // FIXED:  </div>
-<p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400 mb - 2">;
+<p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400 mb - 2">
  {notification.channelName} {notification.message}
 // FIXED:  </p>
- <p className={"tex}t - xs text - neutral - 500 dark:text - neutral - 500">;
+ <p className={"tex}t - xs text - neutral - 500 dark:text - neutral - 500">
  {formatDistanceToNow(new Date(notification.timestamp))} ago;
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className={"fle}x items - center space - x - 1 ml - 2">;
- {!notification.isRead && (})
- <button />;
+ <div className={"fle}x items - center space - x - 1 ml - 2">
+ {!notification.isRead && (}) => {
+ <button />
 // FIXED:  onClick={() => markAsRead(notification.id: React.MouseEvent), }
 // FIXED:  className="p - 1 text - neutral - 400 hover:text - blue - 600 dark:hover:text - blue - 400"
  title="Mark as read";
  >
- <CheckIcon className="w - 4 h - 4" />;
+ <CheckIcon className="w - 4 h - 4" />
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => deleteNotification(notification.id: React.MouseEvent), }
 // FIXED:  className="p - 1 text - neutral - 400 hover:text - red - 600 dark:hover:text - red - 400"
  title="Delete notification";
  >
- <TrashIcon className="w - 4 h - 4" />;
+ <TrashIcon className="w - 4 h - 4" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
- {notification.videoThumbnail && (})
- <img;>;
+ {notification.videoThumbnail && (}) => {
+ <img;>
 // FIXED:  src={notification.videoThumbnail, }
 // FIXED:  alt="Video thumbnail"
 // FIXED:  className="w - 20 h - 11 rounded mt - 2 object - cover" /> />

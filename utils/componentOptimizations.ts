@@ -4,17 +4,16 @@ import { memo, useMemo, forwardRef, lazy, createElement, useEffect, type Compone
  * Higher - order component that adds React.memo with custom comparison
  */
 export function withMemo < P extends object>(,;)
- Component: ComponentType < P>;
+ Component: ComponentType < P>
  areEqual?: (prevProps: P, nextProps: P) => boolean,
 ): ComponentType < P> {
- return memo(Component, areEqual) as unknown as ComponentType < P>;
-
+ return memo(Component, areEqual) as unknown as ComponentType < P>
 /**
  * Higher - order component for lazy loading components
  */
 export function withLazyLoading < P extends object>(,;)
- importFunc: () => Promise<{ default: ComponentType < P> }>;
- _fallback?: ComponentType < any>;
+ importFunc: () => Promise<{ default: ComponentType < P> }>
+ _fallback?: ComponentType < any>
 ): LazyExoticComponent < ComponentType < P>> {
  return lazy(importFunc);
 
@@ -58,7 +57,7 @@ export const memoComparisons = {
  /**
  * Comparison that ignores specific props
  */,
- ignoring: <P extends object>(ignoredProps: Array<any> < keyof P>) =>;
+ ignoring: <P extends object>(ignoredProps: Array<any> < keyof P>) =>
  (prevProps: P, nextProps: P): (boolean) => {
  const filteredPrev: object = { ...prevProps };
  const filteredNext: object = { ...nextProps };

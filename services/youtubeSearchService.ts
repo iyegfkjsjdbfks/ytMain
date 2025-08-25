@@ -478,7 +478,7 @@ export class YouTubeSearchService {
  conditionalLogger.debug('Filtering out non - YouTube URL', { url: item.link }, 'YouTubeSearchService');
  }
  return isYouTubeVideo;
- })
+ }) => {
  .map((item, index) => this.convertToVideo(item, index))
  .filter((video) => {
  // Exclude the current video from recommendations

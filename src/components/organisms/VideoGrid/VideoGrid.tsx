@@ -9,6 +9,7 @@ export interface VideoGridProps {
 export const VideoGrid = (props: VideoGridProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default VideoGrid;

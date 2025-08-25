@@ -36,21 +36,21 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({)
  e.stopPropagation();
  onRetry();
 
- return (;)
- <div;>;
+ return (
+ <div>
 // FIXED:  className={`${variantClasses[variant]} ${className}`} />
 // FIXED:  onClick={(e: any) => handleClick(e), }
  role="alert";
  >
- <div className={"text}-center">;
+ <div className={"text}-center">
  {showIcon && ()
- <ExclamationTriangleIcon;>;
+ <ExclamationTriangleIcon;>
 // FIXED:  className={`w-8 h-8 mx-auto mb-2 ${iconColorClasses[variant]}`} /> />
- <p className={`text-sm mb-2 ${textColorClasses[variant]}`}>;
+ <p className={`text-sm mb-2 ${textColorClasses[variant]}`}>
  {message}
 // FIXED:  </p>
  {onRetry && ()
- <p className={`text-xs opacity-75 ${textColorClasses[variant]}`}>;
+ <p className={`text-xs opacity-75 ${textColorClasses[variant]}`}>
  {retryText}
 // FIXED:  </p>
 // FIXED:  </div>

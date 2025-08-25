@@ -6,6 +6,7 @@ export interface IconProps {
   size?: number, 
 
 export const LikeIcon = (props: IconProps) => {
+}
   return React.createElement('div', { className: props.className }, '👍');
 
 export const DislikeIcon = (props: IconProps) => {

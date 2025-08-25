@@ -27,7 +27,9 @@ interface RefactoredAppProvidersProps {
  * - Proper error boundaries and suspense handling
  * - Reduced provider nesting for better performance
  */
-export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
+export const RefactoredAppProviders: React.FC<Props> = ({}
+  // Props destructuring here
+}
  children }) => {
  return (
  <ErrorBoundary>
@@ -61,7 +63,9 @@ interface TestAppProvidersProps {
  queryClient?: QueryClient;
 }
 
-export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
+export const TestAppProviders: React.FC<Props> = ({}
+  // Props destructuring here
+}
  children,
  queryClient: customQueryClient }) => {
  const client = customQueryClient || queryClient;

@@ -9,6 +9,7 @@ export interface RegisterPageProps {
 export const RegisterPage = (props: RegisterPageProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default RegisterPage;

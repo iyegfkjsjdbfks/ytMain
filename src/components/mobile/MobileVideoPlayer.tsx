@@ -14,6 +14,7 @@ export const MobileVideoPlayer: React.FC<MobileVideoPlayerProps> = ({)
   children,
   onLoad,
   onError, 
+}
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -34,26 +35,23 @@ export const MobileVideoPlayer: React.FC<MobileVideoPlayerProps> = ({)
   }, [onLoad, onError]);
 
   if (error) {
-    return (;)
-      <div className={'component-error ' + className}>;
-        <h3>Error: {error.message}</h3>;
-        <button onClick={() => window.location.reload()}>Retry</button>;
-      </div>;
-
+    return (
+      <div className={'component-error ' + className}>
+        <h3>Error: {error.message}</h3>
+        <button onClick={() => window.location.reload()}>Retry</button>
+      </div>
   if (!isReady) {
-    return (;)
-      <div className={'component-loading ' + className}>;
-        <div>Loading...</div>;
-      </div>;
-
-  return (;)
-    <div className={'component-ready ' + className}>;
-      <div className="component-header">;
-        <h2>MobileVideoPlayer</h2>;
-      </div>;
-      <div className="component-body">;
+    return (
+      <div className={'component-loading ' + className}>
+        <div>Loading...</div>
+      </div>
+  return (
+    <div className={'component-ready ' + className}>
+      <div className="component-header">
+        <h2>MobileVideoPlayer</h2>
+      </div>
+      <div className="component-body">
         {children || <p>Component is ready and functioning properly.</p>}
-      </div>;
-    </div>;
-
+      </div>
+    </div>
 export default MobileVideoPlayer;

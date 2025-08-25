@@ -44,12 +44,11 @@ export interface ArchitecturalInsight {
  resources: string;
 
 export interface DependencyAnalysis {
- outdated: Array<{ name: string; current: string; latest: string; severity: string }>;
- vulnerabilities: Array<{ name: string; severity: string; description: string }>;
+ outdated: Array<{ name: string; current: string; latest: string; severity: string }>
+ vulnerabilities: Array<{ name: string; severity: string; description: string }>
  unused: string;,
  circular: string[][];
- bundleImpact: Array<{ name: string; size: number; impact: string }>;
-
+ bundleImpact: Array<{ name: string; size: number; impact: string }>
 /**
  * Advanced Code Analysis Engine
  */
@@ -145,7 +144,7 @@ return;
  description: string;,
  code: string;
  confidence: number;
- }>;
+ }>
  }> {
  const fileContent = await this.getFileContent(_filePath);
  const suggestions: any[] = [];
@@ -480,8 +479,8 @@ export class TechnicalDebtTracker {
  */
  getDebtSummary(): {
  total: number;,
- byType: Record < string, number>;
- byImpact: Record < string, number>;
+ byType: Record < string, number>
+ byImpact: Record < string, number>
  totalEffort: number;,
  averageAge: number;
  } {
@@ -527,12 +526,12 @@ export class AutomatedCodeReviewer {
  severity: string;
  message: string;
  suggestion?: string;
- }>;
+ }>
  suggestions: Array<{,
  type: string;
  description: string;,
  confidence: number;
- }>;
+ }>
  }> {
  const issues: any[] = [];
  const suggestions: any[] = [];

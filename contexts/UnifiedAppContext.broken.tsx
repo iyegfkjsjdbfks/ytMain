@@ -102,10 +102,9 @@ interface UnifiedAppContextType {}
 
  // Auth actions,
  login: (email,
- password) => Promise<any> < boolean>;
+ password) => Promise<any> < boolean>
  logout: () => void;,
- updateProfile: (updates: Partial < User>) => Promise<any> < boolean>;
-
+ updateProfile: (updates: Partial < User>) => Promise<any> < boolean>
  // Theme actions,
  setTheme: (theme: 'light' | 'dark' | 'system') => void;
 

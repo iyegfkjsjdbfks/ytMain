@@ -5,9 +5,9 @@ import { UnifiedButton } from '../ui / UnifiedButton';
 
 // Form Context Types;
 export interface FormContextValue {}
- errors: Record < string, string>;
- touched: Record < string, boolean>;
- values: Record < string, any>;
+ errors: Record < string, string>
+ touched: Record < string, boolean>
+ values: Record < string, any>
  setFieldValue: (name,)
  value: string | number) => void;,
  setFieldError: (name,)
@@ -21,11 +21,10 @@ const FormContext = createContext < FormContextValue | null>(null);
 // Form Provider Component;
 export interface FormProviderProps {}
  children: React.ReactNode;
- initialValues?: Record < string, any>;
- validationSchema?: Record < string(value: string | number) => string | undefined>;
- onSubmit?: (values: Record < string, any>) => void | Promise<any> < void>;
-
-export const FormProvider: React.FC < FormProviderProps> = ({, })
+ initialValues?: Record < string, any>
+ validationSchema?: Record < string(value: string | number) => string | undefined>
+ onSubmit?: (values: Record < string, any>) => void | Promise<any> < void>
+export const FormProvider: React.FC < FormProviderProps> = ({, }) => {
  children,
  initialValues = {},
  validationSchema = {} }) => {}
@@ -51,7 +50,7 @@ export const FormProvider: React.FC < FormProviderProps> = ({, })
  setTouched(prev => ({ ...prev as any, [name]: touched }));
  }, []);
 
- const validateField = useCallback((name) => {})
+ const validateField = useCallback((name) => {}) => {
  const validator = validationSchema.name;
  if (validator) {}
  const error = validator(values.name);
@@ -68,8 +67,8 @@ export const FormProvider: React.FC < FormProviderProps> = ({, })
  setFieldTouched,
  validateField };
 
- return (;)
- <FormContext.Provider value={contextValue}>;
+ return (
+ <FormContext.Provider value={contextValue}>
  {children}
 // FIXED:  </FormContext.Provider>
 
@@ -89,7 +88,7 @@ export interface FormFieldProps {}
  children: React.ReactNode;
  className?: string;
 
-export const FormField: React.FC < FormFieldProps> = ({, })
+export const FormField: React.FC < FormFieldProps> = ({, }) => {
  name,
  label,
  required,
@@ -99,10 +98,10 @@ export const FormField: React.FC < FormFieldProps> = ({, })
  const { errors, touched } = useFormContext();
  const error = touched.name ? errors.name : undefined;
 
- return (;)
- <div className={cn('space - y - 1', className)}>;
- {label && (})
- <label;>;
+ return (
+ <div className={cn('space - y - 1', className)}>
+ {label && (}) => {
+ <label;>
 // FIXED:  htmlFor={name, }
 // FIXED:  className={"bloc}k text - sm font - medium text - neutral - 700 dark:text - neutral - 300" />
  {label}
@@ -111,13 +110,13 @@ export const FormField: React.FC < FormFieldProps> = ({, })
 
  {children}
 
- {error && (})
- <p className={"tex}t - sm text - red - 600 dark:text - red - 400">;
+ {error && (}) => {
+ <p className={"tex}t - sm text - red - 600 dark:text - red - 400">
  {error}
 // FIXED:  </p>
 
- {helpText && !error && (})
- <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400">;
+ {helpText && !error && (}) => {
+ <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400">
  {helpText}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -144,7 +143,7 @@ const inputSizeClasses: object = {, }
  md: 'px - 4 py - 2.5 text - sm',
  lg: 'px - 4 py - 3 text - base' };
 
-export const UnifiedInput: React.FC < UnifiedInputProps> = ({, })
+export const UnifiedInput: React.FC < UnifiedInputProps> = ({, }) => {
  name,
  label,
  required,
@@ -161,13 +160,13 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({, })
  const error = touched.name ? errors.name : undefined;
  const value = values.name || '';
 
- const handleChange = useCallback((e: React.ChangeEvent < HTMLInputElement>) => {, })
+ const handleChange = useCallback((e: React.ChangeEvent < HTMLInputElement>) => {, }) => {
  const newValue = e.target.value;
  setFieldValue(name, newValue);
  onChange?.(newValue);
  }, [name, setFieldValue, onChange]);
 
- const handleBlur = useCallback(() => {})
+ const handleBlur = useCallback(() => {}) => {
  setFieldTouched(name, true);
  validateField(name);
  }, [name, setFieldTouched, validateField]);
@@ -186,15 +185,15 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({, })
  className);
 
  const input = (;)
- <div className={"relative}">;
- {leftIcon && (})
- <div className={"absolut}e inset - y - 0 left - 0 pl - 3 flex items - center pointer - events - none">;
- <span className={"tex}t - neutral - 400 dark:text - neutral - 500">;
+ <div className={"relative}">
+ {leftIcon && (}) => {
+ <div className={"absolut}e inset - y - 0 left - 0 pl - 3 flex items - center pointer - events - none">
+ <span className={"tex}t - neutral - 400 dark:text - neutral - 500">
  {leftIcon}
 // FIXED:  </span>
 // FIXED:  </div>
 
- <input;>;
+ <input;>
  {...props}
 // FIXED:  id={name, }
 // FIXED:  name={name, }
@@ -203,17 +202,17 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({, })
  onBlur={handleBlur}
 // FIXED:  className={inputClasses, } />
 
- {rightIcon && (})
- <div className={"absolut}e inset - y - 0 right - 0 pr - 3 flex items - center pointer - events - none">;
- <span className={"tex}t - neutral - 400 dark:text - neutral - 500">;
+ {rightIcon && (}) => {
+ <div className={"absolut}e inset - y - 0 right - 0 pr - 3 flex items - center pointer - events - none">
+ <span className={"tex}t - neutral - 400 dark:text - neutral - 500">
  {rightIcon}
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
 
  if (label || helpText) {}
- return (;)
- <FormField;>;
+ return (
+ <FormField;>
 // FIXED:  name={name, }
  {...(label && { label })}
  {...(required !== undefined && { required })}
@@ -245,7 +244,7 @@ const resizeClasses: object = {, }
  horizontal: 'resize - x',
  both: 'resize' };
 
-export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({, })
+export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({, }) => {
  name,
  label,
  required,
@@ -261,13 +260,13 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({, })
  const error = touched.name ? errors.name : undefined;
  const value = values.name || '';
 
- const handleChange = useCallback((e: React.ChangeEvent < HTMLTextAreaElement>) => {, })
+ const handleChange = useCallback((e: React.ChangeEvent < HTMLTextAreaElement>) => {, }) => {
  const newValue = e.target.value;
  setFieldValue(name, newValue);
  onChange?.(newValue);
  }, [name, setFieldValue, onChange]);
 
- const handleBlur = useCallback(() => {})
+ const handleBlur = useCallback(() => {}) => {
  setFieldTouched(name, true);
  validateField(name);
  }, [name, setFieldTouched, validateField]);
@@ -294,8 +293,8 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({, })
 // FIXED:  className={textareaClasses, } />
 
  if (label || helpText) {}
- return (;)
- <FormField;>;
+ return (
+ <FormField;>
 // FIXED:  name={name, }
  {...(label && { label })}
  {...(required !== undefined && { required })}
@@ -311,13 +310,13 @@ export interface UnifiedSelectProps extends Omit < React.SelectHTMLAttributes < 
  label?: string;
  required?: boolean;
  helpText?: string;
- options: Array<{value: string; label: string; disabled ?  : boolean}>;
+ options: Array<{value: string; label: string; disabled ?  : boolean}>
  placeholder?: string;
  variant?: 'default' | 'filled' | 'outline';
  selectSize?: 'sm' | 'md' | 'lg';
  onChange?: (value: string | number) => void;
 
-export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({, })
+export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({, }) => {
  name,
  label,
  required,
@@ -334,13 +333,13 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({, })
  const error = touched.name ? errors.name : undefined;
  const value = values.name || '';
 
- const handleChange = useCallback((e: React.ChangeEvent < HTMLSelectElement>) => {, })
+ const handleChange = useCallback((e: React.ChangeEvent < HTMLSelectElement>) => {, }) => {
  const newValue = e.target.value;
  setFieldValue(name, newValue);
  onChange?.(newValue);
  }, [name, setFieldValue, onChange]);
 
- const handleBlur = useCallback(() => {})
+ const handleBlur = useCallback(() => {}) => {
  setFieldTouched(name, true);
  validateField(name);
  }, [name, setFieldTouched, validateField]);
@@ -358,7 +357,7 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({, })
  className);
 
  const select = (<div className={"relative}">;)
- <select;>;
+ <select;>
  {...props}
 // FIXED:  id={name, }
 // FIXED:  name={name, }
@@ -370,8 +369,8 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({, })
  backgroundImage: 'url("data:image / svg + xml,%3csvg xmlns="\'http://www.w3.org" / 2000 / svg\' fill="\'none\'" viewBox="\'0" 0 20 20\'%3e%3cpath stroke="\'%236b7280\'" stroke - linecap="\'round\'" stroke - linejoin="\'round\'" stroke - width="\'1.5\'" d="\'m6" 8 4 4 4 - 4\'/%3e%3c / svg%3e")' 
 
  >
- {placeholder && (})
- <option value="" disabled>;
+ {placeholder && (}) => {
+ <option value="" disabled>
  {placeholder}
 // FIXED:  </option>
  {options.map((option) => (}))
@@ -385,8 +384,8 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({, })
 // FIXED:  </div>
 
  if (label || helpText) {}
- return (;)
- <FormField;>;
+ return (
+ <FormField;>
 // FIXED:  name={name, }
  {...(label && { label })}
  {...(required !== undefined && { required })}
@@ -399,12 +398,12 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({, })
 // Form Component;
 export interface UnifiedFormProps {}
  children: React.ReactNode;
- onSubmit?: (values: Record < string, any>) => void | Promise<any> < void>;
- initialValues?: Record < string, any>;
- validationSchema?: Record < string(value: string | number) => string | undefined>;
+ onSubmit?: (values: Record < string, any>) => void | Promise<any> < void>
+ initialValues?: Record < string, any>
+ validationSchema?: Record < string(value: string | number) => string | undefined>
  className?: string;
 
-export const UnifiedForm: React.FC < UnifiedFormProps> = ({, })
+export const UnifiedForm: React.FC < UnifiedFormProps> = ({, }) => {
  children,
  onSubmit,
  initialValues,
@@ -412,7 +411,7 @@ export const UnifiedForm: React.FC < UnifiedFormProps> = ({, })
  className }) => {}
  const [isSubmitting, setIsSubmitting] = useState < boolean>(false);
 
- const handleSubmit = useCallback(async (e: React.FormEvent): Promise<any> < any> => {, })
+ const handleSubmit = useCallback(async (e: React.FormEvent): Promise<any> < any> => {, }) => {
  e.preventDefault();
  if (!onSubmit) {}
 return;
@@ -428,20 +427,20 @@ return;
  setIsSubmitting(false);
  }, [onSubmit]);
 
- return (;)
- <FormProvider;>;
+ return (
+ <FormProvider;>
  {...(initialValues && { initialValues })}
  {...(validationSchema && { validationSchema })} />
- <form />;
+ <form />
 // FIXED:  onSubmit={(e: React.FormEvent) => handleSubmit(e), }
 // FIXED:  className={cn('space - y - 6', className)}
  noValidate;
  >
  {children}
 
- {onSubmit && (})
- <div className={"fle}x justify - end">;
- <UnifiedButton;>;
+ {onSubmit && (}) => {
+ <div className={"fle}x justify - end">
+ <UnifiedButton;>
 // FIXED:  type="submit"
  loading={isSubmitting}
 // FIXED:  disabled={isSubmitting} />

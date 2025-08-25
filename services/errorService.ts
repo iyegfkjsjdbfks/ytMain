@@ -5,7 +5,7 @@ export interface ErrorContext {
  url?: string;
  timestamp: number;
  componentStack?: string | undefined;
- additionalData?: Record < string, any>;
+ additionalData?: Record < string, any>
 }
 
 export interface ErrorReport {

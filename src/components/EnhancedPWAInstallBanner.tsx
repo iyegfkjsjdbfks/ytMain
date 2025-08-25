@@ -9,6 +9,7 @@ export interface EnhancedPWAInstallBannerProps {
 export const EnhancedPWAInstallBanner = (props: EnhancedPWAInstallBannerProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default EnhancedPWAInstallBanner;

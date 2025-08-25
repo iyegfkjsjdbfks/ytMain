@@ -12,7 +12,7 @@ export interface SubscriptionManagerProps {}
  subscriberCount: string;
  onSubscriptionChange?: (isSubscribed: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void;
 
-const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({, })
+const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({, }) => {
  channelName,
  channelAvatarUrl,
  channelId,
@@ -23,7 +23,7 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({, })
  const [isLoading, setIsLoading] = useState < boolean>(false);
  const [showNotificationMenu, setShowNotificationMenu] = useState < boolean>(false);
 
- useEffect(() => {})
+ useEffect(() => {}) => {
  // Load subscription status from localStorage;
  const subscriptions = JSON.parse((localStorage).getItem('youtubeCloneSubscriptions_v1') || '{}');
  const channelData = subscriptions.channelId;
@@ -73,70 +73,70 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({, })
  (console).error('Error updating notification settings:', error);
  setShowNotificationMenu(false);
 
- return (;)
- <div className={"fle}x items - center space - x - 2">;
- {isSubscribed ? (})
- <div className={"fle}x items - center space - x - 1">;
- <button />;
+ return (
+ <div className={"fle}x items - center space - x - 2">
+ {isSubscribed ? (}) => {
+ <div className={"fle}x items - center space - x - 1">
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSubscribe(e), }
 // FIXED:  disabled={isLoading, }
 // FIXED:  className={"fle}x items - center space - x - 2 bg - neutral - 100 dark:bg - neutral - 800 hover:bg - neutral - 200 dark:hover:bg - neutral - 700 text - neutral - 800 dark:text - neutral - 200 px - 4 py - 2 rounded - full text - sm font - medium transition - colors disabled:opacity - 50"
  >
- <CheckIcon className="w - 4 h - 4" />;
- <span > Subscribed</span>;
+ <CheckIcon className="w - 4 h - 4" />
+ <span > Subscribed</span>
 // FIXED:  </button>
 
- <div className={"relative}">;
- <button />;
+ <div className={"relative}">
+ <button />
 // FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu: React.MouseEvent), }
 // FIXED:  className={`p - 2 rounded - full transition - colors ${, }
  notificationsEnabled;
  ? 'bg - neutral - 800 dark:bg - neutral - 200 text - white dark:text - neutral - 800 hover:bg - neutral - 700 dark:hover:bg - neutral - 300';
- : 'bg - neutral - 100 dark:bg - neutral - 800 text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 200 dark:hover:bg - neutral - 700';
+ : 'bg - neutral - 100 dark:bg - neutral - 800 text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 200 dark:hover:bg - neutral - 700'
  }`}
  title={notificationsEnabled ? 'Notifications on' : 'Notifications off', }
  >
- {notificationsEnabled ? (})
- <BellIconSolid className="w - 4 h - 4" />;
+ {notificationsEnabled ? (}) => {
+ <BellIconSolid className="w - 4 h - 4" />
  ) : (;
- <BellIcon className="w - 4 h - 4" />;
+ <BellIcon className="w - 4 h - 4" />
 // FIXED:  </button>
 
- {showNotificationMenu && (})
- <div className={"absolut}e top - full right - 0 mt - 1 w - 48 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 50 py - 1">;
- <button />;
+ {showNotificationMenu && (}) => {
+ <div className={"absolut}e top - full right - 0 mt - 1 w - 48 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 50 py - 1">
+ <button />
 // FIXED:  onClick={() => handleNotificationToggle(true: React.MouseEvent), }
 // FIXED:  className={`w - full text - left px - 3 py - 2 text - sm hover:bg - neutral - 100 dark:hover:bg - neutral - 700 ${, }
- notificationsEnabled ? 'text - neutral - 900 dark:text - neutral - 100 font - medium' : 'text - neutral - 600 dark:text - neutral - 400';
+ notificationsEnabled ? 'text - neutral - 900 dark:text - neutral - 100 font - medium' : 'text - neutral - 600 dark:text - neutral - 400'
  }`}
  >
- <div className={"fle}x items - center space - x - 2">;
- <BellIconSolid className="w - 4 h - 4" />;
- <span > All notifications</span>;
+ <div className={"fle}x items - center space - x - 2">
+ <BellIconSolid className="w - 4 h - 4" />
+ <span > All notifications</span>
 // FIXED:  </div>
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => handleNotificationToggle(false: React.MouseEvent), }
 // FIXED:  className={`w - full text - left px - 3 py - 2 text - sm hover:bg - neutral - 100 dark:hover:bg - neutral - 700 ${, }
- !notificationsEnabled ? 'text - neutral - 900 dark:text - neutral - 100 font - medium' : 'text - neutral - 600 dark:text - neutral - 400';
+ !notificationsEnabled ? 'text - neutral - 900 dark:text - neutral - 100 font - medium' : 'text - neutral - 600 dark:text - neutral - 400'
  }`}
  >
- <div className={"fle}x items - center space - x - 2">;
- <BellIcon className="w - 4 h - 4" />;
- <span > None</span>;
+ <div className={"fle}x items - center space - x - 2">
+ <BellIcon className="w - 4 h - 4" />
+ <span > None</span>
 // FIXED:  </div>
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
  ) : (;
- <button />;
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSubscribe(e), }
 // FIXED:  disabled={isLoading, }
 // FIXED:  className={"fle}x items - center space - x - 2 bg - red - 600 hover:bg - red - 700 text - white px - 4 py - 2 rounded - full text - sm font - medium transition - colors disabled:opacity - 50"
  >
- <PlusIcon className="w - 4 h - 4" />;
- <span > Subscribe</span>;
+ <PlusIcon className="w - 4 h - 4" />
+ <span > Subscribe</span>
 // FIXED:  </button>
 // FIXED:  </div>
 

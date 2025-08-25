@@ -8,7 +8,7 @@ export interface FormField {
   type: "text" | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'file';
   placeholder?: string;
   required?: boolean;
-  options?: Array<{ value: string; label: string }>;
+  options?: Array<{ value: string; label: string }>
   validation?: (value: string | number) => string | null;
   disabled?: boolean;
   accept?: string; // for file inputs;
@@ -16,7 +16,7 @@ export interface FormField {
 
 export interface BaseFormProps {
   fields: FormField[];
-  onSubmit: (data: Record<string, any>) => void | Promise<void>;
+  onSubmit: (data: Record<string, any>) => void | Promise<void>
   submitLabel?: string;
   cancelLabel?: string;
   onCancel?: () => void;
@@ -24,7 +24,7 @@ export interface BaseFormProps {
   error?: string | null;
   success?: string | null;
   className?: string;
-  initialValues?: Record<string, any>;
+  initialValues?: Record<string, any>
   children?: React.ReactNode;
   showResetButton?: boolean;
 
@@ -38,6 +38,7 @@ const BaseForm: FC<BaseFormProps> = ({)
   error = null,
   success = null,
   className = '',
+}
   initialValues = {},
   children,
   showResetButton = false;
@@ -102,90 +103,85 @@ const BaseForm: FC<BaseFormProps> = ({)
 
     switch (field.type) {
       case 'textarea':;
-        return (;)
-          <textarea;>;
+        return (
+          <textarea;>
             {...commonProps}
             placeholder={field.placeholder}
             rows={field.rows || 4} />
       
       case 'select':;
-        return (;)
-          <select {...commonProps}>;
-            <option value="">{field.placeholder || `Select ${field.label}`}</option>;
+        return (
+          <select {...commonProps}>
+            <option value="">{field.placeholder || `Select ${field.label}`}</option>
             {field.options?.map(option => ())
-              <option key={option.value} value={option.value}>;
+              <option key={option.value} value={option.value}>
                 {option.label}
-              </option>;
-          </select>;
-      
+              </option>
+          </select>
       case 'checkbox':;
-        return (;)
-          <input;>;
+        return (
+          <input;>
             {...commonProps}
             type="checkbox";
             checked={formData[field.name] || false} />
       
       case 'file':;
-        return (;)
-          <input;>;
+        return (
+          <input;>
             {...commonProps}
             type="file";
             accept={field.accept} />
       
       default:;
-        return (;)
-          <input;>;
+        return (
+          <input;>
             {...commonProps}
             type={field.type}
             placeholder={field.placeholder} />
 
-  return (;)
-    <form onSubmit={handleFormSubmit} className={`base - form ${className}`}>;
+  return (
+    <form onSubmit={handleFormSubmit} className={`base - form ${className}`}>
       {error && <div className={"for}m - error">{error}</div>}
       {success && <div className={"for}m - success">{success}</div>}
       
       {fields.map(field => ())
-        <div key={field.name} className={"for}m - field">;
-          <label htmlFor={field.name} className={"for}m - label">;
+        <div key={field.name} className={"for}m - field">
+          <label htmlFor={field.name} className={"for}m - label">
             {field.label}
             {field.required && <span className={"required}">*</span>}
-          </label>;
+          </label>
           {renderField(field)}
           {errors[field.name] && ()
-            <div className={"fiel}d - error">{errors[field.name]}</div>;
-        </div>;
-      
+            <div className={"fiel}d - error">{errors[field.name]}</div>
+        </div>
       {children}
       
-      <div className={"for}m - actions">;
+      <div className={"for}m - actions">
         {showResetButton && ()
-          <button;>;
+          <button>
             type="button";
             onClick={handleReset}
             disabled={loading}
             className={"bt}n btn - secondary";
           >
             Reset;
-          </button>;
-        
+          </button>
         {onCancel && ()
-          <button;>;
+          <button>
             type="button";
             onClick={onCancel}
             disabled={loading}
             className={"bt}n btn - secondary";
           >
             {cancelLabel}
-          </button>;
-        
-        <button;>;
+          </button>
+        <button>
           type="submit";
           disabled={loading}
           className={"bt}n btn - primary";
         >
           {loading ? 'Submitting...' : submitLabel, }
-        </button>;
-      </div>;
-    </form>;
-
+        </button>
+      </div>
+    </form>
 export default BaseForm;
