@@ -38,6 +38,7 @@ id: searchResult.id,
  createdAt: now,
  updatedAt: now 
  };
+};
 
 export interface OptimizedSearchResultsProps {
 videos: Video[];
@@ -351,7 +352,7 @@ onLoadMore();
  const LoadingSkeleton = memo(() => (
  <div className="w-full max-w-[1280px] mx-auto">
  <div className="space-y-4 px-4">
- {Array<any>.from({ length: 10 }).map((_, index) => (
+ {Array.from({ length: 10 }).map((_, index) => (
  <div key={index} className="flex flex-col sm:flex-row gap-4 sm:gap-6 animate-pulse p-3">
  <div className="w-full sm:w-[480px] h-[270px] bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0" />
  <div className="flex-1 min-w-0">
