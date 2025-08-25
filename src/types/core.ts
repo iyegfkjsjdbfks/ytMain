@@ -84,6 +84,7 @@ export interface Channel {
  videoCount: number;
  name?: string; // Display name
  avatarUrl?: string; // Avatar image URL
+ bannerUrl?: string; // Banner image URL
  subscribers?: number | string; // Subscriber count
  joinedDate?: string; // Date joined
  totalViews?: number; // Total channel views

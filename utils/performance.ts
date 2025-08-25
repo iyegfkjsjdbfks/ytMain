@@ -1,16 +1,15 @@
 import React, { useEffect, forwardRef } from 'react';
-// / <reference types="vite / client" />
 // Performance monitoring utilities for React components
 export interface PerformanceMetric {
- name: string;,
+ name: string;
  startTime: number;
  endTime?: number;
  duration?: number;
- metadata?: Record < string, any>;
+ metadata?: Record<string, any>;
 }
 
 export class PerformanceMonitor {
- private metrics: Map < string, PerformanceMetric> = new Map();
+ private metrics: Map<string, PerformanceMetric> = new Map();
  private observers: PerformanceObserver[] = [];
  private isEnabled: boolean = import.meta.env.MODE === 'development';
 
@@ -18,6 +17,8 @@ export class PerformanceMonitor {
  if (this.isEnabled && typeof window !== 'undefined' && 'PerformanceObserver' in window) {
  this.setupObservers();
  }
+ }
+
  private setupObservers() {
  // Observe paint metrics
  try {
@@ -45,26 +46,31 @@ export class PerformanceMonitor {
  } catch (e) {
  // PerformanceObserver not supported
  }
- startMeasure(name, metadata?: Record < string, any>): void {
+ }
+ 
+ startMeasure(name: string, metadata?: Record<string, any>): void {
  if (!this.isEnabled) {
-return;
-}
+ return;
+ }
 
  const metric: PerformanceMetric = {
  name,
  startTime: performance.now(),
- metadata: metadata || {};
+ metadata: metadata || {}
+ };
 
  this.metrics.set(name, metric);
 
  if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function') {
  performance.mark(`${name}-start`);
  }
- hasMetric(name): boolean {
+ }
+
+ hasMetric(name: string): boolean {
  return this.metrics.has(name);
  }
 
- endMeasure(name): number | null {
+ endMeasure(name: string): number | null {
  if (!this.isEnabled) {
 return null;
 }
@@ -89,14 +95,14 @@ return null;
  }
 
  // Log slow operations with different thresholds for different operation types
- const getThreshold = (operationName): (number) => {
- if (operationName.startsWith('image - load')) {
-return 2000;
-} // 2s for images
+ const getThreshold = (operationName: string): number => {
+ if (operationName.startsWith('image-load')) {
+ return 2000; // 2s for images
+ }
  if (operationName.includes('search')) {
-return 1500;
-} // 1.5s for search
- return 100; // Default 100ms;
+ return 1500; // 1.5s for search
+ }
+ return 100; // Default 100ms
  };
 
  const threshold = getThreshold(name);
@@ -108,7 +114,7 @@ return 1500;
  }
 
  getMetrics(): PerformanceMetric[] {
- return Array<any>.from(this.metrics.values()).filter((m) => m.duration !== undefined);
+ return Array.from(this.metrics.values()).filter((m) => m.duration !== undefined);
  }
 
  clearMetrics(): void {
@@ -117,7 +123,9 @@ return 1500;
  performance.clearMarks();
  performance.clearMeasures();
  }
- getAverageTime(name): number | null {
+ }
+
+ getAverageTime(name: string): number | null {
  const metrics = this.getMetrics().filter((m) => m.name === name);
  if (metrics.length === 0) {
 return null;
@@ -164,6 +172,8 @@ return;
  this.observers.forEach((observer) => observer.disconnect());
  this.observers = [];
  }
+}
+
 // Global instance
 export const performanceMonitor = new PerformanceMonitor();
 
@@ -180,7 +190,7 @@ export function usePerformanceMonitor(componentName: any): any {
  : null;
  };
 
- const measureAsync = async <T>(operationName, operation: () => Promise<any> < T>): Promise<any> < T> => {
+ const measureAsync = async <T>(operationName: string, operation: () => Promise<T>): Promise<T> => {
  const fullName: string = `${componentName}-${operationName}`;
  performanceMonitor.startMeasure(fullName);
  try {
@@ -194,9 +204,10 @@ export function usePerformanceMonitor(componentName: any): any {
  performanceMonitor.endMeasure(fullName);
  }
  throw error;
+ }
  };
 
- const measureSync = <T>(operationName, operation: () => T): (T) => {
+ const measureSync = <T>(operationName: string, operation: () => T): T => {
  const fullName: string = `${componentName}-${operationName}`;
  performanceMonitor.startMeasure(fullName);
  try {
@@ -210,6 +221,7 @@ export function usePerformanceMonitor(componentName: any): any {
  performanceMonitor.endMeasure(fullName);
  }
  throw error;
+ }
  };
 
  return {
@@ -219,13 +231,13 @@ export function usePerformanceMonitor(componentName: any): any {
  measureSync };
 }
 
-// Higher - order component for automatic performance monitoring
-export function withPerformanceMonitoring < P extends object>(,;
- WrappedComponent: React.ComponentType < P>
+// Higher-order component for automatic performance monitoring
+export function withPerformanceMonitoring<P extends object>(
+ WrappedComponent: React.ComponentType<P>,
  componentName?: string) {
  const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
- const MonitoredComponent = React.forwardRef < any, P>((props, ref) => {
+ const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {
  const { startRender, endRender } = usePerformanceMonitor(displayName);
 
  useEffect(() => {
@@ -268,19 +280,19 @@ export const analyzeBundleSize = () => {
 return;
 }
 
- const scripts = Array<any>.from(document.querySelectorAll < HTMLScriptElement>('script.src'));
- const styles = Array<any>.from(document.querySelectorAll < HTMLLinkElement>('link[rel="stylesheet"]'));
+ const scripts = Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'));
+ const styles = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
 
  (console as any).group('📦 Bundle Analysis');
  // Estimate bundle sizes (this is approximate)
  scripts.forEach((script) => {
- if (script.src && !script.src.includes('chrome - extension')) {
+ if (script.src && !script.src.includes('chrome-extension')) {
  // Placeholder for size analysis if needed
  }
  });
 
  styles.forEach((style) => {
- if (style.href && !style.href.includes('chrome - extension')) {
+ if (style.href && !style.href.includes('chrome-extension')) {
  // Placeholder for size analysis if needed
  }
  });

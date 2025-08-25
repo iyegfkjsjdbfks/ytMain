@@ -1,11 +1,10 @@
-import React, { useRef, memo, useMemo, useState, useEffect, lazy, FC, MouseEvent } from 'react';
-// @ts - nocheck
-import { useIntersectionObserver } from '../src / hooks / useIntersectionObserver';
-import { getYouTubeVideoId } from '../src / lib / youtube - utils';
-import { performanceMonitor } from '../utils / performance';
+import React, { memo, useMemo, useState, useEffect } from 'react';
+import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
+import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { performanceMonitor } from '../utils/performance';
 
-import type { YouTubeSearchResult, GoogleSearchResult } from '../services / googleSearchService';
-import type { Video } from '../types.ts';
+import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
+import type { Video } from '../types';
 
 // Helper function to convert search results to Video type
 const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
@@ -18,20 +17,23 @@ return item;
  const searchResult = item;
  const now = new Date().toISOString();
  return {
-id: searchResult.id,
+ id: searchResult.id,
  title: searchResult.title,
  description: searchResult.description || '',
+ thumbnail: searchResult.thumbnailUrl || '',
  thumbnailUrl: searchResult.thumbnailUrl,
  videoUrl: searchResult.videoUrl,
  duration: searchResult.duration || '0:00',
- views: (("viewCount" in searchResult && (("viewCount" in searchResult) ? searchResult.viewCount : searchResult.views)) || ("views" in searchResult && searchResult.views) || 0).toString(),
- likes: (("likeCount" in searchResult && (("likeCount" in searchResult) ? searchResult.likeCount : searchResult.likes)) || ("likes" in searchResult && searchResult.likes) || 0),
- dislikes: (("dislikeCount" in searchResult && (("dislikeCount" in searchResult && searchResult.dislikeCount) || ("dislikes" in searchResult && searchResult.dislikes) || 0)) || ("dislikes" in searchResult && searchResult.dislikes) || 0) || 0,
+ views: searchResult.views || 0,
+ publishedAt: searchResult.uploadedAt || now,
+ channelId: searchResult.channelId || 'unknown',
+ channelTitle: searchResult.channelName || 'Unknown Channel',
+ likes: searchResult.likes || 0,
+ dislikes: searchResult.dislikes || 0,
  uploadedAt: searchResult.uploadedAt || now,
  channelName: searchResult.channelName,
- channelId: searchResult.channelId || 'unknown',
  channelAvatarUrl: searchResult.channelAvatarUrl || '',
- category: (("categoryId" in searchResult && (("categoryId" in searchResult && searchResult.categoryId) || ("category" in searchResult && searchResult.category) || "general")) || ("category" in searchResult && searchResult.category) || "general") || '',
+ category: searchResult.category || 'general',
  tags: searchResult.tags || [],
  visibility: 'public' as const,
  // Required BaseEntity properties,

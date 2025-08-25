@@ -5,13 +5,7 @@
  * and via CLI for common scenarios.
  */
 
-import { 
-  resolveTypeScriptErrors, 
-  WorkflowCoordinator, 
-  ErrorAnalyzer,
-  ValidationEngine,
-  ReportGenerator 
-} from '../src/error-resolution';
+import { resolveTypeScriptErrors, WorkflowCoordinator, ErrorAnalyzer, ValidationEngine, ReportGenerator } from '../src/error-resolution';
 
 // Example 1: Simple error resolution
 async function basicErrorResolution() {
