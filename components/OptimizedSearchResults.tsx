@@ -107,9 +107,9 @@ const extractVideoId = (video: Video) => {}
 };
 
 // YouTube - style search result card component
-const YouTubeSearchResultCard: React.FC<{,}
- item: Video | YouTubeSearchResult | GoogleSearchResult;,
- onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void
+const YouTubeSearchResultCard: React.FC<{
+item: Video | YouTubeSearchResult | GoogleSearchResult;
+onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
 }> = memo(({ item, onVideoClick }) => {}
  const convertedVideo = convertToVideo(item);
 
@@ -261,18 +261,19 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
 type FilterTab = 'all' | 'videos' | 'channels' | 'playlists' | 'live' | 'shorts';
 
 // Main component
-const OptimizedSearchResults: React.FC < OptimizedSearchResultsProps> = ({}
- videos,
- youtubeVideos,
- googleSearchVideos,
- loading,
- query,
- sortBy,
- onVideoClick,
- onLoadMore,
- hasMore = false }) => {}
- const [activeTab, setActiveTab] = useState < FilterTab>('all');
- const containerRef = React.useRef < HTMLDivElement>(null);
+const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
+videos,
+youtubeVideos,
+googleSearchVideos,
+loading,
+query,
+sortBy,
+onVideoClick,
+onLoadMore,
+hasMore = false
+}) => {}
+ const [activeTab, setActiveTab] = useState<FilterTab>('all');
+ const containerRef = React.useRef<HTMLDivElement>(null);
 
  // Debounce query for performance
  const debouncedQuery = useDebounce(query, 300);
@@ -286,10 +287,10 @@ const OptimizedSearchResults: React.FC < OptimizedSearchResultsProps> = ({}
  const allResults = useMemo(() => {}
  performanceMonitor.startMeasure('search - results - processing');
 
- const combined = [;
- ...(videos || []).map((v) => ({ ...v as any, source: 'local' as const contentType: 'video' as const })),
- ...(youtubeVideos || []).map((v) => ({ ...v as any, source: 'youtube' as const contentType: 'video' as const })),
- ...(googleSearchVideos || []).map((v) => ({ ...v as any, source: 'google - search' as const contentType: 'video' as const }))];
+ const combined = [
+ ...(videos || []).map((v) => ({ ...v as any, source: 'local' as const, contentType: 'video' as const })),
+ ...(youtubeVideos || []).map((v) => ({ ...v as any, source: 'youtube' as const, contentType: 'video' as const })),
+ ...(googleSearchVideos || []).map((v) => ({ ...v as any, source: 'google-search' as const, contentType: 'video' as const }))];
 
  let sorted = combined;
  if (sortingFunctions[sortBy as keyof typeof sortingFunctions]) {}
