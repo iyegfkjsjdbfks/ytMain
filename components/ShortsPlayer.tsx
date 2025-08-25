@@ -2,19 +2,18 @@ import React, { useEffect, useCallback, useRef, useState, FC, KeyboardEvent, Mou
 // @ts - nocheck;
 
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, HeartIcon, ShareIcon, EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, ChatBubbleLeftIcon } from '@heroicons / react / 24 / outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons / react / 24 / solid';
-const HeartIconSolid = HeartSolidIcon;
+import { HeartIcon as HeartIcon } from '@heroicons / react / 24 / solid';
+const HeartIconSolid = HeartIcon;
 
-import type { Short } from '../src / types / core';
-
+import type { Short } from '../src / types / core'
 export interface ShortsPlayerProps {}
  shorts: Short;,
  currentIndex: number;
- onIndexChange: (index) => void;,
- onLike: (shortId) => void;
- onSubscribe: (channelId) => void;,
- onComment: (shortId) => void;
- onShare: (shortId) => void;
+ onIndexChange: (index: any) => void;,
+ onLike: (shortId: any) => void;
+ onSubscribe: (channelId: any) => void;,
+ onComment: (shortId: any) => void;
+ onShare: (shortId: any) => void;
  className?: string;
 }
 
@@ -166,7 +165,7 @@ return;
  video.currentTime = newTime;
  };
 
- const formatNumber = (num): (string) => {}
+ const formatNumber = (num): (string: any) => {}
  if (num >= 1000000) {}
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {}
@@ -290,7 +289,7 @@ return null;
  {/* Hashtags */}
  {currentShort.tags.length > 0 && (}
  <div className="flex flex - wrap gap - 2 mb - 3">
- {currentShort.tags.slice(0, 3).map((tag,}
+ {currentShort.tags.slice(0, 3).map((tag }
  index) => (
  <span;
  key={index}
@@ -316,7 +315,7 @@ return null;
  }`}
  >
  {currentShort.isLiked ? (}
- <HeartSolidIcon className="w - 6 h - 6" />
+ <HeartIcon className="w - 6 h - 6" />
  ) : (
  <HeartIcon className="w - 6 h - 6" />
  )}
@@ -376,6 +375,5 @@ return null;
 // FIXED:  </div>
 // FIXED:  </div>
  );
-};
-
+}
 export default ShortsPlayer;

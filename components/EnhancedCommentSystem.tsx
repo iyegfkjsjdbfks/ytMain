@@ -1,11 +1,10 @@
 import React, { FC, useState, useEffect, useMemo, useRef } from 'react';
 
 import { HeartIcon, ChatBubbleLeftIcon, FlagIcon, PencilIcon, TrashIcon, ChevronDownIcon, ChevronUpIcon, ExclamationTriangleIcon } from '@heroicons / react / 24 / outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons / react / 24 / solid';
-const HeartIconSolid = HeartSolidIcon;
+import { HeartIcon as HeartIcon } from '@heroicons / react / 24 / solid';
+const HeartIconSolid = HeartIcon;
 
-import { formatDistanceToNow } from '../utils / dateUtils';
-
+import { formatDistanceToNow } from '../utils / dateUtils'
 export interface Comment {}
  id: string;,
  content: string;
@@ -41,10 +40,10 @@ export interface EnhancedCommentSystemProps {}
  onAddComment: (content, parentId?: string) => void;
  onEditComment: (commentId,
  content) => void;
- onDeleteComment: (commentId) => void;,
- onLikeComment: (commentId) => void;
- onDislikeComment: (commentId) => void;,
- onPinComment: (commentId) => void;
+ onDeleteComment: (commentId: any) => void;,
+ onLikeComment: (commentId: any) => void;
+ onDislikeComment: (commentId: any) => void;,
+ onPinComment: (commentId: any) => void;
  onReportComment: (commentId,
  reason) => void;
  onModerateComment: (commentId,
@@ -122,7 +121,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  };
 
  const toggleReplies = (commentId: any) => {}
- setExpandedReplies((prev) => {}
+ setExpandedReplies((prev: any) => {}
  const newSet = new Set(prev);
  if (newSet.has(commentId)) {}
  newSet.delete(commentId);
@@ -133,7 +132,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  });
  };
 
- const formatNumber = (num): (string) => {}
+ const formatNumber = (num): (string: any) => {}
  if (num >= 1000000) {}
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {}
@@ -257,7 +256,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  }`}
  >
  {comment.isLiked ? (}
- <HeartSolidIcon className="w - 4 h - 4" />
+ <HeartIcon className="w - 4 h - 4" />
  ) : (
  <HeartIcon className="w - 4 h - 4" />
  )}
@@ -416,7 +415,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 
  {expandedReplies.has(comment.id) && (}
  <div className="mt - 3">
- {comment.replies.map((reply) => renderComment(reply, true))}
+ {comment.replies.map((reply: any) => renderComment(reply, true))}
 // FIXED:  </div>
  )}
 // FIXED:  </div>
@@ -429,9 +428,9 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 
  // Filter and sort comments with memoization;
  const sortedComments = useMemo(() => {}
- const topLevelComments = comments.filter((comment) => !comment.parentId);
- const pinnedComments = topLevelComments.filter((comment) => comment.isPinned);
- const regularComments = topLevelComments.filter((comment) => !comment.isPinned);
+ const topLevelComments = comments.filter((comment: any) => !comment.parentId);
+ const pinnedComments = topLevelComments.filter((comment: any) => comment.isPinned);
+ const regularComments = topLevelComments.filter((comment: any) => !comment.isPinned);
 
  const sorted = regularComments.sort((a,
  b) => {}
@@ -516,7 +515,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 
  {/* Comments List */}
  <div className="space - y - 6">
- {sortedComments.map((comment) => renderComment(comment))}
+ {sortedComments.map((comment: any) => renderComment(comment))}
 // FIXED:  </div>
 
  {/* Report Modal */}
@@ -528,7 +527,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 // FIXED:  </h3>
 
  <div className="space - y - 3 mb - 6">
- {reportReasons.map((reason) => (}
+ {reportReasons.map((reason: any) => (}
  <label key={reason} className="flex items - center">
  <input;
 // FIXED:  type="radio"
@@ -566,6 +565,5 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  )}
 // FIXED:  </div>
  );
-};
-
+}
 export default EnhancedCommentSystem;

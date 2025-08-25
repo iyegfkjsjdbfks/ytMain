@@ -1,4 +1,5 @@
-// commentService - Enhanced Service;
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+// commentService - Enhanced Service
 export interface CommentServiceConfig {
   apiUrl?: string;
   timeout?: number;
@@ -59,5 +60,5 @@ export class CommentService {
   }
 }
 
-export const commentService = new CommentService();
+export const commentService = new CommentService()
 export default commentService;

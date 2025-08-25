@@ -1,9 +1,10 @@
+import { useLocation } from 'react-router-dom';
 import React, { useState, useRef, useEffect, FC, MouseEvent } from 'react';
 import { useLocation } from 'react - router - dom';
 // @ts - nocheck - Temporary during refactoring;
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon } from '@heroicons / react / 24 / outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons / react / 24 / solid';
-const HeartIconSolid = HeartSolidIcon;
+import { HeartIcon as HeartIcon } from '@heroicons / react / 24 / solid';
+const HeartIconSolid = HeartIcon;
 
 import { useIntersectionObserver, useVideoAutoplay } from '../hooks/index.ts';
 import { useVideoPlayer } from '../src / hooks / useVideoPlayer';
@@ -11,16 +12,15 @@ import { useVideoPlayer } from '../src / hooks / useVideoPlayer';
 import LoadingSpinner from 'LoadingSpinner';
 import { ActionButton, ErrorMessage } from 'ui/index.ts';
 
-import type { Short } from '../src / types / core';
-
+import type { Short } from '../src / types / core'
 export interface ShortDisplayCardProps {}
  short: Short;
  isLiked?: boolean;
  isFollowed?: boolean;
- onLike?: (shortId) => void;
- onFollow?: (channelName) => void;
- onComment?: (shortId) => void;
- onShare?: (shortId) => void;
+ onLike?: (shortId: any) => void;
+ onFollow?: (channelName: any) => void;
+ onComment?: (shortId: any) => void;
+ onShare?: (shortId: any) => void;
  onVideoChange?: () => void;
  onVideoEnd?: () => void;
  isActive?: boolean;
@@ -28,7 +28,7 @@ export interface ShortDisplayCardProps {}
 
 // Video - specific components;
 
-// Extracted PlayPauseOverlay component;
+// Extracted PlayPauseOverlay component
 export interface PlayPauseOverlayProps {}
  isPlaying: boolean;,
  onToggle: () => void;
@@ -60,7 +60,7 @@ const PlayPauseOverlay: React.FC < PlayPauseOverlayProps> = ({ isPlaying, onTogg
 // FIXED:  </div>
 );
 
-// Extracted VideoInfo component;
+// Extracted VideoInfo component
 export interface VideoInfoProps {}
  title: string;,
  channelName: string;
@@ -100,7 +100,7 @@ const VideoInfo: React.FC < VideoInfoProps> = ({}
 // FIXED:  </div>
 );
 
-// Extracted ActionButtons component;
+// Extracted ActionButtons component
 export interface ActionButtonsProps {}
  isMuted: boolean;,
  isLiked: boolean;
@@ -170,7 +170,7 @@ const LoadingIndicator: React.FC = () => (
 // FIXED:  </div>
 );
 
-// Extracted ErrorState component;
+// Extracted ErrorState component
 export interface ErrorStateProps {}
  error: string;,
  onRetry: () => void;
@@ -227,7 +227,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  isIntersecting,
  isPlaying: videoPlayer.isPlaying,
  isManuallyPaused,
- actions: {,}
+ actions: { }
  play: videoPlayer.play,
  pause: videoPlayer.pause,
  unmute: videoPlayer.unmute },
@@ -352,9 +352,8 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
 // FIXED:  </div>
 // FIXED:  </div>
  );
-};
-
+}
 export default ShortDisplayCard;
 
-// Export video - specific sub - components for reuse in other parts of the application;
+// Export video - specific sub - components for reuse in other parts of the application
 export { PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState };

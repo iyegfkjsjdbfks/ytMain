@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 import { Link } from 'react - router - dom';
 
@@ -8,8 +9,7 @@ import { formatCount } from '../utils / numberUtils';
 import SaveIcon from './icons / SaveIcon';
 import SaveIconFilled from './icons / SaveIconFilled';
 import ThumbsDownIcon from './icons / ThumbsDownIcon';
-import ThumbsUpIcon from './icons / ThumbsUpIcon';
-
+import ThumbsUpIcon from './icons / ThumbsUpIcon'
 export interface VideoActionsProps {}
  liked: boolean;,
  disliked: boolean;
@@ -25,7 +25,7 @@ export interface VideoActionsProps {}
 export interface ShareModalProps {}
  isOpen: boolean;,
  onClose: () => void;
- onShareToSocial: (platform) => void;,
+ onShareToSocial: (platform: any) => void;,
  onCopyLink: () => void;
  shareMessage?: string;
 }
@@ -247,6 +247,5 @@ const VideoActions: React.FC < VideoActionsProps> = ({}
 // FIXED:  </div>
 // FIXED:  </div>
  );
-};
-
+}
 export default VideoActions;

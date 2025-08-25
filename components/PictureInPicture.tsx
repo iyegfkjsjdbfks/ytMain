@@ -1,8 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react - router - dom';
 
-import { XIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon } from '@heroicons / react / 24 / outline';
-
+import { XIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon } from '@heroicons / react / 24 / outline'
 export interface PictureInPictureProps {}
  videoId: string;,
  videoTitle: string;
@@ -29,9 +29,9 @@ const PictureInPicture: React.FC < PictureInPictureProps> = ({}
  const [currentTime, setCurrentTime] = useState < number>(0);
  const [duration, setDuration] = useState < number>(0);
  const [isDragging, setIsDragging] = useState < boolean>(false);
- const [position, setPosition] = useState({ x: 20,}
+ const [position, setPosition] = useState({ x: 20 }
  y: 20 });
- const [dragOffset, setDragOffset] = useState({ x: 0,}
+ const [dragOffset, setDragOffset] = useState({ x: 0 }
  y: 0 });
  const [isMinimized, setIsMinimized] = useState < boolean>(false);
 
@@ -121,7 +121,7 @@ return;
  setCurrentTime(newTime);
  };
 
- const formatTime = (time): (string) => {}
+ const formatTime = (time): (string: any) => {}
  const minutes = Math.floor(time / 60);
  const seconds = Math.floor(time % 60);
  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -142,7 +142,7 @@ return null;
 // FIXED:  className={`fixed z - 50 bg - black rounded - lg shadow - 2xl border border - gray - 600 overflow - hidden transition - all duration - 200 ${}
  isMinimized ? 'w - 16 h - 12' : 'w - 80 h - 48'
  } ${className}`}
-// FIXED:  style={{,}
+// FIXED:  style={{ }
  left: `${position.x}px`,
  top: `${position.y}px`,
  cursor: isDragging ? 'grabbing' : 'grab' }
@@ -307,6 +307,5 @@ return null;
  )}
 // FIXED:  </div>
  );
-};
-
+}
 export default PictureInPicture;

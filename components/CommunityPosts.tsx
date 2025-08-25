@@ -1,12 +1,12 @@
+import { Link } from 'react-router-dom';
 import React, { useState, FC } from 'react';
 import { Link } from 'react - router - dom';
 
 import { HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PhotoIcon, VideoCameraIcon, LinkIcon } from '@heroicons / react / 24 / outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons / react / 24 / solid';
-const HeartIconSolid = HeartSolidIcon;
+import { HeartIcon as HeartIcon } from '@heroicons / react / 24 / solid';
+const HeartIconSolid = HeartIcon;
 
-import { formatDistanceToNow } from '../utils / dateUtils';
-
+import { formatDistanceToNow } from '../utils / dateUtils'
 export interface CommunityPost {}
  id: string;,
  channelId: string;
@@ -46,9 +46,9 @@ export interface CommunityPost {}
 export interface CommunityPostsProps {}
  channelId?: string;
  posts: CommunityPost;,
- onLike: (postId) => void;
- onComment: (postId) => void;,
- onShare: (postId) => void;
+ onLike: (postId: any) => void;
+ onComment: (postId: any) => void;,
+ onShare: (postId: any) => void;
  onVote?: (postId,
  optionId) => void;
  className?: string;
@@ -64,7 +64,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  const [expandedPosts, setExpandedPosts] = useState < Set < string>>(new Set());
 
  const toggleExpanded = (postId: any) => {}
- setExpandedPosts((prev) => {}
+ setExpandedPosts((prev: any) => {}
  const newSet = new Set(prev);
  if (newSet.has(postId)) {}
  newSet.delete(postId);
@@ -75,7 +75,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  });
  };
 
- const formatNumber = (num): (string) => {}
+ const formatNumber = (num): (string: any) => {}
  if (num >= 1000000) {}
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {}
@@ -122,7 +122,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  post.images.length === 2 ? 'grid - cols - 2' :
  'grid - cols - 2 md:grid - cols - 3' />
  }`}>
- {post.images.map((image,}
+ {post.images.map((image }
  index) => (
  <img;
  key={index}
@@ -166,7 +166,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  {post.poll.question}
 // FIXED:  </h4>
  <div className="space - y - 2">
- {post.poll.options.map((option) => {}
+ {post.poll.options.map((option: any) => {}
  const percentage = post.poll!.totalVotes > 0;
  ? (option.votes / post.poll!.totalVotes) * 100;
  : 0;
@@ -258,7 +258,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
 
  return (
  <div className={`space - y - 6 ${className}`}>
- {posts.map((post) => (}
+ {posts.map((post: any) => (}
  <div;
  key={post.id}
 // FIXED:  className="bg - white dark:bg - gray - 800 rounded - lg border border - gray - 200 dark:border - gray - 700 p - 6" />
@@ -319,7 +319,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  }`}
  >
  {post.isLiked ? (}
- <HeartSolidIcon className="w - 5 h - 5" />
+ <HeartIcon className="w - 5 h - 5" />
  ) : (
  <HeartIcon className="w - 5 h - 5" />
  )}
@@ -347,6 +347,5 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  ))}
 // FIXED:  </div>
  );
-};
-
+}
 export default CommunityPosts;

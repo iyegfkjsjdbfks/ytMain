@@ -1,4 +1,5 @@
-// videoService - Enhanced Service;
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+// videoService - Enhanced Service
 export interface VideoServiceConfig {
   apiUrl?: string;
   timeout?: number;
@@ -59,5 +60,5 @@ export class VideoService {
   }
 }
 
-export const videoService = new VideoService();
+export const videoService = new VideoService()
 export default videoService;

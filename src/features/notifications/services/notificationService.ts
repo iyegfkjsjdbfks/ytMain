@@ -1,4 +1,5 @@
-// notificationService - Enhanced Service;
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+// notificationService - Enhanced Service
 export class NotificationService {
   private apiUrl: string;
 
@@ -37,5 +38,5 @@ export class NotificationService {
   }
 }
 
-export const notificationService = new NotificationService();
+export const notificationService = new NotificationService()
 export default notificationService;

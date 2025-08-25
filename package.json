@@ -32,12 +32,15 @@
   "author": "TypeScript Error Resolution Team",
   "license": "MIT",
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "clsx": "^2.1.1",
     "commander": "^11.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.2",
     "react-virtualized-auto-sizer": "^1.0.26",
     "react-window": "^1.8.11",
+    "tailwind-merge": "^3.3.1",
     "typescript": "^5.0.0"
   },
   "devDependencies": {

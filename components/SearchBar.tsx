@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { MouseEvent, ChangeEvent, FormEvent, FC, useState, useEffect, useCallback, useRef, memo } from 'react';
 import { useNavigate } from 'react - router - dom';
 
@@ -142,7 +143,7 @@ inputRef.current.blur();
 // FIXED:  onChange={(e: React.ChangeEvent) => handleInputChange(e)}
  onFocus={handleInputFocus}
 // FIXED:  placeholder="Search"
-// FIXED:  className={`w - full pl - 3 sm:pl - 4 pr - 8 sm:pr - 10 py - 2 sm:py - 2.5 bg - white border border - neutral - 300,}
+// FIXED:  className={`w - full pl - 3 sm:pl - 4 pr - 8 sm:pr - 10 py - 2 sm:py - 2.5 bg - white border border - neutral - 300 }
  dark:bg - neutral - 900 dark:border - neutral - 700,
  focus:ring - 1 focus:ring - blue - 500 focus:border - blue - 500 focus:bg - white dark:focus:bg - black;
  outline - none text - neutral - 900 dark:text - neutral - 50 placeholder - neutral - 500 dark:placeholder - neutral - 400 text - sm shadow - sm;
@@ -190,7 +191,7 @@ inputRef.current.blur();
 // FIXED:  className="absolute top - full left - 0 right - 0 mt - 0.5 bg - white dark:bg - neutral - 800 border border - neutral - 300 dark:border - neutral - 700 rounded - b - xl shadow - 2xl z-[101] py - 1 overflow - y - auto max - h - 80 animate - fade - in - fast"
 // FIXED:  aria - label="Recent searches" />
  >
- {recentSearches.map((searchTerm) => (}
+ {recentSearches.map((searchTerm: any) => (}
  <li key={searchTerm} className="flex items - center justify - between px - 4 py - 2.5 text - sm text - neutral - 800 dark:text - neutral - 100 hover:bg - neutral - 100 dark:hover:bg - neutral - 700 / 70 transition - colors group">
  <button />
 // FIXED:  onClick={() => handleSearch(searchTerm: React.MouseEvent)}
@@ -227,6 +228,5 @@ inputRef.current.blur();
  );
 });
 
-SearchBar.displayName = 'SearchBar';
-
+SearchBar.displayName = 'SearchBar'
 export default SearchBar;

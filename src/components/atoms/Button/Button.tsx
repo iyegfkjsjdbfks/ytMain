@@ -41,7 +41,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           sizeClass,
           className;
         )}
-        ref={ref}
+        ref={ ref }: any
         {...props}
       />
     );
@@ -50,5 +50,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = "Button";
 
-export { Button };
+export { Button }: any;
 export default Button;

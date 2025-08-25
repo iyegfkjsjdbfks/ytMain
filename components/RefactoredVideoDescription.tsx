@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { FC, type React } from 'react';
 import type { Video } from '../types.ts';
 import type { Channel } from '../types.ts';
@@ -7,8 +8,7 @@ import { BellIcon } from '@heroicons / react / 24 / outline';
 
 import { formatCount } from '../utils / numberUtils';
 
-import { SummarizeIcon } from './icons / SummarizeIcon';
-
+import { SummarizeIcon } from './icons / SummarizeIcon'
 export interface Channel {}
  id: string;,
  name: string;
@@ -46,7 +46,7 @@ export interface RefactoredVideoDescriptionProps {}
  * - Cleaner component composition;
  */
 
-// Reusable Channel Info Component;
+// Reusable Channel Info Component
 export interface ChannelInfoProps {}
  channel: Channel | null;,
  isSubscribed: boolean; onSubscribe: () => void;
@@ -93,7 +93,7 @@ const ChannelInfo: React.FC < ChannelInfoProps> = ({ channel, isSubscribed, onSu
  );
 };
 
-// Reusable Subscribe Button Component;
+// Reusable Subscribe Button Component
 export interface SubscribeButtonProps {}
  isSubscribed: boolean; onSubscribe: () => void;
 }
@@ -127,7 +127,7 @@ const NotificationButton: React.FC = () => {}
  );
 };
 
-// Reusable Description Content Component;
+// Reusable Description Content Component
 export interface DescriptionContentProps {}
  video: Video;,
  showFullDescription: boolean; onToggleDescription: () => void;
@@ -181,7 +181,7 @@ const DescriptionContent: React.FC < DescriptionContentProps> = ({}
  );
 };
 
-// Reusable AI Summary Section Component;
+// Reusable AI Summary Section Component
 export interface AISummarySectionProps {}
  canSummarize: boolean;,
  isSummarizing: boolean;
@@ -283,6 +283,5 @@ const RefactoredVideoDescription: React.FC < RefactoredVideoDescriptionProps> = 
 // FIXED:  </div>
 // FIXED:  </div>
  );
-};
-
+}
 export default RefactoredVideoDescription;

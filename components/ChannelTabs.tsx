@@ -1,37 +1,38 @@
-import React, { FC } from 'react';
-
-export interface Tab {
-  id: string;
-  label: string;
-}
+import React from 'react';
 
 export interface ChannelTabsProps {
-  tabs: Tab[];
   activeTab: string;
-  onTabClick: (tabId: string) => void;
+  onTabChange: (tab: string) => void;
 }
 
-const ChannelTabs: React.FC<ChannelTabsProps> = ({ tabs, activeTab, onTabClick }) => {
+const ChannelTabs: React.FC<ChannelTabsProps> = ({ activeTab, onTabChange }) => {
+  const tabs = [
+    { id: 'videos', label: 'Videos' },
+    { id: 'shorts', label: 'Shorts' },
+    { id: 'playlists', label: 'Playlists' },
+    { id: 'community', label: 'Community' },
+    { id: 'about', label: 'About' },
+  ];
+
   return (
-    <div className="border-b border-neutral-300 dark:border-neutral-700/80 mb-1">
-      <nav className="-mb-px flex space-x-2 sm:space-x-4 overflow-x-auto no-scrollbar" aria-label="Channel tabs">
+    <div className="border-b border-gray-200">
+      <nav className="flex space-x-8">
         {tabs.map((tab) => (
-          <button;
+          <button
             key={tab.id}
-            onClick={() => onTabClick(tab.id)}
+            onClick={() => onTabChange(tab.id)}
             className={`
-              whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors;
-              ${
-                activeTab === tab.id;
-                  ? 'border-neutral-800 dark:border-neutral-50 text-neutral-800 dark:text-neutral-50'
-                  : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:border-neutral-400 dark:hover:border-neutral-500'
-              {"}"
-            `{"}"
-          {">"}
-            {tab.label.toUpperCase()}
-          </button></nav>
-        )){"}"
-      </nav></div>
+              py-3 px-1 border-b-2 font-medium text-sm transition-colors
+              ${activeTab === tab.id
+                ? 'border-red-500 text-red-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }
+            `}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState, FC } from 'react';
 import { Link } from 'react - router - dom';
 // @ts - nocheck;
@@ -8,8 +9,7 @@ import { getYouTubeVideoId } from '../src / lib / youtube - utils';
 
 import ImageWithFallback from 'ImageWithFallback';
 
-import type { Video } from '../types.ts';
-
+import type { Video } from '../types.ts'
 export interface SimpleHoverVideoCardProps {}
  video: Video;
  className?: string;
@@ -25,7 +25,7 @@ const SimpleHoverVideoCard: React.FC < SimpleHoverVideoCardProps> = ({ video, cl
  const HIDE_DELAY: number = 150; // Delay before hiding preview;
 
  // Extract YouTube video ID from the video;
- const getVideoId = (video: Video): string | (null) => {}
+ const getVideoId = (video: Video): string | (null: any) => {}
  // Try to extract from video.id if it has prefixes;
  if (video.id.startsWith('youtube-')) {}
  return video.id.replace('youtube-', '');
@@ -295,6 +295,5 @@ return duration;
  `}</style>
 // FIXED:  </div>
  );
-};
-
+}
 export default SimpleHoverVideoCard;

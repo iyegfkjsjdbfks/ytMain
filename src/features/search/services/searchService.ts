@@ -1,4 +1,5 @@
-// searchService - Enhanced Service;
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+// searchService - Enhanced Service
 export interface SearchServiceConfig {
   apiUrl?: string;
   timeout?: number;
@@ -59,5 +60,5 @@ export class SearchService {
   }
 }
 
-export const searchService = new SearchService();
+export const searchService = new SearchService()
 export default searchService;
