@@ -17,8 +17,8 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
  // Convert YouTubeSearchResult or GoogleSearchResult to Video
  const searchResult = item;
  const now = new Date().toISOString();
- return {}
- id: searchResult.id,
+ return {
+id: searchResult.id,
  title: searchResult.title,
  description: searchResult.description || '',
  thumbnailUrl: searchResult.thumbnailUrl,
@@ -39,57 +39,52 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
  updatedAt: now 
  };
 
-export interface OptimizedSearchResultsProps {}
- videos: Video;,
- youtubeVideos: YouTubeSearchResult;
- googleSearchVideos: GoogleSearchResult;,
- loading: boolean;
- query: string;,
- sortBy: string;
- onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
- onLoadMore?: () => void;
- hasMore?: boolean;
+export interface OptimizedSearchResultsProps {
+videos: Video[];
+youtubeVideos: YouTubeSearchResult[];
+googleSearchVideos: GoogleSearchResult[];
+loading: boolean;
+query: string;
+sortBy: string;
+onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
+onLoadMore?: () => void;
+hasMore?: boolean;
 }
 
 // Debounce hook for search optimization
-export function useDebounce < T>(value: T,;
- delay): T {}
- const [debouncedValue, setDebouncedValue] = useState < T>(value);
+export function useDebounce<T>(value: T, delay: number): T {
+ const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
- useEffect(() => {}
- const handler = setTimeout((() => {}
+ useEffect(() => {
+ const handler = setTimeout(() => {
  setDebouncedValue(value);
- }) as any, delay);
-
- return () => {}
+ }, delay);
+ return () => {
  clearTimeout(handler);
- }}, [value, delay]);
+ };
+ }, [value, delay]);
 
  return debouncedValue;
 }
 
 // Memoized sorting functions
-const sortingFunctions: object = {}
- relevance: (items,
- query) => {}
- return items.sort((a,
- b) => {}
+const sortingFunctions = {
+ relevance: (items: any[], query: string) => {
+ return items.sort((a: any, b: any) => {
  const aRelevance = a.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
  const bRelevance = b.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
  return bRelevance - aRelevance;
  });
  },
- date: (items) => {}
- return items.sort((a,
- b) => {}
+ date: (items: any[]) => {
+ return items.sort((a: any, b: any) => {
  const dateA = a.uploadedAt || a.publishedAt || '';
  const dateB = b.uploadedAt || b.publishedAt || '';
  return new Date(dateB).getTime() - new Date(dateA).getTime();
  });
  },
- views: (items) => {}
- return items.sort((a,
- b) => {}
+ views: (items: any[]) => {
+ return items.sort((a: any, b: any) => {
  const viewsA = typeof a.views === 'string' ? parseInt(a.views, 10) || 0 : (a.views || 0);
  const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : (b.views || 0);
  return viewsB - viewsA;

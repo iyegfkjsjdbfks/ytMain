@@ -1,0 +1,214 @@
+components/CommentModal.tsx(111,29): error TS1005: '}' expected.
+components/forms/Button.tsx(63,3): error TS1109: Expression expected.
+components/forms/Button.tsx(68,3): error TS1109: Expression expected.
+components/forms/Button.tsx(70,2): error TS1109: Expression expected.
+components/forms/Input.tsx(39,4): error TS1005: '...' expected.
+components/forms/Input.tsx(40,4): error TS1005: '...' expected.
+components/forms/Input.tsx(42,31): error TS1005: '>' expected.
+components/forms/Input.tsx(43,70): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/forms/Input.tsx(44,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/forms/Input.tsx(45,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/icons/YouTubeLogo.tsx(9,2): error TS2657: JSX expressions must have one parent element.
+components/icons/YouTubeLogo.tsx(13,2): error TS1005: ')' expected.
+components/icons/YouTubeLogo.tsx(14,1): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(12,2): error TS1005: '=>' expected.
+components/OptimizedSearchResults.tsx(15,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(22,7): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(23,13): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(24,14): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(25,10): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(26,10): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(27,7): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(28,7): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(29,10): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(30,12): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(31,13): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(32,11): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(33,18): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(34,10): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(35,6): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(36,12): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(38,11): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(39,11): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(40,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(43,16): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(45,41): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(47,16): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(49,81): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(50,13): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(50,25): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(51,10): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(52,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(55,43): error TS1138: Parameter declaration expected.
+components/OptimizedSearchResults.tsx(60,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(61,2): error TS1005: ')' expected.
+components/OptimizedSearchResults.tsx(61,26): error TS1005: ')' expected.
+components/OptimizedSearchResults.tsx(62,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(62,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(62,5): error TS1434: Unexpected keyword or identifier.
+components/OptimizedSearchResults.tsx(62,18): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(66,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(66,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(66,4): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(66,20): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(69,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(77,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(80,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(80,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(81,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(81,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(85,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(88,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(88,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(89,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(89,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(93,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(96,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(96,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(97,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(109,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(110,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(112,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(115,42): error TS1131: Property or signature expected.
+components/OptimizedSearchResults.tsx(115,43): error TS1005: '>' expected.
+components/OptimizedSearchResults.tsx(116,57): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(118,1): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(118,2): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(118,4): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(119,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(124,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(129,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(131,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(137,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(137,4): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(139,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(139,4): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(141,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(143,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(147,2): error TS1472: 'catch' or 'finally' expected.
+components/OptimizedSearchResults.tsx(153,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(156,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(159,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(162,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(165,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(167,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(167,4): error TS1005: 'try' expected.
+components/OptimizedSearchResults.tsx(169,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(178,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(180,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(187,2): error TS1005: '}' expected.
+components/OptimizedSearchResults.tsx(187,5): error TS1003: Identifier expected.
+components/OptimizedSearchResults.tsx(187,42): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(190,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(191,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(193,13): error TS1005: ':' expected.
+components/OptimizedSearchResults.tsx(196,7): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(198,14): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(203,2): error TS1005: '}' expected.
+components/OptimizedSearchResults.tsx(203,5): error TS1003: Identifier expected.
+components/OptimizedSearchResults.tsx(205,2): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/OptimizedSearchResults.tsx(206,2): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/OptimizedSearchResults.tsx(209,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/OptimizedSearchResults.tsx(217,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/OptimizedSearchResults.tsx(219,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(219,4): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(220,5): error TS1003: Identifier expected.
+components/OptimizedSearchResults.tsx(220,9): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(220,10): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(220,16): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(226,3): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(228,2): error TS1005: ')' expected.
+components/OptimizedSearchResults.tsx(228,69): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(232,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(232,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(234,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(234,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(262,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(263,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(263,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(270,2): error TS1005: ')' expected.
+components/OptimizedSearchResults.tsx(278,18): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(278,19): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(278,21): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(287,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(287,11): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(288,12): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(288,22): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(288,23): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(292,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(292,66): error TS1005: ')' expected.
+components/OptimizedSearchResults.tsx(294,20): error TS1137: Expression or comma expected.
+components/OptimizedSearchResults.tsx(295,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(295,72): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(296,2): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(296,81): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(297,2): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(297,94): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(297,127): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(302,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(306,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(308,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(308,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(308,72): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(312,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(313,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(313,15): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(315,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(315,17): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(316,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(316,18): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(318,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(318,13): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(320,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(322,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(322,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(323,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(323,15): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(325,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(332,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(334,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(334,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(335,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(335,12): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(336,2): error TS1005: 'export' expected.
+components/OptimizedSearchResults.tsx(336,9): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(337,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(338,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(338,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(338,28): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(342,2): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(344,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(346,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(346,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(346,51): error TS1005: ';' expected.
+components/OptimizedSearchResults.tsx(352,8): error TS1477: An instantiation expression cannot be followed by a property access.
+components/OptimizedSearchResults.tsx(384,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(388,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(396,45): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(396,64): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/OptimizedSearchResults.tsx(397,119): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(402,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/OptimizedSearchResults.tsx(404,14): error TS17002: Expected corresponding JSX closing tag for 'div'.
+components/OptimizedSearchResults.tsx(406,48): error TS1005: ',' expected.
+components/OptimizedSearchResults.tsx(406,67): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/OptimizedSearchResults.tsx(407,119): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(412,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/OptimizedSearchResults.tsx(414,14): error TS17002: Expected corresponding JSX closing tag for 'div'.
+components/OptimizedSearchResults.tsx(418,2): error TS1005: ')' expected.
+components/OptimizedSearchResults.tsx(426,33): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(428,41): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(433,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/OptimizedSearchResults.tsx(434,4): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/OptimizedSearchResults.tsx(436,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(436,4): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(438,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(441,15): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(443,14): error TS1109: Expression expected.
+components/OptimizedSearchResults.tsx(449,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/OptimizedSearchResults.tsx(451,14): error TS17002: Expected corresponding JSX closing tag for 'div'.
+components/OptimizedSearchResults.tsx(452,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(452,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(454,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(454,3): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(456,2): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(457,1): error TS1128: Declaration or statement expected.

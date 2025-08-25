@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback, useRef, KeyboardEvent
 import { useLocation } from 'react-router-dom';
 import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import CommentModal from '../components/CommentModal';
+import CommentModal from '../../components/CommentModal';
 import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
 import ShortsPageError from '../components/ErrorStates/ShortsPageError';
 import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';

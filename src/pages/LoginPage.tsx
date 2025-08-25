@@ -1,8 +1,8 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import Button from '../components/forms/Button';
-import Input from '../components/forms/Input';
-import YouTubeLogo from '../components/icons/YouTubeLogo';
+import Button from '../../components/forms/Button';
+import Input from '../../components/forms/Input';
+import YouTubeLogo from '../../components/icons/YouTubeLogo';
 import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
