@@ -1,0 +1,1 @@
+{"version":3,"file":"googleSearchService.js","sourceRoot":"","sources":["googleSearchService.ts"],"names":[],"mappings":";;;AAAA,iDAAiD;AACjD,MAAa,mBAAmB;IAC9B;QACE,sBAAsB;IACxB,CAAC;IAED,KAAK,CAAC,MAAM,CAAC,KAAa;QACxB,6BAA6B;QAC7B,OAAO,EAAE,CAAC;IACZ,CAAC;CACF;AATD,kDASC;AAED,kBAAe,IAAI,mBAAmB,EAAE,CAAC"}

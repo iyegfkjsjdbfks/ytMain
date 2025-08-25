@@ -8,9 +8,8 @@ interface ErrorMessageProps {
  showIcon?: boolean;
  className?: string;
  variant?: 'overlay' | 'inline' | 'card';
-}
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({
+const ErrorMessage: React.FC<ErrorMessageProps> = ({)
  message,
  onRetry,
  retryText = 'Click to retry',
@@ -36,31 +35,25 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
  if (onRetry) {
  e.stopPropagation();
  onRetry();
- };
 
- return (
- <div;>
+ return (;)
+ <div;>;
 // FIXED:  className={`${variantClasses[variant]} ${className}`} />
-// FIXED:  onClick={(e: any) => handleClick(e)}
- role="alert"
+// FIXED:  onClick={(e: any) => handleClick(e), }
+ role="alert";
  >
- <div className={"text}-center">
- {showIcon && (
- <ExclamationTriangleIcon;>
-// FIXED:  className={`w-8 h-8 mx-auto mb-2 ${iconColorClasses[variant]}`} />
- />
- )}
- <p className={`text-sm mb-2 ${textColorClasses[variant]}`}>
+ <div className={"text}-center">;
+ {showIcon && ()
+ <ExclamationTriangleIcon;>;
+// FIXED:  className={`w-8 h-8 mx-auto mb-2 ${iconColorClasses[variant]}`} /> />
+ <p className={`text-sm mb-2 ${textColorClasses[variant]}`}>;
  {message}
 // FIXED:  </p>
- {onRetry && (
- <p className={`text-xs opacity-75 ${textColorClasses[variant]}`}>
+ {onRetry && ()
+ <p className={`text-xs opacity-75 ${textColorClasses[variant]}`}>;
  {retryText}
 // FIXED:  </p>
- )}
 // FIXED:  </div>
 // FIXED:  </div>
- );
-};
 
 export default ErrorMessage;

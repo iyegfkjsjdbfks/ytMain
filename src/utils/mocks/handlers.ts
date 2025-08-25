@@ -2,6 +2,5 @@
 export const handlers = {
   enabled: true,
   process: (data: unknown) => data, 
-};
 
 export default handlers;

@@ -12,7 +12,5 @@ export function useVideoAutoplay() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useVideoAutoplay;

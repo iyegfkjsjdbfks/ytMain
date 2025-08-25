@@ -14,7 +14,6 @@ export interface Video {
   tags: string[];
   category: string;
   isLive: boolean;
-}
 
 export interface VideoMetadata {
   title: string;
@@ -23,14 +22,12 @@ export interface VideoMetadata {
   category: string;
   privacy: 'public' | 'private' | 'unlisted';
   thumbnail?: File;
-}
 
 export interface VideoUploadProgress {
   uploadId: string;
   progress: number;
   status: 'uploading' | 'processing' | 'completed' | 'failed';
   error?: string;
-}
 
 export interface VideoPlayerState {
   isPlaying: boolean;
@@ -40,7 +37,6 @@ export interface VideoPlayerState {
   isMuted: boolean;
   isFullscreen: boolean;
   playbackRate: number;
-}
 
 export interface VideoComment {
   id: string;
@@ -53,14 +49,12 @@ export interface VideoComment {
   likeCount: number;
   replyCount: number;
   replies?: VideoComment[];
-}
 
 export interface VideoQuality {
   label: string;
   value: string;
   resolution: string;
   bitrate: number;
-}
 
 export type VideoSortOption = 'newest' | 'oldest' | 'popular' | 'trending';
 export type VideoFilterOption = 'all' | 'today' | 'week' | 'month' | 'year';

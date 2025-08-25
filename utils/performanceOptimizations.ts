@@ -14,44 +14,39 @@ export const withPerformanceOptimization = {
  /**
  * Shallow comparison memoization
  */,
- shallow: <P extends object>(Component: ComponentType < P>) =>
- memo(Component(prevProps, nextProps) => {
+ shallow: <P extends object>(Component: ComponentType < P>) =>;
+ memo(Component(prevProps, nextProps) => {)
  const prevKeys = Object.keys(prevProps);
  const nextKeys = Object.keys(nextProps);
 
  if (prevKeys.length !== nextKeys.length) {
  return false;
- }
 
  for (const key of prevKeys) {
  if (prevProps[key as keyof P] !== nextProps[key as keyof P]) {
  return false;
- }
  return true;
- }),
 
  /**
  * Memoization that ignores specific props
  */,
- ignoring: <P extends object>(ignoredProps: Array<any> < keyof P>) =>
- (Component: ComponentType < P>) =>
- memo(Component(prevProps, nextProps) => {
+ ignoring: <P extends object>(ignoredProps: Array<any> < keyof P>) =>;
+ (Component: ComponentType < P>) =>;
+ memo(Component(prevProps, nextProps) => {)
  const filteredPrev: object = { ...prevProps };
  const filteredNext: object = { ...nextProps };
 
- ignoredProps.forEach((prop) => {
+ ignoredProps.forEach((prop) => {)
  delete filteredPrev.prop;
  delete filteredNext.prop;
- });
 
  return JSON.stringify(filteredPrev) === JSON.stringify(filteredNext);
- }),
 
  /**
  * Memoization for components with array props
  */,
- arrayOptimized: <P extends object>(Component: ComponentType < P>) =>
- memo(Component(prevProps, nextProps) => {
+ arrayOptimized: <P extends object>(Component: ComponentType < P>) =>;
+ memo(Component(prevProps, nextProps) => {)
  for (const key in prevProps) {
  const prevValue = prevProps.key;
  const nextValue = nextProps.key;
@@ -59,14 +54,11 @@ export const withPerformanceOptimization = {
  if (Array<any>.isArray<any>(prevValue) && Array<any>.isArray<any>(nextValue)) {
  if (prevValue.length !== nextValue.length) {
  return false;
- }
  for (let i = 0; i < prevValue.length; i++) {
  if (prevValue.i !== nextValue.i) {
  return false;
- }
  } else if (prevValue !== nextValue) {
  return false;
- }
  return true;
  }) };
 
@@ -77,11 +69,10 @@ export const lazyWithFallback = {
  /**
  * Create a lazy component
  */,
- create: <P extends object>(,
- importFunc: () => Promise<{ default: ComponentType < P> }>
+ create: <P extends object>(,)
+ importFunc: () => Promise<{ default: ComponentType < P> }>;
  ) => {
  return lazy(importFunc);
- };
 
 /**
  * Hook optimization utilities
@@ -90,38 +81,36 @@ export const hookOptimizations = {
  /**
  * Create stable object reference
  */,
- useStableObject: <T extends object>(obj: T): T =>
+ useStableObject: <T extends object>(obj: T): T =>;
  useMemo(() => obj, Object.values(obj)),
 
  /**
  * Create stable array reference
  */,
- useStableArray<any>: <T extends any[]>(arr: T): T =>
+ useStableArray<any>: <T extends any[]>(arr: T): T =>;
  useMemo(() => arr, arr),
 
  /**
  * Create stable callback with dependency optimization
  */,
- useOptimizedCallback: <T extends (...args) => any>(,
+ useOptimizedCallback: <T extends (...args) => any>(,)
  callback: T,
  deps): T => useCallback(callback, deps),
 
  /**
  * Memoized expensive computation
  */,
- useExpensiveComputation: <T>(,
+ useExpensiveComputation: <T>(,)
  computeFn: () => T,
  deps,
  shouldRecompute?: (newDeps, oldDeps) => boolean,
  ): (T) => {
- return useMemo(() => {
+ return useMemo(() => {)
  if (shouldRecompute) {
  // Custom recomputation logic would go here
  // For now, just use standard memoization
- }
  return computeFn();
  }, deps);
- };
 
 /**
  * List rendering optimizations
@@ -133,15 +122,11 @@ export const listOptimizations = {
  generateStableKey: (item, index, prefix = 'item'): (string) => {
  if (item.id) {
 return `${prefix}-${item.id}`;
-}
  if (item.key) {
 return `${prefix}-${item.key}`;
-}
  if (item.name) {
 return `${prefix}-${item.name}`;
-}
  return `${prefix}-${index}`;
- },
 
  /**
  * Chunk large arrays for better performance
@@ -150,19 +135,16 @@ return `${prefix}-${item.name}`;
  const chunks: T[][] = [];
  for (let i = 0; i < array.length; i += chunkSize) {
  chunks.push(array.slice(i, i + chunkSize));
- }
  return chunks;
- },
 
  /**
  * Virtual scrolling helper for large lists
  */,
- getVisibleItems: <T>(,
+ getVisibleItems: <T>(,)
  items: T[],
  startIndex,
  visibleCount): T[] => {
  return items.slice(startIndex, startIndex + visibleCount);
- };
 
 /**
  * Image loading optimizations
@@ -172,28 +154,25 @@ export const imageOptimizations = {
  * Preload critical images
  */,
  preloadImage: (src): Promise<any> < void> => {
- return new Promise<any>((resolve, reject) => {
+ return new Promise<any>((resolve, reject) => {)
  const img = new Image();
  img.onload = () => resolve();
  img.onerror = reject;
  img.src = src;
- });
- },
 
  /**
  * Lazy load image with intersection observer
  */,
- createLazyImageObserver: (,
+ createLazyImageObserver: (,)
  callback: (entry: IntersectionObserverEntry) => void,
  options?: IntersectionObserverInit,
  ): (IntersectionObserver) => {
- return new IntersectionObserver((entries) => {
+ return new IntersectionObserver((entries) => {)
  entries.forEach(callback);
  }, {
  rootMargin: '50px',
  threshold: 0.1,
  ...options });
- };
 
 /**
  * Bundle size optimizations
@@ -202,30 +181,26 @@ export const bundleOptimizations = {
  /**
  * Dynamic import with error handling
  */,
- dynamicImport: async <T>(,
- importFunc: () => Promise<any> < T>
+ dynamicImport: async <T>(,)
+ importFunc: () => Promise<any> < T>;
  ): Promise<any> < T | null> => {
  try {
  return await importFunc();
  } catch (error) {
  (console).error('Dynamic import failed:', error);
  return null;
- }
- },
 
  /**
  * Tree - shaking friendly import helper
  */,
- selectiveImport: <T, K extends keyof T>(,
+ selectiveImport: <T, K extends keyof T>(,)
  module: T,
  keys: K[],
  ): Pick < T, K> => {
  const result = {} as Pick < T, K>;
- keys.forEach((key: K) => {
+ keys.forEach((key: K) => {)
  result.key = module.key;
- });
  return result;
- };
 
 /**
  * Event handler optimizations
@@ -234,13 +209,13 @@ export const eventOptimizations = {
  /**
  * Throttled event handler
  */,
- throttle: <T extends (...args) => any>(,
+ throttle: <T extends (...args) => any>(,)
  func: T,
  delay): (T) => {
  let timeoutId: ReturnType < typeof setTimeout> | null = null;
  let lastExecTime: number = 0;
 
- return ((...args) => {
+ return ((...args) => {)
  const currentTime = Date.now();
 
  if (currentTime - lastExecTime > delay) {
@@ -249,44 +224,38 @@ export const eventOptimizations = {
  } else {
  if (timeoutId) {
 clearTimeout(timeoutId);
-}
- timeoutId = setTimeout((() => {
+ timeoutId = setTimeout((() => {))
  func(...args);
  lastExecTime = Date.now();
  }) as any, delay - (currentTime - lastExecTime));
- }
  }) as T;
- },
 
  /**
  * Debounced event handler
  */,
- debounce: <T extends (...args) => any>(,
+ debounce: <T extends (...args) => any>(,)
  func: T,
  delay): (T) => {
  let timeoutId: ReturnType < typeof setTimeout> | null = null;
 
- return ((...args) => {
+ return ((...args) => {)
  if (timeoutId) {
 clearTimeout(timeoutId);
-}
  timeoutId = setTimeout((() => func(...args)) as any, delay);
  }) as T;
- },
 
  /**
  * Passive event listener helper
  */,
- addPassiveListener: (,
+ addPassiveListener: (,)
  element: Element,
  event: Event,
  handler: EventListener,
  options?: AddEventListenerOptions,
  ): (void) => {
- element.addEventListener(event, handler, {
+ element.addEventListener(event, handler, {)
  passive: true,
  ...options });
- };
 
 /**
  * Memory management utilities
@@ -299,7 +268,7 @@ export const memoryOptimizations = {
  get: (key: K) => V | undefined;,
  set: (key: K, value: V) => void;,
  has: (key: K) => boolean;,
- delete: (key: K) => boolean
+ delete: (key: K) => boolean;
  } => {
  const cache = new WeakMap < K, V>();
 
@@ -308,7 +277,6 @@ export const memoryOptimizations = {
  set: (key: K, value: V) => cache.set(key, value),
  has: (key: K) => cache.has(key),
  delete: (key: K) => cache.delete(key) };
- },
 
  /**
  * LRU cache implementation
@@ -323,9 +291,7 @@ export const memoryOptimizations = {
  cache.delete(key);
  cache.set(key, value);
  return value;
- }
  return undefined;
- },
  set: (key: K, value: V): (void) => {
  if (cache.has(key)) {
  cache.delete(key);
@@ -333,13 +299,10 @@ export const memoryOptimizations = {
  const firstKey = cache.keys().next().value;
  if (firstKey !== undefined) {
  cache.delete(firstKey);
- }
  cache.set(key, value);
- },
  has: (key: K): boolean => cache.has(key),
  clear: (): void => cache.clear(),
  size: (): number => cache.size };
- };
 
 // Export all optimizations as a single object
 export const PerformanceOptimizations = {

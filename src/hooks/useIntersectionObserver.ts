@@ -12,7 +12,5 @@ export function useIntersectionObserver() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useIntersectionObserver;

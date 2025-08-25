@@ -10,8 +10,7 @@ export interface PerformanceMetric {
  value: number;
  timestamp: number;,
  url: string;
- userAgent: string
-}
+ userAgent: string;
 
 export class PerformanceMonitor {
  private metrics: PerformanceMetric[] = [];
@@ -19,7 +18,6 @@ export class PerformanceMonitor {
 
  constructor() {
  this.isEnabled = import.meta.env.PROD || import.meta.env.VITE_ENABLE_PERFORMANCE_MONITORING === 'true';
- }
 
  /**
  * Track Core Web Vitals (CLS, FID, LCP)
@@ -27,40 +25,34 @@ export class PerformanceMonitor {
  public trackWebVitals(): void {
  if (!this.isEnabled) {
 return;
-}
 
  // Track Largest Contentful Paint (LCP)
- this.observePerformanceEntry('largest - contentful - paint', (entry) => {
- this.recordMetric({
+ this.observePerformanceEntry('largest - contentful - paint', (entry) => {)
+ this.recordMetric({)
  name: 'LCP',
  value: entry.startTime,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
- });
 
  // Track First Input Delay (FID)
- this.observePerformanceEntry('first - input', (entry) => {
- this.recordMetric({
+ this.observePerformanceEntry('first - input', (entry) => {)
+ this.recordMetric({)
  name: 'FID',
  value: entry.processingStart - entry.startTime,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
- });
 
  // Track Cumulative Layout Shift (CLS)
- this.observePerformanceEntry('layout - shift', (entry) => {
+ this.observePerformanceEntry('layout - shift', (entry) => {)
  if (!entry.hadRecentInput) {
- this.recordMetric({
+ this.recordMetric({)
  name: 'CLS',
  value: entry.value,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
- }
- });
- }
 
  /**
  * Track custom performance metrics
@@ -68,15 +60,13 @@ return;
  public trackCustomMetric(name, value: string | number): void {
  if (!this.isEnabled) {
 return;
-}
 
- this.recordMetric({
+ this.recordMetric({)
  name,
  value: typeof value === 'string' ? parseFloat(value) || 0 : value,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
- }
 
  /**
  * Track page load performance
@@ -84,35 +74,31 @@ return;
  public trackPageLoad(): void {
  if (!this.isEnabled) {
 return;
-}
 
- window.addEventListener('load', ( as EventListener) => {
+ window.addEventListener('load', ( as EventListener) => {)
  const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
 
  if (navigation) {
- this.recordMetric({
+ this.recordMetric({)
  name: 'TTFB',
  value: navigation.responseStart - navigation.requestStart,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
 
- this.recordMetric({
+ this.recordMetric({)
  name: 'DOMContentLoaded',
  value: navigation.domContentLoadedEventEnd - navigation.startTime,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
 
- this.recordMetric({
+ this.recordMetric({)
  name: 'LoadComplete',
  value: navigation.loadEventEnd - navigation.startTime,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
- }
- });
- }
 
  /**
  * Track React component render performance
@@ -120,15 +106,13 @@ return;
  public trackComponentRender(componentName, renderTime): void {
  if (!this.isEnabled) {
 return;
-}
 
- this.recordMetric({
+ this.recordMetric({)
  name: `Component_${componentName}_Render`,
  value: renderTime,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
- }
 
  /**
  * Track API call performance
@@ -136,9 +120,8 @@ return;
  public trackApiCall(endpoint, duration, status): void {
  if (!this.isEnabled) {
 return;
-}
 
- this.recordMetric({
+ this.recordMetric({)
  name: `API_${endpoint.replace(/[^a - zA - Z0 - 9]/g, '_')}`,
  value: duration,
  timestamp: Date.now(),
@@ -147,26 +130,23 @@ return;
 
  // Track API errors separately
  if (status >= 400) {
- this.recordMetric({
+ this.recordMetric({)
  name: `API_Error_${status}`,
  value: 1,
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent });
- }
  /**
  * Get all recorded metrics
  */
  public getMetrics(): PerformanceMetric[] {
  return [...this.metrics];
- }
 
  /**
  * Clear all metrics
  */
  public clearMetrics(): void {
  this.metrics = [];
- }
 
  /**
  * Send metrics to analytics service
@@ -174,21 +154,18 @@ return;
  public async sendMetrics(): Promise<any> < void> {
  if (!this.isEnabled || this.metrics.length === 0) {
 return;
-}
 
  try {
  // In a real application, you would send this to your analytics service
  // For now, we'll just log to console in development
  if (import.meta.env.DEV) {
  (console).group('Performance Metrics');
- this.metrics.forEach((metric) => {
+ this.metrics.forEach((metric) => {)
  (console).log(`${metric.name}: ${metric.value}ms`);
- });
  (console).groupEnd();
- }
 
  // Example: Send to analytics service
- // await (fetch)('/api / analytics / performance', {
+ // await (fetch)('/api / analytics / performance', {)
  // method: 'POST',
  // headers: { 'Content - Type': 'application / json' },
  // body: JSON.stringify({ metrics: this.metrics })
@@ -197,24 +174,19 @@ return;
  this.clearMetrics();
  } catch (error) {
  (console).error('Failed to send performance metrics:', error);
- }
  private observePerformanceEntry(entryType, callback: (entry) => void): void {
  try {
- const observer = new PerformanceObserver((list) => {
+ const observer = new PerformanceObserver((list) => {)
  list.getEntries().forEach(callback);
- });
  observer.observe({ entryTypes: [entryType] });
  } catch (error) {
  (console).warn(`Failed to observe ${entryType}:`, error);
- }
  private recordMetric(metric: PerformanceMetric): void {
  this.metrics.push(metric);
 
  // Auto - send metrics when we have too many to prevent memory issues
  if (this.metrics.length >= 100) {
  this.sendMetrics();
- }
-}
 
 // Create singleton instance
 export const performanceMonitor = new PerformanceMonitor();
@@ -223,31 +195,26 @@ export const performanceMonitor = new PerformanceMonitor();
 export function usePerformanceTracking(componentName: any): any {
  const trackRender = (renderTime: any) => {
  performanceMonitor.trackComponentRender(componentName, renderTime);
- };
 
  return { trackRender };
-}
 
 // Higher - order component for automatic performance tracking
-export function withPerformanceTracking < P extends object>(;
- WrappedComponent: React.ComponentType < P>
+export function withPerformanceTracking < P extends object>(;)
+ WrappedComponent: React.ComponentType < P>;
  componentName?: string) {
  const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
  const WithPerformanceTracking = (props: P) => {
  const startTime = performance.now();
 
- React.useEffect(() => {
+ React.useEffect(() => {)
  const endTime = performance.now();
  performanceMonitor.trackComponentRender(displayName, endTime - startTime);
- });
 
  return React.createElement(WrappedComponent, props);
- };
 
  WithPerformanceTracking.displayName = `withPerformanceTracking(${displayName})`;
  return WithPerformanceTracking;
-}
 
 // Initialize performance monitoring
 if (typeof window !== 'undefined') {
@@ -255,12 +222,10 @@ if (typeof window !== 'undefined') {
  performanceMonitor.trackPageLoad();
 
  // Send metrics periodically
- setInterval((() => {
+ setInterval((() => {))
  performanceMonitor.sendMetrics();
  }) as any, 30000); // Every 30 seconds
 
  // Send metrics before page unload
- window.addEventListener('beforeunload', ( as EventListener) => {
+ window.addEventListener('beforeunload', ( as EventListener) => {)
  performanceMonitor.sendMetrics();
- });
-}

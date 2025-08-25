@@ -11,7 +11,6 @@ interface ShortVideo {
   channel: string,
   views: number,
   createdAt: Date,
-}
 
 export function useShortsData() {
   const [data, setData] = useState<ShortVideo[] | null>(null);
@@ -23,8 +22,6 @@ export function useShortsData() {
     loading,
     error,
     setData, 
-  };
-}
 
 // Additional shorts-related hook;
 export function useShortsVideos() {
@@ -37,7 +34,5 @@ export function useShortsVideos() {
     loading,
     error,
     setShortsVideos, 
-  };
-}
 
 export default useShortsData;

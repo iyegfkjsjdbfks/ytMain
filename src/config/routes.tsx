@@ -53,12 +53,12 @@ const TestMetadataFetch = lazy(() => import('../debug/TestMetadataFetch'));
 const GoogleSearchStoreDebug = lazy(() => import('../debug/GoogleSearchStoreDebug'));
 
 // Route configuration for main application;
-export const mainRoutes: RouteObject[] = [
+export const mainRoutes: RouteObject[] = [;
  {
  path: '/',
  element: <Layout />,
  errorElement: <ErrorBoundary />,
- children: [
+ children: [;
  {
  index: true,
  element: <HomePage /> },
@@ -147,14 +147,13 @@ export const mainRoutes: RouteObject[] = [
  {
  path: 'account',
  element: <AccountLayout />,
- children: [
+ children: [;
  {
  path: 'settings',
  element: <SettingsPage /> },
  {
  path: 'privacy',
  element: <SettingsPage /> // Can be replaced with dedicated privacy page later;
- },
  {
  path: 'data',
  element: <YourDataPage /> }] },
@@ -167,12 +166,12 @@ export const mainRoutes: RouteObject[] = [
  element: <ContentManagerPage /> }] }];
 
 // Route configuration for studio;
-export const studioRoutes: RouteObject[] = [
+export const studioRoutes: RouteObject[] = [;
  {
  path: 'studio',
  element: <StudioLayout />,
  errorElement: <ErrorBoundary />,
- children: [
+ children: [;
  {
  index: true,
  element: <StudioDashboardPage /> },
@@ -205,22 +204,20 @@ export const studioRoutes: RouteObject[] = [
  element: <VideoEditorPage /> }] }];
 
 // Authentication routes (outside main layout)
-const authRoutes: RouteObject[] = [
+const authRoutes: RouteObject[] = [;
  {
  path: '/login',
- element: (
- <ProtectedRoute requireAuth={false}>
- <LoginPage />
+ element: (;)
+ <ProtectedRoute requireAuth={false}>;
+ <LoginPage />;
 // FIXED:  </ProtectedRoute>
- ),
  errorElement: <ErrorBoundary /> },
  {
  path: '/register',
- element: (
- <ProtectedRoute requireAuth={false}>
- <RegisterPage />
+ element: (;)
+ <ProtectedRoute requireAuth={false}>;
+ <RegisterPage />;
 // FIXED:  </ProtectedRoute>
- ),
  errorElement: <ErrorBoundary /> }];
 
 // Combined route configuration;

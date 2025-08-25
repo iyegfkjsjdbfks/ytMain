@@ -25,18 +25,17 @@ interface YouTubePlayerWrapperProps {
  // IFrame API specific props;
  onPlaybackQualityChange?: (event: Event) => void;
  onPlaybackRateChange?: (event: Event) => void;
-}
 
 // Union type for player methods;
 export interface YouTubePlayerWrapperMethods {}
 
-const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
+const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((;))
  props,
  _ref) => {
  // YouTubePlayerWrapper rendering;
 
  // Create mock video object for YouTubePlayer component;
- const createMockVideo = (videoId: string): YouTubeSearchResult => ({,
+ const createMockVideo = (videoId: string): YouTubeSearchResult => ({,)
  id: videoId,
  title: 'Video',
  description: '',
@@ -51,20 +50,17 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
  isYouTube: true as const });
 
  // Use YouTube Player - Best for simple YouTube integration;
- return (
- <YouTubePlayer;>
+ return (;)
+ <YouTubePlayer;>;
  video={createMockVideo(props.videoId)}
- {...(props.width !== undefined && { width: props.width })}
- {...(props.height !== undefined && { height: props.height })}
- {...(props.autoplay !== undefined && { autoplay: props.autoplay })}
- {...(props.controls !== undefined && { controls: props.controls })}
- {...(props.className !== undefined && { className: props.className })}
- {...(props.onStateChange !== undefined && { onStateChange: props.onStateChange })}
- {...(props.onReady !== undefined && { onReady: props.onReady })}
- {...(props.onError !== undefined && { onError: props.onError })} />
- />
- );
-});
+ {...(props.width !== undefined && { width: props.width }), }
+ {...(props.height !== undefined && { height: props.height }), }
+ {...(props.autoplay !== undefined && { autoplay: props.autoplay }), }
+ {...(props.controls !== undefined && { controls: props.controls }), }
+ {...(props.className !== undefined && { className: props.className }), }
+ {...(props.onStateChange !== undefined && { onStateChange: props.onStateChange }), }
+ {...(props.onReady !== undefined && { onReady: props.onReady }), }
+ {...(props.onError !== undefined && { onError: props.onError })} /> />
 
 YouTubePlayerWrapper.displayName = 'YouTubePlayerWrapper';
 

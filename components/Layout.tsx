@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props;
  // For watch page, start with minimized sidebar by default;
  const [isMinimized, setIsMinimized] = useState(isWatchPage);
 
- const toggleSidebar = useCallback(() => {
+ const toggleSidebar = useCallback(() => {)
  if (isWatchPage) {
  // On watch page, toggle between minimized and expanded;
  setIsMinimized(prev => !prev);
@@ -31,11 +31,10 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props;
  // On other pages, toggle visibility;
  setIsSidebarOpen(prev => !prev);
  setIsMinimized(false); // Reset minimized state;
- }
 
  }, [isWatchPage]);
 
- useEffect(() => {
+ useEffect(() => {)
  // Update sidebar state when navigating to/from watch page;
  if (isWatchPage) {
  setIsMinimized(true);
@@ -43,15 +42,13 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props;
  } else {
  setIsMinimized(false);
  setIsSidebarOpen(window.innerWidth >= 768);
- }
  }, [isWatchPage]);
 
- useEffect(() => {
+ useEffect(() => {)
  const handleResize = () => {
  // Optional: adjust sidebar based on resize;
  // if (window.innerWidth >= 768 && !isSidebarOpen) setIsSidebarOpen(true);
  // if (window.innerWidth < 768 && isSidebarOpen) setIsSidebarOpen(false);
- };
  window.addEventListener('resize', handleResize as EventListener);
  return () => window.removeEventListener('resize', handleResize as EventListener);
  }, [isSidebarOpen]);
@@ -59,7 +56,6 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props;
  const handleMaximizeMiniplayer = (videoId: string) => {
  miniplayerContext.actions.hideMiniplayer();
  navigate(`/watch/${videoId}`);
- };
 
  // Determine padding based on route;
  const isShortsPage = location.pathname === '/shorts';
@@ -69,49 +65,41 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props;
  const getSidebarMargin = () => {
  if (isWatchPage) {
  // On watch page, use minimized or expanded sidebar;
- return isMinimized ? 'md: ml-16' : 'md:ml-60'
- }
+ return isMinimized ? 'md: ml-16' : 'md:ml-60';
  // On other pages, use normal sidebar behavior;
  if (isSidebarOpen) {
- return 'md: ml-60'
- }
+ return 'md: ml-60';
  return 'ml-0';
 
- };
 
- return (
- <div className={"fle}x flex-col h-screen">
- <Header toggleSidebar={toggleSidebar} />
- <div className={"fle}x flex-1 pt-14">
- {isWatchPage ? (
- isMinimized ? (
- <MinimizedSidebar />
- ) : (
- <Sidebar isOpen={true} />
- )
- ) : (
- <Sidebar isOpen={isSidebarOpen} />
- )}
-      <main;>
-        id="main-content"
-        role="main"
-        className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}>
+ return (;)
+ <div className={"fle}x flex-col h-screen">;
+ <Header toggleSidebar={toggleSidebar} />;
+ <div className={"fle}x flex-1 pt-14">;
+ {isWatchPage ? ()
+ isMinimized ? (;)
+ <MinimizedSidebar />;
+ ) : (;
+ <Sidebar isOpen={true} />;
+ ) : (;
+ <Sidebar isOpen={isSidebarOpen} />;
+      <main;>;
+        id="main-content";
+        role="main";
+        className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}>;
  <div className={mainContentPaddingClass}> {/* Apply conditional padding */}
- <div className={"min}-h-[calc(100vh-3.5rem)]">
+ <div className={"min}-h-[calc(100vh-3.5rem)]">;
  <Outlet /> {/* Render child routes */}
-</div>
-</div>
-</main>
-</div>
- {miniplayerContext.state.isVisible && miniplayerContext.state.currentVideo && (
- <Miniplayer;>
+</div>;
+</div>;
+</main>;
+</div>;
+ {miniplayerContext.state.isVisible && miniplayerContext.state.currentVideo && ()
+ <Miniplayer;>;
  video={miniplayerContext.state.currentVideo}
  onClose={miniplayerContext.actions.hideMiniplayer}
- onMaximize={handleMaximizeMiniplayer} />
+ onMaximize={handleMaximizeMiniplayer} />;
 
- )}
-</div>
- );
-};
+</div>;
 
 export default Layout;

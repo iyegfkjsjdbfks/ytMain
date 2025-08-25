@@ -4,12 +4,10 @@ import React, { ReactNode } from 'react';
 export interface BaseComponent {
  className?: string;
  children?: React.ReactNode;
-}
 
 export interface LoadingState {
  isLoading: boolean;
  error?: string | null;
-}
 
 export interface PaginationState {
  page: number;
@@ -17,7 +15,6 @@ export interface PaginationState {
  total: number;
  hasNextPage: boolean;
  hasPreviousPage: boolean;
-}
 
 export interface Video {
  id: string;
@@ -29,7 +26,6 @@ export interface Video {
  publishedAt: string;
  channelId: string;
  channelTitle: string;
-}
 
 export interface Channel {
  id: string;
@@ -38,7 +34,6 @@ export interface Channel {
  thumbnail: string;
  subscriberCount: number;
  videoCount: number;
-}
 
 export interface Playlist {
  id: string;
@@ -48,14 +43,12 @@ export interface Playlist {
  videoCount: number;
  channelId: string;
  channelTitle: string;
-}
 
 export interface ApiResponse<T> {
  data: T;
  success: boolean;
  message?: string;
  error?: string;
-}
 
 export interface SearchFilters {
  query?: string;
@@ -63,13 +56,12 @@ export interface SearchFilters {
  duration?: 'short' | 'medium' | 'long';
  uploadDate?: 'hour' | 'today' | 'week' | 'month' | 'year';
  sortBy?: 'relevance' | 'date' | 'views' | 'rating';
-}
 
 export type ComponentSize = 'small' | 'medium' | 'large';
-export type ComponentVariant =
- | 'primary'
- | 'secondary'
- | 'success'
- | 'warning'
+export type ComponentVariant =;
+ | 'primary';
+ | 'secondary';
+ | 'success';
+ | 'warning';
  | 'error';
 export type ThemeMode = 'light' | 'dark' | 'system';

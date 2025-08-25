@@ -11,7 +11,6 @@ export interface ProgressUpdate {
   currentTask: string,
   estimatedCompletion: Date,
   elapsedTime: number,
-}
 
 export interface PhaseProgress {
   name: string,
@@ -22,7 +21,6 @@ export interface PhaseProgress {
   errorsAtStart: number,
   errorsFixed: number,
   currentTask: string,
-}
 
 export class ProgressMonitor extends EventEmitter {
   private startTime: Date,
@@ -40,8 +38,6 @@ export class ProgressMonitor extends EventEmitter {
       successRate: 0,
       rollbackCount: 0,
       timeoutCount: 0,
-    };
-  }
 
   /**
    * Initializes monitoring for a set of phases;
@@ -51,19 +47,16 @@ export class ProgressMonitor extends EventEmitter {
     this.phases.clear(), 
 
     for (const phase of phases) {
-      this.phases.set(phase.name, {
+      this.phases.set(phase.name, {)
         name: phase.name,
         status: 'pending',
         progress: 0,
         errorsAtStart: 0,
         errorsFixed: 0,
-        currentTask: 'Waiting to start'
-      });
-    }
+        currentTask: 'Waiting to start';
 
     console.log(`📊 Initialized monitoring for ${phases.length} phases with ${totalErrors} total errors`);
     this.emit('initialized', { phases: Array.from(this.phases.values()), totalErrors });
-  }
 
   /**
    * Starts monitoring a specific phase;
@@ -72,12 +65,10 @@ export class ProgressMonitor extends EventEmitter {
     const phase = this.phases.get(phaseName), ;
     if (!phase) {;
       throw new Error(`Phase not found: ${phaseName}`);
-    }
 
     // End previous phase if running;
     if (this.currentPhase && this.currentPhase !== phaseName) {
       this.endPhase(this.currentPhase, 'completed'), 
-    }
 
     phase.status = 'running';
     phase.startTime = new Date();
@@ -90,12 +81,11 @@ export class ProgressMonitor extends EventEmitter {
 
     // Start periodic updates;
     this.startPeriodicUpdates();
-  }
 
   /**
    * Updates progress for the current phase;
    */
-  public updateProgress(
+  public updateProgress(;)
     errorsFixed: number,
     errorsRemaining: number,
     currentTask: string,
@@ -103,7 +93,6 @@ export class ProgressMonitor extends EventEmitter {
     if (!this.currentPhase) {
       console.warn('⚠️ No active phase to update');
       return, 
-    }
 
     const phase = this.phases.get(this.currentPhase);
     if (!phase) return;
@@ -114,7 +103,6 @@ export class ProgressMonitor extends EventEmitter {
     // Calculate progress percentage;
     if (phase.errorsAtStart > 0) {
       phase.progress = Math.min(100, (errorsFixed / phase.errorsAtStart) * 100), 
-    }
 
     // Update performance metrics;
     this.updatePerformanceMetrics(errorsFixed, errorsRemaining);
@@ -126,11 +114,9 @@ export class ProgressMonitor extends EventEmitter {
       errorsRemaining,
       currentTask,
       estimatedCompletion: this.calculateEstimatedCompletion(errorsRemaining),
-      elapsedTime: Date.now() - this.startTime.getTime()
-    };
+      elapsedTime: Date.now() - this.startTime.getTime();
 
     this.emit('progressUpdate', progressUpdate);
-  }
 
   /**
    * Ends a phase with the specified status;
@@ -147,15 +133,12 @@ export class ProgressMonitor extends EventEmitter {
       console.log(`✅ Completed phase: ${phaseName} (${phase.errorsFixed} errors fixed)`);
     } else {
       console.log(`❌ Failed phase: ${phaseName}`);
-    }
 
     this.emit('phaseEnded', { phase: phaseName, status, errorsFixed: phase.errorsFixed });
 
     if (phaseName === this.currentPhase) {
       this.currentPhase = null;
       this.stopPeriodicUpdates(), 
-    }
-  }
 
   /**
    * Records a rollback event;
@@ -164,7 +147,6 @@ export class ProgressMonitor extends EventEmitter {
     this.performanceMetrics.rollbackCount++, 
     console.log(`🔄 Rollback recorded: ${reason}`);
     this.emit('rollback', { reason, count: this.performanceMetrics.rollbackCount });
-  }
 
   /**
    * Records a timeout event;
@@ -173,7 +155,6 @@ export class ProgressMonitor extends EventEmitter {
     this.performanceMetrics.timeoutCount++, 
     console.log(`⏰ Timeout recorded: ${operation}`);
     this.emit('timeout', { operation, count: this.performanceMetrics.timeoutCount });
-  }
 
   /**
    * Gets current progress summary;
@@ -197,12 +178,10 @@ export class ProgressMonitor extends EventEmitter {
     if (phases.length > 0) {
       const phaseProgress = phases.reduce((sum: any, p: any) => sum + p.progress, 0);
       overallProgress = phaseProgress / phases.length, 
-    }
 
     const elapsedTime = Date.now() - this.startTime.getTime();
-    const estimatedCompletion = this.calculateEstimatedCompletion(;
+    const estimatedCompletion = this.calculateEstimatedCompletion(;)
       this.totalErrors - totalErrorsFixed;
-    );
 
     return {
       totalPhases: phases.length,
@@ -212,16 +191,13 @@ export class ProgressMonitor extends EventEmitter {
       totalErrorsFixed,
       elapsedTime,
       estimatedCompletion,
-      performanceMetrics: { ...this.performanceMetrics }
-    };
-  }
+      performanceMetrics: { ...this.performanceMetrics , }
 
   /**
    * Gets detailed phase information;
    */
   public getPhaseDetails(): PhaseProgress[] {
     return Array.from(this.phases.values()), 
-  }
 
   /**
    * Stops all monitoring and cleanup;
@@ -231,13 +207,11 @@ export class ProgressMonitor extends EventEmitter {
     
     if (this.currentPhase) {
       this.endPhase(this.currentPhase, 'completed'), 
-    }
 
     const summary = this.getProgressSummary();
     console.log(`🏁 Monitoring stopped. Total time: ${this.formatDuration(summary.elapsedTime)}`);
     
     this.emit('stopped', summary);
-  }
 
   /**
    * Starts periodic progress updates;
@@ -245,20 +219,16 @@ export class ProgressMonitor extends EventEmitter {
   private startPeriodicUpdates(): void {
     if (this.updateInterval) return;
 
-    this.updateInterval = setInterval(() => {
+    this.updateInterval = setInterval(() => {)
       if (this.currentPhase) {
         const phase = this.phases.get(this.currentPhase);
         if (phase && phase.status === 'running') {
-          this.emit('periodicUpdate', {
+          this.emit('periodicUpdate', {)
             phase: this.currentPhase,
             elapsedTime: phase.startTime ? Date.now() - phase.startTime.getTime() : 0,
             progress: phase.progress,
             currentTask: phase.currentTask, 
-          });
-        }
-      }
     }, 5000); // Update every 5 seconds;
-  }
 
   /**
    * Stops periodic updates;
@@ -267,8 +237,6 @@ export class ProgressMonitor extends EventEmitter {
     if (this.updateInterval) {
       clearInterval(this.updateInterval);
       this.updateInterval = null, 
-    }
-  }
 
   /**
    * Updates performance metrics;
@@ -277,14 +245,11 @@ export class ProgressMonitor extends EventEmitter {
     const totalProcessed = errorsFixed + errorsRemaining;
     if (totalProcessed > 0) {
       this.performanceMetrics.successRate = errorsFixed / totalProcessed, 
-    }
 
     // Calculate average fix time;
     const elapsedTime = Date.now() - this.startTime.getTime();
     if (errorsFixed > 0) {
       this.performanceMetrics.averageFixTime = elapsedTime / errorsFixed, 
-    }
-  }
 
   /**
    * Calculates estimated completion time;
@@ -292,11 +257,9 @@ export class ProgressMonitor extends EventEmitter {
   private calculateEstimatedCompletion(errorsRemaining: number): Date {
     if (errorsRemaining === 0 || this.performanceMetrics.averageFixTime === 0) {
       return new Date(), 
-    }
 
     const estimatedTimeRemaining = errorsRemaining * this.performanceMetrics.averageFixTime;
     return new Date(Date.now() + estimatedTimeRemaining);
-  }
 
   /**
    * Formats duration in human readable format;
@@ -305,13 +268,9 @@ export class ProgressMonitor extends EventEmitter {
     const seconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60), 
-;
     if (hours > 0) {;
       return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
     } else if (minutes > 0) {
       return `${minutes}m ${seconds % 60}s`;
     } else {
       return `${seconds}s`;
-    }
-  }
-}

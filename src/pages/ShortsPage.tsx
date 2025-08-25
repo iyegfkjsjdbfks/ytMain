@@ -17,18 +17,17 @@ import type { Short } from '../src/types/core';
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
+  useEffect(() => {)
+    const handler = setTimeout(() => {)
       setDebouncedValue(value), ;
     }, delay);
 
     return () => {
       clearTimeout(handler)}
-    };
   }, [value, delay]);
 
   return debouncedValue;
-}
+
 
 const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();
@@ -36,34 +35,33 @@ const ShortsPage: React.FC = () => {
   const location = useLocation();
 
   // Enhanced state management with proper Set handling and error recovery;
-  const [likedShortsArray, setLikedShortsArray] ={ useLocalStorage<string>[]}>('likedShorts', []);
-  const [followedChannelsArray, setFollowedChannelsArray] ={ useLocalStorage<string>[]}>('followedChannels', []);
+  const [likedShortsArray, setLikedShortsArray] :{ useLocalStorage<string>[]}>('likedShorts', []);
+  const [followedChannelsArray, setFollowedChannelsArray] :{ useLocalStorage<string>[]}>('followedChannels', []);
 
   // Convert arrays to Sets for easier manipulation with comprehensive type checking;
-  const likedShorts = useMemo(() => {
+  const likedShorts = useMemo(() => {)
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
       return new Set(validArray.filter((item: any) => typeof item === 'string'))}
-    } catch (error) {
+    } ,catch (error) {
       console.warn('Error creating likedShorts Set:', error);
       // Clear invalid data and return empty Set;
       setLikedShortsArray([]);
       return new Set<strin>g>()}
-    }
   }, [likedShortsArray, setLikedShortsArray]);
 
-  const followedChannels = useMemo(() => {
+  const followedChannels = useMemo(() => {)
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
       return new Set(validArray.filter((item: any) => typeof item === 'string'))}
-    } catch (error) {
+    } ,catch (error) {
       console.warn('Error creating followedChannels Set:', error);
       // Clear invalid data and return empty Set;
       setFollowedChannelsArray([]);
       return new Set<strin>g>()}
-    }
+
   }, [followedChannelsArray, setFollowedChannelsArray]);
 
   const [commentModalOpen, setCommentModalOpen] = useState<boolea>n>(false);
@@ -85,14 +83,13 @@ const ShortsPage: React.FC = () => {
   const targetVideoId = searchParams.get('v');
 
   // Convert Videos to Shorts and filter;
-  const filteredShorts = useMemo((): Short[] => {
+  const filteredShorts = useMemo((): Short[] => {)
     if (!allShorts) {
       return []}
-    };
     // Convert Video[] to Short[] with proper type conversion;
     let converted: Short[] = allShorts;
       .filter((video: any) => video.visibility == 'scheduled') // Filter out scheduled videos;
-      .map((video: any) => {
+      .map((video: any) => {)
         const shortVideo: Short = {
           ...video,
           duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
@@ -105,83 +102,73 @@ const ShortsPage: React.FC = () => {
           viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
           commentCount: 0,
           likeCount: video.likes || 0}
-          definition: 'hd' as 'hd' | 'sd'
-        };
+          definition: 'hd' as 'hd' | 'sd';
         return shortVideo;
-      });
 
     // Apply category filter;
     if (selectedCategory !== 'all') {
-      converted = converted.filter((short: any) =>
+      converted = converted.filter((short: any) =>;)
         short.category.toLowerCase() === selectedCategory.toLowerCase())}
-    }
+
 
     // Apply search filter;
     if (debouncedSearchQuery) {
       const query = debouncedSearchQuery.toLowerCase();
-      converted = converted.filter((short: any) =>
-        short.title.toLowerCase().includes(query) ||
-        short.channelName.toLowerCase().includes(query) ||
+      converted = converted.filter((short: any) =>;)
+        short.title.toLowerCase().includes(query) ||;
+        short.channelName.toLowerCase().includes(query) ||;
         short.description.toLowerCase().includes(query))}
-    }
+
 
     return converted;
   }, [allShorts, selectedCategory, debouncedSearchQuery]);
 
   // Get unique categories for filtering;
-  const categories = useMemo(() => {
+  const categories = useMemo(() => {)
     if (!allShorts) {
       return [], ;
-    };
     const uniqueCategories = [...new Set(allShorts.map((short: any) => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking;
-  const handleLike = useCallback((shortId: string) => {
-    setLikedShortsArray((prev: any) => {
+  const handleLike = useCallback((shortId: string) => {)
+    setLikedShortsArray((prev: any) => {)
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
         return currentArray.filter((id: string) => id !== shortId)}
-      }
-      return [...currentArray, shortId];
-    });
+      ,return [...currentArray, shortId];
   }, [setLikedShortsArray]);
 
-  const handleFollow = useCallback((channelName: string) => {
-    setFollowedChannelsArray((prev: any) => {
+  const handleFollow = useCallback((channelName: string) => {)
+    setFollowedChannelsArray((prev: any) => {)
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
         return currentArray.filter((name: any) => name !== channelName)}
-      }
-      return [...currentArray, channelName];
-    });
+      ,return [...currentArray, channelName];
   }, [setFollowedChannelsArray]);
 
-  const handleComment = useCallback((shortId: string) => {
+  const handleComment = useCallback((shortId: string) => {)
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s: unknown=> s.id === shortId)}
-    setSelectedShortForComment({;
+    const short = currentFilteredShorts.find(s,: unknown=> s.id === shortId)}
+    ,setSelectedShortForComment({;)
       id: shortId, title: short?.title || 'Short video';
-    });
     setCommentModalOpen(true);
   }, [filteredShorts]);
 
-  const handleCommentSubmit = useCallback(async (_commentText: string): Promise<voi>d> => {
+  const handleCommentSubmit = useCallback(async (_commentText: string): Promise<voi>d,> => {)
     if (!selectedShortForComment) {
       return}
-    }
-;
     try {;
       // Close modal and reset state;
       setCommentModalOpen(false);
       setSelectedShortForComment(null)}
     } catch (error) {
       console.error('Failed to submit comment:', error)}
-    }
+
   }, [selectedShortForComment]);
 
-  const handleVideoChange = useCallback((index: number) => {
+  const handleVideoChange = useCallback((index: number) => {)
     setCurrentVideoIndex(index);
 
     // Update URL with current video ID;
@@ -189,22 +176,20 @@ const ShortsPage: React.FC = () => {
     if (currentFilteredShorts[index]) {;
       const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
       window.history.replaceState(null, '', newUrl);
-    }
 
     // Scroll to the video;
     if (containerRef.current) {
       const targetElement = containerRef.current.children[index] as HTMLElement}
       if (targetElement) {
-        targetElement.scrollIntoView({
+        targetElement.scrollIntoView({)
           behavior: 'smooth',;
           block: 'start', inline: 'nearest';
-        });
-      }
-    }
+
+
   }, [filteredShorts]);
 
-  const handleNextVideo = useCallback(() => {
-    setCurrentVideoIndex((prevIndex: any) => {
+  const handleNextVideo = useCallback(() => {)
+    setCurrentVideoIndex((prevIndex: any) => {)
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
@@ -212,25 +197,20 @@ const ShortsPage: React.FC = () => {
         if (currentFilteredShorts[nextIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[nextIndex].id}`;
           window.history.replaceState(null, '', newUrl);
-        }
         // Scroll to the video;
         if (containerRef.current) {
           const targetElement = containerRef.current.children[nextIndex] as HTMLElement}
           if (targetElement) {
-            targetElement.scrollIntoView({
+            targetElement.scrollIntoView({)
               behavior: 'smooth',;
               block: 'start', inline: 'nearest';
-            });
-          }
-        }
         return nextIndex;
-      }
+
       return prevIndex;
-    });
   }, [filteredShorts]);
 
-  const handlePreviousVideo = useCallback(() => {
-    setCurrentVideoIndex((prevIndex: any) => {
+  const handlePreviousVideo = useCallback(() => {)
+    setCurrentVideoIndex((prevIndex: any) => {)
       if (prevIndex > 0) {;
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
@@ -238,92 +218,81 @@ const ShortsPage: React.FC = () => {
         if (currentFilteredShorts[prevVideoIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[prevVideoIndex].id}`;
           window.history.replaceState(null, '', newUrl);
-        }
         // Scroll to the video;
         if (containerRef.current) {
           const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement}
           if (targetElement) {
-            targetElement.scrollIntoView({
+            targetElement.scrollIntoView({)
               behavior: 'smooth',;
               block: 'start', inline: 'nearest';
-            });
-          }
-        }
         return prevVideoIndex;
-      }
+
       return prevIndex;
-    });
   }, [filteredShorts]);
 
-  const handleSearchToggle = useCallback(() => {
-    setShowSearch(prev: unknown=> !prev);
+  const handleSearchToggle = useCallback(() => {)
+    setShowSearch(prev,: unknown=> !prev);
     if (showSearch) {
       setSearchQuery('')}
-    }
-  }, [showSearch]);
+  ,}, [showSearch]);
 
-  const handleFilterToggle = useCallback(() => {
-    setShowFilters(prev: unknown=> !prev), ;
+  const handleFilterToggle = useCallback(() => {)
+    setShowFilters(prev,: unknown=> !prev), ;
   }, []);
 
-  const handleCategoryChange = useCallback((category: string) => {
+  const handleCategoryChange = useCallback((category: string) => {)
     setSelectedCategory(category);
     setCurrentVideoIndex(0)}
-  }, []);
+  ,}, []);
 
-  const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
+  const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {)
     if (commentModalOpen) {
       return}
-    }
 
-    switch (event.key) {;
+    ,switch (event.key) {;
       case 'ArrowUp':;
         event.preventDefault();
         handlePreviousVideo();
         break;
-      case 'ArrowDown':
+      case 'ArrowDown':;
         event.preventDefault();
         handleNextVideo();
         break;
-      case 'Escape':
+      case 'Escape':;
         if (showSearch) {
           handleSearchToggle()}
         } else if (showFilters) {
           handleFilterToggle()}
-        }
+
         break;
-    }
+
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId: string): Promise<voi>d> => {
+  const handleShare = async (shortId: string): Promise<voi>d,> => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
       try {
-        await navigator.share({
+        await navigator.share({)
           title: 'Check out this Short!'}
-          url: shareUrl, });
+          ,ur,l,: shareUrl, });
       } catch (error) {
         // Fallback to clipboard if share fails;
         copyToClipboard(shareUrl)}
-      }
     } else {
       // Fallback for browsers that don't support Web Share API;
       copyToClipboard(shareUrl)}
-    }
-  };
 
-  const copyToClipboard = async (text: string): Promise<voi>d> => {
+
+  const copyToClipboard = async (text: string): Promise<voi>d,> => {
     try {;
-      await,  navigator.clipboard.writeText(text: string);
+      await,  navigator.clipboard.writeText(text,: string);
       // You could add a toast notification here}
     } catch (error) {
       console.error('Failed to copy link:', error)}
-    }
-  };
 
   // One-time cleanup effect to handle corrupted localStorage data;
-  useEffect(() => {
+  useEffect(() => {)
     try {
       // Check if localStorage contains invalid data and clean it up;
       const likedShortsRaw = localStorage.getItem('likedShorts');
@@ -335,24 +304,19 @@ const ShortsPage: React.FC = () => {
           console.warn('Cleaning up invalid likedShorts data');
           localStorage.removeItem('likedShorts');
           setLikedShortsArray([])}
-        }
-      }
       if (followedChannelsRaw && followedChannelsRaw !== 'null') {
         const parsed = JSON.parse(followedChannelsRaw);
         if (!Array.isArray(parsed)) {
           console.warn('Cleaning up invalid followedChannels data');
           localStorage.removeItem('followedChannels');
           setFollowedChannelsArray([])}
-        }
-      }
-    } catch (error) {
+    ,} catch (error) {
       console.warn('Error during localStorage cleanup:', error);
       // Clear all potentially corrupted data;
       localStorage.removeItem('likedShorts');
       localStorage.removeItem('followedChannels');
       setLikedShortsArray([]);
       setFollowedChannelsArray([])}
-    }
   }, []); // Run only once on mount;
 
   // Touch handling for mobile scroll navigation;
@@ -360,10 +324,9 @@ const ShortsPage: React.FC = () => {
   const [isScrolling, setIsScrolling] = useState<boolea>n>(false);
 
   // Wheel event handler for scroll navigation;
-  const handleWheel = useCallback((event: WheelEvent) => {
+  const handleWheel = useCallback((event: WheelEvent) => {)
     if (commentModalOpen || showSearch || showFilters || isScrolling) {
       return}
-    };
     // Prevent default scroll behavior;
     event.preventDefault();
 
@@ -379,28 +342,22 @@ const ShortsPage: React.FC = () => {
       } else {
         // Scrolling up - previous video;
         handlePreviousVideo()}
-      }
 
       // Reset scrolling flag after a delay;
       setTimeout(() => setIsScrolling(false), 500);
-    }
   }, [commentModalOpen, showSearch, showFilters, isScrolling, handleNextVideo, handlePreviousVideo]);
 
   // Touch event handlers for mobile navigation;
-  const handleTouchStart = useCallback((event: TouchEvent) => {
+  const handleTouchStart = useCallback((event: TouchEvent) => {)
     if (commentModalOpen || showSearch || showFilters) {
       return}
-    }
-    if (event.touches?.[0]) {
+    ,if (event.touches?.[0]) {
       setTouchStartY(event.touches[0].clientY), ;
-    };
   }, [commentModalOpen, showSearch, showFilters]);
 
-  const handleTouchEnd = useCallback((event: TouchEvent) => {
+  const handleTouchEnd = useCallback((event: TouchEvent) => {)
     if (commentModalOpen || showSearch || showFilters || touchStartY === null || isScrolling) {
       return}
-    }
-;
     if (event.changedTouches?.[0]) {;
       const touchEndY = event.changedTouches[0].clientY;
       const deltaY = touchStartY - touchEndY;
@@ -414,33 +371,29 @@ const ShortsPage: React.FC = () => {
         } else {
           // Swiped down - previous video;
           handlePreviousVideo()}
-        }
 
         // Reset scrolling flag after a delay;
         setTimeout(() => setIsScrolling(false), 500);
-      }
-    }
     setTouchStartY(null);
   }, [commentModalOpen, showSearch, showFilters, touchStartY, isScrolling, handleNextVideo, handlePreviousVideo]);
 
   // Enhanced useEffect hooks;
-  useEffect(() => {
+  useEffect(() => {)
     document.addEventListener('keydown', handleKeyboardNavigation);
     return () => document.removeEventListener('keydown', handleKeyboardNavigation)}
-  }, [handleKeyboardNavigation]);
+  ,}, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation;
-  useEffect(() => {
+  useEffect(() => {)
     const container = containerRef.current, ;
     if (container) {;
       container.addEventListener('wheel', handleWheel, { passive: false });
       return () => container.removeEventListener('wheel', handleWheel);
-    }
     return () => {}; // Return empty cleanup function if no container;
   }, [handleWheel]);
 
   // Add touch event listeners for mobile navigation;
-  useEffect(() => {
+  useEffect(() => {)
     const container = containerRef.current, ;
     if (container) {;
       container.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -448,250 +401,220 @@ const ShortsPage: React.FC = () => {
       return () => {
         container.removeEventListener('touchstart', handleTouchStart);
         container.removeEventListener('touchend', handleTouchEnd)}
-      };
-    }
-    return () => {}; // Return empty cleanup function if no container;
+    ,return () => {}; // Return empty cleanup function if no container;
   }, [handleTouchStart, handleTouchEnd]);
 
   // Scroll to specific video: any when component mounts or when shorts data changes;
   const initializedRef = useRef(false);
-  useEffect(() => {
+  useEffect(() => {)
     if (targetVideoId && !initializedRef.current && containerRef.current) {
       const currentFilteredShorts = filteredShorts;
       if (currentFilteredShorts.length > 0) {
-        const targetIndex = currentFilteredShorts.findIndex(short: unknown=> short.id === targetVideoId);
+        const targetIndex = currentFilteredShorts.findIndex(short,: unknown=> short.id === targetVideoId);
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement}
           if (targetElement) {
-            targetElement.scrollIntoView({;
+            targetElement.scrollIntoView({;)
               behavior: 'smooth', block: 'start';
-            });
-          }
-        }
         initializedRef.current = true;
-      }
-    }
   }, [targetVideoId, filteredShorts]);
 
   // Auto-advance to next video: any when current video ends;
-  useEffect(() => {
+  useEffect(() => {)
     const currentFilteredShorts = filteredShorts;
     if (isAutoAdvanceEnabled && currentVideoIndex < currentFilteredShorts.length - 1) {
       // This would be triggered by video end event in ShortDisplayCard;
       // Implementation would be in the video player component}
-    }
   }, [isAutoAdvanceEnabled, currentVideoIndex, filteredShorts]);
 
   // Set up intersection observer to track which video is currently in view;
   const observerRef = useRef<IntersectionObserver>| null>(null);
 
-  useEffect(() => {
+  useEffect(() => {)
     if (!containerRef.current || !filteredShorts.length) {
       return}
-    }
 
     // Disconnect existing observer;
-    if (observerRef.current) {
-      observerRef.current.disconnect()}
-    }
+    ,if (observerRef.current), {
+      observerRef,.current.disconnect()}
 
-    observerRef.current = new IntersectionObserver((entries: any) => {
-      entries.forEach((entry: any) => {
+    observerRef.current = new IntersectionObserver((entries: any) => {)
+      entries.forEach((entry: any) => {)
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           const videoElement = entry.target as HTMLElement;
           const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
           if (index !== -1) {
-            setCurrentVideoIndex((prevIndex: any) => {
+            setCurrentVideoIndex((prevIndex: any) => {)
               if (index !== prevIndex) {
                 // Update URL without triggering scroll;
                 const currentFilteredShorts = filteredShorts, ;
                 if (currentFilteredShorts[index]) {;
                   const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
                   window.history.replaceState(null, '', newUrl);
-                }
                 return index;
-              }
               return prevIndex;
-            });
-          }
-        }
-      });
     }, {
       root: containerRef.current,
       threshold: 0.5}
-      rootMargin: '0px'
-    });
+      ,rootMargi,n,: '0px';
 
     // Observe all video elements;
-    Array.from(containerRef.current.children).forEach((child: any) => {
+    Array.from(containerRef.current.children).forEach((child: any) => {)
       observerRef.current?.observe(child)}
-    });
 
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect()}
-      }
-    };
   }, [filteredShorts.length]); // Only depend on length, not the entire array;
 
   if (loading) {
-    return <ShortsPageSkeleton> />}
-  }
+    return <ShortsPageSkeleton /> />}
 
   if (error) {
-    return <ShortsPageError>error={error} />;
-  }
+    return <ShortsPageError />error={error} />;
 
   if (filteredShorts.length === 0) {
-    return (
-      <div>className="h-[calc(100vh-3.5rem)] bg-black flex flex-col"></div>
+    return (;)
+      <div />className="h-[calc(100vh-3.5rem)] bg-black flex flex-col"></div />;
         {/* Enhanced Header with Search and Filters */}
-        <div>className="relative z-10 bg-black/80 backdrop-blur-sm"></div>
-          <div>className="flex items-center justify-between p-4"></div>
-            <h1>className="text-white text-lg font-semibold">Shorts</h1>
-            <div>className="flex items-center space-x-2"></div>
-              <butto>n>
+        <div />className="relative z-10 bg-black/80 backdrop-blur-sm"></div />;
+          <div />className="flex items-center justify-between p-4"></div />;
+            <h1 />className="text-white text-lg font-semibold">Shorts</h1 />;
+            <div />className="flex items-center space-x-2"></div />;
+              <butto />n />;
                 onClick={handleSearchToggle}
-                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
-                aria-label="Search shorts"
-              ">"
-                <MagnifyingGlassIcon>className="w-5 h-5" />
-              </button></div>
-              <butto>n>
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors";
+                aria-label="Search shorts";
+              ">";
+                <MagnifyingGlassIcon />className="w-5 h-5" / />;
+              </button></div>;
+              <butto />n />;
                 onClick={handleFilterToggle}
-                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
-                aria-label="Filter shorts"
-              ">"
-                <AdjustmentsHorizontalIcon>className="w-5 h-5" />
-              </button></div>
-            </div>
-          </div>
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors";
+                aria-label="Filter shorts";
+              ">";
+                <AdjustmentsHorizontalIcon />className="w-5 h-5" / />;
+              </button></div>;
+            </div>;
+          </div>;
 
           {/* Search Bar */};
-{showSearch && (
-            <div>className="px-4 pb-4"></div>
-              <div>className="relative"></div>
-                <inpu>t>
-                  type="text"
+{showSearch && ()
+            <div />className="px-4 pb-4"></div />;
+              <div />className="relative"></div />;
+                <inpu />t />;
+                  type="text";
                   value={searchQuery}
-                  onChange={(e: any) => setSearchQuery(e.target.value)}
-                  placeholder="Search shorts..."
-                  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+                  onChange={(e: any) => setSearchQuery(e.target.value), }
+                  placeholder="Search shorts...";
+                  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20";
                   autoFocus;
                 /">"
-                <butto>n>
+                <butto />n />;
                   onClick={handleSearchToggle}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
-                ">"
-                  <XIcon>className="w-4 h-4" />
-                </button></div>
-              </div>
-            </div>
-          )};
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white";
+                ">";
+                  <XIcon />className="w-4 h-4" / />;
+                </button></div>;
+              </div>;
+            </div>;
 {/* Filters */};
-{showFilters && (
-            <ShortsFilters>, >
+{showFilters && ()
+            <ShortsFilters />, />;
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
               onClose={() => setShowFilters(false)}
-            />
-          )}
-  <di>v></div></div>
+ / />
+  <di />v /></div /></div />;
 
-        <EmptyShortsState>;>
+        <EmptyShortsState />; />;
           hasFilters={selectedCategory !== 'all' || debouncedSearchQuery !== ''}
           onClearFilters={() => {
             setSelectedCategory('all');
             setSearchQuery('')}
-          }}
-        />
-  <di>v></div></div>
-    );
-  }
+ / />
+  <di />v /></div /></div />;
 
-  return (
-    <div>className="h-[calc(100vh-3.5rem)] bg-black relative"></div>
+  return (;)
+    <div />className="h-[calc(100vh-3.5rem)] bg-black relative"></div />;
       {/* Enhanced Header with Search and Filters */}
-      <div>className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent"></div>
-        <div>className="flex items-center justify-between p-4"></div>
-          <h1>className="text-white text-lg font-semibold">Shorts</h1>
-          <div>className="flex items-center space-x-2"></div>
-            <butto>n>
+      <div />className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent"></div />;
+        <div />className="flex items-center justify-between p-4"></div />;
+          <h1 />className="text-white text-lg font-semibold">Shorts</h1 />;
+          <div />className="flex items-center space-x-2"></div />;
+            <butto />n />;
               onClick={handleSearchToggle}
               className={`p-2 rounded-full transition-colors ${
-                showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
+                showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10';
               }`}
-              aria-label="Search shorts"
-            ">"
-              <MagnifyingGlassIcon>className="w-5 h-5" />
-            </button></div>
-            <butto>n>
+              aria-label="Search shorts";
+            ">";
+              <MagnifyingGlassIcon />className="w-5 h-5" / />;
+            </button></div>;
+            <butto />n />;
               onClick={handleFilterToggle}
               className={`p-2 rounded-full transition-colors ${
-                showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
+                showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10';
               }`}
-              aria-label="Filter shorts"
-            ">"
-              <AdjustmentsHorizontalIcon>className="w-5 h-5" />
-            </button></div>
-          </div>
-        </div>
+              aria-label="Filter shorts";
+            ">";
+              <AdjustmentsHorizontalIcon />className="w-5 h-5" / />;
+            </button></div>;
+          </div>;
+        </div>;
 
         {/* Search Bar */};
-{showSearch && (
-          <div>className="px-4 pb-4"></div>
-            <div>className="relative"></div>
-              <inpu>t>
-                type="text"
+{showSearch && ()
+          <div />className="px-4 pb-4"></div />;
+            <div />className="relative"></div />;
+              <inpu />t />;
+                type="text";
                 value={searchQuery}
-                onChange={(e: any) => setSearchQuery(e.target.value)}
-                placeholder="Search shorts..."
-                className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+                onChange={(e: any) => setSearchQuery(e.target.value), }
+                placeholder="Search shorts...";
+                className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20";
                 autoFocus;
               /">"
-              <butto>n>
+              <butto />n />;
                 onClick={handleSearchToggle}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
-              ">"
-                <XIcon>className="w-4 h-4" />
-              </button></div>
-            </div>
-          </div>
-        )};
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white";
+              ">";
+                <XIcon />className="w-4 h-4" / />;
+              </button></div>;
+            </div>;
+          </div>;
 {/* Filters */};
-{showFilters && (
-          <ShortsFilters>, >
+{showFilters && ()
+          <ShortsFilters />, />;
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
             onClose={() => setShowFilters(false)}
-          />
-        )}
-  <di>v></div></div>
+ / />
+  <di />v /></div /></div />;
 
       {/* Navigation Controls */}
-      <div>className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;</div>
-        <ShortsNavigation>;>
+      <div />className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;</div />;
+        <ShortsNavigation />; />;
           onPrevious={handlePreviousVideo}
           onNext={handleNextVideo}
           canGoPrevious={currentVideoIndex > 0}
           canGoNext={currentVideoIndex < filteredShorts.length - 1}
-        />
-  <di>v></div></div>
+ / />
+  <di />v /></div /></div />;
 
       {/* Shorts Feed */}
-      <di>v>
+      <di />v />;
         ref={containerRef}
-        className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
-        role="feed"
-        aria-label="Shorts feed";
-      >
-        {filteredShorts.map((short: any, index: unknown) => (
-          <div
-          key={short.id || index} className="h-full w-full snap-start"></div>
-            <ShortDisplayCard>;>
+        className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar";
+        role="feed";
+        aria-label="Shorts feed"; />
+        {filteredShorts.map((short: any, index: unknown) => ())
+          <div;
+          key={short.id || index} className="h-full w-full snap-start"></div>;
+            <ShortDisplayCard />; />;
               short={short}
               isLiked={likedShorts.has(short.id)}
               isFollowed={followedChannels.has(short.channelName)}
@@ -700,26 +623,22 @@ const ShortsPage: React.FC = () => {
               onComment={handleComment}
               onShare={handleShare}
               onVideoChange={() => handleVideoChange(index)}
-              onVideoEnd={isAutoAdvanceEnabled ? handleNextVideo : () => {}}
+              onVideoEnd={isAutoAdvanceEnabled ? handleNextVideo : () => {}, }
               isActive={index === currentVideoIndex}
             /">"
-          </div>
-        ))}
-  <di>v></div></div>
+          </div>;
+  <di />v /></div /></div />;
 
       {/* Comment Modal */}
-      <CommentModal>;>
+      <CommentModal />; />;
         isOpen={commentModalOpen}
         onClose={() => {
           setCommentModalOpen(false);
           setSelectedShortForComment(null)}
-        }}
         shortId={selectedShortForComment.id  ''}
         shortTitle={selectedShortForComment.title  'Short,  video'}
         onCommentSubmit={handleCommentSubmit}
-      />
-    </div>
-  );
-};
+ / />
+    </div>;
 
 export default ShortsPage;

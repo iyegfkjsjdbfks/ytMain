@@ -12,7 +12,5 @@ export function usePWA() {
     data,
     loading,
     error, 
-  };
-}
 
 export default usePWA;

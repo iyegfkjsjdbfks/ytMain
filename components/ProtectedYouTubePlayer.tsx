@@ -17,13 +17,12 @@ interface ProtectedYouTubePlayerProps {
  onReady?: (event: Event) => void;
  onStateChange?: (event: Event) => void;
  onError?: (event: Event) => void;
-}
 
 /**
  * YouTubePlayer wrapped with specialized error boundary;
  * Provides enhanced error handling for YouTube video playback;
  */
-const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
+const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({)
  video,
  width = '100%',
  height = '315',
@@ -35,27 +34,25 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
  onError }) => {
  const videoId = typeof video === 'object' && 'id' in video ? video.id : '';
 
- const handleRetry = useCallback(() => {
+ const handleRetry = useCallback(() => {)
  conditionalLogger.debug('Retrying YouTube player', { videoId });
  // The error boundary will reset and re-render the component;
  }, [videoId]);
 
- return (
- <VideoErrorBoundary;>
+ return (;)
+ <VideoErrorBoundary;>;
  videoId={videoId}
- onRetry={handleRetry}/>
- <YouTubePlayer;>
+ onRetry={handleRetry} />;
+ <YouTubePlayer;>;
  video={video}
  width={width || 560}
  height={height || 315}
  autoplay={autoplay}
  controls={controls}
-// FIXED:  className={className}
+// FIXED:  className={className, }
  {...(onReady && { onReady })}
  {...(onStateChange && { onStateChange })}
  {...(onError && { onError })} />
 // FIXED:  </VideoErrorBoundary>
- );
-};
 
 export default ProtectedYouTubePlayer;

@@ -19,7 +19,6 @@ export interface LiveStream {
  settings: LiveStreamSettings;
  stats: LiveStreamStats;
  monetization: LiveStreamMonetization;
-}
 
 export interface LiveStreamSettings {
  enableChat: boolean;
@@ -36,14 +35,12 @@ export interface LiveStreamSettings {
  enableRecording: boolean;
  enableMultiplatform: boolean;
  platforms: StreamPlatform;
-}
 
 export interface StreamPlatform {
  name: 'youtube' | 'twitch' | 'facebook' | 'twitter';
  enabled: boolean;
  streamKey?: string;
  settings?: Record<string, any>;
-}
 
 export interface LiveStreamStats {
  viewers: number;
@@ -61,7 +58,6 @@ export interface LiveStreamStats {
  bitrate: number;
  frameDrops: number;
  latency: number;
-}
 
 export interface LiveStreamMonetization {
  totalRevenue: number;
@@ -70,7 +66,6 @@ export interface LiveStreamMonetization {
  membershipRevenue: number;
  donationRevenue: number;
  superChats: SuperChat;
-}
 
 export interface ChatMessage {
  id: string;
@@ -89,7 +84,6 @@ export interface ChatMessage {
  deletedBy?: string;
  edited?: boolean;
  editedAt?: Date;
-}
 
 export interface SuperChat {
  id: string;
@@ -101,21 +95,18 @@ export interface SuperChat {
  timestamp?: Date;
  color: string;
  duration: number;
-}
 
 export interface ChatBadge {
  type: "moderator" | 'owner' | 'member' | 'verified' | 'subscriber';
  label: string;
  color?: string;
  icon?: string;
-}
 
 export interface MembershipInfo {
  level: string;
  duration: number; // months,
  badge: string;
  perks: string;
-}
 
 export interface LivePoll {
  id: string;
@@ -127,14 +118,12 @@ export interface LivePoll {
  createdAt: Date;
  duration: number; // in milliseconds;
  endedAt?: Date;
-}
 
 export interface PollOption {
  id: string;
  text: string;
  votes: number;
  percentage: number;
-}
 
 export interface QAQuestion {
  id: string;
@@ -149,7 +138,6 @@ export interface QAQuestion {
  answeredAt?: Date;
  isHighlighted: boolean;
  upvotes?: number;
-}
 
 export interface ChatModerationAction {
  type: "timeout" | 'ban' | 'delete' | 'warn' | 'approve';
@@ -158,7 +146,6 @@ export interface ChatModerationAction {
  reason: string;
  duration?: number; // minutes for timeout,
  timestamp: Date;
-}
 
 export interface StreamReplay {
  id: string;
@@ -171,7 +158,6 @@ export interface StreamReplay {
  createdAt: Date;
  views: number;
  isProcessing?: boolean;
-}
 
 export interface StreamHighlight {
  id: string;
@@ -180,4 +166,3 @@ export interface StreamHighlight {
  description?: string;
  type: "moment" | 'super_chat' | 'poll' | 'qa' | 'milestone';
  data?;
-}

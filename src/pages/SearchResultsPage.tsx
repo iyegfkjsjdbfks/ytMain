@@ -13,18 +13,17 @@ interface SearchState {
   googleSearchVideos: any[], 
   loading: boolean,
   youtubeLoading: boolean}
-}
+
 
 // Memoized empty state component;
-const EmptySearchState = memo(() => (
-          <div>className="text-center py-12"></div>
-    <div>className="text-neutral-500 dark:text-neutral-400"></div>
-      <MagnifyingGlassIcon>className="w-16 h-16 mx-auto mb-4 opacity-50" />
-      <h3>className="text-lg font-medium mb-2">Enter a search term</h3>
-      <p>Use the search bar above to find videos.</p>
+const EmptySearchState = memo(() => (;))
+          <div />className="text-center py-12"></div />;
+    <div />className="text-neutral-500 dark:text-neutral-400"></div />;
+      <MagnifyingGlassIcon />className="w-16 h-16 mx-auto mb-4 opacity-50" / />;
+      <h3 />className="text-lg font-medium mb-2">Enter a search term</h3 />;
+      <p>Use the search bar above to find videos.</p>;
     </div>;
   </div>;
-));
 
 EmptySearchState.displayName = 'EmptySearchState';
 
@@ -36,47 +35,43 @@ const SearchResultsPage: React.FC = () => {
   const debouncedQuery = useDebounce(query, 300);
 
   // Consolidated state, 
-  const [searchState, setSearchState] = useState<SearchStat>e>({
+  const [searchState, setSearchState] = useState<SearchStat>e>({)
     videos: [],
     youtubeVideos: [],
     googleSearchVideos: [],
     loading: false,
     youtubeLoading: false}
-  });
 
   // Memoized search function with performance monitoring;
-  const performSearch = useCallback(async (searchQuery: string): Promise<voi>d> => {
+  const performSearch = useCallback(async (searchQuery: string): Promise<voi>d,> => {)
     if (!searchQuery.trim()) {
-      setSearchState({
+      setSearchState({)
         videos: [],
         youtubeVideos: [],
         googleSearchVideos: []}
-        loading: false,;
+        ,loadin,g,: false,;
         youtubeLoading: false,;
-      });
       return;
-    }
 
-    setSearchState(prev => ({...prev, 
+    setSearchState(prev => ({...prev, ))
       loading: true}
-      youtubeLoading: true}));
+      youtubeLoading,: tru,e,}));
 
     try {
-      const result = await VideoService.searchVideos?(searchQuery), 
+      const result : await VideoService.searchVideos?(searchQuery), 
       
-      setSearchState({
+      setSearchState,({)
         videos: result.videos || [],
         youtubeVideos: [],
         googleSearchVideos: []}
         loading: false,;
         youtubeLoading: false,;
-      });
     } catch (error) {
       console.error('Error in search:', error), 
-      setSearchState(prev => ({...prev, 
+      setSearchState(prev => ({...prev, ))
         loading: false}
-        youtubeLoading: false}));
-    }
+        youtubeLoading,: fals,e,}));
+
   }, []);
 
   // Effect for debounced search;
@@ -84,33 +79,28 @@ const SearchResultsPage: React.FC = () => {
 
   // Early return for empty query;
   if (!query) {
-    return (
-      <div>className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"></div>
-        <EmptySearchState> />
-      </div>
-    )}
-  }
+    return (;)
+      <div />className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"></div />;
+        <EmptySearchState /> / />;
+      </div>;
 
-  return (<div>className="min-h-screen bg-white dark:bg-gray-900 pt-4"></div>
-      <div>className="max-w-[1280px] mx-auto"></div>
-        <OptimizedSearchResults>;>
+
+  return (<div />className="min-h-screen bg-white dark:bg-gray-900 pt-4"></div />;)
+      <div />className="max-w-[1280px] mx-auto"></div />;
+        <OptimizedSearchResults />; />;
           videos={searchState.videos}
           youtubeVideos={searchState.youtubeVideos}
           googleSearchVideos={searchState.googleSearchVideos}
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
-          sortBy="relevance"
+          sortBy="relevance";
           onVideoClick={(video: any) => {if ('videoId' in video) {
               navigate(`/watch?v=${video.videoId}`);
             } else {
               navigate(`/watch?v=${video.id}`);
-            }
-          }}
         /">"
-      </div>
-    </div>
-  );
-};
+      </div>;
+    </div>;
 
 // Export with memo for performance;
 export default React.memo(SearchResultsPage);

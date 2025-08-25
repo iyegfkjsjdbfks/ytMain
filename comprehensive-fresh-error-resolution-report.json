@@ -1,0 +1,620 @@
+{
+  "timestamp": "2025-08-25T17:12:57.683Z",
+  "systemInfo": {
+    "deploymentGuide": "DEPLOYMENT_GUIDE.md",
+    "implementationSummary": "IMPLEMENTATION_SUMMARY.md",
+    "architecture": {
+      "coreComponents": [
+        "ExecutionOrchestrator",
+        "ProcessMonitor",
+        "ReportGenerator",
+        "RollbackManager",
+        "ValidationEngine",
+        "WorkflowCoordinator"
+      ],
+      "fixers": [
+        "ImportFixer",
+        "TypeFixer",
+        "LogicFixer"
+      ],
+      "generators": [
+        "BaseScriptGenerator",
+        "FormattingScriptGenerator",
+        "SyntaxScriptGenerator",
+        "TypeScriptGenerator"
+      ]
+    }
+  },
+  "errorAnalysis": {
+    "initialErrors": 5140,
+    "finalErrors": 5079,
+    "errorsFixed": 61,
+    "successRate": "1.2%",
+    "categories": {
+      "TS1005": {
+        "name": "Syntax - Missing Comma/Semicolon",
+        "priority": 1,
+        "strategy": "syntax-fix",
+        "count": 1257,
+        "examples": [
+          "components/CategoryChips.tsx(32,8): error TS1005: ',' expected.",
+          "components/CategoryChips.tsx(35,8): error TS1005: ';' expected.",
+          "components/ChannelHeader.tsx(43,8): error TS1005: ':' expected."
+        ]
+      },
+      "TS1128": {
+        "name": "Syntax - Declaration Expected",
+        "priority": 1,
+        "strategy": "syntax-fix",
+        "count": 732,
+        "examples": [
+          "components/CategoryChips.tsx(35,3): error TS1128: Declaration or statement expected.",
+          "components/CategoryChips.tsx(35,4): error TS1128: Declaration or statement expected.",
+          "components/CategoryChips.tsx(104,1): error TS1128: Declaration or statement expected."
+        ]
+      },
+      "TS1109": {
+        "name": "Syntax - Expression Expected",
+        "priority": 1,
+        "strategy": "syntax-fix",
+        "count": 963,
+        "examples": [
+          "components/ChannelHeader.tsx(35,27): error TS1109: Expression expected.",
+          "components/ChannelHeader.tsx(38,36): error TS1109: Expression expected.",
+          "components/VideoCard.tsx(18,81): error TS1109: Expression expected."
+        ]
+      },
+      "TS17008": {
+        "name": "JSX - Missing Closing Tag",
+        "priority": 2,
+        "strategy": "jsx-fix",
+        "count": 29,
+        "examples": [
+          "components/ChannelHeader.tsx(37,12): error TS17008: JSX element 'img' has no corresponding closing tag.",
+          "components/ChannelHeader.tsx(47,10): error TS17008: JSX element 'img' has no corresponding closing tag.",
+          "components/CommentModal.tsx(55,14): error TS17008: JSX element 'textarea' has no corresponding closing tag."
+        ]
+      },
+      "TS1382": {
+        "name": "Syntax - Unexpected Token",
+        "priority": 1,
+        "strategy": "syntax-fix",
+        "count": 1243,
+        "examples": [
+          "components/ChannelHeader.tsx(41,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+          "components/ChannelHeader.tsx(51,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+          "components/CommentModal.tsx(58,41): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?"
+        ]
+      },
+      "TS2657": {
+        "name": "JSX - Invalid Attribute",
+        "priority": 2,
+        "strategy": "jsx-fix",
+        "count": 210,
+        "examples": [
+          "components/VideoCard.tsx(50,2): error TS2657: JSX expressions must have one parent element.",
+          "components/VideoCard.tsx(61,81): error TS2657: JSX expressions must have one parent element.",
+          "src/components/LoadingSpinner.tsx(13,2): error TS2657: JSX expressions must have one parent element."
+        ]
+      },
+      "TS1381": {
+        "name": "Unknown - TS1381",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 27,
+        "examples": [
+          "components/VideoCard.tsx(55,96): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+          "components/VideoCard.tsx(61,127): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+          "components/forms/Button.tsx(53,8): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
+        ]
+      },
+      "TS17002": {
+        "name": "JSX - Invalid Element",
+        "priority": 2,
+        "strategy": "jsx-fix",
+        "count": 267,
+        "examples": [
+          "components/VideoCard.tsx(58,4): error TS17002: Expected corresponding JSX closing tag for 'ImageWithFallback'.",
+          "components/VideoCard.tsx(62,4): error TS17002: Expected corresponding JSX closing tag for 'SaveIcon'.",
+          "components/VideoCard.tsx(77,4): error TS17002: Expected corresponding JSX closing tag for 'img'."
+        ]
+      },
+      "TS1136": {
+        "name": "Unknown - TS1136",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 20,
+        "examples": [
+          "components/VideoCard.tsx(85,24): error TS1136: Property assignment expected.",
+          "src/error-resolution/core/ErrorAnalyzer.ts(433,47): error TS1136: Property assignment expected.",
+          "src/error-resolution/core/ExecutionOrchestrator.ts(166,71): error TS1136: Property assignment expected."
+        ]
+      },
+      "TS1003": {
+        "name": "Syntax - Identifier Expected",
+        "priority": 1,
+        "strategy": "syntax-fix",
+        "count": 99,
+        "examples": [
+          "components/forms/Input.tsx(32,36): error TS1003: Identifier expected.",
+          "src/error-resolution/core/ErrorAnalyzer.ts(220,17): error TS1003: Identifier expected.",
+          "src/error-resolution/core/ErrorAnalyzer.ts(354,32): error TS1003: Identifier expected."
+        ]
+      },
+      "TS1472": {
+        "name": "Unknown - TS1472",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 38,
+        "examples": [
+          "contexts/WatchLaterContext.tsx(35,7): error TS1472: 'catch' or 'finally' expected.",
+          "src/error-resolution/cli/main.ts(42,7): error TS1472: 'catch' or 'finally' expected.",
+          "src/error-resolution/cli/main.ts(73,8): error TS1472: 'catch' or 'finally' expected."
+        ]
+      },
+      "TS1135": {
+        "name": "Unknown - TS1135",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 37,
+        "examples": [
+          "contexts/WatchLaterContext.tsx(44,4): error TS1135: Argument expression expected.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(77,8): error TS1135: Argument expression expected.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(114,10): error TS1135: Argument expression expected."
+        ]
+      },
+      "TS1442": {
+        "name": "Unknown - TS1442",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 22,
+        "examples": [
+          "src/config/pwa.ts(8,38): error TS1442: Expected '=' for property initializer.",
+          "src/error-resolution/core/CacheManager.ts(21,28): error TS1442: Expected '=' for property initializer.",
+          "src/error-resolution/core/CacheManager.ts(22,29): error TS1442: Expected '=' for property initializer."
+        ]
+      },
+      "TS18026": {
+        "name": "Unknown - TS18026",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 1,
+        "examples": [
+          "src/error-resolution/cli/analyze.ts(2,1): error TS18026: '#!' can only be used at the start of a file."
+        ]
+      },
+      "TS1137": {
+        "name": "Unknown - TS1137",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 18,
+        "examples": [
+          "src/error-resolution/core/CacheManager.ts(43,27): error TS1137: Expression or comma expected.",
+          "src/error-resolution/core/CacheManager.ts(99,32): error TS1137: Expression or comma expected.",
+          "src/error-resolution/core/ExecutionOrchestrator.ts(75,63): error TS1137: Expression or comma expected."
+        ]
+      },
+      "TS1011": {
+        "name": "Unknown - TS1011",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 27,
+        "examples": [
+          "src/error-resolution/core/ErrorAnalyzer.ts(354,33): error TS1011: An element access expression should take an argument.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(207,56): error TS1011: An element access expression should take an argument.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(207,86): error TS1011: An element access expression should take an argument."
+        ]
+      },
+      "TS1068": {
+        "name": "Unknown - TS1068",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 1,
+        "examples": [
+          "src/error-resolution/core/ErrorAnalyzer.ts(437,5): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected."
+        ]
+      },
+      "TS1434": {
+        "name": "Syntax - Unterminated",
+        "priority": 1,
+        "strategy": "syntax-fix",
+        "count": 115,
+        "examples": [
+          "src/error-resolution/core/ExecutionOrchestrator.ts(152,11): error TS1434: Unexpected keyword or identifier.",
+          "src/error-resolution/core/ExecutionOrchestrator.ts(165,11): error TS1434: Unexpected keyword or identifier.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(243,13): error TS1434: Unexpected keyword or identifier."
+        ]
+      },
+      "TS1002": {
+        "name": "Unknown - TS1002",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 7,
+        "examples": [
+          "src/error-resolution/core/ExecutionOrchestrator.ts(172,65): error TS1002: Unterminated string literal.",
+          "src/features/channel/pages/ChannelPage.tsx(23,47): error TS1002: Unterminated string literal.",
+          "src/features/user/pages/HistoryPage.tsx(9,72): error TS1002: Unterminated string literal."
+        ]
+      },
+      "TS1359": {
+        "name": "Unknown - TS1359",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 2,
+        "examples": [
+          "src/error-resolution/generators/TypeScriptGenerator.ts(210,10): error TS1359: Identifier expected. 'const' is a reserved word that cannot be used here.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(529,10): error TS1359: Identifier expected. 'const' is a reserved word that cannot be used here."
+        ]
+      },
+      "TS1110": {
+        "name": "Unknown - TS1110",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 1,
+        "examples": [
+          "src/error-resolution/test/WorkflowCoordinator.test.ts(96,29): error TS1110: Type expected."
+        ]
+      },
+      "TS1134": {
+        "name": "Unknown - TS1134",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 3,
+        "examples": [
+          "src/error-resolution/test/WorkflowCoordinator.test.ts(96,37): error TS1134: Variable declaration expected.",
+          "src/pages/UploadPage.tsx(68,7): error TS1134: Variable declaration expected.",
+          "src/pages/VideoUploadPage.tsx(98,7): error TS1134: Variable declaration expected."
+        ]
+      },
+      "TS1435": {
+        "name": "Unknown - TS1435",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 6,
+        "examples": [
+          "src/features/channel/pages/ChannelPage.tsx(22,2): error TS1435: Unknown keyword or identifier. Did you mean 'this'?",
+          "src/features/playlist/pages/PlaylistDetailPage.tsx(22,2): error TS1435: Unknown keyword or identifier. Did you mean 'this'?",
+          "src/pages/YourDataPage.tsx(193,21): error TS1435: Unknown keyword or identifier. Did you mean 'delete'?"
+        ]
+      },
+      "TS1228": {
+        "name": "Unknown - TS1228",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 3,
+        "examples": [
+          "src/features/channel/pages/ChannelPage.tsx(22,7): error TS1228: A type predicate is only allowed in return type position for functions and methods.",
+          "src/features/playlist/pages/PlaylistDetailPage.tsx(22,7): error TS1228: A type predicate is only allowed in return type position for functions and methods.",
+          "src/pages/YourDataPage.tsx(184,38): error TS1228: A type predicate is only allowed in return type position for functions and methods."
+        ]
+      },
+      "TS1130": {
+        "name": "Unknown - TS1130",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 2,
+        "examples": [
+          "src/pages/CommentModerationPage.tsx(62,22): error TS1130: 'case' or 'default' expected.",
+          "src/pages/ShortsPage.tsx(279,25): error TS1130: 'case' or 'default' expected."
+        ]
+      },
+      "TS1127": {
+        "name": "Unknown - TS1127",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 5,
+        "examples": [
+          "src/pages/CommentModerationPage.tsx(147,29): error TS1127: Invalid character.",
+          "src/pages/CommunityPage.tsx(48,40): error TS1127: Invalid character.",
+          "src/pages/CommunityPage.tsx(48,51): error TS1127: Invalid character."
+        ]
+      },
+      "TS2809": {
+        "name": "Unknown - TS2809",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 1,
+        "examples": [
+          "src/pages/SubscriptionsPage.tsx(25,5): error TS2809: Declaration or statement expected. This '=' follows a block of statements, so if you intended to write a destructuring assignment, you might need to wrap the whole assignment in parentheses."
+        ]
+      },
+      "TS1129": {
+        "name": "Unknown - TS1129",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 2,
+        "examples": [
+          "src/pages/UserPage.tsx(63,11): error TS1129: Statement expected.",
+          "src/pages/WatchPage.tsx(222,15): error TS1129: Statement expected."
+        ]
+      },
+      "TS17015": {
+        "name": "Unknown - TS17015",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 1,
+        "examples": [
+          "src/pages/UserPage.tsx(165,19): error TS17015: Expected corresponding closing tag for JSX fragment."
+        ]
+      },
+      "TS1160": {
+        "name": "Unknown - TS1160",
+        "priority": 5,
+        "strategy": "manual-review",
+        "count": 1,
+        "examples": [
+          "src/pages/VideoUploadPage.tsx(453,32): error TS1160: Unterminated template literal."
+        ]
+      }
+    }
+  },
+  "resolutionPhases": [
+    {
+      "errorCode": "TS1005",
+      "category": "Syntax - Missing Comma/Semicolon",
+      "success": true,
+      "errorsFixed": 688,
+      "duration": 1376
+    },
+    {
+      "errorCode": "TS1128",
+      "category": "Syntax - Declaration Expected",
+      "success": true,
+      "errorsFixed": 174,
+      "duration": 1296
+    },
+    {
+      "errorCode": "TS1109",
+      "category": "Syntax - Expression Expected",
+      "success": true,
+      "errorsFixed": 1,
+      "duration": 1247
+    },
+    {
+      "errorCode": "TS1382",
+      "category": "Syntax - Unexpected Token",
+      "success": true,
+      "errorsFixed": 16,
+      "duration": 1237
+    },
+    {
+      "errorCode": "TS1003",
+      "category": "Syntax - Identifier Expected",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 1230
+    },
+    {
+      "errorCode": "TS1434",
+      "category": "Syntax - Unterminated",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 1205
+    },
+    {
+      "errorCode": "TS17008",
+      "category": "JSX - Missing Closing Tag",
+      "success": true,
+      "errorsFixed": 17,
+      "duration": 1178
+    },
+    {
+      "errorCode": "TS2657",
+      "category": "JSX - Invalid Attribute",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 1203
+    },
+    {
+      "errorCode": "TS17002",
+      "category": "JSX - Invalid Element",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 1206
+    },
+    {
+      "errorCode": "TS1381",
+      "category": "Unknown - TS1381",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1136",
+      "category": "Unknown - TS1136",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1472",
+      "category": "Unknown - TS1472",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1135",
+      "category": "Unknown - TS1135",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1442",
+      "category": "Unknown - TS1442",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS18026",
+      "category": "Unknown - TS18026",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1137",
+      "category": "Unknown - TS1137",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1011",
+      "category": "Unknown - TS1011",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1068",
+      "category": "Unknown - TS1068",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1002",
+      "category": "Unknown - TS1002",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1359",
+      "category": "Unknown - TS1359",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1110",
+      "category": "Unknown - TS1110",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1134",
+      "category": "Unknown - TS1134",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1435",
+      "category": "Unknown - TS1435",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1228",
+      "category": "Unknown - TS1228",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1130",
+      "category": "Unknown - TS1130",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1127",
+      "category": "Unknown - TS1127",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 1
+    },
+    {
+      "errorCode": "TS2809",
+      "category": "Unknown - TS2809",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1129",
+      "category": "Unknown - TS1129",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS17015",
+      "category": "Unknown - TS17015",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    },
+    {
+      "errorCode": "TS1160",
+      "category": "Unknown - TS1160",
+      "success": false,
+      "errorsFixed": 0,
+      "duration": 0
+    }
+  ],
+  "executionLog": [
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.494Z] [INFO] \n🔧 Phase: Unknown - TS18026 (1 errors)",
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.494Z] [INFO] \n🔧 Phase: Unknown - TS1137 (18 errors)",
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.494Z] [INFO] \n🔧 Phase: Unknown - TS1011 (27 errors)",
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.494Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1068 (1 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1002 (7 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1359 (2 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1110 (1 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1134 (3 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1435 (6 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1228 (3 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1130 (2 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.495Z] [INFO] \n🔧 Phase: Unknown - TS1127 (5 errors)",
+    "[2025-08-25T17:12:56.495Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.496Z] [INFO] \n🔧 Phase: Unknown - TS2809 (1 errors)",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.496Z] [INFO] \n🔧 Phase: Unknown - TS1129 (2 errors)",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.496Z] [INFO] \n🔧 Phase: Unknown - TS17015 (1 errors)",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Phase completed with limited success",
+    "[2025-08-25T17:12:56.496Z] [INFO] \n🔧 Phase: Unknown - TS1160 (1 errors)",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Strategy 'manual-review' requires manual intervention",
+    "[2025-08-25T17:12:56.496Z] [WARN] ⚠️ Phase completed with limited success"
+  ],
+  "performance": {
+    "totalDuration": 14786,
+    "phasesCompleted": 30,
+    "successfulPhases": 5
+  }
+}

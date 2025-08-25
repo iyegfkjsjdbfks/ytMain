@@ -9,7 +9,6 @@ interface Subscription {
   channelName: string,
   subscriberCount: number,
   isSubscribed: boolean,
-}
 
 export function useSubscription() {
   const [data, setData] = useState<Subscription | null>(null);
@@ -21,7 +20,5 @@ export function useSubscription() {
     loading,
     error,
     setData, 
-  };
-}
 
 export default useSubscription;

@@ -27,7 +27,6 @@ export { useShortsVideos } from './useShortsData';
 export const useHomeVideos = () => {
  // Placeholder implementation;
  return [];
-};
 
 // Re-export from unified hooks;
 export * from './unifiedHooks';

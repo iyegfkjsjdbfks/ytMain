@@ -42,38 +42,32 @@ export interface Video {
  isShort?: boolean;
  createdAt?: string;
  updatedAt?: string;
- };
  privacyStatus?: string;
  isShort?: boolean;
  createdAt?: string;
  updatedAt?: string;
  definition?: string;
- };
  contentDetails?: {
  definition?: string;
  dimension?: string;
  caption?: string;
  licensedContent?: boolean;
  projection?: string;
- };
  privacyStatus?: string;
  isShort?: boolean;
  createdAt?: string;
  updatedAt?: string;
  definition?: string;
  commentCount?: number;
-}
 
 export interface Short extends Video {
  isShort: true;
-}
 
 export interface User {
  id: string;
  name: string;
  email: string;
  avatar?: string;
-}
 
 export interface Channel {
  id: string;
@@ -89,7 +83,6 @@ export interface Channel {
  joinedDate?: string; // Date joined;
  totalViews?: number; // Total channel views;
  isVerified?: boolean;
-}
 
 export interface Playlist {
  id: string;
@@ -105,7 +98,6 @@ export interface Playlist {
  totalDuration?: string;
  ownerName?: string;
  thumbnailUrl?: string;
-}
 
 export interface Comment {
  id: string;
@@ -123,11 +115,9 @@ export interface Comment {
  videoId?: string;
  parentId?: string;
  replyCount?: number;
-}
 
 export interface VideoItem extends Video {
  // Additional properties for video grid items;
-}
 
 // Re-export for compatibility;
 export type { Video as CoreVideo };

@@ -15,9 +15,8 @@ interface RecommendationEngineProps {
  currentVideoId?: string;
  maxRecommendations?: number;
  onVideoSelect?: (videoId: string) => void;
-}
 
-const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
+const RecommendationEngine: React.FC<RecommendationEngineProps> = ({)
  currentVideo,
  currentVideoId,
  maxRecommendations = 10,
@@ -27,12 +26,12 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  const [useGoogleCustomSearch, setUseGoogleCustomSearch] = useState<boolean>(false);
 
  // Determine the current video ID from either prop;
- const activeVideoId = useMemo(() => {
+ const activeVideoId = useMemo(() => {)
  return currentVideo?.id || currentVideoId;
  }, [currentVideo?.id, currentVideoId]);
 
  // Check API configuration and determine strategy;
- useEffect(() => {
+ useEffect(() => {)
  const provider = getYouTubeSearchProvider();
  const googleSearchConfigured = youtubeSearchService.isConfigured();
  const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -51,25 +50,24 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  (console).log(' Strategy: Google Custom Search (discovery) + YouTube Data API v3 (metadata)');
 
  if (googleSearchConfigured && youtubeApiKey) {
- (console).log('✅ Optimal setup: Google Custom Search discovery with YouTube Data API v3 metadata')
+ (console).log('✅ Optimal setup: Google Custom Search discovery with YouTube Data API v3 metadata');
  } else if (googleSearchConfigured) {
  (console).log('⚠️ Google Custom Search discovery only (YouTube API metadata not available)');
  } else if (youtubeApiKey) {
  (console).log('⚠️ YouTube Data API v3 only (Google Custom Search discovery not available)');
  } else {
  (console).log('❌ No APIs available - will use local video fallback');
- }
  }, []);
 
  // Stable reference for generateRecommendations function;
- const generateRecommendations = useCallback(async (): Promise<void> => {
+ const generateRecommendations = useCallback(async (): Promise<void> => {)
  setLoading(true);
  try {
  let recommendedVideos: Video = [];
 
  if (useGoogleCustomSearch) {
  (console).log('🎯 Using DIRECT STRATEGY: Google Custom Search API for YouTube recommendations');
- (console).log('🔍 Current video context:', {
+ (console).log('🔍 Current video context:', {)
  id: currentVideo?.id,
  title: currentVideo?.title,
  category: currentVideo?.category,
@@ -83,10 +81,10 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  // Extract meaningful words from title (remove common words)
  const titleWords = currentVideo.title;
  .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special characters;
- .split(' ')
- .filter((word) =>
- word.length > 3 &&
- !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase()))
+ .split(' ');
+ .filter((word) =>;)
+ word.length > 3 &&;
+ !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase()));
  .slice(0, 3); // Take first 3 meaningful words;
 
  if (titleWords.length > 0) {
@@ -97,10 +95,9 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  searchQuery = currentVideo.category;
  } else {
  searchQuery = 'trending youtube videos';
- }
 
  (console).log('🔍 Searching for related videos with intelligent query:', searchQuery);
- (console).log('🔍 Generated from video:', { title: currentVideo.title,
+ (console).log('🔍 Generated from video:', { title: currentVideo.title,)
  channel: currentVideo.channelName, category: currentVideo.category });
 
  // Use Google Custom Search directly for better recommendations;
@@ -109,7 +106,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  (console).log('📊 Google Custom Search returned:', googleSearchResults.length, 'results');
 
  // Convert Google Custom Search results to Video format;
- recommendedVideos = googleSearchResults.map((googleVideo) => ({
+ recommendedVideos = googleSearchResults.map((googleVideo) => ({))
  id: googleVideo.id,
  title: googleVideo.title,
  description: googleVideo.description,
@@ -140,7 +137,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  (console).log('📊 Google Custom Search trending results:', trendingResults.length);
 
  // Convert Google Custom Search results to Video format;
- recommendedVideos = trendingResults.map((googleVideo) => ({
+ recommendedVideos = trendingResults.map((googleVideo) => ({))
  id: googleVideo.id,
  title: googleVideo.title,
  description: googleVideo.description,
@@ -163,23 +160,21 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
  // Required Video interface properties,
  visibility: 'public' as const createdAt: new Date().toISOString(),
  updatedAt: new Date().toISOString() }));
- }
 
  (console).log(`📋 Google Custom Search returned ${recommendedVideos.length} recommendations`);
 
  // Fallback to local videos only if Google Custom Search fails;
  if (recommendedVideos.length === 0) {
  (console).log('⚠️ No results from Google Custom Search, falling back to local videos');
- const availableVideos = realVideos.filter((video) =>
+ const availableVideos = realVideos.filter((video) =>;)
  !activeVideoId || video.id !== activeVideoId);
  recommendedVideos = availableVideos.slice(0, maxRecommendations);
  } else {
  (console).log(`✅ Using ${recommendedVideos.length} recommendations from Google Custom Search`);
- }
  } else {
  // Fallback to real videos with basic recommendation logic;
  (console).log('Using fallback recommendation system');
- const availableVideos = realVideos.filter((video) =>
+ const availableVideos = realVideos.filter((video) =>;)
  !activeVideoId || video.id !== activeVideoId);
 
  // Simple recommendation logic - prioritize similar categories if available;
@@ -187,140 +182,121 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
  if (currentVideo?.category) {
  // First, try to get videos from the same category;
- const sameCategory = availableVideos.filter(
+ const sameCategory = availableVideos.filter(;)
  video => video.category === currentVideo.category);
  recommended = [...sameCategory];
- }
 
  // Fill remaining slots with other videos;
  if (recommended.length < maxRecommendations) {
  const remaining = availableVideos.filter((video) => !recommended.find((r) => r.id === video.id));
  recommended = [...recommended as any, ...remaining];
- }
 
  // Shuffle and limit;
  const shuffled = [...recommended].sort(() => Math.random() - 0.5);
  recommendedVideos = shuffled.slice(0, maxRecommendations);
- }
 
  setRecommendations(recommendedVideos);
  } catch (error) {
  (console).error('Error generating recommendations:', error);
 
  // Fallback to real videos in case of error;
- const availableVideos = realVideos.filter((video) =>
+ const availableVideos = realVideos.filter((video) =>;)
  !activeVideoId || video.id !== activeVideoId);
  const fallbackVideos = availableVideos.slice(0, maxRecommendations);
  setRecommendations(fallbackVideos);
  } finally {
  setLoading(false);
- }
  }, [activeVideoId, currentVideo, maxRecommendations, useGoogleCustomSearch]);
 
  // Use stable dependencies to prevent infinite re-renders;
- useEffect(() => {
- generateRecommendations().catch(() => {
+ useEffect(() => {)
+ generateRecommendations().catch(() => {)
  // Handle promise rejection silently;
- });
  }, [generateRecommendations]);
 
- const handleVideoClick = useCallback((video: Video) => {
+ const handleVideoClick = useCallback((video: Video) => {)
  if (onVideoSelect) {
  onVideoSelect(video.id);
  } else {
  // Default behavior - navigate to watch page;
  // Ensure we preserve the video ID exactly as it is (with google-search- prefix if it has one)
  window.location.href = `/watch?v=${video.id}`;
- }
  }, [onVideoSelect]);
 
  if (loading) {
- return (
- <div className={"space}-y-0">
- <div className={"mb}-4">
- <div className={"fle}x items-center justify-between mb-2">
- <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">
+ return (;)
+ <div className={"space}-y-0">;
+ <div className={"mb}-4">;
+ <div className={"fle}x items-center justify-between mb-2">;
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">;
  Recommended for you;
 // FIXED:  </h3>
- {useGoogleCustomSearch && (
- <div className={"fle}x items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">
- <div className={"w}-2 h-2 bg-blue-500 rounded-full animate-pulse" />
- <span>Loading...</span>
-// FIXED:  </div>
- )}
+ {useGoogleCustomSearch && ()
+ <div className={"fle}x items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">;
+ <div className={"w}-2 h-2 bg-blue-500 rounded-full animate-pulse" />;
+ <span>Loading...</span>;
 // FIXED:  </div>
 // FIXED:  </div>
- <div className={"space}-y-2">
- {[...Array(5)].map((_, i) => (
-          <div key={i} className={"fle}x gap-2 p-1">
- <div className={"w}-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />
- <div className={"flex}-1 min-w-0">
- <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
- <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
- <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
+// FIXED:  </div>
+ <div className={"space}-y-2">;
+ {[...Array(5)].map((_, i) => ())
+          <div key={i} className={"fle}x gap-2 p-1">;
+ <div className={"w}-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />;
+ <div className={"flex}-1 min-w-0">;
+ <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />;
+ <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />;
+ <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />;
 // FIXED:  </div>
 // FIXED:  </div>
- ))}
 // FIXED:  </div>
 // FIXED:  </div>
- );
- }
 
  if (recommendations.length === 0) {
- return (
- <div className={"space}-y-0">
- <div className={"mb}-4">
- <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">
+ return (;)
+ <div className={"space}-y-0">;
+ <div className={"mb}-4">;
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">;
  Recommended for you;
 // FIXED:  </h3>
 // FIXED:  </div>
-<div className={"text}-center py-8 text-gray-500">
+<div className={"text}-center py-8 text-gray-500">;
  No recommendations available;
 // FIXED:  </div>
 // FIXED:  </div>
- );
- }
 
- return (
- <div className={"space}-y-0">
+ return (;)
+ <div className={"space}-y-0">;
  {/* YouTube-style section header - more compact */}
- <div className={"mb}-4">
- <div className={"fle}x items-center justify-between mb-2">
- <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">
+ <div className={"mb}-4">;
+ <div className={"fle}x items-center justify-between mb-2">;
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white">;
  Recommended for you;
 // FIXED:  </h3>
- {useGoogleCustomSearch && (
- <div className={"fle}x items-center space-x-1 text-xs text-green-600 dark:text-green-400">
- <div className={"w}-2 h-2 bg-green-500 rounded-full animate-pulse" />
- <span>Live</span>
+ {useGoogleCustomSearch && ()
+ <div className={"fle}x items-center space-x-1 text-xs text-green-600 dark:text-green-400">;
+ <div className={"w}-2 h-2 bg-green-500 rounded-full animate-pulse" />;
+ <span>Live</span>;
 // FIXED:  </div>
- )}
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* YouTube-style video grid - more compact spacing */}
- <div className={"space}-y-2">
- {recommendations.map((video) => (
-          <div key={video.id} className={"cursor}-pointer" onClick={() => handleVideoClick(video)}>
- {useGoogleCustomSearch ? (
- <EnhancedYouTubeVideoCard;>
+ <div className={"space}-y-2">;
+ {recommendations.map((video) => ())
+          <div key={video.id} className={"cursor}-pointer" onClick={() => handleVideoClick(video)}>;
+ {useGoogleCustomSearch ? ()
+ <EnhancedYouTubeVideoCard;>;
  video={video}
  onVideoSelect={onVideoSelect}
  showChannel={true}
- size="sm" />
- />
- ) : (
- <OptimizedVideoCard;>
+ size="sm" />; />
+ ) : (;
+ <OptimizedVideoCard;>;
  video={video}
  showChannel={true}
- size="sm" />
- />
- )}
-// FIXED:  </div>
- ))}
+ size="sm" />; />
 // FIXED:  </div>
 // FIXED:  </div>
- );
-};
+// FIXED:  </div>
 
 export default RecommendationEngine;

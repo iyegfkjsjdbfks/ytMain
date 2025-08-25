@@ -12,7 +12,5 @@ export function useLiveStream() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useLiveStream;

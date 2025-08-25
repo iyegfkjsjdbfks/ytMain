@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { routes } from './config/routes';
 
 // Create router with v7 future flags to prevent deprecation warnings;
-const router = createBrowserRouter(
+const router = createBrowserRouter(;)
   routes,
   {
     future: {
@@ -14,13 +14,9 @@ const router = createBrowserRouter(
       v7_normalizeFormMethod: true,
       v7_partialHydration: true,
       v7_skipActionErrorRevalidation: true,
-    };
-  };
-);
 
 import React from 'react';
 const App: React.FC = () => {
   return <RouterProvider router={router} />;
-};
 
 export default App;

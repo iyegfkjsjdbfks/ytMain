@@ -81,7 +81,7 @@ export const ERROR_CONFIG = {
  ERROR_ENDPOINT: import.meta.env.VITE_ERROR_ENDPOINT || '',
 
  // Error filtering,
- IGNORE_ERRORS: [
+ IGNORE_ERRORS: [;
  'ResizeObserver loop limit exceeded',
  'Non-Error promise rejection captured',
  'ChunkLoadError',
@@ -238,38 +238,28 @@ export const validateConfig = () => {
  if (ENV.PROD) {
  if (!API_CONFIG.YOUTUBE_API_KEY) {
  errors.push('VITE_YOUTUBE_API_KEY is required in production');
- }
 
  if (ANALYTICS_CONFIG.ENABLED && !ANALYTICS_CONFIG.GOOGLE_ANALYTICS_ID) {
  errors.push('VITE_GOOGLE_ANALYTICS_ID is required when analytics is enabled');
- }
 
  if (ERROR_CONFIG.REPORT_ERRORS && !ERROR_CONFIG.SENTRY_DSN && !ERROR_CONFIG.ERROR_ENDPOINT) {
  errors.push('Error reporting endpoint is required when error reporting is enabled');
- }
  // Validate numeric ranges;
  if (PERFORMANCE_CONFIG.DEFAULT_PAGE_SIZE > PERFORMANCE_CONFIG.MAX_PAGE_SIZE) {
  errors.push('DEFAULT_PAGE_SIZE cannot be greater than MAX_PAGE_SIZE');
- }
 
  if (UI_CONFIG.DEFAULT_VOLUME < 0 || UI_CONFIG.DEFAULT_VOLUME > 1) {
  errors.push('DEFAULT_VOLUME must be between 0 and 1');
- }
 
  if (PERFORMANCE_CONFIG.PERFORMANCE_SAMPLE_RATE < 0 || PERFORMANCE_CONFIG.PERFORMANCE_SAMPLE_RATE > 1) {
  errors.push('PERFORMANCE_SAMPLE_RATE must be between 0 and 1');
- }
- }
 
  return errors;
-};
 
 // Initialize configuration validation;
 if (ENV.DEV) {
  const configErrors = validateConfig();
  if (configErrors.length > 0) {
  (console).warn('Configuration validation errors:', configErrors);
- }
-}
 
 export default CONFIG;

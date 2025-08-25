@@ -8,7 +8,6 @@
 export const parseViewCount = (viewsStr): number => {
  if (!viewsStr) {
 return 0;
-}
  const lowerStr = viewsStr.toLowerCase().replace(/\s*views?$/, ''); // Remove " views" or " view" suffix and trim
  let numPart = parseFloat(lowerStr);
 
@@ -20,9 +19,7 @@ return 0;
  numPart *= 1000000;
  } else if (lowerStr.includes('k')) {
  numPart *= 1000;
- }
  return Math.floor(numPart); // Return integer part
-};
 
 /**
  * Formats a number into a string with K, M, B suffixes for thousands, millions, billions.
@@ -31,7 +28,7 @@ return 0;
  * @returns A string representation of the number with suffix.
  */
 export const formatCount = (num, digits: number = 0): string => {
- const lookup = [
+ const lookup = [;
  { value: 1, symbol: '' },
  { value: 1e3, symbol: 'K' },
  { value: 1e6, symbol: 'M' },
@@ -50,15 +47,12 @@ return '0';
  numStr = (num / item.value).toFixed(1); // Use 1 decimal for K/M/B if digits is 0
  if (/\.0$/.test(numStr)) { // Check if it ends with .0
  numStr = (num / item.value).toFixed(0); // If so, remove .0
- }
  } else if (digits > 0) {
  numStr = (num / item.value).toFixed(digits);
  } else {
  numStr = (num / item.value).toFixed(0); // Default to 0 decimals if no symbol
- }
 
  return numStr.replace(rx, '$1') + item.symbol;
-};
 
 /**
  * Alias for formatCount to maintain backward compatibility
@@ -77,7 +71,5 @@ export const formatDuration = (seconds): string => {
 
  if (hours > 0) {
  return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
- }
  return `${minutes}:${secs.toString().padStart(2, '0')}`;
 
-};

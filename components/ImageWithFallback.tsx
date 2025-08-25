@@ -11,9 +11,8 @@ interface ImageWithFallbackProps {
  onLoad?: () => void;
  maxRetries?: number;
  retryDelay?: number;
-}
 
-const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
+const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({)
  src,
  alt,
  fallbackSrc,
@@ -31,10 +30,9 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
  const [isRateLimited, setIsRateLimited] = useState<boolean>(false);
 
  // Generate fallback URL;
- const generateFallback = useCallback(() => {
+ const generateFallback = useCallback(() => {)
  if (fallbackSrc) {
 return fallbackSrc;
-}
 
  // Convert API placeholder URLs to direct picsum URLs;
  if (src.includes('/api/placeholder/')) {
@@ -43,13 +41,11 @@ return fallbackSrc;
  if (dimensions?.includes('x')) {
  const [w, h] = dimensions.split('x').map(Number);
  return `https://picsum.photos/${w || width}/${h || height}?random=${Math.floor(Math.random() * 1000)}`;
- }
-    }
     // Generate a picsum URL as fallback;
     return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
   }, [fallbackSrc, src, width, height]);
 
- useEffect(() => {
+ useEffect(() => {)
  setCurrentSrc(src);
  setHasError(false);
  setIsLoading(true);
@@ -57,7 +53,7 @@ return fallbackSrc;
  setIsRateLimited(false);
  }, [src]);
 
- const handleError = useCallback((_event?: React.SyntheticEvent<HTMLImageElement, Event>) => {
+ const handleError = useCallback((_event?: React.SyntheticEvent<HTMLImageElement, Event>) => {)
  const isYouTubeThumbnail = currentSrc.includes('yt3.ggpht.com') || currentSrc.includes('i.ytimg.com');
 
  // Check if this is a 429 rate limiting error for YouTube thumbnails;
@@ -65,14 +61,13 @@ return fallbackSrc;
  setIsRateLimited(true);
  const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff;
 
- setTimeout((() => {
+ setTimeout((() => {))
  setRetryCount(prev => prev + 1);
  setCurrentSrc(src); // Retry original source;
  setIsLoading(true);
  }) as any, delay);
 
  return;
- }
 
  if (!hasError) {
  setHasError(true);
@@ -81,7 +76,6 @@ return fallbackSrc;
  } else {
  // If even the fallback fails, show a placeholder;
  setCurrentSrc(generatePlaceholderDataUrl(width, height, alt));
- }
  setIsLoading(false);
  setIsRateLimited(false);
  }, [currentSrc, hasError, retryCount, maxRetries, retryDelay, src, width, height, alt, onError, generateFallback]);
@@ -89,9 +83,8 @@ return fallbackSrc;
  const handleLoad = () => {
  setIsLoading(false);
  onLoad?.();
- };
 
- const generatePlaceholderDataUrl = (w,
+ const generatePlaceholderDataUrl = (w,)
  h, text): string => {
  const canvas = document.createElement('canvas');
  canvas.width = w;
@@ -100,7 +93,6 @@ return fallbackSrc;
  const ctx = canvas.getContext('2d');
  if (!ctx) {
 return '';
-}
 
  // Fill background with gradient;
  const gradient = ctx.createLinearGradient(0, 0, w, h);
@@ -141,7 +133,6 @@ return '';
  ctx.lineTo(centerX + iconSize / 4, centerY - iconSize / 8);
  ctx.lineTo(centerX + iconSize / 2, centerY + iconSize / 4);
  ctx.closePath();
- }
 
  ctx.fill();
 
@@ -168,46 +159,36 @@ return '';
  y += fontSize + 4;
  } else {
  line = testLine;
- }
- }
  ctx.fillText(line, centerX, y);
 
  return canvas.toDataURL();
- };
 
- return (
- <div className={`relative ${className}`} style={{ width, height }}>
- {isLoading && (
- <div;>
-  className={"absolut}e inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded"
-  style={{ width, height }}
- />
- )}
+ return (;)
+ <div className={`relative ${className}`} style={{ width, height }}>;
+ {isLoading && ()
+ <div;>;
+  className={"absolut}e inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded";
+  style={{ width, height }} />
 
- <img;>
+ <img;>;
   src={currentSrc}
   alt={alt}
   width={width}
   height={height}
-  className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`}
+  className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`, }
   onError={handleError}
   onLoad={handleLoad}
-  loading="lazy"
- />
+  loading="lazy"; />
 
- {hasError && (
- <div className={"absolut}e top-2 right-2 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">
+ {hasError && ()
+ <div className={"absolut}e top-2 right-2 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">;
   Fallback;
- </div>
- )}
+ </div>;
 
- {isRateLimited && (
- <div className={"absolut}e top-2 left-2 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">
-  Retrying... ({retryCount}/{maxRetries})
- </div>
- )}
- </div>
- );
-};
+ {isRateLimited && ()
+ <div className={"absolut}e top-2 left-2 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">;
+  Retrying... ({retryCount}/{maxRetries});
+ </div>;
+ </div>;
 
 export default ImageWithFallback;

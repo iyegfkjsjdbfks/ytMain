@@ -6,7 +6,6 @@ export interface UseInstallPromptConfig {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void, 
-}
 
 export function useInstallPrompt(config: UseInstallPromptConfig = {}) {
   const { enabled = true, onSuccess, onError } = config;
@@ -15,7 +14,7 @@ export function useInstallPrompt(config: UseInstallPromptConfig = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -23,13 +22,12 @@ export function useInstallPrompt(config: UseInstallPromptConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve: unknown=> setTimeout(resolve, 500)), 
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 500)), 
       
       const result = {
         hookName: 'useInstallPrompt',
         timestamp: Date.now(),
-        status: 'success';
-      };
+        status: 'success',;
       
       setData(result);
       onSuccess?.(result);
@@ -39,10 +37,9 @@ export function useInstallPrompt(config: UseInstallPromptConfig = {}) {
       onError?.(error), 
     } finally {
       setLoading(false), 
-    }
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData(), 
   }, [fetchData]);
 
@@ -51,7 +48,6 @@ export function useInstallPrompt(config: UseInstallPromptConfig = {}) {
     loading,
     error,
     refetch: fetchData,
-  };
-}
+
 
 export default useInstallPrompt;

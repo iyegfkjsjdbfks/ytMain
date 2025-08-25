@@ -6,9 +6,8 @@ export interface componentUtilsProps {
   children?: React.ReactNode;
   onLoad?: () => void;
   onError?: (error: Error) => void, 
-}
 
-export const componentUtils: React.FC<componentUtilsProps> = ({
+export const componentUtils: React.FC<componentUtilsProps> = ({)
   className = '',
   children,
   onLoad,
@@ -17,7 +16,7 @@ export const componentUtils: React.FC<componentUtilsProps> = ({
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
+  useEffect(() => {)
     const initialize = async () => {
       try {;
         // Simulate initialization;
@@ -28,46 +27,37 @@ export const componentUtils: React.FC<componentUtilsProps> = ({
         const error = err instanceof Error ? err : new Error('Initialization failed');
         setError(error);
         onError?.(error), 
-      }
-    };
 
     initialize();
   }, [onLoad, onError]);
 
   if (error) {
-    return (
-      <div className={'error-state ' + className}>
-        <h3>Error in componentUtils</h3>
-        <p>{error.message}</p>
-        <button onClick={() => window.location.reload()}>
+    return (;)
+      <div className={'error-state ' + className}>;
+        <h3>Error in componentUtils</h3>;
+        <p>{error.message}</p>;
+        <button onClick={() => window.location.reload()}>;
           Retry;
-        </button>
-      </div>
-    );
-  }
+        </button>;
+      </div>;
 
   if (!isReady) {
-    return (
-      <div className={'loading-state ' + className}>
-        <div>Loading componentUtils...</div>
-      </div>
-    );
-  }
+    return (;)
+      <div className={'loading-state ' + className}>;
+        <div>Loading componentUtils...</div>;
+      </div>;
 
-  return (
-    <div className={'component-ready ' + className}>
-      <div className="component-header">
-        <h2>componentUtils</h2>
-      </div>
-      <div className="component-body">
-        {children || (
-          <div className="default-content">
-            <p>Component is ready and functioning properly.</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
+  return (;)
+    <div className={'component-ready ' + className}>;
+      <div className="component-header">;
+        <h2>componentUtils</h2>;
+      </div>;
+      <div className="component-body">;
+        {children || ()
+          <div className="default-content">;
+            <p>Component is ready and functioning properly.</p>;
+          </div>;
+      </div>;
+    </div>;
 
 export default componentUtils;

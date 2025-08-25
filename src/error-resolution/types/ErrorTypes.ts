@@ -13,7 +13,6 @@ export enum ErrorRootCause {
   IMPORT = 3,        // Third priority - resolves dependencies;
   TYPE = 4,          // Fourth priority - complex type issues;
   LOGIC = 5          // Lowest priority - requires careful analysis;
-}
 
 // Error severity levels;
 export enum ErrorSeverity {
@@ -21,7 +20,6 @@ export enum ErrorSeverity {
   HIGH = 'high',         // Causes major functionality issues;
   MEDIUM = 'medium',     // Causes minor issues or warnings;
   LOW = 'low'           // Style or optimization issues;
-}
 
 // Error categorization interface;
 export interface ErrorCategory {
@@ -31,7 +29,6 @@ export interface ErrorCategory {
   rootCause: ErrorRootCause;
   fixingStrategy: 'bulk' | 'individual' | 'template';
   description: string;
-}
 
 // Analyzed error interface;
 export interface AnalyzedError {
@@ -45,7 +42,6 @@ export interface AnalyzedError {
   severity: ErrorSeverity;
   dependencies: string[];
   rawOutput: string;
-}
 
 // Error analysis result;
 export interface ErrorAnalysisResult {
@@ -55,7 +51,6 @@ export interface ErrorAnalysisResult {
   errorsBySeverity: Map<ErrorSeverity, AnalyzedError[]>;
   analysisTimestamp: Date;
   summary: ErrorSummary;
-}
 
 // Error summary statistics;
 export interface ErrorSummary {
@@ -69,7 +64,6 @@ export interface ErrorSummary {
   typeErrors: number;
   logicErrors: number;
   filesAffected: number;
-}
 
 // Script command types;
 export interface ScriptCommand {
@@ -79,7 +73,6 @@ export interface ScriptCommand {
   replacement?: string;
   position?: { line: number; column: number };
   description: string;
-}
 
 // Fixing script interface;
 export interface FixingScript {
@@ -90,7 +83,6 @@ export interface FixingScript {
   rollbackCommands: ScriptCommand[];
   validationChecks: ValidationCheck[];
   estimatedRuntime: number;
-}
 
 // Validation check interface;
 export interface ValidationCheck {
@@ -98,7 +90,6 @@ export interface ValidationCheck {
   command: string;
   expectedResult: 'success' | 'zero-errors' | 'improved-count';
   timeoutSeconds: number;
-}
 
 // Progress monitoring interfaces;
 export interface ProgressMonitor {
@@ -108,14 +99,12 @@ export interface ProgressMonitor {
   errorsRemaining: number;
   estimatedCompletion: Date;
   performanceMetrics: PerformanceMetrics;
-}
 
 export interface PerformanceMetrics {
   averageFixTime: number;
   successRate: number;
   rollbackCount: number;
   timeoutCount: number;
-}
 
 // Execution state management;
 export interface ExecutionState {
@@ -126,7 +115,6 @@ export interface ExecutionState {
   errorCounts: Record<string, number>;
   appliedFixes: AppliedFix[];
   rollbackStack: RollbackAction[];
-}
 
 export interface ExecutionPhase {
   name: string;
@@ -134,7 +122,6 @@ export interface ExecutionPhase {
   scripts: FixingScript[];
   prerequisites: string[];
   successCriteria: ValidationCheck[];
-}
 
 export interface AppliedFix {
   timestamp: Date;
@@ -143,7 +130,6 @@ export interface AppliedFix {
   errorsFixed: number;
   newErrorsIntroduced: number;
   rollbackId: string;
-}
 
 export interface RollbackAction {
   id: string;
@@ -152,4 +138,3 @@ export interface RollbackAction {
   targetFiles: string[];
   backupPath: string;
   description: string;
-}

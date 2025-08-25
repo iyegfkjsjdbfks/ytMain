@@ -4,14 +4,12 @@ export interface PerformanceMetrics {
   loadTime: number;
   memoryUsage: number;
   timestamp: number;
-}
 
 export class PerformanceMonitor {
   private metrics: PerformanceMetrics[] = [];
   
   startMeasure(name: string): void {
     performance.mark(`${name}-start`);
-  }
   
   endMeasure(name: string): number {
     performance.mark(`${name}-end`);
@@ -19,7 +17,6 @@ export class PerformanceMonitor {
     
     const measure = performance.getEntriesByName(name)[0];
     return measure ? measure.duration : 0;
-  }
   
   recordMetric(metric: PerformanceMetrics): void {
     this.metrics.push(metric);
@@ -27,17 +24,12 @@ export class PerformanceMonitor {
     // Keep only last 100 metrics;
     if (this.metrics.length > 100) {
       this.metrics.shift();
-    }
-  }
   
   getMetrics(): PerformanceMetrics[] {
     return [...this.metrics];
-  }
   
   clearMetrics(): void {
     this.metrics = [];
-  }
-}
 
 export const performanceMonitor = new PerformanceMonitor();
 
@@ -45,6 +37,4 @@ export function usePerformanceMonitor(name: string) {
   // Placeholder hook implementation;
   return {
     startMeasure: () => performanceMonitor.startMeasure(name),
-    endMeasure: () => performanceMonitor.endMeasure(name)
-  };
-}
+    endMeasure: () => performanceMonitor.endMeasure(name);
