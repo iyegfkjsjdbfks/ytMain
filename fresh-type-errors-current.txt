@@ -1,0 +1,1993 @@
+components/CategoryChips.tsx(34,60): error TS1005: ',' expected.
+components/CategoryChips.tsx(41,59): error TS1005: ',' expected.
+components/CategoryChips.tsx(50,63): error TS1005: ',' expected.
+components/CategoryChips.tsx(51,79): error TS1005: ',' expected.
+components/CategoryChips.tsx(57,56): error TS1005: ',' expected.
+components/CommentModal.tsx(31,55): error TS1005: ',' expected.
+components/VideoCard.tsx(59,70): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/VideoCard.tsx(96,127): error TS1005: ',' expected.
+components/VideoCard.tsx(96,137): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/VideoCard.tsx(96,138): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/VideoCard.tsx(98,4): error TS17002: Expected corresponding JSX closing tag for 'div'.
+components/VideoCard.tsx(115,4): error TS17002: Expected corresponding JSX closing tag for 'Link'.
+components/VideoCard.tsx(116,2): error TS1005: ')' expected.
+components/VideoCard.tsx(117,2): error TS1109: Expression expected.
+components/VideoCard.tsx(118,1): error TS1128: Declaration or statement expected.
+components/VideoCard.tsx(118,2): error TS1128: Declaration or statement expected.
+components/forms/Input.tsx(32,36): error TS1003: Identifier expected.
+contexts/WatchLaterContext.tsx(17,3): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(35,7): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(36,65): error TS1005: ',' expected.
+contexts/WatchLaterContext.tsx(37,7): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(43,77): error TS1005: ',' expected.
+contexts/WatchLaterContext.tsx(44,3): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(47,29): error TS1005: ',' expected.
+contexts/WatchLaterContext.tsx(48,32): error TS1005: ',' expected.
+contexts/WatchLaterContext.tsx(48,49): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(50,5): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(54,29): error TS1005: ',' expected.
+contexts/WatchLaterContext.tsx(54,55): error TS1005: ',' expected.
+contexts/WatchLaterContext.tsx(54,85): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(57,52): error TS1005: '=>' expected.
+contexts/WatchLaterContext.tsx(57,61): error TS1005: ';' expected.
+contexts/WatchLaterContext.tsx(58,11): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(58,47): error TS1005: ',' expected.
+contexts/WatchLaterContext.tsx(58,58): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(62,30): error TS1109: Expression expected.
+contexts/WatchLaterContext.tsx(70,22): error TS1136: Property assignment expected.
+contexts/WatchLaterContext.tsx(71,3): error TS1128: Declaration or statement expected.
+contexts/WatchLaterContext.tsx(78,1): error TS1128: Declaration or statement expected.
+src/App.tsx(18,4): error TS1005: ')' expected.
+src/App.tsx(19,1): error TS1128: Declaration or statement expected.
+src/components/ErrorBoundaries/DataFetchErrorBoundary.tsx(29,7): error TS1109: Expression expected.
+src/components/ErrorBoundaries/DataFetchErrorBoundary.tsx(33,7): error TS1109: Expression expected.
+src/components/ErrorBoundaries/VideoErrorBoundary.tsx(29,7): error TS1109: Expression expected.
+src/components/ErrorBoundaries/VideoErrorBoundary.tsx(33,7): error TS1109: Expression expected.
+src/components/LoadingSpinner.tsx(13,16): error TS1136: Property assignment expected.
+src/components/LoadingSpinner.tsx(17,3): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/components/LoadingSpinner.tsx(18,3): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/components/LoadingSpinner.tsx(20,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/LoadingSpinner.tsx(23,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/LoadingSpinner.tsx(26,1): error TS1005: '</' expected.
+src/components/PWAInstallBanner.tsx(29,7): error TS1109: Expression expected.
+src/components/PWAInstallBanner.tsx(33,7): error TS1109: Expression expected.
+src/components/PWAUpdateNotification.tsx(18,15): error TS1109: Expression expected.
+src/components/PWAUpdateNotification.tsx(36,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/PWAUpdateNotification.tsx(42,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/PWAUpdateNotification.tsx(45,7): error TS1005: ')' expected.
+src/components/PWAUpdateNotification.tsx(46,5): error TS1109: Expression expected.
+src/components/PWAUpdateNotification.tsx(47,3): error TS1109: Expression expected.
+src/components/PWAUpdateNotification.tsx(48,1): error TS1128: Declaration or statement expected.
+src/components/atoms/Button/Button.tsx(7,1): error TS1109: Expression expected.
+src/components/atoms/Button/Button.tsx(23,5): error TS1136: Property assignment expected.
+src/components/atoms/Button/Button.tsx(24,1): error TS1128: Declaration or statement expected.
+src/components/atoms/Button/Button.tsx(38,8): error TS17008: JSX element 'button' has no corresponding closing tag.
+src/components/atoms/Button/Button.tsx(47,8): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/atoms/Button/Button.tsx(49,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/atoms/Button/Button.tsx(55,23): error TS1005: '</' expected.
+src/components/examples/YouTubePlayerExample.tsx(29,7): error TS1109: Expression expected.
+src/components/examples/YouTubePlayerExample.tsx(33,7): error TS1109: Expression expected.
+src/components/mobile/MobileVideoPlayer.tsx(29,7): error TS1109: Expression expected.
+src/components/mobile/MobileVideoPlayer.tsx(33,7): error TS1109: Expression expected.
+src/components/optimized/OptimizedSearchResults.tsx(29,7): error TS1109: Expression expected.
+src/components/optimized/OptimizedSearchResults.tsx(33,7): error TS1109: Expression expected.
+src/components/unified/UnifiedButton.tsx(28,7): error TS1109: Expression expected.
+src/components/unified/UnifiedButton.tsx(32,7): error TS1109: Expression expected.
+src/config/pwa.ts(8,38): error TS1442: Expected '=' for property initializer.
+src/config/pwa.ts(18,3): error TS1109: Expression expected.
+src/config/pwa.ts(23,5): error TS1109: Expression expected.
+src/config/pwa.ts(34,5): error TS1109: Expression expected.
+src/debug/GoogleSearchStoreDebug.tsx(28,7): error TS1109: Expression expected.
+src/debug/GoogleSearchStoreDebug.tsx(32,7): error TS1109: Expression expected.
+src/debug/TestMetadataFetch.tsx(27,7): error TS1109: Expression expected.
+src/debug/TestMetadataFetch.tsx(31,7): error TS1109: Expression expected.
+src/error-resolution/cli/analyze.ts(2,1): error TS18026: '#!' can only be used at the start of a file.
+src/error-resolution/cli/analyze.ts(2,16): error TS1005: ';' expected.
+src/error-resolution/cli/main.ts(12,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(17,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(55,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(73,29): error TS1136: Property assignment expected.
+src/error-resolution/cli/main.ts(74,8): error TS1472: 'catch' or 'finally' expected.
+src/error-resolution/cli/main.ts(88,5): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(88,7): error TS1005: 'try' expected.
+src/error-resolution/cli/main.ts(92,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(92,4): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(95,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(109,7): error TS1109: Expression expected.
+src/error-resolution/cli/main.ts(122,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(140,9): error TS1109: Expression expected.
+src/error-resolution/cli/main.ts(158,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(175,15): error TS1109: Expression expected.
+src/error-resolution/cli/main.ts(176,7): error TS1109: Expression expected.
+src/error-resolution/cli/main.ts(183,29): error TS1136: Property assignment expected.
+src/error-resolution/cli/main.ts(184,8): error TS1472: 'catch' or 'finally' expected.
+src/error-resolution/cli/main.ts(194,7): error TS1109: Expression expected.
+src/error-resolution/cli/main.ts(198,5): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(198,7): error TS1005: 'try' expected.
+src/error-resolution/cli/main.ts(202,3): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(202,4): error TS1128: Declaration or statement expected.
+src/error-resolution/cli/main.ts(210,1): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(21,28): error TS1442: Expected '=' for property initializer.
+src/error-resolution/core/CacheManager.ts(22,29): error TS1442: Expected '=' for property initializer.
+src/error-resolution/core/CacheManager.ts(28,3): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(36,5): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(43,27): error TS1137: Expression or comma expected.
+src/error-resolution/core/CacheManager.ts(70,5): error TS1128: Declaration or statement expected.
+src/error-resolution/core/CacheManager.ts(75,7): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(92,5): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(99,32): error TS1137: Expression or comma expected.
+src/error-resolution/core/CacheManager.ts(128,5): error TS1128: Declaration or statement expected.
+src/error-resolution/core/CacheManager.ts(133,7): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(246,7): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(258,11): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(343,13): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(360,7): error TS1128: Declaration or statement expected.
+src/error-resolution/core/CacheManager.ts(364,5): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(407,5): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(409,5): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(426,9): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(429,9): error TS1109: Expression expected.
+src/error-resolution/core/CacheManager.ts(449,3): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(182,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(204,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(217,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(224,17): error TS1003: Identifier expected.
+src/error-resolution/core/ErrorAnalyzer.ts(231,9): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(281,7): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(302,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(307,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(312,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(328,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(334,5): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(354,7): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(359,32): error TS1003: Identifier expected.
+src/error-resolution/core/ErrorAnalyzer.ts(359,33): error TS1011: An element access expression should take an argument.
+src/error-resolution/core/ErrorAnalyzer.ts(360,7): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(366,7): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(372,7): error TS1109: Expression expected.
+src/error-resolution/core/ErrorAnalyzer.ts(408,24): error TS1005: ',' expected.
+src/error-resolution/core/ErrorAnalyzer.ts(408,29): error TS1005: ',' expected.
+src/error-resolution/core/ErrorAnalyzer.ts(409,120): error TS1005: ')' expected.
+src/error-resolution/core/ErrorAnalyzer.ts(410,9): error TS1128: Declaration or statement expected.
+src/error-resolution/core/ErrorAnalyzer.ts(417,7): error TS1128: Declaration or statement expected.
+src/error-resolution/core/ErrorAnalyzer.ts(439,42): error TS1005: ',' expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(26,36): error TS1442: Expected '=' for property initializer.
+src/error-resolution/core/ExecutionOrchestrator.ts(31,3): error TS1109: Expression expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(56,7): error TS1109: Expression expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(71,5): error TS1109: Expression expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(79,56): error TS1005: ',' expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(80,5): error TS1128: Declaration or statement expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(106,14): error TS1003: Identifier expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(138,5): error TS1109: Expression expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(147,22): error TS1005: ',' expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(155,5): error TS1109: Expression expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(164,9): error TS1109: Expression expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(166,9): error TS1109: Expression expected.
+src/error-resolution/core/ExecutionOrchestrator.ts(188,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(28,26): error TS1442: Expected '=' for property initializer.
+src/error-resolution/core/ProgressMonitor.ts(32,49): error TS1442: Expected '=' for property initializer.
+src/error-resolution/core/ProgressMonitor.ts(53,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(80,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(105,13): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(106,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(117,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(146,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(157,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(200,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(203,67): error TS1005: ')' expected.
+src/error-resolution/core/ProgressMonitor.ts(205,5): error TS1128: Declaration or statement expected.
+src/error-resolution/core/ProgressMonitor.ts(224,3): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(234,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(270,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(280,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(286,5): error TS1109: Expression expected.
+src/error-resolution/core/ProgressMonitor.ts(295,5): error TS1109: Expression expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(31,29): error TS1442: Expected '=' for property initializer.
+src/error-resolution/generators/BaseScriptGenerator.ts(37,3): error TS1109: Expression expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(42,45): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(43,3): error TS1109: Expression expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(50,34): error TS1138: Parameter declaration expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(54,34): error TS1138: Parameter declaration expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(55,35): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(55,40): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(58,55): error TS1005: ')' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(58,57): error TS1434: Unexpected keyword or identifier.
+src/error-resolution/generators/BaseScriptGenerator.ts(58,64): error TS1128: Declaration or statement expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(59,89): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(62,7): error TS1109: Expression expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(69,84): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(75,113): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(76,3): error TS1138: Parameter declaration expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(86,26): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(89,5): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(94,28): error TS1005: ',' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(97,6): error TS1005: ')' expected.
+src/error-resolution/generators/BaseScriptGenerator.ts(97,16): error TS1005: ';' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(9,3): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(197,7): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(199,7): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(201,7): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(203,7): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(205,7): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(209,7): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(224,35): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(224,40): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(225,45): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(225,50): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(255,14): error TS1003: Identifier expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(264,5): error TS1109: Expression expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(294,37): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(294,42): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(345,37): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(345,42): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(383,37): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(383,42): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(439,37): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(439,42): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(440,47): error TS1005: ',' expected.
+src/error-resolution/generators/FormattingScriptGenerator.ts(440,52): error TS1005: ',' expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(11,3): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(218,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(220,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(222,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(224,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(226,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(228,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(230,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(232,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(236,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(296,14): error TS1003: Identifier expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(305,5): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(620,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(622,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(624,7): error TS1109: Expression expected.
+src/error-resolution/generators/SyntaxScriptGenerator.ts(626,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(11,3): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(216,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(218,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(220,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(222,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(224,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(226,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(228,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(230,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(232,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(236,7): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(297,14): error TS1003: Identifier expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(306,5): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(331,17): error TS1005: ',' expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(331,22): error TS1005: ',' expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(334,76): error TS1136: Property assignment expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(376,17): error TS1005: ',' expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(376,22): error TS1005: ',' expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(381,76): error TS1005: ',' expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(612,5): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(631,5): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(635,5): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(639,5): error TS1109: Expression expected.
+src/error-resolution/generators/TypeScriptGenerator.ts(643,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(29,3): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(55,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(91,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(100,48): error TS1005: ',' expected.
+src/error-resolution/test/CacheManager.test.ts(121,47): error TS1005: ',' expected.
+src/error-resolution/test/CacheManager.test.ts(145,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(156,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(167,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(183,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(194,3): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(205,48): error TS1005: ',' expected.
+src/error-resolution/test/CacheManager.test.ts(223,22): error TS1136: Property assignment expected.
+src/error-resolution/test/CacheManager.test.ts(224,8): error TS1005: ',' expected.
+src/error-resolution/test/CacheManager.test.ts(224,9): error TS1005: ')' expected.
+src/error-resolution/test/CacheManager.test.ts(239,7): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(242,22): error TS1136: Property assignment expected.
+src/error-resolution/test/CacheManager.test.ts(243,8): error TS1005: ',' expected.
+src/error-resolution/test/CacheManager.test.ts(243,9): error TS1005: ')' expected.
+src/error-resolution/test/CacheManager.test.ts(256,9): error TS1128: Declaration or statement expected.
+src/error-resolution/test/CacheManager.test.ts(273,10): error TS1005: ',' expected.
+src/error-resolution/test/CacheManager.test.ts(274,7): error TS1128: Declaration or statement expected.
+src/error-resolution/test/CacheManager.test.ts(282,3): error TS1128: Declaration or statement expected.
+src/error-resolution/test/CacheManager.test.ts(282,4): error TS1128: Declaration or statement expected.
+src/error-resolution/test/CacheManager.test.ts(326,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(342,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(357,5): error TS1109: Expression expected.
+src/error-resolution/test/CacheManager.test.ts(359,1): error TS1128: Declaration or statement expected.
+src/error-resolution/test/CacheManager.test.ts(359,2): error TS1128: Declaration or statement expected.
+src/error-resolution/test/ImportFixer.test.ts(7,7): error TS1005: ',' expected.
+src/error-resolution/test/ImportFixer.test.ts(13,3): error TS1109: Expression expected.
+src/error-resolution/test/ImportFixer.test.ts(17,3): error TS1109: Expression expected.
+src/error-resolution/test/ImportFixer.test.ts(22,5): error TS1109: Expression expected.
+src/error-resolution/test/ImportFixer.test.ts(122,19): error TS1136: Property assignment expected.
+src/error-resolution/test/ImportFixer.test.ts(125,7): error TS1005: ',' expected.
+src/error-resolution/test/ImportFixer.test.ts(125,8): error TS1005: ')' expected.
+src/error-resolution/test/ImportFixer.test.ts(145,5): error TS1109: Expression expected.
+src/error-resolution/test/ImportFixer.test.ts(154,5): error TS1109: Expression expected.
+src/error-resolution/test/ImportFixer.test.ts(185,7): error TS1109: Expression expected.
+src/error-resolution/test/ImportFixer.test.ts(188,7): error TS1109: Expression expected.
+src/error-resolution/test/ImportFixer.test.ts(210,1): error TS1128: Declaration or statement expected.
+src/error-resolution/test/ImportFixer.test.ts(210,2): error TS1128: Declaration or statement expected.
+src/error-resolution/test/ValidationEngine.test.ts(8,7): error TS1005: ',' expected.
+src/error-resolution/test/ValidationEngine.test.ts(17,3): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(27,5): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(45,10): error TS1005: ',' expected.
+src/error-resolution/test/ValidationEngine.test.ts(68,7): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(71,7): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(84,7): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(87,7): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(100,7): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(103,7): error TS1109: Expression expected.
+src/error-resolution/test/ValidationEngine.test.ts(115,73): error TS1005: ',' expected.
+src/error-resolution/test/ValidationEngine.test.ts(140,5): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(8,7): error TS1005: ',' expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(13,3): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(17,3): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(23,5): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(37,5): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(48,5): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(59,27): error TS1005: ',' expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(74,27): error TS1005: ',' expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(96,29): error TS1110: Type expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(96,37): error TS1005: ':' expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(96,39): error TS1136: Property assignment expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(97,8): error TS1005: ')' expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(112,7): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(115,7): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(124,5): error TS1109: Expression expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(126,1): error TS1128: Declaration or statement expected.
+src/error-resolution/test/WorkflowCoordinator.test.ts(126,2): error TS1128: Declaration or statement expected.
+src/error-resolution/utils/FileManager.ts(47,9): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(108,16): error TS1003: Identifier expected.
+src/error-resolution/utils/FileManager.ts(178,3): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(185,3): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(212,16): error TS1003: Identifier expected.
+src/error-resolution/utils/FileManager.ts(221,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(232,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(252,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(296,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(323,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(371,40): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(378,7): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(414,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(425,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(437,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(456,7): error TS1128: Declaration or statement expected.
+src/error-resolution/utils/FileManager.ts(456,69): error TS1005: ',' expected.
+src/error-resolution/utils/FileManager.ts(456,71): error TS1005: ':' expected.
+src/error-resolution/utils/FileManager.ts(467,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(477,5): error TS1109: Expression expected.
+src/error-resolution/utils/FileManager.ts(479,5): error TS1109: Expression expected.
+src/features/analytics/components/AdvancedAnalyticsDashboard.tsx(38,9): error TS1109: Expression expected.
+src/features/analytics/components/AdvancedAnalyticsDashboard.tsx(52,7): error TS1109: Expression expected.
+src/features/analytics/components/AdvancedAnalyticsDashboard.tsx(54,7): error TS1109: Expression expected.
+src/features/auth/components/LoginForm.tsx(28,7): error TS1109: Expression expected.
+src/features/auth/components/LoginForm.tsx(32,7): error TS1109: Expression expected.
+src/features/auth/components/ProtectedRoute.tsx(28,7): error TS1109: Expression expected.
+src/features/auth/components/ProtectedRoute.tsx(32,7): error TS1109: Expression expected.
+src/features/auth/components/RegisterForm.tsx(29,7): error TS1109: Expression expected.
+src/features/auth/components/RegisterForm.tsx(33,7): error TS1109: Expression expected.
+src/features/auth/services/authService.ts(39,32): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(39,68): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(68,32): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(68,68): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(94,32): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(94,67): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(119,32): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(119,67): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(133,32): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(133,68): error TS1005: ',' expected.
+src/features/auth/services/authService.ts(134,57): error TS1005: ',' expected.
+src/features/channel/pages/ChannelPage.tsx(10,2): error TS1109: Expression expected.
+src/features/channel/pages/ChannelPage.tsx(15,3): error TS17008: JSX element 'p' has no corresponding closing tag.
+src/features/channel/pages/ChannelPage.tsx(17,2): error TS1109: Expression expected.
+src/features/channel/pages/ChannelPage.tsx(18,26): error TS1005: '}' expected.
+src/features/channel/pages/ChannelPage.tsx(20,7): error TS1005: '}' expected.
+src/features/channel/pages/ChannelPage.tsx(20,81): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/features/comments/components/CommentSection.tsx(29,7): error TS1109: Expression expected.
+src/features/comments/components/CommentSection.tsx(33,7): error TS1109: Expression expected.
+src/features/comments/hooks/useComments.ts(26,32): error TS1005: ',' expected.
+src/features/comments/hooks/useComments.ts(26,67): error TS1005: ',' expected.
+src/features/comments/hooks/useComments.ts(28,7): error TS1109: Expression expected.
+src/features/comments/hooks/useComments.ts(31,26): error TS1005: ',' expected.
+src/features/comments/hooks/useComments.ts(40,5): error TS1109: Expression expected.
+src/features/comments/hooks/useComments.ts(42,5): error TS1109: Expression expected.
+src/features/comments/hooks/useComments.ts(47,3): error TS1109: Expression expected.
+src/features/comments/services/commentService.ts(10,39): error TS1442: Expected '=' for property initializer.
+src/features/comments/services/commentService.ts(26,10): error TS1005: ',' expected.
+src/features/comments/services/commentService.ts(27,8): error TS1005: ',' expected.
+src/features/comments/services/commentService.ts(35,50): error TS1005: ',' expected.
+src/features/comments/services/commentService.ts(37,5): error TS1109: Expression expected.
+src/features/comments/services/commentService.ts(46,37): error TS1005: ',' expected.
+src/features/comments/services/commentService.ts(46,47): error TS1005: ',' expected.
+src/features/comments/services/commentService.ts(55,49): error TS1005: ',' expected.
+src/features/comments/services/commentService.ts(57,5): error TS1109: Expression expected.
+src/features/common/components/ErrorBoundary.tsx(28,7): error TS1109: Expression expected.
+src/features/common/components/ErrorBoundary.tsx(32,7): error TS1109: Expression expected.
+src/features/common/components/Footer.tsx(28,7): error TS1109: Expression expected.
+src/features/common/components/Footer.tsx(32,7): error TS1109: Expression expected.
+src/features/common/components/Header.tsx(28,7): error TS1109: Expression expected.
+src/features/common/components/Header.tsx(32,7): error TS1109: Expression expected.
+src/features/common/components/Sidebar.tsx(28,7): error TS1109: Expression expected.
+src/features/common/components/Sidebar.tsx(32,7): error TS1109: Expression expected.
+src/features/common/components/StudioHeader.tsx(28,7): error TS1109: Expression expected.
+src/features/common/components/StudioHeader.tsx(32,7): error TS1109: Expression expected.
+src/features/common/components/StudioSidebar.tsx(28,7): error TS1109: Expression expected.
+src/features/common/components/StudioSidebar.tsx(32,7): error TS1109: Expression expected.
+src/features/community/components/CommunityPost.tsx(28,7): error TS1109: Expression expected.
+src/features/community/components/CommunityPost.tsx(32,7): error TS1109: Expression expected.
+src/features/creator/components/CreatorStudioDashboard.tsx(44,9): error TS1109: Expression expected.
+src/features/creator/components/CreatorStudioDashboard.tsx(60,7): error TS1109: Expression expected.
+src/features/creator/components/CreatorStudioDashboard.tsx(62,7): error TS1109: Expression expected.
+src/features/livestream/components/LivePolls.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/LivePolls.tsx(32,7): error TS1109: Expression expected.
+src/features/livestream/components/LiveStreamStudio.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/LiveStreamStudio.tsx(32,7): error TS1109: Expression expected.
+src/features/livestream/components/LiveStreamViewer.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/LiveStreamViewer.tsx(32,7): error TS1109: Expression expected.
+src/features/livestream/components/MultiplatformStreaming.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/MultiplatformStreaming.tsx(32,7): error TS1109: Expression expected.
+src/features/livestream/components/ProtectedStreamAnalyticsDashboard.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/ProtectedStreamAnalyticsDashboard.tsx(32,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(44,9): error TS1109: Expression expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(60,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(62,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamManagementDashboard.tsx(44,9): error TS1109: Expression expected.
+src/features/livestream/components/StreamManagementDashboard.tsx(60,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamManagementDashboard.tsx(62,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamScheduler.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamScheduler.tsx(32,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamSettings.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/StreamSettings.tsx(32,7): error TS1109: Expression expected.
+src/features/livestream/components/SuperChatPanel.tsx(28,7): error TS1109: Expression expected.
+src/features/livestream/components/SuperChatPanel.tsx(32,7): error TS1109: Expression expected.
+src/features/moderation/components/ModerationDashboard.tsx(38,9): error TS1109: Expression expected.
+src/features/moderation/components/ModerationDashboard.tsx(52,7): error TS1109: Expression expected.
+src/features/moderation/components/ModerationDashboard.tsx(54,7): error TS1109: Expression expected.
+src/features/notifications/components/NotificationCenter.tsx(28,7): error TS1109: Expression expected.
+src/features/notifications/components/NotificationCenter.tsx(32,7): error TS1109: Expression expected.
+src/features/notifications/hooks/useNotifications.ts(34,32): error TS1005: ',' expected.
+src/features/notifications/hooks/useNotifications.ts(34,41): error TS1005: ',' expected.
+src/features/notifications/hooks/useNotifications.ts(34,76): error TS1005: ',' expected.
+src/features/notifications/hooks/useNotifications.ts(34,85): error TS1005: ',' expected.
+src/features/notifications/hooks/useNotifications.ts(36,7): error TS1109: Expression expected.
+src/features/notifications/hooks/useNotifications.ts(39,23): error TS1136: Property assignment expected.
+src/features/notifications/hooks/useNotifications.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/features/notifications/hooks/useNotifications.ts(44,7): error TS1005: ',' expected.
+src/features/notifications/hooks/useNotifications.ts(48,5): error TS1109: Expression expected.
+src/features/notifications/hooks/useNotifications.ts(50,5): error TS1109: Expression expected.
+src/features/notifications/hooks/useNotifications.ts(51,4): error TS1128: Declaration or statement expected.
+src/features/notifications/hooks/useNotifications.ts(51,35): error TS1005: ';' expected.
+src/features/notifications/hooks/useNotifications.ts(55,3): error TS1109: Expression expected.
+src/features/notifications/hooks/useNotifications.ts(63,1): error TS1128: Declaration or statement expected.
+src/features/notifications/services/notificationService.ts(18,44): error TS1005: ',' expected.
+src/features/notifications/services/notificationService.ts(27,83): error TS1005: ',' expected.
+src/features/notifications/services/notificationService.ts(34,44): error TS1005: ',' expected.
+src/features/playlist/components/PlaylistCard.tsx(28,7): error TS1109: Expression expected.
+src/features/playlist/components/PlaylistCard.tsx(32,7): error TS1109: Expression expected.
+src/features/playlist/hooks/usePlaylists.ts(34,32): error TS1005: ',' expected.
+src/features/playlist/hooks/usePlaylists.ts(34,41): error TS1005: ',' expected.
+src/features/playlist/hooks/usePlaylists.ts(34,76): error TS1005: ',' expected.
+src/features/playlist/hooks/usePlaylists.ts(34,85): error TS1005: ',' expected.
+src/features/playlist/hooks/usePlaylists.ts(36,7): error TS1109: Expression expected.
+src/features/playlist/hooks/usePlaylists.ts(39,23): error TS1136: Property assignment expected.
+src/features/playlist/hooks/usePlaylists.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/features/playlist/hooks/usePlaylists.ts(44,7): error TS1005: ',' expected.
+src/features/playlist/hooks/usePlaylists.ts(48,5): error TS1109: Expression expected.
+src/features/playlist/hooks/usePlaylists.ts(50,5): error TS1109: Expression expected.
+src/features/playlist/hooks/usePlaylists.ts(51,4): error TS1128: Declaration or statement expected.
+src/features/playlist/hooks/usePlaylists.ts(51,35): error TS1005: ';' expected.
+src/features/playlist/hooks/usePlaylists.ts(55,3): error TS1109: Expression expected.
+src/features/playlist/hooks/usePlaylists.ts(63,1): error TS1128: Declaration or statement expected.
+src/features/playlist/pages/PlaylistDetailPage.tsx(10,2): error TS1109: Expression expected.
+src/features/playlist/pages/PlaylistDetailPage.tsx(15,3): error TS17008: JSX element 'p' has no corresponding closing tag.
+src/features/playlist/pages/PlaylistDetailPage.tsx(17,2): error TS1109: Expression expected.
+src/features/playlist/pages/PlaylistDetailPage.tsx(18,27): error TS1005: '}' expected.
+src/features/playlist/pages/PlaylistDetailPage.tsx(20,7): error TS1005: '}' expected.
+src/features/playlist/pages/PlaylistDetailPage.tsx(20,81): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/features/playlist/services/playlistService.ts(18,44): error TS1005: ',' expected.
+src/features/playlist/services/playlistService.ts(27,83): error TS1005: ',' expected.
+src/features/playlist/services/playlistService.ts(34,44): error TS1005: ',' expected.
+src/features/search/services/searchService.ts(10,38): error TS1442: Expected '=' for property initializer.
+src/features/search/services/searchService.ts(26,10): error TS1005: ',' expected.
+src/features/search/services/searchService.ts(27,8): error TS1005: ',' expected.
+src/features/search/services/searchService.ts(35,50): error TS1005: ',' expected.
+src/features/search/services/searchService.ts(37,5): error TS1109: Expression expected.
+src/features/search/services/searchService.ts(46,37): error TS1005: ',' expected.
+src/features/search/services/searchService.ts(46,47): error TS1005: ',' expected.
+src/features/search/services/searchService.ts(55,49): error TS1005: ',' expected.
+src/features/search/services/searchService.ts(57,5): error TS1109: Expression expected.
+src/features/subscription/components/SubscriptionButton.tsx(27,7): error TS1109: Expression expected.
+src/features/subscription/components/SubscriptionButton.tsx(31,7): error TS1109: Expression expected.
+src/features/subscription/services/subscriptionService.ts(18,44): error TS1005: ',' expected.
+src/features/subscription/services/subscriptionService.ts(27,83): error TS1005: ',' expected.
+src/features/subscription/services/subscriptionService.ts(34,44): error TS1005: ',' expected.
+src/features/video/components/ProtectedVideoPlayer.tsx(27,7): error TS1109: Expression expected.
+src/features/video/components/ProtectedVideoPlayer.tsx(31,7): error TS1109: Expression expected.
+src/features/video/components/StudioVideoGrid.tsx(27,7): error TS1109: Expression expected.
+src/features/video/components/StudioVideoGrid.tsx(31,7): error TS1109: Expression expected.
+src/features/video/components/VideoCard.tsx(27,7): error TS1109: Expression expected.
+src/features/video/components/VideoCard.tsx(31,7): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(25,3): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(34,5): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(36,5): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(38,5): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(48,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/features/video/components/VideoEditor.tsx(53,7): error TS1005: ')' expected.
+src/features/video/components/VideoEditor.tsx(53,18): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(54,14): error TS1005: ';' expected.
+src/features/video/components/VideoEditor.tsx(56,9): error TS1128: Declaration or statement expected.
+src/features/video/components/VideoEditor.tsx(57,7): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(57,8): error TS1128: Declaration or statement expected.
+src/features/video/components/VideoEditor.tsx(59,7): error TS2657: JSX expressions must have one parent element.
+src/features/video/components/VideoEditor.tsx(60,10): error TS17008: JSX element 'textarea' has no corresponding closing tag.
+src/features/video/components/VideoEditor.tsx(65,11): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/features/video/components/VideoEditor.tsx(67,14): error TS1005: ';' expected.
+src/features/video/components/VideoEditor.tsx(68,3): error TS1109: Expression expected.
+src/features/video/components/VideoEditor.tsx(69,1): error TS1128: Declaration or statement expected.
+src/features/video/components/VideoGrid.tsx(27,7): error TS1109: Expression expected.
+src/features/video/components/VideoGrid.tsx(31,7): error TS1109: Expression expected.
+src/features/video/components/VideoList.tsx(27,7): error TS1109: Expression expected.
+src/features/video/components/VideoList.tsx(31,7): error TS1109: Expression expected.
+src/features/video/components/VideoPlayer.tsx(27,7): error TS1109: Expression expected.
+src/features/video/components/VideoPlayer.tsx(31,7): error TS1109: Expression expected.
+src/features/video/components/VideoUpload.tsx(27,7): error TS1109: Expression expected.
+src/features/video/components/VideoUpload.tsx(31,7): error TS1109: Expression expected.
+src/features/video/hooks/useVideo.ts(34,32): error TS1005: ',' expected.
+src/features/video/hooks/useVideo.ts(34,41): error TS1005: ',' expected.
+src/features/video/hooks/useVideo.ts(34,76): error TS1005: ',' expected.
+src/features/video/hooks/useVideo.ts(34,85): error TS1005: ',' expected.
+src/features/video/hooks/useVideo.ts(36,7): error TS1109: Expression expected.
+src/features/video/hooks/useVideo.ts(39,23): error TS1136: Property assignment expected.
+src/features/video/hooks/useVideo.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/features/video/hooks/useVideo.ts(44,7): error TS1005: ',' expected.
+src/features/video/hooks/useVideo.ts(48,5): error TS1109: Expression expected.
+src/features/video/hooks/useVideo.ts(50,5): error TS1109: Expression expected.
+src/features/video/hooks/useVideo.ts(51,4): error TS1128: Declaration or statement expected.
+src/features/video/hooks/useVideo.ts(51,35): error TS1005: ';' expected.
+src/features/video/hooks/useVideo.ts(55,3): error TS1109: Expression expected.
+src/features/video/hooks/useVideo.ts(63,1): error TS1128: Declaration or statement expected.
+src/features/video/hooks/useVideoInteractions.ts(34,32): error TS1005: ',' expected.
+src/features/video/hooks/useVideoInteractions.ts(34,41): error TS1005: ',' expected.
+src/features/video/hooks/useVideoInteractions.ts(34,76): error TS1005: ',' expected.
+src/features/video/hooks/useVideoInteractions.ts(34,85): error TS1005: ',' expected.
+src/features/video/hooks/useVideoInteractions.ts(36,7): error TS1109: Expression expected.
+src/features/video/hooks/useVideoInteractions.ts(39,23): error TS1136: Property assignment expected.
+src/features/video/hooks/useVideoInteractions.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/features/video/hooks/useVideoInteractions.ts(44,7): error TS1005: ',' expected.
+src/features/video/hooks/useVideoInteractions.ts(48,5): error TS1109: Expression expected.
+src/features/video/hooks/useVideoInteractions.ts(50,5): error TS1109: Expression expected.
+src/features/video/hooks/useVideoInteractions.ts(51,4): error TS1128: Declaration or statement expected.
+src/features/video/hooks/useVideoInteractions.ts(51,35): error TS1005: ';' expected.
+src/features/video/hooks/useVideoInteractions.ts(55,3): error TS1109: Expression expected.
+src/features/video/hooks/useVideoInteractions.ts(63,1): error TS1128: Declaration or statement expected.
+src/features/video/pages/SearchResultsPage.tsx(26,7): error TS1109: Expression expected.
+src/features/video/pages/SearchResultsPage.tsx(30,7): error TS1109: Expression expected.
+src/features/video/pages/VideoDemo.tsx(26,7): error TS1109: Expression expected.
+src/features/video/pages/VideoDemo.tsx(30,7): error TS1109: Expression expected.
+src/features/video/services/videoService.ts(10,37): error TS1442: Expected '=' for property initializer.
+src/features/video/services/videoService.ts(26,10): error TS1005: ',' expected.
+src/features/video/services/videoService.ts(27,8): error TS1005: ',' expected.
+src/features/video/services/videoService.ts(35,50): error TS1005: ',' expected.
+src/features/video/services/videoService.ts(37,5): error TS1109: Expression expected.
+src/features/video/services/videoService.ts(46,37): error TS1005: ',' expected.
+src/features/video/services/videoService.ts(46,47): error TS1005: ',' expected.
+src/features/video/services/videoService.ts(55,49): error TS1005: ',' expected.
+src/features/video/services/videoService.ts(57,5): error TS1109: Expression expected.
+src/hooks/legacy/root-useLiveStream.ts(8,52): error TS1442: Expected '=' for property initializer.
+src/hooks/legacy/root-useLiveStream.ts(18,3): error TS1109: Expression expected.
+src/hooks/legacy/root-useLiveStream.ts(23,5): error TS1109: Expression expected.
+src/hooks/legacy/root-useLiveStream.ts(32,47): error TS1005: ',' expected.
+src/hooks/legacy/root-useLiveStream.ts(34,5): error TS1109: Expression expected.
+src/hooks/legacy/root-useVideoPlayer.ts(8,53): error TS1442: Expected '=' for property initializer.
+src/hooks/legacy/root-useVideoPlayer.ts(18,3): error TS1109: Expression expected.
+src/hooks/legacy/root-useVideoPlayer.ts(23,5): error TS1109: Expression expected.
+src/hooks/legacy/root-useVideoPlayer.ts(32,47): error TS1005: ',' expected.
+src/hooks/legacy/root-useVideoPlayer.ts(34,5): error TS1109: Expression expected.
+src/hooks/optimizedHooks.ts(9,49): error TS1442: Expected '=' for property initializer.
+src/hooks/optimizedHooks.ts(18,63): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(26,32): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(27,8): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(31,7): error TS1109: Expression expected.
+src/hooks/optimizedHooks.ts(35,44): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(37,5): error TS1109: Expression expected.
+src/hooks/optimizedHooks.ts(41,55): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(46,48): error TS1005: ',' expected.
+src/hooks/unified/useApi.ts(34,32): error TS1005: ',' expected.
+src/hooks/unified/useApi.ts(34,41): error TS1005: ',' expected.
+src/hooks/unified/useApi.ts(34,76): error TS1005: ',' expected.
+src/hooks/unified/useApi.ts(34,85): error TS1005: ',' expected.
+src/hooks/unified/useApi.ts(36,7): error TS1109: Expression expected.
+src/hooks/unified/useApi.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/unified/useApi.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/unified/useApi.ts(44,7): error TS1005: ',' expected.
+src/hooks/unified/useApi.ts(48,5): error TS1109: Expression expected.
+src/hooks/unified/useApi.ts(50,5): error TS1109: Expression expected.
+src/hooks/unified/useApi.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/unified/useApi.ts(51,35): error TS1005: ';' expected.
+src/hooks/unified/useApi.ts(55,3): error TS1109: Expression expected.
+src/hooks/unified/useApi.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/unified/useVideos.ts(34,32): error TS1005: ',' expected.
+src/hooks/unified/useVideos.ts(34,41): error TS1005: ',' expected.
+src/hooks/unified/useVideos.ts(34,76): error TS1005: ',' expected.
+src/hooks/unified/useVideos.ts(34,85): error TS1005: ',' expected.
+src/hooks/unified/useVideos.ts(36,7): error TS1109: Expression expected.
+src/hooks/unified/useVideos.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/unified/useVideos.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/unified/useVideos.ts(44,7): error TS1005: ',' expected.
+src/hooks/unified/useVideos.ts(48,5): error TS1109: Expression expected.
+src/hooks/unified/useVideos.ts(50,5): error TS1109: Expression expected.
+src/hooks/unified/useVideos.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/unified/useVideos.ts(51,35): error TS1005: ';' expected.
+src/hooks/unified/useVideos.ts(55,3): error TS1109: Expression expected.
+src/hooks/unified/useVideos.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/unifiedHooks.ts(9,47): error TS1442: Expected '=' for property initializer.
+src/hooks/unifiedHooks.ts(18,63): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(26,32): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(27,8): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(31,7): error TS1109: Expression expected.
+src/hooks/unifiedHooks.ts(35,44): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(37,5): error TS1109: Expression expected.
+src/hooks/unifiedHooks.ts(41,55): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(46,48): error TS1005: ',' expected.
+src/hooks/useAnalytics.ts(26,32): error TS1005: ',' expected.
+src/hooks/useAnalytics.ts(26,67): error TS1005: ',' expected.
+src/hooks/useAnalytics.ts(28,7): error TS1109: Expression expected.
+src/hooks/useAnalytics.ts(31,26): error TS1005: ',' expected.
+src/hooks/useAnalytics.ts(40,5): error TS1109: Expression expected.
+src/hooks/useAnalytics.ts(42,5): error TS1109: Expression expected.
+src/hooks/useAnalytics.ts(47,3): error TS1109: Expression expected.
+src/hooks/useAsyncData.ts(50,2): error TS1005: ',' expected.
+src/hooks/useAsyncData.ts(50,4): error TS1434: Unexpected keyword or identifier.
+src/hooks/useAsyncData.ts(50,11): error TS1128: Declaration or statement expected.
+src/hooks/useAsyncData.ts(52,4): error TS1128: Declaration or statement expected.
+src/hooks/useAsyncData.ts(55,2): error TS1128: Declaration or statement expected.
+src/hooks/useAsyncData.ts(55,4): error TS1005: 'try' expected.
+src/hooks/useAsyncData.ts(59,44): error TS1005: ',' expected.
+src/hooks/useAsyncData.ts(67,2): error TS1128: Declaration or statement expected.
+src/hooks/useAsyncData.ts(67,3): error TS1128: Declaration or statement expected.
+src/hooks/useAsyncData.ts(67,18): error TS1005: ';' expected.
+src/hooks/useAsyncData.ts(89,1): error TS1128: Declaration or statement expected.
+src/hooks/useDebounce.ts(34,32): error TS1005: ',' expected.
+src/hooks/useDebounce.ts(34,41): error TS1005: ',' expected.
+src/hooks/useDebounce.ts(34,76): error TS1005: ',' expected.
+src/hooks/useDebounce.ts(34,85): error TS1005: ',' expected.
+src/hooks/useDebounce.ts(36,7): error TS1109: Expression expected.
+src/hooks/useDebounce.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useDebounce.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useDebounce.ts(44,7): error TS1005: ',' expected.
+src/hooks/useDebounce.ts(48,5): error TS1109: Expression expected.
+src/hooks/useDebounce.ts(50,5): error TS1109: Expression expected.
+src/hooks/useDebounce.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useDebounce.ts(51,35): error TS1005: ';' expected.
+src/hooks/useDebounce.ts(55,3): error TS1109: Expression expected.
+src/hooks/useDebounce.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useDropdownMenu.ts(34,32): error TS1005: ',' expected.
+src/hooks/useDropdownMenu.ts(34,41): error TS1005: ',' expected.
+src/hooks/useDropdownMenu.ts(34,76): error TS1005: ',' expected.
+src/hooks/useDropdownMenu.ts(34,85): error TS1005: ',' expected.
+src/hooks/useDropdownMenu.ts(36,7): error TS1109: Expression expected.
+src/hooks/useDropdownMenu.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useDropdownMenu.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useDropdownMenu.ts(44,7): error TS1005: ',' expected.
+src/hooks/useDropdownMenu.ts(48,5): error TS1109: Expression expected.
+src/hooks/useDropdownMenu.ts(50,5): error TS1109: Expression expected.
+src/hooks/useDropdownMenu.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useDropdownMenu.ts(51,35): error TS1005: ';' expected.
+src/hooks/useDropdownMenu.ts(55,3): error TS1109: Expression expected.
+src/hooks/useDropdownMenu.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useEnhancedQuery.ts(26,32): error TS1005: ',' expected.
+src/hooks/useEnhancedQuery.ts(26,67): error TS1005: ',' expected.
+src/hooks/useEnhancedQuery.ts(28,7): error TS1109: Expression expected.
+src/hooks/useEnhancedQuery.ts(31,26): error TS1005: ',' expected.
+src/hooks/useEnhancedQuery.ts(40,5): error TS1109: Expression expected.
+src/hooks/useEnhancedQuery.ts(42,5): error TS1109: Expression expected.
+src/hooks/useEnhancedQuery.ts(47,3): error TS1109: Expression expected.
+src/hooks/useFormState.ts(34,32): error TS1005: ',' expected.
+src/hooks/useFormState.ts(34,41): error TS1005: ',' expected.
+src/hooks/useFormState.ts(34,76): error TS1005: ',' expected.
+src/hooks/useFormState.ts(34,85): error TS1005: ',' expected.
+src/hooks/useFormState.ts(36,7): error TS1109: Expression expected.
+src/hooks/useFormState.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useFormState.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useFormState.ts(44,7): error TS1005: ',' expected.
+src/hooks/useFormState.ts(48,5): error TS1109: Expression expected.
+src/hooks/useFormState.ts(50,5): error TS1109: Expression expected.
+src/hooks/useFormState.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useFormState.ts(51,35): error TS1005: ';' expected.
+src/hooks/useFormState.ts(55,3): error TS1109: Expression expected.
+src/hooks/useFormState.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useInstallPrompt.ts(26,32): error TS1005: ',' expected.
+src/hooks/useInstallPrompt.ts(26,67): error TS1005: ',' expected.
+src/hooks/useInstallPrompt.ts(28,7): error TS1109: Expression expected.
+src/hooks/useInstallPrompt.ts(31,26): error TS1005: ',' expected.
+src/hooks/useInstallPrompt.ts(40,5): error TS1109: Expression expected.
+src/hooks/useInstallPrompt.ts(42,5): error TS1109: Expression expected.
+src/hooks/useInstallPrompt.ts(47,3): error TS1109: Expression expected.
+src/hooks/useLocalStorage.ts(34,32): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(34,41): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(34,76): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(34,85): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(36,7): error TS1109: Expression expected.
+src/hooks/useLocalStorage.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useLocalStorage.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useLocalStorage.ts(44,7): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(48,5): error TS1109: Expression expected.
+src/hooks/useLocalStorage.ts(50,5): error TS1109: Expression expected.
+src/hooks/useLocalStorage.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useLocalStorage.ts(51,35): error TS1005: ';' expected.
+src/hooks/useLocalStorage.ts(55,3): error TS1109: Expression expected.
+src/hooks/useLocalStorage.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useLocalStorageSet.ts(34,32): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(34,41): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(34,76): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(34,85): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(36,7): error TS1109: Expression expected.
+src/hooks/useLocalStorageSet.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useLocalStorageSet.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useLocalStorageSet.ts(44,7): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(48,5): error TS1109: Expression expected.
+src/hooks/useLocalStorageSet.ts(50,5): error TS1109: Expression expected.
+src/hooks/useLocalStorageSet.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useLocalStorageSet.ts(51,35): error TS1005: ';' expected.
+src/hooks/useLocalStorageSet.ts(55,3): error TS1109: Expression expected.
+src/hooks/useLocalStorageSet.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useMobileDetection.ts(34,32): error TS1005: ',' expected.
+src/hooks/useMobileDetection.ts(34,41): error TS1005: ',' expected.
+src/hooks/useMobileDetection.ts(34,76): error TS1005: ',' expected.
+src/hooks/useMobileDetection.ts(34,85): error TS1005: ',' expected.
+src/hooks/useMobileDetection.ts(36,7): error TS1109: Expression expected.
+src/hooks/useMobileDetection.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useMobileDetection.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useMobileDetection.ts(44,7): error TS1005: ',' expected.
+src/hooks/useMobileDetection.ts(48,5): error TS1109: Expression expected.
+src/hooks/useMobileDetection.ts(50,5): error TS1109: Expression expected.
+src/hooks/useMobileDetection.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useMobileDetection.ts(51,35): error TS1005: ';' expected.
+src/hooks/useMobileDetection.ts(55,3): error TS1109: Expression expected.
+src/hooks/useMobileDetection.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useModal.ts(34,32): error TS1005: ',' expected.
+src/hooks/useModal.ts(34,41): error TS1005: ',' expected.
+src/hooks/useModal.ts(34,76): error TS1005: ',' expected.
+src/hooks/useModal.ts(34,85): error TS1005: ',' expected.
+src/hooks/useModal.ts(36,7): error TS1109: Expression expected.
+src/hooks/useModal.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useModal.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useModal.ts(44,7): error TS1005: ',' expected.
+src/hooks/useModal.ts(48,5): error TS1109: Expression expected.
+src/hooks/useModal.ts(50,5): error TS1109: Expression expected.
+src/hooks/useModal.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useModal.ts(51,35): error TS1005: ';' expected.
+src/hooks/useModal.ts(55,3): error TS1109: Expression expected.
+src/hooks/useModal.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useOfflineStatus.ts(26,32): error TS1005: ',' expected.
+src/hooks/useOfflineStatus.ts(26,67): error TS1005: ',' expected.
+src/hooks/useOfflineStatus.ts(28,7): error TS1109: Expression expected.
+src/hooks/useOfflineStatus.ts(31,26): error TS1005: ',' expected.
+src/hooks/useOfflineStatus.ts(40,5): error TS1109: Expression expected.
+src/hooks/useOfflineStatus.ts(42,5): error TS1109: Expression expected.
+src/hooks/useOfflineStatus.ts(47,3): error TS1109: Expression expected.
+src/hooks/useOptimizedVideoData.ts(34,32): error TS1005: ',' expected.
+src/hooks/useOptimizedVideoData.ts(34,41): error TS1005: ',' expected.
+src/hooks/useOptimizedVideoData.ts(34,76): error TS1005: ',' expected.
+src/hooks/useOptimizedVideoData.ts(34,85): error TS1005: ',' expected.
+src/hooks/useOptimizedVideoData.ts(36,7): error TS1109: Expression expected.
+src/hooks/useOptimizedVideoData.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/useOptimizedVideoData.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useOptimizedVideoData.ts(44,7): error TS1005: ',' expected.
+src/hooks/useOptimizedVideoData.ts(48,5): error TS1109: Expression expected.
+src/hooks/useOptimizedVideoData.ts(50,5): error TS1109: Expression expected.
+src/hooks/useOptimizedVideoData.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/useOptimizedVideoData.ts(51,35): error TS1005: ';' expected.
+src/hooks/useOptimizedVideoData.ts(55,3): error TS1109: Expression expected.
+src/hooks/useOptimizedVideoData.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/usePWANotifications.ts(35,32): error TS1005: ',' expected.
+src/hooks/usePWANotifications.ts(35,41): error TS1005: ',' expected.
+src/hooks/usePWANotifications.ts(35,76): error TS1005: ',' expected.
+src/hooks/usePWANotifications.ts(35,85): error TS1005: ',' expected.
+src/hooks/usePWANotifications.ts(37,7): error TS1109: Expression expected.
+src/hooks/usePWANotifications.ts(40,23): error TS1136: Property assignment expected.
+src/hooks/usePWANotifications.ts(41,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/usePWANotifications.ts(45,7): error TS1005: ',' expected.
+src/hooks/usePWANotifications.ts(49,5): error TS1109: Expression expected.
+src/hooks/usePWANotifications.ts(51,5): error TS1109: Expression expected.
+src/hooks/usePWANotifications.ts(52,4): error TS1128: Declaration or statement expected.
+src/hooks/usePWANotifications.ts(52,35): error TS1005: ';' expected.
+src/hooks/usePWANotifications.ts(56,3): error TS1109: Expression expected.
+src/hooks/usePWANotifications.ts(64,1): error TS1128: Declaration or statement expected.
+src/hooks/usePWAUpdates.ts(26,32): error TS1005: ',' expected.
+src/hooks/usePWAUpdates.ts(26,67): error TS1005: ',' expected.
+src/hooks/usePWAUpdates.ts(28,7): error TS1109: Expression expected.
+src/hooks/usePWAUpdates.ts(31,26): error TS1005: ',' expected.
+src/hooks/usePWAUpdates.ts(40,5): error TS1109: Expression expected.
+src/hooks/usePWAUpdates.ts(42,5): error TS1109: Expression expected.
+src/hooks/usePWAUpdates.ts(47,3): error TS1109: Expression expected.
+src/hooks/usePerformanceMonitor.ts(34,32): error TS1005: ',' expected.
+src/hooks/usePerformanceMonitor.ts(34,41): error TS1005: ',' expected.
+src/hooks/usePerformanceMonitor.ts(34,76): error TS1005: ',' expected.
+src/hooks/usePerformanceMonitor.ts(34,85): error TS1005: ',' expected.
+src/hooks/usePerformanceMonitor.ts(36,7): error TS1109: Expression expected.
+src/hooks/usePerformanceMonitor.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/usePerformanceMonitor.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/usePerformanceMonitor.ts(44,7): error TS1005: ',' expected.
+src/hooks/usePerformanceMonitor.ts(48,5): error TS1109: Expression expected.
+src/hooks/usePerformanceMonitor.ts(50,5): error TS1109: Expression expected.
+src/hooks/usePerformanceMonitor.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/usePerformanceMonitor.ts(51,35): error TS1005: ';' expected.
+src/hooks/usePerformanceMonitor.ts(55,3): error TS1109: Expression expected.
+src/hooks/usePerformanceMonitor.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/usePerformanceOptimization.ts(34,32): error TS1005: ',' expected.
+src/hooks/usePerformanceOptimization.ts(34,41): error TS1005: ',' expected.
+src/hooks/usePerformanceOptimization.ts(34,76): error TS1005: ',' expected.
+src/hooks/usePerformanceOptimization.ts(34,85): error TS1005: ',' expected.
+src/hooks/usePerformanceOptimization.ts(36,7): error TS1109: Expression expected.
+src/hooks/usePerformanceOptimization.ts(39,23): error TS1136: Property assignment expected.
+src/hooks/usePerformanceOptimization.ts(40,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/usePerformanceOptimization.ts(44,7): error TS1005: ',' expected.
+src/hooks/usePerformanceOptimization.ts(48,5): error TS1109: Expression expected.
+src/hooks/usePerformanceOptimization.ts(50,5): error TS1109: Expression expected.
+src/hooks/usePerformanceOptimization.ts(51,4): error TS1128: Declaration or statement expected.
+src/hooks/usePerformanceOptimization.ts(51,35): error TS1005: ';' expected.
+src/hooks/usePerformanceOptimization.ts(55,3): error TS1109: Expression expected.
+src/hooks/usePerformanceOptimization.ts(63,1): error TS1128: Declaration or statement expected.
+src/hooks/useRefactoredHooks.ts(26,32): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(26,67): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(28,7): error TS1109: Expression expected.
+src/hooks/useRefactoredHooks.ts(31,26): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(40,5): error TS1109: Expression expected.
+src/hooks/useRefactoredHooks.ts(42,5): error TS1109: Expression expected.
+src/hooks/useRefactoredHooks.ts(47,3): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(26,32): error TS1005: ',' expected.
+src/hooks/useServiceWorker.ts(26,67): error TS1005: ',' expected.
+src/hooks/useServiceWorker.ts(28,7): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(31,26): error TS1005: ',' expected.
+src/hooks/useServiceWorker.ts(40,5): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(42,5): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(47,3): error TS1109: Expression expected.
+src/hooks/useTrendingSearch.ts(35,32): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(35,41): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(35,76): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(35,85): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(37,7): error TS1109: Expression expected.
+src/hooks/useTrendingSearch.ts(40,23): error TS1136: Property assignment expected.
+src/hooks/useTrendingSearch.ts(41,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useTrendingSearch.ts(45,7): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(49,5): error TS1109: Expression expected.
+src/hooks/useTrendingSearch.ts(51,5): error TS1109: Expression expected.
+src/hooks/useTrendingSearch.ts(52,4): error TS1128: Declaration or statement expected.
+src/hooks/useTrendingSearch.ts(52,35): error TS1005: ';' expected.
+src/hooks/useTrendingSearch.ts(56,3): error TS1109: Expression expected.
+src/hooks/useTrendingSearch.ts(64,1): error TS1128: Declaration or statement expected.
+src/hooks/useVideoCache.ts(35,32): error TS1005: ',' expected.
+src/hooks/useVideoCache.ts(35,41): error TS1005: ',' expected.
+src/hooks/useVideoCache.ts(35,76): error TS1005: ',' expected.
+src/hooks/useVideoCache.ts(35,85): error TS1005: ',' expected.
+src/hooks/useVideoCache.ts(37,7): error TS1109: Expression expected.
+src/hooks/useVideoCache.ts(40,23): error TS1136: Property assignment expected.
+src/hooks/useVideoCache.ts(41,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useVideoCache.ts(45,7): error TS1005: ',' expected.
+src/hooks/useVideoCache.ts(49,5): error TS1109: Expression expected.
+src/hooks/useVideoCache.ts(51,5): error TS1109: Expression expected.
+src/hooks/useVideoCache.ts(52,4): error TS1128: Declaration or statement expected.
+src/hooks/useVideoCache.ts(52,35): error TS1005: ';' expected.
+src/hooks/useVideoCache.ts(56,3): error TS1109: Expression expected.
+src/hooks/useVideoCache.ts(64,1): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(26,32): error TS1005: ',' expected.
+src/hooks/useVideoPlayer.ts(26,67): error TS1005: ',' expected.
+src/hooks/useVideoPlayer.ts(28,7): error TS1109: Expression expected.
+src/hooks/useVideoPlayer.ts(31,26): error TS1005: ',' expected.
+src/hooks/useVideoPlayer.ts(40,5): error TS1109: Expression expected.
+src/hooks/useVideoPlayer.ts(42,5): error TS1109: Expression expected.
+src/hooks/useVideoPlayer.ts(47,3): error TS1109: Expression expected.
+src/hooks/useVideosData.ts(35,32): error TS1005: ',' expected.
+src/hooks/useVideosData.ts(35,41): error TS1005: ',' expected.
+src/hooks/useVideosData.ts(35,76): error TS1005: ',' expected.
+src/hooks/useVideosData.ts(35,85): error TS1005: ',' expected.
+src/hooks/useVideosData.ts(37,7): error TS1109: Expression expected.
+src/hooks/useVideosData.ts(40,23): error TS1136: Property assignment expected.
+src/hooks/useVideosData.ts(41,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useVideosData.ts(45,7): error TS1005: ',' expected.
+src/hooks/useVideosData.ts(49,5): error TS1109: Expression expected.
+src/hooks/useVideosData.ts(51,5): error TS1109: Expression expected.
+src/hooks/useVideosData.ts(52,4): error TS1128: Declaration or statement expected.
+src/hooks/useVideosData.ts(52,35): error TS1005: ';' expected.
+src/hooks/useVideosData.ts(56,3): error TS1109: Expression expected.
+src/hooks/useVideosData.ts(64,1): error TS1128: Declaration or statement expected.
+src/hooks/useWatchPage.ts(35,32): error TS1005: ',' expected.
+src/hooks/useWatchPage.ts(35,41): error TS1005: ',' expected.
+src/hooks/useWatchPage.ts(35,76): error TS1005: ',' expected.
+src/hooks/useWatchPage.ts(35,85): error TS1005: ',' expected.
+src/hooks/useWatchPage.ts(37,7): error TS1109: Expression expected.
+src/hooks/useWatchPage.ts(40,23): error TS1136: Property assignment expected.
+src/hooks/useWatchPage.ts(41,8): error TS1472: 'catch' or 'finally' expected.
+src/hooks/useWatchPage.ts(45,7): error TS1005: ',' expected.
+src/hooks/useWatchPage.ts(49,5): error TS1109: Expression expected.
+src/hooks/useWatchPage.ts(51,5): error TS1109: Expression expected.
+src/hooks/useWatchPage.ts(52,4): error TS1128: Declaration or statement expected.
+src/hooks/useWatchPage.ts(52,35): error TS1005: ';' expected.
+src/hooks/useWatchPage.ts(56,3): error TS1109: Expression expected.
+src/hooks/useWatchPage.ts(64,1): error TS1128: Declaration or statement expected.
+src/index.tsx(6,34): error TS1005: ')' expected.
+src/index.tsx(8,1): error TS1128: Declaration or statement expected.
+src/lib/youtube-utils.ts(8,47): error TS1442: Expected '=' for property initializer.
+src/lib/youtube-utils.ts(18,3): error TS1109: Expression expected.
+src/lib/youtube-utils.ts(23,5): error TS1109: Expression expected.
+src/lib/youtube-utils.ts(32,47): error TS1005: ',' expected.
+src/lib/youtube-utils.ts(34,5): error TS1109: Expression expected.
+src/pages/AdminPage.tsx(37,19): error TS1109: Expression expected.
+src/pages/AdminPage.tsx(39,15): error TS1005: '}' expected.
+src/pages/AdminPage.tsx(40,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/AdminPage.tsx(42,22): error TS1005: ')' expected.
+src/pages/AdminPage.tsx(44,9): error TS1005: '}' expected.
+src/pages/AdminPage.tsx(146,5): error TS1005: ')' expected.
+src/pages/AdminPage.tsx(147,3): error TS1109: Expression expected.
+src/pages/AdminPage.tsx(148,1): error TS1128: Declaration or statement expected.
+src/pages/AnalyticsPage.tsx(34,73): error TS1005: ',' expected.
+src/pages/AnalyticsPage.tsx(35,3): error TS1128: Declaration or statement expected.
+src/pages/AnalyticsPage.tsx(42,42): error TS1005: ',' expected.
+src/pages/AnalyticsPage.tsx(43,3): error TS1128: Declaration or statement expected.
+src/pages/AnalyticsPage.tsx(51,20): error TS1003: Identifier expected.
+src/pages/AnalyticsPage.tsx(51,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/AnalyticsPage.tsx(55,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/AnalyticsPage.tsx(60,15): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/AnalyticsPage.tsx(61,20): error TS1003: Identifier expected.
+src/pages/AnalyticsPage.tsx(61,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/AnalyticsPage.tsx(65,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/AnalyticsPage.tsx(70,15): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/AnalyticsPage.tsx(71,11): error TS1005: ')' expected.
+src/pages/AnalyticsPage.tsx(72,9): error TS1109: Expression expected.
+src/pages/AnalyticsPage.tsx(75,14): error TS1005: ';' expected.
+src/pages/AnalyticsPage.tsx(76,11): error TS2657: JSX expressions must have one parent element.
+src/pages/AnalyticsPage.tsx(96,9): error TS1128: Declaration or statement expected.
+src/pages/AnalyticsPage.tsx(99,14): error TS1005: ';' expected.
+src/pages/AnalyticsPage.tsx(100,11): error TS2657: JSX expressions must have one parent element.
+src/pages/AnalyticsPage.tsx(127,9): error TS1128: Declaration or statement expected.
+src/pages/AnalyticsPage.tsx(130,14): error TS1005: ';' expected.
+src/pages/AnalyticsPage.tsx(131,11): error TS2657: JSX expressions must have one parent element.
+src/pages/AnalyticsPage.tsx(160,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/AnalyticsPage.tsx(160,36): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/AnalyticsPage.tsx(166,13): error TS1005: '}' expected.
+src/pages/AnalyticsPage.tsx(167,11): error TS1005: ')' expected.
+src/pages/AnalyticsPage.tsx(191,7): error TS1128: Declaration or statement expected.
+src/pages/AnalyticsPage.tsx(192,5): error TS1109: Expression expected.
+src/pages/AnalyticsPage.tsx(193,3): error TS1109: Expression expected.
+src/pages/AnalyticsPage.tsx(194,1): error TS1128: Declaration or statement expected.
+src/pages/ChannelCustomizationPage.tsx(16,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(22,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(28,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(31,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/ChannelCustomizationPage.tsx(31,17): error TS1005: ')' expected.
+src/pages/ChannelCustomizationPage.tsx(32,9): error TS1109: Expression expected.
+src/pages/ChannelCustomizationPage.tsx(118,13): error TS2657: JSX expressions must have one parent element.
+src/pages/ChannelCustomizationPage.tsx(125,20): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/ChannelCustomizationPage.tsx(129,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(136,28): error TS1003: Identifier expected.
+src/pages/ChannelCustomizationPage.tsx(136,30): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(140,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(147,20): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/ChannelCustomizationPage.tsx(151,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(159,22): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/ChannelCustomizationPage.tsx(163,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(168,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelCustomizationPage.tsx(169,21): error TS17002: Expected corresponding JSX closing tag for 'input'.
+src/pages/ChannelCustomizationPage.tsx(182,12): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/ChannelCustomizationPage.tsx(184,14): error TS1005: ')' expected.
+src/pages/ChannelCustomizationPage.tsx(185,5): error TS1128: Declaration or statement expected.
+src/pages/ChannelCustomizationPage.tsx(186,3): error TS1109: Expression expected.
+src/pages/ChannelCustomizationPage.tsx(187,1): error TS1128: Declaration or statement expected.
+src/pages/ChannelPage.tsx(45,36): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(46,3): error TS1128: Declaration or statement expected.
+src/pages/ChannelPage.tsx(53,15): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(54,7): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(70,34): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(71,11): error TS1128: Declaration or statement expected.
+src/pages/ChannelPage.tsx(71,13): error TS1128: Declaration or statement expected.
+src/pages/ChannelPage.tsx(79,9): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(79,11): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(81,17): error TS1005: ':' expected.
+src/pages/ChannelPage.tsx(92,48): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(93,12): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(97,11): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(97,17): error TS1005: ':' expected.
+src/pages/ChannelPage.tsx(97,74): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(99,11): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(100,11): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(102,7): error TS1005: ',' expected.
+src/pages/ChannelPage.tsx(102,9): error TS1135: Argument expression expected.
+src/pages/ChannelPage.tsx(105,7): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(107,7): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(108,5): error TS1128: Declaration or statement expected.
+src/pages/ChannelPage.tsx(114,3): error TS1128: Declaration or statement expected.
+src/pages/ChannelPage.tsx(114,4): error TS1128: Declaration or statement expected.
+src/pages/ChannelPage.tsx(114,23): error TS1005: ';' expected.
+src/pages/ChannelPage.tsx(117,37): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(122,3): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(138,3): error TS1109: Expression expected.
+src/pages/ChannelPage.tsx(142,21): error TS1003: Identifier expected.
+src/pages/ChannelPage.tsx(142,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelPage.tsx(147,9): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelPage.tsx(154,27): error TS1003: Identifier expected.
+src/pages/ChannelPage.tsx(154,28): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelPage.tsx(161,11): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ChannelPage.tsx(165,1): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(50,54): error TS1005: ',' expected.
+src/pages/CommentModerationPage.tsx(50,79): error TS1005: ')' expected.
+src/pages/CommentModerationPage.tsx(51,9): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(52,5): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(52,6): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(53,3): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(59,3): error TS1109: Expression expected.
+src/pages/CommentModerationPage.tsx(62,22): error TS1130: 'case' or 'default' expected.
+src/pages/CommentModerationPage.tsx(63,7): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(63,22): error TS1005: ';' expected.
+src/pages/CommentModerationPage.tsx(64,7): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(64,22): error TS1005: ';' expected.
+src/pages/CommentModerationPage.tsx(65,7): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(65,21): error TS1005: ';' expected.
+src/pages/CommentModerationPage.tsx(66,7): error TS1005: 'export' expected.
+src/pages/CommentModerationPage.tsx(66,14): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(67,5): error TS1109: Expression expected.
+src/pages/CommentModerationPage.tsx(68,3): error TS1128: Declaration or statement expected.
+src/pages/CommentModerationPage.tsx(112,21): error TS1109: Expression expected.
+src/pages/CommentModerationPage.tsx(114,17): error TS1005: '}' expected.
+src/pages/CommentModerationPage.tsx(115,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommentModerationPage.tsx(120,66): error TS1005: ':' expected.
+src/pages/CommentModerationPage.tsx(121,45): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommentModerationPage.tsx(122,25): error TS1005: '}' expected.
+src/pages/CommentModerationPage.tsx(125,24): error TS1005: ')' expected.
+src/pages/CommentModerationPage.tsx(127,11): error TS1005: '}' expected.
+src/pages/CommentModerationPage.tsx(137,17): error TS2657: JSX expressions must have one parent element.
+src/pages/CommentModerationPage.tsx(161,21): error TS2657: JSX expressions must have one parent element.
+src/pages/CommentModerationPage.tsx(165,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommentModerationPage.tsx(171,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommentModerationPage.tsx(173,32): error TS1005: ')' expected.
+src/pages/CommentModerationPage.tsx(177,21): error TS1005: ')' expected.
+src/pages/CommentModerationPage.tsx(179,17): error TS1005: '}' expected.
+src/pages/CommentModerationPage.tsx(182,11): error TS1005: '}' expected.
+src/pages/CommentModerationPage.tsx(183,9): error TS1005: ')' expected.
+src/pages/CommentModerationPage.tsx(186,14): error TS1005: ';' expected.
+src/pages/CommentModerationPage.tsx(186,65): error TS1109: Expression expected.
+src/pages/CommentModerationPage.tsx(187,11): error TS2657: JSX expressions must have one parent element.
+src/pages/CommentModerationPage.tsx(209,16): error TS17008: JSX element 'textarea' has no corresponding closing tag.
+src/pages/CommentModerationPage.tsx(213,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommentModerationPage.tsx(219,14): error TS1005: ';' expected.
+src/pages/CommentModerationPage.tsx(220,7): error TS1109: Expression expected.
+src/pages/CommentModerationPage.tsx(221,5): error TS1109: Expression expected.
+src/pages/CommentModerationPage.tsx(222,3): error TS1109: Expression expected.
+src/pages/CommentModerationPage.tsx(223,1): error TS1128: Declaration or statement expected.
+src/pages/CommunityPage.tsx(16,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommunityPage.tsx(22,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommunityPage.tsx(28,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/CommunityPage.tsx(31,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/CommunityPage.tsx(31,17): error TS1005: ')' expected.
+src/pages/CommunityPage.tsx(32,9): error TS1109: Expression expected.
+src/pages/CommunityPage.tsx(34,9): error TS2657: JSX expressions must have one parent element.
+src/pages/CommunityPage.tsx(95,14): error TS1005: ';' expected.
+src/pages/CommunityPage.tsx(96,5): error TS1109: Expression expected.
+src/pages/CommunityPage.tsx(97,3): error TS1109: Expression expected.
+src/pages/CommunityPage.tsx(98,1): error TS1128: Declaration or statement expected.
+src/pages/ContentManagerPage.tsx(16,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ContentManagerPage.tsx(22,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ContentManagerPage.tsx(28,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ContentManagerPage.tsx(31,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/ContentManagerPage.tsx(31,17): error TS1005: ')' expected.
+src/pages/ContentManagerPage.tsx(32,9): error TS1109: Expression expected.
+src/pages/ContentManagerPage.tsx(34,9): error TS2657: JSX expressions must have one parent element.
+src/pages/ContentManagerPage.tsx(72,14): error TS1005: ';' expected.
+src/pages/ContentManagerPage.tsx(73,5): error TS1109: Expression expected.
+src/pages/ContentManagerPage.tsx(74,3): error TS1109: Expression expected.
+src/pages/ContentManagerPage.tsx(75,1): error TS1128: Declaration or statement expected.
+src/pages/DashboardPage.tsx(26,7): error TS1109: Expression expected.
+src/pages/DashboardPage.tsx(30,7): error TS1109: Expression expected.
+src/pages/HomePage.tsx(19,33): error TS1005: ',' expected.
+src/pages/HomePage.tsx(20,25): error TS1005: ',' expected.
+src/pages/HomePage.tsx(21,3): error TS1109: Expression expected.
+src/pages/HomePage.tsx(26,5): error TS1109: Expression expected.
+src/pages/HomePage.tsx(29,5): error TS1109: Expression expected.
+src/pages/HomePage.tsx(36,46): error TS1005: ',' expected.
+src/pages/HomePage.tsx(37,3): error TS1128: Declaration or statement expected.
+src/pages/HomePage.tsx(37,4): error TS1128: Declaration or statement expected.
+src/pages/HomePage.tsx(37,8): error TS1005: ';' expected.
+src/pages/HomePage.tsx(60,25): error TS1003: Identifier expected.
+src/pages/HomePage.tsx(60,26): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/HomePage.tsx(64,13): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/HomePage.tsx(79,41): error TS1005: ',' expected.
+src/pages/HomePage.tsx(79,56): error TS1003: Identifier expected.
+src/pages/HomePage.tsx(79,65): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/HomePage.tsx(79,107): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/HomePage.tsx(91,17): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/HomePage.tsx(99,17): error TS1005: '(' expected.
+src/pages/HomePage.tsx(99,20): error TS1005: ')' expected.
+src/pages/HomePage.tsx(99,27): error TS1005: ',' expected.
+src/pages/HomePage.tsx(100,17): error TS1005: ',' expected.
+src/pages/HomePage.tsx(101,17): error TS1005: ',' expected.
+src/pages/HomePage.tsx(103,13): error TS1005: ',' expected.
+src/pages/HomePage.tsx(104,11): error TS1005: '}' expected.
+src/pages/HomePage.tsx(123,1): error TS1128: Declaration or statement expected.
+src/pages/LiveStreamingHubPage.tsx(27,7): error TS1109: Expression expected.
+src/pages/LiveStreamingHubPage.tsx(31,7): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(31,7): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(34,5): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(36,5): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(49,7): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(52,5): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(54,5): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(68,16): error TS1003: Identifier expected.
+src/pages/LoginPage.tsx(68,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(71,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(73,13): error TS17002: Expected corresponding JSX closing tag for 'p'.
+src/pages/LoginPage.tsx(73,20): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/LoginPage.tsx(74,11): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/LoginPage.tsx(74,13): error TS1005: ')' expected.
+src/pages/LoginPage.tsx(75,7): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(79,12): error TS17008: JSX element 'form' has no corresponding closing tag.
+src/pages/LoginPage.tsx(93,23): error TS1003: Identifier expected.
+src/pages/LoginPage.tsx(93,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(103,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(112,23): error TS1003: Identifier expected.
+src/pages/LoginPage.tsx(112,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(122,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(128,18): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/LoginPage.tsx(133,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(147,22): error TS1003: Identifier expected.
+src/pages/LoginPage.tsx(147,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(151,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(153,17): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/LoginPage.tsx(155,11): error TS1128: Declaration or statement expected.
+src/pages/LoginPage.tsx(155,18): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(157,11): error TS2657: JSX expressions must have one parent element.
+src/pages/LoginPage.tsx(169,20): error TS1003: Identifier expected.
+src/pages/LoginPage.tsx(169,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(174,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/LoginPage.tsx(176,15): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/LoginPage.tsx(176,22): error TS1005: ';' expected.
+src/pages/LoginPage.tsx(177,11): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(179,11): error TS2657: JSX expressions must have one parent element.
+src/pages/LoginPage.tsx(191,14): error TS1005: ';' expected.
+src/pages/LoginPage.tsx(192,7): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(193,5): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(194,3): error TS1109: Expression expected.
+src/pages/LoginPage.tsx(195,1): error TS1128: Declaration or statement expected.
+src/pages/PlaylistDetailPage.tsx(42,13): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(43,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(52,7): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(55,7): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(59,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(61,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(67,3): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(74,7): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(79,17): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(80,9): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(86,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(89,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(95,3): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(99,13): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(100,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(105,13): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(106,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(113,9): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(132,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(138,13): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(139,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(154,5): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(159,3): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(175,3): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(184,11): error TS1005: '(' expected.
+src/pages/PlaylistDetailPage.tsx(184,17): error TS1005: ')' expected.
+src/pages/PlaylistDetailPage.tsx(189,11): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(192,12): error TS1005: '}' expected.
+src/pages/PlaylistDetailPage.tsx(192,36): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(195,20): error TS1139: Type parameter declaration expected.
+src/pages/PlaylistDetailPage.tsx(195,21): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(196,18): error TS1005: ':' expected.
+src/pages/PlaylistDetailPage.tsx(199,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(205,16): error TS1005: '}' expected.
+src/pages/PlaylistDetailPage.tsx(205,37): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(217,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(221,9): error TS1005: ')' expected.
+src/pages/PlaylistDetailPage.tsx(223,9): error TS2657: JSX expressions must have one parent element.
+src/pages/PlaylistDetailPage.tsx(227,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(234,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(237,20): error TS1005: ';' expected.
+src/pages/PlaylistDetailPage.tsx(238,9): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(239,7): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(241,14): error TS1005: ',' expected.
+src/pages/PlaylistDetailPage.tsx(265,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(273,20): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(278,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistDetailPage.tsx(281,32): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/PlaylistDetailPage.tsx(282,21): error TS1005: ')' expected.
+src/pages/PlaylistDetailPage.tsx(283,21): error TS17002: Expected corresponding JSX closing tag for 'li'.
+src/pages/PlaylistDetailPage.tsx(283,25): error TS1005: ')' expected.
+src/pages/PlaylistDetailPage.tsx(284,18): error TS1005: ':' expected.
+src/pages/PlaylistDetailPage.tsx(285,8): error TS1005: ';' expected.
+src/pages/PlaylistDetailPage.tsx(285,14): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(286,13): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(287,11): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(287,12): error TS1128: Declaration or statement expected.
+src/pages/PlaylistDetailPage.tsx(287,13): error TS1128: Declaration or statement expected.
+src/pages/PlaylistDetailPage.tsx(288,10): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/PlaylistDetailPage.tsx(288,13): error TS1005: ';' expected.
+src/pages/PlaylistDetailPage.tsx(289,7): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(289,9): error TS1128: Declaration or statement expected.
+src/pages/PlaylistDetailPage.tsx(295,8): error TS1128: Declaration or statement expected.
+src/pages/PlaylistDetailPage.tsx(296,14): error TS1005: ';' expected.
+src/pages/PlaylistDetailPage.tsx(297,3): error TS1109: Expression expected.
+src/pages/PlaylistDetailPage.tsx(298,1): error TS1128: Declaration or statement expected.
+src/pages/PlaylistsPage.tsx(22,7): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(23,63): error TS1005: ',' expected.
+src/pages/PlaylistsPage.tsx(25,7): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(27,7): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(36,13): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(37,5): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(53,24): error TS1005: ',' expected.
+src/pages/PlaylistsPage.tsx(53,66): error TS1005: ',' expected.
+src/pages/PlaylistsPage.tsx(57,56): error TS1005: ',' expected.
+src/pages/PlaylistsPage.tsx(59,5): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(61,5): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(68,3): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(72,32): error TS1005: ',' expected.
+src/pages/PlaylistsPage.tsx(72,47): error TS1003: Identifier expected.
+src/pages/PlaylistsPage.tsx(72,56): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(72,98): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(80,9): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/PlaylistsPage.tsx(81,11): error TS1005: ')' expected.
+src/pages/PlaylistsPage.tsx(82,3): error TS1128: Declaration or statement expected.
+src/pages/PlaylistsPage.tsx(95,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(101,7): error TS1005: ')' expected.
+src/pages/PlaylistsPage.tsx(101,19): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(102,9): error TS1005: ':' expected.
+src/pages/PlaylistsPage.tsx(103,7): error TS1128: Declaration or statement expected.
+src/pages/PlaylistsPage.tsx(103,9): error TS1128: Declaration or statement expected.
+src/pages/PlaylistsPage.tsx(108,21): error TS1003: Identifier expected.
+src/pages/PlaylistsPage.tsx(108,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(112,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(154,18): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/PlaylistsPage.tsx(161,19): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(166,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(180,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(187,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/PlaylistsPage.tsx(191,15): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/PlaylistsPage.tsx(191,20): error TS1005: ')' expected.
+src/pages/PlaylistsPage.tsx(192,11): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(193,9): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(194,7): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(195,14): error TS1005: ';' expected.
+src/pages/PlaylistsPage.tsx(196,3): error TS1109: Expression expected.
+src/pages/PlaylistsPage.tsx(197,1): error TS1128: Declaration or statement expected.
+src/pages/RegisterPage.tsx(35,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(39,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(43,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(47,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(51,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(55,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(59,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(68,13): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(69,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(78,38): error TS1136: Property assignment expected.
+src/pages/RegisterPage.tsx(79,8): error TS1472: 'catch' or 'finally' expected.
+src/pages/RegisterPage.tsx(85,7): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(86,7): error TS1005: ',' expected.
+src/pages/RegisterPage.tsx(88,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(90,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(104,16): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(104,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(107,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(109,13): error TS17002: Expected corresponding JSX closing tag for 'p'.
+src/pages/RegisterPage.tsx(109,20): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/RegisterPage.tsx(110,11): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/RegisterPage.tsx(110,13): error TS1005: ')' expected.
+src/pages/RegisterPage.tsx(111,7): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(115,12): error TS17008: JSX element 'form' has no corresponding closing tag.
+src/pages/RegisterPage.tsx(130,25): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(130,26): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(140,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(149,25): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(149,26): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(159,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(169,23): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(169,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(179,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(188,23): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(188,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(198,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(210,23): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(210,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(220,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(225,16): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/RegisterPage.tsx(232,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(246,22): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(246,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(250,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(252,17): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/RegisterPage.tsx(254,11): error TS1128: Declaration or statement expected.
+src/pages/RegisterPage.tsx(254,18): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(259,20): error TS1003: Identifier expected.
+src/pages/RegisterPage.tsx(259,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(262,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/RegisterPage.tsx(264,17): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/RegisterPage.tsx(265,13): error TS1128: Declaration or statement expected.
+src/pages/RegisterPage.tsx(266,11): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(267,9): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(268,7): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(269,5): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(270,3): error TS1109: Expression expected.
+src/pages/RegisterPage.tsx(271,1): error TS1128: Declaration or statement expected.
+src/pages/SearchResultsPage.tsx(26,9): error TS1005: ')' expected.
+src/pages/SearchResultsPage.tsx(27,1): error TS1128: Declaration or statement expected.
+src/pages/SearchResultsPage.tsx(27,2): error TS1128: Declaration or statement expected.
+src/pages/SearchResultsPage.tsx(55,31): error TS1136: Property assignment expected.
+src/pages/SearchResultsPage.tsx(56,8): error TS1128: Declaration or statement expected.
+src/pages/SearchResultsPage.tsx(67,21): error TS1005: ',' expected.
+src/pages/SearchResultsPage.tsx(72,31): error TS1136: Property assignment expected.
+src/pages/SearchResultsPage.tsx(80,3): error TS1128: Declaration or statement expected.
+src/pages/SearchResultsPage.tsx(80,4): error TS1128: Declaration or statement expected.
+src/pages/SearchResultsPage.tsx(80,8): error TS1005: ';' expected.
+src/pages/SearchResultsPage.tsx(83,51): error TS1109: Expression expected.
+src/pages/SearchResultsPage.tsx(92,3): error TS1109: Expression expected.
+src/pages/SearchResultsPage.tsx(96,32): error TS1003: Identifier expected.
+src/pages/SearchResultsPage.tsx(96,33): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SearchResultsPage.tsx(109,11): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SearchResultsPage.tsx(113,1): error TS1128: Declaration or statement expected.
+src/pages/SettingsPage.tsx(40,18): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/SettingsPage.tsx(45,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SettingsPage.tsx(50,24): error TS1003: Identifier expected.
+src/pages/SettingsPage.tsx(50,25): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SettingsPage.tsx(54,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SettingsPage.tsx(59,19): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SettingsPage.tsx(69,16): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/SettingsPage.tsx(74,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SettingsPage.tsx(84,18): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/SettingsPage.tsx(89,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SettingsPage.tsx(94,24): error TS1003: Identifier expected.
+src/pages/SettingsPage.tsx(94,25): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SettingsPage.tsx(98,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SettingsPage.tsx(103,19): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SettingsPage.tsx(106,11): error TS1005: ')' expected.
+src/pages/SettingsPage.tsx(107,9): error TS1109: Expression expected.
+src/pages/SettingsPage.tsx(108,7): error TS1109: Expression expected.
+src/pages/SettingsPage.tsx(109,5): error TS1109: Expression expected.
+src/pages/SettingsPage.tsx(110,3): error TS1109: Expression expected.
+src/pages/SettingsPage.tsx(111,1): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(17,48): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(22,33): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(27,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(39,94): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(40,109): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(48,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(49,60): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(53,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(61,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(62,65): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(66,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(72,75): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(81,60): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(91,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(95,7): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(99,85): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(106,98): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(118,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(127,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(130,57): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(136,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(147,7): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(157,7): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(164,47): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(165,31): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(166,56): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(167,6): error TS1005: ')' expected.
+src/pages/ShortsPage.tsx(167,8): error TS1434: Unexpected keyword or identifier.
+src/pages/ShortsPage.tsx(167,15): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(169,3): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(169,4): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(169,22): error TS1005: ';' expected.
+src/pages/ShortsPage.tsx(173,13): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(174,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(180,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(181,55): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(182,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(192,51): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(201,44): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(202,10): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(215,55): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(223,48): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(224,14): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(241,55): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(249,48): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(250,14): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(260,23): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(263,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(267,24): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(267,44): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(271,33): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(273,3): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(277,13): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(278,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(292,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(294,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(306,27): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(310,7): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(314,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(319,12): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(319,49): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(322,50): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(323,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(339,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(347,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(350,63): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(356,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(366,13): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(367,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(381,7): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(384,7): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(394,13): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(395,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(398,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(403,13): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(404,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(416,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(419,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(430,66): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(431,82): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(432,3): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(438,74): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(439,70): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(448,83): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(449,79): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(451,69): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(452,65): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(453,7): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(464,66): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(470,49): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(471,14): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(493,13): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(494,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(499,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(513,63): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(531,5): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(536,7): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(542,3): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(560,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(567,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(573,11): error TS1005: ')' expected.
+src/pages/ShortsPage.tsx(577,18): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/ShortsPage.tsx(584,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(588,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(592,13): error TS1005: ')' expected.
+src/pages/ShortsPage.tsx(593,11): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(597,15): error TS1005: '(' expected.
+src/pages/ShortsPage.tsx(597,25): error TS1005: ')' expected.
+src/pages/ShortsPage.tsx(600,24): error TS1136: Property assignment expected.
+src/pages/ShortsPage.tsx(600,25): error TS1135: Argument expression expected.
+src/pages/ShortsPage.tsx(600,36): error TS1005: ';' expected.
+src/pages/ShortsPage.tsx(601,13): error TS1161: Unterminated regular expression literal.
+src/pages/ShortsPage.tsx(602,11): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(603,14): error TS1005: ';' expected.
+src/pages/ShortsPage.tsx(605,26): error TS1003: Identifier expected.
+src/pages/ShortsPage.tsx(610,11): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(611,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(612,16): error TS17002: Expected corresponding JSX closing tag for 'EmptyShortsState'.
+src/pages/ShortsPage.tsx(613,5): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(614,3): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(629,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(638,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(644,9): error TS1005: ')' expected.
+src/pages/ShortsPage.tsx(648,16): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/ShortsPage.tsx(655,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(659,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(663,11): error TS1005: ')' expected.
+src/pages/ShortsPage.tsx(664,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(668,13): error TS1005: '(' expected.
+src/pages/ShortsPage.tsx(668,23): error TS1005: ')' expected.
+src/pages/ShortsPage.tsx(671,22): error TS1136: Property assignment expected.
+src/pages/ShortsPage.tsx(671,23): error TS1135: Argument expression expected.
+src/pages/ShortsPage.tsx(671,34): error TS1005: ';' expected.
+src/pages/ShortsPage.tsx(672,11): error TS1161: Unterminated regular expression literal.
+src/pages/ShortsPage.tsx(673,9): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(673,10): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(674,14): error TS1005: ';' expected.
+src/pages/ShortsPage.tsx(677,12): error TS1005: ';' expected.
+src/pages/ShortsPage.tsx(677,101): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(678,26): error TS1003: Identifier expected.
+src/pages/ShortsPage.tsx(683,10): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(684,16): error TS17002: Expected corresponding JSX closing tag for 'ShortsNavigation'.
+src/pages/ShortsPage.tsx(692,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(693,56): error TS1005: ',' expected.
+src/pages/ShortsPage.tsx(693,65): error TS1005: '=>' expected.
+src/pages/ShortsPage.tsx(693,67): error TS1005: '}' expected.
+src/pages/ShortsPage.tsx(693,68): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(695,30): error TS1003: Identifier expected.
+src/pages/ShortsPage.tsx(695,31): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(706,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(708,11): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/ShortsPage.tsx(712,20): error TS1003: Identifier expected.
+src/pages/ShortsPage.tsx(717,9): error TS1109: Expression expected.
+src/pages/ShortsPage.tsx(718,46): error TS1005: '}' expected.
+src/pages/ShortsPage.tsx(718,48): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/ShortsPage.tsx(719,52): error TS1005: '}' expected.
+src/pages/ShortsPage.tsx(719,67): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/ShortsPage.tsx(721,8): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/ShortsPage.tsx(722,7): error TS17002: Expected corresponding JSX closing tag for 'CommentModal'.
+src/pages/ShortsPage.tsx(723,3): error TS1128: Declaration or statement expected.
+src/pages/ShortsPage.tsx(724,1): error TS1128: Declaration or statement expected.
+src/pages/StudioDashboardPage.tsx(29,18): error TS1003: Identifier expected.
+src/pages/StudioDashboardPage.tsx(29,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/StudioDashboardPage.tsx(33,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/StudioDashboardPage.tsx(38,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/StudioDashboardPage.tsx(41,9): error TS1005: ')' expected.
+src/pages/StudioDashboardPage.tsx(108,7): error TS1128: Declaration or statement expected.
+src/pages/StudioDashboardPage.tsx(109,5): error TS1109: Expression expected.
+src/pages/StudioDashboardPage.tsx(110,3): error TS1109: Expression expected.
+src/pages/StudioDashboardPage.tsx(111,1): error TS1128: Declaration or statement expected.
+src/pages/StudioPage.tsx(37,19): error TS1109: Expression expected.
+src/pages/StudioPage.tsx(39,15): error TS1005: '}' expected.
+src/pages/StudioPage.tsx(40,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/StudioPage.tsx(42,22): error TS1005: ')' expected.
+src/pages/StudioPage.tsx(44,9): error TS1005: '}' expected.
+src/pages/StudioPage.tsx(178,5): error TS1005: ')' expected.
+src/pages/StudioPage.tsx(179,3): error TS1109: Expression expected.
+src/pages/StudioPage.tsx(180,1): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(33,25): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(34,3): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(39,5): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(53,9): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(59,9): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(63,59): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(77,42): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(78,63): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(79,63): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(81,9): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(84,42): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(88,42): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(105,5): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(124,3): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(134,5): error TS1005: ')' expected.
+src/pages/SubscriptionsPage.tsx(134,7): error TS1434: Unexpected keyword or identifier.
+src/pages/SubscriptionsPage.tsx(134,14): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(135,3): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(138,5): error TS2657: JSX expressions must have one parent element.
+src/pages/SubscriptionsPage.tsx(149,18): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(149,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(154,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(157,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SubscriptionsPage.tsx(160,20): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(160,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(165,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(167,15): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SubscriptionsPage.tsx(168,20): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(173,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(175,22): error TS1005: ')' expected.
+src/pages/SubscriptionsPage.tsx(176,11): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(177,9): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(178,7): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(181,26): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(182,22): error TS1005: ';' expected.
+src/pages/SubscriptionsPage.tsx(183,48): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(184,39): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(185,42): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(187,8): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(194,78): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(194,87): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(204,20): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(204,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(207,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(209,17): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SubscriptionsPage.tsx(209,22): error TS1005: ')' expected.
+src/pages/SubscriptionsPage.tsx(210,13): error TS1005: ')' expected.
+src/pages/SubscriptionsPage.tsx(211,11): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(211,13): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(211,16): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(211,18): error TS2657: JSX expressions must have one parent element.
+src/pages/SubscriptionsPage.tsx(212,56): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(212,65): error TS1005: '=>' expected.
+src/pages/SubscriptionsPage.tsx(212,67): error TS1005: '}' expected.
+src/pages/SubscriptionsPage.tsx(212,68): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(216,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(218,25): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(218,28): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(222,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(225,26): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(225,27): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(228,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(230,23): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SubscriptionsPage.tsx(240,27): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(242,23): error TS1005: '}' expected.
+src/pages/SubscriptionsPage.tsx(244,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(251,28): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(255,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(258,19): error TS1005: ')' expected.
+src/pages/SubscriptionsPage.tsx(259,17): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(260,15): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(260,16): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(261,14): error TS1005: ';' expected.
+src/pages/SubscriptionsPage.tsx(262,11): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(262,12): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(263,14): error TS1005: ';' expected.
+src/pages/SubscriptionsPage.tsx(264,7): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(264,8): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(267,10): error TS17008: JSX element 'Tabs' has no corresponding closing tag.
+src/pages/SubscriptionsPage.tsx(267,62): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(280,22): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(280,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(284,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(288,17): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SubscriptionsPage.tsx(290,11): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(304,21): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(306,19): error TS1005: '}' expected.
+src/pages/SubscriptionsPage.tsx(307,17): error TS1005: '}' expected.
+src/pages/SubscriptionsPage.tsx(309,24): error TS1003: Identifier expected.
+src/pages/SubscriptionsPage.tsx(309,25): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(312,20): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(313,42): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SubscriptionsPage.tsx(313,47): error TS1005: ')' expected.
+src/pages/SubscriptionsPage.tsx(313,49): error TS17002: Expected corresponding JSX closing tag for 'TabsContent'.
+src/pages/SubscriptionsPage.tsx(314,17): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(314,19): error TS1434: Unexpected keyword or identifier.
+src/pages/SubscriptionsPage.tsx(314,26): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(314,27): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(315,15): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(315,21): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(316,13): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(316,15): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(320,21): error TS1005: '(' expected.
+src/pages/SubscriptionsPage.tsx(320,24): error TS1005: ')' expected.
+src/pages/SubscriptionsPage.tsx(320,26): error TS1136: Property assignment expected.
+src/pages/SubscriptionsPage.tsx(320,52): error TS1005: ',' expected.
+src/pages/SubscriptionsPage.tsx(324,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/SubscriptionsPage.tsx(326,15): error TS1005: '}' expected.
+src/pages/SubscriptionsPage.tsx(327,14): error TS1128: Declaration or statement expected.
+src/pages/SubscriptionsPage.tsx(328,10): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/SubscriptionsPage.tsx(328,22): error TS1005: ';' expected.
+src/pages/SubscriptionsPage.tsx(329,9): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(330,7): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(331,5): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(332,3): error TS1109: Expression expected.
+src/pages/SubscriptionsPage.tsx(333,1): error TS1128: Declaration or statement expected.
+src/pages/TrendingPage.tsx(17,59): error TS1005: ',' expected.
+src/pages/TrendingPage.tsx(18,3): error TS1128: Declaration or statement expected.
+src/pages/TrendingPage.tsx(21,16): error TS1003: Identifier expected.
+src/pages/TrendingPage.tsx(31,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/TrendingPage.tsx(32,24): error TS1005: ',' expected.
+src/pages/TrendingPage.tsx(32,33): error TS1005: '=>' expected.
+src/pages/TrendingPage.tsx(32,36): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/TrendingPage.tsx(32,66): error TS1011: An element access expression should take an argument.
+src/pages/TrendingPage.tsx(32,71): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/TrendingPage.tsx(33,4): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/TrendingPage.tsx(33,21): error TS1005: ')' expected.
+src/pages/TrendingPage.tsx(34,3): error TS1109: Expression expected.
+src/pages/TrendingPage.tsx(35,1): error TS1128: Declaration or statement expected.
+src/pages/UploadPage.tsx(33,7): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(40,29): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(48,7): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(58,46): error TS1005: ',' expected.
+src/pages/UploadPage.tsx(67,57): error TS1005: ',' expected.
+src/pages/UploadPage.tsx(84,9): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(106,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(117,18): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/UploadPage.tsx(123,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(138,20): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(143,17): error TS1005: ')' expected.
+src/pages/UploadPage.tsx(153,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(153,36): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(157,15): error TS1005: '}' expected.
+src/pages/UploadPage.tsx(158,14): error TS1005: '}' expected.
+src/pages/UploadPage.tsx(159,11): error TS1005: '}' expected.
+src/pages/UploadPage.tsx(169,20): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/UploadPage.tsx(176,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(182,28): error TS1003: Identifier expected.
+src/pages/UploadPage.tsx(182,29): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(188,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(195,28): error TS1003: Identifier expected.
+src/pages/UploadPage.tsx(195,29): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(199,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(203,23): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/UploadPage.tsx(208,28): error TS1003: Identifier expected.
+src/pages/UploadPage.tsx(208,29): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(212,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(220,23): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/UploadPage.tsx(221,19): error TS1005: ')' expected.
+src/pages/UploadPage.tsx(227,22): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/UploadPage.tsx(234,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(238,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(243,53): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(244,26): error TS1005: '}' expected.
+src/pages/UploadPage.tsx(244,58): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(249,26): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(254,28): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(256,38): error TS17002: Expected corresponding JSX closing tag for 'span'.
+src/pages/UploadPage.tsx(257,25): error TS1005: ')' expected.
+src/pages/UploadPage.tsx(257,27): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/UploadPage.tsx(258,24): error TS1005: ';' expected.
+src/pages/UploadPage.tsx(259,14): error TS1005: ';' expected.
+src/pages/UploadPage.tsx(260,19): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(260,20): error TS1128: Declaration or statement expected.
+src/pages/UploadPage.tsx(261,14): error TS1005: ';' expected.
+src/pages/UploadPage.tsx(262,15): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(263,13): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(264,11): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(264,12): error TS1128: Declaration or statement expected.
+src/pages/UploadPage.tsx(267,13): error TS2657: JSX expressions must have one parent element.
+src/pages/UploadPage.tsx(271,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(278,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UploadPage.tsx(281,13): error TS1005: ')' expected.
+src/pages/UploadPage.tsx(282,11): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(283,14): error TS1005: ';' expected.
+src/pages/UploadPage.tsx(284,7): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(285,5): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(286,3): error TS1109: Expression expected.
+src/pages/UploadPage.tsx(287,1): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(23,7): error TS1109: Expression expected.
+src/pages/UserPage.tsx(25,7): error TS1109: Expression expected.
+src/pages/UserPage.tsx(27,7): error TS1109: Expression expected.
+src/pages/UserPage.tsx(36,3): error TS1109: Expression expected.
+src/pages/UserPage.tsx(51,66): error TS1137: Expression or comma expected.
+src/pages/UserPage.tsx(52,3): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(62,17): error TS1005: ')' expected.
+src/pages/UserPage.tsx(63,9): error TS1129: Statement expected.
+src/pages/UserPage.tsx(64,7): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(64,23): error TS1005: ';' expected.
+src/pages/UserPage.tsx(71,7): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(71,23): error TS1005: ';' expected.
+src/pages/UserPage.tsx(78,7): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(78,19): error TS1005: ';' expected.
+src/pages/UserPage.tsx(99,7): error TS1005: 'export' expected.
+src/pages/UserPage.tsx(99,14): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(101,5): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(102,3): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(110,3): error TS1109: Expression expected.
+src/pages/UserPage.tsx(152,23): error TS1109: Expression expected.
+src/pages/UserPage.tsx(154,19): error TS1005: '}' expected.
+src/pages/UserPage.tsx(155,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UserPage.tsx(178,29): error TS1109: Expression expected.
+src/pages/UserPage.tsx(178,36): error TS1005: ':' expected.
+src/pages/UserPage.tsx(178,41): error TS1005: ':' expected.
+src/pages/UserPage.tsx(178,61): error TS1005: ',' expected.
+src/pages/UserPage.tsx(179,19): error TS1005: '}' expected.
+src/pages/UserPage.tsx(181,23): error TS1109: Expression expected.
+src/pages/UserPage.tsx(183,19): error TS1005: '}' expected.
+src/pages/UserPage.tsx(184,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/UserPage.tsx(187,26): error TS1005: ')' expected.
+src/pages/UserPage.tsx(190,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/UserPage.tsx(191,9): error TS1005: ')' expected.
+src/pages/UserPage.tsx(194,14): error TS1005: ';' expected.
+src/pages/UserPage.tsx(196,9): error TS1128: Declaration or statement expected.
+src/pages/UserPage.tsx(197,14): error TS1005: ';' expected.
+src/pages/UserPage.tsx(198,5): error TS1109: Expression expected.
+src/pages/UserPage.tsx(199,3): error TS1109: Expression expected.
+src/pages/UserPage.tsx(200,1): error TS1128: Declaration or statement expected.
+src/pages/VideoUploadPage.tsx(39,60): error TS1005: ',' expected.
+src/pages/VideoUploadPage.tsx(40,3): error TS1128: Declaration or statement expected.
+src/pages/VideoUploadPage.tsx(60,29): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(74,9): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(88,46): error TS1005: ',' expected.
+src/pages/VideoUploadPage.tsx(97,57): error TS1005: ',' expected.
+src/pages/VideoUploadPage.tsx(136,48): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(140,86): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(150,39): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(155,48): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(159,86): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(169,39): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(174,48): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(177,86): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(190,15): error TS2657: JSX expressions must have one parent element.
+src/pages/VideoUploadPage.tsx(194,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(206,18): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(215,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(216,17): error TS17002: Expected corresponding JSX closing tag for 'input'.
+src/pages/VideoUploadPage.tsx(227,20): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(232,17): error TS1005: ')' expected.
+src/pages/VideoUploadPage.tsx(242,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(242,36): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(245,18): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/VideoUploadPage.tsx(250,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(268,20): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/VideoUploadPage.tsx(275,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(282,28): error TS1003: Identifier expected.
+src/pages/VideoUploadPage.tsx(282,29): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(289,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(297,22): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/VideoUploadPage.tsx(304,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(308,22): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(317,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(322,26): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(324,36): error TS17002: Expected corresponding JSX closing tag for 'span'.
+src/pages/VideoUploadPage.tsx(325,23): error TS1005: ')' expected.
+src/pages/VideoUploadPage.tsx(325,25): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/VideoUploadPage.tsx(327,19): error TS1005: '}' expected.
+src/pages/VideoUploadPage.tsx(329,15): error TS1005: ')' expected.
+src/pages/VideoUploadPage.tsx(342,26): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(345,23): error TS1005: ')' expected.
+src/pages/VideoUploadPage.tsx(352,26): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(358,23): error TS1005: '}' expected.
+src/pages/VideoUploadPage.tsx(363,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(367,17): error TS1005: ')' expected.
+src/pages/VideoUploadPage.tsx(368,17): error TS2657: JSX expressions must have one parent element.
+src/pages/VideoUploadPage.tsx(370,26): error TS1003: Identifier expected.
+src/pages/VideoUploadPage.tsx(370,27): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(374,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(378,21): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/VideoUploadPage.tsx(379,14): error TS1005: ';' expected.
+src/pages/VideoUploadPage.tsx(383,19): error TS2657: JSX expressions must have one parent element.
+src/pages/VideoUploadPage.tsx(384,26): error TS1003: Identifier expected.
+src/pages/VideoUploadPage.tsx(388,19): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(393,14): error TS1005: ';' expected.
+src/pages/VideoUploadPage.tsx(396,22): error TS1005: ';' expected.
+src/pages/VideoUploadPage.tsx(396,44): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(397,19): error TS2657: JSX expressions must have one parent element.
+src/pages/VideoUploadPage.tsx(398,22): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/VideoUploadPage.tsx(403,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(408,22): error TS17008: JSX element 'input' has no corresponding closing tag.
+src/pages/VideoUploadPage.tsx(413,23): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(416,14): error TS1005: ';' expected.
+src/pages/VideoUploadPage.tsx(417,15): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(418,13): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(420,13): error TS2657: JSX expressions must have one parent element.
+src/pages/VideoUploadPage.tsx(424,16): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(431,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/VideoUploadPage.tsx(434,14): error TS1005: ';' expected.
+src/pages/VideoUploadPage.tsx(435,11): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(436,9): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(436,10): error TS1128: Declaration or statement expected.
+src/pages/VideoUploadPage.tsx(447,14): error TS1005: ';' expected.
+src/pages/VideoUploadPage.tsx(448,5): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(449,3): error TS1109: Expression expected.
+src/pages/VideoUploadPage.tsx(450,1): error TS1128: Declaration or statement expected.
+src/pages/WatchPage.tsx(82,9): error TS1005: ')' expected.
+src/pages/WatchPage.tsx(83,1): error TS1128: Declaration or statement expected.
+src/pages/WatchPage.tsx(83,2): error TS1128: Declaration or statement expected.
+src/pages/WatchPage.tsx(144,3): error TS1109: Expression expected.
+src/pages/WatchPage.tsx(159,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(163,7): error TS1005: ')' expected.
+src/pages/WatchPage.tsx(164,5): error TS1109: Expression expected.
+src/pages/WatchPage.tsx(165,3): error TS1128: Declaration or statement expected.
+src/pages/WatchPage.tsx(184,27): error TS1005: '(' expected.
+src/pages/WatchPage.tsx(184,32): error TS1005: ')' expected.
+src/pages/WatchPage.tsx(186,25): error TS1161: Unterminated regular expression literal.
+src/pages/WatchPage.tsx(187,23): error TS1129: Statement expected.
+src/pages/WatchPage.tsx(187,24): error TS1005: ':' expected.
+src/pages/WatchPage.tsx(190,46): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(190,47): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(196,27): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(199,17): error TS1005: '}' expected.
+src/pages/WatchPage.tsx(199,21): error TS1005: '}' expected.
+src/pages/WatchPage.tsx(200,39): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(200,40): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(204,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(206,15): error TS1005: '}' expected.
+src/pages/WatchPage.tsx(223,28): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(223,29): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(232,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(236,30): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(236,31): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(248,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(251,27): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(251,28): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(255,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(258,29): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(258,30): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(279,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(286,36): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(286,37): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(291,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(298,37): error TS1003: Identifier expected.
+src/pages/WatchPage.tsx(298,38): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(305,9): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/WatchPage.tsx(308,1): error TS1128: Declaration or statement expected.
+src/pages/YouTubeDemo.tsx(27,7): error TS1109: Expression expected.
+src/pages/YouTubeDemo.tsx(31,7): error TS1109: Expression expected.
+src/pages/YourDataPage.tsx(76,19): error TS1109: Expression expected.
+src/pages/YourDataPage.tsx(78,15): error TS1005: '}' expected.
+src/pages/YourDataPage.tsx(79,14): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/pages/YourDataPage.tsx(81,22): error TS1005: ')' expected.
+src/pages/YourDataPage.tsx(83,9): error TS1005: '}' expected.
+src/pages/YourDataPage.tsx(267,5): error TS1005: ')' expected.
+src/pages/YourDataPage.tsx(268,3): error TS1109: Expression expected.
+src/pages/YourDataPage.tsx(269,1): error TS1128: Declaration or statement expected.
+src/services/api/base.ts(9,29): error TS1442: Expected '=' for property initializer.
+src/services/api/base.ts(15,16): error TS1005: ',' expected.
+src/services/api/base.ts(21,3): error TS1109: Expression expected.
+src/services/api/videos.ts(9,31): error TS1442: Expected '=' for property initializer.
+src/services/api/videos.ts(15,16): error TS1005: ',' expected.
+src/services/api/videos.ts(21,3): error TS1109: Expression expected.
+src/services/api/youtubeService.ts(15,49): error TS1442: Expected '=' for property initializer.
+src/services/api/youtubeService.ts(24,63): error TS1005: ',' expected.
+src/services/api/youtubeService.ts(32,32): error TS1005: ',' expected.
+src/services/api/youtubeService.ts(33,8): error TS1005: ',' expected.
+src/services/api/youtubeService.ts(37,7): error TS1109: Expression expected.
+src/services/api/youtubeService.ts(47,44): error TS1005: ',' expected.
+src/services/api/youtubeService.ts(49,5): error TS1109: Expression expected.
+src/services/api/youtubeService.ts(53,55): error TS1005: ',' expected.
+src/services/api/youtubeService.ts(58,48): error TS1005: ',' expected.
+src/services/livestreamAPI.ts(22,26): error TS1442: Expected '=' for property initializer.
+src/services/livestreamAPI.ts(23,27): error TS1442: Expected '=' for property initializer.
+src/services/livestreamAPI.ts(28,3): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(34,7): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(42,5): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(49,7): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(58,5): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(65,7): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(73,5): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(80,7): error TS1109: Expression expected.
+src/services/livestreamAPI.ts(87,5): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(35,67): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(55,5): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(56,82): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(61,43): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(62,5): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(68,50): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(69,5): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(78,7): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(87,7): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(92,5): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(99,31): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(100,5): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(103,45): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(107,7): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(110,7): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(112,42): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(113,52): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(123,7): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(124,50): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(125,7): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(137,62): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(137,115): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(138,5): error TS1109: Expression expected.
+src/services/metadataNormalizationService.ts(139,64): error TS1005: ',' expected.
+src/services/metadataNormalizationService.ts(140,5): error TS1109: Expression expected.
+src/utils/componentUtils.tsx(27,7): error TS1109: Expression expected.
+src/utils/componentUtils.tsx(31,7): error TS1109: Expression expected.
+src/utils/dateUtils.ts(2,65): error TS1005: '=>' expected.
+src/utils/dateUtils.ts(2,74): error TS1005: ';' expected.
+src/utils/dateUtils.ts(14,69): error TS1005: '=>' expected.
+src/utils/dateUtils.ts(14,78): error TS1005: ';' expected.
+src/utils/dateUtils.ts(26,73): error TS1005: '=>' expected.
+src/utils/dateUtils.ts(26,82): error TS1005: ';' expected.
+src/utils/dateUtils.ts(56,34): error TS1005: ',' expected.
+src/utils/dateUtils.ts(56,52): error TS1005: ';' expected.
+src/utils/dateUtils.ts(65,56): error TS1005: '=>' expected.
+src/utils/dateUtils.ts(65,65): error TS1005: ';' expected.
+src/utils/dateUtils.ts(73,60): error TS1005: ',' expected.
+src/utils/dateUtils.ts(73,122): error TS1005: ',' expected.
+src/utils/dateUtils.ts(75,71): error TS1005: ',' expected.
+src/utils/logger.ts(11,26): error TS1442: Expected '=' for property initializer.
+src/utils/logger.ts(12,33): error TS1442: Expected '=' for property initializer.
+src/utils/logger.ts(17,3): error TS1109: Expression expected.
+src/utils/logger.ts(21,3): error TS1109: Expression expected.
+src/utils/logger.ts(26,20): error TS1005: ',' expected.
+src/utils/logger.ts(30,3): error TS1109: Expression expected.
+src/utils/logger.ts(34,13): error TS1109: Expression expected.
+src/utils/logger.ts(35,5): error TS1109: Expression expected.
+src/utils/logger.ts(43,13): error TS1109: Expression expected.
+src/utils/logger.ts(44,5): error TS1109: Expression expected.
+src/utils/logger.ts(51,13): error TS1109: Expression expected.
+src/utils/logger.ts(52,5): error TS1109: Expression expected.
+src/utils/logger.ts(59,13): error TS1109: Expression expected.
+src/utils/logger.ts(60,5): error TS1109: Expression expected.
+src/utils/logger.ts(68,5): error TS1109: Expression expected.
+src/utils/logger.ts(73,3): error TS1109: Expression expected.
+src/utils/logger.ts(77,3): error TS1109: Expression expected.
+src/utils/logger.ts(81,74): error TS1005: ')' expected.
+src/utils/logger.ts(82,1): error TS1128: Declaration or statement expected.
+src/utils/pwa.ts(6,3): error TS1109: Expression expected.
+src/utils/pwa.ts(10,3): error TS1109: Expression expected.
+src/utils/pwa.ts(14,3): error TS1109: Expression expected.
+src/utils/pwa.ts(18,3): error TS1109: Expression expected.
+src/utils/pwa.ts(22,3): error TS1109: Expression expected.
+src/utils/pwa.ts(26,3): error TS1109: Expression expected.
+src/utils/pwa.ts(30,3): error TS1109: Expression expected.
+src/utils/pwa.ts(35,3): error TS1109: Expression expected.
+src/utils/pwa.ts(41,5): error TS1109: Expression expected.
+src/utils/pwa.ts(44,5): error TS1109: Expression expected.
+src/utils/pwa.ts(50,3): error TS1109: Expression expected.
+src/utils/pwa.ts(54,3): error TS1109: Expression expected.
+src/utils/pwa.ts(66,55): error TS1005: ',' expected.
+src/utils/pwa.ts(67,5): error TS1109: Expression expected.
+src/utils/pwa.ts(77,7): error TS1109: Expression expected.
+src/utils/pwa.ts(79,51): error TS1005: ',' expected.
+src/utils/pwa.ts(80,5): error TS1109: Expression expected.
+src/utils/pwa.ts(103,56): error TS1005: ',' expected.
+src/utils/pwa.ts(107,68): error TS1005: ',' expected.
+src/utils/pwa.ts(108,47): error TS1005: ',' expected.
+src/utils/pwa.ts(109,3): error TS1109: Expression expected.
+src/utils/pwa.ts(111,71): error TS1005: ',' expected.
+src/utils/pwa.ts(112,50): error TS1005: ',' expected.
+src/utils/pwa.ts(113,3): error TS1109: Expression expected.
