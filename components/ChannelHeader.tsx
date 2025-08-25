@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import BellIcon from './icons/BellIcon';
 import type { Channel } from '../src/types/core';
 

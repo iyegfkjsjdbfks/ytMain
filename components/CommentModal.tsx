@@ -1,15 +1,15 @@
-import React, { useState, FC } from 'react';
+import React, { useState } from 'react';
 
-import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 
-import BaseModal from 'BaseModal.tsx';
+import BaseModal from './BaseModal';
 
 interface CommentModalProps {
  isOpen: boolean;
  onClose: () => void;
  shortId: string;
  shortTitle?: string;
- onCommentSubmit?: (commentText) => void
+ onCommentSubmit?: (commentText: string) => void;
 }
 
 /**
@@ -26,7 +26,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
  // shortId is currently not used but kept for future functionality
 
- const handleCommentSubmit = async (text): Promise<any> => {
+ const handleCommentSubmit = async (text: string): Promise<void> => {
  if (!text.trim()) {
 return;
 }
@@ -34,7 +34,7 @@ return;
  setIsSubmitting(true);
  try {
  // Call the provided submit handler or default behavior
- if (onCommentSubmit as any) {
+ if (onCommentSubmit) {
  await onCommentSubmit(text);
  } else {
  // Default behavior - you can implement API call here
@@ -53,7 +53,7 @@ return;
  <div className="flex justify-end space-x-3">
  <button
  type="button"
- onClick={(e) => onClose()}
+ onClick={onClose}
  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
  disabled={isSubmitting}
  >
@@ -81,7 +81,7 @@ return;
  <div className="space-y-4">
  {shortTitle && (
  <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
- <ChatBubbleOvalLeftIcon className="w-4 h-4" />
+ <ChatBubbleLeftIcon className="w-4 h-4" />
  <span>Commenting on: {shortTitle}</span>
  </div>
  )}
