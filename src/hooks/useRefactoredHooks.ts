@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseRefactoredHooksConfig {
   enabled?: boolean;
-  onSuccess?: (data: unknown) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void, 
 }
 
@@ -23,7 +23,7 @@ export function useRefactoredHooks(config: UseRefactoredHooksConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve: unknown=> setTimeout(resolve, 500: unknown)), 
+      await new Promise(resolve: unknown=> setTimeout(resolve, 500)), 
       
       const result = {
         hookName: 'useRefactoredHooks',

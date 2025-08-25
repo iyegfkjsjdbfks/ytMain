@@ -1,0 +1,12 @@
+// Export all video-related components;
+// Note: Component files will be created as needed;
+export const VideoPlayer = () => null;
+export const VideoCard = () => null;
+export const VideoList = () => null;
+export const VideoControls = () => null;
+export const VideoThumbnail = () => null;
+export const VideoMetadataComponent = () => null;
+export const VideoDescription = () => null;
+export const VideoComments = () => null;
+export const VideoRecommendations = () => null;
+export const VideoUpload = () => null;

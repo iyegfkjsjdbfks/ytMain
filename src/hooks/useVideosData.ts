@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseVideosDataOptions {
   enabled?: boolean;
-  onSuccess?: (data: unknown) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void}
 }
 
@@ -32,7 +32,7 @@ export function useVideosData(
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300: unknown: unknown)), 
+      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'useVideosData'}

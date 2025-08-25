@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UsePerformanceOptimizationOptions {
   enabled?: boolean;
-  onSuccess?: (data: unknown) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void}
 }
 
@@ -31,7 +31,7 @@ export function usePerformanceOptimization(
       setLoading(true);
       setError(null);
       
-      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300: unknown: unknown)), 
+      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'usePerformanceOptimization'}

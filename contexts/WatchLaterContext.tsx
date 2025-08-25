@@ -33,14 +33,14 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
       try {
         setWatchLaterVideos(JSON.parse(stored))}
       } catch (error) {
-        console.error('Error loading watch later videos:', error: unknown)}
+        console.error('Error loading watch later videos:', error)}
       }
     }
   }, []);
 
   // Save to localStorage whenever the list changes;
   useEffect(() => {
-    localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos: unknown))}
+    localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos))}
   }, [watchLaterVideos]);
 
   const addToWatchLater = (videoId: string) => {

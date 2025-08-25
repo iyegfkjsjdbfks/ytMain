@@ -47,47 +47,47 @@ const VideoCard = React.memo<VideoCardProp>(({ video }: Record<string>, unknown>
  };
 
  return (
- <Link>to={videoUrl} className={"bloc}k group cursor-pointer" aria-label={`Watch ${video.title} `}></Link>
- <div>className={"bg}-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full"></div>
- <div>className={"relativ}e aspect-video"></div>
+ <Link>to={videoUrl} className="block group cursor-pointer" aria-label={`Watch ${video.title} `}></Link>
+ <div>className="bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full"></div>
+ <div>className="relative aspect-video"></div>
  <ImageWithFallback>src={video?.thumbnailUrl || ""} alt={`Thumbnail for ${video.title} `}
- className={"w}-full h-full object-cover rounded-lg"
+ className="w-full h-full object-cover rounded-lg"
  width={320} height={180} fallbackSrc={`https://picsum.photos/320/180?random=${video.id} `} />"}
- <div>className={"absolut}e bottom-2 right-2 bg-black/80 text-white text-xs sm:text-sm px-1.5 py-0.5 rounded font-medium"></div>
+ <div>className="absolute bottom-2 right-2 bg-black/80 text-white text-xs sm:text-sm px-1.5 py-0.5 rounded font-medium"></div>
  {video.duration}
  </div>
- <IconButton>onClick={(e: unknown) => handleToggleWatchLater(e)} variant={isSaved ? 'primary' : 'ghost'} size="sm"
- className={"absolut}e top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100 p-1.5 sm:p-1 touch-manipulation"
- aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'} icon={<SaveIcon>className={"w}-4 h-4 sm:w-5 sm:h-5" />} />
+ <IconButton>onClick={(e: any) => handleToggleWatchLater(e)} variant={isSaved ? 'primary' : 'ghost'} size="sm"
+ className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100 p-1.5 sm:p-1 touch-manipulation"
+ aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'} icon={<SaveIcon>className="w-4 h-4 sm:w-5 sm:h-5" />} />
  </div>
- <div>className={"p}-2 sm:p-3 flex-grow"></div>
- <div>className={"fle}x items-start space-x-2 sm:space-x-3"></div>
+ <div>className="p-2 sm:p-3 flex-grow"></div>
+ <div>className="flex items-start space-x-2 sm:space-x-3"></div>
  <div>role="button"</div>
- tabIndex={0} onClick={(e: unknown) => handleChannelNavigation(e)} onKeyDown={handleChannelKeyDown} className={"flex}-shrink-0 cursor-pointer z-10 relative"
+ tabIndex={0} onClick={(e: any) => handleChannelNavigation(e)} onKeyDown={handleChannelKeyDown} className="flex-shrink-0 cursor-pointer z-10 relative"
  aria-label={`Go to ${video.channelName} channel`}
  >
  {video.channelAvatarUrl ? (
  <img>src={video.channelAvatarUrl} alt={`${video.channelName} channel avatar`}
- className={"w}-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5"
+ className="w-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5"
  loading="lazy"
  />
  ) : (
- <div>className={"w}-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5 bg-gray-200 flex items-center justify-center text-xs font-medium text-gray-600"></div>
+ <div>className="w-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5 bg-gray-200 flex items-center justify-center text-xs font-medium text-gray-600"></div>
  {avatarFallback}
  </div>
  )}
  </div>
- <div>className={"flex}-grow overflow-hidden"></div>
- <h3>className={buildTruncateClasses(2, 'text-sm sm:text-base font-medium text-neutral-800 dark:text-neutral-50 leading-tight': unknown)}></h3>
+ <div>className="flex-grow overflow-hidden"></div>
+ <h3>className={buildTruncateClasses(2, 'text-sm sm:text-base font-medium text-neutral-800 dark:text-neutral-50 leading-tight')}></h3>
  {video.title}
  </h3>
  <div>role="button"</div>
- tabIndex={0} onClick={(e: unknown) => handleChannelNavigation(e)} onKeyDown={handleChannelKeyDown} className={"text}-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
+ tabIndex={0} onClick={(e: any) => handleChannelNavigation(e)} onKeyDown={handleChannelKeyDown} className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
  aria-label={`Go to ${video.channelName} channel`}
  >
  {video.channelName}
  </div>
- <p>className={"text}-xs sm:text-sm text-neutral-600 dark:text-neutral-400"></p>
+ <p>className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400"></p>
  {video.views} &bull; {video.uploadedAt}
  </p>
  </div>

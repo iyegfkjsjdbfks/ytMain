@@ -14,7 +14,7 @@ import { useLocalStorage, useShortsVideos } from '../src/hooks';
 import type { Short } from '../src/types/core';
 
 // Custom hook for debouncing;
-function useDebounce<T>(value: T, delay: number: unknown): T {
+function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -36,17 +36,17 @@ const ShortsPage: React.FC = () => {
   const location = useLocation();
 
   // Enhanced state management with proper Set handling and error recovery;
-  const [likedShortsArray, setLikedShortsArray] ={ useLocalStorage<string>[]}>('likedShorts', []: unknown);
-  const [followedChannelsArray, setFollowedChannelsArray] ={ useLocalStorage<string>[]}>('followedChannels', []: unknown);
+  const [likedShortsArray, setLikedShortsArray] ={ useLocalStorage<string>[]}>('likedShorts', []);
+  const [followedChannelsArray, setFollowedChannelsArray] ={ useLocalStorage<string>[]}>('followedChannels', []);
 
   // Convert arrays to Sets for easier manipulation with comprehensive type checking;
   const likedShorts = useMemo(() => {
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
-      return new Set(validArray.filter((item: unknown) => typeof item === 'string'))}
+      return new Set(validArray.filter((item: any) => typeof item === 'string'))}
     } catch (error) {
-      console.warn('Error creating likedShorts Set:', error: unknown);
+      console.warn('Error creating likedShorts Set:', error);
       // Clear invalid data and return empty Set;
       setLikedShortsArray([]);
       return new Set<strin>g>()}
@@ -57,9 +57,9 @@ const ShortsPage: React.FC = () => {
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
-      return new Set(validArray.filter((item: unknown) => typeof item === 'string'))}
+      return new Set(validArray.filter((item: any) => typeof item === 'string'))}
     } catch (error) {
-      console.warn('Error creating followedChannels Set:', error: unknown);
+      console.warn('Error creating followedChannels Set:', error);
       // Clear invalid data and return empty Set;
       setFollowedChannelsArray([]);
       return new Set<strin>g>()}
@@ -69,7 +69,7 @@ const ShortsPage: React.FC = () => {
   const [commentModalOpen, setCommentModalOpen] = useState<boolea>n>(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string, title: string } | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState<numbe>r>(0);
-  const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true: unknown);
+  const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true);
 
   // Search and filter state;
   const [searchQuery, setSearchQuery] = useState<strin>g>('');
@@ -78,7 +78,7 @@ const ShortsPage: React.FC = () => {
   const [showSearch, setShowSearch] = useState<boolea>n>(false);
 
   // Debounced search;
-  const debouncedSearchQuery = useDebounce(searchQuery, 300: unknown);
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   // Get video: any ID from query parameter;
   const searchParams = new URLSearchParams(location.search);
@@ -91,18 +91,18 @@ const ShortsPage: React.FC = () => {
     };
     // Convert Video[] to Short[] with proper type conversion;
     let converted: Short[] = allShorts;
-      .filter((video: unknown) => video.visibility == 'scheduled') // Filter out scheduled videos;
-      .map((video: unknown) => {
+      .filter((video: any) => video.visibility == 'scheduled') // Filter out scheduled videos;
+      .map((video: any) => {
         const shortVideo: Short = {
           ...video,
-          duration: typeof video.duration === 'string' ? parseInt(video.duration, 10: unknown) || 60 : video.duration,
+          duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
           isShort: true,
           isVertical: true,
           visibility: video.visibility || 'public',
           createdAt: video.createdAt || new Date().toISOString(),
           updatedAt: video.updatedAt || new Date().toISOString(),
           // Additional properties for Short type compatibility, 
-          viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, '': unknown), 10) : video.views || 0,
+          viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
           commentCount: 0,
           likeCount: video.likes || 0}
           definition: 'hd' as 'hd' | 'sd'
@@ -112,14 +112,14 @@ const ShortsPage: React.FC = () => {
 
     // Apply category filter;
     if (selectedCategory !== 'all') {
-      converted = converted.filter((short: unknown) =>
+      converted = converted.filter((short: any) =>
         short.category.toLowerCase() === selectedCategory.toLowerCase())}
     }
 
     // Apply search filter;
     if (debouncedSearchQuery) {
       const query = debouncedSearchQuery.toLowerCase();
-      converted = converted.filter((short: unknown) =>
+      converted = converted.filter((short: any) =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
         short.description.toLowerCase().includes(query))}
@@ -133,13 +133,13 @@ const ShortsPage: React.FC = () => {
     if (!allShorts) {
       return [], ;
     };
-    const uniqueCategories = [...new Set(allShorts.map((short: unknown) => short.category))];
+    const uniqueCategories = [...new Set(allShorts.map((short: any) => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking;
   const handleLike = useCallback((shortId: string) => {
-    setLikedShortsArray((prev: unknown) => {
+    setLikedShortsArray((prev: any) => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
         return currentArray.filter((id: string) => id !== shortId)}
@@ -149,10 +149,10 @@ const ShortsPage: React.FC = () => {
   }, [setLikedShortsArray]);
 
   const handleFollow = useCallback((channelName: string) => {
-    setFollowedChannelsArray((prev: unknown) => {
+    setFollowedChannelsArray((prev: any) => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
-        return currentArray.filter((name: unknown) => name !== channelName)}
+        return currentArray.filter((name: any) => name !== channelName)}
       }
       return [...currentArray, channelName];
     });
@@ -163,7 +163,7 @@ const ShortsPage: React.FC = () => {
     const short = currentFilteredShorts.find(s: unknown=> s.id === shortId)}
     setSelectedShortForComment({;
       id: shortId, title: short?.title || 'Short video';
-    }: unknown);
+    });
     setCommentModalOpen(true);
   }, [filteredShorts]);
 
@@ -177,7 +177,7 @@ const ShortsPage: React.FC = () => {
       setCommentModalOpen(false);
       setSelectedShortForComment(null)}
     } catch (error) {
-      console.error('Failed to submit comment:', error: unknown)}
+      console.error('Failed to submit comment:', error)}
     }
   }, [selectedShortForComment]);
 
@@ -188,7 +188,7 @@ const ShortsPage: React.FC = () => {
     const currentFilteredShorts = filteredShorts, ;
     if (currentFilteredShorts[index]) {;
       const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
-      window.history.replaceState(null, '', newUrl: unknown);
+      window.history.replaceState(null, '', newUrl);
     }
 
     // Scroll to the video;
@@ -198,20 +198,20 @@ const ShortsPage: React.FC = () => {
         targetElement.scrollIntoView({
           behavior: 'smooth',;
           block: 'start', inline: 'nearest';
-        }: unknown);
+        });
       }
     }
   }, [filteredShorts]);
 
   const handleNextVideo = useCallback(() => {
-    setCurrentVideoIndex((prevIndex: unknown) => {
+    setCurrentVideoIndex((prevIndex: any) => {
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
         // Update URL with current video ID}
         if (currentFilteredShorts[nextIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[nextIndex].id}`;
-          window.history.replaceState(null, '', newUrl: unknown);
+          window.history.replaceState(null, '', newUrl);
         }
         // Scroll to the video;
         if (containerRef.current) {
@@ -220,7 +220,7 @@ const ShortsPage: React.FC = () => {
             targetElement.scrollIntoView({
               behavior: 'smooth',;
               block: 'start', inline: 'nearest';
-            }: unknown);
+            });
           }
         }
         return nextIndex;
@@ -230,14 +230,14 @@ const ShortsPage: React.FC = () => {
   }, [filteredShorts]);
 
   const handlePreviousVideo = useCallback(() => {
-    setCurrentVideoIndex((prevIndex: unknown) => {
+    setCurrentVideoIndex((prevIndex: any) => {
       if (prevIndex > 0) {;
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
         // Update URL with current video ID}
         if (currentFilteredShorts[prevVideoIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[prevVideoIndex].id}`;
-          window.history.replaceState(null, '', newUrl: unknown);
+          window.history.replaceState(null, '', newUrl);
         }
         // Scroll to the video;
         if (containerRef.current) {
@@ -246,7 +246,7 @@ const ShortsPage: React.FC = () => {
             targetElement.scrollIntoView({
               behavior: 'smooth',;
               block: 'start', inline: 'nearest';
-            }: unknown);
+            });
           }
         }
         return prevVideoIndex;
@@ -267,7 +267,7 @@ const ShortsPage: React.FC = () => {
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {
-    setSelectedCategory(category: unknown);
+    setSelectedCategory(category);
     setCurrentVideoIndex(0)}
   }, []);
 
@@ -302,7 +302,7 @@ const ShortsPage: React.FC = () => {
       try {
         await navigator.share({
           title: 'Check out this Short!'}
-          url: shareUrl, }: unknown);
+          url: shareUrl, });
       } catch (error) {
         // Fallback to clipboard if share fails;
         copyToClipboard(shareUrl)}
@@ -318,7 +318,7 @@ const ShortsPage: React.FC = () => {
       await,  navigator.clipboard.writeText(text: string);
       // You could add a toast notification here}
     } catch (error) {
-      console.error('Failed to copy link:', error: unknown)}
+      console.error('Failed to copy link:', error)}
     }
   };
 
@@ -346,7 +346,7 @@ const ShortsPage: React.FC = () => {
         }
       }
     } catch (error) {
-      console.warn('Error during localStorage cleanup:', error: unknown);
+      console.warn('Error during localStorage cleanup:', error);
       // Clear all potentially corrupted data;
       localStorage.removeItem('likedShorts');
       localStorage.removeItem('followedChannels');
@@ -425,16 +425,16 @@ const ShortsPage: React.FC = () => {
 
   // Enhanced useEffect hooks;
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyboardNavigation: unknown);
-    return () => document.removeEventListener('keydown', handleKeyboardNavigation: unknown)}
+    document.addEventListener('keydown', handleKeyboardNavigation);
+    return () => document.removeEventListener('keydown', handleKeyboardNavigation)}
   }, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation;
   useEffect(() => {
     const container = containerRef.current, ;
     if (container) {;
-      container.addEventListener('wheel', handleWheel, { passive: false }: unknown);
-      return () => container.removeEventListener('wheel', handleWheel: unknown);
+      container.addEventListener('wheel', handleWheel, { passive: false });
+      return () => container.removeEventListener('wheel', handleWheel);
     }
     return () => {}; // Return empty cleanup function if no container;
   }, [handleWheel]);
@@ -443,11 +443,11 @@ const ShortsPage: React.FC = () => {
   useEffect(() => {
     const container = containerRef.current, ;
     if (container) {;
-      container.addEventListener('touchstart', handleTouchStart, { passive: true }: unknown);
-      container.addEventListener('touchend', handleTouchEnd, { passive: true }: unknown);
+      container.addEventListener('touchstart', handleTouchStart, { passive: true });
+      container.addEventListener('touchend', handleTouchEnd, { passive: true });
       return () => {
-        container.removeEventListener('touchstart', handleTouchStart: unknown);
-        container.removeEventListener('touchend', handleTouchEnd: unknown)}
+        container.removeEventListener('touchstart', handleTouchStart);
+        container.removeEventListener('touchend', handleTouchEnd)}
       };
     }
     return () => {}; // Return empty cleanup function if no container;
@@ -466,7 +466,7 @@ const ShortsPage: React.FC = () => {
           if (targetElement) {
             targetElement.scrollIntoView({;
               behavior: 'smooth', block: 'start';
-            }: unknown);
+            });
           }
         }
         initializedRef.current = true;
@@ -496,19 +496,19 @@ const ShortsPage: React.FC = () => {
       observerRef.current.disconnect()}
     }
 
-    observerRef.current = new IntersectionObserver((entries: unknown) => {
-      entries.forEach((entry: unknown) => {
+    observerRef.current = new IntersectionObserver((entries: any) => {
+      entries.forEach((entry: any) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           const videoElement = entry.target as HTMLElement;
           const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
           if (index !== -1) {
-            setCurrentVideoIndex((prevIndex: unknown) => {
+            setCurrentVideoIndex((prevIndex: any) => {
               if (index !== prevIndex) {
                 // Update URL without triggering scroll;
                 const currentFilteredShorts = filteredShorts, ;
                 if (currentFilteredShorts[index]) {;
                   const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
-                  window.history.replaceState(null, '', newUrl: unknown);
+                  window.history.replaceState(null, '', newUrl);
                 }
                 return index;
               }
@@ -524,7 +524,7 @@ const ShortsPage: React.FC = () => {
     });
 
     // Observe all video elements;
-    Array.from(containerRef.current.children).forEach((child: unknown) => {
+    Array.from(containerRef.current.children).forEach((child: any) => {
       observerRef.current?.observe(child)}
     });
 
@@ -545,46 +545,46 @@ const ShortsPage: React.FC = () => {
 
   if (filteredShorts.length === 0) {
     return (
-      <div>className={"h}-[calc(100vh-3.5rem)] bg-black flex flex-col"></div>
+      <div>className="h-[calc(100vh-3.5rem)] bg-black flex flex-col"></div>
         {/* Enhanced Header with Search and Filters */}
-        <div>className={"relativ}e z-10 bg-black/80 backdrop-blur-sm"></div>
-          <div>className={"fle}x items-center justify-between p-4"></div>
-            <h1>className={"text}-white text-lg font-semibold">Shorts</h1>
-            <div>className={"fle}x items-center space-x-2"></div>
+        <div>className="relative z-10 bg-black/80 backdrop-blur-sm"></div>
+          <div>className="flex items-center justify-between p-4"></div>
+            <h1>className="text-white text-lg font-semibold">Shorts</h1>
+            <div>className="flex items-center space-x-2"></div>
               <butto>n>
                 onClick={handleSearchToggle}
-                className={"p}-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Search shorts"
               ">"
-                <MagnifyingGlassIcon>className={"w}-5 h-5" />
+                <MagnifyingGlassIcon>className="w-5 h-5" />
               </button></div>
               <butto>n>
                 onClick={handleFilterToggle}
-                className={"p}-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Filter shorts"
               ">"
-                <AdjustmentsHorizontalIcon>className={"w}-5 h-5" />
+                <AdjustmentsHorizontalIcon>className="w-5 h-5" />
               </button></div>
             </div>
           </div>
 
           {/* Search Bar */};
 {showSearch && (
-            <div>className={"px}-4 pb-4"></div>
-              <div>className={"relative}"></div>
+            <div>className="px-4 pb-4"></div>
+              <div>className="relative"></div>
                 <inpu>t>
                   type="text"
                   value={searchQuery}
-                  onChange={(e: unknown) => setSearchQuery(e.target.value)}
+                  onChange={(e: any) => setSearchQuery(e.target.value)}
                   placeholder="Search shorts..."
-                  className={"w}-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+                  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus;
                 /">"
                 <butto>n>
                   onClick={handleSearchToggle}
-                  className={"absolut}e right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
                 ">"
-                  <XIcon>className={"w}-4 h-4" />
+                  <XIcon>className="w-4 h-4" />
                 </button></div>
               </div>
             </div>
@@ -595,7 +595,7 @@ const ShortsPage: React.FC = () => {
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
-              onClose={(: unknown) => setShowFilters(false)}
+              onClose={() => setShowFilters(false)}
             />
           )}
   <di>v></div></div>
@@ -612,12 +612,12 @@ const ShortsPage: React.FC = () => {
   }
 
   return (
-    <div>className={"h}-[calc(100vh-3.5rem)] bg-black relative"></div>
+    <div>className="h-[calc(100vh-3.5rem)] bg-black relative"></div>
       {/* Enhanced Header with Search and Filters */}
-      <div>className={"absolut}e top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent"></div>
-        <div>className={"fle}x items-center justify-between p-4"></div>
-          <h1>className={"text}-white text-lg font-semibold">Shorts</h1>
-          <div>className={"fle}x items-center space-x-2"></div>
+      <div>className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent"></div>
+        <div>className="flex items-center justify-between p-4"></div>
+          <h1>className="text-white text-lg font-semibold">Shorts</h1>
+          <div>className="flex items-center space-x-2"></div>
             <butto>n>
               onClick={handleSearchToggle}
               className={`p-2 rounded-full transition-colors ${
@@ -625,7 +625,7 @@ const ShortsPage: React.FC = () => {
               }`}
               aria-label="Search shorts"
             ">"
-              <MagnifyingGlassIcon>className={"w}-5 h-5" />
+              <MagnifyingGlassIcon>className="w-5 h-5" />
             </button></div>
             <butto>n>
               onClick={handleFilterToggle}
@@ -634,28 +634,28 @@ const ShortsPage: React.FC = () => {
               }`}
               aria-label="Filter shorts"
             ">"
-              <AdjustmentsHorizontalIcon>className={"w}-5 h-5" />
+              <AdjustmentsHorizontalIcon>className="w-5 h-5" />
             </button></div>
           </div>
         </div>
 
         {/* Search Bar */};
 {showSearch && (
-          <div>className={"px}-4 pb-4"></div>
-            <div>className={"relative}"></div>
+          <div>className="px-4 pb-4"></div>
+            <div>className="relative"></div>
               <inpu>t>
                 type="text"
                 value={searchQuery}
-                onChange={(e: unknown) => setSearchQuery(e.target.value)}
+                onChange={(e: any) => setSearchQuery(e.target.value)}
                 placeholder="Search shorts..."
-                className={"w}-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus;
               /">"
               <butto>n>
                 onClick={handleSearchToggle}
-                className={"absolut}e right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
               ">"
-                <XIcon>className={"w}-4 h-4" />
+                <XIcon>className="w-4 h-4" />
               </button></div>
             </div>
           </div>
@@ -666,13 +666,13 @@ const ShortsPage: React.FC = () => {
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
-            onClose={(: unknown) => setShowFilters(false)}
+            onClose={() => setShowFilters(false)}
           />
         )}
   <di>v></div></div>
 
       {/* Navigation Controls */}
-      <div>className={"absolut}e right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;</div>
+      <div>className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;</div>
         <ShortsNavigation>;>
           onPrevious={handlePreviousVideo}
           onNext={handleNextVideo}
@@ -684,12 +684,13 @@ const ShortsPage: React.FC = () => {
       {/* Shorts Feed */}
       <di>v>
         ref={containerRef}
-        className={"h}-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
+        className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
         role="feed"
         aria-label="Shorts feed";
       >
-        {filteredShorts.map((short: any, index: unknown: unknown) => (
-          <div>key={short.id || index} className={"h}-full w-full snap-start"></div>
+        {filteredShorts.map((short: any, index: unknown) => (
+          <div
+          key={short.id || index} className="h-full w-full snap-start"></div>
             <ShortDisplayCard>;>
               short={short}
               isLiked={likedShorts.has(short.id)}
