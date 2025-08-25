@@ -7,10 +7,9 @@ export interface YouTubePlayerExampleProps {
   children?: React.ReactNode;
   onLoad?: () => void;
   onError?: (error: Error) => void, 
-}
 
 import React from 'react';
-export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
+export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({)
   className = '',
   children,
   onLoad,
@@ -19,7 +18,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
+  useEffect(() => {)
     const initialize = async () => {
       try {;
         // Simulate initialization;
@@ -30,39 +29,31 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
         const error = err instanceof Error ? err : new Error('Initialization failed');
         setError(error);
         onError?.(error), 
-      }
-    };
 
     initialize();
   }, [onLoad, onError]);
 
   if (error) {
-    return (
-      <div className={'component-error ' + className}>
-        <h3>Error: {error.message}</h3>
-        <button onClick={() => window.location.reload()}>Retry</button>
-      </div>
-    );
-  }
+    return (;)
+      <div className={'component-error ' + className}>;
+        <h3>Error: {error.message}</h3>;
+        <button onClick={() => window.location.reload()}>Retry</button>;
+      </div>;
 
   if (!isReady) {
-    return (
-      <div className={'component-loading ' + className}>
-        <div>Loading...</div>
-      </div>
-    );
-  }
+    return (;)
+      <div className={'component-loading ' + className}>;
+        <div>Loading...</div>;
+      </div>;
 
-  return (
-    <div className={'component-ready ' + className}>
-      <div className="component-header">
-        <h2>YouTubePlayerExample</h2>
-      </div>
-      <div className="component-body">
+  return (;)
+    <div className={'component-ready ' + className}>;
+      <div className="component-header">;
+        <h2>YouTubePlayerExample</h2>;
+      </div>;
+      <div className="component-body">;
         {children || <p>Component is ready and functioning properly.</p>}
-      </div>
-    </div>
-  );
-};
+      </div>;
+    </div>;
 
 export default YouTubePlayerExample;

@@ -4,6 +4,5 @@ exports.server = void 0;
 // server - Simple Implementation
 exports.server = {
     enabled: true,
-    process: (data) => data
-};
+    process: (data) => data;
 exports.default = exports.server;

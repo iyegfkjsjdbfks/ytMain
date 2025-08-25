@@ -11,12 +11,12 @@ export interface UseDebounceOptions {
 export interface UseDebounceResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function useDebounce(
-  options: UseDebounceOptions = {})
+export function useDebounce(;)
+  options: UseDebounceOptions = {});
 ): UseDebounceResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function useDebounce(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -37,7 +37,6 @@ export function useDebounce(
         hookName: 'useDebounce'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -50,7 +49,7 @@ export function useDebounce(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -59,7 +58,6 @@ export function useDebounce(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default useDebounce;

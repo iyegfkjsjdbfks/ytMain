@@ -16,13 +16,11 @@ export interface SystemEvent {
   data?: unknown;
   timestamp: number;
   handled: boolean;
-}
 
 export interface SystemHealth {
   overall: 'healthy' | 'degraded' | 'critical';
   systems: Record<string, 'healthy' | 'degraded' | 'critical'>;
   lastCheck: number;
-}
 
 export interface SystemMetrics {
   performance: { score: number };
@@ -30,12 +28,10 @@ export interface SystemMetrics {
   deployment: { successRate: number };
   quality: { score: number };
   features: { totalFlags: number };
-}
 
 export interface IntegrationConfig {
   healthCheckInterval: number;
   eventRetentionDays: number;
-}
 
 class SystemIntegrationHub {
   private events: SystemEvent[] = [];
@@ -46,8 +42,7 @@ class SystemIntegrationHub {
     security: { score: 100 },
     deployment: { successRate: 1 },
     quality: { score: 100 },
-    features: { totalFlags: 0 }
-  };
+    features: { totalFlags: 0 , }
   private config: IntegrationConfig = { healthCheckInterval: 60000, eventRetentionDays: 30 };
   private intervalId?: ReturnType<typeof setInterval>;
 
@@ -55,19 +50,16 @@ class SystemIntegrationHub {
     if (this.intervalId) return;
     this.intervalId = setInterval(() => this.performHealthCheck(), this.config.healthCheckInterval);
     await this.performHealthCheck();
-  }
 
   destroy(): void {
     if (this.intervalId) clearInterval(this.intervalId);
     this.intervalId = undefined;
     this.handlers.clear();
     this.events = [];
-  }
 
   on(type: SystemEventType, handler: (e: SystemEvent) => void): void {
     if (!this.handlers.has(type)) this.handlers.set(type, []);
     this.handlers.get(type)!.push(handler);
-  }
 
   emit(event: Omit<SystemEvent, 'id' | 'timestamp' | 'handled'>): SystemEvent {
     const full: SystemEvent = { id: `evt_${Date.now()}_${Math.random().toString(36).slice(2,8)}`, timestamp: Date.now(), handled: false, ...event };
@@ -77,7 +69,6 @@ class SystemIntegrationHub {
     this.events = this.events.filter(e => e.timestamp >= cutoff);
     (this.handlers.get(full.type) || []).forEach(h => { try { h(full); } catch (e) { /* ignore */ } });
     return full;
-  }
 
   private performHealthCheck(): void {
     this.health.lastCheck = Date.now();
@@ -86,15 +77,13 @@ class SystemIntegrationHub {
     const sec = this.metrics.security.score;
     this.health.overall = (perf < 60 || sec < 60) ? 'critical' : (perf < 80 || sec < 80) ? 'degraded' : 'healthy';
     this.emit({ type: 'workflow', source: 'SystemIntegrationHub', severity: this.health.overall === 'critical' ? 'critical' : this.health.overall === 'degraded' ? 'medium' : 'low', title: 'HealthCheck', description: 'Periodic health check executed.' });
-  }
 
   getSystemHealth(): SystemHealth { return { ...this.health, systems: { ...this.health.systems } }; }
-  getSystemMetrics(): SystemMetrics { return JSON.parse(JSON.stringify(this.metrics)); }
-  getRecentEvents(limit = 50): SystemEvent[] { return this.events.slice(-limit).reverse(); }
+  getSystemMetrics(): SystemMetrics { return JSON.parse(JSON.stringify(this.metrics)); , }
+  getRecentEvents(limit = 50): SystemEvent[] { return this.events.slice(-limit).reverse(); , }
   updateConfig(cfg: Partial<IntegrationConfig>): void { this.config = { ...this.config, ...cfg }; }
-  acknowledge(id): void { const ev = this.events.find(e => e.id === id); if (ev) ev.handled = true; }
+  acknowledge(id): void { const ev = this.events.find(e => e.id === id); if (ev) ev.handled = true; , }
   generateSystemReport() { return { health: this.getSystemHealth(), metrics: this.getSystemMetrics(), recentEvents: this.getRecentEvents(10) }; }
-}
 
 export const systemIntegration = new SystemIntegrationHub();
 export default systemIntegration;

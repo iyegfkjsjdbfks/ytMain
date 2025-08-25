@@ -12,7 +12,5 @@ export function useQueryClient() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useQueryClient;

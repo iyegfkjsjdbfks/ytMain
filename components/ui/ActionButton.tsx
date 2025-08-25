@@ -6,9 +6,8 @@ interface ActionButtonProps {
  className?: string;
  variant?: 'default' | 'primary' | 'secondary';
  size?: 'sm' | 'md' | 'lg';
-}
 
-const ActionButton: React.FC<ActionButtonProps> = ({
+const ActionButton: React.FC<ActionButtonProps> = ({)
  onClick,
  ariaLabel,
  children,
@@ -27,15 +26,13 @@ const ActionButton: React.FC<ActionButtonProps> = ({
  md: 'p-2',
  lg: 'p-3' };
 
- return (
- <button />
-// FIXED:  onClick={(e: any) => onClick(e)}
-// FIXED:  className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
-// FIXED:  aria-label={ariaLabel}
+ return (;)
+ <button />;
+// FIXED:  onClick={(e: any) => onClick(e), }
+// FIXED:  className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`, }
+// FIXED:  aria-label={ariaLabel, }
  >
  {children}
 // FIXED:  </button>
- );
-};
 
 export default ActionButton;

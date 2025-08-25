@@ -11,12 +11,12 @@ export interface UseVideoOptions {
 export interface UseVideoResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function useVideo(
-  options: UseVideoOptions = {})
+export function useVideo(;)
+  options: UseVideoOptions = {});
 ): UseVideoResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function useVideo(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -37,7 +37,6 @@ export function useVideo(
         hookName: 'useVideo'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -50,7 +49,7 @@ export function useVideo(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -59,7 +58,6 @@ export function useVideo(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default useVideo;

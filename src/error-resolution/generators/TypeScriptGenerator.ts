@@ -8,200 +8,160 @@ import { Logger } from '../utils/Logger';
 export class TypeScriptGenerator extends BaseScriptGenerator {
   constructor() {
     super('typescript')}
-  }
 
   protected initializeTemplates(): void {
     // Template for adding missing interface properties, 
-    this:.addTemplate({
+    this:.addTemplate({)
       id: 'add-missing-property',
       name: 'Add Missing Property',
       description: 'Adds missing properties to interfaces or types',
-      parameters: [
+      parameters: [;
         {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to modify',
           required: true}
-        ,},
         {
           name: 'interfaceName',
           type: 'string',
           description: 'Name of the interface to modify',
           required: true}
-        ,},
         {
           name: 'propertyName',
           type: 'string',
           description: 'Name of the property to add',
           required: true}
-        },
         {
           name: 'propertyType',
           type: 'string',
           description: 'Type of the property to add',
           required: true}
-          defaultValue: 'any'
+          defaultValue: 'any';
 
-      ],
-      commands: [
+      commands: [;
         {
           type: 'replace'}
           ,fil,e: '{{targetFile}}',
           pattern,: new RegExp(`(interface\\s+{{interfaceName}}\\s*\\{[^}]*)(\\})`, 'g'),
           replacement,: '$1  {{propertyName}}: {{propertyType}};\n$2',
-          description,: 'Add {{propertyName}}: {{propertyType}} to {{interfaceName}} in {{targetFile}}'
-        ,}
-      ],
+          description,: 'Add {{propertyName}}: {{propertyType}} to {{interfaceName}} in {{targetFile}}';
       validationChecks: [;
         {
           type: 'syntax'}
           ,comman,d: 'npx tsc --noEmit {{targetFile}}',
           expectedResult,: 'improved-count',
           timeoutSeconds,: 15,
-        }
-      ]
-    });
 
     // Template for fixing type assignments;
-    this.addTemplate({
+    this.addTemplate({)
       id: 'fix-type-assignment',
       name: 'Fix Type Assignment',
       description: 'Fixes type assignment compatibility issues',
-      parameters: [
+      parameters: [;
         {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
           required: true}
-        ,}
-      ,],
-      commands,: [
+      commands,: [;
         {
           type: 'replace'}
           ,fil,e: '{{targetFile}}',
           pattern,: /:\s*any\[\]/g,
           replacement,: ': unknown[]',
-          description,: 'Replace any[] with unknown[] for better type safety in {{targetFile}}'
-        ,}
-      ],
-      validationChecks,: [
+          description,: 'Replace any[] with unknown[] for better type safety in {{targetFile}}';
+      validationChecks,: [;
         {
           type: 'syntax'}
           ,comman,d: 'npx tsc --noEmit {{targetFile}}',
           expectedResult,: 'improved-count',
           timeoutSeconds,: 15,
-        }
-      ]
-    ,});
 
     // Template for adding type parameters;
-    this.addTemplate({
+    this.addTemplate({)
       id: 'add-type-parameters',
       name: 'Add Type Parameters',
       description: 'Adds missing type parameters to generic types',
-      parameters: [
+      parameters: [;
         {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
           required: true}
-        ,},
         {
           name: 'genericType',
           type: 'string',
           description: 'Generic type that needs parameters',
           required: true}
-        ,},
         {
           name: 'typeParameter',
           type: 'string',
           description: 'Type parameter to add',
           required: true}
-          ,defaultValu,e,: 'any'
-        ,}
-      ],
-      commands,: [
+          ,defaultValu,e,: 'any';
+      commands,: [;
         {
           type: 'replace'}
           ,fil,e: '{{targetFile}}',
           pattern,: new RegExp(`\\b{{genericType}}\\b(?!<)`, 'g'),
           replacement,: '{{genericType}}<{{typeParameter}}>',
-          description,: 'Add type parameter <{{typeParameter}}> to {{genericType}} in {{targetFile}}'
-        ,}
-      ],
-      validationChecks,: [
+          description,: 'Add type parameter <{{typeParameter}}> to {{genericType}} in {{targetFile}}';
+      validationChecks,: [;
         {
           type: 'syntax'}
           ,comman,d: 'npx tsc --noEmit {{targetFile}}',
           expectedResult,: 'improved-count',
           timeoutSeconds,: 15,
-        }
-      ]
-    ,});
 
     // Template for fixing optional properties;
-    this.addTemplate({
+    this.addTemplate({)
       id: 'fix-optional-properties',
       name: 'Fix Optional Properties',
       description: 'Adds optional modifiers to properties that may be undefined',
-      parameters: [
+      parameters: [;
         {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
           required: true}
-        ,}
-      ,],
-      commands,: [
+      commands,: [;
         {
           type: 'replace'}
           ,fil,e: '{{targetFile}}',
           pattern,: /(\w+):\s*(\w+)\s*\|\s*undefined/g,
           replacement,: '$1?: $2',
-          description,: 'Convert union with undefined to optional property in {{targetFile}}'
-        ,}
-      ],
-      validationChecks,: [
+          description,: 'Convert union with undefined to optional property in {{targetFile}}';
+      validationChecks,: [;
         {
           type: 'syntax'}
           ,comman,d: 'npx tsc --noEmit {{targetFile}}',
           expectedResult,: 'improved-count',
           timeoutSeconds,: 15,
-        }
-      ]
-    ,});
 
     // Template for adding null checks;
-    this.addTemplate({
+    this.addTemplate({)
       id: 'add-null-checks',
       name: 'Add Null Checks',
       description: 'Adds null/undefined checks to prevent runtime errors',
-      parameters: [
+      parameters: [;
         {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
           required: true}
-        ,}
-      ,],
-      commands,: [
+      commands,: [;
         {
           type: 'replace'}
           ,fil,e: '{{targetFile}}',
           pattern,: /(\w+)\.(\w+)/g,
           replacement,: '$1?.$2',
-          description,: 'Add optional chaining to property access in {{targetFile}}'
-        ,}
-      ],
-      validationChecks,: [
+          description,: 'Add optional chaining to property access in {{targetFile}}';
+      validationChecks,: [;
         {
           type: 'syntax'}
           ,comman,d: 'npx tsc --noEmit {{targetFile}}',
           expectedResult,: 'improved-count',
           timeoutSeconds,: 15,
-        }
-      ]
-    ,});
 
 
   protected groupErrorsByPattern(errors,: AnalyzedError[]): Map<string, AnalyzedError[]> {
@@ -240,7 +200,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     return groups;
 
 
-  protected async generateScriptForPattern(
+  protected async generateScriptForPattern(;)
     pattern,: string,
     errors,: AnalyzedError[],
     _context,: GenerationContext,
@@ -255,47 +215,47 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     const affectedFiles : [...new Set(errors.map(e => e.file))],;
 
     switch (pattern) {
-      case :'missing-property',:
+      case :'missing-property',:;
         commands = this.generateMissingPropertyFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:;
 
-      case :'type-assignment',:
+      case :'type-assignment',:;
         commands = this.generateTypeAssignmentFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:;
 
-      case :'missing-type-parameter',:
+      case :'missing-type-parameter',:;
         commands = this.generateTypeParameterFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:;
 
-      case :'possibly-undefined',:
-      case :'possibly-null',:
+      case :'possibly-undefined',:;
+      case :'possibly-null',:;
         commands = this.generateNullCheckFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:;
 
-      case :'undefined-variable',:
+      case :'undefined-variable',:;
         commands = this.generateUndefinedVariableFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:;
 
-      case :'not-callable',:
+      case :'not-callable',:;
         commands = this.generateCallableFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:;
 
-      case :'index-signature',:
+      case :'index-signature',:;
         commands = this.generateIndexSignatureFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:;
 
-      case :'argument-type',:
+      case :'argument-type',:;
         commands = this.generateArgumentTypeFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
         break:}
-      default:
+      default:;
         Logger.process({ message: 'Unknown TypeScript pattern', pattern });
         return null;
 
@@ -311,8 +271,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks}
-      estimatedRuntime: this.estimateRuntime(commands)
-    };
+      estimatedRuntime: this.estimateRuntime(commands);
 
 
   /**
@@ -327,15 +286,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       if (propertyMatch) {
         const propertyName = propertyMatch[1], 
         
-        commands,.pus,h,({
+        commands,.pus,h,({)
           type: 'replace',
           file: error.file}
           pattern: new RegExp(`(interface\\s+\\w+\\s*\\{[^}]*)(\\})`, 'g'),;
           replacement: `$1  ${propertyName}?;\n$2`,
           description: `Add missing property '${propertyName}' to interface in ${error.file}`;
-        });
-      }
-    }
 
     return commands;
 
@@ -348,14 +304,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
     for (const error of errors) {
       // Add type assertions to fix assignment issues;
-      commands.push({
+      commands.push({)
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\s*=\s*([^;]+);/g,
         replacement: '$1 = $2, '}
-        ,descriptio,n: `Add type assertion to fix assignment in ${error.file} at line ${error.line}`
-      ,});
-    }
+        ,descriptio,n: `Add type assertion to fix assignment in ${error.file} at line ${error.line}`;
 
     return commands;
 
@@ -372,15 +326,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       if (typeMatch) {
         const typeName = typeMatch[1], 
         
-        commands,.pus,h,({
+        commands,.pus,h,({)
           type: 'replace',
           file: error.file}
           pattern: new RegExp(`\\b${typeName}\\b(?!<)`, 'g'),
           replacement: `${typeName}<any>`,
           description: `Add type parameter to ${typeName} in ${error.file}`;
-        });
-      }
-    }
 
     return commands;
 
@@ -393,22 +344,20 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
     for (const error of errors) {
       // Add optional chaining or null checks, 
-      commands.push({
+      commands.push({)
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\.(\w+)/g,
         replacement: '$1?.$2'}
-        ,descriptio,n: `Add optional chaining in ${error.file} at line ${error.line}`
-      ,});
+        ,descriptio,n: `Add optional chaining in ${error.file} at line ${error.line}`;
 
       // Add null coalescing for assignments;
-      commands.push({
+      commands.push({)
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\s*=\s*(\w+);/g,
         replacement: '$1 = $2 ?? undefined, '}
-        ,descriptio,n: `Add null coalescing in ${error.file} at line ${error.line}`
-      ,});
+        ,descriptio,n: `Add null coalescing in ${error.file} at line ${error.line}`;
 
 
     return commands;
@@ -427,15 +376,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         const variableName = variableMatch[1];
         
         // Add variable declaration, 
-        commands.push({
+        commands.push({)
           type: 'insert',
           file: error.file}
           ,replacemen,t: `const ${variableName} = undefined;\n`,
           position,: { line: 1, column: 0 },
-          description,: `Declare undefined variable '${variableName}' in ${error.file}`
-        ,});
-      }
-    }
+          description,: `Declare undefined variable '${variableName}' in ${error.file}`;
 
     return commands;
 
@@ -448,14 +394,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
     for (const error of errors) {
       // Add type assertion to make object callable, 
-      commands.push({
+      commands.push({)
         type: 'replace',
         file: error.file,
-        pattern: /(\w+)\(/g,
-        replacement: '($1)('}
-        ,descriptio,n: `Add callable type assertion in ${error.file} at line ${error.line}`
-      ,});
-    }
+        pattern: /(\w+)\(/g,)
+        replacement: '($1)('})
+        ,descriptio,n: `Add callable type assertion in ${error.file} at line ${error.line}`;
 
     return commands;
 
@@ -468,14 +412,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
     for (const error of errors) {
       // Add index signature to interfaces;
-      commands.push({
+      commands.push({)
         type: 'replace',
         file: error.file,
         pattern: /(interface\s+\w+\s*\{)/g,
         replacement: '$1\n  [key: string], '}
-        ,descriptio,n: `Add index signature to interface in ${error.file}`
-      ,});
-    }
+        ,descriptio,n: `Add index signature to interface in ${error.file}`;
 
     return commands;
 
@@ -488,14 +430,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
     for (const error of errors) {
       // Add type assertion to function arguments, 
-      commands.push({
+      commands.push({)
         type: 'replace',
         file: error.file,
         pattern: /(\w+)\(([^)]+)\)/g,
         replacement: '$1($2)'}
-        ,descriptio,n: `Add type assertion to function argument in ${error.file} at line ${error.line}`
-      ,});
-    }
+        ,descriptio,n: `Add type assertion to function argument in ${error.file} at line ${error.line}`;
 
     return commands;
 
@@ -504,18 +444,17 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
    * Creates type validation checks for files;
    */
   protected override createTypeValidationChecks(files,: string[]): ValidationCheck[] {
-    return files.map(file => ({
+    return files.map(file => ({))
       type: 'syntax' as const}
       command,: `npx tsc --noEmit --strict ${file}`,
       expectedResult,: 'improved-count' as const,
       timeoutSeconds,: 20,
-    }));
 
 
   /**
    * Generates a comprehensive TypeScript fixing script;
    */
-  public async generateComprehensiveTypeScript(
+  public async generateComprehensiveTypeScript(;)
     _context,: GenerationContext,
   ): Promise<FixingScript> {
     const scriptId : `typescript-comprehensive-${Date.now()}`,;
@@ -528,31 +467,28 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     // Add commands for common TypeScript fixes;
     for (const ,file, o,f ,allFiles) {
       // Fix any types, 
-      commands.push({
+      commands.push({)
         type: 'replace',
         file,
         pattern: /:\s*any\b/g,
         replacement: ': unknown'}
-        ,descriptio,n: `Replace 'any' with 'unknown' for better type safety in ${file}`
-      ,,},);
+        ,descriptio,n: `Replace 'any' with 'unknown' for better type safety in ${file}`;
 
       // Add optional chaining where needed;
-      commands,.push({
+      commands,.push({)
         type: 'replace',
         file,
-        pattern: /(\w+)\.(\w+)(?!\?)/g,
+        pattern: /(\w+)\.(\w+)(?!\)/g,
         replacement: '$1?.$2'}
-        ,descriptio,n: `Add optional chaining in ${file}`
-      ,});
+        ,descriptio,n: `Add optional chaining in ${file}`;
 
       // Fix function return types;
-      commands.push({
+      commands.push({)
         type: 'replace',
         file,
         pattern: /function\s+(\w+)\s*\([^)]*\)\s*\{/g,
-        replacement: 'function $1() {'}
-        ,descriptio,n: `Add return type annotations in ${file}`
-      ,});
+        replacement: 'function $1() {', }
+        ,descriptio,n: `Add return type annotations in ${file}`;
 
 
     // Add comprehensive validation;
@@ -565,8 +501,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       commands,
       rollbackCommands: this.generateRollbackCommands(commands),
       validationChecks}
-      estimatedRuntime: this.estimateRuntime(commands)
-    };
+      estimatedRuntime: this.estimateRuntime(commands);
 
 
   /**
@@ -599,11 +534,9 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     const coverage = totalDeclarations > 0 ? (typedDeclarations / totalDeclarations) * 100 : 100}
     if (untypedDeclarations > 0) {;
       suggestions.push(`Add type annotations to ${untypedDeclarations} declarations`);
-    }
     
     if (anyUsage.length > 0) {
       suggestions.push(`Replace ${anyUsage.length} 'any' types with more specific types`);
-    }
     
     if (coverage < 80) {
       suggestions.push('Consider enabling strict mode for better type safety')}
@@ -615,7 +548,6 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       untypedDeclarations,
       coverage,
       suggestions}
-    };
 
 
   /**
@@ -626,7 +558,6 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
     if (error.message.includes('any')) {
       suggestions.push('Consider using a more specific type instead of "any"')}
-    }
 
     if (error.message.includes('undefined')) {
       suggestions.push('Add null/undefined checks or use optional chaining')}

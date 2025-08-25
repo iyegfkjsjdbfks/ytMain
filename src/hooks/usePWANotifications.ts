@@ -11,12 +11,12 @@ export interface UsePWANotificationsOptions {
 export interface UsePWANotificationsResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function usePWANotifications(
-  options: UsePWANotificationsOptions = {})
+export function usePWANotifications(;)
+  options: UsePWANotificationsOptions = {});
 ): UsePWANotificationsResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function usePWANotifications(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -38,7 +38,6 @@ export function usePWANotifications(
         hookName: 'usePWANotifications'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -51,7 +50,7 @@ export function usePWANotifications(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -60,7 +59,6 @@ export function usePWANotifications(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default usePWANotifications;

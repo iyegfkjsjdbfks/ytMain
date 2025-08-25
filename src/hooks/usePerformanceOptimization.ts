@@ -11,12 +11,12 @@ export interface UsePerformanceOptimizationOptions {
 export interface UsePerformanceOptimizationResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function usePerformanceOptimization(
-  options: UsePerformanceOptimizationOptions = {})
+export function usePerformanceOptimization(;)
+  options: UsePerformanceOptimizationOptions = {});
 ): UsePerformanceOptimizationResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function usePerformanceOptimization(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -37,7 +37,6 @@ export function usePerformanceOptimization(
         hookName: 'usePerformanceOptimization'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -50,7 +49,7 @@ export function usePerformanceOptimization(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -59,7 +58,6 @@ export function usePerformanceOptimization(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default usePerformanceOptimization;

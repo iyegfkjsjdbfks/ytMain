@@ -1,7 +1,7 @@
 import React from 'react';
 // Image utility functions for handling placeholders and fallbacks
 
-export const getImageWithFallback = (,;
+export const getImageWithFallback = (,;)
  primaryUrl,
  fallbackUrl?: string,
  width?: number,
@@ -10,7 +10,6 @@ export const getImageWithFallback = (,;
  // If primary URL is already a picsum URL, return it
  if (primaryUrl.includes('picsum.photos')) {
  return primaryUrl;
- }
 
  // If primary URL is a placeholder API URL, convert to picsum
  if (primaryUrl.includes('/api / placeholder/')) {
@@ -18,27 +17,21 @@ export const getImageWithFallback = (,;
  const dimensions = parts[parts.length - 1];
  const [w, h] = dimensions?.split('x').map(Number) || [];
  return `https://picsum.photos/${w || width || 320}/${h || height || 180}?random=${Math.floor(Math.random() * 1000)}`;
- }
 
  // Return fallback or generate one
  if (fallbackUrl) {
  return fallbackUrl;
- }
 
  return `https://picsum.photos/${width || 320}/${height || 180}?random=${Math.floor(Math.random() * 1000)}`;
-};
 
 export const getVideoThumbnail = (videoId, width: number = 320, height: number = 180): (string) => {
  return `https://picsum.photos/${width}/${height}?random=${videoId}`;
-};
 
 export const getChannelAvatar = (channelId, size: number = 40): (string) => {
  return `https://picsum.photos/${size}/${size}?random=${channelId}`;
-};
 
 export const getUserAvatar = (userId, size: number = 40): (string) => {
  return `https://picsum.photos/${size}/${size}?random = user-${userId}`;
-};
 
 export const handleImageError = (event: React.SyntheticEvent < HTMLImageElement>) => {
  const img = event.currentTarget;
@@ -47,16 +40,13 @@ export const handleImageError = (event: React.SyntheticEvent < HTMLImageElement>
 
  // Generate a new random fallback image
  img.src = `https://picsum.photos/${width}/${height}?random=${Date.now()}`;
-};
 
 export const preloadImage = (src): Promise<any> < void> => {
- return new Promise<any>((resolve, reject) => {
+ return new Promise<any>((resolve, reject) => {)
  const img = new Image();
  img.onload = () => resolve();
  img.onerror = reject;
  img.src = src;
- });
-};
 
 export const generatePlaceholderDataUrl = (width, height, text?: string): (string) => {
  const canvas = document.createElement('canvas');
@@ -66,7 +56,6 @@ export const generatePlaceholderDataUrl = (width, height, text?: string): (strin
  const ctx = canvas.getContext('2d');
  if (!ctx) {
 return '';
-}
 
  // Fill background
  ctx.fillStyle = '#f3f4f6';
@@ -79,13 +68,11 @@ return '';
  ctx.textAlign = 'center';
  ctx.textBaseline = 'middle';
  ctx.fillText(text, width / 2, height / 2);
- }
 
  return canvas.toDataURL();
-};
 
 // Image optimization utilities
-export const getOptimizedImageUrl = (,;
+export const getOptimizedImageUrl = (,;)
  originalUrl,
  width?: number,
  height?: number,
@@ -96,34 +83,27 @@ export const getOptimizedImageUrl = (,;
  const url = new URL(originalUrl);
  if (width) {
 url.searchParams.set('width', width.toString());
-}
  if (height) {
 url.searchParams.set('height', height.toString());
-}
  if (quality !== 80) {
 url.searchParams.set('quality', quality.toString());
-}
  return url.toString();
- }
 
  return originalUrl;
-};
 
 // Responsive image utilities
 export const getResponsiveImageSrcSet = (baseUrl, sizes): (string) => {
  return sizes;
- .map((size) => `${getOptimizedImageUrl(baseUrl, size)} ${size}w`)
+ .map((size) => `${getOptimizedImageUrl(baseUrl, size)} ${size}w`);
  .join(', ');
-};
 
 export const getResponsiveImageSizes = (breakpoints: { [key: string]: string }): (string) => {
- return Object.entries(breakpoints)
- .map(([breakpoint, size]) => `(${breakpoint}) ${size}`)
+ return Object.entries(breakpoints);
+ .map(([breakpoint, size]) => `(${breakpoint}) ${size}`);
  .join(', ');
-};
 
 // Image lazy loading utilities
-export const createIntersectionObserver = (,;
+export const createIntersectionObserver = (,;)
  callback: IntersectionObserverCallback,
  options?: IntersectionObserverInit,
 ): (IntersectionObserver) => {
@@ -134,64 +114,54 @@ export const createIntersectionObserver = (,;
  ...options };
 
  return new IntersectionObserver(callback, defaultOptions);
-};
 
 // Image format detection
 export const supportsWebP = (): (boolean) => {
  const canvas = document.createElement('canvas');
  canvas.width = 1;
  canvas.height = 1;
- return canvas.toDataURL('image / webp').indexOf('data: image / webp') === 0
-};
+ return canvas.toDataURL('image / webp').indexOf('data: image / webp') === 0;
 
 export const supportsAvif = (): (boolean) => {
  const canvas = document.createElement('canvas');
  canvas.width = 1;
  canvas.height = 1;
- return canvas.toDataURL('image / avif').indexOf('data: image / avif') === 0
-};
+ return canvas.toDataURL('image / avif').indexOf('data: image / avif') === 0;
 
 // Get the best supported image format
 export const getBestImageFormat = (): 'avif' | 'webp' | 'jpg' => {
  if (supportsAvif()) {
 return 'avif';
-}
  if (supportsWebP()) {
 return 'webp';
-}
  return 'jpg';
-};
 
 // Color utilities for placeholder generation
 export const generateColorFromString = (str): (string) => {
  let hash: number = 0;
  for (let i = 0; i < str.length; i++) {
  hash = str.charCodeAt(i) + ((hash << 5) - hash);
- }
 
  const hue = hash % 360;
  return `hsl(${hue}, 70%, 80%)`;
-};
 
 export const getContrastColor = (backgroundColor): (string) => {
  // Simple contrast calculation - in production, use a more sophisticated algorithm
  const rgb = backgroundColor.match(/\d+/g);
  if (!rgb) {
 return '#000000';
-}
 
  const brightness = (parseInt(rgb[0] || '0', 10) * 299 + parseInt(rgb[1] || '0', 10) * 587 + parseInt(rgb[2] || '0', 10) * 114) / 1000;
  return brightness > 128 ? '#000000' : '#ffffff';
-};
 
 // Image compression utilities (for upload)
-export const compressImage = (,;
+export const compressImage = (,;)
  file: File,
  maxWidth: number = 1920,
  maxHeight: number = 1080,
  quality: number = 0.8,
 ): Promise<any> < Blob> => {
- return new Promise<any>((resolve) => {
+ return new Promise<any>((resolve) => {)
  const canvas = document.createElement('canvas');
  const ctx = canvas.getContext('2d');
  const img = new Image();
@@ -204,23 +174,18 @@ export const compressImage = (,;
  if (width > maxWidth) {
  height = (height * maxWidth) / width;
  width = maxWidth;
- }
  } else {
  if (height > maxHeight) {
  width = (width * maxHeight) / height;
  height = maxHeight;
- }
  canvas.width = width;
  canvas.height = height;
 
  // Draw and compress
  ctx?.drawImage(img, 0, 0, width, height);
  canvas.toBlob(resolve as BlobCallback, 'image / jpeg', quality);
- };
 
  img.src = URL.createObjectURL(file);
- });
-};
 
 // Image validation utilities
 export const validateImageFile = (file: File): { valid: boolean; error?: string } => {
@@ -228,18 +193,15 @@ export const validateImageFile = (file: File): { valid: boolean; error?: string 
  const maxSize = 10 * 1024 * 1024; // 10MB;
  if (!allowedTypes.includes(file.type)) {
  return { valid: false, error: 'Invalid file type. Please upload a JPEG, PNG, WebP, or GIF image.' };
- }
 
  if (file.size > maxSize) {
  return { valid: false, error: 'File size too large. Please upload an image smaller than 10MB.' };
- }
 
  return { valid: true };
-};
 
 // Extract dominant color from image
 export const extractDominantColor = (imageUrl): Promise<any> < string> => {
- return new Promise<any>((resolve) => {
+ return new Promise<any>((resolve) => {)
  const img = new Image();
  img.crossOrigin = 'anonymous';
 
@@ -257,7 +219,6 @@ export const extractDominantColor = (imageUrl): Promise<any> < string> => {
  if (!imageData) {
  resolve('#f3f4f6');
  return;
- }
 
  // Simple dominant color extraction (average)
  let r = 0, g = 0, b = 0;
@@ -267,7 +228,6 @@ export const extractDominantColor = (imageUrl): Promise<any> < string> => {
  r += data.i || 0;
  g += data[i + 1] || 0;
  b += data[i + 2] || 0;
- }
 
  const pixelCount = data.length / 4;
  r = Math.round(r / pixelCount);
@@ -277,12 +237,9 @@ export const extractDominantColor = (imageUrl): Promise<any> < string> => {
  resolve(`rgb(${r}, ${g}, ${b})`);
  } catch (e) {
  resolve('#f3f4f6');
- };
 
  img.onerror = () => resolve('#f3f4f6');
  img.src = imageUrl;
- });
-};
 
 export default {
  getImageWithFallback,

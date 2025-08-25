@@ -4,7 +4,6 @@ export interface BadgeProps {
  variant?: 'default' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
  size?: 'sm' | 'md' | 'lg';
  className?: string;
-}
 
 const variantClasses = {
  default: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200',
@@ -19,20 +18,18 @@ const sizeClasses = {
  md: 'px-2.5 py-1 text-sm',
  lg: 'px-3 py-1.5 text-base' };
 
-export const Badge: React.FC<BadgeProps> = ({
+export const Badge: React.FC<BadgeProps> = ({)
  children,
  variant = 'default',
  size = 'md',
  className = '' }) => {
- return (
- <span;>
+ return (;)
+ <span;>;
 // FIXED:  className={`inline-flex items-center font-medium rounded-full ${
- variantClasses[variant]
+ variantClasses[variant];
  } ${
- sizeClasses[size]
- } ${className}`}/>
+ sizeClasses[size];
+ } ${className}`} />
  {children}
 // FIXED:  </span>
- );
-};
 export default Badge;

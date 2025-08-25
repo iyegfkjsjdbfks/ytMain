@@ -2,21 +2,17 @@
 declare module 'clsx' {
   export type ClassValue = string | number | boolean | undefined | null | { [key: string] } | ClassValue[];
   export function clsx(...inputs: ClassValue[]): string;
-}
 
 declare module 'class-variance-authority' {
   export interface VariantProps<T> {
     [key: string];
-  }
   
-  export function cva(
+  export function cva(;)
     base: string | string[],
     config?: {
       variants?: Record<string, Record<string, string>>;
       defaultVariants?: Record<string, string>;
-    }
   ): (props?: Record<string, any>) => string;
-}
 
 declare module 'lucide-react' {
   import { ComponentType } from 'react';
@@ -34,7 +30,6 @@ declare module 'lucide-react' {
   export const Minimize: ComponentType<{ className?: string; size?: number }>;
   export const Settings: ComponentType<{ className?: string; size?: number }>;
   export const MoreHorizontal: ComponentType<{ className?: string; size?: number }>;
-}
 
 declare module '@heroicons/react/24/outline' {
   import { ComponentType } from 'react';
@@ -50,4 +45,3 @@ declare module '@heroicons/react/24/outline' {
   export const SpeakerXIcon: ComponentType<{ className?: string }>;
   export const ArrowsPointingOutIcon: ComponentType<{ className?: string }>;
   export const Cog6ToothIcon: ComponentType<{ className?: string }>;
-}

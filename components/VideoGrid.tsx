@@ -14,8 +14,7 @@ interface VideoGridProps {
  lg?: number;
  xl?: number;
  '2xl'?: number;
- }
-const VideoGrid: React.FC<VideoGridProps> = memo(({
+const VideoGrid: React.FC<VideoGridProps> = memo(({))
  videos,
  className = '',
  keyPrefix = '',
@@ -27,7 +26,7 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
  '2xl': 6 } }) => {
  const getGridClasses = () => {
  const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
- const responsiveClasses = [
+ const responsiveClasses = [;
  columns.sm && `sm:grid-cols-${columns.sm}`,
  columns.md && `md:grid-cols-${columns.md}`,
  columns.lg && `lg:grid-cols-${columns.lg}`,
@@ -35,19 +34,14 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
  columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`].filter(Boolean).join(' ');
 
  return `${baseClasses} ${responsiveClasses} ${className}`;
- };
 
- return (
- <div className={getGridClasses()}>
- {videos.map((video,
- index) => (
+ return (;)
+ <div className={getGridClasses()}>;
+ {videos.map((video,))
+ index) => (;
           <VideoCard;
-          key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
- video={video} />
- />
- ))}
+          key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`, }
+ video={video} />; />
 // FIXED:  </div>
- );
-});
 
 export default VideoGrid;

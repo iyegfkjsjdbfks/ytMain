@@ -6,7 +6,6 @@ export interface UseEnhancedQueryConfig {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void, 
-}
 
 export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
   const { enabled = true, onSuccess, onError } = config;
@@ -15,7 +14,7 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -29,7 +28,6 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
         hookName: 'useEnhancedQuery',
         timestamp: Date.now(),
         status: 'success',;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -39,10 +37,9 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
       onError?.(error), 
     } finally {
       setLoading(false), 
-    }
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData(), 
   }, [fetchData]);
 
@@ -51,7 +48,6 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
     loading,
     error,
     refetch: fetchData,
-  };
 
 
 export default useEnhancedQuery;

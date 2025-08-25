@@ -4,6 +4,5 @@ exports.browser = void 0;
 // browser - Simple Implementation
 exports.browser = {
     enabled: true,
-    process: (data) => data
-};
+    process: (data) => data;
 exports.default = exports.browser;

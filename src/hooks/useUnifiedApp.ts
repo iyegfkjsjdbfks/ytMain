@@ -12,7 +12,5 @@ export function useUnifiedApp() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useUnifiedApp;

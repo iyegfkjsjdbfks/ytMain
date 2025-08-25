@@ -3,20 +3,17 @@ export interface VideoQuality {
  value: string;
  resolution: string;
  bitrate: string;
-}
 
 export interface Subtitle {
  language: string;
  languageCode: string;
  url: string;
  isDefault: boolean;
-}
 
 export interface Chapter {
  start: number;
  title: string;
  thumbnail?: string;
-}
 
 export interface Video {
  id: string;
@@ -59,12 +56,10 @@ export interface Video {
  dislikeCount: string;
  favoriteCount: string;
  commentCount: string;
- };
  topicDetails?: {
  topicIds: string;
  relevantTopicIds: string;
  topicCategories: string;
- };
  contentDetails?: {
  duration: string;
  dimension: string;
@@ -74,16 +69,13 @@ export interface Video {
  regionRestriction?: {
  allowed?: string;
  blocked?: string;
- };
  contentRating?: Record<string, string>;
  projection?: string;
  hasCustomThumbnail?: boolean;
- };
  player?: {
  embedHtml: string;
  embedHeight?: number;
  embedWidth?: number;
- };
  status?: {
  uploadStatus: string;
  failureReason?: string;
@@ -95,7 +87,6 @@ export interface Video {
  publicStatsViewable: boolean;
  madeForKids: boolean;
  selfDeclaredMadeForKids?: boolean;
- };
  fileDetails?: {
  fileName: string;
  fileSize: string;
@@ -120,21 +111,18 @@ export interface Video {
  durationMs: string;
  bitrateBps: string;
  creationTime: string;
- };
  processingDetails?: {
  processingStatus: string;
  processingProgress?: {
  partsTotal: string;
  partsProcessed: string;
  timeLeftMs: string;
- };
  processingFailureReason?: string;
  fileDetailsAvailability?: string;
  processingIssuesAvailability?: string;
  tagSuggestionsAvailability?: string;
  editorSuggestionsAvailability?: string;
  thumbnailsAvailability?: string;
- };
  suggestions?: {
  processingErrors?: string;
  processingWarnings?: string;
@@ -144,7 +132,6 @@ export interface Video {
  categoryRestricts: string;
  }>;
  editorSuggestions?: string;
- };
  liveStreamingDetails?: {
  actualStartTime?: string;
  actualEndTime?: string;
@@ -152,15 +139,12 @@ export interface Video {
  scheduledEndTime?: string;
  concurrentViewers?: string;
  activeLiveChatId?: string;
- };
- localizations?: Record<
+ localizations?: Record<;
  string,
  {
  title: string;
  description: string;
- }
  >;
  // Required timestamp fields,
  createdAt: string;
  updatedAt: string;
-}

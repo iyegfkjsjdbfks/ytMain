@@ -12,7 +12,5 @@ export function useAsyncState() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useAsyncState;

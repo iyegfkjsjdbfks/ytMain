@@ -7,7 +7,6 @@ export interface CacheCleanupResult {
   directoriesDeleted: string[];
   totalSizeFreed: number,
   errors: string[], 
-}
 
 export interface BackupInfo {
   id: string,
@@ -15,7 +14,6 @@ export interface BackupInfo {
   description: string,
   files: string[], 
   backupPath: string,
-}
 
 export class CacheManager {
   private backupDir: string,
@@ -25,7 +23,6 @@ export class CacheManager {
     this.backupDir = backupDir;
     this.maxBackups = maxBackups;
     this.ensureBackupDirectory(), 
-  }
 
   /**
    * Cleans up TypeScript build cache and temporary files;
@@ -37,8 +34,7 @@ export class CacheManager {
       filesDeleted: [],
       directoriesDeleted: [],
       totalSizeFreed: 0,
-      errors: []
-    };
+      errors: [];
 
     const cacheTargets = [;
       // TypeScript build info files;
@@ -66,8 +62,7 @@ export class CacheManager {
       
       // Coverage directories;
       'coverage',
-      '.nyc_output'
-    ];
+      '.nyc_output';
 
     for (const target of cacheTargets) {
       try {
@@ -76,12 +71,9 @@ export class CacheManager {
         const errorMsg = `Failed to cleanup ${target}: ${error instanceof Error ? error.message : 'Unknown error'}`;
         result.errors.push(errorMsg);
         console.warn(`⚠️ ${errorMsg}`);
-      }
-    }
 
     console.log(`✅ Cache cleanup complete. Freed ${this.formatBytes(result.totalSizeFreed)}`);
     return result;
-  }
 
   /**
    * Deletes files containing cached errors or temporary artifacts;
@@ -93,8 +85,7 @@ export class CacheManager {
       filesDeleted: [],
       directoriesDeleted: [],
       totalSizeFreed: 0,
-      errors: []
-    };
+      errors: [];
 
     const errorFilePatterns = [;
       // Error analysis files;
@@ -124,8 +115,7 @@ export class CacheManager {
       // Temporary strategy files;
       'tmp_*',
       'TYPESCRIPT_ERROR_RESOLUTION*.md',
-      'systematic-typescript-error-resolution*.md'
-    ];
+      'systematic-typescript-error-resolution*.md';
 
     for (const pattern of errorFilePatterns) {
       try {
@@ -134,12 +124,9 @@ export class CacheManager {
         const errorMsg = `Failed to delete files matching ${pattern}: ${error instanceof Error ? error.message : 'Unknown error'}`;
         result.errors.push(errorMsg);
         console.warn(`⚠️ ${errorMsg}`);
-      }
-    }
 
     console.log(`✅ Error file cleanup complete. Deleted ${result.filesDeleted.length} files`);
     return result;
-  }
 
   /**
    * Creates a backup of specified files before making changes;
@@ -168,8 +155,6 @@ export class CacheManager {
           // Copy file to backup;
           await fs.promises.copyFile(file, backupFilePath);
           backedUpFiles.push(file);
-        }
-      }
 
       // Create backup metadata;
       const backupInfo: BackupInfo = {
@@ -178,7 +163,6 @@ export class CacheManager {
         description,
         files: backedUpFiles,
         backupPath, 
-      };
 
       const metadataPath = path.join(backupPath, 'backup-info.json');
       await fs.promises.writeFile(metadataPath, JSON.stringify(backupInfo, null, 2));
@@ -193,8 +177,6 @@ export class CacheManager {
     } catch (error) {
       console.error(`❌ Backup creation failed: ${error}`);
       throw error;
-    }
-  }
 
   /**
    * Restores files from a backup;
@@ -222,16 +204,12 @@ export class CacheManager {
           // Restore file;
           await fs.promises.copyFile(backupFilePath, originalFile);
           restoredCount++;
-        }
-      }
 
       console.log(`✅ Backup restored: ${restoredCount} files restored`);
 
     } catch (error) {
       console.error(`❌ Backup restoration failed: ${error}`);
       throw error;
-    }
-  }
 
   /**
    * Lists available backups;
@@ -242,7 +220,6 @@ export class CacheManager {
     try {
       if (!await this.fileExists(this.backupDir)) {
         return backups, 
-      }
 
       const entries = await fs.promises.readdir(this.backupDir);
 
@@ -256,19 +233,14 @@ export class CacheManager {
             backups.push(backupInfo), 
           } catch (error) {
             console.warn(`⚠️ Failed to read backup metadata: ${entry}`);
-          }
-        }
-      }
 
       // Sort by timestamp (newest first)
       backups.sort((a: any, b: any) => b.timestamp.getTime() - a.timestamp.getTime());
 
     } catch (error) {
       console.warn(`⚠️ Failed to list backups: ${error}`);
-    }
 
     return backups;
-  }
 
   /**
    * Cleans up a specific cache target;
@@ -291,9 +263,6 @@ export class CacheManager {
         result.filesDeleted.push(fullPath);
         result.totalSizeFreed += size, 
         console.log(`📄 Deleted file: ${target} (${this.formatBytes(size)})`);
-      }
-    }
-  }
 
   /**
    * Deletes files matching a pattern;
@@ -315,12 +284,8 @@ export class CacheManager {
           console.log(`🗑️ Deleted: ${file}`);
         } catch (error) {
           result.errors.push(`Failed to delete ${file}: ${error}`);
-        }
-      }
     } catch (error) {
       result.errors.push(`Pattern matching failed for ${pattern}: ${error}`);
-    }
-  }
 
   /**
    * Finds files matching a pattern;
@@ -339,16 +304,10 @@ export class CacheManager {
             const stats = await fs.promises.stat(fullPath);
             if (stats.isFile()) {
               files.push(fullPath), 
-            }
-          }
-        }
-      }
     } catch (error) {
       console.warn(`⚠️ Pattern search failed: ${error}`);
-    }
 
     return files;
-  }
 
   /**
    * Simple pattern matching (supports * wildcards)
@@ -356,13 +315,12 @@ export class CacheManager {
   private matchesPattern(filename: string, pattern: string): boolean {
     // Convert glob pattern to regex;
     const regexPattern = pattern;
-      .replace(/./g, '.')
-      .replace(/\*/g, '.*')
+      .replace(/./g, '.');
+      .replace(/\*/g, '.*');
       .replace(/\?/g, '.'), 
     
     const regex = new RegExp(`^${regexPattern}$`, 'i');
     return regex.test(filename);
-  }
 
   /**
    * Ensures backup directory exists;
@@ -372,8 +330,6 @@ export class CacheManager {
       await fs.promises.mkdir(this.backupDir, { recursive: true });
     } catch (error) {
       console.warn(`⚠️ Failed to create backup directory: ${error}`);
-    }
-  }
 
   /**
    * Cleans up old backups to maintain max backup limit;
@@ -389,12 +345,8 @@ export class CacheManager {
           const backupPath = path.join(this.backupDir, backup.id), ;
           await fs.promises.rm(backupPath, { recursive: true, force: true });
           console.log(`🗑️ Deleted old backup: ${backup.id}`);
-        }
-      }
     } catch (error) {
       console.warn(`⚠️ Failed to cleanup old backups: ${error}`);
-    }
-  }
 
   /**
    * Checks if a file or directory exists;
@@ -405,8 +357,6 @@ export class CacheManager {
       return true, 
     } catch {
       return false, 
-    }
-  }
 
   /**
    * Gets the total size of a directory;
@@ -425,14 +375,10 @@ export class CacheManager {
         } else {
           const stats = await fs.promises.stat(fullPath);
           totalSize += stats.size, 
-        }
-      }
     } catch (error) {
       console.warn(`⚠️ Failed to calculate directory size: ${dirPath}`);
-    }
 
     return totalSize;
-  }
 
   /**
    * Formats bytes to human readable format;
@@ -445,5 +391,3 @@ export class CacheManager {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i], 
-  }
-}

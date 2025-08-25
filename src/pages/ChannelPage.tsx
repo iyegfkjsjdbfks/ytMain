@@ -14,7 +14,6 @@ interface PlaylistSummary {
   description?: string;
   videoCount: number,
   thumbnailUrl?: string, 
-}
 
 interface CommunityPost {
   id: string,
@@ -22,7 +21,6 @@ interface CommunityPost {
   createdAt: string,
   likes: number,
   comments: number,
-}
 
 const ChannelPage: React._FC = () => {
   const { channelIdOrName } = useParams<{ channelIdOrName: string }>();
@@ -35,7 +33,7 @@ const ChannelPage: React._FC = () => {
   const [activeTab, setActiveTab] = useState('HOME');
   const [isSubscribed, setIsSubscribed] = useState<boolea>n>(false);
 
-  const tabs = [
+  const tabs = [;
     { id: 'HOME', label: 'Home' },
     { id: 'VIDEOS', label: 'Videos' },
     { id: 'SHORTS', label: 'Shorts' },
@@ -43,15 +41,13 @@ const ChannelPage: React._FC = () => {
     { id: 'PLAYLISTS', label: 'Playlists' },
     { id: 'COMMUNITY', label: 'Community' },;
     { id: 'ABOUT', label: 'About' };
-  ];
 
-  useEffect(() => {
+  useEffect(() => {)
     const fetchChannelData = async (): Promise<voi>d,> => {
       if (!channelIdOrName) {;
         setError('Channel identifier is missing.');
         setLoading(false);
         return, 
-      }
       setLoading(true);
       setError(null);
       setActiveTab('HOME'); // Reset to home on new channel load;
@@ -64,15 +60,14 @@ const ChannelPage: React._FC = () => {
         if (fetchedChannel) {
           setChannel(fetchedChannel);
           // Fetch all data concurrently;
-          const [
+          const [;
             fetchedVideos,
             fetchedPlaylists,
             fetchedCommunityPosts,;
-          ] = await Promise.all([
+          ] = await Promise.all([;)
             getVideosByChannelName(fetchedChannel.name || decodedName),
             getChannelPlaylists(fetchedChannel.name || decodedName),
-            getChannelCommunityPosts(fetchedChannel.name || decodedName)
-          ]);
+            getChannelCommunityPosts(fetchedChannel.name || decodedName);
           setVideos(fetchedVideos);
           setChannelPlaylists(fetchedPlaylists);
           setChannelCommunityPosts(fetchedCommunityPosts), 
@@ -90,7 +85,6 @@ const ChannelPage: React._FC = () => {
             isVerified: false,
             createdAt: new Date().toISOString(),;
             updatedAt: new Date().toISOString();
-          };
           setChannel(mockChannel);
 
           // Fetch videos for the channel name;
@@ -98,60 +92,50 @@ const ChannelPage: React._FC = () => {
           setVideos(fetchedVideos);
           setChannelPlaylists([]);
           setChannelCommunityPosts([]);
-        }
       } catch (err) {
         console.error('Error fetching channel data:', err);
         setError('Failed to load channel data. Please try again later.'), 
       } finally {
         setLoading(false), 
-      }
-    };
 
-    fetchChannelData().catch(() => {
+    fetchChannelData().catch(() => {)
       // Handle promise rejection silently, 
-    });
     window.scrollTo(0, 0);
   }, [channelIdOrName]);
 
   const handleSubscribeToggle = () => {
     setIsSubscribed(prev => !prev), ;
-  };
 
   if (loading) {
-    return <ChannelPageSkeleton  />  />, 
-  }
+    return <ChannelPageSkeleton /> />, 
 
   if (error) {
-    return (
-      <div  />className="p-6 text-center text-red-500 dark:text-red-400 text-lg"></div  />
+    return (;)
+      <div />className="p-6 text-center text-red-500 dark:text-red-400 text-lg"></div />;
         {error}
-      </div>
-    );
-  }
+      </div>;
 
   if (!channel) {
-    return (
-      <div  />className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg"></div  />
-        Channel not found.
-      </div>
-    ), 
-  }
+    return (;)
+      <div />className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg"></div />;
+        Channel not found.;
+      </div>;
 
-  return (
-    <div  />className="bg-white dark:bg-neutral-950 min-h-full"></div  />
-      <ChannelHeader  />;  />
+  return (;)
+    <div />className="bg-white dark:bg-neutral-950 min-h-full"></div />;
+      <ChannelHeader />; />;
         channel={channel}
         videoCount={videos.length}
         isSubscribed={isSubscribed}
         onSubscribeToggle={handleSubscribeToggle}
       /">"
 
-      <div  />className="px-4 md:px-6 lg:px-8"></div  />
-        <ChannelTabs  />tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} /  />
-      </div>
+      <div />className="px-4 md:px-6 lg:px-8"></div />;
+        <ChannelTabs />tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} / />;
+      </div>;
 
-      <div  />className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"></div  />
-        <ChannelTabContent  />;  />
+      <div />className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"></div />;
+        <ChannelTabContent />; />;
           activeTab={activeTab}
           channel={channel}
           videos={videos}
@@ -159,9 +143,7 @@ const ChannelPage: React._FC = () => {
           communityPosts={channelCommunityPosts}
           onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
         /">"
-      </div>
-    </div>
-  );
-};
+      </div>;
+    </div>;
 
 export default ChannelPage;

@@ -11,12 +11,12 @@ export interface UseLocalStorageOptions {
 export interface UseLocalStorageResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function useLocalStorage(
-  options: UseLocalStorageOptions = {})
+export function useLocalStorage(;)
+  options: UseLocalStorageOptions = {});
 ): UseLocalStorageResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function useLocalStorage(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -37,7 +37,6 @@ export function useLocalStorage(
         hookName: 'useLocalStorage'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -50,7 +49,7 @@ export function useLocalStorage(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -59,7 +58,6 @@ export function useLocalStorage(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default useLocalStorage;

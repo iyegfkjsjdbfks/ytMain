@@ -11,12 +11,12 @@ export interface UseTrendingSearchOptions {
 export interface UseTrendingSearchResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function useTrendingSearch(
-  options: UseTrendingSearchOptions = {})
+export function useTrendingSearch(;)
+  options: UseTrendingSearchOptions = {});
 ): UseTrendingSearchResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function useTrendingSearch(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -38,7 +38,6 @@ export function useTrendingSearch(
         hookName: 'useTrendingSearch'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -51,7 +50,7 @@ export function useTrendingSearch(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -60,7 +59,6 @@ export function useTrendingSearch(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default useTrendingSearch;

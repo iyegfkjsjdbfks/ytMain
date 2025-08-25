@@ -31,33 +31,29 @@ async function main() {
       const rootCause = errors[0]?.category.rootCause || 'Unknown';
       const strategy = errors[0]?.category.fixingStrategy || 'individual';
       console.log(`${category}: ${errors.length} errors (${rootCause}, ${strategy} fix)`);
-    }
     
     // Display error breakdown by severity;
     console.log('\n🚨 ERRORS BY SEVERITY');
     console.log('====================');
     for (const [severity, errors] of result.errorsBySeverity.entries()) {
       console.log(`${severity.toUpperCase()}: ${errors.length} errors`);
-    }
     
     // Display top problematic files;
     console.log('\n📁 TOP PROBLEMATIC FILES');
     console.log('=======================');
-    const fileErrorCounts = Array.from(result.errorsByFile.entries())
-      .map(([file, errors]) => ({ file, count: errors.length }))
-      .sort((a, b) => b.count - a.count)
+    const fileErrorCounts = Array.from(result.errorsByFile.entries());
+      .map(([file, errors]) => ({ file, count: errors.length }));
+      .sort((a, b) => b.count - a.count);
       .slice(0, 10);
       
     for (const { file, count } of fileErrorCounts) {
       console.log(`${file}: ${count} errors`);
-    }
     
     // Display recommendations;
     console.log('\n💡 RECOMMENDATIONS');
     console.log('==================');
     for (const recommendation of result.recommendations) {
       console.log(`• ${recommendation}`);
-    }
     
     // Save detailed analysis;
     const outputPath = path.join(process.cwd(), 'error-analysis-result.json');
@@ -69,12 +65,9 @@ async function main() {
   } catch (error) {
     console.error('❌ Analysis failed:', error);
     process.exit(1);
-  }
-}
 
 // Run the CLI if this file is executed directly;
 if (require.main === module) {
   main().catch(console.error);
-}
 
 export { main };

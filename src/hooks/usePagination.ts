@@ -12,7 +12,5 @@ export function usePagination() {
     data,
     loading,
     error, 
-  };
-}
 
 export default usePagination;

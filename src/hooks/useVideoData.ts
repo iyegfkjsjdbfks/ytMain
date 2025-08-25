@@ -11,7 +11,6 @@ interface Video {
   channel: string,
   views: number,
   uploadedAt: Date,
-}
 
 export function useVideoData() {
   const [data, setData] = useState<Video[] | null>(null);
@@ -23,8 +22,6 @@ export function useVideoData() {
     loading,
     error,
     setData, 
-  };
-}
 
 // Additional video-related hooks;
 export function useVideos() {
@@ -37,8 +34,6 @@ export function useVideos() {
     loading,
     error,
     setVideos, 
-  };
-}
 
 export function useTrendingVideos() {
   const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
@@ -50,8 +45,6 @@ export function useTrendingVideos() {
     loading,
     error,
     setTrendingVideos, 
-  };
-}
 
 export function useSubscriptionsFeed() {
   const [subscriptionsFeed, setSubscriptionsFeed] = useState<Video[]>([]);
@@ -63,8 +56,6 @@ export function useSubscriptionsFeed() {
     loading,
     error,
     setSubscriptionsFeed, 
-  };
-}
 
 export function useChannelVideos() {
   const [channelVideos, setChannelVideos] = useState<Video[]>([]);
@@ -76,7 +67,5 @@ export function useChannelVideos() {
     loading,
     error,
     setChannelVideos, 
-  };
-}
 
 export default useVideoData;

@@ -1,15 +1,12 @@
 // Global type definitions
 declare module 'react' {
   export * from '@types/react';
-}
 
 declare module 'react-dom' {
   export * from '@types/react-dom';
-}
 
 declare module 'react-router-dom' {
   export * from 'react-router-dom';
-}
 
 declare module '@heroicons/react/24/outline' {
   import { ComponentType, SVGProps } from 'react';
@@ -40,14 +37,12 @@ declare module '@heroicons/react/24/outline' {
   export const Cog6ToothIcon: ComponentType<SVGProps<SVGSVGElement>>;
   export const HomeIcon: ComponentType<SVGProps<SVGSVGElement>>;
   export const FireIcon: ComponentType<SVGProps<SVGSVGElement>>;
-}
 
 // Common component props
 declare global {
   interface ComponentProps {
     className?: string;
     children?: React.ReactNode;
-  }
   
   interface VideoData {
     id: string;
@@ -61,8 +56,6 @@ declare global {
       id: string;
       name: string;
       avatar: string;
-    };
-  }
   
   interface ChannelData {
     id: string;
@@ -72,7 +65,6 @@ declare global {
     description?: string;
     subscriberCount: number;
     videoCount: number;
-  }
   
   interface CommentData {
     id: string;
@@ -80,11 +72,8 @@ declare global {
     author: {
       name: string;
       avatar: string;
-    };
     timestamp: string;
     likes: number;
     replies?: CommentData[];
-  }
-}
 
 export {};

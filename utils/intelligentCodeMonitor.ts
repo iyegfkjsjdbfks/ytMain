@@ -18,16 +18,14 @@ export interface CodeMetrics {
  technicalDebt: number;,
  securityVulnerabilities: number;
  performanceIssues: number;,
- accessibilityIssues: number
-}
+ accessibilityIssues: number;
 
 export interface CodeQualityTrend {
  timestamp: number;,
  _metrics: CodeMetrics;
  score: number;,
  improvements: string[];
- regressions: string[]
-}
+ regressions: string[];
 
 export interface RefactoringOpportunity {
  id: string;,
@@ -41,9 +39,7 @@ export interface RefactoringOpportunity {
  suggestion: string;
  codeExample?: {
  before: string;,
- after: string
- };
-}
+ after: string;
 
 export interface CodeReviewInsight {
  id: string;,
@@ -53,8 +49,7 @@ export interface CodeReviewInsight {
  description: string;,
  recommendation: string;
  files: string[];,
- estimatedImpact: string
-}
+ estimatedImpact: string;
 
 export interface QualityGate {
  id: string;,
@@ -62,11 +57,10 @@ export interface QualityGate {
  criteria: Array<{,
  metric: keyof CodeMetrics;
  operator: '>' | '<' | '>=' | '<=' | '==';,
- threshold: number
+ threshold: number;
  }>;
  blocking: boolean;,
- enabled: boolean
-}
+ enabled: boolean;
 
 /**
  * Intelligent Code Quality Monitor
@@ -83,49 +77,47 @@ export class IntelligentCodeMonitor {
  constructor() {
  this.initializeQualityGates();
  this.startMonitoring();
- }
 
  /**
  * Initialize default quality gates
  */
  private initializeQualityGates(): void {
- this.qualityGates = [
+ this.qualityGates = [;
  {
  id: 'complexity - gate',
  name: 'Code Complexity',
- criteria: [
+ criteria: [;
  { metric: 'complexity', operator: '<=', threshold: 10 }],
  blocking: true,
  enabled: true },
  {
  id: 'coverage - gate',
  name: 'Test Coverage',
- criteria: [
+ criteria: [;
  { metric: 'testCoverage', operator: '>=', threshold: 80 }],
  blocking: true,
  enabled: true },
  {
  id: 'security - gate',
  name: 'Security Vulnerabilities',
- criteria: [
+ criteria: [;
  { metric: 'securityVulnerabilities', operator: '==', threshold: 0 }],
  blocking: true,
  enabled: true },
  {
  id: 'maintainability - gate',
  name: 'Maintainability Index',
- criteria: [
+ criteria: [;
  { metric: 'maintainability', operator: '>=', threshold: 70 }],
  blocking: false,
  enabled: true },
  {
  id: 'duplicate - code - gate',
  name: 'Duplicate Code',
- criteria: [
+ criteria: [;
  { metric: 'duplicateCode', operator: '<=', threshold: 5 }],
  blocking: false,
  enabled: true }];
- }
 
  /**
  * Start continuous monitoring
@@ -133,7 +125,6 @@ export class IntelligentCodeMonitor {
  startMonitoring(): void {
  if (this.isMonitoring) {
 return;
-}
 
  this.isMonitoring = true;
  (console).log('🔍 Starting intelligent code quality monitoring...');
@@ -142,10 +133,9 @@ return;
  this.performAnalysis();
 
  // Set up periodic monitoring
- this.monitoringInterval = setInterval((() => {
+ this.monitoringInterval = setInterval((() => {))
  this.performAnalysis();
  }) as any, 5 * 60 * 1000); // Every 5 minutes
- }
 
  /**
  * Stop monitoring
@@ -153,16 +143,13 @@ return;
  stopMonitoring(): void {
  if (!this.isMonitoring) {
 return;
-}
 
  this.isMonitoring = false;
  if (this.monitoringInterval) {
  clearInterval(this.monitoringInterval);
  this.monitoringInterval = null;
- }
 
  (console).log('⏹️ Stopped code quality monitoring');
- }
 
  /**
  * Perform comprehensive code analysis
@@ -189,7 +176,7 @@ return;
 
  if (previousTrend) {
  // Compare with previous _metrics
- Object.entries(_metrics).forEach(([key, value]) => {
+ Object.entries(_metrics).forEach(([key, value]) => {)
  const previousValue = previousTrend._metrics[key as keyof CodeMetrics];
  const improvement = this.isImprovement(key as keyof CodeMetrics, value, previousValue);
 
@@ -197,9 +184,6 @@ return;
  improvements.push(`${key} improved by ${improvement.toFixed(1)}%`);
  } else if (improvement < -5) { // Only report significant regressions
  regressions.push(`${key} regressed by ${Math.abs(improvement).toFixed(1)}%`);
- }
- });
- }
 
  // Store trend
  const trend: CodeQualityTrend = {,
@@ -214,7 +198,6 @@ return;
  // Keep only last 100 trends
  if (this.trends.length > 100) {
  this.trends = this.trends.slice(-100);
- }
 
  // Generate insights and opportunities
  await this.generateRefactoringOpportunities(_metrics);
@@ -227,18 +210,15 @@ return;
  if (regressions.length > 0) {
  (console).warn('⚠️ Code quality regressions detected:', regressions);
  advancedAPM.recordMetric('code - quality - regression', regressions.length);
- }
 
  if (improvements.length > 0) {
  (console).log('✅ Code quality improvements:', improvements);
  advancedAPM.recordMetric('code - quality - improvement', improvements.length);
- }
 
  this.lastAnalysis = now;
 
  } catch (error) {
  (console).error('Failed to perform code analysis:', error);
- }
  /**
  * Collect comprehensive code _metrics
  */
@@ -272,7 +252,6 @@ return;
  securityVulnerabilities: 0,
  performanceIssues: 2,
  accessibilityIssues: 3 };
- }
  /**
  * Generate realistic metric values with some variation
  */
@@ -286,10 +265,8 @@ return;
  // Small random walk
  const change = (Math.random() * 0.5) * 2; // -1 to 1
  return Math.max(min, Math.min(max, previousValue + change));
- }
 
  return Math.round(base * 10) / 10;
- }
 
  /**
  * Calculate overall quality score
@@ -304,21 +281,17 @@ return;
  securityVulnerabilities: -5, // Lower is better,
  performanceIssues: -2, // Lower is better,
  accessibilityIssues: -1, // Lower is better
- };
 
  let score: number = 50; // Base score
 
- Object.entries(_metrics).forEach(([key, value]) => {
+ Object.entries(_metrics).forEach(([key, value]) => {)
  const weight = weights[key as keyof typeof weights];
  if (weight > 0) {
  score += (value / 100) * weight * 50;
  } else {
  score += Math.max(0(100 - value) / 100) * Math.abs(weight) / 10;
- }
- });
 
  return Math.max(0, Math.min(100, Math.round(score)));
- }
 
  /**
  * Check if a metric change is an improvement
@@ -328,12 +301,10 @@ return;
 
  if (previous === 0) {
 return 0;
-}
 
  const percentChange = ((current - previous) / previous) * 100;
 
  return lowerIsBetter.includes(metric) ? -percentChange : percentChange;
- }
 
  /**
  * Generate refactoring opportunities
@@ -343,7 +314,7 @@ return 0;
 
  // High complexity opportunities
  if (metrics.complexity > 10) {
- opportunities.push({
+ opportunities.push({)
  id: 'reduce - complexity',
  type: "maintainability",
  file: 'components / ComplexComponent.tsx,',
@@ -356,11 +327,10 @@ return 0;
  codeExample: {,
  before: 'function complexFunction() /* 50+ lines of code */ }',
  after: 'function mainFunction() helper1(); helper2(); helper3() }' } });
- }
 
  // Low test coverage opportunities
  if (metrics.testCoverage < 80) {
- opportunities.push({
+ opportunities.push({)
  id: 'improve - test - coverage',
  type: "testing",
  file: 'utils / uncoveredUtils.ts,',
@@ -373,11 +343,10 @@ return 0;
  codeExample: {,
  before: '// No tests',
  after: 'describe("utilFunction", () => { it("should work correctly", () => { ... }); });' } });
- }
 
  // Performance opportunities
  if (metrics.performanceIssues > 3) {
- opportunities.push({
+ opportunities.push({)
  id: 'optimize - performance',
  type: "performance",
  file: 'components / SlowComponent.tsx,',
@@ -390,11 +359,10 @@ return 0;
  codeExample: {,
  before: 'export const SlowComponent = ({ data }: any) => { ... }',
  after: 'export const SlowComponent = React.memo(({ data }) => { ... });' } });
- }
 
  // Security opportunities
  if (metrics.securityVulnerabilities > 0) {
- opportunities.push({
+ opportunities.push({)
  id: 'fix - security - issues',
  type: "security",
  file: 'utils / apiUtils.ts,',
@@ -407,11 +375,10 @@ return 0;
  codeExample: {,
  before: 'innerHTML = userInput',
  after: 'innerHTML = DOMPurify.sanitize(userInput),' } });
- }
 
  // Accessibility opportunities
  if (metrics.accessibilityIssues > 5) {
- opportunities.push({
+ opportunities.push({)
  id: 'improve - accessibility',
  type: "accessibility",
  file: 'components / Button.tsx,',
@@ -424,10 +391,8 @@ return 0;
  codeExample: {,
  before: '<button onClic={true}k={handleClick}>Submit</button>',
  after: '<button onClic={true}k={handleClick} aria - label="Submit form">Submit</button>' } });
- }
 
  this.opportunities = opportunities;
- }
 
  /**
  * Generate code review insights
@@ -437,7 +402,7 @@ return 0;
 
  // Architecture insights
  if (metrics.complexity > 12) {
- insights.push({
+ insights.push({)
  id: 'architecture - complexity',
  category: 'architecture',
  severity: 'warning',
@@ -446,11 +411,10 @@ return 0;
  recommendation: 'Consider implementing Domain - Driven Design patterns to better organize code',
  files: ['src / components/', 'src / utils/', 'src / services/'],
  estimatedImpact: 'Improved maintainability and reduced development time' });
- }
 
  // Pattern insights
  if (metrics.duplicateCode > 8) {
- insights.push({
+ insights.push({)
  id: 'pattern - duplication',
  category: 'patterns',
  severity: 'warning',
@@ -459,11 +423,10 @@ return 0;
  recommendation: 'Extract common functionality into reusable hooks or utility functions',
  files: ['components / VideoCard.tsx', 'components / PlaylistCard.tsx'],
  estimatedImpact: 'Reduced bundle size and improved maintainability' });
- }
 
  // Performance insights
  if (metrics.performanceIssues > 4) {
- insights.push({
+ insights.push({)
  id: 'performance - optimization',
  category: 'performance',
  severity: 'error',
@@ -472,11 +435,10 @@ return 0;
  recommendation: 'Implement code splitting, lazy loading, and memoization strategies',
  files: ['components / VideoGrid.tsx', 'pages / Home.tsx'],
  estimatedImpact: 'Faster page loads and better user experience' });
- }
 
  // Security insights
  if (metrics.securityVulnerabilities > 0) {
- insights.push({
+ insights.push({)
  id: 'security - vulnerabilities',
  category: 'security',
  severity: 'error',
@@ -485,11 +447,10 @@ return 0;
  recommendation: 'Implement input validation, output encoding, and security headers',
  files: ['utils / apiUtils.ts', 'components / SearchBar.tsx'],
  estimatedImpact: 'Enhanced application security and user data protection' });
- }
 
  // Testing insights
  if (metrics.testCoverage < 75) {
- insights.push({
+ insights.push({)
  id: 'testing - coverage',
  category: 'testing',
  severity: 'warning',
@@ -498,10 +459,8 @@ return 0;
  recommendation: 'Implement comprehensive unit and integration tests',
  files: ['tests/', 'src/'],
  estimatedImpact: 'Reduced bugs and increased confidence in deployments' });
- }
 
  this.insights = insights;
- }
 
  /**
  * Check quality gates
@@ -509,28 +468,25 @@ return 0;
  private checkQualityGates(metrics: CodeMetrics): void {
  const failedGates: string[] = [];
 
- this.qualityGates.forEach((gate) => {
+ this.qualityGates.forEach((gate) => {)
  if (!gate.enabled) {
 return;
-}
 
- const failed = gate.criteria.some((criterion) => {
+ const failed = gate.criteria.some((criterion) => {)
  const value = metrics[criterion.metric as keyof CodeMetrics];
 
  switch (criterion.operator) {
- case '>':
+ case '>':;
  return value <= criterion.threshold;
- case '<':
+ case '<':;
  return value >= criterion.threshold;
- case '>=':
+ case '>=':;
  return value < criterion.threshold;
- case '<=':
+ case '<=':;
  return value > criterion.threshold;
- case '==':
+ case '==':;
  return value !== criterion.threshold;
- default: return false
- }
- });
+ default: return false;
 
  if (failed) {
  failedGates.push(gate.name);
@@ -540,39 +496,32 @@ return;
  advancedAPM.recordMetric('quality - gate - failure', 1, { gate: gate.name });
  } else {
  (console).warn(`⚠️ Quality gate warning: ${gate.name}`);
- }
- });
 
  if (failedGates.length === 0) {
  (console).log('✅ All quality gates passed');
- }
  /**
  * Get current trends
  */
  getTrends(): CodeQualityTrend[] {
  return [...this.trends];
- }
 
  /**
  * Get refactoring opportunities
  */
  getRefactoringOpportunities(): RefactoringOpportunity[] {
  return [...this.opportunities];
- }
 
  /**
  * Get code review insights
  */
  getCodeReviewInsights(): CodeReviewInsight[] {
  return [...this.insights];
- }
 
  /**
  * Get quality gates
  */
  getQualityGates(): QualityGate[] {
  return [...this.qualityGates];
- }
 
  /**
  * Get latest _metrics
@@ -580,23 +529,20 @@ return;
  getLatestMetrics(): CodeMetrics | null {
  const latestTrend = this.trends[this.trends.length - 1];
  return latestTrend ? latestTrend._metrics : null;
- }
 
  /**
  * Get quality score trend
  */
  getQualityScoreTrend(): Array<{ timestamp: number; score: number }> {
- return this.trends.map((trend) => ({
+ return this.trends.map((trend) => ({))
  timestamp: trend.timestamp,
  score: trend.score }));
- }
 
  /**
  * Auto - implement simple refactoring opportunities
  */
  async autoImplementRefactoring(opportunityIds: string[]): Promise<any> < void> {
- const automatableOpportunities = this.opportunities.filter((op) => opportunityIds.includes(op.id) && op.automatable
- );
+ const automatableOpportunities = this.opportunities.filter((op) => opportunityIds.includes(op.id) && op.automatable;)
 
  (console).log(`🔧 Auto - implementing ${automatableOpportunities.length} refactoring opportunities...`);
 
@@ -607,8 +553,6 @@ return;
  advancedAPM.recordMetric('auto - refactoring - applied', 1, { type: opportunity.type });
  } catch (error) {
  (console).error(`❌ Failed to apply refactoring: ${opportunity.description}`, error);
- }
- }
 
  /**
  * Generate quality report
@@ -617,7 +561,6 @@ return;
  const latest = this.trends[this.trends.length - 1];
  if (!latest) {
 return 'No data available';
-}
 
  const report = [;
  '# Code Quality Report',
@@ -641,24 +584,21 @@ return 'No data available';
  ...latest.regressions.map((reg) => `- ${reg}`),
  '',
  '## Refactoring Opportunities',
- ...this.opportunities.slice(0, 5).map((op) =>
+ ...this.opportunities.slice(0, 5).map((op) =>;)
  `- ${op.description} (${op.impact} impact, ${op.effort} effort)${op.automatable ? ' [Auto - fixable]' : ''}`,
- ),
  '',
  '## Code Review Insights',
- ...this.insights.slice(0, 3).map((insight) =>
+ ...this.insights.slice(0, 3).map((insight) =>;)
  `- ${insight.title}: ${insight.description}`,
  )].filter((line) => line !== undefined);
 
  return report.join('\n');
- }
 // Create and export singleton instance
 export const intelligentCodeMonitor = new IntelligentCodeMonitor();
 
 // Auto - start in development mode
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
  (console).log('🚀 Intelligent Code Monitor initialized');
-}
 
 export default intelligentCodeMonitor;
 export type {

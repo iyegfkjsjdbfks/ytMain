@@ -13,8 +13,7 @@ interface ConfigStatus {
  hasEngineId: boolean;
  apiKeyLength?: number;
  engineIdLength?: number;
- recommendations: string[]
-}
+ recommendations: string[];
 
 export const checkYouTubeAPIConfig = (): ConfigStatus => {
  const status = youtubeSearchService.getConfigStatus();
@@ -24,13 +23,11 @@ export const checkYouTubeAPIConfig = (): ConfigStatus => {
  if (!status.hasApiKey) {
  recommendations.push('Add VITE_GOOGLE_SEARCH_API_KEY to your .env file');
  recommendations.push('Get API key from: https://console.developers.google.com/')
- }
 
  // Check Engine ID
  if (!status.hasEngineId) {
  recommendations.push('Add VITE_GOOGLE_SEARCH_ENGINE_ID to your .env file');
  recommendations.push('Create Custom Search Engine at: https://cse.google.com/')
- }
 
  // Additional recommendations
  if (status.configured) {
@@ -38,8 +35,7 @@ export const checkYouTubeAPIConfig = (): ConfigStatus => {
  recommendations.push('Recommendations will use live YouTube search results');
  } else {
  recommendations.push('📋 Setup Guide: See GOOGLE_SEARCH_SETUP.md for detailed instructions');
- recommendations.push('🔄 Fallback: Using static sample videos until API is configured')
- }
+ recommendations.push('🔄 Fallback: Using static sample videos until API is configured');
 
  return {
  isConfigured: status.configured,
@@ -48,7 +44,6 @@ export const checkYouTubeAPIConfig = (): ConfigStatus => {
  apiKeyLength: API_CONFIG.GOOGLE_SEARCH_API_KEY?.length,
  engineIdLength: API_CONFIG.GOOGLE_SEARCH_ENGINE_ID?.length,
  recommendations };
-};
 
 /**
  * Test the YouTube Search API with a simple query
@@ -67,7 +62,6 @@ export const testYouTubeAPI = async (): Promise<{
  success: true,
  message: 'YouTube Search API is working correctly',
  results: results.length };
- }
  return {
  success: false,
  message: 'API responded but returned no results',
@@ -78,8 +72,6 @@ export const testYouTubeAPI = async (): Promise<{
  success: false,
  message: 'YouTube Search API test failed',
  error: error instanceof Error ? error.message : 'Unknown error' };
- }
-};
 
 /**
  * Log configuration status to console for debugging
@@ -97,14 +89,12 @@ export const logConfigStatus = (): void => {
  (console).groupEnd();
 
  (console).groupEnd();
-};
 
 /**
  * Show configuration info in development mode
  */
 if (import.meta.env.DEV) {
  logConfigStatus();
-}
 
 export default {
  checkYouTubeAPIConfig,

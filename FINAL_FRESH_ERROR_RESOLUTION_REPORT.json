@@ -1,0 +1,1416 @@
+{
+  "timestamp": "2025-08-25T17:18:50.495Z",
+  "deployment": {
+    "system": "Final Fresh TypeScript Error Resolution Deployment",
+    "guides": [
+      "DEPLOYMENT_GUIDE.md",
+      "IMPLEMENTATION_SUMMARY.md"
+    ],
+    "components": {
+      "coreComponents": [
+        "ExecutionOrchestrator - Phase-based execution with dependency management",
+        "ProcessMonitor - Timeout detection and resource monitoring",
+        "ReportGenerator - Comprehensive HTML/JSON/Markdown reporting",
+        "RollbackManager - Multi-level rollback with Git integration",
+        "ValidationEngine - Multi-type validation (syntax, lint, build, tests)",
+        "WorkflowCoordinator - End-to-end orchestration of all phases"
+      ],
+      "scriptGenerators": [
+        "BaseScriptGenerator - Abstract framework with template system",
+        "FormattingScriptGenerator - ESLint, Prettier, code style fixes",
+        "SyntaxScriptGenerator - Brackets, semicolons, indentation",
+        "TypeScriptGenerator - Interface and type system fixes"
+      ],
+      "specializedFixers": [
+        "ImportFixer - Module resolution, circular dependency detection",
+        "TypeFixer - Interface compatibility, missing properties",
+        "LogicFixer - Null/undefined handling, async patterns"
+      ]
+    }
+  },
+  "results": {
+    "initialErrors": 7818,
+    "finalErrors": 11375,
+    "errorsFixed": 0,
+    "successRate": "0.0%",
+    "errorAnalysis": {
+      "UNCATEGORIZED_TS1134": {
+        "description": "Uncategorized TS1134 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 58,
+        "examples": [
+          "components/CategoryChips.tsx(32,9): error TS1134: Variable declaration expected.",
+          "contexts/WatchLaterContext.tsx(50,9): error TS1134: Variable declaration expected.",
+          "src/components/LoadingSpinner.tsx(8,46): error TS1134: Variable declaration expected."
+        ]
+      },
+      "TS1128_DECLARATION_EXPECTED": {
+        "regex": {},
+        "description": "Invalid code structure or stray syntax",
+        "cause": "Broken code blocks or misplaced punctuation",
+        "strategy": "structure_cleanup",
+        "priority": 1,
+        "automated": true,
+        "count": 966,
+        "examples": [
+          "components/CategoryChips.tsx(35,3): error TS1128: Declaration or statement expected.",
+          "components/CategoryChips.tsx(35,4): error TS1128: Declaration or statement expected.",
+          "components/CategoryChips.tsx(104,1): error TS1128: Declaration or statement expected.",
+          "components/VideoCard.tsx(58,2): error TS1128: Declaration or statement expected.",
+          "components/VideoCard.tsx(78,3): error TS1128: Declaration or statement expected."
+        ]
+      },
+      "TS1005_MISSING_PUNCTUATION": {
+        "regex": {},
+        "description": "Missing punctuation (comma, semicolon, parenthesis)",
+        "cause": "Syntax errors in TypeScript/JavaScript code structure",
+        "strategy": "punctuation_fix",
+        "priority": 1,
+        "automated": true,
+        "count": 2437,
+        "examples": [
+          "components/CategoryChips.tsx(35,8): error TS1005: ';' expected.",
+          "components/VideoCard.tsx(18,55): error TS1005: ')' expected.",
+          "components/VideoCard.tsx(18,83): error TS1005: ';' expected.",
+          "components/VideoCard.tsx(50,11): error TS1005: ')' expected.",
+          "components/VideoCard.tsx(50,25): error TS1005: ';' expected."
+        ]
+      },
+      "TS1109_EXPRESSION_EXPECTED": {
+        "regex": {},
+        "description": "Expression expected in conditional or assignment",
+        "cause": "Malformed conditional expressions or incomplete statements",
+        "strategy": "expression_fix",
+        "priority": 1,
+        "automated": true,
+        "count": 3052,
+        "examples": [
+          "components/ChannelHeader.tsx(35,28): error TS1109: Expression expected.",
+          "components/VideoCard.tsx(18,81): error TS1109: Expression expected.",
+          "components/VideoCard.tsx(50,100): error TS1109: Expression expected.",
+          "components/VideoCard.tsx(50,101): error TS1109: Expression expected.",
+          "components/VideoCard.tsx(50,110): error TS1109: Expression expected."
+        ]
+      },
+      "TS1382_JSX_SELF_CLOSING": {
+        "regex": {},
+        "description": "JSX self-closing tag syntax error",
+        "cause": "Missing space before /> in JSX elements",
+        "strategy": "jsx_self_closing_fix",
+        "priority": 1,
+        "automated": true,
+        "count": 38,
+        "examples": [
+          "components/ChannelHeader.tsx(41,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+          "components/ChannelHeader.tsx(51,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+          "components/CommentModal.tsx(58,44): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+          "components/CommentModal.tsx(69,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+          "components/CommentModal.tsx(75,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?"
+        ]
+      },
+      "TS17008_UNCLOSED_JSX": {
+        "regex": {},
+        "description": "JSX element missing closing tag",
+        "cause": "Self-closing elements written as opening tags",
+        "strategy": "jsx_closing_fix",
+        "priority": 1,
+        "automated": true,
+        "count": 4,
+        "examples": [
+          "components/CommentModal.tsx(55,14): error TS17008: JSX element 'textarea' has no corresponding closing tag.",
+          "components/forms/Button.tsx(27,3): error TS17008: JSX element 'button' has no corresponding closing tag.",
+          "components/forms/Button.tsx(34,3): error TS17008: JSX element 'svg' has no corresponding closing tag.",
+          "components/icons/YouTubeLogo.tsx(9,3): error TS17008: JSX element 'path' has no corresponding closing tag."
+        ]
+      },
+      "UNCATEGORIZED_TS1381": {
+        "description": "Uncategorized TS1381 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 6,
+        "examples": [
+          "components/VideoCard.tsx(55,97): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+          "components/VideoCard.tsx(61,131): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+          "components/forms/Button.tsx(53,8): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
+        ]
+      },
+      "UNCATEGORIZED_TS17002": {
+        "description": "Uncategorized TS17002 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 30,
+        "examples": [
+          "components/VideoCard.tsx(56,126): error TS17002: Expected corresponding JSX closing tag for 'ImageWithFallback'.",
+          "components/VideoCard.tsx(62,4): error TS17002: Expected corresponding JSX closing tag for 'IconButton'.",
+          "components/VideoCard.tsx(75,145): error TS17002: Expected corresponding JSX closing tag for 'img'."
+        ]
+      },
+      "UNCATEGORIZED_TS2657": {
+        "description": "Uncategorized TS2657 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 43,
+        "examples": [
+          "components/VideoCard.tsx(59,2): error TS2657: JSX expressions must have one parent element.",
+          "src/features/channel/pages/ChannelPage.tsx(13,2): error TS2657: JSX expressions must have one parent element.",
+          "src/features/channel/pages/UserPage.tsx(14,2): error TS2657: JSX expressions must have one parent element."
+        ]
+      },
+      "UNCATEGORIZED_TS1136": {
+        "description": "Uncategorized TS1136 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 146,
+        "examples": [
+          "components/VideoCard.tsx(66,24): error TS1136: Property assignment expected.",
+          "components/VideoCard.tsx(85,25): error TS1136: Property assignment expected.",
+          "src/App.tsx(17,7): error TS1136: Property assignment expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1161": {
+        "description": "Uncategorized TS1161 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 109,
+        "examples": [
+          "components/VideoCard.tsx(68,3): error TS1161: Unterminated regular expression literal.",
+          "src/components/LoadingSpinner.tsx(16,2): error TS1161: Unterminated regular expression literal.",
+          "src/pages/AnalyticsPage.tsx(51,27): error TS1161: Unterminated regular expression literal."
+        ]
+      },
+      "UNCATEGORIZED_TS1003": {
+        "description": "Uncategorized TS1003 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 137,
+        "examples": [
+          "components/VideoCard.tsx(81,41): error TS1003: Identifier expected.",
+          "components/VideoCard.tsx(81,44): error TS1003: Identifier expected.",
+          "components/VideoCard.tsx(88,9): error TS1003: Identifier expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1138": {
+        "description": "Uncategorized TS1138 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 21,
+        "examples": [
+          "components/VideoCard.tsx(81,42): error TS1138: Parameter declaration expected.",
+          "src/components/LoadingSpinner.tsx(10,19): error TS1138: Parameter declaration expected.",
+          "src/error-resolution/core/ErrorAnalyzer.ts(271,40): error TS1138: Parameter declaration expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1135": {
+        "description": "Uncategorized TS1135 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 295,
+        "examples": [
+          "components/VideoCard.tsx(85,28): error TS1135: Argument expression expected.",
+          "contexts/WatchLaterContext.tsx(38,6): error TS1135: Argument expression expected.",
+          "contexts/WatchLaterContext.tsx(44,4): error TS1135: Argument expression expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1472": {
+        "description": "Uncategorized TS1472 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 53,
+        "examples": [
+          "contexts/WatchLaterContext.tsx(35,7): error TS1472: 'catch' or 'finally' expected.",
+          "src/error-resolution/cli/main.ts(42,7): error TS1472: 'catch' or 'finally' expected.",
+          "src/error-resolution/cli/main.ts(73,8): error TS1472: 'catch' or 'finally' expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1434": {
+        "description": "Uncategorized TS1434 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 252,
+        "examples": [
+          "src/components/PWAUpdateNotification.tsx(31,55): error TS1434: Unexpected keyword or identifier.",
+          "src/components/PWAUpdateNotification.tsx(31,59): error TS1434: Unexpected keyword or identifier.",
+          "src/components/PWAUpdateNotification.tsx(36,11): error TS1434: Unexpected keyword or identifier."
+        ]
+      },
+      "UNCATEGORIZED_TS1228": {
+        "description": "Uncategorized TS1228 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 5,
+        "examples": [
+          "src/components/PWAUpdateNotification.tsx(31,63): error TS1228: A type predicate is only allowed in return type position for functions and methods.",
+          "src/features/channel/pages/ChannelPage.tsx(22,7): error TS1228: A type predicate is only allowed in return type position for functions and methods.",
+          "src/features/playlist/pages/PlaylistDetailPage.tsx(22,7): error TS1228: A type predicate is only allowed in return type position for functions and methods."
+        ]
+      },
+      "UNCATEGORIZED_TS1442": {
+        "description": "Uncategorized TS1442 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 22,
+        "examples": [
+          "src/config/pwa.ts(8,38): error TS1442: Expected '=' for property initializer.",
+          "src/error-resolution/core/CacheManager.ts(21,28): error TS1442: Expected '=' for property initializer.",
+          "src/error-resolution/core/CacheManager.ts(22,29): error TS1442: Expected '=' for property initializer."
+        ]
+      },
+      "UNCATEGORIZED_TS18026": {
+        "description": "Uncategorized TS18026 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 1,
+        "examples": [
+          "src/error-resolution/cli/analyze.ts(2,1): error TS18026: '#!' can only be used at the start of a file."
+        ]
+      },
+      "UNCATEGORIZED_TS1137": {
+        "description": "Uncategorized TS1137 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 61,
+        "examples": [
+          "src/error-resolution/core/CacheManager.ts(43,27): error TS1137: Expression or comma expected.",
+          "src/error-resolution/core/CacheManager.ts(99,32): error TS1137: Expression or comma expected.",
+          "src/error-resolution/core/ExecutionOrchestrator.ts(75,63): error TS1137: Expression or comma expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1011": {
+        "description": "Uncategorized TS1011 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 26,
+        "examples": [
+          "src/error-resolution/core/ErrorAnalyzer.ts(354,33): error TS1011: An element access expression should take an argument.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(207,57): error TS1011: An element access expression should take an argument.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(207,87): error TS1011: An element access expression should take an argument."
+        ]
+      },
+      "UNCATEGORIZED_TS1068": {
+        "description": "Uncategorized TS1068 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 1,
+        "examples": [
+          "src/error-resolution/core/ErrorAnalyzer.ts(437,5): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1002": {
+        "description": "Uncategorized TS1002 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 9,
+        "examples": [
+          "src/error-resolution/core/ExecutionOrchestrator.ts(172,67): error TS1002: Unterminated string literal.",
+          "src/features/channel/pages/ChannelPage.tsx(23,47): error TS1002: Unterminated string literal.",
+          "src/features/user/pages/HistoryPage.tsx(9,72): error TS1002: Unterminated string literal."
+        ]
+      },
+      "UNCATEGORIZED_TS1359": {
+        "description": "Uncategorized TS1359 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 2,
+        "examples": [
+          "src/error-resolution/generators/TypeScriptGenerator.ts(210,10): error TS1359: Identifier expected. 'const' is a reserved word that cannot be used here.",
+          "src/pages/WatchPage.tsx(221,30): error TS1359: Identifier expected. 'typeof' is a reserved word that cannot be used here."
+        ]
+      },
+      "UNCATEGORIZED_TS1110": {
+        "description": "Uncategorized TS1110 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 3,
+        "examples": [
+          "src/error-resolution/generators/TypeScriptGenerator.ts(522,41): error TS1110: Type expected.",
+          "src/error-resolution/generators/TypeScriptGenerator.ts(523,51): error TS1110: Type expected.",
+          "src/error-resolution/test/WorkflowCoordinator.test.ts(96,29): error TS1110: Type expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1435": {
+        "description": "Uncategorized TS1435 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 10,
+        "examples": [
+          "src/features/channel/pages/ChannelPage.tsx(22,2): error TS1435: Unknown keyword or identifier. Did you mean 'this'?",
+          "src/features/channel/pages/ChannelPage.tsx(26,2): error TS1435: Unknown keyword or identifier. Did you mean 'for'?",
+          "src/features/playlist/pages/PlaylistDetailPage.tsx(22,2): error TS1435: Unknown keyword or identifier. Did you mean 'this'?"
+        ]
+      },
+      "UNCATEGORIZED_TS1160": {
+        "description": "Uncategorized TS1160 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 6,
+        "examples": [
+          "src/features/comments/services/commentService.ts(62,31): error TS1160: Unterminated template literal.",
+          "src/features/search/services/searchService.ts(62,30): error TS1160: Unterminated template literal.",
+          "src/features/video/services/videoService.ts(62,29): error TS1160: Unterminated template literal."
+        ]
+      },
+      "UNCATEGORIZED_TS1181": {
+        "description": "Uncategorized TS1181 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 1,
+        "examples": [
+          "src/pages/ChannelPage.tsx(70,35): error TS1181: Array element destructuring pattern expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1130": {
+        "description": "Uncategorized TS1130 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 2,
+        "examples": [
+          "src/pages/CommentModerationPage.tsx(62,22): error TS1130: 'case' or 'default' expected.",
+          "src/pages/ShortsPage.tsx(279,26): error TS1130: 'case' or 'default' expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1127": {
+        "description": "Uncategorized TS1127 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 16,
+        "examples": [
+          "src/pages/CommentModerationPage.tsx(147,29): error TS1127: Invalid character.",
+          "src/pages/CommunityPage.tsx(48,40): error TS1127: Invalid character.",
+          "src/pages/CommunityPage.tsx(48,51): error TS1127: Invalid character."
+        ]
+      },
+      "UNCATEGORIZED_TS1351": {
+        "description": "Uncategorized TS1351 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 3,
+        "examples": [
+          "src/pages/SettingsPage.tsx(56,48): error TS1351: An identifier or keyword cannot immediately follow a numeric literal.",
+          "src/pages/SettingsPage.tsx(57,46): error TS1351: An identifier or keyword cannot immediately follow a numeric literal.",
+          "src/pages/SettingsPage.tsx(58,46): error TS1351: An identifier or keyword cannot immediately follow a numeric literal."
+        ]
+      },
+      "UNCATEGORIZED_TS2809": {
+        "description": "Uncategorized TS2809 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 1,
+        "examples": [
+          "src/pages/SubscriptionsPage.tsx(25,5): error TS2809: Declaration or statement expected. This '=' follows a block of statements, so if you intended to write a destructuring assignment, you might need to wrap the whole assignment in parentheses."
+        ]
+      },
+      "UNCATEGORIZED_TS1129": {
+        "description": "Uncategorized TS1129 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 1,
+        "examples": [
+          "src/pages/UserPage.tsx(63,11): error TS1129: Statement expected."
+        ]
+      },
+      "UNCATEGORIZED_TS1443": {
+        "description": "Uncategorized TS1443 error",
+        "cause": "Requires manual analysis",
+        "strategy": "manual_review",
+        "priority": 5,
+        "automated": false,
+        "count": 1,
+        "examples": [
+          "src/pages/UserPage.tsx(155,26): error TS1443: Module declaration names may only use ' or \" quoted strings."
+        ]
+      }
+    },
+    "fileImpact": {
+      "components/CategoryChips.tsx": {
+        "errorCount": 5,
+        "errorTypes": {}
+      },
+      "components/ChannelHeader.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "components/CommentModal.tsx": {
+        "errorCount": 4,
+        "errorTypes": {}
+      },
+      "components/HoverAutoplayVideoCard.tsx": {
+        "errorCount": 4,
+        "errorTypes": {}
+      },
+      "components/OptimizedSearchResults.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "components/VideoCard.tsx": {
+        "errorCount": 88,
+        "errorTypes": {}
+      },
+      "components/forms/Button.tsx": {
+        "errorCount": 11,
+        "errorTypes": {}
+      },
+      "components/forms/Input.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "components/icons/YouTubeLogo.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "contexts/WatchLaterContext.tsx": {
+        "errorCount": 29,
+        "errorTypes": {}
+      },
+      "src/App.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/components/ErrorBoundaries/DataFetchErrorBoundary.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/components/ErrorBoundaries/VideoErrorBoundary.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/components/LoadingSpinner.tsx": {
+        "errorCount": 15,
+        "errorTypes": {}
+      },
+      "src/components/PWAInstallBanner.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/components/PWAUpdateNotification.tsx": {
+        "errorCount": 35,
+        "errorTypes": {}
+      },
+      "src/components/atoms/Button/Button.tsx": {
+        "errorCount": 28,
+        "errorTypes": {}
+      },
+      "src/components/examples/YouTubePlayerExample.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/components/mobile/MobileVideoPlayer.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/components/optimized/OptimizedSearchResults.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/components/unified/UnifiedButton.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/config/pwa.ts": {
+        "errorCount": 4,
+        "errorTypes": {}
+      },
+      "src/debug/GoogleSearchStoreDebug.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/debug/TestMetadataFetch.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/error-resolution/cli/analyze.ts": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/error-resolution/cli/main.ts": {
+        "errorCount": 43,
+        "errorTypes": {}
+      },
+      "src/error-resolution/core/CacheManager.ts": {
+        "errorCount": 21,
+        "errorTypes": {}
+      },
+      "src/error-resolution/core/ErrorAnalyzer.ts": {
+        "errorCount": 29,
+        "errorTypes": {}
+      },
+      "src/error-resolution/core/ExecutionOrchestrator.ts": {
+        "errorCount": 38,
+        "errorTypes": {}
+      },
+      "src/error-resolution/core/ProgressMonitor.ts": {
+        "errorCount": 18,
+        "errorTypes": {}
+      },
+      "src/error-resolution/generators/BaseScriptGenerator.ts": {
+        "errorCount": 9,
+        "errorTypes": {}
+      },
+      "src/error-resolution/generators/FormattingScriptGenerator.ts": {
+        "errorCount": 23,
+        "errorTypes": {}
+      },
+      "src/error-resolution/generators/SyntaxScriptGenerator.ts": {
+        "errorCount": 16,
+        "errorTypes": {}
+      },
+      "src/error-resolution/generators/TypeScriptGenerator.ts": {
+        "errorCount": 342,
+        "errorTypes": {}
+      },
+      "src/error-resolution/test/CacheManager.test.ts": {
+        "errorCount": 71,
+        "errorTypes": {}
+      },
+      "src/error-resolution/test/ErrorAnalyzer.test.ts": {
+        "errorCount": 1,
+        "errorTypes": {}
+      },
+      "src/error-resolution/test/ImportFixer.test.ts": {
+        "errorCount": 49,
+        "errorTypes": {}
+      },
+      "src/error-resolution/test/ValidationEngine.test.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/error-resolution/test/WorkflowCoordinator.test.ts": {
+        "errorCount": 33,
+        "errorTypes": {}
+      },
+      "src/error-resolution/utils/FileManager.ts": {
+        "errorCount": 20,
+        "errorTypes": {}
+      },
+      "src/features/analytics/components/AdvancedAnalyticsDashboard.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/features/auth/components/LoginForm.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/auth/components/ProtectedRoute.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/auth/components/RegisterForm.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/auth/services/authService.ts": {
+        "errorCount": 5,
+        "errorTypes": {}
+      },
+      "src/features/channel/pages/ChannelPage.tsx": {
+        "errorCount": 39,
+        "errorTypes": {}
+      },
+      "src/features/channel/pages/UserPage.tsx": {
+        "errorCount": 16,
+        "errorTypes": {}
+      },
+      "src/features/comments/components/CommentSection.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/comments/hooks/useComments.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/features/comments/services/commentService.ts": {
+        "errorCount": 18,
+        "errorTypes": {}
+      },
+      "src/features/common/components/ErrorBoundary.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/common/components/Footer.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/common/components/Header.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/common/components/Sidebar.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/common/components/StudioHeader.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/common/components/StudioSidebar.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/community/components/CommunityPost.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/creator/components/CreatorStudioDashboard.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/AdvancedLiveChat.tsx": {
+        "errorCount": 14,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/LivePolls.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/LiveStreamStudio.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/LiveStreamViewer.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/MultiplatformStreaming.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/ProtectedStreamAnalyticsDashboard.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/StreamAnalyticsDashboard.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/StreamManagementDashboard.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/StreamScheduler.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/StreamSettings.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/livestream/components/SuperChatPanel.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/moderation/components/ModerationDashboard.tsx": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/features/notifications/components/NotificationCenter.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/notifications/hooks/useNotifications.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/features/playlist/components/PlaylistCard.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/playlist/hooks/usePlaylists.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/features/playlist/pages/PlaylistDetailPage.tsx": {
+        "errorCount": 37,
+        "errorTypes": {}
+      },
+      "src/features/playlist/pages/PlaylistsPage.tsx": {
+        "errorCount": 15,
+        "errorTypes": {}
+      },
+      "src/features/search/services/searchService.ts": {
+        "errorCount": 18,
+        "errorTypes": {}
+      },
+      "src/features/subscription/components/SubscriptionButton.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/user/pages/HistoryPage.tsx": {
+        "errorCount": 16,
+        "errorTypes": {}
+      },
+      "src/features/user/pages/LibraryPage.tsx": {
+        "errorCount": 15,
+        "errorTypes": {}
+      },
+      "src/features/user/pages/LikedVideosPage.tsx": {
+        "errorCount": 16,
+        "errorTypes": {}
+      },
+      "src/features/user/pages/SettingsPage.tsx": {
+        "errorCount": 14,
+        "errorTypes": {}
+      },
+      "src/features/user/pages/SubscriptionsPage.tsx": {
+        "errorCount": 14,
+        "errorTypes": {}
+      },
+      "src/features/user/pages/WatchLaterPage.tsx": {
+        "errorCount": 16,
+        "errorTypes": {}
+      },
+      "src/features/user/pages/YourDataPage.tsx": {
+        "errorCount": 15,
+        "errorTypes": {}
+      },
+      "src/features/video/components/ProtectedVideoPlayer.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/components/StudioVideoGrid.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/components/VideoCard.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/components/VideoEditor.tsx": {
+        "errorCount": 54,
+        "errorTypes": {}
+      },
+      "src/features/video/components/VideoGrid.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/components/VideoList.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/components/VideoPlayer.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/components/VideoUpload.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/hooks/useVideo.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/features/video/hooks/useVideoInteractions.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/features/video/pages/HomePage.tsx": {
+        "errorCount": 7,
+        "errorTypes": {}
+      },
+      "src/features/video/pages/SearchResultsPage.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/pages/ShortsPage.tsx": {
+        "errorCount": 14,
+        "errorTypes": {}
+      },
+      "src/features/video/pages/TrendingPage.tsx": {
+        "errorCount": 16,
+        "errorTypes": {}
+      },
+      "src/features/video/pages/VideoDemo.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/features/video/services/videoService.ts": {
+        "errorCount": 18,
+        "errorTypes": {}
+      },
+      "src/hooks/legacy/root-useLiveStream.ts": {
+        "errorCount": 4,
+        "errorTypes": {}
+      },
+      "src/hooks/legacy/root-useVideoPlayer.ts": {
+        "errorCount": 4,
+        "errorTypes": {}
+      },
+      "src/hooks/optimizedHooks.ts": {
+        "errorCount": 13,
+        "errorTypes": {}
+      },
+      "src/hooks/unified/useApi.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/unified/useVideos.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/unifiedHooks.ts": {
+        "errorCount": 13,
+        "errorTypes": {}
+      },
+      "src/hooks/useAnalytics.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/useDebounce.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useDropdownMenu.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useEnhancedQuery.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/useFormState.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useInstallPrompt.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/useLocalStorage.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useLocalStorageSet.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useMobileDetection.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useModal.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useOfflineStatus.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/useOptimizedVideoData.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/usePWANotifications.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/usePWAUpdates.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/usePerformanceMonitor.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/usePerformanceOptimization.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useRefactoredHooks.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/useServiceWorker.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/useTrendingSearch.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useVideoCache.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useVideoPlayer.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/hooks/useVideosData.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/hooks/useWatchPage.ts": {
+        "errorCount": 17,
+        "errorTypes": {}
+      },
+      "src/index.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/lib/youtube-utils.ts": {
+        "errorCount": 4,
+        "errorTypes": {}
+      },
+      "src/pages/AIContentSparkPage.tsx": {
+        "errorCount": 15,
+        "errorTypes": {}
+      },
+      "src/pages/AdminPage.tsx": {
+        "errorCount": 254,
+        "errorTypes": {}
+      },
+      "src/pages/AnalyticsPage.tsx": {
+        "errorCount": 372,
+        "errorTypes": {}
+      },
+      "src/pages/ChannelCustomizationPage.tsx": {
+        "errorCount": 294,
+        "errorTypes": {}
+      },
+      "src/pages/ChannelPage.tsx": {
+        "errorCount": 63,
+        "errorTypes": {}
+      },
+      "src/pages/CommentModerationPage.tsx": {
+        "errorCount": 311,
+        "errorTypes": {}
+      },
+      "src/pages/CommunityPage.tsx": {
+        "errorCount": 208,
+        "errorTypes": {}
+      },
+      "src/pages/ContentManagerPage.tsx": {
+        "errorCount": 131,
+        "errorTypes": {}
+      },
+      "src/pages/DashboardPage.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/pages/GoLivePage.tsx": {
+        "errorCount": 15,
+        "errorTypes": {}
+      },
+      "src/pages/HomePage.tsx": {
+        "errorCount": 140,
+        "errorTypes": {}
+      },
+      "src/pages/LiveStreamingHubPage.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/pages/LoginPage.tsx": {
+        "errorCount": 201,
+        "errorTypes": {}
+      },
+      "src/pages/PlaylistDetailPage.tsx": {
+        "errorCount": 265,
+        "errorTypes": {}
+      },
+      "src/pages/PlaylistManagerPage.tsx": {
+        "errorCount": 1,
+        "errorTypes": {}
+      },
+      "src/pages/PlaylistsPage.tsx": {
+        "errorCount": 245,
+        "errorTypes": {}
+      },
+      "src/pages/RegisterPage.tsx": {
+        "errorCount": 220,
+        "errorTypes": {}
+      },
+      "src/pages/SearchResultsPage.tsx": {
+        "errorCount": 79,
+        "errorTypes": {}
+      },
+      "src/pages/SettingsPage.tsx": {
+        "errorCount": 159,
+        "errorTypes": {}
+      },
+      "src/pages/ShortsPage.tsx": {
+        "errorCount": 397,
+        "errorTypes": {}
+      },
+      "src/pages/StudioDashboardPage.tsx": {
+        "errorCount": 214,
+        "errorTypes": {}
+      },
+      "src/pages/StudioPage.tsx": {
+        "errorCount": 347,
+        "errorTypes": {}
+      },
+      "src/pages/SubscriptionsPage.tsx": {
+        "errorCount": 367,
+        "errorTypes": {}
+      },
+      "src/pages/TrendingPage.tsx": {
+        "errorCount": 36,
+        "errorTypes": {}
+      },
+      "src/pages/UploadPage.tsx": {
+        "errorCount": 364,
+        "errorTypes": {}
+      },
+      "src/pages/UserPage.tsx": {
+        "errorCount": 191,
+        "errorTypes": {}
+      },
+      "src/pages/VideoUploadPage.tsx": {
+        "errorCount": 100,
+        "errorTypes": {}
+      },
+      "src/pages/WatchPage.tsx": {
+        "errorCount": 299,
+        "errorTypes": {}
+      },
+      "src/pages/YouTubeDemo.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/pages/YourDataPage.tsx": {
+        "errorCount": 503,
+        "errorTypes": {}
+      },
+      "src/services/api/base.ts": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/services/api/videos.ts": {
+        "errorCount": 3,
+        "errorTypes": {}
+      },
+      "src/services/api/youtubeService.ts": {
+        "errorCount": 13,
+        "errorTypes": {}
+      },
+      "src/services/livestreamAPI.ts": {
+        "errorCount": 11,
+        "errorTypes": {}
+      },
+      "src/services/metadataNormalizationService.ts": {
+        "errorCount": 13,
+        "errorTypes": {}
+      },
+      "src/utils/componentUtils.tsx": {
+        "errorCount": 2,
+        "errorTypes": {}
+      },
+      "src/utils/dateUtils.ts": {
+        "errorCount": 10,
+        "errorTypes": {}
+      },
+      "src/utils/logger.ts": {
+        "errorCount": 19,
+        "errorTypes": {}
+      },
+      "src/utils/pwa.ts": {
+        "errorCount": 20,
+        "errorTypes": {}
+      }
+    }
+  },
+  "resolutionPhases": [
+    {
+      "pattern": "TS1128_DECLARATION_EXPECTED",
+      "description": "Invalid code structure or stray syntax",
+      "cause": "Broken code blocks or misplaced punctuation",
+      "success": true,
+      "errorsFixed": 5391,
+      "duration": 94
+    },
+    {
+      "pattern": "TS1005_MISSING_PUNCTUATION",
+      "description": "Missing punctuation (comma, semicolon, parenthesis)",
+      "cause": "Syntax errors in TypeScript/JavaScript code structure",
+      "success": true,
+      "errorsFixed": 11900,
+      "duration": 114
+    },
+    {
+      "pattern": "TS1109_EXPRESSION_EXPECTED",
+      "description": "Expression expected in conditional or assignment",
+      "cause": "Malformed conditional expressions or incomplete statements",
+      "success": true,
+      "errorsFixed": 12,
+      "duration": 31
+    },
+    {
+      "pattern": "TS1382_JSX_SELF_CLOSING",
+      "description": "JSX self-closing tag syntax error",
+      "cause": "Missing space before /> in JSX elements",
+      "success": true,
+      "errorsFixed": 340,
+      "duration": 50
+    },
+    {
+      "pattern": "TS17008_UNCLOSED_JSX",
+      "description": "JSX element missing closing tag",
+      "cause": "Self-closing elements written as opening tags",
+      "success": true,
+      "errorsFixed": 341,
+      "duration": 34
+    }
+  ],
+  "executionLog": [
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied self-closing spacing fix to NotificationSystem.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to NotificationSystem.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied self-closing spacing fix to RefactoredSaveToPlaylistModal.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to RefactoredSaveToPlaylistModal.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied self-closing spacing fix to ChannelPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ChannelPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied self-closing spacing fix to PlaylistDetailSkeleton.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to PlaylistDetailSkeleton.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied self-closing spacing fix to HistoryPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.206Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to HistoryPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to LikedVideosPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to LikedVideosPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to WatchPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to WatchPageSkeleton.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to YouTubeVideoGrid.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to YouTubeVideoGrid.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to PWAInstallBanner.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to PWAInstallBanner.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to VideoAnalytics.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VideoAnalytics.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to SearchBar.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SearchBar.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to MinimizedSidebar.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to MinimizedSidebar.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied self-closing spacing fix to SearchSuggestions.tsx",
+    "[2025-08-25T17:18:49.207Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SearchSuggestions.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to UserMenu.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to UserMenu.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to FileUpload.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to FileUpload.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to LoadingStates.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to LoadingStates.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to ProgressBar.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ProgressBar.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to ActionButton.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ActionButton.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to ErrorMessage.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ErrorMessage.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to UnifiedButton.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to UnifiedButton.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to Tabs.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Tabs.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied self-closing spacing fix to Button.tsx",
+    "[2025-08-25T17:18:49.208Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Button.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to FormComponents.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to FormComponents.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to Badge.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Badge.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to DropdownMenu.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to DropdownMenu.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to UnifiedComponents.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to UnifiedComponents.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to CommentModal.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to CommentModal.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to ProtectedYouTubePlayer.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ProtectedYouTubePlayer.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to YouTubePlayerWrapper.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to YouTubePlayerWrapper.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to VideoPlaybackDetails.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VideoPlaybackDetails.tsx",
+    "[2025-08-25T17:18:49.209Z] [DEBUG]    ✅ Applied self-closing spacing fix to Layout.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Layout.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to SortFilterPanel.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SortFilterPanel.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to PlaylistEditModal.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to PlaylistEditModal.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to RefactoredVideoDescription.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to RefactoredVideoDescription.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to SubscriptionStats.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SubscriptionStats.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to LoadingSpinner.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to LoadingSpinner.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to Input.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Input.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to UnifiedFormSystem.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to UnifiedFormSystem.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied self-closing spacing fix to Textarea.tsx",
+    "[2025-08-25T17:18:49.210Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Textarea.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied self-closing spacing fix to Button.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Button.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied img self-closing fix to CommunityPosts.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied self-closing spacing fix to CommunityPosts.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to CommunityPosts.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied self-closing spacing fix to DataWrapper.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to DataWrapper.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied self-closing spacing fix to SubscriptionsPage.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SubscriptionsPage.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied self-closing spacing fix to WatchHistory.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to WatchHistory.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied self-closing spacing fix to VirtualizedVideoGrid.tsx",
+    "[2025-08-25T17:18:49.211Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VirtualizedVideoGrid.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied self-closing spacing fix to VideoEditor.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VideoEditor.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied self-closing spacing fix to Header.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Header.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied self-closing spacing fix to OptimizedTrendingSection.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to OptimizedTrendingSection.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied self-closing spacing fix to CategoryChips.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to CategoryChips.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied self-closing spacing fix to DevOpsDashboard.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to DevOpsDashboard.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied self-closing spacing fix to VideoQualitySelector.tsx",
+    "[2025-08-25T17:18:49.212Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VideoQualitySelector.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied self-closing spacing fix to NotificationsPanel.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to NotificationsPanel.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied self-closing spacing fix to DeveloperDashboard.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to DeveloperDashboard.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied self-closing spacing fix to Miniplayer.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Miniplayer.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied self-closing spacing fix to EnhancedYouTubeVideoCard.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to EnhancedYouTubeVideoCard.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied self-closing spacing fix to VideoGrid.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VideoGrid.tsx",
+    "[2025-08-25T17:18:49.213Z] [DEBUG]    ✅ Applied self-closing spacing fix to HoverAutoplayVideoCard.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to HoverAutoplayVideoCard.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied self-closing spacing fix to ShortsNavigation.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ShortsNavigation.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied self-closing spacing fix to ShortsPlayer.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ShortsPlayer.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied self-closing spacing fix to ShortsProgressIndicator.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ShortsProgressIndicator.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied self-closing spacing fix to ProtectedRoute.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ProtectedRoute.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied self-closing spacing fix to YouTubePlayer.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to YouTubePlayer.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied self-closing spacing fix to LiveStreams.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to LiveStreams.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied self-closing spacing fix to ChannelPage.tsx",
+    "[2025-08-25T17:18:49.214Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ChannelPage.tsx",
+    "[2025-08-25T17:18:49.215Z] [DEBUG]    ✅ Applied self-closing spacing fix to VideoEditor.tsx",
+    "[2025-08-25T17:18:49.215Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VideoEditor.tsx",
+    "[2025-08-25T17:18:49.216Z] [DEBUG]    ✅ Applied self-closing spacing fix to PlaylistDetailPage.tsx",
+    "[2025-08-25T17:18:49.216Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to PlaylistDetailPage.tsx",
+    "[2025-08-25T17:18:49.216Z] [DEBUG]    ✅ Applied self-closing spacing fix to routes.tsx",
+    "[2025-08-25T17:18:49.216Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to routes.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied self-closing spacing fix to index.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to index.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied self-closing spacing fix to SettingsPage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SettingsPage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied self-closing spacing fix to WatchLaterPage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to WatchLaterPage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied self-closing spacing fix to HomePage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to HomePage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied self-closing spacing fix to StudioPage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to StudioPage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied self-closing spacing fix to CommunityPage.tsx",
+    "[2025-08-25T17:18:49.217Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to CommunityPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied self-closing spacing fix to AdminPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to AdminPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied self-closing spacing fix to RegisterPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to RegisterPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied self-closing spacing fix to PlaylistsPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to PlaylistsPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied self-closing spacing fix to SearchResultsPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SearchResultsPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied self-closing spacing fix to LikedVideosPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to LikedVideosPage.tsx",
+    "[2025-08-25T17:18:49.218Z] [DEBUG]    ✅ Applied self-closing spacing fix to VideoUploadPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to VideoUploadPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied self-closing spacing fix to LoginPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to LoginPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied self-closing spacing fix to ChannelCustomizationPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ChannelCustomizationPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied self-closing spacing fix to ShortsPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ShortsPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied self-closing spacing fix to ContentManagerPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ContentManagerPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied self-closing spacing fix to CommentModerationPage.tsx",
+    "[2025-08-25T17:18:49.219Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to CommentModerationPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied self-closing spacing fix to UserPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to UserPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied self-closing spacing fix to HistoryPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to HistoryPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied self-closing spacing fix to SubscriptionsPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to SubscriptionsPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied self-closing spacing fix to ChannelPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to ChannelPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied self-closing spacing fix to WatchPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to WatchPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied self-closing spacing fix to TrendingPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to TrendingPage.tsx",
+    "[2025-08-25T17:18:49.220Z] [DEBUG]    ✅ Applied self-closing spacing fix to YourDataPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to YourDataPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied self-closing spacing fix to PlaylistDetailPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to PlaylistDetailPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied self-closing spacing fix to AnalyticsPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to AnalyticsPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied self-closing spacing fix to StudioDashboardPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to StudioDashboardPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied self-closing spacing fix to UploadPage.tsx",
+    "[2025-08-25T17:18:49.221Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to UploadPage.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied self-closing spacing fix to PWAUpdateNotification.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to PWAUpdateNotification.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied self-closing spacing fix to Button.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to Button.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied self-closing spacing fix to LoadingSpinner.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to LoadingSpinner.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied self-closing spacing fix to App.tsx",
+    "[2025-08-25T17:18:49.222Z] [DEBUG]    ✅ Applied clean self-closing spacing fix to App.tsx",
+    "[2025-08-25T17:18:49.222Z] [SUCCESS] ✅ Fixed 341 errors in 0s"
+  ],
+  "performance": {
+    "totalDuration": 4409,
+    "phasesCompleted": 5,
+    "successfulPhases": 5
+  }
+}

@@ -4,6 +4,5 @@ exports.index = void 0;
 // index - Simple Implementation
 exports.index = {
     enabled: true,
-    process: (data) => data
-};
+    process: (data) => data;
 exports.default = exports.index;

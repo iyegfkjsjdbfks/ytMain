@@ -11,10 +11,8 @@ interface DataWrapperProps<T> {
  title: string;
  message: string;
  icon?: React.ReactNode;
- };
  errorTitle?: string;
  isEmpty?: (data: T) => boolean;
-}
 
 /**
  * Higher-order component that handles common data fetching states;
@@ -27,7 +25,7 @@ interface DataWrapperProps<T> {
  * @param errorTitle - Custom error title;
  * @param isEmpty - Function to determine if data is empty;
  */
-export function DataWrapper<T>({
+export function DataWrapper<T>({)
  data,
  loading,
  error,
@@ -38,28 +36,20 @@ export function DataWrapper<T>({
  isEmpty = (data: T) => Array.isArray(data) ? data.length === 0 : !data }: DataWrapperProps<T>) {
  if (loading) {
  return loadingSkeleton || <VideoGridSkeleton />;
- }
 
  if (error) {
- return (
- <ErrorState;>
+ return (;)
+ <ErrorState;>;
  title={errorTitle || 'Failed to load data'}
- message={error} />
- />
- );
- }
+ message={error} />; />
 
  if (isEmpty(data) && emptyState) {
- return (
- <EmptyState;>
+ return (;)
+ <EmptyState;>;
  title={emptyState.title}
  message={emptyState.message}
- icon={emptyState.icon} />
- />
- );
- }
+ icon={emptyState.icon} />; />
 
- return <>{children(data)}</>;
-}
+ return <>{children(data)}< />;
 
 export default DataWrapper;

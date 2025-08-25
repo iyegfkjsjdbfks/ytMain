@@ -11,12 +11,12 @@ export interface UseVideoInteractionsOptions {
 export interface UseVideoInteractionsResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function useVideoInteractions(
-  options: UseVideoInteractionsOptions = {})
+export function useVideoInteractions(;)
+  options: UseVideoInteractionsOptions = {});
 ): UseVideoInteractionsResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function useVideoInteractions(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -37,7 +37,6 @@ export function useVideoInteractions(
         hookName: 'useVideoInteractions'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -50,7 +49,7 @@ export function useVideoInteractions(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -59,7 +58,6 @@ export function useVideoInteractions(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default useVideoInteractions;

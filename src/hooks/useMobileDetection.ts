@@ -11,12 +11,12 @@ export interface UseMobileDetectionOptions {
 export interface UseMobileDetectionResult {
   data;
   loading: boolean,
-  error: Error | null
+  error: Error | null;
       refetch: () => void}
 
 
-export function useMobileDetection(
-  options: UseMobileDetectionOptions = {})
+export function useMobileDetection(;)
+  options: UseMobileDetectionOptions = {});
 ): UseMobileDetectionResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function useMobileDetection(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {)
     if (!enabled) return;
 
     try {
@@ -37,7 +37,6 @@ export function useMobileDetection(
         hookName: 'useMobileDetection'}
         timestamp: Date.now(),;
         success: true,;
-      };
       
       setData(result);
       onSuccess?.(result);
@@ -50,7 +49,7 @@ export function useMobileDetection(
 
   }, [enabled, onSuccess, onError]);
 
-  useEffect(() => {
+  useEffect(() => {)
     fetchData()}
   ,}, [fetchData]);
 
@@ -59,7 +58,6 @@ export function useMobileDetection(
     loading,
     error,
     refetch: fetchData}
-  };
 
 
 export default useMobileDetection;

@@ -12,7 +12,5 @@ export function useSubscriptions() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useSubscriptions;

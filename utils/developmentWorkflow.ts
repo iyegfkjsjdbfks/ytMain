@@ -18,19 +18,16 @@ export interface WorkflowStage {
  retries: number;,
  conditions: WorkflowCondition[];
  actions: WorkflowAction[];
-}
 
 export interface WorkflowCondition {
  type: "metric" | 'test - result' | 'security - scan' | 'performance' | 'code - quality';,
  operator: 'gt' | 'lt' | 'eq' | 'gte' | 'lte' | 'contains' | 'not - contains';
  value: unknown;,
  _source: string;
-}
 
 export interface WorkflowAction {
  type: "notify" | 'block' | 'auto - fix' | 'create - issue' | 'rollback' | 'scale';,
  _config: Record < string, any>;
-}
 
 export interface DeploymentStrategy {
  name: string;,
@@ -38,7 +35,6 @@ export interface DeploymentStrategy {
  _config: Record < string, any>;
  healthChecks: string[];,
  rollbackTriggers: WorkflowCondition[];
-}
 
 export interface QualityGateResult {
  passed: boolean;,
@@ -51,7 +47,6 @@ export interface QualityGateResult {
  message: string;
  }>;
  timestamp: number;
-}
 
 export interface ContinuousImprovementSuggestion {
  id: string;,
@@ -62,7 +57,6 @@ export interface ContinuousImprovementSuggestion {
  estimatedImpact: string;
  automatable: boolean;,
  dependencies: string[];
-}
 
 /**
  * Intelligent Workflow Engine
@@ -77,7 +71,6 @@ export class IntelligentWorkflowEngine {
  constructor() {
  this.setupDefaultWorkflows();
  this.setupDefaultDeploymentStrategies();
- }
 
  /**
  * Start the workflow engine
@@ -85,13 +78,11 @@ export class IntelligentWorkflowEngine {
  start(): void {
  if (this.isRunning) {
 return undefined;
-}
 
  this.isRunning = true;
  this.startWorkflowMonitoring();
 
  (console).log('🔄 Intelligent workflow engine started');
- }
 
  /**
  * Stop the workflow engine
@@ -99,7 +90,6 @@ return undefined;
  stop(): void {
  this.isRunning = false;
  (console).log('🔄 Intelligent workflow engine stopped');
- }
 
  /**
  * Execute workflow
@@ -113,7 +103,6 @@ return undefined;
  const workflow = this.workflows.get(workflowName);
  if (!workflow) {
  throw new Error(`Workflow '${workflowName}' not found`);
- }
 
  const results: QualityGateResult[] = [] as QualityGateResult[];
 
@@ -132,7 +121,6 @@ return undefined;
  results,
  failedStage: stage.name,
  error: `Stage '${stage.name}' failed quality gates` };
- }
 
  (console).log(`✅ Stage '${stage.name}' completed`);
  } catch (error) {
@@ -144,12 +132,9 @@ return undefined;
  results,
  failedStage: stage.name,
  error: error instanceof Error ? error.message : 'Unknown error' };
- }
- }
 
  (console).log(`🎉 Workflow '${workflowName}' completed successfully`);
  return { success: true, results };
- }
 
  /**
  * Execute deployment with _strategy
@@ -163,7 +148,6 @@ return undefined;
  const strategy = this.deploymentStrategies.get(strategyName);
  if (!strategy) {
  throw new Error(`Deployment strategy '${strategyName}' not found`);
- }
 
  const deploymentId = this.generateSecureToken(16);
  this.currentDeployment = {
@@ -183,18 +167,15 @@ return undefined;
  if (!healthStatus.healthy) {
  (console).warn('⚠️ Health checks failed, considering rollback');
  await this.evaluateRollback(strategy, healthStatus);
- }
 
  // Mark completion safely
  if (this.currentDeployment) {
  this.currentDeployment.status = 'idle';
- }
 
- advancedAPM.recordMetric('deployment - success', 1, {
+ advancedAPM.recordMetric('deployment - success', 1, {)
  strategy: strategyName,
  version: effectiveVersion,
  // Duration logging removed or adjusted to available fields
- });
 
  return {
  success: true,
@@ -207,13 +188,12 @@ return undefined;
  this.currentDeployment.status = 'failed';
  this.currentDeployment.error = error instanceof Error ? error.message : 'Unknown error';
 
- advancedAPM.recordMetric('deployment - failure', 1, {
+ advancedAPM.recordMetric('deployment - failure', 1, {)
  _strategy: strategyName,
  _version: version,
  _error: this.currentDeployment.error });
 
  throw error;
- }
  /**
  * Get continuous improvement suggestions
  */
@@ -237,7 +217,6 @@ return undefined;
  suggestions.push(...testingSuggestions);
 
  return suggestions.sort((a, b) => b.priority - a.priority);
- }
 
  /**
  * Auto - implement improvements
@@ -256,25 +235,21 @@ return undefined;
  if (!_suggestion) {
  failed.push({ id, _error: 'Suggestion not found' });
  continue;
- }
 
  if (!_suggestion.automatable) {
  failed.push({ id, _error: 'Suggestion is not automatable' });
  continue;
- }
 
  try {
  await this.implementSuggestion(_suggestion);
  implemented.push(id);
  (console).log(`✅ Auto - implemented: ${_suggestion.description}`);
  } catch (error) {
- failed.push({
+ failed.push({)
  id,
  _error: error instanceof Error ? error.message : 'Unknown error' });
  (console).error(`❌ Failed to implement: ${_suggestion.description}`, error);
- }
  return { implemented, failed };
- }
 
  /**
  * Get workflow analytics
@@ -288,8 +263,7 @@ return undefined;
  executions: number[];
  successRates: number[];,
  durations: number[];
- timestamps: number[]
- };
+ timestamps: number[];
  } {
  const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
  const recentResults = this.qualityGateHistory.filter((r) => r.timestamp > cutoff);
@@ -299,9 +273,8 @@ return undefined;
  const successRate = totalExecutions > 0 ? successfulExecutions / totalExecutions : 0;
 
  const failuresByStage: Record < string, number> = {};
- recentResults.filter((r) => !r.passed).forEach((r) => {
+ recentResults.filter((r) => !r.passed).forEach((r) => {)
  failuresByStage[r.stage] = (failuresByStage[r.stage] || 0) + 1;
- });
 
  // Generate trends (mock data for now)
  const trends = {
@@ -316,7 +289,6 @@ return undefined;
  averageDuration: 180, // Mock average
  failuresByStage,
  trends };
- }
 
  private async executeStage(stage: WorkflowStage, _context: Record < string, any>): Promise<any> < QualityGateResult> {
  const startTime = Date.now();
@@ -335,8 +307,6 @@ return undefined;
  // Execute failure actions
  for (const _action of stage.actions) {
  await this.executeAction(_action, { condition, result: conditionResult });
- }
- }
 
  const result: QualityGateResult = {
  passed,
@@ -349,69 +319,65 @@ return undefined;
  // Keep only last 1000 results
  if (this.qualityGateHistory.length > 1000) {
  this.qualityGateHistory.splice(0, this.qualityGateHistory.length - 1000);
- }
 
- advancedAPM.recordMetric('workflow - stage - duration', Date.now() - startTime, {
+ advancedAPM.recordMetric('workflow - stage - duration', Date.now() - startTime, {)
  stage: stage.name,
  passed: passed.toString() });
 
  return result;
- }
 
  private async evaluateCondition(condition: WorkflowCondition, _context: Record < string, any>): Promise<{
  condition: string;,
  passed: boolean;
  value;
  threshold;
- message: string
+ message: string;
  }> {
  let value;
  let passed: boolean = false;
 
  // Get value based on condition type
  switch (condition.type) {
- case 'metric':
+ case 'metric':;
  value = await this.getMetricValue(condition._source);
  break;
- case 'test - result':
+ case 'test - result':;
  value = await this.getTestResult(condition._source);
  break;
- case 'security - scan':
+ case 'security - scan':;
  value = await this.getSecurityScanResult(condition._source);
  break;
- case 'performance':
+ case 'performance':;
  value = await this.getPerformanceMetric(condition._source);
  break;
- case 'code - quality':
+ case 'code - quality':;
  value = await this.getCodeQualityMetric(condition._source);
  break;
- default: value = _context[condition._source]
- }
+ default: value = _context[condition._source];
 
  // Evaluate condition
  switch (condition.operator) {
- case 'gt':
+ case 'gt':;
  passed = value > condition.value;
  break;
- case 'lt':
+ case 'lt':;
  passed = value < condition.value;
  break;
- case 'eq':
+ case 'eq':;
  passed = value === condition.value;
  break;
- case 'gte':
+ case 'gte':;
  passed = value >= condition.value;
  break;
- case 'lte':
+ case 'lte':;
  passed = value <= condition.value;
  break;
- case 'contains':
+ case 'contains':;
  passed = String(value).includes(String(condition.value));
  break;
- case 'not - contains':
+ case 'not - contains':;
  passed = !String(value).includes(String(condition.value));
  break;
- }
 
  return {
  condition: `${condition._source} ${condition.operator} ${condition.value}`,
@@ -419,43 +385,40 @@ return undefined;
  value,
  threshold: condition.value,
  message: passed ? 'Condition passed' : `Expected ${condition._source} to be ${condition.operator} ${condition.value}, got ${value}` };
- }
 
  private async executeAction(__action: WorkflowAction, ___context): Promise<any> < void> {
  switch (_action.type) {
- case 'notify':
+ case 'notify':;
  (console).warn(`🔔 Notification: ${_action?._config.message || 'Quality gate failed'}`);
  break;
- case 'block':
+ case 'block':;
  throw new Error(_action?._config.message || 'Workflow blocked by quality gate');
- case 'auto - fix':
+ case 'auto - fix':;
  await this.executeAutoFix(_action?._config);
  break;
- case 'create - issue':
+ case 'create - issue':;
  await this.createIssue(_action?._config, _context);
  break;
- case 'rollback':
+ case 'rollback':;
  await this.executeRollback(_action?._config);
  break;
- case 'scale':
+ case 'scale':;
  await this.executeScaling(_action?._config);
  break;
- }
  private async executeDeploymentStrategy(_strategy: DeploymentStrategy, _version, _config: Record < string, any>): Promise<any> < void> {
  switch (_strategy.type) {
- case 'blue - green':
+ case 'blue - green':;
  await this.executeBlueGreenDeployment(_strategy, _version, _config);
  break;
- case 'canary':
+ case 'canary':;
  await this.executeCanaryDeployment(_strategy, _version, _config);
  break;
- case 'rolling':
+ case 'rolling':;
  await this.executeRollingDeployment(_strategy, _version, _config);
  break;
- case 'feature - flag':
+ case 'feature - flag':;
  await this.executeFeatureFlagDeployment(_strategy, _version, _config);
  break;
- }
  private async executeBlueGreenDeployment(_strategy: DeploymentStrategy, _version, _config: Record < string, any>): Promise<any> < void> {
  (console).log('🔵 Starting blue - green deployment for _strategy:', _strategy.name);
 
@@ -471,7 +434,6 @@ return undefined;
  (console).log('🟢 Traffic switched to green environment');
  } else {
  throw new Error('Green environment health _checks failed');
- }
  private async executeCanaryDeployment(_strategy: DeploymentStrategy, _version, _config: Record < string, any>): Promise<any> < void> {
  (console).log('🐤 Starting canary deployment');
 
@@ -488,9 +450,7 @@ return undefined;
  if (!healthStatus.healthy) {
  await this.rollbackCanary();
  throw new Error(`Canary deployment failed at ${_percentage}% traffic`);
- }
  (console).log('🎉 Canary deployment completed successfully');
- }
 
  private async executeRollingDeployment(_strategy: DeploymentStrategy, _version, _config: Record < string, any>): Promise<any> < void> {
  const _batchSize = _config._batchSize || 5;
@@ -511,9 +471,7 @@ return undefined;
  if (!healthStatus.healthy) {
  await this.rollbackBatch(i, batch);
  throw new Error(`Rolling deployment failed at batch ${Math.floor(i / _batchSize) + 1}`);
- }
  (console).log('🎉 Rolling deployment completed successfully');
- }
 
  private async executeFeatureFlagDeployment(_strategy: DeploymentStrategy, _version, _config: Record < string, any>): Promise<any> < void> {
  (console).log('🚩 Starting feature flag deployment');
@@ -535,60 +493,48 @@ return undefined;
  if (!healthStatus.healthy) {
  await this.disableFeatureFlag(_config._flagName);
  throw new Error(`Feature flag rollout failed at ${_percentage}%`);
- }
  (console).log('🎉 Feature flag deployment completed successfully');
- }
 
  // Mock implementations for deployment operations
  private async deployToEnvironment(__env, ___version): Promise<any> < void> {
  (console).log(`🚀 Deploying ${_version} to ${_env} environment`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 2000)); // Simulate deployment time
- }
 
  private async switchTraffic(__env): Promise<any> < void> {
  (console).log(`🔀 Switching traffic to ${_env}`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 1000));
- }
 
  private async routeTrafficToCanary(__percentage, ___version): Promise<any> < void> {
  (console).log(`📊 Routing ${_percentage}% traffic to canary ${_version}`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 1000));
- }
 
  private async rollbackCanary(): Promise<any> < void> {
  (console).log('⏪ Rolling back canary deployment');
  await new Promise<any>(resolve => setTimeout((resolve) as any, 1000));
- }
 
  private async deployBatch(__startIndex, ___batchSize, ___version): Promise<any> < void> {
  (console).log(`📦 Deploying batch starting at ${_startIndex} (${_batchSize} instances) with ${_version}`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 1500));
- }
 
  private async rollbackBatch(_startIndex, _batchSize): Promise<any> < void> {
  (console).log(`⏪ Rolling back batch starting at ${_startIndex}`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 1000));
- }
 
  private async deployWithFeatureFlag(_version, enabled): Promise<any> < void> {
  (console).log(`🚀 Deploying ${_version} with feature flag ${enabled ? 'enabled' : 'disabled'}`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 2000));
- }
 
  private async updateFeatureFlag(flagName, percentage): Promise<any> < void> {
  (console).log(`🎯 Updating feature flag ${flagName} to ${percentage}%`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 500));
- }
 
  private async disableFeatureFlag(flagName): Promise<any> < void> {
  (console).log(`🚫 Disabling feature flag ${flagName}`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, 500));
- }
 
  private async waitForStabilization(seconds): Promise<any> < void> {
  (console).log(`⏳ Waiting ${seconds}s for stabilization`);
  await new Promise<any>(resolve => setTimeout((resolve) as any, Math.min(seconds * 1000, 5000))); // Cap at 5s for demo
- }
 
  private async runDeploymentHealthChecks(checks: string[]): Promise<{ healthy: boolean; details: { checks: Array<{ name: string; status: string; responseTime: number }> } }> {
  (console).log('🏥 Running deployment health checks');
@@ -599,11 +545,10 @@ return undefined;
  return {
  healthy,
  details: {,
- checks: checks.map((check) => ({
+ checks: checks.map((check) => ({))
  name: check,
  status: healthy ? 'healthy' : 'unhealthy',
  responseTime: Math.random() * 100 + 50 })) };
- }
 
  private async evaluateRollback(strategy: DeploymentStrategy, healthStatus): Promise<any> < void> {
  for (const trigger of strategy.rollbackTriggers) {
@@ -612,53 +557,42 @@ return undefined;
  (console).log('⏪ Triggering automatic rollback');
  await this.executeRollback({ reason: 'Health check failure' });
  break;
- }
- }
 
  // Mock implementations for various operations
  private async getMetricValue(source): Promise<any> < number> {
  const metrics = advancedAPM.getAggregatedMetrics(source);
  return metrics.avg || Math.random() * 100;
- }
 
  private async getTestResult(source): Promise<any> < number> {
  (console).log(`Getting test results for source: ${source}`);
  return Math.random() > 0.1 ? 100 : 75; // 90% pass rate
- }
 
  private async getSecurityScanResult(source): Promise<any> < number> {
  (console).log(`Getting security scan results for source: ${source}`);
  return Math.random() > 0.05 ? 0 : 1; // 95% clean rate
- }
 
  private async getPerformanceMetric(source): Promise<any> < number> {
  return performanceMonitor.getMetrics().find(m => m.name === source)?.value ?? Math.random() * 1000;
- }
 
  private async getCodeQualityMetric(source): Promise<any> < number> {
  const analysis = await codeAnalysisEngine.analyzeCode();
  return ((analysis))[source] ?? Math.random() * 100;
- }
 
  private async executeAutoFix(config: { type: string }): Promise<any> < void> {
  (console).log('🔧 Executing auto - fix:', config.type);
  // Implementation would depend on the type of fix
- }
 
  private async createIssue(config: { title: string }, context: { workflowName?: string }): Promise<any> < void> {
  (console).log('📝 Creating issue:', config.title, 'for context:', context.workflowName || 'unknown');
  // Implementation would integrate with issue tracking system
- }
 
  private async executeRollback(config: { reason: string }): Promise<any> < void> {
  (console).log('⏪ Executing rollback:', config.reason);
  // Implementation would rollback to previous version
- }
 
  private async executeScaling(config: { action: string }): Promise<any> < void> {
  (console).log('📈 Executing scaling:', config.action);
  // Implementation would scale infrastructure
- }
 
  private async analyzePerformanceMetrics(): Promise<any> < ContinuousImprovementSuggestion[]> {
  const suggestions: ContinuousImprovementSuggestion[] = [];
@@ -666,7 +600,7 @@ return undefined;
  // Analyze performance trends
  const memoryMetrics = advancedAPM.getAggregatedMetrics('memory - usage');
  if (memoryMetrics.avg > 80 * 1024 * 1024) { // 80MB
- suggestions.push({
+ suggestions.push({)
  id: 'optimize - memory - usage',
  category: 'performance',
  priority: 8,
@@ -675,17 +609,15 @@ return undefined;
  estimatedImpact: 'Reduce memory usage by 20 - 30%',
  automatable: false,
  dependencies: ['performance - monitoring'] });
- }
 
  return suggestions;
- }
 
  private async analyzeCodeQuality(): Promise<any> < ContinuousImprovementSuggestion[]> {
  const suggestions: ContinuousImprovementSuggestion[] = [];
 
  const analysis = await codeAnalysisEngine.analyzeCode();
  if (analysis.complexity > 8) {
- suggestions.push({
+ suggestions.push({)
  id: 'reduce - complexity',
  category: 'maintainability',
  priority: 7,
@@ -694,17 +626,15 @@ return undefined;
  estimatedImpact: 'Improve maintainability and reduce bugs',
  automatable: true,
  dependencies: ['code - analysis'] });
- }
 
  return suggestions;
- }
 
  private async analyzeDeploymentPatterns(): Promise<any> < ContinuousImprovementSuggestion[]> {
  const suggestions: ContinuousImprovementSuggestion[] = [];
 
  const analytics = this.getWorkflowAnalytics();
  if (analytics.successRate < 0.9) {
- suggestions.push({
+ suggestions.push({)
  id: 'improve - deployment - reliability',
  category: 'deployment',
  priority: 9,
@@ -713,10 +643,8 @@ return undefined;
  estimatedImpact: 'Increase deployment success rate to >95%',
  automatable: true,
  dependencies: ['workflow - engine'] });
- }
 
  return suggestions;
- }
 
  private async analyzeTestingEffectiveness(): Promise<any> < ContinuousImprovementSuggestion[]> {
  const suggestions: ContinuousImprovementSuggestion[] = [];
@@ -724,7 +652,7 @@ return undefined;
  // Mock analysis of test coverage and effectiveness
  const testCoverage = Math.random() * 30 + 70; // 70 - 100%
  if (testCoverage < 85) {
- suggestions.push({
+ suggestions.push({)
  id: 'improve - test - coverage',
  category: 'testing',
  priority: 6,
@@ -733,45 +661,40 @@ return undefined;
  estimatedImpact: 'Reduce production bugs by 40%',
  automatable: false,
  dependencies: ['testing - framework'] });
- }
 
  return suggestions;
- }
 
  private async implementSuggestion(__suggestion: ContinuousImprovementSuggestion): Promise<any> < void> {
  (console).log(`🔧 Implementing: ${_suggestion.description}`);
 
  switch (_suggestion.id) {
- case 'reduce - complexity':
+ case 'reduce - complexity':;
  // Auto - refactor complex functions
  await this.autoRefactorComplexFunctions();
  break;
- case 'improve - deployment - reliability':
+ case 'improve - deployment - reliability':;
  // Add more quality gates
  await this.addDeploymentQualityGates();
  break;
  // Add more auto - implementation cases
- }
  private async autoRefactorComplexFunctions(): Promise<any> < void> {
  (console).log('🔧 Auto - refactoring complex functions');
  // Implementation would use AST manipulation to refactor code
- }
 
  private async addDeploymentQualityGates(): Promise<any> < void> {
  (console).log('🚪 Adding deployment quality gates');
  // Implementation would add more stringent quality _checks
- }
 
  private setupDefaultWorkflows(): void {
  // Pre - commit workflow
- this.workflows.set('pre - commit', [
+ this.workflows.set('pre - commit', [;)
  {
  name: 'code - quality - check',
  type: 'quality - gate',
  required: true,
  timeout: 60,
  retries: 0,
- conditions: [
+ conditions: [;
  {
  type: 'code - quality',
  operator: 'gte',
@@ -782,26 +705,26 @@ return undefined;
  operator: 'eq',
  value: 0,
  _source: 'vulnerabilities' }],
- actions: [
+ actions: [;
  {
  type: "block",
  _config: { message: 'Code quality standards not met' } }] }]);
 
  // CI / CD workflow
- this.workflows.set('ci - cd', [
+ this.workflows.set('ci - cd', [;)
  {
  name: 'test - execution',
  type: "test",
  required: true,
  timeout: 300,
  retries: 1,
- conditions: [
+ conditions: [;
  {
  type: 'test - result',
  operator: 'gte',
  value: 95,
  _source: 'test - coverage' }],
- actions: [
+ actions: [;
  {
  type: "block",
  _config: { message: 'Test coverage below threshold' } }] },
@@ -811,28 +734,27 @@ return undefined;
  required: true,
  timeout: 120,
  retries: 0,
- conditions: [
+ conditions: [;
  {
  type: "performance",
  operator: 'lt',
  value: 3000,
  _source: 'page - load - time' }],
- actions: [
+ actions: [;
  {
  type: "notify",
  _config: { message: 'Performance degradation detected' } }] }]);
- }
 
  private setupDefaultDeploymentStrategies(): void {
  // Blue - Green deployment
- this.deploymentStrategies.set('blue - green', {
+ this.deploymentStrategies.set('blue - green', {)
  name: 'Blue - Green Deployment',
  type: 'blue - green',
  _config: {,
  healthCheckTimeout: 300,
  switchTimeout: 60 },
  healthChecks: ['api - health', 'database - connectivity', 'external - services'],
- rollbackTriggers: [
+ rollbackTriggers: [;
  {
  type: "metric",
  operator: 'gt',
@@ -840,14 +762,14 @@ return undefined;
  _source: 'error - rate' }] });
 
  // Canary deployment
- this.deploymentStrategies.set('canary', {
+ this.deploymentStrategies.set('canary', {)
  name: 'Canary Deployment',
  type: "canary",
  _config: {,
  trafficPercentages: [5, 10, 25, 50, 100],
  stabilizationTime: 300 },
  healthChecks: ['api - health', 'performance - metrics'],
- rollbackTriggers: [
+ rollbackTriggers: [;
  {
  type: "metric",
  operator: 'gt',
@@ -858,23 +780,19 @@ return undefined;
  operator: 'gt',
  value: 2000,
  _source: 'response - time' }] });
- }
 
  private generateSecureToken(length): string {
  const chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
  let result: string = '';
  for (let i = 0; i < length; i++) {
  result += chars.charAt(Math.floor(Math.random() * chars.length));
- }
  return result;
- }
 
  private startWorkflowMonitoring(): void {
  // Monitor workflow health and performance
- setInterval((() => {
+ setInterval((() => {))
  if (!this.isRunning) {
 return undefined;
-}
 
  const analytics = this.getWorkflowAnalytics(1); // Last day
 
@@ -886,16 +804,13 @@ return undefined;
  const duration = Date.now() - this.currentDeployment.startTime;
  if (duration > 30 * 60 * 1000) { // 30 minutes
  (console).warn('⚠️ Long - running deployment detected');
- }
  }, 60000); // Every minute
- }
 // Create singleton instance
 export const intelligentWorkflowEngine = new IntelligentWorkflowEngine();
 
 // Auto - start in development
 if (process.env.NODE_ENV === 'development') {
  intelligentWorkflowEngine.start();
-}
 
 // Export types
 export type {

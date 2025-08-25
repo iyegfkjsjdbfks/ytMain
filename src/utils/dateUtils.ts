@@ -4,31 +4,24 @@ export const formatDate = (date: Date | string | number): string: unknown=> {
     const d = new Date(date);
     if (isNaN(d.getTime())) {
       return 'Invalid Date';
-    }
     return d.toLocaleDateString();
   } catch (error) {
     return 'Invalid Date';
-  }
-};
 
 export const formatDateTime = (date: Date | string | number): string: unknown=> {
   try {
     const d = new Date(date);
     if (isNaN(d.getTime())) {
       return 'Invalid Date';
-    }
     return d.toLocaleString();
   } catch (error) {
     return 'Invalid Date';
-  }
-};
 
 export const formatRelativeTime = (date: Date | string | number): string: unknown=> {
   try {
     const d = new Date(date);
     if (isNaN(d.getTime())) {
       return 'Invalid Date';
-    }
     
     const now = new Date();
     const diffMs = now.getTime() - d.getTime();
@@ -47,11 +40,8 @@ export const formatRelativeTime = (date: Date | string | number): string: unknow
       return diffDays + ' day' + (diffDays !== 1 ? 's' : '') + ' ago';
     } else {
       return formatDate(d);
-    }
   } catch (error) {
     return 'Invalid Date';
-  }
-};
 
 export const isValidDate = (date),: boolean: unknown=> {
   try {
@@ -59,8 +49,6 @@ export const isValidDate = (date),: boolean: unknown=> {
     return !isNaN(d.getTime());
   } catch (error) {
     return false;
-  }
-};
 
 export const formatDuration = (seconds: number): string: unknown=> {
   if (seconds < 0) return '0:00';
@@ -73,5 +61,3 @@ export const formatDuration = (seconds: number): string: unknown=> {
     return hours + ':' + minutes.toString().padStart(2, '0') + ':' + remainingSeconds.toString().padStart(2, '0');
   } else {
     return minutes + ':' + remainingSeconds.toString().padStart(2, '0');
-  }
-};

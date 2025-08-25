@@ -12,7 +12,5 @@ export function useCommon() {
     data,
     loading,
     error, 
-  };
-}
 
 export default useCommon;
