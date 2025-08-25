@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-08-25T14:37:49.145Z",
+  "deployment": {
+    "success": true,
+    "totalErrorsFixed": 0,
+    "duration": 26587,
+    "phases": []
+  },
+  "initialAnalysis": {
+    "totalErrors": 400,
+    "categoriesCount": 8,
+    "topErrorCodes": [
+      {
+        "code": "TS7006",
+        "count": 105
+      },
+      {
+        "code": "TS2307",
+        "count": 54
+      },
+      {
+        "code": "TS6133",
+        "count": 49
+      },
+      {
+        "code": "TS2305",
+        "count": 42
+      },
+      {
+        "code": "TS2614",
+        "count": 27
+      },
+      {
+        "code": "TS7008",
+        "count": 25
+      },
+      {
+        "code": "TS18047",
+        "count": 17
+      },
+      {
+        "code": "TS2341",
+        "count": 16
+      },
+      {
+        "code": "TS2322",
+        "count": 11
+      },
+      {
+        "code": "TS2339",
+        "count": 10
+      }
+    ]
+  },
+  "resolutionResults": [
+    {
+      "success": true,
+      "category": "implicit-any-parameters",
+      "errorsFixed": 0,
+      "duration": 3287,
+      "details": []
+    },
+    {
+      "success": true,
+      "category": "unused-declarations",
+      "errorsFixed": 0,
+      "duration": 3299,
+      "details": []
+    },
+    {
+      "success": true,
+      "category": "module-not-found",
+      "errorsFixed": 0,
+      "duration": 3316,
+      "details": []
+    },
+    {
+      "success": true,
+      "category": "missing-exports",
+      "errorsFixed": 0,
+      "duration": 3421,
+      "details": []
+    },
+    {
+      "success": true,
+      "category": "implicit-any-members",
+      "errorsFixed": 0,
+      "duration": 3310,
+      "details": []
+    },
+    {
+      "success": true,
+      "category": "possibly-null",
+      "errorsFixed": 0,
+      "duration": 3295,
+      "details": []
+    },
+    {
+      "success": true,
+      "category": "private-access",
+      "errorsFixed": 0,
+      "duration": 3338,
+      "details": []
+    },
+    {
+      "success": false,
+      "category": "other-errors",
+      "errorsFixed": 0,
+      "duration": 3315,
+      "details": []
+    }
+  ],
+  "configuration": {
+    "projectPath": "/home/runner/work/ytMain/ytMain",
+    "dryRun": true,
+    "backup": true,
+    "maxIterations": 5,
+    "timeoutSeconds": 600,
+    "generateReports": true
+  }
+}
