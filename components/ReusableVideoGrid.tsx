@@ -1,7 +1,7 @@
 import React, { ReactNode, FC } from 'react';
-import { VideoGridSkeleton } from 'LoadingStates.tsx';
-import OptimizedVideoCard from 'OptimizedVideoCard.tsx';
-import VideoCard from 'VideoCard.tsx';
+import { VideoGridSkeleton } from 'LoadingStates';
+import OptimizedVideoCard from 'OptimizedVideoCard';
+import VideoCard from 'VideoCard';
 
 import type { Video } from '../types.ts';
 
@@ -25,14 +25,14 @@ interface ReusableVideoGridProps {
 
 /**
  * Reusable video grid component that handles:
- * - Responsive grid layouts
- * - Loading states with skeletons
- * - Error states
- * - Empty states
- * - Optimized vs standard video cards
- * - Customizable display options
+ * - Responsive grid layouts;
+ * - Loading states with skeletons;
+ * - Error states;
+ * - Empty states;
+ * - Optimized vs standard video cards;
+ * - Customizable display options;
  *
- * Eliminates code duplication across pages that display video grids
+ * Eliminates code duplication across pages that display video grids;
  */
 const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  videos,
@@ -48,7 +48,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  emptyMessage = 'No videos found',
  emptyIcon,
  skeletonCount = 18 }) => {
- // Grid column classes
+ // Grid column classes;
  const getGridColumns = () => {
  if (columns === 'auto') {
  return 'grid-cols-1 sm: grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
@@ -56,7 +56,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  return `grid-cols-${columns}`;
  };
 
- // Gap classes
+ // Gap classes;
  const getGapClass = () => {
  switch (gap as any) {
  case 'sm': return 'gap-3';
@@ -64,7 +64,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  default: return 'gap-4'
  };
 
- // Loading state
+ // Loading state;
  if (loading as any) {
  return (
  <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
@@ -73,7 +73,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  );
  }
 
- // Error state
+ // Error state;
  if (error as any) {
  return (
  <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -83,7 +83,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
 // FIXED:  </svg>
 // FIXED:  </div>
 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
- Failed to load videos
+ Failed to load videos;
 // FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400 mb-4">
  {error}
@@ -92,13 +92,13 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
 // FIXED:  onClick={() => window.location.reload()}
 // FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
  >
- Try Again
+ Try Again;
 // FIXED:  </button>
 // FIXED:  </div>
  );
  }
 
- // Empty state
+ // Empty state;
  if (!videos || videos.length === 0) {
  return (
  <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -119,13 +119,13 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
  );
  }
 
- // Video grid
+ // Video grid;
  const VideoComponent = optimized ? OptimizedVideoCard : VideoCard;
 
  return (
  <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
  {videos.map((video) => (
- <VideoComponent
+ <VideoComponent;
  key={video.id}
  video={video}
  showChannel={showChannelName}

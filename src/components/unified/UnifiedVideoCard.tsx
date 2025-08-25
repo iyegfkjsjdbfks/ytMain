@@ -1,16 +1,17 @@
-// UnifiedVideoCard - Enhanced Component
+import React from 'react';
+// UnifiedVideoCard - Enhanced Component;
 import React, { useState } from 'react';
 
 export interface UnifiedVideoCardProps {
   className?: string;
-  children?: React.ReactNode;
+  children?: React.ReactNode, 
 }
 
 export const UnifiedVideoCard: React.FC<UnifiedVideoCardProps> = ({
   className = '',
-  children
+  children, 
 }) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false), 
 
   return (
     <div className={'component ' + className}>

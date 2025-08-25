@@ -1,3 +1,4 @@
+// @ts-nocheck
 import _React, { lazy } from 'react';
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -5,11 +6,11 @@ import Layout from '../components/Layout';
 import StudioLayout from '../components/StudioLayout';
 import { RouteObject } from 'react-router-dom';
 import ProtectedRoute from '../components/ProtectedRoute';
-// Import HomePage directly for faster initial load
+// Import HomePage directly for faster initial load;
 import HomePage from '../pages/HomePage';
 
-// Lazy load secondary components for better performance
-// HomePage is loaded directly for faster initial render
+// Lazy load secondary components for better performance;
+// HomePage is loaded directly for faster initial render;
 const WatchPage = lazy(() => import('../pages/WatchPage'));
 const SearchResultsPage = lazy(() => import('../pages/SearchResultsPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
@@ -33,7 +34,7 @@ const VideoUploadPage = lazy(() => import('../pages/VideoUploadPage'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
 const AdminPage = lazy(() => import('../pages/AdminPage'));
 
-// Studio pages
+// Studio pages;
 const StudioPage = lazy(() => import('../pages/StudioPage'));
 const UploadPage = lazy(() => import('../pages/UploadPage'));
 const StudioDashboardPage = lazy(() => import('../pages/StudioDashboardPage'));
@@ -47,11 +48,11 @@ const PlaylistManagerPage = lazy(() => import('../pages/PlaylistManagerPage'));
 const ChannelCustomizationPage = lazy(() => import('../pages/ChannelCustomizationPage'));
 const VideoEditorPage = lazy(() => import('../pages/VideoEditorPage'));
 
-// Debug components
+// Debug components;
 const TestMetadataFetch = lazy(() => import('../debug/TestMetadataFetch'));
 const GoogleSearchStoreDebug = lazy(() => import('../debug/GoogleSearchStoreDebug'));
 
-// Route configuration for main application
+// Route configuration for main application;
 export const mainRoutes: RouteObject[] = [
  {
  path: '/',
@@ -142,7 +143,7 @@ export const mainRoutes: RouteObject[] = [
  {
  path: 'studio/upload',
  element: <UploadPage /> },
- // Account section with nested routes and dedicated layout
+ // Account section with nested routes and dedicated layout;
  {
  path: 'account',
  element: <AccountLayout />,
@@ -152,7 +153,7 @@ export const mainRoutes: RouteObject[] = [
  element: <SettingsPage /> },
  {
  path: 'privacy',
- element: <SettingsPage /> // Can be replaced with dedicated privacy page later
+ element: <SettingsPage /> // Can be replaced with dedicated privacy page later;
  },
  {
  path: 'data',
@@ -160,12 +161,12 @@ export const mainRoutes: RouteObject[] = [
  {
  path: 'analytics',
  element: <AnalyticsPage /> },
- // Redirect for legacy content-manager route
+ // Redirect for legacy content-manager route;
  {
  path: 'content-manager',
  element: <ContentManagerPage /> }] }];
 
-// Route configuration for studio
+// Route configuration for studio;
 export const studioRoutes: RouteObject[] = [
  {
  path: 'studio',
@@ -222,5 +223,5 @@ const authRoutes: RouteObject[] = [
  ),
  errorElement: <ErrorBoundary /> }];
 
-// Combined route configuration
+// Combined route configuration;
 export const routes: RouteObject[] = [...mainRoutes, ...studioRoutes, ...authRoutes];

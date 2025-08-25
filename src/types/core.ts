@@ -1,4 +1,4 @@
-// Core type definitions - unified interface
+// Core type definitions - unified interface;
 export interface Video {
  id: string;
  title: string;
@@ -11,20 +11,20 @@ export interface Video {
  channelId: string;
  channelTitle: string;
  category?: string;
- // Additional properties for compatibility
+ // Additional properties for compatibility;
  videoUrl?: string;
  likes?: number;
  dislikes?: number;
  uploadedAt?: string;
- channelName?: string; // Alternative name field
- channelAvatarUrl?: string; // Channel avatar URL
- isLive?: boolean; // Live stream indicator
- viewCount?: number; // View count for sorting
- dislikeCount?: number; // Dislike count
- categoryId?: string; // Category ID
- buffered?: TimeRanges; // Buffered time ranges
- tags?: string | string[]; // Video tags
- likeCount?: number; // Some code uses likeCount
+ channelName?: string; // Alternative name field;
+ channelAvatarUrl?: string; // Channel avatar URL;
+ isLive?: boolean; // Live stream indicator;
+ viewCount?: number; // View count for sorting;
+ dislikeCount?: number; // Dislike count;
+ categoryId?: string; // Category ID;
+ buffered?: TimeRanges; // Buffered time ranges;
+ tags?: string | string[]; // Video tags;
+ likeCount?: number; // Some code uses likeCount;
  visibility?: string;
  metadata?;
  statistics?: {
@@ -65,7 +65,7 @@ export interface Video {
 }
 
 export interface Short extends Video {
- isShort: true
+ isShort: true;
 }
 
 export interface User {
@@ -82,12 +82,12 @@ export interface Channel {
  thumbnail: string;
  subscriberCount: number;
  videoCount: number;
- name?: string; // Display name
- avatarUrl?: string; // Avatar image URL
- bannerUrl?: string; // Banner image URL
- subscribers?: number | string; // Subscriber count
- joinedDate?: string; // Date joined
- totalViews?: number; // Total channel views
+ name?: string; // Display name;
+ avatarUrl?: string; // Avatar image URL;
+ bannerUrl?: string; // Banner image URL;
+ subscribers?: number | string; // Subscriber count;
+ joinedDate?: string; // Date joined;
+ totalViews?: number; // Total channel views;
  isVerified?: boolean;
 }
 
@@ -126,8 +126,8 @@ export interface Comment {
 }
 
 export interface VideoItem extends Video {
- // Additional properties for video grid items
+ // Additional properties for video grid items;
 }
 
-// Re-export for compatibility
+// Re-export for compatibility;
 export type { Video as CoreVideo };

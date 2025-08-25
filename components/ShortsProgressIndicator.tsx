@@ -25,7 +25,7 @@ return null;
 
  {/* Progress bar */}
  <div className="w-1 h-20 bg-white/20 rounded-full overflow-hidden">
- <div
+ <div;
 // FIXED:  className="w-full bg-white rounded-full transition-all duration-300 ease-out"
 // FIXED:  style={{ height: `${progress}%` } />
  />
@@ -35,12 +35,12 @@ return null;
  {totalCount <= 10 && (
  <div className="flex flex-col space-y-1">
  {Array.from({ length: totalCount }, (_, index) => (
- <div
+ <div;
  key={index}
 // FIXED:  className={`w-2 h-2 rounded-full transition-colors duration-200 ${
- index === currentIndex
+ index === currentIndex;
  ? 'bg-white'
- : index < currentIndex
+ : index < currentIndex;
  ? 'bg-white/60'
  : 'bg-white/20'
  }`} />

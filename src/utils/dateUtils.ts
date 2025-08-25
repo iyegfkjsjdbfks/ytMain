@@ -1,4 +1,4 @@
-// Date Utils - Minimal Implementation
+// Date Utils - Minimal Implementation;
 export const formatDate = (date: Date | string | number): string => {
   try {
     const d = new Date(date);

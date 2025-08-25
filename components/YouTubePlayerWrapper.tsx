@@ -1,6 +1,6 @@
 import React, { forwardRef, type ReactNode, lazy, ReactNode } from 'react';
 
-import YouTubePlayer from 'YouTubePlayer.tsx';
+import YouTubePlayer from 'YouTubePlayer';
 
 import type { YouTubeSearchResult } from '../services/googleSearchService.ts';
 
@@ -22,21 +22,21 @@ interface YouTubePlayerWrapperProps {
  lazy?: boolean;
  preload?: 'none' | 'metadata' | 'auto';
  placeholder?: ReactNode;
- // IFrame API specific props
+ // IFrame API specific props;
  onPlaybackQualityChange?: (event: Event) => void;
- onPlaybackRateChange?: (event: Event) => void
+ onPlaybackRateChange?: (event: Event) => void;
 }
 
-// Union type for player methods
+// Union type for player methods;
 export interface YouTubePlayerWrapperMethods {}
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
  props,
  _ref) => {
- // YouTubePlayerWrapper rendering
+ // YouTubePlayerWrapper rendering;
 
- // Create mock video object for YouTubePlayer component
- const createMockVideo = (videoId): YouTubeSearchResult => ({,
+ // Create mock video object for YouTubePlayer component;
+ const createMockVideo = (videoId: string): YouTubeSearchResult => ({,
  id: videoId,
  title: 'Video',
  description: '',
@@ -50,9 +50,9 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
  uploadedAt: new Date().toISOString(),
  isYouTube: true as const });
 
- // Use YouTube Player - Best for simple YouTube integration
+ // Use YouTube Player - Best for simple YouTube integration;
  return (
- <YouTubePlayer
+ <YouTubePlayer;
  video={createMockVideo(props.videoId)}
  {...(props.width !== undefined && { width: props.width })}
  {...(props.height !== undefined && { height: props.height })}

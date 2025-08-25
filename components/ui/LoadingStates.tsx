@@ -1,7 +1,7 @@
 import React, { ReactNode, FC } from 'react';
 import { cn } from '../../utils / cn';
 
-// Base loading props interface
+// Base loading props interface;
 export interface LoadingProps {}
  className?: string;
  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -10,7 +10,7 @@ export interface LoadingProps {}
  text?: string;
 }
 
-// Size mappings
+// Size mappings;
 const sizeMap: object = {}
  xs: { spinner: 'w - 3 h - 3',}
  text: 'text - xs' },
@@ -23,14 +23,14 @@ const sizeMap: object = {}
  xl: { spinner: 'w - 8 h - 8',}
  text: 'text - xl' };
 
-// Color mappings
+// Color mappings;
 const colorMap: object = {}
  primary: 'text - red - 600',
  secondary: 'text - gray - 600',
  white: 'text - white',
  gray: 'text - gray - 400' };
 
-// Base Spinner Component
+// Base Spinner Component;
 export const Spinner: React.FC < LoadingProps> = ({}
  className = '',
  size = 'md',
@@ -39,7 +39,7 @@ export const Spinner: React.FC < LoadingProps> = ({}
  const colorClass = colorMap.color;
 
  return (
- <div
+ <div;
 // FIXED:  className={cn(}
  'animate - spin rounded - full border - 2 border - current border - t - transparent',
  sizeClass,
@@ -51,7 +51,7 @@ export const Spinner: React.FC < LoadingProps> = ({}
  );
 };
 
-// Dots Loading Component
+// Dots Loading Component;
 export const DotsLoader: React.FC < LoadingProps> = ({}
  className = '',
  size = 'md',
@@ -62,7 +62,7 @@ export const DotsLoader: React.FC < LoadingProps> = ({}
  return (
  <div className={cn('flex space - x - 1', className)} role="status" aria - label="Loading">
  {[0, 1, 2].map((i) => (}
- <div
+ <div;
  key={i}
 // FIXED:  className={cn(}
  'rounded - full animate - pulse',
@@ -78,7 +78,7 @@ export const DotsLoader: React.FC < LoadingProps> = ({}
  );
 };
 
-// Pulse Loading Component
+// Pulse Loading Component;
 export const PulseLoader: React.FC < LoadingProps & {children ?  : React.ReactNode}> = ({}
  className = '',
  children }) => {}
@@ -89,7 +89,7 @@ export const PulseLoader: React.FC < LoadingProps & {children ?  : React.ReactNo
  );
 };
 
-// Skeleton Loading Component
+// Skeleton Loading Component;
 export const Skeleton: React.FC<{}
  className?: string;
  width?: string;
@@ -108,7 +108,7 @@ export const Skeleton: React.FC<{}
  full: 'rounded - full' }[rounded];
 
  return (
- <div
+ <div;
 // FIXED:  className={cn(}
  'animate - pulse bg - gray - 200 dark:bg - gray - 700',
  width,
@@ -121,7 +121,7 @@ export const Skeleton: React.FC<{}
  );
 };
 
-// Main Loading Component
+// Main Loading Component;
 export const Loading: React.FC < LoadingProps> = ({}
  className = '',
  size = 'md',
@@ -159,7 +159,7 @@ export const Loading: React.FC < LoadingProps> = ({}
  );
 };
 
-// Specialized Loading Components for common use cases
+// Specialized Loading Components for common use cases;
 export const VideoCardSkeleton: React.FC<{className ?  : string}> = ({ className }: any) => (
  <div className={cn('space - y - 3', className)}>
  <Skeleton height="h - 48" rounded="lg" />
@@ -202,7 +202,7 @@ export const PlaylistSkeleton: React.FC<{className ?  : string}> = ({ className 
 // FIXED:  </div>
 );
 
-// Loading Screen Component
+// Loading Screen Component;
 export const LoadingScreen: React.FC<{}
  message?: string;
  className?: string;
@@ -212,7 +212,7 @@ export const LoadingScreen: React.FC<{}
 // FIXED:  </div>
 );
 
-// Page Loading Component
+// Page Loading Component;
 export const PageLoading: React.FC<{}
  message?: string;
  className?: string;
@@ -222,7 +222,7 @@ export const PageLoading: React.FC<{}
 // FIXED:  </div>
 );
 
-// Button Loading Component
+// Button Loading Component;
 export const ButtonLoading: React.FC<{}
  size?: 'xs' | 'sm' | 'md';
  className?: string;

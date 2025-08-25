@@ -13,7 +13,7 @@ const PlaylistManagerPage: React.FC = () => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Playlist Manager</h1>
           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Create New Playlist
+            Create New Playlist;
           </button>
         </div>
         
@@ -55,13 +55,13 @@ const PlaylistManagerPage: React.FC = () => {
                       <td className="py-3">
                         <div className="flex space-x-2">
                           <button className="text-blue-500 hover:text-blue-700 text-sm">
-                            Edit
+                            Edit;
                           </button>
                           <button className="text-green-500 hover:text-green-700 text-sm">
-                            View
+                            View;
                           </button>
                           <button className="text-red-500 hover:text-red-700 text-sm">
-                            Delete
+                            Delete;
                           </button>
                         </div>
                       </td>
@@ -78,13 +78,13 @@ const PlaylistManagerPage: React.FC = () => {
             <h3 className="text-lg font-semibold mb-2">Quick Actions</h3>
             <div className="space-y-2">
               <button className="w-full text-left px-3 py-2 rounded hover:bg-gray-100">
-                Import Playlist
+                Import Playlist;
               </button>
               <button className="w-full text-left px-3 py-2 rounded hover:bg-gray-100">
-                Export Playlists
+                Export Playlists;
               </button>
               <button className="w-full text-left px-3 py-2 rounded hover:bg-gray-100">
-                Bulk Edit
+                Bulk Edit;
               </button>
             </div>
           </div>

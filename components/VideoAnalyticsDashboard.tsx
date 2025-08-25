@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 import type { Video } from '../types.ts';
 
-import { ClockIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, EyeIcon, ChartBarIcon } from '@heroicons / react / 24 / outline';
+import { ClockIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, EyeIcon, ChartBarSquareIcon } from '@heroicons / react / 24 / outline';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Doughnut, Line } from 'react - chartjs - 2';
 
@@ -34,7 +34,7 @@ export interface VideoAnalytics {}
  averageViewDuration: number; // in seconds,
  totalWatchTime: number; // in seconds,
  clickThroughRate: number; // percentage,
- engagementRate: number; // percentage
+ engagementRate: number; // percentage;
 
  // Time series data,
  viewsOverTime: Array<{ date: string; views: number }>;
@@ -53,7 +53,7 @@ export interface VideoAnalytics {}
  revenue?: {}
  total: number;,
  rpm: number; // Revenue per mille,
- cpm: number; // Cost per mille
+ cpm: number; // Cost per mille;
 
  }
 export interface VideoAnalyticsDashboardProps {}
@@ -98,7 +98,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  currency: 'USD' }).format(amount);
  };
 
- // Chart configurations
+ // Chart configurations;
  const viewsChartData: object = {}
  labels: analytics.viewsOverTime.map((d) => new Date(d.date).toLocaleDateString()),
  datasets: [
@@ -172,7 +172,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {/* Video Header */}
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <div className="flex items - start space - x - 4">
- <img
+ <img;
 // FIXED:  src={analytics.thumbnail}
 // FIXED:  alt={analytics.title}
 // FIXED:  className="w - 32 h - 18 object - cover rounded - lg flex - shrink - 0" />
@@ -228,11 +228,11 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  label: '90 days' },
  { value: '365d',}
  label: '1 year' }].map((option) => (
- <button
+ <button;
  key={option.value} />
 // FIXED:  onClick={() => onTimeRangeChange(option.value as any: React.MouseEvent)}
 // FIXED:  className={`px - 4 py - 2 rounded - md text - sm font - medium transition - colors ${}
- timeRange === option.value
+ timeRange === option.value;
  ? 'bg - white dark:bg - gray - 600 text - gray - 900 dark:text - white shadow - sm'
  : 'text - gray - 600 dark:text - gray - 300 hover:text - gray - 900 dark:hover:text - white'
  }`}
@@ -253,11 +253,11 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  label: 'Engagement' },
  ...(analytics.revenue ? [{ value: 'revenue',}
  label: 'Revenue' }]: [])].map((tab) => (
- <button
+ <button;
  key={tab.value} />
 // FIXED:  onClick={() => setActiveTab(tab.value as any: React.MouseEvent)}
 // FIXED:  className={`px - 4 py - 2 rounded - md text - sm font - medium transition - colors ${}
- activeTab === tab.value
+ activeTab === tab.value;
  ? 'bg - white dark:bg - gray - 600 text - gray - 900 dark:text - white shadow - sm'
  : 'text - gray - 600 dark:text - gray - 300 hover:text - gray - 900 dark:hover:text - white'
  }`}
@@ -274,7 +274,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {/* Views Chart */}
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Views over time
+ Views over time;
 // FIXED:  </h3>
  <div className="h - 64">
  <Line data={viewsChartData} options={chartOptions} />
@@ -284,7 +284,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {/* Watch Time Chart */}
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Watch time over time
+ Watch time over time;
 // FIXED:  </h3>
  <div className="h - 64">
  <Line data={watchTimeChartData} options={chartOptions} />
@@ -341,7 +341,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {/* Device Types */}
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Device types
+ Device types;
 // FIXED:  </h3>
  <div className="h - 64">
  <Doughnut data={deviceChartData} options={doughnutOptions} />
@@ -351,7 +351,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {/* Traffic Sources */}
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Traffic sources
+ Traffic sources;
 // FIXED:  </h3>
  <div className="h - 64">
  <Doughnut data={trafficSourcesChartData} options={doughnutOptions} />
@@ -361,7 +361,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {/* Top Countries */}
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Top countries
+ Top countries;
 // FIXED:  </h3>
  <div className="space - y - 3">
  {analytics.topCountries.slice(0, 5).map((country, index) => (}
@@ -388,7 +388,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {/* Demographics */}
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Age groups
+ Age groups;
 // FIXED:  </h3>
  <div className="space - y - 3">
  {analytics.ageGroups.map((group) => (}
@@ -396,7 +396,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  <span className="text - gray - 900 dark:text - white">{group.range}</span>
  <div className="flex items - center space - x - 2">
  <div className="w - 24 bg - gray - 200 dark:bg - gray - 700 rounded - full h - 2">
- <div
+ <div;
 // FIXED:  className="bg - blue - 500 h - 2 rounded - full"
 // FIXED:  style={{ width: `${group.percentage}%` } />
  />
@@ -425,7 +425,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {analytics.clickThroughRate.toFixed(2)}%
 // FIXED:  </div>
  <p className="text - xs text - gray - 500 dark:text - gray - 400 mt - 1">
- Click - through rate
+ Click - through rate;
 // FIXED:  </p>
 // FIXED:  </div>
 
@@ -438,7 +438,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {((analytics.averageViewDuration / 600) * 100).toFixed(1)}%
 // FIXED:  </div>
  <p className="text - xs text - gray - 500 dark:text - gray - 400 mt - 1">
- Average view duration
+ Average view duration;
 // FIXED:  </p>
 // FIXED:  </div>
 
@@ -451,7 +451,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {((analytics.likes / (analytics.likes + analytics.dislikes)) * 100).toFixed(1)}%
 // FIXED:  </div>
  <p className="text - xs text - gray - 500 dark:text - gray - 400 mt - 1">
- Likes vs dislikes
+ Likes vs dislikes;
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -462,7 +462,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  <div className="grid grid - cols - 1 md:grid - cols - 3 gap - 6">
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700">
  <div className="flex items - center space - x - 2 mb - 2">
- <ChartBarIcon className="w - 5 h - 5 text - green - 500" />
+ <ChartBarSquareIcon className="w - 5 h - 5 text - green - 500" />
  <span className="text - sm font - medium text - gray - 600 dark:text - gray - 400">Total Revenue</span>
 // FIXED:  </div>
 <div className="text - 2xl font - bold text - gray - 900 dark:text - white">
@@ -479,7 +479,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {formatCurrency(analytics.revenue.rpm)}
 // FIXED:  </div>
  <p className="text - xs text - gray - 500 dark:text - gray - 400 mt - 1">
- Revenue per mille
+ Revenue per mille;
 // FIXED:  </p>
 // FIXED:  </div>
 
@@ -492,7 +492,7 @@ const VideoAnalyticsDashboard: React.FC < VideoAnalyticsDashboardProps> = ({}
  {formatCurrency(analytics.revenue.cpm)}
 // FIXED:  </div>
  <p className="text - xs text - gray - 500 dark:text - gray - 400 mt - 1">
- Cost per mille
+ Cost per mille;
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>

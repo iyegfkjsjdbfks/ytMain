@@ -39,14 +39,14 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
  };
 
  return (
- <div
+ <div;
 // FIXED:  className={`${variantClasses[variant]} ${className}`} />
-// FIXED:  onClick={(e) => handleClick(e)}
+// FIXED:  onClick={(e: any) => handleClick(e)}
  role="alert"
  >
  <div className="text-center">
  {showIcon && (
- <ExclamationTriangleIcon
+ <ExclamationTriangleIcon;
 // FIXED:  className={`w-8 h-8 mx-auto mb-2 ${iconColorClasses[variant]}`} />
  />
  )}

@@ -1,32 +1,34 @@
-// SuperChatPanel - React Component
+import React from 'react';
+// SuperChatPanel - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface SuperChatPanelProps {
   className?: string;
   children?: React.ReactNode;
   onLoad?: () => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError, 
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const initialize = async () => {
-      try {
+      try {;
         await new Promise(resolve => setTimeout(resolve, 200));
         setIsReady(true);
-        onLoad?.();
+        onLoad?.(), 
       } catch (err) {
         const error = err instanceof Error ? err : new Error('Initialization failed');
         setError(error);
-        onError?.(error);
+        onError?.(error), 
       }
     };
 
@@ -39,7 +41,7 @@ export const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
         <h3>Error in SuperChatPanel</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

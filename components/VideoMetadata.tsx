@@ -118,11 +118,11 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 mt-4">
  <div className="flex items-center justify-between mb-4">
  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
- Video Information
+ Video Information;
 // FIXED:  </h3>
  {detailedMetadata.some(item => item.condition) && onToggleExpanded && (
  <button />
-// FIXED:  onClick={(e) => onToggleExpanded(e)}
+// FIXED:  onClick={(e: any) => onToggleExpanded(e)}
 // FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
  >
  {expanded ? 'Show Less' : 'Show More'}
@@ -147,7 +147,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {expanded && (
  <div className="border-t border-neutral-200 dark:border-neutral-700 pt-4">
  <h4 className="text-md font-medium text-neutral-900 dark:text-white mb-3">
- Detailed Information
+ Detailed Information;
 // FIXED:  </h4>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -169,7 +169,7 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="flex flex-wrap gap-2">
  {video.tags.slice(0, 10).map((tag,
  index) => (
- <span
+ <span;
  key={index}
 // FIXED:  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full" />
  >
@@ -178,7 +178,7 @@ return `${(num / 1000).toFixed(1)}K`;
  ))}
  {video.tags.length > 10 && (
  <span className="px-2 py-1 bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 text-xs rounded-full">
- +{video.tags.length - 10} more
+ +{video.tags.length - 10} more;
 // FIXED:  </span>
  )}
 // FIXED:  </div>
@@ -189,7 +189,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {streamingDetails && (
  <div className="mb-4">
  <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">
- Live Stream Information
+ Live Stream Information;
 // FIXED:  </h5>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
  {video.metadata?.scheduledStartTime && (
@@ -232,7 +232,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {video.contentDetails && (
  <div className="mb-4">
  <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">
- Technical Details
+ Technical Details;
 // FIXED:  </h5>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
  <div>
@@ -269,7 +269,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {video.statistics && (
  <div>
  <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">
- Engagement Statistics
+ Engagement Statistics;
 // FIXED:  </h5>
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
  <div className="text-center p-2 bg-neutral-100 dark:bg-neutral-700 rounded">

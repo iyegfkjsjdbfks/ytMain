@@ -1,6 +1,6 @@
 import React from 'react';
 /**
- * LikedVideosPage component for displaying videos the user has liked
+ * LikedVideosPage component for displaying videos the user has liked;
  */
 const LikedVideosPage: React.FC = () => {
  return (
@@ -9,7 +9,7 @@ const LikedVideosPage: React.FC = () => {
  <p className='text-gray-600 mb-4'>Videos you've liked</p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
- This is a placeholder for the liked videos page that will display
+ This is a placeholder for the liked videos page that will display;
  videos you've liked.
 // FIXED:  </p>
  <p className='mt-2'>

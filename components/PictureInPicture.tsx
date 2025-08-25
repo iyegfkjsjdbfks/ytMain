@@ -1,8 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react - router - dom';
 
-import { XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon } from '@heroicons / react / 24 / outline';
-
+import { XIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon } from '@heroicons / react / 24 / outline'
 export interface PictureInPictureProps {}
  videoId: string;,
  videoTitle: string;
@@ -29,9 +29,9 @@ const PictureInPicture: React.FC < PictureInPictureProps> = ({}
  const [currentTime, setCurrentTime] = useState < number>(0);
  const [duration, setDuration] = useState < number>(0);
  const [isDragging, setIsDragging] = useState < boolean>(false);
- const [position, setPosition] = useState({ x: 20,}
+ const [position, setPosition] = useState({ x: 20 }
  y: 20 });
- const [dragOffset, setDragOffset] = useState({ x: 0,}
+ const [dragOffset, setDragOffset] = useState({ x: 0 }
  y: 0 });
  const [isMinimized, setIsMinimized] = useState < boolean>(false);
 
@@ -45,7 +45,7 @@ const PictureInPicture: React.FC < PictureInPictureProps> = ({}
  const newX = e.clientX - dragOffset.x;
  const newY = e.clientY - dragOffset.y;
 
- // Keep within viewport bounds
+ // Keep within viewport bounds;
  const maxX = window.innerWidth - containerRef.current.offsetWidth;
  const maxY = window.innerHeight - containerRef.current.offsetHeight;
 
@@ -100,7 +100,7 @@ return;
  videoRef.current.pause();
  } else {}
  videoRef.current.play().catch(() => {}
- // Handle play promise rejection silently
+ // Handle play promise rejection silently;
  });
  }
  setIsPlaying(!isPlaying);
@@ -121,7 +121,7 @@ return;
  setCurrentTime(newTime);
  };
 
- const formatTime = (time): (string) => {}
+ const formatTime = (time): (string: any) => {}
  const minutes = Math.floor(time / 60);
  const seconds = Math.floor(time % 60);
  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -137,19 +137,19 @@ return null;
 }
 
  return (
- <div
+ <div;
  ref={containerRef}
 // FIXED:  className={`fixed z - 50 bg - black rounded - lg shadow - 2xl border border - gray - 600 overflow - hidden transition - all duration - 200 ${}
  isMinimized ? 'w - 16 h - 12' : 'w - 80 h - 48'
  } ${className}`}
-// FIXED:  style={{,}
+// FIXED:  style={{ }
  left: `${position.x}px`,
  top: `${position.y}px`,
  cursor: isDragging ? 'grabbing' : 'grab' }
  onMouseDown={handleMouseDown} />
  >
  {isMinimized ? (}
- // Minimized view
+ // Minimized view;
  <div className="w - full h - full flex items - center justify - center bg - gray - 900">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
@@ -163,12 +163,12 @@ return null;
 // FIXED:  </button>
 // FIXED:  </div>
  ) : (
- // Full view
+ // Full view;
  <><</>/><</>/><</>/>
  {/* Video */}
  <div className="relative w - full h - full">
  {videoUrl ? (}
- <video
+ <video;
  ref={videoRef}
 // FIXED:  src={videoUrl}
 // FIXED:  className="w - full h - full object - cover"
@@ -177,7 +177,7 @@ return null;
  onPause={() => setIsPlaying(false)}
  />
  ) : (
- <img
+ <img;
 // FIXED:  src={thumbnailUrl}
 // FIXED:  alt={videoTitle}
 // FIXED:  className="w - full h - full object - cover" />
@@ -197,7 +197,7 @@ return null;
 // FIXED:  className="p - 1 bg - black / 50 text - white rounded hover:bg - black / 70 transition - colors"
  title="Minimize"
  >
- <XMarkIcon className="w - 3 h - 3" />
+ <XIcon className="w - 3 h - 3" />
 // FIXED:  </button>
 
  <button />
@@ -220,7 +220,7 @@ return null;
 // FIXED:  className="p - 1 bg - black / 50 text - white rounded hover:bg - black / 70 transition - colors"
  title="Close"
  >
- <XMarkIcon className="w - 3 h - 3" />
+ <XIcon className="w - 3 h - 3" />
 // FIXED:  </button>
 // FIXED:  </div>
 
@@ -245,11 +245,11 @@ return null;
  <div className="absolute bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 80 to - transparent p - 2">
  {/* Progress Bar */}
  {duration > 0 && (}
- <div
+ <div;
 // FIXED:  className="w - full h - 1 bg - white / 30 rounded - full mb - 2 cursor - pointer" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSeek(e)}
  >
- <div
+ <div;
 // FIXED:  className="h - full bg - red - 500 rounded - full transition - all"
 // FIXED:  style={{ width: `${(currentTime / duration) * 100}%` } />
  />
@@ -266,7 +266,7 @@ return null;
 // FIXED:  className="hover:text - gray - 300"
  >
  {isMuted ? (}
- <SpeakerXMarkIcon className="w - 4 h - 4" />
+ <SpeakerXIcon className="w - 4 h - 4" />
  ) : (
  <SpeakerWaveIcon className="w - 4 h - 4" />
  )}
@@ -307,6 +307,5 @@ return null;
  )}
 // FIXED:  </div>
  );
-};
-
+}
 export default PictureInPicture;

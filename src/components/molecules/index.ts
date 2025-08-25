@@ -1,2 +1,2 @@
-// Molecules
+// Molecules;
 export * from './VideoCard';

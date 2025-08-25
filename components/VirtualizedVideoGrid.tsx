@@ -4,8 +4,8 @@ import { FixedSizeGrid } from 'react - window';
 
 import { cn } from '../utils / cn';
 
-import LoadingSpinner from 'LoadingSpinner.tsx';
-import OptimizedVideoCard from 'OptimizedVideoCard.tsx';
+import LoadingSpinner from 'LoadingSpinner';
+import OptimizedVideoCard from 'OptimizedVideoCard';
 
 import type { Video } from '../types.ts';
 
@@ -52,7 +52,7 @@ const GridItem: React.FC < GridItemProps> = ({ columnIndex, rowIndex, style, dat
 
  return (
  <div style={style} className="p - 2">
- <OptimizedVideoCard
+ <OptimizedVideoCard;
  video={video}
  size={cardSize}
  showChannel={showChannel}
@@ -79,7 +79,7 @@ const VirtualizedVideoGrid: React.FC < VirtualizedVideoGridProps> = ({}
  height: 0 });
  const [containerRef, setContainerRef] = useState < HTMLDivElement | null>(null);
 
- // Calculate grid dimensions based on card size and container width
+ // Calculate grid dimensions based on card size and container width;
  const { columnsPerRow, columnWidth, rowHeight } = useMemo(() => {}
  const cardWidths: object = {}
  sm: 280,
@@ -93,7 +93,7 @@ const VirtualizedVideoGrid: React.FC < VirtualizedVideoGridProps> = ({}
 
  const cardWidth = cardWidths.cardSize;
  const cardHeight = cardHeights.cardSize;
- const gap: number = 16; // 1rem gap
+ const gap: number = 16; // 1rem gap;
 
  const availableWidth = containerSize.width - gap;
  const cols = Math.max(1, Math.floor(availableWidth / (cardWidth + gap)));
@@ -101,13 +101,13 @@ const VirtualizedVideoGrid: React.FC < VirtualizedVideoGridProps> = ({}
 
  return {}
  columnsPerRow: cols,
- columnWidth: actualColumnWidth, rowHeight: cardHeight + gap
+ columnWidth: actualColumnWidth, rowHeight: cardHeight + gap;
 
  }}, [containerSize.width, cardSize]);
 
  const rowCount = Math.ceil(videos.length / columnsPerRow);
 
- // Handle container resize
+ // Handle container resize;
  useEffect(() => {}
  if (!containerRef) {}
 return;
@@ -124,7 +124,7 @@ return;
  return () => resizeObserver.disconnect();
  }, [containerRef]);
 
- // Handle infinite scrolling
+ // Handle infinite scrolling;
  const handleScroll = useCallback(({ scrollTop, scrollHeight, clientHeight }) => {}
  if (!hasMore || loading || !onLoadMore) {}
 return;
@@ -137,7 +137,7 @@ return;
  },
  [hasMore, loading, onLoadMore]);
 
- // Grid item data
+ // Grid item data;
  const itemData = useMemo(
  () => ({}
  videos,
@@ -163,13 +163,13 @@ return;
 
  return (
  <div className={cn('w - full h - full', className)}>
- <div
+ <div;
  ref={setContainerRef}
 // FIXED:  className="w - full h - full min - h-[400px]" />
  >
  {containerSize.width > 0 && (}
  <><</>/><</>/><</>/>
- <Grid
+ <Grid;
  columnCount={columnsPerRow}
  columnWidth={columnWidth}
  height={containerSize.height}
@@ -198,7 +198,7 @@ return;
 // FIXED:  onClick={(e: React.MouseEvent) => onLoadMore(e)}
 // FIXED:  className="px - 6 py - 3 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors font - medium"
  >
- Load More Videos
+ Load More Videos;
 // FIXED:  </button>
 // FIXED:  </div>
  )}

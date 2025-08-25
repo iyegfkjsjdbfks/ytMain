@@ -1,53 +1,144 @@
-// authService - Advanced Service Implementation
-export interface authServiceConfig {
-  baseUrl?: string;
-  timeout?: number;
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react'
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  avatar?: string;
+  role?: string;
 }
 
-export class AuthService {
-  private config: Required<authServiceConfig>;
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error?: string;
+}
 
-  constructor(config: authServiceConfig = {}) {
-    this.config = {
-      baseUrl: config.baseUrl || '/api',
-      timeout: config.timeout || 5000
-    };
-  }
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
 
-  async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    const url = this.config.baseUrl + endpoint;
-    
+export interface RegisterData {
+  email: string;
+  password: string;
+  name: string;
+}
+
+class AuthService {
+  private user: User | null = null;
+  private isLoading: boolean = false;
+  
+  async login(credentials: LoginCredentials): Promise<User> {
+    this.isLoading = true;
     try {
-      const response = await fetch(url, {
-        ...options,
-        headers: {
-          'Content-Type': 'application/json',
-          ...options.headers
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error('Request failed: ' + response.status);
+      // Mock implementation - replace with real API call
+      const { email, password } = credentials;
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Mock validation
+      if (email && password) {
+        const user: User = {
+          id: '1',
+          email,
+          name: 'User',
+          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face'
+        };
+        this.user = user;
+        return user;
       }
-
-      return await response.json();
+      
+      throw new Error('Invalid credentials');
     } catch (error) {
-      console.error('Service error:', error);
       throw error;
+    } finally {
+      this.isLoading = false;
     }
   }
-
-  async get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: 'GET' });
+  
+  async register(data: RegisterData): Promise<User> {
+    this.isLoading = true;
+    try {
+      // Mock implementation - replace with real API call
+      const { email, password, name } = data;
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Mock validation
+      if (email && password && name) {
+        const user: User = {
+          id: Date.now().toString(),
+          email,
+          name,
+          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face'
+        };
+        this.user = user;
+        return user;
+      }
+      
+      throw new Error('Registration failed');
+    } catch (error) {
+      throw error;
+    } finally {
+      this.isLoading = false;
+    }
   }
-
-  async post<T>(endpoint: string, data): Promise<T> {
-    return this.request<T>(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
+  
+  async logout(): Promise<void> {
+    this.isLoading = true;
+    try {
+      // Mock implementation - replace with real API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      this.user = null;
+    } catch (error) {
+      throw error;
+    } finally {
+      this.isLoading = false;
+    }
+  }
+  
+  getCurrentUser(): User | null {
+    return this.user;
+  }
+  
+  isAuthenticated(): boolean {
+    return this.user !== null;
+  }
+  
+  isLoadingState(): boolean {
+    return this.isLoading;
+  }
+  
+  async refreshToken(): Promise<User | null> {
+    this.isLoading = true;
+    try {
+      // Mock implementation - replace with real API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      return this.user;
+    } catch (error) {
+      this.user = null;
+      throw error;
+    } finally {
+      this.isLoading = false;
+    }
+  }
+  
+  async resetPassword(email: string): Promise<void> {
+    this.isLoading = true;
+    try {
+      // Mock implementation - replace with real API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Password reset email sent to:', email);
+    } catch (error) {
+      throw error;
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
 
-export const authService = new AuthService();
+export const authService = new AuthService()
 export default authService;

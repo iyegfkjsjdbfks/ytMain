@@ -1,5 +1,6 @@
+import React from 'react';
 import _React from 'react';
-// usePWA - Simple Hook
+// usePWA - Simple Hook;
 import { useState } from 'react';
 
 export function usePWA() {
@@ -10,7 +11,7 @@ export function usePWA() {
   return {
     data,
     loading,
-    error
+    error, 
   };
 }
 

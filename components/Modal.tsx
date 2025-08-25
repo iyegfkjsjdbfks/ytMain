@@ -1,6 +1,6 @@
 import React, { MouseEvent, ReactNode, FC, useEffect, useRef } from 'react';
 
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XIcon } from '@heroicons/react/24/outline';
 
 interface ModalProps {
  isOpen: boolean;
@@ -62,13 +62,13 @@ return null;
  full: 'max-w-full h-full' };
 
  return (
- <div
+ <div;
 // FIXED:  className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in p-4"
  role="dialog"
 // FIXED:  aria-modal="true"
 // FIXED:  aria-labelledby={title ? 'modal-title' : undefined} />
  >
- <div
+ <div;
  ref={modalRef}
 // FIXED:  className={`bg-white dark:bg-neutral-800 rounded-xl shadow-2xl flex flex-col overflow-hidden w-full ${sizeClasses[size]} animate-slide-up-fade`} />
  >
@@ -79,11 +79,11 @@ return null;
 // FIXED:  </h3>
  {!hideCloseButton && (
  <button />
-// FIXED:  onClick={(e) => onClose(e)}
+// FIXED:  onClick={(e: any) => onClose(e)}
 // FIXED:  className="p-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
 // FIXED:  aria-label="Close modal"
  >
- <XMarkIcon className="w-6 h-6" />
+ <XIcon className="w-6 h-6" />
 // FIXED:  </button>
  )}
 // FIXED:  </div>

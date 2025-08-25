@@ -1,5 +1,6 @@
+import React from 'react';
 import _React from 'react';
-// useVideoAutoplay - Simple Hook
+// useVideoAutoplay - Simple Hook;
 import { useState } from 'react';
 
 export function useVideoAutoplay() {
@@ -10,7 +11,7 @@ export function useVideoAutoplay() {
   return {
     data,
     loading,
-    error
+    error, 
   };
 }
 

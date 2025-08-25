@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 const HistoryIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }: any) => (
- <svg
+ <svg;
 // FIXED:  className={className}
  fill="none"
  stroke="currentColor"

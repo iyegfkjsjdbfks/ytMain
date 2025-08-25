@@ -2,7 +2,7 @@ import React, { useEffect, createContext, useReducer, useCallback, type ReactNod
 import type { User } from '../src / types / core';
 import type { MiniplayerVideo, StrictNotification } from '../types / strictTypes';
 
-// Unified App State Interface
+// Unified App State Interface;
 interface UnifiedAppState {}
  // Auth state,
  user: User | null;,
@@ -24,7 +24,7 @@ interface UnifiedAppState {}
  notifications: StrictNotification[]
 }
 
-// Action Types
+// Action Types;
 type UnifiedAppAction =
  | { type: "SET_USER"; payload: User | null }
  | { type: "SET_AUTH_LOADING"; payload: boolean }
@@ -37,7 +37,7 @@ type UnifiedAppAction =
  | { type: "ADD_NOTIFICATION"; payload: StrictNotification }
  | { type: "REMOVE_NOTIFICATION"; payload: string };
 
-// Initial State
+// Initial State;
 const initialState: UnifiedAppState = {,}
  user: null,
  isAuthenticated: false,
@@ -49,7 +49,7 @@ const initialState: UnifiedAppState = {,}
  sidebarCollapsed: false,
  notifications: [] };
 
-// Reducer
+// Reducer;
 function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): UnifiedAppState {}
  switch (action.type) {}
  case 'SET_USER':
@@ -81,7 +81,7 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
  case 'REMOVE_FROM_WATCH_LATER':
  return {}
  ...state as any,
- watchLaterVideos: state.watchLaterVideos.filter((id) => id !== action.payload) };
+ watchLaterVideos: state.watchLaterVideos.filter((id: string) => id !== action.payload) };
  case 'TOGGLE_SIDEBAR':
  return {}
  ...state as any,
@@ -94,9 +94,9 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
  return {}
  ...state as any,
  notifications: state.notifications.filter((n) => n.id !== action.payload) };
- default: return state
+ default: return state;
  }
-// Context Interface
+// Context Interface;
 interface UnifiedAppContextType {}
  state: UnifiedAppState;
 
@@ -115,45 +115,45 @@ interface UnifiedAppContextType {}
  toggleMiniplayer: () => void;
 
  // Watch Later actions,
- addToWatchLater: (videoId) => void;,
- removeFromWatchLater: (videoId) => void;
- isInWatchLater: (videoId) => boolean;
+ addToWatchLater: (videoId: string) => void;,
+ removeFromWatchLater: (videoId: string) => void;
+ isInWatchLater: (videoId: string) => boolean;
 
  // UI actions,
  toggleSidebar: () => void;,
  addNotification: (notification: Omit < StrictNotification, 'id' | 'timestamp'>) => void;
- removeNotification: (id) => void
+ removeNotification: (id: string) => void;
 }
 
-// Create Context
+// Create Context;
 export const UnifiedAppContext = createContext < UnifiedAppContextType | undefined>(undefined);
 
-// Custom Hook with consistent export for Fast Refresh - moved to separate file to avoid Fast Refresh issues
+// Custom Hook with consistent export for Fast Refresh - moved to separate file to avoid Fast Refresh issues;
 // See hooks / useUnifiedApp.ts;
 
-// Provider Props
+// Provider Props;
 interface UnifiedAppProviderProps {}
- children?: React.ReactNode
+ children?: React.ReactNode;
 }
 
-// Provider Component
+// Provider Component;
 export const UnifiedAppProvider: React.FC < UnifiedAppProviderProps> = ({ children }: any) => {}
  const [state, dispatch] = useReducer < any, any>(unifiedAppReducer, initialState);
 
- // Auth actions
+ // Auth actions;
  const login = useCallback(async (email,
  password): Promise<any> < boolean> => {}
  dispatch({ type: "SET_AUTH_LOADING",}
  payload: true });
 
  try {}
- // Simulate API call - password validation would happen here
+ // Simulate API call - password validation would happen here;
  if (password.length < 6) {}
  return false;
  }
  await new Promise<any>(resolve => setTimeout((resolve) as any, 1000));
 
- // Mock successful login
+ // Mock successful login;
  const mockUser: User = {,}
  id: '1',
  username: email.split('@')[0] || 'user',
@@ -220,14 +220,14 @@ return false;
  }
  }, [state.user]);
 
- // Theme actions
+ // Theme actions;
  const setTheme = useCallback((theme: 'light' | 'dark' | 'system') => {}
  dispatch({ type: "SET_THEME",}
  payload: theme });
  (localStorage as any).setItem('youtube_clone_theme', theme);
  }, []);
 
- // Miniplayer actions
+ // Miniplayer actions;
  const openMiniplayer = useCallback((video: MiniplayerVideo) => {}
  dispatch({ type: "SET_MINIPLAYER_VIDEO",}
  payload: video });
@@ -242,26 +242,26 @@ return false;
  dispatch({ type: "TOGGLE_MINIPLAYER" });
  }, []);
 
- // Watch Later actions
- const addToWatchLater = useCallback((videoId) => {}
+ // Watch Later actions;
+ const addToWatchLater = useCallback((videoId: string) => {}
  dispatch({ type: "ADD_TO_WATCH_LATER",}
  payload: videoId });
  const updated: any[] = [...state.watchLaterVideos, videoId];
  (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
  }, [state.watchLaterVideos]);
 
- const removeFromWatchLater = useCallback((videoId) => {}
+ const removeFromWatchLater = useCallback((videoId: string) => {}
  dispatch({ type: "REMOVE_FROM_WATCH_LATER",}
  payload: videoId });
- const updated = state.watchLaterVideos.filter((id) => id !== videoId);
+ const updated = state.watchLaterVideos.filter((id: string) => id !== videoId);
  (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
  }, [state.watchLaterVideos]);
 
- const isInWatchLater = useCallback((videoId) => {}
- return state.watchLaterVideos.includes(videoId);
+ const isInWatchLater = useCallback((videoId: string) => {}
+ return state.watchLaterVideos.includes(videoId: string);
  }, [state.watchLaterVideos]);
 
- // UI actions
+ // UI actions;
  const toggleSidebar = useCallback(() => {}
  dispatch({ type: "TOGGLE_SIDEBAR" });
  }, []);
@@ -275,20 +275,20 @@ return false;
  payload: notificationWithId });
  }, []);
 
- const removeNotification = useCallback((id) => {}
+ const removeNotification = useCallback((id: string) => {}
  dispatch({ type: "REMOVE_NOTIFICATION",}
  payload: id });
  }, []);
 
- // Initialize state from localStorage
+ // Initialize state from localStorage;
  React.useEffect(() => {}
  const initializeState = () => {}
- // Set loading to false immediately for faster perceived performance
+ // Set loading to false immediately for faster perceived performance;
  dispatch({ type: "SET_AUTH_LOADING",}
  payload: false });
 
  try {}
- // Initialize auth state
+ // Initialize auth state;
  const storedUser = (localStorage as any).getItem('youtube_clone_user');
  const token = (localStorage as any).getItem('youtube_clone_token');
 
@@ -302,21 +302,21 @@ return false;
  localStorage.removeItem('youtube_clone_user');
  localStorage.removeItem('youtube_clone_token');
  }
- // Initialize theme
+ // Initialize theme;
  const storedTheme = (localStorage as any).getItem('youtube_clone_theme') as 'light' | 'dark' | 'system';
  if (storedTheme && ['light', 'dark', 'system'].includes(storedTheme)) {}
  dispatch({ type: "SET_THEME",}
  payload: storedTheme });
  }
 
- // Initialize watch later asynchronously to not block initial render
+ // Initialize watch later asynchronously to not block initial render;
  setTimeout((() => {}
  const storedWatchLater = (localStorage as any).getItem('youtube_clone_watch_later');
  if (storedWatchLater as any) {}
  try {}
  const watchLaterVideos = JSON.parse(storedWatchLater);
  if (Array<any>.isArray<any>(watchLaterVideos)) {}
- watchLaterVideos.forEach((videoId) => {}
+ watchLaterVideos.forEach((videoId: string) => {}
  if (typeof videoId === 'string') {}
  dispatch({ type: "ADD_TO_WATCH_LATER") as any,}
  payload: videoId });

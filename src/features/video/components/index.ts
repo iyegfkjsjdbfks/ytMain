@@ -1,5 +1,5 @@
-// Export all video-related components
-// Note: Component files will be created as needed
+// Export all video-related components;
+// Note: Component files will be created as needed;
 export const VideoPlayer = () => null;
 export const VideoCard = () => null;
 export const VideoList = () => null;

@@ -1,4 +1,4 @@
-// Component exports
+// Component exports;
 export { default as ActionButton } from './ActionButton';
 export { Badge } from './Badge';
 export { Button } from './Button';
@@ -9,10 +9,10 @@ export { Loading as LoadingSpinner, Spinner, DotsLoader, PulseLoader, Skeleton }
 export { ProgressBar } from './ProgressBar';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 
-// New unified components
+// New unified components;
 export { UnifiedButton } from './UnifiedButton';
 
-// Type exports
+// Type exports;
 export type { default as ActionButtonProps } from './ActionButton';
 export type { BadgeProps } from './Badge';
 export type { ButtonProps } from './Button';
@@ -23,5 +23,5 @@ export type { LoadingProps as LoadingSpinnerProps } from './LoadingStates';
 export type { ProgressBarProps } from './ProgressBar';
 export type { TabsProps } from './Tabs';
 
-// New unified component types
+// New unified component types;
 export type { UnifiedButtonProps } from './UnifiedButton';

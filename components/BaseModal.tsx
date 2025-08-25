@@ -1,4 +1,4 @@
-import React, { MouseEvent, KeyboardEvent, ReactNode, FC, useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export interface BaseModalProps {
@@ -16,16 +16,6 @@ export interface BaseModalProps {
   preventBodyScroll?: boolean;
 }
 
-/**
- * Reusable base modal component that provides:
- * - Consistent modal styling and behavior
- * - Accessibility features (focus management, escape key)
- * - Customizable sizes and styling
- * - Optional footer and header
- * - Overlay click and escape key handling
- *
- * Reduces code duplication for modal implementations across the app
- */
 const BaseModal: React.FC<BaseModalProps> = ({
   isOpen,
   onClose,
@@ -38,7 +28,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   footer,
   className = '',
   overlayClassName = '',
-  preventBodyScroll = true
+  preventBodyScroll = true,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -56,94 +46,79 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
   // Handle escape key
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (closeOnEscape && event.key === 'Escape') {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && closeOnEscape) {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape as EventListener);
-      return () => document.removeEventListener('keydown', handleEscape as EventListener);
+      document.addEventListener('keydown', handleEscape);
+      previousActiveElement.current = document.activeElement as HTMLElement;
+      
+      // Focus the modal
+      setTimeout(() => {
+        modalRef.current?.focus();
+      }, 0);
     }
-    return undefined;
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      if (previousActiveElement.current) {
+        previousActiveElement.current.focus();
+      }
+    };
   }, [isOpen, closeOnEscape, onClose]);
 
   // Handle body scroll
   useEffect(() => {
     if (preventBodyScroll && isOpen) {
       document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = 'unset';
-      };
+    } else {
+      document.body.style.overflow = '';
     }
-    return undefined;
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen, preventBodyScroll]);
 
-  // Focus management
-  useEffect(() => {
-    if (isOpen) {
-      previousActiveElement.current = document.activeElement as HTMLElement;
-      modalRef.current?.focus();
-    } else {
-      previousActiveElement.current?.focus();
-    }
-  }, [isOpen]);
-
-  // Handle overlay click
-  const handleOverlayClick = (event: React.MouseEvent) => {
-    if (closeOnOverlayClick && event.target === event.currentTarget) {
+  // Handle click outside
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget && closeOnOverlayClick) {
       onClose();
     }
   };
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`}
       onClick={handleOverlayClick}
-      onKeyDown={(e) => {
-        if (e.key === 'Escape') {
-          onClose();
-        }
-      }}
-      role="dialog"
-      aria-modal="true"
-      tabIndex={0}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity" />
-
-      {/* Modal */}
+      <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
+      
       <div
         ref={modalRef}
+        className={`relative w-full ${getSizeClasses()} bg-white rounded-lg shadow-xl ${className}`}
         tabIndex={-1}
-        className={`
-          relative w-full ${getSizeClasses()} max-h-[90vh] 
-          bg-white dark:bg-gray-800 rounded-lg shadow-xl 
-          transform transition-all duration-200 ease-out
-          flex flex-col
-          ${className}
-        `}
         role="dialog"
-        aria-labelledby={title ? 'modal-title' : undefined}
-        aria-describedby="modal-content"
+        aria-modal="true"
+        aria-labelledby={title ? "modal-title" : undefined}
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200">
             {title && (
-              <h2 id="modal-title" className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 id="modal-title" className="text-xl font-semibold text-gray-900">
                 {title}
               </h2>
             )}
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
                 aria-label="Close modal"
               >
                 <XMarkIcon className="w-5 h-5" />
@@ -153,13 +128,13 @@ const BaseModal: React.FC<BaseModalProps> = ({
         )}
 
         {/* Content */}
-        <div id="modal-content" className="flex-1 overflow-y-auto p-6">
+        <div className="p-6">
           {children}
         </div>
 
         {/* Footer */}
         {footer && (
-          <div className="p-6 border-t border-gray-200 dark:border-gray-700">
+          <div className="px-6 py-4 border-t border-gray-200">
             {footer}
           </div>
         )}

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-// Solid Chat Bubble Icon
+// Solid Chat Bubble Icon;
 const SolidChatBubbleIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }: any) => (
- <svg
+ <svg;
 // FIXED:  className={className}
  fill="currentColor"
  viewBox="0 0 24 24"
@@ -13,4 +13,4 @@ const SolidChatBubbleIcon: React.FC<{ className?: string }> = ({ className = 'w-
 );
 
 export { SolidChatBubbleIcon as ChatBubbleOvalLeftEllipsisIcon };
-export default SolidChatBubbleIcon; // Default export for convenience
+export default SolidChatBubbleIcon; // Default export for convenience;

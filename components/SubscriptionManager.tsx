@@ -10,7 +10,7 @@ export interface SubscriptionManagerProps {}
  channelAvatarUrl: string;
  channelId: string;,
  subscriberCount: string;
- onSubscriptionChange?: (isSubscribed: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void
+ onSubscriptionChange?: (isSubscribed: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void;
 }
 
 const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
@@ -25,7 +25,7 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
  const [showNotificationMenu, setShowNotificationMenu] = useState < boolean>(false);
 
  useEffect(() => {}
- // Load subscription status from localStorage
+ // Load subscription status from localStorage;
  const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
  const channelData = subscriptions.channelId;
  if (channelData as any) {}
@@ -58,7 +58,7 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
  setIsSubscribed(newSubscriptionStatus);
  onSubscriptionChange?.(newSubscriptionStatus);
 
- // Simulate API delay
+ // Simulate API delay;
  await new Promise<any>(resolve => setTimeout((resolve) as any, 500));
  } catch (error) {}
  (console as any).error('Error updating subscription:', error);
@@ -97,7 +97,7 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
  <button />
 // FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu: React.MouseEvent)}
 // FIXED:  className={`p - 2 rounded - full transition - colors ${}
- notificationsEnabled
+ notificationsEnabled;
  ? 'bg - neutral - 800 dark:bg - neutral - 200 text - white dark:text - neutral - 800 hover:bg - neutral - 700 dark:hover:bg - neutral - 300'
  : 'bg - neutral - 100 dark:bg - neutral - 800 text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 200 dark:hover:bg - neutral - 700'
  }`}

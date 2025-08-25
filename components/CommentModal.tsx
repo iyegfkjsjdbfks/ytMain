@@ -1,112 +1,94 @@
 import React, { useState } from 'react';
-
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 
-import BaseModal from './BaseModal';
-
-interface CommentModalProps {
- isOpen: boolean;
- onClose: () => void;
- shortId: string;
- shortTitle?: string;
- onCommentSubmit?: (commentText: string) => void;
+export interface CommentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  shortId: string;
+  shortTitle: string;
+  onCommentSubmit: (comment: string) => void;
 }
 
-/**
- * Comment modal specifically designed for shorts
- * Allows users to comment on short videos without navigating away
- */
 const CommentModal: React.FC<CommentModalProps> = ({
- isOpen,
- onClose,
- shortId: _shortId,
- shortTitle,
- onCommentSubmit }) => {
- const [commentText, setCommentText] = useState<string>('');
- const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
- // shortId is currently not used but kept for future functionality
+  isOpen,
+  onClose,
+  shortId,
+  shortTitle,
+  onCommentSubmit,
+}) => {
+  const [comment, setComment] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
- const handleCommentSubmit = async (text: string): Promise<void> => {
- if (!text.trim()) {
-return;
-}
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!comment.trim() || isSubmitting) return;
 
- setIsSubmitting(true);
- try {
- // Call the provided submit handler or default behavior
- if (onCommentSubmit) {
- await onCommentSubmit(text);
- } else {
- // Default behavior - you can implement API call here
- }
+    setIsSubmitting(true);
+    try {
+      await onCommentSubmit(comment);
+      setComment('');
+      onClose();
+    } catch (error) {
+      console.error('Failed to submit comment:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
- setCommentText('');
- onClose();
- } catch (error) {
- (console as any).error('Failed to submit comment:', error);
- } finally {
- setIsSubmitting(false);
- }
- };
+  if (!isOpen) return null;
 
- const modalFooter = (
- <div className="flex justify-end space-x-3">
- <button
- type="button"
- onClick={onClose}
- className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
- disabled={isSubmitting}
- >
- Cancel
- </button>
- <button
- type="button"
- onClick={() => handleCommentSubmit(commentText)}
- disabled={!commentText.trim() || isSubmitting}
- className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
- >
- {isSubmitting ? 'Posting...' : 'Comment'}
- </button>
- </div>
- );
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onClose} />
+      
+      <div className="relative w-full max-w-md bg-white rounded-lg shadow-xl">
+        <div className="p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <ChatBubbleLeftIcon className="w-6 h-6 text-gray-600" />
+            <h2 className="text-lg font-semibold">Add Comment</h2>
+          </div>
 
- return (
- <BaseModal
- isOpen={isOpen}
- onClose={onClose}
- title="Add a comment"
- size="md"
- footer={modalFooter}
- >
- <div className="space-y-4">
- {shortTitle && (
- <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
- <ChatBubbleLeftIcon className="w-4 h-4" />
- <span>Commenting on: {shortTitle}</span>
- </div>
- )}
+          <p className="text-sm text-gray-600 mb-4">
+            Commenting on: {shortTitle}
+          </p>
 
- <div>
- <label htmlFor="comment-text" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
- Your comment
- </label>
- <textarea
- id="comment-text"
- rows={4}
- value={commentText}
- onChange={(e) => setCommentText(e.target.value)}
- placeholder="Share your thoughts about this short..."
- className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white resize-none"
- maxLength={500}
- disabled={isSubmitting}
- />
- <div className="mt-1 text-xs text-gray-500 dark:text-gray-400 text-right">
- {commentText.length}/500
- </div>
- </div>
- </div>
- </BaseModal>
- );
+          <form onSubmit={handleSubmit}>
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Write a comment..."
+              className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              rows={4}
+              maxLength={500}
+            />
+
+            <div className="flex justify-between items-center mt-4">
+              <span className="text-sm text-gray-500">
+                {comment.length}/500
+              </span>
+              
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={!comment.trim() || isSubmitting}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                >
+                  {isSubmitting ? 'Posting...' : 'Post'}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CommentModal;

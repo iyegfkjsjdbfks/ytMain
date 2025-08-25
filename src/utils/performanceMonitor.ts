@@ -1,4 +1,4 @@
-// Performance Monitor - Minimal Implementation
+// Performance Monitor - Minimal Implementation;
 export interface PerformanceMetrics {
   renderTime: number;
   loadTime: number;
@@ -24,7 +24,7 @@ export class PerformanceMonitor {
   recordMetric(metric: PerformanceMetrics): void {
     this.metrics.push(metric);
     
-    // Keep only last 100 metrics
+    // Keep only last 100 metrics;
     if (this.metrics.length > 100) {
       this.metrics.shift();
     }
@@ -42,7 +42,7 @@ export class PerformanceMonitor {
 export const performanceMonitor = new PerformanceMonitor();
 
 export function usePerformanceMonitor(name: string) {
-  // Placeholder hook implementation
+  // Placeholder hook implementation;
   return {
     startMeasure: () => performanceMonitor.startMeasure(name),
     endMeasure: () => performanceMonitor.endMeasure(name)

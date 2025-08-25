@@ -1,6 +1,6 @@
 import React from 'react';
 /**
- * SettingsPage component for managing user account settings
+ * SettingsPage component for managing user account settings;
  */
 const SettingsPage: React.FC = () => {
  return (
@@ -9,7 +9,7 @@ const SettingsPage: React.FC = () => {
  <p className='text-gray-600 mb-4'>Manage your YouTube account settings</p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
- This is a placeholder for the settings page that will allow you to
+ This is a placeholder for the settings page that will allow you to;
  manage your YouTube account settings.
 // FIXED:  </p>
  <p className='mt-2'>

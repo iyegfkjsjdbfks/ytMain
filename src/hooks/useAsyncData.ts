@@ -10,14 +10,14 @@ interface UseAsyncDataReturn<T> {
  loading: boolean;
  error: string | null;
  refetch: () => Promise<void>;
- setData: (data: T) => void
+ setData: (data: T) => void;
 }
 
 /**
- * Custom hook for handling async data fetching with loading and error states
- * @param asyncFunction - The async function to execute
- * @param options - Configuration options
- * @returns Object containing data, loading, error states and utility functions
+ * Custom hook for handling async data fetching with loading and error states;
+ * @param asyncFunction - The async function to execute;
+ * @param options - Configuration options;
+ * @returns Object containing data, loading, error states and utility functions;
  */
 export function useAsyncData<T>(
  asyncFunction: () => Promise<T>,
@@ -26,10 +26,10 @@ export function useAsyncData<T>(
  const { initialData, dependencies = [] } = options;
 
  const [data, setData] = useState<T>(initialData as T);
- const [loading, setLoading] = useState(!initialData); // Don't show loading if we have initial data
+ const [loading, setLoading] = useState(!initialData); // Don't show loading if we have initial data;
  const [error, setError] = useState<string | null>(null);
 
- // Use a stable reference to prevent infinite re-renders
+ // Use a stable reference to prevent infinite re-renders;
  const asyncFunctionRef = useRef(asyncFunction);
 
  // Only update ref if function actually changed (prevent unnecessary updates)
@@ -43,7 +43,7 @@ export function useAsyncData<T>(
 
  try {
  const result = await asyncFunctionRef.current();
- // Handle empty or null results gracefully
+ // Handle empty or null results gracefully;
  if (result === null || result === undefined) {
  (console).warn(
  'useAsyncData: Received null/undefined result, using initial data'
@@ -57,7 +57,7 @@ export function useAsyncData<T>(
  err instanceof Error ? err.message : 'An error occurred';
  setError(errorMessage);
  (console).error('useAsyncData error:', err);
- // On error, use initial data if available
+ // On error, use initial data if available;
  if (initialData !== undefined) {
  setData(initialData as T);
  }
@@ -66,16 +66,16 @@ export function useAsyncData<T>(
  }
  }, [initialData]);
 
- // Use a more stable dependencies array to prevent infinite re-renders
- // Also delay execution slightly if we have initial data to improve perceived performance
+ // Use a more stable dependencies array to prevent infinite re-renders;
+ // Also delay execution slightly if we have initial data to improve perceived performance;
  useEffect(() => {
  if (initialData) {
- // Delay fetch to improve initial render performance
+ // Delay fetch to improve initial render performance;
  const timeoutId = setTimeout((fetchData), 100);
  return () => clearTimeout(timeoutId);
  }
  fetchData();
- return undefined; // Explicit return for all code paths
+ return undefined; // Explicit return for all code paths;
  }, [fetchData, JSON.stringify(dependencies)]);
 
  const refetch = useCallback(() => fetchData(), [fetchData]);

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 export interface ProgressBarProps {
- value: number; // 0-100
+ value: number; // 0-100;
  max?: number;
  size?: 'sm' | 'md' | 'lg';
  variant?: 'default' | 'success' | 'warning' | 'error';
@@ -45,7 +45,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 // FIXED:  </div>
  )}
  <div className={`w-full bg-neutral-200 dark:bg-neutral-700 rounded-full ${sizeClasses[size]}`}>
- <div
+ <div;
 // FIXED:  className={`${sizeClasses[size]} ${variantClasses[variant]} rounded-full transition-all duration-300 ease-in-out`}
 // FIXED:  style={{ width: `${percentage}%` }
  role="progressbar"

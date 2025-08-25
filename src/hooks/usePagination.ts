@@ -1,5 +1,6 @@
+import React from 'react';
 import _React from 'react';
-// usePagination - Simple Hook
+// usePagination - Simple Hook;
 import { useState } from 'react';
 
 export function usePagination() {
@@ -10,7 +11,7 @@ export function usePagination() {
   return {
     data,
     loading,
-    error
+    error, 
   };
 }
 

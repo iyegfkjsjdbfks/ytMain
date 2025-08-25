@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 const ThumbsDownIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }: any) => (
- <svg
+ <svg;
 // FIXED:  className={className}
  fill="currentColor"
  viewBox="0 0 20 20"

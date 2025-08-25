@@ -1,9 +1,14 @@
 import React from 'react';
-import BellIcon from './icons/BellIcon';
-import type { Channel } from '../src/types/core';
 
 export interface ChannelHeaderProps {
-  channel: Channel;
+  channel: {
+    id: string;
+    name: string;
+    avatar: string;
+    bannerUrl?: string;
+    description?: string;
+    subscriberCount: number;
+  };
   videoCount: number;
   isSubscribed: boolean;
   onSubscribeToggle: () => void;
@@ -13,69 +18,70 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
   channel,
   videoCount,
   isSubscribed,
-  onSubscribeToggle
+  onSubscribeToggle,
 }) => {
-  const channelName = channel.name || channel.title;
-  const subscriberCount = channel.subscribers || channel.subscriberCount;
+  const formatSubscriberCount = (count: number): string => {
+    if (count >= 1000000) {
+      return `${(count / 1000000).toFixed(1)}M`;
+    } else if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}K`;
+    }
+    return count.toString();
+  };
 
   return (
-    <>
-      {/* Channel Banner */}
-      <div className="h-32 sm:h-48 md:h-56 lg:h-64 bg-neutral-200 dark:bg-neutral-700/30">
-        <img
-          src={channel.bannerUrl || 'https://picsum.photos/seed/default_banner/1200/400'}
-          alt={`${channelName} banner`}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.currentTarget.src = 'https://picsum.photos/seed/default_banner/1200/400';
-          }}
-        />
-      </div>
-
-      {/* Channel Info */}
-      <div className="px-4 md:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-center sm:items-end -mt-10 sm:-mt-12 md:-mt-16 mb-4 sm:mb-6 relative z-10">
-          {/* Avatar */}
+    <div className="w-full">
+      {/* Banner */}
+      {channel.bannerUrl && (
+        <div className="h-32 sm:h-48 md:h-64 bg-gray-200 rounded-lg mb-4 overflow-hidden">
           <img
-            src={channel.avatarUrl || 'https://picsum.photos/seed/default_avatar/160/160'}
-            alt={`${channelName} avatar`}
-            className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full border-4 border-white dark:border-neutral-800 shadow-lg"
-            onError={(e) => {
-              e.currentTarget.src = 'https://picsum.photos/seed/default_channel_avatar/160/160';
-            }}
+            src={channel.bannerUrl}
+            alt={`${channel.name} banner`}
+            className="w-full h-full object-cover"
           />
-
-          {/* Channel Details */}
-          <div className="flex-grow mt-3 sm:mt-0 text-center sm:text-left">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-50">
-              {channelName}
-            </h1>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-              @{channelName?.toLowerCase().replace(/\s+/g, '')} &bull; {subscriberCount} subscribers &bull; {videoCount} videos
-            </p>
-          </div>
-
-          {/* Subscribe Button */}
-          <div className="mt-4 sm:mt-0 sm:ml-auto flex-shrink-0">
-            <button
-              onClick={onSubscribeToggle}
-              className={`
-                px-4 py-2 rounded-full font-medium text-sm transition-colors flex items-center gap-2
-                ${
-                  isSubscribed
-                    ? 'bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-200'
-                    : 'bg-black dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-200 text-white dark:text-black'
-                }
-              `}
-              title={isSubscribed ? `Unsubscribe from ${channelName}` : `Subscribe to ${channelName}`}
-            >
-              <span>{isSubscribed ? 'Subscribed' : 'Subscribe'}</span>
-              {isSubscribed && <BellIcon className="w-4 h-4" />}
-            </button>
-          </div>
         </div>
+      )}
+
+      {/* Channel info */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+        <img
+          src={channel.avatar}
+          alt={`${channel.name} avatar`}
+          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full"
+        />
+        
+        <div className="flex-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+            {channel.name}
+          </h1>
+          
+          <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 mb-3">
+            <span>{formatSubscriberCount(channel.subscriberCount)} subscribers</span>
+            <span>•</span>
+            <span>{videoCount} videos</span>
+          </div>
+          
+          {channel.description && (
+            <p className="text-gray-600 text-sm line-clamp-2">
+              {channel.description}
+            </p>
+          )}
+        </div>
+
+        <button
+          onClick={onSubscribeToggle}
+          className={`
+            px-6 py-2 rounded-full font-medium transition-colors
+            ${isSubscribed
+              ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              : 'bg-red-600 text-white hover:bg-red-700'
+            }
+          `}
+        >
+          {isSubscribed ? 'Subscribed' : 'Subscribe'}
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

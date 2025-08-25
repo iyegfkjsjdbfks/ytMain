@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, memo, lazy, KeyboardEvent, MouseEvent } from 'react';
-// @ts - nocheck
+// @ts - nocheck;
 
-import { PlayIcon, ClockIcon, EllipsisVerticalIcon, PlusIcon, CheckIcon, XMarkIcon } from '@heroicons / react / 24 / outline';
+import { PlayIcon, ClockIcon, EllipsisVerticalIcon, PlusIcon, CheckIcon, XIcon } from '@heroicons / react / 24 / outline';
 
 import { useMiniplayerActions } from '../contexts / OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts / WatchLaterContext';
@@ -14,15 +14,15 @@ import formatViews, { formatDuration } from '../utils / formatters';
 import { performanceMonitor } from '../utils / performance';
 
 import DropdownMenuItem, { DropdownMenu } from './ui / DropdownMenu';
-import YouTubePlayer from 'YouTubePlayer.tsx';
+import YouTubePlayer from 'YouTubePlayer';
 
 import type { Video } from '../types.ts';
 
-// Enhanced image cache manager with size limits and cleanup
+// Enhanced image cache manager with size limits and cleanup;
 export class ImageCacheManager {}
  private cache = new Map < string, { timestamp: number; url: string }>();
  private readonly maxSize = 100;
- private readonly maxAge = 30 * 60 * 1000; // 30 minutes
+ private readonly maxAge = 30 * 60 * 1000; // 30 minutes;
 
  add(url) {}
  this.cleanup();
@@ -47,7 +47,7 @@ return false;
  const entries = Array<any>.from(this.cache.entries())
  .sort(([ a], [ b]) => a.timestamp - b.timestamp);
 
- // Remove oldest 20% of entries
+ // Remove oldest 20% of entries;
  const toRemove = Math.floor(this.maxSize * 0.2);
  for (let i = 0; i < toRemove; i++) {}
  const entry = entries.i;
@@ -60,7 +60,7 @@ return false;
 const imageCache = new ImageCacheManager();
 const failedImages = new Set < string>();
 
-// Enhanced type definitions
+// Enhanced type definitions;
 
 type VideoCardSizeVariant = 'sm' | 'md' | 'lg';
 
@@ -77,7 +77,7 @@ export interface OptimizedVideoCardProps {}
  index?: number;
 }
 
-// Enhanced lazy image component with retry mechanism
+// Enhanced lazy image component with retry mechanism;
 export interface LazyImageProps {}
  src: string;,
  alt: string;
@@ -111,11 +111,11 @@ const LazyImage = memo < LazyImageProps>(({ src, alt, className, priority = 'low
  const handleError = useCallback(() => {}
  if (retryCount < maxRetries) {}
  setRetryCount(prev => prev + 1);
- // Retry after exponential backoff delay
+ // Retry after exponential backoff delay;
  setTimeout((() => {}
  setError(false);
  setLoaded(false);
- // Force reload by updating src
+ // Force reload by updating src;
  if (imgRef.current) {}
  imgRef.current.src = `${src}?retry="${retryCount" + 1}`;
  }
@@ -136,19 +136,19 @@ const LazyImage = memo < LazyImageProps>(({ src, alt, className, priority = 'low
  if (shouldLoad && !loaded && !error && !imageCache.has(src) && !failedImages.has(src)) {}
  performanceMonitor.startMeasure(`image - load-${src}`);
 
- // Set a timeout to prevent indefinite loading
+ // Set a timeout to prevent indefinite loading;
  const timeoutId = setTimeout((() => {}
  if (!loaded && !error) {}
  (console as any).warn(`Image loading timeout for: ${src}`);
  handleError();
  }
- }) as any, 5000); // 5 second timeout
+ }) as any, 5000); // 5 second timeout;
 
  return () => {}
  clearTimeout(timeoutId);
 
  }
- // Return empty cleanup function for else case
+ // Return empty cleanup function for else case;
  return () => {}
  }}, [shouldLoad, loaded, error, src, handleError]);
 
@@ -156,7 +156,7 @@ const LazyImage = memo < LazyImageProps>(({ src, alt, className, priority = 'low
  <div ref={intersectionRef as any} className={`relative overflow - hidden ${className}`}>
  {shouldLoad ? (}
  <><</>/><</>/><</>/>
- <img
+ <img;
  ref={imgRef}
 // FIXED:  src={src}
 // FIXED:  alt={alt}
@@ -233,10 +233,10 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  const [isPlayingInline, setIsPlayingInline] = useState < boolean>(false);
 
  export const classes = sizeClasses.size;
- const isWatchLater: boolean = false; // Simplified for now
+ const isWatchLater: boolean = false; // Simplified for now;
  const isYouTube = isYouTubeUrl(video.videoUrl || '');
 
- // Memoized formatted values
+ // Memoized formatted values;
  const formattedDuration = useMemo(() => {}
  const durationNum = typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration;
  return formatDuration(durationNum || 0);
@@ -247,12 +247,12 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  }, [video.views]);
  const formattedTimeAgo = useMemo(() => formatTimeAgo(video.uploadedAt), [video.uploadedAt]);
 
- // Event handlers with performance monitoring
+ // Event handlers with performance monitoring;
  const handleVideoClick = useCallback(() => {}
  try {}
  performanceMonitor.startMeasure('video - card - click');
  if (isYouTube && !isPlayingInline) {}
- // For YouTube videos, start inline playback
+ // For YouTube videos, start inline playback;
  setIsPlayingInline(true);
  } else if (onClick as any) {}
  onClick(video);
@@ -317,7 +317,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  }, [toggleMenu]);
 
  return (
- <div
+ <div;
 // FIXED:  className={cn(}
  classes.container,
  'group cursor - pointer transition - transform hover:scale - 105',
@@ -333,12 +333,12 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  {isPlayingInline && isYouTube ? (}
  /* YouTube Player for inline playback */
  <div className="relative">
- <YouTubePlayer
+ <YouTubePlayer;
  video={video}
  width="100%"
  height={size === 'sm' ? 180 : size === 'md' ? 200 : 240}
- autoplay
- controls
+ autoplay;
+ controls;
 // FIXED:  className={classes.thumbnail} />
  />
  {/* Close button for inline player */}
@@ -347,13 +347,13 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
 // FIXED:  className="absolute top - 2 right - 2 p - 1.5 bg - black bg - opacity - 60 hover:bg - opacity - 80 rounded - full transition - colors z - 10"
  title="Close player"
  >
- <XMarkIcon className="w - 4 h - 4 text - white" />
+ <XIcon className="w - 4 h - 4 text - white" />
 // FIXED:  </button>
 // FIXED:  </div>
  ) : (
  /* Regular thumbnail */
  <><</>/><</>/><</>/>
- <LazyImage
+ <LazyImage;
 // FIXED:  src={video.thumbnailUrl}
 // FIXED:  alt={video.title}
 // FIXED:  className={cn(}
@@ -371,7 +371,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  {/* Live Badge */}
  {video.isLive && (}
  <div className="absolute top - 2 left - 2 bg - red - 600 text - white text - xs px - 2 py - 1 rounded font - medium">
- LIVE
+ LIVE;
 // FIXED:  </div>
  )}
 
@@ -425,7 +425,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
 
  {/* Dropdown Menu - Hide when inline player is active */}
  {!isPlayingInline && (}
- <DropdownMenu
+ <DropdownMenu;
  isOpen={showMenu}
  onClose={closeMenu}
  menuRef={menuRef}
@@ -437,7 +437,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
 // FIXED:  onClick={(e: Event) => {}
  e.stopPropagation();
  closeMenu();
- // Open save to playlist modal
+ // Open save to playlist modal;
  const event = new CustomEvent('openSaveToPlaylist', { detail: { video } 
  });
  window.dispatchEvent(event);
@@ -445,13 +445,13 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  icon={<PlusIcon className="w - 4 h - 4" />}
 // FIXED:  aria - label="Save video to playlist"
  >
- Save to playlist
+ Save to playlist;
 // FIXED:  </DropdownMenuItem>
  <DropdownMenuItem />
 // FIXED:  onClick={(e: Event) => {}
  e.stopPropagation();
  closeMenu();
- // Share video functionality
+ // Share video functionality;
  const shareData: object = {}
  title: video.title,
  text: `Check out this video: ${video.title}`,
@@ -460,11 +460,11 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  if (navigator.share) {}
  navigator.share(shareData).catch(console.error);
  } else {}
- // Fallback: copy to clipboard
+ // Fallback: copy to clipboard;
  navigator.clipboard.writeText(shareData.url).then(() => {}
  alert('Video link copied to clipboard!');
  }).catch(() => {}
- // Final fallback: show share modal
+ // Final fallback: show share modal;
  const event = new CustomEvent('openShareModal', { detail: shareData });
  window.dispatchEvent(event);
  });
@@ -477,24 +477,24 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  }
 // FIXED:  aria - label="Share video"
  >
- Share
+ Share;
 // FIXED:  </DropdownMenuItem>
  <DropdownMenuItem />
 // FIXED:  onClick={(e: Event) => {}
  e.stopPropagation();
  closeMenu();
- // Mark video as not interested
+ // Mark video as not interested;
  const notInterestedVideos = JSON.parse((localStorage as any).getItem('youtubeCloneNotInterested_v1') || '[]');
  if (!notInterestedVideos.includes(video.id)) {}
  notInterestedVideos.push(video.id);
  (localStorage as any).setItem('youtubeCloneNotInterested_v1', JSON.stringify(notInterestedVideos));
 
- // Dispatch event to remove video from current view
+ // Dispatch event to remove video from current view;
  const event = new CustomEvent('videoNotInterested', { detail: { videoId: video.id } 
  });
  window.dispatchEvent(event);
 
- // Show feedback
+ // Show feedback;
  const feedback = document.createElement('div');
  feedback.className = 'fixed top - 4 right - 4 bg - gray - 800 text - white px - 4 py - 2 rounded - lg z - 50';
  feedback.textContent = 'Video marked as not interested';
@@ -510,14 +510,14 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  }
 // FIXED:  aria - label="Mark as not interested"
  >
- Not interested
+ Not interested;
 // FIXED:  </DropdownMenuItem>
  <DropdownMenuSeparator />
  <DropdownMenuItem />
 // FIXED:  onClick={(e: Event) => {}
  e.stopPropagation();
  closeMenu();
- // Report video functionality
+ // Report video functionality;
  const reportReasons = [;
  'Spam or misleading',
  'Hateful or abusive content',
@@ -553,7 +553,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  }
 // FIXED:  aria - label="Report video"
  >
- Report
+ Report;
 // FIXED:  </DropdownMenuItem>
 // FIXED:  </DropdownMenu>
  )}
@@ -569,7 +569,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  {/* Channel Info */}
  {showChannel && (}
  <div className="flex items - center gap - 2">
- <img
+ <img;
 // FIXED:  src={video.channelAvatarUrl}
 // FIXED:  alt={video.channelName}
 // FIXED:  className="w - 6 h - 6 rounded - full object - cover"
@@ -607,7 +607,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
  {video.tags && video.tags.length > 0 && (}
  <div className="flex flex - wrap gap - 1 mt - 2" role="list" aria - label="Video tags">
  {video.tags.slice(0, 3).map((tag) => (}
- <span
+ <span;
  key={tag}
 // FIXED:  className="text - xs bg - gray - 100 text - gray - 600 px - 2 py - 1 rounded - full"
  role="listitem" />
@@ -624,7 +624,7 @@ const OptimizedVideoCard = memo < OptimizedVideoCardProps>(
 
 OptimizedVideoCard.displayName = 'OptimizedVideoCard';
 
-// Export with enhanced memoization
+// Export with enhanced memoization;
 export default withMemo(OptimizedVideoCard(prevProps, nextProps) => {}
  return (
  prevProps.video.id === nextProps.video.id &&
@@ -637,6 +637,6 @@ export default withMemo(OptimizedVideoCard(prevProps, nextProps) => {}
  prevProps.showDescription === nextProps.showDescription &&
  prevProps.priority === nextProps.priority &&
  prevProps.lazy === nextProps.lazy &&
- prevProps.index === nextProps.index
+ prevProps.index === nextProps.index;
  );
 });

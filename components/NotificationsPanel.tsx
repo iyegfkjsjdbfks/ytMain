@@ -2,7 +2,7 @@ import React, { useState, FC } from 'react';
 import type { Video } from '../types.ts';
 
 import { ChatBubbleLeftRightIcon, BellAlertIcon } from '@heroicons/react/24/outline';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
  id: string;
@@ -33,7 +33,7 @@ const mockNotifications: NotificationItem[] = [
  time: 'Yesterday' }];
 
 interface NotificationsPanelProps {
- isOpen: boolean; onClose: () => void
+ isOpen: boolean; onClose: () => void;
 }
 
 const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }: any) => {
@@ -49,13 +49,13 @@ return null;
  setNotifications(prev => prev.map((notification) => ({ ...notification as any, isNew: false })));
  };
 
- const markAsRead = (id) => {
+ const markAsRead = (id: string) => {
  setNotifications(prev => prev.map((notification) =>
  notification.id === id ? { ...notification as any, isNew: false } : notification));
  };
 
  return (
- <div
+ <div;
 // FIXED:  className="absolute top-full right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/80 rounded-xl shadow-2xl z-[100] animate-fade-in-down-notif flex flex-col"
  role="dialog"
 // FIXED:  aria-modal="true"
@@ -63,14 +63,14 @@ return null;
  >
  <header className="flex items-center justify-between p-3.5 border-b border-neutral-200 dark:border-neutral-700/80">
  <h2 id="notifications-panel-title" className="text-base font-semibold text-neutral-900 dark:text-neutral-50">
- Notifications
+ Notifications;
 // FIXED:  </h2>
  <button />
-// FIXED:  onClick={(e) => onClose(e)}
+// FIXED:  onClick={(e: any) => onClose(e)}
 // FIXED:  className="p-1.5 rounded-full text-neutral-500 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
 // FIXED:  aria-label="Close notifications panel"
  >
- <XMarkIcon className="w-5 h-5" />
+ <XIcon className="w-5 h-5" />
 // FIXED:  </button>
 // FIXED:  </header>
 

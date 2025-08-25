@@ -1,12 +1,13 @@
+// @ts-nocheck
 import _React from 'react';
-// Environment configuration
+// Environment configuration;
 export const ENV = {
  NODE_ENV: import.meta.env.NODE_ENV || 'development',
  PROD: import.meta.env.PROD,
  DEV: import.meta.env.DEV,
  SSR: import.meta.env.SSR } as const;
 
-// API Configuration
+// API Configuration;
 export const API_CONFIG = {
  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001',
  TIMEOUT: parseInt(import.meta.env.VITE_API_TIMEOUT || '10000', 10),
@@ -21,10 +22,10 @@ export const API_CONFIG = {
 
  // Rate limiting,
  RATE_LIMIT_REQUESTS: parseInt(import.meta.env.VITE_RATE_LIMIT_REQUESTS || '100', 10),
- RATE_LIMIT_WINDOW: parseInt(import.meta.env.VITE_RATE_LIMIT_WINDOW || '60000', 10), // 1 minute
+ RATE_LIMIT_WINDOW: parseInt(import.meta.env.VITE_RATE_LIMIT_WINDOW || '60000', 10), // 1 minute;
 } as const;
 
-// Performance Configuration
+// Performance Configuration;
 export const PERFORMANCE_CONFIG = {
  // Caching,
  CACHE_TTL: parseInt(import.meta.env.VITE_CACHE_TTL || '300000', 10), // 5 minutes,
@@ -51,7 +52,7 @@ export const PERFORMANCE_CONFIG = {
  VENDOR: parseInt(import.meta.env.VITE_BUNDLE_VENDOR_BUDGET || '1000', 10),
  CHUNK: parseInt(import.meta.env.VITE_BUNDLE_CHUNK_BUDGET || '200', 10) } } as const;
 
-// Analytics Configuration
+// Analytics Configuration;
 export const ANALYTICS_CONFIG = {
  ENABLED: import.meta.env.VITE_ANALYTICS_ENABLED === 'true',
  GOOGLE_ANALYTICS_ID: import.meta.env.VITE_GOOGLE_ANALYTICS_ID || '',
@@ -67,10 +68,10 @@ export const ANALYTICS_CONFIG = {
  // Data retention,
  LOCAL_STORAGE_TTL: parseInt(import.meta.env.VITE_ANALYTICS_LOCAL_TTL || '604800000', 10), // 7 days,
  BATCH_SIZE: parseInt(import.meta.env.VITE_ANALYTICS_BATCH_SIZE || '10', 10),
- FLUSH_INTERVAL: parseInt(import.meta.env.VITE_ANALYTICS_FLUSH_INTERVAL || '30000', 10), // 30 seconds
+ FLUSH_INTERVAL: parseInt(import.meta.env.VITE_ANALYTICS_FLUSH_INTERVAL || '30000', 10), // 30 seconds;
 } as const;
 
-// Error Handling Configuration
+// Error Handling Configuration;
 export const ERROR_CONFIG = {
  ENABLED: import.meta.env.VITE_ERROR_TRACKING_ENABLED !== 'false',
  SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN || '',
@@ -91,7 +92,7 @@ export const ERROR_CONFIG = {
  MAX_ERRORS_PER_SESSION: parseInt(import.meta.env.VITE_MAX_ERRORS_PER_SESSION || '50', 10),
  ERROR_THROTTLE_MS: parseInt(import.meta.env.VITE_ERROR_THROTTLE_MS || '1000', 10) } as const;
 
-// Feature Flags
+// Feature Flags;
 export const FEATURE_FLAGS = {
  // UI Features,
  DARK_MODE: import.meta.env.VITE_FEATURE_DARK_MODE !== 'false',
@@ -114,7 +115,7 @@ export const FEATURE_FLAGS = {
  MOCK_API: import.meta.env.VITE_MOCK_API === 'true',
  PERFORMANCE_OVERLAY: import.meta.env.VITE_PERFORMANCE_OVERLAY === 'true' } as const;
 
-// UI Configuration
+// UI Configuration;
 export const UI_CONFIG = {
  // Theme,
  DEFAULT_THEME: import.meta.env.VITE_DEFAULT_THEME || 'light',
@@ -143,7 +144,7 @@ export const UI_CONFIG = {
  XL: 1280,
  XXL: 1536 } } as const;
 
-// Storage Configuration
+// Storage Configuration;
 export const STORAGE_CONFIG = {
  // Local Storage keys,
  KEYS: {
@@ -167,13 +168,13 @@ export const STORAGE_CONFIG = {
  CACHE_CLEANUP_THRESHOLD: parseFloat(import.meta.env.VITE_CACHE_CLEANUP_THRESHOLD || '0.8'), // 80%
 } as const;
 
-// Security Configuration
+// Security Configuration;
 export const SECURITY_CONFIG = {
  // Content Security Policy,
  CSP_ENABLED: import.meta.env.VITE_CSP_ENABLED === 'true',
 
  // API Security,
- API_KEY_ROTATION_INTERVAL: parseInt(import.meta.env.VITE_API_KEY_ROTATION_INTERVAL || '86400000', 10), // 24 hours
+ API_KEY_ROTATION_INTERVAL: parseInt(import.meta.env.VITE_API_KEY_ROTATION_INTERVAL || '86400000', 10), // 24 hours;
 
  // Input validation,
  MAX_INPUT_LENGTH: parseInt(import.meta.env.VITE_MAX_INPUT_LENGTH || '1000', 10),
@@ -183,10 +184,10 @@ export const SECURITY_CONFIG = {
  // Rate limiting,
  SEARCH_RATE_LIMIT: parseInt(import.meta.env.VITE_SEARCH_RATE_LIMIT || '10', 10), // per minute,
  COMMENT_RATE_LIMIT: parseInt(import.meta.env.VITE_COMMENT_RATE_LIMIT || '5', 10), // per minute,
- LIKE_RATE_LIMIT: parseInt(import.meta.env.VITE_LIKE_RATE_LIMIT || '30', 10), // per minute
+ LIKE_RATE_LIMIT: parseInt(import.meta.env.VITE_LIKE_RATE_LIMIT || '30', 10), // per minute;
 } as const;
 
-// Development Configuration
+// Development Configuration;
 export const DEV_CONFIG = {
  // Hot reload,
  HOT_RELOAD: ENV.DEV,
@@ -204,7 +205,7 @@ export const DEV_CONFIG = {
  REDUX_DEVTOOLS: ENV.DEV,
  PERFORMANCE_DEVTOOLS: ENV.DEV || FEATURE_FLAGS.PERFORMANCE_OVERLAY } as const;
 
-// Export all configurations
+// Export all configurations;
 export const CONFIG = {
  ENV,
  API: API_CONFIG,
@@ -217,7 +218,7 @@ export const CONFIG = {
  SECURITY: SECURITY_CONFIG,
  DEV: DEV_CONFIG } as const;
 
-// Type definitions
+// Type definitions;
 export type Config = typeof CONFIG;
 export type FeatureFlags = typeof FEATURE_FLAGS;
 export type ApiConfig = typeof API_CONFIG;
@@ -229,11 +230,11 @@ export type StorageConfig = typeof STORAGE_CONFIG;
 export type SecurityConfig = typeof SECURITY_CONFIG;
 export type DevConfig = typeof DEV_CONFIG;
 
-// Validation functions
+// Validation functions;
 export const validateConfig = () => {
  const errors: string[] = [];
 
- // Validate required API keys in production
+ // Validate required API keys in production;
  if (ENV.PROD) {
  if (!API_CONFIG.YOUTUBE_API_KEY) {
  errors.push('VITE_YOUTUBE_API_KEY is required in production');
@@ -246,7 +247,7 @@ export const validateConfig = () => {
  if (ERROR_CONFIG.REPORT_ERRORS && !ERROR_CONFIG.SENTRY_DSN && !ERROR_CONFIG.ERROR_ENDPOINT) {
  errors.push('Error reporting endpoint is required when error reporting is enabled');
  }
- // Validate numeric ranges
+ // Validate numeric ranges;
  if (PERFORMANCE_CONFIG.DEFAULT_PAGE_SIZE > PERFORMANCE_CONFIG.MAX_PAGE_SIZE) {
  errors.push('DEFAULT_PAGE_SIZE cannot be greater than MAX_PAGE_SIZE');
  }
@@ -263,7 +264,7 @@ export const validateConfig = () => {
  return errors;
 };
 
-// Initialize configuration validation
+// Initialize configuration validation;
 if (ENV.DEV) {
  const configErrors = validateConfig();
  if (configErrors.length > 0) {

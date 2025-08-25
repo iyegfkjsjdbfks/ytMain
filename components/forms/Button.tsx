@@ -41,9 +41,9 @@ const Button: React.FC<ButtonProps> = ({
 
  return (
  <button
-// FIXED:  type="button"
-// FIXED:  className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
-// FIXED:  disabled={disabled || isLoading}
+ type="button"
+ className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+ disabled={disabled || isLoading}
  {...props}
  >
  {isLoading && (
@@ -70,7 +70,7 @@ const Button: React.FC<ButtonProps> = ({
  {leftIcon && !isLoading && <span className={`${children ? 'mr-2' : ''} ${iconSizeClasses[size]}`}>{leftIcon}</span>}
  {children}
  {rightIcon && !isLoading && <span className={`${children ? 'ml-2' : ''} ${iconSizeClasses[size]}`}>{rightIcon}</span>}
-  </button>
+ </button>
  );
 };
 

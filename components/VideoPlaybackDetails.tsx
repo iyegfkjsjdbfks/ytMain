@@ -6,10 +6,10 @@ import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils.ts';
 import { formatDistanceToNow } from '../utils/dateUtils.ts';
 import { formatCount } from '../utils/numberUtils.ts';
 
-import AdvancedVideoPlayer from 'AdvancedVideoPlayer.tsx';
-import VideoActions from 'VideoActions.tsx';
-import VideoDescription from 'VideoDescription.tsx';
-import YouTubePlayerWrapper from 'YouTubePlayerWrapper.tsx';
+import AdvancedVideoPlayer from 'AdvancedVideoPlayer';
+import VideoActions from 'VideoActions';
+import VideoDescription from 'VideoDescription';
+import YouTubePlayerWrapper from 'YouTubePlayerWrapper';
 
 import type { Video } from '../src/types/core.ts';
 
@@ -34,7 +34,7 @@ interface VideoPlaybackDetailsProps {
  handleSubscribe: () => void;
  openSaveModal: () => void;
  handleToggleDescription: () => void;
- handleSummarizeDescription?: () => void; // Optional as per VideoDescription
+ handleSummarizeDescription?: () => void; // Optional as per VideoDescription;
 }
 
 const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
@@ -57,14 +57,14 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
  handleSummarizeDescription } = props;
  if (!video) {
 return null;
-} // Should be handled by parent, but good practice
+} // Should be handled by parent, but good practice;
 
  return (
  <>
  {/* Video player */}
  <div className="mb-4">
  {isYouTubeUrl(video.videoUrl) ? (
- <YouTubePlayerWrapper
+ <YouTubePlayerWrapper;
  videoId={getYouTubeVideoId(video.videoUrl) || ''}
  autoplay={false}
  width="100%"
@@ -72,7 +72,7 @@ return null;
  controls={true} />
  />
  ) : (
- <AdvancedVideoPlayer
+ <AdvancedVideoPlayer;
  video={video} />
  />
  )}
@@ -91,7 +91,7 @@ return null;
 // FIXED:  </div>
 
  {/* Video actions */}
- <VideoActions
+ <VideoActions;
  liked={liked}
  disliked={disliked}
  likeCount={video.likes || 0}
@@ -104,7 +104,7 @@ return null;
 
  {/* Video description */}
  {channel && (
- <VideoDescription
+ <VideoDescription;
  video={video}
  channel={channel}
  isSubscribed={isSubscribed}

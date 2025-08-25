@@ -1,0 +1,77 @@
+{
+  "timestamp": "2025-08-25T12:59:17.879Z",
+  "deployment": {
+    "success": true,
+    "duration": 5838,
+    "totalErrorsFixed": 0
+  },
+  "initialAnalysis": {
+    "totalErrors": 674,
+    "categoriesFound": [
+      "cleanup",
+      "types",
+      "imports",
+      "general",
+      "syntax-critical"
+    ],
+    "severityDistribution": {
+      "low": 49,
+      "medium": 238,
+      "high": 96,
+      "critical": 291
+    }
+  },
+  "phaseResults": [],
+  "recommendations": [
+    {
+      "category": "syntax-critical",
+      "priority": 1,
+      "action": "Fix critical syntax errors immediately - these prevent compilation",
+      "count": 263,
+      "scripts": [
+        "fix-ts1005-critical-syntax.js",
+        "fix-ts1128-declaration-expected.js"
+      ]
+    },
+    {
+      "category": "imports",
+      "priority": 2,
+      "action": "Resolve import and module errors to enable type checking",
+      "count": 130,
+      "scripts": [
+        "fix-ts2307-cannot-find-module.js",
+        "fix-ts2305-no-exported-member.js"
+      ]
+    },
+    {
+      "category": "types",
+      "priority": 3,
+      "action": "Fix type compatibility and property errors",
+      "count": 173,
+      "scripts": [
+        "fix-ts2339-property-errors.js",
+        "fix-ts7006-implicit-any-param.js"
+      ]
+    },
+    {
+      "category": "cleanup",
+      "priority": 4,
+      "action": "Clean up unused variables and imports",
+      "count": 49,
+      "scripts": [
+        "fix-ts6133-declared-not-used.js"
+      ]
+    }
+  ],
+  "executionLog": [
+    "[2025-08-25T12:59:12.041Z] [INFO] 🚀 Deploying Comprehensive TypeScript Error Resolution System...",
+    "[2025-08-25T12:59:12.047Z] [INFO] 📄 Loaded 436 errors from type-errors-fresh.txt",
+    "[2025-08-25T12:59:12.048Z] [INFO] 📄 Loaded 276 errors from fresh-type-errors-manual.txt",
+    "[2025-08-25T12:59:12.048Z] [INFO] 📊 Loaded 674 fresh errors for analysis",
+    "[2025-08-25T12:59:12.048Z] [INFO] 📈 Categorized errors into 5 categories",
+    "[2025-08-25T12:59:12.326Z] [INFO] 💾 Created backup at: /home/runner/work/ytMain/ytMain/.error-fix-backups/backup-2025-08-25T12-59-12-049Z",
+    "[2025-08-25T12:59:12.327Z] [INFO] 🔄 Starting systematic error resolution phases...",
+    "[2025-08-25T12:59:12.327Z] [INFO] \n--- Critical Syntax Resolution: Fix critical syntax errors that prevent compilation ---",
+    "[2025-08-25T12:59:17.878Z] [SUCCESS] 🎉 No errors remaining, skipping remaining phases"
+  ]
+}

@@ -24,7 +24,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  window.addEventListener('online', handleOnline as EventListener);
  window.addEventListener('offline', handleOffline as EventListener);
 
- // Initial check
+ // Initial check;
  setIsOnline(navigator.onLine);
  if (!navigator.onLine) {
  setShowOfflineMessage(true);
@@ -35,7 +35,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }: any) =>
  window.removeEventListener('offline', handleOffline as EventListener);
  }}, []);
 
- // Auto-hide offline message after 5 seconds when back online
+ // Auto-hide offline message after 5 seconds when back online;
  useEffect(() => {
  if (isOnline && showOfflineMessage) {
  const timer = setTimeout((() => {

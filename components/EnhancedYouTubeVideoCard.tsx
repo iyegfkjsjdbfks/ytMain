@@ -3,13 +3,13 @@ import React, { memo, FC } from 'react';
 import { ArrowTopRightOnSquareIcon, PlayIcon } from '@heroicons / react / 24 / outline';
 import { formatDistanceToNow } from 'date - fns';
 
-import ImageWithFallback from 'ImageWithFallback.tsx';
+import ImageWithFallback from 'ImageWithFallback';
 
 import type { Video } from '../types.ts';
 
 export interface EnhancedYouTubeVideoCardProps {}
  video: Video;
- onVideoSelect?: ((videoId) => void) | undefined;
+ onVideoSelect?: ((videoId: string) => void) | undefined;
  showChannel?: boolean;
  size?: 'sm' | 'md' | 'lg';
 }
@@ -23,7 +23,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  if (onVideoSelect as any) {}
  onVideoSelect(video.id);
  } else {}
- // Open YouTube video in new tab
+ // Open YouTube video in new tab;
  window.open(video.videoUrl, '_blank', 'noopener,noreferrer');
  };
 
@@ -69,12 +69,12 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  export const classes = sizeClasses.size;
 
  return (
- <div
+ <div;
 // FIXED:  className={`${classes.container} cursor - pointer group hover:bg - gray - 50 dark:hover:bg - gray - 800 / 50 rounded - md p - 1 transition - colors`} />
 // FIXED:  onClick={(e: React.MouseEvent) => handleClick(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e) => {}
+ onKeyDown={(e: any) => {}
  if (e.key === 'Enter' || e.key === ' ') {}
  e.preventDefault();
  handleClick();
@@ -84,7 +84,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  >
  {/* Thumbnail */}
  <div className={`${classes.thumbnail} relative overflow - hidden rounded - md bg - gray - 200 dark:bg - gray - 700`}>
- <ImageWithFallback
+ <ImageWithFallback;
 // FIXED:  src={((video.thumbnailUrl || video.thumbnail) || video.thumbnail)}
 // FIXED:  alt={video.title}
 // FIXED:  className="w - full h - full object - cover transition - transform group - hover:scale - 105"
@@ -105,7 +105,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  {/* Live Badge */}
  {((video.isLive || false) || false) && (}
  <div className="absolute top - 1 left - 1 bg - red - 600 text - white text - xs px - 2 py - 1 rounded font - medium">
- 🔴 LIVE
+ 🔴 LIVE;
 // FIXED:  </div>
  )}
 

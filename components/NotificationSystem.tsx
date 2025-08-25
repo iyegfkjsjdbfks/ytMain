@@ -1,6 +1,6 @@
 import React, { MouseEvent, FC, useState, useEffect, useCallback, useRef } from 'react';
 
-import { BellIcon, XMarkIcon, PlayIcon, UserPlusIcon, HeartIcon, ChatBubbleLeftIcon, Cog6ToothIcon } from '@heroicons / react / 24 / outline';
+import { BellIcon, XIcon, PlayIcon, UserPlusIcon, HeartIcon, ChatBubbleLeftIcon, Cog6ToothIcon } from '@heroicons / react / 24 / outline';
 import { BellIcon as BellSolidIcon } from '@heroicons / react / 24 / solid';
 const BellIconSolid = BellSolidIcon;
 
@@ -34,7 +34,7 @@ const NotificationSystem: React.FC < NotificationSystemProps> = ({ className = '
  useEffect(() => {}
  loadNotifications();
 
- // Simulate real - time notifications
+ // Simulate real - time notifications;
  const interval = setInterval((() => {}
  if (Math.random() > 0.8) { // 20% chance every 30 seconds}
  generateMockNotification();
@@ -67,7 +67,7 @@ const NotificationSystem: React.FC < NotificationSystemProps> = ({ className = '
  const parsed = JSON.parse(stored);
  setNotifications(parsed);
  } else {}
- // Generate initial mock notifications
+ // Generate initial mock notifications;
  const initialNotifications = generateInitialNotifications();
  setNotifications(initialNotifications);
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
@@ -142,7 +142,7 @@ const NotificationSystem: React.FC < NotificationSystemProps> = ({ className = '
 
  if (!type) {}
 return;
-} // Safety check
+} // Safety check;
 
  const newNotification: Notification = {,}
  id: Date.now().toString(),
@@ -158,7 +158,7 @@ return;
  priority: type === 'live_stream' ? 'high' : 'medium' };
 
  setNotifications((prev) => {}
- const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50
+ const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50;
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
  return updated;
  });
@@ -220,7 +220,7 @@ return;
  };
 
  const filteredNotifications = filter === 'all';
- ? notifications
+ ? notifications;
  : notifications.filter((n) => !n.isRead);
 
  return (
@@ -251,7 +251,7 @@ return;
  <div className="p - 4 border - b border - gray - 200 dark:border - gray - 700">
  <div className="flex items - center justify - between">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white">
- Notifications
+ Notifications;
 // FIXED:  </h3>
  <div className="flex items - center space - x - 2">
  <button />
@@ -265,13 +265,13 @@ return;
 // FIXED:  className="text - sm text - blue - 600 dark:text - blue - 400 hover:underline"
 // FIXED:  disabled={unreadCount === 0}
  >
- Mark all read
+ Mark all read;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => setIsOpen(false: React.MouseEvent)}
 // FIXED:  className="text - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300"
  >
- <XMarkIcon className="w - 5 h - 5" />
+ <XIcon className="w - 5 h - 5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -287,7 +287,7 @@ return;
 // FIXED:  </div>
  ) : (
  filteredNotifications.map((notification) => (
- <div
+ <div;
  key={notification.id}
 // FIXED:  className={`p - 4 border - b border - gray - 100 dark:border - gray - 700 hover:bg - gray - 50 dark:hover:bg - gray - 700 transition - colors ${}
  !notification.isRead ? 'bg - blue - 50 dark:bg - blue - 900 / 20' : ''
@@ -318,7 +318,7 @@ return;
  {notification.channelName && (}
  <div className="flex items - center mt - 2">
  {notification.channelAvatar && (}
- <img
+ <img;
 // FIXED:  src={notification.channelAvatar}
 // FIXED:  alt={notification.channelName}
 // FIXED:  className="w - 4 h - 4 rounded - full mr - 2" />
@@ -330,13 +330,13 @@ return;
 // FIXED:  </div>
  )}
  <p className="text - xs text - gray - 400 dark:text - gray - 500 mt - 1">
- {formatDistanceToNow(new Date(notification.timestamp))} ago
+ {formatDistanceToNow(new Date(notification.timestamp))} ago;
 // FIXED:  </p>
 // FIXED:  </div>
 
  {/* Thumbnail */}
  {notification.thumbnail && (}
- <img
+ <img;
 // FIXED:  src={notification.thumbnail}
 // FIXED:  alt=""
 // FIXED:  className="w - 16 h - 9 object - cover rounded ml - 3 flex - shrink - 0" />
@@ -352,7 +352,7 @@ return;
 // FIXED:  onClick={() => markAsRead(notification.id: React.MouseEvent)}
 // FIXED:  className="text - xs text - blue - 600 dark:text - blue - 400 hover:underline"
  >
- Mark as read
+ Mark as read;
 // FIXED:  </button>
  )}
  {notification.videoId && (}
@@ -363,7 +363,7 @@ return;
  }
 // FIXED:  className="text - xs text - blue - 600 dark:text - blue - 400 hover:underline"
  >
- Watch video
+ Watch video;
 // FIXED:  </button>
  )}
 // FIXED:  </div>
@@ -371,7 +371,7 @@ return;
 // FIXED:  onClick={() => deleteNotification(notification.id: React.MouseEvent)}
 // FIXED:  className="text - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300"
  >
- <XMarkIcon className="w - 4 h - 4" />
+ <XIcon className="w - 4 h - 4" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

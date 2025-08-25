@@ -1,32 +1,33 @@
-// StudioVideoGrid - React Component
+// StudioVideoGrid - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface StudioVideoGridProps {
   className?: string;
   children?: React.ReactNode;
   onLoad?: () => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError, 
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const initialize = async () => {
-      try {
+      try {;
         await new Promise(resolve => setTimeout(resolve, 200));
         setIsReady(true);
-        onLoad?.();
+        onLoad?.(), 
       } catch (err) {
         const error = err instanceof Error ? err : new Error('Initialization failed');
         setError(error);
-        onError?.(error);
+        onError?.(error), 
       }
     };
 
@@ -39,7 +40,7 @@ export const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
         <h3>Error in StudioVideoGrid</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

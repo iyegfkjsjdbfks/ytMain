@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import { EyeIcon, ChartBarIcon } from '@heroicons / react / 24 / outline';
+import { EyeIcon, ChartBarSquareIcon } from '@heroicons / react / 24 / outline';
 
 import { formatDistanceToNow } from '../utils / dateUtils';
 import { ChatBubbleLeftIcon } from '@heroicons / react / 24 / outline';
@@ -74,10 +74,10 @@ const VideoAnalytics: React.FC < VideoAnalyticsProps> = ({ videoId, className = 
  const loadAnalyticsData = async (): Promise<any> < void> => {}
  setIsLoading(true);
  try {}
- // Simulate API call
+ // Simulate API call;
  await new Promise<any>(resolve => setTimeout((resolve) as any, 1000));
 
- const mockData = generateMockAnalyticsData(videoId);
+ const mockData = generateMockAnalyticsData(videoId: string);
  setAnalyticsData(mockData);
  } catch (error) {}
  (console as any).error('Error loading analytics data:', error);
@@ -85,13 +85,13 @@ const VideoAnalytics: React.FC < VideoAnalyticsProps> = ({ videoId, className = 
  setIsLoading(false);
  };
 
- const generateMockAnalyticsData = (videoId): (AnalyticsData) => {}
+ const generateMockAnalyticsData = (videoId: string): (AnalyticsData) => {}
  const baseViews = Math.floor(Math.random() * 1000000) + 10000;
  const likes = Math.floor(baseViews * (0.02 + Math.random() * 0.08));
  const dislikes = Math.floor(likes * (0.05 + Math.random() * 0.15));
  const comments = Math.floor(baseViews * (0.001 + Math.random() * 0.01));
  const shares = Math.floor(baseViews * (0.005 + Math.random() * 0.02));
- const watchTime = Math.floor(baseViews * (120 + Math.random() * 300)); // seconds
+ const watchTime = Math.floor(baseViews * (120 + Math.random() * 300)); // seconds;
  const averageViewDuration = 120 + Math.random() * 180;
 
  return {}
@@ -262,7 +262,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {analyticsData.clickThroughRate.toFixed(1)}%
 // FIXED:  </p>
 // FIXED:  </div>
- <ChartBarIcon className="w - 8 h - 8 text - purple - 500" />
+ <ChartBarSquareIcon className="w - 8 h - 8 text - purple - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -273,7 +273,7 @@ return `${(num / 1000).toFixed(1)}K`;
  <div className="h - 64 flex items - end space - x - 1">
  {analyticsData.retention.map((value: string | number,}
  index) => (
- <div
+ <div;
  key={index}
 // FIXED:  className="bg - blue - 500 rounded - t flex - 1 transition - all hover:bg - blue - 600"
 // FIXED:  style={{ height: `${(value / 100) * 100}%` }
@@ -299,7 +299,7 @@ return `${(num / 1000).toFixed(1)}K`;
  <span className="text - sm text - neutral - 600 dark:text - neutral - 400 capitalize">{source}</span>
  <div className="flex items - center space - x - 2">
  <div className="w - 32 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">
- <div
+ <div;
 // FIXED:  className="bg - blue - 500 h - 2 rounded - full"
 // FIXED:  style={{ width: `${percentage}%` } />
  />
@@ -327,7 +327,7 @@ return `${(num / 1000).toFixed(1)}K`;
  <span className="text - sm text - neutral - 600 dark:text - neutral - 400">{age}</span>
  <div className="flex items - center space - x - 2">
  <div className="w - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">
- <div
+ <div;
 // FIXED:  className="bg - green - 500 h - 2 rounded - full"
 // FIXED:  style={{ width: `${percentage}%` } />
  />
@@ -349,7 +349,7 @@ return `${(num / 1000).toFixed(1)}K`;
  <span className="text - sm text - neutral - 600 dark:text - neutral - 400">{country}</span>
  <div className="flex items - center space - x - 2">
  <div className="w - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">
- <div
+ <div;
 // FIXED:  className="bg - purple - 500 h - 2 rounded - full"
 // FIXED:  style={{ width: `${percentage}%` } />
  />
@@ -443,7 +443,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {formatNumber(analyticsData.likes)}
 // FIXED:  </p>
  <p className="text - sm text - green - 600">
- {analyticsData.engagement.likeRate.toFixed(2)}% rate
+ {analyticsData.engagement.likeRate.toFixed(2)}% rate;
 // FIXED:  </p>
 // FIXED:  </div>
  <HandThumbUpIcon className="w - 8 h - 8 text - green - 500" />
@@ -458,7 +458,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {formatNumber(analyticsData.comments)}
 // FIXED:  </p>
  <p className="text - sm text - blue - 600">
- {analyticsData.engagement.commentRate.toFixed(2)}% rate
+ {analyticsData.engagement.commentRate.toFixed(2)}% rate;
 // FIXED:  </p>
 // FIXED:  </div>
  <ChatBubbleLeftIcon className="w - 8 h - 8 text - blue - 500" />
@@ -473,7 +473,7 @@ return `${(num / 1000).toFixed(1)}K`;
  {formatNumber(analyticsData.shares)}
 // FIXED:  </p>
  <p className="text - sm text - purple - 600">
- {analyticsData.engagement.shareRate.toFixed(2)}% rate
+ {analyticsData.engagement.shareRate.toFixed(2)}% rate;
 // FIXED:  </p>
 // FIXED:  </div>
  <ShareIcon className="w - 8 h - 8 text - purple - 500" />
@@ -491,17 +491,17 @@ return `${(num / 1000).toFixed(1)}K`;
  <div>
  <h2 className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">Video Analytics</h2>
  <p className="text - neutral - 600 dark:text - neutral - 400">
- Published {formatDistanceToNow(new Date(analyticsData.publishedAt))} ago
+ Published {formatDistanceToNow(new Date(analyticsData.publishedAt))} ago;
 // FIXED:  </p>
 // FIXED:  </div>
 
  <div className="flex space - x - 2">
  {(['7d', '28d', '90d', '365d'] as const).map((range) => (}
- <button
+ <button;
  key={range} />
 // FIXED:  onClick={() => setTimeRange(range: React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 1 text - sm rounded - full transition - colors ${}
- timeRange === range
+ timeRange === range;
  ? 'bg - blue - 100 dark:bg - blue - 900 text - blue - 800 dark:text - blue - 200'
  : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700'
  }`}
@@ -517,11 +517,11 @@ return `${(num / 1000).toFixed(1)}K`;
  {/* Tabs */}
  <div className="flex space - x - 1 mb - 6 bg - neutral - 100 dark:bg - neutral - 800 p - 1 rounded - lg">
  {(['overview', 'audience', 'revenue', 'engagement'] as const).map((tab) => (}
- <button
+ <button;
  key={tab} />
 // FIXED:  onClick={() => setActiveTab(tab: React.MouseEvent)}
 // FIXED:  className={`flex - 1 py - 2 px - 4 text - sm font - medium rounded - md transition - colors ${}
- activeTab === tab
+ activeTab === tab;
  ? 'bg - white dark:bg - neutral - 700 text - neutral - 900 dark:text - neutral - 100 shadow - sm'
  : 'text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 900 dark:hover:text - neutral - 100'
  }`}

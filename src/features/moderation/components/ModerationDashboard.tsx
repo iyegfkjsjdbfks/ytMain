@@ -1,20 +1,22 @@
-// ModerationDashboard - Enhanced Dashboard Component
+import React from 'react';
+// ModerationDashboard - Enhanced Dashboard Component;
 import React, { useState, useEffect } from 'react';
 
 interface ModerationDashboardProps {
   className?: string;
-  onDataUpdate?: (data: DashboardData) => void;
+  onDataUpdate?: (data: DashboardData) => void, 
 }
 
 interface DashboardData {
   metrics: Record<string, number>;
-  charts: any[];
-  lastUpdated: string;
+  charts: any[], 
+  lastUpdated: string,
 }
 
+import React from 'react';
 export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   className = '',
-  onDataUpdate
+  onDataUpdate, 
 }) => {
   const [data, setData] = useState<DashboardData>({
     metrics: {},
@@ -26,18 +28,18 @@ export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
+      try {;
         setLoading(true);
         setError(null);
         
-        // Simulate data fetching
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Simulate data fetching;
+        await new Promise(resolve => setTimeout(resolve, 1000)), 
         
         const newData: DashboardData = {
           metrics: {
             totalViews: 1000,
             totalLikes: 50,
-            totalComments: 25
+            totalComments: 25,
           },
           charts: [],
           lastUpdated: new Date().toISOString()
@@ -46,9 +48,9 @@ export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
         setData(newData);
         onDataUpdate?.(newData);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load data');
+        setError(err instanceof Error ? err.message : 'Failed to load data'), 
       } finally {
-        setLoading(false);
+        setLoading(false), 
       }
     };
 
@@ -68,7 +70,7 @@ export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
       <div className={`dashboard-error ${className}`}>
         <div>Error: {error}</div>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );
@@ -94,7 +96,7 @@ export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
       
       <div className="dashboard-charts">
         {data.charts.length > 0 ? (
-          data.charts.map((_chart, index) => (
+          data.charts.map((_chart: any, index: any) => (
             <div key={index} className="_chart-container">
               {/* Chart component would go here */}
               <div>Chart {index + 1}</div>

@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
 // subscriptionService - Enhanced Service
 export class SubscriptionService {
   private apiUrl: string;
@@ -37,5 +38,5 @@ export class SubscriptionService {
   }
 }
 
-export const subscriptionService = new SubscriptionService();
+export const subscriptionService = new SubscriptionService()
 export default subscriptionService;

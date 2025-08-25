@@ -1,20 +1,19 @@
 import React, { useEffect, useCallback, useRef, useState, FC, KeyboardEvent, MouseEvent } from 'react';
-// @ts - nocheck
+// @ts - nocheck;
 
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ShareIcon, EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, ChatBubbleLeftIcon } from '@heroicons / react / 24 / outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons / react / 24 / solid';
-const HeartIconSolid = HeartSolidIcon;
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, HeartIcon, ShareIcon, EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, ChatBubbleLeftIcon } from '@heroicons / react / 24 / outline';
+import { HeartIcon as HeartIcon } from '@heroicons / react / 24 / solid';
+const HeartIconSolid = HeartIcon;
 
-import type { Short } from '../src / types / core';
-
+import type { Short } from '../src / types / core'
 export interface ShortsPlayerProps {}
  shorts: Short;,
  currentIndex: number;
- onIndexChange: (index) => void;,
- onLike: (shortId) => void;
- onSubscribe: (channelId) => void;,
- onComment: (shortId) => void;
- onShare: (shortId) => void;
+ onIndexChange: (index: any) => void;,
+ onLike: (shortId: any) => void;
+ onSubscribe: (channelId: any) => void;,
+ onComment: (shortId: any) => void;
+ onShare: (shortId: any) => void;
  className?: string;
 }
 
@@ -51,11 +50,11 @@ return;
  };
 
  const handleEnded = () => {}
- // Auto - advance to next short
+ // Auto - advance to next short;
  if (currentIndex < shorts.length - 1) {}
  onIndexChange(currentIndex + 1);
  } else {}
- // Loop back to first short
+ // Loop back to first short;
  onIndexChange(0);
  };
 
@@ -80,7 +79,7 @@ return;
 return;
 }
 
- // Auto - play when short changes
+ // Auto - play when short changes;
  if (isPlaying as any) {}
  video.play().catch(console.error);
  }
@@ -88,7 +87,7 @@ return;
  }, [currentIndex, isPlaying]);
 
  useEffect(() => {}
- // Handle keyboard navigation
+ // Handle keyboard navigation;
  const handleKeyDown = (e: KeyboardEvent) => {}
  switch (e.key) {}
  case ' ':
@@ -166,7 +165,7 @@ return;
  video.currentTime = newTime;
  };
 
- const formatNumber = (num): (string) => {}
+ const formatNumber = (num): (string: any) => {}
  if (num >= 1000000) {}
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {}
@@ -182,7 +181,7 @@ return null;
  return (
  <div className={`relative w - full h - screen bg - black overflow - hidden ${className}`} ref={containerRef}>
  {/* Video */}
- <video
+ <video;
  ref={videoRef}
 // FIXED:  src={currentShort.videoUrl}
 // FIXED:  className="w - full h - full object - cover"
@@ -201,12 +200,12 @@ return null;
  )}
 
  {/* Progress Bar */}
- <div
+ <div;
  ref={progressRef}
 // FIXED:  className="absolute right - 2 top - 20 bottom - 20 w - 1 bg - white / 30 rounded - full cursor - pointer" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSeek(e)}
  >
- <div
+ <div;
 // FIXED:  className="w - full bg - white rounded - full transition - all duration - 100"
 // FIXED:  style={{ height: `${progress}%` } />
  />
@@ -248,7 +247,7 @@ return null;
  <div className="absolute bottom - 0 left - 0 right - 16 p - 4 bg - gradient - to - t from - black / 80 to - transparent">
  {/* Channel Info */}
  <div className="flex items - center space - x - 3 mb - 3">
- <img
+ <img;
 // FIXED:  src={currentShort.channelAvatarUrl}
 // FIXED:  alt={currentShort.channelName}
 // FIXED:  className="w - 10 h - 10 rounded - full" />
@@ -271,7 +270,7 @@ return null;
 // FIXED:  onClick={() => onSubscribe(currentShort.channelId: React.MouseEvent)}
 // FIXED:  className="bg - white text - black px - 4 py - 1 rounded - full text - sm font - medium hover:bg - gray - 200 transition - colors"
  >
- Subscribe
+ Subscribe;
 // FIXED:  </button>
 // FIXED:  </div>
 
@@ -290,9 +289,9 @@ return null;
  {/* Hashtags */}
  {currentShort.tags.length > 0 && (}
  <div className="flex flex - wrap gap - 2 mb - 3">
- {currentShort.tags.slice(0, 3).map((tag,}
+ {currentShort.tags.slice(0, 3).map((tag }
  index) => (
- <span
+ <span;
  key={index}
 // FIXED:  className="text - blue - 400 text - sm hover:text - blue - 300 cursor - pointer" />
  >
@@ -310,13 +309,13 @@ return null;
  <button />
 // FIXED:  onClick={() => onLike(currentShort.id: React.MouseEvent)}
 // FIXED:  className={`p - 3 rounded - full transition - colors ${}
- currentShort.isLiked
+ currentShort.isLiked;
  ? 'bg - red - 500 text - white'
  : 'bg - black / 50 text - white hover:bg - black / 70'
  }`}
  >
  {currentShort.isLiked ? (}
- <HeartSolidIcon className="w - 6 h - 6" />
+ <HeartIcon className="w - 6 h - 6" />
  ) : (
  <HeartIcon className="w - 6 h - 6" />
  )}
@@ -363,7 +362,7 @@ return null;
 // FIXED:  className="p - 3 bg - black / 50 text - white rounded - full hover:bg - black / 70 transition - colors"
  >
  {isMuted ? (}
- <SpeakerXMarkIcon className="w - 6 h - 6" />
+ <SpeakerXIcon className="w - 6 h - 6" />
  ) : (
  <SpeakerWaveIcon className="w - 6 h - 6" />
  )}
@@ -376,6 +375,5 @@ return null;
 // FIXED:  </div>
 // FIXED:  </div>
  );
-};
-
+}
 export default ShortsPlayer;

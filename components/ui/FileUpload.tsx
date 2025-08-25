@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef } from 'react';
 
 import { DocumentIcon, CloudArrowUpIcon } from '@heroicons / react / 24 / outline';
-import { XMarkIcon } from '@heroicons / react / 24 / outline';
+import { XIcon } from '@heroicons / react / 24 / outline';
 
 export interface FileUploadProps {}
  accept?: string;
@@ -38,7 +38,7 @@ return;
 
  const fileArray<any> = Array<any>.from(selectedFiles);
 
- // Validate file size
+ // Validate file size;
  if (maxSize as any) {}
  const oversizedFiles = fileArray<any>.filter((file) => file.size > maxSize);
  if (oversizedFiles.length > 0) {}
@@ -85,13 +85,13 @@ return '0 Bytes';
 
  return (
  <div className={`w - full ${className}`}>
- <div
+ <div;
 // FIXED:  className={`relative border - 2 border - dashed rounded - lg p - 6 transition - colors ${}
- isDragOver
+ isDragOver;
  ? 'border - blue - 400 bg - blue - 50 dark:bg - blue - 900 / 10'
  : 'border - neutral - 300 dark:border - neutral - 600'
  } ${}
- disabled
+ disabled;
  ? 'opacity - 50 cursor - not - allowed'
  : 'cursor - pointer hover:border - neutral - 400 dark:hover:border - neutral - 500'
  }`}
@@ -100,7 +100,7 @@ return '0 Bytes';
  onDrop={handleDrop} />
 // FIXED:  onClick={(e: React.MouseEvent) => handleClick(e)}
  >
- <input
+ <input;
  ref={fileInputRef}
 // FIXED:  type="file"
  accept={accept}
@@ -140,7 +140,7 @@ return '0 Bytes';
  <div className="space - y - 2">
  {files.map((file,}
  index) => (
- <div
+ <div;
  key={index}
 // FIXED:  className="flex items - center justify - between p - 3 bg - neutral - 50 dark:bg - neutral - 800 rounded - lg" />
  >
@@ -163,7 +163,7 @@ return '0 Bytes';
  }
 // FIXED:  className="p - 1 text - neutral - 400 hover:text - red - 500 transition - colors"
  >
- <XMarkIcon className="h - 4 w - 4" />
+ <XIcon className="h - 4 w - 4" />
 // FIXED:  </button>
  )}
 // FIXED:  </div>

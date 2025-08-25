@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { VideoGridSkeleton, ErrorState, EmptyState } from 'LoadingStates.tsx';
+import { VideoGridSkeleton, ErrorState, EmptyState } from 'LoadingStates';
 
 interface DataWrapperProps<T> {
  data: T;
@@ -13,19 +13,19 @@ interface DataWrapperProps<T> {
  icon?: React.ReactNode;
  };
  errorTitle?: string;
- isEmpty?: (data: T) => boolean
+ isEmpty?: (data: T) => boolean;
 }
 
 /**
- * Higher-order component that handles common data fetching states
- * @param data - The fetched data
- * @param loading - Loading state
- * @param error - Error message if any
- * @param children - Render function for the data
- * @param loadingSkeleton - Custom loading component
- * @param emptyState - Configuration for empty state
- * @param errorTitle - Custom error title
- * @param isEmpty - Function to determine if data is empty
+ * Higher-order component that handles common data fetching states;
+ * @param data - The fetched data;
+ * @param loading - Loading state;
+ * @param error - Error message if any;
+ * @param children - Render function for the data;
+ * @param loadingSkeleton - Custom loading component;
+ * @param emptyState - Configuration for empty state;
+ * @param errorTitle - Custom error title;
+ * @param isEmpty - Function to determine if data is empty;
  */
 export function DataWrapper<T>({
  data,
@@ -42,7 +42,7 @@ export function DataWrapper<T>({
 
  if (error as any) {
  return (
- <ErrorState
+ <ErrorState;
  title={errorTitle || 'Failed to load data'}
  message={error} />
  />
@@ -51,7 +51,7 @@ export function DataWrapper<T>({
 
  if (isEmpty(data) && emptyState) {
  return (
- <EmptyState
+ <EmptyState;
  title={emptyState.title}
  message={emptyState.message}
  icon={emptyState.icon} />

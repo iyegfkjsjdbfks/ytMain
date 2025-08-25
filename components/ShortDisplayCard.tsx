@@ -1,53 +1,53 @@
+import { useLocation } from 'react-router-dom';
 import React, { useState, useRef, useEffect, FC, MouseEvent } from 'react';
 import { useLocation } from 'react - router - dom';
-// @ts - nocheck - Temporary during refactoring
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons / react / 24 / outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons / react / 24 / solid';
-const HeartIconSolid = HeartSolidIcon;
+// @ts - nocheck - Temporary during refactoring;
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon } from '@heroicons / react / 24 / outline';
+import { HeartIcon as HeartIcon } from '@heroicons / react / 24 / solid';
+const HeartIconSolid = HeartIcon;
 
 import { useIntersectionObserver, useVideoAutoplay } from '../hooks/index.ts';
 import { useVideoPlayer } from '../src / hooks / useVideoPlayer';
 
-import LoadingSpinner from 'LoadingSpinner.tsx';
+import LoadingSpinner from 'LoadingSpinner';
 import { ActionButton, ErrorMessage } from 'ui/index.ts';
 
-import type { Short } from '../src / types / core';
-
+import type { Short } from '../src / types / core'
 export interface ShortDisplayCardProps {}
  short: Short;
  isLiked?: boolean;
  isFollowed?: boolean;
- onLike?: (shortId) => void;
- onFollow?: (channelName) => void;
- onComment?: (shortId) => void;
- onShare?: (shortId) => void;
+ onLike?: (shortId: any) => void;
+ onFollow?: (channelName: any) => void;
+ onComment?: (shortId: any) => void;
+ onShare?: (shortId: any) => void;
  onVideoChange?: () => void;
  onVideoEnd?: () => void;
  isActive?: boolean;
 }
 
-// Video - specific components
+// Video - specific components;
 
 // Extracted PlayPauseOverlay component
 export interface PlayPauseOverlayProps {}
  isPlaying: boolean;,
- onToggle: () => void
+ onToggle: () => void;
 }
 
 const PlayPauseOverlay: React.FC < PlayPauseOverlayProps> = ({ isPlaying, onToggle }: any) => (
- <div
+ <div;
 // FIXED:  className="absolute inset - 0 flex items - center justify - center cursor - pointer" />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
  e.stopPropagation();
  onToggle();
  }
  >
- <button
+ <button;
 // FIXED:  className={`}
- bg - black bg - opacity - 50 text - white p - 4 rounded - full 
- transition - opacity duration - 200 pointer - events - none
+ bg - black bg - opacity - 50 text - white p - 4 rounded - full; 
+ transition - opacity duration - 200 pointer - events - none;
  ${!isPlaying ? 'opacity - 100' : 'opacity - 0 group - hover:opacity - 100 hover:opacity - 100'}
- hover:bg - opacity - 70
+ hover:bg - opacity - 70;
  `}
 // FIXED:  aria - label={isPlaying ? 'Pause video' : 'Play video'} />
  >
@@ -66,7 +66,7 @@ export interface VideoInfoProps {}
  channelName: string;
  views: string;,
  isFollowed: boolean;
- onFollow: (() => void) | undefined
+ onFollow: (() => void) | undefined;
 }
 
 const VideoInfo: React.FC < VideoInfoProps> = ({}
@@ -89,7 +89,7 @@ const VideoInfo: React.FC < VideoInfoProps> = ({}
  onFollow();
  }
 // FIXED:  className={`px - 3 py - 1 text - xs font - medium rounded - full transition - colors ${}
- isFollowed
+ isFollowed;
  ? 'bg - gray - 600 text - white hover:bg - gray - 700'
  : 'bg - white text - black hover:bg - gray - 200'
  }`}
@@ -107,7 +107,7 @@ export interface ActionButtonsProps {}
  onToggleMute: () => void;,
  onLike: (e: React.MouseEvent) => void;,
  onComment: (e: React.MouseEvent) => void;,
- onShare: (e: React.MouseEvent) => void
+ onShare: (e: React.MouseEvent) => void;
 }
 
 const ActionButtons: React.FC < ActionButtonsProps> = ({}
@@ -127,7 +127,7 @@ const ActionButtons: React.FC < ActionButtonsProps> = ({}
  ariaLabel={isMuted ? 'Unmute video' : 'Mute video'}
  >
  {isMuted ? (}
- <SpeakerXMarkIcon className="w - 5 h - 5" />
+ <SpeakerXIcon className="w - 5 h - 5" />
  ) : (
  <SpeakerWaveIcon className="w - 5 h - 5" />
  )}
@@ -150,7 +150,7 @@ const ActionButtons: React.FC < ActionButtonsProps> = ({}
 // FIXED:  onClick={(e: React.MouseEvent) => onComment(e)}
  ariaLabel="Comment on video"
  >
- <ChatBubbleOvalLeftIcon className="w - 5 h - 5" />
+ <ChatBubbleLeftIcon className="w - 5 h - 5" />
 // FIXED:  </ActionButton>
 
  {/* Share */}
@@ -163,7 +163,7 @@ const ActionButtons: React.FC < ActionButtonsProps> = ({}
 // FIXED:  </div>
 );
 
-// Extracted LoadingIndicator component
+// Extracted LoadingIndicator component;
 const LoadingIndicator: React.FC = () => (
  <div className="absolute inset - 0 flex items - center justify - center bg - black bg - opacity - 50">
  <LoadingSpinner size="md" color="white" />
@@ -173,11 +173,11 @@ const LoadingIndicator: React.FC = () => (
 // Extracted ErrorState component
 export interface ErrorStateProps {}
  error: string;,
- onRetry: () => void
+ onRetry: () => void;
 }
 
 const ErrorState: React.FC < ErrorStateProps> = ({ error, onRetry }: any) => (
- <ErrorMessage
+ <ErrorMessage;
  message={error}
  onRetry={onRetry}
  variant="overlay"
@@ -185,7 +185,7 @@ const ErrorState: React.FC < ErrorStateProps> = ({ error, onRetry }: any) => (
  />
 );
 
-// Main component
+// Main component;
 const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  short,
  isLiked = false,
@@ -201,7 +201,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  const isOnShortsPage = location.pathname === '/shorts';
  const [isManuallyPaused, setIsManuallyPaused] = React.useState < boolean>(false);
 
- // Real video player implementation
+ // Real video player implementation;
  const videoPlayer = useVideoPlayer({}
  autoplay: false,
  muted: true,
@@ -209,7 +209,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
 
  const videoRef = useRef < HTMLVideoElement>(null);
 
- // Set video ref when component mounts
+ // Set video ref when component mounts;
  useEffect(() => {}
  if (videoRef.current) {}
  videoPlayer.setVideoRef(videoRef.current);
@@ -217,7 +217,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
 
  }, [videoPlayer]);
 
- // Use intersection observer for visibility tracking and autoplay
+ // Use intersection observer for visibility tracking and autoplay;
  const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({}
  threshold: 0.7,
  rootMargin: '0px' });
@@ -227,16 +227,16 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  isIntersecting,
  isPlaying: videoPlayer.isPlaying,
  isManuallyPaused,
- actions: {,}
+ actions: { }
  play: videoPlayer.play,
  pause: videoPlayer.pause,
  unmute: videoPlayer.unmute },
  setIsManuallyPaused,
  enableAutoplay: true, // Enable autoplay on both shorts page and home page,
- unmuteOnAutoplay: isOnShortsPage, // Only unmute on autoplay when on shorts page
+ unmuteOnAutoplay: isOnShortsPage, // Only unmute on autoplay when on shorts page;
  });
 
- // Event handlers
+ // Event handlers;
  const handlePlayPauseToggle = async (): Promise<any> < void> => {}
  try {}
  if (videoPlayer.isPlaying) {}
@@ -278,7 +278,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  onVideoEnd?.();
  };
 
- // Notify parent when video becomes active
+ // Notify parent when video becomes active;
  React.useEffect(() => {}
  if (isActive && onVideoChange) {}
  onVideoChange();
@@ -290,20 +290,20 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  <div />
  ref={intersectionRef as React.RefObject < HTMLDivElement>}
 // FIXED:  className={`relative bg - black overflow - hidden group cursor - pointer ${}
- isOnShortsPage
+ isOnShortsPage;
  ? 'w - full h - full'
  : 'w - 40 h - 72 rounded - lg'
  }`}
  >
  {/* Real video element */}
- <video
+ <video;
  ref={videoRef}
 // FIXED:  src={short.videoUrl}
  poster={short.thumbnailUrl}
 // FIXED:  className="w - full h - full object - cover cursor - pointer"
- playsInline
+ playsInline;
  muted={videoPlayer.isMuted}
- loop
+ loop;
  preload="metadata" />
 // FIXED:  onClick={(e: React.MouseEvent) => handlePlayPauseToggle(e)}
  onEnded={() => {}
@@ -316,14 +316,14 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
 
  {/* Error State */}
  {videoPlayer.error && (}
- <ErrorState
+ <ErrorState;
  error={videoPlayer.error.message}
  onRetry={handleRetry} />
  />
  )}
 
  {/* Play / Pause Overlay */}
- <PlayPauseOverlay
+ <PlayPauseOverlay;
  isPlaying={videoPlayer.isPlaying}
  onToggle={handlePlayPauseToggle} />
  />
@@ -331,7 +331,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  {/* Video Info Overlay */}
  <div className="absolute bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 80 to - transparent p - 4 pointer - events - none">
  <div className="flex items - end justify - between">
- <VideoInfo
+ <VideoInfo;
  title={short.title}
  channelName={short.channelName}
  views={short.views}
@@ -340,7 +340,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
  />
 
  {/* Action Buttons */}
- <ActionButtons
+ <ActionButtons;
  isMuted={videoPlayer.isMuted}
  isLiked={isLiked}
  onToggleMute={videoPlayer.toggleMute}
@@ -352,8 +352,7 @@ const ShortDisplayCard: React.FC < ShortDisplayCardProps> = ({}
 // FIXED:  </div>
 // FIXED:  </div>
  );
-};
-
+}
 export default ShortDisplayCard;
 
 // Export video - specific sub - components for reuse in other parts of the application

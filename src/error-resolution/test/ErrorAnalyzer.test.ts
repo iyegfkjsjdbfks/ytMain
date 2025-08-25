@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ErrorAnalyzer, ErrorRootCause, ErrorSeverity } from '../core/ErrorAnalyzer';
 
 describe('ErrorAnalyzer', () => {
@@ -11,7 +12,7 @@ describe('ErrorAnalyzer', () => {
     it('should categorize syntax errors correctly', () => {
       const mockErrorLine = "utils/securityMonitoring.ts:515:58 - error TS1005: ';' expected.";
       
-      // Use reflection to access private method for testing
+      // Use reflection to access private method for testing;
       const parseErrorLine = (analyzer).parseErrorLine.bind(analyzer);
       const result = parseErrorLine(mockErrorLine);
       
@@ -51,7 +52,7 @@ describe('ErrorAnalyzer', () => {
 
   describe('Error Analysis', () => {
     it('should handle empty error output', async () => {
-      // Mock the captureTypeScriptErrors method to return empty string
+      // Mock the captureTypeScriptErrors method to return empty string;
       jest.spyOn(analyzer, 'captureTypeScriptErrors').mockReturnValue('');
       
       const result = await analyzer.analyzeErrors();

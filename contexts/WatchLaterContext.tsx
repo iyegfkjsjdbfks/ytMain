@@ -2,10 +2,10 @@ import React, { createContext, useContext, useState, useEffect, type ReactNode }
 
 interface WatchLaterContextType {
   watchLaterVideos: string[];
-  addToWatchLater: (videoId) => void;
-  removeFromWatchLater: (videoId) => void;
-  isInWatchLater: (videoId) => boolean;
-  clearWatchLater: () => void;
+  addToWatchLater: (videoId: string) => void;
+  removeFromWatchLater: (videoId: string) => void;
+  isInWatchLater: (videoId: string) => boolean;
+  clearWatchLater: () => void, 
 }
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
@@ -13,52 +13,53 @@ const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undef
 export const useWatchLater = () => {
   const context = useContext(WatchLaterContext);
   if (!context) {
-    throw new Error('useWatchLater must be used within a WatchLaterProvider');
+    throw new Error('useWatchLater must be used within a WatchLaterProvider'), 
   }
   return context;
 };
 
 interface WatchLaterProviderProps {
-  children: ReactNode;
+  children: ReactNode,
 }
 
+import React from 'react';
 export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children }) => {
   const [watchLaterVideos, setWatchLaterVideos] = useState<string[]>([]);
 
-  // Load from localStorage on mount
+  // Load from localStorage on mount;
   useEffect(() => {
     const stored = localStorage.getItem('watchLaterVideos');
     if (stored) {
       try {
-        setWatchLaterVideos(JSON.parse(stored));
+        setWatchLaterVideos(JSON.parse(stored)), 
       } catch (error) {
-        console.error('Error loading watch later videos:', error);
+        console.error('Error loading watch later videos:', error), 
       }
     }
   }, []);
 
-  // Save to localStorage whenever the list changes
+  // Save to localStorage whenever the list changes;
   useEffect(() => {
-    localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos));
+    localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos)), 
   }, [watchLaterVideos]);
 
-  const addToWatchLater = (videoId) => {
-    setWatchLaterVideos(prev => {
-      if (prev.includes(videoId)) return prev;
-      return [...prev, videoId];
+  const addToWatchLater = (videoId: string) => {
+    setWatchLaterVideos(prev => {;
+      if (prev.includes(videoId: string)) return,  prev;
+      return [...prev, videoId], 
     });
   };
 
-  const removeFromWatchLater = (videoId) => {
-    setWatchLaterVideos(prev => prev.filter(id => id !== videoId));
+  const removeFromWatchLater = (videoId: string) => {
+    setWatchLaterVideos(prev => prev.filter(id => id !== videoId)), ;
   };
 
-  const isInWatchLater = (videoId): boolean => {
-    return watchLaterVideos.includes(videoId);
+  const isInWatchLater = (videoId: string): boolean => {
+    return,  watchLaterVideos.includes(videoId: string), ;
   };
 
   const clearWatchLater = () => {
-    setWatchLaterVideos([]);
+    setWatchLaterVideos([]), ;
   };
 
   const value = {
@@ -66,7 +67,7 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
-    clearWatchLater
+    clearWatchLater, ;
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import { ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowDownTrayIcon, XIcon } from '@heroicons/react/24/outline';
 
 import { PWAEvents, PWAUtils } from '../src/utils/pwa.ts';
 
@@ -14,48 +14,48 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  const [isInstalling, setIsInstalling] = useState<boolean>(false);
 
  useEffect(() => {
- // Check if PWA is already installed
+ // Check if PWA is already installed;
  if (PWAUtils.isInstalled()) {
  return;
  }
 
- // Check if installation is supported
+ // Check if installation is supported;
  if (!PWAUtils.canInstall()) {
  return;
  }
 
- // Listen for beforeinstallprompt event
+ // Listen for beforeinstallprompt event;
  const handleBeforeInstallPrompt = (e: Event) => {
- // Prevent the mini-infobar from appearing on mobile
+ // Prevent the mini-infobar from appearing on mobile;
  e.preventDefault();
 
- // Save the event so it can be triggered later
+ // Save the event so it can be triggered later;
  setDeferredPrompt(e);
 
- // Check if user has previously dismissed the banner
+ // Check if user has previously dismissed the banner;
  const dismissedTime = (localStorage as any).getItem('pwa-banner-dismissed');
  if (dismissedTime as any) {
  const dismissedDate = new Date(parseInt(dismissedTime, 10));
  const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
 
- // Don't show banner if dismissed within last 30 days
+ // Don't show banner if dismissed within last 30 days;
  if (daysSinceDismissed < 30) {
  return;
  }
- // Show the banner after a delay
+ // Show the banner after a delay;
  setTimeout((() => {
  setShowBanner(true);
  PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_SHOWN);
  }) as any, 3000);
  };
 
- // Listen for app installed event
+ // Listen for app installed event;
  const handleAppInstalled = () => {
  setShowBanner(false);
  setDeferredPrompt(null);
  PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
 
- // Store install date
+ // Store install date;
  (localStorage as any).setItem('pwa-install-date', Date.now().toString());
  };
 
@@ -76,10 +76,10 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  setIsInstalling(true);
 
  try {
- // Show the install prompt
+ // Show the install prompt;
  await deferredPrompt.prompt();
 
- // Wait for the user to respond to the prompt
+ // Wait for the user to respond to the prompt;
  const { outcome } = await deferredPrompt.userChoice;
 
  if (outcome === 'accepted') {
@@ -88,7 +88,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { reason: 'User dismissed' });
  }
 
- // Clear the deferredPrompt
+ // Clear the deferredPrompt;
  setDeferredPrompt(null);
  setShowBanner(false);
  } catch (error) {
@@ -101,7 +101,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  const handleDismiss = () => {
  setShowBanner(false);
 
- // Store dismissal time
+ // Store dismissal time;
  (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
 
  PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_DISMISSED);
@@ -153,7 +153,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  <div className="flex items-center space-x-2">
  {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && (
  <button />
-// FIXED:  onClick={(e) => handleInstall(e)}
+// FIXED:  onClick={(e: any) => handleInstall(e)}
 // FIXED:  disabled={isInstalling}
 // FIXED:  className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
  >
@@ -162,11 +162,11 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  )}
 
  <button />
-// FIXED:  onClick={(e) => handleDismiss(e)}
+// FIXED:  onClick={(e: any) => handleDismiss(e)}
 // FIXED:  className="p-1 hover:bg-white/20 rounded-lg transition-colors"
 // FIXED:  aria-label="Dismiss install banner"
  >
- <XMarkIcon className="h-5 w-5" />
+ <XIcon className="h-5 w-5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

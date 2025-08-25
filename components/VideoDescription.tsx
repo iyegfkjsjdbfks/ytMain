@@ -7,7 +7,7 @@ import { BellIcon } from '@heroicons/react/24/outline';
 
 import { formatCount } from '../utils/numberUtils.ts';
 
-import { SummarizeIcon } from 'icons/SummarizeIcon.tsx';
+import { SummarizeIcon } from 'icons/SummarizeIcon';
 
 import type { Video, Channel } from '../src/types/core.ts';
 
@@ -18,8 +18,8 @@ interface VideoDescriptionProps {
  showFullDescription?: boolean;
  isSummarizing?: boolean;
  onSubscribe?: (channelId) => void;
- onLike?: (videoId) => void;
- onShare?: (videoId) => void;
+ onLike?: (videoId: string) => void;
+ onShare?: (videoId: string) => void;
  onToggleDescription?: () => void;
 }
 
@@ -43,14 +43,14 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
  <div className="flex items-center justify-between mb-3">
  <div className="flex items-center space-x-3">
  <Link to={channelLink} className="flex-shrink-0">
- <img
+ <img;
 // FIXED:  src={video.channelAvatarUrl || channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'}
 // FIXED:  alt={`${video.channelName || channel?.name || 'Unknown'} channel avatar`}
 // FIXED:  className="w-10 h-10 rounded-full object-cover" />
  />
 // FIXED:  </Link>
  <div className="min-w-0 flex-grow">
- <Link
+ <Link;
  to={channelLink}
 // FIXED:  className="text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors block truncate" />
  >
@@ -66,9 +66,9 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 // FIXED:  </div>
  <div className="flex items-center space-x-2">
  <button />
-// FIXED:  onClick={(e) => onSubscribe(e)}
+// FIXED:  onClick={(e: any) => onSubscribe(e)}
 // FIXED:  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
- isSubscribed
+ isSubscribed;
  ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600'
  : 'bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200'
  }`}
@@ -77,7 +77,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
  {isSubscribed ? 'Subscribed' : 'Subscribe'}
 // FIXED:  </button>
  {isSubscribed && (
- <button
+ <button;
 // FIXED:  className="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/70 text-neutral-700 dark:text-neutral-200"
 // FIXED:  aria-label="Manage notifications for this channel"
  title="Notifications" />
@@ -89,14 +89,14 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 // FIXED:  </div>
 
  {/* Video Description */}
- <div
+ <div;
 // FIXED:  className={`text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap leading-relaxed cursor-pointer ${
  !showFullDescription ? 'max-h-20 overflow-hidden' : ''
  }`} />
-// FIXED:  onClick={(e) => onToggleDescription(e)}
+// FIXED:  onClick={(e: any) => onToggleDescription(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e) => {
+ onKeyDown={(e: any) => {
  if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -106,7 +106,7 @@ onToggleDescription();
  >
  <div className="text-sm" id="video-description-content">
  <span className="font-medium text-neutral-800 dark:text-neutral-200">
- {video.uploadedAt} &bull; {typeof video.views === 'string' && ((video.views as string)).includes(' ') ? ((video.views as string)).split(' ')[0] : video.views} views
+ {video.uploadedAt} &bull; {typeof video.views === 'string' && ((video.views as string)).includes(' ') ? ((video.views as string)).split(' ')[0] : video.views} views;
 // FIXED:  </span>
  <br/>
  {video.description}
@@ -116,10 +116,10 @@ onToggleDescription();
  {/* Show More/Less Button */}
  {(video.description.length > 150 || video.description.includes('\n')) && (
  <span />
-// FIXED:  onClick={(e) => onToggleDescription(e)}
+// FIXED:  onClick={(e: any) => onToggleDescription(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e) => {
+ onKeyDown={(e: any) => {
  if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -134,7 +134,7 @@ onToggleDescription();
  {canSummarize && (
  <div className="mt-4">
  <button />
-// FIXED:  onClick={(e) => onSummarizeDescription(e)}
+// FIXED:  onClick={(e: any) => onSummarizeDescription(e)}
 // FIXED:  disabled={isSummarizing}
 // FIXED:  className="flex items-center space-x-1.5 bg-sky-500/10 dark:bg-sky-400/10 hover:bg-sky-500/20 dark:hover:bg-sky-400/20 text-sky-700 dark:text-sky-300 px-3.5 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
 // FIXED:  aria-label="Summarize video description with AI"
@@ -158,7 +158,7 @@ onToggleDescription();
  <div className="mt-3 p-3.5 bg-sky-50 dark:bg-sky-900/40 border border-sky-200 dark:border-sky-700/60 rounded-lg">
  <h3 className="text-sm font-semibold text-sky-800 dark:text-sky-200 mb-1.5 flex items-center">
  <SummarizeIcon className="w-5 h-5 mr-1.5 text-sky-600 dark:text-sky-400" />
- AI Generated Summary
+ AI Generated Summary;
 // FIXED:  </h3>
  <p className="text-sm text-neutral-700 dark:text-neutral-200 italic leading-relaxed whitespace-pre-wrap">
  {summary}

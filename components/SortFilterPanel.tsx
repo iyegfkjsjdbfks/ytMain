@@ -54,7 +54,7 @@ return null;
 
  return (
  <div className="relative">
- <button
+ <button;
  ref={buttonRef} />
 // FIXED:  onClick={() => setShowPanel(prev => !prev: React.MouseEvent)}
 // FIXED:  className="flex items - center text - sm font - medium text - neutral - 700 dark:text - neutral - 300 hover:bg - neutral - 100 dark:hover:bg - neutral - 800 px - 3 py - 1.5 rounded - md border border - neutral - 300 dark:border - neutral - 700 transition - colors disabled:opacity - 50 disabled:cursor - not - allowed"
@@ -66,10 +66,10 @@ return null;
 // FIXED:  disabled={disabled}
  >
  <AdjustmentsHorizontalIcon className="w - 4 h - 4 mr - 1.5" />
- Sort by
+ Sort by;
 // FIXED:  </button>
  {showPanel && (}
- <div
+ <div;
  ref={panelRef}
 // FIXED:  id="sort - options - panel"
 // FIXED:  className="absolute top - full right - 0 mt - 1.5 w - 48 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - xl z - 30 py - 1 animate - fade - in - fast"
@@ -78,7 +78,7 @@ return null;
 // FIXED:  aria - labelledby="filter - button" />
  >
  {sortOptions.map((option) => (}
- <button
+ <button;
  key={option.value} />
 // FIXED:  onClick={() => handleSortOptionClick(option.value: React.MouseEvent)}
 // FIXED:  className={`w - full text - left px - 3 py - 2 text - sm flex items - center justify - between}

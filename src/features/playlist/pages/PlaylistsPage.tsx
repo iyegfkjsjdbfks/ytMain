@@ -1,6 +1,7 @@
 import React from 'react';
+import React from 'react';
 /**
- * PlaylistsPage component for displaying all playlists
+ * PlaylistsPage component for displaying all playlists;
  */
 const PlaylistsPage: React.FC = () => {
  return (
@@ -9,7 +10,7 @@ const PlaylistsPage: React.FC = () => {
  <p className='text-gray-600 mb-4'>Browse and manage your playlists</p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
- This is a placeholder for the playlists page that will display all
+ This is a placeholder for the playlists page that will display all;
  your created and saved playlists.
 // FIXED:  </p>
  <p className='mt-2'>

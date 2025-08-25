@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { XMarkIcon } from '@heroicons / react / 24 / outline';
+import { XIcon } from '@heroicons / react / 24 / outline';
 
 export interface ShortsFiltersProps {}
  categories: string;,
  selectedCategory: string;
- onCategoryChange: (category) => void;,
- onClose: () => void
+ onCategoryChange: (category: any) => void;,
+ onClose: () => void;
 }
 
 const ShortsFilters: React.FC < ShortsFiltersProps> = ({}
@@ -30,22 +30,22 @@ return 'All';
 // FIXED:  className="p - 1 text - white / 60 hover:text - white transition - colors"
 // FIXED:  aria - label="Close filters"
  >
- <XMarkIcon className="w - 4 h - 4" />
+ <XIcon className="w - 4 h - 4" />
 // FIXED:  </button>
 // FIXED:  </div>
 
  <div className="flex flex - wrap gap - 2">
- {categories.map((category) => (}
- <button
+ {categories.map((category: any) => (}
+ <button;
  key={category} />
 // FIXED:  onClick={() => onCategoryChange(category: React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 1.5 rounded - full text - sm font - medium transition - colors ${}
- selectedCategory === category
+ selectedCategory === category;
  ? 'bg - white text - black'
  : 'bg - white / 20 text - white hover:bg - white / 30'
  }`}
  >
- {formatCategoryName(category)}
+ {formatCategoryName(category: any)}
 // FIXED:  </button>
  ))}
 // FIXED:  </div>
@@ -55,7 +55,7 @@ return 'All';
 // FIXED:  onClick={() => onCategoryChange('all': React.MouseEvent)}
 // FIXED:  className="mt - 3 text - sm text - white / 60 hover:text - white transition - colors"
  >
- Clear filter
+ Clear filter;
 // FIXED:  </button>
  )}
 // FIXED:  </div>

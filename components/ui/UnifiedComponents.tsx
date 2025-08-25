@@ -1,10 +1,10 @@
 import React, { MouseEvent, ReactNode, FC, forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes, InputHTMLAttributes } from 'react';
 
-import { ExclamationTriangleIcon, CheckCircleIcon, InformationCircleIcon, XMarkIcon, ArrowPathIcon } from '@heroicons / react / 24 / outline';
+import { ExclamationTriangleIcon, CheckCircleIcon, InformationCircleIcon, XIcon, ArrowPathIcon } from '@heroicons / react / 24 / outline';
 
 import { cn } from '../../utils / cn';
 
-// Unified Button Component
+// Unified Button Component;
 export interface UnifiedButtonProps extends ButtonHTMLAttributes < HTMLButtonElement> {}
  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'success';
  size?: 'sm' | 'md' | 'lg';
@@ -37,12 +37,12 @@ export const UnifiedButton = forwardRef < HTMLButtonElement, UnifiedButtonProps>
  className,
  children,
  disabled,
- ...props
+ ...props;
  }, ref) => {}
  const isDisabled = disabled || loading;
 
  return (
- <button
+ <button;
  ref={ref}
 // FIXED:  className={cn(}
  'inline - flex items - center justify - center font - medium rounded - md border transition - colors duration - 200 focus:outline - none focus:ring - 2 focus:ring - offset - 2 focus:ring - red - 500 disabled:opacity - 50 disabled:cursor - not - allowed',
@@ -69,7 +69,7 @@ export const UnifiedButton = forwardRef < HTMLButtonElement, UnifiedButtonProps>
 
 UnifiedButton.displayName = 'UnifiedButton';
 
-// Unified Input Component
+// Unified Input Component;
 export interface UnifiedInputProps extends InputHTMLAttributes < HTMLInputElement> {}
  label?: string;
  error?: string;
@@ -89,7 +89,7 @@ export const UnifiedInput = forwardRef < HTMLInputElement, UnifiedInputProps>(;
  fullWidth = false,
  className,
  id,
- ...props
+ ...props;
  }, ref) => {}
  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
  const hasError = !!error;
@@ -97,7 +97,7 @@ export const UnifiedInput = forwardRef < HTMLInputElement, UnifiedInputProps>(;
  return (
  <div className={cn('space - y - 1', fullWidth && 'w - full')}>
  {label && (}
- <label
+ <label;
 // FIXED:  htmlFor={inputId}
 // FIXED:  className="block text - sm font - medium text - gray - 700 dark:text - gray - 300" />
  >
@@ -110,12 +110,12 @@ export const UnifiedInput = forwardRef < HTMLInputElement, UnifiedInputProps>(;
  <span className="text - gray - 400">{leftIcon}</span>
 // FIXED:  </div>
  )}
- <input
+ <input;
  ref={ref}
 // FIXED:  id={inputId}
 // FIXED:  className={cn(}
  'block w - full px - 3 py - 2 border rounded - md shadow - sm placeholder - gray - 400 focus:outline - none focus:ring - 2 focus:ring - red - 500 focus:border - red - 500 transition - colors duration - 200',
- hasError
+ hasError;
  ? 'border - red - 300 text - red - 900 placeholder - red - 300 focus:ring - red - 500 focus:border - red - 500'
  : 'border - gray - 300 dark:border - gray - 600 dark:bg - gray - 700 dark:text - white',
  leftIcon && 'pl - 10',
@@ -144,7 +144,7 @@ export const UnifiedInput = forwardRef < HTMLInputElement, UnifiedInputProps>(;
 
 UnifiedInput.displayName = 'UnifiedInput';
 
-// Unified Card Component
+// Unified Card Component;
 export interface UnifiedCardProps {}
  children?: React.ReactNode;
  className?: string;
@@ -174,7 +174,7 @@ export const UnifiedCard: React.FC < UnifiedCardProps> = ({}
  border = true,
  hover = false }) => {}
  return (
- <div
+ <div;
 // FIXED:  className={cn(}
  'bg - white dark:bg - gray - 800 rounded - lg transition - all duration - 200',
  cardPadding.padding,
@@ -188,7 +188,7 @@ export const UnifiedCard: React.FC < UnifiedCardProps> = ({}
  );
 };
 
-// Unified Alert Component
+// Unified Alert Component;
 export interface UnifiedAlertProps {}
  type?: 'info' | 'success' | 'warning' | 'error';
  title?: string;
@@ -256,7 +256,7 @@ export const UnifiedAlert: React.FC < UnifiedAlertProps> = ({}
  {dismissible && onDismiss && (}
  <div className="ml - auto pl - 3">
  <div className="-mx - 1.5 -my - 1.5">
- <button
+ <button;
 // FIXED:  type="button"
 // FIXED:  className={cn(}
  'inline - flex rounded - md p - 1.5 focus:outline - none focus:ring - 2 focus:ring - offset - 2 transition - colors',
@@ -265,7 +265,7 @@ export const UnifiedAlert: React.FC < UnifiedAlertProps> = ({}
 // FIXED:  onClick={(e: React.MouseEvent) => onDismiss(e)}
  >
  <span className="sr - only">Dismiss</span>
- <XMarkIcon className="h - 5 w - 5" />
+ <XIcon className="h - 5 w - 5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -275,7 +275,7 @@ export const UnifiedAlert: React.FC < UnifiedAlertProps> = ({}
  );
 };
 
-// Unified Loading Component
+// Unified Loading Component;
 export interface UnifiedLoadingProps {}
  type?: 'spinner' | 'dots' | 'pulse';
  size?: 'sm' | 'md' | 'lg';
@@ -299,7 +299,7 @@ export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({}
  switch (type as any) {}
  case 'spinner':
  return (
- <ArrowPathIcon
+ <ArrowPathIcon;
 // FIXED:  className={cn(sizeClass, 'animate - spin text - gray - 400', className)} />
  />
  );
@@ -307,7 +307,7 @@ export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({}
  return (
  <div className={cn('flex space - x - 1', className)}>
  {[0, 1, 2].map((i) => (}
- <div
+ <div;
  key={i}
 // FIXED:  className={cn(}
  'bg - gray - 400 rounded - full animate - pulse',
@@ -321,14 +321,14 @@ export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({}
  );
  case 'pulse':
  return (
- <div
+ <div;
 // FIXED:  className={cn(}
  'bg - gray - 300 dark:bg - gray - 600 rounded animate - pulse',
  sizeClass,
  className)} />
  />
  );
- default: return null
+ default: return null;
  };
 
  return (
@@ -341,7 +341,7 @@ export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({}
  );
 };
 
-// Unified Modal Component
+// Unified Modal Component;
 export interface UnifiedModalProps {}
  isOpen: boolean;,
  onClose: () => void;
@@ -378,11 +378,11 @@ return null;
  };
 
  return (
- <div
+ <div;
 // FIXED:  className="fixed inset - 0 z - 50 flex items - center justify - center p - 4 bg - black bg - opacity - 50" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleOverlayClick(e)}
  >
- <div
+ <div;
 // FIXED:  className={cn(}
  'bg - white dark:bg - gray - 800 rounded - lg shadow - xl w - full',
  modalSizes.size,
@@ -400,7 +400,7 @@ return null;
 // FIXED:  onClick={(e: React.MouseEvent) => onClose(e)}
 // FIXED:  className="text - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300 transition - colors"
  >
- <XMarkIcon className="w - 6 h - 6" />
+ <XIcon className="w - 6 h - 6" />
 // FIXED:  </button>
  )}
 // FIXED:  </div>
@@ -413,7 +413,7 @@ return null;
  );
 };
 
-// Export all components
+// Export all components;
 export {}
  UnifiedButton as Button,
  UnifiedInput as Input,

@@ -1,32 +1,32 @@
-// SearchResultsPage - React Component
+// SearchResultsPage - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface SearchResultsPageProps {
   className?: string;
   children?: React.ReactNode;
   onLoad?: () => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void, 
 }
 
 export const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError, 
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const initialize = async () => {
-      try {
+      try {;
         await new Promise(resolve => setTimeout(resolve, 200));
         setIsReady(true);
-        onLoad?.();
+        onLoad?.(), 
       } catch (err) {
         const error = err instanceof Error ? err : new Error('Initialization failed');
         setError(error);
-        onError?.(error);
+        onError?.(error), 
       }
     };
 
@@ -39,7 +39,7 @@ export const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
         <h3>Error in SearchResultsPage</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

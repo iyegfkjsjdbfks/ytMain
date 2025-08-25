@@ -1,15 +1,15 @@
 import React, { lazy, FC, MouseEvent, type React } from 'react';
 import { Link } from 'react-router-dom';
 
-import { EyeIcon, CalendarDaysIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, CalendarIcon, PlayIcon } from '@heroicons/react/24/outline';
 
-import { useWatchLater } from '../contexts/WatchLaterContext.tsx';
+import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks.ts';
-import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils.tsx';
+import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 
-import { SaveIcon } from 'icons/UnifiedIcon.tsx';
-import ImageWithFallback from 'ImageWithFallback.tsx';
-import { IconButton } from 'ui/Button.tsx';
+import { SaveIcon } from 'icons/UnifiedIcon';
+import ImageWithFallback from 'ImageWithFallback';
+import { IconButton } from 'ui/Button';
 
 import type { Video } from '../types.ts';
 
@@ -47,7 +47,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
  {/* Thumbnail */}
  <div className="relative flex-shrink-0">
  <Link to={videoUrl} className="block">
- <ImageWithFallback
+ <ImageWithFallback;
 // FIXED:  src={video?.thumbnailUrl || ""}
 // FIXED:  alt={video.title}
 // FIXED:  className="w-48 h-28 object-cover rounded-lg"
@@ -81,7 +81,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
  <div className="flex items-center space-x-2 mt-2">
  <Link to={channelUrl}>
  {video.channelAvatarUrl ? (
- <img
+ <img;
 // FIXED:  src={video.channelAvatarUrl}
 // FIXED:  alt={video.channelName}
 // FIXED:  className="w-6 h-6 rounded-full object-cover"
@@ -93,7 +93,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 // FIXED:  </div>
  )}
 // FIXED:  </Link>
- <Link
+ <Link;
  to={channelUrl}
 // FIXED:  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" />
  >
@@ -108,7 +108,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
  <span>{video.views}</span>
 // FIXED:  </div>
  <div className="flex items-center space-x-1">
- <CalendarDaysIcon className="w-4 h-4" />
+ <CalendarIcon className="w-4 h-4" />
  <span>{video.uploadedAt}</span>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -119,7 +119,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 
  <div className="flex-shrink-0">
  <IconButton />
-// FIXED:  onClick={(e) => handleToggleWatchLater(e)}
+// FIXED:  onClick={(e: any) => handleToggleWatchLater(e)}
  variant="ghost"
  size="sm"
 // FIXED:  className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400`}
@@ -138,7 +138,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
  <div className="group">
  <div className="relative mb-3">
  <Link to={videoUrl} className="block">
- <ImageWithFallback
+ <ImageWithFallback;
 // FIXED:  src={video?.thumbnailUrl || ""}
 // FIXED:  alt={video.title}
 // FIXED:  className="w-full aspect-video object-cover rounded-lg group-hover:rounded-none transition-all duration-200"
@@ -165,7 +165,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
  <div className="flex space-x-3 flex-1 min-w-0">
  {showChannel && video.channelAvatarUrl && (
  <Link to={channelUrl} className="flex-shrink-0">
- <img
+ <img;
 // FIXED:  src={video.channelAvatarUrl}
 // FIXED:  alt={video.channelName}
 // FIXED:  className="w-9 h-9 rounded-full object-cover"
@@ -182,7 +182,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 // FIXED:  </Link>
 
  {showChannel && (
- <Link
+ <Link;
  to={channelUrl}
 // FIXED:  className="block text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors mt-1" />
  >
@@ -200,7 +200,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 
  <div className="flex-shrink-0 ml-2">
  <IconButton />
-// FIXED:  onClick={(e) => handleToggleWatchLater(e)}
+// FIXED:  onClick={(e: any) => handleToggleWatchLater(e)}
  variant="ghost"
  size="sm"
 // FIXED:  className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity`}

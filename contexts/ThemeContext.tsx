@@ -27,7 +27,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [actualTheme, setActualTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    // Load theme from localStorage
+    // Load theme from localStorage;
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {
       setThemeState(savedTheme);
@@ -55,7 +55,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
     applyTheme();
 
-    // Listen for system theme changes
+    // Listen for system theme changes;
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       if (theme === 'system') {
@@ -75,7 +75,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const value = {
     theme,
     setTheme,
-    actualTheme
+    actualTheme;
   };
 
   return (

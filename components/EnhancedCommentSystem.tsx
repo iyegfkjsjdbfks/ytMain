@@ -1,11 +1,10 @@
 import React, { FC, useState, useEffect, useMemo, useRef } from 'react';
 
 import { HeartIcon, ChatBubbleLeftIcon, FlagIcon, PencilIcon, TrashIcon, ChevronDownIcon, ChevronUpIcon, ExclamationTriangleIcon } from '@heroicons / react / 24 / outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons / react / 24 / solid';
-const HeartIconSolid = HeartSolidIcon;
+import { HeartIcon as HeartIcon } from '@heroicons / react / 24 / solid';
+const HeartIconSolid = HeartIcon;
 
-import { formatDistanceToNow } from '../utils / dateUtils';
-
+import { formatDistanceToNow } from '../utils / dateUtils'
 export interface Comment {}
  id: string;,
  content: string;
@@ -27,7 +26,7 @@ export interface Comment {}
  isReported: boolean;,
  moderationStatus: 'approved' | 'pending' | 'flagged' | 'removed';
  mentions: string;,
- hashtags: string
+ hashtags: string;
 }
 
 export interface EnhancedCommentSystemProps {}
@@ -41,10 +40,10 @@ export interface EnhancedCommentSystemProps {}
  onAddComment: (content, parentId?: string) => void;
  onEditComment: (commentId,
  content) => void;
- onDeleteComment: (commentId) => void;,
- onLikeComment: (commentId) => void;
- onDislikeComment: (commentId) => void;,
- onPinComment: (commentId) => void;
+ onDeleteComment: (commentId: any) => void;,
+ onLikeComment: (commentId: any) => void;
+ onDislikeComment: (commentId: any) => void;,
+ onPinComment: (commentId: any) => void;
  onReportComment: (commentId,
  reason) => void;
  onModerateComment: (commentId,
@@ -122,7 +121,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  };
 
  const toggleReplies = (commentId: any) => {}
- setExpandedReplies((prev) => {}
+ setExpandedReplies((prev: any) => {}
  const newSet = new Set(prev);
  if (newSet.has(commentId)) {}
  newSet.delete(commentId);
@@ -133,7 +132,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  });
  };
 
- const formatNumber = (num): (string) => {}
+ const formatNumber = (num): (string: any) => {}
  if (num >= 1000000) {}
  return `${(num / 1000000).toFixed(1) }M`;
  } else if (num >= 1000) {}
@@ -148,7 +147,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  const isEditing = editingComment === comment.id;
 
  return (
- <div
+ <div;
  key={comment.id}
 // FIXED:  className={`${isReply ? 'ml - 12 mt - 3' : 'mb - 6'} ${}
  comment.isPinned ? 'bg - blue - 50 dark:bg - blue - 900 / 20 p - 4 rounded - lg' : ''
@@ -156,7 +155,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  >
  <div className="flex space - x - 3">
  {/* Avatar */}
- <img
+ <img;
 // FIXED:  src={comment.authorAvatar}
 // FIXED:  alt={comment.authorName}
 // FIXED:  className="w - 10 h - 10 rounded - full flex - shrink - 0" />
@@ -179,7 +178,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 
  {comment.isChannelOwner && (}
  <span className="bg - gray - 100 dark:bg - gray - 700 text - gray - 700 dark:text - gray - 300 px - 2 py - 0.5 rounded text - xs">
- Creator
+ Creator;
 // FIXED:  </span>
  )}
 
@@ -188,7 +187,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  )}
 
  <span className="text - sm text - gray - 500 dark:text - gray - 400">
- {formatDistanceToNow(new Date(comment.timestamp))} ago
+ {formatDistanceToNow(new Date(comment.timestamp))} ago;
 // FIXED:  </span>
 
  {comment.isEdited && (}
@@ -199,7 +198,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  {/* Comment Content */}
  {isEditing ? (}
  <div className="mb - 3">
- <textarea
+ <textarea;
 // FIXED:  value={editContent} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setEditContent(e.target.value)}
 // FIXED:  className="w - full p - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white resize - none"
@@ -210,7 +209,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 // FIXED:  onClick={() => handleEditSubmit(comment.id: React.MouseEvent)}
 // FIXED:  className="px - 3 py - 1 bg - blue - 600 text - white rounded text - sm hover:bg - blue - 700"
  >
- Save
+ Save;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => {}
@@ -219,7 +218,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  }
 // FIXED:  className="px - 3 py - 1 border border - gray - 300 dark:border - gray - 600 rounded text - sm hover:bg - gray - 50 dark:hover:bg - gray - 700"
  >
- Cancel
+ Cancel;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -251,13 +250,13 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  <button />
 // FIXED:  onClick={() => onLikeComment(comment.id: React.MouseEvent)}
 // FIXED:  className={`flex items - center space - x - 1 text - sm transition - colors ${}
- comment.isLiked
+ comment.isLiked;
  ? 'text - blue - 600 dark:text - blue - 400'
  : 'text - gray - 500 dark:text - gray - 400 hover:text - gray - 700 dark:hover:text - gray - 300'
  }`}
  >
  {comment.isLiked ? (}
- <HeartSolidIcon className="w - 4 h - 4" />
+ <HeartIcon className="w - 4 h - 4" />
  ) : (
  <HeartIcon className="w - 4 h - 4" />
  )}
@@ -267,7 +266,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  <button />
 // FIXED:  onClick={() => onDislikeComment(comment.id: React.MouseEvent)}
 // FIXED:  className={`text - sm transition - colors ${}
- comment.isDisliked
+ comment.isDisliked;
  ? 'text - red - 600 dark:text - red - 400'
  : 'text - gray - 500 dark:text - gray - 400 hover:text - gray - 700 dark:hover:text - gray - 300'
  }`}
@@ -282,7 +281,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 // FIXED:  onClick={() => setReplyingTo(comment.id: React.MouseEvent)}
 // FIXED:  className="text - sm text - gray - 500 dark:text - gray - 400 hover:text - gray - 700 dark:hover:text - gray - 300"
  >
- Reply
+ Reply;
 // FIXED:  </button>
  )}
 
@@ -339,19 +338,19 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 // FIXED:  onClick={() => onModerateComment(comment.id, 'approve': React.MouseEvent)}
 // FIXED:  className="text - sm text - green - 600 hover:text - green - 700"
  >
- Approve
+ Approve;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => onModerateComment(comment.id, 'flag': React.MouseEvent)}
 // FIXED:  className="text - sm text - yellow - 600 hover:text - yellow - 700"
  >
- Flag
+ Flag;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => onModerateComment(comment.id, 'remove': React.MouseEvent)}
 // FIXED:  className="text - sm text - red - 600 hover:text - red - 700"
  >
- Remove
+ Remove;
 // FIXED:  </button>
 // FIXED:  </div>
  )}
@@ -361,12 +360,12 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  {/* Reply Input */}
  {replyingTo === comment.id && (}
  <div className="mt - 3">
- <textarea
+ <textarea;
  ref={replyTextareaRef}
 // FIXED:  placeholder={`Reply to ${comment.authorName}...`}
 // FIXED:  className="w - full p - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white resize - none"
  rows={2} />
- onKeyDown={(e) => {}
+ onKeyDown={(e: any) => {}
  if (e.key === 'Enter' && !e.shiftKey) {}
  e.preventDefault();
  handleSubmitReply(comment.id, e.currentTarget.value);
@@ -385,13 +384,13 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  }
 // FIXED:  className="px - 3 py - 1 bg - blue - 600 text - white rounded text - sm hover:bg - blue - 700"
  >
- Reply
+ Reply;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => setReplyingTo(null: React.MouseEvent)}
 // FIXED:  className="px - 3 py - 1 border border - gray - 300 dark:border - gray - 600 rounded text - sm hover:bg - gray - 50 dark:hover:bg - gray - 700"
  >
- Cancel
+ Cancel;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -416,7 +415,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 
  {expandedReplies.has(comment.id) && (}
  <div className="mt - 3">
- {comment.replies.map((reply) => renderComment(reply, true))}
+ {comment.replies.map((reply: any) => renderComment(reply, true))}
 // FIXED:  </div>
  )}
 // FIXED:  </div>
@@ -427,11 +426,11 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  );
  };
 
- // Filter and sort comments with memoization
+ // Filter and sort comments with memoization;
  const sortedComments = useMemo(() => {}
- const topLevelComments = comments.filter((comment) => !comment.parentId);
- const pinnedComments = topLevelComments.filter((comment) => comment.isPinned);
- const regularComments = topLevelComments.filter((comment) => !comment.isPinned);
+ const topLevelComments = comments.filter((comment: any) => !comment.parentId);
+ const pinnedComments = topLevelComments.filter((comment: any) => comment.isPinned);
+ const regularComments = topLevelComments.filter((comment: any) => !comment.isPinned);
 
  const sorted = regularComments.sort((a,
  b) => {}
@@ -442,7 +441,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
  case 'popular':
  return b.likes - a.likes;
- default: return 0
+ default: return 0;
  }
 
  });
@@ -464,10 +463,10 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  {/* Header */}
  <div className="flex items - center justify - between">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white">
- {formatNumber(comments.length)} Comments
+ {formatNumber(comments.length)} Comments;
 // FIXED:  </h3>
 
- <select
+ <select;
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={(e: React.ChangeEvent) => onSortChange(e.target.value as any)}
 // FIXED:  className="px - 3 py - 1 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white text - sm"
@@ -481,13 +480,13 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  {/* Add Comment */}
  {currentUserId && (}
  <div className="flex space - x - 3">
- <img
+ <img;
 // FIXED:  src={`https://picsum.photos / 40 / 40?random="${currentUserId}`}"
 // FIXED:  alt="Your avatar"
 // FIXED:  className="w - 10 h - 10 rounded - full flex - shrink - 0" />
  />
  <div className="flex - 1">
- <textarea
+ <textarea;
  ref={textareaRef}
 // FIXED:  value={newComment} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setNewComment(e.target.value)}
@@ -500,14 +499,14 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 // FIXED:  onClick={() => setNewComment('': React.MouseEvent)}
 // FIXED:  className="px - 4 py - 2 text - gray - 600 dark:text - gray - 400 hover:text - gray - 800 dark:hover:text - gray - 200"
  >
- Cancel
+ Cancel;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSubmitComment(e)}
 // FIXED:  disabled={!newComment.trim()}
 // FIXED:  className="px - 4 py - 2 bg - blue - 600 text - white rounded hover:bg - blue - 700 disabled:opacity - 50 disabled:cursor - not - allowed"
  >
- Comment
+ Comment;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -516,7 +515,7 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
 
  {/* Comments List */}
  <div className="space - y - 6">
- {sortedComments.map((comment) => renderComment(comment))}
+ {sortedComments.map((comment: any) => renderComment(comment))}
 // FIXED:  </div>
 
  {/* Report Modal */}
@@ -524,13 +523,13 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  <div className="fixed inset - 0 bg - black / 50 flex items - center justify - center z - 50">
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 max - w - md w - full mx - 4">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Report Comment
+ Report Comment;
 // FIXED:  </h3>
 
  <div className="space - y - 3 mb - 6">
- {reportReasons.map((reason) => (}
+ {reportReasons.map((reason: any) => (}
  <label key={reason} className="flex items - center">
- <input
+ <input;
 // FIXED:  type="radio"
 // FIXED:  name="reportReason"
 // FIXED:  value={reason}
@@ -551,14 +550,14 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  }
 // FIXED:  className="flex - 1 px - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded text - gray - 700 dark:text - gray - 300 hover:bg - gray - 50 dark:hover:bg - gray - 700"
  >
- Cancel
+ Cancel;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleReport(showReportModal: React.MouseEvent)}
 // FIXED:  disabled={!reportReason}
 // FIXED:  className="flex - 1 px - 4 py - 2 bg - red - 600 text - white rounded hover:bg - red - 700 disabled:opacity - 50 disabled:cursor - not - allowed"
  >
- Report
+ Report;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -566,6 +565,5 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({}
  )}
 // FIXED:  </div>
  );
-};
-
+}
 export default EnhancedCommentSystem;

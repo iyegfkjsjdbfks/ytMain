@@ -1,6 +1,6 @@
 import React from 'react';
 /**
- * GoLivePage component for starting and managing live streams
+ * GoLivePage component for starting and managing live streams;
  */
 const GoLivePage: React.FC = () => {
  return (
@@ -9,7 +9,7 @@ const GoLivePage: React.FC = () => {
  <p className='text-gray-600 mb-4'>Set up and manage your livestream</p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
- This is a placeholder for the Go Live page that will allow you to set
+ This is a placeholder for the Go Live page that will allow you to set;
  up and manage your livestream.
 // FIXED:  </p>
  <p className='mt-2'>

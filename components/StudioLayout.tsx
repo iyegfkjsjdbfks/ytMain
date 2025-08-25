@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-// import StudioSidebar from './StudioSidebar'; // Assuming a StudioSidebar component will be created
-// import StudioHeader from './StudioHeader'; // Assuming a StudioHeader component might be needed
+// import StudioSidebar from './StudioSidebar'; // Assuming a StudioSidebar component will be created;
+// import StudioHeader from './StudioHeader'; // Assuming a StudioHeader component might be needed;
 
 const StudioLayout: React.FC = () => {
  return (
@@ -9,7 +9,7 @@ const StudioLayout: React.FC = () => {
  {/* <StudioHeader /> */}
  <div className="flex flex-1 pt-14"> {/* Adjust pt-14 if StudioHeader has different height */}
  {/* <StudioSidebar /> */}
-      <main
+      <main;
         id="studio-main-content"
         role="main"
         className="flex-1 overflow-y-auto bg-white dark:bg-neutral-900 p-4 md:p-6">

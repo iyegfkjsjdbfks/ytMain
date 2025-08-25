@@ -1,4 +1,4 @@
-// Enhanced Live Streaming Types
+// Enhanced Live Streaming Types;
 export interface LiveStream {
  id: string;
  title: string;
@@ -18,7 +18,7 @@ export interface LiveStream {
  creatorAvatar: string;
  settings: LiveStreamSettings;
  stats: LiveStreamStats;
- monetization: LiveStreamMonetization
+ monetization: LiveStreamMonetization;
 }
 
 export interface LiveStreamSettings {
@@ -35,7 +35,7 @@ export interface LiveStreamSettings {
  frameRate: 30 | 60;
  enableRecording: boolean;
  enableMultiplatform: boolean;
- platforms: StreamPlatform
+ platforms: StreamPlatform;
 }
 
 export interface StreamPlatform {
@@ -60,7 +60,7 @@ export interface LiveStreamStats {
  streamHealth: 'excellent' | 'good' | 'fair' | 'poor';
  bitrate: number;
  frameDrops: number;
- latency: number
+ latency: number;
 }
 
 export interface LiveStreamMonetization {
@@ -69,7 +69,7 @@ export interface LiveStreamMonetization {
  adRevenue: number;
  membershipRevenue: number;
  donationRevenue: number;
- superChats: SuperChat
+ superChats: SuperChat;
 }
 
 export interface ChatMessage {
@@ -100,7 +100,7 @@ export interface SuperChat {
  message: string;
  timestamp?: Date;
  color: string;
- duration: number
+ duration: number;
 }
 
 export interface ChatBadge {
@@ -114,7 +114,7 @@ export interface MembershipInfo {
  level: string;
  duration: number; // months,
  badge: string;
- perks: string
+ perks: string;
 }
 
 export interface LivePoll {
@@ -125,7 +125,7 @@ export interface LivePoll {
  isActive: boolean;
  totalVotes: number;
  createdAt: Date;
- duration: number; // in milliseconds
+ duration: number; // in milliseconds;
  endedAt?: Date;
 }
 
@@ -133,7 +133,7 @@ export interface PollOption {
  id: string;
  text: string;
  votes: number;
- percentage: number
+ percentage: number;
 }
 
 export interface QAQuestion {
@@ -157,7 +157,7 @@ export interface ChatModerationAction {
  moderatorId: string;
  reason: string;
  duration?: number; // minutes for timeout,
- timestamp: Date
+ timestamp: Date;
 }
 
 export interface StreamReplay {

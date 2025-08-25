@@ -1,2 +1,2 @@
-// Export all video-related hooks
+// Export all video-related hooks;
 export * from './useVideo';

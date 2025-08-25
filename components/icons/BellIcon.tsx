@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 const BellIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }: any) => (
- <svg
+ <svg;
 // FIXED:  className={className}
  fill="none"
  stroke="currentColor"

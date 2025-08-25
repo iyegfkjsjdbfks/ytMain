@@ -2,7 +2,7 @@ import React, { FC, useState, useRef } from 'react';
 
 import { EllipsisHorizontalIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons / react / 24 / outline';
 
-import AddCommentForm from 'AddCommentForm.tsx';
+import AddCommentForm from 'AddCommentForm';
 import ThumbsDownIcon from './icons / ThumbsDownIcon';
 import ThumbsUpIcon from './icons / ThumbsUpIcon';
 export interface Comment {}
@@ -31,7 +31,7 @@ export interface CommentsSectionProps {}
  activeCommentMenu: string | null;,
  expandedReplies: Record < string, boolean>;
  maxCommentLength: number;,
- onCommentSubmit: (commentText) => void;
+ onCommentSubmit: (commentText: string) => void;
  onReplySubmit: (parentId) => void;,
  onEditSave: (commentId,
  newText, parentId?: string) => void;
@@ -40,7 +40,7 @@ export interface CommentsSectionProps {}
  parentId: string | undefined, action: 'like' | 'dislike') => void;,
  onSortChange: (order: 'top' | 'newest') => void;,
  onSetReplyingTo: (commentId: string | null, text?: string) => void;
- onSetCurrentReplyText: (text) => void;,
+ onSetCurrentReplyText: (text: string) => void;,
  onSetEditingComment: (comment: {id: string; parentId ?  : string} | null) => void;
  onSetActiveCommentMenu: (commentId: string | null) => void;,
  onSetExpandedReplies: (updater: (prev: Record < string, boolean>) => Record < string, boolean>) => void;
@@ -144,7 +144,7 @@ return 0;
 
  {isEditing ? (}
  <div className="space - y - 2">
- <textarea
+ <textarea;
 
 
 
@@ -153,7 +153,7 @@ return 0;
  />
  <div className="flex justify - between items - center">
  <span className={`text - xs ${}
- editText.length > maxCommentLength
+ editText.length > maxCommentLength;
  ? 'text - red - 500 dark:text - red - 400'
  : 'text - neutral - 500 dark:text - neutral - 400'
  }`}>
@@ -176,11 +176,11 @@ return 0;
  <div className="absolute top - full left - 0 mt - 1 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 10 py - 1 min - w-[120px]">
  <button />
  >
- Edit
+ Edit;
 
  <button />
  >
- Delete
+ Delete;
 
 
  )}
@@ -197,7 +197,7 @@ return 0;
  }
  }
 
- comment.isLikedByCurrentUser
+ comment.isLikedByCurrentUser;
  ? 'text - sky - 600 dark:text - sky - 400'
  : 'text - neutral - 500 dark:text - neutral - 400 hover:text - neutral - 700 dark:hover:text - neutral - 200'
  }`}
@@ -222,7 +222,7 @@ return 0;
  }
  }
 
- comment.isDislikedByCurrentUser
+ comment.isDislikedByCurrentUser;
  ? 'text - red - 500 dark:text - red - 400'
  : 'text - neutral - 500 dark:text - neutral - 400 hover:text - neutral - 700 dark:hover:text - neutral - 200'
  }`}
@@ -241,7 +241,7 @@ return 0;
  }
 
  >
- REPLY
+ REPLY;
 
  )}
 
@@ -253,7 +253,7 @@ return 0;
  <div className="flex items - start space - x - 2.5 mt - 3">
  <img />
  <div className="flex - grow">
- <input
+ <input;
  ref={replyInputRef}
 
 
@@ -264,7 +264,7 @@ return 0;
  />
  <div className="flex justify - between items - center mt - 1.5">
  <span className={`text - xs ${}
- currentReplyText.length > maxCommentLength
+ currentReplyText.length > maxCommentLength;
  ? 'text - red - 500 dark:text - red - 400'
  : 'text - neutral - 500 dark:text - neutral - 400'
  }`}>
@@ -277,11 +277,11 @@ return 0;
  }
 
  >
- Cancel
+ Cancel;
 
  <button />
  >
- Reply
+ Reply;
 
 
 
@@ -317,7 +317,7 @@ return 0;
  {/* Comments Header */}
  <div className="flex items - center justify - between mb - 3">
  <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
- {commentCount} Comments
+ {commentCount} Comments;
 
  <div className="flex items - center space - x - 2 text - sm">
  <button />
@@ -326,7 +326,7 @@ return 0;
  : 'hover:bg - neutral - 100 dark:hover:bg - neutral - 800'
  }`}
  >
- Top
+ Top;
 
  <button />
  commentSortOrder === 'newest'
@@ -334,14 +334,14 @@ return 0;
  : 'hover:bg - neutral - 100 dark:hover:bg - neutral - 800'
  }`}
  >
- Newest
+ Newest;
 
 
 
 
  {/* Add Comment Form */}
  <div className="mb - 6">
- <AddCommentForm
+ <AddCommentForm;
  currentUserAvatarUrl="https://picsum.photos / seed / currentUserComment / 40 / 40"
  onCommentSubmit={onCommentSubmit}
  maxCommentLength={maxCommentLength} />

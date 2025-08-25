@@ -11,7 +11,7 @@ const CreatorStudioPage: React.FC = () => {
             <h2 className="text-xl font-semibold mb-4">Channel Dashboard</h2>
             <p className="text-gray-600 mb-4">Overview of your channel performance and key metrics.</p>
             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-              View Dashboard
+              View Dashboard;
             </button>
           </div>
           
@@ -19,7 +19,7 @@ const CreatorStudioPage: React.FC = () => {
             <h2 className="text-xl font-semibold mb-4">Content Creation</h2>
             <p className="text-gray-600 mb-4">Tools and resources for creating engaging content.</p>
             <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-              Create Content
+              Create Content;
             </button>
           </div>
           
@@ -27,7 +27,7 @@ const CreatorStudioPage: React.FC = () => {
             <h2 className="text-xl font-semibold mb-4">Analytics</h2>
             <p className="text-gray-600 mb-4">Detailed analytics and insights about your content.</p>
             <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-              View Analytics
+              View Analytics;
             </button>
           </div>
           
@@ -35,7 +35,7 @@ const CreatorStudioPage: React.FC = () => {
             <h2 className="text-xl font-semibold mb-4">Audience</h2>
             <p className="text-gray-600 mb-4">Understand your audience demographics and behavior.</p>
             <button className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
-              Audience Insights
+              Audience Insights;
             </button>
           </div>
           
@@ -43,7 +43,7 @@ const CreatorStudioPage: React.FC = () => {
             <h2 className="text-xl font-semibold mb-4">Monetization</h2>
             <p className="text-gray-600 mb-4">Manage your monetization settings and revenue streams.</p>
             <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-              Monetization Settings
+              Monetization Settings;
             </button>
           </div>
           
@@ -51,7 +51,7 @@ const CreatorStudioPage: React.FC = () => {
             <h2 className="text-xl font-semibold mb-4">Community</h2>
             <p className="text-gray-600 mb-4">Engage with your community and manage interactions.</p>
             <button className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600">
-              Community Hub
+              Community Hub;
             </button>
           </div>
         </div>
