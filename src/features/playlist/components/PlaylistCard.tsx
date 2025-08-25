@@ -9,6 +9,7 @@ export interface PlaylistCardProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const PlaylistCard: React.FC<PlaylistCardProps> = ({
   className = '',
   children,

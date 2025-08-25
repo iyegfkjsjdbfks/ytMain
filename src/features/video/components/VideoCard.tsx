@@ -8,6 +8,7 @@ export interface VideoCardProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const VideoCard: React.FC<VideoCardProps> = ({
   className = '',
   children,

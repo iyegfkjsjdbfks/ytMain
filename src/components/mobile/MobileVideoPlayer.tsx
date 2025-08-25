@@ -9,6 +9,7 @@ export interface MobileVideoPlayerProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const MobileVideoPlayer: React.FC<MobileVideoPlayerProps> = ({
   className = '',
   children,

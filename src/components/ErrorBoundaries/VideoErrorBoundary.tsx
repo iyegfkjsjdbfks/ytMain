@@ -9,6 +9,7 @@ export interface VideoErrorBoundaryProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const VideoErrorBoundary: React.FC<VideoErrorBoundaryProps> = ({
   className = '',
   children,

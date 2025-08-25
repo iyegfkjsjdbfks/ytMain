@@ -9,6 +9,7 @@ export interface StudioSidebarProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const StudioSidebar: React.FC<StudioSidebarProps> = ({
   className = '',
   children,

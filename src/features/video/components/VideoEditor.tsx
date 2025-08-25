@@ -8,6 +8,7 @@ interface VideoEditorProps {
   className?: string, 
 }
 
+import React from 'react';
 export const VideoEditor: React.FC<VideoEditorProps> = ({
   initialValue = '',
   onChange,
@@ -56,7 +57,7 @@ export const VideoEditor: React.FC<VideoEditorProps> = ({
       )}
       
       <div className="editor-content">
-        <textarea;>
+        <textarea>
           value={value}
           onChange={(e: any) => handleChange(e.target.value)}
           className="editor-textarea"

@@ -13,6 +13,7 @@ interface DashboardData {
   lastUpdated: string,
 }
 
+import React from 'react';
 export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   className = '',
   onDataUpdate, 

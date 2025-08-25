@@ -8,6 +8,7 @@ export interface VideoListProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const VideoList: React.FC<VideoListProps> = ({
   className = '',
   children,

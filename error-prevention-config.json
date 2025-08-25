@@ -1,0 +1,12 @@
+{
+  "enablePreventionMode": true,
+  "enableRealTimeValidation": true,
+  "enableAutoBackup": true,
+  "maxErrorsBeforeAlert": 10,
+  "validationPatterns": {
+    "jsxSyntax": true,
+    "reactImports": true,
+    "typeAnnotations": true,
+    "destructuringPatterns": true
+  }
+}

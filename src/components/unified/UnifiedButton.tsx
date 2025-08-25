@@ -9,6 +9,7 @@ export interface UnifiedButtonProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
   className = '',
   children,

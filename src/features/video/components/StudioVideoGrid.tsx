@@ -8,6 +8,7 @@ export interface StudioVideoGridProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   className = '',
   children,

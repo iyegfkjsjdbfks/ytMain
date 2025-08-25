@@ -9,6 +9,7 @@ export interface NotificationCenterProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   className = '',
   children,

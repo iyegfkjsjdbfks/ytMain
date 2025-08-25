@@ -9,6 +9,7 @@ export interface SuperChatPanelProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   className = '',
   children,

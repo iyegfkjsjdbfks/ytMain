@@ -9,6 +9,7 @@ export interface DataFetchErrorBoundaryProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const DataFetchErrorBoundary: React.FC<DataFetchErrorBoundaryProps> = ({
   className = '',
   children,

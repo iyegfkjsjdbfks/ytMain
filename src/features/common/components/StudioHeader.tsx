@@ -9,6 +9,7 @@ export interface StudioHeaderProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const StudioHeader: React.FC<StudioHeaderProps> = ({
   className = '',
   children,

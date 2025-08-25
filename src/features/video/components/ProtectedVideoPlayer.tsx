@@ -8,6 +8,7 @@ export interface ProtectedVideoPlayerProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const ProtectedVideoPlayer: React.FC<ProtectedVideoPlayerProps> = ({
   className = '',
   children,

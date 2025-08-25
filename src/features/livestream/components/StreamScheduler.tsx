@@ -9,6 +9,7 @@ export interface StreamSchedulerProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   className = '',
   children,

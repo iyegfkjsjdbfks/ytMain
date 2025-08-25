@@ -8,6 +8,7 @@ export interface VideoUploadProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const VideoUpload: React.FC<VideoUploadProps> = ({
   className = '',
   children,

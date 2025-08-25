@@ -9,6 +9,7 @@ export interface ErrorBoundaryProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
   className = '',
   children,

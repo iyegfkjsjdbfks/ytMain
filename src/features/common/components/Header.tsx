@@ -9,6 +9,7 @@ export interface HeaderProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const Header: React.FC<HeaderProps> = ({
   className = '',
   children,

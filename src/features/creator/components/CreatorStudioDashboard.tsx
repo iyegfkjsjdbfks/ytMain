@@ -19,6 +19,7 @@ interface CreatorStudioDashboardProps {
   onDataUpdate?: (data: DashboardData) => void, 
 }
 
+import React from 'react';
 export const CreatorStudioDashboard: React.FC<CreatorStudioDashboardProps> = ({
   className = '',
   onDataUpdate, 

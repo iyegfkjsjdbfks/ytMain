@@ -9,6 +9,7 @@ export interface YouTubePlayerExampleProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   className = '',
   children,

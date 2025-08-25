@@ -9,6 +9,7 @@ export interface LiveStreamStudioProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const LiveStreamStudio: React.FC<LiveStreamStudioProps> = ({
   className = '',
   children,

@@ -9,6 +9,7 @@ export interface CommunityPostProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const CommunityPost: React.FC<CommunityPostProps> = ({
   className = '',
   children,

@@ -9,6 +9,7 @@ export interface CommentSectionProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const CommentSection: React.FC<CommentSectionProps> = ({
   className = '',
   children,

@@ -8,6 +8,7 @@ export interface SubscriptionButtonProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
   className = '',
   children,

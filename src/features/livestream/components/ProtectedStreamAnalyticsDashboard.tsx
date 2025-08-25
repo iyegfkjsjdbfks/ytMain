@@ -9,6 +9,7 @@ export interface ProtectedStreamAnalyticsDashboardProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const ProtectedStreamAnalyticsDashboard: React.FC<ProtectedStreamAnalyticsDashboardProps> = ({
   className = '',
   children,

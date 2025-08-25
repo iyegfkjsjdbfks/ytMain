@@ -9,6 +9,7 @@ export interface ProtectedRouteProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   className = '',
   children,

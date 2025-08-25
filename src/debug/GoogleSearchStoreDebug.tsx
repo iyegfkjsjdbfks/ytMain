@@ -9,6 +9,7 @@ export interface GoogleSearchStoreDebugProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const GoogleSearchStoreDebug: React.FC<GoogleSearchStoreDebugProps> = ({
   className = '',
   children,

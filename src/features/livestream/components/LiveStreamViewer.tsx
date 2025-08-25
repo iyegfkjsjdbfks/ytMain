@@ -9,6 +9,7 @@ export interface LiveStreamViewerProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
   className = '',
   children,

@@ -22,6 +22,7 @@ interface WatchLaterProviderProps {
   children: ReactNode,
 }
 
+import React from 'react';
 export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children }) => {
   const [watchLaterVideos, setWatchLaterVideos] = useState<string[]>([]);
 

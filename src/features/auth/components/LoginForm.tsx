@@ -9,6 +9,7 @@ export interface LoginFormProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const LoginForm: React.FC<LoginFormProps> = ({
   className = '',
   children,

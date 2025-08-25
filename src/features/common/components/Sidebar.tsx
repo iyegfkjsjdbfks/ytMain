@@ -9,6 +9,7 @@ export interface SidebarProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const Sidebar: React.FC<SidebarProps> = ({
   className = '',
   children,

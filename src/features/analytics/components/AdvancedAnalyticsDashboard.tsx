@@ -13,6 +13,7 @@ interface DashboardData {
   lastUpdated: string,
 }
 
+import React from 'react';
 export const AdvancedAnalyticsDashboard: React.FC<AdvancedAnalyticsDashboardProps> = ({
   className = '',
   onDataUpdate, 

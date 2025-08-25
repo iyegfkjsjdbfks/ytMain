@@ -9,6 +9,7 @@ export interface StreamSettingsProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const StreamSettings: React.FC<StreamSettingsProps> = ({
   className = '',
   children,

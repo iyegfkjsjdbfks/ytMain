@@ -9,6 +9,7 @@ export interface MultiplatformStreamingProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
   className = '',
   children,

@@ -9,6 +9,7 @@ export interface LivePollsProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const LivePolls: React.FC<LivePollsProps> = ({
   className = '',
   children,

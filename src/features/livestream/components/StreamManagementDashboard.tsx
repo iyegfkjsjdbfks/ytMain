@@ -19,6 +19,7 @@ interface StreamManagementDashboardProps {
   onDataUpdate?: (data: DashboardData) => void, 
 }
 
+import React from 'react';
 export const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   className = '',
   onDataUpdate, 

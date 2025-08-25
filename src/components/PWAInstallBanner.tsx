@@ -9,6 +9,7 @@ export interface PWAInstallBannerProps {
   onError?: (error: Error) => void, 
 }
 
+import React from 'react';
 export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
   className = '',
   children,
