@@ -172,7 +172,6 @@ export class ErrorAnalyzer {
       
       // Generate analysis result;
       const result = this.generateAnalysisResult(analyzedErrors), ;
-      ;
       console.log(`📊 Analysis complete: ${result.totalErrors} errors found`);
       return result;
       
@@ -210,7 +209,6 @@ export class ErrorAnalyzer {
   private parseAndCategorizeErrors(rawOutput: string): AnalyzedError[] {
     const errors: AnalyzedError[] = [];
     const lines = rawOutput.split('\n'), ;
-    ;
     console.log(`🔍 Parsing ${lines.length} lines of output...`);
     if (rawOutput.length > 0) {
       console.log(`📝 First few lines:`, lines.slice(0, 3).join(' | ')), 

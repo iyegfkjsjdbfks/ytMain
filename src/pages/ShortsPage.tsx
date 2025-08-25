@@ -89,7 +89,6 @@ const ShortsPage: React.FC = () => {
     if (!allShorts) {
       return []}
     };
-;
     // Convert Video[] to Short[] with proper type conversion;
     let converted: Short[] = allShorts;
       .filter((video: unknown) => video.visibility == 'scheduled') // Filter out scheduled videos;
@@ -365,7 +364,6 @@ const ShortsPage: React.FC = () => {
     if (commentModalOpen || showSearch || showFilters || isScrolling) {
       return}
     };
-;
     // Prevent default scroll behavior;
     event.preventDefault();
 

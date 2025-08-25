@@ -1,0 +1,78 @@
+{
+  "totalErrors": 6768,
+  "categorization": {
+    "CRITICAL_SYNTAX": {
+      "priority": 1,
+      "count": 5283,
+      "description": "Critical syntax errors blocking compilation"
+    },
+    "JSX_CORRUPTION": {
+      "priority": 2,
+      "count": 1329,
+      "description": "JSX syntax and structure issues"
+    },
+    "IMPORT_RESOLUTION": {
+      "priority": 3,
+      "count": 0,
+      "description": "Module resolution and import issues"
+    },
+    "TYPE_DEFINITIONS": {
+      "priority": 4,
+      "count": 0,
+      "description": "Type definition and annotation issues"
+    },
+    "LOGIC_PATTERNS": {
+      "priority": 5,
+      "count": 0,
+      "description": "Logic and pattern issues requiring careful analysis"
+    },
+    "FORMATTING_STYLE": {
+      "priority": 6,
+      "count": 156,
+      "description": "Code formatting and style issues"
+    }
+  },
+  "criticalFiles": [
+    {
+      "file": "src/error-resolution/generators/TypeScriptGenerator.ts",
+      "errorCount": 379
+    },
+    {
+      "file": "src/pages/ShortsPage.tsx",
+      "errorCount": 357
+    },
+    {
+      "file": "src/pages/SubscriptionsPage.tsx",
+      "errorCount": 259
+    },
+    {
+      "file": "src/pages/YourDataPage.tsx",
+      "errorCount": 248
+    },
+    {
+      "file": "src/pages/WatchPage.tsx",
+      "errorCount": 189
+    },
+    {
+      "file": "src/pages/UploadPage.tsx",
+      "errorCount": 186
+    },
+    {
+      "file": "src/pages/CommentModerationPage.tsx",
+      "errorCount": 184
+    },
+    {
+      "file": "src/pages/AnalyticsPage.tsx",
+      "errorCount": 175
+    },
+    {
+      "file": "src/pages/PlaylistDetailPage.tsx",
+      "errorCount": 172
+    },
+    {
+      "file": "src/pages/RegisterPage.tsx",
+      "errorCount": 162
+    }
+  ],
+  "timestamp": "2025-08-25T16:04:24.335Z"
+}

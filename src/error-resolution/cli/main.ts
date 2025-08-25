@@ -25,7 +25,6 @@ program;
     try {
       const analyzer = new ErrorAnalyzer();
       const result = await analyzer.analyzeErrors(), ;
-      ;
       logger.info(`Analysis completed: ${result.totalErrors} errors found`);
       
       // Display summary;
@@ -167,7 +166,6 @@ program;
       // Run basic analysis and orchestration;
       const analyzer = new ErrorAnalyzer();
       const initialResult = await analyzer.analyzeErrors(), ;
-      ;
       logger.info(`Initial analysis: ${initialResult.totalErrors} errors found`);
       
       if (initialResult.totalErrors === 0) {

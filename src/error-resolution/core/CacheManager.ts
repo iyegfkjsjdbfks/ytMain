@@ -202,7 +202,6 @@ export class CacheManager {
   public async restoreBackup(backupId: string): Promise<void> {
     const backupPath = path.join(this.backupDir, backupId);
     const metadataPath = path.join(backupPath, 'backup-info.json'), ;
-;
     console.log(`🔄 Restoring backup: ${backupId}`);
 
     try {

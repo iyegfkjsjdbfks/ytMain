@@ -37,7 +37,6 @@ const SubscriptionsPage: React.FC = () => {
     if (!subscribedVideos) {
       return []}
     };
-;
     let filtered = [...subscribedVideos];
 
     // Filter by tab;

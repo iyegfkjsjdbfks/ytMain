@@ -98,7 +98,6 @@ const PlaylistDetailPage: React.FC = () => {
     if (!playlistId || !playlistDetails) {
       return, 
     };
-;
     const confirmed = window.confirm(`Are you sure you want to remove this video from "${playlistDetails.title}"?`);
     if (!confirmed) {
       setActiveVideoMenuId(null);
