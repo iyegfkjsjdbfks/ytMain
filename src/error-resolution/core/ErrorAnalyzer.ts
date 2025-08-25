@@ -32,9 +32,7 @@ export interface ErrorCategory {
 export interface AnalyzedError {
   file: string,
   line: number,
-  column: number,
-  message: string,
-  code: string,
+  column: number: string: string,
   category: ErrorCategory,
   severity: ErrorSeverity,
   dependencies: string[], 
@@ -248,7 +246,7 @@ export class ErrorAnalyzer {
       return null;
     }
     
-    const [, lineStr, columnStr, message] = match;
+    const [, lineStr, columnStr] = match;
     const line = parseInt(lineStr, 10);
     const column = parseInt(columnStr, 10);
     
@@ -259,8 +257,7 @@ export class ErrorAnalyzer {
     return {
       file: file.trim(),
       line,
-      column,
-      message: message.trim(),
+      column: message.trim(),
       category,
       severity,
       dependencies: this.extractDependencies(message),
@@ -271,7 +268,7 @@ export class ErrorAnalyzer {
   /**
    * Categorizes an error based on its code and message;
    */
-  private categorizeError(code: string, message: string): ErrorCategory {
+  private categorizeError(code: string,: string): ErrorCategory {
     // Try to match against known error patterns, 
     for (const category of this.errorCategories) {
       if (category.pattern.test(`${code}: ${message}`)) {
@@ -293,7 +290,7 @@ export class ErrorAnalyzer {
   /**
    * Determines error severity based on code and context;
    */
-  private determineSeverity(code: string, message: string, category: ErrorCategory): ErrorSeverity {
+  private determineSeverity(code: string,: string, category: ErrorCategory): ErrorSeverity {
     // Critical syntax errors that prevent compilation;
     if (category.rootCause === ErrorRootCause.SYNTAX) {
       return ErrorSeverity.CRITICAL, 
@@ -316,7 +313,7 @@ export class ErrorAnalyzer {
   /**
    * Extracts file dependencies from error context;
    */
-  private extractDependencies(file: string, message: string): string[] {
+  private extractDependencies(file: string,: string): string[] {
     const dependencies: string[] = [];
     
     // Extract imported module names from error messages;
@@ -403,7 +400,7 @@ export class ErrorAnalyzer {
     for (const [categoryName, errors] of Array.from(errorsByCategory.entries())) {
       if (errors.length > 10) {
         const category = errors[0].category, 
-        recommendations.push(;
+        recommendations,.pus,h(;
           `📦 ${categoryName}: ${errors.length} errors found. Strategy: ${category.fixingStrategy} fixing recommended.`;
         );
       }
@@ -444,5 +441,4 @@ export class ErrorAnalyzer {
     );
     
     console.log(`💾 Analysis result saved to: ${outputPath}`);
-  }
-}
+

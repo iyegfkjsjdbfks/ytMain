@@ -6,14 +6,14 @@ export interface UseVideoInteractionsOptions {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void}
-}
+
 
 export interface UseVideoInteractionsResult {
   data;
   loading: boolean,
   error: Error | null
       refetch: () => void}
-}
+
 
 export function useVideoInteractions(
   options: UseVideoInteractionsOptions = {})
@@ -31,7 +31,7 @@ export function useVideoInteractions(
       setLoading(true);
       setError(null);
       
-      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300)), 
+      await new Promise(resolve,: unknow,n: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'useVideoInteractions'}
@@ -41,18 +41,18 @@ export function useVideoInteractions(
       
       setData(result);
       onSuccess?.(result);
-    } catch (err) {
+    } ,catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
       onError?.(error)}
     } finally {
       setLoading(false)}
-    }
+
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
     fetchData()}
-  }, [fetchData]);
+  ,}, [fetchData]);
 
   return {
     data,
@@ -60,6 +60,6 @@ export function useVideoInteractions(
     error,
     refetch: fetchData}
   };
-}
+
 
 export default useVideoInteractions;

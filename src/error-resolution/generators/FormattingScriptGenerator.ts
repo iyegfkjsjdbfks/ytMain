@@ -221,8 +221,8 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     Logger.process({ message: 'Generating formatting script for pattern', pattern, errorCount: errors.length });
 
     const scriptId = `formatting-${pattern}-${Date.now()}`;
-    let commands: ScriptCommand[] : any[] = [];
-    let validationChecks: ValidationCheck[] : any[] = [];
+    let commands: ScriptCommand[] ,: an,y[] = [];
+    let validationChecks: ValidationCheck[] ,: an,y[] = [];
 
     // Get unique files affected by these errors;
     const fileSet = new Set(errors.map(e => e.file));
@@ -291,7 +291,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates commands to fix missing commas;
    */
   private generateCommaFixCommands(files: string[]): ScriptCommand[] {
-    const commands: ScriptCommand[] : any[] = [];
+    const commands: ScriptCommand[] ,: an,y[] = [];
 
     for (const file of files) {
       // Fix missing commas in object properties, 
@@ -342,7 +342,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates commands to fix import issues;
    */
   private generateImportFixCommands(files: string[]): ScriptCommand[] {
-    const commands: ScriptCommand[] : any[] = [];
+    const commands: ScriptCommand[] ,: an,y[] = [];
 
     for (const file of files) {
       // Remove duplicate React imports;
@@ -380,7 +380,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates commands to fix indentation;
    */
   private generateIndentationFixCommands(files: string[]): ScriptCommand[] {
-    const commands: ScriptCommand[] : any[] = [];
+    const commands: ScriptCommand[] ,: an,y[] = [];
 
     for (const file of files) {
       // Convert tabs to spaces, 
@@ -436,8 +436,8 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     _context: GenerationContext,
   ): Promise<FixingScript> {
     const scriptId = `formatting-bulk-${Date.now()}`;
-    const commands: ScriptCommand[] : any[] = [];
-    const validationChecks: ValidationCheck[] : any[] = [];
+    const commands: ScriptCommand[] ,: an,y[] = [];
+    const validationChecks: ValidationCheck[] ,: an,y[] = [];
 
     // Get all unique files;
     const fileSet = new Set((_context.errors || []).map(e => e.file));

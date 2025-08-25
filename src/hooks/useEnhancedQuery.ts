@@ -23,12 +23,12 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve: unknown=> setTimeout(resolve, 500)), 
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 500)), 
       
       const result = {
         hookName: 'useEnhancedQuery',
         timestamp: Date.now(),
-        status: 'success';
+        status: 'success',;
       };
       
       setData(result);
@@ -52,6 +52,6 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
     error,
     refetch: fetchData,
   };
-}
+
 
 export default useEnhancedQuery;

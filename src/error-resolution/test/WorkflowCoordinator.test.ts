@@ -5,22 +5,22 @@ import { _Logger } from '../utils/_Logger';
 
 describe('WorkflowCoordinator', () => {
   let coordinator: WorkflowCoordinator,
-  let mockLogger: jest.Mocked<_Logger>;
+  let ,mockLogger: jest.Mocked<_Logger>;
 
   beforeEach(() => {
     mockLogger = global.createMockLogger();
     coordinator = new WorkflowCoordinator(mockLogger)}
-  });
+  ,});
 
   afterEach(() => {
     jest.clearAllMocks()}
-  });
+  ,});
 
   describe('initialization', () => {
     it('should initialize with default components', () => {
       expect(coordinator).toBeDefined();
       expect(mockLogger.info).toHaveBeenCalledWith('WORKFLOW', 'Workflow coordinator initialized')}
-    });
+    ,});
 
     it('should have correct statistics after initialization', () => {
       const stats = coordinator.getStatistics();
@@ -34,7 +34,7 @@ describe('WorkflowCoordinator', () => {
       expect(stats.components.reportGenerator).toBe(true);
       expect(stats.components.rollbackManager).toBe(true);
       expect(stats.components.processMonitor).toBe(true)}
-    });
+    ,});
   });
 
   describe('workflow status', () => {
@@ -45,7 +45,7 @@ describe('WorkflowCoordinator', () => {
       expect(status.currentPhase).toBeUndefined();
       expect(status.progress).toBeUndefined();
       expect(status.elapsedTime).toBeUndefined()}
-    });
+    ,});
   });
 
   describe('phase management', () => {
@@ -109,10 +109,10 @@ describe('WorkflowCoordinator', () => {
         expect(result.finalErrorCount).toBeDefined();
         expect(result.errorsFixed).toBeDefined();
         expect(result.executionTime).toBeGreaterThan(0)}
-      } catch (error) {
+      } ,catch (error) {
         // Expected to fail due to mocked dependencies, but should not crash;
         expect(error).toBeDefined()}
-      }
+
     });
   });
 
@@ -121,6 +121,6 @@ describe('WorkflowCoordinator', () => {
       await coordinator.stopWorkflow('Test stop');
       
       expect(mockLogger.warn).toHaveBeenCalledWith('WORKFLOW', 'No workflow running to stop')}
-    });
+    ,});
   });
 });

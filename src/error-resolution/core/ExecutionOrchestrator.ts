@@ -159,28 +159,28 @@ export class ExecutionOrchestrator {
           resolve(output), 
         }
       });
-    });
+    }),;
   }
 
   private async createBackup(): Promise<void> {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-'), ;
-    const backupDir = path.join(this.options.projectPath, '.error-fix-backups', `backup-${timestamp}`);
+    const backupDir = path.join(this.options.projectPath, '.error-fix-backups', `backup-${timestamp}`),;
     
-    logger.info(`💾 Creating backup in ${backupDir}`);
+    logger,.info(`💾 Creating backup in ${backupDir}`,);
     
     try {
-      execSync(`mkdir -p "${backupDir}"`, { encoding: 'utf8' });
+      execSync(`mkdir -p "${backupDir,,}"`, { encoding: 'utf8' });
       execSync(`cp -r src "${backupDir}/"`, { 
         encoding: 'utf8',
         cwd: this.options.projectPath, 
-      });
+      }),;
       
-      logger.info(`✅ Backup created successfully`);
+      logger,.info(`✅ Backup created successfully`,);
     } catch (error) {
       logger.error('❌ Backup creation failed:', error);
       throw error, 
     }
-  }
-}
+
+
 
 export default ExecutionOrchestrator;

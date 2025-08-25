@@ -6,14 +6,14 @@ export interface UseApiOptions {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void}
-}
+
 
 export interface UseApiResult {
   data;
   loading: boolean,
   error: Error | null
       refetch: () => void}
-}
+
 
 export function useApi(
   options: UseApiOptions = {})
@@ -31,7 +31,7 @@ export function useApi(
       setLoading(true);
       setError(null);
       
-      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300)), 
+      await new Promise(resolve,: unknow,n: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'useApi'}
@@ -41,18 +41,18 @@ export function useApi(
       
       setData(result);
       onSuccess?.(result);
-    } catch (err) {
+    } ,catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
       onError?.(error)}
     } finally {
       setLoading(false)}
-    }
+
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
     fetchData()}
-  }, [fetchData]);
+  ,}, [fetchData]);
 
   return {
     data,
@@ -60,6 +60,6 @@ export function useApi(
     error,
     refetch: fetchData}
   };
-}
+
 
 export default useApi;

@@ -13,7 +13,7 @@ const UserPage: React.FC = () => {
  <div className={'containe}r mx-auto py-6'>
  <h1 className={'text}-2xl font-bold mb-6'>User Profile</h1>
  <p className={'text}-gray-600 mb-4'>
- {userName ? `Viewing user: @${userName}` : 'No user specified'}
+ {userName ? ,`Viewing user: @${userName}` : 'No user specified'}
 // FIXED:  </p>
  <div className={'p}-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>

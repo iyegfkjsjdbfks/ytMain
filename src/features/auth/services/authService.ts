@@ -36,7 +36,7 @@ class AuthService {
       const { email, password } = credentials;
       
       // Simulate API delay
-      await new Promise(resolve: unknown=> setTimeout(resolve, 1000));
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 1000));
       
       // Mock validation
       if (email && password) {
@@ -65,7 +65,7 @@ class AuthService {
       const { email, password, name } = data;
       
       // Simulate API delay
-      await new Promise(resolve: unknown=> setTimeout(resolve, 1000));
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 1000));
       
       // Mock validation
       if (email && password && name) {
@@ -91,7 +91,7 @@ class AuthService {
     this.isLoading = true;
     try {
       // Mock implementation - replace with real API call
-      await new Promise(resolve: unknown=> setTimeout(resolve, 500));
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 500));
       this.user = null;
     } catch (error) {
       throw error;
@@ -116,7 +116,7 @@ class AuthService {
     this.isLoading = true;
     try {
       // Mock implementation - replace with real API call
-      await new Promise(resolve: unknown=> setTimeout(resolve, 500));
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 500));
       return this.user;
     } catch (error) {
       this.user = null;
@@ -130,7 +130,7 @@ class AuthService {
     this.isLoading = true;
     try {
       // Mock implementation - replace with real API call
-      await new Promise(resolve: unknown=> setTimeout(resolve, 1000));
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 1000));
       console.log('Password reset email sent to:', email);
     } catch (error) {
       throw error;

@@ -28,7 +28,7 @@ function useDebounce<T>(value: T, delay: number): T {
   }, [value, delay]);
 
   return debouncedValue;
-}
+
 
 const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();
@@ -45,7 +45,7 @@ const ShortsPage: React.FC = () => {
       // Ensure we have a valid array;
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
       return new Set(validArray.filter((item: any) => typeof item === 'string'))}
-    } catch (error) {
+    } ,catch (error) {
       console.warn('Error creating likedShorts Set:', error);
       // Clear invalid data and return empty Set;
       setLikedShortsArray([]);
@@ -58,12 +58,12 @@ const ShortsPage: React.FC = () => {
       // Ensure we have a valid array;
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
       return new Set(validArray.filter((item: any) => typeof item === 'string'))}
-    } catch (error) {
+    } ,catch (error) {
       console.warn('Error creating followedChannels Set:', error);
       // Clear invalid data and return empty Set;
       setFollowedChannelsArray([]);
       return new Set<strin>g>()}
-    }
+
   }, [followedChannelsArray, setFollowedChannelsArray]);
 
   const [commentModalOpen, setCommentModalOpen] = useState<boolea>n>(false);
@@ -114,7 +114,7 @@ const ShortsPage: React.FC = () => {
     if (selectedCategory !== 'all') {
       converted = converted.filter((short: any) =>
         short.category.toLowerCase() === selectedCategory.toLowerCase())}
-    }
+
 
     // Apply search filter;
     if (debouncedSearchQuery) {
@@ -123,7 +123,7 @@ const ShortsPage: React.FC = () => {
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
         short.description.toLowerCase().includes(query))}
-    }
+
 
     return converted;
   }, [allShorts, selectedCategory, debouncedSearchQuery]);
@@ -144,7 +144,7 @@ const ShortsPage: React.FC = () => {
       if (currentArray.includes(shortId)) {
         return currentArray.filter((id: string) => id !== shortId)}
       }
-      return [...currentArray, shortId];
+      ,return [...currentArray, shortId];
     });
   }, [setLikedShortsArray]);
 
@@ -154,20 +154,20 @@ const ShortsPage: React.FC = () => {
       if (currentArray.includes(channelName)) {
         return currentArray.filter((name: any) => name !== channelName)}
       }
-      return [...currentArray, channelName];
+      ,return [...currentArray, channelName];
     });
   }, [setFollowedChannelsArray]);
 
   const handleComment = useCallback((shortId: string) => {
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s: unknown=> s.id === shortId)}
-    setSelectedShortForComment({;
+    const short = currentFilteredShorts.find(s,: unknown=> s.id === shortId)}
+    ,setSelectedShortForComment({;
       id: shortId, title: short?.title || 'Short video';
     });
     setCommentModalOpen(true);
   }, [filteredShorts]);
 
-  const handleCommentSubmit = useCallback(async (_commentText: string): Promise<voi>d> => {
+  const handleCommentSubmit = useCallback(async (_commentText: string): Promise<voi>d,> => {
     if (!selectedShortForComment) {
       return}
     }
@@ -178,7 +178,7 @@ const ShortsPage: React.FC = () => {
       setSelectedShortForComment(null)}
     } catch (error) {
       console.error('Failed to submit comment:', error)}
-    }
+
   }, [selectedShortForComment]);
 
   const handleVideoChange = useCallback((index: number) => {
@@ -199,8 +199,8 @@ const ShortsPage: React.FC = () => {
           behavior: 'smooth',;
           block: 'start', inline: 'nearest';
         });
-      }
-    }
+
+
   }, [filteredShorts]);
 
   const handleNextVideo = useCallback(() => {
@@ -222,9 +222,9 @@ const ShortsPage: React.FC = () => {
               block: 'start', inline: 'nearest';
             });
           }
-        }
+        ,}
         return nextIndex;
-      }
+
       return prevIndex;
     });
   }, [filteredShorts]);
@@ -248,35 +248,35 @@ const ShortsPage: React.FC = () => {
               block: 'start', inline: 'nearest';
             });
           }
-        }
+        ,}
         return prevVideoIndex;
-      }
+
       return prevIndex;
     });
   }, [filteredShorts]);
 
   const handleSearchToggle = useCallback(() => {
-    setShowSearch(prev: unknown=> !prev);
+    setShowSearch(prev,: unknown=> !prev);
     if (showSearch) {
       setSearchQuery('')}
     }
-  }, [showSearch]);
+  ,}, [showSearch]);
 
   const handleFilterToggle = useCallback(() => {
-    setShowFilters(prev: unknown=> !prev), ;
+    setShowFilters(prev,: unknown=> !prev), ;
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {
     setSelectedCategory(category);
     setCurrentVideoIndex(0)}
-  }, []);
+  ,}, []);
 
   const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
     if (commentModalOpen) {
       return}
     }
 
-    switch (event.key) {;
+    ,switch (event.key) {;
       case 'ArrowUp':;
         event.preventDefault();
         handlePreviousVideo();
@@ -290,19 +290,19 @@ const ShortsPage: React.FC = () => {
           handleSearchToggle()}
         } else if (showFilters) {
           handleFilterToggle()}
-        }
+
         break;
-    }
+
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId: string): Promise<voi>d> => {
+  const handleShare = async (shortId: string): Promise<voi>d,> => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
       try {
         await navigator.share({
           title: 'Check out this Short!'}
-          url: shareUrl, });
+          ,ur,l: shareUrl, });
       } catch (error) {
         // Fallback to clipboard if share fails;
         copyToClipboard(shareUrl)}
@@ -310,12 +310,12 @@ const ShortsPage: React.FC = () => {
     } else {
       // Fallback for browsers that don't support Web Share API;
       copyToClipboard(shareUrl)}
-    }
+
   };
 
-  const copyToClipboard = async (text: string): Promise<voi>d> => {
+  const copyToClipboard = async (text: string): Promise<voi>d,> => {
     try {;
-      await,  navigator.clipboard.writeText(text: string);
+      await,  navigator.clipboard.writeText(text,: string);
       // You could add a toast notification here}
     } catch (error) {
       console.error('Failed to copy link:', error)}
@@ -345,14 +345,14 @@ const ShortsPage: React.FC = () => {
           setFollowedChannelsArray([])}
         }
       }
-    } catch (error) {
+    ,} catch (error) {
       console.warn('Error during localStorage cleanup:', error);
       // Clear all potentially corrupted data;
       localStorage.removeItem('likedShorts');
       localStorage.removeItem('followedChannels');
       setLikedShortsArray([]);
       setFollowedChannelsArray([])}
-    }
+    ,}
   }, []); // Run only once on mount;
 
   // Touch handling for mobile scroll navigation;
@@ -391,7 +391,7 @@ const ShortsPage: React.FC = () => {
     if (commentModalOpen || showSearch || showFilters) {
       return}
     }
-    if (event.touches?.[0]) {
+    ,if (event.touches?.[0]) {
       setTouchStartY(event.touches[0].clientY), ;
     };
   }, [commentModalOpen, showSearch, showFilters]);
@@ -427,7 +427,7 @@ const ShortsPage: React.FC = () => {
   useEffect(() => {
     document.addEventListener('keydown', handleKeyboardNavigation);
     return () => document.removeEventListener('keydown', handleKeyboardNavigation)}
-  }, [handleKeyboardNavigation]);
+  ,}, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation;
   useEffect(() => {
@@ -450,7 +450,7 @@ const ShortsPage: React.FC = () => {
         container.removeEventListener('touchend', handleTouchEnd)}
       };
     }
-    return () => {}; // Return empty cleanup function if no container;
+    ,return () => {}; // Return empty cleanup function if no container;
   }, [handleTouchStart, handleTouchEnd]);
 
   // Scroll to specific video: any when component mounts or when shorts data changes;
@@ -459,7 +459,7 @@ const ShortsPage: React.FC = () => {
     if (targetVideoId && !initializedRef.current && containerRef.current) {
       const currentFilteredShorts = filteredShorts;
       if (currentFilteredShorts.length > 0) {
-        const targetIndex = currentFilteredShorts.findIndex(short: unknown=> short.id === targetVideoId);
+        const targetIndex = currentFilteredShorts.findIndex(short,: unknown=> short.id === targetVideoId);
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement}
@@ -492,9 +492,9 @@ const ShortsPage: React.FC = () => {
     }
 
     // Disconnect existing observer;
-    if (observerRef.current) {
-      observerRef.current.disconnect()}
-    }
+    ,if (observerRef.current), {
+      observerRef,.current.disconnect()}
+    ,}
 
     observerRef.current = new IntersectionObserver((entries: any) => {
       entries.forEach((entry: any) => {
@@ -520,13 +520,13 @@ const ShortsPage: React.FC = () => {
     }, {
       root: containerRef.current,
       threshold: 0.5}
-      rootMargin: '0px'
-    });
+      ,rootMargi,n: '0px'
+    ,});
 
     // Observe all video elements;
     Array.from(containerRef.current.children).forEach((child: any) => {
       observerRef.current?.observe(child)}
-    });
+    ,});
 
     return () => {
       if (observerRef.current) {
@@ -596,7 +596,7 @@ const ShortsPage: React.FC = () => {
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
               onClose={() => setShowFilters(false)}
-            />
+ />
           )}
   <di>v></div></div>
 
@@ -606,7 +606,7 @@ const ShortsPage: React.FC = () => {
             setSelectedCategory('all');
             setSearchQuery('')}
           }}
-        />
+ />
   <di>v></div></div>
     );
   }
@@ -667,7 +667,7 @@ const ShortsPage: React.FC = () => {
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
             onClose={() => setShowFilters(false)}
-          />
+ />
         )}
   <di>v></div></div>
 
@@ -678,7 +678,7 @@ const ShortsPage: React.FC = () => {
           onNext={handleNextVideo}
           canGoPrevious={currentVideoIndex > 0}
           canGoNext={currentVideoIndex < filteredShorts.length - 1}
-        />
+ />
   <di>v></div></div>
 
       {/* Shorts Feed */}
@@ -717,7 +717,7 @@ const ShortsPage: React.FC = () => {
         shortId={selectedShortForComment.id  ''}
         shortTitle={selectedShortForComment.title  'Short,  video'}
         onCommentSubmit={handleCommentSubmit}
-      />
+ />
     </div>
   );
 };

@@ -14,7 +14,7 @@ const PlaylistsPage: React.FC = () => {
   const [isCreating, setIsCreating] = useState<boolea>n>(false);
 
   useEffect(() => {
-    const fetchPlaylists = async (): Promise<voi>d> => {
+    const fetchPlaylists = async (): Promise<voi>d,> => {
       setLoading(true);
       try {
         const fetchedPlaylists = await getUserPlaylists();
@@ -29,7 +29,7 @@ const PlaylistsPage: React.FC = () => {
     fetchPlaylists();
   }, []);
 
-  const handleCreatePlaylist = async (e: React.FormEvent): Promise<voi>d> => {
+  const handleCreatePlaylist = async (e: React.FormEvent): Promise<voi>d,> => {
     e.preventDefault();
     if (!newPlaylistName.trim()) {
       setCreateError('Please enter a playlist name.');
@@ -50,7 +50,7 @@ const PlaylistsPage: React.FC = () => {
         createdAt: newPlaylist.createdAt,
         updatedAt: newPlaylist.updatedAt, 
       };
-      setPlaylists(prev: unknown=> [playlistWithDetails, ...prev]);
+      setPlaylists(prev,: unknown=> [playlistWithDetails, ...prev]);
       setIsCreateModalOpen(false);
       setNewPlaylistName('');
     } catch (error) {
@@ -69,7 +69,7 @@ const PlaylistsPage: React.FC = () => {
 
   const renderSkeleton = () => (
           <div>className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6"></div>
-      {Array.from({ length: 5 }: Record<string>, unknown>).map((_: any, index: unknown) => (
+      {Array.from({ length: 5 },: Record<string>, unknown>).map((_: any, index: unknown) => (
           <div
           key={index} className="bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm animate-pulse"></div>
           <div>className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-t-xl" /></div>
@@ -100,8 +100,8 @@ const PlaylistsPage: React.FC = () => {
       </div>
 
       {loading ? ()
-        renderSkeleton()
-      ) : playlists.length > 0 ? (
+        ,renderSkeleton()
+      ,) : playlist,s.length > 0 ? (
         <div>className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6"></div>
           {playlists.map((playlist: any) => (
           <Link>to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"></Link>
@@ -121,8 +121,8 @@ const PlaylistsPage: React.FC = () => {
               <div>className="p-3 sm:p-4"></div>
                 <h3>className="text-sm sm:text-base font-semibold text-neutral-800 dark:text-neutral-50 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2 mb-0.5">{playlist.title}</h3>
                 <p>className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1"></p>
-                  Updated {new Date(playlist.updatedAt).toLocaleDateString()}
-                </p>
+                  ,Updated, {new Date(playlist.updatedAt).toLocaleDateString()}
+                ,</p>
               </div>
             </Link>
           ))}
@@ -188,13 +188,13 @@ const PlaylistsPage: React.FC = () => {
                   className="px-4 py-2 text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 ">"
                   {isCreating ? 'Creating...' : 'Create'}
-                </button></form>
+                </button></form>;
               </div>
             </form></div>
           </div>
         </div>
       )}
-  <di>v></div></div>
+  <di>v></div></div>;
   );
 };
 

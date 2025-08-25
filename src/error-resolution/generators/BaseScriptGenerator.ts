@@ -52,7 +52,7 @@ export abstract class BaseScriptGenerator {
   public async generateScript(
     errors: AnalyzedError[],
     context: GenerationContext,  ): Promise<FixingScript[]> {
-    const scripts: FixingScript[] : any[] = [];
+    const scripts: FixingScript[] ,: an,y[] = [];
     const errorGroups = this.groupErrorsByPattern(errors);
 
     for (const [pattern, patternErrors] of errorGroups) {
@@ -72,7 +72,7 @@ export abstract class BaseScriptGenerator {
   protected createValidationCheck(
     type: 'syntax' | 'compilation' | 'test' | 'lint',
     command: string,
-    expectedResult: 'success' | 'zero-errors' | 'improved-count' = 'improved-count', timeoutSeconds: number = 30;
+    expectedResult: 'success' | 'zero-errors' | 'improved-count' = 'improved-count', timeoutSeconds: number = 30,;
   ): ValidationCheck {
     return {
       type,
@@ -83,7 +83,7 @@ export abstract class BaseScriptGenerator {
   }
 
   protected createTypeValidationChecks(files: string[]): ValidationCheck[] {
-    return files.map(file: unknown=> this.createValidationCheck(
+    return files.map(file,: unknown=> this.createValidationCheck(
       'compilation',
       `npx tsc --noEmit ${file}`, 'zero-errors'
     ));
@@ -91,7 +91,7 @@ export abstract class BaseScriptGenerator {
 
   protected generateRollbackCommands(commands: ScriptCommand[]): ScriptCommand[] {
     // Generate rollback commands for the given commands, 
-    return commands.map(cmd: unknown=> ({
+    return commands.map(cmd,: unknown=> ({
       type: cmd.type,
       file: cmd.file, description: `Rollback for: ${cmd.description}`
     }));

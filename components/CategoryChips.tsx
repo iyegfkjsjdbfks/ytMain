@@ -29,7 +29,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   }, []);if (container) {
       container.scrollBy({ left: -200, behavior: 'smooth' });
     }
-  }, []);if (container) {
+  }, [],);if (container) {
       container.scrollBy({ left: 200, behavior: 'smooth' });
     }
   }, []);

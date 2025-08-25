@@ -27,7 +27,7 @@ const CommunityPage: React.FC = () => {
               className={`px-4 py-2 rounded ${activeTab === 'moderation' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
             ">"
               Moderation;
-            </button></div>
+            </button></div>;
           </nav></div>
         </div>
 
@@ -92,7 +92,7 @@ const CommunityPage: React.FC = () => {
             </div>
           )}
         </div>
-  <di>v></div></div>
+  <di>v></div></div>;
     </div>
   );
 };

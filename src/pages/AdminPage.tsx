@@ -11,7 +11,7 @@ interface AdminStats {
   activeUsers: number,
 }
 
-const AdminPage: React.FC<AdminPageProp>s> = ({ className }) => {
+const AdminPage: React.FC<AdminPageProp>,,s> = ({ className }) => {
   const [stats] = useState<AdminStat>s>({
     totalUsers: 125000,
     totalVideos: 45000,
@@ -40,7 +40,7 @@ const AdminPage: React.FC<AdminPageProp>s> = ({ className }) => {
             ">"
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button></div>
-          )){"}"
+          )){"}";
         </div>
 
         {/* Overview Tab */};

@@ -23,7 +23,7 @@ export class CommentService {
       const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
         method: 'GET', headers: {
           'Content-Type': 'application/json'
-        };
+        },;
       });
 
       if (!response.ok) {
@@ -43,7 +43,7 @@ export class CommentService {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }, body: JSON.stringify(data);
+        }, body: JSON.stringify(data),;
       });
 
       if (!response.ok) {
@@ -55,8 +55,8 @@ export class CommentService {
       console.error('Service post error:', error);
       throw error, 
     }
-  }
-}
+
+
 
 export const commentService = new CommentService()
 export default commentService;

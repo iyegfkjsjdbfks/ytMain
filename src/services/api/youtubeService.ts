@@ -29,7 +29,7 @@ export class YoutubeService {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers, };
+          ...options.headers, },;
       });
 
       if (!response.ok) {
@@ -58,7 +58,7 @@ export class YoutubeService {
       method: 'POST', body: JSON.stringify(data)
     });
   }
-}
+
 
 export const youtubeService = new YoutubeService();
 export default youtubeService;

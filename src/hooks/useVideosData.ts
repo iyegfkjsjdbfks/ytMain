@@ -6,14 +6,14 @@ export interface UseVideosDataOptions {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void}
-}
+
 
 export interface UseVideosDataResult {
   data;
   loading: boolean,
   error: Error | null
       refetch: () => void}
-}
+
 
 export function useVideosData(
   options: UseVideosDataOptions = {})
@@ -32,7 +32,7 @@ export function useVideosData(
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300)), 
+      await new Promise(resolve,: unknow,n: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'useVideosData'}
@@ -42,18 +42,18 @@ export function useVideosData(
       
       setData(result);
       onSuccess?.(result);
-    } catch (err) {
+    } ,catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
       onError?.(error)}
     } finally {
       setLoading(false)}
-    }
+
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
     fetchData()}
-  }, [fetchData]);
+  ,}, [fetchData]);
 
   return {
     data,
@@ -61,6 +61,6 @@ export function useVideosData(
     error,
     refetch: fetchData}
   };
-}
+
 
 export default useVideosData;

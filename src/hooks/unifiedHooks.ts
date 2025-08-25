@@ -23,7 +23,7 @@ export class UnifiedHooks {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers, };
+          ...options.headers, },;
       });
 
       if (!response.ok) {
@@ -46,7 +46,7 @@ export class UnifiedHooks {
       method: 'POST', body: JSON.stringify(data)
     });
   }
-}
+
 
 export const unifiedHooks = new UnifiedHooks();
 export default unifiedHooks;

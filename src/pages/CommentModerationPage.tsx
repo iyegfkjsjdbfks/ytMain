@@ -14,7 +14,7 @@ interface Comment {
   flagReason?: string, 
 }
 
-const CommentModerationPage: React.FC<CommentModerationPageProp>s> = ({ className }) => {
+const CommentModerationPage: React.FC<CommentModerationPageProp>,,s> = ({ className }) => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'pending' | 'flagged' | 'approved' | 'rejected'>('pending'), 
   const [comments, setComments] = useState<Comment>[]>([
     {
@@ -101,7 +101,7 @@ const CommentModerationPage: React.FC<CommentModerationPageProp>s> = ({ classNam
         </div>
 
         {/* Filter Tabs */}
-        <div>className="bg-white rounded-lg shadow-md p-6"></div>
+        <div>className="bg-white rounded-lg shadow-md p-6"></div>;
           <div>className="flex space-x-4 mb-6"></div>
             {(['all', 'pending', 'flagged', 'approved', 'rejected'] as const).map((filter: any) => (
           <butto>n
@@ -116,22 +116,22 @@ const CommentModerationPage: React.FC<CommentModerationPageProp>s> = ({ classNam
                 {filter.charAt(0).toUpperCase() + filter.slice(1)};
 {filter !== 'all' && (
                   <span>className="ml-2 text-xs"></span>
-                    ({filter === 'flagged' 
+                    ({filter ,=== 'flagged' 
                       ? comments.filter(c => c.flagReason).length;
                       : comments.filter(c =">" c.status === filter).length, 
                     {"}")
                   </span>
-                )}
+                ),}
               </button></div>
             )){"}"
           </div>
 
           {/* Comments List */}
-          <div>className="space-y-4"></div>
-            {filteredComments.length === 0 ? (
+          <div>className="space-y-4"></div>;
+            {filteredComments,.length === 0 ? (
               <div>className="text-center py-8 text-gray-500"></div>
                 <p>No comments found for the selected filter.</p>
-              </div>
+              </div,>
             ) : (
               filteredComments.map((comment: any) => (
           <div>key = {comment.id} className = "border rounded-lg p-4"></div>
@@ -140,12 +140,12 @@ const CommentModerationPage: React.FC<CommentModerationPageProp>s> = ({ classNam
                       <div>className="flex items-center space-x-3 mb-2"></div>
                         <h3>className="font-semibold">{comment.author}</h3>
                         <span>className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(comment.status)}`}></span>
-                          {comment.status}
-                        </span>
-                        {comment.flagReason && (
+                          {comment,.status}
+                        ,</span>
+                        {comment,.flagReason && (
                           <span>className="px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-600"></span>
-                            🚩 {comment.flagReason}
-                          </span>
+                            🚩 {comment,.flagReason}
+                          ,</span>
                         )}
                       </div>
                       <p>className="text-gray-600 text-sm mb-2">On: {comment.videoTitle}</p>
@@ -157,20 +157,20 @@ const CommentModerationPage: React.FC<CommentModerationPageProp>s> = ({ classNam
                     <p>className="text-gray-800">{comment.content}</p>
                   </div>
                   
-                  {comment.status === 'pending' && (
+                  {comment,.status === 'pending' && (
                     <div>className = "flex space-x-3"></div>
                       <butto>n>
                         onClick={() => handleCommentAction(comment.id, 'approve')}
                         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm"
                       ">"
                         Approve;
-                      </button></div>
+                      </button></div,>
                       <butto>n>
                         onClick={() => handleCommentAction(comment.id, 'reject')}
                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-sm"
                       ">"
                         Reject;
-                      </button></div>
+                      </button></div>;
                       <button>className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 text-sm"></button>
                         Hold for Review;
                       </button>
@@ -183,22 +183,22 @@ const CommentModerationPage: React.FC<CommentModerationPageProp>s> = ({ classNam
         </div>
 
         {/* Moderation Settings */}
-        <div>className="mt-8 bg-white rounded-lg shadow-md p-6">;</div>
+        <div>className="mt-8 bg-white rounded-lg shadow-md p-6">;</div>;
           <h2>className = "text-xl font-semibold mb-4">Moderation Settings</h2>
           <div>className="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
             <di>v>
               <h3>className="font-medium mb-3">Auto-moderation</h3>
               <div>className="space-y-2"></div>
                 <label>className="flex items-center">
-                  <input>type="checkbox" className="mr-2" defaultChecked />
+                  <input />type="checkbox" className="mr-2" defaultChecked />
                   <span>className="text-sm">Hold potentially inappropriate comments for review</span>
                 </label>
                 <label>className="flex items-center">
-                  <input>type="checkbox" className="mr-2" defaultChecked />
+                  <input />type="checkbox" className="mr-2" defaultChecked />
                   <span>className="text-sm">Block links in comments</span>
                 </label>
                 <label>className="flex items-center">
-                  <input>type="checkbox" className="mr-2" />
+                  <input />type="checkbox" className="mr-2" />
                   <span>className="text-sm">Require approval for all comments</span>
                 </label>
               </div>
@@ -216,7 +216,7 @@ const CommentModerationPage: React.FC<CommentModerationPageProp>s> = ({ classNam
               </button>
             </div>
           </div>
-  <di>v></div></div>
+  <di>v></div></div>;
       </div>
     </div>
   );

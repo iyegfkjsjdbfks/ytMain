@@ -12,7 +12,7 @@ export class Videos {
     this.config = {
       enabled: true,
       options: {},
-      ...config;
+      ...config,;
     };
   }
 

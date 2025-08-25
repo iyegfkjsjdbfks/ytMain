@@ -6,14 +6,14 @@ export interface UsePerformanceMonitorOptions {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void}
-}
+
 
 export interface UsePerformanceMonitorResult {
   data;
   loading: boolean,
   error: Error | null
       refetch: () => void}
-}
+
 
 export function usePerformanceMonitor(
   options: UsePerformanceMonitorOptions = {})
@@ -31,7 +31,7 @@ export function usePerformanceMonitor(
       setLoading(true);
       setError(null);
       
-      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300)), 
+      await new Promise(resolve,: unknow,n: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'usePerformanceMonitor'}
@@ -41,18 +41,18 @@ export function usePerformanceMonitor(
       
       setData(result);
       onSuccess?.(result);
-    } catch (err) {
+    } ,catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
       onError?.(error)}
     } finally {
       setLoading(false)}
-    }
+
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
     fetchData()}
-  }, [fetchData]);
+  ,}, [fetchData]);
 
   return {
     data,
@@ -60,6 +60,6 @@ export function usePerformanceMonitor(
     error,
     refetch: fetchData}
   };
-}
+
 
 export default usePerformanceMonitor;

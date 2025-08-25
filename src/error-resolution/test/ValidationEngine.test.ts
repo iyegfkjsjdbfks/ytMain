@@ -5,7 +5,7 @@ import { _Logger } from '../utils/_Logger';
 
 describe('ValidationEngine', () => {
   let validationEngine: ValidationEngine,
-  let mockLogger: jest.Mocked<_Logger>;
+  let ,mockLogger: jest.Mocked<_Logger>;
 
   beforeEach(() => {
     mockLogger = global.createMockLogger(), 
@@ -42,7 +42,7 @@ describe('ValidationEngine', () => {
             expectedResult: 'success' as const,
             timeoutSeconds: 10,
           }
-        ];
+        ],;
       };
 
       validationEngine.registerSuite(customSuite);
@@ -112,7 +112,7 @@ describe('ValidationEngine', () => {
       // Mock TypeScript compilation to return fewer errors, 
       const mockResult = {
         exitCode: 0,
-        output: 'test.ts(1,1): error TS2304: Cannot find name "test".\n';
+        output: 'test.ts(1,1): error TS2304: Cannot find name "test".\n',;
       };
       
       // Mock the executeTypeScriptCheck method;

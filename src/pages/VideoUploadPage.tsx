@@ -15,7 +15,7 @@ interface VideoDetails {
   ageRestriction: boolean,
 }
 
-const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
+const VideoUploadPage: React.FC<VideoUploadPageProp>,,s> = ({ className }) => {
   const [selectedFile, setSelectedFile] = useState<File>| null>(null);
   const [uploadProgress, setUploadProgress] = useState<numbe>r>(0);
   const [isUploading, setIsUploading] = useState<boolea>n>(false);
@@ -39,7 +39,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
     'Autos & Vehicles', 'Pets & Animals', 'Travel & Events';
   ];
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElemen>t>) => {
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElemen>,,t>) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file), 
@@ -47,7 +47,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
     }
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElemen>t>) => {
+  const handleDrop = (event: React.DragEvent<HTMLDivElemen>,,t>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file && file.type.startsWith('video/')) {
@@ -56,7 +56,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
     }
   };
 
-  const handleDragOver = (event: React.DragEvent<HTMLDivElemen>t>) => {
+  const handleDragOver = (event: React.DragEvent<HTMLDivElemen>,,t>) => {
     event.preventDefault(), ;
   };
 
@@ -95,10 +95,10 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
     setVideoDetails(prev => ({
       ...prev,;
       tags: prev.tags.filter(tag => tag !== tagToRemove);
-    }));
+    },));
   };
 
-  const handleThumbnailSelect = (event: React.ChangeEvent<HTMLInputElemen>t>) => {
+  const handleThumbnailSelect = (event: React.ChangeEvent<HTMLInputElemen>,,t>) => {
     const file = event.target.files?.[0], ;
     if (file) {;
       setVideoDetails(prev => ({ ...prev, thumbnail: file }));
@@ -137,7 +137,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
             currentStep === 'upload' ? 'text-blue-600' : 
             currentStep === 'details' || currentStep === 'publish' ? 'text-green-600' : 'text-gray-400'
           }`}>
-            <div>className={`w-8 h-8 rounded-full flex items-center justify-center ${></div>
+            <div>className={`w-8 h-8 rounded-full flex items-center justify-center ${></div>;
               currentStep === 'upload' ? 'bg-blue-600 text-white' :
               currentStep === 'details' || currentStep === 'publish' ? 'bg-green-600 text-white' : 'bg-gray-300'
             }`}>
@@ -147,16 +147,16 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
           </div>
           
           <div>className="flex-1 h-1 mx-4 bg-gray-300"></div>
-            <div>className={`h-full ${></div>
+            <div>className={`h-full ${></div>;
               currentStep === 'details' || currentStep === 'publish' ? 'bg-green-600' : 'bg-gray-300'
             }`} style={{ width: currentStep === 'details' || currentStep === 'publish' ? '100%' : '0%' }}></div>
           </div>
           
-          <div>className={`flex items-center ${></div>
+          <div>className={`flex items-center ${></div>;
             currentStep === 'details' ? 'text-blue-600' :
             currentStep === 'publish' ? 'text-green-600' : 'text-gray-400'
           }`}>
-            <div>className={`w-8 h-8 rounded-full flex items-center justify-center ${></div>
+            <div>className={`w-8 h-8 rounded-full flex items-center justify-center ${></div>;
               currentStep === 'details' ? 'bg-blue-600 text-white' :
               currentStep === 'publish' ? 'bg-green-600 text-white' : 'bg-gray-300'
             }`}>
@@ -166,15 +166,15 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>s> = ({ className }) => {
           </div>
           
           <div>className="flex-1 h-1 mx-4 bg-gray-300"></div>
-            <div>className={`h-full ${></div>
+            <div>className={`h-full ${></div>;
               currentStep === 'publish' ? 'bg-green-600' : 'bg-gray-300'
             }`} style={{ width: currentStep === 'publish' ? '100%' : '0%' }}></div>
           </div>
           
-          <div>className={`flex items-center ${></div>
+          <div>className={`flex items-center ${></div>;
             currentStep === 'publish' ? 'text-blue-600' : 'text-gray-400'
           }`}>
-            <div>className={`w-8 h-8 rounded-full flex items-center justify-center ${></div>
+            <div>className={`w-8 h-8 rounded-full flex items-center justify-center ${></div>;
               currentStep === 'publish' ? 'bg-blue-600 text-white' : 'bg-gray-300'
             }`}>
               3;

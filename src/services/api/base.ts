@@ -12,7 +12,7 @@ export class Base {
     this.config = {
       enabled: true,
       options: {},
-      ...config;
+      ...config,;
     };
   }
 

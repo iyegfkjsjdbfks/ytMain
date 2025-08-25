@@ -27,7 +27,7 @@ const ChannelCustomizationPage: React.FC = () => {
               className={`px-4 py-2 rounded ${activeTab === 'info' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
             ">"
               Basic Info;
-            </button></div>
+            </button></div>;
           </nav></div>
         </div>
 
@@ -181,7 +181,7 @@ const ChannelCustomizationPage: React.FC = () => {
             </div>
           )}
         </div>
-  <di>v></div></div>
+  <di>v></div></div>;
     </div>
   );
 };

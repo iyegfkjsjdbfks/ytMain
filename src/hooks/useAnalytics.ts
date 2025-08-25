@@ -23,12 +23,12 @@ export function useAnalytics(config: UseAnalyticsConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve: unknown=> setTimeout(resolve, 500)), 
+      await new Promise(resolve,: unknown=> setTimeout(resolve, 500)), 
       
       const result = {
         hookName: 'useAnalytics',
         timestamp: Date.now(),
-        status: 'success';
+        status: 'success',;
       };
       
       setData(result);
@@ -52,6 +52,6 @@ export function useAnalytics(config: UseAnalyticsConfig = {}) {
     error,
     refetch: fetchData,
   };
-}
+
 
 export default useAnalytics;

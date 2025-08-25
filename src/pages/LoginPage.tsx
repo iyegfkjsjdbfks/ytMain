@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
 
   const from = (location.state)?.from?.pathname || '/';
 
-  const handleSubmit = async (_e: FormEvent): Promise<voi>d> => {
+  const handleSubmit = async (_e: FormEvent): Promise<voi>d,> => {
     _e.preventDefault();
     setError('');
     setIsLoading(true);
@@ -36,7 +36,7 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  const handleDemoLogin = async (): Promise<voi>d> => {
+  const handleDemoLogin = async (): Promise<voi>d,> => {
     setError('');
     setIsLoading(true);
 
@@ -173,7 +173,7 @@ const LoginPage: React.FC = () => {
               className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
             ">"
               Try Demo Account;
-            </Button></div>
+            </Button></div>;
           </div>
 
           <div>className="mt-6"></div>
@@ -188,7 +188,7 @@ const LoginPage: React.FC = () => {
               </a>
             </div>
           </div>
-  <di>v></div></div>
+  <di>v></div></div>;
       </div>
     </div>
   );

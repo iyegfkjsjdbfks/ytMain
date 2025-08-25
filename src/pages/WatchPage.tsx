@@ -15,23 +15,23 @@ const LoadingSkeleton = memo(() => (
       <div>className="flex flex-col xl:flex-row gap-6"></div>
         <div>className="flex-1 max-w-full xl:max-w-[854px]"></div>
           {/* Video player skeleton */}
-          <div>className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse mb-4" /></div>
+          <div>className,="aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse mb-4" /></div>
 
           {/* Title skeleton */}
-          <div>className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-3" /></div>
+          <div>className,="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-3" /></div>
 
           {/* Metadata and actions skeleton */}
-          <div>className="flex items-center justify-between mb-4"></div>
+          <div>className,="flex items-center justify-between mb-4"></div>
             <div>className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-48" /></div>
             <div>className="flex space-x-2"></div>
               <div>className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
               <div>className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
               <div>className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
-            </div>
+            ,</div>
           </div>
 
           {/* Description skeleton */}
-          <div>className="bg-gray-200 dark:bg-gray-700 rounded-xl p-4 mb-4 animate-pulse"></div>
+          <div>className="bg-gray-200 dark:bg-gray-700 rounded-xl p-4 mb-4 animate-pulse"></div>;
             <div>className="flex items-center space-x-3 mb-3"></div>
               <div>className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full" /></div>
               <div>className="flex-1"></div>
@@ -47,8 +47,8 @@ const LoadingSkeleton = memo(() => (
           </div>
 
           {/* Comments skeleton */}
-          <div>className="space-y-4"></div>
-            {[...Array(3)].map((_: any, i: any) => (
+          <div>className="space-y-4"></div>;
+            {[...Array(3),].map((_: any, i: any) => (
           <div
           key={i} className="flex space-x-3"></div>
                 <div>className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
@@ -58,12 +58,12 @@ const LoadingSkeleton = memo(() => (
                   <div>className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4" /></div>
                 </div>
               </div>
-            ))}
+            ),)}
           </div>
         </div>
 
         {/* Sidebar skeleton */}
-        <div>className="xl:w-[402px] xl:flex-shrink-0"></div>
+        <div>className="xl:w-[402px] xl:flex-shrink-0"></div>;
           <div>className="space-y-2"></div>
             <div>className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4" /></div>
             {[...Array(5)].map((_: any, i: any) => (
@@ -153,18 +153,18 @@ const WatchPage: React._FC = () => {
             {error || 'Video not found'}
           </h1>
           <p>className="text-gray-600 dark:text-gray-400 mb-6"></p>
-            The video you're looking for doesn't exist or has been removed.
+            The video you're looking for doesn't exist or has been removed.;
           </p>
           <butto>n>
             onClick={() => navigate('/')}
             className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
           ">"
             Go to Home;
-          </button></div>
+          </button></div>;
         </div>
       </div>
     );
-  }
+
 
   return (
     <div>className="min-h-screen bg-white dark:bg-gray-900"></div>
@@ -185,7 +185,7 @@ const WatchPage: React._FC = () => {
                         <YouTubePlayer>, >
                           video={video}
                           autoplay;
-                        />
+ />
                       );
                     default:
                       return (
@@ -216,7 +216,7 @@ const WatchPage: React._FC = () => {
             </div>
 
             {/* Video metadata and actions combined */}
-            <div>className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4 px-1 sm:px-0"></div>
+            <div>className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4 px-1 sm:px-0"></div>;
               <div>className="text-xs sm:text-sm text-gray-600 dark:text-gray-400"></div>
                 {formatCount(typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0)} views • {formatDistanceToNow(video.uploadedAt)}
               </div>
@@ -225,7 +225,7 @@ const WatchPage: React._FC = () => {
               <VideoActions>;>
                 liked={liked}
                 disliked={disliked}
-                likeCount={video.likes || 0}
+                likeCount={video,.likes || 0}
                 onLike={handleLike}
                 onDislike={handleDislike}
                 onShare={() => {}}
@@ -300,7 +300,7 @@ const WatchPage: React._FC = () => {
       <RefactoredSaveToPlaylistModal>;>
         isOpen={isSaveModalOpen}
         onClose={closeSaveModal}
-        videoId={videoId || ''}
+        videoId={videoId ,|| ''}
         existingPlaylists={mockPlaylists}
         onSaveToPlaylist={enhancedHandleSaveToPlaylist}
         onCreatePlaylist={handleCreatePlaylist}

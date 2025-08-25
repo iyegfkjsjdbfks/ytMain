@@ -1,12 +1,12 @@
 # Fresh TypeScript Error Resolution - Summary Report
 
-Generated: 2025-08-25T14:38:41.997Z
+Generated: 2025-08-25T17:10:38.018Z
 
 ## 🚀 Deployment Results
 
 - **Status**: ✅ Success
 - **Total Errors Fixed**: 0
-- **Duration**: 27 seconds
+- **Duration**: 19 seconds
 - **Phases Executed**: 0
 
 ## 📊 Initial Analysis
@@ -29,58 +29,58 @@ Generated: 2025-08-25T14:38:41.997Z
 ## 🔧 Resolution Phases
 
 ### implicit-any-parameters
-- **Success**: ✅
+- **Success**: ❌
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ### unused-declarations
 - **Success**: ✅
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ### module-not-found
 - **Success**: ❌
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ### missing-exports
 - **Success**: ❌
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ### implicit-any-members
-- **Success**: ✅
+- **Success**: ❌
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ### possibly-null
 - **Success**: ❌
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ### private-access
-- **Success**: ❌
+- **Success**: ✅
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ### other-errors
 - **Success**: ❌
 - **Errors Fixed**: 0
-- **Duration**: 3s
+- **Duration**: 2s
 
 
 ## ⚙️ Configuration
 
 - **Project Path**: /home/runner/work/ytMain/ytMain
 - **Dry Run**: No
-- **Backup**: No
+- **Backup**: Yes
 - **Max Iterations**: 5
 - **Timeout**: 600s
 

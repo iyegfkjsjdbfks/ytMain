@@ -23,7 +23,7 @@ export class VideoService {
       const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
         method: 'GET', headers: {
           'Content-Type': 'application/json'
-        };
+        },;
       });
 
       if (!response.ok) {
@@ -43,7 +43,7 @@ export class VideoService {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }, body: JSON.stringify(data);
+        }, body: JSON.stringify(data),;
       });
 
       if (!response.ok) {
@@ -55,8 +55,8 @@ export class VideoService {
       console.error('Service post error:', error);
       throw error, 
     }
-  }
-}
+
+
 
 export const videoService = new VideoService()
 export default videoService;

@@ -11,8 +11,8 @@ const RegisterPage: React.FC = () => {
     lastName: '',
     email: '',
     password: ''}
-    confirmPassword: ''
-  });
+    ,confirmPasswor,d: ''
+  ,,});
   const [isLoading, setIsLoading] = useState<boolea>n>(false);
   const [error, setError] = useState<strin>g>('');
   const [acceptTerms, setAcceptTerms] = useState<boolea>n>(false);
@@ -20,7 +20,7 @@ const RegisterPage: React.FC = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElemen>t>): void => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElemen>,,t>): void => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -36,31 +36,31 @@ const RegisterPage: React.FC = () => {
     if (!formData.lastName.trim()) {
       setError('Last name is required');
       return false}
-    }
+
     if (!formData.email.trim()) {
       setError('Email is required');
       return false}
-    }
+
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       setError('Please enter a valid email address');
       return false}
-    }
+
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters long');
       return false}
-    }
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return false}
-    }
+
     if (!acceptTerms) {
       setError('You must accept the Terms of Service and Privacy Policy');
       return false}
-    }
+
     return true;
   };
 
-  const handleSubmit = async (e: FormEvent): Promise<voi>d> => {
+  const handleSubmit = async (e: FormEvent): Promise<voi>d,> => {
     e.preventDefault();
     setError('');
 
@@ -74,7 +74,7 @@ const RegisterPage: React.FC = () => {
       const success = await register({
         firstName: formData.firstName,
         lastName: formData.lastName}
-        email: formData.email,;
+        ,emai,l: formData.email,;
         password: formData.password, ;
       });
 
@@ -82,12 +82,12 @@ const RegisterPage: React.FC = () => {
         navigate('/', { replace: true });
       } else {
         setError('Registration failed. Please try again.')}
-      }
+
     } catch (err) {
       setError('An error occurred during registration. Please try again.')}
     } finally {
       setIsLoading(false)}
-    }
+
   };
 
   return (
@@ -257,7 +257,7 @@ const RegisterPage: React.FC = () => {
             <div>className="text-center text-xs text-gray-500 dark:text-gray-400"></div>
               Already have an account?{' '}
               <Link>;></Link>
-                to="/login"
+                to="/login";
                 className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
               ">"
                 Sign in here;

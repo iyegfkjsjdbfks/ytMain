@@ -11,7 +11,7 @@ interface VideoStats {
   subscribers: number,
 }
 
-const StudioPage: React.FC<StudioPageProp>s> = ({ className }) => {
+const StudioPage: React.FC<StudioPageProp>,,s> = ({ className }) => {
   const [stats] = useState<VideoStat>s>({
     views: 125000,
     likes: 8500,
@@ -40,7 +40,7 @@ const StudioPage: React.FC<StudioPageProp>s> = ({ className }) => {
             ">"
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button></div>
-          )){"}"
+          )){"}";
         </div>
 
         {/* Dashboard Tab */};
@@ -67,7 +67,7 @@ const StudioPage: React.FC<StudioPageProp>s> = ({ className }) => {
             </div>
 
             {/* Quick Actions */}
-            <div>className="bg-white rounded-lg shadow-md p-6"></div>
+            <div>className="bg-white rounded-lg shadow-md p-6"></div>;
               <h2>className="text-xl font-semibold mb-4">Quick Actions</h2>
               <div>className="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
                 <button>className="bg-red-500 text-white p-4 rounded-lg hover:bg-red-600 transition-colors"></button>

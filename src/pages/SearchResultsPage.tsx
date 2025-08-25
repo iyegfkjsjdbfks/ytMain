@@ -13,7 +13,7 @@ interface SearchState {
   googleSearchVideos: any[], 
   loading: boolean,
   youtubeLoading: boolean}
-}
+
 
 // Memoized empty state component;
 const EmptySearchState = memo(() => (
@@ -42,16 +42,16 @@ const SearchResultsPage: React.FC = () => {
     googleSearchVideos: [],
     loading: false,
     youtubeLoading: false}
-  });
+  },);
 
   // Memoized search function with performance monitoring;
-  const performSearch = useCallback(async (searchQuery: string): Promise<voi>d> => {
+  const performSearch = useCallback(async (searchQuery: string): Promise<voi>d,> => {
     if (!searchQuery.trim()) {
       setSearchState({
         videos: [],
         youtubeVideos: [],
         googleSearchVideos: []}
-        loading: false,;
+        ,loadin,g: false,;
         youtubeLoading: false,;
       });
       return;
@@ -59,12 +59,12 @@ const SearchResultsPage: React.FC = () => {
 
     setSearchState(prev => ({...prev, 
       loading: true}
-      youtubeLoading: true}));
+      youtubeLoading,: tru,e}));
 
     try {
       const result = await VideoService.searchVideos?(searchQuery), 
       
-      setSearchState({
+      setSearchState,({
         videos: result.videos || [],
         youtubeVideos: [],
         googleSearchVideos: []}
@@ -75,8 +75,8 @@ const SearchResultsPage: React.FC = () => {
       console.error('Error in search:', error), 
       setSearchState(prev => ({...prev, 
         loading: false}
-        youtubeLoading: false}));
-    }
+        youtubeLoading,: fals,e}));
+
   }, []);
 
   // Effect for debounced search;
@@ -89,7 +89,7 @@ const SearchResultsPage: React.FC = () => {
         <EmptySearchState> />
       </div>
     )}
-  }
+
 
   return (<div>className="min-h-screen bg-white dark:bg-gray-900 pt-4"></div>
       <div>className="max-w-[1280px] mx-auto"></div>

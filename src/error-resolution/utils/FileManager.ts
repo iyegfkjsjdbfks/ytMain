@@ -453,7 +453,7 @@ export class FileManager {
     // Check for trailing whitespace;
     const lines = content.split('\n');
     const trailingWhitespaceLines = lines;
-      .map((line: any, index: any) => ({ line: line, number: index  1 }))
+      .map((line: any, index: any) => ({ line: line, number: index  ,1 }))
       .filter(({ line }) => line.match(/\s+$/))
       .map(({ number }) => number);
 

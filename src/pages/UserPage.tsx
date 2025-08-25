@@ -62,21 +62,21 @@ const UserPage: React.FC = () => {
             ))};
           </div>;
         );
-      case 'playlists':
+      case 'playlists':;
         return (
           <div>className="text-center py-12"></div>
             <QueueListIcon>className="w-16 h-16 mx-auto text-neutral-400 mb-4" />
             <p>className="text-neutral-600 dark:text-neutral-400">No playlists available</p>
           </div>
         );
-      case 'community':
+      case 'community':;
         return (
           <div>className="text-center py-12"></div>
             <ChatBubbleLeftRightIcon>className="w-16 h-16 mx-auto text-neutral-400 mb-4" />
             <p>className="text-neutral-600 dark:text-neutral-400">No community posts yet</p>
           </div>
         );
-      case 'about':
+      case 'about':;
         return (
           <div>className="max-w-2xl"></div>
             <div>className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm"></div>
@@ -99,7 +99,7 @@ const UserPage: React.FC = () => {
         );
       default:
         return null;
-    }
+
   };
 
   if (loading) {
@@ -137,12 +137,12 @@ const UserPage: React.FC = () => {
                   <spa>n>123 videos</span>
                 </div>
                 <p>className="mt-2 text-neutral-600 dark:text-neutral-400 line-clamp-2"></p>
-                  Welcome to our amazing channel! We create content that you'll love.
+                  Welcome to our amazing channel! We create content that you'll love.;
                 </p>
               </div>
               
               {/* Subscribe Button */}
-              <div>className="flex items-center gap-3 mt-4 sm:mt-0"></div>
+              <div>className="flex items-center gap-3 mt-4 sm:mt-0"></div>;
                 <button>className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors"></button>
                   <BellIcon>className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
                 </button>
@@ -169,14 +169,14 @@ const UserPage: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div>className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8"></div>
+        <div>className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8"></div>;
           <nav>className="flex border-b border-neutral-200 dark:border-neutral-700">
             {tabs.map((tab: any) => {
               const Icon = tab.icon, 
               return (
                 <butto>n
           key={tab.id}
-                  onClick={() ={">"{"}" setActiveTab(tab.id){"}"
+                  onClick={() ={">"{"}" setActiveTab(tab.id),{"}"
                   className={`flex items-center gap-2 px-6 py-4 border-b-2 font-medium transition-colors ${
                     activeTab === tab.id, 
                       ? 'border-red-500 text-red-600 dark:text-red-400'
@@ -188,14 +188,14 @@ const UserPage: React.FC = () => {
                 </button></nav>;
               );
             {"{"}""){"{"}""
-          </nav></div>
+          </nav></div>;
         </div>
 
         {/* Tab Content */}
-        <div>className="pb-12"></div>
+        <div>className="pb-12"></div>;
           {renderTabContent()}
         </div>
-  <di>v></div></div>
+  <di>v></div></div>;
     </div>
   );
 };

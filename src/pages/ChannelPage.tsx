@@ -46,7 +46,7 @@ const ChannelPage: React._FC = () => {
   ];
 
   useEffect(() => {
-    const fetchChannelData = async (): Promise<voi>d> => {
+    const fetchChannelData = async (): Promise<voi>d,> => {
       if (!channelIdOrName) {;
         setError('Channel identifier is missing.');
         setLoading(false);
@@ -67,7 +67,7 @@ const ChannelPage: React._FC = () => {
           const [
             fetchedVideos,
             fetchedPlaylists,
-            fetchedCommunityPosts;
+            fetchedCommunityPosts,;
           ] = await Promise.all([
             getVideosByChannelName(fetchedChannel.name || decodedName),
             getChannelPlaylists(fetchedChannel.name || decodedName),

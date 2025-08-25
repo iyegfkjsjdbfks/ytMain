@@ -12,7 +12,7 @@ interface VideoDetails {
   tags: string[], 
 }
 
-const UploadPage: React.FC<UploadPageProp>s> = ({ className }) => {
+const UploadPage: React.FC<UploadPageProp>,,s> = ({ className }) => {
   const [selectedFile, setSelectedFile] = useState<File>| null>(null);
   const [uploadProgress, setUploadProgress] = useState<numbe>r>(0);
   const [isUploading, setIsUploading] = useState<boolea>n>(false), 
@@ -26,7 +26,7 @@ const UploadPage: React.FC<UploadPageProp>s> = ({ className }) => {
   const [tagInput, setTagInput] = useState<strin>g>('');
   const fileInputRef = useRef<HTMLInputElemen>t>(null);
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElemen>t>) => {
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElemen>,,t>) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file), 
@@ -65,7 +65,7 @@ const UploadPage: React.FC<UploadPageProp>s> = ({ className }) => {
     setVideoDetails(prev => ({
       ...prev,;
       tags: prev.tags.filter(tag => tag !== tagToRemove);
-    }));
+    },));
   };
 
   const handleUpload = async () => {
@@ -137,10 +137,10 @@ const UploadPage: React.FC<UploadPageProp>s> = ({ className }) => {
                     className="text-red-500 hover:text-red-700"
                   ">"
                     Remove;
-                  </button></div>
+                  </button></div>;
                 </div>
                 
-                {isUploading && (
+                {isUploading ,&& (
                   <div>className="space-y-2"></div>
                     <div>className="flex justify-between text-sm"></div>
                       <spa>n>Uploading...</span>
@@ -241,8 +241,8 @@ const UploadPage: React.FC<UploadPageProp>s> = ({ className }) => {
                   </div>
                   
                   {videoDetails.tags.length > 0 && ()
-                    <div>className="flex flex-wrap gap-2"></div>
-                      {videoDetails.tags.map((tag: any, index: any) => (
+                    <div>className="flex flex-wrap gap-2"></div>;
+                      {videoDetails,.tags.map((tag: any, index: any) => (
           <spa>n
           key={index}
                           className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center space-x-2"
@@ -255,10 +255,10 @@ const UploadPage: React.FC<UploadPageProp>s> = ({ className }) => {
                             ×
                           </button></div>
                         </span>
-                      ))}
+                      ),)}
   <di>v></div></div>
                   )}
-  <di>v></div></div>
+  <di>v></div></div>;
               </div>
             </div>
           )};
@@ -280,7 +280,7 @@ const UploadPage: React.FC<UploadPageProp>s> = ({ className }) => {
               </button>
             </div>
           )}
-  <di>v></div></div>
+  <di>v></div></div>;
       </div>
     </div>
   );

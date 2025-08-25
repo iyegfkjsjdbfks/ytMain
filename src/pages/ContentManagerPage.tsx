@@ -27,7 +27,7 @@ const ContentManagerPage: React.FC = () => {
               className={`px-4 py-2 rounded ${activeTab === 'shorts' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
             ">"
               Shorts;
-            </button></div>
+            </button></div>;
           </nav></div>
         </div>
 
@@ -69,7 +69,7 @@ const ContentManagerPage: React.FC = () => {
             </div>
           )}
         </div>
-  <di>v></div></div>
+  <di>v></div></div>;
     </div>
   );
 };

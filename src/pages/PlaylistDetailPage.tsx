@@ -35,7 +35,7 @@ const PlaylistDetailPage: React.FC = () => {
   const [editingPlaylistDescription, setEditingPlaylistDescription] = useState<strin>g>('');
   const editModalRef = useRef<HTMLFormElemen>t>(null);
 
-  const fetchPlaylistData = async (): Promise<voi>d> => {
+  const fetchPlaylistData = async (): Promise<voi>d,> => {
     if (!playlistId) {;
       setError('Playlist ID is missing.');
       setLoading(false);
@@ -94,7 +94,7 @@ const PlaylistDetailPage: React.FC = () => {
     setActiveVideoMenuId(prevId => (prevId === videoId ? null : videoId)), 
   };
 
-  const handleRemoveVideo = async (videoIdToRemove: string | number): Promise<voi>d> => {
+  const handleRemoveVideo = async (videoIdToRemove: string | number): Promise<voi>d,> => {
     if (!playlistId || !playlistDetails) {
       return, 
     };
@@ -131,7 +131,7 @@ const PlaylistDetailPage: React.FC = () => {
     }
   };
 
-  const handleSaveChanges = async (title: string, description: string): Promise<voi>d> => {
+  const handleSaveChanges = async (title: string, description: string): Promise<voi>d,> => {
     if (!playlistId || !title.trim()) {;
       alert('Playlist title cannot be empty.');
       return, 
@@ -191,7 +191,7 @@ const PlaylistDetailPage: React.FC = () => {
       <div>className="mb-6 sm:mb-8"></div>
         <div>className="flex flex-col sm:flex-row items-start md:items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-3"></div>
           {videos && videos.length > 0 ? (
-            <img>,  />
+            <img>, />
               src={videos[0]?.thumbnailUrl}
               alt={`${title} thumbnail`}
               className="w-full sm:w-32 sm:h-32 md:w-48 md:h-48 object-cover rounded-lg shadow-md flex-shrink-0 bg-neutral-200 dark:bg-neutral-800"
@@ -207,7 +207,7 @@ const PlaylistDetailPage: React.FC = () => {
             <p>className="text-sm text-neutral-600 dark:text-neutral-400"></p>
               {videoCount} video{videoCount !== 1 ? 's' : ''} • Last updated {new Date(updatedAt).toLocaleDateString()}
             </p>
-            {description && <p>className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 line-clamp-2">{description}</p>}
+            {description ,&& <p>className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 line-clamp-2">{description}</p>}
             <butto>n>
               id="edit-playlist-button"
               onClick={handleOpenEditModal}
@@ -237,7 +237,7 @@ const PlaylistDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {videos.length > 0 ? (
+      {videos,.length > 0 ? (
         <ul>className="divide-y divide-neutral-200 dark:divide-neutral-800">
           {videos.map((video: any, index: any) => (
           <li
@@ -255,7 +255,7 @@ const PlaylistDetailPage: React.FC = () => {
                   <p>className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{video.channelName}</p>
                   <p>className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">{video.views} • {video.uploadedAt}</p>
                 </div>
-              </Link>
+              </Link,>
               <div>className="relative ml-2 flex-shrink-0"></div>
                 <butto>n>
                   onClick={(e: any) => handleToggleVideoMenu(video.id, e)}
@@ -282,10 +282,10 @@ const PlaylistDetailPage: React.FC = () => {
                     {/* Add other actions here e.g., Add to queue, Move to top/bottom */}
                   </div></ul>
                 )}
-  <di>v></div></div>
+  <di>v></div></div>;
             </li>
           ))}
-  <di>v></ul></div>
+  <di>v></ul></div>;
       ) : (
         <div>className="text-center py-12"></div>
           <QueueListIcon>className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
@@ -293,7 +293,7 @@ const PlaylistDetailPage: React.FC = () => {
           <p>className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Add some videos to get started!</p>
         </div>
       )}
-  <di>v></div></div>
+  <di>v></div></div>;
   );
 };
 

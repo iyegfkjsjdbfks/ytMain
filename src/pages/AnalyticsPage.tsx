@@ -13,7 +13,7 @@ interface AnalyticsData {
   revenue: number,
 }
 
-const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
+const AnalyticsPage: React.FC<AnalyticsPageProp>,,s> = ({ className }) => {
   const [selectedMetric, setSelectedMetric] = useState<'views' | 'watchTime' | 'subscribers' | 'revenue'>('views');
   const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d'), 
   
@@ -67,12 +67,12 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
               <option>value="28d">Last 28 days</option>
               <option>value="90d">Last 90 days</option>
               <option>value="365d">Last year</option>
-            </select></div>
+            </select></div>;
           </div>
         </div>
         
         {/* Key Metrics Overview */}
-        <div>className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
+        <div>className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>;
           <div>className="bg-white rounded-lg shadow-md p-6"></div>
             <h3>className="text-lg font-semibold text-gray-700 mb-2">Total Views</h3>
             <p>className="text-3xl font-bold text-blue-600">{analytics.views.toLocaleString()}</p>
@@ -96,7 +96,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
         </div>
 
         {/* Charts Section */}
-        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"></div>
+        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"></div>;
           <div>className="bg-white rounded-lg shadow-md p-6"></div>
             <h2>className="text-xl font-semibold mb-4">Performance Over Time</h2>
             <div>className="h-64 bg-gray-100 rounded flex items-center justify-center"></div>
@@ -128,7 +128,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
         </div>
 
         {/* Top Performing Content */}
-        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>;
           <div>className="bg-white rounded-lg shadow-md p-6"></div>
             <h2>className="text-xl font-semibold mb-4">Top Videos</h2>
             <div>className="space-y-4"></div>
@@ -142,7 +142,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
                   <div>className="text-right"></div>
                     <p>className="font-semibold text-sm">{video.views.toLocaleString()}</p>
                     <p>className="text-xs text-gray-600">views</p>
-                  </div>
+                  ,</div>
                 </div>
               ))}
             </div>
@@ -165,13 +165,13 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
                     <span>className="text-sm font-semibold w-8">{country.percentage}%</span>
                   </div>
                 </div>
-              )){"}"
+              )){"}";
             </div>
           </div>
-  <di>v></div></div>
+  <di>v></div></div>;
 
         {/* Revenue Analytics */}
-        <div>className="mt-8 bg-white rounded-lg shadow-md p-6">;</div>
+        <div>className="mt-8 bg-white rounded-lg shadow-md p-6">;</div>;
           <h2>className = "text-xl font-semibold mb-4">Revenue Analytics</h2>
           <div>className="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
             <div>className="text-center"></div>
@@ -190,7 +190,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProp>s> = ({ className }) => {
               <p>className="text-sm text-gray-600">Cost per mille</p>
             </div>
           </div>
-  <di>v></div></div>
+  <di>v></div></div>;
       </div>
     </div>
   );

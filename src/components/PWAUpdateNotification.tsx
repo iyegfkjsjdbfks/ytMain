@@ -39,7 +39,7 @@ const PWAUpdateNotification: React.FC = () => {
           onClick={() => setShowUpdate(false)} className="px-4 py-2 bg-blue-700 rounded hover:bg-blue-800"
         ">"
           Later;
-        </button></div>
+        </button></div>;
       </div>
     </div>
   );

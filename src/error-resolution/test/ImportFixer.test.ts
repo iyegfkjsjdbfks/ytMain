@@ -4,22 +4,22 @@ import { _Logger } from '../utils/_Logger';
 
 describe('ImportFixer', () => {
   let importFixer: ImportFixer,
-  let mockLogger: jest.Mocked<_Logger>;
+  let ,mockLogger: jest.Mocked<_Logger>;
   const projectRoot = '/test/project';
 
   beforeEach(() => {
     mockLogger = global.createMockLogger();
     importFixer = new ImportFixer(projectRoot, mockLogger)}
-  });
+  ,});
 
   afterEach(() => {
     jest.clearAllMocks()}
-  });
+  ,});
 
   describe('initialization', () => {
     it('should initialize with project root and logger', () => {
       expect(importFixer).toBeDefined()}
-    });
+    ,});
   });
 
   describe('error type detection', () => {
@@ -34,9 +34,9 @@ describe('ImportFixer', () => {
         category: {
           primary: 'Import',
           secondary: 'ModuleResolution'}
-          rootCause: ErrorRootCause.MISSING_IMPORT, }
+          ,rootCause: ErrorRootCause.MISSING_IMPORT, }
         }
-      };
+      ,};
 
       // Access private method for testing;
       const isModuleNotFound = (importFixer).isModuleNotFoundError(error);
@@ -54,9 +54,9 @@ describe('ImportFixer', () => {
         category: {
           primary: 'Import',
           secondary: 'ExportResolution'}
-          rootCause: ErrorRootCause.MISSING_IMPORT, }
+          ,rootCause: ErrorRootCause.MISSING_IMPORT, }
         }
-      };
+      ,};
 
       const isImportNotFound = (importFixer).isImportNotFoundError(error);
       expect(isImportNotFound).toBe(true);
@@ -85,21 +85,21 @@ const MyComponent = () => {
         importedItems: ['React'],
         isDefault: true,
         isNamespace: false}
-      });
+      ,});
       
       expect(imports[1]).toMatchObject({
         importPath: 'react',
         importedItems: ['Component', 'useState'],
         isDefault: false,
         isNamespace: false}
-      });
+      ,});
       
       expect(imports[2]).toMatchObject({
         importPath: 'fs',
         importedItems: ['fs'],
         isDefault: false,
         isNamespace: true}
-      });
+      ,});
     });
   });
 
@@ -112,17 +112,17 @@ const MyComponent = () => {
           isDefault: true,
           isNamespace: false,
           line: 1}
-          originalText: "import React from 'react', "
-        },
+          ,originalTex,t: "import React from 'react', "
+        ,},
         {
           importPath: 'react',
           importedItems: ['Component'],
           isDefault: false}
-          isNamespace: false,;
+          ,isNamespac,e: false,;
           line: 2,;
           originalText: "import { Component } from 'react';"
         }
-      ];
+      ,];
 
       const duplicates = (importFixer).findDuplicateImports(imports);
       
@@ -142,7 +142,7 @@ const MyComponent = () => {
 
       const similarity3 = (importFixer).calculateSimilarity('react', 'completely-different');
       expect(similarity3).toBeLessThan(0.5)}
-    });
+    ,});
   });
 
   describe('error fixing', () => {
@@ -151,7 +151,7 @@ const MyComponent = () => {
       
       expect(commands).toEqual([]);
       expect(mockLogger.info).toHaveBeenCalledWith('IMPORT_FIXER', 'Fixing 0 import-related errors')}
-    });
+    ,});
 
     it('should process import errors and generate commands', async () => {
       const errors: AnalyzedError[] = [
@@ -165,9 +165,9 @@ const MyComponent = () => {
           category: {
             primary: 'Import',
             secondary: 'ModuleResolution'}
-            rootCause: ErrorRootCause.MISSING_IMPORT, }
-          }
-        }
+            ,rootCause: ErrorRootCause.MISSING_IMPORT, }
+          ,}
+        ,}
       ];
 
       // Mock file system operations;
@@ -185,7 +185,7 @@ const MyComponent = () => {
       } catch (error) {
         // Expected to fail due to mocked file system, but should not crash;
         expect(error).toBeDefined()}
-      }
+
     });
   });
 

@@ -9,7 +9,7 @@ interface VideoEditorProps {
 }
 
 import React from 'react';
-export const VideoEditor: React.FC<VideoEditorProp>s> = ({
+export const VideoEditor: React.FC<VideoEditorProp>,,s> = ({
   initialValue = '',
   onChange,
   onSave,
@@ -48,8 +48,8 @@ export const VideoEditor: React.FC<VideoEditorProp>s> = ({
         </button></div>
       </div>
       
-      {error && ()
-        <div>className="editor-error"></div>
+      {error ,&& ()
+        <div>className="editor-error"></div>;
           {error}
         </div>
       )}
@@ -60,7 +60,7 @@ export const VideoEditor: React.FC<VideoEditorProp>s> = ({
           placeholder="Start editing..."
         /">"
       </div>
-  <di>v></div></div>
+  <di>v></div></div>;
   );
 };
 

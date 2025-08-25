@@ -11,7 +11,7 @@ interface DashboardStats {
   revenue: number,
 }
 
-const StudioDashboardPage: React.FC<StudioDashboardPageProp>s> = ({ className }) => {
+const StudioDashboardPage: React.FC<StudioDashboardPageProp>,,s> = ({ className }) => {
   const [stats] = useState<DashboardStat>s>({
     totalViews: 1250000,
     watchTime: 45000,
@@ -39,7 +39,7 @@ const StudioDashboardPage: React.FC<StudioDashboardPageProp>s> = ({ className })
         </div>
         
         {/* Key Metrics */}
-        <div>className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
+        <div>className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>;
           <div>className="bg-white rounded-lg shadow-md p-6"></div>
             <h3>className="text-lg font-semibold text-gray-700 mb-2">Views</h3>
             <p>className="text-3xl font-bold text-red-600">{stats.totalViews.toLocaleString()}</p>
@@ -63,7 +63,7 @@ const StudioDashboardPage: React.FC<StudioDashboardPageProp>s> = ({ className })
         </div>
 
         {/* Recent Activity */}
-        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+        <div>className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>;
           <div>className="bg-white rounded-lg shadow-md p-6"></div>
             <h2>className="text-xl font-semibold mb-4">Recent Videos</h2>
             <div>className="space-y-4"></div>

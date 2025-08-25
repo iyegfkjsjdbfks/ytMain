@@ -114,11 +114,11 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
       <Link to={`/watch?v=${video.id}`} className="block">
         <div className="relative bg-gray-100 rounded-lg overflow-hidden aspect-video">
           {/* Thumbnail */}
-          <img>
+          <img />
             src={video.thumbnail}
             alt={video.title}
             className="w-full h-full object-cover"
-          />
+ />
           
           {/* Video overlay for autoplay */}
           {isPlaying && (
@@ -157,11 +157,11 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
         
         {/* Video info */}
         <div className="mt-3 flex gap-3">
-          <img>
+          <img />
             src={video.channel.avatar}
             alt={video.channel.name}
             className="w-9 h-9 rounded-full flex-shrink-0"
-          />
+ />
           
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-medium line-clamp-2 text-gray-900 group-hover:text-gray-700">

@@ -66,8 +66,8 @@ const HomePage: React._FC = () => {
       </div>
 
       {/* Main Content */}
-      <div>className="max-w-[1440px] mx-auto px-6 py-6"></div>
-        {loading && filteredVideos.length === 0 ? (
+      <div>className="max-w-[1440px] mx-auto px-6 py-6"></div>;
+        {loading ,&& filteredVideos.length === 0 ? (
           /* Loading skeleton - YouTube grid style */
           <di>v>
             <div>className="flex items-center gap-2 mb-6"></div>
@@ -76,7 +76,7 @@ const HomePage: React._FC = () => {
               </div>
             </div>
             <div>className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4"></div>
-              {Array.from({ length: 12 }: Record<string>, unknown>).map((_: any, index: unknown) => (
+              {Array.from({ length: 12 },: Record<string>, unknown>).map((_: any, index: unknown) => (
           <div
           key={index} className="animate-pulse"></div>
                   <div>className="bg-gray-200 dark:bg-gray-700 rounded-xl mb-3 w-full h-[250px]" /></div>
@@ -103,7 +103,7 @@ const HomePage: React._FC = () => {
               /">"
             )){"}"
           </div>
-        )};
+        ),};
 {/* Empty State */};
 {!loading && filteredVideos.length === 0 && (
           <div>className="text-center py-12"></div>

@@ -20,7 +20,7 @@ program;
   .option('-o, --output <file>', 'Output file for analysis results')
   .action(async (options: any) => {
     logger.info('Starting TypeScript error analysis...')}
-    logger.info(`Project: ${options.project}`);
+    ,logger.info(`Project: ${options.project}`);
     
     try {
       const analyzer = new ErrorAnalyzer();
@@ -42,7 +42,7 @@ program;
       if (options.output) {
         await analyzer.saveAnalysisResult(result, options.output)}
         logger.info(`Results saved to: ${options.output}`);
-      }
+
       
     } catch (error) {
       logger.error(`Error during analysis: ${error}`);
@@ -59,7 +59,7 @@ program;
   .option('--max-iterations <num>', 'Maximum fix iterations', '5')
   .action(async (options: any) => {
     logger.info('Starting automatic error fixing...')}
-    logger.info(`Project: ${options.project}`);
+    ,logger.info(`Project: ${options.project}`);
     logger.info(`Dry run: ${options.dryRun ? 'Yes' : 'No'}`);
     logger.info(`Backup: ${options.backup ? 'Yes' : 'No'}`);
     
@@ -68,7 +68,7 @@ program;
         projectPath: path.resolve(options.project),
         dryRun: options.dryRun || false,
         backup: options.backup !== false}
-        maxIterations: parseInt(options.maxIterations) || 5,;
+        ,maxIteration,s: parseInt(options.maxIterations) || 5,;
         timeoutSeconds: 300,;
       });
       
@@ -82,7 +82,7 @@ program;
       if (result.details.length > 0) {
         console.log('\n📝 Details:')}
         result.details.forEach(detail => console.log(`  ${detail}`));
-      }
+
       
     } catch (error) {
       logger.error(`Error during fixing: ${error}`);
@@ -96,7 +96,7 @@ program;
   .option('-p, --project <path>', 'Path to project root', '.')
   .action(async (options: any) => {
     logger.info('Validating project...')}
-    logger.info(`Project: ${options.project}`);
+    ,logger.info(`Project: ${options.project}`);
     
     try {
       const analyzer = new ErrorAnalyzer();
@@ -123,7 +123,7 @@ program;
   .option('-p, --project <path>', 'Path to project root', '.')
   .action(async (options: any) => {
     logger.info('Checking project status...')}
-    logger.info(`Project: ${options.project}`);
+    ,logger.info(`Project: ${options.project}`);
     
     try {
       const analyzer = new ErrorAnalyzer();
@@ -139,13 +139,13 @@ program;
         for (const [category, errors] of result.errorsByCategory) {
           console.log(`  ${category}: ${errors.length} errors`);
         }
-      }
+
       
       // Show recommendations;
       if (result.recommendations.length > 0) {
         console.log('\n💡 Recommendations:')}
         result.recommendations.forEach(rec => console.log(`  ${rec}`));
-      }
+
       
     } catch (error) {
       logger.error(`Error during status check: ${error}`);
@@ -177,7 +177,7 @@ program;
         projectPath: path.resolve(options.project),
         dryRun: options.dryRun || false,
         backup: !options.noBackup}
-        maxIterations: 5,;
+        ,maxIteration,s: 5,;
         timeoutSeconds: 300,;
       });
       
@@ -205,4 +205,3 @@ program.parse();
 // If no command provided, show help;
 if (!process.argv.slice(2).length) {
   program.outputHelp()}
-}

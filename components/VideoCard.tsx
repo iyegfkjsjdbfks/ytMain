@@ -82,10 +82,10 @@ const VideoCard = React.memo<VideoCardProp>(({ video }: Record<string>, unknown>
  {video.title}
  </h3>
  <div>role="button"</div>
- tabIndex={0} onClick={(e: any) => handleChannelNavigation(e)} onKeyDown={handleChannelKeyDown} className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
+ tabIndex={0} onClick={(e,: any) => handleChannelNavigation(e)} onKeyDown={handleChannelKeyDown} className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative";
  aria-label={`Go to ${video.channelName} channel`}
  >
- {video.channelName}
+ {video,.channelName}
  </div>
  <p>className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400"></p>
  {video.views} &bull; {video.uploadedAt}

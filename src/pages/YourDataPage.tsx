@@ -12,7 +12,7 @@ interface DataCategory {
   downloadable: boolean,
 }
 
-const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
+const YourDataPage: React.FC<YourDataPageProp>,,s> = ({ className }) => {
   const [selectedTab, setSelectedTab] = useState<'overview' | 'download' | 'delete' | 'privacy'>('overview'), 
   
   const dataCategories: DataCategory[] = [
@@ -79,7 +79,7 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
             ">"
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button></div>
-          )){"}"
+          )){"}";
         </div>
 
         {/* Overview Tab */};
@@ -116,10 +116,10 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
                     </div>
                     <div>className="text-right"></div>
                       <p>className="font-semibold">{category.size}</p>
-                      {category.downloadable && (
+                      ,{categor,y.downloadable && (
                         <span>className="text-green-600 text-xs">✓ Downloadable</span>
                       )}
-                    </div>
+                    ,</div>
                   </div>
                 ))}
               </div>
@@ -134,7 +134,7 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
               <div>className="bg-blue-50 border border-blue-200 rounded-lg p-4"></div>
                 <h3>className="font-medium text-blue-800 mb-2">Export Your YouTube Data</h3>
                 <p>className="text-blue-700 text-sm mb-4"></p>
-                  You can download a copy of your YouTube data to keep for your records or use with another service.
+                  You can download a copy of your YouTube data to keep for your records or use with another service.;
                 </p>
                 <button>className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"></button>
                   Create Export, 
@@ -161,11 +161,11 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
                 <h3>className="font-medium mb-3">Export Format</h3>
                 <div>className="space-y-2"></div>
                   <label>className="flex items-center">
-                    <input>type="radio" name="format" className="mr-3" defaultChecked />
+                    <input />type="radio" name="format" className="mr-3" defaultChecked />
                     <spa>n>JSON (Machine readable)</span>
                   </label>
                   <label>className="flex items-center">
-                    <input>type="radio" name="format" className="mr-3" />
+                    <input />type="radio" name="format" className="mr-3" />
                     <spa>n>HTML (Human readable)</span>
                   </label>
                 </div>
@@ -181,7 +181,7 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
               <div>className="bg-red-50 border border-red-200 rounded-lg p-4"></div>
                 <h3>className="font-medium text-red-800 mb-2">⚠️ Permanent Data Deletion</h3>
                 <p>className="text-red-700 text-sm mb-4"></p>
-                  Deleting your data is permanent and cannot be undone. Please consider downloading your data first.
+                  Deleting your data is permanent and cannot be undone. Please consider downloading your data first.;
                 </p>
               </div>
 
@@ -227,7 +227,7 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
                       <p>className="text-gray-600 text-sm">Save videos you watch to improve recommendations</p>
                     </div>
                     <label>className="relative inline-flex items-center cursor-pointer">
-                      <input>type="checkbox" className="sr-only peer" defaultChecked />
+                      <input />type="checkbox" className="sr-only peer" defaultChecked />
                       <div>className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                     </label>
                   </div>
@@ -238,7 +238,7 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
                       <p>className="text-gray-600 text-sm">Save searches to improve recommendations</p>
                     </div>
                     <label>className="relative inline-flex items-center cursor-pointer">
-                      <input>type="checkbox" className="sr-only peer" defaultChecked />
+                      <input />type="checkbox" className="sr-only peer" defaultChecked />
                       <div>className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                     </label>
                   </div>
@@ -249,15 +249,15 @@ const YourDataPage: React.FC<YourDataPageProp>s> = ({ className }) => {
                 <h3>className="font-medium mb-3">Data Retention</h3>
                 <div>className="space-y-2"></div>
                   <label>className="flex items-center">
-                    <input>type="radio" name="retention" className="mr-3" defaultChecked />
+                    <input />type="radio" name="retention" className="mr-3" defaultChecked />
                     <spa>n>Keep until I delete manually</span>
                   </label>
                   <label>className="flex items-center">
-                    <input>type="radio" name="retention" className="mr-3" />
+                    <input />type="radio" name="retention" className="mr-3" />
                     <spa>n>Auto-delete after 18 months</span>
                   </label>
                   <label>className="flex items-center">
-                    <input>type="radio" name="retention" className="mr-3" />
+                    <input />type="radio" name="retention" className="mr-3" />
                     <spa>n>Auto-delete after 36 months</span>
                   </label>
                 </div>

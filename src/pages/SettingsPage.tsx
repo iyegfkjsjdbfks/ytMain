@@ -12,7 +12,7 @@ interface SettingsState {
   quality: string,
 }
 
-const SettingsPage: React.FC<SettingsPageProp>s> = ({ className }) => {
+const SettingsPage: React.FC<SettingsPageProp>,,s> = ({ className }) => {
   const [settings, setSettings] = useState<SettingsStat>e>({
     notifications: true,
     autoplay: false,
@@ -100,7 +100,7 @@ const SettingsPage: React.FC<SettingsPageProp>s> = ({ className }) => {
                   <option>value="es">Spanish</option>
                   <option>value="fr">French</option>
                   <option>value="de">German</option>
-                </select></div>
+                </select></div>;
               </div>
             </div>
           </div>

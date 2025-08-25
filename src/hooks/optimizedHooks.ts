@@ -23,7 +23,7 @@ export class OptimizedHooks {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers, };
+          ...options.headers, },;
       });
 
       if (!response.ok) {
@@ -46,7 +46,7 @@ export class OptimizedHooks {
       method: 'POST', body: JSON.stringify(data)
     });
   }
-}
+
 
 export const optimizedHooks = new OptimizedHooks();
 export default optimizedHooks;

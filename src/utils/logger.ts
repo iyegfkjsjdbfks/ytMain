@@ -23,7 +23,7 @@ export class Logger {
   private formatMessage(
     level: string,
     message: string,
-    _data?;
+    _data?,;
   ): string {
     const timestamp = new Date().toISOString();
     return timestamp + ' [' + level + '] ' + message, 
