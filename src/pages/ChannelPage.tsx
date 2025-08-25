@@ -54,7 +54,7 @@ const ChannelPage: React._FC = () => {
       }
       setLoading(true);
       setError(null);
-      setActiveTab('HOME'); // Reset to home on new channel load
+      setActiveTab('HOME'); // Reset to home on new channel load;
       setIsSubscribed(Math.random() > 0.5);
 
       try {
@@ -63,11 +63,11 @@ const ChannelPage: React._FC = () => {
 
         if (fetchedChannel) {
           setChannel(fetchedChannel);
-          // Fetch all data concurrently
+          // Fetch all data concurrently;
           const [
             fetchedVideos,
             fetchedPlaylists,
-            fetchedCommunityPosts
+            fetchedCommunityPosts;
           ] = await Promise.all([
             getVideosByChannelName(fetchedChannel.name || decodedName),
             getChannelPlaylists(fetchedChannel.name || decodedName),
@@ -77,7 +77,7 @@ const ChannelPage: React._FC = () => {
           setChannelPlaylists(fetchedPlaylists);
           setChannelCommunityPosts(fetchedCommunityPosts);
         } else {
-          // Create a mock channel if not found
+          // Create a mock channel if not found;
           const mockChannel = {
             id: decodedName,
             name: decodedName,
@@ -93,7 +93,7 @@ const ChannelPage: React._FC = () => {
           };
           setChannel(mockChannel);
 
-          // Fetch videos for the channel name
+          // Fetch videos for the channel name;
           const fetchedVideos = await getVideosByChannelName(decodedName);
           setVideos(fetchedVideos);
           setChannelPlaylists([]);
@@ -108,7 +108,7 @@ const ChannelPage: React._FC = () => {
     };
 
     fetchChannelData().catch(() => {
-      // Handle promise rejection silently
+      // Handle promise rejection silently;
     });
     window.scrollTo(0, 0);
   }, [channelIdOrName]);
@@ -139,26 +139,26 @@ const ChannelPage: React._FC = () => {
 
   return (
     <div className="bg-white dark:bg-neutral-950 min-h-full">
-      <ChannelHeader
+      <ChannelHeader;
         channel={channel}
         videoCount={videos.length}
         isSubscribed={isSubscribed}
         onSubscribeToggle={handleSubscribeToggle}
-      />
+      /{">"}
 
       <div className="px-4 md:px-6 lg:px-8">
         <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
       </div>
 
       <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3">
-        <ChannelTabContent
+        <ChannelTabContent;
           activeTab={activeTab}
           channel={channel}
           videos={videos}
           playlists={channelPlaylists}
           communityPosts={channelCommunityPosts}
           onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
-        />
+        /{">"}
       </div>
     </div>
   );

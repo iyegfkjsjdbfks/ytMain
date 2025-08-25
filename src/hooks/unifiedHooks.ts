@@ -1,4 +1,4 @@
-// unifiedHooks - Advanced Service Implementation
+// unifiedHooks - Advanced Service Implementation;
 export interface unifiedHooksConfig {
   baseUrl?: string;
   timeout?: number;
@@ -10,7 +10,7 @@ export class UnifiedHooks {
   constructor(config: unifiedHooksConfig = {}) {
     this.config = {
       baseUrl: config.baseUrl || '/api',
-      timeout: config.timeout || 5000
+      timeout: config.timeout || 5000;
     };
   }
 
@@ -22,7 +22,7 @@ export class UnifiedHooks {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers
+          ...options.headers;
         }
       });
 

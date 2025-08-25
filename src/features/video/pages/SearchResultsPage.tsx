@@ -1,4 +1,4 @@
-// SearchResultsPage - React Component
+// SearchResultsPage - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface SearchResultsPageProps {
@@ -12,7 +12,7 @@ export const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
         <h3>Error in SearchResultsPage</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

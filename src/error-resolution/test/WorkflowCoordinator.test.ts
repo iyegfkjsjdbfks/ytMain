@@ -92,10 +92,10 @@ describe('WorkflowCoordinator', () => {
         rollbackOnFailure: false,
         continueOnValidationFailure: true,
         generateReports: false,
-        reportFormats: [] as const
+        reportFormats: [] as,  const;
       };
 
-      // Mock the file system to return empty results
+      // Mock the file system to return empty results;
       const fs = require('fs');
       fs.promises.readdir.mockResolvedValue([]);
 
@@ -109,7 +109,7 @@ describe('WorkflowCoordinator', () => {
         expect(result.errorsFixed).toBeDefined();
         expect(result.executionTime).toBeGreaterThan(0);
       } catch (error) {
-        // Expected to fail due to mocked dependencies, but should not crash
+        // Expected to fail due to mocked dependencies, but should not crash;
         expect(error).toBeDefined();
       }
     });

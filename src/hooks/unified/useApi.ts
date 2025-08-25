@@ -1,9 +1,9 @@
-// useApi - Custom Hook
+// useApi - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseApiOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useApi(
       const result = {
         hookName: 'useApi',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useApi(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

@@ -131,7 +131,7 @@ const WatchPage: React._FC = () => {
     openSaveModal,
     closeSaveModal,
     enhancedHandleSaveToPlaylist,
-    handleCreatePlaylist
+    handleCreatePlaylist;
   } = useWatchPage();
 
   const { navigate } = useMiniplayerActions();
@@ -153,12 +153,12 @@ const WatchPage: React._FC = () => {
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             The video you're looking for doesn't exist or has been removed.
           </p>
-          <button
+          <button;
             onClick={() => navigate('/')}
             className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Go to Home
-          </button>
+          {">"}
+            Go to Home;
+          </button></div>
         </div>
       </div>
     );
@@ -180,29 +180,29 @@ const WatchPage: React._FC = () => {
                   switch (youtubePlayerType) {
                     case 'youtube-player':
                       return (
-                        <YouTubePlayer
+                        <YouTubePlayer;
                           video={video}
-                          autoplay
+                          autoplay;
                         />
                       );
                     default:
                       return (
-                        <YouTubePlayerWrapper
+                        <YouTubePlayerWrapper;
                           videoId={videoId}
-                          autoplay
+                          autoplay;
                           width="100%"
                           height="100%"
-                          controls
-                        />
+                          controls;
+                        /{">"}
                       );
-                  }
-                })() : (
-                  <AdvancedVideoPlayer
+                  {"}"
+                {"}")() : (
+                  <AdvancedVideoPlayer;
                     video={video}
-                    autoplay
-                    muted
-                  />
-                )}
+                    autoplay;
+                    muted;
+                  /{">"}
+                ){"}"
               </div>
             </div>
 
@@ -220,7 +220,7 @@ const WatchPage: React._FC = () => {
               </div>
 
               {/* Video actions - moved to same line as metadata */}
-              <VideoActions
+              <VideoActions;
                 liked={liked}
                 disliked={disliked}
                 likeCount={video.likes || 0}
@@ -229,11 +229,11 @@ const WatchPage: React._FC = () => {
                 onShare={() => {}}
                 onSave={openSaveModal}
                 isSavedToAnyList={isSavedToAnyList}
-              />
+              /{">"}
             </div>
 
             {/* Video description */}
-            <VideoDescription
+            <VideoDescription;
               video={video}
               channel={channel}
               isSubscribed={isSubscribed}
@@ -245,17 +245,17 @@ const WatchPage: React._FC = () => {
               isSummarizing={isSummarizing}
               canSummarize={!!canSummarize}
               onSummarizeDescription={handleSummarizeDescription}
-            />
+            /{">"}
 
             {/* Enhanced Video Metadata */}
-            <VideoMetadata
+            <VideoMetadata;
               video={video}
               expanded={metadataExpanded}
               onToggleExpanded={() => setMetadataExpanded(!metadataExpanded)}
-            />
+            /{">"}
 
             {/* Comments section */}
-            <CommentsSection
+            <CommentsSection;
               comments={comments}
               commentCount={commentCount}
               commentSortOrder={commentSortOrder}
@@ -276,33 +276,33 @@ const WatchPage: React._FC = () => {
               onSetEditingComment={setEditingComment}
               onSetActiveCommentMenu={setActiveCommentMenu}
               onSetExpandedReplies={setExpandedReplies}
-            />
+            /{">"}
           </div>
 
           {/* Sidebar - Related videos */}
           <aside className="xl:w-[402px] xl:flex-shrink-0 mt-4 xl:mt-0">
             <div className="xl:sticky xl:top-4">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 px-1 sm:px-0">Up next</h2>
-              <RecommendationEngine
+              <RecommendationEngine;
                 currentVideo={video}
                 onVideoSelect={(videoId: string) => {
                   window.location.href = `/watch?v=${videoId}`;
                 }}
-              />
+              /{">"}
             </div>
           </aside>
         </div>
       </div>
 
       {/* Save to Playlist Modal */}
-      <RefactoredSaveToPlaylistModal
+      <RefactoredSaveToPlaylistModal;
         isOpen={isSaveModalOpen}
         onClose={closeSaveModal}
         videoId={videoId || ''}
         existingPlaylists={mockPlaylists}
         onSaveToPlaylist={enhancedHandleSaveToPlaylist}
         onCreatePlaylist={handleCreatePlaylist}
-      />
+      /{">"}
     </div>
   );
 };

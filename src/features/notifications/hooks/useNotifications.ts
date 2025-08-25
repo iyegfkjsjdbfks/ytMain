@@ -1,9 +1,9 @@
-// useNotifications - Custom Hook
+// useNotifications - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseNotificationsOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useNotifications(
       const result = {
         hookName: 'useNotifications',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useNotifications(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

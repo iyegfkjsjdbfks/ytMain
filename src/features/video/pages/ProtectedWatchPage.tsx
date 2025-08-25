@@ -1,4 +1,4 @@
-// ProtectedWatchPage - Simple Component
+// ProtectedWatchPage - Simple Component;
 import React from 'react';
 
 export interface ProtectedWatchPageProps {
@@ -8,7 +8,7 @@ export interface ProtectedWatchPageProps {
 
 export const ProtectedWatchPage = (props: ProtectedWatchPageProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

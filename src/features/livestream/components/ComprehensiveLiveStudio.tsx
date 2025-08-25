@@ -1,4 +1,4 @@
-// ComprehensiveLiveStudio - Simple Component
+// ComprehensiveLiveStudio - Simple Component;
 import React from 'react';
 
 export interface ComprehensiveLiveStudioProps {
@@ -8,7 +8,7 @@ export interface ComprehensiveLiveStudioProps {
 
 export const ComprehensiveLiveStudio = (props: ComprehensiveLiveStudioProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

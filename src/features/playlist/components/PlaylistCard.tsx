@@ -1,4 +1,4 @@
-// PlaylistCard - React Component
+// PlaylistCard - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface PlaylistCardProps {
@@ -12,7 +12,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
         <h3>Error in PlaylistCard</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

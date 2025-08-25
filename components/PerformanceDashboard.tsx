@@ -35,7 +35,7 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
  name.includes('api') ? 'api' :
  name.includes('click') || name.includes('hover') ? 'user - interaction' : 'navigation' }));
 
- setMetrics(formattedMetrics.slice(-20)); // Keep last 20 metrics
+ setMetrics(formattedMetrics.slice(-20)); // Keep last 20 metrics;
  }, 1000);
 
  return () => clearInterval(interval);
@@ -114,7 +114,7 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
  {metric.name}
 // FIXED:  </span>
  <span className="text - white font - mono">
- {metric.value.toFixed(1)}ms
+ {metric.value.toFixed(1)}ms;
 // FIXED:  </span>
 // FIXED:  </div>
  ))
@@ -143,7 +143,7 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
 // FIXED:  onClick={() => performanceMonitor.clearMetrics()}
 // FIXED:  className="text - xs text - red - 400 hover:text - red - 300"
  >
- Clear
+ Clear;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => {}
@@ -152,7 +152,7 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
  }
 // FIXED:  className="text - xs text - blue - 400 hover:text - blue - 300"
  >
- Log Report
+ Log Report;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

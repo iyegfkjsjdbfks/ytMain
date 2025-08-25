@@ -21,42 +21,42 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
       description: 'Videos you\'ve watched on YouTube',
       size: '2.3 MB',
       lastUpdated: '2 hours ago',
-      downloadable: true
+      downloadable: true;
     },
     {
       name: 'Search History',
       description: 'Your YouTube search queries',
       size: '1.1 MB',
       lastUpdated: '1 day ago',
-      downloadable: true
+      downloadable: true;
     },
     {
       name: 'Comments',
       description: 'Comments you\'ve posted on videos',
       size: '0.8 MB',
       lastUpdated: '3 days ago',
-      downloadable: true
+      downloadable: true;
     },
     {
       name: 'Liked Videos',
       description: 'Videos you\'ve liked or disliked',
       size: '0.5 MB',
       lastUpdated: '1 week ago',
-      downloadable: true
+      downloadable: true;
     },
     {
       name: 'Subscriptions',
       description: 'Channels you\'ve subscribed to',
       size: '0.2 MB',
       lastUpdated: '2 weeks ago',
-      downloadable: true
+      downloadable: true;
     },
     {
       name: 'Playlists',
       description: 'Playlists you\'ve created or saved',
       size: '0.3 MB',
       lastUpdated: '1 month ago',
-      downloadable: true
+      downloadable: true;
     }
   ];
 
@@ -68,18 +68,18 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
         {/* Navigation Tabs */}
         <div className="flex space-x-4 mb-6">
           {(['overview', 'download', 'delete', 'privacy'] as const).map((tab) => (
-            <button
+            <button;
               key={tab}
               onClick={() => setSelectedTab(tab)}
               className={`px-4 py-2 rounded-lg font-medium ${
-                selectedTab === tab
+                selectedTab === tab;
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
+              {"{"}""`{"{"}""
+            {">"}
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
+            </button></div>
+          )){"}"
         </div>
 
         {/* Overview Tab */}
@@ -137,7 +137,7 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
                   You can download a copy of your YouTube data to keep for your records or use with another service.
                 </p>
                 <button className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-                  Create Export
+                  Create Export;
                 </button>
               </div>
 
@@ -190,7 +190,7 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
                   <h3 className="font-medium mb-2">Delete Watch History</h3>
                   <p className="text-gray-600 text-sm mb-3">Remove all videos from your watch history</p>
                   <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                    Delete Watch History
+                    Delete Watch History;
                   </button>
                 </div>
 
@@ -198,7 +198,7 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
                   <h3 className="font-medium mb-2">Delete Search History</h3>
                   <p className="text-gray-600 text-sm mb-3">Remove all your search queries</p>
                   <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                    Delete Search History
+                    Delete Search History;
                   </button>
                 </div>
 
@@ -206,7 +206,7 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
                   <h3 className="font-medium mb-2">Delete All Activity</h3>
                   <p className="text-gray-600 text-sm mb-3">Remove all your YouTube activity data</p>
                   <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-                    Delete All Activity
+                    Delete All Activity;
                   </button>
                 </div>
               </div>

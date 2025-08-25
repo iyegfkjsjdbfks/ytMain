@@ -1,4 +1,4 @@
-// YouTubeDemo - Clean Component Implementation
+// YouTubeDemo - Clean Component Implementation;
 import React, { useState, useEffect } from 'react';
 
 export interface YouTubeDemoProps {
@@ -12,7 +12,7 @@ export const YouTubeDemo: React.FC<YouTubeDemoProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -20,7 +20,7 @@ export const YouTubeDemo: React.FC<YouTubeDemoProps> = ({
   useEffect(() => {
     const initialize = async () => {
       try {
-        // Simulate initialization
+        // Simulate initialization;
         await new Promise(resolve => setTimeout(resolve, 200));
         setIsReady(true);
         onLoad?.();
@@ -40,7 +40,7 @@ export const YouTubeDemo: React.FC<YouTubeDemoProps> = ({
         <h3>Error in YouTubeDemo</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

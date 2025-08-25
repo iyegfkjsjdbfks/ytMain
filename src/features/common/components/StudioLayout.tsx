@@ -1,4 +1,4 @@
-// StudioLayout - Simple Component
+// StudioLayout - Simple Component;
 import React from 'react';
 
 export interface StudioLayoutProps {
@@ -8,7 +8,7 @@ export interface StudioLayoutProps {
 
 export const StudioLayout = (props: StudioLayoutProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

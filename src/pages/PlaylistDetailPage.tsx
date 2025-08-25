@@ -66,14 +66,14 @@ const PlaylistDetailPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, [playlistId]);
 
-  // Close video action menu on click outside
+  // Close video action menu on click outside;
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (videoMenuRef.current && !videoMenuRef.current.contains(event.target as Node)) {
         setActiveVideoMenuId(null);
       }
       if (editModalRef.current && !editModalRef.current.contains(event.target as Node)) {
-        // Check if the click was on the trigger button to prevent immediate closing
+        // Check if the click was on the trigger button to prevent immediate closing;
         const editButton = document.getElementById('edit-playlist-button');
         if (editButton && editButton.contains(event.target as Node)) {
           return;
@@ -114,13 +114,13 @@ const PlaylistDetailPage: React.FC = () => {
         return {
             ...prevDetails,
             videos: prevDetails.videos.filter((video) => video.id !== videoIdToRemove),
-            // The count will be derived from videos.length, and updatedAt is handled by service
+            // The count will be derived from videos.length, and updatedAt is handled by service;
           };
       });
-      setActiveVideoMenuId(null); // Close menu
+      setActiveVideoMenuId(null); // Close menu;
     } catch (err) {
       console.error('Failed to remove video from playlist:', err);
-      alert('Error removing video. Please try again.'); // Or use a more sophisticated notification
+      alert('Error removing video. Please try again.'); // Or use a more sophisticated notification;
     }
   };
 
@@ -180,28 +180,28 @@ const PlaylistDetailPage: React.FC = () => {
   return (
     <div className="p-4 md:p-6 bg-white dark:bg-neutral-950">
       {isEditModalOpen && playlistDetails && (
-        <PlaylistEditModal
+        <PlaylistEditModal;
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           initialTitle={editingPlaylistTitle}
           initialDescription={editingPlaylistDescription}
           onSaveChanges={handleSaveChanges}
-        />
-      )}
+        /{">"}
+      ){"}"
 
       <div className="mb-6 sm:mb-8">
         <div className="flex flex-col sm:flex-row items-start md:items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-3">
           {videos && videos.length > 0 ? (
-            <img
+            <img;
               src={videos[0]?.thumbnailUrl}
               alt={`${title} thumbnail`}
               className="w-full sm:w-32 sm:h-32 md:w-48 md:h-48 object-cover rounded-lg shadow-md flex-shrink-0 bg-neutral-200 dark:bg-neutral-800"
-            />
+            /{">"}
           ) : (
             <div className="w-full sm:w-32 sm:h-32 md:w-48 md:h-48 bg-neutral-200 dark:bg-neutral-800 rounded-lg shadow-md flex items-center justify-center flex-shrink-0">
               <QueueListIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-500" />
             </div>
-          )}
+          ){"}"
           <div className="flex-grow">
             <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">{title}</h1>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">Your playlist</p>
@@ -209,32 +209,32 @@ const PlaylistDetailPage: React.FC = () => {
               {videoCount} video{videoCount !== 1 ? 's' : ''} • Last updated {new Date(updatedAt).toLocaleDateString()}
             </p>
             {description && <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 line-clamp-2">{description}</p>}
-            <button
+            <button;
               id="edit-playlist-button"
               onClick={handleOpenEditModal}
               className="mt-2.5 flex items-center text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 font-medium"
               title="Edit playlist title and description"
-            >
-              <PencilIcon className="w-3.5 h-3.5 mr-1" /> Edit details
-            </button>
+            {">"}
+              <PencilIcon className="w-3.5 h-3.5 mr-1" /> Edit details;
+            </button></div>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
-          <button
+          <button;
             onClick={() => {}}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 dark:bg-neutral-100 dark:hover:bg-neutral-200 text-white dark:text-black font-medium rounded-full text-sm transition-colors"
-          >
+          {">"}
             <PlaySolidIcon className="w-5 h-5 mr-2" />
-            Play All
-          </button>
-          <button
+            Play All;
+          </button></div>
+          <button;
             onClick={() => {}}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-100 font-medium rounded-full text-sm transition-colors"
-          >
+          {">"}
             <ArrowsRightLeftIcon className="w-5 h-5 mr-2 transform scale-x-[-1]" />
-            Shuffle
-          </button>
+            Shuffle;
+          </button></div>
         </div>
       </div>
 
@@ -257,35 +257,35 @@ const PlaylistDetailPage: React.FC = () => {
                 </div>
               </Link>
               <div className="relative ml-2 flex-shrink-0">
-                <button
-                  onClick={(e) => handleToggleVideoMenu(video.id, e)}
+                <button;
+                  onClick={(e: any) => handleToggleVideoMenu(video.id, e)}
                   className="p-2 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
                   aria-label="More actions for this video"
                   title="More actions"
-                >
+                {">"}
                   <EllipsisVerticalIcon className="w-5 h-5" />
-                </button>
+                </button></div>
                 {activeVideoMenuId === video.id && (
-                  <div
+                  <div;
                     ref={videoMenuRef}
                     className="absolute top-full right-0 mt-1 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md shadow-lg z-50 py-1 animate-fade-in-fast"
                     role="menu"
-                  >
-                    <button
+                  {">"}
+                    <button;
                       onClick={() => handleRemoveVideo(video.id)}
                       className="w-full flex items-center px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10"
                       role="menuitem"
-                    >
+                    {">"}
                       <TrashIcon className="w-4 h-4 mr-2.5" />
-                      Remove from playlist
-                    </button>
+                      Remove from playlist;
+                    </button></li>
                     {/* Add other actions here e.g., Add to queue, Move to top/bottom */}
-                  </div>
+                  </div></ul>
                 )}
-              </div>
+  <div></div></div>
             </li>
           ))}
-        </ul>
+  <div></ul></div>
       ) : (
         <div className="text-center py-12">
           <QueueListIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
@@ -293,7 +293,7 @@ const PlaylistDetailPage: React.FC = () => {
           <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Add some videos to get started!</p>
         </div>
       )}
-    </div>
+  <div></div></div>
   );
 };
 

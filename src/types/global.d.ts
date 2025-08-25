@@ -1,4 +1,4 @@
-// Global type definitions
+// Global type definitions;
 declare module '@/config/routes.tsx' {
   export interface RouteConfig {
     path: string;

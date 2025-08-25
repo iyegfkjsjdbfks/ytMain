@@ -28,7 +28,7 @@ export class FileManager {
   private operationHistory: FileOperationResult[] = [];
 
   /**
-   * Performs a batch of file operations safely with rollback capability
+   * Performs a batch of file operations safely with rollback capability;
    */
   public async performOperations(operations: FileOperation[]): Promise<FileOperationResult[]> {
     console.log(`📁 Performing ${operations.length} file operations...`);
@@ -45,15 +45,15 @@ export class FileManager {
         if (!_result.success) {
           console.error(`❌ Operation failed: ${operation.type} ${operation.source}`);
           
-          // Rollback previous operations
+          // Rollback previous operations;
           await this.rollbackOperations(rollbackOperations);
           break;
         }
 
-        // Track rollback operation
+        // Track rollback operation;
         const rollbackOp = this.createRollbackOperation(operation, _result);
         if (rollbackOp) {
-          rollbackOperations.unshift(rollbackOp); // Add to beginning for reverse order
+          rollbackOperations.unshift(rollbackOp); // Add to beginning for reverse order;
         }
       }
 
@@ -69,7 +69,7 @@ export class FileManager {
   }
 
   /**
-   * Validates file syntax and structure
+   * Validates file syntax and structure;
    */
   public async validateFile(_filePath: string): Promise<FileValidationResult> {
     const _result: FileValidationResult = {
@@ -80,18 +80,18 @@ export class FileManager {
     };
 
     try {
-      // Check if file exists
+      // Check if file exists;
       if (!await this.fileExists(_filePath)) {
         _result.isValid = false;
         _result.errors.push(`File does not exist: ${_filePath}`);
         return _result;
       }
 
-      // Read file content
+      // Read file content;
       const content = await fs.promises.readFile(_filePath, 'utf8');
       const ext = path.extname(_filePath).toLowerCase();
 
-      // Perform validation based on file type
+      // Perform validation based on file type;
       switch (ext) {
         case '.ts':
         case '.tsx':
@@ -108,7 +108,7 @@ export class FileManager {
           _result.warnings.push(`No specific validation available for ${ext} files`);
       }
 
-      // General file validation
+      // General file validation;
       await this.validateGeneralFile(content, _filePath, _result);
 
     } catch (error) {
@@ -120,7 +120,7 @@ export class FileManager {
   }
 
   /**
-   * Safely deletes files with backup option
+   * Safely deletes files with backup option;
    */
   public async safeDelete(filePaths: string[], createBackup = true): Promise<FileOperationResult[]> {
     console.log(`🗑️ Safely deleting ${filePaths.length} files...`);
@@ -128,19 +128,19 @@ export class FileManager {
     const operations: FileOperation[] = filePaths.map(_filePath => ({
       type: 'delete',
       source: _filePath,
-      backup: createBackup
+      backup: createBackup;
     }));
 
     return await this.performOperations(operations);
   }
 
   /**
-   * Creates a safe copy of files with validation
+   * Creates a safe copy of files with validation;
    */
   public async safeCopy(sourceFiles: string[], targetDir: string): Promise<FileOperationResult[]> {
     console.log(`📋 Copying ${sourceFiles.length} files to ${targetDir}...`);
     
-    // Ensure target directory exists
+    // Ensure target directory exists;
     await fs.promises.mkdir(targetDir, { recursive: true });
 
     const operations: FileOperation[] = sourceFiles.map(source => ({
@@ -153,7 +153,7 @@ export class FileManager {
   }
 
   /**
-   * Moves files safely with validation
+   * Moves files safely with validation;
    */
   public async safeMove(fileMoves: Array<{ source: string; target: string }>): Promise<FileOperationResult[]> {
     console.log(`📦 Moving ${fileMoves.length} files...`);
@@ -162,33 +162,33 @@ export class FileManager {
       type: 'move',
       source,
       target,
-      backup: true
+      backup: true;
     }));
 
     return await this.performOperations(operations);
   }
 
   /**
-   * Gets operation history for debugging
+   * Gets operation history for debugging;
    */
   public getOperationHistory(): FileOperationResult[] {
     return [...this.operationHistory];
   }
 
   /**
-   * Clears operation history
+   * Clears operation history;
    */
   public clearHistory(): void {
     this.operationHistory = [];
   }
 
   /**
-   * Performs a single file operation
+   * Performs a single file operation;
    */
   private async performSingleOperation(operation: FileOperation): Promise<FileOperationResult> {
     const _result: FileOperationResult = {
       success: false,
-      operation
+      operation;
     };
 
     try {
@@ -222,7 +222,7 @@ export class FileManager {
   }
 
   /**
-   * Creates a new file
+   * Creates a new file;
    */
   private async createFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.content) {
@@ -233,16 +233,16 @@ export class FileManager {
       throw new Error(`File already exists: ${operation.source}`);
     }
 
-    // Ensure directory exists
+    // Ensure directory exists;
     await fs.promises.mkdir(path.dirname(operation.source), { recursive: true });
     
-    // Create file
+    // Create file;
     await fs.promises.writeFile(operation.source, operation.content, 'utf8');
     console.log(`📄 Created: ${operation.source}`);
   }
 
   /**
-   * Updates an existing file
+   * Updates an existing file;
    */
   private async updateFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.content) {
@@ -253,40 +253,40 @@ export class FileManager {
       throw new Error(`File does not exist: ${operation.source}`);
     }
 
-    // Create backup if requested
+    // Create backup if requested;
     if (operation.backup) {
       const backupPath = `${operation.source}.backup.${Date.now()}`;
       await fs.promises.copyFile(operation.source, backupPath);
       _result.backupPath = backupPath;
     }
 
-    // Update file
+    // Update file;
     await fs.promises.writeFile(operation.source, operation.content, 'utf8');
     console.log(`✏️ Updated: ${operation.source}`);
   }
 
   /**
-   * Deletes a file
+   * Deletes a file;
    */
   private async deleteFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!await this.fileExists(operation.source)) {
       throw new Error(`File does not exist: ${operation.source}`);
     }
 
-    // Create backup if requested
+    // Create backup if requested;
     if (operation.backup) {
       const backupPath = `${operation.source}.deleted.${Date.now()}`;
       await fs.promises.copyFile(operation.source, backupPath);
       _result.backupPath = backupPath;
     }
 
-    // Delete file
+    // Delete file;
     await fs.promises.unlink(operation.source);
     console.log(`🗑️ Deleted: ${operation.source}`);
   }
 
   /**
-   * Moves a file
+   * Moves a file;
    */
   private async moveFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.target) {
@@ -297,23 +297,23 @@ export class FileManager {
       throw new Error(`Source file does not exist: ${operation.source}`);
     }
 
-    // Ensure target directory exists
+    // Ensure target directory exists;
     await fs.promises.mkdir(path.dirname(operation.target), { recursive: true });
 
-    // Create backup if requested
+    // Create backup if requested;
     if (operation.backup) {
       const backupPath = `${operation.source}.moved.${Date.now()}`;
       await fs.promises.copyFile(operation.source, backupPath);
       _result.backupPath = backupPath;
     }
 
-    // Move file
+    // Move file;
     await fs.promises.rename(operation.source, operation.target);
     console.log(`📦 Moved: ${operation.source} → ${operation.target}`);
   }
 
   /**
-   * Copies a file
+   * Copies a file;
    */
   private async copyFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.target) {
@@ -324,16 +324,16 @@ export class FileManager {
       throw new Error(`Source file does not exist: ${operation.source}`);
     }
 
-    // Ensure target directory exists
+    // Ensure target directory exists;
     await fs.promises.mkdir(path.dirname(operation.target), { recursive: true });
 
-    // Copy file
+    // Copy file;
     await fs.promises.copyFile(operation.source, operation.target);
     console.log(`📋 Copied: ${operation.source} → ${operation.target}`);
   }
 
   /**
-   * Creates a rollback operation for the given operation
+   * Creates a rollback operation for the given operation;
    */
   private createRollbackOperation(operation: FileOperation, _result: FileOperationResult): FileOperation | null {
     switch (operation.type) {
@@ -363,7 +363,7 @@ export class FileManager {
   }
 
   /**
-   * Rolls back a list of operations
+   * Rolls back a list of operations;
    */
   private async rollbackOperations(operations: FileOperation[]): Promise<void> {
     if (operations.length === 0) return;
@@ -380,45 +380,45 @@ export class FileManager {
   }
 
   /**
-   * Validates TypeScript files
+   * Validates TypeScript files;
    */
   private async validateTypeScriptFile(content: string, _result: FileValidationResult): Promise<void> {
-    // Check for common TypeScript syntax issues
+    // Check for common TypeScript syntax issues;
     const lines = content.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const lineNum = i + 1;
 
-      // Check for missing semicolons
+      // Check for missing semicolons;
       if (line.trim().match(/^(const|let|var|return|throw)\s+.*[^;{}\s]$/)) {
         _result.warnings.push(`Line ${lineNum}: Missing semicolon`);
       }
 
-      // Check for unused imports
+      // Check for unused imports;
       if (line.trim().startsWith('import') && !content.includes(line.match(/import\s+.*?\s+from/)?.[0]?.replace(/import\s+/, '').replace(/\s+from/, '') || '')) {
         _result.warnings.push(`Line ${lineNum}: Potentially unused import`);
       }
 
-      // Check for console.log statements
+      // Check for console.log statements;
       if (line.includes('console.log')) {
         _result.suggestions.push(`Line ${lineNum}: Consider removing console.log for production`);
       }
     }
 
-    // Check for TypeScript-specific issues
+    // Check for TypeScript-specific issues;
     if (content.includes('any') && !content.includes('// @ts-ignore')) {
       _result.warnings.push('File contains "any" types - consider using more specific types');
     }
   }
 
   /**
-   * Validates JavaScript files
+   * Validates JavaScript files;
    */
   private async validateJavaScriptFile(content: string, _result: FileValidationResult): Promise<void> {
-    // Basic JavaScript validation
+    // Basic JavaScript validation;
     try {
-      // Check for syntax errors by attempting to parse
+      // Check for syntax errors by attempting to parse;
       new Function(content);
     } catch (error) {
       _result.isValid = false;
@@ -427,7 +427,7 @@ export class FileManager {
   }
 
   /**
-   * Validates JSON files
+   * Validates JSON files;
    */
   private async validateJsonFile(content: string, _result: FileValidationResult): Promise<void> {
     try {
@@ -439,19 +439,19 @@ export class FileManager {
   }
 
   /**
-   * Validates general file properties
+   * Validates general file properties;
    */
   private async validateGeneralFile(content: string, _filePath: string, _result: FileValidationResult): Promise<void> {
-    // Check file size
+    // Check file size;
     const sizeInMB = Buffer.byteLength(content, 'utf8') / (1024 * 1024);
     if (sizeInMB > 10) {
       _result.warnings.push(`Large file size: ${sizeInMB.toFixed(2)}MB`);
     }
 
-    // Check for trailing whitespace
+    // Check for trailing whitespace;
     const lines = content.split('\n');
-    const trailingWhitespaceLines = lines
-      .map((line, index) => ({ line: line, number: index + 1 }))
+    const trailingWhitespaceLines = lines;
+      .map((line, index) => ({ line: line, number: index  1 }))
       .filter(({ line }) => line.match(/\s+$/))
       .map(({ number }) => number);
 
@@ -459,14 +459,14 @@ export class FileManager {
       _result.suggestions.push(`Trailing whitespace found on lines: ${trailingWhitespaceLines.slice(0, 5).join(', ')}${trailingWhitespaceLines.length > 5 ? '...' : ''}`);
     }
 
-    // Check line endings
+    // Check line endings;
     if (content.includes('\r\n') && content.includes('\n')) {
       _result.warnings.push('Mixed line endings detected (CRLF and LF)');
     }
   }
 
   /**
-   * Checks if a file exists
+   * Checks if a file exists;
    */
   private async fileExists(_filePath: string): Promise<boolean> {
     try {

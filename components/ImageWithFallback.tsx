@@ -30,13 +30,13 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
  const [retryCount, setRetryCount] = useState<number>(0);
  const [isRateLimited, setIsRateLimited] = useState<boolean>(false);
 
- // Generate fallback URL
+ // Generate fallback URL;
  const generateFallback = useCallback(() => {
  if (fallbackSrc as any) {
 return fallbackSrc;
 }
 
- // Convert API placeholder URLs to direct picsum URLs
+ // Convert API placeholder URLs to direct picsum URLs;
  if (src.includes('/api/placeholder/')) {
  const parts = src.split('/');
  const dimensions = parts[parts.length - 1];
@@ -45,7 +45,7 @@ return fallbackSrc;
  return `https://picsum.photos/${w || width}/${h || height}?random=${Math.floor(Math.random() * 1000)}`;
  }
     }
-    // Generate a picsum URL as fallback
+    // Generate a picsum URL as fallback;
     return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
   }, [fallbackSrc, src, width, height]);
 
@@ -60,14 +60,14 @@ return fallbackSrc;
  const handleError = useCallback((_event?: React.SyntheticEvent<HTMLImageElement, Event>) => {
  const isYouTubeThumbnail = currentSrc.includes('yt3.ggpht.com') || currentSrc.includes('i.ytimg.com');
 
- // Check if this is a 429 rate limiting error for YouTube thumbnails
+ // Check if this is a 429 rate limiting error for YouTube thumbnails;
  if (isYouTubeThumbnail && retryCount < maxRetries) {
  setIsRateLimited(true);
- const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff
+ const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff;
 
  setTimeout((() => {
  setRetryCount(prev => prev + 1);
- setCurrentSrc(src); // Retry original source
+ setCurrentSrc(src); // Retry original source;
  setIsLoading(true);
  }) as any, delay);
 
@@ -79,7 +79,7 @@ return fallbackSrc;
  setCurrentSrc(generateFallback());
  onError?.();
  } else {
- // If even the fallback fails, show a placeholder
+ // If even the fallback fails, show a placeholder;
  setCurrentSrc(generatePlaceholderDataUrl(width, height, alt));
  }
  setIsLoading(false);
@@ -102,14 +102,14 @@ return fallbackSrc;
 return '';
 }
 
- // Fill background with gradient
+ // Fill background with gradient;
  const gradient = ctx.createLinearGradient(0, 0, w, h);
  gradient.addColorStop(0, '#f3f4f6');
  gradient.addColorStop(1, '#e5e7eb');
  ctx.fillStyle = gradient;
  ctx.fillRect(0, 0, w, h);
 
- // Add border
+ // Add border;
  ctx.strokeStyle = '#d1d5db';
  ctx.lineWidth = 1;
  ctx.strokeRect(0, 0, w, h);
@@ -123,7 +123,7 @@ return '';
  ctx.beginPath();
 
  if (text.toLowerCase().includes('video') || text.toLowerCase().includes('play')) {
- // Play button triangle
+ // Play button triangle;
  ctx.moveTo(centerX - iconSize / 2, centerY - iconSize / 2);
  ctx.lineTo(centerX + iconSize / 2, centerY);
  ctx.lineTo(centerX - iconSize / 2, centerY + iconSize / 2);
@@ -133,7 +133,7 @@ return '';
  ctx.rect(centerX - iconSize / 2, centerY - iconSize / 2, iconSize, iconSize);
  ctx.stroke();
 
- // Mountain shape
+ // Mountain shape;
  ctx.beginPath();
  ctx.moveTo(centerX - iconSize / 4, centerY + iconSize / 4);
  ctx.lineTo(centerX - iconSize / 8, centerY);
@@ -145,7 +145,7 @@ return '';
 
  ctx.fill();
 
- // Add text
+ // Add text;
  const fontSize = Math.max(12, Math.min(w, h) / 12);
  ctx.fillStyle = '#6b7280';
  ctx.font = `${fontSize}px Arial, sans-serif`;
@@ -178,13 +178,13 @@ return '';
  return (
  <div className={`relative ${className}`} style={{ width, height }}>
  {isLoading && (
- <div
+ <div;
   className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded"
   style={{ width, height }}
  />
  )}
 
- <img
+ <img;
   src={currentSrc}
   alt={alt}
   width={width}
@@ -197,7 +197,7 @@ return '';
 
  {hasError && (
  <div className="absolute top-2 right-2 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">
-  Fallback
+  Fallback;
  </div>
  )}
 

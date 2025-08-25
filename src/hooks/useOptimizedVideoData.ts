@@ -1,9 +1,9 @@
-// useOptimizedVideoData - Custom Hook
+// useOptimizedVideoData - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseOptimizedVideoDataOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useOptimizedVideoData(
       const result = {
         hookName: 'useOptimizedVideoData',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useOptimizedVideoData(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

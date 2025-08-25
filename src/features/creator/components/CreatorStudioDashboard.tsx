@@ -1,4 +1,4 @@
-// CreatorStudioDashboard - Enhanced Dashboard Component
+// CreatorStudioDashboard - Enhanced Dashboard Component;
 import React, { useState, useEffect } from 'react';
 
 interface ChartData {
@@ -20,7 +20,7 @@ interface CreatorStudioDashboardProps {
 
 export const CreatorStudioDashboard: React.FC<CreatorStudioDashboardProps> = ({
   className = '',
-  onDataUpdate
+  onDataUpdate;
 }) => {
   const [data, setData] = useState<DashboardData>({
     metrics: {},
@@ -36,14 +36,14 @@ export const CreatorStudioDashboard: React.FC<CreatorStudioDashboardProps> = ({
         setLoading(true);
         setError(null);
         
-        // Simulate data fetching
+        // Simulate data fetching;
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         const newData: DashboardData = {
           metrics: {
             totalViews: 1000,
             totalLikes: 50,
-            totalComments: 25
+            totalComments: 25;
           },
           charts: [
             { type: 'line', data: [10, 40, 20, 80], labels: ['Mon', 'Tue', 'Wed', 'Thu'] }
@@ -76,7 +76,7 @@ export const CreatorStudioDashboard: React.FC<CreatorStudioDashboardProps> = ({
       <div className={`dashboard-error ${className}`}>
         <div>Error: {error}</div>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

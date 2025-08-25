@@ -1,9 +1,9 @@
-// usePWANotifications - Clean Hook Implementation
+// usePWANotifications - Clean Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UsePWANotificationsOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -30,13 +30,13 @@ export function usePWANotifications(
       setLoading(true);
       setError(null);
       
-      // Simulate async operation
+      // Simulate async operation;
       await new Promise(resolve => setTimeout(resolve, 300));
       
       const result = {
         hookName: 'usePWANotifications',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -58,7 +58,7 @@ export function usePWANotifications(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

@@ -1,5 +1,5 @@
 import React, { MouseEvent, KeyboardEvent, ReactNode, FC, useEffect, useRef } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XIcon } from '@heroicons/react/24/outline';
 
 export interface BaseModalProps {
   isOpen: boolean;
@@ -18,13 +18,13 @@ export interface BaseModalProps {
 
 /**
  * Reusable base modal component that provides:
- * - Consistent modal styling and behavior
+ * - Consistent modal styling and behavior;
  * - Accessibility features (focus management, escape key)
- * - Customizable sizes and styling
- * - Optional footer and header
- * - Overlay click and escape key handling
+ * - Customizable sizes and styling;
+ * - Optional footer and header;
+ * - Overlay click and escape key handling;
  *
- * Reduces code duplication for modal implementations across the app
+ * Reduces code duplication for modal implementations across the app;
  */
 const BaseModal: React.FC<BaseModalProps> = ({
   isOpen,
@@ -38,12 +38,12 @@ const BaseModal: React.FC<BaseModalProps> = ({
   footer,
   className = '',
   overlayClassName = '',
-  preventBodyScroll = true
+  preventBodyScroll = true;
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
-  // Size classes
+  // Size classes;
   const getSizeClasses = () => {
     switch (size) {
       case 'sm': return 'max-w-md';
@@ -54,7 +54,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
     }
   };
 
-  // Handle escape key
+  // Handle escape key;
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (closeOnEscape && event.key === 'Escape') {
@@ -69,7 +69,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
     return undefined;
   }, [isOpen, closeOnEscape, onClose]);
 
-  // Handle body scroll
+  // Handle body scroll;
   useEffect(() => {
     if (preventBodyScroll && isOpen) {
       document.body.style.overflow = 'hidden';
@@ -80,7 +80,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
     return undefined;
   }, [isOpen, preventBodyScroll]);
 
-  // Focus management
+  // Focus management;
   useEffect(() => {
     if (isOpen) {
       previousActiveElement.current = document.activeElement as HTMLElement;
@@ -90,7 +90,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
     }
   }, [isOpen]);
 
-  // Handle overlay click
+  // Handle overlay click;
   const handleOverlayClick = (event: React.MouseEvent) => {
     if (closeOnOverlayClick && event.target === event.currentTarget) {
       onClose();
@@ -102,10 +102,10 @@ const BaseModal: React.FC<BaseModalProps> = ({
   }
 
   return (
-    <div
+    <div;
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`}
       onClick={handleOverlayClick}
-      onKeyDown={(e) => {
+      onKeyDown={(e: any) => {
         if (e.key === 'Escape') {
           onClose();
         }
@@ -118,20 +118,20 @@ const BaseModal: React.FC<BaseModalProps> = ({
       <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity" />
 
       {/* Modal */}
-      <div
+      <div;
         ref={modalRef}
         tabIndex={-1}
         className={`
           relative w-full ${getSizeClasses()} max-h-[90vh] 
-          bg-white dark:bg-gray-800 rounded-lg shadow-xl 
-          transform transition-all duration-200 ease-out
-          flex flex-col
+          bg-white dark:bg-gray-800 rounded-lg shadow-xl; 
+          transform transition-all duration-200 ease-out;
+          flex flex-col;
           ${className}
         `}
         role="dialog"
         aria-labelledby={title ? 'modal-title' : undefined}
         aria-describedby="modal-content"
-      >
+      {">"}
         {/* Header */}
         {(title || showCloseButton) && (
           <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
@@ -141,13 +141,13 @@ const BaseModal: React.FC<BaseModalProps> = ({
               </h2>
             )}
             {showCloseButton && (
-              <button
+              <button;
                 onClick={onClose}
                 className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 aria-label="Close modal"
-              >
-                <XMarkIcon className="w-5 h-5" />
-              </button>
+              {">"}
+                <XIcon className="w-5 h-5" />
+              </button></div>
             )}
           </div>
         )}
@@ -163,7 +163,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
             {footer}
           </div>
         )}
-      </div>
+  <div></div></div>
     </div>
   );
 };

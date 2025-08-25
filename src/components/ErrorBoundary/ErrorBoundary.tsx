@@ -1,4 +1,4 @@
-// ErrorBoundary - Simple Component
+// ErrorBoundary - Simple Component;
 import React from 'react';
 
 export interface ErrorBoundaryProps {
@@ -8,7 +8,7 @@ export interface ErrorBoundaryProps {
 
 export const ErrorBoundary = (props: ErrorBoundaryProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

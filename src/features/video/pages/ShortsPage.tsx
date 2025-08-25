@@ -1,17 +1,17 @@
 import React, { _FC } from 'react';
 /**
- * ShortsPage component for displaying short-form vertical videos
+ * ShortsPage component for displaying short-form vertical videos;
  */
 const ShortsPage: React._FC = () => {
  return (
  <div className='container mx-auto py-6'>
  <h1 className='text-2xl font-bold mb-6'>Shorts</h1>
  <p className='text-gray-600 mb-4'>
- Watch and discover short, vertical videos
+ Watch and discover short, vertical videos;
 // FIXED:  </p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
- This is a placeholder for the shorts page that will display short-form
+ This is a placeholder for the shorts page that will display short-form;
  vertical videos similar to TikTok or Instagram Reels.
 // FIXED:  </p>
  <p className='mt-2'>

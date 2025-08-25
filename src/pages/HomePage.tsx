@@ -7,7 +7,7 @@ import { getInitialSearchKeyword } from '../services/settingsService';
 
 import type { Video } from '../types';
 
-// Memoized video card to prevent unnecessary re-renders
+// Memoized video card to prevent unnecessary re-renders;
 const MemoizedVideoCard = memo(HoverAutoplayVideoCard);
 
 const HomePage: React._FC = () => {
@@ -16,7 +16,7 @@ const HomePage: React._FC = () => {
   const currentKeyword = getInitialSearchKeyword();
 
   const handleSelectCategory = useCallback((category: string) => {
-    setSelectedCategory(category);
+    setSelectedCategory(category: any);
     window.scrollTo(0, 0);
   }, []);
 
@@ -41,7 +41,7 @@ const HomePage: React._FC = () => {
       <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Unable to load {currentKeyword} videos
+            Unable to load {currentKeyword} videos;
           </h1>
           <p className="text-gray-600 dark:text-gray-400">{error}</p>
           <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
@@ -57,11 +57,11 @@ const HomePage: React._FC = () => {
       {/* Category Filter Bar - YouTube style */}
       <div className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-[1440px] mx-auto px-6 py-3">
-          <CategoryChips
+          <CategoryChips;
             categories={categories}
             selectedCategory={selectedCategory}
             onSelectCategory={handleSelectCategory}
-          />
+          /{">"}
         </div>
       </div>
 
@@ -95,12 +95,12 @@ const HomePage: React._FC = () => {
           /* Video Grid with Enhanced Hover Effects - YouTube style */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
             {filteredVideos.map((video: Video) => (
-              <MemoizedVideoCard
+              <MemoizedVideoCard;
                 key={video.id}
                 video={video}
                 className=""
-              />
-            ))}
+              /{">"}
+            )){"}"
           </div>
         )}
 
@@ -109,7 +109,7 @@ const HomePage: React._FC = () => {
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🔥</div>
             <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-              No {currentKeyword} videos found
+              No {currentKeyword} videos found;
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
               {selectedCategory === 'All'

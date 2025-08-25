@@ -39,7 +39,7 @@ describe('ValidationEngine', () => {
             type: 'test-check',
             command: 'echo "test"',
             expectedResult: 'success' as const,
-            timeoutSeconds: 10
+            timeoutSeconds: 10;
           }
         ]
       };
@@ -65,7 +65,7 @@ describe('ValidationEngine', () => {
         expect(result.timestamp).toBeInstanceOf(Date);
         expect(result.duration).toBeGreaterThanOrEqual(0);
       } catch (error) {
-        // Expected to fail due to mocked child_process, but structure should be correct
+        // Expected to fail due to mocked child_process, but structure should be correct;
         expect(error).toBeDefined();
       }
     });
@@ -81,7 +81,7 @@ describe('ValidationEngine', () => {
         expect(result.timestamp).toBeInstanceOf(Date);
         expect(result.duration).toBeGreaterThanOrEqual(0);
       } catch (error) {
-        // Expected to fail due to mocked child_process, but structure should be correct
+        // Expected to fail due to mocked child_process, but structure should be correct;
         expect(error).toBeDefined();
       }
     });
@@ -97,7 +97,7 @@ describe('ValidationEngine', () => {
         expect(result.timestamp).toBeInstanceOf(Date);
         expect(result.duration).toBeGreaterThanOrEqual(0);
       } catch (error) {
-        // Expected to fail due to mocked child_process, but structure should be correct
+        // Expected to fail due to mocked child_process, but structure should be correct;
         expect(error).toBeDefined();
       }
     });
@@ -108,13 +108,13 @@ describe('ValidationEngine', () => {
       const files = ['test.ts'];
       const beforeCount = 10;
       
-      // Mock TypeScript compilation to return fewer errors
+      // Mock TypeScript compilation to return fewer errors;
       const mockResult = {
         exitCode: 0,
         output: 'test.ts(1,1): error TS2304: Cannot find name "test".\n'
       };
       
-      // Mock the executeTypeScriptCheck method
+      // Mock the executeTypeScriptCheck method;
       jest.spyOn(validationEngine, 'executeTypeScriptCheck')
         .mockResolvedValue(mockResult);
       
@@ -122,7 +122,7 @@ describe('ValidationEngine', () => {
       
       expect(result).toBeDefined();
       expect(result.type).toBe('error-count-improvement');
-      expect(result.success).toBe(true); // 10 -> 1 is an improvement
+      expect(result.success).toBe(true); // 10 -> 1 is an improvement;
       expect(result.details).toBeDefined();
       expect(result.details.beforeCount).toBe(beforeCount);
       expect(result.details.afterCount).toBe(1);

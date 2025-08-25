@@ -1,9 +1,9 @@
-// useDropdownMenu - Custom Hook
+// useDropdownMenu - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseDropdownMenuOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useDropdownMenu(
       const result = {
         hookName: 'useDropdownMenu',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useDropdownMenu(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

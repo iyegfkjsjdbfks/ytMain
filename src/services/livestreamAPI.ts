@@ -1,5 +1,5 @@
 import _React from 'react';
-// Livestream API - Enhanced Implementation
+// Livestream API - Enhanced Implementation;
 export interface LiveStreamConfig {
   streamKey: string;
   title: string;
@@ -49,7 +49,7 @@ export class LiveStreamAPI {
         id: streamId,
         status: 'live',
         startTime: new Date().toISOString(),
-        viewerCount: 0
+        viewerCount: 0;
       };
     } catch (error) {
       console.error('Failed to start live stream:', error);

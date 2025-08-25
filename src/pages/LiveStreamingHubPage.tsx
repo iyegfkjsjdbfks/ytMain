@@ -1,4 +1,4 @@
-// LiveStreamingHubPage - Clean Component Implementation
+// LiveStreamingHubPage - Clean Component Implementation;
 import React, { useState, useEffect } from 'react';
 
 export interface LiveStreamingHubPageProps {
@@ -12,7 +12,7 @@ export const LiveStreamingHubPage: React.FC<LiveStreamingHubPageProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -20,7 +20,7 @@ export const LiveStreamingHubPage: React.FC<LiveStreamingHubPageProps> = ({
   useEffect(() => {
     const initialize = async () => {
       try {
-        // Simulate initialization
+        // Simulate initialization;
         await new Promise(resolve => setTimeout(resolve, 200));
         setIsReady(true);
         onLoad?.();
@@ -40,7 +40,7 @@ export const LiveStreamingHubPage: React.FC<LiveStreamingHubPageProps> = ({
         <h3>Error in LiveStreamingHubPage</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

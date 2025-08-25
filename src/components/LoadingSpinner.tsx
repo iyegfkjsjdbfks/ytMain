@@ -14,9 +14,9 @@ const LoadingSpinner: FC<LoadingSpinnerProps> = ({
 
  return (
  <div className={`flex items-center justify-center ${className}`}>
- <div
-// FIXED:  className={`${_sizeClasses[_size]} border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin`} />
- />
+ <div;
+// FIXED:  className={`${_sizeClasses[_size]} border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin`} /{">"}
+ /{">"}
 // FIXED:  </div>
  );
 };

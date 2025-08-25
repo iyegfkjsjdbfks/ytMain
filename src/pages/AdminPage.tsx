@@ -16,7 +16,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
     totalUsers: 125000,
     totalVideos: 45000,
     totalViews: 2500000,
-    activeUsers: 8500
+    activeUsers: 8500;
   });
 
   const [selectedTab, setSelectedTab] = useState<'overview' | 'users' | 'content' | 'reports'>('overview');
@@ -29,18 +29,18 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
         {/* Navigation Tabs */}
         <div className="flex space-x-4 mb-6">
           {(['overview', 'users', 'content', 'reports'] as const).map((tab) => (
-            <button
+            <button;
               key={tab}
               onClick={() => setSelectedTab(tab)}
               className={`px-4 py-2 rounded-lg font-medium ${
-                selectedTab === tab
+                selectedTab === tab;
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
+              {"{"}""`{"{"}""
+            {">"}
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
+            </button></div>
+          )){"}"
         </div>
 
         {/* Overview Tab */}
@@ -76,7 +76,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">Manage user accounts and permissions</p>
                 </div>
                 <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                  Manage
+                  Manage;
                 </button>
               </div>
               <div className="flex justify-between items-center p-4 border rounded">
@@ -85,7 +85,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">View and manage banned accounts</p>
                 </div>
                 <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                  View
+                  View;
                 </button>
               </div>
             </div>
@@ -103,7 +103,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">Review flagged videos and content</p>
                 </div>
                 <button className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
-                  Review
+                  Review;
                 </button>
               </div>
               <div className="flex justify-between items-center p-4 border rounded">
@@ -112,7 +112,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">Handle copyright and DMCA requests</p>
                 </div>
                 <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-                  Handle
+                  Handle;
                 </button>
               </div>
             </div>
@@ -130,7 +130,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">View user-submitted reports</p>
                 </div>
                 <button className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600">
-                  View Reports
+                  View Reports;
                 </button>
               </div>
               <div className="flex justify-between items-center p-4 border rounded">
@@ -139,7 +139,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">Platform performance and usage analytics</p>
                 </div>
                 <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                  View Analytics
+                  View Analytics;
                 </button>
               </div>
             </div>

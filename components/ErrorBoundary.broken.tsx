@@ -2,7 +2,7 @@ import React, { ReactNode, Component, type ErrorInfo } from 'react';
 
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
-// Error reporting service
+// Error reporting service;
 interface ErrorReport {
  error: Error;
  errorInfo: ErrorInfo;
@@ -10,7 +10,7 @@ interface ErrorReport {
  url: string;
  userAgent: string;
  userId?: string;
- sessionId: string
+ sessionId: string;
 }
 
 class ErrorReportingService {
@@ -39,11 +39,11 @@ class ErrorReportingService {
  timestamp: Date.now(),
  url: window.location.href,
  userAgent: navigator.userAgent,
- sessionId: this.sessionId
+ sessionId: this.sessionId;
  };
 
  try {
- // In development, log to console
+ // In development, log to console;
  if (import.meta.env.DEV) {
  (console as any).group('🚨 Error Report');
  (console as any).error('Error:', error);
@@ -52,16 +52,16 @@ class ErrorReportingService {
  (console as any).groupEnd();
  }
 
- // In production, send to error reporting service
+ // In production, send to error reporting service;
  if (import.meta.env.PROD) {
- // Example: Send to error reporting service
+ // Example: Send to error reporting service;
  // await (fetch as any)('/api/errors', {
  // method: 'POST',
  // headers: { 'Content-Type': 'application/json' },
  // body: JSON.stringify(report)
  // });
 
-        // Or use a service like Sentry
+        // Or use a service like Sentry;
         // Sentry.captureException(error, { contexts: { react: errorInfo } });
  }
  } catch (reportingError) {
@@ -96,7 +96,7 @@ class ErrorBoundary extends Component<Props, State> {
 
  public override state: State = {
  hasError: false,
- retryCount: 0
+ retryCount: 0;
  };
 
  constructor(props: Props) {
@@ -109,7 +109,7 @@ class ErrorBoundary extends Component<Props, State> {
  return {
  hasError: true,
  error,
- errorId
+ errorId;
  };
  }
 
@@ -117,7 +117,7 @@ class ErrorBoundary extends Component<Props, State> {
  const { resetKeys, resetOnPropsChange } = this.props;
  const { hasError } = this.state;
 
- // Reset error boundary when resetKeys change
+ // Reset error boundary when resetKeys change;
  if (hasError && resetKeys && prevProps.resetKeys !== resetKeys) {
  const hasResetKeyChanged = resetKeys.some(
  (key, index) => this.prevResetKeys[index] !== key);
@@ -134,10 +134,10 @@ class ErrorBoundary extends Component<Props, State> {
  errorInfo: ErrorInfo) {
  (console as any).error('ErrorBoundary caught an error:', error, errorInfo);
 
- // Report error to external service
+ // Report error to external service;
  errorReporter.reportError(error, errorInfo).catch(console.error);
 
- // Call custom error handler if provided
+ // Call custom error handler if provided;
  this.props.onError?.(error, errorInfo);
 
  this.setState({ error, errorInfo });
@@ -154,7 +154,7 @@ class ErrorBoundary extends Component<Props, State> {
 
  this.setState({
  hasError: false,
- retryCount: 0
+ retryCount: 0;
  });
  };
 
@@ -165,12 +165,12 @@ class ErrorBoundary extends Component<Props, State> {
  if (retryCount < maxRetries) {
  this.setState(prevState => ({
  hasError: false,
- retryCount: prevState.retryCount + 1
+ retryCount: prevState.retryCount + 1;
  }));
  };
 
  private handleAutoRetry = () => {
- // Auto-retry after 5 seconds for the first error
+ // Auto-retry after 5 seconds for the first error;
  if (this.state.retryCount === 0) {
  this.resetTimeoutId = window.setTimeout((() => {
  this.handleRetry();
@@ -187,7 +187,7 @@ class ErrorBoundary extends Component<Props, State> {
 
  public override render() {
  if (this.state.hasError) {
- // Use custom fallback if provided
+ // Use custom fallback if provided;
  if (this.props.fallback) {
  return this.props.fallback;
  }
@@ -196,7 +196,7 @@ class ErrorBoundary extends Component<Props, State> {
  const { retryCount, error, errorInfo, errorId } = this.state;
  const canRetry = retryCount < maxRetries;
 
- // Auto-retry for first error
+ // Auto-retry for first error;
  if (retryCount === 0) {
  this.handleAutoRetry();
  }
@@ -208,10 +208,10 @@ class ErrorBoundary extends Component<Props, State> {
  <ExclamationTriangleIcon className="h-12 w-12 text-red-500" />
 // FIXED:  </div>
 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
- Something went wrong
+ Something went wrong;
 // FIXED:  </h2>
  <p className="mt-2 text-center text-sm text-gray-600">
- {retryCount > 0
+ {retryCount > 0;
  ? `We've tried ${retryCount} time${retryCount > 1 ? 's' : ''} to fix this. Please try refreshing the page.`
  : "We're sorry, but something unexpected happened. We'll automatically retry in a moment."
  }
@@ -236,24 +236,24 @@ class ErrorBoundary extends Component<Props, State> {
  <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
  <div className="space-y-4">
  {canRetry && (
- <button
+ <button;
 // FIXED:  onClick={this.handleRetry}
 // FIXED:  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" />
  >
  Try Again ({maxRetries - retryCount} left)
 // FIXED:  </button>
  )}
- <button
+ <button;
 // FIXED:  onClick={this.handleReload}
 // FIXED:  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" />
  >
- Refresh Page
+ Refresh Page;
 // FIXED:  </button>
- <button
+ <button;
 // FIXED:  onClick={this.handleGoHome}
 // FIXED:  className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" />
  >
- Go to Home
+ Go to Home;
 // FIXED:  </button>
 // FIXED:  </div>
 

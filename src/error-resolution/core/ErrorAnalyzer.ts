@@ -2,20 +2,20 @@ import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 
-// Error categorization interfaces and enums
+// Error categorization interfaces and enums;
 export enum ErrorRootCause {
-  FORMATTING = 1,    // Highest priority - safe to fix first
-  SYNTAX = 2,        // Second priority - enables other fixes
-  IMPORT = 3,        // Third priority - resolves dependencies
-  TYPE = 4,          // Fourth priority - complex type issues
-  LOGIC = 5          // Lowest priority - requires careful analysis
+  FORMATTING = 1,    // Highest priority - safe to fix first;
+  SYNTAX = 2,        // Second priority - enables other fixes;
+  IMPORT = 3,        // Third priority - resolves dependencies;
+  TYPE = 4,          // Fourth priority - complex type issues;
+  LOGIC = 5          // Lowest priority - requires careful analysis;
 }
 
 export enum ErrorSeverity {
-  CRITICAL = 'critical',  // Blocks compilation completely
-  HIGH = 'high',         // Causes major functionality issues
-  MEDIUM = 'medium',     // Causes minor issues or warnings
-  LOW = 'low'           // Style or optimization issues
+  CRITICAL = 'critical',  // Blocks compilation completely;
+  HIGH = 'high',         // Causes major functionality issues;
+  MEDIUM = 'medium',     // Causes minor issues or warnings;
+  LOW = 'low'           // Style or optimization issues;
 }
 
 export interface ErrorCategory {
@@ -92,7 +92,7 @@ export class ErrorAnalyzer {
       description: 'Invalid property assignment syntax in objects'
     },
     
-    // Import/Export errors
+    // Import/Export errors;
     {
       name: 'Cannot Find Module',
       priority: 2,
@@ -110,7 +110,7 @@ export class ErrorAnalyzer {
       description: 'Importing non-existent exports from modules'
     },
     
-    // Type errors
+    // Type errors;
     {
       name: 'Property Does Not Exist',
       priority: 3,
@@ -136,7 +136,7 @@ export class ErrorAnalyzer {
       description: 'Generic types missing required type parameters'
     },
     
-    // Logic errors
+    // Logic errors;
     {
       name: 'Possibly Undefined',
       priority: 4,
@@ -156,19 +156,19 @@ export class ErrorAnalyzer {
   ];
 
   /**
-   * Captures and analyzes all TypeScript compilation errors
+   * Captures and analyzes all TypeScript compilation errors;
    */
   public async analyzeErrors(): Promise<ErrorAnalysisResult> {
     console.log('🔍 Starting TypeScript error analysis...');
     
     try {
-      // Capture TypeScript errors
+      // Capture TypeScript errors;
       const rawErrors = this.captureTypeScriptErrors();
       
-      // Parse and categorize errors
+      // Parse and categorize errors;
       const analyzedErrors = this.parseAndCategorizeErrors(rawErrors);
       
-      // Generate analysis result
+      // Generate analysis result;
       const result = this.generateAnalysisResult(analyzedErrors);
       
       console.log(`📊 Analysis complete: ${result.totalErrors} errors found`);
@@ -181,29 +181,29 @@ export class ErrorAnalyzer {
   }
 
   /**
-   * Captures TypeScript compilation errors by running tsc
+   * Captures TypeScript compilation errors by running tsc;
    */
   private captureTypeScriptErrors(): string {
     try {
       console.log('🏃 Running TypeScript compilation to capture errors...');
       
-      // Run tsc on all TypeScript files to capture errors
+      // Run tsc on all TypeScript files to capture errors;
       execSync('npx tsc --noEmit components/*.tsx utils/*.ts', { 
         encoding: 'utf8',
         stdio: 'pipe'
       });
       
-      return ''; // No errors if we reach here
+      return ''; // No errors if we reach here;
       
     } catch (error: any) {
-      // TypeScript errors are captured in stderr and stdout
+      // TypeScript errors are captured in stderr and stdout;
       console.log('🔍 Captured TypeScript compilation errors');
       return error.stdout || error.stderr || error.message || '';
     }
   }
 
   /**
-   * Parses raw TypeScript error output and categorizes each error
+   * Parses raw TypeScript error output and categorizes each error;
    */
   private parseAndCategorizeErrors(rawOutput: string): AnalyzedError[] {
     const errors: AnalyzedError[] = [];
@@ -217,7 +217,7 @@ export class ErrorAnalyzer {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       
-      // Skip empty lines and non-error lines
+      // Skip empty lines and non-error lines;
       if (!line || !line.includes('error TS')) {
         continue;
       }
@@ -237,10 +237,10 @@ export class ErrorAnalyzer {
   }
 
   /**
-   * Parses a single error line into an AnalyzedError object
+   * Parses a single error line into an AnalyzedError object;
    */
   private parseErrorLine(errorLine: string): AnalyzedError | null {
-    // TypeScript error format: file.ts(line,column): error TSxxxx: message
+    // TypeScript error format: file.ts(line,column): error TSxxxx: message;
     const errorRegex = /^(.+)\((\d+),(\d+)\):\s*error\s+(TS\d+):\s*(.+)$/;
     const match = errorLine.match(errorRegex);
     
@@ -253,7 +253,7 @@ export class ErrorAnalyzer {
     const line = parseInt(lineStr, 10);
     const column = parseInt(columnStr, 10);
     
-    // Categorize the error
+    // Categorize the error;
     const category = this.categorizeError(code, message);
     const severity = this.determineSeverity(code, message, category);
     
@@ -266,22 +266,22 @@ export class ErrorAnalyzer {
       category,
       severity,
       dependencies: this.extractDependencies(file, message),
-      rawError: errorLine
+      rawError: errorLine;
     };
   }
 
   /**
-   * Categorizes an error based on its code and message
+   * Categorizes an error based on its code and message;
    */
   private categorizeError(code: string, message: string): ErrorCategory {
-    // Try to match against known error patterns
+    // Try to match against known error patterns;
     for (const category of this.errorCategories) {
       if (category.pattern.test(`${code}: ${message}`)) {
         return category;
       }
     }
     
-    // Default category for unrecognized errors
+    // Default category for unrecognized errors;
     return {
       name: 'Unknown Error',
       priority: 5,
@@ -293,41 +293,41 @@ export class ErrorAnalyzer {
   }
 
   /**
-   * Determines error severity based on code and context
+   * Determines error severity based on code and context;
    */
   private determineSeverity(code: string, message: string, category: ErrorCategory): ErrorSeverity {
-    // Critical syntax errors that prevent compilation
+    // Critical syntax errors that prevent compilation;
     if (category.rootCause === ErrorRootCause.SYNTAX) {
       return ErrorSeverity.CRITICAL;
     }
     
-    // Import errors are high priority
+    // Import errors are high priority;
     if (category.rootCause === ErrorRootCause.IMPORT) {
       return ErrorSeverity.HIGH;
     }
     
-    // Type errors are medium priority
+    // Type errors are medium priority;
     if (category.rootCause === ErrorRootCause.TYPE) {
       return ErrorSeverity.MEDIUM;
     }
     
-    // Logic errors are low priority
+    // Logic errors are low priority;
     return ErrorSeverity.LOW;
   }
 
   /**
-   * Extracts file dependencies from error context
+   * Extracts file dependencies from error context;
    */
   private extractDependencies(file: string, message: string): string[] {
     const dependencies: string[] = [];
     
-    // Extract imported module names from error messages
+    // Extract imported module names from error messages;
     const moduleMatch = message.match(/module ['"]([^'"]+)['"]/);
     if (moduleMatch) {
       dependencies.push(moduleMatch[1]);
     }
     
-    // Extract file references
+    // Extract file references;
     const fileMatch = message.match(/in file ['"]([^'"]+)['"]/);
     if (fileMatch) {
       dependencies.push(fileMatch[1]);
@@ -337,7 +337,7 @@ export class ErrorAnalyzer {
   }
 
   /**
-   * Generates comprehensive analysis result from parsed errors
+   * Generates comprehensive analysis result from parsed errors;
    */
   private generateAnalysisResult(errors: AnalyzedError[]): ErrorAnalysisResult {
     const errorsByCategory = new Map<string, AnalyzedError[]>();
@@ -345,34 +345,34 @@ export class ErrorAnalyzer {
     const errorsBySeverity = new Map<ErrorSeverity, AnalyzedError[]>();
     const criticalFiles: string[] = [];
     
-    // Group errors by various criteria
+    // Group errors by various criteria;
     for (const error of errors) {
-      // By category
+      // By category;
       const categoryKey = error.category.name;
       if (!errorsByCategory.has(categoryKey)) {
         errorsByCategory.set(categoryKey, []);
       }
       errorsByCategory.get(categoryKey)!.push(error);
       
-      // By file
+      // By file;
       if (!errorsByFile.has(error.file)) {
         errorsByFile.set(error.file, []);
       }
       errorsByFile.get(error.file)!.push(error);
       
-      // By severity
+      // By severity;
       if (!errorsBySeverity.has(error.severity)) {
         errorsBySeverity.set(error.severity, []);
       }
       errorsBySeverity.get(error.severity)!.push(error);
       
-      // Track critical files
+      // Track critical files;
       if (error.severity === ErrorSeverity.CRITICAL && !criticalFiles.includes(error.file)) {
         criticalFiles.push(error.file);
       }
     }
     
-    // Generate recommendations
+    // Generate recommendations;
     const recommendations = this.generateRecommendations(errorsByCategory, criticalFiles);
     
     return {
@@ -381,12 +381,12 @@ export class ErrorAnalyzer {
       errorsByFile,
       errorsBySeverity,
       criticalFiles,
-      recommendations
+      recommendations;
     };
   }
 
   /**
-   * Generates actionable recommendations based on error analysis
+   * Generates actionable recommendations based on error analysis;
    */
   private generateRecommendations(
     errorsByCategory: Map<string, AnalyzedError[]>,
@@ -394,14 +394,14 @@ export class ErrorAnalyzer {
   ): string[] {
     const recommendations: string[] = [];
     
-    // Critical file recommendations
+    // Critical file recommendations;
     if (criticalFiles.length > 0) {
       recommendations.push(
         `🚨 CRITICAL: ${criticalFiles.length} files have syntax errors preventing compilation. Fix these first: ${criticalFiles.slice(0, 5).join(', ')}`
       );
     }
     
-    // Category-specific recommendations
+    // Category-specific recommendations;
     for (const [categoryName, errors] of Array.from(errorsByCategory.entries())) {
       if (errors.length > 10) {
         const category = errors[0].category;
@@ -411,7 +411,7 @@ export class ErrorAnalyzer {
       }
     }
     
-    // Priority recommendations
+    // Priority recommendations;
     const syntaxErrors = Array.from(errorsByCategory.values())
       .flat()
       .filter(e => e.category.rootCause === ErrorRootCause.SYNTAX);
@@ -426,7 +426,7 @@ export class ErrorAnalyzer {
   }
 
   /**
-   * Saves analysis result to a JSON file for further processing
+   * Saves analysis result to a JSON file for further processing;
    */
   public async saveAnalysisResult(result: ErrorAnalysisResult, outputPath: string): Promise<void> {
     const serializedResult = {

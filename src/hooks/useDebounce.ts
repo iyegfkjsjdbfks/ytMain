@@ -1,9 +1,9 @@
-// useDebounce - Custom Hook
+// useDebounce - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseDebounceOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useDebounce(
       const result = {
         hookName: 'useDebounce',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useDebounce(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

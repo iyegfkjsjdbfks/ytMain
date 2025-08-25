@@ -1,10 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env node;
 
 import { ErrorAnalyzer } from '../core/ErrorAnalyzer';
 import * as path from 'path';
 
 /**
- * CLI script to analyze TypeScript errors in the current project
+ * CLI script to analyze TypeScript errors in the current project;
  */
 async function main() {
   console.log('🚀 TypeScript Error Analysis Tool');
@@ -13,17 +13,17 @@ async function main() {
   try {
     const analyzer = new ErrorAnalyzer();
     
-    // Analyze errors
+    // Analyze errors;
     const result = await analyzer.analyzeErrors();
     
-    // Display summary
+    // Display summary;
     console.log('\n📊 ANALYSIS SUMMARY');
     console.log('==================');
     console.log(`Total Errors: ${result.totalErrors}`);
     console.log(`Critical Files: ${result.criticalFiles.length}`);
     console.log(`Error Categories: ${result.errorsByCategory.size}`);
     
-    // Display error breakdown by category
+    // Display error breakdown by category;
     console.log('\n📦 ERRORS BY CATEGORY');
     console.log('====================');
     for (const [category, errors] of result.errorsByCategory.entries()) {
@@ -32,14 +32,14 @@ async function main() {
       console.log(`${category}: ${errors.length} errors (${rootCause}, ${strategy} fix)`);
     }
     
-    // Display error breakdown by severity
+    // Display error breakdown by severity;
     console.log('\n🚨 ERRORS BY SEVERITY');
     console.log('====================');
     for (const [severity, errors] of result.errorsBySeverity.entries()) {
       console.log(`${severity.toUpperCase()}: ${errors.length} errors`);
     }
     
-    // Display top problematic files
+    // Display top problematic files;
     console.log('\n📁 TOP PROBLEMATIC FILES');
     console.log('=======================');
     const fileErrorCounts = Array.from(result.errorsByFile.entries())
@@ -51,14 +51,14 @@ async function main() {
       console.log(`${file}: ${count} errors`);
     }
     
-    // Display recommendations
+    // Display recommendations;
     console.log('\n💡 RECOMMENDATIONS');
     console.log('==================');
     for (const recommendation of result.recommendations) {
       console.log(`• ${recommendation}`);
     }
     
-    // Save detailed analysis
+    // Save detailed analysis;
     const outputPath = path.join(process.cwd(), 'error-analysis-result.json');
     console.log(`Saving analysis to: ${outputPath}`);
     await analyzer.saveAnalysisResult(result, outputPath);
@@ -71,7 +71,7 @@ async function main() {
   }
 }
 
-// Run the CLI if this file is executed directly
+// Run the CLI if this file is executed directly;
 if (require.main === module) {
   main().catch(console.error);
 }

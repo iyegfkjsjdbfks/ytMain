@@ -1,6 +1,6 @@
 import React, { memo, FC } from 'react';
 
-import YouTubeVideoCard from 'YouTubeVideoCard.tsx';
+import YouTubeVideoCard from 'YouTubeVideoCard';
 
 import type { YouTubeSearchResult } from '../services/googleSearchService.ts';
 
@@ -41,10 +41,10 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
  <div className={getGridClasses()}>
  {videos.map((video,
  index) => {
- // Generate a stable key using available identifiers
+ // Generate a stable key using available identifiers;
  const videoKey = video.id || (video as any).videoId || `video-${index}`;
  return (
- <YouTubeVideoCard
+ <YouTubeVideoCard;
  key={keyPrefix ? `${keyPrefix}-${videoKey}` : videoKey}
  video={video} />
  />

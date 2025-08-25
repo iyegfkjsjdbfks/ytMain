@@ -1,9 +1,9 @@
-// useLocalStorageSet - Custom Hook
+// useLocalStorageSet - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseLocalStorageSetOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useLocalStorageSet(
       const result = {
         hookName: 'useLocalStorageSet',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useLocalStorageSet(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

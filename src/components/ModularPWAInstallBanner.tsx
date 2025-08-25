@@ -1,4 +1,4 @@
-// ModularPWAInstallBanner - Enhanced Component
+// ModularPWAInstallBanner - Enhanced Component;
 import React, { useState } from 'react';
 
 export interface ModularPWAInstallBannerProps {
@@ -8,7 +8,7 @@ export interface ModularPWAInstallBannerProps {
 
 export const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
   className = '',
-  children
+  children;
 }) => {
   const [isActive, setIsActive] = useState(false);
 

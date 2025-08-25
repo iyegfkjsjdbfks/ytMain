@@ -1,11 +1,11 @@
 import React, { useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
-// @ts-nocheck
+// @ts-nocheck;
 
 import { getShortsVideos } from '../services/realVideoService.ts';
 
-import ShortsIcon from 'icons/ShortsIcon.tsx';
-import ShortDisplayCard from 'ShortDisplayCard.tsx';
+import ShortsIcon from 'icons/ShortsIcon';
+import ShortDisplayCard from 'ShortDisplayCard';
 
 import type { Short } from '../src/types/core.ts';
 
@@ -22,12 +22,12 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
  const fetchShorts = async (): Promise<void> => {
  try {
  setLoading(true);
- // Assuming your video service can filter by a 'Shorts' category or similar
- // Get shorts videos directly from the service
+ // Assuming your video service can filter by a 'Shorts' category or similar;
+ // Get shorts videos directly from the service;
  const allShortsVideos = await getShortsVideos();
  const shortsVideos = allShortsVideos.slice(0, maxShorts);
 
- // Convert Video objects to Short objects
+ // Convert Video objects to Short objects;
  const convertedShorts: Short[] = shortsVideos.map((video) => {
  const shortVideo: Short = {
  id: video.id,
@@ -103,7 +103,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
  }
 
  if (shorts.length === 0) {
- return null; // Don't render the section if there are no shorts
+ return null; // Don't render the section if there are no shorts;
  }
 
  return (
@@ -113,11 +113,11 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }: any) =>
  <ShortsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Shorts</h2>
 // FIXED:  </div>
- <Link
+ <Link;
  to="/shorts"
 // FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
- View All
+ View All;
 // FIXED:  </Link>
 // FIXED:  </div>
  <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">

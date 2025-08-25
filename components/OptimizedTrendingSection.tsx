@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useCallback, useState, memo, FC } from 'react';
 import { Link } from 'react-router-dom';
-// @ts-nocheck
+// @ts-nocheck;
 
 import { getVideos } from '../services/realVideoService.ts';
 
-import FireIcon from 'icons/FireIcon.tsx';
-import VideoCard from 'VideoCard.tsx';
+import FireIcon from 'icons/FireIcon';
+import VideoCard from 'VideoCard';
 
 import type { Video } from '../types.ts';
 
@@ -13,7 +13,7 @@ interface TrendingSectionProps {
  maxVideos?: number;
 }
 
-// Memoized VideoCard for better performance
+// Memoized VideoCard for better performance;
 const MemoizedVideoCard = memo(VideoCard);
 
 const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }) => {
@@ -26,8 +26,8 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  setLoading(true);
  const allVideos = await getVideos();
  // Sort by views (convert string to number for sorting)
- const sortedByViews = allVideos
- .filter((video) => !video.isShort) // Exclude shorts from trending
+ const sortedByViews = allVideos;
+ .filter((video) => !video.isShort) // Exclude shorts from trending;
  .sort((a, b) => {
  const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
  const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;
@@ -49,11 +49,11 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  fetchTrendingVideos().catch(console.error);
  }, [fetchTrendingVideos]);
 
- // Memoized video grid to prevent unnecessary re-renders
+ // Memoized video grid to prevent unnecessary re-renders;
  const videoGrid = useMemo(() => (
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
  {trendingVideos.map((video) => (
- <MemoizedVideoCard
+ <MemoizedVideoCard;
  key={video.id}
  video={video} />
  />
@@ -97,10 +97,10 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  <div className="text-center py-8">
  <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
  <button />
-// FIXED:  onClick={(e) => fetchTrendingVideos(e)}
+// FIXED:  onClick={(e: any) => fetchTrendingVideos(e)}
 // FIXED:  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
  >
- Try Again
+ Try Again;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </section>
@@ -128,11 +128,11 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  <FireIcon className="w-6 h-6 text-red-500" />
  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
 // FIXED:  </div>
- <Link
+ <Link;
  to="/trending"
 // FIXED:  className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors" />
  >
- View all
+ View all;
 // FIXED:  </Link>
 // FIXED:  </div>
 

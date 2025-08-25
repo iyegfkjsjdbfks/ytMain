@@ -1,9 +1,9 @@
-// usePerformanceMonitor - Custom Hook
+// usePerformanceMonitor - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UsePerformanceMonitorOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function usePerformanceMonitor(
       const result = {
         hookName: 'usePerformanceMonitor',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function usePerformanceMonitor(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

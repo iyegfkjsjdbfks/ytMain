@@ -1,4 +1,4 @@
-// CommentCard - Simple Component
+// CommentCard - Simple Component;
 import React from 'react';
 
 export interface CommentCardProps {
@@ -8,7 +8,7 @@ export interface CommentCardProps {
 
 export const CommentCard = (props: CommentCardProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

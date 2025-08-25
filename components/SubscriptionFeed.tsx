@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { getVideos } from '../services/realVideoService.ts';
 
-import SubscriptionsIcon from 'icons/SubscriptionsIcon.tsx';
-import VideoCard from 'VideoCard.tsx';
+import SubscriptionsIcon from 'icons/SubscriptionsIcon';
+import VideoCard from 'VideoCard';
 
 import type { Video } from '../types.ts';
 
@@ -23,7 +23,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  setLoading(true);
  const allVideos = await getVideos();
 
- // Mock subscribed channels - in a real app, this would come from user data
+ // Mock subscribed channels - in a real app, this would come from user data;
  const subscribedChannels = [
  'Nature Explorers',
  'TechLevelUp',
@@ -32,8 +32,8 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  'Fitness Journey',
  'Music Vibes'];
 
- // Filter videos from subscribed channels and sort by upload date
- const subscriptionFeed = allVideos
+ // Filter videos from subscribed channels and sort by upload date;
+ const subscriptionFeed = allVideos;
  .filter((video) => subscribedChannels.includes(video.channelName) && !video.isShort)
  .sort((a, b) => {
  // Sort by most recent (this is a simple mock - in reality you'd parse actual dates)
@@ -108,11 +108,11 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
 // FIXED:  </div>
  <div className="text-center py-8 text-neutral-600 dark:text-neutral-400">
  <p className="mb-2">No new videos from your subscriptions</p>
- <Link
+ <Link;
  to="/trending"
 // FIXED:  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 font-medium" />
  >
- Discover new channels
+ Discover new channels;
 // FIXED:  </Link>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -126,11 +126,11 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }: an
  <SubscriptionsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Latest from your subscriptions</h2>
 // FIXED:  </div>
- <Link
+ <Link;
  to="/subscriptions"
 // FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
- View All
+ View All;
 // FIXED:  </Link>
 // FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

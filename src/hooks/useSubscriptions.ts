@@ -1,5 +1,5 @@
 import _React from 'react';
-// useSubscriptions - Simple Hook
+// useSubscriptions - Simple Hook;
 import { useState } from 'react';
 
 export function useSubscriptions() {
@@ -10,7 +10,7 @@ export function useSubscriptions() {
   return {
     data,
     loading,
-    error
+    error;
   };
 }
 

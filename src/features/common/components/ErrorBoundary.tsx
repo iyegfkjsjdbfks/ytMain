@@ -1,4 +1,4 @@
-// ErrorBoundary - React Component
+// ErrorBoundary - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface ErrorBoundaryProps {
@@ -12,7 +12,7 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
         <h3>Error in ErrorBoundary</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

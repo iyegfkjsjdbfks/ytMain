@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 interface ShortsPageErrorProps {
- error: string
+ error: string;
 }
 
 const ShortsPageError: React.FC<ShortsPageErrorProps> = ({ error }: any) => {

@@ -1,4 +1,4 @@
-// LiveStreamErrorBoundary - Simple Component
+// LiveStreamErrorBoundary - Simple Component;
 import React from 'react';
 
 export interface LiveStreamErrorBoundaryProps {
@@ -8,7 +8,7 @@ export interface LiveStreamErrorBoundaryProps {
 
 export const LiveStreamErrorBoundary = (props: LiveStreamErrorBoundaryProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

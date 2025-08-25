@@ -1,9 +1,9 @@
-// Logger - Minimal Implementation
+// Logger - Minimal Implementation;
 export enum LogLevel {
   ERROR = 0,
   WARN = 1,
   INFO = 2,
-  DEBUG = 3
+  DEBUG = 3;
 }
 
 export class Logger {
@@ -22,7 +22,7 @@ export class Logger {
   private formatMessage(
     level: string,
     message: string,
-    _data?: unknown
+    _data?: unknown;
   ): string {
     const timestamp = new Date().toISOString();
     return timestamp + ' [' + level + '] ' + message;
@@ -77,7 +77,7 @@ export class Logger {
 }
 
 export const logger = new Logger(
-  process.env.NODE_ENV === 'development' ? LogLevel.DEBUG : LogLevel.INFO
+  process.env.NODE_ENV === 'development' ? LogLevel.DEBUG : LogLevel.INFO;
 );
 
 export default logger;

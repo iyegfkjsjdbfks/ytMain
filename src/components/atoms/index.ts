@@ -1,2 +1,2 @@
-// Atoms
+// Atoms;
 export * from './Button';

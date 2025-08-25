@@ -25,5 +25,5 @@ export default {
   LikeIcon,
   DislikeIcon,
   CommentIcon,
-  ShareIcon
+  ShareIcon;
 };

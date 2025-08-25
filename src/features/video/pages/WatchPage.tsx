@@ -1,4 +1,4 @@
-// WatchPage - Simple Component
+// WatchPage - Simple Component;
 import React from 'react';
 
 export interface WatchPageProps {
@@ -8,7 +8,7 @@ export interface WatchPageProps {
 
 export const WatchPage = (props: WatchPageProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

@@ -1,4 +1,4 @@
-// RegisterForm - Advanced Component Implementation
+// RegisterForm - Advanced Component Implementation;
 import React, { useState, useEffect } from 'react';
 
 export interface RegisterFormProps {
@@ -12,7 +12,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -20,7 +20,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   useEffect(() => {
     const initialize = async () => {
       try {
-        // Simulate initialization
+        // Simulate initialization;
         await new Promise(resolve => setTimeout(resolve, 500));
         setIsReady(true);
         onLoad?.();

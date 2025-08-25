@@ -37,26 +37,26 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ className }) => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-medium">Autoplay</label>
-                <input
+                <input;
                   type="checkbox"
                   checked={settings.autoplay}
-                  onChange={(e) => handleSettingChange('autoplay', e.target.checked)}
+                  onChange={(e: any) => handleSettingChange('autoplay', e.target.checked)}
                   className="toggle"
-                />
+                /{">"}
               </div>
               
               <div className="flex items-center justify-between">
                 <label className="text-sm font-medium">Video Quality</label>
-                <select
+                <select;
                   value={settings.quality}
-                  onChange={(e) => handleSettingChange('quality', e.target.value)}
+                  onChange={(e: any) => handleSettingChange('quality', e.target.value)}
                   className="border rounded px-3 py-1"
-                >
+                {">"}
                   <option value="auto">Auto</option>
                   <option value="1080p">1080p</option>
                   <option value="720p">720p</option>
                   <option value="480p">480p</option>
-                </select>
+                </select></div>
               </div>
             </div>
           </div>
@@ -66,12 +66,12 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ className }) => {
             
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium">Enable Notifications</label>
-              <input
+              <input;
                 type="checkbox"
                 checked={settings.notifications}
-                onChange={(e) => handleSettingChange('notifications', e.target.checked)}
+                onChange={(e: any) => handleSettingChange('notifications', e.target.checked)}
                 className="toggle"
-              />
+              /{">"}
             </div>
           </div>
 
@@ -81,26 +81,26 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ className }) => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-medium">Dark Mode</label>
-                <input
+                <input;
                   type="checkbox"
                   checked={settings.darkMode}
-                  onChange={(e) => handleSettingChange('darkMode', e.target.checked)}
+                  onChange={(e: any) => handleSettingChange('darkMode', e.target.checked)}
                   className="toggle"
-                />
+                /{">"}
               </div>
               
               <div className="flex items-center justify-between">
                 <label className="text-sm font-medium">Language</label>
-                <select
+                <select;
                   value={settings.language}
-                  onChange={(e) => handleSettingChange('language', e.target.value)}
+                  onChange={(e: any) => handleSettingChange('language', e.target.value)}
                   className="border rounded px-3 py-1"
-                >
+                {">"}
                   <option value="en">English</option>
                   <option value="es">Spanish</option>
                   <option value="fr">French</option>
                   <option value="de">German</option>
-                </select>
+                </select></div>
               </div>
             </div>
           </div>

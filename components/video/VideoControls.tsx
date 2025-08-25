@@ -1,5 +1,5 @@
 import React, { MouseEvent, ChangeEvent, FC } from 'react';
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon } from '@heroicons / react / 24 / outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon } from '@heroicons / react / 24 / outline';
 
 import { ActionButton } from '../ui/index.ts';
 
@@ -59,11 +59,11 @@ const VideoControls: React.FC < VideoControlsProps> = ({}
  return (
  <div className={`bg - gradient - to - t from - black / 80 to - transparent p - 4 ${className}`}>
  {/* Progress Bar */}
- <div
+ <div;
 // FIXED:  className="w - full h - 1 bg - gray - 600 rounded - full cursor - pointer mb - 4 group" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleProgressClick(e)}
  >
- <div
+ <div;
 // FIXED:  className="h - full bg - red - 600 rounded - full relative group - hover:h - 1.5 transition - all"
 // FIXED:  style={{ width: `${progress}%` } />
  >
@@ -94,13 +94,13 @@ const VideoControls: React.FC < VideoControlsProps> = ({}
  ariaLabel={isMuted ? 'Unmute' : 'Mute'}
  >
  {isMuted ? (}
- <SpeakerXMarkIcon className="w - 5 h - 5" />
+ <SpeakerXIcon className="w - 5 h - 5" />
  ) : (
  <SpeakerWaveIcon className="w - 5 h - 5" />
  )}
 // FIXED:  </ActionButton>
 
- <input
+ <input;
 // FIXED:  type="range"
  min="0"
  max="1"
@@ -119,7 +119,7 @@ const VideoControls: React.FC < VideoControlsProps> = ({}
 
  <div className="flex items - center space - x - 2">
  {/* Playback Rate */}
- <select
+ <select;
 // FIXED:  value={playbackRate} />
 // FIXED:  onChange={(e: React.ChangeEvent) => onPlaybackRateChange(parseFloat(e.target.value))}
 // FIXED:  className="bg - black bg - opacity - 50 text - white text - sm rounded px - 2 py - 1 border - none outline - none"

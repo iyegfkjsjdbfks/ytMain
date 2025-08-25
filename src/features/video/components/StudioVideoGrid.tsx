@@ -1,4 +1,4 @@
-// StudioVideoGrid - React Component
+// StudioVideoGrid - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface StudioVideoGridProps {
@@ -12,7 +12,7 @@ export const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
         <h3>Error in StudioVideoGrid</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

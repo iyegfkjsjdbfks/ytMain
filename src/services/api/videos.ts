@@ -1,4 +1,4 @@
-// videos - Enhanced Implementation
+// videos - Enhanced Implementation;
 export interface VideosConfig {
   enabled: boolean;
   options: Record<string, any>;
@@ -11,7 +11,7 @@ export class Videos {
     this.config = {
       enabled: true,
       options: {},
-      ...config
+      ...config;
     };
   }
 

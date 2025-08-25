@@ -1,4 +1,4 @@
-// commentService - Enhanced Service
+// commentService - Enhanced Service;
 export interface CommentServiceConfig {
   apiUrl?: string;
   timeout?: number;
@@ -13,7 +13,7 @@ export class CommentService {
       apiUrl: '/api',
       timeout: 5000,
       retries: 3,
-      ...config
+      ...config;
     };
   }
 

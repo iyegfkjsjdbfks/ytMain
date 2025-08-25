@@ -1,4 +1,4 @@
-// StudioSidebar - React Component
+// StudioSidebar - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface StudioSidebarProps {
@@ -12,7 +12,7 @@ export const StudioSidebar: React.FC<StudioSidebarProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const StudioSidebar: React.FC<StudioSidebarProps> = ({
         <h3>Error in StudioSidebar</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

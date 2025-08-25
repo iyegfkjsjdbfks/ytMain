@@ -1,4 +1,4 @@
-// searchService - Enhanced Service
+// searchService - Enhanced Service;
 export interface SearchServiceConfig {
   apiUrl?: string;
   timeout?: number;
@@ -13,7 +13,7 @@ export class SearchService {
       apiUrl: '/api',
       timeout: 5000,
       retries: 3,
-      ...config
+      ...config;
     };
   }
 

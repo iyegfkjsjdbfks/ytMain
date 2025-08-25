@@ -1,5 +1,5 @@
-// Main hooks index - comprehensive exports
-// Basic hooks
+// Main hooks index - comprehensive exports;
+// Basic hooks;
 export { useFormState } from './useFormState';
 export { useAsyncState } from './useAsyncState';
 export { useTrendingSearch } from './useTrendingSearch';
@@ -11,7 +11,7 @@ export { useDropdownMenu } from './useDropdownMenu';
 export { useOptimizedVideoData } from './useOptimizedVideoData';
 export { useWatchPage } from './useWatchPage';
 
-// Video hooks
+// Video hooks;
 export { useVideoPlayer } from './useVideoPlayer';
 export {
  useVideos,
@@ -20,15 +20,15 @@ export {
  useChannelVideos } from './useVideoData';
 export { useVideosData } from './useVideosData';
 
-// Shorts and specialized hooks
+// Shorts and specialized hooks;
 export { useShortsVideos } from './useShortsData';
 
-// Helper function for missing hooks
+// Helper function for missing hooks;
 export const useHomeVideos = () => {
- // Placeholder implementation
+ // Placeholder implementation;
  return [];
 };
 
-// Re-export from unified hooks
+// Re-export from unified hooks;
 export * from './unifiedHooks';
 export * from './unified';

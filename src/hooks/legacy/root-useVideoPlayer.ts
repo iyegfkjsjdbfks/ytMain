@@ -1,4 +1,4 @@
-// rootUseVideoPlayer - Generic Implementation
+// rootUseVideoPlayer - Generic Implementation;
 export interface RootUseVideoPlayerConfig {
   enabled?: boolean;
 }
@@ -8,7 +8,7 @@ export class RootUseVideoPlayer {
 
   constructor(config: RootUseVideoPlayerConfig = {}) {
     this.config = {
-      enabled: config.enabled ?? true
+      enabled: config.enabled ?? true;
     };
   }
 

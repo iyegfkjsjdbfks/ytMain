@@ -1,4 +1,4 @@
-// optimizedHooks - Advanced Service Implementation
+// optimizedHooks - Advanced Service Implementation;
 export interface optimizedHooksConfig {
   baseUrl?: string;
   timeout?: number;
@@ -10,7 +10,7 @@ export class OptimizedHooks {
   constructor(config: optimizedHooksConfig = {}) {
     this.config = {
       baseUrl: config.baseUrl || '/api',
-      timeout: config.timeout || 5000
+      timeout: config.timeout || 5000;
     };
   }
 
@@ -22,7 +22,7 @@ export class OptimizedHooks {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers
+          ...options.headers;
         }
       });
 

@@ -1,9 +1,9 @@
-// useVideoCache - Clean Hook Implementation
+// useVideoCache - Clean Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseVideoCacheOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -30,13 +30,13 @@ export function useVideoCache(
       setLoading(true);
       setError(null);
       
-      // Simulate async operation
+      // Simulate async operation;
       await new Promise(resolve => setTimeout(resolve, 300));
       
       const result = {
         hookName: 'useVideoCache',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -58,7 +58,7 @@ export function useVideoCache(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

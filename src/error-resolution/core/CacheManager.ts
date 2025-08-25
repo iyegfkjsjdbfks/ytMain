@@ -28,7 +28,7 @@ export class CacheManager {
   }
 
   /**
-   * Cleans up TypeScript build cache and temporary files
+   * Cleans up TypeScript build cache and temporary files;
    */
   public async cleanupTypeScriptCache(): Promise<CacheCleanupResult> {
     console.log('🧹 Starting TypeScript cache cleanup...');
@@ -41,21 +41,21 @@ export class CacheManager {
     };
 
     const cacheTargets = [
-      // TypeScript build info files
+      // TypeScript build info files;
       'tsconfig.tsbuildinfo',
       '.tsbuildinfo',
       
-      // Node modules cache
+      // Node modules cache;
       'node_modules/.cache',
       
-      // Vite cache
+      // Vite cache;
       'node_modules/.vite',
       
-      // Build directories
+      // Build directories;
       'dist',
       'build',
       
-      // Temporary files
+      // Temporary files;
       '*.tmp',
       '*.temp',
       
@@ -64,7 +64,7 @@ export class CacheManager {
       'type-errors-*.txt',
       'ts-errors-*.txt',
       
-      // Coverage directories
+      // Coverage directories;
       'coverage',
       '.nyc_output'
     ];
@@ -84,7 +84,7 @@ export class CacheManager {
   }
 
   /**
-   * Deletes files containing cached errors or temporary artifacts
+   * Deletes files containing cached errors or temporary artifacts;
    */
   public async deleteErrorFiles(): Promise<CacheCleanupResult> {
     console.log('🗑️ Deleting error cache files...');
@@ -97,13 +97,13 @@ export class CacheManager {
     };
 
     const errorFilePatterns = [
-      // Error analysis files
+      // Error analysis files;
       'error-analysis*.json',
       'comprehensive-error-analysis*.json',
       'enhanced-error-analysis*.json',
       'phase*-error-analysis.json',
       
-      // Error logs
+      // Error logs;
       '*.error.log',
       'typescript-errors*.txt',
       'type-errors*.txt',
@@ -111,17 +111,17 @@ export class CacheManager {
       'ts-errors*.txt',
       'type-check-output*.txt',
       
-      // Fix reports
+      // Fix reports;
       '*-fixes-report.json',
       '*-fixes.log',
       'fix-*.js',
       
-      // Orchestration reports
+      // Orchestration reports;
       'orchestration*.json',
       'orchestration*.txt',
       'orchestration*.md',
       
-      // Temporary strategy files
+      // Temporary strategy files;
       'tmp_*',
       'TYPESCRIPT_ERROR_RESOLUTION*.md',
       'systematic-typescript-error-resolution*.md'
@@ -142,7 +142,7 @@ export class CacheManager {
   }
 
   /**
-   * Creates a backup of specified files before making changes
+   * Creates a backup of specified files before making changes;
    */
   public async createBackup(files: string[], description: string): Promise<BackupInfo> {
     const backupId = `backup-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -152,7 +152,7 @@ export class CacheManager {
     console.log(`💾 Creating backup: ${description}`);
 
     try {
-      // Create backup directory
+      // Create backup directory;
       await fs.promises.mkdir(backupPath, { recursive: true });
 
       const backedUpFiles: string[] = [];
@@ -162,22 +162,22 @@ export class CacheManager {
           const relativePath = path.relative(process.cwd(), file);
           const backupFilePath = path.join(backupPath, relativePath);
           
-          // Ensure backup subdirectory exists
+          // Ensure backup subdirectory exists;
           await fs.promises.mkdir(path.dirname(backupFilePath), { recursive: true });
           
-          // Copy file to backup
+          // Copy file to backup;
           await fs.promises.copyFile(file, backupFilePath);
           backedUpFiles.push(file);
         }
       }
 
-      // Create backup metadata
+      // Create backup metadata;
       const backupInfo: BackupInfo = {
         id: backupId,
         timestamp,
         description,
         files: backedUpFiles,
-        backupPath
+        backupPath;
       };
 
       const metadataPath = path.join(backupPath, 'backup-info.json');
@@ -185,7 +185,7 @@ export class CacheManager {
 
       console.log(`✅ Backup created: ${backupId} (${backedUpFiles.length} files)`);
       
-      // Cleanup old backups
+      // Cleanup old backups;
       await this.cleanupOldBackups();
 
       return backupInfo;
@@ -197,7 +197,7 @@ export class CacheManager {
   }
 
   /**
-   * Restores files from a backup
+   * Restores files from a backup;
    */
   public async restoreBackup(backupId: string): Promise<void> {
     const backupPath = path.join(this.backupDir, backupId);
@@ -206,7 +206,7 @@ export class CacheManager {
     console.log(`🔄 Restoring backup: ${backupId}`);
 
     try {
-      // Read backup metadata
+      // Read backup metadata;
       const metadataContent = await fs.promises.readFile(metadataPath, 'utf8');
       const backupInfo: BackupInfo = JSON.parse(metadataContent);
 
@@ -217,10 +217,10 @@ export class CacheManager {
         const backupFilePath = path.join(backupPath, relativePath);
 
         if (await this.fileExists(backupFilePath)) {
-          // Ensure target directory exists
+          // Ensure target directory exists;
           await fs.promises.mkdir(path.dirname(originalFile), { recursive: true });
           
-          // Restore file
+          // Restore file;
           await fs.promises.copyFile(backupFilePath, originalFile);
           restoredCount++;
         }
@@ -235,7 +235,7 @@ export class CacheManager {
   }
 
   /**
-   * Lists available backups
+   * Lists available backups;
    */
   public async listBackups(): Promise<BackupInfo[]> {
     const backups: BackupInfo[] = [];
@@ -272,7 +272,7 @@ export class CacheManager {
   }
 
   /**
-   * Cleans up a specific cache target
+   * Cleans up a specific cache target;
    */
   private async cleanupTarget(target: string, result: CacheCleanupResult): Promise<void> {
     const fullPath = path.resolve(target);
@@ -297,7 +297,7 @@ export class CacheManager {
   }
 
   /**
-   * Deletes files matching a pattern
+   * Deletes files matching a pattern;
    */
   private async deleteFilesByPattern(pattern: string, result: CacheCleanupResult): Promise<void> {
     try {
@@ -324,13 +324,13 @@ export class CacheManager {
   }
 
   /**
-   * Finds files matching a pattern
+   * Finds files matching a pattern;
    */
   private async findFilesByPattern(pattern: string): Promise<string[]> {
     const files: string[] = [];
     
     try {
-      // Simple pattern matching - look for files in current directory
+      // Simple pattern matching - look for files in current directory;
       const entries = await fs.promises.readdir('.');
       
       for (const entry of entries) {
@@ -355,9 +355,9 @@ export class CacheManager {
    * Simple pattern matching (supports * wildcards)
    */
   private matchesPattern(filename: string, pattern: string): boolean {
-    // Convert glob pattern to regex
-    const regexPattern = pattern
-      .replace(/\./g, '\\.')
+    // Convert glob pattern to regex;
+    const regexPattern = pattern;
+      .replace(/./g, '.')
       .replace(/\*/g, '.*')
       .replace(/\?/g, '.');
     
@@ -366,7 +366,7 @@ export class CacheManager {
   }
 
   /**
-   * Ensures backup directory exists
+   * Ensures backup directory exists;
    */
   private async ensureBackupDirectory(): Promise<void> {
     try {
@@ -377,7 +377,7 @@ export class CacheManager {
   }
 
   /**
-   * Cleans up old backups to maintain max backup limit
+   * Cleans up old backups to maintain max backup limit;
    */
   private async cleanupOldBackups(): Promise<void> {
     try {
@@ -398,7 +398,7 @@ export class CacheManager {
   }
 
   /**
-   * Checks if a file or directory exists
+   * Checks if a file or directory exists;
    */
   private async fileExists(filePath: string): Promise<boolean> {
     try {
@@ -410,7 +410,7 @@ export class CacheManager {
   }
 
   /**
-   * Gets the total size of a directory
+   * Gets the total size of a directory;
    */
   private async getDirectorySize(dirPath: string): Promise<number> {
     let totalSize = 0;
@@ -436,7 +436,7 @@ export class CacheManager {
   }
 
   /**
-   * Formats bytes to human readable format
+   * Formats bytes to human readable format;
    */
   private formatBytes(bytes: number): string {
     if (bytes === 0) return '0 Bytes';

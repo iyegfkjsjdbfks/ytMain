@@ -1,4 +1,4 @@
-// OfflineIndicator - Simple Component
+// OfflineIndicator - Simple Component;
 import React from 'react';
 
 export interface OfflineIndicatorProps {
@@ -8,7 +8,7 @@ export interface OfflineIndicatorProps {
 
 export const OfflineIndicator = (props: OfflineIndicatorProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

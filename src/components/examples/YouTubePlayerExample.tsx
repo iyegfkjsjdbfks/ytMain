@@ -1,4 +1,4 @@
-// YouTubePlayerExample - Advanced Component Implementation
+// YouTubePlayerExample - Advanced Component Implementation;
 import React, { useState, useEffect } from 'react';
 
 export interface YouTubePlayerExampleProps {
@@ -12,7 +12,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -20,7 +20,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   useEffect(() => {
     const initialize = async () => {
       try {
-        // Simulate initialization
+        // Simulate initialization;
         await new Promise(resolve => setTimeout(resolve, 500));
         setIsReady(true);
         onLoad?.();

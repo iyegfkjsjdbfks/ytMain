@@ -1,4 +1,4 @@
-// ProtectedSearchResultsPage - Simple Component
+// ProtectedSearchResultsPage - Simple Component;
 import React from 'react';
 
 export interface ProtectedSearchResultsPageProps {
@@ -8,7 +8,7 @@ export interface ProtectedSearchResultsPageProps {
 
 export const ProtectedSearchResultsPage = (props: ProtectedSearchResultsPageProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

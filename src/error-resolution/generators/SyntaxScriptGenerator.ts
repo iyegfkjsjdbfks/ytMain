@@ -9,7 +9,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   protected initializeTemplates(): void {
-    // Template for fixing missing braces
+    // Template for fixing missing braces;
     this.addTemplate({
       id: 'fix-missing-braces',
       name: 'Fix Missing Braces',
@@ -19,13 +19,13 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         },
         {
           name: 'lineNumber',
           type: 'number',
           description: 'Line number where brace is missing',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -42,12 +42,12 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for fixing bracket matching
+    // Template for fixing bracket matching;
     this.addTemplate({
       id: 'fix-bracket-matching',
       name: 'Fix Bracket Matching',
@@ -57,7 +57,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -81,12 +81,12 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for fixing JSX syntax errors
+    // Template for fixing JSX syntax errors;
     this.addTemplate({
       id: 'fix-jsx-syntax',
       name: 'Fix JSX Syntax',
@@ -96,7 +96,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target JSX/TSX file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -120,12 +120,12 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for fixing object syntax
+    // Template for fixing object syntax;
     this.addTemplate({
       id: 'fix-object-syntax',
       name: 'Fix Object Syntax',
@@ -135,7 +135,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -159,12 +159,12 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for fixing function syntax
+    // Template for fixing function syntax;
     this.addTemplate({
       id: 'fix-function-syntax',
       name: 'Fix Function Syntax',
@@ -174,7 +174,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -198,7 +198,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
@@ -210,7 +210,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
     for (const error of errors) {
       let pattern = 'unknown';
 
-      // Group by specific syntax error patterns
+      // Group by specific syntax error patterns;
       if (error.message.includes("'}' expected") || error.code === 'TS1005') {
         pattern = 'missing-brace';
       } else if (error.message.includes("')' expected")) {
@@ -241,7 +241,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    _context: GenerationContext
+    _context: GenerationContext;
   ): Promise<FixingScript | null> {
     Logger.process({ message: 'Generating syntax script for pattern', pattern, errorCount: errors.length });
 
@@ -249,7 +249,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
     let commands: ScriptCommand[] = [];
     let validationChecks: ValidationCheck[] = [];
 
-    // Get unique files affected by these errors
+    // Get unique files affected by these errors;
     const affectedFiles = [...new Set(errors.map(e => e.file))];
 
     switch (pattern) {
@@ -314,13 +314,13 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix missing braces
+   * Generates commands to fix missing braces;
    */
   private generateBraceFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Add closing brace at the end of the file or appropriate location
+      // Add closing brace at the end of the file or appropriate location;
       commands.push({
         type: 'insert',
         file: error.file,
@@ -334,7 +334,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix missing parentheses
+   * Generates commands to fix missing parentheses;
    */
   private generateParenthesisFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
@@ -353,7 +353,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix missing brackets
+   * Generates commands to fix missing brackets;
    */
   private generateBracketFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
@@ -372,13 +372,13 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix JSX syntax errors
+   * Generates commands to fix JSX syntax errors;
    */
   private generateJSXFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const file of files) {
-      // Fix unclosed JSX elements
+      // Fix unclosed JSX elements;
       commands.push({
         type: 'replace',
         file,
@@ -387,7 +387,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         description: `Fix unclosed JSX elements in ${file}`
       });
 
-      // Fix self-closing tag spacing
+      // Fix self-closing tag spacing;
       commands.push({
         type: 'replace',
         file,
@@ -396,7 +396,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         description: `Fix self-closing JSX tag spacing in ${file}`
       });
 
-      // Fix JSX fragment syntax
+      // Fix JSX fragment syntax;
       commands.push({
         type: 'replace',
         file,
@@ -410,13 +410,13 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix object syntax errors
+   * Generates commands to fix object syntax errors;
    */
   private generateObjectSyntaxFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const file of files) {
-      // Fix leading commas in objects
+      // Fix leading commas in objects;
       commands.push({
         type: 'replace',
         file,
@@ -434,7 +434,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         description: `Remove invalid trailing commas in ${file}`
       });
 
-      // Fix malformed property assignments
+      // Fix malformed property assignments;
       commands.push({
         type: 'replace',
         file,
@@ -448,13 +448,13 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix statement syntax errors
+   * Generates commands to fix statement syntax errors;
    */
   private generateStatementSyntaxFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const file of files) {
-      // Fix incomplete statements
+      // Fix incomplete statements;
       commands.push({
         type: 'replace',
         file,
@@ -463,7 +463,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         description: `Remove incomplete access modifiers in ${file}`
       });
 
-      // Fix incomplete function declarations
+      // Fix incomplete function declarations;
       commands.push({
         type: 'replace',
         file,
@@ -472,7 +472,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         description: `Remove incomplete function declarations in ${file}`
       });
 
-      // Fix incomplete class declarations
+      // Fix incomplete class declarations;
       commands.push({
         type: 'replace',
         file,
@@ -486,13 +486,13 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix expression syntax errors
+   * Generates commands to fix expression syntax errors;
    */
   private generateExpressionSyntaxFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const file of files) {
-      // Fix incomplete ternary operators
+      // Fix incomplete ternary operators;
       commands.push({
         type: 'replace',
         file,
@@ -501,7 +501,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         description: `Fix incomplete ternary operators in ${file}`
       });
 
-      // Fix incomplete binary expressions
+      // Fix incomplete binary expressions;
       commands.push({
         type: 'replace',
         file,
@@ -510,7 +510,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
         description: `Fix incomplete logical expressions in ${file}`
       });
 
-      // Fix incomplete comparison expressions
+      // Fix incomplete comparison expressions;
       commands.push({
         type: 'replace',
         file,
@@ -524,13 +524,13 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix unexpected token errors
+   * Generates commands to fix unexpected token errors;
    */
   private generateUnexpectedTokenFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Try to identify and fix common unexpected token issues
+      // Try to identify and fix common unexpected token issues;
       if (error.message.includes('{')) {
         commands.push({
           type: 'replace',
@@ -554,37 +554,37 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Creates syntax validation checks for files
+   * Creates syntax validation checks for files;
    */
   private createSyntaxValidationChecks(files: string[]): ValidationCheck[] {
     return files.map(file => ({
       type: 'syntax' as const,
       command: `npx tsc --noEmit ${file}`,
       expectedResult: 'improved-count' as const,
-      timeoutSeconds: 15
+      timeoutSeconds: 15;
     }));
   }
 
   /**
-   * Generates a comprehensive syntax fixing script
+   * Generates a comprehensive syntax fixing script;
    */
   public async generateComprehensiveSyntaxScript(
-    _context: GenerationContext
+    _context: GenerationContext;
   ): Promise<FixingScript> {
     const scriptId = `syntax-comprehensive-${Date.now()}`;
     const commands: ScriptCommand[] = [];
     const validationChecks: ValidationCheck[] = [];
 
-    // Get all unique files
+    // Get all unique files;
     const affectedFiles = [...new Set((_context.errors || []).map(e => e.file))];
 
-    // Add commands for each type of syntax fix
+    // Add commands for each type of syntax fix;
     commands.push(...this.generateJSXFixCommands(affectedFiles.filter(f => f.endsWith('.tsx') || f.endsWith('.jsx'))));
     commands.push(...this.generateObjectSyntaxFixCommands(affectedFiles));
     commands.push(...this.generateStatementSyntaxFixCommands(affectedFiles));
     commands.push(...this.generateExpressionSyntaxFixCommands(affectedFiles));
 
-    // Add validation checks
+    // Add validation checks;
     validationChecks.push(...this.createSyntaxValidationChecks(affectedFiles));
 
     return {
@@ -599,7 +599,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Analyzes bracket/brace balance in a file
+   * Analyzes bracket/brace balance in a file;
    */
   public analyzeBracketBalance(fileContent: string): {
     balanced: boolean;
@@ -639,7 +639,7 @@ export class SyntaxScriptGenerator extends BaseScriptGenerator {
       balanced: missingClosing === 0 && extraClosing === 0,
       missingClosing,
       extraClosing,
-      suggestions
+      suggestions;
     };
   }
 }

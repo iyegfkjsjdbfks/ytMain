@@ -1,4 +1,4 @@
-// Export all video-related types
+// Export all video-related types;
 export interface Video {
   id: string;
   title: string;

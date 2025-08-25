@@ -1,4 +1,4 @@
-// StreamScheduler - React Component
+// StreamScheduler - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface StreamSchedulerProps {
@@ -12,7 +12,7 @@ export const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const StreamScheduler: React.FC<StreamSchedulerProps> = ({
         <h3>Error in StreamScheduler</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

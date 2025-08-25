@@ -1,4 +1,4 @@
-// LazyVideoPlayer - Simple Component
+// LazyVideoPlayer - Simple Component;
 import React from 'react';
 
 export interface LazyVideoPlayerProps {
@@ -8,7 +8,7 @@ export interface LazyVideoPlayerProps {
 
 export const LazyVideoPlayer = (props: LazyVideoPlayerProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

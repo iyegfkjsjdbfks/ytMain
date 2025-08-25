@@ -1,4 +1,4 @@
-// Footer - React Component
+// Footer - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface FooterProps {
@@ -12,7 +12,7 @@ export const Footer: React.FC<FooterProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({
         <h3>Error in Footer</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

@@ -1,9 +1,9 @@
-// usePlaylists - Custom Hook
+// usePlaylists - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UsePlaylistsOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function usePlaylists(
       const result = {
         hookName: 'usePlaylists',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function usePlaylists(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

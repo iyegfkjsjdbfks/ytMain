@@ -1,4 +1,4 @@
-// RegisterPage - Simple Component
+// RegisterPage - Simple Component;
 import React from 'react';
 
 export interface RegisterPageProps {
@@ -8,7 +8,7 @@ export interface RegisterPageProps {
 
 export const RegisterPage = (props: RegisterPageProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

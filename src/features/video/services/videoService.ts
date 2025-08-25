@@ -1,4 +1,4 @@
-// videoService - Enhanced Service
+// videoService - Enhanced Service;
 export interface VideoServiceConfig {
   apiUrl?: string;
   timeout?: number;
@@ -13,7 +13,7 @@ export class VideoService {
       apiUrl: '/api',
       timeout: 5000,
       retries: 3,
-      ...config
+      ...config;
     };
   }
 

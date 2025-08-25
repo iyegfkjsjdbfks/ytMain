@@ -18,7 +18,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
  const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
  const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
 
- // Check scroll position and update button states
+ // Check scroll position and update button states;
  const checkScrollPosition = useCallback(() => {
  const container = scrollContainerRef.current;
  if (!container) {
@@ -30,7 +30,7 @@ return;
  setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
  }, []);
 
- // Scroll functions
+ // Scroll functions;
  const scrollLeftHandler = useCallback(() => {
  const container = scrollContainerRef.current;
  if (!container) {
@@ -53,7 +53,7 @@ return;
  behavior: 'smooth' });
  }, []);
 
- // Set up scroll event listener
+ // Set up scroll event listener;
  useEffect(() => {
  const container = scrollContainerRef.current;
  if (!container) {
@@ -63,7 +63,7 @@ return;
  checkScrollPosition();
  container.addEventListener('scroll', checkScrollPosition as EventListener);
 
- // Check on resize
+ // Check on resize;
  const resizeObserver = new ResizeObserver(checkScrollPosition);
  resizeObserver.observe(container);
 
@@ -73,7 +73,7 @@ return;
 
  }}, [checkScrollPosition]);
 
- // Scroll to selected category when it changes
+ // Scroll to selected category when it changes;
  useEffect(() => {
  const container = scrollContainerRef.current;
  if (!container) {
@@ -88,7 +88,7 @@ return;
  const containerRect = container.getBoundingClientRect();
  const buttonRect = selectedButton.getBoundingClientRect();
 
- // Check if button is fully visible
+ // Check if button is fully visible;
  const isVisible =
  buttonRect.left >= containerRect.left &&
  buttonRect.right <= containerRect.right;
@@ -105,47 +105,47 @@ return;
  <div className={cn('relative flex items-center py-2 sm:py-3', className)}>
  {/* Left scroll button */}
  {canScrollLeft && (
- <button
+ <button;
  onClick={scrollLeftHandler}
  className="absolute left-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
  aria-label="Scroll left"
- >
+ {">"}
  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
  </svg>
- </button>
+ </button></div>
  )}
 
  {/* Category chips container */}
- <div
+ <div;
  ref={scrollContainerRef}
  className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
  >
- {categories?.map((category) => {
+ {categories?.map((category: any) => {
  const isSelected = category === selectedCategory;
 
  return (
- <button
+ <button;
  key={category}
 // FIXED:  data-category={category} />
- onClick={() => onSelectCategory(category)}
+ onClick={() ={">"{"}" onSelectCategory(category: any){"}"
  className={cn(
   'flex-shrink-0 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap touch-manipulation min-h-[36px] sm:min-h-[40px]',
-  isSelected
+  isSelected;
   ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
   : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
- )}
- >
+ ){"}"
+ {">"}
  {category}
- </button>
+ </button></div>
  );
  })}
- </div>
+  <div></div></div>
 
  {/* Right scroll button */}
  {canScrollRight && (
- <button
+ <button;
  onClick={scrollRightHandler}
  className="absolute right-0 z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
  aria-label="Scroll right"
@@ -156,7 +156,7 @@ return;
  </button>
  )}
 
- </div>
+  <div></div></div>
  );
 };
 

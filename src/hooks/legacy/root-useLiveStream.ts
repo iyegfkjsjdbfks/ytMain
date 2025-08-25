@@ -1,4 +1,4 @@
-// rootUseLiveStream - Generic Implementation
+// rootUseLiveStream - Generic Implementation;
 export interface RootUseLiveStreamConfig {
   enabled?: boolean;
 }
@@ -8,7 +8,7 @@ export class RootUseLiveStream {
 
   constructor(config: RootUseLiveStreamConfig = {}) {
     this.config = {
-      enabled: config.enabled ?? true
+      enabled: config.enabled ?? true;
     };
   }
 

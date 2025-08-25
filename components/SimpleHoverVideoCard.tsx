@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState, FC } from 'react';
 import { Link } from 'react - router - dom';
-// @ts - nocheck
+// @ts - nocheck;
 
 import { formatDistanceToNow } from 'date - fns';
 
 import { getYouTubeVideoId } from '../src / lib / youtube - utils';
 
-import ImageWithFallback from 'ImageWithFallback.tsx';
+import ImageWithFallback from 'ImageWithFallback';
 
 import type { Video } from '../types.ts';
 
@@ -21,12 +21,12 @@ const SimpleHoverVideoCard: React.FC < SimpleHoverVideoCardProps> = ({ video, cl
  const hoverTimeoutRef = useRef < ReturnType < typeof setTimeout> | null>(null);
  const hideTimeoutRef = useRef < ReturnType < typeof setTimeout> | null>(null);
 
- // Configuration constants
- const HIDE_DELAY: number = 150; // Delay before hiding preview
+ // Configuration constants;
+ const HIDE_DELAY: number = 150; // Delay before hiding preview;
 
- // Extract YouTube video ID from the video
+ // Extract YouTube video ID from the video;
  const getVideoId = (video: Video): string | (null) => {}
- // Try to extract from video.id if it has prefixes
+ // Try to extract from video.id if it has prefixes;
  if (video.id.startsWith('youtube-')) {}
  return video.id.replace('youtube-', '');
  }
@@ -34,7 +34,7 @@ const SimpleHoverVideoCard: React.FC < SimpleHoverVideoCardProps> = ({ video, cl
  return video.id.replace('google - search-', '');
  }
 
- // Try to extract from videoUrl if available
+ // Try to extract from videoUrl if available;
  if (video.videoUrl) {}
  return getYouTubeVideoId(video.videoUrl);
  }
@@ -76,13 +76,13 @@ return duration;
  const handleMouseEnter = () => {}
  setIsHovered(true);
 
- // Clear any existing hide timeout
+ // Clear any existing hide timeout;
  if (hideTimeoutRef.current) {}
  clearTimeout(hideTimeoutRef.current);
  hideTimeoutRef.current = null;
  }
 
- // Disabled: Show preview after delay
+ // Disabled: Show preview after delay;
  // if (videoId as any) {}
  // hoverTimeoutRef.current = setTimeout((() => {}
  // setShowPreview(true);
@@ -92,19 +92,19 @@ return duration;
  const handleMouseLeave = () => {}
  setIsHovered(false);
 
- // Clear the hover timeout if user leaves before delay completes
+ // Clear the hover timeout if user leaves before delay completes;
  if (hoverTimeoutRef.current) {}
  clearTimeout(hoverTimeoutRef.current);
  hoverTimeoutRef.current = null;
  }
 
- // Hide preview after a brief delay
+ // Hide preview after a brief delay;
  hideTimeoutRef.current = setTimeout((() => {}
  setShowPreview(false);
  }) as any, HIDE_DELAY);
  };
 
- // Cleanup timeouts on unmount
+ // Cleanup timeouts on unmount;
  useEffect(() => {}
  return () => {}
  if (hoverTimeoutRef.current) {}
@@ -116,7 +116,7 @@ return duration;
  }}, []);
 
  return (
- <div
+ <div;
 // FIXED:  className={`group cursor - pointer ${className}`}
  onMouseEnter={handleMouseEnter}
  onMouseLeave={handleMouseLeave} />
@@ -126,7 +126,7 @@ return duration;
  <Link to={`/watch/${video.id}`}>
  <div className="relative w - full" style={{ height: '250px' }}>
  {/* Main thumbnail */}
- <ImageWithFallback
+ <ImageWithFallback;
 // FIXED:  src={video.thumbnailUrl}
 // FIXED:  alt={video.title}
 // FIXED:  className="absolute inset - 0 w - full h - full object - cover rounded - xl"
@@ -145,7 +145,7 @@ return duration;
  {/* Animated play icon */}
  <div className="absolute inset - 0 flex items - center justify - center">
  <div className="bg - red - 600 bg - opacity - 90 rounded - full p - 4 transform scale - 110 animate - pulse">
- <svg
+ <svg;
 // FIXED:  className="w - 10 h - 10 text - white animate - pulse"
  fill="currentColor"
  viewBox="0 0 24 24" />
@@ -158,10 +158,10 @@ return duration;
  {/* Preview indicators */}
  <div className="absolute top - 3 left - 3 flex gap - 2">
  <div className="bg - red - 600 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">
- ▶ Preview
+ ▶ Preview;
 // FIXED:  </div>
 <div className="bg - black / 70 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">
- HD
+ HD;
 // FIXED:  </div>
 // FIXED:  </div>
 
@@ -178,7 +178,7 @@ return duration;
  {isHovered && !showPreview && (}
  <div className="absolute inset - 0 flex items - center justify - center bg - black / 20 transition - all duration - 200">
  <div className="bg - black bg - opacity - 70 rounded - full p - 3 transform scale - 110 transition - transform duration - 200">
- <svg
+ <svg;
 // FIXED:  className="w - 8 h - 8 text - white"
  fill="currentColor"
  viewBox="0 0 24 24" />
@@ -201,7 +201,7 @@ return duration;
  {/* Hover indicator during delay */}
  {isHovered && !showPreview && videoId && (}
  <div className="absolute top - 2 left - 2 bg - red - 600 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">
- Hover to preview
+ Hover to preview;
 // FIXED:  </div>
  )}
 // FIXED:  </div>
@@ -213,7 +213,7 @@ return duration;
  {/* Channel Avatar */}
  {video.channelAvatarUrl && (}
  <Link to={`/channel/${video.channelId}`} className="flex - shrink - 0">
- <ImageWithFallback
+ <ImageWithFallback;
 // FIXED:  src={video.channelAvatarUrl}
 // FIXED:  alt={video.channelName}
 // FIXED:  className={`w - 9 h - 9 rounded - full object - cover transition - transform duration - 200 ${}
@@ -286,11 +286,11 @@ return duration;
  width: 100%
  }
  .animate - fade - in {}
- animation: fade - in 0.3s ease - out
+ animation: fade - in 0.3s ease - out;
  }
 
  .animate - progress - bar {}
- animation: progress - bar 3s linear infinite
+ animation: progress - bar 3s linear infinite;
  }
  `}</style>
 // FIXED:  </div>

@@ -1,4 +1,4 @@
-// NotificationCenter - React Component
+// NotificationCenter - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface NotificationCenterProps {
@@ -12,7 +12,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         <h3>Error in NotificationCenter</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

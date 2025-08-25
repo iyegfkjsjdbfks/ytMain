@@ -23,7 +23,7 @@ const EmptyShortsState: React.FC<EmptyShortsStateProps> = ({
 // FIXED:  </h2>
 
  <p className="text-gray-300 mb-6">
- {hasFilters
+ {hasFilters;
  ? 'No shorts match your current search or filter criteria. Try adjusting your filters or search terms.'
  : 'There are no short videos to display right now. Check back later for new content!'
  }
@@ -32,10 +32,10 @@ const EmptyShortsState: React.FC<EmptyShortsStateProps> = ({
  <div className="flex flex-col sm:flex-row gap-3 justify-center">
  {hasFilters && onClearFilters && (
  <button />
-// FIXED:  onClick={(e) => onClearFilters(e)}
+// FIXED:  onClick={(e: any) => onClearFilters(e)}
 // FIXED:  className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-medium transition-colors"
  >
- Clear Filters
+ Clear Filters;
 // FIXED:  </button>
  )}
 
@@ -43,7 +43,7 @@ const EmptyShortsState: React.FC<EmptyShortsStateProps> = ({
 // FIXED:  onClick={() => window.location.reload()}
 // FIXED:  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
  >
- Refresh
+ Refresh;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

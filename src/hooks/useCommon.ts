@@ -1,5 +1,5 @@
 import _React from 'react';
-// useCommon - Simple Hook
+// useCommon - Simple Hook;
 import { useState } from 'react';
 
 export function useCommon() {
@@ -10,7 +10,7 @@ export function useCommon() {
   return {
     data,
     loading,
-    error
+    error;
   };
 }
 

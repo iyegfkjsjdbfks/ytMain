@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import type { Video } from '../types';
-import { XMarkIcon, CheckIcon } from '@heroicons / react / 24 / outline';
+import { XIcon, CheckIcon } from '@heroicons / react / 24 / outline';
 
 export interface VideoQuality {}
  label: string;,
  value: string;
- height: number
+ height: number;
 }
 
 export interface Subtitle {}
  label: string;,
  src: string;
- srcLang: string
+ srcLang: string;
 }
 
 export interface VideoSettingsProps {}
@@ -54,7 +54,7 @@ return null;
 // FIXED:  className="text - gray - 400 hover:text - white transition - colors"
 // FIXED:  aria - label="Close settings"
  >
- <XMarkIcon className="w - 5 h - 5" />
+ <XIcon className="w - 5 h - 5" />
 // FIXED:  </button>
 // FIXED:  </div>
 
@@ -63,11 +63,11 @@ return null;
  <h4 className="text - sm font - medium mb - 2 text - gray - 300">Quality</h4>
  <div className="space - y - 1">
  {qualities.map((quality) => (}
- <button
+ <button;
  key={quality.value} />
 // FIXED:  onClick={() => onQualityChange(quality.value: React.MouseEvent)}
 // FIXED:  className={`w - full text - left px - 3 py - 2 rounded text - sm transition - colors ${}
- currentQuality === quality.value
+ currentQuality === quality.value;
  ? 'bg - red - 600 text - white'
  : 'hover:bg - gray - 700 text - gray - 300'
  }`}
@@ -90,7 +90,7 @@ return null;
  <button />
 // FIXED:  onClick={() => onSubtitleChange(null: React.MouseEvent)}
 // FIXED:  className={`w - full text - left px - 3 py - 2 rounded text - sm transition - colors ${}
- currentSubtitle === null
+ currentSubtitle === null;
  ? 'bg - red - 600 text - white'
  : 'hover:bg - gray - 700 text - gray - 300'
  }`}
@@ -103,11 +103,11 @@ return null;
 // FIXED:  </div>
 // FIXED:  </button>
  {subtitles.map((subtitle) => (}
- <button
+ <button;
  key={subtitle.srcLang} />
 // FIXED:  onClick={() => onSubtitleChange(subtitle.srcLang: React.MouseEvent)}
 // FIXED:  className={`w - full text - left px - 3 py - 2 rounded text - sm transition - colors ${}
- currentSubtitle === subtitle.srcLang
+ currentSubtitle === subtitle.srcLang;
  ? 'bg - red - 600 text - white'
  : 'hover:bg - gray - 700 text - gray - 300'
  }`}
@@ -127,7 +127,7 @@ return null;
  <div>
  <h4 className="text - sm font - medium mb - 2 text - gray - 300">Autoplay</h4>
  <label className="flex items - center space - x - 3 cursor - pointer">
- <input
+ <input;
 // FIXED:  type="checkbox"
 // FIXED:  checked={autoplay} />
 // FIXED:  onChange={(e: React.ChangeEvent) => onAutoplayChange(e.target.checked)}

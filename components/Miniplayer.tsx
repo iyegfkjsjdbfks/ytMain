@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { PlayIcon as PlaySolidIcon, XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid';
+import { PlayIcon as PlaySolidIcon, XIcon as XMarkSolidIcon } from '@heroicons/react/24/solid';
 const PlayIconSolid = PlaySolidIcon;
-const XMarkIconSolid = XMarkSolidIcon;
+const XIconSolid = XMarkSolidIcon;
 
 import type { Video } from '../src/types/core.ts';
 
 interface MiniplayerProps {
   video: Video | null;
   onClose: () => void;
-  onMaximize: (videoId) => void;
+  onMaximize: (videoId: string) => void;
 }
 
 const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) => {
@@ -29,13 +29,13 @@ const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) =
   };
 
   return (
-    <div
+    <div;
       className="fixed bottom-4 right-4 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden z-50"
       role="complementary"
     >
       <div className="relative aspect-video bg-black group">
         <Link to={`/watch/${video.id}`} className="block" onClick={handleMaximize}>
-          <img
+          <img;
             src={video.thumbnail || ''}
             alt={video.title || ''}
             className="w-full h-full object-cover"
@@ -53,7 +53,7 @@ const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) =
           </h3>
         </Link>
         
-        <Link
+        <Link;
           to={`/channel/${encodeURIComponent(video.channelName || video.channelTitle || "Unknown")}`}
           className="text-xs text-gray-600 dark:text-gray-400 hover:underline mt-1 block"
           title={video.channelName || video.channelTitle || "Unknown"}
@@ -62,13 +62,13 @@ const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) =
         </Link>
   </div>
       
-      <button
+      <button;
         onClick={handleClose}
         className="absolute top-2 right-2 p-1 bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors"
         aria-label="Close miniplayer"
         title="Close miniplayer"
       >
-        <XMarkIconSolid className="w-5 h-5" />
+        <XIconSolid className="w-5 h-5" />
       </button>
     </div>
   );

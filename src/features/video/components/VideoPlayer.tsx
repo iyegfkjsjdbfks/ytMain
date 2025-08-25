@@ -1,4 +1,4 @@
-// VideoPlayer - React Component
+// VideoPlayer - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface VideoPlayerProps {
@@ -12,7 +12,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         <h3>Error in VideoPlayer</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

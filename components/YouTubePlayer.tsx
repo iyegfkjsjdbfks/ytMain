@@ -5,7 +5,7 @@ import { getYouTubeVideoId } from '../src / lib / youtube - utils';
 import type { YouTubeSearchResult } from '../services / googleSearchService';
 import type { Video } from '../src / types / core';
 
-// YouTube Player API types
+// YouTube Player API types;
 
 export interface YTPlayer {}
  playVideo(): void;
@@ -45,7 +45,7 @@ export interface YouTubePlayerProps {}
  className?: string;
  onReady?: (event: Event) => void;
  onStateChange?: (event: Event) => void;
- onError?: (event: Event) => void
+ onError?: (event: Event) => void;
 }
 
 const YouTubePlayer: React.FC < YouTubePlayerProps> = ({}
@@ -65,32 +65,32 @@ const YouTubePlayer: React.FC < YouTubePlayerProps> = ({}
  const [playerError, setPlayerError] = useState < string | null>(null);
  const playerIdRef = useRef(`youtube - player-${Math.random().toString(36).substr(2, 9)}`);
 
- // Extract video ID from the video object
+ // Extract video ID from the video object;
  const videoId = ((: any) => {}
- // Handle YouTubeSearchResult type
+ // Handle YouTubeSearchResult type;
  if ('embedUrl' in video && video.embedUrl) {}
  return video.embedUrl.split('/embed/')[1]?.split('?')[0] || '';
  }
- // Handle Video type
+ // Handle Video type;
  if ('videoUrl' in video && video.videoUrl) {}
  return getYouTubeVideoId(video.videoUrl) || '';
  }
  return '';
  })();
 
- // Validate video ID
- const isValidVideoId = videoId && videoId.length === 11 && /^[a - zA - Z0 - 9_-]+$/.test(videoId);
+ // Validate video ID;
+ const isValidVideoId = videoId && videoId.length === 11 && /^[a - zA - Z0 - 9_-]+$/.test(videoId: string);
 
- // Load YouTube IFrame API
+ // Load YouTube IFrame API;
  useEffect(() => {}
  if (window.YT?.Player) {}
  setIsAPIReady(true);
  return;
  }
 
- // Check if script is already loading
+ // Check if script is already loading;
  if (document.querySelector('script[src*="youtube.com / iframe_api"]') as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement) {}
- // Script is loading, wait for it
+ // Script is loading, wait for it;
  const checkAPI = () => {}
  if (window.YT?.Player) {}
  setIsAPIReady(true);
@@ -101,7 +101,7 @@ const YouTubePlayer: React.FC < YouTubePlayerProps> = ({}
  return;
  }
 
- // Load the API script
+ // Load the API script;
  const script = document.createElement('script');
  script.src = 'https://www.youtube.com / iframe_api';
  script.async = true;
@@ -116,14 +116,14 @@ const YouTubePlayer: React.FC < YouTubePlayerProps> = ({}
  document.head.appendChild(script);
 
  return () => {}
- // Cleanup: restore original callback
+ // Cleanup: restore original callback;
  if (originalCallback as any) {}
  (window as any).onYouTubeIframeAPIReady = originalCallback;
  }
 
  }}, []);
 
- // Initialize player when API is ready
+ // Initialize player when API is ready;
  useEffect(() => {}
  if (!isAPIReady || !playerRef.current || !isValidVideoId) {}
 return;
@@ -132,7 +132,7 @@ return;
  let isMounted: boolean = true;
 
  try {}
- // Destroy existing player if any
+ // Destroy existing player if any;
  if (ytPlayerRef.current) {}
  try {}
  ytPlayerRef.current.destroy();
@@ -142,12 +142,12 @@ return;
  ytPlayerRef.current = null;
  }
 
- // Ensure the container element exists and is properly prepared
+ // Ensure the container element exists and is properly prepared;
  const container = document.getElementById(playerIdRef.current) as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement as HTMLElement;
  if (container && document.body.contains(container)) {}
- // Clear any existing content safely
+ // Clear any existing content safely;
  try {}
- // Check if container is still in DOM before clearing
+ // Check if container is still in DOM before clearing;
  if (container.parentNode) {}
  container.innerHTML = '';
  }
@@ -155,7 +155,7 @@ return;
  } catch (error) {}
  (console as any).debug('Error clearing container:', error);
  }
- // Create new player
+ // Create new player;
  if (!window.YT) {}
  throw new Error('YouTube API not available');
  }
@@ -173,8 +173,8 @@ return;
  playsinline: 1,
  fs: 1, // Enable fullscreen button,
  iv_load_policy: 3, // Hide video annotations,
- disablekb: 0, // Enable keyboard controls
- // Remove widget_referrer as it might cause origin issues
+ disablekb: 0, // Enable keyboard controls;
+ // Remove widget_referrer as it might cause origin issues;
  },
  events: {,}
  onReady: (event) => {}
@@ -182,22 +182,22 @@ return;
  setIsPlayerReady(true);
  setPlayerError(null);
 
- // Call the external onReady callback if provided
+ // Call the external onReady callback if provided;
  if (onReady as any) {}
  try {}
  onReady(event);
  } catch (error) {}
  (console as any).warn('Error in onReady callback:', error);
  }
- // Try to autoplay if autoplay is enabled
+ // Try to autoplay if autoplay is enabled;
  if (autoplay as any) {}
  try {}
  (console as any).log('Attempting to autoplay YouTube video...');
- // Mute first for better autoplay compliance
+ // Mute first for better autoplay compliance;
  event.target.mute();
  event.target.playVideo();
 
- // Fallback: try again after a short delay if not playing
+ // Fallback: try again after a short delay if not playing;
  setTimeout((() => {}
  try {}
  const playerState = event.target.getPlayerState();
@@ -216,10 +216,10 @@ return;
  }
  },
  onStateChange: (event) => {}
- // Handle state changes if needed
+ // Handle state changes if needed;
  (console as any).log('YouTube player state changed:', event.data);
 
- // Call the external onStateChange callback if provided
+ // Call the external onStateChange callback if provided;
  if (onStateChange as any) {}
  try {}
  onStateChange(event);
@@ -233,7 +233,7 @@ return;
  (console as any).log('Unmuting video after autoplay...');
  event.target.unMute();
 
- // Resume playback after unmuting in case it paused
+ // Resume playback after unmuting in case it paused;
  setTimeout(() => {}
  try {}
  const currentState = event.target.getPlayerState();
@@ -245,7 +245,7 @@ return;
  } catch (playError) {}
  (console as any).warn('Failed to resume playback after unmute:') as any, playError);
  }
- }, 100); // Short delay to let unmute complete
+ }, 100); // Short delay to let unmute complete;
  } catch (error) {}
  (console as any).warn('Failed to unmute video:', error);
  }
@@ -264,7 +264,7 @@ return;
  150: 'Video not available in embedded players' };
  const message = errorMessages[event.data] || 'Unknown error occurred';
 
- // For embedding errors (101, 150), show a more user - friendly message
+ // For embedding errors (101, 150), show a more user - friendly message;
  if (event.data === 101 || event.data === 150) {}
  (console as any).debug('Video cannot be embedded, this is expected for some videos');
  setPlayerError('This video cannot be played here. Click to watch on YouTube.');
@@ -273,7 +273,7 @@ return;
  setPlayerError(message);
  }
 
- // Call the external onError callback if provided
+ // Call the external onError callback if provided;
  if (onError as any) {}
  try {}
  onError(event);
@@ -290,13 +290,13 @@ return;
  isMounted = false;
  if (ytPlayerRef.current) {}
  try {}
- // Check if player still exists and has destroy method
+ // Check if player still exists and has destroy method;
  if (typeof ytPlayerRef.current.destroy === 'function') {}
  ytPlayerRef.current.destroy();
  }
 
  } catch (error) {}
- // Silently handle cleanup errors
+ // Silently handle cleanup errors;
  (console as any).debug('YouTube player cleanup error:', error);
  } finally {}
  ytPlayerRef.current = null;
@@ -307,7 +307,7 @@ return;
  return (
  <div className={`bg - gray - 100 dark:bg - gray - 800 rounded - lg p - 4 ${className}`}>
  <p className="text - gray - 600 dark:text - gray - 400 text - center">
- Invalid YouTube video ID
+ Invalid YouTube video ID;
 // FIXED:  </p>
 // FIXED:  </div>
  );
@@ -333,7 +333,7 @@ return;
 // FIXED:  </div>
 // FIXED:  </div>
  )}
- <div
+ <div;
  ref={playerRef}
 // FIXED:  id={playerIdRef.current}
 // FIXED:  className="w - full h - full"

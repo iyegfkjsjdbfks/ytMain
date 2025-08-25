@@ -2,7 +2,7 @@ import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 
 import type { Video } from '../types.ts';
 
-import { Cog6ToothIcon, CheckIcon, PlayIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ForwardIcon, BackwardIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
+import { Cog6ToothIcon, CheckIcon, PlayIcon, SpeakerWaveIcon, SpeakerXIcon, ForwardIcon, BackwardIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
  label: string;
@@ -13,7 +13,7 @@ export interface VideoQuality {
 
 export interface PlaybackSpeed {
  label: string;
- value: number
+ value: number;
 }
 
 interface VideoQualitySelectorProps {
@@ -113,7 +113,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  {/* Play/Pause Button */}
  {onPlayPause && (
  <button />
-// FIXED:  onClick={(e) => onPlayPause(e)}
+// FIXED:  onClick={(e: any) => onPlayPause(e)}
 // FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
 // FIXED:  aria-label={isPlaying ? 'Pause' : 'Play'}
  >
@@ -128,7 +128,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  )}
 
  {/* Skip Backward */}
- <button
+ <button;
 // FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
 // FIXED:  aria-label="Skip backward 10 seconds" />
  >
@@ -136,7 +136,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 // FIXED:  </button>
 
  {/* Skip Forward */}
- <button
+ <button;
 // FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
 // FIXED:  aria-label="Skip forward 10 seconds" />
  >
@@ -152,7 +152,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 // FIXED:  aria-label="Volume"
  >
  {volume === 0 ? (
- <SpeakerXMarkIcon className="w-5 h-5" />
+ <SpeakerXIcon className="w-5 h-5" />
  ) : (
  <SpeakerWaveIcon className="w-5 h-5" />
  )}
@@ -160,18 +160,18 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 
  {/* Volume Slider */}
  {showVolumeSlider && (
- <div
+ <div;
 // FIXED:  className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black/80 backdrop-blur-sm rounded-lg p-3" />
  onMouseLeave={() => setShowVolumeSlider(false)}
  >
  <div className="flex flex-col items-center space-y-2">
  <span className="text-white text-xs">{Math.round(volume)}%</span>
- <input
+ <input;
 // FIXED:  type="range"
  min="0"
  max="100"
 // FIXED:  value={volume} />
-// FIXED:  onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
+// FIXED:  onChange={(e: any) => onVolumeChange?.(parseInt(e.target.value, 10))}
 // FIXED:  className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
 // FIXED:  style={{ writingMode: 'vertical-lr' as const WebkitAppearance: 'slider-vertical' }
  />
@@ -186,7 +186,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  {/* Picture-in-Picture */}
  {onPictureInPictureToggle && (
  <button />
-// FIXED:  onClick={(e) => onPictureInPictureToggle(e)}
+// FIXED:  onClick={(e: any) => onPictureInPictureToggle(e)}
 // FIXED:  className={`p-2 text-white hover:bg-white/20 rounded-full transition-colors ${
  isPictureInPicture ? 'bg-white/20' : ''
  }`}
@@ -254,7 +254,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 // FIXED:  onClick={() => setActivePanel('main')}
 // FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors border-b border-gray-600"
  >
- ← Quality
+ ← Quality;
 // FIXED:  </button>
 
  {/* Auto Quality */}
@@ -271,7 +271,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 
  {/* Quality Options */}
  {qualities.map((quality) => (
- <button
+ <button;
  key={quality.value} />
 // FIXED:  onClick={() => handleQualitySelect(quality.value)}
 // FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
@@ -293,12 +293,12 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 // FIXED:  onClick={() => setActivePanel('main')}
 // FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors border-b border-gray-600"
  >
- ← Playback speed
+ ← Playback speed;
 // FIXED:  </button>
 
  {/* Speed Options */}
  {playbackSpeeds.map((speed) => (
- <button
+ <button;
  key={speed.value} />
 // FIXED:  onClick={() => handleSpeedSelect(speed.value)}
 // FIXED:  className="w-full px-4 py-2 text-left text-white hover:bg-white/20 transition-colors flex items-center justify-between"
@@ -316,7 +316,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
  {/* Fullscreen */}
  {onFullscreenToggle && (
  <button />
-// FIXED:  onClick={(e) => onFullscreenToggle(e)}
+// FIXED:  onClick={(e: any) => onFullscreenToggle(e)}
 // FIXED:  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
 // FIXED:  aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
  >

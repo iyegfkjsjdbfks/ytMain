@@ -13,14 +13,14 @@ export interface Channel {}
  id: string;,
  name: string;
  avatarUrl: string;,
- subscriberCount: string; isVerified: boolean
+ subscriberCount: string; isVerified: boolean;
 }
 
 export interface Video {}
  id: string;,
  title: string;
  description: string;,
- views: string; uploadedAt: string
+ views: string; uploadedAt: string;
 }
 
 export interface RefactoredVideoDescriptionProps {}
@@ -33,23 +33,23 @@ export interface RefactoredVideoDescriptionProps {}
  isSummarizing: boolean;,
  canSummarize: boolean;
  onSubscribe: () => void;,
- onToggleDescription: () => void; onSummarizeDescription: () => void
+ onToggleDescription: () => void; onSummarizeDescription: () => void;
 }
 
 /**
- * Refactored Video Description Component
+ * Refactored Video Description Component;
  *
- * This component demonstrates improved patterns: * - Extracted reusable sub - components
- * - Better separation of concerns
- * - Consistent styling patterns
- * - Improved accessibility
- * - Cleaner component composition
+ * This component demonstrates improved patterns: * - Extracted reusable sub - components;
+ * - Better separation of concerns;
+ * - Consistent styling patterns;
+ * - Improved accessibility;
+ * - Cleaner component composition;
  */
 
-// Reusable Channel Info Component
+// Reusable Channel Info Component;
 export interface ChannelInfoProps {}
  channel: Channel | null;,
- isSubscribed: boolean; onSubscribe: () => void
+ isSubscribed: boolean; onSubscribe: () => void;
 }
 
 const ChannelInfo: React.FC < ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }: any) => {}
@@ -59,7 +59,7 @@ const ChannelInfo: React.FC < ChannelInfoProps> = ({ channel, isSubscribed, onSu
  <div className="flex items - center justify - between mb - 4">
  <div className="flex items - center space - x - 3">
  <Link to={channelLink} className="flex - shrink - 0" />
- <img
+ <img;
 // FIXED:  src={channel ? .avatarUrl || 'https : //picsum.photos / seed / defaultChannel / 40 / 40'}
 // FIXED:  alt={`${channel?.name || 'Unknown'} channel avatar`}
 // FIXED:  className="w - 10 h - 10 rounded - full object - cover ring - 2 ring - gray - 200 dark:ring - gray - 700" />
@@ -67,7 +67,7 @@ const ChannelInfo: React.FC < ChannelInfoProps> = ({ channel, isSubscribed, onSu
 // FIXED:  </Link>
 
  <div className="min - w - 0 flex - grow">
- <Link
+ <Link;
  to={channelLink}
 // FIXED:  className="text - sm font - semibold text - gray - 900 dark:text - gray - 100 hover:text - blue - 600 dark:hover:text - blue - 400 transition - colors block truncate" />
  >
@@ -93,9 +93,9 @@ const ChannelInfo: React.FC < ChannelInfoProps> = ({ channel, isSubscribed, onSu
  );
 };
 
-// Reusable Subscribe Button Component
+// Reusable Subscribe Button Component;
 export interface SubscribeButtonProps {}
- isSubscribed: boolean; onSubscribe: () => void
+ isSubscribed: boolean; onSubscribe: () => void;
 }
 
 const SubscribeButton: React.FC < SubscribeButtonProps> = ({ isSubscribed, onSubscribe }: any) => {}
@@ -103,7 +103,7 @@ const SubscribeButton: React.FC < SubscribeButtonProps> = ({ isSubscribed, onSub
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onSubscribe(e)}
 // FIXED:  className={`px - 4 py - 2 rounded - full text - sm font - medium transition - all duration - 200 transform hover:scale - 105 ${}
- isSubscribed
+ isSubscribed;
  ? 'bg - gray - 200 dark:bg - gray - 700 text - gray - 800 dark:text - gray - 200 hover:bg - gray - 300 dark:hover:bg - gray - 600'
  : 'bg - red - 600 text - white hover:bg - red - 700 shadow - lg hover:shadow - xl'
  }`}
@@ -114,10 +114,10 @@ const SubscribeButton: React.FC < SubscribeButtonProps> = ({ isSubscribed, onSub
  );
 };
 
-// Reusable Notification Button Component
+// Reusable Notification Button Component;
 const NotificationButton: React.FC = () => {}
  return (
- <button
+ <button;
 // FIXED:  className="p - 2 rounded - full hover:bg - gray - 200 dark:hover:bg - gray - 700 text - gray - 700 dark:text - gray - 300 transition - colors"
 // FIXED:  aria - label="Manage notifications for this channel"
  title="Notifications" />
@@ -127,10 +127,10 @@ const NotificationButton: React.FC = () => {}
  );
 };
 
-// Reusable Description Content Component
+// Reusable Description Content Component;
 export interface DescriptionContentProps {}
  video: Video;,
- showFullDescription: boolean; onToggleDescription: () => void
+ showFullDescription: boolean; onToggleDescription: () => void;
 }
 
 const DescriptionContent: React.FC < DescriptionContentProps> = ({}
@@ -143,18 +143,18 @@ const DescriptionContent: React.FC < DescriptionContentProps> = ({}
  <div className="space - y - 2">
  {/* Video Metadata */}
  <div className="text - sm font - medium text - gray - 800 dark:text - gray - 200">
- {video.uploadedAt} • {video.views.split(' ')[0]} views
+ {video.uploadedAt} • {video.views.split(' ')[0]} views;
 // FIXED:  </div>
 
  {/* Description Text */}
- <div
+ <div;
 // FIXED:  className={`text - gray - 700 dark:text - gray - 300 whitespace - pre - wrap leading - relaxed cursor - pointer transition - all duration - 300 ${}
  !showFullDescription ? 'max - h - 20 overflow - hidden' : ''
  }`} />
 // FIXED:  onClick={(e: React.MouseEvent) => onToggleDescription(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e) => {}
+ onKeyDown={(e: any) => {}
  if (e.key === 'Enter' || e.key === ' ') {}
  e.preventDefault();
  onToggleDescription();
@@ -181,12 +181,12 @@ const DescriptionContent: React.FC < DescriptionContentProps> = ({}
  );
 };
 
-// Reusable AI Summary Section Component
+// Reusable AI Summary Section Component;
 export interface AISummarySectionProps {}
  canSummarize: boolean;,
  isSummarizing: boolean;
  summary?: string;
- summaryError?: string; onSummarizeDescription: () => void
+ summaryError?: string; onSummarizeDescription: () => void;
 }
 
 const AISummarySection: React.FC < AISummarySectionProps> = ({}
@@ -231,7 +231,7 @@ return null;
  <div className="p - 4 bg - gradient - to - r from - blue - 50 to - purple - 50 dark:from - blue - 900 / 40 dark:to - purple - 900 / 40 border border - blue - 200 dark:border - blue - 700 / 60 rounded - lg">
  <h3 className="text - sm font - semibold text - blue - 800 dark:text - blue - 200 mb - 2 flex items - center">
  <SummarizeIcon className="w - 5 h - 5 mr - 2 text - blue - 600 dark:text - blue - 400" />
- AI Generated Summary
+ AI Generated Summary;
 // FIXED:  </h3>
  <p className="text - sm text - gray - 700 dark:text - gray - 200 leading - relaxed whitespace - pre - wrap">
  {summary}
@@ -242,7 +242,7 @@ return null;
  );
 };
 
-// Main Refactored Component
+// Main Refactored Component;
 const RefactoredVideoDescription: React.FC < RefactoredVideoDescriptionProps> = ({}
  video,
  channel,
@@ -258,14 +258,14 @@ const RefactoredVideoDescription: React.FC < RefactoredVideoDescriptionProps> = 
  return (
  <div className="bg - gray - 100 dark:bg - gray - 800 rounded - xl p - 4 mt - 4 shadow - sm border border - gray - 200 dark:border - gray - 700">
  {/* Channel Information */}
- <ChannelInfo
+ <ChannelInfo;
  channel={channel}
  isSubscribed={isSubscribed}
  onSubscribe={onSubscribe} />
  />
 
  {/* Video Description */}
- <DescriptionContent
+ <DescriptionContent;
  video={video}
  showFullDescription={showFullDescription}
  onToggleDescription={onToggleDescription} />
@@ -273,7 +273,7 @@ const RefactoredVideoDescription: React.FC < RefactoredVideoDescriptionProps> = 
 
  {/* AI Summary Section */}
  <div className="mt - 4">
- <AISummarySection
+ <AISummarySection;
  canSummarize={canSummarize}
  isSummarizing={isSummarizing}
  summary={summary || ''}

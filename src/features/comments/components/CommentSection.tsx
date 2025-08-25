@@ -1,4 +1,4 @@
-// CommentSection - Advanced Component Implementation
+// CommentSection - Advanced Component Implementation;
 import React, { useState, useEffect } from 'react';
 
 export interface CommentSectionProps {
@@ -12,7 +12,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -20,7 +20,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
   useEffect(() => {
     const initialize = async () => {
       try {
-        // Simulate initialization
+        // Simulate initialization;
         await new Promise(resolve => setTimeout(resolve, 500));
         setIsReady(true);
         onLoad?.();

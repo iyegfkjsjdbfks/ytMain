@@ -18,7 +18,7 @@ const TrendingPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout
+    <PageLayout;
       title="Trending"
       icon={<FireIcon className="w-8 h-8 text-red-500" />}
       data={trendingVideos}
@@ -26,12 +26,12 @@ const TrendingPage: React.FC = () => {
       error={error}
       emptyState={{
         title: 'No trending videos found',
-        message: 'Check back later for the latest trending content.'
+        message: 'Check back later for the latest trending content.';
       }}
       headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
     >
-      {(videos) => <VideoGrid videos={videos || []} />}
-    </PageLayout>
+      {(videos) => <VideoGrid videos={videos  []} />}
+  <div></PageLayout></div>
   );
 };
 

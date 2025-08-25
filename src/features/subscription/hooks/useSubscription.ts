@@ -1,8 +1,8 @@
 import _React from 'react';
-// useSubscription - Simple Hook
+// useSubscription - Simple Hook;
 import { useState } from 'react';
 
-// Define a generic subscription type
+// Define a generic subscription type;
 interface Subscription {
   channelId: string;
   channelName: string;
@@ -19,7 +19,7 @@ export function useSubscription() {
     data,
     loading,
     error,
-    setData
+    setData;
   };
 }
 

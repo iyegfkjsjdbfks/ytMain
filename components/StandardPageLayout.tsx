@@ -1,6 +1,6 @@
 import React, { ReactNode, FC } from 'react';
-import LoadingSpinner from 'LoadingSpinner.tsx';
-import { ErrorState } from 'LoadingStates.tsx';
+import LoadingSpinner from 'LoadingSpinner';
+import { ErrorState } from 'LoadingStates';
 
 interface StandardPageLayoutProps {
  children: React.ReactNode;
@@ -19,12 +19,12 @@ interface StandardPageLayoutProps {
 
 /**
  * Standardized page layout component that handles common page patterns:
- * - Loading states with customizable skeletons
- * - Error states with retry functionality
- * - Empty states with custom messaging
- * - Consistent header structure
+ * - Loading states with customizable skeletons;
+ * - Error states with retry functionality;
+ * - Empty states with custom messaging;
+ * - Consistent header structure;
  *
- * Reduces code duplication across pages by providing a unified layout structure
+ * Reduces code duplication across pages by providing a unified layout structure;
  */
 const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  children,
@@ -39,22 +39,22 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
  emptyComponent,
  className = '',
  containerClassName = 'container mx-auto px-4 py-6' }) => {
- // Default loading component
+ // Default loading component;
  const defaultLoadingComponent = (
  <div className="flex items-center justify-center min-h-[400px]">
  <LoadingSpinner size="lg" />
 // FIXED:  </div>
  );
 
- // Default error component
+ // Default error component;
  const defaultErrorComponent = (
- <ErrorState
+ <ErrorState;
  title="Something went wrong"
  message={error || 'An unexpected error occurred'} />
  />
  );
 
- // Default empty component
+ // Default empty component;
  const defaultEmptyComponent = (
  <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
  <div className="text-gray-400 mb-4">
@@ -63,7 +63,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
 // FIXED:  </svg>
 // FIXED:  </div>
 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
- No content found
+ No content found;
 // FIXED:  </h3>
  <p className="text-gray-500 dark:text-gray-400">
  There's nothing to display at the moment.

@@ -40,13 +40,13 @@ const iconSizeClasses = {
  lg: 'w-5 h-5' };
 
 const LoadingSpinner: React.FC<{ size: string }> = ({ size }: any) => (
- <svg
+ <svg;
 // FIXED:  className={cn('animate-spin text-current', size)}
  xmlns="http://www.w3.org/2000/svg"
  fill="none"
  viewBox="0 0 24 24" />
  >
- <circle
+ <circle;
 // FIXED:  className="opacity-25"
  cx="12"
  cy="12"
@@ -54,7 +54,7 @@ const LoadingSpinner: React.FC<{ size: string }> = ({ size }: any) => (
  stroke="currentColor"
  strokeWidth="4" />
  />
- <path
+ <path;
 // FIXED:  className="opacity-75"
  fill="currentColor"
  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -73,26 +73,26 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
  children,
  disabled,
  className,
- ...props
+ ...props;
 }) => {
  const isDisabled = disabled || loading;
  const isActionVariant = variant === 'action';
  const isLinkVariant = variant === 'link';
 
  const baseClasses = cn(
- // Base styles
+ // Base styles;
  'inline-flex items-center justify-center font-medium transition-all duration-150 ease-in-out',
  'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
  'dark:focus-visible:ring-offset-neutral-900',
 
- // Conditional styles
+ // Conditional styles;
  {
  'border': !isActionVariant,
  'w-full': fullWidth,
  'opacity-70 cursor-not-allowed': isDisabled,
  'font-semibold': !isLinkVariant },
 
- // Size and variant classes
+ // Size and variant classes;
  !isLinkVariant && sizeClasses[size],
  variantClasses[variant],
  roundedClasses[rounded]);
@@ -101,14 +101,14 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
  const spinnerSize = iconSizeClasses[size];
 
  return (
- <button
+ <button;
 // FIXED:  type="button"
 // FIXED:  className={cn(baseClasses, className)}
 // FIXED:  disabled={isDisabled}
  {...props} />
  >
  {loading && (
- <LoadingSpinner
+ <LoadingSpinner;
  size={cn(
  spinnerSize,
  children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : '')} />
@@ -132,8 +132,8 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
  );
 };
 
-// Export as default for backward compatibility
+// Export as default for backward compatibility;
 export default UnifiedButton;
 
-// Type exports
+// Type exports;
 export type { UnifiedButtonProps };

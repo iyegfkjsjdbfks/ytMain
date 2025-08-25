@@ -1,4 +1,4 @@
-// UnifiedButton - React Component
+// UnifiedButton - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface UnifiedButtonProps {
@@ -12,7 +12,7 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
         <h3>Error in UnifiedButton</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

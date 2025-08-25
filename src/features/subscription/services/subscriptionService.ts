@@ -1,4 +1,4 @@
-// subscriptionService - Enhanced Service
+// subscriptionService - Enhanced Service;
 export class SubscriptionService {
   private apiUrl: string;
 

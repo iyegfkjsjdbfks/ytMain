@@ -1,4 +1,4 @@
-// AdvancedSearchFilters - Simple Component
+// AdvancedSearchFilters - Simple Component;
 import React from 'react';
 
 export interface AdvancedSearchFiltersProps {
@@ -8,7 +8,7 @@ export interface AdvancedSearchFiltersProps {
 
 export const AdvancedSearchFilters = (props: AdvancedSearchFiltersProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

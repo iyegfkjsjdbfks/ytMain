@@ -1,6 +1,6 @@
 import React, { MouseEvent, FC, useState, useEffect, useCallback, useRef } from 'react';
 
-import { XMarkIcon, BellIcon } from '@heroicons / react / 24 / outline';
+import { XIcon, BellIcon } from '@heroicons / react / 24 / outline';
 import { BellIcon as BellSolidIcon } from '@heroicons / react / 24 / solid';
 const BellIconSolid = BellSolidIcon;
 
@@ -35,7 +35,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  useEffect(() => {}
  loadNotifications();
 
- // Simulate real - time notifications
+ // Simulate real - time notifications;
  const interval = setInterval((() => {}
  if (Math.random() < 0.1) { // 10% chance every 30 seconds}
  generateRandomNotification();
@@ -63,7 +63,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  setNotifications(parsedNotifications);
  setUnreadCount(parsedNotifications.filter((n: Notification) => !n.isRead).length)
  } else {}
- // Generate initial mock notifications
+ // Generate initial mock notifications;
  const mockNotifications = generateMockNotifications();
  setNotifications(mockNotifications);
  setUnreadCount(mockNotifications.filter((n) => !n.isRead).length);
@@ -131,7 +131,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  timestamp: new Date().toISOString(),
  isRead: false };
 
- const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50
+ const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50;
  setNotifications(updatedNotifications);
  setUnreadCount(prev => prev + 1);
  (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
@@ -252,7 +252,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
 // FIXED:  onClick={() => setIsOpen(false: React.MouseEvent)}
 // FIXED:  className="p - 1 text - neutral - 500 hover:text - neutral - 700 dark:hover:text - neutral - 300"
  >
- <XMarkIcon className="w - 5 h - 5" />
+ <XIcon className="w - 5 h - 5" />
 // FIXED:  </button>
 // FIXED:  </div>
 
@@ -266,7 +266,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700'
  }`}
  >
- All
+ All;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => setFilter('unread': React.MouseEvent)}
@@ -285,7 +285,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
 // FIXED:  onClick={(e: React.MouseEvent) => markAllAsRead(e)}
 // FIXED:  className="text - sm text - blue - 600 dark:text - blue - 400 hover:text - blue - 800 dark:hover:text - blue - 300"
  >
- Mark all read
+ Mark all read;
 // FIXED:  </button>
  )}
 // FIXED:  </div>
@@ -299,14 +299,14 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
 // FIXED:  </div>
  ) : (
  filteredNotifications.map((notification) => (
- <div
+ <div;
  key={notification.id}
 // FIXED:  className={`p - 4 border - b border - neutral - 100 dark:border - neutral - 700 hover:bg - neutral - 50 dark:hover:bg - neutral - 750 transition - colors ${}
  !notification.isRead ? 'bg - blue - 50 dark:bg - blue - 950 / 20' : ''
  }`} />
  >
  <div className="flex items - start space - x - 3">
- <img
+ <img;
 // FIXED:  src={notification.channelAvatar}
 // FIXED:  alt={notification.channelName}
 // FIXED:  className="w - 10 h - 10 rounded - full flex - shrink - 0" />
@@ -328,7 +328,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
  {notification.channelName} {notification.message}
 // FIXED:  </p>
  <p className="text - xs text - neutral - 500 dark:text - neutral - 500">
- {formatDistanceToNow(new Date(notification.timestamp))} ago
+ {formatDistanceToNow(new Date(notification.timestamp))} ago;
 // FIXED:  </p>
 // FIXED:  </div>
 
@@ -353,7 +353,7 @@ const NotificationCenter: React.FC < NotificationCenterProps> = ({ className = '
 // FIXED:  </div>
 
  {notification.videoThumbnail && (}
- <img
+ <img;
 // FIXED:  src={notification.videoThumbnail}
 // FIXED:  alt="Video thumbnail"
 // FIXED:  className="w - 20 h - 11 rounded mt - 2 object - cover" />

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, FC } from 'react';
 import { Link } from 'react-router-dom';
-// @ts-nocheck
+// @ts-nocheck;
 
 import { getVideos } from '../services/realVideoService.ts';
 
-import VideoCard from 'VideoCard.tsx';
+import VideoCard from 'VideoCard';
 
 import type { Video } from '../types.ts';
 
@@ -23,10 +23,10 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  setLoading(true);
  const allVideos = await getVideos();
 
- // Mock live streams by modifying some videos to appear as live
- const mockLiveStreams = allVideos
+ // Mock live streams by modifying some videos to appear as live;
+ const mockLiveStreams = allVideos;
  .filter((video) => !video.isShort)
- .slice(0, maxStreams * 2) // Get more videos to simulate live streams
+ .slice(0, maxStreams * 2) // Get more videos to simulate live streams;
  .map((video, index) => {
  if (index < maxStreams) {
  return {
@@ -36,7 +36,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  views: `${Math.floor(Math.random() * 5000) + 500} watching now`,
  publishedAt: 'Live now',
  duration: 'LIVE',
- thumbnail: video.thumbnailUrl, // Keep original thumbnail
+ thumbnail: video.thumbnailUrl, // Keep original thumbnail;
 
  }
  return video;
@@ -119,11 +119,11 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <div className="w-3 h-3 bg-red-600 rounded-full mr-2 animate-pulse" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Live now</h2>
 // FIXED:  </div>
- <Link
+ <Link;
  to="/trending?filter=live"
 // FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
- View All
+ View All;
 // FIXED:  </Link>
 // FIXED:  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -132,7 +132,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }: any) => {
  <VideoCard video={stream} />
  {/* Live indicator overlay */}
  <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded shadow-lg">
- LIVE
+ LIVE;
 // FIXED:  </div>
  {/* Viewer count overlay */}
  <div className="absolute bottom-16 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">

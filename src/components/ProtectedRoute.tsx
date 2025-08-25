@@ -7,7 +7,7 @@ export interface ProtectedRouteProps {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, className = '' }) => {
   return React.createElement('div', {
-    className: 'protectedroute-container ' + className
+    className: 'protectedroute-container ' + className;
   }, children || 'ProtectedRoute Component');
 };
 

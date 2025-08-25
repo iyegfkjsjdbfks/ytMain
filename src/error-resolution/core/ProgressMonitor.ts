@@ -4,7 +4,7 @@ import { PerformanceMetrics, ExecutionPhase } from '../types/ErrorTypes';
 
 export interface ProgressUpdate {
   phase: string;
-  progress: number; // 0-100
+  progress: number; // 0-100;
   errorsFixed: number;
   errorsRemaining: number;
   currentTask: string;
@@ -38,12 +38,12 @@ export class ProgressMonitor extends EventEmitter {
       averageFixTime: 0,
       successRate: 0,
       rollbackCount: 0,
-      timeoutCount: 0
+      timeoutCount: 0;
     };
   }
 
   /**
-   * Initializes monitoring for a set of phases
+   * Initializes monitoring for a set of phases;
    */
   public initializePhases(phases: ExecutionPhase[], totalErrors: number): void {
     this.totalErrors = totalErrors;
@@ -65,7 +65,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Starts monitoring a specific phase
+   * Starts monitoring a specific phase;
    */
   public startPhase(phaseName: string, errorsAtStart: number): void {
     const phase = this.phases.get(phaseName);
@@ -73,7 +73,7 @@ export class ProgressMonitor extends EventEmitter {
       throw new Error(`Phase not found: ${phaseName}`);
     }
 
-    // End previous phase if running
+    // End previous phase if running;
     if (this.currentPhase && this.currentPhase !== phaseName) {
       this.endPhase(this.currentPhase, 'completed');
     }
@@ -87,17 +87,17 @@ export class ProgressMonitor extends EventEmitter {
     console.log(`🚀 Started phase: ${phaseName} (${errorsAtStart} errors)`);
     this.emit('phaseStarted', { phase: phaseName, errorsAtStart });
 
-    // Start periodic updates
+    // Start periodic updates;
     this.startPeriodicUpdates();
   }
 
   /**
-   * Updates progress for the current phase
+   * Updates progress for the current phase;
    */
   public updateProgress(
     errorsFixed: number,
     errorsRemaining: number,
-    currentTask: string
+    currentTask: string;
   ): void {
     if (!this.currentPhase) {
       console.warn('⚠️ No active phase to update');
@@ -110,12 +110,12 @@ export class ProgressMonitor extends EventEmitter {
     phase.errorsFixed = errorsFixed;
     phase.currentTask = currentTask;
     
-    // Calculate progress percentage
+    // Calculate progress percentage;
     if (phase.errorsAtStart > 0) {
       phase.progress = Math.min(100, (errorsFixed / phase.errorsAtStart) * 100);
     }
 
-    // Update performance metrics
+    // Update performance metrics;
     this.updatePerformanceMetrics(errorsFixed, errorsRemaining);
 
     const progressUpdate: ProgressUpdate = {
@@ -132,7 +132,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Ends a phase with the specified status
+   * Ends a phase with the specified status;
    */
   public endPhase(phaseName: string, status: 'completed' | 'failed'): void {
     const phase = this.phases.get(phaseName);
@@ -157,7 +157,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Records a rollback event
+   * Records a rollback event;
    */
   public recordRollback(reason: string): void {
     this.performanceMetrics.rollbackCount++;
@@ -166,7 +166,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Records a timeout event
+   * Records a timeout event;
    */
   public recordTimeout(operation: string): void {
     this.performanceMetrics.timeoutCount++;
@@ -175,7 +175,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Gets current progress summary
+   * Gets current progress summary;
    */
   public getProgressSummary(): {
     totalPhases: number;
@@ -191,7 +191,7 @@ export class ProgressMonitor extends EventEmitter {
     const completedPhases = phases.filter(p => p.status === 'completed').length;
     const totalErrorsFixed = phases.reduce((sum, p) => sum + p.errorsFixed, 0);
     
-    // Calculate overall progress
+    // Calculate overall progress;
     let overallProgress = 0;
     if (phases.length > 0) {
       const phaseProgress = phases.reduce((sum, p) => sum + p.progress, 0);
@@ -200,7 +200,7 @@ export class ProgressMonitor extends EventEmitter {
 
     const elapsedTime = Date.now() - this.startTime.getTime();
     const estimatedCompletion = this.calculateEstimatedCompletion(
-      this.totalErrors - totalErrorsFixed
+      this.totalErrors - totalErrorsFixed;
     );
 
     return {
@@ -216,14 +216,14 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Gets detailed phase information
+   * Gets detailed phase information;
    */
   public getPhaseDetails(): PhaseProgress[] {
     return Array.from(this.phases.values());
   }
 
   /**
-   * Stops all monitoring and cleanup
+   * Stops all monitoring and cleanup;
    */
   public stop(): void {
     this.stopPeriodicUpdates();
@@ -239,7 +239,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Starts periodic progress updates
+   * Starts periodic progress updates;
    */
   private startPeriodicUpdates(): void {
     if (this.updateInterval) return;
@@ -252,15 +252,15 @@ export class ProgressMonitor extends EventEmitter {
             phase: this.currentPhase,
             elapsedTime: phase.startTime ? Date.now() - phase.startTime.getTime() : 0,
             progress: phase.progress,
-            currentTask: phase.currentTask
+            currentTask: phase.currentTask;
           });
         }
       }
-    }, 5000); // Update every 5 seconds
+    }, 5000); // Update every 5 seconds;
   }
 
   /**
-   * Stops periodic updates
+   * Stops periodic updates;
    */
   private stopPeriodicUpdates(): void {
     if (this.updateInterval) {
@@ -270,7 +270,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Updates performance metrics
+   * Updates performance metrics;
    */
   private updatePerformanceMetrics(errorsFixed: number, errorsRemaining: number): void {
     const totalProcessed = errorsFixed + errorsRemaining;
@@ -278,7 +278,7 @@ export class ProgressMonitor extends EventEmitter {
       this.performanceMetrics.successRate = errorsFixed / totalProcessed;
     }
 
-    // Calculate average fix time
+    // Calculate average fix time;
     const elapsedTime = Date.now() - this.startTime.getTime();
     if (errorsFixed > 0) {
       this.performanceMetrics.averageFixTime = elapsedTime / errorsFixed;
@@ -286,7 +286,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Calculates estimated completion time
+   * Calculates estimated completion time;
    */
   private calculateEstimatedCompletion(errorsRemaining: number): Date {
     if (errorsRemaining === 0 || this.performanceMetrics.averageFixTime === 0) {
@@ -298,7 +298,7 @@ export class ProgressMonitor extends EventEmitter {
   }
 
   /**
-   * Formats duration in human readable format
+   * Formats duration in human readable format;
    */
   private formatDuration(milliseconds: number): string {
     const seconds = Math.floor(milliseconds / 1000);

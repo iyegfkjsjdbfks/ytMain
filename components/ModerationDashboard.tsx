@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import { ShieldCheckIcon, TrashIcon, CheckIcon, XMarkIcon, FlagIcon, ChatBubbleLeftIcon, VideoCameraIcon, UserIcon, ClockIcon, MagnifyingGlassIcon } from '@heroicons / react / 24 / outline';
+import { ShieldCheckIcon, TrashIcon, CheckIcon, XIcon, FlagIcon, ChatBubbleLeftIcon, VideoCameraIcon, UserIcon, ClockIcon, MagnifyingGlassIcon } from '@heroicons / react / 24 / outline';
 
 import { formatDistanceToNow } from '../utils / dateUtils';
 
@@ -29,7 +29,7 @@ export interface ModerationItem {}
  comments?: number;
  };
 
- // AI Analysis
+ // AI Analysis;
  aiAnalysis?: {}
  toxicityScore: number;,
  categories: string;
@@ -74,7 +74,7 @@ const ModerationDashboard: React.FC < ModerationDashboardProps> = ({}
  }, []);
 
  const loadModerationItems = () => {}
- // Mock moderation items
+ // Mock moderation items;
  const mockItems: ModerationItem[] = [;
  {}
  id: '1',
@@ -182,14 +182,14 @@ return false;
  return priorityOrder[b.priority] - priorityOrder[a.priority];
  case 'reports':
  return b.reportCount - a.reportCount;
- default: return 0
+ default: return 0;
  }
  });
 
  const handleModerate = (itemId: string | number, action: 'approve' | 'reject' | 'remove' | 'flag') => {}
  onModerate(itemId, action, moderationReason);
  setItems(prev => prev.map((item) =>
- item.id === itemId
+ item.id === itemId;
  ? {}
  ...item as any,
  status: action === 'approve' ? 'approved' :
@@ -272,7 +272,7 @@ return false;
  <span > Content Moderation</span>
 // FIXED:  </h1>
  <p className="text - gray - 600 dark:text - gray - 400 mt - 1">
- {filteredItems.length} items requiring review
+ {filteredItems.length} items requiring review;
 // FIXED:  </p>
 // FIXED:  </div>
 
@@ -301,7 +301,7 @@ return false;
  {/* Search */}
  <div className="md:col - span - 2 relative">
  <MagnifyingGlassIcon className="absolute left - 3 top - 1/2 transform -translate - y - 1 / 2 w - 5 h - 5 text - gray - 400" />
- <input
+ <input;
 // FIXED:  type="text"
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setSearchQuery(e.target.value)}
@@ -311,7 +311,7 @@ return false;
 // FIXED:  </div>
 
  {/* Filters */}
- <select
+ <select;
 // FIXED:  value={filterStatus} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setFilterStatus(e.target.value as any)}
 // FIXED:  className="px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white"
@@ -323,7 +323,7 @@ return false;
  <option value="rejected">Rejected</option>
 // FIXED:  </select>
 
- <select
+ <select;
 // FIXED:  value={filterType} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setFilterType(e.target.value as any)}
 // FIXED:  className="px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white"
@@ -335,7 +335,7 @@ return false;
  <option value="community_post">Posts</option>
 // FIXED:  </select>
 
- <select
+ <select;
 // FIXED:  value={filterPriority} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setFilterPriority(e.target.value as any)}
 // FIXED:  className="px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white"
@@ -347,7 +347,7 @@ return false;
  <option value="low">Low</option>
 // FIXED:  </select>
 
- <select
+ <select;
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setSortBy(e.target.value as any)}
 // FIXED:  className="px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white"
@@ -365,7 +365,7 @@ return false;
  <div className="bg - blue - 50 dark:bg - blue - 900 / 20 border border - blue - 200 dark:border - blue - 800 rounded - lg p - 4">
  <div className="flex items - center justify - between">
  <span className="text - blue - 800 dark:text - blue - 200">
- {selectedItems.size} item{selectedItems.size !== 1 ? 's' : ''} selected
+ {selectedItems.size} item{selectedItems.size !== 1 ? 's' : ''} selected;
 // FIXED:  </span>
 
  <div className="flex space - x - 3">
@@ -373,19 +373,19 @@ return false;
 // FIXED:  onClick={() => handleBulkAction('approve': React.MouseEvent)}
 // FIXED:  className="px - 3 py - 1 bg - green - 600 text - white rounded text - sm hover:bg - green - 700"
  >
- Approve All
+ Approve All;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction('reject': React.MouseEvent)}
 // FIXED:  className="px - 3 py - 1 bg - yellow - 600 text - white rounded text - sm hover:bg - yellow - 700"
  >
- Reject All
+ Reject All;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction('remove': React.MouseEvent)}
 // FIXED:  className="px - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700"
  >
- Remove All
+ Remove All;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -395,7 +395,7 @@ return false;
  {/* Moderation Items */}
  <div className="space - y - 4">
  {filteredItems.map((item) => (}
- <div
+ <div;
  key={item.id}
 // FIXED:  className={`bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg p - 6 ${}
  selectedItems.has(item.id) ? 'ring - 2 ring - blue - 500' : ''
@@ -403,7 +403,7 @@ return false;
  >
  <div className="flex items - start space - x - 4">
  {/* Selection Checkbox */}
- <input
+ <input;
 // FIXED:  type="checkbox"
 // FIXED:  checked={selectedItems.has(item.id)} />
 // FIXED:  onChange={() => toggleSelection(item.id: React.ChangeEvent)}
@@ -445,7 +445,7 @@ return false;
  {/* Content Preview */}
  <div className="md:col - span - 2">
  {item.content.thumbnail && (}
- <img
+ <img;
 // FIXED:  src={item.content.thumbnail}
 // FIXED:  alt="Content thumbnail"
 // FIXED:  className="w - full h - 32 object - cover rounded mb - 2" />
@@ -480,7 +480,7 @@ return false;
  <div className="mt - 1">
  {item.aiAnalysis.categories.map((category,}
  index) => (
- <span
+ <span;
  key={index}
 // FIXED:  className="inline - block bg - red - 100 dark:bg - red - 900 / 20 text - red - 800 dark:text - red - 200 px - 2 py - 1 rounded text - xs mr - 1 mb - 1" />
  >
@@ -517,7 +517,7 @@ return false;
  }
 // FIXED:  className="flex items - center space - x - 1 px - 3 py - 1 bg - yellow - 600 text - white rounded text - sm hover:bg - yellow - 700"
  >
- <XMarkIcon className="w - 4 h - 4" />
+ <XIcon className="w - 4 h - 4" />
  <span > Reject</span>
 // FIXED:  </button>
 
@@ -546,10 +546,10 @@ return false;
  <div className="fixed inset - 0 bg - black / 50 flex items - center justify - center z - 50">
  <div className="bg - white dark:bg - gray - 800 rounded - lg p - 6 max - w - md w - full mx - 4">
  <h3 className="text - lg font - semibold text - gray - 900 dark:text - white mb - 4">
- Moderation Action
+ Moderation Action;
 // FIXED:  </h3>
 
- <textarea
+ <textarea;
 // FIXED:  value={moderationReason} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setModerationReason(e.target.value)}
 // FIXED:  placeholder="Enter reason for this action (optional)"
@@ -562,13 +562,13 @@ return false;
 // FIXED:  onClick={() => setShowModerationModal(null: React.MouseEvent)}
 // FIXED:  className="flex - 1 px - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded text - gray - 700 dark:text - gray - 300 hover:bg - gray - 50 dark:hover:bg - gray - 700"
  >
- Cancel
+ Cancel;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleModerate(showModerationModal, 'reject': React.MouseEvent)}
 // FIXED:  className="flex - 1 px - 4 py - 2 bg - yellow - 600 text - white rounded hover:bg - yellow - 700"
  >
- Reject
+ Reject;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

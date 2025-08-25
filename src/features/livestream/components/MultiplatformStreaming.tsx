@@ -1,4 +1,4 @@
-// MultiplatformStreaming - React Component
+// MultiplatformStreaming - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface MultiplatformStreamingProps {
@@ -12,7 +12,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
         <h3>Error in MultiplatformStreaming</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

@@ -1,4 +1,4 @@
-// MobileVideoGrid - Simple Component
+// MobileVideoGrid - Simple Component;
 import React from 'react';
 
 export interface MobileVideoGridProps {
@@ -8,7 +8,7 @@ export interface MobileVideoGridProps {
 
 export const MobileVideoGrid = (props: MobileVideoGridProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

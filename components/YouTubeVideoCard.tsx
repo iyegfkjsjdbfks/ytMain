@@ -1,12 +1,12 @@
 import React, { lazy, FC, type React } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 
-// YouTube Video Card component for displaying YouTube search results
-// YouTube Video Card component for displaying YouTube search results
+// YouTube Video Card component for displaying YouTube search results;
+// YouTube Video Card component for displaying YouTube search results;
 
-import { buildVideoUrl } from '../utils/componentUtils.tsx';
+import { buildVideoUrl } from '../utils/componentUtils';
 
-import YouTubePlayerWrapper from 'YouTubePlayerWrapper.tsx';
+import YouTubePlayerWrapper from 'YouTubePlayerWrapper';
 
 import type { YouTubeSearchResult } from '../services/googleSearchService.ts';
 
@@ -18,11 +18,11 @@ interface YouTubeVideoCardProps {
 const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }: any) => {
  const navigate = useNavigate();
 
- // Extract video ID from the video object
+ // Extract video ID from the video object;
  const videoId = video.embedUrl?.split('/embed/')[1]?.split('?')[0] || video.id || '';
- const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId);
+ const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId: string);
 
- // Helper function to format duration is now imported from utils
+ // Helper function to format duration is now imported from utils;
 
  const formatUploadDate = (uploadDate?: string) => {
  if (!uploadDate) {
@@ -56,18 +56,18 @@ return `${Math.floor(diffDays / 30)} months ago`;
  // Use the full video ID to preserve the source context (google-search- or youtube- prefix)
  const fullVideoId = video.id;
 
- // Navigate to watch page with full video ID to preserve metadata source
+ // Navigate to watch page with full video ID to preserve metadata source;
  const watchUrl = buildVideoUrl(fullVideoId);
  navigate(watchUrl);
  };
 
  return (
- <div
+ <div;
 // FIXED:  className={`bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full cursor-pointer group ${className}`} />
-// FIXED:  onClick={(e) => handleCardClick(e)}
+// FIXED:  onClick={(e: any) => handleCardClick(e)}
  role="button"
  tabIndex={0}
- onKeyDown={(e) => {
+ onKeyDown={(e: any) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.preventDefault();
  handleCardClick();
@@ -78,7 +78,7 @@ return `${Math.floor(diffDays / 30)} months ago`;
  {/* YouTube Embed Player Section */}
  <div className="relative aspect-video">
  {isValidVideoId ? (
- <YouTubePlayerWrapper
+ <YouTubePlayerWrapper;
  videoId={videoId}
  width="100%"
  height="100%"

@@ -1,4 +1,4 @@
-// VideoGrid - Simple Component
+// VideoGrid - Simple Component;
 import React from 'react';
 
 export interface VideoGridProps {
@@ -8,7 +8,7 @@ export interface VideoGridProps {
 
 export const VideoGrid = (props: VideoGridProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

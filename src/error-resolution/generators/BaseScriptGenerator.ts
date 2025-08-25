@@ -46,12 +46,12 @@ export abstract class BaseScriptGenerator {
   protected abstract generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    context: GenerationContext
+    context: GenerationContext;
   ): Promise<FixingScript | null>;
 
   public async generateScript(
     errors: AnalyzedError[],
-    context: GenerationContext
+    context: GenerationContext;
   ): Promise<FixingScript[]> {
     const scripts: FixingScript[] = [];
     const errorGroups = this.groupErrorsByPattern(errors);
@@ -74,13 +74,13 @@ export abstract class BaseScriptGenerator {
     type: 'syntax' | 'compilation' | 'test' | 'lint',
     command: string,
     expectedResult: 'success' | 'zero-errors' | 'improved-count' = 'improved-count',
-    timeoutSeconds: number = 30
+    timeoutSeconds: number = 30;
   ): ValidationCheck {
     return {
       type,
       command,
       expectedResult,
-      timeoutSeconds
+      timeoutSeconds;
     };
   }
 
@@ -93,7 +93,7 @@ export abstract class BaseScriptGenerator {
   }
 
   protected generateRollbackCommands(commands: ScriptCommand[]): ScriptCommand[] {
-    // Generate rollback commands for the given commands
+    // Generate rollback commands for the given commands;
     return commands.map(cmd => ({
       type: cmd.type,
       file: cmd.file,
@@ -102,8 +102,8 @@ export abstract class BaseScriptGenerator {
   }
 
   protected estimateRuntime(commands: ScriptCommand[]): number {
-    // Estimate runtime in seconds based on command count and type
-    return commands.length * 5; // 5 seconds per command as rough estimate
+    // Estimate runtime in seconds based on command count and type;
+    return commands.length * 5; // 5 seconds per command as rough estimate;
   }
 }
 

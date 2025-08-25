@@ -1,9 +1,9 @@
-// useMobileDetection - Custom Hook
+// useMobileDetection - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseMobileDetectionOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useMobileDetection(
       const result = {
         hookName: 'useMobileDetection',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useMobileDetection(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

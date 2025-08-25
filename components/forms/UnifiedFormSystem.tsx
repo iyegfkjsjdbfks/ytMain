@@ -3,7 +3,7 @@ import React, { ChangeEvent, FormEvent, ReactNode, FC, useState, useCallback, us
 import { cn } from '../../utils / cn';
 import { UnifiedButton } from '../ui / UnifiedButton';
 
-// Form Context Types
+// Form Context Types;
 export interface FormContextValue {}
  errors: Record < string, string>;
  touched: Record < string, boolean>;
@@ -14,12 +14,12 @@ export interface FormContextValue {}
  error: Error) => void;,
  setFieldTouched: (name,
  touched) => void;
- validateField: (name) => void
+ validateField: (name) => void;
 }
 
 const FormContext = createContext < FormContextValue | null>(null);
 
-// Form Provider Component
+// Form Provider Component;
 export interface FormProviderProps {}
  children: React.ReactNode;
  initialValues?: Record < string, any>;
@@ -38,7 +38,7 @@ export const FormProvider: React.FC < FormProviderProps> = ({}
  const setFieldValue = useCallback((name,
  value: string | number) => {}
  setValues(prev => ({ ...prev as any, [name]: value }));
- // Clear error when user starts typing
+ // Clear error when user starts typing;
  if (errors.name) {}
  setErrors(prev => ({ ...prev as any, [name]: '' }));
  }
@@ -79,7 +79,7 @@ export const FormProvider: React.FC < FormProviderProps> = ({}
  );
 };
 
-// Hook to use form context
+// Hook to use form context;
 export const useFormContext = () => {}
  const context = useContext < any>(FormContext);
  if (!context) {}
@@ -88,7 +88,7 @@ export const useFormContext = () => {}
  return context;
 };
 
-// Field Wrapper Component
+// Field Wrapper Component;
 export interface FormFieldProps {}
  name: string;
  label?: string;
@@ -111,7 +111,7 @@ export const FormField: React.FC < FormFieldProps> = ({}
  return (
  <div className={cn('space - y - 1', className)}>
  {label && (}
- <label
+ <label;
 // FIXED:  htmlFor={name}
 // FIXED:  className="block text - sm font - medium text - neutral - 700 dark:text - neutral - 300" />
  >
@@ -137,7 +137,7 @@ export const FormField: React.FC < FormFieldProps> = ({}
  );
 };
 
-// Enhanced Input Component
+// Enhanced Input Component;
 export interface UnifiedInputProps extends Omit < React.InputHTMLAttributes < HTMLInputElement> 'onChange'> {}
  name: string;
  label?: string;
@@ -147,7 +147,7 @@ export interface UnifiedInputProps extends Omit < React.InputHTMLAttributes < HT
  rightIcon?: React.ReactNode;
  variant?: 'default' | 'filled' | 'outline';
  inputSize?: 'sm' | 'md' | 'lg';
- onChange?: (value: string | number) => void
+ onChange?: (value: string | number) => void;
 }
 
 const inputVariantClasses: object = {}
@@ -171,7 +171,7 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({}
  inputSize = 'md',
  onChange,
  className,
- ...props
+ ...props;
 }) => {}
  const { values, errors, touched, setFieldValue, setFieldTouched, validateField } = useFormContext();
  const error = touched.name ? errors.name : undefined;
@@ -211,7 +211,7 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({}
 // FIXED:  </div>
  )}
 
- <input
+ <input;
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
@@ -233,7 +233,7 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({}
 
  if (label || helpText) {}
  return (
- <FormField
+ <FormField;
 // FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
@@ -247,7 +247,7 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({}
  return input;
 };
 
-// Enhanced Textarea Component
+// Enhanced Textarea Component;
 export interface UnifiedTextareaProps extends Omit < React.TextareaHTMLAttributes < HTMLTextAreaElement> 'onChange'> {}
  name: string;
  label?: string;
@@ -256,7 +256,7 @@ export interface UnifiedTextareaProps extends Omit < React.TextareaHTMLAttribute
  variant?: 'default' | 'filled' | 'outline';
  textareaSize?: 'sm' | 'md' | 'lg';
  resize?: 'none' | 'vertical' | 'horizontal' | 'both';
- onChange?: (value: string | number) => void
+ onChange?: (value: string | number) => void;
 }
 
 const textareaSizeClasses: object = {}
@@ -280,7 +280,7 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({}
  resize = 'vertical',
  onChange,
  className,
- ...props
+ ...props;
 }) => {}
  const { values, errors, touched, setFieldValue, setFieldTouched, validateField } = useFormContext();
  const error = touched.name ? errors.name : undefined;
@@ -309,7 +309,7 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({}
  'border - red - 500 focus:border - red - 500 focus:ring - red - 500': error },
  className);
 
- const textarea = (<textarea
+ const textarea = (<textarea;
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
@@ -322,7 +322,7 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({}
 
  if (label || helpText) {}
  return (
- <FormField
+ <FormField;
 // FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
@@ -336,7 +336,7 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({}
  return textarea;
 };
 
-// Select Component
+// Select Component;
 export interface UnifiedSelectProps extends Omit < React.SelectHTMLAttributes < HTMLSelectElement> 'onChange'> {}
  name: string;
  label?: string;
@@ -346,7 +346,7 @@ export interface UnifiedSelectProps extends Omit < React.SelectHTMLAttributes < 
  placeholder?: string;
  variant?: 'default' | 'filled' | 'outline';
  selectSize?: 'sm' | 'md' | 'lg';
- onChange?: (value: string | number) => void
+ onChange?: (value: string | number) => void;
 }
 
 export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
@@ -360,7 +360,7 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
  selectSize = 'md',
  onChange,
  className,
- ...props
+ ...props;
 }) => {}
  const { values, errors, touched, setFieldValue, setFieldTouched, validateField } = useFormContext();
  const error = touched.name ? errors.name : undefined;
@@ -390,7 +390,7 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
  className);
 
  const select = (<div className="relative">
- <select
+ <select;
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
@@ -409,7 +409,7 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
 // FIXED:  </option>
  )}
  {options.map((option) => (}
- <option
+ <option;
  key={option.value}
 // FIXED:  value={option.value}
 // FIXED:  disabled={option.disabled} />
@@ -423,7 +423,7 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
 
  if (label || helpText) {}
  return (
- <FormField
+ <FormField;
 // FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
@@ -437,7 +437,7 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
  return select;
 };
 
-// Form Component
+// Form Component;
 export interface UnifiedFormProps {}
  children: React.ReactNode;
  onSubmit?: (values: Record < string, any>) => void | Promise<any> < void>;
@@ -462,8 +462,8 @@ return;
 
  setIsSubmitting(true);
  try {}
- // Get form data from context would be handled here
- // For now, we'll pass empty object
+ // Get form data from context would be handled here;
+ // For now, we'll pass empty object;
  await onSubmit({});
  } catch (error) {}
  (console as any).error('Form submission error:', error);
@@ -473,20 +473,20 @@ return;
  }, [onSubmit]);
 
  return (
- <FormProvider
+ <FormProvider;
  {...(initialValues && { initialValues })}
  {...(validationSchema && { validationSchema })} />
  >
  <form />
 // FIXED:  onSubmit={(e: React.FormEvent) => handleSubmit(e)}
 // FIXED:  className={cn('space - y - 6', className)}
- noValidate
+ noValidate;
  >
  {children}
 
  {onSubmit && (}
  <div className="flex justify - end">
- <UnifiedButton
+ <UnifiedButton;
 // FIXED:  type="submit"
  loading={isSubmitting}
 // FIXED:  disabled={isSubmitting} />
@@ -500,7 +500,7 @@ return;
  );
 };
 
-// Type exports
+// Type exports;
 export type {}
  FormContextValue,
  FormProviderProps,

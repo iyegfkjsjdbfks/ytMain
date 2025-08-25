@@ -27,7 +27,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
     category: 'Entertainment',
     tags: [],
     monetization: false,
-    ageRestriction: false
+    ageRestriction: false;
   });
   const [tagInput, setTagInput] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -107,10 +107,10 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
 
   const handlePublish = () => {
     setCurrentStep('publish');
-    // Simulate publishing process
+    // Simulate publishing process;
     setTimeout(() => {
       alert('Video published successfully!');
-      // Reset form
+      // Reset form;
       setSelectedFile(null);
       setUploadProgress(0);
       setCurrentStep('upload');
@@ -121,7 +121,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
         category: 'Entertainment',
         tags: [],
         monetization: false,
-        ageRestriction: false
+        ageRestriction: false;
       });
     }, 2000);
   };
@@ -141,7 +141,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
               currentStep === 'upload' ? 'bg-blue-600 text-white' :
               currentStep === 'details' || currentStep === 'publish' ? 'bg-green-600 text-white' : 'bg-gray-300'
             }`}>
-              1
+              1;
             </div>
             <span className="ml-2 font-medium">Upload</span>
           </div>
@@ -160,7 +160,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
               currentStep === 'details' ? 'bg-blue-600 text-white' :
               currentStep === 'publish' ? 'bg-green-600 text-white' : 'bg-gray-300'
             }`}>
-              2
+              2;
             </div>
             <span className="ml-2 font-medium">Details</span>
           </div>
@@ -177,7 +177,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
             <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
               currentStep === 'publish' ? 'bg-blue-600 text-white' : 'bg-gray-300'
             }`}>
-              3
+              3;
             </div>
             <span className="ml-2 font-medium">Publish</span>
           </div>
@@ -185,13 +185,13 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
 
         {/* Upload Step */}
         {currentStep === 'upload' && (
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className = "bg-white rounded-lg shadow-md p-6">
             {!selectedFile ? (
-              <div
+              <div;
                 className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-400 transition-colors"
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
-              >
+              {">"}
                 <div className="mb-4">
                   <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
@@ -200,19 +200,19 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Upload your video</h3>
                 <p className="text-gray-600 mb-4">Drag and drop video files to upload</p>
                 <p className="text-sm text-gray-500 mb-4">Your videos will be private until you publish them.</p>
-                <button
+                <button;
                   onClick={() => fileInputRef.current?.click()}
                   className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
-                >
-                  SELECT FILES
-                </button>
-                <input
+                {">"}
+                  SELECT FILES;
+                </button></div>
+                <input;
                   ref={fileInputRef}
                   type="file"
                   accept="video/*"
                   onChange={handleFileSelect}
                   className="hidden"
-                />
+                /{">"}
               </div>
             ) : (
               <div className="space-y-4">
@@ -221,12 +221,12 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
                     <h3 className="font-medium">{selectedFile.name}</h3>
                     <p className="text-gray-600 text-sm">{(selectedFile.size / (1024 * 1024)).toFixed(2)} MB</p>
                   </div>
-                  <button
+                  <button;
                     onClick={() => setSelectedFile(null)}
                     className="text-red-500 hover:text-red-700"
-                  >
-                    Remove
-                  </button>
+                  {">"}
+                    Remove;
+                  </button></div>
                 </div>
                 
                 {isUploading && (
@@ -236,25 +236,25 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
                       <span>{Math.round(uploadProgress)}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div
+                      <div;
                         className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${uploadProgress}%` }}
-                      ></div>
+                      {">"}{"<"}/div{">"}
                     </div>
                   </div>
                 )}
                 
                 {!isUploading && uploadProgress === 0 && (
-                  <button
+                  <button;
                     onClick={simulateUpload}
                     className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
                   >
-                    Start Upload
+                    Start Upload;
                   </button>
                 )}
-              </div>
+  <div></div></div>
             )}
-          </div>
+  <div></div></div>
         )}
 
         {/* Details Step */}
@@ -267,28 +267,28 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
                 {/* Title */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Title (required)</label>
-                  <input
+                  <input;
                     type="text"
                     value={videoDetails.title}
-                    onChange={(e) => handleDetailsChange('title', e.target.value)}
+                    onChange={(e: any) => handleDetailsChange('title', e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Add a title that describes your video"
                     maxLength={100}
-                  />
+                  /{">"}
                   <p className="text-xs text-gray-500 mt-1">{videoDetails.title.length}/100</p>
                 </div>
 
                 {/* Description */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                  <textarea
+                  <textarea;
                     value={videoDetails.description}
-                    onChange={(e) => handleDetailsChange('description', e.target.value)}
+                    onChange={(e: any) => handleDetailsChange('description', e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     rows={6}
                     placeholder="Tell viewers about your video"
                     maxLength={5000}
-                  />
+                  /{">"}
                   <p className="text-xs text-gray-500 mt-1">{videoDetails.description.length}/5000</p>
                 </div>
 
@@ -296,36 +296,36 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Tags</label>
                   <div className="flex space-x-2 mb-2">
-                    <input
+                    <input;
                       type="text"
                       value={tagInput}
-                      onChange={(e) => setTagInput(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                      onChange={(e: any) => setTagInput(e.target.value)}
+                      onKeyPress={(e: any) => e.key === 'Enter' && (e.preventDefault(), addTag())}
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Add a tag"
-                    />
-                    <button
+                    /{">"}
+                    <button;
                       onClick={addTag}
                       className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    >
-                      Add
-                    </button>
+                    {">"}
+                      Add;
+                    </button></div>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {videoDetails.tags.map((tag, index) => (
-                      <span
+                      <span;
                         key={index}
                         className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm flex items-center"
-                      >
+                      {">"}
                         {tag}
-                        <button
+                        <button;
                           onClick={() => removeTag(tag)}
                           className="ml-2 text-gray-500 hover:text-gray-700"
-                        >
+                        {">"}
                           ×
-                        </button>
-                      </span>
-                    ))}
+                        </button></div>
+                      </span></div>
+                    )){"}"
                   </div>
                 </div>
               </div>
@@ -338,102 +338,102 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
                     {videoDetails.thumbnail ? (
                       <div>
                         <p className="text-sm text-gray-600 mb-2">{videoDetails.thumbnail.name}</p>
-                        <button
+                        <button;
                           onClick={() => handleDetailsChange('thumbnail', undefined)}
                           className="text-red-500 hover:text-red-700 text-sm"
-                        >
-                          Remove
-                        </button>
+                        {">"}
+                          Remove;
+                        </button></div>
                       </div>
                     ) : (
                       <div>
                         <p className="text-sm text-gray-600 mb-2">Upload a custom thumbnail</p>
-                        <button
+                        <button;
                           onClick={() => thumbnailInputRef.current?.click()}
                           className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 text-sm"
-                        >
-                          Upload Thumbnail
-                        </button>
+                        {">"}
+                          Upload Thumbnail;
+                        </button></div>
                       </div>
-                    )}
-                    <input
+                    ){"}"
+                    <input;
                       ref={thumbnailInputRef}
                       type="file"
                       accept="image/*"
                       onChange={handleThumbnailSelect}
                       className="hidden"
-                    />
+                    /{">"}
                   </div>
-                </div>
+  <div></div></div>
 
                 {/* Visibility */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Visibility</label>
-                  <select
+                  <label className = "block text-sm font-medium text-gray-700 mb-2">Visibility</label>
+                  <select;
                     value={videoDetails.visibility}
-                    onChange={(e) => handleDetailsChange('visibility', e.target.value)}
+                    onChange={(e: any) => handleDetailsChange('visibility', e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="public">Public</option>
                     <option value="unlisted">Unlisted</option>
                     <option value="private">Private</option>
                   </select>
-                </div>
+  <div></div></div>
 
                 {/* Category */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                  <select
+                  <label className = "block text-sm font-medium text-gray-700 mb-2">Category</label>
+                  <select;
                     value={videoDetails.category}
-                    onChange={(e) => handleDetailsChange('category', e.target.value)}
+                    onChange={(e: any) => handleDetailsChange('category', e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    {categories.map((category) => (
+                    {categories.map((category: any) => (
                       <option key={category} value={category}>{category}</option>
                     ))}
                   </select>
-                </div>
+  <div></div></div>
 
                 {/* Additional Options */}
-                <div className="space-y-3">
-                  <label className="flex items-center">
-                    <input
+                <div className="space-y-3">;
+                  <label className = "flex items-center">
+                    <input;
                       type="checkbox"
                       checked={videoDetails.monetization}
-                      onChange={(e) => handleDetailsChange('monetization', e.target.checked)}
+                      onChange={(e: any) => handleDetailsChange('monetization', e.target.checked)}
                       className="mr-3"
-                    />
+                    /{">"}
                     <span className="text-sm">Enable monetization</span>
                   </label>
                   
                   <label className="flex items-center">
-                    <input
+                    <input;
                       type="checkbox"
                       checked={videoDetails.ageRestriction}
-                      onChange={(e) => handleDetailsChange('ageRestriction', e.target.checked)}
+                      onChange={(e: any) => handleDetailsChange('ageRestriction', e.target.checked)}
                       className="mr-3"
-                    />
+                    /{">"}
                     <span className="text-sm">Age restriction (18+)</span>
                   </label>
-                </div>
+  <div></div></div>
               </div>
             </div>
 
-            <div className="flex justify-between mt-8">
-              <button
+            <div className = "flex justify-between mt-8">
+              <button;
                 onClick={() => setCurrentStep('upload')}
                 className="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600"
-              >
-                Back
-              </button>
-              <button
+              {">"}
+                Back;
+              </button></div>
+              <button;
                 onClick={handlePublish}
                 disabled={!videoDetails.title.trim()}
                 className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
-                Publish
+                Publish;
               </button>
-            </div>
+  <div></div></div>
           </div>
         )}
 
@@ -447,7 +447,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProps> = ({ className }) => {
             </div>
           </div>
         )}
-      </div>
+  <div></div></div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-// GoogleSearchStoreDebug - React Component
+// GoogleSearchStoreDebug - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface GoogleSearchStoreDebugProps {
@@ -12,7 +12,7 @@ export const GoogleSearchStoreDebug: React.FC<GoogleSearchStoreDebugProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const GoogleSearchStoreDebug: React.FC<GoogleSearchStoreDebugProps> = ({
         <h3>Error in GoogleSearchStoreDebug</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

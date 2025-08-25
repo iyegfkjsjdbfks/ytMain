@@ -1,4 +1,4 @@
-// AdvancedAnalyticsDashboard - Enhanced Dashboard Component
+// AdvancedAnalyticsDashboard - Enhanced Dashboard Component;
 import React, { useState, useEffect } from 'react';
 
 interface AdvancedAnalyticsDashboardProps {
@@ -14,7 +14,7 @@ interface DashboardData {
 
 export const AdvancedAnalyticsDashboard: React.FC<AdvancedAnalyticsDashboardProps> = ({
   className = '',
-  onDataUpdate
+  onDataUpdate;
 }) => {
   const [data, setData] = useState<DashboardData>({
     metrics: {},
@@ -30,14 +30,14 @@ export const AdvancedAnalyticsDashboard: React.FC<AdvancedAnalyticsDashboardProp
         setLoading(true);
         setError(null);
         
-        // Simulate data fetching
+        // Simulate data fetching;
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         const newData: DashboardData = {
           metrics: {
             totalViews: 1000,
             totalLikes: 50,
-            totalComments: 25
+            totalComments: 25;
           },
           charts: [],
           lastUpdated: new Date().toISOString()
@@ -68,7 +68,7 @@ export const AdvancedAnalyticsDashboard: React.FC<AdvancedAnalyticsDashboardProp
       <div className={`dashboard-error ${className}`}>
         <div>Error: {error}</div>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

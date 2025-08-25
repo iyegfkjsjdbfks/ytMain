@@ -90,7 +90,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  case 'video': return <VideoCameraIcon className="w - 4 h - 4" />;
  case 'poll': return <ChatBubbleLeftIcon className="w - 4 h - 4" />;
  case 'link': return <LinkIcon className="w - 4 h - 4" />;
- default: return null
+ default: return null;
  };
 
  const renderPostContent = (post: CommunityPost) => {}
@@ -124,13 +124,13 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  }`}>
  {post.images.map((image,}
  index) => (
- <img
+ <img;
  key={index}
 // FIXED:  src={image}
 // FIXED:  alt={`Post ${index + 1}`}
 // FIXED:  className="w - full h - 48 object - cover rounded - lg cursor - pointer hover:opacity - 90 transition - opacity" />
 // FIXED:  onClick={() => {}
- // Open image in modal / lightbox
+ // Open image in modal / lightbox;
 
  }
  />
@@ -141,7 +141,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  {/* Video */}
  {post.type === 'video' && post.videoThumbnail && (}
  <div className="relative cursor - pointer group">
- <img
+ <img;
 // FIXED:  src={post.videoThumbnail}
 // FIXED:  alt="Video thumbnail"
 // FIXED:  className="w - full h - 48 object - cover rounded - lg" />
@@ -168,16 +168,16 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  <div className="space - y - 2">
  {post.poll.options.map((option) => {}
  const percentage = post.poll!.totalVotes > 0;
- ? (option.votes / post.poll!.totalVotes) * 100
+ ? (option.votes / post.poll!.totalVotes) * 100;
  : 0;
  const isSelected = post.poll!.userVote === option.id;
 
  return (
- <button
+ <button;
  key={option.id} />
 // FIXED:  onClick={() => onVote ? .(post.id, option.id : React.MouseEvent)}
 // FIXED:  className={`w - full text - left p - 3 rounded - lg border transition - colors ${}
- isSelected
+ isSelected;
  ? 'border - blue - 500 bg - blue - 50 dark:bg - blue - 900 / 20'
  : 'border - gray - 200 dark:border - gray - 700 hover:bg - gray - 50 dark:hover:bg - gray - 800'
  }`}
@@ -189,7 +189,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
 // FIXED:  </span>
 // FIXED:  </div>
  <div className="mt - 2 bg - gray - 200 dark:bg - gray - 700 rounded - full h - 2">
- <div
+ <div;
 // FIXED:  className={`h - 2 rounded - full transition - all duration - 300 ${}
  isSelected ? 'bg - blue - 500' : 'bg - gray - 400 dark:bg - gray - 600'
  }`}
@@ -201,14 +201,14 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  })}
 // FIXED:  </div>
 <p className="text - sm text - gray - 500 dark:text - gray - 400 mt - 3">
- {formatNumber(post.poll.totalVotes)} votes
+ {formatNumber(post.poll.totalVotes)} votes;
 // FIXED:  </p>
 // FIXED:  </div>
  )}
 
  {/* Link Preview */}
  {post.type === 'link' && post.link && (}
- <a
+ <a;
 // FIXED:  href={post.link.url}
  target="_blank"
  rel="noopener noreferrer"
@@ -216,7 +216,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  >
  <div className="flex">
  {post.link.thumbnail && (}
- <img
+ <img;
 // FIXED:  src={post.link.thumbnail}
 // FIXED:  alt={post.link.title}
 // FIXED:  className="w - 24 h - 24 object - cover flex - shrink - 0" />
@@ -247,7 +247,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  <ChatBubbleLeftIcon className="w - 16 h - 16 mx - auto" />
 // FIXED:  </div>
 <h3 className="text - lg font - medium text - gray - 900 dark:text - white mb - 2">
- No community posts yet
+ No community posts yet;
 // FIXED:  </h3>
  <p className="text - gray - 600 dark:text - gray - 400">
  This channel hasn't shared any community posts.
@@ -259,14 +259,14 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  return (
  <div className={`space - y - 6 ${className}`}>
  {posts.map((post) => (}
- <div
+ <div;
  key={post.id}
 // FIXED:  className="bg - white dark:bg - gray - 800 rounded - lg border border - gray - 200 dark:border - gray - 700 p - 6" />
  >
  {/* Header */}
  <div className="flex items - start justify - between mb - 4">
  <div className="flex items - center space - x - 3">
- <img
+ <img;
 // FIXED:  src={post.channelAvatar}
 // FIXED:  alt={post.channelName}
 // FIXED:  className="w - 10 h - 10 rounded - full" />
@@ -285,7 +285,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  )}
  {post.isPinned && (}
  <span className="text - xs bg - blue - 100 dark:bg - blue - 900 text - blue - 800 dark:text - blue - 200 px - 2 py - 1 rounded - full">
- Pinned
+ Pinned;
 // FIXED:  </span>
  )}
  {getPostIcon(post.type) && (}
@@ -295,7 +295,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  )}
 // FIXED:  </div>
 <p className="text - sm text - gray - 500 dark:text - gray - 400">
- {formatDistanceToNow(new Date(post.timestamp))} ago
+ {formatDistanceToNow(new Date(post.timestamp))} ago;
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -313,7 +313,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({}
  <button />
 // FIXED:  onClick={() => onLike(post.id: React.MouseEvent)}
 // FIXED:  className={`flex items - center space - x - 2 transition - colors ${}
- post.isLiked
+ post.isLiked;
  ? 'text - red - 500'
  : 'text - gray - 500 dark:text - gray - 400 hover:text - red - 500'
  }`}

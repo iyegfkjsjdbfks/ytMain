@@ -58,7 +58,7 @@ export const MiniplayerProvider: React.FC<MiniplayerProviderProps> = ({ children
     isPlaying,
     openMiniplayer,
     closeMiniplayer,
-    togglePlay
+    togglePlay;
   };
 
   return (

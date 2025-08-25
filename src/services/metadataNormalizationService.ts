@@ -1,4 +1,4 @@
-// Metadata Normalization Service - Enhanced Implementation
+// Metadata Normalization Service - Enhanced Implementation;
 export interface RawVideoMetadata {
   id?: string;
   title?: string;
@@ -45,7 +45,7 @@ export class MetadataNormalizationService {
       channelId: this.normalizeId(raw.channel?.id),
       channelTitle: this.normalizeTitle(raw.channel?.name),
       channelThumbnail: this.normalizeThumbnail(raw.channel?.thumbnail),
-      source
+      source;
     };
   }
 

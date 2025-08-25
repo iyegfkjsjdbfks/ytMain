@@ -1,4 +1,4 @@
-// ModerationDashboard - Enhanced Dashboard Component
+// ModerationDashboard - Enhanced Dashboard Component;
 import React, { useState, useEffect } from 'react';
 
 interface ModerationDashboardProps {
@@ -14,7 +14,7 @@ interface DashboardData {
 
 export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   className = '',
-  onDataUpdate
+  onDataUpdate;
 }) => {
   const [data, setData] = useState<DashboardData>({
     metrics: {},
@@ -30,14 +30,14 @@ export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
         setLoading(true);
         setError(null);
         
-        // Simulate data fetching
+        // Simulate data fetching;
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         const newData: DashboardData = {
           metrics: {
             totalViews: 1000,
             totalLikes: 50,
-            totalComments: 25
+            totalComments: 25;
           },
           charts: [],
           lastUpdated: new Date().toISOString()
@@ -68,7 +68,7 @@ export const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
       <div className={`dashboard-error ${className}`}>
         <div>Error: {error}</div>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

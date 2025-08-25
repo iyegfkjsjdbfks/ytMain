@@ -1,4 +1,4 @@
-// notificationService - Enhanced Service
+// notificationService - Enhanced Service;
 export class NotificationService {
   private apiUrl: string;
 

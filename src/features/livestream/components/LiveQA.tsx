@@ -1,4 +1,4 @@
-// LiveQA - Enhanced Component
+// LiveQA - Enhanced Component;
 import React, { useState } from 'react';
 
 export interface LiveQAProps {
@@ -8,7 +8,7 @@ export interface LiveQAProps {
 
 export const LiveQA: React.FC<LiveQAProps> = ({
   className = '',
-  children
+  children;
 }) => {
   const [isActive, setIsActive] = useState(false);
 

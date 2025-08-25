@@ -11,8 +11,8 @@ export interface FormField {
   options?: Array<{ value: string; label: string }>;
   validation?: (value: string | number) => string | null;
   disabled?: boolean;
-  accept?: string; // for file inputs
-  rows?: number; // for textarea
+  accept?: string; // for file inputs;
+  rows?: number; // for textarea;
 }
 
 export interface BaseFormProps {
@@ -42,7 +42,7 @@ const BaseForm: FC<BaseFormProps> = ({
   className = '',
   initialValues = {},
   children,
-  showResetButton = false
+  showResetButton = false;
 }) => {
   const [formData, setFormData] = useState<Record<string, any>>(initialValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -53,10 +53,10 @@ const BaseForm: FC<BaseFormProps> = ({
     
     setFormData(prev => ({
       ...prev,
-      [name]: newValue
+      [name]: newValue;
     }));
 
-    // Clear error when user starts typing
+    // Clear error when user starts typing;
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -119,7 +119,7 @@ const BaseForm: FC<BaseFormProps> = ({
     switch (field.type) {
       case 'textarea':
         return (
-          <textarea
+          <textarea;
             {...commonProps}
             placeholder={field.placeholder}
             rows={field.rows || 4}
@@ -140,7 +140,7 @@ const BaseForm: FC<BaseFormProps> = ({
       
       case 'checkbox':
         return (
-          <input
+          <input;
             {...commonProps}
             type="checkbox"
             checked={formData[field.name] || false}
@@ -149,7 +149,7 @@ const BaseForm: FC<BaseFormProps> = ({
       
       case 'file':
         return (
-          <input
+          <input;
             {...commonProps}
             type="file"
             accept={field.accept}
@@ -158,7 +158,7 @@ const BaseForm: FC<BaseFormProps> = ({
       
       default:
         return (
-          <input
+          <input;
             {...commonProps}
             type={field.type}
             placeholder={field.placeholder}
@@ -189,18 +189,18 @@ const BaseForm: FC<BaseFormProps> = ({
       
       <div className="form - actions">
         {showResetButton && (
-          <button
+          <button;
             type="button"
             onClick={handleReset}
             disabled={loading}
             className="btn btn - secondary"
           >
-            Reset
+            Reset;
           </button>
         )}
         
         {onCancel && (
-          <button
+          <button;
             type="button"
             onClick={onCancel}
             disabled={loading}
@@ -210,7 +210,7 @@ const BaseForm: FC<BaseFormProps> = ({
           </button>
         )}
         
-        <button
+        <button;
           type="submit"
           disabled={loading}
           className="btn btn - primary"

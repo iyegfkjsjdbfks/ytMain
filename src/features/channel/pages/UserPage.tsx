@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 /**
- * UserPage component for displaying a user's public profile
+ * UserPage component for displaying a user's public profile;
  */
 const UserPage: React.FC = () => {
  return null;
@@ -16,7 +16,7 @@ const UserPage: React.FC = () => {
 // FIXED:  </p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
- This is a placeholder for the user profile page that will display
+ This is a placeholder for the user profile page that will display;
  public information about a user.
 // FIXED:  </p>
  <p className='mt-2'>

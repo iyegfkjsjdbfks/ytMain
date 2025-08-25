@@ -1,6 +1,6 @@
 import React from 'react';
 /**
- * HistoryPage component for displaying user's watch history
+ * HistoryPage component for displaying user's watch history;
  */
 const HistoryPage: React.FC = () => {
  return (
@@ -9,7 +9,7 @@ const HistoryPage: React.FC = () => {
  <p className='text-gray-600 mb-4'>Videos you've watched recently</p>
  <div className='p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700'>
  <p>
- This is a placeholder for the watch history page that will display
+ This is a placeholder for the watch history page that will display;
  videos you've watched.
 // FIXED:  </p>
  <p className='mt-2'>

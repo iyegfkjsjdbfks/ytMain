@@ -1,4 +1,4 @@
-// PlaylistManager - Simple Component
+// PlaylistManager - Simple Component;
 import React from 'react';
 
 export interface PlaylistManagerProps {
@@ -8,7 +8,7 @@ export interface PlaylistManagerProps {
 
 export const PlaylistManager = (props: PlaylistManagerProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

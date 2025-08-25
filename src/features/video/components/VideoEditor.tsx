@@ -1,4 +1,4 @@
-// VideoEditor - Enhanced Editor Component
+// VideoEditor - Enhanced Editor Component;
 import React, { useState, useCallback } from 'react';
 
 interface VideoEditorProps {
@@ -40,30 +40,30 @@ export const VideoEditor: React.FC<VideoEditorProps> = ({
   return (
     <div className={`editor ${className}`}>
       <div className="editor-toolbar">
-        <button 
+        <button; 
           onClick={handleSave}
           disabled={saving}
           className="save-button"
-        >
+        {">"}
           {saving ? 'Saving...' : 'Save'}
-        </button>
+        </button></div>
       </div>
       
-      {error && (
+      {error && ()
         <div className="editor-error">
           {error}
         </div>
       )}
       
       <div className="editor-content">
-        <textarea
+        <textarea;
           value={value}
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e: any) => handleChange(e.target.value)}
           className="editor-textarea"
           placeholder="Start editing..."
-        />
+        /{">"}
       </div>
-    </div>
+  <div></div></div>
   );
 };
 

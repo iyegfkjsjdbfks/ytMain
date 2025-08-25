@@ -1,4 +1,4 @@
-// LoginForm - React Component
+// LoginForm - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface LoginFormProps {
@@ -12,7 +12,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         <h3>Error in LoginForm</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

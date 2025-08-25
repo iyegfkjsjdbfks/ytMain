@@ -128,7 +128,7 @@ const UserPage: React.FC = () => {
               {/* Channel Details */}
               <div className="flex-1 min-w-0">
                 <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-                  Channel Name
+                  Channel Name;
                 </h1>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-neutral-600 dark:text-neutral-400">
                   <span>@channelhandle</span>
@@ -145,23 +145,23 @@ const UserPage: React.FC = () => {
                 <button className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
                   <BellIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
                 </button>
-                <button
+                <button;
                   onClick={handleSubscribe}
                   className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                    isSubscribed
+                    isSubscribed;
                       ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
                       : 'bg-red-600 text-white hover:bg-red-700'
-                  }`}
-                >
+                  {"{"}""`{"{"}""
+                {">"}
                   {isSubscribed ? (
                     <>
                       <CheckIcon className="w-4 h-4 inline mr-2" />
-                      Subscribed
+                      Subscribed;
                     </>
                   ) : (
                     'Subscribe'
                   )}
-                </button>
+                </button></div>
               </div>
             </div>
           </div>
@@ -173,28 +173,28 @@ const UserPage: React.FC = () => {
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
-                <button
+                <button;
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() ={">"{"}" setActiveTab(tab.id){"}"
                   className={`flex items-center gap-2 px-6 py-4 border-b-2 font-medium transition-colors ${
-                    activeTab === tab.id
+                    activeTab === tab.id;
                       ? 'border-red-500 text-red-600 dark:text-red-400'
                       : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
-                  }`}
-                >
+                  {"{"}""`{"{"}""
+                {">"}
                   <Icon className="w-5 h-5" />
                   <span>{tab.label}</span>
-                </button>
+                </button></nav>
               );
-            })}
-          </nav>
+            {"{"}""){"{"}""
+          </nav></div>
         </div>
 
         {/* Tab Content */}
         <div className="pb-12">
           {renderTabContent()}
         </div>
-      </div>
+  <div></div></div>
     </div>
   );
 };

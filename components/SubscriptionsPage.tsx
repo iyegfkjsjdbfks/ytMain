@@ -46,12 +46,12 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  const [showUnsubscribeModal, setShowUnsubscribeModal] = useState < string | null>(null);
 
  useEffect(() => {}
- // Simulate fetching subscriptions from an API or local storage
+ // Simulate fetching subscriptions from an API or local storage;
  const storedSubscriptions = (localStorage as any).getItem('youtubeCloneSubscriptions_v1');
  if (storedSubscriptions as any) {}
  setSubscriptions(JSON.parse(storedSubscriptions));
  } else {}
- // Mock data if no subscriptions are found
+ // Mock data if no subscriptions are found;
  const mockSubscriptions: SubscriptionData[] = [;
  {}
  id: '1',
@@ -188,7 +188,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  } else if (filterBy === 'live') {}
  filtered = filtered.filter((sub) => sub.isLive);
  } else if (filterBy === 'recent_uploads') {}
- filtered = filtered.filter((sub) => sub.lastVideoUpload && (new Date().getTime() - new Date(sub.lastVideoUpload).getTime()) < (7 * 24 * 60 * 60 * 1000)); // Last 7 days
+ filtered = filtered.filter((sub) => sub.lastVideoUpload && (new Date().getTime() - new Date(sub.lastVideoUpload).getTime()) < (7 * 24 * 60 * 60 * 1000)); // Last 7 days;
  }
 
  switch (sortBy as any) {}
@@ -211,10 +211,10 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 
  const toggleNotifications = (channelId: any) => {}
  setSubscriptions(prev => prev.map((sub) =>
- sub.channelId === channelId
+ sub.channelId === channelId;
  ? { ...sub as any, notificationsEnabled: !sub.notificationsEnabled }
  : sub));
- // Update localStorage
+ // Update localStorage;
  const stored = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
  const updatedStored: object = { ...stored };
  if (updatedStored.channelId) {}
@@ -225,7 +225,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 
  const handleUnsubscribe = (channelId: any) => {}
  setSubscriptions(prev => prev.filter((sub) => sub.channelId !== channelId));
- // Update localStorage
+ // Update localStorage;
  const stored = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
  delete stored.channelId;
  (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(stored));
@@ -268,7 +268,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  <div className="flex flex - col md:flex - row md:items - center md:justify - between gap - 4">
  {/* Search Bar */}
  <div className="relative flex - grow">
- <input
+ <input;
 // FIXED:  type="text"
 // FIXED:  placeholder="Search subscriptions..."
 // FIXED:  value={searchQuery} />
@@ -279,7 +279,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 // FIXED:  </div>
 
  {/* Sort By */}
- <select
+ <select;
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setSortBy(e.target.value as any)}
 // FIXED:  className="px - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - full bg - gray - 100 dark:bg - gray - 700 text - gray - 900 dark:text - white focus:outline - none focus:ring - 2 focus:ring - blue - 500"
@@ -291,7 +291,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 // FIXED:  </select>
 
  {/* Filter By */}
- <select
+ <select;
 // FIXED:  value={filterBy} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setFilterBy(e.target.value as any)}
 // FIXED:  className="px - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - full bg - gray - 100 dark:bg - gray - 700 text - gray - 900 dark:text - white focus:outline - none focus:ring - 2 focus:ring - blue - 500"
@@ -333,19 +333,19 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  {bulkActionMode && selectedSubscriptions.size > 0 && (}
  <><</>/><</>/><</>/>
  <span className="text - gray - 700 dark:text - gray - 300 text - sm">
- {selectedSubscriptions.size} selected
+ {selectedSubscriptions.size} selected;
 // FIXED:  </span>
  <button />
 // FIXED:  onClick={() => handleBulkAction('toggle_notifications': React.MouseEvent)}
 // FIXED:  className="px - 4 py - 2 text - sm font - medium text - blue - 600 dark:text - blue - 400 hover:underline"
  >
- Toggle Notifications
+ Toggle Notifications;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction('unsubscribe': React.MouseEvent)}
 // FIXED:  className="px - 4 py - 2 text - sm font - medium text - red - 600 dark:text - red - 400 hover:underline"
  >
- Unsubscribe Selected
+ Unsubscribe Selected;
 // FIXED:  </button>
 // FIXED:  </>
  )}
@@ -368,7 +368,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  <div key={sub.id} className="bg - white dark:bg - gray - 800 rounded - lg shadow - sm overflow - hidden border border - gray - 200 dark:border - gray - 700">
  {bulkActionMode && (}
  <div className="absolute top - 2 left - 2 z - 10">
- <input
+ <input;
 // FIXED:  type="checkbox"
 // FIXED:  checked={selectedSubscriptions.has(sub.channelId)} />
 // FIXED:  onChange={() => toggleBulkSelection(sub.channelId: React.ChangeEvent)}
@@ -377,12 +377,12 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 // FIXED:  </div>
  )}
  <div className="relative h - 32 bg - gray - 200 dark:bg - gray - 700 flex items - center justify - center">
- <img
+ <img;
 // FIXED:  src={sub.channelArt || `/api / placeholder / 480 / 180?text="${sub.channelName.split('" ')[0]}`}
 // FIXED:  alt={`${sub.channelName} channel art`}
 // FIXED:  className="w - full h - full object - cover" />
  />
- <img
+ <img;
 // FIXED:  src={sub.channelAvatar}
 // FIXED:  alt={`${sub.channelName} avatar`}
 // FIXED:  className="absolute -bottom - 8 left - 4 w - 16 h - 16 rounded - full border - 4 border - white dark:border - gray - 800 shadow - md" />
@@ -396,7 +396,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  )}
 // FIXED:  </h3>
  <p className="text - sm text - gray - 600 dark:text - gray - 400">
- {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos
+ {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos;
 // FIXED:  </p>
  <p className="text - xs text - gray - 500 dark:text - gray - 400 mt - 1">
  Subscribed {formatDistanceToNow(new Date(sub.subscribedAt), { addSuffix: true })}
@@ -434,7 +434,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  <div key={sub.id} className="bg - white dark:bg - gray - 800 rounded - lg shadow - sm overflow - hidden border border - gray - 200 dark:border - gray - 700 flex items - center p - 4">
  {bulkActionMode && (}
  <div className="flex - shrink - 0 mr - 4">
- <input
+ <input;
 // FIXED:  type="checkbox"
 // FIXED:  checked={selectedSubscriptions.has(sub.channelId)} />
 // FIXED:  onChange={() => toggleBulkSelection(sub.channelId: React.ChangeEvent)}
@@ -442,7 +442,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  />
 // FIXED:  </div>
  )}
- <img
+ <img;
 // FIXED:  src={sub.channelAvatar}
 // FIXED:  alt={`${sub.channelName} avatar`}
 // FIXED:  className="w - 20 h - 20 rounded - full object - cover flex - shrink - 0 mr - 4" />
@@ -455,7 +455,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  )}
 // FIXED:  </h3>
  <p className="text - sm text - gray - 600 dark:text - gray - 400">
- {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos
+ {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos;
 // FIXED:  </p>
  <p className="text - xs text - gray - 500 dark:text - gray - 400 mt - 1">
  Subscribed {formatDistanceToNow(new Date(sub.subscribedAt), { addSuffix: true })}
@@ -505,13 +505,13 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 // FIXED:  onClick={() => setShowUnsubscribeModal(null: React.MouseEvent)}
 // FIXED:  className="px - 4 py - 2 text - gray - 600 dark:text - gray - 400 hover:text - gray - 900 dark:hover:text - white rounded - lg"
  >
- Cancel
+ Cancel;
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleUnsubscribe(showUnsubscribeModal: React.MouseEvent)}
 // FIXED:  className="px - 4 py - 2 bg - red - 600 hover:bg - red - 700 text - white rounded - lg"
  >
- Unsubscribe
+ Unsubscribe;
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

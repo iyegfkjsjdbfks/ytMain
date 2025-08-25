@@ -1,4 +1,4 @@
-// ProtectedLiveStreamViewer - Simple Component
+// ProtectedLiveStreamViewer - Simple Component;
 import React from 'react';
 
 export interface ProtectedLiveStreamViewerProps {
@@ -8,7 +8,7 @@ export interface ProtectedLiveStreamViewerProps {
 
 export const ProtectedLiveStreamViewer = (props: ProtectedLiveStreamViewerProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

@@ -1,4 +1,4 @@
-// youtubeService - Clean Service Implementation
+// youtubeService - Clean Service Implementation;
 export interface youtubeServiceConfig {
   baseUrl?: string;
   timeout?: number;
@@ -16,7 +16,7 @@ export class YoutubeService {
   constructor(config: youtubeServiceConfig = {}) {
     this.config = {
       baseUrl: config.baseUrl || '/api',
-      timeout: config.timeout || 5000
+      timeout: config.timeout || 5000;
     };
   }
 
@@ -28,7 +28,7 @@ export class YoutubeService {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers
+          ...options.headers;
         }
       });
 

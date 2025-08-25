@@ -1,4 +1,4 @@
-// pwa - Generic Implementation
+// pwa - Generic Implementation;
 export interface pwaConfig {
   enabled?: boolean;
 }
@@ -8,7 +8,7 @@ export class Pwa {
 
   constructor(config: pwaConfig = {}) {
     this.config = {
-      enabled: config.enabled ?? true
+      enabled: config.enabled ?? true;
     };
   }
 

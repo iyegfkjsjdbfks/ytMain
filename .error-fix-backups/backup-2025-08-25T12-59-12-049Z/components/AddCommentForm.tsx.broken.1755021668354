@@ -1,0 +1,88 @@
+import React, { useState, useRef, FC, FormEvent } from 'react';
+import { PaperAirplaneIcon as PaperAirplaneSolidIcon } from '@heroicons/react/24/solid';
+const PaperAirplaneIconSolid = PaperAirplaneSolidIcon;
+
+interface AddCommentFormProps {
+ currentUserAvatarUrl: string;
+ onCommentSubmit: (commentText: any) => void;
+ maxCommentLength: number
+
+const AddCommentForm: React.FC<AddCommentFormProps> = ({
+ currentUserAvatarUrl,
+ onCommentSubmit,
+ maxCommentLength }) => {
+ const [commentText, setCommentText] = useState<string>('');
+ const [isFocused, setIsFocused] = useState<boolean>(false);
+ const inputRef = useRef<HTMLInputElement>(null);
+
+ const handleSubmit: any = (e: React.FormEvent<HTMLFormElement>) => {
+ e.preventDefault();
+ if (!commentText.trim() || commentText.length > maxCommentLength) {
+return;
+
+ onCommentSubmit(commentText.trim());
+ setCommentText('');
+ setIsFocused(false);
+ if (inputRef.current) {
+ inputRef.current.blur();
+;
+
+ const handleCancel: any = () => {
+ setCommentText('');
+ setIsFocused(false);
+ if (inputRef.current) {
+ inputRef.current.blur();
+;
+
+ const isCommentValid = commentText.trim().length > 0 && commentText.length <= maxCommentLength;
+
+ return (
+ <div className="flex items-start space-x-3">
+ <img
+// FIXED:  src={currentUserAvatarUrl}
+// FIXED:  alt="Your avatar"
+// FIXED:  className="w-10 h-10 rounded-full flex-shrink-0" />
+
+ <div className="flex-grow">
+ <form onSubmit={(e: any) => handleSubmit(e)} className="w-full">
+ <input
+ ref={inputRef}
+// FIXED:  type="text"
+// FIXED:  value={commentText} />
+// FIXED:  onChange={(e) => setCommentText(e.target.value)}
+ onFocus={() => setIsFocused(true)}
+// FIXED:  placeholder="Add a comment..."
+// FIXED:  className="bg-transparent border-b border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-sky-500 w-full py-2 outline-none text-neutral-900 dark:text-neutral-50 placeholder-neutral-500 dark:placeholder-neutral-400 text-sm transition-colors"
+// FIXED:  aria-label="Add a public comment"
+ maxLength={maxCommentLength + 20} // Allow some overtyping for visual feedback
+
+ {(isFocused || commentText) && (
+ <div className="flex justify-between items-center mt-2">
+ <span className={`text-xs ${commentText.length > maxCommentLength ? 'text-red-500 dark:text-red-400' : 'text-neutral-500 dark:text-neutral-400'}`}>
+ {commentText.length}/{maxCommentLength}
+</span>
+ <div className="space-x-2">
+ <button
+// FIXED:  type="button" />
+// FIXED:  onClick={(e: any) => handleCancel(e)}
+// FIXED:  className="px-3 py-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700/70 rounded-full transition-colors"
+
+ Cancel
+</button>
+ <button
+// FIXED:  type="submit"
+// FIXED:  disabled={!isCommentValid}
+// FIXED:  className="px-4 py-1.5 text-xs font-medium bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center" />
+
+ Comment <PaperAirplaneIcon className="w-3 h-3 ml-1.5 transform rotate-45" />
+</button>
+</div>
+</div>
+
+</form>
+</div>
+</div>
+;
+;
+
+export default AddCommentForm;

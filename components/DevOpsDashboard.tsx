@@ -1,13 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
 
 /**
- * Comprehensive DevOps Dashboard
+ * Comprehensive DevOps Dashboard;
  * Provides unified monitoring and management interface for all system aspects:
- * - Performance monitoring
- * - Security monitoring
- * - Deployment automation
- * - Code quality tracking
- * - Feature flag management
+ * - Performance monitoring;
+ * - Security monitoring;
+ * - Deployment automation;
+ * - Code quality tracking;
+ * - Feature flag management;
  */
 
 import { deploymentAutomation } from '../utils / deploymentAutomation';
@@ -15,7 +15,7 @@ import { intelligentCodeMonitor } from '../utils / intelligentCodeMonitor';
 import { performanceMonitor } from '../utils / performanceMonitor';
 import { securityMonitoring } from '../utils / securityMonitoring';
 
-// Types for dashboard data
+// Types for dashboard data;
 export interface DashboardMetrics {}
  performance: {,}
  score: number;
@@ -55,7 +55,7 @@ export interface AlertItem {}
  title: string;
  description: string;,
  timestamp: number;
- acknowledged: boolean
+ acknowledged: boolean;
 }
 
 const DevOpsDashboard: React.FC = () => {}
@@ -66,12 +66,12 @@ const DevOpsDashboard: React.FC = () => {}
  const [isLoading, setIsLoading] = useState < boolean>(true);
  const [lastUpdated, setLastUpdated] = useState < Date>(new Date());
 
- // Fetch dashboard data
+ // Fetch dashboard data;
  const fetchDashboardData = async (): Promise<any> < void> => {}
  try {}
  setIsLoading(true);
 
- // Gather metrics from all monitoring systems
+ // Gather metrics from all monitoring systems;
  const performanceMetrics = performanceMonitor.getMetrics();
  const securityMetrics = securityMonitoring.getSecurityMetrics();
  const deploymentMetrics = deploymentAutomation.getDeploymentMetrics();
@@ -81,7 +81,7 @@ const DevOpsDashboard: React.FC = () => {}
  activeFlags: 0;
  }; // featureFlagManager.getMetrics();
 
- // Transform data for dashboard
+ // Transform data for dashboard;
  const dashboardMetrics: DashboardMetrics = {,}
  performance: {}
  score: Math.round(performanceMetrics.find(m => m.name === 'performance - score')?.value || 85),
@@ -89,7 +89,7 @@ const DevOpsDashboard: React.FC = () => {}
  fid: performanceMetrics.find(m => m.name === 'fid')?.value || 50,
  cls: performanceMetrics.find(m => m.name === 'cls')?.value || 0.05,
  memoryUsage: performanceMetrics.find(m => m.name === 'memory - usage')?.value || 45,
- errorRate: performanceMetrics.find(m => m.name === 'error - rate')?.value || 0.1
+ errorRate: performanceMetrics.find(m => m.name === 'error - rate')?.value || 0.1;
  },
  security: {,}
  score: Math.round(securityMetrics.securityScore),
@@ -101,7 +101,7 @@ const DevOpsDashboard: React.FC = () => {}
  successRate: Math.round(deploymentMetrics.successRate * 100),
  averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes,
  frequency: deploymentMetrics.deploymentFrequency,
- activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length
+ activeDeployments: deploymentAutomation.getAllExecutions().filter((e: any) => e.status === 'running').length;
  },
  codeQuality: {,}
  score: codeMetrics ? Math.round(
@@ -116,14 +116,14 @@ const DevOpsDashboard: React.FC = () => {}
 
  setMetrics(dashboardMetrics);
 
- // Gather alerts from all systems
+ // Gather alerts from all systems;
  const allAlerts: AlertItem[] = [;
  ...securityMonitoring.getSecurityAlerts(false).map((alert) => ({}
  id: alert.id,
  type: "security" as const severity: alert.severity,
  title: alert.title,
  description: alert.description,
- timestamp: alert.timestamp, acknowledged: alert.acknowledged
+ timestamp: alert.timestamp, acknowledged: alert.acknowledged;
  })),
  ...deploymentAutomation.getAllExecutions()
  .filter((exec) => exec.status === 'failed')
@@ -136,7 +136,7 @@ const DevOpsDashboard: React.FC = () => {}
  acknowledged: false }))
  ];
 
- // Add performance alerts
+ // Add performance alerts;
  if (dashboardMetrics.performance.score < 70) {}
  allAlerts.push({}
  id: 'perf - low - score',
@@ -148,7 +148,7 @@ const DevOpsDashboard: React.FC = () => {}
  acknowledged: false });
  }
 
- // Add code quality alerts
+ // Add code quality alerts;
  if (dashboardMetrics.codeQuality.score < 75) {}
  allAlerts.push({}
  id: 'quality - low - score',
@@ -169,16 +169,16 @@ const DevOpsDashboard: React.FC = () => {}
  setIsLoading(false);
  };
 
- // Auto - refresh data
+ // Auto - refresh data;
  useEffect(() => {}
  fetchDashboardData().catch(console.error);
  const interval = setInterval((() => {}
  fetchDashboardData().catch(console.error);
- }) as any, 30000); // Refresh every 30 seconds
+ }) as any, 30000); // Refresh every 30 seconds;
  return () => clearInterval(interval);
  }, []);
 
- // Get severity color
+ // Get severity color;
  const getSeverityColor = (severity: any) => {}
  switch (severity as any) {}
  case 'critical': return 'text - red - 600 bg - red - 100';
@@ -187,7 +187,7 @@ const DevOpsDashboard: React.FC = () => {}
  case 'low': return 'text - blue - 600 bg - blue - 100'; default: return 'text - gray - 600 bg - gray - 100'
  };
 
- // Get score color
+ // Get score color;
  const getScoreColor = (score: any) => {}
  if (score >= 90) {}
 return 'text - green - 600';
@@ -201,7 +201,7 @@ return 'text - orange - 600';
  return 'text - red - 600';
  };
 
- // Render metric card
+ // Render metric card;
  const MetricCard: React.FC<{,}
  title: string;,
  value: string | number;
@@ -227,7 +227,7 @@ return 'text - orange - 600';
 // FIXED:  </div>
  );
 
- // Render overview tab
+ // Render overview tab;
  const OverviewTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
@@ -238,25 +238,25 @@ return <div > Loading...;
  return (
  <div className="space - y - 6">
  {/* Key Metrics Grid */}<div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
- <MetricCard
+ <MetricCard;
  title="Performance Score",
 // FIXED:  value={metrics.performance.score}
  color={getScoreColor(metrics.performance.score)}
  trend="stable" />
  />
- <MetricCard
+ <MetricCard;
  title="Security Score"
 // FIXED:  value={metrics.security.score}
  color={getScoreColor(metrics.security.score)}
  trend="up" />
  />
- <MetricCard
+ <MetricCard;
  title="Deployment Success"
 // FIXED:  value={`${metrics.deployment.successRate}%`}
  color={getScoreColor(metrics.deployment.successRate)}
  trend="stable" />
  />
- <MetricCard
+ <MetricCard;
  title="Code Quality"
 // FIXED:  value={metrics.codeQuality.score}
  color={getScoreColor(metrics.codeQuality.score)}
@@ -342,7 +342,7 @@ return <div > Loading...;
  );
  };
 
- // Render performance tab
+ // Render performance tab;
  const PerformanceTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
@@ -353,25 +353,25 @@ return <div > Loading...;
  return (
  <div className="space - y - 6">
  <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6">
- <MetricCard
+ <MetricCard;
  title="Largest Contentful Paint",
 // FIXED:  value={`${metrics.performance.lcp}ms`}, />
  color={metrics.performance.lcp < 2500 ? 'text - green - 600' : 'text - red - 600'} />
- <MetricCard
+ <MetricCard;
  title="First Input Delay",
 // FIXED:  value={`${metrics.performance.fid}ms`}, />
  color={metrics.performance.fid < 100 ? 'text - green - 600' : 'text - red - 600'} />
- <MetricCard
+ <MetricCard;
  title="Cumulative Layout Shift",
 // FIXED:  value={metrics.performance.cls.toFixed(3)}
  color={metrics.performance.cls < 0.1 ? 'text - green - 600' : 'text - red - 600'} />
  />
- <MetricCard
+ <MetricCard;
  title="Memory Usage"
 // FIXED:  value={`${metrics.performance.memoryUsage}%`}
  color={metrics.performance.memoryUsage < 70 ? 'text - green - 600' : 'text - red - 600'} />
  />
- <MetricCard
+ <MetricCard;
  title="Error Rate"
 // FIXED:  value={`${metrics.performance.errorRate}%`}
  color={metrics.performance.errorRate < 1 ? 'text - green - 600' : 'text - red - 600'} />
@@ -381,7 +381,7 @@ return <div > Loading...;
  );
  };
 
- // Render security tab
+ // Render security tab;
  const SecurityTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
@@ -392,21 +392,21 @@ return <div > Loading...;
  return (
  <div className="space - y - 6">
  <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
- <MetricCard
+ <MetricCard;
  title="Threats Detected",
 // FIXED:  value={metrics.security.threatsDetected}
  color="text - red - 600" />
  />
- <MetricCard
+ <MetricCard;
  title="Vulnerabilities",
 // FIXED:  value={metrics.security.vulnerabilities} />
  color={metrics.security.vulnerabilities === 0 ? 'text - green - 600' : 'text - red - 600'} />
- <MetricCard
+ <MetricCard;
  title="Compliance Score",
 // FIXED:  value={`${metrics.security.complianceScore}%`},
  color={getScoreColor(metrics.security.complianceScore)} />
  />
- <MetricCard
+ <MetricCard;
  title="Security Score"
 // FIXED:  value={metrics.security.score}
  color={getScoreColor(metrics.security.score)} />
@@ -416,7 +416,7 @@ return <div > Loading...;
  );
  };
 
- // Render deployment tab
+ // Render deployment tab;
  const DeploymentTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
@@ -427,22 +427,22 @@ return <div > Loading...;
  return (
  <div className="space - y - 6">
  <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
- <MetricCard
+ <MetricCard;
  title="Success Rate",
 // FIXED:  value={`${metrics.deployment.successRate}%`},
  color={getScoreColor(metrics.deployment.successRate)} />
  />
- <MetricCard
+ <MetricCard;
  title="Average Deploy Time"
 // FIXED:  value={`${metrics.deployment.averageTime}min`}
  color="text - blue - 600" />
  />
- <MetricCard
+ <MetricCard;
  title="Deploy Frequency"
 // FIXED:  value={`${metrics.deployment.frequency}/day`}
  color="text - green - 600" />
  />
- <MetricCard
+ <MetricCard;
  title="Active Deployments"
 // FIXED:  value={metrics.deployment.activeDeployments} />
  color={metrics.deployment.activeDeployments > 0 ? 'text - orange - 600' : 'text - green - 600'}
@@ -452,7 +452,7 @@ return <div > Loading...;
  );
  };
 
- // Render quality tab
+ // Render quality tab;
  const QualityTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
@@ -463,22 +463,22 @@ return <div > Loading...;
  return (
  <div className="space - y - 6">
  <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
- <MetricCard
+ <MetricCard;
  title="Code Quality Score",
 // FIXED:  value={metrics.codeQuality.score}
  color={getScoreColor(metrics.codeQuality.score)} />
  />
- <MetricCard
+ <MetricCard;
  title="Complexity"
 // FIXED:  value={metrics.codeQuality.complexity}
  color={metrics.codeQuality.complexity < 20 ? 'text - green - 600' : 'text - red - 600'} />
  />
- <MetricCard
+ <MetricCard;
  title="Test Coverage"
 // FIXED:  value={`${metrics.codeQuality.coverage}%`}
  color={getScoreColor(metrics.codeQuality.coverage)} />
  />
- <MetricCard
+ <MetricCard;
  title="Technical Debt"
 // FIXED:  value={`${metrics.codeQuality.technicalDebt}h`}
  color={metrics.codeQuality.technicalDebt < 20 ? 'text - green - 600' : 'text - red - 600'} />
@@ -488,7 +488,7 @@ return <div > Loading...;
  );
  };
 
- // Render features tab
+ // Render features tab;
  const FeaturesTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
@@ -499,17 +499,17 @@ return <div > Loading...;
  return (
  <div className="space - y - 6">
  <div className="grid grid - cols - 1 md:grid - cols - 3 gap - 6">
- <MetricCard
+ <MetricCard;
  title="Total Flags",
 // FIXED:  value={metrics.featureFlags.totalFlags}
  color="text - blue - 600" />
  />
- <MetricCard
+ <MetricCard;
  title="Active Flags",
 // FIXED:  value={metrics.featureFlags.activeFlags}
  color="text - green - 600" />
  />
- <MetricCard
+ <MetricCard;
  title="Running Experiments",
 // FIXED:  value={metrics.featureFlags.experimentsRunning}
  color="text - purple - 600" />
@@ -576,7 +576,7 @@ return <div > Loading...;
  key={tab.id} />
 // FIXED:  onClick={() => setActiveTab(tab.id as any: React.MouseEvent)}
 // FIXED:  className={`py - 4 px - 1 border - b - 2 font - medium text - sm ${}
- activeTab === tab.id
+ activeTab === tab.id;
  ? 'border - blue - 500 text - blue - 600'
  : 'border - transparent text - gray - 500 hover:text - gray - 700 hover:border - gray - 300'
  }`}

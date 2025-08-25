@@ -1,9 +1,9 @@
-// useWatchPage - Clean Hook Implementation
+// useWatchPage - Clean Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseWatchPageOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -30,13 +30,13 @@ export function useWatchPage(
       setLoading(true);
       setError(null);
       
-      // Simulate async operation
+      // Simulate async operation;
       await new Promise(resolve => setTimeout(resolve, 300));
       
       const result = {
         hookName: 'useWatchPage',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -58,7 +58,7 @@ export function useWatchPage(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

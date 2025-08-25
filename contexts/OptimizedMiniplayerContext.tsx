@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useMemo, type ReactNode } from 'react';
 import type { Video } from '../src/types/core.ts';
 
-// State interface
+// State interface;
 interface MiniplayerState {
   isVisible: boolean;
   currentVideo: Video | null;
@@ -14,7 +14,7 @@ interface MiniplayerState {
   currentIndex: number;
 }
 
-// Action types
+// Action types;
 type MiniplayerAction =
   | { type: "SHOW_MINIPLAYER"; payload: Video }
   | { type: "HIDE_MINIPLAYER" }
@@ -32,7 +32,7 @@ type MiniplayerAction =
   | { type: "PREVIOUS_VIDEO" }
   | { type: "SET_CURRENT_INDEX"; payload: number };
 
-// Initial state
+// Initial state;
 const initialState: MiniplayerState = {
   isVisible: false,
   currentVideo: null,
@@ -42,10 +42,10 @@ const initialState: MiniplayerState = {
   duration: 0,
   isMaximized: false,
   queue: [],
-  currentIndex: -1
+  currentIndex: -1;
 };
 
-// Reducer
+// Reducer;
 const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): MiniplayerState => {
   switch (action.type) {
     case 'SHOW_MINIPLAYER':
@@ -53,7 +53,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         ...state,
         isVisible: true,
         currentVideo: action.payload,
-        isPlaying: true
+        isPlaying: true;
       };
 
     case 'HIDE_MINIPLAYER':
@@ -62,19 +62,19 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         isVisible: false,
         currentVideo: null,
         isPlaying: false,
-        currentTime: 0
+        currentTime: 0;
       };
 
     case 'TOGGLE_PLAY':
       return {
         ...state,
-        isPlaying: !state.isPlaying
+        isPlaying: !state.isPlaying;
       };
 
     case 'SET_PLAYING':
       return {
         ...state,
-        isPlaying: action.payload
+        isPlaying: action.payload;
       };
 
     case 'SET_VOLUME':
@@ -86,32 +86,32 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
     case 'SET_CURRENT_TIME':
       return {
         ...state,
-        currentTime: action.payload
+        currentTime: action.payload;
       };
 
     case 'SET_DURATION':
       return {
         ...state,
-        duration: action.payload
+        duration: action.payload;
       };
 
     case 'TOGGLE_MAXIMIZE':
       return {
         ...state,
-        isMaximized: !state.isMaximized
+        isMaximized: !state.isMaximized;
       };
 
     case 'SET_MAXIMIZED':
       return {
         ...state,
-        isMaximized: action.payload
+        isMaximized: action.payload;
       };
 
     case 'SET_QUEUE':
       return {
         ...state,
         queue: action.payload,
-        currentIndex: action.payload.length > 0 ? 0 : -1
+        currentIndex: action.payload.length > 0 ? 0 : -1;
       };
 
     case 'ADD_TO_QUEUE':
@@ -126,7 +126,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       return {
         ...state,
         queue: newQueue,
-        currentIndex: newIndex
+        currentIndex: newIndex;
       };
     }
 
@@ -137,7 +137,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: nextIndex,
           currentVideo: state.queue[nextIndex] || null,
-          currentTime: 0
+          currentTime: 0;
         };
       }
       return state;
@@ -150,7 +150,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: prevIndex,
           currentVideo: state.queue[prevIndex] || null,
-          currentTime: 0
+          currentTime: 0;
         };
       }
       return state;
@@ -162,7 +162,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: action.payload,
           currentVideo: state.queue[action.payload] || null,
-          currentTime: 0
+          currentTime: 0;
         };
       }
       return state;
@@ -172,7 +172,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
   }
 };
 
-// Context interface
+// Context interface;
 interface MiniplayerContextValue {
   state: MiniplayerState;
   actions: {
@@ -182,22 +182,22 @@ interface MiniplayerContextValue {
     setPlaying: (playing) => void;
     setVolume: (volume) => void;
     setCurrentTime: (time) => void;
-    setDuration: (duration) => void;
+    setDuration: (duration: number) => void;
     toggleMaximize: () => void;
     setMaximized: (maximized) => void;
     setQueue: (queue: Video[]) => void;
     addToQueue: (video: Video) => void;
-    removeFromQueue: (videoId) => void;
+    removeFromQueue: (videoId: string) => void;
     nextVideo: () => void;
     previousVideo: () => void;
     setCurrentIndex: (index) => void;
   };
 }
 
-// Create context
+// Create context;
 const MiniplayerContext = createContext<MiniplayerContextValue | null>(null);
 
-// Provider component
+// Provider component;
 interface MiniplayerProviderProps {
   children?: React.ReactNode;
 }
@@ -205,7 +205,7 @@ interface MiniplayerProviderProps {
 export const OptimizedMiniplayerProvider: React.FC<MiniplayerProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(miniplayerReducer, initialState);
 
-  // Memoized actions to prevent unnecessary re-renders
+  // Memoized actions to prevent unnecessary re-renders;
   const actions = useMemo(() => ({
     showMiniplayer: (video: Video) => dispatch({ type: "SHOW_MINIPLAYER", payload: video }),
     hideMiniplayer: () => dispatch({ type: "HIDE_MINIPLAYER" }),
@@ -213,12 +213,12 @@ export const OptimizedMiniplayerProvider: React.FC<MiniplayerProviderProps> = ({
     setPlaying: (playing) => dispatch({ type: "SET_PLAYING", payload: playing }),
     setVolume: (volume) => dispatch({ type: "SET_VOLUME", payload: volume }),
     setCurrentTime: (time) => dispatch({ type: "SET_CURRENT_TIME", payload: time }),
-    setDuration: (duration) => dispatch({ type: "SET_DURATION", payload: duration }),
+    setDuration: (duration: number) => dispatch({ type: "SET_DURATION", payload: duration }),
     toggleMaximize: () => dispatch({ type: "TOGGLE_MAXIMIZE" }),
     setMaximized: (maximized) => dispatch({ type: "SET_MAXIMIZED", payload: maximized }),
     setQueue: (queue: Video[]) => dispatch({ type: "SET_QUEUE", payload: queue }),
     addToQueue: (video: Video) => dispatch({ type: "ADD_TO_QUEUE", payload: video }),
-    removeFromQueue: (videoId) => dispatch({ type: "REMOVE_FROM_QUEUE", payload: videoId }),
+    removeFromQueue: (videoId: string) => dispatch({ type: "REMOVE_FROM_QUEUE", payload: videoId }),
     nextVideo: () => dispatch({ type: "NEXT_VIDEO" }),
     previousVideo: () => dispatch({ type: "PREVIOUS_VIDEO" }),
     setCurrentIndex: (index) => dispatch({ type: "SET_CURRENT_INDEX", payload: index })
@@ -233,7 +233,7 @@ export const OptimizedMiniplayerProvider: React.FC<MiniplayerProviderProps> = ({
   );
 };
 
-// Hook to use the context
+// Hook to use the context;
 export const useOptimizedMiniplayer = () => {
   const context = useContext(MiniplayerContext);
   if (!context) {
@@ -242,7 +242,7 @@ export const useOptimizedMiniplayer = () => {
   return context;
 };
 
-// Selector hooks for specific parts of the state
+// Selector hooks for specific parts of the state;
 export const useMiniplayerVideo = () => {
   const { state } = useOptimizedMiniplayer();
   return state.currentVideo;
@@ -259,7 +259,7 @@ export const useMiniplayerPlayback = () => {
     isPlaying: state.isPlaying,
     currentTime: state.currentTime,
     duration: state.duration,
-    volume: state.volume
+    volume: state.volume;
   };
 };
 
@@ -267,7 +267,7 @@ export const useMiniplayerQueue = () => {
   const { state } = useOptimizedMiniplayer();
   return {
     queue: state.queue,
-    currentIndex: state.currentIndex
+    currentIndex: state.currentIndex;
   };
 };
 

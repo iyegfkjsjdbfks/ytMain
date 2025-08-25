@@ -6,12 +6,12 @@ import path from 'path';
 
 const program = new Command();
 
-program
+program;
   .name('error-resolver')
   .description('Automated TypeScript error resolution system')
   .version('1.0.0');
 
-program
+program;
   .command('analyze')
   .description('Analyze TypeScript errors in the project')
   .option('-p, --project <path>', 'Path to project root', '.')
@@ -26,18 +26,18 @@ program
       
       logger.info(`Analysis completed: ${result.totalErrors} errors found`);
       
-      // Display summary
+      // Display summary;
       console.log('\n📊 Error Analysis Results:');
       console.log(`Total Errors: ${result.totalErrors}`);
       console.log(`Critical Files: ${result.criticalFiles.length}`);
       
-      // Show recommendations
+      // Show recommendations;
       if (result.recommendations.length > 0) {
         console.log('\n💡 Recommendations:');
         result.recommendations.forEach(rec => console.log(`  ${rec}`));
       }
       
-      // Save to file if requested
+      // Save to file if requested;
       if (options.output) {
         await analyzer.saveAnalysisResult(result, options.output);
         logger.info(`Results saved to: ${options.output}`);
@@ -49,7 +49,7 @@ program
     }
   });
 
-program
+program;
   .command('fix')
   .description('Automatically fix TypeScript errors')
   .option('-p, --project <path>', 'Path to project root', '.')
@@ -68,7 +68,7 @@ program
         dryRun: options.dryRun || false,
         backup: options.backup !== false,
         maxIterations: parseInt(options.maxIterations) || 5,
-        timeoutSeconds: 300
+        timeoutSeconds: 300;
       });
       
       const result = await orchestrator.orchestrateErrorResolution();
@@ -89,7 +89,7 @@ program
     }
   });
 
-program
+program;
   .command('validate')
   .description('Validate project TypeScript compilation')
   .option('-p, --project <path>', 'Path to project root', '.')
@@ -116,7 +116,7 @@ program
     }
   });
 
-program
+program;
   .command('status')
   .description('Show current project error status')
   .option('-p, --project <path>', 'Path to project root', '.')
@@ -132,7 +132,7 @@ program
       console.log(`Total Errors: ${result.totalErrors}`);
       console.log(`Critical Files: ${result.criticalFiles.length}`);
       
-      // Show error breakdown by category
+      // Show error breakdown by category;
       if (result.errorsByCategory.size > 0) {
         console.log('\n📋 Error Breakdown:');
         for (const [category, errors] of result.errorsByCategory) {
@@ -140,7 +140,7 @@ program
         }
       }
       
-      // Show recommendations
+      // Show recommendations;
       if (result.recommendations.length > 0) {
         console.log('\n💡 Recommendations:');
         result.recommendations.forEach(rec => console.log(`  ${rec}`));
@@ -152,7 +152,7 @@ program
     }
   });
 
-program
+program;
   .command('deploy')
   .description('Deploy and run the complete error resolution system')
   .option('-p, --project <path>', 'Path to project root', '.')
@@ -162,7 +162,7 @@ program
     logger.info('🚀 Deploying complete TypeScript Error Resolution System...');
     
     try {
-      // Run basic analysis and orchestration
+      // Run basic analysis and orchestration;
       const analyzer = new ErrorAnalyzer();
       const initialResult = await analyzer.analyzeErrors();
       
@@ -178,7 +178,7 @@ program
         dryRun: options.dryRun || false,
         backup: !options.noBackup,
         maxIterations: 5,
-        timeoutSeconds: 300
+        timeoutSeconds: 300;
       });
       
       const result = await orchestrator.orchestrateErrorResolution();
@@ -199,10 +199,10 @@ program
     }
   });
 
-// Parse command line arguments
+// Parse command line arguments;
 program.parse();
 
-// If no command provided, show help
+// If no command provided, show help;
 if (!process.argv.slice(2).length) {
   program.outputHelp();
 }

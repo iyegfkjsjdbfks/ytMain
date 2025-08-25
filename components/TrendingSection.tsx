@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { getVideos } from '../services/realVideoService.ts';
 
-import FireIcon from 'icons/FireIcon.tsx';
-import VideoCard from 'VideoCard.tsx';
+import FireIcon from 'icons/FireIcon';
+import VideoCard from 'VideoCard';
 
 import type { Video } from '../types.ts';
 
@@ -12,7 +12,7 @@ interface TrendingSectionProps {
  maxVideos?: number;
 }
 
-// Memoized VideoCard for better performance
+// Memoized VideoCard for better performance;
 const MemoizedVideoCard = memo(VideoCard);
 
 const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }) => {
@@ -25,8 +25,8 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  setLoading(true);
  const allVideos = await getVideos();
  // Sort by views (convert string to number for sorting)
- const sortedByViews = allVideos
- .filter((video) => !video.isShort) // Exclude shorts from trending
+ const sortedByViews = allVideos;
+ .filter((video) => !video.isShort) // Exclude shorts from trending;
  .sort((a, b) => {
  const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
  const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;
@@ -48,10 +48,10 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  fetchTrendingVideos();
  }, [fetchTrendingVideos]);
 
- // Memoized video grid to prevent unnecessary re-renders
+ // Memoized video grid to prevent unnecessary re-renders;
  const videoGrid = useMemo(() =>
  trendingVideos.map((video) => (
- <MemoizedVideoCard
+ <MemoizedVideoCard;
  key={video.id}
  video={video} />
  />
@@ -109,11 +109,11 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
  <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
 // FIXED:  </div>
- <Link
+ <Link;
  to="/trending"
 // FIXED:  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500" />
  >
- View All
+ View All;
 // FIXED:  </Link>
 // FIXED:  </div>
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

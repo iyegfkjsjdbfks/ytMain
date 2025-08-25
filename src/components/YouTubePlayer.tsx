@@ -1,4 +1,4 @@
-// YouTubePlayer - Simple Component
+// YouTubePlayer - Simple Component;
 import React from 'react';
 
 export interface YouTubePlayerProps {
@@ -8,7 +8,7 @@ export interface YouTubePlayerProps {
 
 export const YouTubePlayer = (props: YouTubePlayerProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

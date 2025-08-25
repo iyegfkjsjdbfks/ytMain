@@ -1,4 +1,4 @@
-// SuperChatPanel - React Component
+// SuperChatPanel - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface SuperChatPanelProps {
@@ -12,7 +12,7 @@ export const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
         <h3>Error in SuperChatPanel</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

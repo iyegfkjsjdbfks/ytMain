@@ -1,28 +1,28 @@
 /**
- * Core TypeScript Error Resolution System - Type Definitions
+ * Core TypeScript Error Resolution System - Type Definitions;
  * 
- * This module defines the fundamental data structures for the intelligent
+ * This module defines the fundamental data structures for the intelligent;
  * TypeScript error resolution system.
  */
 
-// Root cause categories with fixing priorities
+// Root cause categories with fixing priorities;
 export enum ErrorRootCause {
-  FORMATTING = 1,    // Highest priority - safe to fix first
-  SYNTAX = 2,        // Second priority - enables other fixes
-  IMPORT = 3,        // Third priority - resolves dependencies
-  TYPE = 4,          // Fourth priority - complex type issues
-  LOGIC = 5          // Lowest priority - requires careful analysis
+  FORMATTING = 1,    // Highest priority - safe to fix first;
+  SYNTAX = 2,        // Second priority - enables other fixes;
+  IMPORT = 3,        // Third priority - resolves dependencies;
+  TYPE = 4,          // Fourth priority - complex type issues;
+  LOGIC = 5          // Lowest priority - requires careful analysis;
 }
 
-// Error severity levels
+// Error severity levels;
 export enum ErrorSeverity {
-  CRITICAL = 'critical',  // Blocks compilation completely
-  HIGH = 'high',         // Causes major functionality issues
-  MEDIUM = 'medium',     // Causes minor issues or warnings
-  LOW = 'low'           // Style or optimization issues
+  CRITICAL = 'critical',  // Blocks compilation completely;
+  HIGH = 'high',         // Causes major functionality issues;
+  MEDIUM = 'medium',     // Causes minor issues or warnings;
+  LOW = 'low'           // Style or optimization issues;
 }
 
-// Error categorization interface
+// Error categorization interface;
 export interface ErrorCategory {
   name: string;
   priority: number;
@@ -32,7 +32,7 @@ export interface ErrorCategory {
   description: string;
 }
 
-// Analyzed error interface
+// Analyzed error interface;
 export interface AnalyzedError {
   id: string;
   file: string;
@@ -46,7 +46,7 @@ export interface AnalyzedError {
   rawOutput: string;
 }
 
-// Error analysis result
+// Error analysis result;
 export interface ErrorAnalysisResult {
   totalErrors: number;
   errorsByCategory: Map<string, AnalyzedError[]>;
@@ -56,7 +56,7 @@ export interface ErrorAnalysisResult {
   summary: ErrorSummary;
 }
 
-// Error summary statistics
+// Error summary statistics;
 export interface ErrorSummary {
   criticalErrors: number;
   highPriorityErrors: number;
@@ -70,7 +70,7 @@ export interface ErrorSummary {
   filesAffected: number;
 }
 
-// Script command types
+// Script command types;
 export interface ScriptCommand {
   type: 'replace' | 'insert' | 'delete' | 'move';
   file: string;
@@ -80,7 +80,7 @@ export interface ScriptCommand {
   description: string;
 }
 
-// Fixing script interface
+// Fixing script interface;
 export interface FixingScript {
   id: string;
   category: string;
@@ -91,7 +91,7 @@ export interface FixingScript {
   estimatedRuntime: number;
 }
 
-// Validation check interface
+// Validation check interface;
 export interface ValidationCheck {
   type: 'syntax' | 'compilation' | 'test' | 'lint';
   command: string;
@@ -99,7 +99,7 @@ export interface ValidationCheck {
   timeoutSeconds: number;
 }
 
-// Progress monitoring interfaces
+// Progress monitoring interfaces;
 export interface ProgressMonitor {
   startTime: Date;
   currentPhase: string;
@@ -116,7 +116,7 @@ export interface PerformanceMetrics {
   timeoutCount: number;
 }
 
-// Execution state management
+// Execution state management;
 export interface ExecutionState {
   sessionId: string;
   startTime: Date;

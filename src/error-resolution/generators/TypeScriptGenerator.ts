@@ -9,7 +9,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   protected initializeTemplates(): void {
-    // Template for adding missing interface properties
+    // Template for adding missing interface properties;
     this.addTemplate({
       id: 'add-missing-property',
       name: 'Add Missing Property',
@@ -19,19 +19,19 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to modify',
-          required: true
+          required: true;
         },
         {
           name: 'interfaceName',
           type: 'string',
           description: 'Name of the interface to modify',
-          required: true
+          required: true;
         },
         {
           name: 'propertyName',
           type: 'string',
           description: 'Name of the property to add',
-          required: true
+          required: true;
         },
         {
           name: 'propertyType',
@@ -55,12 +55,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for fixing type assignments
+    // Template for fixing type assignments;
     this.addTemplate({
       id: 'fix-type-assignment',
       name: 'Fix Type Assignment',
@@ -70,7 +70,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -87,12 +87,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for adding type parameters
+    // Template for adding type parameters;
     this.addTemplate({
       id: 'add-type-parameters',
       name: 'Add Type Parameters',
@@ -102,13 +102,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         },
         {
           name: 'genericType',
           type: 'string',
           description: 'Generic type that needs parameters',
-          required: true
+          required: true;
         },
         {
           name: 'typeParameter',
@@ -132,12 +132,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for fixing optional properties
+    // Template for fixing optional properties;
     this.addTemplate({
       id: 'fix-optional-properties',
       name: 'Fix Optional Properties',
@@ -147,7 +147,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -164,12 +164,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for adding null checks
+    // Template for adding null checks;
     this.addTemplate({
       id: 'add-null-checks',
       name: 'Add Null Checks',
@@ -179,7 +179,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -196,7 +196,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
@@ -208,7 +208,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     for (const error of errors) {
       let pattern = 'unknown';
 
-      // Group by TypeScript error patterns
+      // Group by TypeScript error patterns;
       if (error.message.includes('Property') && error.message.includes('does not exist')) {
         pattern = 'missing-property';
       } else if (error.message.includes('Type') && error.message.includes('is not assignable to type')) {
@@ -241,7 +241,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    _context: GenerationContext
+    _context: GenerationContext;
   ): Promise<FixingScript | null> {
     Logger.process({ message: 'Generating TypeScript script for pattern', pattern, errorCount: errors.length });
 
@@ -249,7 +249,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
     let commands: ScriptCommand[] = [];
     let validationChecks: ValidationCheck[] = [];
 
-    // Get unique files affected by these errors
+    // Get unique files affected by these errors;
     const affectedFiles = [...new Set(errors.map(e => e.file))];
 
     switch (pattern) {
@@ -315,13 +315,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix missing property errors
+   * Generates commands to fix missing property errors;
    */
   private generateMissingPropertyFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Extract property name from error message
+      // Extract property name from error message;
       const propertyMatch = error.message.match(/Property '(\w+)' does not exist/);
       if (propertyMatch) {
         const propertyName = propertyMatch[1];
@@ -340,13 +340,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix type assignment errors
+   * Generates commands to fix type assignment errors;
    */
   private generateTypeAssignmentFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Add type assertions to fix assignment issues
+      // Add type assertions to fix assignment issues;
       commands.push({
         type: 'replace',
         file: error.file,
@@ -360,13 +360,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix missing type parameter errors
+   * Generates commands to fix missing type parameter errors;
    */
   private generateTypeParameterFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Extract generic type name from error message
+      // Extract generic type name from error message;
       const typeMatch = error.message.match(/Generic type '(\w+)'/);
       if (typeMatch) {
         const typeName = typeMatch[1];
@@ -385,13 +385,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix null/undefined access errors
+   * Generates commands to fix null/undefined access errors;
    */
   private generateNullCheckFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Add optional chaining or null checks
+      // Add optional chaining or null checks;
       commands.push({
         type: 'replace',
         file: error.file,
@@ -400,7 +400,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         description: `Add optional chaining in ${error.file} at line ${error.line}`
       });
 
-      // Add null coalescing for assignments
+      // Add null coalescing for assignments;
       commands.push({
         type: 'replace',
         file: error.file,
@@ -414,18 +414,18 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix undefined variable errors
+   * Generates commands to fix undefined variable errors;
    */
   private generateUndefinedVariableFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Extract variable name from error message
+      // Extract variable name from error message;
       const variableMatch = error.message.match(/Cannot find name '(\w+)'/);
       if (variableMatch) {
         const variableName = variableMatch[1];
         
-        // Add variable declaration
+        // Add variable declaration;
         commands.push({
           type: 'insert',
           file: error.file,
@@ -440,13 +440,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix callable errors
+   * Generates commands to fix callable errors;
    */
   private generateCallableFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Add type assertion to make object callable
+      // Add type assertion to make object callable;
       commands.push({
         type: 'replace',
         file: error.file,
@@ -460,13 +460,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix index signature errors
+   * Generates commands to fix index signature errors;
    */
   private generateIndexSignatureFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Add index signature to interfaces
+      // Add index signature to interfaces;
       commands.push({
         type: 'replace',
         file: error.file,
@@ -480,13 +480,13 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix argument type errors
+   * Generates commands to fix argument type errors;
    */
   private generateArgumentTypeFixCommands(errors: AnalyzedError[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const error of errors) {
-      // Add type assertion to function arguments
+      // Add type assertion to function arguments;
       commands.push({
         type: 'replace',
         file: error.file,
@@ -500,33 +500,33 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Creates type validation checks for files
+   * Creates type validation checks for files;
    */
   protected override createTypeValidationChecks(files: string[]): ValidationCheck[] {
     return files.map(file => ({
       type: 'syntax' as const,
       command: `npx tsc --noEmit --strict ${file}`,
       expectedResult: 'improved-count' as const,
-      timeoutSeconds: 20
+      timeoutSeconds: 20;
     }));
   }
 
   /**
-   * Generates a comprehensive TypeScript fixing script
+   * Generates a comprehensive TypeScript fixing script;
    */
   public async generateComprehensiveTypeScript(
-    _context: GenerationContext
+    _context: GenerationContext;
   ): Promise<FixingScript> {
     const scriptId = `typescript-comprehensive-${Date.now()}`;
     const commands: ScriptCommand[] = [];
     const validationChecks: ValidationCheck[] = [];
 
-    // Get all unique files
+    // Get all unique files;
     const allFiles = [...new Set((_context.errors || []).map(e => e.file))];
 
-    // Add commands for common TypeScript fixes
+    // Add commands for common TypeScript fixes;
     for (const file of allFiles) {
-      // Fix any types
+      // Fix any types;
       commands.push({
         type: 'replace',
         file,
@@ -535,7 +535,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         description: `Replace 'any' with 'unknown' for better type safety in ${file}`
       });
 
-      // Add optional chaining where needed
+      // Add optional chaining where needed;
       commands.push({
         type: 'replace',
         file,
@@ -544,7 +544,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         description: `Add optional chaining in ${file}`
       });
 
-      // Fix function return types
+      // Fix function return types;
       commands.push({
         type: 'replace',
         file,
@@ -554,7 +554,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       });
     }
 
-    // Add comprehensive validation
+    // Add comprehensive validation;
     validationChecks.push(...this.createTypeValidationChecks(allFiles));
 
     return {
@@ -569,7 +569,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Analyzes type coverage in a file
+   * Analyzes type coverage in a file;
    */
   public analyzeTypeCoverage(fileContent: string): {
     totalDeclarations: number;
@@ -580,15 +580,15 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   } {
     const suggestions: string[] = [];
     
-    // Count function declarations
+    // Count function declarations;
     const functionMatches = fileContent.match(/function\s+\w+\s*\([^)]*\)/g) || [];
     const typedFunctions = fileContent.match(/function\s+\w+\s*\([^)]*\):\s*\w+/g) || [];
     
-    // Count variable declarations
+    // Count variable declarations;
     const variableMatches = fileContent.match(/(const|let|var)\s+\w+/g) || [];
     const typedVariables = fileContent.match(/(const|let|var)\s+\w+:\s*\w+/g) || [];
     
-    // Count any usage
+    // Count any usage;
     const anyUsage = fileContent.match(/:\s*any\b/g) || [];
     
     const totalDeclarations = functionMatches.length + variableMatches.length;
@@ -614,12 +614,12 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       typedDeclarations,
       untypedDeclarations,
       coverage,
-      suggestions
+      suggestions;
     };
   }
 
   /**
-   * Suggests type improvements for a given error
+   * Suggests type improvements for a given error;
    */
   public suggestTypeImprovement(error: AnalyzedError): string[] {
     const suggestions: string[] = [];

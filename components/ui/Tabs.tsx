@@ -1,7 +1,7 @@
 import React, { ReactNode, FC, useContext, createContext } from 'react';
 
 interface TabsContextType {
- value: string; onValueChange: (value: string | number) => void
+ value: string; onValueChange: (value: string | number) => void;
 }
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined);
@@ -58,7 +58,7 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, class
  <button />
 // FIXED:  onClick={() => onValueChange(value)}
 // FIXED:  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
- isActive
+ isActive;
  ? 'border-blue-500 text-blue-600 dark:text-blue-400'
  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-600'
  } ${className}`}

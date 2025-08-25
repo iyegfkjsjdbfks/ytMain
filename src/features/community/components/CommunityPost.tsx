@@ -1,4 +1,4 @@
-// CommunityPost - React Component
+// CommunityPost - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface CommunityPostProps {
@@ -12,7 +12,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
         <h3>Error in CommunityPost</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

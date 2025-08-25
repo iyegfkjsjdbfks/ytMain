@@ -1,4 +1,4 @@
-// VideoGrid - React Component
+// VideoGrid - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface VideoGridProps {
@@ -12,7 +12,7 @@ export const VideoGrid: React.FC<VideoGridProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const VideoGrid: React.FC<VideoGridProps> = ({
         <h3>Error in VideoGrid</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

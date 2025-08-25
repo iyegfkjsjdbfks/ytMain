@@ -1,4 +1,4 @@
-// Sidebar - React Component
+// Sidebar - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface SidebarProps {
@@ -12,7 +12,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <h3>Error in Sidebar</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

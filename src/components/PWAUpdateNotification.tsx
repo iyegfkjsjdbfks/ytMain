@@ -4,7 +4,7 @@ const PWAUpdateNotification: React.FC = () => {
   const [showUpdate, setShowUpdate] = useState(false);
 
   useEffect(() => {
-    // Listen for service worker updates
+    // Listen for service worker updates;
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.ready.then(registration => {
         registration.addEventListener('updatefound', () => {
@@ -28,18 +28,18 @@ const PWAUpdateNotification: React.FC = () => {
       <p className="font-semibold mb-2">Update Available!</p>
       <p className="text-sm mb-3">A new version of the app is available.</p>
       <div className="flex gap-2">
-        <button
+        <button;
           onClick={() => window.location.reload()}
           className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-100"
-        >
-          Update Now
-        </button>
-        <button
+        {">"}
+          Update Now;
+        </button></div>
+        <button;
           onClick={() => setShowUpdate(false)}
           className="px-4 py-2 bg-blue-700 rounded hover:bg-blue-800"
-        >
-          Later
-        </button>
+        {">"}
+          Later;
+        </button></div>
       </div>
     </div>
   );

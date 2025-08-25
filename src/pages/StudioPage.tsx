@@ -16,7 +16,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
     views: 125000,
     likes: 8500,
     comments: 1200,
-    subscribers: 45000
+    subscribers: 45000;
   });
 
   const [selectedTab, setSelectedTab] = useState<'dashboard' | 'content' | 'analytics' | 'monetization'>('dashboard');
@@ -29,18 +29,18 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
         {/* Navigation Tabs */}
         <div className="flex space-x-4 mb-6">
           {(['dashboard', 'content', 'analytics', 'monetization'] as const).map((tab) => (
-            <button
+            <button;
               key={tab}
               onClick={() => setSelectedTab(tab)}
               className={`px-4 py-2 rounded-lg font-medium ${
-                selectedTab === tab
+                selectedTab === tab;
                   ? 'bg-red-500 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
+              {"{"}""`{"{"}""
+            {">"}
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
+            </button></div>
+          )){"}"
         </div>
 
         {/* Dashboard Tab */}
@@ -98,7 +98,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
                   <p className="text-gray-600">Manage your uploaded videos</p>
                 </div>
                 <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                  Manage
+                  Manage;
                 </button>
               </div>
               <div className="flex justify-between items-center p-4 border rounded">
@@ -107,7 +107,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
                   <p className="text-gray-600">Organize your content into playlists</p>
                 </div>
                 <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                  Manage
+                  Manage;
                 </button>
               </div>
               <div className="flex justify-between items-center p-4 border rounded">
@@ -116,7 +116,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
                   <p className="text-gray-600">Manage your short-form content</p>
                 </div>
                 <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                  Manage
+                  Manage;
                 </button>
               </div>
             </div>

@@ -13,8 +13,8 @@ interface CommentModalProps {
 }
 
 /**
- * Comment modal specifically designed for shorts
- * Allows users to comment on short videos without navigating away
+ * Comment modal specifically designed for shorts;
+ * Allows users to comment on short videos without navigating away;
  */
 const CommentModal: React.FC<CommentModalProps> = ({
  isOpen,
@@ -24,7 +24,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
  onCommentSubmit }) => {
  const [commentText, setCommentText] = useState<string>('');
  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
- // shortId is currently not used but kept for future functionality
+ // shortId is currently not used but kept for future functionality;
 
  const handleCommentSubmit = async (text: string): Promise<void> => {
  if (!text.trim()) {
@@ -33,11 +33,11 @@ return;
 
  setIsSubmitting(true);
  try {
- // Call the provided submit handler or default behavior
+ // Call the provided submit handler or default behavior;
  if (onCommentSubmit) {
- await onCommentSubmit(text);
+ await,  onCommentSubmit(text: string);
  } else {
- // Default behavior - you can implement API call here
+ // Default behavior - you can implement API call here;
  }
 
  setCommentText('');
@@ -50,28 +50,28 @@ return;
  };
 
  const modalFooter = (
- <div className="flex justify-end space-x-3">
- <button
+ <div className = "flex justify-end space-x-3">
+ <button;
  type="button"
  onClick={onClose}
  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
  disabled={isSubmitting}
- >
- Cancel
- </button>
- <button
+ {">"}
+ Cancel;
+ </button></div>
+ <button;
  type="button"
- onClick={() => handleCommentSubmit(commentText)}
- disabled={!commentText.trim() || isSubmitting}
+ onClick={() => handleCommentSubmit(commentText: string)}
+ disabled={commentText.trim()  isSubmitting}
  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
  >
  {isSubmitting ? 'Posting...' : 'Comment'}
- </button>
+  <div></button></div>
  </div>
  );
 
  return (
- <BaseModal
+ <BaseModal;
  isOpen={isOpen}
  onClose={onClose}
  title="Add a comment"
@@ -88,20 +88,20 @@ return;
 
  <div>
  <label htmlFor="comment-text" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
- Your comment
+ Your comment;
  </label>
- <textarea
+ <textarea;
  id="comment-text"
  rows={4}
  value={commentText}
- onChange={(e) => setCommentText(e.target.value)}
+ onChange={(e: any) => setCommentText(e.target.value)}
  placeholder="Share your thoughts about this short..."
  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white resize-none"
  maxLength={500}
  disabled={isSubmitting}
- />
+ /{">"}
  <div className="mt-1 text-xs text-gray-500 dark:text-gray-400 text-right">
- {commentText.length}/500
+ {commentText.length}/500;
  </div>
  </div>
  </div>

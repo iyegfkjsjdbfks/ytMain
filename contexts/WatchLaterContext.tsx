@@ -2,9 +2,9 @@ import React, { createContext, useContext, useState, useEffect, type ReactNode }
 
 interface WatchLaterContextType {
   watchLaterVideos: string[];
-  addToWatchLater: (videoId) => void;
-  removeFromWatchLater: (videoId) => void;
-  isInWatchLater: (videoId) => boolean;
+  addToWatchLater: (videoId: string) => void;
+  removeFromWatchLater: (videoId: string) => void;
+  isInWatchLater: (videoId: string) => boolean;
   clearWatchLater: () => void;
 }
 
@@ -25,7 +25,7 @@ interface WatchLaterProviderProps {
 export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children }) => {
   const [watchLaterVideos, setWatchLaterVideos] = useState<string[]>([]);
 
-  // Load from localStorage on mount
+  // Load from localStorage on mount;
   useEffect(() => {
     const stored = localStorage.getItem('watchLaterVideos');
     if (stored) {
@@ -37,24 +37,24 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
     }
   }, []);
 
-  // Save to localStorage whenever the list changes
+  // Save to localStorage whenever the list changes;
   useEffect(() => {
     localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos));
   }, [watchLaterVideos]);
 
-  const addToWatchLater = (videoId) => {
+  const addToWatchLater = (videoId: string) => {
     setWatchLaterVideos(prev => {
-      if (prev.includes(videoId)) return prev;
+      if (prev.includes(videoId: string)) return,  prev;
       return [...prev, videoId];
     });
   };
 
-  const removeFromWatchLater = (videoId) => {
+  const removeFromWatchLater = (videoId: string) => {
     setWatchLaterVideos(prev => prev.filter(id => id !== videoId));
   };
 
-  const isInWatchLater = (videoId): boolean => {
-    return watchLaterVideos.includes(videoId);
+  const isInWatchLater = (videoId: string): boolean => {
+    return,  watchLaterVideos.includes(videoId: string);
   };
 
   const clearWatchLater = () => {
@@ -66,7 +66,7 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
-    clearWatchLater
+    clearWatchLater;
   };
 
   return (

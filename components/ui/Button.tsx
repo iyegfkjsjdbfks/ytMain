@@ -2,9 +2,9 @@ import React, { forwardRef, FC, ReactNode } from 'react';
 
 import { cn } from '../../utils / cn';
 
-import { ButtonLoading } from 'LoadingStates.tsx';
+import { ButtonLoading } from 'LoadingStates';
 
-// Button variants and sizes
+// Button variants and sizes;
 export type ButtonVariant =;
  | 'primary'
  | 'secondary'
@@ -22,10 +22,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes < HTMLButtonElem
  leftIcon?: React.ReactNode;
  rightIcon?: React.ReactNode;
  fullWidth?: boolean;
- rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'; children: React.ReactNode
+ rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'; children: React.ReactNode;
 }
 
-// Enhanced variant styles with YouTube - like red theme
+// Enhanced variant styles with YouTube - like red theme;
 const variantClasses: object = {}
  primary: 'bg - red - 600 hover:bg - red - 700 text - white border - transparent focus:ring - red - 500',
  secondary: 'bg - neutral - 100 hover:bg - neutral - 200 text - neutral - 900 border - transparent dark:bg - neutral - 800 dark:hover:bg - neutral - 700 dark:text - neutral - 100 focus:ring - neutral - 500',
@@ -35,7 +35,7 @@ const variantClasses: object = {}
  link: 'bg - transparent text - red - 600 border - transparent hover:text - red - 700 hover:underline focus:ring - red - 500 p - 0'
 };
 
-// Enhanced size classes
+// Enhanced size classes;
 const sizeClasses: object = {}
  xs: 'px - 2 py - 1 text - xs',
  sm: 'px - 3 py - 1.5 text - sm',
@@ -62,7 +62,7 @@ export const Button = forwardRef < HTMLButtonElement, ButtonProps>((;
  children,
  disabled,
  className = '',
- ...props
+ ...props;
  },
  ref) => {}
  const isDisabled = disabled || loading;
@@ -79,7 +79,7 @@ export const Button = forwardRef < HTMLButtonElement, ButtonProps>((;
  className);
 
  return (
- <button
+ <button;
  ref={ref}
 // FIXED:  className={buttonClasses}
 // FIXED:  disabled={isDisabled}
@@ -107,7 +107,7 @@ export const Button = forwardRef < HTMLButtonElement, ButtonProps>((;
 
 Button.displayName = 'Button';
 
-// Icon Button Component
+// Icon Button Component;
 export interface IconButtonProps extends Omit < ButtonProps, 'leftIcon' | 'rightIcon' | 'children'> {}
  icon: React.ReactNode;
  'aria - label': string;
@@ -120,11 +120,11 @@ export const IconButton = forwardRef < HTMLButtonElement, IconButtonProps>((;
  size = 'md',
  rounded = 'md',
  className,
- ...props
+ ...props;
  },
  ref) => {}
  return (
- <Button
+ <Button;
  ref={ref}
  variant={variant}
  size={size}
@@ -139,14 +139,14 @@ export const IconButton = forwardRef < HTMLButtonElement, IconButtonProps>((;
 
 IconButton.displayName = 'IconButton';
 
-// Specialized Button Components for YouTube - like functionality
+// Specialized Button Components for YouTube - like functionality;
 export const SubscribeButton: React.FC<{,}
  isSubscribed: boolean;
  loading?: boolean;
  onClick?: () => void;
  className?: string;
 }> = ({ isSubscribed, loading = false, onClick, className }: any) => (
- <Button
+ <Button;
  variant={isSubscribed ? 'outline' : 'primary'}
  size="sm"
  loading={loading} />
@@ -164,7 +164,7 @@ export const LikeButton: React.FC<{,}
  onClick?: () => void;
  className?: string;
 }> = ({ isLiked, count, loading = false, onClick, className }: any) => (
- <Button
+ <Button;
  variant={isLiked ? 'primary' : 'ghost'}
  size="sm"
  loading={loading} />

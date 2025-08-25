@@ -1,4 +1,4 @@
-// LiveStreamStudio - React Component
+// LiveStreamStudio - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface LiveStreamStudioProps {
@@ -12,7 +12,7 @@ export const LiveStreamStudio: React.FC<LiveStreamStudioProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const LiveStreamStudio: React.FC<LiveStreamStudioProps> = ({
         <h3>Error in LiveStreamStudio</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

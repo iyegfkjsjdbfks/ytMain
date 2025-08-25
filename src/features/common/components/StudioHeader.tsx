@@ -1,4 +1,4 @@
-// StudioHeader - React Component
+// StudioHeader - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface StudioHeaderProps {
@@ -12,7 +12,7 @@ export const StudioHeader: React.FC<StudioHeaderProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const StudioHeader: React.FC<StudioHeaderProps> = ({
         <h3>Error in StudioHeader</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

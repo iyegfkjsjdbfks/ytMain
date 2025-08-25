@@ -2,8 +2,8 @@ import React, { FC, useState, useEffect } from 'react';
 
 import { useAsyncState } from '../src / hooks';
 
-import BaseForm from 'BaseForm.tsx';
-import BaseModal from 'BaseModal.tsx';
+import BaseForm from 'BaseForm';
+import BaseModal from 'BaseModal';
 
 import type { Playlist } from '../src / types / core';
 
@@ -18,14 +18,14 @@ export interface RefactoredSaveToPlaylistModalProps {}
 }
 
 /**
- * Refactored Save to Playlist Modal demonstrating the use of reusable components
+ * Refactored Save to Playlist Modal demonstrating the use of reusable components;
  *
  * This modal shows how the new reusable components reduce code duplication:
  * - BaseModal handles modal functionality (overlay, escape key, focus management)
- * - BaseForm handles form state, validation, and submission
- * - useAsyncState manages loading and error states
+ * - BaseForm handles form state, validation, and submission;
+ * - useAsyncState manages loading and error states;
  *
- * Compare this with the original SaveToPlaylistModal to see the reduction in boilerplate
+ * Compare this with the original SaveToPlaylistModal to see the reduction in boilerplate;
  */
 const RefactoredSaveToPlaylistModal: React.FC < RefactoredSaveToPlaylistModalProps> = ({}
  isOpen,
@@ -37,7 +37,7 @@ const RefactoredSaveToPlaylistModal: React.FC < RefactoredSaveToPlaylistModalPro
  const [selectedPlaylistId, setSelectedPlaylistId] = useState < string>('');
  const [showCreateForm, setShowCreateForm] = useState < boolean>(false);
 
- // Auto - select first playlist when modal opens
+ // Auto - select first playlist when modal opens;
  useEffect(() => {}
  if (isOpen && existingPlaylists.length > 0 && !selectedPlaylistId && existingPlaylists[0]) {}
  setSelectedPlaylistId(existingPlaylists[0].id);
@@ -45,7 +45,7 @@ const RefactoredSaveToPlaylistModal: React.FC < RefactoredSaveToPlaylistModalPro
 
  }, [isOpen, existingPlaylists, selectedPlaylistId]);
 
- // Reset state when modal closes
+ // Reset state when modal closes;
  useEffect(() => {}
  if (!isOpen) {}
  setSelectedPlaylistId('');
@@ -62,7 +62,7 @@ const RefactoredSaveToPlaylistModal: React.FC < RefactoredSaveToPlaylistModalPro
  loading: createLoading,
  error: createError } = useAsyncState(async (): Promise<any> < void> => {}, [], { initialLoading: false });
 
- // Handle saving to existing playlist
+ // Handle saving to existing playlist;
  const handleSaveToExisting = async (): Promise<any> < void> => {}
  if (!selectedPlaylistId) {}
 return;
@@ -75,7 +75,7 @@ return;
  (console as any).error('Error saving to playlist:', error);
  };
 
- // Handle creating new playlist
+ // Handle creating new playlist;
  const handleCreatePlaylist = async (formData: Record < string, any>): Promise<any> < any> => {}
  try {}
  const newPlaylist = await onCreatePlaylist(formData.name, formData.description);
@@ -85,7 +85,7 @@ return;
  (console as any).error('Error creating playlist:', error);
  };
 
- // Form fields for creating new playlist
+ // Form fields for creating new playlist;
  const createPlaylistFields = [;
  {}
  name: 'name',
@@ -112,7 +112,7 @@ return 'Playlist name must be less than 100 characters';
 // FIXED:  onClick={(e: React.MouseEvent) => onClose(e)}
 // FIXED:  className="px - 4 py - 2 border border - gray - 300 dark:border - gray - 600 text - gray - 700 dark:text - gray - 300 rounded - lg hover:bg - gray - 50 dark:hover:bg - gray - 700 transition - colors"
  >
- Cancel
+ Cancel;
 // FIXED:  </button>
 
  {!showCreateForm && (}
@@ -121,7 +121,7 @@ return 'Playlist name must be less than 100 characters';
 // FIXED:  onClick={() => setShowCreateForm(true: React.MouseEvent)}
 // FIXED:  className="px - 4 py - 2 border border - blue - 600 text - blue - 600 rounded - lg hover:bg - blue - 50 dark:hover:bg - blue - 900 / 20 transition - colors"
  >
- Create New Playlist
+ Create New Playlist;
 // FIXED:  </button>
 
  <button />
@@ -137,7 +137,7 @@ return 'Playlist name must be less than 100 characters';
  );
 
  return (
- <BaseModal
+ <BaseModal;
  isOpen={isOpen}
  onClose={onClose}
  title={showCreateForm ? 'Create New Playlist' : 'Save to Playlist'}
@@ -153,7 +153,7 @@ return 'Playlist name must be less than 100 characters';
 
  {showCreateForm ? (}
  /* Create new playlist form */
- <BaseForm
+ <BaseForm;
  fields={createPlaylistFields} />
 // FIXED:  onSubmit={(e: React.FormEvent) => handleCreatePlaylist(e)}
  loading={createLoading}
@@ -167,7 +167,7 @@ return 'Playlist name must be less than 100 characters';
  <div className="space - y - 4">
  <div>
  <label htmlFor="select - playlist" className="block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 2">
- Select a playlist
+ Select a playlist;
 // FIXED:  </label>
 
  {existingPlaylists.length === 0 ? (}
@@ -179,18 +179,18 @@ return 'Playlist name must be less than 100 characters';
 // FIXED:  onClick={() => setShowCreateForm(true: React.MouseEvent)}
 // FIXED:  className="px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors"
  >
- Create Your First Playlist
+ Create Your First Playlist;
 // FIXED:  </button>
 // FIXED:  </div>
  ) : (
  <div className="space - y - 2 max - h - 60 overflow - y - auto">
  {existingPlaylists.map((playlist) => (}
- <label
+ <label;
  key={playlist.id}
 // FIXED:  htmlFor={`playlist-${playlist.id}`}
 // FIXED:  className="flex items - center p - 3 border border - gray - 200 dark:border - gray - 700 rounded - lg hover:bg - gray - 50 dark:hover:bg - gray - 800 cursor - pointer transition - colors" />
  >
- <input
+ <input;
 // FIXED:  id={`playlist-${playlist.id}`}
 // FIXED:  type="radio"
 // FIXED:  name="playlist"
@@ -209,7 +209,7 @@ return 'Playlist name must be less than 100 characters';
 // FIXED:  </div>
  )}
  <div className="text - xs text - gray - 400 dark:text - gray - 500 mt - 1">
- {playlist.videoCount} videos
+ {playlist.videoCount} videos;
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </label>

@@ -1,4 +1,4 @@
-// youtubeUtils - Generic Implementation
+// youtubeUtils - Generic Implementation;
 export interface YoutubeUtilsConfig {
   enabled?: boolean;
 }
@@ -8,7 +8,7 @@ export class YoutubeUtils {
 
   constructor(config: YoutubeUtilsConfig = {}) {
     this.config = {
-      enabled: config.enabled ?? true
+      enabled: config.enabled ?? true;
     };
   }
 

@@ -7,7 +7,7 @@ export interface StudioLayoutProps {
 
 export const StudioLayout: React.FC<StudioLayoutProps> = ({ children, className = '' }) => {
   return React.createElement('div', {
-    className: 'studiolayout-container ' + className
+    className: 'studiolayout-container ' + className;
   }, children || 'StudioLayout Component');
 };
 

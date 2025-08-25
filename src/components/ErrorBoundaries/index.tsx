@@ -1,8 +1,8 @@
-// import DataFetchErrorBoundary, { type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary'; // Unused import
-// import LiveStreamErrorBoundary, { type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary'; // Unused import
-// import VideoErrorBoundary, { type VideoErrorBoundaryProps } from './VideoErrorBoundary'; // Unused import
+// import DataFetchErrorBoundary, { type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary'; // Unused import;
+// import LiveStreamErrorBoundary, { type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary'; // Unused import;
+// import VideoErrorBoundary, { type VideoErrorBoundaryProps } from './VideoErrorBoundary'; // Unused import;
 
-// Re-export all error boundaries and their types
+// Re-export all error boundaries and their types;
 export { default as VideoErrorBoundary } from './VideoErrorBoundary';
 export type { VideoErrorBoundaryProps } from './VideoErrorBoundary';
 
@@ -12,8 +12,8 @@ export type { LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
 export { default as DataFetchErrorBoundary } from './DataFetchErrorBoundary';
 export type { DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
 
-// Re-export the main error boundary from the common components
+// Re-export the main error boundary from the common components;
 export { ErrorBoundary as BaseErrorBoundary } from '../../features/common/components/ErrorBoundary';
 
-// Re-export all protected components
+// Re-export all protected components;
 export * from './ProtectedComponents';

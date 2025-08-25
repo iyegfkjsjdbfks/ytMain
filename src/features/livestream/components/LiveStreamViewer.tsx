@@ -1,4 +1,4 @@
-// LiveStreamViewer - React Component
+// LiveStreamViewer - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface LiveStreamViewerProps {
@@ -12,7 +12,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
         <h3>Error in LiveStreamViewer</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

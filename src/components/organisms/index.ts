@@ -1,2 +1,2 @@
-// Organisms
+// Organisms;
 export * from './VideoGrid';

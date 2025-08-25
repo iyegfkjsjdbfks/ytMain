@@ -1,4 +1,4 @@
-// Header - React Component
+// Header - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface HeaderProps {
@@ -12,7 +12,7 @@ export const Header: React.FC<HeaderProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
         <h3>Error in Header</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

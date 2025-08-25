@@ -10,25 +10,25 @@ const ChannelCustomizationPage: React.FC = () => {
         
         <div className="mb-6">
           <nav className="flex space-x-4">
-            <button
+            <button;
               onClick={() => setActiveTab('branding')}
               className={`px-4 py-2 rounded ${activeTab === 'branding' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            >
-              Branding
-            </button>
-            <button
+            {">"}
+              Branding;
+            </button></nav>
+            <button;
               onClick={() => setActiveTab('layout')}
               className={`px-4 py-2 rounded ${activeTab === 'layout' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            >
-              Layout
-            </button>
-            <button
+            {">"}
+              Layout;
+            </button></div>
+            <button;
               onClick={() => setActiveTab('info')}
               className={`px-4 py-2 rounded ${activeTab === 'info' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            >
-              Basic Info
-            </button>
-          </nav>
+            {">"}
+              Basic Info;
+            </button></div>
+          </nav></div>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6">
@@ -38,40 +38,40 @@ const ChannelCustomizationPage: React.FC = () => {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Icon
+                    Channel Icon;
                   </label>
                   <div className="flex items-center space-x-4">
                     <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center">
                       <span className="text-gray-500">Icon</span>
                     </div>
                     <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                      Upload New Icon
+                      Upload New Icon;
                     </button>
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Banner
+                    Channel Banner;
                   </label>
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
                     <p className="text-gray-500 mb-4">Upload your channel banner (2560 x 1440 recommended)</p>
                     <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                      Upload Banner
+                      Upload Banner;
                     </button>
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Watermark
+                    Channel Watermark;
                   </label>
                   <div className="flex items-center space-x-4">
                     <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
                       <span className="text-gray-500 text-xs">Logo</span>
                     </div>
                     <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-                      Upload Watermark
+                      Upload Watermark;
                     </button>
                   </div>
                 </div>
@@ -85,17 +85,17 @@ const ChannelCustomizationPage: React.FC = () => {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Trailer
+                    Channel Trailer;
                   </label>
                   <p className="text-gray-600 mb-4">Set a video to introduce new visitors to your channel</p>
                   <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Select Trailer Video
+                    Select Trailer Video;
                   </button>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Featured Sections
+                    Featured Sections;
                   </label>
                   <p className="text-gray-600 mb-4">Organize your content into sections on your channel page</p>
                   <div className="space-y-2">
@@ -109,7 +109,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
                   </div>
                   <button className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                    Add Section
+                    Add Section;
                   </button>
                 </div>
               </div>
@@ -122,68 +122,68 @@ const ChannelCustomizationPage: React.FC = () => {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Name
+                    Channel Name;
                   </label>
-                  <input
+                  <input;
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter your channel name"
-                  />
+                  /{">"}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Description
+                    Channel Description;
                   </label>
-                  <textarea
+                  <textarea;
                     rows={4}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Describe your channel and what viewers can expect"
-                  />
+                  /{">"}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Keywords
+                    Channel Keywords;
                   </label>
-                  <input
+                  <input;
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter keywords separated by commas"
-                  />
+                  /{">"}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Channel Links
+                    Channel Links;
                   </label>
                   <div className="space-y-2">
-                    <input
+                    <input;
                       type="url"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Website URL"
-                    />
-                    <input
+                    /{">"}
+                    <input;
                       type="url"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Social media URL"
-                    />
+                    /{">"}
                   </div>
                 </div>
                 
                 <div className="flex space-x-4">
                   <button className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-                    Save Changes
+                    Save Changes;
                   </button>
                   <button className="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
-                    Cancel
+                    Cancel;
                   </button>
                 </div>
               </div>
             </div>
           )}
         </div>
-      </div>
+  <div></div></div>
     </div>
   );
 };

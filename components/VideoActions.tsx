@@ -1,7 +1,7 @@
 import React, { MouseEvent, FC, useState, useEffect, useRef } from 'react';
 import { Link } from 'react - router - dom';
 
-import { ShareIcon, XMarkIcon } from '@heroicons / react / 24 / outline';
+import { ShareIcon, XIcon } from '@heroicons / react / 24 / outline';
 
 import { formatCount } from '../utils / numberUtils';
 
@@ -49,7 +49,7 @@ return null;
 // FIXED:  className="p - 1 rounded - full hover:bg - neutral - 100 dark:hover:bg - neutral - 700"
 // FIXED:  aria - label="Close share modal"
  >
- <XMarkIcon className="w - 5 h - 5 text - neutral - 500 dark:text - neutral - 300" />
+ <XIcon className="w - 5 h - 5 text - neutral - 500 dark:text - neutral - 300" />
 // FIXED:  </button>
 // FIXED:  </div>
 
@@ -95,17 +95,17 @@ return null;
 
  <div className="border - t border - neutral - 200 dark:border - neutral - 700 pt - 4">
  <div className="flex items - center space - x - 2">
- <input
+ <input;
 // FIXED:  type="text"
 // FIXED:  value={window.location.href}
- readOnly
+ readOnly;
 // FIXED:  className="flex - 1 px - 3 py - 2 text - sm border border - neutral - 300 dark:border - neutral - 600 rounded - md bg - neutral - 50 dark:bg - neutral - 700 text - neutral - 700 dark:text - neutral - 300" />
  />
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onCopyLink(e)}
 // FIXED:  className="px - 4 py - 2 bg - sky - 500 hover:bg - sky - 600 dark:bg - sky - 600 dark:hover:bg - sky - 500 text - white text - sm font - medium rounded - md transition - colors"
  >
- Copy
+ Copy;
 // FIXED:  </button>
 // FIXED:  </div>
  {shareMessage && (}
@@ -173,7 +173,7 @@ const VideoActions: React.FC < VideoActionsProps> = ({}
  setTimeout((() => setShareMessage('')) as any, 3000);
  };
 
- // Close share modal when clicking outside
+ // Close share modal when clicking outside;
  useEffect(() => {}
  const handleClickOutside = (event: MouseEvent) => {}
  if (isShareModalOpen && !(event.target as Element).closest('.share - modal - container')) {}
@@ -222,7 +222,7 @@ const VideoActions: React.FC < VideoActionsProps> = ({}
  <span className="text - xs">Share</span>
 // FIXED:  </button>
 
- <ShareModal
+ <ShareModal;
  isOpen={isShareModalOpen} />
  onClose={() => setIsShareModalOpen(false)}
  onShareToSocial={handleShareToSocial}
@@ -233,7 +233,7 @@ const VideoActions: React.FC < VideoActionsProps> = ({}
 
  {/* Save Button */}
  <div className="relative">
- <button
+ <button;
  ref={saveButtonRef} />
 // FIXED:  onClick={(e: React.MouseEvent) => onSave(e)}
 // FIXED:  disabled={saveModalLoading}

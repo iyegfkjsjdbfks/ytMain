@@ -1,4 +1,4 @@
-// base - Enhanced Implementation
+// base - Enhanced Implementation;
 export interface BaseConfig {
   enabled: boolean;
   options: Record<string, any>;
@@ -11,7 +11,7 @@ export class Base {
     this.config = {
       enabled: true,
       options: {},
-      ...config
+      ...config;
     };
   }
 

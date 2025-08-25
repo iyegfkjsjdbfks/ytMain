@@ -1,9 +1,9 @@
-// useVideos - Custom Hook
+// useVideos - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseVideosOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useVideos(
       const result = {
         hookName: 'useVideos',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useVideos(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

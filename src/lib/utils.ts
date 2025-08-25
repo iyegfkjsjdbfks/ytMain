@@ -1,14 +1,14 @@
-// Utility functions
+// Utility functions;
 export function cn(...inputs: (string | undefined | null | boolean)[]): string {
   return inputs.filter(Boolean).join(' ');
 }
 
-export function formatDate(date: Date | string): string {
+export,  function formatDate(date: Dat, e | string): string {
   const d = new Date(date);
   return d.toLocaleDateString();
 }
 
-export function formatDuration(seconds: number): string {
+export function formatDuration(seconds: numbe, r): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
@@ -19,17 +19,17 @@ export function formatDuration(seconds: number): string {
   return `${minutes}:${secs.toString().padStart(2, '0')}`;
 }
 
-export function clamp(value: number, min: number, max: number): number {
+export function clamp(value: numbe, r, min: numbe, r, max: numbe, r): number {
   return Math.min(Math.max(value, min), max);
 }
 
-export function debounce<T extends (...args: any[]) => any>(
+export,  function debounce<T,  extends (...args: an, y[]) => any>(
   func: T,
-  delay: number
-): (...args: Parameters<T>) => void {
-  let timeoutId: NodeJS.Timeout;
+  delay: numbe, r;
+): (...args: Parameter, s<T>) => void {
+  let,  timeoutId: NodeJ, S.Timeout;
   
-  return (...args: Parameters<T>) => {
+  return (...args: Parameter, s<T>) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func(...args), delay);
   };

@@ -1,9 +1,9 @@
-// useVideosData - Clean Hook Implementation
+// useVideosData - Clean Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseVideosDataOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -30,13 +30,13 @@ export function useVideosData(
       setLoading(true);
       setError(null);
       
-      // Simulate async operation
+      // Simulate async operation;
       await new Promise(resolve => setTimeout(resolve, 300));
       
       const result = {
         hookName: 'useVideosData',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -58,7 +58,7 @@ export function useVideosData(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

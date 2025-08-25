@@ -1,4 +1,4 @@
-// Comprehensive type declarations
+// Comprehensive type declarations;
 declare module 'clsx' {
   export type ClassValue = string | number | boolean | undefined | null | { [key: string] } | ClassValue[];
   export function clsx(...inputs: ClassValue[]): string;
@@ -47,7 +47,7 @@ declare module '@heroicons/react/24/outline' {
   export const PlayIcon: ComponentType<{ className?: string }>;
   export const PauseIcon: ComponentType<{ className?: string }>;
   export const SpeakerWaveIcon: ComponentType<{ className?: string }>;
-  export const SpeakerXMarkIcon: ComponentType<{ className?: string }>;
+  export const SpeakerXIcon: ComponentType<{ className?: string }>;
   export const ArrowsPointingOutIcon: ComponentType<{ className?: string }>;
   export const Cog6ToothIcon: ComponentType<{ className?: string }>;
 }

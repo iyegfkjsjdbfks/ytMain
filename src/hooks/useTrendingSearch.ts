@@ -1,9 +1,9 @@
-// useTrendingSearch - Clean Hook Implementation
+// useTrendingSearch - Clean Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseTrendingSearchOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -30,13 +30,13 @@ export function useTrendingSearch(
       setLoading(true);
       setError(null);
       
-      // Simulate async operation
+      // Simulate async operation;
       await new Promise(resolve => setTimeout(resolve, 300));
       
       const result = {
         hookName: 'useTrendingSearch',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -58,7 +58,7 @@ export function useTrendingSearch(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

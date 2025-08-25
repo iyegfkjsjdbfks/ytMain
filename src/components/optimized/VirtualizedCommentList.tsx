@@ -1,4 +1,4 @@
-// VirtualizedCommentList - Simple Component
+// VirtualizedCommentList - Simple Component;
 import React from 'react';
 
 export interface VirtualizedCommentListProps {
@@ -8,7 +8,7 @@ export interface VirtualizedCommentListProps {
 
 export const VirtualizedCommentList = (props: VirtualizedCommentListProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

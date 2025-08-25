@@ -1,4 +1,4 @@
-// VideoList - React Component
+// VideoList - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface VideoListProps {
@@ -12,7 +12,7 @@ export const VideoList: React.FC<VideoListProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const VideoList: React.FC<VideoListProps> = ({
         <h3>Error in VideoList</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

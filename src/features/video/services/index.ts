@@ -1,2 +1,2 @@
-// Export all video-related services
+// Export all video-related services;
 export * from './videoService';

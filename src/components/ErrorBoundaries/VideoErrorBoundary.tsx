@@ -1,4 +1,4 @@
-// VideoErrorBoundary - Advanced Component Implementation
+// VideoErrorBoundary - Advanced Component Implementation;
 import React, { useState, useEffect } from 'react';
 
 export interface VideoErrorBoundaryProps {
@@ -12,7 +12,7 @@ export const VideoErrorBoundary: React.FC<VideoErrorBoundaryProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -20,7 +20,7 @@ export const VideoErrorBoundary: React.FC<VideoErrorBoundaryProps> = ({
   useEffect(() => {
     const initialize = async () => {
       try {
-        // Simulate initialization
+        // Simulate initialization;
         await new Promise(resolve => setTimeout(resolve, 500));
         setIsReady(true);
         onLoad?.();

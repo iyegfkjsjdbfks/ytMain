@@ -23,7 +23,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
     clickThroughRate: 5.8,
     averageViewDuration: '4:32',
     subscribersGained: 1250,
-    revenue: 2500
+    revenue: 2500;
   });
 
   const topVideos = [
@@ -48,26 +48,26 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Channel Analytics</h1>
           <div className="flex space-x-4">
-            <select
+            <select;
               value={selectedMetric}
-              onChange={(e) => setSelectedMetric(e.target.value as any)}
+              onChange={(e: any) => setSelectedMetric(e.target.value as any)}
               className="border rounded-lg px-3 py-2"
-            >
+            {">"}
               <option value="views">Views</option>
               <option value="watchTime">Watch Time</option>
               <option value="subscribers">Subscribers</option>
               <option value="revenue">Revenue</option>
-            </select>
-            <select
+            </select></div>
+            <select;
               value={timeRange}
-              onChange={(e) => setTimeRange(e.target.value as any)}
+              onChange={(e: any) => setTimeRange(e.target.value as any)}
               className="border rounded-lg px-3 py-2"
-            >
+            {">"}
               <option value="7d">Last 7 days</option>
               <option value="28d">Last 28 days</option>
               <option value="90d">Last 90 days</option>
               <option value="365d">Last year</option>
-            </select>
+            </select></div>
           </div>
         </div>
         
@@ -154,22 +154,22 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
                   <span className="text-sm">{country.country}</span>
                   <div className="flex items-center space-x-2">
                     <div className="w-20 bg-gray-200 rounded-full h-2">
-                      <div
+                      <div;
                         className="bg-blue-500 h-2 rounded-full"
                         style={{ width: `${country.percentage * 2}%` }}
-                      ></div>
+                      {">"}{"<"}/div{">"}
                     </div>
                     <span className="text-sm font-semibold w-8">{country.percentage}%</span>
                   </div>
                 </div>
-              ))}
+              )){"}"
             </div>
           </div>
-        </div>
+  <div></div></div>
 
         {/* Revenue Analytics */}
-        <div className="mt-8 bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Revenue Analytics</h2>
+        <div className="mt-8 bg-white rounded-lg shadow-md p-6">;
+          <h2 className = "text-xl font-semibold mb-4">Revenue Analytics</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <h3 className="text-lg font-semibold text-gray-700">Total Revenue</h3>
@@ -187,7 +187,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
               <p className="text-sm text-gray-600">Cost per mille</p>
             </div>
           </div>
-        </div>
+  <div></div></div>
       </div>
     </div>
   );

@@ -2,29 +2,29 @@ import React, { createContext, useContext, useReducer, useCallback, useEffect, u
 import type { User } from '../src/types/core';
 import type { MiniplayerVideo, StrictNotification } from '../src/types/strictTypes';
 
-// Unified App State Interface
+// Unified App State Interface;
 interface UnifiedAppState {
-  // Auth state
+  // Auth state;
   user: User | null;
   isAuthenticated: boolean;
   isAuthLoading: boolean;
 
-  // Theme state
+  // Theme state;
   theme: 'light' | 'dark' | 'system';
 
-  // Miniplayer state
+  // Miniplayer state;
   miniplayerVideo: MiniplayerVideo | null;
   isMiniplayerOpen: boolean;
 
-  // Watch Later state
+  // Watch Later state;
   watchLaterVideos: string[];
 
-  // UI state
+  // UI state;
   sidebarCollapsed: boolean;
   notifications: StrictNotification[];
 }
 
-// Action Types
+// Action Types;
 type UnifiedAppAction =
   | { type: "SET_USER"; payload: User | null }
   | { type: "SET_AUTH_LOADING"; payload: boolean }
@@ -37,7 +37,7 @@ type UnifiedAppAction =
   | { type: "ADD_NOTIFICATION"; payload: StrictNotification }
   | { type: "REMOVE_NOTIFICATION"; payload: string };
 
-// Initial State
+// Initial State;
 const initialState: UnifiedAppState = {
   user: null,
   isAuthenticated: false,
@@ -50,35 +50,35 @@ const initialState: UnifiedAppState = {
   notifications: []
 };
 
-// Reducer
+// Reducer;
 function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): UnifiedAppState {
   switch (action.type) {
     case 'SET_USER':
       return {
         ...state,
         user: action.payload,
-        isAuthenticated: !!action.payload
+        isAuthenticated: !!action.payload;
       };
     case 'SET_AUTH_LOADING':
       return {
         ...state,
-        isAuthLoading: action.payload
+        isAuthLoading: action.payload;
       };
     case 'SET_THEME':
       return {
         ...state,
-        theme: action.payload
+        theme: action.payload;
       };
     case 'SET_MINIPLAYER_VIDEO':
       return {
         ...state,
         miniplayerVideo: action.payload,
-        isMiniplayerOpen: !!action.payload
+        isMiniplayerOpen: !!action.payload;
       };
     case 'TOGGLE_MINIPLAYER':
       return {
         ...state,
-        isMiniplayerOpen: !state.isMiniplayerOpen
+        isMiniplayerOpen: !state.isMiniplayerOpen;
       };
     case 'ADD_TO_WATCH_LATER':
       return {
@@ -93,7 +93,7 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
     case 'TOGGLE_SIDEBAR':
       return {
         ...state,
-        sidebarCollapsed: !state.sidebarCollapsed
+        sidebarCollapsed: !state.sidebarCollapsed;
       };
     case 'ADD_NOTIFICATION':
       return {
@@ -110,47 +110,47 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
   }
 }
 
-// Context Interface
+// Context Interface;
 interface UnifiedAppContextType {
   state: UnifiedAppState;
   
-  // Auth actions
+  // Auth actions;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<boolean>;
   
-  // Theme actions
+  // Theme actions;
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
   
-  // Miniplayer actions
+  // Miniplayer actions;
   openMiniplayer: (video: MiniplayerVideo) => void;
   closeMiniplayer: () => void;
   toggleMiniplayer: () => void;
   
-  // Watch Later actions
+  // Watch Later actions;
   addToWatchLater: (videoId: string) => void;
   removeFromWatchLater: (videoId: string) => void;
   isInWatchLater: (videoId: string) => boolean;
   
-  // UI actions
+  // UI actions;
   toggleSidebar: () => void;
   addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
   removeNotification: (id: string) => void;
 }
 
-// Create Context
+// Create Context;
 export const UnifiedAppContext = createContext<UnifiedAppContextType | undefined>(undefined);
 
-// Provider Props
+// Provider Props;
 interface UnifiedAppProviderProps {
   children?: React.ReactNode;
 }
 
-// Provider Component
+// Provider Component;
 export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(unifiedAppReducer, initialState);
 
-  // Check for existing auth on mount
+  // Check for existing auth on mount;
   useEffect(() => {
     const checkAuth = () => {
       try {
@@ -168,12 +168,12 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     checkAuth();
   }, []);
 
-  // Auth actions
+  // Auth actions;
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
     dispatch({ type: "SET_AUTH_LOADING", payload: true });
 
     try {
-      // Simulate API call
+      // Simulate API call;
       if (password.length < 6) {
         return false;
       }
@@ -222,11 +222,11 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     }
   }, [state.user]);
 
-  // Theme actions
+  // Theme actions;
   const setTheme = useCallback((theme: 'light' | 'dark' | 'system') => {
     dispatch({ type: "SET_THEME", payload: theme });
     
-    // Apply theme to document
+    // Apply theme to document;
     if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     } else {
@@ -234,7 +234,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     }
   }, []);
 
-  // Miniplayer actions
+  // Miniplayer actions;
   const openMiniplayer = useCallback((video: MiniplayerVideo) => {
     dispatch({ type: "SET_MINIPLAYER_VIDEO", payload: video });
   }, []);
@@ -247,7 +247,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     dispatch({ type: "TOGGLE_MINIPLAYER" });
   }, []);
 
-  // Watch Later actions
+  // Watch Later actions;
   const addToWatchLater = useCallback((videoId: string) => {
     dispatch({ type: "ADD_TO_WATCH_LATER", payload: videoId });
   }, []);
@@ -257,10 +257,10 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   }, []);
 
   const isInWatchLater = useCallback((videoId: string): boolean => {
-    return state.watchLaterVideos.includes(videoId);
+    return state.watchLaterVideos.includes(videoId: string);
   }, [state.watchLaterVideos]);
 
-  // UI actions
+  // UI actions;
   const toggleSidebar = useCallback(() => {
     dispatch({ type: "TOGGLE_SIDEBAR" });
   }, []);
@@ -273,7 +273,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     };
     dispatch({ type: "ADD_NOTIFICATION", payload: fullNotification });
     
-    // Auto-remove after 5 seconds
+    // Auto-remove after 5 seconds;
     setTimeout(() => {
       dispatch({ type: "REMOVE_NOTIFICATION", payload: fullNotification.id });
     }, 5000);
@@ -283,7 +283,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     dispatch({ type: "REMOVE_NOTIFICATION", payload: id });
   }, []);
 
-  // Context value
+  // Context value;
   const value = useMemo(() => ({
     state,
     login,
@@ -298,7 +298,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     isInWatchLater,
     toggleSidebar,
     addNotification,
-    removeNotification
+    removeNotification;
   }), [
     state,
     login,
@@ -313,7 +313,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     isInWatchLater,
     toggleSidebar,
     addNotification,
-    removeNotification
+    removeNotification;
   ]);
 
   return (
@@ -323,7 +323,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   );
 };
 
-// Custom Hook
+// Custom Hook;
 export const useUnifiedApp = () => {
   const context = useContext(UnifiedAppContext);
   if (context === undefined) {

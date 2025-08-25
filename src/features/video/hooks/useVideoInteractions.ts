@@ -1,9 +1,9 @@
-// useVideoInteractions - Custom Hook
+// useVideoInteractions - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseVideoInteractionsOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useVideoInteractions(
       const result = {
         hookName: 'useVideoInteractions',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useVideoInteractions(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

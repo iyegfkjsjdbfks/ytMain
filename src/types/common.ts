@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-// Common TypeScript interfaces and types
+// Common TypeScript interfaces and types;
 
 export interface BaseComponent {
  className?: string;
@@ -16,7 +16,7 @@ export interface PaginationState {
  pageSize: number;
  total: number;
  hasNextPage: boolean;
- hasPreviousPage: boolean
+ hasPreviousPage: boolean;
 }
 
 export interface Video {
@@ -28,7 +28,7 @@ export interface Video {
  views: number;
  publishedAt: string;
  channelId: string;
- channelTitle: string
+ channelTitle: string;
 }
 
 export interface Channel {
@@ -37,7 +37,7 @@ export interface Channel {
  description: string;
  thumbnail: string;
  subscriberCount: number;
- videoCount: number
+ videoCount: number;
 }
 
 export interface Playlist {
@@ -47,7 +47,7 @@ export interface Playlist {
  thumbnail: string;
  videoCount: number;
  channelId: string;
- channelTitle: string
+ channelTitle: string;
 }
 
 export interface ApiResponse<T> {

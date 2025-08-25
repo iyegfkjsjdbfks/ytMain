@@ -46,9 +46,9 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
 
   const handleCommentAction = (commentId: string, action: 'approve' | 'reject') => {
     setComments(prev => prev.map(comment => 
-      comment.id === commentId 
-        ? { ...comment, status: action === 'approve' ? 'approved' : 'rejected' }
-        : comment
+      comment.id === commentId; 
+         { ...comment, status: action === 'approve'  'approved' : 'rejected' }
+        : comment;
     ));
   };
 
@@ -104,26 +104,26 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex space-x-4 mb-6">
             {(['all', 'pending', 'flagged', 'approved', 'rejected'] as const).map((filter) => (
-              <button
+              <button;
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
                 className={`px-4 py-2 rounded-lg font-medium ${
-                  selectedFilter === filter
+                  selectedFilter === filter;
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
+                {"{"}""`{"{"}""
+              {">"}
                 {filter.charAt(0).toUpperCase() + filter.slice(1)}
                 {filter !== 'all' && (
                   <span className="ml-2 text-xs">
                     ({filter === 'flagged' 
-                      ? comments.filter(c => c.flagReason).length
-                      : comments.filter(c => c.status === filter).length
-                    })
+                      ? comments.filter(c => c.flagReason).length;
+                      : comments.filter(c ={">"} c.status === filter).length;
+                    {"}")
                   </span>
                 )}
-              </button>
-            ))}
+              </button></div>
+            )){"}"
           </div>
 
           {/* Comments List */}
@@ -134,7 +134,7 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
               </div>
             ) : (
               filteredComments.map((comment) => (
-                <div key={comment.id} className="border rounded-lg p-4">
+                <div key = {comment.id} className = "border rounded-lg p-4">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
@@ -158,33 +158,33 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
                   </div>
                   
                   {comment.status === 'pending' && (
-                    <div className="flex space-x-3">
-                      <button
+                    <div className = "flex space-x-3">
+                      <button;
                         onClick={() => handleCommentAction(comment.id, 'approve')}
                         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm"
-                      >
-                        Approve
-                      </button>
-                      <button
+                      {">"}
+                        Approve;
+                      </button></div>
+                      <button;
                         onClick={() => handleCommentAction(comment.id, 'reject')}
                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-sm"
-                      >
-                        Reject
-                      </button>
+                      {">"}
+                        Reject;
+                      </button></div>
                       <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 text-sm">
-                        Hold for Review
+                        Hold for Review;
                       </button>
                     </div>
-                  )}
+                  ){"}"
                 </div>
               ))
-            )}
+            ){"}"
           </div>
         </div>
 
         {/* Moderation Settings */}
-        <div className="mt-8 bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Moderation Settings</h2>
+        <div className="mt-8 bg-white rounded-lg shadow-md p-6">;
+          <h2 className = "text-xl font-semibold mb-4">Moderation Settings</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="font-medium mb-3">Auto-moderation</h3>
@@ -206,17 +206,17 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
             
             <div>
               <h3 className="font-medium mb-3">Blocked Words</h3>
-              <textarea
+              <textarea;
                 className="w-full border rounded p-2 text-sm"
                 rows={4}
                 placeholder="Enter words to automatically block (one per line)"
-              />
+              /{">"}
               <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">
-                Save Blocked Words
+                Save Blocked Words;
               </button>
             </div>
           </div>
-        </div>
+  <div></div></div>
       </div>
     </div>
   );

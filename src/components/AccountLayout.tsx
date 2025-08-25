@@ -7,7 +7,7 @@ export interface AccountLayoutProps {
 
 export const AccountLayout: React.FC<AccountLayoutProps> = ({ children, className = '' }) => {
   return React.createElement('div', {
-    className: 'accountlayout-container ' + className
+    className: 'accountlayout-container ' + className;
   }, children || 'AccountLayout Component');
 };
 

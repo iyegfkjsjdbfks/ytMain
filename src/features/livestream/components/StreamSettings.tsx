@@ -1,4 +1,4 @@
-// StreamSettings - React Component
+// StreamSettings - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface StreamSettingsProps {
@@ -12,7 +12,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
         <h3>Error in StreamSettings</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

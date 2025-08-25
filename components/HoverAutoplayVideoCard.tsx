@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 declare namespace NodeJS {
  interface ProcessEnv {
- [key: string]: string | undefined
+ [key: string]: string | undefined;
  }
  interface Process {
  env: ProcessEnv;
@@ -15,7 +15,7 @@ import { formatDistanceToNow } from 'date-fns';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils.ts';
 
-import ImageWithFallback from 'ImageWithFallback.tsx';
+import ImageWithFallback from 'ImageWithFallback';
 
 import type { Video } from '../types.ts';
 
@@ -33,13 +33,13 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
- // Configuration constants
- const HOVER_DELAY = 500; // Delay before showing video preview in milliseconds
- const HIDE_DELAY = 100; // Delay before hiding video preview in milliseconds
+ // Configuration constants;
+ const HOVER_DELAY = 500; // Delay before showing video preview in milliseconds;
+ const HIDE_DELAY = 100; // Delay before hiding video preview in milliseconds;
 
- // Extract YouTube video ID from the video
+ // Extract YouTube video ID from the video;
  const getVideoId = (video: Video): string | null => {
- // Try to extract from video.id if it has prefixes
+ // Try to extract from video.id if it has prefixes;
  if (video.id.startsWith('youtube-')) {
  return video.id.replace('youtube-', '');
  }
@@ -47,7 +47,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
  return video.id.replace('google-search-', '');
  }
 
- // Try to extract from videoUrl if available
+ // Try to extract from videoUrl if available;
  if (video.videoUrl) {
  return getYouTubeVideoId(video.videoUrl);
  }
@@ -89,15 +89,15 @@ return duration;
  const handleMouseEnter = () => {
  setIsHovered(true);
 
- // Clear any existing hide timeout
+ // Clear any existing hide timeout;
  if (hideTimeoutRef.current) {
  clearTimeout(hideTimeoutRef.current);
  hideTimeoutRef.current = null;
  }
 
- // Only show iframe if we have a valid video ID and no previous errors
+ // Only show iframe if we have a valid video ID and no previous errors;
  if (videoId && !hasError) {
- // Set a timeout to show the iframe after hovering for configured delay
+ // Set a timeout to show the iframe after hovering for configured delay;
  hoverTimeoutRef.current = setTimeout((() => {
  setShowIframe(true);
  }) as any, HOVER_DELAY);
@@ -107,37 +107,37 @@ return duration;
  const handleMouseLeave = () => {
  setIsHovered(false);
 
- // Clear the hover timeout if user leaves before delay completes
+ // Clear the hover timeout if user leaves before delay completes;
  if (hoverTimeoutRef.current) {
  clearTimeout(hoverTimeoutRef.current);
  hoverTimeoutRef.current = null;
  }
 
- // Hide iframe after a brief delay to prevent flickering
+ // Hide iframe after a brief delay to prevent flickering;
  hideTimeoutRef.current = setTimeout((() => {
  setShowIframe(false);
- // Reset mute state for next hover
+ // Reset mute state for next hover;
  setIsMuted(true);
  }) as any, HIDE_DELAY);
  };
 
- // Handle iframe errors
+ // Handle iframe errors;
  const handleIframeError = () => {
  (console as any).warn('YouTube iframe failed to load for video:', videoId);
  setHasError(true);
  setShowIframe(false);
  };
 
- // Toggle mute/unmute
+ // Toggle mute/unmute;
  const toggleMute = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
  setIsMuted(!isMuted);
- // Force iframe reload to apply mute setting
+ // Force iframe reload to apply mute setting;
  setIframeKey(prev => prev + 1);
  };
 
- // Cleanup timeouts on unmount
+ // Cleanup timeouts on unmount;
  useEffect(() => {
  return () => {
  if (hoverTimeoutRef.current) {
@@ -149,17 +149,17 @@ return duration;
  }}, []);
 
  return (
- <div
+ <div;
   className={`group cursor-pointer ${className}`}
   onMouseEnter={handleMouseEnter}
   onMouseLeave={handleMouseLeave}
  >
  {/* Video Thumbnail/Player */}
- <div className="relative mb-3">
+ <div className="relative mb-3">;
  <Link to={`/watch/${video.id}`}>
  <div className="relative w-full" style={{ height: '250px' }}>
  {/* Thumbnail - always visible as background */}
- <ImageWithFallback
+ <ImageWithFallback;
  src={video.thumbnailUrl || video.thumbnail}
   alt={video.title}
   className={`absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-300 ${
@@ -168,13 +168,13 @@ return duration;
  width={320}
  height={250}
  fallbackSrc={`https://picsum.photos/320/250?random=${video.id}`}
- />
+ /{">"}
 
  {/* YouTube iframe - shown on hover */}
  {showIframe && videoId && (
  <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden bg-black">
- <iframe
- key={`hover-${videoId}-${iframeKey}`} // Force remount when mute changes
+ <iframe;
+ key={`hover-${videoId}-${iframeKey}`} // Force remount when mute changes;
  src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&rel=0&modestbranding=1&playsinline=1&fs=0&disablekb=1&iv_load_policy=3&start=0&end=30&loop=1&playlist=${videoId}&origin=${encodeURIComponent(window.location.origin)}&enablejsapi=0`}
  title={`Preview: ${video.title}`}
  className="w-full h-full border-0"
@@ -187,15 +187,15 @@ return duration;
   outline: 'none'
  }}
  onError={handleIframeError}
- />
+ /{">"}
 
  {/* Mute/Unmute Button */}
- <button
+ <button;
   onClick={toggleMute}
   className="absolute bottom-2 left-2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition-all duration-200 z-10"
   style={{ pointerEvents: 'auto' }}
   title={isMuted ? 'Unmute video' : 'Mute video'}
- >
+ {">"}
  {isMuted ? (
  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
  {/* Muted speaker icon */}
@@ -207,9 +207,9 @@ return duration;
  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
 </svg>
  )}
-</button>
+</button></div>
 </div>
- )}
+ ){"}"
 
  {/* Duration Badge */}
  {video.duration && video.duration !== '0:00' && (
@@ -228,23 +228,23 @@ return duration;
  {hasError ? 'Thumbnail Only' : 'Preview'}
 </div>
  )}
-</div>
-</Link>
+</div></Link>
+  <div></Link></div>
   </div>
 
  {/* Video Info */}
- <div className="flex gap-3">
+ <div className="flex gap-3">;
  {/* Channel Avatar */}
  {(video.channelAvatarUrl || video.thumbnail) && (
  <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
- <ImageWithFallback
+ <ImageWithFallback;
  src={video.channelAvatarUrl || video.thumbnail}
   alt={video.channelName || video.channelTitle || 'Channel'}
   className="w-9 h-9 rounded-full object-cover"
  width={36}
  height={36}
  fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName || 'channel'}`}
- />
+ /{">"}
 </Link>
  )}
 
@@ -283,7 +283,7 @@ return duration;
 </span>
 </div>
 </div>
-</div>
+  <div></div></div>
 </div>
  );
 };

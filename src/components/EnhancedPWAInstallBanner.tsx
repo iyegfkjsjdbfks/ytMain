@@ -1,4 +1,4 @@
-// EnhancedPWAInstallBanner - Simple Component
+// EnhancedPWAInstallBanner - Simple Component;
 import React from 'react';
 
 export interface EnhancedPWAInstallBannerProps {
@@ -8,7 +8,7 @@ export interface EnhancedPWAInstallBannerProps {
 
 export const EnhancedPWAInstallBanner = (props: EnhancedPWAInstallBannerProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 

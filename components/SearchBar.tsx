@@ -1,14 +1,14 @@
 import React, { MouseEvent, ChangeEvent, FormEvent, FC, useState, useEffect, useCallback, useRef, memo } from 'react';
 import { useNavigate } from 'react - router - dom';
 
-import { XMarkIcon as XMarkSolidIcon } from '@heroicons / react / 24 / solid'; // For remove button;
-const XMarkIconSolid = XMarkSolidIcon;
+import { XIcon as XMarkSolidIcon } from '@heroicons / react / 24 / solid'; // For remove button;
+const XIconSolid = XMarkSolidIcon;
 
 import { getSearchSuggestions, saveRecentSearch, getRecentSearches, removeRecentSearch, clearAllRecentSearches } from '../services / realVideoService';
 
 import ClockIcon from './icons / ClockIcon'; // For recent searches;
 import SearchIcon from './icons / SearchIcon';
-import SearchSuggestions from 'SearchSuggestions.tsx';
+import SearchSuggestions from 'SearchSuggestions';
 
 const SearchBar: React.FC = memo(() => {}
  const [query, setQuery] = useState < string>('');
@@ -25,7 +25,7 @@ const SearchBar: React.FC = memo(() => {}
  setRecentSearches(fetchedRecent);
  if (fetchedRecent.length > 0) {}
  setShowRecentSearches(true);
- setShowSuggestions(false); // Ensure suggestions are hidden
+ setShowSuggestions(false); // Ensure suggestions are hidden;
  } else {}
  setShowRecentSearches(false);
  }
@@ -36,11 +36,11 @@ const SearchBar: React.FC = memo(() => {}
  const fetched = await getSearchSuggestions(currentQuery);
  setSuggestions(fetched);
  setShowSuggestions(fetched.length > 0);
- setShowRecentSearches(false); // Hide recent searches when showing suggestions
+ setShowRecentSearches(false); // Hide recent searches when showing suggestions;
  } else {}
  setSuggestions([]);
  setShowSuggestions(false);
- // If query becomes empty, try to show recent searches
+ // If query becomes empty, try to show recent searches;
  if (currentQuery.trim().length === 0 && inputRef.current === document.activeElement) {}
  loadRecentSearches().catch(console.error);
  }
@@ -65,7 +65,7 @@ const SearchBar: React.FC = memo(() => {}
  navigate(`/search?q="${encodeURIComponent(trimmedQuery)}`);"
  if (inputRef.current) {}
 inputRef.current.blur();
-} // Optionally blur input after search
+} // Optionally blur input after search;
  };
 
  const handleSubmit = (e: React.FormEvent < HTMLFormElement>) => {}
@@ -89,15 +89,15 @@ inputRef.current.blur();
  const newQuery = e.target.value;
  setQuery(newQuery);
  if (newQuery.trim() === '') {}
- loadRecentSearches().catch(console.error); // Load recent if input becomes empty
+ loadRecentSearches().catch(console.error); // Load recent if input becomes empty;
  } else {}
- setShowRecentSearches(false); // Hide recent if user starts typing
- // Suggestions will be handled by the debounced useEffect
+ setShowRecentSearches(false); // Hide recent if user starts typing;
+ // Suggestions will be handled by the debounced useEffect;
  };
 
  const handleRemoveRecentSearch = async (searchToRemove,
  e: React.MouseEvent): Promise<any> < any> => {}
- e.stopPropagation(); // Prevent click on list item
+ e.stopPropagation(); // Prevent click on list item;
  const updatedSearches = await removeRecentSearch(searchToRemove);
  setRecentSearches(updatedSearches);
  if (updatedSearches.length === 0) {}
@@ -135,7 +135,7 @@ inputRef.current.blur();
  return (
  <div ref={searchBarRef} className="flex - grow max - w - xl mx - 1 sm:mx - 2 md:mx - 4 relative">
  <form onSubmit={(e: React.FormEvent) => handleSubmit(e)} className="flex items - center w - full" role="search">
- <input
+ <input;
  ref={inputRef}
 // FIXED:  type="search"
 // FIXED:  value={query} />
@@ -144,9 +144,9 @@ inputRef.current.blur();
 // FIXED:  placeholder="Search"
 // FIXED:  className={`w - full pl - 3 sm:pl - 4 pr - 8 sm:pr - 10 py - 2 sm:py - 2.5 bg - white border border - neutral - 300,}
  dark:bg - neutral - 900 dark:border - neutral - 700,
- focus:ring - 1 focus:ring - blue - 500 focus:border - blue - 500 focus:bg - white dark:focus:bg - black
- outline - none text - neutral - 900 dark:text - neutral - 50 placeholder - neutral - 500 dark:placeholder - neutral - 400 text - sm shadow - sm
- transition - all duration - 100 ease - in - out
+ focus:ring - 1 focus:ring - blue - 500 focus:border - blue - 500 focus:bg - white dark:focus:bg - black;
+ outline - none text - neutral - 900 dark:text - neutral - 50 placeholder - neutral - 500 dark:placeholder - neutral - 400 text - sm shadow - sm;
+ transition - all duration - 100 ease - in - out;
  ${inputBorderRadiusClass}
  `}
 // FIXED:  aria - label="Search YouTube"
@@ -163,10 +163,10 @@ inputRef.current.blur();
  })()
  }
  />
- <button
+ <button;
 // FIXED:  type="submit"
 // FIXED:  className={`px - 3 sm:px - 4 md:px - 5 py - 2 sm:py - 2.5 bg - neutral - 100 hover:bg - neutral - 200 dark:bg - neutral - 700 dark:hover:bg - neutral - 600 }
- border border - neutral - 300 dark:border - neutral - 700 border - l - 0 
+ border border - neutral - 300 dark:border - neutral - 700 border - l - 0; 
  flex items - center justify - center transition - all duration - 100 ease - in - out min - w-[44px]
  ${buttonBorderRadiusClass}
  `}
@@ -177,7 +177,7 @@ inputRef.current.blur();
 // FIXED:  </form>
  {showSuggestions && suggestions.length > 0 && (}
  <div id="search - suggestions - listbox">
- <SearchSuggestions
+ <SearchSuggestions;
  suggestions={suggestions} />
  onSuggestionClick={(e: React.MouseEvent) => handleSuggestionClick(e)}
  isVisible={showSuggestions}
@@ -185,7 +185,7 @@ inputRef.current.blur();
 // FIXED:  </div>
  )}
  {showRecentSearches && recentSearches.length > 0 && (}
- <ul
+ <ul;
 // FIXED:  id="recent - searches - listbox"
 // FIXED:  className="absolute top - full left - 0 right - 0 mt - 0.5 bg - white dark:bg - neutral - 800 border border - neutral - 300 dark:border - neutral - 700 rounded - b - xl shadow - 2xl z-[101] py - 1 overflow - y - auto max - h - 80 animate - fade - in - fast"
 // FIXED:  aria - label="Recent searches" />
@@ -207,7 +207,7 @@ inputRef.current.blur();
 // FIXED:  aria - label={`Remove ${searchTerm} from recent searches`}
  title="Remove"
  >
- <XMarkIcon className="w - 4 h - 4 text - neutral - 500 dark:text - neutral - 400" />
+ <XIcon className="w - 4 h - 4 text - neutral - 500 dark:text - neutral - 400" />
 // FIXED:  </button>
 // FIXED:  </li>
  ))}
@@ -218,7 +218,7 @@ inputRef.current.blur();
  }
 // FIXED:  className="w - full text - center px - 4 py - 2 text - xs font - medium text - sky - 600 dark:text - sky - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700 / 70 transition - colors"
  >
- Clear all recent searches
+ Clear all recent searches;
 // FIXED:  </button>
 // FIXED:  </li>
 // FIXED:  </ul>

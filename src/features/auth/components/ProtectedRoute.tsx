@@ -1,4 +1,4 @@
-// ProtectedRoute - React Component
+// ProtectedRoute - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface ProtectedRouteProps {
@@ -12,7 +12,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         <h3>Error in ProtectedRoute</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

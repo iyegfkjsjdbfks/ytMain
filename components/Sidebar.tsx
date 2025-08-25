@@ -1,9 +1,9 @@
 import React, { memo, FC, ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { QueueListIcon as QueueListSolidIcon, ChartBarIcon as ChartBarSolidIcon, CogIcon as CogSolidIcon, CurrencyDollarIcon as CurrencyDollarSolidIcon, DocumentTextIcon as DocumentTextSolidIcon, VideoCameraIcon as VideoCameraSolidIcon, ChatBubbleLeftRightIcon as ChatBubbleLeftRightSolidIcon, UserGroupIcon as UserGroupSolidIcon, PaintBrushIcon as PaintBrushSolidIcon, FilmIcon as FilmSolidIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio;
+import { QueueListIcon as QueueListSolidIcon, ChartBarSquareIcon as ChartBarSolidIcon, CogIcon as CogSolidIcon, CurrencyDollarIcon as CurrencyDollarSolidIcon, DocumentTextIcon as DocumentTextSolidIcon, VideoCameraIcon as VideoCameraSolidIcon, ChatBubbleLeftRightIcon as ChatBubbleLeftRightSolidIcon, UserGroupIcon as UserGroupSolidIcon, PaintBrushIcon as PaintBrushSolidIcon, FilmIcon as FilmSolidIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio;
 const QueueListIconSolid = QueueListSolidIcon;
-const ChartBarIconSolid = ChartBarSolidIcon;
+const ChartBarSquareIconSolid = ChartBarSolidIcon;
 const CogIconSolid = CogSolidIcon;
 const CurrencyDollarIconSolid = CurrencyDollarSolidIcon;
 const DocumentTextIconSolid = DocumentTextSolidIcon;
@@ -13,17 +13,17 @@ const UserGroupIconSolid = UserGroupSolidIcon;
 const PaintBrushIconSolid = PaintBrushSolidIcon;
 const FilmIconSolid = FilmSolidIcon;
 
-import ClockIcon from 'icons/ClockIcon.tsx';
-import FireIcon from 'icons/FireIcon.tsx';
-import HistoryIcon from 'icons/HistoryIcon.tsx';
-import HomeIcon from 'icons/HomeIcon.tsx';
-import PlaylistIcon from 'icons/PlaylistIcon.tsx';
-import PlaylistPlayIcon from 'icons/PlaylistPlayIcon.tsx';
-import ShortsIcon from 'icons/ShortsIcon.tsx';
-import SubscriptionsIcon from 'icons/SubscriptionsIcon.tsx';
+import ClockIcon from 'icons/ClockIcon';
+import FireIcon from 'icons/FireIcon';
+import HistoryIcon from 'icons/HistoryIcon';
+import HomeIcon from 'icons/HomeIcon';
+import PlaylistIcon from 'icons/PlaylistIcon';
+import PlaylistPlayIcon from 'icons/PlaylistPlayIcon';
+import ShortsIcon from 'icons/ShortsIcon';
+import SubscriptionsIcon from 'icons/SubscriptionsIcon';
 
 interface SidebarProps {
- isOpen: boolean
+ isOpen: boolean;
 }
 
 interface NavItemProps {
@@ -39,7 +39,7 @@ const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPa
  (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
 
  return (
- <Link
+ <Link;
  to={to}
  title={title || label}
  className={`flex items-center px-3 py-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors duration-150 group ${isActive ? 'bg-neutral-200 dark:bg-neutral-800 font-medium text-neutral-900 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100'}`}
@@ -50,7 +50,7 @@ const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPa
 // FIXED:  </Link>
  );
 });
-NavItem.displayName = 'NavItem'; // For better debugging
+NavItem.displayName = 'NavItem'; // For better debugging;
 
 const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
  const location = useLocation();
@@ -59,14 +59,14 @@ const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
  <>
  {/* Mobile Overlay */}
  {isOpen && (
- <div
+ <div;
 // FIXED:  className="fixed inset-0 bg-black/50 z-30 md:hidden"
 // FIXED:  aria-hidden="true" />
  />
  )}
 
  {/* Desktop Sidebar */}
- <aside
+ <aside;
 // FIXED:  className={'fixed top-14 left-0 z-40 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-all duration-300 ease-in-out overflow-y-auto hidden md:block w-60'}
 // FIXED:  aria-label="Main navigation" />
  >
@@ -94,10 +94,10 @@ const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
 
  <nav className="p-3 space-y-0.5">
  <h3 className="px-3 pt-1 pb-2 text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Creator Studio</h3>
- <NavItem to="/studio" icon={<ChartBarIcon className="w-5 h-5"/>} label="Dashboard" currentPath={location.pathname} title="Studio Dashboard"/>
+ <NavItem to="/studio" icon={<ChartBarSquareIcon className="w-5 h-5"/>} label="Dashboard" currentPath={location.pathname} title="Studio Dashboard"/>
  <NavItem to="/upload" icon={<VideoCameraIcon className="w-5 h-5"/>} label="Upload" currentPath={location.pathname} title="Upload Video"/>
  <NavItem to="/studio/content" icon={<DocumentTextIcon className="w-5 h-5"/>} label="Content" currentPath={location.pathname} title="Content Manager"/>
- <NavItem to="/studio/analytics" icon={<ChartBarIcon className="w-5 h-5"/>} label="Analytics" currentPath={location.pathname} title="Analytics"/>
+ <NavItem to="/studio/analytics" icon={<ChartBarSquareIcon className="w-5 h-5"/>} label="Analytics" currentPath={location.pathname} title="Analytics"/>
  <NavItem to="/studio/comments" icon={<ChatBubbleLeftRightIcon className="w-5 h-5"/>} label="Comments" currentPath={location.pathname} title="Comment Moderation"/>
  <NavItem to="/studio/monetization" icon={<CurrencyDollarIcon className="w-5 h-5"/>} label="Monetization" currentPath={location.pathname} title="Monetization"/>
  <NavItem to="/studio/community" icon={<UserGroupIcon className="w-5 h-5"/>} label="Community" currentPath={location.pathname} title="Community Posts"/>
@@ -118,7 +118,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
 // FIXED:  </aside>
 
  {/* Mobile Sidebar */}
- <aside
+ <aside;
   className={`fixed top-14 left-0 z-50 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-transform duration-300 ease-in-out overflow-y-auto w-64 md:hidden ${isOpen ? 'transform translate-x-0' : 'transform -translate-x-full'}`}
   aria-label="Mobile navigation"
  >
@@ -146,10 +146,10 @@ const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
 
  <nav className="p-3 space-y-0.5">
  <h3 className="px-3 pt-1 pb-2 text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Creator Studio</h3>
- <NavItem to="/studio" icon={<ChartBarIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Dashboard" currentPath={location.pathname} title="Studio Dashboard"/>
+ <NavItem to="/studio" icon={<ChartBarSquareIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Dashboard" currentPath={location.pathname} title="Studio Dashboard"/>
  <NavItem to="/upload" icon={<VideoCameraIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Upload" currentPath={location.pathname} title="Upload Video"/>
  <NavItem to="/studio/content" icon={<DocumentTextIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Content" currentPath={location.pathname} title="Content Manager"/>
- <NavItem to="/studio/analytics" icon={<ChartBarIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Analytics" currentPath={location.pathname} title="Analytics"/>
+ <NavItem to="/studio/analytics" icon={<ChartBarSquareIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Analytics" currentPath={location.pathname} title="Analytics"/>
  <NavItem to="/studio/comments" icon={<ChatBubbleLeftRightIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Comments" currentPath={location.pathname} title="Comment Moderation"/>
  <NavItem to="/studio/monetization" icon={<CurrencyDollarIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Monetization" currentPath={location.pathname} title="Monetization"/>
  <NavItem to="/studio/community" icon={<UserGroupIcon className="w-5 h-5 sm:w-6 sm:h-6"/>} label="Community" currentPath={location.pathname} title="Community Posts"/>

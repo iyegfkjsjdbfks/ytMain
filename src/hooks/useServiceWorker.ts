@@ -1,9 +1,9 @@
-// useServiceWorker - Advanced Hook Implementation
+// useServiceWorker - Advanced Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseServiceWorkerConfig {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -21,7 +21,7 @@ export function useServiceWorker(config: UseServiceWorkerConfig = {}) {
       setLoading(true);
       setError(null);
       
-      // Simulate async operation
+      // Simulate async operation;
       await new Promise(resolve => setTimeout(resolve, 500));
       
       const result = {
@@ -49,7 +49,7 @@ export function useServiceWorker(config: UseServiceWorkerConfig = {}) {
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

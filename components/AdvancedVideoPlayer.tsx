@@ -1,5 +1,5 @@
 import React, { MouseEvent, KeyboardEvent, FC, useState, useEffect, useCallback, useRef } from 'react';
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import { useVideoPlayer } from '../src/hooks/index.ts';
 import type { Video } from '../src/types/core.ts';
 

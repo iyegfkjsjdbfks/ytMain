@@ -1,5 +1,5 @@
 import _React from 'react';
-// useUnifiedApp - Simple Hook
+// useUnifiedApp - Simple Hook;
 import { useState } from 'react';
 
 export function useUnifiedApp() {
@@ -10,7 +10,7 @@ export function useUnifiedApp() {
   return {
     data,
     loading,
-    error
+    error;
   };
 }
 

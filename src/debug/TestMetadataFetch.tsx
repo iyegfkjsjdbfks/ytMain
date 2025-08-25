@@ -1,4 +1,4 @@
-// TestMetadataFetch - React Component
+// TestMetadataFetch - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface TestMetadataFetchProps {
@@ -12,7 +12,7 @@ export const TestMetadataFetch: React.FC<TestMetadataFetchProps> = ({
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const TestMetadataFetch: React.FC<TestMetadataFetchProps> = ({
         <h3>Error in TestMetadataFetch</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

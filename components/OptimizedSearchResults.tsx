@@ -6,14 +6,14 @@ import { performanceMonitor } from '../utils/performance';
 import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import type { Video } from '../types';
 
-// Helper function to convert search results to Video type
+// Helper function to convert search results to Video type;
 const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
 if ('views' in item && 'likes' in item && 'visibility' in item) {
-// Already a Video type
+// Already a Video type;
 return item;
 }
 
- // Convert YouTubeSearchResult or GoogleSearchResult to Video
+ // Convert YouTubeSearchResult or GoogleSearchResult to Video;
  const searchResult = item;
  const now = new Date().toISOString();
  return {
@@ -38,7 +38,7 @@ return item;
  visibility: 'public' as const,
  // Required BaseEntity properties,
  createdAt: now,
- updatedAt: now 
+ updatedAt: now; 
  };
 };
 
@@ -54,7 +54,7 @@ onLoadMore?: () => void;
 hasMore?: boolean;
 }
 
-// Debounce hook for search optimization
+// Debounce hook for search optimization;
 export function useDebounce<T>(value: T, delay: number): T {
  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
@@ -70,7 +70,7 @@ export function useDebounce<T>(value: T, delay: number): T {
  return debouncedValue;
 }
 
-// Memoized sorting functions
+// Memoized sorting functions;
 const sortingFunctions = {
  relevance: (items: any[], query: string) => {
  return items.sort((a: any, b: any) => {
@@ -95,7 +95,7 @@ const sortingFunctions = {
  }
 };
 
-// Helper function to extract video ID for iframe embedding
+// Helper function to extract video ID for iframe embedding;
 const extractVideoId = (video: Video) => {
  let videoId = getYouTubeVideoId(video.videoUrl);
  if (!videoId) {
@@ -111,7 +111,7 @@ const extractVideoId = (video: Video) => {
  return videoId && videoId.length === 11 ? videoId : null;
 };
 
-// YouTube - style search result card component
+// YouTube - style search result card component;
 const YouTubeSearchResultCard: React.FC<{
 item: Video | YouTubeSearchResult | GoogleSearchResult;
 onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
@@ -172,7 +172,7 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  const videoId = extractVideoId(convertedVideo);
 
  const handleCardClick = (e: React.MouseEvent) => {
- // Prevent navigation when clicking on video player
+ // Prevent navigation when clicking on video player;
  if (videoId && (e.target as HTMLElement).closest('iframe, [id*="youtube - player"]')) {
  e.stopPropagation();
  return;
@@ -181,10 +181,10 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  };
 
  return (
- <div
+ <div;
  className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors"
  onClick={(e: React.MouseEvent) => handleCardClick(e)}
- onKeyDown={(e) => {
+ onKeyDown={(e: any) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.preventDefault();
  onVideoClick(item);
@@ -194,37 +194,37 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  tabIndex={0}
  >
  {/* YouTube Player or Thumbnail */}
- <div className="relative flex - shrink - 0">
+ <div className="relative flex - shrink - 0">;
  <div className="w - full sm:w-[480px] h-[270px] sm:h-[270px] aspect - video sm:aspect - auto bg - gray - 200 dark:bg - gray - 700 rounded - xl overflow - hidden">
  {videoId ? (
- <div
+ <div;
  className="w-full h-full"
  onClick={(e: React.MouseEvent) => e.stopPropagation()}
- onKeyDown={(e) => {
+ onKeyDown={(e: any) => {
  if (e.key === 'Enter' || e.key === ' ') {
  e.stopPropagation();
  }
  }}
  role="button"
  tabIndex={0}
- >
- <iframe
+ {">"}
+ <iframe;
  src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0&origin=${encodeURIComponent(window.location.origin)}`}
  title={convertedVideo.title}
  className="w-full h-full border-0 rounded-xl"
  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
- allowFullScreen
+ allowFullScreen;
  loading="lazy"
- />
+ /{">"}
  </div>
  ) : (
  <>
- <img
+ <img;
  src={convertedVideo.thumbnailUrl}
  alt={convertedVideo.title}
  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
  loading="lazy"
- />
+ /{">"}
  {/* Duration badge */}
  {convertedVideo.duration && convertedVideo.duration !== '0:00' && (
  <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-sm font-medium">
@@ -233,40 +233,40 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  )}
  </>
  )}
- </div>
+  <div></div></div>
  </div>
 
  {/* Content */}
- <div className="flex-1 min-w-0">
+ <div className="flex-1 min-w-0">;
  {/* Title */}
- <h3 className="text-lg sm:text-xl font-medium text-gray-900 dark:text-white line-clamp-2 leading-6 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+ <h3 className="text-lg sm:text-xl font-medium text-gray-900 dark:text-white line-clamp-2 leading-6 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">;
  {convertedVideo.title}
- </h3>
+  <div></h3></div>
 
  {/* Minimal metadata line - YouTube style */}
- <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
- <span className="hover:text-gray-900 dark:hover:text-white transition-colors">
+ <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">;
+ <span className = "hover: text-gray-900 dark: hover: text-white transition-colors">
  {convertedVideo.channelName}
  </span>
  <span className="mx-1">•</span>
  <span>{formatViews(convertedVideo.views)} views</span>
  <span className="mx-1">•</span>
  <span>{formatTimeAgo(convertedVideo.uploadedAt)}</span>
- </div>
+  <div></div></div>
 
  {/* Description - only first line visible */}
- <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1 leading-5">
+ <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1 leading-5">;
  {convertedVideo.description}
- </p>
+  <div></p></div>
  </div>
  </div>
  );
 });
 
-// Filter tab types
+// Filter tab types;
 type FilterTab = 'all' | 'videos' | 'channels' | 'playlists' | 'live' | 'shorts';
 
-// Main component
+// Main component;
 const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 videos,
 youtubeVideos,
@@ -276,21 +276,21 @@ query,
 sortBy,
 onVideoClick,
 onLoadMore,
-hasMore = false
+hasMore = false;
 }) => {
 const [activeTab, setActiveTab] = useState<FilterTab>('all');
  const containerRef = React.useRef<HTMLDivElement>(null);
 
- // Debounce query for performance
+ // Debounce query for performance;
  const debouncedQuery = useDebounce(query, 300);
 
- // Intersection observer for infinite scroll
+ // Intersection observer for infinite scroll;
  const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
 threshold: 0.1,
 rootMargin: '100px'
 });
 
- // Combine and sort all results
+ // Combine and sort all results;
  const allResults = useMemo(() => {
  performanceMonitor.startMeasure('search - results - processing');
 
@@ -310,14 +310,14 @@ performanceMonitor.endMeasure('search - results - processing');
  return sorted;
  }, [videos, youtubeVideos, googleSearchVideos, sortBy, debouncedQuery]);
 
- // Filter results based on active tab
+ // Filter results based on active tab;
  const filteredResults = useMemo(() => {
  switch (activeTab as any) {
 case 'videos':
-return allResults; // All our current content are videos
+return allResults; // All our current content are videos;
 case 'channels':
 case 'playlists':
-return []; // Not implemented yet
+return []; // Not implemented yet;
 case 'live':
 return allResults.filter((item) => {
 const video = 'isLive' in item ? item : convertToVideo(item);
@@ -343,14 +343,14 @@ return allResults;
 }
  }, [allResults, activeTab]);
 
- // Handle infinite scroll
+ // Handle infinite scroll;
  useEffect(() => {
 if (isIntersecting && hasMore && !loading && onLoadMore) {
 onLoadMore();
 }
 }, [isIntersecting, hasMore, loading, onLoadMore]);
 
- // Loading skeleton
+ // Loading skeleton;
  const LoadingSkeleton = memo(() => (
  <div className="w-full max-w-[1280px] mx-auto">
  <div className="space-y-4 px-4">
@@ -369,7 +369,7 @@ onLoadMore();
  </div>
  ));
 
- // Empty state
+ // Empty state;
  const EmptyState = memo(() => (
  <div className="flex flex-col items-center justify-center py-12 text-center">
  <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
@@ -397,46 +397,46 @@ onLoadMore();
  {/* YouTube-style filter tabs */}
  <div className="mb-4 px-4">
  <div className="flex items-center gap-3 mb-4 overflow-x-auto scrollbar-hide">
- <button
+ <button;
  onClick={() => setActiveTab('all')}
  className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
  activeTab === 'all'
  ? 'bg-black dark:bg-white text-white dark:text-black'
  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
  }`}
- >
- All
- </button>
- <button
+ {">"}
+ All;
+ </button></div>
+ <button;
  onClick={() => setActiveTab('videos')}
  className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
  activeTab === 'videos'
  ? 'bg-black dark:bg-white text-white dark:text-black'
  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
  }`}
- >
- Videos
- </button>
+ {">"}
+ Videos;
+ </button></div>
  </div>
  </div>
 
  {/* Results header */}
- <div className="mb-4 px-4">
+ <div className="mb-4 px-4">;
  <div className="text-sm text-gray-600 dark:text-gray-400">
- About {filteredResults.length.toLocaleString()} results
+ About {filteredResults.length.toLocaleString()} results;
  </div>
- </div>
+  <div></div></div>
 
  {/* Results */}
  {filteredResults.length > 0 ? (
  <div className="space-y-4 px-4">
  {filteredResults.map((item, index) => (
- <YouTubeSearchResultCard
+ <YouTubeSearchResultCard;
  key={`${item.id}-${index}`}
  item={item}
  onVideoClick={onVideoClick}
- />
- ))}
+ /{">"}
+ )){"}"
  </div>
  ) : (
  <EmptyState />
@@ -448,18 +448,18 @@ onLoadMore();
  {loading ? (
  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
  ) : (
- <button
+ <button;
  onClick={onLoadMore}
  className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
- >
- Load More Videos
- </button>
+ {">"}
+ Load More Videos;
+ </button></div>
  )}
- </div>
+  <div></div></div>
  )}
- </div>
+  <div></div></div>
  );
 };
 
-// Export memoized component
+// Export memoized component;
 export default memo(OptimizedSearchResults);

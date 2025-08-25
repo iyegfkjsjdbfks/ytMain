@@ -1,9 +1,9 @@
-// useModal - Custom Hook
+// useModal - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseModalOptions {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -35,7 +35,7 @@ export function useModal(
       const result = {
         hookName: 'useModal',
         timestamp: Date.now(),
-        success: true
+        success: true;
       };
       
       setData(result);
@@ -57,7 +57,7 @@ export function useModal(
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

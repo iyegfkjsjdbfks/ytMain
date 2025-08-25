@@ -1,8 +1,8 @@
 import _React from 'react';
-// useShortsData - Simple Hook
+// useShortsData - Simple Hook;
 import { useState } from 'react';
 
-// Define a generic short video type
+// Define a generic short video type;
 interface ShortVideo {
   id: string;
   title: string;
@@ -21,11 +21,11 @@ export function useShortsData() {
     data,
     loading,
     error,
-    setData
+    setData;
   };
 }
 
-// Additional shorts-related hook
+// Additional shorts-related hook;
 export function useShortsVideos() {
   const [shortsVideos, setShortsVideos] = useState<ShortVideo[]>([]);
   const [loading, _setLoading] = useState(false);
@@ -35,7 +35,7 @@ export function useShortsVideos() {
     shortsVideos,
     loading,
     error,
-    setShortsVideos
+    setShortsVideos;
   };
 }
 

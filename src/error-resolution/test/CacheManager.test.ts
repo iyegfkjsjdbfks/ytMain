@@ -3,7 +3,7 @@ import { FileManager } from '../utils/FileManager';
 import * as fs from 'fs';
 import * as _path from '_path';
 
-// Mock fs module for testing
+// Mock fs module for testing;
 jest.mock('fs', () => ({
   promises: {
     mkdir: jest.fn(),
@@ -29,11 +29,11 @@ describe('CacheManager', () => {
 
   describe('Cache Cleanup', () => {
     it('should clean up TypeScript cache files', async () => {
-      // Mock file existence and stats
+      // Mock file existence and stats;
       mockFs.access.mockResolvedValue(undefined);
       mockFs.stat.mockResolvedValue({
         isDirectory: () => false,
-        size: 1024
+        size: 1024;
       });
 
       const result = await cacheManager.cleanupTypeScriptCache();
@@ -44,7 +44,7 @@ describe('CacheManager', () => {
     });
 
     it('should handle cleanup errors gracefully', async () => {
-      // Mock file access to throw error
+      // Mock file access to throw error;
       mockFs.access.mockRejectedValue(new Error('File not found'));
 
       const result = await cacheManager.cleanupTypeScriptCache();
@@ -54,12 +54,12 @@ describe('CacheManager', () => {
     });
 
     it('should delete error files by pattern', async () => {
-      // Mock readdir to return matching files
+      // Mock readdir to return matching files;
       mockFs.readdir.mockResolvedValue(['error-analysis.json', 'other-file.txt']);
       mockFs.access.mockResolvedValue(undefined);
       mockFs.stat.mockResolvedValue({
         isFile: () => true,
-        size: 512
+        size: 512;
       });
 
       const result = await cacheManager.deleteErrorFiles();
@@ -73,7 +73,7 @@ describe('CacheManager', () => {
     it('should create backup successfully', async () => {
       const testFiles = ['test1.ts', 'test2.ts'];
       
-      // Mock file operations
+      // Mock file operations;
       mockFs.mkdir.mockResolvedValue(undefined);
       mockFs.access.mockResolvedValue(undefined);
       mockFs.copyFile.mockResolvedValue(undefined);
@@ -99,7 +99,7 @@ describe('CacheManager', () => {
         backupPath: `.test-backups/${backupId}`
       };
 
-      // Mock backup metadata reading
+      // Mock backup metadata reading;
       mockFs.readFile.mockResolvedValue(JSON.stringify(mockBackupInfo));
       mockFs.access.mockResolvedValue(undefined);
       mockFs.mkdir.mockResolvedValue(undefined);
@@ -120,7 +120,7 @@ describe('CacheManager', () => {
         backupPath: '.test-backups/backup-123'
       };
 
-      // Mock directory listing and metadata reading
+      // Mock directory listing and metadata reading;
       mockFs.access.mockResolvedValue(undefined);
       mockFs.readdir.mockResolvedValue(['backup-123']);
       mockFs.readFile.mockResolvedValue(JSON.stringify(mockBackupInfo));
@@ -135,7 +135,7 @@ describe('CacheManager', () => {
     it('should handle backup creation failure', async () => {
       const testFiles = ['nonexistent.ts'];
       
-      // Mock file access to fail
+      // Mock file access to fail;
       mockFs.access.mockRejectedValue(new Error('File not found'));
       mockFs.mkdir.mockResolvedValue(undefined);
 
@@ -168,11 +168,11 @@ describe('CacheManager', () => {
     it('should check file existence', async () => {
       const cacheManagerAny = cacheManager;
       
-      // Mock successful access
+      // Mock successful access;
       mockFs.access.mockResolvedValue(undefined);
       expect(await cacheManagerAny.fileExists('existing-file.ts')).toBe(true);
       
-      // Mock failed access
+      // Mock failed access;
       mockFs.access.mockRejectedValue(new Error('File not found'));
       expect(await cacheManagerAny.fileExists('nonexistent-file.ts')).toBe(false);
     });
@@ -190,7 +190,7 @@ describe('FileManager', () => {
 
   describe('File Operations', () => {
     it('should perform create operation successfully', async () => {
-      mockFs.access.mockRejectedValue(new Error('File not found')); // File doesn't exist
+      mockFs.access.mockRejectedValue(new Error('File not found')); // File doesn't exist;
       mockFs.mkdir.mockResolvedValue(undefined);
       mockFs.writeFile.mockResolvedValue(undefined);
 
@@ -207,7 +207,7 @@ describe('FileManager', () => {
     });
 
     it('should perform update operation with backup', async () => {
-      mockFs.access.mockResolvedValue(undefined); // File exists
+      mockFs.access.mockResolvedValue(undefined); // File exists;
       mockFs.copyFile.mockResolvedValue(undefined);
       mockFs.writeFile.mockResolvedValue(undefined);
 
@@ -215,51 +215,51 @@ describe('FileManager', () => {
         type: 'update' as const,
         source: 'existing-file.ts',
         content: 'console.log("Updated");',
-        backup: true
+        backup: true;
       }];
 
       const results = await fileManager.performOperations(operations);
 
       expect(results[0].success).toBe(true);
       expect(results[0].backupPath).toBeDefined();
-      expect(mockFs.copyFile).toHaveBeenCalled(); // Backup created
+      expect(mockFs.copyFile).toHaveBeenCalled(); // Backup created;
       expect(mockFs.writeFile).toHaveBeenCalledWith('existing-file.ts', 'console.log("Updated");', 'utf8');
     });
 
     it('should perform delete operation with backup', async () => {
-      mockFs.access.mockResolvedValue(undefined); // File exists
+      mockFs.access.mockResolvedValue(undefined); // File exists;
       mockFs.copyFile.mockResolvedValue(undefined);
       mockFs.unlink.mockResolvedValue(undefined);
 
       const operations = [{
         type: 'delete' as const,
         source: 'file-to-delete.ts',
-        backup: true
+        backup: true;
       }];
 
       const results = await fileManager.performOperations(operations);
 
       expect(results[0].success).toBe(true);
       expect(results[0].backupPath).toBeDefined();
-      expect(mockFs.copyFile).toHaveBeenCalled(); // Backup created
+      expect(mockFs.copyFile).toHaveBeenCalled(); // Backup created;
       expect(mockFs.unlink).toHaveBeenCalledWith('file-to-delete.ts');
     });
 
     it('should rollback operations on failure', async () => {
-      // First operation succeeds, second fails
-      mockFs.access
+      // First operation succeeds, second fails;
+      mockFs.access;
         .mockResolvedValueOnce(undefined) // First file exists (delete)
         .mockRejectedValueOnce(new Error('File not found')); // Second file doesn't exist (update fails)
       
       mockFs.copyFile.mockResolvedValue(undefined);
       mockFs.unlink.mockResolvedValue(undefined);
-      mockFs.rename.mockResolvedValue(undefined); // For rollback
+      mockFs.rename.mockResolvedValue(undefined); // For rollback;
 
       const operations = [
         {
           type: 'delete' as const,
           source: 'file1.ts',
-          backup: true
+          backup: true;
         },
         {
           type: 'update' as const,
@@ -272,7 +272,7 @@ describe('FileManager', () => {
 
       expect(results[0].success).toBe(true);
       expect(results[1].success).toBe(false);
-      // Rollback should have been attempted
+      // Rollback should have been attempted;
     });
   });
 
@@ -290,7 +290,7 @@ describe('FileManager', () => {
       const result = await fileManager.validateFile('test.ts');
 
       expect(result.isValid).toBe(true);
-      expect(result.warnings.length).toBeGreaterThan(0); // Should warn about missing semicolon and console.log
+      expect(result.warnings.length).toBeGreaterThan(0); // Should warn about missing semicolon and console.log;
     });
 
     it('should validate JSON files', async () => {
@@ -299,12 +299,12 @@ describe('FileManager', () => {
 
       mockFs.access.mockResolvedValue(undefined);
       
-      // Valid JSON
+      // Valid JSON;
       mockFs.readFile.mockResolvedValue(validJson);
       let result = await fileManager.validateFile('valid.json');
       expect(result.isValid).toBe(true);
 
-      // Invalid JSON
+      // Invalid JSON;
       mockFs.readFile.mockResolvedValue(invalidJson);
       result = await fileManager.validateFile('invalid.json');
       expect(result.isValid).toBe(false);

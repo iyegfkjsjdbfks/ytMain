@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { DataWrapper } from 'DataWrapper.tsx';
+import { DataWrapper } from 'DataWrapper';
 
 interface PageLayoutProps<T> {
  title: string;
@@ -65,14 +65,14 @@ export function PageLayout<T>({
  )}
 // FIXED:  </div>
 
- <DataWrapper
+ <DataWrapper;
  data={data}
  loading={loading}
  error={error}
  loadingSkeleton={renderSkeleton()}
  {...(emptyState && { emptyState })} />
  >
- {(data) => children(data)}
+ {(data: any) => children(data)}
 // FIXED:  </DataWrapper>
 // FIXED:  </div>
  );

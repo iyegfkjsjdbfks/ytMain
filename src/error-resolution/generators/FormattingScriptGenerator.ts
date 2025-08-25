@@ -8,7 +8,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   protected initializeTemplates(): void {
-    // Template for removing trailing spaces
+    // Template for removing trailing spaces;
     this.addTemplate({
       id: 'remove-trailing-spaces',
       name: 'Remove Trailing Spaces',
@@ -36,12 +36,12 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: 'eslint --fix {{filePattern}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 30
+          timeoutSeconds: 30;
         }
       ]
     });
 
-    // Template for fixing missing semicolons
+    // Template for fixing missing semicolons;
     this.addTemplate({
       id: 'add-missing-semicolons',
       name: 'Add Missing Semicolons',
@@ -51,7 +51,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -68,12 +68,12 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for fixing missing commas
+    // Template for fixing missing commas;
     this.addTemplate({
       id: 'add-missing-commas',
       name: 'Add Missing Commas',
@@ -83,7 +83,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -107,12 +107,12 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15
+          timeoutSeconds: 15;
         }
       ]
     });
 
-    // Template for organizing imports
+    // Template for organizing imports;
     this.addTemplate({
       id: 'organize-imports',
       name: 'Organize Imports',
@@ -122,7 +122,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to organize',
-          required: true
+          required: true;
         }
       ],
       commands: [
@@ -139,12 +139,12 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: 'eslint {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 10
+          timeoutSeconds: 10;
         }
       ]
     });
 
-    // Template for fixing indentation
+    // Template for fixing indentation;
     this.addTemplate({
       id: 'fix-indentation',
       name: 'Fix Indentation',
@@ -154,14 +154,14 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true
+          required: true;
         },
         {
           name: 'indentSize',
           type: 'number',
           description: 'Number of spaces for indentation',
           required: false,
-          defaultValue: 2
+          defaultValue: 2;
         }
       ],
       commands: [
@@ -178,7 +178,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: 'eslint {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 10
+          timeoutSeconds: 10;
         }
       ]
     });
@@ -190,7 +190,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     for (const error of errors) {
       let pattern = 'unknown';
 
-      // Group by error patterns
+      // Group by error patterns;
       if (error.message.includes("';' expected")) {
         pattern = 'missing-semicolon';
       } else if (error.message.includes("',' expected")) {
@@ -215,7 +215,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    _context: GenerationContext
+    _context: GenerationContext;
   ): Promise<FixingScript | null> {
     Logger.process({ message: 'Generating formatting script for pattern', pattern, errorCount: errors.length });
 
@@ -223,7 +223,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     let commands: ScriptCommand[] = [];
     let validationChecks: ValidationCheck[] = [];
 
-    // Get unique files affected by these errors
+    // Get unique files affected by these errors;
     const fileSet = new Set(errors.map(e => e.file));
     const affectedFiles = Array.from(fileSet);
 
@@ -274,7 +274,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix missing semicolons
+   * Generates commands to fix missing semicolons;
    */
   private generateSemicolonFixCommands(files: string[]): ScriptCommand[] {
     return files.map(file => ({
@@ -287,13 +287,13 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix missing commas
+   * Generates commands to fix missing commas;
    */
   private generateCommaFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const file of files) {
-      // Fix missing commas in object properties
+      // Fix missing commas in object properties;
       commands.push({
         type: 'replace',
         file,
@@ -302,7 +302,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
         description: `Add missing commas in object properties in ${file}`
       });
 
-      // Fix missing commas in array elements
+      // Fix missing commas in array elements;
       commands.push({
         type: 'replace',
         file,
@@ -311,7 +311,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
         description: `Add missing commas in arrays in ${file}`
       });
 
-      // Fix function parameter commas
+      // Fix function parameter commas;
       commands.push({
         type: 'replace',
         file,
@@ -325,7 +325,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix trailing spaces
+   * Generates commands to fix trailing spaces;
    */
   private generateTrailingSpaceFixCommands(files: string[]): ScriptCommand[] {
     return files.map(file => ({
@@ -338,13 +338,13 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix import issues
+   * Generates commands to fix import issues;
    */
   private generateImportFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const file of files) {
-      // Remove duplicate React imports
+      // Remove duplicate React imports;
       commands.push({
         type: 'replace',
         file,
@@ -353,7 +353,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
         description: `Remove duplicate React imports in ${file}`
       });
 
-      // Standardize import formatting
+      // Standardize import formatting;
       commands.push({
         type: 'replace',
         file,
@@ -376,13 +376,13 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates commands to fix indentation
+   * Generates commands to fix indentation;
    */
   private generateIndentationFixCommands(files: string[]): ScriptCommand[] {
     const commands: ScriptCommand[] = [];
 
     for (const file of files) {
-      // Convert tabs to spaces
+      // Convert tabs to spaces;
       commands.push({
         type: 'replace',
         file,
@@ -391,12 +391,12 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
         description: `Convert tabs to spaces in ${file}`
       });
 
-      // Fix inconsistent spacing
+      // Fix inconsistent spacing;
       commands.push({
         type: 'replace',
         file,
         pattern: /^( {1,3})(\S)/gm,
-        replacement: '  $2', // Normalize to 2 spaces
+        replacement: '  $2', // Normalize to 2 spaces;
         description: `Normalize indentation to 2 spaces in ${file}`
       });
     }
@@ -405,51 +405,51 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Creates syntax validation checks for files
+   * Creates syntax validation checks for files;
    */
   private createSyntaxValidationChecks(files: string[]): ValidationCheck[] {
     return files.map(file => ({
       type: 'syntax' as const,
       command: `npx tsc --noEmit ${file}`,
       expectedResult: 'improved-count' as const,
-      timeoutSeconds: 15
+      timeoutSeconds: 15;
     }));
   }
 
   /**
-   * Creates lint validation checks for files
+   * Creates lint validation checks for files;
    */
   private createLintValidationChecks(files: string[]): ValidationCheck[] {
     return files.map(file => ({
       type: 'lint' as const,
       command: `eslint ${file}`,
       expectedResult: 'improved-count' as const,
-      timeoutSeconds: 10
+      timeoutSeconds: 10;
     }));
   }
 
   /**
-   * Generates a bulk formatting script for all common issues
+   * Generates a bulk formatting script for all common issues;
    */
   public async generateBulkFormattingScript(
-    _context: GenerationContext
+    _context: GenerationContext;
   ): Promise<FixingScript> {
     const scriptId = `formatting-bulk-${Date.now()}`;
     const commands: ScriptCommand[] = [];
     const validationChecks: ValidationCheck[] = [];
 
-    // Get all unique files
+    // Get all unique files;
     const fileSet = new Set((_context.errors || []).map(e => e.file));
     const allFiles = Array.from(fileSet);
 
-    // Add commands for each type of formatting fix
+    // Add commands for each type of formatting fix;
     commands.push(...this.generateTrailingSpaceFixCommands(allFiles));
     commands.push(...this.generateSemicolonFixCommands(allFiles));
     commands.push(...this.generateCommaFixCommands(allFiles));
     commands.push(...this.generateImportFixCommands(allFiles));
     commands.push(...this.generateIndentationFixCommands(allFiles));
 
-    // Add comprehensive validation
+    // Add comprehensive validation;
     validationChecks.push(...this.createLintValidationChecks(allFiles));
     validationChecks.push(...this.createSyntaxValidationChecks(allFiles));
 
@@ -465,7 +465,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   }
 
   /**
-   * Generates a Prettier formatting script
+   * Generates a Prettier formatting script;
    */
   public generatePrettierScript(files: string[]): FixingScript {
     const scriptId = `formatting-prettier-${Date.now()}`;
@@ -489,15 +489,15 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: `npx prettier --write ${files.join(' ')}`,
           expectedResult: 'success',
-          timeoutSeconds: 60
+          timeoutSeconds: 60;
         }
       ],
-      estimatedRuntime: files.length * 100 // 100ms per file
+      estimatedRuntime: files.length * 100 // 100ms per file;
     };
   }
 
   /**
-   * Generates an ESLint auto-fix script
+   * Generates an ESLint auto-fix script;
    */
   public generateESLintScript(files: string[]): FixingScript {
     const scriptId = `formatting-eslint-${Date.now()}`;
@@ -521,10 +521,10 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: `npx eslint --fix ${files.join(' ')}`,
           expectedResult: 'improved-count',
-          timeoutSeconds: 120
+          timeoutSeconds: 120;
         }
       ],
-      estimatedRuntime: files.length * 200 // 200ms per file
+      estimatedRuntime: files.length * 200 // 200ms per file;
     };
   }
 }

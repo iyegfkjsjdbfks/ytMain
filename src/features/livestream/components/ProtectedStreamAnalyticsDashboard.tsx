@@ -1,4 +1,4 @@
-// ProtectedStreamAnalyticsDashboard - React Component
+// ProtectedStreamAnalyticsDashboard - React Component;
 import React, { useState, useEffect } from 'react';
 
 export interface ProtectedStreamAnalyticsDashboardProps {
@@ -12,7 +12,7 @@ export const ProtectedStreamAnalyticsDashboard: React.FC<ProtectedStreamAnalytic
   className = '',
   children,
   onLoad,
-  onError
+  onError;
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -39,7 +39,7 @@ export const ProtectedStreamAnalyticsDashboard: React.FC<ProtectedStreamAnalytic
         <h3>Error in ProtectedStreamAnalyticsDashboard</h3>
         <p>{error.message}</p>
         <button onClick={() => window.location.reload()}>
-          Retry
+          Retry;
         </button>
       </div>
     );

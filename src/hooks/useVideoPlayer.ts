@@ -1,9 +1,9 @@
-// useVideoPlayer - Advanced Hook Implementation
+// useVideoPlayer - Advanced Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseVideoPlayerConfig {
   enabled?: boolean;
-  onSuccess?: (data) => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -21,7 +21,7 @@ export function useVideoPlayer(config: UseVideoPlayerConfig = {}) {
       setLoading(true);
       setError(null);
       
-      // Simulate async operation
+      // Simulate async operation;
       await new Promise(resolve => setTimeout(resolve, 500));
       
       const result = {
@@ -49,7 +49,7 @@ export function useVideoPlayer(config: UseVideoPlayerConfig = {}) {
     data,
     loading,
     error,
-    refetch: fetchData
+    refetch: fetchData;
   };
 }
 

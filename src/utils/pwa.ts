@@ -1,4 +1,4 @@
-// PWA Utilities - Minimal Implementation
+// PWA Utilities - Minimal Implementation;
 export class PWAUtils {
   static isInstallSupported(): boolean {
     return 'serviceWorker' in navigator;
@@ -58,7 +58,7 @@ export class PWAUtils {
         const estimate = await navigator.storage.estimate();
         return {
           used: estimate.usage || 0,
-          available: estimate.quota || 0
+          available: estimate.quota || 0;
         };
       }
     } catch (error) {
@@ -87,14 +87,14 @@ export class PWAUtils {
       return {
         type: connection.type || 'unknown',
         effectiveType: connection.effectiveType || 'unknown',
-        downlink: connection.downlink || 0
+        downlink: connection.downlink || 0;
       };
     }
     
     return {
       type: 'unknown',
       effectiveType: 'unknown',
-      downlink: 0
+      downlink: 0;
     };
   }
 

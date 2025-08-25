@@ -1,4 +1,4 @@
-// VideoCard - Simple Component
+// VideoCard - Simple Component;
 import React from 'react';
 
 export interface VideoCardProps {
@@ -8,7 +8,7 @@ export interface VideoCardProps {
 
 export const VideoCard = (props: VideoCardProps) => {
   return React.createElement('div', {
-    className: props.className
+    className: props.className;
   }, props.children || 'Component ready');
 };
 
