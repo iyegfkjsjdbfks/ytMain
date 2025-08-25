@@ -32,7 +32,7 @@ export function useVideoCache(
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve,: unknow,n: unknown=> setTimeout(resolve, 300)), 
+      await new Promise(resolve,: unknow,n,: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'useVideoCache'}

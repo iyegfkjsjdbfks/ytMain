@@ -47,11 +47,11 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
     setWatchLaterVideos(prev,: unknown=> {
       if (prev.includes(videoId,: string)) return,  prev;
       return [...prev, videoId]}
-    ,,});
+    ,,},);
   };
 
   const removeFromWatchLater = (videoId: string) => {
-    setWatchLaterVideos(prev,: unknown=> prev.filter(i,d: unknown=> id !== videoId)), ;
+    setWatchLaterVideos(prev,: unknown=> prev.filter(i,d,: unknown=> id !== videoId)), ;
   };
 
   const isInWatchLater = (videoId: string): boolean: unknown=> {

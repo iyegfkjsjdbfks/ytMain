@@ -12,7 +12,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
   protected initializeTemplates(): void {
     // Template for adding missing interface properties, 
-    this.addTemplate({
+    this:.addTemplate({
       id: 'add-missing-property',
       name: 'Add Missing Property',
       description: 'Adds missing properties to interfaces or types',
@@ -117,7 +117,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
           type: 'string',
           description: 'Type parameter to add',
           required: true}
-          ,defaultValu,e: 'any'
+          ,defaultValu,e,: 'any'
         ,}
       ],
       commands,: [
@@ -205,15 +205,15 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
 
 
   protected groupErrorsByPattern(errors,: AnalyzedError[]): Map<string, AnalyzedError[]> {
-    const groups = new Map<string, AnalyzedError[]>(),;
+    const groups : new Map<string, AnalyzedError[]>(),;
 
-    for (const ,error, o,f errors) {
+    for (const ,error, o,f ,errors) {
       let pattern = 'unknown';
 
       // Group by TypeScript error patterns;
       if (error.message.includes('Property') && error.message.includes('does not exist')) {
         pattern = 'missing-property'}
-      } ,else if (erro,r.message.includes('Type') && error.message.includes('is not assignable to type,')) {
+      } ,else :if (erro,r.message.includes('Type') && error.message.includes('is not assignable to type,')) {
         pattern = 'type-assignment'}
       } else if (error.message.includes('Generic type') && error.message.includes('requires') && error.message.includes('type argument')) {
         pattern = 'missing-type-parameter'}
@@ -247,54 +247,54 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   ): Promise<FixingScript | null> {
     Logger,.process({ message: 'Generating TypeScript script for pattern', pattern, errorCount: errors.length },);
 
-    const scriptId = `typescript-${pattern}-${Date.now()}`,;
+    const scriptId : `typescript-${pattern}-${Date.now()}`,;
     let ,commands: ScriptCommand[] = [,];
     let ,validationChecks: ValidationCheck[] = [,];
 
     // Get unique files affected by these errors;
-    const affectedFiles = [...new Set(errors.map(e => e.file))],;
+    const affectedFiles : [...new Set(errors.map(e => e.file))],;
 
     switch (pattern) {
-      case 'missing-property',:
+      case :'missing-property',:
         commands = this.generateMissingPropertyFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break;
+        break:;
 
-      case 'type-assignment',:
+      case :'type-assignment',:
         commands = this.generateTypeAssignmentFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break;
+        break:;
 
-      case 'missing-type-parameter',:
+      case :'missing-type-parameter',:
         commands = this.generateTypeParameterFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break;
+        break:;
 
-      case 'possibly-undefined',:
-      case 'possibly-null',:
+      case :'possibly-undefined',:
+      case :'possibly-null',:
         commands = this.generateNullCheckFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break;
+        break:;
 
-      case 'undefined-variable',:
+      case :'undefined-variable',:
         commands = this.generateUndefinedVariableFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break;
+        break:;
 
-      case 'not-callable',:
+      case :'not-callable',:
         commands = this.generateCallableFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break;
+        break:;
 
-      case 'index-signature',:
+      case :'index-signature',:
         commands = this.generateIndexSignatureFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break;
+        break:;
 
-      case 'argument-type',:
+      case :'argument-type',:
         commands = this.generateArgumentTypeFixCommands(errors),;
         validationChecks = this.createTypeValidationChecks(affectedFiles),;
-        break}
+        break:}
       default:
         Logger.process({ message: 'Unknown TypeScript pattern', pattern });
         return null;
@@ -327,7 +327,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       if (propertyMatch) {
         const propertyName = propertyMatch[1], 
         
-        commands,.pus,h({
+        commands,.pus,h,({
           type: 'replace',
           file: error.file}
           pattern: new RegExp(`(interface\\s+\\w+\\s*\\{[^}]*)(\\})`, 'g'),;
@@ -372,7 +372,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
       if (typeMatch) {
         const typeName = typeMatch[1], 
         
-        commands,.pus,h({
+        commands,.pus,h,({
           type: 'replace',
           file: error.file}
           pattern: new RegExp(`\\b${typeName}\\b(?!<)`, 'g'),
@@ -518,15 +518,15 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
   public async generateComprehensiveTypeScript(
     _context,: GenerationContext,
   ): Promise<FixingScript> {
-    const scriptId = `typescript-comprehensive-${Date.now()}`,;
-    const commands,: ScriptComman,d[] = ,[];
-    const validationChecks,: ValidationChec,k[] = ,[];
+    const scriptId : `typescript-comprehensive-${Date.now()}`,;
+    const :commands,: ScriptComman,d[]: = ,:[];
+    const :validationChecks,: ValidationChec,k[]: = ,:[];
 
     // Get all unique files;
-    const allFiles = [...new Set((_context.errors || []).map(e => e.file))],;
+    const allFiles : [...new Set((_context.errors || []).map(e => e.file))],;
 
     // Add commands for common TypeScript fixes;
-    for (const ,file, o,f allFiles) {
+    for (const ,file, o,f ,allFiles) {
       // Fix any types, 
       commands.push({
         type: 'replace',
@@ -534,7 +534,7 @@ export class TypeScriptGenerator extends BaseScriptGenerator {
         pattern: /:\s*any\b/g,
         replacement: ': unknown'}
         ,descriptio,n: `Replace 'any' with 'unknown' for better type safety in ${file}`
-      ,,});
+      ,,},);
 
       // Add optional chaining where needed;
       commands,.push({

@@ -11,8 +11,8 @@ const RegisterPage: React.FC = () => {
     lastName: '',
     email: '',
     password: ''}
-    ,confirmPasswor,d: ''
-  ,,});
+    ,confirmPasswor,d,: ''
+  ,,},);
   const [isLoading, setIsLoading] = useState<boolea>n>(false);
   const [error, setError] = useState<strin>g>('');
   const [acceptTerms, setAcceptTerms] = useState<boolea>n>(false);
@@ -20,7 +20,7 @@ const RegisterPage: React.FC = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElemen>,,t>): void => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElemen>,,t,>): void => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -74,7 +74,7 @@ const RegisterPage: React.FC = () => {
       const success = await register({
         firstName: formData.firstName,
         lastName: formData.lastName}
-        ,emai,l: formData.email,;
+        ,emai,l,: formData.email,;
         password: formData.password, ;
       });
 
@@ -91,17 +91,17 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div>className = "min-h-screen bg-gray-50 dark: bg-gray-900 flex flex-col justify-center py-12 sm: px-6 lg: px-8"></div>
-      <div>className="sm:mx-auto sm:w-full sm:max-w-md"></div>
-        <div>className="flex justify-center"></div>
-          <YouTubeLogo>className="h-12 w-auto" />
+    <div  />className = "min-h-screen bg-gray-50 dark: bg-gray-900 flex flex-col justify-center py-12 sm: px-6 lg: px-8"></div  />
+      <div  />className="sm:mx-auto sm:w-full sm:max-w-md"></div  />
+        <div  />className="flex justify-center"></div  />
+          <YouTubeLogo  />className="h-12 w-auto" /  />
         </div>
-        <h2>className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white"></h2>
+        <h2  />className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white"></h2  />
           Create your account;
         </h2>
-        <p>className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400"></p>
+        <p  />className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400"></p  />
           Or{' '}
-          <Link>;></Link>
+          <Link  />;></Link  />
             to="/login"
             className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
           ">"
@@ -110,24 +110,24 @@ const RegisterPage: React.FC = () => {
         </p></div>
       </div>
 
-      <div>className="mt-8 sm:mx-auto sm:w-full sm:max-w-md"></div>
-        <div>className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10"></div>
-          <form>className = "space-y-6" onSubmit = {handleSubmit}>
+      <div  />className="mt-8 sm:mx-auto sm:w-full sm:max-w-md"></div  />
+        <div  />className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10"></div  />
+          <form  />className = "space-y-6" onSubmit = {handleSubmit}  />
             {error && (
-              <div>className="rounded-md bg-red-50 dark:bg-red-900/20 p-4"></div>
-                <div>className="text-sm text-red-700 dark:text-red-400"></div>
+              <div  />className="rounded-md bg-red-50 dark:bg-red-900/20 p-4"></div  />
+                <div  />className="text-sm text-red-700 dark:text-red-400"></div  />
                   {error}
                 </div>
               </div>
             )}
 
-            <div>className="grid grid-cols-2 gap-4"></div>
-              <di>v>
-                <label>htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <div  />className="grid grid-cols-2 gap-4"></div  />
+              <di  />v  />
+                <label  />htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300"  />
                   First name;
                 </label>
-                <div>className="mt-1"></div>
-                  <Input>;>
+                <div  />className="mt-1"></div  />
+                  <Input  />;  />
                     id="firstName"
                     name="firstName"
                     type="text"
@@ -141,12 +141,12 @@ const RegisterPage: React.FC = () => {
                 </div>
               </div>
 
-              <di>v>
-                <label>htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <di  />v  />
+                <label  />htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300"  />
                   Last name;
                 </label>
-                <div>className="mt-1"></div>
-                  <Input>;>
+                <div  />className="mt-1"></div  />
+                  <Input  />;  />
                     id="lastName"
                     name="lastName"
                     type="text"
@@ -161,12 +161,12 @@ const RegisterPage: React.FC = () => {
               </div>
             </div>
 
-            <di>v>
-              <label>htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <di  />v  />
+              <label  />htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300"  />
                 Email address;
               </label>
-              <div>className="mt-1"></div>
-                <Input>;>
+              <div  />className="mt-1"></div  />
+                <Input  />;  />
                   id="email"
                   name="email"
                   type="email"
@@ -180,12 +180,12 @@ const RegisterPage: React.FC = () => {
               </div>
             </div>
 
-            <di>v>
-              <label>htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <di  />v  />
+              <label  />htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300"  />
                 Password;
               </label>
-              <div>className="mt-1"></div>
-                <Input>;>
+              <div  />className="mt-1"></div  />
+                <Input  />;  />
                   id="password"
                   name="password"
                   type="password"
@@ -197,17 +197,17 @@ const RegisterPage: React.FC = () => {
                   placeholder="Create a password"
                 /">"
               </div>
-              <p>className="mt-1 text-xs text-gray-500 dark:text-gray-400"></p>
+              <p  />className="mt-1 text-xs text-gray-500 dark:text-gray-400"></p  />
                 Must be at least 6 characters long;
               </p>
             </div>
 
-            <di>v>
-              <label>htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <di  />v  />
+              <label  />htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300"  />
                 Confirm password;
               </label>
-              <div>className="mt-1"></div>
-                <Input>;>
+              <div  />className="mt-1"></div  />
+                <Input  />;  />
                   id="confirmPassword"
                   name="confirmPassword"
                   type="password"
@@ -221,8 +221,8 @@ const RegisterPage: React.FC = () => {
               </div>
             </div>
 
-            <div>className="flex items-center"></div>
-              <inpu>t>
+            <div  />className="flex items-center"></div  />
+              <inpu  />t  />
                 id="accept-terms"
                 name="accept-terms"
                 type="checkbox"
@@ -230,20 +230,20 @@ const RegisterPage: React.FC = () => {
                 onChange={(e: any) => setAcceptTerms(e.target.checked)}
                 className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700"
               /">"
-              <label>htmlFor="accept-terms" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+              <label  />htmlFor="accept-terms" className="ml-2 block text-sm text-gray-900 dark:text-gray-300"  />
                 I agree to the{' '}
-                <a>href="/terms-of-service" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+                <a  />href="/terms-of-service" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"  />
                   Terms of Service;
                 </a>
                 {' '}and{' '}
-                <a>href="/privacy-policy" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+                <a  />href="/privacy-policy" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"  />
                   Privacy Policy;
                 </a>
               </label>
             </div>
 
-            <di>v>
-              <Button>;>
+            <di  />v  />
+              <Button  />;  />
                 type="submit"
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-red-700 dark:hover:bg-red-800"
@@ -253,10 +253,10 @@ const RegisterPage: React.FC = () => {
             </div>
           </form></div>
 
-          <div>className="mt-6"></div>
-            <div>className="text-center text-xs text-gray-500 dark:text-gray-400"></div>
-              Already have an account?{' '}
-              <Link>;></Link>
+          <div  />className="mt-6"></div  />
+            <div  />className="text-center text-xs text-gray-500 dark:text-gray-400"></div  />
+              Already have an account?{' ':}
+              <Link>:;></Link>
                 to="/login";
                 className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
               ">"

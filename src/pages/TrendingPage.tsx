@@ -18,19 +18,19 @@ const TrendingPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout>;>
+    <PageLayout  />;  />
       title="Trending"
-      icon={<FireIcon>className="w-8 h-8 text-red-500" />}
+      icon={<FireIcon  />className="w-8 h-8 text-red-500"  />}
       data={trendingVideos}
       loading={loading}
       error={error}
       emptyState={{
         title: 'No trending videos found',
         message: 'Check back later for the latest trending content.', }}
-      headerActions={<CategoryTabs>categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
-    >
-      {(videos: unknown) => <VideoGrid>videos={videos  []} />}
-  <di>v></PageLayout></div>
+      headerActions={<CategoryTabs  />categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory}  />}
+  />
+      {(videos: unknown) => <VideoGrid  />videos={videos  []}  />}
+  <di  />v  /></PageLayout  /></div  />
   );
 };
 

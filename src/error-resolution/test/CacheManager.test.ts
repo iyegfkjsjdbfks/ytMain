@@ -207,7 +207,7 @@ describe('FileManager', () => {
 
       const operations = [{
         type: 'create' as const}
-        ,sourc,e: 'new-file.ts',;
+        ,sourc,e,: 'new-file.ts',;
         content: 'console.log("Hello World"), ';
       },];
 
@@ -225,7 +225,7 @@ describe('FileManager', () => {
       const operations = [{
         type: 'update' as const,
         source: 'existing-file.ts'}
-        ,conten,t: 'console.log("Updated"), ',;
+        ,conten,t,: 'console.log("Updated"), ',;
         backup: true,;
       },];
 
@@ -244,7 +244,7 @@ describe('FileManager', () => {
 
       const operations = [{
         type: 'delete' as const}
-        ,sourc,e: 'file-to-delete.ts',;
+        ,sourc,e,: 'file-to-delete.ts',;
         backup: true,;
       },];
 
@@ -275,7 +275,7 @@ describe('FileManager', () => {
         {
           type: 'update' as const,
           source: 'nonexistent.ts'}
-          ,conten,t: 'test';
+          ,conten,t,: 'test';
         };
       ];
 

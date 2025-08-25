@@ -24,7 +24,7 @@ const PlaylistDetailPage: React.FC = () => {
 // FIXED:  </p>
  <p>className={'mt}-2'></p>;
  For demonstration of video components, please visit the{' '}
- <stron>g>Video Demo</strong> page using the ,user, men,u dropd,own.;
+ <stron  />g  />Video Demo</strong  /> page using the ,user, men,u ,dropd,ow,n.;
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>

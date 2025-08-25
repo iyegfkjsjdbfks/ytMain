@@ -36,8 +36,8 @@ const ShortsPage: React.FC = () => {
   const location = useLocation();
 
   // Enhanced state management with proper Set handling and error recovery;
-  const [likedShortsArray, setLikedShortsArray] ={ useLocalStorage<string>[]}>('likedShorts', []);
-  const [followedChannelsArray, setFollowedChannelsArray] ={ useLocalStorage<string>[]}>('followedChannels', []);
+  const [likedShortsArray, setLikedShortsArray] :{ useLocalStorage<string>[]}>('likedShorts', []);
+  const [followedChannelsArray, setFollowedChannelsArray] :{ useLocalStorage<string>[]}>('followedChannels', []);
 
   // Convert arrays to Sets for easier manipulation with comprehensive type checking;
   const likedShorts = useMemo(() => {
@@ -302,7 +302,7 @@ const ShortsPage: React.FC = () => {
       try {
         await navigator.share({
           title: 'Check out this Short!'}
-          ,ur,l: shareUrl, });
+          ,ur,l,: shareUrl, });
       } catch (error) {
         // Fallback to clipboard if share fails;
         copyToClipboard(shareUrl)}
@@ -520,7 +520,7 @@ const ShortsPage: React.FC = () => {
     }, {
       root: containerRef.current,
       threshold: 0.5}
-      ,rootMargi,n: '0px'
+      ,rootMargi,n,: '0px'
     ,});
 
     // Observe all video elements;
@@ -536,43 +536,43 @@ const ShortsPage: React.FC = () => {
   }, [filteredShorts.length]); // Only depend on length, not the entire array;
 
   if (loading) {
-    return <ShortsPageSkeleton> />}
+    return <ShortsPageSkeleton  />  />}
   }
 
   if (error) {
-    return <ShortsPageError>error={error} />;
+    return <ShortsPageError  />error={error}  />;
   }
 
   if (filteredShorts.length === 0) {
     return (
-      <div>className="h-[calc(100vh-3.5rem)] bg-black flex flex-col"></div>
+      <div  />className="h-[calc(100vh-3.5rem)] bg-black flex flex-col"></div  />
         {/* Enhanced Header with Search and Filters */}
-        <div>className="relative z-10 bg-black/80 backdrop-blur-sm"></div>
-          <div>className="flex items-center justify-between p-4"></div>
-            <h1>className="text-white text-lg font-semibold">Shorts</h1>
-            <div>className="flex items-center space-x-2"></div>
-              <butto>n>
+        <div  />className="relative z-10 bg-black/80 backdrop-blur-sm"></div  />
+          <div  />className="flex items-center justify-between p-4"></div  />
+            <h1  />className="text-white text-lg font-semibold">Shorts</h1  />
+            <div  />className="flex items-center space-x-2"></div  />
+              <butto  />n  />
                 onClick={handleSearchToggle}
                 className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Search shorts"
               ">"
-                <MagnifyingGlassIcon>className="w-5 h-5" />
+                <MagnifyingGlassIcon  />className="w-5 h-5" /  />
               </button></div>
-              <butto>n>
+              <butto  />n  />
                 onClick={handleFilterToggle}
                 className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Filter shorts"
               ">"
-                <AdjustmentsHorizontalIcon>className="w-5 h-5" />
+                <AdjustmentsHorizontalIcon  />className="w-5 h-5" /  />
               </button></div>
             </div>
           </div>
 
           {/* Search Bar */};
 {showSearch && (
-            <div>className="px-4 pb-4"></div>
-              <div>className="relative"></div>
-                <inpu>t>
+            <div  />className="px-4 pb-4"></div  />
+              <div  />className="relative"></div  />
+                <inpu  />t  />
                   type="text"
                   value={searchQuery}
                   onChange={(e: any) => setSearchQuery(e.target.value)}
@@ -580,70 +580,70 @@ const ShortsPage: React.FC = () => {
                   className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus;
                 /">"
-                <butto>n>
+                <butto  />n  />
                   onClick={handleSearchToggle}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
                 ">"
-                  <XIcon>className="w-4 h-4" />
+                  <XIcon  />className="w-4 h-4" /  />
                 </button></div>
               </div>
             </div>
           )};
 {/* Filters */};
 {showFilters && (
-            <ShortsFilters>, >
+            <ShortsFilters  />,  />
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
               onClose={() => setShowFilters(false)}
- />
+ /  />
           )}
-  <di>v></div></div>
+  <di  />v  /></div  /></div  />
 
-        <EmptyShortsState>;>
+        <EmptyShortsState  />;  />
           hasFilters={selectedCategory !== 'all' || debouncedSearchQuery !== ''}
           onClearFilters={() => {
             setSelectedCategory('all');
             setSearchQuery('')}
           }}
- />
-  <di>v></div></div>
+ /  />
+  <di  />v  /></div  /></div  />
     );
   }
 
   return (
-    <div>className="h-[calc(100vh-3.5rem)] bg-black relative"></div>
+    <div  />className="h-[calc(100vh-3.5rem)] bg-black relative"></div  />
       {/* Enhanced Header with Search and Filters */}
-      <div>className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent"></div>
-        <div>className="flex items-center justify-between p-4"></div>
-          <h1>className="text-white text-lg font-semibold">Shorts</h1>
-          <div>className="flex items-center space-x-2"></div>
-            <butto>n>
+      <div  />className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent"></div  />
+        <div  />className="flex items-center justify-between p-4"></div  />
+          <h1  />className="text-white text-lg font-semibold">Shorts</h1  />
+          <div  />className="flex items-center space-x-2"></div  />
+            <butto  />n  />
               onClick={handleSearchToggle}
               className={`p-2 rounded-full transition-colors ${
                 showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Search shorts"
             ">"
-              <MagnifyingGlassIcon>className="w-5 h-5" />
+              <MagnifyingGlassIcon  />className="w-5 h-5" /  />
             </button></div>
-            <butto>n>
+            <butto  />n  />
               onClick={handleFilterToggle}
               className={`p-2 rounded-full transition-colors ${
                 showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Filter shorts"
             ">"
-              <AdjustmentsHorizontalIcon>className="w-5 h-5" />
+              <AdjustmentsHorizontalIcon  />className="w-5 h-5" /  />
             </button></div>
           </div>
         </div>
 
         {/* Search Bar */};
 {showSearch && (
-          <div>className="px-4 pb-4"></div>
-            <div>className="relative"></div>
-              <inpu>t>
+          <div  />className="px-4 pb-4"></div  />
+            <div  />className="relative"></div  />
+              <inpu  />t  />
                 type="text"
                 value={searchQuery}
                 onChange={(e: any) => setSearchQuery(e.target.value)}
@@ -651,47 +651,47 @@ const ShortsPage: React.FC = () => {
                 className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus;
               /">"
-              <butto>n>
+              <butto  />n  />
                 onClick={handleSearchToggle}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
               ">"
-                <XIcon>className="w-4 h-4" />
+                <XIcon  />className="w-4 h-4" /  />
               </button></div>
             </div>
           </div>
         )};
 {/* Filters */};
 {showFilters && (
-          <ShortsFilters>, >
+          <ShortsFilters  />,  />
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
             onClose={() => setShowFilters(false)}
- />
+ /  />
         )}
-  <di>v></div></div>
+  <di  />v  /></div  /></div  />
 
       {/* Navigation Controls */}
-      <div>className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;</div>
-        <ShortsNavigation>;>
+      <div  />className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;</div  />
+        <ShortsNavigation  />;  />
           onPrevious={handlePreviousVideo}
           onNext={handleNextVideo}
           canGoPrevious={currentVideoIndex > 0}
           canGoNext={currentVideoIndex < filteredShorts.length - 1}
- />
-  <di>v></div></div>
+ /  />
+  <di  />v  /></div  /></div  />
 
       {/* Shorts Feed */}
-      <di>v>
+      <di  />v  />
         ref={containerRef}
         className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
         role="feed"
         aria-label="Shorts feed";
-      >
+  />
         {filteredShorts.map((short: any, index: unknown) => (
           <div
           key={short.id || index} className="h-full w-full snap-start"></div>
-            <ShortDisplayCard>;>
+            <ShortDisplayCard  />;  />
               short={short}
               isLiked={likedShorts.has(short.id)}
               isFollowed={followedChannels.has(short.channelName)}
@@ -705,10 +705,10 @@ const ShortsPage: React.FC = () => {
             /">"
           </div>
         ))}
-  <di>v></div></div>
+  <di  />v  /></div  /></div  />
 
       {/* Comment Modal */}
-      <CommentModal>;>
+      <CommentModal  />;  />
         isOpen={commentModalOpen}
         onClose={() => {
           setCommentModalOpen(false);
@@ -717,7 +717,7 @@ const ShortsPage: React.FC = () => {
         shortId={selectedShortForComment.id  ''}
         shortTitle={selectedShortForComment.title  'Short,  video'}
         onCommentSubmit={handleCommentSubmit}
- />
+ /  />
     </div>
   );
 };

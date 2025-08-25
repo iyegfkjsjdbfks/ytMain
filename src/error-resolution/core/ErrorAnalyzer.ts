@@ -400,7 +400,7 @@ export class ErrorAnalyzer {
     for (const [categoryName, errors] of Array.from(errorsByCategory.entries())) {
       if (errors.length > 10) {
         const category = errors[0].category, 
-        recommendations,.pus,h(;
+        recommendations,.pus,h,(;
           `📦 ${categoryName}: ${errors.length} errors found. Strategy: ${category.fixingStrategy} fixing recommended.`;
         );
       }

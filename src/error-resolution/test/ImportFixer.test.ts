@@ -112,13 +112,13 @@ const MyComponent = () => {
           isDefault: true,
           isNamespace: false,
           line: 1}
-          ,originalTex,t: "import React from 'react', "
+          ,originalTex,t,: "import React from 'react', "
         ,},
         {
           importPath: 'react',
           importedItems: ['Component'],
           isDefault: false}
-          ,isNamespac,e: false,;
+          ,isNamespac,e,: false,;
           line: 2,;
           originalText: "import { Component } from 'react';"
         }

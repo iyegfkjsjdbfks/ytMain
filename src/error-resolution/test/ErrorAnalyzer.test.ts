@@ -64,7 +64,7 @@ describe('ErrorAnalyzer', () => {
   describe('Error Analysis', () => {
     it('should handle empty error output', async () => {
       // Mock the captureTypeScriptErrors method to return empty string;
-      jest.spyOn(analyzer, 'captureTypeScriptErrors').mockReturnValue?('');
+      jest.spyOn(analyzer, 'captureTypeScriptErrors').mockReturnValue?(''):;
       
       const result = await analyzer.analyzeErrors();
       

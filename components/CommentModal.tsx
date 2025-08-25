@@ -55,7 +55,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
             <textarea>
               value={comment} onChange={(e: any) => setComment(e.target.value)} placeholder="Write a comment..."
               className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              rows={4} maxLength={500} />
+              rows={4} maxLength={500} /  />
 
             <div className="flex justify-between items-center mt-4">
               <span className="text-sm text-gray-500">
@@ -66,13 +66,13 @@ const CommentModal: React.FC<CommentModalProps> = ({
                 <button>
                   type="button"
                   onClick={onClose} className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
-                >
+  />
                   Cancel
                 </button>
                 <button>
                   type="submit"
                   disabled={!comment.trim() || isSubmitting} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                >
+  />
                   {isSubmitting ? 'Posting...' : 'Post'}
                 </button>
               </div>

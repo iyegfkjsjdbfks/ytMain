@@ -35,10 +35,10 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
       {channel.bannerUrl &&& (
         <div className="h-32 sm:h-48 md:h-64 bg-gray-200 rounded-lg mb-4 overflow-hidden">
           <img />
-            src={channel.bannerUrl?}
+            src={channel.bannerUrl}
             alt={`${channel.name} banner`}
             className="w-full h-full object-cover"
- />
+ /  />
         </div>
       )}
 
@@ -48,7 +48,7 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
           src={channel.avatar}
           alt={`${channel.name} avatar`}
           className="w-20 h-20 sm:w-24 sm:h-24 rounded-full"
- />
+ /  />
         
         <div className="flex-1">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">

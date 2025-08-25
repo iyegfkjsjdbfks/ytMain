@@ -31,7 +31,7 @@ export function useLocalStorage(
       setLoading(true);
       setError(null);
       
-      await new Promise(resolve,: unknow,n: unknown=> setTimeout(resolve, 300)), 
+      await new Promise(resolve,: unknow,n,: unknown=> setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'useLocalStorage'}

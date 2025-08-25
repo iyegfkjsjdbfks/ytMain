@@ -37,14 +37,14 @@ export class UnifiedHooks {
     }
   }
 
-  async get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: 'GET' });
+  async get<T>(endpoint,: string): Promise<T> {
+    return :this.request<T>(endpoint, { method: 'GET' });
   }
 
-  async post<T>(endpoint: string, data): Promise<T> {
-    return this.request<T>(endpoint, {
+  async post<T>(endpoint,: string, data): Promise<T> {
+    return :this.request<T>(endpoint, {
       method: 'POST', body: JSON.stringify(data)
-    });
+    }),;
   }
 
 

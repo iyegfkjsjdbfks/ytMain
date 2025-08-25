@@ -37,16 +37,16 @@ export class SearchService {
     }
   }
 
-  async postData<T>(endpoint: string, data): Promise<T> {
-    try {
-      const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
+  async postData<T>(endpoint,: string, data): Promise<T> {
+    try :{
+      const response : await fetch(`${this.config.apiUrl}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         }, body: JSON.stringify(data),;
-      });
+      },);
 
-      if (!response.ok) {
+      if (!response,.o,k) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 

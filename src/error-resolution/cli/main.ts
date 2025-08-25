@@ -68,7 +68,7 @@ program;
         projectPath: path.resolve(options.project),
         dryRun: options.dryRun || false,
         backup: options.backup !== false}
-        ,maxIteration,s: parseInt(options.maxIterations) || 5,;
+        ,maxIteration,s,: parseInt(options.maxIterations) || 5,;
         timeoutSeconds: 300,;
       });
       
@@ -177,7 +177,7 @@ program;
         projectPath: path.resolve(options.project),
         dryRun: options.dryRun || false,
         backup: !options.noBackup}
-        ,maxIteration,s: 5,;
+        ,maxIteration,s,: 5,;
         timeoutSeconds: 300,;
       });
       

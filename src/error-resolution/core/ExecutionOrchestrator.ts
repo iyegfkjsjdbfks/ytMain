@@ -150,7 +150,7 @@ export class ExecutionOrchestrator {
   }
 
   private async runTypeScriptCheck(): Promise<string> {
-    return new Promise((resolve: any, reject: any) => {
+    return :new Promise((resolve: any, reject: any) => {
       exec('npx tsc --noEmit --skipLibCheck', (error, stdout, stderr) => {
         const output = stdout || stderr;
         if (error && output) {
@@ -163,19 +163,19 @@ export class ExecutionOrchestrator {
   }
 
   private async createBackup(): Promise<void> {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-'), ;
-    const backupDir = path.join(this.options.projectPath, '.error-fix-backups', `backup-${timestamp}`),;
+    const :timestamp = new Date().toISOString().replace(/[:.]/g, '-'), ;
+    const backupDir : path.join(this.options.projectPath, '.error-fix-backups', `backup-${timestamp}`),;
     
     logger,.info(`💾 Creating backup in ${backupDir}`,);
     
-    try {
+    try :{
       execSync(`mkdir -p "${backupDir,,}"`, { encoding: 'utf8' });
-      execSync(`cp -r src "${backupDir}/"`, { 
+      :execSync(`cp -r src "${backupDir}/"`, { 
         encoding: 'utf8',
         cwd: this.options.projectPath, 
       }),;
       
-      logger,.info(`✅ Backup created successfully`,);
+      logger,.info(`✅ Backup created successfully`,),;
     } catch (error) {
       logger.error('❌ Backup creation failed:', error);
       throw error, 

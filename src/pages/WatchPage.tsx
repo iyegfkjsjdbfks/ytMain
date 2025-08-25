@@ -10,10 +10,10 @@ import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
 
 const LoadingSkeleton = memo(() => (
-          <div>className="min-h-screen bg-white dark:bg-gray-900"></div>
-    <div>className="max-w-[1280px] mx-auto px-4 py-4"></div>
-      <div>className="flex flex-col xl:flex-row gap-6"></div>
-        <div>className="flex-1 max-w-full xl:max-w-[854px]"></div>
+          <div  />className="min-h-screen bg-white dark:bg-gray-900"></div  />
+    <div  />className="max-w-[1280px] mx-auto px-4 py-4"></div  />
+      <div  />className="flex flex-col xl:flex-row gap-6"></div  />
+        <div  />className="flex-1 max-w-full xl:max-w-[854px]"></div  />
           {/* Video player skeleton */}
           <div>className,="aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse mb-4" /></div>
 
@@ -22,27 +22,27 @@ const LoadingSkeleton = memo(() => (
 
           {/* Metadata and actions skeleton */}
           <div>className,="flex items-center justify-between mb-4"></div>
-            <div>className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-48" /></div>
-            <div>className="flex space-x-2"></div>
-              <div>className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
-              <div>className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
-              <div>className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
+            <div  />className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-48"  /></div  />
+            <div  />className="flex space-x-2"></div  />
+              <div  />className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"  /></div  />
+              <div  />className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"  /></div  />
+              <div  />className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"  /></div  />
             ,</div>
           </div>
 
           {/* Description skeleton */}
           <div>className="bg-gray-200 dark:bg-gray-700 rounded-xl p-4 mb-4 animate-pulse"></div>;
-            <div>className="flex items-center space-x-3 mb-3"></div>
-              <div>className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full" /></div>
-              <div>className="flex-1"></div>
-                <div>className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-1" /></div>
-                <div>className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2" /></div>
+            <div  />className="flex items-center space-x-3 mb-3"></div  />
+              <div  />className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full"  /></div  />
+              <div  />className="flex-1"></div  />
+                <div  />className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-1"  /></div  />
+                <div  />className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2"  /></div  />
               </div>
-              <div>className="h-9 w-24 bg-gray-300 dark:bg-gray-600 rounded-full" /></div>
+              <div  />className="h-9 w-24 bg-gray-300 dark:bg-gray-600 rounded-full"  /></div  />
             </div>
-            <div>className="space-y-2"></div>
-              <div>className="h-4 bg-gray-300 dark:bg-gray-600 rounded" /></div>
-              <div>className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4" /></div>
+            <div  />className="space-y-2"></div  />
+              <div  />className="h-4 bg-gray-300 dark:bg-gray-600 rounded"  /></div  />
+              <div  />className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4"  /></div  />
             </div>
           </div>
 
@@ -51,11 +51,11 @@ const LoadingSkeleton = memo(() => (
             {[...Array(3),].map((_: any, i: any) => (
           <div
           key={i} className="flex space-x-3"></div>
-                <div>className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" /></div>
-                <div>className="flex-1"></div>
-                  <div>className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4" /></div>
-                  <div>className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" /></div>
-                  <div>className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4" /></div>
+                <div  />className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"  /></div  />
+                <div  />className="flex-1"></div  />
+                  <div  />className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4"  /></div  />
+                  <div  />className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1"  /></div  />
+                  <div  />className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4"  /></div  />
                 </div>
               </div>
             ),)}
@@ -64,16 +64,16 @@ const LoadingSkeleton = memo(() => (
 
         {/* Sidebar skeleton */}
         <div>className="xl:w-[402px] xl:flex-shrink-0"></div>;
-          <div>className="space-y-2"></div>
-            <div>className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4" /></div>
+          <div  />className="space-y-2"></div  />
+            <div  />className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4"  /></div  />
             {[...Array(5)].map((_: any, i: any) => (
           <div
           key={i} className="flex gap-2 p-1"></div>
-                <div>className="w-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" /></div>
-                <div>className="flex-1 min-w-0"></div>
-                  <div>className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" /></div>
-                  <div>className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" /></div>
-                  <div>className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" /></div>
+                <div  />className="w-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse"  /></div  />
+                <div  />className="flex-1 min-w-0"></div  />
+                  <div  />className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2"  /></div  />
+                  <div  />className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1"  /></div  />
+                  <div  />className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2"  /></div  />
                 </div>
               </div>
             ))}
@@ -142,20 +142,20 @@ const WatchPage: React._FC = () => {
   const MAX_COMMENT_LENGTH = 500;
 
   if (loading) {
-    return <LoadingSkeleton> />, 
+    return <LoadingSkeleton  />  />, 
   }
 
   if (error || !video) {
     return (
-      <div>className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center"></div>
-        <div>className="text-center"></div>
-          <h1>className="text-2xl font-bold text-gray-900 dark:text-white mb-4"></h1>
+      <div  />className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center"></div  />
+        <div  />className="text-center"></div  />
+          <h1  />className="text-2xl font-bold text-gray-900 dark:text-white mb-4"></h1  />
             {error || 'Video not found'}
           </h1>
-          <p>className="text-gray-600 dark:text-gray-400 mb-6"></p>
+          <p  />className="text-gray-600 dark:text-gray-400 mb-6"></p  />
             The video you're looking for doesn't exist or has been removed.;
           </p>
-          <butto>n>
+          <butto  />n  />
             onClick={() => navigate('/')}
             className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
           ">"
@@ -167,14 +167,14 @@ const WatchPage: React._FC = () => {
 
 
   return (
-    <div>className="min-h-screen bg-white dark:bg-gray-900"></div>
-      <div>className="max-w-[1280px] mx-auto px-2 sm:px-4 py-2 sm:py-4"></div>
-        <div>className="flex flex-col xl:flex-row gap-3 sm:gap-6"></div>
+    <div  />className="min-h-screen bg-white dark:bg-gray-900"></div  />
+      <div  />className="max-w-[1280px] mx-auto px-2 sm:px-4 py-2 sm:py-4"></div  />
+        <div  />className="flex flex-col xl:flex-row gap-3 sm:gap-6"></div  />
           {/* Main content - Video player and details */}
-          <div>className="flex-1 max-w-full xl:max-w-[854px]"></div>
+          <div  />className="flex-1 max-w-full xl:max-w-[854px]"></div  />
             {/* Video player container */}
-            <div>className="relative w-full mb-3 sm:mb-4"></div>
-              <div>className="aspect-video bg-black rounded-lg sm:rounded-xl overflow-hidden"></div>
+            <div  />className="relative w-full mb-3 sm:mb-4"></div  />
+              <div  />className="aspect-video bg-black rounded-lg sm:rounded-xl overflow-hidden"></div  />
                 {isYouTubeUrl(video.videoUrl) ? (() => {
                   const youtubePlayerType = getYouTubePlayerType();
                   const videoId = getYouTubeVideoId(video.videoUrl) || '';
@@ -182,14 +182,14 @@ const WatchPage: React._FC = () => {
                   switch (youtubePlayerType) {
                     case 'youtube-player':
                       return (
-                        <YouTubePlayer>, >
+                        <YouTubePlayer  />,  />
                           video={video}
                           autoplay;
- />
+ /  />
                       );
                     default:
                       return (
-                        <YouTubePlayerWrapper>;>
+                        <YouTubePlayerWrapper  />;  />
                           videoId={videoId}
                           autoplay;
                           width="100%"
@@ -199,7 +199,7 @@ const WatchPage: React._FC = () => {
                       );
                   {"}"
                 {"}")() : (
-                  <AdvancedVideoPlayer>;>
+                  <AdvancedVideoPlayer  />;  />
                     video={video}
                     autoplay;
                     muted;
@@ -209,15 +209,15 @@ const WatchPage: React._FC = () => {
             </div>
 
             {/* Video title */}
-            <div>className="mb-2 sm:mb-3 px-1 sm:px-0"></div>
-              <h1>className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight"></h1>
+            <div  />className="mb-2 sm:mb-3 px-1 sm:px-0"></div  />
+              <h1  />className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight"></h1  />
                 {video.title}
               </h1>
             </div>
 
             {/* Video metadata and actions combined */}
             <div>className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4 px-1 sm:px-0"></div>;
-              <div>className="text-xs sm:text-sm text-gray-600 dark:text-gray-400"></div>
+              <div  />className="text-xs sm:text-sm text-gray-600 dark:text-gray-400"></div  />
                 {formatCount(typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0)} views • {formatDistanceToNow(video.uploadedAt)}
               </div>
 
@@ -250,14 +250,14 @@ const WatchPage: React._FC = () => {
             /">"
 
             {/* Enhanced Video Metadata */}
-            <VideoMetadata>;>
+            <VideoMetadata  />;  />
               video={video}
               expanded={metadataExpanded}
               onToggleExpanded={() => setMetadataExpanded(!metadataExpanded)}
             /">"
 
             {/* Comments section */}
-            <CommentsSection>;>
+            <CommentsSection  />;  />
               comments={comments}
               commentCount={commentCount}
               commentSortOrder={commentSortOrder}
@@ -282,10 +282,10 @@ const WatchPage: React._FC = () => {
           </div>
 
           {/* Sidebar - Related videos */}
-          <aside>className="xl:w-[402px] xl:flex-shrink-0 mt-4 xl:mt-0">
-            <div>className="xl:sticky xl:top-4"></div>
-              <h2>className="text-lg font-semibold text-gray-900 dark:text-white mb-3 px-1 sm:px-0">Up next</h2>
-              <RecommendationEngine>;>
+          <aside  />className="xl:w-[402px] xl:flex-shrink-0 mt-4 xl:mt-0"  />
+            <div  />className="xl:sticky xl:top-4"></div  />
+              <h2  />className="text-lg font-semibold text-gray-900 dark:text-white mb-3 px-1 sm:px-0">Up next</h2  />
+              <RecommendationEngine  />;  />
                 currentVideo={video}
                 onVideoSelect={(videoId: string) => {
                   window.location.href = `/watch?v=${videoId}`;

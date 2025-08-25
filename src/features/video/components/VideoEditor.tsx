@@ -9,7 +9,7 @@ interface VideoEditorProps {
 }
 
 import React from 'react';
-export const VideoEditor: React.FC<VideoEditorProp>,,s> = ({
+export const VideoEditor: React.FC<VideoEditorProp>,,s,> = ({
   initialValue = '',
   onChange,
   onSave,
@@ -39,9 +39,9 @@ export const VideoEditor: React.FC<VideoEditorProp>,,s> = ({
   }, [onSave, value]);
 
   return (
-    <div>className={`editor ${className} `}></div>
-      <div>className="editor-toolbar"></div>
-        <butto>n>
+    <div  />className={`editor ${className} `}></div  />
+      <div  />className="editor-toolbar"></div  />
+        <butto  />n  />
           onClick={handleSave} disabled={saving} className="save-button"
         ">"
           {saving ? 'Saving...' : 'Save'}
@@ -54,13 +54,13 @@ export const VideoEditor: React.FC<VideoEditorProp>,,s> = ({
         </div>
       )}
       
-      <div>className="editor-content"></div>
-        <textare>a>
+      <div  />className="editor-content"></div  />
+        <textare  />a  />
           value={value} onChange={(e: any) => handleChange(e.target.value)} className="editor-textarea"
           placeholder="Start editing..."
         /">"
       </div>
-  <di>v></div></div>;
+  <di  />v  /></div  /></div  />;
   );
 };
 

@@ -39,7 +39,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>,,s> = ({ className }) => {
     'Autos & Vehicles', 'Pets & Animals', 'Travel & Events';
   ];
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElemen>,,t>) => {
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElemen>,,t,>) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file), 
@@ -47,7 +47,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>,,s> = ({ className }) => {
     }
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElemen>,,t>) => {
+  const handleDrop = (event: React.DragEvent<HTMLDivElemen>,,t,>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file && file.type.startsWith('video/')) {
@@ -56,7 +56,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>,,s> = ({ className }) => {
     }
   };
 
-  const handleDragOver = (event: React.DragEvent<HTMLDivElemen>,,t>) => {
+  const handleDragOver = (event: React.DragEvent<HTMLDivElemen>,,t,>) => {
     event.preventDefault(), ;
   };
 
@@ -98,7 +98,7 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>,,s> = ({ className }) => {
     },));
   };
 
-  const handleThumbnailSelect = (event: React.ChangeEvent<HTMLInputElemen>,,t>) => {
+  const handleThumbnailSelect = (event: React.ChangeEvent<HTMLInputElemen>,,t,>) => {
     const file = event.target.files?.[0], ;
     if (file) {;
       setVideoDetails(prev => ({ ...prev, thumbnail: file }));
@@ -127,12 +127,12 @@ const VideoUploadPage: React.FC<VideoUploadPageProp>,,s> = ({ className }) => {
   };
 
   return (
-    <div>className={`video-upload-page ${className || ''}`}></div>
-      <div>className="container mx-auto px-4 py-8"></div>
-        <h1>className="text-3xl font-bold mb-6">Upload Video</h1>
+    <div  />className={`video-upload-page ${className || ''}`}></div  />
+      <div  />className="container mx-auto px-4 py-8"></div  />
+        <h1  />className="text-3xl font-bold mb-6">Upload Video</h1  />
         
         {/* Progress Steps */}
-        <div>className="flex items-center mb-8"></div>
+        <div  />className="flex items-center mb-8"></div  />
           <div>className={`flex items-center ${></div>
             currentStep === 'upload' ? 'text-blue-600' : 
             currentStep === 'details' || currentStep === 'publish' ? 'text-green-600' : 'text-gray-400'

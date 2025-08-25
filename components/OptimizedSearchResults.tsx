@@ -99,7 +99,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({ query, 
                   src={result.thumbnail}
                   alt={result.title}
                   className="w-40 h-24 object-cover rounded"
- />
+ /  />
               </div>
               <div className="flex-1">
                 <h3 className="font-medium text-lg mb-1">{result.title}</h3>
@@ -118,7 +118,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({ query, 
                   src={result.avatar}
                   alt={result.title}
                   className="w-16 h-16 rounded-full"
- />
+ /  />
               </div>
               <div className="flex-1">
                 <h3 className="font-medium text-lg mb-1">{result.title}</h3>
