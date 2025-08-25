@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-08-25T18:44:22.628Z",
+  "duration": "3 seconds",
+  "initialErrors": 9981,
+  "finalErrors": 10292,
+  "errorsFixed": -311,
+  "successRate": "-3.1%",
+  "fixedByType": {
+    "missingSemicolon": 224,
+    "caseSemicolon": 58,
+    "defaultSemicolon": 6,
+    "destructuringComma": 87,
+    "unterminatedTemplate": 626,
+    "tripleAmpersand": 1,
+    "emptyExpression": 1,
+    "jsxClosingSlash": 75
+  },
+  "targetedErrorTypes": [
+    "TS1005",
+    "TS1109",
+    "TS1128",
+    "TS1136",
+    "TS1382"
+  ]
+}

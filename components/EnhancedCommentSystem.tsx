@@ -388,14 +388,14 @@ const EnhancedCommentSystem: React.FC < EnhancedCommentSystemProps> = ({, }) => 
  const pinnedComments = topLevelComments.filter((comment: any) => comment.isPinned);
  const regularComments = topLevelComments.filter((comment: any) => !comment.isPinned);
 
- const sorted = regularComments.sort((a,))
+ const sorted = regularComments.sort((a,));
  b) => {}
  switch (sortBy) {}
- case 'newest':;
+ case 'newest':
  return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
- case 'oldest':;
+ case 'oldest':
  return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
- case 'popular':;
+ case 'popular':
  return b.likes - a.likes;
  default: return 0;
 

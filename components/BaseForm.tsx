@@ -102,14 +102,14 @@ const BaseForm: FC<BaseFormProps> = ({)
       className: `form - input ${errors[field.name] ? 'error' : ''}`;
 
     switch (field.type) {
-      case 'textarea':;
+      case 'textarea':
         return (
           <textarea;>
             {...commonProps}
             placeholder={field.placeholder}
             rows={field.rows || 4} />
       
-      case 'select':;
+      case 'select':
         return (
           <select {...commonProps}>
             <option value="">{field.placeholder || `Select ${field.label}`}</option>
@@ -118,21 +118,21 @@ const BaseForm: FC<BaseFormProps> = ({)
                 {option.label}
               </option>
           </select>
-      case 'checkbox':;
+      case 'checkbox':
         return (
           <input;>
             {...commonProps}
             type="checkbox";
             checked={formData[field.name] || false} />
       
-      case 'file':;
+      case 'file':
         return (
           <input;>
             {...commonProps}
             type="file";
             accept={field.accept} />
       
-      default:;
+      default:
         return (
           <input;>
             {...commonProps}

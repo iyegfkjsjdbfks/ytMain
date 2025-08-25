@@ -117,7 +117,7 @@ const CommunityPosts: React.FC < CommunityPostsProps> = ({, }) => {
           key={index}
 // FIXED:  src={image, }
 // FIXED:  alt={`Post ${index + 1}`, }
-// FIXED:  className="w - full h - 48 object - cover rounded - lg cursor - pointer hover:opacity - 90 transition - opacity" / / />
+// FIXED:  className="w - full h - 48 object - cover rounded - lg cursor - pointer hover:opacity - 90 transition - opacity" / />
 // FIXED:  onClick={() => {, }
  // Open image in modal / lightbox; />
 // FIXED:  </div>

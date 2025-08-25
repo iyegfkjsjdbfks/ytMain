@@ -1,0 +1,40 @@
+import React, { useCallback, FC } from 'react';
+import { conditionalLogger } from '../../../utils/conditionalLogger.ts';
+
+import { DataFetchErrorBoundary } from '../../../components/ErrorBoundaries/index.tsx';
+import StreamAnalyticsDashboard from 'StreamAnalyticsDashboard.tsx';
+
+interface ProtectedStreamAnalyticsDashboardProps {
+ streamId: string;
+ className?: string;
+}
+
+/**
+ * StreamAnalyticsDashboard wrapped with specialized error boundary
+ * Provides enhanced error handling for analytics data fetching
+ */
+const ProtectedStreamAnalyticsDashboard: FC<
+ ProtectedStreamAnalyticsDashboardProps
+> = ({ streamId, className }: any) => {
+ const handleRetry = useCallback(() => {
+ conditionalLogger.debug('Retrying analytics dashboard data fetch', {
+ streamId });
+ // The error boundary will reset and re-render the component
+ // Additional retry logic can be implemented here if needed
+ }, [streamId]);
+
+ return (
+ <DataFetchErrorBoundary
+ dataType='analytics data'
+ onRetry={handleRetry}
+ showOfflineMessage={true} />
+ >
+ <StreamAnalyticsDashboard
+ streamId={streamId}
+ {...(className && { className })} />
+ />
+// FIXED:  </DataFetchErrorBoundary>
+ );
+};
+
+export default ProtectedStreamAnalyticsDashboard;
