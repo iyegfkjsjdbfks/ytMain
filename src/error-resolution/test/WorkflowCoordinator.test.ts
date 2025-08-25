@@ -9,17 +9,17 @@ describe('WorkflowCoordinator', () => {
 
   beforeEach(() => {
     mockLogger = global.createMockLogger();
-    coordinator = new WorkflowCoordinator(mockLogger), 
+    coordinator = new WorkflowCoordinator(mockLogger)}
   });
 
   afterEach(() => {
-    jest.clearAllMocks(), 
+    jest.clearAllMocks()}
   });
 
   describe('initialization', () => {
     it('should initialize with default components', () => {
       expect(coordinator).toBeDefined();
-      expect(mockLogger.info).toHaveBeenCalledWith('WORKFLOW', 'Workflow coordinator initialized'), 
+      expect(mockLogger.info).toHaveBeenCalledWith('WORKFLOW', 'Workflow coordinator initialized')}
     });
 
     it('should have correct statistics after initialization', () => {
@@ -33,7 +33,7 @@ describe('WorkflowCoordinator', () => {
       expect(stats.components.validationEngine).toBe(true);
       expect(stats.components.reportGenerator).toBe(true);
       expect(stats.components.rollbackManager).toBe(true);
-      expect(stats.components.processMonitor).toBe(true), 
+      expect(stats.components.processMonitor).toBe(true)}
     });
   });
 
@@ -44,7 +44,7 @@ describe('WorkflowCoordinator', () => {
       expect(status.isRunning).toBe(false);
       expect(status.currentPhase).toBeUndefined();
       expect(status.progress).toBeUndefined();
-      expect(status.elapsedTime).toBeUndefined(), 
+      expect(status.elapsedTime).toBeUndefined()}
     });
   });
 
@@ -54,8 +54,8 @@ describe('WorkflowCoordinator', () => {
         id: 'custom-test-phase',
         name: 'Custom Test Phase',
         description: 'A test phase for unit testing',
-        dependencies: [],
-        required: false,
+        dependencies: []}
+        required: false,;
         execute: jest.fn();
       };
 
@@ -69,8 +69,8 @@ describe('WorkflowCoordinator', () => {
         id: 'removable-phase',
         name: 'Removable Phase',
         description: 'A phase that will be removed',
-        dependencies: [],
-        required: false,
+        dependencies: []}
+        required: false,;
         execute: jest.fn();
       };
 
@@ -91,8 +91,8 @@ describe('WorkflowCoordinator', () => {
         timeoutSeconds: 30,
         maxRetries: 1,
         rollbackOnFailure: false,
-        continueOnValidationFailure: true,
-        generateReports: false,
+        continueOnValidationFailure: true}
+        generateReports: false,;
         reportFormats: [] as,  const, ;
       };
 
@@ -108,10 +108,10 @@ describe('WorkflowCoordinator', () => {
         expect(result.initialErrorCount).toBeDefined();
         expect(result.finalErrorCount).toBeDefined();
         expect(result.errorsFixed).toBeDefined();
-        expect(result.executionTime).toBeGreaterThan(0), 
+        expect(result.executionTime).toBeGreaterThan(0)}
       } catch (error) {
         // Expected to fail due to mocked dependencies, but should not crash;
-        expect(error).toBeDefined(), 
+        expect(error).toBeDefined()}
       }
     });
   });
@@ -120,7 +120,7 @@ describe('WorkflowCoordinator', () => {
     it('should handle stop workflow when no workflow is running', async () => {
       await coordinator.stopWorkflow('Test stop');
       
-      expect(mockLogger.warn).toHaveBeenCalledWith('WORKFLOW', 'No workflow running to stop'), 
+      expect(mockLogger.warn).toHaveBeenCalledWith('WORKFLOW', 'No workflow running to stop')}
     });
   });
 });

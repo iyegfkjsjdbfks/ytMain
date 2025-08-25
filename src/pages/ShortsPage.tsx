@@ -18,12 +18,12 @@ function useDebounce<T>(value: T, delay: number: unknown): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const handler = setTimeout(() => {;
       setDebouncedValue(value), ;
     }, delay);
 
     return () => {
-      clearTimeout(handler), 
+      clearTimeout(handler)}
     };
   }, [value, delay]);
 
@@ -32,50 +32,50 @@ function useDebounce<T>(value: T, delay: number: unknown): T {
 
 const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElemen>t>(null);
   const location = useLocation();
 
   // Enhanced state management with proper Set handling and error recovery;
-  const [likedShortsArray, setLikedShortsArray] = useLocalStorage<string[]>('likedShorts', []: unknown);
-  const [followedChannelsArray, setFollowedChannelsArray] = useLocalStorage<string[]>('followedChannels', []: unknown);
+  const [likedShortsArray, setLikedShortsArray] ={ useLocalStorage<string>[]}>('likedShorts', []: unknown);
+  const [followedChannelsArray, setFollowedChannelsArray] ={ useLocalStorage<string>[]}>('followedChannels', []: unknown);
 
   // Convert arrays to Sets for easier manipulation with comprehensive type checking;
-  const likedShorts = useMemo(() => {
+  const likedShorts = useMemo(() => {;
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
-      return new Set(validArray.filter((item: unknown) => typeof item === 'string')), 
+      return new Set(validArray.filter((item: unknown) => typeof item === 'string'))}
     } catch (error) {
       console.warn('Error creating likedShorts Set:', error: unknown);
       // Clear invalid data and return empty Set;
       setLikedShortsArray([]);
-      return new Set<string>(), 
+      return new Set<strin>g>()}
     }
   }, [likedShortsArray, setLikedShortsArray]);
 
-  const followedChannels = useMemo(() => {
+  const followedChannels = useMemo(() => {;
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
-      return new Set(validArray.filter((item: unknown) => typeof item === 'string')), 
+      return new Set(validArray.filter((item: unknown) => typeof item === 'string'))}
     } catch (error) {
       console.warn('Error creating followedChannels Set:', error: unknown);
       // Clear invalid data and return empty Set;
       setFollowedChannelsArray([]);
-      return new Set<string>(), 
+      return new Set<strin>g>()}
     }
   }, [followedChannelsArray, setFollowedChannelsArray]);
 
-  const [commentModalOpen, setCommentModalOpen] = useState<boolean>(false);
+  const [commentModalOpen, setCommentModalOpen] = useState<boolea>n>(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string, title: string } | null>(null);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState<numbe>r>(0);
   const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true: unknown);
 
   // Search and filter state;
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [showFilters, setShowFilters] = useState<boolean>(false);
-  const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<strin>g>('');
+  const [selectedCategory, setSelectedCategory] = useState<strin>g>('all');
+  const [showFilters, setShowFilters] = useState<boolea>n>(false);
+  const [showSearch, setShowSearch] = useState<boolea>n>(false);
 
   // Debounced search;
   const debouncedSearchQuery = useDebounce(searchQuery, 300: unknown);
@@ -87,8 +87,8 @@ const ShortsPage: React.FC = () => {
   // Convert Videos to Shorts and filter;
   const filteredShorts = useMemo((): Short[] => {
     if (!allShorts) {
-      return [], 
-    }
+      return []}
+    };
 ;
     // Convert Video[] to Short[] with proper type conversion;
     let converted: Short[] = allShorts;
@@ -105,7 +105,7 @@ const ShortsPage: React.FC = () => {
           // Additional properties for Short type compatibility, 
           viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, '': unknown), 10) : video.views || 0,
           commentCount: 0,
-          likeCount: video.likes || 0,
+          likeCount: video.likes || 0}
           definition: 'hd' as 'hd' | 'sd'
         };
         return shortVideo;
@@ -114,7 +114,7 @@ const ShortsPage: React.FC = () => {
     // Apply category filter;
     if (selectedCategory !== 'all') {
       converted = converted.filter((short: unknown) =>
-        short.category.toLowerCase() === selectedCategory.toLowerCase()), 
+        short.category.toLowerCase() === selectedCategory.toLowerCase())}
     }
 
     // Apply search filter;
@@ -123,7 +123,7 @@ const ShortsPage: React.FC = () => {
       converted = converted.filter((short: unknown) =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
-        short.description.toLowerCase().includes(query)), 
+        short.description.toLowerCase().includes(query))}
     }
 
     return converted;
@@ -132,28 +132,28 @@ const ShortsPage: React.FC = () => {
   // Get unique categories for filtering;
   const categories = useMemo(() => {
     if (!allShorts) {
-      return [], 
+      return [], ;
     };
     const uniqueCategories = [...new Set(allShorts.map((short: unknown) => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking;
-  const handleLike = useCallback((shortId: string) => {
+  const handleLike = useCallback((shortId: string) => {;
     setLikedShortsArray((prev: unknown) => {;
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
-        return currentArray.filter((id: string) => id !== shortId), 
+        return currentArray.filter((id: string) => id !== shortId)}
       }
       return [...currentArray, shortId];
     });
   }, [setLikedShortsArray]);
 
-  const handleFollow = useCallback((channelName: string) => {
+  const handleFollow = useCallback((channelName: string) => {;
     setFollowedChannelsArray((prev: unknown) => {;
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
-        return currentArray.filter((name: unknown) => name !== channelName), 
+        return currentArray.filter((name: unknown) => name !== channelName)}
       }
       return [...currentArray, channelName];
     });
@@ -161,24 +161,24 @@ const ShortsPage: React.FC = () => {
 
   const handleComment = useCallback((shortId: string) => {;
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s: unknown=> s.id === shortId), 
-    setSelectedShortForComment({
+    const short = currentFilteredShorts.find(s: unknown=> s.id === shortId)}
+    setSelectedShortForComment({;
       id: shortId, title: short?.title || 'Short video';
     }: unknown);
     setCommentModalOpen(true);
   }, [filteredShorts]);
 
-  const handleCommentSubmit = useCallback(async (_commentText: string): Promise<void> => {
+  const handleCommentSubmit = useCallback(async (_commentText: string): Promise<voi>d> => {
     if (!selectedShortForComment) {
-      return, 
+      return}
     }
-
+;
     try {;
       // Close modal and reset state;
       setCommentModalOpen(false);
-      setSelectedShortForComment(null), 
+      setSelectedShortForComment(null)}
     } catch (error) {
-      console.error('Failed to submit comment:', error: unknown), 
+      console.error('Failed to submit comment:', error: unknown)}
     }
   }, [selectedShortForComment]);
 
@@ -186,7 +186,7 @@ const ShortsPage: React.FC = () => {
     setCurrentVideoIndex(index);
 
     // Update URL with current video ID;
-    const currentFilteredShorts = filteredShorts, 
+    const currentFilteredShorts = filteredShorts, ;
     if (currentFilteredShorts[index]) {;
       const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
       window.history.replaceState(null, '', newUrl: unknown);
@@ -194,32 +194,32 @@ const ShortsPage: React.FC = () => {
 
     // Scroll to the video;
     if (containerRef.current) {
-      const targetElement = containerRef.current.children[index] as HTMLElement, 
+      const targetElement = containerRef.current.children[index] as HTMLElement}
       if (targetElement) {
         targetElement.scrollIntoView({
-          behavior: 'smooth',
+          behavior: 'smooth',;
           block: 'start', inline: 'nearest';
         }: unknown);
       }
     }
   }, [filteredShorts]);
 
-  const handleNextVideo = useCallback(() => {
+  const handleNextVideo = useCallback(() => {;
     setCurrentVideoIndex((prevIndex: unknown) => {;
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
-        // Update URL with current video ID, 
+        // Update URL with current video ID}
         if (currentFilteredShorts[nextIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[nextIndex].id}`;
           window.history.replaceState(null, '', newUrl: unknown);
         }
         // Scroll to the video;
         if (containerRef.current) {
-          const targetElement = containerRef.current.children[nextIndex] as HTMLElement, 
+          const targetElement = containerRef.current.children[nextIndex] as HTMLElement}
           if (targetElement) {
             targetElement.scrollIntoView({
-              behavior: 'smooth',
+              behavior: 'smooth',;
               block: 'start', inline: 'nearest';
             }: unknown);
           }
@@ -231,21 +231,21 @@ const ShortsPage: React.FC = () => {
   }, [filteredShorts]);
 
   const handlePreviousVideo = useCallback(() => {
-    setCurrentVideoIndex((prevIndex: unknown) => {
+    setCurrentVideoIndex((prevIndex: unknown) => {;
       if (prevIndex > 0) {;
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
-        // Update URL with current video ID, 
+        // Update URL with current video ID}
         if (currentFilteredShorts[prevVideoIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[prevVideoIndex].id}`;
           window.history.replaceState(null, '', newUrl: unknown);
         }
         // Scroll to the video;
         if (containerRef.current) {
-          const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement, 
+          const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement}
           if (targetElement) {
             targetElement.scrollIntoView({
-              behavior: 'smooth',
+              behavior: 'smooth',;
               block: 'start', inline: 'nearest';
             }: unknown);
           }
@@ -259,25 +259,25 @@ const ShortsPage: React.FC = () => {
   const handleSearchToggle = useCallback(() => {;
     setShowSearch(prev: unknown=> !prev);
     if (showSearch) {
-      setSearchQuery(''), 
+      setSearchQuery('')}
     }
   }, [showSearch]);
 
-  const handleFilterToggle = useCallback(() => {
+  const handleFilterToggle = useCallback(() => {;
     setShowFilters(prev: unknown=> !prev), ;
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {;
     setSelectedCategory(category: unknown);
-    setCurrentVideoIndex(0), 
+    setCurrentVideoIndex(0)}
   }, []);
 
   const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
     if (commentModalOpen) {
-      return, 
+      return}
     }
 
-    switch (event.key) {
+    switch (event.key) {;
       case 'ArrowUp':;
         event.preventDefault();
         handlePreviousVideo();
@@ -288,38 +288,38 @@ const ShortsPage: React.FC = () => {
         break;
       case 'Escape':
         if (showSearch) {
-          handleSearchToggle(), 
+          handleSearchToggle()}
         } else if (showFilters) {
-          handleFilterToggle(), 
+          handleFilterToggle()}
         }
         break;
     }
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId: string): Promise<void> => {;
+  const handleShare = async (shortId: string): Promise<voi>d> => {;
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Check out this Short!',
+          title: 'Check out this Short!'}
           url: shareUrl, }: unknown);
       } catch (error) {
         // Fallback to clipboard if share fails;
-        copyToClipboard(shareUrl), 
+        copyToClipboard(shareUrl)}
       }
     } else {
       // Fallback for browsers that don't support Web Share API;
-      copyToClipboard(shareUrl), 
+      copyToClipboard(shareUrl)}
     }
   };
 
-  const copyToClipboard = async (text: string): Promise<void> => {
+  const copyToClipboard = async (text: string): Promise<voi>d> => {;
     try {;
       await,  navigator.clipboard.writeText(text: string);
-      // You could add a toast notification here, 
+      // You could add a toast notification here}
     } catch (error) {
-      console.error('Failed to copy link:', error: unknown), 
+      console.error('Failed to copy link:', error: unknown)}
     }
   };
 
@@ -335,7 +335,7 @@ const ShortsPage: React.FC = () => {
         if (!Array.isArray(parsed)) {
           console.warn('Cleaning up invalid likedShorts data');
           localStorage.removeItem('likedShorts');
-          setLikedShortsArray([]), 
+          setLikedShortsArray([])}
         }
       }
       if (followedChannelsRaw && followedChannelsRaw !== 'null') {
@@ -343,7 +343,7 @@ const ShortsPage: React.FC = () => {
         if (!Array.isArray(parsed)) {
           console.warn('Cleaning up invalid followedChannels data');
           localStorage.removeItem('followedChannels');
-          setFollowedChannelsArray([]), 
+          setFollowedChannelsArray([])}
         }
       }
     } catch (error) {
@@ -352,19 +352,19 @@ const ShortsPage: React.FC = () => {
       localStorage.removeItem('likedShorts');
       localStorage.removeItem('followedChannels');
       setLikedShortsArray([]);
-      setFollowedChannelsArray([]), 
+      setFollowedChannelsArray([])}
     }
   }, []); // Run only once on mount;
 
   // Touch handling for mobile scroll navigation;
-  const [touchStartY, setTouchStartY] = useState<number | null>(null);
-  const [isScrolling, setIsScrolling] = useState<boolean>(false);
+  const [touchStartY, setTouchStartY] = useState<number>| null>(null);
+  const [isScrolling, setIsScrolling] = useState<boolea>n>(false);
 
   // Wheel event handler for scroll navigation;
   const handleWheel = useCallback((event: WheelEvent) => {
     if (commentModalOpen || showSearch || showFilters || isScrolling) {
-      return, 
-    }
+      return}
+    };
 ;
     // Prevent default scroll behavior;
     event.preventDefault();
@@ -377,10 +377,10 @@ const ShortsPage: React.FC = () => {
       setIsScrolling(true);
       if (deltaY > 0) {
         // Scrolling down - next video;
-        handleNextVideo(), 
+        handleNextVideo()}
       } else {
         // Scrolling up - previous video;
-        handlePreviousVideo(), 
+        handlePreviousVideo()}
       }
 
       // Reset scrolling flag after a delay;
@@ -391,18 +391,18 @@ const ShortsPage: React.FC = () => {
   // Touch event handlers for mobile navigation;
   const handleTouchStart = useCallback((event: TouchEvent) => {
     if (commentModalOpen || showSearch || showFilters) {
-      return, 
+      return}
     }
     if (event.touches?.[0]) {
-      setTouchStartY(event.touches[0].clientY), 
+      setTouchStartY(event.touches[0].clientY), ;
     };
   }, [commentModalOpen, showSearch, showFilters]);
 
   const handleTouchEnd = useCallback((event: TouchEvent) => {
     if (commentModalOpen || showSearch || showFilters || touchStartY === null || isScrolling) {
-      return, 
+      return}
     }
-
+;
     if (event.changedTouches?.[0]) {;
       const touchEndY = event.changedTouches[0].clientY;
       const deltaY = touchStartY - touchEndY;
@@ -412,10 +412,10 @@ const ShortsPage: React.FC = () => {
         setIsScrolling(true);
         if (deltaY > 0) {
           // Swiped up - next video;
-          handleNextVideo(), 
+          handleNextVideo()}
         } else {
           // Swiped down - previous video;
-          handlePreviousVideo(), 
+          handlePreviousVideo()}
         }
 
         // Reset scrolling flag after a delay;
@@ -428,12 +428,12 @@ const ShortsPage: React.FC = () => {
   // Enhanced useEffect hooks;
   useEffect(() => {
     document.addEventListener('keydown', handleKeyboardNavigation: unknown);
-    return () => document.removeEventListener('keydown', handleKeyboardNavigation: unknown), 
+    return () => document.removeEventListener('keydown', handleKeyboardNavigation: unknown)}
   }, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation;
   useEffect(() => {
-    const container = containerRef.current, 
+    const container = containerRef.current, ;
     if (container) {;
       container.addEventListener('wheel', handleWheel, { passive: false }: unknown);
       return () => container.removeEventListener('wheel', handleWheel: unknown);
@@ -443,13 +443,13 @@ const ShortsPage: React.FC = () => {
 
   // Add touch event listeners for mobile navigation;
   useEffect(() => {
-    const container = containerRef.current, 
+    const container = containerRef.current, ;
     if (container) {;
       container.addEventListener('touchstart', handleTouchStart, { passive: true }: unknown);
       container.addEventListener('touchend', handleTouchEnd, { passive: true }: unknown);
       return () => {
         container.removeEventListener('touchstart', handleTouchStart: unknown);
-        container.removeEventListener('touchend', handleTouchEnd: unknown), 
+        container.removeEventListener('touchend', handleTouchEnd: unknown)}
       };
     }
     return () => {}; // Return empty cleanup function if no container;
@@ -464,9 +464,9 @@ const ShortsPage: React.FC = () => {
         const targetIndex = currentFilteredShorts.findIndex(short: unknown=> short.id === targetVideoId);
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
-          const targetElement = containerRef.current.children[targetIndex] as HTMLElement, 
+          const targetElement = containerRef.current.children[targetIndex] as HTMLElement}
           if (targetElement) {
-            targetElement.scrollIntoView({
+            targetElement.scrollIntoView({;
               behavior: 'smooth', block: 'start';
             }: unknown);
           }
@@ -481,21 +481,21 @@ const ShortsPage: React.FC = () => {
     const currentFilteredShorts = filteredShorts;
     if (isAutoAdvanceEnabled && currentVideoIndex < currentFilteredShorts.length - 1) {
       // This would be triggered by video end event in ShortDisplayCard;
-      // Implementation would be in the video player component, 
+      // Implementation would be in the video player component}
     }
   }, [isAutoAdvanceEnabled, currentVideoIndex, filteredShorts]);
 
   // Set up intersection observer to track which video is currently in view;
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const observerRef = useRef<IntersectionObserver>| null>(null);
 
   useEffect(() => {
     if (!containerRef.current || !filteredShorts.length) {
-      return, 
+      return}
     }
 
     // Disconnect existing observer;
     if (observerRef.current) {
-      observerRef.current.disconnect(), 
+      observerRef.current.disconnect()}
     }
 
     observerRef.current = new IntersectionObserver((entries: unknown) => {
@@ -507,7 +507,7 @@ const ShortsPage: React.FC = () => {
             setCurrentVideoIndex((prevIndex: unknown) => {
               if (index !== prevIndex) {
                 // Update URL without triggering scroll;
-                const currentFilteredShorts = filteredShorts, 
+                const currentFilteredShorts = filteredShorts, ;
                 if (currentFilteredShorts[index]) {;
                   const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
                   window.history.replaceState(null, '', newUrl: unknown);
@@ -521,60 +521,60 @@ const ShortsPage: React.FC = () => {
       });
     }, {
       root: containerRef.current,
-      threshold: 0.5,
+      threshold: 0.5}
       rootMargin: '0px'
     });
 
     // Observe all video elements;
     Array.from(containerRef.current.children).forEach((child: unknown) => {
-      observerRef.current?.observe(child), 
+      observerRef.current?.observe(child)}
     });
 
     return () => {
       if (observerRef.current) {
-        observerRef.current.disconnect(), 
+        observerRef.current.disconnect()}
       }
     };
   }, [filteredShorts.length]); // Only depend on length, not the entire array;
 
   if (loading) {
-    return <ShortsPageSkeleton />, 
+    return <ShortsPageSkeleton> />}
   }
 
   if (error) {
-    return <ShortsPageError error={error} />;
+    return <ShortsPageError>error={error} />;
   }
 
   if (filteredShorts.length === 0) {
     return (
-      <div className="h-[calc(100vh-3.5rem)] bg-black flex flex-col">
+      <div>className="h-[calc(100vh-3.5rem)] bg-black flex flex-col"></div>
         {/* Enhanced Header with Search and Filters */}
-        <div className="relative z-10 bg-black/80 backdrop-blur-sm">
-          <div className="flex items-center justify-between p-4">
-            <h1 className="text-white text-lg font-semibold">Shorts</h1>
-            <div className="flex items-center space-x-2">
-              <button>
+        <div>className="relative z-10 bg-black/80 backdrop-blur-sm"></div>
+          <div>className="flex items-center justify-between p-4"></div>
+            <h1>className="text-white text-lg font-semibold">Shorts</h1>
+            <div>className="flex items-center space-x-2"></div>
+              <butto>n>
                 onClick={handleSearchToggle}
                 className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Search shorts"
               ">"
-                <MagnifyingGlassIcon className="w-5 h-5" />
+                <MagnifyingGlassIcon>className="w-5 h-5" />
               </button></div>
-              <button>
+              <butto>n>
                 onClick={handleFilterToggle}
                 className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Filter shorts"
               ">"
-                <AdjustmentsHorizontalIcon className="w-5 h-5" />
+                <AdjustmentsHorizontalIcon>className="w-5 h-5" />
               </button></div>
             </div>
           </div>
 
           {/* Search Bar */};
 {showSearch && (
-            <div className="px-4 pb-4">
-              <div className="relative">
-                <input>
+            <div>className="px-4 pb-4"></div>
+              <div>className="relative"></div>
+                <inpu>t>
                   type="text"
                   value={searchQuery}
                   onChange={(e: unknown) => setSearchQuery(e.target.value)}
@@ -582,70 +582,70 @@ const ShortsPage: React.FC = () => {
                   className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus;
                 /">"
-                <button>
+                <butto>n>
                   onClick={handleSearchToggle}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
                 ">"
-                  <XIcon className="w-4 h-4" />
+                  <XIcon>className="w-4 h-4" />
                 </button></div>
               </div>
             </div>
           )};
 {/* Filters */};
 {showFilters && (
-            <ShortsFilters, >
+            <ShortsFilters>, >
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
               onClose={(: unknown) => setShowFilters(false)}
             />
           )}
-  <div></div></div>
+  <di>v></div></div>
 
-        <EmptyShortsState;>
+        <EmptyShortsState>;>
           hasFilters={selectedCategory !== 'all' || debouncedSearchQuery !== ''}
           onClearFilters={() => {
             setSelectedCategory('all');
-            setSearchQuery(''), 
+            setSearchQuery('')}
           }}
         />
-  <div></div></div>
+  <di>v></div></div>
     );
   }
 
   return (
-    <div className="h-[calc(100vh-3.5rem)] bg-black relative">
+    <div>className="h-[calc(100vh-3.5rem)] bg-black relative"></div>
       {/* Enhanced Header with Search and Filters */}
-      <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent">
-        <div className="flex items-center justify-between p-4">
-          <h1 className="text-white text-lg font-semibold">Shorts</h1>
-          <div className="flex items-center space-x-2">
-            <button>
+      <div>className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent"></div>
+        <div>className="flex items-center justify-between p-4"></div>
+          <h1>className="text-white text-lg font-semibold">Shorts</h1>
+          <div>className="flex items-center space-x-2"></div>
+            <butto>n>
               onClick={handleSearchToggle}
               className={`p-2 rounded-full transition-colors ${
                 showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Search shorts"
             ">"
-              <MagnifyingGlassIcon className="w-5 h-5" />
+              <MagnifyingGlassIcon>className="w-5 h-5" />
             </button></div>
-            <button>
+            <butto>n>
               onClick={handleFilterToggle}
               className={`p-2 rounded-full transition-colors ${
                 showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Filter shorts"
             ">"
-              <AdjustmentsHorizontalIcon className="w-5 h-5" />
+              <AdjustmentsHorizontalIcon>className="w-5 h-5" />
             </button></div>
           </div>
         </div>
 
         {/* Search Bar */};
 {showSearch && (
-          <div className="px-4 pb-4">
-            <div className="relative">
-              <input>
+          <div>className="px-4 pb-4"></div>
+            <div>className="relative"></div>
+              <inpu>t>
                 type="text"
                 value={searchQuery}
                 onChange={(e: unknown) => setSearchQuery(e.target.value)}
@@ -653,46 +653,46 @@ const ShortsPage: React.FC = () => {
                 className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus;
               /">"
-              <button>
+              <butto>n>
                 onClick={handleSearchToggle}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
               ">"
-                <XIcon className="w-4 h-4" />
+                <XIcon>className="w-4 h-4" />
               </button></div>
             </div>
           </div>
         )};
 {/* Filters */};
 {showFilters && (
-          <ShortsFilters, >
+          <ShortsFilters>, >
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
             onClose={(: unknown) => setShowFilters(false)}
           />
         )}
-  <div></div></div>
+  <di>v></div></div>
 
       {/* Navigation Controls */}
-      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;
-        <ShortsNavigation;>
+      <div>className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;</div>
+        <ShortsNavigation>;>
           onPrevious={handlePreviousVideo}
           onNext={handleNextVideo}
           canGoPrevious={currentVideoIndex > 0}
           canGoNext={currentVideoIndex < filteredShorts.length - 1}
         />
-  <div></div></div>
+  <di>v></div></div>
 
       {/* Shorts Feed */}
-      <div>
+      <di>v>
         ref={containerRef}
         className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
         role="feed"
         aria-label="Shorts feed";
       >
         {filteredShorts.map((short: any, index: unknown: unknown) => (
-          <div key={short.id || index} className="h-full w-full snap-start">
-            <ShortDisplayCard;>
+          <div>key={short.id || index} className="h-full w-full snap-start"></div>
+            <ShortDisplayCard>;>
               short={short}
               isLiked={likedShorts.has(short.id)}
               isFollowed={followedChannels.has(short.channelName)}
@@ -706,14 +706,14 @@ const ShortsPage: React.FC = () => {
             /">"
           </div>
         ))}
-  <div></div></div>
+  <di>v></div></div>
 
       {/* Comment Modal */}
-      <CommentModal;>
+      <CommentModal>;>
         isOpen={commentModalOpen}
         onClose={() => {
           setCommentModalOpen(false);
-          setSelectedShortForComment(null), 
+          setSelectedShortForComment(null)}
         }}
         shortId={selectedShortForComment.id  ''}
         shortTitle={selectedShortForComment.title  'Short,  video'}

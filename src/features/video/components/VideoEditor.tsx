@@ -4,12 +4,12 @@ import React, { useState, useCallback } from 'react';
 interface VideoEditorProps {
   initialValue?: string;
   onChange?: (value: string) => void;
-  onSave?: (value: string) => Promise<void>;
+  onSave?: (value: string) => Promise<voi>d>;
   className?: string, 
 }
 
 import React from 'react';
-export const VideoEditor: React.FC<VideoEditorProps> = ({
+export const VideoEditor: React.FC<VideoEditorProp>s> = ({
   initialValue = '',
   onChange,
   onSave,
@@ -17,7 +17,7 @@ export const VideoEditor: React.FC<VideoEditorProps> = ({
 }) => {
   const [value, setValue] = useState(initialValue);
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>| null>(null);
 
   const handleChange = useCallback((newValue: string) => {;
     setValue(newValue);
@@ -39,9 +39,9 @@ export const VideoEditor: React.FC<VideoEditorProps> = ({
   }, [onSave, value]);
 
   return (
-    <div className={`editor ${className}`}>
-      <div className="editor-toolbar">
-        <button>
+    <div>className={`editor ${className}`}></div>
+      <div>className="editor-toolbar"></div>
+        <butto>n>
           onClick={handleSave}
           disabled={saving}
           className="save-button"
@@ -51,20 +51,20 @@ export const VideoEditor: React.FC<VideoEditorProps> = ({
       </div>
       
       {error && ()
-        <div className="editor-error">
+        <div>className="editor-error"></div>
           {error}
         </div>
       )}
       
-      <div className="editor-content">
-        <textarea>
+      <div>className="editor-content"></div>
+        <textare>a>
           value={value}
           onChange={(e: any) => handleChange(e.target.value)}
           className="editor-textarea"
           placeholder="Start editing..."
         /">"
       </div>
-  <div></div></div>
+  <di>v></div></div>
   );
 };
 

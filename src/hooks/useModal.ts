@@ -5,18 +5,18 @@ import { useState, useEffect, useCallback } from 'react';
 export interface UseModalOptions {
   enabled?: boolean;
   onSuccess?: (data: unknown) => void;
-  onError?: (error: Error) => void, 
+  onError?: (error: Error) => void}
 }
 
 export interface UseModalResult {
   data;
   loading: boolean,
   error: Error | null
-      refetch: () => void, 
+      refetch: () => void}
 }
 
 export function useModal(
-  options: UseModalOptions = {}
+  options: UseModalOptions = {})
 ): UseModalResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -34,8 +34,8 @@ export function useModal(
       await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300: unknown: unknown)), 
       
       const result = {
-        hookName: 'useModal',
-        timestamp: Date.now(),
+        hookName: 'useModal'}
+        timestamp: Date.now(),;
         success: true,;
       };
       
@@ -44,21 +44,21 @@ export function useModal(
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      onError?.(error), 
+      onError?.(error)}
     } finally {
-      setLoading(false), 
+      setLoading(false)}
     }
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
-    fetchData(), 
+    fetchData()}
   }, [fetchData]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData,
+    refetch: fetchData}
   };
 }
 

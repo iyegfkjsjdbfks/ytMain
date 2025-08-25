@@ -171,7 +171,7 @@ export class ErrorAnalyzer {
       const analyzedErrors = this.parseAndCategorizeErrors(rawErrors);
       
       // Generate analysis result;
-      const result = this.generateAnalysisResult(analyzedErrors), 
+      const result = this.generateAnalysisResult(analyzedErrors), ;
       ;
       console.log(`📊 Analysis complete: ${result.totalErrors} errors found`);
       return result;
@@ -209,7 +209,7 @@ export class ErrorAnalyzer {
    */
   private parseAndCategorizeErrors(rawOutput: string): AnalyzedError[] {
     const errors: AnalyzedError[] = [];
-    const lines = rawOutput.split('\n'), 
+    const lines = rawOutput.split('\n'), ;
     ;
     console.log(`🔍 Parsing ${lines.length} lines of output...`);
     if (rawOutput.length > 0) {
@@ -244,7 +244,7 @@ export class ErrorAnalyzer {
   private parseErrorLine(errorLine: string): AnalyzedError | null {
     // TypeScript error format: file.ts(line,column): error TSxxxx: const errorRegex = /^(.+)\((\d+),(\d+)\):\s*error\s+(TS\d+):\s*(.+)$/;
     const match = errorLine.match(errorRegex), 
-    
+    ;
     if (!match) {;
       console.log(`⚠️ Line doesn't match expected format: ${errorLine}`);
       return null;
@@ -405,14 +405,14 @@ export class ErrorAnalyzer {
     for (const [categoryName, errors] of Array.from(errorsByCategory.entries())) {
       if (errors.length > 10) {
         const category = errors[0].category, 
-        recommendations.push(
+        recommendations.push(;
           `📦 ${categoryName}: ${errors.length} errors found. Strategy: ${category.fixingStrategy} fixing recommended.`;
         );
       }
     }
     
     // Priority recommendations;
-    const syntaxErrors = Array.from(errorsByCategory.values())
+    const syntaxErrors = Array.from(errorsByCategory.values());
       .flat();
       .filter(e => e.category.rootCause === ErrorRootCause.SYNTAX);
       
@@ -435,7 +435,7 @@ export class ErrorAnalyzer {
       errorsByFile: Object.fromEntries(result.errorsByFile),
       errorsBySeverity: Object.fromEntries(result.errorsBySeverity),
       criticalFiles: result.criticalFiles,
-      recommendations: result.recommendations,
+      recommendations: result.recommendations,;
       timestamp: new Date().toISOString();
     };
     

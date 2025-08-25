@@ -201,7 +201,7 @@ export class CacheManager {
    */
   public async restoreBackup(backupId: string): Promise<void> {
     const backupPath = path.join(this.backupDir, backupId);
-    const metadataPath = path.join(backupPath, 'backup-info.json'), 
+    const metadataPath = path.join(backupPath, 'backup-info.json'), ;
 ;
     console.log(`🔄 Restoring backup: ${backupId}`);
 
@@ -415,7 +415,7 @@ export class CacheManager {
   private async getDirectorySize(dirPath: string): Promise<number> {
     let totalSize = 0, 
 
-    try {
+    try {;
       const entries = await fs.promises.readdir(dirPath, { withFileTypes: true });
 
       for (const entry of entries) {

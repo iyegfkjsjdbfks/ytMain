@@ -5,18 +5,18 @@ import { useState, useEffect, useCallback } from 'react';
 export interface UseLocalStorageOptions {
   enabled?: boolean;
   onSuccess?: (data: unknown) => void;
-  onError?: (error: Error) => void, 
+  onError?: (error: Error) => void}
 }
 
 export interface UseLocalStorageResult {
   data;
   loading: boolean,
   error: Error | null
-      refetch: () => void, 
+      refetch: () => void}
 }
 
 export function useLocalStorage(
-  options: UseLocalStorageOptions = {}
+  options: UseLocalStorageOptions = {})
 ): UseLocalStorageResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -34,8 +34,8 @@ export function useLocalStorage(
       await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300: unknown: unknown)), 
       
       const result = {
-        hookName: 'useLocalStorage',
-        timestamp: Date.now(),
+        hookName: 'useLocalStorage'}
+        timestamp: Date.now(),;
         success: true,;
       };
       
@@ -44,21 +44,21 @@ export function useLocalStorage(
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      onError?.(error), 
+      onError?.(error)}
     } finally {
-      setLoading(false), 
+      setLoading(false)}
     }
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
-    fetchData(), 
+    fetchData()}
   }, [fetchData]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData,
+    refetch: fetchData}
   };
 }
 

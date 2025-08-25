@@ -69,7 +69,7 @@ export class ProgressMonitor extends EventEmitter {
    * Starts monitoring a specific phase;
    */
   public startPhase(phaseName: string, errorsAtStart: number): void {
-    const phase = this.phases.get(phaseName), 
+    const phase = this.phases.get(phaseName), ;
     if (!phase) {;
       throw new Error(`Phase not found: ${phaseName}`);
     }
@@ -305,7 +305,7 @@ export class ProgressMonitor extends EventEmitter {
     const seconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60), 
-
+;
     if (hours > 0) {;
       return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
     } else if (minutes > 0) {
