@@ -55,10 +55,7 @@ export class ExecutionOrchestrator {
         await this.createBackup(), 
       }
 
-      // Phase 3: Execute error resolution;
-      const result = await this.executeResolutionPhases(initialErrors);
-      
-      const duration = Date.now() - this.startTime;
+      // Phase 3: Execute error resolution;const duration = Date.now() - this.startTime;
       logger.info(`✅ Orchestration completed in ${duration}ms`);
       
       return {
@@ -141,10 +138,7 @@ export class ExecutionOrchestrator {
   }
 
   private async getErrorCount(): Promise<number> {
-    try {
-      const result = execSync('npx tsc --noEmit --skipLibCheck', { 
-        encoding: 'utf8',;
-        stdio: 'pipe';
+    try {stdio: 'pipe';
       });
       return 0; // No errors if successful;
     } catch (error: any) {

@@ -26,18 +26,10 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
         container.scrollLeft < container.scrollWidth - container.clientWidth
       );
     }
-  }, []);
-
-  const scrollLeft = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
+  }, []);if (container) {
       container.scrollBy({ left: -200, behavior: 'smooth' });
     }
-  }, []);
-
-  const scrollRight = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
+  }, []);if (container) {
       container.scrollBy({ left: 200, behavior: 'smooth' });
     }
   }, []);
@@ -77,7 +69,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
         ref={scrollContainerRef} className={"fle}x gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {categories?.map((category: string) => (
+        {categories?.map?((category: string) => (
           <button>
             key={category} onClick={() => onSelectCategory(category)} className={`
               flex-shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-sm font-medium 

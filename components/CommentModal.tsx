@@ -53,7 +53,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
 
           <form onSubmit={handleSubmit}>
             <textarea>
-              value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Write a comment..."
+              value={comment} onChange={(e: any) => setComment(e.target.value)} placeholder="Write a comment..."
               className={"w}-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               rows={4} maxLength={500} />
 

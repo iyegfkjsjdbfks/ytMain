@@ -32,10 +32,10 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
   return (
     <div className={"w}-full">
       {/* Banner */}
-      {channel.bannerUrl && (
+      {channel.bannerUrl? && (
         <div className={"h}-32 sm:h-48 md:h-64 bg-gray-200 rounded-lg mb-4 overflow-hidden">
           <img>
-            src={channel.bannerUrl}
+            src={channel.bannerUrl?}
             alt={`${channel.name} banner`}
             className={"w}-full h-full object-cover"
           />

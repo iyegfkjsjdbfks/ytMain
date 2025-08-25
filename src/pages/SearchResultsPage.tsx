@@ -62,7 +62,7 @@ const SearchResultsPage: React.FC = () => {
       youtubeLoading: true}));
 
     try {
-      const result = await VideoService.searchVideos(searchQuery), 
+      const result = await VideoService.searchVideos?(searchQuery), 
       
       setSearchState({
         videos: result.videos || [],

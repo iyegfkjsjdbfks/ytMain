@@ -17,23 +17,7 @@ const Button: React.FC<ButtonProps> = ({
  className = '',
  disabled,
  ...props
-}) => {
- const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900 transition-all duration-150 ease-in-out';
-
- const variantClasses = {
- primary: `bg-sky-600 hover:bg-sky-700 text-white focus-visible:ring-sky-500 ${disabled || isLoading ? 'opacity-70 cursor-not-allowed' : ''}`,
- secondary: `bg-neutral-200 hover:bg-neutral-300 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-100 focus-visible:ring-neutral-500 ${disabled || isLoading ? 'opacity-70 cursor-not-allowed' : ''}`,
- danger: `bg-red-600 hover:bg-red-700 text-white focus-visible:ring-red-500 ${disabled || isLoading ? 'opacity-70 cursor-not-allowed' : ''}`,
- ghost: `bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700/70 text-neutral-700 dark:text-neutral-200 focus-visible:ring-sky-500 ${disabled || isLoading ? 'opacity-70 cursor-not-allowed' : ''}`,
- link: `bg-transparent hover:underline text-sky-600 dark:text-sky-400 focus-visible:ring-sky-500 p-0 ${disabled || isLoading ? 'opacity-70 cursor-not-allowed' : ''}` };
-
- const sizeClasses = {
- xs: 'px-2.5 py-1.5 text-xs',
- sm: 'px-3 py-2 text-sm',
- md: 'px-4 py-2 text-sm',
- lg: 'px-6 py-3 text-base' };
-
- const iconSizeClasses = {
+}) => {const iconSizeClasses = {
  xs: 'w-3.5 h-3.5',
  sm: 'w-4 h-4',
  md: 'w-5 h-5',

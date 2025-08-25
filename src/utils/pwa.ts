@@ -82,7 +82,7 @@ export class PWAUtils {
   }
 
   static getNetworkInfo(): { type: string, effectiveType: string, downlink: number } {
-    const connection = (navigator).connection || (navigator).mozConnection || (navigator).webkitConnection;
+    const connection = (navigator).connection? || (navigator).mozConnection? || (navigator).webkitConnection?;
     
     if (connection) {
       return {
