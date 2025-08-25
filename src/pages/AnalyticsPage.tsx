@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
 interface AnalyticsPageProps {
-  className?: string;
+  className?: string, 
 }
 
 interface AnalyticsData {
-  views: number;
-  impressions: number;
-  clickThroughRate: number;
-  averageViewDuration: string;
-  subscribersGained: number;
-  revenue: number;
+  views: number,
+  impressions: number,
+  clickThroughRate: number,
+  averageViewDuration: string,
+  subscribersGained: number,
+  revenue: number,
 }
 
 const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
   const [selectedMetric, setSelectedMetric] = useState<'views' | 'watchTime' | 'subscribers' | 'revenue'>('views');
-  const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d');
+  const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d'), 
   
   const [analytics] = useState<AnalyticsData>({
     views: 1250000,
@@ -23,7 +23,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
     clickThroughRate: 5.8,
     averageViewDuration: '4:32',
     subscribersGained: 1250,
-    revenue: 2500;
+    revenue: 2500,
   });
 
   const topVideos = [
@@ -31,7 +31,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
     { title: 'JavaScript Tips and Tricks', views: 98000, duration: '8:45' },
     { title: 'CSS Grid Tutorial', views: 87000, duration: '15:22' },
     { title: 'Node.js Crash Course', views: 76000, duration: '18:10' },
-    { title: 'Database Design Basics', views: 65000, duration: '22:15' }
+    { title: 'Database Design Basics', views: 65000, duration: '22:15' };
   ];
 
   const audienceData = [
@@ -39,7 +39,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
     { country: 'United Kingdom', percentage: 15 },
     { country: 'Canada', percentage: 12 },
     { country: 'Australia', percentage: 8 },
-    { country: 'Germany', percentage: 7 }
+    { country: 'Germany', percentage: 7 };
   ];
 
   return (
@@ -48,21 +48,21 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Channel Analytics</h1>
           <div className="flex space-x-4">
-            <select;
+            <select;>
               value={selectedMetric}
               onChange={(e: any) => setSelectedMetric(e.target.value as any)}
               className="border rounded-lg px-3 py-2"
-            {">"}
+            ">"
               <option value="views">Views</option>
               <option value="watchTime">Watch Time</option>
               <option value="subscribers">Subscribers</option>
               <option value="revenue">Revenue</option>
             </select></div>
-            <select;
+            <select;>
               value={timeRange}
               onChange={(e: any) => setTimeRange(e.target.value as any)}
               className="border rounded-lg px-3 py-2"
-            {">"}
+            ">"
               <option value="7d">Last 7 days</option>
               <option value="28d">Last 28 days</option>
               <option value="90d">Last 90 days</option>
@@ -113,7 +113,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
                 { source: 'External', percentage: 15, color: 'bg-green-500' },
                 { source: 'Direct/Unknown', percentage: 10, color: 'bg-yellow-500' },
                 { source: 'Playlists', percentage: 5, color: 'bg-purple-500' }
-              ].map((source, index) => (
+              ].map((source: any, index: any) => (
                 <div key={index} className="flex items-center space-x-3">
                   <div className={`w-4 h-4 rounded ${source.color}`}></div>
                   <div className="flex-1 flex justify-between">
@@ -131,7 +131,7 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Top Videos</h2>
             <div className="space-y-4">
-              {topVideos.map((video, index) => (
+              {topVideos.map((video: any, index: any) => (
                 <div key={index} className="flex justify-between items-center p-3 border rounded">
                   <div className="flex-1">
                     <h3 className="font-medium text-sm">{video.title}</h3>
@@ -149,15 +149,15 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ className }) => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Audience Geography</h2>
             <div className="space-y-4">
-              {audienceData.map((country, index) => (
+              {audienceData.map((country: any, index: any) => (
                 <div key={index} className="flex justify-between items-center">
                   <span className="text-sm">{country.country}</span>
                   <div className="flex items-center space-x-2">
                     <div className="w-20 bg-gray-200 rounded-full h-2">
-                      <div;
+                      <div>
                         className="bg-blue-500 h-2 rounded-full"
                         style={{ width: `${country.percentage * 2}%` }}
-                      {">"}{"<"}/div{">"}
+                      ">"{"<"}/div">"
                     </div>
                     <span className="text-sm font-semibold w-8">{country.percentage}%</span>
                   </div>

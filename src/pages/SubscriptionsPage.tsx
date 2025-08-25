@@ -21,7 +21,7 @@ const SubscriptionsPage: React.FC = () => {
     loading: channelsLoading,
     error: channelsError,
     toggleNotifications,
-    unsubscribe;
+    unsubscribe, 
   } = useSubscriptions();
 
   const [activeTab, setActiveTab] = useState<TabType>('all');
@@ -30,14 +30,14 @@ const SubscriptionsPage: React.FC = () => {
   const [showChannels, setShowChannels] = useState<boolean>(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0), 
   }, []);
 
   const filteredVideos = useMemo(() => {
     if (!subscribedVideos) {
-      return [];
+      return [], 
     }
-
+;
     let filtered = [...subscribedVideos];
 
     // Filter by tab;
@@ -47,23 +47,23 @@ const SubscriptionsPage: React.FC = () => {
 
     switch (activeTab) {
       case 'today':
-        filtered = filtered.filter((video) => {
+        filtered = filtered.filter((video: any) => {
           const uploadDate = new Date(video.uploadedAt);
-          return uploadDate >= today;
+          return uploadDate >= today, 
         });
         break;
       case 'week':
-        filtered = filtered.filter((video) => {
+        filtered = filtered.filter((video: any) => {
           const uploadDate = new Date(video.uploadedAt);
-          return uploadDate >= weekAgo;
+          return uploadDate >= weekAgo, 
         });
         break;
       case 'unwatched':
         // Mock unwatched filter - in real app would check watch history;
-        filtered = filtered.filter((_, index) => index % 3 !== 0);
+        filtered = filtered.filter((_: any, index: any) => index % 3 !== 0);
         break;
       case 'live':
-        filtered = filtered.filter((video) => video.isLive);
+        filtered = filtered.filter((video: any) => video.isLive);
         break;
       case 'posts':
         // Mock community posts filter;
@@ -74,41 +74,41 @@ const SubscriptionsPage: React.FC = () => {
     // Sort videos;
     switch (sortBy) {
       case 'popular':
-        filtered.sort((a, b) => {
+        filtered.sort((a: any, b: any) => {
           const aViews = parseInt(a.views.replace(/[^\d]/g, ''), 10);
           const bViews = parseInt(b.views.replace(/[^\d]/g, ''), 10);
-          return bViews - aViews;
+          return bViews - aViews, 
         });
         break;
       case 'oldest':
-        filtered.sort((a, b) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
+        filtered.sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
         break;
       case 'latest':
       default:
-        filtered.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+        filtered.sort((a: any, b: any) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
         break;
     }
 
     return filtered;
   }, [subscribedVideos, activeTab, sortBy]);
 
-  const subscriptionStats = useMemo(() => {
-    const notificationsEnabled = subscribedChannels.filter((c) => c.notificationsEnabled).length;
+  const subscriptionStats = useMemo(() => {;
+    const notificationsEnabled = subscribedChannels.filter((c: any) => c.notificationsEnabled).length;
     const totalVideos = subscribedVideos?.length || 0;
 
     // Calculate new videos today (mock calculation)
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const newVideosToday = subscribedVideos?.filter((video) => {
+    const newVideosToday = subscribedVideos?.filter((video: any) => {;
       const uploadDate = new Date(video.uploadedAt);
-      return uploadDate >= todayStart;
+      return uploadDate >= todayStart, 
     }).length || 0;
 
     return {
       totalChannels: subscribedChannels.length,
       notificationsEnabled,
       totalVideos,
-      newVideosToday;
+      newVideosToday, 
     };
   }, [subscribedChannels, subscribedVideos]);
 
@@ -120,7 +120,7 @@ const SubscriptionsPage: React.FC = () => {
       <div className="flex justify-center items-center min-h-96">
         <LoadingSpinner size="lg" />
       </div>
-    );
+    ), 
   }
 
   if (error) {
@@ -128,7 +128,7 @@ const SubscriptionsPage: React.FC = () => {
       <div className="text-center py-12">
         <SubscriptionsIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
         <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
-          Something went wrong;
+          Something went wrong, 
         </h2>
         <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
       </div>
@@ -147,31 +147,31 @@ const SubscriptionsPage: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-2">
-          <Button;
+          <Button;>
             variant={showChannels ? 'primary' : 'secondary'}
             size="sm"
             onClick={() => setShowChannels(!showChannels)}
             className="flex items-center space-x-2"
-          {">"}
+          ">"
             <UserGroupIcon className="w-4 h-4" />
             <span>Manage</span>
           </Button></div>
 
           <div className="flex items-center border border-neutral-200 dark:border-neutral-700 rounded-lg">
-            <Button;
+            <Button;>
               variant={viewType === 'grid' ? 'primary' : 'ghost'}
               size="sm"
               onClick={() => setViewType('grid')}
               className="rounded-r-none border-r border-neutral-200 dark:border-neutral-700"
-            {">"}
+            ">"
               <ViewColumnsIcon className="w-4 h-4" />
             </Button></div>
-            <Button;
+            <Button;>
               variant={viewType === 'list' ? 'primary' : 'ghost'}
               size="sm"
               onClick={() => setViewType('list')}
               className="rounded-l-none"
-            {">"}
+            ">"
               <Bars3Icon className="w-4 h-4" />
             </Button></div>
           </div>
@@ -179,7 +179,7 @@ const SubscriptionsPage: React.FC = () => {
       </div>
 
       {/* Subscription Statistics */}
-      <SubscriptionStats;
+      <SubscriptionStats;>
         totalChannels={subscriptionStats.totalChannels}
         notificationsEnabled={subscriptionStats.notificationsEnabled}
         totalVideos={subscriptionStats.totalVideos}
@@ -187,8 +187,8 @@ const SubscriptionsPage: React.FC = () => {
         className="mb-6"
       />
 
-      {/* Subscribed Channels Management */}
-      {showChannels && (
+      {/* Subscribed Channels Management */};
+{showChannels && (
         <div className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
@@ -202,32 +202,32 @@ const SubscriptionsPage: React.FC = () => {
               <p className="text-neutral-600 dark:text-neutral-400">
                 You haven't subscribed to any channels yet.
               </p>
-              <Link;
+              <Link;>
                 to="/trending"
                 className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium mt-2 inline-block"
-              {">"}
+              ">"
                 Discover channels to subscribe to;
               </Link></div>
             </div>
-          ) : (;
+          ) : (, 
             <div className = "grid grid-cols-1 sm: grid-cols-2 md: grid-cols-3 lg: grid-cols-4 gap-4">
-              {subscribedChannels.map((channel) => (
-                <div;
+              {subscribedChannels.map((channel: any) => (
+                <div>
                   key={channel.id}
                   className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
-                {">"}
+                ">"
                   <Link to={`/channel/${encodeURIComponent(channel.name)}`}>
-                    <img;
+                    <img; />
                       src={channel.avatar}
                       alt={channel.name}
                       className="w-12 h-12 rounded-full object-cover"
-                    /{">"}
+                    /">"
                   </Link>
                   <div className="flex-1 min-w-0">
-                    <Link;
+                    <Link;>
                       to={`/channel/${encodeURIComponent(channel.name)}`}
                       className="font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-400 truncate block"
-                    {">"}
+                    ">"
                       {channel.name}
                     </Link></div>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
@@ -235,22 +235,22 @@ const SubscriptionsPage: React.FC = () => {
                     </p>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <button;
+                    <button>
                       onClick={() => toggleNotifications(channel.id)}
                       className={`p-2 rounded-full transition-colors ${
-                        channel.notificationsEnabled;
+                        channel.notificationsEnabled, 
                           ? 'bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-800 hover:bg-neutral-700 dark:hover:bg-neutral-300'
                           : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                       {"{"}""`{"{"}""
                       title={channel.notificationsEnabled ? 'Notifications on' : 'Notifications off'}
-                    {">"}
+                    ">"
                       {channel.notificationsEnabled ? (
                         <BellSolidIcon className="w-4 h-4" />
                       ) : (
                         <BellIcon className="w-4 h-4" />
                       )}
                     </button></div>
-                    <Button;
+                    <Button;>
                       variant="ghost"
                       size="sm"
                       onClick={() => unsubscribe(channel.id)}
@@ -263,9 +263,8 @@ const SubscriptionsPage: React.FC = () => {
   <div></div></div>
           )}
   <div></div></div>
-      )}
-
-      {/* Video Feed */}
+      )};
+{/* Video Feed */}
       <div className = "mb-6">
         <Tabs value = {activeTab} onValueChange = {(value) = > setActiveTab(value as TabType)}>
           <div className="flex items-center justify-between mb-4">
@@ -280,11 +279,11 @@ const SubscriptionsPage: React.FC = () => {
 
             <div className="flex items-center space-x-2 ml-4">
               <AdjustmentsHorizontalIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
-              <select;
+              <select;>
                 value={sortBy}
                 onChange={(e: any) => setSortBy(e.target.value as SortType)}
                 className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-2 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
-              {">"}
+              ">"
                 <option value="latest">Latest</option>
                 <option value="popular">Popular</option>
                 <option value="oldest">Oldest</option>
@@ -303,29 +302,29 @@ const SubscriptionsPage: React.FC = () => {
                   }
                 </h2>
                 <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                  {subscribedChannels.length === 0;
+                  {subscribedChannels.length === 0, 
                     ? 'Subscribe to channels to see their latest videos here.'
                     : 'Check back later for new content from your subscribed channels.'
                   {"}"
                 </p>
                 {subscribedChannels.length === 0 && (
-                  <Link;
+                  <Link;>
                     to="/trending"
                     className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium"
-                  {">"}
-                    Discover channels;
+                  ">"
+                    Discover channels, 
                   </Link></div>
                 )}
               </div></TabsContent>
             ) : (
               <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
-                {filteredVideos.map((video) => (
-                  <SubscriptionVideoCard;
+                {filteredVideos.map((video: any) => (
+                  <SubscriptionVideoCard, >
                     key={`${activeTab}-${video.id}`}
                     video={video}
                     viewType={viewType}
                     showChannel;
-                  /{">"}
+                  /">"
                 )){"}"
               </div>
             )}

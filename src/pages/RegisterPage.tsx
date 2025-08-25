@@ -20,52 +20,52 @@ const RegisterPage: React.FC = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {;
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value;
+      [name]: value, 
     }));
   };
 
   const validateForm = (): boolean => {
-    if (!formData.firstName.trim()) {
+    if (!formData.firstName.trim()) {;
       setError('First name is required');
-      return false;
+      return false, 
     }
     if (!formData.lastName.trim()) {
       setError('Last name is required');
-      return false;
+      return false, 
     }
     if (!formData.email.trim()) {
       setError('Email is required');
-      return false;
+      return false, 
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       setError('Please enter a valid email address');
-      return false;
+      return false, 
     }
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters long');
-      return false;
+      return false, 
     }
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
-      return false;
+      return false, 
     }
     if (!acceptTerms) {
       setError('You must accept the Terms of Service and Privacy Policy');
-      return false;
+      return false, 
     }
     return true;
   };
 
-  const handleSubmit = async (e: FormEvent): Promise<void> => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {;
     e.preventDefault();
     setError('');
 
     if (!validateForm()) {
-      return;
+      return, 
     }
 
     setIsLoading(true);
@@ -75,18 +75,18 @@ const RegisterPage: React.FC = () => {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        password: formData.password;
+        password: formData.password, ;
       });
 
       if (success) {
         navigate('/', { replace: true });
       } else {
-        setError('Registration failed. Please try again.');
+        setError('Registration failed. Please try again.'), 
       }
     } catch (err) {
-      setError('An error occurred during registration. Please try again.');
+      setError('An error occurred during registration. Please try again.'), 
     } finally {
-      setIsLoading(false);
+      setIsLoading(false), 
     }
   };
 
@@ -101,10 +101,10 @@ const RegisterPage: React.FC = () => {
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
           Or{' '}
-          <Link;
+          <Link;>
             to="/login"
             className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
-          {">"}
+          ">"
             sign in to your existing account;
           </Link></p>
         </p></div>
@@ -127,7 +127,7 @@ const RegisterPage: React.FC = () => {
                   First name;
                 </label>
                 <div className="mt-1">
-                  <Input;
+                  <Input;>
                     id="firstName"
                     name="firstName"
                     type="text"
@@ -137,7 +137,7 @@ const RegisterPage: React.FC = () => {
                     onChange={handleInputChange}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                     placeholder="First name"
-                  /{">"}
+                  /">"
                 </div>
               </div>
 
@@ -146,7 +146,7 @@ const RegisterPage: React.FC = () => {
                   Last name;
                 </label>
                 <div className="mt-1">
-                  <Input;
+                  <Input;>
                     id="lastName"
                     name="lastName"
                     type="text"
@@ -156,7 +156,7 @@ const RegisterPage: React.FC = () => {
                     onChange={handleInputChange}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                     placeholder="Last name"
-                  /{">"}
+                  /">"
                 </div>
               </div>
             </div>
@@ -166,7 +166,7 @@ const RegisterPage: React.FC = () => {
                 Email address;
               </label>
               <div className="mt-1">
-                <Input;
+                <Input;>
                   id="email"
                   name="email"
                   type="email"
@@ -176,7 +176,7 @@ const RegisterPage: React.FC = () => {
                   onChange={handleInputChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                   placeholder="Enter your email"
-                /{">"}
+                /">"
               </div>
             </div>
 
@@ -185,7 +185,7 @@ const RegisterPage: React.FC = () => {
                 Password;
               </label>
               <div className="mt-1">
-                <Input;
+                <Input;>
                   id="password"
                   name="password"
                   type="password"
@@ -195,7 +195,7 @@ const RegisterPage: React.FC = () => {
                   onChange={handleInputChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                   placeholder="Create a password"
-                /{">"}
+                /">"
               </div>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                 Must be at least 6 characters long;
@@ -207,7 +207,7 @@ const RegisterPage: React.FC = () => {
                 Confirm password;
               </label>
               <div className="mt-1">
-                <Input;
+                <Input;>
                   id="confirmPassword"
                   name="confirmPassword"
                   type="password"
@@ -217,19 +217,19 @@ const RegisterPage: React.FC = () => {
                   onChange={handleInputChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                   placeholder="Confirm your password"
-                /{">"}
+                /">"
               </div>
             </div>
 
             <div className="flex items-center">
-              <input;
+              <input>
                 id="accept-terms"
                 name="accept-terms"
                 type="checkbox"
                 checked={acceptTerms}
                 onChange={(e: any) => setAcceptTerms(e.target.checked)}
                 className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700"
-              /{">"}
+              /">"
               <label htmlFor="accept-terms" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
                 I agree to the{' '}
                 <a href="/terms-of-service" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
@@ -243,11 +243,11 @@ const RegisterPage: React.FC = () => {
             </div>
 
             <div>
-              <Button;
+              <Button;>
                 type="submit"
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-red-700 dark:hover:bg-red-800"
-              {">"}
+              ">"
                 {isLoading ? 'Creating account...' : 'Create account'}
               </Button></div>
             </div>
@@ -256,10 +256,10 @@ const RegisterPage: React.FC = () => {
           <div className="mt-6">
             <div className="text-center text-xs text-gray-500 dark:text-gray-400">
               Already have an account?{' '}
-              <Link;
+              <Link;>
                 to="/login"
                 className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
-              {">"}
+              ">"
                 Sign in here;
               </Link></div>
             </div>

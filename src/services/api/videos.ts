@@ -1,11 +1,12 @@
+import React from 'react';
 // videos - Enhanced Implementation;
 export interface VideosConfig {
-  enabled: boolean;
-  options: Record<string, any>;
+  enabled: boolean,
+  options: Record<string, any>, 
 }
 
 export class Videos {
-  private config: VideosConfig;
+  private config: VideosConfig,
 
   constructor(config?: Partial<VideosConfig>) {
     this.config = {
@@ -16,7 +17,7 @@ export class Videos {
   }
 
   isEnabled(): boolean {
-    return this.config.enabled;
+    return this.config.enabled, 
   }
 
   updateConfig(newConfig: Partial<VideosConfig>): void {

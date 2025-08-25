@@ -1,44 +1,45 @@
+import React from 'react';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
 
 export interface GenerationContext {
   targetFiles: string[];
-  errorCount: number;
-  timeoutSeconds: number;
-  dryRun: boolean;
-  backupEnabled: boolean;
-  errors?: AnalyzedError[];
+  errorCount: number,
+  timeoutSeconds: number,
+  dryRun: boolean,
+  backupEnabled: boolean,
+  errors?: AnalyzedError[], 
 }
 
 export interface ScriptTemplate {
-  id: string;
-  name: string;
-  description: string;
+  id: string,
+  name: string,
+  description: string,
   parameters: TemplateParameter[];
   commands: ScriptCommand[];
-  validationChecks: ValidationCheck[];
+  validationChecks: ValidationCheck[], 
 }
 
 export interface TemplateParameter {
-  name: string;
+  name: string,
   type: 'string' | 'number' | 'boolean';
-  description: string;
-  required: boolean;
-  defaultValue?;
+  description: string,
+  required: boolean,
+  defaultValue?, 
 }
 
 export abstract class BaseScriptGenerator {
-  protected category: string;
+  protected category: string,
   protected templates: Map<string, ScriptTemplate> = new Map();
 
   constructor(category: string) {
     this.category = category;
-    this.initializeTemplates();
+    this.initializeTemplates(), 
   }
 
   protected abstract initializeTemplates(): void;
 
   protected addTemplate(template: ScriptTemplate): void {
-    this.templates.set(template.id, template);
+    this.templates.set(template.id, template), 
   }
 
   protected abstract groupErrorsByPattern(errors: AnalyzedError[]): Map<string, AnalyzedError[]>;
@@ -46,20 +47,20 @@ export abstract class BaseScriptGenerator {
   protected abstract generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    context: GenerationContext;
+    context: GenerationContext,
   ): Promise<FixingScript | null>;
 
   public async generateScript(
     errors: AnalyzedError[],
-    context: GenerationContext;
+    context: GenerationContext,
   ): Promise<FixingScript[]> {
-    const scripts: FixingScript[] = [];
+    const scripts: FixingScript[] : any[] = [];
     const errorGroups = this.groupErrorsByPattern(errors);
 
     for (const [pattern, patternErrors] of errorGroups) {
       const script = await this.generateScriptForPattern(pattern, patternErrors, context);
       if (script) {
-        scripts.push(script);
+        scripts.push(script), 
       }
     }
 
@@ -80,7 +81,7 @@ export abstract class BaseScriptGenerator {
       type,
       command,
       expectedResult,
-      timeoutSeconds;
+      timeoutSeconds, 
     };
   }
 
@@ -93,7 +94,7 @@ export abstract class BaseScriptGenerator {
   }
 
   protected generateRollbackCommands(commands: ScriptCommand[]): ScriptCommand[] {
-    // Generate rollback commands for the given commands;
+    // Generate rollback commands for the given commands, 
     return commands.map(cmd => ({
       type: cmd.type,
       file: cmd.file,
@@ -103,7 +104,7 @@ export abstract class BaseScriptGenerator {
 
   protected estimateRuntime(commands: ScriptCommand[]): number {
     // Estimate runtime in seconds based on command count and type;
-    return commands.length * 5; // 5 seconds per command as rough estimate;
+    return commands.length * 5; // 5 seconds per command as rough estimate, 
   }
 }
 

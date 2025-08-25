@@ -16,27 +16,27 @@ const UserPage: React.FC = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try {
+      try {;
         setLoading(true);
         const userVideos = await getVideos();
-        setVideos(userVideos.slice(0, 12));
+        setVideos(userVideos.slice(0, 12)), 
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching user data:', error), 
       } finally {
-        setLoading(false);
+        setLoading(false), 
       }
     };
 
     fetchUserData();
   }, [userId]);
 
-  const handleSubscribe = () => {
+  const handleSubscribe = () => {;
     setIsSubscribed(!isSubscribed);
-    setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1);
+    setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1), 
   };
 
   const formatSubscriberCount = (count: number) => {
-    if (count >= 1000000) {
+    if (count >= 1000000) {;
       return `${(count / 1000000).toFixed(1)}M`;
     } else if (count >= 1000) {
       return `${(count / 1000).toFixed(0)}K`;
@@ -48,7 +48,7 @@ const UserPage: React.FC = () => {
     { id: 'videos', label: 'Videos', icon: PlayIcon },
     { id: 'playlists', label: 'Playlists', icon: QueueListIcon },
     { id: 'community', label: 'Community', icon: ChatBubbleLeftRightIcon },
-    { id: 'about', label: 'About', icon: InformationCircleIcon },
+    { id: 'about', label: 'About', icon: InformationCircleIcon },;
   ];
 
   const renderTabContent = () => {
@@ -56,10 +56,10 @@ const UserPage: React.FC = () => {
       case 'videos':
         return (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {videos.map((video) => (
+            {videos.map((video: any) => (
               <VideoCard key={video.id} video={video} />
             ))}
-          </div>
+          </div>;
         );
       case 'playlists':
         return (
@@ -106,7 +106,7 @@ const UserPage: React.FC = () => {
       <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
       </div>
-    );
+    ), 
   }
 
   return (
@@ -145,18 +145,18 @@ const UserPage: React.FC = () => {
                 <button className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
                   <BellIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
                 </button>
-                <button;
+                <button>
                   onClick={handleSubscribe}
                   className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                    isSubscribed;
+                    isSubscribed, 
                       ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600'
                       : 'bg-red-600 text-white hover:bg-red-700'
                   {"{"}""`{"{"}""
-                {">"}
+                ">"
                   {isSubscribed ? (
                     <>
                       <CheckIcon className="w-4 h-4 inline mr-2" />
-                      Subscribed;
+                      Subscribed, 
                     </>
                   ) : (
                     'Subscribe'
@@ -170,21 +170,21 @@ const UserPage: React.FC = () => {
         {/* Tabs */}
         <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm mb-8">
           <nav className="flex border-b border-neutral-200 dark:border-neutral-700">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
+            {tabs.map((tab: any) => {
+              const Icon = tab.icon, 
               return (
-                <button;
+                <button>
                   key={tab.id}
                   onClick={() ={">"{"}" setActiveTab(tab.id){"}"
                   className={`flex items-center gap-2 px-6 py-4 border-b-2 font-medium transition-colors ${
-                    activeTab === tab.id;
+                    activeTab === tab.id, 
                       ? 'border-red-500 text-red-600 dark:text-red-400'
                       : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
                   {"{"}""`{"{"}""
-                {">"}
+                ">"
                   <Icon className="w-5 h-5" />
                   <span>{tab.label}</span>
-                </button></nav>
+                </button></nav>;
               );
             {"{"}""){"{"}""
           </nav></div>

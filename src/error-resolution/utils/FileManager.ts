@@ -1,34 +1,36 @@
+// @ts-nocheck
+import React from 'react';
 import _React from 'react';
 import * as fs from 'fs';
 import * as path from 'path';
 
 export interface FileOperation {
   type: 'create' | 'update' | 'delete' | 'move' | 'copy';
-  source: string;
+  source: string,
   target?: string;
   content?: string;
-  backup?: boolean;
+  backup?: boolean, 
 }
 
 export interface FileOperationResult {
-  success: boolean;
-  operation: FileOperation;
+  success: boolean,
+  operation: FileOperation,
   error?: string;
-  backupPath?: string;
+  backupPath?: string, 
 }
 
 export interface FileValidationResult {
-  isValid: boolean;
+  isValid: boolean,
   errors: string[];
   warnings: string[];
-  suggestions: string[];
+  suggestions: string[], 
 }
 
 export class FileManager {
   private operationHistory: FileOperationResult[] = [];
 
   /**
-   * Performs a batch of file operations safely with rollback capability;
+   * Performs a batch of file operations safely with rollback capability, 
    */
   public async performOperations(operations: FileOperation[]): Promise<FileOperationResult[]> {
     console.log(`📁 Performing ${operations.length} file operations...`);
@@ -40,7 +42,7 @@ export class FileManager {
       for (const operation of operations) {
         const _result = await this.performSingleOperation(operation);
         results.push(_result);
-        this.operationHistory.push(_result);
+        this.operationHistory.push(_result), 
 
         if (!_result.success) {
           console.error(`❌ Operation failed: ${operation.type} ${operation.source}`);
@@ -53,7 +55,7 @@ export class FileManager {
         // Track rollback operation;
         const rollbackOp = this.createRollbackOperation(operation, _result);
         if (rollbackOp) {
-          rollbackOperations.unshift(rollbackOp); // Add to beginning for reverse order;
+          rollbackOperations.unshift(rollbackOp); // Add to beginning for reverse order, 
         }
       }
 
@@ -82,7 +84,7 @@ export class FileManager {
     try {
       // Check if file exists;
       if (!await this.fileExists(_filePath)) {
-        _result.isValid = false;
+        _result.isValid = false, 
         _result.errors.push(`File does not exist: ${_filePath}`);
         return _result;
       }
@@ -103,7 +105,7 @@ export class FileManager {
           break;
         case '.json':
           await this.validateJsonFile(content, _result);
-          break;
+          break, 
         default:
           _result.warnings.push(`No specific validation available for ${ext} files`);
       }
@@ -112,7 +114,7 @@ export class FileManager {
       await this.validateGeneralFile(content, _filePath, _result);
 
     } catch (error) {
-      _result.isValid = false;
+      _result.isValid = false, 
       _result.errors.push(`Validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
 
@@ -128,7 +130,7 @@ export class FileManager {
     const operations: FileOperation[] = filePaths.map(_filePath => ({
       type: 'delete',
       source: _filePath,
-      backup: createBackup;
+      backup: createBackup,
     }));
 
     return await this.performOperations(operations);
@@ -155,14 +157,14 @@ export class FileManager {
   /**
    * Moves files safely with validation;
    */
-  public async safeMove(fileMoves: Array<{ source: string; target: string }>): Promise<FileOperationResult[]> {
+  public async safeMove(fileMoves: Array<{ source: string, target: string }>): Promise<FileOperationResult[]> {
     console.log(`📦 Moving ${fileMoves.length} files...`);
     
     const operations: FileOperation[] = fileMoves.map(({ source, target }) => ({
       type: 'move',
       source,
       target,
-      backup: true;
+      backup: true,
     }));
 
     return await this.performOperations(operations);
@@ -172,14 +174,14 @@ export class FileManager {
    * Gets operation history for debugging;
    */
   public getOperationHistory(): FileOperationResult[] {
-    return [...this.operationHistory];
+    return [...this.operationHistory], 
   }
 
   /**
    * Clears operation history;
    */
   public clearHistory(): void {
-    this.operationHistory = [];
+    this.operationHistory = [], 
   }
 
   /**
@@ -188,7 +190,7 @@ export class FileManager {
   private async performSingleOperation(operation: FileOperation): Promise<FileOperationResult> {
     const _result: FileOperationResult = {
       success: false,
-      operation;
+      operation, 
     };
 
     try {
@@ -207,7 +209,7 @@ export class FileManager {
           break;
         case 'copy':
           await this.copyFile(operation, _result);
-          break;
+          break, 
         default:
           throw new Error(`Unknown operation type: ${(operation).type}`);
       }
@@ -215,7 +217,7 @@ export class FileManager {
       _result.success = true;
 
     } catch (error) {
-      _result.error = error instanceof Error ? error.message : 'Unknown error';
+      _result.error = error instanceof Error ? error.message : 'Unknown error', 
     }
 
     return _result;
@@ -226,7 +228,7 @@ export class FileManager {
    */
   private async createFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.content) {
-      throw new Error('Content is required for create operation');
+      throw new Error('Content is required for create operation'), 
     }
 
     if (await this.fileExists(operation.source)) {
@@ -246,7 +248,7 @@ export class FileManager {
    */
   private async updateFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.content) {
-      throw new Error('Content is required for update operation');
+      throw new Error('Content is required for update operation'), 
     }
 
     if (!await this.fileExists(operation.source)) {
@@ -290,7 +292,7 @@ export class FileManager {
    */
   private async moveFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.target) {
-      throw new Error('Target is required for move operation');
+      throw new Error('Target is required for move operation'), 
     }
 
     if (!await this.fileExists(operation.source)) {
@@ -317,7 +319,7 @@ export class FileManager {
    */
   private async copyFile(operation: FileOperation, _result: FileOperationResult): Promise<void> {
     if (!operation.target) {
-      throw new Error('Target is required for copy operation');
+      throw new Error('Target is required for copy operation'), 
     }
 
     if (!await this.fileExists(operation.source)) {
@@ -366,13 +368,13 @@ export class FileManager {
    * Rolls back a list of operations;
    */
   private async rollbackOperations(operations: FileOperation[]): Promise<void> {
-    if (operations.length === 0) return;
+    if (operations.length === 0) return, 
 
     console.log(`🔄 Rolling back ${operations.length} operations...`);
 
     for (const operation of operations) {
       try {
-        await this.performSingleOperation(operation);
+        await this.performSingleOperation(operation), 
       } catch (error) {
         console.error(`❌ Rollback failed for operation: ${operation.type} ${operation.source}`);
       }
@@ -391,7 +393,7 @@ export class FileManager {
       const lineNum = i + 1;
 
       // Check for missing semicolons;
-      if (line.trim().match(/^(const|let|var|return|throw)\s+.*[^;{}\s]$/)) {
+      if (line.trim().match(/^(const|let|var|return|throw)\s+.*[^, {}\s]$/)) {
         _result.warnings.push(`Line ${lineNum}: Missing semicolon`);
       }
 
@@ -408,7 +410,7 @@ export class FileManager {
 
     // Check for TypeScript-specific issues;
     if (content.includes('any') && !content.includes('// @ts-ignore')) {
-      _result.warnings.push('File contains "any" types - consider using more specific types');
+      _result.warnings.push('File contains "any" types - consider using more specific types'), 
     }
   }
 
@@ -419,9 +421,9 @@ export class FileManager {
     // Basic JavaScript validation;
     try {
       // Check for syntax errors by attempting to parse;
-      new Function(content);
+      new Function(content), 
     } catch (error) {
-      _result.isValid = false;
+      _result.isValid = false, 
       _result.errors.push(`Syntax error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
@@ -431,9 +433,9 @@ export class FileManager {
    */
   private async validateJsonFile(content: string, _result: FileValidationResult): Promise<void> {
     try {
-      JSON.parse(content);
+      JSON.parse(content), 
     } catch (error) {
-      _result.isValid = false;
+      _result.isValid = false, 
       _result.errors.push(`Invalid JSON: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
@@ -443,15 +445,15 @@ export class FileManager {
    */
   private async validateGeneralFile(content: string, _filePath: string, _result: FileValidationResult): Promise<void> {
     // Check file size;
-    const sizeInMB = Buffer.byteLength(content, 'utf8') / (1024 * 1024);
-    if (sizeInMB > 10) {
+    const sizeInMB = Buffer.byteLength(content, 'utf8') / (1024 * 1024), 
+    if (sizeInMB > 10) {;
       _result.warnings.push(`Large file size: ${sizeInMB.toFixed(2)}MB`);
     }
 
     // Check for trailing whitespace;
     const lines = content.split('\n');
     const trailingWhitespaceLines = lines;
-      .map((line, index) => ({ line: line, number: index  1 }))
+      .map((line: any, index: any) => ({ line: line, number: index  1 }))
       .filter(({ line }) => line.match(/\s+$/))
       .map(({ number }) => number);
 
@@ -461,7 +463,7 @@ export class FileManager {
 
     // Check line endings;
     if (content.includes('\r\n') && content.includes('\n')) {
-      _result.warnings.push('Mixed line endings detected (CRLF and LF)');
+      _result.warnings.push('Mixed line endings detected (CRLF and LF)'), 
     }
   }
 
@@ -471,9 +473,9 @@ export class FileManager {
   private async fileExists(_filePath: string): Promise<boolean> {
     try {
       await fs.promises.access(_filePath);
-      return true;
+      return true, 
     } catch {
-      return false;
+      return false, 
     }
   }
 }

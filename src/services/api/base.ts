@@ -1,11 +1,12 @@
+import React from 'react';
 // base - Enhanced Implementation;
 export interface BaseConfig {
-  enabled: boolean;
-  options: Record<string, any>;
+  enabled: boolean,
+  options: Record<string, any>, 
 }
 
 export class Base {
-  private config: BaseConfig;
+  private config: BaseConfig,
 
   constructor(config?: Partial<BaseConfig>) {
     this.config = {
@@ -16,7 +17,7 @@ export class Base {
   }
 
   isEnabled(): boolean {
-    return this.config.enabled;
+    return this.config.enabled, 
   }
 
   updateConfig(newConfig: Partial<BaseConfig>): void {

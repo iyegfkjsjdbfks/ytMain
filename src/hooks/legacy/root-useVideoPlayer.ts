@@ -1,24 +1,25 @@
+import React from 'react';
 // rootUseVideoPlayer - Generic Implementation;
 export interface RootUseVideoPlayerConfig {
-  enabled?: boolean;
+  enabled?: boolean, 
 }
 
 export class RootUseVideoPlayer {
-  private config: Required<RootUseVideoPlayerConfig>;
+  private config: Required<RootUseVideoPlayerConfig>, 
 
   constructor(config: RootUseVideoPlayerConfig = {}) {
     this.config = {
-      enabled: config.enabled ?? true;
+      enabled: config.enabled ?? true, 
     };
   }
 
   isEnabled(): boolean {
-    return this.config.enabled;
+    return this.config.enabled, 
   }
 
   process(data): any {
     if (!this.config.enabled) {
-      return data;
+      return data, 
     }
 
     try {
@@ -29,7 +30,7 @@ export class RootUseVideoPlayer {
       };
     } catch (error) {
       console.error('Processing error:', error);
-      throw error;
+      throw error, 
     }
   }
 }

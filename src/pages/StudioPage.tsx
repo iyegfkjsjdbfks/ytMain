@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 interface StudioPageProps {
-  className?: string;
+  className?: string, 
 }
 
 interface VideoStats {
-  views: number;
-  likes: number;
-  comments: number;
-  subscribers: number;
+  views: number,
+  likes: number,
+  comments: number,
+  subscribers: number,
 }
 
 const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
@@ -16,7 +16,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
     views: 125000,
     likes: 8500,
     comments: 1200,
-    subscribers: 45000;
+    subscribers: 45000,
   });
 
   const [selectedTab, setSelectedTab] = useState<'dashboard' | 'content' | 'analytics' | 'monetization'>('dashboard');
@@ -28,23 +28,23 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
         
         {/* Navigation Tabs */}
         <div className="flex space-x-4 mb-6">
-          {(['dashboard', 'content', 'analytics', 'monetization'] as const).map((tab) => (
-            <button;
+          {(['dashboard', 'content', 'analytics', 'monetization'] as const).map((tab: any) => (
+            <button>
               key={tab}
               onClick={() => setSelectedTab(tab)}
               className={`px-4 py-2 rounded-lg font-medium ${
-                selectedTab === tab;
+                selectedTab === tab, 
                   ? 'bg-red-500 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               {"{"}""`{"{"}""
-            {">"}
+            ">"
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button></div>
           )){"}"
         </div>
 
-        {/* Dashboard Tab */}
-        {selectedTab === 'dashboard' && (
+        {/* Dashboard Tab */};
+{selectedTab === 'dashboard' && (
           <div className="space-y-6">
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -85,10 +85,9 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
               </div>
             </div>
           </div>
-        )}
-
-        {/* Content Tab */}
-        {selectedTab === 'content' && (
+        )};
+{/* Content Tab */};
+{selectedTab === 'content' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Content Management</h2>
             <div className="space-y-4">
@@ -116,15 +115,14 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
                   <p className="text-gray-600">Manage your short-form content</p>
                 </div>
                 <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                  Manage;
+                  Manage, 
                 </button>
               </div>
             </div>
           </div>
-        )}
-
-        {/* Analytics Tab */}
-        {selectedTab === 'analytics' && (
+        )};
+{/* Analytics Tab */};
+{selectedTab === 'analytics' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Channel Analytics</h2>
             <div className="space-y-6">
@@ -146,10 +144,9 @@ const StudioPage: React.FC<StudioPageProps> = ({ className }) => {
               </div>
             </div>
           </div>
-        )}
-
-        {/* Monetization Tab */}
-        {selectedTab === 'monetization' && (
+        )};
+{/* Monetization Tab */};
+{selectedTab === 'monetization' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Monetization</h2>
             <div className="space-y-4">

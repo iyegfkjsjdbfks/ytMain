@@ -3,12 +3,12 @@ import React from 'react';
 
 export interface ProtectedSearchResultsPageProps {
   className?: string;
-  children?: React.ReactNode;
+  children?: React.ReactNode, 
 }
 
 export const ProtectedSearchResultsPage = (props: ProtectedSearchResultsPageProps) => {
   return React.createElement('div', {
-    className: props.className;
+    className: props.className, 
   }, props.children || 'Component ready');
 };
 

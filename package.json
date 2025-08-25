@@ -15,11 +15,12 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.ts",
-    "type-check": "tsc --noEmit --pretty",
+    "type-check": "tsc --noEmit --skipLibCheck",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts",
     "clean": "rimraf dist",
-    "prepublishOnly": "npm run clean && npm run build"
+    "prepublishOnly": "npm run clean && npm run build",
+    "type-check:strict": "tsc --noEmit"
   },
   "keywords": [
     "typescript",

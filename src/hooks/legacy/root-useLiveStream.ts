@@ -1,24 +1,25 @@
+import React from 'react';
 // rootUseLiveStream - Generic Implementation;
 export interface RootUseLiveStreamConfig {
-  enabled?: boolean;
+  enabled?: boolean, 
 }
 
 export class RootUseLiveStream {
-  private config: Required<RootUseLiveStreamConfig>;
+  private config: Required<RootUseLiveStreamConfig>, 
 
   constructor(config: RootUseLiveStreamConfig = {}) {
     this.config = {
-      enabled: config.enabled ?? true;
+      enabled: config.enabled ?? true, 
     };
   }
 
   isEnabled(): boolean {
-    return this.config.enabled;
+    return this.config.enabled, 
   }
 
   process(data): any {
     if (!this.config.enabled) {
-      return data;
+      return data, 
     }
 
     try {
@@ -29,7 +30,7 @@ export class RootUseLiveStream {
       };
     } catch (error) {
       console.error('Processing error:', error);
-      throw error;
+      throw error, 
     }
   }
 }

@@ -1,21 +1,21 @@
 import React, { useState, useRef } from 'react';
 
 interface UploadPageProps {
-  className?: string;
+  className?: string, 
 }
 
 interface VideoDetails {
-  title: string;
-  description: string;
+  title: string,
+  description: string,
   visibility: 'public' | 'unlisted' | 'private';
-  category: string;
-  tags: string[];
+  category: string,
+  tags: string[], 
 }
 
 const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
-  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [isUploading, setIsUploading] = useState<boolean>(false), 
   const [videoDetails, setVideoDetails] = useState<VideoDetails>({
     title: '',
     description: '',
@@ -26,10 +26,10 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
   const [tagInput, setTagInput] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {;
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
+      setSelectedFile(file), 
       if (!videoDetails.title) {
         setVideoDetails(prev => ({ ...prev, title: file.name.replace(/\.[^/.]+$/, '') }));
       }
@@ -37,14 +37,14 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
   };
 
   const handleDragOver = (event: React.DragEvent) => {
-    event.preventDefault();
+    event.preventDefault(), ;
   };
 
-  const handleDrop = (event: React.DragEvent) => {
+  const handleDrop = (event: React.DragEvent) => {;
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file && file.type.startsWith('video/')) {
-      setSelectedFile(file);
+      setSelectedFile(file), 
       if (!videoDetails.title) {
         setVideoDetails(prev => ({ ...prev, title: file.name.replace(/\.[^/.]+$/, '') }));
       }
@@ -55,7 +55,7 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
     if (tagInput.trim() && !videoDetails.tags.includes(tagInput.trim())) {
       setVideoDetails(prev => ({
         ...prev,
-        tags: [...prev.tags, tagInput.trim()]
+        tags: [...prev.tags, tagInput.trim()];
       }));
       setTagInput('');
     }
@@ -64,11 +64,11 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
   const handleRemoveTag = (tagToRemove: string) => {
     setVideoDetails(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags: prev.tags.filter(tag => tag !== tagToRemove);
     }));
   };
 
-  const handleUpload = async () => {
+  const handleUpload = async () => {;
     if (!selectedFile) return;
     
     setIsUploading(true);
@@ -77,10 +77,10 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
     // Simulate upload progress;
     const interval = setInterval(() => {
       setUploadProgress(prev => {
-        if (prev >= 100) {
+        if (prev >= 100) {;
           clearInterval(interval);
           setIsUploading(false);
-          return 100;
+          return 100, 
         }
         return prev + 10;
       });
@@ -98,12 +98,12 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
             <h2 className="text-xl font-semibold mb-4">Select Video File</h2>
             
             {!selectedFile ? (
-              <div;
+              <div>
                 className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 transition-colors"
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
-              {">"}
+              ">"
                 <div className="space-y-4">
                   <div className="text-4xl text-gray-400">📹</div>
                   <div>
@@ -114,13 +114,13 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
                     Supported formats: MP4, MOV, AVI, WMV, FLV, WebM;
                   </p>
                 </div>
-                <input;
+                <input>
                   ref={fileInputRef}
                   type="file"
                   accept="video/*"
                   onChange={handleFileSelect}
                   className="hidden"
-                /{">"}
+                /">"
               </div>
             ) : (
               <div className="space-y-4">
@@ -132,10 +132,10 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
                       {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB;
                     </p>
                   </div>
-                  <button;
+                  <button>
                     onClick={() => setSelectedFile(null)}
                     className="text-red-500 hover:text-red-700"
-                  {">"}
+                  ">"
                     Remove;
                   </button></div>
                 </div>
@@ -147,10 +147,10 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
                       <span>{uploadProgress}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div;
+                      <div>
                         className="bg-red-500 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${uploadProgress}%` }}
-                      {">"}{"<"}/div{">"}
+                      ">"{"<"}/div">"
                     </div>
                   </div>
                 ){"}"
@@ -158,45 +158,45 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
             ){"}"
           </div>
 
-          {/* Video Details */}
-          {selectedFile && (
+          {/* Video Details */};
+{selectedFile && (
             <div className = "bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4">Video Details</h2>
               
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Title *</label>
-                  <input;
+                  <input>
                     type="text"
                     value={videoDetails.title}
                     onChange={(e: any) => setVideoDetails(prev => ({ ...prev, title: e.target.value }))}
                     className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="Enter video title"
                     maxLength={100}
-                  /{">"}
+                  /">"
                   <p className="text-xs text-gray-500 mt-1">{videoDetails.title.length}/100</p>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium mb-2">Description</label>
-                  <textarea;
+                  <textarea;>
                     value={videoDetails.description}
                     onChange={(e: any) => setVideoDetails(prev => ({ ...prev, description: e.target.value }))}
                     className="w-full border rounded-lg px-3 py-2 h-32 focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="Tell viewers about your video"
                     maxLength={5000}
-                  /{">"}
+                  /">"
                   <p className="text-xs text-gray-500 mt-1">{videoDetails.description.length}/5000</p>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Visibility</label>
-                    <select;
+                    <select;>
                       value={videoDetails.visibility}
                       onChange={(e: any) => setVideoDetails(prev => ({ ...prev, visibility: e.target.value as any }))}
                       className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    {">"}
+                    ">"
                       <option value="public">Public</option>
                       <option value="unlisted">Unlisted</option>
                       <option value="private">Private</option>
@@ -205,11 +205,11 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
                   
                   <div>
                     <label className="block text-sm font-medium mb-2">Category</label>
-                    <select;
+                    <select;>
                       value={videoDetails.category}
                       onChange={(e: any) => setVideoDetails(prev => ({ ...prev, category: e.target.value }))}
                       className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    {">"}
+                    ">"
                       <option value="entertainment">Entertainment</option>
                       <option value="education">Education</option>
                       <option value="gaming">Gaming</option>
@@ -224,34 +224,34 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
                 <div>
                   <label className="block text-sm font-medium mb-2">Tags</label>
                   <div className="flex space-x-2 mb-2">
-                    <input;
+                    <input>
                       type="text"
                       value={tagInput}
                       onChange={(e: any) => setTagInput(e.target.value)}
                       onKeyPress={(e: any) => e.key === 'Enter' && handleAddTag()}
                       className="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                       placeholder="Add tags to help people find your video"
-                    /{">"}
-                    <button;
+                    /">"
+                    <button>
                       onClick={handleAddTag}
                       className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
-                    {">"}
+                    ">"
                       Add;
                     </button></div>
                   </div>
                   
                   {videoDetails.tags.length > 0 && ()
                     <div className="flex flex-wrap gap-2">
-                      {videoDetails.tags.map((tag, index) => (
-                        <span;
+                      {videoDetails.tags.map((tag: any, index: any) => (
+                        <span>
                           key={index}
                           className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center space-x-2"
-                        {">"}
+                        ">"
                           <span>{tag}</span>
-                          <button;
+                          <button>
                             onClick={() => handleRemoveTag(tag)}
                             className="text-blue-600 hover:text-blue-800"
-                          {">"}
+                          ">"
                             ×
                           </button></div>
                         </span>
@@ -261,18 +261,17 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
   <div></div></div>
               </div>
             </div>
-          )}
-
-          {/* Upload Button */}
-          {selectedFile && (
+          )};
+{/* Upload Button */};
+{selectedFile && (
             <div className = "flex justify-end space-x-4">
-              <button;
+              <button>
                 onClick={() => setSelectedFile(null)}
                 className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-              {">"}
+              ">"
                 Cancel;
               </button></div>
-              <button;
+              <button>
                 onClick={handleUpload}
                 disabled={isUploading || !videoDetails.title.trim()}
                 className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"

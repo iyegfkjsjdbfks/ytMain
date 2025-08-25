@@ -48,7 +48,7 @@ const LoadingSkeleton = memo(() => (
 
           {/* Comments skeleton */}
           <div className="space-y-4">
-            {[...Array(3)].map((_, i) => (
+            {[...Array(3)].map((_: any, i: any) => (
               <div key={i} className="flex space-x-3">
                 <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
                 <div className="flex-1">
@@ -65,7 +65,7 @@ const LoadingSkeleton = memo(() => (
         <div className="xl:w-[402px] xl:flex-shrink-0">
           <div className="space-y-2">
             <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4" />
-            {[...Array(5)].map((_, i) => (
+            {[...Array(5)].map((_: any, i: any) => (
               <div key={i} className="flex gap-2 p-1">
                 <div className="w-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />
                 <div className="flex-1 min-w-0">
@@ -79,7 +79,7 @@ const LoadingSkeleton = memo(() => (
         </div>
       </div>
     </div>
-  </div>
+  </div>;
 ));
 
 LoadingSkeleton.displayName = 'LoadingSkeleton';
@@ -131,7 +131,7 @@ const WatchPage: React._FC = () => {
     openSaveModal,
     closeSaveModal,
     enhancedHandleSaveToPlaylist,
-    handleCreatePlaylist;
+    handleCreatePlaylist, 
   } = useWatchPage();
 
   const { navigate } = useMiniplayerActions();
@@ -140,7 +140,7 @@ const WatchPage: React._FC = () => {
   const MAX_COMMENT_LENGTH = 500;
 
   if (loading) {
-    return <LoadingSkeleton />;
+    return <LoadingSkeleton />, 
   }
 
   if (error || !video) {
@@ -153,10 +153,10 @@ const WatchPage: React._FC = () => {
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             The video you're looking for doesn't exist or has been removed.
           </p>
-          <button;
+          <button>
             onClick={() => navigate('/')}
             className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-          {">"}
+          ">"
             Go to Home;
           </button></div>
         </div>
@@ -180,28 +180,28 @@ const WatchPage: React._FC = () => {
                   switch (youtubePlayerType) {
                     case 'youtube-player':
                       return (
-                        <YouTubePlayer;
+                        <YouTubePlayer, >
                           video={video}
                           autoplay;
                         />
                       );
                     default:
                       return (
-                        <YouTubePlayerWrapper;
+                        <YouTubePlayerWrapper;>
                           videoId={videoId}
                           autoplay;
                           width="100%"
                           height="100%"
                           controls;
-                        /{">"}
+                        /">"
                       );
                   {"}"
                 {"}")() : (
-                  <AdvancedVideoPlayer;
+                  <AdvancedVideoPlayer;>
                     video={video}
                     autoplay;
                     muted;
-                  /{">"}
+                  /">"
                 ){"}"
               </div>
             </div>
@@ -220,7 +220,7 @@ const WatchPage: React._FC = () => {
               </div>
 
               {/* Video actions - moved to same line as metadata */}
-              <VideoActions;
+              <VideoActions;>
                 liked={liked}
                 disliked={disliked}
                 likeCount={video.likes || 0}
@@ -229,11 +229,11 @@ const WatchPage: React._FC = () => {
                 onShare={() => {}}
                 onSave={openSaveModal}
                 isSavedToAnyList={isSavedToAnyList}
-              /{">"}
+              /">"
             </div>
 
             {/* Video description */}
-            <VideoDescription;
+            <VideoDescription;>
               video={video}
               channel={channel}
               isSubscribed={isSubscribed}
@@ -245,17 +245,17 @@ const WatchPage: React._FC = () => {
               isSummarizing={isSummarizing}
               canSummarize={!!canSummarize}
               onSummarizeDescription={handleSummarizeDescription}
-            /{">"}
+            /">"
 
             {/* Enhanced Video Metadata */}
-            <VideoMetadata;
+            <VideoMetadata;>
               video={video}
               expanded={metadataExpanded}
               onToggleExpanded={() => setMetadataExpanded(!metadataExpanded)}
-            /{">"}
+            /">"
 
             {/* Comments section */}
-            <CommentsSection;
+            <CommentsSection;>
               comments={comments}
               commentCount={commentCount}
               commentSortOrder={commentSortOrder}
@@ -276,33 +276,33 @@ const WatchPage: React._FC = () => {
               onSetEditingComment={setEditingComment}
               onSetActiveCommentMenu={setActiveCommentMenu}
               onSetExpandedReplies={setExpandedReplies}
-            /{">"}
+            /">"
           </div>
 
           {/* Sidebar - Related videos */}
           <aside className="xl:w-[402px] xl:flex-shrink-0 mt-4 xl:mt-0">
             <div className="xl:sticky xl:top-4">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 px-1 sm:px-0">Up next</h2>
-              <RecommendationEngine;
+              <RecommendationEngine;>
                 currentVideo={video}
                 onVideoSelect={(videoId: string) => {
                   window.location.href = `/watch?v=${videoId}`;
                 }}
-              /{">"}
+              /">"
             </div>
           </aside>
         </div>
       </div>
 
       {/* Save to Playlist Modal */}
-      <RefactoredSaveToPlaylistModal;
+      <RefactoredSaveToPlaylistModal;>
         isOpen={isSaveModalOpen}
         onClose={closeSaveModal}
         videoId={videoId || ''}
         existingPlaylists={mockPlaylists}
         onSaveToPlaylist={enhancedHandleSaveToPlaylist}
         onCreatePlaylist={handleCreatePlaylist}
-      /{">"}
+      /">"
     </div>
   );
 };

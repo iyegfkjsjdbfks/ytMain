@@ -1,10 +1,11 @@
+import React from 'react';
 // useEnhancedQuery - Advanced Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseEnhancedQueryConfig {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void, 
 }
 
 export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
@@ -14,7 +15,7 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {;
     if (!enabled) return;
 
     try {
@@ -22,12 +23,12 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 500)), 
       
       const result = {
         hookName: 'useEnhancedQuery',
         timestamp: Date.now(),
-        status: 'success'
+        status: 'success';
       };
       
       setData(result);
@@ -35,21 +36,21 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      onError?.(error);
+      onError?.(error), 
     } finally {
-      setLoading(false);
+      setLoading(false), 
     }
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
-    fetchData();
+    fetchData(), 
   }, [fetchData]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData;
+    refetch: fetchData,
   };
 }
 

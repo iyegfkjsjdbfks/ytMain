@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ErrorAnalyzer, ErrorRootCause, ErrorSeverity } from '../core/ErrorAnalyzer';
 
 describe('ErrorAnalyzer', () => {

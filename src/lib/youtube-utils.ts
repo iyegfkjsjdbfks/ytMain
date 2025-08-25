@@ -1,24 +1,25 @@
+import React from 'react';
 // youtubeUtils - Generic Implementation;
 export interface YoutubeUtilsConfig {
-  enabled?: boolean;
+  enabled?: boolean, 
 }
 
 export class YoutubeUtils {
-  private config: Required<YoutubeUtilsConfig>;
+  private config: Required<YoutubeUtilsConfig>, 
 
   constructor(config: YoutubeUtilsConfig = {}) {
     this.config = {
-      enabled: config.enabled ?? true;
+      enabled: config.enabled ?? true, 
     };
   }
 
   isEnabled(): boolean {
-    return this.config.enabled;
+    return this.config.enabled, 
   }
 
   process(data): any {
     if (!this.config.enabled) {
-      return data;
+      return data, 
     }
 
     try {
@@ -29,7 +30,7 @@ export class YoutubeUtils {
       };
     } catch (error) {
       console.error('Processing error:', error);
-      throw error;
+      throw error, 
     }
   }
 }

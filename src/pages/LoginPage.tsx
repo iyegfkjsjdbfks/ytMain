@@ -9,7 +9,7 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>(''), 
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -17,40 +17,40 @@ const LoginPage: React.FC = () => {
 
   const from = (location.state)?.from?.pathname || '/';
 
-  const handleSubmit = async (_e: FormEvent): Promise<void> => {
+  const handleSubmit = async (_e: FormEvent): Promise<void> => {;
     _e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
-      const success = await login(email, password);
-      if (success) {
+      const success = await login(email, password), 
+      if (success) {;
         navigate(from, { replace: true });
       } else {
-        setError('Invalid email or password. Please try again.');
+        setError('Invalid email or password. Please try again.'), 
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError('An error occurred. Please try again.'), 
     } finally {
-      setIsLoading(false);
+      setIsLoading(false), 
     }
   };
 
-  const handleDemoLogin = async (): Promise<void> => {
+  const handleDemoLogin = async (): Promise<void> => {;
     setError('');
     setIsLoading(true);
 
     try {
-      const success = await login('demo@example.com', 'demo123');
-      if (success) {
+      const success = await login('demo@example.com', 'demo123'), 
+      if (success) {;
         navigate(from, { replace: true });
       } else {
-        setError('Demo login failed. Please try again.');
+        setError('Demo login failed. Please try again.'), 
       }
     } catch (err) {
-      setError('Demo login failed. Please try again.');
+      setError('Demo login failed. Please try again.'), 
     } finally {
-      setIsLoading(false);
+      setIsLoading(false), 
     }
   };
 
@@ -65,10 +65,10 @@ const LoginPage: React.FC = () => {
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
           Or{' '}
-          <Link;
+          <Link;>
             to="/register"
             className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
-          {">"}
+          ">"
             create a new account;
           </Link></p>
         </p></div>
@@ -90,17 +90,17 @@ const LoginPage: React.FC = () => {
                 Email address;
               </label>
               <div className="mt-1">
-                <Input;
+                <Input;>
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required;
                   value={email}
-                  onChange={(_e) => setEmail(_e.target.value)}
+                  onChange={(_e: any) => setEmail(_e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                   placeholder="Enter your email"
-                /{">"}
+                /">"
               </div>
             </div>
 
@@ -109,28 +109,28 @@ const LoginPage: React.FC = () => {
                 Password;
               </label>
               <div className="mt-1">
-                <Input;
+                <Input;>
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
                   required;
                   value={password}
-                  onChange={(_e) => setPassword(_e.target.value)}
+                  onChange={(_e: any) => setPassword(_e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                   placeholder="Enter your password"
-                /{">"}
+                /">"
               </div>
             </div>
 
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <input;
+                <input>
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700"
-                /{">"}
+                /">"
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
                   Remember me;
                 </label>
@@ -144,11 +144,11 @@ const LoginPage: React.FC = () => {
             </div>
 
             <div>
-              <Button;
+              <Button;>
                 type="submit"
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-red-700 dark:hover:bg-red-800"
-              {">"}
+              ">"
                 {isLoading ? 'Signing in...' : 'Sign in'}
               </Button></div>
             </div>
@@ -166,12 +166,12 @@ const LoginPage: React.FC = () => {
           </div>
 
           <div className="mt-6">
-            <Button;
+            <Button;>
               type="button"
               onClick={handleDemoLogin}
               disabled={isLoading}
               className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            {">"}
+            ">"
               Try Demo Account;
             </Button></div>
           </div>

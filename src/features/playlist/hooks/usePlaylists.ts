@@ -1,17 +1,18 @@
+import React from 'react';
 // usePlaylists - Custom Hook;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UsePlaylistsOptions {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void, 
 }
 
 export interface UsePlaylistsResult {
   data;
-  loading: boolean;
-  error: Error | null;
-  refetch: () => void;
+  loading: boolean,
+  error: Error | null
+      refetch: () => void, 
 }
 
 export function usePlaylists(
@@ -23,19 +24,19 @@ export function usePlaylists(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {;
     if (!enabled) return;
 
     try {
       setLoading(true);
       setError(null);
       
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'usePlaylists',
         timestamp: Date.now(),
-        success: true;
+        success: true,;
       };
       
       setData(result);
@@ -43,21 +44,21 @@ export function usePlaylists(
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      onError?.(error);
+      onError?.(error), 
     } finally {
-      setLoading(false);
+      setLoading(false), 
     }
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
-    fetchData();
+    fetchData(), 
   }, [fetchData]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData;
+    refetch: fetchData,
   };
 }
 

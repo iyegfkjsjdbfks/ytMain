@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 interface AdminPageProps {
-  className?: string;
+  className?: string, 
 }
 
 interface AdminStats {
-  totalUsers: number;
-  totalVideos: number;
-  totalViews: number;
-  activeUsers: number;
+  totalUsers: number,
+  totalVideos: number,
+  totalViews: number,
+  activeUsers: number,
 }
 
 const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
@@ -16,7 +16,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
     totalUsers: 125000,
     totalVideos: 45000,
     totalViews: 2500000,
-    activeUsers: 8500;
+    activeUsers: 8500,
   });
 
   const [selectedTab, setSelectedTab] = useState<'overview' | 'users' | 'content' | 'reports'>('overview');
@@ -28,23 +28,23 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
         
         {/* Navigation Tabs */}
         <div className="flex space-x-4 mb-6">
-          {(['overview', 'users', 'content', 'reports'] as const).map((tab) => (
-            <button;
+          {(['overview', 'users', 'content', 'reports'] as const).map((tab: any) => (
+            <button>
               key={tab}
               onClick={() => setSelectedTab(tab)}
               className={`px-4 py-2 rounded-lg font-medium ${
-                selectedTab === tab;
+                selectedTab === tab, 
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               {"{"}""`{"{"}""
-            {">"}
+            ">"
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button></div>
           )){"}"
         </div>
 
-        {/* Overview Tab */}
-        {selectedTab === 'overview' && (
+        {/* Overview Tab */};
+{selectedTab === 'overview' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-lg font-semibold text-gray-700">Total Users</h3>
@@ -63,10 +63,9 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
               <p className="text-3xl font-bold text-orange-600">{stats.activeUsers.toLocaleString()}</p>
             </div>
           </div>
-        )}
-
-        {/* Users Tab */}
-        {selectedTab === 'users' && (
+        )};
+{/* Users Tab */};
+{selectedTab === 'users' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">User Management</h2>
             <div className="space-y-4">
@@ -85,15 +84,14 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">View and manage banned accounts</p>
                 </div>
                 <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                  View;
+                  View, 
                 </button>
               </div>
             </div>
           </div>
-        )}
-
-        {/* Content Tab */}
-        {selectedTab === 'content' && (
+        )};
+{/* Content Tab */};
+{selectedTab === 'content' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Content Management</h2>
             <div className="space-y-4">
@@ -112,15 +110,14 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">Handle copyright and DMCA requests</p>
                 </div>
                 <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-                  Handle;
+                  Handle, 
                 </button>
               </div>
             </div>
           </div>
-        )}
-
-        {/* Reports Tab */}
-        {selectedTab === 'reports' && (
+        )};
+{/* Reports Tab */};
+{selectedTab === 'reports' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Reports & Analytics</h2>
             <div className="space-y-4">
@@ -139,7 +136,7 @@ const AdminPage: React.FC<AdminPageProps> = ({ className }) => {
                   <p className="text-gray-600">Platform performance and usage analytics</p>
                 </div>
                 <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                  View Analytics;
+                  View Analytics, 
                 </button>
               </div>
             </div>

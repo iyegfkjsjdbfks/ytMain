@@ -1,16 +1,17 @@
+import React from 'react';
 // LiveQA - Enhanced Component;
 import React, { useState } from 'react';
 
 export interface LiveQAProps {
   className?: string;
-  children?: React.ReactNode;
+  children?: React.ReactNode, 
 }
 
 export const LiveQA: React.FC<LiveQAProps> = ({
   className = '',
-  children;
+  children, 
 }) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false), 
 
   return (
     <div className={'component ' + className}>

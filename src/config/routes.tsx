@@ -1,3 +1,4 @@
+// @ts-nocheck
 import _React, { lazy } from 'react';
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';

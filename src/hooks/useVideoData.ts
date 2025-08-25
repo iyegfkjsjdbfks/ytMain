@@ -1,15 +1,16 @@
+import React from 'react';
 import _React from 'react';
 // useVideoData - Simple Hook;
 import { useState } from 'react';
 
 // Define a generic video type;
 interface Video {
-  id: string;
-  title: string;
-  thumbnail: string;
-  channel: string;
-  views: number;
-  uploadedAt: Date;
+  id: string,
+  title: string,
+  thumbnail: string,
+  channel: string,
+  views: number,
+  uploadedAt: Date,
 }
 
 export function useVideoData() {
@@ -21,7 +22,7 @@ export function useVideoData() {
     data,
     loading,
     error,
-    setData;
+    setData, 
   };
 }
 
@@ -35,7 +36,7 @@ export function useVideos() {
     videos,
     loading,
     error,
-    setVideos;
+    setVideos, 
   };
 }
 
@@ -48,7 +49,7 @@ export function useTrendingVideos() {
     trendingVideos,
     loading,
     error,
-    setTrendingVideos;
+    setTrendingVideos, 
   };
 }
 
@@ -61,7 +62,7 @@ export function useSubscriptionsFeed() {
     subscriptionsFeed,
     loading,
     error,
-    setSubscriptionsFeed;
+    setSubscriptionsFeed, 
   };
 }
 
@@ -74,7 +75,7 @@ export function useChannelVideos() {
     channelVideos,
     loading,
     error,
-    setChannelVideos;
+    setChannelVideos, 
   };
 }
 

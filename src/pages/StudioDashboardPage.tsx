@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 interface StudioDashboardPageProps {
-  className?: string;
+  className?: string, 
 }
 
 interface DashboardStats {
-  totalViews: number;
-  watchTime: number;
-  subscribers: number;
-  revenue: number;
+  totalViews: number,
+  watchTime: number,
+  subscribers: number,
+  revenue: number,
 }
 
 const StudioDashboardPage: React.FC<StudioDashboardPageProps> = ({ className }) => {
@@ -16,7 +16,7 @@ const StudioDashboardPage: React.FC<StudioDashboardPageProps> = ({ className }) 
     totalViews: 1250000,
     watchTime: 45000,
     subscribers: 125000,
-    revenue: 2500;
+    revenue: 2500,
   });
 
   const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d');
@@ -26,11 +26,11 @@ const StudioDashboardPage: React.FC<StudioDashboardPageProps> = ({ className }) 
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Channel Dashboard</h1>
-          <select;
+          <select;>
             value={timeRange}
             onChange={(e: any) => setTimeRange(e.target.value as any)}
             className="border rounded-lg px-3 py-2"
-          {">"}
+          ">"
             <option value="7d">Last 7 days</option>
             <option value="28d">Last 28 days</option>
             <option value="90d">Last 90 days</option>
@@ -71,7 +71,7 @@ const StudioDashboardPage: React.FC<StudioDashboardPageProps> = ({ className }) 
                 { title: 'My Latest Tutorial', views: '12.5K', status: 'Published' },
                 { title: 'Behind the Scenes', views: '8.2K', status: 'Published' },
                 { title: 'Q&A Session', views: '15.1K', status: 'Published' }
-              ].map((video, index) => (
+              ].map((video: any, index: any) => (
                 <div key={index} className="flex justify-between items-center p-3 border rounded">
                   <div>
                     <h3 className="font-medium">{video.title}</h3>

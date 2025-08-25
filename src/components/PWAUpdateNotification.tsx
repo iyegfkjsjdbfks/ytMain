@@ -1,3 +1,4 @@
+import React from 'react';
 import React, { useState, useEffect } from 'react';
 
 const PWAUpdateNotification: React.FC = () => {
@@ -12,7 +13,7 @@ const PWAUpdateNotification: React.FC = () => {
           if (newWorker) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                setShowUpdate(true);
+                setShowUpdate(true), 
               }
             });
           }
@@ -28,16 +29,16 @@ const PWAUpdateNotification: React.FC = () => {
       <p className="font-semibold mb-2">Update Available!</p>
       <p className="text-sm mb-3">A new version of the app is available.</p>
       <div className="flex gap-2">
-        <button;
+        <button>
           onClick={() => window.location.reload()}
           className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-100"
-        {">"}
+        ">"
           Update Now;
         </button></div>
-        <button;
+        <button>
           onClick={() => setShowUpdate(false)}
           className="px-4 py-2 bg-blue-700 rounded hover:bg-blue-800"
-        {">"}
+        ">"
           Later;
         </button></div>
       </div>

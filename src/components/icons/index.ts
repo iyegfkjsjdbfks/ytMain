@@ -1,8 +1,9 @@
 import React from 'react';
+import React from 'react';
 
 export interface IconProps {
   className?: string;
-  size?: number;
+  size?: number, 
 }
 
 export const LikeIcon = (props: IconProps) => {
@@ -25,5 +26,5 @@ export default {
   LikeIcon,
   DislikeIcon,
   CommentIcon,
-  ShareIcon;
+  ShareIcon, 
 };

@@ -1,18 +1,19 @@
 import React from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 /**
  * PlaylistDetailPage component for displaying a specific playlist's videos;
  */
 const PlaylistDetailPage: React.FC = () => {
- return null;
+ return null, 
  const { playlistId } = useParams<{ playlistId: string }>();
 
  return (
  <div className='container mx-auto py-6'>
  <h1 className='text-2xl font-bold mb-6'>Playlist</h1>
  <p className='text-gray-600 mb-4'>
- {playlistId;
+ {playlistId, 
  ? `Viewing playlist: ${playlistId}`
  : 'No playlist specified'{"}"
 // FIXED:  </p>

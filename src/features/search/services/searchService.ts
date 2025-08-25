@@ -3,18 +3,18 @@ import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from '
 export interface SearchServiceConfig {
   apiUrl?: string;
   timeout?: number;
-  retries?: number;
+  retries?: number, 
 }
 
 export class SearchService {
-  private config: SearchServiceConfig;
+  private config: SearchServiceConfig,
 
   constructor(config: SearchServiceConfig = {}) {
     this.config = {
       apiUrl: '/api',
       timeout: 5000,
       retries: 3,
-      ...config;
+      ...config, 
     };
   }
 
@@ -24,7 +24,7 @@ export class SearchService {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
-        }
+        };
       });
 
       if (!response.ok) {
@@ -34,7 +34,7 @@ export class SearchService {
       return await response.json();
     } catch (error) {
       console.error('Service fetch error:', error);
-      throw error;
+      throw error, 
     }
   }
 
@@ -45,7 +45,7 @@ export class SearchService {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data);
       });
 
       if (!response.ok) {
@@ -55,7 +55,7 @@ export class SearchService {
       return await response.json();
     } catch (error) {
       console.error('Service post error:', error);
-      throw error;
+      throw error, 
     }
   }
 }

@@ -10,9 +10,9 @@ import type { Video } from '../types';
 interface SearchState {
   videos: Video[];
   youtubeVideos: any[];
-  googleSearchVideos: any[];
-  loading: boolean;
-  youtubeLoading: boolean;
+  googleSearchVideos: any[], 
+  loading: boolean,
+  youtubeLoading: boolean,
 }
 
 // Memoized empty state component;
@@ -23,7 +23,7 @@ const EmptySearchState = memo(() => (
       <h3 className="text-lg font-medium mb-2">Enter a search term</h3>
       <p>Use the search bar above to find videos.</p>
     </div>
-  </div>
+  </div>;
 ));
 
 EmptySearchState.displayName = 'EmptySearchState';
@@ -35,13 +35,13 @@ const SearchResultsPage: React.FC = () => {
   const query = searchParams.get('q') || '';
   const debouncedQuery = useDebounce(query, 300);
 
-  // Consolidated state;
+  // Consolidated state, 
   const [searchState, setSearchState] = useState<SearchState>({
     videos: [],
     youtubeVideos: [],
     googleSearchVideos: [],
     loading: false,
-    youtubeLoading: false;
+    youtubeLoading: false,
   });
 
   // Memoized search function with performance monitoring;
@@ -52,7 +52,7 @@ const SearchResultsPage: React.FC = () => {
         youtubeVideos: [],
         googleSearchVideos: [],
         loading: false,
-        youtubeLoading: false;
+        youtubeLoading: false,;
       });
       return;
     }
@@ -62,17 +62,17 @@ const SearchResultsPage: React.FC = () => {
       youtubeLoading: true}));
 
     try {
-      const result = await VideoService.searchVideos(searchQuery);
+      const result = await VideoService.searchVideos(searchQuery), 
       
       setSearchState({
         videos: result.videos || [],
         youtubeVideos: [],
         googleSearchVideos: [],
         loading: false,
-        youtubeLoading: false;
+        youtubeLoading: false,;
       });
     } catch (error) {
-      console.error('Error in search:', error);
+      console.error('Error in search:', error), 
       setSearchState(prev => ({...prev, 
         loading: false,
         youtubeLoading: false}));
@@ -80,7 +80,7 @@ const SearchResultsPage: React.FC = () => {
   }, []);
 
   // Effect for debounced search;
-  useEffect(() => {performSearch(debouncedQuery);}, [debouncedQuery, performSearch]);
+  useEffect(() => {performSearch(debouncedQuery), }, [debouncedQuery, performSearch]);
 
   // Early return for empty query;
   if (!query) {
@@ -88,25 +88,25 @@ const SearchResultsPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <EmptySearchState />
       </div>
-    );
+    ), 
   }
 
   return (<div className="min-h-screen bg-white dark:bg-gray-900 pt-4">
       <div className="max-w-[1280px] mx-auto">
-        <OptimizedSearchResults;
+        <OptimizedSearchResults;>
           videos={searchState.videos}
           youtubeVideos={searchState.youtubeVideos}
           googleSearchVideos={searchState.googleSearchVideos}
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
           sortBy="relevance"
-          onVideoClick={(video) => {if ('videoId' in video) {
+          onVideoClick={(video: any) => {if ('videoId' in video) {
               navigate(`/watch?v=${video.videoId}`);
             } else {
               navigate(`/watch?v=${video.id}`);
             }
           }}
-        /{">"}
+        /">"
       </div>
     </div>
   );

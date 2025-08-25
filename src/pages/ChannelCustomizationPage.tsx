@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ChannelCustomizationPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('branding');
+  const [activeTab, setActiveTab] = useState('branding'), 
 
   return (
     <div className="channel-customization-page">
@@ -10,22 +10,22 @@ const ChannelCustomizationPage: React.FC = () => {
         
         <div className="mb-6">
           <nav className="flex space-x-4">
-            <button;
+            <button>
               onClick={() => setActiveTab('branding')}
               className={`px-4 py-2 rounded ${activeTab === 'branding' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Branding;
             </button></nav>
-            <button;
+            <button>
               onClick={() => setActiveTab('layout')}
               className={`px-4 py-2 rounded ${activeTab === 'layout' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Layout;
             </button></div>
-            <button;
+            <button>
               onClick={() => setActiveTab('info')}
               className={`px-4 py-2 rounded ${activeTab === 'info' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Basic Info;
             </button></div>
           </nav></div>
@@ -71,15 +71,14 @@ const ChannelCustomizationPage: React.FC = () => {
                       <span className="text-gray-500 text-xs">Logo</span>
                     </div>
                     <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-                      Upload Watermark;
+                      Upload Watermark, 
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-          )}
-          
-          {activeTab === 'layout' && (
+          )};
+{activeTab === 'layout' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Channel Layout</h2>
               <div className="space-y-6">
@@ -109,14 +108,13 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
                   </div>
                   <button className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                    Add Section;
+                    Add Section, 
                   </button>
                 </div>
               </div>
             </div>
-          )}
-          
-          {activeTab === 'info' && (
+          )};
+{activeTab === 'info' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Basic Information</h2>
               <div className="space-y-6">
@@ -124,33 +122,33 @@ const ChannelCustomizationPage: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Channel Name;
                   </label>
-                  <input;
+                  <input>
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter your channel name"
-                  /{">"}
+                  /">"
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Channel Description;
                   </label>
-                  <textarea;
+                  <textarea, >
                     rows={4}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Describe your channel and what viewers can expect"
-                  /{">"}
+                  /">"
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Channel Keywords;
                   </label>
-                  <input;
+                  <input>
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter keywords separated by commas"
-                  /{">"}
+                  /">"
                 </div>
                 
                 <div>
@@ -158,16 +156,16 @@ const ChannelCustomizationPage: React.FC = () => {
                     Channel Links;
                   </label>
                   <div className="space-y-2">
-                    <input;
+                    <input>
                       type="url"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Website URL"
-                    /{">"}
-                    <input;
+                    /">"
+                    <input>
                       type="url"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Social media URL"
-                    /{">"}
+                    /">"
                   </div>
                 </div>
                 

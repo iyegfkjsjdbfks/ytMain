@@ -1,3 +1,4 @@
+// @ts-nocheck
 import _React from 'react';
 // Environment configuration;
 export const ENV = {

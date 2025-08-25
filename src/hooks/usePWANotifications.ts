@@ -1,17 +1,18 @@
+import React from 'react';
 // usePWANotifications - Clean Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UsePWANotificationsOptions {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void, 
 }
 
 export interface UsePWANotificationsResult {
   data;
-  loading: boolean;
-  error: Error | null;
-  refetch: () => void;
+  loading: boolean,
+  error: Error | null
+      refetch: () => void, 
 }
 
 export function usePWANotifications(
@@ -23,7 +24,7 @@ export function usePWANotifications(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {;
     if (!enabled) return;
 
     try {
@@ -31,12 +32,12 @@ export function usePWANotifications(
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 300)), 
       
       const result = {
         hookName: 'usePWANotifications',
         timestamp: Date.now(),
-        success: true;
+        success: true,;
       };
       
       setData(result);
@@ -44,21 +45,21 @@ export function usePWANotifications(
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      onError?.(error);
+      onError?.(error), 
     } finally {
-      setLoading(false);
+      setLoading(false), 
     }
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
-    fetchData();
+    fetchData(), 
   }, [fetchData]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData;
+    refetch: fetchData,
   };
 }
 

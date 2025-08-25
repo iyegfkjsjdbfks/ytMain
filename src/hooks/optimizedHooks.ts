@@ -1,16 +1,17 @@
+import React from 'react';
 // optimizedHooks - Advanced Service Implementation;
 export interface optimizedHooksConfig {
   baseUrl?: string;
-  timeout?: number;
+  timeout?: number, 
 }
 
 export class OptimizedHooks {
-  private config: Required<optimizedHooksConfig>;
+  private config: Required<optimizedHooksConfig>, 
 
   constructor(config: optimizedHooksConfig = {}) {
     this.config = {
       baseUrl: config.baseUrl || '/api',
-      timeout: config.timeout || 5000;
+      timeout: config.timeout || 5000, 
     };
   }
 
@@ -22,18 +23,18 @@ export class OptimizedHooks {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers;
-        }
+          ...options.headers, 
+        };
       });
 
       if (!response.ok) {
-        throw new Error('Request failed: ' + response.status);
+        throw new Error('Request failed: ' + response.status), 
       }
 
       return await response.json();
     } catch (error) {
       console.error('Service error:', error);
-      throw error;
+      throw error, 
     }
   }
 

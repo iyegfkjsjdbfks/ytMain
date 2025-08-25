@@ -1,14 +1,15 @@
+import React from 'react';
 // PlaylistManager - Simple Component;
 import React from 'react';
 
 export interface PlaylistManagerProps {
   className?: string;
-  children?: React.ReactNode;
+  children?: React.ReactNode, 
 }
 
 export const PlaylistManager = (props: PlaylistManagerProps) => {
   return React.createElement('div', {
-    className: props.className;
+    className: props.className, 
   }, props.children || 'Component ready');
 };
 

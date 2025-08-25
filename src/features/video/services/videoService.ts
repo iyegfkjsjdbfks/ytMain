@@ -3,18 +3,18 @@ import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from '
 export interface VideoServiceConfig {
   apiUrl?: string;
   timeout?: number;
-  retries?: number;
+  retries?: number, 
 }
 
 export class VideoService {
-  private config: VideoServiceConfig;
+  private config: VideoServiceConfig,
 
   constructor(config: VideoServiceConfig = {}) {
     this.config = {
       apiUrl: '/api',
       timeout: 5000,
       retries: 3,
-      ...config;
+      ...config, 
     };
   }
 
@@ -24,7 +24,7 @@ export class VideoService {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
-        }
+        };
       });
 
       if (!response.ok) {
@@ -34,7 +34,7 @@ export class VideoService {
       return await response.json();
     } catch (error) {
       console.error('Service fetch error:', error);
-      throw error;
+      throw error, 
     }
   }
 
@@ -45,7 +45,7 @@ export class VideoService {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data);
       });
 
       if (!response.ok) {
@@ -55,7 +55,7 @@ export class VideoService {
       return await response.json();
     } catch (error) {
       console.error('Service post error:', error);
-      throw error;
+      throw error, 
     }
   }
 }

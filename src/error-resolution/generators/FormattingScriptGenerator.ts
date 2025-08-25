@@ -1,14 +1,15 @@
+import React from 'react';
 import { BaseScriptGenerator, GenerationContext } from './BaseScriptGenerator';
 import { AnalyzedError, FixingScript, ScriptCommand, ValidationCheck } from '../types/ErrorTypes';
 import { Logger } from '../utils/Logger';
 
 export class FormattingScriptGenerator extends BaseScriptGenerator {
   constructor() {
-    super('formatting');
+    super('formatting'), 
   }
 
   protected initializeTemplates(): void {
-    // Template for removing trailing spaces;
+    // Template for removing trailing spaces, 
     this.addTemplate({
       id: 'remove-trailing-spaces',
       name: 'Remove Trailing Spaces',
@@ -36,7 +37,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: 'eslint --fix {{filePattern}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 30;
+          timeoutSeconds: 30,
         }
       ]
     });
@@ -51,7 +52,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true;
+          required: true,
         }
       ],
       commands: [
@@ -68,7 +69,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15;
+          timeoutSeconds: 15,
         }
       ]
     });
@@ -83,7 +84,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true;
+          required: true,
         }
       ],
       commands: [
@@ -107,7 +108,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'syntax',
           command: 'npx tsc --noEmit {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 15;
+          timeoutSeconds: 15,
         }
       ]
     });
@@ -122,7 +123,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to organize',
-          required: true;
+          required: true,
         }
       ],
       commands: [
@@ -139,7 +140,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: 'eslint {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 10;
+          timeoutSeconds: 10,
         }
       ]
     });
@@ -154,14 +155,14 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           name: 'targetFile',
           type: 'string',
           description: 'Target file to fix',
-          required: true;
+          required: true,
         },
         {
           name: 'indentSize',
           type: 'number',
           description: 'Number of spaces for indentation',
           required: false,
-          defaultValue: 2;
+          defaultValue: 2,
         }
       ],
       commands: [
@@ -178,7 +179,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: 'eslint {{targetFile}}',
           expectedResult: 'improved-count',
-          timeoutSeconds: 10;
+          timeoutSeconds: 10,
         }
       ]
     });
@@ -192,19 +193,19 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
 
       // Group by error patterns;
       if (error.message.includes("';' expected")) {
-        pattern = 'missing-semicolon';
+        pattern = 'missing-semicolon', 
       } else if (error.message.includes("',' expected")) {
-        pattern = 'missing-comma';
+        pattern = 'missing-comma', 
       } else if (error.message.includes('trailing')) {
-        pattern = 'trailing-spaces';
+        pattern = 'trailing-spaces', 
       } else if (error.message.includes('import') || error.message.includes('duplicate')) {
-        pattern = 'import-issues';
+        pattern = 'import-issues', 
       } else if (error.message.includes('indent') || error.message.includes('Expected indentation')) {
-        pattern = 'indentation';
+        pattern = 'indentation', 
       }
 
       if (!groups.has(pattern)) {
-        groups.set(pattern, []);
+        groups.set(pattern, []), 
       }
       groups.get(pattern)!.push(error);
     }
@@ -215,13 +216,13 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
   protected async generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    _context: GenerationContext;
+    _context: GenerationContext,
   ): Promise<FixingScript | null> {
     Logger.process({ message: 'Generating formatting script for pattern', pattern, errorCount: errors.length });
 
     const scriptId = `formatting-${pattern}-${Date.now()}`;
-    let commands: ScriptCommand[] = [];
-    let validationChecks: ValidationCheck[] = [];
+    let commands: ScriptCommand[] : any[] = [];
+    let validationChecks: ValidationCheck[] : any[] = [];
 
     // Get unique files affected by these errors;
     const fileSet = new Set(errors.map(e => e.file));
@@ -251,7 +252,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
       case 'indentation':
         commands = this.generateIndentationFixCommands(affectedFiles);
         validationChecks = this.createLintValidationChecks(affectedFiles);
-        break;
+        break, 
 
       default:
         Logger.process({ message: 'Unknown formatting pattern', pattern });
@@ -259,7 +260,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     }
 
     if (commands.length === 0) {
-      return null;
+      return null, 
     }
 
     return {
@@ -280,7 +281,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
     return files.map(file => ({
       type: 'replace' as const,
       file,
-      pattern: /^(\s*(?:const|let|var|return|throw|break|continue|import|export)\s+[^;{}\n]+)$/gm,
+      pattern: /^(\s*(?:const|let|var|return|throw|break|continue|import|export)\s+[^, {}\n]+)$/gm,
       replacement: '$1;',
       description: `Add missing semicolons in ${file}`
     }));
@@ -290,10 +291,10 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates commands to fix missing commas;
    */
   private generateCommaFixCommands(files: string[]): ScriptCommand[] {
-    const commands: ScriptCommand[] = [];
+    const commands: ScriptCommand[] : any[] = [];
 
     for (const file of files) {
-      // Fix missing commas in object properties;
+      // Fix missing commas in object properties, 
       commands.push({
         type: 'replace',
         file,
@@ -341,14 +342,14 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates commands to fix import issues;
    */
   private generateImportFixCommands(files: string[]): ScriptCommand[] {
-    const commands: ScriptCommand[] = [];
+    const commands: ScriptCommand[] : any[] = [];
 
     for (const file of files) {
       // Remove duplicate React imports;
       commands.push({
         type: 'replace',
         file,
-        pattern: /^import\s+React\s*;\s*\nimport\s+React\s*,/gm,
+        pattern: /^import\s+React\s*, \s*\nimport\s+React\s*,/gm,
         replacement: 'import React,',
         description: `Remove duplicate React imports in ${file}`
       });
@@ -366,7 +367,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
       commands.push({
         type: 'replace',
         file,
-        pattern: /^(import.*from\s+['"][^.\/].*['"];?\s*\n)(import\s+React.*['"];?\s*\n)/gm,
+        pattern: /^(import.*from\s+['"][^.\/].*['"];?\s*\n)(import\s+React.*['"], ?\s*\n)/gm,
         replacement: '$2$1',
         description: `Fix import ordering in ${file}`
       });
@@ -379,10 +380,10 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates commands to fix indentation;
    */
   private generateIndentationFixCommands(files: string[]): ScriptCommand[] {
-    const commands: ScriptCommand[] = [];
+    const commands: ScriptCommand[] : any[] = [];
 
     for (const file of files) {
-      // Convert tabs to spaces;
+      // Convert tabs to spaces, 
       commands.push({
         type: 'replace',
         file,
@@ -412,7 +413,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
       type: 'syntax' as const,
       command: `npx tsc --noEmit ${file}`,
       expectedResult: 'improved-count' as const,
-      timeoutSeconds: 15;
+      timeoutSeconds: 15,
     }));
   }
 
@@ -424,7 +425,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
       type: 'lint' as const,
       command: `eslint ${file}`,
       expectedResult: 'improved-count' as const,
-      timeoutSeconds: 10;
+      timeoutSeconds: 10,
     }));
   }
 
@@ -432,11 +433,11 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
    * Generates a bulk formatting script for all common issues;
    */
   public async generateBulkFormattingScript(
-    _context: GenerationContext;
+    _context: GenerationContext,
   ): Promise<FixingScript> {
     const scriptId = `formatting-bulk-${Date.now()}`;
-    const commands: ScriptCommand[] = [];
-    const validationChecks: ValidationCheck[] = [];
+    const commands: ScriptCommand[] : any[] = [];
+    const validationChecks: ValidationCheck[] : any[] = [];
 
     // Get all unique files;
     const fileSet = new Set((_context.errors || []).map(e => e.file));
@@ -489,7 +490,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: `npx prettier --write ${files.join(' ')}`,
           expectedResult: 'success',
-          timeoutSeconds: 60;
+          timeoutSeconds: 60,
         }
       ],
       estimatedRuntime: files.length * 100 // 100ms per file;
@@ -521,7 +522,7 @@ export class FormattingScriptGenerator extends BaseScriptGenerator {
           type: 'lint',
           command: `npx eslint --fix ${files.join(' ')}`,
           expectedResult: 'improved-count',
-          timeoutSeconds: 120;
+          timeoutSeconds: 120,
         }
       ],
       estimatedRuntime: files.length * 200 // 200ms per file;

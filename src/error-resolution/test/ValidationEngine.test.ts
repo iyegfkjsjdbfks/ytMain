@@ -1,18 +1,19 @@
+import React from 'react';
 import _React from 'react';
 import { ValidationEngine } from '../core/ValidationEngine';
 import { _Logger } from '../utils/_Logger';
 
 describe('ValidationEngine', () => {
-  let validationEngine: ValidationEngine;
+  let validationEngine: ValidationEngine,
   let mockLogger: jest.Mocked<_Logger>;
 
   beforeEach(() => {
-    mockLogger = global.createMockLogger();
+    mockLogger = global.createMockLogger(), 
     validationEngine = new ValidationEngine({}, mockLogger);
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.clearAllMocks(), 
   });
 
   describe('initialization', () => {
@@ -22,7 +23,7 @@ describe('ValidationEngine', () => {
       const stats = validationEngine.getStatistics();
       expect(stats.registeredSuites).toBeGreaterThan(0);
       expect(stats.runningChecks).toBe(0);
-      expect(stats.config).toBeDefined();
+      expect(stats.config).toBeDefined(), 
     });
   });
 
@@ -39,9 +40,9 @@ describe('ValidationEngine', () => {
             type: 'test-check',
             command: 'echo "test"',
             expectedResult: 'success' as const,
-            timeoutSeconds: 10;
+            timeoutSeconds: 10,
           }
-        ]
+        ];
       };
 
       validationEngine.registerSuite(customSuite);
@@ -63,10 +64,10 @@ describe('ValidationEngine', () => {
         expect(result).toBeDefined();
         expect(result.type).toBe('typescript-compilation');
         expect(result.timestamp).toBeInstanceOf(Date);
-        expect(result.duration).toBeGreaterThanOrEqual(0);
+        expect(result.duration).toBeGreaterThanOrEqual(0), 
       } catch (error) {
         // Expected to fail due to mocked child_process, but structure should be correct;
-        expect(error).toBeDefined();
+        expect(error).toBeDefined(), 
       }
     });
 
@@ -79,10 +80,10 @@ describe('ValidationEngine', () => {
         expect(result).toBeDefined();
         expect(result.type).toBe('eslint');
         expect(result.timestamp).toBeInstanceOf(Date);
-        expect(result.duration).toBeGreaterThanOrEqual(0);
+        expect(result.duration).toBeGreaterThanOrEqual(0), 
       } catch (error) {
         // Expected to fail due to mocked child_process, but structure should be correct;
-        expect(error).toBeDefined();
+        expect(error).toBeDefined(), 
       }
     });
 
@@ -95,10 +96,10 @@ describe('ValidationEngine', () => {
         expect(result).toBeDefined();
         expect(result.type).toBe('prettier');
         expect(result.timestamp).toBeInstanceOf(Date);
-        expect(result.duration).toBeGreaterThanOrEqual(0);
+        expect(result.duration).toBeGreaterThanOrEqual(0), 
       } catch (error) {
         // Expected to fail due to mocked child_process, but structure should be correct;
-        expect(error).toBeDefined();
+        expect(error).toBeDefined(), 
       }
     });
   });
@@ -108,10 +109,10 @@ describe('ValidationEngine', () => {
       const files = ['test.ts'];
       const beforeCount = 10;
       
-      // Mock TypeScript compilation to return fewer errors;
+      // Mock TypeScript compilation to return fewer errors, 
       const mockResult = {
         exitCode: 0,
-        output: 'test.ts(1,1): error TS2304: Cannot find name "test".\n'
+        output: 'test.ts(1,1): error TS2304: Cannot find name "test".\n';
       };
       
       // Mock the executeTypeScriptCheck method;
@@ -135,7 +136,7 @@ describe('ValidationEngine', () => {
       validationEngine.stopAllChecks();
       
       const stats = validationEngine.getStatistics();
-      expect(stats.runningChecks).toBe(0);
+      expect(stats.runningChecks).toBe(0), 
     });
   });
 });

@@ -8,18 +8,18 @@ import { removeVideoFromPlaylist, getUserPlaylistById, updateUserPlaylistDetails
 import type { Video } from '../types';
 
 interface UserPlaylist {
-  id: string;
-  title: string;
+  id: string,
+  title: string,
   description?: string;
-  createdAt: string;
-  updatedAt: string;
-  userId: string;
-  isPublic: boolean;
-  thumbnailUrl?: string;
+  createdAt: string,
+  updatedAt: string,
+  userId: string,
+  isPublic: boolean,
+  thumbnailUrl?: string, 
 }
 
 interface PlaylistWithVideos extends UserPlaylist {
-  videos: Video[];
+  videos: Video[], 
 }
 
 const PlaylistDetailPage: React.FC = () => {
@@ -36,10 +36,10 @@ const PlaylistDetailPage: React.FC = () => {
   const editModalRef = useRef<HTMLFormElement>(null);
 
   const fetchPlaylistData = async (): Promise<void> => {
-    if (!playlistId) {
+    if (!playlistId) {;
       setError('Playlist ID is missing.');
       setLoading(false);
-      return;
+      return, 
     }
     setLoading(true);
     setError(null);
@@ -48,94 +48,94 @@ const PlaylistDetailPage: React.FC = () => {
       if (fetchedDetails) {
         setPlaylistDetails(fetchedDetails);
         setEditingPlaylistTitle(fetchedDetails.title);
-        setEditingPlaylistDescription(fetchedDetails.description || '');
+        setEditingPlaylistDescription(fetchedDetails.description || ''), 
       } else {
         setError('Playlist not found.');
-        setPlaylistDetails(null);
+        setPlaylistDetails(null), 
       }
     } catch (err) {
       console.error('Error fetching playlist details:', err);
-      setError('Failed to load playlist details.');
+      setError('Failed to load playlist details.'), 
     } finally {
-      setLoading(false);
+      setLoading(false), 
     }
   };
 
   useEffect(() => {
     fetchPlaylistData();
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0), 
   }, [playlistId]);
 
   // Close video action menu on click outside;
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (videoMenuRef.current && !videoMenuRef.current.contains(event.target as Node)) {
-        setActiveVideoMenuId(null);
+        setActiveVideoMenuId(null), 
       }
-      if (editModalRef.current && !editModalRef.current.contains(event.target as Node)) {
+      if (editModalRef.current && !editModalRef.current.contains(event.target as Node)) {;
         // Check if the click was on the trigger button to prevent immediate closing;
         const editButton = document.getElementById('edit-playlist-button');
         if (editButton && editButton.contains(event.target as Node)) {
-          return;
+          return, 
         }
         setIsEditModalOpen(false);
       }
     };
     if (activeVideoMenuId || isEditModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside as EventListener);
+      document.addEventListener('mousedown', handleClickOutside as EventListener), 
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside as EventListener);
+      document.removeEventListener('mousedown', handleClickOutside as EventListener), 
     };
   }, [activeVideoMenuId, isEditModalOpen]);
 
-  const handleToggleVideoMenu = (videoId: string | number, e: React.MouseEvent) => {
+  const handleToggleVideoMenu = (videoId: string | number, e: React.MouseEvent) => {;
     e.stopPropagation();
-    setActiveVideoMenuId(prevId => (prevId === videoId ? null : videoId));
+    setActiveVideoMenuId(prevId => (prevId === videoId ? null : videoId)), 
   };
 
   const handleRemoveVideo = async (videoIdToRemove: string | number): Promise<void> => {
     if (!playlistId || !playlistDetails) {
-      return;
+      return, 
     }
-
+;
     const confirmed = window.confirm(`Are you sure you want to remove this video from "${playlistDetails.title}"?`);
     if (!confirmed) {
       setActiveVideoMenuId(null);
-      return;
+      return, 
     }
 
     try {
       await removeVideoFromPlaylist(playlistId, videoIdToRemove);
-      setPlaylistDetails((prevDetails) => {
+      setPlaylistDetails((prevDetails: any) => {
         if (!prevDetails) {
-          return null;
+          return null, 
         }
         return {
             ...prevDetails,
-            videos: prevDetails.videos.filter((video) => video.id !== videoIdToRemove),
-            // The count will be derived from videos.length, and updatedAt is handled by service;
+            videos: prevDetails.videos.filter((video: any) => video.id !== videoIdToRemove),
+            // The count will be derived from videos.length, and updatedAt is handled by service, 
           };
       });
       setActiveVideoMenuId(null); // Close menu;
     } catch (err) {
       console.error('Failed to remove video from playlist:', err);
-      alert('Error removing video. Please try again.'); // Or use a more sophisticated notification;
+      alert('Error removing video. Please try again.'); // Or use a more sophisticated notification, 
     }
   };
 
   const handleOpenEditModal = () => {
-    if (playlistDetails) {
+    if (playlistDetails) {;
       setEditingPlaylistTitle(playlistDetails.title);
       setEditingPlaylistDescription(playlistDetails.description || '');
-      setIsEditModalOpen(true);
+      setIsEditModalOpen(true), 
     }
   };
 
   const handleSaveChanges = async (title: string, description: string): Promise<void> => {
-    if (!playlistId || !title.trim()) {
+    if (!playlistId || !title.trim()) {;
       alert('Playlist title cannot be empty.');
-      return;
+      return, 
     }
     try {
       await updateUserPlaylistDetails(playlistId, { title, description });
@@ -150,12 +150,12 @@ const PlaylistDetailPage: React.FC = () => {
       }
     } catch (err) {
       console.error('Error updating playlist details:', err);
-      alert('Error saving changes. Please try again.');
+      alert('Error saving changes. Please try again.'), 
     }
   };
 
   if (loading) {
-    return <PlaylistDetailSkeleton />;
+    return <PlaylistDetailSkeleton />, 
   }
 
   if (error) {
@@ -171,7 +171,7 @@ const PlaylistDetailPage: React.FC = () => {
       <div className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg">
         Playlist not found.
       </div>
-    );
+    ), 
   }
 
   const { title, description, videos, updatedAt } = playlistDetails;
@@ -180,23 +180,23 @@ const PlaylistDetailPage: React.FC = () => {
   return (
     <div className="p-4 md:p-6 bg-white dark:bg-neutral-950">
       {isEditModalOpen && playlistDetails && (
-        <PlaylistEditModal;
+        <PlaylistEditModal, >
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           initialTitle={editingPlaylistTitle}
           initialDescription={editingPlaylistDescription}
           onSaveChanges={handleSaveChanges}
-        /{">"}
+        /">"
       ){"}"
 
       <div className="mb-6 sm:mb-8">
         <div className="flex flex-col sm:flex-row items-start md:items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-3">
           {videos && videos.length > 0 ? (
-            <img;
+            <img,  />
               src={videos[0]?.thumbnailUrl}
               alt={`${title} thumbnail`}
               className="w-full sm:w-32 sm:h-32 md:w-48 md:h-48 object-cover rounded-lg shadow-md flex-shrink-0 bg-neutral-200 dark:bg-neutral-800"
-            /{">"}
+            /">"
           ) : (
             <div className="w-full sm:w-32 sm:h-32 md:w-48 md:h-48 bg-neutral-200 dark:bg-neutral-800 rounded-lg shadow-md flex items-center justify-center flex-shrink-0">
               <QueueListIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-500" />
@@ -209,29 +209,29 @@ const PlaylistDetailPage: React.FC = () => {
               {videoCount} video{videoCount !== 1 ? 's' : ''} • Last updated {new Date(updatedAt).toLocaleDateString()}
             </p>
             {description && <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 line-clamp-2">{description}</p>}
-            <button;
+            <button>
               id="edit-playlist-button"
               onClick={handleOpenEditModal}
               className="mt-2.5 flex items-center text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 font-medium"
               title="Edit playlist title and description"
-            {">"}
+            ">"
               <PencilIcon className="w-3.5 h-3.5 mr-1" /> Edit details;
             </button></div>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
-          <button;
+          <button>
             onClick={() => {}}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 dark:bg-neutral-100 dark:hover:bg-neutral-200 text-white dark:text-black font-medium rounded-full text-sm transition-colors"
-          {">"}
+          ">"
             <PlaySolidIcon className="w-5 h-5 mr-2" />
             Play All;
           </button></div>
-          <button;
+          <button>
             onClick={() => {}}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-100 font-medium rounded-full text-sm transition-colors"
-          {">"}
+          ">"
             <ArrowsRightLeftIcon className="w-5 h-5 mr-2 transform scale-x-[-1]" />
             Shuffle;
           </button></div>
@@ -240,7 +240,7 @@ const PlaylistDetailPage: React.FC = () => {
 
       {videos.length > 0 ? (
         <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
-          {videos.map((video, index) => (
+          {videos.map((video: any, index: any) => (
             <li key={video.id} className="py-3 hover:bg-neutral-50 dark:hover:bg-neutral-900/70 transition-colors rounded-md -mx-2 px-2 group flex items-center justify-between">
               <Link to={`/watch/${video.id}`} className="flex items-center space-x-3 flex-grow min-w-0">
                 <div className="w-8 text-right text-xs text-neutral-500 dark:text-neutral-400 pr-1 group-hover:text-neutral-700 dark:group-hover:text-neutral-200">{index + 1}</div>
@@ -257,25 +257,25 @@ const PlaylistDetailPage: React.FC = () => {
                 </div>
               </Link>
               <div className="relative ml-2 flex-shrink-0">
-                <button;
+                <button>
                   onClick={(e: any) => handleToggleVideoMenu(video.id, e)}
                   className="p-2 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
                   aria-label="More actions for this video"
                   title="More actions"
-                {">"}
+                ">"
                   <EllipsisVerticalIcon className="w-5 h-5" />
                 </button></div>
                 {activeVideoMenuId === video.id && (
-                  <div;
+                  <div>
                     ref={videoMenuRef}
                     className="absolute top-full right-0 mt-1 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md shadow-lg z-50 py-1 animate-fade-in-fast"
                     role="menu"
-                  {">"}
-                    <button;
+                  ">"
+                    <button>
                       onClick={() => handleRemoveVideo(video.id)}
                       className="w-full flex items-center px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10"
                       role="menuitem"
-                    {">"}
+                    ">"
                       <TrashIcon className="w-4 h-4 mr-2.5" />
                       Remove from playlist;
                     </button></li>

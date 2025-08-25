@@ -1,3 +1,4 @@
+import React from 'react';
 /**
  * Core TypeScript Error Resolution System - Type Definitions;
  * 

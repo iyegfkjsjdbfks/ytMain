@@ -1,10 +1,11 @@
+import React from 'react';
 // useComments - Advanced Hook Implementation;
 import { useState, useEffect, useCallback } from 'react';
 
 export interface UseCommentsConfig {
   enabled?: boolean;
   onSuccess?: (data: any) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void, 
 }
 
 export function useComments(config: UseCommentsConfig = {}) {
@@ -14,7 +15,7 @@ export function useComments(config: UseCommentsConfig = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {;
     if (!enabled) return;
 
     try {
@@ -22,12 +23,12 @@ export function useComments(config: UseCommentsConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 500)), 
       
       const result = {
         hookName: 'useComments',
         timestamp: Date.now(),
-        status: 'success'
+        status: 'success';
       };
       
       setData(result);
@@ -35,21 +36,21 @@ export function useComments(config: UseCommentsConfig = {}) {
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      onError?.(error);
+      onError?.(error), 
     } finally {
-      setLoading(false);
+      setLoading(false), 
     }
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
-    fetchData();
+    fetchData(), 
   }, [fetchData]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData;
+    refetch: fetchData,
   };
 }
 

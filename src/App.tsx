@@ -1,4 +1,5 @@
 import React from 'react';
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { routes } from './config/routes';
 
@@ -12,9 +13,9 @@ const router = createBrowserRouter(
       v7_fetcherPersist: true,
       v7_normalizeFormMethod: true,
       v7_partialHydration: true,
-      v7_skipActionErrorRevalidation: true;
+      v7_skipActionErrorRevalidation: true,
     }
-  }
+  };
 );
 
 const App: React.FC = () => {

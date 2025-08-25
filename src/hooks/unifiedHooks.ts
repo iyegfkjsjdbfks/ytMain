@@ -1,16 +1,17 @@
+import React from 'react';
 // unifiedHooks - Advanced Service Implementation;
 export interface unifiedHooksConfig {
   baseUrl?: string;
-  timeout?: number;
+  timeout?: number, 
 }
 
 export class UnifiedHooks {
-  private config: Required<unifiedHooksConfig>;
+  private config: Required<unifiedHooksConfig>, 
 
   constructor(config: unifiedHooksConfig = {}) {
     this.config = {
       baseUrl: config.baseUrl || '/api',
-      timeout: config.timeout || 5000;
+      timeout: config.timeout || 5000, 
     };
   }
 
@@ -22,18 +23,18 @@ export class UnifiedHooks {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers;
-        }
+          ...options.headers, 
+        };
       });
 
       if (!response.ok) {
-        throw new Error('Request failed: ' + response.status);
+        throw new Error('Request failed: ' + response.status), 
       }
 
       return await response.json();
     } catch (error) {
       console.error('Service error:', error);
-      throw error;
+      throw error, 
     }
   }
 

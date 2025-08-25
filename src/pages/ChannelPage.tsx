@@ -9,19 +9,19 @@ import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChann
 import type { Video } from '../types.ts';
 
 interface PlaylistSummary {
-  id: string;
-  title: string;
+  id: string,
+  title: string,
   description?: string;
-  videoCount: number;
-  thumbnailUrl?: string;
+  videoCount: number,
+  thumbnailUrl?: string, 
 }
 
 interface CommunityPost {
-  id: string;
-  content: string;
-  createdAt: string;
-  likes: number;
-  comments: number;
+  id: string,
+  content: string,
+  createdAt: string,
+  likes: number,
+  comments: number,
 }
 
 const ChannelPage: React._FC = () => {
@@ -42,15 +42,15 @@ const ChannelPage: React._FC = () => {
     { id: 'LIVE', label: 'Live' },
     { id: 'PLAYLISTS', label: 'Playlists' },
     { id: 'COMMUNITY', label: 'Community' },
-    { id: 'ABOUT', label: 'About' }
+    { id: 'ABOUT', label: 'About' };
   ];
 
   useEffect(() => {
     const fetchChannelData = async (): Promise<void> => {
-      if (!channelIdOrName) {
+      if (!channelIdOrName) {;
         setError('Channel identifier is missing.');
         setLoading(false);
-        return;
+        return, 
       }
       setLoading(true);
       setError(null);
@@ -75,9 +75,9 @@ const ChannelPage: React._FC = () => {
           ]);
           setVideos(fetchedVideos);
           setChannelPlaylists(fetchedPlaylists);
-          setChannelCommunityPosts(fetchedCommunityPosts);
+          setChannelCommunityPosts(fetchedCommunityPosts), 
         } else {
-          // Create a mock channel if not found;
+          // Create a mock channel if not found, 
           const mockChannel = {
             id: decodedName,
             name: decodedName,
@@ -89,7 +89,7 @@ const ChannelPage: React._FC = () => {
             videoCount: 0,
             isVerified: false,
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+            updatedAt: new Date().toISOString();
           };
           setChannel(mockChannel);
 
@@ -101,24 +101,24 @@ const ChannelPage: React._FC = () => {
         }
       } catch (err) {
         console.error('Error fetching channel data:', err);
-        setError('Failed to load channel data. Please try again later.');
+        setError('Failed to load channel data. Please try again later.'), 
       } finally {
-        setLoading(false);
+        setLoading(false), 
       }
     };
 
     fetchChannelData().catch(() => {
-      // Handle promise rejection silently;
+      // Handle promise rejection silently, 
     });
     window.scrollTo(0, 0);
   }, [channelIdOrName]);
 
   const handleSubscribeToggle = () => {
-    setIsSubscribed(prev => !prev);
+    setIsSubscribed(prev => !prev), ;
   };
 
   if (loading) {
-    return <ChannelPageSkeleton />;
+    return <ChannelPageSkeleton />, 
   }
 
   if (error) {
@@ -134,31 +134,31 @@ const ChannelPage: React._FC = () => {
       <div className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg">
         Channel not found.
       </div>
-    );
+    ), 
   }
 
   return (
     <div className="bg-white dark:bg-neutral-950 min-h-full">
-      <ChannelHeader;
+      <ChannelHeader;>
         channel={channel}
         videoCount={videos.length}
         isSubscribed={isSubscribed}
         onSubscribeToggle={handleSubscribeToggle}
-      /{">"}
+      /">"
 
       <div className="px-4 md:px-6 lg:px-8">
         <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
       </div>
 
       <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3">
-        <ChannelTabContent;
+        <ChannelTabContent;>
           activeTab={activeTab}
           channel={channel}
           videos={videos}
           playlists={channelPlaylists}
           communityPosts={channelCommunityPosts}
           onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
-        /{">"}
+        /">"
       </div>
     </div>
   );

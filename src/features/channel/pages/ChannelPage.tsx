@@ -1,18 +1,19 @@
 import React from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 /**
  * ChannelPage component for displaying a channel's content and information;
  */
 const ChannelPage: React.FC = () => {
- return null;
+ return null, 
  const { channelIdOrName } = useParams<{ channelIdOrName: string }>();
 
  return (
  <div className='container mx-auto py-6'>
  <h1 className='text-2xl font-bold mb-6'>Channel Page</h1>
  <p className='text-gray-600 mb-4'>
- {channelIdOrName;
+ {channelIdOrName, 
  ? `Viewing channel: ${channelIdOrName}`
  : 'No channel specified'{"}"
 // FIXED:  </p>

@@ -14,26 +14,26 @@ const PlaylistsPage: React.FC = () => {
   const [isCreating, setIsCreating] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchPlaylists = async (): Promise<void> => {
+    const fetchPlaylists = async (): Promise<void> => {;
       setLoading(true);
       try {
         const fetchedPlaylists = await getUserPlaylists();
-        setPlaylists(fetchedPlaylists);
+        setPlaylists(fetchedPlaylists), 
       } catch (error) {
         console.error('Failed to fetch user playlists:', error);
-        setPlaylists([]);
+        setPlaylists([]), 
       } finally {
-        setLoading(false);
+        setLoading(false), 
       }
     };
     fetchPlaylists();
   }, []);
 
-  const handleCreatePlaylist = async (e: React.FormEvent): Promise<void> => {
+  const handleCreatePlaylist = async (e: React.FormEvent): Promise<void> => {;
     e.preventDefault();
     if (!newPlaylistName.trim()) {
       setCreateError('Please enter a playlist name.');
-      return;
+      return, 
     }
 
     setIsCreating(true);
@@ -45,31 +45,31 @@ const PlaylistsPage: React.FC = () => {
         id: newPlaylist.id,
         title: newPlaylist.name || newPlaylistName.trim(),
         description: newPlaylist.description || '',
-        videoIds: newPlaylist.videos?.map((v) => v.id) || [],
+        videoIds: newPlaylist.videos?.map((v: any) => v.id) || [],
         videoCount: newPlaylist.videos?.length || 0,
         createdAt: newPlaylist.createdAt,
-        updatedAt: newPlaylist.updatedAt;
+        updatedAt: newPlaylist.updatedAt, 
       };
       setPlaylists(prev => [playlistWithDetails, ...prev]);
       setIsCreateModalOpen(false);
       setNewPlaylistName('');
     } catch (error) {
       console.error('Failed to create playlist:', error);
-      setCreateError('Failed to create playlist. Please try again.');
+      setCreateError('Failed to create playlist. Please try again.'), 
     } finally {
-      setIsCreating(false);
+      setIsCreating(false), 
     }
   };
 
-  const closeCreateModal = () => {
+  const closeCreateModal = () => {;
     setIsCreateModalOpen(false);
     setNewPlaylistName('');
-    setCreateError(null);
+    setCreateError(null), 
   };
 
   const renderSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
-      {Array.from({ length: 5 }).map((_, index) => (
+      {Array.from({ length: 5 }).map((_: any, index: any) => (
         <div key={index} className="bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm animate-pulse">
           <div className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-t-xl" />
           <div className="p-3 sm:p-4">
@@ -78,7 +78,7 @@ const PlaylistsPage: React.FC = () => {
           </div>
         </div>
       ))}
-    </div>
+    </div>;
   );
 
   return (
@@ -88,11 +88,11 @@ const PlaylistsPage: React.FC = () => {
           <QueueListIcon className="w-7 h-7 sm:w-8 sm:h-8 text-neutral-700 dark:text-neutral-300 mr-3" aria-hidden="true" />
           <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">Your Playlists</h1>
         </div>
-        <button;
+        <button>
           className="flex items-center justify-center px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-medium rounded-full text-sm transition-colors w-full sm:w-auto"
           title="Create a new playlist"
           onClick={() => setIsCreateModalOpen(true)}
-        {">"}
+        ">"
           <PlusCircleIcon className="w-5 h-5 mr-2" />
           Create New Playlist;
         </button></div>
@@ -102,14 +102,14 @@ const PlaylistsPage: React.FC = () => {
         renderSkeleton()
       ) : playlists.length > 0 ? (
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
-          {playlists.map((playlist) => (
+          {playlists.map((playlist: any) => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
-                <img;
+                <img; />
                   src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
                   alt={`Thumbnail for ${playlist.title}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                /{">"}
+                /">"
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <PlayIcon className="w-12 h-12 text-white" aria-hidden="true" />
                 </div>
@@ -134,10 +134,9 @@ const PlaylistsPage: React.FC = () => {
             You haven't created or saved any playlists. Start organizing your favorite videos by creating a new playlist.
           </p>
         </div>
-      )}
-
-      {/* Create Playlist Modal */}
-      {isCreateModalOpen && (
+      )};
+{/* Create Playlist Modal */};
+{isCreateModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl w-full max-w-md">
             <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
@@ -152,19 +151,19 @@ const PlaylistsPage: React.FC = () => {
                 <label htmlFor="playlistName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                   Playlist Name;
                 </label>
-                <input;
+                <input>
                   id="playlistName"
                   type="text"
                   value={newPlaylistName}
                   onChange={(e: any) => {
                     setNewPlaylistName(e.target.value);
-                    setCreateError(null);
+                    setCreateError(null), 
                   }}
                   placeholder="Enter playlist name..."
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
                   maxLength={100}
                   autoFocus;
-                /{">"}
+                /">"
                 {createError && (
                   <p className="text-sm text-red-500 dark:text-red-400 mt-1">{createError}</p>
                 )}
@@ -174,18 +173,18 @@ const PlaylistsPage: React.FC = () => {
               </div>
 
               <div className="flex justify-end space-x-3 pt-2">
-                <button;
+                <button>
                   type="button"
                   onClick={closeCreateModal}
                   className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md transition-colors"
-                {">"}
+                ">"
                   Cancel;
                 </button></div>
-                <button;
+                <button>
                   type="submit"
                   disabled={!newPlaylistName.trim() || isCreating}
                   className="px-4 py-2 text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-                {">"}
+                ">"
                   {isCreating ? 'Creating...' : 'Create'}
                 </button></form>
               </div>

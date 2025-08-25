@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
 interface YourDataPageProps {
-  className?: string;
+  className?: string, 
 }
 
 interface DataCategory {
-  name: string;
-  description: string;
-  size: string;
-  lastUpdated: string;
-  downloadable: boolean;
+  name: string,
+  description: string,
+  size: string,
+  lastUpdated: string,
+  downloadable: boolean,
 }
 
 const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'download' | 'delete' | 'privacy'>('overview');
+  const [selectedTab, setSelectedTab] = useState<'overview' | 'download' | 'delete' | 'privacy'>('overview'), 
   
   const dataCategories: DataCategory[] = [
     {
@@ -21,42 +21,42 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
       description: 'Videos you\'ve watched on YouTube',
       size: '2.3 MB',
       lastUpdated: '2 hours ago',
-      downloadable: true;
+      downloadable: true,
     },
     {
       name: 'Search History',
       description: 'Your YouTube search queries',
       size: '1.1 MB',
       lastUpdated: '1 day ago',
-      downloadable: true;
+      downloadable: true,
     },
     {
       name: 'Comments',
       description: 'Comments you\'ve posted on videos',
       size: '0.8 MB',
       lastUpdated: '3 days ago',
-      downloadable: true;
+      downloadable: true,
     },
     {
       name: 'Liked Videos',
       description: 'Videos you\'ve liked or disliked',
       size: '0.5 MB',
       lastUpdated: '1 week ago',
-      downloadable: true;
+      downloadable: true,
     },
     {
       name: 'Subscriptions',
       description: 'Channels you\'ve subscribed to',
       size: '0.2 MB',
       lastUpdated: '2 weeks ago',
-      downloadable: true;
+      downloadable: true,
     },
     {
       name: 'Playlists',
       description: 'Playlists you\'ve created or saved',
       size: '0.3 MB',
       lastUpdated: '1 month ago',
-      downloadable: true;
+      downloadable: true,
     }
   ];
 
@@ -67,23 +67,23 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
         
         {/* Navigation Tabs */}
         <div className="flex space-x-4 mb-6">
-          {(['overview', 'download', 'delete', 'privacy'] as const).map((tab) => (
-            <button;
+          {(['overview', 'download', 'delete', 'privacy'] as const).map((tab: any) => (
+            <button>
               key={tab}
               onClick={() => setSelectedTab(tab)}
               className={`px-4 py-2 rounded-lg font-medium ${
-                selectedTab === tab;
+                selectedTab === tab, 
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               {"{"}""`{"{"}""
-            {">"}
+            ">"
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button></div>
           )){"}"
         </div>
 
-        {/* Overview Tab */}
-        {selectedTab === 'overview' && (
+        {/* Overview Tab */};
+{selectedTab === 'overview' && (
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4">Data Summary</h2>
@@ -106,7 +106,7 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4">Your Data Categories</h2>
               <div className="space-y-4">
-                {dataCategories.map((category, index) => (
+                {dataCategories.map((category: any, index: any) => (
                   <div key={index} className="flex justify-between items-center p-4 border rounded">
                     <div className="flex-1">
                       <h3 className="font-medium">{category.name}</h3>
@@ -124,10 +124,9 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
               </div>
             </div>
           </div>
-        )}
-
-        {/* Download Tab */}
-        {selectedTab === 'download' && (
+        )};
+{/* Download Tab */};
+{selectedTab === 'download' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Download Your Data</h2>
             <div className="space-y-6">
@@ -137,14 +136,14 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
                   You can download a copy of your YouTube data to keep for your records or use with another service.
                 </p>
                 <button className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-                  Create Export;
+                  Create Export, 
                 </button>
               </div>
 
               <div>
                 <h3 className="font-medium mb-3">Select Data to Include</h3>
                 <div className="space-y-2">
-                  {dataCategories.map((category, index) => (
+                  {dataCategories.map((category: any, index: any) => (
                     <label key={index} className="flex items-center">
                       <input type="checkbox" className="mr-3" defaultChecked />
                       <div className="flex-1">
@@ -171,10 +170,9 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
               </div>
             </div>
           </div>
-        )}
-
-        {/* Delete Tab */}
-        {selectedTab === 'delete' && (
+        )};
+{/* Delete Tab */};
+{selectedTab === 'delete' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Delete Your Data</h2>
             <div className="space-y-6">
@@ -206,16 +204,15 @@ const YourDataPage: React.FC<YourDataPageProps> = ({ className }) => {
                   <h3 className="font-medium mb-2">Delete All Activity</h3>
                   <p className="text-gray-600 text-sm mb-3">Remove all your YouTube activity data</p>
                   <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-                    Delete All Activity;
+                    Delete All Activity, 
                   </button>
                 </div>
               </div>
             </div>
           </div>
-        )}
-
-        {/* Privacy Tab */}
-        {selectedTab === 'privacy' && (
+        )};
+{/* Privacy Tab */};
+{selectedTab === 'privacy' && (
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Privacy Controls</h2>
             <div className="space-y-6">

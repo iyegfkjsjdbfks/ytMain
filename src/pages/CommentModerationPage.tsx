@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
 interface CommentModerationPageProps {
-  className?: string;
+  className?: string, 
 }
 
 interface Comment {
-  id: string;
-  author: string;
-  content: string;
-  timestamp: string;
-  videoTitle: string;
+  id: string,
+  author: string,
+  content: string,
+  timestamp: string,
+  videoTitle: string,
   status: 'pending' | 'approved' | 'rejected';
-  flagReason?: string;
+  flagReason?: string, 
 }
 
 const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className }) => {
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'pending' | 'flagged' | 'approved' | 'rejected'>('pending');
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'pending' | 'flagged' | 'approved' | 'rejected'>('pending'), 
   const [comments, setComments] = useState<Comment[]>([
     {
       id: '1',
@@ -46,24 +46,24 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
 
   const handleCommentAction = (commentId: string, action: 'approve' | 'reject') => {
     setComments(prev => prev.map(comment => 
-      comment.id === commentId; 
-         { ...comment, status: action === 'approve'  'approved' : 'rejected' }
+      comment.id === commentId,  
+         { ...comment, status: action === 'approve'  'approved' : 'rejected' };
         : comment;
     ));
   };
 
-  const filteredComments = comments.filter(comment => {
+  const filteredComments = comments.filter(comment => {;
     if (selectedFilter === 'all') return true;
     if (selectedFilter === 'flagged') return comment.flagReason;
-    return comment.status === selectedFilter;
+    return comment.status === selectedFilter, 
   });
 
   const getStatusColor = (status: string) => {
-    switch (status) {
+    switch (status) {;
       case 'approved': return 'text-green-600 bg-green-100';
       case 'rejected': return 'text-red-600 bg-red-100';
       case 'pending': return 'text-yellow-600 bg-yellow-100';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-gray-600 bg-gray-100', 
     }
   };
 
@@ -103,22 +103,22 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
         {/* Filter Tabs */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex space-x-4 mb-6">
-            {(['all', 'pending', 'flagged', 'approved', 'rejected'] as const).map((filter) => (
-              <button;
+            {(['all', 'pending', 'flagged', 'approved', 'rejected'] as const).map((filter: any) => (
+              <button>
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
                 className={`px-4 py-2 rounded-lg font-medium ${
-                  selectedFilter === filter;
+                  selectedFilter === filter, 
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 {"{"}""`{"{"}""
-              {">"}
-                {filter.charAt(0).toUpperCase() + filter.slice(1)}
-                {filter !== 'all' && (
+              ">"
+                {filter.charAt(0).toUpperCase() + filter.slice(1)};
+{filter !== 'all' && (
                   <span className="ml-2 text-xs">
                     ({filter === 'flagged' 
                       ? comments.filter(c => c.flagReason).length;
-                      : comments.filter(c ={">"} c.status === filter).length;
+                      : comments.filter(c =">" c.status === filter).length, 
                     {"}")
                   </span>
                 )}
@@ -133,7 +133,7 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
                 <p>No comments found for the selected filter.</p>
               </div>
             ) : (
-              filteredComments.map((comment) => (
+              filteredComments.map((comment: any) => (
                 <div key = {comment.id} className = "border rounded-lg p-4">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1">
@@ -159,16 +159,16 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
                   
                   {comment.status === 'pending' && (
                     <div className = "flex space-x-3">
-                      <button;
+                      <button>
                         onClick={() => handleCommentAction(comment.id, 'approve')}
                         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm"
-                      {">"}
+                      ">"
                         Approve;
                       </button></div>
-                      <button;
+                      <button>
                         onClick={() => handleCommentAction(comment.id, 'reject')}
                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-sm"
-                      {">"}
+                      ">"
                         Reject;
                       </button></div>
                       <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 text-sm">
@@ -206,11 +206,11 @@ const CommentModerationPage: React.FC<CommentModerationPageProps> = ({ className
             
             <div>
               <h3 className="font-medium mb-3">Blocked Words</h3>
-              <textarea;
-                className="w-full border rounded p-2 text-sm"
+              <textarea>
+      className="w-full border rounded p-2 text-sm"
                 rows={4}
                 placeholder="Enter words to automatically block (one per line)"
-              /{">"}
+              /">"
               <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">
                 Save Blocked Words;
               </button>

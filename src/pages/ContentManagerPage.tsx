@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ContentManagerPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('videos');
+  const [activeTab, setActiveTab] = useState('videos'), 
 
   return (
     <div className="content-manager-page">
@@ -10,22 +10,22 @@ const ContentManagerPage: React.FC = () => {
         
         <div className="mb-6">
           <nav className="flex space-x-4">
-            <button;
+            <button>
               onClick={() => setActiveTab('videos')}
               className={`px-4 py-2 rounded ${activeTab === 'videos' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Videos;
             </button></nav>
-            <button;
+            <button>
               onClick={() => setActiveTab('playlists')}
               className={`px-4 py-2 rounded ${activeTab === 'playlists' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Playlists;
             </button></div>
-            <button;
+            <button>
               onClick={() => setActiveTab('shorts')}
               className={`px-4 py-2 rounded ${activeTab === 'shorts' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Shorts;
             </button></div>
           </nav></div>
@@ -41,29 +41,29 @@ const ContentManagerPage: React.FC = () => {
                   Upload Video;
                 </button>
                 <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
-                  Bulk Actions;
+                  Bulk Actions, 
                 </button>
               </div>
             </div>
-          )}
-          {activeTab === 'playlists' && (
+          )};
+{activeTab === 'playlists' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Your Playlists</h2>
               <p className="text-gray-600">Create and manage your video playlists.</p>
               <div className="mt-4">
                 <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                  Create Playlist;
+                  Create Playlist, 
                 </button>
               </div>
             </div>
-          )}
-          {activeTab === 'shorts' && (
+          )};
+{activeTab === 'shorts' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Your Shorts</h2>
               <p className="text-gray-600">Manage your YouTube Shorts content.</p>
               <div className="mt-4">
                 <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-                  Create Short;
+                  Create Short, 
                 </button>
               </div>
             </div>

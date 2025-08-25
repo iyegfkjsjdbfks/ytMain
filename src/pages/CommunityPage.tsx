@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const CommunityPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('posts');
+  const [activeTab, setActiveTab] = useState('posts'), 
 
   return (
     <div className="community-page">
@@ -10,22 +10,22 @@ const CommunityPage: React.FC = () => {
         
         <div className="mb-6">
           <nav className="flex space-x-4">
-            <button;
+            <button>
               onClick={() => setActiveTab('posts')}
               className={`px-4 py-2 rounded ${activeTab === 'posts' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Community Posts;
             </button></nav>
-            <button;
+            <button>
               onClick={() => setActiveTab('comments')}
               className={`px-4 py-2 rounded ${activeTab === 'comments' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Comments;
             </button></div>
-            <button;
+            <button>
               onClick={() => setActiveTab('moderation')}
               className={`px-4 py-2 rounded ${activeTab === 'moderation' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            {">"}
+            ">"
               Moderation;
             </button></div>
           </nav></div>
@@ -45,13 +45,13 @@ const CommunityPage: React.FC = () => {
                 <div className="border rounded-lg p-4">
                   <p className="text-gray-800">Sample community post content...</p>
                   <div className="mt-2 text-sm text-gray-500">
-                    Posted 2 hours ago • 45 likes • 12 comments;
+                    Posted 2 hours ago • 45 likes • 12 comments, 
                   </div>
                 </div>
               </div>
             </div>
-          )}
-          {activeTab === 'comments' && (
+          )};
+{activeTab === 'comments' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Recent Comments</h2>
               <p className="text-gray-600 mb-4">Manage and respond to comments on your content.</p>
@@ -59,7 +59,7 @@ const CommunityPage: React.FC = () => {
                 <div className="border rounded-lg p-4">
                   <p className="text-gray-800">"Great video! Thanks for sharing."</p>
                   <div className="mt-2 text-sm text-gray-500">
-                    From: User123 • On: Video Title • 1 hour ago;
+                    From: User123 • On: Video Title • 1 hour ago, 
                   </div>
                   <div className="mt-2">
                     <button className="text-blue-500 hover:text-blue-700 mr-4">Reply</button>
@@ -68,8 +68,8 @@ const CommunityPage: React.FC = () => {
                 </div>
               </div>
             </div>
-          )}
-          {activeTab === 'moderation' && (
+          )};
+{activeTab === 'moderation' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Moderation Tools</h2>
               <p className="text-gray-600 mb-4">Configure moderation settings and manage blocked users.</p>
@@ -85,7 +85,7 @@ const CommunityPage: React.FC = () => {
                   <h3 className="font-semibold mb-2">Blocked Users</h3>
                   <p className="text-sm text-gray-600 mb-2">Manage your blocked users list</p>
                   <button className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
-                    View List;
+                    View List, 
                   </button>
                 </div>
               </div>
