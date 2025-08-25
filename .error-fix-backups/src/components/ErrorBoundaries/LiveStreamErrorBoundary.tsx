@@ -125,14 +125,14 @@ export class LiveStreamErrorBoundary extends Component < Props, State> {}
 
  if (this.state.isReconnecting) {}
  return (
- <div className='flex flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
- <div className='flex items - center justify - center w - 16 h - 16 bg - blue - 100 rounded - full mb - 4'>
+ <div className={'fle}x flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
+ <div className={'fle}x items - center justify - center w - 16 h - 16 bg - blue - 100 rounded - full mb - 4'>
  <ArrowPathIcon className='w - 8 h - 8 text - blue - 600 animate - spin' />
 // FIXED:  </div>
-<h3 className='text - lg font - semibold text - gray - 900 mb - 2'>
+<h3 className={'tex}t - lg font - semibold text - gray - 900 mb - 2'>
  Reconnecting...
 // FIXED:  </h3>
- <p className='text - sm text - gray - 600 text - center'>
+ <p className={'tex}t - sm text - gray - 600 text - center'>
  Attempting to reconnect to the live stream
 // FIXED:  </p>
 // FIXED:  </div>
@@ -140,67 +140,64 @@ export class LiveStreamErrorBoundary extends Component < Props, State> {}
  }
 
  return (
- <div className='flex flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
- <div className='flex items - center justify - center w - 16 h - 16 bg - red - 100 rounded - full mb - 4'>
+ <div className={'fle}x flex - col items - center justify - center p - 8 bg - gray - 50 rounded - lg border border - gray - 200'>
+ <div className={'fle}x items - center justify - center w - 16 h - 16 bg - red - 100 rounded - full mb - 4'>
  <SignalSlashIcon className='w - 8 h - 8 text - red - 600' />
 // FIXED:  </div>
-<h3 className='text - lg font - semibold text - gray - 900 mb - 2'>
+<h3 className={'tex}t - lg font - semibold text - gray - 900 mb - 2'>
  Live Stream Error
 // FIXED:  </h3>
 
- <p className='text - sm text - gray - 600 text - center mb - 6 max - w - md'>
+ <p className={'tex}t - sm text - gray - 600 text - center mb - 6 max - w - md'>
  {this.props.streamId}
  ? `There was an error with live stream ${this.props.streamId}. This might be due to network issues or the stream being offline.`
  : 'There was an error with the live stream. The stream might be offline or experiencing technical difficulties.'}
 // FIXED:  </p>
 
- <div className='flex flex - wrap gap - 3 justify - center'>
+ <div className={'fle}x flex - wrap gap - 3 justify - center'>
  {canRetry && (}
- <button
+ <button>
 // FIXED:  onClick={this.handleRetry}
-// FIXED:  className='flex items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors' />
- >
+// FIXED:  className={'fle}x items - center gap - 2 px - 4 py - 2 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors'/>
  <ArrowPathIcon className='w - 4 h - 4' />
  Retry ({this.maxRetries - this.state.retryCount} left)
 // FIXED:  </button>
  )}
 
- <button
+ <button>
 // FIXED:  onClick={this.handleReconnect}
-// FIXED:  className='flex items - center gap - 2 px - 4 py - 2 bg - green - 600 text - white rounded - lg hover:bg - green - 700 transition - colors' />
- >
+// FIXED:  className={'fle}x items - center gap - 2 px - 4 py - 2 bg - green - 600 text - white rounded - lg hover:bg - green - 700 transition - colors'/>
  <SignalSlashIcon className='w - 4 h - 4' />
  Reconnect
 // FIXED:  </button>
 
- <button
+ <button>
 // FIXED:  onClick={this.handleGoHome}
-// FIXED:  className='flex items - center gap - 2 px - 4 py - 2 border border - gray - 300 text - gray - 700 rounded - lg hover:bg - gray - 50 transition - colors' />
- >
+// FIXED:  className={'fle}x items - center gap - 2 px - 4 py - 2 border border - gray - 300 text - gray - 700 rounded - lg hover:bg - gray - 50 transition - colors'/>
  <HomeIcon className='w - 4 h - 4' />
  Go Home
 // FIXED:  </button>
 // FIXED:  </div>
-<div className='mt - 4 text - xs text - gray - 500 text - center'>
+<div className={'m}t - 4 text - xs text - gray - 500 text - center'>
  Stream errors: {this.state.retryCount} / {this.maxRetries}
 // FIXED:  </div>
 
  {import.meta.env.MODE === 'development' && this.state.error && (}
- <details className='mt - 6 w - full'>
- <summary className='cursor - pointer text - sm font - medium text - gray - 700 hover:text - gray - 900'>
+ <details className={'m}t - 6 w - full'>
+ <summary className={'curso}r - pointer text - sm font - medium text - gray - 700 hover:text - gray - 900'>
  Error Details (Development)
 // FIXED:  </summary>
- <div className='mt - 2 p - 3 bg - gray - 100 rounded text - xs font - mono text - gray - 800 overflow - auto max - h - 40'>
- <div className='font - semibold text - red - 600 mb - 2'>
+ <div className={'m}t - 2 p - 3 bg - gray - 100 rounded text - xs font - mono text - gray - 800 overflow - auto max - h - 40'>
+ <div className={'fon}t - semibold text - red - 600 mb - 2'>
  {this.state.error.name}: {this.state.error.message}
 // FIXED:  </div>
-<pre className='whitespace - pre - wrap text - xs'>
+<pre className={'whitespac}e - pre - wrap text - xs'>
  {this.state.error.stack}
 // FIXED:  </pre>
  {this.state.errorInfo && (}
- <div className='mt - 2 pt - 2 border - t border - gray - 300'>
- <div className='font - semibold mb - 1'>Component Stack:</div>
-<pre className='whitespace - pre - wrap text - xs'>
+ <div className={'m}t - 2 pt - 2 border - t border - gray - 300'>
+ <div className={'fon}t - semibold mb - 1'>Component Stack:</div>
+<pre className={'whitespac}e - pre - wrap text - xs'>
  {this.state.errorInfo.componentStack}
 // FIXED:  </pre>
 // FIXED:  </div>

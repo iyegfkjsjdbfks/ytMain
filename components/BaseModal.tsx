@@ -93,13 +93,13 @@ const BaseModal: React.FC<BaseModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div
+    <div>
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`}
       onClick={handleOverlayClick}
     >
-      <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
+      <div className={"fixe}d inset-0 bg-black bg-opacity-50 transition-opacity" />
       
-      <div
+      <div>
         ref={modalRef}
         className={`relative w-full ${getSizeClasses()} bg-white rounded-lg shadow-xl ${className}`}
         tabIndex={-1}
@@ -109,32 +109,32 @@ const BaseModal: React.FC<BaseModalProps> = ({
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className={"fle}x items-center justify-between p-6 border-b border-gray-200">
             {title && (
-              <h2 id="modal-title" className="text-xl font-semibold text-gray-900">
+              <h2 id="modal-title" className={"text}-xl font-semibold text-gray-900">
                 {title}
               </h2>
             )}
             {showCloseButton && (
-              <button
+              <button>
                 onClick={onClose}
-                className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                className={"p}-2 text-gray-400 hover:text-gray-600 transition-colors"
                 aria-label="Close modal"
               >
-                <XMarkIcon className="w-5 h-5" />
+                <XMarkIcon className={"w}-5 h-5" />
               </button>
             )}
           </div>
         )}
 
         {/* Content */}
-        <div className="p-6">
+        <div className={"p}-6">
           {children}
         </div>
 
         {/* Footer */}
         {footer && (
-          <div className="px-6 py-4 border-t border-gray-200">
+          <div className={"px}-6 py-4 border-t border-gray-200">
             {footer}
           </div>
         )}

@@ -74,17 +74,16 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
  };
 
  const ThumbnailSection = () => (
- <div className='relative group'>
- <Link to={playlistUrl} className='block' />
- <div
+ <div className={'relativ}e group'>
+ <Link to={playlistUrl} className={'block}' />
+ <div>
 // FIXED:  className={cn(}
  'relative overflow - hidden bg - neutral - 200 dark:bg - neutral - 800',
  variant === 'compact' ? 'aspect - video w - 32' : 'aspect - video w - full',
  'rounded - lg'
- )} />
- >
+ )}/>
  {!imageError && playlist.thumbnailUrl ? (}
- <img
+ <img>
 // FIXED:  src={playlist.thumbnailUrl}
 // FIXED:  alt={playlist.title}
 // FIXED:  className={cn(}
@@ -103,13 +102,13 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
  )}
 
  {/* Overlay */}
- <div className='absolute inset - 0 bg - black / 0 group - hover:bg - black / 20 transition - all duration - 300 flex items - center justify - center'>
- <div className='opacity - 0 group - hover:opacity - 100 transition - opacity duration - 300 flex items - center space - x - 2'>
- <UnifiedButton
+ <div className={'absolut}e inset - 0 bg - black / 0 group - hover:bg - black / 20 transition - all duration - 300 flex items - center justify - center'>
+ <div className={'opacit}y - 0 group - hover:opacity - 100 transition - opacity duration - 300 flex items - center space - x - 2'>
+ <UnifiedButton>
  variant='ghost'
  size='sm' />
 // FIXED:  onClick={handleAction((: React.MouseEvent) => onPlay?.(playlist))}
-// FIXED:  className='bg - black / 50 text - white hover:bg - black / 70'
+// FIXED:  className={'b}g - black / 50 text - white hover:bg - black / 70'
  >
  <PlayIcon className='w - 5 h - 5' />
 // FIXED:  </UnifiedButton>
@@ -117,14 +116,14 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
 // FIXED:  </div>
 
  {/* Video count badge */}
- <div className='absolute bottom - 2 right - 2 bg - black / 80 text - white text - xs px - 2 py - 1 rounded flex items - center space - x - 1'>
+ <div className={'absolut}e bottom - 2 right - 2 bg - black / 80 text - white text - xs px - 2 py - 1 rounded flex items - center space - x - 1'>
  <VideoCameraIcon className='w - 3 h - 3' />
  <span>{playlist.videoCount}</span>
 // FIXED:  </div>
 
  {/* Visibility indicator */}
  {playlist.visibility !== 'public' && (}
- <div className='absolute top - 2 left - 2 bg - black / 80 text - white text - xs px - 2 py - 1 rounded flex items - center space - x - 1'>
+ <div className={'absolut}e top - 2 left - 2 bg - black / 80 text - white text - xs px - 2 py - 1 rounded flex items - center space - x - 1'>
  {getVisibilityIcon()}
  <span>{getVisibilityText()}</span>
 // FIXED:  </div>
@@ -135,81 +134,76 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
  );
 
  const ContentSection = () => (
- <div
-// FIXED:  className={cn('flex - 1 min - w - 0', variant === 'compact' ? 'ml - 3' : 'mt - 3')} />
- >
+ <div>
+// FIXED:  className={cn('flex - 1 min - w - 0', variant === 'compact' ? 'ml - 3' : 'mt - 3')}/>
  {/* Title */}
- <Link to={playlistUrl} className='block' />
- <h3
+ <Link to={playlistUrl} className={'block}' />
+ <h3>
 // FIXED:  className={cn(}
  'font - medium text - neutral - 900 dark:text - neutral - 100 line - clamp - 2',
  'hover:text - red - 600 dark:hover:text - red - 400 transition - colors',
  variant === 'compact' ? 'text - sm' : 'text - base'
- )} />
- >
+ )}/>
  {playlist.title}
 // FIXED:  </h3>
 // FIXED:  </Link>
 
  {/* Owner */}
  {showOwner && (}
- <Link
+ <Link>
  to={ownerUrl}
 // FIXED:  className={cn(}
  'text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 900 dark:hover:text - neutral - 100',
  'transition - colors block mt - 1',
  variant === 'compact' ? 'text - xs' : 'text - sm'
- )} />
- >
+ )}/>
  {playlist.ownerName}
 // FIXED:  </Link>
  )}
 
  {/* Description */}
  {variant === 'detailed' && playlist.description && (}
- <p className='text - sm text - neutral - 600 dark:text - neutral - 400 mt - 2 line - clamp - 2'>
+ <p className={'tex}t - sm text - neutral - 600 dark:text - neutral - 400 mt - 2 line - clamp - 2'>
  {playlist.description}
 // FIXED:  </p>
  )}
 
  {/* Meta information */}
- <div
+ <div>
 // FIXED:  className={cn(}
  'flex items - center space - x - 3 mt - 2',
  variant === 'compact' ? 'text - xs' : 'text - sm',
  'text - neutral - 500 dark:text - neutral - 400'
- )} />
- >
- <div className='flex items - center space - x - 1'>
+ )}/>
+ <div className={'fle}x items - center space - x - 1'>
  <VideoCameraIcon className='w - 3 h - 3' />
  <span>{playlist.videoCount} videos</span>
 // FIXED:  </div>
 
  {playlist.totalDuration && (}
- <div className='flex items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 1'>
  <ClockIcon className='w - 3 h - 3' />
  <span>{playlist.totalDuration}</span>
 // FIXED:  </div>
  )}
 
- <div className='flex items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 1'>
  <span > Updated {formatRelativeTime(playlist.updatedAt)}</span>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Tags */}
  {variant === 'detailed' && playlist.tags && playlist.tags.length > 0 && (}
- <div className='flex flex - wrap gap - 1 mt - 2'>
+ <div className={'fle}x flex - wrap gap - 1 mt - 2'>
  {playlist.tags.slice(0, 3).map((tag) => (}
- <span
+ <span>
  key={tag}
-// FIXED:  className='px - 2 py - 1 bg - neutral - 100 dark:bg - neutral - 700 text - neutral - 700 dark:text - neutral - 300 text - xs rounded' />
- >
+// FIXED:  className={'p}x - 2 py - 1 bg - neutral - 100 dark:bg - neutral - 700 text - neutral - 700 dark:text - neutral - 300 text - xs rounded'/>
  #{tag}
 // FIXED:  </span>
  ))}
  {playlist.tags.length > 3 && (}
- <span className='text - xs text - neutral - 500'>
+ <span className={'tex}t - xs text - neutral - 500'>
  +{playlist.tags.length - 3} more
 // FIXED:  </span>
  )}
@@ -220,10 +214,10 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
 
  const ActionsSection = () =>
  showActions && (
- <div className='flex items - center space - x - 2'>
+ <div className={'fle}x items - center space - x - 2'>
  {/* Follow / Unfollow button */}
  {!isOwner && (}
- <UnifiedButton
+ <UnifiedButton>
  variant={isFollowed ? 'secondary' : 'primary'}
  size='sm' />
 // FIXED:  onClick={handleAction((: React.MouseEvent) =>}
@@ -245,7 +239,7 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
  )}
 
  {/* Share button */}
- <UnifiedButton
+ <UnifiedButton>
  variant='ghost'
  size='sm' />
 // FIXED:  onClick={handleAction((: React.MouseEvent) => onShare?.(playlist))}
@@ -254,8 +248,8 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
 // FIXED:  </UnifiedButton>
 
  {/* Menu button */}
- <div className='relative'>
- <UnifiedButton
+ <div className={'relative}'>
+ <UnifiedButton>
  variant='ghost'
  size='sm' />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
@@ -269,8 +263,8 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
 
  {/* Dropdown menu */}
  {showMenu && (}
- <div className='absolute right - 0 top - full mt - 1 w - 48 bg - white dark:bg - neutral - 800 rounded - md shadow - lg border border - neutral - 200 dark:border - neutral - 700 z - 50'>
- <div className='py - 1'>
+ <div className={'absolut}e right - 0 top - full mt - 1 w - 48 bg - white dark:bg - neutral - 800 rounded - md shadow - lg border border - neutral - 200 dark:border - neutral - 700 z - 50'>
+ <div className={'p}y - 1'>
  {isOwner ? (}
  <></><</>/>
  <button />
@@ -316,7 +310,7 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
  // Click outside to close menu
  React.useEffect(() => {}
  const handleClickOutside = () => setShowMenu(false);
- if (showMenu as any) {}
+ if (showMenu) {}
  document.addEventListener('click', handleClickOutside as EventListener);
  return () => document.removeEventListener('click', handleClickOutside as EventListener);
  }
@@ -324,7 +318,7 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
  }, [showMenu]);
 
  return (
- <article
+ <article>
 // FIXED:  className={cn(}
  'group transition - all duration - 200',
  variant === 'compact' ? 'flex items - start' : 'flex flex - col',
@@ -332,8 +326,7 @@ export const PlaylistCard: React.FC < PlaylistCardProps> = ({}
  'p - 4 bg - white dark:bg - neutral - 800 rounded - lg shadow - sm hover:shadow - md',
  className
  )}
- data - playlist - id={playlist.id} />
- >
+ data - playlist - id={playlist.id}/>
  <ThumbnailSection />
  <ContentSection />
  {variant !== 'compact' && <ActionsSection />}

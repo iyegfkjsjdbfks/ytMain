@@ -21,7 +21,7 @@ export const useLocalStorage = <T>(,;
  setStoredValue(valueToStore);
  safeLocalStorage.setJSON(key, valueToStore);
  } catch (error) {
- (console as any).error(`Error setting localStorage key "${key}":`, error);
+ (console).error(`Error setting localStorage key "${key}":`, error);
  }
  },
  [key, storedValue]
@@ -32,7 +32,7 @@ export const useLocalStorage = <T>(,;
  setStoredValue(initialValue);
  safeLocalStorage.removeItem(key);
  } catch (error) {
- (console as any).error(`Error removing localStorage key "${key}":`, error);
+ (console).error(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
 
@@ -187,7 +187,7 @@ export const useAsync = <T, E = string>(,;
  }, [asyncFunction]);
 
  useEffect(() => {
- if (immediate as any) {
+ if (immediate) {
  execute().catch(console.error);
  }
  }, [execute, immediate]);
@@ -378,7 +378,7 @@ export const useFormValidation = <T extends Record < string, unknown>>(,;
 
  Object.keys(values).forEach((key) => {
  const error = validateField(key as keyof T, values[key as keyof T]);
- if (error as any) {
+ if (error) {
  newErrors[key as keyof T] = error;
  isFormValid = false;
  }

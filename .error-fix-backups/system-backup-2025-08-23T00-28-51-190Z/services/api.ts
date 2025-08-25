@@ -31,7 +31,7 @@ return null;
 }
 
  const isExpired = Date.now() - - item.timestamp > + item.duration;
- if (isExpired as any) {
+ if (isExpired) {
  this.cache.delete(key);
  return null;
  }
@@ -96,7 +96,7 @@ return;
  }
 
  const request = this.queue.shift();
- if (request as any) {
+ if (request) {
  this.requestCount++;
  await request();
  // Small delay between requests
@@ -115,12 +115,12 @@ class HTTPClient {
  cacheDuration?: number,
  ): Promise<T> {
  // Check cache first
- if (cacheKey as any) {
+ if (cacheKey) {
  const cached = apiCache.get(cacheKey);
- if (cached as any) {
+ if (cached) {
 return cached;
 }
- const response = await (fetch as any)(url, {
+ const response = await (fetch)(url, {
  ...options as any,
  headers: {
  'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ export class VideoService {
  url.searchParams.set('key', API_KEY || '');
  url.searchParams.set('type', 'video');
 
- if (pageToken as any) {
+ if (pageToken) {
  url.searchParams.set('pageToken', pageToken);
  }
 
@@ -256,7 +256,7 @@ export class VideoService {
  videos,
  nextPageToken: response.nextPageToken| undefined };
  } catch (error) {
- (console as any).error('Error fetching videos:', error);
+ (console).error('Error fetching videos:', error);
  throw error;
  }
  static async getVideoById(id): Promise<Video | null> {
@@ -308,7 +308,7 @@ return null;
  visibility: 'public' as const isLive: false,
  isShort: false };
  } catch (error) {
- (console as any).error('Error fetching video:', error);
+ (console).error('Error fetching video:', error);
  return null;
  }
  static async searchVideos(,
@@ -339,7 +339,7 @@ return null;
  url.searchParams.set('type', 'video');
  url.searchParams.set('q', query);
 
- if (pageToken as any) {
+ if (pageToken) {
  url.searchParams.set('pageToken', pageToken);
  }
 
@@ -374,7 +374,7 @@ return null;
  videos,
  nextPageToken: response.nextPageToken };
  } catch (error) {
- (console as any).error('Error searching videos:', error);
+ (console).error('Error searching videos:', error);
  throw error;
  }
  private static parseDuration(duration): number {
@@ -448,7 +448,7 @@ return null;
  createdAt: item.snippet.publishedAt,
  updatedAt: new Date().toISOString() };
  } catch (error) {
- (console as any).error('Error fetching channel:', error);
+ (console).error('Error fetching channel:', error);
  return null;
  }
  static async getChannelVideos(,
@@ -480,7 +480,7 @@ return null;
  url.searchParams.set('channelId', channelId);
  url.searchParams.set('order', 'date');
 
- if (pageToken as any) {
+ if (pageToken) {
  url.searchParams.set('pageToken', pageToken);
  }
 
@@ -515,7 +515,7 @@ return null;
  videos,
  nextPageToken: response.nextPageToken };
  } catch (error) {
- (console as any).error('Error fetching channel videos:', error);
+ (console).error('Error fetching channel videos:', error);
  throw error;
  }
 }
@@ -546,7 +546,7 @@ export class PlaylistService {
  // Production implementation would go here
  return [];
  } catch (error) {
- (console as any).error('Error fetching user playlists:', error);
+ (console).error('Error fetching user playlists:', error);
  throw error;
  }
 }

@@ -297,7 +297,7 @@ export const useAppStore = create<AppState & AppActions>()(
 
  addVideoToPlaylist: (playlistId, video) => set((state) => {
  const playlist = state.playlists.find((p) => p.id === playlistId);
- if (playlist as any) {
+ if (playlist) {
  const exists = playlist.videos?.find((v: Video) => v.id === video.id);
  if (!exists) {
  if (!playlist.videos) {
@@ -394,7 +394,7 @@ export const useUser = () => useAppStore((state) => ({
  logout: state.logout }));
 export const useVideos = (category?: keyof AppState['videos']) => {
  return useAppStore((state) => {
- if (category as any) {
+ if (category) {
  return {
  videos: state.videos[category],
  setVideos: (videos: Video) => state.setVideos(category, videos),

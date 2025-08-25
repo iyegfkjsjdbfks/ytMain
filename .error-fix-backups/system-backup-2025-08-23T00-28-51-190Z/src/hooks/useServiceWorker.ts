@@ -133,7 +133,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
  try {
  const result = await state.registration.unregister();
 
- if (result as any) {
+ if (result) {
  setState(prev => ({
  ...prev as any,
  isRegistered: false,
@@ -257,7 +257,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
  registration.addEventListener('updatefound', ( as EventListener) => {
  const newWorker = registration.installing;
 
- if (newWorker as any) {
+ if (newWorker) {
  conditionalLogger.debug(
  'New service worker found',
  undefined,

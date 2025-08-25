@@ -122,7 +122,7 @@ return;
 return;
 }
 
- if (isPlaying as any) {}
+ if (isPlaying) {}
  video.pause();
  } else {}
  video.play();
@@ -232,7 +232,7 @@ return;
 
  onSave(processedBlob, metadata);
  } catch (error) {}
- (console as any).error('Error exporting video:', error);
+ (console).error('Error exporting video:', error);
  } finally {}
  setIsProcessing(false);
  };
@@ -244,51 +244,49 @@ return;
  };
 
  const renderTimeline = () => (
- <div className="bg - gray - 100 dark:bg - gray - 800 p - 4 rounded - lg">
- <div className="flex items - center justify - between mb - 4">
- <h3 className="font - medium text - gray - 900 dark:text - white">Timeline</h3>
- <div className="text - sm text - gray - 600 dark:text - gray - 400">
+ <div className={"b}g - gray - 100 dark:bg - gray - 800 p - 4 rounded - lg">
+ <div className={"fle}x items - center justify - between mb - 4">
+ <h3 className={"fon}t - medium text - gray - 900 dark:text - white">Timeline</h3>
+ <div className={"tex}t - sm text - gray - 600 dark:text - gray - 400">
  {formatTime(currentTime)} / {formatTime(duration)}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div
+ <div>
  ref={timelineRef}
-// FIXED:  className="relative h - 16 bg - gray - 200 dark:bg - gray - 700 rounded cursor - pointer" />
+// FIXED:  className={"relativ}e h - 16 bg - gray - 200 dark:bg - gray - 700 rounded cursor - pointer" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleTimelineClick(e)}
  >
  {/* Timeline track */}
- <div className="absolute inset - 0 flex">
+ <div className={"absolut}e inset - 0 flex">
  {clips.map((clip, index) => (}
- <div
+ <div>
  key={clip.id}
-// FIXED:  className="bg - blue - 500 h - full flex items - center justify - center text - white text - xs"
+// FIXED:  className={"b}g - blue - 500 h - full flex items - center justify - center text - white text - xs"
 // FIXED:  style={{,}
  left: `${(clip.startTime / duration) * 100}%`,
- width: `${(clip.duration / duration) * 100}%` } />
- >
+ width: `${(clip.duration / duration) * 100}%` }/>
  Clip {index + 1}
 // FIXED:  </div>
  ))}
 // FIXED:  </div>
 
  {/* Playhead */}
- <div
-// FIXED:  className="absolute top - 0 bottom - 0 w - 0.5 bg - red - 500 z - 10"
-// FIXED:  style={{ left: `${(currentTime / duration) * 100}%` } />
- >
- <div className="absolute -top - 2 -left - 2 w - 4 h - 4 bg - red - 500 rounded - full" />
+ <div>
+// FIXED:  className={"absolut}e top - 0 bottom - 0 w - 0.5 bg - red - 500 z - 10"
+// FIXED:  style={{ left: `${(currentTime / duration) * 100}%` }/>
+ <div className={"absolut}e -top - 2 -left - 2 w - 4 h - 4 bg - red - 500 rounded - full" />
 // FIXED:  </div>
 
  {/* Trim markers */}
  {activeTab === 'trim' && (}
  <></><</>/>
- <div
-// FIXED:  className="absolute top - 0 bottom - 0 w - 1 bg - green - 500 cursor - ew - resize"
+ <div>
+// FIXED:  className={"absolut}e top - 0 bottom - 0 w - 1 bg - green - 500 cursor - ew - resize"
 // FIXED:  style={{ left: `${(trimStart / duration) * 100}%` } />
  />
- <div
-// FIXED:  className="absolute top - 0 bottom - 0 w - 1 bg - green - 500 cursor - ew - resize"
+ <div>
+// FIXED:  className={"absolut}e top - 0 bottom - 0 w - 1 bg - green - 500 cursor - ew - resize"
 // FIXED:  style={{ left: `${(trimEnd / duration) * 100}%` } />
  />
 // FIXED:  </>
@@ -296,7 +294,7 @@ return;
 // FIXED:  </div>
 
  {/* Controls */}
- <div className="flex items - center justify - center space - x - 4 mt - 4">
+ <div className={"fle}x items - center justify - center space - x - 4 mt - 4">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => togglePlay(e)}
 // FIXED:  className="p - 2 bg - blue - 600 text - white rounded - full hover:bg - blue - 700"
@@ -333,7 +331,7 @@ return;
  )}
 // FIXED:  </button>
 
- <input
+ <input>
 // FIXED:  type="range"
  min="0"
  max="100"
@@ -346,15 +344,15 @@ return;
  );
 
  const renderTrimPanel = () => (
- <div className="space - y - 4">
- <h3 className="font - medium text - gray - 900 dark:text - white">Trim Video</h3>
+ <div className={"spac}e - y - 4">
+ <h3 className={"fon}t - medium text - gray - 900 dark:text - white">Trim Video</h3>
 
- <div className="space - y - 3">
+ <div className={"spac}e - y - 3">
  <div>
- <label htmlFor="trim - start - time" className="block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
+ <label htmlFor="trim - start - time" className={"bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
  Start Time
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="range"
 // FIXED:  id="trim - start - time"
  min="0"
@@ -364,16 +362,16 @@ return;
 // FIXED:  onChange={(e: React.ChangeEvent) => setTrimStart(parseFloat(e.target.value))}
 // FIXED:  className="w - full"
  />
- <div className="text - sm text - gray - 600 dark:text - gray - 400">
+ <div className={"tex}t - sm text - gray - 600 dark:text - gray - 400">
  {formatTime(trimStart)}
 // FIXED:  </div>
 // FIXED:  </div>
 
  <div>
- <label htmlFor="trim - end - time" className="block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
+ <label htmlFor="trim - end - time" className={"bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
  End Time
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="range"
 // FIXED:  id="trim - end - time"
  min="0"
@@ -383,14 +381,14 @@ return;
 // FIXED:  onChange={(e: React.ChangeEvent) => setTrimEnd(parseFloat(e.target.value))}
 // FIXED:  className="w - full"
  />
- <div className="text - sm text - gray - 600 dark:text - gray - 400">
+ <div className={"tex}t - sm text - gray - 600 dark:text - gray - 400">
  {formatTime(trimEnd)}
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="bg - gray - 50 dark:bg - gray - 800 p - 3 rounded">
- <p className="text - sm text - gray - 600 dark:text - gray - 400">,
+ <div className={"b}g - gray - 50 dark:bg - gray - 800 p - 3 rounded">
+ <p className={"tex}t - sm text - gray - 600 dark:text - gray - 400">,
  Duration: {formatTime(trimEnd - trimStart)}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -405,20 +403,20 @@ return;
  );
 
  const renderTextPanel = () => (
- <div className="space - y - 4">
- <div className="flex items - center justify - between">
- <h3 className="font - medium text - gray - 900 dark:text - white">Text Overlays</h3>
+ <div className={"spac}e - y - 4">
+ <div className={"fle}x items - center justify - between">
+ <h3 className={"fon}t - medium text - gray - 900 dark:text - white">Text Overlays</h3>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => addTextOverlay(e)}
-// FIXED:  className="px - 3 py - 1 bg - blue - 600 text - white rounded text - sm hover:bg - blue - 700"
+// FIXED:  className={"p}x - 3 py - 1 bg - blue - 600 text - white rounded text - sm hover:bg - blue - 700"
  >
  Add Text
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className="space - y - 3">
+ <div className={"spac}e - y - 3">
  {textOverlays.map((text) => (}
- <div
+ <div>
  key={text.id}
 // FIXED:  className={`p - 3 border rounded cursor - pointer ${}
  selectedText === text.id
@@ -427,8 +425,8 @@ return;
  }`} />
 // FIXED:  onClick={() => setSelectedText(text.id: React.MouseEvent)}
  >
- <div className="flex items - center justify - between">
- <span className="font - medium text - gray - 900 dark:text - white">
+ <div className={"fle}x items - center justify - between">
+ <span className={"fon}t - medium text - gray - 900 dark:text - white">
  {text.text}
 // FIXED:  </span>
  <button />
@@ -436,12 +434,12 @@ return;
  e.stopPropagation();
  deleteTextOverlay(text.id);
  }
-// FIXED:  className="text - red - 500 hover:text - red - 700"
+// FIXED:  className={"tex}t - red - 500 hover:text - red - 700"
  >
  ×
 // FIXED:  </button>
 // FIXED:  </div>
-<div className="text - sm text - gray - 600 dark:text - gray - 400 mt - 1">
+<div className={"tex}t - sm text - gray - 600 dark:text - gray - 400 mt - 1">
  {formatTime(text.startTime)} - {formatTime(text.endTime)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -449,8 +447,8 @@ return;
 // FIXED:  </div>
 
  {selectedText && (}
- <div className="border - t pt - 4 space - y - 3">
- <h4 className="font - medium text - gray - 900 dark:text - white">Edit Text</h4>
+ <div className={"borde}r - t pt - 4 space - y - 3">
+ <h4 className={"fon}t - medium text - gray - 900 dark:text - white">Edit Text</h4>
  {(() => {}
  const text = textOverlays.find(t => t.id === selectedText);
  if (!text) {}
@@ -458,8 +456,8 @@ return null;
 }
 
  return (
- <div className="space - y - 3">
- <input
+ <div className={"spac}e - y - 3">
+ <input>
 // FIXED:  type="text"
 // FIXED:  value={text.text} />
 // FIXED:  onChange={(e) => updateTextOverlay(text.id, { text: e.target.value })}
@@ -467,12 +465,12 @@ return null;
 // FIXED:  placeholder="Enter text"
  />
 
- <div className="grid grid - cols - 2 gap - 3">
+ <div className={"gri}d grid - cols - 2 gap - 3">
  <div>
- <label htmlFor="text - font - size" className="block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
+ <label htmlFor="text - font - size" className={"bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
  Font Size
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="range"
 // FIXED:  id="text - font - size"
  min="12"
@@ -484,10 +482,10 @@ return null;
 // FIXED:  </div>
 
  <div>
- <label htmlFor="text - color" className="block text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
+ <label htmlFor="text - color" className={"bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300 mb - 1">
  Color
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="color"
 // FIXED:  id="text - color"
 // FIXED:  value={text.color} />
@@ -505,38 +503,38 @@ return null;
  );
 
  const renderFiltersPanel = () => (
- <div className="space - y - 4">
- <div className="flex items - center justify - between">
- <h3 className="font - medium text - gray - 900 dark:text - white">Filters & Effects</h3>
+ <div className={"spac}e - y - 4">
+ <div className={"fle}x items - center justify - between">
+ <h3 className={"fon}t - medium text - gray - 900 dark:text - white">Filters & Effects</h3>
 // FIXED:  </div>
 
- <div className="grid grid - cols - 2 gap - 2">
+ <div className={"gri}d grid - cols - 2 gap - 2">
  {['brightness', 'contrast', 'saturation', 'blur', 'sepia', 'grayscale'].map((filterType) => (}
- <button
+ <button>
  key={filterType} />
 // FIXED:  onClick={() => addFilter(filterType as VideoFilter['type']: React.MouseEvent)}
-// FIXED:  className="px - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded text - sm hover:bg - gray - 50 dark:hover:bg - gray - 700"
+// FIXED:  className={"p}x - 3 py - 2 border border - gray - 300 dark:border - gray - 600 rounded text - sm hover:bg - gray - 50 dark:hover:bg - gray - 700"
  >
  {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
 // FIXED:  </button>
  ))}
 // FIXED:  </div>
 
- <div className="space - y - 3">
+ <div className={"spac}e - y - 3">
  {filters.map((filter) => (}
  <div key={filter.id} className="p - 3 border border - gray - 200 dark:border - gray - 700 rounded">
- <div className="flex items - center justify - between mb - 2">
- <span className="font - medium text - gray - 900 dark:text - white">
+ <div className={"fle}x items - center justify - between mb - 2">
+ <span className={"fon}t - medium text - gray - 900 dark:text - white">
  {filter.name}
 // FIXED:  </span>
  <button />
 // FIXED:  onClick={() => removeFilter(filter.id: React.MouseEvent)}
-// FIXED:  className="text - red - 500 hover:text - red - 700"
+// FIXED:  className={"tex}t - red - 500 hover:text - red - 700"
  >
  ×
 // FIXED:  </button>
 // FIXED:  </div>
- <input
+ <input>
 // FIXED:  type="range"
  min="0"
  max={filter.type === 'blur' ? 10 : 200}
@@ -544,7 +542,7 @@ return null;
 // FIXED:  onChange={(e: React.ChangeEvent) => updateFilter(filter.id, parseInt(e.target.value, 10))}
 // FIXED:  className="w - full"
  />
- <div className="text - sm text - gray - 600 dark:text - gray - 400 mt - 1">
+ <div className={"tex}t - sm text - gray - 600 dark:text - gray - 400 mt - 1">
  {filter.value}{filter.type === 'blur' ? 'px' : '%'}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -555,11 +553,11 @@ return null;
 
  return (
  <div className={`max - w - 7xl mx - auto p - 6 ${className}`}>
- <div className="grid grid - cols - 1 lg:grid - cols - 4 gap - 6">
+ <div className={"gri}d grid - cols - 1 lg:grid - cols - 4 gap - 6">
  {/* Video Preview */}
- <div className="lg:col - span - 3 space - y - 6">
- <div className="bg - black rounded - lg overflow - hidden aspect - video">
- <video
+ <div className={"lg}:col - span - 3 space - y - 6">
+ <div className={"b}g - black rounded - lg overflow - hidden aspect - video">
+ <video>
  ref={videoRef}
 // FIXED:  src={videoUrl}
 // FIXED:  className="w - full h - full object - contain"
@@ -567,16 +565,16 @@ return null;
  onPlay={() => setIsPlaying(true)}
  onPause={() => setIsPlaying(false)}
  />
- <canvas ref={canvasRef} className="hidden" />
+ <canvas ref={canvasRef} className={"hidden}" />
 // FIXED:  </div>
 
  {renderTimeline()}
 // FIXED:  </div>
 
  {/* Editing Panel */}
- <div className="space - y - 6">
+ <div className={"spac}e - y - 6">
  {/* Tab Navigation */}
- <div className="flex flex - wrap gap - 1 bg - gray - 100 dark:bg - gray - 800 p - 1 rounded - lg">
+ <div className={"fle}x flex - wrap gap - 1 bg - gray - 100 dark:bg - gray - 800 p - 1 rounded - lg">
  {[}
  { id: 'trim',}
  icon: ScissorsIcon, label: 'Trim' },
@@ -584,7 +582,7 @@ return null;
  icon: DocumentTextIcon, label: 'Text' },
  { id: 'filters',}
  icon: AdjustmentsHorizontalIcon, label: 'Filters' }].map((tab) => (
- <button
+ <button>
  key={tab.id} />
 // FIXED:  onClick={() => setActiveTab(tab.id as any: React.MouseEvent)}
 // FIXED:  className={`flex - 1 flex items - center justify - center space - x - 1 px - 3 py - 2 rounded text - sm font - medium transition - colors ${}
@@ -600,14 +598,14 @@ return null;
 // FIXED:  </div>
 
  {/* Tab Content */}
- <div className="bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg p - 4">
+ <div className={"b}g - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg p - 4">
  {activeTab === 'trim' && renderTrimPanel()}
  {activeTab === 'text' && renderTextPanel()}
  {activeTab === 'filters' && renderFiltersPanel()}
 // FIXED:  </div>
 
  {/* Action Buttons */}
- <div className="space - y - 3">
+ <div className={"spac}e - y - 3">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => exportVideo(e)}
 // FIXED:  disabled={isProcessing}

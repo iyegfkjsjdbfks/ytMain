@@ -4,19 +4,19 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseWatchPageOptions {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
-  onError?: (error: Error) => void, 
+  onSuccess?: (data: unknown) => void;
+  onError?: (error: Error) => void}
 }
 
 export interface UseWatchPageResult {
   data;
   loading: boolean,
   error: Error | null
-      refetch: () => void, 
+      refetch: () => void}
 }
 
 export function useWatchPage(
-  options: UseWatchPageOptions = {}
+  options: UseWatchPageOptions = {})
 ): UseWatchPageResult {
   const { enabled = true, onSuccess, onError } = options;
   
@@ -24,7 +24,7 @@ export function useWatchPage(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {;
+  const fetchData = useCallback(async () => {
     if (!enabled) return;
 
     try {
@@ -32,11 +32,11 @@ export function useWatchPage(
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve => setTimeout(resolve, 300)), 
+      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300: unknown: unknown)), 
       
       const result = {
-        hookName: 'useWatchPage',
-        timestamp: Date.now(),
+        hookName: 'useWatchPage'}
+        timestamp: Date.now(),;
         success: true,;
       };
       
@@ -45,21 +45,21 @@ export function useWatchPage(
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      onError?.(error), 
+      onError?.(error)}
     } finally {
-      setLoading(false), 
+      setLoading(false)}
     }
   }, [enabled, onSuccess, onError]);
 
   useEffect(() => {
-    fetchData(), 
+    fetchData()}
   }, [fetchData]);
 
   return {
     data,
     loading,
     error,
-    refetch: fetchData,
+    refetch: fetchData}
   };
 }
 

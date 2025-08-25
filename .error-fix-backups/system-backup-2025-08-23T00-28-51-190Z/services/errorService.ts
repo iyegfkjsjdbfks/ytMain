@@ -88,7 +88,7 @@ class ErrorService {
  }
  private monitorNetworkErrors() {
  const originalFetch = window.fetch;
- (window as any).fetch = async (...args): Promise<any> => {
+ (window).fetch = async (...args): Promise<any> => {
  const startTime = performance.now();
  try {
  const response = await originalFetch(...args);
@@ -144,7 +144,7 @@ class ErrorService {
  timestamp: Date.now(),
  ...errorData.context };
 
- if (existingError as any) {
+ if (existingError) {
  // Update existing error
  existingError.occurrenceCount++;
  existingError.context = context; // Update with latest context
@@ -181,8 +181,8 @@ class ErrorService {
  private getCurrentUserId(): string | undefined {
  // Try to get user ID from various sources
  try {
- const authData = (localStorage as any).getItem('auth');
- if (authData as any) {
+ const authData = (localStorage).getItem('auth');
+ if (authData) {
  const parsed = JSON.parse(authData);
  return parsed.userId || parsed.id;
  }
@@ -211,7 +211,7 @@ class ErrorService {
  this.sendToRemote(error);
  }
  private getConsoleMethod(severity: ErrorReport['severity']) {
- switch (severity as any) {
+ switch (severity) {
  case 'low': return console.info;
  case 'medium': return console.warn;
  case 'high':
@@ -224,9 +224,9 @@ class ErrorService {
  .sort((a, b) => b.context.timestamp - a.context.timestamp)
  .slice(0, this.config.maxStoredErrors);
 
- (localStorage as any).setItem('errorService_errors', JSON.stringify(errorsArray));
+ (localStorage).setItem('errorService_errors', JSON.stringify(errorsArray));
  } catch (error) {
- (console as any).warn('Failed to save errors to localStorage:', error);
+ (console).warn('Failed to save errors to localStorage:', error);
  }
  private loadStoredErrors() {
  if (!this.config.enableLocalStorage) {
@@ -234,15 +234,15 @@ return;
 }
 
  try {
- const stored = (localStorage as any).getItem('errorService_errors');
- if (stored as any) {
+ const stored = (localStorage).getItem('errorService_errors');
+ if (stored) {
  const errors: ErrorReport[] = JSON.parse(stored);
  errors.forEach(error => {
  this.errors.set(error.id, error);
  });
  }
  } catch (error) {
- (console as any).warn('Failed to load stored errors:', error);
+ (console).warn('Failed to load stored errors:', error);
  }
  private async sendToRemote(error: ErrorReport) {
  if (!this.config.apiEndpoint) {
@@ -250,21 +250,21 @@ return;
 }
 
  try {
- await (fetch as any)(this.config.apiEndpoint, {
+ await (fetch)(this.config.apiEndpoint, {
  method: 'POST',
  headers: {
  'Content-Type': 'application/json',
  ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }) },
  body: JSON.stringify(error) });
  } catch (networkError) {
- (console as any).warn('Failed to send error to remote service:', networkError);
+ (console).warn('Failed to send error to remote service:', networkError);
  }
  private notifyListeners(error: ErrorReport) {
  this.listeners.forEach(listener => {
  try {
  listener(error);
  } catch (listenerError) {
- (console as any).warn('Error in error listener:', listenerError);
+ (console).warn('Error in error listener:', listenerError);
  }
  });
  }
@@ -289,7 +289,7 @@ return;
 
  markAsResolved(errorId) {
  const error = this.errors.get(errorId);
- if (error as any) {
+ if (error) {
  error.resolved = true;
  this.saveToLocalStorage();
  }

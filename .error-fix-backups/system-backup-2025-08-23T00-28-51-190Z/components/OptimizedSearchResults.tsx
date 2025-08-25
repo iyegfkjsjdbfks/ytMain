@@ -180,8 +180,8 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  };
 
  return (
- <div
-// FIXED:  className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors" />
+ <div>
+// FIXED:  className={"fle}x flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors" />
 // FIXED:  onClick={(e) => handleCardClick(e)}
  onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
@@ -193,11 +193,11 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  tabIndex={0}
  >
  {/* YouTube Player or Thumbnail */}
- <div className="relative flex-shrink-0">
- <div className="w-full sm:w-[480px] h-[270px] sm:h-[270px] aspect-video sm:aspect-auto bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
+ <div className={"relativ}e flex-shrink-0">
+ <div className={"w}-full sm:w-[480px] h-[270px] sm:h-[270px] aspect-video sm:aspect-auto bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
  {videoId ? (
- <div
-// FIXED:  className="w-full h-full" />
+ <div>
+// FIXED:  className={"w}-full h-full" />
 // FIXED:  onClick={(e) => e.stopPropagation()}
  onKeyDown={(e) => {
  if (e.key === 'Enter' || e.key === ' ') {
@@ -207,10 +207,10 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
  role="button"
  tabIndex={0}
  >
- <iframe
+ <iframe>
 // FIXED:  src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0&origin=${encodeURIComponent(window.location.origin)}`}
  title={convertedVideo.title}
-// FIXED:  className="w-full h-full border-0 rounded-xl"
+// FIXED:  className={"w}-full h-full border-0 rounded-xl"
  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
  allowFullScreen
  loading="lazy" />
@@ -218,15 +218,15 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
 // FIXED:  </div>
  ) : (
  <>
- <img
+ <img>
 // FIXED:  src={convertedVideo.thumbnailUrl}
 // FIXED:  alt={convertedVideo.title}
-// FIXED:  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+// FIXED:  className={"w}-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
  loading="lazy" />
  />
  {/* Duration badge */}
  {convertedVideo.duration && convertedVideo.duration !== '0:00' && (
- <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-sm font-medium">
+ <div className={"absolut}e bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-sm font-medium">
  {formatDuration(convertedVideo.duration)}
 // FIXED:  </div>
  )}
@@ -236,25 +236,25 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
 // FIXED:  </div>
 
  {/* Content */}
- <div className="flex-1 min-w-0">
+ <div className={"flex}-1 min-w-0">
  {/* Title */}
- <h3 className="text-lg sm:text-xl font-medium text-gray-900 dark:text-white line-clamp-2 leading-6 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+ <h3 className={"text}-lg sm:text-xl font-medium text-gray-900 dark:text-white line-clamp-2 leading-6 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
  {convertedVideo.title}
 // FIXED:  </h3>
 
  {/* Minimal metadata line - YouTube style */}
- <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
- <span className="hover:text-gray-900 dark:hover:text-white transition-colors">
+ <div className={"text}-sm text-gray-600 dark:text-gray-400 mb-2">
+ <span className={"hover}:text-gray-900 dark:hover:text-white transition-colors">
  {convertedVideo.channelName}
 // FIXED:  </span>
- <span className="mx-1">•</span>
+ <span className={"mx}-1">•</span>
  <span>{formatViews(convertedVideo.views)} views</span>
- <span className="mx-1">•</span>
+ <span className={"mx}-1">•</span>
  <span>{formatTimeAgo(convertedVideo.uploadedAt)}</span>
 // FIXED:  </div>
 
  {/* Description - only first line visible */}
- <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1 leading-5">
+ <p className={"text}-sm text-gray-600 dark:text-gray-400 line-clamp-1 leading-5">
  {convertedVideo.description}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -309,7 +309,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
  // Filter results based on active tab
  const filteredResults = useMemo(() => {
- switch (activeTab as any) {
+ switch (activeTab) {
  case 'videos':
  return allResults; // All our current content are videos
  case 'channels':
@@ -347,16 +347,16 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
  // Loading skeleton
  const LoadingSkeleton = memo(() => (
- <div className="w-full max-w-[1280px] mx-auto">
- <div className="space-y-4 px-4">
+ <div className={"w}-full max-w-[1280px] mx-auto">
+ <div className={"space}-y-4 px-4">
  {Array.from({ length: 10 }).map((_, index) => (
- <div key={index} className="flex flex-col sm:flex-row gap-4 sm:gap-6 animate-pulse p-3">
- <div className="w-full sm:w-[480px] h-[270px] bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0" />
- <div className="flex-1 min-w-0">
- <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded mb-1" />
- <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
- <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-2" />
- <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full" />
+ <div key={index} className={"fle}x flex-col sm:flex-row gap-4 sm:gap-6 animate-pulse p-3">
+ <div className={"w}-full sm:w-[480px] h-[270px] bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0" />
+ <div className={"flex}-1 min-w-0">
+ <div className={"h}-6 bg-gray-200 dark:bg-gray-700 rounded mb-1" />
+ <div className={"h}-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+ <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-2" />
+ <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded w-full" />
 // FIXED:  </div>
 // FIXED:  </div>
  ))}
@@ -366,14 +366,14 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
  // Empty state
  const EmptyState = memo(() => (
- <div className="flex flex-col items-center justify-center py-12 text-center">
- <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
- <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <div className={"fle}x flex-col items-center justify-center py-12 text-center">
+ <div className={"w}-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
+ <svg className={"w}-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 // FIXED:  </svg>
 // FIXED:  </div>
-<h3 className="text-lg font-medium text-gray-900 mb-2">No results found</h3>
- <p className="text-gray-500 max-w-md">
+<h3 className={"text}-lg font-medium text-gray-900 mb-2">No results found</h3>
+ <p className={"text}-gray-500 max-w-md">
  Try adjusting your search terms to find what you're looking for.
 // FIXED:  </p>
 // FIXED:  </div>
@@ -388,10 +388,10 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
  }
 
  return (
- <div ref={containerRef} className="w-full max-w-[1280px] mx-auto">
+ <div ref={containerRef} className={"w}-full max-w-[1280px] mx-auto">
  {/* YouTube-style filter tabs */}
- <div className="mb-4 px-4">
- <div className="flex items-center gap-3 mb-4 overflow-x-auto scrollbar-hide">
+ <div className={"mb}-4 px-4">
+ <div className={"fle}x items-center gap-3 mb-4 overflow-x-auto scrollbar-hide">
  <button />
 // FIXED:  onClick={() => setActiveTab('all')}
 // FIXED:  className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
@@ -416,17 +416,17 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 // FIXED:  </div>
 
  {/* Results header */}
- <div className="mb-4 px-4">
- <div className="text-sm text-gray-600 dark:text-gray-400">
+ <div className={"mb}-4 px-4">
+ <div className={"text}-sm text-gray-600 dark:text-gray-400">
  About {filteredResults.length.toLocaleString()} results
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Results */}
  {filteredResults.length > 0 ? (
- <div className="space-y-4 px-4">
+ <div className={"space}-y-4 px-4">
  {filteredResults.map((item, index) => (
- <YouTubeSearchResultCard
+ <YouTubeSearchResultCard>
  key={`${item.id}-${index}`}
  item={item}
  onVideoClick={onVideoClick} />
@@ -439,13 +439,13 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
  {/* Load more trigger */}
  {hasMore && (
- <div ref={loadMoreRef as React.RefObject<HTMLDivElement>} className="h-20 flex items-center justify-center mt-8">
+ <div ref={loadMoreRef as React.RefObject<HTMLDivElement>} className={"h}-20 flex items-center justify-center mt-8">
  {loading ? (
- <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
+ <div className={"animate}-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
  ) : (
  <button />
 // FIXED:  onClick={(e) => onLoadMore(e)}
-// FIXED:  className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+// FIXED:  className={"px}-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
  >
  Load More Videos
 // FIXED:  </button>

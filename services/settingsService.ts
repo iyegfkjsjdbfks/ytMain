@@ -137,19 +137,19 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
 };
 
 export const getSettings = (): Settings => {
- const stored = (localStorage as any).getItem('appSettings');
- if (stored as any) {
+ const stored = (localStorage).getItem('appSettings');
+ if (stored) {
  try {
  return { ...defaultSettings as any, ...JSON.parse(stored) };
  } catch (error) {
- (console as any).error('Error parsing stored settings:', error);
+ (console).error('Error parsing stored settings:', error);
  }
  }
  return defaultSettings;
 };
 
 export const saveSettings = (settings: Settings): void => {
- (localStorage as any).setItem('appSettings', JSON.stringify(settings));
+ (localStorage).setItem('appSettings', JSON.stringify(settings));
 };
 
 export const getYouTubePlayerType = (): YouTubePlayerType => {
@@ -215,7 +215,7 @@ export const toggleYouTubePlayer = (playerType: YouTubePlayerType): void => {
  const enabled = settings.enabledYouTubePlayers;
  const isEnabled = enabled.includes(playerType);
 
- if (isEnabled as any) {
+ if (isEnabled) {
  // Don't allow disabling if it's the only enabled player
  if (enabled.length > 1) {
  settings.enabledYouTubePlayers = enabled.filter((p) => p !== playerType)
@@ -232,7 +232,7 @@ export const toggleLocalPlayer = (playerType: LocalVideoPlayerType): void => {
  const enabled = settings.enabledLocalPlayers;
  const isEnabled = enabled.includes(playerType);
 
- if (isEnabled as any) {
+ if (isEnabled) {
  // Don't allow disabling if it's the only enabled player
  if (enabled.length > 1) {
  settings.enabledLocalPlayers = enabled.filter((p) => p !== playerType)
@@ -343,7 +343,7 @@ export const getPlayerUsageByPage = (playerType: VideoPlayerType): PageType[] =>
  ? pageConfig.youtubePlayer === playerType
  : pageConfig.localPlayer === playerType;
 
- if (isUsed as any) {
+ if (isUsed) {
  pages.push(page as PageType);
  }
  });

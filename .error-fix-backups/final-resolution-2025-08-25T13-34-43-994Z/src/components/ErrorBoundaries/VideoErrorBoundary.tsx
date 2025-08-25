@@ -53,10 +53,10 @@ export const VideoErrorBoundary: React.FC<VideoErrorBoundaryProps> = ({
 
   return (
     <div className={'component-ready ' + className}>
-      <div className="component-header">
+      <div className={"component}-header">
         <h2>VideoErrorBoundary</h2>
       </div>
-      <div className="component-body">
+      <div className={"component}-body">
         {children || <p>Component is ready and functioning properly.</p>}
       </div>
     </div>

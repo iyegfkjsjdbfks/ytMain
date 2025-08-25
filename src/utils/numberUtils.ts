@@ -1,7 +1,7 @@
 // numberUtils - Simple Implementation;
 export const numberUtils = {
   enabled: true,
-  process: (data: any) => data, 
+  process: (data: unknown) => data, 
 };
 
 export default numberUtils;

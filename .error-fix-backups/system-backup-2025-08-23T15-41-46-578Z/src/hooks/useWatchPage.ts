@@ -130,7 +130,7 @@ export const useWatchPage = () => {
 
  try {
  const unifiedVideo = await unifiedDataService.getVideoById(videoId);
- if (unifiedVideo as any) {
+ if (unifiedVideo) {
  // Convert unified video format to expected format
  foundVideo = {
  id: unifiedVideo.id,
@@ -157,7 +157,7 @@ export const useWatchPage = () => {
  updatedAt: unifiedVideo.publishedAt };
  }
  } catch (error) {
- (console as any).warn(
+ (console).warn(
  'Failed to load from unified service, trying real video service:',
  error
  );
@@ -174,7 +174,7 @@ export const useWatchPage = () => {
  const isYouTubeVideoId =;
  cleanVideoId.length === 11 && /^[a - zA - Z0 - 9_-]+$/.test(cleanVideoId);
 
- if (isYouTubeVideoId as any) {
+ if (isYouTubeVideoId) {
  // Create a YouTube video object
  foundVideo = {
  id: cleanVideoId,
@@ -271,7 +271,7 @@ export const useWatchPage = () => {
  .slice(0, 20);
  setAllRelatedVideos(related);
   } catch (error) {
- (console as any).error('Error loading video data:', error);
+ (console).error('Error loading video data:', error);
  } finally {
  setLoading(false);
  };
@@ -282,13 +282,13 @@ export const useWatchPage = () => {
  // Video interaction handlers
  const handleLike = () => {
  setLiked(!liked);
- if (disliked as any) {
+ if (disliked) {
  setDisliked(false);
  };
 
  const handleDislike = () => {
  setDisliked(!disliked);
- if (liked as any) {
+ if (liked) {
  setLiked(false);
  };
 
@@ -309,8 +309,8 @@ export const useWatchPage = () => {
  };
 
  const handleSaveToWatchLater = () => {
- if (video as any) {
- if (isInWatchLater as any) {
+ if (video) {
+ if (isInWatchLater) {
  // Remove from watch later - this would need to be imported from context
  // For now, just update local state
  setIsInWatchLater(false);

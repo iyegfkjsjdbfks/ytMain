@@ -31,7 +31,7 @@ export function useComponentPerformance(componentName: any): any {}
  const totalLifetime = unmountTime - mountTime.current;
 
  if (import.meta.env.DEV) {}
- (console as any).log(`Component ${componentName} lifetime: ${totalLifetime.toFixed(2)}ms`);
+ (console).log(`Component ${componentName} lifetime: ${totalLifetime.toFixed(2)}ms`);
  }
  }}, [componentName]);
 
@@ -44,7 +44,7 @@ export function useComponentPerformance(componentName: any): any {}
  performanceMonitor.trackComponentRender(componentName, renderDuration);
 
  if (import.meta.env.DEV && renderDuration > 16) {}
- (console as any).warn(`Slow render detected in ${componentName}: ${renderDuration.toFixed(2)}ms`);
+ (console).warn(`Slow render detected in ${componentName}: ${renderDuration.toFixed(2)}ms`);
  }
  });
 
@@ -56,7 +56,7 @@ return undefined;
 
  const observer = new IntersectionObserver((entries) => {}
  const entry = entries[0];
- if (entry as any) {}
+ if (entry) {}
  setIsVisible(entry.isIntersecting);
  }
  },
@@ -89,12 +89,12 @@ export function smartMemo < P extends object>(,;
  const startTime = performance.now();
 
  // Use custom comparison if provided
- if (propsAreEqual as any) {}
+ if (propsAreEqual) {}
  const result = propsAreEqual(prevProps, nextProps);
  const comparisonTime = performance.now() - startTime;
 
  if (import.meta.env.DEV && comparisonTime > 1) {}
- (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
+ (console).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
  }
 
  return result;
@@ -114,7 +114,7 @@ export function smartMemo < P extends object>(,;
  }
  const comparisonTime = performance.now() - startTime;
  if (import.meta.env.DEV && comparisonTime > 1) {}
- (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
+ (console).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
  }
 
  return true;
@@ -143,7 +143,7 @@ export function useOptimizedCallback < T extends (...args) => any>(,;
 
  if (changed && import.meta.env.DEV && debugName) {}
  const timeSinceCreation = performance.now() - creationTime.current;
- (console as any).log(`Callback ${debugName} recreated after ${timeSinceCreation.toFixed(2)}ms`);
+ (console).log(`Callback ${debugName} recreated after ${timeSinceCreation.toFixed(2)}ms`);
  creationTime.current = performance.now();
  }
 
@@ -185,14 +185,14 @@ export function useOptimizedMemo < T>(,;
 
  if (import.meta.env.DEV) {}
  if (computationTime.current > 5) {}
- (console as any).warn(`Expensive memo computation${debugName ? ` in ${debugName}` : ''}: ${computationTime.current.toFixed(2)}ms`);
+ (console).warn(`Expensive memo computation${debugName ? ` in ${debugName}` : ''}: ${computationTime.current.toFixed(2)}ms`);
  }
 
  // Estimate memory usage for objects
  if (typeof result === 'object' && result !== null) {}
  const jsonSize = JSON.stringify(result).length;
  if (jsonSize > 10000) { // 10KB threshold}
- (console as any).warn(`Large memo value${debugName ? ` in ${debugName}` : ''}: ~${(jsonSize / 1024).toFixed(1)}KB`);
+ (console).warn(`Large memo value${debugName ? ` in ${debugName}` : ''}: ~${(jsonSize / 1024).toFixed(1)}KB`);
  }
  }
 
@@ -210,13 +210,13 @@ export function createLazyComponent < P extends Record < string, any>>(,;
  return function LazyWrapper(props: P): any {}
  const [error, setError] = useState < Error | null>(null);
 
- if (error as any) {}
+ if (error) {}
  return errorFallback || (
  <div className="p - 4 text - center text - red - 600">
  <p > Failed to load component</p>
  <button />
 // FIXED:  onClick={() => setError(null: React.MouseEvent)}
-// FIXED:  className="mt - 2 px - 4 py - 2 bg - red - 600 text - white rounded hover:bg - red - 700"
+// FIXED:  className={"m}t - 2 px - 4 py - 2 bg - red - 600 text - white rounded hover:bg - red - 700"
  >
  Retry
 // FIXED:  </button>
@@ -225,14 +225,14 @@ export function createLazyComponent < P extends Record < string, any>>(,;
  }
 
  return (
- <React.Suspense
+ <React.Suspense>
  fallback={fallback || ( />}
- <div className="flex items - center justify - center p - 8">
- <div className="animate - spin rounded - full h - 8 w - 8 border - b - 2 border - blue - 600" />
+ <div className={"fle}x items - center justify - center p - 8">
+ <div className={"animat}e - spin rounded - full h - 8 w - 8 border - b - 2 border - blue - 600" />
 // FIXED:  </div>
  )}
  >
- <LazyComponent {...((props as any))} />
+ <LazyComponent {...((props))} />
 // FIXED:  </React.Suspense>
  );
  }
@@ -337,7 +337,7 @@ export function createAsyncComponent < _P extends object>(,;
  const loadTime = performance.now() - startTime;
 
  if (import.meta.env.DEV) {}
- (console as any).log(`Loaded chunk ${chunkName || componentPath} in ${loadTime.toFixed(2)}ms`);
+ (console).log(`Loaded chunk ${chunkName || componentPath} in ${loadTime.toFixed(2)}ms`);
  }
 
  performanceMonitor.trackCustomMetric(
@@ -347,7 +347,7 @@ export function createAsyncComponent < _P extends object>(,;
  return module;
  })
  .catch((error) => {}
- (console as any).error(`Failed to load chunk ${chunkName || componentPath}:`, error);
+ (console).error(`Failed to load chunk ${chunkName || componentPath}:`, error);
  throw error;
  });
  });
@@ -364,7 +364,7 @@ export function withPerformanceMonitoring < P extends object>(,;
 
  // Track visibility changes
  useEffect(() => {}
- if (isVisible as any) {}
+ if (isVisible) {}
  trackCustomMetric('visibility_time', performance.now());
  }
 
@@ -372,13 +372,13 @@ export function withPerformanceMonitoring < P extends object>(,;
 
  // Add performance data to dev tools
  useEffect(() => {}
- if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {}
- (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (,
+ if (import.meta.env.DEV && (((window))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {}
+ (((window))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (,
  _id,
  _root,
  _priorityLevel) => {}
  // Custom performance tracking logic
- (console as any).debug('Component committed to root');
+ (console).debug('Component committed to root');
 
  }
  }, []);

@@ -32,7 +32,7 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
  publishedAt } = video;
 
  const handleClick = () => {}
- if (onClick as any) {}
+ if (onClick) {}
  onClick(video);
  };
 
@@ -78,18 +78,18 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 
  if (variant === 'compact') {}
  return (
- <div
-// FIXED:  className='flex space - x - 2 mb - 2 hover:bg - gray - 100 rounded p - 1 cursor - pointer' />
+ <div>
+// FIXED:  className={'fle}x space - x - 2 mb - 2 hover:bg - gray - 100 rounded p - 1 cursor - pointer' />
 // FIXED:  onClick={(e: React.MouseEvent) => handleClick(e)}
  >
- <div className='relative flex - shrink - 0 w - 40 h - 24'>
+ <div className={'relativ}e flex - shrink - 0 w - 40 h - 24'>
  <Link to={`/watch/${id}`}>
- <img
+ <img>
 // FIXED:  src={thumbnailUrl}
 // FIXED:  alt={title}
 // FIXED:  className='w - full h - full object - cover rounded' />
  />
- <div className='absolute bottom - 1 right - 1 bg - black bg - opacity - 50 text - white text - xs px - 1.5 py - 0.5 rounded - sm font - medium'>
+ <div className={'absolut}e bottom - 1 right - 1 bg - black bg - opacity - 50 text - white text - xs px - 1.5 py - 0.5 rounded - sm font - medium'>
  {formatDuration(}
  typeof duration === 'string'
  ? parseInt(duration, 10)
@@ -98,38 +98,36 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 // FIXED:  </div>
 // FIXED:  </Link>
 // FIXED:  </div>
- <div className='flex - grow min - w - 0'>
- <Link to={`/watch/${id}`} className='block'>
- <h3 className='font - medium text - sm line - clamp - 2 mb - 1'>{title}</h3>
+ <div className={'fle}x - grow min - w - 0'>
+ <Link to={`/watch/${id}`} className={'block}'>
+ <h3 className={'fon}t - medium text - sm line - clamp - 2 mb - 1'>{title}</h3>
 // FIXED:  </Link>
- <Link to={`/channel/${channelId}`} className='block'>
- <p className='text - xs text - gray - 600'>{channelName}</p>
+ <Link to={`/channel/${channelId}`} className={'block}'>
+ <p className={'tex}t - xs text - gray - 600'>{channelName}</p>
 // FIXED:  </Link>
- <p className='text - xs text - gray - 600'>
+ <p className={'tex}t - xs text - gray - 600'>
  {formattedViews} views • {formattedDate}
 // FIXED:  </p>
  {(likeCount || commentCount) && (}
- <div className='flex items - center space - x - 3 text - xs text - gray - 500 mt - 1'>
+ <div className={'fle}x items - center space - x - 3 text - xs text - gray - 500 mt - 1'>
  {likeCount && (}
- <span className='flex items - center'>
- <svg
+ <span className={'fle}x items - center'>
+ <svg>
 // FIXED:  className='w - 3 h - 3 mr - 1'
  fill='currentColor'
- viewBox='0 0 20 20' />
- >
+ viewBox='0 0 20 20'/>
  <path d='M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01 - 3 0v - 6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962 - 1.608l1.2 - 6A2 2 0 0015.56 8H12V4a2 2 0 00 - 2 - 2 1 1 0 00 - 1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z' />
 // FIXED:  </svg>
  {formattedLikes}
 // FIXED:  </span>
  )}
  {commentCount && (}
- <span className='flex items - center'>
- <svg
+ <span className={'fle}x items - center'>
+ <svg>
 // FIXED:  className='w - 3 h - 3 mr - 1'
  fill='currentColor'
- viewBox='0 0 20 20' />
- >
- <path
+ viewBox='0 0 20 20'/>
+ <path>
  fillRule='evenodd'
  d='M18 10c0 3.866 - 3.582 7 - 8 7a8.841 8.841 0 01 - 4.083-.98L2 17l1.338 - 3.123C2.493 12.767 2 11.434 2 10c0 - 3.866 3.582 - 7 8 - 7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h - 2v2h2V9zM9 9h2v2H9V9z'
  clipRule='evenodd' />
@@ -147,19 +145,19 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 
  if (variant === 'studio') {}
  return (
- <div
-// FIXED:  className='border border - gray - 200 rounded - md hover:bg - gray - 50 cursor - pointer' />
+ <div>
+// FIXED:  className={'borde}r border - gray - 200 rounded - md hover:bg - gray - 50 cursor - pointer' />
 // FIXED:  onClick={(e: React.MouseEvent) => handleClick(e)}
  >
- <div className='flex p - 3'>
- <div className='relative w - 40 h - 24 flex - shrink - 0'>
+ <div className={'fle}x p - 3'>
+ <div className={'relativ}e w - 40 h - 24 flex - shrink - 0'>
  <Link to={`/studio / videos / edit/${id}`}>
- <img
+ <img>
 // FIXED:  src={thumbnailUrl}
 // FIXED:  alt={title}
 // FIXED:  className='w - full h - full object - cover rounded' />
  />
- <div className='absolute bottom - 1 right - 1 bg - black bg - opacity - 50 text - white text - xs px - 1.5 py - 0.5 rounded - sm font - medium'>
+ <div className={'absolut}e bottom - 1 right - 1 bg - black bg - opacity - 50 text - white text - xs px - 1.5 py - 0.5 rounded - sm font - medium'>
  {formatDuration(}
  typeof duration === 'string'
  ? parseInt(duration, 10)
@@ -169,40 +167,38 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 // FIXED:  </Link>
 // FIXED:  </div>
 
- <div className='ml - 3 flex - grow'>
- <Link to={`/studio / videos / edit/${id}`} className='block'>
- <h3 className='font - medium line - clamp - 2 mb - 1'>{title}</h3>
+ <div className={'m}l - 3 flex - grow'>
+ <Link to={`/studio / videos / edit/${id}`} className={'block}'>
+ <h3 className={'fon}t - medium line - clamp - 2 mb - 1'>{title}</h3>
 // FIXED:  </Link>
- <p className='text - sm text - gray - 600 line - clamp - 2 mb - 1'>
+ <p className={'tex}t - sm text - gray - 600 line - clamp - 2 mb - 1'>
  {description}
 // FIXED:  </p>
- <div className='flex items - center text - xs text - gray - 500'>
+ <div className={'fle}x items - center text - xs text - gray - 500'>
  <span>{formattedDate}</span>
- <span className='mx - 1'>•</span>
+ <span className={'m}x - 1'>•</span>
  <span>{formattedViews} views</span>
- <span className='mx - 1'>•</span>
- <span
+ <span className={'m}x - 1'>•</span>
+ <span>
 // FIXED:  className={}
  video.visibility === 'public'
  ? 'text - green - 600'
  : 'text - yellow - 600'
- } />
- >
+ }/>
  {video.visibility}
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='ml - 2 flex flex - col space - y - 2'>
+ <div className={'m}l - 2 flex flex - col space - y - 2'>
  <button className='p - 1 hover:bg - gray - 200 rounded'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -211,14 +207,13 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 // FIXED:  </svg>
 // FIXED:  </button>
  <button className='p - 1 hover:bg - gray - 200 rounded'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -227,14 +222,13 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 // FIXED:  </svg>
 // FIXED:  </button>
  <button className='p - 1 hover:bg - gray - 200 rounded'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -250,25 +244,25 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 
  // Default variant
  return (
- <div className='mb - 4'>
- <div className='relative'>
+ <div className={'m}b - 4'>
+ <div className={'relative}'>
  <Link to={`/watch/${id}`}>
- <img
+ <img>
 // FIXED:  src={thumbnailUrl}
 // FIXED:  alt={title}
 // FIXED:  className='w - full aspect - video object - cover rounded - lg' />
  />
- <div className='absolute bottom - 2 right - 2 bg - black bg - opacity - 50 text - white text - xs px - 1.5 py - 0.5 rounded - sm font - medium'>
+ <div className={'absolut}e bottom - 2 right - 2 bg - black bg - opacity - 50 text - white text - xs px - 1.5 py - 0.5 rounded - sm font - medium'>
  {formatDuration(}
  typeof duration === 'string' ? parseInt(duration, 10) : duration
  )}
 // FIXED:  </div>
 // FIXED:  </Link>
 // FIXED:  </div>
- <div className='mt - 2 flex'>
+ <div className={'m}t - 2 flex'>
  {channelAvatarUrl && (}
- <Link to={`/channel/${channelId}`} className='flex - shrink - 0 mr - 2'>
- <img
+ <Link to={`/channel/${channelId}`} className={'fle}x - shrink - 0 mr - 2'>
+ <img>
 // FIXED:  src={channelAvatarUrl}
 // FIXED:  alt={channelName}
 // FIXED:  className='w - 9 h - 9 rounded - full' />
@@ -276,37 +270,35 @@ const VideoCard: React.FC < VideoCardProps> = React.memo(({ video, variant = 'de
 // FIXED:  </Link>
  )}
  <div>
- <Link to={`/watch/${id}`} className='block'>
- <h3 className='font - medium line - clamp - 2 mb - 1'>{title}</h3>
+ <Link to={`/watch/${id}`} className={'block}'>
+ <h3 className={'fon}t - medium line - clamp - 2 mb - 1'>{title}</h3>
 // FIXED:  </Link>
- <Link to={`/channel/${channelId}`} className='block'>
- <p className='text - sm text - gray - 600'>{channelName}</p>
+ <Link to={`/channel/${channelId}`} className={'block}'>
+ <p className={'tex}t - sm text - gray - 600'>{channelName}</p>
 // FIXED:  </Link>
- <p className='text - sm text - gray - 600'>
+ <p className={'tex}t - sm text - gray - 600'>
  {formattedViews} views • {formattedDate}
 // FIXED:  </p>
  {(likeCount || commentCount) && (}
- <div className='flex items - center space - x - 4 text - sm text - gray - 500 mt - 1'>
+ <div className={'fle}x items - center space - x - 4 text - sm text - gray - 500 mt - 1'>
  {likeCount && (}
- <span className='flex items - center'>
- <svg
+ <span className={'fle}x items - center'>
+ <svg>
 // FIXED:  className='w - 4 h - 4 mr - 1'
  fill='currentColor'
- viewBox='0 0 20 20' />
- >
+ viewBox='0 0 20 20'/>
  <path d='M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01 - 3 0v - 6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962 - 1.608l1.2 - 6A2 2 0 0015.56 8H12V4a2 2 0 00 - 2 - 2 1 1 0 00 - 1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z' />
 // FIXED:  </svg>
  {formattedLikes}
 // FIXED:  </span>
  )}
  {commentCount && (}
- <span className='flex items - center'>
- <svg
+ <span className={'fle}x items - center'>
+ <svg>
 // FIXED:  className='w - 4 h - 4 mr - 1'
  fill='currentColor'
- viewBox='0 0 20 20' />
- >
- <path
+ viewBox='0 0 20 20'/>
+ <path>
  fillRule='evenodd'
  d='M18 10c0 3.866 - 3.582 7 - 8 7a8.841 8.841 0 01 - 4.083-.98L2 17l1.338 - 3.123C2.493 12.767 2 11.434 2 10c0 - 3.866 3.582 - 7 8 - 7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h - 2v2h2V9zM9 9h2v2H9V9z'
  clipRule='evenodd' />

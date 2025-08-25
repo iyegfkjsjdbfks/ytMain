@@ -21,10 +21,10 @@ interface SearchState {}
 
 // Memoized empty state component
 const EmptySearchState = memo(() => (
- <div className="text - center py - 12">
- <div className="text - neutral - 500 dark:text - neutral - 400">
+ <div className={"tex}t - center py - 12">
+ <div className={"tex}t - neutral - 500 dark:text - neutral - 400">
  <MagnifyingGlassIcon className="w - 16 h - 16 mx - auto mb - 4 opacity - 50" />
- <h3 className="text - lg font - medium mb - 2">Enter a search term</h3>
+ <h3 className={"tex}t - lg font - medium mb - 2">Enter a search term</h3>
  <p > Use the search bar above to find videos.</p>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -75,12 +75,12 @@ const SearchResultsPage: React.FC = () => {}
  const { getYouTubeSearchProvider } = await import('../services / settingsService');
  const provider = getYouTubeSearchProvider();
 
- (console as any).log(`🔍 Search provider: ${provider}`);
+ (console).log(`🔍 Search provider: ${provider}`);
 
  // When Hybrid Mode is selected, prioritize Google Custom Search API for discovery
  // as per user requirement and rule
  if (provider === 'hybrid') {}
- (console as any).log('🔄 Hybrid Mode: Using Google Custom Search API for discovery with YouTube API metadata fallback');
+ (console).log('🔄 Hybrid Mode: Using Google Custom Search API for discovery with YouTube API metadata fallback');
 
  // Use Google Custom Search for discovery with YouTube API for metadata enhancement
  const combinedResults = await searchCombined(
@@ -119,7 +119,7 @@ const SearchResultsPage: React.FC = () => {}
  performanceMonitor.endMeasure('search - results - load');
  }
  } catch (error) {}
- (console as any).error('Error in search:', error);
+ (console).error('Error in search:', error);
  setSearchState(prev => ({ ...prev as any, loading: false,}
  youtubeLoading: false }));
  if (performanceMonitor.hasMetric('search - results - load')) {}
@@ -146,16 +146,16 @@ const SearchResultsPage: React.FC = () => {}
  // Early return for empty query
  if (!query) {}
  return (
- <div className="max - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8 py - 8">
+ <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8 py - 8">
  <EmptySearchState />
 // FIXED:  </div>
  );
  }
 
  return (
- <div className="min - h - screen bg - white dark:bg - gray - 900 pt - 4">
- <div className="max - w-[1280px] mx - auto">
- <OptimizedSearchResults
+ <div className={"mi}n - h - screen bg - white dark:bg - gray - 900 pt - 4">
+ <div className={"ma}x - w-[1280px] mx - auto">
+ <OptimizedSearchResults>
  videos={searchState.videos}
  youtubeVideos={searchState.youtubeVideos}
  googleSearchVideos={searchState.googleSearchVideos}

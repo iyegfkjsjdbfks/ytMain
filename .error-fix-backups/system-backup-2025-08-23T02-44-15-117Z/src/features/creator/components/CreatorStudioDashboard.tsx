@@ -159,7 +159,7 @@ export const CreatorStudioDashboard: React.FC = () => {}
  };
 
  const getStatusColor = (status: any) => {}
- switch (status as any) {}
+ switch (status) {}
  case 'published':
  return 'text - green - 600 bg - green - 100 dark:bg - green - 900 dark:text - green - 300';
  case 'processing':
@@ -172,7 +172,7 @@ export const CreatorStudioDashboard: React.FC = () => {}
  };
 
  const getNotificationIcon = (type: any) => {}
- switch (type as any) {}
+ switch (type) {}
  case 'milestone':
  return CheckCircleIcon;
  case 'comment':
@@ -187,24 +187,24 @@ export const CreatorStudioDashboard: React.FC = () => {}
  };
 
  return (
- <div className='min - h - screen bg - gray - 50 dark:bg - gray - 900 p - 6'>
- <div className='max - w - 7xl mx - auto'>
+ <div className={'mi}n - h - screen bg - gray - 50 dark:bg - gray - 900 p - 6'>
+ <div className={'ma}x - w - 7xl mx - auto'>
  {/* Header */}
- <div className='flex items - center justify - between mb - 8'>
+ <div className={'fle}x items - center justify - between mb - 8'>
  <div>
- <h1 className='text - 3xl font - bold text - gray - 900 dark:text - white'>
+ <h1 className={'tex}t - 3xl font - bold text - gray - 900 dark:text - white'>
  Creator Studio
 // FIXED:  </h1>
- <p className='text - gray - 600 dark:text - gray - 400 mt - 2'>
+ <p className={'tex}t - gray - 600 dark:text - gray - 400 mt - 2'>
  Manage your channel and track performance
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className='flex items - center gap - 4'>
- <select
+ <div className={'fle}x items - center gap - 4'>
+ <select>
 // FIXED:  value={timeRange} />
 // FIXED:  onChange={e => setTimeRange(e.target.value as any: React.ChangeEvent)}
-// FIXED:  className='px - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - lg bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white'
+// FIXED:  className={'p}x - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - lg bg - white dark:bg - gray - 800 text - gray - 900 dark:text - white'
  >
  <option value='7d'>Last 7 days</option>
  <option value='30d'>Last 30 days</option>
@@ -214,23 +214,22 @@ export const CreatorStudioDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Key Metrics */}
- <div className='grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 8'>
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 8'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Views
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - gray - 900 dark:text - white'>
+ <p className={'tex}t - 2xl font - bold text - gray - 900 dark:text - white'>
  {formatNumber(metrics.views.total)}
 // FIXED:  </p>
- <div
+ <div>
 // FIXED:  className={`flex items - center mt - 2 text - sm ${}
  metrics.views.trend === 'up'
  ? 'text - green - 600'
  : 'text - red - 600'
- }`} />
- >
+ }`}/>
  {metrics.views.trend === 'up' ? (}
  <ArrowTrendingUpIcon className='w - 4 h - 4 mr - 1' />
  ) : (
@@ -245,22 +244,21 @@ export const CreatorStudioDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Watch Time
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - gray - 900 dark:text - white'>
+ <p className={'tex}t - 2xl font - bold text - gray - 900 dark:text - white'>
  {formatDuration(metrics.watchTime.total)}
 // FIXED:  </p>
- <div
+ <div>
 // FIXED:  className={`flex items - center mt - 2 text - sm ${}
  metrics.watchTime.trend === 'up'
  ? 'text - green - 600'
  : 'text - red - 600'
- }`} />
- >
+ }`}/>
  {metrics.watchTime.trend === 'up' ? (}
  <ArrowTrendingUpIcon className='w - 4 h - 4 mr - 1' />
  ) : (
@@ -275,22 +273,21 @@ export const CreatorStudioDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Subscribers
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - gray - 900 dark:text - white'>
+ <p className={'tex}t - 2xl font - bold text - gray - 900 dark:text - white'>
  {formatNumber(metrics.subscribers.total)}
 // FIXED:  </p>
- <div
+ <div>
 // FIXED:  className={`flex items - center mt - 2 text - sm ${}
  metrics.subscribers.trend === 'up'
  ? 'text - green - 600'
  : 'text - red - 600'
- }`} />
- >
+ }`}/>
  {metrics.subscribers.trend === 'up' ? (}
  <ArrowTrendingUpIcon className='w - 4 h - 4 mr - 1' />
  ) : (
@@ -305,22 +302,21 @@ export const CreatorStudioDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between'>
  <div>
- <p className='text - sm font - medium text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm font - medium text - gray - 600 dark:text - gray - 400'>
  Revenue
 // FIXED:  </p>
- <p className='text - 2xl font - bold text - gray - 900 dark:text - white'>
+ <p className={'tex}t - 2xl font - bold text - gray - 900 dark:text - white'>
  ${metrics.revenue.total.toLocaleString()}
 // FIXED:  </p>
- <div
+ <div>
 // FIXED:  className={`flex items - center mt - 2 text - sm ${}
  metrics.revenue.trend === 'up'
  ? 'text - green - 600'
  : 'text - red - 600'
- }`} />
- >
+ }`}/>
  {metrics.revenue.trend === 'up' ? (}
  <ArrowTrendingUpIcon className='w - 4 h - 4 mr - 1' />
  ) : (
@@ -336,28 +332,27 @@ export const CreatorStudioDashboard: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className='grid grid - cols - 1 lg:grid - cols - 3 gap - 8'>
+ <div className={'gri}d grid - cols - 1 lg:grid - cols - 3 gap - 8'>
  {/* Quick Actions */}
- <div className='lg:col - span - 2'>
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700 mb - 8'>
- <h2 className='text - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
+ <div className={'lg}:col - span - 2'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700 mb - 8'>
+ <h2 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4'>
  Quick Actions
 // FIXED:  </h2>
- <div className='grid grid - cols - 2 gap - 4'>
+ <div className={'gri}d grid - cols - 2 gap - 4'>
  {quickActions.map((action) => (}
- <button
+ <button>
  key={action.id}
 // FIXED:  onClick={action.action}
-// FIXED:  className='flex items - center gap - 4 p - 4 border border - gray - 200 dark:border - gray - 600 rounded - lg hover:bg - gray - 50 dark:hover:bg - gray - 700 transition - colors text - left' />
- >
+// FIXED:  className={'fle}x items - center gap - 4 p - 4 border border - gray - 200 dark:border - gray - 600 rounded - lg hover:bg - gray - 50 dark:hover:bg - gray - 700 transition - colors text - left'/>
  <div className={`p - 3 rounded - full ${action.color}`}>
  <action.icon className='w - 6 h - 6 text - white' />
 // FIXED:  </div>
  <div>
- <h3 className='font - medium text - gray - 900 dark:text - white'>
+ <h3 className={'fon}t - medium text - gray - 900 dark:text - white'>
  {action.title}
 // FIXED:  </h3>
- <p className='text - sm text - gray - 600 dark:text - gray - 400'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400'>
  {action.description}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -367,40 +362,39 @@ export const CreatorStudioDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Recent Videos */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between mb - 4'>
- <h2 className='text - lg font - semibold text - gray - 900 dark:text - white'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between mb - 4'>
+ <h2 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  Recent Videos
 // FIXED:  </h2>
- <button className='text - blue - 600 hover:text - blue - 700 text - sm font - medium'>
+ <button className={'tex}t - blue - 600 hover:text - blue - 700 text - sm font - medium'>
  View all
 // FIXED:  </button>
 // FIXED:  </div>
- <div className='space - y - 4'>
+ <div className={'spac}e - y - 4'>
  {recentVideos.map((video) => (}
- <div key={video.id} className='flex items - center gap - 4'>
- <img
+ <div key={video.id} className={'fle}x items - center gap - 4'>
+ <img>
 // FIXED:  src={video.thumbnail}
 // FIXED:  alt={video.title}
 // FIXED:  className='w - 20 h - 12 object - cover rounded' />
  />
- <div className='flex - 1 min - w - 0'>
- <h3 className='font - medium text - gray - 900 dark:text - white truncate'>
+ <div className={'fle}x - 1 min - w - 0'>
+ <h3 className={'fon}t - medium text - gray - 900 dark:text - white truncate'>
  {video.title}
 // FIXED:  </h3>
- <div className='flex items - center gap - 4 mt - 1 text - sm text - gray - 600 dark:text - gray - 400'>
+ <div className={'fle}x items - center gap - 4 mt - 1 text - sm text - gray - 600 dark:text - gray - 400'>
  <span>{formatNumber(video.views)} views</span>
  <span>{formatNumber(video.likes)} likes</span>
  <span>{formatNumber(video.comments)} comments</span>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className='text - right'>
- <span
-// FIXED:  className={`inline - block px - 2 py - 1 rounded - full text - xs font - medium ${getStatusColor(video.status)}`} />
- >
+ <div className={'tex}t - right'>
+ <span>
+// FIXED:  className={`inline - block px - 2 py - 1 rounded - full text - xs font - medium ${getStatusColor(video.status)}`}/>
  {video.status}
 // FIXED:  </span>
- <p className='text - xs text - gray - 500 dark:text - gray - 400 mt - 1'>
+ <p className={'tex}t - xs text - gray - 500 dark:text - gray - 400 mt - 1'>
  {new Date(video.publishedAt).toLocaleDateString()}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -411,29 +405,28 @@ export const CreatorStudioDashboard: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Notifications */}
- <div className='bg - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between mb - 4'>
- <h2 className='text - lg font - semibold text - gray - 900 dark:text - white'>
+ <div className={'b}g - white dark:bg - gray - 800 rounded - lg p - 6 border border - gray - 200 dark:border - gray - 700'>
+ <div className={'fle}x items - center justify - between mb - 4'>
+ <h2 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  Notifications
 // FIXED:  </h2>
- <button className='text - blue - 600 hover:text - blue - 700 text - sm font - medium'>
+ <button className={'tex}t - blue - 600 hover:text - blue - 700 text - sm font - medium'>
  Mark all read
 // FIXED:  </button>
 // FIXED:  </div>
- <div className='space - y - 4'>
+ <div className={'spac}e - y - 4'>
  {notifications.map((notification) => {}
  const IconComponent = getNotificationIcon(notification.type);
  return (
- <div
+ <div>
  key={notification.id}
 // FIXED:  className={`p - 4 rounded - lg border ${}
  notification.isRead
  ? 'border - gray - 200 dark:border - gray - 600'
  : 'border - blue - 200 dark:border - blue - 800 bg - blue - 50 dark:bg - blue - 900 / 20'
- }`} />
- >
- <div className='flex items - start gap - 3'>
- <IconComponent
+ }`}/>
+ <div className={'fle}x items - start gap - 3'>
+ <IconComponent>
 // FIXED:  className={`w - 5 h - 5 mt - 0.5 ${}
  notification.priority === 'high'
  ? 'text - red - 500'
@@ -442,14 +435,14 @@ export const CreatorStudioDashboard: React.FC = () => {}
  : 'text - blue - 500'
  }`} />
  />
- <div className='flex - 1 min - w - 0'>
- <h4 className='font - medium text - gray - 900 dark:text - white text - sm'>
+ <div className={'fle}x - 1 min - w - 0'>
+ <h4 className={'fon}t - medium text - gray - 900 dark:text - white text - sm'>
  {notification.title}
 // FIXED:  </h4>
- <p className='text - sm text - gray - 600 dark:text - gray - 400 mt - 1'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400 mt - 1'>
  {notification.message}
 // FIXED:  </p>
- <p className='text - xs text - gray - 500 dark:text - gray - 400 mt - 2'>
+ <p className={'tex}t - xs text - gray - 500 dark:text - gray - 400 mt - 2'>
  {new Date(notification.timestamp).toLocaleString()}
 // FIXED:  </p>
 // FIXED:  </div>

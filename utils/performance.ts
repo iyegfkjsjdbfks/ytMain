@@ -38,7 +38,7 @@ export class PerformanceMonitor {
  list.getEntries().forEach((_entry) => {
  // Performance monitoring disabled
  // const navigation = _entry as PerformanceNavigationTiming;
- // (console as any).log('Navigation timing:', navigation);
+ // (console).log('Navigation timing:', navigation);
  });
  });
  navigationObserver.observe({ entryTypes: ['navigation'] });
@@ -78,7 +78,7 @@ return null;
  const metric = this.metrics.get(name);
  if (!metric) {
  if (import.meta.env.MODE === 'development') {
- (console as any).warn(`Performance metric '${name}' not found`);
+ (console).warn(`Performance metric '${name}' not found`);
  }
  return null;
  }
@@ -107,7 +107,7 @@ return null;
 
  const threshold = getThreshold(name);
  if (duration > threshold) {
- (console as any).warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
+ (console).warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
  }
 
  return duration;
@@ -145,7 +145,7 @@ return;
  return;
  }
 
- (console as any).group('📊 Performance Summary');
+ (console).group('📊 Performance Summary');
 
  // Group by name and calculate averages
  const grouped = metrics.reduce((acc, metric) => {
@@ -165,7 +165,7 @@ return;
 
  });
 
- (console as any).groupEnd();
+ (console).groupEnd();
  }
 
  disconnect(): void {
@@ -283,7 +283,7 @@ return;
  const scripts = Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'));
  const styles = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
 
- (console as any).group('📦 Bundle Analysis');
+ (console).group('📦 Bundle Analysis');
  // Estimate bundle sizes (this is approximate)
  scripts.forEach((script) => {
  if (script.src && !script.src.includes('chrome-extension')) {
@@ -297,17 +297,17 @@ return;
  }
  });
 
- (console as any).groupEnd();
+ (console).groupEnd();
 };
 
 // Memory usage monitoring
 export const monitorMemoryUsage = () => {
- if (typeof window === 'undefined' || !(window.performance as any)?.memory) {
- (console as any).warn('Memory monitoring not supported in this browser');
+ if (typeof window === 'undefined' || !(window.performance)?.memory) {
+ (console).warn('Memory monitoring not supported in this browser');
  return;
  }
 
- // const _memory = (window.performance as any).memory;
+ // const _memory = (window.performance).memory;
 
  };
 

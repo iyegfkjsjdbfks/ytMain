@@ -16,7 +16,7 @@ afterAll(() => {
 
 // Component that throws an error
 const ThrowError = ({ shouldThrow }: any) => {
- if (shouldThrow as any) {
+ if (shouldThrow) {
  throw new Error('Test error');
  }
  return <div>No error

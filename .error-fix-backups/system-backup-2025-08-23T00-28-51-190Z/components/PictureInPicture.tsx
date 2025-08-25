@@ -58,7 +58,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
  setIsDragging(false);
  };
 
- if (isDragging as any) {
+ if (isDragging) {
  document.addEventListener('mousemove', handleMouseMove as EventListener);
  document.addEventListener('mouseup', handleMouseUp as EventListener);
  }
@@ -96,7 +96,7 @@ return;
 
  const togglePlay = () => {
  if (videoRef.current) {
- if (isPlaying as any) {
+ if (isPlaying) {
  videoRef.current.pause();
  } else {
  videoRef.current.play().catch(() => {
@@ -137,7 +137,7 @@ return null;
 }
 
  return (
- <div
+ <div>
  ref={containerRef}
 // FIXED:  className={`fixed z-50 bg-black rounded-lg shadow-2xl border border-gray-600 overflow-hidden transition-all duration-200 ${
  isMinimized ? 'w-16 h-12' : 'w-80 h-48'
@@ -146,58 +146,57 @@ return null;
  left: `${position.x}px`,
  top: `${position.y}px`,
  cursor: isDragging ? 'grabbing' : 'grab' }
- onMouseDown={handleMouseDown} />
- >
+ onMouseDown={handleMouseDown}/>
  {isMinimized ? (
  // Minimized view
- <div className="w-full h-full flex items-center justify-center bg-gray-900">
+ <div className={"w}-full h-full flex items-center justify-center bg-gray-900">
  <button />
 // FIXED:  onClick={(e) => {
  e.stopPropagation();
  setIsMinimized(false);
 
  }
-// FIXED:  className="text-white hover:text-gray-300"
+// FIXED:  className={"text}-white hover:text-gray-300"
  >
- <PlayIcon className="w-6 h-6" />
+ <PlayIcon className={"w}-6 h-6" />
 // FIXED:  </button>
 // FIXED:  </div>
  ) : (
  // Full view
  <>
  {/* Video */}
- <div className="relative w-full h-full">
+ <div className={"relativ}e w-full h-full">
  {videoUrl ? (
- <video
+ <video>
  ref={videoRef}
 // FIXED:  src={videoUrl}
-// FIXED:  className="w-full h-full object-cover"
+// FIXED:  className={"w}-full h-full object-cover"
  muted={isMuted} />
  onPlay={() => setIsPlaying(true)}
  onPause={() => setIsPlaying(false)}
  />
  ) : (
- <img
+ <img>
 // FIXED:  src={thumbnailUrl}
 // FIXED:  alt={videoTitle}
-// FIXED:  className="w-full h-full object-cover" />
+// FIXED:  className={"w}-full h-full object-cover" />
  />
  )}
 
  {/* Controls Overlay */}
- <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
+ <div className={"absolut}e inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
  {/* Top Controls */}
- <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
- <div className="flex space-x-1">
+ <div className={"absolut}e top-2 left-2 right-2 flex justify-between items-start">
+ <div className={"fle}x space-x-1">
  <button />
 // FIXED:  onClick={(e) => {
  e.stopPropagation();
  setIsMinimized(true);
  }
-// FIXED:  className="p-1 bg-black/50 text-white rounded hover:bg-black/70 transition-colors"
+// FIXED:  className={"p}-1 bg-black/50 text-white rounded hover:bg-black/70 transition-colors"
  title="Minimize"
  >
- <XMarkIcon className="w-3 h-3" />
+ <XMarkIcon className={"w}-3 h-3" />
 // FIXED:  </button>
 
  <button />
@@ -205,10 +204,10 @@ return null;
  e.stopPropagation();
  handleExpand();
  }
-// FIXED:  className="p-1 bg-black/50 text-white rounded hover:bg-black/70 transition-colors"
+// FIXED:  className={"p}-1 bg-black/50 text-white rounded hover:bg-black/70 transition-colors"
  title="Expand to theater mode"
  >
- <ArrowsPointingOutIcon className="w-3 h-3" />
+ <ArrowsPointingOutIcon className={"w}-3 h-3" />
 // FIXED:  </button>
 // FIXED:  </div>
 
@@ -217,58 +216,58 @@ return null;
  e.stopPropagation();
  onClose();
  }
-// FIXED:  className="p-1 bg-black/50 text-white rounded hover:bg-black/70 transition-colors"
+// FIXED:  className={"p}-1 bg-black/50 text-white rounded hover:bg-black/70 transition-colors"
  title="Close"
  >
- <XMarkIcon className="w-3 h-3" />
+ <XMarkIcon className={"w}-3 h-3" />
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Center Play Button */}
- <div className="absolute inset-0 flex items-center justify-center">
+ <div className={"absolut}e inset-0 flex items-center justify-center">
  <button />
 // FIXED:  onClick={(e) => {
  e.stopPropagation();
  togglePlay();
  }
-// FIXED:  className="p-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
+// FIXED:  className={"p}-3 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
  >
  {isPlaying ? (
- <PauseIcon className="w-6 h-6" />
+ <PauseIcon className={"w}-6 h-6" />
  ) : (
- <PlayIcon className="w-6 h-6" />
+ <PlayIcon className={"w}-6 h-6" />
  )}
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Bottom Controls */}
- <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+ <div className={"absolut}e bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
  {/* Progress Bar */}
  {duration > 0 && (
- <div
-// FIXED:  className="w-full h-1 bg-white/30 rounded-full mb-2 cursor-pointer" />
+ <div>
+// FIXED:  className={"w}-full h-1 bg-white/30 rounded-full mb-2 cursor-pointer" />
 // FIXED:  onClick={(e) => handleSeek(e)}
  >
- <div
-// FIXED:  className="h-full bg-red-500 rounded-full transition-all"
+ <div>
+// FIXED:  className={"h}-full bg-red-500 rounded-full transition-all"
 // FIXED:  style={{ width: `${(currentTime / duration) * 100}%` } />
  />
 // FIXED:  </div>
  )}
 
- <div className="flex items-center justify-between text-white text-xs">
- <div className="flex items-center space-x-2">
+ <div className={"fle}x items-center justify-between text-white text-xs">
+ <div className={"fle}x items-center space-x-2">
  <button />
 // FIXED:  onClick={(e) => {
  e.stopPropagation();
  toggleMute();
  }
-// FIXED:  className="hover:text-gray-300"
+// FIXED:  className={"hover}:text-gray-300"
  >
  {isMuted ? (
- <SpeakerXMarkIcon className="w-4 h-4" />
+ <SpeakerXMarkIcon className={"w}-4 h-4" />
  ) : (
- <SpeakerWaveIcon className="w-4 h-4" />
+ <SpeakerWaveIcon className={"w}-4 h-4" />
  )}
 // FIXED:  </button>
 
@@ -284,10 +283,10 @@ return null;
  e.stopPropagation();
  handleExpand();
  }
-// FIXED:  className="hover:text-gray-300"
+// FIXED:  className={"hover}:text-gray-300"
  title="Open in new tab"
  >
- <ArrowTopRightOnSquareIcon className="w-4 h-4" />
+ <ArrowTopRightOnSquareIcon className={"w}-4 h-4" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -295,11 +294,11 @@ return null;
 // FIXED:  </div>
 
  {/* Video Info */}
- <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-8">
- <h3 className="text-white text-sm font-medium line-clamp-2 mb-1">
+ <div className={"absolut}e bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-8">
+ <h3 className={"text}-white text-sm font-medium line-clamp-2 mb-1">
  {videoTitle}
 // FIXED:  </h3>
- <p className="text-gray-300 text-xs">
+ <p className={"text}-gray-300 text-xs">
  {channelName}
 // FIXED:  </p>
 // FIXED:  </div>

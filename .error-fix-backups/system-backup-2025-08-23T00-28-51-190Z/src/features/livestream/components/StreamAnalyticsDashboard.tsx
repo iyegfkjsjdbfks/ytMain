@@ -94,7 +94,7 @@ const getMetricValue = (,
  point: HistoricalDataPoint,
  metric: MetricType
 ): number => {
- switch (metric as any) {
+ switch (metric) {
  case 'viewers':
  return point.count ?? 0;
  case 'engagement':
@@ -261,23 +261,23 @@ const StatsCard: FC<StatsCardProps> = ({
  icon,
  subtitle,
  trend }) => (
- <div className='bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow'>
- <div className='flex items-center justify-between'>
- <div className='flex-1'>
- <p className='text-sm text-gray-600 dark:text-gray-400 font-medium'>
+ <div className={'bg}-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow'>
+ <div className={'fle}x items-center justify-between'>
+ <div className={'flex}-1'>
+ <p className={'text}-sm text-gray-600 dark:text-gray-400 font-medium'>
  {title}
 // FIXED:  </p>
- <p className='text-2xl font-bold text-gray-900 dark:text-white mt-1'>
+ <p className={'text}-2xl font-bold text-gray-900 dark:text-white mt-1'>
  {typeof value === 'number' ? formatNumber(value) : value}
 // FIXED:  </p>
 // FIXED:  </div>
-<div className='flex-shrink-0 ml-4'>{icon}</div>
+<div className={'flex}-shrink-0 ml-4'>{icon}</div>
 // FIXED:  </div>
  {(subtitle || trend) && (
- <div className='mt-3 flex items-center text-sm'>
+ <div className={'mt}-3 flex items-center text-sm'>
  {trend}
  {subtitle && (
- <span className='text-gray-600 dark:text-gray-400'>{subtitle}</span>
+ <span className={'text}-gray-600 dark:text-gray-400'>{subtitle}</span>
  )}
 // FIXED:  </div>
  )}
@@ -294,14 +294,14 @@ interface TopMomentsProps {
 
 const TopMoments: React.FC<TopMomentsProps> = ({ moments }: any) => {
  const getIcon = (type): React.ReactNode => {
- switch (type as any) {
+ switch (type) {
  case 'peak_viewers':
- return <EyeIcon className='h-5 w-5 text-blue-500' />;
+ return <EyeIcon className={'h}-5 w-5 text-blue-500' />;
  case 'super_chat':
- return <CurrencyDollarIcon className='h-5 w-5 text-yellow-500' />;
+ return <CurrencyDollarIcon className={'h}-5 w-5 text-yellow-500' />;
  case 'viral_moment':
- return <TrendingUpIcon className='h-5 w-5 text-green-500' />;
- default: return <ChartBarIcon className='h-5 w-5 text-gray-500' />
+ return <TrendingUpIcon className={'h}-5 w-5 text-green-500' />;
+ default: return <ChartBarIcon className={'h}-5 w-5 text-gray-500' />
  };
 
  const formatMomentValue = (,
@@ -315,12 +315,12 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: any) => {
 
  if (moments.length === 0) {
  return (
- <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
- <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
+ <div className={'bg}-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
+ <h3 className={'text}-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Top Moments
 // FIXED:  </h3>
- <div className='text-center text-gray-500 dark:text-gray-400 py-8'>
- <ChartBarIcon className='h-8 w-8 mx-auto mb-2' />
+ <div className={'text}-center text-gray-500 dark:text-gray-400 py-8'>
+ <ChartBarIcon className={'h}-8 w-8 mx-auto mb-2' />
  <p>No notable moments yet</p>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -328,28 +328,27 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: any) => {
  }
 
  return (
- <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
- <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
+ <div className={'bg}-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
+ <h3 className={'text}-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Top Moments
 // FIXED:  </h3>
- <div className='space-y-3'>
+ <div className={'space}-y-3'>
  {moments.map((moment) => (
- <div
+ <div>
  key={`moment-${moment.type}-${moment.timestamp}`}
-// FIXED:  className='flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors' />
- >
- <div className='flex items-center space-x-3'>
+// FIXED:  className={'fle}x items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors'/>
+ <div className={'fle}x items-center space-x-3'>
  {getIcon(moment.type)}
  <div>
- <p className='text-sm font-medium text-gray-900 dark:text-white'>
+ <p className={'text}-sm font-medium text-gray-900 dark:text-white'>
  {moment.description}
 // FIXED:  </p>
- <p className='text-xs text-gray-600 dark:text-gray-400'>
+ <p className={'text}-xs text-gray-600 dark:text-gray-400'>
  {formatDuration(moment.timestamp)}
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
-<div className='text-sm font-bold text-gray-900 dark:text-white'>
+<div className={'text}-sm font-bold text-gray-900 dark:text-white'>
  {formatMomentValue(moment)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -368,32 +367,31 @@ interface DemographicsProps {
 }
 
 const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
- <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
- <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
+ <div className={'bg}-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
+ <h3 className={'text}-lg font-semibold text-gray-900 dark:text-white mb-4'>
  Audience Demographics
 // FIXED:  </h3>
- <div className='space-y-6'>
+ <div className={'space}-y-6'>
  <div>
- <h4 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
+ <h4 className={'text}-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
  Top Countries
 // FIXED:  </h4>
- <div className='space-y-3'>
+ <div className={'space}-y-3'>
  {demographics.countries.slice(0, 3).map((country) => (
- <div
+ <div>
  key={`country-${country.name}`}
-// FIXED:  className='flex items-center justify-between' />
- >
- <span className='text-sm text-gray-600 dark:text-gray-400 font-medium'>
+// FIXED:  className={'fle}x items-center justify-between'/>
+ <span className={'text}-sm text-gray-600 dark:text-gray-400 font-medium'>
  {country.name}
 // FIXED:  </span>
- <div className='flex items-center space-x-3'>
- <div className='w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2'>
- <div
-// FIXED:  className='bg-blue-500 h-2 rounded-full transition-all duration-300'
+ <div className={'fle}x items-center space-x-3'>
+ <div className={'w}-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2'>
+ <div>
+// FIXED:  className={'bg}-blue-500 h-2 rounded-full transition-all duration-300'
 // FIXED:  style={{ width: `${country.percentage}%` } />
  />
 // FIXED:  </div>
-<span className='text-sm font-medium text-gray-900 dark:text-white min-w-[2rem] text-right'>
+<span className={'text}-sm font-medium text-gray-900 dark:text-white min-w-[2rem] text-right'>
  {country.percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -403,19 +401,18 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
 // FIXED:  </div>
 
  <div>
- <h4 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
+ <h4 className={'text}-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
  Devices
 // FIXED:  </h4>
- <div className='grid grid-cols-2 gap-3'>
+ <div className={'gri}d grid-cols-2 gap-3'>
  {demographics.devices.map((device) => (
- <div
+ <div>
  key={`device-${device.type}`}
-// FIXED:  className='text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors' />
- >
- <div className='text-lg font-bold text-gray-900 dark:text-white'>
+// FIXED:  className={'text}-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors'/>
+ <div className={'text}-lg font-bold text-gray-900 dark:text-white'>
  {device.percentage}%
 // FIXED:  </div>
-<div className='text-xs text-gray-600 dark:text-gray-400 font-medium'>
+<div className={'text}-xs text-gray-600 dark:text-gray-400 font-medium'>
  {device.type}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -436,9 +433,9 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: any) => (
  * @component
  * @example
  * ```tsx
- * <StreamAnalyticsDashboard
+ * <StreamAnalyticsDashboard>
  * streamId="stream_123"
- * className="w-full" />
+ * className={"w}-full" />
  * />
  * ```
  */
@@ -487,24 +484,24 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  }
  }, [analytics, selectedMetric]);
 
- if (loading as any) {
+ if (loading) {
  return (
  <div className={`p-6 ${className}`}>
- <div className='animate-pulse space-y-4'>
- <div className='h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3' />
- <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+ <div className={'animate}-pulse space-y-4'>
+ <div className={'h}-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3' />
+ <div className={'gri}d grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
  {Array.from({ length: 4 }).map((_, i) => (
- <div
+ <div>
  key={`loading-card-${i}`}
-// FIXED:  className='h-24 bg-gray-200 dark:bg-gray-700 rounded' />
+// FIXED:  className={'h}-24 bg-gray-200 dark:bg-gray-700 rounded' />
  />
  ))}
 // FIXED:  </div>
- <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
- <div className='h-64 bg-gray-200 dark:bg-gray-700 rounded' />
- <div className='h-64 bg-gray-200 dark:bg-gray-700 rounded' />
+ <div className={'gri}d grid-cols-1 lg:grid-cols-2 gap-6'>
+ <div className={'h}-64 bg-gray-200 dark:bg-gray-700 rounded' />
+ <div className={'h}-64 bg-gray-200 dark:bg-gray-700 rounded' />
 // FIXED:  </div>
- <div className='h-48 bg-gray-200 dark:bg-gray-700 rounded' />
+ <div className={'h}-48 bg-gray-200 dark:bg-gray-700 rounded' />
 // FIXED:  </div>
 // FIXED:  </div>
  );
@@ -513,12 +510,12 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  if (!analytics) {
  return (
  <div className={`p-6 ${className}`}>
- <div className='text-center text-gray-500 dark:text-gray-400'>
- <ChartBarIcon className='h-12 w-12 mx-auto mb-4 text-gray-400 dark:text-gray-500' />
- <h3 className='text-lg font-medium mb-2'>
+ <div className={'text}-center text-gray-500 dark:text-gray-400'>
+ <ChartBarIcon className={'h}-12 w-12 mx-auto mb-4 text-gray-400 dark:text-gray-500' />
+ <h3 className={'text}-lg font-medium mb-2'>
  No analytics data available
 // FIXED:  </h3>
- <p className='text-sm'>
+ <p className={'text}-sm'>
  Analytics will appear here once your stream is live.
 // FIXED:  </p>
 // FIXED:  </div>
@@ -529,17 +526,17 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  return (
  <div className={`p-6 space-y-6 ${className}`}>
  {/* Header */}
- <div className='flex items-center justify-between'>
- <h2 className='text-2xl font-bold text-gray-900 dark:text-white'>
+ <div className={'fle}x items-center justify-between'>
+ <h2 className={'text}-2xl font-bold text-gray-900 dark:text-white'>
  Stream Analytics
 // FIXED:  </h2>
- <div className='flex items-center space-x-2'>
- <select
+ <div className={'fle}x items-center space-x-2'>
+ <select>
 // FIXED:  value={timeRange} />
 // FIXED:  onChange={e => {
  setTimeRange(e.target.value as TimeRange);
  }
-// FIXED:  className='px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className={'px}-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
 // FIXED:  aria-label='Select time range'
  >
  <option value='live'>Live</option>
@@ -551,75 +548,74 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
 // FIXED:  </div>
 
  {/* Real-time Stats Cards */}
- <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
- <StatsCard
+ <div className={'gri}d grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+ <StatsCard>
  title='Current Viewers'
 // FIXED:  value={analytics.realTimeStats.viewers} />
- icon={<EyeIcon className='h-8 w-8 text-blue-500' />}
+ icon={<EyeIcon className={'h}-8 w-8 text-blue-500' />}
  trend={
  <>
- <TrendingUpIcon className='h-4 w-4 text-green-500 mr-1' />
- <span className='text-green-600'>,
+ <TrendingUpIcon className={'h}-4 w-4 text-green-500 mr-1' />
+ <span className={'text}-green-600'>,
  Peak: {formatNumber(analytics.realTimeStats.peakViewers)}
 // FIXED:  </span>
 // FIXED:  </>
  }
  />
 
- <StatsCard
+ <StatsCard>
  title='Stream Duration'
 // FIXED:  value={formatDuration(analytics.realTimeStats.duration)} />
- icon={<ClockIcon className='h-8 w-8 text-purple-500' />}
+ icon={<ClockIcon className={'h}-8 w-8 text-purple-500' />}
  trend={
  <>
- <SignalIcon
+ <SignalIcon>
 // FIXED:  className={`h-4 w-4 mr-1 ${getHealthColor(analytics.realTimeStats.streamHealth)}`} />
  />
- <span
-// FIXED:  className={getHealthColor(analytics.realTimeStats.streamHealth)} />
- >
+ <span>
+// FIXED:  className={getHealthColor(analytics.realTimeStats.streamHealth)}/>
  {analytics.realTimeStats.streamHealth}
 // FIXED:  </span>
 // FIXED:  </>
  }
  />
 
- <StatsCard
+ <StatsCard>
  title='Chat Messages'
 // FIXED:  value={analytics.realTimeStats.chatMessages} />
- icon={<ChatBubbleLeftRightIcon className='h-8 w-8 text-green-500' />}
+ icon={<ChatBubbleLeftRightIcon className={'h}-8 w-8 text-green-500' />}
  trend={
  <>
- <HeartIcon className='h-4 w-4 text-red-500 mr-1' />
- <span className='text-gray-600'>
+ <HeartIcon className={'h}-4 w-4 text-red-500 mr-1' />
+ <span className={'text}-gray-600'>
  {formatNumber(analytics.realTimeStats.likes)} likes
 // FIXED:  </span>
 // FIXED:  </>
  }
  />
 
- <StatsCard
+ <StatsCard>
  title='Super Chat Revenue'
 // FIXED:  value={`$${analytics.realTimeStats.superChatAmount.toFixed(2)}`} />
- icon={<CurrencyDollarIcon className='h-8 w-8 text-yellow-500' />}
+ icon={<CurrencyDollarIcon className={'h}-8 w-8 text-yellow-500' />}
  subtitle={`${analytics.realTimeStats.superChatCount} donations`}
  />
 // FIXED:  </div>
 
  {/* Charts Section */}
- <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
+ <div className={'gri}d grid-cols-1 lg:grid-cols-2 gap-6'>
  {/* Viewer Chart */}
- <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
- <div className='flex items-center justify-between mb-4'>
- <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
+ <div className={'bg}-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700'>
+ <div className={'fle}x items-center justify-between mb-4'>
+ <h3 className={'text}-lg font-semibold text-gray-900 dark:text-white'>
  Viewer Trends
 // FIXED:  </h3>
- <select
+ <select>
 // FIXED:  value={selectedMetric} />
 // FIXED:  onChange={e => {
  setSelectedMetric(e.target.value as MetricType);
  }
-// FIXED:  className='px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+// FIXED:  className={'px}-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
 // FIXED:  aria-label='Select metric to display'
  >
  <option value='viewers'>Viewers</option>
@@ -628,15 +624,14 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
 // FIXED:  </select>
 // FIXED:  </div>
  {chartData.length > 0 ? (
- <div
-// FIXED:  className='h-64 flex items-end justify-between space-x-1'
+ <div>
+// FIXED:  className={'h}-64 flex items-end justify-between space-x-1'
  role='img'
-// FIXED:  aria-label={`${selectedMetric} chart`} />
- >
+// FIXED:  aria-label={`${selectedMetric} chart`}/>
  {chartData.map((point) => (
- <div
+ <div>
  key={point.id}
-// FIXED:  className='bg-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer'
+// FIXED:  className={'bg}-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer'
 // FIXED:  style={{ height: `${point.height}%`,
  width: '4%' }
  title={`${point.value} at ${new Date(point.time).toLocaleTimeString()}`}
@@ -645,9 +640,9 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
  ))}
 // FIXED:  </div>
  ) : (
- <div className='h-64 flex items-center justify-center text-gray-500 dark:text-gray-400'>
- <div className='text-center'>
- <ChartBarIcon className='h-8 w-8 mx-auto mb-2' />
+ <div className={'h}-64 flex items-center justify-center text-gray-500 dark:text-gray-400'>
+ <div className={'text}-center'>
+ <ChartBarIcon className={'h}-8 w-8 mx-auto mb-2' />
  <p>No chart data available</p>
 // FIXED:  </div>
 // FIXED:  </div>

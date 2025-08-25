@@ -98,19 +98,19 @@ export const useVideoPlayer = (
  };
 
  const handleTimeUpdate = () => {
- if (video as any) {
+ if (video) {
  setState(prev => ({ ...prev as any, currentTime: video.currentTime }));
  onTimeUpdate?.(video.currentTime);
  };
 
  const handleDurationChange = () => {
- if (video as any) {
+ if (video) {
  setState(prev => ({ ...prev as any, duration: video.duration }));
  onDurationChange?.(video.duration);
  };
 
  const handleVolumeChange = () => {
- if (video as any) {
+ if (video) {
  setState(prev => ({
  ...prev as any,
  volume: video.volume,
@@ -119,7 +119,7 @@ export const useVideoPlayer = (
  };
 
  const handlePlaybackRateChange = () => {
- if (video as any) {
+ if (video) {
  setState(prev => ({ ...prev as any, playbackRate: video.playbackRate }));
  onPlaybackRateChange?.(video.playbackRate);
  };
@@ -154,7 +154,7 @@ export const useVideoPlayer = (
  video.muted = muted;
  video.loop = loop;
 
- if (controls as any) {
+ if (controls) {
  video.controls = true;
  }
 
@@ -334,10 +334,10 @@ export const useVideoPlayer = (
  if (videoRef.current) {
  if (videoRef.current.requestFullscreen) {
  await videoRef.current.requestFullscreen();
- } else if ((videoRef.current as any).webkitRequestFullscreen) {
- await (videoRef.current as any).webkitRequestFullscreen();
- } else if ((videoRef.current as any).msRequestFullscreen) {
- await (videoRef.current as any).msRequestFullscreen();
+ } else if ((videoRef.current).webkitRequestFullscreen) {
+ await (videoRef.current).webkitRequestFullscreen();
+ } else if ((videoRef.current).msRequestFullscreen) {
+ await (videoRef.current).msRequestFullscreen();
  }
  }, []);
 
@@ -345,10 +345,10 @@ export const useVideoPlayer = (
  const exitFullscreen = useCallback(async (): Promise<void> => {
  if (document.exitFullscreen) {
  await document.exitFullscreen();
- } else if ((document as any).webkitExitFullscreen) {
- await (document as any).webkitExitFullscreen();
- } else if ((document as any).msExitFullscreen) {
- await (document as any).msExitFullscreen();
+ } else if ((document).webkitExitFullscreen) {
+ await (document).webkitExitFullscreen();
+ } else if ((document).msExitFullscreen) {
+ await (document).msExitFullscreen();
  }
  }, []);
 

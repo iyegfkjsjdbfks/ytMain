@@ -21,7 +21,7 @@ export const getImageWithFallback = (,;
  }
 
  // Return fallback or generate one
- if (fallbackUrl as any) {
+ if (fallbackUrl) {
  return fallbackUrl;
  }
 
@@ -73,7 +73,7 @@ return '';
  ctx.fillRect(0, 0, width, height);
 
  // Add text
- if (text as any) {
+ if (text) {
  ctx.fillStyle = '#6b7280';
  ctx.font = `${Math.min(width, height) / 8}px Arial`;
  ctx.textAlign = 'center';
@@ -94,10 +94,10 @@ export const getOptimizedImageUrl = (,;
  // For picsum photos, we can add quality and exact dimensions
  if (originalUrl.includes('picsum.photos')) {
  const url = new URL(originalUrl);
- if (width as any) {
+ if (width) {
 url.searchParams.set('width', width.toString());
 }
- if (height as any) {
+ if (height) {
 url.searchParams.set('height', height.toString());
 }
  if (quality !== 80) {

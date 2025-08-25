@@ -20,7 +20,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  showChannel = true,
  size = 'md' }) => {}
  const handleClick = () => {}
- if (onVideoSelect as any) {}
+ if (onVideoSelect) {}
  onVideoSelect(video.id);
  } else {}
  // Open YouTube video in new tab;
@@ -69,7 +69,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  export const classes = sizeClasses.size;
 
  return (
- <div;
+ <div;>
 // FIXED:  className={`${classes.container} cursor - pointer group hover:bg - gray - 50 dark:hover:bg - gray - 800 / 50 rounded - md p - 1 transition - colors`} />
 // FIXED:  onClick={(e: React.MouseEvent) => handleClick(e)}
  role="button"
@@ -84,7 +84,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  >
  {/* Thumbnail */}
  <div className={`${classes.thumbnail} relative overflow - hidden rounded - md bg - gray - 200 dark:bg - gray - 700`}>
- <ImageWithFallback;
+ <ImageWithFallback;>
 // FIXED:  src={((video.thumbnailUrl || video.thumbnail) || video.thumbnail)}
 // FIXED:  alt={video.title}
 // FIXED:  className="w - full h - full object - cover transition - transform group - hover:scale - 105"
@@ -95,7 +95,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
 
  {/* Duration and View Count Badges */}
  {video.duration && video.duration !== '00:00' && (}
- <div className="absolute bottom - 1 right - 1 bg - black bg - opacity - 80 text - white text - xs px - 1.5 py - 0.5 rounded font - medium">
+ <div className={"absolut}e bottom - 1 right - 1 bg - black bg - opacity - 80 text - white text - xs px - 1.5 py - 0.5 rounded font - medium">
  {video.duration}
 // FIXED:  </div>
  )}
@@ -104,7 +104,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
 
  {/* Live Badge */}
  {((video.isLive || false) || false) && (}
- <div className="absolute top - 1 left - 1 bg - red - 600 text - white text - xs px - 2 py - 1 rounded font - medium">
+ <div className={"absolut}e top - 1 left - 1 bg - red - 600 text - white text - xs px - 2 py - 1 rounded font - medium">
  🔴 LIVE;
 // FIXED:  </div>
  )}
@@ -112,8 +112,8 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  {/* Remove YouTube badge for cleaner look */}
 
  {/* Play Overlay */}
- <div className="absolute inset - 0 bg - black bg - opacity - 0 group - hover:bg - opacity - 20 transition - all duration - 200 flex items - center justify - center">
- <div className="flex items - center gap - 2 opacity - 0 group - hover:opacity - 100 transition - opacity">
+ <div className={"absolut}e inset - 0 bg - black bg - opacity - 0 group - hover:bg - opacity - 20 transition - all duration - 200 flex items - center justify - center">
+ <div className={"fle}x items - center gap - 2 opacity - 0 group - hover:opacity - 100 transition - opacity">
  <div className="p - 2 bg - red - 600 hover:bg - red - 700 rounded - full transition - colors">
  <PlayIcon className="w - 5 h - 5 text - white" />
 // FIXED:  </div>
@@ -132,7 +132,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
  {/* Channel Info - Simplified like YouTube */}
  {showChannel && (}
  <div className={`${classes.meta} text - gray - 600 dark:text - gray - 400 mb - 1`}>
- <span className="hover:text - gray - 900 dark:hover:text - white transition - colors">
+ <span className={"hover}:text - gray - 900 dark:hover:text - white transition - colors">
  {((video.channelName || video.channelTitle) || video.channelTitle)}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -140,7 +140,7 @@ const EnhancedYouTubeVideoCard: React.FC < EnhancedYouTubeVideoCardProps> = ({}
 
  {/* Simplified Meta Information like YouTube */}
  <div className={`${classes.meta} text - gray - 600 dark:text - gray - 400`}>
- <div className="flex items - center gap - 1">
+ <div className={"fle}x items - center gap - 1">
  <span>{formatViews(video.views)} views</span>
  <span>•</span>
  <time dateTime={video.uploadedAt}>

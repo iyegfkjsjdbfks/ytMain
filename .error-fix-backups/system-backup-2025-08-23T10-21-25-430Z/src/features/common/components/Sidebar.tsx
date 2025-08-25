@@ -13,9 +13,9 @@ const Sidebar: React.FC = () => {}
  return (
  <aside className='w - 64 bg - white shadow - sm hidden md:block'>
  <div className='p - 4'>
- <nav className='space - y - 1'>
+ <nav className={'spac}e - y - 1'>
  {/* Main navigation links */}
- <NavLink
+ <NavLink>
  to='/' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -26,14 +26,13 @@ const Sidebar: React.FC = () => {}
  }
  end
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -43,7 +42,7 @@ const Sidebar: React.FC = () => {}
  Home
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/trending' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -53,14 +52,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -70,7 +68,7 @@ const Sidebar: React.FC = () => {}
  Trending
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/shorts' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -80,12 +78,11 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  viewBox='0 0 24 24'
- fill='currentColor' />
- >
+ fill='currentColor'/>
  <path d='M19.293 5.293L16.707 2.707C16.316 2.316 15.684 2.316 15.293 2.707L12.707 5.293C12.316 5.684 12.316 6.316 12.707 6.707C13.098 7.098 13.73 7.098 14.121 6.707L15 5.828V13C15 13.552 14.552 14 14 14H10C9.448 14 9 13.552 9 13V5.828L9.879 6.707C10.27 7.098 10.902 7.098 11.293 6.707C11.684 6.316 11.684 5.684 11.293 5.293L8.707 2.707C8.316 2.316 7.684 2.316 7.293 2.707L4.707 5.293C4.316 5.684 4.316 6.316 4.707 6.707C5.098 7.098 5.73 7.098 6.121 6.707L7 5.828V13C7 14.657 8.343 16 10 16H14C15.657 16 17 14.657 17 13V5.828L17.879 6.707C18.27 7.098 18.902 7.098 19.293 6.707C19.684 6.316 19.684 5.684 19.293 5.293Z' />
 // FIXED:  </svg>
  Shorts
@@ -94,7 +91,7 @@ const Sidebar: React.FC = () => {}
  {/* Authenticated user links */}
  {isAuthenticated && (}
  <><</>/><</>/>
- <NavLink
+ <NavLink>
  to='/subscriptions' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -104,14 +101,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -121,13 +117,13 @@ const Sidebar: React.FC = () => {}
  Subscriptions
 // FIXED:  </NavLink>
 
- <div className='pt - 5 pb - 2'>
- <h3 className='px - 4 text - xs font - semibold text - gray - 500 uppercase tracking - wider'>
+ <div className={'p}t - 5 pb - 2'>
+ <h3 className={'p}x - 4 text - xs font - semibold text - gray - 500 uppercase tracking - wider'>
  Your Library
 // FIXED:  </h3>
 // FIXED:  </div>
 
- <NavLink
+ <NavLink>
  to='/history' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -137,14 +133,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -154,7 +149,7 @@ const Sidebar: React.FC = () => {}
  History
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/watch - later' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -164,14 +159,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -181,7 +175,7 @@ const Sidebar: React.FC = () => {}
  Watch Later
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/liked - videos' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -191,14 +185,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -208,7 +201,7 @@ const Sidebar: React.FC = () => {}
  Liked Videos
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/playlists' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -218,14 +211,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -235,13 +227,13 @@ const Sidebar: React.FC = () => {}
  Playlists
 // FIXED:  </NavLink>
 
- <div className='pt - 5 pb - 2'>
- <h3 className='px - 4 text - xs font - semibold text - gray - 500 uppercase tracking - wider'>
+ <div className={'p}t - 5 pb - 2'>
+ <h3 className={'p}x - 4 text - xs font - semibold text - gray - 500 uppercase tracking - wider'>
  Create
 // FIXED:  </h3>
 // FIXED:  </div>
 
- <NavLink
+ <NavLink>
  to='/studio' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -251,14 +243,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -268,7 +259,7 @@ const Sidebar: React.FC = () => {}
  YouTube Studio
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/upload' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -278,14 +269,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -295,7 +285,7 @@ const Sidebar: React.FC = () => {}
  Upload Video
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/go - live' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - lg ${}
@@ -305,14 +295,13 @@ const Sidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -326,22 +315,20 @@ const Sidebar: React.FC = () => {}
 
  {/* Show login link for non - authenticated users */}
  {!isAuthenticated && (}
- <div className='mt - 6 px - 4 py - 2'>
- <p className='text - sm text - gray - 600 mb - 2'>
+ <div className={'m}t - 6 px - 4 py - 2'>
+ <p className={'tex}t - sm text - gray - 600 mb - 2'>
  Sign in to like videos, comment, and subscribe.
 // FIXED:  </p>
- <NavLink
+ <NavLink>
  to='/login'
-// FIXED:  className='flex items - center justify - center px - 4 py - 2 border border - blue - 600 rounded - full text - blue - 600 text - sm font - medium hover:bg - blue - 50' />
- >
- <svg
+// FIXED:  className={'fle}x items - center justify - center px - 4 py - 2 border border - blue - 600 rounded - full text - blue - 600 text - sm font - medium hover:bg - blue - 50'/>
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 2'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}

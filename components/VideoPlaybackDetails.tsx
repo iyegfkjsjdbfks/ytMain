@@ -62,9 +62,9 @@ return null;
  return (
  <>
  {/* Video player */}
- <div className="mb-4">
+ <div className={"mb}-4">
  {isYouTubeUrl(video.videoUrl) ? (
- <YouTubePlayerWrapper;
+ <YouTubePlayerWrapper;>
  videoId={getYouTubeVideoId(video.videoUrl) || ''}
  autoplay={false}
  width="100%"
@@ -72,26 +72,26 @@ return null;
  controls={true} />
  />
  ) : (
- <AdvancedVideoPlayer;
+ <AdvancedVideoPlayer;>
  video={video} />
  />
  )}
 // FIXED:  </div>
 
  {/* Video title and stats */}
- <div className="mb-4">
- <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+ <div className={"mb}-4">
+ <h1 className={"text}-xl font-bold text-gray-900 dark:text-white mb-2">
  {video.title}
 // FIXED:  </h1>
- <div className="flex items-center justify-between">
- <div className="text-sm text-gray-600 dark:text-gray-400">
+ <div className={"fle}x items-center justify-between">
+ <div className={"text}-sm text-gray-600 dark:text-gray-400">
  {formatCount(typeof video.views === 'string' ? parseInt(((video.views as string)).replace(/[^0-9]/g, ''), 10) : video.views || 0)} views • {formatDistanceToNow(video.uploadedAt)}
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Video actions */}
- <VideoActions;
+ <VideoActions;>
  liked={liked}
  disliked={disliked}
  likeCount={video.likes || 0}
@@ -104,7 +104,7 @@ return null;
 
  {/* Video description */}
  {channel && (
- <VideoDescription;
+ <VideoDescription;>
  video={video}
  channel={channel}
  isSubscribed={isSubscribed}

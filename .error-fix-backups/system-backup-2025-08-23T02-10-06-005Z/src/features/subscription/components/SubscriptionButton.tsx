@@ -35,7 +35,7 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  updateNotificationLevel } = useSubscription(channelId);
 
  const handleSubscriptionToggle = async (): Promise<any> < void> => {}
- if (isSubscribed as any) {}
+ if (isSubscribed) {}
  await unsubscribe();
  } else {}
  await subscribe();
@@ -62,7 +62,7 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  };
 
  const getSizeClasses = () => {}
- switch (size as any) {}
+ switch (size) {}
  case 'sm':
  return 'px - 3 py - 1.5 text - sm';
  case 'lg':
@@ -71,7 +71,7 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  };
 
  const getNotificationIcon = () => {}
- switch (notificationLevel as any) {}
+ switch (notificationLevel) {}
  case 'all':
  return <BellSolidIcon className='w - 4 h - 4' />;
  case 'personalized':
@@ -99,7 +99,7 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  <><</>/>
  {isSubscribed ? 'Subscribed' : 'Subscribe'}
  {subscriberCount && variant !== 'compact' && (}
- <span className='ml - 1 opacity - 75'>
+ <span className={'m}l - 1 opacity - 75'>
  {formatSubscriberCount(subscriberCount)}
 // FIXED:  </span>
  )}
@@ -108,7 +108,7 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
 // FIXED:  </button>
 
  {isSubscribed && showNotificationBell && (}
- <div className='relative'>
+ <div className={'relative}'>
  <button />
 // FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu: React.MouseEvent)}
 // FIXED:  className='p - 2 rounded - full hover:bg - gray - 100 dark:hover:bg - gray - 800 transition - colors'
@@ -118,8 +118,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
 // FIXED:  </button>
 
  {showNotificationMenu && (}
- <div className='absolute top - full right - 0 mt - 2 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 2 z - 10 min - w-[200px]'>
- <div className='px - 4 py - 2 text - sm font - medium text - gray - 900 dark:text - white border - b border - gray - 200 dark:border - gray - 700'>
+ <div className={'absolut}e top - full right - 0 mt - 2 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 2 z - 10 min - w-[200px]'>
+ <div className={'p}x - 4 py - 2 text - sm font - medium text - gray - 900 dark:text - white border - b border - gray - 200 dark:border - gray - 700'>
  Notifications
 // FIXED:  </div>
 
@@ -133,8 +133,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  >
  <BellSolidIcon className='w - 4 h - 4' />
  <div>
- <div className='font - medium'>All</div>
-<div className='text - xs opacity - 75'>
+ <div className={'fon}t - medium'>All</div>
+<div className={'tex}t - xs opacity - 75'>
  Get notified for all uploads
 // FIXED:  </div>
 // FIXED:  </div>
@@ -150,8 +150,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  >
  <BellIcon className='w - 4 h - 4' />
  <div>
- <div className='font - medium'>Personalized</div>
-<div className='text - xs opacity - 75'>
+ <div className={'fon}t - medium'>Personalized</div>
+<div className={'tex}t - xs opacity - 75'>
  Occasional notifications
 // FIXED:  </div>
 // FIXED:  </div>
@@ -167,8 +167,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  >
  <BellSlashIcon className='w - 4 h - 4' />
  <div>
- <div className='font - medium'>None</div>
-<div className='text - xs opacity - 75'>
+ <div className={'fon}t - medium'>None</div>
+<div className={'tex}t - xs opacity - 75'>
  Turn off notifications
 // FIXED:  </div>
 // FIXED:  </div>
@@ -198,7 +198,7 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  <><</>/>
  {isSubscribed ? 'Subscribed' : 'Subscribe'}
  {subscriberCount && (}
- <span className='opacity - 75'>
+ <span className={'opacit}y - 75'>
  {formatSubscriberCount(subscriberCount)}
 // FIXED:  </span>
  )}
@@ -207,7 +207,7 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
 // FIXED:  </button>
 
  {isSubscribed && showNotificationBell && (}
- <div className='relative'>
+ <div className={'relative}'>
  <button />
 // FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu: React.MouseEvent)}
 // FIXED:  className='p - 2 rounded - full hover:bg - gray - 100 dark:hover:bg - gray - 800 transition - colors'
@@ -217,8 +217,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
 // FIXED:  </button>
 
  {showNotificationMenu && (}
- <div className='absolute top - full right - 0 mt - 2 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 2 z - 10 min - w-[200px]'>
- <div className='px - 4 py - 2 text - sm font - medium text - gray - 900 dark:text - white border - b border - gray - 200 dark:border - gray - 700'>
+ <div className={'absolut}e top - full right - 0 mt - 2 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg py - 2 z - 10 min - w-[200px]'>
+ <div className={'p}x - 4 py - 2 text - sm font - medium text - gray - 900 dark:text - white border - b border - gray - 200 dark:border - gray - 700'>
  Notifications for {channelName}
 // FIXED:  </div>
 
@@ -232,8 +232,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  >
  <BellSolidIcon className='w - 4 h - 4' />
  <div>
- <div className='font - medium'>All</div>
-<div className='text - xs opacity - 75'>
+ <div className={'fon}t - medium'>All</div>
+<div className={'tex}t - xs opacity - 75'>
  Get notified for all uploads
 // FIXED:  </div>
 // FIXED:  </div>
@@ -249,8 +249,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  >
  <BellIcon className='w - 4 h - 4' />
  <div>
- <div className='font - medium'>Personalized</div>
-<div className='text - xs opacity - 75'>
+ <div className={'fon}t - medium'>Personalized</div>
+<div className={'tex}t - xs opacity - 75'>
  Occasional notifications
 // FIXED:  </div>
 // FIXED:  </div>
@@ -266,8 +266,8 @@ export const SubscriptionButton: React.FC < SubscriptionButtonProps> = ({}
  >
  <BellSlashIcon className='w - 4 h - 4' />
  <div>
- <div className='font - medium'>None</div>
-<div className='text - xs opacity - 75'>
+ <div className={'fon}t - medium'>None</div>
+<div className={'tex}t - xs opacity - 75'>
  Turn off notifications
 // FIXED:  </div>
 // FIXED:  </div>

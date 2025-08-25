@@ -62,8 +62,7 @@ export class ExecutionOrchestrator {
       logger.info(`✅ Orchestration completed in ${duration}ms`);
       
       return {
-        ...result,
-        duration, 
+        ...duration, 
       };
       
     } catch (error) {
@@ -76,7 +75,7 @@ export class ExecutionOrchestrator {
     const phases = [
       { name: 'syntax', description: 'Syntax Error Resolution' },
       { name: 'imports', description: 'Import Error Resolution' },
-      { name: 'types', description: 'Type Error Resolution' },
+      { name: 'types', description: 'Type Error Resolution' },;
       { name: 'cleanup', description: 'Final Cleanup' };
     ];
 
@@ -144,7 +143,7 @@ export class ExecutionOrchestrator {
   private async getErrorCount(): Promise<number> {
     try {
       const result = execSync('npx tsc --noEmit --skipLibCheck', { 
-        encoding: 'utf8',
+        encoding: 'utf8',;
         stdio: 'pipe';
       });
       return 0; // No errors if successful;

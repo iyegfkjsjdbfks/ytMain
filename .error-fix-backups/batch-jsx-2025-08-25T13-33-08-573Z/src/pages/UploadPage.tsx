@@ -89,66 +89,66 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
 
   return (
     <div className={`upload-page ${className || ''}`}>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Upload Video</h1>
+      <div className={"containe}r mx-auto px-4 py-8">
+        <h1 className={"text}-3xl font-bold mb-6">Upload Video</h1>
         
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className={"max}-w-4xl mx-auto space-y-6">
           {/* File Upload Area */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Select Video File</h2>
+          <div className={"bg}-white rounded-lg shadow-md p-6">
+            <h2 className={"text}-xl font-semibold mb-4">Select Video File</h2>
             
             {!selectedFile ? (
-              <div;
-                className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 transition-colors"
+              <div;>
+                className={"border}-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 transition-colors"
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
               {">"}
-                <div className="space-y-4">
-                  <div className="text-4xl text-gray-400">📹</div>
+                <div className={"space}-y-4">
+                  <div className={"text}-4xl text-gray-400">📹</div>
                   <div>
-                    <p className="text-lg font-medium">Drag and drop video files to upload</p>
-                    <p className="text-gray-600">Or click to browse files</p>
+                    <p className={"text}-lg font-medium">Drag and drop video files to upload</p>
+                    <p className={"text}-gray-600">Or click to browse files</p>
                   </div>
-                  <p className="text-sm text-gray-500">
+                  <p className={"text}-sm text-gray-500">
                     Supported formats: MP4, MOV, AVI, WMV, FLV, WebM;
                   </p>
                 </div>
-                <input;
+                <input;>
                   ref={fileInputRef}
                   type="file"
                   accept="video/*"
                   onChange={handleFileSelect}
-                  className="hidden"
+                  className={"hidden}"
                 /{">"}
               </div>
             ) : (
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded">
-                  <div className="text-2xl">🎬</div>
-                  <div className="flex-1">
-                    <p className="font-medium">{selectedFile.name}</p>
-                    <p className="text-sm text-gray-600">
+              <div className={"space}-y-4">
+                <div className={"fle}x items-center space-x-4 p-4 bg-gray-50 rounded">
+                  <div className={"text}-2xl">🎬</div>
+                  <div className={"flex}-1">
+                    <p className={"font}-medium">{selectedFile.name}</p>
+                    <p className={"text}-sm text-gray-600">
                       {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB;
                     </p>
                   </div>
-                  <button;
+                  <button;>
                     onClick={() => setSelectedFile(null)}
-                    className="text-red-500 hover:text-red-700"
+                    className={"text}-red-500 hover:text-red-700"
                   {">"}
                     Remove;
                   </button></div>
                 </div>
                 
                 {isUploading && (
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
+                  <div className={"space}-y-2">
+                    <div className={"fle}x justify-between text-sm">
                       <span>Uploading...</span>
                       <span>{uploadProgress}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div;
-                        className="bg-red-500 h-2 rounded-full transition-all duration-300"
+                    <div className={"w}-full bg-gray-200 rounded-full h-2">
+                      <div;>
+                        className={"bg}-red-500 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${uploadProgress}%` }}
                       {">"}{"<"}/div{">"}
                     </div>
@@ -161,41 +161,41 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
           {/* Video Details */}
           {selectedFile && (
             <div className = "bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4">Video Details</h2>
+              <h2 className={"text}-xl font-semibold mb-4">Video Details</h2>
               
-              <div className="space-y-4">
+              <div className={"space}-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Title *</label>
-                  <input;
+                  <label className={"bloc}k text-sm font-medium mb-2">Title *</label>
+                  <input;>
                     type="text"
                     value={videoDetails.title}
                     onChange={(e: any) => setVideoDetails(prev => ({ ...prev, title: e.target.value }))}
-                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className={"w}-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="Enter video title"
                     maxLength={100}
                   /{">"}
-                  <p className="text-xs text-gray-500 mt-1">{videoDetails.title.length}/100</p>
+                  <p className={"text}-xs text-gray-500 mt-1">{videoDetails.title.length}/100</p>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Description</label>
-                  <textarea;
+                  <label className={"bloc}k text-sm font-medium mb-2">Description</label>
+                  <textarea;>
                     value={videoDetails.description}
                     onChange={(e: any) => setVideoDetails(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full border rounded-lg px-3 py-2 h-32 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className={"w}-full border rounded-lg px-3 py-2 h-32 focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="Tell viewers about your video"
                     maxLength={5000}
                   /{">"}
-                  <p className="text-xs text-gray-500 mt-1">{videoDetails.description.length}/5000</p>
+                  <p className={"text}-xs text-gray-500 mt-1">{videoDetails.description.length}/5000</p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className={"gri}d grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Visibility</label>
-                    <select;
+                    <label className={"bloc}k text-sm font-medium mb-2">Visibility</label>
+                    <select;>
                       value={videoDetails.visibility}
-                      onChange={(e: any) => setVideoDetails(prev => ({ ...prev, visibility: e.target.value as any }))}
-                      className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                      onChange={(e: any) => setVideoDetails(prev => ({ ...prev, visibility: e.target.value}))}
+                      className={"w}-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     {">"}
                       <option value="public">Public</option>
                       <option value="unlisted">Unlisted</option>
@@ -204,11 +204,11 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium mb-2">Category</label>
-                    <select;
+                    <label className={"bloc}k text-sm font-medium mb-2">Category</label>
+                    <select;>
                       value={videoDetails.category}
                       onChange={(e: any) => setVideoDetails(prev => ({ ...prev, category: e.target.value }))}
-                      className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className={"w}-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     {">"}
                       <option value="entertainment">Entertainment</option>
                       <option value="education">Education</option>
@@ -222,35 +222,35 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Tags</label>
-                  <div className="flex space-x-2 mb-2">
-                    <input;
+                  <label className={"bloc}k text-sm font-medium mb-2">Tags</label>
+                  <div className={"fle}x space-x-2 mb-2">
+                    <input;>
                       type="text"
                       value={tagInput}
                       onChange={(e: any) => setTagInput(e.target.value)}
                       onKeyPress={(e: any) => e.key === 'Enter' && handleAddTag()}
-                      className="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className={"flex}-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                       placeholder="Add tags to help people find your video"
                     /{">"}
-                    <button;
+                    <button;>
                       onClick={handleAddTag}
-                      className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                      className={"bg}-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
                     {">"}
                       Add;
                     </button></div>
                   </div>
                   
                   {videoDetails.tags.length > 0 && ()
-                    <div className="flex flex-wrap gap-2">
+                    <div className={"fle}x flex-wrap gap-2">
                       {videoDetails.tags.map((tag, index) => (
-                        <span;
+                        <span;>
                           key={index}
-                          className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center space-x-2"
+                          className={"bg}-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center space-x-2"
                         {">"}
                           <span>{tag}</span>
-                          <button;
+                          <button;>
                             onClick={() => handleRemoveTag(tag)}
-                            className="text-blue-600 hover:text-blue-800"
+                            className={"text}-blue-600 hover:text-blue-800"
                           {">"}
                             ×
                           </button></div>
@@ -266,16 +266,16 @@ const UploadPage: React.FC<UploadPageProps> = ({ className }) => {
           {/* Upload Button */}
           {selectedFile && (
             <div className = "flex justify-end space-x-4">
-              <button;
+              <button;>
                 onClick={() => setSelectedFile(null)}
-                className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                className={"px}-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
               {">"}
                 Cancel;
               </button></div>
-              <button;
+              <button;>
                 onClick={handleUpload}
                 disabled={isUploading || !videoDetails.title.trim()}
-                className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                className={"px}-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isUploading ? 'Uploading...' : 'Upload Video'}
               </button>

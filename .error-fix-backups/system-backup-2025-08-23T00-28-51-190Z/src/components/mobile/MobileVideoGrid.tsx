@@ -26,7 +26,7 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: any)
  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
  const handleClick = useCallback(() => {
- if (video as any) {
+ if (video) {
  onVideoClick(video);
  }
  }, [video, onVideoClick]);
@@ -40,19 +40,19 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: any)
  }
 
  return (
- <div style={style} className='px-2 pb-4'>
- <div
-// FIXED:  className='bg-white dark:bg-gray-800 rounded-lg shadow-sm active:scale-95 transition-transform cursor-pointer' />
+ <div style={style} className={'px}-2 pb-4'>
+ <div>
+// FIXED:  className={'bg}-white dark:bg-gray-800 rounded-lg shadow-sm active:scale-95 transition-transform cursor-pointer' />
 // FIXED:  onClick={(e) => handleClick(e)}
  >
  {/* Video Thumbnail */}
- <div className='relative aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden'>
+ <div className={'relativ}e aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden'>
  {!imageLoaded && (
- <div className='absolute inset-0 flex items-center justify-center'>
- <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500' />
+ <div className={'absolut}e inset-0 flex items-center justify-center'>
+ <div className={'animate}-spin rounded-full h-6 w-6 border-b-2 border-blue-500' />
 // FIXED:  </div>
  )}
- <img
+ <img>
 // FIXED:  src={video.thumbnailUrl}
 // FIXED:  alt={video.title}
 // FIXED:  className={`w-full h-full object-cover transition-opacity duration-300 ${
@@ -64,7 +64,7 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: any)
 
  {/* Duration Badge */}
  {video.duration && typeof video.duration === 'number' && (
- <div className='absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded'>
+ <div className={'absolut}e bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded'>
  {Math.floor(video.duration / 60)}:
  {(video.duration % 60).toString().padStart(2, '0')}
 // FIXED:  </div>
@@ -72,26 +72,26 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: any)
 // FIXED:  </div>
 
  {/* Video Info */}
- <div className='p-3'>
+ <div className={'p}-3'>
  {/* Channel Avatar and Title */}
- <div className='flex space-x-3'>
- <img
+ <div className={'fle}x space-x-3'>
+ <img>
 // FIXED:  src={video.channel?.avatarUrl || 'https://via.placeholder.com/36'}
 // FIXED:  alt={video.channel?.name}
-// FIXED:  className='w-9 h-9 rounded-full flex-shrink-0'
+// FIXED:  className={'w}-9 h-9 rounded-full flex-shrink-0'
  loading='lazy' />
  />
- <div className='flex-1 min-w-0'>
- <h3 className='font-medium text-sm text-gray-900 dark:text-white line-clamp-2 leading-tight mb-1'>
+ <div className={'flex}-1 min-w-0'>
+ <h3 className={'font}-medium text-sm text-gray-900 dark:text-white line-clamp-2 leading-tight mb-1'>
  {video.title}
 // FIXED:  </h3>
- <p className='text-xs text-gray-600 dark:text-gray-400 mb-1'>
+ <p className={'text}-xs text-gray-600 dark:text-gray-400 mb-1'>
  {video.channel?.name}
  {video.channel?.isVerified && (
- <span className='ml-1 text-blue-500'>✓</span>
+ <span className={'ml}-1 text-blue-500'>✓</span>
  )}
 // FIXED:  </p>
- <div className='flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-500'>
+ <div className={'fle}x items-center space-x-1 text-xs text-gray-500 dark:text-gray-500'>
  <span>{video.views || '0'} views</span>
  <span>•</span>
  <span>{video.publishedAt || 'Recently'}</span>
@@ -149,16 +149,16 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
  return (
  <div className={`space-y-4 ${className}`}>
  {Array.from({ length: 6 }).map((_, index) => (
- <div key={index} className='px-2'>
- <div className='bg-white dark:bg-gray-800 rounded-lg shadow-sm animate-pulse'>
- <div className='aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg' />
- <div className='p-3'>
- <div className='flex space-x-3'>
- <div className='w-9 h-9 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0' />
- <div className='flex-1 space-y-2'>
- <div className='h-4 bg-gray-200 dark:bg-gray-700 rounded w-full' />
- <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4' />
- <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2' />
+ <div key={index} className={'px}-2'>
+ <div className={'bg}-white dark:bg-gray-800 rounded-lg shadow-sm animate-pulse'>
+ <div className={'aspect}-video bg-gray-200 dark:bg-gray-700 rounded-t-lg' />
+ <div className={'p}-3'>
+ <div className={'fle}x space-x-3'>
+ <div className={'w}-9 h-9 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0' />
+ <div className={'flex}-1 space-y-2'>
+ <div className={'h}-4 bg-gray-200 dark:bg-gray-700 rounded w-full' />
+ <div className={'h}-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4' />
+ <div className={'h}-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2' />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -171,10 +171,9 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
 
  if (videos.length === 0) {
  return (
- <div
-// FIXED:  className={`flex flex-col items-center justify-center h-64 ${className}`} />
- >
- <p className='text-gray-500 dark:text-gray-400 text-center px-4'>
+ <div>
+// FIXED:  className={`flex flex-col items-center justify-center h-64 ${className}`}/>
+ <p className={'text}-gray-500 dark:text-gray-400 text-center px-4'>
  No videos found
 // FIXED:  </p>
 // FIXED:  </div>
@@ -183,27 +182,25 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
 
  return (
  <div className={`w-full ${className}`}>
- <List
+ <List>
  height={window.innerHeight - 120} // Account for header/navigation
  width='100%'
  itemCount={videos.length}
  itemSize={itemHeight}
  itemData={listData}
- overscanCount={2} />
- >
+ overscanCount={2}/>
  {MobileVideoItem}
 // FIXED:  </List>
 
  {/* Load more trigger */}
  {hasMore && (
- <div
+ <div>
  ref={loadMoreRef}
-// FIXED:  className='h-20 flex items-center justify-center' />
- >
+// FIXED:  className={'h}-20 flex items-center justify-center'/>
  {loading ? (
- <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500' />
+ <div className={'animate}-spin rounded-full h-8 w-8 border-b-2 border-blue-500' />
  ) : (
- <p className='text-gray-500 dark:text-gray-400'>
+ <p className={'text}-gray-500 dark:text-gray-400'>
  Load more videos...
 // FIXED:  </p>
  )}

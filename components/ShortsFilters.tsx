@@ -21,10 +21,10 @@ return 'All';
  };
 
  return (
- <div className="px - 4 pb - 4">
- <div className="bg - white / 10 backdrop - blur - sm rounded - lg p - 4">
- <div className="flex items - center justify - between mb - 3">
- <h3 className="text - white font - medium">Filter by Category</h3>
+ <div className={"p}x - 4 pb - 4">
+ <div className={"b}g - white / 10 backdrop - blur - sm rounded - lg p - 4">
+ <div className={"fle}x items - center justify - between mb - 3">
+ <h3 className={"tex}t - white font - medium">Filter by Category</h3>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onClose(e)}
 // FIXED:  className="p - 1 text - white / 60 hover:text - white transition - colors"
@@ -34,9 +34,9 @@ return 'All';
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className="flex flex - wrap gap - 2">
+ <div className={"fle}x flex - wrap gap - 2">
  {categories.map((category: any) => (}
- <button;
+ <button;>
  key={category} />
 // FIXED:  onClick={() => onCategoryChange(category: React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 1.5 rounded - full text - sm font - medium transition - colors ${}
@@ -53,7 +53,7 @@ return 'All';
  {selectedCategory !== 'all' && (}
  <button />
 // FIXED:  onClick={() => onCategoryChange('all': React.MouseEvent)}
-// FIXED:  className="mt - 3 text - sm text - white / 60 hover:text - white transition - colors"
+// FIXED:  className={"m}t - 3 text - sm text - white / 60 hover:text - white transition - colors"
  >
  Clear filter;
 // FIXED:  </button>

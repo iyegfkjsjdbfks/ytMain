@@ -19,20 +19,19 @@ const Header: React.FC = () => {}
  };
 
  return (
- <header className='bg - white shadow - sm sticky top - 0 z - 10'>
- <div className='max - w-7xl mx - auto px - 4 sm:px - 6 lg:px - 8'>
- <div className='flex justify - between items - center h - 16'>
+ <header className={'b}g - white shadow - sm sticky top - 0 z - 10'>
+ <div className={'ma}x - w-7xl mx - auto px - 4 sm:px - 6 lg:px - 8'>
+ <div className={'fle}x justify - between items - center h - 16'>
  {/* Logo and hamburger menu */}
- <div className='flex items - center'>
+ <div className={'fle}x items - center'>
  <button className='p - 2 rounded - full hover:bg - gray - 200 mr - 2'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 6 w - 6'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -40,18 +39,17 @@ const Header: React.FC = () => {}
  />
 // FIXED:  </svg>
 // FIXED:  </button>
- <Link to='/' className='flex items - center'>
- <svg
+ <Link to='/' className={'fle}x items - center'>
+ <svg>
  viewBox='0 0 90 20'
 // FIXED:  className='h - 6'
- preserveAspectRatio='xMidYMid meet' />
- >
+ preserveAspectRatio='xMidYMid meet'/>
  <g>
- <path
+ <path>
  d='M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e - 07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e - 07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e - 07 5.35042 0 10 0 10C0 10 2.24288e - 07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z'
  fill='#FF0000' />
  />
- <path
+ <path>
  d='M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z'
  fill='white' />
  />
@@ -70,27 +68,25 @@ const Header: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Search bar */}
- <div className='max - w-lg w - full lg:max - w-xs'>
- <form onSubmit={(e: React.FormEvent) => handleSearch(e)} className='relative'>
- <input
+ <div className={'ma}x - w-lg w - full lg:max - w-xs'>
+ <form onSubmit={(e: React.FormEvent) => handleSearch(e)} className={'relative}'>
+ <input>
 // FIXED:  type='text'
 // FIXED:  placeholder='Search'
-// FIXED:  className='block w - full bg - gray - 100 border border - gray - 300 rounded - full py - 2 pl - 4 pr - 10 focus:outline - none focus:border - blue - 500'
+// FIXED:  className={'bloc}k w - full bg - gray - 100 border border - gray - 300 rounded - full py - 2 pl - 4 pr - 10 focus:outline - none focus:border - blue - 500'
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={e => setSearchQuery(e.target.value: React.ChangeEvent)}
  />
- <button
+ <button>
 // FIXED:  type='submit'
-// FIXED:  className='absolute inset - y-0 right - 0 pr - 3 flex items - center' />
- >
- <svg
+// FIXED:  className={'absolut}e inset - y-0 right - 0 pr - 3 flex items - center'/>
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 text - gray - 500'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -102,16 +98,15 @@ const Header: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Right nav items */}
- <div className='flex items - center space - x-4'>
+ <div className={'fle}x items - center space - x-4'>
  <button className='p - 2 rounded - full hover:bg - gray - 200'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 6 w - 6'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -121,64 +116,58 @@ const Header: React.FC = () => {}
 // FIXED:  </button>
 
  {user ? (}
- <div className='relative group'>
- <button className='flex items - center space - x-2'>
- <img
+ <div className={'relativ}e group'>
+ <button className={'fle}x items - center space - x-2'>
+ <img>
 // FIXED:  src={user.avatarUrl || 'https://via.placeholder.com / 150'}
 // FIXED:  alt={user.displayName || 'User'}
 // FIXED:  className='h - 8 w - 8 rounded - full object - cover' />
  />
- <div className='hidden md:block text - left'>
- <p className='text - sm font - medium'>{user.displayName}</p>
- <p className='text - xs text - gray - 500'>@{user.username}</p>
+ <div className={'hidde}n md:block text - left'>
+ <p className={'tex}t - sm font - medium'>{user.displayName}</p>
+ <p className={'tex}t - xs text - gray - 500'>@{user.username}</p>
 // FIXED:  </div>
 // FIXED:  </button>
- <div className='absolute right - 0 mt - 2 w - 48 bg - white rounded - md shadow - lg py - 1 hidden group - hover:block z - 50'>
- <Link
+ <div className={'absolut}e right - 0 mt - 2 w - 48 bg - white rounded - md shadow - lg py - 1 hidden group - hover:block z - 50'>
+ <Link>
  to='/channel / me'
-// FIXED:  className='block px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100' />
- >
+// FIXED:  className={'bloc}k px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'/>
  Your channel
 // FIXED:  </Link>
- <Link
+ <Link>
  to='/studio'
-// FIXED:  className='block px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100' />
- >
+// FIXED:  className={'bloc}k px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'/>
  YouTube Studio
 // FIXED:  </Link>
- <Link
+ <Link>
  to='/video - demo'
-// FIXED:  className='block px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100 bg - blue - 50' />
- >
+// FIXED:  className={'bloc}k px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100 bg - blue - 50'/>
  Video Components Demo
 // FIXED:  </Link>
- <Link
+ <Link>
  to='/settings'
-// FIXED:  className='block px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100' />
- >
+// FIXED:  className={'bloc}k px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'/>
  Settings
 // FIXED:  </Link>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => logout(e)}
-// FIXED:  className='block w - full text - left px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'
+// FIXED:  className={'bloc}k w - full text - left px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'
  >
  Sign out
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
  ) : (
- <Link
+ <Link>
  to='/login'
-// FIXED:  className='flex items - center text - blue - 600 border border - blue - 600 rounded - full px - 3 py - 1' />
- >
- <svg
+// FIXED:  className={'fle}x items - center text - blue - 600 border border - blue - 600 rounded - full px - 3 py - 1'/>
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 1'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}

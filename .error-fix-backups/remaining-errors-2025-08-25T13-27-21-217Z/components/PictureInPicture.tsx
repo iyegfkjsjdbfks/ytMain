@@ -58,7 +58,7 @@ const PictureInPicture: React.FC < PictureInPictureProps> = ({}
  setIsDragging(false);
  };
 
- if (isDragging as any) {}
+ if (isDragging) {}
  document.addEventListener('mousemove', handleMouseMove as EventListener);
  document.addEventListener('mouseup', handleMouseUp as EventListener);
  }
@@ -96,7 +96,7 @@ return;
 
  const togglePlay = () => {}
  if (videoRef.current) {}
- if (isPlaying as any) {}
+ if (isPlaying) {}
  videoRef.current.pause();
  } else {}
  videoRef.current.play().catch(() => {}
@@ -137,7 +137,7 @@ return null;
 }
 
  return (
- <div;
+ <div;>
  ref={containerRef}
 // FIXED:  className={`fixed z - 50 bg - black rounded - lg shadow - 2xl border border - gray - 600 overflow - hidden transition - all duration - 200 ${}
  isMinimized ? 'w - 16 h - 12' : 'w - 80 h - 48'
@@ -146,8 +146,7 @@ return null;
  left: `${position.x}px`,
  top: `${position.y}px`,
  cursor: isDragging ? 'grabbing' : 'grab' }
- onMouseDown={handleMouseDown} />
- >
+ onMouseDown={handleMouseDown}/>
  {isMinimized ? (}
  // Minimized view;
  <div className="w - full h - full flex items - center justify - center bg - gray - 900">
@@ -157,7 +156,7 @@ return null;
  setIsMinimized(false);
 
  }
-// FIXED:  className="text - white hover:text - gray - 300"
+// FIXED:  className={"tex}t - white hover:text - gray - 300"
  >
  <PlayIcon className="w - 6 h - 6" />
 // FIXED:  </button>
@@ -166,9 +165,9 @@ return null;
  // Full view;
  <><</>/><</>/><</>/>
  {/* Video */}
- <div className="relative w - full h - full">
+ <div className={"relativ}e w - full h - full">
  {videoUrl ? (}
- <video;
+ <video;>
  ref={videoRef}
 // FIXED:  src={videoUrl}
 // FIXED:  className="w - full h - full object - cover"
@@ -177,7 +176,7 @@ return null;
  onPause={() => setIsPlaying(false)}
  />
  ) : (
- <img;
+ <img;>
 // FIXED:  src={thumbnailUrl}
 // FIXED:  alt={videoTitle}
 // FIXED:  className="w - full h - full object - cover" />
@@ -185,10 +184,10 @@ return null;
  )}
 
  {/* Controls Overlay */}
- <div className="absolute inset - 0 bg - black / 20 opacity - 0 hover:opacity - 100 transition - opacity">
+ <div className={"absolut}e inset - 0 bg - black / 20 opacity - 0 hover:opacity - 100 transition - opacity">
  {/* Top Controls */}
- <div className="absolute top - 2 left - 2 right - 2 flex justify - between items - start">
- <div className="flex space - x - 1">
+ <div className={"absolut}e top - 2 left - 2 right - 2 flex justify - between items - start">
+ <div className={"fle}x space - x - 1">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
  e.stopPropagation();
@@ -225,7 +224,7 @@ return null;
 // FIXED:  </div>
 
  {/* Center Play Button */}
- <div className="absolute inset - 0 flex items - center justify - center">
+ <div className={"absolut}e inset - 0 flex items - center justify - center">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
  e.stopPropagation();
@@ -242,28 +241,28 @@ return null;
 // FIXED:  </div>
 
  {/* Bottom Controls */}
- <div className="absolute bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 80 to - transparent p - 2">
+ <div className={"absolut}e bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 80 to - transparent p - 2">
  {/* Progress Bar */}
  {duration > 0 && (}
- <div;
+ <div;>
 // FIXED:  className="w - full h - 1 bg - white / 30 rounded - full mb - 2 cursor - pointer" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSeek(e)}
  >
- <div;
+ <div;>
 // FIXED:  className="h - full bg - red - 500 rounded - full transition - all"
 // FIXED:  style={{ width: `${(currentTime / duration) * 100}%` } />
  />
 // FIXED:  </div>
  )}
 
- <div className="flex items - center justify - between text - white text - xs">
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center justify - between text - white text - xs">
+ <div className={"fle}x items - center space - x - 2">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
  e.stopPropagation();
  toggleMute();
  }
-// FIXED:  className="hover:text - gray - 300"
+// FIXED:  className={"hover}:text - gray - 300"
  >
  {isMuted ? (}
  <SpeakerXIcon className="w - 4 h - 4" />
@@ -284,7 +283,7 @@ return null;
  e.stopPropagation();
  handleExpand();
  }
-// FIXED:  className="hover:text - gray - 300"
+// FIXED:  className={"hover}:text - gray - 300"
  title="Open in new tab"
  >
  <ArrowTopRightOnSquareIcon className="w - 4 h - 4" />
@@ -295,11 +294,11 @@ return null;
 // FIXED:  </div>
 
  {/* Video Info */}
- <div className="absolute bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 90 via - black / 60 to - transparent p - 3 pt - 8">
- <h3 className="text - white text - sm font - medium line - clamp - 2 mb - 1">
+ <div className={"absolut}e bottom - 0 left - 0 right - 0 bg - gradient - to - t from - black / 90 via - black / 60 to - transparent p - 3 pt - 8">
+ <h3 className={"tex}t - white text - sm font - medium line - clamp - 2 mb - 1">
  {videoTitle}
 // FIXED:  </h3>
- <p className="text - gray - 300 text - xs">
+ <p className={"tex}t - gray - 300 text - xs">
  {channelName}
 // FIXED:  </p>
 // FIXED:  </div>

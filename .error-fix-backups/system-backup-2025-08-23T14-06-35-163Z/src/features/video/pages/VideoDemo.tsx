@@ -30,12 +30,12 @@ const VideoDemo: React.FC = () => {}
  };
 
  return (
- <div className='container mx - auto px - 4 py - 8'>
- <h1 className='text - 3xl font - bold mb - 8'>Video Component Demo</h1>
+ <div className={'containe}r mx - auto px - 4 py - 8'>
+ <h1 className={'tex}t - 3xl font - bold mb - 8'>Video Component Demo</h1>
 
  {/* Tabs */}
- <div className='flex border - b mb - 8'>
- <button
+ <div className={'fle}x border - b mb - 8'>
+ <button>
 // FIXED:  className={`px - 4 py - 2 ${}
  selectedTab === 'components'
  ? 'border - b - 2 border - blue - 500 text - blue - 600'
@@ -45,7 +45,7 @@ const VideoDemo: React.FC = () => {}
  >
  Video Components
 // FIXED:  </button>
- <button
+ <button>
 // FIXED:  className={`px - 4 py - 2 ${}
  selectedTab === 'studio'
  ? 'border - b - 2 border - blue - 500 text - blue - 600'
@@ -59,11 +59,11 @@ const VideoDemo: React.FC = () => {}
 
  {selectedTab === 'components' ? (}
  <><</>/><</>/><</>/>
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>
  Video Card (Default)
 // FIXED:  </h2>
- <div className='grid grid - cols - 1 sm:grid - cols - 2 md:grid - cols - 4 gap - 6'>
+ <div className={'gri}d grid - cols - 1 sm:grid - cols - 2 md:grid - cols - 4 gap - 6'>
  {realVideos[0] && (}
  <VideoCard video={realVideos[0]} onClick={(e: React.MouseEvent) => handleVideoClick(e)} />
  )}
@@ -73,20 +73,20 @@ const VideoDemo: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </section>
 
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>
  Video Card (Compact)
 // FIXED:  </h2>
- <div className='max - w - md'>
+ <div className={'ma}x - w - md'>
  {realVideos[2] && (}
- <VideoCard
+ <VideoCard>
  video={realVideos[2]}
  variant='compact' />
 // FIXED:  onClick={(e: React.MouseEvent) => handleVideoClick(e)}
  />
  )}
  {realVideos[3] && (}
- <VideoCard
+ <VideoCard>
  video={realVideos[3]}
  variant='compact' />
 // FIXED:  onClick={(e: React.MouseEvent) => handleVideoClick(e)}
@@ -95,11 +95,11 @@ const VideoDemo: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </section>
 
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>Video Card (Studio)</h2>
- <div className='max - w - 4xl'>
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>Video Card (Studio)</h2>
+ <div className={'ma}x - w - 4xl'>
  {realVideos[4] && (}
- <VideoCard
+ <VideoCard>
  video={realVideos[4]}
  variant='studio' />
 // FIXED:  onClick={(e: React.MouseEvent) => handleVideoClick(e)}
@@ -108,10 +108,10 @@ const VideoDemo: React.FC = () => {}
 // FIXED:  </div>
 // FIXED:  </section>
 
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>Video Grid</h2>
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>Video Grid</h2>
  {realVideos.length > 0 && (}
- <VideoGrid
+ <VideoGrid>
  title='Featured Videos'
  videos={realVideos}
  columns={4}
@@ -121,12 +121,12 @@ const VideoDemo: React.FC = () => {}
  )}
 // FIXED:  </section>
 
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>
  Video List (Grid Layout)
 // FIXED:  </h2>
  {realVideos.length > 0 && (}
- <VideoList
+ <VideoList>
  videos={realVideos}
  layout='grid'
  onVideoClick={handleVideoClick} />
@@ -134,12 +134,12 @@ const VideoDemo: React.FC = () => {}
  )}
 // FIXED:  </section>
 
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>
  Video List (List Layout)
 // FIXED:  </h2>
  {realVideos.length > 0 && (}
- <VideoList
+ <VideoList>
  videos={realVideos.slice(0, 4)}
  layout='list'
  variant='compact'
@@ -148,19 +148,19 @@ const VideoDemo: React.FC = () => {}
  )}
 // FIXED:  </section>
 
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>Empty Video List</h2>
- <VideoList
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>Empty Video List</h2>
+ <VideoList>
  videos={[]}
  emptyMessage='No videos found. Try a different search term.' />
  />
 // FIXED:  </section>
 // FIXED:  </>
  ) : (
- <section className='mb - 12'>
- <h2 className='text - 2xl font - semibold mb - 4'>Studio Video Grid</h2>
+ <section className={'m}b - 12'>
+ <h2 className={'tex}t - 2xl font - semibold mb - 4'>Studio Video Grid</h2>
  {realVideos.length > 0 && (}
- <StudioVideoGrid
+ <StudioVideoGrid>
  videos={realVideos}
  title='Your Videos'
  onEdit={handleVideoEdit}

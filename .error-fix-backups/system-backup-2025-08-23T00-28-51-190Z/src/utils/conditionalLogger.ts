@@ -69,7 +69,7 @@ class ConditionalLogger {
  message,
  source
  );
- (console as any).error(formattedMessage, data || '');
+ (console).error(formattedMessage, data || '');
  }
  warn(message, data?: unknown, source?: string): void {
  if (this.shouldLog(LogLevel.WARN)) {
@@ -78,7 +78,7 @@ class ConditionalLogger {
  message,
  source
  );
- (console as any).warn(formattedMessage, data || '');
+ (console).warn(formattedMessage, data || '');
  }
  info(message, data?: unknown, source?: string): void {
  if (this.shouldLog(LogLevel.INFO)) {
@@ -87,7 +87,7 @@ class ConditionalLogger {
  message,
  source
  );
- (console as any).info(formattedMessage, data || '');
+ (console).info(formattedMessage, data || '');
  }
  debug(message, data?: unknown, source?: string): void {
  if (this.shouldLog(LogLevel.DEBUG)) {
@@ -96,25 +96,25 @@ class ConditionalLogger {
  message,
  source
  );
- (console as any).debug(formattedMessage, data || '');
+ (console).debug(formattedMessage, data || '');
  }
  // Performance logging for development
  time(label): void {
  if (this.isDevelopment) {
- (console as any).time(label);
+ (console).time(label);
  }
  timeEnd(label): void {
  if (this.isDevelopment) {
- (console as any).timeEnd(label);
+ (console).timeEnd(label);
  }
  // Group logging for complex operations
  group(label): void {
  if (this.isDevelopment) {
- (console as any).group(label);
+ (console).group(label);
  }
  groupEnd(): void {
  if (this.isDevelopment) {
- (console as any).groupEnd();
+ (console).groupEnd();
  }
  // API response logging with sanitization
  apiResponse(endpoint, response, duration?: number): void {

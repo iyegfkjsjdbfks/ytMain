@@ -237,11 +237,11 @@ class TestPerformanceTracker {
 
  static startTest(testName): () => void {
  const startTime = performance.now();
- const startMemory = (performance as any).memory?.usedJSHeapSize || 0;
+ const startMemory = (performance).memory?.usedJSHeapSize || 0;
 
  return () => {
  const endTime = performance.now();
- const endMemory = (performance as any).memory?.usedJSHeapSize || 0;
+ const endMemory = (performance).memory?.usedJSHeapSize || 0;
 
  this.testMetrics.set(testName, {
  renderTime: 0, // Will be set by render tracking,
@@ -252,7 +252,7 @@ class TestPerformanceTracker {
 
  static trackRender(testName, renderTime): void {
  const metrics = this.testMetrics.get(testName);
- if (metrics as any) {
+ if (metrics) {
  metrics.renderTime = renderTime;
  }
  static getMetrics(testName?: string) {
@@ -351,22 +351,22 @@ beforeAll(() => {
  // // performanceMonitor.init(); // Method not available // Method not available
  }
 
- (console as any).log('Test environment initialized');
+ (console).log('Test environment initialized');
 });
 
 // Cleanup after all tests
 afterAll(() => {
  // Generate performance report
  if (TEST_CONFIG.enablePerformanceTracking) {
- (console as any).log(`\n${ TestPerformanceTracker.generateReport()}`);
- (console as any).log('\nPerformance report not available');
- // (console as any).log(`\n${performanceMonitor.getReport()}`); // Method not available
+ (console).log(`\n${ TestPerformanceTracker.generateReport()}`);
+ (console).log('\nPerformance report not available');
+ // (console).log(`\n${performanceMonitor.getReport()}`); // Method not available
  }
 
  // Cleanup mocks
  vi.restoreAllMocks();
 
- (console as any).log('Test environment cleaned up');
+ (console).log('Test environment cleaned up');
 });
 
 // Setup before each test
@@ -512,12 +512,12 @@ export { mockLocalStorage,
 
 // Global error handler for unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {
- (console as any).error('Unhandled Rejection at:', promise, 'reason:', reason);
+ (console).error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
 // Global error handler for uncaught exceptions
 process.on('uncaughtException', (error: Error) => {
- (console as any).error('Uncaught Exception:', error);
+ (console).error('Uncaught Exception:', error);
 });
 
-(console as any).log('Test setup completed successfully');
+(console).log('Test setup completed successfully');

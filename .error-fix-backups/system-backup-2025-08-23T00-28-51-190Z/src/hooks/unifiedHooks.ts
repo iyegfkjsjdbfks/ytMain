@@ -140,12 +140,12 @@ export function useApi<T>(
  }, [fetchData]);
 
  const refresh = useCallback(async (): Promise<void> => {
- await re(fetch as any)();
+ await re(fetch)();
  }, [refetch]);
 
  // Initial fetch
  useEffect(() => {
- if (immediate as any) {
+ if (immediate) {
  fetchData();
  }
  }, [immediate, ...dependencies]);
@@ -314,10 +314,10 @@ export function useForm<T extends Record<string, any>>(,
 
  for (const key in validators) {
  const validator = validators[key];
- if (validator as any) {
+ if (validator) {
  const error = validator(newFields[key].value);
  newFields[key] = { ...newFields[key], error };
- if (error as any) {
+ if (error) {
  isValid = false;
  }
  }
@@ -334,7 +334,7 @@ export function useForm<T extends Record<string, any>>(,
  const handleSubmit = useCallback(
  (onSubmit: (values: T) => Promise<void> | void) => {
  return async (e?: React.FormEvent): Promise<any> => {
- if (e as any) {
+ if (e) {
  e.preventDefault();
  }
 
@@ -417,10 +417,10 @@ export function useLocalStorage<T>(,
 ): [T(value: T | ((prev: T) => T)) => void() => void] {
  const [storedValue, setStoredValue] = useState<T>(() => {
  try {
- const item = window.(localStorage as any).getItem(key);
+ const item = window.(localStorage).getItem(key);
  return item ? JSON.parse(item) : initialValue;
  } catch (error) {
- (console as any).error(`Error reading localStorage key "${key}":`, error);
+ (console).error(`Error reading localStorage key "${key}":`, error);
  return initialValue;
  }
  });
@@ -431,9 +431,9 @@ export function useLocalStorage<T>(,
  const valueToStore =
  value instanceof Function ? value(storedValue) : value;
  setStoredValue(valueToStore);
- window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+ window.(localStorage).setItem(key, JSON.stringify(valueToStore));
  } catch (error) {
- (console as any).error(`Error setting localStorage key "${key}":`, error);
+ (console).error(`Error setting localStorage key "${key}":`, error);
  }
  },
  [key, storedValue]
@@ -444,7 +444,7 @@ export function useLocalStorage<T>(,
  window.localStorage.removeItem(key);
  setStoredValue(initialValue);
  } catch (error) {
- (console as any).error(`Error removing localStorage key "${key}":`, error);
+ (console).error(`Error removing localStorage key "${key}":`, error);
  }
  }, [key, initialValue]);
 
@@ -465,7 +465,7 @@ export function useIntersectionObserver(,
  }
 
  const observer = new IntersectionObserver(([entry]) => {
- if (entry as any) {
+ if (entry) {
  setIsIntersecting(entry.isIntersecting);
  }
  }, options);

@@ -117,7 +117,7 @@ return 0;
  };
 
  const handleEditSave = () => {}
- if (editingComment as any) {}
+ if (editingComment) {}
  onEditSave(editingComment.id, editText, editingComment.parentId);
  setEditText('');
  };
@@ -129,57 +129,52 @@ return 0;
  return (
  <div key={comment.id} className={`flex items - start space - x-2.5 ${isReply ? 'ml - 8' : ''}`}>
  <img />
- <div className="flex - grow min - w-0">
- <div className="flex items - center space - x-1.5 mb - 1">
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"fle}x - grow min - w-0">
+ <div className={"fle}x items - center space - x-1.5 mb - 1">
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {comment.userName}
 
- <span className="text - xs text - neutral - 500 dark:text - neutral - 400">
+ <span className={"tex}t - xs text - neutral - 500 dark:text - neutral - 400">
  {comment.timestamp}
 
  {comment.isEdited && (}
- <span className="text - xs text - neutral - 400 dark:text - neutral - 500">(edited)</span>
+ <span className={"tex}t - xs text - neutral - 400 dark:text - neutral - 500">(edited)</span>
  )}
 
 
  {isEditing ? (}
- <div className="space - y-2">
- <textarea
-
-
-
+ <div className={"spac}e - y-2">
+ <textarea>
  rows={3}
  maxLength={maxCommentLength}
  />
- <div className="flex justify - between items - center">
- <span className={`text - xs ${}
+ <div className={"fle}x justify - between items - center">
+ <span className={`text - xs ${}>
  editText.length > maxCommentLength
  ? 'text - red - 500 dark:text - red - 400'
  : 'text - neutral - 500 dark:text - neutral - 400'
  }`}>
  {editText.length}/{maxCommentLength}
 
- <div className="space - x-2">
+ <div className={"spac}e - x-2">
  <button />
- <span className="text - sky - 600 dark:text - sky - 400 font - medium">@{comment.replyTo} </span>
+ <span className={"tex}t - sky - 600 dark:text - sky - 400 font - medium">@{comment.replyTo} </span>
  )}
  {comment.commentText}
 
 
- <div className="flex items - center space - x-4 text - xs text - neutral - 500 dark:text - neutral - 400">
- <div className="flex items - center space - x-3">
- <div className="relative">
+ <div className={"fle}x items - center space - x-4 text - xs text - neutral - 500 dark:text - neutral - 400">
+ <div className={"fle}x items - center space - x-3">
+ <div className={"relative}">
  {comment.userName === 'You' && (}
  <button />
  )}
  {isMenuOpen && (}
- <div className="absolute top - full left - 0 mt - 1 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 10 py - 1 min - w-[120px]">
- <button />
- >
+ <div className={"absolut}e top - full left - 0 mt - 1 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 10 py - 1 min - w-[120px]">
+ <button/>
  Edit
 
- <button />
- >
+ <button/>
  Delete
 
 
@@ -193,7 +188,7 @@ return 0;
  try {}
  onToggleLikeDislike(comment.id, comment.parentId, 'like');
  } catch (error) {}
- (console as any).error('Error toggling like:', error);
+ (console).error('Error toggling like:', error);
  }
  }
 
@@ -205,10 +200,10 @@ return 0;
 
 
  >
- <ThumbsUpIcon className=""
+ <ThumbsUpIcon className="">
  }`}/>
  {comment.likes > 0 && (}
- <span className="text - xs font - medium">{comment.likes}</span>
+ <span className={"tex}t - xs font - medium">{comment.likes}</span>
  )}
 
 
@@ -218,7 +213,7 @@ return 0;
  try {}
  onToggleLikeDislike(comment.id, comment.parentId, 'dislike');
  } catch (error) {}
- (console as any).error('Error toggling dislike:', error);
+ (console).error('Error toggling dislike:', error);
  }
  }
 
@@ -230,7 +225,7 @@ return 0;
 
 
  >
- <ThumbsDownIcon className=""
+ <ThumbsDownIcon className="">
  }`}/>
 
 
@@ -250,10 +245,10 @@ return 0;
 
  {/* Reply Input */}
  {replyingToCommentId === comment.id && !isReply && (}
- <div className="flex items - start space - x-2.5 mt - 3">
+ <div className={"fle}x items - start space - x-2.5 mt - 3">
  <img />
- <div className="flex - grow">
- <input
+ <div className={"fle}x - grow">
+ <input>
  ref={replyInputRef}
 
 
@@ -262,15 +257,15 @@ return 0;
 
  maxLength={maxCommentLength + 20}
  />
- <div className="flex justify - between items - center mt - 1.5">
- <span className={`text - xs ${}
+ <div className={"fle}x justify - between items - center mt - 1.5">
+ <span className={`text - xs ${}>
  currentReplyText.length > maxCommentLength
  ? 'text - red - 500 dark:text - red - 400'
  : 'text - neutral - 500 dark:text - neutral - 400'
  }`}>
  {currentReplyText.length}/{maxCommentLength}
 
- <div className="space - x-2">
+ <div className={"spac}e - x-2">
  <button />
  onSetReplyingTo(null);
  onSetCurrentReplyText('');
@@ -279,8 +274,7 @@ return 0;
  >
  Cancel
 
- <button />
- >
+ <button/>
  Reply
 
 
@@ -291,13 +285,13 @@ return 0;
 
  {/* Replies */}
  {!isReply && comment.replies && comment.replies.length > 0 && (}
- <div className="mt - 3">
+ <div className={"m}t - 3">
  <button />
  }
  {expandedReplies[comment.id] ? 'Hide' : 'View'} {comment.replyCount} repl{comment.replyCount === 1 ? 'y' : 'ies'}
 
  {expandedReplies[comment.id] && (}
- <div className="space - y-3 pt - 2">
+ <div className={"spac}e - y-3 pt - 2">
  {comment.replies}
  .sort((a,
  b) => parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp))
@@ -313,13 +307,13 @@ return 0;
  };
 
  return (
- <div className="mt - 6">
+ <div className={"m}t - 6">
  {/* Comments Header */}
- <div className="flex items - center justify - between mb - 3">
- <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
+ <div className={"fle}x items - center justify - between mb - 3">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
  {commentCount} Comments
 
- <div className="flex items - center space - x-2 text - sm">
+ <div className={"fle}x items - center space - x-2 text - sm">
  <button />
  commentSortOrder === 'top'
  ? 'bg - neutral - 200 dark:bg - neutral - 700 font - medium'
@@ -340,8 +334,8 @@ return 0;
 
 
  {/* Add Comment Form */}
- <div className="mb - 6">
- <AddCommentForm
+ <div className={"m}b - 6">
+ <AddCommentForm>
  currentUserAvatarUrl="https://picsum.photos / seed / currentUserComment / 40 / 40"
  onCommentSubmit={onCommentSubmit}
  maxCommentLength={maxCommentLength} />
@@ -349,7 +343,7 @@ return 0;
 
 
  {/* Comments List */}
- <div className="space - y-5">
+ <div className={"spac}e - y-5">
  {sortedComments.map((comment) => renderComment(comment))}
 
 

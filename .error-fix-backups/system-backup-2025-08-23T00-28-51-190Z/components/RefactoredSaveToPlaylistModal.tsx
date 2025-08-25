@@ -72,7 +72,7 @@ return;
  await onSaveToPlaylist(videoId, selectedPlaylistId);
  onClose();
  } catch (error) {
- (console as any).error('Error saving to playlist:', error);
+ (console).error('Error saving to playlist:', error);
  };
 
  // Handle creating new playlist
@@ -82,7 +82,7 @@ return;
  await onSaveToPlaylist(videoId, newPlaylist.id);
  onClose();
  } catch (error) {
- (console as any).error('Error creating playlist:', error);
+ (console).error('Error creating playlist:', error);
  };
 
  // Form fields for creating new playlist
@@ -108,10 +108,10 @@ return 'Playlist name must be less than 100 characters';
  rows: 3 }];
 
  const modalFooter = (
- <div className="flex gap-3">
+ <div className={"fle}x gap-3">
  <button />
 // FIXED:  onClick={(e) => onClose(e)}
-// FIXED:  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+// FIXED:  className={"px}-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
  >
  Cancel
 // FIXED:  </button>
@@ -120,7 +120,7 @@ return 'Playlist name must be less than 100 characters';
  <>
  <button />
 // FIXED:  onClick={() => setShowCreateForm(true)}
-// FIXED:  className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+// FIXED:  className={"px}-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
  >
  Create New Playlist
 // FIXED:  </button>
@@ -128,7 +128,7 @@ return 'Playlist name must be less than 100 characters';
  <button />
 // FIXED:  onClick={(e) => handleSaveToExisting(e)}
 // FIXED:  disabled={!selectedPlaylistId || saveLoading}
-// FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+// FIXED:  className={"px}-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
  >
  {saveLoading ? 'Saving...' : 'Save to Playlist'}
 // FIXED:  </button>
@@ -138,23 +138,22 @@ return 'Playlist name must be less than 100 characters';
  );
 
  return (
- <BaseModal
+ <BaseModal>
  isOpen={isOpen}
  onClose={onClose}
  title={showCreateForm ? 'Create New Playlist' : 'Save to Playlist'}
  size="md"
- footer={!showCreateForm ? modalFooter : undefined} />
- >
+ footer={!showCreateForm ? modalFooter : undefined}/>
  {/* Error messages */}
  {saveError && (
- <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
- <p className="text-red-600 dark:text-red-400 text-sm">{saveError}</p>
+ <div className={"mb}-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+ <p className={"text}-red-600 dark:text-red-400 text-sm">{saveError}</p>
 // FIXED:  </div>
  )}
 
  {showCreateForm ? (
  /* Create new playlist form */
- <BaseForm
+ <BaseForm>
  fields={createPlaylistFields} />
 // FIXED:  onSubmit={(e) => handleCreatePlaylist(e)}
  loading={createLoading}
@@ -165,51 +164,50 @@ return 'Playlist name must be less than 100 characters';
  />
  ) : (
  /* Select existing playlist */
- <div className="space-y-4">
+ <div className={"space}-y-4">
  <div>
- <label htmlFor="select-playlist" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="select-playlist" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Select a playlist
 // FIXED:  </label>
 
  {existingPlaylists.length === 0 ? (
- <div className="text-center py-8">
- <p className="text-gray-500 dark:text-gray-400 mb-4">
+ <div className={"text}-center py-8">
+ <p className={"text}-gray-500 dark:text-gray-400 mb-4">
  You don't have any playlists yet.
 // FIXED:  </p>
  <button />
 // FIXED:  onClick={() => setShowCreateForm(true)}
-// FIXED:  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+// FIXED:  className={"px}-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
  >
  Create Your First Playlist
 // FIXED:  </button>
 // FIXED:  </div>
  ) : (
- <div className="space-y-2 max-h-60 overflow-y-auto">
+ <div className={"space}-y-2 max-h-60 overflow-y-auto">
  {existingPlaylists.map((playlist) => (
- <label
+ <label>
  key={playlist.id}
 // FIXED:  htmlFor={`playlist-${playlist.id}`}
-// FIXED:  className="flex items-center p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors" />
- >
- <input
+// FIXED:  className={"fle}x items-center p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"/>
+ <input>
 // FIXED:  id={`playlist-${playlist.id}`}
 // FIXED:  type="radio"
 // FIXED:  name="playlist"
 // FIXED:  value={playlist.id}
 // FIXED:  checked={selectedPlaylistId === playlist.id} />
 // FIXED:  onChange={(e) => setSelectedPlaylistId(e.target.value)}
-// FIXED:  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+// FIXED:  className={"w}-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
  />
- <div className="ml-3 flex-1">
- <div className="text-sm font-medium text-gray-900 dark:text-white">
+ <div className={"ml}-3 flex-1">
+ <div className={"text}-sm font-medium text-gray-900 dark:text-white">
  {playlist.title}
 // FIXED:  </div>
  {playlist.description && (
- <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+ <div className={"text}-xs text-gray-500 dark:text-gray-400 mt-1">
  {playlist.description}
 // FIXED:  </div>
  )}
- <div className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+ <div className={"text}-xs text-gray-400 dark:text-gray-500 mt-1">
  {playlist.videoCount} videos
 // FIXED:  </div>
 // FIXED:  </div>

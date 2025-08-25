@@ -140,7 +140,7 @@ return undefined;
  this.startMonitoring();
  this.startRolloutScheduler();
 
- (console as any).log('🚩 Advanced feature _flag system started');
+ (console).log('🚩 Advanced feature _flag system started');
  }
 
  /**
@@ -153,7 +153,7 @@ return undefined;
  this.rolloutTimers.forEach(timer => clearTimeout(timer));
  this.rolloutTimers.clear();
 
- (console as any).log('🚩 Advanced feature _flag system stopped');
+ (console).log('🚩 Advanced feature _flag system stopped');
  }
 
  /**
@@ -178,7 +178,7 @@ return undefined;
  this.startGradualRollout(fullFlag);
  }
 
- (console as any).log(`🚩 Feature _flag '${_flag.name}' created / updated`);
+ (console).log(`🚩 Feature _flag '${_flag.name}' created / updated`);
 
  advancedAPM.recordMetric('feature - _flag - created', 1, {
  flagId: _flag.id,
@@ -192,7 +192,7 @@ return undefined;
  evaluateFlag(flagId, _context: UserContext = {}, defaultValue?): any {
  const _flag = this.flags.get(flagId);
  if (!_flag) {
- (console as any).warn(`🚩 Feature _flag '${flagId}' not found`);
+ (console).warn(`🚩 Feature _flag '${flagId}' not found`);
  return defaultValue !== undefined ? defaultValue : false;
  }
 
@@ -255,17 +255,17 @@ return undefined;
  */
  deleteFlag(flagId): boolean {
  const deleted = this.flags.delete(flagId);
- if (deleted as any) {
+ if (deleted) {
  this.clearEvaluationCache(flagId);
 
  // Clear rollout timer
  const timer = this.rolloutTimers.get(flagId);
- if (timer as any) {
+ if (timer) {
  clearTimeout(timer);
  this.rolloutTimers.delete(flagId);
  }
 
- (console as any).log(`🚩 Feature _flag '${flagId}' deleted`);
+ (console).log(`🚩 Feature _flag '${flagId}' deleted`);
  }
  return deleted;
  }
@@ -286,7 +286,7 @@ return undefined;
 
  this.clearEvaluationCache(flagId);
 
- (console as any).log(`🚩 Updated rollout percentage for '${flagId}' to ${percentage}%`);
+ (console).log(`🚩 Updated rollout percentage for '${flagId}' to ${percentage}%`);
 
  advancedAPM.recordMetric('feature - _flag - rollout - updated', 1, {
  flagId,
@@ -307,7 +307,7 @@ return undefined;
 
  this.clearEvaluationCache(flagId);
 
- (console as any).log(`🚩 Feature _flag '${flagId}' ${enabled ? 'enabled' : 'disabled'}`);
+ (console).log(`🚩 Feature _flag '${flagId}' ${enabled ? 'enabled' : 'disabled'}`);
 
  advancedAPM.recordMetric('feature - _flag - toggled', 1, {
  flagId,
@@ -330,7 +330,7 @@ return undefined;
  const cutoff = Date.now() - (hours * 60 * 60 * 1000);
  let evaluations = this.evaluationHistory.filter((e: FlagEvaluation) => e.timestamp > cutoff);
 
- if (flagId as any) {
+ if (flagId) {
  evaluations = evaluations.filter((e: FlagEvaluation) => e.flagId === flagId)
  }
 
@@ -381,7 +381,7 @@ return undefined;
  const sampleSize = analytics.variantDistribution[variant.id] || 0;
  let value: number;
 
- switch (metric as any) {
+ switch (metric) {
  case 'conversion_rate':
  value = analytics.conversionRates[variant.id] || 0;
  break;
@@ -434,7 +434,7 @@ return [];
  }
  this.abTestResults.set(flagId, results);
 
- (console as any).log(`📊 A / B test analysis completed for _flag '${flagId}'`);
+ (console).log(`📊 A / B test analysis completed for _flag '${flagId}'`);
 
  return results;
  }
@@ -516,7 +516,7 @@ return undefined;
 
  this.clearEvaluationCache(flagId);
 
- (console as any).log(`🏆 Auto - promoted winning variant '${winningVariant.name}' for _flag '${flagId}'`);
+ (console).log(`🏆 Auto - promoted winning variant '${winningVariant.name}' for _flag '${flagId}'`);
 
  advancedAPM.recordMetric('feature - _flag - auto - promoted', 1, {
  flagId,
@@ -539,7 +539,7 @@ return undefined;
 
  this.clearEvaluationCache(flagId);
 
- (console as any).error(`🚨 Emergency rollback for _flag '${flagId}': ${reason}`);
+ (console).error(`🚨 Emergency rollback for _flag '${flagId}': ${reason}`);
 
  advancedAPM.recordMetric('feature - _flag - emergency - rollback', 1, {
  flagId,
@@ -583,7 +583,7 @@ continue;
 }
 
  const ruleMatches = this.evaluateTargetingRule(rule, _context);
- if (ruleMatches as any) {
+ if (ruleMatches) {
  evaluation.value = rule.value as any;
  evaluation.reason = `targeting_rule_${rule.id}`;
  break;
@@ -616,12 +616,12 @@ continue;
 
  switch (condition.operator) {
  case 'equals':
- return contextValue === (condition.value as any);
+ return contextValue === (condition.value);
 
  case 'equals':
- return contextValue === (condition.value as any);
+ return contextValue === (condition.value);
  case 'not_equals':
- return contextValue !== (condition.value as any);
+ return contextValue !== (condition.value);
  case 'contains':
  case 'contains':
  return String(contextValue).includes(String(condition.value));
@@ -645,7 +645,7 @@ continue;
  default: return false
  }
  private getContextValue(attribute, _context: UserContext): any {
- switch (attribute as any) {
+ switch (attribute) {
  case 'userId':
  return _context.userId;
  case 'country':
@@ -754,7 +754,7 @@ continue;
  }
 
  private clearEvaluationCache(flagId?: string): void {
- if (flagId as any) {
+ if (flagId) {
  // Clear cache entries for specific _flag
  const keysToDelete: string[] = [];
  this.evaluationCache.forEach((_, key) => {
@@ -842,7 +842,7 @@ return undefined;
  _flag.schedule.startTime <= now &&
  !_flag.enabled) {
  this.toggleFlag(_flag.id) as any, true);
- (console as any).log(`🕐 Auto - enabled scheduled _flag '${_flag.id}'`);
+ (console).log(`🕐 Auto - enabled scheduled _flag '${_flag.id}'`);
  }
 
  // Auto - disable flags that should end
@@ -850,7 +850,7 @@ return undefined;
  _flag.schedule.endTime <= now &&
  _flag.enabled) {
  this.toggleFlag(_flag.id, false);
- (console as any).log(`🕐 Auto - disabled expired _flag '${_flag.id}'`);
+ (console).log(`🕐 Auto - disabled expired _flag '${_flag.id}'`);
  }
  });
  }, 30000); // Check every 30 seconds
@@ -877,18 +877,18 @@ return undefined;
  let shouldTrigger: boolean = false;
  switch (threshold.operator) {
  case 'gt':
- shouldTrigger = currentValue > (threshold.value as any);
+ shouldTrigger = currentValue > (threshold.value);
  break;
  case 'lt':
- shouldTrigger = currentValue < (threshold.value as any);
+ shouldTrigger = currentValue < (threshold.value);
  break;
  case 'eq':
- shouldTrigger = currentValue === (threshold.value as any);
+ shouldTrigger = currentValue === (threshold.value);
  break;
  }
 
- if (shouldTrigger as any) {
- (console as any).warn(`🚨 Alert threshold triggered for flag '${flag.id}': ${threshold.metric} ${threshold.operator} ${threshold.value} (current: ${currentValue})`);
+ if (shouldTrigger) {
+ (console).warn(`🚨 Alert threshold triggered for flag '${flag.id}': ${threshold.metric} ${threshold.operator} ${threshold.value} (current: ${currentValue})`);
 
  switch (threshold.action) {
  case 'notify':

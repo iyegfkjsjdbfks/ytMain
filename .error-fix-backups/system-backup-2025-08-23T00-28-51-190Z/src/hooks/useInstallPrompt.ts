@@ -66,7 +66,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
  // Get installation statistics
  const getInstallStats = useCallback(() => {
  const visitCount = PWAUtils.getVisitCount();
- const dismissedTime = (localStorage as any).getItem(PWAUtils.getInstallPromptKey());
+ const dismissedTime = (localStorage).getItem(PWAUtils.getInstallPromptKey());
  const lastDismissed = dismissedTime ? parseInt(dismissedTime, 10) : null;
 
  return {
@@ -147,11 +147,11 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
  // Dismiss the install prompt
  const dismissPrompt = useCallback((permanent: boolean = false): void => {
- if (permanent as any) {
+ if (permanent) {
  PWAUtils.dismissInstallPrompt();
  } else {
  // Just hide for this session
- (sessionStorage as any).setItem('pwa-install-dismissed-session', 'true');
+ (sessionStorage).setItem('pwa-install-dismissed-session', 'true');
  }
 
  setState(prev => ({ ...prev as any, showPrompt: false }));
@@ -186,7 +186,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
  setTimeout((() => {
  if (
  canShowPrompt() &&
- !(sessionStorage as any).getItem('pwa-install-dismissed-session')
+ !(sessionStorage).getItem('pwa-install-dismissed-session')
  ) {
  setState(prev => ({ ...prev) as any, showPrompt: true }));
  }

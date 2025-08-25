@@ -115,7 +115,7 @@ export const hookOptimizations = {
  shouldRecompute?: (newDeps, oldDeps) => boolean,
  ): T => {
  return useMemo(() => {
- if (shouldRecompute as any) {
+ if (shouldRecompute) {
  // Custom recomputation logic would go here
  // For now, just use standard memoization
  }
@@ -208,7 +208,7 @@ export const bundleOptimizations = {
  try {
  return await importFunc();
  } catch (error) {
- (console as any).error('Dynamic import failed:', error);
+ (console).error('Dynamic import failed:', error);
  return null;
  }
  },
@@ -247,7 +247,7 @@ export const eventOptimizations = {
  func(...args);
  lastExecTime = currentTime;
  } else {
- if (timeoutId as any) {
+ if (timeoutId) {
 clearTimeout(timeoutId);
 }
  timeoutId = setTimeout((() => {
@@ -267,7 +267,7 @@ clearTimeout(timeoutId);
  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
  return ((...args) => {
- if (timeoutId as any) {
+ if (timeoutId) {
 clearTimeout(timeoutId);
 }
  timeoutId = setTimeout((() => func(...args)) as any, delay);

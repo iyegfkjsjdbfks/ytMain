@@ -41,7 +41,7 @@ describe('UnifiedDataService', () => {
  });
 
  it('should allow custom configuration', () => {
- const customService = new (unifiedDataService.constructor as any)({
+ const customService = new (unifiedDataService.constructor)({
  sources: { local: false, youtube: true },
  limits: { youtube: 50 },
  mixing: { strategy: 'source-priority' } });
@@ -205,8 +205,8 @@ describe('UnifiedDataService', () => {
  const mockVideo = { id: 'test-video', title: 'Test Video' };
 
  beforeEach(() => {
- mockVideoServiceModule.getVideoById.mockResolvedValue(mockVideo as any);
- mockMetadataService.normalizeLocalVideo.mockReturnValue(mockVideo as any);
+ mockVideoServiceModule.getVideoById.mockResolvedValue(mockVideo);
+ mockMetadataService.normalizeLocalVideo.mockReturnValue(mockVideo);
  });
 
  it('should fetch video from local source first', async (): Promise<void> => {
@@ -219,7 +219,7 @@ describe('UnifiedDataService', () => {
  it('should fallback to YouTube if local video not found', async (): Promise<void> => {
  mockVideoServiceModule.getVideoById.mockResolvedValue(null);
  mockYoutubeService.fetchVideos.mockResolvedValue([mockVideo as any]);
- mockMetadataService.normalizeYouTubeVideo.mockResolvedValue(mockVideo as any);
+ mockMetadataService.normalizeYouTubeVideo.mockResolvedValue(mockVideo);
 
  const result = await service.getVideoById('test-video');
 
@@ -262,8 +262,8 @@ describe('UnifiedDataService', () => {
  const mockChannel = { id: 'test-channel', name: 'Test Channel' };
 
  beforeEach(() => {
- mockVideoServiceModule.getChannelById.mockResolvedValue(mockChannel as any);
- mockMetadataService.normalizeLocalChannel.mockReturnValue(mockChannel as any);
+ mockVideoServiceModule.getChannelById.mockResolvedValue(mockChannel);
+ mockMetadataService.normalizeLocalChannel.mockReturnValue(mockChannel);
  });
 
  it('should fetch channel from local source first', async (): Promise<void> => {
@@ -275,8 +275,8 @@ describe('UnifiedDataService', () => {
 
  it('should fallback to YouTube if local channel not found', async (): Promise<void> => {
  mockVideoServiceModule.getChannelById.mockResolvedValue(null);
- mockYoutubeService.fetchChannel.mockResolvedValue(mockChannel as any);
- mockMetadataService.normalizeYouTubeChannel.mockReturnValue(mockChannel as any);
+ mockYoutubeService.fetchChannel.mockResolvedValue(mockChannel);
+ mockMetadataService.normalizeYouTubeChannel.mockReturnValue(mockChannel);
 
  const result = await service.getChannelById('test-channel');
 
@@ -318,7 +318,7 @@ describe('UnifiedDataService', () => {
  service.updateConfig({ mixing: { strategy: 'round-robin' } });
 
  // Use private method through service instance
- const mixedVideos = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
+ const mixedVideos = (service).mixVideoResults(localVideos, youtubeVideos, 4);
 
  expect(mixedVideos).toHaveLength(4);
  expect(mixedVideos[0].id).toBe('local-1');
@@ -333,7 +333,7 @@ describe('UnifiedDataService', () => {
  strategy: 'source-priority',
  sourcePriority: ['local', 'youtube'] } });
 
- const mixedVideos = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
+ const mixedVideos = (service).mixVideoResults(localVideos, youtubeVideos, 4);
 
  expect(mixedVideos).toHaveLength(4);
  expect(mixedVideos[0].id).toBe('local-1');
@@ -351,7 +351,7 @@ describe('UnifiedDataService', () => {
  { ...youtubeVideos[0], likes: 150, commentCount: 15 },
  { ...youtubeVideos[1], likes: 250, commentCount: 25 }];
 
- const mixedVideos = (service as any).mixVideoResults(
+ const mixedVideos = (service).mixVideoResults(
  videosWithEngagement.slice(0, 2),
  videosWithEngagement.slice(2),
  4,
@@ -364,40 +364,40 @@ describe('UnifiedDataService', () => {
 
  describe('Cache Management', () => {
  it('should clear all cache', () => {
- (service as any).setCachedData = vi.fn();
+ (service).setCachedData = vi.fn();
  service.clearCache();
 
  // Test that cache is cleared
- const result = (service as any).getCachedData('test-key');
+ const result = (service).getCachedData('test-key');
  expect(result).toBeNull();
  });
 
  it('should clear cache by pattern', () => {
  // Add some test data to cache
- (service as any).setCachedData('video:123', { id: '123' });
- (service as any).setCachedData('channel:456', { id: '456' });
- (service as any).setCachedData('trending:data', { data: [] });
+ (service).setCachedData('video:123', { id: '123' });
+ (service).setCachedData('channel:456', { id: '456' });
+ (service).setCachedData('trending:data', { data: [] });
 
  service.clearCache('video:');
 
  // Video cache should be cleared, others should remain
- expect((service as any).getCachedData('video:123')).toBeNull();
+ expect((service).getCachedData('video:123')).toBeNull();
  // Note: We can't easily test that others remain without exposing cache internals
  });
 
  it('should respect cache TTL', async (): Promise<void> => {
  service.updateConfig({ caching: { enabled: true, ttl: 100 } });
 
- (service as any).setCachedData('test-key', { data: 'test' });
+ (service).setCachedData('test-key', { data: 'test' });
 
  // Should get cached data immediately
- expect((service as any).getCachedData('test-key')).toEqual({ data: 'test' });
+ expect((service).getCachedData('test-key')).toEqual({ data: 'test' });
 
  // Wait for cache to expire
  await new Promise(resolve => setTimeout((resolve) as any, 150));
 
  // Should return null after expiry
- expect((service as any).getCachedData('test-key')).toBeNull();
+ expect((service).getCachedData('test-key')).toBeNull();
  });
  });
 });

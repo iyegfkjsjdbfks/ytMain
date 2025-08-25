@@ -1,7 +1,7 @@
 // errorUtils - Simple Implementation;
 export const errorUtils = {
   enabled: true,
-  process: (data: any) => data, 
+  process: (data: unknown) => data, 
 };
 
 export default errorUtils;

@@ -42,7 +42,7 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
  }, [isVisible]);
 
  const getPositionClasses = () => {}
- switch (position as any) {}
+ switch (position) {}
  case 'top - left':
  return 'top - 4 left - 4';
  case 'bottom - left':
@@ -53,7 +53,7 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
  };
 
  const getTypeColor = (type: any) => {}
- switch (type as any) {}
+ switch (type) {}
  case 'render':
  return 'text - blue - 600';
  case 'api':
@@ -77,43 +77,43 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
 
  return (
  <div className={`fixed ${getPositionClasses()} z - 50 font - mono text - xs`}>
- <div className="bg - black bg - opacity - 90 text - white rounded - lg p - 3 min - w-64 shadow - lg">
+ <div className={"b}g - black bg - opacity - 90 text - white rounded - lg p - 3 min - w-64 shadow - lg">
  {/* Header */}
- <div className="flex items - center justify - between mb - 2">
- <h3 className="font - semibold">Performance Monitor</h3>
+ <div className={"fle}x items - center justify - between mb - 2">
+ <h3 className={"fon}t - semibold">Performance Monitor</h3>
  <button />
 // FIXED:  onClick={() => setIsExpanded(!isExpanded: React.MouseEvent)}
-// FIXED:  className="text - gray - 300 hover:text - white"
+// FIXED:  className={"tex}t - gray - 300 hover:text - white"
  >
  {isExpanded ? '−' : '+'}
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Summary Stats */}
- <div className="grid grid - cols - 2 gap - 2 mb - 3 text - xs">
- <div className="bg - blue - 900 bg - opacity - 50 p - 2 rounded">
- <div className="text - blue - 300">Avg Render</div>
-<div className="font - bold">{averageRenderTime.toFixed(1)}ms</div>
+ <div className={"gri}d grid - cols - 2 gap - 2 mb - 3 text - xs">
+ <div className={"b}g - blue - 900 bg - opacity - 50 p - 2 rounded">
+ <div className={"tex}t - blue - 300">Avg Render</div>
+<div className={"fon}t - bold">{averageRenderTime.toFixed(1)}ms</div>
 // FIXED:  </div>
- <div className="bg - green - 900 bg - opacity - 50 p - 2 rounded">
- <div className="text - green - 300">API Calls</div>
-<div className="font - bold">{apiCallsCount}</div>
+ <div className={"b}g - green - 900 bg - opacity - 50 p - 2 rounded">
+ <div className={"tex}t - green - 300">API Calls</div>
+<div className={"fon}t - bold">{apiCallsCount}</div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Detailed Metrics */}
  {isExpanded && (}
- <div className="space - y-1 max - h-64 overflow - y-auto">
- <div className="font - semibold mb - 2 text - gray - 300">Recent Metrics:</div>
+ <div className={"spac}e - y-1 max - h-64 overflow - y-auto">
+ <div className={"fon}t - semibold mb - 2 text - gray - 300">Recent Metrics:</div>
  {metrics.length === 0 ? (}
- <div className="text - gray - 400">No metrics available</div>
+ <div className={"tex}t - gray - 400">No metrics available</div>
  ) : (
  metrics.slice().reverse().map((metric, index) => (
- <div key={index} className="flex justify - between items - center py - 1 border - b border - gray - 700">
+ <div key={index} className={"fle}x justify - between items - center py - 1 border - b border - gray - 700">
  <span className={`${getTypeColor(metric.type)} truncate max - w-32`}>
  {metric.name}
 // FIXED:  </span>
- <span className="text - white font - mono">
+ <span className={"tex}t - white font - mono">
  {metric.value.toFixed(1)}ms
 // FIXED:  </span>
 // FIXED:  </div>
@@ -124,11 +124,11 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
 
  {/* Performance Tips */}
  {isExpanded && averageRenderTime > 100 && (}
- <div className="mt - 3 p - 2 bg - yellow - 900 bg - opacity - 50 rounded">
- <div className="text - yellow - 300 font - semibold">⚠️ Performance Warning</div>
- <div className="text - yellow - 200 text - xs">
+ <div className={"m}t - 3 p - 2 bg - yellow - 900 bg - opacity - 50 rounded">
+ <div className={"tex}t - yellow - 300 font - semibold">⚠️ Performance Warning</div>
+ <div className={"tex}t - yellow - 200 text - xs">
  Average render time is high. Consider:
- <ul className="list - disc list - inside mt - 1">
+ <ul className={"lis}t - disc list - inside mt - 1">
  <li > Adding React.memo to components</li>
  <li > Using useCallback for event handlers</li>
  <li > Implementing virtual scrolling</li>
@@ -138,19 +138,19 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({}
  )}
 
  {/* Controls */}
- <div className="flex justify - between mt - 3 pt - 2 border - t border - gray - 700">
+ <div className={"fle}x justify - between mt - 3 pt - 2 border - t border - gray - 700">
  <button />
 // FIXED:  onClick={() => performanceMonitor.clearMetrics()}
-// FIXED:  className="text - xs text - red - 400 hover:text - red - 300"
+// FIXED:  className={"tex}t - xs text - red - 400 hover:text - red - 300"
  >
  Clear
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => {}
  const metrics = performanceMonitor.getMetrics();
- (console as any).table(metrics);
+ (console).table(metrics);
  }
-// FIXED:  className="text - xs text - blue - 400 hover:text - blue - 300"
+// FIXED:  className={"tex}t - xs text - blue - 400 hover:text - blue - 300"
  >
  Log Report
 // FIXED:  </button>

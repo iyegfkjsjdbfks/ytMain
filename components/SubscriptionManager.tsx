@@ -26,9 +26,9 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
 
  useEffect(() => {}
  // Load subscription status from localStorage;
- const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
+ const subscriptions = JSON.parse((localStorage).getItem('youtubeCloneSubscriptions_v1') || '{}');
  const channelData = subscriptions.channelId;
- if (channelData as any) {}
+ if (channelData) {}
  setIsSubscribed(channelData.isSubscribed);
  setNotificationsEnabled(channelData.notificationsEnabled || false);
  }
@@ -37,10 +37,10 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
  const handleSubscribe = async (): Promise<any> < void> => {}
  setIsLoading(true);
  try {}
- const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
+ const subscriptions = JSON.parse((localStorage).getItem('youtubeCloneSubscriptions_v1') || '{}');
  const newSubscriptionStatus = !isSubscribed;
 
- if (newSubscriptionStatus as any) {}
+ if (newSubscriptionStatus) {}
  subscriptions.channelId = {}
  channelName,
  channelAvatarUrl,
@@ -54,46 +54,46 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
  setNotificationsEnabled(false);
  }
 
- (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
+ (localStorage).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
  setIsSubscribed(newSubscriptionStatus);
  onSubscriptionChange?.(newSubscriptionStatus);
 
  // Simulate API delay;
  await new Promise<any>(resolve => setTimeout((resolve) as any, 500));
  } catch (error) {}
- (console as any).error('Error updating subscription:', error);
+ (console).error('Error updating subscription:', error);
  } finally {}
  setIsLoading(false);
  };
 
  const handleNotificationToggle = async (enabled): Promise<any> < any> => {}
  try {}
- const subscriptions = JSON.parse((localStorage as any).getItem('youtubeCloneSubscriptions_v1') || '{}');
+ const subscriptions = JSON.parse((localStorage).getItem('youtubeCloneSubscriptions_v1') || '{}');
  if (subscriptions.channelId) {}
  subscriptions.channelId.notificationsEnabled = enabled;
- (localStorage as any).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
+ (localStorage).setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
  setNotificationsEnabled(enabled);
  }
  } catch (error) {}
- (console as any).error('Error updating notification settings:', error);
+ (console).error('Error updating notification settings:', error);
  }
  setShowNotificationMenu(false);
  };
 
  return (
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center space - x - 2">
  {isSubscribed ? (}
- <div className="flex items - center space - x - 1">
+ <div className={"fle}x items - center space - x - 1">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSubscribe(e)}
 // FIXED:  disabled={isLoading}
-// FIXED:  className="flex items - center space - x - 2 bg - neutral - 100 dark:bg - neutral - 800 hover:bg - neutral - 200 dark:hover:bg - neutral - 700 text - neutral - 800 dark:text - neutral - 200 px - 4 py - 2 rounded - full text - sm font - medium transition - colors disabled:opacity - 50"
+// FIXED:  className={"fle}x items - center space - x - 2 bg - neutral - 100 dark:bg - neutral - 800 hover:bg - neutral - 200 dark:hover:bg - neutral - 700 text - neutral - 800 dark:text - neutral - 200 px - 4 py - 2 rounded - full text - sm font - medium transition - colors disabled:opacity - 50"
  >
  <CheckIcon className="w - 4 h - 4" />
  <span > Subscribed</span>
 // FIXED:  </button>
 
- <div className="relative">
+ <div className={"relative}">
  <button />
 // FIXED:  onClick={() => setShowNotificationMenu(!showNotificationMenu: React.MouseEvent)}
 // FIXED:  className={`p - 2 rounded - full transition - colors ${}
@@ -111,14 +111,14 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
 // FIXED:  </button>
 
  {showNotificationMenu && (}
- <div className="absolute top - full right - 0 mt - 1 w - 48 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 50 py - 1">
+ <div className={"absolut}e top - full right - 0 mt - 1 w - 48 bg - white dark:bg - neutral - 800 border border - neutral - 200 dark:border - neutral - 700 rounded - lg shadow - lg z - 50 py - 1">
  <button />
 // FIXED:  onClick={() => handleNotificationToggle(true: React.MouseEvent)}
 // FIXED:  className={`w - full text - left px - 3 py - 2 text - sm hover:bg - neutral - 100 dark:hover:bg - neutral - 700 ${}
  notificationsEnabled ? 'text - neutral - 900 dark:text - neutral - 100 font - medium' : 'text - neutral - 600 dark:text - neutral - 400'
  }`}
  >
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center space - x - 2">
  <BellIconSolid className="w - 4 h - 4" />
  <span > All notifications</span>
 // FIXED:  </div>
@@ -129,7 +129,7 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
  !notificationsEnabled ? 'text - neutral - 900 dark:text - neutral - 100 font - medium' : 'text - neutral - 600 dark:text - neutral - 400'
  }`}
  >
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center space - x - 2">
  <BellIcon className="w - 4 h - 4" />
  <span > None</span>
 // FIXED:  </div>
@@ -142,7 +142,7 @@ const SubscriptionManager: React.FC < SubscriptionManagerProps> = ({}
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSubscribe(e)}
 // FIXED:  disabled={isLoading}
-// FIXED:  className="flex items - center space - x - 2 bg - red - 600 hover:bg - red - 700 text - white px - 4 py - 2 rounded - full text - sm font - medium transition - colors disabled:opacity - 50"
+// FIXED:  className={"fle}x items - center space - x - 2 bg - red - 600 hover:bg - red - 700 text - white px - 4 py - 2 rounded - full text - sm font - medium transition - colors disabled:opacity - 50"
  >
  <PlusIcon className="w - 4 h - 4" />
  <span > Subscribe</span>

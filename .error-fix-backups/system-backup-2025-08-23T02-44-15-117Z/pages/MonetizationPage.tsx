@@ -234,14 +234,14 @@ return { labels: [],}
  if (loading || !metrics) {}
  return (
  <div className="p - 6 space - y - 6">
- <div className="animate - pulse">
+ <div className={"animat}e - pulse">
  <div className="h - 8 bg - neutral - 200 dark:bg - neutral - 700 rounded w - 1/4 mb - 6" />
- <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6 mb - 6">
  {Array<any>.from({ length: 4 }).map((_, i) => (
  <div key={i} className="h - 32 bg - neutral - 200 dark:bg - neutral - 700 rounded - lg" />
  ))}
 // FIXED:  </div>
- <div className="grid grid - cols - 1 lg:grid - cols - 2 gap - 6">
+ <div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">
  <div className="h - 96 bg - neutral - 200 dark:bg - neutral - 700 rounded - lg" />
  <div className="h - 96 bg - neutral - 200 dark:bg - neutral - 700 rounded - lg" />
 // FIXED:  </div>
@@ -253,15 +253,15 @@ return { labels: [],}
  return (
  <div className="p - 6 space - y - 6">
  {/* Header */}
- <div className="flex flex - col sm:flex - row sm:items - center sm:justify - between">
- <h1 className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mb - 4 sm:mb - 0">
+ <div className={"fle}x flex - col sm:flex - row sm:items - center sm:justify - between">
+ <h1 className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mb - 4 sm:mb - 0">
  Monetization Dashboard
 // FIXED:  </h1>
- <div className="flex items - center space - x - 4">
- <select
+ <div className={"fle}x items - center space - x - 4">
+ <select>
 // FIXED:  value={timeRange} />
-// FIXED:  onChange={(e: React.ChangeEvent) => setTimeRange(e.target.value as any)}
-// FIXED:  className="px - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent"
+// FIXED:  onChange={(e: React.ChangeEvent) => setTimeRange(e.target.value)}
+// FIXED:  className={"p}x - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent"
  >
  <option value="7d">Last 7 days</option>
  <option value="30d">Last 30 days</option>
@@ -272,15 +272,15 @@ return { labels: [],}
 // FIXED:  </div>
 
  {/* Key Metrics */}
- <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center justify - between">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
  <div>
- <p className="text - sm font - medium text - neutral - 600 dark:text - neutral - 400">Total Revenue</p>
- <p className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
+ <p className={"tex}t - sm font - medium text - neutral - 600 dark:text - neutral - 400">Total Revenue</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
  {formatCurrency(metrics.totalRevenue)}
 // FIXED:  </p>
- <p className="text - sm text - green - 600 dark:text - green - 400 flex items - center mt - 1">
+ <p className={"tex}t - sm text - green - 600 dark:text - green - 400 flex items - center mt - 1">
  <ArrowTrendingUpIcon className="w - 4 h - 4 mr - 1" />
  +{metrics.revenueGrowth.toFixed(1)}%
 // FIXED:  </p>
@@ -291,14 +291,14 @@ return { labels: [],}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center justify - between">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
  <div>
- <p className="text - sm font - medium text - neutral - 600 dark:text - neutral - 400">RPM (Revenue per 1K views)</p>
- <p className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
+ <p className={"tex}t - sm font - medium text - neutral - 600 dark:text - neutral - 400">RPM (Revenue per 1K views)</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
  {formatCurrency(metrics.rpm)}
 // FIXED:  </p>
- <p className="text - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">
+ <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">
  {formatNumber(metrics.adImpressions)} impressions
 // FIXED:  </p>
 // FIXED:  </div>
@@ -308,14 +308,14 @@ return { labels: [],}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center justify - between">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
  <div>
- <p className="text - sm font - medium text - neutral - 600 dark:text - neutral - 400">Channel Members</p>
- <p className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
+ <p className={"tex}t - sm font - medium text - neutral - 600 dark:text - neutral - 400">Channel Members</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
  {formatNumber(metrics.memberCount)}
 // FIXED:  </p>
- <p className="text - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">
+ <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">
  {formatCurrency(metrics.membershipRevenue)} this period
 // FIXED:  </p>
 // FIXED:  </div>
@@ -325,14 +325,14 @@ return { labels: [],}
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center justify - between">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
  <div>
- <p className="text - sm font - medium text - neutral - 600 dark:text - neutral - 400">Super Chats</p>
- <p className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
+ <p className={"tex}t - sm font - medium text - neutral - 600 dark:text - neutral - 400">Super Chats</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50">
  {formatNumber(metrics.superChatCount)}
 // FIXED:  </p>
- <p className="text - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">
+ <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">
  {formatCurrency(metrics.superChatRevenue)} earned
 // FIXED:  </p>
 // FIXED:  </div>
@@ -344,17 +344,17 @@ return { labels: [],}
 // FIXED:  </div>
 
  {/* Revenue Charts */}
- <div className="grid grid - cols - 1 lg:grid - cols - 2 gap - 6">
+ <div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">
  {/* Revenue Over Time */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center justify - between mb - 6">
- <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between mb - 6">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50">
  Revenue Over Time
 // FIXED:  </h2>
- <select
+ <select>
 // FIXED:  value={selectedMetric} />
-// FIXED:  onChange={(e: React.ChangeEvent) => setSelectedMetric(e.target.value as any)}
-// FIXED:  className="px - 3 py - 1 text - sm border border - neutral - 300 dark:border - neutral - 600 rounded bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50"
+// FIXED:  onChange={(e: React.ChangeEvent) => setSelectedMetric(e.target.value)}
+// FIXED:  className={"p}x - 3 py - 1 text - sm border border - neutral - 300 dark:border - neutral - 600 rounded bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50"
  >
  <option value="revenue">Revenue</option>
  <option value="rpm">RPM</option>
@@ -362,19 +362,19 @@ return { labels: [],}
 // FIXED:  </select>
 // FIXED:  </div>
  <div className="h - 80">
- <Suspense fallback={<div className="flex items - center justify - center h - full">Loading chart...</div>}>
+ <Suspense fallback={<div className={"fle}x items - center justify - center h - full">Loading chart...</div>}>
  <LazyLineChart data={getRevenueChartData()} options={chartOptions} />
 // FIXED:  </Suspense>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Revenue Sources */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 6">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 6">
  Revenue Sources
 // FIXED:  </h2>
  <div className="h - 80">
- <Suspense fallback={<div className="flex items - center justify - center h - full">Loading chart...</div>}>
+ <Suspense fallback={<div className={"fle}x items - center justify - center h - full">Loading chart...</div>}>
  <LazyDoughnutChart data={getRevenueSourcesData()} options={doughnutOptions} />
 // FIXED:  </Suspense>
 // FIXED:  </div>
@@ -382,65 +382,65 @@ return { labels: [],}
 // FIXED:  </div>
 
  {/* Detailed Metrics */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 6">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 6">
  Detailed Metrics
 // FIXED:  </h2>
- <div className="grid grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6">
- <div className="space - y - 4">
- <h3 className="font - medium text - neutral - 700 dark:text - neutral - 300">Ad Performance</h3>
- <div className="space - y - 2">
- <div className="flex justify - between">
- <span className="text - sm text - neutral - 600 dark:text - neutral - 400">CPM</span>
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6">
+ <div className={"spac}e - y - 4">
+ <h3 className={"fon}t - medium text - neutral - 700 dark:text - neutral - 300">Ad Performance</h3>
+ <div className={"spac}e - y - 2">
+ <div className={"fle}x justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">CPM</span>
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {formatCurrency(metrics.cpm)}
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex justify - between">
- <span className="text - sm text - neutral - 600 dark:text - neutral - 400">Click - through Rate</span>
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"fle}x justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Click - through Rate</span>
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {metrics.clickThroughRate.toFixed(2)}%
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex justify - between">
- <span className="text - sm text - neutral - 600 dark:text - neutral - 400">Ad Impressions</span>
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"fle}x justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Ad Impressions</span>
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {formatNumber(metrics.adImpressions)}
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="space - y - 4">
- <h3 className="font - medium text - neutral - 700 dark:text - neutral - 300">Membership</h3>
- <div className="space - y - 2">
- <div className="flex justify - between">
- <span className="text - sm text - neutral - 600 dark:text - neutral - 400">Total Members</span>
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"spac}e - y - 4">
+ <h3 className={"fon}t - medium text - neutral - 700 dark:text - neutral - 300">Membership</h3>
+ <div className={"spac}e - y - 2">
+ <div className={"fle}x justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Total Members</span>
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {formatNumber(metrics.memberCount)}
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex justify - between">
- <span className="text - sm text - neutral - 600 dark:text - neutral - 400">Avg. Revenue per Member</span>
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"fle}x justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Avg. Revenue per Member</span>
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {formatCurrency(metrics.membershipRevenue / metrics.memberCount)}
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="space - y - 4">
- <h3 className="font - medium text - neutral - 700 dark:text - neutral - 300">Merchandise</h3>
- <div className="space - y - 2">
- <div className="flex justify - between">
- <span className="text - sm text - neutral - 600 dark:text - neutral - 400">Units Sold</span>
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"spac}e - y - 4">
+ <h3 className={"fon}t - medium text - neutral - 700 dark:text - neutral - 300">Merchandise</h3>
+ <div className={"spac}e - y - 2">
+ <div className={"fle}x justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Units Sold</span>
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {formatNumber(metrics.merchandiseSales)}
 // FIXED:  </span>
 // FIXED:  </div>
- <div className="flex justify - between">
- <span className="text - sm text - neutral - 600 dark:text - neutral - 400">Avg. Order Value</span>
- <span className="text - sm font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"fle}x justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Avg. Order Value</span>
+ <span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 50">
  {formatCurrency(revenueData.reduce((sum, day) => sum + day.merchandiseRevenue, 0) / metrics.merchandiseSales)}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -450,35 +450,35 @@ return { labels: [],}
 // FIXED:  </div>
 
  {/* Payout Information */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
- <h2 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 4">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 6 border border - neutral - 200 dark:border - neutral - 700">
+ <h2 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 50 mb - 4">
  Payout Information
 // FIXED:  </h2>
- <div className="grid grid - cols - 1 md:grid - cols - 3 gap - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 3 gap - 6">
  <div className="p - 4 bg - blue - 50 dark:bg - blue - 900 / 20 rounded - lg">
- <h3 className="font - medium text - blue - 900 dark:text - blue - 100 mb - 2">Current Balance</h3>
- <p className="text - 2xl font - bold text - blue - 900 dark:text - blue - 100">
+ <h3 className={"fon}t - medium text - blue - 900 dark:text - blue - 100 mb - 2">Current Balance</h3>
+ <p className={"tex}t - 2xl font - bold text - blue - 900 dark:text - blue - 100">
  {formatCurrency(metrics.totalRevenue * 0.8)}
 // FIXED:  </p>
- <p className="text - sm text - blue - 700 dark:text - blue - 300 mt - 1">
+ <p className={"tex}t - sm text - blue - 700 dark:text - blue - 300 mt - 1">
  Available for payout
 // FIXED:  </p>
 // FIXED:  </div>
  <div className="p - 4 bg - green - 50 dark:bg - green - 900 / 20 rounded - lg">
- <h3 className="font - medium text - green - 900 dark:text - green - 100 mb - 2">Next Payout</h3>
- <p className="text - lg font - semibold text - green - 900 dark:text - green - 100">
+ <h3 className={"fon}t - medium text - green - 900 dark:text - green - 100 mb - 2">Next Payout</h3>
+ <p className={"tex}t - lg font - semibold text - green - 900 dark:text - green - 100">
  {new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}
 // FIXED:  </p>
- <p className="text - sm text - green - 700 dark:text - green - 300 mt - 1">
+ <p className={"tex}t - sm text - green - 700 dark:text - green - 300 mt - 1">
  Estimated date
 // FIXED:  </p>
 // FIXED:  </div>
  <div className="p - 4 bg - purple - 50 dark:bg - purple - 900 / 20 rounded - lg">
- <h3 className="font - medium text - purple - 900 dark:text - purple - 100 mb - 2">Payment Method</h3>
- <p className="text - lg font - semibold text - purple - 900 dark:text - purple - 100">
+ <h3 className={"fon}t - medium text - purple - 900 dark:text - purple - 100 mb - 2">Payment Method</h3>
+ <p className={"tex}t - lg font - semibold text - purple - 900 dark:text - purple - 100">
  Bank Transfer
 // FIXED:  </p>
- <p className="text - sm text - purple - 700 dark:text - purple - 300 mt - 1">
+ <p className={"tex}t - sm text - purple - 700 dark:text - purple - 300 mt - 1">
  ****1234
 // FIXED:  </p>
 // FIXED:  </div>

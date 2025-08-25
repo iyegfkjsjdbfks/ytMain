@@ -89,9 +89,9 @@ const BaseForm: React.FC<BaseFormProps> = ({
  const handleBlur = (fieldName) => {
  setTouched(prev => ({ ...prev as any, [fieldName]: true }));
  const field = fields.find((f) => f.name === fieldName);
- if (field as any) {
+ if (field) {
  const error = validateField(field, values[fieldName]);
- if (error as any) {
+ if (error) {
  setError(fieldName, error);
  }
  };
@@ -104,7 +104,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  const newErrors: Record<string, string> = {};
  fields.forEach((field) => {
  const error = validateField(field, values[field.name]);
- if (error as any) {
+ if (error) {
  newErrors[field.name] = error;
  setError(field.name, error);
  }
@@ -143,11 +143,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
  switch (field.type) {
  case 'textarea':
  return (
- <textarea
-
-
-
-
+ <textarea>
  onBlur={() => handleBlur(field.name)}
 
  required={field.required}
@@ -159,11 +155,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
  case 'select':
  return (
- <select
-
-
-
-
+ <select>
  onBlur={() => handleBlur(field.name)}
  required={field.required}
 
@@ -180,19 +172,14 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
  case 'checkbox':
  return (
- <div className="flex items-center">
- <input
-
-
-
-
-
+ <div className={"fle}x items-center">
+ <input>
  onBlur={() => handleBlur(field.name)}
  required={field.required}
 
 
  />
- <label htmlFor={field.name} className="ml-2 text-sm text-gray-900 dark:text-white">
+ <label htmlFor={field.name} className={"ml}-2 text-sm text-gray-900 dark:text-white">
  {field.label}
 
 
@@ -200,11 +187,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
  case 'file':
  return (
- <input
-
-
-
-
+ <input>
  onBlur={() => handleBlur(field.name)}
  required={field.required}
 
@@ -215,12 +198,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
 
  default:
  return (
- <input
-
-
-
-
-
+ <input>
  onBlur={() => handleBlur(field.name)}
 
  required={field.required}
@@ -234,15 +212,15 @@ const BaseForm: React.FC<BaseFormProps> = ({
  <form onSubmit={(e) => handleFormSubmit(e)} className={`space-y-6 ${className}`}>
  {/* Error message */}
  {error && (
- <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
- <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+ <div className={"p}-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+ <p className={"text}-red-600 dark:text-red-400 text-sm">{error}</p>
 
  )}
 
  {/* Success message */}
  {success && (
- <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
- <p className="text-green-600 dark:text-green-400 text-sm">{success}</p>
+ <div className={"p}-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+ <p className={"text}-green-600 dark:text-green-400 text-sm">{success}</p>
 
  )}
 
@@ -251,18 +229,18 @@ const BaseForm: React.FC<BaseFormProps> = ({
  const fieldError = touched[field.name] ? validateField(field, values[field.name]) : null;
 
  return (
- <div key={field.name} className="space-y-2">
+ <div key={field.name} className={"space}-y-2">
  {field.type !== 'checkbox' && (
- <label htmlFor={field.name} className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+ <label htmlFor={field.name} className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300">
  {field.label}
- {field.required && <span className="text-red-500 ml-1">*</span>}
+ {field.required && <span className={"text}-red-500 ml-1">*</span>}
 
  )}
 
  {renderField(field)}
 
  {fieldError && (
- <p className="text-red-500 text-sm">{fieldError}</p>
+ <p className={"text}-red-500 text-sm">{fieldError}</p>
  )}
 
  );
@@ -272,35 +250,28 @@ const BaseForm: React.FC<BaseFormProps> = ({
  {children}
 
  {/* Form actions */}
- <div className="flex gap-3 pt-4">
- <button
-
-
-
+ <div className={"fle}x gap-3 pt-4">
+ <button>
  >
  {loading || isSubmitting ? 'Loading...' : submitLabel}
 
 
  {onCancel && (
- <button
-
-
-
-
+ <button>
  >
  {cancelLabel}
 
  )}
 
  {showResetButton && (
-          <button
+          <button>
             type="button"
             onClick={() => {
               reset();
               setTouched({});
             }}
             disabled={loading}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className={"px}-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {resetLabel}
           </button>

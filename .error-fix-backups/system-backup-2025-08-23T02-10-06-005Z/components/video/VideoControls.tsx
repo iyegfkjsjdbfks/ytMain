@@ -59,21 +59,20 @@ const VideoControls: React.FC < VideoControlsProps> = ({}
  return (
  <div className={`bg - gradient - to - t from - black / 80 to - transparent p - 4 ${className}`}>
  {/* Progress Bar */}
- <div
+ <div>
 // FIXED:  className="w - full h - 1 bg - gray - 600 rounded - full cursor - pointer mb - 4 group" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleProgressClick(e)}
  >
- <div
+ <div>
 // FIXED:  className="h - full bg - red - 600 rounded - full relative group - hover:h - 1.5 transition - all"
-// FIXED:  style={{ width: `${progress}%` } />
- >
- <div className="absolute right - 0 top - 1/2 transform -translate - y - 1 / 2 w - 3 h - 3 bg - red - 600 rounded - full opacity - 0 group - hover:opacity - 100 transition - opacity" />
+// FIXED:  style={{ width: `${progress}%` }/>
+ <div className={"absolut}e right - 0 top - 1/2 transform -translate - y - 1 / 2 w - 3 h - 3 bg - red - 600 rounded - full opacity - 0 group - hover:opacity - 100 transition - opacity" />
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Controls */}
- <div className="flex items - center justify - between">
- <div className="flex items - center space - x - 4">
+ <div className={"fle}x items - center justify - between">
+ <div className={"fle}x items - center space - x - 4">
  {/* Play / Pause */}
  <ActionButton />
 // FIXED:  onClick={(e: React.MouseEvent) => onPlayPause(e)}
@@ -88,7 +87,7 @@ const VideoControls: React.FC < VideoControlsProps> = ({}
 // FIXED:  </ActionButton>
 
  {/* Volume Controls */}
- <div className="flex items - center space - x - 2 group">
+ <div className={"fle}x items - center space - x - 2 group">
  <ActionButton />
 // FIXED:  onClick={(e: React.MouseEvent) => onMuteToggle(e)}
  ariaLabel={isMuted ? 'Unmute' : 'Mute'}
@@ -100,7 +99,7 @@ const VideoControls: React.FC < VideoControlsProps> = ({}
  )}
 // FIXED:  </ActionButton>
 
- <input
+ <input>
 // FIXED:  type="range"
  min="0"
  max="1"
@@ -112,17 +111,17 @@ const VideoControls: React.FC < VideoControlsProps> = ({}
 // FIXED:  </div>
 
  {/* Time Display */}
- <span className="text - white text - sm font - mono">
+ <span className={"tex}t - white text - sm font - mono">
  {formatTime(currentTime)} / {formatTime(duration)}
 // FIXED:  </span>
 // FIXED:  </div>
 
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center space - x - 2">
  {/* Playback Rate */}
- <select
+ <select>
 // FIXED:  value={playbackRate} />
 // FIXED:  onChange={(e: React.ChangeEvent) => onPlaybackRateChange(parseFloat(e.target.value))}
-// FIXED:  className="bg - black bg - opacity - 50 text - white text - sm rounded px - 2 py - 1 border - none outline - none"
+// FIXED:  className={"b}g - black bg - opacity - 50 text - white text - sm rounded px - 2 py - 1 border - none outline - none"
  >
  <option value={0.25}>0.25x</option>
  <option value={0.5}>0.5x</option>

@@ -57,8 +57,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  }, []);
 
  const loadNotifications = useCallback(() => {
- const stored = (localStorage as any).getItem('youtubeCloneNotifications_v1');
- if (stored as any) {
+ const stored = (localStorage).getItem('youtubeCloneNotifications_v1');
+ if (stored) {
  const parsedNotifications = JSON.parse(stored);
  setNotifications(parsedNotifications);
  setUnreadCount(parsedNotifications.filter((n: Notification) => !n.isRead).length)
@@ -67,7 +67,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  const mockNotifications = generateMockNotifications();
  setNotifications(mockNotifications);
  setUnreadCount(mockNotifications.filter((n) => !n.isRead).length);
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(mockNotifications));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(mockNotifications));
  }
 
  }, []);
@@ -134,11 +134,11 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50
  setNotifications(updatedNotifications);
  setUnreadCount(prev => prev + 1);
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
  }, [notifications]);
 
  const getNotificationTitle = (type: Notification['type']): string => {
- switch (type as any) {
+ switch (type) {
  case 'video_upload': return 'New video uploaded';
  case 'comment_reply': return 'New reply to your comment';
  case 'like': return 'Someone liked your video';
@@ -189,14 +189,14 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  n.id === notificationId ? { ...n as any, isRead: true } : n);
  setNotifications(updatedNotifications);
  setUnreadCount(prev => Math.max(0, prev - 1));
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
  };
 
  const markAllAsRead = () => {
  const updatedNotifications = notifications.map((n) => ({ ...n as any, isRead: true }));
  setNotifications(updatedNotifications);
  setUnreadCount(0);
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
  };
 
  const deleteNotification = (notificationId) => {
@@ -206,7 +206,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  if (notification && !notification.isRead) {
  setUnreadCount(prev => Math.max(0, prev - 1));
  }
- (localStorage as any).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
+ (localStorage).setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
  };
 
  const filteredNotifications = filter === 'unread'
@@ -214,7 +214,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  : notifications;
 
  const getNotificationIcon = (type: Notification['type']) => {
- switch (type as any) {
+ switch (type) {
  case 'video_upload': return '🎥';
  case 'comment_reply': return '💬';
  case 'like': return '❤️';
@@ -228,36 +228,36 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  <div className={`relative ${className}`} ref={dropdownRef}>
  <button />
 // FIXED:  onClick={() => setIsOpen(!isOpen)}
-// FIXED:  className="relative p-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
+// FIXED:  className={"relativ}e p-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
  title="Notifications"
  >
  {unreadCount > 0 ? (
- <BellIconSolid className="w-6 h-6" />
+ <BellIconSolid className={"w}-6 h-6" />
  ) : (
- <BellIcon className="w-6 h-6" />
+ <BellIcon className={"w}-6 h-6" />
  )}
  {unreadCount > 0 && (
- <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
+ <span className={"absolut}e -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
  {unreadCount > 99 ? '99+' : unreadCount}
 // FIXED:  </span>
  )}
 // FIXED:  </button>
 
  {isOpen && (
- <div className="absolute top-full right-0 mt-2 w-96 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl z-50 max-h-96 overflow-hidden">
- <div className="p-4 border-b border-neutral-200 dark:border-neutral-700">
- <div className="flex items-center justify-between mb-3">
- <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Notifications</h3>
+ <div className={"absolut}e top-full right-0 mt-2 w-96 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl z-50 max-h-96 overflow-hidden">
+ <div className={"p}-4 border-b border-neutral-200 dark:border-neutral-700">
+ <div className={"fle}x items-center justify-between mb-3">
+ <h3 className={"text}-lg font-semibold text-neutral-900 dark:text-neutral-100">Notifications</h3>
  <button />
 // FIXED:  onClick={() => setIsOpen(false)}
-// FIXED:  className="p-1 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+// FIXED:  className={"p}-1 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
  >
- <XMarkIcon className="w-5 h-5" />
+ <XMarkIcon className={"w}-5 h-5" />
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className="flex items-center justify-between">
- <div className="flex space-x-2">
+ <div className={"fle}x items-center justify-between">
+ <div className={"fle}x space-x-2">
  <button />
 // FIXED:  onClick={() => setFilter('all')}
 // FIXED:  className={`px-3 py-1 text-sm rounded-full transition-colors ${
@@ -283,7 +283,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
  {unreadCount > 0 && (
  <button />
 // FIXED:  onClick={(e) => markAllAsRead(e)}
-// FIXED:  className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+// FIXED:  className={"text}-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
  >
  Mark all read
 // FIXED:  </button>
@@ -291,72 +291,71 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="max-h-80 overflow-y-auto">
+ <div className={"max}-h-80 overflow-y-auto">
  {filteredNotifications.length === 0 ? (
- <div className="p-8 text-center text-neutral-500 dark:text-neutral-400">
- <BellIcon className="w-12 h-12 mx-auto mb-3 opacity-50" />
+ <div className={"p}-8 text-center text-neutral-500 dark:text-neutral-400">
+ <BellIcon className={"w}-12 h-12 mx-auto mb-3 opacity-50" />
  <p>No notifications</p>
 // FIXED:  </div>
  ) : (
  filteredNotifications.map((notification) => (
- <div
+ <div>
  key={notification.id}
 // FIXED:  className={`p-4 border-b border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-750 transition-colors ${
  !notification.isRead ? 'bg-blue-50 dark:bg-blue-950/20' : ''
- }`} />
- >
- <div className="flex items-start space-x-3">
- <img
+ }`}/>
+ <div className={"fle}x items-start space-x-3">
+ <img>
 // FIXED:  src={notification.channelAvatar}
 // FIXED:  alt={notification.channelName}
-// FIXED:  className="w-10 h-10 rounded-full flex-shrink-0" />
+// FIXED:  className={"w}-10 h-10 rounded-full flex-shrink-0" />
  />
 
- <div className="flex-1 min-w-0">
- <div className="flex items-start justify-between">
- <div className="flex-1">
- <div className="flex items-center space-x-2 mb-1">
- <span className="text-lg">{getNotificationIcon(notification.type)}</span>
- <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+ <div className={"flex}-1 min-w-0">
+ <div className={"fle}x items-start justify-between">
+ <div className={"flex}-1">
+ <div className={"fle}x items-center space-x-2 mb-1">
+ <span className={"text}-lg">{getNotificationIcon(notification.type)}</span>
+ <p className={"text}-sm font-medium text-neutral-900 dark:text-neutral-100">
  {notification.title}
 // FIXED:  </p>
  {!notification.isRead && (
- <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
+ <div className={"w}-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
  )}
 // FIXED:  </div>
-<p className="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
+<p className={"text}-sm text-neutral-600 dark:text-neutral-400 mb-2">
  {notification.channelName} {notification.message}
 // FIXED:  </p>
- <p className="text-xs text-neutral-500 dark:text-neutral-500">
+ <p className={"text}-xs text-neutral-500 dark:text-neutral-500">
  {formatDistanceToNow(new Date(notification.timestamp))} ago
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className="flex items-center space-x-1 ml-2">
+ <div className={"fle}x items-center space-x-1 ml-2">
  {!notification.isRead && (
  <button />
 // FIXED:  onClick={() => markAsRead(notification.id)}
-// FIXED:  className="p-1 text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400"
+// FIXED:  className={"p}-1 text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400"
  title="Mark as read"
  >
- <CheckIcon className="w-4 h-4" />
+ <CheckIcon className={"w}-4 h-4" />
 // FIXED:  </button>
  )}
  <button />
 // FIXED:  onClick={() => deleteNotification(notification.id)}
-// FIXED:  className="p-1 text-neutral-400 hover:text-red-600 dark:hover:text-red-400"
+// FIXED:  className={"p}-1 text-neutral-400 hover:text-red-600 dark:hover:text-red-400"
  title="Delete notification"
  >
- <TrashIcon className="w-4 h-4" />
+ <TrashIcon className={"w}-4 h-4" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {notification.videoThumbnail && (
- <img
+ <img>
 // FIXED:  src={notification.videoThumbnail}
 // FIXED:  alt="Video thumbnail"
-// FIXED:  className="w-20 h-11 rounded mt-2 object-cover" />
+// FIXED:  className={"w}-20 h-11 rounded mt-2 object-cover" />
  />
  )}
 // FIXED:  </div>

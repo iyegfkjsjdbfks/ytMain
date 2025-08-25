@@ -275,9 +275,9 @@ export function usePlaylistWithVideos(playlistId): any {
  loading: playlist.loading || videos.loading || stats.loading,
  error: playlist.error || videos.error || stats.error,
  refetch: () => {
- playlist.re(fetch as any)();
- videos.re(fetch as any)();
- stats.re(fetch as any)();
+ playlist.re(fetch)();
+ videos.re(fetch)();
+ stats.re(fetch)();
  };
 }
 

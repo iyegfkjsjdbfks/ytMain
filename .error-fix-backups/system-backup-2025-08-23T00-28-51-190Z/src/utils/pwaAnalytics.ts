@@ -42,7 +42,7 @@ class PWAAnalytics {
 
  // Send to Google Analytics if available
  if ('gtag' in window) {
- (window as any).gtag('event', event.action, {
+ (window).gtag('event', event.action, {
  event_category: event.category,
  event_label: event.label,
  value: event.value,

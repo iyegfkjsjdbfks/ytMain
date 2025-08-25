@@ -385,7 +385,7 @@ export const createYouTubeError = (,;
 ): (YouTubeApiError) => {
  let code: ErrorCode = ERROR_CODES.API_SERVER_ERROR;
 
- switch (errorType as any) {
+ switch (errorType) {
  case 'unavailable':
  code = ERROR_CODES.YOUTUBE_VIDEO_UNAVAILABLE;
  break;
@@ -413,7 +413,7 @@ export const createYouTubeError = (,;
  embedDisabled: errorType === 'embed_disabled',
  regionBlocked: errorType === 'region_blocked' };
 
- if (videoId as any) {
+ if (videoId) {
  error.details = { videoId };
  }
 

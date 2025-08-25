@@ -48,7 +48,7 @@ return [];
  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
  const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
 
- switch (activeTab as any) {
+ switch (activeTab) {
  case 'today':
  filtered = filtered.filter((video) => {
  const uploadDate = new Date(video.uploadedAt);
@@ -75,7 +75,7 @@ return [];
  }
 
  // Sort videos
- switch (sortBy as any) {
+ switch (sortBy) {
  case 'popular':
  filtered.sort((a, b) => parseInt(((b.views as string)).replace(/[^\d]/g, ''), 10) - parseInt(((a.views as string)).replace(/[^\d]/g, ''), 10));
  break;
@@ -112,128 +112,125 @@ return [];
  const loading = videosLoading || channelsLoading;
  const error = videosError || channelsError;
 
- if (loading as any) {
+ if (loading) {
  return (
- <div className="flex justify-center items-center min-h-96">
+ <div className={"fle}x justify-center items-center min-h-96">
  <LoadingSpinner size="lg" />
 // FIXED:  </div>
  );
  }
 
- if (error as any) {
+ if (error) {
  return (
- <div className="text-center py-12">
- <SubscriptionsIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
- <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+ <div className={"text}-center py-12">
+ <SubscriptionsIcon className={"w}-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
+ <h2 className={"text}-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
  Something went wrong
 // FIXED:  </h2>
- <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
+ <p className={"text}-neutral-600 dark:text-neutral-400">{error}</p>
 // FIXED:  </div>
  );
  }
 
  return (
- <div className="max-w-7xl mx-auto px-4 py-6">
+ <div className={"max}-w-7xl mx-auto px-4 py-6">
  {/* Header */}
- <div className="flex items-center justify-between mb-6">
- <div className="flex items-center space-x-3">
- <SubscriptionsIcon className="w-8 h-8 text-red-600 dark:text-red-500" />
- <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+ <div className={"fle}x items-center justify-between mb-6">
+ <div className={"fle}x items-center space-x-3">
+ <SubscriptionsIcon className={"w}-8 h-8 text-red-600 dark:text-red-500" />
+ <h1 className={"text}-2xl font-bold text-neutral-900 dark:text-neutral-100">
  Subscriptions
 // FIXED:  </h1>
 // FIXED:  </div>
 
- <div className="flex items-center space-x-2">
- <Button
+ <div className={"fle}x items-center space-x-2">
+ <Button>
  variant={showChannels ? 'primary' : 'secondary'}
  size="sm" />
 // FIXED:  onClick={() => setShowChannels(!showChannels)}
-// FIXED:  className="flex items-center space-x-2"
+// FIXED:  className={"fle}x items-center space-x-2"
  >
- <UserGroupIcon className="w-4 h-4" />
+ <UserGroupIcon className={"w}-4 h-4" />
  <span>Manage</span>
 // FIXED:  </Button>
 
- <div className="flex items-center border border-neutral-200 dark:border-neutral-700 rounded-lg">
- <Button
+ <div className={"fle}x items-center border border-neutral-200 dark:border-neutral-700 rounded-lg">
+ <Button>
  variant={viewType === 'grid' ? 'primary' : 'ghost'}
  size="sm" />
 // FIXED:  onClick={() => setViewType('grid')}
-// FIXED:  className="rounded-r-none border-r border-neutral-200 dark:border-neutral-700"
+// FIXED:  className={"rounded}-r-none border-r border-neutral-200 dark:border-neutral-700"
  >
- <ViewColumnsIcon className="w-4 h-4" />
+ <ViewColumnsIcon className={"w}-4 h-4" />
 // FIXED:  </Button>
- <Button
+ <Button>
  variant={viewType === 'list' ? 'primary' : 'ghost'}
  size="sm" />
 // FIXED:  onClick={() => setViewType('list')}
-// FIXED:  className="rounded-l-none"
+// FIXED:  className={"rounded}-l-none"
  >
- <Bars3Icon className="w-4 h-4" />
+ <Bars3Icon className={"w}-4 h-4" />
 // FIXED:  </Button>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Subscription Statistics */}
- <SubscriptionStats
+ <SubscriptionStats>
  totalChannels={subscriptionStats.totalChannels}
  notificationsEnabled={subscriptionStats.notificationsEnabled}
  totalVideos={subscriptionStats.totalVideos}
  newVideosToday={subscriptionStats.newVideosToday}
-// FIXED:  className="mb-6" />
+// FIXED:  className={"mb}-6" />
  />
 
  {/* Subscribed Channels Management */}
  {showChannels && (
- <div className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
- <div className="flex items-center justify-between mb-4">
- <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+ <div className={"mb}-6 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
+ <div className={"fle}x items-center justify-between mb-4">
+ <h2 className={"text}-lg font-semibold text-neutral-900 dark:text-neutral-100">
  Subscribed Channels ({subscribedChannels.length})
 // FIXED:  </h2>
 // FIXED:  </div>
 
  {subscribedChannels.length === 0 ? (
- <div className="text-center py-8">
- <UserGroupIcon className="w-12 h-12 text-neutral-400 dark:text-neutral-600 mx-auto mb-3" />
- <p className="text-neutral-600 dark:text-neutral-400">
+ <div className={"text}-center py-8">
+ <UserGroupIcon className={"w}-12 h-12 text-neutral-400 dark:text-neutral-600 mx-auto mb-3" />
+ <p className={"text}-neutral-600 dark:text-neutral-400">
  You haven't subscribed to any channels yet.
 // FIXED:  </p>
- <Link
+ <Link>
  to="/trending"
-// FIXED:  className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium mt-2 inline-block" />
- >
+// FIXED:  className={"text}-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium mt-2 inline-block"/>
  Discover channels to subscribe to
 // FIXED:  </Link>
 // FIXED:  </div>
  ) : (
- <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+ <div className={"gri}d grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
  {subscribedChannels.map((channel) => (
- <div
+ <div>
  key={channel.id}
-// FIXED:  className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700" />
- >
+// FIXED:  className={"fle}x items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"/>
  <Link to={`/channel/${encodeURIComponent(channel.name)}`}>
- <img
+ <img>
 // FIXED:  src={channel.avatar}
 // FIXED:  alt={channel.name}
-// FIXED:  className="w-12 h-12 rounded-full object-cover" />
+// FIXED:  className={"w}-12 h-12 rounded-full object-cover" />
  />
 // FIXED:  </Link>
 
- <div className="flex-1 min-w-0">
- <Link
+ <div className={"flex}-1 min-w-0">
+ <Link>
  to={`/channel/${encodeURIComponent(channel.name)}`}
-// FIXED:  className="block font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-500 truncate" />
- >
+// FIXED:  className={"bloc}k font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-500 truncate"/>
  {channel.name}
 // FIXED:  </Link>
- <p className="text-sm text-neutral-600 dark:text-neutral-400">
+ <p className={"text}-sm text-neutral-600 dark:text-neutral-400">
  {channel.subscribers} subscribers
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className="flex items-center space-x-1">
+ <div className={"fle}x items-center space-x-1">
  <button />
 // FIXED:  onClick={() => toggleNotifications(channel.id)}
 // FIXED:  className={`p-2 rounded-full transition-colors ${
@@ -244,17 +241,17 @@ return [];
  title={channel.notificationsEnabled ? 'Notifications on' : 'Notifications off'}
  >
  {channel.notificationsEnabled ? (
- <BellIconSolid className="w-4 h-4" />
+ <BellIconSolid className={"w}-4 h-4" />
  ) : (
- <BellIcon className="w-4 h-4" />
+ <BellIcon className={"w}-4 h-4" />
  )}
 // FIXED:  </button>
 
- <Button
+ <Button>
  variant="ghost"
  size="sm" />
 // FIXED:  onClick={() => unsubscribe(channel.id)}
-// FIXED:  className="text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-500"
+// FIXED:  className={"text}-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-500"
  >
  Unsubscribe
 // FIXED:  </Button>
@@ -267,10 +264,10 @@ return [];
  )}
 
  {/* Tabs and Filters */}
- <div className="mb-6">
+ <div className={"mb}-6">
  <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabType)}>
- <div className="flex items-center justify-between mb-4">
- <TabsList className="flex-1">
+ <div className={"fle}x items-center justify-between mb-4">
+ <TabsList className={"flex}-1">
  <TabsTrigger value="all">All</TabsTrigger>
  <TabsTrigger value="today">Today</TabsTrigger>
  <TabsTrigger value="week">This week</TabsTrigger>
@@ -279,12 +276,12 @@ return [];
  <TabsTrigger value="posts">Posts</TabsTrigger>
 // FIXED:  </TabsList>
 
- <div className="flex items-center space-x-2 ml-4">
- <AdjustmentsHorizontalIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
- <select
+ <div className={"fle}x items-center space-x-2 ml-4">
+ <AdjustmentsHorizontalIcon className={"w}-4 h-4 text-neutral-600 dark:text-neutral-400" />
+ <select>
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={(e) => setSortBy(e.target.value as SortType)}
-// FIXED:  className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-3 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
+// FIXED:  className={"text}-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-3 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
  >
  <option value="latest">Latest</option>
  <option value="popular">Popular</option>
@@ -295,25 +292,24 @@ return [];
 
  <TabsContent value={activeTab}>
  {filteredVideos.length === 0 ? (
- <div className="text-center py-12">
- <SubscriptionsIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
- <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+ <div className={"text}-center py-12">
+ <SubscriptionsIcon className={"w}-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
+ <h2 className={"text}-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
  {activeTab === 'all'
  ? 'No new videos from your subscriptions'
  : `No ${activeTab} videos from your subscriptions`
  }
 // FIXED:  </h2>
- <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+ <p className={"text}-neutral-600 dark:text-neutral-400 mb-4">
  {subscribedChannels.length === 0
  ? 'Subscribe to channels to see their latest videos here.'
  : 'Check back later for new content from your subscribed channels.'
  }
 // FIXED:  </p>
  {subscribedChannels.length === 0 && (
- <Link
+ <Link>
  to="/trending"
-// FIXED:  className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors" />
- >
+// FIXED:  className={"inline}-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"/>
  Discover channels
 // FIXED:  </Link>
  )}
@@ -321,7 +317,7 @@ return [];
  ) : (
  <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
  {filteredVideos.map((video) => (
- <SubscriptionVideoCard
+ <SubscriptionVideoCard>
  key={`${activeTab}-${video.id}`}
  video={video}
  viewType={viewType}

@@ -25,7 +25,7 @@ export class VideoService {
  * Fetch a single video by ID
  */
  async getVideo(videoId): Promise<any> < Video> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}`);
+ const response = await (fetch)(`${this.baseUrl}/${videoId}`);
 
  if (!response.ok) {
  throw new Error(`Failed to fetch video: ${response.statusText}`);
@@ -44,13 +44,13 @@ export class VideoService {
  const url = new URL(this.baseUrl);
  url.pathname += '/trending';
 
- if (category as any) {
+ if (category) {
  url.searchParams.append('category', category);
  }
 
  url.searchParams.append('limit', limit.toString());
 
- const response = await (fetch as any)(url.toString());
+ const response = await (fetch)(url.toString());
 
  if (!response.ok) {
  throw new Error(
@@ -72,7 +72,7 @@ export class VideoService {
  url.searchParams.append('videoId', videoId);
  url.searchParams.append('limit', limit.toString());
 
- const response = await (fetch as any)(url.toString());
+ const response = await (fetch)(url.toString());
 
  if (!response.ok) {
  throw new Error(
@@ -87,7 +87,7 @@ export class VideoService {
  * Fetch video metrics
  */
  async getVideoMetrics(videoId): Promise<any> < VideoMetrics> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/metrics`);
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/metrics`);
 
  if (!response.ok) {
  throw new Error(`Failed to fetch video metrics: ${response.statusText}`);
@@ -105,7 +105,7 @@ export class VideoService {
  url.searchParams.append('q', query);
  url.searchParams.append('limit', limit.toString());
 
- const response = await (fetch as any)(url.toString());
+ const response = await (fetch)(url.toString());
 
  if (!response.ok) {
  throw new Error(`Failed to search videos: ${response.statusText}`);
@@ -118,7 +118,7 @@ export class VideoService {
  * Toggle like on a video
  */
  async toggleLike(videoId): Promise<any> < VideoInteractionResponse> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/like`, {
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/like`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json' } });
@@ -134,7 +134,7 @@ export class VideoService {
  * Toggle dislike on a video
  */
  async toggleDislike(videoId): Promise<any> < VideoInteractionResponse> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/dislike`, {
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/dislike`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json' } });
@@ -150,7 +150,7 @@ export class VideoService {
  * Toggle save on a video
  */
  async toggleSave(videoId): Promise<any> < VideoInteractionResponse> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/save`, {
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/save`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json' } });
@@ -166,7 +166,7 @@ export class VideoService {
  * Report a video
  */
  async reportVideo(videoId, reason): Promise<any> < void> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/report`, {
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/report`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json' },
@@ -181,7 +181,7 @@ export class VideoService {
   }
 
  async getVideoInteractions(videoId): Promise<any> < VideoInteractionResponse> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/interactions`);
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/interactions`);
 
  if (!response.ok) {
  throw new Error(
@@ -196,7 +196,7 @@ export class VideoService {
  * Get video statistics
  */
  async getVideoStats(videoId): Promise<any> < VideoStats> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/stats`);
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/stats`);
 
  if (!response.ok) {
  throw new Error(`Failed to get video stats: ${response.statusText}`);
@@ -209,7 +209,7 @@ export class VideoService {
  * Get video engagement metrics
  */
  async getVideoEngagement(videoId): Promise<any> < VideoEngagement> {
- const response = await (fetch as any)(`${this.baseUrl}/${videoId}/engagement`);
+ const response = await (fetch)(`${this.baseUrl}/${videoId}/engagement`);
 
  if (!response.ok) {
  throw new Error(`Failed to get video engagement: ${response.statusText}`);
@@ -253,7 +253,7 @@ export class VideoService {
  // First try to get YouTube metadata
  const youtubeVideo = await this.getYouTubeVideo(videoId);
 
- if (youtubeVideo as any) {
+ if (youtubeVideo) {
  // If YouTube data is available, use it with local interactions
  try {
  const interactions = await this.getVideoInteractions(videoId);

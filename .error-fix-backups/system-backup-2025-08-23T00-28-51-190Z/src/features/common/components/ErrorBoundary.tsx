@@ -42,28 +42,28 @@ export class ErrorBoundary extends Component<Props, State> {
  if (this.state.hasError) {
  // You can render any custom fallback UI
  return (
- <div className='min-h-screen flex items-center justify-center bg-gray-100'>
- <div className='bg-white p-8 rounded-lg shadow-md max-w-lg w-full'>
- <h1 className='text-2xl font-bold text-red-600 mb-4'>
+ <div className={'min}-h-screen flex items-center justify-center bg-gray-100'>
+ <div className={'bg}-white p-8 rounded-lg shadow-md max-w-lg w-full'>
+ <h1 className={'text}-2xl font-bold text-red-600 mb-4'>
  Something went wrong
 // FIXED:  </h1>
- <div className='bg-red-50 p-4 rounded mb-4 border border-red-200'>
- <p className='text-red-800 font-medium'>
+ <div className={'bg}-red-50 p-4 rounded mb-4 border border-red-200'>
+ <p className={'text}-red-800 font-medium'>
  {this.state.error && this.state.error.toString()}
 // FIXED:  </p>
  {this.state.errorInfo && (
- <details className='mt-2'>
- <summary className='text-sm text-red-700 cursor-pointer'>
+ <details className={'mt}-2'>
+ <summary className={'text}-sm text-red-700 cursor-pointer'>
  View technical details
 // FIXED:  </summary>
- <pre className='mt-2 text-xs overflow-auto p-2 bg-red-100 rounded'>
+ <pre className={'mt}-2 text-xs overflow-auto p-2 bg-red-100 rounded'>
  {this.state.errorInfo.componentStack}
 // FIXED:  </pre>
 // FIXED:  </details>
  )}
 // FIXED:  </div>
- <button
-// FIXED:  className='w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors' />
+ <button>
+// FIXED:  className={'w}-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors' />
 // FIXED:  onClick={() => (window.location.href = '/')}
  >
  Go to Home

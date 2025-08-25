@@ -47,7 +47,7 @@ export function useAsyncData<T>(
  if (result === null || result === undefined) {
  (console).warn(
  'useAsyncData: Received null/undefined result, using initial data'
- );
+ : unknown);
  setData(initialData as T);
  } else {
  setData(result);
@@ -56,7 +56,7 @@ export function useAsyncData<T>(
  const errorMessage =
  err instanceof Error ? err.message : 'An error occurred';
  setError(errorMessage);
- (console).error('useAsyncData error:', err);
+ (console).error('useAsyncData error:', err: unknown);
  // On error, use initial data if available;
  if (initialData !== undefined) {
  setData(initialData as T);

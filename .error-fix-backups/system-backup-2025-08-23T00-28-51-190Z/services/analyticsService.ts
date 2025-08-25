@@ -84,8 +84,8 @@ class AnalyticsService {
 
  private getCurrentUserId(): string | undefined {
  try {
- const authData = (localStorage as any).getItem('auth');
- if (authData as any) {
+ const authData = (localStorage).getItem('auth');
+ if (authData) {
  const parsed = JSON.parse(authData);
  return parsed.userId || parsed.id;
  }
@@ -131,7 +131,7 @@ class AnalyticsService {
  window.addEventListener('load', ( as EventListener) => {
  setTimeout((() => {
  const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
- if (navigation as any) {
+ if (navigation) {
  this.track('page_load_performance') as any, {
  loadTime: navigation.loadEventEnd - navigation.loadEventStart,
  domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
@@ -268,14 +268,14 @@ return;
 }
 
  try {
- const stored = (localStorage as any).getItem('analytics_events');
- if (stored as any) {
+ const stored = (localStorage).getItem('analytics_events');
+ if (stored) {
  const events: AnalyticsEvent[] = JSON.parse(stored);
  this.eventQueue.push(...events);
  localStorage.removeItem('analytics_events'); // Clear after loading
  }
  } catch (error) {
- (console as any).warn('Failed to load stored analytics events:', error);
+ (console).warn('Failed to load stored analytics events:', error);
  }
  // Public API
  track(,
@@ -304,7 +304,7 @@ return;
  this.notifyListeners(event);
 
  if (this.config.enableDebugMode) {
- (console as any).log('[Analytics]', event);
+ (console).log('[Analytics]', event);
  }
 
  // Auto-flush if queue is full
@@ -373,20 +373,20 @@ return;
  // Store in localStorage as backup
  if (this.config.enableLocalStorage && !immediate) {
  try {
- const existingEvents = (localStorage as any).getItem('analytics_events');
+ const existingEvents = (localStorage).getItem('analytics_events');
  const allEvents = existingEvents ? JSON.parse(existingEvents) : [];
  allEvents.push(...eventsToSend);
 
  // Keep only the most recent events
  const recentEvents = allEvents.slice(-this.config.maxStoredEvents);
- (localStorage as any).setItem('analytics_events', JSON.stringify(recentEvents));
+ (localStorage).setItem('analytics_events', JSON.stringify(recentEvents));
  } catch (error) {
- (console as any).warn('Failed to store analytics events:', error);
+ (console).warn('Failed to store analytics events:', error);
  }
  // Send to remote endpoint
  if (this.config.enableRemoteTracking && this.config.apiEndpoint) {
  try {
- const response = await (fetch as any)(this.config.apiEndpoint, {
+ const response = await (fetch)(this.config.apiEndpoint, {
  method: 'POST',
  headers: {
  'Content-Type': 'application/json',
@@ -402,7 +402,7 @@ return;
  localStorage.removeItem('analytics_events');
  }
  } catch (error) {
- (console as any).warn('Failed to send analytics events:', error);
+ (console).warn('Failed to send analytics events:', error);
  // Re-add events to queue for retry
  this.eventQueue.unshift(...eventsToSend);
  }
@@ -452,7 +452,7 @@ return;
  try {
  listener(event);
  } catch (error) {
- (console as any).warn('Error in analytics listener:', error);
+ (console).warn('Error in analytics listener:', error);
  }
  });
  }

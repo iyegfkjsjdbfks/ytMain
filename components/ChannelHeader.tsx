@@ -30,45 +30,45 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
   };
 
   return (
-    <div className="w-full">
+    <div className={"w}-full">
       {/* Banner */}
       {channel.bannerUrl && (
-        <div className="h-32 sm:h-48 md:h-64 bg-gray-200 rounded-lg mb-4 overflow-hidden">
-          <img
+        <div className={"h}-32 sm:h-48 md:h-64 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+          <img>
             src={channel.bannerUrl}
             alt={`${channel.name} banner`}
-            className="w-full h-full object-cover"
+            className={"w}-full h-full object-cover"
           />
         </div>
       )}
 
       {/* Channel info */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
-        <img
+      <div className={"fle}x flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+        <img>
           src={channel.avatar}
           alt={`${channel.name} avatar`}
-          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full"
+          className={"w}-20 h-20 sm:w-24 sm:h-24 rounded-full"
         />
         
-        <div className="flex-1">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+        <div className={"flex}-1">
+          <h1 className={"text}-2xl sm:text-3xl font-bold text-gray-900 mb-2">
             {channel.name}
           </h1>
           
-          <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 mb-3">
+          <div className={"fle}x flex-wrap items-center gap-2 text-sm text-gray-600 mb-3">
             <span>{formatSubscriberCount(channel.subscriberCount)} subscribers</span>
             <span>•</span>
             <span>{videoCount} videos</span>
           </div>
           
           {channel.description && (
-            <p className="text-gray-600 text-sm line-clamp-2">
+            <p className={"text}-gray-600 text-sm line-clamp-2">
               {channel.description}
             </p>
           )}
         </div>
 
-        <button
+        <button>
           onClick={onSubscribeToggle}
           className={`
             px-6 py-2 rounded-full font-medium transition-colors

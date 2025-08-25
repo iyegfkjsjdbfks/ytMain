@@ -81,7 +81,7 @@ return;
 }
 
  // Auto - play when short changes
- if (isPlaying as any) {}
+ if (isPlaying) {}
  video.play().catch(console.error);
  }
 
@@ -120,7 +120,7 @@ return;
 return;
 }
 
- if (isPlaying as any) {}
+ if (isPlaying) {}
  video.pause();
  } else {}
  video.play().catch(console.error);
@@ -182,7 +182,7 @@ return null;
  return (
  <div className={`relative w - full h - screen bg - black overflow - hidden ${className}`} ref={containerRef}>
  {/* Video */}
- <video
+ <video>
  ref={videoRef}
 // FIXED:  src={currentShort.videoUrl}
 // FIXED:  className="w - full h - full object - cover"
@@ -195,25 +195,25 @@ return null;
 
  {/* Loading Spinner */}
  {isLoading && (}
- <div className="absolute inset - 0 flex items - center justify - center bg - black / 50">
+ <div className={"absolut}e inset - 0 flex items - center justify - center bg - black / 50">
  <div className="w - 8 h - 8 border - 2 border - white border - t-transparent rounded - full animate - spin" />
 // FIXED:  </div>
  )}
 
  {/* Progress Bar */}
- <div
+ <div>
  ref={progressRef}
-// FIXED:  className="absolute right - 2 top - 20 bottom - 20 w - 1 bg - white / 30 rounded - full cursor - pointer" />
+// FIXED:  className={"absolut}e right - 2 top - 20 bottom - 20 w - 1 bg - white / 30 rounded - full cursor - pointer" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleSeek(e)}
  >
- <div
+ <div>
 // FIXED:  className="w - full bg - white rounded - full transition - all duration - 100"
 // FIXED:  style={{ height: `${progress}%` } />
  />
 // FIXED:  </div>
 
  {/* Navigation Arrows */}
- <div className="absolute right - 4 top - 1/2 transform -translate - y-1 / 2 flex flex - col space - y-4">
+ <div className={"absolut}e right - 4 top - 1/2 transform -translate - y-1 / 2 flex flex - col space - y-4">
  <button />
 // FIXED:  onClick={() => navigateShort('up': React.MouseEvent)}
 // FIXED:  disabled={currentIndex === 0}
@@ -233,7 +233,7 @@ return null;
 
  {/* Play / Pause Overlay */}
  {showControls && (}
- <div className="absolute inset - 0 flex items - center justify - center pointer - events - none">
+ <div className={"absolut}e inset - 0 flex items - center justify - center pointer - events - none">
  <div className="p - 4 bg - black / 50 rounded - full">
  {isPlaying ? (}
  <PauseIcon className="w - 12 h - 12 text - white" />
@@ -245,17 +245,17 @@ return null;
  )}
 
  {/* Content Info */}
- <div className="absolute bottom - 0 left - 0 right - 16 p - 4 bg - gradient - to - t from - black / 80 to - transparent">
+ <div className={"absolut}e bottom - 0 left - 0 right - 16 p - 4 bg - gradient - to - t from - black / 80 to - transparent">
  {/* Channel Info */}
- <div className="flex items - center space - x-3 mb - 3">
- <img
+ <div className={"fle}x items - center space - x-3 mb - 3">
+ <img>
 // FIXED:  src={currentShort.channelAvatarUrl}
 // FIXED:  alt={currentShort.channelName}
 // FIXED:  className="w - 10 h - 10 rounded - full" />
  />
- <div className="flex - 1">
- <div className="flex items - center space - x-2">
- <span className="text - white font - medium">{currentShort.channelName}</span>
+ <div className={"fle}x - 1">
+ <div className={"fle}x items - center space - x-2">
+ <span className={"tex}t - white font - medium">{currentShort.channelName}</span>
  {currentShort.channel?.isVerified && (}
  <div className="w - 4 h - 4 bg - gray - 500 rounded - full flex items - center justify - center">
  <svg className="w - 3 h - 3 text - white" fill="currentColor" viewBox="0 0 20 20">
@@ -264,24 +264,24 @@ return null;
 // FIXED:  </div>
  )}
 // FIXED:  </div>
-<p className="text - gray - 300 text - sm">{formatNumber(parseInt(currentShort.views, 10) || 0)} views</p>
+<p className={"tex}t - gray - 300 text - sm">{formatNumber(parseInt(currentShort.views, 10) || 0)} views</p>
 // FIXED:  </div>
 
  <button />
 // FIXED:  onClick={() => onSubscribe(currentShort.channelId: React.MouseEvent)}
-// FIXED:  className="bg - white text - black px - 4 py - 1 rounded - full text - sm font - medium hover:bg - gray - 200 transition - colors"
+// FIXED:  className={"b}g - white text - black px - 4 py - 1 rounded - full text - sm font - medium hover:bg - gray - 200 transition - colors"
  >
  Subscribe
 // FIXED:  </button>
 // FIXED:  </div>
 
  {/* Video Title & Description */}
- <div className="mb - 3">
- <h3 className="text - white font - medium mb - 1 line - clamp - 2">
+ <div className={"m}b - 3">
+ <h3 className={"tex}t - white font - medium mb - 1 line - clamp - 2">
  {currentShort.title}
 // FIXED:  </h3>
  {currentShort.description && (}
- <p className="text - gray - 300 text - sm line - clamp - 2">
+ <p className={"tex}t - gray - 300 text - sm line - clamp - 2">
  {currentShort.description}
 // FIXED:  </p>
  )}
@@ -289,13 +289,12 @@ return null;
 
  {/* Hashtags */}
  {currentShort.tags.length > 0 && (}
- <div className="flex flex - wrap gap - 2 mb - 3">
+ <div className={"fle}x flex - wrap gap - 2 mb - 3">
  {currentShort.tags.slice(0, 3).map((tag,}
  index) => (
- <span
+ <span>
  key={index}
-// FIXED:  className="text - blue - 400 text - sm hover:text - blue - 300 cursor - pointer" />
- >
+// FIXED:  className={"tex}t - blue - 400 text - sm hover:text - blue - 300 cursor - pointer"/>
  #{tag}
 // FIXED:  </span>
  ))}
@@ -304,9 +303,9 @@ return null;
 // FIXED:  </div>
 
  {/* Action Buttons */}
- <div className="absolute bottom - 20 right - 4 flex flex - col space - y-6">
+ <div className={"absolut}e bottom - 20 right - 4 flex flex - col space - y-6">
  {/* Like */}
- <div className="flex flex - col items - center">
+ <div className={"fle}x flex - col items - center">
  <button />
 // FIXED:  onClick={() => onLike(currentShort.id: React.MouseEvent)}
 // FIXED:  className={`p - 3 rounded - full transition - colors ${}
@@ -321,33 +320,33 @@ return null;
  <HeartIcon className="w - 6 h - 6" />
  )}
 // FIXED:  </button>
- <span className="text - white text - xs mt - 1">
+ <span className={"tex}t - white text - xs mt - 1">
  {formatNumber(currentShort.likes)}
 // FIXED:  </span>
 // FIXED:  </div>
 
  {/* Comment */}
- <div className="flex flex - col items - center">
+ <div className={"fle}x flex - col items - center">
  <button />
 // FIXED:  onClick={() => onComment(currentShort.id: React.MouseEvent)}
 // FIXED:  className="p - 3 bg - black / 50 text - white rounded - full hover:bg - black / 70 transition - colors"
  >
  <ChatBubbleLeftIcon className="w - 6 h - 6" />
 // FIXED:  </button>
- <span className="text - white text - xs mt - 1">
+ <span className={"tex}t - white text - xs mt - 1">
  {formatNumber(currentShort.commentCount || 0)}
 // FIXED:  </span>
 // FIXED:  </div>
 
  {/* Share */}
- <div className="flex flex - col items - center">
+ <div className={"fle}x flex - col items - center">
  <button />
 // FIXED:  onClick={() => onShare(currentShort.id: React.MouseEvent)}
 // FIXED:  className="p - 3 bg - black / 50 text - white rounded - full hover:bg - black / 70 transition - colors"
  >
  <ShareIcon className="w - 6 h - 6" />
 // FIXED:  </button>
- <span className="text - white text - xs mt - 1">
+ <span className={"tex}t - white text - xs mt - 1">
  {formatNumber(currentShort.analytics?.engagement?.shares || 0)}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -371,7 +370,7 @@ return null;
 // FIXED:  </div>
 
  {/* Short Counter */}
- <div className="absolute top - 4 right - 4 bg - black / 50 text - white px - 3 py - 1 rounded - full text - sm">
+ <div className={"absolut}e top - 4 right - 4 bg - black / 50 text - white px - 3 py - 1 rounded - full text - sm">
  {currentIndex + 1} / {shorts.length}
 // FIXED:  </div>
 // FIXED:  </div>

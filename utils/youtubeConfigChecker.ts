@@ -87,16 +87,16 @@ export const testYouTubeAPI = async (): Promise<{
 export const logConfigStatus = (): void => {
  const config = checkYouTubeAPIConfig();
 
- (console as any).group('🎯 YouTube API Configuration Status');
- (console as any).log('Configured:', config.isConfigured ? '✅' : '❌');
- (console as any).log('API Key:', config.hasApiKey ? '✅' : '❌', config.hasApiKey ? `(${config.apiKeyLength} chars)` : '');
- (console as any).log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
+ (console).group('🎯 YouTube API Configuration Status');
+ (console).log('Configured:', config.isConfigured ? '✅' : '❌');
+ (console).log('API Key:', config.hasApiKey ? '✅' : '❌', config.hasApiKey ? `(${config.apiKeyLength} chars)` : '');
+ (console).log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
 
- (console as any).group('📋 Recommendations:');
- config.recommendations.forEach((rec) => (console as any).log(`• ${rec}`));
- (console as any).groupEnd();
+ (console).group('📋 Recommendations:');
+ config.recommendations.forEach((rec) => (console).log(`• ${rec}`));
+ (console).groupEnd();
 
- (console as any).groupEnd();
+ (console).groupEnd();
 };
 
 /**

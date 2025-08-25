@@ -17,34 +17,32 @@ const StudioSidebar: React.FC = () => {}
  <div className='p - 4'>
  {/* Channel info */}
  {user && (}
- <div className='mb - 6'>
- <div className='flex items - center mb - 4'>
- <img
+ <div className={'m}b - 6'>
+ <div className={'fle}x items - center mb - 4'>
+ <img>
 // FIXED:  src={user.avatarUrl || 'https://via.placeholder.com / 150'}
 // FIXED:  alt={user.displayName || 'Channel'}
 // FIXED:  className='h - 10 w - 10 rounded - full object - cover' />
  />
- <div className='ml - 3'>
- <p className='font - medium text - sm truncate'>
+ <div className={'m}l - 3'>
+ <p className={'fon}t - medium text - sm truncate'>
  {user.displayName}
 // FIXED:  </p>
- <p className='text - xs text - gray - 400 truncate'>
+ <p className={'tex}t - xs text - gray - 400 truncate'>
  @{user.username}
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
- <Link
+ <Link>
  to='/channel / me'
-// FIXED:  className='flex items - center text - xs text - blue - 400 hover:text - blue - 300' />
- >
+// FIXED:  className={'fle}x items - center text - xs text - blue - 400 hover:text - blue - 300'/>
  <span > View channel</span>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 3 w - 3 ml - 1'
  viewBox='0 0 20 20'
- fill='currentColor' />
- >
- <path
+ fill='currentColor'/>
+ <path>
  fillRule='evenodd'
  d='M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l - 4 4a1 1 0 01 - 1.414 - 1.414L12.586 11H5a1 1 0 110 - 2h7.586l - 2.293 - 2.293a1 1 0 010 - 1.414z'
  clipRule='evenodd' />
@@ -55,8 +53,8 @@ const StudioSidebar: React.FC = () => {}
  )}
 
  {/* Main navigation */}
- <nav className='space - y-1'>
- <NavLink
+ <nav className={'spac}e - y-1'>
+ <NavLink>
  to='/studio' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -67,14 +65,13 @@ const StudioSidebar: React.FC = () => {}
  }
  end
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -84,7 +81,7 @@ const StudioSidebar: React.FC = () => {}
  Dashboard
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / content' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -94,14 +91,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -111,7 +107,7 @@ const StudioSidebar: React.FC = () => {}
  Content
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / analytics' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -121,14 +117,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -138,7 +133,7 @@ const StudioSidebar: React.FC = () => {}
  Analytics
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / comments' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -148,14 +143,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -165,7 +159,7 @@ const StudioSidebar: React.FC = () => {}
  Comments
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / subtitles' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -175,14 +169,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -192,7 +185,7 @@ const StudioSidebar: React.FC = () => {}
  Subtitles
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / copyright' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -202,14 +195,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -219,7 +211,7 @@ const StudioSidebar: React.FC = () => {}
  Copyright
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / monetization' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -229,14 +221,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -246,7 +237,7 @@ const StudioSidebar: React.FC = () => {}
  Monetization
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / customization' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -256,14 +247,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -273,7 +263,7 @@ const StudioSidebar: React.FC = () => {}
  Customization
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / audio - library' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -283,14 +273,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -302,12 +291,12 @@ const StudioSidebar: React.FC = () => {}
 // FIXED:  </nav>
 
  {/* Settings */}
- <div className='mt - 10'>
- <h3 className='px - 4 text - xs font - semibold text - gray - 400 uppercase tracking - wider'>
+ <div className={'m}t - 10'>
+ <h3 className={'p}x - 4 text - xs font - semibold text - gray - 400 uppercase tracking - wider'>
  Settings
 // FIXED:  </h3>
- <nav className='mt - 2 space - y-1'>
- <NavLink
+ <nav className={'m}t - 2 space - y-1'>
+ <NavLink>
  to='/studio / settings / channel' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -317,14 +306,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -334,7 +322,7 @@ const StudioSidebar: React.FC = () => {}
  Channel
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / settings / upload - defaults' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -344,14 +332,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -361,7 +348,7 @@ const StudioSidebar: React.FC = () => {}
  Upload defaults
 // FIXED:  </NavLink>
 
- <NavLink
+ <NavLink>
  to='/studio / settings / community' />
 // FIXED:  className={({ isActive }: any) =>
  `flex items - center px - 4 py - 2 text - sm font - medium rounded - md ${}
@@ -371,14 +358,13 @@ const StudioSidebar: React.FC = () => {}
  }`
  }
  >
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 3'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}

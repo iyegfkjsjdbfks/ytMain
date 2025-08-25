@@ -52,7 +52,7 @@ const GridItem: React.FC < GridItemProps> = ({ columnIndex, rowIndex, style, dat
 
  return (
  <div style={style} className="p - 2">
- <OptimizedVideoCard
+ <OptimizedVideoCard>
  video={video}
  size={cardSize}
  showChannel={showChannel}
@@ -151,10 +151,10 @@ return;
 
  if (videos.length === 0 && !loading) {}
  return (
- <div className="flex flex - col items - center justify - center py - 12 text - gray - 500">
- <div className="text - 6xl mb - 4">📺</div>
-<h3 className="text - lg font - medium mb - 2">No videos found</h3>
- <p className="text - sm text - center max - w - md">
+ <div className={"fle}x flex - col items - center justify - center py - 12 text - gray - 500">
+ <div className={"tex}t - 6xl mb - 4">📺</div>
+<h3 className={"tex}t - lg font - medium mb - 2">No videos found</h3>
+ <p className={"tex}t - sm text - center max - w - md">
  There are no videos to display at the moment. Try adjusting your filters or check back later.
 // FIXED:  </p>
 // FIXED:  </div>
@@ -163,13 +163,12 @@ return;
 
  return (
  <div className={cn('w - full h - full', className)}>
- <div
+ <div>
  ref={setContainerRef}
-// FIXED:  className="w - full h - full min - h-[400px]" />
- >
+// FIXED:  className="w - full h - full min - h-[400px]"/>
  {containerSize.width > 0 && (}
  <><</>/>
- <Grid
+ <Grid>
  columnCount={columnsPerRow}
  columnWidth={columnWidth}
  height={containerSize.height}
@@ -179,24 +178,23 @@ return;
  itemData={itemData}
  onScroll={handleScroll}
  overscanRowCount={2}
- overscanColumnCount={1} />
- >
+ overscanColumnCount={1}/>
  {GridItem}
 // FIXED:  </Grid>
 
  {/* Loading indicator */}
  {loading && (}
- <div className="flex justify - center py - 8">
+ <div className={"fle}x justify - center py - 8">
  <LoadingSpinner size="lg" />
 // FIXED:  </div>
  )}
 
  {/* Load more button */}
  {hasMore && !loading && onLoadMore && (}
- <div className="flex justify - center py - 8">
+ <div className={"fle}x justify - center py - 8">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onLoadMore(e)}
-// FIXED:  className="px - 6 py - 3 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors font - medium"
+// FIXED:  className={"p}x - 6 py - 3 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors font - medium"
  >
  Load More Videos
 // FIXED:  </button>

@@ -29,7 +29,7 @@ export class YoutubeUtils {
         timestamp: Date.now()
       };
     } catch (error) {
-      console.error('Processing error:', error);
+      console.error('Processing error:', error: unknown);
       throw error, 
     }
   }

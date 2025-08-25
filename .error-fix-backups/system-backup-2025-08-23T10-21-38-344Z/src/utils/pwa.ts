@@ -64,7 +64,7 @@ export class PWAUtils {
  static isInstallSupported(): boolean {
  return (
  'beforeinstallprompt' in window ||
- (navigator as any).standalone !== undefined
+ (navigator).standalone !== undefined
  );
  }
 
@@ -74,7 +74,7 @@ export class PWAUtils {
  static isInstalled(): boolean {
  return (
  window.matchMedia('(display - mode: standalone)').matches ||
- (navigator as any).standalone === true ||
+ (navigator).standalone === true ||
  document.referrer.includes('android - app://')
  );
  }
@@ -191,7 +191,7 @@ export class PWAUtils {
 
  // iOS Safari doesn't support beforeinstallprompt but supports Add to Home Screen
  if (platform === 'ios') {
- return (navigator as any).standalone !== undefined;
+ return (navigator).standalone !== undefined;
  }
 
  // Android and desktop support beforeinstallprompt
@@ -216,7 +216,7 @@ export class PWAUtils {
  return { used, available, percentage };
  }
  } catch (error) {
- (console as any).warn('Failed to get storage usage:', error);
+ (console).warn('Failed to get storage usage:', error);
  }
 
  return { used: 0, available: 0, percentage: 0 };
@@ -234,7 +234,7 @@ export class PWAUtils {
  return true;
  }
  } catch (error) {
- (console as any).error('Failed to clear cache:', error);
+ (console).error('Failed to clear cache:', error);
  }
 
  return false;
@@ -251,11 +251,11 @@ export class PWAUtils {
  saveData: boolean
  } {
  const connection =;
- (navigator as any).connection ||
- (navigator as any).mozConnection ||
- (navigator as any).webkitConnection;
+ (navigator).connection ||
+ (navigator).mozConnection ||
+ (navigator).webkitConnection;
 
- if (connection as any) {
+ if (connection) {
  return {
  type: connection.type || 'unknown',
  effectiveType: connection.effectiveType || 'unknown',

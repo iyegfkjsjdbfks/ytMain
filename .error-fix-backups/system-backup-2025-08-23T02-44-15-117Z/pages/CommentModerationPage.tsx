@@ -40,7 +40,7 @@ const CommentModerationPage: React.FC = () => {}
  for (const video of videos.slice(0, 5)) { // Limit to first 5 videos for demo}
  const videoComments = await getCommentsByVideoId(video.id);
  const commentsWithVideo = videoComments.map((comment) => ({}
- ...(comment as any),
+ ...(comment),
  videoTitle: video.title,
  videoId: video.id,
  status: Math.random() > 0.7 ? 'pending' : Math.random() > 0.8 ? 'spam' : 'approved' as any,
@@ -50,7 +50,7 @@ const CommentModerationPage: React.FC = () => {}
 
  setComments(allComments);
  } catch (error) {}
- (console as any).error('Failed to fetch comments:', error);
+ (console).error('Failed to fetch comments:', error);
  } finally {}
  setLoading(false);
  };
@@ -71,7 +71,7 @@ const CommentModerationPage: React.FC = () => {}
  filtered = filtered.filter((comment) => comment.status === filter);
  }
  // Apply search
- if (searchQuery as any) {}
+ if (searchQuery) {}
  filtered = filtered.filter((comment) =>
  comment.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
  comment.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -80,7 +80,7 @@ const CommentModerationPage: React.FC = () => {}
 
  // Apply sort
  filtered.sort((a, b) => {}
- switch (sortBy as any) {}
+ switch (sortBy) {}
  case 'newest':
  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
  case 'oldest':
@@ -150,7 +150,7 @@ const CommentModerationPage: React.FC = () => {}
  const getStatusBadge = (status: string | number, flaggedReason?: string) => {}
  const baseClasses: string = 'px - 2 py - 1 rounded - full text - xs font - medium';
 
- if (flaggedReason as any) {}
+ if (flaggedReason) {}
  return (
  <span className={`${baseClasses} bg - red - 100 text - red - 800 dark:bg - red - 900 / 30 dark:text - red - 400`}>
  <FlagIcon className="w - 3 h - 3 inline mr - 1" />
@@ -159,7 +159,7 @@ const CommentModerationPage: React.FC = () => {}
  );
  }
 
- switch (status as any) {}
+ switch (status) {}
  case 'approved':
  return <span className={`${baseClasses} bg - green - 100 text - green - 800 dark:bg - green - 900 / 30 dark:text - green - 400`}>Approved</span>;
  case 'pending':
@@ -181,12 +181,12 @@ return comments.filter((c) => c.flaggedReason).length;
  return comments.filter((c) => c.status === filterType).length;
  };
 
- if (loading as any) {}
+ if (loading) {}
  return (
  <div className="p - 6 space - y - 6">
- <div className="animate - pulse">
+ <div className={"animat}e - pulse">
  <div className="h - 8 bg - neutral - 200 dark:bg - neutral - 700 rounded w - 1/4 mb - 6" />
- <div className="space - y - 4">
+ <div className={"spac}e - y - 4">
  {Array<any>.from({ length: 5 }).map((_, i) => (
  <div key={i} className="h - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded - lg" />
  ))}
@@ -199,22 +199,22 @@ return comments.filter((c) => c.flaggedReason).length;
  return (
  <div className="p - 6 space - y - 6">
  {/* Header */}
- <div className="flex flex - col sm:flex - row sm:items - center sm:justify - between">
- <h1 className="text - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mb - 4 sm:mb - 0">
+ <div className={"fle}x flex - col sm:flex - row sm:items - center sm:justify - between">
+ <h1 className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 50 mb - 4 sm:mb - 0">
  Comment Moderation
 // FIXED:  </h1>
- <div className="text - sm text - neutral - 600 dark:text - neutral - 400">
+ <div className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">
  {filteredComments.length} of {comments.length} comments
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Filters and Search */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg p - 4 border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex flex - col lg:flex - row lg:items - center lg:justify - between space - y - 4 lg:space - y - 0">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg p - 4 border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x flex - col lg:flex - row lg:items - center lg:justify - between space - y - 4 lg:space - y - 0">
  {/* Filter Tabs */}
- <div className="flex flex - wrap gap - 2">
+ <div className={"fle}x flex - wrap gap - 2">
  {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType).map((filterType) => (}
- <button
+ <button>
  key={filterType} />
 // FIXED:  onClick={() => setFilter(filterType: React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 2 rounded - lg text - sm font - medium transition - colors ${}
@@ -229,20 +229,20 @@ return comments.filter((c) => c.flaggedReason).length;
 // FIXED:  </div>
 
  {/* Search and Sort */}
- <div className="flex items - center space - x - 4">
- <div className="relative">
- <input
+ <div className={"fle}x items - center space - x - 4">
+ <div className={"relative}">
+ <input>
 // FIXED:  type="text"
 // FIXED:  placeholder="Search comments..."
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setSearchQuery(e.target.value)}
-// FIXED:  className="pl - 3 pr - 10 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent w - 64"
+// FIXED:  className={"p}l - 3 pr - 10 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent w - 64"
  />
 // FIXED:  </div>
- <select
+ <select>
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setSortBy(e.target.value as SortType)}
-// FIXED:  className="px - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent"
+// FIXED:  className={"p}x - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 800 text - neutral - 900 dark:text - neutral - 50 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent"
  >
  <option value="newest">Newest First</option>
  <option value="oldest">Oldest First</option>
@@ -255,36 +255,36 @@ return comments.filter((c) => c.flaggedReason).length;
 
  {/* Bulk Actions */}
  {showBulkActions && (}
- <div className="bg - blue - 50 dark:bg - blue - 900 / 20 border border - blue - 200 dark:border - blue - 800 rounded - lg p - 4">
- <div className="flex items - center justify - between">
- <span className="text - sm font - medium text - blue - 900 dark:text - blue - 100">
+ <div className={"b}g - blue - 50 dark:bg - blue - 900 / 20 border border - blue - 200 dark:border - blue - 800 rounded - lg p - 4">
+ <div className={"fle}x items - center justify - between">
+ <span className={"tex}t - sm font - medium text - blue - 900 dark:text - blue - 100">
  {selectedComments.size} comment{selectedComments.size !== 1 ? 's' : ''} selected
 // FIXED:  </span>
- <div className="flex items - center space - x - 2">
+ <div className={"fle}x items - center space - x - 2">
  <button />
 // FIXED:  onClick={() => handleBulkAction('approve': React.MouseEvent)}
-// FIXED:  className="px - 3 py - 1 bg - green - 500 text - white rounded text - sm hover:bg - green - 600 transition - colors"
+// FIXED:  className={"p}x - 3 py - 1 bg - green - 500 text - white rounded text - sm hover:bg - green - 600 transition - colors"
  >
  <CheckIcon className="w - 4 h - 4 inline mr - 1" />
  Approve
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction('spam': React.MouseEvent)}
-// FIXED:  className="px - 3 py - 1 bg - red - 500 text - white rounded text - sm hover:bg - red - 600 transition - colors"
+// FIXED:  className={"p}x - 3 py - 1 bg - red - 500 text - white rounded text - sm hover:bg - red - 600 transition - colors"
  >
  <ExclamationTriangleIcon className="w - 4 h - 4 inline mr - 1" />
  Mark as Spam
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction('hide': React.MouseEvent)}
-// FIXED:  className="px - 3 py - 1 bg - gray - 500 text - white rounded text - sm hover:bg - gray - 600 transition - colors"
+// FIXED:  className={"p}x - 3 py - 1 bg - gray - 500 text - white rounded text - sm hover:bg - gray - 600 transition - colors"
  >
  <EyeSlashIcon className="w - 4 h - 4 inline mr - 1" />
  Hide
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={() => handleBulkAction('delete': React.MouseEvent)}
-// FIXED:  className="px - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700 transition - colors"
+// FIXED:  className={"p}x - 3 py - 1 bg - red - 600 text - white rounded text - sm hover:bg - red - 700 transition - colors"
  >
  <TrashIcon className="w - 4 h - 4 inline mr - 1" />
  Delete
@@ -295,77 +295,77 @@ return comments.filter((c) => c.flaggedReason).length;
  )}
 
  {/* Comments List */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
  {/* Header with Select All */}
  <div className="p - 4 border - b border - neutral - 200 dark:border - neutral - 700">
- <label className="flex items - center space - x - 3">
- <input
+ <label className={"fle}x items - center space - x - 3">
+ <input>
 // FIXED:  type="checkbox" />
 // FIXED:  checked={selectedComments.size === filteredComments.length && filteredComments.length > 0}
 // FIXED:  onChange={(e: React.ChangeEvent) => handleSelectAll(e)}
-// FIXED:  className="rounded border - neutral - 300 dark:border - neutral - 600 text - blue - 500 focus:ring - blue - 500"
+// FIXED:  className={"rounde}d border - neutral - 300 dark:border - neutral - 600 text - blue - 500 focus:ring - blue - 500"
  />
- <span className="text - sm font - medium text - neutral - 700 dark:text - neutral - 300">
+ <span className={"tex}t - sm font - medium text - neutral - 700 dark:text - neutral - 300">
  Select All
 // FIXED:  </span>
 // FIXED:  </label>
 // FIXED:  </div>
 
  {/* Comments */}
- <div className="divide - y divide - neutral - 200 dark:divide - neutral - 700">
+ <div className={"divid}e - y divide - neutral - 200 dark:divide - neutral - 700">
  {filteredComments.length === 0 ? (}
  <div className="p - 8 text - center">
  <ChatBubbleLeftIcon className="w - 16 h - 16 text - neutral - 400 dark:text - neutral - 500 mx - auto mb - 4" />
- <h3 className="text - lg font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
+ <h3 className={"tex}t - lg font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
  No comments found
 // FIXED:  </h3>
- <p className="text - neutral - 500 dark:text - neutral - 400">
+ <p className={"tex}t - neutral - 500 dark:text - neutral - 400">
  {searchQuery ? 'Try adjusting your search or filters.' : 'No comments match the current filter.'}
 // FIXED:  </p>
 // FIXED:  </div>
  ) : (
  filteredComments.map((comment) => (
  <div key={comment.id} className="p - 4 hover:bg - neutral - 50 dark:hover:bg - neutral - 700 / 30">
- <div className="flex items - start space - x - 4">
- <input
+ <div className={"fle}x items - start space - x - 4">
+ <input>
 // FIXED:  type="checkbox"
 // FIXED:  checked={selectedComments.has(comment.id)} />
 // FIXED:  onChange={() => handleSelectComment(comment.id: React.ChangeEvent)}
-// FIXED:  className="mt - 1 rounded border - neutral - 300 dark:border - neutral - 600 text - blue - 500 focus:ring - blue - 500"
+// FIXED:  className={"m}t - 1 rounded border - neutral - 300 dark:border - neutral - 600 text - blue - 500 focus:ring - blue - 500"
  />
- <img
+ <img>
 // FIXED:  src={comment.authorAvatar}
 // FIXED:  alt={comment.authorName}
 // FIXED:  className="w - 10 h - 10 rounded - full" />
  />
- <div className="flex - 1 min - w - 0">
- <div className="flex items - center space - x - 2 mb - 1">
- <span className="font - medium text - neutral - 900 dark:text - neutral - 50">
+ <div className={"fle}x - 1 min - w - 0">
+ <div className={"fle}x items - center space - x - 2 mb - 1">
+ <span className={"fon}t - medium text - neutral - 900 dark:text - neutral - 50">
  {comment.authorName}
 // FIXED:  </span>
  {getStatusBadge(comment.status, comment.flaggedReason)}
- <span className="text - sm text - neutral - 500 dark:text - neutral - 400">
+ <span className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400">
  {parseRelativeDate(comment.publishedAt)}
 // FIXED:  </span>
 // FIXED:  </div>
-<p className="text - neutral - 700 dark:text - neutral - 300 mb - 2">
+<p className={"tex}t - neutral - 700 dark:text - neutral - 300 mb - 2">
  {comment.text}
 // FIXED:  </p>
- <div className="flex items - center space - x - 4 text - sm text - neutral - 500 dark:text - neutral - 400">
+ <div className={"fle}x items - center space - x - 4 text - sm text - neutral - 500 dark:text - neutral - 400">
  <span > On: {comment.videoTitle}</span>
  <span>{comment.likes} likes</span>
  {comment.replyCount && <span>{comment.replyCount} replies</span>}
 // FIXED:  </div>
  {comment.flaggedReason && (}
- <div className="mt - 2 p - 2 bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded">
- <span className="text - sm text - red - 800 dark:text - red - 400">
+ <div className={"m}t - 2 p - 2 bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded">
+ <span className={"tex}t - sm text - red - 800 dark:text - red - 400">
  <FlagIcon className="w - 4 h - 4 inline mr - 1" />,
  Flagged: {comment.flaggedReason}
 // FIXED:  </span>
 // FIXED:  </div>
  )}
 // FIXED:  </div>
- <div className="flex items - center space - x - 1">
+ <div className={"fle}x items - center space - x - 1">
  <button />
 // FIXED:  onClick={() => handleSingleAction(comment.id, 'approve': React.MouseEvent)}
 // FIXED:  className="p - 2 text - green - 600 hover:bg - green - 100 dark:hover:bg - green - 900 / 30 rounded transition - colors"

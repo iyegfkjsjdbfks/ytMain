@@ -9,16 +9,16 @@ describe('ImportFixer', () => {
 
   beforeEach(() => {
     mockLogger = global.createMockLogger();
-    importFixer = new ImportFixer(projectRoot, mockLogger), 
+    importFixer = new ImportFixer(projectRoot, mockLogger)}
   });
 
   afterEach(() => {
-    jest.clearAllMocks(), 
+    jest.clearAllMocks()}
   });
 
   describe('initialization', () => {
     it('should initialize with project root and logger', () => {
-      expect(importFixer).toBeDefined(), 
+      expect(importFixer).toBeDefined()}
     });
   });
 
@@ -33,8 +33,8 @@ describe('ImportFixer', () => {
         severity: 'error',
         category: {
           primary: 'Import',
-          secondary: 'ModuleResolution',
-          rootCause: ErrorRootCause.MISSING_IMPORT, 
+          secondary: 'ModuleResolution'}
+          rootCause: ErrorRootCause.MISSING_IMPORT, }
         }
       };
 
@@ -53,8 +53,8 @@ describe('ImportFixer', () => {
         severity: 'error',
         category: {
           primary: 'Import',
-          secondary: 'ExportResolution',
-          rootCause: ErrorRootCause.MISSING_IMPORT, 
+          secondary: 'ExportResolution'}
+          rootCause: ErrorRootCause.MISSING_IMPORT, }
         }
       };
 
@@ -65,7 +65,7 @@ describe('ImportFixer', () => {
 
   describe('import extraction', () => {
     it('should extract import statements from file content', () => {
-      const fileContent = `
+      const fileContent = `;
 import React from 'react', ;
 import { Component, useState } from 'react';
 import * as fs from 'fs';
@@ -84,21 +84,21 @@ const MyComponent = () => {
         importPath: 'react',
         importedItems: ['React'],
         isDefault: true,
-        isNamespace: false,
+        isNamespace: false}
       });
       
       expect(imports[1]).toMatchObject({
         importPath: 'react',
         importedItems: ['Component', 'useState'],
         isDefault: false,
-        isNamespace: false,
+        isNamespace: false}
       });
       
       expect(imports[2]).toMatchObject({
         importPath: 'fs',
         importedItems: ['fs'],
         isDefault: false,
-        isNamespace: true,
+        isNamespace: true}
       });
     });
   });
@@ -111,14 +111,14 @@ const MyComponent = () => {
           importedItems: ['React'],
           isDefault: true,
           isNamespace: false,
-          line: 1,
+          line: 1}
           originalText: "import React from 'react', "
         },
         {
           importPath: 'react',
           importedItems: ['Component'],
-          isDefault: false,
-          isNamespace: false,
+          isDefault: false}
+          isNamespace: false,;
           line: 2,;
           originalText: "import { Component } from 'react';"
         }
@@ -141,7 +141,7 @@ const MyComponent = () => {
       expect(similarity2).toBeGreaterThan(0.8);
 
       const similarity3 = (importFixer).calculateSimilarity('react', 'completely-different');
-      expect(similarity3).toBeLessThan(0.5), 
+      expect(similarity3).toBeLessThan(0.5)}
     });
   });
 
@@ -150,7 +150,7 @@ const MyComponent = () => {
       const commands = await importFixer.fixImportErrors([]);
       
       expect(commands).toEqual([]);
-      expect(mockLogger.info).toHaveBeenCalledWith('IMPORT_FIXER', 'Fixing 0 import-related errors'), 
+      expect(mockLogger.info).toHaveBeenCalledWith('IMPORT_FIXER', 'Fixing 0 import-related errors')}
     });
 
     it('should process import errors and generate commands', async () => {
@@ -164,8 +164,8 @@ const MyComponent = () => {
           severity: 'error',
           category: {
             primary: 'Import',
-            secondary: 'ModuleResolution',
-            rootCause: ErrorRootCause.MISSING_IMPORT, 
+            secondary: 'ModuleResolution'}
+            rootCause: ErrorRootCause.MISSING_IMPORT, }
           }
         }
       ];
@@ -181,10 +181,10 @@ const MyComponent = () => {
         
         expect(commands).toBeDefined();
         expect(Array.isArray(commands)).toBe(true);
-        expect(mockLogger.info).toHaveBeenCalledWith('IMPORT_FIXER', 'Fixing 1 import-related errors'), 
+        expect(mockLogger.info).toHaveBeenCalledWith('IMPORT_FIXER', 'Fixing 1 import-related errors')}
       } catch (error) {
         // Expected to fail due to mocked file system, but should not crash;
-        expect(error).toBeDefined(), 
+        expect(error).toBeDefined()}
       }
     });
   });

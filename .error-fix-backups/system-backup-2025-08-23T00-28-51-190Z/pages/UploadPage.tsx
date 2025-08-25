@@ -117,7 +117,7 @@ return null;
  const handleDrop = (event: React.DragEvent) => {
  event.preventDefault();
  const file = event.dataTransfer.files[0];
- if (file as any) {
+ if (file) {
  // Create a proper FileList-like object
  const fileList = {
  0: file,
@@ -170,88 +170,88 @@ return null;
  };
 
  const getVisibilityIcon = (visibility) => {
- switch (visibility as any) {
- case 'public': return <GlobeAltIcon className="w-4 h-4" />;
- case 'unlisted': return <EyeIcon className="w-4 h-4" />;
- case 'private': return <LockClosedIcon className="w-4 h-4" />;
- default: return <GlobeAltIcon className="w-4 h-4" />
+ switch (visibility) {
+ case 'public': return <GlobeAltIcon className={"w}-4 h-4" />;
+ case 'unlisted': return <EyeIcon className={"w}-4 h-4" />;
+ case 'private': return <LockClosedIcon className={"w}-4 h-4" />;
+ default: return <GlobeAltIcon className={"w}-4 h-4" />
  };
 
  return (
- <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
- <div className="max-w-6xl mx-auto p-6">
+ <div className={"min}-h-screen bg-gray-50 dark:bg-gray-900">
+ <div className={"max}-w-6xl mx-auto p-6">
  {/* Header */}
- <div className="flex items-center justify-between mb-8">
- <div className="flex items-center space-x-3">
- <VideoCameraIcon className="w-8 h-8 text-red-600" />
- <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+ <div className={"fle}x items-center justify-between mb-8">
+ <div className={"fle}x items-center space-x-3">
+ <VideoCameraIcon className={"w}-8 h-8 text-red-600" />
+ <h1 className={"text}-3xl font-bold text-gray-900 dark:text-white">
  Upload Video
 // FIXED:  </h1>
 // FIXED:  </div>
 
- <UnifiedButton
+ <UnifiedButton>
  variant="ghost" />
 // FIXED:  onClick={() => navigate('/studio')}
  >
- <XMarkIcon className="w-5 h-5 mr-2" />
+ <XMarkIcon className={"w}-5 h-5 mr-2" />
  Cancel
 // FIXED:  </UnifiedButton>
 // FIXED:  </div>
 
- <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+ <div className={"gri}d grid-cols-1 lg:grid-cols-3 gap-8">
  {/* Upload Area */}
- <div className="lg:col-span-2">
+ <div className={"lg}:col-span-2">
  {!uploadedFile ? (
- <div
-// FIXED:  className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-12 text-center hover:border-gray-400 dark:hover:border-gray-500 transition-colors cursor-pointer"
+ <div>
+// FIXED:  className={"border}-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-12 text-center hover:border-gray-400 dark:hover:border-gray-500 transition-colors cursor-pointer"
  onDragOver={handleDragOver}
  onDrop={handleDrop} />
 // FIXED:  onClick={() => fileInputRef.current?.click()}
  >
- <CloudArrowUpIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
- <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+ <CloudArrowUpIcon className={"w}-16 h-16 text-gray-400 mx-auto mb-4" />
+ <h3 className={"text}-xl font-semibold text-gray-900 dark:text-white mb-2">
  Select files to upload
 // FIXED:  </h3>
- <p className="text-gray-600 dark:text-gray-400 mb-4">
+ <p className={"text}-gray-600 dark:text-gray-400 mb-4">
  Or drag and drop video files
 // FIXED:  </p>
  <UnifiedButton variant="primary">
  Select Files
 // FIXED:  </UnifiedButton>
- <input
+ <input>
  ref={fileInputRef}
 // FIXED:  type="file"
  accept="video/*" />
 // FIXED:  onChange={(e) => handleFileSelect(e)}
-// FIXED:  className="hidden"
+// FIXED:  className={"hidden}"
  />
- <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+ <p className={"text}-sm text-gray-500 dark:text-gray-400 mt-4">
  Your videos will be private until you publish them.
 // FIXED:  </p>
 // FIXED:  </div>
  ) : (
- <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+ <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
  {/* Upload Progress */}
- <div className="mb-6">
- <div className="flex items-center space-x-4 mb-4">
- <video
+ <div className={"mb}-6">
+ <div className={"fle}x items-center space-x-4 mb-4">
+ <video>
 // FIXED:  src={uploadedFile.preview}
-// FIXED:  className="w-24 h-14 object-cover rounded"
+// FIXED:  className={"w}-24 h-14 object-cover rounded"
  controls={false} />
  />
- <div className="flex-1">
- <h3 className="font-medium text-gray-900 dark:text-white">
+ <div className={"flex}-1">
+ <h3 className={"font}-medium text-gray-900 dark:text-white">
  {uploadedFile.file.name}
 // FIXED:  </h3>
- <p className="text-sm text-gray-600 dark:text-gray-400">
+ <p className={"text}-sm text-gray-600 dark:text-gray-400">
  {(uploadedFile.file.size / (1024 * 1024)).toFixed(1)} MB
 // FIXED:  </p>
 // FIXED:  </div>
- <div className="flex items-center space-x-2">
+ <div className={"fle}x items-center space-x-2">
  {uploadedFile.status === 'completed' && (
- <CheckCircleIcon className="w-6 h-6 text-green-500" />
+ <CheckCircleIcon className={"w}-6 h-6 text-green-500" />
  )}
- <span className="text-sm font-medium text-gray-900 dark:text-white">
+ <span className={"text}-sm font-medium text-gray-900 dark:text-white">
  {uploadedFile.status === 'uploading' && 'Uploading...'}
  {uploadedFile.status === 'processing' && 'Processing...'}
  {uploadedFile.status === 'completed' && 'Ready to publish'}
@@ -261,9 +261,9 @@ return null;
 // FIXED:  </div>
 
  {uploadedFile.status !== 'completed' && (
- <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
- <div
-// FIXED:  className="bg-red-600 h-2 rounded-full transition-all duration-300"
+ <div className={"w}-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+ <div>
+// FIXED:  className={"bg}-red-600 h-2 rounded-full transition-all duration-300"
 // FIXED:  style={{ width: `${uploadedFile.progress}%` } />
  />
 // FIXED:  </div>
@@ -272,58 +272,58 @@ return null;
 
  {/* Video Details Form */}
  <Tabs value={activeTab} onValueChange={setActiveTab}>
- <TabsList className="mb-6">
+ <TabsList className={"mb}-6">
  <TabsTrigger value="details">Details</TabsTrigger>
  <TabsTrigger value="visibility">Visibility</TabsTrigger>
  <TabsTrigger value="monetization">Monetization</TabsTrigger>
 // FIXED:  </TabsList>
 
- <TabsContent value="details" className="space-y-6">
+ <TabsContent value="details" className={"space}-y-6">
  <div>
- <label htmlFor="video-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="video-title" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Title (required)
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  type="text"
 // FIXED:  id="video-title"
 // FIXED:  value={metadata.title} />
 // FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, title: e.target.value }))}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
 // FIXED:  placeholder="Add a title that describes your video"
  maxLength={100}
  />
- <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+ <p className={"text}-sm text-gray-500 dark:text-gray-400 mt-1">
  {metadata.title.length}/100
 // FIXED:  </p>
 // FIXED:  </div>
 
  <div>
- <label htmlFor="video-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="video-description" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Description
 // FIXED:  </label>
- <textarea
+ <textarea>
 // FIXED:  id="video-description"
 // FIXED:  value={metadata.description} />
 // FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, description: e.target.value }))}
  rows={6}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
 // FIXED:  placeholder="Tell viewers about your video"
  maxLength={5000}
  />
- <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+ <p className={"text}-sm text-gray-500 dark:text-gray-400 mt-1">
  {metadata.description.length}/5000
 // FIXED:  </p>
 // FIXED:  </div>
 
  <div>
- <label htmlFor="video-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="video-category" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Category
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id="video-category"
 // FIXED:  value={metadata.category} />
 // FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, category: e.target.value }))}
-// FIXED:  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+// FIXED:  className={"w}-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
  >
  {categories.map((category) => (
  <option key={category} value={category}>
@@ -334,21 +334,20 @@ return null;
 // FIXED:  </div>
 
  <div>
- <label htmlFor="video-tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+ <label htmlFor="video-tags" className={"bloc}k text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
  Tags
 // FIXED:  </label>
- <div className="flex flex-wrap gap-2 mb-2">
+ <div className={"fle}x flex-wrap gap-2 mb-2">
  {metadata.tags.map((tag) => (
- <span
+ <span>
  key={tag}
-// FIXED:  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200" />
- >
+// FIXED:  className={"inline}-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"/>
  {tag}
  <button />
 // FIXED:  onClick={() => removeTag(tag)}
-// FIXED:  className="ml-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+// FIXED:  className={"ml}-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
  >
- <XMarkIcon className="w-4 h-4" />
+ <XMarkIcon className={"w}-4 h-4" />
 // FIXED:  </button>
 // FIXED:  </span>
  ))}
@@ -356,11 +355,11 @@ return null;
 // FIXED:  </div>
 
  <div>
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white mb-4">
  Choose when to publish and who can see your video
 // FIXED:  </h3>
 
- <div className="space-y-3">
+ <div className={"space}-y-3">
  {[
  { value: 'public',
  label: 'Public', description: 'Anyone can search for and view' },
@@ -368,25 +367,24 @@ return null;
  label: 'Unlisted', description: 'Anyone with the link can view' },
  { value: 'private',
  label: 'Private', description: 'Only you can view' }].map((option) => (
- <label
+ <label>
  key={option.value}
-// FIXED:  className="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800" />
- >
- <input
+// FIXED:  className={"fle}x items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800"/>
+ <input>
 // FIXED:  type="radio"
 // FIXED:  name="visibility"
 // FIXED:  value={option.value}
 // FIXED:  checked={metadata.visibility === option.value} />
-// FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, visibility: e.target.value as any }))}
-// FIXED:  className="mr-3"
+// FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, visibility: e.target.value}))}
+// FIXED:  className={"mr}-3"
  />
- <div className="flex items-center space-x-3">
+ <div className={"fle}x items-center space-x-3">
  {getVisibilityIcon(option.value)}
  <div>
- <p className="font-medium text-gray-900 dark:text-white">
+ <p className={"font}-medium text-gray-900 dark:text-white">
  {option.label}
 // FIXED:  </p>
- <p className="text-sm text-gray-600 dark:text-gray-400">
+ <p className={"text}-sm text-gray-600 dark:text-gray-400">
  {option.description}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -396,49 +394,49 @@ return null;
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="space-y-4">
- <label htmlFor="comments-enabled" className="flex items-center text-gray-900 dark:text-white">
- <input
+ <div className={"space}-y-4">
+ <label htmlFor="comments-enabled" className={"fle}x items-center text-gray-900 dark:text-white">
+ <input>
 // FIXED:  type="checkbox"
 // FIXED:  id="comments-enabled"
 // FIXED:  checked={metadata.commentsEnabled} />
 // FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, commentsEnabled: e.target.checked }))}
-// FIXED:  className="mr-3"
+// FIXED:  className={"mr}-3"
  />
  Allow comments
 // FIXED:  </label>
 
- <label htmlFor="age-restriction" className="flex items-center">
- <input
+ <label htmlFor="age-restriction" className={"fle}x items-center">
+ <input>
 // FIXED:  type="checkbox"
 // FIXED:  id="age-restriction"
 // FIXED:  checked={metadata.ageRestriction} />
 // FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, ageRestriction: e.target.checked }))}
-// FIXED:  className="mr-3"
+// FIXED:  className={"mr}-3"
  />
- <span className="text-gray-900 dark:text-white">Age restriction (18+)</span>
+ <span className={"text}-gray-900 dark:text-white">Age restriction (18+)</span>
 // FIXED:  </label>
 // FIXED:  </div>
 // FIXED:  </TabsContent>
 
- <TabsContent value="monetization" className="space-y-6">
+ <TabsContent value="monetization" className={"space}-y-6">
  <div>
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white mb-4">
  Monetization
 // FIXED:  </h3>
 
- <label htmlFor="monetization-enabled" className="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
- <input
+ <label htmlFor="monetization-enabled" className={"fle}x items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+ <input>
 // FIXED:  type="checkbox"
 // FIXED:  id="monetization-enabled"
 // FIXED:  checked={metadata.monetization} />
 // FIXED:  onChange={(e) => setMetadata(prev => ({ ...prev as any, monetization: e.target.checked }))}
-// FIXED:  className="mr-3"
+// FIXED:  className={"mr}-3"
  />
- <p className="font-medium text-gray-900 dark:text-white">
+ <p className={"font}-medium text-gray-900 dark:text-white">
  Enable monetization
 // FIXED:  </p>
- <p className="text-sm text-gray-600 dark:text-gray-400">
+ <p className={"text}-sm text-gray-600 dark:text-gray-400">
  Allow ads to be shown on your video
 // FIXED:  </p>
 // FIXED:  </label>
@@ -450,27 +448,27 @@ return null;
 // FIXED:  </div>
 
  {/* Sidebar */}
- <div className="space-y-6">
+ <div className={"space}-y-6">
  {uploadedFile && (
- <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+ <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white mb-4">
  Video Preview
 // FIXED:  </h3>
- <video
+ <video>
 // FIXED:  src={uploadedFile.preview}
  controls
-// FIXED:  className="w-full rounded-lg" />
+// FIXED:  className={"w}-full rounded-lg" />
  />
 // FIXED:  </div>
  )}
 
- <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+ <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white mb-4">
  Publish Options
 // FIXED:  </h3>
 
- <div className="space-y-4">
- <UnifiedButton
+ <div className={"space}-y-4">
+ <UnifiedButton>
  variant="primary"
  fullWidth />
 // FIXED:  onClick={(e) => handlePublish(e)}
@@ -489,11 +487,11 @@ return null;
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+ <div className={"bg}-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+ <h3 className={"text}-lg font-medium text-gray-900 dark:text-white mb-4">
  Upload Tips
 // FIXED:  </h3>
- <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
+ <ul className={"text}-sm text-gray-600 dark:text-gray-400 space-y-2">
  <li>• Use a clear, descriptive title</li>
  <li>• Add relevant tags to help people find your video</li>
  <li>• Choose an eye-catching thumbnail</li>

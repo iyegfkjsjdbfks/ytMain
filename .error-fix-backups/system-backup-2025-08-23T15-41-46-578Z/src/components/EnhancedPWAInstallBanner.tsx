@@ -170,7 +170,7 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
  setState(prev => ({ ...prev as any, isVisible: false,}
  isAnimating: false }));
  // Don't permanently dismiss, just hide for this session
- (sessionStorage as any).setItem('pwa - banner - hidden', 'true');
+ (sessionStorage).setItem('pwa - banner - hidden', 'true');
  }, []);
 
  // Handle update
@@ -187,7 +187,7 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
  // Position classes
  const positionClasses = useMemo(() => {}
  const base: string = 'fixed z - 50';
- switch (position as any) {}
+ switch (position) {}
  case 'top':
  return `${base} top - 4 left - 4 right - 4 md:left - auto md:right - 4 md:max - w - sm`;
  case 'center':
@@ -221,37 +221,36 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
  }
 
  // Update banner (if update is available)
- if (updateAvailable as any) {}
+ if (updateAvailable) {}
  return (
  <div className={`${positionClasses} ${className}`}>
- <div
-// FIXED:  className={`${themeClasses} rounded - lg shadow - lg border p - 4 ${animationClasses}`} />
- >
- <div className='flex items - center justify - between mb - 3'>
- <div className='flex items - center space - x - 2'>
+ <div>
+// FIXED:  className={`${themeClasses} rounded - lg shadow - lg border p - 4 ${animationClasses}`}/>
+ <div className={'fle}x items - center justify - between mb - 3'>
+ <div className={'fle}x items - center space - x - 2'>
  <div className='w - 8 h - 8 bg - blue - 600 rounded - lg flex items - center justify - center'>
  <Download className='w - 4 h - 4 text - white' />
 // FIXED:  </div>
  <div>
- <h3 className='font - semibold text - sm'>Update Available</h3>
- <p className='text - xs opacity - 75'>
+ <h3 className={'fon}t - semibold text - sm'>Update Available</h3>
+ <p className={'tex}t - xs opacity - 75'>
  New features and improvements
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDismiss(e)}
-// FIXED:  className='opacity - 50 hover:opacity - 75 transition - opacity'
+// FIXED:  className={'opacit}y - 50 hover:opacity - 75 transition - opacity'
 // FIXED:  aria - label='Dismiss update banner'
  >
  <X className='w - 4 h - 4' />
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className='flex space - x - 2'>
+ <div className={'fle}x space - x - 2'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleUpdate(e)}
-// FIXED:  className='flex - 1 bg - blue - 600 hover:bg - blue - 700 text - white text - sm font - medium py - 2 px - 3 rounded - md transition - colors'
+// FIXED:  className={'fle}x - 1 bg - blue - 600 hover:bg - blue - 700 text - white text - sm font - medium py - 2 px - 3 rounded - md transition - colors'
  >
  Update Now
 // FIXED:  </button>
@@ -275,21 +274,20 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
  if (variant === 'minimal') {}
  return (
  <div className={`${positionClasses} ${className}`}>
- <div
-// FIXED:  className={`${themeClasses} rounded - lg shadow - lg border p - 3 ${animationClasses}`} />
- >
- <div className='flex items - center justify - between'>
- <div className='flex items - center space - x - 2'>
+ <div>
+// FIXED:  className={`${themeClasses} rounded - lg shadow - lg border p - 3 ${animationClasses}`}/>
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center space - x - 2'>
  <div className='w - 6 h - 6 bg - red - 600 rounded flex items - center justify - center'>
  <div className='w - 3 h - 3 bg - white rounded - sm' />
 // FIXED:  </div>
-<span className='text - sm font - medium'>Install YouTubeX</span>
+<span className={'tex}t - sm font - medium'>Install YouTubeX</span>
 // FIXED:  </div>
- <div className='flex items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 1'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleInstall(e)}
 // FIXED:  disabled={state.installProgress === 'installing'}
-// FIXED:  className='bg - red - 600 hover:bg - red - 700 disabled:opacity - 50 text - white text - xs font - medium py - 1 px - 2 rounded transition - colors'
+// FIXED:  className={'b}g - red - 600 hover:bg - red - 700 disabled:opacity - 50 text - white text - xs font - medium py - 1 px - 2 rounded transition - colors'
  >
  {state.installProgress === 'installing'}
  ? 'Installing...'
@@ -297,7 +295,7 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDismiss(e)}
-// FIXED:  className='opacity - 50 hover:opacity - 75 transition - opacity p - 1'
+// FIXED:  className={'opacit}y - 50 hover:opacity - 75 transition - opacity p - 1'
 // FIXED:  aria - label='Dismiss'
  >
  <X className='w - 3 h - 3' />
@@ -313,27 +311,26 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
  if (variant === 'floating') {}
  return (
  <div className={`${positionClasses} ${className}`}>
- <div
-// FIXED:  className={`${themeClasses} rounded - full shadow - lg border p - 3 ${animationClasses}`} />
- >
- <div className='flex items - center space - x - 3'>
+ <div>
+// FIXED:  className={`${themeClasses} rounded - full shadow - lg border p - 3 ${animationClasses}`}/>
+ <div className={'fle}x items - center space - x - 3'>
  <div className='w - 8 h - 8 bg - red - 600 rounded - full flex items - center justify - center'>
  <Download className='w - 4 h - 4 text - white' />
 // FIXED:  </div>
- <div className='flex - 1'>
- <p className='text - sm font - medium'>Install App</p>
+ <div className={'fle}x - 1'>
+ <p className={'tex}t - sm font - medium'>Install App</p>
 // FIXED:  </div>
- <div className='flex items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 1'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleInstall(e)}
 // FIXED:  disabled={state.installProgress === 'installing'}
-// FIXED:  className='bg - red - 600 hover:bg - red - 700 disabled:opacity - 50 text - white text - xs font - medium py - 1 px - 3 rounded - full transition - colors'
+// FIXED:  className={'b}g - red - 600 hover:bg - red - 700 disabled:opacity - 50 text - white text - xs font - medium py - 1 px - 3 rounded - full transition - colors'
  >
  {state.installProgress === 'installing' ? '...' : 'Install'}
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDismiss(e)}
-// FIXED:  className='opacity - 50 hover:opacity - 75 transition - opacity p - 1'
+// FIXED:  className={'opacit}y - 50 hover:opacity - 75 transition - opacity p - 1'
 // FIXED:  aria - label='Dismiss'
  >
  <X className='w - 3 h - 3' />
@@ -348,27 +345,26 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
  // Detailed variant (default)
  return (
  <div className={`${positionClasses} ${className}`}>
- <div
-// FIXED:  className={`${themeClasses} rounded - lg shadow - lg border ${animationClasses}`} />
- >
+ <div>
+// FIXED:  className={`${themeClasses} rounded - lg shadow - lg border ${animationClasses}`}/>
  {/* Header */}
  <div className='p - 4 pb - 0'>
- <div className='flex items - start justify - between mb - 3'>
- <div className='flex items - center space - x - 3'>
+ <div className={'fle}x items - start justify - between mb - 3'>
+ <div className={'fle}x items - center space - x - 3'>
  <div className='w - 10 h - 10 bg - red - 600 rounded - lg flex items - center justify - center'>
  <div className='w - 6 h - 6 bg - white rounded - sm flex items - center justify - center'>
  <div className='w - 0 h - 0 border - l-[4px] border - l - red - 600 border - t-[3px] border - t - transparent border - b-[3px] border - b - transparent' />
 // FIXED:  </div>
 // FIXED:  </div>
  <div>
- <h3 className='font - semibold text - base'>Install YouTubeX</h3>
- <p className='text - sm opacity - 75'>
+ <h3 className={'fon}t - semibold text - base'>Install YouTubeX</h3>
+ <p className={'tex}t - sm opacity - 75'>
  Get the full app experience
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
- <div className='flex items - center space - x - 1'>
- <div className='flex items - center space - x - 1 text - xs opacity - 50'>
+ <div className={'fle}x items - center space - x - 1'>
+ <div className={'fle}x items - center space - x - 1 text - xs opacity - 50'>
  {isOnline ? (}
  <Wifi className='w - 3 h - 3' />
  ) : (
@@ -377,7 +373,7 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
 // FIXED:  </div>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleDismiss(e)}
-// FIXED:  className='opacity - 50 hover:opacity - 75 transition - opacity p - 1'
+// FIXED:  className={'opacit}y - 50 hover:opacity - 75 transition - opacity p - 1'
 // FIXED:  aria - label='Dismiss install banner'
  >
  <X className='w - 4 h - 4' />
@@ -388,14 +384,14 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
 
  {/* Benefits */}
  {showBenefits && (}
- <div className='px - 4 pb - 3'>
- <div className='grid grid - cols - 2 gap - 2'>
+ <div className={'p}x - 4 pb - 3'>
+ <div className={'gri}d grid - cols - 2 gap - 2'>
  {BENEFITS.slice(0, state.showDetails ? 4 : 2).map((benefit, index) => {}
  const Icon = benefit.icon;
  return (
- <div key={index} className='flex items - center space - x - 2'>
+ <div key={index} className={'fle}x items - center space - x - 2'>
  <Icon className='w - 3 h - 3 opacity - 60' />
- <span className='text - xs opacity - 75'>
+ <span className={'tex}t - xs opacity - 75'>
  {benefit.title}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -407,7 +403,7 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
  {BENEFITS.length > 2 && (}
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => toggleDetails(e)}
-// FIXED:  className='text - xs opacity - 50 hover:opacity - 75 transition - opacity mt - 2'
+// FIXED:  className={'tex}t - xs opacity - 50 hover:opacity - 75 transition - opacity mt - 2'
  >
  {state.showDetails ? 'Show less' : 'Show more benefits'}
 // FIXED:  </button>
@@ -417,11 +413,11 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
 
  {/* Actions */}
  <div className='p - 4 pt - 0'>
- <div className='flex space - x - 2 mb - 3'>
+ <div className={'fle}x space - x - 2 mb - 3'>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => handleInstall(e)}
 // FIXED:  disabled={state.installProgress === 'installing'}
-// FIXED:  className='flex - 1 bg - red - 600 hover:bg - red - 700 disabled:opacity - 50 text - white text - sm font - medium py - 2.5 px - 4 rounded - md transition - colors flex items - center justify - center space - x - 2'
+// FIXED:  className={'fle}x - 1 bg - red - 600 hover:bg - red - 700 disabled:opacity - 50 text - white text - sm font - medium py - 2.5 px - 4 rounded - md transition - colors flex items - center justify - center space - x - 2'
  >
  {state.installProgress === 'installing' ? (}
  <><</>/><</>/><</>/>
@@ -448,16 +444,16 @@ const EnhancedPWAInstallBanner: FC < EnhancedPWAInstallBannerProps> = ({}
 // FIXED:  </div>
 
  {/* Footer */}
- <div className='text - xs opacity - 50 text - center'>
+ <div className={'tex}t - xs opacity - 50 text - center'>
  Works on all devices • No app store needed
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Error state */}
  {state.installProgress === 'error' && (}
- <div className='px - 4 pb - 4'>
- <div className='bg - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded - md p - 2'>
- <p className='text - xs text - red - 600 dark:text - red - 400 text - center'>
+ <div className={'p}x - 4 pb - 4'>
+ <div className={'b}g - red - 50 dark:bg - red - 900 / 20 border border - red - 200 dark:border - red - 800 rounded - md p - 2'>
+ <p className={'tex}t - xs text - red - 600 dark:text - red - 400 text - center'>
  Installation failed. Please try again.
 // FIXED:  </p>
 // FIXED:  </div>

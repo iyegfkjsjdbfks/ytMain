@@ -119,7 +119,7 @@ const BaseForm: FC<BaseFormProps> = ({
     switch (field.type) {
       case 'textarea':
         return (
-          <textarea
+          <textarea>
             {...commonProps}
             placeholder={field.placeholder}
             rows={field.rows || 4}
@@ -140,7 +140,7 @@ const BaseForm: FC<BaseFormProps> = ({
       
       case 'checkbox':
         return (
-          <input
+          <input>
             {...commonProps}
             type="checkbox"
             checked={formData[field.name] || false}
@@ -149,7 +149,7 @@ const BaseForm: FC<BaseFormProps> = ({
       
       case 'file':
         return (
-          <input
+          <input>
             {...commonProps}
             type="file"
             accept={field.accept}
@@ -158,7 +158,7 @@ const BaseForm: FC<BaseFormProps> = ({
       
       default:
         return (
-          <input
+          <input>
             {...commonProps}
             type={field.type}
             placeholder={field.placeholder}
@@ -169,51 +169,51 @@ const BaseForm: FC<BaseFormProps> = ({
 
   return (
     <form onSubmit={handleFormSubmit} className={`base - form ${className}`}>
-      {error && <div className="form - error">{error}</div>}
-      {success && <div className="form - success">{success}</div>}
+      {error && <div className={"for}m - error">{error}</div>}
+      {success && <div className={"for}m - success">{success}</div>}
       
       {fields.map(field => (
-        <div key={field.name} className="form - field">
-          <label htmlFor={field.name} className="form - label">
+        <div key={field.name} className={"for}m - field">
+          <label htmlFor={field.name} className={"for}m - label">
             {field.label}
-            {field.required && <span className="required">*</span>}
+            {field.required && <span className={"required}">*</span>}
           </label>
           {renderField(field)}
           {errors[field.name] && (
-            <div className="field - error">{errors[field.name]}</div>
+            <div className={"fiel}d - error">{errors[field.name]}</div>
           )}
         </div>
       ))}
       
       {children}
       
-      <div className="form - actions">
+      <div className={"for}m - actions">
         {showResetButton && (
-          <button
+          <button>
             type="button"
             onClick={handleReset}
             disabled={loading}
-            className="btn btn - secondary"
+            className={"bt}n btn - secondary"
           >
             Reset
           </button>
         )}
         
         {onCancel && (
-          <button
+          <button>
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="btn btn - secondary"
+            className={"bt}n btn - secondary"
           >
             {cancelLabel}
           </button>
         )}
         
-        <button
+        <button>
           type="submit"
           disabled={loading}
-          className="btn btn - primary"
+          className={"bt}n btn - primary"
         >
           {loading ? 'Submitting...' : submitLabel}
         </button>

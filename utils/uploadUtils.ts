@@ -8,7 +8,7 @@ export interface VideoUploadData {
 
 export interface UploadProgress { percentage: number; uploadedBytes: number; totalBytes: number; speed: number; timeRemaining: number }
 
-export interface UploadResponse { success: boolean; videoId?: string; message?: string; [k: string]: unknown }
+export interface UploadResponse { success: boolean; videoId?: string; message?: string; [k: string]}
 
 export interface UploadOptions {
 	onProgress?: (p: UploadProgress) => void;

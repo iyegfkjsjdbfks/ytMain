@@ -88,7 +88,7 @@ export const formatTimeAgo = (dateString): string => {
  const diffInYears = Math.floor(diffInDays / 365);
  return `${diffInYears} year${diffInYears === 1 ? '' : 's'} ago`;
  } catch (error) {
- (console as any).error('Error formatting date:', error);
+ (console).error('Error formatting date:', error);
  return 'Unknown';
  };
 
@@ -145,7 +145,7 @@ return '$0.00';
  style: 'currency',
  currency }).format(amount);
  } catch (error) {
- (console as any).error('Error formatting currency:', error);
+ (console).error('Error formatting currency:', error);
  return `${currency} ${amount.toFixed(2)}`;
  };
 
@@ -162,7 +162,7 @@ export const formatDate = (dateString, options?: Intl.DateTimeFormatOptions): st
 
  return date.toLocaleDateString('en-US', options || defaultOptions);
  } catch (error) {
- (console as any).error('Error formatting date:', error);
+ (console).error('Error formatting date:', error);
  return 'Invalid date';
  };
 
@@ -178,7 +178,7 @@ export const formatTime = (dateString, options?: Intl.DateTimeFormatOptions): st
 
  return date.toLocaleTimeString('en-US', options || defaultOptions);
  } catch (error) {
- (console as any).error('Error formatting time:', error);
+ (console).error('Error formatting time:', error);
  return 'Invalid time';
  };
 
@@ -203,7 +203,7 @@ return phoneNumber;
 }
 
  const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
- if (match as any) {
+ if (match) {
  return `(${match[1]}) ${match[2]}-${match[3]}`;
  }
 

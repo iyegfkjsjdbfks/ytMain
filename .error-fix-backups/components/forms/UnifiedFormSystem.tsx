@@ -56,9 +56,9 @@ export const FormProvider: React.FC < FormProviderProps> = ({}
 
  const validateField = useCallback((name) => {}
  const validator = validationSchema.name;
- if (validator as any) {}
+ if (validator) {}
  const error = validator(values.name);
- if (error as any) {}
+ if (error) {}
  setFieldError(name, error);
  }
  }, [validationSchema, values, setFieldError]);
@@ -111,25 +111,24 @@ export const FormField: React.FC < FormFieldProps> = ({}
  return (
  <div className={cn('space - y - 1', className)}>
  {label && (}
- <label
+ <label>
 // FIXED:  htmlFor={name}
-// FIXED:  className="block text - sm font - medium text - neutral - 700 dark:text - neutral - 300" />
- >
+// FIXED:  className={"bloc}k text - sm font - medium text - neutral - 700 dark:text - neutral - 300"/>
  {label}
- {required && <span className="text - red - 500 ml - 1">*</span>}
+ {required && <span className={"tex}t - red - 500 ml - 1">*</span>}
 // FIXED:  </label>
  )}
 
  {children}
 
  {error && (}
- <p className="text - sm text - red - 600 dark:text - red - 400">
+ <p className={"tex}t - sm text - red - 600 dark:text - red - 400">
  {error}
 // FIXED:  </p>
  )}
 
  {helpText && !error && (}
- <p className="text - sm text - neutral - 500 dark:text - neutral - 400">
+ <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400">
  {helpText}
 // FIXED:  </p>
  )}
@@ -202,16 +201,16 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({}
  className);
 
  const input = (
- <div className="relative">
+ <div className={"relative}">
  {leftIcon && (}
- <div className="absolute inset - y - 0 left - 0 pl - 3 flex items - center pointer - events - none">
- <span className="text - neutral - 400 dark:text - neutral - 500">
+ <div className={"absolut}e inset - y - 0 left - 0 pl - 3 flex items - center pointer - events - none">
+ <span className={"tex}t - neutral - 400 dark:text - neutral - 500">
  {leftIcon}
 // FIXED:  </span>
 // FIXED:  </div>
  )}
 
- <input
+ <input>
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
@@ -222,8 +221,8 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({}
  />
 
  {rightIcon && (}
- <div className="absolute inset - y - 0 right - 0 pr - 3 flex items - center pointer - events - none">
- <span className="text - neutral - 400 dark:text - neutral - 500">
+ <div className={"absolut}e inset - y - 0 right - 0 pr - 3 flex items - center pointer - events - none">
+ <span className={"tex}t - neutral - 400 dark:text - neutral - 500">
  {rightIcon}
 // FIXED:  </span>
 // FIXED:  </div>
@@ -233,12 +232,11 @@ export const UnifiedInput: React.FC < UnifiedInputProps> = ({}
 
  if (label || helpText) {}
  return (
- <FormField
+ <FormField>
 // FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
- {...(helpText && { helpText })} />
- >
+ {...(helpText && { helpText })}/>
  {input}
 // FIXED:  </FormField>
  );
@@ -309,7 +307,7 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({}
  'border - red - 500 focus:border - red - 500 focus:ring - red - 500': error },
  className);
 
- const textarea = (<textarea
+ const textarea = (<textarea>
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
@@ -322,12 +320,11 @@ export const UnifiedTextarea: React.FC < UnifiedTextareaProps> = ({}
 
  if (label || helpText) {}
  return (
- <FormField
+ <FormField>
 // FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
- {...(helpText && { helpText })} />
- >
+ {...(helpText && { helpText })}/>
  {textarea}
 // FIXED:  </FormField>
  );
@@ -389,8 +386,8 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
  'border - red - 500 focus:border - red - 500 focus:ring - red - 500': error },
  className);
 
- const select = (<div className="relative">
- <select
+ const select = (<div className={"relative}">
+ <select>
  {...props}
 // FIXED:  id={name}
 // FIXED:  name={name}
@@ -409,11 +406,10 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
 // FIXED:  </option>
  )}
  {options.map((option) => (}
- <option
+ <option>
  key={option.value}
 // FIXED:  value={option.value}
-// FIXED:  disabled={option.disabled} />
- >
+// FIXED:  disabled={option.disabled}/>
  {option.label}
 // FIXED:  </option>
  ))}
@@ -423,12 +419,11 @@ export const UnifiedSelect: React.FC < UnifiedSelectProps> = ({}
 
  if (label || helpText) {}
  return (
- <FormField
+ <FormField>
 // FIXED:  name={name}
  {...(label && { label })}
  {...(required !== undefined && { required })}
- {...(helpText && { helpText })} />
- >
+ {...(helpText && { helpText })}/>
  {select}
 // FIXED:  </FormField>
  );
@@ -466,17 +461,16 @@ return;
  // For now, we'll pass empty object
  await onSubmit({});
  } catch (error) {}
- (console as any).error('Form submission error:', error);
+ (console).error('Form submission error:', error);
  } finally {}
  setIsSubmitting(false);
  }
  }, [onSubmit]);
 
  return (
- <FormProvider
+ <FormProvider>
  {...(initialValues && { initialValues })}
- {...(validationSchema && { validationSchema })} />
- >
+ {...(validationSchema && { validationSchema })}/>
  <form />
 // FIXED:  onSubmit={(e: React.FormEvent) => handleSubmit(e)}
 // FIXED:  className={cn('space - y - 6', className)}
@@ -485,12 +479,11 @@ return;
  {children}
 
  {onSubmit && (}
- <div className="flex justify - end">
- <UnifiedButton
+ <div className={"fle}x justify - end">
+ <UnifiedButton>
 // FIXED:  type="submit"
  loading={isSubmitting}
-// FIXED:  disabled={isSubmitting} />
- >
+// FIXED:  disabled={isSubmitting}/>
  {isSubmitting ? 'Submitting...' : 'Submit'}
 // FIXED:  </UnifiedButton>
 // FIXED:  </div>

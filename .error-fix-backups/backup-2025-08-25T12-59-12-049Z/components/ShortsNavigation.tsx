@@ -18,14 +18,14 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
  const handlePrevious = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
- if (canGoPrevious as any) {
+ if (canGoPrevious) {
  onPrevious();
  };
 
  const handleNext = (e: React.MouseEvent) => {
  e.preventDefault();
  e.stopPropagation();
- if (canGoNext as any) {
+ if (canGoNext) {
  onNext();
  };
 
@@ -43,7 +43,7 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
 // FIXED:  aria-label="Previous short"
 // FIXED:  style={{ pointerEvents: 'auto' }
  >
- <ChevronUpIcon className="w-6 h-6" />
+ <ChevronUpIcon className={"w}-6 h-6" />
 // FIXED:  </button>
 
  {/* Next button */}
@@ -58,7 +58,7 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
 // FIXED:  aria-label="Next short"
 // FIXED:  style={{ pointerEvents: 'auto' }
  >
- <ChevronDownIcon className="w-6 h-6" />
+ <ChevronDownIcon className={"w}-6 h-6" />
 // FIXED:  </button>
 // FIXED:  </div>
  );

@@ -55,17 +55,17 @@ const NotificationItem: React.FC < NotificationItemProps> = ({}
  };
 
  return (
- <div
+ <div>
 // FIXED:  className={`p - 4 border - l - 4 ${getPriorityColor()} hover:bg - gray - 50 dark:hover:bg - gray - 800 transition - colors cursor - pointer ${}
  !notification.isRead ? 'bg - blue - 50 dark:bg - blue - 900 / 10' : ''
  }`} />
 // FIXED:  onClick={() => onClick(notification: React.MouseEvent)}
  >
- <div className='flex items - start gap - 3'>
+ <div className={'fle}x items - start gap - 3'>
  {/* Avatar / Icon */}
- <div className='flex - shrink - 0'>
+ <div className={'fle}x - shrink - 0'>
  {notification.fromUserAvatar ? (}
- <img
+ <img>
 // FIXED:  src={notification.fromUserAvatar}
 // FIXED:  alt={notification.fromUserName || 'User'}
 // FIXED:  className='w - 10 h - 10 rounded - full object - cover' />
@@ -78,23 +78,22 @@ const NotificationItem: React.FC < NotificationItemProps> = ({}
 // FIXED:  </div>
 
  {/* Content */}
- <div className='flex - 1 min - w - 0'>
- <div className='flex items - start justify - between'>
- <div className='flex - 1'>
- <h4
+ <div className={'fle}x - 1 min - w - 0'>
+ <div className={'fle}x items - start justify - between'>
+ <div className={'fle}x - 1'>
+ <h4>
 // FIXED:  className={`text - sm font - medium ${}
  !notification.isRead
  ? 'text - gray - 900 dark:text - white'
  : 'text - gray - 700 dark:text - gray - 300'
- }`} />
- >
+ }`}/>
  {notification.title}
 // FIXED:  </h4>
- <p className='text - sm text - gray - 600 dark:text - gray - 400 mt - 1 line - clamp - 2'>
+ <p className={'tex}t - sm text - gray - 600 dark:text - gray - 400 mt - 1 line - clamp - 2'>
  {notification.message}
 // FIXED:  </p>
- <div className='flex items - center gap - 2 mt - 2'>
- <span className='text - xs text - gray - 500 dark:text - gray - 400'>
+ <div className={'fle}x items - center gap - 2 mt - 2'>
+ <span className={'tex}t - xs text - gray - 500 dark:text - gray - 400'>
  {formatDistanceToNow(new Date(notification.createdAt), {}
  addSuffix: true })}
 // FIXED:  </span>
@@ -105,7 +104,7 @@ const NotificationItem: React.FC < NotificationItemProps> = ({}
 // FIXED:  </div>
 
  {/* Actions */}
- <div className='flex items - center gap - 1 ml - 2'>
+ <div className={'fle}x items - center gap - 1 ml - 2'>
  {!notification.isRead && (}
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {}
@@ -133,8 +132,8 @@ const NotificationItem: React.FC < NotificationItemProps> = ({}
 
  {/* Thumbnail */}
  {notification.thumbnail && (}
- <div className='mt - 2'>
- <img
+ <div className={'m}t - 2'>
+ <img>
 // FIXED:  src={notification.thumbnail}
 // FIXED:  alt='Notification thumbnail'
 // FIXED:  className='w - 16 h - 12 object - cover rounded' />
@@ -222,7 +221,7 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
  {/* Notification Bell */}
  <button />
 // FIXED:  onClick={() => setIsOpen(!isOpen: React.MouseEvent)}
-// FIXED:  className='relative p - 2 rounded - full hover:bg - gray - 100 dark:hover:bg - gray - 800 transition - colors'
+// FIXED:  className={'relativ}e p - 2 rounded - full hover:bg - gray - 100 dark:hover:bg - gray - 800 transition - colors'
  >
  {unreadCount > 0 ? (}
  <BellSolidIcon className='w - 6 h - 6 text - gray - 700 dark:text - gray - 300' />
@@ -231,7 +230,7 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
  )}
 
  {unreadCount > 0 && (}
- <span className='absolute -top - 1 -right - 1 bg - red - 600 text - white text - xs rounded - full w - 5 h - 5 flex items - center justify - center'>
+ <span className={'absolut}e -top - 1 -right - 1 bg - red - 600 text - white text - xs rounded - full w - 5 h - 5 flex items - center justify - center'>
  {unreadCount > 99 ? '99+' : unreadCount}
 // FIXED:  </span>
  )}
@@ -239,14 +238,14 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
 
  {/* Notification Dropdown */}
  {isOpen && (}
- <div className='absolute top - full right - 0 mt - 2 w - 96 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg z - 50 max - h - 96 overflow - hidden'>
+ <div className={'absolut}e top - full right - 0 mt - 2 w - 96 bg - white dark:bg - gray - 800 border border - gray - 200 dark:border - gray - 700 rounded - lg shadow - lg z - 50 max - h - 96 overflow - hidden'>
  {/* Header */}
  <div className='p - 4 border - b border - gray - 200 dark:border - gray - 700'>
- <div className='flex items - center justify - between mb - 3'>
- <h3 className='text - lg font - semibold text - gray - 900 dark:text - white'>
+ <div className={'fle}x items - center justify - between mb - 3'>
+ <h3 className={'tex}t - lg font - semibold text - gray - 900 dark:text - white'>
  Notifications
 // FIXED:  </h3>
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  <button />
 // FIXED:  onClick={() => setIsOpen(false: React.MouseEvent)}
 // FIXED:  className='p - 1 rounded - full hover:bg - gray - 100 dark:hover:bg - gray - 700'
@@ -257,8 +256,8 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
 // FIXED:  </div>
 
  {/* Filters */}
- <div className='flex items - center justify - between'>
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center justify - between'>
+ <div className={'fle}x items - center gap - 2'>
  <button />
 // FIXED:  onClick={() => setFilter('all': React.MouseEvent)}
 // FIXED:  className={`px - 3 py - 1 rounded - full text - sm font - medium transition - colors ${}
@@ -281,18 +280,18 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className='flex items - center gap - 2'>
+ <div className={'fle}x items - center gap - 2'>
  {unreadCount > 0 && (}
  <button />
 // FIXED:  onClick={() => markAllAsRead()}
-// FIXED:  className='text - sm text - blue - 600 hover:text - blue - 700 font - medium'
+// FIXED:  className={'tex}t - sm text - blue - 600 hover:text - blue - 700 font - medium'
  >
  Mark all read
 // FIXED:  </button>
  )}
  <button />
 // FIXED:  onClick={() => clearAll()}
-// FIXED:  className='text - sm text - gray - 600 dark:text - gray - 400 hover:text - gray - 900 dark:hover:text - white'
+// FIXED:  className={'tex}t - sm text - gray - 600 dark:text - gray - 400 hover:text - gray - 900 dark:hover:text - white'
  >
  Clear all
 // FIXED:  </button>
@@ -300,8 +299,8 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
 // FIXED:  </div>
 
  {/* Category Filter */}
- <div className='mt - 3'>
- <select
+ <div className={'m}t - 3'>
+ <select>
 // FIXED:  value={selectedCategory} />
 // FIXED:  onChange={e => setSelectedCategory(e.target.value: React.ChangeEvent)}
 // FIXED:  className='w - full px - 3 py - 1 border border - gray - 300 dark:border - gray - 600 rounded - md bg - white dark:bg - gray - 700 text - sm'
@@ -316,15 +315,15 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
 // FIXED:  </div>
 
  {/* Notifications List */}
- <div className='max - h - 80 overflow - y - auto'>
+ <div className={'ma}x - h - 80 overflow - y - auto'>
  {isLoading ? (}
  <div className='p - 4 text - center text - gray - 500 dark:text - gray - 400'>
  Loading notifications...
 // FIXED:  </div>
  ) : filteredNotifications.length > 0 ? (
- <div className='divide - y divide - gray - 200 dark:divide - gray - 700'>
+ <div className={'divid}e - y divide - gray - 200 dark:divide - gray - 700'>
  {filteredNotifications.map((notification) => (}
- <NotificationItem
+ <NotificationItem>
  key={notification.id}
  notification={notification}
  onMarkAsRead={markAsRead}
@@ -338,7 +337,7 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
  <BellIcon className='w - 12 h - 12 mx - auto mb - 4 opacity - 50' />
  <p > No notifications found</p>
  {filter === 'unread' && (}
- <p className='text - sm mt - 1'>All caught up! 🎉</p>
+ <p className={'tex}t - sm mt - 1'>All caught up! 🎉</p>
  )}
 // FIXED:  </div>
  )}
@@ -347,7 +346,7 @@ export const NotificationCenter: React.FC < NotificationCenterProps> = ({}
  {/* Footer */}
  {filteredNotifications.length > 0 && (}
  <div className='p - 3 border - t border - gray - 200 dark:border - gray - 700 text - center'>
- <button className='text - sm text - blue - 600 hover:text - blue - 700 font - medium'>
+ <button className={'tex}t - sm text - blue - 600 hover:text - blue - 700 font - medium'>
  View all notifications
 // FIXED:  </button>
 // FIXED:  </div>

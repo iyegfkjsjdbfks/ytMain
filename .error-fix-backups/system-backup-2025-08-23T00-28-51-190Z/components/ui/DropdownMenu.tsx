@@ -41,13 +41,12 @@ return null;
 }
 
  return (
- <div
+ <div>
  ref={menuRef}
 // FIXED:  className={cn(
  'absolute z-50 min-w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2',
  positionClasses[position],
- className)} />
- >
+ className)}/>
  {children}
 // FIXED:  </div>
  );
@@ -74,7 +73,7 @@ const DropdownMenuItem = ({
  disabled && 'opacity-50 cursor-not-allowed',
  className)}
  >
- {icon && <span className="flex-shrink-0">{icon}</span>}
+ {icon && <span className={"flex}-shrink-0">{icon}</span>}
  <span>{children}</span>
 // FIXED:  </button>
  );

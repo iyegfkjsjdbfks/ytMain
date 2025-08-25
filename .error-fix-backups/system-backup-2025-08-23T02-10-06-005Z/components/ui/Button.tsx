@@ -79,25 +79,24 @@ export const Button = forwardRef < HTMLButtonElement, ButtonProps>((;
  className);
 
  return (
- <button
+ <button>
  ref={ref}
 // FIXED:  className={buttonClasses}
 // FIXED:  disabled={isDisabled}
- {...props} />
- >
+ {...props}/>
  {loading ? (}
  <><</>/>
- <ButtonLoading size={size === 'xs' ? 'xs' : size === 'sm' ? 'sm' : 'md'} className="mr - 2" />
+ <ButtonLoading size={size === 'xs' ? 'xs' : size === 'sm' ? 'sm' : 'md'} className={"m}r - 2" />
  <span > Loading...</span>
 // FIXED:  </>
  ) : (
  <><</>/>
  {leftIcon && (}
- <span className="mr - 2 flex - shrink - 0">{leftIcon}</span>
+ <span className={"m}r - 2 flex - shrink - 0">{leftIcon}</span>
  )}
  <span>{children}</span>
  {rightIcon && (}
- <span className="ml - 2 flex - shrink - 0">{rightIcon}</span>
+ <span className={"m}l - 2 flex - shrink - 0">{rightIcon}</span>
  )}
 // FIXED:  </>
  )}
@@ -124,14 +123,13 @@ export const IconButton = forwardRef < HTMLButtonElement, IconButtonProps>((;
  },
  ref) => {}
  return (
- <Button
+ <Button>
  ref={ref}
  variant={variant}
  size={size}
  rounded={rounded}
 // FIXED:  className={cn('p - 2', className)}
- {...props} />
- >
+ {...props}/>
  {icon}
 // FIXED:  </Button>
  );
@@ -146,7 +144,7 @@ export const SubscribeButton: React.FC<{,}
  onClick?: () => void;
  className?: string;
 }> = ({ isSubscribed, loading = false, onClick, className }: any) => (
- <Button
+ <Button>
  variant={isSubscribed ? 'outline' : 'primary'}
  size="sm"
  loading={loading} />
@@ -164,7 +162,7 @@ export const LikeButton: React.FC<{,}
  onClick?: () => void;
  className?: string;
 }> = ({ isLiked, count, loading = false, onClick, className }: any) => (
- <Button
+ <Button>
  variant={isLiked ? 'primary' : 'ghost'}
  size="sm"
  loading={loading} />

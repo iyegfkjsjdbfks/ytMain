@@ -33,8 +33,8 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  setDeferredPrompt(e);
 
  // Check if user has previously dismissed the banner
- const dismissedTime = (localStorage as any).getItem('pwa-banner-dismissed');
- if (dismissedTime as any) {
+ const dismissedTime = (localStorage).getItem('pwa-banner-dismissed');
+ if (dismissedTime) {
  const dismissedDate = new Date(parseInt(dismissedTime, 10));
  const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
 
@@ -56,7 +56,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
 
  // Store install date
- (localStorage as any).setItem('pwa-install-date', Date.now().toString());
+ (localStorage).setItem('pwa-install-date', Date.now().toString());
  };
 
  window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
@@ -92,7 +92,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  setDeferredPrompt(null);
  setShowBanner(false);
  } catch (error) {
- (console as any).error('Error during PWA installation:', error);
+ (console).error('Error during PWA installation:', error);
  PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { error });
  } finally {
  setIsInstalling(false);
@@ -102,7 +102,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
  setShowBanner(false);
 
  // Store dismissal time
- (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
+ (localStorage).setItem('pwa-banner-dismissed', Date.now().toString());
 
  PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_DISMISSED);
  };
@@ -136,26 +136,26 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
 
  return (
  <div className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform transition-transform duration-300 ${className}`}>
- <div className="max-w-7xl mx-auto px-4 py-3">
- <div className="flex items-center justify-between">
- <div className="flex items-center space-x-3">
- <ArrowDownTrayIcon className="h-6 w-6 flex-shrink-0" />
- <div className="flex-1">
- <p className="text-sm font-medium">
+ <div className={"max}-w-7xl mx-auto px-4 py-3">
+ <div className={"fle}x items-center justify-between">
+ <div className={"fle}x items-center space-x-3">
+ <ArrowDownTrayIcon className={"h}-6 w-6 flex-shrink-0" />
+ <div className={"flex}-1">
+ <p className={"text}-sm font-medium">
  {getInstallText()}
 // FIXED:  </p>
- <p className="text-xs opacity-90 mt-1">
+ <p className={"text}-xs opacity-90 mt-1">
  {getInstallInstructions()}
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="flex items-center space-x-2">
+ <div className={"fle}x items-center space-x-2">
  {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && (
  <button />
 // FIXED:  onClick={(e) => handleInstall(e)}
 // FIXED:  disabled={isInstalling}
-// FIXED:  className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+// FIXED:  className={"bg}-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
  >
  {isInstalling ? 'Installing...' : 'Install'}
 // FIXED:  </button>
@@ -163,10 +163,10 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) =>
 
  <button />
 // FIXED:  onClick={(e) => handleDismiss(e)}
-// FIXED:  className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+// FIXED:  className={"p}-1 hover:bg-white/20 rounded-lg transition-colors"
 // FIXED:  aria-label="Dismiss install banner"
  >
- <XMarkIcon className="h-5 w-5" />
+ <XMarkIcon className={"h}-5 w-5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

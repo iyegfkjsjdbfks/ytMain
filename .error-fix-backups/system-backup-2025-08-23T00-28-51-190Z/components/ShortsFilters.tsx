@@ -21,22 +21,22 @@ return 'All';
  };
 
  return (
- <div className="px-4 pb-4">
- <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
- <div className="flex items-center justify-between mb-3">
- <h3 className="text-white font-medium">Filter by Category</h3>
+ <div className={"px}-4 pb-4">
+ <div className={"bg}-white/10 backdrop-blur-sm rounded-lg p-4">
+ <div className={"fle}x items-center justify-between mb-3">
+ <h3 className={"text}-white font-medium">Filter by Category</h3>
  <button />
 // FIXED:  onClick={(e) => onClose(e)}
-// FIXED:  className="p-1 text-white/60 hover:text-white transition-colors"
+// FIXED:  className={"p}-1 text-white/60 hover:text-white transition-colors"
 // FIXED:  aria-label="Close filters"
  >
- <XMarkIcon className="w-4 h-4" />
+ <XMarkIcon className={"w}-4 h-4" />
 // FIXED:  </button>
 // FIXED:  </div>
 
- <div className="flex flex-wrap gap-2">
+ <div className={"fle}x flex-wrap gap-2">
  {categories.map((category) => (
- <button
+ <button>
  key={category} />
 // FIXED:  onClick={() => onCategoryChange(category)}
 // FIXED:  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
@@ -53,7 +53,7 @@ return 'All';
  {selectedCategory !== 'all' && (
  <button />
 // FIXED:  onClick={() => onCategoryChange('all')}
-// FIXED:  className="mt-3 text-sm text-white/60 hover:text-white transition-colors"
+// FIXED:  className={"mt}-3 text-sm text-white/60 hover:text-white transition-colors"
  >
  Clear filter
 // FIXED:  </button>

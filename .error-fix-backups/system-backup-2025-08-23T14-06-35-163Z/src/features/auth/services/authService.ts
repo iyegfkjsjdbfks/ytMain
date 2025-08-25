@@ -16,7 +16,7 @@ export class AuthService {
  * Log in with credentials
  */
  async login(credentials: LoginCredentials): Promise<any> < User> {
- const response = await (fetch as any)(`${this.baseUrl}/login`, {
+ const response = await (fetch)(`${this.baseUrl}/login`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json' },
@@ -36,7 +36,7 @@ export class AuthService {
  * Register a new user
  */
  async register(data: RegisterData): Promise<any> < User> {
- const response = await (fetch as any)(`${this.baseUrl}/register`, {
+ const response = await (fetch)(`${this.baseUrl}/register`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json' },
@@ -60,7 +60,7 @@ export class AuthService {
 
  if (tokens?.refreshToken) {
  try {
- await (fetch as any)(`${this.baseUrl}/logout`, {
+ await (fetch)(`${this.baseUrl}/logout`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json',
@@ -83,7 +83,7 @@ export class AuthService {
  }
 
  try {
- const response = await (fetch as any)(`${this.baseUrl}/me`, {
+ const response = await (fetch)(`${this.baseUrl}/me`, {
  headers: {,
  Authorization: `Bearer ${tokens.accessToken}` } });
 
@@ -91,7 +91,7 @@ export class AuthService {
  if (response.status === 401) {
  // Token expired, try to refresh
  const newTokens = await this.refreshToken(tokens.refreshToken);
- if (newTokens as any) {
+ if (newTokens) {
  return this.getCurrentUser();
  }
  return null;
@@ -109,7 +109,7 @@ export class AuthService {
  */
  private async refreshToken(refreshToken): Promise<any> < AuthTokens | null> {
  try {
- const response = await (fetch as any)(`${this.baseUrl}/refresh`, {
+ const response = await (fetch)(`${this.baseUrl}/refresh`, {
  method: 'POST',
  headers: {
  'Content - Type': 'application / json' },
@@ -132,14 +132,14 @@ export class AuthService {
  * Set authentication tokens in localStorage
  */
  private setTokens(tokens: AuthTokens): void {
- (localStorage as any).setItem(this.tokenKey, JSON.stringify(tokens));
+ (localStorage).setItem(this.tokenKey, JSON.stringify(tokens));
  }
 
  /**
  * Get authentication tokens from localStorage
  */
  private getTokens(): AuthTokens | null {
- const tokensString = (localStorage as any).getItem(this.tokenKey);
+ const tokensString = (localStorage).getItem(this.tokenKey);
  if (!tokensString) {
  return null;
  }

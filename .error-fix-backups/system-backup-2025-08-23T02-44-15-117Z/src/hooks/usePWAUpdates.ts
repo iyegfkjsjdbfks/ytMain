@@ -66,10 +66,10 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
 
  const [cacheInfo, setCacheInfo] = useState < CacheInfo | null>(null);
  const [autoUpdateEnabled, setAutoUpdateEnabled] = useState < boolean>(
- (localStorage as any).getItem('pwa - auto - update') === 'true'
+ (localStorage).getItem('pwa - auto - update') === 'true'
  );
  const [updateInterval, setUpdateIntervalState] = useState < number>(
- parseInt((localStorage as any).getItem('pwa - update - interval') || '60', 10)
+ parseInt((localStorage).getItem('pwa - update - interval') || '60', 10)
  );
 
  // Check for service worker updates
@@ -92,7 +92,7 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
  // Check if there's a waiting service worker
  const hasUpdate = !!registration.waiting || !!registration.installing;
 
- if (hasUpdate as any) {
+ if (hasUpdate) {
  // Try to get update information
  const updateInfo = await getUpdateInfo(registration);
 
@@ -216,7 +216,7 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
  version: state.updateVersion,
  timestamp: Date.now() };
 
- (localStorage as any).setItem('pwa - skipped - update', JSON.stringify(skipInfo));
+ (localStorage).setItem('pwa - skipped - update', JSON.stringify(skipInfo));
 
  conditionalLogger.debug(
  'PWA update skipped',
@@ -249,7 +249,7 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
 
  for (const request of requests) {
  const response = await cache.match(request);
- if (response as any) {
+ if (response) {
  const blob = await response.blob();
  totalSize += blob.size;
  }
@@ -301,7 +301,7 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
  // Enable / disable auto - update
  const enableAutoUpdate = useCallback((enabled) => {
  setAutoUpdateEnabled(enabled);
- (localStorage as any).setItem('pwa - auto - update', enabled.toString());
+ (localStorage).setItem('pwa - auto - update', enabled.toString());
 
  conditionalLogger.debug(
  `Auto - update ${enabled ? 'enabled' : 'disabled'}`,
@@ -313,7 +313,7 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
  // Set update check interval
  const setUpdateInterval = useCallback((minutes) => {
  setUpdateIntervalState(minutes);
- (localStorage as any).setItem('pwa - update - interval', minutes.toString());
+ (localStorage).setItem('pwa - update - interval', minutes.toString());
 
  conditionalLogger.debug(
  'Update interval changed',
@@ -329,7 +329,7 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
  // Try to get version from service worker
  const worker = registration.waiting || registration.installing;
 
- if (worker as any) {
+ if (worker) {
  // Send message to get version info
  const messageChannel = new MessageChannel();
 
@@ -423,7 +423,7 @@ export const usePWAUpdates = (): (UsePWAUpdatesReturn) => {
  return () => {
  navigator.serviceWorker.removeEventListener('message', handleMessage as EventListener);
 
- if (updateTimer as any) {
+ if (updateTimer) {
  clearInterval(updateTimer);
  };
  }, [autoUpdateEnabled, updateInterval, checkForUpdates, updateCacheInfo]);

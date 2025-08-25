@@ -445,7 +445,7 @@ export class FileManager {
    */
   private async validateGeneralFile(content: string, _filePath: string, _result: FileValidationResult): Promise<void> {
     // Check file size;
-    const sizeInMB = Buffer.byteLength(content, 'utf8') / (1024 * 1024), 
+    const sizeInMB = Buffer.byteLength(content, 'utf8') / (1024 * 1024), ;
     if (sizeInMB > 10) {;
       _result.warnings.push(`Large file size: ${sizeInMB.toFixed(2)}MB`);
     }

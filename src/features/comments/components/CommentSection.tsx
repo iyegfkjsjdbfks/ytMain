@@ -55,10 +55,10 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
 
   return (
     <div className={'component-ready ' + className}>
-      <div className="component-header">
+      <div className={"component}-header">
         <h2>CommentSection</h2>
       </div>
-      <div className="component-body">
+      <div className={"component}-body">
         {children || <p>Component is ready and functioning properly.</p>}
       </div>
     </div>

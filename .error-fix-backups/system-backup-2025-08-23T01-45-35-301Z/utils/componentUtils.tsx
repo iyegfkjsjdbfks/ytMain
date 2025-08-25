@@ -64,7 +64,7 @@ export const ComponentWrapper: React.FC < ComponentWrapperProps> = ({ }
   </div>
 );
  } catch (error) {}
- (console as any).error('Component error:', error);
+ (console).error('Component error:', error);
  return <></>{fallback}</>;
  };
 
@@ -82,11 +82,11 @@ export const safeLocalStorage = {}
  getItem: (key): string | (null) => {}
  try {}
  if (typeof window !== 'undefined') {}
- return (localStorage as any).getItem(key);
+ return (localStorage).getItem(key);
  }
 
  } catch (error) {}
- (console as any).warn('localStorage getItem failed:', error);
+ (console).warn('localStorage getItem failed:', error);
  }
  return null;
  },
@@ -95,11 +95,11 @@ export const safeLocalStorage = {}
  value: string | number): (boolean) => {}
  try {}
  if (typeof window !== 'undefined') {}
- (localStorage as any).setItem(key, String(value));
+ (localStorage).setItem(key, String(value));
  return true;
  }
  } catch (error) {}
- (console as any).warn('localStorage setItem failed:', error);
+ (console).warn('localStorage setItem failed:', error);
  }
  return false;
  },
@@ -111,7 +111,7 @@ export const safeLocalStorage = {}
  return true;
  }
  } catch (error) {}
- (console as any).warn('localStorage removeItem failed:', error);
+ (console).warn('localStorage removeItem failed:', error);
  }
  return false;
  };

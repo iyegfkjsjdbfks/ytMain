@@ -347,8 +347,7 @@ export class MetadataNormalizationService {
  'bannerExternalUrl' in youtubeChannel.brandingSettings.image
  ) {
  result.bannerUrl = (
- youtubeChannel.brandingSettings.image as any
- ).bannerExternalUrl;
+ youtubeChannel.brandingSettings.image).bannerExternalUrl;
  }
  if (youtubeChannel.snippet?.publishedAt) {
  result.joinedDate = youtubeChannel.snippet.publishedAt;
@@ -559,7 +558,7 @@ export class MetadataNormalizationService {
  private mapYouTubeVisibility(
  privacyStatus?: string
  ): 'public' | 'unlisted' | 'private' {
- switch (privacyStatus as any) {
+ switch (privacyStatus) {
  case 'public':
  return 'public';
  case 'unlisted':

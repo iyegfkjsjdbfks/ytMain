@@ -38,7 +38,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  setTrendingVideos(sortedByViews);
  setError(null);
  } catch (err) {
- (console as any).error('Failed to fetch trending videos:', err);
+ (console).error('Failed to fetch trending videos:', err);
  setError('Could not load trending videos at this time.');
  } finally {
  setLoading(false);
@@ -51,9 +51,9 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
 
  // Memoized video grid to prevent unnecessary re-renders;
  const videoGrid = useMemo(() => (
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+ <div className={"gri}d grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
  {trendingVideos.map((video) => (
- <MemoizedVideoCard;
+ <MemoizedVideoCard;>
  key={video.id}
  video={video} />
  />
@@ -61,23 +61,23 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
 // FIXED:  </div>
  ), [trendingVideos]);
 
- if (loading as any) {
+ if (loading) {
  return (
- <section className="mb-8">
- <div className="flex items-center gap-2 mb-4">
- <FireIcon className="w-6 h-6 text-red-500" />
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
+ <section className={"mb}-8">
+ <div className={"fle}x items-center gap-2 mb-4">
+ <FireIcon className={"w}-6 h-6 text-red-500" />
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
 // FIXED:  </div>
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+ <div className={"gri}d grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
  {Array.from({ length: maxVideos }).map((_, index) => (
- <div key={index} className="animate-pulse">
- <div className="bg-gray-200 dark:bg-gray-700 rounded-lg mb-3 w-full h-48" />
- <div className="flex gap-3">
- <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0" />
- <div className="flex-1 space-y-2">
- <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded" />
- <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
- <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
+ <div key={index} className={"animate}-pulse">
+ <div className={"bg}-gray-200 dark:bg-gray-700 rounded-lg mb-3 w-full h-48" />
+ <div className={"fle}x gap-3">
+ <div className={"w}-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0" />
+ <div className={"flex}-1 space-y-2">
+ <div className={"h}-4 bg-gray-200 dark:bg-gray-700 rounded" />
+ <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
+ <div className={"h}-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -87,18 +87,18 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
  );
  }
 
- if (error as any) {
+ if (error) {
  return (
- <section className="mb-8">
- <div className="flex items-center gap-2 mb-4">
- <FireIcon className="w-6 h-6 text-red-500" />
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
+ <section className={"mb}-8">
+ <div className={"fle}x items-center gap-2 mb-4">
+ <FireIcon className={"w}-6 h-6 text-red-500" />
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
 // FIXED:  </div>
- <div className="text-center py-8">
- <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
+ <div className={"text}-center py-8">
+ <p className={"text}-gray-600 dark:text-gray-400 mb-4">{error}</p>
  <button />
 // FIXED:  onClick={(e: any) => fetchTrendingVideos(e)}
-// FIXED:  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+// FIXED:  className={"px}-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
  >
  Try Again;
 // FIXED:  </button>
@@ -109,29 +109,28 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
 
  if (trendingVideos.length === 0) {
  return (
- <section className="mb-8">
- <div className="flex items-center gap-2 mb-4">
- <FireIcon className="w-6 h-6 text-red-500" />
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
+ <section className={"mb}-8">
+ <div className={"fle}x items-center gap-2 mb-4">
+ <FireIcon className={"w}-6 h-6 text-red-500" />
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
 // FIXED:  </div>
- <div className="text-center py-8">
- <p className="text-gray-600 dark:text-gray-400">No trending videos available right now.</p>
+ <div className={"text}-center py-8">
+ <p className={"text}-gray-600 dark:text-gray-400">No trending videos available right now.</p>
 // FIXED:  </div>
 // FIXED:  </section>
  );
  }
 
  return (
- <section className="mb-8">
- <div className="flex items-center justify-between mb-4">
- <div className="flex items-center gap-2">
- <FireIcon className="w-6 h-6 text-red-500" />
- <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
+ <section className={"mb}-8">
+ <div className={"fle}x items-center justify-between mb-4">
+ <div className={"fle}x items-center gap-2">
+ <FireIcon className={"w}-6 h-6 text-red-500" />
+ <h2 className={"text}-xl font-semibold text-gray-900 dark:text-white">Trending</h2>
 // FIXED:  </div>
- <Link;
+ <Link;>
  to="/trending"
-// FIXED:  className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors" />
- >
+// FIXED:  className={"text}-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors"/>
  View all;
 // FIXED:  </Link>
 // FIXED:  </div>

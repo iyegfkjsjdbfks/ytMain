@@ -222,7 +222,7 @@ export class OfflineStorage {
  const getRequest = store.get(id);
  getRequest.onsuccess = () => {
  const action = getRequest.result;
- if (action as any) {
+ if (action) {
  action.synced = true;
  const putRequest = store.put(action);
  putRequest.onsuccess = () => resolve();
@@ -382,7 +382,7 @@ export class OfflineStorage {
  const getRequest = store.get(id);
  getRequest.onsuccess = () => {
  const upload = getRequest.result;
- if (upload as any) {
+ if (upload) {
  upload.status = status;
  upload.updatedAt = Date.now();
  const putRequest = store.put(upload);
@@ -425,7 +425,7 @@ export class OfflineStorage {
 
  videosRequest.onsuccess = (event) => {
  const cursor = (event.target as IDBRequest).result;
- if (cursor as any) {
+ if (cursor) {
  const video = cursor.value;
  if (video.cachedAt && video.cachedAt < cutoffTime) {
  cursor.delete();
@@ -439,7 +439,7 @@ export class OfflineStorage {
 
  historyRequest.onsuccess = (event) => {
  const cursor = (event.target as IDBRequest).result;
- if (cursor as any) {
+ if (cursor) {
  const entry = cursor.value;
  if (entry.watchedAt < cutoffTime) {
  cursor.delete();
@@ -495,7 +495,7 @@ export const syncPendingActions = async (): Promise<any> < void> => {
 
  for (const action of pendingActions) {
  try {
- const response = await (fetch as any)(action.endpoint, {
+ const response = await (fetch)(action.endpoint, {
  method: action.method,
  headers: {
  'Content - Type': 'application / json' },

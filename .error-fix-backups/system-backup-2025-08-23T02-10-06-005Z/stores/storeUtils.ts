@@ -78,7 +78,7 @@ const performanceMiddleware = <T>(,
  performanceMonitor.trackCustomMetric(`store_${storeName}_update`, duration);
 
  if (import.meta.env.DEV && duration > 5) {
- (console as any).warn(`Slow state update in ${storeName}: ${duration.toFixed(2)}ms`);
+ (console).warn(`Slow state update in ${storeName}: ${duration.toFixed(2)}ms`);
  };
 
  return config(wrappedSet, get, api);
@@ -98,7 +98,7 @@ export function createAsyncActions < T>() {
  return {
  setLoading: (loading) => (state) => {
  state.loading = loading;
- if (loading as any) {
+ if (loading) {
  state.error = null;
  }
  },
@@ -152,7 +152,7 @@ export function createPaginatedActions < T>() {
 
  setLoading: (loading) => (state) => {
  state.loading = loading;
- if (loading as any) {
+ if (loading) {
  state.error = null;
  }
  },
@@ -205,7 +205,7 @@ export class OptimisticUpdatesManager < T> {
 
  rollback(id): void {
  const update = this.updates.get(id);
- if (update as any) {
+ if (update) {
  update.rollback();
  this.updates.delete(id);
  }
@@ -304,7 +304,7 @@ export function createComputed < T, R>(,;
  let cachedDeps;
 
  return (state: T): (R) => {
- if (dependencies as any) {
+ if (dependencies) {
  const currentDeps = dependencies(state);
 
  if (!cachedDeps || !shallowEqual(cachedDeps, currentDeps)) {
@@ -408,7 +408,7 @@ export class StoreSynchronizer {
  const to = this.instances.get(toStore);
 
  if (!from || !to) {
- (console as any).warn(`Store synchronization failed: ${fromStore} or ${toStore} not found`);
+ (console).warn(`Store synchronization failed: ${fromStore} or ${toStore} not found`);
  return;
  }
 

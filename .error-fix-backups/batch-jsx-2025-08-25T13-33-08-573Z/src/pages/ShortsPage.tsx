@@ -553,46 +553,46 @@ const ShortsPage: React.FC = () => {
 
   if (filteredShorts.length === 0) {
     return (
-      <div className="h-[calc(100vh-3.5rem)] bg-black flex flex-col">
+      <div className={"h}-[calc(100vh-3.5rem)] bg-black flex flex-col">
         {/* Enhanced Header with Search and Filters */}
-        <div className="relative z-10 bg-black/80 backdrop-blur-sm">
-          <div className="flex items-center justify-between p-4">
-            <h1 className="text-white text-lg font-semibold">Shorts</h1>
-            <div className="flex items-center space-x-2">
-              <button;
+        <div className={"relativ}e z-10 bg-black/80 backdrop-blur-sm">
+          <div className={"fle}x items-center justify-between p-4">
+            <h1 className={"text}-white text-lg font-semibold">Shorts</h1>
+            <div className={"fle}x items-center space-x-2">
+              <button;>
                 onClick={handleSearchToggle}
-                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                className={"p}-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Search shorts"
               {">"}
-                <MagnifyingGlassIcon className="w-5 h-5" />
+                <MagnifyingGlassIcon className={"w}-5 h-5" />
               </button></div>
-              <button;
+              <button;>
                 onClick={handleFilterToggle}
-                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                className={"p}-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Filter shorts"
               {">"}
-                <AdjustmentsHorizontalIcon className="w-5 h-5" />
+                <AdjustmentsHorizontalIcon className={"w}-5 h-5" />
               </button></div>
             </div>
           </div>
 
           {/* Search Bar */}
           {showSearch && (
-            <div className="px-4 pb-4">
-              <div className="relative">
-                <input;
+            <div className={"px}-4 pb-4">
+              <div className={"relative}">
+                <input;>
                   type="text"
                   value={searchQuery}
                   onChange={(e: any) => setSearchQuery(e.target.value)}
                   placeholder="Search shorts..."
-                  className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+                  className={"w}-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus;
                 /{">"}
-                <button;
+                <button;>
                   onClick={handleSearchToggle}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+                  className={"absolut}e right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
                 {">"}
-                  <XIcon className="w-4 h-4" />
+                  <XIcon className={"w}-4 h-4" />
                 </button></div>
               </div>
             </div>
@@ -600,7 +600,7 @@ const ShortsPage: React.FC = () => {
 
           {/* Filters */}
           {showFilters && (
-            <ShortsFilters;
+            <ShortsFilters;>
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
@@ -609,7 +609,7 @@ const ShortsPage: React.FC = () => {
           )}
   <div></div></div>
 
-        <EmptyShortsState;
+        <EmptyShortsState;>
           hasFilters={selectedCategory !== 'all' || debouncedSearchQuery !== ''}
           onClearFilters={() => {
             setSelectedCategory('all');
@@ -621,50 +621,50 @@ const ShortsPage: React.FC = () => {
   }
 
   return (
-    <div className="h-[calc(100vh-3.5rem)] bg-black relative">
+    <div className={"h}-[calc(100vh-3.5rem)] bg-black relative">
       {/* Enhanced Header with Search and Filters */}
-      <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent">
-        <div className="flex items-center justify-between p-4">
-          <h1 className="text-white text-lg font-semibold">Shorts</h1>
-          <div className="flex items-center space-x-2">
-            <button;
+      <div className={"absolut}e top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent">
+        <div className={"fle}x items-center justify-between p-4">
+          <h1 className={"text}-white text-lg font-semibold">Shorts</h1>
+          <div className={"fle}x items-center space-x-2">
+            <button;>
               onClick={handleSearchToggle}
               className={`p-2 rounded-full transition-colors ${
                 showSearch ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Search shorts"
             {">"}
-              <MagnifyingGlassIcon className="w-5 h-5" />
+              <MagnifyingGlassIcon className={"w}-5 h-5" />
             </button></div>
-            <button;
+            <button;>
               onClick={handleFilterToggle}
               className={`p-2 rounded-full transition-colors ${
                 showFilters ? 'bg-white/20 text-white' : 'text-white hover:bg-white/10'
               }`}
               aria-label="Filter shorts"
             {">"}
-              <AdjustmentsHorizontalIcon className="w-5 h-5" />
+              <AdjustmentsHorizontalIcon className={"w}-5 h-5" />
             </button></div>
           </div>
         </div>
 
         {/* Search Bar */}
         {showSearch && (
-          <div className="px-4 pb-4">
-            <div className="relative">
-              <input;
+          <div className={"px}-4 pb-4">
+            <div className={"relative}">
+              <input;>
                 type="text"
                 value={searchQuery}
                 onChange={(e: any) => setSearchQuery(e.target.value)}
                 placeholder="Search shorts..."
-                className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
+                className={"w}-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus;
               /{">"}
-              <button;
+              <button;>
                 onClick={handleSearchToggle}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
+                className={"absolut}e right-2 top-1/2 transform -translate-y-1/2 p-1 text-white/60 hover:text-white"
               {">"}
-                <XIcon className="w-4 h-4" />
+                <XIcon className={"w}-4 h-4" />
               </button></div>
             </div>
           </div>
@@ -672,7 +672,7 @@ const ShortsPage: React.FC = () => {
 
         {/* Filters */}
         {showFilters && (
-          <ShortsFilters;
+          <ShortsFilters;>
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
@@ -682,8 +682,8 @@ const ShortsPage: React.FC = () => {
   <div></div></div>
 
       {/* Navigation Controls */}
-      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;
-        <ShortsNavigation;
+      <div className={"absolut}e right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">;
+        <ShortsNavigation;>
           onPrevious={handlePreviousVideo}
           onNext={handleNextVideo}
           canGoPrevious={currentVideoIndex > 0}
@@ -692,15 +692,15 @@ const ShortsPage: React.FC = () => {
   <div></div></div>
 
       {/* Shorts Feed */}
-      <div;
+      <div;>
         ref={containerRef}
-        className="h-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
+        className={"h}-full overflow-y-scroll snap-y snap-mandatory no-scrollbar"
         role="feed"
         aria-label="Shorts feed";
       >
         {filteredShorts.map((short, index) => (
-          <div key={short.id || index} className="h-full w-full snap-start">
-            <ShortDisplayCard;
+          <div key={short.id || index} className={"h}-full w-full snap-start">
+            <ShortDisplayCard;>
               short={short}
               isLiked={likedShorts.has(short.id)}
               isFollowed={followedChannels.has(short.channelName)}
@@ -717,7 +717,7 @@ const ShortsPage: React.FC = () => {
   <div></div></div>
 
       {/* Comment Modal */}
-      <CommentModal;
+      <CommentModal;>
         isOpen={commentModalOpen}
         onClose={() => {
           setCommentModalOpen(false);

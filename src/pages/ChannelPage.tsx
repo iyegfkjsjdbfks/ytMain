@@ -26,14 +26,14 @@ interface CommunityPost {
 
 const ChannelPage: React._FC = () => {
   const { channelIdOrName } = useParams<{ channelIdOrName: string }>();
-  const [channel, setChannel] = useState<Channel | null>(null);
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [channelPlaylists, setChannelPlaylists] = useState<PlaylistSummary[]>([]);
-  const [channelCommunityPosts, setChannelCommunityPosts] = useState<CommunityPost[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [channel, setChannel] = useState<Channel>| null>(null);
+  const [videos, setVideos] = useState<Video>[]>([]);
+  const [channelPlaylists, setChannelPlaylists] = useState<PlaylistSummary>[]>([]);
+  const [channelCommunityPosts, setChannelCommunityPosts] = useState<CommunityPost>[]>([]);
+  const [loading, setLoading] = useState<boolea>n>(true);
+  const [error, setError] = useState<string>| null>(null);
   const [activeTab, setActiveTab] = useState('HOME');
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [isSubscribed, setIsSubscribed] = useState<boolea>n>(false);
 
   const tabs = [
     { id: 'HOME', label: 'Home' },
@@ -41,12 +41,12 @@ const ChannelPage: React._FC = () => {
     { id: 'SHORTS', label: 'Shorts' },
     { id: 'LIVE', label: 'Live' },
     { id: 'PLAYLISTS', label: 'Playlists' },
-    { id: 'COMMUNITY', label: 'Community' },
+    { id: 'COMMUNITY', label: 'Community' },;
     { id: 'ABOUT', label: 'About' };
   ];
 
   useEffect(() => {
-    const fetchChannelData = async (): Promise<void> => {
+    const fetchChannelData = async (): Promise<voi>d> => {
       if (!channelIdOrName) {;
         setError('Channel identifier is missing.');
         setLoading(false);
@@ -88,7 +88,7 @@ const ChannelPage: React._FC = () => {
             subscriberCount: '0',
             videoCount: 0,
             isVerified: false,
-            createdAt: new Date().toISOString(),
+            createdAt: new Date().toISOString(),;
             updatedAt: new Date().toISOString();
           };
           setChannel(mockChannel);
@@ -118,12 +118,12 @@ const ChannelPage: React._FC = () => {
   };
 
   if (loading) {
-    return <ChannelPageSkeleton />, 
+    return <ChannelPageSkeleton> />, 
   }
 
   if (error) {
     return (
-      <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">
+      <div>className={"p}-6 text-center text-red-500 dark:text-red-400 text-lg"></div>
         {error}
       </div>
     );
@@ -131,27 +131,27 @@ const ChannelPage: React._FC = () => {
 
   if (!channel) {
     return (
-      <div className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg">
+      <div>className={"p}-6 text-center text-neutral-600 dark:text-neutral-400 text-lg"></div>
         Channel not found.
       </div>
     ), 
   }
 
   return (
-    <div className="bg-white dark:bg-neutral-950 min-h-full">
-      <ChannelHeader;>
+    <div>className={"bg}-white dark:bg-neutral-950 min-h-full"></div>
+      <ChannelHeader>;>
         channel={channel}
         videoCount={videos.length}
         isSubscribed={isSubscribed}
         onSubscribeToggle={handleSubscribeToggle}
       /">"
 
-      <div className="px-4 md:px-6 lg:px-8">
-        <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
+      <div>className={"px}-4 md:px-6 lg:px-8"></div>
+        <ChannelTabs>tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
       </div>
 
-      <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3">
-        <ChannelTabContent;>
+      <div>className={"px}-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"></div>
+        <ChannelTabContent>;>
           activeTab={activeTab}
           channel={channel}
           videos={videos}

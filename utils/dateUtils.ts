@@ -21,7 +21,7 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
  const unit = parts[2];
  let msAgo = 0;
 
- switch (unit as any) {
+ switch (unit) {
  case 'hour':
  msAgo = quantity * 60 * 60 * 1000;
  break;

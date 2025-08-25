@@ -1,0 +1,92 @@
+{
+  "timestamp": "2025-08-25T16:00:47.966Z",
+  "executionTime": 2621,
+  "totalErrorsFixed": 123,
+  "phaseResults": [
+    {
+      "phase": "Phase 1: Fix Comma-Expected Errors",
+      "errorsFixed": 8,
+      "success": true
+    },
+    {
+      "phase": "Phase 2: Fix Expression-Expected Errors",
+      "errorsFixed": 0,
+      "success": true
+    },
+    {
+      "phase": "Phase 3: Fix JSX Syntax Errors",
+      "errorsFixed": 31,
+      "success": true
+    },
+    {
+      "phase": "Phase 4: Fix Declaration Errors",
+      "errorsFixed": 51,
+      "success": true
+    },
+    {
+      "phase": "Phase 5: Fix Property Assignment Errors",
+      "errorsFixed": 33,
+      "success": true
+    }
+  ],
+  "options": {
+    "projectPath": "/home/runner/work/ytMain/ytMain",
+    "dryRun": false,
+    "backup": true,
+    "maxIterations": 10,
+    "timeoutSeconds": 1800,
+    "generateReports": true
+  },
+  "executionLog": [
+    "[2025-08-25T16:00:46.754Z] [INFO]   ✅ Fixed declaration issues in src/pages/PlaylistsPage.tsx",
+    "[2025-08-25T16:00:46.754Z] [INFO]   ✅ Fixed declaration issues in src/pages/RegisterPage.tsx",
+    "[2025-08-25T16:00:46.754Z] [INFO]   ✅ Fixed declaration issues in src/pages/SearchResultsPage.tsx",
+    "[2025-08-25T16:00:46.755Z] [INFO]   ✅ Fixed declaration issues in src/pages/ShortsPage.tsx",
+    "[2025-08-25T16:00:46.755Z] [INFO]   ✅ Fixed declaration issues in src/pages/SubscriptionsPage.tsx",
+    "[2025-08-25T16:00:46.755Z] [INFO]   ✅ Fixed declaration issues in src/pages/TrendingPage.tsx",
+    "[2025-08-25T16:00:46.756Z] [INFO]   ✅ Fixed declaration issues in src/pages/UploadPage.tsx",
+    "[2025-08-25T16:00:46.756Z] [INFO]   ✅ Fixed declaration issues in src/pages/UserPage.tsx",
+    "[2025-08-25T16:00:46.756Z] [INFO]   ✅ Fixed declaration issues in src/pages/VideoUploadPage.tsx",
+    "[2025-08-25T16:00:46.756Z] [INFO]   ✅ Fixed declaration issues in src/pages/WatchPage.tsx",
+    "[2025-08-25T16:00:46.757Z] [INFO]   ✅ Phase completed: 51 errors fixed",
+    "[2025-08-25T16:00:46.757Z] [INFO] \nPhase 5: Fix Property Assignment Errors",
+    "[2025-08-25T16:00:46.757Z] [INFO] 🔧 Fixing 37 property assignment errors (TS1136)...",
+    "[2025-08-25T16:00:46.757Z] [INFO]   ✅ Fixed property assignments in contexts/WatchLaterContext.tsx",
+    "[2025-08-25T16:00:46.757Z] [INFO]   ✅ Fixed property assignments in src/components/LoadingSpinner.tsx",
+    "[2025-08-25T16:00:46.757Z] [INFO]   ✅ Fixed property assignments in src/components/atoms/Button/Button.tsx",
+    "[2025-08-25T16:00:46.758Z] [INFO]   ✅ Fixed property assignments in src/error-resolution/cli/main.ts",
+    "[2025-08-25T16:00:46.758Z] [INFO]   ✅ Fixed property assignments in src/error-resolution/generators/TypeScriptGenerator.ts",
+    "[2025-08-25T16:00:46.759Z] [INFO]   ✅ Fixed property assignments in src/error-resolution/test/CacheManager.test.ts",
+    "[2025-08-25T16:00:46.759Z] [INFO]   ✅ Fixed property assignments in src/error-resolution/test/ImportFixer.test.ts",
+    "[2025-08-25T16:00:46.760Z] [INFO]   ✅ Fixed property assignments in src/error-resolution/test/WorkflowCoordinator.test.ts",
+    "[2025-08-25T16:00:46.760Z] [INFO]   ✅ Fixed property assignments in src/features/notifications/hooks/useNotifications.ts",
+    "[2025-08-25T16:00:46.760Z] [INFO]   ✅ Fixed property assignments in src/features/playlist/hooks/usePlaylists.ts",
+    "[2025-08-25T16:00:46.760Z] [INFO]   ✅ Fixed property assignments in src/features/video/hooks/useVideo.ts",
+    "[2025-08-25T16:00:46.760Z] [INFO]   ✅ Fixed property assignments in src/features/video/hooks/useVideoInteractions.ts",
+    "[2025-08-25T16:00:46.761Z] [INFO]   ✅ Fixed property assignments in src/hooks/unified/useApi.ts",
+    "[2025-08-25T16:00:46.761Z] [INFO]   ✅ Fixed property assignments in src/hooks/unified/useVideos.ts",
+    "[2025-08-25T16:00:46.761Z] [INFO]   ✅ Fixed property assignments in src/hooks/useDebounce.ts",
+    "[2025-08-25T16:00:46.761Z] [INFO]   ✅ Fixed property assignments in src/hooks/useDropdownMenu.ts",
+    "[2025-08-25T16:00:46.761Z] [INFO]   ✅ Fixed property assignments in src/hooks/useFormState.ts",
+    "[2025-08-25T16:00:46.762Z] [INFO]   ✅ Fixed property assignments in src/hooks/useLocalStorage.ts",
+    "[2025-08-25T16:00:46.762Z] [INFO]   ✅ Fixed property assignments in src/hooks/useLocalStorageSet.ts",
+    "[2025-08-25T16:00:46.762Z] [INFO]   ✅ Fixed property assignments in src/hooks/useMobileDetection.ts",
+    "[2025-08-25T16:00:46.762Z] [INFO]   ✅ Fixed property assignments in src/hooks/useModal.ts",
+    "[2025-08-25T16:00:46.762Z] [INFO]   ✅ Fixed property assignments in src/hooks/useOptimizedVideoData.ts",
+    "[2025-08-25T16:00:46.763Z] [INFO]   ✅ Fixed property assignments in src/hooks/usePWANotifications.ts",
+    "[2025-08-25T16:00:46.763Z] [INFO]   ✅ Fixed property assignments in src/hooks/usePerformanceMonitor.ts",
+    "[2025-08-25T16:00:46.763Z] [INFO]   ✅ Fixed property assignments in src/hooks/usePerformanceOptimization.ts",
+    "[2025-08-25T16:00:46.763Z] [INFO]   ✅ Fixed property assignments in src/hooks/useTrendingSearch.ts",
+    "[2025-08-25T16:00:46.763Z] [INFO]   ✅ Fixed property assignments in src/hooks/useVideoCache.ts",
+    "[2025-08-25T16:00:46.763Z] [INFO]   ✅ Fixed property assignments in src/hooks/useVideosData.ts",
+    "[2025-08-25T16:00:46.764Z] [INFO]   ✅ Fixed property assignments in src/hooks/useWatchPage.ts",
+    "[2025-08-25T16:00:46.764Z] [INFO]   ✅ Fixed property assignments in src/pages/RegisterPage.tsx",
+    "[2025-08-25T16:00:46.764Z] [INFO]   ✅ Fixed property assignments in src/pages/SearchResultsPage.tsx",
+    "[2025-08-25T16:00:46.765Z] [INFO]   ✅ Fixed property assignments in src/pages/ShortsPage.tsx",
+    "[2025-08-25T16:00:46.765Z] [INFO]   ✅ Fixed property assignments in src/pages/SubscriptionsPage.tsx",
+    "[2025-08-25T16:00:46.765Z] [INFO]   ✅ Phase completed: 33 errors fixed",
+    "[2025-08-25T16:00:46.765Z] [INFO] 🔍 Validating fixes...",
+    "[2025-08-25T16:00:47.965Z] [INFO] 📊 Validation complete: 5132 errors remaining",
+    "[2025-08-25T16:00:47.966Z] [INFO] 📋 Generating comprehensive report..."
+  ]
+}

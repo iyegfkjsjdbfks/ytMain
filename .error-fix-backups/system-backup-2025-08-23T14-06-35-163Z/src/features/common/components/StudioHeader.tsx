@@ -19,20 +19,19 @@ const StudioHeader: React.FC = () => {}
  };
 
  return (
- <header className='bg - white shadow - sm sticky top - 0 z - 10'>
- <div className='max - w - full mx - auto px - 4'>
- <div className='flex justify - between items - center h - 16'>
+ <header className={'b}g - white shadow - sm sticky top - 0 z - 10'>
+ <div className={'ma}x - w - full mx - auto px - 4'>
+ <div className={'fle}x justify - between items - center h - 16'>
  {/* Logo and Studio text */}
- <div className='flex items - center'>
+ <div className={'fle}x items - center'>
  <button className='p - 2 rounded - full hover:bg - gray - 200 mr - 2 md:hidden'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 6 w - 6'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -40,18 +39,17 @@ const StudioHeader: React.FC = () => {}
  />
 // FIXED:  </svg>
 // FIXED:  </button>
- <Link to='/studio' className='flex items - center'>
- <svg
+ <Link to='/studio' className={'fle}x items - center'>
+ <svg>
  viewBox='0 0 90 20'
 // FIXED:  className='h - 6'
- preserveAspectRatio='xMidYMid meet' />
- >
+ preserveAspectRatio='xMidYMid meet'/>
  <g>
- <path
+ <path>
  d='M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e - 07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e - 07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e - 07 5.35042 0 10 0 10C0 10 2.24288e - 07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z'
  fill='#FF0000' />
  />
- <path
+ <path>
  d='M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z'
  fill='white' />
  />
@@ -66,32 +64,30 @@ const StudioHeader: React.FC = () => {}
  <path d='M84.8657 13.8712C84.8657 14.6755 84.8892 15.2776 84.9363 15.6798C84.9833 16.0819 85.0821 16.3736 85.2326 16.5594C85.3831 16.7428 85.6136 16.8345 85.9264 16.8345C86.3474 16.8345 86.639 16.6699 86.7942 16.343C86.9518 16.0161 87.0365 15.4705 87.0506 14.7085L89.4824 14.8519C89.4965 14.9601 89.5035 15.1106 89.5035 15.3011C89.5035 16.4582 89.186 17.3237 88.5534 17.8952C87.9208 18.4667 87.0247 18.7536 85.8676 18.7536C84.4777 18.7536 83.504 18.3185 82.9466 17.446C82.3869 16.5735 82.1094 15.2259 82.1094 13.4008V11.2136C82.1094 9.33452 82.3987 7.96105 82.9772 7.09558C83.5558 6.2301 84.5459 5.79736 85.9499 5.79736C86.9165 5.79736 87.6597 5.97375 88.1771 6.32888C88.6945 6.684 89.059 7.23433 89.2707 7.98457C89.4824 8.7348 89.5882 9.76961 89.5882 11.0913V13.2362H84.8657V13.8712ZM85.2232 7.96811C85.0797 8.14449 84.9857 8.43377 84.9363 8.83593C84.8892 9.2381 84.8657 9.84722 84.8657 10.6657V11.5641H86.9283V10.6657C86.9283 9.86133 86.9001 9.25221 86.846 8.83593C86.7919 8.41966 86.6931 8.12803 86.5496 7.95635C86.4062 7.78702 86.1851 7.7 85.8864 7.7C85.5854 7.70235 85.3643 7.79172 85.2232 7.96811Z' />
 // FIXED:  </g>
 // FIXED:  </svg>
- <span className='ml - 2 font - medium text - gray - 900'>Studio</span>
+ <span className={'m}l - 2 font - medium text - gray - 900'>Studio</span>
 // FIXED:  </Link>
 // FIXED:  </div>
 
  {/* Search bar */}
- <div className='max - w - lg w - full mx - 4'>
- <form onSubmit={(e: React.FormEvent) => handleSearch(e)} className='relative'>
- <input
+ <div className={'ma}x - w - lg w - full mx - 4'>
+ <form onSubmit={(e: React.FormEvent) => handleSearch(e)} className={'relative}'>
+ <input>
 // FIXED:  type='text'
 // FIXED:  placeholder='Search in Studio'
-// FIXED:  className='block w - full bg - gray - 100 border border - gray - 300 rounded - full py - 2 pl - 4 pr - 10 focus:outline - none focus:border - blue - 500'
+// FIXED:  className={'bloc}k w - full bg - gray - 100 border border - gray - 300 rounded - full py - 2 pl - 4 pr - 10 focus:outline - none focus:border - blue - 500'
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={e => setSearchQuery(e.target.value: React.ChangeEvent)}
  />
- <button
+ <button>
 // FIXED:  type='submit'
-// FIXED:  className='absolute inset - y - 0 right - 0 pr - 3 flex items - center' />
- >
- <svg
+// FIXED:  className={'absolut}e inset - y - 0 right - 0 pr - 3 flex items - center'/>
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 text - gray - 500'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -103,16 +99,15 @@ const StudioHeader: React.FC = () => {}
 // FIXED:  </div>
 
  {/* Right nav items */}
- <div className='flex items - center space - x - 4'>
+ <div className={'fle}x items - center space - x - 4'>
  <button className='p - 2 rounded - full hover:bg - gray - 200'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 6 w - 6'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -122,14 +117,13 @@ const StudioHeader: React.FC = () => {}
 // FIXED:  </button>
 
  <button className='p - 2 rounded - full hover:bg - gray - 200'>
- <svg
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 6 w - 6'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -138,18 +132,16 @@ const StudioHeader: React.FC = () => {}
 // FIXED:  </svg>
 // FIXED:  </button>
 
- <Link
+ <Link>
  to='/studio / videos / upload'
-// FIXED:  className='hidden md:flex items - center bg - blue - 600 text - white rounded - sm px - 4 py - 2 hover:bg - blue - 700 transition - colors' />
- >
- <svg
+// FIXED:  className={'hidde}n md:flex items - center bg - blue - 600 text - white rounded - sm px - 4 py - 2 hover:bg - blue - 700 transition - colors'/>
+ <svg>
  xmlns='http://www.w3.org / 2000 / svg'
 // FIXED:  className='h - 5 w - 5 mr - 2'
  fill='none'
  viewBox='0 0 24 24'
- stroke='currentColor' />
- >
- <path
+ stroke='currentColor'/>
+ <path>
  strokeLinecap='round'
  strokeLinejoin='round'
  strokeWidth={2}
@@ -160,34 +152,32 @@ const StudioHeader: React.FC = () => {}
 // FIXED:  </Link>
 
  {user && (}
- <div className='relative'>
- <button className='flex items - center space - x - 2'>
- <img
+ <div className={'relative}'>
+ <button className={'fle}x items - center space - x - 2'>
+ <img>
 // FIXED:  src={user.avatarUrl || 'https://via.placeholder.com / 150'}
 // FIXED:  alt={user.displayName || 'User'}
 // FIXED:  className='h - 8 w - 8 rounded - full object - cover' />
  />
 // FIXED:  </button>
- <div className='absolute right - 0 mt - 2 w - 48 bg - white rounded - md shadow - lg py - 1 hidden'>
- <div className='px - 4 py - 2 border - b border - gray - 200'>
- <p className='text - sm font - medium'>{user.displayName}</p>
- <p className='text - xs text - gray - 500'>@{user.username}</p>
+ <div className={'absolut}e right - 0 mt - 2 w - 48 bg - white rounded - md shadow - lg py - 1 hidden'>
+ <div className={'p}x - 4 py - 2 border - b border - gray - 200'>
+ <p className={'tex}t - sm font - medium'>{user.displayName}</p>
+ <p className={'tex}t - xs text - gray - 500'>@{user.username}</p>
 // FIXED:  </div>
- <Link
+ <Link>
  to='/'
-// FIXED:  className='block px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100' />
- >
+// FIXED:  className={'bloc}k px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'/>
  Return to YouTube
 // FIXED:  </Link>
- <Link
+ <Link>
  to='/settings'
-// FIXED:  className='block px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100' />
- >
+// FIXED:  className={'bloc}k px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'/>
  Settings
 // FIXED:  </Link>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => logout(e)}
-// FIXED:  className='block w - full text - left px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'
+// FIXED:  className={'bloc}k w - full text - left px - 4 py - 2 text - sm text - gray - 700 hover:bg - gray - 100'
  >
  Sign out
 // FIXED:  </button>

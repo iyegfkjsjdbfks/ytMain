@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
  const [isMinimized, setIsMinimized] = useState(isWatchPage);
 
  const toggleSidebar = useCallback(() => {
- if (isWatchPage as any) {
+ if (isWatchPage) {
  // On watch page, toggle between minimized and expanded
  setIsMinimized(prev => !prev);
  setIsSidebarOpen(true); // Always keep sidebar visible on watch page
@@ -37,7 +37,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
 
  useEffect(() => {
  // Update sidebar state when navigating to/from watch page
- if (isWatchPage as any) {
+ if (isWatchPage) {
  setIsMinimized(true);
  setIsSidebarOpen(true);
  } else {
@@ -67,12 +67,12 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
 
  // Calculate sidebar margin based on state and screen size
  const getSidebarMargin = () => {
- if (isWatchPage as any) {
+ if (isWatchPage) {
  // On watch page, use minimized or expanded sidebar
  return isMinimized ? 'md: ml-16' : 'md:ml-60'
  }
  // On other pages, use normal sidebar behavior
- if (isSidebarOpen as any) {
+ if (isSidebarOpen) {
  return 'md: ml-60'
  }
  return 'ml-0';
@@ -80,9 +80,9 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
  };
 
  return (
- <div className="flex flex-col h-screen">
+ <div className={"fle}x flex-col h-screen">
  <Header toggleSidebar={toggleSidebar} />
- <div className="flex flex-1 pt-14">
+ <div className={"fle}x flex-1 pt-14">
  {isWatchPage ? (
  isMinimized ? (
  <MinimizedSidebar />
@@ -92,19 +92,19 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
  ) : (
  <Sidebar isOpen={isSidebarOpen} />
  )}
-      <main
+      <main>
         id="main-content"
         role="main"
         className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}>
  <div className={mainContentPaddingClass}> {/* Apply conditional padding */}
- <div className="min-h-[calc(100vh-3.5rem)]">
+ <div className={"min}-h-[calc(100vh-3.5rem)]">
  <Outlet /> {/* Render child routes */}
 </div>
 </div>
 </main>
 </div>
  {miniplayerContext.state.isVisible && miniplayerContext.state.currentVideo && (
- <Miniplayer
+ <Miniplayer>
  video={miniplayerContext.state.currentVideo}
  onClose={miniplayerContext.actions.hideMiniplayer}
  onMaximize={handleMaximizeMiniplayer} />

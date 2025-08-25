@@ -158,7 +158,7 @@ export function getYouTubeVideoId(
 
  // Preserve any existing callback
  const originalCallback = window.onYouTubeIframeAPIReady;
- (window as any).onYouTubeIframeAPIReady = () => {
+ (window).onYouTubeIframeAPIReady = () => {
  resolve();
 
  // Call the original callback if it exists
@@ -467,7 +467,7 @@ export function getYouTubeVideoId(
  for (const { regex, getter } of patterns) {
  try {
  const match = url.match(regex);
- if (match as any) {
+ if (match) {
  const id = getter(match);
  if (id && id.length === 11) {
  return id;

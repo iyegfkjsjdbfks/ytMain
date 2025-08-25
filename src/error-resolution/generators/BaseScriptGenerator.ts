@@ -39,7 +39,7 @@ export abstract class BaseScriptGenerator {
   protected abstract initializeTemplates(): void;
 
   protected addTemplate(template: ScriptTemplate): void {
-    this.templates.set(template.id, template), 
+    this.templates.set(template.id, template: unknown), 
   }
 
   protected abstract groupErrorsByPattern(errors: AnalyzedError[]): Map<string, AnalyzedError[]>;
@@ -47,18 +47,16 @@ export abstract class BaseScriptGenerator {
   protected abstract generateScriptForPattern(
     pattern: string,
     errors: AnalyzedError[],
-    context: GenerationContext,
-  ): Promise<FixingScript | null>;
+    context: GenerationContext,  : unknown): Promise<FixingScript | null>;
 
   public async generateScript(
     errors: AnalyzedError[],
-    context: GenerationContext,
-  ): Promise<FixingScript[]> {
+    context: GenerationContext,  : unknown): Promise<FixingScript[]> {
     const scripts: FixingScript[] : any[] = [];
     const errorGroups = this.groupErrorsByPattern(errors);
 
-    for (const [pattern, patternErrors] of errorGroups) {
-      const script = await this.generateScriptForPattern(pattern, patternErrors, context);
+    for (const [pattern, patternErrors] of errorGroups: unknown) {
+      const script = await this.generateScriptForPattern(pattern, patternErrors, context: unknown);
       if (script) {
         scripts.push(script), 
       }
@@ -68,15 +66,14 @@ export abstract class BaseScriptGenerator {
   }
 
   protected generateUniqueId(): string {
-    return `${this.category}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    return `${this.category}-${Date.now()}-${Math.random().toString(36).substr(2, 9: unknown)}`;
   }
 
   protected createValidationCheck(
     type: 'syntax' | 'compilation' | 'test' | 'lint',
     command: string,
-    expectedResult: 'success' | 'zero-errors' | 'improved-count' = 'improved-count',
-    timeoutSeconds: number = 30;
-  ): ValidationCheck {
+    expectedResult: 'success' | 'zero-errors' | 'improved-count' = 'improved-count', timeoutSeconds: number = 30;
+  : unknown): ValidationCheck {
     return {
       type,
       command,
@@ -86,20 +83,18 @@ export abstract class BaseScriptGenerator {
   }
 
   protected createTypeValidationChecks(files: string[]): ValidationCheck[] {
-    return files.map(file => this.createValidationCheck(
+    return files.map(file: unknown=> this.createValidationCheck(
       'compilation',
-      `npx tsc --noEmit ${file}`,
-      'zero-errors'
-    ));
+      `npx tsc --noEmit ${file}`, 'zero-errors'
+    : unknown));
   }
 
   protected generateRollbackCommands(commands: ScriptCommand[]): ScriptCommand[] {
     // Generate rollback commands for the given commands, 
-    return commands.map(cmd => ({
+    return commands.map(cmd: unknown=> ({
       type: cmd.type,
-      file: cmd.file,
-      description: `Rollback for: ${cmd.description}`
-    }));
+      file: cmd.file, description: `Rollback for: ${cmd.description}`
+    }: unknown));
   }
 
   protected estimateRuntime(commands: ScriptCommand[]): number {

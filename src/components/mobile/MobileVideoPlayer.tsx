@@ -55,10 +55,10 @@ export const MobileVideoPlayer: React.FC<MobileVideoPlayerProps> = ({
 
   return (
     <div className={'component-ready ' + className}>
-      <div className="component-header">
+      <div className={"component}-header">
         <h2>MobileVideoPlayer</h2>
       </div>
-      <div className="component-body">
+      <div className={"component}-body">
         {children || <p>Component is ready and functioning properly.</p>}
       </div>
     </div>

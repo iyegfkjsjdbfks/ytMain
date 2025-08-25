@@ -541,7 +541,7 @@ return;
 }
 
  this.isRunning = true;
- (console as any).log('🚀 Starting deployment automation engine...');
+ (console).log('🚀 Starting deployment automation engine...');
 
  // Process _execution queue
  setInterval((() => {
@@ -619,7 +619,7 @@ return;
  this.executions.set(_executionId, _execution);
  this.executionQueue.push(_executionId);
 
- (console as any).log(`📋 Deployment queued: ${pipeline.name} (${_executionId})`);
+ (console).log(`📋 Deployment queued: ${pipeline.name} (${_executionId})`);
  advancedAPM.recordMetric('deployment - triggered', 1, { pipeline: pipelineId, trigger });
 
  return _executionId;
@@ -689,7 +689,7 @@ return;
  s.status === 'success' || s.status === 'skipped',
  );
 
- if (allStagesSuccessful as any) {
+ if (allStagesSuccessful) {
  _execution.status = 'success';
  this.addLog(_execution, 'info', 'Deployment completed successfully');
 
@@ -718,7 +718,7 @@ return;
  status: _execution.status,
  duration: _execution.metrics.duration.toString() });
 
- (console as any).log(`🏁 Deployment ${_execution.status}: ${pipeline.name} (${_execution.metrics.duration}ms)`);
+ (console).log(`🏁 Deployment ${_execution.status}: ${pipeline.name} (${_execution.metrics.duration}ms)`);
  }
  /**
  * Execute a single stage
@@ -782,7 +782,7 @@ return;
  return true;
  }
 
- (console as any).log(`🚪 Checking quality gates for ${environment}...`);
+ (console).log(`🚪 Checking quality gates for ${environment}...`);
 
  const codeMetrics = intelligentCodeMonitor.getLatestMetrics();
  const performanceMetrics = performanceMonitor.getMetrics();
@@ -811,12 +811,12 @@ continue;
  const passed = this.evaluateCriterion(value, criterion.operator, criterion.threshold);
 
  if (!passed) {
- (console as any).error(`❌ Quality gate failed: ${gate.name} - ${criterion.metric} ${criterion.operator} ${criterion.threshold} (actual: ${value})`);
+ (console).error(`❌ Quality gate failed: ${gate.name} - ${criterion.metric} ${criterion.operator} ${criterion.threshold} (actual: ${value})`);
  return false;
  }
  }
 
- (console as any).log('✅ All quality gates passed');
+ (console).log('✅ All quality gates passed');
  return true;
  }
 
@@ -824,7 +824,7 @@ continue;
  * Evaluate a criterion
  */
  private evaluateCriterion(value: string | number, operator, threshold): boolean {
- switch (operator as any) {
+ switch (operator) {
  case '>':
  return value > threshold;
  case '<':
@@ -852,7 +852,7 @@ continue;
  try {
  const success = await this.executeHealthCheck(_healthCheck);
 
- if (success as any) {
+ if (success) {
  this.addLog(execution, 'info', `✅ Health check passed: ${_healthCheck.name}`);
  } else {
  this.addLog(execution, 'error', `❌ Health check failed: ${_healthCheck.name}`);
@@ -870,7 +870,7 @@ continue;
  * Execute a health check
  */
  private async executeHealthCheck(healthCheck: HealthCheck): Promise<any> < boolean> {
- const { _config: config } = (healthCheck as any);
+ const { _config: config } = (healthCheck);
  const maxRetries = config?.retries || 3;
 
  for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -941,7 +941,7 @@ continue;
 
  // Send rollback notification
  const pipeline = this.pipelines.get(execution.pipelineId);
- if (pipeline as any) {
+ if (pipeline) {
  await this.sendNotifications(pipeline._environment as any, 'rollback', execution);
  }
 
@@ -958,16 +958,16 @@ continue;
  event: 'start' | 'success' | 'failure' | 'rollback',
  execution: DeploymentExecution): Promise<any> < void> {
  const config = this.configs.get(`${environment}-config`);
- if (!config || !Array<any>.isArray<any>((config as any).notifications)) {
+ if (!config || !Array<any>.isArray<any>((config).notifications)) {
  return;
  }
 
- const relevantNotifications = (config as any).notifications.filter((n) => n.events?.includes(event));
+ const relevantNotifications = (config).notifications.filter((n) => n.events?.includes(event));
 
  for (const notification of relevantNotifications) {
  try {
  // Simulate notification sending
- (console as any).log(`📢 Sending ${notification.type} notification for ${event}:`, {
+ (console).log(`📢 Sending ${notification.type} notification for ${event}:`, {
  execution: execution.id,
  status: execution.status,
  environment });
@@ -977,7 +977,7 @@ continue;
  event,
  environment });
  } catch (error) {
- (console as any).error(`Failed to send ${notification.type} notification:`, error);
+ (console).error(`Failed to send ${notification.type} notification:`, error);
  }
  }
 
@@ -1080,7 +1080,7 @@ continue;
  _execution.endTime = Date.now();
  this.addLog(_execution, 'warn', 'Deployment cancelled by user');
 
- (console as any).log(`🛑 Deployment cancelled: ${_executionId}`);
+ (console).log(`🛑 Deployment cancelled: ${_executionId}`);
  advancedAPM.recordMetric('deployment - cancelled', 1, { _execution: _executionId });
  }
 }
@@ -1090,7 +1090,7 @@ export const deploymentAutomation = new DeploymentAutomationEngine();
 
 // Auto - start in development mode
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
- (console as any).log('🚀 Deployment Automation Engine initialized');
+ (console).log('🚀 Deployment Automation Engine initialized');
 }
 
 export default deploymentAutomation;

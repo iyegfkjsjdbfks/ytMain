@@ -181,14 +181,14 @@ export const UnifiedAppProvider: React.FC < UnifiedAppProviderProps> = ({ childr
  createdAt: new Date().toISOString(),
  updatedAt: new Date().toISOString() };
 
- (localStorage as any).setItem('youtube_clone_user', JSON.stringify(mockUser));
- (localStorage as any).setItem('youtube_clone_token', 'mock - token');
+ (localStorage).setItem('youtube_clone_user', JSON.stringify(mockUser));
+ (localStorage).setItem('youtube_clone_token', 'mock - token');
 
  dispatch({ type: "SET_USER",}
  payload: mockUser });
  return true;
  } catch (error) {}
- (console as any).error('Login failed:', error);
+ (console).error('Login failed:', error);
  return false;
  } finally {}
  dispatch({ type: "SET_AUTH_LOADING",}
@@ -210,12 +210,12 @@ return false;
 
  try {}
  const updatedUser: object = { ...state.user, ...updates };
- (localStorage as any).setItem('youtube_clone_user', JSON.stringify(updatedUser));
+ (localStorage).setItem('youtube_clone_user', JSON.stringify(updatedUser));
  dispatch({ type: "SET_USER",}
  payload: updatedUser });
  return true;
  } catch (error) {}
- (console as any).error('Profile update failed:', error);
+ (console).error('Profile update failed:', error);
  return false;
  }
  }, [state.user]);
@@ -224,7 +224,7 @@ return false;
  const setTheme = useCallback((theme: 'light' | 'dark' | 'system') => {}
  dispatch({ type: "SET_THEME",}
  payload: theme });
- (localStorage as any).setItem('youtube_clone_theme', theme);
+ (localStorage).setItem('youtube_clone_theme', theme);
  }, []);
 
  // Miniplayer actions;
@@ -247,14 +247,14 @@ return false;
  dispatch({ type: "ADD_TO_WATCH_LATER",}
  payload: videoId });
  const updated: any[] = [...state.watchLaterVideos, videoId];
- (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
+ (localStorage).setItem('youtube_clone_watch_later', JSON.stringify(updated));
  }, [state.watchLaterVideos]);
 
  const removeFromWatchLater = useCallback((videoId: string) => {}
  dispatch({ type: "REMOVE_FROM_WATCH_LATER",}
  payload: videoId });
  const updated = state.watchLaterVideos.filter((id: string) => id !== videoId);
- (localStorage as any).setItem('youtube_clone_watch_later', JSON.stringify(updated));
+ (localStorage).setItem('youtube_clone_watch_later', JSON.stringify(updated));
  }, [state.watchLaterVideos]);
 
  const isInWatchLater = useCallback((videoId: string) => {}
@@ -289,8 +289,8 @@ return false;
 
  try {}
  // Initialize auth state;
- const storedUser = (localStorage as any).getItem('youtube_clone_user');
- const token = (localStorage as any).getItem('youtube_clone_token');
+ const storedUser = (localStorage).getItem('youtube_clone_user');
+ const token = (localStorage).getItem('youtube_clone_token');
 
  if (storedUser && token) {}
  try {}
@@ -298,12 +298,12 @@ return false;
  dispatch({ type: "SET_USER",}
  payload: user });
  } catch (parseError) {}
- (console as any).warn('Failed to parse stored user data, clearing:', parseError);
+ (console).warn('Failed to parse stored user data, clearing:', parseError);
  localStorage.removeItem('youtube_clone_user');
  localStorage.removeItem('youtube_clone_token');
  }
  // Initialize theme;
- const storedTheme = (localStorage as any).getItem('youtube_clone_theme') as 'light' | 'dark' | 'system';
+ const storedTheme = (localStorage).getItem('youtube_clone_theme') as 'light' | 'dark' | 'system';
  if (storedTheme && ['light', 'dark', 'system'].includes(storedTheme)) {}
  dispatch({ type: "SET_THEME",}
  payload: storedTheme });
@@ -311,8 +311,8 @@ return false;
 
  // Initialize watch later asynchronously to not block initial render;
  setTimeout((() => {}
- const storedWatchLater = (localStorage as any).getItem('youtube_clone_watch_later');
- if (storedWatchLater as any) {}
+ const storedWatchLater = (localStorage).getItem('youtube_clone_watch_later');
+ if (storedWatchLater) {}
  try {}
  const watchLaterVideos = JSON.parse(storedWatchLater);
  if (Array<any>.isArray<any>(watchLaterVideos)) {}
@@ -324,12 +324,12 @@ return false;
  });
  }
  } catch (parseError) {}
- (console as any).warn('Failed to parse stored watch later data, clearing:', parseError);
+ (console).warn('Failed to parse stored watch later data, clearing:', parseError);
  localStorage.removeItem('youtube_clone_watch_later');
  }
  }, 0);
  } catch (error) {}
- (console as any).error('Failed to initialize app state:', error);
+ (console).error('Failed to initialize app state:', error);
  };
 
  initializeState();

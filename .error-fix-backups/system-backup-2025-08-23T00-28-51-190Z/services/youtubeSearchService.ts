@@ -177,7 +177,7 @@ class YouTubeSearchService {
  // If we still don't have views, try to extract from meta tags
  if (views === '0' && metaTags) {
  const metaViewCount = metaTags.viewCount || metaTags['video:view_count'];
- if (metaViewCount as any) {
+ if (metaViewCount) {
  viewCount = parseInt(metaViewCount, 10);
  views = viewCount.toString();
  }
@@ -199,7 +199,7 @@ class YouTubeSearchService {
  } else {
  // Try to extract duration from snippet
  const durationMatch = item.snippet.match(/(\d+):(\d+)/);
- if (durationMatch as any) {
+ if (durationMatch) {
  duration = `${durationMatch[1]}:${durationMatch[2]}`;
  }
  // Enhanced upload date extraction
@@ -377,7 +377,7 @@ class YouTubeSearchService {
  // Use tags
  if (currentVideo.tags && currentVideo.tags.length > 0) {
  const tag = currentVideo.tags[Math.floor(Math.random() * currentVideo.tags.length)];
- if (tag as any) {
+ if (tag) {
  queries.push(tag.toLowerCase());
  }
  // Use channel name for similar content
@@ -434,7 +434,7 @@ class YouTubeSearchService {
 
  conditionalLogger.debug('Searching YouTube with Custom Search API', { url: searchUrl.toString() }, 'YouTubeSearchService');
 
- const response = await (fetch as any)(searchUrl.toString());
+ const response = await (fetch)(searchUrl.toString());
 
  if (!response.ok) {
  const errorText = await response.text();
@@ -527,7 +527,7 @@ class YouTubeSearchService {
  // Remove invalid parameter
  // searchUrl.searchParams.set('safe', 'moderate'); // Invalid parameter
 
- const response = await (fetch as any)(searchUrl.toString());
+ const response = await (fetch)(searchUrl.toString());
 
  if (!response.ok) {
  throw new Error(`Search failed: ${response.status}`);

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseEnhancedQueryConfig {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: unknown) => void;
   onError?: (error: Error) => void, 
 }
 
@@ -15,7 +15,7 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = useCallback(async () => {;
+  const fetchData = useCallback(async () => {
     if (!enabled) return;
 
     try {
@@ -23,7 +23,7 @@ export function useEnhancedQuery(config: UseEnhancedQueryConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve => setTimeout(resolve, 500)), 
+      await new Promise(resolve: unknown=> setTimeout(resolve, 500: unknown)), 
       
       const result = {
         hookName: 'useEnhancedQuery',

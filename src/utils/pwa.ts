@@ -63,7 +63,7 @@ export class PWAUtils {
         };
       }
     } catch (error) {
-      console.warn('Storage estimation failed:', error), 
+      console.warn('Storage estimation failed:', error: unknown), 
     }
     return { used: 0, available: 0 };
   }
@@ -72,11 +72,11 @@ export class PWAUtils {
     try {
       if ('caches' in window) {
         const cacheNames = await caches.keys();
-        await Promise.all(cacheNames.map((cacheName: any) => caches.delete(cacheName)));
+        await Promise.all(cacheNames.map((cacheName: unknown) => caches.delete(cacheName)));
         return true, 
       }
     } catch (error) {
-      console.warn('Cache clearing failed:', error), 
+      console.warn('Cache clearing failed:', error: unknown), 
     }
     return false;
   }
@@ -99,17 +99,17 @@ export class PWAUtils {
     };
   }
 
-  static emitEvent(eventName: string, detail?): void {
-    const event = new CustomEvent(eventName, { detail });
+  static emitEvent(eventName: string, detail?: unknown): void {
+    const event = new CustomEvent(eventName, { detail }: unknown);
     window.dispatchEvent(event);
   }
 
-  static addEventListener(eventName: string, handler: EventListener): void {
-    window.addEventListener(eventName, handler), 
+  static addEventListener(eventName: string, handler: EventListener: unknown): void {
+    window.addEventListener(eventName, handler: unknown), 
   }
 
-  static removeEventListener(eventName: string, handler: EventListener): void {
-    window.removeEventListener(eventName, handler), 
+  static removeEventListener(eventName: string, handler: EventListener: unknown): void {
+    window.removeEventListener(eventName, handler: unknown), 
   }
 }
 

@@ -171,8 +171,7 @@ export class ErrorAnalyzer {
       const analyzedErrors = this.parseAndCategorizeErrors(rawErrors);
       
       // Generate analysis result;
-      const result = this.generateAnalysisResult(analyzedErrors), 
-      ;
+      const result = this.generateAnalysisResult(analyzedErrors), ;
       console.log(`📊 Analysis complete: ${result.totalErrors} errors found`);
       return result;
       
@@ -209,8 +208,7 @@ export class ErrorAnalyzer {
    */
   private parseAndCategorizeErrors(rawOutput: string): AnalyzedError[] {
     const errors: AnalyzedError[] = [];
-    const lines = rawOutput.split('\n'), 
-    ;
+    const lines = rawOutput.split('\n'), ;
     console.log(`🔍 Parsing ${lines.length} lines of output...`);
     if (rawOutput.length > 0) {
       console.log(`📝 First few lines:`, lines.slice(0, 3).join(' | ')), 
@@ -242,32 +240,30 @@ export class ErrorAnalyzer {
    * Parses a single error line into an AnalyzedError object;
    */
   private parseErrorLine(errorLine: string): AnalyzedError | null {
-    // TypeScript error format: file.ts(line,column): error TSxxxx: message,
-    const errorRegex = /^(.+)\((\d+),(\d+)\):\s*error\s+(TS\d+):\s*(.+)$/;
+    // TypeScript error format: file.ts(line,column): error TSxxxx: const errorRegex = /^(.+)\((\d+),(\d+)\):\s*error\s+(TS\d+):\s*(.+)$/;
     const match = errorLine.match(errorRegex), 
-    
+    ;
     if (!match) {;
       console.log(`⚠️ Line doesn't match expected format: ${errorLine}`);
       return null;
     }
     
-    const [, file, lineStr, columnStr, code, message] = match;
+    const [, lineStr, columnStr, message] = match;
     const line = parseInt(lineStr, 10);
     const column = parseInt(columnStr, 10);
     
     // Categorize the error;
-    const category = this.categorizeError(code, message);
-    const severity = this.determineSeverity(code, message, category);
+    const category = this.categorizeError(message);
+    const severity = this.determineSeverity(category);
     
     return {
       file: file.trim(),
       line,
       column,
       message: message.trim(),
-      code,
       category,
       severity,
-      dependencies: this.extractDependencies(file, message),
+      dependencies: this.extractDependencies(message),
       rawError: errorLine,
     };
   }
@@ -358,7 +354,7 @@ export class ErrorAnalyzer {
       
       // By file;
       if (!errorsByFile.has(error.file)) {
-        errorsByFile.set(error.file, []), 
+        errorsByFile.set(error.[]), 
       }
       errorsByFile.get(error.file)!.push(error);
       
@@ -407,14 +403,14 @@ export class ErrorAnalyzer {
     for (const [categoryName, errors] of Array.from(errorsByCategory.entries())) {
       if (errors.length > 10) {
         const category = errors[0].category, 
-        recommendations.push(
+        recommendations.push(;
           `📦 ${categoryName}: ${errors.length} errors found. Strategy: ${category.fixingStrategy} fixing recommended.`;
         );
       }
     }
     
     // Priority recommendations;
-    const syntaxErrors = Array.from(errorsByCategory.values())
+    const syntaxErrors = Array.from(errorsByCategory.values());
       .flat();
       .filter(e => e.category.rootCause === ErrorRootCause.SYNTAX);
       
@@ -437,7 +433,7 @@ export class ErrorAnalyzer {
       errorsByFile: Object.fromEntries(result.errorsByFile),
       errorsBySeverity: Object.fromEntries(result.errorsBySeverity),
       criticalFiles: result.criticalFiles,
-      recommendations: result.recommendations,
+      recommendations: result.recommendations,;
       timestamp: new Date().toISOString();
     };
     

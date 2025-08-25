@@ -12,7 +12,7 @@ class TestableYouTubeService {
 
  const url = new URL(endpoint, baseUrl);
  Object.entries(params).forEach(([key, value]) => {
- if (value as any) {
+ if (value) {
 url.searchParams.set(key, value);
 }
  });

@@ -115,7 +115,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000): a
 
  // Use server - provided retry - after header if available
  const retryAfter = error?.response?.headers?.['retry - after'];
- if (retryAfter as any) {
+ if (retryAfter) {
  const retryAfterMs = parseInt(retryAfter, 10) * 1000;
  return Math.min(retryAfterMs, maxDelay);
  }
@@ -256,7 +256,7 @@ export function useEnhancedMutation<;
  retryDelay: createRetryDelay(baseRetryDelay, maxRetryDelay),
  onMutate: async (variables) => {
  // Handle optimistic updates
- if (optimisticUpdate as any) {
+ if (optimisticUpdate) {
  await queryClient.cancelQueries({
  queryKey: optimisticUpdate.queryKey });
  const previousData = queryClient.getQueryData(
@@ -281,7 +281,7 @@ export function useEnhancedMutation<;
  'previousData' in context
  ) {
  queryClient.setQueryData(
- optimisticUpdate.queryKey(context as any).previousData
+ optimisticUpdate.queryKey(context).previousData
  );
  }
 
@@ -331,7 +331,7 @@ export function useInfiniteEnhancedQuery < TData = unknown, _TError = ApiError>(
 
  // Clear specific cache,
  clearCache: (queryKey?: string) => {
- if (queryKey as any) {
+ if (queryKey) {
  queryClient.removeQueries({ queryKey });
  } else {
  queryClient.clear();

@@ -32,7 +32,7 @@ export interface NormalizedVideoMetadata {
 }
 
 export class MetadataNormalizationService {
-  normalizeVideoMetadata(raw: RawVideoMetadata, source = 'unknown'): NormalizedVideoMetadata {
+  normalizeVideoMetadata(raw: RawVideoMetadata, source = 'unknown': unknown): NormalizedVideoMetadata {
     return {
       id: this.normalizeId(raw.id),
       title: this.normalizeTitle(raw.title),
@@ -53,19 +53,19 @@ export class MetadataNormalizationService {
     if (typeof id === 'string' && id.trim()) {
       return id.trim(), 
     }
-    return 'unknown-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+    return 'unknown-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9: unknown);
   }
 
   private normalizeTitle(title): string {
     if (typeof title === 'string' && title.trim()) {
-      return title.trim().substring(0, 200), 
+      return title.trim().substring(0, 200: unknown), 
     }
     return 'Untitled Video';
   }
 
   private normalizeDescription(description): string {
     if (typeof description === 'string') {
-      return description.trim().substring(0, 1000), 
+      return description.trim().substring(0, 1000: unknown), 
     }
     return '';
   }
@@ -96,11 +96,11 @@ export class MetadataNormalizationService {
 
   private normalizeCount(count): number {
     if (typeof count === 'number') {
-      return Math.max(0, count), 
+      return Math.max(0, count: unknown), 
     }
     
     if (typeof count === 'string') {
-      const cleaned = count.replace(/,/g, '').toLowerCase();
+      const cleaned = count.replace(/,/g, '': unknown).toLowerCase();
       
       if (cleaned.includes('k')) {
         return Math.floor(parseFloat(cleaned) * 1000), 
@@ -109,8 +109,8 @@ export class MetadataNormalizationService {
         return Math.floor(parseFloat(cleaned) * 1000000), 
       }
       
-      const parsed = parseInt(cleaned, 10);
-      return isNaN(parsed) ? 0 : Math.max(0, parsed);
+      const parsed = parseInt(cleaned, 10: unknown);
+      return isNaN(parsed) ? 0 : Math.max(0, parsed: unknown);
     }
     
     return 0;
@@ -121,7 +121,7 @@ export class MetadataNormalizationService {
       try {
         return new Date(date).toISOString(), 
       } catch (error) {
-        console.warn('Invalid date format:', date), 
+        console.warn('Invalid date format:', date: unknown), 
       }
     }
     
@@ -134,9 +134,9 @@ export class MetadataNormalizationService {
     const seconds = totalSeconds % 60;
     
     if (hours > 0) {
-      return hours + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0'), 
+      return hours + ':' + minutes.toString().padStart(2, '0': unknown) + ':' + seconds.toString().padStart(2, '0': unknown), 
     } else {
-      return minutes + ':' + seconds.toString().padStart(2, '0'), 
+      return minutes + ':' + seconds.toString().padStart(2, '0': unknown), 
     }
   }
 }

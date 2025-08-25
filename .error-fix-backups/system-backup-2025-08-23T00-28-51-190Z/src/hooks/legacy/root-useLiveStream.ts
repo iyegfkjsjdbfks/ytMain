@@ -74,7 +74,7 @@ export function useLiveStream(streamId?: string): any {
  }, [streamId]);
 
  const updateStreamStats = (newStats: Partial<LiveStream['stats']>) => {
- if (stream as any) {
+ if (stream) {
  setStream((prev) =>
  prev
  ? {
@@ -85,7 +85,7 @@ export function useLiveStream(streamId?: string): any {
  };
 
  const addSuperChat = (amount, message, username) => {
- if (stream as any) {
+ if (stream) {
  const superChat = {
  id: Date.now().toString(),
  username,

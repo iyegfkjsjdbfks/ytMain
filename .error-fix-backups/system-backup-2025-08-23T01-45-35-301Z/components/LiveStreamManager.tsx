@@ -92,7 +92,7 @@ const LiveStreamManager: React.FC < LiveStreamManagerProps> = ({}
 
  useEffect(() => {}
  return () => {}
- if (stream as any) {}
+ if (stream) {}
  stream.getTracks().forEach(track => track.stop());
  }
  if (statsInterval.current) {}
@@ -127,7 +127,7 @@ clearInterval(chatInterval.current);
  videoRef.current.srcObject = mediaStream;
  }
  } catch (error) {}
- (console as any).error('Error accessing media devices:', error);
+ (console).error('Error accessing media devices:', error);
  alert('Could not access camera / microphone. Please check permissions.');
  } finally {}
  setIsSettingUp(false);
@@ -176,7 +176,7 @@ clearInterval(chatInterval.current);
 
  const pauseStream = () => {}
  setIsPaused(!isPaused);
- if (stream as any) {}
+ if (stream) {}
  stream.getVideoTracks().forEach((track) => {}
  track.enabled = isPaused;
  });
@@ -186,7 +186,7 @@ clearInterval(chatInterval.current);
  setIsStreaming(false);
  setIsPaused(false);
 
- if (stream as any) {}
+ if (stream) {}
  stream.getTracks().forEach(track => track.stop());
  setStream(null);
  }
@@ -205,7 +205,7 @@ clearInterval(chatInterval.current);
  };
 
  const toggleAudio = () => {}
- if (stream as any) {}
+ if (stream) {}
  stream.getAudioTracks().forEach((track) => {}
  track.enabled = !audioEnabled;
  });
@@ -213,7 +213,7 @@ clearInterval(chatInterval.current);
  };
 
  const toggleVideo = () => {}
- if (stream as any) {}
+ if (stream) {}
  stream.getVideoTracks().forEach((track) => {}
  track.enabled = !videoEnabled;
  });
@@ -290,14 +290,14 @@ return;
 
  return (
  <div className={`bg - neutral - 50 dark:bg - neutral - 900 ${className}`}>
- <div className="max - w-7xl mx - auto p - 6">
- <div className="grid grid - cols - 1 lg:grid - cols - 3 gap - 6">
+ <div className={"ma}x - w-7xl mx - auto p - 6">
+ <div className={"gri}d grid - cols - 1 lg:grid - cols - 3 gap - 6">
  {/* Main Stream Area */}
- <div className="lg:col - span - 2 space - y-4">
+ <div className={"lg}:col - span - 2 space - y-4">
  {/* Video Preview */}
- <div className="relative bg - black rounded - lg overflow - hidden aspect - video">
+ <div className={"relativ}e bg - black rounded - lg overflow - hidden aspect - video">
  {stream ? (}
- <video
+ <video>
  ref={videoRef}
  autoPlay
  muted
@@ -305,23 +305,23 @@ return;
 // FIXED:  className="w - full h - full object - cover" />
  />
  ) : (
- <div className="flex items - center justify - center h - full text - white">
- <div className="text - center">
+ <div className={"fle}x items - center justify - center h - full text - white">
+ <div className={"tex}t - center">
  <VideoCameraIcon className="w - 16 h - 16 mx - auto mb - 4 opacity - 50" />
- <p className="text - lg">Camera not connected</p>
- <p className="text - sm opacity - 75">Click "Start Stream" to begin</p>
+ <p className={"tex}t - lg">Camera not connected</p>
+ <p className={"tex}t - sm opacity - 75">Click "Start Stream" to begin</p>
 // FIXED:  </div>
 // FIXED:  </div>
  )}
 
  {/* Stream Status Overlay */}
  {isStreaming && (}
- <div className="absolute top - 4 left - 4 flex items - center space - x-4">
- <div className="flex items - center space - x-2 bg - red - 600 text - white px - 3 py - 1 rounded - full">
+ <div className={"absolut}e top - 4 left - 4 flex items - center space - x-4">
+ <div className={"fle}x items - center space - x-2 bg - red - 600 text - white px - 3 py - 1 rounded - full">
  <div className="w - 2 h - 2 bg - white rounded - full animate - pulse" />
- <span className="text - sm font - medium">LIVE</span>
+ <span className={"tex}t - sm font - medium">LIVE</span>
 // FIXED:  </div>
-<div className="bg - black bg - opacity - 50 text - white px - 3 py - 1 rounded - full text - sm">
+<div className={"b}g - black bg - opacity - 50 text - white px - 3 py - 1 rounded - full text - sm">
  {formatDuration(stats.duration)}
 // FIXED:  </div>
 // FIXED:  </div>
@@ -329,12 +329,12 @@ return;
 
  {/* Stream Stats Overlay */}
  {isStreaming && (}
- <div className="absolute top - 4 right - 4 space - y-2">
- <div className="flex items - center space - x-2 bg - black bg - opacity - 50 text - white px - 3 py - 1 rounded - full text - sm">
+ <div className={"absolut}e top - 4 right - 4 space - y-2">
+ <div className={"fle}x items - center space - x-2 bg - black bg - opacity - 50 text - white px - 3 py - 1 rounded - full text - sm">
  <EyeIcon className="w - 4 h - 4" />
  <span>{stats.viewers}</span>
 // FIXED:  </div>
- <div className="flex items - center space - x-2 bg - black bg - opacity - 50 text - white px - 3 py - 1 rounded - full text - sm">
+ <div className={"fle}x items - center space - x-2 bg - black bg - opacity - 50 text - white px - 3 py - 1 rounded - full text - sm">
  <HeartIcon className="w - 4 h - 4" />
  <span>{stats.likes}</span>
 // FIXED:  </div>
@@ -343,29 +343,29 @@ return;
 // FIXED:  </div>
 
  {/* Stream Controls */}
- <div className="flex items - center justify - between bg - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
- <div className="flex items - center space - x-3">
+ <div className={"fle}x items - center justify - between bg - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center space - x-3">
  {!isStreaming ? (}
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => startStream(e)}
 // FIXED:  disabled={isSettingUp}
-// FIXED:  className="flex items - center space - x-2 bg - red - 600 hover:bg - red - 700 text - white px - 4 py - 2 rounded - lg font - medium transition - colors disabled:opacity - 50"
+// FIXED:  className={"fle}x items - center space - x-2 bg - red - 600 hover:bg - red - 700 text - white px - 4 py - 2 rounded - lg font - medium transition - colors disabled:opacity - 50"
  >
  <PlayIcon className="w - 5 h - 5" />
  <span>{isSettingUp ? 'Setting up...' : 'Start Stream'}</span>
 // FIXED:  </button>
  ) : (
- <div className="flex items - center space - x-2">
+ <div className={"fle}x items - center space - x-2">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => pauseStream(e)}
-// FIXED:  className="flex items - center space - x-2 bg - yellow - 600 hover:bg - yellow - 700 text - white px - 4 py - 2 rounded - lg font - medium transition - colors"
+// FIXED:  className={"fle}x items - center space - x-2 bg - yellow - 600 hover:bg - yellow - 700 text - white px - 4 py - 2 rounded - lg font - medium transition - colors"
  >
  {isPaused ? <PlayIcon className="w - 5 h - 5" /> : <PauseIcon className="w - 5 h - 5" />}
  <span>{isPaused ? 'Resume' : 'Pause'}</span>
 // FIXED:  </button>
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => stopStream(e)}
-// FIXED:  className="flex items - center space - x-2 bg - neutral - 600 hover:bg - neutral - 700 text - white px - 4 py - 2 rounded - lg font - medium transition - colors"
+// FIXED:  className={"fle}x items - center space - x-2 bg - neutral - 600 hover:bg - neutral - 700 text - white px - 4 py - 2 rounded - lg font - medium transition - colors"
  >
  <StopIcon className="w - 5 h - 5" />
  <span > Stop</span>
@@ -373,7 +373,7 @@ return;
 // FIXED:  </div>
  )}
 
- <div className="flex items - center space - x-2">
+ <div className={"fle}x items - center space - x-2">
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => toggleAudio(e)}
 // FIXED:  className={`p - 2 rounded - lg transition - colors ${}
@@ -408,10 +408,10 @@ return;
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className="flex items - center space - x-2">
+ <div className={"fle}x items - center space - x-2">
  <button />
 // FIXED:  onClick={() => setShowChat(!showChat: React.MouseEvent)}
-// FIXED:  className="flex items - center space - x-2 text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 800 dark:hover:text - neutral - 200 px - 3 py - 2 rounded - lg transition - colors"
+// FIXED:  className={"fle}x items - center space - x-2 text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 800 dark:hover:text - neutral - 200 px - 3 py - 2 rounded - lg transition - colors"
  >
  <ChatBubbleLeftIcon className="w - 5 h - 5" />
  <span > Chat</span>
@@ -419,7 +419,7 @@ return;
 
  <button />
 // FIXED:  onClick={() => setShowSettings(!showSettings: React.MouseEvent)}
-// FIXED:  className="flex items - center space - x-2 text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 800 dark:hover:text - neutral - 200 px - 3 py - 2 rounded - lg transition - colors"
+// FIXED:  className={"fle}x items - center space - x-2 text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 800 dark:hover:text - neutral - 200 px - 3 py - 2 rounded - lg transition - colors"
  >
  <Cog6ToothIcon className="w - 5 h - 5" />
  <span > Settings</span>
@@ -429,15 +429,15 @@ return;
 
  {/* Stream Settings */}
  {showSettings && (}
- <div className="bg - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700 space - y-4">
- <h3 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 100">Stream Settings</h3>
+ <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700 space - y-4">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">Stream Settings</h3>
 
- <div className="grid grid - cols - 1 md:grid - cols - 2 gap - 4">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 gap - 4">
  <div>
- <label htmlFor="stream - title" className="block text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
+ <label htmlFor="stream - title" className={"bloc}k text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
  Stream Title *
 // FIXED:  </label>
- <input
+ <input>
 // FIXED:  id="stream - title"
 // FIXED:  type="text"
 // FIXED:  value={settings.title} />
@@ -448,10 +448,10 @@ return;
 // FIXED:  </div>
 
  <div>
- <label htmlFor="stream - category" className="block text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
+ <label htmlFor="stream - category" className={"bloc}k text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
  Category
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id="stream - category"
 // FIXED:  value={settings.category} />
 // FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, category: e.target.value }))}
@@ -464,10 +464,10 @@ return;
 // FIXED:  </div>
 
  <div>
- <label htmlFor="stream - privacy" className="block text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
+ <label htmlFor="stream - privacy" className={"bloc}k text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
  Privacy
 // FIXED:  </label>
- <select
+ <select>
 // FIXED:  id="stream - privacy"
 // FIXED:  value={settings.privacy} />
 // FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, privacy: e.target.value as 'public' | 'unlisted' | 'private' }))}
@@ -479,36 +479,36 @@ return;
 // FIXED:  </select>
 // FIXED:  </div>
 
- <div className="flex items - center space - x-4">
- <label htmlFor="enable - chat" className="flex items - center space - x-2">
- <input
+ <div className={"fle}x items - center space - x-4">
+ <label htmlFor="enable - chat" className={"fle}x items - center space - x-2">
+ <input>
 // FIXED:  id="enable - chat"
 // FIXED:  type="checkbox"
 // FIXED:  checked={settings.enableChat} />
 // FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, enableChat: e.target.checked }))}
-// FIXED:  className="rounded border - neutral - 300 dark:border - neutral - 600 text - blue - 600 focus:ring - blue - 500"
+// FIXED:  className={"rounde}d border - neutral - 300 dark:border - neutral - 600 text - blue - 600 focus:ring - blue - 500"
  />
- <span className="text - sm text - neutral - 700 dark:text - neutral - 300">Enable Chat</span>
+ <span className={"tex}t - sm text - neutral - 700 dark:text - neutral - 300">Enable Chat</span>
 // FIXED:  </label>
 
- <label htmlFor="enable - donations" className="flex items - center space - x-2">
- <input
+ <label htmlFor="enable - donations" className={"fle}x items - center space - x-2">
+ <input>
 // FIXED:  id="enable - donations"
 // FIXED:  type="checkbox"
 // FIXED:  checked={settings.enableDonations} />
 // FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, enableDonations: e.target.checked }))}
-// FIXED:  className="rounded border - neutral - 300 dark:border - neutral - 600 text - blue - 600 focus:ring - blue - 500"
+// FIXED:  className={"rounde}d border - neutral - 300 dark:border - neutral - 600 text - blue - 600 focus:ring - blue - 500"
  />
- <span className="text - sm text - neutral - 700 dark:text - neutral - 300">Enable Donations</span>
+ <span className={"tex}t - sm text - neutral - 700 dark:text - neutral - 300">Enable Donations</span>
 // FIXED:  </label>
 // FIXED:  </div>
 // FIXED:  </div>
 
  <div>
- <label htmlFor="stream - description" className="block text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
+ <label htmlFor="stream - description" className={"bloc}k text - sm font - medium text - neutral - 700 dark:text - neutral - 300 mb - 2">
  Description
 // FIXED:  </label>
- <textarea
+ <textarea>
 // FIXED:  id="stream - description"
 // FIXED:  value={settings.description} />
 // FIXED:  onChange={(e) => setSettings(prev => ({ ...prev as any, description: e.target.value }))}
@@ -523,32 +523,32 @@ return;
 
  {/* Chat and Stats Sidebar */}
  {showChat && (}
- <div className="space - y-4">
+ <div className={"spac}e - y-4">
  {/* Stream Stats */}
  {isStreaming && (}
- <div className="bg - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
- <h3 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 3">Live Stats</h3>
- <div className="grid grid - cols - 2 gap - 3 text - sm">
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 3">Live Stats</h3>
+ <div className={"gri}d grid - cols - 2 gap - 3 text - sm">
  <div>
- <p className="text - neutral - 600 dark:text - neutral - 400">Viewers</p>
- <p className="text - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.viewers}</p>
+ <p className={"tex}t - neutral - 600 dark:text - neutral - 400">Viewers</p>
+ <p className={"tex}t - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.viewers}</p>
 // FIXED:  </div>
  <div>
- <p className="text - neutral - 600 dark:text - neutral - 400">Peak</p>
- <p className="text - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.peakViewers}</p>
+ <p className={"tex}t - neutral - 600 dark:text - neutral - 400">Peak</p>
+ <p className={"tex}t - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.peakViewers}</p>
 // FIXED:  </div>
  <div>
- <p className="text - neutral - 600 dark:text - neutral - 400">Likes</p>
- <p className="text - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.likes}</p>
+ <p className={"tex}t - neutral - 600 dark:text - neutral - 400">Likes</p>
+ <p className={"tex}t - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.likes}</p>
 // FIXED:  </div>
  <div>
- <p className="text - neutral - 600 dark:text - neutral - 400">Messages</p>
- <p className="text - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.messages}</p>
+ <p className={"tex}t - neutral - 600 dark:text - neutral - 400">Messages</p>
+ <p className={"tex}t - xl font - bold text - neutral - 900 dark:text - neutral - 100">{stats.messages}</p>
 // FIXED:  </div>
  {settings.enableDonations && stats.totalDonations > 0 && (}
- <div className="col - span - 2">
- <p className="text - neutral - 600 dark:text - neutral - 400">Donations</p>
- <p className="text - xl font - bold text - green - 600">${stats.totalDonations}</p>
+ <div className={"co}l - span - 2">
+ <p className={"tex}t - neutral - 600 dark:text - neutral - 400">Donations</p>
+ <p className={"tex}t - xl font - bold text - green - 600">${stats.totalDonations}</p>
 // FIXED:  </div>
  )}
 // FIXED:  </div>
@@ -556,25 +556,24 @@ return;
  )}
 
  {/* Live Chat */}
- <div className="bg - white dark:bg - neutral - 800 rounded - lg border border - neutral - 200 dark:border - neutral - 700 flex flex - col h - 96">
+ <div className={"b}g - white dark:bg - neutral - 800 rounded - lg border border - neutral - 200 dark:border - neutral - 700 flex flex - col h - 96">
  <div className="p - 4 border - b border - neutral - 200 dark:border - neutral - 700">
- <h3 className="text - lg font - semibold text - neutral - 900 dark:text - neutral - 100">Live Chat</h3>
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">Live Chat</h3>
 // FIXED:  </div>
 
- <div
+ <div>
  ref={chatContainerRef}
-// FIXED:  className="flex - 1 overflow - y-auto p - 4 space - y-2" />
- >
+// FIXED:  className={"fle}x - 1 overflow - y-auto p - 4 space - y-2"/>
  {chatMessages.length === 0 ? (}
- <p className="text - neutral - 500 dark:text - neutral - 400 text - center py - 8">
+ <p className={"tex}t - neutral - 500 dark:text - neutral - 400 text - center py - 8">
  No messages yet. Start the conversation!
 // FIXED:  </p>
  ) : (
  chatMessages.map((message) => (
- <div key={message.id} className="flex items - start space - x-2">
- <div className="flex - 1">
- <div className="flex items - center space - x-2">
- <span className={`text - sm font - medium ${}
+ <div key={message.id} className={"fle}x items - start space - x-2">
+ <div className={"fle}x - 1">
+ <div className={"fle}x items - center space - x-2">
+ <span className={`text - sm font - medium ${}>
  message.isOwner
  ? 'text - red - 600 dark:text - red - 400'
  : message.isModerator
@@ -586,12 +585,12 @@ return;
  {message.isModerator && ' (Mod)'}
 // FIXED:  </span>
  {message.donation && (}
- <span className="bg - yellow - 100 dark:bg - yellow - 900 text - yellow - 800 dark:text - yellow - 200 text - xs px - 2 py - 1 rounded - full">
+ <span className={"b}g - yellow - 100 dark:bg - yellow - 900 text - yellow - 800 dark:text - yellow - 200 text - xs px - 2 py - 1 rounded - full">
  ${message.donation.amount}
 // FIXED:  </span>
  )}
 // FIXED:  </div>
-<p className="text - sm text - neutral - 700 dark:text - neutral - 300">
+<p className={"tex}t - sm text - neutral - 700 dark:text - neutral - 300">
  {message.message}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -601,18 +600,18 @@ return;
 // FIXED:  </div>
 
  <div className="p - 4 border - t border - neutral - 200 dark:border - neutral - 700">
- <div className="flex space - x-2">
- <input
+ <div className={"fle}x space - x-2">
+ <input>
 // FIXED:  type="text"
 // FIXED:  value={newMessage} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setNewMessage(e.target.value)}
  onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
 // FIXED:  placeholder="Type a message..."
-// FIXED:  className="flex - 1 px - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 700 text - neutral - 900 dark:text - neutral - 100 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent text - sm"
+// FIXED:  className={"fle}x - 1 px - 3 py - 2 border border - neutral - 300 dark:border - neutral - 600 rounded - lg bg - white dark:bg - neutral - 700 text - neutral - 900 dark:text - neutral - 100 focus:ring - 2 focus:ring - blue - 500 focus:border - transparent text - sm"
  />
  <button />
 // FIXED:  onClick={(e: React.MouseEvent) => sendChatMessage(e)}
-// FIXED:  className="px - 4 py - 2 bg - blue - 600 hover:bg - blue - 700 text - white rounded - lg font - medium transition - colors text - sm"
+// FIXED:  className={"p}x - 4 py - 2 bg - blue - 600 hover:bg - blue - 700 text - white rounded - lg font - medium transition - colors text - sm"
  >
  Send
 // FIXED:  </button>

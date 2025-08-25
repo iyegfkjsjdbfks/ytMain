@@ -14,11 +14,11 @@ export const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = (
 
   return (
     <div className={'component ' + className}>
-      <div className="component-header">
+      <div className={"component}-header">
         <h3>Modular P W A Install Banner</h3>
       </div>
       
-      <div className="component-content">
+      <div className={"component}-content">
         {children || (
           <div>
             <button onClick={() => setIsActive(!isActive)}>

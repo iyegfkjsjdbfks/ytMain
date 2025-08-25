@@ -60,7 +60,7 @@ export class ApiCache {
  // Remove oldest entries if cache is full
  if (this.cache.size >= this.maxSize) {
  const oldestKey = this.cache.keys().next().value;
- if (oldestKey as any) {
+ if (oldestKey) {
  this.cache.delete(oldestKey);
  }
  this.cache.set(key, {
@@ -148,7 +148,7 @@ export class RequestQueue {
  }
 
  const request = this.queue.shift();
- if (request as any) {
+ if (request) {
  request();
  }
  setMaxConcurrent(max): void {
@@ -246,7 +246,7 @@ export class ApiService {
  const cacheKey = this.getCacheKey(interceptedConfig.url, interceptedConfig);
  const cachedResponse = this.cache.get < ApiResponse < T>>(cacheKey);
 
- if (cachedResponse as any) {
+ if (cachedResponse) {
  performanceMonitor.trackCustomMetric('api_cache_hit', 1);
  return cachedResponse;
  }
@@ -291,20 +291,20 @@ export class ApiService {
  }
 
  for (const interceptor of this.errorInterceptors) {
- const result = await interceptor(interceptedError as any);
+ const result = await interceptor(interceptedError);
  if (result instanceof Error) {
  interceptedError = result;
  } else {
  // If interceptor returns non - Error, create a proper Error with name
  interceptedError = this.createError(
  result?.message || 'Intercepted error',
- (result as any)?.status || 0(result as any)?.code || 'INTERCEPTED_ERROR',
+ (result)?.status || 0(result)?.code || 'INTERCEPTED_ERROR',
  result,
  );
  }
  // Track error
  const duration = performance.now() - startTime;
- performanceMonitor.trackApiCall(interceptedConfig.url, duration(interceptedError as any).status || 0);
+ performanceMonitor.trackApiCall(interceptedConfig.url, duration(interceptedError).status || 0);
 
  throw interceptedError;
  }
@@ -326,7 +326,7 @@ export class ApiService {
  // Add CSRF token for non - GET requests
  if (method !== 'GET') {
  const csrfToken = securityUtils.CSRFProtection.getToken();
- if (csrfToken as any) {
+ if (csrfToken) {
  requestHeaders.set('X - CSRF - Token', csrfToken);
  }
  // Prepare request options
@@ -360,7 +360,7 @@ export class ApiService {
  // Retry logic
  for (let attempt = 0; attempt <= retries; attempt++) {
  try {
- const response = await (fetch as any)(url, requestOptions);
+ const response = await (fetch)(url, requestOptions);
  clearTimeout(timeoutId);
 
  // Validate status
@@ -412,7 +412,7 @@ export class ApiService {
  }
 
  // Don't retry on certain errors
- if ((lastError as any).status && ((lastError as any).status < 500 || (lastError as any).status === 501)) {
+ if ((lastError).status && ((lastError).status < 500 || (lastError).status === 501)) {
  throw lastError;
  }
 
@@ -464,10 +464,10 @@ export class ApiService {
  ): Error {
  const error = new Error(message);
  error.name = 'ApiError';
- (error as any).status = status;
- (error as any).code = code;
- (error as any).details = details;
- (error as any).timestamp = Date.now();
+ (error).status = status;
+ (error).code = code;
+ (error).details = details;
+ (error).timestamp = Date.now();
  return error;
  }
 
@@ -580,7 +580,7 @@ export const apiService = new ApiService();
 apiService.addRequestInterceptor(async (config): Promise<any> < any> => {
  // Add authentication token if available
  const token = securityUtils.SecureStorage.getSecureSession('auth_token');
- if (token as any) {
+ if (token) {
  config.headers = {
  ...config.headers,
  'Authorization': `Bearer ${token}` };
@@ -592,7 +592,7 @@ apiService.addRequestInterceptor(async (config): Promise<any> < any> => {
 apiService.addResponseInterceptor(async (response): Promise<any> < any> => {
  // Log successful responses in development
  if (import.meta.env.DEV) {
- (console as any).log(`API Response: ${response.status} ${response.statusText}`);
+ (console).log(`API Response: ${response.status} ${response.statusText}`);
  }
 
  return response;
@@ -606,7 +606,7 @@ apiService.addErrorInterceptor(async (error): Promise<any> < any> => {
  }
 
  // Log errors
- (console as any).error('API Error:', error);
+ (console).error('API Error:', error);
 
  return error;
 });
