@@ -15,7 +15,7 @@ export interface FileUploadProps {}
  description?: string;
  files?: File;
 
-export const FileUpload: React.FC < FileUploadProps> = ({, })
+export const FileUpload: React.FC < FileUploadProps> = ({, }) => {
  accept,
  multiple = false,
  maxSize,
@@ -73,9 +73,9 @@ return '0 Bytes';
  const i = Math.floor(Math.log(bytes) / Math.log(k));
  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2)) } ${ sizes.i}`;
 
- return (;)
- <div className={`w - full ${className}`}>;
- <div;>;
+ return (
+ <div className={`w - full ${className}`}>
+ <div>
 // FIXED:  className={`relative border - 2 border - dashed rounded - lg p - 6 transition - colors ${, }
  isDragOver;
  ? 'border - blue - 400 bg - blue - 50 dark:bg - blue - 900 / 10';
@@ -83,72 +83,71 @@ return '0 Bytes';
  } ${}
  disabled;
  ? 'opacity - 50 cursor - not - allowed';
- : 'cursor - pointer hover:border - neutral - 400 dark:hover:border - neutral - 500';
+ : 'cursor - pointer hover:border - neutral - 400 dark:hover:border - neutral - 500'
  }`}
  onDragOver={handleDragOver}
  onDragLeave={handleDragLeave}
- onDrop={handleDrop} />;
+ onDrop={handleDrop} />
 // FIXED:  onClick={(e: React.MouseEvent) => handleClick(e), }
  >
- <input;>;
+ <input;>
  ref={fileInputRef}
 // FIXED:  type="file"
  accept={accept}
- multiple={multiple} />;
+ multiple={multiple} />
 // FIXED:  onChange={(e: React.ChangeEvent) => handleFileSelect(e.target.files), }
 // FIXED:  className={"hidden}"
 // FIXED:  disabled={disabled, } />
 
- <div className={"tex}t - center">;
- <CloudArrowUpIcon className={"m}x - auto h - 12 w - 12 text - neutral - 400" />;
- <div className={"m}t - 4">;
- <p className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"tex}t - center">
+ <CloudArrowUpIcon className={"m}x - auto h - 12 w - 12 text - neutral - 400" />
+ <div className={"m}t - 4">
+ <p className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">
  {label}
 // FIXED:  </p>
- <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">;
+ <p className={"tex}t - sm text - neutral - 500 dark:text - neutral - 400 mt - 1">
  {description}
 // FIXED:  </p>
- {maxSize && (})
- <p className={"tex}t - xs text - neutral - 400 dark:text - neutral - 500 mt - 1">;
+ {maxSize && (}) => {
+ <p className={"tex}t - xs text - neutral - 400 dark:text - neutral - 500 mt - 1">
  Maximum file size: {formatFileSize(maxSize), }
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
- {error && (})
- <p className={"m}t - 2 text - sm text - red - 600 dark:text - red - 400">{error}</p>;
-
- {files.length > 0 && (})
- <div className={"m}t - 4 space - y - 2">;
- <h4 className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">;
+ {error && (}) => {
+ <p className={"m}t - 2 text - sm text - red - 600 dark:text - red - 400">{error}</p>
+ {files.length > 0 && (}) => {
+ <div className={"m}t - 4 space - y - 2">
+ <h4 className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">
  Selected Files ({files.length});
 // FIXED:  </h4>
- <div className={"spac}e - y - 2">;
+ <div className={"spac}e - y - 2">
  {files.map((file,}))
  index) => (;
-          <div;
+          <div
           key={index}
 // FIXED:  className={"fle}x items - center justify - between p - 3 bg - neutral - 50 dark:bg - neutral - 800 rounded - lg" />
- <div className={"fle}x items - center space - x - 3">;
- <DocumentIcon className="h - 5 w - 5 text - neutral - 400" />;
- <div>;
- <p className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"fle}x items - center space - x - 3">
+ <DocumentIcon className="h - 5 w - 5 text - neutral - 400" />
+ <div>
+ <p className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100">
  {file.name}
 // FIXED:  </p>
- <p className={"tex}t - xs text - neutral - 500 dark:text - neutral - 400">;
+ <p className={"tex}t - xs text - neutral - 500 dark:text - neutral - 400">
  {formatFileSize(file.size)}
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
- {onFileRemove && (})
- <button />;
+ {onFileRemove && (}) => {
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => {, }
  e.stopPropagation();
  onFileRemove(index);
 // FIXED:  className="p - 1 text - neutral - 400 hover:text - red - 500 transition - colors"
  >
- <XIcon className="h - 4 w - 4" />;
+ <XIcon className="h - 4 w - 4" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>

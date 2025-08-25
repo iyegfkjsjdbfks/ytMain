@@ -5,8 +5,7 @@ import { _Logger } from '../utils/_Logger';
 
 describe('WorkflowCoordinator', () => {)
   let coordinator: WorkflowCoordinator,
-  let ,mockLogger: jest.Mocked<_Logger>;
-
+  let ,mockLogger: jest.Mocked<_Logger>
   beforeEach(() => {)
     mockLogger = global.createMockLogger();
     coordinator = new WorkflowCoordinator(mockLogger)}

@@ -19,8 +19,7 @@ jest.mock('fs', () => ({))
 
 describe('CacheManager', () => {)
   let cacheManager: CacheManager,
-  const mockFs = fs.promises as jest.Mocked<typeof fs.promises>;
-
+  const mockFs = fs.promises as jest.Mocked<typeof fs.promises>
   beforeEach(() => {)
     cacheManager = new CacheManager('.test-backups', 5);
     jest.clearAllMocks()}
@@ -170,8 +169,7 @@ describe('CacheManager', () => {)
 
 describe('FileManager', () => {)
   let fileManager: FileManager,
-  const mockFs = fs.promises as jest.Mocked<typeof fs.promises>;
-
+  const mockFs = fs.promises as jest.Mocked<typeof fs.promises>
   beforeEach(() => {)
     fileManager = new FileManager();
     jest.clearAllMocks()}

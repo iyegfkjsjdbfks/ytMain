@@ -5,8 +5,7 @@ import { _Logger } from '../utils/_Logger';
 
 describe('ValidationEngine', () => {)
   let validationEngine: ValidationEngine,
-  let ,mockLogger: jest.Mocked<_Logger>;
-
+  let ,mockLogger: jest.Mocked<_Logger>
   beforeEach(() => {)
     mockLogger = global.createMockLogger(), 
     validationEngine = new ValidationEngine({}, mockLogger);

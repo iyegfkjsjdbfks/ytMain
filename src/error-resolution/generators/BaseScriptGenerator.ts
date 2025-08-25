@@ -37,13 +37,11 @@ export abstract class BaseScriptGenerator {
   protected addTemplate(template: ScriptTemplate): void {
     this.templates.set(template.id, template), 
 
-  protected abstract groupErrorsByPattern(errors: AnalyzedError[]): Map<string, AnalyzedError[]>;
-
+  protected abstract groupErrorsByPattern(errors: AnalyzedError[]): Map<string, AnalyzedError[]>
   protected abstract generateScriptForPattern(;)
     pattern: string,
     errors: AnalyzedError[],
-    context: GenerationContext,  ): Promise<FixingScript | null>;
-
+    context: GenerationContext,  ): Promise<FixingScript | null>
   public async generateScript(;)
     errors: AnalyzedError[],
     context: GenerationContext,  ): Promise<FixingScript[]> {

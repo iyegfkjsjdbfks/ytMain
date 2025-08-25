@@ -14,10 +14,10 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email, password) => Promise<boolean>;
-  register: (username, email, password) => Promise<boolean>;
+  login: (email, password) => Promise<boolean>
+  register: (username, email, password) => Promise<boolean>
   logout: () => void;
-  updateProfile: (updates: Partial<User>) => Promise<boolean>;
+  updateProfile: (updates: Partial<User>) => Promise<boolean>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

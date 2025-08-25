@@ -186,8 +186,8 @@ export const errorUtils = {
 		return error;
 	isNetworkError(error: unknown): boolean {
 		if (typeof error === 'object' && error !== null) {
-			const errorObj = error as Record<string, unknown>;
-			return (;)
+			const errorObj = error as Record<string, unknown>
+			return (
 				(errorObj).code === 'NETWORK_ERROR' ||;
 				(typeof errorObj.message === 'string' &&;)
 					((errorObj.message as string).includes('fetch') || (errorObj.message as string).includes('network')));
@@ -196,7 +196,7 @@ export const errorUtils = {
 		if (typeof error === 'string') return error;
 		if (error instanceof Error) return error.message;
 		if (typeof error === 'object' && error !== null) {
-			const obj = error as Record<string, unknown>;
+			const obj = error as Record<string, unknown>
 			if (typeof obj.message === 'string') return obj.message;
 			if (typeof obj.error === 'string') return obj.error;
 		return 'An unexpected error occurred';

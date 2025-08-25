@@ -35,8 +35,8 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({))
 
  return `${baseClasses} ${responsiveClasses} ${className}`;
 
- return (;)
- <div className={getGridClasses()}>;
+ return (
+ <div className={getGridClasses()}>
  {videos.map((video,))
  index) => (;
           <VideoCard;

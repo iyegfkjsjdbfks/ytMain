@@ -28,8 +28,7 @@ export interface SubscriptionData {}
  views: number;
  uploadedAt: string;,
  duration: string;
- }>;
-
+ }>
 export interface SubscriptionsPageProps {}
  className?: string;
 
@@ -43,7 +42,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  const [selectedSubscriptions, setSelectedSubscriptions] = useState < Set < string>>(new Set());
  const [showUnsubscribeModal, setShowUnsubscribeModal] = useState < string | null>(null);
 
- useEffect(() => {})
+ useEffect(() => {}) => {
  // Simulate fetching subscriptions from an API or local storage;
  const storedSubscriptions = (localStorage).getItem('youtubeCloneSubscriptions_v1');
  if (storedSubscriptions) {}
@@ -223,7 +222,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  setShowUnsubscribeModal(null);
 
  const toggleBulkSelection = (channelId: any) => {, }
- setSelectedSubscriptions((prev) => {})
+ setSelectedSubscriptions((prev) => {}) => {
  const newSet = new Set(prev);
  if (newSet.has(channelId)) {}
  newSet.delete(channelId);
@@ -232,7 +231,7 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
  return newSet;
 
  const handleBulkAction = (action: 'unsubscribe' | 'toggle_notifications') => {, }
- selectedSubscriptions.forEach((channelId) => {})
+ selectedSubscriptions.forEach((channelId) => {}) => {
  if (action === 'unsubscribe') {}
  handleUnsubscribe(channelId);
  } else if (action === 'toggle_notifications') {}
@@ -242,89 +241,88 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 
  const filteredAndSortedSubscriptions = filterSubscriptions();
 
- return (;)
- <div className={`min - h - screen bg - gray - 50 dark:bg - gray - 900 ${className}`}>;
- <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8 py - 8">;
- <h1 className={"tex}t - 3xl font - bold text - gray - 900 dark:text - white mb - 6">Subscriptions</h1>;
-
+ return (
+ <div className={`min - h - screen bg - gray - 50 dark:bg - gray - 900 ${className}`}>
+ <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8 py - 8">
+ <h1 className={"tex}t - 3xl font - bold text - gray - 900 dark:text - white mb - 6">Subscriptions</h1>
  {/* Controls: Search, Sort, Filter, View Mode */}
- <div className={"b}g - white dark:bg - gray - 800 rounded - lg shadow - sm p - 4 mb - 6">;
- <div className={"fle}x flex - col md:flex - row md:items - center md:justify - between gap - 4">;
+ <div className={"b}g - white dark:bg - gray - 800 rounded - lg shadow - sm p - 4 mb - 6">
+ <div className={"fle}x flex - col md:flex - row md:items - center md:justify - between gap - 4">
  {/* Search Bar */}
- <div className={"relativ}e flex - grow">;
- <input;>;
+ <div className={"relativ}e flex - grow">
+ <input;>
 // FIXED:  type="text"
 // FIXED:  placeholder="Search subscriptions..."
 // FIXED:  value={searchQuery} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setSearchQuery(e.target.value), }
 // FIXED:  className="w - full pl - 10 pr - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - full bg - gray - 100 dark:bg - gray - 700 text - gray - 900 dark:text - white focus:outline - none focus:ring - 2 focus:ring - blue - 500" />
- <MagnifyingGlassIcon className={"absolut}e left - 3 top - 1/2 transform -translate - y - 1 / 2 w - 5 h - 5 text - gray - 400" />;
+ <MagnifyingGlassIcon className={"absolut}e left - 3 top - 1/2 transform -translate - y - 1 / 2 w - 5 h - 5 text - gray - 400" />
 // FIXED:  </div>
 
  {/* Sort By */}
- <select;>;
+ <select;>
 // FIXED:  value={sortBy} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setSortBy(e.target.value), }
 // FIXED:  className={"p}x - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - full bg - gray - 100 dark:bg - gray - 700 text - gray - 900 dark:text - white focus:outline - none focus:ring - 2 focus:ring - blue - 500"
  >
- <option value="alphabetical">Sort by: A - Z</option>;
- <option value="recent">Sort by: Recently Subscribed</option>;
- <option value="most_videos">Sort by: Most Videos</option>;
- <option value="subscribers">Sort by: Subscribers</option>;
+ <option value="alphabetical">Sort by: A - Z</option>
+ <option value="recent">Sort by: Recently Subscribed</option>
+ <option value="most_videos">Sort by: Most Videos</option>
+ <option value="subscribers">Sort by: Subscribers</option>
 // FIXED:  </select>
 
  {/* Filter By */}
- <select;>;
+ <select;>
 // FIXED:  value={filterBy} />
 // FIXED:  onChange={(e: React.ChangeEvent) => setFilterBy(e.target.value), }
 // FIXED:  className={"p}x - 4 py - 2 border border - gray - 300 dark:border - gray - 600 rounded - full bg - gray - 100 dark:bg - gray - 700 text - gray - 900 dark:text - white focus:outline - none focus:ring - 2 focus:ring - blue - 500"
  >
- <option value="all">Filter: All</option>;
- <option value="notifications_on">Filter: Notifications On</option>;
- <option value="notifications_off">Filter: Notifications Off</option>;
- <option value="live">Filter: Live Now</option>;
- <option value="recent_uploads">Filter: Recent Uploads</option>;
+ <option value="all">Filter: All</option>
+ <option value="notifications_on">Filter: Notifications On</option>
+ <option value="notifications_off">Filter: Notifications Off</option>
+ <option value="live">Filter: Live Now</option>
+ <option value="recent_uploads">Filter: Recent Uploads</option>
 // FIXED:  </select>
 
  {/* View Mode Toggle */}
- <div className={"fle}x bg - gray - 100 dark:bg - gray - 700 rounded - full p - 1">;
- <button />;
+ <div className={"fle}x bg - gray - 100 dark:bg - gray - 700 rounded - full p - 1">
+ <button />
 // FIXED:  onClick={() => setViewMode('grid': React.MouseEvent), }
 // FIXED:  className={`p - 2 rounded - full ${viewMode === 'grid' ? 'bg - white dark : bg - gray - 600 shadow text - blue - 600' : 'text - gray - 500 dark:text - gray - 400 hover:text - blue - 600'}`, }
  title="Grid View";
  >
- <Squares2X2Icon className="w - 5 h - 5" />;
+ <Squares2X2Icon className="w - 5 h - 5" />
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => setViewMode('list': React.MouseEvent), }
 // FIXED:  className={`p - 2 rounded - full ${viewMode === 'list' ? 'bg - white dark : bg - gray - 600 shadow text - blue - 600' : 'text - gray - 500 dark:text - gray - 400 hover:text - blue - 600'}`, }
  title="List View";
  >
- <ListBulletIcon className="w - 5 h - 5" />;
+ <ListBulletIcon className="w - 5 h - 5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Bulk Actions */}
- <div className={"m}t - 4 flex items - center gap - 4">;
- <button />;
+ <div className={"m}t - 4 flex items - center gap - 4">
+ <button />
 // FIXED:  onClick={() => setBulkActionMode(!bulkActionMode: React.MouseEvent), }
 // FIXED:  className={"p}x - 4 py - 2 text - sm font - medium text - blue - 600 dark:text - blue - 400 hover:underline"
  >
  {bulkActionMode ? 'Exit Bulk Mode' : 'Select Multiple', }
 // FIXED:  </button>
- {bulkActionMode && selectedSubscriptions.size > 0 && (})
- <><< /> /><< /> /><< /> />;
- <span className={"tex}t - gray - 700 dark:text - gray - 300 text - sm">;
+ {bulkActionMode && selectedSubscriptions.size > 0 && (}) => {
+ <><< /> /><< /> /><< /> />
+ <span className={"tex}t - gray - 700 dark:text - gray - 300 text - sm">
  {selectedSubscriptions.size} selected;
 // FIXED:  </span>
- <button />;
+ <button />
 // FIXED:  onClick={() => handleBulkAction('toggle_notifications': React.MouseEvent), }
 // FIXED:  className={"p}x - 4 py - 2 text - sm font - medium text - blue - 600 dark:text - blue - 400 hover:underline"
  >
  Toggle Notifications;
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => handleBulkAction('unsubscribe': React.MouseEvent), }
 // FIXED:  className={"p}x - 4 py - 2 text - sm font - medium text - red - 600 dark:text - red - 400 hover:underline"
  >
@@ -335,147 +333,147 @@ const SubscriptionsPage: React.FC < SubscriptionsPageProps> = ({ className = '' 
 // FIXED:  </div>
 
  {/* Subscription List / Grid */}
- {filteredAndSortedSubscriptions.length === 0 ? (})
- <div className={"tex}t - center py - 12 bg - white dark:bg - gray - 800 rounded - lg shadow - sm">;
- <p className={"tex}t - gray - 600 dark:text - gray - 400 text - lg">;
+ {filteredAndSortedSubscriptions.length === 0 ? (}) => {
+ <div className={"tex}t - center py - 12 bg - white dark:bg - gray - 800 rounded - lg shadow - sm">
+ <p className={"tex}t - gray - 600 dark:text - gray - 400 text - lg">
  No subscriptions found matching your criteria.;
 // FIXED:  </p>
- <p className={"tex}t - gray - 500 dark:text - gray - 400 mt - 2">;
+ <p className={"tex}t - gray - 500 dark:text - gray - 400 mt - 2">
  Try adjusting your search, sort, or filter options.;
 // FIXED:  </p>
 // FIXED:  </div>
  ) : viewMode === 'grid' ? (;
- <div className={"gri}d grid - cols - 1 sm:grid - cols - 2 lg:grid - cols - 3 xl:grid - cols - 4 gap - 6">;
+ <div className={"gri}d grid - cols - 1 sm:grid - cols - 2 lg:grid - cols - 3 xl:grid - cols - 4 gap - 6">
  {filteredAndSortedSubscriptions.map((sub) => (}))
- <div key={sub.id} className={"b}g - white dark:bg - gray - 800 rounded - lg shadow - sm overflow - hidden border border - gray - 200 dark:border - gray - 700">;
- {bulkActionMode && (})
- <div className={"absolut}e top - 2 left - 2 z - 10">;
- <input;>;
+ <div key={sub.id} className={"b}g - white dark:bg - gray - 800 rounded - lg shadow - sm overflow - hidden border border - gray - 200 dark:border - gray - 700">
+ {bulkActionMode && (}) => {
+ <div className={"absolut}e top - 2 left - 2 z - 10">
+ <input;>
 // FIXED:  type="checkbox"
 // FIXED:  checked={selectedSubscriptions.has(sub.channelId)} />
 // FIXED:  onChange={() => toggleBulkSelection(sub.channelId: React.ChangeEvent), }
 // FIXED:  className={"for}m - checkbox h - 5 w - 5 text - blue - 600 rounded focus:ring - blue - 500" />
 // FIXED:  </div>
- <div className={"relativ}e h - 32 bg - gray - 200 dark:bg - gray - 700 flex items - center justify - center">;
- <img;>;
+ <div className={"relativ}e h - 32 bg - gray - 200 dark:bg - gray - 700 flex items - center justify - center">
+ <img;>
 // FIXED:  src={sub.channelArt || `/api / placeholder / 480 / 180?text="${sub.channelName.split('" ')[0]}`, }
 // FIXED:  alt={`${sub.channelName} channel art`, }
 // FIXED:  className="w - full h - full object - cover" /> />
- <img;>;
+ <img;>
 // FIXED:  src={sub.channelAvatar, }
 // FIXED:  alt={`${sub.channelName} avatar`, }
 // FIXED:  className={"absolut}e -bottom - 8 left - 4 w - 16 h - 16 rounded - full border - 4 border - white dark:border - gray - 800 shadow - md" /> />
 // FIXED:  </div>
- <div className="p - 4 pt - 10">;
- <h3 className={"fon}t - semibold text - lg text - gray - 900 dark:text - white line - clamp - 1">;
+ <div className="p - 4 pt - 10">
+ <h3 className={"fon}t - semibold text - lg text - gray - 900 dark:text - white line - clamp - 1">
  {sub.channelName}
- {sub.channelVerified && (})
- <CheckIcon className="w - 4 h - 4 inline - block ml - 1 text - blue - 500" title="Verified Channel" />;
+ {sub.channelVerified && (}) => {
+ <CheckIcon className="w - 4 h - 4 inline - block ml - 1 text - blue - 500" title="Verified Channel" />
 // FIXED:  </h3>
- <p className={"tex}t - sm text - gray - 600 dark:text - gray - 400">;
+ <p className={"tex}t - sm text - gray - 600 dark:text - gray - 400">
  {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos;
 // FIXED:  </p>
- <p className={"tex}t - xs text - gray - 500 dark:text - gray - 400 mt - 1">;
+ <p className={"tex}t - xs text - gray - 500 dark:text - gray - 400 mt - 1">
  Subscribed {formatDistanceToNow(new Date(sub.subscribedAt), { addSuffix: true })}
 // FIXED:  </p>
- <p className={"tex}t - sm text - gray - 700 dark:text - gray - 300 mt - 2 line - clamp - 2">;
+ <p className={"tex}t - sm text - gray - 700 dark:text - gray - 300 mt - 2 line - clamp - 2">
  {sub.description}
 // FIXED:  </p>
- <div className={"fle}x items - center justify - between mt - 4">;
- <button />;
+ <div className={"fle}x items - center justify - between mt - 4">
+ <button />
 // FIXED:  onClick={() => toggleNotifications(sub.channelId: React.MouseEvent), }
 // FIXED:  className={`p - 2 rounded - full ${sub.notificationsEnabled ? 'bg - red - 100 text - red - 600' : 'bg - gray - 100 text - gray - 600 dark:bg - gray - 700 dark:text - gray - 300'} hover:bg - red - 200 dark:hover:bg - red - 900 / 20 transition - colors`, }
  title={sub.notificationsEnabled ? 'Notifications On' : 'Notifications Off', }
  >
- {sub.notificationsEnabled ? (})
- <BellSolidIcon className="w - 5 h - 5" />;
+ {sub.notificationsEnabled ? (}) => {
+ <BellSolidIcon className="w - 5 h - 5" />
  ) : (;
- <BellIcon className="w - 5 h - 5" />;
+ <BellIcon className="w - 5 h - 5" />
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => setShowUnsubscribeModal(sub.channelId: React.MouseEvent), }
 // FIXED:  className={"fle}x items - center space - x - 1 px - 3 py - 1 text - sm font - medium text - red - 600 dark:text - red - 400 border border - red - 600 dark:border - red - 400 rounded - full hover:bg - red - 50 dark:hover:bg - red - 900 / 20 transition - colors"
  >
- <UserMinusIcon className="w - 4 h - 4" />;
- <span > Unsubscribe</span>;
+ <UserMinusIcon className="w - 4 h - 4" />
+ <span > Unsubscribe</span>
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
  ) : (;
- <div className={"spac}e - y - 4">;
+ <div className={"spac}e - y - 4">
  {filteredAndSortedSubscriptions.map((sub) => (}))
- <div key={sub.id} className={"b}g - white dark:bg - gray - 800 rounded - lg shadow - sm overflow - hidden border border - gray - 200 dark:border - gray - 700 flex items - center p - 4">;
- {bulkActionMode && (})
- <div className={"fle}x - shrink - 0 mr - 4">;
- <input;>;
+ <div key={sub.id} className={"b}g - white dark:bg - gray - 800 rounded - lg shadow - sm overflow - hidden border border - gray - 200 dark:border - gray - 700 flex items - center p - 4">
+ {bulkActionMode && (}) => {
+ <div className={"fle}x - shrink - 0 mr - 4">
+ <input;>
 // FIXED:  type="checkbox"
 // FIXED:  checked={selectedSubscriptions.has(sub.channelId)} />
 // FIXED:  onChange={() => toggleBulkSelection(sub.channelId: React.ChangeEvent), }
 // FIXED:  className={"for}m - checkbox h - 5 w - 5 text - blue - 600 rounded focus:ring - blue - 500" />
 // FIXED:  </div>
- <img;>;
+ <img;>
 // FIXED:  src={sub.channelAvatar, }
 // FIXED:  alt={`${sub.channelName} avatar`, }
 // FIXED:  className="w - 20 h - 20 rounded - full object - cover flex - shrink - 0 mr - 4" /> />
- <div className={"fle}x - grow">;
- <h3 className={"fon}t - semibold text - lg text - gray - 900 dark:text - white line - clamp - 1">;
+ <div className={"fle}x - grow">
+ <h3 className={"fon}t - semibold text - lg text - gray - 900 dark:text - white line - clamp - 1">
  {sub.channelName}
- {sub.channelVerified && (})
- <CheckIcon className="w - 4 h - 4 inline - block ml - 1 text - blue - 500" title="Verified Channel" />;
+ {sub.channelVerified && (}) => {
+ <CheckIcon className="w - 4 h - 4 inline - block ml - 1 text - blue - 500" title="Verified Channel" />
 // FIXED:  </h3>
- <p className={"tex}t - sm text - gray - 600 dark:text - gray - 400">;
+ <p className={"tex}t - sm text - gray - 600 dark:text - gray - 400">
  {sub.subscriberCount.toLocaleString()} subscribers • {sub.videoCount} videos;
 // FIXED:  </p>
- <p className={"tex}t - xs text - gray - 500 dark:text - gray - 400 mt - 1">;
+ <p className={"tex}t - xs text - gray - 500 dark:text - gray - 400 mt - 1">
  Subscribed {formatDistanceToNow(new Date(sub.subscribedAt), { addSuffix: true })}
 // FIXED:  </p>
- <p className={"tex}t - sm text - gray - 700 dark:text - gray - 300 mt - 2 line - clamp - 2">;
+ <p className={"tex}t - sm text - gray - 700 dark:text - gray - 300 mt - 2 line - clamp - 2">
  {sub.description}
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"fle}x flex - col items - end space - y - 2 ml - 4 flex - shrink - 0">;
- <button />;
+ <div className={"fle}x flex - col items - end space - y - 2 ml - 4 flex - shrink - 0">
+ <button />
 // FIXED:  onClick={() => toggleNotifications(sub.channelId: React.MouseEvent), }
 // FIXED:  className={`p - 2 rounded - full ${sub.notificationsEnabled ? 'bg - red - 100 text - red - 600' : 'bg - gray - 100 text - gray - 600 dark:bg - gray - 700 dark:text - gray - 300'} hover:bg - red - 200 dark:hover:bg - red - 900 / 20 transition - colors`, }
  title={sub.notificationsEnabled ? 'Notifications On' : 'Notifications Off', }
  >
- {sub.notificationsEnabled ? (})
- <BellSolidIcon className="w - 5 h - 5" />;
+ {sub.notificationsEnabled ? (}) => {
+ <BellSolidIcon className="w - 5 h - 5" />
  ) : (;
- <BellIcon className="w - 5 h - 5" />;
+ <BellIcon className="w - 5 h - 5" />
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => setShowUnsubscribeModal(sub.channelId: React.MouseEvent), }
 // FIXED:  className={"fle}x items - center space - x - 1 px - 3 py - 1 text - sm font - medium text - red - 600 dark:text - red - 400 border border - red - 600 dark:border - red - 400 rounded - full hover:bg - red - 50 dark:hover:bg - red - 900 / 20 transition - colors"
  >
- <UserMinusIcon className="w - 4 h - 4" />;
- <span > Unsubscribe</span>;
+ <UserMinusIcon className="w - 4 h - 4" />
+ <span > Unsubscribe</span>
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Unsubscribe Confirmation Modal */}
- {showUnsubscribeModal && (})
- <div className={"fixe}d inset - 0 bg - black bg - opacity - 50 flex items - center justify - center z - 50">;
- <div className={"b}g - white dark:bg - gray - 800 rounded - lg p - 6 shadow - xl max - w - sm w - full text - center">;
- <h3 className={"tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4">Unsubscribe?</h3>;
- <p className={"tex}t - gray - 600 dark:text - gray - 400 mb - 6">;
+ {showUnsubscribeModal && (}) => {
+ <div className={"fixe}d inset - 0 bg - black bg - opacity - 50 flex items - center justify - center z - 50">
+ <div className={"b}g - white dark:bg - gray - 800 rounded - lg p - 6 shadow - xl max - w - sm w - full text - center">
+ <h3 className={"tex}t - lg font - semibold text - gray - 900 dark:text - white mb - 4">Unsubscribe?</h3>
+ <p className={"tex}t - gray - 600 dark:text - gray - 400 mb - 6">
  Are you sure you want to unsubscribe from {' '}
- <span className={"fon}t - medium text - gray - 900 dark:text - white">;
+ <span className={"fon}t - medium text - gray - 900 dark:text - white">
  {subscriptions.find(sub => sub.channelId === showUnsubscribeModal)?.channelName}
 // FIXED:  </span>
 // FIXED:  </p>
- <div className={"fle}x justify - center space - x - 4">;
- <button />;
+ <div className={"fle}x justify - center space - x - 4">
+ <button />
 // FIXED:  onClick={() => setShowUnsubscribeModal(null: React.MouseEvent), }
 // FIXED:  className={"p}x - 4 py - 2 text - gray - 600 dark:text - gray - 400 hover:text - gray - 900 dark:hover:text - white rounded - lg"
  >
  Cancel;
 // FIXED:  </button>
- <button />;
+ <button />
 // FIXED:  onClick={() => handleUnsubscribe(showUnsubscribeModal: React.MouseEvent), }
 // FIXED:  className={"p}x - 4 py - 2 bg - red - 600 hover:bg - red - 700 text - white rounded - lg"
  >

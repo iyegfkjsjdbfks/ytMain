@@ -19,7 +19,7 @@ export interface SystemEvent {
 
 export interface SystemHealth {
   overall: 'healthy' | 'degraded' | 'critical';
-  systems: Record<string, 'healthy' | 'degraded' | 'critical'>;
+  systems: Record<string, 'healthy' | 'degraded' | 'critical'>
   lastCheck: number;
 
 export interface SystemMetrics {
@@ -44,8 +44,7 @@ class SystemIntegrationHub {
     quality: { score: 100 },
     features: { totalFlags: 0 , }
   private config: IntegrationConfig = { healthCheckInterval: 60000, eventRetentionDays: 30 };
-  private intervalId?: ReturnType<typeof setInterval>;
-
+  private intervalId?: ReturnType<typeof setInterval>
   async initialize(): Promise<void> {
     if (this.intervalId) return;
     this.intervalId = setInterval(() => this.performHealthCheck(), this.config.healthCheckInterval);

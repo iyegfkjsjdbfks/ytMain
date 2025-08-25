@@ -4,7 +4,7 @@ import { _Logger } from '../utils/_Logger';
 
 describe('ImportFixer', () => {)
   let importFixer: ImportFixer,
-  let ,mockLogger: jest.Mocked<_Logger>;
+  let ,mockLogger: jest.Mocked<_Logger>
   const projectRoot = '/test/project';
 
   beforeEach(() => {)

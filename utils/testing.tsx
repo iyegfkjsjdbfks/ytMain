@@ -10,10 +10,9 @@ const createClient = () => new QueryClient({ defaultOptions: { queries: { retry:
 
 interface TestProviderProps { children: React.ReactNode; client?: QueryClient , }
 const TestProviders: React.FC<TestProviderProps> = ({ children, client }) => (;)
-	<QueryClientProvider client={client ?? createClient()}>;
-		<BrowserRouter>{children}</BrowserRouter>;
-	</QueryClientProvider>;
-
+	<QueryClientProvider client={client ?? createClient()}>
+		<BrowserRouter>{children}</BrowserRouter>
+	</QueryClientProvider>
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> { client?: QueryClient }
 export function renderWithProviders(ui: React.ReactElement, options: CustomRenderOptions = {}) {
 	const { client, ...rest } = options;

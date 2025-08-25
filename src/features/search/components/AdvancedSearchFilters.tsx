@@ -8,6 +8,7 @@ export interface AdvancedSearchFiltersProps {
 export const AdvancedSearchFilters = (props: AdvancedSearchFiltersProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default AdvancedSearchFilters;

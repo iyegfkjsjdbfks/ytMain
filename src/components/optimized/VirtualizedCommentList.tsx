@@ -9,6 +9,7 @@ export interface VirtualizedCommentListProps {
 export const VirtualizedCommentList = (props: VirtualizedCommentListProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default VirtualizedCommentList;

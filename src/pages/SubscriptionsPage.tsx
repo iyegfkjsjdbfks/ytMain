@@ -110,194 +110,185 @@ const SubscriptionsPage: React.FC = () => {
   const error = videosError || channelsError;
 
   if (loading) {
-    return (;)
-      <div />className="flex justify-center items-center min-h-96"></div />;
-        <LoadingSpinner />size="lg" / />;
-      </div>;
-
-
+    return (
+      <div />className="flex justify-center items-center min-h-96"></div />
+        <LoadingSpinner />size="lg" / />
+      </div>
   if (error) {
-    return (;)
-      <div />className="text-center py-12"></div />;
-        <SubscriptionsIcon />className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" / />;
-        <h2 />className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2"></h2 />;
-          Something went wrong, </h2>;
-        <p />className="text-neutral-600 dark:text-neutral-400">{error}</p />;
-      </div>;
-
-  return (;)
-    <div />className="max-w-7xl mx-auto px-4 py-6"></div />;
+    return (
+      <div />className="text-center py-12"></div />
+        <SubscriptionsIcon />className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" / />
+        <h2 />className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2"></h2 />
+          Something went wrong, </h2>
+        <p />className="text-neutral-600 dark:text-neutral-400">{error}</p />
+      </div>
+  return (
+    <div />className="max-w-7xl mx-auto px-4 py-6"></div />
       {/* Header */}
-      <div />className="flex items-center justify-between mb-6"></div />;
-        <div />className="flex items-center space-x-3"></div />;
-          <SubscriptionsIcon />className="w-8 h-8 text-red-600 dark:text-red-500" / />;
-          <h1 />className="text-2xl font-bold text-neutral-900 dark:text-neutral-100"></h1 />;
+      <div />className="flex items-center justify-between mb-6"></div />
+        <div />className="flex items-center space-x-3"></div />
+          <SubscriptionsIcon />className="w-8 h-8 text-red-600 dark:text-red-500" / />
+          <h1 />className="text-2xl font-bold text-neutral-900 dark:text-neutral-100"></h1 />
             Subscriptions;
-          </h1>;
-        </div>;
-
-        <div />className="flex items-center space-x-2"></div />;
-          <Button />; />;
+          </h1>
+        </div>
+        <div />className="flex items-center space-x-2"></div />
+          <Button />; />
             variant={showChannels ? 'primary' : 'secondary', }
             size="sm";
             onClick={() => setShowChannels(!showChannels)}
-            className="flex items-center space-x-2";
+            className="flex items-center space-x-2"
           ">";
-            <UserGroupIcon />className="w-4 h-4" / />;
-            <spa />n />Manage</span />;
-          </Button></div>;
-
-          <div />className="flex items-center border border-neutral-200 dark:border-neutral-700 rounded-lg"></div />;
-            <Button />; />;
+            <UserGroupIcon />className="w-4 h-4" / />
+            <spa />n />Manage</span />
+          </Button></div>
+          <div />className="flex items-center border border-neutral-200 dark:border-neutral-700 rounded-lg"></div />
+            <Button />; />
               variant={viewType === 'grid' ? 'primary' : 'ghost', }
               size="sm";
               onClick={() => setViewType('grid')}
-              className="rounded-r-none border-r border-neutral-200 dark:border-neutral-700";
+              className="rounded-r-none border-r border-neutral-200 dark:border-neutral-700"
             ">";
-              <ViewColumnsIcon />className="w-4 h-4" / />;
-            </Button></div>;
-            <Button />; />;
+              <ViewColumnsIcon />className="w-4 h-4" / />
+            </Button></div>
+            <Button />; />
               variant={viewType === 'list' ? 'primary' : 'ghost', }
               size="sm";
               onClick={() => setViewType('list')}
-              className="rounded-l-none";
+              className="rounded-l-none"
             ">";
-              <Bars3Icon />className="w-4 h-4" / />;
-            </Button></div>;
-          </div>;
-        </div>;
-      </div>;
-
+              <Bars3Icon />className="w-4 h-4" / />
+            </Button></div>
+          </div>
+        </div>
+      </div>
       {/* Subscription Statistics */}
-      <SubscriptionStats>;>;
+      <SubscriptionStats>;>
         totalChannels={subscriptionStats.totalChannels}
         notificationsEnabled={subscriptionStats,.notificationsEnabled}
         totalVideos={subscriptionStats,.totalVideos}
         newVideosToday={subscriptionStats,.newVideosToday}
-        className="mb-6"; />
+        className="mb-6" />
 
       {/* Subscribed Channels Management */};
 {showChannels && ()
-        <div />className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700"></div />;
-          <div />className="flex items-center justify-between mb-4"></div />;
-            <h2 />className="text-lg font-semibold text-neutral-900 dark:text-neutral-100"></h2 />;
+        <div />className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700"></div />
+          <div />className="flex items-center justify-between mb-4"></div />
+            <h2 />className="text-lg font-semibold text-neutral-900 dark:text-neutral-100"></h2 />
               Subscribed Channels ({subscribedChannels,.length,}: Record<string>, unknown>);
-            </h2>;
-          </div>;
-
+            </h2>
+          </div>
           {subscribedChannels,.length === 0 ? ()
-            <div />className="text-center py-8"></div />;
-              <UserGroupIcon />className="w-12 h-12 text-neutral-400 dark:text-neutral-600 mx-auto mb-3" / />;
-              <p />className="text-neutral-600 dark:text-neutral-400"></p />;
+            <div />className="text-center py-8"></div />
+              <UserGroupIcon />className="w-12 h-12 text-neutral-400 dark:text-neutral-600 mx-auto mb-3" / />
+              <p />className="text-neutral-600 dark:text-neutral-400"></p />
                 You haven't subscribed to any channels yet.;
-              </p>;
-              <Link />;></Link />;
+              </p>
+              <Link />;></Link />
                 to="/trending";
-                ,className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium mt-2 inline-block";
+                ,className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium mt-2 inline-block"
               ,">";
                 :Discover ,channels, t,o, subscri,b,,e, to;
-              </Link,></div>;
-            </div>;
-          ) : (, <div />className = "grid grid-cols-1 sm: grid-cols-2 md: grid-cols-3 lg: grid-cols-4 gap-4"></div />;
+              </Link,></div>
+            </div>
+          ) : (, <div />className = "grid grid-cols-1 sm: grid-cols-2 md: grid-cols-3 lg: grid-cols-4 gap-4"></div />
               {subscribedChannels.map((channel: unknown) => ())
           <di>v;
           key={channel.id}
-                  className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700";
+                  className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
                 ">";
-                  <Link />to={`/channel/${encodeURIComponent(channel.name)}`}></Link />;
-                    <img />; / />;
+                  <Link />to={`/channel/${encodeURIComponent(channel.name)}`}></Link />
+                    <img />; / />
                       src={channel.avatar}
                       alt={channel.name}
-                      className="w-12 h-12 rounded-full object-cover";
+                      className="w-12 h-12 rounded-full object-cover"
                     /">"
-                  </Link>;
-                  <div />className="flex-1 min-w-0"></div />;
-                    <Link />;></Link />;
+                  </Link>
+                  <div />className="flex-1 min-w-0"></div />
+                    <Link />;></Link />
                       to={`/channel/${encodeURIComponent(channel.name)}`}
-                      className="font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-400 truncate block";
+                      className="font-medium text-neutral-900 dark:text-neutral-100 hover:text-red-600 dark:hover:text-red-400 truncate block"
                     ">";
                       {channel.name}
-                    </Link></div>;
-                    <p />className="text-sm text-neutral-600 dark:text-neutral-400"></p />;
+                    </Link></div>
+                    <p />className="text-sm text-neutral-600 dark:text-neutral-400"></p />
                       ,{channe,l.subscribers,} subscribers;
-                    </p>;
-                  </div>;
-                  <div />className="flex items-center space-x-1"></div />;
-                    <butto />n />;
+                    </p>
+                  </div>
+                  <div />className="flex items-center space-x-1"></div />
+                    <butto />n />
                       onClick={() => toggleNotifications(channel.id)}
                       className={`p-2 rounded-full transition-colors ${
                         channel.notificationsEnabled}
                           ? 'bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-800 hover:bg-neutral-700 dark:hover:bg-neutral-300';
-                          : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-600';
+                          : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                       {"{"}""`{"{"}""
                       title={channel.notificationsEnabled ? 'Notifications on' : 'Notifications off', }
                     ">";
                       {channel.notificationsEnabled ? ()
-                        <BellSolidIcon />className="w-4 h-4" / />;
+                        <BellSolidIcon />className="w-4 h-4" / />
                       ) : (;
-                        <BellIcon />className="w-4 h-4" / />;
-                    </button></div>;
-                    <Button />; />;
+                        <BellIcon />className="w-4 h-4" / />
+                    </button></div>
+                    <Button />; />
                       variant="ghost";
                       size="sm";
                       onClick={() => unsubscribe(channel.id)} />
                       Unsubscribe;
-                    </Button>;
-                  </div>;
-                </div>;
-  <di />v /></div /></div />;
-  <di />v /></div /></div />;
+                    </Button>
+                  </div>
+                </div>
+  <di />v /></div /></div />
+  <di />v /></div /></div />
 {/* Video Feed */}
-      <div />className = "mb-6"></div />;
-        <Tabs />value = {activeTab} onValueChange = {(value) = > setActiveTab(value as TabType)} />;
-          <div />className="flex items-center justify-between mb-4"></div />;
-            <TabsList />className="flex-1" />;
-              <TabsTrigger />value="all">All</TabsTrigger />;
-              <TabsTrigger />value="today">Today</TabsTrigger />;
-              <TabsTrigger />value="week">This week</TabsTrigger />;
-              <TabsTrigger />value="unwatched">Unwatched</TabsTrigger />;
-              <TabsTrigger />value="live">Live</TabsTrigger />;
-              <TabsTrigger />value="posts">Posts</TabsTrigger />;
-            </TabsList>;
-
-            <div />className="flex items-center space-x-2 ml-4"></div />;
-              <AdjustmentsHorizontalIcon />className="w-4 h-4 text-neutral-600 dark:text-neutral-400" / />;
-              <select />; />;
+      <div />className = "mb-6"></div />
+        <Tabs />value = {activeTab} onValueChange = {(value) = > setActiveTab(value as TabType)} />
+          <div />className="flex items-center justify-between mb-4"></div />
+            <TabsList />className="flex-1" />
+              <TabsTrigger />value="all">All</TabsTrigger />
+              <TabsTrigger />value="today">Today</TabsTrigger />
+              <TabsTrigger />value="week">This week</TabsTrigger />
+              <TabsTrigger />value="unwatched">Unwatched</TabsTrigger />
+              <TabsTrigger />value="live">Live</TabsTrigger />
+              <TabsTrigger />value="posts">Posts</TabsTrigger />
+            </TabsList>
+            <div />className="flex items-center space-x-2 ml-4"></div />
+              <AdjustmentsHorizontalIcon />className="w-4 h-4 text-neutral-600 dark:text-neutral-400" / />
+              <select />; />
                 value={sortBy}
                 onChange={(e: any) => setSortBy(e.target.value as SortType), }
-                className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-2 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100";
+                className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-2 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
               ">";
-                <option />value="latest">Latest</option />;
-                <option />value="popular">Popular</option />;
-                <option />value="oldest">Oldest</option />;
-              </select></div>;
-            </div>;
-          </div>;
-
-          <TabsContent />value={activeTab} />;
+                <option />value="latest">Latest</option />
+                <option />value="popular">Popular</option />
+                <option />value="oldest">Oldest</option />
+              </select></div>
+            </div>
+          </div>
+          <TabsContent />value={activeTab} />
             {filteredVideos.length === 0 ? ()
-              <div />className="text-center py-12"></div />;
-                <SubscriptionsIcon />className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" / />;
-                <h2 />className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2"></h2 />;
+              <div />className="text-center py-12"></div />
+                <SubscriptionsIcon />className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" / />
+                <h2 />className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2"></h2 />
                   {activeTab === 'all'
                     ? 'No new videos from your subscriptions';
                     : `No ${activeTab} videos from your subscriptions`;
-                </h2>;
-                <p />className="text-neutral-600 dark:text-neutral-400 mb-4"></p />;
+                </h2>
+                <p />className="text-neutral-600 dark:text-neutral-400 mb-4"></p />
                   {subscribedChannels.length === 0}
                     ? 'Subscribe to channels to see their latest videos here.';
                     : 'Check back later for new content from your subscribed channels.';
                   {"}"
-                </p>;
+                </p>
                 {subscribedChannels.length === 0 && ()
-                  <Link />;></Link />;
+                  <Link />;></Link />
                     to="/trending";
-                    className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium";
+                    className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium"
                   ">";
-                    Discover channels, </Link></div>;
-              </div></TabsContent>;
+                    Discover channels, </Link></div>
+              </div></TabsContent>
             ) : (;
-              <div />className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}></div />;
+              <div />className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}></div />
                 {filteredVideos.map((video: any) => ())
           <SubscriptionVideoCard>, 
           key={`${activeTab}-${video.id}`}
@@ -306,10 +297,9 @@ const SubscriptionsPage: React.FC = () => {
                     showChannel;
                   /">"
                 )){"}";
-              </div>;
-  <di />v /></TabsContent /></div />;
-        </Tabs>;
-      </div>;
-    </div>;
-
+              </div>
+  <di />v /></TabsContent /></div />
+        </Tabs>
+      </div>
+    </div>
 export default SubscriptionsPage;

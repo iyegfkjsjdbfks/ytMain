@@ -23,6 +23,7 @@ export const formatDuration = (seconds: number): string => {
  const secs = Math.floor(seconds % 60);
 
  if (hours > 0) {
+}
  return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
  return `${minutes}:${secs.toString().padStart(2, '0')}`;
 
@@ -52,11 +53,10 @@ export const ComponentWrapper: React.FC<ComponentWrapperProps> = ({)
  fallback = null;
 }) => {
  try {
- return <div className={className}>{children}</div>;
+ return <div className={className}>{children}</div>
  } catch (error) {
  (console).error('Component error:', error);
- return <>{fallback}</>;
-
+ return <>{fallback}</>
 // Build truncate classes utility
 export const buildTruncateClasses = (;)
  lines: number = 1,

@@ -79,8 +79,7 @@ export interface UserContext {
  city?: string;
  deviceType?: string;
  browserType?: string;
- customAttributes?: Record < string, any>;
-
+ customAttributes?: Record < string, any>
 export interface FlagEvaluation {
  flagId: string;
  userId?: string;
@@ -285,8 +284,8 @@ return undefined;
  getEvaluationAnalytics(flagId?: string, hours = 24): {
  totalEvaluations: number;,
  uniqueUsers: number;
- variantDistribution: Record < string, number>;
- conversionRates: Record < string, number>;
+ variantDistribution: Record < string, number>
+ conversionRates: Record < string, number>
  performanceImpact: {,
  averageLoadTime: number;
  errorRate: number;

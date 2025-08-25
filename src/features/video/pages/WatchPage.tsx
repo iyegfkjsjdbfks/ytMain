@@ -8,6 +8,7 @@ export interface WatchPageProps {
 export const WatchPage = (props: WatchPageProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default WatchPage;

@@ -289,7 +289,7 @@ class TestRunner {
                         <div class="test-item test-${test.status}">
                             <strong>${test.status === 'passed' ? '✅' : test.status === 'failed' ? '❌' : '⏭️'}</strong>
                             ${test.name}
-                            ${test.errors && test.errors.length > 0 ? `<br><small style="color: #dc3545;">${test.errors[0]}</small>` : ''}
+                            ${test.errors && test.errors.length > 0 ? `<br><small style="color: #dc3545">${test.errors[0]}</small>` : ''}
                         </div>
                     `).join('')}
                 </div>

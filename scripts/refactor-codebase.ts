@@ -12,7 +12,7 @@ import path from 'path';
 interface RefactorTask {
   name: string;
   description: string;
-  execute: () => Promise<void>;
+  execute: () => Promise<void>
   priority: 'high' | 'medium' | 'low';
 }
 
@@ -137,6 +137,7 @@ export interface UnifiedVideoCardProps {
   onClick?: (video: Video) => void;
   className?: string;
 }
+}
 
 const variantStyles: Record<VideoCardVariant, string> = {
   default: 'flex flex-col space-y-3',
@@ -168,7 +169,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
   };
 
   const formattedDate = video.createdAt 
-    ? formatDistanceToNow(new Date(video.createdAt), { addSuffix: true })
+    ? formatDistanceToNow(new Date(video.createdAt), { addSuffix: true }) => {
     : '';
 
   return (
@@ -428,7 +429,7 @@ export interface PaginatedResponse<T> extends ApiResponse<T[]> {
 export interface AppError {
   code: string;
   message: string;
-  details?: Record<string, any>;
+  details?: Record<string, any>
   timestamp: string;
 }
 

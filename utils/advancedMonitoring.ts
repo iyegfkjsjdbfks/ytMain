@@ -9,9 +9,8 @@ import React from 'react';
 export interface MetricData {
  timestamp: number;,
  value: number;
- tags?: Record < string, string>;
- metadata?: Record < string, any>;
-
+ tags?: Record < string, string>
+ metadata?: Record < string, any>
 export interface AlertRule {
  id: string;,
  name: string;
@@ -23,11 +22,10 @@ export interface AlertRule {
 
 export interface AlertAction {
  type: "email" | 'webhook' | 'console' | 'storage';,
- _config: Record < string, any>;
-
+ _config: Record < string, any>
 export interface HealthCheck {
  name: string;,
- check: () => Promise<{ healthy: boolean; details?: any }>;
+ check: () => Promise<{ healthy: boolean; details?: any }>
  interval: number; // seconds,
  timeout: number; // seconds
  retries: number;
@@ -170,7 +168,7 @@ return metrics;
  */
  async runQualityGates(gateName?: string): Promise<{
  passed: boolean;,
- results: Array<{ gate: string; rule: string; passed: boolean; message: string; value?: number }>;
+ results: Array<{ gate: string; rule: string; passed: boolean; message: string; value?: number }>
  }> {
  const results: Array<{ gate: string; rule: string; passed: boolean; message: string; value?: number }> = [];
  let allPassed: boolean = true;
@@ -205,7 +203,7 @@ continue;
  */
  async getHealthStatus(): Promise<{
  healthy: boolean;,
- checks: Array<{ name: string; healthy: boolean; details?: string; error?: string }>;
+ checks: Array<{ name: string; healthy: boolean; details?: string; error?: string }>
  }> {
  const checks: Array<{ name: string; healthy: boolean; details?: string; error?: string }> = [];
  let overallHealthy: boolean = true;
@@ -236,7 +234,7 @@ continue;
  * Export monitoring data
  */
  exportData(): {
- metrics: Record < string, MetricData[]>;
+ metrics: Record < string, MetricData[]>
  alerts: AlertRule;,
  timestamp: number;
  } {
@@ -642,7 +640,7 @@ export class BundleAnalyzer {
  async analyze(): Promise<{
  totalSize: number;,
  gzippedSize: number;
- chunks: Array<{ name: string; size: number }>;
+ chunks: Array<{ name: string; size: number }>
  duplicates: string[];
  }> {
  // This would integrate with webpack - bundle - analyzer or similar

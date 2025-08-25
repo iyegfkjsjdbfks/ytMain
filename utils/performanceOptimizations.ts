@@ -14,7 +14,7 @@ export const withPerformanceOptimization = {
  /**
  * Shallow comparison memoization
  */,
- shallow: <P extends object>(Component: ComponentType < P>) =>;
+ shallow: <P extends object>(Component: ComponentType < P>) =>
  memo(Component(prevProps, nextProps) => {)
  const prevKeys = Object.keys(prevProps);
  const nextKeys = Object.keys(nextProps);
@@ -30,8 +30,8 @@ export const withPerformanceOptimization = {
  /**
  * Memoization that ignores specific props
  */,
- ignoring: <P extends object>(ignoredProps: Array<any> < keyof P>) =>;
- (Component: ComponentType < P>) =>;
+ ignoring: <P extends object>(ignoredProps: Array<any> < keyof P>) =>
+ (Component: ComponentType < P>) =>
  memo(Component(prevProps, nextProps) => {)
  const filteredPrev: object = { ...prevProps };
  const filteredNext: object = { ...nextProps };
@@ -45,7 +45,7 @@ export const withPerformanceOptimization = {
  /**
  * Memoization for components with array props
  */,
- arrayOptimized: <P extends object>(Component: ComponentType < P>) =>;
+ arrayOptimized: <P extends object>(Component: ComponentType < P>) =>
  memo(Component(prevProps, nextProps) => {)
  for (const key in prevProps) {
  const prevValue = prevProps.key;
@@ -70,7 +70,7 @@ export const lazyWithFallback = {
  * Create a lazy component
  */,
  create: <P extends object>(,)
- importFunc: () => Promise<{ default: ComponentType < P> }>;
+ importFunc: () => Promise<{ default: ComponentType < P> }>
  ) => {
  return lazy(importFunc);
 
@@ -81,13 +81,13 @@ export const hookOptimizations = {
  /**
  * Create stable object reference
  */,
- useStableObject: <T extends object>(obj: T): T =>;
+ useStableObject: <T extends object>(obj: T): T =>
  useMemo(() => obj, Object.values(obj)),
 
  /**
  * Create stable array reference
  */,
- useStableArray<any>: <T extends any[]>(arr: T): T =>;
+ useStableArray<any>: <T extends any[]>(arr: T): T =>
  useMemo(() => arr, arr),
 
  /**
@@ -182,7 +182,7 @@ export const bundleOptimizations = {
  * Dynamic import with error handling
  */,
  dynamicImport: async <T>(,)
- importFunc: () => Promise<any> < T>;
+ importFunc: () => Promise<any> < T>
  ): Promise<any> < T | null> => {
  try {
  return await importFunc();
@@ -197,7 +197,7 @@ export const bundleOptimizations = {
  module: T,
  keys: K[],
  ): Pick < T, K> => {
- const result = {} as Pick < T, K>;
+ const result = {} as Pick < T, K>
  keys.forEach((key: K) => {)
  result.key = module.key;
  return result;

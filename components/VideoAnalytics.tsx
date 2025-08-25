@@ -62,7 +62,7 @@ const VideoAnalytics: React.FC < VideoAnalyticsProps> = ({ videoId, className = 
  const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d');
  const [activeTab, setActiveTab] = useState<'overview' | 'audience' | 'revenue' | 'engagement'>('overview');
 
- useEffect(() => {})
+ useEffect(() => {}) => {
  loadAnalyticsData();
  }, [videoId, timeRange]);
 
@@ -171,118 +171,118 @@ return `${(num / 1000).toFixed(1)}K`;
  return `${minutes}:${secs.toString().padStart(2, '0')}`;
 
  const formatCurrency = (amount): (string) => {, }
- return new Intl.NumberFormat('en - US', {})
+ return new Intl.NumberFormat('en - US', {}) => {
  style: 'currency',
  currency: 'USD',
  minimumFractionDigits: 2 }).format(amount);
 
  if (isLoading) {}
- return (;)
- <div className={`p - 6 ${className}`}>;
- <div className={"animat}e - pulse space - y - 6">;
- <div className="h - 8 bg - neutral - 200 dark:bg - neutral - 700 rounded w - 1/3" />;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 4">;
+ return (
+ <div className={`p - 6 ${className}`}>
+ <div className={"animat}e - pulse space - y - 6">
+ <div className="h - 8 bg - neutral - 200 dark:bg - neutral - 700 rounded w - 1/3" />
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 4">
  {Array<any>.from({ length: 4 }).map((_, i) => ())
-          <div key={i} className="h - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded" />;
+          <div key={i} className="h - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded" />
 // FIXED:  </div>
- <div className="h - 64 bg - neutral - 200 dark:bg - neutral - 700 rounded" />;
+ <div className="h - 64 bg - neutral - 200 dark:bg - neutral - 700 rounded" />
 // FIXED:  </div>
 // FIXED:  </div>
 
  if (!analyticsData) {}
- return (;)
- <div className={`p - 6 text - center ${className}`}>;
- <p className={"tex}t - neutral - 500 dark:text - neutral - 400">No analytics data available</p>;
+ return (
+ <div className={`p - 6 text - center ${className}`}>
+ <p className={"tex}t - neutral - 500 dark:text - neutral - 400">No analytics data available</p>
 // FIXED:  </div>
 
  const renderOverviewTab = () => (;)
-          <div className={"spac}e - y - 6">;
+          <div className={"spac}e - y - 6">
  {/* Key Metrics */}
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 4">;
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Views</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 4">
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Views</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatNumber(analyticsData.views)}
 // FIXED:  </p>
 // FIXED:  </div>
- <EyeIcon className="w - 8 h - 8 text - blue - 500" />;
+ <EyeIcon className="w - 8 h - 8 text - blue - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Watch Time</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Watch Time</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatDuration(analyticsData.watchTime)}
 // FIXED:  </p>
 // FIXED:  </div>
- <ClockIcon className="w - 8 h - 8 text - green - 500" />;
+ <ClockIcon className="w - 8 h - 8 text - green - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Engagement</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Engagement</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {analyticsData.engagement.likeRate.toFixed(1)}%
 // FIXED:  </p>
 // FIXED:  </div>
- <HandThumbUpIcon className="w - 8 h - 8 text - red - 500" />;
+ <HandThumbUpIcon className="w - 8 h - 8 text - red - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">CTR</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">CTR</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {analyticsData.clickThroughRate.toFixed(1)}%
 // FIXED:  </p>
 // FIXED:  </div>
- <ChartBarSquareIcon className="w - 8 h - 8 text - purple - 500" />;
+ <ChartBarSquareIcon className="w - 8 h - 8 text - purple - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Retention Graph */}
- <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Audience Retention</h3>;
- <div className="h - 64 flex items - end space - x - 1">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Audience Retention</h3>
+ <div className="h - 64 flex items - end space - x - 1">
  {analyticsData.retention.map((value: string | number,}))
  index) => (;
-          <div;
+          <div
           key={index}
 // FIXED:  className={"b}g - blue - 500 rounded - t flex - 1 transition - all hover:bg - blue - 600"
 // FIXED:  style={{ height: `${(value / 100) * 100}%` , }
  title={`${(index * 5)}% - ${value.toFixed(1)}% retention`} />; />
 // FIXED:  </div>
- <div className={"fle}x justify - between text - sm text - neutral - 600 dark:text - neutral - 400 mt - 2">;
- <span > 0%</span>;
- <span > 25%</span>;
- <span > 50%</span>;
- <span > 75%</span>;
- <span > 100%</span>;
+ <div className={"fle}x justify - between text - sm text - neutral - 600 dark:text - neutral - 400 mt - 2">
+ <span > 0%</span>
+ <span > 25%</span>
+ <span > 50%</span>
+ <span > 75%</span>
+ <span > 100%</span>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Traffic Sources */}
- <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Traffic Sources</h3>;
- <div className={"spac}e - y - 3">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Traffic Sources</h3>
+ <div className={"spac}e - y - 3">
  {Object.entries(analyticsData.trafficSources).map(([source, percentage]) => (}))
- <div key={source} className={"fle}x items - center justify - between">;
- <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400 capitalize">{source}</span>;
- <div className={"fle}x items - center space - x - 2">;
- <div className="w - 32 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">;
- <div;>;
+ <div key={source} className={"fle}x items - center justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400 capitalize">{source}</span>
+ <div className={"fle}x items - center space - x - 2">
+ <div className="w - 32 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">
+ <div>
 // FIXED:  className={"b}g - blue - 500 h - 2 rounded - full"
 // FIXED:  style={{ width: `${percentage}%` } /> />
 // FIXED:  </div>
-<span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100 w - 12">;
+<span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100 w - 12">
  {percentage.toFixed(1)}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -292,22 +292,22 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
 
  const renderAudienceTab = () => (;)
-          <div className={"spac}e - y - 6">;
+          <div className={"spac}e - y - 6">
  {/* Demographics */}
- <div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">;
- <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Age Groups</h3>;
- <div className={"spac}e - y - 3">;
+ <div className={"gri}d grid - cols - 1 lg:grid - cols - 2 gap - 6">
+ <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Age Groups</h3>
+ <div className={"spac}e - y - 3">
  {Object.entries(analyticsData.demographics.ageGroups).map(([age, percentage]) => (}))
- <div key={age} className={"fle}x items - center justify - between">;
- <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">{age}</span>;
- <div className={"fle}x items - center space - x - 2">;
- <div className="w - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">;
- <div;>;
+ <div key={age} className={"fle}x items - center justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">{age}</span>
+ <div className={"fle}x items - center space - x - 2">
+ <div className="w - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">
+ <div>
 // FIXED:  className={"b}g - green - 500 h - 2 rounded - full"
 // FIXED:  style={{ width: `${percentage}%` } /> />
 // FIXED:  </div>
-<span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100 w - 10">;
+<span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100 w - 10">
  {percentage}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -315,19 +315,19 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Top Countries</h3>;
- <div className={"spac}e - y - 3">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Top Countries</h3>
+ <div className={"spac}e - y - 3">
  {Object.entries(analyticsData.demographics.countries).map(([country, percentage]) => (}))
- <div key={country} className={"fle}x items - center justify - between">;
- <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">{country}</span>;
- <div className={"fle}x items - center space - x - 2">;
- <div className="w - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">;
- <div;>;
+ <div key={country} className={"fle}x items - center justify - between">
+ <span className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">{country}</span>
+ <div className={"fle}x items - center space - x - 2">
+ <div className="w - 24 bg - neutral - 200 dark:bg - neutral - 700 rounded - full h - 2">
+ <div>
 // FIXED:  className={"b}g - purple - 500 h - 2 rounded - full"
 // FIXED:  style={{ width: `${percentage}%` } /> />
 // FIXED:  </div>
-<span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100 w - 10">;
+<span className={"tex}t - sm font - medium text - neutral - 900 dark:text - neutral - 100 w - 10">
  {percentage.toFixed(1)}%
 // FIXED:  </span>
 // FIXED:  </div>
@@ -337,34 +337,34 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
 
  {/* Devices */}
- <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Device Types</h3>;
- <div className={"gri}d grid - cols - 2 md:grid - cols - 4 gap - 4">;
- <div className={"tex}t - center">;
- <DevicePhoneMobileIcon className="w - 8 h - 8 mx - auto mb - 2 text - blue - 500" />;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Mobile</p>;
- <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 6 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <h3 className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100 mb - 4">Device Types</h3>
+ <div className={"gri}d grid - cols - 2 md:grid - cols - 4 gap - 4">
+ <div className={"tex}t - center">
+ <DevicePhoneMobileIcon className="w - 8 h - 8 mx - auto mb - 2 text - blue - 500" />
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Mobile</p>
+ <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">
  {analyticsData.devices.mobile.toFixed(1)}%
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"tex}t - center">;
- <ComputerDesktopIcon className="w - 8 h - 8 mx - auto mb - 2 text - green - 500" />;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Desktop</p>;
- <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"tex}t - center">
+ <ComputerDesktopIcon className="w - 8 h - 8 mx - auto mb - 2 text - green - 500" />
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Desktop</p>
+ <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">
  {analyticsData.devices.desktop.toFixed(1)}%
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"tex}t - center">;
- <GlobeAltIcon className="w - 8 h - 8 mx - auto mb - 2 text - orange - 500" />;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Tablet</p>;
- <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"tex}t - center">
+ <GlobeAltIcon className="w - 8 h - 8 mx - auto mb - 2 text - orange - 500" />
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Tablet</p>
+ <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">
  {analyticsData.devices.tablet.toFixed(1)}%
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"tex}t - center">;
- <TvIcon className="w - 8 h - 8 mx - auto mb - 2 text - red - 500" />;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">TV</p>;
- <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"tex}t - center">
+ <TvIcon className="w - 8 h - 8 mx - auto mb - 2 text - red - 500" />
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">TV</p>
+ <p className={"tex}t - lg font - semibold text - neutral - 900 dark:text - neutral - 100">
  {analyticsData.devices.tv.toFixed(1)}%
 // FIXED:  </p>
 // FIXED:  </div>
@@ -373,29 +373,29 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
 
  const renderRevenueTab = () => (;)
-          <div className={"spac}e - y - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 4">;
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Estimated Revenue</p>;
- <p className={"tex}t - 2xl font - bold text - green - 600">;
+          <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 4">
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Estimated Revenue</p>
+ <p className={"tex}t - 2xl font - bold text - green - 600">
  {formatCurrency(analyticsData.revenueData.estimatedRevenue)}
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">RPM</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">RPM</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatCurrency(analyticsData.revenueData.rpm)}
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">CPM</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">CPM</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatCurrency(analyticsData.revenueData.cpm)}
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Ad Views</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Ad Views</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatNumber(analyticsData.revenueData.adViews)}
 // FIXED:  </p>
 // FIXED:  </div>
@@ -403,76 +403,76 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
 
  const renderEngagementTab = () => (;)
-          <div className={"spac}e - y - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 4">;
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Likes</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+          <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 4">
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Likes</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatNumber(analyticsData.likes)}
 // FIXED:  </p>
- <p className={"tex}t - sm text - green - 600">;
+ <p className={"tex}t - sm text - green - 600">
  {analyticsData.engagement.likeRate.toFixed(2)}% rate;
 // FIXED:  </p>
 // FIXED:  </div>
- <HandThumbUpIcon className="w - 8 h - 8 text - green - 500" />;
+ <HandThumbUpIcon className="w - 8 h - 8 text - green - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Comments</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Comments</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatNumber(analyticsData.comments)}
 // FIXED:  </p>
- <p className={"tex}t - sm text - blue - 600">;
+ <p className={"tex}t - sm text - blue - 600">
  {analyticsData.engagement.commentRate.toFixed(2)}% rate;
 // FIXED:  </p>
 // FIXED:  </div>
- <ChatBubbleLeftIcon className="w - 8 h - 8 text - blue - 500" />;
+ <ChatBubbleLeftIcon className="w - 8 h - 8 text - blue - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 
- <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Shares</p>;
- <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">;
+ <div className={"b}g - white dark:bg - neutral - 800 p - 4 rounded - lg border border - neutral - 200 dark:border - neutral - 700">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm text - neutral - 600 dark:text - neutral - 400">Shares</p>
+ <p className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">
  {formatNumber(analyticsData.shares)}
 // FIXED:  </p>
- <p className={"tex}t - sm text - purple - 600">;
+ <p className={"tex}t - sm text - purple - 600">
  {analyticsData.engagement.shareRate.toFixed(2)}% rate;
 // FIXED:  </p>
 // FIXED:  </div>
- <ShareIcon className="w - 8 h - 8 text - purple - 500" />;
+ <ShareIcon className="w - 8 h - 8 text - purple - 500" />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
- return (;)
- <div className={`bg - neutral - 50 dark:bg - neutral - 900 ${className}`}>;
- <div className="p - 6">;
+ return (
+ <div className={`bg - neutral - 50 dark:bg - neutral - 900 ${className}`}>
+ <div className="p - 6">
  {/* Header */}
- <div className={"fle}x items - center justify - between mb - 6">;
- <div>;
- <h2 className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">Video Analytics</h2>;
- <p className={"tex}t - neutral - 600 dark:text - neutral - 400">;
+ <div className={"fle}x items - center justify - between mb - 6">
+ <div>
+ <h2 className={"tex}t - 2xl font - bold text - neutral - 900 dark:text - neutral - 100">Video Analytics</h2>
+ <p className={"tex}t - neutral - 600 dark:text - neutral - 400">
  Published {formatDistanceToNow(new Date(analyticsData.publishedAt))} ago;
 // FIXED:  </p>
 // FIXED:  </div>
 
- <div className={"fle}x space - x - 2">;
+ <div className={"fle}x space - x - 2">
  {(['7d', '28d', '90d', '365d'] as const).map((range) => (}))
- <button;
-          key={range} />;
+ <button
+          key={range} />
 // FIXED:  onClick={() => setTimeRange(range: React.MouseEvent), }
 // FIXED:  className={`px - 3 py - 1 text - sm rounded - full transition - colors ${, }
  timeRange === range;
  ? 'bg - blue - 100 dark:bg - blue - 900 text - blue - 800 dark:text - blue - 200';
- : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700';
+ : 'text - neutral - 600 dark:text - neutral - 400 hover:bg - neutral - 100 dark:hover:bg - neutral - 700'
  }`}
  >
  {range === '7d' ? 'Last 7 days' : , }
@@ -483,15 +483,15 @@ return `${(num / 1000).toFixed(1)}K`;
 // FIXED:  </div>
 
  {/* Tabs */}
- <div className={"fle}x space - x - 1 mb - 6 bg - neutral - 100 dark:bg - neutral - 800 p - 1 rounded - lg">;
+ <div className={"fle}x space - x - 1 mb - 6 bg - neutral - 100 dark:bg - neutral - 800 p - 1 rounded - lg">
  {(['overview', 'audience', 'revenue', 'engagement'] as const).map((tab) => (}))
- <button;
-          key={tab} />;
+ <button
+          key={tab} />
 // FIXED:  onClick={() => setActiveTab(tab: React.MouseEvent), }
 // FIXED:  className={`flex - 1 py - 2 px - 4 text - sm font - medium rounded - md transition - colors ${, }
  activeTab === tab;
  ? 'bg - white dark:bg - neutral - 700 text - neutral - 900 dark:text - neutral - 100 shadow - sm';
- : 'text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 900 dark:hover:text - neutral - 100';
+ : 'text - neutral - 600 dark:text - neutral - 400 hover:text - neutral - 900 dark:hover:text - neutral - 100'
  }`}
  >
  {tab.charAt(0).toUpperCase() + tab.slice(1)}

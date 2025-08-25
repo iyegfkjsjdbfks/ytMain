@@ -26,7 +26,7 @@ const buttonSizes: object = {, }
  lg: 'px - 6 py - 3 text - base' };
 
 export const UnifiedButton = forwardRef < HTMLButtonElement, UnifiedButtonProps>(;)
- ({})
+ ({}) => {
  variant = 'primary',
  size = 'md',
  loading = false,
@@ -40,10 +40,10 @@ export const UnifiedButton = forwardRef < HTMLButtonElement, UnifiedButtonProps>
  }, ref) => {}
  const isDisabled = disabled || loading;
 
- return (;)
- <button;>;
+ return (
+ <button>
  ref={ref}
-// FIXED:  className={cn(, })
+// FIXED:  className={cn(, }) => {
  'inline - flex items - center justify - center font - medium rounded - md border transition - colors duration - 200 focus:outline - none focus:ring - 2 focus:ring - offset - 2 focus:ring - red - 500 disabled:opacity - 50 disabled:cursor - not - allowed',
  buttonVariants.variant,
  buttonSizes.size,
@@ -51,13 +51,13 @@ export const UnifiedButton = forwardRef < HTMLButtonElement, UnifiedButtonProps>
  className)}
 // FIXED:  disabled={isDisabled, }
  {...props} />
- {loading && (})
- <ArrowPathIcon className="w - 4 h - 4 mr - 2 animate - spin" />;
- {!loading && icon && iconPosition === 'left' && (})
- <span className={"m}r - 2">{icon}</span>;
+ {loading && (}) => {
+ <ArrowPathIcon className="w - 4 h - 4 mr - 2 animate - spin" />
+ {!loading && icon && iconPosition === 'left' && (}) => {
+ <span className={"m}r - 2">{icon}</span>
  {children}
- {!loading && icon && iconPosition === 'right' && (})
- <span className={"m}l - 2">{icon}</span>;
+ {!loading && icon && iconPosition === 'right' && (}) => {
+ <span className={"m}l - 2">{icon}</span>
 // FIXED:  </button>
 
 UnifiedButton.displayName = 'UnifiedButton';
@@ -72,7 +72,7 @@ export interface UnifiedInputProps extends InputHTMLAttributes < HTMLInputElemen
  fullWidth?: boolean;
 
 export const UnifiedInput = forwardRef < HTMLInputElement, UnifiedInputProps>(;)
- ({})
+ ({}) => {
  label,
  error,
  helperText,
@@ -86,23 +86,23 @@ export const UnifiedInput = forwardRef < HTMLInputElement, UnifiedInputProps>(;)
  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
  const hasError = !!error;
 
- return (;)
- <div className={cn('space - y - 1', fullWidth && 'w - full')}>;
- {label && (})
- <label;>;
+ return (
+ <div className={cn('space - y - 1', fullWidth && 'w - full')}>
+ {label && (}) => {
+ <label;>
 // FIXED:  htmlFor={inputId, }
 // FIXED:  className={"bloc}k text - sm font - medium text - gray - 700 dark:text - gray - 300" />
  {label}
 // FIXED:  </label>
- <div className={"relative}">;
- {leftIcon && (})
- <div className={"absolut}e inset - y - 0 left - 0 pl - 3 flex items - center pointer - events - none">;
- <span className={"tex}t - gray - 400">{leftIcon}</span>;
+ <div className={"relative}">
+ {leftIcon && (}) => {
+ <div className={"absolut}e inset - y - 0 left - 0 pl - 3 flex items - center pointer - events - none">
+ <span className={"tex}t - gray - 400">{leftIcon}</span>
 // FIXED:  </div>
- <input;>;
+ <input;>
  ref={ref}
 // FIXED:  id={inputId, }
-// FIXED:  className={cn(, })
+// FIXED:  className={cn(, }) => {
  'block w - full px - 3 py - 2 border rounded - md shadow - sm placeholder - gray - 400 focus:outline - none focus:ring - 2 focus:ring - red - 500 focus:border - red - 500 transition - colors duration - 200',
  hasError;
  ? 'border - red - 300 text - red - 900 placeholder - red - 300 focus:ring - red - 500 focus:border - red - 500';
@@ -111,18 +111,18 @@ export const UnifiedInput = forwardRef < HTMLInputElement, UnifiedInputProps>(;)
  rightIcon && 'pr - 10',
  className)}
  {...props} /> />
- {rightIcon && (})
- <div className={"absolut}e inset - y - 0 right - 0 pr - 3 flex items - center pointer - events - none">;
- <span className={"tex}t - gray - 400">{rightIcon}</span>;
+ {rightIcon && (}) => {
+ <div className={"absolut}e inset - y - 0 right - 0 pr - 3 flex items - center pointer - events - none">
+ <span className={"tex}t - gray - 400">{rightIcon}</span>
 // FIXED:  </div>
 // FIXED:  </div>
- {error && (})
- <p className={"tex}t - sm text - red - 600 dark:text - red - 400 flex items - center">;
- <ExclamationTriangleIcon className="w - 4 h - 4 mr - 1" />;
+ {error && (}) => {
+ <p className={"tex}t - sm text - red - 600 dark:text - red - 400 flex items - center">
+ <ExclamationTriangleIcon className="w - 4 h - 4 mr - 1" />
  {error}
 // FIXED:  </p>
- {helperText && !error && (})
- <p className={"tex}t - sm text - gray - 500 dark:text - gray - 400">{helperText}</p>;
+ {helperText && !error && (}) => {
+ <p className={"tex}t - sm text - gray - 500 dark:text - gray - 400">{helperText}</p>
 // FIXED:  </div>
 
 UnifiedInput.displayName = 'UnifiedInput';
@@ -148,22 +148,22 @@ const cardShadow: object = {, }
  md: 'shadow - md',
  lg: 'shadow - lg' };
 
-export const UnifiedCard: React.FC < UnifiedCardProps> = ({, })
+export const UnifiedCard: React.FC < UnifiedCardProps> = ({, }) => {
  children,
  className,
  padding = 'md',
  shadow = 'sm',
  border = true,
  hover = false }) => {}
- return (;)
- <div;>;
-// FIXED:  className={cn(, })
+ return (
+ <div>
+// FIXED:  className={cn(, }) => {
  'bg - white dark:bg - gray - 800 rounded - lg transition - all duration - 200',
  cardPadding.padding,
  cardShadow.shadow,
  border && 'border border - gray - 200 dark:border - gray - 700',
  hover && 'hover:shadow - md hover:scale-[1.02]',
- className)} />;
+ className)} />
  {children}
 // FIXED:  </div>
 
@@ -202,7 +202,7 @@ const alertStyles: object = {, }
  content: 'text - red - 700 dark:text - red - 300',
  IconComponent: ExclamationTriangleIcon };
 
-export const UnifiedAlert: React.FC < UnifiedAlertProps> = ({, })
+export const UnifiedAlert: React.FC < UnifiedAlertProps> = ({, }) => {
  type = 'info',
  title,
  children,
@@ -212,37 +212,37 @@ export const UnifiedAlert: React.FC < UnifiedAlertProps> = ({, })
  const styles = alertStyles.type;
  const { IconComponent } = styles;
 
- return (;)
+ return (
  <div className={cn(}>;)
  'rounded - md border p - 4',
- styles.container, />;
- className)}>;
- <div className={"flex}">;
- <div className={"fle}x - shrink - 0">;
- <IconComponent className={cn('h - 5 w - 5', styles.icon)} />;
+ styles.container, />
+ className)}>
+ <div className={"flex}">
+ <div className={"fle}x - shrink - 0">
+ <IconComponent className={cn('h - 5 w - 5', styles.icon)} />
 // FIXED:  </div>
- <div className={"m}l - 3 flex - 1">;
- {title && (})
- <h3 className={cn('text - sm font - medium', styles.title)}>;
+ <div className={"m}l - 3 flex - 1">
+ {title && (}) => {
+ <h3 className={cn('text - sm font - medium', styles.title)}>
  {title}
 // FIXED:  </h3>
- <div className={cn('text - sm', title ? 'mt - 2' : '', styles.content)}>;
+ <div className={cn('text - sm', title ? 'mt - 2' : '', styles.content)}>
  {children}
 // FIXED:  </div>
 // FIXED:  </div>
- {dismissible && onDismiss && (})
- <div className={"m}l - auto pl - 3">;
- <div className="-mx - 1.5 -my - 1.5">;
- <button;>;
+ {dismissible && onDismiss && (}) => {
+ <div className={"m}l - auto pl - 3">
+ <div className="-mx - 1.5 -my - 1.5">
+ <button>
 // FIXED:  type="button"
-// FIXED:  className={cn(, })
+// FIXED:  className={cn(, }) => {
  'inline - flex rounded - md p - 1.5 focus:outline - none focus:ring - 2 focus:ring - offset - 2 transition - colors',
  styles.icon,
- 'hover:bg - black / 5 dark:hover:bg - white / 5')} />;
+ 'hover:bg - black / 5 dark:hover:bg - white / 5')} />
 // FIXED:  onClick={(e: React.MouseEvent) => onDismiss(e), }
  >
- <span className={"s}r - only">Dismiss</span>;
- <XIcon className="h - 5 w - 5" />;
+ <span className={"s}r - only">Dismiss</span>
+ <XIcon className="h - 5 w - 5" />
 // FIXED:  </button>
 // FIXED:  </div>
 // FIXED:  </div>
@@ -261,7 +261,7 @@ const loadingSizes: object = {, }
  md: 'w - 6 h - 6',
  lg: 'w - 8 h - 8' };
 
-export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({, })
+export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({, }) => {
  type = 'spinner',
  size = 'md',
  text,
@@ -271,16 +271,16 @@ export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({, })
  const renderLoader = () => {}
  switch (type) {}
  case 'spinner':;
- return (;)
- <ArrowPathIcon;>;
+ return (
+ <ArrowPathIcon;>
 // FIXED:  className={cn(sizeClass, 'animate - spin text - gray - 400', className)} /> />
  case 'dots':;
- return (;)
- <div className={cn('flex space - x - 1', className)}>;
+ return (
+ <div className={cn('flex space - x - 1', className)}>
  {[0, 1, 2].map((i) => (}))
- <div;
+ <div
           key={i}
-// FIXED:  className={cn(, })
+// FIXED:  className={cn(, }) => {
  'bg - gray - 400 rounded - full animate - pulse',
  size === 'sm' ? 'w - 1 h - 1' : size === 'md' ? 'w - 2 h - 2' : 'w - 3 h - 3')}
 // FIXED:  style={{,}
@@ -288,19 +288,19 @@ export const UnifiedLoading: React.FC < UnifiedLoadingProps> = ({, })
  animationDuration: '1s' } />; />
 // FIXED:  </div>
  case 'pulse':;
- return (;)
- <div;>;
-// FIXED:  className={cn(, })
+ return (
+ <div>
+// FIXED:  className={cn(, }) => {
  'bg - gray - 300 dark:bg - gray - 600 rounded animate - pulse',
  sizeClass,
  className)} />; />
  default: return null;
 
- return (;)
- <div className={"fle}x items - center justify - center space - x - 2">;
+ return (
+ <div className={"fle}x items - center justify - center space - x - 2">
  {renderLoader()}
- {text && (})
- <span className={"tex}t - sm text - gray - 500 dark:text - gray - 400">{text}</span>;
+ {text && (}) => {
+ <span className={"tex}t - sm text - gray - 500 dark:text - gray - 400">{text}</span>
 // FIXED:  </div>
 
 // Unified Modal Component;
@@ -320,7 +320,7 @@ const modalSizes: object = {, }
  lg: 'max - w - 2xl',
  xl: 'max - w - 4xl' };
 
-export const UnifiedModal: React.FC < UnifiedModalProps> = ({, })
+export const UnifiedModal: React.FC < UnifiedModalProps> = ({, }) => {
  isOpen,
  onClose,
  title,
@@ -336,31 +336,31 @@ return null;
  if (e.target === e.currentTarget && closeOnOverlayClick) {}
  onClose();
 
- return (;)
- <div;>;
+ return (
+ <div>
 // FIXED:  className={"fixe}d inset - 0 z - 50 flex items - center justify - center p - 4 bg - black bg - opacity - 50" />
 // FIXED:  onClick={(e: React.MouseEvent) => handleOverlayClick(e), }
  >
- <div;>;
-// FIXED:  className={cn(, })
+ <div>
+// FIXED:  className={cn(, }) => {
  'bg - white dark:bg - gray - 800 rounded - lg shadow - xl w - full',
  modalSizes.size,
- className)} />;
- {(title || showCloseButton) && (})
- <div className={"fle}x items - center justify - between p - 6 border - b border - gray - 200 dark:border - gray - 700">;
- {title && (})
- <h2 className={"tex}t - lg font - semibold text - gray - 900 dark:text - white">;
+ className)} />
+ {(title || showCloseButton) && (}) => {
+ <div className={"fle}x items - center justify - between p - 6 border - b border - gray - 200 dark:border - gray - 700">
+ {title && (}) => {
+ <h2 className={"tex}t - lg font - semibold text - gray - 900 dark:text - white">
  {title}
 // FIXED:  </h2>
- {showCloseButton && (})
- <button />;
+ {showCloseButton && (}) => {
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onClose(e), }
 // FIXED:  className={"tex}t - gray - 400 hover:text - gray - 600 dark:hover:text - gray - 300 transition - colors"
  >
- <XIcon className="w - 6 h - 6" />;
+ <XIcon className="w - 6 h - 6" />
 // FIXED:  </button>
 // FIXED:  </div>
- <div className="p - 6">;
+ <div className="p - 6">
  {children}
 // FIXED:  </div>
 // FIXED:  </div>

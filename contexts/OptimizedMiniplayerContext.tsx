@@ -221,7 +221,7 @@ export const OptimizedMiniplayerProvider: React.FC<MiniplayerProviderProps> = ({
     removeFromQueue: (videoId: string) => dispatch({ type: "REMOVE_FROM_QUEUE", payload: videoId }),
     nextVideo: () => dispatch({ type: "NEXT_VIDEO" }),
     previousVideo: () => dispatch({ type: "PREVIOUS_VIDEO" }),
-    setCurrentIndex: (index) => dispatch({ type: "SET_CURRENT_INDEX", payload: index })
+    setCurrentIndex: (index) => dispatch({ type: "SET_CURRENT_INDEX", payload: index }) => {
   }), []);
 
   const value = useMemo(() => ({ state, actions }), [state, actions]);

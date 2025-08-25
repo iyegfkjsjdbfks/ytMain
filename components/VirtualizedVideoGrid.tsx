@@ -45,11 +45,10 @@ const GridItem: React.FC < GridItemProps> = ({ columnIndex, rowIndex, style, dat
  const video = videos.videoIndex;
 
  if (!video) {}
- return <div style={style} />;
-
- return (;)
- <div style={style} className="p - 2">;
- <OptimizedVideoCard;>;
+ return <div style={style} />
+ return (
+ <div style={style} className="p - 2">
+ <OptimizedVideoCard;>
  video={video}
  size={cardSize}
  showChannel={showChannel}
@@ -58,7 +57,7 @@ const GridItem: React.FC < GridItemProps> = ({ columnIndex, rowIndex, style, dat
  {...(onChannelClick && { onChannelClick })} /> />
 // FIXED:  </div>
 
-const VirtualizedVideoGrid: React.FC < VirtualizedVideoGridProps> = ({, })
+const VirtualizedVideoGrid: React.FC < VirtualizedVideoGridProps> = ({, }) => {
  videos,
  loading = false,
  hasMore = false,
@@ -69,12 +68,12 @@ const VirtualizedVideoGrid: React.FC < VirtualizedVideoGridProps> = ({, })
  cardSize = 'md',
  showChannel = true,
  showDescription = false }) => {}
- const [containerSize, setContainerSize] = useState({ width: 0,})
+ const [containerSize, setContainerSize] = useState({ width: 0,}) => {
  height: 0 });
  const [containerRef, setContainerRef] = useState < HTMLDivElement | null>(null);
 
  // Calculate grid dimensions based on card size and container width;
- const { columnsPerRow, columnWidth, rowHeight } = useMemo(() => {})
+ const { columnsPerRow, columnWidth, rowHeight } = useMemo(() => {}) => {
  const cardWidths: object = {, }
  sm: 280,
  md: 320, lg: 360;
@@ -100,11 +99,11 @@ const VirtualizedVideoGrid: React.FC < VirtualizedVideoGridProps> = ({, })
  const rowCount = Math.ceil(videos.length / columnsPerRow);
 
  // Handle container resize;
- useEffect(() => {})
+ useEffect(() => {}) => {
  if (!containerRef) {}
 return;
 
- const resizeObserver = new ResizeObserver((entries) => {})
+ const resizeObserver = new ResizeObserver((entries) => {}) => {
  for (const entry of entries) {}
  const { width, height } = entry.contentRect;
  setContainerSize({ width, height });
@@ -114,7 +113,7 @@ return;
  }, [containerRef]);
 
  // Handle infinite scrolling;
- const handleScroll = useCallback(({ scrollTop, scrollHeight, clientHeight }) => {})
+ const handleScroll = useCallback(({ scrollTop, scrollHeight, clientHeight }) => {}) => {
  if (!hasMore || loading || !onLoadMore) {}
 return;
 
@@ -125,7 +124,7 @@ return;
 
  // Grid item data;
  const itemData = useMemo(;)
- () => ({})
+ () => ({}) => {
  videos,
  columnsPerRow,
  ...(onVideoClick && { onVideoClick }),
@@ -136,23 +135,23 @@ return;
  [videos, columnsPerRow, onVideoClick, onChannelClick, cardSize, showChannel, showDescription]);
 
  if (videos.length === 0 && !loading) {}
- return (;)
- <div className={"fle}x flex - col items - center justify - center py - 12 text - gray - 500">;
- <div className={"tex}t - 6xl mb - 4">📺</div>;
-<h3 className={"tex}t - lg font - medium mb - 2">No videos found</h3>;
- <p className={"tex}t - sm text - center max - w - md">;
+ return (
+ <div className={"fle}x flex - col items - center justify - center py - 12 text - gray - 500">
+ <div className={"tex}t - 6xl mb - 4">📺</div>
+<h3 className={"tex}t - lg font - medium mb - 2">No videos found</h3>
+ <p className={"tex}t - sm text - center max - w - md">
  There are no videos to display at the moment. Try adjusting your filters or check back later.;
 // FIXED:  </p>
 // FIXED:  </div>
 
- return (;)
- <div className={cn('w - full h - full', className)}>;
- <div;>;
+ return (
+ <div className={cn('w - full h - full', className)}>
+ <div>
  ref={setContainerRef}
 // FIXED:  className="w - full h - full min - h-[400px]" />
- {containerSize.width > 0 && (})
- <><< /> /><< /> /><< /> />;
- <Grid;>;
+ {containerSize.width > 0 && (}) => {
+ <><< /> /><< /> /><< /> />
+ <Grid;>
  columnCount={columnsPerRow}
  columnWidth={columnWidth}
  height={containerSize.height}
@@ -162,20 +161,20 @@ return;
  itemData={itemData}
  onScroll={handleScroll}
  overscanRowCount={2}
- overscanColumnCount={1} />;
+ overscanColumnCount={1} />
  {GridItem}
 // FIXED:  </Grid>
 
  {/* Loading indicator */}
- {loading && (})
- <div className={"fle}x justify - center py - 8">;
- <LoadingSpinner size="lg" />;
+ {loading && (}) => {
+ <div className={"fle}x justify - center py - 8">
+ <LoadingSpinner size="lg" />
 // FIXED:  </div>
 
  {/* Load more button */}
- {hasMore && !loading && onLoadMore && (})
- <div className={"fle}x justify - center py - 8">;
- <button />;
+ {hasMore && !loading && onLoadMore && (}) => {
+ <div className={"fle}x justify - center py - 8">
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => onLoadMore(e), }
 // FIXED:  className={"p}x - 6 py - 3 bg - blue - 600 text - white rounded - lg hover:bg - blue - 700 transition - colors font - medium"
  >

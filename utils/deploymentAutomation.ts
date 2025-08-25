@@ -42,7 +42,7 @@ export interface QualityGateConfig {
  metric: string;,
  operator: '>' | '<' | '>=' | '<=' | '==';
  threshold: number;
- }>;
+ }>
  blocking: boolean;
 
 export interface NotificationConfig {
@@ -51,8 +51,7 @@ export interface NotificationConfig {
  url?: string;
  channel?: string;
  recipients?: string[];
- events: Array<'start' | 'success' | 'failure' | 'rollback'>;
-
+ events: Array<'start' | 'success' | 'failure' | 'rollback'>
 export interface DeploymentPipeline {
  id: string;,
  name: string;
@@ -103,8 +102,7 @@ export interface DeploymentLogEntry {
  level: 'info' | 'warn' | 'error' | 'debug';
  message: string;
  stage?: string;
- metadata?: Record < string, any>;
-
+ metadata?: Record < string, any>
 type DeploymentLog = DeploymentLogEntry;
 
 export interface DeploymentMetrics {

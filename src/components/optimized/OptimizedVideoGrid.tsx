@@ -9,6 +9,7 @@ export interface OptimizedVideoGridProps {
 export const OptimizedVideoGrid = (props: OptimizedVideoGridProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default OptimizedVideoGrid;

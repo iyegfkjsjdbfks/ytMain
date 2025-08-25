@@ -8,7 +8,7 @@ interface UseAsyncDataReturn<T> {
  data: T;
  loading: boolean;
  error: string | null;
- refetch: () => Promise<void>;
+ refetch: () => Promise<void>
  setData: (data: T) => void;
 
 /**

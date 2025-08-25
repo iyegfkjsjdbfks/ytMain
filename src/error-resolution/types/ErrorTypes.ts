@@ -46,9 +46,9 @@ export interface AnalyzedError {
 // Error analysis result;
 export interface ErrorAnalysisResult {
   totalErrors: number;
-  errorsByCategory: Map<string, AnalyzedError[]>;
-  errorsByFile: Map<string, AnalyzedError[]>;
-  errorsBySeverity: Map<ErrorSeverity, AnalyzedError[]>;
+  errorsByCategory: Map<string, AnalyzedError[]>
+  errorsByFile: Map<string, AnalyzedError[]>
+  errorsBySeverity: Map<ErrorSeverity, AnalyzedError[]>
   analysisTimestamp: Date;
   summary: ErrorSummary;
 
@@ -112,7 +112,7 @@ export interface ExecutionState {
   startTime: Date;
   currentPhase: ExecutionPhase;
   completedPhases: ExecutionPhase[];
-  errorCounts: Record<string, number>;
+  errorCounts: Record<string, number>
   appliedFixes: AppliedFix[];
   rollbackStack: RollbackAction[];
 

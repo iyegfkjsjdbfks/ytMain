@@ -69,7 +69,7 @@ export interface Video {
  regionRestriction?: {
  allowed?: string;
  blocked?: string;
- contentRating?: Record<string, string>;
+ contentRating?: Record<string, string>
  projection?: string;
  hasCustomThumbnail?: boolean;
  player?: {
@@ -101,13 +101,13 @@ export interface Video {
  bitrateBps: string;
  rotation: string;
  vendor: string;
- }>;
+ }>
  audioStreams: Array<{
  channelCount: number;
  codec: string;
  bitrateBps: string;
  vendor: string;
- }>;
+ }>
  durationMs: string;
  bitrateBps: string;
  creationTime: string;
@@ -130,7 +130,7 @@ export interface Video {
  tagSuggestions?: Array<{
  tag: string;
  categoryRestricts: string;
- }>;
+ }>
  editorSuggestions?: string;
  liveStreamingDetails?: {
  actualStartTime?: string;
@@ -144,7 +144,7 @@ export interface Video {
  {
  title: string;
  description: string;
- >;
+ >
  // Required timestamp fields,
  createdAt: string;
  updatedAt: string;

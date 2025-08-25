@@ -126,7 +126,7 @@ const DevOpsDashboard: React.FC = () => {, }
 
  // Add performance alerts;
  if (dashboardMetrics.performance.score < 70) {}
- allAlerts.push({})
+ allAlerts.push({}) => {
  id: 'perf - low - score',
  type: "performance",
  severity: 'medium',
@@ -137,7 +137,7 @@ const DevOpsDashboard: React.FC = () => {, }
 
  // Add code quality alerts;
  if (dashboardMetrics.codeQuality.score < 75) {}
- allAlerts.push({})
+ allAlerts.push({}) => {
  id: 'quality - low - score',
  type: "quality",
  severity: 'medium',
@@ -155,7 +155,7 @@ const DevOpsDashboard: React.FC = () => {, }
  setIsLoading(false);
 
  // Auto - refresh data;
- useEffect(() => {})
+ useEffect(() => {}) => {
  fetchDashboardData().catch(console.error);
  const interval = setInterval((() => {}))
  fetchDashboardData().catch(console.error);
@@ -189,17 +189,17 @@ return 'text - orange - 600';
  trend?: 'up' | 'down' | 'stable';
  color?: string;
  }> = ({ title, value, subtitle, trend, color = 'text - gray - 900' }: any) => ()
-          <div className={"b}g - white rounded - lg shadow p - 6">;
- <div className={"fle}x items - center justify - between">;
- <div>;
- <p className={"tex}t - sm font - medium text - gray - 600">{title}</p>;
- <p className={`text - 2xl font - semibold ${color}`}>{value}</p>;
+          <div className={"b}g - white rounded - lg shadow p - 6">
+ <div className={"fle}x items - center justify - between">
+ <div>
+ <p className={"tex}t - sm font - medium text - gray - 600">{title}</p>
+ <p className={`text - 2xl font - semibold ${color}`}>{value}</p>
  {subtitle && <p className={"tex}t - sm text - gray - 500">{subtitle}</p>}
 // FIXED:  </div>
- {trend && (})
- <div className={`text - sm ${}>;
- trend === 'up' ? 'text - green - 600' :;
- trend === 'down' ? 'text - red - 600' : 'text - gray - 600' />;
+ {trend && (}) => {
+ <div className={`text - sm ${}>
+ trend === 'up' ? 'text - green - 600' :
+ trend === 'down' ? 'text - red - 600' : 'text - gray - 600' />
  }`}>
  {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '→'}</div>
 // FIXED:  </div>
@@ -209,27 +209,26 @@ return 'text - orange - 600';
  const OverviewTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
-  </div>;
-
- return (;)
- <div className={"spac}e - y - 6">;
+  </div>
+ return (
+ <div className={"spac}e - y - 6">
  {/* Key Metrics Grid */}<div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
- <MetricCard;>;
+ <MetricCard;>
  title="Performance Score",
 // FIXED:  value={metrics.performance.score, }
  color={getScoreColor(metrics.performance.score)}
  trend="stable" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Security Score";
 // FIXED:  value={metrics.security.score, }
  color={getScoreColor(metrics.security.score)}
  trend="up" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Deployment Success";
 // FIXED:  value={`${metrics.deployment.successRate}%`, }
  color={getScoreColor(metrics.deployment.successRate)}
  trend="stable" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Code Quality";
 // FIXED:  value={metrics.codeQuality.score, }
  color={getScoreColor(metrics.codeQuality.score)}
@@ -237,73 +236,73 @@ return <div > Loading...;
 // FIXED:  </div>
 
  {/* System Status */}
- <div className={"b}g - white rounded - lg shadow">;
- <div className={"p}x - 6 py - 4 border - b border - gray - 200">;
- <h3 className={"tex}t - lg font - medium text - gray - 900">System Status</h3>;
+ <div className={"b}g - white rounded - lg shadow">
+ <div className={"p}x - 6 py - 4 border - b border - gray - 200">
+ <h3 className={"tex}t - lg font - medium text - gray - 900">System Status</h3>
 // FIXED:  </div>
- <div className="p - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6">;
- <div className={"fle}x items - center space - x - 3">;
- <div className="w - 3 h - 3 bg - green - 400 rounded - full" />;
- <span className={"tex}t - sm text - gray - 600">Application Health: Healthy</span>;
+ <div className="p - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6">
+ <div className={"fle}x items - center space - x - 3">
+ <div className="w - 3 h - 3 bg - green - 400 rounded - full" />
+ <span className={"tex}t - sm text - gray - 600">Application Health: Healthy</span>
 // FIXED:  </div>
- <div className={"fle}x items - center space - x - 3">;
- <div className="w - 3 h - 3 bg - green - 400 rounded - full" />;
- <span className={"tex}t - sm text - gray - 600">Database: Connected</span>;
+ <div className={"fle}x items - center space - x - 3">
+ <div className="w - 3 h - 3 bg - green - 400 rounded - full" />
+ <span className={"tex}t - sm text - gray - 600">Database: Connected</span>
 // FIXED:  </div>
- <div className={"fle}x items - center space - x - 3">;
- <div className="w - 3 h - 3 bg - yellow - 400 rounded - full" />;
- <span className={"tex}t - sm text - gray - 600">Cache: Degraded</span>;
+ <div className={"fle}x items - center space - x - 3">
+ <div className="w - 3 h - 3 bg - yellow - 400 rounded - full" />
+ <span className={"tex}t - sm text - gray - 600">Cache: Degraded</span>
 // FIXED:  </div>
- <div className={"fle}x items - center space - x - 3">;
- <div className="w - 3 h - 3 bg - green - 400 rounded - full" />;
- <span className={"tex}t - sm text - gray - 600">CDN: Operational</span>;
+ <div className={"fle}x items - center space - x - 3">
+ <div className="w - 3 h - 3 bg - green - 400 rounded - full" />
+ <span className={"tex}t - sm text - gray - 600">CDN: Operational</span>
 // FIXED:  </div>
- <div className={"fle}x items - center space - x - 3">;
- <div className="w - 3 h - 3 bg - green - 400 rounded - full" />;
- <span className={"tex}t - sm text - gray - 600">Monitoring: Active</span>;
+ <div className={"fle}x items - center space - x - 3">
+ <div className="w - 3 h - 3 bg - green - 400 rounded - full" />
+ <span className={"tex}t - sm text - gray - 600">Monitoring: Active</span>
 // FIXED:  </div>
- <div className={"fle}x items - center space - x - 3">;
- <div className="w - 3 h - 3 bg - green - 400 rounded - full" />;
- <span className={"tex}t - sm text - gray - 600">Security: Protected</span>;
+ <div className={"fle}x items - center space - x - 3">
+ <div className="w - 3 h - 3 bg - green - 400 rounded - full" />
+ <span className={"tex}t - sm text - gray - 600">Security: Protected</span>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Recent Alerts */}
- <div className={"b}g - white rounded - lg shadow">;
- <div className={"p}x - 6 py - 4 border - b border - gray - 200">;
- <h3 className={"tex}t - lg font - medium text - gray - 900">Recent Alerts</h3>;
+ <div className={"b}g - white rounded - lg shadow">
+ <div className={"p}x - 6 py - 4 border - b border - gray - 200">
+ <h3 className={"tex}t - lg font - medium text - gray - 900">Recent Alerts</h3>
 // FIXED:  </div>
- <div className={"divid}e - y divide - gray - 200">;
+ <div className={"divid}e - y divide - gray - 200">
  {alerts.slice(0, 5).map((alert) => (}))
- <div key={alert.id} className="p - 6">;
- <div className={"fle}x items - start justify - between">;
- <div className={"fle}x items - start space - x - 3">;
- <span className={`inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium ${getSeverityColor(alert.severity)}`}>;
+ <div key={alert.id} className="p - 6">
+ <div className={"fle}x items - start justify - between">
+ <div className={"fle}x items - start space - x - 3">
+ <span className={`inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium ${getSeverityColor(alert.severity)}`}>
  {alert.severity.toUpperCase()}
 // FIXED:  </span>
- <div>;
- <p className={"tex}t - sm font - medium text - gray - 900">{alert.title}</p>;
- <p className={"tex}t - sm text - gray - 500">{alert.description}</p>;
- <p className={"tex}t - xs text - gray - 400 mt - 1">;
+ <div>
+ <p className={"tex}t - sm font - medium text - gray - 900">{alert.title}</p>
+ <p className={"tex}t - sm text - gray - 500">{alert.description}</p>
+ <p className={"tex}t - xs text - gray - 400 mt - 1">
  {new Date(alert.timestamp).toLocaleString()}
 // FIXED:  </p>
 // FIXED:  </div>
 // FIXED:  </div>
- <span className={`inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium ${}>;
+ <span className={`inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium ${}>
  alert.type === 'security' ? 'text - red - 800 bg - red - 100' :;
  alert.type === 'performance' ? 'text - blue - 800 bg - blue - 100' :;
- alert.type === 'deployment' ? 'text - purple - 800 bg - purple - 100' :;
- 'text - gray - 800 bg - gray - 100' />;
+ alert.type === 'deployment' ? 'text - purple - 800 bg - purple - 100' :
+ 'text - gray - 800 bg - gray - 100' />
  }`}>
  {alert.type}
 // FIXED:  </span>
 // FIXED:  </div>
 // FIXED:  </div>
- {alerts.length === 0 && (})
- <div className="p - 6 text - center text - gray - 500">;
+ {alerts.length === 0 && (}) => {
+ <div className="p - 6 text - center text - gray - 500">
  No active alerts,
 // FIXED:  </div>
 // FIXED:  </div>
@@ -314,28 +313,27 @@ return <div > Loading...;
  const PerformanceTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
-  </div>;
-
- return (;)
- <div className={"spac}e - y - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6">;
- <MetricCard;>;
+  </div>
+ return (
+ <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 3 gap - 6">
+ <MetricCard;>
  title="Largest Contentful Paint",
 // FIXED:  value={`${metrics.performance.lcp}ms`}, />
- color={metrics.performance.lcp < 2500 ? 'text - green - 600' : 'text - red - 600'} />;
- <MetricCard;>;
+ color={metrics.performance.lcp < 2500 ? 'text - green - 600' : 'text - red - 600'} />
+ <MetricCard;>
  title="First Input Delay",
 // FIXED:  value={`${metrics.performance.fid}ms`}, />
- color={metrics.performance.fid < 100 ? 'text - green - 600' : 'text - red - 600'} />;
- <MetricCard;>;
+ color={metrics.performance.fid < 100 ? 'text - green - 600' : 'text - red - 600'} />
+ <MetricCard;>
  title="Cumulative Layout Shift",
 // FIXED:  value={metrics.performance.cls.toFixed(3), }
  color={metrics.performance.cls < 0.1 ? 'text - green - 600' : 'text - red - 600'} />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Memory Usage";
 // FIXED:  value={`${metrics.performance.memoryUsage}%`, }
  color={metrics.performance.memoryUsage < 70 ? 'text - green - 600' : 'text - red - 600'} />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Error Rate";
 // FIXED:  value={`${metrics.performance.errorRate}%`, }
  color={metrics.performance.errorRate < 1 ? 'text - green - 600' : 'text - red - 600'} />; />
@@ -346,24 +344,23 @@ return <div > Loading...;
  const SecurityTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
-  </div>;
-
- return (;)
- <div className={"spac}e - y - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">;
- <MetricCard;>;
+  </div>
+ return (
+ <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
+ <MetricCard;>
  title="Threats Detected",
 // FIXED:  value={metrics.security.threatsDetected, }
  color="text - red - 600" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Vulnerabilities",
 // FIXED:  value={metrics.security.vulnerabilities} />
- color={metrics.security.vulnerabilities === 0 ? 'text - green - 600' : 'text - red - 600'} />;
- <MetricCard;>;
+ color={metrics.security.vulnerabilities === 0 ? 'text - green - 600' : 'text - red - 600'} />
+ <MetricCard;>
  title="Compliance Score",
 // FIXED:  value={`${metrics.security.complianceScore}%`},
  color={getScoreColor(metrics.security.complianceScore)} />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Security Score";
 // FIXED:  value={metrics.security.score, }
  color={getScoreColor(metrics.security.score)} />; />
@@ -374,24 +371,23 @@ return <div > Loading...;
  const DeploymentTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
-  </div>;
-
- return (;)
- <div className={"spac}e - y - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">;
- <MetricCard;>;
+  </div>
+ return (
+ <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
+ <MetricCard;>
  title="Success Rate",
 // FIXED:  value={`${metrics.deployment.successRate}%`},
  color={getScoreColor(metrics.deployment.successRate)} />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Average Deploy Time";
 // FIXED:  value={`${metrics.deployment.averageTime}min`, }
  color="text - blue - 600" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Deploy Frequency";
 // FIXED:  value={`${metrics.deployment.frequency}/day`, }
  color="text - green - 600" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Active Deployments";
 // FIXED:  value={metrics.deployment.activeDeployments} />
  color={metrics.deployment.activeDeployments > 0 ? 'text - orange - 600' : 'text - green - 600', } />
@@ -402,24 +398,23 @@ return <div > Loading...;
  const QualityTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
-  </div>;
-
- return (;)
- <div className={"spac}e - y - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">;
- <MetricCard;>;
+  </div>
+ return (
+ <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 2 lg:grid - cols - 4 gap - 6">
+ <MetricCard;>
  title="Code Quality Score",
 // FIXED:  value={metrics.codeQuality.score, }
  color={getScoreColor(metrics.codeQuality.score)} />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Complexity";
 // FIXED:  value={metrics.codeQuality.complexity, }
  color={metrics.codeQuality.complexity < 20 ? 'text - green - 600' : 'text - red - 600'} />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Test Coverage";
 // FIXED:  value={`${metrics.codeQuality.coverage}%`, }
  color={getScoreColor(metrics.codeQuality.coverage)} />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Technical Debt";
 // FIXED:  value={`${metrics.codeQuality.technicalDebt}h`, }
  color={metrics.codeQuality.technicalDebt < 20 ? 'text - green - 600' : 'text - red - 600'} />; />
@@ -430,20 +425,19 @@ return <div > Loading...;
  const FeaturesTab = () => {}
  if (!metrics) {}
 return <div > Loading...;
-  </div>;
-
- return (;)
- <div className={"spac}e - y - 6">;
- <div className={"gri}d grid - cols - 1 md:grid - cols - 3 gap - 6">;
- <MetricCard;>;
+  </div>
+ return (
+ <div className={"spac}e - y - 6">
+ <div className={"gri}d grid - cols - 1 md:grid - cols - 3 gap - 6">
+ <MetricCard;>
  title="Total Flags",
 // FIXED:  value={metrics.featureFlags.totalFlags, }
  color="text - blue - 600" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Active Flags",
 // FIXED:  value={metrics.featureFlags.activeFlags, }
  color="text - green - 600" />; />
- <MetricCard;>;
+ <MetricCard;>
  title="Running Experiments",
 // FIXED:  value={metrics.featureFlags.experimentsRunning, }
  color="text - purple - 600" />; />
@@ -451,27 +445,27 @@ return <div > Loading...;
 // FIXED:  </div>
 
  if (isLoading && !metrics) {}
- return (;)
- <div className={"mi}n - h - screen bg - gray - 50 flex items - center justify - center">;
- <div className={"tex}t - center">;
- <div className={"animat}e - spin rounded - full h - 12 w - 12 border - b - 2 border - blue - 600 mx - auto" />;
- <p className={"m}t - 4 text - gray - 600">Loading DevOps Dashboard...</p>;
+ return (
+ <div className={"mi}n - h - screen bg - gray - 50 flex items - center justify - center">
+ <div className={"tex}t - center">
+ <div className={"animat}e - spin rounded - full h - 12 w - 12 border - b - 2 border - blue - 600 mx - auto" />
+ <p className={"m}t - 4 text - gray - 600">Loading DevOps Dashboard...</p>
 // FIXED:  </div>
 // FIXED:  </div>
 
- return (;)
- <div className={"mi}n - h - screen bg - gray - 50">;
+ return (
+ <div className={"mi}n - h - screen bg - gray - 50">
  {/* Header */}<div className={"b}g - white shadow">
- <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8">;
- <div className={"fle}x justify - between items - center py - 6">;
- <div>;
- <h1 className={"tex}t - 3xl font - bold text - gray - 900">DevOps Dashboard</h1>;
- <p className={"tex}t - sm text - gray - 500">;
+ <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8">
+ <div className={"fle}x justify - between items - center py - 6">
+ <div>
+ <h1 className={"tex}t - 3xl font - bold text - gray - 900">DevOps Dashboard</h1>
+ <p className={"tex}t - sm text - gray - 500">
  Last updated: {lastUpdated.toLocaleString(), }
 // FIXED:  </p>
 // FIXED:  </div>
- <div className={"fle}x items - center space - x - 4">;
- <button />;
+ <div className={"fle}x items - center space - x - 4">
+ <button />
 // FIXED:  onClick={(e: React.MouseEvent) => fetchDashboardData(e), }
 // FIXED:  className={"b}g - blue - 600 hover:bg - blue - 700 text - white px - 4 py - 2 rounded - md text - sm font - medium"
 // FIXED:  disabled={isLoading, }
@@ -484,9 +478,9 @@ return <div > Loading...;
 // FIXED:  </div>
 
  {/* Navigation Tabs */}
- <div className={"b}g - white border - b border - gray - 200">;
- <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8">;
- <nav className={"fle}x space - x - 8">;
+ <div className={"b}g - white border - b border - gray - 200">
+ <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8">
+ <nav className={"fle}x space - x - 8">
  {[}
  { id: 'overview',}
  label: 'Overview' },
@@ -502,12 +496,12 @@ return <div > Loading...;
  label: 'Feature Flags' }
  ].map((tab) => (;))
           <button,
-          key={tab.id} />;
+          key={tab.id} />
 // FIXED:  onClick={() => setActiveTab(tab.id as any: React.MouseEvent), }
 // FIXED:  className={`py - 4 px - 1 border - b - 2 font - medium text - sm ${, }
  activeTab === tab.id;
  ? 'border - blue - 500 text - blue - 600';
- : 'border - transparent text - gray - 500 hover:text - gray - 700 hover:border - gray - 300';
+ : 'border - transparent text - gray - 500 hover:text - gray - 700 hover:border - gray - 300'
  }`}
  >
  {tab.label}
@@ -517,7 +511,7 @@ return <div > Loading...;
 // FIXED:  </div>
 
  {/* Content */}
- <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8 py - 8">;
+ <div className={"ma}x - w - 7xl mx - auto px - 4 sm:px - 6 lg:px - 8 py - 8">
  {activeTab === 'overview' && <OverviewTab />}
  {activeTab === 'performance' && <PerformanceTab />}
  {activeTab === 'security' && <SecurityTab />}

@@ -8,6 +8,7 @@ export interface testingHelpersProps {
 export const testingHelpers = (props: testingHelpersProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default testingHelpers;

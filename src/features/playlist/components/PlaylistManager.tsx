@@ -9,6 +9,7 @@ export interface PlaylistManagerProps {
 export const PlaylistManager = (props: PlaylistManagerProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default PlaylistManager;

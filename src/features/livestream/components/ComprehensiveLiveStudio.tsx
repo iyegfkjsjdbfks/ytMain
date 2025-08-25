@@ -9,6 +9,7 @@ export interface ComprehensiveLiveStudioProps {
 export const ComprehensiveLiveStudio = (props: ComprehensiveLiveStudioProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default ComprehensiveLiveStudio;

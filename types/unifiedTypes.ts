@@ -228,18 +228,18 @@ export interface AudienceMetrics {
 }
 
 export interface DemographicData {
- ageGroups: Array<{ range: string; percentage: number }>;
+ ageGroups: Array<{ range: string; percentage: number }>
  gender: { male: number; female: number; other: number };
 }
 
 export interface GeographicData {
- countries: Array<{ country: string; percentage: number; views: number }>;
- cities: Array<{ city: string; country: string; percentage: number }>;
+ countries: Array<{ country: string; percentage: number; views: number }>
+ cities: Array<{ city: string; country: string; percentage: number }>
 }
 
 export interface DeviceData {
- types: Array<{ device: string; percentage: number }>;
- operatingSystems: Array<{ os: string; percentage: number }>;
+ types: Array<{ device: string; percentage: number }>
+ operatingSystems: Array<{ os: string; percentage: number }>
 }
 
 export interface PlaybackLocationData {
@@ -342,7 +342,7 @@ export interface Notification extends BaseEntity {
  isRead: boolean;
  actionUrl?: string;
  thumbnail?: string;
- metadata?: Record<string, any>;
+ metadata?: Record<string, any>
 }
 
 export type NotificationType =
@@ -393,7 +393,7 @@ export interface SearchFilters {
  uploadDate?: 'hour' | 'today' | 'week' | 'month' | 'year';
  sortBy?: 'relevance' | 'date' | 'views' | 'rating';
  quality?: 'hd' | '4k';
- features?: Array<'live' | 'hd' | '4k' | 'subtitles' | 'creative_commons'>;
+ features?: Array<'live' | 'hd' | '4k' | 'subtitles' | 'creative_commons'>
 }
 
 // API Types
@@ -417,7 +417,7 @@ export interface PaginationInfo {
 export interface ApiError {
  code: string;
  message: string;
- details?: Record<string, any>;
+ details?: Record<string, any>
  timestamp: string
 }
 
@@ -428,7 +428,7 @@ export interface FormField {
  type: "text" | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'date';
  required: boolean;
  placeholder?: string;
- options?: Array<{ value: string; label: string }>;
+ options?: Array<{ value: string; label: string }>
  validation?: ValidationRule;
  defaultValue?: any;
 }
@@ -441,9 +441,9 @@ export interface ValidationRule {
 }
 
 export interface FormState {
- values: Record<string, any>;
- errors: Record<string, string>;
- touched: Record<string, boolean>;
+ values: Record<string, any>
+ errors: Record<string, string>
+ touched: Record<string, boolean>
  isSubmitting: boolean;
  isValid: boolean
 }
@@ -517,10 +517,10 @@ export interface AuthContextType {
  user: User | null;
  isAuthenticated: boolean;
  isLoading: boolean;
- login: (email, password) => Promise<void>;
- register: (userData: RegisterData) => Promise<void>;
+ login: (email, password) => Promise<void>
+ register: (userData: RegisterData) => Promise<void>
  logout: () => void;
- updateProfile: (data: Partial<User>) => Promise<void>;
+ updateProfile: (data: Partial<User>) => Promise<void>
  refreshToken: () => Promise<void>
 }
 
@@ -560,20 +560,20 @@ export interface UseApiReturn<T> {
  data: T | null;
  loading: boolean;
  error: string | null;
- refetch: () => Promise<void>;
+ refetch: () => Promise<void>
  mutate: (newData: T) => void
 }
 
 export interface UseFormOptions {
- initialValues?: Record<string, any>;
- validationSchema?: Record<string, ValidationRule[]>;
+ initialValues?: Record<string, any>
+ validationSchema?: Record<string, ValidationRule[]>
  onSubmit?: (values: Record<string, any>) => Promise<void> | void;
 }
 
 export interface UseFormReturn {
- values: Record<string, any>;
- errors: Record<string, string>;
- touched: Record<string, boolean>;
+ values: Record<string, any>
+ errors: Record<string, string>
+ touched: Record<string, boolean>
  isSubmitting: boolean;
  isValid: boolean;
  setValue: (name, value: string | number) => void;
@@ -588,10 +588,8 @@ export type DeepPartial<T> = {
  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-
-export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
-
+export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>
 export type Nullable<T> = T | null;
 
 export type ValueOf<T> = T[keyof T];

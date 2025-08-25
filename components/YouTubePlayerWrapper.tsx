@@ -50,8 +50,8 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
  isYouTube: true as const });
 
  // Use YouTube Player - Best for simple YouTube integration;
- return (;)
- <YouTubePlayer;>;
+ return (
+ <YouTubePlayer;>
  video={createMockVideo(props.videoId)}
  {...(props.width !== undefined && { width: props.width }), }
  {...(props.height !== undefined && { height: props.height }), }

@@ -91,7 +91,7 @@ return duration;
  }) as any, HIDE_DELAY);
 
  // Cleanup timeouts on unmount;
- useEffect(() => {})
+ useEffect(() => {}) => {
  return () => {}
  if (hoverTimeoutRef.current) {}
  clearTimeout(hoverTimeoutRef.current);
@@ -99,17 +99,17 @@ return duration;
  clearTimeout(hideTimeoutRef.current);
  }}, []);
 
- return (;)
- <div;>;
+ return (
+ <div>
 // FIXED:  className={`group cursor - pointer ${className}`, }
  onMouseEnter={handleMouseEnter}
- onMouseLeave={handleMouseLeave} />;
+ onMouseLeave={handleMouseLeave} />
  {/* Video Thumbnail */}
- <div className={"relativ}e mb - 3">;
- <Link to={`/watch/${video.id}`}>;
- <div className={"relativ}e w - full" style={{ height: '250px' }}>;
+ <div className={"relativ}e mb - 3">
+ <Link to={`/watch/${video.id}`}>
+ <div className={"relativ}e w - full" style={{ height: '250px' }}>
  {/* Main thumbnail */}
- <ImageWithFallback;>;
+ <ImageWithFallback;>
 // FIXED:  src={video.thumbnailUrl, }
 // FIXED:  alt={video.title, }
 // FIXED:  className={"absolut}e inset - 0 w - full h - full object - cover rounded - xl"
@@ -118,66 +118,65 @@ return duration;
  fallbackSrc={`https://picsum.photos / 320 / 250?random="${video.id}`}" /> />
 
  {/* Animated preview overlay */}
- {showPreview && videoId && (})
- <div className={"absolut}e inset - 0 w - full h - full rounded - lg overflow - hidden">;
+ {showPreview && videoId && (}) => {
+ <div className={"absolut}e inset - 0 w - full h - full rounded - lg overflow - hidden">
  {/* Enhanced preview effect with animated elements */}
- <div className={"absolut}e inset - 0 bg - gradient - to - r from - red - 600 / 20 via - transparent to - red - 600 / 20 animate - pulse" />;
- <div className={"absolut}e inset - 0 bg - gradient - to - t from - black / 30 via - transparent to - black / 30" />;
-
+ <div className={"absolut}e inset - 0 bg - gradient - to - r from - red - 600 / 20 via - transparent to - red - 600 / 20 animate - pulse" />
+ <div className={"absolut}e inset - 0 bg - gradient - to - t from - black / 30 via - transparent to - black / 30" />
  {/* Animated play icon */}
- <div className={"absolut}e inset - 0 flex items - center justify - center">;
- <div className={"b}g - red - 600 bg - opacity - 90 rounded - full p - 4 transform scale - 110 animate - pulse">;
- <svg;>;
+ <div className={"absolut}e inset - 0 flex items - center justify - center">
+ <div className={"b}g - red - 600 bg - opacity - 90 rounded - full p - 4 transform scale - 110 animate - pulse">
+ <svg;>
 // FIXED:  className="w - 10 h - 10 text - white animate - pulse"
  fill="currentColor";
- viewBox="0 0 24 24" />;
- <path d="M8 5v14l11 - 7z" />;
+ viewBox="0 0 24 24" />
+ <path d="M8 5v14l11 - 7z" />
 // FIXED:  </svg>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Preview indicators */}
- <div className={"absolut}e top - 3 left - 3 flex gap - 2">;
- <div className={"b}g - red - 600 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">;
+ <div className={"absolut}e top - 3 left - 3 flex gap - 2">
+ <div className={"b}g - red - 600 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">
  ▶ Preview;
 // FIXED:  </div>
-<div className={"b}g - black / 70 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">;
+<div className={"b}g - black / 70 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">
  HD;
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Animated progress bar */}
- <div className={"absolut}e bottom - 4 left - 4 right - 4">;
- <div className="w - full h - 1 bg - white / 30 rounded - full overflow - hidden">;
- <div className="h - full bg - red - 600 rounded - full animate - progress - bar" />;
+ <div className={"absolut}e bottom - 4 left - 4 right - 4">
+ <div className="w - full h - 1 bg - white / 30 rounded - full overflow - hidden">
+ <div className="h - full bg - red - 600 rounded - full animate - progress - bar" />
 // FIXED:  </div>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Play button overlay - shown on hover when not in preview mode */}
- {isHovered && !showPreview && (})
- <div className={"absolut}e inset - 0 flex items - center justify - center bg - black / 20 transition - all duration - 200">;
- <div className={"b}g - black bg - opacity - 70 rounded - full p - 3 transform scale - 110 transition - transform duration - 200">;
- <svg;>;
+ {isHovered && !showPreview && (}) => {
+ <div className={"absolut}e inset - 0 flex items - center justify - center bg - black / 20 transition - all duration - 200">
+ <div className={"b}g - black bg - opacity - 70 rounded - full p - 3 transform scale - 110 transition - transform duration - 200">
+ <svg;>
 // FIXED:  className="w - 8 h - 8 text - white"
  fill="currentColor";
- viewBox="0 0 24 24" />;
- <path d="M8 5v14l11 - 7z" />;
+ viewBox="0 0 24 24" />
+ <path d="M8 5v14l11 - 7z" />
 // FIXED:  </svg>
 // FIXED:  </div>
 // FIXED:  </div>
 
  {/* Duration Badge */}
- {video.duration && video.duration !== '0:00' && (, })
- <div className={`absolute bottom - 2 right - 2 bg - black bg - opacity - 80 text - white text - xs px - 2 py - 1 rounded - sm font - medium transition - all duration - 200 ${}>;
- showPreview ? 'opacity - 0 transform translate - y - 2' : 'opacity - 100' />;
+ {video.duration && video.duration !== '0:00' && (, }) => {
+ <div className={`absolute bottom - 2 right - 2 bg - black bg - opacity - 80 text - white text - xs px - 2 py - 1 rounded - sm font - medium transition - all duration - 200 ${}>
+ showPreview ? 'opacity - 0 transform translate - y - 2' : 'opacity - 100' />
  }`}>
  {formatDuration(video.duration)}
 // FIXED:  </div>
 
  {/* Hover indicator during delay */}
- {isHovered && !showPreview && videoId && (})
- <div className={"absolut}e top - 2 left - 2 bg - red - 600 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">;
+ {isHovered && !showPreview && videoId && (}) => {
+ <div className={"absolut}e top - 2 left - 2 bg - red - 600 text - white text - xs px - 2 py - 1 rounded - sm font - medium animate - fade - in">
  Hover to preview;
 // FIXED:  </div>
 // FIXED:  </div>
@@ -185,15 +184,15 @@ return duration;
 // FIXED:  </div>
 
  {/* Video Info */}
- <div className={"fle}x gap - 3">;
+ <div className={"fle}x gap - 3">
  {/* Channel Avatar */}
- {video.channelAvatarUrl && (})
- <Link to={`/channel/${video.channelId}`} className={"fle}x - shrink - 0">;
- <ImageWithFallback;>;
+ {video.channelAvatarUrl && (}) => {
+ <Link to={`/channel/${video.channelId}`} className={"fle}x - shrink - 0">
+ <ImageWithFallback;>
 // FIXED:  src={video.channelAvatarUrl, }
 // FIXED:  alt={video.channelName, }
 // FIXED:  className={`w - 9 h - 9 rounded - full object - cover transition - transform duration - 200 ${, }
- isHovered ? 'transform scale - 110 ring - 2 ring - red - 500 / 50' : '';
+ isHovered ? 'transform scale - 110 ring - 2 ring - red - 500 / 50' : ''
  }`}
  width={36}
  height={36}
@@ -201,31 +200,31 @@ return duration;
 // FIXED:  </Link>
 
  {/* Video Details */}
- <div className={"fle}x - 1 min - w - 0">;
+ <div className={"fle}x - 1 min - w - 0">
  {/* Video Title */}
- <Link to={`/watch/${video.id}`}>;
- <h3 className={`font - medium text - black dark:text - white line - clamp - 2 text - sm leading - 5 mb - 1 transition - colors duration - 200 ${}>;
- isHovered ? 'text - blue - 600 dark:text - blue - 400' : '' />;
+ <Link to={`/watch/${video.id}`}>
+ <h3 className={`font - medium text - black dark:text - white line - clamp - 2 text - sm leading - 5 mb - 1 transition - colors duration - 200 ${}>
+ isHovered ? 'text - blue - 600 dark:text - blue - 400' : '' />
  }`}>
  {video.title}
 // FIXED:  </h3>
 // FIXED:  </Link>
 
  {/* Channel Name */}
- <Link to={`/channel/${video.channelId}`}>;
- <p className={`text - gray - 600 dark:text - gray - 400 text - sm transition - colors duration - 200 ${}>;
- isHovered ? 'text - gray - 800 dark:text - white' : '' />;
+ <Link to={`/channel/${video.channelId}`}>
+ <p className={`text - gray - 600 dark:text - gray - 400 text - sm transition - colors duration - 200 ${}>
+ isHovered ? 'text - gray - 800 dark:text - white' : '' />
  }`}>
  {video.channelName}
 // FIXED:  </p>
 // FIXED:  </Link>
 
  {/* Views and Upload Time */}
- <div className={"fle}x items - center text - gray - 600 dark:text - gray - 400 text - sm">;
- <span>{formatViews(video.views)} views</span>;
- <span className={"m}x - 1">•</span>;
- <span>;
- {(() => {})
+ <div className={"fle}x items - center text - gray - 600 dark:text - gray - 400 text - sm">
+ <span>{formatViews(video.views)} views</span>
+ <span className={"m}x - 1">•</span>
+ <span>
+ {(() => {}) => {
  try {}
  const date = new Date(video.uploadedAt);
  if (isNaN(date.getTime())) {}
@@ -258,6 +257,6 @@ return duration;
 
  .animate - progress - bar {}
  animation: progress - bar 3s linear infinite;
- `}</style>;
+ `}</style>
 // FIXED:  </div>
 export default SimpleHoverVideoCard;

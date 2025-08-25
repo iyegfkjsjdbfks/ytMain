@@ -5,6 +5,7 @@ export interface LayoutProps {
   children?: React.ReactNode;
       className?: string, 
 
+}
 export const Layout: React.FC<LayoutProps> = ({ children, className = '' }) => {
   return React.createElement('div', {)
     className: 'layout-container ' + className, 

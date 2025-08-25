@@ -9,6 +9,7 @@ export interface MobileVideoGridProps {
 export const MobileVideoGrid = (props: MobileVideoGridProps) => {
   return React.createElement('div', {)
     className: props.className, 
+}
   }, props.children || 'Component ready');
 
 export default MobileVideoGrid;

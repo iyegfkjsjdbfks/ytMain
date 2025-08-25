@@ -5,8 +5,7 @@ export interface PerformanceMetric {
  startTime: number;
  endTime?: number;
  duration?: number;
- metadata?: Record<string, any>;
-
+ metadata?: Record<string, any>
 export class PerformanceMonitor {
  private metrics: Map<string, PerformanceMetric> = new Map();
  private observers: PerformanceObserver[] = [];

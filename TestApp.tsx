@@ -41,7 +41,7 @@ const router = createBrowserRouter(
 
 const TestApp: React.FC = () => {
   console.log('TestApp: React Router v7 future flags are enabled');
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 };
 
 export default TestApp;
