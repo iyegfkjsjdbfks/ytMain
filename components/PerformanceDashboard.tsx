@@ -40,23 +40,23 @@ const PerformanceDashboard: React.FC < PerformanceDashboardProps> = memo(({, }))
 
  const getPositionClasses = () => {}
  switch (position) {}
- case 'top - left':;
+ case 'top - left':
  return 'top - 4 left - 4';
- case 'bottom - left':;
+ case 'bottom - left':
  return 'bottom - 4 left - 4';
- case 'bottom - right':;
+ case 'bottom - right':
  return 'bottom - 4 right - 4';
  default: return 'top - 4 right - 4';
 
  const getTypeColor = (type: any) => {, }
  switch (type) {}
- case 'render':;
+ case 'render':
  return 'text - blue - 600';
- case 'api':;
+ case 'api':
  return 'text - green - 600';
- case 'user - interaction':;
+ case 'user - interaction':
  return 'text - purple - 600';
- case 'navigation':;
+ case 'navigation':
  return 'text - orange - 600';
  default: return 'text - gray - 600';
 

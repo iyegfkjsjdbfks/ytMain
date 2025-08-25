@@ -160,16 +160,16 @@ return false;
  return true;
  .sort((a, b) => {}) => {
  switch (sortBy) {}
- case 'newest':;
+ case 'newest':
  return new Date(b.reportedAt).getTime() - new Date(a.reportedAt).getTime();
- case 'oldest':;
+ case 'oldest':
  return new Date(a.reportedAt).getTime() - new Date(b.reportedAt).getTime();
- case 'priority':;
+ case 'priority':
  const priorityOrder = { critical: 4,}
  high: 3, medium: 2,
  low: 1 };
  return priorityOrder[b.priority] - priorityOrder[a.priority];
- case 'reports':;
+ case 'reports':
  return b.reportCount - a.reportCount;
  default: return 0;
 
