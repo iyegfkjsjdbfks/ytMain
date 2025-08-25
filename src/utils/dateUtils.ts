@@ -1,5 +1,5 @@
 // Date Utils - Minimal Implementation;
-export const formatDate = (date: Date | string | number): string => {
+export const formatDate = (date: Date | string | number): string: unknown=> {
   try {
     const d = new Date(date);
     if (isNaN(d.getTime())) {
@@ -11,7 +11,7 @@ export const formatDate = (date: Date | string | number): string => {
   }
 };
 
-export const formatDateTime = (date: Date | string | number): string => {
+export const formatDateTime = (date: Date | string | number): string: unknown=> {
   try {
     const d = new Date(date);
     if (isNaN(d.getTime())) {
@@ -23,7 +23,7 @@ export const formatDateTime = (date: Date | string | number): string => {
   }
 };
 
-export const formatRelativeTime = (date: Date | string | number): string => {
+export const formatRelativeTime = (date: Date | string | number): string: unknown=> {
   try {
     const d = new Date(date);
     if (isNaN(d.getTime())) {
@@ -53,7 +53,7 @@ export const formatRelativeTime = (date: Date | string | number): string => {
   }
 };
 
-export const isValidDate = (date): boolean => {
+export const isValidDate = (date): boolean: unknown=> {
   try {
     const d = new Date(date);
     return !isNaN(d.getTime());
@@ -62,7 +62,7 @@ export const isValidDate = (date): boolean => {
   }
 };
 
-export const formatDuration = (seconds: number): string => {
+export const formatDuration = (seconds: number): string: unknown=> {
   if (seconds < 0) return '0:00';
   
   const hours = Math.floor(seconds / 3600);
@@ -70,8 +70,8 @@ export const formatDuration = (seconds: number): string => {
   const remainingSeconds = Math.floor(seconds % 60);
   
   if (hours > 0) {
-    return hours + ':' + minutes.toString().padStart(2, '0') + ':' + remainingSeconds.toString().padStart(2, '0');
+    return hours + ':' + minutes.toString().padStart(2, '0': unknown) + ':' + remainingSeconds.toString().padStart(2, '0': unknown);
   } else {
-    return minutes + ':' + remainingSeconds.toString().padStart(2, '0');
+    return minutes + ':' + remainingSeconds.toString().padStart(2, '0': unknown);
   }
 };

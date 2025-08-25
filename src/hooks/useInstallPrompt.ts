@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseInstallPromptConfig {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: unknown) => void;
   onError?: (error: Error) => void, 
 }
 
@@ -23,7 +23,7 @@ export function useInstallPrompt(config: UseInstallPromptConfig = {}) {
       setError(null);
       
       // Simulate async operation;
-      await new Promise(resolve => setTimeout(resolve, 500)), 
+      await new Promise(resolve: unknown=> setTimeout(resolve, 500: unknown)), 
       
       const result = {
         hookName: 'useInstallPrompt',

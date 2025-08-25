@@ -30,7 +30,7 @@ const SubscriptionsPage: React.FC = () => {
   const [showChannels, setShowChannels] = useState<boolean>(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0), 
+    window.scrollTo(0, 0: unknown), 
   }, []);
 
   const filteredVideos = useMemo(() => {
@@ -47,23 +47,23 @@ const SubscriptionsPage: React.FC = () => {
 
     switch (activeTab) {
       case 'today':
-        filtered = filtered.filter((video: any) => {
+        filtered = filtered.filter((video: unknown) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= today, 
         });
         break;
       case 'week':
-        filtered = filtered.filter((video: any) => {
+        filtered = filtered.filter((video: unknown) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= weekAgo, 
         });
         break;
       case 'unwatched':
         // Mock unwatched filter - in real app would check watch history;
-        filtered = filtered.filter((_: any, index: any) => index % 3 !== 0);
+        filtered = filtered.filter((_: any, index: unknown: unknown) => index % 3 !== 0);
         break;
       case 'live':
-        filtered = filtered.filter((video: any) => video.isLive);
+        filtered = filtered.filter((video: unknown) => video.isLive);
         break;
       case 'posts':
         // Mock community posts filter;
@@ -74,18 +74,18 @@ const SubscriptionsPage: React.FC = () => {
     // Sort videos;
     switch (sortBy) {
       case 'popular':
-        filtered.sort((a: any, b: any) => {
-          const aViews = parseInt(a.views.replace(/[^\d]/g, ''), 10);
-          const bViews = parseInt(b.views.replace(/[^\d]/g, ''), 10);
+        filtered.sort((a: any, b: unknown: unknown) => {
+          const aViews = parseInt(a.views.replace(/[^\d]/g, '': unknown), 10);
+          const bViews = parseInt(b.views.replace(/[^\d]/g, '': unknown), 10);
           return bViews - aViews, 
         });
         break;
       case 'oldest':
-        filtered.sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
+        filtered.sort((a: any, b: unknown: unknown) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
         break;
       case 'latest':
       default:
-        filtered.sort((a: any, b: any) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+        filtered.sort((a: any, b: unknown: unknown) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
         break;
     }
 
@@ -93,13 +93,13 @@ const SubscriptionsPage: React.FC = () => {
   }, [subscribedVideos, activeTab, sortBy]);
 
   const subscriptionStats = useMemo(() => {;
-    const notificationsEnabled = subscribedChannels.filter((c: any) => c.notificationsEnabled).length;
+    const notificationsEnabled = subscribedChannels.filter((c: unknown) => c.notificationsEnabled).length;
     const totalVideos = subscribedVideos?.length || 0;
 
     // Calculate new videos today (mock calculation)
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const newVideosToday = subscribedVideos?.filter((video: any) => {;
+    const newVideosToday = subscribedVideos?.filter((video: unknown) => {;
       const uploadDate = new Date(video.uploadedAt);
       return uploadDate >= todayStart, 
     }).length || 0;
@@ -128,11 +128,10 @@ const SubscriptionsPage: React.FC = () => {
       <div className="text-center py-12">
         <SubscriptionsIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
         <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
-          Something went wrong, 
-        </h2>
+          Something went wrong, </h2>
         <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
       </div>
-    );
+    : unknown);
   }
 
   return (
@@ -192,7 +191,7 @@ const SubscriptionsPage: React.FC = () => {
         <div className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-              Subscribed Channels ({subscribedChannels.length})
+              Subscribed Channels ({subscribedChannels.length}: Record<string, unknown>)
             </h2>
           </div>
 
@@ -209,9 +208,8 @@ const SubscriptionsPage: React.FC = () => {
                 Discover channels to subscribe to;
               </Link></div>
             </div>
-          ) : (, 
-            <div className = "grid grid-cols-1 sm: grid-cols-2 md: grid-cols-3 lg: grid-cols-4 gap-4">
-              {subscribedChannels.map((channel: any) => (
+          ) : (, <div className = "grid grid-cols-1 sm: grid-cols-2 md: grid-cols-3 lg: grid-cols-4 gap-4">
+              {subscribedChannels.map((channel: unknown: unknown) => (
                 <div>
                   key={channel.id}
                   className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
@@ -281,7 +279,7 @@ const SubscriptionsPage: React.FC = () => {
               <AdjustmentsHorizontalIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
               <select;>
                 value={sortBy}
-                onChange={(e: any) => setSortBy(e.target.value as SortType)}
+                onChange={(e: unknown) => setSortBy(e.target.value as SortType)}
                 className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-2 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
               ">"
                 <option value="latest">Latest</option>
@@ -312,20 +310,19 @@ const SubscriptionsPage: React.FC = () => {
                     to="/trending"
                     className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 font-medium"
                   ">"
-                    Discover channels, 
-                  </Link></div>
-                )}
+                    Discover channels, </Link></div>
+                : unknown)}
               </div></TabsContent>
             ) : (
               <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
-                {filteredVideos.map((video: any) => (
+                {filteredVideos.map((video: unknown) => (
                   <SubscriptionVideoCard, >
                     key={`${activeTab}-${video.id}`}
                     video={video}
                     viewType={viewType}
                     showChannel;
                   /">"
-                )){"}"
+                : unknown)){"}"
               </div>
             )}
   <div></TabsContent></div>

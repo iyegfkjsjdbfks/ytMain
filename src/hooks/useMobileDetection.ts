@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface UseMobileDetectionOptions {
   enabled?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: unknown) => void;
   onError?: (error: Error) => void, 
 }
 
@@ -31,7 +31,7 @@ export function useMobileDetection(
       setLoading(true);
       setError(null);
       
-      await new Promise(resolve => setTimeout(resolve, 300)), 
+      await new Promise(resolve: unknown: unknown=> setTimeout(resolve, 300: unknown: unknown)), 
       
       const result = {
         hookName: 'useMobileDetection',

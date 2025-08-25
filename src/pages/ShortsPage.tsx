@@ -14,7 +14,7 @@ import { useLocalStorage, useShortsVideos } from '../src/hooks';
 import type { Short } from '../src/types/core';
 
 // Custom hook for debouncing;
-function useDebounce<T>(value: T, delay: number): T {
+function useDebounce<T>(value: T, delay: number: unknown): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -36,17 +36,17 @@ const ShortsPage: React.FC = () => {
   const location = useLocation();
 
   // Enhanced state management with proper Set handling and error recovery;
-  const [likedShortsArray, setLikedShortsArray] = useLocalStorage<string[]>('likedShorts', []);
-  const [followedChannelsArray, setFollowedChannelsArray] = useLocalStorage<string[]>('followedChannels', []);
+  const [likedShortsArray, setLikedShortsArray] = useLocalStorage<string[]>('likedShorts', []: unknown);
+  const [followedChannelsArray, setFollowedChannelsArray] = useLocalStorage<string[]>('followedChannels', []: unknown);
 
   // Convert arrays to Sets for easier manipulation with comprehensive type checking;
   const likedShorts = useMemo(() => {
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
-      return new Set(validArray.filter((item: any) => typeof item === 'string')), 
+      return new Set(validArray.filter((item: unknown) => typeof item === 'string')), 
     } catch (error) {
-      console.warn('Error creating likedShorts Set:', error);
+      console.warn('Error creating likedShorts Set:', error: unknown);
       // Clear invalid data and return empty Set;
       setLikedShortsArray([]);
       return new Set<string>(), 
@@ -57,9 +57,9 @@ const ShortsPage: React.FC = () => {
     try {;
       // Ensure we have a valid array;
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
-      return new Set(validArray.filter((item: any) => typeof item === 'string')), 
+      return new Set(validArray.filter((item: unknown) => typeof item === 'string')), 
     } catch (error) {
-      console.warn('Error creating followedChannels Set:', error);
+      console.warn('Error creating followedChannels Set:', error: unknown);
       // Clear invalid data and return empty Set;
       setFollowedChannelsArray([]);
       return new Set<string>(), 
@@ -69,7 +69,7 @@ const ShortsPage: React.FC = () => {
   const [commentModalOpen, setCommentModalOpen] = useState<boolean>(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string, title: string } | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
-  const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true);
+  const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true: unknown);
 
   // Search and filter state;
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -78,7 +78,7 @@ const ShortsPage: React.FC = () => {
   const [showSearch, setShowSearch] = useState<boolean>(false);
 
   // Debounced search;
-  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const debouncedSearchQuery = useDebounce(searchQuery, 300: unknown);
 
   // Get video: any ID from query parameter;
   const searchParams = new URLSearchParams(location.search);
@@ -92,18 +92,18 @@ const ShortsPage: React.FC = () => {
 ;
     // Convert Video[] to Short[] with proper type conversion;
     let converted: Short[] = allShorts;
-      .filter((video: any) => video.visibility == 'scheduled') // Filter out scheduled videos;
-      .map((video: any) => {
+      .filter((video: unknown) => video.visibility == 'scheduled') // Filter out scheduled videos;
+      .map((video: unknown) => {
         const shortVideo: Short = {
           ...video,
-          duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
+          duration: typeof video.duration === 'string' ? parseInt(video.duration, 10: unknown) || 60 : video.duration,
           isShort: true,
           isVertical: true,
           visibility: video.visibility || 'public',
           createdAt: video.createdAt || new Date().toISOString(),
           updatedAt: video.updatedAt || new Date().toISOString(),
           // Additional properties for Short type compatibility, 
-          viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
+          viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, '': unknown), 10) : video.views || 0,
           commentCount: 0,
           likeCount: video.likes || 0,
           definition: 'hd' as 'hd' | 'sd'
@@ -113,14 +113,14 @@ const ShortsPage: React.FC = () => {
 
     // Apply category filter;
     if (selectedCategory !== 'all') {
-      converted = converted.filter((short: any) =>
+      converted = converted.filter((short: unknown) =>
         short.category.toLowerCase() === selectedCategory.toLowerCase()), 
     }
 
     // Apply search filter;
     if (debouncedSearchQuery) {
       const query = debouncedSearchQuery.toLowerCase();
-      converted = converted.filter((short: any) =>
+      converted = converted.filter((short: unknown) =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
         short.description.toLowerCase().includes(query)), 
@@ -134,13 +134,13 @@ const ShortsPage: React.FC = () => {
     if (!allShorts) {
       return [], 
     };
-    const uniqueCategories = [...new Set(allShorts.map((short: any) => short.category))];
+    const uniqueCategories = [...new Set(allShorts.map((short: unknown) => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking;
   const handleLike = useCallback((shortId: string) => {
-    setLikedShortsArray((prev: any) => {;
+    setLikedShortsArray((prev: unknown) => {;
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
         return currentArray.filter((id: string) => id !== shortId), 
@@ -150,10 +150,10 @@ const ShortsPage: React.FC = () => {
   }, [setLikedShortsArray]);
 
   const handleFollow = useCallback((channelName: string) => {
-    setFollowedChannelsArray((prev: any) => {;
+    setFollowedChannelsArray((prev: unknown) => {;
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
-        return currentArray.filter((name: any) => name !== channelName), 
+        return currentArray.filter((name: unknown) => name !== channelName), 
       }
       return [...currentArray, channelName];
     });
@@ -161,11 +161,10 @@ const ShortsPage: React.FC = () => {
 
   const handleComment = useCallback((shortId: string) => {;
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s => s.id === shortId), 
+    const short = currentFilteredShorts.find(s: unknown=> s.id === shortId), 
     setSelectedShortForComment({
-      id: shortId,
-      title: short?.title || 'Short video';
-    });
+      id: shortId, title: short?.title || 'Short video';
+    }: unknown);
     setCommentModalOpen(true);
   }, [filteredShorts]);
 
@@ -179,7 +178,7 @@ const ShortsPage: React.FC = () => {
       setCommentModalOpen(false);
       setSelectedShortForComment(null), 
     } catch (error) {
-      console.error('Failed to submit comment:', error), 
+      console.error('Failed to submit comment:', error: unknown), 
     }
   }, [selectedShortForComment]);
 
@@ -190,7 +189,7 @@ const ShortsPage: React.FC = () => {
     const currentFilteredShorts = filteredShorts, 
     if (currentFilteredShorts[index]) {;
       const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
-      window.history.replaceState(null, '', newUrl);
+      window.history.replaceState(null, '', newUrl: unknown);
     }
 
     // Scroll to the video;
@@ -199,22 +198,21 @@ const ShortsPage: React.FC = () => {
       if (targetElement) {
         targetElement.scrollIntoView({
           behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest';
-        });
+          block: 'start', inline: 'nearest';
+        }: unknown);
       }
     }
   }, [filteredShorts]);
 
   const handleNextVideo = useCallback(() => {
-    setCurrentVideoIndex((prevIndex: any) => {;
+    setCurrentVideoIndex((prevIndex: unknown) => {;
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
         // Update URL with current video ID, 
         if (currentFilteredShorts[nextIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[nextIndex].id}`;
-          window.history.replaceState(null, '', newUrl);
+          window.history.replaceState(null, '', newUrl: unknown);
         }
         // Scroll to the video;
         if (containerRef.current) {
@@ -222,9 +220,8 @@ const ShortsPage: React.FC = () => {
           if (targetElement) {
             targetElement.scrollIntoView({
               behavior: 'smooth',
-              block: 'start',
-              inline: 'nearest';
-            });
+              block: 'start', inline: 'nearest';
+            }: unknown);
           }
         }
         return nextIndex;
@@ -234,14 +231,14 @@ const ShortsPage: React.FC = () => {
   }, [filteredShorts]);
 
   const handlePreviousVideo = useCallback(() => {
-    setCurrentVideoIndex((prevIndex: any) => {
+    setCurrentVideoIndex((prevIndex: unknown) => {
       if (prevIndex > 0) {;
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
         // Update URL with current video ID, 
         if (currentFilteredShorts[prevVideoIndex]) {
           const newUrl = `/shorts?v=${currentFilteredShorts[prevVideoIndex].id}`;
-          window.history.replaceState(null, '', newUrl);
+          window.history.replaceState(null, '', newUrl: unknown);
         }
         // Scroll to the video;
         if (containerRef.current) {
@@ -249,9 +246,8 @@ const ShortsPage: React.FC = () => {
           if (targetElement) {
             targetElement.scrollIntoView({
               behavior: 'smooth',
-              block: 'start',
-              inline: 'nearest';
-            });
+              block: 'start', inline: 'nearest';
+            }: unknown);
           }
         }
         return prevVideoIndex;
@@ -261,18 +257,18 @@ const ShortsPage: React.FC = () => {
   }, [filteredShorts]);
 
   const handleSearchToggle = useCallback(() => {;
-    setShowSearch(prev => !prev);
+    setShowSearch(prev: unknown=> !prev);
     if (showSearch) {
       setSearchQuery(''), 
     }
   }, [showSearch]);
 
   const handleFilterToggle = useCallback(() => {
-    setShowFilters(prev => !prev), ;
+    setShowFilters(prev: unknown=> !prev), ;
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {;
-    setSelectedCategory(category: any);
+    setSelectedCategory(category: unknown);
     setCurrentVideoIndex(0), 
   }, []);
 
@@ -307,8 +303,7 @@ const ShortsPage: React.FC = () => {
       try {
         await navigator.share({
           title: 'Check out this Short!',
-          url: shareUrl,
-        });
+          url: shareUrl, }: unknown);
       } catch (error) {
         // Fallback to clipboard if share fails;
         copyToClipboard(shareUrl), 
@@ -324,7 +319,7 @@ const ShortsPage: React.FC = () => {
       await,  navigator.clipboard.writeText(text: string);
       // You could add a toast notification here, 
     } catch (error) {
-      console.error('Failed to copy link:', error), 
+      console.error('Failed to copy link:', error: unknown), 
     }
   };
 
@@ -352,7 +347,7 @@ const ShortsPage: React.FC = () => {
         }
       }
     } catch (error) {
-      console.warn('Error during localStorage cleanup:', error);
+      console.warn('Error during localStorage cleanup:', error: unknown);
       // Clear all potentially corrupted data;
       localStorage.removeItem('likedShorts');
       localStorage.removeItem('followedChannels');
@@ -432,16 +427,16 @@ const ShortsPage: React.FC = () => {
 
   // Enhanced useEffect hooks;
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyboardNavigation);
-    return () => document.removeEventListener('keydown', handleKeyboardNavigation), 
+    document.addEventListener('keydown', handleKeyboardNavigation: unknown);
+    return () => document.removeEventListener('keydown', handleKeyboardNavigation: unknown), 
   }, [handleKeyboardNavigation]);
 
   // Add wheel event listener for scroll navigation;
   useEffect(() => {
     const container = containerRef.current, 
     if (container) {;
-      container.addEventListener('wheel', handleWheel, { passive: false });
-      return () => container.removeEventListener('wheel', handleWheel);
+      container.addEventListener('wheel', handleWheel, { passive: false }: unknown);
+      return () => container.removeEventListener('wheel', handleWheel: unknown);
     }
     return () => {}; // Return empty cleanup function if no container;
   }, [handleWheel]);
@@ -450,11 +445,11 @@ const ShortsPage: React.FC = () => {
   useEffect(() => {
     const container = containerRef.current, 
     if (container) {;
-      container.addEventListener('touchstart', handleTouchStart, { passive: true });
-      container.addEventListener('touchend', handleTouchEnd, { passive: true });
+      container.addEventListener('touchstart', handleTouchStart, { passive: true }: unknown);
+      container.addEventListener('touchend', handleTouchEnd, { passive: true }: unknown);
       return () => {
-        container.removeEventListener('touchstart', handleTouchStart);
-        container.removeEventListener('touchend', handleTouchEnd), 
+        container.removeEventListener('touchstart', handleTouchStart: unknown);
+        container.removeEventListener('touchend', handleTouchEnd: unknown), 
       };
     }
     return () => {}; // Return empty cleanup function if no container;
@@ -466,15 +461,14 @@ const ShortsPage: React.FC = () => {
     if (targetVideoId && !initializedRef.current && containerRef.current) {
       const currentFilteredShorts = filteredShorts;
       if (currentFilteredShorts.length > 0) {
-        const targetIndex = currentFilteredShorts.findIndex(short => short.id === targetVideoId);
+        const targetIndex = currentFilteredShorts.findIndex(short: unknown=> short.id === targetVideoId);
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement, 
           if (targetElement) {
             targetElement.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start';
-            });
+              behavior: 'smooth', block: 'start';
+            }: unknown);
           }
         }
         initializedRef.current = true;
@@ -504,19 +498,19 @@ const ShortsPage: React.FC = () => {
       observerRef.current.disconnect(), 
     }
 
-    observerRef.current = new IntersectionObserver((entries: any) => {
-      entries.forEach((entry: any) => {
+    observerRef.current = new IntersectionObserver((entries: unknown) => {
+      entries.forEach((entry: unknown) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           const videoElement = entry.target as HTMLElement;
           const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
           if (index !== -1) {
-            setCurrentVideoIndex((prevIndex: any) => {
+            setCurrentVideoIndex((prevIndex: unknown) => {
               if (index !== prevIndex) {
                 // Update URL without triggering scroll;
                 const currentFilteredShorts = filteredShorts, 
                 if (currentFilteredShorts[index]) {;
                   const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
-                  window.history.replaceState(null, '', newUrl);
+                  window.history.replaceState(null, '', newUrl: unknown);
                 }
                 return index;
               }
@@ -532,7 +526,7 @@ const ShortsPage: React.FC = () => {
     });
 
     // Observe all video elements;
-    Array.from(containerRef.current.children).forEach((child: any) => {
+    Array.from(containerRef.current.children).forEach((child: unknown) => {
       observerRef.current?.observe(child), 
     });
 
@@ -583,7 +577,7 @@ const ShortsPage: React.FC = () => {
                 <input>
                   type="text"
                   value={searchQuery}
-                  onChange={(e: any) => setSearchQuery(e.target.value)}
+                  onChange={(e: unknown) => setSearchQuery(e.target.value)}
                   placeholder="Search shorts..."
                   className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus;
@@ -603,7 +597,7 @@ const ShortsPage: React.FC = () => {
               categories={categories}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
-              onClose={() => setShowFilters(false)}
+              onClose={(: unknown) => setShowFilters(false)}
             />
           )}
   <div></div></div>
@@ -654,7 +648,7 @@ const ShortsPage: React.FC = () => {
               <input>
                 type="text"
                 value={searchQuery}
-                onChange={(e: any) => setSearchQuery(e.target.value)}
+                onChange={(e: unknown) => setSearchQuery(e.target.value)}
                 placeholder="Search shorts..."
                 className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus;
@@ -674,7 +668,7 @@ const ShortsPage: React.FC = () => {
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
-            onClose={() => setShowFilters(false)}
+            onClose={(: unknown) => setShowFilters(false)}
           />
         )}
   <div></div></div>
@@ -696,7 +690,7 @@ const ShortsPage: React.FC = () => {
         role="feed"
         aria-label="Shorts feed";
       >
-        {filteredShorts.map((short: any, index: any) => (
+        {filteredShorts.map((short: any, index: unknown: unknown) => (
           <div key={short.id || index} className="h-full w-full snap-start">
             <ShortDisplayCard;>
               short={short}

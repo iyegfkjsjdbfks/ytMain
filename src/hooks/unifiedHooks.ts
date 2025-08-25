@@ -15,7 +15,7 @@ export class UnifiedHooks {
     };
   }
 
-  async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  async request<T>(endpoint: string, options: RequestInit = {}: unknown): Promise<T> {
     const url = this.config.baseUrl + endpoint;
     
     try {
@@ -23,9 +23,8 @@ export class UnifiedHooks {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers, 
-        };
-      });
+          ...options.headers, };
+      }: unknown);
 
       if (!response.ok) {
         throw new Error('Request failed: ' + response.status), 
@@ -33,19 +32,18 @@ export class UnifiedHooks {
 
       return await response.json();
     } catch (error) {
-      console.error('Service error:', error);
+      console.error('Service error:', error: unknown);
       throw error, 
     }
   }
 
   async get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: 'GET' });
+    return this.request<T>(endpoint, { method: 'GET' }: unknown);
   }
 
-  async post<T>(endpoint: string, data): Promise<T> {
+  async post<T>(endpoint: string, data: unknown): Promise<T> {
     return this.request<T>(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(data)
+      method: 'POST', body: JSON.stringify(data: unknown)
     });
   }
 }

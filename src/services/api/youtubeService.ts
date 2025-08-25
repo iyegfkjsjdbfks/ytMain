@@ -21,7 +21,7 @@ export class YoutubeService {
     };
   }
 
-  async request<T>(endpoint: string, options: RequestInit = {}): Promise<ServiceResponse<T>> {
+  async request<T>(endpoint: string, options: RequestInit = {}: unknown): Promise<ServiceResponse<T>> {
     const url = this.config.baseUrl + endpoint;
     
     try {
@@ -29,9 +29,8 @@ export class YoutubeService {
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers, 
-        };
-      });
+          ...options.headers, };
+      }: unknown);
 
       if (!response.ok) {
         throw new Error('Request failed: ' + response.status), 
@@ -45,19 +44,18 @@ export class YoutubeService {
         message: 'Success'
       };
     } catch (error) {
-      console.error('Service error:', error);
+      console.error('Service error:', error: unknown);
       throw error, 
     }
   }
 
   async get<T>(endpoint: string): Promise<ServiceResponse<T>> {
-    return this.request<T>(endpoint, { method: 'GET' });
+    return this.request<T>(endpoint, { method: 'GET' }: unknown);
   }
 
-  async post<T>(endpoint: string, data): Promise<ServiceResponse<T>> {
+  async post<T>(endpoint: string, data: unknown): Promise<ServiceResponse<T>> {
     return this.request<T>(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(data)
+      method: 'POST', body: JSON.stringify(data: unknown)
     });
   }
 }

@@ -1,6 +1,6 @@
 # Fresh TypeScript Error Resolution - Summary Report
 
-Generated: 2025-08-25T14:37:49.145Z
+Generated: 2025-08-25T14:38:41.997Z
 
 ## 🚀 Deployment Results
 
@@ -41,13 +41,13 @@ Generated: 2025-08-25T14:37:49.145Z
 
 
 ### module-not-found
-- **Success**: ✅
+- **Success**: ❌
 - **Errors Fixed**: 0
 - **Duration**: 3s
 
 
 ### missing-exports
-- **Success**: ✅
+- **Success**: ❌
 - **Errors Fixed**: 0
 - **Duration**: 3s
 
@@ -59,13 +59,13 @@ Generated: 2025-08-25T14:37:49.145Z
 
 
 ### possibly-null
-- **Success**: ✅
+- **Success**: ❌
 - **Errors Fixed**: 0
 - **Duration**: 3s
 
 
 ### private-access
-- **Success**: ✅
+- **Success**: ❌
 - **Errors Fixed**: 0
 - **Duration**: 3s
 
@@ -79,8 +79,8 @@ Generated: 2025-08-25T14:37:49.145Z
 ## ⚙️ Configuration
 
 - **Project Path**: /home/runner/work/ytMain/ytMain
-- **Dry Run**: Yes
-- **Backup**: Yes
+- **Dry Run**: No
+- **Backup**: No
 - **Max Iterations**: 5
 - **Timeout**: 600s
 

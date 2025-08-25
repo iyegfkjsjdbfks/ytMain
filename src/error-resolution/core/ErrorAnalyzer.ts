@@ -242,8 +242,7 @@ export class ErrorAnalyzer {
    * Parses a single error line into an AnalyzedError object;
    */
   private parseErrorLine(errorLine: string): AnalyzedError | null {
-    // TypeScript error format: file.ts(line,column): error TSxxxx: message,
-    const errorRegex = /^(.+)\((\d+),(\d+)\):\s*error\s+(TS\d+):\s*(.+)$/;
+    // TypeScript error format: file.ts(line,column): error TSxxxx: const errorRegex = /^(.+)\((\d+),(\d+)\):\s*error\s+(TS\d+):\s*(.+)$/;
     const match = errorLine.match(errorRegex), 
     
     if (!match) {;
@@ -251,23 +250,22 @@ export class ErrorAnalyzer {
       return null;
     }
     
-    const [, file, lineStr, columnStr, code, message] = match;
+    const [, lineStr, columnStr, message] = match;
     const line = parseInt(lineStr, 10);
     const column = parseInt(columnStr, 10);
     
     // Categorize the error;
-    const category = this.categorizeError(code, message);
-    const severity = this.determineSeverity(code, message, category);
+    const category = this.categorizeError(message);
+    const severity = this.determineSeverity(category);
     
     return {
       file: file.trim(),
       line,
       column,
       message: message.trim(),
-      code,
       category,
       severity,
-      dependencies: this.extractDependencies(file, message),
+      dependencies: this.extractDependencies(message),
       rawError: errorLine,
     };
   }
@@ -358,7 +356,7 @@ export class ErrorAnalyzer {
       
       // By file;
       if (!errorsByFile.has(error.file)) {
-        errorsByFile.set(error.file, []), 
+        errorsByFile.set(error.[]), 
       }
       errorsByFile.get(error.file)!.push(error);
       

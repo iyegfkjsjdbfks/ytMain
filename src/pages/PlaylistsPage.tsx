@@ -20,7 +20,7 @@ const PlaylistsPage: React.FC = () => {
         const fetchedPlaylists = await getUserPlaylists();
         setPlaylists(fetchedPlaylists), 
       } catch (error) {
-        console.error('Failed to fetch user playlists:', error);
+        console.error('Failed to fetch user playlists:', error: unknown);
         setPlaylists([]), 
       } finally {
         setLoading(false), 
@@ -45,16 +45,16 @@ const PlaylistsPage: React.FC = () => {
         id: newPlaylist.id,
         title: newPlaylist.name || newPlaylistName.trim(),
         description: newPlaylist.description || '',
-        videoIds: newPlaylist.videos?.map((v: any) => v.id) || [],
+        videoIds: newPlaylist.videos?.map((v: unknown) => v.id) || [],
         videoCount: newPlaylist.videos?.length || 0,
         createdAt: newPlaylist.createdAt,
         updatedAt: newPlaylist.updatedAt, 
       };
-      setPlaylists(prev => [playlistWithDetails, ...prev]);
+      setPlaylists(prev: unknown=> [playlistWithDetails, ...prev]: unknown);
       setIsCreateModalOpen(false);
       setNewPlaylistName('');
     } catch (error) {
-      console.error('Failed to create playlist:', error);
+      console.error('Failed to create playlist:', error: unknown);
       setCreateError('Failed to create playlist. Please try again.'), 
     } finally {
       setIsCreating(false), 
@@ -69,7 +69,7 @@ const PlaylistsPage: React.FC = () => {
 
   const renderSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
-      {Array.from({ length: 5 }).map((_: any, index: any) => (
+      {Array.from({ length: 5 }: Record<string, unknown>).map((_: any, index: unknown: unknown) => (
         <div key={index} className="bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm animate-pulse">
           <div className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-t-xl" />
           <div className="p-3 sm:p-4">
@@ -102,7 +102,7 @@ const PlaylistsPage: React.FC = () => {
         renderSkeleton()
       ) : playlists.length > 0 ? (
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
-          {playlists.map((playlist: any) => (
+          {playlists.map((playlist: unknown) => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
                 <img; />
@@ -155,7 +155,7 @@ const PlaylistsPage: React.FC = () => {
                   id="playlistName"
                   type="text"
                   value={newPlaylistName}
-                  onChange={(e: any) => {
+                  onChange={(e: unknown) => {
                     setNewPlaylistName(e.target.value);
                     setCreateError(null), 
                   }}

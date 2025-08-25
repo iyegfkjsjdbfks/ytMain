@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-25T14:37:49.145Z",
+  "timestamp": "2025-08-25T14:38:41.997Z",
   "deployment": {
     "success": true,
     "totalErrorsFixed": 0,
-    "duration": 26587,
+    "duration": 26717,
     "phases": []
   },
   "initialAnalysis": {
@@ -57,63 +57,63 @@
       "success": true,
       "category": "implicit-any-parameters",
       "errorsFixed": 0,
-      "duration": 3287,
+      "duration": 3351,
       "details": []
     },
     {
       "success": true,
       "category": "unused-declarations",
       "errorsFixed": 0,
-      "duration": 3299,
+      "duration": 3310,
       "details": []
     },
     {
-      "success": true,
+      "success": false,
       "category": "module-not-found",
       "errorsFixed": 0,
-      "duration": 3316,
+      "duration": 3305,
       "details": []
     },
     {
-      "success": true,
+      "success": false,
       "category": "missing-exports",
       "errorsFixed": 0,
-      "duration": 3421,
+      "duration": 3333,
       "details": []
     },
     {
       "success": true,
       "category": "implicit-any-members",
       "errorsFixed": 0,
-      "duration": 3310,
+      "duration": 3350,
       "details": []
     },
     {
-      "success": true,
+      "success": false,
       "category": "possibly-null",
       "errorsFixed": 0,
-      "duration": 3295,
+      "duration": 3380,
       "details": []
     },
     {
-      "success": true,
+      "success": false,
       "category": "private-access",
       "errorsFixed": 0,
-      "duration": 3338,
+      "duration": 3351,
       "details": []
     },
     {
       "success": false,
       "category": "other-errors",
       "errorsFixed": 0,
-      "duration": 3315,
+      "duration": 3326,
       "details": []
     }
   ],
   "configuration": {
     "projectPath": "/home/runner/work/ytMain/ytMain",
-    "dryRun": true,
-    "backup": true,
+    "dryRun": false,
+    "backup": false,
     "maxIterations": 5,
     "timeoutSeconds": 600,
     "generateReports": true

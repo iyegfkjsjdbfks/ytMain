@@ -1,4 +1,3 @@
-import React from 'react';
 // Import and re-export VideoVisibility type
 import type { Video } from '../src/types';
 import type { VideoVisibility } from 'src/types/core';
@@ -37,7 +36,7 @@ export interface CommunityPost {
 }
 
 // Re-export core Video type
-export type { Video, ContentItem } from './src/types/core';
+export type { ContentItem } from './src/types/core';
 
 // Extended Video interface with additional properties for backward compatibility
 export interface ExtendedVideo {

@@ -1,7 +1,7 @@
 // analytics - Simple Implementation;
 export const analytics = {
   enabled: true,
-  process: (data: any) => data, 
+  process: (data: unknown) => data, 
 };
 
 export default analytics;

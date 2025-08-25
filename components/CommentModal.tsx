@@ -14,8 +14,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
   onClose,
   shortId,
   shortTitle,
-  onCommentSubmit,
-}) => {
+  onCommentSubmit, }: unknown) => {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -29,7 +28,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
       setComment('');
       onClose();
     } catch (error) {
-      console.error('Failed to submit comment:', error);
+      console.error('Failed to submit comment:', error: unknown);
     } finally {
       setIsSubmitting(false);
     }

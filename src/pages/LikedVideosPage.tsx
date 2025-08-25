@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HeartIcon } from '@heroicons/react/24/solid';
 import VideoCard from '../../components/VideoCard';
-import HoverAutoplayVideoCard from '../../components/HoverAutoplayVideoCard';
 import { getLikedVideos } from '../services/realVideoService';
 import type { Video } from '../types';
 

@@ -11,7 +11,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   categories,
   selectedCategory,
   onSelectCategory,
-  className = '',
+  className = ''
 }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -31,14 +31,14 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   const scrollLeft = useCallback(() => {
     const container = scrollContainerRef.current;
     if (container) {
-      container.scrollBy({ left: -200, behavior: 'smooth' });
+      container.scrollBy({ left: -200, behavior: 'smooth' }: unknown);
     }
   }, []);
 
   const scrollRight = useCallback(() => {
     const container = scrollContainerRef.current;
     if (container) {
-      container.scrollBy({ left: 200, behavior: 'smooth' });
+      container.scrollBy({ left: 200, behavior: 'smooth' }: unknown);
     }
   }, []);
 
@@ -47,14 +47,14 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
     const container = scrollContainerRef.current;
     if (container) {
       checkScrollPosition();
-      container.addEventListener('scroll', checkScrollPosition);
-      return () => container.removeEventListener('scroll', checkScrollPosition);
+      container.addEventListener('scroll', checkScrollPosition: unknown);
+      return () => container.removeEventListener('scroll', checkScrollPosition: unknown);
     }
   }, [checkScrollPosition]);
 
   // Check scroll position when categories change
   useEffect(() => {
-    const timeout = setTimeout(checkScrollPosition, 100);
+    const timeout = setTimeout(checkScrollPosition, 100: unknown);
     return () => clearTimeout(timeout);
   }, [categories, checkScrollPosition]);
 

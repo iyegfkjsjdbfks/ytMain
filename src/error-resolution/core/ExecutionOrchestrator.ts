@@ -62,8 +62,7 @@ export class ExecutionOrchestrator {
       logger.info(`✅ Orchestration completed in ${duration}ms`);
       
       return {
-        ...result,
-        duration, 
+        ...duration, 
       };
       
     } catch (error) {

@@ -1,7 +1,7 @@
 // index - Simple Implementation;
 export const index = {
   enabled: true,
-  process: (data: any) => data, 
+  process: (data: unknown) => data, 
 };
 
 export default index;

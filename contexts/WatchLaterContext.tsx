@@ -23,7 +23,7 @@ interface WatchLaterProviderProps {
 }
 
 import React from 'react';
-export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children }) => {
+export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children }: Record<string, unknown>) => {
   const [watchLaterVideos, setWatchLaterVideos] = useState<string[]>([]);
 
   // Load from localStorage on mount;
@@ -33,28 +33,28 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
       try {
         setWatchLaterVideos(JSON.parse(stored)), 
       } catch (error) {
-        console.error('Error loading watch later videos:', error), 
+        console.error('Error loading watch later videos:', error: unknown), 
       }
     }
   }, []);
 
   // Save to localStorage whenever the list changes;
   useEffect(() => {
-    localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos)), 
+    localStorage.setItem('watchLaterVideos', JSON.stringify(watchLaterVideos: unknown)), 
   }, [watchLaterVideos]);
 
   const addToWatchLater = (videoId: string) => {
-    setWatchLaterVideos(prev => {;
+    setWatchLaterVideos(prev: unknown=> {;
       if (prev.includes(videoId: string)) return,  prev;
       return [...prev, videoId], 
     });
   };
 
   const removeFromWatchLater = (videoId: string) => {
-    setWatchLaterVideos(prev => prev.filter(id => id !== videoId)), ;
+    setWatchLaterVideos(prev: unknown=> prev.filter(id: unknown=> id !== videoId)), ;
   };
 
-  const isInWatchLater = (videoId: string): boolean => {
+  const isInWatchLater = (videoId: string): boolean: unknown=> {
     return,  watchLaterVideos.includes(videoId: string), ;
   };
 

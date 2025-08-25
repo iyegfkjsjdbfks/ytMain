@@ -21,11 +21,10 @@ export class VideoService {
   async fetchData<T>(endpoint: string): Promise<T> {
     try {
       const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
-        method: 'GET',
-        headers: {
+        method: 'GET', headers: {
           'Content-Type': 'application/json'
         };
-      });
+      }: unknown);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,19 +32,18 @@ export class VideoService {
 
       return await response.json();
     } catch (error) {
-      console.error('Service fetch error:', error);
+      console.error('Service fetch error:', error: unknown);
       throw error, 
     }
   }
 
-  async postData<T>(endpoint: string, data): Promise<T> {
+  async postData<T>(endpoint: string, data: unknown): Promise<T> {
     try {
       const response = await fetch(`${this.config.apiUrl}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data);
+        }, body: JSON.stringify(data: unknown);
       });
 
       if (!response.ok) {
@@ -54,7 +52,7 @@ export class VideoService {
 
       return await response.json();
     } catch (error) {
-      console.error('Service post error:', error);
+      console.error('Service post error:', error: unknown);
       throw error, 
     }
   }

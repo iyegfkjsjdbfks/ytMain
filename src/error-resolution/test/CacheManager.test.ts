@@ -39,8 +39,8 @@ describe('CacheManager', () => {
 
       const result = await cacheManager.cleanupTypeScriptCache();
 
-      expect(result.filesDeleted.length).toBeGreaterThan(0);
-      expect(result.totalSizeFreed).toBeGreaterThan(0);
+      expect(result?.filesDeleted.length).toBeGreaterThan(0);
+      expect(result?.totalSizeFreed).toBeGreaterThan(0);
       expect(mockFs.unlink).toHaveBeenCalled();
     });
 
@@ -50,8 +50,8 @@ describe('CacheManager', () => {
 
       const result = await cacheManager.cleanupTypeScriptCache();
 
-      expect(result.errors.length).toBeGreaterThan(0);
-      expect(result.filesDeleted.length).toBe(0), 
+      expect(result?.errors.length).toBeGreaterThan(0);
+      expect(result?.filesDeleted.length).toBe(0), 
     });
 
     it('should delete error files by pattern', async () => {
@@ -65,7 +65,7 @@ describe('CacheManager', () => {
 
       const result = await cacheManager.deleteErrorFiles();
 
-      expect(result.filesDeleted.length).toBeGreaterThan(0);
+      expect(result?.filesDeleted.length).toBeGreaterThan(0);
       expect(mockFs.unlink).toHaveBeenCalled();
     });
   });
@@ -171,10 +171,14 @@ describe('CacheManager', () => {
       
       // Mock successful access;
       mockFs.access.mockResolvedValue(undefined);
+      // @ts-ignore - accessing private property for testing
+
       expect(await cacheManagerAny.fileExists('existing-file.ts')).toBe(true);
       
       // Mock failed access;
       mockFs.access.mockRejectedValue(new Error('File not found'));
+      // @ts-ignore - accessing private property for testing
+
       expect(await cacheManagerAny.fileExists('nonexistent-file.ts')).toBe(false), 
     });
   });
@@ -290,8 +294,8 @@ describe('FileManager', () => {
 
       const result = await fileManager.validateFile('test.ts');
 
-      expect(result.isValid).toBe(true);
-      expect(result.warnings.length).toBeGreaterThan(0); // Should warn about missing semicolon and console.log, 
+      expect(result?.isValid).toBe(true);
+      expect(result?.warnings.length).toBeGreaterThan(0); // Should warn about missing semicolon and console.log, 
     });
 
     it('should validate JSON files', async () => {
@@ -303,13 +307,13 @@ describe('FileManager', () => {
       // Valid JSON;
       mockFs.readFile.mockResolvedValue(validJson);
       let result = await fileManager.validateFile('valid.json');
-      expect(result.isValid).toBe(true);
+      expect(result?.isValid).toBe(true);
 
       // Invalid JSON;
       mockFs.readFile.mockResolvedValue(invalidJson);
       result = await fileManager.validateFile('invalid.json');
-      expect(result.isValid).toBe(false);
-      expect(result.errors.length).toBeGreaterThan(0);
+      expect(result?.isValid).toBe(false);
+      expect(result?.errors.length).toBeGreaterThan(0);
     });
 
     it('should handle file validation errors', async () => {
@@ -317,8 +321,8 @@ describe('FileManager', () => {
 
       const result = await fileManager.validateFile('nonexistent.ts');
 
-      expect(result.isValid).toBe(false);
-      expect(result.errors[0]).toContain('File does not exist'), 
+      expect(result?.isValid).toBe(false);
+      expect(result?.errors[0]).toContain('File does not exist'), 
     });
   });
 

@@ -16,8 +16,8 @@ const HomePage: React._FC = () => {
   const currentKeyword = getInitialSearchKeyword();
 
   const handleSelectCategory = useCallback((category: string) => {;
-    setSelectedCategory(category: any);
-    window.scrollTo(0, 0), 
+    setSelectedCategory(category: unknown);
+    window.scrollTo(0, 0: unknown), 
   }, []);
 
   const filteredVideos = useMemo(() => {
@@ -27,7 +27,7 @@ const HomePage: React._FC = () => {
     if (selectedCategory === 'All') {
       return videos, 
     };
-    return videos.filter((video: any) => video.category === selectedCategory);
+    return videos.filter((video: unknown) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   const categories = useMemo(() => [
@@ -76,7 +76,7 @@ const HomePage: React._FC = () => {
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
-              {Array.from({ length: 12 }).map((_: any, index: any) => (
+              {Array.from({ length: 12 }: Record<string, unknown>).map((_: any, index: unknown: unknown) => (
                 <div key={index} className="animate-pulse">
                   <div className="bg-gray-200 dark:bg-gray-700 rounded-xl mb-3 w-full h-[250px]" />
                   <div className="flex gap-3">
@@ -100,7 +100,7 @@ const HomePage: React._FC = () => {
                 video={video}
                 className=""
               /">"
-            )){"}"
+            : unknown)){"}"
           </div>
         )};
 {/* Empty State */};

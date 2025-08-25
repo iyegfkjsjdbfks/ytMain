@@ -384,26 +384,49 @@ class FreshErrorResolutionSystem {
       let content = await fs.readFile(filePath, 'utf8');
       let modified = false;
 
-      // Common patterns for fixing implicit any parameters
-      const fixes = [
-        // Function parameters
-        { pattern: /\(([^)]*?):\s*any\s*\)/g, replacement: '($1: unknown)' },
-        { pattern: /\(([^)]*?),\s*([^),]+)\s*\)/g, replacement: '($1, $2: unknown)' },
-        // Object destructuring parameters
-        { pattern: /\(\{([^}]+)\}\)/g, replacement: '({$1}: Record<string, unknown>)' },
-        // Array parameters
-        { pattern: /([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(?==>)/g, replacement: '$1: unknown' }
-      ];
-
-      for (const fix of fixes) {
-        const newContent = content.replace(fix.pattern, fix.replacement);
-        if (newContent !== content) {
-          content = newContent;
-          modified = true;
+      // More targeted fixes based on specific error patterns
+      for (const error of errors) {
+        const { line, message } = error;
+        
+        // Extract parameter name from error message
+        const paramMatch = message.match(/Parameter '([^']+)' implicitly has an 'any' type/);
+        if (paramMatch) {
+          const paramName = paramMatch[1];
+          
+          // Look for the parameter in the file and add type annotation
+          const lines = content.split('\n');
+          const lineIndex = line - 1;
+          
+          if (lineIndex >= 0 && lineIndex < lines.length) {
+            let lineContent = lines[lineIndex];
+            
+            // Various patterns for parameter typing
+            const patterns = [
+              // Function parameter: (param) => 
+              { regex: new RegExp(`\\(([^)]*\\b${paramName}\\b[^)]*)\\)\\s*=>`, 'g'), 
+                replacement: `($1: unknown) =>` },
+              // Function parameter: function(param)
+              { regex: new RegExp(`function[^(]*\\(([^)]*\\b${paramName}\\b[^)]*)\\)`, 'g'), 
+                replacement: `function($1: unknown)` },
+              // Method parameter: method(param)
+              { regex: new RegExp(`\\b${paramName}\\b(?=\\s*[,)])`, 'g'), 
+                replacement: `${paramName}: unknown` },
+            ];
+            
+            for (const pattern of patterns) {
+              const newLine = lineContent.replace(pattern.regex, pattern.replacement);
+              if (newLine !== lineContent) {
+                lines[lineIndex] = newLine;
+                modified = true;
+                break;
+              }
+            }
+          }
         }
       }
 
       if (modified) {
+        content = lines.join('\n');
         await fs.writeFile(filePath, content, 'utf8');
         this.log(`✅ Fixed implicit any in ${filePath}`, 'info');
         return true;
@@ -587,16 +610,20 @@ class FreshErrorResolutionSystem {
         
         if (lineIndex >= 0 && lineIndex < lines.length) {
           // Add @ts-ignore comment before the problematic line
-          if (!lines[lineIndex - 1]?.includes('@ts-ignore')) {
+          if (lineIndex > 0 && !lines[lineIndex - 1]?.includes('@ts-ignore')) {
             const indent = lines[lineIndex].match(/^\s*/)[0];
             lines.splice(lineIndex, 0, `${indent}// @ts-ignore - accessing private property for testing`);
             modified = true;
           }
         }
+        
+        if (modified) {
+          content = lines.join('\n');
+        }
       }
 
       if (modified) {
-        await fs.writeFile(filePath, lines.join('\n'), 'utf8');
+        await fs.writeFile(filePath, content, 'utf8');
         this.log(`✅ Fixed private access in ${filePath}`, 'info');
         return true;
       }

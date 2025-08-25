@@ -29,7 +29,7 @@ export class RootUseLiveStream {
         timestamp: Date.now()
       };
     } catch (error) {
-      console.error('Processing error:', error);
+      console.error('Processing error:', error: unknown);
       throw error, 
     }
   }

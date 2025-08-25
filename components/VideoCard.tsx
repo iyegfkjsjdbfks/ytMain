@@ -1,4 +1,4 @@
-import React, { memo, lazy, FC, KeyboardEvent, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
@@ -15,7 +15,7 @@ interface VideoCardProps {
  video: Video;
 }
 
-const VideoCard = React.memo<VideoCardProps>(({ video }) => {
+const VideoCard = React.memo<VideoCardProps>(({ video }: Record<string, unknown>) => {
  const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
  const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
  const navigate = useNavigate();
@@ -61,7 +61,7 @@ const VideoCard = React.memo<VideoCardProps>(({ video }) => {
  {video.duration}
  </div>
  <IconButton
- onClick={(e: any) => handleToggleWatchLater(e)}
+ onClick={(e: unknown) => handleToggleWatchLater(e)}
  variant={isSaved ? 'primary' : 'ghost'}
  size="sm"
  className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100 p-1.5 sm:p-1 touch-manipulation"
@@ -74,7 +74,7 @@ const VideoCard = React.memo<VideoCardProps>(({ video }) => {
  <div
  role="button"
  tabIndex={0}
- onClick={(e: any) => handleChannelNavigation(e)}
+ onClick={(e: unknown) => handleChannelNavigation(e)}
  onKeyDown={handleChannelKeyDown}
  className="flex-shrink-0 cursor-pointer z-10 relative"
  aria-label={`Go to ${video.channelName} channel`}
@@ -93,13 +93,13 @@ const VideoCard = React.memo<VideoCardProps>(({ video }) => {
  )}
  </div>
  <div className="flex-grow overflow-hidden">
- <h3 className={buildTruncateClasses(2, 'text-sm sm:text-base font-medium text-neutral-800 dark:text-neutral-50 leading-tight')}>
+ <h3 className={buildTruncateClasses(2, 'text-sm sm:text-base font-medium text-neutral-800 dark:text-neutral-50 leading-tight': unknown)}>
  {video.title}
  </h3>
  <div
  role="button"
  tabIndex={0}
- onClick={(e: any) => handleChannelNavigation(e)}
+ onClick={(e: unknown) => handleChannelNavigation(e)}
  onKeyDown={handleChannelKeyDown}
  className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
  aria-label={`Go to ${video.channelName} channel`}
