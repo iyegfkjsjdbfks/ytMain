@@ -46,6 +46,7 @@ export class PerformanceMonitor {
  } catch (e) {
  // PerformanceObserver not supported
  }
+ }
  
  startMeasure(name: string, metadata?: Record<string, any>): void {
  if (!this.isEnabled) {
@@ -171,6 +172,8 @@ return;
  this.observers.forEach((observer) => observer.disconnect());
  this.observers = [];
  }
+}
+
 // Global instance
 export const performanceMonitor = new PerformanceMonitor();
 
@@ -187,7 +190,7 @@ export function usePerformanceMonitor(componentName: any): any {
  : null;
  };
 
- const measureAsync = async <T>(operationName, operation: () => Promise<any> < T>): Promise<any> < T> => {
+ const measureAsync = async <T>(operationName: string, operation: () => Promise<T>): Promise<T> => {
  const fullName: string = `${componentName}-${operationName}`;
  performanceMonitor.startMeasure(fullName);
  try {
@@ -201,9 +204,10 @@ export function usePerformanceMonitor(componentName: any): any {
  performanceMonitor.endMeasure(fullName);
  }
  throw error;
+ }
  };
 
- const measureSync = <T>(operationName, operation: () => T): (T) => {
+ const measureSync = <T>(operationName: string, operation: () => T): T => {
  const fullName: string = `${componentName}-${operationName}`;
  performanceMonitor.startMeasure(fullName);
  try {
@@ -217,6 +221,7 @@ export function usePerformanceMonitor(componentName: any): any {
  performanceMonitor.endMeasure(fullName);
  }
  throw error;
+ }
  };
 
  return {
@@ -226,13 +231,13 @@ export function usePerformanceMonitor(componentName: any): any {
  measureSync };
 }
 
-// Higher - order component for automatic performance monitoring
-export function withPerformanceMonitoring < P extends object>(,;
- WrappedComponent: React.ComponentType < P>
+// Higher-order component for automatic performance monitoring
+export function withPerformanceMonitoring<P extends object>(
+ WrappedComponent: React.ComponentType<P>,
  componentName?: string) {
  const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
- const MonitoredComponent = React.forwardRef < any, P>((props, ref) => {
+ const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {
  const { startRender, endRender } = usePerformanceMonitor(displayName);
 
  useEffect(() => {
@@ -275,19 +280,19 @@ export const analyzeBundleSize = () => {
 return;
 }
 
- const scripts = Array<any>.from(document.querySelectorAll < HTMLScriptElement>('script.src'));
- const styles = Array<any>.from(document.querySelectorAll < HTMLLinkElement>('link[rel="stylesheet"]'));
+ const scripts = Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'));
+ const styles = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
 
  (console as any).group('📦 Bundle Analysis');
  // Estimate bundle sizes (this is approximate)
  scripts.forEach((script) => {
- if (script.src && !script.src.includes('chrome - extension')) {
+ if (script.src && !script.src.includes('chrome-extension')) {
  // Placeholder for size analysis if needed
  }
  });
 
  styles.forEach((style) => {
- if (style.href && !style.href.includes('chrome - extension')) {
+ if (style.href && !style.href.includes('chrome-extension')) {
  // Placeholder for size analysis if needed
  }
  });
