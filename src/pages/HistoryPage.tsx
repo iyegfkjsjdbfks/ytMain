@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ClockIcon } from '@heroicons/react/24/outline';
-import VideoCard from '../components/VideoCard';
+import VideoCard from '../../components/VideoCard';
 import { getWatchHistoryVideos } from '../services/realVideoService';
 import type { Video } from '../types';
 

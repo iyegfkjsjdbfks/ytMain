@@ -1,7 +1,7 @@
 // Logger - Simple Implementation
 export const Logger = {
   enabled: true,
-  process: (data) => data
+  process: (data: any) => data
 };
 
 export default Logger;

@@ -16,7 +16,7 @@ export class Pwa {
     return this.config.enabled;
   }
 
-  process(data): any {
+  process(data: any): any {
     if (!this.config.enabled) {
       return data;
     }

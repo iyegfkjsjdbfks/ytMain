@@ -1,7 +1,7 @@
 // ReportGenerator - Simple Implementation
 export const ReportGenerator = {
   enabled: true,
-  process: (data) => data
+  process: (data: any) => data
 };
 
 export default ReportGenerator;

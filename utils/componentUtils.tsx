@@ -1,46 +1,46 @@
 import React, { ReactNode, FC, useCallback, useMemo } from 'react';
 // Component utilities and helpers
 // Type definitions
-export interface TruncateOptions {}
+export interface TruncateOptions {
  maxLength?: number;
  suffix?: string;
  preserveWords?: boolean;
 }
 
-export interface ComponentWrapperProps {}
+export interface ComponentWrapperProps {
  children?: React.ReactNode;
  className?: string;
  fallback?: ReactNode;
 }
 
 // Utility functions for components
-export const truncateText = (text: string, ;
- maxLength: number = 100, suffix = '...') => {}
+export const truncateText = (text: string,
+ maxLength: number = 100, suffix = '...') => {
  if (text.length <= maxLength) return text;
  return text.slice(0, maxLength) + suffix;
 };
 
-export const formatDuration = (seconds): (string) => {}
+export const formatDuration = (seconds: number): string => {
  const hours = Math.floor(seconds / 3600);
  const minutes = Math.floor((seconds % 3600) / 60);
  const secs = Math.floor(seconds % 60);
 
- if (hours > 0) {}
+ if (hours > 0) {
  return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
  }
  return `${minutes}:${secs.toString().padStart(2, '0')}`;
 };
 
-export const formatViews = (views): (string) => {}
- if (views >= 1000000) {}
- return `${(views / 1000000).toFixed(1)}M views`;
- } else if (views >= 1000) {}
- return `${(views / 1000).toFixed(1)}K views`;
+export const formatViews = (views: number): string => {
+ if (views >= 1000000) {
+   return `${(views / 1000000).toFixed(1)}M views`;
+ } else if (views >= 1000) {
+   return `${(views / 1000).toFixed(1)}K views`;
  }
  return `${views} views`;
 };
 
-export const formatDate = (date: string | Date): (string) => {}
+export const formatDate = (date: string | Date): string => {
  const d = new Date(date);
  const now = new Date();
  const diffTime = Math.abs(now.getTime() - d.getTime());
@@ -54,67 +54,65 @@ export const formatDate = (date: string | Date): (string) => {}
 };
 
 // Component wrapper utilities
-export const ComponentWrapper: React.FC < ComponentWrapperProps> = ({ }
+export const ComponentWrapper: React.FC<ComponentWrapperProps> = ({
  children, 
  className = '', 
  fallback = null 
-}) => {}
- try {}
- return <div className={className}>{children}
-  </div>
-);
- } catch (error) {}
+}) => {
+ try {
+ return <div className={className}>{children}</div>;
+ } catch (error) {
  (console as any).error('Component error:', error);
- return <><</>/><</>/><</>/>{fallback}</>;
+ return <>{fallback}</>;
+ }
  };
 
 // Build truncate classes utility
-export const buildTruncateClasses = (,;
+export const buildTruncateClasses = (
  lines: number = 1,
  baseClasses = ''
-): (string) => {}
- const truncateClass = lines === 1 ? 'truncate' : `line - clamp-${lines}`;
+): string => {
+ const truncateClass = lines === 1 ? 'truncate' : `line-clamp-${lines}`;
  return `${baseClasses} ${truncateClass}`.trim();
 };
 
 // Safe localStorage utility
-export const safeLocalStorage = {}
- getItem: (key): string | (null) => {}
- try {}
- if (typeof window !== 'undefined') {}
- return (localStorage as any).getItem(key);
- }
-
- } catch (error) {}
- (console as any).warn('localStorage getItem failed:', error);
- }
- return null;
+export const safeLocalStorage = {
+ getItem: (key: string): string | null => {
+   try {
+     if (typeof window !== 'undefined') {
+       return (localStorage as any).getItem(key);
+     }
+   } catch (error) {
+     (console as any).warn('localStorage getItem failed:', error);
+   }
+   return null;
  },
 
- setItem: (key,
- value: string | number): (boolean) => {}
- try {}
- if (typeof window !== 'undefined') {}
- (localStorage as any).setItem(key, String(value));
- return true;
- }
- } catch (error) {}
- (console as any).warn('localStorage setItem failed:', error);
- }
- return false;
+ setItem: (key: string, value: string | number): boolean => {
+   try {
+     if (typeof window !== 'undefined') {
+       (localStorage as any).setItem(key, String(value));
+       return true;
+     }
+   } catch (error) {
+     (console as any).warn('localStorage setItem failed:', error);
+   }
+   return false;
  },
 
- removeItem: (key): (boolean) => {}
- try {}
- if (typeof window !== 'undefined') {}
- localStorage.removeItem(key);
- return true;
+ removeItem: (key: string): boolean => {
+   try {
+     if (typeof window !== 'undefined') {
+       localStorage.removeItem(key);
+       return true;
+     }
+   } catch (error) {
+     (console as any).warn('localStorage removeItem failed:', error);
+   }
+   return false;
  }
- } catch (error) {}
- (console as any).warn('localStorage removeItem failed:', error);
- }
- return false;
- };
+};
 
 // Performance utilities
 export const memo = React.memo;
@@ -122,7 +120,7 @@ export const useMemo = React.useMemo;
 export const useCallback = React.useCallback;
 
 // Export all utilities
-export default {}
+export default {
  truncateText,
  formatDuration,
  formatViews,
@@ -132,17 +130,18 @@ export default {}
  safeLocalStorage,
  memo: React.memo,
  useMemo: React.useMemo,
- useCallback: React.useCallback };
-
-// Additional utility functions
-export const buildVideoUrl = (videoId): (string) => {}
- return `/watch?v="${videoId}`;"
+ useCallback: React.useCallback
 };
 
-export const buildChannelUrl = (channelId): (string) => {}
+// Additional utility functions
+export const buildVideoUrl = (videoId: string): string => {
+ return `/watch?v=${videoId}`;
+};
+
+export const buildChannelUrl = (channelId: string): string => {
  return `/channel/${channelId}`;
 };
 
-export const getAvatarFallback = (name): (string) => {}
+export const getAvatarFallback = (name: string): string => {
  return name.charAt(0).toUpperCase();
 };

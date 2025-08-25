@@ -15,7 +15,7 @@ interface VideoCardProps {
  video: Video
 }
 
-const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
+const VideoCard = React.memo<VideoCardProps>(({ video }) => {
  const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
  const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
  const navigate = useNavigate();
@@ -43,6 +43,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
  const handleChannelKeyDown = (e: React.KeyboardEvent) => {
  if (e.key === 'Enter' || e.key === ' ') {
  handleChannelNavigation(e);
+ }
  };
 
  return (
@@ -56,66 +57,66 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
  width={320}
  height={180}
  fallbackSrc={`https://picsum.photos/320/180?random=${video.id}`} />
- />
  <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs sm:text-sm px-1.5 py-0.5 rounded font-medium">
  {video.duration}
-// FIXED:  </div>
- <IconButton />
-// FIXED:  onClick={(e) => handleToggleWatchLater(e)}
+ </div>
+ <IconButton
+ onClick={(e) => handleToggleWatchLater(e)}
  variant={isSaved ? 'primary' : 'ghost'}
  size="sm"
-// FIXED:  className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100 p-1.5 sm:p-1 touch-manipulation"
-// FIXED:  aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
+ className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100 p-1.5 sm:p-1 touch-manipulation"
+ aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
  icon={<SaveIcon className="w-4 h-4 sm:w-5 sm:h-5" />}
  />
-// FIXED:  </div>
+ </div>
  <div className="p-2 sm:p-3 flex-grow">
  <div className="flex items-start space-x-2 sm:space-x-3">
  <div
  role="button"
- tabIndex={0} />
-// FIXED:  onClick={(e) => handleChannelNavigation(e)}
+ tabIndex={0}
+ onClick={(e) => handleChannelNavigation(e)}
  onKeyDown={handleChannelKeyDown}
-// FIXED:  className="flex-shrink-0 cursor-pointer z-10 relative"
-// FIXED:  aria-label={`Go to ${video.channelName} channel`}
+ className="flex-shrink-0 cursor-pointer z-10 relative"
+ aria-label={`Go to ${video.channelName} channel`}
  >
  {video.channelAvatarUrl ? (
  <img
-// FIXED:  src={video.channelAvatarUrl}
-// FIXED:  alt={`${video.channelName} channel avatar`}
-// FIXED:  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5"
- loading="lazy" />
+ src={video.channelAvatarUrl}
+ alt={`${video.channelName} channel avatar`}
+ className="w-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5"
+ loading="lazy"
  />
  ) : (
  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5 bg-gray-200 flex items-center justify-center text-xs font-medium text-gray-600">
  {avatarFallback}
-// FIXED:  </div>
+ </div>
  )}
-// FIXED:  </div>
+ </div>
  <div className="flex-grow overflow-hidden">
  <h3 className={buildTruncateClasses(2, 'text-sm sm:text-base font-medium text-neutral-800 dark:text-neutral-50 leading-tight')}>
  {video.title}
-// FIXED:  </h3>
+ </h3>
  <div
  role="button"
- tabIndex={0} />
-// FIXED:  onClick={(e) => handleChannelNavigation(e)}
+ tabIndex={0}
+ onClick={(e) => handleChannelNavigation(e)}
  onKeyDown={handleChannelKeyDown}
-// FIXED:  className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
-// FIXED:  aria-label={`Go to ${video.channelName} channel`}
+ className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
+ aria-label={`Go to ${video.channelName} channel`}
  >
  {video.channelName}
-// FIXED:  </div>
+ </div>
 <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
  {video.views} &bull; {video.uploadedAt}
-// FIXED:  </p>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </Link>
+</p>
+</div>
+</div>
+</div>
+</div>
+</Link>
  );
 });
+
 VideoCard.displayName = 'VideoCard'; // For better debugging
 
 export default VideoCard;

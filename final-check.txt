@@ -1,0 +1,2 @@
+components/VideoCard.tsx(117,2): error TS1005: ',' expected.
+components/VideoCard.tsx(117,4): error TS1128: Declaration or statement expected.

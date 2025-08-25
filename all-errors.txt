@@ -1,0 +1,413 @@
+components/ChannelHeader.tsx(1,17): error TS6133: 'FC' is declared but its value is never read.
+components/ChannelHeader.tsx(26,24): error TS2339: Property 'bannerUrl' does not exist on type 'Channel'.
+components/ChannelTabContent.tsx(4,44): error TS2307: Cannot find module '@heroicons/react/24/solid' or its corresponding type declarations.
+components/ChannelTabContent.tsx(5,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'CalendarDaysIcon'.
+components/ChannelTabContent.tsx(5,28): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'ChartBarIcon'.
+components/ChannelTabContent.tsx(5,42): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'SignalSlashIcon'.
+components/ChannelTabs.tsx(1,17): error TS6133: 'FC' is declared but its value is never read.
+components/icons/BellIcon.tsx(1,17): error TS6133: 'FC' is declared but its value is never read.
+components/icons/BellIcon.tsx(2,53): error TS6133: 'className' is declared but its value is never read.
+components/LoadingStates/ChannelPageSkeleton.tsx(1,17): error TS6133: 'FC' is declared but its value is never read.
+components/VideoCard.tsx(1,17): error TS6133: 'memo' is declared but its value is never read.
+components/VideoCard.tsx(1,23): error TS6133: 'lazy' is declared but its value is never read.
+components/VideoCard.tsx(1,29): error TS6133: 'FC' is declared but its value is never read.
+components/VideoCard.tsx(1,33): error TS6133: 'KeyboardEvent' is declared but its value is never read.
+components/VideoCard.tsx(1,48): error TS6133: 'MouseEvent' is declared but its value is never read.
+components/VideoCard.tsx(5,10): error TS2614: Module '"../src/hooks/unifiedHooks.ts"' has no exported member 'useToggle'. Did you mean to use 'import useToggle from "../src/hooks/unifiedHooks.ts"' instead?
+components/VideoCard.tsx(8,26): error TS2307: Cannot find module 'icons/UnifiedIcon.tsx' or its corresponding type declarations.
+components/VideoCard.tsx(9,31): error TS2307: Cannot find module 'ImageWithFallback.tsx' or its corresponding type declarations.
+components/VideoCard.tsx(10,28): error TS2307: Cannot find module 'ui/Button.tsx' or its corresponding type declarations.
+components/VideoCard.tsx(19,49): error TS2339: Property 'isWatchLater' does not exist on type 'WatchLaterContextType'.
+components/VideoCard.tsx(24,56): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | boolean'.
+  Type 'undefined' is not assignable to type 'string | number | boolean'.
+components/VideoCard.tsx(25,43): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+components/VideoCard.tsx(64,12): error TS7006: Parameter 'e' implicitly has an 'any' type.
+contexts/WatchLaterContext.tsx(5,21): error TS7006: Parameter 'videoId' implicitly has an 'any' type.
+contexts/WatchLaterContext.tsx(6,26): error TS7006: Parameter 'videoId' implicitly has an 'any' type.
+contexts/WatchLaterContext.tsx(7,20): error TS7006: Parameter 'videoId' implicitly has an 'any' type.
+contexts/WatchLaterContext.tsx(45,28): error TS7006: Parameter 'videoId' implicitly has an 'any' type.
+contexts/WatchLaterContext.tsx(52,33): error TS7006: Parameter 'videoId' implicitly has an 'any' type.
+contexts/WatchLaterContext.tsx(56,27): error TS7006: Parameter 'videoId' implicitly has an 'any' type.
+src/components/LoadingSpinner.tsx(8,2): error TS6133: '_size' is declared but its value is never read.
+src/components/LoadingSpinner.tsx(10,8): error TS6133: '_sizeClasses' is declared but its value is never read.
+src/config/routes.tsx(48,43): error TS2307: Cannot find module '../pages/VideoEditorPage' or its corresponding type declarations.
+src/config/routes.tsx(211,18): error TS2322: Type '{ children: (string | Element)[]; requireAuth: boolean; }' is not assignable to type 'IntrinsicAttributes & ProtectedRouteProps'.
+  Property 'requireAuth' does not exist on type 'IntrinsicAttributes & ProtectedRouteProps'.
+src/config/routes.tsx(219,18): error TS2322: Type '{ children: (string | Element)[]; requireAuth: boolean; }' is not assignable to type 'IntrinsicAttributes & ProtectedRouteProps'.
+  Property 'requireAuth' does not exist on type 'IntrinsicAttributes & ProtectedRouteProps'.
+src/error-resolution/core/CacheManager.ts(4,10): error TS2724: '"child_process"' has no exported member named '_execSync'. Did you mean 'execSync'?
+src/error-resolution/core/ErrorAnalyzer.ts(4,24): error TS2307: Cannot find module '_path' or its corresponding type declarations.
+src/error-resolution/core/ErrorAnalyzer.ts(201,14): error TS18046: 'error' is of type 'unknown'.
+src/error-resolution/core/ErrorAnalyzer.ts(201,30): error TS18046: 'error' is of type 'unknown'.
+src/error-resolution/generators/BaseScriptGenerator.ts(26,3): error TS7008: Member 'defaultValue' implicitly has an 'any' type.
+src/error-resolution/index.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/error-resolution/test/CacheManager.test.ts(4,24): error TS2307: Cannot find module '_path' or its corresponding type declarations.
+src/error-resolution/test/CacheManager.test.ts(36,9): error TS2322: Type 'number' is not assignable to type 'bigint'.
+src/error-resolution/test/CacheManager.test.ts(58,41): error TS2322: Type 'string' is not assignable to type 'Dirent<Buffer<ArrayBufferLike>>'.
+src/error-resolution/test/CacheManager.test.ts(58,64): error TS2322: Type 'string' is not assignable to type 'Dirent<Buffer<ArrayBufferLike>>'.
+src/error-resolution/test/CacheManager.test.ts(62,9): error TS2322: Type 'number' is not assignable to type 'bigint'.
+src/error-resolution/test/CacheManager.test.ts(125,41): error TS2322: Type 'string' is not assignable to type 'Dirent<Buffer<ArrayBufferLike>>'.
+src/error-resolution/test/CacheManager.test.ts(151,30): error TS2341: Property 'matchesPattern' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(152,30): error TS2341: Property 'matchesPattern' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(153,30): error TS2341: Property 'matchesPattern' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(154,30): error TS2341: Property 'matchesPattern' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(162,30): error TS2341: Property 'formatBytes' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(163,30): error TS2341: Property 'formatBytes' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(164,30): error TS2341: Property 'formatBytes' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(165,30): error TS2341: Property 'formatBytes' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(173,36): error TS2341: Property 'fileExists' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/CacheManager.test.ts(177,36): error TS2341: Property 'fileExists' is private and only accessible within class 'CacheManager'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(15,41): error TS2341: Property 'parseErrorLine' is private and only accessible within class 'ErrorAnalyzer'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(19,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(19,21): error TS2551: Property 'code' does not exist on type 'AnalyzedError'. Did you mean '_code'?
+src/error-resolution/test/ErrorAnalyzer.test.ts(20,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(21,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(22,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(22,21): error TS2551: Property 'file' does not exist on type 'AnalyzedError'. Did you mean '_file'?
+src/error-resolution/test/ErrorAnalyzer.test.ts(23,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(24,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(30,41): error TS2341: Property 'parseErrorLine' is private and only accessible within class 'ErrorAnalyzer'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(34,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(34,21): error TS2551: Property 'code' does not exist on type 'AnalyzedError'. Did you mean '_code'?
+src/error-resolution/test/ErrorAnalyzer.test.ts(35,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(36,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(42,41): error TS2341: Property 'parseErrorLine' is private and only accessible within class 'ErrorAnalyzer'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(46,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(46,21): error TS2551: Property 'code' does not exist on type 'AnalyzedError'. Did you mean '_code'?
+src/error-resolution/test/ErrorAnalyzer.test.ts(47,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(48,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(55,28): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(object: ErrorAnalyzer, method: never): SpyInstance<never, never, any>', gave the following error.
+    Argument of type '"captureTypeScriptErrors"' is not assignable to parameter of type 'never'.
+  Overload 2 of 3, '(object: ErrorAnalyzer, method: keyof ErrorAnalyzer): SpyInstance<Promise<void> | Promise<ErrorAnalysisResult>, [] | [result: ...], any>', gave the following error.
+    Argument of type '"captureTypeScriptErrors"' is not assignable to parameter of type 'keyof ErrorAnalyzer'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(55,55): error TS2339: Property 'mockReturnValue' does not exist on type 'never'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(86,49): error TS2341: Property 'generateAnalysisResult' is private and only accessible within class 'ErrorAnalyzer'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(87,45): error TS2345: Argument of type '{ file: string; line: number; column: number; message: string; code: string; category: { name: string; priority: number; pattern: RegExp; rootCause: ErrorRootCause; fixingStrategy: "bulk"; description: string; }; severity: ErrorSeverity; dependencies: never[]; rawError: string; }[]' is not assignable to parameter of type 'AnalyzedError[]'.
+  Type '{ file: string; line: number; column: number; message: string; code: string; category: { name: string; priority: number; pattern: RegExp; rootCause: ErrorRootCause; fixingStrategy: "bulk"; description: string; }; severity: ErrorSeverity; dependencies: never[]; rawError: string; }' is missing the following properties from type 'AnalyzedError': _file, _message, _code
+src/error-resolution/test/ErrorAnalyzer.test.ts(100,41): error TS2341: Property 'parseErrorLine' is private and only accessible within class 'ErrorAnalyzer'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(104,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(104,21): error TS2551: Property 'file' does not exist on type 'AnalyzedError'. Did you mean '_file'?
+src/error-resolution/test/ErrorAnalyzer.test.ts(105,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(106,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(107,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(107,21): error TS2551: Property 'code' does not exist on type 'AnalyzedError'. Did you mean '_code'?
+src/error-resolution/test/ErrorAnalyzer.test.ts(108,14): error TS18047: 'result' is possibly 'null'.
+src/error-resolution/test/ErrorAnalyzer.test.ts(108,21): error TS2551: Property 'message' does not exist on type 'AnalyzedError'. Did you mean '_message'?
+src/error-resolution/test/ErrorAnalyzer.test.ts(114,41): error TS2341: Property 'parseErrorLine' is private and only accessible within class 'ErrorAnalyzer'.
+src/error-resolution/test/ImportFixer.test.ts(2,10): error TS2614: Module '"../types"' has no exported member 'AnalyzedError'. Did you mean to use 'import AnalyzedError from "../types"' instead?
+src/error-resolution/test/ImportFixer.test.ts(2,25): error TS2614: Module '"../types"' has no exported member 'ErrorRootCause'. Did you mean to use 'import ErrorRootCause from "../types"' instead?
+src/error-resolution/test/ImportFixer.test.ts(3,25): error TS2307: Cannot find module '../utils/_Logger' or its corresponding type declarations.
+src/error-resolution/test/ImportFixer.test.ts(6,20): error TS2749: 'ImportFixer' refers to a value, but is being used as a type here. Did you mean 'typeof ImportFixer'?
+src/error-resolution/test/ImportFixer.test.ts(11,25): error TS7017: Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+src/error-resolution/test/ImportFixer.test.ts(12,23): error TS2351: This expression is not constructable.
+  Type '{ enabled: boolean; process: (data: any) => any; }' has no construct signatures.
+src/error-resolution/test/ValidationEngine.test.ts(3,25): error TS2307: Cannot find module '../utils/_Logger' or its corresponding type declarations.
+src/error-resolution/test/ValidationEngine.test.ts(6,25): error TS2749: 'ValidationEngine' refers to a value, but is being used as a type here. Did you mean 'typeof ValidationEngine'?
+src/error-resolution/test/ValidationEngine.test.ts(10,25): error TS7017: Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+src/error-resolution/test/ValidationEngine.test.ts(11,28): error TS2351: This expression is not constructable.
+  Type '{ enabled: boolean; process: (data: any) => any; }' has no construct signatures.
+src/error-resolution/test/WorkflowCoordinator.test.ts(3,25): error TS2307: Cannot find module '../utils/_Logger' or its corresponding type declarations.
+src/error-resolution/test/WorkflowCoordinator.test.ts(6,20): error TS2749: 'WorkflowCoordinator' refers to a value, but is being used as a type here. Did you mean 'typeof WorkflowCoordinator'?
+src/error-resolution/test/WorkflowCoordinator.test.ts(10,25): error TS7017: Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+src/error-resolution/test/WorkflowCoordinator.test.ts(11,23): error TS2351: This expression is not constructable.
+  Type '{ enabled: boolean; process: (data: any) => any; }' has no construct signatures.
+src/features/auth/services/authService.ts(44,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/auth/store/authStore.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/comments/hooks/useComments.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/comments/services/commentService.ts(40,39): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/common/index.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/livestream/components/index.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/notifications/hooks/useNotifications.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/notifications/hooks/useNotifications.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/features/notifications/services/notificationService.ts(22,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/playlist/hooks/usePlaylists.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/playlist/hooks/usePlaylists.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/features/playlist/services/playlistService.ts(22,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/search/services/searchService.ts(40,39): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/subscription/services/subscriptionService.ts(22,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/user/pages/YourDataPage.tsx(1,17): error TS2305: Module '"react"' has no exported member '_FC'.
+src/features/user/pages/YourDataPage.tsx(5,27): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/features/video/hooks/useVideo.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/video/hooks/useVideo.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/features/video/hooks/useVideoInteractions.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/features/video/hooks/useVideoInteractions.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/features/video/pages/HomePage.tsx(1,17): error TS2305: Module '"react"' has no exported member '_FC'.
+src/features/video/pages/HomePage.tsx(5,23): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/features/video/pages/ShortsPage.tsx(1,17): error TS2305: Module '"react"' has no exported member '_FC'.
+src/features/video/pages/ShortsPage.tsx(5,25): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/features/video/pages/TrendingPage.tsx(1,17): error TS2305: Module '"react"' has no exported member '_FC'.
+src/features/video/pages/TrendingPage.tsx(5,27): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/features/video/services/videoService.ts(40,39): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/legacy/index.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/legacy/root-useLiveStream.ts(19,11): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/legacy/root-useVideoPlayer.ts(19,11): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/optimizedHooks.ts(44,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/unified/index.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/unified/useApi.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/unified/useApi.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/unified/useVideos.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/unified/useVideos.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/unifiedHooks.ts(44,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useAnalytics.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useAsyncData.ts(5,2): error TS7008: Member 'dependencies' implicitly has an 'any' type.
+src/hooks/useDebounce.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useDebounce.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useDropdownMenu.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useDropdownMenu.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useEnhancedQuery.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useFormState.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useFormState.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useInstallPrompt.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useLocalStorage.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useLocalStorage.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useLocalStorageSet.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useLocalStorageSet.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useMobileDetection.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useMobileDetection.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useModal.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useModal.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useOfflineStatus.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useOptimizedVideoData.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useOptimizedVideoData.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/usePerformanceMonitor.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/usePerformanceMonitor.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/usePerformanceOptimization.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/usePerformanceOptimization.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/usePWANotifications.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/usePWANotifications.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/usePWAUpdates.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useRefactoredHooks.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useServiceWorker.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useTrendingSearch.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useTrendingSearch.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useVideoCache.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useVideoCache.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useVideoPlayer.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useVideosData.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useVideosData.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/hooks/useWatchPage.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/useWatchPage.ts(11,3): error TS7008: Member 'data' implicitly has an 'any' type.
+src/lib/constants.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/lib/youtube-utils.ts(19,11): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/pages/ChannelPage.tsx(1,38): error TS2305: Module '"react"' has no exported member '_FC'.
+src/pages/ChannelPage.tsx(2,10): error TS2614: Module '"../types"' has no exported member 'Channel'. Did you mean to use 'import Channel from "../types"' instead?
+src/pages/ChannelPage.tsx(8,10): error TS2614: Module '"../services/realVideoService.ts"' has no exported member 'getChannelByName'. Did you mean to use 'import getChannelByName from "../services/realVideoService.ts"' instead?
+src/pages/ChannelPage.tsx(8,28): error TS2614: Module '"../services/realVideoService.ts"' has no exported member 'getVideosByChannelName'. Did you mean to use 'import getVideosByChannelName from "../services/realVideoService.ts"' instead?
+src/pages/ChannelPage.tsx(8,52): error TS2614: Module '"../services/realVideoService.ts"' has no exported member 'getChannelPlaylists'. Did you mean to use 'import getChannelPlaylists from "../services/realVideoService.ts"' instead?
+src/pages/ChannelPage.tsx(8,73): error TS2614: Module '"../services/realVideoService.ts"' has no exported member 'getChannelCommunityPosts'. Did you mean to use 'import getChannelCommunityPosts from "../services/realVideoService.ts"' instead?
+src/pages/ChannelPage.tsx(9,28): error TS2307: Cannot find module '../types.ts' or its corresponding type declarations.
+src/pages/ChannelPage.tsx(27,26): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/pages/ChannelPage.tsx(159,11): error TS2719: Type 'CommunityPost[]' is not assignable to type 'CommunityPost[]'. Two different types with this name exist, but they are unrelated.
+  Type 'CommunityPost' is missing the following properties from type 'CommunityPost': channelName, channelAvatarUrl, timestamp, textContent, commentsCount
+src/pages/HistoryPage.tsx(2,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'ClockIcon'.
+src/pages/HistoryPage.tsx(3,23): error TS2307: Cannot find module '../components/VideoCard' or its corresponding type declarations.
+src/pages/HistoryPage.tsx(4,10): error TS2614: Module '"../services/realVideoService"' has no exported member 'getWatchHistoryVideos'. Did you mean to use 'import getWatchHistoryVideos from "../services/realVideoService"' instead?
+src/pages/HistoryPage.tsx(5,15): error TS2614: Module '"../types"' has no exported member 'Video'. Did you mean to use 'import Video from "../types"' instead?
+src/pages/HomePage.tsx(1,55): error TS2305: Module '"react"' has no exported member '_FC'.
+src/pages/HomePage.tsx(3,27): error TS2307: Cannot find module '../components/CategoryChips' or its corresponding type declarations.
+src/pages/HomePage.tsx(4,36): error TS2307: Cannot find module '../components/HoverAutoplayVideoCard' or its corresponding type declarations.
+src/pages/HomePage.tsx(6,10): error TS2614: Module '"../services/settingsService"' has no exported member 'getInitialSearchKeyword'. Did you mean to use 'import getInitialSearchKeyword from "../services/settingsService"' instead?
+src/pages/HomePage.tsx(8,15): error TS2614: Module '"../types"' has no exported member 'Video'. Did you mean to use 'import Video from "../types"' instead?
+src/pages/HomePage.tsx(13,23): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/pages/HomePage.tsx(30,27): error TS7006: Parameter 'video' implicitly has an 'any' type.
+src/pages/HomePage.tsx(46,59): error TS2322: Type 'Error' is not assignable to type 'ReactNode'.
+src/pages/LikedVideosPage.tsx(2,27): error TS2307: Cannot find module '@heroicons/react/24/solid' or its corresponding type declarations.
+src/pages/LikedVideosPage.tsx(3,23): error TS2307: Cannot find module '../components/VideoCard' or its corresponding type declarations.
+src/pages/LikedVideosPage.tsx(4,10): error TS2614: Module '"../services/realVideoService"' has no exported member 'getLikedVideos'. Did you mean to use 'import getLikedVideos from "../services/realVideoService"' instead?
+src/pages/LikedVideosPage.tsx(5,15): error TS2614: Module '"../types"' has no exported member 'Video'. Did you mean to use 'import Video from "../types"' instead?
+src/pages/LoginPage.tsx(3,20): error TS2307: Cannot find module '../components/forms/Button' or its corresponding type declarations.
+src/pages/LoginPage.tsx(4,19): error TS2307: Cannot find module '../components/forms/Input' or its corresponding type declarations.
+src/pages/LoginPage.tsx(5,25): error TS2307: Cannot find module '../components/icons/YouTubeLogo' or its corresponding type declarations.
+src/pages/LoginPage.tsx(6,25): error TS2307: Cannot find module '../contexts/AuthContext' or its corresponding type declarations.
+src/pages/LoginPage.tsx(100,30): error TS7006: Parameter '_e' implicitly has an 'any' type.
+src/pages/LoginPage.tsx(119,30): error TS7006: Parameter '_e' implicitly has an 'any' type.
+src/pages/PlaylistDetailPage.tsx(3,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'QueueListIcon'.
+src/pages/PlaylistDetailPage.tsx(3,25): error TS2724: '"@heroicons/react/24/outline"' has no exported member named '_PlayIcon'. Did you mean 'PlayIcon'?
+src/pages/PlaylistDetailPage.tsx(3,36): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'TrashIcon'.
+src/pages/PlaylistDetailPage.tsx(3,47): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'EllipsisVerticalIcon'.
+src/pages/PlaylistDetailPage.tsx(3,69): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'PencilIcon'.
+src/pages/PlaylistDetailPage.tsx(3,81): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'ArrowsRightLeftIcon'.
+src/pages/PlaylistDetailPage.tsx(4,82): error TS2307: Cannot find module '@heroicons/react/24/solid' or its corresponding type declarations.
+src/pages/PlaylistDetailPage.tsx(5,36): error TS2307: Cannot find module '../components/LoadingStates/PlaylistDetailSkeleton' or its corresponding type declarations.
+src/pages/PlaylistDetailPage.tsx(6,31): error TS2307: Cannot find module '../components/PlaylistEditModal' or its corresponding type declarations.
+src/pages/PlaylistDetailPage.tsx(7,10): error TS2614: Module '"../services/realVideoService"' has no exported member 'removeVideoFromPlaylist'. Did you mean to use 'import removeVideoFromPlaylist from "../services/realVideoService"' instead?
+src/pages/PlaylistDetailPage.tsx(7,35): error TS2614: Module '"../services/realVideoService"' has no exported member 'getUserPlaylistById'. Did you mean to use 'import getUserPlaylistById from "../services/realVideoService"' instead?
+src/pages/PlaylistDetailPage.tsx(7,56): error TS2614: Module '"../services/realVideoService"' has no exported member 'updateUserPlaylistDetails'. Did you mean to use 'import updateUserPlaylistDetails from "../services/realVideoService"' instead?
+src/pages/PlaylistDetailPage.tsx(8,15): error TS2614: Module '"../types"' has no exported member 'Video'. Did you mean to use 'import Video from "../types"' instead?
+src/pages/PlaylistDetailPage.tsx(94,26): error TS2345: Argument of type '(prevId: string | null) => string | number | null' is not assignable to parameter of type 'SetStateAction<string | null>'.
+  Type '(prevId: string | null) => string | number | null' is not assignable to type '(prevState: string | null) => string | null'.
+    Type 'string | number | null' is not assignable to type 'string | null'.
+      Type 'number' is not assignable to type 'string'.
+src/pages/PlaylistDetailPage.tsx(178,38): error TS2551: Property 'videoIds' does not exist on type 'PlaylistWithVideos'. Did you mean 'videos'?
+src/pages/PlaylistsPage.tsx(2,47): error TS2307: Cannot find module '@heroicons/react/24/solid' or its corresponding type declarations.
+src/pages/PlaylistsPage.tsx(3,20): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'XMarkIcon'.
+src/pages/PlaylistsPage.tsx(5,10): error TS2614: Module '"../services/realVideoService"' has no exported member 'createUserPlaylist'. Did you mean to use 'import createUserPlaylist from "../services/realVideoService"' instead?
+src/pages/PlaylistsPage.tsx(5,30): error TS2614: Module '"../services/realVideoService"' has no exported member 'getUserPlaylists'. Did you mean to use 'import getUserPlaylists from "../services/realVideoService"' instead?
+src/pages/PlaylistsPage.tsx(6,15): error TS2614: Module '"../types"' has no exported member 'UserPlaylistDetails'. Did you mean to use 'import UserPlaylistDetails from "../types"' instead?
+src/pages/PlaylistsPage.tsx(48,44): error TS7006: Parameter 'v' implicitly has an 'any' type.
+src/pages/RegisterPage.tsx(3,20): error TS2307: Cannot find module '../components/forms/Button' or its corresponding type declarations.
+src/pages/RegisterPage.tsx(4,19): error TS2307: Cannot find module '../components/forms/Input' or its corresponding type declarations.
+src/pages/RegisterPage.tsx(5,25): error TS2307: Cannot find module '../components/icons/YouTubeLogo' or its corresponding type declarations.
+src/pages/RegisterPage.tsx(6,25): error TS2307: Cannot find module '../contexts/AuthContext' or its corresponding type declarations.
+src/pages/SearchResultsPage.tsx(2,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'MagnifyingGlassIcon'.
+src/pages/SearchResultsPage.tsx(4,36): error TS2307: Cannot find module '../components/OptimizedSearchResults' or its corresponding type declarations.
+src/pages/SearchResultsPage.tsx(7,15): error TS2614: Module '"../types"' has no exported member 'Video'. Did you mean to use 'import Video from "../types"' instead?
+src/pages/SearchResultsPage.tsx(36,45): error TS2554: Expected 0-1 arguments, but got 2.
+src/pages/SearchResultsPage.tsx(65,41): error TS2339: Property 'searchVideos' does not exist on type 'Videos'.
+src/pages/SearchResultsPage.tsx(83,34): error TS2345: Argument of type 'UseDebounceResult' is not assignable to parameter of type 'string'.
+src/pages/SearchResultsPage.tsx(103,26): error TS7006: Parameter 'video' implicitly has an 'any' type.
+src/pages/ShortsPage.tsx(3,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'MagnifyingGlassIcon'.
+src/pages/ShortsPage.tsx(3,31): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'AdjustmentsHorizontalIcon'.
+src/pages/ShortsPage.tsx(3,58): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'XMarkIcon'.
+src/pages/ShortsPage.tsx(5,26): error TS2307: Cannot find module '../components/CommentModal' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(6,30): error TS2307: Cannot find module '../components/ErrorStates/EmptyShortsState' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(7,29): error TS2307: Cannot find module '../components/ErrorStates/ShortsPageError' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(8,32): error TS2307: Cannot find module '../components/LoadingStates/ShortsPageSkeleton' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(9,30): error TS2307: Cannot find module '../components/ShortDisplayCard' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(10,27): error TS2307: Cannot find module '../components/ShortsFilters' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(11,30): error TS2307: Cannot find module '../components/ShortsNavigation' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(12,50): error TS2307: Cannot find module '../src/hooks' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(14,28): error TS2307: Cannot find module '../src/types/core' or its corresponding type declarations.
+src/pages/ShortsPage.tsx(95,16): error TS7006: Parameter 'video' implicitly has an 'any' type.
+src/pages/ShortsPage.tsx(96,13): error TS7006: Parameter 'video' implicitly has an 'any' type.
+src/pages/ShortsPage.tsx(137,57): error TS7006: Parameter 'short' implicitly has an 'any' type.
+src/pages/ShortsPage.tsx(143,26): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/pages/ShortsPage.tsx(153,31): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/pages/ShortsPage.tsx(435,42): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(type: "keydown", listener: (this: Document, ev: KeyboardEvent) => any, options?: boolean | AddEventListenerOptions | undefined): void', gave the following error.
+    Argument of type '(event: KeyboardEvent) => void' is not assignable to parameter of type '(this: Document, ev: KeyboardEvent) => any'.
+      Types of parameters 'event' and 'ev' are incompatible.
+        Type 'KeyboardEvent' is missing the following properties from type 'KeyboardEvent<Element>': locale, nativeEvent, isDefaultPrevented, isPropagationStopped, persist
+  Overload 2 of 2, '(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void', gave the following error.
+    Argument of type '(event: KeyboardEvent) => void' is not assignable to parameter of type 'EventListenerOrEventListenerObject'.
+      Type '(event: KeyboardEvent) => void' is not assignable to type 'EventListener'.
+        Types of parameters 'event' and 'evt' are incompatible.
+          Type 'Event' is missing the following properties from type 'KeyboardEvent<Element>': altKey, charCode, ctrlKey, code, and 15 more.
+src/pages/ShortsPage.tsx(436,58): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(type: "keydown", listener: (this: Document, ev: KeyboardEvent) => any, options?: boolean | EventListenerOptions | undefined): void', gave the following error.
+    Argument of type '(event: KeyboardEvent) => void' is not assignable to parameter of type '(this: Document, ev: KeyboardEvent) => any'.
+      Types of parameters 'event' and 'ev' are incompatible.
+        Type 'KeyboardEvent' is missing the following properties from type 'KeyboardEvent<Element>': locale, nativeEvent, isDefaultPrevented, isPropagationStopped, persist
+  Overload 2 of 2, '(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void', gave the following error.
+    Argument of type '(event: KeyboardEvent) => void' is not assignable to parameter of type 'EventListenerOrEventListenerObject'.
+      Type '(event: KeyboardEvent) => void' is not assignable to type 'EventListener'.
+        Types of parameters 'event' and 'evt' are incompatible.
+          Type 'Event' is missing the following properties from type 'KeyboardEvent<Element>': altKey, charCode, ctrlKey, code, and 15 more.
+src/pages/SubscriptionsPage.tsx(3,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'ViewColumnsIcon'.
+src/pages/SubscriptionsPage.tsx(3,27): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'Bars3Icon'.
+src/pages/SubscriptionsPage.tsx(3,38): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'AdjustmentsHorizontalIcon'.
+src/pages/SubscriptionsPage.tsx(3,65): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'BellIcon'.
+src/pages/SubscriptionsPage.tsx(3,75): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'UserGroupIcon'.
+src/pages/SubscriptionsPage.tsx(4,43): error TS2307: Cannot find module '@heroicons/react/24/solid' or its corresponding type declarations.
+src/pages/SubscriptionsPage.tsx(5,31): error TS2307: Cannot find module '../components/icons/SubscriptionsIcon' or its corresponding type declarations.
+src/pages/SubscriptionsPage.tsx(7,31): error TS2307: Cannot find module '../components/SubscriptionStats' or its corresponding type declarations.
+src/pages/SubscriptionsPage.tsx(8,35): error TS2307: Cannot find module '../components/SubscriptionVideoCard' or its corresponding type declarations.
+src/pages/SubscriptionsPage.tsx(9,24): error TS2307: Cannot find module '../components/ui/Button' or its corresponding type declarations.
+src/pages/SubscriptionsPage.tsx(10,58): error TS2307: Cannot find module '../components/ui/Tabs' or its corresponding type declarations.
+src/pages/SubscriptionsPage.tsx(11,10): error TS2724: '"../hooks"' has no exported member named 'useSubscriptions'. Did you mean 'useSubscriptionsFeed'?
+src/pages/SubscriptionsPage.tsx(18,11): error TS2339: Property 'data' does not exist on type '{ subscriptionsFeed: Video[]; loading: boolean; error: string | null; setSubscriptionsFeed: Dispatch<SetStateAction<Video[]>>; }'.
+src/pages/SubscriptionsPage.tsx(96,61): error TS7006: Parameter 'c' implicitly has an 'any' type.
+src/pages/SubscriptionsPage.tsx(102,54): error TS7006: Parameter 'video' implicitly has an 'any' type.
+src/pages/SubscriptionsPage.tsx(121,25): error TS2322: Type '{ size: string; }' is not assignable to type 'IntrinsicAttributes & LoadingSpinnerProps'.
+  Property 'size' does not exist on type 'IntrinsicAttributes & LoadingSpinnerProps'. Did you mean '_size'?
+src/pages/SubscriptionsPage.tsx(214,40): error TS7006: Parameter 'channel' implicitly has an 'any' type.
+src/pages/SubscriptionsPage.tsx(270,49): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/pages/TrendingPage.tsx(2,26): error TS2307: Cannot find module '@heroicons/react/24/solid' or its corresponding type declarations.
+src/pages/TrendingPage.tsx(3,26): error TS2307: Cannot find module '../components/CategoryTabs' or its corresponding type declarations.
+src/pages/TrendingPage.tsx(4,24): error TS2307: Cannot find module '../components/PageLayout' or its corresponding type declarations.
+src/pages/TrendingPage.tsx(5,23): error TS2307: Cannot find module '../components/VideoGrid' or its corresponding type declarations.
+src/pages/TrendingPage.tsx(10,11): error TS2339: Property 'data' does not exist on type '{ trendingVideos: Video[]; loading: boolean; error: string | null; setTrendingVideos: Dispatch<SetStateAction<Video[]>>; }'.
+src/pages/TrendingPage.tsx(10,70): error TS2554: Expected 0 arguments, but got 1.
+src/pages/TrendingPage.tsx(33,9): error TS7006: Parameter 'videos' implicitly has an 'any' type.
+src/pages/UserPage.tsx(3,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'CheckIcon'.
+src/pages/UserPage.tsx(3,21): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'BellIcon'.
+src/pages/UserPage.tsx(3,31): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'QueueListIcon'.
+src/pages/UserPage.tsx(3,46): error TS2724: '"@heroicons/react/24/outline"' has no exported member named 'ChatBubbleLeftRightIcon'. Did you mean 'ChatBubbleLeftIcon'?
+src/pages/UserPage.tsx(3,71): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'InformationCircleIcon'.
+src/pages/UserPage.tsx(4,36): error TS2307: Cannot find module '@heroicons/react/24/solid' or its corresponding type declarations.
+src/pages/UserPage.tsx(5,23): error TS2307: Cannot find module '../components/VideoCard' or its corresponding type declarations.
+src/pages/UserPage.tsx(6,10): error TS2614: Module '"../services/realVideoService"' has no exported member 'getVideos'. Did you mean to use 'import getVideos from "../services/realVideoService"' instead?
+src/pages/UserPage.tsx(7,15): error TS2614: Module '"../types"' has no exported member 'Video'. Did you mean to use 'import Video from "../types"' instead?
+src/pages/WatchLaterPage.tsx(1,17): error TS2305: Module '"react"' has no exported member '_FC'.
+src/pages/WatchLaterPage.tsx(2,10): error TS2305: Module '"@heroicons/react/24/outline"' has no exported member 'ClockIcon'.
+src/pages/WatchLaterPage.tsx(4,23): error TS2307: Cannot find module '../components/VideoCard.tsx' or its corresponding type declarations.
+src/pages/WatchLaterPage.tsx(5,31): error TS2307: Cannot find module '../contexts/WatchLaterContext.tsx' or its corresponding type declarations.
+src/pages/WatchLaterPage.tsx(7,28): error TS2307: Cannot find module '../src/types/core.ts' or its corresponding type declarations.
+src/pages/WatchLaterPage.tsx(9,29): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/pages/WatchPage.tsx(1,17): error TS2724: '"react"' has no exported member named '_useState'. Did you mean 'useState'?
+src/pages/WatchPage.tsx(1,28): error TS2724: '"react"' has no exported member named '_useEffect'. Did you mean 'useEffect'?
+src/pages/WatchPage.tsx(1,46): error TS2724: '"react"' has no exported member named '_useCallback'. Did you mean 'useCallback'?
+src/pages/WatchPage.tsx(1,60): error TS2305: Module '"react"' has no exported member '_FC'.
+src/pages/WatchPage.tsx(2,10): error TS2305: Module '"../components/index.ts"' has no exported member 'AdvancedVideoPlayer'.
+src/pages/WatchPage.tsx(2,31): error TS2305: Module '"../components/index.ts"' has no exported member 'YouTubePlayer'.
+src/pages/WatchPage.tsx(2,46): error TS2305: Module '"../components/index.ts"' has no exported member 'YouTubePlayerWrapper'.
+src/pages/WatchPage.tsx(2,68): error TS2305: Module '"../components/index.ts"' has no exported member 'VideoDescription'.
+src/pages/WatchPage.tsx(2,86): error TS2305: Module '"../components/index.ts"' has no exported member 'VideoActions'.
+src/pages/WatchPage.tsx(2,100): error TS2305: Module '"../components/index.ts"' has no exported member 'CommentsSection'.
+src/pages/WatchPage.tsx(2,117): error TS2305: Module '"../components/index.ts"' has no exported member 'RefactoredSaveToPlaylistModal'.
+src/pages/WatchPage.tsx(2,148): error TS2305: Module '"../components/index.ts"' has no exported member 'RecommendationEngine'.
+src/pages/WatchPage.tsx(3,27): error TS2307: Cannot find module '../components/VideoMetadata' or its corresponding type declarations.
+src/pages/WatchPage.tsx(4,38): error TS2307: Cannot find module '../contexts/OptimizedMiniplayerContext' or its corresponding type declarations.
+src/pages/WatchPage.tsx(5,31): error TS2307: Cannot find module '../contexts/WatchLaterContext' or its corresponding type declarations.
+src/pages/WatchPage.tsx(6,30): error TS2307: Cannot find module '../src/hooks/useWatchPage' or its corresponding type declarations.
+src/pages/WatchPage.tsx(7,10): error TS2614: Module '"../services/settingsService"' has no exported member 'getYouTubePlayerType'. Did you mean to use 'import getYouTubePlayerType from "../services/settingsService"' instead?
+src/pages/WatchPage.tsx(8,49): error TS2307: Cannot find module '../src/lib/youtube-utils' or its corresponding type declarations.
+src/pages/WatchPage.tsx(9,10): error TS2305: Module '"../utils/dateUtils"' has no exported member 'formatDistanceToNow'.
+src/pages/WatchPage.tsx(10,10): error TS2614: Module '"../utils/numberUtils"' has no exported member 'formatCount'. Did you mean to use 'import formatCount from "../utils/numberUtils"' instead?
+src/pages/WatchPage.tsx(87,24): error TS2694: Namespace 'React' has no exported member '_FC'.
+src/pages/WatchPage.tsx(138,9): error TS6133: '_addToWatchLater' is declared but its value is never read.
+src/services/api/youtubeService.ts(56,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/services/googleSearchService.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/services/livestreamAPI.ts(21,11): error TS6133: '_apiKey' is declared but its value is never read.
+src/services/livestreamAPI.ts(22,11): error TS6133: '_baseUrl' is declared but its value is never read.
+src/services/liveStreamService.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/services/metadataNormalizationService.ts(52,23): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/services/metadataNormalizationService.ts(59,26): error TS7006: Parameter 'title' implicitly has an 'any' type.
+src/services/metadataNormalizationService.ts(66,32): error TS7006: Parameter 'description' implicitly has an 'any' type.
+src/services/metadataNormalizationService.ts(73,30): error TS7006: Parameter 'thumbnail' implicitly has an 'any' type.
+src/services/metadataNormalizationService.ts(83,29): error TS7006: Parameter 'duration' implicitly has an 'any' type.
+src/services/metadataNormalizationService.ts(97,26): error TS7006: Parameter 'count' implicitly has an 'any' type.
+src/services/metadataNormalizationService.ts(119,25): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/services/realVideoService.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/services/settingsService.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/services/unifiedDataService.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/test/setup.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/types/common.ts(1,17): error TS6133: 'ReactNode' is declared but its value is never read.
+src/types/core.ts(29,2): error TS7008: Member 'metadata' implicitly has an 'any' type.
+src/types/errors.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/types/index.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/types/livestream.ts(182,2): error TS7008: Member 'data' implicitly has an 'any' type.
+src/types/unified.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/types/youtube.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/analytics.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/conditionalLogger.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/dateUtils.ts(56,29): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/utils/errorUtils.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/index.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/mocks/browser.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/mocks/handlers.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/mocks/server.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/numberUtils.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/offlineStorage.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/performanceOptimizations.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/performanceProfiler.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/pwa.ts(84,36): error TS2339: Property 'connection' does not exist on type 'Navigator'.
+src/utils/pwa.ts(84,62): error TS2339: Property 'mozConnection' does not exist on type 'Navigator'.
+src/utils/pwa.ts(84,91): error TS2339: Property 'webkitConnection' does not exist on type 'Navigator'.
+src/utils/pwa.ts(101,39): error TS7006: Parameter 'detail' implicitly has an 'any' type.
+src/utils/pwaAnalytics.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/utils/youtubeApiUtils.ts(4,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+types.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+types.ts(3,1): error TS6133: 'Video' is declared but its value is never read.
+types.ts(3,28): error TS2307: Cannot find module '../src/types' or its corresponding type declarations.
+types.ts(4,38): error TS2307: Cannot find module 'src/types/core' or its corresponding type declarations.
+types.ts(40,22): error TS2305: Module '"./src/types/core"' has no exported member 'ContentItem'.
+utils/componentUtils.tsx(1,28): error TS6133: 'FC' is declared but its value is never read.
+utils/componentUtils.tsx(1,32): error TS2395: Individual declarations in merged declaration 'useCallback' must be all exported or all local.
+utils/componentUtils.tsx(1,32): error TS2440: Import declaration conflicts with local declaration of 'useCallback'.
+utils/componentUtils.tsx(1,45): error TS2395: Individual declarations in merged declaration 'useMemo' must be all exported or all local.
+utils/componentUtils.tsx(1,45): error TS2440: Import declaration conflicts with local declaration of 'useMemo'.
+utils/componentUtils.tsx(119,14): error TS2395: Individual declarations in merged declaration 'useMemo' must be all exported or all local.
+utils/componentUtils.tsx(120,14): error TS2395: Individual declarations in merged declaration 'useCallback' must be all exported or all local.

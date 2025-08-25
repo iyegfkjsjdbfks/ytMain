@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState, memo, _FC } from 'react';
 
-import CategoryChips from '../components/CategoryChips';
-import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
+import CategoryChips from '../../components/CategoryChips';
+import HoverAutoplayVideoCard from '../../components/HoverAutoplayVideoCard';
 import { useTrendingSearch } from '../hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
 
